@@ -1,0 +1,6 @@
+Name:Parcel Myr
+ManaCost:1 U
+Types:Artifact Creature Clue Myr
+PT:2/1
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+Oracle:{2}, Sacrifice Parcel Myr: Draw a card.

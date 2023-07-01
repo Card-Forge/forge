@@ -1,0 +1,7 @@
+Name:Scald
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Island | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a player taps an Island for mana, CARDNAME deals 1 damage to that player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever a player taps an Island for mana, Scald deals 1 damage to that player.

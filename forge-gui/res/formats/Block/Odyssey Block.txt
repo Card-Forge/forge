@@ -1,0 +1,6 @@
+[format]
+Name:Odyssey Block
+Type:Archived
+Subtype:Block
+Order:129
+Sets:JUD, TOR, ODY

@@ -1,0 +1,10 @@
+Name:Elvish Scout
+ManaCost:G
+Types:Creature Elf Scout
+PT:1/1
+A:AB$ Untap | Cost$ G T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
+SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
+SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by it this turn.
+SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by it this turn. | Secondary$ True
+AI:RemoveDeck:All
+Oracle:{G}, {T}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.

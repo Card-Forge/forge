@@ -1,0 +1,8 @@
+Name:Bloodletter Quill
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T AddCounter<1/BLOOD> | NumCards$ 1 | SpellDescription$ Draw a card, then you lose 1 life for each blood counter on CARDNAME. | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+A:AB$ RemoveCounter | Cost$ U B | CounterType$ BLOOD | CounterNum$ 1 | SpellDescription$ Remove a blood counter from CARDNAME.
+SVar:X:Count$CardCounters.BLOOD
+Oracle:{2}, {T}, Put a blood counter on Bloodletter Quill: Draw a card, then you lose 1 life for each blood counter on Bloodletter Quill.\n{U}{B}: Remove a blood counter from Bloodletter Quill.

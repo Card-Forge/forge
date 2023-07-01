@@ -1,0 +1,7 @@
+Name:Kozilek's Channeler
+ManaCost:5
+Types:Creature Eldrazi
+PT:4/4
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}{C}.

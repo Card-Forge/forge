@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jubilee 3
+Title=Jubilee
+Difficulty=hard
+Description=WUBRG multicolored creature Deck with Blessing of the Nephilim and Knight of New Alara
+Icon=Jubilee.jpg
+Deck Type=constructed
+[main]
+1 Tropical Island
+2 Tundra
+2 Savannah
+2 Plateau
+1 Scrubland
+2 Bayou
+1 Taiga
+4 Flooded Strand
+4 Windswept Heath
+1 Mox Emerald
+1 Mox Ruby
+1 Mox Pearl
+1 Mox Jet
+1 Mox Sapphire
+2 Dryad Militant
+2 Rakdos Cackler
+4 Civic Saber
+3 Spirit of Resistance
+4 Knight of New Alara
+4 Earnest Fellowship
+3 Bant Sureblade
+3 Esper Stormblade
+2 Naya Hushblade
+2 Jund Hackblade
+1 Sliver Legion
+1 Sliver Queen
+1 Sliver Overlord
+4 Transguild Courier
+[sideboard]

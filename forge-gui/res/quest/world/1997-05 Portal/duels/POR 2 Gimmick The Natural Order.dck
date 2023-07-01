@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: The Natural Order
+Title=The Natural Order
+Difficulty=medium
+Description=Nature's secrets can be read on every tree, every branch, every leaf.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+24 Forest|POR|1
+4 Grizzly Bears|POR
+4 Jungle Lion|POR
+4 Moon Sprite|POR
+4 Natural Order|POR
+4 Nature's Lore|POR
+4 Primeval Force|POR
+4 Whiptail Wurm|POR
+4 Willow Dryad|POR
+4 Wood Elves|POR

@@ -1,0 +1,9 @@
+Name:Enigmatic Incarnation
+ManaCost:2 G U
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ At the beginning of your end step, you may sacrifice another enchantment. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed enchantment's mana value, put that card onto the battlefield, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ Sac<1/Enchantment.Other/another enchantment> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | AILogic$ SacAndUpgrade
+SVar:X:Sacrificed$CardManaCost/Plus.1
+SVar:AIPreference:SacCost$Creature
+DeckNeeds:Type$Enchantment
+Oracle:At the beginning of your end step, you may sacrifice another enchantment. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed enchantment's mana value, put that card onto the battlefield, then shuffle.

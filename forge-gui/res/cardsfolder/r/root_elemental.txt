@@ -1,0 +1,8 @@
+Name:Root Elemental
+ManaCost:4 G G
+Types:Creature Elemental
+PT:6/5
+K:Morph:5 G G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card from your hand onto the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1
+Oracle:Morph {5}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Root Elemental is turned face up, you may put a creature card from your hand onto the battlefield.

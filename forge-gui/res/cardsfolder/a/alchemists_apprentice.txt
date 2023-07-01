@@ -1,0 +1,7 @@
+Name:Alchemist's Apprentice
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Sacrifice Alchemist's Apprentice: Draw a card.

@@ -1,0 +1,6 @@
+Name:Skyswirl Harrier
+ManaCost:4 W
+Types:Creature Bird
+PT:3/4
+K:Flying
+Oracle:Flying

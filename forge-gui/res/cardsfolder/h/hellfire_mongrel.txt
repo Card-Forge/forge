@@ -1,0 +1,8 @@
+Name:Hellfire Mongrel
+ManaCost:2 R
+Types:Creature Elemental Dog
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ TrigHand | SVarCompare$ LE2 | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+SVar:TrigHand:Count$ValidHand Card.ActivePlayerCtrl
+Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to that player.

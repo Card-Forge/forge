@@ -1,0 +1,9 @@
+Name:Insolent Neonate
+ManaCost:R
+Types:Creature Vampire
+PT:1/1
+K:Menace
+A:AB$ Draw | Cost$ Discard<1/Card> Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nDiscard a card, Sacrifice Insolent Neonate: Draw a card.

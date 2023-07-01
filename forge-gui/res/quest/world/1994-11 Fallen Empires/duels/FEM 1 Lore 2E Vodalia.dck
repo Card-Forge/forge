@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 2E Vodalia
+Title=Vodalia
+Difficulty=easy
+Description="Vodalian Soldiers had some unique advantages. Often they would ride into battle on war machines rumored to have come from the far northern oceans." -Sarpadian Empires, vol. V
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Balm of Restoration|FEM
+4 Conch Horn|FEM
+24 Island|LEB|2
+1 Merseine|FEM|1
+1 Merseine|FEM|2
+1 Merseine|FEM|3
+1 Merseine|FEM|4
+4 River Merfolk|FEM
+4 Seasinger|FEM
+4 Svyelunite Priest|FEM
+1 Vodalian Mage|FEM|1
+1 Vodalian Mage|FEM|2
+2 Vodalian Mage|FEM|3
+1 Vodalian Soldiers|FEM|1
+1 Vodalian Soldiers|FEM|2
+1 Vodalian Soldiers|FEM|3
+1 Vodalian Soldiers|FEM|4

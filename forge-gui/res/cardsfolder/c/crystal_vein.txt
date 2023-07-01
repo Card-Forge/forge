@@ -1,0 +1,7 @@
+Name:Crystal Vein
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Crystal Vein: Add {C}{C}.

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #06
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/11/088.-GRN6.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards that could be drawn are irrelevant to the puzzle.
+[state]
+humanlife=20
+ailife=3
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Arcane Flight;Huatli, Warrior Poet;Disperse;Curious Obsession;Sea Legs
+humanlibrary=Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog;Fog
+humanbattlefield=Surge Mare|Id:5;Helm of the Host|AttachedTo:5;Valduk, Keeper of the Flame;Divine Visitation;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Glacial Fortress;Glacial Fortress;t:Angel,P:4,T:4,Cost:no cost,Color:W,Types:Creature-Angel,Keywords:Flying-Vigilance,Image:w_4_4_angel_flying_vigilance_grn
+aibattlefield=Murmuring Mystic;t:Bird Illusion,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Bird-Illusion,Keywords:Flying,Image:u_1_1_bird_illusion_flying_grn;t:Bird Illusion,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Bird-Illusion,Keywords:Flying,Image:u_1_1_bird_illusion_flying_grn;t:Bird Illusion,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Bird-Illusion,Keywords:Flying,Image:u_1_1_bird_illusion_flying_grn;t:Bird Illusion,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Bird-Illusion,Keywords:Flying,Image:u_1_1_bird_illusion_flying_grn;t:Bird Illusion,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Bird-Illusion,Keywords:Flying,Image:u_1_1_bird_illusion_flying_grn;Dreamcaller Siren

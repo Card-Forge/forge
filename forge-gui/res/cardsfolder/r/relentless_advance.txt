@@ -1,0 +1,7 @@
+Name:Relentless Advance
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Amass | Type$ Zombie | Num$ 3 | SpellDescription$ Amass Zombies 3. (Put three +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+DeckHints:Ability$Amass & Type$Zombie
+DeckHas:Ability$Amass|Counters|Token
+Oracle:Amass Zombies 3. (Put three +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

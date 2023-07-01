@@ -1,0 +1,6 @@
+Name:Shu Farmer
+ManaCost:1 W
+Types:Creature Human
+PT:1/1
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ You gain 1 life. Activate only during your turn, before attackers are declared.
+Oracle:{T}: You gain 1 life. Activate only during your turn, before attackers are declared.

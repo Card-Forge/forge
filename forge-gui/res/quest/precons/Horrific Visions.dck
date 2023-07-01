@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Horrific Visions
+Description=Delving into eldritch secrets can shatter the mind, but it can also bring great power. As you bring a wide variety of arcane magic to bear against your opponent, you'll grow closer and closer to the unearthly insight that will lead you to victory.
+Deck Type=constructed
+Set=SOI
+Image=horrific_visions.jpg
+[Main]
+2 Groundskeeper|SOI
+1 Loam Dryad|SOI
+3 Moldgraf Scavenger|SOI
+2 Obsessive Skinner|SOI
+2 Wicker Witch|SOI
+1 Wild-Field Scarecrow|SOI
+1 Inexorable Blob|SOI
+1 Crow of Dark Tidings|SOI
+2 Tooth Collector|SOI
+2 Stallion of Ashmouth|SOI
+1 Soul Swallower+|SOI
+1 Ghoulsteed|SOI
+1 Hound of the Farbogs|SOI
+1 Morkrut Necropod|SOI
+1 Kessig Dire Swine|SOI
+1 Fork in the Road|SOI
+1 Rabid Bite|SOI
+1 Liliana's Indignation|SOI
+1 Merciless Resolve|SOI
+1 Might Beyond Reason|SOI
+1 Throttle|SOI
+2 Explosive Apparatus|SOI
+2 Dead Weight|SOI
+2 Vessel of Nascency|SOI
+1 Crawling Sensation|SOI
+1 Foul Orchard|SOI
+1 Warped Landscape|SOI
+12 Forest|SOI
+11 Swamp|SOI
+[Sideboard]
+

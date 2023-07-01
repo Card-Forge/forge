@@ -1,0 +1,6 @@
+Name:Champion of Arashin
+ManaCost:3 W
+Types:Creature Dog Warrior
+PT:3/2
+K:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

@@ -1,0 +1,9 @@
+Name:Ward of Bones
+ManaCost:6
+Types:Artifact
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ Opponent.withMoreCreaturesThanYou | Description$ Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.
+S:Mode$ CantBeCast | ValidCard$ Artifact | Caster$ Opponent.withMoreArtifactsThanYou
+S:Mode$ CantBeCast | ValidCard$ Enchantment | Caster$ Opponent.withMoreEnchantmentsThanYou
+S:Mode$ CantPlayLand | Player$ Opponent.withMoreLandsThanYou | Description$ Each opponent who controls more lands than you can't play lands.
+SVar:NonStackingEffect:True
+Oracle:Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.\nEach opponent who controls more lands than you can't play lands.

@@ -1,0 +1,24 @@
+Name:Primal Amulet
+ManaCost:4
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a charge counter on CARDNAME. Then if there are four or more charge counters on it, you may remove those counters and transform it.
+SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ FullyCharged | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | Optional$ True | RememberAmount$ True | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ Discharged | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:FullyCharged:Count$Valid Card.Self+counters_GE4_CHARGE
+SVar:Discharged:Count$RememberedSize
+AlternateMode:DoubleFaced
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
+
+ALTERNATE
+
+Name:Primal Wellspring
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:(Transforms from Primal Amulet.)\n{T}: Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.

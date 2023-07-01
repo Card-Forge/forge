@@ -1,0 +1,6 @@
+Name:Treetop Rangers
+ManaCost:2 G
+Types:Creature Elf Ranger
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying | Description$ CARDNAME can't be blocked except by creatures with flying.
+Oracle:Treetop Rangers can't be blocked except by creatures with flying.

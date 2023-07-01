@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robocop 1
+Title=Robocop
+Difficulty=easy
+Description="Drop it! Dead or alive, you are coming with me"
+Icon=Robocop.png
+Deck Type=constructed
+[Main]
+2 Caravan Escort|ROE
+2 Champion's Drake|ROE
+2 Distortion Strike|ROE
+2 Hada Spy Patrol|ROE
+2 Halimar Wavewatch|ROE
+2 Hedron-Field Purists|ROE
+2 Ikiral Outrider|ROE
+8 Island|ZEN|1
+2 Kabira Vindicator|ROE
+2 Khalni Gem|ZEN
+2 Knight of Cliffhaven|ROE
+2 Lighthouse Chronologist|ROE
+8 Plains|ZEN|1
+2 Skywatcher Adept|ROE
+2 Student of Warfare|ROE
+4 Evolving Wilds|ROE
+4 Thrummingbird|SOM
+2 Time of Heroes|ROE
+2 Transcendent Master|ROE
+2 Venerated Teacher|ROE
+2 Veteran's Reflexes|WWK
+2 Windborne Charge|ZEN
+[sideboard]

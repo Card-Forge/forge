@@ -1,0 +1,6 @@
+Name:Whiptongue Frog
+ManaCost:2 U
+Types:Creature Frog
+PT:1/3
+A:AB$ Pump | Cost$ U | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:{U}: Whiptongue Frog gains flying until end of turn.

@@ -1,0 +1,14 @@
+Name:Nemata, Primeval Warden
+ManaCost:2 B G
+Types:Legendary Creature Treefolk
+PT:3/4
+K:Reach
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Card.Creature+OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead. When you do, create a 1/1 green Saproling creature token.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigToken | TriggerDescription$ If a nontoken creature an opponent controls would die, exile it instead. When you do, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+A:AB$ Pump | Cost$ G Sac<1/Saproling> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+A:AB$ Draw | Cost$ 1 B Sac<2/Saproling> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHints:Type$Saproling
+DeckHas:Ability$Token & Type$Saproling
+Oracle:Reach\nIf a creature an opponent controls would die, exile it instead. When you do, create a 1/1 green Saproling creature token.\n{G}, Sacrifice a Saproling: Nemata, Primeval Warden gets +2/+2 until end of turn.\n{1}{B}, Sacrifice two Saprolings: Draw a card.

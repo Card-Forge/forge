@@ -1,0 +1,8 @@
+Name:Royal Decree
+ManaCost:2 W W
+Types:Enchantment
+K:Cumulative upkeep:W
+T:Mode$ Taps | ValidCard$ Swamp,Mountain,Permanent.Black,Permanent.Red | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, CARDNAME deals 1 damage to that permanent's controller.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1
+AI:RemoveDeck:Random
+Oracle:Cumulative upkeep {W} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.

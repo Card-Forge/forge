@@ -1,0 +1,20 @@
+[metadata]
+Code=F13
+Date=2013-01-01
+Name=Friday Night Magic 2013
+Type=Promo
+ScryfallCode=F13
+
+[cards]
+1 R Searing Spear @Christopher Moeller
+2 R Reliquary Tower @Drew Baker
+3 R Farseek @Michael Komarck
+4 R Call of the Conclave @Anthony Palumbo
+5 R Judge's Familiar @Ryan Yee
+6 R Izzet Charm @Zoltan Boros
+7 R Rakdos Cackler @Dave Kendall
+8 R Dimir Charm @Zoltan Boros
+9 R Experiment One @Jack Wang
+10 R Ghor-Clan Rampager @Dave Kendall
+11 R Grisly Salvage @Maciej Kuciara
+12 R Sin Collector @Izzy

@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Mundungu
+OpponentName=The Mundungus
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Mundungu|Mundungu|Mundungu|Mundungu
+[metadata]
+Name=MIR Challenge: Mundungu
+Title=The Mundungus
+Difficulty=easy
+Description="Our buried kings silently await the revolt of dead peasants." -Tuwile, mundungu of Aku
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+30 Island|MIR|3
+30 Swamp|MIR|4

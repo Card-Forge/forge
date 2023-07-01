@@ -1,0 +1,10 @@
+[metadata]
+Code=PTOR
+Date=2002-02-04
+Name=Torment Promos
+Type=Promo
+CardLang=ru
+ScryfallCode=PTOR
+
+[cards]
+67 R Laquatus's Champion @Greg Staples

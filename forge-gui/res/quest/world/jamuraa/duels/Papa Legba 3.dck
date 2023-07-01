@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Papa Legba 3
+Title=Papa Legba
+Icon=PapaLegba.jpg
+Difficulty=hard
+Description=Papa Legba plays Jon Finkel's Type 1.x 'Finkel Prison' deck.
+Deck Type=constructed
+[main]
+3 Armageddon|5ED
+3 Aura of Silence|WTH
+4 Counterspell|5ED
+1 Flood Plain|MIR
+2 Gaea's Blessing|WTH
+2 Gerrard's Wisdom|WTH
+4 Icy Manipulator|LEB
+4 Marble Diamond|MIR
+4 Mishra's Factory|ATQ
+2 Plateau|LEB
+1 Pyroclasm|ICE
+3 Savannah|LEB
+3 Serrated Arrows|HML
+3 Sky Diamond|MIR
+2 Swords to Plowshares|LEB
+2 Sylvan Library|LEG
+4 Tithe|VIS
+4 Tundra|LEB
+2 Undiscovered Paradise|VIS
+1 Volcanic Island|LEB
+3 Winter Orb|LEB
+3 Wrath of God|5ED
+[sideboard]
+[planes]
+[schemes]

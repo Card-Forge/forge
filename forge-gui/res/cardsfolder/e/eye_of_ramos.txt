@@ -1,0 +1,7 @@
+Name:Eye of Ramos
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ U | SpellDescription$ Add {U}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {U}.\nSacrifice Eye of Ramos: Add {U}.

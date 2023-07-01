@@ -1,0 +1,10 @@
+Name:Slivdrazi Monstrosity
+ManaCost:C W U B R G
+Types:Legendary Creature Sliver Eldrazi
+PT:8/8
+S:Mode$ Continuous | Affected$ Permanent.Eldrazi+YouCtrl | AddType$ Sliver | Description$ Eldrazi you control are Slivers in addition to their other types.
+S:Mode$ Continuous | Affected$ Permanent.Sliver+YouCtrl | AddKeyword$ Devoid & Annihilator:1 | SetColor$ Colorless | Description$ Slivers you control have devoid and annihilator 1.
+A:AB$ Token | Cost$ 3 | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ c_1_1_eldrazi_sliver_sac | SpellDescription$ Create a 1/1 colorless Eldrazi Sliver creature token. It has "Sacrifice this creature: Add {C}."
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:Eldrazi you control are Slivers in addition to their other types.\nSlivers you control have devoid and annihilator 1.\n{3}: Create a 1/1 colorless Eldrazi Sliver creature token. It has "Sacrifice this creature: Add {C}."

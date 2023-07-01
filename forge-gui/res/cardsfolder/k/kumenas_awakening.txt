@@ -1,0 +1,9 @@
+Name:Kumena's Awakening
+ManaCost:2 U U
+Types:Enchantment
+K:Ascend
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each player draws a card. If you have the city's blessing, instead only you draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ Player | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
+SVar:X:Count$Blessing.1.0
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of your upkeep, each player draws a card. If you have the city's blessing, instead only you draw a card.

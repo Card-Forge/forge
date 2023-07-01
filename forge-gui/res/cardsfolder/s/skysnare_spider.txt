@@ -1,0 +1,7 @@
+Name:Skysnare Spider
+ManaCost:4 G G
+Types:Creature Spider
+PT:6/6
+K:Vigilance
+K:Reach
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nReach (This creature can block creatures with flying.)

@@ -1,0 +1,7 @@
+Name:Pathmaker Initiate
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:2/1
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:{T}: Target creature with power 2 or less can't be blocked this turn.

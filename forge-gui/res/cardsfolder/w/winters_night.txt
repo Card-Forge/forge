@@ -1,0 +1,9 @@
+Name:Winter's Night
+ManaCost:R G W
+Types:World Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land.Snow | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a snow land for mana, that player adds one mana of any type that land produced. That land doesn't untap during its controller's next untap step.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Whenever a player taps a snow land for mana, that player adds one mana of any type that land produced. That land doesn't untap during its controller's next untap step.

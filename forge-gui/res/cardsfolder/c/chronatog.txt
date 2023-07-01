@@ -1,0 +1,8 @@
+Name:Chronatog
+ManaCost:1 U
+Types:Creature Atog
+PT:1/2
+A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | ActivationLimit$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ CARDNAME gets +3/+3 until end of turn. You skip your next turn. Activate only once each turn.
+SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ 1 | Defined$ You
+AI:RemoveDeck:All
+Oracle:{0}: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate only once each turn.

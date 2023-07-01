@@ -1,0 +1,7 @@
+Name:Cloudshredder Sliver
+ManaCost:R W
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Flying & Haste | Description$ Sliver creatures you control have flying and haste.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have flying and haste.

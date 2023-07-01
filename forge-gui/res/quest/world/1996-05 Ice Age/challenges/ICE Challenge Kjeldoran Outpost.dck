@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Kjeldoran Outpost
+OpponentName=The Outpost
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Kjeldoran Outpost|Kjeldoran Outpost|Kjeldoran Outpost|Kjeldoran Outpost
+HumanExtras=Lord of Tresserhorn
+[metadata]
+Name=ICE Challenge: Kjeldoran Outpost
+Title=The Outpost
+Difficulty=medium
+Description="The meek shall fight as one, and they shall overcome even the greatest of foes." -Halvor Arensson, Kjeldoran priest
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+60 Plains|ICE|1

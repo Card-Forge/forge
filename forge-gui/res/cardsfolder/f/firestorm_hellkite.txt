@@ -1,0 +1,8 @@
+Name:Firestorm Hellkite
+ManaCost:4 U R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Trample
+K:Cumulative upkeep:U R
+Oracle:Flying, trample\nCumulative upkeep {U}{R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

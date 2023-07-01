@@ -1,0 +1,7 @@
+Name:Toxic Deluge
+ManaCost:2 B
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 2 B PayLife<X> | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ All creatures get -X/-X until end of turn.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn.

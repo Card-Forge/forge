@@ -1,0 +1,9 @@
+Name:Lightning Dart
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | IsCurse$ True | AITgts$ Creature.White,Creature.Blue | NumDmg$ X | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ CARDNAME deals 1 damage to target creature. If that creature is white or blue, CARDNAME deals 4 damage to it instead.
+SVar:Y:Targeted$Valid Creature.White,Creature.Blue
+SVar:X:Count$Compare Y GE1.4.1
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Lightning Dart deals 1 damage to target creature. If that creature is white or blue, Lightning Dart deals 4 damage to it instead.

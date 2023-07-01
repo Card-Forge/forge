@@ -1,0 +1,7 @@
+Name:Solitary Camel
+ManaCost:2 W
+Types:Creature Camel
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ Desert | Description$ CARDNAME has lifelink as long as you control a Desert or there is a Desert card in your graveyard. (Damage dealt by this creature also causes you to gain that much life.)
+DeckHints:Type$Desert
+Oracle:Solitary Camel has lifelink as long as you control a Desert or there is a Desert card in your graveyard. (Damage dealt by this creature also causes you to gain that much life.)

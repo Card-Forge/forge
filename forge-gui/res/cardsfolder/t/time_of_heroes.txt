@@ -1,0 +1,5 @@
+Name:Time of Heroes
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.counters_GE1_LEVEL+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Each creature you control with a level counter on it gets +2/+2.
+Oracle:Each creature you control with a level counter on it gets +2/+2.

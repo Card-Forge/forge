@@ -1,0 +1,6 @@
+Name:Savai Triome
+ManaCost:no cost
+Types:Land Mountain Plains Swamp
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {R}, {W}, or {B}.)\nSavai Triome enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

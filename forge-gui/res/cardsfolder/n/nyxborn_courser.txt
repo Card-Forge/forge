@@ -1,0 +1,5 @@
+Name:Nyxborn Courser
+ManaCost:1 W W
+Types:Enchantment Creature Centaur Scout
+PT:2/4
+Oracle:

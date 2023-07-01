@@ -1,0 +1,7 @@
+Name:Sidewinder Sliver
+ManaCost:W
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Flanking | Description$ All Sliver creatures have flanking.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have flanking. (Whenever a creature without flanking blocks a Sliver, the blocking creature gets -1/-1 until end of turn.)

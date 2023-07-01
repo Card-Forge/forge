@@ -1,0 +1,7 @@
+Name:Raven Guild Initiate
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/4
+K:Morph:Return<1/Bird>
+AI:RemoveDeck:Random
+Oracle:Morph—Return a Bird you control to its owner's hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

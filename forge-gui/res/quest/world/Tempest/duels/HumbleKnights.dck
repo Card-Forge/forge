@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Humble Knights
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=Humility deck
+Deck Type=constructed
+Name=HumbleKnights
+[Main]
+3 Bullwhip|STH
+3 Gerrard's Battle Cry|TMP
+3 Hero's Resolve|TMP
+4 Humility|TMP
+4 Orim's Prayer|TMP
+4 Paladin en-Vec|EXO
+4 Pegasus Stampede|EXO
+7 Plains|TMP|1
+9 Plains|TMP|2
+4 Plains|TMP|3
+3 Plains|TMP|4
+4 Spirit Mirror|TMP
+4 Winds of Rath|TMP
+4 Youthful Knight|STH

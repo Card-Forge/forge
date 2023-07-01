@@ -1,0 +1,8 @@
+Name:Wonder
+ManaCost:3 U
+Types:Creature Incarnation
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Flying | IsPresent$ Island.YouCtrl | Description$ As long as CARDNAME is in your graveyard and you control a Island, creatures you control have flying.
+SVar:DiscardMe:2
+Oracle:Flying\nAs long as Wonder is in your graveyard and you control an Island, creatures you control have flying.

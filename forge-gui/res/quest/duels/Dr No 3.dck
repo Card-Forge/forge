@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dr No 3
+Title=Dr No
+Difficulty=hard
+Description=WB Discard deck with The Rack and Shrieking Affliction
+Icon=Dr No.jpg
+Deck Type=constructed
+[main]
+10 Swamp|M12
+1 Plains
+4 Marsh Flats
+4 Scrubland
+1 Mox Pearl
+1 Mox Jet
+4 The Rack
+4 Shrieking Affliction
+1 Megrim
+1 Liliana's Caress
+4 Hymn to Tourach
+4 Gerrard's Verdict
+2 Mind Twist
+2 Wrench Mind
+1 Raven's Crime
+4 Innocent Blood
+4 Damnation
+3 Wrath of God
+1 Disenchant
+1 Liliana of the Veil
+3 Ensnaring Bridge
+[sideboard]

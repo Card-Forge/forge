@@ -1,0 +1,5 @@
+Name:Molten Vortex
+ManaCost:R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ R Discard<1/Land> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:{R}, Discard a land card: Molten Vortex deals 2 damage to any target.

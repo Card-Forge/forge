@@ -1,0 +1,10 @@
+Name:Triumph of Gerrard
+ManaCost:1 W
+Types:Enchantment Saga
+K:Saga:3:DBPutCounter,DBPutCounter,DBPump
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.greatestPowerControlledByYou | TgtPrompt$ Select target creature you control with the greatest power | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature you control with the greatest power.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.greatestPowerControlledByYou | KW$ Flying & First Strike & Lifelink | TgtPrompt$ Select target creature you control with the greatest power | SpellDescription$ Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Put a +1/+1 counter on target creature you control with the greatest power.\nIII — Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.

@@ -1,0 +1,6 @@
+Name:Lost Soul
+ManaCost:1 B B
+Types:Creature Spirit Minion
+PT:2/1
+K:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

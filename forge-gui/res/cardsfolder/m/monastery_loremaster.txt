@@ -1,0 +1,8 @@
+Name:Monastery Loremaster
+ManaCost:3 U
+Types:Creature Djinn Wizard
+PT:3/2
+K:Megamorph:5 U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return target noncreature, nonland card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Card.nonCreature+nonLand+YouCtrl | TgtPrompt$ Select target noncreature, nonland card in your graveyard | Origin$ Graveyard | Destination$ Hand
+Oracle:Megamorph {5}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Monastery Loremaster is turned face up, return target noncreature, nonland card from your graveyard to your hand.

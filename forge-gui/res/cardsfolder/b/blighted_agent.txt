@@ -1,0 +1,7 @@
+Name:Blighted Agent
+ManaCost:1 U
+Types:Creature Phyrexian Human Rogue
+PT:1/1
+K:Infect
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nBlighted Agent can't be blocked.

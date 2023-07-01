@@ -1,0 +1,9 @@
+Name:Living Hive
+ManaCost:6 G G
+Types:Creature Elemental Insect
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Insect creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample\nWhenever Living Hive deals combat damage to a player, create that many 1/1 green Insect creature tokens.

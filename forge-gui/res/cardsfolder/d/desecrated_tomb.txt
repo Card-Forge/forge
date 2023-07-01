@@ -1,0 +1,8 @@
+Name:Desecrated Tomb
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZoneAll | Origin$ Graveyard | Destination$ Any | ValidCards$ Creature.YouOwn | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Token
+Oracle:Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying.

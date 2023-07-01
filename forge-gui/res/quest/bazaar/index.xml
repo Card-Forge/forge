@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+<bazaar>
+  <options>
+   <iconSize>160</iconSize>
+  </options>
+  <stalls>
+    <stall name="Alchemist" displayName="Orim, Samite Healer" icon="ICO_QUEST_BOTTLES">
+      <description>The walls of this alchemist&apos;s stall are covered with shelves with potions, oils, powders, poultices and elixirs, each meticulously labeled.</description>
+      <items>
+        <string>Elixir of Life</string>
+        <string>Pound of Flesh</string>
+      </items> 	
+    </stall>
+    <stall name="Banker" displayName="Bank of Sarpadia" icon="ICO_QUEST_COIN">
+      <description>A large book large enough to be seen from the outside rests on the Banker&apos;s desk.</description>
+      <items>
+        <string>Bank Membership</string>
+        <string>Estates</string>
+        <string>Lucky Coin</string>
+        <string>Cash Stakes</string>
+      </items> 	
+    </stall>
+    <stall name="Bookstore" displayName="Beleren&apos;s Books" icon="ICO_QUEST_BOOK">
+      <description>Tomes of different sizes are stacked in man-high towers.</description>
+      <items>
+        <string>Sleight</string>
+      </items> 	
+    </stall>
+    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_QUEST_BIG_ARMOR">
+      <description>This adventurer&apos;s market has a tool for every need ... or so the plaque on the wall claims.</description>
+      <items>
+        <string>Map</string>
+        <string>Zeppelin</string>
+        <string>Charm of Vigor</string>
+        <string>Charm of Vim</string>
+      </items> 	
+    </stall>
+    <stall name="Nursery" displayName="Force of Nature Nursery" icon="ICO_QUEST_LEAF">
+      <description>The smells of the one hundred and one different plants forms a unique fragrance.</description>
+      <items>
+        <string>Plant</string>
+      </items> 	
+    </stall>
+    <stall name="Pet Shop" displayName="The Hive" icon="ICO_QUEST_FOX">
+      <description>This large menagerie echoes with a multitude of animal noises.</description>
+      <items>
+		<string>Ape</string>
+        <string>Bird</string>
+        <string>Crocodile</string>
+        <string>Hound</string>
+        <string>Wolf</string>
+      </items> 	
+    </stall>
+  </stalls>
+  <questItems>
+    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_QUEST_BIG_BOOK">
+      <description>These volumes explain how to perform the most difficult of sleights.
+
+Effect: Your first mulligan is free.</description>
+    </item>
+    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_QUEST_BIG_MAP">
+      <description>These ancient charts should facilitate navigation during your travels significantly.
+
+Effect: Quest challenges become available more frequently.</description>
+    </item>
+    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_QUEST_BIG_COIN">
+      <description>This coin is believed to give good luck to its owner.
+
+Effect: Improves the chance of getting a random rare after each match by 15%.</description>
+    </item>
+    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_QUEST_BIG_HOUSE">
+      <description>Land owners have a strong voice in community matters.
+
+Effect: Gives a bonus of %d%% to match winnings.
+Effect: Improves sell percentage by %.2f%%.</description>
+    </item>
+    <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_QUEST_ZEP">
+      <description>This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.
+
+Effect: Quest challenges become available more frequently.
+Effect: +3 life
+Effect: Activate once for a new set of challenges (re-fuels after a challenge is attempted).</description>
+    </item>
+    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_QUEST_BIG_BREW">
+      <description>The Alchemist welcomes contributions to his famous Elixir.
+But beware, you may build an immunity to its effects...
+
+Effect: Alchemist gives you %d credits.
+Effect: Reduces maximum life by 1.</description>
+    </item>
+    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_QUEST_BIG_ELIXIR">
+      <description>A salty sweet smell rises from the vials bubbling behind the counter.
+
+Effect: Gives +1 to maximum life.
+Fine Print: Loses effectiveness after 15 uses.</description>
+    </item>
+    <item name="Charm of Vim" maxLevel="1" basePrice="1000"
+    	itemType="CHARM_VIM" icon="ICO_QUEST_BIG_BOOTS">
+    	<description>A charm fills you with energy, speeding your movements.
+    	
+Effect: You may have each match be best of 1 instead of 3.</description>
+    </item>
+    <item name="Charm of Vigor" maxLevel="1" basePrice="1000"
+    	itemType="CHARM" icon="ICO_QUEST_BIG_CHARM">
+    	<description>A charm to ward off the fatigue of battle.
+    	
+Effect: You may have each match be best of 5 instead of 3.</description>
+    </item>
+    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_QUEST_BIG_STAKES">
+      <description>A written agreement with the Spell Shop to acquire cards you lose in an ante match from quest opponents.
+
+Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
+    </item>
+    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_QUEST_BIG_BM">
+      <description>A token certifying you as a member of the bank, giving you a greater selection of booster packs when you win. 
+
+Effect: Adds one more booster pack to the pack selection after you win.</description>
+    </item>
+  </questItems>
+  <pets>
+    <pet name="Plant" slot="0" saveFileKey="Plant" maxLevel="6">
+      <desc>Start each of your battles with this lush, verdant plant on your side.
+Excellent at blocking the nastiest of critters!</desc>
+      <levels>
+        <level value="0" stats="You do not own a plant" nextLevel="Purchase Plant" />
+        <level value="1" pic="plantwall_lvl1" stats="0/1 {G} Defender" cost="100" cardFile="plant_wall_l1.txt" nextLevel="Improve the defense power of your plant." />
+        <level value="2" pic="plantwall_lvl2" stats="0/2 {G} Defender" cost="250" cardFile="plant_wall_l2.txt" nextLevel="Improve the defense power of your plant." />
+        <level value="3" pic="plantwall_lvl3" stats="0/3 {G} Defender" cost="400" cardFile="plant_wall_l3.txt" nextLevel="Improve the defense power of your plant." />
+        <level value="4" pic="plantwall_lvl4" stats="1/3 {G} Defender" cost="550" cardFile="plant_wall_l4.txt" nextLevel="Grow venomous thorns on your plant." />
+        <level value="5" pic="plantwall_lvl5" stats="1/3 {G} Defender Wither" cost="800" cardFile="plant_wall_l5.txt" nextLevel="Improve the defense power of your plant and your plant will have healing properties" />
+        <level value="6" pic="plantwall_lvl6" stats="1/4 {G} Defender Wither {T}: Gain 1 life" cost="1000" cardFile="plant_wall_l6.txt" nextLevel="You cannot train your plant any further." />
+      </levels>
+    </pet>
+    <pet name="Wolf" slot="1" saveFileKey="Wolf" maxLevel="4">
+      <desc>This ferocious animal may have been raised in captivity, but it has been trained to kill.</desc>
+      <levels>
+        <level value="0" stats="You do not own a wolf" nextLevel="Purchase Wolf" />
+        <level value="1" pic="petwolf_lvl1" stats="1/1 {W}" cost="250" cardFile="wolf_pet_l1.txt" nextLevel="The wolf's special bond increases your life force." />
+        <level value="2" pic="petwolf_lvl2_r1" stats="1/1 {W} Lifelink" cost="350" cardFile="wolf_pet_l2.txt" nextLevel="Improve offensive prowess of your wolf." />
+        <level value="3" pic="petwolf_lvl3_r1" stats="2/1 {W} Lifelink" cost="500" cardFile="wolf_pet_l3.txt" nextLevel="Your wolf stands ever vigilant." />
+        <level value="4" pic="petwolf_lvl4_r1" stats="2/1 {W} Lifelink Vigilance" cost="750" cardFile="wolf_pet_l4.txt" nextLevel="You cannot train your wolf any further" />
+      </levels>
+    </pet>
+    <pet name="Bird" slot="1" saveFileKey="Bird" maxLevel="4">
+      <desc>Unmatched in speed, agility and awareness, this trained hawk makes a fantastic hunter.</desc>
+      <levels>
+        <level value="0" stats="You do not own a bird" nextLevel="Purchase Bird" />
+        <level value="1" pic="petbird_lvl1" stats="1/1 {U}" cost="250" cardFile="bird_pet_l1.txt" nextLevel="Your baby bird learns how to fly." />
+        <level value="2" pic="petbird_lvl2" stats="1/1 {U} Flying" cost="350" cardFile="bird_pet_l2.txt" nextLevel="Toughen up your bird by having it fly through storms like a crow." />
+        <level value="3" pic="petbird_lvl3" stats="1/2 {U} Flying" cost="450" cardFile="bird_pet_l3.txt" nextLevel="Your bird learns the art of scrying, revealing valuable information anywhere it can." />
+        <level value="4" pic="petbird_lvl4_r1" stats="1/3 {U} Flying Scry" cost="750" cardFile="bird_pet_l4.txt" nextLevel="You cannot train your bird any further" />
+      </levels>
+    </pet>
+    <pet name="Hound" slot="1" saveFileKey="Hound" maxLevel="4">
+      <desc>Dogs are said to be man's best friend. Definitely not this one.</desc>
+      <levels>
+        <level value="0" stats="You do not own a hound" nextLevel="Purchase Hound" />
+        <level value="1" pic="pethound_lvl1" stats="1/1 {R}" cost="250" cardFile="hound_pet_l1.txt" nextLevel="Give Haste to your hound." />
+        <level value="2" pic="pethound_lvl2" stats="1/1 {R} Haste" cost="400" cardFile="hound_pet_l2.txt" nextLevel="Improve the attack power of your hound." />
+        <level value="3" pic="pethound_lvl3" stats="2/1 {R} Haste" cost="500" cardFile="hound_pet_l3.txt" nextLevel="Your hound can burst into flames, dealing extra damage but perishing in the process." />
+        <level value="4" pic="pethound_lvl4" stats="2/1 {R} Haste Burst Into Flames" cost="700" cardFile="hound_pet_l4.txt" nextLevel="You cannot train your hound any further" />
+      </levels>
+    </pet>
+    <pet name="Crocodile" slot="1" saveFileKey="Crocodile" maxLevel="4">
+      <desc>With its razor sharp teeth, this monster is extremely dangerous and hard to track.</desc>
+      <levels>
+        <level value="0" stats="You do not own a crocodile" cost="0" cardfile="null" nextLevel="Purchase Crocodile" />
+        <level value="1" pic="petcrocodile_lvl1" stats="1/1 {B}" cost="250" cardFile="crocodile_pet_l1.txt" nextLevel="Crocodile hides, not able to block or be tracked when its not your turn." />
+        <level value="2" pic="petcrocodile_lvl2" stats="2/1 {B} Hides" cost="350" cardFile="crocodile_pet_l2.txt" nextLevel="Improve the durability of your Crocodile" />
+        <level value="3" pic="petcrocodile_lvl3" stats="2/2 {B} Hides" cost="450" cardFile="crocodile_pet_l3.txt" nextLevel="Crocodiles teeth become razor sharp, being a major danger for anything in its way" />
+        <level value="4" pic="petcrocodile_lvl4" stats="2/2 {B} Hides Deathtouch" cost="750" cardFile="crocodile_pet_l4.txt" nextLevel="You cannot train your crocodile any further" />
+      </levels>
+    </pet>
+	<pet name="Ape" slot="1" saveFileKey="Ape" maxLevel="4">
+      <desc>This beast swells up to deal some hearty damage.</desc>
+      <levels>
+        <level value="0" stats="You do not own an Ape" cost="0" cardfile="null" nextLevel="Purchase Ape" />
+        <level value="1" pic="petape_lvl1" stats="1/1 {G}" cost="250" cardFile="ape_pet_l1.txt" nextLevel="Ape starts putting on some extra pounds." />
+        <level value="2" pic="petape_lvl2" stats="2/1 {G}" cost="400" cardFile="ape_pet_l2.txt" nextLevel="Your Ape uses his weight advantage to stomp past smaller beasts." />
+        <level value="3" pic="petape_lvl3" stats="2/1 {G} Trample" cost="450" cardFile="ape_pet_l3.txt" nextLevel="Your Ape intensity grows in battle able to dish out and take more damage." />
+        <level value="4" pic="petape_lvl4" stats="2/1 {G} Trample Pump" cost="750" cardFile="ape_pet_l4.txt" nextLevel="You cannot train your Ape any further" />
+      </levels>
+    </pet>
+  </pets>
+</bazaar>

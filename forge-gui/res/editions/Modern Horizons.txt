@@ -1,0 +1,289 @@
+[metadata]
+Code=MH1
+Date=2019-06-14
+Name=Modern Horizons
+Code2=MH1
+Type=Draft
+BoosterCovers=5
+Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
+BoosterBox=24
+ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
+ScryfallCode=MH1
+
+[cards]
+1 M Morophon, the Boundless @Victor Adame Minguez
+2 C Answered Prayers @Seb McKinnon
+3 R Astral Drift @Anna Steinbauer
+4 U Battle Screech @Anastasia Ovchinnikova
+5 U Dismantling Blow @Tomasz Jedruszek
+6 C Enduring Sliver @Josh Hass
+7 C Ephemerate @Bastien L. Deharme
+8 U Face of Divinity @Martina Pilcerova
+9 U First Sliver's Chosen @Steven Belledin
+10 R Force of Virtue @Livia Prima
+11 U Generous Gift @Kev Walker
+12 C Gilded Light @John Avon
+13 R Giver of Runes @Seb McKinnon
+14 C Impostor of the Sixth Pride @Chris Seaman
+15 C Irregular Cohort @Steve Argyle
+16 U King of the Pride @Jonathan Kuo
+17 C Knight of Old Benalia @Dan Scott
+18 C Lancer Sliver @Lucas Graciano
+19 C Martyr's Soul @Mila Pesic
+20 R On Thin Ice @Lucas Graciano
+21 M Ranger-Captain of Eos @Ryan Pancoast
+22 C Recruit the Worthy @Joe Slucher
+23 C Reprobation @Igor Kieryluk
+24 C Rhox Veteran @Milivoj Ćeran
+25 C Segovian Angel @Simon Dominic
+26 M Serra the Benevolent @Magali Villeneuve
+27 C Settle Beyond Reality @Anthony Palumbo
+28 C Shelter @Christopher Moeller
+29 R Sisay, Weatherlight Captain @Anna Steinbauer
+30 C Soul-Strike Technique @Joe Slucher
+31 U Splicer's Skill @Jason Felix
+32 C Stirring Address @Volkan Baǵa
+33 C Trustworthy Scout @Joseph Meehan
+34 U Valiant Changeling @Gabor Szikszai
+35 U Vesperlark @Raoul Vitale
+36 C Wall of One Thousand Cuts @Greg Staples
+37 R Winds of Abandon @Noah Bradley
+38 U Wing Shards @Daren Bader
+39 U Zhalfirin Decoy @Paul Scott Canavan
+40 R Archmage's Charm @Alayna Danner
+41 R Bazaar Trademage @Christopher Moeller
+42 U Blizzard Strix @Suzanne Helmigh
+43 C Chillerpillar @Suzanne Helmigh
+44 C Choking Tethers @Deruchenko Alexander
+45 U Cunning Evasion @Steve Argyle
+46 M Echo of Eons @Terese Nielsen
+47 U Everdream @Nils Hamm
+48 U Exclude @Jehan Choo
+49 C Eyekite @Dan Scott
+50 U Fact or Fiction @Matt Cavotta
+51 C Faerie Seer @Colin Boyer
+52 R Force of Negation @Paul Scott Canavan
+53 R Future Sight @Dan Scott
+54 C Iceberg Cancrix @Ravenna Tran
+55 C Man-o'-War @Jon J Muth
+56 R Marit Lage's Slumber @Randy Vargas
+57 R Mirrodin Besieged @Bram Sels
+58 R Mist-Syndicate Naga @Randy Vargas
+59 C Moonblade Shinobi @Taylor Ingvarsson
+60 U Oneirophage @Martina Pilcerova
+61 C Phantasmal Form @Steve Argyle
+62 C Phantom Ninja @Joe Slucher
+63 C Pondering Mage @Tommy Arnold
+64 C Prohibit @Adam Rex
+65 C Rain of Revelation @Nils Hamm
+66 U Rebuild @Lindsey Look
+67 C Scour All Possibilities @Mitchell Malloy
+68 U Scuttling Sliver @Mike Bierek
+69 C Smoke Shroud @Micah Epstein
+70 C Spell Snuff @Nic Klein
+71 C Stream of Thought @Seb McKinnon
+72 C String of Disappearances @Seb McKinnon
+73 U Tribute Mage @Scott Murphy
+74 U Twisted Reflection @Jason Felix
+75 M Urza, Lord High Artificer @Grzegorz Rutkowski
+76 U Watcher for Tomorrow @Tommy Arnold
+77 C Windcaller Aven @Uriah Voth
+78 C Winter's Rest @Mila Pesic
+79 C Azra Smokeshaper @Aaron Miller
+80 R Cabal Therapist @Mitchell Malloy
+81 U Carrion Feeder @Svetlin Velinov
+82 C Changeling Outcast @Micah Epstein
+83 R Cordial Vampire @Winona Nelson
+84 U Crypt Rats @Matt Cavotta
+85 R Dead of Winter @Zack Stella
+86 C Defile @Joe Slucher
+87 C Diabolic Edict @Franz Vohwinkel
+88 U Dregscape Sliver @Zack Stella
+89 R Endling @Livia Prima
+90 U Feaster of Fools @John Severin Brassell
+91 C First-Sphere Gargantua @Randy Vargas
+92 R Force of Despair @Seb McKinnon
+93 C Gluttonous Slug @Greg Staples
+94 U Graveshifter @Jakub Kasper
+95 C Headless Specter @Anastasia Ovchinnikova
+96 C Mind Rake @Jason Rainville
+97 C Mob @Sidharth Chaturvedi
+98 R Nether Spirit @Deruchenko Alexander
+99 C Ninja of the New Moon @Greg Opalinski
+100 R Plague Engineer @Nicholas Gregory
+101 C Putrid Goblin @Winona Nelson
+102 C Rank Officer @Nicholas Gregory
+103 C Ransack the Lab @Chris Seaman
+104 C Return from Extinction @Deruchenko Alexander
+105 U Sadistic Obsession @Matt Stewart
+106 U Shatter Assumptions @Chuck Lukacs
+107 C Silumgar Scavenger @Greg Staples
+108 U Sling-Gang Lieutenant @Craig J Spearing
+109 U Smiting Helix @Evan Shipard
+110 U Throatseeker @Dmitry Burmak
+111 C Umezawa's Charm @Eric Deschamps
+112 U Undead Augur @Sara Winters
+113 C Unearth @Jehan Choo
+114 C Venomous Changeling @Aaron Miller
+115 C Warteye Witch @Steve Prescott
+116 M Yawgmoth, Thran Physician @Mark Winters
+117 U Alpine Guide @Wayne Reynolds
+118 R Aria of Flame @Greg Staples
+119 C Bladeback Sliver @Svetlin Velinov
+120 C Bogardan Dragonheart @Randy Vargas
+121 C Cleaving Sliver @David Gaillet
+122 U Firebolt @Chris Rallis
+123 C Fists of Flame @Steve Argyle
+124 R Force of Rage @Clint Cearley
+125 C Geomancer's Gambit @Adam Paquette
+126 C Goatnap @Mark Zug
+127 C Goblin Champion @Kev Walker
+128 R Goblin Engineer @Jehan Choo
+129 U Goblin Matron @Jesper Ejsing
+130 U Goblin Oriflamme @David Palumbo
+131 C Goblin War Party @Deruchenko Alexander
+132 U Hollowhead Sliver @Johan Grenier
+133 C Igneous Elemental @Anastasia Ovchinnikova
+134 C Lava Dart @Tyler Walpole
+135 C Magmatic Sinkhole @Mark Behm
+136 C Orcish Hellraiser @Darren Tan
+137 U Ore-Scale Guardian @Aaron Miller
+138 R Pashalik Mons @Even Amundsen
+139 U Pillage @Jesper Ejsing
+140 R Planebound Accomplice @Paul Scott Canavan
+141 C Pyrophobia @Izzy
+142 C Quakefoot Cyclops @Mike Bierek
+143 U Ravenous Giant @Milivoj Ćeran
+144 C Reckless Charge @Steve Argyle
+145 M Seasoned Pyromancer @Cynthia Sheppard
+146 C Shenanigans @Lindsey Look
+147 C Spinehorn Minotaur @Jesper Ejsing
+148 R Spiteful Sliver @Johann Bodin
+149 R Tectonic Reformation @James Paick
+150 U Throes of Chaos @Igor Kieryluk
+151 U Urza's Rage @Jim Murray
+152 U Vengeful Devil @Jakub Kasper
+153 C Viashino Sandsprinter @Jason A. Engle
+154 C Volatile Claws @Paul Scott Canavan
+155 R Ayula, Queen Among Bears @Jesper Ejsing
+156 R Ayula's Influence @Kari Christensen
+157 C Bellowing Elk @Lucas Graciano
+158 R Collector Ouphe @Filip Burburan
+159 U Conifer Wurm @Raoul Vitale
+160 R Crashing Footfalls @Dan Scott
+161 R Deep Forest Hermit @Chris Seaman
+162 C Elvish Fury @Randy Vargas
+163 C Excavating Anurid @Joe Slucher
+164 R Force of Vigor @Randy Vargas
+165 C Frostwalla @Lars Grant-West
+166 R Genesis @Alayna Danner
+167 U Glacial Revelation @Magali Villeneuve
+168 M Hexdrinker @Forrest Imel
+169 C Krosan Tusker @Kev Walker
+170 U Llanowar Tribe @Scott Murphy
+171 C Mother Bear @Winona Nelson
+172 C Murasa Behemoth @Dave Kendall
+173 U Nantuko Cultivator @Jehan Choo
+174 C Nimble Mongoose @Kev Walker
+175 U Regrowth @Dan Scott
+176 C Rime Tender @Bastien L. Deharme
+177 U Saddled Rimestag @Winona Nelson
+178 C Savage Swipe @David Gaillet
+179 U Scale Up @Suzanne Helmigh
+180 C Spore Frog @Donato Giancola
+181 C Springbloom Druid @Randy Gallegos
+182 U Squirrel Nest @Daniel Ljunggren
+183 U Tempered Sliver @Mitchell Malloy
+184 C Thornado @Volkan Baǵa
+185 C Treefolk Umbra @Zack Stella
+186 C Treetop Ambusher @Randy Vargas
+187 C Trumpeting Herd @Lars Grant-West
+188 C Twin-Silk Spider @Ben Maier
+189 M Unbound Flourishing @Tomasz Jedruszek
+190 U Wall of Blossoms @Heather Hudson
+191 C Weather the Storm @Magali Villeneuve
+192 U Webweaver Changeling @Nicholas Gregory
+193 C Winding Way @Adam Paquette
+194 U Abominable Treefolk @Jonas De Ro
+195 R Cloudshredder Sliver @Filip Burburan
+196 R Collected Conjuring @Steve Argyle
+197 R Eladamri's Call @Kev Walker
+198 U Etchings of the Chosen @Chuck Lukacs
+199 R Fallen Shinobi @Tomasz Jedruszek
+200 M The First Sliver @Svetlin Velinov
+201 U Good-Fortune Unicorn @Kee Lo
+202 R Hogaak, Arisen Necropolis @Vincent Proce
+203 R Ice-Fang Coatl @Filip Burburan
+204 U Ingenious Infiltrator @Jason Rainville
+205 R Kaya's Guile @Jason Rainville
+206 M Kess, Dissident Mage @Izzy
+207 U Lavabelly Sliver @Mark Behm
+208 R Lightning Skelemental @Nicholas Gregory
+209 U Munitions Expert @Jesper Ejsing
+210 C Nature's Chant @Raoul Vitale
+211 R Reap the Past @John Severin Brassell
+212 U Rotwidow Pack @Kev Walker
+213 U Ruination Rioter @Dmitry Burmak
+214 U Soulherder @Seb McKinnon
+215 U Thundering Djinn @Anastasia Ovchinnikova
+216 R Unsettled Mariner @John Stanko
+217 M Wrenn and Six @Chase Stone
+218 R Altar of Dementia @Brom
+219 C Amorphous Axe @Martina Pilcerova
+220 C Arcum's Astrolabe @Igor Kieryluk
+221 U Birthing Boughs @Mike Bierek
+222 U Farmstead Gleaner @Josh Hass
+223 C Fountain of Ichor @Grzegorz Rutkowski
+224 U Icehide Golem @Paul Scott Canavan
+225 U Lesser Masticore @Wisnu Tan
+226 M Mox Tantalite @Ryan Pancoast
+227 R Scrapyard Recombiner @Simon Dominic
+228 M Sword of Sinew and Steel @Chris Rahn
+229 M Sword of Truth and Justice @Chris Rahn
+230 U Talisman of Conviction @Lindsey Look
+231 U Talisman of Creativity @Lindsey Look
+232 U Talisman of Curiosity @Lindsey Look
+233 U Talisman of Hierarchy @Lindsey Look
+234 U Talisman of Resilience @Lindsey Look
+235 C Universal Automaton @Ben Maier
+236 U Barren Moor @Noah Bradley
+237 C Cave of Temptation @Winona Nelson
+238 R Fiery Islet @Richard Wright
+239 U Forgotten Cave @Noah Bradley
+240 U Frostwalk Bastion @Jedd Chevrier
+241 R Hall of Heliod's Generosity @Daniel Ljunggren
+242 U Lonely Sandbar @Noah Bradley
+243 R Nurturing Peatland @Noah Bradley
+244 R Prismatic Vista @Sam Burley
+245 U Secluded Steppe @Noah Bradley
+246 R Silent Clearing @Seb McKinnon
+247 R Sunbaked Canyon @Yeong-Hao Han
+248 U Tranquil Thicket @Noah Bradley
+249 R Waterlogged Grove @John Avon
+250 L Snow-Covered Plains @Titus Lunter
+251 L Snow-Covered Island @Titus Lunter
+252 L Snow-Covered Swamp @Titus Lunter
+253 L Snow-Covered Mountain @Titus Lunter
+254 L Snow-Covered Forest @Titus Lunter
+255 R Flusterstorm @Chris Rallis
+
+[tokens]
+b_2_2_zombie
+c_0_0_a_construct_total_artifacts
+c_1_1_a_myr
+c_2_2_shapeshifter_changeling
+c_3_3_a_phyrexian_golem
+g_1_1_squirrel
+g_1_2_spider_reach
+g_2_2_bear
+g_3_3_elephant
+g_4_4_rhino_trample
+marit_lage
+r_1_1_elemental
+r_1_1_goblin
+r_3_1_elemental_trample_haste
+u_1_1_illusion_flying
+w_1_1_bird_flying
+w_1_1_soldier
+w_4_4_angel_flying_vigilance
+wb_1_1_spirit_flying

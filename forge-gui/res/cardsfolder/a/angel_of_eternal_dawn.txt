@@ -1,0 +1,10 @@
+Name:Angel of Eternal Dawn
+ManaCost:2 W
+Types:Creature Angel
+PT:2/4
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDay | TriggerDescription$ When CARDNAME enters the battlefield, it becomes day.
+SVar:TrigDay:DB$ DayTime | Value$ Day
+S:Mode$ Continuous | GlobalRule$ It can't become night. | Description$ It can't become night.
+S:Mode$ CantBeCast | ValidCard$ Card | cmcGT$ Turns | Caster$ Opponent | Description$ Your opponents can't cast spells with mana value greater than the number of turns they have begun.
+Oracle:Flying\nWhen Angel of Eternal Dawn enters the battlefield, it becomes day.\nIt can't become night.\nYour opponents can't cast spells with mana value greater than the number of turns they have begun.

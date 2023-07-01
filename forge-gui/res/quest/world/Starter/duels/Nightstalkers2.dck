@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Abyssal Nightstalker
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Not much to say, this is a Nightstalker deck.
+Deck Type=constructed
+Name=Nightstalkers2
+[Main]
+4 Abyssal Nightstalker|PO2
+2 Assassin's Blade|POR
+4 Brutal Nightstalker|PO2
+4 Feral Shadow|POR
+2 Hand of Death|POR|2
+4 Lurking Nightstalker|PO2
+2 Nightstalker Engine|PO2
+4 Predatory Nightstalker|PO2
+4 Prowling Nightstalker|PO2
+2 Raiding Nightstalker|PO2
+4 Return of the Nightstalkers|PO2
+7 Swamp|PO2|1
+9 Swamp|PO2|2
+8 Swamp|PO2|3

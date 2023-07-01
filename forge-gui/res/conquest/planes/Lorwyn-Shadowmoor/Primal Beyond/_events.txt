@@ -1,0 +1,9 @@
+Name:Elementals of Lorwyn|Deck:Elementals of Lorwyn.dck|Variant:None|Avatar:Supreme Exemplar|Desc:
+Name:Ashling, the Extinguisher|Deck:Ashling, the Extinguisher.dck|Variant:Commander|Avatar:Ashling, the Extinguisher|Desc:
+Name:Ashling the Pilgrim|Deck:Ashling the Pilgrim.dck|Variant:Commander|Avatar:Ashling the Pilgrim|Desc:
+Name:Horde of Notions|Deck:Horde of Notions.dck|Variant:Commander|Avatar:Horde of Notions|Desc:
+Name:Marath, Will of the Wild|Deck:Marath, Will of the Wild.dck|Variant:Commander|Avatar:Marath, Will of the Wild|Desc:
+Name:Reaper King|Deck:Reaper King.dck|Variant:Commander|Avatar:Reaper King|Desc:
+Name:The Extinguisher|Deck:The Extinguisher.dck|Variant:Vanguard|Avatar:Ashling, the Extinguisher|Desc:
+Name:The Pilgrim|Deck:The Pilgrim.dck|Variant:Vanguard|Avatar:Ashling the Pilgrim|Desc:
+Name:Mirror Entity|Deck:Mirror Entity-VAN.dck|Variant:Vanguard|Avatar:Mirror Entity|Desc:

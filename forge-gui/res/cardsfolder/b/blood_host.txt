@@ -1,0 +1,7 @@
+Name:Blood Host
+ManaCost:3 B B
+Types:Creature Vampire
+PT:3/3
+A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on CARDNAME and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:{1}{B}, Sacrifice another creature: Put a +1/+1 counter on Blood Host and you gain 2 life.

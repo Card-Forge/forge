@@ -1,0 +1,8 @@
+Name:Daru Warchief
+ManaCost:2 W W
+Types:Creature Human Soldier
+PT:1/1
+S:Mode$ ReduceCost | ValidCard$ Soldier | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Soldier spells you cast cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl | AddPower$ 1 | AddToughness$ 2 | Description$ Soldier creatures you control get +1/+2.
+SVar:PlayMain1:TRUE
+Oracle:Soldier spells you cast cost {1} less to cast.\nSoldier creatures you control get +1/+2.

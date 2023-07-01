@@ -1,0 +1,7 @@
+Name:Yew Spirit
+ManaCost:4 G
+Types:Creature Spirit Treefolk
+PT:3/3
+A:AB$ Pump | Cost$ 2 G G | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
+SVar:X:Count$CardPower
+Oracle:{2}{G}{G}: Yew Spirit gets +X/+X until end of turn, where X is its power.

@@ -1,0 +1,7 @@
+Name:Skyrider Trainee
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
+SVar:EnchantMe:Once
+Oracle:Skyrider Trainee has flying as long as it's enchanted.

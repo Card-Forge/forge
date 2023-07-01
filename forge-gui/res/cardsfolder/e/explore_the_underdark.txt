@@ -1,0 +1,7 @@
+Name:Explore the Underdark
+ManaCost:4 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic,Card.Gate | ChangeTypeDesc$ basic land cards and/or Gate | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBInitiative | SpellDescription$ Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle.
+SVar:DBInitiative:DB$ TakeInitiative | SpellDescription$ You take the initiative.
+DeckHints:Type$Gate
+Oracle:Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle.\nYou take the initiative.

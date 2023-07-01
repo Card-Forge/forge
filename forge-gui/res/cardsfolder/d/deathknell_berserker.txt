@@ -1,0 +1,8 @@
+Name:Deathknell Berserker
+ManaCost:1 B
+Types:Creature Elf Berserker
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+powerGE3 | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, if its power was 3 or greater, create a 2/2 black Zombie Berserker creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie_berserker | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Deathknell Berserker dies, if its power was 3 or greater, create a 2/2 black Zombie Berserker creature token.

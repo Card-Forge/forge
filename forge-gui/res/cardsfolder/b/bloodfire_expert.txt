@@ -1,0 +1,6 @@
+Name:Bloodfire Expert
+ManaCost:2 R
+Types:Creature Efreet Monk
+PT:3/1
+K:Prowess
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

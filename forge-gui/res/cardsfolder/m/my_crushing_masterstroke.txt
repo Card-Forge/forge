@@ -1,0 +1,8 @@
+Name:My Crushing Masterstroke
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigControl | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, gain control of all nonland permanents your opponents control until end of turn. Untap those permanents. They gain haste until end of turn. Each of them attacks its owner this turn if able.
+SVar:TrigControl:DB$ GainControl | AllValid$ Permanent.OppCtrl+nonLand | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ AttackOwner
+SVar:AttackOwner:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ CardOwner | Description$ This permanent attacks its owner this turn if able.
+Oracle:When you set this scheme in motion, gain control of all nonland permanents your opponents control until end of turn. Untap those permanents. They gain haste until end of turn. Each of them attacks its owner this turn if able.

@@ -1,0 +1,14 @@
+Name:Thassa, God of the Sea
+ManaCost:2 U
+Types:Legendary Enchantment Creature God
+PT:5/5
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to blue is less than 5, NICKNAME isn't a creature. (Each {U} in the mana costs of permanents you control counts towards your devotion to blue.)
+SVar:X:Count$Devotion.Blue
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ Effect | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature you control can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Permanent.Blue
+Oracle:Indestructible\nAs long as your devotion to blue is less than five, Thassa isn't a creature. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nAt the beginning of your upkeep, scry 1.\n{1}{U}: Target creature you control can't be blocked this turn.

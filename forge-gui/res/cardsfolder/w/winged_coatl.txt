@@ -1,0 +1,8 @@
+Name:Winged Coatl
+ManaCost:1 G U
+Types:Creature Snake
+PT:1/1
+K:Flash
+K:Flying
+K:Deathtouch
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

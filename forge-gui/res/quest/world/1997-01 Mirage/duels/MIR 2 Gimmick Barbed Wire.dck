@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 2 Gimmick: Barbed Wire
+Title=Barbed Wire
+Difficulty=medium
+Description="How have I angered nature that she would imprison me in a labyrinth of grass?" -Kasib ibn Naji, Letters
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Barbed Foliage|MIR
+2 Cursed Totem|MIR
+4 Dream Tides|VIS
+2 Elephant Grass|VIS
+4 Fog|MIR
+10 Forest|MIR|3
+4 Impulse|VIS
+10 Island|MIR|3
+2 Katabatic Winds|VIS
+4 Malignant Growth|MIR
+4 Power Sink|MIR
+4 Quicksand|VIS
+4 Rampant Growth|MIR
+2 Undo|VIS

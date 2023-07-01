@@ -1,0 +1,64 @@
+[duel]
+[metadata]
+Name=Raven 2
+Title=Raven
+Difficulty=medium
+Description=WU Spirit deck
+Icon=Raven.jpg
+Deck Type=constructed
+[main]
+6 Plains|M12
+5 Island|M12
+4 Sejiri Refuge
+4 Glacial Fortress
+4 Seachrome Coast
+4 Flooded Strand
+1 Moorland Haunt
+1 Nimbus Maze
+1 Angel of Flight Alabaster
+1 Angelic Curator
+1 Azorius Herald
+1 Baku Altar
+1 Battleground Geist
+1 Beckon Apparition
+1 Belfry Spirit
+1 Chapel Geist
+1 Cloud Spirit
+1 Cloudhoof Kirin
+4 Drogskol Captain
+1 Dungeon Geists
+1 Field of Souls
+1 Gallows Warden
+1 Geist-Honored Monk
+1 Ghost Ship
+1 Godhead of Awe
+1 Guardian of the Guildpact
+1 Hundred-Talon Kami
+1 Kami of Old Stone
+1 Kami of the Honored Dead
+1 Kami of the Palace Fields
+1 Karmic Guide
+1 Kataki, War's Wage
+1 Keiga, the Tide Star
+1 Lantern Kami
+1 Melesse Spirit
+1 Midnight Haunting
+1 Moon Heron
+1 Niblis of the Mist
+1 Oyobi, Who Split the Heavens
+1 Promise of Bunrei
+1 Revered Dead
+1 Ribbons of the Reikai
+1 River Kaijin
+1 Sire of the Storm
+1 Sky Spirit
+1 Soulbound Guardians
+1 Spectral Procession
+1 Spirit of the Hearth
+1 Spiritual Guardian
+1 Teller of Tales
+1 Torii Watchward
+1 Voiceless Spirit
+1 Wind Spirit
+1 Windborn Muse
+[sideboard]

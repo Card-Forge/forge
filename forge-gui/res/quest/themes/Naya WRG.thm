@@ -1,0 +1,170 @@
+BasicLandPercentage=10
+
+[Group MaxCnt=4 Percentage=27]
+Jungle Shrine
+Plateau
+Savannah
+Taiga
+Arid Mesa
+Wooded Foothills
+Windswept Heath
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Druid of the Anima
+Drumhunter
+Exuberant Firestoker
+Exuberant Firestoker
+Kavu Lair
+Mayael the Anima
+Mighty Emergence
+Sunseed Nurturer
+Sunseed Nurturer
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Paleoloth
+Paleoloth
+Where Ancients Tread
+Mycoid Shepherd
+Mycoid Shepherd
+Vagrant Plowbeasts
+[/Group]
+
+[Group MaxCnt=2 Percentage=7]
+Blistering Barrier
+Rage Nimbus
+Woolly Thoctar
+Woolly Thoctar
+Woolly Thoctar
+[/Group]
+
+[Group MaxCnt=2 Percentage=12]
+Balduvian Horde
+Blastoderm
+Calciderm
+Citanul Centaurs
+Cliffrunner Behemoth
+Cliffrunner Behemoth
+Cliffrunner Behemoth
+Darba
+Flamecore Elemental
+Hungry Mist
+Hunted Lammasu
+Hunted Troll
+Incurable Ogre
+Jade Leech
+Lumbering Satyr
+Mungha Wurm
+Pillaging Horde
+Rumbling Slum
+Sunweb
+Vengeful Firebrand
+Wild Leotau
+[/Group]
+
+[Group MaxCnt=1 Percentage=11]
+Ant Queen
+Ayumi, the Last Visitor
+Baneslayer Angel
+Beacon Behemoth
+Deadly Insect
+Eron the Relentless
+Fangren Marauder
+Fire Elemental
+Frost Ogre
+Gorger Wurm
+Hulking Cyclops
+Hunted Dragon
+Molder Beast
+Mosstodon
+Panther Warriors
+Rakeclaw Gargantuan
+Savage Thallid
+Scoria Elemental
+Scuzzback Marauders
+Silverback Ape
+Spectral Force
+Spined Wurm
+Stomper Cub
+Streetbreaker Wurm
+Uril, the Miststalker
+Winding Wurm
+[/Group]
+
+[Group MaxCnt=1 Percentage=8]
+Alpha Tyrranax
+Arctic Nishoba
+Axegrinder Giant
+Barbtooth Wurm
+Bull Cerodon
+Carnassid
+Cavern Thoctar
+Deathless Angel
+Durkwood Baloth
+Enlisted Wurm
+Fangren Marauder
+Flameborn Hellion
+Frenetic Raptor
+Giant Warthog
+Inferno Titan
+Iron-Barb Hellion
+Jerrard of the Closed Fist
+Kamahl, Pit Fighter
+Meglonoth
+Moss Kami
+Nightsoil Kami
+Primeval Titan
+Rampaging Baloths
+Roughshod Mentor
+Ryusei, the Falling Star
+Sabertooth Nishoba
+Shivan Dragon
+Sigiled Behemoth
+Sun Titan
+Sunrise Sovereign
+The Lady of the Mountain
+Thundermare
+Torsten Von Ursus
+Vastwood Gorger
+Yavimaya Wurm
+Yosei, the Morning Star
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+Angel of Retribution
+Archangel
+Ashen Firebeast
+Ashen Monstrosity
+Avatar of Fury
+Avatar of Might
+Avenger of Zendikar
+Blazing Archon
+Body of Jukai
+Bogardan Hellkite
+Brimstone Dragon
+Crash of Rhinos
+Craw Wurm
+Duskdale Wurm
+Enormous Baloth
+Gaea's Revenge
+Godsire
+Goliath Spider
+Havenwood Wurm
+Jungle Weaver
+Kalonian Behemoth
+Krosan Colossus
+Living Hive
+Loamdragger Giant
+Oakgnarl Warrior
+Pelakka Wurm
+Penumbra Wurm
+Rootbreaker Wurm
+Scaled Wurm
+Shivan Hellkite
+Spearbreaker Behemoth
+Whiptail Wurm
+Windbrisk Raptor
+[/Group]
+
+End

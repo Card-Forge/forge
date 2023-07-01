@@ -1,0 +1,8 @@
+Name:Kinnan, Bonder Prodigy
+ManaCost:G U
+Types:Legendary Creature Human Druid
+PT:2/2
+T:Mode$ TapsForMana | ValidCard$ Permanent.nonLand | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
+A:AB$ Dig | Cost$ 5 G U | ForceRevealToController$ True | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.nonHuman | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may put a non-Human creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+Oracle:Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.\n{5}{G}{U}: Look at the top five cards of your library. You may put a non-Human creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

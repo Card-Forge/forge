@@ -1,0 +1,8 @@
+Name:Monstrous Carabid
+ManaCost:3 B R
+Types:Creature Insect
+PT:4/4
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+K:Cycling:BR
+DeckHas:Ability$Discard
+Oracle:Monstrous Carabid attacks each combat if able.\nCycling {B/R} ({B/R}, Discard this card: Draw a card.)

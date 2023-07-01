@@ -1,0 +1,6 @@
+Name:Esper Cormorants
+ManaCost:2 W U
+Types:Artifact Creature Bird
+PT:3/3
+K:Flying
+Oracle:Flying

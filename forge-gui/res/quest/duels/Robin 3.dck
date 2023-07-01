@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robin 3
+Title=Robin
+Difficulty=hard
+Description=URG deck with unblockable creatures, auras and equipment
+Icon=Robin.jpg
+Deck Type=constructed
+[main]
+4 Volcanic Island
+4 Tropical Island
+1 Sulfur Falls
+1 Hinterland Harbor
+1 Island
+2 Flooded Strand
+3 Misty Rainforest
+2 Polluted Delta
+3 Scalding Tarn
+1 Mox Sapphire
+1 Mox Emerald
+1 Mox Ruby
+4 AEther Figment
+4 Invisible Stalker
+4 Jhessian Infiltrator
+1 Metathran Soldier
+1 Thalakos Seer
+1 Thalakos Sentry
+4 Curiosity
+1 Keen Sense
+1 Latulla's Orders
+2 Curse of Stalked Prey
+1 Sigil of Sleep
+1 Destructive Urge
+1 Snake Umbra
+1 Specter's Shroud
+1 Quietus Spike
+1 Sword of Feast and Famine
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow
+1 Sword of War and Peace
+3 Lightning Bolt
+1 Naturalize
+[sideboard]

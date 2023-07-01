@@ -1,0 +1,6 @@
+Name:Eiganjo Castle
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature.Legendary | Amount$ 2 | TgtPrompt$ Select target legendary creature | SpellDescription$ Prevent the next 2 damage that would be dealt to target legendary creature this turn.
+Oracle:{T}: Add {W}.\n{W}, {T}: Prevent the next 2 damage that would be dealt to target legendary creature this turn.

@@ -1,0 +1,22 @@
+[quest]
+id=KHM Challenge: Runeforge Champion
+OpponentName=The Champions
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Bretagard Stronghold
+HumanExtras=
+[metadata]
+Title=Runeforge Champion
+Difficulty=easy
+Description="Every champion was once a contender that refused to give up."\n--Rocky Balboa, Rocky Balboa
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Runeforge Champion
+[Main]
+30 Arctic Treeline|KHM|1
+10 Rune of Might|KHM|1
+10 Rune of Sustenance|KHM|1
+10 Runeforge Champion|KHM|2

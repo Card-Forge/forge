@@ -1,0 +1,8 @@
+Name:Usher of the Fallen
+ManaCost:W
+Types:Creature Spirit Warrior
+PT:2/1
+A:AB$ Token | Cost$ 1 W | TokenAmount$ 1 | TokenScript$ w_1_1_human_warrior | TokenOwner$ You | Boast$ True | SpellDescription$ Create a 1/1 white Human Warrior creature token.
+SVar:NonCombatPriority:10
+DeckHas:Ability$Token
+Oracle:Boast — {1}{W}: Create a 1/1 white Human Warrior creature token. (Activate only if this creature attacked this turn and only once each turn.)

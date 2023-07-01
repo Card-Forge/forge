@@ -1,0 +1,10 @@
+Name:Wizened Arbiter
+ManaCost:W W
+Types:Creature Human Soldier Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChooseSb | TriggerDescription$ When CARDNAME enters the battlefield, you may reveal a white card you own from outside the game. If you do, exchange that card with a card in your hand.
+SVar:DBChooseSb:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.White+YouOwn | ChoiceZone$ Sideboard | SubAbility$ DBMoveHand
+SVar:DBMoveHand:DB$ ChangeZone | Origin$ Hand | Destination$ Sideboard | ChangeType$ Card.YouOwn | ChangeTypeDesc$ card | Mandatory$ True | ChangeNum$ 1 | SubAbility$ DBMoveSb | NoReveal$ True | RememberChanged$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:DBMoveSb:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | Defined$ ChosenCard | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Reveal$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Wizened Arbiter enters the battlefield, you may reveal a white card you own from outside the game. If you do, exchange that card with a card in your hand.

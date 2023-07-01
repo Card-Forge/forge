@@ -1,0 +1,7 @@
+Name:Gamekeeper
+ManaCost:3 G
+Types:Creature Elf
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard.
+SVar:TrigExile:AB$ DigUntil | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Valid$ Creature | ValidDescription$ Creature | FoundDestination$ Battlefield | RevealedDestination$ Graveyard
+Oracle:When Gamekeeper dies, you may exile it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard.

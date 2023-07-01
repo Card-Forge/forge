@@ -1,0 +1,6 @@
+Name:Shivan Zombie
+ManaCost:B R
+Types:Creature Phyrexian Barbarian Zombie
+PT:2/2
+K:Protection from white
+Oracle:Protection from white

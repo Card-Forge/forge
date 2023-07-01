@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone 1
+Title=Wilma Flintstone
+Difficulty=easy
+Description=BG deck with Noxious Hatchling and Woodlurker Mimic
+Icon=Wilma Flintstone.jpg
+Deck Type=constructed
+[main]
+7 Forest|M11
+7 Swamp|M11
+3 Gilt-Leaf Palace
+2 Llanowar Wastes
+2 Pine Barrens
+2 Savage Lands
+2 Jungle Hollow
+1 Dark Heart of the Wood
+1 Death Mutation
+1 Drain the Well
+1 Ebony Treefolk
+1 Gift of the Deity
+1 Golgari Germination
+1 Golgari Guildmage
+1 Golgari Rotwurm
+1 Hag Hedge-Mage
+3 Llanowar Dead
+1 Maelstrom Pulse
+3 Noxious Hatchling
+3 Woodlurker Mimic
+2 Odious Trow
+1 Putrefy
+2 Rendclaw Trow
+1 Shambling Shell
+3 Stalker Hag
+2 Woodwraith Strangler
+1 Elves of Deep Shadow
+1 Possessed Centaur
+1 Bog Gnarr
+1 Quirion Dryad
+1 Golgari Longlegs
+[sideboard]

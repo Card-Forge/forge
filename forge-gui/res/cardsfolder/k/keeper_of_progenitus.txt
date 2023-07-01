@@ -1,0 +1,8 @@
+Name:Keeper of Progenitus
+ManaCost:3 G
+Types:Creature Elf Druid
+PT:1/3
+T:Mode$ TapsForMana | ValidCard$ Mountain,Forest,Plains | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+AI:RemoveDeck:All
+Oracle:Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana of any type that land produced.

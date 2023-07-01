@@ -1,0 +1,6 @@
+Name:Lightning Hounds
+ManaCost:2 R R
+Types:Creature Dog
+PT:3/2
+K:First Strike
+Oracle:First strike

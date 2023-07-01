@@ -1,0 +1,7 @@
+Name:Holdout Settlement
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Tap an untapped creature you control: Add one mana of any color.

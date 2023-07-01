@@ -1,0 +1,26 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/02/RIX5-Feb-19.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has {E}{E} (two energy counters).
+[state]
+humanlife=20
+ailife=9
+turn=1
+aicounters=ENERGY=2
+activeplayer=human
+activephase=MAIN1
+humanhand=Kujar Seedsculptor;One With the Wind;Vraska, Relic Seeker;Reaver Ambush
+humanlibrary=
+humangraveyard=
+humanbattlefield=Vizier of Tumbling Sands|Id:4;Frilled Sandwalla;Majestic Myriarch;Fetid Pools;Fetid Pools;Fetid Pools;Blooming Marsh;Blooming Marsh;Blooming Marsh;Blooming Marsh
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Labyrinth Guardian;Ornithopter;Deadlock Trap;Captured by the Consulate|AttachedTo:4
+aiexile=
+aicommand=

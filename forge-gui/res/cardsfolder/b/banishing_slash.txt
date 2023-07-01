@@ -1,0 +1,8 @@
+Name:Banishing Slash
+ManaCost:W W
+Types:Sorcery
+A:SP$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment,Creature.tapped | TgtPrompt$ Select up to one target artifact, enchantment or tapped creature | SubAbility$ DBToken | SpellDescription$ Destroy up to one target artifact, enchantment, or tapped creature.
+SVar:DBToken:DB$ Token | ConditionPresent$ Artifact.YouCtrl | ConditionPresent2$ Enchantment.YouCtrl | TokenScript$ w_2_2_samurai_vigilance | SpellDescription$ Then if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
+DeckHints:Type$Artifact|Enchantment
+DeckHas:Ability$Token & Type$Samurai
+Oracle:Destroy up to one target artifact, enchantment, or tapped creature. Then if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.

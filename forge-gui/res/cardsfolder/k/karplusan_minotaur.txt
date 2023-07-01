@@ -1,0 +1,11 @@
+Name:Karplusan Minotaur
+ManaCost:2 R R
+Types:Creature Minotaur Warrior
+PT:3/3
+K:Cumulative upkeep:FlipCoin<1>:Flip a coin.
+T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigYouDmg | TriggerDescription$ Whenever you win a coin flip, CARDNAME deals 1 damage to any target.
+SVar:TrigYouDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any
+T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Lose | TriggerZones$ Battlefield | Execute$ TrigOppDmg | TriggerDescription$ Whenever you lose a coin flip, CARDNAME deals 1 damage to any target of an opponent's choice.
+SVar:TrigOppDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | TargetingPlayer$ Opponent
+AI:RemoveDeck:All
+Oracle:Cumulative upkeep—Flip a coin. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you win a coin flip, Karplusan Minotaur deals 1 damage to any target.\nWhenever you lose a coin flip, Karplusan Minotaur deals 1 damage to any target of an opponent's choice.

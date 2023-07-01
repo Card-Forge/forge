@@ -1,0 +1,8 @@
+Name:Victory's Herald
+ManaCost:3 W W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures gain flying and lifelink until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ Flying & Lifelink
+Oracle:Flying\nWhenever Victory's Herald attacks, attacking creatures gain flying and lifelink until end of turn.

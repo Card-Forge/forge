@@ -1,0 +1,6 @@
+Name:Sentinel Dispatch
+ManaCost:no cost
+Types:Conspiracy
+T:Mode$ Phase | FirstUpkeepThisGame$ True | Execute$ TrigToken | EffectZone$ Command | TriggerDescription$ At the beginning of the first upkeep, create a 1/1 colorless Construct artifact creature token with defender.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_construct_defender | TokenOwner$ You
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nAt the beginning of the first upkeep, create a 1/1 colorless Construct artifact creature token with defender.

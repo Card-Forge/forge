@@ -1,0 +1,12 @@
+Name:Risky Move
+ManaCost:3 R R R
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player gains control of CARDNAME.
+SVar:TrigGainControl:DB$ GainControl | NewController$ TriggeredPlayer | Defined$ Self
+T:Mode$ ChangesController | ValidCard$ Card.Self | ValidOriginalController$ Player.Other | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ When you gain control of CARDNAME from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature.
+SVar:TrigChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl | Mandatory$ True | AILogic$ WorstCard | SubAbility$ DBChoosePlayer
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBFlip
+SVar:DBFlip:DB$ FlipACoin | LoseSubAbility$ DBControl
+SVar:DBControl:DB$ GainControl | NewController$ Player.Chosen | Defined$ ChosenCard
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player gains control of Risky Move.\nWhen you gain control of Risky Move from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature.

@@ -1,0 +1,7 @@
+Name:Warmind Infantry
+ManaCost:2 R
+Types:Creature Elemental Soldier
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigBattalionPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+Oracle:Battalion — Whenever Warmind Infantry and at least two other creatures attack, Warmind Infantry gets +2/+0 until end of turn.

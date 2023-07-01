@@ -1,0 +1,8 @@
+Name:Corpsejack Menace
+ManaCost:2 B G
+Types:Creature Fungus
+PT:4/4
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ DoubleCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead.

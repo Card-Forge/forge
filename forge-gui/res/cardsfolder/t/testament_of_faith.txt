@@ -1,0 +1,7 @@
+Name:Testament of Faith
+ManaCost:W
+Types:Enchantment
+A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Wall | Keywords$ Defender | SpellDescription$ CARDNAME becomes an X/X Wall creature with defender in addition to its other types until end of turn.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}: Testament of Faith becomes an X/X Wall creature with defender in addition to its other types until end of turn.

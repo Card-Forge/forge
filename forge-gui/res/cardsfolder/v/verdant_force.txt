@@ -1,0 +1,8 @@
+Name:Verdant Force
+ManaCost:5 G G G
+Types:Creature Elemental
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:At the beginning of each upkeep, create a 1/1 green Saproling creature token.

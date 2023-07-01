@@ -1,0 +1,7 @@
+Name:Supreme Inquisitor
+ManaCost:3 U U
+Types:Creature Human Wizard
+PT:1/3
+A:AB$ ChangeZone | Cost$ tapXType<5/Wizard> | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 5 | IsCurse$ True | SpellDescription$ Search target player's library for up to five cards and exile them. Then that player shuffles.
+AI:RemoveDeck:Random
+Oracle:Tap five untapped Wizards you control: Search target player's library for up to five cards and exile them. Then that player shuffles.

@@ -1,0 +1,7 @@
+[format]
+Name:Mirage Block
+Type:Archived
+Subtype:Block
+Order:134
+Sets:VIS, WTH, MIR
+Banned:Squandered Resources

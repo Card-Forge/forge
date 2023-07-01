@@ -1,0 +1,12 @@
+Name:Crystalline Nautilus
+ManaCost:2 U
+Types:Enchantment Creature Nautilus
+PT:4/4
+K:Bestow:3 U U
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ CrystallineNautilusSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:CrystallineNautilusSac:DB$ Sacrifice | SacValid$ Self
+SVar:Targeting:Dies
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddTrigger$ SpellTarget | AddSVar$ CrystallineNautilusSac & CrystallineNautilusTarget | Description$ Enchanted creature gets +4/+4 and has "When this creature becomes the target of a spell or ability, sacrifice it."
+SVar:SpellTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ CrystallineNautilusSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:CrystallineNautilusTarget:Targeting:Dies
+Oracle:Bestow {3}{U}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nWhen Crystalline Nautilus becomes the target of a spell or ability, sacrifice it.\nEnchanted creature gets +4/+4 and has "When this creature becomes the target of a spell or ability, sacrifice it."

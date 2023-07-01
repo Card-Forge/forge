@@ -1,0 +1,6 @@
+Name:Marisi's Twinclaws
+ManaCost:2 RW G
+Types:Creature Cat Warrior
+PT:2/4
+K:Double Strike
+Oracle:Double strike

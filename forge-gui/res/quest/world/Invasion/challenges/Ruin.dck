@@ -1,0 +1,30 @@
+[quest]
+id=Ruin
+OpponentName=Global Ruin
+AILife=40
+Repeat=true
+Wins=20
+Card Reward=tournament pack INV;booster pack PLS;booster pack APC
+Ticket Reward=true
+Credit Reward=250
+AIExtras=Island|Mountain|Plains|Swamp|Forest
+HumanExtras=
+[metadata]
+Title=Ruin
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=hard
+Description=The world might end today!
+Deck Type=constructed
+Name=Ruin
+[Main]
+16 Global Ruin|INV
+2 Gaea's Skyfolk|APC
+2 Galina's Knight|INV
+2 Goblin Legionnaire|APC
+2 Llanowar Dead|APC
+2 Llanowar Knight|INV
+2 Putrid Warrior|APC
+2 Razorfin Hunter|APC
+2 Shivan Zombie|INV
+2 Vodalian Zombie|INV
+2 Yavimaya Barbarian|INV

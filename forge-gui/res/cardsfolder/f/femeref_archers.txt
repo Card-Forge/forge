@@ -1,0 +1,6 @@
+Name:Femeref Archers
+ManaCost:2 G
+Types:Creature Human Archer
+PT:2/2
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$ Select target attacking creature with flying | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking creature with flying.
+Oracle:{T}: Femeref Archers deals 4 damage to target attacking creature with flying.

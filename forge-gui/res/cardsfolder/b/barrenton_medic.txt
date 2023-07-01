@@ -1,0 +1,8 @@
+Name:Barrenton Medic
+ManaCost:4 W
+Types:Creature Kithkin Cleric
+PT:0/4
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+A:AB$ Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
+AI:RemoveDeck:All
+Oracle:{T}: Prevent the next 1 damage that would be dealt to any target this turn.\nPut a -1/-1 counter on Barrenton Medic: Untap Barrenton Medic.

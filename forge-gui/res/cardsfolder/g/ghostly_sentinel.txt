@@ -1,0 +1,7 @@
+Name:Ghostly Sentinel
+ManaCost:4 W
+Types:Creature Kor Spirit
+PT:3/3
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

@@ -1,0 +1,6 @@
+Name:Blasted Landscape
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+K:Cycling:2
+Oracle:{T}: Add {C}.\nCycling {2} ({2}, Discard this card: Draw a card.)

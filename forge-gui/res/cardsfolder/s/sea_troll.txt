@@ -1,0 +1,6 @@
+Name:Sea Troll
+ManaCost:2 U
+Types:Creature Troll
+PT:2/1
+A:AB$ Regenerate | Cost$ U | IsPresent$ Card.Self+blockedValidThisTurn Creature.Blue,Card.Self+blockedByValidThisTurn Creature.Blue | SpellDescription$ Regenerate CARDNAME. Activate only if CARDNAME blocked or was blocked by a blue creature this turn.
+Oracle:{U}: Regenerate Sea Troll. Activate only if Sea Troll blocked or was blocked by a blue creature this turn.

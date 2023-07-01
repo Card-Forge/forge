@@ -1,0 +1,9 @@
+Name:Stalking Vengeance
+ManaCost:5 R R
+Types:Creature Avatar
+PT:5/5
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature you control dies, it deals damage equal to its power to target player or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
+SVar:X:TriggeredCard$CardPower
+Oracle:Haste\nWhenever another creature you control dies, it deals damage equal to its power to target player or planeswalker.

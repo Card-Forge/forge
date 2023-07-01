@@ -1,0 +1,11 @@
+Name:Magma Burst
+ManaCost:3 R
+Types:Instant
+K:Kicker:Sac<2/Land>
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | TargetMin$ X | TargetMax$ X | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.
+SVar:X:Count$Kicked.2.1
+SVar:NeedsToPlayKickedVar:Z GE2
+SVar:Z:Count$Valid Creature.OppCtrl/Plus.Z1
+SVar:Z1:Count$Valid Planeswalker.OppCtrl
+AI:RemoveDeck:All
+Oracle:Kicker—Sacrifice two lands. (You may sacrifice two lands in addition to any other costs as you cast this spell.)\nMagma Burst deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.

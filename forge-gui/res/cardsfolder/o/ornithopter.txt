@@ -1,0 +1,6 @@
+Name:Ornithopter
+ManaCost:0
+Types:Artifact Creature Thopter
+PT:0/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,8 @@
+Name:Konda's Hatamoto
+ManaCost:1 W
+Types:Creature Human Samurai
+PT:1/2
+K:Bushido:1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Vigilance | IsPresent$ Samurai.Legendary+YouCtrl | Description$ As long as you control a legendary Samurai, CARDNAME gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)
+SVar:BuffedBy:Samurai.Legendary
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nAs long as you control a legendary Samurai, Konda's Hatamoto gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)

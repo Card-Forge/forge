@@ -1,0 +1,8 @@
+Name:War Dance
+ManaCost:G
+Types:Enchantment
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | NumAtt$ +X | NumDef$ +X | ValidTgts$ Creature | TgtPrompt$ Select target creature. | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of verse counters on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+SVar:X:Count$CardCounters.VERSE
+Oracle:At the beginning of your upkeep, you may put a verse counter on War Dance.\nSacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.

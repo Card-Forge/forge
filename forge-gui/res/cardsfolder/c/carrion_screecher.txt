@@ -1,0 +1,6 @@
+Name:Carrion Screecher
+ManaCost:3 B
+Types:Creature Zombie Bird
+PT:3/1
+K:Flying
+Oracle:Flying

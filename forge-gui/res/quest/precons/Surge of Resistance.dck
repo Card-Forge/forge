@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Surge of Resistance
+Description=Sometimes casting one spell just isn't enough. Your spells with surge get cheaper or better if you've already cast a spell this turn. Save up a handful of cards, then finish off your opponent in a flurry of spells.
+Deck Type=constructed
+Set=OGW
+Image=surge_of_resistance.jpg
+[Main]
+2 Anticipate|BFZ
+1 Blighted Gorge|BFZ
+1 Boulder Salvo|OGW
+2 Cloud Manta|BFZ
+2 Comparative Analysis|OGW
+2 Containment Membrane|OGW
+1 Cyclone Sire|OGW
+1 Evolving Wilds|BFZ
+2 Expedite|OGW
+3 Goblin Freerunner|OGW
+1 Grip of the Roil|OGW
+11 Island|BFZ
+2 Jwar Isle Avenger|OGW
+3 Lavastep Raider|BFZ
+12 Mountain|BFZ
+2 Pyromancer's Assault|OGW
+2 Reckless Bushwhacker|OGW
+1 Roiling Waters|OGW
+1 Rolling Thunder|BFZ
+2 Stormchaser Mage|OGW
+1 Tyrant of Valakut+|OGW
+1 Ugin's Insight|BFZ
+3 Umara Entangler|OGW
+1 Windrider Patrol|BFZ
+

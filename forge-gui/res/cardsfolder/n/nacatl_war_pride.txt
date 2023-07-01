@@ -1,0 +1,11 @@
+Name:Nacatl War-Pride
+ManaCost:3 G G G
+Types:Creature Cat Warrior
+PT:3/3
+K:CARDNAME must be blocked by exactly one creature if able.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopyPermanent | TriggerDescription$ Whenever CARDNAME attacks, create X tokens that are copies of CARDNAME and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ X | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Exile
+SVar:X:Count$Valid Creature.DefenderCtrl
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Nacatl War-Pride must be blocked by exactly one creature if able.\nWhenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.

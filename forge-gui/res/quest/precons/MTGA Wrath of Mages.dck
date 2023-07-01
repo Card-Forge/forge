@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Wrath of Mages
+Description=Cast powerful spells to wreak havoc on your enemies.
+Deck Type=constructed
+Set=ANA
+[Main]
+2 Aven Wind Mage|M19
+1 Banefire|M19
+2 Blink of an Eye|DOM
+3 Disperse|M19
+3 Enigma Drake|M19
+1 Entrancing Melody|XLN
+2 Fight with Fire|DOM
+3 Ghitu Lavarunner|DOM
+2 Guttersnipe|M19
+4 Highland Lake|M19
+10 Island|GRN
+2 Lightning Strike|M19
+10 Mountain|GRN
+1 Mystic Archaeologist|M19
+1 Repeating Barrage|XLN
+1 River's Rebuke|XLN
+1 Rowdy Crew|XLN
+1 Salvager of Secrets|M19
+3 Shivan Fire|DOM
+3 Sift|M19
+1 Sulfur Falls|DOM
+3 Vodalian Arcanist|DOM
+
+

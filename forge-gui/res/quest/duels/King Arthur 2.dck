@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=King Arthur 2
+Title=King Arthur
+Difficulty=medium
+Description=WG Knight deck with Knight of New Alara and Knight of the Reliquary
+Icon=King Arthur.jpg
+Deck Type=constructed
+[main]
+1 Lionheart Maverick
+1 Student of Warfare
+1 Adventuring Gear
+1 Trusty Machete
+2 Safewright Quest
+4 Steward of Valeron
+1 Knight of the White Orchid
+1 Accorder Paladin
+1 No-Dachi
+1 Sigil Blessing
+1 Reknit
+2 Knight of the Reliquary
+3 Wilt-Leaf Cavaliers
+1 Skyhunter Cub
+1 Asha's Favor
+2 Kinsbaile Cavalier
+2 Knight of New Alara
+3 Wilt-Leaf Liege
+1 Kabira Vindicator
+1 Lead the Stampede
+3 Juniper Order Ranger
+1 Lightwielder Paladin
+1 Mirari's Wake
+2 Savannah
+9 Forest|MBS
+9 Plains|MBS
+1 Elfhame Palace
+3 Graypelt Refuge
+[sideboard]

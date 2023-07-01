@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Melira, Sylvok Outcast
+Title=Melira, Sylvok Outcast
+Difficulty=hard
+Description=Pod
+Icon=Melira.jpg
+Deck Type=constructed
+[Main]
+4 Birthing Pod|NPH
+2 Blade Splicer|NPH
+1 Bringer of the White Dawn|5DN
+1 Elesh Norn, Grand Cenobite|NPH
+2 Eternal Witness|5DN
+7 Forest|SOM|1
+2 Gold Myr|SOM
+1 Hoverguard Sweepers|5DN
+7 Island|SOM|1
+1 Melira, Sylvok Outcast|NPH
+1 Myr Retriever|MRD
+4 Myr Servitor|5DN
+2 Perilous Myr|SOM
+7 Plains|SOM|1
+2 Precursor Golem|SOM
+4 Razorverge Thicket|SOM
+4 Seachrome Coast|SOM
+2 Silver Myr|SOM
+2 Solemn Simulacrum|MRD
+2 Wing Splicer|NPH
+2 Wurmcoil Engine|SOM
+[sideboard]

@@ -1,0 +1,18 @@
+[metadata]
+Code=P22
+Date=2022-01-01
+Name=Judge Gift Cards 2022
+Type=Promo
+ScryfallCode=P22
+
+[cards]
+1 R Greater Auramancy @Lucas Graciano
+2 R Omniscience @Alayna Danner
+3 R Parallel Lives @Greg Staples
+4 R Stranglehold @Ralph Horsley
+5 R Smothering Tithe @Aurore Folny
+6 R Training Grounds @Caroline Gariba
+7 R Animate Dead @Helge C. Balzer
+8 R Purphoros, God of the Forge @Anato Finnstark
+9 R No Mercy @John Stanko
+10 R Growing Rites of Itlimoc @Dmitry Burmak

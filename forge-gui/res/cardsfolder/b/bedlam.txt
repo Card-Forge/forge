@@ -1,0 +1,7 @@
+Name:Bedlam
+ManaCost:2 R R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Creatures can't block.

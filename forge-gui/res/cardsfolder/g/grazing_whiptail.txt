@@ -1,0 +1,6 @@
+Name:Grazing Whiptail
+ManaCost:2 G G
+Types:Creature Dinosaur
+PT:3/4
+K:Reach
+Oracle:Reach

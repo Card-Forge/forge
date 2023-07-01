@@ -1,0 +1,8 @@
+Name:Akroan Sergeant
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+K:Renown:1
+DeckHas:Ability$Counters
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

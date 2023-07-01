@@ -1,0 +1,19 @@
+[quest]
+id=Crusaders
+OpponentName=The Crusaders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=2 white rares
+Credit Reward=400
+AIExtras=Plains|Plains|Plains|Angelfire Crusader|Crusading Knight
+HumanExtras=
+[metadata]
+Title=The Crusaders
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=Look at their armor.... oh, shiny!
+Deck Type=constructed
+Name=Crusaders
+[Main]
+17 Blinding Light|INV

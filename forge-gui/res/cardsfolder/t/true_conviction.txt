@@ -1,0 +1,7 @@
+Name:True Conviction
+ManaCost:3 W W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Double Strike & Lifelink | Description$ Creatures you control have double strike and lifelink.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have double strike and lifelink.

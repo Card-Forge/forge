@@ -1,0 +1,7 @@
+Name:Student of Ojutai
+ManaCost:3 W
+Types:Creature Human Monk
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a noncreature spell, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever you cast a noncreature spell, you gain 2 life.

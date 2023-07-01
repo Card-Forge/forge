@@ -1,0 +1,10 @@
+Name:Drana's Emissary
+ManaCost:1 W B
+Types:Creature Vampire Cleric Ally
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your upkeep, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Flying\nAt the beginning of your upkeep, each opponent loses 1 life and you gain 1 life.

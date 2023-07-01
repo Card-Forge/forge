@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 3E The Ebon Hand
+Title=The Ebon Hand
+Difficulty=easy
+Description="There are intriguing similarities between the Order and Icatia's Leitbur religion, suggesting the two had a common origin." -Sarpadian Empires, vol. VI
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+1 Armor Thrull|FEM|1
+1 Armor Thrull|FEM|4
+1 Basal Thrull|FEM|2
+1 Basal Thrull|FEM|3
+4 Breeding Pit|FEM
+4 Ebon Praetor|FEM
+1 Hymn to Tourach|FEM|1
+1 Hymn to Tourach|FEM|2
+1 Hymn to Tourach|FEM|3
+1 Hymn to Tourach|FEM|4
+2 Initiates of the Ebon Hand|FEM|1
+1 Initiates of the Ebon Hand|FEM|2
+1 Initiates of the Ebon Hand|FEM|3
+1 Order of the Ebon Hand|FEM|1
+1 Order of the Ebon Hand|FEM|2
+2 Order of the Ebon Hand|FEM|3
+4 Soul Exchange|FEM
+24 Swamp|LEB|1
+4 Thrull Retainer|FEM
+4 Tourach's Chant|FEM

@@ -1,0 +1,9 @@
+Name:Humans of Gavony|Deck:Humans of Gavony.dck|Variant:None|Avatar:Odric, Lunarch Marshal|Desc:
+Name:Angel's Grace|Deck:Angels Grace.dck|Variant:None|Avatar:Angelic Overseer|Desc:
+Name:Tokens|Deck:Tokens.dck|Variant:None|Avatar:Thraben Doomsayer|Desc:
+Name:Maraxus|Deck:Maraxus.dck|Variant:Vanguard|Avatar:Maraxus|Desc:
+Name:Sigarda|Deck:Sigarda.dck|Variant:Commander|Avatar:Sigarda, Host of Herons|Desc:
+Name:Thalia, Heretic Cathar|Deck:Thalia, Heretic Cathar.dck|Variant:Commander|Avatar:Thalia, Heretic Cathar|Desc:
+Name:Mikaeus, the Lunarch|Deck:Mikaeus, the Lunarch.dck|Variant:Commander|Avatar:Mikaeus, the Lunarch|Desc:
+Name:Avacyn, Angel of Hope|Deck:Avacyn, Angel of Hope.dck|Variant:Commander|Avatar:Avacyn, Angel of Hope|Desc:
+Name:Nahiri|Deck:Nahiri.dck|Variant:Planeswalker|Avatar:Nahiri, the Harbinger|Desc:

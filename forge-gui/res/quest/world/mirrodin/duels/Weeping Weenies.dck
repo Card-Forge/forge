@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Weeping Weenies
+Title=Weeping Weenies
+Difficulty=easy
+Description=A weenie deck with some backup spells
+Icon=Weeping Weenies.jpg
+Deck Type=constructed
+[Main]
+2 Arrest|MRD
+4 Echoing Courage|DST
+16 Forest|MRD|1
+2 Gold Myr|SOM
+2 Infested Roothold|DST
+2 Leonin Elder|MRD
+1 Myr Matrix|DST
+2 One Dozen Eyes|MRD
+8 Plains|MRD|1
+2 Pulse of the Tangle|DST
+1 Purge|DST
+3 Raise the Alarm|MRD
+3 Tangle Golem|DST
+2 Tangle Spider|DST
+2 Tel-Jilad Archers|MRD
+2 Tel-Jilad Outrider|DST
+2 Test of Faith|DST
+2 Thunderstaff|DST
+1 Viridian Shaman|MRD
+1 Wirefly Hive|DST
+[sideboard]

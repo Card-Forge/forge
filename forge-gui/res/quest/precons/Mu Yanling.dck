@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1400
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mu Yanling
+Description=Jiang Yanggu wanders the world accompanied by his faithful companion, Mowu, searching for clues to a past he can't remember. Mu Yanling, an enigmatic storm mage, remembers her tragic past all too clearly but will never give up hope of saving those she loves. When their paths collide on a sacred magical mountain, they realize they both may be caught up in a greater mystery than they ever imagined.
+Deck Type=constructed
+Set=GS1
+Image=mu_yanling.jpg
+[main]
+2 Welkin Tern|GS1
+2 Brilliant Plan|GS1
+1 Cloak of Mists|GS1
+4 Meandering River|GS1
+9 Plains|GS1
+12 Island|GS1
+1 Mu Yanling|GS1
+2 Colorful Feiyi Sparrow|GS1
+2 Purple-Crystal Crab|GS1
+2 Vivid Flying Fish|GS1
+2 Heavenly Qilin|GS1
+2 Armored Whirl Turtle|GS1
+2 Nine-Tail White Fox|GS1
+2 Earth-Origin Yak|GS1
+3 Moon-Eating Dog|GS1
+2 Stormcloud Spirit|GS1
+1 Ancestor Dragon|GS1
+2 Qilin's Blessing|GS1
+2 Drown in Shapelessness|GS1
+3 Dragon's Presence|GS1
+2 Rhythmic Water Vortex|GS1

@@ -1,0 +1,7 @@
+Name:Foul Play
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SubAbility$ DBInvestigate | SpellDescription$ Destroy target creature with power 2 or less. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate
+DeckHas:Ability$Token|Sacrifice
+Oracle:Destroy target creature with power 2 or less. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

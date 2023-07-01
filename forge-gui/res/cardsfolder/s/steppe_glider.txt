@@ -1,0 +1,8 @@
+Name:Steppe Glider
+ManaCost:4 W
+Types:Creature Elemental
+PT:2/4
+K:Flying
+K:Vigilance
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Flying & Vigilance | SpellDescription$ Target creature with a +1/+1 counter on it gains flying and vigilance until end of turn.
+Oracle:Flying, vigilance\n{1}{W}: Target creature with a +1/+1 counter on it gains flying and vigilance until end of turn.

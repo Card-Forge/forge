@@ -1,0 +1,7 @@
+Name:Plaguebearer
+ManaCost:1 B
+Types:Creature Zombie
+PT:1/1
+A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack+cmcEQX | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature with mana value X.
+SVar:X:Count$xPaid
+Oracle:{X}{X}{B}: Destroy target nonblack creature with mana value X.

@@ -1,0 +1,8 @@
+Name:Dreams of the Dead
+ManaCost:3 U
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature in your graveyard | SubAbility$ DBPump | SpellDescription$ Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:DBPump:DB$ Pump | KW$ Cumulative upkeep:2 | LeaveBattlefield$ Exile | Defined$ Targeted | Duration$ Permanent
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:{1}{U}: Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else. (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless they pay its upkeep cost for each age counter on it.)

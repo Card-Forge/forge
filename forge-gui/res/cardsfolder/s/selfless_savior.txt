@@ -1,0 +1,6 @@
+Name:Selfless Savior
+ManaCost:W
+Types:Creature Dog
+PT:1/1
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Another target creature you control gains indestructible until end of turn.
+Oracle:Sacrifice Selfless Savior: Another target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

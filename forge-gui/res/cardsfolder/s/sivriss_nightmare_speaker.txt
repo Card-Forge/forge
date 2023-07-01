@@ -1,0 +1,13 @@
+Name:Sivriss, Nightmare Speaker
+ManaCost:3 B
+Types:Legendary Creature Snake Cleric Warlock
+PT:3/3
+A:AB$ RepeatEach | Cost$ T Sac<1/Creature.Other;Artifact/another creature or an artifact> | RepeatPlayers$ Opponent | RepeatSubAbility$ DBMill | SpellDescription$ For each opponent, you mill a card, then return that card from your graveyard to your hand unless that player pays 3 life. (To mill a card, put the top card of your library into your graveyard.)
+SVar:DBMill:DB$ Mill | Imprint$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Graveyard | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+K:Choose a Background
+SVar:AIPreference:SacCost$Artifact.Token,Creature.Other+cmcLE2,Artifact.cmcLE1
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice|Mill|Graveyard
+Oracle:{T}, Sacrifice another creature or an artifact: For each opponent, you mill a card, then return that card from your graveyard to your hand unless that player pays 3 life. (To mill a card, put the top card of your library into your graveyard.)\nChoose a Background (You can have a Background as a second commander.)

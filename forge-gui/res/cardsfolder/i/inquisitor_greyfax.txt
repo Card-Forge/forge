@@ -1,0 +1,11 @@
+Name:Inquisitor Greyfax
+ManaCost:1 W U B
+Types:Legendary Creature Human Inquisitor
+PT:3/3
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Unquestionable Wisdom — Other creatures you control get +1/+0 and have vigilance.
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature.OppCtrl | SubAbility$ DBInvestigate | TgtPrompt$ Choose target creature an opponent controls | PrecostDesc$ Hunt for Heresy — | SpellDescription$ Tap target creature an opponent controls. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
+Oracle:Vigilance\nUnquestionable Wisdom — Other creatures you control get +1/+0 and have vigilance.\nHunt for Heresy — {1}, {T}: Tap target creature an opponent controls. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

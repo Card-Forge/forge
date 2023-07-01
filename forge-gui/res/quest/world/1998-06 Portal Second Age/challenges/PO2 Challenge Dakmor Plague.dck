@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Dakmor Plague
+OpponentName=The Plague
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Dakmor Plague
+Title=The Plague
+Difficulty=medium
+Description="A plague a' both your houses!"\n-Mercutio, Shakespeare's Romeo and Juliet
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Dakmor Plague|PO2
+30 Swamp|PO2|2

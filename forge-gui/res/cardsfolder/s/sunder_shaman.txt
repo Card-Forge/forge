@@ -1,0 +1,8 @@
+Name:Sunder Shaman
+ManaCost:R R G G
+Types:Creature Giant Shaman
+PT:5/5
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target artifact or enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget,Enchantment.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment damaged player controls
+Oracle:Sunder Shaman can't be blocked by more than one creature.\nWhenever Sunder Shaman deals combat damage to a player, destroy target artifact or enchantment that player controls.

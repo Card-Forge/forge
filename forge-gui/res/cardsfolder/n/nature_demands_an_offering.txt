@@ -1,0 +1,19 @@
+Name:Nature Demands an Offering
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseCreature | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles.
+SVar:ChooseCreature:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.YouDontCtrl | Mandatory$ True | SubAbility$ BounceCreature
+SVar:BounceCreature:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | Unimprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember1
+SVar:DBRemember1:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ ChooseArtifact
+SVar:ChooseArtifact:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Artifact.YouDontCtrl | Mandatory$ True | SubAbility$ BounceArtifact
+SVar:BounceArtifact:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | Unimprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember2
+SVar:DBRemember2:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ ChooseEnchant
+SVar:ChooseEnchant:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Enchantment.YouDontCtrl | Mandatory$ True | SubAbility$ BounceEnchant
+SVar:BounceEnchant:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | Unimprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember3
+SVar:DBRemember3:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ ChooseLand
+SVar:ChooseLand:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Land.YouDontCtrl | Mandatory$ True | SubAbility$ BounceLand
+SVar:BounceLand:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | Unimprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember4
+SVar:DBRemember4:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles.

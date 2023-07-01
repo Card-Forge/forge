@@ -1,0 +1,7 @@
+Name:Ghost Tactician
+ManaCost:4 W
+Types:Creature Spirit Spellshaper
+PT:2/5
+A:AB$ PumpAll | Cost$ W T Discard<1/Card> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+AI:RemoveDeck:All
+Oracle:{W}, {T}, Discard a card: Creatures you control get +1/+0 until end of turn.

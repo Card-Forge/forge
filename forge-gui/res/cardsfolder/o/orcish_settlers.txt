@@ -1,0 +1,8 @@
+Name:Orcish Settlers
+ManaCost:1 R
+Types:Creature Orc
+PT:1/1
+A:AB$ Destroy | Cost$ X X R T Sac<1/CARDNAME> | TargetMin$ X | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select X target lands | SpellDescription$ Destroy X target lands.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}{X}{R}, {T}, Sacrifice Orcish Settlers: Destroy X target lands.

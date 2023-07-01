@@ -1,0 +1,8 @@
+Name:Guardian of the Ages
+ManaCost:7
+Types:Artifact Creature Golem
+PT:7/7
+K:Defender
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | IsPresent$ Card.Self+withDefender | TriggerZones$ Battlefield | Execute$ DBAnimate | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, if CARDNAME has defender, it loses defender and gains trample.
+SVar:DBAnimate:DB$ Animate | Keywords$ Trample | RemoveKeywords$ Defender | Duration$ Permanent
+Oracle:Defender (This creature can't attack.)\nWhen a creature attacks you or a planeswalker you control, if Guardian of the Ages has defender, it loses defender and gains trample.

@@ -1,0 +1,8 @@
+Name:Shimmering Barrier
+ManaCost:1 W
+Types:Creature Wall
+PT:1/3
+K:Defender
+K:First Strike
+K:Cycling:2
+Oracle:Defender (This creature can't attack.)\nFirst strike\nCycling {2} ({2}, Discard this card: Draw a card.)

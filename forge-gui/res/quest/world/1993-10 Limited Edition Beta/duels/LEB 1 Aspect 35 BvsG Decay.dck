@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 35 BvG Decay
+Title=Aspect of Decay
+Difficulty=easy
+Description=They say the Zombie Master controlled these foul creatures even before his own death, but now that he is one of them, nothing can make them betray him.
+Icon=Aspect of Decay.jpg
+Deck Type=constructed
+[Main]
+2 Ankh of Mishra|LEB
+2 Black Vise|LEB
+2 Copper Tablet|LEB
+3 Paralyze|LEB
+3 Pestilence|LEB
+4 Plague Rats|LEB
+3 Rod of Ruin|LEB
+4 Scathe Zombies|LEB
+4 Scavenging Ghoul|LEB
+24 Swamp|LEB|1
+2 Throne of Bone|LEB
+3 Weakness|LEB
+4 Zombie Master|LEB

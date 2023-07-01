@@ -1,0 +1,8 @@
+Name:Dregscape Sliver
+ManaCost:1 B
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AffectedZone$ Graveyard | AddKeyword$ Unearth:2 | Description$ Each Sliver creature card in your graveyard has unearth {2}.
+SVar:PlayMain1:TRUE
+K:Unearth:2
+Oracle:Each Sliver creature card in your graveyard has unearth {2}.\nUnearth {2} ({2}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

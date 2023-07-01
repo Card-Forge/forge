@@ -1,0 +1,8 @@
+Name:Sigarda, Host of Herons
+ManaCost:2 G W W
+Types:Legendary Creature Angel
+PT:5/5
+K:Flying
+K:Hexproof
+S:Mode$ CantSacrifice | ValidCard$ Card.YouCtrl | ValidCause$ SpellAbility.OppCtrl | ForCost$ False | Description$ Spells and abilities your opponents control can't cause you to sacrifice permanents.
+Oracle:Flying, hexproof\nSpells and abilities your opponents control can't cause you to sacrifice permanents.

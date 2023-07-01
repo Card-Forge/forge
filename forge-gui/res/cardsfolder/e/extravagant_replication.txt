@@ -1,0 +1,7 @@
+Name:Extravagant Replication
+ManaCost:4 U U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigClone | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of another target nonland permanent you control.
+SVar:TrigClone:DB$ CopyPermanent | ValidTgts$ Permanent.nonLand+YouCtrl+Other | TgtPrompt$ Select target non-land permanent you control. | NumCopies$ 1
+DeckHas:Ability$Token
+Oracle:At the beginning of your upkeep, create a token that's a copy of another target nonland permanent you control.

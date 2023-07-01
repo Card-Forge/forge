@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (RNA)
+Type:Archived
+Subtype:Standard
+Effective:2019-01-17
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA
+Banned:Rampaging Ferocidon

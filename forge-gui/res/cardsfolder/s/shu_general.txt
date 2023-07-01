@@ -1,0 +1,7 @@
+Name:Shu General
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+K:Horsemanship
+Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)

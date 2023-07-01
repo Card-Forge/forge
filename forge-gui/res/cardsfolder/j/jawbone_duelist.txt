@@ -1,0 +1,7 @@
+Name:Jawbone Duelist
+ManaCost:1 W
+Types:Creature Phyrexian Soldier
+PT:1/1
+K:Double Strike
+K:Toxic:1
+Oracle:Double strike\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)

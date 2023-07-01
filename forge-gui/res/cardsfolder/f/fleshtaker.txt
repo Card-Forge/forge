@@ -1,0 +1,10 @@
+Name:Fleshtaker
+ManaCost:W B
+Types:Creature Human Assassin
+PT:2/2
+T:Mode$ Sacrificed | ValidCard$ Creature.Other | Execute$ TrigGainLife | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another creature, you gain 1 life and scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:Whenever you sacrifice another creature, you gain 1 life and scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\n{1}, Sacrifice another creature: Fleshtaker gets +2/+2 until end of turn.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dr Watson 2
+Title=Dr Watson
+Difficulty=medium
+Description=Mono G Forest deck with with land fetch and Baru, Fist of Krosa
+Icon=Dr Watson.jpg
+Deck Type=constructed
+[main]
+25 Forest|M12
+1 Boundless Realms
+2 Cultivate
+1 Hunting Cheetah
+1 Kodama's Reach
+1 Mwonvuli Acid-Moss
+1 Nature's Lore
+1 Ondu Giant
+1 Oracle of Mul Daya
+1 Rowen
+1 Silverglade Elemental
+2 Skyshroud Claim
+1 Three Visits
+1 Wood Elves
+1 Aspect of Wolf
+1 Avenger of Zendikar
+4 Baru, Fist of Krosa
+1 Beacon of Creation
+1 Blanchwood Armor
+1 Coiling Woodworm
+1 Dauntless Dourbark
+1 Dungrove Elder
+1 Howl of the Night Pack
+1 Molimo, Maro-Sorcerer
+1 People of the Woods
+1 Primal Bellow
+1 Reach of Branches
+1 Tangle Golem
+1 Timbermaw Larva
+1 Traproot Kami
+1 Treefolk Seedlings
+1 Uktabi Wildcats
+1 Kalonian Twingrove
+[sideboard]

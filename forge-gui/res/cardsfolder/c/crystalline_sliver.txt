@@ -1,0 +1,7 @@
+Name:Crystalline Sliver
+ManaCost:W U
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Shroud | Description$ All Slivers have shroud.
+SVar:PlayMain1:TRUE
+Oracle:All Slivers have shroud. (They can't be the targets of spells or abilities.)

@@ -1,0 +1,11 @@
+Name:Voidwing Hybrid
+ManaCost:U B
+Types:Creature Phyrexian Bat
+PT:2/1
+K:Flying
+K:Toxic:1
+T:Mode$ Proliferate | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerDescription$ When you proliferate, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Proliferate
+Oracle:Flying\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen you proliferate, return Voidwing Hybrid from your graveyard to your hand.

@@ -1,0 +1,7 @@
+Name:Air Servant
+ManaCost:4 U
+Types:Creature Elemental
+PT:4/3
+K:Flying
+A:AB$ Tap | Cost$ 2 U | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Tap target creature with flying.
+Oracle:Flying\n{2}{U}: Tap target creature with flying.

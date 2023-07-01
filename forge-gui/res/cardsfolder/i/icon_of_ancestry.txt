@@ -1,0 +1,9 @@
+Name:Icon of Ancestry
+ManaCost:3
+Types:Artifact
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
+S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control of the chosen type get +1/+1.
+SVar:PlayMain1:TRUE
+A:AB$ Dig | Cost$ 3 T | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.ChosenType | ForceRevealToController$ True | DestinationZone$ Hand | RestRandomOrder$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:As Icon of Ancestry enters the battlefield, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

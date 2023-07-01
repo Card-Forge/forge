@@ -1,0 +1,7 @@
+Name:Silver Knight
+ManaCost:W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Protection from red
+Oracle:First strike, protection from red

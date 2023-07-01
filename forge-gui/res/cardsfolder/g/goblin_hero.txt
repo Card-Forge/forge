@@ -1,0 +1,5 @@
+Name:Goblin Hero
+ManaCost:2 R
+Types:Creature Goblin
+PT:2/2
+Oracle:

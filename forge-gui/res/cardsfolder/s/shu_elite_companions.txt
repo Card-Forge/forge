@@ -1,0 +1,6 @@
+Name:Shu Elite Companions
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:3/3
+K:Horsemanship
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)

@@ -1,0 +1,9 @@
+Name:Bramble Elemental
+ManaCost:3 G G
+Types:Creature Elemental
+PT:4/4
+T:Mode$ Attached | ValidSource$ Aura | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an Aura becomes attached to CARDNAME, create two 1/1 green Saproling creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenOwner$ TriggeredTargetController | TokenScript$ g_1_1_saproling
+SVar:EnchantMe:Multiple
+DeckHas:Ability$Token
+Oracle:Whenever an Aura becomes attached to Bramble Elemental, create two 1/1 green Saproling creature tokens.

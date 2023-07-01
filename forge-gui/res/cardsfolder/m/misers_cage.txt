@@ -1,0 +1,6 @@
+Name:Misers' Cage
+ManaCost:3
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card.ActivePlayerCtrl | PresentZone$ Hand | PresentCompare$ GE5 | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has five or more cards in hand, CARDNAME deals 2 damage to that player.
+SVar:TrigDamageOpp:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+Oracle:At the beginning of each opponent's upkeep, if that player has five or more cards in hand, Misers' Cage deals 2 damage to that player.

@@ -1,0 +1,9 @@
+Name:Overgrown Armasaur
+ManaCost:3 G G
+Types:Creature Dinosaur
+PT:4/4
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_1_1_saproling | TokenAmount$ 1
+SVar:HasCombatEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Enrage — Whenever Overgrown Armasaur is dealt damage, create a 1/1 green Saproling creature token.

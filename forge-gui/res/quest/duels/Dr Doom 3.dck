@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Dr Doom 3
+Title=Dr Doom
+Difficulty=hard
+Description=Mono B Life Drain deck with Exquisite Blood and Sanguine Bond
+Icon=Dr Doom.jpg
+Deck Type=constructed
+[main]
+1 Bloodchief Ascension
+4 Consuming Vapors
+2 Corrupt
+4 Exquisite Blood
+1 Kokusho, the Evening Star
+3 Leechridden Swamp
+1 Mox Jet
+2 Pristine Talisman
+4 Sanguine Bond
+20 Swamp
+4 Tendrils of Corruption
+4 Vampire Nighthawk
+3 Vault Skirge
+3 Wall of Souls
+2 Royal Assassin
+2 Hideous End
+[sideboard]

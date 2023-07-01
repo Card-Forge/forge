@@ -1,0 +1,6 @@
+Name:Spreading Insurrection
+ManaCost:4 R
+Types:Sorcery
+K:Storm
+A:SP$ GainControl | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature you don't control until end of turn. Untap that creature. It gains haste until end of turn.
+Oracle:Gain control of target creature you don't control until end of turn. Untap that creature. It gains haste until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

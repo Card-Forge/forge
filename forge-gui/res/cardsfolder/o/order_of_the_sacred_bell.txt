@@ -1,0 +1,5 @@
+Name:Order of the Sacred Bell
+ManaCost:3 G
+Types:Creature Human Monk
+PT:4/3
+Oracle:

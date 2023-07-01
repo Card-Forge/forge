@@ -1,0 +1,10 @@
+Name:Eater of Virtue
+ManaCost:1
+Types:Legendary Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigExile | TriggerDescription$ Whenever equipped creature dies, exile it.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & First Strike & Double Strike & Deathtouch & Haste & Hexproof & Indestructible & Lifelink & Menace & Protection & Reach & Trample & Vigilance | SharedKeywordsZone$ Exile | SharedRestrictions$ Card.ExiledWithSource | Description$ As long as a card exiled with CARDNAME has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.
+DeckHints:Keyword$Flying|First Strike|Double Strike|Deathtouch|Haste|Hexproof|Indestructible|Lifelink|Menace|Protection|Reach|Trample|Vigilance
+Oracle:Whenever equipped creature dies, exile it.\nEquipped creature gets +2/+0.\nAs long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.\nEquip {1}

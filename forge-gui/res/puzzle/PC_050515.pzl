@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 050515 - Second Nature
+URL:http://www.gatheringmagic.com/seanuy-050515-perplexing-chimera-6-second-nature/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=2
+AILife=14
+humanhand=Swamp|Set:ZEN; Forked Bolt; Exhume; Big Game Hunter; Maze Rusher
+humanbattlefield=Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Fulminator Mage; Sandstorm Eidolon; Akroan Conscriptor; Seal of Fire; Tortured Existence; Barl's Cage
+humangraveyard=Pyre Zombie
+aibattlefield=Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Tranquil Thicket|Tapped; Rogue's Passage|Tapped; Miren, the Moaning Well|Tapped; Treetop Village; Sachi, Daughter of Seshiro; Barishi; Jaddi Lifestrider; Force of Nature
+aigraveyard=Elvish Visionary; Spike Feeder; Groundbreaker; Pelakka Wurm

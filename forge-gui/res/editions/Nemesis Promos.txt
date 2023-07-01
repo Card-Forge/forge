@@ -1,0 +1,9 @@
+[metadata]
+Code=PNEM
+Date=2000-02-14
+Name=Nemesis Promos
+Type=Promo
+ScryfallCode=PNEM
+
+[cards]
+67 R Rathi Assassin @Dana Knutson

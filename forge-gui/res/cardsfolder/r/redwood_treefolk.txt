@@ -1,0 +1,5 @@
+Name:Redwood Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+PT:3/6
+Oracle:

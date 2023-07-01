@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Picard 1
+Title=Picard
+Difficulty=easy
+Description=WG tribal Elf deck
+Icon=Picard.jpg
+Deck Type=constructed
+[main]
+10 Forest|M11
+5 Plains|M11
+3 Elfhame Palace
+1 Arctic Flats
+1 Tranquil Garden
+1 Vec Townships
+2 Grasslands
+1 Elvish Harbinger
+1 Elvish Promenade
+1 Elvish Vanguard
+1 Skyshroud Poacher
+2 Wirewood Herald
+1 Wirewood Hivemaster
+2 Devoted Hero
+1 Elvish Healer
+2 Keen-Eyed Archers
+1 Rune-Cervin Rider
+1 Safehold Duo
+2 Safehold Sentry
+1 Selesnya Evangel
+1 Farhaven Elf
+1 Civic Wayfinder
+1 Cylian Elf
+1 Druid of the Anima
+1 Elvish Archers
+1 Elvish Farmer
+1 Elvish Visionary
+1 Fyndhorn Druid
+1 Norwood Archers
+1 Norwood Riders
+1 Norwood Warrior
+1 Quirion Trailblazer
+1 Raven's Run Dragoon
+1 Sylvan Ranger
+1 Symbiotic Elf
+1 Treetop Rangers
+1 Warren-Scourge Elf
+1 Wildslayer Elves
+1 Rebuff the Wicked
+1 Reknit
+[sideboard]

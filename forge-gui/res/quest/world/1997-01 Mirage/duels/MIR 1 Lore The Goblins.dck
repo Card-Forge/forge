@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: The Goblins
+Title=The Goblins
+Difficulty=easy
+Description="Flog and Squee / Up the tree / See the army / Flee, flee, flee." -Goblin nursery rhyme/war cry
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Goblin Elite Infantry|MIR
+1 Goblin Recruiter|VIS
+4 Goblin Scouts|MIR
+4 Goblin Soothsayer|MIR
+4 Goblin Swine-Rider|VIS
+4 Goblin Tinkerer|MIR
+4 Keeper of Kookus|VIS
+3 Kookus|VIS
+24 Mountain|MIR|1
+4 Relentless Assault|VIS
+4 Rock Slide|VIS

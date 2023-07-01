@@ -1,0 +1,10 @@
+Name:Scepter of Celebration
+ManaCost:2 G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+2 and has trample.
+T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, create that many 1/1 green and white Citizen creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ gw_1_1_citizen
+SVar:X:TriggerCount$DamageAmount
+K:Equip:3
+DeckHas:Ability$Token & Type$Citizen
+Oracle:Equipped creature gets +2/+0 and has trample.\nWhenever equipped creature deals combat damage to a player, create that many 1/1 green and white Citizen creature tokens.\nEquip {3}

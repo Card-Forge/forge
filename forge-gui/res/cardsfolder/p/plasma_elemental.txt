@@ -1,0 +1,6 @@
+Name:Plasma Elemental
+ManaCost:5 U
+Types:Creature Elemental
+PT:4/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Plasma Elemental can't be blocked.

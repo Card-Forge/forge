@@ -1,0 +1,8 @@
+Name:Dense Canopy
+ManaCost:1 G
+Types:Enchantment
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.withFlying | Description$ Creatures with flying can block only creatures with flying.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Creatures with flying can block only creatures with flying.

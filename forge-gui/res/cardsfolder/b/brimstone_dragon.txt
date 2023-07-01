@@ -1,0 +1,7 @@
+Name:Brimstone Dragon
+ManaCost:6 R R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Haste
+Oracle:Flying, haste

@@ -1,0 +1,46 @@
+[metadata]
+Code=PRES
+Date=2007-01-01
+Name=Resale Promos
+Type=Promo
+ScryfallCode=PRES
+
+[cards]
+A1 R Jaya Ballard, Task Mage @Matt Cavotta
+A2 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
+A3 R Broodmate Dragon @Vance Kovacs
+A4 R Retaliator Griffin @Jesper Ejsing
+A5 R Terra Stomper @Goran Josic
+A6 R Terastodon @Lars Grant-West
+A7 R Knight Exemplar @Jason Chan
+A8 R Sunblast Angel @Jason Chan
+A9 R Angel of Glory's Rise @James Ryman
+A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
+A11 R Angelic Skirmisher @David Rapoza
+A12 R Xathrid Necromancer @Maciej Kuciara
+13★ U Loam Lion @Daniel Ljunggren
+26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
+47 R Thalia's Lancers @David Palumbo
+49 R Curator of Mysteries @Christine Choi
+52 R Cyclone Summoner @Andrey Kuzinskiy
+100 R Etali, Primal Storm @Raymond Swanland
+123 R Beast Whisperer @Matt Stewart
+124 R End-Raze Forerunners @Mathias Kollros
+125 R Calamity Bearer @Simon Dominic
+127 R Vito, Thorn of the Dusk Rose @Lie Setiawan
+133 R Opportunistic Dragon @Chris Rahn
+140 R Neheb, Dreadhorde Champion @Igor Kieryluk
+141★ R Goblin Chieftain @Sam Wood
+147 R Bristling Hydra @Chris Rahn
+149 R Atarka, World Render @Karl Kopinski
+149* R Lathliss, Dragon Queen @Alex Konstad
+162 R Kogla, the Titan Ape @Chris Rahn
+172 R Gargos, Vicious Watcher @Mathias Kollros
+176 R Genesis Hydra @Peter Mohrbacher
+193 R Outland Colossus @Ryan Pancoast
+203 R Scute Swarm @Alex Konstad
+221★ R Oran-Rief, the Vastwood @Mike Bierek
+235 R Stonecoil Serpent @Mark Poole
+235★ R Nyx Lotus @Raoul Vitale
+374 R Valkyrie Harbinger @Tran Nguyen
+376 R Cleaving Reaper @Victor Adame Minguez

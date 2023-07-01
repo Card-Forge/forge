@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=RiGa 3
+Title=RiGa
+Difficulty=hard
+Description=And God said, “Let the land produce living creatures according to their kinds..."
+Icon=Riga.png
+Deck Type=constructed
+[Main]
+4 Beastmaster Ascension|ZEN
+1 Dread Statuary|WWK
+3 Eldrazi Monument|ZEN
+13 Forest|LEB
+4 Joraga Treespeaker|ROE
+4 Khalni Garden|WWK
+4 Kozilek's Predator|ROE
+2 Leatherback Baloth|WWK
+4 Lotus Cobra|ZEN
+4 Misty Rainforest|ZEN
+4 Nest Invader|ROE
+3 River Boa|ZEN
+4 Vengevine|ROE
+2 Verdant Catacombs|ZEN
+4 Wolfbriar Elemental|WWK
+[sideboard]

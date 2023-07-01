@@ -1,0 +1,13 @@
+Name:Jagged Poppet
+ManaCost:1 B R
+Types:Creature Ogre Warrior
+PT:3/4
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigYouDiscard | TriggerDescription$ Whenever CARDNAME is dealt damage, discard that many cards.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Hellbent$ True | Execute$ TrigOppDiscard | TriggerDescription$ Hellbent — Whenever CARDNAME deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
+SVar:TrigYouDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose
+SVar:TrigOppDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose
+SVar:X:TriggerCount$DamageAmount
+SVar:NeedsToPlayVar:Y LE2
+SVar:Y:Count$CardsInYourHand
+SVar:BuffedBy:Card
+Oracle:Whenever Jagged Poppet is dealt damage, discard that many cards.\nHellbent — Whenever Jagged Poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.

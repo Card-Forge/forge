@@ -1,0 +1,7 @@
+Name:Mayael the Anima
+ManaCost:R G W
+Types:Legendary Creature Elf Shaman
+PT:2/3
+A:AB$ Dig | Cost$ 3 R G W T | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.powerGE5 | DestinationZone$ Battlefield | SpellDescription$ Look at the top five cards of your library. You may put a creature card with power 5 or greater from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+AI:RemoveDeck:Random
+Oracle:{3}{R}{G}{W}, {T}: Look at the top five cards of your library. You may put a creature card with power 5 or greater from among them onto the battlefield. Put the rest on the bottom of your library in any order.

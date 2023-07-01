@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 3 Color: 5 Green
+Title=The Color Green
+Difficulty=hard
+Description=The lion's only loyalty is to its hunger.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+24 Forest|POR|3
+4 Grizzly Bears|POR
+2 Hurricane|POR
+4 Jungle Lion|POR
+4 Monstrous Growth|POR|2
+4 Natural Order|POR
+4 Nature's Lore|POR
+4 Plant Elemental|POR
+2 Primeval Force|POR
+4 Whiptail Wurm|POR
+4 Wood Elves|POR

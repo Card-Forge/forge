@@ -1,0 +1,11 @@
+Name:Cleaving Reaper
+ManaCost:3 B B
+Types:Creature Angel Berserker
+PT:5/3
+K:Flying
+K:Trample
+A:AB$ ChangeZone | Cost$ PayLife<3> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | CheckSVar$ X | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only if you had an Angel or Berserker enter the battlefield under your control this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Angel.YouCtrl,Berserker.YouCtrl
+DeckHints:Type$Angel|Berserker
+DeckHas:Ability$Graveyard
+Oracle:Flying, trample\nPay 3 life: Return Cleaving Reaper from your graveyard to your hand. Activate only if you had an Angel or Berserker enter the battlefield under your control this turn.

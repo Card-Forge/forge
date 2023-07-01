@@ -1,0 +1,10 @@
+[metadata]
+Code=G01
+Date=2001-01-01
+Name=Judge Gift Cards 2001
+Type=Promo
+ScryfallCode=G01
+
+[cards]
+1 R Ball Lightning @Quinton Hoover
+2 R Oath of Druids @Daren Bader

@@ -1,0 +1,9 @@
+Name:Reckless Racer
+ManaCost:2 R
+Types:Creature Human Pilot
+PT:2/3
+K:First Strike
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes tapped, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
+DeckHas:Ability$Discard
+Oracle:First strike\nWhenever Reckless Racer becomes tapped, you may discard a card. If you do, draw a card.

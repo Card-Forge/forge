@@ -1,0 +1,7 @@
+Name:Sentinels of Glen Elendra
+ManaCost:3 U
+Types:Creature Faerie Soldier
+PT:2/3
+K:Flash
+K:Flying
+Oracle:Flash\nFlying

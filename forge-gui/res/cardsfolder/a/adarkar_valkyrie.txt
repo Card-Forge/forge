@@ -1,0 +1,9 @@
+Name:Adarkar Valkyrie
+ManaCost:4 W W
+Types:Snow Creature Angel
+PT:4/5
+K:Flying
+K:Vigilance
+A:AB$ DelayedTrigger | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | StackDescription$ When {c:Targeted} dies this turn, return that card to the battlefield under your control. | SpellDescription$ When target creature other than CARDNAME dies this turn, return that card to the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+Oracle:Flying, vigilance\n{T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.

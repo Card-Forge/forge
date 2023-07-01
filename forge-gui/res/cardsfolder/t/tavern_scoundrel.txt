@@ -1,0 +1,9 @@
+Name:Tavern Scoundrel
+ManaCost:1 R
+Types:Creature Human Rogue
+PT:1/3
+T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you win a coin flip, create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
+A:AB$ FlipACoin | Cost$ 1 T Sac<1/Permanent.Other/another permanent> | SpellDescription$ Flip a coin.
+DeckHas:Ability$Sacrifice|Token
+Oracle:Whenever you win a coin flip, create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")\n{1}, {T}, Sacrifice another permanent: Flip a coin.

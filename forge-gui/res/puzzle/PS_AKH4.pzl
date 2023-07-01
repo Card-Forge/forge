@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #04 - How much damage can you deal?
+URL:https://i.redd.it/vfe0zsipygzy.png
+Goal:Win
+Turns:1
+Difficulty:Easy
+Description:Try to do as much damage to your opponent as possible during your turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=1
+humanhand=Brazen Scourge;Hazoret's Favor;Wastes;Insult // Injury
+humanbattlefield=Mountain;Mountain;Mountain;Mountain;Saheeli Rai|Counters:LOYALTY=3;Combat Celebrant;Identity Thief;Mirrorpool
+aibattlefield=

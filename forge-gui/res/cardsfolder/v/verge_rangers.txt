@@ -1,0 +1,10 @@
+Name:Verge Rangers
+ManaCost:2 W
+Types:Creature Human Scout Ranger
+PT:3/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as an opponent controls more lands than you, you may play lands from the top of your library. (You can play a land this way only if you have an available land play remaining.)
+SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:First strike\nYou may look at the top card of your library any time.\nAs long as an opponent controls more lands than you, you may play lands from the top of your library. (You can play a land this way only if you have an available land play remaining.)

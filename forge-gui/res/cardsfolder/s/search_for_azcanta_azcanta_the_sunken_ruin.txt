@@ -1,0 +1,18 @@
+Name:Search for Azcanta
+ManaCost:1 U
+Types:Legendary Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. Then if you have seven or more cards in your graveyard, you may transform CARDNAME. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1 | SubAbility$ DBTransform | SpellDescription$ Surveil 1. Then if you have seven or more cards in your graveyard, you may transform CARDNAME (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True | ConditionPresent$ Card.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE7
+DeckHas:Ability$Surveil|Graveyard
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your upkeep, surveil 1. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta. (Look at the top card of your library. You may put that card into your graveyard.)
+
+ALTERNATE
+
+Name:Azcanta, the Sunken Ruin
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | SpellDescription$ Add {U}.
+A:AB$ Dig | Cost$ 2 U T | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.nonCreature+nonLand | SpellDescription$ Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Oracle:(Transforms from Search for Azcanta.)\n{T}: Add {U}.\n{2}{U}, {T}: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

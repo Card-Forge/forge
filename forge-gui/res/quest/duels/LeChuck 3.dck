@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=LeChuck 3
+Title=LeChuck
+Difficulty=hard
+Description=UBG Splinterfright deck with Hermit Druid, Boneyard Wurm and Deadbridge Chant
+Icon=LeChuck.jpg
+Deck Type=constructed
+[main]
+4 Bayou
+4 Tropical Island
+2 Forest
+2 Dryad Arbor
+3 Misty Rainforest
+3 Verdant Catacombs
+3 Windswept Heath
+3 Wooded Foothills
+2 Deadbridge Chant
+2 Grisly Salvage
+2 Tracker's Instincts
+2 Mulch
+4 Satyr Wayfinder
+4 Splinterfright
+4 Golgari Grave-Troll
+3 Armored Skaab
+1 Hermit Druid
+4 Boneyard Wurm
+2 Ghoultree
+1 Jarad, Golgari Lich Lord
+1 Brawn
+1 Wonder
+2 Nemesis of Mortals
+1 Sidisi, Brood Tyrant
+[sideboard]

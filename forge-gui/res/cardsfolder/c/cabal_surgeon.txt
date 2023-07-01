@@ -1,0 +1,6 @@
+Name:Cabal Surgeon
+ManaCost:2 B B
+Types:Creature Human Minion
+PT:2/1
+A:AB$ ChangeZone | Cost$ 2 B B T ExileFromGrave<2/Card> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
+Oracle:{2}{B}{B}, {T}, Exile two cards from your graveyard: Return target creature card from your graveyard to your hand.

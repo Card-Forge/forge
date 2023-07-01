@@ -1,0 +1,7 @@
+Name:Elder Druid
+ManaCost:3 G
+Types:Creature Elf Cleric Druid
+PT:2/2
+A:AB$ TapOrUntap | Cost$ 3 G T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
+AI:RemoveDeck:All
+Oracle:{3}{G}, {T}: You may tap or untap target artifact, creature, or land.

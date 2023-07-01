@@ -1,0 +1,10 @@
+Name:Stitcher's Graft
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Equipped creature gets +3/+3.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ StayTapped | TriggerDescription$ Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.
+SVar:StayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ TriggeredAttackerLKICopy | Duration$ Permanent
+T:Mode$ Unattach | ValidAttachment$ Card.Self | ValidObject$ Permanent | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes unattached from a permanent, sacrifice that permanent.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ TriggeredObjectLKICopy | Controller$ You
+K:Equip:2
+Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature attacks, it doesn't untap during its controller's next untap step.\nWhenever Stitcher's Graft becomes unattached from a permanent, sacrifice that permanent.\nEquip {2}

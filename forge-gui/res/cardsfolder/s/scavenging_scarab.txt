@@ -1,0 +1,6 @@
+Name:Scavenging Scarab
+ManaCost:3 B
+Types:Creature Insect
+PT:3/3
+K:CARDNAME can't block.
+Oracle:Scavenging Scarab can't block.

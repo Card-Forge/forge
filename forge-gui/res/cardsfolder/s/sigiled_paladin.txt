@@ -1,0 +1,7 @@
+Name:Sigiled Paladin
+ManaCost:W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Exalted
+Oracle:First strike\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

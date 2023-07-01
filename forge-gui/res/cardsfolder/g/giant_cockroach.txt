@@ -1,0 +1,5 @@
+Name:Giant Cockroach
+ManaCost:3 B
+Types:Creature Insect
+PT:4/2
+Oracle:

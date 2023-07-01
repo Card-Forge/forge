@@ -1,0 +1,9 @@
+Name:Trusted Advisor
+ManaCost:U
+Types:Creature Human Advisor
+PT:1/2
+S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 2 | Description$ Your maximum hand size is increased by two.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a blue creature you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.Blue+YouCtrl
+AI:RemoveDeck:All
+Oracle:Your maximum hand size is increased by two.\nAt the beginning of your upkeep, return a blue creature you control to its owner's hand.

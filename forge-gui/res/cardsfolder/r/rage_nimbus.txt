@@ -1,0 +1,9 @@
+Name:Rage Nimbus
+ManaCost:2 R
+Types:Creature Elemental
+PT:5/3
+K:Defender
+K:Flying
+A:AB$ Effect | Cost$ 1 R | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+Oracle:Defender, flying\n{1}{R}: Target creature attacks this turn if able.

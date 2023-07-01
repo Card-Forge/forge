@@ -1,0 +1,8 @@
+Name:Lat-Nam Adept
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:3/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Whenever you draw your second card each turn, put a +1/+1 counter on Lat-Nam Adept.

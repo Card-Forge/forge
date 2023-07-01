@@ -1,0 +1,8 @@
+Name:Renegade Warlord
+ManaCost:4 R
+Types:Creature Human Soldier
+PT:3/3
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Whenever CARDNAME attacks, each other attacking creature gets +1/+0 until end of turn.
+SVar:TrigBattleCry:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ 1
+Oracle:First strike\nWhenever Renegade Warlord attacks, each other attacking creature gets +1/+0 until end of turn.

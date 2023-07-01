@@ -1,0 +1,8 @@
+Name:Neurok Commando
+ManaCost:1 U U
+Types:Creature Human Rogue
+PT:2/1
+K:Shroud
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nWhenever Neurok Commando deals combat damage to a player, you may draw a card.

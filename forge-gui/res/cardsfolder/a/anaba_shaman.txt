@@ -1,0 +1,6 @@
+Name:Anaba Shaman
+ManaCost:3 R
+Types:Creature Minotaur Shaman
+PT:2/2
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{R}, {T}: Anaba Shaman deals 1 damage to any target.

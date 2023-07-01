@@ -1,0 +1,7 @@
+Name:Order of the Golden Cricket
+ManaCost:1 W
+Types:Creature Kithkin Knight
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {W}. If you do, it gains flying until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ W | Defined$ Self | KW$ Flying
+Oracle:Whenever Order of the Golden Cricket attacks, you may pay {W}. If you do, it gains flying until end of turn.

@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Unlikely Alliances
+Description=Under Emrakul's influence, many denizens of Innistrad have been transformed into horrible monsters. But all is not lost. You know that strange times call for stranger friends, and you will make your stand with the collective strength of unexpected comrades.
+Deck Type=constructed
+Set=EMN
+Image=unlikely_alliances.jpg
+[Main]
+2 Angelic Purge|SOI
+2 Blessed Alliance|EMN
+1 Borrowed Grace|EMN
+1 Borrowed Malevolence|EMN
+1 Bound by Moonsilver|SOI
+2 Campaign of Vengeance|EMN
+3 Desperate Sentry|EMN
+1 Emissary of the Sleepless|SOI
+1 Gavony Unhallowed|EMN
+2 Haunted Dead|EMN
+2 Lunarch Mantle|EMN
+1 Morkrut Necropod|SOI
+1 Nearheath Chaplain|SOI
+13 Plains|SOI
+1 Providence|EMN
+1 Repel the Abominable|EMN
+2 Ruthless Disposal|EMN
+1 Sanctifier of Souls+|EMN
+1 Sanitarium Skeleton|SOI
+2 Skirsdag Supplicant|EMN
+2 Spectral Reserves|EMN
+12 Swamp|SOI
+2 Unruly Mob|SOI
+1 Vampire Noble|SOI
+2 Vessel of Ephemera|SOI
+

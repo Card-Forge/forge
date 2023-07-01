@@ -1,0 +1,6 @@
+Name:Catalyst Elemental
+ManaCost:2 R
+Types:Creature Elemental
+PT:2/2
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R R | SpellDescription$ Add {R}{R}.
+Oracle:Sacrifice Catalyst Elemental: Add {R}{R}.

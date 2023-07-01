@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Frodo 3
+Title=Frodo
+Difficulty=hard
+Description=WRG Zoo deck
+Icon=Frodo.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+2 Plateau
+2 Taiga
+2 Savannah
+4 Arid Mesa
+4 Wooded Foothills
+4 Windswept Heath
+1 Forest|ZEN
+1 Mountain|ZEN
+1 Plains|ZEN
+1 Experiment One
+4 Kird Ape
+4 Wild Nacatl
+4 Loam Lion
+3 Steppe Lynx
+1 Soldier of the Pantheon
+1 Dryad Militant
+4 Path to Exile
+4 Lightning Bolt
+1 Gaddock Teeg
+2 Flinthoof Boar
+1 Plated Geopede
+3 Lightning Helix
+1 Fleecemane Lion
+1 Voice of Resurgence
+3 Woolly Thoctar
+1 Glorious Anthem
+[sideboard]

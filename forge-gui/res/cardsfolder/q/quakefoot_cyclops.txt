@@ -1,0 +1,11 @@
+Name:Quakefoot Cyclops
+ManaCost:4 R
+Types:Creature Cyclops
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures can't block this turn.
+SVar:TrigPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
+K:Cycling:1 R
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ When you cycle CARDNAME, target creature can't block this turn.
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True
+SVar:PlayMain1:TRUE
+Oracle:When Quakefoot Cyclops enters the battlefield, up to two target creatures can't block this turn.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)\nWhen you cycle Quakefoot Cyclops, target creature can't block this turn.

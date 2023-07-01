@@ -1,0 +1,6 @@
+Name:Krark-Clan Ironworks
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ Sac<1/Artifact> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+AI:RemoveDeck:All
+Oracle:Sacrifice an artifact: Add {C}{C}.

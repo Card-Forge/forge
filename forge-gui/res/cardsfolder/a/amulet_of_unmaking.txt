@@ -1,0 +1,5 @@
+Name:Amulet of Unmaking
+ManaCost:5
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 5 T Exile<1/CARDNAME> | ValidTgts$ Artifact,Creature,Land | SorcerySpeed$ True | TgtPrompt$ Select target artifact, creature, or land | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact, creature, or land. Activate only as a sorcery.
+Oracle:{5}, {T}, Exile Amulet of Unmaking: Exile target artifact, creature, or land. Activate only as a sorcery.

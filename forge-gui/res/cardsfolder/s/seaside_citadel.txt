@@ -1,0 +1,6 @@
+Name:Seaside Citadel
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W U | SpellDescription$ Add {G}, {W}, or {U}.
+Oracle:Seaside Citadel enters the battlefield tapped.\n{T}: Add {G}, {W}, or {U}.

@@ -1,0 +1,6 @@
+Name:Duskmantle Operative
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE4 | Description$ CARDNAME can't be blocked by creatures with power 4 or greater.
+Oracle:Duskmantle Operative can't be blocked by creatures with power 4 or greater.

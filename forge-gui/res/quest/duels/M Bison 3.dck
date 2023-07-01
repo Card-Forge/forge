@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=M Bison 3
+Title=M Bison
+Difficulty=hard
+Description=UBG Exalted deck
+Icon=M Bison.jpg
+Deck Type=constructed
+[main]
+1 Breeding Pool
+1 Cathedral of War
+3 Dismal Backwater
+4 Jungle Hollow
+3 Opulent Palace
+1 Overgrown Tomb
+2 Temple of Deceit
+4 Temple of Malady
+2 Temple of Mystery
+2 Thornwood Falls
+1 Watery Grave
+1 Bow of Nylea
+1 Nemesis Mask
+2 Sigil of Valor
+1 Whip of Erebos
+4 Court Archers
+1 Duskmantle Prowler
+4 Duty-Bound Dead
+1 Frontline Sage
+4 Knight of Infamy
+4 Noble Hierarch
+2 Rhox Charger
+4 Servant of Nefarox
+1 Ice Cage
+1 Levitation
+1 Primal Rage
+1 Abrupt Decay
+1 Cyclonic Rift
+1 Concentrate
+1 Void Snare
+[sideboard]

@@ -1,0 +1,9 @@
+Name:Jadar, Ghoulcaller of Nephalia
+ManaCost:1 B
+Types:Legendary Creature Human Wizard
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+withDecayed | PresentCompare$ EQ0 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you control no creatures with decayed, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed
+DeckHas:Ability$Token
+DeckHints:Type$Zombie
+Oracle:At the beginning of your end step, if you control no creatures with decayed, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)

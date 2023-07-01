@@ -1,0 +1,7 @@
+Name:Haazda Snare Squad
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may pay {W}. If you do, tap target creature an opponent controls.
+SVar:TrigTap:AB$ Tap | Cost$ W | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Whenever Haazda Snare Squad attacks, you may pay {W}. If you do, tap target creature an opponent controls.

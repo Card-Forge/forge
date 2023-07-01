@@ -1,0 +1,6 @@
+Name:Buried Ruin
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice Buried Ruin: Return target artifact card from your graveyard to your hand.

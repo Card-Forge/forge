@@ -1,0 +1,5 @@
+Name:Herbal Poultice
+ManaCost:0
+Types:Artifact
+A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ 3 Sac<1/CARDNAME> | SpellDescription$ Regenerate target creature.
+Oracle:{3}, Sacrifice Herbal Poultice: Regenerate target creature.

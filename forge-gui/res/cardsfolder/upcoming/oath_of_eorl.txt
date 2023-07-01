@@ -1,0 +1,10 @@
+Name:Oath of Eorl
+ManaCost:3 R W
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBTokenBis,DBCounter
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenAmount$ 2 | SpellDescription$ Create two 1/1 white Human Soldier creature tokens.
+SVar:DBTokenBis:DB$ Token | TokenScript$ r_2_2_human_knight_trample_haste | TokenAmount$ 2 | SpellDescription$ Create two 2/2 red Human Knight creature tokens with trample and haste.
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Human |  TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Put an indestructible counter on up to one target Human. | CounterType$ Indestructible | CounterNum$ 1 | SubAbility$ DBMonarch | SpellDescription$ Put an indestructible counter on up to one target Human. You become the monarch.
+SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You 
+DeckHas:Ability$Counters|Token & Type$Knight|Soldier|Human
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI— Create two 1/1 white Human Soldier creature tokens.\nII— Create two 2/2 red Human Knight creature tokens with trample and haste.\nIII— Put an indestructible counter on up to one target Human. You become the monarch.

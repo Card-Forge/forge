@@ -1,0 +1,8 @@
+Name:Sidar Kondo of Jamuraa
+ManaCost:2 G W
+Types:Legendary Creature Human Knight
+PT:2/5
+K:Flanking
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerLE2 | ValidBlocker$ Creature.withoutFlying+withoutReach+OppCtrl | Description$ Creatures your opponents control without flying or reach can't block creatures with power 2 or less.
+K:Partner
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nCreatures your opponents control without flying or reach can't block creatures with power 2 or less.\nPartner (You can have two commanders if both have partner.)

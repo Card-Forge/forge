@@ -1,0 +1,9 @@
+Name:Frenzy Sliver
+ManaCost:1 B
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddTrigger$ TrigFrenzy | AddSVar$ FrenzyPump | Description$ All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)
+SVar:TrigFrenzy:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ FrenzyPump | TriggerZones$ Battlefield | TriggerDescription$ Frenzy 1 (Whenever CARDNAME attacks and isn't blocked, it gets +1/+0 until end of turn.)
+SVar:FrenzyPump:DB$ Pump | NumAtt$ +1 | Defined$ TriggeredAttacker
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)

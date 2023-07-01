@@ -1,0 +1,7 @@
+Name:Splitting Headache
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Charm | Choices$ SplitDiscard,FocusDiscard | CharmNum$ 1
+SVar:SplitDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+SVar:FocusDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | SpellDescription$ Target player reveals their hand. You choose a card from it. That player discards that card.
+Oracle:Choose one —\n• Target player discards two cards.\n• Target player reveals their hand. You choose a card from it. That player discards that card.

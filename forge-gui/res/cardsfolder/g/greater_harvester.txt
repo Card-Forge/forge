@@ -1,0 +1,10 @@
+Name:Greater Harvester
+ManaCost:2 B B B
+Types:Creature Horror
+PT:5/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a permanent.
+SVar:TrigSacYou:DB$ Sacrifice | SacValid$ Permanent | Defined$ You
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices two permanents.
+SVar:TrigSacOpp:DB$ Sacrifice | SacValid$ Permanent | Amount$ 2 | Defined$ TriggeredTarget
+SVar:MustBeBlocked:True
+Oracle:At the beginning of your upkeep, sacrifice a permanent.\nWhenever Greater Harvester deals combat damage to a player, that player sacrifices two permanents.

@@ -1,0 +1,5 @@
+Name:Muck Rats
+ManaCost:B
+Types:Creature Rat
+PT:1/1
+Oracle:

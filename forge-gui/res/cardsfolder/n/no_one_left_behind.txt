@@ -1,0 +1,8 @@
+Name:No One Left Behind
+ManaCost:4 B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Creature.cmcLE3 | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a creature card with mana value 3 or less.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | ChangeNum$ 1 | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard|Mill|Dredge
+Oracle:This spell costs {3} less to cast if it targets a creature card with mana value 3 or less.\nReturn target creature card from your graveyard to the battlefield.

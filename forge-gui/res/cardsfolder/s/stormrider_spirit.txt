@@ -1,0 +1,7 @@
+Name:Stormrider Spirit
+ManaCost:4 U
+Types:Creature Spirit
+PT:3/3
+K:Flash
+K:Flying
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying

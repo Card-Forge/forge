@@ -1,0 +1,8 @@
+Name:Twinning Staff
+ManaCost:3
+Types:Artifact
+R:Event$ CopySpell | ActiveZones$ Battlefield | ValidPlayer$ You | ValidSpell$ Spell | ReplaceWith$ AddOneMore | Description$ If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.
+SVar:AddOneMore:DB$ ReplaceEffect | VarName$ Amount | VarValue$ X
+SVar:X:ReplaceCount$Amount/Plus.1
+A:AB$ CopySpellAbility | Cost$ 7 T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+Oracle:If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.\n{7}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.

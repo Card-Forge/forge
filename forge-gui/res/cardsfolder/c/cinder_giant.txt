@@ -1,0 +1,7 @@
+Name:Cinder Giant
+ManaCost:3 R
+Types:Creature Giant
+PT:5/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to each other creature you control.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.YouCtrl+StrictlyOther | NumDmg$ 2
+Oracle:At the beginning of your upkeep, Cinder Giant deals 2 damage to each other creature you control.

@@ -1,0 +1,7 @@
+Name:Lightmine Field
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ AttackersDeclared | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures attack, CARDNAME deals damage to each of those creatures equal to the number of attacking creatures.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredAttackers | NumDmg$ X
+SVar:X:Count$Valid Creature.attacking
+Oracle:Whenever one or more creatures attack, Lightmine Field deals damage to each of those creatures equal to the number of attacking creatures.

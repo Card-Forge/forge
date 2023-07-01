@@ -1,0 +1,9 @@
+Name:Crusading Knight
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:2/2
+K:Protection from black
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Swamp your opponents control.
+SVar:X:Count$Valid Swamp.OppCtrl
+AI:RemoveDeck:Random
+Oracle:Protection from black\nCrusading Knight gets +1/+1 for each Swamp your opponents control.

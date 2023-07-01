@@ -1,0 +1,7 @@
+Name:Spectral Lynx
+ManaCost:1 W
+Types:Creature Cat Spirit
+PT:2/1
+K:Protection from green
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Protection from green\n{B}: Regenerate Spectral Lynx.

@@ -1,0 +1,6 @@
+Name:Humble Budoka
+ManaCost:1 G
+Types:Creature Human Monk
+PT:2/2
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)

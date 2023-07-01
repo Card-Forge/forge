@@ -1,0 +1,6 @@
+Name:Fractal Token
+ManaCost:no cost
+Colors:green,blue
+Types:Creature Fractal
+PT:0/0
+Oracle:

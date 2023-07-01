@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Alt-A-Kesh 3
+Title=Alt-A-Kesh
+Difficulty=hard
+Description=UBG Shandalar Djinn deck, walls and fliers.
+Icon=Alt.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+4 Bayou|LEB
+2 Birds of Paradise|2ED
+2 Bog Imp|4ED
+2 Cockatrice|2ED
+2 Energy Flux|ATQ
+2 Erhnam Djinn|ARN
+4 Forest|4ED
+5 Island|4ED
+1 Junun Efreet|ARN
+2 Lord of the Pit|2ED
+2 Mahamoti Djinn|2ED
+1 Phantasmal Forces|2ED
+2 Phantom Monster|2ED
+2 Scryb Sprites|2ED
+2 Stream of Life|2ED
+4 Swamp|4ED
+1 Time Walk|2ED
+1 Timetwister|2ED
+4 Tropical Island|2ED
+4 Underground Sea|2ED
+2 Untamed Wilds|4ED
+2 Vampire Bats|LEG
+2 Wall of Air|2ED
+2 Wall of Bone|4ED
+2 Wall of Ice|2ED
+2 Zephyr Falcon|LEG
+[sideboard]

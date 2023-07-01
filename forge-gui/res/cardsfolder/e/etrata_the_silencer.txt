@@ -1,0 +1,12 @@
+Name:Etrata, the Silencer
+ManaCost:2 U B
+Types:Legendary Creature Vampire Assassin
+PT:3/5
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them. NICKNAME's owner shuffles NICKNAME into their library.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Exile target creature that player controls | Origin$ Battlefield | Destination$ Exile | WithCountersType$ HIT | SubAbility$ DBLose
+SVar:DBLose:DB$ LosesGame | Defined$ TriggeredTarget | ConditionCheckSVar$ CheckExile | ConditionSVarCompare$ GE3 | SubAbility$ DBShuffle
+SVar:CheckExile:Count$ValidExile Card.counters_GE1_HIT+ControlledBy TriggeredTarget
+SVar:DBShuffle:DB$ ChangeZone | ConditionPresent$ Card.Self | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Library | Shuffle$ True
+DeckHints:Name$Mari, the Killing Quill|Ravenloft Adventurer
+Oracle:Etrata, the Silencer can't be blocked.\nWhenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them. Etrata's owner shuffles Etrata into their library.

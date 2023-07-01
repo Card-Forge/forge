@@ -1,0 +1,6 @@
+[format]
+Name:Block: Masques (MMQ)
+Type:Archived
+Subtype:Block
+Effective:1999-11-01
+Sets:MMQ

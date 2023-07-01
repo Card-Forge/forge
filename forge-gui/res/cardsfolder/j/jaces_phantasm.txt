@@ -1,0 +1,8 @@
+Name:Jace's Phantasm
+ManaCost:U
+Types:Creature Illusion
+PT:1/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | CheckSVar$ X | SVarCompare$ GE10 | Description$ CARDNAME gets +4/+4 as long as an opponent has ten or more cards in their graveyard.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+Oracle:Flying\nJace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in their graveyard.

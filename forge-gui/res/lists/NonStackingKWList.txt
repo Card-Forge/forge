@@ -1,0 +1,42 @@
+All creatures able to block CARDNAME do so.
+Banding
+CARDNAME's activated abilities can't be activated.
+CARDNAME can't be regenerated.
+CARDNAME must be blocked if able.
+CARDNAME doesn't untap during your untap step.
+Changeling
+Convoke
+Deathtouch
+Defender
+Delve
+Double Strike
+Fear
+First Strike
+Flash
+Flying
+Forestwalk
+Haste
+Hexproof
+Horsemanship
+Indestructible
+Infect
+Intimidate
+Islandwalk
+Lifelink
+Menace
+Mountainwalk
+Persist
+Phasing
+Plainswalk
+Prevent all combat damage that would be dealt by CARDNAME.
+Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+Reach
+Rebound
+Shadow
+Shroud
+Split Second 
+Swampwalk
+Trample
+Undying
+Vigilance
+Wither

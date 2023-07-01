@@ -1,0 +1,7 @@
+Name:Toxic Abomination
+ManaCost:1 B
+Types:Creature Phyrexian Zombie
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+Oracle:When Toxic Abomination enters the battlefield, you lose 2 life.

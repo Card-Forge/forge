@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ajani, Valiant Protector
+Description=Unite the rogue inventors of Kaladesh to build up an unstoppable force of renegades, ready to stand against corruption and retake the capital. Join forces with the mighty Planeswalker Ajani Goldmane-- with a card unique to this deck-- to claim your victory.
+Deck Type=constructed
+Set=AER
+Image=ajani_valiant_protector.jpg
+[Main]
+1 Ajani, Valiant Protector+|AER
+2 Narnam Renegade|AER
+2 Verdant Automaton|AER
+3 Ajani's Comrade|AER
+3 Audacious Infiltrator|AER
+1 Ghirapur Guide|KLD
+2 Silkweaver Elite|AER
+1 Deadeye Harpooner|AER
+1 Solemn Recruit|AER
+2 Armorcraft Judge|KLD
+2 Lifecraft Cavalry|AER
+1 Ridgescale Tusker|AER
+1 Airdrop Aeronauts|AER
+1 Prey Upon|AER
+4 Inspiring Roar|AER
+1 Engineered Might|KLD
+1 Natural Obsolescence|AER
+3 Renegade Map|AER
+1 Daredevil Dragster|AER
+2 Unbridled Growth|AER
+2 Ajani's Aid|AER
+1 Aid from the Cowl|AER
+4 Tranquil Expanse|AER
+9 Forest|KLD
+9 Plains|KLD
+

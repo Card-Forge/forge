@@ -1,0 +1,6 @@
+Name:Skulltap
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Draw | Cost$ 1 B Sac<1/Creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards.

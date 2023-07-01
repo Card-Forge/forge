@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 090815 - Blood Will Run
+URL:http://www.gatheringmagic.com/seanuy-090815-blood-will-run/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=2
+AILife=6
+humanhand=Blazing Torch|Set:ZEN; Wind Zendikon|Set:WWK
+humangraveyard=
+humanlibrary=
+humanbattlefield=Island|Set:ZEN; Island|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Quicksand|Set:WWK; Goblin War Paint|Set:ZEN|AttachedTo:420; Cunning Sparkmage|Set:WWK|Id:420; Tideforce Elemental|Set:WWK; Shatterskull Giant|Set:ZEN; Surrakar Banisher|Set:WWK
+aibattlefield=Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Giant Scorpion|Set:ZEN; Vampire Nighthawk|Set:ZEN; Vampire Nighthawk|Set:ZEN; Jagwasp Swarm|Set:WWK|Tapped; Crypt Ripper|Set:ZEN|Tapped
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

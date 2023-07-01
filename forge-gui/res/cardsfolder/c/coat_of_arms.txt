@@ -1,0 +1,8 @@
+Name:Coat of Arms
+ManaCost:5
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Battlefield | Description$ Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it.
+SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Goblin Warriors and a Goblin Shaman are on the battlefield, each gets +2/+2.)

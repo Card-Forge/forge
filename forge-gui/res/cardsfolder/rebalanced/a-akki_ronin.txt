@@ -1,0 +1,10 @@
+Name:A-Akki Ronin
+ManaCost:R
+Types:Creature Goblin Samurai
+PT:1/2
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, you may put a card from your hand on the bottom of your library. If you do, draw a card.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Samurai|Warrior
+Oracle:Whenever a Samurai or Warrior you control attacks alone, you may put a card from your hand on the bottom of your library. If you do, draw a card.

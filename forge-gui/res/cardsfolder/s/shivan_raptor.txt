@@ -1,0 +1,8 @@
+Name:Shivan Raptor
+ManaCost:2 R
+Types:Creature Dinosaur
+PT:3/1
+K:First Strike
+K:Haste
+K:Echo:2 R
+Oracle:First strike, haste\nEcho {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

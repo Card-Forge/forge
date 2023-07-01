@@ -1,0 +1,9 @@
+Name:Pyre of Heroes
+ManaCost:2
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX+sharesCreatureTypeWith Sacrificed | ChangeNum$ 1 | SorcerySpeed$ True | AILogic$ SacAndUpgrade | StackDescription$ SpellDescription | SpellDescription$ Search your library for a creature card that shares a creature type with the sacrificed creature and has mana value equal to 1 plus that creature's mana value. Put that card onto the battlefield, then shuffle. Activate only as a sorcery.
+SVar:X:Sacrificed$CardManaCost/Plus.1
+SVar:AIPreference:SacCost$Creature
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Creature
+Oracle:{2}, {T}, Sacrifice a creature: Search your library for a creature card that shares a creature type with the sacrificed creature and has mana value equal to 1 plus that creature's mana value. Put that card onto the battlefield, then shuffle. Activate only as a sorcery.

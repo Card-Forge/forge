@@ -1,0 +1,8 @@
+Name:Demon's Jester
+ManaCost:3 B
+Types:Creature Imp
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Condition$ Hellbent | Description$ Hellbent — CARDNAME gets +2/+1 as long as you have no cards in hand.
+SVar:BuffedBy:Card
+Oracle:Flying\nHellbent — Demon's Jester gets +2/+1 as long as you have no cards in hand.

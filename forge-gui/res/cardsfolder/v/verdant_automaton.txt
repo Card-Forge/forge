@@ -1,0 +1,6 @@
+Name:Verdant Automaton
+ManaCost:2
+Types:Artifact Creature Construct
+PT:1/2
+A:AB$ PutCounter | Cost$ 3 G | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:{3}{G}: Put a +1/+1 counter on Verdant Automaton.

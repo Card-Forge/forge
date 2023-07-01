@@ -1,0 +1,7 @@
+Name:Patch Up
+ManaCost:2 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 3 | MaxTotalTargetCMC$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to three target creature cards with total mana value 3 or less | SpellDescription$ Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Sacrifice
+Oracle:Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield.

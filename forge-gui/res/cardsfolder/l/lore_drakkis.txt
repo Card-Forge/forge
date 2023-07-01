@@ -1,0 +1,8 @@
+Name:Lore Drakkis
+ManaCost:1 U R
+Types:Creature Lizard Beast
+PT:2/3
+K:Mutate:UR UR
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature mutates, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn
+Oracle:Mutate {U/R}{U/R} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, return target instant or sorcery card from your graveyard to your hand.

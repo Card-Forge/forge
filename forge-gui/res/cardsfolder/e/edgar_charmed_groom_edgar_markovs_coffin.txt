@@ -1,0 +1,26 @@
+Name:Edgar, Charmed Groom
+ManaCost:2 W B
+Types:Legendary Creature Vampire Noble
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampires you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under its owner's control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Defined$ TriggeredNewCardLKICopy | Destination$ Battlefield | Transformed$ True
+DeckHints:Type$Vampire
+AlternateMode:DoubleFaced
+Oracle:Other Vampires you control get +1/+1.\nWhen Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control.
+
+ALTERNATE
+
+Name:Edgar Markov's Coffin
+ManaCost:no cost
+Colors:white,black
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on CARDNAME. Then if there are three or more bloodline counters on it, remove those counters and transform it.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_1_1_vampire_lifelink | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ BLOODLINE | CounterNum$ 1 | SubAbility$ DBRemoveCounters
+SVar:DBRemoveCounters:DB$ RemoveCounter | ConditionPresent$ Card.Self+counters_GE3_BLOODLINE | CounterType$ BLOODLINE | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+DeckHas:Ability$Token|LifeGain|Counters
+Oracle:At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it.

@@ -1,0 +1,9 @@
+Name:Priest of Ancient Lore
+ManaCost:2 W
+Types:Creature Dwarf Cleric
+PT:2/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life and draw a card.
+SVar:TrigLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+Oracle:When Priest of Ancient Lore enters the battlefield, you gain 1 life and draw a card.

@@ -1,0 +1,9 @@
+Name:Anvil of Bogardan
+ManaCost:2
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card, then discards a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredPlayer | Mode$ TgtChoose
+AI:RemoveDeck:Random
+Oracle:Players have no maximum hand size.\nAt the beginning of each player's draw step, that player draws an additional card, then discards a card.

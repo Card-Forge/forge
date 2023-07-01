@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ako Legends of the Jukai 2
+Title=Legends of the Jukai
+Difficulty=medium
+Description="The husk splits like a madman's smile - And mystery steps forth" -- Snow-fur, kitsune poet
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+1 Arashi, the Sky Asunder|SOK
+1 Body of Jukai|BOK
+1 Bounteous Kirin|SOK
+2 Commune with Nature|CHK
+4 Dripping-Tongue Zubera|CHK
+4 Elder Pine of Jukai|SOK
+2 Forest|CHK|1
+3 Forest|CHK|2
+7 Forest|CHK|3
+7 Forest|CHK|4
+1 Iname, Life Aspect|CHK
+1 Jugan, the Rising Star|CHK
+1 Kodama of the North Tree|CHK
+1 Kodama of the South Tree|CHK
+3 Kodama's Reach|CHK
+4 Lifespinner|BOK
+2 Long-Forgotten Gohei|CHK
+1 Myojin of Life's Web|CHK
+2 Okina, Temple to the Grandfathers|CHK
+2 Orochi Sustainer|CHK
+1 Patron of the Orochi|BOK
+1 Sachi, Daughter of Seshiro|CHK
+2 Sakura-Tribe Elder|CHK
+1 Sekki, Seasons' Guide|SOK
+1 Seshiro the Anointed|CHK
+3 Traproot Kami|BOK
+2 Untaidake, the Cloud Keeper|CHK
+[Sideboard]
+

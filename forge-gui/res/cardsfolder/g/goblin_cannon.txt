@@ -1,0 +1,7 @@
+Name:Goblin Cannon
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBSac | SpellDescription$ CARDNAME deals 1 damage to any target. Sacrifice CARDNAME.
+SVar:DBSac:DB$ Sacrifice
+AI:RemoveDeck:All
+Oracle:{2}: Goblin Cannon deals 1 damage to any target. Sacrifice Goblin Cannon.

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Tezzeret, Master of Metal
+Description=Fill the streets of Kaladesh with a legion of mechanical soldiers, drawing on superior resources to control the battlefield and crush your enemies. Call on the cunning of the Planeswalker Tezzeret-- with a card unique to this deck-- to power your way to victory.
+Deck Type=constructed
+Set=AER
+Image=tezzeret_master_of_metal.jpg
+[Main]
+1 Tezzeret, Master of Metal+|AER
+1 Ornithopter|AER
+2 Augmenting Automaton|AER
+1 Merchant's Dockhand|AER
+2 Dhund Operative|KLD
+3 Tezzeret's Simulacrum|AER
+1 Dukhara Peafowl|KLD
+1 Treasure Keeper|AER
+1 Quicksmith Spy|AER
+1 Foundry Assembler|AER
+2 Bastion Inventor|AER
+2 Wind-Kin Raiders|AER
+1 Ironclad Revolutionary|AER
+1 Barricade Breaker|AER
+1 Fen Hauler|AER
+1 Reverse Engineer|AER
+2 Tezzeret's Betrayal|AER
+1 Essence Extraction|KLD
+2 Universal Solvent|AER
+4 Pendulum of Patterns|AER
+2 Implement of Examination|AER
+2 Tezzeret's Touch|AER
+4 Submerged Boneyard|AER
+11 Island|KLD
+10 Swamp|KLD

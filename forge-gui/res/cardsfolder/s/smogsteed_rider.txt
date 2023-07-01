@@ -1,0 +1,7 @@
+Name:Smogsteed Rider
+ManaCost:2 B B
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, each other attacking creature gains fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+Other | KW$ Fear
+Oracle:Whenever Smogsteed Rider attacks, each other attacking creature gains fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)

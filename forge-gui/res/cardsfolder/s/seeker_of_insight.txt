@@ -1,0 +1,8 @@
+Name:Seeker of Insight
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/3
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | CheckSVar$ CastTest | SVarCompare$ GE1 | SpellDescription$ Draw a card, then discard a card. Activate only if you've cast a noncreature spell this turn.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:CastTest:Count$ThisTurnCast_Card.YouCtrl+nonCreature
+Oracle:{T}: Draw a card, then discard a card. Activate only if you've cast a noncreature spell this turn.

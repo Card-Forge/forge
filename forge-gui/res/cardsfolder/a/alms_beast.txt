@@ -1,0 +1,6 @@
+Name:Alms Beast
+ManaCost:2 W B
+Types:Creature Beast
+PT:6/6
+S:Mode$ Continuous | Affected$ Creature.blockedBySource,Creature.blockingSource | AddKeyword$ Lifelink | Description$ Creatures blocking or blocked by CARDNAME have lifelink.
+Oracle:Creatures blocking or blocked by Alms Beast have lifelink.

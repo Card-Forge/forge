@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=James Bond 2
+Title=James Bond
+Difficulty=medium
+Description=WG Sliver deck
+Icon=James Bond.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Windswept Heath
+2 Razorverge Thicket
+4 Sliver Hive
+5 Plains|M11
+3 Forest|M11
+4 Metallic Sliver
+2 Plated Sliver
+3 Virulent Sliver
+2 Sidewinder Sliver
+3 Muscle Sliver
+2 Sinew Sliver
+2 Talon Sliver
+1 Spinneret Sliver
+1 Horned Sliver
+1 Reflex Sliver
+1 Watcher Sliver
+1 Essence Sliver
+1 Might Sliver
+1 Brood Sliver
+1 Fungus Sliver
+1 Lymph Sliver
+1 Root Sliver
+1 Venser's Sliver
+2 Disenchant
+2 Deglamer
+4 Oust
+1 Harmonize
+[sideboard]

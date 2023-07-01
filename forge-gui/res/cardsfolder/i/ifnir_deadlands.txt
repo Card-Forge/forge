@@ -1,0 +1,8 @@
+Name:Ifnir Deadlands
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ PutCounter | Cost$ 2 B B T Sac<1/Desert> | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two -1/-1 counters on target creature an opponent controls. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {B}.\n{2}{B}{B}, {T}, Sacrifice a Desert: Put two -1/-1 counters on target creature an opponent controls. Activate only as a sorcery.

@@ -1,0 +1,9 @@
+Name:Vampire Envoy
+ManaCost:2 B
+Types:Creature Vampire Cleric Ally
+PT:1/4
+K:Flying
+T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME becomes tapped, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever Vampire Envoy becomes tapped, you gain 1 life.

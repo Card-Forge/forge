@@ -1,0 +1,7 @@
+Name:Gifted Aetherborn
+ManaCost:B B
+Types:Creature Aetherborn Vampire
+PT:2/3
+K:Deathtouch
+K:Lifelink
+Oracle:Deathtouch, lifelink

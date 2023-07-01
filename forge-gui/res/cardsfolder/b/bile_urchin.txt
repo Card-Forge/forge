@@ -1,0 +1,6 @@
+Name:Bile Urchin
+ManaCost:B
+Types:Creature Spirit
+PT:1/1
+A:AB$ LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+Oracle:Sacrifice Bile Urchin: Target player loses 1 life.

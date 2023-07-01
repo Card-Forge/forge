@@ -1,0 +1,18 @@
+Name:Hookhand Mariner
+ManaCost:3 G
+Types:Creature Human Werewolf
+PT:4/4
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Daybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Riphook Raider
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:6/4
+K:Nightbound
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Riphook Raider can't be blocked by creatures with power 2 or less.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

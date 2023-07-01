@@ -1,0 +1,6 @@
+Name:Case the Joint
+ManaCost:3 U
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLook | SpellDescription$ Draw two cards, then look at the top card of each player's library.
+SVar:DBLook:DB$ PeekAndReveal | Defined$ Player | NoReveal$ True
+Oracle:Draw two cards, then look at the top card of each player's library.

@@ -1,0 +1,8 @@
+Name:Thraben Foulbloods
+ManaCost:2 B
+Types:Creature Zombie Dog
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | Condition$ Delirium | Description$ Delirium — CARDNAME gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Thraben Foulbloods gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)

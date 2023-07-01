@@ -1,0 +1,6 @@
+Name:Dusk Imp
+ManaCost:2 B
+Types:Creature Imp
+PT:2/1
+K:Flying
+Oracle:Flying

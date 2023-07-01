@@ -1,0 +1,8 @@
+Name:Yuan-Ti Malison
+ManaCost:1 U
+Types:Creature Snake Rogue
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | IsPresent$ Card.attacking+Other | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigVenture | TriggerZones$ Battlefield | TriggerController$ TriggeredSourceController | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+Oracle:Yuan-Ti Malison can't be blocked as long as it's attacking alone.\nWhenever Yuan-Ti Malison deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)

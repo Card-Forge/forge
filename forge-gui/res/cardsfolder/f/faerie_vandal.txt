@@ -1,0 +1,10 @@
+Name:Faerie Vandal
+ManaCost:1 U
+Types:Creature Faerie Rogue
+PT:1/2
+K:Flash
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flash\nFlying\nWhenever you draw your second card each turn, put a +1/+1 counter on Faerie Vandal.

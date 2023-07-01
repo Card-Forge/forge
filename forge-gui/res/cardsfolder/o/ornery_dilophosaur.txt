@@ -1,0 +1,8 @@
+Name:Ornery Dilophosaur
+ManaCost:3 G
+Types:Creature Dinosaur
+PT:2/2
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerGE4 | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, if you control a creature with power 4 or greater, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ 2 | NumDef$ 2 | Defined$ Self
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever Ornery Dilophosaur attacks, if you control a creature with power 4 or greater, Ornery Dilophosaur gets +2/+2 until end of turn.

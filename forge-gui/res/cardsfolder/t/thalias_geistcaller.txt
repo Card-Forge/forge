@@ -1,0 +1,12 @@
+Name:Thalia's Geistcaller
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:3/1
+K:Lifelink
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromYourGraveyard | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:BuffedBy:Card
+DeckHas:Ability$Token
+A:AB$ Pump | Cost$ Sac<1/Spirit> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+DeckHints:Type$Spirit
+Oracle:Lifelink\nWhenever you cast a spell from your graveyard, create a 1/1 white Spirit creature token with flying.\nSacrifice a Spirit: Thalia's Geistcaller gains indestructible until end of turn.

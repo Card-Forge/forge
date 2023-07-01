@@ -1,0 +1,8 @@
+Name:Rimebound Dead
+ManaCost:B
+Types:Snow Creature Skeleton
+PT:1/1
+A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
+# AI can now use snow mana to pay for activated abilities.
+AI:RemoveDeck:Random
+Oracle:{S}: Regenerate Rimebound Dead. ({S} can be paid with one mana from a snow source.)

@@ -1,0 +1,6 @@
+Name:Zarichi Tiger
+ManaCost:3 W
+Types:Creature Cat
+PT:2/3
+A:AB$ GainLife | Cost$ 1 W T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+Oracle:{1}{W}, {T}: You gain 2 life.

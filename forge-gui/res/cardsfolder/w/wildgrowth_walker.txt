@@ -1,0 +1,9 @@
+Name:Wildgrowth Walker
+ManaCost:1 G
+Types:Creature Elemental
+PT:1/3
+T:Mode$ Explores | Execute$ DBPutCounter | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control explores, put a +1/+1 counter on CARDNAME and you gain 3 life.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+SVar:AIPriorityModifier:1
+Oracle:Whenever a creature you control explores, put a +1/+1 counter on Wildgrowth Walker and you gain 3 life.

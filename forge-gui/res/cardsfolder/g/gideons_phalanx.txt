@@ -1,0 +1,6 @@
+Name:Gideon's Phalanx
+ManaCost:5 W W
+Types:Instant
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ Create four 2/2 white Knight creature tokens with vigilance. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE2
+Oracle:Create four 2/2 white Knight creature tokens with vigilance.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.

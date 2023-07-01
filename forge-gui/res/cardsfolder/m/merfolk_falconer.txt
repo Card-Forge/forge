@@ -1,0 +1,8 @@
+Name:Merfolk Falconer
+ManaCost:3 U U
+Types:Creature Merfolk Wizard
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.kicked | ValidActivatingPlayer$ You | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a kicked spell, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:Flying\nWhenever you cast a kicked spell, scry 2.

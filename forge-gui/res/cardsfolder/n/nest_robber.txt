@@ -1,0 +1,6 @@
+Name:Nest Robber
+ManaCost:1 R
+Types:Creature Dinosaur
+PT:2/1
+K:Haste
+Oracle:Haste

@@ -1,0 +1,7 @@
+Name:Phyrexian Tyranny
+ManaCost:U B R
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever a player draws a card, that player loses 2 life unless they pay {2}.
+SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredCardController
+AI:RemoveDeck:Random
+Oracle:Whenever a player draws a card, that player loses 2 life unless they pay {2}.

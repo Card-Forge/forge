@@ -1,0 +1,9 @@
+Name:Rigo, Streetwise Mentor
+ManaCost:GW W WU
+Types:Legendary Creature Cat Citizen
+PT:2/2
+K:etbCounter:SHIELD:1
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl+powerLE1 | AttackedTarget$ Player,Planeswalker | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player or planeswalker with one or more creatures with power 1 or less, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Counters
+Oracle:Rigo, Streetwise Mentor enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nWhenever you attack a player or planeswalker with one or more creatures with power 1 or less, draw a card.

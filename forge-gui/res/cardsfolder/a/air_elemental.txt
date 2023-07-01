@@ -1,0 +1,6 @@
+Name:Air Elemental
+ManaCost:3 U U
+Types:Creature Elemental
+PT:4/4
+K:Flying
+Oracle:Flying

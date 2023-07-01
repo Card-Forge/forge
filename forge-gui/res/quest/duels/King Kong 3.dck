@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=King Kong 3
+Title=King Kong
+Difficulty=hard
+Description=WRG Squirrel deck with tokens, changelings, Deranged Hermit and threat removal
+Icon=King Kong.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Wooded Foothills
+4 Taiga
+4 Windswept Heath
+4 Forest|M11
+1 Mox Emerald
+1 Mox Ruby
+1 Mox Pearl
+1 Swarmyard
+4 Deranged Hermit
+1 Nut Collector
+4 Squirrel Mob
+1 Squirrel Nest
+4 Acorn Harvest
+4 Chatter of the Squirrel
+1 Avian Changeling
+1 Chameleon Colossus
+1 Taurean Mauler
+1 Woodland Changeling
+1 Jacques le Vert
+1 Crib Swap
+1 Leyline of the Meek
+1 Parallel Evolution
+4 Lightning Helix
+1 Aura Shards
+1 Titanic Ultimatum
+1 Captured Sunlight
+1 Fracturing Gust
+1 Spidersilk Armor
+1 Kodama's Reach
+[sideboard]

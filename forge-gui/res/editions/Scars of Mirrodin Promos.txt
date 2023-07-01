@@ -1,0 +1,13 @@
+[metadata]
+Code=PSOM
+Date=2010-09-30
+Name=Scars of Mirrodin Promos
+Type=Promo
+ScryfallCode=PSOM
+
+[cards]
+24 R Tempered Steel @jD
+*69 R Memoricide @Erica Yang
+174 U Memnite @rk post
+205★ R Steel Hellkite @Jaime Jones
+223★ M Wurmcoil Engine @Raymond Swanland

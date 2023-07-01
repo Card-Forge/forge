@@ -1,0 +1,8 @@
+Name:Tuktuk Rubblefort
+ManaCost:2 R
+Types:Creature Wall
+PT:0/3
+K:Defender
+K:Reach
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+Oracle:Defender, reach\nCreatures you control have haste.

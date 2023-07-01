@@ -1,0 +1,6 @@
+Name:Vedalken Certarch
+ManaCost:U
+Types:Creature Vedalken Wizard
+PT:1/1
+A:AB$ Tap | Cost$ T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature or land. | Activation$ Metalcraft | PrecostDesc$ Metalcraft — | SpellDescription$ Tap target artifact, creature or land. Activate only if you control three or more artifacts.
+Oracle:Metalcraft — {T}: Tap target artifact, creature, or land. Activate only if you control three or more artifacts.

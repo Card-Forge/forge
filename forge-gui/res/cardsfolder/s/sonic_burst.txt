@@ -1,0 +1,5 @@
+Name:Sonic Burst
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R Discard<1/Random> | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+Oracle:As an additional cost to cast this spell, discard a card at random.\nSonic Burst deals 4 damage to any target.

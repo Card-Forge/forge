@@ -1,0 +1,8 @@
+Name:Aggravate
+ManaCost:3 R R
+Types:Instant
+A:SP$ DamageAll | ValidTgts$ Player | NumDmg$ 1 | RememberDamaged$ True | ValidCards$ Creature | ValidDescription$ each creature target player controls. | SubAbility$ DBAnimate | SpellDescription$ CARDNAME deals 1 damage to each creature target player controls.
+SVar:DBAnimate:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | StaticAbilities$ MustAttack | SubAbility$ DBCleanup | SpellDescription$ Each creature dealt damage this way attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ Each creature dealt damage this way attacks this turn if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Aggravate deals 1 damage to each creature target player controls. Each creature dealt damage this way attacks this turn if able.

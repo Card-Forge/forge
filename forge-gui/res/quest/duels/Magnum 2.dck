@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Magnum 2
+Title=Magnum
+Difficulty=medium
+Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Icon=Magnum.jpg
+Deck Type=constructed
+[main]
+4 Tropical Island
+8 Island|ISD
+2 Yavimaya Coast
+5 Forest|ISD
+2 Temporal Spring
+2 Hinterland Harbor
+1 Cold-Eyed Selkie
+2 Assault Zeppelid
+1 Shielding Plax
+2 Gaea's Skyfolk
+1 Yavimaya's Embrace
+1 Trapjaw Kelpie
+1 Drakewing Krasis
+1 Jungle Barrier
+1 Slippery Bogle
+1 Selkie Hedge-Mage
+1 Dryad Arbor
+2 Wistful Selkie
+1 Trygon Predator
+3 Sturdy Hatchling
+1 Leafdrake Roost
+3 Shorecrasher Mimic
+2 Favor of the Overbeing
+1 Fable of Wolf and Owl
+1 Vedalken Heretic
+1 Jhessian Infiltrator
+2 Lorescale Coatl
+1 Prime Speaker Zegana
+3 Murkfiend Liege
+2 Coiling Oracle
+1 Mystic Genesis
+[sideboard]

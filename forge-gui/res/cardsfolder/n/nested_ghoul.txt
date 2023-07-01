@@ -1,0 +1,8 @@
+Name:Nested Ghoul
+ManaCost:3 B B
+Types:Creature Phyrexian Zombie Warrior
+PT:4/2
+T:Mode$ DamageDone | ValidTarget$ Creature.Self | Execute$ TrigZombie | TriggerDescription$ Whenever a source deals damage to CARDNAME, create a 2/2 black Phyrexian Zombie creature token.
+SVar:TrigZombie:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_phyrexian_zombie | TokenOwner$ You
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever a source deals damage to Nested Ghoul, create a 2/2 black Phyrexian Zombie creature token.

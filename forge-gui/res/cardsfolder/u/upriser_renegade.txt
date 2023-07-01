@@ -1,0 +1,9 @@
+Name:Upriser Renegade
+ManaCost:1 R
+Types:Creature Human Samurai
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +2/+0 for each other modified creature you control. (Equipment, Auras you control, and counters are modifications.)
+SVar:X:Count$Valid Creature.modified+Other+YouCtrl/Times.2
+SVar:BuffedBy:Aura,Equipment
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Upriser Renegade gets +2/+0 for each other modified creature you control. (Equipment, Auras you control, and counters are modifications.)

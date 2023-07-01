@@ -1,0 +1,14 @@
+Name:Runadi, Behemoth Caller
+ManaCost:2 G
+Types:Legendary Creature Cat Shaman
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a creature spell with mana value 5 or greater, that creature enters the battlefield with X additional +1/+1 counters on it, where X is its mana value minus 4.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ X
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE3_P1P1 | AddKeyword$ Haste | Description$ Creatures you control with three or more +1/+1 counters on them have haste.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+SVar:X:Remembered$CardManaCost/Minus.4
+DeckHas:Ability$Counters
+DeckHints:Type$Tyranid|Hydra
+Oracle:Whenever you cast a creature spell with mana value 5 or greater, that creature enters the battlefield with X additional +1/+1 counters on it, where X is its mana value minus 4.\nCreatures you control with three or more +1/+1 counters on them have haste.\n{T}: Add {G}.

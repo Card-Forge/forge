@@ -1,0 +1,11 @@
+Name:Regal Bloodlord
+ManaCost:3 W B
+Types:Creature Vampire Soldier
+PT:2/4
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained life this turn, create a 1/1 black Bat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:Flying\nAt the beginning of each end step, if you gained life this turn, create a 1/1 black Bat creature token with flying.

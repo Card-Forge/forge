@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mardu Raiders
+Description=The Mardu charge straight into their foes, relying on speed and numbers to conquer the battlefield. Claim the spoils you deserve when your horde rushes to victory!
+Deck Type=constructed
+Set=KTK
+Image=mardu_raiders.jpg
+[Main]
+1 Bloodfell Caves|KTK
+2 Nomad Outpost|KTK
+1 Scoured Barrens|KTK
+1 Wind-scarred Crag|KTK
+8 Mountain|KTK
+5 Plains|KTK
+7 Swamp|KTK
+1 Firehoof Cavalry|KTK
+1 Mardu Hateblade|KTK
+2 Borderland Marauder|M15
+1 Valley Dasher|KTK
+2 War-name Aspirant|KTK
+1 Gurmag Swiftwing|KTK
+2 Mardu Skullhunter|KTK
+2 Goblin Roughrider|M15
+2 Mardu Hordechief|KTK
+1 Carrion Crow|M15
+1 Necrogen Scudder|M15
+2 Mardu Warshrieker|KTK
+1 Timely Hordemate|KTK
+1 Ankle Shanker+|KTK
+1 Mardu Roughrider|KTK
+1 Crippling Blight|M15
+1 Lightning Strike|M15
+1 Raise The Alarm|M15
+1 Mardu Banner|KTK
+2 Trumpet Blast|KTK
+1 Hordeling Outburst|KTK
+1 Mardu Charm|KTK
+1 Bring Low|KTK
+1 Smite The Monstrous|KTK
+1 Crackling Doom|KTK
+1 Arrow Storm|KTK
+1 Flesh To Dust|M15
+1 Heat Ray|M15

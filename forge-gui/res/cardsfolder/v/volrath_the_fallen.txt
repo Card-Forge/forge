@@ -1,0 +1,7 @@
+Name:Volrath the Fallen
+ManaCost:3 B B B
+Types:Legendary Creature Phyrexian Shapeshifter
+PT:6/4
+A:AB$ Pump | Cost$ 1 B Discard<1/Creature> | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the discarded card's mana value.
+SVar:X:Discarded$CardManaCost
+Oracle:{1}{B}, Discard a creature card: Volrath the Fallen gets +X/+X until end of turn, where X is the discarded card's mana value.

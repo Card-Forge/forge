@@ -1,0 +1,9 @@
+Name:Loathsome Curator
+ManaCost:4 B
+Types:Creature Gorgon Wizard
+PT:5/4
+K:Menace
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME exploits a creature, destroy target creature you don't control with mana value 3 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3+YouDontCtrl | TgtPrompt$ Select target creature with mana value 3 or less you don't control
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nMenace\nWhen Loathsome Curator exploits a creature, destroy target creature you don't control with mana value 3 or less.

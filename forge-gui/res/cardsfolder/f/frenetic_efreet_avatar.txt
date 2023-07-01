@@ -1,0 +1,9 @@
+Name:Frenetic Efreet Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/-3
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.YouCtrl | AddKeyword$ Phasing | Description$ Each permanent you control has phasing. (It phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigFlip | TriggerDescription$ At the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.
+SVar:TrigFlip:DB$ FlipACoin | Defined$ You | WinSubAbility$ DBAddTurn
+SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1
+Oracle:Hand -1, life -3\nEach permanent you control has phasing. (It phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nAt the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.

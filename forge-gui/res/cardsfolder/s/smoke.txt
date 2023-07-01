@@ -1,0 +1,11 @@
+Name:Smoke
+ManaCost:R R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Creature:1 | Description$ Players can't untap more than one creature during their untap steps.
+SVar:NonStackingEffect:True
+DeckHints:Type$Planeswalker|Artifact|Enchantment
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpps:Count$Valid Creature.OppCtrl/LimitMax.5
+SVar:CountMe:Count$Valid Creature.YouCtrl
+AI:RemoveDeck:Random
+Oracle:Players can't untap more than one creature during their untap steps.

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (M12)
+Type:Archived
+Subtype:Standard
+Effective:2011-07-15
+Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12
+Banned:Jace, the Mind Sculptor; Stoneforge Mystic

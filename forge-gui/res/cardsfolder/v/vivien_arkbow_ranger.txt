@@ -1,0 +1,12 @@
+Name:Vivien, Arkbow Ranger
+ManaCost:1 G G G
+Types:Legendary Planeswalker Vivien
+Loyalty:4
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBPumpAll | SpellDescription$ Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
+SVar:DBPumpAll:DB$ Pump | KW$ Trample | Defined$ Targeted
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | AILogic$ Fight | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | AILogic$ PowerDmg | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+A:AB$ ChangeZone | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Sideboard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeTypeDesc$ creature card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SpellDescription$ You may reveal a creature card you own from outside the game and put it into your hand.
+DeckHas:Ability$Counters
+Oracle:[+1]: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.\n[-3]: Target creature you control deals damage equal to its power to target creature or planeswalker.\n[-5]: You may reveal a creature card you own from outside the game and put it into your hand.

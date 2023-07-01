@@ -1,0 +1,9 @@
+Name:Venerable Kumo
+ManaCost:4 G
+Types:Creature Spirit
+PT:2/3
+K:Reach
+K:Soulshift:4
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit
+Oracle:Reach (This creature can block creatures with flying.)\nSoulshift 4 (When this creature dies, you may return target Spirit card with mana value 4 or less from your graveyard to your hand.)

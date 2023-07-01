@@ -1,0 +1,9 @@
+Name:Port Razer
+ManaCost:3 R R
+Types:Creature Orc Pirate
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, untap each creature you control. After this combat phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.attackedBySourceThisTurn | Description$ CARDNAME can't attack a player it has already attacked this turn.
+Oracle:Whenever Port Razer deals combat damage to a player, untap each creature you control. After this combat phase, there is an additional combat phase.\nPort Razer can't attack a player it has already attacked this turn.

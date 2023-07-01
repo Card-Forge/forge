@@ -1,0 +1,7 @@
+Name:Flowstone Charger
+ManaCost:2 R W
+Types:Creature Beast
+PT:2/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/-3 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ -3
+Oracle:Whenever Flowstone Charger attacks, it gets +3/-3 until end of turn.

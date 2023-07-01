@@ -1,0 +1,8 @@
+Name:Purple Worm
+ManaCost:5 G G
+Types:Creature Worm
+PT:8/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2} less to cast if a creature died this turn.
+SVar:X:Count$Morbid.1.0
+K:Ward:2
+Oracle:This spell costs {2} less to cast if a creature died this turn.\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)

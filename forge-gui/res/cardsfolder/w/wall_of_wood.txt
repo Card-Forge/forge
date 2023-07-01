@@ -1,0 +1,6 @@
+Name:Wall of Wood
+ManaCost:G
+Types:Creature Wall
+PT:0/3
+K:Defender
+Oracle:Defender (This creature can't attack.)

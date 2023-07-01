@@ -1,0 +1,6 @@
+Name:Viashino Spearhunter
+ManaCost:2 R
+Types:Creature Viashino Warrior
+PT:2/1
+K:First Strike
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)

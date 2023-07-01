@@ -1,0 +1,29 @@
+[metadata]
+Code=PGPX
+Code2=PGPX
+Date=2007-02-24
+Name=Grand Prix Promos
+Type=Promo
+ScryfallCode=PGPX
+
+[cards]
+2007 R Spiritmonger @Kev Walker
+2008 R Call of the Herd @Lars Grant-West
+2009 R Chrome Mox @Alan Pollack
+2010 R Umezawa's Jitte @Svetlin Velinov
+2011 R Maelstrom Pulse @John Avon
+2012a R Goblin Guide @Steve Prescott
+2012b R Lotus Cobra @Terese Nielsen
+2013a M Primeval Titan @Peter Mohrbacher
+2013b R All Is Dust @Vincent Proce
+2014 M Batterskull @Igor Kieryluk
+2015 M Griselbrand @Jaime Jones
+2016 R Stoneforge Mystic @Johannes Voss
+2016b R Sword of Feast and Famine @Efrem Palacios
+2017 M Progenitus @Jaime Jones
+2018 R Mutavault @John Avon
+2018a L Plains @Donato Giancola
+2018b L Island @Donato Giancola
+2018c L Swamp @Donato Giancola
+2018d L Mountain @Donato Giancola
+2018f L Forest @Donato Giancola

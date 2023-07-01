@@ -1,0 +1,8 @@
+Name:Niv-Mizzet Reborn
+ManaCost:W U B R G
+Types:Legendary Creature Dragon Avatar
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top ten cards of your library. For each color pair, choose a card that's exactly those colors from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 10 | Reveal$ True | ForEachColorPair$ True | RestRandomOrder$ True
+Oracle:Flying\nWhen Niv-Mizzet Reborn enters the battlefield, reveal the top ten cards of your library. For each color pair, choose a card that's exactly those colors from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order.

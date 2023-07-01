@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Spectre 3
+Title=The Spectre
+Difficulty=hard
+Description=UBR Specter deck
+Icon=The Spectre.jpg
+Deck Type=constructed
+[main]
+8 Swamp
+4 Crumbling Necropolis
+4 Underground Sea
+1 Badlands
+2 Polluted Delta
+2 Bloodstained Mire
+3 Scalding Tarn
+1 Silent Departure
+4 Sinkhole
+1 Riftwing Cloudskate
+1 Disperse
+1 Echoing Truth
+1 Into the Roil
+4 Hypnotic Specter
+1 Liliana's Specter
+1 Needle Specter
+4 Sedraxis Specter
+3 Silent Specter
+1 Man-o'-War
+1 Repulse
+1 Abyssal Specter
+2 Blazing Specter
+2 Blizzard Specter
+4 Guul Draz Specter
+1 Shimian Specter
+1 Churning Eddy
+1 Shrieking Specter
+[sideboard]

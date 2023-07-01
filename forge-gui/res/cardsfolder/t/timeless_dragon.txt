@@ -1,0 +1,9 @@
+Name:Timeless Dragon
+ManaCost:3 W W
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:TypeCycling:Plains:2
+K:Eternalize:2 W W
+DeckHas:Ability$Token
+Oracle:Flying\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)\nEternalize {2}{W}{W} ({2}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Dragon with no mana cost. Eternalize only as a sorcery.)

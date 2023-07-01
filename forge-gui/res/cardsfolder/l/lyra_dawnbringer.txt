@@ -1,0 +1,12 @@
+Name:Lyra Dawnbringer
+ManaCost:3 W W
+Types:Legendary Creature Angel
+PT:5/5
+K:Flying
+K:First Strike
+K:Lifelink
+S:Mode$ Continuous | Affected$ Angel.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Other Angels you control get +1/+1 and have lifelink.
+SVar:BuffedBy:Angel
+SVar:PlayMain1:TRUE
+DeckHints:Type$Angel
+Oracle:Flying, first strike, lifelink\nOther Angels you control get +1/+1 and have lifelink.

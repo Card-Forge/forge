@@ -1,0 +1,5 @@
+Name:Loamdragger Giant
+ManaCost:4 RG RG RG
+Types:Creature Giant Warrior
+PT:7/6
+Oracle:

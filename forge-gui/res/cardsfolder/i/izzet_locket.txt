@@ -1,0 +1,8 @@
+Name:Izzet Locket
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
+DeckNeeds:Color$Blue|Red
+A:AB$ Draw | Cost$ UR UR UR UR T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {U} or {R}.\n{U/R}{U/R}{U/R}{U/R}, {T}, Sacrifice Izzet Locket: Draw two cards.

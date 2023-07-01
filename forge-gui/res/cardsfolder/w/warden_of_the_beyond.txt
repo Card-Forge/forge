@@ -1,0 +1,7 @@
+Name:Warden of the Beyond
+ManaCost:2 W
+Types:Creature Human Wizard
+PT:2/2
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.OppOwn | PresentZone$ Exile | Description$ CARDNAME gets +2/+2 as long as an opponent owns a card in exile.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWarden of the Beyond gets +2/+2 as long as an opponent owns a card in exile.

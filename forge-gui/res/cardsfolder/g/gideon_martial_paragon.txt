@@ -1,0 +1,13 @@
+Name:Gideon, Martial Paragon
+ManaCost:4 W
+Types:Legendary Planeswalker Gideon
+Loyalty:5
+A:AB$ UntapAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Untap all creatures you control. Those creatures get +1/+1 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Indestructible | Types$ Creature,Human,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
+A:AB$ PumpAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBTapAll | SpellDescription$ Creatures you control get +2/+2 until end of turn. Tap all creatures your opponents control.
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl
+DeckHints:Name$Gideon's Resolve
+Oracle:[+2]: Untap all creatures you control. Those creatures get +1/+1 until end of turn.\n[0]: Until end of turn, Gideon, Martial Paragon becomes a 5/5 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.\n[-10]: Creatures you control get +2/+2 until end of turn. Tap all creatures your opponents control.

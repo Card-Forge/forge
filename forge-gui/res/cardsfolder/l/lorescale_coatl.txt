@@ -1,0 +1,8 @@
+Name:Lorescale Coatl
+ManaCost:1 G U
+Types:Creature Snake
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you draw a card, put a +1/+1 counter on Lorescale Coatl.

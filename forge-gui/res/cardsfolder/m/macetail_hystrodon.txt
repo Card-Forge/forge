@@ -1,0 +1,8 @@
+Name:Macetail Hystrodon
+ManaCost:6 R
+Types:Creature Beast
+PT:4/4
+K:First Strike
+K:Haste
+K:Cycling:3
+Oracle:First strike, haste\nCycling {3} ({3}, Discard this card: Draw a card.)

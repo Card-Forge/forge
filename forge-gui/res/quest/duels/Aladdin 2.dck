@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aladdin 2
+Title=Aladdin
+Difficulty=medium
+Description=WU Brave the Sands deck 
+Icon=Aladdin.jpg
+Deck Type=constructed
+[main]
+4 Flooded Strand
+5 Snow-Covered Plains
+1 Snow-Covered Island
+4 Boreal Shelf
+2 Glacial Fortress
+2 Seachrome Coast
+2 Sejiri Refuge
+2 Temple of Enlightenment
+2 Tranquil Cove
+4 Brave the Sands
+1 Brass Man
+4 Giant Tortoise
+4 Watchdog
+4 Phyrexian Ironfoot
+4 Archangel of Tithes
+1 Galvanic Juggernaut
+1 Dragonlord Ojutai
+1 Castle Raptors
+4 Pristine Angel
+1 Hindering Light
+2 Disenchant
+1 Negate
+1 Ior Ruin Expedition
+1 Inaction Injunction
+1 Unsummon
+1 Silent Departure
+[sideboard]

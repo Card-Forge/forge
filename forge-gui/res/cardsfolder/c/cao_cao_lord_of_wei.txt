@@ -1,0 +1,6 @@
+Name:Cao Cao, Lord of Wei
+ManaCost:3 B B
+Types:Legendary Creature Human Soldier
+PT:3/3
+A:AB$ Discard | Cost$ T | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Target opponent discards two cards. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Target opponent discards two cards. Activate only during your turn, before attackers are declared.

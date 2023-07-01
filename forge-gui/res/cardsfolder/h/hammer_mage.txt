@@ -1,0 +1,8 @@
+Name:Hammer Mage
+ManaCost:1 R
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ DestroyAll | Cost$ X R T Discard<1/Card> | ValidCards$ Artifact.cmcLEX | SpellDescription$ Destroy all artifacts with mana value X or less.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+Oracle:{X}{R}, {T}, Discard a card: Destroy all artifacts with mana value X or less.

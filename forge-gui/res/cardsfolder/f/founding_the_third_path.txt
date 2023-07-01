@@ -1,0 +1,11 @@
+Name:Founding the Third Path
+ManaCost:1 U
+Types:Enchantment Saga
+K:Read ahead:3:DBPlayFree,DBMill,DBCopy
+SVar:DBPlayFree:DB$ Play | Valid$ Instant.YouOwn,Sorcery.YouOwn | ValidSA$ Spell.cmcEQ1,Spell.cmcEQ2 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SpellDescription$ You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.
+SVar:DBMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | SpellDescription$ Target player mills four cards.
+SVar:DBCopy:DB$ ChangeZone | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose up to one target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.\nII — Target player mills four cards.\nIII — Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.

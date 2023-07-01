@@ -1,0 +1,9 @@
+Name:Mirror of Fate
+ManaCost:5
+Types:Artifact
+A:AB$ ChooseCard | Cost$ T Sac<1/CARDNAME> | MinAmount$ 0 | Amount$ 7 | Choices$ Card.YouOwn+faceUp | SubAbility$ DBExile | ChoiceZone$ Exile | SpellDescription$ Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library.
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | Defined$ You | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | Defined$ You | ChangeType$ Card.ChosenCard
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice Mirror of Fate: Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library.

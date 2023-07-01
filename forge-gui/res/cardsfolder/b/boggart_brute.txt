@@ -1,0 +1,6 @@
+Name:Boggart Brute
+ManaCost:2 R
+Types:Creature Goblin Warrior
+PT:3/2
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

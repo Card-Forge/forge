@@ -1,0 +1,7 @@
+Name:Courier Hawk
+ManaCost:1 W
+Types:Creature Bird
+PT:1/2
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

@@ -1,0 +1,7 @@
+Name:Soldevi Machinist
+ManaCost:1 U
+Types:Creature Human Wizard Artificer
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Activated.Artifact+inZoneBattlefield | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities of artifacts.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}{C}. Spend this mana only to activate abilities of artifacts.

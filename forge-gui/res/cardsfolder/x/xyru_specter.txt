@@ -1,0 +1,10 @@
+Name:Xyru Specter
+ManaCost:2 B B
+Types:Creature Specter
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigChoice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards a card unless they challenge you. If challenged, and you show them two black cards in your hand, they must discard two cards.
+SVar:TrigChoice:DB$ GenericChoice | Defined$ TriggeredTarget | Choices$ DBDiscardOne,DBChallenge | AILogic$ Random
+SVar:DBDiscardOne:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Discard one card
+SVar:DBChallenge:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose | UnlessCost$ Reveal<2/Card.Black> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Challenge
+Oracle:Flying\nWhenever Xyru Specter deals damage to an opponent, that player discards a card unless they challenge you. If challenged, and you show them two black cards in your hand, they must discard two cards.

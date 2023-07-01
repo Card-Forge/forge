@@ -1,0 +1,6 @@
+Name:Battle Hurda
+ManaCost:4 W
+Types:Creature Giant
+PT:3/3
+K:First Strike
+Oracle:First strike

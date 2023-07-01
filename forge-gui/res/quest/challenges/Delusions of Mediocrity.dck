@@ -1,0 +1,41 @@
+[quest]
+id=34
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=3 enchantment rares
+Credit Reward=500
+HumanExtras=Delusions of Mediocrity|Delusions of Mediocrity|Delusions of Mediocrity
+AIExtras=
+[metadata]
+Name=quest34
+Title=Delusions of Mediocrity
+Difficulty=hard
+Description=Protect your Delusions of Mediocrity or they will destroy you!
+Icon=Delusions of Mediocrity.jpg
+Deck Type=constructed
+[main]
+1 Tropical Island
+4 Savannah
+1 Taiga
+1 Island
+1 Plains
+1 Forest
+2 Flooded Strand
+4 Windswept Heath
+4 Seaside Citadel
+4 Ancient Ziggurat
+4 Noble Hierarch
+4 Birds of Paradise
+4 Elvish Visionary
+4 Trygon Predator
+4 Polis Crusher
+4 Dawning Purist
+4 Reliquary Monk
+4 Rust Scarab
+1 Veteran Armorer
+1 Kongming, "Sleeping Dragon"
+1 Urabrask the Hidden
+1 Archetype of Courage
+1 Masako the Humorless
+[sideboard]

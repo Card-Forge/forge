@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 1W
+Title=The Color White
+Difficulty=Hard
+Description="The meek shall fight as one, and they shall overcome even the greatest of foes." -Halvor Arensson, Kjeldoran Priest
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Blinking Spirit|ICE
+4 Disenchant|ICE
+4 Exile|ALL
+2 Inheritance|ALL
+4 Ivory Gargoyle|ALL
+4 Kjeldoran Outpost|ALL
+4 Order of the White Shield|ICE
+24 Plains|ICE|3
+2 Reprisal|ALL|1
+2 Reprisal|ALL|2
+4 Swords to Plowshares|ICE
+2 Wild Aesthir|ALL|1
+2 Wild Aesthir|ALL|2

@@ -1,0 +1,10 @@
+Name:Myth Realized
+ManaCost:W
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put a lore counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LORE | CounterNum$ 1
+A:AB$ PutCounter | Cost$ 2 W | CounterType$ LORE | CounterNum$ 1 | SpellDescription$ Put a lore counter on CARDNAME.
+A:AB$ Animate | Cost$ W | Defined$ Self | Types$ Creature,Monk,Avatar | staticAbilities$ Static | SpellDescription$ Until end of turn, CARDNAME becomes a Monk Avatar creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lore counters on it."
+SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lore counters on it.
+SVar:X:Count$CardCounters.LORE
+Oracle:Whenever you cast a noncreature spell, put a lore counter on Myth Realized.\n{2}{W}: Put a lore counter on Myth Realized.\n{W}: Until end of turn, Myth Realized becomes a Monk Avatar creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lore counters on it."

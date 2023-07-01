@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 219: The Siege of Fancheng
+Title=AD 219: The Siege of Fancheng
+Difficulty=easy
+Description=Kongming's predecessor helped Liu Bei win the battle of Fancheng by recognizing and defeating Cao Ren's use of the dreaded "Eight Gold Locks" formation.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alert Shu Infantry|PTK
+4 Broken Dam|PTK
+4 Flanking Troops|PTK
+4 Guan Yu, Sainted Warrior|PTK
+8 Island|PTK|2
+4 Liu Bei, Lord of Shu|PTK
+16 Plains|PTK|1
+4 Sage's Knowledge|PTK
+4 Shu Cavalry|PTK
+4 Shu Grain Caravan|PTK
+4 Zhuge Jin, Wu Strategist|PTK

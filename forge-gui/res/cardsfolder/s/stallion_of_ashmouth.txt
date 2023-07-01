@@ -1,0 +1,8 @@
+Name:Stallion of Ashmouth
+ManaCost:3 B
+Types:Creature Nightmare Horse
+PT:3/3
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Activate only if there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — {1}{B}: Stallion of Ashmouth gets +1/+1 until end of turn. Activate only if there are four or more card types among cards in your graveyard.

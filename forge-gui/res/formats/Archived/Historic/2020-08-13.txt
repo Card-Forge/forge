@@ -1,0 +1,7 @@
+[format]
+Name:Historic (AKR)
+Type:Archived
+Subtype:Arena
+Effective:2020-08-13
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB
+Banned:Agent of Treachery; Fires of Invention; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer; Winota, Joiner of Forces

@@ -1,0 +1,5 @@
+Name:Jayemdae Tome
+ManaCost:4
+Types:Artifact
+A:AB$ Draw | Cost$ 4 T | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{4}, {T}: Draw a card.

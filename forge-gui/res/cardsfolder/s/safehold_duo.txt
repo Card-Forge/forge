@@ -1,0 +1,10 @@
+Name:Safehold Duo
+ManaCost:3 GW
+Types:Creature Elf Warrior Shaman
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a green spell, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a white spell, CARDNAME gains vigilance until end of turn.
+SVar:TrigPump11:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
+SVar:TrigPumpKW:DB$ Pump | KW$ Vigilance | Defined$ Self
+SVar:BuffedBy:Card.Green,Card.White
+Oracle:Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.

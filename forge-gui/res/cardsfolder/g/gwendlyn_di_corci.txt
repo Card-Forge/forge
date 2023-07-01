@@ -1,0 +1,7 @@
+Name:Gwendlyn Di Corci
+ManaCost:U B B R
+Types:Legendary Creature Human Rogue
+PT:3/5
+A:AB$ Discard | Cost$ T | ValidTgts$ Player | PlayerTurn$ True | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random. Activate only during your turn.
+DeckHas:Ability$Discard
+Oracle:{T}: Target player discards a card at random. Activate only during your turn.

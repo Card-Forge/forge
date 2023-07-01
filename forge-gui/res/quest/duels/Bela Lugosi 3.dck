@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Bela Lugosi 3
+Title=Bela Lugosi
+Difficulty=hard
+Description=Mono B Vampire deck
+Icon=Bela Lugosi.jpg
+Deck Type=constructed
+[main]
+4 Bloodline Keeper
+1 Bloodlord of Vaasgoth
+2 Feast of Blood
+4 Go for the Throat
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+2 Malakir Bloodwitch
+4 Gatekeeper of Malakir
+3 Kalastria Highborn
+1 Ascendant Evincar
+22 Swamp
+1 Mox Jet
+2 Guul Draz Assassin
+2 Captivating Vampire
+1 Anowon, the Ruin Sage
+1 Mirri the Cursed
+2 Shadow Alley Denizen
+[sideboard]

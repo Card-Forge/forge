@@ -1,0 +1,12 @@
+Name:Chromanticore
+ManaCost:W U B R G
+Types:Enchantment Creature Manticore
+PT:4/4
+K:Bestow:2 W U B R G
+K:Flying
+K:First Strike
+K:Vigilance
+K:Trample
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Flying & First Strike & Vigilance & Trample & Lifelink | Description$ Enchanted creature gets +4/+4 and has flying, first strike, vigilance, trample and lifelink.
+Oracle:Bestow {2}{W}{U}{B}{R}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nFlying, first strike, vigilance, trample, lifelink\nEnchanted creature gets +4/+4 and has flying, first strike, vigilance, trample, and lifelink.

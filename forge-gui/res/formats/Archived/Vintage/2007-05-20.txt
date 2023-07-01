@@ -1,0 +1,8 @@
+[format]
+Name:Vintage (FUT)
+Type:Archived
+Subtype:Vintage
+Effective:2007-05-20
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, POR, WTH, TMP, STH, EXO, PO2, USG, ATH, ULG, 6ED, UDS, S99, PTK, MMQ, BRB, NMS, S00, PCY, BTD, INV, PLS, 7ED, APC, ODY, DKM, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT
+Restricted:Ancestral Recall; Balance; Black Lotus; Black Vise; Burning Wish; Channel; Chrome Mox; Crop Rotation; Demonic Consultation; Demonic Tutor; Dream Halls; Enlightened Tutor; Entomb; Fact or Fiction; Fastbond; Frantic Search; Grim Monolith; Gush; Imperial Seal; Library of Alexandria; Lion's Eye Diamond; Lotus Petal; Mana Crypt; Mana Vault; Memory Jar; Mind Twist; Mind's Desire; Mox Diamond; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Mystical Tutor; Necropotence; Personal Tutor; Regrowth; Sol Ring; Strip Mine; Time Spiral; Time Walk; Timetwister; Tinker; Tolarian Academy; Trinisphere; Vampiric Tutor; Voltaic Key; Wheel of Fortune; Windfall; Yawgmoth's Bargain; Yawgmoth's Will
+Banned:Amulet of Quoz; Bronze Tablet; Chaos Orb; Contract from Below; Darkpact; Demonic Attorney; Falling Star; Jeweled Bird; Rebirth; Tempest Efreet; Timmerian Fiends

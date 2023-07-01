@@ -1,0 +1,7 @@
+Name:Volcano Imp
+ManaCost:3 B
+Types:Creature Imp
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:Flying\n{1}{R}: Volcano Imp gains first strike until end of turn.

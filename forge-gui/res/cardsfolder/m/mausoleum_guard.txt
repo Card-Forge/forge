@@ -1,0 +1,9 @@
+Name:Mausoleum Guard
+ManaCost:3 W
+Types:Creature Human Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 1/1 white Spirit creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:SacMe:1
+DeckHas:Ability$Token
+Oracle:When Mausoleum Guard dies, create two 1/1 white Spirit creature tokens with flying.

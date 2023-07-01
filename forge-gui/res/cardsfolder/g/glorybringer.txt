@@ -1,0 +1,9 @@
+Name:Glorybringer
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigDealDamage | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, it deals 4 damage to target non-Dragon creature an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.nonDragon+OppCtrl | TgtPrompt$ Select target non-Dragon creature an opponent controls | NumDmg$ 4 | SpellDescription$ When you exert CARDNAME, it deals 4 damage to target non-Dragon creature an opponent controls.
+Oracle:Flying, haste\nYou may exert Glorybringer as it attacks. When you do, it deals 4 damage to target non-Dragon creature an opponent controls. (An exerted creature won't untap during your next untap step.)

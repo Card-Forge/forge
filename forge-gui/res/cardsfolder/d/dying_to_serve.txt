@@ -1,0 +1,8 @@
+Name:Dying to Serve
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you discard one or more cards, create a tapped 2/2 black Zombie creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ b_2_2_zombie
+DeckHas:Ability$Token & Type$Zombie
+DeckHints:Ability$Discard|Graveyard
+Oracle:Whenever you discard one or more cards, create a tapped 2/2 black Zombie creature token. This ability triggers only once each turn.

@@ -1,0 +1,9 @@
+Name:Duelcraft Trainer
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/3
+K:First Strike
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPump | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, target creature you control gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:First strike\nCoven — At the beginning of combat on your turn, if you control three or more creatures with different powers, target creature you control gains double strike until end of turn.

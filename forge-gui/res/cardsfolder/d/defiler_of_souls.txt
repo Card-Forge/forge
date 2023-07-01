@@ -1,0 +1,8 @@
+Name:Defiler of Souls
+ManaCost:3 B B R
+Types:Creature Demon
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.MonoColor | Defined$ TriggeredPlayer | SacMessage$ monocolored creature
+Oracle:Flying\nAt the beginning of each player's upkeep, that player sacrifices a monocolored creature.

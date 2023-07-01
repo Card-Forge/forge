@@ -1,0 +1,8 @@
+Name:Aeronaut Admiral
+ManaCost:3 W
+Types:Creature Human Pilot
+PT:3/1
+K:Flying
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Flying | Description$ Vehicles you control have flying.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nVehicles you control have flying.

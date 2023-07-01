@@ -1,0 +1,7 @@
+Name:Nullmage Shepherd
+ManaCost:3 G
+Types:Creature Elf Shaman
+PT:2/4
+A:AB$ Destroy | Cost$ tapXType<4/Creature> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+AI:RemoveDeck:All
+Oracle:Tap four untapped creatures you control: Destroy target artifact or enchantment.

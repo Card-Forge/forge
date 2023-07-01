@@ -1,0 +1,7 @@
+Name:Wings of the Guard
+ManaCost:1 W
+Types:Creature Bird
+PT:1/1
+K:Flying
+K:Melee
+Oracle:Flying\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)

@@ -1,0 +1,7 @@
+Name:Wall of Air
+ManaCost:1 U U
+Types:Creature Wall
+PT:1/5
+K:Flying
+K:Defender
+Oracle:Defender, flying (This creature can't attack, and it can block creatures with flying.)

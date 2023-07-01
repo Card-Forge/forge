@@ -1,0 +1,6 @@
+Name:Territorial Roc
+ManaCost:1 W
+Types:Creature Bird
+PT:1/3
+K:Flying
+Oracle:Flying

@@ -1,0 +1,8 @@
+Name:Tradewind Rider
+ManaCost:3 U
+Types:Creature Spirit
+PT:1/4
+K:Flying
+A:AB$ ChangeZone | Cost$ T tapXType<2/Creature> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+SVar:NonCombatPriority:1
+Oracle:Flying\n{T}, Tap two untapped creatures you control: Return target permanent to its owner's hand.

@@ -1,0 +1,11 @@
+Name:Lightning Phoenix
+ManaCost:2 R
+Types:Creature Phoenix
+PT:2/2
+K:Flying
+K:Haste
+K:CARDNAME can't block.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of your end step, if an opponent was dealt 3 or more damage this turn, you may pay {R}. If you do, return CARDNAME from your graveyard to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$MaxOppDamageThisTurn
+Oracle:Flying, haste\nLightning Phoenix can't block.\nAt the beginning of your end step, if an opponent was dealt 3 or more damage this turn, you may pay {R}. If you do, return Lightning Phoenix from your graveyard to the battlefield.

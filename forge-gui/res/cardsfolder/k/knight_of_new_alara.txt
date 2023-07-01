@@ -1,0 +1,8 @@
+Name:Knight of New Alara
+ManaCost:2 G W
+Types:Creature Human Knight
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each other multicolored creature you control gets +1/+1 for each of its colors.
+SVar:AffectedX:Count$CardNumColors
+SVar:PlayMain1:TRUE
+Oracle:Each other multicolored creature you control gets +1/+1 for each of its colors.

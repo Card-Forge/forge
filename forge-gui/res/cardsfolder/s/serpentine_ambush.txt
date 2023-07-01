@@ -1,0 +1,6 @@
+Name:Serpentine Ambush
+ManaCost:1 U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | Types$ Serpent | RemoveCreatureTypes$ True | Power$ 5 | Toughness$ 5 | StackDescription$ Until end of turn, {c:Targeted} becomes a blue Serpent with base power and toughness 5/5. | SpellDescription$ Until end of turn, target creature becomes a blue Serpent with base power and toughness 5/5.
+DeckHas:Type$Serpent
+Oracle:Until end of turn, target creature becomes a blue Serpent with base power and toughness 5/5.

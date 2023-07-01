@@ -1,0 +1,5 @@
+Name:Kindercatch
+ManaCost:3 G G G
+Types:Creature Spirit
+PT:6/6
+Oracle:

@@ -1,0 +1,5 @@
+Name:Kessig|Art:Kessig Wolf Run|Colors:RG
+Name:Gavony|Art:Gavony Township|Colors:GW
+Name:Moorland|Art:Moorland Haunt|Colors:WU
+Name:Nephalia|Art:Nephalia Drownyard|Colors:UB
+Name:Stensia|Art:Stensia Bloodhall|Colors:BR

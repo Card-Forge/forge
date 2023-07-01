@@ -1,0 +1,7 @@
+Name:Starstorm
+ManaCost:X R R
+Types:Instant
+K:Cycling:3
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
+SVar:X:Count$xPaid
+Oracle:Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)

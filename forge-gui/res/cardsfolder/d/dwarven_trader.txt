@@ -1,0 +1,5 @@
+Name:Dwarven Trader
+ManaCost:R
+Types:Creature Dwarf
+PT:1/1
+Oracle:

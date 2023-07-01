@@ -1,0 +1,6 @@
+Name:Koma's Coil
+ManaCost:no cost
+Types:Creature Serpent
+PT:3/3
+Colors:blue
+Oracle:

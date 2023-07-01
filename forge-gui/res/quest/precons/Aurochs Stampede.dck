@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Aurochs Stampede
+Description=Aurochs like two things: frenzied stampedes and more Aurochs. Neither is in short supply during their winter migration-- and during an ice age, winter never ends. Rumble along with the herd that puts the "wild" back in wildlife.
+Deck Type=constructed
+Set=CSP
+Image=aurochs_stampede.jpg
+[main]
+3 Aurochs|ICE
+3 Aurochs Herd|CSP
+2 Balduvian Rage|CSP
+2 Boreal Druid|CSP
+1 Bounty of the Hunt|ALL
+4 Bull Aurochs|CSP
+1 Deadly Insect|ALL|2
+2 Earthen Goo|CSP
+2 Frostweb Spider|CSP
+1 Giant Trap Door Spider|ICE
+1 Gorilla Shaman|ALL|2
+1 Hibernation's End|CSP
+2 Highland Weald|CSP
+2 Incinerate|ICE
+1 Orcish Lumberjack|ICE
+1 Resize|CSP
+2 Rimehorn Aurochs|CSP
+1 Shape of the Wiitigo|CSP
+14 Snow-Covered Forest|CSP
+8 Snow-Covered Mountain|CSP
+1 Stalking Yeti|CSP
+2 Tinder Wall|ICE
+1 Whalebone Glider|ICE
+2 Woolly Mammoths|ICE
+[sideboard]

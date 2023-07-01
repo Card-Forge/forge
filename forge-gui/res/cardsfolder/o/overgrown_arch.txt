@@ -1,0 +1,9 @@
+Name:Overgrown Arch
+ManaCost:1 G
+Types:Creature Plant Wall
+PT:0/4
+K:Defender
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+A:AB$ Learn | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:Defender\n{T}: You gain 1 life.\n{2}, Sacrifice Overgrown Arch: Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

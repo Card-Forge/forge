@@ -1,0 +1,10 @@
+[metadata]
+Code=PDP15
+Date=2014-01-01
+Name=Duels of the Planeswalkers 2015 Promos
+Type=Promo
+ScryfallCode=PDP15
+
+[cards]
+1 M Soul of Ravnica @Lucas Graciano
+2 M Soul of Zendikar @Eytan Zana

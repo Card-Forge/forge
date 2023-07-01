@@ -1,0 +1,7 @@
+Name:Mage-Ring Bully
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:2/2
+K:Prowess
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nMage-Ring Bully attacks each combat if able.

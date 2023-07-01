@@ -1,0 +1,23 @@
+[quest]
+id=ELD Challenge: Final Challenge
+OpponentName=The Final Challenge
+AILife=20
+Repeat=true
+WinMessage=Congratulations!\n\nYou have completed the ultimate challenge in Eldraine and have proven that you are strong enough to defeat the deadliest of opponents.\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again.
+Wins=20
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=The Circle of Loyalty|The Magic Mirror|The Cauldron of Eternity|Embercleave|The Great Henge|Happily Ever After|Mirrormade|Revenge of Ravens|Fires of Invention|Trail of Crumbs|The Royal Scions
+HumanExtras=
+[metadata]
+Title=The Final Challenge
+Difficulty=hard
+Description=Your opponent starts with a whole bunch of stuff.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Final Challenge
+[Main]
+40 Plains|ELD|1
+12 Happily Ever After|ELD|1
+4 Silverflame Ritual|ELD
+4 Inquisitive Puppet|ELD

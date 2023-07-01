@@ -1,0 +1,29 @@
+[metadata]
+Title=White-Blue Skies
+Difficulty=very hard
+Description=This deck tries to win in the air.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 White-Blue Skies
+[Main]
+4 Archon of Absolution|ELD
+4 Ardenvale Tactician|ELD|1
+4 Brazen Borrower|ELD|1
+2 Castle Ardenvale|ELD|1
+4 Fae of Wishes|ELD|1
+2 Faerie Formation|ELD
+4 Faerie Guidemother|ELD|1
+2 Harmonious Archon|ELD|1
+2 Hushbringer|ELD|1
+4 Hypnotic Sprite|ELD|1
+12 Island|ELD|1
+4 Mysterious Pathlighter|ELD
+12 Plains|ELD|4
+[Sideboard]
+1 Enchanted Carriage|ELD
+1 Glass Casket|ELD|1
+1 Silverflame Ritual|ELD
+1 The Circle of Loyalty|ELD|1
+1 Turn into a Pumpkin|ELD
+1 Unexplained Vision|ELD
+1 Witching Well|ELD

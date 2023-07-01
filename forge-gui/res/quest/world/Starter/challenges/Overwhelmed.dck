@@ -1,0 +1,24 @@
+[quest]
+id=Overwhelmed
+OpponentName=The Great Army
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=duplicate card
+Ticket Reward=true
+Credit Reward=2000
+AIExtras=Swamp|Swamp|Swamp|Swamp|Swamp|Swamp
+HumanExtras=
+[metadata]
+Title=The Great Army
+Icon=Dungeon Crawling Black.jpg
+Difficulty=very hard
+Description=What do you mean by "You need soldiers to fight a war!"? I have them, right her...hey where did my men go?
+Deck Type=constructed
+Name=Overwhelmed
+[Main]
+20 Overwhelming Forces|PTK
+20 Swamp|PTK
+9 Wei Ambush Force|PTK
+9 Wei Infantry|PTK
+2 Cao Cao, Lord of Wei|PTK

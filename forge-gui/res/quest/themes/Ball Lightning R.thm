@@ -1,0 +1,34 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=11]
+Smoke
+Bedlam
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Hellspark Elemental
+Spark Elemental
+Viashino Sandscout
+[/Group]
+
+[Group MaxCnt=4 Percentage=23]
+Arc Runner
+Ball Lightning
+Hell's Thunder
+Viashino Sandstalker
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Blistering Firecat
+Blistering Firecat
+Giant Solifuge
+Viashino Cutthroat
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Ashen Monstrosity
+Flameborn Hellion
+Thundermare
+[/Group]
+
+End

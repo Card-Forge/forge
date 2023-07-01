@@ -1,0 +1,7 @@
+Name:Crabapple Cohort
+ManaCost:4 G
+Types:Creature Treefolk Warrior
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Creature.Green+Other+YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control another green creature.
+SVar:BuffedBy:Creature.Green
+Oracle:Crabapple Cohort gets +1/+1 as long as you control another green creature.

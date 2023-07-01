@@ -1,0 +1,6 @@
+Name:Darting Merfolk
+ManaCost:1 U
+Types:Creature Merfolk
+PT:1/1
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:{U}: Return Darting Merfolk to its owner's hand.

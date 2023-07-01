@@ -1,0 +1,10 @@
+Name:Evolving Door
+ManaCost:2 G
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/Creature> | Origin$ Library | Destination$ Exile | ChangeType$ Creature.numColorsEQX | ChangeTypeDesc$ creature card that's {n:X color} | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Count the colors of the sacrificed creature, then search your library for a creature card that's exactly that many colors plus one. Exile that card, then shuffle.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Amount$ All | Controller$ You | Optional$ True | SubAbility$ DBCleanup | DefinedDesc$ the exiled card | SpellDescription$ You may cast the exiled card. Activate only as a sorcery.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Sacrificed$CardNumColors/Plus.1
+DeckHas:Ability$Sacrifice
+AI:RemoveDeck:Random
+Oracle:{1}, {T}, Sacrifice a creature: Count the colors of the sacrificed creature, then search your library for a creature card that's exactly that many colors plus one. Exile that card, then shuffle. You may cast the exiled card. Activate only as a sorcery.

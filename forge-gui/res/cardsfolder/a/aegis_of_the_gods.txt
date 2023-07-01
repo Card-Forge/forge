@@ -1,0 +1,6 @@
+Name:Aegis of the Gods
+ManaCost:1 W
+Types:Enchantment Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+Oracle:You have hexproof. (You can't be the target of spells or abilities your opponents control.)

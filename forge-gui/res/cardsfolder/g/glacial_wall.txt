@@ -1,0 +1,6 @@
+Name:Glacial Wall
+ManaCost:2 U
+Types:Creature Wall
+PT:0/7
+K:Defender
+Oracle:Defender (This creature can't attack.)

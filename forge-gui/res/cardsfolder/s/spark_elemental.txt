@@ -1,0 +1,11 @@
+Name:Spark Elemental
+ManaCost:R
+Types:Creature Elemental
+PT:3/1
+K:Trample
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste (This creature can deal excess combat damage to the player or planeswalker it's attacking. This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, sacrifice Spark Elemental.

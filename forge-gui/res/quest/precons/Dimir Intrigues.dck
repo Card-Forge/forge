@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dimir Intrigues
+Description=The Dimir guild is quiet and unassuming... so it's clearly running everything from behind the scenes. The transmute mechanic is just one way they manipulate their own fates. How they pull their enemies' puppet strings is truly wicked.
+Deck Type=constructed
+Set=RAV
+Image=dimir_intrigues.jpg
+[main]
+2 Belltower Sphinx|RAV
+1 Clutch of the Undercity|RAV
+3 Consult the Necrosages|RAV
+2 Dimir Aqueduct|RAV
+1 Dimir Guildmage|RAV
+2 Dimir House Guard|RAV
+2 Dimir Infiltrator|RAV
+1 Dimir Signet|RAV
+2 Disembowel|RAV
+1 Dream Leash|RAV
+1 Duskmantle, House of Shadow|RAV
+2 Induce Paranoia|RAV
+11 Island|RAV
+2 Last Gasp|RAV
+2 Lore Broker|RAV
+3 Lurking Informant|RAV
+1 Mausoleum Turnkey|RAV
+2 Psychic Drain|RAV
+1 Ribbons of Night|RAV
+2 Sewerdreg|RAV
+10 Swamp|RAV
+1 Szadek, Lord of Secrets|RAV
+3 Vedalken Entrancer|RAV
+2 Wizened Snitches|RAV
+[sideboard]

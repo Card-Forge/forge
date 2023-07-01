@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #00
+URL:https://i.redd.it/qpxurj487xty.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Your opponent has activated Gideon of the Trials ultimate (emblem-granting) ability earlier in the game. During your opponent's last turn, they activated Gideon of the Trials's +1 ability targeting your Ayli, Eternal Pilgrim.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=21
+AILife=3
+humanhand=Stasis Snare;Angel of Invention;Sacred Cat;Declaration in Stone
+humanbattlefield=Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Ayli, Eternal Pilgrim|Id:100;Vampire Cutthroat;Indulgent Aristocrat;Sacred Cat|Set:AKH
+aibattlefield=Gideon of the Trials|Set:AKH|Counters:LOYALTY=5;Bruna, the Fading Light;Renegade Rallier;Renegade Rallier
+aiprecast=Gideon of the Trials:3;Gideon of the Trials:1->100

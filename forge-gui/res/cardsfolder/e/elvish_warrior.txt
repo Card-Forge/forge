@@ -1,0 +1,5 @@
+Name:Elvish Warrior
+ManaCost:G G
+Types:Creature Elf Warrior
+PT:2/3
+Oracle:

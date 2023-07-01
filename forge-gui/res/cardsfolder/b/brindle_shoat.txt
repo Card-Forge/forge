@@ -1,0 +1,8 @@
+Name:Brindle Shoat
+ManaCost:1 G
+Types:Creature Boar
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 3/3 green Boar creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_boar | TokenOwner$ TriggeredCardController
+SVar:SacMe:4
+Oracle:When Brindle Shoat dies, create a 3/3 green Boar creature token.

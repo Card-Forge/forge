@@ -1,0 +1,7 @@
+Name:Syndicate Trafficker
+ManaCost:1 B
+Types:Creature Aetherborn Rogue
+PT:3/1
+A:AB$ PutCounter | Cost$ 1 Sac<1/Artifact> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible
+Oracle:{1}, Sacrifice an artifact: Put a +1/+1 counter on Syndicate Trafficker. It gains indestructible until end of turn.

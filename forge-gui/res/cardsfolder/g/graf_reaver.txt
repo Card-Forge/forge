@@ -1,0 +1,11 @@
+Name:Graf Reaver
+ManaCost:1 B
+Types:Creature Zombie Warrior
+PT:3/3
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME exploits a creature, destroy target planeswalker.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+AI:RemoveDeck:Random
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Graf Reaver exploits a creature, destroy target planeswalker.\nAt the beginning of your upkeep, Graf Reaver deals 1 damage to you.

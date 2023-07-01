@@ -1,0 +1,10 @@
+Name:Pristine Skywise
+ManaCost:4 W U
+Types:Creature Dragon
+PT:6/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a noncreature spell, untap CARDNAME. It gains protection from the color of your choice until end of turn.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBProtection
+SVar:DBProtection:DB$ Protection | Defined$ Self | Gains$ Choice | Choices$ AnyColor
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying\nWhenever you cast a noncreature spell, untap Pristine Skywise. It gains protection from the color of your choice until end of turn.

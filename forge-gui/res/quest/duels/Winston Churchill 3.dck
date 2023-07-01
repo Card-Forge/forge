@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Winston Churchill 3
+Title=Winston Churchill
+Difficulty=hard
+Description=WG Defender deck with Fell the Mighty
+Icon=Winston Churchill.jpg
+Deck Type=constructed
+[main]
+4 Forest
+4 Plains
+4 Savannah
+3 Sunpetal Grove
+2 Temple Garden
+4 Windswept Heath
+4 Angelic Wall
+2 Axebane Guardian
+2 Colossus of Akros
+3 Overgrown Battlement
+4 Perimeter Captain
+4 Stalwart Shield-Bearers
+1 Traproot Kami
+3 Wall of Blossoms
+4 Wall of Omens
+3 Wall of Vines
+2 Assault Formation
+2 Spidersilk Armor
+3 Fell the Mighty
+2 Harmonize
+[sideboard]

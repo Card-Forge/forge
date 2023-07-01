@@ -1,0 +1,8 @@
+Name:Rotten Reunion
+ManaCost:B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to one target card in a graveyard | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBToken | SpellDescription$ Exile up to one target card from a graveyard.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+K:Flashback:1 B
+DeckHas:Ability$Token|Sacrifice|Graveyard & Type$Zombie
+Oracle:Exile up to one target card from a graveyard. Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)\nFlashback {1}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

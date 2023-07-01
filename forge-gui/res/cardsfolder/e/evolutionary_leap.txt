@@ -1,0 +1,6 @@
+Name:Evolutionary Leap
+ManaCost:1 G
+Types:Enchantment
+A:AB$ DigUntil | Cost$ G Sac<1/Creature> | Valid$ Card.Creature | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand | SpellDescription$ Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
+AI:RemoveDeck:All
+Oracle:{G}, Sacrifice a creature: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.

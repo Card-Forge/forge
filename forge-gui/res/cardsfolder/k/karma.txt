@@ -1,0 +1,11 @@
+Name:Karma
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of Swamps they control.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
+SVar:X:Count$Valid Swamp.ActivePlayerCtrl
+AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpps:Count$Valid Swamp.OppCtrl/LimitMax.5
+SVar:CountMe:Count$Valid Swamp.YouCtrl
+Oracle:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.

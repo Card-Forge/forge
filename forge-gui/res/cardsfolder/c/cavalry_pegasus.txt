@@ -1,0 +1,9 @@
+Name:Cavalry Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+PT:1/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, each attacking Human gains flying until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Human.attacking | KW$ Flying
+DeckHints:Type$Human
+Oracle:Flying\nWhenever Cavalry Pegasus attacks, each attacking Human gains flying until end of turn.

@@ -1,0 +1,12 @@
+Name:Umezawa's Jitte
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Equip:2
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put two charge counters on CARDNAME.
+A:AB$ Charm | Cost$ SubCounter<1/CHARGE> | Choices$ JittePump,JitteCurse,JitteLife | Defined$ You
+SVar:JittePump:DB$ Pump | Defined$ Equipped | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Equipped creature gets +2/+2 until end of turn.
+SVar:JitteCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
+SVar:JitteLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 2
+DeckHas:Ability$Counters|LifeGain
+Oracle:Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.\nRemove a charge counter from Umezawa's Jitte: Choose one —\n• Equipped creature gets +2/+2 until end of turn.\n• Target creature gets -1/-1 until end of turn.\n• You gain 2 life.\nEquip {2}

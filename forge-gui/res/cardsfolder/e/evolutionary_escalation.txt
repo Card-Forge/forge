@@ -1,0 +1,8 @@
+Name:Evolutionary Escalation
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls | CounterType$ P1P1 | CounterNum$ 3 | AILogic$ BoonCounterOnOppCreature
+DeckHas:Ability$Counters
+Oracle:At the beginning of your upkeep, put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls.

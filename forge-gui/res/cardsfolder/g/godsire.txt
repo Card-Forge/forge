@@ -1,0 +1,7 @@
+Name:Godsire
+ManaCost:4 R G G W
+Types:Creature Beast
+PT:8/8
+K:Vigilance
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ rgw_8_8_beast | TokenOwner$ You | SpellDescription$ Create an 8/8 Beast creature token that's red, green, and white.
+Oracle:Vigilance\n{T}: Create an 8/8 Beast creature token that's red, green, and white.

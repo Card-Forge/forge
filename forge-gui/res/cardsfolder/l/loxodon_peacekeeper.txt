@@ -1,0 +1,10 @@
+Name:Loxodon Peacekeeper
+ManaCost:1 W
+Types:Creature Elephant Soldier
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of your upkeep, the player with the lowest life total gains control of CARDNAME. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of CARDNAME.
+SVar:TrigGainControl:DB$ ChoosePlayer | Defined$ You | Choices$ Player.withLowestLife | ChoiceTitle$ Choose an player with lowest life total | AILogic$ Pump | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, the player with the lowest life total gains control of Loxodon Peacekeeper. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of Loxodon Peacekeeper.

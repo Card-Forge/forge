@@ -1,0 +1,11 @@
+Name:Incisor Glider
+ManaCost:1 W
+Types:Artifact Creature Phyrexian Construct
+PT:1/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ Corrupted — Whenever CARDNAME attacks, if an opponent has three or more poison counters, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:HasAttackEffect:TRUE
+DeckHints:Keyword$Infect|Toxic & Ability$Proliferate
+Oracle:Flying\nCorrupted — Whenever Incisor Glider attacks, if an opponent has three or more poison counters, creatures you control get +1/+1 until end of turn.

@@ -1,0 +1,10 @@
+Name:Arctic Nishoba
+ManaCost:5 G
+Types:Creature Cat Warrior
+PT:6/6
+K:Trample
+K:Cumulative upkeep:GW
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ When CARDNAME dies, you gain 2 life for each age counter on it.
+SVar:TrigGain:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ X
+SVar:X:TriggeredCard$CardCounters.AGE/Times.2
+Oracle:Trample\nCumulative upkeep {G} or {W} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Arctic Nishoba dies, you gain 2 life for each age counter on it.

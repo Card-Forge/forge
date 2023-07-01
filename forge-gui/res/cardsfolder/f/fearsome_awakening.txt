@@ -1,0 +1,8 @@
+Name:Fearsome Awakening
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. If it's a Dragon, put two +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Dragon | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Dragon & Ability$Graveyard
+Oracle:Return target creature card from your graveyard to the battlefield. If it's a Dragon, put two +1/+1 counters on it.

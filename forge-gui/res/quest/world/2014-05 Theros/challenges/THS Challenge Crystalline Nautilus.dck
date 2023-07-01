@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Crystalline Nautilus
+OpponentName=Naughty Christie
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Crystalline Nautilus
+Title=Naughty Christie
+Difficulty=easy
+Description=Naughty Christie sat on a wall.\nNaughty Christie had a great fall.\nAll the king's horses and all the king's men couldn't put Christie together again.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+30 Crystalline Nautilus|JOU
+30 Island|THS|2

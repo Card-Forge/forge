@@ -1,0 +1,11 @@
+Name:Roon of the Hidden Realm
+ManaCost:2 G W U
+Types:Legendary Creature Rhino Soldier
+PT:4/4
+K:Vigilance
+K:Trample
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.Other | Mandatory$ True | TgtPrompt$ Select another target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled creature to the battlefield. | SubAbility$ DBCleanup
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Vigilance, trample\n{2}, {T}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.

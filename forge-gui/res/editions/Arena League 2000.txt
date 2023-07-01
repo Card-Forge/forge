@@ -1,0 +1,19 @@
+[metadata]
+Code=PAL00
+Date=2000-01-01
+Name=Arena League 2000
+Type=Promo
+ScryfallCode=PAL00
+
+[cards]
+2 R Duress @Lawrence Snelly
+3 R Uktabi Orangutan @Una Fricker
+4 R Chill @Greg Simanson
+5 R Pillage @Richard Kane Ferguson
+6 R Enlightened Tutor @Dan Frazier
+7 R Stupor @Mike Kimble
+8 R Plains @Edward P. Beard, Jr.
+9 R Island @Tony Szczudlo
+10 R Swamp @Rob Alexander
+11 R Mountain @Rob Alexander
+12 R Forest @Rob Alexander

@@ -1,0 +1,13 @@
+Name:Armored Skyhunter
+ManaCost:3 W
+Types:Creature Cat Knight
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top six cards of your library. You may put an Aura or Equipment card from among them onto the battlefield. If an Equipment is put onto the battlefield this way, you may attach it to a creature you control. Put the rest of those cards on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Aura,Equipment | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control to attach the Equipment to | Amount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBAttachEquip
+SVar:DBAttachEquip:DB$ Attach | Object$ Remembered | Defined$ ChosenCard | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Aura|Equipment
+Oracle:Flying\nWhenever Armored Skyhunter attacks, look at the top six cards of your library. You may put an Aura or Equipment card from among them onto the battlefield. If an Equipment is put onto the battlefield this way, you may attach it to a creature you control. Put the rest of those cards on the bottom of your library in a random order.

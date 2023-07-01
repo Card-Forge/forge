@@ -1,0 +1,8 @@
+Name:Maelstrom Archangel
+ManaCost:W U B R G
+Types:Creature Angel
+PT:5/5
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPlay | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast a spell from your hand without paying its mana cost.
+SVar:TrigPlay:DB$ Play | Valid$ Card.YouCtrl | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
+Oracle:Flying\nWhenever Maelstrom Archangel deals combat damage to a player, you may cast a spell from your hand without paying its mana cost.

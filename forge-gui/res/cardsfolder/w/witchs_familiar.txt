@@ -1,0 +1,5 @@
+Name:Witch's Familiar
+ManaCost:2 B
+Types:Creature Frog
+PT:2/3
+Oracle:

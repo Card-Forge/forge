@@ -1,0 +1,13 @@
+Name:Braids, Arisen Nightmare
+ManaCost:1 B B
+Types:Legendary Creature Nightmare
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card.
+SVar:TrigSac:DB$ Sacrifice | Optional$ True | SacValid$ Artifact,Creature,Enchantment,Land,Planeswalker | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | ConditionDefined$ Remembered | ConditionPresent$ Card | RepeatSubAbility$ DBMaySac | RepeatPlayers$ Player.Opponent | SubAbility$ DBCleanup
+SVar:DBMaySac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Permanent.sharesCardTypeWith RememberedCard | RememberSacrificed$ True | Optional$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Defined$ Player.IsRemembered | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Defined$ You | NumCards$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
+Oracle:At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card.

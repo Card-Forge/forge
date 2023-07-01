@@ -1,0 +1,7 @@
+Name:Involuntary Cooldown
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Tap | ValidTgts$ Artifact,Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target artifacts and/or creatures | SpellDescription$ Tap up to two target artifacts and/or creatures. Put two stun counters on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 2
+DeckHas:Ability$Counters
+Oracle:Tap up to two target artifacts and/or creatures. Put two stun counters on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)

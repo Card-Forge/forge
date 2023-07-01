@@ -1,0 +1,10 @@
+Name:Wall of Souls
+ManaCost:1 B
+Types:Creature Wall
+PT:0/4
+K:Defender
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt combat damage, it deals that much damage to target opponent or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Souls is dealt combat damage, it deals that much damage to target opponent or planeswalker.

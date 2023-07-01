@@ -1,0 +1,7 @@
+Name:Vryn Wingmare
+ManaCost:2 W
+Types:Creature Pegasus
+PT:2/1
+K:Flying
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
+Oracle:Flying\nNoncreature spells cost {1} more to cast.

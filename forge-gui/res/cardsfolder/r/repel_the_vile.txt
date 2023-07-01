@@ -1,0 +1,7 @@
+Name:Repel the Vile
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | Choices$ DBExileCreature,DBExileEnchantment | Defined$ You
+SVar:DBExileCreature:DB$ ChangeZone | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Choose target creature with power 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 4 or greater.
+SVar:DBExileEnchantment:DB$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Choose target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
+Oracle:Choose one —\n• Exile target creature with power 4 or greater.\n• Exile target enchantment.

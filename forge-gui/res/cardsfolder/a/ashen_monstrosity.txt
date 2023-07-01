@@ -1,0 +1,7 @@
+Name:Ashen Monstrosity
+ManaCost:5 R R
+Types:Creature Spirit
+PT:7/4
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Haste\nAshen Monstrosity attacks each combat if able.

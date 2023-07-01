@@ -1,0 +1,5 @@
+Name:Frenzied Raptor
+ManaCost:2 R
+Types:Creature Dinosaur
+PT:4/2
+Oracle:

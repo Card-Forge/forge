@@ -1,0 +1,20 @@
+[metadata]
+Code=F11
+Date=2011-01-01
+Name=Friday Night Magic 2011
+Type=Promo
+ScryfallCode=F11
+
+[cards]
+1 R Everflowing Chalice @Charles Urbach
+2 R Spellstutter Sprite @Christopher Moeller
+3 R Wall of Omens @Howard Lyon
+4 R Artisan of Kozilek @Nils Hamm
+5 R Squadron Hawk @Martina Pilcerova
+6 R Rhox War Monk @Allen Williams
+7 R Jace's Ingenuity @Steve Argyle
+8 R Cultivate @John Avon
+9 R Teetering Peaks @Kekai Kotaki
+10 R Contagion Clasp @Franz Vohwinkel
+11 R Go for the Throat @David Rapoza
+12 R Savage Lands @John Avon

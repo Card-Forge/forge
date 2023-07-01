@@ -1,0 +1,6 @@
+Name:Enchanted Being
+ManaCost:1 W W
+Types:Creature Human
+PT:2/2
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.Self | ValidSource$ Creature.enchanted | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by enchanted creatures.
+Oracle:Prevent all combat damage that would be dealt to Enchanted Being by enchanted creatures.

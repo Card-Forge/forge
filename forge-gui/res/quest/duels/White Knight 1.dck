@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=White Knight 1
+Title=White Knight
+Difficulty=easy
+Description=Mono W Knights deck
+Icon=White Knight.jpg
+Deck Type=constructed
+[main]
+4 Saltblast
+24 Plains|M10
+4 Caravan Escort
+3 Skyhunter Prowler
+3 Veteran Cavalier
+3 Kabira Vindicator
+4 Lionheart Maverick
+4 Youthful Knight
+4 Oust
+2 Knight of Cliffhaven
+2 Knight Errant
+3 Benalish Cavalry
+[sideboard]

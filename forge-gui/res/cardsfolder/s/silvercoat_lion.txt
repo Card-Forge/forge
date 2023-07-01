@@ -1,0 +1,5 @@
+Name:Silvercoat Lion
+ManaCost:1 W
+Types:Creature Cat
+PT:2/2
+Oracle:

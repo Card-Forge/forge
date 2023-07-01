@@ -1,0 +1,6 @@
+Name:Memory Theft
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | SubAbility$ DBChangeZone | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. You may put a card that has an Adventure that player owns from exile into that player's graveyard.
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Card.AdventureCard+TargetedPlayerCtrl | Origin$ Exile | Destination$ Graveyard | Hidden$ True
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. You may put a card that has an Adventure that player owns from exile into that player's graveyard.

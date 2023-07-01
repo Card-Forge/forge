@@ -1,0 +1,9 @@
+Name:Narfi, Betrayer King
+ManaCost:3 U B
+Types:Legendary Snow Creature Zombie Wizard
+PT:4/3
+S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl,Creature.Snow+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Snow and Zombie creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+A:AB$ ChangeZone | Cost$ S S S | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped
+DeckHints:Type$Snow|Zombie
+Oracle:Other snow and Zombie creatures you control get +1/+1.\n{S}{S}{S}: Return Narfi, Betrayer King from your graveyard to the battlefield tapped. ({S} can be paid with one mana from a snow source.)

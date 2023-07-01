@@ -1,0 +1,7 @@
+Name:Prismite
+ManaCost:2
+Types:Artifact Creature Golem
+PT:2/1
+A:AB$ Mana | Cost$ 2 | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:{2}: Add one mana of any color.

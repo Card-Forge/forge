@@ -1,0 +1,7 @@
+Name:Phyrexian Juggernaut
+ManaCost:6
+Types:Artifact Creature Phyrexian Juggernaut
+PT:5/5
+K:Infect
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nPhyrexian Juggernaut attacks each combat if able.

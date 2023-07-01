@@ -1,0 +1,23 @@
+Name:Rick, Steadfast Leader
+ManaCost:2 W W
+Types:Legendary Creature Human Soldier
+PT:3/4
+K:ETBReplacement:Other:ChooseAbilities
+SVar:ChooseAbilities:DB$ GenericChoice | Choices$ FSVig,VigLif,FSLif | SpellDescription$ As NICKNAME enters the battlefield, choose two abilities from among first strike, vigilance, and lifelink.
+SVar:FSVig:DB$ StoreSVar | SVar$ VarFSVig | Type$ Number | Expression$ 1 | SpellDescription$ First strike, vigilance
+SVar:VigLif:DB$ StoreSVar | SVar$ VarVigLif | Type$ Number | Expression$ 1 | SpellDescription$ Vigilance, lifelink
+SVar:FSLif:DB$ StoreSVar | SVar$ VarFSLif | Type$ Number | Expression$ 1 | SpellDescription$ First strike, lifelink
+S:Mode$ Continuous | Affected$ Human.YouCtrl | AddKeyword$ First Strike & Vigilance | CheckSVar$ VarFSVig | SVarCompare$ EQ1 | Description$ Humans you control have each of the chosen abilities.
+S:Mode$ Continuous | Affected$ Human.YouCtrl | AddKeyword$ Vigilance & Lifelink | CheckSVar$ VarVigLif | SVarCompare$ EQ1 | Secondary$ True
+S:Mode$ Continuous | Affected$ Human.YouCtrl | AddKeyword$ First Strike & Lifelink | CheckSVar$ VarFSLif | SVarCompare$ EQ1 | Secondary$ True
+S:Mode$ Continuous | Affected$ Human.YouCtrl | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Human.YouCtrl | PresentCompare$ GE4 | Description$ As long as you control four or more Humans, Humans you control get +2/+2.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ ResetSVars | Static$ True
+SVar:ResetSVars:DB$ StoreSVar | SVar$ VarFSVig | Type$ Number | Expression$ 0 | SubAbility$ ResetSVars2
+SVar:ResetSVars2:DB$ StoreSVar | SVar$ VarVigLif | Type$ Number | Expression$ 0 | SubAbility$ ResetSVars3
+SVar:ResetSVars3:DB$ StoreSVar | SVar$ VarFSLif | Type$ Number | Expression$ 0
+SVar:VarFSVig:Number$0
+SVar:VarVigLif:Number$0
+SVar:VarFSLif:Number$0
+SVar:PlayMain1:TRUE
+DeckHints:Type$Human
+Oracle:As Rick enters the battlefield, choose two abilities from among first strike, vigilance, and lifelink.\nHumans you control have each of the chosen abilities.\nAs long as you control four or more Humans, Humans you control get +2/+2.

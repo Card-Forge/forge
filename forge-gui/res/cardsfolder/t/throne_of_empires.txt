@@ -1,0 +1,11 @@
+Name:Throne of Empires
+ManaCost:4
+Types:Artifact
+A:AB$ Token | Cost$ 1 T | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires.
+SVar:X:Count$Compare AllM12Empires GT0.5.1
+SVar:AllM12Empires:SVar$Z/Times.Y
+SVar:Z:Count$Valid Artifact.namedCrown of Empires+YouCtrl
+SVar:Y:Count$Valid Artifact.namedScepter of Empires+YouCtrl
+AI:RemoveDeck:Random
+DeckHints:Name$Scepter of Empires|Crown of Empires
+Oracle:{1}, {T}: Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires.

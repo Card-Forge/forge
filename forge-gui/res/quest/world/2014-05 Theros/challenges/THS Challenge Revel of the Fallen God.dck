@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Revel of the Fallen God
+OpponentName=The Revelers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Temple of Abandon|Temple of Abandon|Temple of Abandon
+HumanExtras=
+[metadata]
+Name=THS Challenge: Revel of the Fallen God
+Title=The Revel of the Fallen God
+Difficulty=hard
+Description="Xenagos has fallen, and the world grows dark without him. What can ever fill that darkness but our rage?"\n-Guruthes, disciple of Xenagos
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+30 Revel of the Fallen God|JOU
+30 Forest|THS|3

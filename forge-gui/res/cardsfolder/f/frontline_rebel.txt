@@ -1,0 +1,6 @@
+Name:Frontline Rebel
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:3/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Frontline Rebel attacks each combat if able.

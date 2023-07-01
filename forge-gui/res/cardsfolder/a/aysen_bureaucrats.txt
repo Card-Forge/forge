@@ -1,0 +1,6 @@
+Name:Aysen Bureaucrats
+ManaCost:1 W
+Types:Creature Human Advisor
+PT:1/1
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ Tap target creature with power 2 or less.
+Oracle:{T}: Tap target creature with power 2 or less.

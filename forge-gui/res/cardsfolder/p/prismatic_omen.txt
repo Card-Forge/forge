@@ -1,0 +1,7 @@
+Name:Prismatic Omen
+ManaCost:1 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ AllBasicLandType | Description$ Lands you control are every basic land type in addition to their other types.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Lands you control are every basic land type in addition to their other types.

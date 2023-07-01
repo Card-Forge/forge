@@ -1,0 +1,6 @@
+Name:Smelt-Ward Ignus
+ManaCost:1 R
+Types:Creature Elemental
+PT:2/1
+A:AB$ GainControl | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature.powerLE3 | LoseControl$ EOT | TgtPrompt$ Select target creature with power 3 or less | Untap$ True | AddKWs$ Haste | SorcerySpeed$ True | SpellDescription$ Gain control of target creature with power 3 or less until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery.
+Oracle:{2}{R}, Sacrifice Smelt-Ward Ignus: Gain control of target creature with power 3 or less until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery.

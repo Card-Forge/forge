@@ -1,0 +1,6 @@
+Name:Voltaic Construct
+ManaCost:4
+Types:Artifact Creature Golem Construct
+PT:2/2
+A:AB$ Untap | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Untap target artifact creature.
+Oracle:{2}: Untap target artifact creature.

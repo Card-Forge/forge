@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Cow 3
+Title=Cow
+Difficulty=hard
+Description=BR Minotaur deck with Ragemonger, Rageblood Shaman and Kragma Warcaller
+Icon=Cow.jpg
+Deck Type=constructed
+[main]
+4 Badlands
+4 Blackcleave Cliffs
+4 Blood Crypt
+4 Bloodstained Mire
+3 Dragonskull Summit
+2 Mountain|THS
+1 Swamp|THS
+1 Adaptive Automaton
+1 Anaba Spirit Crafter
+4 Deathbellow Raider
+4 Felhide Brawler
+3 Felhide Petrifier
+2 Gorehorn Minotaurs
+4 Kragma Warcaller
+1 Minotaur Explorer
+1 Minotaur Skullcleaver
+4 Rageblood Shaman
+4 Ragemonger
+3 Taurean Mauler
+1 Cover of Darkness
+1 Flurry of Horns
+1 Night's Whisper
+2 Lightning Bolt
+1 Terminate
+[sideboard]

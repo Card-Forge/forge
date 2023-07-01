@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=MIR 3 PT Paris 1997: Voodoo by Mark Justice
+Title=Voodoo
+Difficulty=hard
+Description=Played by Mark Justice at Pro Tour: Paris 1997.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Coercion|VIS
+4 Fallen Askari|VIS
+4 Fireblast|VIS
+1 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+3 Kaervek's Torch|MIR
+10 Mountain|MIR|2
+1 Necromancy|VIS
+2 Quicksand|VIS
+4 Rocky Tar Pit|MIR
+3 Shadow Guildmage|MIR
+1 Snake Basket|VIS
+1 Stupor|MIR
+8 Swamp|MIR|1
+4 Talruum Minotaur|MIR
+1 Undiscovered Paradise|VIS
+4 Viashino Sandstalker|VIS
+[Sideboard]
+1 Elkin Lair|VIS
+3 Funeral Charm|VIS
+1 Necromancy|VIS
+4 Nekrataal|VIS
+3 Stupor|MIR
+3 Torrent of Lava|MIR

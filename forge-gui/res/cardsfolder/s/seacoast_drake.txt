@@ -1,0 +1,6 @@
+Name:Seacoast Drake
+ManaCost:1 U
+Types:Creature Drake
+PT:1/3
+K:Flying
+Oracle:Flying

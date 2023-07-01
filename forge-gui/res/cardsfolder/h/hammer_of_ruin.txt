@@ -1,0 +1,8 @@
+Name:Hammer of Ruin
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Equipment.ControlledBy TriggeredTarget | TgtPrompt$ Select target Equipment damaged player controls
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.\nEquip {2}

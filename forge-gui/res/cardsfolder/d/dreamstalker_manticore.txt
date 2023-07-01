@@ -1,0 +1,7 @@
+Name:Dreamstalker Manticore
+ManaCost:2 R
+Types:Enchantment Creature Manticore
+PT:4/2
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigDamage | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, CARDNAME deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Whenever you cast your first spell during each opponent's turn, Dreamstalker Manticore deals 1 damage to any target.

@@ -1,0 +1,8 @@
+Name:Basking Rootwalla
+ManaCost:G
+Types:Creature Lizard
+PT:1/1
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+K:Madness:0
+SVar:DiscardMe:5
+Oracle:{1}{G}: Basking Rootwalla gets +2/+2 until end of turn. Activate only once each turn.\nMadness {0} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

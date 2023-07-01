@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Exxon Valdez
+Title=Exxon Valdez
+Difficulty=medium
+Description=The Phyrexian infection has spread, and will keep on spreading, and spreading, and spreading...
+Icon=Exxon.jpg
+Deck Type=constructed
+[Main]
+2 Banishment Decree|MBS
+2 Blight Mamba|SOM
+1 Blightwidow|MBS
+2 Carrion Call|SOM
+2 Choking Fumes|MBS
+1 Core Prowler|MBS
+1 Corpse Cur|SOM
+1 Cystbearer|SOM
+1 Decimator Web|MBS
+14 Forest|SOM|1
+2 Lost Leonin|NPH
+2 Phyrexian Digester|MBS
+1 Phyrexian Hydra|MBS
+2 Phyrexian Juggernaut|MBS
+1 Pistus Strike|MBS
+2 Plague Myr|MBS
+11 Plains|SOM|1
+2 Priests of Norn|MBS
+1 Putrefax|SOM
+1 Rot Wolf|MBS
+2 Shriek Raptor|NPH
+2 Tine Shrike|MBS
+1 Trigon of Infestation|SOM
+2 Unnatural Predation|MBS
+1 Viridian Corrupter|MBS
+[sideboard]

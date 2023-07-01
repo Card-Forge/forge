@@ -1,0 +1,9 @@
+Name:Voice of Resurgence
+ManaCost:G W
+Types:Creature Elemental
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts a spell during your turn, or whenever CARDNAME dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever an opponent casts a spell during your turn, or whenever CARDNAME dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_x_x_elemental_total_creatures | TokenOwner$ You
+SVar:SacMe:1
+Oracle:Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."

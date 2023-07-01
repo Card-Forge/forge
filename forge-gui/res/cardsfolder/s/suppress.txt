@@ -1,0 +1,9 @@
+Name:Suppress
+ManaCost:2 B
+Types:Sorcery
+A:SP$ ChangeZoneAll | ValidTgts$ Player | ChangeType$ Card | Origin$ Hand | Destination$ Exile | Hidden$ True | ExileFaceDown$ True | RememberChanged$ True | Reveal$ False | SubAbility$ DelTrig | StackDescription$ {p:Targeted} exiles all cards from their hand face down. | SpellDescription$ Target player exiles all cards from their hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to their hand.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | DelayedTriggerDefinedPlayer$ Targeted | ThisTurn$ True | RememberObjects$ Remembered | Execute$ TrigReturn | Secondary$ True | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the end step of that player's next turn, that player returns those cards to their hand. | StackDescription$ At the beginning of the end step of that player's next turn, that player returns those cards to their hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Target player exiles all cards from their hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to their hand.

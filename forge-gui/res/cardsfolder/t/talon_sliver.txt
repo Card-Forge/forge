@@ -1,0 +1,7 @@
+Name:Talon Sliver
+ManaCost:1 W
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ First Strike | Description$ All Sliver creatures have first strike.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have first strike.

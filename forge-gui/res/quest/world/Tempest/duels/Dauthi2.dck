@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Dauthi Warlord
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Dauthi deck
+Deck Type=constructed
+Name=Dauthi2
+[Main]
+2 Coat of Arms|EXO
+3 Death Stroke|STH
+2 Extinction|TMP
+3 Dark Banishing|TMP
+2 Dauthi Cutthroat|EXO
+4 Dauthi Horror|TMP
+4 Dauthi Marauder|TMP
+4 Dauthi Mercenary|TMP
+4 Dauthi Slayer|TMP
+4 Dauthi Warlord|EXO
+2 Diabolic Edict|TMP
+1 Swamp|TMP|1
+6 Swamp|TMP|2
+3 Swamp|TMP|3
+7 Swamp|TMP|4
+1 Volrath's Stronghold|STH
+4 Wall of Souls|STH
+4 Wasteland|TMP

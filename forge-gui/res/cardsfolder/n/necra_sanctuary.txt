@@ -1,0 +1,11 @@
+Name:Necra Sanctuary
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Green,Permanent.YouCtrl+White | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ L
+SVar:Y:Count$Valid Permanent.Green+YouCtrl/LimitMax.1
+SVar:Z:Count$Valid Permanent.White+YouCtrl/LimitMax.1
+SVar:X:SVar$Y/Plus.Z
+SVar:L:Count$Compare X EQ2.3.1
+DeckNeeds:Color$White|Green
+Oracle:At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.

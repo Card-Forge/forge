@@ -1,0 +1,4 @@
+Name:Snow-Covered Island
+ManaCost:no cost
+Types:Basic Snow Land Island
+Oracle:({T}: Add {U}.)

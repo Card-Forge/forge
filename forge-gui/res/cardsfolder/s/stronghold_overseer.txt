@@ -1,0 +1,9 @@
+Name:Stronghold Overseer
+ManaCost:3 B B B
+Types:Creature Demon
+PT:5/5
+K:Flying
+K:Shadow
+A:AB$ PumpAll | Cost$ B B | ValidCards$ Creature.withShadow | NumAtt$ +1 | SubAbility$ DBPumpAll | SpellDescription$ Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.withoutShadow | NumAtt$ -1
+Oracle:Flying\nShadow (This creature can block or be blocked by only creatures with shadow.)\n{B}{B}: Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.

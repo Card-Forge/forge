@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=THS
+Image=anthousas_army.jpg
+Name=Anthousa's Army
+Description=Come quickly, hero, and gather an army. Cast an arsenal of powerful Auras and spells to pave a path to victory for your numerous warriors!
+[Main]
+1 Anthousa, Setessan Hero+|THS
+1 Artisan's Sorrow|THS
+2 Battlewise Valor|THS
+1 Bow of Nylea|THS
+2 Centaur Battlemaster|THS
+2 Chronicler of Heroes|THS
+2 Dauntless Onslaught|THS
+2 Deadly Recluse|M14
+2 Elvish Mystic|M14
+1 Favored Hoplite|THS
+13 Forest|THS
+2 Giant Growth|M14
+2 Pacifism|M14
+1 Phalanx Leader|THS
+1 Pheres-Band Centaurs|THS
+12 Plains|THS
+2 Rumbling Baloth|M14
+1 Setessan Battle Priest|THS
+1 Setessan Griffin|THS
+2 Staunch-Hearted Warrior|THS
+2 Time to Feed|THS
+1 Vanquish the Foul|THS
+2 Warriors' Lesson|THS
+2 Wingsteed Rider|THS

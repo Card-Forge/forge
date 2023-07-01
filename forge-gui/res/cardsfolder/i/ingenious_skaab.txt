@@ -1,0 +1,7 @@
+Name:Ingenious Skaab
+ManaCost:2 U
+Types:Creature Zombie Horror
+PT:2/3
+K:Prowess
+A:AB$ Pump | Cost$ U | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{U}: Ingenious Skaab gets +1/-1 until end of turn.

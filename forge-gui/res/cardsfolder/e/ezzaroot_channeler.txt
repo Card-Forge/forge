@@ -1,0 +1,10 @@
+Name:Ezzaroot Channeler
+ManaCost:5 G
+Types:Creature Treefolk Druid
+PT:4/6
+K:Reach
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ X | Description$ Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn.
+A:AB$ GainLife | Cost$ T | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+Oracle:Reach\nCreature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn.\n{T}: You gain 2 life.

@@ -1,0 +1,11 @@
+Name:No Quarter
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ LessPowerThanAttacker | TriggerZones$ Battlefield | Execute$ DestroyBlocker | TriggerDescription$ Whenever a creature becomes blocked by a creature with lesser power, destroy the blocking creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ LessPowerThanBlocker | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ DestroyAttacker | TriggerDescription$ Whenever a creature blocks a creature with lesser power, destroy the attacking creature.
+SVar:DestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
+SVar:DestroyAttacker:DB$ Destroy | Defined$ TriggeredAttackerLKICopy
+SVar:AttackerPower:Count$ TriggeredAttacker.Power
+SVar:BlockerPower:Count$ TriggeredBlocker.Power
+AI:RemoveDeck:Random
+Oracle:Whenever a creature becomes blocked by a creature with lesser power, destroy the blocking creature.\nWhenever a creature blocks a creature with lesser power, destroy the attacking creature.

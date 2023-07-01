@@ -1,0 +1,5 @@
+Name:Vault of Whispers
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:(Vault of Whispers isn't a spell.)\n{T}: Add {B}.

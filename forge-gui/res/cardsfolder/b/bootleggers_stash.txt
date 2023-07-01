@@ -1,0 +1,7 @@
+Name:Bootleggers' Stash
+ManaCost:5 G
+Types:Artifact
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ CreateToken | Description$ Lands you control have "{T}: Create a Treasure token."
+SVar:CreateToken:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Lands you control have "{T}: Create a Treasure token."

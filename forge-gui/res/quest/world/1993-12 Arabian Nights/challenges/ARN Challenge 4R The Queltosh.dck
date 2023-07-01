@@ -1,0 +1,18 @@
+[quest]
+id=ARN Challenge: 4R The Queltosh
+OpponentName=The Queltosh
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=Desert|Desert|Desert|Desert|Desert|Desert|Desert|Desert|Aladdin's Ring
+[metadata]
+Name=ARN Challenge: 4R The Queltosh
+Title=The Queltosh
+Difficulty=medium
+Description=This red djinn is laying waste to the city of Cairo with a powerful magic weapon.  Can you stop the creature?
+Icon=Queltosh.jpg
+Deck Type=constructed
+[main]
+60 Desert Nomads|ARN

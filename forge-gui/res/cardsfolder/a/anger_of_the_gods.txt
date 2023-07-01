@@ -1,0 +1,6 @@
+Name:Anger of the Gods
+ManaCost:1 R R
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 3 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 3 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Anger of the Gods deals 3 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.

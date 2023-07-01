@@ -1,0 +1,9 @@
+Name:Crucible of the Spirit Dragon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 1 T | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ Combo Any | Amount$ X | RestrictValid$ Spell.Dragon,Activated.Dragon+inZoneBattlefield | CostDesc$ {T}, Remove X storage counters from CARDNAME: | SpellDescription$ Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Put a storage counter on Crucible of the Spirit Dragon.\n{T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons.

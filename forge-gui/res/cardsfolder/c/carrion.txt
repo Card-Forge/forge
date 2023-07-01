@@ -1,0 +1,7 @@
+Name:Carrion
+ManaCost:1 B B
+Types:Instant
+A:SP$ Token | Cost$ 1 B B Sac<1/Creature> | TokenScript$ b_0_1_insect | TokenOwner$ You | TokenAmount$ X | SpellDescription$ Create X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nCreate X 0/1 black Insect creature tokens, where X is the sacrificed creature's power.

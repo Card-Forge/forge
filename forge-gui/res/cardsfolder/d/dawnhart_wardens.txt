@@ -1,0 +1,9 @@
+Name:Dawnhart Wardens
+ManaCost:1 G W
+Types:Creature Human Warlock
+PT:3/3
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPumpAll | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Vigilance\nCoven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn.

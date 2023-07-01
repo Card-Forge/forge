@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Stormfist Crusader
+OpponentName=The Crusaders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Steelclaw Lance
+HumanExtras=
+[metadata]
+Title=Stormfist Crusader
+Difficulty=medium
+Description="As she reached the pinnacle, lightning flashed and her eyes blazed with newfound power."\n-Legend of the Gilded Knights
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Stormfist Crusader
+[Main]
+30 Stormfist Crusader|ELD|2
+30 Tournament Grounds|ELD

@@ -1,0 +1,6 @@
+Name:Jagwasp Swarm
+ManaCost:3 B
+Types:Creature Insect
+PT:3/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,8 @@
+Name:Maze Sentinel
+ManaCost:5 W
+Types:Creature Elemental
+PT:3/6
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Vigilance | Description$ Multicolored creatures you control have vigilance.
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nMulticolored creatures you control have vigilance.

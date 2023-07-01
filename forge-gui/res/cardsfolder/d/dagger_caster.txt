@@ -1,0 +1,8 @@
+Name:Dagger Caster
+ManaCost:3 R
+Types:Creature Viashino Rogue
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each opponent and 1 damage to each creature your opponents control.
+SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Player.Opponent | SubAbility$ DBDamageCreature
+SVar:DBDamageCreature:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.OppCtrl
+Oracle:When Dagger Caster enters the battlefield, it deals 1 damage to each opponent and 1 damage to each creature your opponents control.

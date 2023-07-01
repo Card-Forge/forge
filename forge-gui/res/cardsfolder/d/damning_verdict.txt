@@ -1,0 +1,6 @@
+Name:Damning Verdict
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.!HasCounters | SpellDescription$ Destroy all creatures with no counters on them.
+DeckHints:Type$Counters
+Oracle:Destroy all creatures with no counters on them.

@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Shrieking Drake
+OpponentName=The Shrieking Drakes
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Phyrexian Walker
+[metadata]
+Name=MIR Challenge: Shrieking Drake
+Title=The Shrieking Drakes
+Difficulty=medium
+Description="Kaervek believes the drakes' cries herald his victory; in truth, they mourn aloud for his impending demise." -Teferi
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+45 Shrieking Drake|VIS
+15 Island|MIR|2

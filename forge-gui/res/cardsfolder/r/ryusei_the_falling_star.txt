@@ -1,0 +1,8 @@
+Name:Ryusei, the Falling Star
+ManaCost:5 R
+Types:Legendary Creature Dragon Spirit
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals 5 damage to each creature without flying.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 5 | ValidDescription$ each creature without flying.
+Oracle:Flying\nWhen Ryusei, the Falling Star dies, it deals 5 damage to each creature without flying.

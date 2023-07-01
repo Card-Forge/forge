@@ -1,0 +1,13 @@
+Name:Tatsunari, Toad Rider
+ManaCost:2 B
+Types:Legendary Creature Human Ninja
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Creature.YouCtrl+namedKeimi | PresentCompare$ EQ0 | TriggerDescription$ Whenever you cast an enchantment spell, if you don't control a creature named Keimi, create Keimi, a legendary 3/3 black and green Frog creature token with "Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life."
+SVar:TrigToken:DB$ Token | TokenScript$ keimi
+A:AB$ Effect | Cost$ 1 GU | ValidTgts$ Frog.YouCtrl | TgtPrompt$ Select target Frog you control | RememberObjects$ Targeted | StaticAbilities$ STCantBlockBy,STCantBlockByFrog | StackDescription$ CARDNAME and {c:Targeted} can't be blocked this turn except by creatures with flying or reach. | SpellDescription$ CARDNAME and target Frog you control can't be blocked this turn except by creatures with flying or reach.
+SVar:STCantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutFlying+withoutReach | Description$ EFFECTSOURCE and target Frog you control can't be blocked this turn except by creatures with flying or reach.
+SVar:STCantBlockByFrog:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True
+DeckNeeds:Type$Enchantment
+DeckHints:Type$Frog
+DeckHas:Ability$Token|LifeGain & Type$Frog
+Oracle:Whenever you cast an enchantment spell, if you don't control a creature named Keimi, create Keimi, a legendary 3/3 black and green Frog creature token with "Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life."\n{1}{G/U}: Tatsunari, Toad Rider and target Frog you control can't be blocked this turn except by creatures with flying or reach.

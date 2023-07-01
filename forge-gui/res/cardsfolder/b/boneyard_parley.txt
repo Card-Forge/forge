@@ -1,0 +1,8 @@
+Name:Boneyard Parley
+ManaCost:5 B B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 5 | TgtPrompt$ Select up to five target cards in graveyards | ValidTgts$ Card.Creature | SubAbility$ DBTwoPiles | AITgtOwnCards$ True | AIMinTgts$ 3 | SpellDescription$ Exile up to five target creature cards from graveyards. An opponent separates those cards into two piles. Put all cards from the pile of your choice onto the battlefield under your control and the rest into their owners' graveyards.
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Targeted | Separator$ Opponent | ChosenPile$ DBBattlefield | UnchosenPile$ DBGrave
+SVar:DBBattlefield:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
+Oracle:Exile up to five target creature cards from graveyards. An opponent separates those cards into two piles. Put all cards from the pile of your choice onto the battlefield under your control and the rest into their owners' graveyards.

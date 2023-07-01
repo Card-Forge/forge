@@ -1,0 +1,10 @@
+Name:Defiler of Instinct
+ManaCost:2 R R
+Types:Creature Phyrexian Kavu
+PT:4/4
+K:First Strike
+S:Mode$ OptionalCost | ValidCard$ Permanent.Red | ValidSA$ Spell | Activator$ You | Cost$ PayLife<2> | ReduceColor$ R | Description$ As an additional cost to cast red permanent spells, you may pay 2 life. Those spells cost {R} less to cast if you paid life this way. This effect reduces only the amount of red mana you pay.
+T:Mode$ SpellCast | ValidCard$ Permanent.Red | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a red permanent spell, CARDNAME deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+SVar:BuffedBy:Permanent.Red
+Oracle:First strike\nAs an additional cost to cast red permanent spells, you may pay 2 life. Those spells cost {R} less to cast if you paid life this way. This effect reduces only the amount of red mana you pay.\nWhenever you cast a red permanent spell, Defiler of Instinct deals 1 damage to any target.

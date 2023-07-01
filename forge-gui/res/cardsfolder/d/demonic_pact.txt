@@ -1,0 +1,12 @@
+Name:Demonic Pact
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DrainPact,DiscardPact,DrawPact,DeathPact | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DrainPact:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+SVar:DiscardPact:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+SVar:DrawPact:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:DeathPact:DB$ LosesGame | Defined$ You | SpellDescription$ You lose the game.
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Demonic Pact deals 4 damage to any target and you gain 4 life.\n• Target opponent discards two cards.\n• Draw two cards.\n• You lose the game.

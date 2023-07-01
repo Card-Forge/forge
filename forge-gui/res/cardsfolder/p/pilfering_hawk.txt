@@ -1,0 +1,9 @@
+Name:Pilfering Hawk
+ManaCost:1 U
+Types:Snow Creature Bird
+PT:1/2
+K:Flying
+A:AB$ Draw | Cost$ S T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. ({S} can be paid with one mana from a snow source.) | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Flying\n{S}, {T}: Draw a card, then discard a card. ({S} can be paid with one mana from a snow source.)

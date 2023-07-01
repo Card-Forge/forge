@@ -1,0 +1,8 @@
+Name:Dramatic Finale
+ManaCost:WB WB WB WB
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens you control get +1/+1.
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control die, create a 2/1 white and black Inkling creature token with flying. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_2_1_inkling_flying
+DeckHas:Ability$Token
+Oracle:Creature tokens you control get +1/+1.\nWhenever one or more nontoken creatures you control die, create a 2/1 white and black Inkling creature token with flying. This ability triggers only once each turn.

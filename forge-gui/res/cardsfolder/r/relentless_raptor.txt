@@ -1,0 +1,8 @@
+Name:Relentless Raptor
+ManaCost:R W
+Types:Creature Dinosaur
+PT:3/3
+K:Vigilance
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks or blocks each combat if able.
+S:Mode$ MustBlock | ValidCreature$ Card.Self
+Oracle:Vigilance\nRelentless Raptor attacks or blocks each combat if able.

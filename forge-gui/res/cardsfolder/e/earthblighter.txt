@@ -1,0 +1,6 @@
+Name:Earthblighter
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Destroy | Cost$ 2 B T Sac<1/Goblin> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+Oracle:{2}{B}, {T}, Sacrifice a Goblin: Destroy target land.

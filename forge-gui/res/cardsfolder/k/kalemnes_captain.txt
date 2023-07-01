@@ -1,0 +1,10 @@
+Name:Kalemne's Captain
+ManaCost:3 W W
+Types:Creature Giant Soldier
+PT:5/5
+K:Vigilance
+K:Monstrosity:3:5 W W
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ExileAll | TriggerDescription$ When CARDNAME becomes monstrous, exile all artifacts and enchantments.
+SVar:ExileAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact,Enchantment
+DeckHas:Ability$Counters
+Oracle:Vigilance\n{5}{W}{W}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Kalemne's Captain becomes monstrous, exile all artifacts and enchantments.

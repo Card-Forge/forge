@@ -1,0 +1,9 @@
+Name:Time to Feed
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | AILogic$ Fight | SubAbility$ DBDelayedTrigger | StackDescription$ When {c:ThisTargetedCard} dies this turn, {p:You} gains 3 life. | SpellDescription$ Choose target creature an opponent controls.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ ParentTarget | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigGainLife | SubAbility$ DBFight | StackDescription$ None | SpellDescription$ When that creature dies this turn, you gain 3 life.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | StackDescription$ {c:ThisTargetedCard} fights that creature. | SpellDescription$ Target creature you control fights that creature.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature. (Each deals damage equal to its power to the other.)

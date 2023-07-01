@@ -1,0 +1,8 @@
+Name:Swarm Intelligence
+ManaCost:6 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+DeckHints:Keyword$Retrace|Flashback
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.

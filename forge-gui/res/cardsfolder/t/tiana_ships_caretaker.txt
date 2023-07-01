@@ -1,0 +1,10 @@
+Name:Tiana, Ship's Caretaker
+ManaCost:3 R W
+Types:Legendary Creature Angel Artificer
+PT:3/3
+K:Flying
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Equipment.YouCtrl,Aura.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DelayedTrig | TriggerDescription$ Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, you may return that card to its owner's hand at the beginning of the next end step.
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Return that card to its owner's hand at the beginning of the next end step.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+Oracle:Flying, first strike\nWhenever an Aura or Equipment you control is put into a graveyard from the battlefield, you may return that card to its owner's hand at the beginning of the next end step.

@@ -1,0 +1,8 @@
+Name:Bronze Walrus
+ManaCost:3
+Types:Artifact Creature Walrus
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:When Bronze Walrus enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\n{T}: Add one mana of any color.

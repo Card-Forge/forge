@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Hold the Line
+Description=Darkness closes in on the holy city of Thraben from all sides. With the "Hold the Line" deck, fend off monsters with your phalanx of human soldiers, backed up by righteous magic and sacred might.
+Deck Type=constructed
+Set=ISD
+Image=hold_the_line.jpg
+[main]
+24 Plains|ISD
+4 Accorder Paladin|MBS
+1 Champion of the Parish|ISD
+4 Doomed Traveler|ISD
+1 Elite Inquisitor|ISD
+2 Elite Vanguard|M12
+4 Fiend Hunter|ISD
+4 Gideon's Lawkeeper|M12
+2 Mirran Crusader|MBS
+4 Bonds of Faith|ISD
+2 Butcher's Cleaver|ISD
+2 Honor of the Pure|M12
+4 Oblivion Ring|M12
+2 Silver-Inlaid Dagger|ISD
+[sideboard]
+4 Celestial Purge|M12
+4 Leonin Relic-Warder|MBS
+1 Nevermore|ISD
+3 Nihil Spellbomb|SOM
+3 Suture Priest|NPH

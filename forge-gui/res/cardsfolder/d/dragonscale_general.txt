@@ -1,0 +1,9 @@
+Name:Dragonscale General
+ManaCost:3 W
+Types:Creature Human Warrior
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, bolster X, where X is the number of tapped creatures you control. (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Bolster$ True
+SVar:X:Count$Valid Creature.YouCtrl+tapped
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, bolster X, where X is the number of tapped creatures you control. (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)

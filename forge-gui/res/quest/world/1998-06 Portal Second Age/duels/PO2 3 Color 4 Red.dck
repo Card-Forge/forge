@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 3 Color: 4 Red
+Title=The Color Red
+Difficulty=hard
+Description="This isn't what I meant by ‘facing the heat of battle'"\n-Jefan, Talas ship captain
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PO2
+2 Brimstone Dragon|PO2
+4 Cunning Giant|PO2
+4 Earthquake|PO2
+4 Jagged Lightning|PO2
+26 Mountain|PO2|1
+4 Ogre Arsonist|PO2
+4 Spitting Earth|PO2
+4 Stone Rain|PO2
+4 Volcanic Hammer|PO2

@@ -1,0 +1,9 @@
+Name:Plated Pegasus
+ManaCost:2 W
+Types:Creature Pegasus
+PT:1/2
+K:Flash
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarget$ Permanent,Player | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nIf a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.

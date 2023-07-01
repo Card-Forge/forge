@@ -1,0 +1,10 @@
+Name:Losheel, Clockwork Scholar
+ManaCost:2 W
+Types:Legendary Creature Elephant Artificer
+PT:2/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.Artifact+attacking+YouCtrl | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to attacking artifact creatures you control.
+SVar:NonStackingEffect:True
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.Artifact+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more artifact creatures enter the battlefield under your control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Artifact
+Oracle:Prevent all combat damage that would be dealt to attacking artifact creatures you control.\nWhenever one or more artifact creatures enter the battlefield under your control, draw a card. This ability triggers only once each turn.

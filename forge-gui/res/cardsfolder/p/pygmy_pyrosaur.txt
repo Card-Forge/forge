@@ -1,0 +1,7 @@
+Name:Pygmy Pyrosaur
+ManaCost:1 R
+Types:Creature Lizard
+PT:1/1
+K:CARDNAME can't block.
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Pygmy Pyrosaur can't block.\n{R}: Pygmy Pyrosaur gets +1/+0 until end of turn.

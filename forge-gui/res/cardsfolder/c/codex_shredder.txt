@@ -1,0 +1,7 @@
+Name:Codex Shredder
+ManaCost:1
+Types:Artifact
+A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills a card. (They put the top card of their library into their graveyard.)
+A:AB$ ChangeZone | Cost$ 5 T Sac<1/CARDNAME> | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:{T}: Target player mills a card. (They put the top card of their library into their graveyard.)\n{5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.

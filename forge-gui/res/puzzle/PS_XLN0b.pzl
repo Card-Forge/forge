@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Ixalan #00b (Preview Puzzle 2)
+URL:https://i.redd.it/uy6terwly1oz.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=6
+activeplayer=human
+activephase=MAIN1
+humanhand=Harnessed Lightning|Set:KLD;Harnessed Lightning|Set:KLD;Burning Sun's Avatar|Set:XLN;Noxious Gearhulk|Set:KLD;Shock|Set:AER
+humanlibrary=
+humangraveyard=
+humanbattlefield=Revel in Riches;Reckless Fireweaver;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Verdurous Gearhulk|Counters:P1P1=1|Set:KLD;Deeproot Champion|Counters:P1P1=3;Waker of the Wilds|Counters:P1P1=2;Kujar Seedsculptor|Counters:P1P1=2
+aiexile=
+aicommand=

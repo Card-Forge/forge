@@ -1,0 +1,9 @@
+Name:Guiltfeeder
+ManaCost:3 B B
+Types:Creature Horror
+PT:0/4
+K:Fear
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player loses 1 life for each card in their graveyard.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ X
+SVar:X:Count$ValidGraveyard Card.DefenderCtrl
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Guiltfeeder attacks and isn't blocked, defending player loses 1 life for each card in their graveyard.

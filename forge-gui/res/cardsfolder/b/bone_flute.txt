@@ -1,0 +1,6 @@
+Name:Bone Flute
+ManaCost:3
+Types:Artifact
+A:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature | NumAtt$ -1 | SpellDescription$ All creatures get -1/-0 until end of turn.
+AI:RemoveDeck:All
+Oracle:{2}, {T}: All creatures get -1/-0 until end of turn.

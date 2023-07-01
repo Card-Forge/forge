@@ -1,0 +1,13 @@
+Name:Tidal Influence
+ManaCost:2 U
+Types:Enchantment
+K:etbCounter:TIDE:1
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | IsPresent$ Permanent.namedTidal Influence | Description$ Cast this spell only if no permanents named Tidal Influence are on the battlefield.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ -2 | IsPresent$ Card.Self+counters_EQ1_TIDE | Description$ As long as there is exactly one tide counter on CARDNAME, all blue creatures get -2/-0.
+S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ +2 | IsPresent$ Card.Self+counters_EQ3_TIDE | Description$ As long as there are exactly three tide counters on CARDNAME, all blue creatures get +2/+0.
+T:Mode$ Always | IsPresent$ Card.Self+counters_GE4_TIDE | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ Whenever there are four or more tide counters on CARDNAME, remove all tide counters from it.
+SVar:TrigRemove:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All
+AI:RemoveDeck:Random
+Oracle:Cast this spell only if no permanents named Tidal Influence are on the battlefield.\nTidal Influence enters the battlefield with a tide counter on it.\nAt the beginning of your upkeep, put a tide counter on Tidal Influence.\nAs long as there is exactly one tide counter on Tidal Influence, all blue creatures get -2/-0.\nAs long as there are exactly three tide counters on Tidal Influence, all blue creatures get +2/+0.\nWhenever there are four or more tide counters on Tidal Influence, remove all tide counters from it.

@@ -1,0 +1,5 @@
+Name:Nether Horror
+ManaCost:3 B
+Types:Creature Horror
+PT:4/2
+Oracle:

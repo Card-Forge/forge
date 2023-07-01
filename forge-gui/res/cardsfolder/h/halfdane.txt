@@ -1,0 +1,10 @@
+Name:Halfdane
+ManaCost:1 W U B
+Types:Legendary Creature Shapeshifter
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of your upkeep, change CARDNAME's base power and toughness to the power and toughness of target creature other than CARDNAME until the end of your next upkeep.
+SVar:TrigAnimate:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than this creature | AILogic$ HighestPower | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ Y | Duration$ UntilTheEndOfYourNextUpkeep
+SVar:X:Targeted$CardPower
+SVar:Y:Targeted$CardToughness
+Oracle:At the beginning of your upkeep, change Halfdane's base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep.

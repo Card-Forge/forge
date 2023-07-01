@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Toys for Boys
+Title=Toys for Boys
+Difficulty=medium
+Description=The white weenies have found some equipment.
+Icon=Toys for Boys.jpg
+Deck Type=constructed
+[Main]
+2 Altar's Light|MRD
+2 Arrest|MRD
+3 Auriok Bladewarden|MRD
+2 Auriok Steelshaper|MRD
+1 Banshee's Blade|MRD
+2 Bonesplitter|MRD
+1 Fireshrieker|MRD
+2 Gold Myr|MRD
+4 Leonin Den-Guard|MRD
+2 Leonin Scimitar|MRD
+2 Leonin Skyhunter|MRD
+2 Loxodon Punisher|MRD
+1 Loxodon Warhammer|MRD
+2 Myr Adapter|MRD
+22 Plains|MRD|1
+3 Skyhunter Cub|MRD
+2 Skyhunter Patrol
+2 Slith Ascendant|MRD
+2 Taj-Nar Swordsmith|MRD
+1 Viridian Longbow|MRD
+[sideboard]

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tweety 3
+Title=Tweety
+Difficulty=hard
+Description=WU Flying Aggro deck
+Icon=Tweety.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+1 Plains|M12
+7 Island|M12
+4 Tundra
+4 Flooded Strand
+4 Polluted Delta
+1 Mox Sapphire
+1 Mox Pearl
+4 Faerie Miscreant
+4 Judge's Familiar
+4 Squadron Hawk
+4 Cloud of Faeries
+4 Warden of Evos Isle
+4 Thunderclap Wyvern
+1 Erayo, Soratami Ascendant
+1 Pride of the Clouds
+2 Serendib Efreet|VMA
+4 Favorable Winds
+4 Path to Exile
+1 Time Walk
+1 Daze
+[sideboard]

@@ -1,0 +1,23 @@
+[quest]
+id=POR Final Challenge: Endless Wrath
+OpponentName=Endless Wrath
+AILife=100
+Repeat=false
+Persistent=true
+WinMessage=Congratulations!\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents!\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again!
+Wins=20
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Final Challenge: Endless Wrath
+Title=The Final Challenge
+Difficulty=hard
+Description="As flies to wanton boys, are we to the gods. They kill us for their sport." -William Shakespeare, King Lear
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+40 Plains|POR|2
+60 Wrath of God|POR
+60 Swamp|POR|2
+20 Endless Cockroaches|POR

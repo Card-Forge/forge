@@ -1,0 +1,7 @@
+Name:Deathless Angel
+ManaCost:4 W W
+Types:Creature Angel
+PT:5/7
+K:Flying
+A:AB$ Pump | Cost$ W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
+Oracle:Flying\n{W}{W}: Target creature gains indestructible until end of turn.

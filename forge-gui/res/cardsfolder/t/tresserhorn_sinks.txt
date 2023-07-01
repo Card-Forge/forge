@@ -1,0 +1,6 @@
+Name:Tresserhorn Sinks
+ManaCost:no cost
+Types:Snow Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
+Oracle:Tresserhorn Sinks enters the battlefield tapped.\n{T}: Add {B} or {R}.

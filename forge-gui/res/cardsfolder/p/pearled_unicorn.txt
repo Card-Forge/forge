@@ -1,0 +1,5 @@
+Name:Pearled Unicorn
+ManaCost:2 W
+Types:Creature Unicorn
+PT:2/2
+Oracle:

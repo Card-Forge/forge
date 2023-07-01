@@ -1,0 +1,8 @@
+Name:Merciless Eternal
+ManaCost:2 B
+Types:Creature Zombie Cleric
+PT:2/2
+K:Afflict:2
+A:AB$ Pump | Cost$ 2 B Discard<1/Card> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)\n{2}{B}, Discard a card: Merciless Eternal gets +2/+2 until end of turn.

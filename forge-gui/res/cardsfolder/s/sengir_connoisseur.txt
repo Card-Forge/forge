@@ -1,0 +1,9 @@
+Name:Sengir Connoisseur
+ManaCost:3 B B
+Types:Creature Vampire
+PT:3/3
+K:Flying
+T:Mode$ ChangesZoneAll | Origin$ Battlefield | Destination$ Graveyard | ValidCards$ Creature.Other | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more other creatures die, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever one or more other creatures die, put a +1/+1 counter on Sengir Connoisseur. This ability triggers only once each turn.

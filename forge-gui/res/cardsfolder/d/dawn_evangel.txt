@@ -1,0 +1,8 @@
+Name:Dawn Evangel
+ManaCost:2 W
+Types:Enchantment Creature Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EnchantedBy Aura.YouCtrl | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dies, if an Aura you controlled was attached to it, return target creature card with mana value 2 or less from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+cmcLE2 | TgtPrompt$ Select target creature card with mana value 2 or less
+DeckHints:Type$Aura
+Oracle:Whenever a creature dies, if an Aura you controlled was attached to it, return target creature card with mana value 2 or less from your graveyard to your hand.

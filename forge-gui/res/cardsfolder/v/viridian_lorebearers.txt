@@ -1,0 +1,8 @@
+Name:Viridian Lorebearers
+ManaCost:3 G
+Types:Creature Elf Shaman
+PT:3/3
+A:AB$ Pump | Cost$ 3 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+SVar:X:Count$Valid Artifact.OppCtrl
+AI:RemoveDeck:Random
+Oracle:{3}{G}, {T}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.

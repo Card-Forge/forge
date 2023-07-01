@@ -1,0 +1,6 @@
+Name:Rakdos Shred-Freak
+ManaCost:BR BR
+Types:Creature Human Berserker
+PT:2/1
+K:Haste
+Oracle:Haste

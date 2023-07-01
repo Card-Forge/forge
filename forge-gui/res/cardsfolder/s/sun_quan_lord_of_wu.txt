@@ -1,0 +1,7 @@
+Name:Sun Quan, Lord of Wu
+ManaCost:4 U U
+Types:Legendary Creature Human Soldier
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Horsemanship | Description$ Creatures you control have horsemanship.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)

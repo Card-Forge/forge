@@ -1,0 +1,5 @@
+Name:Knight of the Keep
+ManaCost:2 W
+Types:Creature Human Knight
+PT:3/2
+Oracle:

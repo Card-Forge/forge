@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Splice Girls 3
+Title=Splice Girls
+Difficulty=hard
+Description=“Who do you think you are; Oooh, some kind of superstar.”
+Icon=Splice.jpg
+Deck Type=constructed
+[Main]
+4 AEther Vial|DST
+4 Blade Splicer|NPH
+4 Disperse|M14
+8 Island|SOM|1
+4 Master Splicer|NPH
+8 Plains|SOM|1
+2 Precursor Golem|SOM
+4 Seachrome Coast|SOM
+4 Sensor Splicer|NPH
+4 Solemn Simulacrum|MRD
+4 Talisman of Progress|MRD
+4 Vapor Snag|NPH
+2 Vivisection|MBS
+4 Wing Splicer|NPH
+[sideboard]

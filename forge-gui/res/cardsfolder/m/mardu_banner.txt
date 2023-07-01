@@ -1,0 +1,8 @@
+Name:Mardu Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R W B | SpellDescription$ Add {R}, {W}, or {B}.
+A:AB$ Draw | Cost$ R W B T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|White|Black
+Oracle:{T}: Add {R}, {W}, or {B}.\n{R}{W}{B}, {T}, Sacrifice Mardu Banner: Draw a card.

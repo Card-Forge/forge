@@ -1,0 +1,8 @@
+Name:Pulse Tracker
+ManaCost:B
+Types:Creature Vampire Rogue
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Pulse Tracker attacks, each opponent loses 1 life.

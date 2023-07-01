@@ -1,0 +1,9 @@
+Name:Cliffrunner Behemoth
+ManaCost:3 G
+Types:Creature Rhino Beast
+PT:5/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Permanent.Red+YouCtrl | Description$ CARDNAME has haste as long as you control a red permanent.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | IsPresent$ Permanent.White+YouCtrl | Description$ CARDNAME has lifelink as long as you control a white permanent.
+SVar:BuffedBy:Creature.White,Creature.Red
+DeckHints:Color$White|Red
+Oracle:Cliffrunner Behemoth has haste as long as you control a red permanent.\nCliffrunner Behemoth has lifelink as long as you control a white permanent.

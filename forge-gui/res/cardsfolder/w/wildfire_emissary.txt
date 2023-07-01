@@ -1,0 +1,7 @@
+Name:Wildfire Emissary
+ManaCost:3 R
+Types:Creature Efreet
+PT:2/4
+K:Protection from white
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Protection from white\n{1}{R}: Wildfire Emissary gets +1/+0 until end of turn.

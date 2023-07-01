@@ -1,0 +1,7 @@
+Name:Mortiphobia
+ManaCost:1 B B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 B Discard<1/Card> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+AI:RemoveDeck:Random
+Oracle:{1}{B}, Discard a card: Exile target card from a graveyard.\n{1}{B}, Sacrifice Mortiphobia: Exile target card from a graveyard.

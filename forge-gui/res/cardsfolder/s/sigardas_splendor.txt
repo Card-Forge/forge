@@ -1,0 +1,13 @@
+Name:Sigarda's Splendor
+ManaCost:2 W W
+Types:Enchantment
+K:ETBReplacement:Other:NoteNum
+SVar:NoteNum:DB$ StoreSVar | SVar$ NotedLife | Type$ CountSVar | Expression$ X | SpellDescription$ As CARDNAME enters the battlefield, note your life total.
+SVar:NotedLife:Number$0
+SVar:X:Count$YourLifeTotal
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for CARDNAME. Then note your life total.
+SVar:TrigDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GENotedLife | NumCards$ 1 | SubAbility$ NoteNum
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:As Sigarda's Splendor enters the battlefield, note your life total.\nAt the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for Sigarda's Splendor. Then note your life total.\nWhenever you cast a white spell, you gain 1 life.

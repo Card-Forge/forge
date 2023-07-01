@@ -1,0 +1,7 @@
+Name:Arcane Lighthouse
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ AnimateAll | Cost$ 1 T | ValidCards$ Creature.OppCtrl | RemoveKeywords$ Hexproof & Shroud | CantHaveKeyword$ Hexproof & Shroud | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.

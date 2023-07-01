@@ -1,0 +1,8 @@
+Name:Agent of the Fates
+ManaCost:1 B B
+Types:Creature Human Assassin
+PT:3/2
+K:Deathtouch
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, each opponent sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent
+Oracle:Deathtouch\nHeroic — Whenever you cast a spell that targets Agent of the Fates, each opponent sacrifices a creature.

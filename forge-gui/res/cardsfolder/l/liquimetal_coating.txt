@@ -1,0 +1,6 @@
+Name:Liquimetal Coating
+ManaCost:2
+Types:Artifact
+A:AB$ Animate | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn.
+AI:RemoveDeck:Random
+Oracle:{T}: Target permanent becomes an artifact in addition to its other types until end of turn.

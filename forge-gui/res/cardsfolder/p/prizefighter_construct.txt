@@ -1,0 +1,5 @@
+Name:Prizefighter Construct
+ManaCost:5
+Types:Artifact Creature Construct
+PT:6/2
+Oracle:

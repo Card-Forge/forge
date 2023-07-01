@@ -1,0 +1,8 @@
+Name:Linden, the Steadfast Queen
+ManaCost:W W W
+Types:Legendary Creature Human Noble
+PT:3/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Creature.White+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a white creature you control attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
+Oracle:Vigilance\nWhenever a white creature you control attacks, you gain 1 life.

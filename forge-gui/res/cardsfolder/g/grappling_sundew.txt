@@ -1,0 +1,8 @@
+Name:Grappling Sundew
+ManaCost:1 G
+Types:Creature Plant
+PT:0/4
+K:Defender
+K:Reach
+A:AB$ Pump | Cost$ 4 G | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+Oracle:Defender, reach\n{4}{G}: Grappling Sundew gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy this creature.)

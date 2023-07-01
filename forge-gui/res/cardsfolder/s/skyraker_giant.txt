@@ -1,0 +1,6 @@
+Name:Skyraker Giant
+ManaCost:2 R R
+Types:Creature Giant
+PT:4/3
+K:Reach
+Oracle:Reach

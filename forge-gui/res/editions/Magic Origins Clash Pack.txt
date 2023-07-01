@@ -1,0 +1,14 @@
+[metadata]
+Code=CP3
+Date=2015-07-17
+Name=Magic Origins Clash Pack
+Type=Starter
+ScryfallCode=CP3
+
+[cards]
+1 R Honored Hierarch @Magali Villeneuve
+2 U Seeker of the Way @Magali Villeneuve
+3 U Valorous Stance @Victor Adame Minguez
+4 R Dromoka, the Eternal @Slawomir Maniak
+5 R Siege Rhino @Kev Walker
+6 U Sandsteppe Citadel @John Avon

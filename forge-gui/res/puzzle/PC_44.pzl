@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #44 - Herald of Defeat
+URL:https://perplexingchimera.com/2015/03/18/44-herald-of-defeat/
+Goal:Win
+Turns:1
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=33
+HumanPlay=Perilous Myr|Id:80; Grafted Exoskeleton|AttachedTo:80; Priests of Norn|Counters:M1M1=1; Mycosynth Fiend; Core Prowler|Id:6; Viridian Betrayers; Forest; Forest; Plains; Plains; Phyrexia's Core
+HumanHand=Seize the Initiative
+HumanLibrary=
+HumanGraveyard=
+AIPlay=Suture Priest|Id:83; Loxodon Wayfarer|Tapped; Mortis Dogs|Tapped; Victory's Herald|Tapped; Plains; Plains|Tapped; Plains|Tapped; Swamp; Swamp|Tapped; Swamp|Tapped; Darksteel Axe|AttachedTo:83; Arrest|AttachedTo:6
+AIGraveyard=
+

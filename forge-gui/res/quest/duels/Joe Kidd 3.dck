@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Joe Kidd 3
+Title=Joe Kidd
+Difficulty=hard
+Description=WB deck with Voracious Hatchling and Nightsky Mimic
+Icon=Joe Kidd.jpg
+Deck Type=constructed
+[main]
+3 Mourning Thrull
+5 Swamp|ISD
+5 Plains|ISD
+1 Stillmoon Cavalier
+4 Nightsky Mimic
+4 Scrubland
+4 Marsh Flats
+2 Harvest Gwyllion
+1 Culling Sun
+1 Mox Pearl
+4 Voracious Hatchling
+4 Isolated Chapel
+1 Angel of Despair
+1 Death Grasp
+2 Vindicate
+3 Unmake
+1 Mortify
+1 Debtors' Knell
+1 Mox Jet
+2 Divinity of Pride
+4 Gerrard's Verdict
+1 Edge of the Divinity
+4 Deathbringer Liege
+1 Alms Beast
+[sideboard]

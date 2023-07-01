@@ -1,0 +1,8 @@
+Name:Jalum Tome
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:Random
+DeckHas:Ability$Discard
+Oracle:{2}, {T}: Draw a card, then discard a card.

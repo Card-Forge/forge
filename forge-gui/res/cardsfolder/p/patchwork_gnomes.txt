@@ -1,0 +1,6 @@
+Name:Patchwork Gnomes
+ManaCost:3
+Types:Artifact Creature Gnome
+PT:2/1
+A:AB$ Regenerate | Cost$ Discard<1/Card> | SpellDescription$ Regenerate CARDNAME. (The next time this creature would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)
+Oracle:Discard a card: Regenerate Patchwork Gnomes. (The next time this creature would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)

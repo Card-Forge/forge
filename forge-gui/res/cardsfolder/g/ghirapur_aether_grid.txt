@@ -1,0 +1,6 @@
+Name:Ghirapur Aether Grid
+ManaCost:2 R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ tapXType<2/Artifact> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:Random
+Oracle:Tap two untapped artifacts you control: Ghirapur Aether Grid deals 1 damage to any target.

@@ -1,0 +1,11 @@
+Name:Gustcloak Cavalier
+ManaCost:3 W W
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Gustcloak Cavalier attacks, you may tap target creature.\nWhenever Gustcloak Cavalier becomes blocked, you may untap Gustcloak Cavalier and remove it from combat.

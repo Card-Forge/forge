@@ -1,0 +1,6 @@
+Name:Invoke the Winds
+ManaCost:1 U U U U
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ DBUntap | SpellDescription$ Gain control of target artifact or creature.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SpellDescription$ Untap it.
+Oracle:Gain control of target artifact or creature. Untap it.

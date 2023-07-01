@@ -1,0 +1,14 @@
+[metadata]
+Code=G04
+Date=2004-01-01
+Name=Judge Gift Cards 2004
+Type=Promo
+ScryfallCode=G04
+
+[cards]
+1 R Armageddon @John Avon
+2 R Balance @Kev Walker
+3 R Time Warp @Pete Venters
+4 R Phyrexian Negator @John Zeleznik
+5 R Deranged Hermit @Kev Walker
+6 R Hermit Druid @Heather Hudson

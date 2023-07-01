@@ -1,0 +1,8 @@
+Name:Vectis Agents
+ManaCost:3 U B
+Types:Artifact Creature Human Rogue
+PT:4/3
+A:AB$ Pump | Cost$ U B | NumAtt$ -2 | SubAbility$ DBUnblockable | SpellDescription$ CARDNAME gets -2/-0 until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:{U}{B}: Vectis Agents gets -2/-0 until end of turn and can't be blocked this turn.

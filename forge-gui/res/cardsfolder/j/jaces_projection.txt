@@ -1,0 +1,9 @@
+Name:Jace's Projection
+ManaCost:2 U U
+Types:Creature Wizard Illusion
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ PutCounter | Cost$ 3 U | ValidTgts$ Planeswalker.Jace | TgtPrompt$ Select target Jace | CounterType$ LOYALTY | CounterNum$ 1 | SpellDescription$ Put a loyalty counter on target Jace planeswalker.
+DeckHas:Ability$Counters
+Oracle:Whenever you draw a card, put a +1/+1 counter on Jace's Projection.\n{3}{U}: Put a loyalty counter on target Jace planeswalker.

@@ -1,0 +1,6 @@
+Name:Pendelhaven Elder
+ManaCost:1 G
+Types:Creature Elf Shaman
+PT:1/1
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl+powerEQ1+toughnessEQ1 | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Each 1/1 creature you control gets +1/+2 until end of turn.
+Oracle:{T}: Each 1/1 creature you control gets +1/+2 until end of turn.

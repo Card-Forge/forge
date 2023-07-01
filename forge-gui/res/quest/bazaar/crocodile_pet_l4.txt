@@ -1,0 +1,9 @@
+Name:Crocodile Pet
+ManaCost:no cost
+Colors:black
+Types:Creature Crocodile Pet
+PT:2/2
+K:CARDNAME can't block.
+K:Deathtouch
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | AddKeyword$ Shroud | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, CARDNAME has shroud.
+Oracle:Deathtouch\nCrocodile Pet can't block.\nAs long as it's not your turn, Crocodile Pet has shroud.

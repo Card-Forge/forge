@@ -1,0 +1,8 @@
+Name:Monastery Flock
+ManaCost:2 U
+Types:Creature Bird
+PT:0/5
+K:Defender
+K:Flying
+K:Morph:U
+Oracle:Defender, flying\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -1,0 +1,9 @@
+Name:Bruenor Battlehammer
+ManaCost:2 R W
+Types:Legendary Creature Dwarf Warrior
+PT:5/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | Description$ Each creature you control gets +2/+0 for each Equipment attached to it.
+SVar:AffectedX:Count$Valid Equipment.Attached/Times.2
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You may pay 0 rather than pay equip costs. | CheckSVar$ X | SVarCompare$ LT1 | Description$ You may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.
+SVar:X:Count$YouEquippedThisTurn
+Oracle:Each creature you control gets +2/+0 for each Equipment attached to it.\nYou may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.

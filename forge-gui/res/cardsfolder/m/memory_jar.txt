@@ -1,0 +1,11 @@
+Name:Memory Jar
+ManaCost:5
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DrawEach | SpellDescription$ Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way.
+SVar:DrawEach:DB$ Draw | Defined$ Player | NumCards$ 7 | SubAbility$ DelayedReturn
+SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DiscardEach | RememberObjects$ RememberedLKI | TriggerDescription$ At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way. | SubAbility$ DBCleanup
+SVar:DiscardEach:DB$ Discard | Defined$ Player | Mode$ Hand | SubAbility$ ReturnAll
+SVar:ReturnAll:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice Memory Jar: Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way.

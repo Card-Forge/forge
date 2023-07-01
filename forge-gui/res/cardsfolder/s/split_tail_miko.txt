@@ -1,0 +1,6 @@
+Name:Split-Tail Miko
+ManaCost:1 W
+Types:Creature Fox Cleric
+PT:1/1
+A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
+Oracle:{W}, {T}: Prevent the next 2 damage that would be dealt to any target this turn.

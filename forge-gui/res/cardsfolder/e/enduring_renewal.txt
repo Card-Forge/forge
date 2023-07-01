@@ -1,0 +1,15 @@
+Name:Enduring Renewal
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.YouOwn | MayLookAt$ Player | Description$ Play with your hand revealed.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ EnduringRevealTop | Description$ If you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.
+SVar:EnduringRevealTop:DB$ PeekAndReveal | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBEnduringGraveyard
+SVar:DBEnduringGraveyard:DB$ ChangeZone | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Creature | Origin$ Library | Destination$ Graveyard | SubAbility$ DBEnduringDraw
+SVar:DBEnduringDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBEnduringCleanup
+SVar:DBEnduringCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Creature.YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigEnduringBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
+SVar:TrigEnduringBounce:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Play with your hand revealed.\nIf you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.\nWhenever a creature is put into your graveyard from the battlefield, return it to your hand.

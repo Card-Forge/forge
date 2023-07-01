@@ -1,0 +1,11 @@
+Name:Rhox Faithmender
+ManaCost:3 W
+Types:Creature Rhino Monk
+PT:1/5
+K:Lifelink
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | AiLogic$ DoubleLife | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/Twice
+SVar:PlayMain1:True
+DeckHints:Ability$LifeGain
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nIf you would gain life, you gain twice that much life instead.

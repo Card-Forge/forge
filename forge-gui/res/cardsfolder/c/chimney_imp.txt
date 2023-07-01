@@ -1,0 +1,9 @@
+Name:Chimney Imp
+ManaCost:4 B
+Types:Creature Imp
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, target opponent puts a card from their hand on top of their library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | IsCurse$ True
+SVar:SacMe:1
+Oracle:Flying\nWhen Chimney Imp dies, target opponent puts a card from their hand on top of their library.

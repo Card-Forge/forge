@@ -1,0 +1,6 @@
+Name:Tainted Peak
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {B} or {R}. Activate only if you control a Swamp.
+Oracle:{T}: Add {C}.\n{T}: Add {B} or {R}. Activate only if you control a Swamp.

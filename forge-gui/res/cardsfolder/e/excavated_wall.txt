@@ -1,0 +1,7 @@
+Name:Excavated Wall
+ManaCost:1
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+A:AB$ Mill | Cost$ 1 T | NumCards$ 1 | Defined$ You | SpellDescription$ Mill a card.
+Oracle:Defender\n{1}, {T}: Mill a card. (Put the top card of your library into your graveyard.)

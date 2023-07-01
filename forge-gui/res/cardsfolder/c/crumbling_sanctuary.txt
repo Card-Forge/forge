@@ -1,0 +1,9 @@
+Name:Crumbling Sanctuary
+ManaCost:5
+Types:Artifact
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player | ReplaceWith$ ExileTop | ExecuteMode$ PerTarget | Description$ If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.
+SVar:ExileTop:DB$ Dig | Defined$ ReplacedTarget | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.

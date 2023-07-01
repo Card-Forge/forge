@@ -1,0 +1,7 @@
+Name:Hover Barrier
+ManaCost:2 U
+Types:Creature Illusion Wall
+PT:0/6
+K:Flying
+K:Defender
+Oracle:Defender, flying

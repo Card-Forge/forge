@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=M14
+Image=lightforce.jpg
+Name=Lightforce
+Description=Wield the power of light, boosting your creatures with powerful enchantments. If you opponents don't crumble under the first wave of your assault, they'll be primed for defeat when your larger beasts hit the battlefield.
+[Main]
+1 Ajani's Chosen+|M14
+1 Angelic Accord|M14
+1 Auramancer|M14
+2 Banisher Priest|M14
+2 Brave the Elements|M14
+2 Capashen Knight|M14
+1 Charging Griffin|M14
+1 Congregate|M14
+2 Dawnstrike Paladin|M14
+1 Divine Favor|M14
+1 Elixir of Immortality|M14
+9 Forest|M14
+2 Fortify|M14
+1 Hunt the Weak|M14
+1 Indestructibility|M14
+3 Pacifism|M14
+3 Pillarfield Ox|M14
+16 Plains|M14
+2 Serra Angel|M14
+2 Soulmender|M14
+1 Staff of the Sun Magus|M14
+3 Trollhide|M14
+2 Voracious Wurm|M14

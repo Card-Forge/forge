@@ -1,0 +1,20 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 052615 - Devil's Due
+URL:http://www.gatheringmagic.com/seanuy-052615-perplexing-chimera-devils-due/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Win on your next turn.  AI has Evincar's Justice in hand.
+[state]
+ActivePlayer=AI
+ActivePhase=Main2
+HumanLife=1
+AILife=5
+humanhand=Burst of Energy; Last Breath; Victimize; Spinning Darkness
+humanbattlefield=Plains|Set:ZEN; Plains|Set:ZEN; Plains|Set:ZEN; Plains|Set:ZEN|Tapped; Swamp|Set:ZEN; Swamp|Set:ZEN|Tapped; Sengir Bats|Id:421|Damage:2; Necromancer's Magemark|AttachedTo:421; Mosquito Guard|Id:422|Damage:2; Krovikan Fetish|AttachedTo:422; Kithkin Spellduster|Damage:2; Archdemon of Greed|Tapped|Transformed|Damage:2; Soul Net; Aeolipile
+humangraveyard=Venerable Monk; Flickering Spirit
+humanlibrary=Soul Net
+aihand=Evincar's Justice
+aibattlefield=Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Tainted Wood|Tapped; Raking Canopy
+aigraveyard=
+ailibrary=

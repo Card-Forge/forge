@@ -1,0 +1,7 @@
+Name:Demonmail Hauberk
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:Sac<1/Creature>
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Equipped creature gets +4/+2.
+AI:RemoveDeck:All
+Oracle:Equipped creature gets +4/+2.\nEquip—Sacrifice a creature.

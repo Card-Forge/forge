@@ -1,0 +1,5 @@
+Name:Barktooth Warbeard
+ManaCost:4 B R R
+Types:Legendary Creature Human Warrior
+PT:6/5
+Oracle:

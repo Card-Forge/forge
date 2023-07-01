@@ -1,0 +1,6 @@
+Name:Noble Stand
+ManaCost:4 W
+Types:Enchantment
+T:Mode$ Blocks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control blocks, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever a creature you control blocks, you gain 2 life.

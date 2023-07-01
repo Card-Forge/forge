@@ -1,0 +1,7 @@
+Name:Imposing Vantasaur
+ManaCost:5 W
+Types:Creature Dinosaur
+PT:3/6
+K:Vigilance
+K:Cycling:1
+Oracle:Vigilance\nCycling {1} ({1}, Discard this card: Draw a card.)

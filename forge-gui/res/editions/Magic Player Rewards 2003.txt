@@ -1,0 +1,16 @@
+[metadata]
+Code=P03
+Date=2003-01-01
+Name=Magic Player Rewards 2003
+Type=Promo
+ScryfallCode=P03
+
+[cards]
+1 R Voidmage Prodigy @Christopher Moeller
+
+[tokens]
+g_1_1_insect
+c_1_1_sliver
+g_2_2_bear
+r_1_1_goblin
+b_x_x_demon_flying

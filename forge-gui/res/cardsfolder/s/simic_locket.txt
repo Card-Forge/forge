@@ -1,0 +1,8 @@
+Name:Simic Locket
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green|Blue
+A:AB$ Draw | Cost$ GU GU GU GU T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{T}: Add {G} or {U}.\n{G/U}{G/U}{G/U}{G/U}, {T}, Sacrifice Simic Locket: Draw two cards.

@@ -1,0 +1,8 @@
+Name:Roadside Reliquary
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ 1 | ConditionPresent$ Artifact.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Draw a card if you control an artifact. Draw a card if you control an enchantment.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Enchantment.YouCtrl
+DeckHints:Type$Artifact|Enchantment
+Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice Roadside Reliquary: Draw a card if you control an artifact. Draw a card if you control an enchantment.

@@ -1,0 +1,7 @@
+Name:Urborg Shambler
+ManaCost:2 B B
+Types:Creature Horror
+PT:4/3
+S:Mode$ Continuous | Affected$ Creature.Black+Other | AddPower$ -1 | AddToughness$ -1 | Description$ Other black creatures get -1/-1.
+AI:RemoveDeck:Random
+Oracle:Other black creatures get -1/-1.

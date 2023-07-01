@@ -1,0 +1,7 @@
+Name:Rule of Law
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one spell each turn.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Each player can't cast more than one spell each turn.

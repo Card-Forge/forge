@@ -1,0 +1,12 @@
+Name:Sporeweb Weaver
+ManaCost:2 G
+Types:Creature Spider
+PT:1/4
+K:Reach
+K:Hexproof:Card.Blue:blue
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain 1 life and create a 1/1 green Saproling creature token.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+SVar:HasCombatEffect:TRUE
+DeckHas:Ability$Token|LifeGain
+Oracle:Reach, hexproof from blue\nWhenever Sporeweb Weaver is dealt damage, you gain 1 life and create a 1/1 green Saproling creature token.

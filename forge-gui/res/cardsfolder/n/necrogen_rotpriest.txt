@@ -1,0 +1,9 @@
+Name:Necrogen Rotpriest
+ManaCost:2 B G
+Types:Creature Phyrexian Zombie Cleric
+PT:1/5
+K:Toxic:2
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withToxic | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with toxic deals combat damage to a player, that player gets an additional poison counter.
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredTarget | Num$ 1
+A:AB$ Pump | Cost$ 1 B G | ValidTgts$ Creature.YouCtrl+withToxic | TgtPrompt$ Select target creature you control with toxic | KW$ Deathtouch | SpellDescription$ Target creature you control with toxic gains deathtouch until end of turn.
+Oracle:Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)\nWhenever a creature you control with toxic deals combat damage to a player, that player gets an additional poison counter.\n{1}{B}{G}: Target creature you control with toxic gains deathtouch until end of turn.

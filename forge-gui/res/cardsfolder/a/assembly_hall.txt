@@ -1,0 +1,9 @@
+Name:Assembly Hall
+ManaCost:5
+Types:Artifact
+A:AB$ Reveal | Cost$ 4 T | Defined$ You | RevealValid$ Creature | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Reveal a creature card in your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Remembered.sameName | SubAbility$ DBCleanup | StackDescription$ Search your library for a permanent card with the same name as the revealed creature and put it into your hand. Then shuffle.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{4}, {T}: Reveal a creature card in your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle.

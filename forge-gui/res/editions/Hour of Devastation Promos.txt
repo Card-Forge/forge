@@ -1,0 +1,12 @@
+[metadata]
+Code=PHOU
+Date=2017-07-14
+Name=Hour of Devastation Promos
+Type=Promo
+ScryfallCode=PHOU
+
+[cards]
+2 R Adorned Pouncer @Kev Walker
+83 U Abrade @Florian de Gesincourt
+109 R Wildfire Eternal @Yongjae Choi
+129 R Ramunap Excavator @Joe Slucher

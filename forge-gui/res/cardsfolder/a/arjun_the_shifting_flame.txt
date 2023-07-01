@@ -1,0 +1,11 @@
+Name:Arjun, the Shifting Flame
+ManaCost:4 U R
+Types:Legendary Creature Sphinx Wizard
+PT:5/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
+SVar:TrigChangeZone:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | ChangeType$ Card.YouOwn | RememberChanged$ True | LibraryPosition$ -1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ RemTossed | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemTossed:Remembered$Amount
+Oracle:Flying\nWhenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.

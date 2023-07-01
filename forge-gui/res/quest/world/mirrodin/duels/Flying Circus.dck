@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Flying Circus
+Title=Flying Circus
+Difficulty=easy
+Description="Nobody expects the Spanish Inquisition!" (specially if they are falling from the sky)
+Icon=Flying Circus.jpg
+Deck Type=constructed
+[Main]
+1 Argentum Armor|SOM
+2 Copper Carapace|MBS
+2 Darkslick Drake|SOM
+2 Dementia Bat|NPH
+3 Hovermyr|NPH
+2 Impaler Shrike|NPH
+13 Island|SOM|1
+3 Kiln Walker|NPH
+2 Mortis Dogs|NPH
+2 Necrogen Scudder|SOM
+1 Necropouncer|NPH
+3 Neurok Invisimancer|SOM
+2 Phyrexian Ingester|NPH
+2 Sickleslicer|NPH
+1 Silver Myr|SOM
+2 Spined Thopter|NPH
+2 Spire Monitor|NPH
+11 Swamp|SOM|1
+2 Vapor Snag|NPH
+2 Viridian Claw|MBS
+[sideboard]

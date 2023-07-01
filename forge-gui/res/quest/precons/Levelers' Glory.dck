@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1300
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Levelers' Glory
+Description=Make use of the leveler mechanic, which allows your creatures to grow in power over time. This deck is packed with cheap creatures that come in handy for quick wins, but it also includes Student of Warfare, who can level up to a powerful double-strike creature to finish the long games.
+Deck Type=constructed
+Set=ROE
+Image=levelers_glory.jpg
+[main]
+8 Island|ROE
+10 Plains|ROE
+1 Affa Guard Hound|ROE
+1 Alluring Siren|M10
+2 Caravan Escort|ROE
+1 Glory Seeker|ROE
+1 Hedron-Field Purists|ROE
+1 Lone Missionary|ROE
+2 Makindi Griffin|ROE
+1 Soulbound Guardians|ROE
+1 Student of Warfare+|ROE
+1 Venerated Teacher|ROE
+1 Wall of Frost|M10
+1 Domestication|ROE
+1 Luminous Wake|ROE
+2 Narcolepsy|ROE
+1 Angel's Mercy|M10
+1 Fleeting Distraction|ROE
+1 Negate|M10
+1 Unsummon|M10
+1 See Beyond|ROE
+1 Sleep|M10
+[sideboard]

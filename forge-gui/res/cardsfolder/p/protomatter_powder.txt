@@ -1,0 +1,6 @@
+Name:Protomatter Powder
+ManaCost:2 U
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 4 W T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
+AI:RemoveDeck:Random
+Oracle:{4}{W}, {T}, Sacrifice Protomatter Powder: Return target artifact card from your graveyard to the battlefield.

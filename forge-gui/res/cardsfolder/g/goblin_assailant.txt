@@ -1,0 +1,5 @@
+Name:Goblin Assailant
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+Oracle:

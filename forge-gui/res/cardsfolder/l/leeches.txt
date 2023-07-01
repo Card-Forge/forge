@@ -1,0 +1,9 @@
+Name:Leeches
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 1 W W | ValidTgts$ Player | NumDmg$ X | SubAbility$ Unpoison | SpellDescription$ Target player loses all poison counters. Leeches deals that much damage to that player.
+SVar:Unpoison:DB$ Poison | Defined$ ParentTarget | Num$ -X
+SVar:X:TargetedPlayer$PoisonCounters
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Target player loses all poison counters. Leeches deals that much damage to that player.

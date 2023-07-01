@@ -1,0 +1,20 @@
+Name:Lambholt Pacifist
+ManaCost:1 G
+Types:Creature Human Shaman Werewolf
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | IsPresent$ Creature.YouCtrl+powerGE4 | PresentCompare$ EQ0 | Description$ CARDNAME can't attack unless you control a creature with power 4 or greater.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
+
+ALTERNATE
+
+Name:Lambholt Butcher
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lambholt Butcher.

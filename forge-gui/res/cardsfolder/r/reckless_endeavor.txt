@@ -1,0 +1,8 @@
+Name:Reckless Endeavor
+ManaCost:5 R R
+Types:Sorcery
+A:SP$ RollDice | Amount$ 2 | Sides$ 12 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBDamageAll | StackDescription$ SpellDescription | SpellDescription$ Roll two d12 and choose one result. CARDNAME deals damage equal to that result to each creature. Then create a number of Treasure tokens equal to the other result.
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ X | SubAbility$ DBToken | StackDescription$ None
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice
+Oracle:Roll two d12 and choose one result. Reckless Endeavor deals damage equal to that result to each creature. Then create a number of Treasure tokens equal to the other result.

@@ -1,0 +1,7 @@
+Name:Bitterbow Sharpshooters
+ManaCost:4 G
+Types:Creature Jackal Archer
+PT:4/4
+K:Vigilance
+K:Reach
+Oracle:Vigilance, reach

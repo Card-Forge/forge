@@ -1,0 +1,6 @@
+Name:Nacatl Savage
+ManaCost:1 G
+Types:Creature Cat Warrior
+PT:2/1
+K:Protection from artifacts
+Oracle:Protection from artifacts

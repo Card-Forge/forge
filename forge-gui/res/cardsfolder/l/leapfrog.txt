@@ -1,0 +1,8 @@
+Name:Leapfrog
+ManaCost:2 U
+Types:Creature Frog
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you've cast an instant or sorcery spell this turn.
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+DeckHints:Type$Instant|Sorcery
+Oracle:Leapfrog has flying as long as you've cast an instant or sorcery spell this turn.

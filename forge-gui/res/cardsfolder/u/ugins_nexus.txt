@@ -1,0 +1,10 @@
+Name:Ugin's Nexus
+ManaCost:5
+Types:Legendary Artifact
+R:Event$ BeginTurn | ActiveZones$ Battlefield | ExtraTurn$ True | Skip$ True | Description$ If a player would begin an extra turn, that player skips that turn instead.
+R:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ DBExile | Description$ If CARDNAME would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBAddTurn
+SVar:DBAddTurn:DB$ AddTurn | Defined$ ReplacedCardLKIController | NumTurns$ 1
+AI:RemoveDeck:Random
+SVar:SacMe:5
+Oracle:If a player would begin an extra turn, that player skips that turn instead.\nIf Ugin's Nexus would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one.

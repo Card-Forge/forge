@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 4F The Raiders
+Title=The Raiders
+Difficulty=easy
+Description="The Brassclaws delighted in lightning raids on Icatian and Dwarven towns; an unprepared enemy is easier to defeat." -Sarpadian Empires, vol. IV
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+1 Brassclaw Orcs|FEM|1
+1 Brassclaw Orcs|FEM|2
+1 Brassclaw Orcs|FEM|3
+1 Brassclaw Orcs|FEM|4
+4 Goblin Flotilla|FEM
+1 Goblin War Drums|FEM|1
+1 Goblin War Drums|FEM|2
+1 Goblin War Drums|FEM|3
+1 Goblin War Drums|FEM|4
+28 Mountain|LEB|3
+4 Orcish Captain|FEM
+1 Orcish Spy|FEM|1
+1 Orcish Spy|FEM|2
+2 Orcish Spy|FEM|3
+1 Orcish Veteran|FEM|1
+1 Orcish Veteran|FEM|2
+1 Orcish Veteran|FEM|3
+1 Orcish Veteran|FEM|4
+4 Orgg|FEM

@@ -1,0 +1,10 @@
+Name:Ancestor Dragon
+ManaCost:4 W W
+Types:Creature Dragon
+PT:5/6
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever one or more creatures you control attack, you gain 1 life for each attacking creature.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Creature.attacking
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever one or more creatures you control attack, you gain 1 life for each attacking creature.

@@ -1,0 +1,25 @@
+[metadata]
+Code=SLX
+Date=2022-04-29
+Name=Universes Within
+Type=Collector_Edition
+ScryfallCode=SLX
+
+[cards]
+1 M Arvinox, the Mind Flail @Nikola Matkovic
+2 R Bjorna, Nightfall Alchemist @Jamroz Gary
+3 R Cecily, Haunted Mage @Anastasia Balakchina
+4 R Elmar, Ulvenwald Informant @Eliz Roxs
+5 R Hargilde, Kindly Runechanter @David Sondered
+6 R Othelm, Sigardian Outcast @Alexey Kruglov
+7 R Sophina, Spearsage Deserter @Bartek Fedyczak
+8 R Wernog, Rider's Chaplain @Diego Gisbert
+9 R Havengul Laboratory @Rafater
+10 R Baldin, Century Herdmaster @Zoltan Boros
+11 R Vikya, Scorching Stalwart @Zoltan Boros
+12 R Aisha of Sparks and Smoke @Evyn Fong
+13 R The Howling Abomination @Helge C. Balzer
+14 R Immard, the Stormcleaver @Kai Carpenter
+15 R Maarika, Brutal Gladiator @Wisnu Tan
+16 R Tadeas, Juniper Ascendant @Alexander Mokhov
+17 R Zethi, Arcane Blademaster @Billy Christian

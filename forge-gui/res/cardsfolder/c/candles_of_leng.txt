@@ -1,0 +1,8 @@
+Name:Candles of Leng
+ManaCost:2
+Types:Artifact
+A:AB$ PeekAndReveal | Cost$ 4 T | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBCandlesChangeZone | SpellDescription$ Reveal the top card of your library.
+SVar:DBCandlesChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith YourGraveyard | SubAbility$ DBCandlesDraw | StackDescription$ If it has the same name as a card in their graveyard, they put it into their graveyard. | SpellDescription$ If it has the same name as a card in your graveyard, put it into your graveyard.
+SVar:DBCandlesDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith YourGraveyard | ConditionCompare$ EQ0 | SubAbility$ DBCandlesCleanup | StackDescription$ Otherwise, they draw a card. | SpellDescription$ Otherwise, draw a card.
+SVar:DBCandlesCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{4}, {T}: Reveal the top card of your library. If it has the same name as a card in your graveyard, put it into your graveyard. Otherwise, draw a card.

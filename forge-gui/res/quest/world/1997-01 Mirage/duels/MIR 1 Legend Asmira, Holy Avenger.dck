@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=MIR 1 Legend: Asmira, Holy Avenger
+Title=Asmira, Holy Avenger
+Difficulty=easy
+Description="Omens lie in this early harvest's fruit." -Asmira, Holy Avenger
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Asmira, Holy Avenger|MIR
+4 Femeref Healer|MIR
+6 Forest|MIR|4
+4 Grasslands|MIR
+2 Illumination|MIR
+4 Mtenda Griffin|MIR
+10 Plains|MIR|2
+2 Relic Ward|VIS
+4 Retribution of the Meek|VIS
+2 Righteous War|VIS
+2 Rowen|VIS
+4 Swamp|MIR|2
+4 Unyaro Bee Sting|MIR
+4 Unyaro Griffin|MIR
+2 Vitalizing Cascade|MIR
+2 Warrior's Honor|VIS

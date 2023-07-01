@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Deadpool 3
+Title=Deadpool
+Difficulty=hard
+Description=BR deck with Ashenmoor Liege and Grixis Grimblade
+Icon=Deadpool.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Rakdos Cackler
+4 Grixis Grimblade
+4 Jund Hackblade
+4 Ashenmoor Gouger
+4 Ashenmoor Liege
+4 Demigod of Revenge
+2 Shambling Remains
+1 Defiler of Souls
+1 Fists of the Demigod
+1 Blightning
+4 Terminate
+3 Dreadbore
+1 Kolaghan's Command
+4 Blackcleave Cliffs
+4 Dragonskull Summit
+1 Lavaclaw Reaches
+4 Badlands
+5 Mountain|M12
+5 Swamp|M12
+[sideboard]

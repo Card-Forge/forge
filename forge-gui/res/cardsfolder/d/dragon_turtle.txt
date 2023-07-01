@@ -1,0 +1,11 @@
+Name:Dragon Turtle
+ManaCost:1 U U
+Types:Creature Dragon Turtle
+PT:3/5
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Drag Below — When CARDNAME enters the battlefield, tap it and up to one target creature an opponent controls. They don't untap during their controllers' next untap steps.
+SVar:TrigTap:DB$ Tap | Defined$ Self | RememberTapped$ True | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | AlwaysRemember$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flash\nDrag Below — When Dragon Turtle enters the battlefield, tap it and up to one target creature an opponent controls. They don't untap during their controllers' next untap steps.

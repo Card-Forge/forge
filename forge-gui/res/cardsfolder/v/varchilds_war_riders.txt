@@ -1,0 +1,15 @@
+Name:Varchild's War-Riders
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:3/4
+K:Trample
+K:Rampage:1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCumUpkeep | TriggerDescription$ Cumulative upkeep—Have an opponent create a 1/1 red Survivor creature token.
+SVar:TrigCumUpkeep:DB$ Charm | Choices$ TrigAgeSurvivor,TrigAgeSacrifice | CharmNum$ 1
+SVar:TrigAgeSurvivor:DB$ PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Survivor
+SVar:Survivor:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_survivor | TokenOwner$ Opponent | SpellDescription$ Have an opponent create a 1/1 red Survivor creature token.
+SVar:X:Count$CardCounters.AGE
+SVar:TrigAgeSacrifice:DB$ PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Sacrifice
+SVar:Sacrifice:DB$ Sacrifice | Defined$ Self | SpellDescription$ Sacrifice CARDNAME.
+AI:RemoveDeck:Random
+Oracle:Cumulative upkeep—Have an opponent create a 1/1 red Survivor creature token. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nTrample; rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)

@@ -1,0 +1,8 @@
+Name:Nantuko Vigilante
+ManaCost:3 G
+Types:Creature Insect Druid Mutant
+PT:3/2
+K:Morph:1 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+Oracle:Morph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Nantuko Vigilante is turned face up, destroy target artifact or enchantment.

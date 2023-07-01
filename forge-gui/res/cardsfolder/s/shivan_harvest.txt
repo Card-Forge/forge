@@ -1,0 +1,6 @@
+Name:Shivan Harvest
+ManaCost:1 R
+Types:Enchantment
+A:AB$ Destroy | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
+SVar:NonStackingEffect:True
+Oracle:{1}{R}, Sacrifice a creature: Destroy target nonbasic land.

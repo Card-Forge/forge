@@ -1,0 +1,11 @@
+Name:Wall of Reverence
+ManaCost:3 W
+Types:Creature Spirit Wall
+PT:1/6
+K:Defender
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may gain life equal to the power of target creature you control.
+SVar:TrigDig:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ HighestPower | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Targeted$CardPower
+Oracle:Defender, flying\nAt the beginning of your end step, you may gain life equal to the power of target creature you control.

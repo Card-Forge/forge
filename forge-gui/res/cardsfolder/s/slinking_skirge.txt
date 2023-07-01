@@ -1,0 +1,8 @@
+Name:Slinking Skirge
+ManaCost:3 B
+Types:Creature Phyrexian Imp
+PT:2/1
+K:Flying
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Flying\n{2}, Sacrifice Slinking Skirge: Draw a card.

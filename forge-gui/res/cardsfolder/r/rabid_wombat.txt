@@ -1,0 +1,9 @@
+Name:Rabid Wombat
+ManaCost:2 G G
+Types:Creature Wombat
+PT:0/1
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+Oracle:Vigilance\nRabid Wombat gets +2/+2 for each Aura attached to it.

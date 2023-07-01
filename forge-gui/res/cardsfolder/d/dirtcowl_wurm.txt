@@ -1,0 +1,7 @@
+Name:Dirtcowl Wurm
+ManaCost:4 G
+Types:Creature Wurm
+PT:3/4
+T:Mode$ LandPlayed | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent plays a land, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever an opponent plays a land, put a +1/+1 counter on Dirtcowl Wurm.

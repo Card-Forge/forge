@@ -1,0 +1,12 @@
+Name:Furnace Layer
+ManaCost:no cost
+Types:Plane New Phyrexia
+T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ FurnaceDiscard | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, select target player at random. That player discards a card. If that player discards a land card this way, they lose 3 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ FurnaceDiscard | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, select target player at random. That player discards a card. If that player discards a land card this way, they lose 3 life.
+SVar:FurnaceDiscard:DB$ Discard | ValidTgts$ Player | TargetsAtRandom$ True | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever chaos ensues, you may destroy target nonland permanent.
+SVar:RolledChaos:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent to destroy
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | LowPriority$ True | MaxRollsPerTurn$ 9
+Oracle:When you planeswalk to Furnace Layer or at the beginning of your upkeep, select target player at random. That player discards a card. If that player discards a land card this way, they lose 3 life.\nWhenever chaos ensues, you may destroy target nonland permanent.

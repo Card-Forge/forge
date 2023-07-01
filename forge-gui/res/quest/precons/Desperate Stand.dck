@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Desperate Stand
+Description=Spurred by the threat of the monstrous Eldrazi, the inhabitants of Zendikar have come together like never before. You Ally creatures can team up to unleash devastating effects on the Eldrazi foe and reclaim Zendikar for its people.
+Deck Type=constructed
+Set=OGW
+Image=desperate_stand.jpg
+[Main]
+2 Allied Reinforcements|OGW
+1 Blighted Fen|BFZ
+1 Cliffhaven Vampire|OGW
+1 Cliffside Lookout|BFZ
+1 Dazzling Reflection|OGW
+1 Drana's Chosen|OGW
+1 Drana's Emissary|BFZ
+1 Dutiful Return|BFZ
+1 Evolving Wilds|BFZ
+2 Expedition Envoy|BFZ
+2 Gideon's Reproach|BFZ
+2 Kalastria Healer|BFZ
+2 Kor Castigator|BFZ
+2 Kor Entanglers|BFZ
+2 Kor Scythemaster|OGW
+1 Malakir Soothsayer|OGW
+1 Munda's Vanguard+|OGW
+2 Ondu War Cleric|OGW
+14 Plains|BFZ
+2 Serene Steward|BFZ
+1 Smite the Monstrous|BFZ
+2 Spawnbinder Mage|OGW
+9 Swamp|BFZ
+2 Tar Snare|OGW
+2 Vampire Envoy|OGW
+2 Zulaport Chainmage|OGW

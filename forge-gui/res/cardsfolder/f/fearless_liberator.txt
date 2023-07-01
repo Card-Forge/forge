@@ -1,0 +1,8 @@
+Name:Fearless Liberator
+ManaCost:1 R
+Types:Creature Dwarf Berserker
+PT:2/1
+A:AB$ Token | Cost$ 2 R | TokenAmount$ 1 | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You | Boast$ True | SpellDescription$ Create a 2/1 red Dwarf Berserker creature token.
+SVar:NonCombatPriority:10
+DeckHas:Ability$Token
+Oracle:Boast — {2}{R}: Create a 2/1 red Dwarf Berserker creature token. (Activate only if this creature attacked this turn and only once each turn.)

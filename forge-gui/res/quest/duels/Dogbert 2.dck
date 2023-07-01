@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Dogbert 2
+Title=Dogbert
+Difficulty=medium
+Description=WRG Berserker deck with Lovisa Coldeyes
+Icon=Dogbert.jpg
+Deck Type=constructed
+[main]
+1 Altac Bloodseeker
+1 Bloodbraid Elf
+1 Hellraiser Goblin
+1 Lightning Mauler
+1 Minotaur Skullcleaver
+1 Riot Piker
+1 Scab-Clan Mauler
+1 Stormblood Berserker
+1 Valley Dasher
+2 Elvish Berserker
+2 Jund Hackblade
+1 Vulshok Replica
+1 Taurean Mauler
+1 Avian Changeling
+3 Flame-Kin Zealot
+1 Chameleon Colossus
+1 AErathi Berserker
+1 Ghor-Clan Savage
+1 Kuldotha Ringleader
+1 Berserkers of Blood Ridge
+2 Lovisa Coldeyes
+1 Bone Saw
+1 Copper Carapace
+1 No-Dachi
+1 Vorrac Battlehorns
+1 Behemoth Sledge
+1 Mage Slayer
+1 Gaea's Anthem
+1 Coat of Arms
+1 Firewild Borderpost
+1 Lightning Strike
+1 Destructive Revelry
+1 Pit Fight
+4 Mountain|MBS
+2 Forest|MBS
+2 Savannah
+2 Taiga
+2 Plateau
+2 Jungle Shrine
+2 Sacred Foundry
+2 Razorverge Thicket
+4 Wooded Foothills
+[sideboard]

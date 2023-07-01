@@ -1,0 +1,6 @@
+Name:Goblin Soothsayer
+ManaCost:R
+Types:Creature Goblin Shaman
+PT:1/1
+A:AB$ PumpAll | Cost$ R T Sac<1/Goblin> | ValidCards$ Creature.Red | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Red creatures get +1/+1 until end of turn.
+Oracle:{R}, {T}, Sacrifice a Goblin: Red creatures get +1/+1 until end of turn.

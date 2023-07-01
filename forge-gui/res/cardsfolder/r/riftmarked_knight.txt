@@ -1,0 +1,10 @@
+Name:Riftmarked Knight
+ManaCost:1 W W
+Types:Creature Human Rebel Knight
+PT:2/2
+K:Flanking
+K:Protection from black
+K:Suspend:3:1 W W
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigToken | NewCounterAmount$ 0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, create a 2/2 black Knight creature token with flanking, protection from white, and haste.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_knight_flanking_pro_white_haste
+Oracle:Protection from black; flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nSuspend 3—{1}{W}{W}\nWhen the last time counter is removed from Riftmarked Knight while it's exiled, create a 2/2 black Knight creature token with flanking, protection from white, and haste.

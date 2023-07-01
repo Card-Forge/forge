@@ -1,0 +1,10 @@
+Name:Jace's Archivist
+ManaCost:1 U U
+Types:Creature Vedalken Wizard
+PT:2/2
+A:AB$ Discard | Cost$ U T | Defined$ Player | RememberDiscarded$ True | Mode$ Hand | SubAbility$ WindfallDraw | SpellDescription$ Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
+SVar:WindfallDraw:DB$ Draw | Defined$ Player | NumCards$ X | SubAbility$ WindfallCleanup
+SVar:WindfallCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountPlayers$HighestValidGraveyard,Library,Exile Card.IsRemembered+YouOwn
+AI:RemoveDeck:All
+Oracle:{U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.

@@ -1,0 +1,8 @@
+Name:Splinter Token
+ManaCost:no cost
+Colors:green
+Types:Creature Splinter
+PT:1/1
+K:Flying
+K:Cumulative upkeep:G
+Oracle:Flying\nCumulative upkeep {G}

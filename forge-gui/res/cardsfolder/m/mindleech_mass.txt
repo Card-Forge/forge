@@ -1,0 +1,9 @@
+Name:Mindleech Mass
+ManaCost:5 U B B
+Types:Creature Horror
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may look at that player's hand. If you do, you may cast a spell from among those cards without paying its mana cost.
+SVar:TrigReveal:DB$ RevealHand | Defined$ TriggeredTarget | SubAbility$ TrigPlay | Look$ True
+SVar:TrigPlay:DB$ Play | Valid$ Card.ControlledBy TriggeredTarget | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True
+Oracle:Trample\nWhenever Mindleech Mass deals combat damage to a player, you may look at that player's hand. If you do, you may cast a spell from among those cards without paying its mana cost.

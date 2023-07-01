@@ -1,0 +1,20 @@
+[metadata]
+Code=PCMP
+Date=2006-03-18
+Name=Champs and States
+Type=Promo
+ScryfallCode=PCMP
+
+[cards]
+1 R Electrolyze @Zoltan Boros & Gabor Szikszai
+2 R Niv-Mizzet, the Firemind @Todd Lockwood
+3 R Rakdos Guildmage @Jeremy Jarvis
+4 R Voidslime @Jim Murray
+5 R Urza's Factory @Mark Tedin
+6 R Serra Avenger @Scott M. Fischer
+7 R Blood Knight @Matt Cavotta
+8 R Groundbreaker @Matt Cavotta
+9 R Imperious Perfect @Scott M. Fischer
+10 R Doran, the Siege Tower @Mark Zug
+11 R Bramblewood Paragon @Jim Murray
+12 R Mutavault @Fred Fields

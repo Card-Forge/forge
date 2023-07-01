@@ -1,0 +1,8 @@
+Name:Ajani, Mentor of Heroes
+ManaCost:3 G W
+Types:Legendary Planeswalker Ajani
+Loyalty:4
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Aura,Creature,Planeswalker | SpellDescription$ Look at the top four cards of your library. You may reveal an Aura, creature, or planeswalker card from among them and put that card into your hand. Put the rest on the bottom of your library in any order.
+A:AB$ GainLife | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | LifeAmount$ 100 | SpellDescription$ You gain 100 life.
+Oracle:[+1]: Distribute three +1/+1 counters among one, two, or three target creatures you control.\n[+1]: Look at the top four cards of your library. You may reveal an Aura, creature, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\n[-8]: You gain 100 life.

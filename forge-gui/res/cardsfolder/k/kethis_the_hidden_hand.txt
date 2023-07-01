@@ -1,0 +1,9 @@
+Name:Kethis, the Hidden Hand
+ManaCost:W B G
+Types:Legendary Creature Elf Advisor
+PT:3/4
+S:Mode$ ReduceCost | ValidCard$ Legendary | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Legendary spells you cast cost {1} less to cast.
+A:AB$ Animate | Cost$ ExileFromGrave<2/Card.Legendary/legendary card> | staticAbilities$ Play | Defined$ ValidGraveyard Card.Legendary+YouOwn | SpellDescription$ Until end of turn, each legendary card in your graveyard gains "You may play this card from your graveyard."
+SVar:Play:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | Description$ You may play this card from your graveyard.
+DeckHints:Type$Legendary
+Oracle:Legendary spells you cast cost {1} less to cast.\nExile two legendary cards from your graveyard: Until end of turn, each legendary card in your graveyard gains "You may play this card from your graveyard."

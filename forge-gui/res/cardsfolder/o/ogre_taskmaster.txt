@@ -1,0 +1,6 @@
+Name:Ogre Taskmaster
+ManaCost:3 R
+Types:Creature Ogre
+PT:4/3
+K:CARDNAME can't block.
+Oracle:Ogre Taskmaster can't block.

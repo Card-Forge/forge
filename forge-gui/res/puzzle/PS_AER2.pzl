@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt #02
+URL:https://i.redd.it/e7t8ck386lly.png
+Goal:Win
+Turns:1
+Difficulty:Medium
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+humancounters=ENERGY=3
+AILife=15
+humanhand=Savage Alliance;Hungry Flames;Confiscation Coup;Tezzeret's Touch;Yahenni's Expertise
+humanbattlefield=Island;Swamp;Swamp;Mountain;Electrostatic Pummeler;Tezzeret the Schemer|Counters:LOYALTY=7;t:Etherium Cell,P:0,T:0,Cost:no cost,Types:Artifact,Keywords:,Image:c_etherium_cell|Ability:Petal;t:Etherium Cell,P:0,T:0,Cost:no cost,Types:Artifact,Keywords:,Image:c_etherium_cell|Ability:Petal;t:Etherium Cell,P:0,T:0,Cost:no cost,Types:Artifact,Keywords:,Image:c_etherium_cell|Ability:Petal;t:Etherium Cell,P:0,T:0,Cost:no cost,Types:Artifact,Keywords:,Image:c_etherium_cell|Ability:Petal
+aihand=Island;Bound by Moonsilver;Plains;Plains;Emissary of the Sleepless;Nearheath Chaplain;Plains
+aibattlefield=Kessig Dire Swine;Brood Monitor;Consulate Skygate;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo3;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo3;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo3;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo3
+AbilityPetal=AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.

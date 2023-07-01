@@ -1,0 +1,7 @@
+Name:Awaken the Sky Tyrant
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a source an opponent controls deals damage to you, sacrifice CARDNAME. If you do, create a 5/5 red Dragon creature token with flying.
+SVar:TrigSac:AB$ Token | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | Cost$ Mandatory Sac<1/CARDNAME>
+SVar:X:Remembered$Amount
+Oracle:When a source an opponent controls deals damage to you, sacrifice Awaken the Sky Tyrant. If you do, create a 5/5 red Dragon creature token with flying.

@@ -1,0 +1,9 @@
+Name:Marauding Looter
+ManaCost:2 U R
+Types:Creature Human Pirate
+PT:4/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ RaidTest | OptionalDecider$ You | Execute$ TrigLoot | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — At the beginning of your end step, if you attacked this turn, you may draw a card. If you do, discard a card.

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Master Splinter 3
+Title=Master Splinter
+Difficulty=hard
+Description=UB Ninjutsu deck
+Icon=Master Splinter.jpg
+Deck Type=constructed
+[main]
+4 Polluted Delta
+4 Drowned Catacomb
+1 Go for the Throat
+3 Higure, the Still Wind
+2 Ink-Eyes, Servant of Oni
+1 Inkfathom Infiltrator
+3 Invisible Stalker
+8 Island
+4 Mistblade Shinobi
+4 Ninja of the Deep Hours
+2 Okiba-Gang Shinobi
+1 Silent-Blade Oni
+3 Swamp
+4 Throat Slitter
+4 Tormented Soul
+4 Triton Shorestalker
+4 Underground Sea
+1 Urborg, Tomb of Yawgmoth
+3 Whispersilk Cloak
+[sideboard]

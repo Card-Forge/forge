@@ -1,0 +1,8 @@
+Name:Reckless Embermage
+ManaCost:3 R
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 1 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to any target and 1 damage to itself.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Self | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:{1}{R}: Reckless Embermage deals 1 damage to any target and 1 damage to itself.

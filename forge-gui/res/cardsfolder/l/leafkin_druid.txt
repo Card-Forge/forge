@@ -1,0 +1,8 @@
+Name:Leafkin Druid
+ManaCost:1 G
+Types:Creature Elemental Druid
+PT:0/3
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G}. If you control four or more creatures, add {G}{G} instead.
+SVar:X:Count$Compare Y GE4.2.1
+SVar:Y:Count$Valid Creature.YouCtrl
+Oracle:{T}: Add {G}. If you control four or more creatures, add {G}{G} instead.

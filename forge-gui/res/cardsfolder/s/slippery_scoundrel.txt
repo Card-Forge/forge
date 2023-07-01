@@ -1,0 +1,8 @@
+Name:Slippery Scoundrel
+ManaCost:2 U
+Types:Creature Human Pirate
+PT:2/2
+K:Ascend
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | Condition$ Blessing | Description$ As long as you have the city's blessing, CARDNAME has hexproof and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | Condition$ Blessing
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs long as you have the city's blessing, Slippery Scoundrel has hexproof and can't be blocked.

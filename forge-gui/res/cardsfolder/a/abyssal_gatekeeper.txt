@@ -1,0 +1,7 @@
+Name:Abyssal Gatekeeper
+ManaCost:1 B
+Types:Creature Horror
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, each player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player
+Oracle:When Abyssal Gatekeeper dies, each player sacrifices a creature.

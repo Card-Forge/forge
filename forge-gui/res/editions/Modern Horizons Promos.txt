@@ -1,0 +1,9 @@
+[metadata]
+Code=PMH1
+Date=2019-06-14
+Name=Modern Horizons Promos
+Type=Promo
+ScryfallCode=PMH1
+
+[cards]
+3 R Astral Drift @Svetlin Velinov

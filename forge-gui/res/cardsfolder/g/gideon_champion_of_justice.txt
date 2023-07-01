@@ -1,0 +1,13 @@
+Name:Gideon, Champion of Justice
+ManaCost:2 W W
+Types:Legendary Planeswalker Gideon
+Loyalty:4
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X | ValidTgts$ Opponent | TgtPrompt$ Select which target opponent's creatures to count | Planeswalker$ True | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on CARDNAME for each creature target opponent controls.
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ GideonPT | Toughness$ GideonPT | Keywords$ Indestructible | Types$ Creature,Human,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, Gideon becomes a Human Soldier creature with power and toughness each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<15/LOYALTY> | ChangeType$ Permanent.Other | ValidDescription$ other permanent | Origin$ Battlefield | Destination$ Exile | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all other permanents.
+SVar:X:TargetedPlayer$CreaturesInPlay
+SVar:GideonPT:Count$CardCounters.LOYALTY
+AI:RemoveDeck:All
+Oracle:[+1]: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.\n[0]: Until end of turn, Gideon, Champion of Justice becomes a Human Soldier creature with power and toughness each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.\n[-15]: Exile all other permanents.

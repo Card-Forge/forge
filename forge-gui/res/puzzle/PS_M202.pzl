@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/07/121.-M202.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You chose "Angel" when Arcane Adaptation entered the battlefield.
+[state]
+humanlife=13
+ailife=26
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Bishop of Wings;Stealth Mission;Vampire's Zeal;Release to the Wind
+humanbattlefield=Arcane Adaptation|ChosenType:Angel|NoETBTrigs;Sanctum Seeker;Twinblade Paladin;Epicure of Blood;Bishop of Wings;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs
+aibattlefield=t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;t:Vampire,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Vampire,Keywords:Lifelink,Image:w_1_1_vampire_lifelink_xln;Ajani's Welcome

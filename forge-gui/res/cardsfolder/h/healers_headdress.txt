@@ -1,0 +1,8 @@
+Name:Healer's Headdress
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+A:AB$ Attach | Cost$ W W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Prevent | AddToughness$ 2 | Description$ Equipped creature gets +0/+2 and has "{T}: Prevent the next 1 damage that would be dealt to any target this turn."
+SVar:Prevent:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+Oracle:Equipped creature gets +0/+2 and has "{T}: Prevent the next 1 damage that would be dealt to any target this turn."\n{W}{W}: Attach Healer's Headdress to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

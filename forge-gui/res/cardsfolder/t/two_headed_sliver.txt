@@ -1,0 +1,7 @@
+Name:Two-Headed Sliver
+ManaCost:1 R
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Menace | Description$ Sliver creatures have menace.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)

@@ -1,0 +1,6 @@
+Name:Enraged Ceratok
+ManaCost:2 G G
+Types:Creature Rhino
+PT:4/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Enraged Ceratok can't be blocked by creatures with power 2 or less.

@@ -1,0 +1,6 @@
+Name:Disappearing Act
+ManaCost:1 U U
+Types:Instant
+A:SP$ Counter | Cost$ 1 U U Return<1/Permanent> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, return a permanent you control to its owner's hand.\nCounter target spell.

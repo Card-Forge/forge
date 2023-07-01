@@ -1,0 +1,23 @@
+[quest]
+id=KHM Challenge: Goldspan Dragon
+OpponentName=The Dragons
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Surtland Frostpyre
+HumanExtras=
+[metadata]
+Title=Goldspan Dragon
+Difficulty=hard
+Description="Why do dragons hoard gold? Because the thing you need most is always to be found where you least want to look. You don't get the gold without the dragon."\n--Jordan Peterson
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=KHM Challenge: Goldspan Dragon
+[Main]
+6 Demon Bolt|KHM|1
+6 Frost Bite|KHM|1
+16 Goldspan Dragon|KHM|2
+26 Snow-Covered Mountain|KHM|1
+6 Tundra Fumarole|KHM|1

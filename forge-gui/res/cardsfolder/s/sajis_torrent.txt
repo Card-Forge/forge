@@ -1,0 +1,8 @@
+Name:Saji's Torrent
+ManaCost:1 U
+Types:Instant
+A:SP$ ChooseNumber | Min$ 0 | Max$ 5 | Defined$ You | Random$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Tap X creatures, where X is a number from 0 to 5 chosen at random.
+SVar:DBChoose:DB$ ChooseCard | Amount$ X | Choices$ Creature | SubAbility$ DBTapAll | StackDescription$ None
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.ChosenCard | StackDescription$ None
+SVar:X:Count$ChosenNumber
+Oracle:Tap X creatures, where X is a number from 0 to 5 chosen at random.

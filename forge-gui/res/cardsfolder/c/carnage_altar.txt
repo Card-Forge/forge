@@ -1,0 +1,7 @@
+Name:Carnage Altar
+ManaCost:2
+Types:Artifact
+A:AB$ Draw | Cost$ 3 Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:{3}, Sacrifice a creature: Draw a card.

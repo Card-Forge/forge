@@ -1,0 +1,10 @@
+Name:Candletrap
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender | Description$ Enchanted creature has defender.
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.EnchantedBy | Description$ Prevent all combat damage that would be dealt by enchanted creature.
+A:AB$ ChangeZone | Cost$ 2 W Sac<1/CARDNAME> | Defined$ Enchanted | CheckSVar$ X | SVarCompare$ GE3 | Origin$ Battlefield | Destination$ Exile | PrecostDesc$ Coven — | SpellDescription$ Exile enchanted creature. Activate only if you control three or more creatures with different powers.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Enchant creature\nEnchanted creature has defender.\nPrevent all combat damage that would be dealt by enchanted creature.\nCoven — {2}{W}, Sacrifice Candletrap: Exile enchanted creature. Activate only if you control three or more creatures with different powers.

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=THS
+Image=manipulative_monstrosities.jpg
+Name=Manipulative Monstrosities
+Description=Release the kraken and other monstrous creatures that will blow your opponents away! Grow larger-than-life creatures of myth to conquer your foes with sheer size.
+[Main]
+2 Archaeomancer|M14
+1 Burnished Hart|THS
+2 Coral Merfolk|M14
+2 Crackling Triton|THS
+1 Curse of the Swine|THS
+1 Disperse|M14
+1 Dissolve|THS
+2 Griptide|THS
+2 Ill-Tempered Cyclops|THS
+16 Island|THS
+2 Lightning Strike|THS
+1 Lost in a Labyrinth|THS
+1 Magma Jet|THS
+10 Mountain|THS
+2 Omenspeaker|THS
+1 Ordeal of Purphoros|THS
+2 Rage of Purphoros|THS
+1 Sea God's Revenge|THS
+2 Sealock Monster|THS
+1 Shipbreaker Kraken+|THS
+2 Shock|M14
+2 Stoneshock Giant|THS
+1 Volcanic Geyser|M14
+1 Wall of Frost|M14
+1 Water Servant|M14

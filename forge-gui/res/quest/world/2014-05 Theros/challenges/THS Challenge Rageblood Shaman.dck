@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Rageblood Shaman
+OpponentName=The Horde
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Rageblood Shaman
+Title=Battle the Horde
+Difficulty=easy
+Description=You have come far, Hero, but the next step on your Hero's Path is the deadliest yet. You will face the Horde, an onslaught of savage and fierce Minotaurs, an unyielding tide of destruction.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+30 Mountain|THS|1
+30 Rageblood Shaman|THS

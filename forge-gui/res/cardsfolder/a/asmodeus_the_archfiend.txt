@@ -1,0 +1,12 @@
+Name:Asmodeus the Archfiend
+ManaCost:4 B B
+Types:Legendary Creature Devil God
+PT:6/6
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileTop | Description$ Binding Contract — If you would draw a card, exile the top card of your library face down instead.
+SVar:ExileTop:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True
+A:AB$ Draw | Cost$ B B B | NumCards$ 7 | SpellDescription$ Draw seven cards.
+A:AB$ ChangeZoneAll | Cost$ B | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Hand | RememberChanged$ True | SubAbility$ DBLoseLife | SpellDescription$ Return all cards exiled with CARDNAME to their owner's hand and you lose that much life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Binding Contract — If you would draw a card, exile the top card of your library face down instead.\n{B}{B}{B}: Draw seven cards.\n{B}: Return all cards exiled with Asmodeus the Archfiend to their owner's hand and you lose that much life.

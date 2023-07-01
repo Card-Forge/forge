@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Solaire 3
+Title=Solaire
+Difficulty=hard
+Description=Mono W Light from Within deck
+Icon=Solaire.jpg
+Deck Type=constructed
+[main]
+3 Dawn Elemental
+1 Divinity of Pride
+1 Elite Inquisitor
+1 Evangel of Heliod
+4 Fiend Hunter
+1 Godhead of Awe
+3 Grand Abolisher
+3 Hearthfire Hobgoblin
+1 Idyllic Tutor
+1 Knight of Meadowgrain
+3 Leonin Skyhunter
+4 Light from Within
+1 Nobilis of War
+1 Oversoul of Dusk
+24 Plains
+2 Plumeveil
+3 Serra Avenger
+2 Leonin Relic-Warder
+1 Angel of Jubilation
+[sideboard]

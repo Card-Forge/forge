@@ -1,0 +1,8 @@
+Name:Barrage Ogre
+ManaCost:3 R R
+Types:Creature Ogre Warrior
+PT:3/3
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:AIPreference:SacCost$Artifact.token+nonCreature,Artifact.token+powerLE1,Artifact.cmcEQ1,Artifact.cmcEQ2
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice an artifact: Barrage Ogre deals 2 damage to any target.

@@ -1,0 +1,9 @@
+Name:Pestilence Rats
+ManaCost:2 B
+Types:Creature Rat
+PT:*/3
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of other Rats on the battlefield.
+SVar:X:Count$Valid Rat.Other
+SVar:BuffedBy:Rat
+AI:RemoveDeck:Random
+Oracle:Pestilence Rats's power is equal to the number of other Rats on the battlefield. (For example, as long as there are two other Rats on the battlefield, Pestilence Rats's power and toughness are 2/3.)

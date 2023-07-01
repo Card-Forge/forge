@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Feasting Troll King
+OpponentName=The Troll Kings
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Feasting Troll King
+Difficulty=medium
+Description=DO NOT FEED THE TROLLS
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Feasting Troll King
+[Main]
+30 Feasting Troll King|ELD|2
+30 Gingerbread Cabin|ELD

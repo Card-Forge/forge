@@ -1,0 +1,7 @@
+Name:Welkin Tern
+ManaCost:1 U
+Types:Creature Bird
+PT:2/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWelkin Tern can block only creatures with flying.

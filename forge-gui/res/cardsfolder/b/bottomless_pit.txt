@@ -1,0 +1,7 @@
+Name:Bottomless Pit
+ManaCost:1 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each player's upkeep, that player discards a card at random.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ Random
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player discards a card at random.

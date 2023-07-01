@@ -1,0 +1,6 @@
+Name:Baffling Defenses
+ManaCost:1 W
+Types:Instant
+A:SP$ Effect | StaticAbilities$ Perpetual0P | RememberObjects$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Name$ Baffling Defenses's Perpetual Effect | Duration$ Permanent | SpellDescription$ Target creature's base power perpetually becomes 0.
+SVar:Perpetual0P:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ 0 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature's base power perpetually becomes 0.
+Oracle:Target creature's base power perpetually becomes 0.

@@ -1,0 +1,7 @@
+Name:Duskhunter Bat
+ManaCost:1 B
+Types:Creature Bat
+PT:1/1
+K:Flying
+K:Bloodthirst:1
+Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\nFlying

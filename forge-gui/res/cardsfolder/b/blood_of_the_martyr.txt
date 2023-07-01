@@ -1,0 +1,8 @@
+Name:Blood of the Martyr
+ManaCost:W W W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ MartyrDamage | SpellDescription$ Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+SVar:MartyrDamage:Event$ DamageDone | ValidTarget$ Creature | Optional$ True | OptionalDecider$ You | DamageTarget$ You | ReplaceWith$ DmgYou | Description$ Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+SVar:DmgYou:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player
+AI:RemoveDeck:All
+Oracle:Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.

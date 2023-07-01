@@ -1,0 +1,6 @@
+Name:Wildslayer Elves
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:3/3
+K:Wither
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)

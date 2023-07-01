@@ -1,0 +1,30 @@
+[metadata]
+Title=Planeswalker Deck: Rowan
+Difficulty=medium
+Description=This official two-color Planeswalker Deck showcases what white-red is doing in Eldraine.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Precon: Planeswalker: Rowan
+[Main]
+1 Acclaimed Contender|ELD|1
+2 Ardenvale Tactician|ELD|1
+4 Garrison Griffin|ELD
+1 Giant Killer|ELD|1
+2 Inspiring Veteran|ELD|1
+2 Joust|ELD
+2 Knight of the Keep|ELD
+10 Mountain|ELD|4
+10 Plains|ELD|1
+2 Prized Griffin|ELD
+3 Rimrock Knight|ELD|1
+3 Rowan's Battleguard|ELD
+2 Rowan's Stalwarts|ELD
+1 Rowan, Fearless Sparkmage|ELD
+3 Scorching Dragonfire|ELD
+2 Venerable Knight|ELD
+1 Weaselback Redcap|ELD
+4 Wind-Scarred Crag|ELD
+2 Youthful Knight|ELD
+[Sideboard]
+1 Plains|ELD|1
+2 Weapon Rack|ELD

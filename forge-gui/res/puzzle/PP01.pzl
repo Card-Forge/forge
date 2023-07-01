@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #01 - So Close
+URL:https://pauperpuzzles.wordpress.com/2017/01/17/1-so-close/
+Goal:Win
+Turns:1
+Difficulty:Easy
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=7
+humanhand=Kor Skyfisher;Journey to Nowhere;Lightning Bolt;Thraben Inspector
+humanbattlefield=Ancient Den;Orzhov Basilica;Orzhov Basilica;Secluded Steppe;Bleak Coven Vampires;Prophetic Prism
+humanlibrary=Galvanic Blast
+aibattlefield=Aven Riftwatcher|Counters:TIME=1

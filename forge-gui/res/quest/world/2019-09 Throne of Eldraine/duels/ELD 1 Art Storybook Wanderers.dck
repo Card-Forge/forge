@@ -1,0 +1,22 @@
+[metadata]
+Title=Storybook: Wanderers
+Difficulty=easy
+Description="Storybook" art showcase for adventurer cards.\n\n"Buying old, worn-out junk. Selling marvels of real value."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 Art: Storybook: Wanderers
+[Main]
+3 Animating Faerie|ELD|2
+4 Bonecrusher Giant|ELD|2
+4 Brazen Borrower|ELD|2
+3 Embereth Shieldbreaker|ELD|2
+4 Fae of Wishes|ELD|2
+3 Hypnotic Sprite|ELD|2
+16 Island|ELD|3
+3 Merchant of the Vale|ELD|2
+4 Merfolk Secretkeeper|ELD|2
+10 Mountain|ELD|3
+3 Queen of Ice|ELD|2
+3 Rimrock Knight|ELD|2
+[Sideboard]
+4 Into the Story|ELD

@@ -1,0 +1,8 @@
+Name:Ember Gale
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Effect | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ Evasion | StaticAbilities$ OppCantBlock | RememberObjects$ Targeted | SubAbility$ DBDamage | SpellDescription$ Creatures target player controls can't block this turn. CARDNAME deals 1 damage to each white and/or blue creature that player controls.
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.White+TargetedPlayerCtrl,Creature.Blue+TargetedPlayerCtrl | ValidDescription$ each creature that's white or blue that player controls.
+SVar:OppCantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.RememberedPlayerCtrl | Description$ Creatures targeted player controls can't block this turn.
+AI:RemoveDeck:All
+Oracle:Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.

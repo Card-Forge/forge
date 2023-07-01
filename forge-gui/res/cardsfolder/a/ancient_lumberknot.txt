@@ -1,0 +1,6 @@
+Name:Ancient Lumberknot
+ManaCost:2 B G
+Types:Creature Treefolk
+PT:1/4
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.powerLTtoughness+YouCtrl | Description$ Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
+Oracle:Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.

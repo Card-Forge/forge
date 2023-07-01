@@ -1,0 +1,10 @@
+Name:Medomai the Ageless
+ManaCost:4 W U
+Types:Legendary Creature Sphinx
+PT:4/4
+K:Flying
+S:Mode$ CantAttack | ValidCard$ Card.Self | Condition$ ExtraTurn | Description$ CARDNAME can't attack during extra turns.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigAddTurn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, take an extra turn after this one.
+SVar:TrigAddTurn:DB$ AddTurn | NumTurns$ 1
+SVar:MustBeBlocked:True
+Oracle:Flying\nWhenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.\nMedomai the Ageless can't attack during extra turns.

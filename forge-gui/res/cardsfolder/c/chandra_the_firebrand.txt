@@ -1,0 +1,9 @@
+Name:Chandra, the Firebrand
+ManaCost:3 R
+Types:Legendary Planeswalker Chandra
+Loyalty:3
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DelayedTrigger | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+A:AB$ DealDamage | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ 6 | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each of up to six targets.
+Oracle:[+1]: Chandra, the Firebrand deals 1 damage to any target.\n[-2]: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\n[-6]: Chandra, the Firebrand deals 6 damage to each of up to six targets.

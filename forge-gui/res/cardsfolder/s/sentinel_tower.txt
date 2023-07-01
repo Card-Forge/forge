@@ -1,0 +1,7 @@
+Name:Sentinel Tower
+ManaCost:4
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigDmg | PlayerTurn$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever an instant or sorcery spell is cast during your turn, CARDNAME deals damage to any target equal to 1 plus the number of instant and sorcery spells cast before that spell this turn.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:TriggerObjectsCurrentCastSpells$Valid Sorcery,Instant
+Oracle:Whenever an instant or sorcery spell is cast during your turn, Sentinel Tower deals damage to any target equal to 1 plus the number of instant and sorcery spells cast before that spell this turn.

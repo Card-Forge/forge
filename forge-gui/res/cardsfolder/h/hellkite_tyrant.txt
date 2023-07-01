@@ -1,0 +1,11 @@
+Name:Hellkite Tyrant
+ManaCost:4 R R
+Types:Creature Dragon
+PT:6/5
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, gain control of all artifacts that player controls.
+SVar:TrigGainControl:DB$ GainControl | AllValid$ Artifact.ControlledBy TriggeredTarget | NewController$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | PresentCompare$ GE20 | IsPresent$ Artifact.YouCtrl | Execute$ WinGame | TriggerDescription$ At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
+SVar:WinGame:DB$ WinsGame | Defined$ You
+Oracle:Flying, trample\nWhenever Hellkite Tyrant deals combat damage to a player, gain control of all artifacts that player controls.\nAt the beginning of your upkeep, if you control twenty or more artifacts, you win the game.

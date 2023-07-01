@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=MIR 3 PT Paris 1997: Big Blue by Jason Gordon
+Title=Big Blue
+Difficulty=hard
+Description=Played by Jason Gordon at Pro Tour: Paris 1997.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Boomerang|MIR
+4 Cloud Elemental|VIS
+2 Desertion|VIS
+4 Dissipate|MIR
+3 Floodgate|MIR
+3 Impulse|VIS
+21 Island|MIR|3
+4 Man-o'-War|VIS
+4 Memory Lapse|MIR
+4 Quicksand|VIS
+2 Snake Basket|VIS
+4 Waterspout Djinn|VIS
+[Sideboard]
+3 Disenchant|MIR
+3 Honorable Passage|VIS
+4 Mind Harness|MIR
+2 Plains|MIR|1
+3 Power Sink|MIR

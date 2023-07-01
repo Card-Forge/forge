@@ -1,0 +1,6 @@
+Name:Master Apothecary
+ManaCost:W W W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ PreventDamage | Cost$ tapXType<1/Cleric> | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
+Oracle:Tap an untapped Cleric you control: Prevent the next 2 damage that would be dealt to any target this turn.

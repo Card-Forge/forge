@@ -1,0 +1,10 @@
+Name:Eldrazi Aggressor
+ManaCost:2 R
+Types:Creature Eldrazi Drone
+PT:2/3
+K:Devoid
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Creature.YouCtrl+Colorless+Other | Description$ CARDNAME has haste as long as you control another colorless creature.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
+Oracle:Devoid (This card has no color.)\nEldrazi Aggressor has haste as long as you control another colorless creature.

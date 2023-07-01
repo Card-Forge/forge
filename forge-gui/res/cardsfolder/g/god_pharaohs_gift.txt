@@ -1,0 +1,11 @@
+Name:God-Pharaoh's Gift
+ManaCost:7
+Types:Artifact
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn.
+SVar:TrigExile:DB$ ChangeZone | Hidden$ True | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | PumpKeywords$ Haste | PumpDuration$ EOT | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+DeckHints:Name$Gate to the Afterlife
+Oracle:At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn.

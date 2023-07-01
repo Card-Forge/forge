@@ -1,0 +1,9 @@
+Name:Watcher of the Roost
+ManaCost:2 W
+Types:Creature Bird Soldier
+PT:2/1
+K:Flying
+K:Morph:Reveal<1/Card.White/white>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Flying\nMorph—Reveal a white card in your hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Watcher of the Roost is turned face up, you gain 2 life.

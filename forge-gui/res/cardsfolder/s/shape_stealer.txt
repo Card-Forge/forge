@@ -1,0 +1,13 @@
+Name:Shape Stealer
+ManaCost:U U
+Types:Creature Shapeshifter Spirit
+PT:1/1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigAnimateBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's base power and toughness to that creature's power and toughness until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigAnimateAttacker | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's base power and toughness to that creature's power and toughness until end of turn.
+SVar:TrigAnimateBlocker:DB$ Animate | Power$ W | Toughness$ X
+SVar:TrigAnimateAttacker:DB$ Animate | Power$ Y | Toughness$ Z
+SVar:W:TriggeredAttacker$CardPower
+SVar:X:TriggeredAttacker$CardToughness
+SVar:Y:TriggeredBlocker$CardPower
+SVar:Z:TriggeredBlocker$CardToughness
+Oracle:Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's base power and toughness to that creature's power and toughness until end of turn.

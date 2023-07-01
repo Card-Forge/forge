@@ -1,0 +1,14 @@
+Name:Jodah, the Unifier
+ManaCost:W U B R G
+Types:Legendary Creature Human Wizard
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Legendary creatures you control get +X/+X, where X is the number of legendary creatures you control.
+T:Mode$ SpellCast | ValidCard$ Card.Legendary+wasCastFromYourHandByYou | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDigUntil | TriggerDescription$ Whenever you cast a legendary spell from your hand, exile cards from the top of your library until you exile a legendary nonland card with lesser mana value. You may cast that card without paying its mana cost. Put the rest on the bottom of your library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand+Legendary+cmcLTY | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Imprinted | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+SVar:Y:TriggeredCard$CardManaCost
+DeckHints:Type$Legendary
+Oracle:Legendary creatures you control get +X/+X, where X is the number of legendary creatures you control.\nWhenever you cast a legendary spell from your hand, exile cards from the top of your library until you exile a legendary nonland card with lesser mana value. You may cast that card without paying its mana cost. Put the rest on the bottom of your library in a random order.

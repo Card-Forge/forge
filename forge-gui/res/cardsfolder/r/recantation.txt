@@ -1,0 +1,9 @@
+Name:Recantation
+ManaCost:3 U U
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ U Sac<1/CARDNAME> | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Permanent | TgtPrompt$ Select target permanent. | SpellDescription$ Return up to X target permanents to their owners' hands, where X is the number of verse counters on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+SVar:X:Count$CardCounters.VERSE
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, you may put a verse counter on Recantation.\n{U}, Sacrifice Recantation: Return up to X target permanents to their owners' hands, where X is the number of verse counters on Recantation.

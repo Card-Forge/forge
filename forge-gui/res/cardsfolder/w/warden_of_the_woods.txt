@@ -1,0 +1,8 @@
+Name:Warden of the Woods
+ManaCost:4 G G
+Types:Creature Treefolk
+PT:5/7
+K:Vigilance
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, you may draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | OptionalDecider$ You
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhenever Warden of the Woods becomes the target of a spell or ability an opponent controls, you may draw two cards.

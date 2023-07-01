@@ -1,0 +1,5 @@
+Name:Seal of Primordium
+ManaCost:1 G
+Types:Enchantment
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:Sacrifice Seal of Primordium: Destroy target artifact or enchantment.

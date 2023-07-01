@@ -1,0 +1,8 @@
+Name:Toshiro Umezawa
+ManaCost:1 B B
+Types:Legendary Creature Human Samurai
+PT:2/2
+K:Bushido:1
+T:Mode$ ChangesZone | ValidCard$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPlay | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that spell would be put into a graveyard this turn, exile it instead.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl | ValidSA$ Spell | TgtPrompt$ Choose target instant from your graveyard | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that spell would be put into a graveyard this turn, exile it instead.

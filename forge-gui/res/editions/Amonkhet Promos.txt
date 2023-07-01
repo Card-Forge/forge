@@ -1,0 +1,12 @@
+[metadata]
+Code=PAKH
+Date=2017-04-28
+Name=Amonkhet Promos
+Type=Promo
+ScryfallCode=PAKH
+
+[cards]
+35 U Trueheart Duelist @Magali Villeneuve
+78 R Archfiend of Ifnir @Slawomir Maniak
+134 R Glorybringer @Grzegorz Rutkowski
+234 R Oracle's Vault @Cliff Childs

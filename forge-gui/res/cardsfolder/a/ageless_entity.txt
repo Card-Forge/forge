@@ -1,0 +1,8 @@
+Name:Ageless Entity
+ManaCost:3 G G
+Types:Creature Elemental
+PT:4/4
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put that many +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$LifeAmount
+Oracle:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.

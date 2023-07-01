@@ -1,0 +1,7 @@
+Name:Blight Mamba
+ManaCost:1 G
+Types:Creature Phyrexian Snake
+PT:1/1
+K:Infect
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{1}{G}: Regenerate Blight Mamba.

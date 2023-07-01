@@ -1,0 +1,24 @@
+[metadata]
+Code=W16
+Date=2016-04-08
+Name=Welcome Deck 2016
+Type=Starter
+ScryfallCode=W16
+
+[cards]
+1 R Aegis Angel @Aleksi Briclot
+2 C Marked by Honor @David Palumbo
+3 U Serra Angel @Greg Staples
+4 U Air Servant @Lars Grant-West
+5 C Disperse @Ryan Yee
+6 R Sphinx of Magosi @James Ryman
+7 C Mind Rot @Steve Luke
+8 R Nightmare @Vance Kovacs
+9 U Sengir Vampire @Kev Walker
+10 C Walking Corpse @Igor Kieryluk
+11 C Borderland Marauder @Scott M. Fischer
+12 U Cone of Flame @Chippy
+13 R Shivan Dragon @Donato Giancola
+14 U Incremental Growth @Chuck Lukacs
+15 C Oakenform @Wayne Reynolds
+16 R Soul of the Harvest @Eytan Zana

@@ -1,0 +1,5 @@
+Name:Street Riot
+ManaCost:4 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Trample | Condition$ PlayerTurn | Description$ As long as it's your turn, creatures you control get +1/+0 and have trample.
+Oracle:As long as it's your turn, creatures you control get +1/+0 and have trample.

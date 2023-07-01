@@ -1,0 +1,6 @@
+Name:Etherium Astrolabe
+ManaCost:2 U
+Types:Artifact
+K:Flash
+A:AB$ Draw | Cost$ B T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Flash\n{B}, {T}, Sacrifice an artifact: Draw a card.

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grave Power
+Description=No need to fear death-- it just makes you stronger! Fill your graveyard with creatures and then reap the rewards on the battlefield.
+Deck Type=Constructed
+Set=DKA
+Image=grave_power.jpg
+[main]
+1 Acidic Slime|M12
+1 AEther Adept|M12
+1 Alluring Siren|M12
+2 Ambush Viper|ISD
+3 Armored Skaab|ISD
+2 Boneyard Wurm|ISD
+1 Brindle Boar|M12
+2 Chasm Drake|M12
+3 Dawntreader Elk|DKA
+2 Deranged Assistant|ISD
+1 Executioner's Hood|DKA
+14 Forest|ISD
+1 Ghoultree+|DKA
+1 Gnaw to the Bone|ISD
+2 Grim Flowering|DKA
+2 Hollowhenge Beast|DKA
+10 Island|ISD
+2 Moon Heron|ISD
+2 Mulch|ISD
+1 Splinterfright|ISD
+2 Tower Geist|DKA
+2 Tracker's Instincts|DKA
+2 Wreath of Geists|ISD
+[sideboard]

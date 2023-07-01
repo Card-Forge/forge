@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Goblin War Strike
+OpponentName=The Strike
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Goblin Firestarter|Goblin Firestarter|Goblin Firestarter|Goblin Firestarter
+[metadata]
+Name=PO2 Challenge: Goblin War Strike
+Title=The Strike
+Difficulty=hard
+Description=They raged at the world, at their family, at their life. But mostly they just raged.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+40 Goblin War Strike|PO2
+20 Mountain|PO2|2

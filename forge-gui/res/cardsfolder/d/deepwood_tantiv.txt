@@ -1,0 +1,8 @@
+Name:Deepwood Tantiv
+ManaCost:4 G
+Types:Creature Beast
+PT:2/4
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME becomes blocked, you gain 2 life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Deepwood Tantiv becomes blocked, you gain 2 life.

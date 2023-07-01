@@ -1,0 +1,8 @@
+Name:Boarded Window
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.attackingYou | AddPower$ -1 | Description$ Creatures attacking you get -1/-0.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigExile | TriggerDescription$ At the beginning of each end step, if you were dealt 4 or more damage this turn, exile CARDNAME.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:X:Count$LifeYouLostThisTurn
+Oracle:Creatures attacking you get -1/-0.\nAt the beginning of each end step, if you were dealt 4 or more damage this turn, exile Boarded Window.

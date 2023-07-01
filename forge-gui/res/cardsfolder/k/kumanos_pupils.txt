@@ -1,0 +1,7 @@
+Name:Kumano's Pupils
+ManaCost:4 R
+Types:Creature Human Shaman
+PT:3/3
+R:Event$ Moved | ValidLKI$ Creature.DamagedBy | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+Oracle:If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.

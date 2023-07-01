@@ -1,0 +1,6 @@
+Name:Erstwhile Trooper
+ManaCost:1 B G
+Types:Creature Zombie Soldier
+PT:2/2
+A:AB$ Pump | Cost$ Discard<1/Creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 and gains trample until end of turn. Activate only once each turn.
+Oracle:Discard a creature card: Erstwhile Trooper gets +2/+2 and gains trample until end of turn. Activate only once each turn.

@@ -1,0 +1,7 @@
+Name:Zuran Spellcaster
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:NonCombatPriority:1
+Oracle:{T}: Zuran Spellcaster deals 1 damage to any target.

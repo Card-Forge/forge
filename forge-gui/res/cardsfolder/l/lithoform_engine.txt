@@ -1,0 +1,7 @@
+Name:Lithoform Engine
+ManaCost:4
+Types:Legendary Artifact
+A:AB$ CopySpellAbility | Cost$ 2 T | TgtPrompt$ Select target activated or triggered ability you control | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card,Emblem | MayChooseTarget$ True | StackDescription$ SpellDescription | SpellDescription$ Copy target activated or triggered ability you control. You may choose new targets for the copy.
+A:AB$ CopySpellAbility | Cost$ 3 T | TgtPrompt$ Select target instant or sorcery spell you control | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+A:AB$ CopySpellAbility | Cost$ 4 T | TgtPrompt$ Select target permanent spell you control | ValidTgts$ Permanent.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target permanent spell you control. (The copy becomes a token.)
+Oracle:{2}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.\n{3}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.\n{4}, {T}: Copy target permanent spell you control. (The copy becomes a token.)

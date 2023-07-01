@@ -1,0 +1,9 @@
+Name:Mizzix of the Izmagnus
+ManaCost:2 U R
+Types:Legendary Creature Goblin Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant.cmcGTX,Sorcery.cmcGTX | ValidActivatingPlayer$ You | Execute$ TrigExperience | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell with mana value greater than the number of experience counters you have, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have.
+SVar:X:Count$YourCountersExperience
+Oracle:Whenever you cast an instant or sorcery spell with mana value greater than the number of experience counters you have, you get an experience counter.\nInstant and sorcery spells you cast cost {1} less to cast for each experience counter you have.

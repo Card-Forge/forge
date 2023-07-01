@@ -1,0 +1,7 @@
+Name:Akroma's Memorial
+ManaCost:7
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying & First Strike & Vigilance & Trample & Haste & Protection from black & Protection from red | Description$ Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.

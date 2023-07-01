@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/11/089.-GRN7.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your answer must satisfy all possible blocking scenarios. Assume the top three cards of your opponent's library are all basic Forests. Titanic Growth and Prying Blade are exiled with your Thief of Sanity.
+[state]
+humanlife=20
+ailife=14
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Urza's Ruinous Blast;The Eldest Reborn;Demonic Vigor;Switcheroo
+humanbattlefield=Thief of Sanity|Id:1|RememberedCards:2,3|ExecuteScript:DBEffect;Etrata, the Silencer;Steadfast Armasaur;Goring Ceratops;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Glacial Fortress;Glacial Fortress;Glacial Fortress;Glacial Fortress
+ailibrary=Forest;Forest;Forest
+aibattlefield=Kraul Harpooner;Primordial Wurm;Trostani Discordant
+aiexile=Titanic Growth|Id:2|ExiledWith:1|FaceDown;Prying Blade|Id:3|ExiledWith:1|FaceDown

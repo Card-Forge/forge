@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Furious Forces
+Description=This deck is all about being the biggest and the strongest, and the formidable mechanic makes your creatures even more daunting when you get enough of them together. Roar with the savagery of a dragon!
+Deck Type=constructed
+Set=DTK
+Image=furious_forces.jpg
+[Main]
+2 Atarka Beastbreaker|DTK
+2 Glade Watcher|DTK
+1 Dragonlord's Servant|DTK
+2 Colossodon Yearling|DTK
+2 Hardened Berserker|DTK
+1 Dragonloft Idol|DTK
+2 Sabertooth Outrider|DTK
+1 Summit Prowler|DTK
+2 Lurking Arynx|DTK
+2 Stampeding Elk Herd|DTK
+1 Harbinger of the Hunt+|DTK
+1 Scion of Ugin|DTK
+2 Savage Ventmaw|DTK
+1 Epic Confrontation|DTK
+1 Tread Upon|DTK
+1 Draconic Roar|DTK
+1 Dragon Fodder|DTK
+1 Magmatic Chasm|DTK
+1 Roast|DTK
+1 Atarka Monument|DTK
+1 Seismic Rupture|DTK
+2 Tail Slash|DTK
+1 Press the Advantage|DTK
+2 Sarkhan's Rage|DTK
+1 Berserkers' Onslaught|DTK
+1 Evolving Wilds|DTK
+12 Forest|DTK
+12 Mountain|DTK

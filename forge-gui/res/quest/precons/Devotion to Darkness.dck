@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=THS
+Image=devotion_to_darkness.jpg
+Name=Devotion to Darkness
+Description=True devotion leads to rewards. Rule the battlefield by devoting yourself to the gods, and control your opponents with unimaginable terror.
+[Main]
+1 Abhorrent Overlord+|THS
+2 Blood-Toll Harpy|THS
+1 Boon of Erebos|THS
+2 Child of Night|M14
+2 Disciple of Phenax|THS
+2 Glimpse the Future|M14
+2 Gray Merchant of Asphodel|THS
+1 Griptide|THS
+2 Horizon Scholar|THS
+2 Insatiable Harpy|THS
+9 Island|THS
+1 Lash of the Whip|THS
+1 March of the Returned|THS
+1 Minotaur Abomination|M14
+2 Mogis's Marauder|THS
+1 Ordeal of Thassa|THS
+1 Pharika's Cure|THS
+1 Rescue from the Underworld|THS
+2 Returned Phalanx|THS
+1 Sea God's Revenge|THS
+2 Sip of Hemlock|THS
+16 Swamp|THS
+2 Undead Minotaur|M14
+1 Voyage's End|THS
+1 Whip of Erebos|THS
+1 Witches' Eye|THS

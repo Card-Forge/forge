@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=POR 2 Strategy Card: The Horde
+Title=The Horde
+Difficulty=medium
+Description="By producing a constant supply of small creatures, you can quickly overwhelm your opponent, first by striking before he or she has any creatures to intercept the attackers, and later by attacking with so many creatures that he or she can't intercept them all. Combined with cards that enhance your creatures, this strategy can end the game rapidly." -The Horde Strategy Card
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Angelic Blessing|POR
+1 Armored Pegasus|POR
+1 Charging Paladin|POR
+1 Devoted Hero|POR
+1 Elite Cat Warrior|POR|2
+1 Elvish Ranger|POR
+1 Fleet-Footed Monk|POR
+6 Forest|POR|4
+1 Gorilla Warrior|POR
+1 Grizzly Bears|POR
+1 Jungle Lion|POR
+1 Keen-Eyed Archers|POR
+1 Knight Errant|POR
+1 Monstrous Growth|POR|2
+1 Moon Sprite|POR
+7 Plains|POR|2
+1 Plant Elemental|POR
+1 Regal Unicorn|POR
+1 Steadfastness|POR
+1 Stern Marshal|POR
+1 Valorous Charge|POR
+1 Venerable Monk|POR
+1 Warrior's Charge|POR|2
+1 Willow Dryad|POR

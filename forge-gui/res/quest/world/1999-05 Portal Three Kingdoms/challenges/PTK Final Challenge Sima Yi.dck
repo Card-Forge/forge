@@ -1,0 +1,22 @@
+[quest]
+id=PTK Final Challenge: Sima Yi, Wei Field Marshal
+OpponentName=The Final Challenge
+AILife=100
+Repeat=false
+Persistent=true
+WinMessage=Congratulations!\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents!\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again!
+Wins=20
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Sima Yi, Wei Field Marshal
+[metadata]
+Name=PTK Final Challenge: Sima Yi, Wei Field Marshal
+Title=The Final Challenge
+Difficulty=very hard
+Description="If only I wasn't legendary..."\n-Sima Yi
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Sima Yi, Wei Field Marshal|PTK|1
+50 Swamp|PTK|3
+20 Overwhelming Forces|PTK|1

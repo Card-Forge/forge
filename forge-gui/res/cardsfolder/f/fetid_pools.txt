@@ -1,0 +1,6 @@
+Name:Fetid Pools
+ManaCost:no cost
+Types:Land Island Swamp
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:2
+Oracle:({T}: Add {U} or {B}.)\nFetid Pools enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

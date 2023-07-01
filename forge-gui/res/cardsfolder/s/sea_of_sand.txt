@@ -1,0 +1,15 @@
+Name:Sea of Sand
+ManaCost:no cost
+Types:Plane Rabiah
+R:Event$ Draw | ActiveZones$ Command | ValidPlayer$ Player | ReplaceWith$ RevealedDraw | Description$ Players reveal each card they draw.
+SVar:RevealedDraw:DB$ Draw | Defined$ ReplacedPlayer | NumCards$ 1 | SubAbility$ TrigReveal | RememberDrawn$ True
+SVar:TrigReveal:DB$ Reveal | Defined$ ReplacedPlayer | RevealValid$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Drawn | ValidCard$ Card.Land | TriggerZones$ Command | Execute$ TrigGain | TriggerDescription$ Whenever a player draws a land card, that player gains 3 life.
+SVar:TrigGain:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
+T:Mode$ Drawn | ValidCard$ Card.nonLand | TriggerZones$ Command | Execute$ TrigLose | TriggerDescription$ Whenever a player draws a nonland card, that player loses 3 life.
+SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 3
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, put target permanent on top of its owner's library.
+SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:Players reveal each card they draw.\nWhenever a player draws a land card, that player gains 3 life.\nWhenever a player draws a nonland card, that player loses 3 life.\nWhenever chaos ensues, put target permanent on top of its owner's library.

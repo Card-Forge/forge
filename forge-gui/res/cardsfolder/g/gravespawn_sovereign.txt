@@ -1,0 +1,7 @@
+Name:Gravespawn Sovereign
+ManaCost:4 B B
+Types:Creature Zombie
+PT:3/3
+A:AB$ ChangeZone | Cost$ tapXType<5/Zombie> | TgtPrompt$ Choose target creature card in a graveyard | GainControl$ True | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
+AI:RemoveDeck:Random
+Oracle:Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control.

@@ -1,0 +1,8 @@
+Name:Sydri, Galvanic Genius
+ManaCost:W U B
+Types:Legendary Creature Human Artificer
+PT:2/2
+A:AB$ Animate | Cost$ U | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.
+SVar:X:Targeted$CardManaCost
+A:AB$ Pump | Cost$ W B | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | KW$ Deathtouch & Lifelink | SpellDescription$ Target artifact creature gains deathtouch and lifelink until end of turn.
+Oracle:{U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.\n{W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.

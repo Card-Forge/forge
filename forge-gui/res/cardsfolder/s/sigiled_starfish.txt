@@ -1,0 +1,6 @@
+Name:Sigiled Starfish
+ManaCost:1 U
+Types:Creature Starfish
+PT:0/3
+A:AB$ Scry | Cost$ T | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:{T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

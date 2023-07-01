@@ -1,0 +1,32 @@
+[duel]
+
+[metadata]
+Name=Ares' Art of War 3
+Title=Ares
+Icon=Ares.jpg
+Difficulty=hard
+Description=[W/R] Aggro.
+Deck Type=constructed
+
+[Main]
+13 Mountain|SHM
+11 Plains|SHM
+
+3 Balefire Liege|EVE
+2 Battlegate Mimic|EVE
+2 Belligerent Hatchling|EVE
+3 Blaze|10E
+2 Double Cleave|EVE
+3 Figure of Destiny|EVE
+4 Hearthfire Hobgoblin|EVE
+3 Hobgoblin Dragoon|EVE
+4 Incinerate|10E
+2 Mogg Fanatic|10E
+3 Raging Goblin|10E
+2 Rise of the Hobgoblins|EVE
+2 Scourge of the Nobilis|EVE
+1 Waves of Aggression|EVE
+
+[Sideboard]
+[Planes]
+[Schemes]

@@ -1,0 +1,9 @@
+Name:Cohort|Deck:Cohort.dck|Variant:None|Avatar:Drana's Chosen|Desc:
+Name:Level Up|Deck:Level Up.dck|Variant:None|Avatar:Lighthouse Chronologist|Desc:
+Name:Surge|Deck:Surge.dck|Variant:None|Avatar:Crush of Tentacles|Desc:
+Name:It's a Trap|Deck:It's a Trap.dck|Variant:None|Avatar:Trapmaker's Snare|Desc:
+Name:Lorthos, the Tidemaker|Deck:Lorthos, the Tidemaker.dck|Variant:Commander|Avatar:Lorthos, the Tidemaker|Desc:
+Name:Wrexial, the Risen Deep|Deck:Wrexial, the Risen Deep.dck|Variant:Commander|Avatar:Wrexial, the Risen Deep|Desc:
+Name:Ob Nixilis Reignited|Deck:Ob Nixilis Reignited.dck|Variant:Planeswalker|Avatar:Ob Nixilis Reignited|Desc:
+Name:Kiora, Master of the Depths|Deck:Kiora, Master of the Depths.dck|Variant:Planeswalker|Avatar:Kiora, Master of the Depths|Desc:
+Name:Jace, the Mind Sculptor|Deck:Jace, the Mind Sculptor.dck|Variant:Planeswalker|Avatar:Jace, the Mind Sculptor|Desc:

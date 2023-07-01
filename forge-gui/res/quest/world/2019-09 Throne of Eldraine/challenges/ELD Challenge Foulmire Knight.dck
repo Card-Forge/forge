@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Foulmire Knight
+OpponentName=The Knights
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Lucky Clover|Giant's Skewer
+HumanExtras=
+[metadata]
+Title=Foulmire Knight
+Difficulty=medium
+Description=The knights start with a Lucky Clover and a Giant's Skewer.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Foulmire Knight
+[Main]
+30 Foulmire Knight|ELD|2
+10 Heraldic Banner|ELD
+20 Swamp|ELD|1

@@ -1,0 +1,7 @@
+Name:Halam Djinn
+ManaCost:5 R
+Types:Creature Djinn
+PT:6/5
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self+MostProminentColor red | AddPower$ -2 | AddToughness$ -2 | Description$ CARDNAME gets -2/-2 as long as red is the most common color among all permanents or is tied for most common.
+Oracle:Haste\nHalam Djinn gets -2/-2 as long as red is the most common color among all permanents or is tied for most common.

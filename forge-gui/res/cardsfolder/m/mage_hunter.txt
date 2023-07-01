@@ -1,0 +1,8 @@
+Name:Mage Hunter
+ManaCost:3 B
+Types:Creature Horror
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent casts or copies an instant or sorcery spell, they lose 1 life.
+T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDrain | Secondary$ True | TriggerDescription$ Whenever an opponent casts or copies an instant or sorcery spell, they lose 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 1
+Oracle:Whenever an opponent casts or copies an instant or sorcery spell, they lose 1 life.

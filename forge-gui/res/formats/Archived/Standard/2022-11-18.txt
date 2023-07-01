@@ -1,0 +1,7 @@
+[format]
+Name:Standard (BRO)
+Type:Archived
+Subtype:Standard
+Effective:2022-11-18
+Sets:MID, VOW, NEO, SNC, DMU, BRO
+Banned:The Meathook Massacre

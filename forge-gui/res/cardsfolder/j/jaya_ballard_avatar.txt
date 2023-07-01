@@ -1,0 +1,8 @@
+Name:Jaya Ballard Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+1
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ X | ValidTgts$ Any | NumDmg$ Y | ActivationLimit$ 1 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals an amount of damage chosen at random from 0 to X to any target. Activate only once each turn.
+SVar:X:Count$xPaid
+SVar:Y:Count$Random.0.X
+Oracle:Hand +0, life +1\n{X}: Jaya Ballard Avatar deals an amount of damage chosen at random from 0 to X to any target. Activate only once each turn.

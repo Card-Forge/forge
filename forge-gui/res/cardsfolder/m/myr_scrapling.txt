@@ -1,0 +1,7 @@
+Name:Myr Scrapling
+ManaCost:1
+Types:Artifact Creature Myr
+PT:1/1
+A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+DeckHas:Ability$Counters
+Oracle:Sacrifice Myr Scrapling: Put a +1/+1 counter on target creature.

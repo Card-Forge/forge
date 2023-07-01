@@ -1,0 +1,15 @@
+Name:Captain Rex Nebula
+ManaCost:1 R W
+Types:Legendary Creature Human Pilot Employee
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, choose target nonland permanent you control. Until end of turn, it becomes a Vehicle artifact with base power and toughness each equal to its mana value, and it gains crew 2 and "Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target."
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | RemoveCardTypes$ True | Power$ X | Toughness$ X | Types$ Vehicle,Artifact | Keywords$ Crew:2 | Triggers$ CrashLand
+SVar:CrashLand:Mode$ DamageDealtOnce | ValidSource$ Card.Self | ValidTarget$ Player,Permanent | Execute$ RollCounters | TriggerZones$ Battlefield | TriggerDescription$ Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target.
+SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ Crash
+SVar:Crash:DB$ Sacrifice | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQY | SubAbility$ CrashDamage
+SVar:CrashDamage:DB$ DealDamage | ValidTgts$ Planeswalker,Player,Creature | TgtPrompt$ Choose any target | NumDmg$ Y | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQY
+SVar:X:Targeted$CardManaCost
+SVar:Y:Count$CardManaCost
+DeckHints:Type$Vehicle
+DeckHas:Ability$Sacrifice
+Oracle:At the beginning of combat on your turn, choose target nonland permanent you control. Until end of turn, it becomes a Vehicle artifact with base power and toughness each equal to its mana value, and it gains crew 2 and "Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target."

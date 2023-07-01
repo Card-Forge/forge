@@ -1,0 +1,7 @@
+Name:Fists of Flame
+ManaCost:1 R
+Types:Instant
+A:SP$ Draw | NumCards$ 1 | SubAbility$ DBPump | SpellDescription$ Draw a card.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.
+SVar:X:Count$YouDrewThisTurn
+Oracle:Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.

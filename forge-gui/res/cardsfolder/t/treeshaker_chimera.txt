@@ -1,0 +1,8 @@
+Name:Treeshaker Chimera
+ManaCost:5 G G
+Types:Creature Chimera
+PT:8/5
+K:All creatures able to block CARDNAME do so.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
+Oracle:All creatures able to block Treeshaker Chimera do so.\nWhen Treeshaker Chimera dies, draw three cards.

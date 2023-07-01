@@ -1,0 +1,22 @@
+[quest]
+id=2
+AILife=20
+Repeat=true
+Wins=1
+Card Reward=1 random rares;1 green rares;chosen card rarity:C,U sets:USG,ULG,UDS
+Ticket Reward=true
+Credit Reward=400
+HumanExtras=Wall of Glare|Wall of Glare|Wall of Glare|Wall of Glare|Plains|Plains
+AIExtras=Ancient Silverback|Ancient Silverback|Ancient Silverback|Ancient Silverback|Ancient Silverback|Forest|Forest|Forest
+[metadata]
+Name=quest2
+Title=Ancient threats
+Difficulty=hard
+Description=Ancient monsters are rampaging - can the walls keep them out?
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+10 Forest|USG
+2 Rancor|ULG
+5 Ancient Silverback|UDS
+[sideboard]

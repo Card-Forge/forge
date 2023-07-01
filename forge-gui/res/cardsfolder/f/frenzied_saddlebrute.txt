@@ -1,0 +1,8 @@
+Name:Frenzied Saddlebrute
+ManaCost:4 R
+Types:Creature Orc Warrior
+PT:5/4
+K:Haste
+S:Mode$ CanAttackIfHaste | ValidTarget$ Opponent,Planeswalker.OppCtrl | Description$ All creatures can attack your opponents and planeswalkers your opponents control as though those creatures had haste.
+SVar:PlayMain1:TRUE
+Oracle:Haste\nAll creatures can attack your opponents and planeswalkers your opponents control as though those creatures had haste.

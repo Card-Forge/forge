@@ -1,0 +1,10 @@
+Name:Stenchskipper
+ManaCost:3 B
+Types:Creature Elemental
+PT:6/5
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Goblin.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Goblins, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+AI:RemoveDeck:Random
+SVar:NeedsToPlay:Goblin.YouCtrl
+Oracle:Flying\nAt the beginning of the end step, if you control no Goblins, sacrifice Stenchskipper.

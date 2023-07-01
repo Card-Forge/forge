@@ -1,0 +1,9 @@
+Name:Drone Token
+ManaCost:no cost
+Types:Artifact Creature Drone
+PT:2/2
+K:Deathtouch
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigDrain | TriggerDescription$ When this creature leaves the battlefield, each opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Deathtouch\nWhen this creature leaves the battlefield, each opponent loses 2 life and you gain 2 life.

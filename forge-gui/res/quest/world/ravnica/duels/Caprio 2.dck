@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Caprio 2
+Title=Caprio
+Icon=Caprio.jpg
+Difficulty=medium
+Description=Catch me if you can..
+Deck Type=constructed
+[main]
+4 Compulsive Research|RAV
+4 Cyclonic Rift|RTR
+4 Muddle the Mixture|RAV
+4 Dimir Guildgate|GTC
+1 Duskmantle Seer|GTC
+4 Hunted Horror|RAV
+4 Hunted Phantasm|RAV
+4 Illness in the Ranks|GTC
+8 Island|RTR
+1 Jace, Architect of Thought|RTR
+4 Hatching Plans|GPT
+4 Leyline of Singularity|GPT
+1 Mimeofacture|GPT
+1 Stinkweed Imp|RAV
+1 Dimir House Guard|RAV
+8 Swamp|RTR
+4 Watery Grave|GTC
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,11 @@
+Name:Zabaz, the Glimmerwasp
+ManaCost:1
+Types:Legendary Artifact Creature Insect
+PT:0/0
+K:Modular:1
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCause$ Triggered.Modular | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounter | Description$ If a modular triggered ability would put one or more +1/+1 counters on a creature you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounter:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+A:AB$ Destroy | Cost$ R | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Choose target artifact you control | SpellDescription$ Destroy target artifact you control.
+A:AB$ Pump | Cost$ W | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:Modular 1\nIf a modular triggered ability would put one or more +1/+1 counters on a creature you control, that many plus one +1/+1 counters are put on it instead.\n{R}: Destroy target artifact you control.\n{W}: Zabaz, the Glimmerwasp gains flying until end of turn.

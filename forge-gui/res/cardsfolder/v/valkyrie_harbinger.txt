@@ -1,0 +1,12 @@
+Name:Valkyrie Harbinger
+ManaCost:4 W W
+Types:Creature Angel Cleric
+PT:4/5
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Token|LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Flying, lifelink\nAt the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.

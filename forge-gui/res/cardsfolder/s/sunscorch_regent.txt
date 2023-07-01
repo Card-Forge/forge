@@ -1,0 +1,9 @@
+Name:Sunscorch Regent
+ManaCost:3 W W
+Types:Creature Dragon
+PT:4/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, put a +1/+1 counter on CARDNAME and you gain 1 life.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on Sunscorch Regent and you gain 1 life.

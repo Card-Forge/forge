@@ -1,0 +1,7 @@
+Name:Goblin Brawler
+ManaCost:2 R
+Types:Creature Goblin Warrior
+PT:2/2
+K:First Strike
+S:Mode$ CantAttach | ValidCard$ Card.Equipment | Target$ Card.Self | Description$ CARDNAME can't be equipped.
+Oracle:First strike\nGoblin Brawler can't be equipped.

@@ -1,0 +1,9 @@
+Name:Spectrum Sentinel
+ManaCost:1
+Types:Artifact Creature Soldier
+PT:1/2
+K:Protection:Card.MultiColor:Protection from multicolored
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.nonBasic+OppCtrl | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nonbasic land enters the battlefield under an opponent's control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Protection from multicolored (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything multicolored.)\nWhenever a nonbasic land enters the battlefield under an opponent's control, you gain 1 life.

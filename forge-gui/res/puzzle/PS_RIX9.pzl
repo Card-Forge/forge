@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/03/RIX9-Mar-19.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. You have six cards left in your library - one of each basic land and Vraska, Scheming Gorgon. You don't know their order. You have not cast Approach of the Second Sun this game. Your opponent has no cards in hand.
+[state]
+humanlife=1
+ailife=14
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Approach of the Second Sun;Expel from Orazca;Blossoming Defense;River's Rebuke
+humanlibrary=Mountain;Island;Plains;Vraska, Scheming Gorgon;Swamp;Forest
+humangraveyard=
+humanbattlefield=Kefnet the Mindful;Ravenous Chupacabra;Rashmi, Eternities Crafter;Nicol Bolas, the Deceiver|Counters:LOYALTY=11;Irrigated Farmland;Irrigated Farmland;Irrigated Farmland;Irrigated Farmland;Canyon Slough;Canyon Slough;Canyon Slough;Canyon Slough;Hashep Oasis;Hashep Oasis
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Twilight Prophet;Grasping Scoundrel;Grasping Scoundrel;Grasping Scoundrel;Grasping Scoundrel
+aiexile=
+aicommand=

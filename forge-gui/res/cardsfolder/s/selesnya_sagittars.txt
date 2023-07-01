@@ -1,0 +1,7 @@
+Name:Selesnya Sagittars
+ManaCost:3 G W
+Types:Creature Elf Archer
+PT:2/5
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+Oracle:Reach (This creature can block creatures with flying.)\nSelesnya Sagittars can block an additional creature each combat.

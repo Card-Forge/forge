@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Darrin Stephens 2
+Title=Darrin Stephens
+Difficulty=medium
+Description=Mono U Affinity deck with Affinity for artifacts and Modular cards
+Icon=Darrin Stephens.jpg
+Deck Type=constructed
+[main]
+3 Thoughtcast
+1 Artificer's Epiphany
+1 Ethersworn Adjudicator
+1 Scepter of Insight
+1 Tezzeret the Seeker
+3 Master of Etherium
+1 Trinket Mage
+4 Frogmite
+1 Ancient Den
+2 Thirst for Knowledge
+2 Somber Hoverguard
+1 Broodstar
+10 Island|SOM
+4 Seat of the Synod
+1 Assert Authority
+1 Vault of Whispers
+1 Silver Myr
+1 Vedalken Archmage
+4 Darksteel Citadel
+4 Myr Enforcer
+4 Etherium Sculptor
+1 Qumulox
+1 Great Furnace
+1 Tree of Tales
+3 Arcbound Worker
+1 Chrome Steed
+1 Snapsail Glider
+1 Thopter Spy Network
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Woodland Stream
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+Oracle:Woodland Stream enters the battlefield tapped.\n{T}: Add {G} or {U}.

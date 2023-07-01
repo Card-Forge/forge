@@ -1,0 +1,6 @@
+Name:Ant Queen
+ManaCost:3 G G
+Types:Creature Insect
+PT:5/5
+A:AB$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You | SpellDescription$ Create a 1/1 green Insect creature token.
+Oracle:{1}{G}: Create a 1/1 green Insect creature token.

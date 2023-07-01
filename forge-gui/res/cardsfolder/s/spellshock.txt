@@ -1,0 +1,7 @@
+Name:Spellshock
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 2
+AI:RemoveDeck:All
+Oracle:Whenever a player casts a spell, Spellshock deals 2 damage to that player.

@@ -1,0 +1,7 @@
+Name:Trinisphere
+ManaCost:3
+Types:Artifact
+S:Mode$ SetCost | ValidCard$ Card | Type$ Spell | Amount$ 3 | RaiseTo$ True | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast costs {2}{B} to cast instead.)
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast costs {2}{B} to cast instead.)

@@ -1,0 +1,6 @@
+Name:Spara's Headquarters
+ManaCost:no cost
+Types:Land Forest Plains Island
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {G}, {W}, or {U}.)\nSpara's Headquarters enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

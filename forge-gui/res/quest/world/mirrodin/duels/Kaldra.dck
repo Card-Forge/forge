@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Kaldra
+Title=Kaldra
+Difficulty=medium
+Description="Put on the full armor of God, so that you can take your stand against the devil’s schemes. For our struggle is not against flesh and blood, but against the rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms."
+Icon=Kaldra.jpg
+Deck Type=constructed
+[Main]
+4 Grand Architect|SOM
+4 Helm of Kaldra|5DN
+24 Island|MRD|1
+2 Lumengrid Warden|MRD
+1 March of the Machines|MRD
+3 Oculus|MBS
+4 Shield of Kaldra|DST
+4 Spined Thopter|NPH
+4 Sword of Kaldra|MRD
+1 Tower of Fortunes|MRD
+1 Vedalken Anatomist|MBS
+4 Vedalken Certarch|SOM
+4 Vedalken Engineer|DST
+[sideboard]

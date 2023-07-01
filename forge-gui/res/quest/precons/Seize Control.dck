@@ -1,0 +1,87 @@
+[metadata]
+Name=Seize Control
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Mizzix of the Izmagnus rose from humble beginnings to a place of power by being the craftiest goblin in the forges. As she unleashes more and more spells, they get even cheaper to cast, allowing her to sustain her dominance.
+Set=C15
+Image=seize_control.png
+[Commander]
+1 Mizzix of the Izmagnus+|C15
+[main]
+1 Goblin Electromancer|C15
+1 Jace's Archivist|C15
+1 Gigantoplasm|C15
+1 Talrand, Sky Summoner|C15
+1 Psychosis Crawler|C15
+1 Lone Revenant|C15
+1 Broodbirth Viper|C15
+1 Illusory Ambusher|C15
+1 Warchief Giant|C15
+1 Charmbreaker Devils|C15
+1 Arjun, the Shifting Flame|C15
+1 Etherium-Horn Sorcerer|C15
+1 Melek, Izzet Paragon|C15
+1 Dragon Mage|C15
+1 Preordain|C15
+1 Faithless Looting|C15
+1 Vandalblast|C15
+1 Mizzium Mortars|C15
+1 Windfall|C15
+1 Meteor Blast|C15
+1 Mystic Retrieval|C15
+1 Stolen Goods|C15
+1 Rite of Replication|C15
+1 Sleep|C15
+1 Chain Reaction|C15
+1 Mizzix's Mastery|C15
+1 Call the Skybreaker|C15
+1 Blatant Thievery|C15
+1 Epic Experiment|C15
+1 Blustersquall|C15
+1 Brainstorm|C15
+1 Echoing Truth|C15
+1 Desperate Ravings|C15
+1 Urza's Rage|C15
+1 Counterflux|C15
+1 Aetherize|C15
+1 Fact or Fiction|C15
+1 Reins of Power|C15
+1 Steam Augury|C15
+1 Mystic Confluence|C15
+1 Word of Seizing|C15
+1 Act of Aggression|C15
+1 Prophetic Bolt|C15
+1 Aethersnatch|C15
+1 Mirror Match|C15
+1 Firemind's Foresight|C15
+1 Repeal|C15
+1 Comet Storm|C15
+1 Magmaquake|C15
+1 Stroke of Genius|C15
+1 Dominate|C15
+1 Blue Sun's Zenith|C15
+1 Sol Ring|C15
+1 Izzet Signet|C15
+1 Thought Vessel|C15
+1 Worn Powerstone|C15
+1 Seal of the Guildpact|C15
+1 Awaken the Sky Tyrant|C15
+1 Rite of the Raging Storm|C15
+1 Thought Reflection|C15
+1 Command Tower|C15
+1 Evolving Wilds|C15
+1 Izzet Boilerworks|C15
+1 Izzet Guildgate|C15
+1 Reliquary Tower|C15
+1 Rogue's Passage|C15
+1 Spinerock Knoll|C15
+1 Swiftwater Cliffs|C15
+1 Temple of the False God|C15
+1 Terramorphic Expanse|C15
+1 Vivid Crag|C15
+1 Vivid Creek|C15
+14 Island|C15
+13 Mountain|C15

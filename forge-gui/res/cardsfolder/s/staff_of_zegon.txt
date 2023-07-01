@@ -1,0 +1,5 @@
+Name:Staff of Zegon
+ManaCost:4
+Types:Artifact
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
+Oracle:{3}, {T}: Target creature gets -2/-0 until end of turn.

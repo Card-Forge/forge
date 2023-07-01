@@ -1,0 +1,14 @@
+Name:Lucius the Eternal
+ManaCost:3 B R
+Types:Legendary Creature Astartes Warrior
+PT:5/3
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Armor of Shrieking Souls — When CARDNAME dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return CARDNAME from exile to the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Triggers$ ComeBack | ImprintCards$ ThisTargetedCard | Duration$ Permanent | ForgetOnMoved$ Exile | RememberObjects$ TriggeredCard
+SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:SacMe:3
+DeckHints:Ability$Sacrifice
+Oracle:Haste\nArmor of Shrieking Souls — When Lucius the Eternal dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return Lucius the Eternal from exile to the battlefield under its owner's control.

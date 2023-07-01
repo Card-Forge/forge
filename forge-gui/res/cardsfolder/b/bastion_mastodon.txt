@@ -1,0 +1,7 @@
+Name:Bastion Mastodon
+ManaCost:5
+Types:Artifact Creature Elephant
+PT:4/5
+A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance until end of turn.
+AI:RemoveDeck:Random
+Oracle:{W}: Bastion Mastodon gains vigilance until end of turn.

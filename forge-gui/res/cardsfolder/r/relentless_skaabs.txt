@@ -1,0 +1,7 @@
+Name:Relentless Skaabs
+ManaCost:3 U U
+Types:Creature Zombie
+PT:4/4
+K:Undying
+A:SP$ PermanentCreature | Cost$ 3 U U ExileFromGrave<1/Creature>
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

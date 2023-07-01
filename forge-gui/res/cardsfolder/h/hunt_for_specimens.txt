@@ -1,0 +1,7 @@
+Name:Hunt for Specimens
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Token | TokenScript$ bg_1_1_pest_lifegain | SubAbility$ DBLearn | SpellDescription$ Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+DeckHas:Ability$Token|LifeGain
+Oracle:Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

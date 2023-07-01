@@ -1,0 +1,6 @@
+Name:Boreal Centaur
+ManaCost:1 G
+Types:Snow Creature Centaur Warrior
+PT:2/2
+A:AB$ Pump | Cost$ S | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Activate only once each turn.
+Oracle:{S}: Boreal Centaur gets +1/+1 until end of turn. Activate only once each turn. ({S} can be paid with one mana from a snow source.)

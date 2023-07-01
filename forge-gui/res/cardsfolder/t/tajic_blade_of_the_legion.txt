@@ -1,0 +1,8 @@
+Name:Tajic, Blade of the Legion
+ManaCost:2 R W
+Types:Legendary Creature Human Soldier
+PT:2/2
+K:Indestructible
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gets +5/+5 until end of turn.
+SVar:TrigBattalionPump:DB$ Pump | NumAtt$ +5 | NumDef$ +5
+Oracle:Indestructible\nBattalion — Whenever Tajic, Blade of the Legion and at least two other creatures attack, Tajic gets +5/+5 until end of turn.

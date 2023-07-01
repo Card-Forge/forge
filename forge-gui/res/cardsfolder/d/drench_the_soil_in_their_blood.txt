@@ -1,0 +1,7 @@
+Name:Drench the Soil in Their Blood
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ BloodyCombat | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, after this main phase, there is an additional combat phase followed by an additional main phase. Creatures you control gain vigilance until end of turn.
+SVar:BloodyCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2 | SubAbility$ MakeVigilant
+SVar:MakeVigilant:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+Oracle:When you set this scheme in motion, after this main phase, there is an additional combat phase followed by an additional main phase. Creatures you control gain vigilance until end of turn.

@@ -1,0 +1,5 @@
+Name:Lay Bare the Heart
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+nonLegendary | DiscardValidDesc$ nonlegendary, nonland | SpellDescription$ Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.
+Oracle:Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.

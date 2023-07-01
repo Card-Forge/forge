@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Wishmaster 2
+Title=The Wishmaster
+Difficulty=medium
+Description=UBR djinn and non-creature spell theme deck
+Icon=Wishmaster 2.jpg
+Deck Type=constructed
+[Main]
+2 Ancestral Vision
+2 Burning Wish
+1 Cormela, Glamour Thief
+3 Counterspell
+3 Crumbling Necropolis
+4 Crypt of the Eternals
+2 Cunning Wish
+1 Djinn Illuminatus
+1 Djinn of Infinite Deceits
+1 Djinn of Wishes
+2 Emberwilde Captain
+2 Fledgling Djinn
+2 Future Sight
+3 Ice Tunnel
+3 Island
+2 Juzam Djinn
+1 Maelstrom Muse
+2 Mistfire Adept
+3 Mountain
+3 Obelisk of Grixis
+2 Ojutai's Summons
+2 Old Man of the Sea
+2 Skywise Teachings
+2 Stratus Dancer
+3 Sulfurous Mire
+1 Tidespout Tyrant
+2 Twincast
+3 Volatile Fjord
+[Sideboard]
+2 Ancestral Recall
+1 Flame Wave
+2 Increasing Vengeance
+2 Mana Drain
+1 Plague Wind
+2 Sever the Bloodline
+2 Slave of Bolas
+2 Spinal Embrace
+1 Temporal Manipulation

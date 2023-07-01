@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Ertai, Wizard Adept
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Blue control/counter deck
+Deck Type=constructed
+Name=Ertai2
+[Main]
+4 Counterspell|TMP
+4 Dismiss|TMP
+4 Ertai, Wizard Adept|EXO
+4 Evacuation|STH
+6 Island|TMP|1
+6 Island|TMP|2
+6 Island|TMP|3
+4 Island|TMP|4
+4 Legacy's Allure|TMP
+4 Mana Leak|STH
+2 Power Sink|TMP
+4 Propaganda|TMP
+4 Scrivener|EXO
+2 Thumbscrews|TMP
+2 Treasure Trove|EXO

@@ -1,0 +1,10 @@
+Name:Thrummingbird
+ManaCost:1 U
+Types:Creature Phyrexian Bird Horror
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters
+Oracle:Flying\nWhenever Thrummingbird deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

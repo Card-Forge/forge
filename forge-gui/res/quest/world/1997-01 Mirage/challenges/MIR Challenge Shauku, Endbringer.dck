@@ -1,0 +1,18 @@
+[quest]
+id=MIR Challenge: Shauku, Endbringer
+OpponentName=Shauku, Endbringer
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Shauku, Endbringer|Teferi's Isle
+[metadata]
+Name=MIR Challenge: Shauku, Endbringer
+Title=Shauku, Endbringer
+Difficulty=hard
+Description=First death. Then Shauku.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+60 Mystic Veil|VIS

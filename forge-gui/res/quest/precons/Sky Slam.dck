@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sky Slam 
+Description=Ground creatures can only stand by helplessly unable to block your soaring agents of destruction. With all its counters and bounce spells, this deck will make your opponent's head spin.
+Deck Type=constructed
+Set=8ED
+Image=sky_slam.jpg
+[main]
+1 Air Elemental|8ED
+1 Aven Fisher|8ED
+1 Coastal Hornclaw|8ED
+1 Dehydration|8ED
+1 Fighting Drake|8ED
+1 Fleeting Image|8ED
+2 Horned Turtle|8ED
+17 Island|8ED
+1 Mana Leak|8ED
+1 Phantom Warrior|8ED
+1 Puppeteer|8ED
+2 Remove Soul|8ED
+1 Sage Owl|8ED
+1 Spiketail Hatchling|8ED
+2 Thieving Magpie|8ED
+3 Unsummon|8ED
+1 Urza's Armor|8ED
+2 Wind Drake|8ED
+[sideboard]

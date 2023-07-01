@@ -1,0 +1,7 @@
+Name:Levitation
+ManaCost:2 U U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have flying.

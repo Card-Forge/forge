@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kjeldoran Cunning
+Description=The formidable Kjeldoran army reached the height of its power during the ice age. Enlist to learn the secrets of their battle tactics, including the crafty ripple mechanic that can magnify your spells two-, three-, or even fourfold.
+Deck Type=constructed
+Set=CSP
+Image=kjeldoran_cunning.jpg
+[main]
+1 Binding Grasp|ICE
+2 Boreal Shelf|CSP
+3 Brainstorm|ICE
+1 Darien, King of Kjeldor|CSP
+1 Disenchant|ICE
+1 Field Marshal|CSP
+4 Island|ICE|1
+4 Island|ICE|2
+3 Island|ICE|3
+1 Jotun Grunt|CSP
+1 Jotun Owl Keeper|CSP
+2 Kjeldoran Elite Guard|ICE
+1 Kjeldoran Gargoyle|CSP
+1 Kjeldoran Home Guard|ALL
+3 Kjeldoran Outrider|CSP
+1 Kjeldoran Pride|ALL|2
+2 Lat-Nam's Legacy|ALL|2
+4 Plains|ICE|1
+4 Plains|ICE|2
+3 Plains|ICE|3
+2 Portent|ICE
+1 Reinforcements|ALL|1
+1 Scars of the Veteran|ALL
+4 Surging Aether|CSP
+4 Surging Sentinels|CSP
+1 Swords to Plowshares|ICE
+2 Wings of Aesthir|ICE
+2 Zuran Spellcaster|ICE
+[sideboard]

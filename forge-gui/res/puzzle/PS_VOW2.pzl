@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Crimson Vow #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/12/189.-VOW2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:It's Night! Win this turn. Assume any cards you could draw are not relevant to the solution. Remember that your solution must satisfy all possible blocking options!
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Goldspan Dragon;Wolf Strike
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Stensia Uprising;Olivia's Attendants;Mountain;Mountain;Mountain;Mountain;Forest;The Celestus
+aibattlefield=Katilda, Dawnhart Martyr;Yasharn, Implacable Earth;Voice of the Blessed
+humanprecast=The Celestus:CustomScript:DB$ DayTime | Value$ Night

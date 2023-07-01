@@ -1,0 +1,7 @@
+Name:Okk
+ManaCost:1 R
+Types:Creature Goblin
+PT:4/4
+K:CARDNAME can't attack unless a creature with greater power also attacks.
+K:CARDNAME can't block unless a creature with greater power also blocks.
+Oracle:Okk can't attack unless a creature with greater power also attacks.\nOkk can't block unless a creature with greater power also blocks.

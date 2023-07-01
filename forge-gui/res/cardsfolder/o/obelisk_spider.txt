@@ -1,0 +1,12 @@
+Name:Obelisk Spider
+ManaCost:1 B G
+Types:Creature Spider
+PT:1/4
+K:Reach
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, put a -1/-1 counter on that creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredTargetLKICopy | CounterType$ M1M1 | CounterNum$ 1
+T:Mode$ CounterAddedOnce | ValidCard$ Creature | ValidSource$ You | CounterType$ M1M1 | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you put one or more -1/-1 counters on a creature, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Counters
+Oracle:Reach\nWhenever Obelisk Spider deals combat damage to a creature, put a -1/-1 counter on that creature.\nWhenever you put one or more -1/-1 counters on a creature, each opponent loses 1 life and you gain 1 life.

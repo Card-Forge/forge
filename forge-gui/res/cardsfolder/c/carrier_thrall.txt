@@ -1,0 +1,10 @@
+Name:Carrier Thrall
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
+SVar:SacMe:1
+DeckHints:Type$Eldrazi
+DeckHas:Ability$Mana.Colorless|Token
+Oracle:When Carrier Thrall dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."

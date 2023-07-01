@@ -1,0 +1,6 @@
+Name:Ukud Cobra
+ManaCost:3 B
+Types:Creature Snake
+PT:2/5
+K:Deathtouch
+Oracle:Deathtouch

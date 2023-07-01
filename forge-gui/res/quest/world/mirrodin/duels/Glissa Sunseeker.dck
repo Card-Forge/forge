@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Glissa Sunseeker
+Title=Glissa Sunseeker
+Difficulty=medium
+Description="There is a secret at the heart of this world, and I will unlock it."
+Icon=Glissa Sunseeker.jpg
+Deck Type=constructed
+[Main]
+2 Bringer of the Blue Dawn|5DN
+3 Bringer of the Green Dawn|5DN
+1 Bringer of the Red Dawn|5DN
+1 Bringer of the White Dawn|5DN
+2 Darksteel Ingot|DST
+2 Deconstruct|MRD
+2 Door to Nothingness|5DN
+14 Forest|MRD|1
+1 Helm of Kaldra|5DN
+1 Island|MRD|1
+4 Joiner Adept|5DN
+1 Mountain|MRD|1
+4 Plains|MRD|1
+1 Shield of Kaldra|DST
+3 Steelshaper's Gift|5DN
+1 Swamp|MRD|1
+1 Sword of Kaldra|MRD
+4 Sylvok Explorer|5DN
+2 Talisman of Dominance|MRD
+1 Talisman of Impulse|MRD
+2 Talisman of Indulgence|MRD
+2 Talisman of Progress|MRD
+2 Talisman of Unity|MRD
+3 Viridian Shaman|MRD
+[sideboard]

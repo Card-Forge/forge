@@ -1,0 +1,7 @@
+Name:Flameborn Hellion
+ManaCost:5 R
+Types:Creature Hellion
+PT:5/4
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Haste\nFlameborn Hellion attacks each combat if able.

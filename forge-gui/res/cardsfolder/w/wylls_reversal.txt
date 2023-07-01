@@ -1,0 +1,10 @@
+Name:Wyll's Reversal
+ManaCost:2 R
+Types:Instant
+A:SP$ Pump | TargetType$ SpellAbility.numTargets GE1 | TgtZone$ Stack | ValidTgts$ Card,Emblem | TgtPrompt$ Select target spell or ability with one or more targets | SubAbility$ RollD20 | StackDescription$ {p:You} chooses {s:Targeted}. | SpellDescription$ Choose target spell or ability with one or more targets.
+SVar:RollD20:DB$ RollDice | Sides$ 20 | Modifier$ Y | ResultSubAbilities$ 1-14:ChooseNew,Else:ChooseAndCopy | StackDescription$ SpellDescription | SpellDescription$ Roll a d20 and add the greatest power among creatures you control.
+SVar:ChooseNew:DB$ ChangeTargets | Defined$ Targeted | Optional$ True | SpellDescription$ 1—14 VERT You may choose new targets for that spell or ability.
+SVar:ChooseAndCopy:DB$ ChangeTargets | Defined$ Targeted | Optional$ True | SubAbility$ DBCopy | SpellDescription$ 15+ VERT You may choose new targets for that spell or ability.
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Targeted | Controller$ You | MayChooseTarget$ True
+SVar:Y:Count$Valid Creature.YouCtrl$GreatestPower
+Oracle:Choose target spell or ability with one or more targets. Roll a d20 and add the greatest power among creatures you control.\n1-14 | You may choose new targets for that spell or ability.\n15+ | You may choose new targets for that spell or ability. Then copy it. You may choose new targets for the copy.

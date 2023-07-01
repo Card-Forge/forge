@@ -1,0 +1,8 @@
+Name:Alley Grifters
+ManaCost:1 B B
+Types:Creature Human Mercenary
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredDefendingPlayer | Mode$ TgtChoose
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Alley Grifters becomes blocked, defending player discards a card.

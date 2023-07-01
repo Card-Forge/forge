@@ -1,0 +1,7 @@
+Name:Destructive Flow
+ManaCost:B R G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land.nonBasic | Defined$ TriggeredPlayer | SacMessage$ nonbasic land
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player sacrifices a nonbasic land.

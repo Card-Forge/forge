@@ -1,0 +1,6 @@
+Name:Flames of the Raze-Boar
+ManaCost:5 R
+Types:Instant
+A:SP$ DealDamage | NumDmg$ 4 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature an opponent controls. Then CARDNAME deals 2 damage to each other creature that player controls if you control a creature with power 4 or greater.
+SVar:DBDealDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.NotDefinedTargeted+ControlledBy TargetedController | ConditionPresent$ Creature.powerGE4+YouCtrl
+Oracle:Flames of the Raze-Boar deals 4 damage to target creature an opponent controls. Then Flames of the Raze-Boar deals 2 damage to each other creature that player controls if you control a creature with power 4 or greater.

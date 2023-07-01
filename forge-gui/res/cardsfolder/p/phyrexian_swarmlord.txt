@@ -1,0 +1,9 @@
+Name:Phyrexian Swarmlord
+ManaCost:4 G G
+Types:Creature Phyrexian Insect Horror
+PT:4/4
+K:Infect
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 green Phyrexian Insect creature token with infect for each poison counter your opponents have.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_phyrexian_insect_infect | TokenOwner$ You
+SVar:X:Count$TotalOppPoisonCounters
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nAt the beginning of your upkeep, create a 1/1 green Phyrexian Insect creature token with infect for each poison counter your opponents have.

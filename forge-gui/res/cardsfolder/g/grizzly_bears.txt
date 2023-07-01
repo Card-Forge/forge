@@ -1,0 +1,5 @@
+Name:Grizzly Bears
+ManaCost:1 G
+Types:Creature Bear
+PT:2/2
+Oracle:

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Montgomery Burns 1
+Title=Montgomery Burns
+Difficulty=easy
+Description=WBR No Lifegain deck with Grollub and Alms Beast
+Icon=Montgomery Burns.jpg
+Deck Type=constructed
+[main]
+3 Plains
+1 Swamp
+4 Nomad Outpost
+4 Orzhov Guildgate
+3 Isolated Chapel
+3 Boros Guildgate
+3 Clifftop Retreat
+3 Vivid Meadow
+4 Everlasting Torment
+4 Forsaken Wastes
+4 Leyline of Punishment
+4 Grollub
+4 Alms Beast
+1 Soldevi Steam Beast
+1 Armistice
+2 Condemn
+2 Last Breath
+2 Misfortune's Gain
+2 Oust
+2 Path of Peace
+2 Swords to Plowshares
+2 Devour Flesh
+[sideboard]

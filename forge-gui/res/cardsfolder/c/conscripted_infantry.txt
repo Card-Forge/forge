@@ -1,0 +1,9 @@
+Name:Conscripted Infantry
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Soldier artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_soldier 
+DeckHas:Ability$Token & Type$Artifact
+SVar:SacMe:3
+Oracle:When Conscripted Infantry dies, create a 1/1 colorless Soldier artifact creature token.

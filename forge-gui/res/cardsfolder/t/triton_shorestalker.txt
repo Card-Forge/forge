@@ -1,0 +1,6 @@
+Name:Triton Shorestalker
+ManaCost:U
+Types:Creature Merfolk Rogue
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Triton Shorestalker can't be blocked.

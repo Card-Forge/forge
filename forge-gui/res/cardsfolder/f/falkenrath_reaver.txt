@@ -1,0 +1,5 @@
+Name:Falkenrath Reaver
+ManaCost:1 R
+Types:Creature Vampire
+PT:2/2
+Oracle:

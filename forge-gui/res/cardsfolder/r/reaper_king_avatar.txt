@@ -1,0 +1,7 @@
+Name:Reaper King Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-2/-5
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each creature you control gets +1/+1 for each of its colors.
+SVar:AffectedX:Count$CardNumColors
+Oracle:Hand -2, life -5\nEach creature you control gets +1/+1 for each of its colors.

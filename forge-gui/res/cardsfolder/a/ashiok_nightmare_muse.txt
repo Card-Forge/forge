@@ -1,0 +1,10 @@
+Name:Ashiok, Nightmare Muse
+ManaCost:3 U B
+Types:Legendary Planeswalker Ashiok
+Loyalty:5
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ ub_2_3_nightmare_mill | TokenOwner$ You | SpellDescription$ Create a 2/3 blue and black Nightmare creature token with "Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library."
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBExile | SpellDescription$ Return target nonland permanent to its owner's hand, then that player exiles a card from their hand.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | Mandatory$ True | DefinedPlayer$ TargetedOwner | Chooser$ TargetedOwner
+A:AB$ Play | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Valid$ Card.faceUp+OwnedBy Player.Opponent | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 3 | Optional$ True | SpellDescription$ You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.
+DeckHas:Ability$Token
+Oracle:[+1]: Create a 2/3 blue and black Nightmare creature token with "Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library."\n[-3]: Return target nonland permanent to its owner's hand, then that player exiles a card from their hand.\n[-7]: You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.

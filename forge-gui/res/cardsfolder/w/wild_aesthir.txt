@@ -1,0 +1,8 @@
+Name:Wild Aesthir
+ManaCost:2 W
+Types:Creature Bird
+PT:1/1
+K:Flying
+K:First Strike
+A:AB$ Pump | Cost$ W W | Defined$ Self | NumAtt$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate only once each turn.
+Oracle:Flying, first strike\n{W}{W}: Wild Aesthir gets +2/+0 until end of turn. Activate only once each turn.

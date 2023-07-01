@@ -1,0 +1,7 @@
+Name:Longbow Archer
+ManaCost:W W
+Types:Creature Human Soldier Archer
+PT:2/2
+K:First Strike
+K:Reach
+Oracle:First strike; reach (This creature can block creatures with flying.)

@@ -1,0 +1,10 @@
+Name:Serpentine Spike
+ManaCost:5 R R
+Types:Sorcery
+K:Devoid
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal 2 damage to | NumDmg$ 2 | DamageMap$ True | SubAbility$ DBDamageTwo | StackDescription$ CARDNAME deals 2 damage to {c:ThisTargetedCard}, | SpellDescription$ CARDNAME deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBDamageTwo:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature to deal 3 damage to | NumDmg$ 3 | TargetUnique$ True | SubAbility$ DBDamageThree | StackDescription$ 3 damage to {c:ThisTargetedCard},
+SVar:DBDamageThree:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature to deal 4 damage to | NumDmg$ 4 | TargetUnique$ True | SubAbility$ DBDamageResolve | StackDescription$ and 4 damage to {c:ThisTargetedCard}. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBDamageResolve:DB$ DamageResolve | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Devoid (This card has no color.)\nSerpentine Spike deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.

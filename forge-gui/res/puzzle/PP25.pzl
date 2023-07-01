@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #25 - Good Money After Bad
+URL:https://pauperpuzzles.wordpress.com/2017/05/06/25-good-money-after-bad/
+Goal:Win
+Turns:2
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=6
+AILife=6
+humanhand=Disfigure;Lightning Bolt;Wrangle;Spike Jester;Sultai Scavenger
+humanlibrary=Swamp
+humanbattlefield=Mountain;Mountain;Swamp;Swamp
+aihand=Journey to Nowhere
+ailibrary=Forest
+aibattlefield=Forest;Forest;Forest;Plains;Plains;Plains;Blastoderm|Counters:FADE=3;Humbler of Mortals

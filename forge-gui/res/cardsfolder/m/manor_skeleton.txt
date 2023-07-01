@@ -1,0 +1,7 @@
+Name:Manor Skeleton
+ManaCost:1 B
+Types:Creature Skeleton
+PT:1/1
+K:Haste
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Haste\n{1}{B}: Regenerate Manor Skeleton.

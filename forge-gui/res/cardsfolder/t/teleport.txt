@@ -1,0 +1,6 @@
+Name:Teleport
+ManaCost:U U U
+Types:Instant
+A:SP$ Effect | ActivationPhases$ Declare Attackers | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Cast this spell only during the declare attackers step. Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Cast this spell only during the declare attackers step.\nTarget creature can't be blocked this turn.

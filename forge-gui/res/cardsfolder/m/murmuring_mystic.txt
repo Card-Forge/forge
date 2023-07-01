@@ -1,0 +1,10 @@
+Name:Murmuring Mystic
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:1/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_illusion_flying
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Token
+Oracle:Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.

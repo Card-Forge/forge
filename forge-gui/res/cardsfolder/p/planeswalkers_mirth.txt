@@ -1,0 +1,9 @@
+Name:Planeswalker's Mirth
+ManaCost:2 W
+Types:Enchantment
+A:AB$ Reveal | Cost$ 3 W | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGain | SpellDescription$ Target opponent reveals a card at random from their hand. You gain life equal to that card's mana value.
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:NonStackingEffect:True
+Oracle:{3}{W}: Target opponent reveals a card at random from their hand. You gain life equal to that card's mana value.

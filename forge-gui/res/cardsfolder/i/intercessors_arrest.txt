@@ -1,0 +1,8 @@
+Name:Intercessor's Arrest
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant permanent
+A:SP$ Attach | ValidTgts$ Permanent | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME can't crew Vehicles. | Description$ Enchanted permanent can't attack, block, or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities.
+S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility
+Oracle:Enchant permanent\nEnchanted permanent can't attack, block, or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities.

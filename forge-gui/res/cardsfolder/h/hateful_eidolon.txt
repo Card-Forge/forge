@@ -1,0 +1,10 @@
+Name:Hateful Eidolon
+ManaCost:B
+Types:Enchantment Creature Spirit
+PT:1/2
+K:Lifelink
+T:Mode$ ChangesZone | ValidCard$ Creature.enchanted | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggeredCard$AttachedTo Aura.YouCtrl
+SVar:EnchantMe:Multiple
+Oracle:Lifelink\nWhenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it.

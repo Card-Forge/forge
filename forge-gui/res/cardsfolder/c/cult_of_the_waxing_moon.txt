@@ -1,0 +1,7 @@
+Name:Cult of the Waxing Moon
+ManaCost:4 G
+Types:Creature Human Shaman
+PT:5/4
+T:Mode$ Transformed | ValidCard$ Creature.YouCtrl+nonHuman+inZoneBattlefield | Execute$ Token | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control transforms into a non-Human creature, create a 2/2 green Wolf creature token.
+SVar:Token:DB$ Token | TokenOwner$ You | TokenScript$ g_2_2_wolf | TokenAmount$ 1
+Oracle:Whenever a permanent you control transforms into a non-Human creature, create a 2/2 green Wolf creature token.

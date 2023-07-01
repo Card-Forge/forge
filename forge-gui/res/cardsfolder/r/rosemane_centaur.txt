@@ -1,0 +1,7 @@
+Name:Rosemane Centaur
+ManaCost:3 G W
+Types:Creature Centaur Soldier
+PT:4/4
+K:Convoke
+K:Vigilance
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nVigilance

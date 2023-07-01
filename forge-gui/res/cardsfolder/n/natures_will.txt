@@ -1,0 +1,8 @@
+Name:Nature's Will
+ManaCost:2 G G
+Types:Enchantment
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBTapAll | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Land.ControlledBy TriggeredTarget | SubAbility$ DBUntapAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Land.YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.

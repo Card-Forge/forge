@@ -1,0 +1,6 @@
+Name:Kami of Twisted Reflection
+ManaCost:1 U U
+Types:Creature Spirit
+PT:2/2
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | AITgts$ Creature.Other+YouCtrl | AITgtsOnlyBetterThanSelf$ True | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you control to its owner's hand.
+Oracle:Sacrifice Kami of Twisted Reflection: Return target creature you control to its owner's hand.

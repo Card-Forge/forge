@@ -1,0 +1,6 @@
+Name:Charging Rhino
+ManaCost:3 G G
+Types:Creature Rhino
+PT:4/4
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+Oracle:Charging Rhino can't be blocked by more than one creature.

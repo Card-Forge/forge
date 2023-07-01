@@ -1,0 +1,14 @@
+[metadata]
+Code=P05
+Date=2005-01-01
+Name=Magic Player Rewards 2005
+Type=Promo
+ScryfallCode=P05
+
+[cards]
+1 R Psychatog @Edward P. Beard, Jr.
+2 R Terror @Ron Spencer
+3 R Fireball @Mark Tedin
+4 R Oxidize @Scott M. Fischer
+5 R Mana Leak @Christopher Rush
+6 R Reciprocate @Jim Murray

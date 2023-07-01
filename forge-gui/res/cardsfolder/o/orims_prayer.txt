@@ -1,0 +1,7 @@
+Name:Orim's Prayer
+ManaCost:1 W W
+Types:Enchantment
+T:Mode$ AttackersDeclared | AttackedTarget$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever one or more creatures attack you, you gain 1 life for each attacking creature.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$Valid Creature.attacking
+Oracle:Whenever one or more creatures attack you, you gain 1 life for each attacking creature.

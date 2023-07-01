@@ -1,0 +1,11 @@
+Name:Dark Sphere
+ManaCost:0
+Types:Artifact
+A:AB$ ChooseSource | Cost$ T Sac<1/CARDNAME> | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ DBPrevent
+SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfDown
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.

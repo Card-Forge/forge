@@ -1,0 +1,8 @@
+Name:Sublime Archangel
+ManaCost:2 W W
+Types:Creature Angel
+PT:4/3
+K:Flying
+K:Exalted
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Exalted | Description$ Other creatures you control have Exalted.
+Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nOther creatures you control have exalted. (If a creature has multiple instances of exalted, each triggers separately.)

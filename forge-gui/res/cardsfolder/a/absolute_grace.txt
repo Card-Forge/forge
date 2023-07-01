@@ -1,0 +1,7 @@
+Name:Absolute Grace
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from black | Description$ All creatures have protection from black.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All creatures have protection from black.

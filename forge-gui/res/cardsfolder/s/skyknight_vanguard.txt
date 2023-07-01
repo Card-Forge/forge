@@ -1,0 +1,10 @@
+Name:Skyknight Vanguard
+ManaCost:R W
+Types:Creature Human Knight
+PT:1/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 white Soldier creature token that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever Skyknight Vanguard attacks, create a 1/1 white Soldier creature token that's tapped and attacking.

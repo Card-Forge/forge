@@ -1,0 +1,7 @@
+Name:Track Down
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
+SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature,Land
+Oracle:Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

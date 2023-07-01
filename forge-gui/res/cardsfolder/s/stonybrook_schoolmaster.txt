@@ -1,0 +1,7 @@
+Name:Stonybrook Schoolmaster
+ManaCost:2 W
+Types:Creature Merfolk Wizard
+PT:1/2
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, you may create a 1/1 blue Merfolk Wizard creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_merfolk_wizard | TokenAmount$ 1 | TokenOwner$ You
+Oracle:Whenever Stonybrook Schoolmaster becomes tapped, you may create a 1/1 blue Merfolk Wizard creature token.

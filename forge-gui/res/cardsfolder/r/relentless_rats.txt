@@ -1,0 +1,11 @@
+Name:Relentless Rats
+ManaCost:1 B B
+Types:Creature Rat
+PT:2/2
+K:A deck can have any number of cards named CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature on the battlefield named Relentless Rats.
+SVar:X:Count$Valid Creature.namedRelentless Rats+Other
+SVar:BuffedBy:Creature.namedRelentless Rats
+SVar:PlayMain1:TRUE
+DeckNeeds:Name$Relentless Rats
+Oracle:Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats.\nA deck can have any number of cards named Relentless Rats.

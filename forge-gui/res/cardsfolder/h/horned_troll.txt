@@ -1,0 +1,6 @@
+Name:Horned Troll
+ManaCost:2 G
+Types:Creature Troll
+PT:2/2
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:{G}: Regenerate Horned Troll.

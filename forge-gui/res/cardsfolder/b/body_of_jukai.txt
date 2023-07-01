@@ -1,0 +1,8 @@
+Name:Body of Jukai
+ManaCost:7 G G
+Types:Creature Spirit
+PT:8/5
+K:Trample
+K:Soulshift:8
+DeckHints:Type$Spirit
+Oracle:Trample\nSoulshift 8 (When this creature dies, you may return target Spirit card with mana value 8 or less from your graveyard to your hand.)

@@ -1,0 +1,9 @@
+Name:Beskir Shieldmate
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Human Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_warrior | TokenOwner$ You
+SVar:SacMe:2
+DeckHas:Ability$Token
+Oracle:When Beskir Shieldmate dies, create a 1/1 white Human Warrior creature token.

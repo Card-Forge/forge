@@ -1,0 +1,7 @@
+Name:Wand of Vertebrae
+ManaCost:1
+Types:Artifact
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 1 | SpellDescription$ Mill a card.
+A:AB$ ChangeZone | Cost$ 2 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ 5 | Shuffle$ True | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Shuffle up to five target cards from your graveyard into your library.
+DeckHas:Ability$Graveyard
+Oracle:{T}: Mill a card.\n{2}, {T}, Exile Wand of Vertebrae: Shuffle up to five target cards from your graveyard into your library.

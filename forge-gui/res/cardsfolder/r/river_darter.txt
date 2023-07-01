@@ -1,0 +1,6 @@
+Name:River Darter
+ManaCost:2 U
+Types:Creature Merfolk Warrior
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Dinosaur | Description$ CARDNAME can't be blocked by Dinosaurs.
+Oracle:River Darter can't be blocked by Dinosaurs.

@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Oath of Lim-Dul
+OpponentName=The Herd
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Oath of Lim-Dul
+[metadata]
+Name=ICE Challenge: Oath of Lim-Dul
+Title=The Herd
+Difficulty=medium
+Description="A good Tarpan will serve you, faithful and true. A bad one will kick you in the head." -General Jarkeld, the Arctic Fox
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+20 Forest|ICE|2
+40 Tarpan|ICE

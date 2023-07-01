@@ -1,0 +1,8 @@
+Name:Paragon of Gathering Mists
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
+A:AB$ Pump | Cost$ U T | ValidTgts$ Creature.Blue+Other+YouCtrl | TgtPrompt$ Select target blue creature | KW$ Flying | SpellDescription$ Another target blue creature you control gains flying until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Other blue creatures you control get +1/+1.\n{U}, {T}: Another target blue creature you control gains flying until end of turn.

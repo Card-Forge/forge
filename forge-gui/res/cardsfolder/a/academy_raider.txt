@@ -1,0 +1,9 @@
+Name:Academy Raider
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:1/1
+K:Intimidate
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card>
+AI:RemoveDeck:Random
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever Academy Raider deals combat damage to a player, you may discard a card. If you do, draw a card.

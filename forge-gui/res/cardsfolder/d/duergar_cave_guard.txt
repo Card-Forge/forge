@@ -1,0 +1,7 @@
+Name:Duergar Cave-Guard
+ManaCost:3 R
+Types:Creature Dwarf Warrior
+PT:1/3
+K:Wither
+A:AB$ Pump | Cost$ RW | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{R/W}: Duergar Cave-Guard gets +1/+0 until end of turn.

@@ -1,0 +1,7 @@
+Name:Jenara, Asura of War
+ManaCost:G W U
+Types:Legendary Creature Angel
+PT:3/3
+K:Flying
+A:AB$ PutCounter | Cost$ 1 W | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:Flying\n{1}{W}: Put a +1/+1 counter on Jenara, Asura of War.

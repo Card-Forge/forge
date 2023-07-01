@@ -1,0 +1,7 @@
+Name:Shield of the Realm
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.EquippedBy | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to equipped creature, prevent 2 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 2
+Oracle:If a source would deal damage to equipped creature, prevent 2 of that damage.\nEquip {1}

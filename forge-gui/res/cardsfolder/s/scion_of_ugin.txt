@@ -1,0 +1,6 @@
+Name:Scion of Ugin
+ManaCost:6
+Types:Creature Dragon Spirit
+PT:4/4
+K:Flying
+Oracle:Flying

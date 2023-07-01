@@ -1,0 +1,7 @@
+Name:Living Tempest
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/3
+K:Flash
+K:Flying
+Oracle:Flash\nFlying

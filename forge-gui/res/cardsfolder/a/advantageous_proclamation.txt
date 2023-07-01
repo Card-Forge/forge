@@ -1,0 +1,5 @@
+Name:Advantageous Proclamation
+ManaCost:no cost
+Types:Conspiracy
+K:Your minimum deck size is reduced by five.
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nYour minimum deck size is reduced by five.

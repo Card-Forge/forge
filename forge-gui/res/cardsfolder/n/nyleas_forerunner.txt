@@ -1,0 +1,8 @@
+Name:Nylea's Forerunner
+ManaCost:4 G
+Types:Enchantment Creature Beast
+PT:5/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
+SVar:PlayMain1:TRUE
+Oracle:Trample\nOther creatures you control have trample.

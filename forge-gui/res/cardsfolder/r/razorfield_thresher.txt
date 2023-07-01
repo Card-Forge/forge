@@ -1,0 +1,5 @@
+Name:Razorfield Thresher
+ManaCost:7
+Types:Artifact Creature Construct
+PT:6/4
+Oracle:

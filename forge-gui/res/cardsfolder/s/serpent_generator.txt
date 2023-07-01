@@ -1,0 +1,7 @@
+Name:Serpent Generator
+ManaCost:6
+Types:Artifact
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ c_1_1_a_snake_poison | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Snake artifact creature token. It has "Whenever this creature deals damage to a player, that player gets a poison counter." (A player with ten or more poison counters loses the game.)
+DeckHas:Ability$Token & Type$Snake
+DeckHints:Keyword$Infect
+Oracle:{4}, {T}: Create a 1/1 colorless Snake artifact creature token. It has "Whenever this creature deals damage to a player, that player gets a poison counter." (A player with ten or more poison counters loses the game.)

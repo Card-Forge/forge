@@ -1,0 +1,9 @@
+Name:Vraska's Conquistador
+ManaCost:1 B
+Types:Creature Vampire Soldier
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerZones$ Battlefield | IsPresent$ Planeswalker.Vraska+YouCtrl | PresentCompare$ GE1 | TriggerDescription$ Whenever CARDNAME attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDrain | Secondary$ True | TriggerZones$ Battlefield | IsPresent$ Planeswalker.Vraska+YouCtrl | PresentCompare$ GE1 | TriggerDescription$ Whenever CARDNAME attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever Vraska's Conquistador attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life.

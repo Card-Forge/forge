@@ -1,0 +1,9 @@
+Name:Venomcrawler
+ManaCost:3 B
+Types:Artifact Creature Demon
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Devourer of Souls — Whenever another creature dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Lifelink\nDevourer of Souls — Whenever another creature dies, put a +1/+1 counter on Venomcrawler.

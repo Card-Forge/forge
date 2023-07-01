@@ -1,0 +1,6 @@
+Name:Ignite the Cloneforge!
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a token that's a copy of target permanent an opponent controls.
+SVar:DarkEffect:DB$ CopyPermanent | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls
+Oracle:When you set this scheme in motion, create a token that's a copy of target permanent an opponent controls.

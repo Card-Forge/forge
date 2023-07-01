@@ -1,0 +1,9 @@
+Name:Make Yourself Useful
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MakeUseful | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy target creature an opponent controls. If a creature is destroyed this way, you gain life equal to its toughness.
+SVar:MakeUseful:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberLKI$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardToughness
+Oracle:When you set this scheme in motion, destroy target creature an opponent controls. If a creature is destroyed this way, you gain life equal to its toughness.

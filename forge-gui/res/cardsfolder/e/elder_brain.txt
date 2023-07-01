@@ -1,0 +1,14 @@
+Name:Elder Brain
+ManaCost:5 B B
+Types:Creature Horror
+PT:6/6
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks a player, exile all cards from that player's hand, then they draw that many cards. You may play lands and cast spells from among the exiled cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
+SVar:TrigExile:DB$ ChangeZoneAll | Defined$ TriggeredDefendingPlayer | ChangeType$ Card | Origin$ Hand | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ TriggeredDefendingPlayer | NumCards$ RemTossed | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | Duration$ Permanent | ForgetOnMoved$ Exile
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play lands and cast spells from among the exiled cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemTossed:Remembered$Amount
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Elder Brain attacks a player, exile all cards from that player's hand, then they draw that many cards. You may play lands and cast spells from among the exiled cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.

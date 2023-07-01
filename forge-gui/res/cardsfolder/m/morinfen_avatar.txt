@@ -1,0 +1,10 @@
+Name:Morinfen Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+30
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each permanent you control.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Ouch
+SVar:Ouch:Count$Valid Permanent.YouCtrl
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Hand +0, life +30\nAt the beginning of your upkeep, you lose 1 life for each permanent you control.

@@ -1,0 +1,11 @@
+Name:Triplicate Titan
+ManaCost:9
+Types:Artifact Creature Golem
+PT:9/9
+K:Flying
+K:Vigilance
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_flying,c_3_3_a_golem_vigilance,c_3_3_a_golem_trample
+DeckHas:Ability$Token
+Oracle:Flying, vigilance, trample\nWhen Triplicate Titan dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.

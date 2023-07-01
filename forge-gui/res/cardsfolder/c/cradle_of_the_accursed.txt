@@ -1,0 +1,7 @@
+Name:Cradle of the Accursed
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 3 T Sac<1/CARDNAME> | SorcerySpeed$ True | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | SpellDescription$ Create a 2/2 black Zombie creature token. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:{T}: Add {C}.\n{3}, {T}, Sacrifice Cradle of the Accursed: Create a 2/2 black Zombie creature token. Activate only as a sorcery.

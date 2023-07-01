@@ -1,0 +1,8 @@
+Name:Yukora, the Prisoner
+ManaCost:2 B B
+Types:Legendary Creature Demon Spirit
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice all non-Ogre creatures you control.
+SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Creature.nonOgre+YouCtrl
+DeckHints:Type$Ogre
+Oracle:When Yukora, the Prisoner leaves the battlefield, sacrifice all non-Ogre creatures you control.

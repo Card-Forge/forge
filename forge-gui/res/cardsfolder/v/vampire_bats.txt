@@ -1,0 +1,7 @@
+Name:Vampire Bats
+ManaCost:B
+Types:Creature Bat
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{B}: Vampire Bats gets +1/+0 until end of turn. Activate no more than twice each turn.

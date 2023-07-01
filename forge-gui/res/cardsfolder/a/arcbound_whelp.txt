@@ -1,0 +1,9 @@
+Name:Arcbound Whelp
+ManaCost:3 R
+Types:Artifact Creature Dragon
+PT:0/0
+K:Flying
+K:Modular:2
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Flying\n{R}: Arcbound Whelp gets +1/+0 until end of turn.\nModular 2 (This creature enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

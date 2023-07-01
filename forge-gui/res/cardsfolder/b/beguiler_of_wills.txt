@@ -1,0 +1,7 @@
+Name:Beguiler of Wills
+ManaCost:3 U U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to the number of creatures you control | SpellDescription$ Gain control of target creature with power less than or equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:{T}: Gain control of target creature with power less than or equal to the number of creatures you control.

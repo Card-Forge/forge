@@ -1,0 +1,10 @@
+Name:A-Find the Path
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon.
+SVar:DBVenture:DB$ Venture | Defined$ You
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted land has "{T}: Add two mana of any one colour."
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one colour.
+Oracle:Enchant land\nWhen Find the Path enters the battlefield, venture into the dungeon.\nEnchanted land has "{T}: Add two mana of any one colour."

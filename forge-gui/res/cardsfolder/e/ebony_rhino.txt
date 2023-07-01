@@ -1,0 +1,6 @@
+Name:Ebony Rhino
+ManaCost:7
+Types:Artifact Creature Rhino
+PT:4/5
+K:Trample
+Oracle:Trample

@@ -1,0 +1,7 @@
+Name:Crypt Creeper
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/1
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+AI:RemoveDeck:All
+Oracle:Sacrifice Crypt Creeper: Exile target card from a graveyard.

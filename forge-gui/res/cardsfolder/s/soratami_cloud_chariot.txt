@@ -1,0 +1,9 @@
+Name:Soratami Cloud Chariot
+ManaCost:5
+Types:Artifact
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Flying | SpellDescription$ Target creature you control gains flying until end of turn.
+A:AB$ Effect | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
+SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
+SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn. | Secondary$ True
+AI:RemoveDeck:All
+Oracle:{2}: Target creature you control gains flying until end of turn.\n{2}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.

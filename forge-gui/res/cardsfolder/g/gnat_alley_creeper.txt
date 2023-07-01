@@ -1,0 +1,6 @@
+Name:Gnat Alley Creeper
+ManaCost:2 R
+Types:Creature Human Rogue
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
+Oracle:Gnat Alley Creeper can't be blocked by creatures with flying.

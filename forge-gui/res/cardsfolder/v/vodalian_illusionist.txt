@@ -1,0 +1,7 @@
+Name:Vodalian Illusionist
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+PT:2/2
+A:AB$ Phases | Cost$ U U T | ValidTgts$ Creature | SpellDescription$ Target creature phases out.
+AI:RemoveDeck:All
+Oracle:{U}{U}, {T}: Target creature phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)

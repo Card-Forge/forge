@@ -1,0 +1,7 @@
+Name:Nissa's Chosen
+ManaCost:G G
+Types:Creature Elf Warrior
+PT:2/3
+R:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ NissaChosenRep | Description$ If CARDNAME would die, put it on the bottom of its owner's library instead.
+SVar:NissaChosenRep:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | LibraryPosition$ -1 | Defined$ ReplacedCard
+Oracle:If Nissa's Chosen would die, put it on the bottom of its owner's library instead.

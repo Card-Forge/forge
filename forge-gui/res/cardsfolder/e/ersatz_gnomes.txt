@@ -1,0 +1,9 @@
+Name:Ersatz Gnomes
+ManaCost:3
+Types:Artifact Creature Gnome
+PT:1/1
+A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card | TargetType$ Spell | TgtZone$ Stack | TgtPrompt$ Select target spell to make colorless | Duration$ Permanent | SpellDescription$ Target spell becomes colorless.
+A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to make colorless | SpellDescription$ Target permanent becomes colorless until end of turn.
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}: Target spell becomes colorless.\n{T}: Target permanent becomes colorless until end of turn.

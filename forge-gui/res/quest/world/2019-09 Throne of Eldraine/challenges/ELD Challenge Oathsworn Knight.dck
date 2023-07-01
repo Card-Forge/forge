@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Oathsworn Knight
+OpponentName=The Knights
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Knights' Charge
+HumanExtras=
+[metadata]
+Title=Oathsworn Knight
+Difficulty=medium
+Description="None shall pass!"\n-The Black Knight, Monty Python and the Holy Grail
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Oathsworn Knight
+[Main]
+30 Oathsworn Knight|ELD|2
+30 Witch's Cottage|ELD

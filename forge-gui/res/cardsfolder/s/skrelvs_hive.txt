@@ -1,0 +1,9 @@
+Name:Skrelv's Hive
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withToxic | AddKeyword$ Lifelink | CheckSVar$ X | SVarCompare$ GE3 | Description$ Corrupted - As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+Oracle:At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."\nCorrupted - As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink.

@@ -1,0 +1,16 @@
+[metadata]
+Code=SS1
+Date=2018-06-15
+Name=Signature Spellbook: Jace
+Type=Collector_Edition
+ScryfallCode=SS1
+
+[cards]
+1 M Jace Beleren @Aleksi Briclot
+2 R Blue Elemental Blast @Slawomir Maniak
+3 R Brainstorm @Daarken
+4 R Counterspell @Jason Chan
+5 R Gifts Ungiven @Chris Rallis
+6 R Mystical Tutor @Yongjae Choi
+7 R Negate @Jason Rainville
+8 R Threads of Disloyalty @Tyler Jacobson

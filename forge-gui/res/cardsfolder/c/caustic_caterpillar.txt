@@ -1,0 +1,6 @@
+Name:Caustic Caterpillar
+ManaCost:G
+Types:Creature Insect
+PT:1/1
+A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:{1}{G}, Sacrifice Caustic Caterpillar: Destroy target artifact or enchantment.

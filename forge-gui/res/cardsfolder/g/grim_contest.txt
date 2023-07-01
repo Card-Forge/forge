@@ -1,0 +1,7 @@
+Name:Grim Contest
+ManaCost:1 B G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBEachDamage | StackDescription$ None | SpellDescription$ Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | ToEachOther$ Targeted | NumDmg$ Count$CardToughness | StackDescription$ {c:Targeted} each deal damage equal to its toughness to the other.
+AI:RemoveDeck:All
+Oracle:Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.

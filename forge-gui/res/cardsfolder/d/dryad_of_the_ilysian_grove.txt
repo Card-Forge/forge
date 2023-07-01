@@ -1,0 +1,7 @@
+Name:Dryad of the Ilysian Grove
+ManaCost:2 G
+Types:Enchantment Creature Nymph Dryad
+PT:2/4
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ AllBasicLandType | Description$ Lands you control are every basic land type in addition to their other types.
+Oracle:You may play an additional land on each of your turns.\nLands you control are every basic land type in addition to their other types.

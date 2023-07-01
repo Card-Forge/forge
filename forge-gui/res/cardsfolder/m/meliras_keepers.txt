@@ -1,0 +1,6 @@
+Name:Melira's Keepers
+ManaCost:4 G
+Types:Creature Human Warrior
+PT:4/4
+S:Mode$ CantPutCounter | ValidCard$ Card.Self+inZoneBattlefield | Description$ CARDNAME can't have counters put on it.
+Oracle:Melira's Keepers can't have counters put on it.

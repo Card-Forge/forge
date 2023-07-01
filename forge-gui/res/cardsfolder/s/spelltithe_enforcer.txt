@@ -1,0 +1,8 @@
+Name:Spelltithe Enforcer
+ManaCost:3 W W
+Types:Creature Elephant Wizard
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever an opponent casts a spell, that player sacrifices a permanent unless they pay {1}.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredCardController | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 1 | UnlessPayer$ TriggeredCardController
+SVar:AI_SpellsNeedExtraMana:1 Opponent
+Oracle:Whenever an opponent casts a spell, that player sacrifices a permanent unless they pay {1}.

@@ -1,0 +1,119 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/tavern.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Image",
+      "name": "healIcon",
+      "image": "ui/heal.png",
+      "x": 60,
+      "y": 85,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "tempHitPointCost",
+      "text": "Cost",
+      "binding": "Status",
+      "width": 100,
+      "height": 30,
+      "x": 60,
+      "y": 200
+    },
+    {
+      "type": "Label",
+      "name": "tempHitPoints",
+      "text": "tr(lblTempHitPoints)",
+      "font": "default",
+      "width": 100,
+      "height": 30,
+      "x": 60,
+      "y": 170
+    },
+    {
+      "type": "Image",
+      "name": "sellIcon",
+      "image": "ui/sell.png",
+      "x": 190,
+      "y": 85,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "sell",
+      "text": "tr(lblSell)",
+      "binding": "Equip",
+      "width": 100,
+      "height": 30,
+      "x": 190,
+      "y": 200
+    },
+    {
+      "type": "Image",
+      "name": "tavernEvent",
+      "image": "ui/tavernevent.png",
+      "x": 320,
+      "y": 85,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "Label",
+      "name": "eventDescription",
+      "text": "Booster Draft Available",
+      "font": "default",
+      "width": 100,
+      "height": 30,
+      "x": 320,
+      "y": 170
+    },
+	{
+      "type": "TextButton",
+      "name": "done",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 48,
+      "height": 30,
+      "x": 5,
+      "y": 235
+    },
+	{
+      "type": "TextButton",
+      "name": "event",
+      "text": "Info",
+      "width": 100,
+      "height": 30,
+      "x": 320,
+      "y": 200
+    },
+	{
+      "type": "Label",
+      "name": "playerGold",
+	  "style":"background",
+      "text": "[+Gold]",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 200
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+	  "style":"background",
+      "text": "[+Shards]",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 240
+    }
+  ]
+}

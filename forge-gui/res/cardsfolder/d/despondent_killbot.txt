@@ -1,0 +1,5 @@
+Name:Despondent Killbot
+ManaCost:2
+Types:Artifact Creature Killbot
+PT:2/1
+Oracle:

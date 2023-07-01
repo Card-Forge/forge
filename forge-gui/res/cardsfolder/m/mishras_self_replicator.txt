@@ -1,0 +1,8 @@
+Name:Mishra's Self-Replicator
+ManaCost:5
+Types:Artifact Creature Assembly-Worker
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, you may pay {1}. If you do, create a token that's a copy of CARDNAME. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ Self
+DeckHas:Ability$Token
+Oracle:Whenever you cast a historic spell, you may pay {1}. If you do, create a token that's a copy of Mishra's Self-Replicator. (Artifacts, legendaries, and Sagas are historic.)

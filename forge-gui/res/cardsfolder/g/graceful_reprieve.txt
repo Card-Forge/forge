@@ -1,0 +1,6 @@
+Name:Graceful Reprieve
+ManaCost:1 W
+Types:Instant
+A:SP$ DelayedTrigger | ValidTgts$ Creature | TgtPrompt$ Select target creature | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | StackDescription$ When {c:Targeted} dies this turn, return that card to the battlefield under its owner's control. | SpellDescription$ When target creature dies this turn, return that card to the battlefield under its owner's control.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield
+Oracle:When target creature dies this turn, return that card to the battlefield under its owner's control.

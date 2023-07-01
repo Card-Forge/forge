@@ -1,0 +1,6 @@
+Name:Millennial Gargoyle
+ManaCost:4
+Types:Artifact Creature Gargoyle
+PT:2/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,6 @@
+Name:Porcelain Legionnaire
+ManaCost:2 WP
+Types:Artifact Creature Phyrexian Soldier
+PT:3/1
+K:First Strike
+Oracle:({W/P} can be paid with either {W} or 2 life.)\nFirst strike

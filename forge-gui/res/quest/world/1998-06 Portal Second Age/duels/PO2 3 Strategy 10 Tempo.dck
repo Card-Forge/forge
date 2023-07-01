@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 10 Tempo
+Title=Tempo
+Difficulty=hard
+Description=A custom strategy for the Blue/Green color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|PO2
+2 Apprentice Sorcerer|PO2
+4 False Summoning|PO2
+10 Forest|PO2|3
+12 Island|PO2|2
+2 Mystic Denial|PO2
+4 Nature's Lore|PO2
+4 Plated Wurm|PO2
+4 Sea Drake|PO2
+4 Sylvan Yeti|PO2
+4 Time Ebb|PO2
+2 Undo|PO2
+4 Untamed Wilds|PO2

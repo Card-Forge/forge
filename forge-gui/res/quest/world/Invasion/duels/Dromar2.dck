@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Title=Dromar the Banisher
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=3 color deck with lots of control cards
+Deck Type=constructed
+Name=Dromar2
+[Main]
+4 Absorb|INV
+4 Caves of Koilos|APC
+4 Coastal Tower|INV
+4 Death Grasp|APC
+2 Dromar's Cavern|PLS
+3 Dromar's Charm|PLS
+2 Dromar, the Banisher|INV
+4 Fact or Fiction|INV
+3 Island|INV|1
+1 Island|INV|2
+1 Island|INV|3
+2 Plains|INV|1
+2 Recoil|INV
+4 Rout|INV
+4 Salt Marsh|INV
+1 Spite // Malice|INV
+2 Swamp|INV|1
+2 Teferi's Moat|INV
+4 Undermine|INV
+4 Vindicate|APC
+1 Wash Out|INV
+2 Yawgmoth's Agenda|INV

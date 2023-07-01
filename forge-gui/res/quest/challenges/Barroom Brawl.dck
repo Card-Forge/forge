@@ -1,0 +1,39 @@
+[quest]
+id=12
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 random rares
+Credit Reward=250
+HumanExtras=TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally|TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally|TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally
+AIExtras=Lowland Giant
+[metadata]
+Name=quest12
+Title=Barroom Brawl
+Difficulty=hard
+Description=A drunken giant of a man takes a swing at you, your brew spills and a fight breaks out.
+Icon=Barroom Brawl.jpg
+Deck Type=constructed
+[main]
+2 Birds of Paradise
+4 Knight of the Reliquary
+2 Elspeth, Knight-Errant
+2 Eternal Witness
+1 Progenitus
+5 Plains|M12
+3 Natural Order
+2 Garruk Wildspeaker
+1 Umezawa's Jitte
+7 Forest|M12
+2 Stoneforge Mystic
+4 Swords to Plowshares
+1 Dryad Arbor
+4 Qasali Pridemage
+4 Tarmogoyf
+1 Loxodon Warhammer
+2 Path to Exile
+4 Noble Hierarch
+1 Quietus Spike
+4 Savannah
+4 Wasteland
+[sideboard]

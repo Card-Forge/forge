@@ -1,0 +1,7 @@
+Name:Highland Game
+ManaCost:1 G
+Types:Creature Elk
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain 2 life.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 2
+Oracle:When Highland Game dies, you gain 2 life.

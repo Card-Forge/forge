@@ -1,0 +1,6 @@
+Name:Mahamoti Djinn
+ManaCost:4 U U
+Types:Creature Djinn
+PT:5/6
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

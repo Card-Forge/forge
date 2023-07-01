@@ -1,0 +1,7 @@
+Name:Swarm Guildmage
+ManaCost:B G
+Types:Creature Elf Shaman
+PT:2/2
+A:AB$ PumpAll | Cost$ 4 B T | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Menace | SpellDescription$ Creatures you control get +1/+0 and gain menace until end of turn. (They can't be blocked except by two or more creatures.)
+A:AB$ GainLife | Cost$ 1 G T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+Oracle:{4}{B}, {T}: Creatures you control get +1/+0 and gain menace until end of turn. (They can't be blocked except by two or more creatures.)\n{1}{G}, {T}: You gain 2 life.

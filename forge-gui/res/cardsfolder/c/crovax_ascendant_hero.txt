@@ -1,0 +1,9 @@
+Name:Crovax, Ascendant Hero
+ManaCost:4 W W
+Types:Legendary Creature Human Noble
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.White+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.nonWhite | AddPower$ -1 | AddToughness$ -1 | Description$ Nonwhite creatures get -1/-1.
+A:AB$ ChangeZone | Cost$ PayLife<2> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:PlayMain1:TRUE
+Oracle:Other white creatures get +1/+1.\nNonwhite creatures get -1/-1.\nPay 2 life: Return Crovax, Ascendant Hero to its owner's hand.

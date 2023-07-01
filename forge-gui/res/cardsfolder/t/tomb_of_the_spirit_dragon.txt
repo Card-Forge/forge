@@ -1,0 +1,7 @@
+Name:Tomb of the Spirit Dragon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ GainLife | Cost$ 2 T | LifeAmount$ X | SpellDescription$ You gain 1 life for each colorless creature you control.
+SVar:X:Count$Valid Creature.Colorless+YouCtrl
+Oracle:{T}: Add {C}.\n{2}, {T}: You gain 1 life for each colorless creature you control.

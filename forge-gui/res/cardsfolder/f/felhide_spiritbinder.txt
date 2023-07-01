@@ -1,0 +1,7 @@
+Name:Felhide Spiritbinder
+ManaCost:3 R
+Types:Creature Minotaur Shaman
+PT:3/4
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {1}{R}. If you do, create a token that's a copy of another target creature, except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 R | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature to copy | PumpKeywords$ Haste | AtEOT$ Exile | AddTypes$ Enchantment
+Oracle:Inspired — Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}. If you do, create a token that's a copy of another target creature, except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.

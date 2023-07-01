@@ -1,0 +1,7 @@
+Name:Agent of Horizons
+ManaCost:2 G
+Types:Creature Human Rogue
+PT:3/2
+A:AB$ Effect | Cost$ 2 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:{2}{U}: Agent of Horizons can't be blocked this turn.

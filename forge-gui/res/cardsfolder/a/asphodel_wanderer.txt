@@ -1,0 +1,6 @@
+Name:Asphodel Wanderer
+ManaCost:B
+Types:Creature Skeleton Soldier
+PT:1/1
+A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:{2}{B}: Regenerate Asphodel Wanderer.

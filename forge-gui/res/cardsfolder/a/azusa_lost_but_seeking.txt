@@ -1,0 +1,6 @@
+Name:Azusa, Lost but Seeking
+ManaCost:2 G
+Types:Legendary Creature Human Monk
+PT:1/2
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 2 | Description$ You may play two additional lands on each of your turns.
+Oracle:You may play two additional lands on each of your turns.

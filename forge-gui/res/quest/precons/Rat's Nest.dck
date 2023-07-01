@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rat's Nest
+Description=For years the ratfolk of the Takenuma Swamp have warred with neighboring realms; now their own kami-- Patron of the Nezumi-- has come to grant them newfound strength. Fast creatures and discard make sure you win the rat race!
+Deck Type=constructed
+Set=BOK
+Image=rats_nest.jpg
+[Main]
+2 Befoul|CHK
+1 Dance of Shadows|CHK
+1 Genju of the Fens|BOK
+2 Horobi's Whisper|BOK
+1 Midnight Covenant|CHK
+2 Nezumi Bone-Reader|CHK
+3 Nezumi Cutthroat|CHK
+1 Nezumi Graverobber|CHK
+4 Nezumi Ronin|CHK
+1 Nezumi Shadow-Watcher|BOK
+2 Numai Outcast|CHK
+1 Okiba-Gang Shinobi|BOK
+1 Patron of the Nezumi|BOK
+1 Psychic Spear|BOK
+1 Ragged Veins|CHK
+1 Rend Flesh|CHK
+1 Shuko|BOK
+4 Skullsnatcher|BOK
+1 Stir the Grave|BOK
+6 Swamp|CHK|1
+6 Swamp|CHK|2
+6 Swamp|CHK|3
+6 Swamp|CHK|4
+2 Three Tragedies|BOK
+2 Throat Slitter|BOK
+1 Umezawa's Jitte|BOK
+[sideboard]

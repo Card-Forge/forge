@@ -1,0 +1,6 @@
+Name:Fleetfeather Sandals
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & Haste | Description$ Equipped creature has flying and haste.
+Oracle:Equipped creature has flying and haste.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,7 @@
+Name:Angel of Retribution
+ManaCost:6 W
+Types:Creature Angel
+PT:5/5
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

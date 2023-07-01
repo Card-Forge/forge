@@ -1,0 +1,7 @@
+Name:Disaster Radius
+ManaCost:5 R R
+Types:Sorcery
+A:SP$ DamageAll | Cost$ 5 R R Reveal<1/Creature> | NumDmg$ X | ValidCards$ Creature.OppCtrl | ValidDescription$ each creature your opponents control. | SpellDescription$ CARDNAME deals X damage to each creature your opponents control, where X is the revealed card's mana value.
+SVar:X:Revealed$CardManaCost
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, reveal a creature card from your hand.\nDisaster Radius deals X damage to each creature your opponents control, where X is the revealed card's mana value.

@@ -1,0 +1,7 @@
+Name:Nature's Revolt
+ManaCost:3 G G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land | SetPower$ 2 | SetToughness$ 2 | AddType$ Creature | Description$ All lands are 2/2 creatures that are still lands.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All lands are 2/2 creatures that are still lands.

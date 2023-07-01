@@ -1,0 +1,8 @@
+Name:Barbed Sextant
+ManaCost:1
+Types:Artifact
+A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SubAbility$ DelTrigSlowtrip | SpellDescription$ Add one mana of any color. Draw a card at the beginning of the next turn's upkeep.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
+SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
+AI:RemoveDeck:All
+Oracle:{1}, {T}, Sacrifice Barbed Sextant: Add one mana of any color. Draw a card at the beginning of the next turn's upkeep.

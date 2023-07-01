@@ -1,0 +1,10 @@
+Name:Cyclops Gladiator
+ManaCost:1 R R R
+Types:Creature Cyclops Warrior
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExchangeDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to CARDNAME.
+SVar:TrigExchangeDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls. | NumDmg$ MyX | SubAbility$ ReturnDmg
+SVar:ReturnDmg:DB$ DealDamage | DamageSource$ Targeted | NumDmg$ TheirX
+SVar:MyX:Count$CardPower
+SVar:TheirX:Targeted$CardPower
+Oracle:Whenever Cyclops Gladiator attacks, you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to Cyclops Gladiator.

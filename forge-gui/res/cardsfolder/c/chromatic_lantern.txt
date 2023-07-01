@@ -1,0 +1,7 @@
+Name:Chromatic Lantern
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Lands you control have "{T}: Add one mana of any color."\n{T}: Add one mana of any color.

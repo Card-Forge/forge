@@ -1,0 +1,10 @@
+[metadata]
+Code=G00
+Date=2000-01-01
+Name=Judge Gift Cards 2000
+Type=Promo
+ScryfallCode=G00
+
+[cards]
+1 R Counterspell @Dom!
+2 R Vampiric Tutor @Gary Leach

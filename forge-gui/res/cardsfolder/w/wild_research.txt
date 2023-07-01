@@ -1,0 +1,8 @@
+Name:Wild Research
+ManaCost:2 R
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 W | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1 | Shuffle$ True | SubAbility$ DBDiscard | SpellDescription$ Search your library for an enchantment card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle.
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Hand | ChangeType$ Instant | ChangeNum$ 1 | Shuffle$ True | SubAbility$ DBDiscard | SpellDescription$ Search your library for an instant card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
+SVar:NonStackingEffect:True
+Oracle:{1}{W}: Search your library for an enchantment card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle.\n{1}{U}: Search your library for an instant card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle.

@@ -1,0 +1,18 @@
+[quest]
+id=DRK Challenge: Leviathan
+OpponentName=The Leviathan
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:DRK
+Credit Reward=120
+AIExtras=Leviathan
+[metadata]
+Name=DRK Challenge: Leviathan
+Title=The Leviathan
+Difficulty=medium
+Description="Canst thou draw out leviathan with an hook? or his tongue with a cord which thou lettest down?" -Job 41:1, King James Bible
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+60 Island|LEB|3

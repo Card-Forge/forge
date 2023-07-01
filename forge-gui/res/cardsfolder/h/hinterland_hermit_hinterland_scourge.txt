@@ -1,0 +1,20 @@
+Name:Hinterland Hermit
+ManaCost:1 R
+Types:Creature Human Werewolf
+PT:2/1
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Hermit.
+
+ALTERNATE
+
+Name:Hinterland Scourge
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/2
+K:CARDNAME must be blocked if able.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Hinterland Scourge must be blocked if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.

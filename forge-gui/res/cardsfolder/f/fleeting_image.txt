@@ -1,0 +1,7 @@
+Name:Fleeting Image
+ManaCost:2 U
+Types:Creature Illusion
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Return Fleeting Image to its owner's hand.

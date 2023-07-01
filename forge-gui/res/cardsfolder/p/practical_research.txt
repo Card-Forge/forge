@@ -1,0 +1,8 @@
+Name:Practical Research
+ManaCost:3 U R
+Types:Instant
+A:SP$ Draw | NumCards$ 4 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw four cards.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Instant,Sorcery | StackDescription$ SpellDescription | SpellDescription$ Then discard two cards unless you discard an instant or sorcery card.
+DeckHas:Ability$Discard
+DeckHints:Type$Instant|Sorcery
+Oracle:Draw four cards. Then discard two cards unless you discard an instant or sorcery card.

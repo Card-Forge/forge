@@ -1,0 +1,7 @@
+Name:Steward of Valeron
+ManaCost:G W
+Types:Creature Human Druid Knight
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+K:Vigilance
+Oracle:Vigilance\n{T}: Add {G}.

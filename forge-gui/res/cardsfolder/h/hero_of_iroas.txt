@@ -1,0 +1,8 @@
+Name:Hero of Iroas
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Aura | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Aura spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Aura spells you cast cost {1} less to cast.\nHeroic — Whenever you cast a spell that targets Hero of Iroas, put a +1/+1 counter on Hero of Iroas.

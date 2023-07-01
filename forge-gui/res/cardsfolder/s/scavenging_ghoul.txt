@@ -1,0 +1,10 @@
+Name:Scavenging Ghoul
+ManaCost:3 B
+Types:Creature Zombie
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a corpse counter on CARDNAME for each creature that died this turn.
+A:AB$ Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CORPSE | CounterNum$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Counters
+Oracle:At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature that died this turn.\nRemove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.

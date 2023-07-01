@@ -1,0 +1,9 @@
+Name:Skirk Volcanist
+ManaCost:3 R
+Types:Creature Goblin
+PT:3/1
+K:Morph:Sac<2/Mountain>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+AI:RemoveDeck:All
+Oracle:Morph—Sacrifice two Mountains. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Skirk Volcanist is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.

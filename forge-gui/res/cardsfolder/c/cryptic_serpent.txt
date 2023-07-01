@@ -1,0 +1,8 @@
+Name:Cryptic Serpent
+ManaCost:5 U U
+Types:Creature Serpent
+PT:6/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Ability$Graveyard
+Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.

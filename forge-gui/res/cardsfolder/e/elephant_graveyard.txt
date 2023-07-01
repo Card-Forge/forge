@@ -1,0 +1,8 @@
+Name:Elephant Graveyard
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Regenerate | ValidTgts$ Elephant | TgtPrompt$ Select target Elephant | Cost$ T | SpellDescription$ Regenerate target Elephant.
+AI:RemoveDeck:Random
+DeckNeeds:Type$Elephant
+Oracle:{T}: Add {C}.\n{T}: Regenerate target Elephant.

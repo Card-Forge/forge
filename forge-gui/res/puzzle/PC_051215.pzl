@@ -1,0 +1,19 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 051215 - Light and Shadow
+URL:http://www.gatheringmagic.com/seanuy-051215-perplexing-chimera-7-light-and-shadow/
+Goal:Win
+Turns:3
+Difficulty:Hard
+Description:Win on your next turn.  You must find a way to guarantee the win on this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=3
+AILife=9
+humanhand=Provoke|Set:TPR; Needle Storm|Set:TPR; Tranquility|Set:TPR; Legerdemain|Set:TPR
+humanbattlefield=Forest|Set:TPR; Forest|Set:TPR; Forest|Set:TPR; Forest|Set:TPR; Forest|Set:TPR; Forest|Set:TPR; Island|Set:TPR; Island|Set:TPR; Island|Set:TPR; Island|Set:TPR; Island|Set:TPR; Wind Dancer|Set:TPR; Rootwater Hunter|Set:TPR; Telethopter|Set:TPR; Thalakos Drifters|Set:TPR
+humangraveyard=
+humanlibrary=Island|Set:TPR; Forest|Set:TPR
+aibattlefield=Plains|Tapped|Set:TPR; Plains|Tapped|Set:TPR; Plains|Tapped|Set:TPR; Plains|Tapped|Set:TPR; Island|Tapped|Set:TPR; Island|Tapped|Set:TPR; Island|Tapped|Set:TPR; Island|Tapped|Set:TPR; Armored Pegasus|Set:TPR; Soltari Priest|Set:TPR; Horned Turtle|Set:TPR; Thalakos Scout|Set:TPR; Wayward Soul|Id:420|Tapped|Set:TPR; Sea Monster|Tapped|Set:TPR; Conviction|AttachedTo:420|Set:TPR;
+aigraveyard=
+ailibrary=Shadow Rift|Set:TPR; Repentance|Set:TPR

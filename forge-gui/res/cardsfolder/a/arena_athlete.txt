@@ -1,0 +1,7 @@
+Name:Arena Athlete
+ManaCost:1 R
+Types:Creature Human
+PT:2/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCanNotBlock | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, target creature an opponent controls can't block this turn.
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True
+Oracle:Heroic — Whenever you cast a spell that targets Arena Athlete, target creature an opponent controls can't block this turn.

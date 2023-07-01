@@ -1,0 +1,7 @@
+Name:Serra Angel
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

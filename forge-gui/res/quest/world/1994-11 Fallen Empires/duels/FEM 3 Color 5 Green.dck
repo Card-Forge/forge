@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=FEM 3 Color: 5 Green
+Title=Green
+Difficulty=hard
+Description=The Elves never had a standing army; when battle came, they pressed Hunters, Scouts, and Farmers into a surprisingly effective militia.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+3 Elven Lyre|FEM
+4 Elvish Farmer|FEM
+2 Elvish Hunter|FEM|1
+1 Elvish Hunter|FEM|2
+1 Elvish Hunter|FEM|3
+4 Feral Thallid|FEM
+24 Forest|LEB|3
+3 Fungal Bloom|FEM
+2 Spore Flower|FEM
+1 Thallid|FEM|1
+1 Thallid|FEM|2
+1 Thallid|FEM|3
+1 Thallid|FEM|4
+4 Thallid Devourer|FEM
+1 Thorn Thallid|FEM|1
+1 Thorn Thallid|FEM|2
+1 Thorn Thallid|FEM|3
+1 Thorn Thallid|FEM|4

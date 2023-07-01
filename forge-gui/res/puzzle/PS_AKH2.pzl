@@ -1,0 +1,16 @@
+#Flip Card: Wayward Disciple
+[metadata]
+Name:Possibility Storm - Amonkhet #02
+URL:https://i.redd.it/m40ujfn9nowy.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=10
+humanhand=Trial of Solidarity;Thalia's Lieutenant;Doomed Dissenter;Dusk // Dawn
+humanbattlefield=Plains;Plains;Plains;Swamp;Swamp;Liliana, Death's Majesty|Counters:LOYALTY=5;Wayward Disciple|Transformed;Bontu the Glorified;Defiant Salvager
+humanlibrary=Pious Evangel;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp
+aibattlefield=Aven Mindcensor;Faithbearer Paladin

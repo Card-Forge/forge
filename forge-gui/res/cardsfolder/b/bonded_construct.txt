@@ -1,0 +1,6 @@
+Name:Bonded Construct
+ManaCost:1
+Types:Artifact Creature Construct
+PT:2/1
+K:CARDNAME can't attack alone.
+Oracle:Bonded Construct can't attack alone.

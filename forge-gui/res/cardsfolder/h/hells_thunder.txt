@@ -1,0 +1,12 @@
+Name:Hell's Thunder
+ManaCost:1 R R
+Types:Creature Elemental
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+K:Unearth:4 R
+Oracle:Flying, haste\nAt the beginning of the end step, sacrifice Hell's Thunder.\nUnearth {4}{R} ({4}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

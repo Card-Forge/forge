@@ -1,0 +1,7 @@
+Name:Idol of Oblivion
+ManaCost:2
+Types:Artifact
+A:AB$ Draw | Cost$ T | NumCards$ 1 | CheckSVar$ X | SpellDescription$ Draw a card. Activate only if you created a token this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+YouCtrl
+A:AB$ Token | Cost$ 8 T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_10_10_eldrazi | TokenOwner$ You | SpellDescription$ Create a 10/10 colorless Eldrazi creature token.
+Oracle:{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice Idol of Oblivion: Create a 10/10 colorless Eldrazi creature token.

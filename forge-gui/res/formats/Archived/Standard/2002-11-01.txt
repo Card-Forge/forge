@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ONS)
+Type:Archived
+Subtype:Standard
+Effective:2002-11-01
+Sets:7ED, ODY, TOR, JUD, ONS

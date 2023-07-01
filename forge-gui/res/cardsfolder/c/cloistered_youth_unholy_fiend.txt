@@ -1,0 +1,19 @@
+Name:Cloistered Youth
+ManaCost:1 W
+Types:Creature Human
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your upkeep, you may transform Cloistered Youth.
+
+ALTERNATE
+
+Name:Unholy Fiend
+ManaCost:no cost
+Colors:black
+Types:Creature Horror
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:At the beginning of your end step, you lose 1 life.

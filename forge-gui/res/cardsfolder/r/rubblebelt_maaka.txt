@@ -1,0 +1,6 @@
+Name:Rubblebelt Maaka
+ManaCost:3 R
+Types:Creature Cat
+PT:3/3
+A:AB$ Pump | Cost$ R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target attacking creature gets +3/+3 until end of turn.
+Oracle:Bloodrush — {R}, Discard Rubblebelt Maaka: Target attacking creature gets +3/+3 until end of turn.

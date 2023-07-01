@@ -1,0 +1,8 @@
+Name:Gurmag Swiftwing
+ManaCost:1 B
+Types:Creature Bat
+PT:1/2
+K:Flying
+K:First Strike
+K:Haste
+Oracle:Flying, first strike, haste

@@ -1,0 +1,5 @@
+Name:Celestial Sword
+ManaCost:6
+Types:Artifact
+A:AB$ Pump | Cost$ 3 T | NumAtt$ +3 | NumDef$ +3 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AtEOT$ SacrificeCtrl | SpellDescription$ Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
+Oracle:{3}, {T}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.

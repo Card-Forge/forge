@@ -1,0 +1,5 @@
+Name:Sanctuary Cat
+ManaCost:W
+Types:Creature Cat
+PT:1/2
+Oracle:

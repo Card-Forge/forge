@@ -1,0 +1,22 @@
+[metadata]
+Code=J14
+Date=2014-01-01
+Name=Judge Gift Cards 2014
+Type=Promo
+ScryfallCode=J14
+
+[cards]
+1 R Karador, Ghost Chieftain @Todd Lockwood
+2 R Greater Good @Mathias Kollros
+3 R Riku of Two Reflections @Izzy
+4 R Force of Will @Matt Stewart
+5 R Hanna, Ship's Navigator @Terese Nielsen
+6 R Sword of Feast and Famine @Chris Rahn
+7 R Nekusar, the Mindrazer @Mark Winters
+8 R Elesh Norn, Grand Cenobite @Igor Kieryluk
+9 R Oloro, Ageless Ascetic @Eric Deschamps
+1★ R Plains @Terese Nielsen
+2★ R Island @Terese Nielsen
+3★ R Swamp @Terese Nielsen
+4★ R Mountain @Terese Nielsen
+5★ R Forest @Terese Nielsen

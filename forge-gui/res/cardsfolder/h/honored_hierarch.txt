@@ -1,0 +1,9 @@
+Name:Honored Hierarch
+ManaCost:G
+Types:Creature Human Druid
+PT:1/1
+K:Renown:1
+S:Mode$ Continuous | Affected$ Card.Self+IsRenowned | AddKeyword$ Vigilance | AddAbility$ ManaTap | Description$ As long as CARDNAME is renowned, it has vigilance and "{T}: Add one mana of any color."
+SVar:ManaTap:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Counters
+Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nAs long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color."

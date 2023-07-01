@@ -1,0 +1,8 @@
+Name:Guttersnipe
+ManaCost:2 R
+Types:Creature Goblin Shaman
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, Guttersnipe deals 2 damage to each opponent.

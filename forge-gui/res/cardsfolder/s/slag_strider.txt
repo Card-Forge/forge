@@ -1,0 +1,8 @@
+Name:Slag Strider
+ManaCost:5 R R
+Types:Creature Elemental
+PT:3/3
+K:Affinity:Artifact
+A:AB$ DealDamage | Cost$ 1 Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+DeckHints:Type$Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\n{1}, Sacrifice an artifact: Slag Strider deals 1 damage to any target.

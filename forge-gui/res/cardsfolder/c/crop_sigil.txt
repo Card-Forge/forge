@@ -1,0 +1,10 @@
+Name:Crop Sigil
+ManaCost:G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may mill a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | Optional$ True
+A:AB$ ChangeZone | Cost$ 2 G Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouOwn | SubAbility$ DBReturn | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ Return up to one target creature card and up to one target land card from your graveyard to your hand. Activate only if there are four or more card types among cards in your graveyard.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land.YouOwn | TgtPrompt$ Select target land card in your graveyard
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:At the beginning of your upkeep, you may mill a card.\nDelirium — {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand. Activate only if there are four or more card types among cards in your graveyard.

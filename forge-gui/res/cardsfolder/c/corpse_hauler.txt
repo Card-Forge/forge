@@ -1,0 +1,6 @@
+Name:Corpse Hauler
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/1
+A:AB$ ChangeZone | Cost$ 2 B Sac<1/CARDNAME> | TgtPrompt$ Choose another target creature card in your graveyard | ValidTgts$ Creature.Other+YouOwn | AITgts$ Creature.Other+YouOwn+cmcGE3 | AILogic$ AtOppEOT | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return another target creature card from your graveyard to your hand.
+Oracle:{2}{B}, Sacrifice Corpse Hauler: Return another target creature card from your graveyard to your hand.

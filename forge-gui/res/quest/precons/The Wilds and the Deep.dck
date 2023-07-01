@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Wilds and the Deep
+Description=Harness the power of the untamed places of the world and turn it upon those who stand against you. Savage lands and oceanic depths yield monstrosities that grow in ferocity as the game progresses.
+Deck Type=constructed
+Set=JOU
+Image=the_wilds_and_the_deep.jpg
+[Main]
+1 Agent of Horizons|THS
+1 Arbor Colossus|THS
+1 Archetype of Imagination|BNG
+1 Bassara Tower Archer|JOU
+1 Cloaked Siren|JOU
+2 Fleetfeather Cockatrice|JOU
+2 Golden Hind|JOU
+1 Heroes' Bane+|JOU
+2 Kiora's Follower|BNG
+1 Nessian Asp|THS
+1 Nessian Courser|THS
+2 Nessian Game Warden|JOU
+2 Ravenous Leucrocota|JOU
+2 Sealock Monster|THS
+1 Swarmborn Giant|JOU
+2 Swordwise Centaur|BNG
+1 Triton Shorestalker|JOU
+1 Defend the Hearth|THS
+2 Font of Fertility|JOU
+1 Font of Fortunes|JOU
+1 Hubris|JOU
+1 Market Festival|JOU
+1 Savage Surge|THS
+1 Thassa's Ire|JOU
+2 Time to Feed|THS
+15 Forest|THS
+11 Island|THS
+[sideboard]
+

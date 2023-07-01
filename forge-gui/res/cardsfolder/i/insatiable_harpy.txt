@@ -1,0 +1,7 @@
+Name:Insatiable Harpy
+ManaCost:2 B B
+Types:Creature Harpy
+PT:2/2
+K:Flying
+K:Lifelink
+Oracle:Flying, lifelink

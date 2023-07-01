@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Forest's Might
+Description=As a green mage, the natural world is at your command. The power of life itself fuels your magic.
+Deck Type=constructed
+Set=ANA
+[Main]
+1 Aggressive Mammoth|M19
+2 Blanchwood Armor|M19
+3 Bristling Boar|M19
+3 Centaur Courser|M19
+2 Druid of the Cowl|M19
+2 Elvish Rejuvenator|M19
+25 Forest|GRN
+1 Ghalta, Primal Hunger|RIX
+1 Gigantosaurus|M19
+2 Greenwood Sentinel|M19
+3 Highland Game|M19
+2 Llanowar Elves|M19
+1 Meteor Golem|M19
+2 Plummet|M19
+1 Prodigious Growth|M19
+3 Rabid Bite|M19
+3 Titanic Growth|M19
+1 Verdant Rebirth|XLN
+2 Vigilant Baloth|M19
+
+

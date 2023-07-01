@@ -1,0 +1,7 @@
+Name:Necrogen Spellbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+Oracle:{B}, Sacrifice Necrogen Spellbomb: Target player discards a card.\n{1}, Sacrifice Necrogen Spellbomb: Draw a card.

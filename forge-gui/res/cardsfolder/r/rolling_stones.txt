@@ -1,0 +1,9 @@
+Name:Rolling Stones
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ CanAttackDefender | ValidCard$ Creature.Wall | Description$ Wall creatures can attack as though they didn't have defender.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+DeckNeeds:Type$Wall
+Oracle:Wall creatures can attack as though they didn't have defender.

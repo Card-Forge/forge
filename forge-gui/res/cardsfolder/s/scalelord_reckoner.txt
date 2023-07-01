@@ -1,0 +1,9 @@
+Name:Scalelord Reckoner
+ManaCost:3 W W
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Dragon.inZoneBattlefield+YouCtrl | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TargetsWithDefinedController$ TriggeredSourceController | TgtPrompt$ Select target nonland permanent that player controls.
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.

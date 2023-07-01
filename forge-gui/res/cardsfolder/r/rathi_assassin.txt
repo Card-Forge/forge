@@ -1,0 +1,8 @@
+Name:Rathi Assassin
+ManaCost:2 B B
+Types:Creature Phyrexian Zombie Mercenary Assassin
+PT:2/2
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
+A:AB$ Destroy | Cost$ 1 B B T | ValidTgts$ Creature.tapped+nonBlack | TgtPrompt$ Select target tapped nonblack creature | SpellDescription$ Destroy target tapped nonblack creature.
+AI:RemoveDeck:Random
+Oracle:{1}{B}{B}, {T}: Destroy target tapped nonblack creature.\n{3}, {T}: Search your library for a Mercenary permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.

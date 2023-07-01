@@ -1,0 +1,9 @@
+Name:Split the Spoils
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Permanent.YouOwn | TargetMin$ 0 | TargetMax$ 5 | TgtPrompt$ Select up to five target permanent cards from your graveyard | SubAbility$ DBTwoPiles | SpellDescription$ Exile up to five target permanent cards from your graveyard
+SVar:DBTwoPiles:DB$ TwoPiles | Chooser$ Opponent | DefinedCards$ Targeted | Separator$ You | ChosenPile$ DBHand | UnchosenPile$ DBGrave | AILogic$ Worst | StackDescription$ {p:You} separates them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. | SpellDescription$ and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. (Piles can be empty.)
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
+DeckHas:Ability$Graveyard
+Oracle:Exile up to five target permanent cards from your graveyard and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. (Piles can be empty.)

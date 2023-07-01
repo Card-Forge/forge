@@ -1,0 +1,7 @@
+Name:Troll Ascetic
+ManaCost:1 G G
+Types:Creature Troll Shaman
+PT:3/2
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Troll Ascetic.

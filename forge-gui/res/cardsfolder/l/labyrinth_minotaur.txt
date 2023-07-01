@@ -1,0 +1,8 @@
+Name:Labyrinth Minotaur
+ManaCost:3 U
+Types:Creature Minotaur
+PT:1/4
+T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature doesn't untap during its controller's next untap step.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:HasBlockEffect:TRUE
+Oracle:Whenever Labyrinth Minotaur blocks a creature, that creature doesn't untap during its controller's next untap step.

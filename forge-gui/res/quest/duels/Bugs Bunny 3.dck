@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Bugs Bunny 3
+Title=Bugs Bunny
+Difficulty=hard
+Description=UG Polymorph deck
+Icon=Bugs Bunny.jpg
+Deck Type=constructed
+[main]
+4 Tropical Island
+2 Forest|ODY
+2 Island|ODY
+4 Misty Rainforest
+1 Scalding Tarn
+1 Flooded Strand
+1 Polluted Delta
+3 Hinterland Harbor
+4 Khalni Garden
+1 Mox Emerald
+1 Mox Sapphire
+1 Sol Ring
+1 Ancestral Recall
+1 Time Walk
+1 Treasure Cruise
+1 Mental Misstep
+1 Spell Snare
+1 Geist Snatch
+2 Control Magic
+1 Naturalize
+1 Quiet Contemplation
+1 Font of Fortunes
+1 Ior Ruin Expedition
+1 Farseek
+1 Briar Patch
+4 Chatter of the Squirrel
+4 Sprout
+1 Sprout Swarm
+1 Freyalise, Llanowar's Fury
+4 Proteus Staff
+4 Polymorph
+1 Ulamog, the Infinite Gyre
+1 Darksteel Colossus
+1 Avacyn, Angel of Hope
+[sideboard]

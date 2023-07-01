@@ -1,0 +1,11 @@
+Name:Rem Karolus, Stalwart Slayer
+ManaCost:1 R W
+Types:Legendary Creature Human Knight
+PT:2/3
+K:Flying
+K:Haste
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarget$ You,Permanent.YouCtrl+Other | Prevent$ True | Description$ If a spell would deal damage to you or another permanent you control, prevent that damage.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarget$ Permanent.OppCtrl,Opponent | ReplaceWith$ DmgPlus1 | Description$ If a spell would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+Oracle:Flying, haste\nIf a spell would deal damage to you or another permanent you control, prevent that damage.\nIf a spell would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.

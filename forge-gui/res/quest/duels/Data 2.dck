@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Data 2
+Title=Data
+Difficulty=medium
+Description=WB Swampwalk Karma deck with Contaminated Ground and Crusading Knight
+Icon=Data.jpg
+Deck Type=constructed
+[main]
+1 Tethered Griffin
+2 Quag Vampires
+4 Marsh Threader
+3 Stern Judge
+2 Blistergrub
+1 Mesa Enchantress
+4 Crusading Knight
+1 Angry Mob
+1 Cho-Arrim Legate
+1 Bog Wraith
+1 Moor Fiend
+1 Celestial Ancient
+1 Bog Tatters
+1 Fountain Watch
+3 Evil Presence
+4 Contaminated Ground
+3 Tainted Well
+2 Karma
+4 Isolated Chapel
+9 Plains|ISD
+4 Scoured Barrens
+4 Vault of Whispers
+3 Arcane Sanctum
+[sideboard]

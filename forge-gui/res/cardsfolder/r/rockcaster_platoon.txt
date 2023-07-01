@@ -1,0 +1,6 @@
+Name:Rockcaster Platoon
+ManaCost:5 W W
+Types:Creature Rhino Soldier
+PT:5/7
+A:AB$ DamageAll | Cost$ 4 G | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ 2 | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature with flying and each player.
+Oracle:{4}{G}: Rockcaster Platoon deals 2 damage to each creature with flying and each player.

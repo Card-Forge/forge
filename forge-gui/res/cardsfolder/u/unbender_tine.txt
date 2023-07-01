@@ -1,0 +1,6 @@
+Name:Unbender Tine
+ManaCost:2 W U
+Types:Artifact
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | SpellDescription$ Untap another target permanent.
+AI:RemoveDeck:All
+Oracle:{T}: Untap another target permanent.

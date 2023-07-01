@@ -1,0 +1,7 @@
+Name:The Fallen
+ManaCost:1 B B B
+Types:Creature Zombie
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each opponent and planeswalker it has dealt damage to this game.
+SVar:TrigDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent+wasDealtDamageThisGameBy Self | ValidCards$ Planeswalker.wasDealtDamageByThisGame | NumDmg$ 1
+Oracle:At the beginning of your upkeep, The Fallen deals 1 damage to each opponent and planeswalker it has dealt damage to this game.

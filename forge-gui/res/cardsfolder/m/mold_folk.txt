@@ -1,0 +1,10 @@
+Name:Mold Folk
+ManaCost:1 B
+Types:Creature Fungus Warrior
+PT:1/1
+K:Lifelink
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other;Artifact/another creature or an artifact> | CounterType$ P1P1 | CounterNum$ 1 | PrecostDesc$ Mold Harvest — | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:AIPreference:SacCost$Artifact.Token,Creature.Other+cmcLE2,Artifact.cmcEQ1
+DeckHints:Type$Artifact
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Lifelink\nMold Harvest — {1}, Sacrifice another creature or an artifact: Put a +1/+1 counter on Mold Folk.

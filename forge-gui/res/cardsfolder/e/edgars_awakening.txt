@@ -1,0 +1,10 @@
+Name:Edgar's Awakening
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+T:Mode$ Discarded | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerController$ TriggeredCardController | TriggerDescription$ When you discard CARDNAME, you may pay {B}. When you do, return target creature card from your graveyard to your hand.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ B | Execute$ TrigReturn | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Hand
+DeckHints:Ability$Discard
+DeckHas:Ability$Graveyard
+Oracle:Return target creature card from your graveyard to the battlefield.\nWhen you discard Edgar's Awakening, you may pay {B}. When you do, return target creature card from your graveyard to your hand.

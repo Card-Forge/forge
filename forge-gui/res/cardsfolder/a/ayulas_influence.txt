@@ -1,0 +1,7 @@
+Name:Ayula's Influence
+ManaCost:G G G
+Types:Enchantment
+A:AB$ Token | Cost$ Discard<1/Land> | TokenAmount$ 1 | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create a 2/2 green Bear creature token.
+SVar:AIPreference:DiscardCost$Land.Basic
+DeckHas:Ability$Token
+Oracle:Discard a land card: Create a 2/2 green Bear creature token.

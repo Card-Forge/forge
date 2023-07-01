@@ -1,0 +1,9 @@
+Name:Windreader Sphinx
+ManaCost:5 U U
+Types:Creature Sphinx
+PT:3/7
+K:Flying
+T:Mode$ Attacks | ValidCard$ Creature.withFlying | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with flying attacks, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhenever a creature with flying attacks, you may draw a card.

@@ -1,0 +1,7 @@
+Name:Immaculate Magistrate
+ManaCost:3 G
+Types:Creature Elf Shaman
+PT:2/2
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a +1/+1 counter on target creature for each Elf you control.
+SVar:X:Count$Valid Elf.YouCtrl
+Oracle:{T}: Put a +1/+1 counter on target creature for each Elf you control.

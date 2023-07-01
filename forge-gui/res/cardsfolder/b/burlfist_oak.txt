@@ -1,0 +1,7 @@
+Name:Burlfist Oak
+ManaCost:2 G G
+Types:Creature Treefolk
+PT:2/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ Whenever you draw a card, CARDNAME gets +2/+2 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+Oracle:Whenever you draw a card, Burlfist Oak gets +2/+2 until end of turn.

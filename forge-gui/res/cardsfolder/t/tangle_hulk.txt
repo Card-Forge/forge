@@ -1,0 +1,6 @@
+Name:Tangle Hulk
+ManaCost:5
+Types:Artifact Creature Phyrexian Beast
+PT:5/3
+A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
+Oracle:{2}{G}: Regenerate Tangle Hulk.

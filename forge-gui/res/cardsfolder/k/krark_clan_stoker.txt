@@ -1,0 +1,7 @@
+Name:Krark-Clan Stoker
+ManaCost:2 R
+Types:Creature Goblin Shaman
+PT:2/2
+A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice an artifact: Add {R}{R}.

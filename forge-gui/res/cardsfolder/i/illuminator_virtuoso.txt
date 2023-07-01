@@ -1,0 +1,9 @@
+Name:Illuminator Virtuoso
+ManaCost:1 W
+Types:Creature Human Rogue
+PT:1/1
+K:Double Strike
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell.YouCtrl | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell you control, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+DeckHas:Ability$Discard|Counters
+Oracle:Double strike\nWhenever Illuminator Virtuoso becomes the target of a spell you control, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

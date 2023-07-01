@@ -1,0 +1,8 @@
+Name:Static Orb
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Permanent:2 | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, players can't untap more than two permanents during their untap steps.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.

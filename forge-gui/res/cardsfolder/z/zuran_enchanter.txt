@@ -1,0 +1,8 @@
+Name:Zuran Enchanter
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | PlayerTurn$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate only during your turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:{2}{B}, {T}: Target player discards a card. Activate only during your turn.

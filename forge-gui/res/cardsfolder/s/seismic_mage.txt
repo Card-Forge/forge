@@ -1,0 +1,6 @@
+Name:Seismic Mage
+ManaCost:3 R
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ Destroy | Cost$ 2 R T Discard<1/Card> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+Oracle:{2}{R}, {T}, Discard a card: Destroy target land.

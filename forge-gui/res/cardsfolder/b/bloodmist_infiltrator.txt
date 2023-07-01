@@ -1,0 +1,9 @@
+Name:Bloodmist Infiltrator
+ManaCost:2 B
+Types:Creature Vampire
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, CARDNAME can't be blocked this turn.
+SVar:TrigUnblockable:AB$ Effect | Cost$ Sac<1/Creature.Other/another creature> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Bloodmist Infiltrator attacks, you may sacrifice another creature. If you do, Bloodmist Infiltrator can't be blocked this turn.

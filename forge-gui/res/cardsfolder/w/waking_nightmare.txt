@@ -1,0 +1,5 @@
+Name:Waking Nightmare
+ManaCost:2 B
+Types:Sorcery Arcane
+A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+Oracle:Target player discards two cards.

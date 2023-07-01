@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Saltrem Tor 2
+Title=Saltrem Tor
+Icon=SaltremTor.jpg
+Difficulty=medium
+Description=UGR enchantment/creature deck.
+Deck Type=constructed
+[main]
+3 Birds of Paradise|4ED
+2 Control Magic|LEB
+3 Crimson Manticore|LEG
+2 Emerald Dragonfly|CHR
+2 Eternal Warrior|LEG
+2 Fireball|4ED
+11 Forest|4ED
+2 Fungusaur|LEB
+3 Giant Strength|4ED
+2 Giant Tortoise|ARN
+6 Island|4ED
+2 Lurker|DRK
+6 Mountain|4ED
+3 Prodigal Sorcerer|4ED
+2 Regeneration|4ED
+3 Unstable Mutation|4ED
+2 Verduran Enchantress|LEB
+2 Web|LEB
+2 Whirling Dervish|4ED
+[sideboard]

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Warlock 2
+Title=Warlock
+Icon=Warlock.jpg
+Difficulty=medium
+Description=Black hard-to-block creatures with special abilities.
+Deck Type=constructed
+[main]
+3 Bad Moon|LEB
+4 El-Hajjaj|ARN
+4 Fear|LEB
+2 Frozen Shade|LEB
+4 Hypnotic Specter|2ED
+4 Murk Dwellers|DRK
+1 Nightmare|2ED
+4 Pit Scorpion|LEG
+2 Rod of Ruin|4ED
+23 Swamp|2ED
+4 Terror|2ED
+1 The Fallen|DRK
+4 Unholy Strength|LEB
+[sideboard]

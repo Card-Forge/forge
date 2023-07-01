@@ -1,0 +1,7 @@
+Name:Cloudheath Drake
+ManaCost:4 U
+Types:Artifact Creature Drake
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+Oracle:Flying\n{1}{W}: Cloudheath Drake gains vigilance until end of turn.

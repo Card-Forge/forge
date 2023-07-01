@@ -1,0 +1,8 @@
+Name:Quick Sliver
+ManaCost:1 G
+Types:Creature Sliver
+PT:1/1
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Sliver | ValidSA$ Spell | Caster$ Player | Description$ Any player may cast Sliver spells as though they had flash.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nAny player may cast Sliver spells as though they had flash.

@@ -1,0 +1,7 @@
+Name:Menagerie Liberator
+ManaCost:3 G
+Types:Creature Human Warrior
+PT:3/2
+K:Trample
+K:Melee
+Oracle:Trample\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)

@@ -1,0 +1,34 @@
+[metadata]
+Code=UGF
+Date=2015-01-17
+Name=Ugin's Fate
+Type=Promo
+ScryfallCode=ugin
+
+[cards]
+1 M Ugin, the Spirit Dragon @Chris Rahn
+19 R Mastery of the Unseen @Daniel Ljunggren
+24 C Smite the Monstrous @Greg Staples
+26 C Soul Summons @Johann Bodin
+30 U Watcher of the Roost @Jack Wang
+36 R Jeskai Infiltrator @Cynthia Sheppard
+46 U Reality Shift @Howard Lyon
+48 C Mystic of the Hidden Way @Ryan Alexander Lee
+59 C Write into Being @Yeong-Hao Han
+68 C Debilitating Injury @Slawomir Maniak
+73 R Grim Haruspex @Seb McKinnon
+85 C Sultai Emissary @Mathias Kollros
+88 U Ruthless Ripper @Clint Cearley
+96 C Ainok Tracker @Evan Shipard
+97 U Arc Lightning @Seb McKinnon
+98 C Fierce Invocation @Tyler Jacobson
+113 R Jeering Instigator @Willian Murai
+123 U Arashin War Beast @Eric Deschamps
+129 C Formless Nurturing @Cliff Childs
+131 C Dragonscale Boon @Mark Winters
+146 R Wildcall @Adam Paquette
+161 U Hewed Stone Retainers @David Seguin
+164 U Ugin's Construct @Peter Mohrbacher
+216 R Altar of the Brood @Erica Yang
+217 U Briber's Purse @Steve Argyle
+220 R Ghostfire Blade @Cyril Van Der Haegen

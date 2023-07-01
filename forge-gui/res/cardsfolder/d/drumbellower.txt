@@ -1,0 +1,7 @@
+Name:Drumbellower
+ManaCost:2 W
+Types:Creature Spirit
+PT:2/1
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all creatures you control during each other player's untap step.
+Oracle:Flying\nUntap all creatures you control during each other player's untap step.

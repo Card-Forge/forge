@@ -1,0 +1,8 @@
+Name:Atarka Efreet
+ManaCost:3 R
+Types:Creature Efreet Shaman
+PT:5/1
+K:Megamorph:2 R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Megamorph {2}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Atarka Efreet is turned face up, it deals 1 damage to any target.

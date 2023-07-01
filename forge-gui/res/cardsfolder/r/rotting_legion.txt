@@ -1,0 +1,6 @@
+Name:Rotting Legion
+ManaCost:4 B
+Types:Creature Zombie
+PT:4/5
+K:CARDNAME enters the battlefield tapped.
+Oracle:Rotting Legion enters the battlefield tapped.

@@ -1,0 +1,5 @@
+Name:Font of Vigor
+ManaCost:1 W
+Types:Enchantment
+A:AB$ GainLife | Cost$ 2 W Sac<1/CARDNAME> | LifeAmount$ 7 | SpellDescription$ You gain 7 life.
+Oracle:{2}{W}, Sacrifice Font of Vigor: You gain 7 life.

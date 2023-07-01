@@ -1,0 +1,7 @@
+Name:Wall of Opposition
+ManaCost:3 R R
+Types:Creature Wall
+PT:0/6
+K:Defender
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Defender (This creature can't attack.)\n{1}: Wall of Opposition gets +1/+0 until end of turn.

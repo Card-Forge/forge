@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=MIR 1 City: Nyomba
+Title=Nyomba
+Difficulty=easy
+Description="If I have learned anything as a wizard it is this: never fight your own battles." -Waffa, sorcerer of Nyomba
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Afterlife|MIR
+4 Archangel|VIS
+4 Blinding Light|MIR
+4 Dazzling Beauty|MIR
+4 Ethereal Champion|MIR
+4 Femeref Healer|MIR
+4 Gossamer Chains|VIS
+2 Healing Salve|MIR
+4 Melesse Spirit|MIR
+24 Plains|MIR|2
+2 Remedy|VIS

@@ -1,0 +1,7 @@
+Name:Burning Shield Askari
+ManaCost:2 R
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Pump | Cost$ R R | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{R}{R}: Burning Shield Askari gains first strike until end of turn.

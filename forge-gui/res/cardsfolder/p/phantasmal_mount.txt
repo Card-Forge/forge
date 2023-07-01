@@ -1,0 +1,14 @@
+Name:Phantasmal Mount
+ManaCost:1 U
+Types:Creature Illusion Horse
+PT:1/1
+K:Flying
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+toughnessLE2 | TgtPrompt$ Select target creature you control with toughness 2 or less | NumAtt$ +1 | NumDef$ +1 | KW$ Flying | SubAbility$ PhantasmalMountEffect | SpellDescription$ Target creature you control with toughness 2 or less gets +1/+1 and gains flying until end of turn. When CARDNAME leaves the battlefield this turn, sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice CARDNAME.
+SVar:PhantasmalMountEffect:DB$ Effect | Triggers$ LostTheMount,LostTheTarget | RememberObjects$ Targeted
+SVar:LostTheMount:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | OneOff$ True | Execute$ SacMount | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice EFFECTSOURCE.
+SVar:SacMount:DB$ SacrificeAll | Defined$ EffectSource
+SVar:LostTheTarget:Mode$ ChangesZone | ValidCard$ Card.EffectSource | Origin$ Battlefield | Destination$ Any | OneOff$ True | Execute$ SacTarget | TriggerDescription$ When EFFECTSOURCE leaves the battlefield this turn, sacrifice the targeted creature.
+SVar:SacTarget:DB$ SacrificeAll | Defined$ RememberedLKI
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Flying\n{T}: Target creature you control with toughness 2 or less gets +1/+1 and gains flying until end of turn. When Phantasmal Mount leaves the battlefield this turn, sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice Phantasmal Mount.

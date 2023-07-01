@@ -1,0 +1,6 @@
+Name:Thrull Surgeon
+ManaCost:1 B
+Types:Creature Thrull
+PT:1/1
+A:AB$ Discard | Cost$ 1 B Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player. | Mode$ LookYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Look at target player's hand and choose a card from it. That player discards that card. Activate only as a sorcery.
+Oracle:{1}{B}, Sacrifice Thrull Surgeon: Look at target player's hand and choose a card from it. That player discards that card. Activate only as a sorcery.

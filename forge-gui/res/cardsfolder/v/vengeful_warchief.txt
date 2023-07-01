@@ -1,0 +1,8 @@
+Name:Vengeful Warchief
+ManaCost:4 B
+Types:Creature Orc Warrior
+PT:4/4
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you lose life for the first time each turn, put a +1/+1 counter on CARDNAME. (Damage causes loss of life.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you lose life for the first time each turn, put a +1/+1 counter on Vengeful Warchief. (Damage causes loss of life.)

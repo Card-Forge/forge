@@ -1,0 +1,12 @@
+Name:Monoxa, Midway Manager
+ManaCost:2 B R
+Types:Legendary Creature Vampire Employee
+PT:3/3
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ Pump1 | ValidResult$ GE3 | TriggerDescription$ Whenever you roll a 3 or higher, CARDNAME gains first strike until end of turn. If the roll was 4 or higher, it gains menace until end of turn. If the roll was 5 or higher, it gains lifelink until end of turn.
+SVar:Pump1:DB$ Pump | KW$ First Strike | SubAbility$ Pump2
+SVar:Pump2:DB$ Pump | KW$ Menace | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SubAbility$ Pump3
+SVar:Pump3:DB$ Pump | KW$ Lifelink | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:TriggerCount$Result
+A:AB$ RollDice | Cost$ 6 | SpellDescription$ Roll a six-sided die.
+DeckHas:Ability$LifeGain
+Oracle:Whenever you roll a 3 or higher, Monoxa, Midway Manager gains first strike until end of turn. If the roll was 4 or higher, it gains menace until end of turn. If the roll was 5 or higher, it gains lifelink until end of turn.\n{6}: Roll a six-sided die.

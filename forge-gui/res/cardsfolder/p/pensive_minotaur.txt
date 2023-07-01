@@ -1,0 +1,5 @@
+Name:Pensive Minotaur
+ManaCost:2 R
+Types:Creature Minotaur Warrior
+PT:2/3
+Oracle:

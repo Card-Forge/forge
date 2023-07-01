@@ -1,0 +1,8 @@
+Name:Penumbra Spider
+ManaCost:2 G G
+Types:Creature Spider
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 2/4 black Spider creature token with reach.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_4_spider_reach | TokenOwner$ TriggeredCardController
+Oracle:Reach\nWhen Penumbra Spider dies, create a 2/4 black Spider creature token with reach.

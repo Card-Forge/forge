@@ -1,0 +1,9 @@
+Name:Lethe Lake
+ManaCost:no cost
+Types:Plane Arkhos
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ LetheMill | TriggerDescription$ At the beginning of your upkeep, mill ten cards.
+SVar:LetheMill:DB$ Mill | NumCards$ 10
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target player mills ten cards.
+SVar:RolledChaos:DB$ Mill | ValidTgts$ Player | NumCards$ 10
+SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
+Oracle:At the beginning of your upkeep, mill ten cards.\nWhenever chaos ensues, target player mills ten cards.

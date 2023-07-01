@@ -1,0 +1,6 @@
+Name:Karmic Justice
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Destroyed | ValidCauser$ Player.Opponent | ValidCard$ Permanent.nonCreature+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TargetsWithDefinedController$ TriggeredCauser
+Oracle:Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.

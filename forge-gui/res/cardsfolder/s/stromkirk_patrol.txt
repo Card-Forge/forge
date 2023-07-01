@@ -1,0 +1,7 @@
+Name:Stromkirk Patrol
+ManaCost:4 B
+Types:Creature Vampire Soldier
+PT:4/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever Stromkirk Patrol deals combat damage to a player, put a +1/+1 counter on it.

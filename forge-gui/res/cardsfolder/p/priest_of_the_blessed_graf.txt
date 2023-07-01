@@ -1,0 +1,9 @@
+Name:Priest of the Blessed Graf
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:1/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ At the beginning of your end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of opponents who control more lands than you.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:X:PlayerCountOpponents$HasPropertywithMoreLandsThanYou
+DeckHas:Ability$Token & Type$Spirit
+Oracle:At the beginning of your end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of opponents who control more lands than you.

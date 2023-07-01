@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Brother Voodoo 2
+Title=Brother Voodoo
+Difficulty=medium
+Description=BG Constellation deck with Argothian Enchantress and lots of Enchantment Creatures
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+[main]
+1 Archetype of Finality
+1 Argothian Enchantress
+1 Herald of the Pantheon
+2 Baleful Eidolon
+2 Boon Satyr
+2 Brain Maggot
+2 Courser of Kruphix
+4 Doomwake Giant
+1 Dreadbringer Lampads
+2 Eidolon of Blossoms
+4 Font of Fertility
+12 Forest
+1 Goldenhide Ox
+3 Grim Guardian
+1 Humbler of Mortals
+2 Leafcrown Dryad
+3 Oakheart Dryads
+1 Pharika, God of Affliction
+2 Spiteful Returned
+12 Swamp
+1 Thoughtrender Lamia
+[sideboard]

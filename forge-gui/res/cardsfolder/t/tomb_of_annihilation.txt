@@ -1,0 +1,13 @@
+Name:Tomb of Annihilation
+ManaCost:no cost
+Types:Dungeon
+K:Dungeon:DBEntry,DBVeilsOfFear,DBOubliette,DBSandfallCell,DBCradleDeathGod
+SVar:DBEntry:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | RoomName$ Trapped Entry | SpellDescription$ Each player loses 1 life. | NextRoom$ DBVeilsOfFear,DBOubliette
+SVar:DBVeilsOfFear:DB$ RepeatEach | RepeatSubAbility$ DBLoseLife1 | RepeatPlayers$ Player | RoomName$ Veils of Fear | SpellDescription$ Each player loses 2 life unless they discard a card. | NextRoom$ DBSandfallCell
+SVar:DBLoseLife1:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 2 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
+SVar:DBOubliette:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBSacArtifact | RoomName$ Oubliette | SpellDescription$ Discard a card and sacrifice an artifact, a creature, and a land. | NextRoom$ DBCradleDeathGod
+SVar:DBSacArtifact:DB$ Sacrifice | Defined$ You | SacValid$ Artifact & Creature & Land | SacEachValid$ True
+SVar:DBSandfallCell:DB$ RepeatEach | RepeatSubAbility$ DBLoseLife2 | RepeatPlayers$ Player | RoomName$ Sandfall Cell | SpellDescription$ Each player loses 2 life unless they sacrifice an artifact, a creature, or a land. | NextRoom$ DBCradleDeathGod
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 2 | UnlessCost$ Sac<1/Artifact;Creature;Land/an artifact, a creature, or a land> | UnlessPayer$ Remembered
+SVar:DBCradleDeathGod:DB$ Token | TokenScript$ the_atropal | TokenOwner$ You | RoomName$ Cradle of the Death God | SpellDescription$ Create The Atropal, a legendary 4/4 black God Horror creature token with deathtouch.
+Oracle:Trapped Entry — Each player loses 1 life. (Leads to: Veils of Fear, Oubliette)\nVeils of Fear — Each player loses 2 life unless they discard a card. (Leads to: Sandfall Cell)\nSandfall Cell — Each player loses 2 life unless they sacrifice a creature, artifact, or land. (Leads to: Cradle of the Death God)\nOubliette — Discard a card and sacrifice a creature, an artifact, and a land. (Leads to: Cradle of the Death God)\nCradle of the Death God — Create The Atropal, a legendary 4/4 black God Horror creature token with deathtouch.

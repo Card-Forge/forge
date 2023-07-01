@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Battle Mammoth
+OpponentName=The Mammoths
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Bretagard Stronghold
+HumanExtras=
+[metadata]
+Title=Battle Mammoth
+Difficulty=medium
+Description="Hey, look at that. Dinner and a show."\n--Manny the Woolly Mammoth, Ice Age
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Battle Mammoth
+[Main]
+20 Battle Mammoth|KHM|2
+40 Forest|KHM|1

@@ -1,0 +1,11 @@
+Name:Breathkeeper Seraph
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddTrigger$ DeathTrigger | AddSVar$ DelayedReturn,TrigReturn | Description$ As long as CARDNAME is paired with another creature, each of those creatures have "When this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep."
+SVar:DeathTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DelayedReturn | TriggerDescription$ When this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep.
+SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ You may return it to the battlefield under its owner's control at the beginning of your next upkeep.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Flying, soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Breathkeeper Seraph is paired with another creature, each of those creatures has "When this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep."

@@ -1,0 +1,10 @@
+Name:Walker of the Wastes
+ManaCost:4 C
+Types:Creature Eldrazi
+PT:4/4
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each land you control named Wastes.
+SVar:X:Count$Valid Land.YouCtrl+namedWastes
+DeckNeeds:Ability$Mana.Colorless
+DeckHints:Name$Wastes
+Oracle:({C} represents colorless mana.)\nTrample\nWalker of the Wastes gets +1/+1 for each land you control named Wastes.

@@ -1,0 +1,49 @@
+[metadata]
+Code=H1R
+Date=2021-06-18
+Name=Modern Horizons 1 Timeshifts
+Code2=RMH1
+Type=Draft
+ScryfallCode=H1R
+
+[cards]
+1 U Ephemerate @Bastien L. Deharme
+2 U Generous Gift @Kev Walker
+3 R Giver of Runes @Seb McKinnon
+4 U King of the Pride @Jonathan Kuo
+5 M Ranger-Captain of Eos @Ryan Pancoast
+6 R Sisay, Weatherlight Captain @Anna Steinbauer
+7 R Archmage's Charm @Alayna Danner
+8 U Faerie Seer @Colin Boyer
+9 R Force of Negation @Paul Scott Canavan
+10 U Tribute Mage @Scott Murphy
+11 M Urza, Lord High Artificer @Grzegorz Rutkowski
+12 U Changeling Outcast @Micah Epstein
+13 U Defile @Joe Slucher
+14 R Plague Engineer @Nicholas Gregory
+15 U Undead Augur @Sara Winters
+16 R Goblin Engineer @Jehan Choo
+17 U Magmatic Sinkhole @Mark Behm
+18 U Shenanigans @Lindsey Look
+19 R Ayula, Queen Among Bears @Jesper Ejsing
+20 R Deep Forest Hermit @Chris Seaman
+21 R Force of Vigor @Randy Vargas
+22 U Llanowar Tribe @Scott Murphy
+23 U Scale Up @Suzanne Helmigh
+24 U Weather the Storm @Magali Villeneuve
+25 U Etchings of the Chosen @Chuck Lukacs
+26 M The First Sliver @Svetlin Velinov
+27 R Ice-Fang Coatl @Filip Burburan
+28 U Ingenious Infiltrator @Jason Rainville
+29 U Lavabelly Sliver @Mark Behm
+30 U Soulherder @Seb McKinnon
+31 M Sword of Sinew and Steel @Chris Rahn
+32 M Sword of Truth and Justice @Chris Rahn
+33 U Talisman of Conviction @Lindsey Look
+34 U Talisman of Creativity @Lindsey Look
+35 U Talisman of Curiosity @Lindsey Look
+36 U Talisman of Hierarchy @Lindsey Look
+37 U Talisman of Resilience @Lindsey Look
+38 U Universal Automaton @Ben Maier
+39 R Hall of Heliod's Generosity @Daniel Ljunggren
+40 R Prismatic Vista @Sam Burley

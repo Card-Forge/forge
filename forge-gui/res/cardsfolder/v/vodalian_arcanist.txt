@@ -1,0 +1,7 @@
+Name:Vodalian Arcanist
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {C}. Spend this mana only to cast an instant or sorcery spell.
+DeckHints:Type$Instant|Sorcery
+Oracle:{T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.

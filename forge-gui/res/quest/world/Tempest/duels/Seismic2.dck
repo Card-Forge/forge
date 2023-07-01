@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Cartographer
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Red - Green deck based on discarding lands.
+Deck Type=constructed
+Name=Seismic2
+[Main]
+3 Anarchist|EXO
+4 Cartographer|EXO
+4 Erratic Portal|EXO
+3 Forest|TMP|1
+4 Forest|TMP|2
+1 Forest|TMP|3
+5 Forest|TMP|4
+4 Hermit Druid|STH
+3 Mountain|TMP|1
+4 Mountain|TMP|2
+5 Mountain|TMP|3
+1 Mountain|TMP|4
+2 Mulch|STH
+2 Ravenous Baboons|EXO
+4 Rolling Thunder|TMP
+4 Scorched Earth|TMP
+3 Seismic Assault|EXO
+4 Wall of Blossoms|STH

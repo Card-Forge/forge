@@ -1,0 +1,8 @@
+Name:Mudbrawler Cohort
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:1/1
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Creature.YouCtrl+Red+Other | Description$ CARDNAME gets +1/+1 as long as you control another red creature.
+SVar:BuffedBy:Creature.Red
+Oracle:Haste\nMudbrawler Cohort gets +1/+1 as long as you control another red creature.

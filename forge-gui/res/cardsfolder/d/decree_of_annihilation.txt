@@ -1,0 +1,11 @@
+Name:Decree of Annihilation
+ManaCost:8 R R
+Types:Sorcery
+K:Cycling:5 R R
+A:SP$ ChangeZoneAll | Cost$ 8 R R | ChangeType$ Artifact,Land,Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBExileHand | SpellDescription$ Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When you cycle CARDNAME, destroy all lands
+SVar:DBExileHand:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Exile | SubAbility$ DBExileGraveyard
+SVar:DBExileGraveyard:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
+AI:RemoveDeck:All
+Oracle:Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.\nCycling {5}{R}{R} ({5}{R}{R}, Discard this card: Draw a card.)\nWhen you cycle Decree of Annihilation, destroy all lands.

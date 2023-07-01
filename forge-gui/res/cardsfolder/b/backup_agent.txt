@@ -1,0 +1,9 @@
+Name:Backup Agent
+ManaCost:1 W
+Types:Creature Human Citizen
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When Backup Agent enters the battlefield, put a +1/+1 counter on target creature.

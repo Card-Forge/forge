@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon 2
+Title=Apu Nahasapeemapetilon
+Difficulty=medium
+Description=WG persist deck with Heartmender and Juniper Order Ranger
+Icon=Apu Nahasapeemapetilon.jpg
+Deck Type=constructed
+[main]
+4 Sunpetal Grove
+6 Forest|M12
+4 Razorverge Thicket
+4 Graypelt Refuge
+5 Plains|M12
+1 Oran-Rief, the Vastwood
+4 Heartmender
+4 Juniper Order Ranger
+4 Kitchen Finks
+2 Kithkin Spellduster
+1 Lichenthrope
+4 Rendclaw Trow
+4 Safehold Elite
+2 Scuzzback Marauders
+4 Serrated Biskelion
+1 Trapjaw Kelpie
+2 Wicker Warcrawler
+2 Woodfall Primus
+1 Flourishing Defenses
+1 Rite of Passage
+[sideboard]

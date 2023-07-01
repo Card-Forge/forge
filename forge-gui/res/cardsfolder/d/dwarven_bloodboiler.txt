@@ -1,0 +1,6 @@
+Name:Dwarven Bloodboiler
+ManaCost:R R R
+Types:Creature Dwarf
+PT:2/2
+A:AB$ Pump | Cost$ tapXType<1/Dwarf> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
+Oracle:Tap an untapped Dwarf you control: Target creature gets +2/+0 until end of turn.

@@ -1,0 +1,10 @@
+Name:Salvage Drone
+ManaCost:U
+Types:Creature Eldrazi Drone
+PT:1/1
+K:Devoid
+K:Ingest
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ When CARDNAME dies, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
+DeckHints:Type$Processor
+Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)\nWhen Salvage Drone dies, you may draw a card. If you do, discard a card.

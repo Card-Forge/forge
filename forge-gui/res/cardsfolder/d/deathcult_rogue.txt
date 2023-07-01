@@ -1,0 +1,6 @@
+Name:Deathcult Rogue
+ManaCost:1 UB UB
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonRogue | Description$ CARDNAME can't be blocked except by Rogues.
+Oracle:Deathcult Rogue can't be blocked except by Rogues.

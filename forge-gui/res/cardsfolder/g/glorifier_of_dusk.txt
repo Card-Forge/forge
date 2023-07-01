@@ -1,0 +1,7 @@
+Name:Glorifier of Dusk
+ManaCost:3 W W
+Types:Creature Vampire Soldier
+PT:4/4
+A:AB$ Pump | Cost$ PayLife<2> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ Pump | Cost$ PayLife<2> | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+Oracle:Pay 2 life: Glorifier of Dusk gains flying until end of turn.\nPay 2 life: Glorifier of Dusk gains vigilance until end of turn.

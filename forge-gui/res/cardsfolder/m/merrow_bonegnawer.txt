@@ -1,0 +1,8 @@
+Name:Merrow Bonegnawer
+ManaCost:B
+Types:Creature Merfolk Rogue
+PT:1/1
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | SpellDescription$ Target player exiles a card from their graveyard.
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a black spell, you may untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:{T}: Target player exiles a card from their graveyard.\nWhenever you cast a black spell, you may untap Merrow Bonegnawer.

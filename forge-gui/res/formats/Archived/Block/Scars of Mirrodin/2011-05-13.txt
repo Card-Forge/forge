@@ -1,0 +1,6 @@
+[format]
+Name:Block: Scars of Mirrodin (NPH)
+Type:Archived
+Subtype:Block
+Effective:2011-05-13
+Sets:SOM, MBS, NPH

@@ -1,0 +1,9 @@
+Name:Zebra Unicorn
+ManaCost:2 G W
+Types:Creature Unicorn
+PT:2/2
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Zebra Unicorn deals damage, you gain that much life.

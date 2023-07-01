@@ -1,0 +1,8 @@
+Name:Apprentice Sharpshooter
+ManaCost:2 G
+Types:Creature Human Archer
+PT:1/4
+K:Reach
+K:Training
+DeckHas:Ability$Counters
+Oracle:Reach\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)

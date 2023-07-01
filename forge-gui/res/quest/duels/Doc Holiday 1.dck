@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Doc Holiday 1
+Title=Doc Holiday
+Difficulty=easy
+Description=WUG Morph deck with Ixidron, Aphetto Runecaster and Aven Farseer
+Icon=Doc Holiday.jpg
+Deck Type=constructed
+[main]
+3 Aphetto Runecaster
+3 Aven Farseer
+4 Ixidron
+6 Plains|10E
+11 Island|10E
+6 Forest|10E
+2 Obelisk of Bant
+4 Crystallization
+1 Brine Elemental
+1 Daru Sanctifier
+2 Defender of the Order
+4 Echo Tracer
+4 Liege of the Axe
+4 Nantuko Vigilante
+2 Thelonite Hermit
+1 Wingbeat Warrior
+2 Woodcloaker
+[sideboard]

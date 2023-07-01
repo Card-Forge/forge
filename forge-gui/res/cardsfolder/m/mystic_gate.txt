@@ -1,0 +1,7 @@
+Name:Mystic Gate
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ WU T | Produced$ Combo W U | Amount$ 2 | SpellDescription$ Add {W}{W}, {W}{U}, or {U}{U}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}.

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Gold Finger 3
+Title=Gold Finger
+Difficulty=hard
+Description=Mono U control deck with various counter spells, Serra Sphinx and Memnarch
+Icon=Gold Finger.jpg
+Deck Type=constructed
+[main]
+24 Island|M11
+1 Mox Sapphire
+4 Counterspell
+1 Remove Soul
+1 Preemptive Strike
+1 Essence Scatter
+1 False Summoning
+4 Spell Snare
+4 Dismiss
+2 Repulse
+2 Snap
+2 Serra Sphinx
+2 Ivory Tower
+1 Memnarch
+3 Plumeveil
+1 Ancestral Recall
+1 Time Walk
+3 Cloud of Faeries
+2 Treachery
+[sideboard]

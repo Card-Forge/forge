@@ -1,0 +1,10 @@
+Name:Ishai, Ojutai Dragonspeaker
+ManaCost:2 W U
+Types:Legendary Creature Bird Monk
+PT:1/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Partner
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on Ishai, Ojutai Dragonspeaker.\nPartner (You can have two commanders if both have partner.)

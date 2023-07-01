@@ -1,0 +1,7 @@
+Name:Selesnya Evangel
+ManaCost:G W
+Types:Creature Elf Shaman
+PT:1/2
+A:AB$ Token | Cost$ 1 T tapXType<1/Creature> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+DeckHas:Ability$Token
+Oracle:{1}, {T}, Tap an untapped creature you control: Create a 1/1 green Saproling creature token.

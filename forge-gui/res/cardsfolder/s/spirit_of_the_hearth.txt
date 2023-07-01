@@ -1,0 +1,7 @@
+Name:Spirit of the Hearth
+ManaCost:4 W W
+Types:Creature Cat Spirit
+PT:4/5
+K:Flying
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+Oracle:Flying\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)

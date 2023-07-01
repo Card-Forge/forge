@@ -1,0 +1,7 @@
+Name:Metamorphosis
+ManaCost:G
+Types:Sorcery
+A:SP$ Mana | Cost$ G Sac<1/Creature> | Produced$ Any | Amount$ X | RestrictValid$ Spell.Creature | SpellDescription$ Add X mana of any one color, where X is 1 plus the sacrificed creature's mana value. Spend this mana only to cast creature spells.
+SVar:X:Sacrificed$CardManaCost/Plus.1
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nAdd X mana of any one color, where X is 1 plus the sacrificed creature's mana value. Spend this mana only to cast creature spells.

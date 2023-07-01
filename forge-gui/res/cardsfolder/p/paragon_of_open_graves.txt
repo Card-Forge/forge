@@ -1,0 +1,8 @@
+Name:Paragon of Open Graves
+ManaCost:3 B
+Types:Creature Skeleton Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures you control get +1/+1.
+A:AB$ Pump | Cost$ 2 B T | ValidTgts$ Creature.Black+Other+YouCtrl | TgtPrompt$ Select target black creature | KW$ Deathtouch | SpellDescription$ Another target black creature you control gains deathtouch until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Other black creatures you control get +1/+1.\n{2}{B}, {T}: Another target black creature you control gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

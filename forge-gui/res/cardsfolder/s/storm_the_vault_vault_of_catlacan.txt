@@ -1,0 +1,19 @@
+Name:Storm the Vault
+ManaCost:2 U R
+Types:Legendary Enchantment
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you control five or more artifacts, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Whenever one or more creatures you control deal combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nAt the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
+
+ALTERNATE
+
+Name:Vault of Catlacan
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:(Transforms from Storm the Vault.)\n{T}: Add one mana of any color.\n{T}: Add {U} for each artifact you control.

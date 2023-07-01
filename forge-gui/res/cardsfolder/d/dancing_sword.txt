@@ -1,0 +1,8 @@
+Name:Dancing Sword
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Equipped creature gets +2/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigAnimate | OptionalDecider$ You | TriggerDescription$ When equipped creature dies, you may have CARDNAME become a 2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Artifact,Creature,Construct | Power$ 2 | Toughness$ 1 | Keywords$ Flying & Ward:1 | RemoveCardTypes$ True | RemoveCreatureTypes$ True | RemoveTypes$ Equipment | Duration$ Permanent
+K:Equip:1
+Oracle:Equipped creature gets +2/+1.\nWhen equipped creature dies, you may have Dancing Sword become a 2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment.\nEquip {1}

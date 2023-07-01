@@ -1,0 +1,6 @@
+Name:Acolyte of Xathrid
+ManaCost:B
+Types:Creature Human Cleric
+PT:0/1
+A:AB$ LoseLife | Cost$ 1 B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+Oracle:{1}{B}, {T}: Target player loses 1 life.

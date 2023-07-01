@@ -1,0 +1,7 @@
+Name:First Sliver's Chosen
+ManaCost:4 W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Exalted | Description$ Sliver creatures you control have Exalted.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)

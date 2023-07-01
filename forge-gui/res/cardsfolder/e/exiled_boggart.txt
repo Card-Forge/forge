@@ -1,0 +1,7 @@
+Name:Exiled Boggart
+ManaCost:1 B
+Types:Creature Goblin Rogue
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, discard a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredCardController | NumCards$ 1 | Mode$ TgtChoose
+Oracle:When Exiled Boggart dies, discard a card.

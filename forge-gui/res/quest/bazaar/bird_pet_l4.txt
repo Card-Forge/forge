@@ -1,0 +1,9 @@
+Name:Bird Pet
+ManaCost:no cost
+Colors:blue
+Types:Creature Bird Pet
+PT:1/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBScry | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {1}. If you do, scry 1.
+SVar:DBScry:AB$ Scry | Cost$ 1 | ScryNum$ 1
+Oracle:Flying\nWhenever Bird Pet deals combat damage to a player, you may pay {1}. If you do, scry 1.

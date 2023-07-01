@@ -1,0 +1,7 @@
+Name:Powerstone Shard
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each artifact you control named Powerstone Shard.
+SVar:X:Count$Valid Artifact.namedPowerstone Shard+YouCtrl
+SVar:BuffedBy:Artifact.namedPowerstone Shard
+Oracle:{T}: Add {C} for each artifact you control named Powerstone Shard.

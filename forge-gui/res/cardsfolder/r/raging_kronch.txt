@@ -1,0 +1,6 @@
+Name:Raging Kronch
+ManaCost:2 R
+Types:Creature Beast
+PT:4/3
+K:CARDNAME can't attack alone.
+Oracle:Raging Kronch can't attack alone.

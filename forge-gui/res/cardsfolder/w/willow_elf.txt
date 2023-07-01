@@ -1,0 +1,5 @@
+Name:Willow Elf
+ManaCost:G
+Types:Creature Elf
+PT:1/1
+Oracle:

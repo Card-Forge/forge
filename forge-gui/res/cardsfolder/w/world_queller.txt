@@ -1,0 +1,9 @@
+Name:World Queller
+ManaCost:3 W W
+Types:Creature Avatar
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ ChooseType | TriggerDescription$ At the beginning of your upkeep, you may choose a card type. If you do, each player sacrifices a permanent of that type.
+SVar:ChooseType:DB$ ChooseType | Defined$ You | Type$ Card | SubAbility$ TrigSac
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Permanent.ChosenType | Defined$ Player
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, you may choose a card type. If you do, each player sacrifices a permanent of that type.

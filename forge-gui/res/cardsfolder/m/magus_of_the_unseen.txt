@@ -1,0 +1,9 @@
+Name:Magus of the Unseen
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ GainControl | Cost$ 1 U T | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact opponent controls | LoseControl$ EOT | AddKWs$ Haste | Untap$ True | SubAbility$ DBDelay | SpellDescription$ Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn.
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.IsTriggerRemembered | ValidOriginalController$ You | RememberObjects$ Targeted | Execute$ TrigTap | SpellDescription$ When you lose control of the artifact, tap it.
+SVar:TrigTap:DB$ Tap | Defined$ DelayTriggerRememberedLKI
+AI:RemoveDeck:All
+Oracle:{1}{U}, {T}: Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.

@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Life Boost
+Description=Live it up with the "Life Boost" deck. Lay down cards to increase your life total, or use your creatures to hold opposing creatures at bay while you take your opponents apart.
+Deck Type=constructed
+Set=8ED
+Image=life_boost.jpg
+[main]
+2 Angel of Mercy|8ED
+2 Angelic Page|8ED
+1 Blessed Reversal|8ED
+1 Chastise|8ED
+2 Crossbow Infantry|8ED
+1 Diving Griffin|8ED
+1 Glorious Anthem|8ED
+1 Healing Salve|8ED
+1 Ivory Cup|8ED
+1 Pacifism|8ED
+17 Plains|8ED
+1 Seasoned Marshal|8ED
+1 Spirit Link|8ED
+1 Staunch Defenders|8ED
+2 Suntail Hawk|8ED
+2 Tundra Wolves|8ED
+3 Venerable Monk|8ED
+[sideboard]

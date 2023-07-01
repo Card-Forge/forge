@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Atlantis
+OpponentName=Atlantis
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Atlantis
+Title=Atlantis
+Difficulty=very hard
+Description=A master of tactics, the Lord of Atlantis makes his people bold in battle merely by arriving to lead them.
+Icon=Lord of Atlantis.jpg
+Deck Type=constructed
+[main]
+20 Island|LEB|1
+40 Lord of Atlantis|LEB

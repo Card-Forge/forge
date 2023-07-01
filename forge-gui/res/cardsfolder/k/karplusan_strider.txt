@@ -1,0 +1,6 @@
+Name:Karplusan Strider
+ManaCost:3 G
+Types:Creature Yeti
+PT:3/4
+S:Mode$ CantTarget | ValidSA$ Spell | ValidCard$ Card.Self | ValidSource$ Card.Blue,Card.Black | Description$ CARDNAME can't be the target of blue or black spells.
+Oracle:Karplusan Strider can't be the target of blue or black spells.

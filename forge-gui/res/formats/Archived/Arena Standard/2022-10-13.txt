@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (2022-10-13)
+Type:Archived
+Subtype:Standard
+Effective:2022-10-13
+Sets:MID, VOW, NEO, SNC, DMU
+Banned:The Meathook Massacre

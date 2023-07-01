@@ -1,0 +1,10 @@
+Name:Call to the Grave
+ManaCost:4 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.nonZombie | Defined$ TriggeredPlayer
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
+SVar:TrigSacSelf:DB$ Sacrifice
+AI:RemoveDeck:Random
+DeckHints:Type$Zombie
+Oracle:At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.\nAt the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.

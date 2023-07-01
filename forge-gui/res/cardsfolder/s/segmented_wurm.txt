@@ -1,0 +1,9 @@
+Name:Segmented Wurm
+ManaCost:3 R G
+Types:Creature Wurm
+PT:5/5
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, put a -1/-1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ M1M1
+AI:RemoveDeck:All
+DeckHas:Ability$Counters
+Oracle:Whenever Segmented Wurm becomes the target of a spell or ability, put a -1/-1 counter on it.

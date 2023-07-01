@@ -1,0 +1,8 @@
+Name:Hypersonic Dragon
+ManaCost:3 U R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+S:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | Caster$ You | Description$ You may cast sorcery spells as though they had flash.
+Oracle:Flying, haste\nYou may cast sorcery spells as though they had flash. (You may cast them any time you could cast an instant.)

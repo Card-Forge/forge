@@ -1,0 +1,5 @@
+Name:Metallic Sliver
+ManaCost:no cost
+Types:Artifact Creature Sliver
+PT:1/1
+Oracle:

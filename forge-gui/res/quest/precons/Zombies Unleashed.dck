@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Zombies Unleashed
+Description=The undead are ready to recruit some new members. Zombies with amplify, morph, and other nasty surprises will drag your opponent's creatures-- and your opponent-- deep into the abyss.
+Deck Type=constructed
+Set=LGN
+Image=zombies_unleashed.jpg
+[main]
+1 Cruel Revival|ONS
+2 Deathmark Prelate|LGN
+2 Shepherd of Rot|ONS
+1 Boneknitter|ONS
+2 Frightshroud Courier|ONS
+1 Soulless One|ONS
+1 Festering Goblin|ONS
+23 Swamp|ONS
+2 Barren Moor|ONS
+1 Dirge of Dread|ONS
+1 Feeding Frenzy|ONS
+4 Skinthinner|LGN
+1 Aphetto Exterminator|LGN
+2 Gempalm Polluter|LGN
+1 Ghastly Remains|LGN
+3 Smokespew Invoker|LGN
+2 Embalmed Brawler|LGN
+1 Noxious Ghoul|LGN
+2 Corpse Harvester|LGN
+2 Dripping Dead|LGN
+2 Infernal Caretaker|LGN
+1 Graveborn Muse|LGN
+2 Withered Wretch|LGN
+[sideboard]

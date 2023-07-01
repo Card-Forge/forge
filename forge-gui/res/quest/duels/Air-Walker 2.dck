@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Air-Walker 2
+Title=Air-Walker
+Difficulty=medium
+Description=WUBRG Herald deck
+Icon=Air-Walker.jpg
+Deck Type=constructed
+[main]
+4 Angel's Herald
+2 Badlands
+2 Bayou
+4 Behemoth's Herald
+1 Boros Recruit
+4 Demon's Herald
+4 Dragon's Herald
+1 Dryad Militant
+2 Empyrial Archangel
+2 Godsire
+2 Hellkite Overlord
+1 Nivmagus Elemental
+1 Oona's Gatewarden
+2 Plateau
+2 Prince of Thralls
+2 Savannah
+2 Scrubland
+1 Slitherhead
+2 Sphinx Sovereign
+4 Sphinx's Herald
+2 Taiga
+2 Thran Quarry
+2 Ancient Ziggurat
+2 Tropical Island
+2 Tundra
+2 Underground Sea
+2 Volcanic Island
+1 Scuzzback Scrapper
+[sideboard]

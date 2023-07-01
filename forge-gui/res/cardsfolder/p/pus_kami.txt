@@ -1,0 +1,8 @@
+Name:Pus Kami
+ManaCost:5 B B
+Types:Creature Spirit
+PT:3/3
+A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | AITgts$ BetterThanSource | SpellDescription$ Destroy target nonblack creature.
+K:Soulshift:6
+DeckHints:Type$Spirit
+Oracle:{B}, Sacrifice Pus Kami: Destroy target nonblack creature.\nSoulshift 6 (When this creature dies, you may return target Spirit card with mana value 6 or less from your graveyard to your hand.)

@@ -1,0 +1,7 @@
+Name:Vestige of Emrakul
+ManaCost:3 R
+Types:Creature Eldrazi Drone
+PT:3/4
+K:Devoid
+K:Trample
+Oracle:Devoid (This card has no color.)\nTrample

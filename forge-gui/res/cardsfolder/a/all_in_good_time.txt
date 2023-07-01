@@ -1,0 +1,6 @@
+Name:All in Good Time
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GoodTimes | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, take an extra turn after this one. Schemes can't be set in motion that turn.
+SVar:GoodTimes:DB$ AddTurn | NumTurns$ 1 | NoSchemes$ True
+Oracle:When you set this scheme in motion, take an extra turn after this one. Schemes can't be set in motion that turn.

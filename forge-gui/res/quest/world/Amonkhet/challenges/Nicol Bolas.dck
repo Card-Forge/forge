@@ -1,0 +1,78 @@
+[quest]
+id=7004
+OpponentName=Nicol Bolas
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=1 blue rare;1 black rare;1 red rare
+Credit Reward=200000
+AIExtras=Razaketh, the Foulblooded|The Scorpion God|The Locust God|The Scarab God
+HumanExtras=Rhonas the Indomitable|Kefnet the Mindful|Oketra the True|Bontu the Glorified|Hazoret the Fervent|Protection of the Hekma|Oath of Gideon|Oath of Jace|Oath of Liliana|Oath of Chandra|Oath of Nissa
+[metadata]
+Name=Nicol Bolas
+Title=Nicol Bolas, Planeswalker
+Difficulty=Very Hard
+Description="The gates open to my new era.'"
+Icon=Nicol Bolas, Planeswalker.jpg
+Deck Type=archenemy
+[Main]
+1 Archfiend of Depravity|E01
+1 Baleful Strix|E01
+1 Blood Tyrant|E01
+2 Bone Picker|AKH
+1 Cinder Barrens|AKH
+1 Cruel Ultimatum|E01
+4 Crumbling Necropolis|E01
+1 Deathbringer Regent|E01
+2 Doom Blade|E01
+1 Dragonskull Summit|E01
+1 Dreadbore|E01
+1 Drowned Catacomb|E01
+1 Extract from Darkness|E01
+2 Flametongue Kavu|E01
+1 Grixis Panorama|E01
+1 Harvester of Souls|E01
+2 Highland Lake|AKH
+1 Icefall Regent|E01
+3 Island|E01|1
+2 Island|E01|2
+2 Lightning Bolt|E01
+2 Mountain|E01|1
+1 Mountain|E01|2
+1 Nicol Bolas, Planeswalker|E01
+2 Nightscape Familiar|E01
+2 Obelisk of Grixis|E01
+1 Overseer of the Damned|E01
+1 Prognostic Sphinx|E01
+2 Reckless Spite|E01
+1 Slave of Bolas|E01
+1 Soul Ransom|E01
+1 Sphinx of Jwar Isle|E01
+1 Submerged Boneyard|AKH
+1 Sudden Demise|C13
+4 Swamp|E01|1
+3 Swamp|E01|2
+1 Talisman of Dominance|E01
+1 Talisman of Indulgence|E01
+2 Vampire Nighthawk|E01
+[Schemes]
+1 A Reckoning Approaches|E01
+1 Because I Have Willed It|E01
+1 Behold My Grandeur|E01
+1 Bow to My Command|E01
+1 Choose Your Demise|E01
+1 Delight in the Hunt|E01
+1 Every Dream a Nightmare|E01
+1 For Each of You, a Gift|E01
+1 Know Evil|E01
+1 Make Yourself Useful|E01
+1 My Forces Are Innumerable|E01
+1 My Laughter Echoes|E01
+1 No One Will Hear Your Cries|E01
+1 Pay Tribute to Me|E01
+1 Power Without Equal|E01
+1 The Mighty Will Fall|E01
+1 There Is No Refuge|E01
+1 This World Belongs to Me|E01
+1 What's Yours Is Now Mine|E01
+1 When Will You Learn|E01

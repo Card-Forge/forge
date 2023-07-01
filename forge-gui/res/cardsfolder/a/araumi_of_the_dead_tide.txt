@@ -1,0 +1,8 @@
+Name:Araumi of the Dead Tide
+ManaCost:1 U B
+Types:Legendary Creature Merfolk Wizard
+PT:1/4
+A:AB$ Pump | Cost$ T ExileFromGrave<X/Card> | CostDesc$ {T}, Exile cards from your graveyard equal to the number of opponents you have: | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | PumpZone$ Graveyard | KW$ Encore:CardManaCost | StackDescription$ REP Target creature card_{c:Targeted} | SpellDescription$ Target creature card in your graveyard gains encore until end of turn. The encore cost is equal to its mana cost. (Exile the creature card and pay its mana cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
+SVar:X:PlayerCountOpponents$Amount
+AI:RemoveDeck:All
+Oracle:{T}, Exile cards from your graveyard equal to the number of opponents you have: Target creature card in your graveyard gains encore until end of turn. The encore cost is equal to its mana cost. (Exile the creature card and pay its mana cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

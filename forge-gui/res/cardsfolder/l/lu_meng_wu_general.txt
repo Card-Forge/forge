@@ -1,0 +1,6 @@
+Name:Lu Meng, Wu General
+ManaCost:3 U U
+Types:Legendary Creature Human Soldier
+PT:4/4
+K:Horsemanship
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)

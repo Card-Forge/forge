@@ -1,0 +1,8 @@
+Name:Sabertooth Nishoba
+ManaCost:4 G W
+Types:Creature Cat Beast Warrior
+PT:5/5
+K:Trample
+K:Protection from blue
+K:Protection from red
+Oracle:Trample, protection from blue and from red

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: The School of the Unseen: Jaya Ballard, Task Mage
+Title=Jaya Ballard
+Difficulty=easy
+Description="Anybody want some... toast?" -Jaya Ballard, Task Mage"
+
+Jaya's childhood is shrouded in mystery, but she learned to be a thief on the streets. One day, she tried to steal something from the private chambers of Archmage Eternal Jodah, but was unsuccessful. Sensing magical capabilities in her, Jodah allowed Jaya to study in the School of the Unseen, but after learning a few spells she decided to set out into the world and make a living as a task mage.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Burnout|ALL
+4 Flame Spirit|ICE
+4 Flare|ICE
+4 Incinerate|ICE
+2 Melting|ICE
+24 Mountain|ICE|2
+2 Pyroblast|ICE
+4 Pyroclasm|ICE
+4 Pyrokinesis|ALL
+2 Shatter|ICE
+4 Wall of Lava|ICE
+4 Word of Blasting|ICE

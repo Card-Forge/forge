@@ -1,0 +1,8 @@
+Name:Advocate of the Beast
+ManaCost:2 G
+Types:Creature Elf Shaman
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Beast+YouCtrl | TgtPrompt$ Select target Beast creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Name$Marauding Maulhorn
+Oracle:At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.

@@ -1,0 +1,6 @@
+Name:Copper Gnomes
+ManaCost:2
+Types:Artifact Creature Gnome
+PT:1/1
+A:AB$ ChangeZone | Cost$ 4 Sac<1/CARDNAME> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 1 | Optional$ You | SpellDescription$ You may put an artifact card from your hand onto the battlefield.
+Oracle:{4}, Sacrifice Copper Gnomes: You may put an artifact card from your hand onto the battlefield.

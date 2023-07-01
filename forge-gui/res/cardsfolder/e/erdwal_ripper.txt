@@ -1,0 +1,8 @@
+Name:Erdwal Ripper
+ManaCost:1 R R
+Types:Creature Vampire
+PT:2/1
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Haste\nWhenever Erdwal Ripper deals combat damage to a player, put a +1/+1 counter on it.

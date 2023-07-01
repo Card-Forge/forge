@@ -1,0 +1,10 @@
+Name:Rattleblaze Scarecrow
+ManaCost:6
+Types:Artifact Creature Scarecrow
+PT:5/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | IsPresent$ Creature.YouCtrl+Black | Description$ CARDNAME has persist as long as you control a black creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Creature.YouCtrl+Red | Description$ CARDNAME has haste as long as you control a red creature.
+SVar:BuffedBy:Creature.Black,Creature.Red
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black|Red
+Oracle:Rattleblaze Scarecrow has persist as long as you control a black creature. (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)\nRattleblaze Scarecrow has haste as long as you control a red creature.

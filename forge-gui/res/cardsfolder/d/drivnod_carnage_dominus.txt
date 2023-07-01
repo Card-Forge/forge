@@ -1,0 +1,8 @@
+Name:Drivnod, Carnage Dominus
+ManaCost:3 B B
+Types:Legendary Creature Phyrexian Horror
+PT:8/3
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Creature | Origin$ Battlefield | Destination$ Graveyard | Description$ If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+A:AB$ PutCounter | Cost$ PB PB ExileFromGrave<3/Creature> | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1 | SpellDescription$ Put an indestructible counter on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\n{B/P}{B/P}, Exile three creature cards from your graveyard: Put an indestructible counter on Drivnod, Carnage Dominus. ({B/P} can be paid with either {B} or 2 life.)

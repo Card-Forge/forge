@@ -1,0 +1,9 @@
+Name:Thunderwave
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBSDamage,10-19:DBChooseCard,20:DBLDamage | SpellDescription$ Roll a d20.
+SVar:DBSDamage:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 3 | SpellDescription$ 1—9 VERT CARDNAME deals 3 damage to each creature.
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature | ChoiceTitle$ You may choose a creature | ChoiceOptional$ True | SubAbility$ DBMDamage
+SVar:DBMDamage:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.nonChosenCard | SpellDescription$ 10—19 VERT You may choose a creature. CARDNAME deals 3 damage to each creature not chosen this way.
+SVar:DBLDamage:DB$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 6 | SpellDescription$ 20 VERT CARDNAME deals 6 damage to each creature your opponents control.
+Oracle:Roll a d20.\n1—9 | Thunderwave deals 3 damage to each creature.\n10—19 | You may choose a creature. Thunderwave deals 3 damage to each creature not chosen this way.\n20 | Thunderwave deals 6 damage to each creature your opponents control.

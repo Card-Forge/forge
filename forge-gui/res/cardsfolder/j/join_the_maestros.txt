@@ -1,0 +1,7 @@
+Name:Join the Maestros
+ManaCost:4 B
+Types:Sorcery
+K:Casualty:2
+A:SP$ Token | TokenScript$ b_4_3_ogre_warrior | SpellDescription$ Create a 4/3 black Ogre Warrior creature token.
+DeckHas:Ability$Sacrifice|Token & Type$Ogre|Warrior
+Oracle:Casualty 2 (As you cast this spell, you may sacrifice a creature with power 2 or greater. When you do, copy this spell and you may choose new targets for the copy.)\nCreate a 4/3 black Ogre Warrior creature token.

@@ -1,0 +1,8 @@
+Name:Tamanoa
+ManaCost:R G W
+Types:Creature Spirit
+PT:2/4
+T:Mode$ DamageDealtOnce | ValidSource$ Card.nonCreature+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a noncreature source you control deals damage, you gain that much life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever a noncreature source you control deals damage, you gain that much life.

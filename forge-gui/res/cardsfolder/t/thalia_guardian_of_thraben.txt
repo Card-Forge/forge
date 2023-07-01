@@ -1,0 +1,7 @@
+Name:Thalia, Guardian of Thraben
+ManaCost:1 W
+Types:Legendary Creature Human Soldier
+PT:2/1
+K:First Strike
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
+Oracle:First strike\nNoncreature spells cost {1} more to cast.

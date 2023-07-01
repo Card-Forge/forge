@@ -1,0 +1,8 @@
+Name:Felhide Petrifier
+ManaCost:2 B
+Types:Creature Minotaur Warrior
+PT:2/3
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Creature.Minotaur+Other+YouCtrl | AddKeyword$ Deathtouch | Description$ Other Minotaur creatures you control have deathtouch.
+SVar:PlayMain1:TRUE
+Oracle:Deathtouch\nOther Minotaur creatures you control have deathtouch.

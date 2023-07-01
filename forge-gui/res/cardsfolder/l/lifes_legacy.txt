@@ -1,0 +1,7 @@
+Name:Life's Legacy
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Draw | Cost$ 1 G Sac<1/Creature> | NumCards$ XPower | SpellDescription$ Draw cards equal to the sacrificed creature's power.
+SVar:XPower:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw cards equal to the sacrificed creature's power.

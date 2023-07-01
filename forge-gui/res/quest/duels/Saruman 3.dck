@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Saruman 3
+Title=Saruman
+Difficulty=hard
+Description=UBR discard deck with Waste Not, Megrim, Liliana's Caress and Burning Inquiry 
+Icon=Saruman.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Badlands
+4 Volcanic Island
+4 Crumbling Necropolis
+2 Swamp|M11
+1 Mox Jet
+1 Mox Ruby
+1 Mox Sapphire
+1 Megrim
+3 Waste Not
+4 Liliana's Caress
+1 Geth's Grimoire
+4 Burning Inquiry
+1 Wheel of Fortune
+4 Wheel and Deal
+1 Windfall
+4 Blightning
+4 Hymn to Tourach
+4 Stupor
+4 Sinkhole
+2 Rain of Tears
+1 Ancestral Recall
+1 Damnation
+[sideboard]

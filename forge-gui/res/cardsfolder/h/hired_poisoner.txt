@@ -1,0 +1,6 @@
+Name:Hired Poisoner
+ManaCost:B
+Types:Creature Human Assassin
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch

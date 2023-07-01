@@ -1,0 +1,9 @@
+[metadata]
+Code=PMRD
+Date=2004-06-04
+Name=Mirrodin Promos
+Type=Promo
+ScryfallCode=PMRD
+
+[cards]
+251★ R Sword of Kaldra @Donato Giancola

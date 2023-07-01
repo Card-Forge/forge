@@ -1,0 +1,8 @@
+Name:Cornered Market
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ CantPlayLand | ValidCard$ Land.nonBasic+sharesNameWith NonToken | Description$ Players can't play nonbasic lands with the same name as a nontoken permanent.
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith NonToken | Description$ Players can't cast spells with the same name as a nontoken permanent.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Players can't cast spells with the same name as a nontoken permanent.\nPlayers can't play nonbasic lands with the same name as a nontoken permanent.

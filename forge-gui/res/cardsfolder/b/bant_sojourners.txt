@@ -1,0 +1,9 @@
+Name:Bant Sojourners
+ManaCost:1 G W U
+Types:Creature Human Soldier
+PT:2/4
+K:Cycling:2 W
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it dies, you may create a 1/1 white Soldier creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it dies, you may create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+Oracle:When you cycle Bant Sojourners or it dies, you may create a 1/1 white Soldier creature token.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)

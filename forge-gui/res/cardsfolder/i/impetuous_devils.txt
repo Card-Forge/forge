@@ -1,0 +1,13 @@
+Name:Impetuous Devils
+ManaCost:2 R R
+Types:Creature Devil
+PT:6/1
+K:Haste
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigProvoke | TriggerDescription$ When CARDNAME attacks, up to one target creature defending player controls blocks it this combat if able.
+SVar:TrigProvoke:DB$ MustBlock | Duration$ UntilEndOfCombat | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select up to one target creature defending player controls
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste\nWhen Impetuous Devils attacks, up to one target creature defending player controls blocks it this combat if able.\nAt the beginning of the end step, sacrifice Impetuous Devils.

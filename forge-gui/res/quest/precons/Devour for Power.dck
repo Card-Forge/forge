@@ -1,0 +1,88 @@
+[metadata]
+Name=Devour for Power
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=When The Mimeoplasm becomes your commander, death becomes your friend. Opponents will watch in helpless terror as you devour creatures from one graveyard to help you pound creatures into another. It's a fiendish carnival of cadavers, and you'll be the ringmaster!
+Set=CMD
+Image=devour_for_power.png
+[commander]
+1 The Mimeoplasm+|CMD
+[main]
+1 Shared Trauma|CMD
+1 Syphon Flesh|CMD
+1 Damia, Sage of Stone|CMD
+1 Sewer Nemesis|CMD
+1 Skullbriar, the Walking Grave|CMD
+1 Scythe Specter|CMD
+1 Tribute to the Wild|CMD
+1 Command Tower|CMD
+1 Spell Crumple|CMD
+1 Vow of Wildness|CMD
+1 Riddlekeeper|CMD
+1 Vow of Flight|CMD
+1 Vow of Malice|CMD
+1 Minds Aglow|CMD
+1 Dreamborn Muse|CMD
+1 Grave Pact|CMD
+1 Mortivore|CMD
+1 Troll Ascetic|CMD
+1 Eternal Witness|CMD
+1 Lhurgoyf|CMD
+1 Fleshbag Marauder|CMD
+1 Memory Erosion|CMD
+1 Patron of the Nezumi|CMD
+1 Nezumi Graverobber|CMD
+1 Extractor Demon|CMD
+1 Rupture Spire|CMD
+1 Fact or Fiction|CMD
+1 Simic Growth Chamber|CMD
+1 Simic Signet|CMD
+1 Desecrator Hag|CMD
+1 Brawn|CMD
+1 Stitch Together|CMD
+1 Wonder|CMD
+1 Mulldrifter|CMD
+1 Acidic Slime|CMD
+1 Cultivate|CMD
+1 Gravedigger|CMD
+1 Rise from the Grave|CMD
+1 Sign in Blood|CMD
+1 Terramorphic Expanse|CMD
+1 Lightning Greaves|CMD
+1 Oblivion Stone|CMD
+1 Solemn Simulacrum|CMD
+1 Buried Alive|CMD
+1 Barren Moor|CMD
+1 Lonely Sandbar|CMD
+1 Slipstream Eel|CMD
+1 Syphon Mind|CMD
+1 Tranquil Thicket|CMD
+1 Vorosh, the Hunter|CMD
+1 Dimir Aqueduct|CMD
+1 Dimir Signet|CMD
+1 Golgari Rot Farm|CMD
+1 Golgari Signet|CMD
+1 Svogthos, the Restless Tomb|CMD
+1 Szadek, Lord of Secrets|CMD
+1 Vulturous Zombie|CMD
+1 Artisan of Kozilek|CMD
+1 Temple of the False God|CMD
+1 Living Death|CMD
+1 Dreadship Reef|CMD
+1 Triskelavus|CMD
+1 Avatar of Woe|CMD
+1 Yavimaya Elder|CMD
+1 Dark Hatchling|CMD
+1 Unnerve|CMD
+1 Windfall|CMD
+1 Sol Ring|CMD
+1 Butcher of Malakir|CMD
+1 Wrexial, the Risen Deep|CMD
+1 Jwar Isle Refuge|CMD
+1 Relic Crush|CMD
+8 Forest|CMD
+8 Island|CMD
+11 Swamp|CMD

@@ -1,0 +1,5 @@
+Name:Icy Manipulator
+ManaCost:4
+Types:Artifact
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land. | SpellDescription$ Tap target artifact, creature, or land.
+Oracle:{1}, {T}: Tap target artifact, creature, or land.

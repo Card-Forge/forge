@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=MIR 3 Color: 4 Red
+Title=The Color Red
+Difficulty=hard
+Description=Don't insult a Talruum unless your mount is swift. -Suq'Ata saying
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Bogardan Phoenix|VIS
+4 Dormant Volcano|VIS
+2 Dwarven Miner|MIR
+4 Fire Diamond|MIR
+2 Fireblast|VIS
+2 Hammer of Bogardan|MIR
+1 Hivis of the Scale|MIR
+4 Incinerate|MIR
+4 Kaervek's Torch|MIR
+16 Mountain|MIR|3
+4 Quicksand|VIS
+2 Reckless Embermage|MIR
+1 Subterranean Spirit|MIR
+4 Suq'Ata Lancer|VIS
+4 Talruum Minotaur|MIR
+2 Wildfire Emissary|MIR

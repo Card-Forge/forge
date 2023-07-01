@@ -1,0 +1,9 @@
+Name:Glitterfang
+ManaCost:R
+Types:Creature Spirit
+PT:1/1
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:EndOfTurnLeavePlay:True
+Oracle:Haste\nAt the beginning of the end step, return Glitterfang to its owner's hand.

@@ -1,0 +1,8 @@
+Name:Mortus Strider
+ManaCost:1 U B
+Types:Creature Skeleton
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return it to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
+SVar:SacMe:2
+Oracle:When Mortus Strider dies, return it to its owner's hand.

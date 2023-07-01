@@ -1,0 +1,26 @@
+[duel]
+
+[metadata]
+Name=Demeter's Mending Heart 3
+Title=Demeter
+Icon=Demeter.jpg
+Difficulty=hard
+Description=[W/G] Control (Persist)
+Deck Type=constructed
+
+[Main]
+10 Forest|LRW
+4 Heartmender|SHM
+4 Kitchen Finks|SHM
+4 Oblivion Ring|LRW
+14 Plains|LRW
+4 Quirion Dryad|10E
+4 Safehold Elite|SHM
+4 Shield of the Oversoul|SHM
+4 Turn to Mist|SHM
+4 Wilt-Leaf Liege|SHM
+4 Wrath of God|10E
+
+[Sideboard]
+[Planes]
+[Schemes]

@@ -1,0 +1,9 @@
+Name:Griffin Aerie
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you gained 3 or more life this turn, create a 2/2 white Griffin creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_griffin_flying | TokenOwner$ You
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, if you gained 3 or more life this turn, create a 2/2 white Griffin creature token with flying.

@@ -1,0 +1,12 @@
+Name:Immersturm Predator
+ManaCost:2 B R
+Types:Creature Vampire Dragon
+PT:3/3
+K:Flying
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME becomes tapped, exile up to one target card from a graveyard and put a +1/+1 counter on CARDNAME.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to one target card in a graveyard | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever Immersturm Predator becomes tapped, exile up to one target card from a graveyard and put a +1/+1 counter on Immersturm Predator.\nSacrifice another creature: Immersturm Predator gains indestructible until end of turn. Tap it.

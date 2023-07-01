@@ -1,0 +1,10 @@
+Name:Sire of the Storm
+ManaCost:4 U U
+Types:Creature Spirit
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may draw a card.

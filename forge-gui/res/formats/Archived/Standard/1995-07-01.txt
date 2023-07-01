@@ -1,0 +1,9 @@
+[format]
+Name:Type 2 (CHR)
+Type:Archived
+Subtype:Standard
+Effective:1995-07-01
+Sets:FEM, 4ED, ICE, CHR
+RestrictedLegendary:true
+Restricted:Balance; Channel; Feldon's Cane; Ivory Tower; Mind Twist; Recall
+Banned:Amulet of Quoz; Bronze Tablet; Jeweled Bird; Rebirth; Tempest Efreet

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=NDE 1
+Title=NDE
+Difficulty=easy
+Description="1 Peace 2 Body separation 3 Entering darkness 4 Seeing the light 5 Entering the light"
+Icon=NDE.png
+Deck Type=constructed
+[Main]
+4 Arid Mesa|ZEN
+3 Devout Lightcaster|ZEN
+4 Evolving Wilds|ROE
+4 Flame Slash|ROE
+3 Kor Firewalker|WWK
+4 Lone Missionary|ROE
+4 Lust for War|ROE
+7 Mountain|ZEN|1
+4 Near-Death Experience|ROE
+11 Plains|ZEN|1
+2 Soltari Monk|TMP
+2 Soltari Champion|STH
+4 Tuktuk the Explorer|ROE
+4 Wall of Omens|ROE
+4 Worship|USG
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Stoneforged Blade
+ManaCost:no cost
+Types:Artifact Equipment
+PT:5/5
+K:Indestructible
+K:Equip:0
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Double Strike | Description$ Equipped creature gets +5/+5 and has double strike.
+Oracle:Indestructible\nEquipped creature gets +5/+5 and has double strike.\nEquip {0}.

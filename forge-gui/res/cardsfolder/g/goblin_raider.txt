@@ -1,0 +1,6 @@
+Name:Goblin Raider
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+K:CARDNAME can't block.
+Oracle:Goblin Raider can't block.

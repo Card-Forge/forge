@@ -1,0 +1,7 @@
+Name:Tidehollow Strix
+ManaCost:U B
+Types:Artifact Creature Bird
+PT:2/1
+K:Flying
+K:Deathtouch
+Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

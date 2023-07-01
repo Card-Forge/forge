@@ -1,0 +1,10 @@
+Name:Tribute to Urborg
+ManaCost:1 B
+Types:Instant
+K:Kicker:1 U
+A:SP$ Pump | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2 | SubAbility$ KickerPump | SpellDescription$ Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets an additional -1/-1 until end of turn for each instant and sorcery card in your graveyard.
+SVar:KickerPump:DB$ Pump | Condition$ Kicked | Defined$ Targeted  | NumAtt$ -X | NumDef$ -X
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Ability$Graveyard & Color$Blue & Type$Instant|Sorcery
+SVar:BuffedBy:Instant,Sorcery
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nTarget creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets an additional -1/-1 until end of turn for each instant and sorcery card in your graveyard.

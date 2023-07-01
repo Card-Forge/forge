@@ -1,0 +1,7 @@
+Name:Careless Celebrant
+ManaCost:1 R
+Types:Creature Satyr Shaman
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals 2 damage to target creature or planeswalker an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 2
+Oracle:When Careless Celebrant dies, it deals 2 damage to target creature or planeswalker an opponent controls.

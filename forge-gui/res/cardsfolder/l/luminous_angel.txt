@@ -1,0 +1,9 @@
+Name:Luminous Angel
+ManaCost:4 W W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Flying\nAt the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.

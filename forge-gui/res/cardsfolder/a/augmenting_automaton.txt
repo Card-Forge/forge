@@ -1,0 +1,6 @@
+Name:Augmenting Automaton
+ManaCost:1
+Types:Artifact Creature Construct
+PT:1/1
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:{1}{B}: Augmenting Automaton gets +1/+1 until end of turn.

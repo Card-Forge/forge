@@ -1,0 +1,9 @@
+Name:Ruin Processor
+ManaCost:7
+Types:Creature Eldrazi Processor
+PT:7/8
+T:Mode$ SpellCast | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigHerd | TriggerDescription$ When you cast this spell, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.
+SVar:TrigHerd:AB$ GainLife | Cost$ ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | Defined$ You | LifeAmount$ 5
+DeckHints:Keyword$Ingest
+DeckHas:Ability$LifeGain
+Oracle:When you cast this spell, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.

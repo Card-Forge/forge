@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Church of Tal
+Title=The Church of Tal
+Difficulty=easy
+Description="Bathed in hallowed light, the infidels looked upon the impurities of their souls and despaired." -The Book of Tal
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Angry Mob|DRK
+4 Exorcist|DRK
+4 Fire and Brimstone|DRK
+4 Holy Light|DRK
+4 Inquisition|DRK
+4 Martyr's Cry|DRK
+4 Miracle Worker|DRK
+18 Plains|LEB|1
+4 Preacher|DRK
+6 Swamp|LEB|1
+4 Witch Hunter|DRK

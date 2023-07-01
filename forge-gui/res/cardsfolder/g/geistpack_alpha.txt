@@ -1,0 +1,11 @@
+Name:Geistpack Alpha
+ManaCost:3 G
+Types:Creature Wolf
+PT:5/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME dies, seek a permanent card with mana value equal to the number of lands you control.
+SVar:TrigSeek:DB$ Seek | Type$ Card.Permanent+cmcEQX
+SVar:X:Count$Valid Land.YouCtrl
+SVar:NeedsToPlayVar:X GE4
+SVar:BuffedBy:Land
+Oracle:Trample\nWhen Geistpack Alpha dies, seek a permanent card with mana value equal to the number of lands you control.

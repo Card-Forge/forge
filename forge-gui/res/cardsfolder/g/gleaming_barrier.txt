@@ -1,0 +1,9 @@
+Name:Gleaming Barrier
+ManaCost:2
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Defender\nWhen Gleaming Barrier dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

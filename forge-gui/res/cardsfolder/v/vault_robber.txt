@@ -1,0 +1,7 @@
+Name:Vault Robber
+ManaCost:1 R
+Types:Creature Dwarf Rogue
+PT:1/3
+A:AB$ Token | Cost$ 1 T ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Exile a creature card from your graveyard Create a Treasure token.
+DeckHas:Ability$Token
+Oracle:{1}, {T}, Exile a creature card from your graveyard: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

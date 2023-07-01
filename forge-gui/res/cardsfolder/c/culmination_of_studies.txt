@@ -1,0 +1,14 @@
+Name:Culmination of Studies
+ManaCost:X U R
+Types:Sorcery
+A:SP$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Exile the top X cards of your library.
+SVar:DBToken:DB$ Token | TokenAmount$ L | TokenScript$ c_a_treasure_sac | SubAbility$ DBDraw | SpellDescription$ For each land card exiled this way, create a Treasure token.
+SVar:DBDraw:DB$ Draw | NumCards$ B | SubAbility$ DBDealDamage | StackDescription$ SpellDescription | SpellDescription$ For each blue card exiled this way, draw a card.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ R | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ For each red card exiled this way, CARDNAME deals 1 damage to each opponent.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:L:Remembered$Valid Card.Land
+SVar:B:Remembered$Valid Card.Blue
+SVar:R:Remembered$Valid Card.Red
+DeckHas:Ability$Token
+Oracle:Exile the top X cards of your library. For each land card exiled this way, create a Treasure token. For each blue card exiled this way, draw a card. For each red card exiled this way, Culmination of Studies deals 1 damage to each opponent.

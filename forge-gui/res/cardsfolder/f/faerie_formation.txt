@@ -1,0 +1,9 @@
+Name:Faerie Formation
+ManaCost:4 U
+Types:Creature Faerie
+PT:5/4
+K:Flying
+A:AB$ Token | Cost$ 3 U | TokenAmount$ 1 | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ Create a 1/1 blue Faerie creature token with flying. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Token
+Oracle:Flying\n{3}{U}: Create a 1/1 blue Faerie creature token with flying. Draw a card.

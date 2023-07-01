@@ -1,0 +1,7 @@
+Name:Prakhata Pillar-Bug
+ManaCost:3
+Types:Artifact Creature Insect
+PT:2/3
+A:AB$ Pump | Cost$ B | KW$ Lifelink | Defined$ Self | SpellDescription$ CARDNAME gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
+AI:RemoveDeck:Random
+Oracle:{B}: Prakhata Pillar-Bug gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)

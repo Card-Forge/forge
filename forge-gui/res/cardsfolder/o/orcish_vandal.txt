@@ -1,0 +1,8 @@
+Name:Orcish Vandal
+ManaCost:1 R
+Types:Creature Orc Warrior
+PT:1/1
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:AIPreference:SacCost$Artifact.token+nonCreature,Artifact.token+powerLE1,Artifact.cmcEQ1,Artifact.cmcEQ2
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice an artifact: Orcish Vandal deals 2 damage to any target.

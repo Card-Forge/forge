@@ -1,0 +1,9 @@
+Name:Ghost-Lit Drifter
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 2 U | ValidTgts$ Creature.Other | KW$ Flying | TgtPrompt$ Select another target creature | SpellDescription$ Another target creature gains flying until end of turn.
+A:AB$ Pump | Cost$ X U Discard<1/CARDNAME> | TargetMin$ X | TargetMax$ X | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ X target creatures gain flying until end of turn.
+SVar:X:Count$xPaid
+Oracle:Flying\n{2}{U}: Another target creature gains flying until end of turn.\nChannel — {X}{U}, Discard Ghost-Lit Drifter: X target creatures gain flying until end of turn.

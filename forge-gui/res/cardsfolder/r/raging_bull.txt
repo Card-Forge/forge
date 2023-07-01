@@ -1,0 +1,5 @@
+Name:Raging Bull
+ManaCost:2 R
+Types:Creature Ox
+PT:2/2
+Oracle:

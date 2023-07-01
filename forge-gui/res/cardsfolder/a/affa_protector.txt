@@ -1,0 +1,6 @@
+Name:Affa Protector
+ManaCost:2 W
+Types:Creature Human Soldier Ally
+PT:1/4
+K:Vigilance
+Oracle:Vigilance

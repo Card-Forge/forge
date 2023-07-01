@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Regigigas 3
+Title=Regigigas
+Difficulty=hard
+Description=Mono brown Golem deck
+Icon=Regigigas.jpg
+Deck Type=constructed
+[main]
+1 Ancient Den
+1 Darksteel Sentinel
+1 Great Furnace
+6 Island
+4 Mishra's Workshop
+4 Seat of the Synod
+1 Tolarian Academy
+1 Tree of Tales
+1 Vault of Whispers
+1 Grim Monolith
+1 Mox Sapphire
+1 Sol Ring
+4 Urza's Incubator
+4 Battered Golem
+4 Brass Herald
+1 Clay Statue
+4 Darksteel Citadel
+1 Hewed Stone Retainers
+1 Lodestone Golem
+4 Mycosynth Golem
+1 Platinum Emperion
+1 Rusted Sentinel
+4 Solemn Simulacrum
+1 Sparring Golem
+2 Spire Golem
+1 Stone Golem
+1 Sundering Titan
+1 Thoughtcast
+1 Time Walk
+1 Tinker
+[sideboard]

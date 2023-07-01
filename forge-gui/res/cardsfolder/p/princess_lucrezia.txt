@@ -1,0 +1,6 @@
+Name:Princess Lucrezia
+ManaCost:3 U U B
+Types:Legendary Creature Human Wizard
+PT:5/4
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:{T}: Add {U}.

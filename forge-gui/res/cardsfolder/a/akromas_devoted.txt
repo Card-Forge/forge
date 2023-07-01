@@ -1,0 +1,6 @@
+Name:Akroma's Devoted
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:2/4
+S:Mode$ Continuous | Affected$ Creature.Cleric | AddKeyword$ Vigilance | Description$ Cleric creatures have vigilance.
+Oracle:Cleric creatures have vigilance.

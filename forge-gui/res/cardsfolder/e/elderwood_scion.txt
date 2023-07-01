@@ -1,0 +1,10 @@
+Name:Elderwood Scion
+ManaCost:3 G W
+Types:Creature Elemental
+PT:4/4
+K:Trample
+K:Lifelink
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | Activator$ You | Type$ Spell | Amount$ 2 | Description$ Spells you cast that target CARDNAME cost {2} less to cast.
+S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Player.Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
+SVar:EnchantMe:Multiple
+Oracle:Trample, lifelink\nSpells you cast that target Elderwood Scion cost {2} less to cast.\nSpells your opponents cast that target Elderwood Scion cost {2} more to cast.

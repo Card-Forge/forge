@@ -1,0 +1,9 @@
+Name:Cut a Deal
+ManaCost:2 W
+Types:Sorcery
+A:SP$ Draw | Defined$ Opponent | RememberDrawn$ True | SubAbility$ DBDraw | SpellDescription$ Each opponent draws a card, then you draw a card for each opponent who drew a card this way.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup | StackDescription$ {p:You} draws a card for each opponent who drew a card this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+AI:RemoveDeck:Random
+Oracle:Each opponent draws a card, then you draw a card for each opponent who drew a card this way.

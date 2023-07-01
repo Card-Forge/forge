@@ -1,0 +1,9 @@
+Name:Catacomb Dragon
+ManaCost:4 B B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.nonArtifact+nonDragon | Execute$ TrigPumpBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a nonartifact, non-Dragon creature, that creature gets -X/-0 until end of turn, where X is half the creature's power, rounded down.
+SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ -X
+SVar:X:TriggeredBlocker$CardPower/HalfDown
+Oracle:Flying\nWhenever Catacomb Dragon becomes blocked by a nonartifact, non-Dragon creature, that creature gets -X/-0 until end of turn, where X is half the creature's power, rounded down.

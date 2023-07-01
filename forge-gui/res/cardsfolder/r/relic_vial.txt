@@ -1,0 +1,11 @@
+Name:Relic Vial
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigDrain | IsPresent$ Cleric.YouCtrl | Description$ As long as you control a Cleric, CARDNAME has "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
+SVar:TrigDrain:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Sacrifice|LifeGain
+DeckNeeds:Type$Cleric
+Oracle:{2}, {T}, Sacrifice a creature: Draw a card.\nAs long as you control a Cleric, Relic Vial has "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life."

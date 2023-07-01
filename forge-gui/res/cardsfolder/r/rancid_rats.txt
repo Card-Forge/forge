@@ -1,0 +1,7 @@
+Name:Rancid Rats
+ManaCost:1 B
+Types:Creature Zombie Rat
+PT:1/1
+K:Skulk
+K:Deathtouch
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

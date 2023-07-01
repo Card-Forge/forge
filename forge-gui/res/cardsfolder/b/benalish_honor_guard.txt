@@ -1,0 +1,8 @@
+Name:Benalish Honor Guard
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each legendary creature you control.
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+SVar:BuffedBy:Creature.Legendary
+Oracle:Benalish Honor Guard gets +1/+0 for each legendary creature you control.

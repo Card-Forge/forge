@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Azorius2012 1
+Title=Azorius 2012
+Icon=Azorius-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+1 Archon of the Triumvirate|RTR
+2 Arrest|RTR
+2 Azorius Arrester|RTR
+1 Azorius Guildgate|RTR
+1 Azorius Justiciar|RTR
+2 Azorius Keyrune|RTR
+2 Bazaar Krovod|RTR
+4 Concordia Pegasus|RTR
+2 Dramatic Rescue|RTR
+1 Inaction Injunction|RTR
+12 Island|RTR
+3 Lyev Skyknight|RTR
+1 New Prahv Guildmage|RTR
+12 Plains|RTR
+1 Righteous Authority|RTR
+1 Skyline Predator|RTR
+1 Soulsworn Spirit|RTR
+3 Stealer of Secrets|RTR
+3 Swift Justice|RTR
+1 Tablet of the Guilds|RTR
+2 Trained Caracal|RTR
+2 Vassal Soul|RTR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,7 @@
+Name:Storm the Festival
+ManaCost:3 G G G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 5 | Optional$ True | ChangeNum$ 2 | ChangeValid$ Permanent.cmcLE5 | DestinationZone$ Battlefield | LibraryPosition$ 0 | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. Put up to two permanent cards with mana value 5 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+K:Flashback:7 G G G
+DeckHas:Ability$Graveyard
+Oracle:Look at the top five cards of your library. Put up to two permanent cards with mana value 5 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.\nFlashback {7}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

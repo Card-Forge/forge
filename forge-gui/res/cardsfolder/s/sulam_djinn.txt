@@ -1,0 +1,7 @@
+Name:Sulam Djinn
+ManaCost:5 G
+Types:Creature Djinn
+PT:6/6
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self+MostProminentColor green | AddPower$ -2 | AddToughness$ -2 | Description$ CARDNAME gets -2/-2 as long as green is the most common color among all permanents or is tied for most common.
+Oracle:Trample\nSulam Djinn gets -2/-2 as long as green is the most common color among all permanents or is tied for most common.

@@ -1,0 +1,10 @@
+[metadata]
+Code=PSOK
+Date=2005-06-03
+Name=Saviors of Kamigawa Promos
+Type=Promo
+ScryfallCode=PSOK
+
+[cards]
+18★ R Kiyomaro, First to Stand @Ittoku
+99★ R Ghost-Lit Raider @Ittoku

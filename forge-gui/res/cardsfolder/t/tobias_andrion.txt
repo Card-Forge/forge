@@ -1,0 +1,5 @@
+Name:Tobias Andrion
+ManaCost:3 W U
+Types:Legendary Creature Human Advisor
+PT:4/4
+Oracle:

@@ -1,0 +1,7 @@
+Name:Blood Celebrant
+ManaCost:B
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Mana | Cost$ B PayLife<1> | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:{B}, Pay 1 life: Add one mana of any color.

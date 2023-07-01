@@ -1,0 +1,11 @@
+Name:Mirri the Cursed
+ManaCost:2 B B
+Types:Legendary Creature Vampire Cat
+PT:3/2
+K:First Strike
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasCombatEffect:TRUE
+Oracle:Flying, first strike, haste\nWhenever Mirri the Cursed deals combat damage to a creature, put a +1/+1 counter on Mirri the Cursed.

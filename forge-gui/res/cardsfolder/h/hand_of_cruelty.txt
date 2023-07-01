@@ -1,0 +1,7 @@
+Name:Hand of Cruelty
+ManaCost:B B
+Types:Creature Human Samurai
+PT:2/2
+K:Protection from white
+K:Bushido:1
+Oracle:Protection from white\nBushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

@@ -1,0 +1,6 @@
+Name:Vigilant Baloth
+ManaCost:3 G G
+Types:Creature Beast
+PT:5/5
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

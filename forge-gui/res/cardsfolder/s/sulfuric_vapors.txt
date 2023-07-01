@@ -1,0 +1,9 @@
+Name:Sulfuric Vapors
+ManaCost:3 R
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell.Red | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.

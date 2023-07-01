@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Infernal Intervention
+Description=Toy with your enemy. With the torrent of removal spells at your disposal, existence on the battlefield is at your whim. All will live in fear of your dark power.
+Deck Type=constructed
+Set=M15
+Image=infernal_intervention.jpg
+[Main]
+3 Typhoid Rats|M15
+2 Torch Fiend|M15
+2 Gargoyle Sentinel|M15
+2 Goblin Roughrider|M15
+1 Wall of Fire|M15
+1 Gravedigger|M15
+1 Zof Shade|M15
+1 Thundering Giant|M15
+1 Clear a Path|M15
+1 Cone of Flame|M15
+1 Stab Wound|M15
+1 Caustic Tar|M15
+2 Lightning Strike|M15
+2 Heat Ray|M15
+2 Carrion Crow|M15
+2 Nightfire Giant|M15
+1 Indulgent Tormentor+|M15
+2 Profane Memento|M15
+1 Festergloom|M15
+1 Burning Anger|M15
+2 Flesh to Dust|M15
+2 Blastfire Bolt|M15
+13 Swamp|M15
+13 Mountain|M15

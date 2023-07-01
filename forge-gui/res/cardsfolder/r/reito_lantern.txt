@@ -1,0 +1,6 @@
+Name:Reito Lantern
+ManaCost:2
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
+AI:RemoveDeck:Random
+Oracle:{3}: Put target card from a graveyard on the bottom of its owner's library.

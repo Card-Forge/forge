@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Sly Cooper 2
+Title=Sly Cooper
+Difficulty=medium
+Description=Mono U Prowess deck
+Icon=Sly Cooper.jpg
+Deck Type=constructed
+[main]
+21 Island
+1 Sky Diamond
+1 Ojutai's Breath
+1 Leap
+4 Ancestral Vision
+2 Artful Dodge
+1 Deep Analysis
+4 Distortion Strike
+2 Think Twice
+3 Elusive Spellfist
+2 Jeskai Elder
+2 Jeskai Sage
+3 Jeskai Windscout
+2 Lotus Path Djinn
+2 Mistfire Adept
+1 Bident of Thassa
+4 Singing Bell Strike
+2 Skywise Teachings
+2 Tangle Kelp
+[sideboard]

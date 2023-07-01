@@ -1,0 +1,25 @@
+[metadata]
+Title=Weapon Rack
+Difficulty=medium
+Description=No weapon stays on the rack for long in the Burning Yard.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Weapon Rack
+[Main]
+4 Animating Faerie|ELD|1
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Forest|ELD|1
+16 Island|ELD|4
+4 Lucky Clover|ELD
+4 Mirrormade|ELD|1
+4 Oko, Thief of Crowns|ELD|1
+4 Thornwood Falls|ELD
+4 Turn into a Pumpkin|ELD
+4 Weapon Rack|ELD
+4 Workshop Elders|ELD
+[Sideboard]
+4 Charmed Sleep|ELD
+4 Opt|ELD
+3 Scalding Cauldron|ELD
+4 Witching Well|ELD

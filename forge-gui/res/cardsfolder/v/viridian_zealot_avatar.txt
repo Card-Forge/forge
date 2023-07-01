@@ -1,0 +1,7 @@
+Name:Viridian Zealot Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+2
+A:AB$ Destroy | ActivationZone$ Command | Cost$ 2 Sac<1/Creature> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, put it into your hand, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.sharesNameWith Sacrificed | ChangeNum$ 1 | StackDescription$ Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle.
+Oracle:Hand +0, life +2\n{2}, Sacrifice a creature: Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, put it into your hand, then shuffle.

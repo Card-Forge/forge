@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/01/RIX1-Jan-22.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your Legion Lieutenant is enchanted by your opponent's Compulsory Rest.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=1
+AILife=4
+humanhand=Walking Ballista;Cleansing Ray;Tocatli Honor Guard;Fatal Push;Gideon's Defeat;
+humanlibrary=
+humangraveyard=
+humanbattlefield=Trapjaw Tyrant;Vicious Conquistador;Legion Lieutenant|Id:1;Concealed Courtyard;Concealed Courtyard;Concealed Courtyard;Plains|Set:XLN;Swamp|Set:XLN;Swamp|Set:XLN;
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Compulsory Rest|AttachedTo:1;Protection of the Hekma;Rampaging Ferocidon;Gifted Aetherborn;Regal Caracal;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;
+aiexile=
+aicommand=

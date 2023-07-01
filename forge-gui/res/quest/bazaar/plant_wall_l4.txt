@@ -1,0 +1,8 @@
+Name:Plant Wall
+ManaCost:no cost
+Colors:green
+Types:Creature Plant Wall
+Text:Level 4 Plant Wall
+PT:1/3
+K:Defender
+Oracle:Defender

@@ -1,0 +1,7 @@
+Name:Scuzzback Marauders
+ManaCost:4 RG
+Types:Creature Goblin Warrior
+PT:5/2
+K:Trample
+K:Persist
+Oracle:Trample\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

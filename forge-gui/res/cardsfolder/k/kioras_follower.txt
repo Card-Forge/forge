@@ -1,0 +1,7 @@
+Name:Kiora's Follower
+ManaCost:G U
+Types:Creature Merfolk
+PT:2/2
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | SpellDescription$ Untap another target permanent.
+AI:RemoveDeck:All
+Oracle:{T}: Untap another target permanent.

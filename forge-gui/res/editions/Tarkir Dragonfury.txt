@@ -1,0 +1,12 @@
+[metadata]
+Code=PTKDF
+Date=2015-04-03
+Name=Tarkir Dragonfury
+Type=Promo
+ScryfallCode=PTKDF
+
+[cards]
+135 C Dragon Fodder @Jesper Ejsing
+138 U Dragonlord's Servant @Carl Frank
+187 R Foe-Razer Regent @Svetlin Velinov
+248 C Evolving Wilds @Noah Bradley

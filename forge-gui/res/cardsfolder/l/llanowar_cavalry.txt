@@ -1,0 +1,6 @@
+Name:Llanowar Cavalry
+ManaCost:2 G
+Types:Creature Human Soldier
+PT:1/4
+A:AB$ Pump | Cost$ W | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+Oracle:{W}: Llanowar Cavalry gains vigilance until end of turn.

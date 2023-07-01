@@ -1,0 +1,6 @@
+Name:Collective Restraint
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You | Cost$ X | Description$ Domain — Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.
+SVar:X:Count$Domain
+Oracle:Domain — Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.

@@ -1,0 +1,7 @@
+Name:Pegasus Refuge
+ManaCost:3 W
+Types:Enchantment
+A:AB$ Token | Cost$ 2 Discard<1/Card> | TokenAmount$ 1 | TokenScript$ w_1_1_pegasus_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Pegasus creature token with flying.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:{2}, Discard a card: Create a 1/1 white Pegasus creature token with flying.

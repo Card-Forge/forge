@@ -1,0 +1,8 @@
+Name:Druids' Repository
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPut | TriggerDescription$ Whenever a creature you control attacks, put a charge counter on CARDNAME.
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control attacks, put a charge counter on Druids' Repository.\nRemove a charge counter from Druids' Repository: Add one mana of any color.

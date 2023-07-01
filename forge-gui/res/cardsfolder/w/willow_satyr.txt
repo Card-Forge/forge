@@ -1,0 +1,7 @@
+Name:Willow Satyr
+ManaCost:2 G G
+Types:Creature Satyr
+PT:1/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature. | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target legendary creature for as long as you control CARDNAME and CARDNAME remains tapped.
+Oracle:You may choose not to untap Willow Satyr during your untap step.\n{T}: Gain control of target legendary creature for as long as you control Willow Satyr and Willow Satyr remains tapped.

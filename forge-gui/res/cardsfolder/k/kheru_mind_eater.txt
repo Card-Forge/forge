@@ -1,0 +1,13 @@
+Name:Kheru Mind-Eater
+ManaCost:2 B
+Types:Creature Vampire
+PT:1/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles a card from their hand face down.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | ExileFaceDown$ True | Mandatory$ True | ChangeNum$ 1 | RememberChanged$ True
+S:Mode$ Continuous | MayPlay$ True | MayLookAt$ You | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at cards exiled with CARDNAME, and you may play lands and cast spells from among those cards.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace\nWhenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from their hand face down.\nYou may look at cards exiled with Kheru Mind-Eater, and you may play lands and cast spells from among those cards.

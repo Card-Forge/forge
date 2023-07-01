@@ -1,0 +1,8 @@
+Name:Paragon of Fierce Defiance
+ManaCost:3 R
+Types:Creature Human Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Red+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other red creatures you control get +1/+1.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature.Red+Other+YouCtrl | TgtPrompt$ Select target red creature | KW$ Haste | SpellDescription$ Another target red creature you control gains haste until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Other red creatures you control get +1/+1.\n{R}, {T}: Another target red creature you control gains haste until end of turn. (It can attack and {T} this turn.)

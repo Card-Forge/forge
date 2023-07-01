@@ -1,0 +1,11 @@
+Name:Sen Triplets
+ManaCost:2 W U B
+Types:Legendary Artifact Creature Human Wizard
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ SenEffect | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities and plays with their hand revealed. You may play lands and cast spells from that player's hand this turn.
+SVar:SenEffect:DB$ Effect | ValidTgts$ Opponent | StaticAbilities$ STCantBeCast,STCantBeActivated,STHandRevealed,STCanPlay | RememberObjects$ Targeted | AILogic$ Always
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ This turn, the targeted player can't cast spells or activate abilities and plays with their hand revealed.
+SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | Activator$ Player.IsRemembered
+SVar:STHandRevealed:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.RememberedPlayerOwn | MayLookAt$ Player
+SVar:STCanPlay:Mode$ Continuous | Affected$ Card.RememberedPlayerCtrl | AffectedZone$ Hand | MayPlay$ True | Description$ You may play cards from that player's hand this turn.
+Oracle:At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities and plays with their hand revealed. You may play lands and cast spells from that player's hand this turn.

@@ -1,0 +1,7 @@
+Name:Pyre Charger
+ManaCost:R R
+Types:Creature Elemental Warrior
+PT:1/1
+K:Haste
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Haste\n{R}: Pyre Charger gets +1/+0 until end of turn.

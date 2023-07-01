@@ -1,0 +1,11 @@
+Name:Sensation Gorger
+ManaCost:1 R R
+Types:Creature Goblin Shaman
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigKinship | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with CARDNAME, you may reveal it. If you do, each player discards their hand, then draws four cards.
+SVar:TrigKinship:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1
+SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+Oracle:Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards their hand, then draws four cards.

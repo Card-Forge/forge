@@ -1,0 +1,9 @@
+Name:Paired Tactician
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Warrior.attacking+Other | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME and at least one other Warrior attack, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Warrior
+Oracle:Whenever Paired Tactician and at least one other Warrior attack, put a +1/+1 counter on Paired Tactician.

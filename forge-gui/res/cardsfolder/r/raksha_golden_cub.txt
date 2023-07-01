@@ -1,0 +1,9 @@
+Name:Raksha Golden Cub
+ManaCost:5 W W
+Types:Legendary Creature Cat Soldier
+PT:3/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Cat+YouCtrl | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.Self+equipped | AddKeyword$ Double Strike | Description$ As long as CARDNAME is equipped, Cat creatures you control get +2/+2 and have double strike.
+SVar:EquipMe:Once
+AI:RemoveDeck:Random
+Oracle:Vigilance\nAs long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.

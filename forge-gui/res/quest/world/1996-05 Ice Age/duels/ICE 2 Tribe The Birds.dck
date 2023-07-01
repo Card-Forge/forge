@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: The Birds
+Title=The Birds
+Difficulty=medium
+Description="I've seen a larger Erne knock a Giant to the ground and stay airborne. They move not with the wind, but as the wind." -Arna Kennerud, Skyknight
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+2 Aesthir Glider|ALL|1
+2 Aesthir Glider|ALL|2
+2 Carrier Pigeons|ALL|1
+2 Carrier Pigeons|ALL|2
+5 Island|ICE|1
+5 Island|ICE|3
+4 Kjeldoran Skycaptain|ICE
+4 Kjeldoran Skyknight|ICE
+4 Pit Trap|ICE
+5 Plains|ICE|2
+5 Plains|ICE|3
+4 Silver Erne|ICE
+2 Storm Crow|ALL|1
+2 Storm Crow|ALL|2
+2 Wild Aesthir|ALL|1
+2 Wild Aesthir|ALL|2
+4 Wings of Aesthir|ICE

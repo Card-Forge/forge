@@ -1,0 +1,9 @@
+Name:Unstable Hulk
+ManaCost:1 R R
+Types:Creature Goblin Mutant
+PT:2/2
+K:Morph:3 R R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +6 | NumDef$ +6 | KW$ Trample | SubAbility$ DBSkipTurn
+SVar:DBSkipTurn:DB$ SkipTurn | Defined$ You | NumTurns$ 1
+Oracle:Morph {3}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.

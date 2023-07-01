@@ -1,0 +1,11 @@
+Name:Gouged Zealot
+ManaCost:3 R
+Types:Creature Cyclops Berserker
+PT:4/3
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigDamageAll | TriggerDescription$ Delirium — Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, CARDNAME deals 1 damage to each creature defending player controls.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.DefenderCtrl | NumDmg$ 1 | ValidDescription$ each creature defending player controls.
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Reach\nDelirium — Whenever Gouged Zealot attacks, if there are four or more card types among cards in your graveyard, Gouged Zealot deals 1 damage to each creature defending player controls.

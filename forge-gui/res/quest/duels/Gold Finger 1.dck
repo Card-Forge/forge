@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Gold Finger 1
+Title=Gold Finger
+Difficulty=easy
+Description=Mono U control deck with various counter spells
+Icon=Gold Finger.jpg
+Deck Type=constructed
+[main]
+24 Island|TMP
+1 Arcane Denial
+1 Bone to Ash
+1 Dismal Failure
+1 Dream Fracture
+1 Geist Snatch
+1 Grip of Amnesia
+1 Memory Lapse
+1 Negate
+1 Remand
+1 Thoughtbind
+1 Vex
+1 Repulse
+1 Snap
+1 Symbol of Unsummoning
+1 Unsummon
+1 Vapor Snag
+1 Word of Undoing
+1 Ancestral Vision
+1 Inspiration
+1 Ior Ruin Expedition
+1 Jace's Ingenuity
+1 Jayemdae Tome
+1 Think Twice
+1 Words of Wisdom
+1 Archaeomancer
+1 Aven Fleetwing
+1 Clone
+1 Nephalia Seakite
+1 Peregrine Drake
+1 Shield Sphere
+1 Skyline Predator
+1 Steel Wall
+1 Yotian Soldier
+1 Zephid
+1 Fountain of Youth
+1 Psychic Purge
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Heartwood Treefolk
+ManaCost:2 G G
+Types:Creature Treefolk
+PT:3/4
+K:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

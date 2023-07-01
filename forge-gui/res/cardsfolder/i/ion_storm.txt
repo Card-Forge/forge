@@ -1,0 +1,8 @@
+Name:Ion Storm
+ManaCost:2 R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 1 R SubCounter<1/P1P1/Permanent/permanent you control> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 1 R SubCounter<1/CHARGE/Permanent/permanent you control> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{1}{R}, Remove a +1/+1 counter or a charge counter from a permanent you control: Ion Storm deals 2 damage to any target.

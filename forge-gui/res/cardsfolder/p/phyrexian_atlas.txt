@@ -1,0 +1,8 @@
+Name:Phyrexian Atlas
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Corrupted — Whenever CARDNAME becomes tapped, each opponent with three or more poison counters loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent+IsCorrupted | LifeAmount$ 1
+DeckHints:Keyword$Infect|Toxic
+Oracle:{T}: Add one mana of any color.\nCorrupted — Whenever Phyrexian Atlas becomes tapped, each opponent with three or more poison counters loses 1 life.

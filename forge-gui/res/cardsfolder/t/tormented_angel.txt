@@ -1,0 +1,6 @@
+Name:Tormented Angel
+ManaCost:3 W
+Types:Creature Angel
+PT:1/5
+K:Flying
+Oracle:Flying

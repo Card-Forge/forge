@@ -1,0 +1,8 @@
+Name:Stern Constable
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ Tap | Cost$ T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:{T}, Discard a card: Tap target creature.

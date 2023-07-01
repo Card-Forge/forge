@@ -1,0 +1,18 @@
+[quest]
+id=LEG Challenge: Storm World
+OpponentName=The Storm
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Storm World|Chains of Mephistopheles|Mountain
+[metadata]
+Name=LEG Challenge: Storm World
+Title=The Storm
+Difficulty=very hard
+Description=The forces of evil and chaos conspire to drive you mad.  Can you withstand them?
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+60 Winds of Change|LEG

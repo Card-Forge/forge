@@ -1,0 +1,7 @@
+Name:Ranger's Hawk
+ManaCost:W
+Types:Creature Bird
+PT:1/1
+K:Flying
+A:AB$ Venture | Cost$ 3 T tapXType<1/Creature.Other> | SorcerySpeed$ True | SpellDescription$ Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)
+Oracle:Flying\n{3}, {T}, Tap another untapped creature you control: Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)

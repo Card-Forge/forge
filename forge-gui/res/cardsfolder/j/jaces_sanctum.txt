@@ -1,0 +1,8 @@
+Name:Jace's Sanctum
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBScry | TriggerDescription$ Whenever you cast a instant or sorcery spell, scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

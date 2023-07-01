@@ -1,0 +1,8 @@
+Name:Darien, King of Kjeldor
+ManaCost:4 W W
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ You | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.

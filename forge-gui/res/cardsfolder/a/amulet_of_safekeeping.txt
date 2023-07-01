@@ -1,0 +1,8 @@
+Name:Amulet of Safekeeping
+ManaCost:2
+Types:Artifact
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you become the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ 1 | UnlessPayer$ TriggeredSourceSAController
+S:Mode$ Continuous | Affected$ Creature.token | AddPower$ -1 | Description$ Creature tokens get -1/-0.
+SVar:PlayMain1:TRUE
+Oracle:Whenever you become the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.\nCreature tokens get -1/-0.

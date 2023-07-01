@@ -1,0 +1,6 @@
+Name:Goliath Spider
+ManaCost:6 G G
+Types:Creature Spider
+PT:7/6
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

@@ -1,0 +1,8 @@
+Name:Blackblade Reforged
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Equip:3:Creature.YouCtrl+Legendary:legendary creature
+K:Equip:7
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each land you control.
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}

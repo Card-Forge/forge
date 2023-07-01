@@ -1,0 +1,10 @@
+[metadata]
+Code=PPLS
+Date=2001-02-05
+Name=Planeshift Promos
+Type=Promo
+CardLang=grc
+ScryfallCode=PPLS
+
+[cards]
+119 R Questing Phelddagrif @Matt Cavotta

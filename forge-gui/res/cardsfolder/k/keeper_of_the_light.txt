@@ -1,0 +1,7 @@
+Name:Keeper of the Light
+ManaCost:W W
+Types:Creature Human Wizard
+PT:1/2
+A:AB$ Pump | Cost$ W T | ValidTgts$ Opponent.hasMoreLife | TgtPrompt$ Choose target opponent with more life than you | SubAbility$ LightKeepersLife | StackDescription$ None | SpellDescription$ Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
+SVar:LightKeepersLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:{W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.

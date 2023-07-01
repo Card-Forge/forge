@@ -1,0 +1,5 @@
+Name:Breath Weapon
+ManaCost:2 R
+Types:Instant
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.nonDragon | SpellDescription$ CARDNAME deals 2 damage to each non-Dragon creature. 
+Oracle:Breath Weapon deals 2 damage to each non-Dragon creature.

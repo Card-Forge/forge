@@ -1,0 +1,9 @@
+Name:Inkshield
+ManaCost:3 W B
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt to you this turn. For each 1 damage prevented this way, create a 2/1 white and black Inkling creature token with flying.
+SVar:RPrevent:Event$ DamageDone | ValidTarget$ You | PreventionEffect$ True | ReplaceWith$ Token | IsCombat$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all combat damage that would be dealt to you this turn. For each 1 damage prevented this way, create a 2/1 white and black Inkling creature token with flying.
+SVar:Token:DB$ Token | TokenAmount$ X | TokenScript$ wb_2_1_inkling_flying
+SVar:X:ReplaceCount$DamageAmount
+DeckHas:Ability$Token
+Oracle:Prevent all combat damage that would be dealt to you this turn. For each 1 damage prevented this way, create a 2/1 white and black Inkling creature token with flying.

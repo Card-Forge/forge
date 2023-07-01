@@ -1,0 +1,6 @@
+Name:Goblin Turncoat
+ManaCost:1 B
+Types:Creature Goblin Mercenary
+PT:2/1
+A:AB$ Regenerate | Cost$ Sac<1/Goblin> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
+Oracle:Sacrifice a Goblin: Regenerate Goblin Turncoat.

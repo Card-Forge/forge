@@ -1,0 +1,7 @@
+Name:Heartwood Storyteller Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/+4
+S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card.Creature | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 1 | Description$ The first creature spell you cast each turn costs {1} less to cast.
+S:Mode$ RaiseCost | EffectZone$ Command | ValidCard$ Card.nonCreature | Activator$ Player.Opponent | Type$ Spell | OnlyFirstSpell$ True | Amount$ 1 | Description$ The first noncreature spell each opponent casts each turn costs {1} more to cast.
+Oracle:Hand -1, life +4\nThe first creature spell you cast each turn costs {1} less to cast.\nThe first noncreature spell each opponent casts each turn costs {1} more to cast.

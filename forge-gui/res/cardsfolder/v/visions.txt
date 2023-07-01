@@ -1,0 +1,7 @@
+Name:Visions
+ManaCost:W
+Types:Sorcery
+A:SP$ PeekAndReveal | ValidTgts$ Player | PeekAmount$ 5 | NoReveal$ True | SubAbility$ DBShuffle | SpellDescription$ Look at the top five cards of target player's library. You may then have that player shuffle that library.
+SVar:DBShuffle:DB$ Shuffle | Defined$ Targeted | Optional$ True
+AI:RemoveDeck:All
+Oracle:Look at the top five cards of target player's library. You may then have that player shuffle that library.

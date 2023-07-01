@@ -1,0 +1,8 @@
+Name:Tah-Crop Elite
+ManaCost:3 W
+Types:Creature Bird Warrior
+PT:2/2
+K:Flying
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPumpAll | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, creatures you control get +1/+1 until end of turn. (An exerted creature won't untap during your next untap step.)
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ When you do, creatures you control get +1/+1 until end of turn.
+Oracle:Flying\nYou may exert Tah-Crop Elite as it attacks. When you do, creatures you control get +1/+1 until end of turn. (An exerted creature won't untap during your next untap step.)

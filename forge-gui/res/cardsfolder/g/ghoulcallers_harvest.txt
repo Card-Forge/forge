@@ -1,0 +1,8 @@
+Name:Ghoulcaller's Harvest
+ManaCost:B G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ Create X 2/2 black Zombie creature tokens with decayed, where X is half the number of creature cards in your graveyard, rounded up. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)
+SVar:X:Count$ValidGraveyard Creature.YouOwn/HalfUp
+K:Flashback:3 B G
+DeckHas:Ability$Token|Graveyard
+Oracle:Create X 2/2 black Zombie creature tokens with decayed, where X is half the number of creature cards in your graveyard, rounded up. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)\nFlashback {3}{B}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

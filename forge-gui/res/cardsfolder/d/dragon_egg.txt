@@ -1,0 +1,10 @@
+Name:Dragon Egg
+ManaCost:2 R
+Types:Creature Dragon Egg
+PT:0/2
+K:Defender
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn".
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_2_2_dragon_flying_firebreathing
+SVar:SacMe:4
+DeckHas:Ability$Token
+Oracle:Defender\nWhen Dragon Egg dies, create a 2/2 red Dragon creature token with flying and "{R}: This creature gets +1/+0 until end of turn."

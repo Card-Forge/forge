@@ -1,0 +1,9 @@
+Name:Floating-Dream Zubera
+ManaCost:1 U
+Types:Creature Zubera Spirit
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card for each Zubera that died this turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
+DeckHints:Type$Zubera
+Oracle:When Floating-Dream Zubera dies, draw a card for each Zubera that died this turn.

@@ -1,0 +1,10 @@
+Name:Scythe of the Wretched
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy Equipped | TriggerZones$ Battlefield | Execute$ ScytheReturn | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach CARDNAME to that creature.
+SVar:ScytheReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | RememberChanged$ True | SubAbility$ ScytheAttach
+SVar:ScytheAttach:DB$ Attach | Defined$ Remembered | SubAbility$ WretchedCleanup
+SVar:WretchedCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Equipped creature gets +2/+2.\nWhenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.\nEquip {4}

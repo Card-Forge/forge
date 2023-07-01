@@ -1,0 +1,8 @@
+Name:Rakdos Firewheeler
+ManaCost:B B R R
+Types:Creature Human Rogue
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to target opponent and 2 damage to up to one target creature or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 2 | SubAbility$ MoreDamage
+SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature or planeswalker (2 damage) | NumDmg$ 2
+Oracle:When Rakdos Firewheeler enters the battlefield, it deals 2 damage to target opponent and 2 damage to up to one target creature or planeswalker.

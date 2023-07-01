@@ -1,0 +1,8 @@
+Name:Shambling Swarm
+ManaCost:1 B B B
+Types:Creature Horror
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ SwarmSpread | TriggerDescription$ When CARDNAME dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.
+SVar:SwarmSpread:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | RemovePhase$ End of Turn
+AI:RemoveDeck:All
+Oracle:When Shambling Swarm dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.

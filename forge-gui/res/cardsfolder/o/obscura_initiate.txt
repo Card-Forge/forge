@@ -1,0 +1,9 @@
+Name:Obscura Initiate
+ManaCost:2 U
+Types:Creature Bird Citizen
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 WB | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
+DeckHas:Ability$LifeGain
+DeckHints:Color$White|Black
+Oracle:Flying\n{1}{W/B}: Obscura Initiate gains lifelink until end of turn.

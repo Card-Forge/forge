@@ -1,0 +1,6 @@
+Name:Tectonic Reformation
+ManaCost:1 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land.YouOwn | AffectedZone$ Hand | AddKeyword$ Cycling:R | Description$ Each land card in your hand has cycling {R}.
+K:Cycling:2
+Oracle:Each land card in your hand has cycling {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)

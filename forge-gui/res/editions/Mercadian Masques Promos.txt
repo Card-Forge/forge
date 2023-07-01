@@ -1,0 +1,9 @@
+[metadata]
+Code=PMMQ
+Date=1999-10-04
+Name=Mercadian Masques Promos
+Type=Promo
+ScryfallCode=PMMQ
+
+[cards]
+89 R Overtaker @Clyde Caldwell

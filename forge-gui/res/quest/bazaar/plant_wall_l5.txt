@@ -1,0 +1,9 @@
+Name:Plant Wall
+ManaCost:no cost
+Colors:green
+Types:Creature Plant Wall
+Text:Level 5 Plant Wall
+PT:1/3
+K:Defender
+K:Wither
+Oracle:Defender, Wither

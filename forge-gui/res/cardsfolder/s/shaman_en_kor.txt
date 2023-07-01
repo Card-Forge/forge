@@ -1,0 +1,15 @@
+Name:Shaman en-Kor
+ManaCost:1 W
+Types:Creature Kor Cleric Shaman
+PT:1/2
+A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKor | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
+SVar:EnKor:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ EnKorDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature you control instead.
+SVar:EnKorDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
+A:AB$ ChooseSource | Cost$ 1 W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to CARDNAME instead.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessDamage | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to EFFECTSOURCE instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+AI:RemoveDeck:All
+Oracle:{0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.\n{1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.

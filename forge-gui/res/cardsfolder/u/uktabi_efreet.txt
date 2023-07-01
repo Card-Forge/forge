@@ -1,0 +1,6 @@
+Name:Uktabi Efreet
+ManaCost:2 G G
+Types:Creature Efreet
+PT:5/4
+K:Cumulative upkeep:G
+Oracle:Cumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

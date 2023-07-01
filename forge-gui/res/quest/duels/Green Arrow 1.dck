@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Green Arrow 1
+Title=Green Arrow
+Difficulty=easy
+Description=WG Archer deck with Jagged-Scar Archers and Titania's Chosen
+Icon=Green Arrow.jpg
+Deck Type=constructed
+[main]
+1 Ezuri's Archers
+2 Skyshroud Archer
+1 Elvish Archers
+1 Elvish Hunter
+1 Matsu-Tribe Sniper
+1 Seton's Scout
+1 Thornweald Archer
+1 Crossbow Infantry
+1 Longbow Archer
+1 Femeref Archers
+1 Lys Alana Bowmaster
+1 Jolrael's Centaur
+1 D'Avenant Healer
+1 Jagged-Scar Archers
+1 Keen-Eyed Archers
+1 Titania's Chosen
+1 Norwood Archers
+1 Ranger en-Vec
+1 Lady Caleria
+1 Krosan Archer
+1 Takeno's Cavalry
+1 Tel-Jilad Archers
+1 Aven Archer
+1 Freewind Equenaut
+1 Rashka the Slayer
+1 Game-Trail Changeling
+1 Leaf Arrow
+1 Reknit
+2 Serrated Arrows
+1 Fyndhorn Bow
+1 Viridian Longbow
+1 Lay of the Land
+1 Anoint
+1 Fog
+8 Forest|M11
+7 Plains|M11
+2 Secluded Steppe
+2 Tranquil Thicket
+3 Elfhame Palace
+2 Grasslands
+[sideboard]

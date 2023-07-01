@@ -1,0 +1,10 @@
+Name:Plant Wall
+ManaCost:no cost
+Colors:green
+Types:Creature Plant Wall
+Text:Level 6 Plant Wall
+PT:1/4
+K:Defender
+K:Wither
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+Oracle: Defender, Wither\n{T}: You gain 1 life.

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Shambling Suit
+OpponentName=The Suits
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Shining Armor|Shining Armor
+HumanExtras=
+[metadata]
+Title=Shambling Suit
+Difficulty=medium
+Description=How does a suit of armor wear a suit of armor?
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+Name=ELD Challenge: Shambling Suit
+[Main]
+30 Shambling Suit|ELD
+30 Tournament Grounds|ELD

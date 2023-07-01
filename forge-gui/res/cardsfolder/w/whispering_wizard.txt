@@ -1,0 +1,9 @@
+Name:Whispering Wizard
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:3/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
+SVar:BuffedBy:Card.nonLand+nonCreature
+DeckHas:Ability$Token
+Oracle:Whenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying. This ability triggers only once each turn.

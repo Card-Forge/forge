@@ -1,0 +1,6 @@
+Name:Impostor of the Sixth Pride
+ManaCost:1 W
+Types:Creature Shapeshifter
+PT:3/1
+K:Changeling
+Oracle:Changeling (This card is every creature type.)

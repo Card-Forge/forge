@@ -1,0 +1,19 @@
+[quest]
+id=POR Challenge: Plant Elemental
+OpponentName=The Plant Elementals
+AILife=200
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Plant Elemental
+Title=The Plant Elementals
+Difficulty=easy
+Description=100% organic.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+30 Forest|POR|1
+30 Plant Elemental|POR

@@ -1,0 +1,8 @@
+Name:Resilient Wanderer
+ManaCost:2 W W
+Types:Creature Human Nomad
+PT:2/3
+K:First Strike
+A:AB$ Protection | Cost$ Discard<1/Card> | Defined$ Self | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
+AI:RemoveDeck:All
+Oracle:First strike\nDiscard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.

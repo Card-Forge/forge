@@ -1,0 +1,5 @@
+Name:Arcane Encyclopedia
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 3 T | SpellDescription$ Draw a card.
+Oracle:{3}, {T}: Draw a card.

@@ -1,0 +1,12 @@
+Name:Aven Wind Guide
+ManaCost:2 W U
+Types:Creature Bird Warrior
+PT:2/3
+K:Flying
+K:Vigilance
+K:Embalm:4 W U
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Flying & Vigilance | Description$ Creature tokens you control have flying and vigilance.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+DeckHints:Ability$Token
+Oracle:Flying, vigilance\nCreature tokens you control have flying and vigilance.\nEmbalm {4}{W}{U} ({4}{W}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Bird Warrior with no mana cost. Embalm only as a sorcery.)

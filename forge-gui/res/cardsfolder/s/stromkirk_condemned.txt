@@ -1,0 +1,8 @@
+Name:Stromkirk Condemned
+ManaCost:B B
+Types:Creature Vampire Horror
+PT:2/2
+A:AB$ PumpAll | Cost$ Discard<1/Card> | ValidCards$ Card.Vampire+YouCtrl | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ Vampires you control get +1/+1 until end of turn.
+DeckHints:Type$Vampire
+DeckHas:Ability$Discard
+Oracle:Discard a card: Vampires you control get +1/+1 until end of turn. Activate only once each turn.

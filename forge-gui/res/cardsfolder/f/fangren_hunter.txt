@@ -1,0 +1,6 @@
+Name:Fangren Hunter
+ManaCost:3 G G
+Types:Creature Beast
+PT:4/4
+K:Trample
+Oracle:Trample

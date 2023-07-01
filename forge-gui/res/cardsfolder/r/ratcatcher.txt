@@ -1,0 +1,8 @@
+Name:Ratcatcher
+ManaCost:4 B B
+Types:Creature Ogre Rogue
+PT:4/4
+K:Fear
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may search your library for a Rat card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Rat | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, you may search your library for a Rat card, reveal it, put it into your hand, then shuffle.

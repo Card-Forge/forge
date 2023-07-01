@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: Kjeldor
+Title=The Kjeldoran Wilds
+Difficulty=easy
+Description="High in the Karplusans, death is swift and razor-clawed." -Arna Kennerud, skycaptain
+
+Kjeldor was founded 500 years prior to the casting of the World Spell by Clan Pearl and Clan Emerald, two of the five clans of the kingdom of Storgard. These two clans had left their kingdom for they thought, correctly, that it would soon be caught under the ever growing ice caps. Kjeldor is named after Oriel Kjeldos, the old leader of Clan Emerald who died on the journey from Storgard. Her descendants became the royal family of Kjeldor.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Arctic Foxes|ICE
+4 Blinking Spirit|ICE
+4 Caribou Range|ICE
+2 Carrier Pigeons|ALL|1
+2 Carrier Pigeons|ALL|2
+4 Cold Snap|ICE
+4 Fylgja|ICE
+4 Hipparion|ICE
+4 Ivory Gargoyle|ALL
+24 Plains|ICE|3
+2 Wild Aesthir|ALL|1
+2 Wild Aesthir|ALL|2

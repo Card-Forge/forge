@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Title=Sliver Queen
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=Silver deck
+Deck Type=constructed
+Name=Slivers2
+[Main]
+1 Cinder Marsh|TMP
+2 Clot Sliver|TMP
+1 Coat of Arms|EXO
+3 Crystalline Sliver|STH
+4 Forest|TMP|1
+4 Forest|TMP|2
+1 Heartstone|STH
+4 Hermit Druid|STH
+1 Horned Sliver|TMP
+1 Island|TMP|1
+2 Lotus Petal|TMP
+4 Mogg Hollows|TMP
+1 Mountain|TMP|4
+4 Mox Diamond|STH
+4 Muscle Sliver|TMP
+1 Plains|TMP|2
+4 Rampant Growth|TMP
+1 Rootwater Depths|TMP
+4 Sliver Queen|STH
+4 Spined Sliver|STH
+1 Swamp|TMP|4
+4 Thalakos Lowlands|TMP
+1 Victual Sliver|STH
+3 Winged Sliver|TMP

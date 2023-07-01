@@ -1,0 +1,6 @@
+Name:Angelic Renewal
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouOwn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature is put into your graveyard from the battlefield, you may sacrifice CARDNAME. If you do, return that card to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Whenever a creature is put into your graveyard from the battlefield, you may sacrifice Angelic Renewal. If you do, return that card to the battlefield.

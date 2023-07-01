@@ -1,0 +1,26 @@
+[metadata]
+Title=Paint-by-Numbers: Blue-Red
+Difficulty=very hard
+Description=Built according to Frank Karsten's Pick Order and mana curve.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Pick Order: 204 Blue-Red
+[Main]
+4 Bonecrusher Giant|ELD|2
+4 Brazen Borrower|ELD|2
+2 Castle Embereth|ELD|2
+2 Castle Vantress|ELD|2
+2 Embercleave|ELD|2
+3 Fae of Wishes|ELD|2
+2 Gadwick, the Wizened|ELD|2
+11 Island|ELD|2
+11 Mountain|ELD|4
+4 Opportunistic Dragon|ELD|2
+3 Robber of the Rich|ELD|2
+4 Stonecoil Serpent|ELD|2
+1 Syr Elenora, the Discerning|ELD
+2 The Royal Scions|ELD|2
+1 Torbran, Thane of Red Fell|ELD|2
+4 Vantress Gargoyle|ELD|2
+[Sideboard]
+4 Charmed Sleep|ELD

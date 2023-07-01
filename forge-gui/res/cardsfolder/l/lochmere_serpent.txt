@@ -1,0 +1,13 @@
+Name:Lochmere Serpent
+ManaCost:4 U B
+Types:Creature Serpent
+PT:7/7
+K:Flash
+A:AB$ Effect | Cost$ U Sac<1/Island> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+A:AB$ GainLife | Cost$ B Sac<1/Swamp> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:Random
+A:AB$ ChangeZone | Cost$ U B | TargetMin$ 5 | TargetMax$ 5 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SorcerySpeed$ True | SubAbility$ DBReturn | ActivationZone$ Graveyard | SpellDescription$ Exile five target cards from an opponent's graveyard. Return CARDNAME from your graveyard to your hand. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+Oracle:Flash\n{U}, Sacrifice an Island: Lochmere Serpent can't be blocked this turn.\n{B}, Sacrifice a Swamp: You gain 1 life and draw a card.\n{U}{B}: Exile five target cards from an opponent's graveyard. Return Lochmere Serpent from your graveyard to your hand. Activate only as a sorcery.

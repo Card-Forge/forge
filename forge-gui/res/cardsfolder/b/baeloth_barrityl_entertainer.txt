@@ -1,0 +1,12 @@
+Name:Baeloth Barrityl, Entertainer
+ManaCost:4 R
+Types:Legendary Creature Elf Shaman
+PT:2/5
+K:Choose a Background
+S:Mode$ Continuous | Affected$ Creature.powerLTY+OppCtrl | Goad$ True | Description$ Creatures your opponents control with power less than NICKNAME's power are goaded. (They attack each combat if able and attack a player other than you if able.)
+SVar:Y:Count$CardPower
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attacking+IsGoaded,Creature.blocking+IsGoaded | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a goaded attacking or blocking creature dies, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Creatures your opponents control with power less than Baeloth Barrityl's power are goaded. (They attack each combat if able and attack a player other than you if able.)\nWhenever a goaded attacking or blocking creature dies, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nChoose a Background (You can have a Background as a second commander.)

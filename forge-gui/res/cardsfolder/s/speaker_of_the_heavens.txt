@@ -1,0 +1,12 @@
+Name:Speaker of the Heavens
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+K:Vigilance
+K:Lifelink
+A:AB$ Token | Cost$ T | SorcerySpeed$ True | CheckSVar$ X | SVarCompare$ GEY | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SpellDescription$ Create a 4/4 white Angel creature token with flying. Activate only if you have at least 7 life more than your starting life total and only as a sorcery.
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife/Plus.7
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:Vigilance, lifelink\n{T}: Create a 4/4 white Angel creature token with flying. Activate only if you have at least 7 life more than your starting life total and only as a sorcery.

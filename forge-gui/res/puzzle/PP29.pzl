@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #29 - A Stab In The Back
+URL:https://pauperpuzzles.wordpress.com/2017/06/03/29-a-stab-in-the-back/
+Goal:Win
+Turns:1
+Difficulty:Easy
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=2
+humanhand=Unearth;Cower in Fear;Disfigure;Trespasser's Curse
+humanlibrary=Rite of Consumption
+humanbattlefield=Swamp;Swamp;Swamp;Swamp;Liliana's Specter;Phyrexian Rager
+aihand=Spellstutter Sprite
+aibattlefield=Plains;Island;Faerie Miscreant;Spellstutter Sprite;Angelic Renewal

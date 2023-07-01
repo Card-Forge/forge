@@ -1,0 +1,6 @@
+Name:Barkhide Mauler
+ManaCost:4 G
+Types:Creature Beast
+PT:4/4
+K:Cycling:2
+Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

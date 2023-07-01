@@ -1,0 +1,27 @@
+[duel]
+
+[metadata]
+Name=Protection of Dionysus 4
+Title=Dionysus
+Icon=Dionysus.jpg
+Difficulty=very hard
+Description= [W] Aggro/Control
+Deck Type=constructed
+
+[Main]
+3 Ajani Goldmane|LRW
+4 Burrenton Forge-Tender|LRW
+4 Cloudgoat Ranger|LRW
+4 Figure of Destiny|EVE
+4 Goldmeadow Stalwart|LRW
+17 Plains|LRW
+4 Rustic Clachan|MOR
+4 Spectral Procession|SHM
+4 Stillmoon Cavalier|EVE
+4 Unmake|EVE
+4 Windbrisk Heights|LRW
+4 Wizened Cenn|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

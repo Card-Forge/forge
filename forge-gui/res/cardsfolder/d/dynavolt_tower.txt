@@ -1,0 +1,9 @@
+Name:Dynavolt Tower
+ManaCost:3
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever you cast an instant or sorcery spell, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ DealDamage | Cost$ T PayEnergy<5> | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, you get {E}{E} (two energy counters).\n{T}, Pay {E}{E}{E}{E}{E}: Dynavolt Tower deals 3 damage to any target.

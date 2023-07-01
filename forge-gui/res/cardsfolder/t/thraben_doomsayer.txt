@@ -1,0 +1,9 @@
+Name:Thraben Doomsayer
+ManaCost:1 W W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | Condition$ FatefulHour | Description$ Fateful hour — As long as you have 5 or less life, other creatures you control get +2/+2.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:{T}: Create a 1/1 white Human creature token.\nFateful hour — As long as you have 5 or less life, other creatures you control get +2/+2.

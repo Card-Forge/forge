@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Zegana 3
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=hard
+Description=Darwin, eat your heart out
+Deck Type=constructed
+[main]
+4 Birds of Paradise|M12
+4 Breeding Pool|GTC
+2 Civic Wayfinder|10E
+2 Coiling Oracle|DIS
+4 Crocanura|GTC
+4 Experiment One|GTC
+4 Farseek|M13
+5 Forest|RTR
+4 Island|RTR
+2 Master Biomancer|GTC
+2 Mystic Genesis|GTC
+1 Novijen, Heart of Progress|DIS
+3 Patagia Viper|DIS
+4 Prime Speaker Zegana|GTC
+4 Simic Charm|GTC
+4 Simic Guildgate|GTC
+3 Trygon Predator|DIS
+2 Vigean Hydropon|DIS
+2 Zameck Guildmage|GTC
+[sideboard]
+[planes]
+[schemes]

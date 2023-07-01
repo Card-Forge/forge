@@ -1,0 +1,6 @@
+Name:Goblin Warrior Token
+ManaCost:no cost
+Types:Creature Goblin Warrior
+Colors:red,green
+PT:1/1
+Oracle:

@@ -1,0 +1,17 @@
+[metadata]
+Code=J17
+Date=2017-01-01
+Name=Judge Gift Cards 2017
+Type=Promo
+ScryfallCode=J17
+
+[cards]
+1 M Avacyn, Angel of Hope @Howard Lyon
+2 R Capture of Jingzhou @Jack Wei
+3 R Gaddock Teeg @Matt Stewart
+4 R Homeward Path @Tomasz Jedruszek
+5 M Doran, the Siege Tower @Rob Alexander
+6 R Prismatic Geoscope @Steven Belledin
+7 R Spellskite @Svetlin Velinov
+8 R Pendelhaven @Dimitar Marinski
+F9 R Rules Lawyer @Dmitry Burmak

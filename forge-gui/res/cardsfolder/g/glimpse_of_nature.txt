@@ -1,0 +1,9 @@
+Name:Glimpse of Nature
+ManaCost:G
+Types:Sorcery
+A:SP$ Effect | Triggers$ CreatureSpell | SpellDescription$ Whenever you cast a creature spell this turn, draw a card.
+SVar:CreatureSpell:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ Whenever you cast a creature spell this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
+Oracle:Whenever you cast a creature spell this turn, draw a card.

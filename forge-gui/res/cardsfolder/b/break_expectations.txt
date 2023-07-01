@@ -1,0 +1,10 @@
+Name:Break Expectations
+ManaCost:B
+Types:Sorcery
+A:SP$ Reveal | ValidTgts$ Player | TgtPrompt$ Select target player | RevealAllValid$ Card.cmcGE2+TargetedPlayerCtrl | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Target player reveals all cards with mana value 2 or greater in their hand. You choose a card from among those cards. Exile that card. If a card was exiled this way, that player drafts a card from CARDNAME's spellbook and reveals it.
+SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Targeted | Chooser$ You | Origin$ Hand | Destination$ Exile | ChangeNum$ 1 | ChangeType$ Card.cmcGE2+TargetedPlayerCtrl | Mandatory$ True | AlreadyRevealed$ True | RememberChanged$ True | AILogic$ BestCard | SubAbility$ DBDraft | StackDescription$ None
+SVar:DBDraft:DB$ NameCard | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Draft$ True | Defined$ Targeted | ChooseFromList$ Colossal Plow,Millstone,Whirlermaker,Magistrate's Scepter,Replicating Ring,Raiders' Karve,Weapon Rack,Relic Amulet,Orazca Relic,Fifty Feet of Rope,Pyre of Heroes,Treasure Chest,Leather Armor,Spiked Pit Trap,Gingerbrute | SubAbility$ DBMakeCard | StackDescription$ None
+SVar:DBMakeCard:DB$ MakeCard | Defined$ Targeted | Name$ ChosenName | Zone$ Hand | ImprintMade$ True | SubAbility$ DBReveal
+SVar:DBReveal:DB$ Reveal | Defined$ Targeted | RevealDefined$ Imprinted | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearNamedCard$ True
+Oracle:Target player reveals all cards with mana value 2 or greater in their hand. You choose a card from among those cards. Exile that card. If a card was exiled this way, that player drafts a card from Break Expectations's spellbook and reveals it.

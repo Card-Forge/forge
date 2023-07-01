@@ -1,0 +1,20 @@
+[metadata]
+Code=F06
+Date=2006-01-01
+Name=Friday Night Magic 2006
+Type=Promo
+ScryfallCode=F06
+
+[cards]
+1 R Elves of Deep Shadow @Jesper Myrfors
+2 R Armadillo Cloak @Paolo Parente
+3 R Terminate @DiTerlizzi
+4 R Lobotomy @Thomas M. Baxa
+5 R Goblin Warchief @Greg Hildebrandt & Tim Hildebrandt
+6 R Wild Mongrel @Anthony S. Waters
+7 R Chainer's Edict @Ben Thompson
+8 R Circular Logic @Anthony S. Waters
+9 R Astral Slide @Ron Spears
+10 R Arrogant Wurm @John Avon
+11a R Life // Death @Anthony S. Waters & Edward P. Beard, Jr.
+12a R Fire // Ice @David Martin & Franz Vohwinkel

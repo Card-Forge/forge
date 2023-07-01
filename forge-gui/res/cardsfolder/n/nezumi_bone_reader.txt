@@ -1,0 +1,7 @@
+Name:Nezumi Bone-Reader
+ManaCost:1 B
+Types:Creature Rat Shaman
+PT:1/1
+A:AB$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
+Oracle:{B}, Sacrifice a creature: Target player discards a card. Activate only as a sorcery.

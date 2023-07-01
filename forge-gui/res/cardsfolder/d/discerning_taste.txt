@@ -1,0 +1,10 @@
+Name:Discerning Taste
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Dig | DigNum$ 4 | DestinationZone2$ Graveyard | NoReveal$ True | RememberMovedToZone$ 2 | SubAbility$ DBLifeGain | StackDescription$ SpellDescription | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard. You gain life equal to the greatest power among creature cards put into your graveyard this way.
+SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Creature.IsRemembered$GreatestPower
+DeckHints:Ability$Graveyard
+DeckHas:Ability$LifeGain
+Oracle:Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard. You gain life equal to the greatest power among creature cards put into your graveyard this way.

@@ -1,0 +1,12 @@
+Name:Erebos, God of the Dead
+ManaCost:3 B
+Types:Legendary Enchantment Creature God
+PT:5/7
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to black is less than 5, NICKNAME isn't a creature. (Each {B} in the mana costs of permanents you control counts towards your devotion to black.)
+SVar:X:Count$Devotion.Black
+S:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life.
+A:AB$ Draw | Cost$ 1 B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Permanent.Black
+Oracle:Indestructible\nAs long as your devotion to black is less than five, Erebos isn't a creature. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)\nYour opponents can't gain life.\n{1}{B}, Pay 2 life: Draw a card.

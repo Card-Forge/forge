@@ -1,0 +1,6 @@
+Name:Flowstone Thopter
+ManaCost:7
+Types:Artifact Creature Thopter
+PT:4/4
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gets +1/-1 and gains flying until end of turn.
+Oracle:{1}: Flowstone Thopter gets +1/-1 and gains flying until end of turn.

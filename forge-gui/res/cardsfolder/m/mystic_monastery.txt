@@ -1,0 +1,6 @@
+Name:Mystic Monastery
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo U R W | SpellDescription$ Add {U}, {R}, or {W}.
+Oracle:Mystic Monastery enters the battlefield tapped.\n{T}: Add {U}, {R}, or {W}.

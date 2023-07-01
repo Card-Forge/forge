@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Skemfar Avenger
+OpponentName=The Avengers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Skemfar Elderhall
+HumanExtras=
+[metadata]
+Title=Skemfar Avenger
+Difficulty=medium
+Description=Stripped of their divinity, the elves of Skemfar channeled their rage and sorrow into bloody brutality.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Skemfar Avenger
+[Main]
+10 Elderfang Ritualist|KHM|1
+20 Skemfar Avenger|KHM|2
+30 Swamp|KHM|1

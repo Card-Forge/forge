@@ -1,0 +1,10 @@
+Name:Conspicuous Snoop
+ManaCost:R R
+Types:Creature Goblin Rogue
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Goblin.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Goblin spells from the top of your library.
+AI:RemoveDeck:Random
+S:Mode$ Continuous | TopCardOfLibraryIs$ Goblin | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Goblin.TopLibrary+YouCtrl | GainsAbilitiesOfZones$ Library | Description$ As long as the top card of your library is a Goblin card, CARDNAME has all activated abilities of that card.
+DeckHints:Type$Goblin
+Oracle:Play with the top card of your library revealed.\nYou may cast Goblin spells from the top of your library.\nAs long as the top card of your library is a Goblin card, Conspicuous Snoop has all activated abilities of that card.

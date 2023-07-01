@@ -1,0 +1,25 @@
+[metadata]
+Name:Inquest Gamer - Dead Man's Hand #02
+URL:http://imgur.com/a/EeY71
+Goal:Gain Control of Specified Permanents
+Targets:Card.Red+inZoneBattlefield+OppCtrl,Card.White+inZoneBattlefield+OppCtrl
+Turns:1
+Difficulty:Hard
+Description:You can't win the game. Instead, you need to gain control of all five of your opponent's permanents this turn.\nDream Leash is the only card in your library that will be drawn in your Draw step.
+[state]
+humanlife=5
+ailife=28000
+activeplayer=ai
+activephase=CLEANUP
+humanhand=Copy Enchantment;Peel from Reality;Shinen of Fear's Chill;Dimir Aqueduct
+humanlibrary=Dream Leash
+humangraveyard=
+humanbattlefield=Blood Funnel;Cyclopean Snare;Dimir Doppelganger|Id:14;Followed Footsteps|AttachedTo:14;Halcyon Glaze;Heartstone;Mindleech Mass;Spawnbroker;Dimir Aqueduct;Dimir Aqueduct;Dimir Aqueduct;Dimir Aqueduct;Island;Island;Island;Island
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Boros Swiftblade;Empty-Shrine Kannushi;Drooling Ogre;Mindmoil;Rathi Dragon
+aiexile=
+aicommand=

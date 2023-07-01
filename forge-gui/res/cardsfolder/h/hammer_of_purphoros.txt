@@ -1,0 +1,9 @@
+Name:Hammer of Purphoros
+ManaCost:1 R R
+Types:Legendary Enchantment Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+A:AB$ Token | Cost$ 2 R T Sac<1/Land> | TokenAmount$ 1 | TokenScript$ c_3_3_e_a_golem | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Golem enchantment artifact creature token.
+SVar:BuffedBy:Creature
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have haste.\n{2}{R}, {T}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.

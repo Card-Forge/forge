@@ -1,0 +1,10 @@
+Name:Ashnod the Uncaring
+ManaCost:2 U B R
+Types:Legendary Creature Human Artificer
+PT:1/4
+K:Deathtouch
+T:Mode$ AbilityCast | ValidCard$ Artifact.inZoneBattlefield,Creature.inZoneBattlefield | ValidSA$ SpellAbility.nonManaAbility | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Condition$ Sacrificed | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever you activate an ability of an artifact or creature that isn't a mana ability, if one or more permanents were sacrificed to activate it, you may copy that ability. You may choose new targets for the copy. (Sacrificing an artifact for mana to activate an ability doesn't count.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckNeeds:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Deathtouch\nWhenever you activate an ability of an artifact or creature that isn't a mana ability, if one or more permanents were sacrificed to activate it, you may copy that ability. You may choose new targets for the copy. (Sacrificing an artifact for mana to activate an ability doesn't count.)

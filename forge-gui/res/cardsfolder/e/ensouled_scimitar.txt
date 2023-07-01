@@ -1,0 +1,7 @@
+Name:Ensouled Scimitar
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+A:AB$ Animate | Cost$ 3 | Defined$ Self | Power$ 1 | Toughness$ 5 | Types$ Creature,Artifact,Spirit | Keywords$ Flying | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 1/5 Spirit artifact creature with flying until end of turn. (Equipment that's a creature can't equip a creature.)
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 5 | Description$ Equipped creature gets +1/+5.
+Oracle:{3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn. (Equipment that's a creature can't equip a creature.)\nEquipped creature gets +1/+5.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,7 @@
+Name:Shaper Apprentice
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Merfolk.Other+YouCtrl | Description$ CARDNAME has flying as long as you control another Merfolk.
+SVar:BuffedBy:Merfolk
+Oracle:Shaper Apprentice has flying as long as you control another Merfolk.

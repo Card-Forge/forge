@@ -1,0 +1,8 @@
+Name:Lairwatch Giant
+ManaCost:5 W
+Types:Creature Giant Warrior
+PT:5/3
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+T:Mode$ Blocks | ValidCard$ Card.Self | IsPresent$ Creature.blockedBySource | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks two or more creatures, it gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:Lairwatch Giant can block an additional creature each combat.\nWhenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.

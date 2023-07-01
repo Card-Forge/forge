@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Totoro 2
+Title=Totoro
+Difficulty=medium
+Description=UBG deck with spirits and arcane spells
+Icon=Totoro.jpg
+Deck Type=constructed
+[main]
+4 Forest|ISD
+1 Swamp|ISD
+1 Island|ISD
+4 Bayou
+4 Tropical Island
+4 Underground Sea
+4 Jwar Isle Refuge
+4 Thief of Hope
+1 Infernal Kirin
+1 Bounteous Kirin
+1 Cloudhoof Kirin
+4 Long-Forgotten Gohei
+2 Battleground Geist
+3 Sire of the Storm
+3 Kami of the Hunt
+2 Scaled Hulk
+1 Orbweaver Kumo
+1 Thousand-legged Kami
+1 Venerable Kumo
+1 Nightsoil Kami
+1 Kami of Lunacy
+1 Kami of Empty Graves
+1 Gibbering Kami
+1 Forked-Branch Garami
+1 Crawling Filth
+1 Kami of the Tended Garden
+1 Kodama's Reach
+2 Ribbons of the Reikai
+3 Rend Flesh
+1 Waking Nightmare
+[sideboard]

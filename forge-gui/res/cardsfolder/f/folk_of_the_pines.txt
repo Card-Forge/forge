@@ -1,0 +1,6 @@
+Name:Folk of the Pines
+ManaCost:4 G
+Types:Creature Dryad
+PT:2/5
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:{1}{G}: Folk of the Pines gets +1/+0 until end of turn.

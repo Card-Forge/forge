@@ -1,0 +1,5 @@
+Name:Renegade Demon
+ManaCost:3 B B
+Types:Creature Demon
+PT:5/3
+Oracle:

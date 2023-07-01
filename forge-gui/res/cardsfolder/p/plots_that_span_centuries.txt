@@ -1,0 +1,9 @@
+Name:Plots That Span Centuries
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ PlotEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, the next time you would set a scheme in motion, set three schemes in motion instead.
+SVar:PlotEffect:DB$ Effect | Name$ Plots Scheme | Duration$ Permanent | ReplacementEffects$ PlotPower
+SVar:PlotPower:Event$ SetInMotion | ReplaceWith$ PlotRep | Description$ The next time you would set a scheme in motion, set three schemes in motion instead.
+SVar:PlotRep:DB$ SetInMotion | RepeatNum$ 3 | SubAbility$ ExilePlot
+SVar:ExilePlot:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:When you set this scheme in motion, the next time you would set a scheme in motion, set three schemes in motion instead.

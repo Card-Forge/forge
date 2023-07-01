@@ -1,0 +1,6 @@
+Name:Empty-Shrine Kannushi
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from colorsYouCtrl | Description$ CARDNAME has protection from the colors of permanents you control.
+Oracle:Empty-Shrine Kannushi has protection from the colors of permanents you control.

@@ -1,0 +1,8 @@
+Name:Trade Caravan
+ManaCost:W
+Types:Creature Human Nomad
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a currency counter on CARDNAME.
+A:AB$ Untap | Cost$ SubCounter<2/CURRENCY> | ValidTgts$ Land.Basic | TgtPrompt$ Select target basic land | ActivationPhases$ Upkeep | OpponentTurn$ True | SpellDescription$ Untap target basic land. Activate only during an opponent's upkeep.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CURRENCY | CounterNum$ 1
+Oracle:At the beginning of your upkeep, put a currency counter on Trade Caravan.\nRemove two currency counters from Trade Caravan: Untap target basic land. Activate only during an opponent's upkeep.

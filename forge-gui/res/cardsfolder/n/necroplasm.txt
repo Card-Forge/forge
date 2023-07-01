@@ -1,0 +1,13 @@
+Name:Necroplasm
+ManaCost:1 B B
+Types:Creature Ooze
+PT:1/1
+K:Dredge:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your end step, destroy each creature with mana value equal to the number of +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.cmcEQX
+SVar:X:Count$CardCounters.P1P1
+AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+Oracle:At the beginning of your upkeep, put a +1/+1 counter on Necroplasm.\nAt the beginning of your end step, destroy each creature with mana value equal to the number of +1/+1 counters on Necroplasm.\nDredge 2 (If you would draw a card, you may mill two cards instead. If you do, return this card from your graveyard to your hand.)

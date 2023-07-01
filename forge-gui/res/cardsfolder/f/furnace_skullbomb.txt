@@ -1,0 +1,9 @@
+Name:Furnace Skullbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+A:AB$ PutCounter | Cost$ 1 R Sac<1/CARDNAME> | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target Artifact or Creature you control | CounterType$ OIL | CounterNum$ 2 | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Put two oil counters on target artifact or creature you control. Draw a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw
+AI:RemoveDeck:Random
+DeckHas:Color$Red & Ability$Sacrifice|Counters
+Oracle:{1}, Sacrifice Furnace Skullbomb: Draw a card.\n{1}{R}, Sacrifice Furnace Skullbomb: Put two oil counters on target artifact or creature you control. Draw a card. Activate only as a sorcery.

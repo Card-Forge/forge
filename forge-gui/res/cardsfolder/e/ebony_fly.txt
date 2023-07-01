@@ -1,0 +1,10 @@
+Name:Ebony Fly
+ManaCost:2
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ RollDice | Cost$ 4 | Sides$ 6 | ResultSVar$ X | SubAbility$ DBAnimate | SpellDescription$ Roll a d6.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ X | Types$ Artifact,Creature,Insect | Keywords$ Flying | RemoveCardTypes$ True | Optional$ True | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, you may have CARDNAME become an X/X Insect artifact creature with flying, where X is the result.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | KW$ Flying
+Oracle:Ebony Fly enters the battlefield tapped.\n{T}: Add {C}.\n{4}: Roll a d6. Until end of turn, you may have Ebony Fly become an X/X Insect artifact creature with flying, where X is the result.\nWhenever Ebony Fly attacks, another target attacking creature gains flying until end of turn.

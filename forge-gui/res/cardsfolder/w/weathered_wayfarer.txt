@@ -1,0 +1,8 @@
+Name:Weathered Wayfarer
+ManaCost:W
+Types:Creature Human Nomad Cleric
+PT:1/1
+A:AB$ ChangeZone | Cost$ W T | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 1 | CheckSVar$ X | SVarCompare$ GTY | SpellDescription$ Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you.
+SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:{W}, {T}: Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you.

@@ -1,0 +1,10 @@
+Name:Avaricious Dragon
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard your hand.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand
+Oracle:Flying\nAt the beginning of your draw step, draw an additional card.\nAt the beginning of your end step, discard your hand.

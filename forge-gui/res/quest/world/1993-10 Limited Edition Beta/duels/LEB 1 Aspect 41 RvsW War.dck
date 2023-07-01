@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 41 RvW War
+Title=Aspect of War
+Difficulty=easy
+Description=The minotaurs of the Hurloon Mountains are known for their love of battle. They are also known for their hymns to the dead, sung for friend and foe alike. These hymns can last for days, filling the mountain valleys with their low, haunting sounds.
+Icon=Aspect of War.jpg
+Deck Type=constructed
+[Main]
+3 Gauntlet of Might|LEB
+4 Gray Ogre|LEB
+4 Hurloon Minotaur|LEB
+2 Iron Star|LEB
+4 Ironclaw Orcs|LEB
+4 Juggernaut|LEB
+4 Keldon Warlord|LEB
+24 Mountain|LEB|3
+4 Orcish Artillery|LEB
+3 Orcish Oriflamme|LEB
+4 Uthden Troll|LEB

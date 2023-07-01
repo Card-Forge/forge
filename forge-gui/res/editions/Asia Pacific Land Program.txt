@@ -1,0 +1,23 @@
+[metadata]
+Code=PALP
+Date=1998-09-01
+Name=Asia Pacific Land Program
+Type=Promo
+ScryfallCode=PALP
+
+[cards]
+1 C Forest @Pete Venters
+2 C Island @Edward P. Beard, Jr.
+3 C Mountain @Heather Hudson
+4 C Plains @Ron Spears
+5 C Swamp @Edward P. Beard, Jr.
+6 C Forest @Christopher Rush
+7 C Island @Bob Eggleton
+8 C Mountain @Rebecca Guay
+9 C Plains @Colin MacNeil
+10 C Swamp @Ron Spears
+11 C Forest @Edward P. Beard, Jr.
+12 C Island @Rob Alexander
+13 C Mountain @Edward P. Beard, Jr.
+14 C Plains @Rebecca Guay
+15 C Swamp @Ron Spears

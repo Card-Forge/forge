@@ -1,0 +1,9 @@
+Name:Zur the Enchanter
+ManaCost:1 W U B
+Types:Legendary Creature Human Wizard
+PT:1/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME attacks, you may search your library for an enchantment card with mana value 3 or less, put it onto the battlefield, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.cmcLE3 | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Zur the Enchanter attacks, you may search your library for an enchantment card with mana value 3 or less, put it onto the battlefield, then shuffle.

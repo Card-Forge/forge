@@ -1,0 +1,6 @@
+Name:Weapons Trainer
+ManaCost:R W
+Types:Creature Human Soldier Ally
+PT:3/2
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | IsPresent$ Card.Equipment+YouCtrl | Description$ Other creatures you control get +1/+0 as long as you control an Equipment.
+Oracle:Other creatures you control get +1/+0 as long as you control an Equipment.

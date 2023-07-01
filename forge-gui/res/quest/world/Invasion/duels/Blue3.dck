@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Faerie Sqadron
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Monoblue deck
+Deck Type=constructed
+Name=Blue3
+[Main]
+4 Distorting Wake|INV
+4 Exclude|INV
+4 Fact or Fiction|INV
+4 Faerie Squadron|INV
+8 Island|INV|1
+7 Island|INV|2
+5 Island|INV|3
+4 Island|INV|4
+4 Repulse|INV
+2 Rushing River|PLS
+4 Shoreline Raider|INV
+4 Sky Weaver|INV
+4 Wash Out|INV
+2 Zanam Djinn|INV

@@ -1,0 +1,8 @@
+Name:Dawning Purist
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+K:Morph:1 W
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment.ControlledBy TriggeredTarget | TgtPrompt$ Select target enchantment damaged player controls
+Oracle:Whenever Dawning Purist deals combat damage to a player, you may destroy target enchantment that player controls.\nMorph {1}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -1,0 +1,6 @@
+Name:Guma
+ManaCost:2 R
+Types:Creature Cat
+PT:2/2
+K:Protection from blue
+Oracle:Protection from blue

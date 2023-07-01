@@ -1,0 +1,8 @@
+Name:Relic Runner
+ManaCost:1 U
+Types:Creature Human Rogue
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked if you've cast a historic spell this turn. (Artifacts, legendaries, and Sagas are historic.)
+SVar:X:Count$ThisTurnCast_Card.Historic+YouCtrl
+DeckHints:Type$Artifact|Legendary|Saga
+Oracle:Relic Runner can't be blocked if you've cast a historic spell this turn. (Artifacts, legendaries, and Sagas are historic.)

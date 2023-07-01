@@ -1,0 +1,8 @@
+Name:The Red Terror
+ManaCost:3 R
+Types:Legendary Creature Tyranid
+PT:4/3
+T:Mode$ DamageDealtOnce | TriggerZones$ Battlefield | ValidSource$ Card.RedSource+YouCtrl | ValidTarget$ Player,Permanent | Execute$ TrigPutCounter | TriggerDescription$ Advanced Species — Whenever a red source you control deals damage to one or more permanents and/or players, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Advanced Species — Whenever a red source you control deals damage to one or more permanents and/or players, put a +1/+1 counter on The Red Terror.

@@ -1,0 +1,8 @@
+Name:Roving Harper
+ManaCost:2 W
+Types:Creature Elf Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Elf
+Oracle:When Roving Harper enters the battlefield, draw a card.

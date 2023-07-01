@@ -1,0 +1,7 @@
+Name:Narwhal
+ManaCost:2 U U
+Types:Creature Whale
+PT:2/2
+K:First Strike
+K:Protection from red
+Oracle:First strike, protection from red

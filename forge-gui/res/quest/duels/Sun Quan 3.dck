@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sun Quan 3
+Title=Sun Quan
+Difficulty=hard
+Description=WUR Horsemanship deck with Rolling Earthquake
+Icon=Sun Quan.jpg
+Deck Type=constructed
+[main]
+1 Plateau
+4 Flooded Strand
+1 Arid Mesa
+1 Island|M11
+1 Plains|M11
+4 Tundra
+4 Volcanic Island
+4 Scalding Tarn
+1 Mox Ruby
+1 Mox Sapphire
+1 Mox Pearl
+4 Rolling Earthquake
+1 Guan Yu, Sainted Warrior
+1 Lu Bu, Master-at-Arms
+2 Lu Meng, Wu General
+2 Lu Xun, Scholar General
+4 Shu Cavalry
+2 Sun Ce, Young Conquerer
+4 Wu Elite Cavalry
+4 Wu Light Cavalry
+1 Zhang Fei, Fierce Warrior
+1 Zhao Zilong, Tiger General
+1 Aurification
+1 Glory of Warfare
+1 Bladed Bracers
+1 Bonesplitter
+1 Butcher's Cleaver
+1 Silver-Inlaid Dagger
+1 Specter's Shroud
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow
+1 Lightning Helix
+1 Cessation
+[sideboard]

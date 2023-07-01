@@ -1,0 +1,7 @@
+Name:Forsaken Drifters
+ManaCost:3 B
+Types:Creature Zombie
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, mill four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
+Oracle:When Forsaken Drifters dies, mill four cards.

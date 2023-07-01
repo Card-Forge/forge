@@ -1,0 +1,6 @@
+Name:Behemoth Sledge
+ManaCost:1 G W
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample & Lifelink | Description$ Equipped creature gets +2/+2 and has trample and lifelink.
+Oracle:Equipped creature gets +2/+2 and has trample and lifelink.\nEquip {3}

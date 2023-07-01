@@ -1,0 +1,7 @@
+[format]
+Name:Standard (PCY)
+Type:Archived
+Subtype:Standard
+Effective:2000-07-01
+Sets:USG, ULG, 6ED, UDS, MMQ, NMS, PCY
+Banned:Fluctuator; Memory Jar; Time Spiral; Tolarian Academy; Windfall

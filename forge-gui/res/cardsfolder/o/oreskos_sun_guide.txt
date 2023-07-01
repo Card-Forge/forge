@@ -1,0 +1,7 @@
+Name:Oreskos Sun Guide
+ManaCost:1 W
+Types:Creature Cat Monk
+PT:2/2
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Inspired — Whenever Oreskos Sun Guide becomes untapped, you gain 2 life.

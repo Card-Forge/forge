@@ -1,0 +1,9 @@
+Name:Heart Sliver
+ManaCost:1 R
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Haste | Description$ All Sliver creatures have haste.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+SVar:AntiBuffedBy:Sliver
+Oracle:All Sliver creatures have haste.

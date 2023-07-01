@@ -1,0 +1,6 @@
+Name:Kami of False Hope
+ManaCost:W
+Types:Creature Spirit
+PT:1/1
+A:AB$ Fog | Cost$ Sac<1/CARDNAME> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+Oracle:Sacrifice Kami of False Hope: Prevent all combat damage that would be dealt this turn.

@@ -1,0 +1,7 @@
+[format]
+Name:Pauper (2020-01-14)
+Type:Archived
+Subtype:Pauper
+Effective:2020-01-14
+Rarities:L, C
+Banned:Arcum's Astrolabe; Daze; Fall from Favor; Gush; Gitaxian Probe

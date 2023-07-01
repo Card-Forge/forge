@@ -1,0 +1,9 @@
+Name:Faithful Disciple
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME dies, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Anointed Procession,Cathars' Crusade,Authority of the Consuls,Sigil of the Empty Throne,All That Glitters,Banishing Light,Divine Visitation,Duelist's Heritage,Glorious Anthem,Gauntlets of Light,Teleportation Circle,Angelic Gift,Spectral Steel,Cleric Class,Angelic Exaltation
+SVar:SacMe:2
+Oracle:Vigilance\nWhen Faithful Disciple dies, draft a card from Faithful Disciple's spellbook.

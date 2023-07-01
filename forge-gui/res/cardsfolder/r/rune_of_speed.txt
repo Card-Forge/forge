@@ -1,0 +1,11 @@
+Name:Rune of Speed
+ManaCost:1 R
+Types:Enchantment Aura Rune
+K:Enchant permanent
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Permanent | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ As long as enchanted permanent is a creature, it gets +1/+0 and has haste.
+S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneSpeedST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+0 and has haste."
+SVar:RuneSpeedST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ Equipped creature gets +1/+0 and has haste.
+Oracle:Enchant permanent\nWhen Rune of Speed enters the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it gets +1/+0 and has haste.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+0 and has haste."

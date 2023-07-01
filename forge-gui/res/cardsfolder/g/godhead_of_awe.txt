@@ -1,0 +1,8 @@
+Name:Godhead of Awe
+ManaCost:WU WU WU WU WU
+Types:Creature Spirit Avatar
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Other | SetPower$ 1 | SetToughness$ 1 | Description$ Other creatures have base power and toughness 1/1.
+SVar:NonStackingEffect:True
+Oracle:Flying\nOther creatures have base power and toughness 1/1.

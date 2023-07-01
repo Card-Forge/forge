@@ -1,0 +1,7 @@
+Name:Scandalmonger
+ManaCost:3 B
+Types:Creature Boar Monger
+PT:3/3
+A:AB$ Discard | Cost$ 2 | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | Activator$ Player | IsCurse$ True | SpellDescription$ Target player discards a card. Any player may activate this ability but only as a sorcery.
+AI:RemoveDeck:Random
+Oracle:{2}: Target player discards a card. Any player may activate this ability but only as a sorcery.

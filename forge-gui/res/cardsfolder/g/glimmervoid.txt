@@ -1,0 +1,9 @@
+Name:Glimmervoid
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Artifact.YouCtrl
+AI:RemoveDeck:Random
+Oracle:At the beginning of the end step, if you control no artifacts, sacrifice Glimmervoid.\n{T}: Add one mana of any color.

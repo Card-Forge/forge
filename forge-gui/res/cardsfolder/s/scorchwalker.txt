@@ -1,0 +1,6 @@
+Name:Scorchwalker
+ManaCost:3 R
+Types:Creature Elemental
+PT:5/1
+A:AB$ Pump | Cost$ 1 R R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +5 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +5/+1 until end of turn.
+Oracle:Bloodrush — {1}{R}{R}, Discard Scorchwalker: Target attacking creature gets +5/+1 until end of turn.

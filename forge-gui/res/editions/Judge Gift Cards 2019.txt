@@ -1,0 +1,16 @@
+[metadata]
+Code=J19
+Date=2019-04-10
+Name=Judge Gift Cards 2019
+Type=Promo
+ScryfallCode=J19
+
+[cards]
+1 M Mirri's Guile @Brom
+2 M Sliver Legion @Lius Lasahido
+3 M Mox Opal @Volkan Baǵa
+4 M Isolated Watchtower @Alexander Forssberg
+5 M Monastery Mentor @Anastasia Ovchinnikova
+6 R Yuriko, the Tiger's Shadow @Yongjae Choi
+7 R Chalice of the Void @Seb McKinnon
+8 R Reflecting Pool @Peter Mohrbacher

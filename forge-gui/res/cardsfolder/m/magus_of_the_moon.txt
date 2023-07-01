@@ -1,0 +1,7 @@
+Name:Magus of the Moon
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | Description$ Nonbasic lands are Mountains.
+AI:RemoveDeck:Random
+Oracle:Nonbasic lands are Mountains.

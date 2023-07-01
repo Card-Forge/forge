@@ -1,0 +1,10 @@
+Name:Vona, Butcher of Magan
+ManaCost:3 W B
+Types:Legendary Creature Vampire Knight
+PT:4/4
+K:Vigilance
+K:Lifelink
+A:AB$ Destroy | Cost$ T PayLife<7> | PlayerTurn$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target nonland permanent. Activate only during your turn.
+DeckHas:Ability$LifeGain
+AI:RemoveDeck:Random
+Oracle:Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate only during your turn.

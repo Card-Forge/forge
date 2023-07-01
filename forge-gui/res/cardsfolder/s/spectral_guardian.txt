@@ -1,0 +1,6 @@
+Name:Spectral Guardian
+ManaCost:2 W W
+Types:Creature Spirit
+PT:2/3
+S:Mode$ Continuous | Affected$ Artifact.nonCreature | AddKeyword$ Shroud | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, noncreature artifacts have shroud. (They can't be the targets of spells or abilities.)
+Oracle:As long as Spectral Guardian is untapped, noncreature artifacts have shroud. (They can't be the targets of spells or abilities.)

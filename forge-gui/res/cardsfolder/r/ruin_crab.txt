@@ -1,0 +1,7 @@
+Name:Ruin Crab
+ManaCost:U
+Types:Creature Crab
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, each opponent mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player.Opponent
+Oracle:Landfall — Whenever a land enters the battlefield under your control, each opponent mills three cards. (To mill a card, a player puts the top card of their library into their graveyard.)

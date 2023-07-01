@@ -1,0 +1,9 @@
+Name:Genestealer Locus
+ManaCost:3 U
+Types:Creature Tyranid Human
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.
+SVar:TrigDebuff:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ -1
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks one of your opponents, it gets +0/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumDef$ +1
+Oracle:Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.\nWhenever a creature attacks one of your opponents, it gets +0/+1 until end of turn.

@@ -1,0 +1,9 @@
+Name:Blood Petal Celebrant
+ManaCost:1 R
+Types:Creature Vampire
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice & Type$Blood
+Oracle:Blood Petal Celebrant has first strike as long as it's attacking.\nWhen Blood Petal Celebrant dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

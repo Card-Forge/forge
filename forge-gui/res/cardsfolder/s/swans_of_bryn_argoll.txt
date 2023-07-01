@@ -1,0 +1,9 @@
+Name:Swans of Bryn Argoll
+ManaCost:2 WU WU
+Types:Creature Bird Spirit
+PT:4/3
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBDraw | PreventionEffect$ True | ExecuteMode$ PerSource | Description$ If a source would deal damage to CARDNAME, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ ReplacedSourceController
+SVar:X:ReplaceCount$DamageAmount
+Oracle:Flying\nIf a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.

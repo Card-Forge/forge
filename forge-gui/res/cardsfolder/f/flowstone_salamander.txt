@@ -1,0 +1,6 @@
+Name:Flowstone Salamander
+ManaCost:3 R R
+Types:Creature Salamander
+PT:3/4
+A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.blockingSource | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature blocking it.
+Oracle:{R}: Flowstone Salamander deals 1 damage to target creature blocking it.

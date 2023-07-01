@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 53 GvB Growth
+Title=Aspect of Growth
+Difficulty=easy
+Description=After years of training, the Druid becomes the one with nature, drawing power from the land and returning it when needed.
+Icon=Aspect of Growth.jpg
+Deck Type=constructed
+[Main]
+1 Fastbond|LEB
+24 Forest|LEB|3
+4 Fungusaur|LEB
+3 Giant Growth|LEB
+2 Instill Energy|LEB
+4 Ironroot Treefolk|LEB
+3 Kudzu|LEB
+4 Ley Druid|LEB
+3 Regrowth|LEB
+2 The Hive|LEB
+4 Wall of Brambles|LEB
+4 Wall of Wood|LEB
+2 Wooden Sphere|LEB

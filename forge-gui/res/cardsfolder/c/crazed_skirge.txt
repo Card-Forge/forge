@@ -1,0 +1,7 @@
+Name:Crazed Skirge
+ManaCost:3 B
+Types:Creature Phyrexian Imp
+PT:2/2
+K:Flying
+K:Haste
+Oracle:Flying, haste

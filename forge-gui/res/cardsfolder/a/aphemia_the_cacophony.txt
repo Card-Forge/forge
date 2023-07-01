@@ -1,0 +1,9 @@
+Name:Aphemia, the Cacophony
+ManaCost:1 B
+Types:Legendary Enchantment Creature Harpy
+PT:2/1
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBToken | TriggerDescription$ At the beginning of your end step, you may exile an enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
+SVar:DBToken:AB$ Token | Cost$ ExileFromGrave<1/Enchantment> | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
+DeckHas:Ability$Token
+Oracle:Flying\nAt the beginning of your end step, you may exile an enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.

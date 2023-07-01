@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Turnabout
+Description=They'll never see it coming. Your tricky creatures can untap at a whim to create combat superiority or machine-gun combos. Use their untap abilities repeatedly to build up immense creatures or swarms of tokens—and leave your opponents wondering what hit them.
+Deck Type=constructed
+Set=SHM
+Image=turnabout.jpg
+[main]
+1 Barrenton Medic|SHM
+2 Devoted Druid|SHM
+1 Resplendent Mentor|SHM
+1 Elvish Hexhunter|SHM
+2 Old Ghastbark|SHM
+1 Sapseep Forest|SHM
+1 Revelsong Horn|SHM
+2 Pili-Pala|SHM
+1 Rhys the Redeemed|SHM
+3 Safehold Sentry|SHM
+1 Wilt-Leaf Liege|SHM
+2 Pale Wayfarer|SHM
+1 Umbral Mantle|SHM
+1 Wilt-Leaf Cavaliers|SHM
+2 Safehold Duo|SHM
+1 Gloomwidow's Feast|SHM
+1 Seedcradle Witch|SHM
+2 Drove of Elves|SHM
+12 Plains|SHM
+11 Forest|SHM
+2 Gleeful Sabotage|SHM
+1 Dawnglow Infusion|SHM
+1 Shield of the Oversoul|SHM
+3 Presence of Gond|SHM
+2 Mercy Killing|SHM
+1 Barkshell Blessing|SHM
+1 Toil to Renown|SHM
+[sideboard]

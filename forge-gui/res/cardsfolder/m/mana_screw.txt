@@ -1,0 +1,8 @@
+Name:Mana Screw
+ManaCost:1
+Types:Artifact
+A:AB$ FlipACoin | Cost$ 1 | WinSubAbility$ DBMana | SubAbility$ DBAdd0 | InstantSpeed$ True | SpellDescription$ Flip a coin. If you win the flip, add {C}{C}. Activate only as a instant.
+SVar:DBMana:DB$ Mana | Produced$ C | Amount$ 2
+SVar:DBAdd0:DB$ Mana | Produced$ C | Amount$ 0
+AI:RemoveDeck:All
+Oracle:{1}: Flip a coin. If you win the flip, add {C}{C}. Activate only as a instant.

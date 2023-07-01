@@ -1,0 +1,7 @@
+Name:Watchdog
+ManaCost:3
+Types:Artifact Creature Dog
+PT:1/2
+S:Mode$ MustBlock | ValidCreature$ Card.Self | Description$ CARDNAME blocks each combat if able.
+S:Mode$ Continuous | Affected$ Creature.attackingYou | AddPower$ -1 | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all creatures attacking you get -1/-0.
+Oracle:Watchdog blocks each combat if able.\nAs long as Watchdog is untapped, all creatures attacking you get -1/-0.

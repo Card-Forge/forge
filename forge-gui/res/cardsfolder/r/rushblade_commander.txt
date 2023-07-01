@@ -1,0 +1,8 @@
+Name:Rushblade Commander
+ManaCost:B R
+Types:Creature Azra Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Warrior.YourTeamCtrl | AddKeyword$ Haste | Description$ Warriors your team controls have haste.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Warrior
+Oracle:Warriors your team controls have haste.

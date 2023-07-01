@@ -1,0 +1,8 @@
+Name:Cyclops of Eternal Fury
+ManaCost:4 R R
+Types:Enchantment Creature Cyclops
+PT:5/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+SVar:BuffedBy:Creature
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have haste.

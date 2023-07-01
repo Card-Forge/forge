@@ -1,0 +1,8 @@
+Name:Academic Dispute
+ManaCost:R
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ MustBlock | SubAbility$ DBPump | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Reach | Optional$ True | OptionQuestion$ Do you want TARGETS to gain reach? | SubAbility$ DBLearn | StackDescription$ SpellDescription | SpellDescription$ You may have it gain reach until end of turn.
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+Oracle:Target creature blocks this turn if able. You may have it gain reach until end of turn.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

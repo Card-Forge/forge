@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=LEG 3 Strategy: Pride & Prejudice
+Title=Pride & Prejudice
+Difficulty=hard
+Description="O! call back yesterday, bid time return." -William Shakespeare, King Richard the Second
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Boomerang|LEG
+4 Bronze Horse|LEG
+4 Force Spike|LEG
+4 Invoke Prejudice|LEG
+24 Island|LEB|2
+4 Mana Drain|LEG
+4 Marble Priest|LEG
+4 Remove Soul|LEG
+4 Serpent Generator|LEG
+4 Triassic Egg|LEG

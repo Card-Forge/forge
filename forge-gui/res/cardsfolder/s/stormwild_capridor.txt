@@ -1,0 +1,10 @@
+Name:Stormwild Capridor
+ManaCost:2 W
+Types:Creature Bird Goat
+PT:1/3
+K:Flying
+R:Event$ DamageDone | IsCombat$ False | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If noncombat damage would be dealt to CARDNAME, prevent that damage. Put a +1/+1 counter on CARDNAME for each 1 damage prevented this way.
+SVar:Counters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Defined$ Self
+SVar:X:ReplaceCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Flying\nIf noncombat damage would be dealt to Stormwild Capridor, prevent that damage. Put a +1/+1 counter on Stormwild Capridor for each 1 damage prevented this way.

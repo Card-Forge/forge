@@ -1,0 +1,16 @@
+Name:Chosen of Markov
+ManaCost:2 B
+Types:Creature Human
+PT:2/2
+A:AB$ SetState | Cost$ T tapXType<1/Vampire> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+Oracle:{T}, Tap an untapped Vampire you control: Transform Chosen of Markov.
+
+ALTERNATE
+
+Name:Markov's Servant
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire
+PT:4/4
+Oracle:

@@ -1,0 +1,7 @@
+Name:Thran Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & First Strike & Trample | Description$ As long as CARDNAME is enchanted, it gets +2/+2 and has flying, first strike, and trample.
+SVar:EnchantMe:Once
+Oracle:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.

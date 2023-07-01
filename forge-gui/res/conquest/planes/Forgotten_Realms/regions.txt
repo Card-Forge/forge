@@ -1,0 +1,5 @@
+Name:Cave of the Frost Dragon|Art:Cave of the Frost Dragon|Colors:W
+Name:Hall of Storm Giants|Art:Hall of Storm Giants|Colors:U
+Name:Den of the Bugbear|Art:Den of the Bugbear|Colors:R
+Name:Lair of the Hydra|Art:Lair of the Hydra|Colors:G
+Name:Hive of the Eye Tyrant|Art:Hive of the Eye Tyrant|Colors:B

@@ -1,0 +1,5 @@
+Name:Ghostly Prison
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You | Cost$ 2 | Description$ Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
+Oracle:Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.

@@ -1,0 +1,7 @@
+Name:Hand of Honor
+ManaCost:W W
+Types:Creature Human Samurai
+PT:2/2
+K:Protection from black
+K:Bushido:1
+Oracle:Protection from black\nBushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

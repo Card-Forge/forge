@@ -1,0 +1,8 @@
+Name:Oona's Gatewarden
+ManaCost:UB
+Types:Creature Faerie Soldier
+PT:2/1
+K:Flying
+K:Defender
+K:Wither
+Oracle:Defender, flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)

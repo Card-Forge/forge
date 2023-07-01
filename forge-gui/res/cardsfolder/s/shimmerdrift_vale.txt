@@ -1,0 +1,8 @@
+Name:Shimmerdrift Vale
+ManaCost:no cost
+Types:Snow Land
+K:CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+Oracle:Shimmerdrift Vale enters the battlefield tapped.\nAs Shimmerdrift Vale enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color.

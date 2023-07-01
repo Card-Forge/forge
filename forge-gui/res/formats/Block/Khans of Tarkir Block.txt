@@ -1,0 +1,6 @@
+[format]
+Name:Khans of Tarkir Block
+Type:Archived
+Subtype:Block
+Order:116
+Sets:DTK, FRF, KTK

@@ -1,0 +1,13 @@
+[metadata]
+Code=PISD
+Date=2011-09-24
+Name=Innistrad Promos
+Type=Promo
+ScryfallCode=PISD
+
+[cards]
+13 R Elite Inquisitor @Igor Kieryluk
+64★ R Ludevic's Test Subject @Karl Kopinski
+97 U Diregraf Ghoul @Austin Hsu
+140 R Devil's Play @Raymond Swanland
+193★ R Mayor of Avabruck @Ryan Pancoast

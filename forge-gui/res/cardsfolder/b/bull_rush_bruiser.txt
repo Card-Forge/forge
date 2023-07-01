@@ -1,0 +1,8 @@
+Name:Bull-Rush Bruiser
+ManaCost:3 R
+Types:Creature Minotaur Warrior
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Warrior.Other+YourTeamCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, if your team controls another Warrior, CARDNAME gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike | Defined$ Self
+SVar:BuffedBy:Warrior
+Oracle:Whenever Bull-Rush Bruiser attacks, if your team controls another Warrior, Bull-Rush Bruiser gains first strike until end of turn.

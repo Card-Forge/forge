@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 4R
+Title=The Color Red
+Difficulty=Hard
+Description="From the snowy slopes of Kaelor,/ To the canyons of Bandu,/ We drink and fight and feast and die/ As we were born to do." -Balduvian tavern song
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Balduvian Barbarians|ICE
+4 Balduvian Horde|ALL
+1 Dwarven Armory|ICE
+2 Gorilla Shaman|ALL|1
+2 Gorilla Shaman|ALL|2
+2 Guerrilla Tactics|ALL|1
+2 Guerrilla Tactics|ALL|2
+4 Incinerate|ICE
+24 Mountain|ICE|2
+4 Orcish Cannoneers|ICE
+4 Pillage|ALL
+3 Pyroclasm|ICE
+2 Storm Shaman|ALL|1
+2 Storm Shaman|ALL|2

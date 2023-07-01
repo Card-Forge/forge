@@ -1,0 +1,9 @@
+Name:Mentor's Guidance
+ManaCost:2 U
+Types:Sorcery
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionPresent$ Planeswalker.YouCtrl,Cleric.YouCtrl,Druid.YouCtrl,Shaman.YouCtrl,Warlock.YouCtrl,Wizard.YouCtrl | ConditionCompare$ GE1
+A:SP$ Scry | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1,
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ then draw a card.
+DeckHints:Type$Planeswalker|Cleric|Druid|Shaman|Warlock|Wizard
+Oracle:When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard.\nScry 1, then draw a card.

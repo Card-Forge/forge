@@ -1,0 +1,5 @@
+Name:Shu Foot Soldiers
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/3
+Oracle:

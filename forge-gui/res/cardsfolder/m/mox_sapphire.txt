@@ -1,0 +1,6 @@
+Name:Mox Sapphire
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+SVar:PlayMain1:TRUE
+Oracle:{T}: Add {U}.

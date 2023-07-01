@@ -1,0 +1,8 @@
+Name:Steelclaw Lance
+ManaCost:B R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+K:Equip:1:Creature.Knight+YouCtrl:Knight
+K:Equip:3
+DeckHints:Type$Knight
+Oracle:Equipped creature gets +2/+2.\nEquip Knight {1}\nEquip {3}

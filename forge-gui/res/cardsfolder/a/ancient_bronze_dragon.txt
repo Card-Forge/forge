@@ -1,0 +1,12 @@
+Name:Ancient Bronze Dragon
+ManaCost:5 G G
+Types:Creature Elder Dragon
+PT:7/7
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRoll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, roll a d20. When you do, put X +1/+1 counters on each of up to two target creatures, where X is the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ DBImmediateTrigPutCounter
+SVar:DBImmediateTrigPutCounter:DB$ ImmediateTrigger | Execute$ TrigPutCounter | RememberSVarAmount$ Result | TriggerDescription$ When you do, put X +1/+1 counters on each of up to two target creatures, where X is the result.
+SVar:TrigPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$TriggerRememberAmount
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever Ancient Bronze Dragon deals combat damage to a player, roll a d20. When you do, put X +1/+1 counters on each of up to two target creatures, where X is the result.

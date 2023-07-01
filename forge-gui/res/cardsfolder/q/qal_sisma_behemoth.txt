@@ -1,0 +1,7 @@
+Name:Qal Sisma Behemoth
+ManaCost:2 R
+Types:Creature Ogre Warrior
+PT:5/5
+S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ 2 | Description$ CARDNAME can't attack or block unless you pay {2}.
+S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ 2
+Oracle:Qal Sisma Behemoth can't attack or block unless you pay {2}.

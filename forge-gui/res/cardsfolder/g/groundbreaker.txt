@@ -1,0 +1,11 @@
+Name:Groundbreaker
+ManaCost:G G G
+Types:Creature Elemental
+PT:6/1
+K:Haste
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste\nAt the beginning of the end step, sacrifice Groundbreaker.

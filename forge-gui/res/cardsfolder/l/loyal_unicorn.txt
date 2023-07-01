@@ -1,0 +1,12 @@
+Name:Loyal Unicorn
+ManaCost:3 W
+Types:Creature Unicorn
+PT:3/4
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | TriggerZones$ Battlefield | Execute$ PreventEffect | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, prevent all combat damage that would be dealt to creatures you control this turn.
+SVar:PreventEffect:DB$ Effect | ReplacementEffects$ RPrevent | ValidTgts$ You | SubAbility$ DBPumpAll
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all combat damage that would be dealt to creatures you control this turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | KW$ Vigilance
+SVar:BuffedBy:Card.IsCommander
+AI:RemoveDeck:Random
+Oracle:Vigilance\nLieutenant — At the beginning of combat on your turn, if you control your commander, prevent all combat damage that would be dealt to creatures you control this turn. Other creatures you control gain vigilance until end of turn.

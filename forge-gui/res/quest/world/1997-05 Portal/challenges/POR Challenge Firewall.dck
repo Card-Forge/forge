@@ -1,0 +1,19 @@
+[quest]
+id=POR Challenge: Firewall
+OpponentName=The Firewall
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=Wall of Granite|Wall of Granite|Wall of Granite|Wall of Granite
+[metadata]
+Name=POR Challenge: Firewall
+Title=Firewall
+Difficulty=medium
+Description=The wisest man builds his house behind the rock.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+20 Fire Tempest|POR
+40 Mountain|POR|1

@@ -1,0 +1,6 @@
+Name:Bearscape
+ManaCost:1 G G
+Types:Enchantment
+A:AB$ Token | Cost$ 1 G ExileFromGrave<2/Card> | TokenAmount$ 1 | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create a 2/2 green Bear creature token.
+SVar:NonStackingEffect:True
+Oracle:{1}{G}, Exile two cards from your graveyard: Create a 2/2 green Bear creature token.

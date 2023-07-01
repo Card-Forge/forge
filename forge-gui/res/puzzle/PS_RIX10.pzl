@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan Sunset Puzzle
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/04/057.-RIX003-April-9.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Flame Lash;Flame Lash;Expel from Orazca;Maverick Thopterist;Hazoret the Fervent
+humanlibrary=
+humangraveyard=
+humanbattlefield=Storm the Vault;Tilonalli's Summoner;Goring Ceratops;Growing Rites of Itlimoc|Transformed;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal;Scattered Groves;Scattered Groves
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Desperate Castaways;Desperate Castaways;Desperate Castaways;Desperate Castaways
+aiexile=
+aicommand=

@@ -1,0 +1,38 @@
+[quest]
+id=5008
+OpponentName=Hera
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=3 rares;33% 1 black rare;33% 1 red rare;33% Mutavault|MOR
+Credit Reward=250
+HumanExtras=
+AIExtras=Mutavault
+
+[metadata]
+Name=quest5008
+Title=Hera
+Difficulty=hard
+Description=You killed as many as you could, but the goblins just kept coming!
+Icon=Hera.jpg
+Deck Type=constructed
+
+[Main]
+4 Auntie's Hovel|LRW
+4 Boggart Ram-Gang|SHM
+4 Goblin King|10E
+4 Hearthfire Hobgoblin|EVE
+4 Mad Auntie|LRW
+4 Mogg Fanatic|10E
+8 Mountain|LRW
+3 Mutavault|MOR
+4 Prickly Boggart|MOR
+4 Raging Goblin|10E
+3 Rise of the Hobgoblins|EVE
+3 Squee, Goblin Nabob|10E
+10 Swamp|LRW
+1 Wort, Boggart Auntie|LRW
+
+[sideboard]
+[planes]
+[schemes]

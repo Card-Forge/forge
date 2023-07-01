@@ -1,0 +1,9 @@
+Name:Roving Keep
+ManaCost:7
+Types:Artifact Creature Wall
+PT:5/7
+K:Defender
+A:AB$ Pump | Cost$ 7 | NumAtt$ +2 | KW$ Trample | SubAbility$ DBEffect | SpellDescription$ CARDNAME gets +2/+0 and gains trample until end of turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CanAttack | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ It can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+Oracle:Defender\n{7}: Roving Keep gets +2/+0 and gains trample until end of turn. It can attack this turn as though it didn't have defender.

@@ -1,0 +1,6 @@
+Name:Accorder's Shield
+ManaCost:0
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+3 and has vigilance.
+Oracle:Equipped creature gets +0/+3 and has vigilance. (Attacking doesn't cause it to tap.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

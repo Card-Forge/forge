@@ -1,0 +1,11 @@
+Name:Zephyr Scribe
+ManaCost:2 U
+Types:Creature Human Monk
+PT:2/1
+A:AB$ Draw | Cost$ U T | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a noncreature spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:BuffedBy:Card.nonLand+nonCreature
+AI:RemoveDeck:All
+Oracle:{U}, {T}: Draw a card, then discard a card.\nWhenever you cast a noncreature spell, untap Zephyr Scribe.

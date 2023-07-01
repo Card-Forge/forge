@@ -1,0 +1,28 @@
+[quest]
+id=THS Challenge: Archetypes
+OpponentName=The Archetypes
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Temple of Triumph|Nykthos, Shrine to Nyx
+HumanExtras=
+[metadata]
+Name=THS Challenge: Archetypes
+Title=The Archetypes
+Difficulty=medium
+Description=Typical.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+8 Archetype of Aggression|BNG
+8 Archetype of Courage|BNG
+8 Archetype of Endurance|BNG
+8 Archetype of Finality|BNG
+8 Archetype of Imagination|BNG
+4 Forest|THS|3
+4 Island|THS|3
+4 Mountain|THS|3
+4 Plains|THS|3
+4 Swamp|THS|3

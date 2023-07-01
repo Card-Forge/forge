@@ -1,0 +1,9 @@
+Name:Spiteful Visions
+ManaCost:2 BR BR
+Types:Enchantment
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+T:Mode$ Drawn | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player draws a card, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardOwner | NumDmg$ 1
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's draw step, that player draws an additional card.\nWhenever a player draws a card, Spiteful Visions deals 1 damage to that player.

@@ -1,0 +1,7 @@
+Name:Signal Pest
+ManaCost:1
+Types:Artifact Creature Pest
+PT:0/1
+K:Battle cry
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Description$ CARDNAME can't be blocked except by creatures with flying or reach.
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nSignal Pest can't be blocked except by creatures with flying or reach.

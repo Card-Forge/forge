@@ -1,0 +1,6 @@
+Name:Moonrager's Slash
+ManaCost:2 R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Condition$ Night | Description$ This spell costs {2} less to cast if it's night.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:This spell costs {2} less to cast if it's night.\nMoonrager's Slash deals 3 damage to any target.

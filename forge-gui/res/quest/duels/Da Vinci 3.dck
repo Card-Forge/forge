@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Da Vinci 3
+Title=Da Vinci
+Difficulty=hard
+Description=Mono B deck with Korlash, Heir to Blackblade, Bad Moon and threat removal
+Icon=Da Vinci.jpg
+Deck Type=constructed
+[main]
+23 Swamp|NPH
+1 Mox Jet
+4 Korlash, Heir to Blackblade
+1 Ascendant Evincar
+1 Bad Moon
+2 Corrosive Mentor
+1 Hellfire
+2 Corrupt
+2 Phyrexian Obliterator
+1 Mind Sludge
+1 Nightmare
+1 Tendrils of Corruption
+1 Halo Hunter
+1 Massacre Wurm
+1 Visara the Dreadful
+2 Black Knight
+1 Gatekeeper of Malakir
+1 Dauthi Slayer
+1 Death Stroke
+1 Grasp of Darkness
+1 Hand of Cruelty
+2 Hymn to Tourach
+1 Nantuko Shade
+1 Nether Traitor
+1 Sinkhole
+1 Lashwrithe
+1 Geth's Verdict
+1 Wrench Mind
+1 Dunerider Outlaw
+1 Geralf's Messenger
+[sideboard]

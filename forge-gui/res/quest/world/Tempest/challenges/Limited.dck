@@ -1,0 +1,21 @@
+[quest]
+id=TempestQuest11
+OpponentName=Evil Overlord
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=duplicate card
+Credit Reward=200
+AIExtras=Limited Resources|Plains|Plains|Plains|Swamp|Swamp|Swamp|Swamp
+HumanExtras=
+[metadata]
+Title=Mine, Mine, Mine!
+Icon=Dungeon Crawling White.jpg
+Difficulty=Medium
+Description=This guys seems to be too obsessed with controlling mana sources!
+Deck Type=constructed
+Name=Limited
+[Main]
+20 Manakin|TMP
+20 Plains|TMP
+20 Swamp|TMP

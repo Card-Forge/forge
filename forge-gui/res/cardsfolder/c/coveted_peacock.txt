@@ -1,0 +1,8 @@
+Name:Coveted Peacock
+ManaCost:3 U U
+Types:Creature Bird
+PT:3/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGoad | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may goad target creature defending player controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls.
+Oracle:Flying\nWhenever Coveted Peacock attacks, you may goad target creature defending player controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

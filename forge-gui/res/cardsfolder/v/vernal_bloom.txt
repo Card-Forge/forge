@@ -1,0 +1,7 @@
+Name:Vernal Bloom
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Forest | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Forest is tapped for mana, its controller adds an additional {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredCardController
+AI:RemoveDeck:Random
+Oracle:Whenever a Forest is tapped for mana, its controller adds an additional {G}.

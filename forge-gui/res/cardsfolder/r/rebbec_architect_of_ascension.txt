@@ -1,0 +1,8 @@
+Name:Rebbec, Architect of Ascension
+ManaCost:3 W
+Types:Legendary Creature Human Artificer
+PT:3/4
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Protection from EachCMCAmongDefined | KeywordDefined$ Artifact.YouCtrl | Description$ Artifacts you control have protection from each mana value among artifacts you control.
+DeckNeeds:Type$Artifact
+K:Partner
+Oracle:Artifacts you control have protection from each mana value among artifacts you control.\nPartner (You can have two commanders if both have partner.)

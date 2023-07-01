@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mystique 2
+Title=Mystique
+Difficulty=medium
+Description=UB Milling deck without creatures
+Icon=Mystique.jpg
+Deck Type=constructed
+[main]
+4 Nephalia Drownyard
+4 Pilfered Plans
+4 Underground Sea
+2 Grisly Spectacle
+7 Island
+1 Urborg, Tomb of Yawgmoth
+1 Jace, Memory Adept
+3 Psychic Strike
+4 Drowned Catacomb
+3 Glimpse the Unthinkable
+2 Curse of the Bloody Tome
+4 Forbidden Orchard
+3 Thought Scour
+2 Keening Stone
+1 The Tabernacle at Pendrell Vale
+1 AEther Barrier
+1 Ensnaring Bridge
+1 Weakstone
+1 Cumber Stone
+4 Tainted AEther
+1 Invoke Prejudice
+1 The Abyss
+1 Night of Souls' Betrayal
+1 Pendrell Mists
+1 Sunken Hope
+1 Spreading Plague
+1 Ward of Bones
+[sideboard]

@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Iconic Masters Puzzle
+URL:http://www.possibilitystorm.com/041-iconic-masters-puzzle/
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has eight land cards in their graveyard, and their Knight of the Reliquary has summoning sickness. Assume the remaining cards in your library are all Forests.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=9
+humanhand=Mer-Ek Nightblade|Set:IMA; Hunt the Weak|Set:IMA; Emerge Unscathed|Set:IMA; Crowned Ceratok|Set:IMA; Timberland Guide|Set:IMA;
+humanprecast=
+humangraveyard=
+humanlibrary=Forest; Forest; Forest; Forest; Forest; Forest; Forest; Forest; Forest; Forest;
+humanbattlefield=Spiritmonger|Set:IMA; Chronicler of Heroes|Set:IMA; Kiln Fiend|Set:IMA; Savageborn Hydra|Counters:P1P1=1|Set:IMA; Corpsejack Menace|Set:IMA; Horizon Canopy|Set:IMA; Horizon Canopy|Set:IMA; Rakdos Carnarium|Set:IMA; Rakdos Carnarium|Set:IMA;
+aibattlefield=Ob Nixilis, the Fallen|Counters:P1P1=9|Set:IMA; Blood Baron of Vizkopa|Set:IMA; Knight of the Reliquary|Set:IMA|SummonSick;
+aiprecast=
+aigraveyard=Forest; Forest; Swamp; Swamp; Swamp; Swamp; Plains; Plains;
+ailibrary=
+aiexile=

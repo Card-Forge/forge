@@ -1,0 +1,15 @@
+Name:Zagras, Thief of Heartbeats
+ManaCost:4 B R
+Types:Legendary Creature Vampire Rogue
+PT:4/4
+K:Flying
+K:Deathtouch
+K:Haste
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
+SVar:X:Count$Party
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Deathtouch | Description$ Other creatures you control have deathtouch.
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Planeswalker | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature you control deals combat damage to a planeswalker, destroy that planeswalker.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Warrior|Wizard
+Oracle:This spell costs {1} less to cast for each creature in your party.\nFlying, deathtouch, haste\nOther creatures you control have deathtouch.\nWhenever a creature you control deals combat damage to a planeswalker, destroy that planeswalker.

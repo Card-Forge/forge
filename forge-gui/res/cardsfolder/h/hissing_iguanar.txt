@@ -1,0 +1,7 @@
+Name:Hissing Iguanar
+ManaCost:2 R
+Types:Creature Lizard
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever another creature dies, you may have CARDNAME deal 1 damage to target player or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+Oracle:Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player or planeswalker.

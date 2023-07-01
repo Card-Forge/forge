@@ -1,0 +1,10 @@
+Name:Zareth San, the Trickster
+ManaCost:3 U B
+Types:Legendary Creature Merfolk Rogue
+PT:4/4
+K:Flash
+A:AB$ ChangeZone | Cost$ 2 U B Return<1/Rogue.unblocked+attacking+YouCtrl/unblocked attacking Rogue you control> | ActivationZone$ Hand | Defined$ Self | Origin$ Hand | Destination$ Battlefield | Tapped$ True | Attacking$ True | SpellDescription$ Put CARDNAME from your hand onto the battlefield tapped and attacking.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainControl | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may put target permanent card from that player's graveyard onto the battlefield under your control.
+SVar:TrigGainControl:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Permanent | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target permanent in opponent's graveyard
+DeckHints:Type$Rogue
+Oracle:Flash\n{2}{U}{B}, Return an unblocked attacking Rogue you control to its owner's hand: Put Zareth San, the Trickster from your hand onto the battlefield tapped and attacking.\nWhenever Zareth San deals combat damage to a player, you may put target permanent card from that player's graveyard onto the battlefield under your control.

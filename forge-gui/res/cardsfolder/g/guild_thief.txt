@@ -1,0 +1,10 @@
+Name:Guild Thief
+ManaCost:1 U
+Types:Creature Orc Rogue
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Effect | PrecostDesc$ Cunning Action — | Cost$ 3 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Whenever Guild Thief deals combat damage to a player, put a +1/+1 counter on it.\nCunning Action — {3}{U}: Guild Thief can't be blocked this turn.

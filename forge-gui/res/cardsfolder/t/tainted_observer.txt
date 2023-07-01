@@ -1,0 +1,10 @@
+Name:Tainted Observer
+ManaCost:1 G U
+Types:Creature Phyrexian Bird
+PT:2/3
+K:Flying
+K:Toxic:1
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever another creature enters the battlefield under your control, you may pay {2}. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:AB$ Proliferate | Cost$ 2
+DeckHas:Ability$Proliferate
+Oracle:Flying\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhenever another creature enters the battlefield under your control, you may pay {2}. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

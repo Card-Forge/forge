@@ -1,0 +1,8 @@
+Name:Blossoming Calm
+ManaCost:W
+Types:Instant
+K:Rebound
+A:SP$ Pump | Defined$ You | KW$ Hexproof | Duration$ UntilYourNextTurn | SubAbility$ DBGainLife | StackDescription$ {p:You} gains hexproof until their next turn. | SpellDescription$ You gain hexproof until your next turn. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:You gain hexproof until your next turn. You gain 2 life.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

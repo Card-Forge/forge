@@ -1,0 +1,8 @@
+Name:Living Plane
+ManaCost:2 G G
+Types:World Enchantment
+S:Mode$ Continuous | Affected$ Land | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | Description$ All lands are 1/1 creatures that are still lands.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckHints:Name$Goblin Sharpshooter
+Oracle:All lands are 1/1 creatures that are still lands.

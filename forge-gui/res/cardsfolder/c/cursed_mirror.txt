@@ -1,0 +1,7 @@
+Name:Cursed Mirror
+ManaCost:2 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature | AddKeywords$ Haste | Duration$ UntilEndOfTurn | SpellDescription$ As CARDNAME enters the battlefield, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste.
+Oracle:{T}: Add {R}.\nAs Cursed Mirror enters the battlefield, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste.

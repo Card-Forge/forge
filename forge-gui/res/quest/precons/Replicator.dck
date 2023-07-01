@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Replicator
+Description=Your opponents will have double the trouble defending against the duplicating creatures of "Replicator". What little more it costs to play these harbingers of doom is well worth the suffering they inflict.
+Deck Type=constructed
+Set=NMS
+Image=replicator.jpg
+[main]
+1 Bog Witch|MMQ
+2 Plague Witch|NMS
+2 Deepwood Drummer|MMQ
+4 Howling Wolf|MMQ
+2 Invigorate|MMQ
+2 Cackling Witch|MMQ
+1 Squallmonger|MMQ
+1 Hunted Wumpus|MMQ
+1 Subterranean Hangar|MMQ
+7 Swamp|MMQ
+17 Forest|MMQ
+2 Seal of Doom|NMS
+2 Stampede Driver|NMS
+4 Skyshroud Sentinel|NMS
+4 Blastoderm|NMS
+1 Coiling Woodworm|NMS
+4 Nesting Wurm|NMS
+1 Saproling Burst|NMS
+1 Saproling Cluster|NMS
+1 Flowstone Armor|NMS
+[sideboard]

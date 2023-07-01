@@ -1,0 +1,6 @@
+Name:Vedalken Orrery
+ManaCost:4
+Types:Artifact
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | Description$ You may cast spells as though they had flash.
+SVar:NonStackingEffect:True
+Oracle:You may cast spells as though they had flash.

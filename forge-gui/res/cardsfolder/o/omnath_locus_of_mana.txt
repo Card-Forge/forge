@@ -1,0 +1,9 @@
+Name:Omnath, Locus of Mana
+ManaCost:2 G
+Types:Legendary Creature Elemental
+PT:1/1
+S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Green | Description$ You don't lose unspent green mana as steps and phases end.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each unspent green mana you have.
+SVar:X:Count$ManaPool:green
+AI:RemoveDeck:All
+Oracle:You don't lose unspent green mana as steps and phases end.\nOmnath, Locus of Mana gets +1/+1 for each unspent green mana you have.

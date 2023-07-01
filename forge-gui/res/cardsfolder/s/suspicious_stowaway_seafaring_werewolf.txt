@@ -1,0 +1,25 @@
+Name:Suspicious Stowaway
+ManaCost:1 U
+Types:Creature Human Rogue Werewolf
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+K:Daybound
+DeckHas:Ability$Discard
+AlternateMode:DoubleFaced
+Oracle:Suspicious Stowaway can't be blocked.\nWhenever Suspicious Stowaway deals combat damage to a player, draw a card, then discard a card.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Seafaring Werewolf
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDrawN | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDrawN:DB$ Draw | NumCards$ 1 | Defined$ You
+K:Nightbound
+Oracle:Seafaring Werewolf can't be blocked.\nWhenever Seafaring Werewolf deals combat damage to a player, draw a card.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

@@ -1,0 +1,7 @@
+Name:Stampeding Horncrest
+ManaCost:4 R
+Types:Creature Dinosaur
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Dinosaur.Other+YouCtrl | Description$ CARDNAME has haste as long as you control another Dinosaur.
+DeckHints:Type$Dinosaur
+Oracle:Stampeding Horncrest has haste as long as you control another Dinosaur.

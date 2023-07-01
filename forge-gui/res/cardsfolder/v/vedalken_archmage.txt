@@ -1,0 +1,9 @@
+Name:Vedalken Archmage
+ManaCost:2 U U
+Types:Creature Vedalken Wizard
+PT:0/2
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact
+Oracle:Whenever you cast an artifact spell, draw a card.

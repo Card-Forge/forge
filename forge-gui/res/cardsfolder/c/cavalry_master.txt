@@ -1,0 +1,8 @@
+Name:Cavalry Master
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:3/3
+K:Flanking
+S:Mode$ Continuous | Affected$ Creature.Other+withFlanking+YouCtrl | AddKeyword$ Flanking | Description$ Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
+SVar:PlayMain1:TRUE
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nOther creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)

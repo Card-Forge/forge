@@ -1,0 +1,7 @@
+Name:Bounty Agent
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Legendary,Artifact.Legendary,Enchantment.Legendary | TgtPrompt$ Select target legendary permanent that's an artifact, creature or enchantment. | SpellDescription$ Destroy target legendary permanent that's an artifact, creature, or enchantment.
+Oracle:Vigilance\n{T}, Sacrifice Bounty Agent: Destroy target legendary permanent that's an artifact, creature, or enchantment.

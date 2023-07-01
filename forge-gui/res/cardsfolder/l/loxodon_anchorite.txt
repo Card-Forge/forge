@@ -1,0 +1,6 @@
+Name:Loxodon Anchorite
+ManaCost:2 W W
+Types:Creature Elephant Cleric
+PT:2/3
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
+Oracle:{T}: Prevent the next 2 damage that would be dealt to any target this turn.

@@ -1,0 +1,9 @@
+Name:Phantasmal Dragon
+ManaCost:2 U U
+Types:Creature Dragon Illusion
+PT:5/5
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+SVar:Targeting:Dies
+Oracle:Flying\nWhen Phantasmal Dragon becomes the target of a spell or ability, sacrifice it.

@@ -1,0 +1,9 @@
+Name:Bounty Hunter
+ManaCost:2 B B
+Types:Creature Human Archer Minion
+PT:2/2
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a bounty counter on target nonblack creature.
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.counters_GE1_BOUNTY | TgtPrompt$ Select target creature with a bounty counter on it | SpellDescription$ Destroy target creature with a bounty counter on it.
+SVar:NonCombatPriority:5
+DeckHints:Name$Chevill, Bane of Monsters|Mathas, Fiend Seeker|Termination Facilitator
+Oracle:{T}: Put a bounty counter on target nonblack creature.\n{T}: Destroy target creature with a bounty counter on it.

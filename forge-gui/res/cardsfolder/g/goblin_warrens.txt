@@ -1,0 +1,9 @@
+Name:Goblin Warrens
+ManaCost:2 R
+Types:Enchantment
+A:AB$ Token | Cost$ 2 R Sac<2/Goblin> | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create three 1/1 red Goblin creature tokens.
+SVar:AIPreference:SacCost$Creature.Goblin+cmcLE1
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckNeeds:Type$Goblin
+Oracle:{2}{R}, Sacrifice two Goblins: Create three 1/1 red Goblin creature tokens.

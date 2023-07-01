@@ -1,0 +1,11 @@
+Name:Danitha, New Benalia's Light
+ManaCost:1 G W
+Types:Legendary Creature Human Knight
+PT:2/2
+K:Vigilance
+K:Trample
+K:Lifelink
+S:Mode$ Continuous | Affected$ Aura.YouOwn,Equipment.YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may cast an Aura or Equipment spell from your graveyard.
+DeckHints:Type$Aura|Equipment
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Vigilance, trample, lifelink\nOnce during each of your turns, you may cast an Aura or Equipment spell from your graveyard.

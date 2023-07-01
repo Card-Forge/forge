@@ -1,0 +1,5 @@
+Name:Tasseled Dromedary
+ManaCost:W
+Types:Creature Camel
+PT:0/4
+Oracle:

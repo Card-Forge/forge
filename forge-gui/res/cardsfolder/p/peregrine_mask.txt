@@ -1,0 +1,7 @@
+Name:Peregrine Mask
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Defender & Flying & First Strike | Description$ Equipped creature has defender, flying, and first strike.
+AI:RemoveDeck:All
+Oracle:Equipped creature has defender, flying, and first strike.\nEquip {2}

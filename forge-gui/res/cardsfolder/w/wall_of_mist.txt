@@ -1,0 +1,6 @@
+Name:Wall of Mist
+ManaCost:1 U
+Types:Creature Wall
+PT:0/5
+K:Defender
+Oracle:Defender

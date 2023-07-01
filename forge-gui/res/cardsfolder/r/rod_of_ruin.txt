@@ -1,0 +1,5 @@
+Name:Rod of Ruin
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{3}, {T}: Rod of Ruin deals 1 damage to any target.

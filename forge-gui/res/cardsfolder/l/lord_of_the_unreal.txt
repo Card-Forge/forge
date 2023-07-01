@@ -1,0 +1,6 @@
+Name:Lord of the Unreal
+ManaCost:U U
+Types:Creature Human Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Illusion+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Hexproof | Description$ Illusion creatures you control get +1/+1 and have hexproof.
+Oracle:Illusion creatures you control get +1/+1 and have hexproof. (They can't be the targets of spells or abilities your opponents control.)

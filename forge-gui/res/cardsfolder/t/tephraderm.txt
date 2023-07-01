@@ -1,0 +1,10 @@
+Name:Tephraderm
+ManaCost:4 R
+Types:Creature Beast
+PT:4/5
+T:Mode$ DamageDone | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ Card.Self | Execute$ TrigDealDamage1 | TriggerDescription$ Whenever a creature deals damage to CARDNAME, CARDNAME deals that much damage to that creature.
+T:Mode$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ Card.Self | Execute$ TrigDealDamage2 | TriggerDescription$ Whenever a spell deals damage to CARDNAME, CARDNAME deals that much damage to that spell's controller.
+SVar:TrigDealDamage1:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X
+SVar:TrigDealDamage2:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.\nWhenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.

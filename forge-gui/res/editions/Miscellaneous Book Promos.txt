@@ -1,0 +1,9 @@
+[metadata]
+Code=PBOOK
+Date=2009-01-27
+Name=Miscellaneous Book Promos
+Type=Promo
+ScryfallCode=PBOOK
+
+[cards]
+1 M Jace Beleren @Aleksi Briclot

@@ -1,0 +1,10 @@
+Name:Huatli's Raptor
+ManaCost:G W
+Types:Creature Dinosaur
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Vigilance\nWhen Huatli's Raptor enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

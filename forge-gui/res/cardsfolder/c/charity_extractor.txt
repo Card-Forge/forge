@@ -1,0 +1,6 @@
+Name:Charity Extractor
+ManaCost:3 B
+Types:Creature Human Knight
+PT:1/5
+K:Lifelink
+Oracle:Lifelink

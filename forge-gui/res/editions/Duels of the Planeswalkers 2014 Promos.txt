@@ -1,0 +1,11 @@
+[metadata]
+Code=PDP14
+Date=2013-01-01
+Name=Duels of the Planeswalkers 2014 Promos
+Type=Promo
+ScryfallCode=PDP14
+
+[cards]
+1 R Bonescythe Sliver @Brad Rigney
+2 R Ogre Battledriver @Matt Stewart
+3 R Scavenging Ooze @Dan Scott

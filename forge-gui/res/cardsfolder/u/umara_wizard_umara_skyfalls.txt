@@ -1,0 +1,18 @@
+Name:Umara Wizard
+ManaCost:4 U
+Types:Creature Merfolk Wizard
+PT:4/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlying | TriggerDescription$ Whenever you cast an instant, sorcery, or Wizard spell, CARDNAME gains flying until end of turn.
+SVar:TrigFlying:DB$ Pump | Defined$ Self | KW$ Flying
+DeckNeeds:Type$Instant|Sorcery|Wizard
+AlternateMode:Modal
+Oracle:Whenever you cast an instant, sorcery, or Wizard spell, Umara Wizard gains flying until end of turn.
+
+ALTERNATE
+
+Name:Umara Skyfalls
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Umara Skyfalls enters the battlefield tapped.\n{T}: Add {U}.

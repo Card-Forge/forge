@@ -1,0 +1,26 @@
+Name:Jadzi, Oracle of Arcavios
+ManaCost:6 U U
+Types:Legendary Creature Human Wizard
+PT:5/5
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, reveal the top card of your library. If it's a nonland card, you may cast it by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield.
+SVar:TrigDig:DB$ PeekAndReveal | RememberRevealed$ True | NoPeek$ True | SubAbility$ CastCard
+SVar:CastCard:DB$ Play | Defined$ Remembered | PlayCost$ 1 | ValidSA$ Spell | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | SubAbility$ MoveLand
+SVar:MoveLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+DeckNeeds:Type$Instant|Sorcery
+AlternateMode:Modal
+Oracle:Discard a card: Return Jadzi, Oracle of Arcavios to its owner's hand.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, reveal the top card of your library. If it's a nonland card, you may cast it by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield.
+
+ALTERNATE
+
+Name:Journey to the Oracle
+ManaCost:2 G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ X | SubAbility$ DBBounce | StackDescription$ {p:You} puts any number of land cards from your hand onto the battlefield. | SpellDescription$ You may put any number of land cards from your hand onto the battlefield.
+SVar:DBBounce:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE8 | StackDescription$ Then if {p:You} controls eight or more lands, they may discard a card. If {p:You} does, return CARDNAME to its owner's hand. | SpellDescription$ Then if you control eight or more lands, you may discard a card. If you do, return CARDNAME to its owner's hand.
+SVar:X:Count$ValidHand Land.YouCtrl
+SVar:NeedsToPlayVar:X GE2
+Oracle:You may put any number of land cards from your hand onto the battlefield. Then if you control eight or more lands, you may discard a card. If you do, return Journey to the Oracle to its owner's hand.

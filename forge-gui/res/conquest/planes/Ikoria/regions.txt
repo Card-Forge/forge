@@ -1,0 +1,5 @@
+Name:Ketria|Art:Ketria Triome|Colors:URG
+Name:Raugrin|Art:Raugrin Triome|Colors:WUR
+Name:Indatha|Art:Indatha Triome|Colors:WBG
+Name:Savai|Art:Savai Triome|Colors:WBR
+Name:Zagoth|Art:Zagoth Triome|Colors:UBG

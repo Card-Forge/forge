@@ -1,0 +1,7 @@
+Name:Elite Javelineer
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks, it deals 1 damage to target attacking creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Choose target attacking creature. | NumDmg$ 1
+Oracle:Whenever Elite Javelineer blocks, it deals 1 damage to target attacking creature.

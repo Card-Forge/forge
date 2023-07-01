@@ -1,0 +1,9 @@
+Name:Covert Technician
+ManaCost:2 U
+Types:Artifact Creature Human Ninja
+PT:2/4
+K:Ninjutsu:1 U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigChange | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may put an artifact card with mana value less than or equal to that damage from your hand onto the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX | ChangeNum$ 1 | SelectPrompt$ Choose an artifact card with mana value less than or equal to that damage
+SVar:X:TriggerCount$DamageAmount
+Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Covert Technician deals combat damage to a player, you may put an artifact card with mana value less than or equal to that damage from your hand onto the battlefield.

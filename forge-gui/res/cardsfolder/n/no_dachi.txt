@@ -1,0 +1,6 @@
+Name:No-Dachi
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ First Strike | Description$ Equipped creature gets +2/+0 and has first strike.
+Oracle:Equipped creature gets +2/+0 and has first strike.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,8 @@
+Name:Boros Challenger
+ManaCost:R W
+Types:Creature Human Soldier
+PT:2/3
+K:Mentor
+A:AB$ Pump | Cost$ 2 R W | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\n{2}{R}{W}: Boros Challenger gets +1/+1 until end of turn.

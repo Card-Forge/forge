@@ -1,0 +1,11 @@
+Name:Purity
+ManaCost:3 W W W
+Types:Creature Elemental Incarnation
+PT:6/6
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ GainLife | PreventionEffect$ True | IsCombat$ False | Description$ If noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way.
+SVar:GainLife:DB$ GainLife | Defined$ ReplacedTarget | LifeAmount$ X
+SVar:X:ReplaceCount$DamageAmount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCardLKICopy
+Oracle:Flying\nIf noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way.\nWhen Purity is put into a graveyard from anywhere, shuffle it into its owner's library.

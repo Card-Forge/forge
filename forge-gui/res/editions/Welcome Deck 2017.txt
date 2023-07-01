@@ -1,0 +1,38 @@
+[metadata]
+Code=W17
+Date=2017-04-15
+Name=Welcome Deck 2017
+Type=Starter
+ScryfallCode=W17
+
+[cards]
+1 C Divine Verdict @Kev Walker
+2 C Glory Seeker @Matt Cavotta
+3 U Serra Angel @Greg Staples
+4 C Standing Troops @Zoltan Boros
+5 U Stormfront Pegasus @rk post
+6 R Victory's Herald @rk post
+7 U Air Elemental @Kev Walker
+8 C Coral Merfolk @rk post
+9 C Drag Under @Tianhua X
+10 C Inspiration @Izzy
+11 C Sleep Paralysis @Josu Hernaiz
+12 R Sphinx of Magosi @James Ryman
+13 C Stealer of Secrets @Michael C. Hayes
+14 C Tricks of the Trade @Steven Belledin
+15 C Bloodhunter Bat @Tomasz Jedruszek
+16 C Certain Death @Kev Walker
+17 R Nightmare @Vance Kovacs
+18 C Raise Dead @Carl Critchlow
+19 U Sengir Vampire @Kev Walker
+20 C Untamed Hunger @Willian Murai
+21 C Falkenrath Reaver @Daarken
+22 R Shivan Dragon @Donato Giancola
+23 C Thundering Giant @Mark Zug
+24 R Garruk's Horde @Steve Prescott
+25 C Oakenform @Wayne Reynolds
+26 C Rabid Bite @Karl Kopinski
+27 C Rootwalla @Roger Raupp
+28 C Stalking Tiger @Terese Nielsen
+29 C Stampeding Rhino @Steven Belledin
+30 U Wing Snare @Daren Bader

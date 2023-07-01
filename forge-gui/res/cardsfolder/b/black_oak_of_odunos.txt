@@ -1,0 +1,7 @@
+Name:Black Oak of Odunos
+ManaCost:2 B
+Types:Creature Zombie Treefolk
+PT:0/5
+K:Defender
+A:AB$ Pump | Cost$ B tapXType<1/Creature.Other> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Defender\n{B}, Tap another untapped creature you control: Black Oak of Odunos gets +1/+1 until end of turn.

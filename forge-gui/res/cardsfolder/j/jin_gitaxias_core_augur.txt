@@ -1,0 +1,9 @@
+Name:Jin-Gitaxias, Core Augur
+ManaCost:8 U U
+Types:Legendary Creature Phyrexian Praetor
+PT:5/4
+K:Flash
+S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -7 | Description$ Each opponent's maximum hand size is reduced by seven.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw seven cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 7
+Oracle:Flash\nAt the beginning of your end step, draw seven cards.\nEach opponent's maximum hand size is reduced by seven.

@@ -1,0 +1,6 @@
+Name:Exultant Skymarcher
+ManaCost:1 W W
+Types:Creature Vampire Soldier
+PT:2/3
+K:Flying
+Oracle:Flying

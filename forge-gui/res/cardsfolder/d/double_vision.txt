@@ -1,0 +1,7 @@
+Name:Double Vision
+ManaCost:3 R R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first instant or sorcery spell each turn, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast your first instant or sorcery spell each turn, copy that spell. You may choose new targets for the copy.

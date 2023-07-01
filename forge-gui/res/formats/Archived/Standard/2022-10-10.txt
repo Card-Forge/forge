@@ -1,0 +1,7 @@
+[format]
+Name:Standard (2022-10-10)
+Type:Archived
+Subtype:Standard
+Effective:2022-10-10
+Sets:MID, VOW, NEO, SNC, DMU
+Banned:The Meathook Massacre

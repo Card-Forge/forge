@@ -1,0 +1,5 @@
+Name:Phyrexian Walker
+ManaCost:0
+Types:Artifact Creature Phyrexian Construct
+PT:0/3
+Oracle:

@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Surprise Attack
+Description=Keep your opponents guessing by concealing your creatures with morph until just the right moment. Use the manifest mechanic to bring cards from the top of your library into the battle. The element of surprise will give you the upper hand.
+Deck Type=constructed
+Set=FRF
+Image=surprise_attack.jpg
+[main]
+1 Arashin War Beast|FRF
+1 Awaken the Bear|KTK
+3 Embodiment of Spring|KTK
+2 Ethereal Ambush|FRF
+6 Forest|FRF|1
+5 Forest|FRF|2
+2 Formless Nurturing|FRF
+2 Glacial Stalker|KTK
+1 Hunt the Weak|FRF
+2 Icefeather Aven|KTK
+6 Island|FRF|1
+6 Island|FRF|2
+1 Monastery Flock|KTK
+1 Nimbus of the Isles|M15
+2 Pine Walker|KTK
+1 Reality Shift|FRF
+1 Roaring Primadox|M15
+1 Scion of Glaciers|KTK
+2 Secret Plans|KTK
+2 Singing Bell Strike|KTK
+1 Temur War Shaman|FRF
+3 Thornwood Falls|FRF
+1 Thousand Winds|KTK
+1 Wall of Frost|M15
+1 Waterwhirl|KTK
+2 Whisk Away|FRF
+1 Woolly Loxodon|KTK
+2 Write into Being|FRF

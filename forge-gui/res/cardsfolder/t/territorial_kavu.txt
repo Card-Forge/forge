@@ -1,0 +1,14 @@
+Name:Territorial Kavu
+ManaCost:R G
+Types:Creature Kavu
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Domain — CARDNAME's power and toughness are each equal to the number of basic land types among lands you control.
+SVar:X:Count$Domain
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDiscard,DBExile
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard a card. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select up to one target card in a graveyard | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile up to one target card from a graveyard.
+DeckHas:Ability$Discard
+Oracle:Domain — Territorial Kavu's power and toughness are each equal to the number of basic land types among lands you control.\nWhenever Territorial Kavu attacks, choose one —\n• Discard a card. If you do, draw a card.\n• Exile up to one target card from a graveyard.

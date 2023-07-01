@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Title=Sun Quan, Lord of Wu
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Blue creature deck
+Deck Type=constructed
+Name=BlueCreatureDeck2
+[Main]
+3 Balance of Power|POR
+2 Cloud Dragon|POR
+4 Cloud Pirates|POR
+4 Cloud Spirit|POR
+3 Counterintelligence|PTK
+10 Island|POR|1
+6 Island|POR|2
+5 Island|POR|3
+3 Island|POR|4
+2 Lu Xun, Scholar General|PTK
+4 Man-o'-War|POR
+2 Phantom Warrior|POR
+4 Prodigal Sorcerer|S00
+1 Sun Ce, Young Conquerer|PTK
+1 Sun Quan, Lord of Wu|PTK
+2 Talas Warrior|PO2
+4 Wu Infantry|PTK

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Balduvia: The Shamans
+Title=The Balduvian Shamans
+Difficulty=easy
+Description="We could feel the Shaman's power, as surely as we felt the storm." -Disa the Restless, journal entry
+
+The mystical Balduvian shamans have strong connections to the land, water and sky.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+4 Balduvian Shaman|ICE
+2 Essence Flare|ICE
+2 False Demise|ALL|2
+4 Illusionary Presence|ICE
+2 Mystic Might|ICE
+4 Sea Spirit|ICE
+2 Snow Devil|ICE
+24 Snow-Covered Island|ICE
+2 Storm Cauldron|ALL
+2 Storm Crow|ALL|1
+2 Storm Crow|ALL|2
+4 Storm Elemental|ALL
+2 Updraft|ICE
+4 Wind Spirit|ICE

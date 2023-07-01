@@ -1,0 +1,24 @@
+Name:Hanweir Battlements
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+A:AB$ Meld | Cost$ 3 R R T | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | Name$ Hanweir, the Writhing Township | Primary$ Hanweir Battlements | Secondary$ Hanweir Garrison | SpellDescription$ If you both own and control CARDNAME and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+SVar:X:Count$Valid Creature.YouCtrl+YouOwn+namedHanweir Garrison
+DeckHints:Name$Hanweir Garrison & Type$Eldrazi|Horror
+DeckHas:Ability$Mana.Colorless|Token
+MeldPair:Hanweir Garrison
+AlternateMode:Meld
+Oracle:{T}: Add {C}.\n{R}, {T}: Target creature gains haste until end of turn.\n{3}{R}{R}, {T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+
+ALTERNATE
+
+Name:Hanweir, the Writhing Township
+ManaCost:no cost
+Types:Legendary Creature Eldrazi Ooze
+PT:7/4
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 3/2 colorless Eldrazi Horror creature tokens that are tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+Oracle:Trample, haste\nWhenever Hanweir, the Writhing Township attacks, create two 3/2 colorless Eldrazi Horror creature tokens that are tapped and attacking.

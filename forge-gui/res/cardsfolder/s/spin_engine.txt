@@ -1,0 +1,8 @@
+Name:Spin Engine
+ManaCost:3
+Types:Artifact Creature Construct
+PT:3/1
+A:AB$ Effect | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ ThisTargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.IsRemembered | Description$ {c:Remembered} can't block EFFECTSOURCE this turn.
+DeckNeeds:Color$Red
+Oracle:{R}: Target creature can't block Spin Engine this turn.

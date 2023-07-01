@@ -1,0 +1,8 @@
+Name:Orgg
+ManaCost:3 R R
+Types:Creature Orgg
+PT:6/6
+K:Trample
+S:Mode$ CantAttack | ValidCard$ Card.Self | IfDefenderControls$ Creature.untapped+powerGE3 | Description$ CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE3 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 3 or greater.
+Oracle:Trample\nOrgg can't attack if defending player controls an untapped creature with power 3 or greater.\nOrgg can't block creatures with power 3 or greater.

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Waldo 3
+Title=Waldo
+Difficulty=hard
+Description=WR Norin the Wary deck
+Icon=Waldo.jpg
+Deck Type=constructed
+[main]
+4 Arid Mesa
+4 Bloodstained Mire
+4 Flooded Strand
+1 Mountain
+1 Plains
+4 Plateau
+4 Genesis Chamber
+1 Mox Ruby
+1 Mox Pearl
+4 Norin the Wary
+4 Saltskitter
+4 Soul Warden
+4 Soul's Attendant
+4 Suture Priest
+4 Impact Tremors
+4 Purphoros, God of the Forge
+4 Lightning Bolt
+4 Lightning Helix
+[sideboard]

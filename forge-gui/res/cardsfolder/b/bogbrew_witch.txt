@@ -1,0 +1,7 @@
+Name:Bogbrew Witch
+ManaCost:3 B
+Types:Creature Human Wizard
+PT:1/3
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedFestering Newt,Card.namedBubbling Cauldron | ChangeNum$ 1 | Tapped$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle.
+DeckNeeds:Name$Bubbling Cauldron|Festering Newt
+Oracle:{2}, {T}: Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Fat Albert 2
+Title=Fat Albert
+Difficulty=medium
+Description=WUG Winter Orb deck with mana creatures and Scion of the Wild
+Icon=Fat Albert.jpg
+Deck Type=constructed
+[main]
+3 Tropical Island
+13 Forest|ICE
+1 Dryad Arbor
+1 Rith's Grove
+1 Treva's Ruins
+3 Savannah
+3 Druid of the Anima
+3 Urborg Elf
+4 Gemhide Sliver
+2 Elvish Harbinger
+2 Avacyn's Pilgrim
+1 Quest for Renewal
+4 Winter Orb
+2 Seedborn Muse
+1 Murkfiend Liege
+1 Needle Storm
+1 Fabricate
+1 Dosan's Oldest Chant
+1 Spidersilk Armor
+2 Naturalize
+1 Adun Oakenshield
+1 Benalish Heralds
+1 Blessed Orator
+3 Scion of the Wild
+1 Kismet
+1 Sea Drake
+1 Cloud of Faeries
+1 Gaea's Anthem
+[sideboard]

@@ -1,0 +1,14 @@
+Name:Hierophant Bio-Titan
+ManaCost:10 G G
+Types:Creature Tyranid
+PT:12/12
+K:Vigilance
+K:Reach
+K:Ward:2
+A:SP$ PermanentCreature | Cost$ 10 G G RemoveAnyCounter<X/P1P1/Creature.YouCtrl/among creatures you control>
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Relative$ True | Description$ Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ Titanic — CARDNAME can't be blocked by creatures with power 2 or less.
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Times.2
+DeckHints:Ability$Counters
+Oracle:Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — Hierophant Bio-Titan can't be blocked by creatures with power 2 or less.

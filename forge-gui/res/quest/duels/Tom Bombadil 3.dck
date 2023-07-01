@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Tom Bombadil 3
+Title=Tom Bombadil
+Difficulty=hard
+Description=Mono G deck with Garruk's Packleader, Garruk Wildspeaker and Garruk's Companion
+Icon=Tom Bombadil.jpg
+Deck Type=constructed
+[main]
+1 Explore|WWK
+1 Harrow|ZEN
+1 Overwhelming Stampede|M11
+3 Garruk Wildspeaker|M11
+4 Cultivate|M11
+2 Khalni Hydra|ROE
+2 Lead the Stampede|MBS
+4 Call of the Herd|TSB
+4 Garruk's Packleader|M11
+2 Leatherback Baloth|WWK
+1 Praetor's Counsel|MBS
+2 Vengevine|ROE
+1 Overrun|M10
+2 Obstinate Baloth|M11
+4 Garruk's Companion|M11
+20 Forest|MBS
+2 Thrun, the Last Troll|MBS
+4 Verdant Catacombs|ZEN
+[sideboard]

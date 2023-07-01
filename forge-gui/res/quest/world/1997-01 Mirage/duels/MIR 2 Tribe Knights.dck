@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Knights
+Title=Knights
+Difficulty=medium
+Description="Any day that I ride my horse up to my ankles in the remains of my enemies is a good day." -Akin, seasoned askari
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Burning Shield Askari|MIR
+4 Knight of Valor|VIS
+10 Mountain|MIR|2
+4 Mtenda Herder|MIR
+14 Plains|MIR|3
+3 Searing Spear Askari|MIR
+4 Sidar Jabari|MIR
+4 Suq'Ata Lancer|VIS
+4 Teferi's Honor Guard|VIS
+4 Telim'Tor|MIR
+3 Zhalfirin Crusader|VIS
+3 Zhalfirin Knight|MIR

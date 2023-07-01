@@ -1,0 +1,7 @@
+Name:Akroan Crusader
+ManaCost:R
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, create a 1/1 red Soldier creature token with haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_soldier_haste | TokenOwner$ You
+Oracle:Heroic — Whenever you cast a spell that targets Akroan Crusader, create a 1/1 red Soldier creature token with haste.

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (SOM)
+Type:Archived
+Subtype:Standard
+Effective:2010-10-01
+Sets:ZEN, WWK, ROE, M11, SOM

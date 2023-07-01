@@ -1,0 +1,6 @@
+Name:Mystic Archaeologist
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+A:AB$ Draw | Cost$ 3 U U | Defined$ You | NumCards$ 2 | AILogic$ AtOppEOT | SpellDescription$ Draw two cards.
+Oracle:{3}{U}{U}: Draw two cards.

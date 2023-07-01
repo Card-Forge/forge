@@ -1,0 +1,12 @@
+Name:Folio of Fancies
+ManaCost:1 U
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+SVar:NonStackingEffect:True
+A:AB$ Draw | Cost$ X X T | NumCards$ X | Defined$ Player | SpellDescription$ Each player draws X cards.
+SVar:X:Count$xPaid
+A:AB$ RepeatEach | Cost$ 2 U T | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBMill | SpellDescription$ Each opponent mills cards equal to the number of cards in their hand.
+SVar:DBMill:DB$ Mill | Defined$ Remembered | NumCards$ Y
+SVar:Y:Count$ValidHand Card.RememberedPlayerCtrl
+AI:RemoveDeck:All
+Oracle:Players have no maximum hand size.\n{X}{X}, {T}: Each player draws X cards.\n{2}{U}, {T}: Each opponent mills cards equal to the number of cards in their hand.

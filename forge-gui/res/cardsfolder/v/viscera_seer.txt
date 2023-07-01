@@ -1,0 +1,7 @@
+Name:Viscera Seer
+ManaCost:B
+Types:Creature Vampire Wizard
+PT:1/1
+A:AB$ Scry | Cost$ Sac<1/Creature> | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+AI:RemoveDeck:All
+Oracle:Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

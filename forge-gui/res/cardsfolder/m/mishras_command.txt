@@ -1,0 +1,14 @@
+Name:Mishra's Command
+ManaCost:X R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,DBDamageCreature,DBDamagePW,DBPump | CharmNum$ 2
+SVar:DBDiscard:DB$ Discard | Optional$ True | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Choose target player. They may discard up to X cards. Then they draw a card for each card discarded this way.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDamageCreature:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ This spell deals X damage to target creature.
+SVar:DBDamagePW:DB$ DealDamage | ValidTgts$ Planeswalker | NumDmg$ X | SpellDescription$ This spell deals X damage to target planeswalker.
+SVar:DBPump:DB$ Pump | KW$ Haste | ValidTgts$ Creature | NumAtt$ X | SpellDescription$ Target creature gets +X/+0 and gains haste until end of turn.
+DeckHas:Ability$Discard & Keyword$Haste
+SVar:X:Count$xPaid
+SVar:Y:Count$RememberedSize
+Oracle:Choose two —\n• Choose target player. They may discard up to X cards. Then they draw a card for each card discarded this way.\n• This spell deals X damage to target creature.\n• This spell deals X damage to target planeswalker.\n• Target creature gets +X/+0 and gains haste until end of turn.

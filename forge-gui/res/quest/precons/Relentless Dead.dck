@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Relentless Dead
+Description=Legions of shambling zombies await your command. Unleash your hordes to overwhelm your enemies, then raise an army of the dead with good old-fashioned necromancy.
+Deck Type=Constructed
+Set=DKA
+Image=relentless_dead.jpg
+[main]
+2 Abattoir Ghoul|ISD
+2 Black Cat|DKA
+1 Cellar Door|ISD
+1 Corpse Lunge|ISD
+2 Dead Weight|ISD
+2 Diregraf Captain|DKA
+2 Diregraf Ghoul|ISD
+1 Endless Ranks of the Dead|ISD
+2 Evolving Wilds|DKA
+2 Farbog Boneflinger|DKA
+2 Forbidden Alchemy|ISD
+1 Ghoulraiser|ISD
+1 Havengul Runebinder+|DKA
+1 Headless Skaab|DKA
+10 Island|ISD
+1 Makeshift Mauler|ISD
+1 Moan of the Unhallowed|ISD
+1 Negate|M12
+2 Reap the Seagraf|DKA
+1 Rotting Fensnake|ISD
+3 Screeching Skaab|DKA
+1 Skaab Goliath|ISD
+1 Stitched Drake|ISD
+12 Swamp|ISD
+2 Walking Corpse|ISD
+2 Zombie Goliath|M12
+1 Zombie Infestation|M12
+[sideboard]

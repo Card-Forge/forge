@@ -1,0 +1,6 @@
+[format]
+Name:Kamigawa Block
+Type:Archived
+Subtype:Block
+Order:126
+Sets:SOK, BOK, CHK

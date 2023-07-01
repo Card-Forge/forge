@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: The Alliance
+Title=The Alliance
+Difficulty=easy
+Description="Just as an Herbalist heals a wound, so must we heal the rift between Balduvia and Kjeldor." -King Darien of Kjeldor
+
+Darien, King of Kjeld, became known as Darien the Great after the Archmage Eternal Jodah and Jaya Ballard prevented an attack on his life by the Knights of Stromgald and revealed that Lim-Dul was behind this. After the treacherous members of the military were removed from their place, Darien grasped control of the remaining groups and formed them into a single army under General Varchild. Bullying the merchants under his control and gaining support of the mages via Jodah, Darien made the position of the king stronger than it had been in generations. This allowed him to make an alliance with the Balduvians and lead an army against the necromancer Lim-Dul alongside Jodah and Lovisa Coldeyes.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Errand of Duty|ALL|1
+2 Errand of Duty|ALL|2
+2 Kjeldoran Elite Guard|ICE
+2 Kjeldoran Escort|ALL|1
+2 Kjeldoran Escort|ALL|2
+4 Kjeldoran Guard|ICE
+4 Kjeldoran Home Guard|ALL
+4 Kjeldoran Outpost|ALL
+24 Plains|ICE|2
+1 Reinforcements|ALL|1
+1 Reinforcements|ALL|2
+2 Royal Herbalist|ALL|1
+4 Shield Sphere|ALL
+4 Swords to Plowshares|ICE
+2 Warning|ICE

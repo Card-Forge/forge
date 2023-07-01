@@ -1,0 +1,7 @@
+Name:Mitotic Slime
+ManaCost:4 G
+Types:Creature Ooze
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenSenior | TriggerDescription$ When CARDNAME dies, create two 2/2 green Ooze creature tokens. They have "When this creature dies, create two 1/1 green Ooze creature tokens."
+SVar:TrigTokenSenior:DB$ Token | TokenScript$ g_2_2_ooze_mitotic | TokenOwner$ You | TokenAmount$ 2
+Oracle:When Mitotic Slime dies, create two 2/2 green Ooze creature tokens. They have "When this creature dies, create two 1/1 green Ooze creature tokens."

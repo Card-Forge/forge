@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 God: Minor: 06 Pharika
+Title=Pharika, God of Affliction
+Difficulty=easy
+Description=Deadly poison can be healing medicine in small amounts, and this dichotomy is reflected in the god whose province is such concoctions. Pharika is the keeper of apothecary knowledge, the source of dark magic. She is also the mother of all gorgons, whose snaky bodies resemble hers. Pharika is a fearsome adversary to those who would oppose her. She bears a potion cup from which she dispenses draughts that simultaneously strengthen her servants and slay her enemies. Pharika's dual nature governs aging--the stretch of life and the approach of death.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Aspect of Gorgon|JOU
+4 Asphyxiate|BNG
+4 Forest|THS|4
+4 Nyx Infusion|JOU
+4 Pharika's Chosen|JOU
+4 Pharika's Cure|THS
+4 Pharika's Mender|THS
+4 Pharika, God of Affliction|JOU
+4 Squelching Leeches|JOU
+16 Swamp|THS|4
+4 Temple of Malady|JOU
+4 Viper's Kiss|THS

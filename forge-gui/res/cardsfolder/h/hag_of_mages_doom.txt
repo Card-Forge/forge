@@ -1,0 +1,7 @@
+Name:Hag of Mage's Doom
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+S:Mode$ Continuous | Affected$ Warlock.YouCtrl | AddKeyword$ Ward:PayLife<2> | Description$ Warlocks you control have "Ward — Pay 2 life."
+DeckHints:Type$Warlock
+Oracle:Warlocks you control have "Ward — Pay 2 life."

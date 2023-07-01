@@ -1,0 +1,10 @@
+Name:Dirge Bat
+ManaCost:2 B B
+Types:Creature Bat
+PT:3/3
+K:Mutate:4 B B
+K:Flash
+K:Flying
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever this creature mutates, destroy target creature or planeswalker an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls
+Oracle:Mutate {4}{B}{B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlash\nFlying\nWhenever this creature mutates, destroy target creature or planeswalker an opponent controls.

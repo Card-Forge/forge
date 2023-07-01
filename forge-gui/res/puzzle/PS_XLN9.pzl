@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #09
+URL:http://www.possibilitystorm.com/039-ixalan-season-puzzle-9/
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Note that Opponent has 2 energy.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=6
+humanhand=Disallow; Sand Strangler; Siren's Ruse; Exemplar of Strength; Harnessed Lightning;
+humanprecast=
+humangraveyard=
+humanlibrary=
+humanbattlefield=Consuming Fervor|AttachedTo:420; Spontaneous Artist|Counters:M1M1=4|Id:420; Chaos Maw; Nef-Crop Entangler; Ramunap Ruins; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD;
+aibattlefield=Island|Set:XLN; Adanto Vanguard; Raptor Hatchling; Siren Stormtamer|Tapped; Aethergeode Miner;
+aiprecast=Aether Chaser:TrigEnergy;
+aigraveyard=
+ailibrary=
+aiexile=

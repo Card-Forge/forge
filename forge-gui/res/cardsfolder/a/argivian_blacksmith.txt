@@ -1,0 +1,7 @@
+Name:Argivian Blacksmith
+ManaCost:1 W W
+Types:Creature Human Artificer
+PT:2/2
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature.Artifact | Amount$ 2 | TgtPrompt$ Select target artifact creature | SpellDescription$ Prevent the next 2 damage that would be dealt to target artifact creature this turn.
+DeckHints:Type$Artifact
+Oracle:{T}: Prevent the next 2 damage that would be dealt to target artifact creature this turn.

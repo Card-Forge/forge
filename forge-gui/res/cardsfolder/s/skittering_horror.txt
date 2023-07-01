@@ -1,0 +1,8 @@
+Name:Skittering Horror
+ManaCost:2 B
+Types:Creature Phyrexian Horror
+PT:4/3
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+AI:RemoveDeck:All
+Oracle:When you cast a creature spell, sacrifice Skittering Horror.

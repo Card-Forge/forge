@@ -1,0 +1,5 @@
+Name:Woodland Druid
+ManaCost:G
+Types:Creature Human Druid
+PT:1/2
+Oracle:

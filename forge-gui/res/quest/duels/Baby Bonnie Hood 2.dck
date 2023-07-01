@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Baby Bonnie Hood 2
+Title=Baby Bonnie Hood
+Difficulty=medium
+Description=UR colorless deck
+Icon=Baby Bonnie Hood.jpg
+Deck Type=constructed
+[main]
+4 Island
+4 Mountain
+4 Scalding Tarn
+1 Steam Vents
+4 Sulfur Falls
+4 Volcanic Island
+1 Swiftwater Cliffs
+4 Kozilek's Sentinel
+3 Molten Nursery
+4 Vile Aggregate
+4 Ruination Guide
+4 Tide Drifter
+4 Herald of Kozilek
+1 Benthic Infiltrator
+1 Crumble to Dust
+1 Horribly Awry
+1 Nettle Drone
+1 Spell Shrivel
+3 Touch of the Void
+3 Ghostfire
+1 Turn Against
+1 Vestige of Emrakul
+1 Ghostfire Blade
+1 Hovermyr
+[sideboard]

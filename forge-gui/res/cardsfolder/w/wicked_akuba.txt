@@ -1,0 +1,6 @@
+Name:Wicked Akuba
+ManaCost:B B
+Types:Creature Spirit
+PT:2/2
+A:AB$ LoseLife | Cost$ B | ValidTgts$ Player.wasDealtDamageThisTurnBySource | TgtPrompt$ Select target player that was dealt damage this turn | LifeAmount$ 1 | SpellDescription$ Target player dealt damage by CARDNAME this turn loses 1 life.
+Oracle:{B}: Target player dealt damage by Wicked Akuba this turn loses 1 life.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wyatt Earp 3
+Title=Wyatt Earp
+Difficulty=hard
+Description=Mono W deck with Crovax, Ascendant Hero, Honor of the Pure and small to medium sized creatures
+Icon=Wyatt Earp.jpg
+Deck Type=constructed
+[main]
+21 Plains|M12
+1 Karakas
+1 Mox Pearl
+4 Honor of the Pure
+1 Celestial Crusader
+1 Crovax, Ascendant Hero
+2 Knight of the White Orchid
+2 Mass Calcify
+1 Dawn Elemental
+2 Unmake
+2 Swords to Plowshares
+1 Auriok Champion
+1 Hand of Honor
+3 Knight of Meadowgrain
+1 Light from Within
+4 Serra Avenger
+1 Soltari Monk
+1 White Knight
+1 Soltari Priest
+1 Silver Knight
+2 Kazandu Blademaster
+1 Crackdown
+3 Mirran Crusader
+1 Spectral Procession
+1 Purity
+1 Angel of Jubilation
+[sideboard]

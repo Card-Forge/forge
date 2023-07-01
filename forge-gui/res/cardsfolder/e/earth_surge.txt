@@ -1,0 +1,7 @@
+Name:Earth Surge
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Land | AddPower$ 2 | AddToughness$ 2 | Description$ Each land gets +2/+2 as long as it's a creature.
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
+Oracle:Each land gets +2/+2 as long as it's a creature.

@@ -1,0 +1,11 @@
+Name:Rat Colony
+ManaCost:1 B
+Types:Creature Rat
+PT:2/1
+K:A deck can have any number of cards named CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each other Rat you control.
+SVar:X:Count$Valid Rat.YouCtrl+Other
+SVar:BuffedBy:Rat
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Rat
+Oracle:Rat Colony gets +1/+0 for each other Rat you control.\nA deck can have any number of cards named Rat Colony.

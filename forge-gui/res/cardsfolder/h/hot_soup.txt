@@ -1,0 +1,11 @@
+Name:Hot Soup
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Description$ Equipped creature can't be blocked.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ HotSoupDestroy
+SVar:HotSoupDestroy:SVar:DestroyWhenDamaged:True
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When equipped creature is dealt damage, destroy it.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+SVar:NonStackingAttachEffect:True
+Oracle:Equipped creature can't be blocked.\nWhenever equipped creature is dealt damage, destroy it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

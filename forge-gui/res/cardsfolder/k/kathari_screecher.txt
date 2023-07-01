@@ -1,0 +1,7 @@
+Name:Kathari Screecher
+ManaCost:2 U
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+K:Unearth:2 U
+Oracle:Flying\nUnearth {2}{U} ({2}{U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

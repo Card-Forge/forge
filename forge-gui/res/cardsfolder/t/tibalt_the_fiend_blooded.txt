@@ -1,0 +1,10 @@
+Name:Tibalt, the Fiend-Blooded
+ManaCost:R R
+Types:Legendary Planeswalker Tibalt
+Loyalty:2
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Planeswalker$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card at random.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
+A:AB$ DealDamage | Cost$ SubCounter<4/LOYALTY> | ValidTgts$ Player | NumDmg$ X | Planeswalker$ True | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
+SVar:X:TargetedPlayer$CardsInHand
+A:AB$ GainControl | Cost$ SubCounter<6/LOYALTY> | AllValid$ Creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | Planeswalker$ True | Ultimate$ True | SpellDescription$ Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
+Oracle:[+1]: Draw a card, then discard a card at random.\n[-4]: Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.\n[-6]: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.

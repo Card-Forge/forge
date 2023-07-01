@@ -1,0 +1,6 @@
+Name:Soltari Emissary
+ManaCost:1 W
+Types:Creature Soltari Soldier
+PT:2/1
+A:AB$ Pump | Cost$ W | KW$ Shadow | Defined$ Self | SpellDescription$ CARDNAME gains shadow until end of turn.
+Oracle:{W}: Soltari Emissary gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)

@@ -1,0 +1,37 @@
+[quest]
+id=6003
+AILife=20
+HumanLife=20
+HumanDeck=Phyrexians vs Mirrans.dck
+UseBazaar=False
+ForceAnte=False
+Repeat=false
+Wins=20
+Card Reward=5 random rares
+Credit Reward=200
+[metadata]
+Name=quest6003
+Title=Mirrans (as Phyrexians)
+Difficulty=medium
+Description=Together we stand and fight for a pure Mirrodin
+Icon=Affinito.jpg
+Deck Type=constructed
+[Main]
+4 Glimmerpost|SOM
+4 Gold Myr|SOM
+3 Hovermyr|NPH
+2 Master's Call|MBS
+3 Myr Battlesphere|SOM
+4 Myr Galvanizer|SOM
+1 Myr Propagator|SOM
+2 Myr Reservoir|SOM
+2 Myr Sire|MBS
+1 Myr Turbine|MBS
+2 Myrsmith|SOM
+3 Palladium Myr|SOM
+4 Perilous Myr|SOM
+20 Plains|SOM|1
+1 Shimmer Myr|MBS
+2 Shrine of Loyal Legions|NPH
+2 Tempered Steel|SOM
+[sideboard]

@@ -1,0 +1,10 @@
+Name:Necromancer's Familiar
+ManaCost:3 B
+Types:Creature Bird Spirit
+PT:3/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ Hellbent | Description$ Hellbent — CARDNAME has lifelink as long as you have no cards in hand.
+A:AB$ Pump | Cost$ B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+DeckHas:Ability$LifeGain
+Oracle:Flying\nHellbent — Necromancer's Familiar has lifelink as long as you have no cards in hand.\n{B}, Discard a card: Necromancer's Familiar gains indestructible until end of turn. Tap it.

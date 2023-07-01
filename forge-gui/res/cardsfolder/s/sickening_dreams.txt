@@ -1,0 +1,7 @@
+Name:Sickening Dreams
+ManaCost:1 B
+Types:Sorcery
+A:SP$ DamageAll | Cost$ 1 B Discard<X/Card> | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals X damage to each creature and each player.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard X cards.\nSickening Dreams deals X damage to each creature and each player.

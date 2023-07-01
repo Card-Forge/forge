@@ -1,0 +1,8 @@
+Name:Brood Keeper
+ManaCost:3 R
+Types:Creature Human Shaman
+PT:2/3
+T:Mode$ Attached | ValidSource$ Aura | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an Aura becomes attached to CARDNAME, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_2_2_dragon_flying_firebreathing
+SVar:EnchantMe:Multiple
+Oracle:Whenever an Aura becomes attached to Brood Keeper, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn."

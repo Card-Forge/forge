@@ -1,0 +1,7 @@
+Name:Rooting Kavu
+ManaCost:2 G G
+Types:Creature Kavu
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, shuffle all creature cards from your graveyard into your library.
+SVar:TrigExile:AB$ ChangeZoneAll | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+Oracle:When Rooting Kavu dies, you may exile it. If you do, shuffle all creature cards from your graveyard into your library.

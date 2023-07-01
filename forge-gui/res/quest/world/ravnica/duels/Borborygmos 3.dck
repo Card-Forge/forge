@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Borborygmos 3
+Title=Borborygmos 3
+Icon=Borborygmos.jpg
+Difficulty=hard
+Description=Temper, Temper
+Deck Type=constructed
+[main]
+4 Burning-Tree Emissary|GTC
+4 Burning-Tree Shaman|GPT
+4 Char|RAV
+2 Demonfire|DIS
+4 Experiment One|GTC
+12 Forest|M10
+4 Ghor-Clan Rampager|GTC
+4 Giant Solifuge|GPT
+8 Mountain|RTR
+2 Scab-Clan Mauler|GPT
+4 Domri Rade|GTC
+4 Stomping Ground|GTC
+4 Wasteland Viper|GTC
+[sideboard]
+[planes]
+[schemes]

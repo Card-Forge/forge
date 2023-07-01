@@ -1,0 +1,9 @@
+Name:Immerwolf
+ManaCost:1 R G
+Types:Creature Wolf
+PT:2/2
+K:Intimidate
+S:Mode$ Continuous | Affected$ Creature.Wolf+Other+YouCtrl,Creature.Werewolf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Each other creature you control that's a Wolf or a Werewolf gets +1/+1.
+S:Mode$ CantTransform | ValidCard$ Creature.Werewolf+nonHuman+YouCtrl | Description$ Non-Human Werewolves you control can't transform.
+SVar:PlayMain1:TRUE
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nEach other creature you control that's a Wolf or a Werewolf gets +1/+1.\nNon-Human Werewolves you control can't transform.

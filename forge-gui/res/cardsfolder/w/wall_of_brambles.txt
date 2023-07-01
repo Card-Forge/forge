@@ -1,0 +1,7 @@
+Name:Wall of Brambles
+ManaCost:2 G
+Types:Creature Plant Wall
+PT:2/3
+K:Defender
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Defender (This creature can't attack.)\n{G}: Regenerate Wall of Brambles.

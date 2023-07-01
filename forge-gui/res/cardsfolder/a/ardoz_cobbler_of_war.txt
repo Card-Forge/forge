@@ -1,0 +1,11 @@
+Name:Ardoz, Cobbler of War
+ManaCost:1 R
+Types:Legendary Creature Goblin Shaman
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl,Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +2
+A:AB$ Token | Cost$ 3 R | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_haste | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create a 1/1 red Goblin creature token with haste. Activate only as a sorcery.
+SVar:BuffedBy:Creature
+DeckHas:Ability$Token
+Oracle:Haste\nWhenever Ardoz, Cobbler of War or another creature enters the battlefield under your control, that creature gets +2/+0 until end of turn.\n{3}{R}: Create a 1/1 red Goblin creature token with haste. Activate only as a sorcery.

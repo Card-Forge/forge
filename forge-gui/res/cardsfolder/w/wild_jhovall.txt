@@ -1,0 +1,5 @@
+Name:Wild Jhovall
+ManaCost:3 R
+Types:Creature Cat
+PT:3/3
+Oracle:

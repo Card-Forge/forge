@@ -1,0 +1,10 @@
+Name:Swimmer in Nightmares
+ManaCost:2 U
+Types:Creature Nightmare Merfolk
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE10 | Description$ CARDNAME gets +3/+0 as long as there are ten or more cards in a single graveyard.
+SVar:X:PlayerCountPlayers$HighestCardsInGraveyard
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Planeswalker.Ashiok+YouCtrl | Description$ CARDNAME can't be blocked as long as you control an Ashiok planeswalker.
+SVar:BuffedBy:Ashiok
+DeckHints:Type$Ashiok
+Oracle:Swimmer in Nightmares gets +3/+0 as long as there are ten or more cards in a single graveyard.\nSwimmer in Nightmares can't be blocked as long as you control an Ashiok planeswalker.

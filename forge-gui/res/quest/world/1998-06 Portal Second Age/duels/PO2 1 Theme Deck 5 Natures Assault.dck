@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme Deck: 5 Nature's Assault
+Title=Nature's Assault
+Difficulty=easy
+Description="Nature's Assault" marshals the forces of nature and hurls them at your opponent. Attack with waves of monstrous creatures or defend with courageous Elvish warriors.\n\n"Nature's Assault" is ready to tangle. 
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+3 Bear Cub|PO2
+15 Forest|PO2|1
+2 Golden Bear|PO2
+1 Hurricane|PO2
+2 Ironhoof Ox|PO2
+2 Monstrous Growth|PO2
+2 Natural Spring|PO2
+2 Norwood Archers|PO2
+3 Norwood Ranger|PO2
+2 Norwood Riders|PO2
+2 River Bear|PO2
+1 Sylvan Basilisk|PO2
+2 Wild Ox|PO2

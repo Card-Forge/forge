@@ -1,0 +1,5 @@
+Name:Whirling Catapult
+ManaCost:4
+Types:Artifact
+A:AB$ DamageAll | Cost$ 2 ExileFromTop<2/Card> | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player.
+Oracle:{2}, Exile the top two cards of your library: Whirling Catapult deals 1 damage to each creature with flying and each player.

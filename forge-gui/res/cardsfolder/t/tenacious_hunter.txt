@@ -1,0 +1,6 @@
+Name:Tenacious Hunter
+ManaCost:2 G G
+Types:Creature Crocodile
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Creature.counters_GE1_M1M1 | AddKeyword$ Vigilance & Deathtouch | Description$ As long as a creature has a -1/-1 counter on it, CARDNAME has vigilance and deathtouch.
+Oracle:As long as a creature has a -1/-1 counter on it, Tenacious Hunter has vigilance and deathtouch.

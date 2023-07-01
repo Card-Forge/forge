@@ -1,0 +1,6 @@
+Name:Duelist's Heritage
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ AttackersDeclared | Execute$ TrigPump | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever one or more creatures attack, you may have target attacking creature gain double strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select another target attacking creature | KW$ Double Strike
+Oracle:Whenever one or more creatures attack, you may have target attacking creature gain double strike until end of turn.

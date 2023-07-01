@@ -1,0 +1,20 @@
+Name:Invasion of Arcavios
+ManaCost:3 U U
+Types:Battle Siege
+Defense:7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library, graveyard, and/or outside the game for an instant or sorcery card you own, reveal it, and put it into your hand. If you search your library this way, shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | Destination$ Hand | ShuffleNonMandatory$ True | OriginAlternative$ Graveyard,Sideboard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled | ChangeType$ Sorcery.YouOwn,Instant.YouOwn
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Arcavios enters the battlefield, search your library, graveyard, and/or outside the game for an instant or sorcery card you own, reveal it, and put it into your hand. If you search your library this way, shuffle.
+
+ALTERNATE
+
+Name:Invocation of the Founders
+ManaCost:no cost
+Colors:blue
+Types:Enchantment
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant.wasCastFromYourHand,Sorcery.wasCastFromYourHand | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Optional$ True | MayChooseTarget$ True
+Oracle:Whenever you cast an instant or sorcery spell from your hand, you may copy that spell. You may choose new targets for the copy.

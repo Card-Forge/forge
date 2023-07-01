@@ -1,0 +1,6 @@
+Name:Ferocity of the Wilds
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.nonHuman+attacking+YouCtrl | AddPower$ 1 | AddKeyword$ Trample | Description$ Attacking non-Human creatures you control get +1/+0 and have trample.
+SVar:PlayMain1:TRUE
+Oracle:Attacking non-Human creatures you control get +1/+0 and have trample.

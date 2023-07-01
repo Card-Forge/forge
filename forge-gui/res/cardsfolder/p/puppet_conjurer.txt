@@ -1,0 +1,8 @@
+Name:Puppet Conjurer
+ManaCost:1 B
+Types:Artifact Creature Human Wizard
+PT:1/2
+A:AB$ Token | Cost$ U T | TokenAmount$ 1 | TokenScript$ u_0_1_a_homunculus | TokenOwner$ You | SpellDescription$ Create a 0/1 blue Homunculus artifact creature token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a Homunculus.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Homunculus
+Oracle:{U}, {T}: Create a 0/1 blue Homunculus artifact creature token.\nAt the beginning of your upkeep, sacrifice a Homunculus.

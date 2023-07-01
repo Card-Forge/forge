@@ -1,0 +1,7 @@
+Name:Qasali Pridemage
+ManaCost:G W
+Types:Creature Cat Wizard
+PT:2/2
+K:Exalted
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{1}, Sacrifice Qasali Pridemage: Destroy target artifact or enchantment.

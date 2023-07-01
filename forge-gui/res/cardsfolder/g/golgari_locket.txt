@@ -1,0 +1,8 @@
+Name:Golgari Locket
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+DeckNeeds:Color$Black|Green
+A:AB$ Draw | Cost$ BG BG BG BG T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {B} or {G}.\n{B/G}{B/G}{B/G}{B/G}, {T}, Sacrifice Golgari Locket: Draw two cards.

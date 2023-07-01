@@ -1,0 +1,9 @@
+Name:Akki Ember-Keeper
+ManaCost:1 R
+Types:Enchantment Creature Goblin Warrior
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+modified+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken modified creature you control dies, create a 1/1 colorless Spirit creature token. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_spirit
+DeckHas:Ability$Token & Type$Spirit
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Whenever a nontoken modified creature you control dies, create a 1/1 colorless Spirit creature token. (Equipment, Auras you control, and counters are modifications.)

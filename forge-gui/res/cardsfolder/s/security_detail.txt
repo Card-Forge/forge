@@ -1,0 +1,6 @@
+Name:Security Detail
+ManaCost:3 W
+Types:Enchantment
+A:AB$ Token | Cost$ W W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ0 | ActivationLimit$ 1 | SpellDescription$ Create a 1/1 white Soldier creature token. Activate only if you control no creatures and only once each turn.
+SVar:NonStackingEffect:True
+Oracle:{W}{W}: Create a 1/1 white Soldier creature token. Activate only if you control no creatures and only once each turn.

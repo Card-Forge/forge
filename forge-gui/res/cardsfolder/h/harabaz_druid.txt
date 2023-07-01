@@ -1,0 +1,7 @@
+Name:Harabaz Druid
+ManaCost:1 G
+Types:Creature Human Druid Ally
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of Allies you control.
+SVar:X:Count$Valid Ally.YouCtrl
+Oracle:{T}: Add X mana of any one color, where X is the number of Allies you control.

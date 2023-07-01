@@ -1,0 +1,6 @@
+Name:Thalakos Sentry
+ManaCost:1 U
+Types:Creature Thalakos Soldier
+PT:1/2
+K:Shadow
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)

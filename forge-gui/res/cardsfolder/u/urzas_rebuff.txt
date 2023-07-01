@@ -1,0 +1,7 @@
+Name:Urza's Rebuff
+ManaCost:1 U U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBTap | CharmNum$ 1
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:DBTap:DB$ Tap | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Tap up to two target creatures.
+Oracle:Choose one -\n•Counter target spell.\n•Tap up to two target creatures.

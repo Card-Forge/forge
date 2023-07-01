@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 4 Earth and Fire
+Title=Earth and Fire
+Difficulty=easy
+Description=Fire finds its form in the heat of the forge.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PO2
+4 Brimstone Dragon|PO2
+4 Earthquake|PO2
+4 Jagged Lightning|PO2
+3 Lava Axe|PO2
+26 Mountain|PO2|1
+4 Spitting Earth|PO2
+4 Stone Rain|PO2
+4 Volcanic Hammer|PO2
+3 Wildfire|PO2

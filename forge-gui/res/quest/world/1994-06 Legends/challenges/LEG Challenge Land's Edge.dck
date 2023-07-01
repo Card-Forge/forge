@@ -1,0 +1,18 @@
+[quest]
+id=LEG Challenge: Land's Edge
+OpponentName=The Land's Edge
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Land's Edge
+[metadata]
+Name=LEG Challenge: Land's Edge
+Title=The Land's Edge
+Difficulty=medium
+Description=A rift in the earth spews forth devastating magical energies.  Can you close it?
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+60 Mountain|LEB|3

@@ -1,0 +1,7 @@
+Name:Terra Eternal
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land | AddKeyword$ Indestructible | Description$ All lands have indestructible.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All lands have indestructible.

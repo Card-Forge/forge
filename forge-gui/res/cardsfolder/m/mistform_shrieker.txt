@@ -1,0 +1,10 @@
+Name:Mistform Shrieker
+ManaCost:3 U U
+Types:Creature Illusion
+PT:3/3
+K:Flying
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
+K:Morph:3 U U
+AI:RemoveDeck:All
+Oracle:Flying\n{1}: Mistform Shrieker becomes the creature type of your choice until end of turn.\nMorph {3}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

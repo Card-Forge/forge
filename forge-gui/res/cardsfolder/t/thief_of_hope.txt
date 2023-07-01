@@ -1,0 +1,10 @@
+Name:Thief of Hope
+ManaCost:2 B
+Types:Creature Spirit
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:Soulshift:2
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.\nSoulshift 2 (When this creature dies, you may return target Spirit card with mana value 2 or less from your graveyard to your hand.)

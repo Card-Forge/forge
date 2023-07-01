@@ -1,0 +1,12 @@
+Name:Incubator
+Types:Artifact Incubator
+A:AB$ SetState | Cost$ 2 | Mode$ Transform | SpellDescription$ Transform this artifact.
+AlternateMode:DoubleFaced
+Oracle:{2}: Transform this artifact.
+
+ALTERNATE
+
+Name:Phyrexian Token
+Types:Artifact Creature Phyrexian
+PT:0/0
+Oracle:

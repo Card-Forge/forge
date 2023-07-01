@@ -1,0 +1,10 @@
+Name:Bulwark
+ManaCost:3 R R
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PsychicSlap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
+SVar:PsychicSlap:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
+SVar:A:Count$InYourHand
+SVar:B:Count$InTargetedHand
+SVar:X:SVar$A/Minus.B
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.

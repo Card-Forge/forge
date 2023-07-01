@@ -1,0 +1,9 @@
+Name:Surging Strength|Deck:Surging Strength.dck|Variant:Commander|Avatar:Yorvo, Lord of Garenbrig|Desc:
+Name:Syr Faren, the Hengehammer|Deck:Syr Faren, the Hengehammer.dck|Variant:Commander|Avatar:Syr Faren, the Hengehammer|Desc:
+Name:Garruk, Cursed Huntsman|Deck:Garruk, Cursed Huntsman.dck|Variant:Planeswalker|Avatar:Garruk, Cursed Huntsman|Desc:
+Name:Chulane, Teller of Tales|Deck:Chulane, Teller of Tales.dck|Variant:Commander|Avatar:Chulane, Teller of Tales|Desc:
+Name:Fairy Tales from the Woods|Deck:Fairy Tales from the Woods.dck|Variant:None|Avatar:Wicked Wolf|TemporaryUnlock:Unstable_Realm|Desc:
+Name:Questing Beast|Deck:Questing Beast.dck|Variant:Commander|Avatar:Questing Beast|Desc:
+Name:Vivien, Nature's Avenger|Deck:Vivien, Nature's Avenger.dck|Variant:Planeswalker|Avatar:Vivien, Nature's Avenger|Desc:
+Name:Kethis, the Hidden Hand|Deck:Kethis, the Hidden Hand.dck|Variant:Commander|Avatar:Kethis, the Hidden Hand|Desc:
+Name:Random Garenbrig|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

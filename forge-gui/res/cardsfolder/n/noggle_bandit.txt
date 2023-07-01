@@ -1,0 +1,6 @@
+Name:Noggle Bandit
+ManaCost:1 UR UR
+Types:Creature Noggle Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutDefender | Description$ CARDNAME can't be blocked except by creatures with defender.
+Oracle:Noggle Bandit can't be blocked except by creatures with defender.

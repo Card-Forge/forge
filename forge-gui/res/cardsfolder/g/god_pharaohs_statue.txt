@@ -1,0 +1,7 @@
+Name:God-Pharaoh's Statue
+ManaCost:6
+Types:Legendary Artifact
+S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast cost {2} more to cast.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:Spells your opponents cast cost {2} more to cast.\nAt the beginning of your end step, each opponent loses 1 life.

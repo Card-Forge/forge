@@ -1,0 +1,11 @@
+Name:Kill-Suit Cultist
+ManaCost:R
+Types:Creature Goblin Berserker
+PT:1/1
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+A:AB$ Effect | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature | ReplacementEffects$ SelfDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next time damage would be dealt to target creature this turn, destroy that creature instead.
+SVar:SelfDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ CultistDestroy | Description$ The next time damage would be dealt to target creature this turn, destroy that creature instead.
+SVar:CultistDestroy:DB$ Destroy | Defined$ ReplacedTarget | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+Oracle:Kill-Suit Cultist attacks each combat if able.\n{B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.

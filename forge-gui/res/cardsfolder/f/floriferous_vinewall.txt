@@ -1,0 +1,8 @@
+Name:Floriferous Vinewall
+ManaCost:1 G
+Types:Creature Plant Wall
+PT:0/2
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top six cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Land | RestRandomOrder$ True | ForceRevealToController$ True
+Oracle:Defender\nWhen Floriferous Vinewall enters the battlefield, look at the top six cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

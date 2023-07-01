@@ -1,0 +1,8 @@
+Name:Embrace My Diabolical Vision
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GraveEmbrace | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each player shuffles their hand and graveyard into their library. You draw seven cards, then each other player draws four cards.
+SVar:GraveEmbrace:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard,Hand | Destination$ Library | Shuffle$ True | SubAbility$ MyVision
+SVar:MyVision:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ PitifulDraw
+SVar:PitifulDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 4
+Oracle:When you set this scheme in motion, each player shuffles their hand and graveyard into their library. You draw seven cards, then each other player draws four cards.

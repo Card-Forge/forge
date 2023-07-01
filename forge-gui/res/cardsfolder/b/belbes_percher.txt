@@ -1,0 +1,7 @@
+Name:Belbe's Percher
+ManaCost:2 B
+Types:Creature Bird
+PT:2/2
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nBelbe's Percher can block only creatures with flying.

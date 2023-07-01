@@ -1,0 +1,5 @@
+Name:Knight Errant
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/2
+Oracle:

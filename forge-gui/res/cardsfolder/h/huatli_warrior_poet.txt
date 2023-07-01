@@ -1,0 +1,13 @@
+Name:Huatli, Warrior Poet
+ManaCost:3 R W
+Types:Legendary Planeswalker Huatli
+Loyalty:3
+A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | LifeAmount$ GreatestPow | SpellDescription$ You gain life equal to the greatest power among creatures you control.
+SVar:GreatestPow:Count$Valid Creature.YouCtrl$GreatestPower
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_dinosaur_trample | TokenOwner$ You | SpellDescription$ Create a 3/3 green Dinosaur creature token with trample.
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X | RememberDamaged$ True | SubAbility$ DBNoBlock | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn.
+SVar:DBNoBlock:DB$ Pump | KW$ HIDDEN CARDNAME can't block. | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ Creatures dealt damage this way can't block this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$LifeGain|Token
+Oracle:[+2]: You gain life equal to the greatest power among creatures you control.\n[0]: Create a 3/3 green Dinosaur creature token with trample.\n[-X]: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn.

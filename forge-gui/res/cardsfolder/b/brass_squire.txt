@@ -1,0 +1,8 @@
+Name:Brass Squire
+ManaCost:3
+Types:Artifact Creature Myr
+PT:1/3
+A:AB$ Pump | Cost$ T | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ BrassSquireAttach | StackDescription$ None | SpellDescription$ Attach target Equipment you control to target creature you control.
+SVar:BrassSquireAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+AI:RemoveDeck:All
+Oracle:{T}: Attach target Equipment you control to target creature you control.

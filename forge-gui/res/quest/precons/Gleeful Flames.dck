@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=20
+Credits=2500
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gleeful Flames
+Description=Mock life and cheat death! This green and black deck is packed with hard-to-kill creatures, including those with the new undying ability, and many more ways to turn your smaller threats into larger ones.
+Deck Type=constructed
+Set=DKA
+Image=gleeful_flames.jpg
+[main]
+3 Haunted Fengraf|DKA
+2 Inkmoth Nexus|MBS
+17 Mountain|ISD
+4 Forge Devil|DKA
+4 Goblin Arsonist|M12
+4 Goblin Fireslinger|M12
+4 Goblin Gaveleer|SOM
+1 Hellrider|DKA
+3 Torch Fiend|DKA
+4 Artillerize|NPH
+4 Brimstone Volley|ISD
+1 Curse of Stalked Prey|ISD
+2 Faithless Looting|DKA
+4 Goblin Grenade|M12
+3 Infiltration Lens|SOM
+[sideboard]

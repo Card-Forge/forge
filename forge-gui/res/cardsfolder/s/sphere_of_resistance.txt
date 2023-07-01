@@ -1,0 +1,6 @@
+Name:Sphere of Resistance
+ManaCost:2
+Types:Artifact
+S:Mode$ RaiseCost | ValidCard$ Card | Type$ Spell | Amount$ 1 | Description$ Spells cost {1} more to cast.
+AI:RemoveDeck:Random
+Oracle:Spells cost {1} more to cast.

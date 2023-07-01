@@ -1,0 +1,5 @@
+Name:Spirit Token
+ManaCost:no cost
+Types:Creature Spirit
+PT:2/2
+Oracle:

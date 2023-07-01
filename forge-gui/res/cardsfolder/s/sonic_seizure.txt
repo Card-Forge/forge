@@ -1,0 +1,5 @@
+Name:Sonic Seizure
+ManaCost:R
+Types:Instant
+A:SP$ DealDamage | Cost$ R Discard<1/Random> | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:As an additional cost to cast this spell, discard a card at random.\nSonic Seizure deals 3 damage to any target.

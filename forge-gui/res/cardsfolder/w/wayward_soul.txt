@@ -1,0 +1,7 @@
+Name:Wayward Soul
+ManaCost:2 U U
+Types:Creature Spirit
+PT:3/2
+K:Flying
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
+Oracle:Flying\n{U}: Put Wayward Soul on top of its owner's library.

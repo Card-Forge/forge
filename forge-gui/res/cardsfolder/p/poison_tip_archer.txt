@@ -1,0 +1,9 @@
+Name:Poison-Tip Archer
+ManaCost:2 B G
+Types:Creature Elf Archer
+PT:2/3
+K:Reach
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature dies, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever another creature dies, each opponent loses 1 life.

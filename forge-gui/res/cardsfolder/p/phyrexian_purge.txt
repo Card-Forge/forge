@@ -1,0 +1,9 @@
+Name:Phyrexian Purge
+ManaCost:2 B R
+Types:Sorcery
+A:SP$ Destroy | Cost$ 2 B R PayLife<X> | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxPayLifeLimit | CostDesc$ This spell costs 3 life more to cast for each target. | SpellDescription$ Destroy any number of target creatures.
+SVar:MaxPayLifeLimit:Count$YourLifeTotal/DivideEvenlyDown.3
+SVar:X:SVar$Y/Times.3
+SVar:Y:Targeted$Amount
+AI:RemoveDeck:All
+Oracle:This spell costs 3 life more to cast for each target.\nDestroy any number of target creatures.

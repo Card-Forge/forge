@@ -1,0 +1,13 @@
+Name:Ebonblade Reaper
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:1/1
+K:Morph:3 B B
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, you lose half your life, rounded up.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ EbonXYou
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses half their life, rounded up.
+SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ EbonXOpp
+SVar:EbonXYou:Count$YourLifeTotal/HalfUp
+SVar:EbonXOpp:TriggeredTarget$LifeTotal/HalfUp
+AI:RemoveDeck:All
+Oracle:Whenever Ebonblade Reaper attacks, you lose half your life, rounded up.\nWhenever Ebonblade Reaper deals combat damage to a player, that player loses half their life, rounded up.\nMorph {3}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

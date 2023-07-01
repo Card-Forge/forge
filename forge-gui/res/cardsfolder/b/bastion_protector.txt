@@ -1,0 +1,7 @@
+Name:Bastion Protector
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Indestructible | Description$ Commander creatures you control get +2/+2 and have indestructible.
+SVar:PlayMain1:TRUE
+Oracle:Commander creatures you control get +2/+2 and have indestructible.

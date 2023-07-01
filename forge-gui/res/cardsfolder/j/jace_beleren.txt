@@ -1,0 +1,8 @@
+Name:Jace Beleren
+ManaCost:1 U U
+Types:Legendary Planeswalker Jace
+Loyalty:3
+A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Defined$ Player | Planeswalker$ True | SpellDescription$ Each player draws a card.
+A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ True | SpellDescription$ Target player draws a card.
+A:AB$ Mill | Cost$ SubCounter<10/LOYALTY> | NumCards$ 20 | ValidTgts$ Player | Planeswalker$ True | Ultimate$ True | SpellDescription$ Target player mills twenty cards.
+Oracle:[+2]: Each player draws a card.\n[-1]: Target player draws a card.\n[-10]: Target player mills twenty cards.

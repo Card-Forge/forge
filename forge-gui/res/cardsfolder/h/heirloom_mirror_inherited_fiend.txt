@@ -1,0 +1,25 @@
+Name:Heirloom Mirror
+ManaCost:1 B
+Types:Artifact
+A:AB$ Draw | Cost$ 1 T PayLife<1> Discard<1/Card/card> | NumCards$ 1 | SubAbility$ DBMill | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Draw a card, mill a card, then put a ritual counter on CARDNAME. Then if it has three or more ritual counters on it, remove them and transform it. Activate only as a sorcery.
+SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter1 | StackDescription$ None
+SVar:DBPutCounter1:DB$ PutCounter | CounterType$ RITUAL | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Ritual | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ RITUAL | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:Ritual:Count$Valid Card.Self+counters_GE3_RITUAL
+DeckHas:Ability$Discard|Mill|Counters|Graveyard
+AlternateMode:DoubleFaced
+Oracle:{1}, {T}, Pay 1 life, Discard a card: Draw a card, mill a card, then put a ritual counter on Heirloom Mirror. Then if it has three or more ritual counters on it, remove them and transform it. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Inherited Fiend
+ManaCost:no cost
+Colors:black
+Types:Creature Demon
+PT:4/4
+K:Flying
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature card from a graveyard | SubAbility$ DBPutCounter | StackDescription$ Exile {c:Targeted} from the graveyard. | SpellDescription$ Exile target creature card from a graveyard.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:Flying\n{2}{B}: Exile target creature card from a graveyard. Put a +1/+1 counter on Inherited Fiend.

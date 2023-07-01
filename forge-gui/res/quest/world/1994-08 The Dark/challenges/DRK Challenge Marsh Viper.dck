@@ -1,0 +1,20 @@
+[quest]
+id=DRK Challenge: Marsh Viper
+OpponentName=The Vipers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:DRK
+Credit Reward=120
+AIExtras=Stone Calendar|Stone Calendar|Stone Calendar
+[metadata]
+Name=DRK Challenge: Marsh Viper
+Title=The Vipers
+Difficulty=very hard
+Description="All we had left were their black and bloated bodies." -Maeveen O'Donagh, Memoirs of a Soldier
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+24 Forest|LEB|3
+24 Marsh Viper|DRK
+12 Venom|DRK

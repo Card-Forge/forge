@@ -1,0 +1,7 @@
+Name:Resolute Watchdog
+ManaCost:W
+Types:Creature Dog
+PT:1/3
+K:Defender
+A:AB$ Pump | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Target creature you control gains indestructible until end of turn.
+Oracle:Defender\n{1}, Sacrifice Resolute Watchdog: Target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

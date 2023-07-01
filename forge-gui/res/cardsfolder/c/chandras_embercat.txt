@@ -1,0 +1,7 @@
+Name:Chandra's Embercat
+ManaCost:1 R
+Types:Creature Elemental Cat
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Elemental,Spell.Planeswalker+Chandra | SpellDescription$ Add {R}. Spend this mana only to cast an Elemental spell or a Chandra planeswalker spell.
+SVar:BuffedBy:Planeswalker.Chandra
+Oracle:{T}: Add {R}. Spend this mana only to cast an Elemental spell or a Chandra planeswalker spell.

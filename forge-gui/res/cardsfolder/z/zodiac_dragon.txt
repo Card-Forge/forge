@@ -1,0 +1,7 @@
+Name:Zodiac Dragon
+ManaCost:7 R R
+Types:Creature Dragon
+PT:8/8
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+YouOwn | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, you may return it to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+Oracle:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.

@@ -1,0 +1,6 @@
+Name:Voja
+ManaCost:no cost
+Types:Legendary Creature Wolf
+Colors:white,green
+PT:2/2
+Oracle:

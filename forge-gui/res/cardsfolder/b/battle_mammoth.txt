@@ -1,0 +1,9 @@
+Name:Battle Mammoth
+ManaCost:3 G G
+Types:Creature Elephant
+PT:6/5
+K:Trample
+T:Mode$ BecomesTarget | ValidTarget$ Permanent.YouCtrl+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+K:Foretell:2 G G
+Oracle:Trample\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.\nForetell {2}{G}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

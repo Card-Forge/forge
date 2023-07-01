@@ -1,0 +1,8 @@
+Name:Blind Seer
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+PT:3/3
+A:AB$ ChooseColor | Cost$ 1 U | Defined$ You | SubAbility$ Animate | SpellDescription$ Target spell or permanent becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | ValidTgts$ Card | TgtPrompt$ Select target spell or permanent to change the color of | TgtZone$ Stack,Battlefield | Colors$ ChosenColor | OverwriteColors$ True
+AI:RemoveDeck:All
+Oracle:{1}{U}: Target spell or permanent becomes the color of your choice until end of turn.

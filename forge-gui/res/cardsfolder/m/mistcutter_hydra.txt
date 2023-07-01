@@ -1,0 +1,10 @@
+Name:Mistcutter Hydra
+ManaCost:X G
+Types:Creature Hydra
+PT:0/0
+K:This spell can't be countered.
+K:Haste
+K:Protection from blue
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+Oracle:This spell can't be countered.\nHaste, protection from blue\nMistcutter Hydra enters the battlefield with X +1/+1 counters on it.

@@ -1,0 +1,12 @@
+Name:Haakon, Stromgald Scourge
+ManaCost:1 B B
+Types:Legendary Creature Zombie Knight
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard
+S:Mode$ CantBeCast | ValidCard$ Card.Self | Origin$ Exile,Hand,Library,Command | EffectZone$ Graveyard,Hand,Library,Command,Stack | Description$ You may cast CARDNAME from your graveyard, but not from anywhere else.
+S:Mode$ Continuous | Affected$ Knight.YouCtrl | ValidAfterStack$ Spell.Knight | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ As long as NICKNAME is on the battlefield, you may cast Knight spells from your graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerDescription$ When NICKNAME dies, you lose 2 life.
+SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+AI:RemoveDeck:Random
+SVar:DiscardMe:5
+Oracle:You may cast Haakon, Stromgald Scourge from your graveyard, but not from anywhere else.\nAs long as Haakon is on the battlefield, you may cast Knight spells from your graveyard.\nWhen Haakon dies, you lose 2 life.

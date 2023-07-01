@@ -1,0 +1,8 @@
+Name:Sunseed Nurturer
+ManaCost:2 W
+Types:Creature Human Druid Wizard
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Creature.powerGE5+YouCtrl | Execute$ TrigLife | TriggerDescription$ At the beginning of your end step, if you control a creature with power 5 or greater, you may gain 2 life.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+SVar:TrigLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may gain 2 life.\n{T}: Add {C}.

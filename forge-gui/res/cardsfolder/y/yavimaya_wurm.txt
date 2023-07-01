@@ -1,0 +1,6 @@
+Name:Yavimaya Wurm
+ManaCost:4 G G
+Types:Creature Wurm
+PT:6/4
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

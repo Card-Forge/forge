@@ -1,0 +1,8 @@
+Name:Maze Rusher
+ManaCost:5 R
+Types:Creature Elemental
+PT:6/3
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Haste | Description$ Multicolored creatures you control have haste.
+SVar:PlayMain1:TRUE
+Oracle:Haste\nMulticolored creatures you control have haste.

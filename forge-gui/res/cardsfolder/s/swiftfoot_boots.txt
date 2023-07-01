@@ -1,0 +1,6 @@
+Name:Swiftfoot Boots
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Hexproof | Description$ Equipped creature has hexproof and haste.
+Oracle:Equipped creature has hexproof and haste.\nEquip {1}

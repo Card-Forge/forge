@@ -1,0 +1,7 @@
+Name:Merrow Wavebreakers
+ManaCost:4 U
+Types:Creature Merfolk Soldier
+PT:3/3
+A:AB$ Pump | Cost$ 1 U Untap | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+AI:RemoveDeck:All
+Oracle:{1}{U}, {Q}: Merrow Wavebreakers gains flying until end of turn. ({Q} is the untap symbol.)

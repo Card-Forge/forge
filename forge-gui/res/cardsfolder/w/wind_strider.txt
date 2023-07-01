@@ -1,0 +1,7 @@
+Name:Wind Strider
+ManaCost:4 U
+Types:Creature Merfolk Wizard
+PT:3/3
+K:Flash
+K:Flying
+Oracle:Flash\nFlying

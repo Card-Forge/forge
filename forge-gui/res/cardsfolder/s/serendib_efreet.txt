@@ -1,0 +1,8 @@
+Name:Serendib Efreet
+ManaCost:2 U
+Types:Creature Efreet
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+Oracle:Flying\nAt the beginning of your upkeep, Serendib Efreet deals 1 damage to you.

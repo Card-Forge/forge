@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Mwonvuli Delta
+Title=The Mwonvuli Delta
+Difficulty=easy
+Description="More armies have been lost in the confusion of the jungle mists than to any battle." -Jolrael
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Decomposition|MIR
+2 Fog|MIR
+14 Forest|MIR|3
+6 Island|MIR|3
+2 Knight of the Mists|VIS
+4 Lichenthrope|VIS
+2 Locust Swarm|MIR
+3 Mindbender Spores|MIR
+4 Mist Dragon|MIR
+2 Natural Balance|MIR
+4 River Boa|VIS
+2 Roots of Life|MIR
+4 Undiscovered Paradise|VIS
+3 Vaporous Djinn|MIR
+4 Wall of Roots|MIR
+2 Warping Wurm|MIR

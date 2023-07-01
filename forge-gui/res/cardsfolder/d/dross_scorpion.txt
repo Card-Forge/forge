@@ -1,0 +1,7 @@
+Name:Dross Scorpion
+ManaCost:4
+Types:Artifact Creature Scorpion
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.Creature+Other,Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME or another artifact creature dies, you may untap target artifact.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact.
+Oracle:Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.

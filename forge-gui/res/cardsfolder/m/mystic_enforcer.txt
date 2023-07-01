@@ -1,0 +1,7 @@
+Name:Mystic Enforcer
+ManaCost:2 G W
+Types:Creature Human Nomad Mystic
+PT:3/3
+K:Protection from black
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +3/+3 and has flying.
+Oracle:Protection from black\nThreshold — As long as seven or more cards are in your graveyard, Mystic Enforcer gets +3/+3 and has flying.

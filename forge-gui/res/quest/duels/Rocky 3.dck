@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rocky 3
+Title=Rocky
+Difficulty=hard
+Description=WUR Pro red deck with Flamebreak, Tremor, Pyroclasm
+Icon=Rocky.jpg
+Deck Type=constructed
+[main]
+4 Plateau
+1 Tundra
+4 Volcanic Island
+4 Arid Mesa
+4 Scalding Tarn
+3 Mountain|M11
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+1 Ancestral Recall
+1 Time Walk
+3 Flamebreak
+4 Chain Reaction
+1 Task Mage Assembly
+1 Pyrohemia
+2 Subterranean Spirit
+1 Tremor
+4 Pyroclasm
+2 Auriok Champion
+1 Galina's Knight
+1 Guardian of the Guildpact
+1 Hazerider Drake
+4 Kor Firewalker
+1 Paladin en-Vec
+2 Silver Knight
+2 Soltari Priest
+1 Tivadar of Thorn
+1 Vedalken Outlander
+2 Vulshok Refugee
+1 Weatherseed Faeries
+[sideboard]

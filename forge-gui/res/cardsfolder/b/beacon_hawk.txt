@@ -1,0 +1,9 @@
+Name:Beacon Hawk
+ManaCost:1 W
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may untap target creature.
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature
+Oracle:Flying\nWhenever Beacon Hawk deals combat damage to a player, you may untap target creature.\n{W}: Beacon Hawk gets +0/+1 until end of turn.

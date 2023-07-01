@@ -1,0 +1,14 @@
+Name:Sunset Revelry
+ManaCost:1 W
+Types:Sorcery
+A:SP$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar$ LifeThem | ConditionSVarCompare$ GTLifeYou | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ If an opponent has more life than you, you gain 4 life.
+SVar:LifeThem:PlayerCountOpponents$HighestLifeTotal
+SVar:LifeYou:Count$YourLifeTotal
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | ConditionCheckSVar$ CreaturesThem | ConditionSVarCompare$ GTCreaturesYou | SubAbility$ DBDraw | SpellDescription$ If an opponent controls more creatures than you, create two 1/1 white Human creature tokens.
+SVar:CreaturesThem:PlayerCountOpponents$HighestValid Creature.YouCtrl
+SVar:CreaturesYou:Count$Valid Creature.YouCtrl
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ CardsThem | ConditionSVarCompare$ GTCardsYou | StackDescription$ SpellDescription | SpellDescription$ If an opponent has more cards in hand than you, draw a card.
+SVar:CardsThem:PlayerCountOpponents$HighestCardsInHand
+SVar:CardsYou:Count$CardsInYourHand
+DeckHas:Ability$LifeGain|Token
+Oracle:If an opponent has more life than you, you gain 4 life.\nIf an opponent controls more creatures than you, create two 1/1 white Human creature tokens.\nIf an opponent has more cards in hand than you, draw a card.

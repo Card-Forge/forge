@@ -1,0 +1,10 @@
+Name:Parish-Blade Trainee
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+K:Training
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put its counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHas:Ability$Counters
+SVar:SacMe:2
+Oracle:Training\nWhen Parish-Blade Trainee dies, put its counters on target creature you control.

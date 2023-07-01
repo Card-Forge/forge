@@ -1,0 +1,11 @@
+Name:Forgotten Creation
+ManaCost:3 U
+Types:Creature Zombie Horror
+PT:3/3
+K:Skulk
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:Discarded$Amount
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards.

@@ -1,0 +1,9 @@
+Name:Form of the Dragon
+ManaCost:4 R R R
+Types:Enchantment
+S:Mode$ CantAttack | ValidCard$ Creature.withoutFlying | Target$ You | Description$ Creatures without flying can't attack you.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 5 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of each end step, your life total becomes 5.
+SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ 5
+Oracle:At the beginning of your upkeep, Form of the Dragon deals 5 damage to any target.\nAt the beginning of each end step, your life total becomes 5.\nCreatures without flying can't attack you.

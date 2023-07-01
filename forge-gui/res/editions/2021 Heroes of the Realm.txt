@@ -1,0 +1,12 @@
+[metadata]
+Code=PH21
+Date=2022-08-01
+Name=2021 Heroes of the Realm
+Type=Funny
+ScryfallCode=PH21
+
+[cards]
+1 M Andrios, Roaming Explorer @Borja Pindado
+2 M Arteeoh, Dread Scavenger @Zoltan Boros
+3 M Byode, Inverse Sun @Dominik Mayer
+4 M Ersta, Friend to All @Winona Nelson

@@ -1,0 +1,8 @@
+Name:Ichneumon Druid
+ManaCost:1 G G
+Types:Creature Human Druid
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ GT1 | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, CARDNAME deals 4 damage to that player.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 4
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, Ichneumon Druid deals 4 damage to that player.

@@ -1,0 +1,8 @@
+Name:Contested Cliffs
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ R G T | ValidTgts$ Creature.Beast+YouCtrl | TgtPrompt$ Choose target Beast creature you control | SubAbility$ FightForTheCliffs | StackDescription$ None | SpellDescription$ Target Beast creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:FightForTheCliffs:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{R}{G}, {T}: Target Beast creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)

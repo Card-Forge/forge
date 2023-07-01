@@ -1,0 +1,6 @@
+Name:Hulking Bugbear
+ManaCost:1 R R
+Types:Creature Goblin
+PT:3/3
+K:Haste
+Oracle:Haste

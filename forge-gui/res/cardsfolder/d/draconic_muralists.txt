@@ -1,0 +1,8 @@
+Name:Draconic Muralists
+ManaCost:3 G
+Types:Creature Dragon Bard
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Dragon | ChangeNum$ 1 | ShuffleNonMandatory$ True
+DeckNeeds:Type$Dragon
+Oracle:When Draconic Muralists dies, you may search your library for a Dragon card, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Righteous Valkyrie
+OpponentName=The Valkyries
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Righteous Valkyrie
+Difficulty=hard
+Description="Blessed are those who hunger and thirst after righteousness, for they shall be filled."\n--Matthew 5:6
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Righteous Valkyrie
+[Main]
+30 Plains|KHM|1
+30 Righteous Valkyrie|KHM|2

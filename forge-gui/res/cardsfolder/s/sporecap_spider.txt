@@ -1,0 +1,6 @@
+Name:Sporecap Spider
+ManaCost:2 G
+Types:Creature Spider
+PT:1/5
+K:Reach
+Oracle:Reach

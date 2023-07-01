@@ -1,0 +1,7 @@
+Name:Nightwind Glider
+ManaCost:2 W
+Types:Creature Human Rebel
+PT:2/1
+K:Flying
+K:Protection from black
+Oracle:Flying, protection from black

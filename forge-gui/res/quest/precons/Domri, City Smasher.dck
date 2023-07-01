@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Domri, City Smasher
+Description=Domri Rade is a brash young human whose small stature belies his ferocious nature and formidable power over wild beasts. Summon a horde of feral creatures and goad them into a frenzy as you stampede to victory!
+Deck Type=constructed
+Set=RNA
+Image=domri_city_smasher.jpg
+[Main]
+1 Axebane Beast|RNA
+1 Bolrac-Clan Crusher|RNA
+2 Burn Bright|RNA
+3 Charging War Boar|RNA
+2 Clamor Shaman|RNA
+2 Domri's Nodorog|RNA
+1 Domri, City Smasher+|RNA
+1 End-Raze Forerunners|RNA
+2 Feral Maaka|RNA
+11 Forest|RNA
+3 Frenzied Arynx|RNA
+1 Glass of the Guildpact|RNA
+2 Gravel-Hide Goblin|RNA
+4 Gruul Guildgate|RNA
+11 Mountain|RNA
+4 Ragefire|RNA
+1 Rampaging Rendhorn|RNA
+2 Stony Strength|RNA
+2 Sylvan Brushstrider|RNA
+1 Wrecking Beast|RNA
+3 Zhur-Taa Goblin|RNA

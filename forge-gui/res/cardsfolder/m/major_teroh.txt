@@ -1,0 +1,8 @@
+Name:Major Teroh
+ManaCost:3 W
+Types:Legendary Creature Bird Soldier
+PT:2/3
+K:Flying
+A:AB$ ChangeZoneAll | Cost$ 3 W W Sac<1/CARDNAME> | ChangeType$ Creature.Black | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all black creatures.
+AI:RemoveDeck:Random
+Oracle:Flying\n{3}{W}{W}, Sacrifice Major Teroh: Exile all black creatures.

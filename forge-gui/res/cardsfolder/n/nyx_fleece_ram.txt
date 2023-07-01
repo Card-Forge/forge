@@ -1,0 +1,7 @@
+Name:Nyx-Fleece Ram
+ManaCost:1 W
+Types:Enchantment Creature Sheep
+PT:0/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:At the beginning of your upkeep, you gain 1 life.

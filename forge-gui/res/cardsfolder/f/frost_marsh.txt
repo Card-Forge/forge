@@ -1,0 +1,6 @@
+Name:Frost Marsh
+ManaCost:no cost
+Types:Snow Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
+Oracle:Frost Marsh enters the battlefield tapped.\n{T}: Add {U} or {B}.

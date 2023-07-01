@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Galahad 2
+Title=Galahad
+Difficulty=medium
+Description=WB Knight deck with Kinsbaile Cavalier and Knight Exemplar
+Icon=Galahad.jpg
+Deck Type=constructed
+[main]
+7 Plains|M12
+7 Swamp|M12
+2 Godless Shrine
+4 Scrubland
+2 Stillmoon Cavalier
+2 Knight Exemplar
+1 Glorious Charge
+2 Knight of Meadowgrain
+2 Plover Knights
+3 Knight of the White Orchid
+3 Black Knight
+1 Kulrath Knight
+1 Thistledown Liege
+1 Wilt-Leaf Cavaliers
+1 Swords to Plowshares
+2 Silver Knight
+4 Kinsbaile Cavalier
+2 Soltari Crusader
+2 Serra's Blessing
+4 Godless Shrine
+2 Paladin en-Vec
+2 Path to Exile
+1 Valorous Stance
+1 Doom Blade
+1 Dark Banishing
+[sideboard]

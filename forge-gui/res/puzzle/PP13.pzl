@@ -1,0 +1,18 @@
+[metadata]
+Name:Pauper Puzzles #13 - A Tap Dance
+URL:https://pauperpuzzles.wordpress.com/2017/02/11/13-a-tap-dance/
+Goal:Survive
+Turns:2
+Description:Survive until your next turn.
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=20
+humanhand=Azorius Chancery;Ghostly Flicker;Pestermite;Explore;Sundering Vitae
+humanlibrary=Dream's Grip;Ghostly Flicker
+humanbattlefield=Kabira Crossroads;Secluded Steppe;Island;Forest;Essence Warden|Id:12;Curse of Chains|AttachedTo:12;Pestermite;Quirion Ranger
+aihand=Groundswell
+aibattlefield=Shinen of Life's Roar;Nest Invader;Skarrgan Pit-Skulk;River Boa;Silhana Ledgewalker|Counters:P1P1=1;Tangle Golem;Elite Cat Warrior;Vault Skirge
+ailibrary=Forest

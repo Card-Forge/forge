@@ -1,0 +1,6 @@
+Name:Grim Backwoods
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 B G T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card.

@@ -1,0 +1,6 @@
+Name:Terrain Generator
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 2 T | ChangeType$ Land.Basic+YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Hand | Destination$ Battlefield | Tapped$ True | SpellDescription$ You may put a basic land card from your hand onto the battlefield tapped.
+Oracle:{T}: Add {C}.\n{2}, {T}: You may put a basic land card from your hand onto the battlefield tapped.

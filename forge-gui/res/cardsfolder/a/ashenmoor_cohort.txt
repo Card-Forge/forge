@@ -1,0 +1,7 @@
+Name:Ashenmoor Cohort
+ManaCost:5 B
+Types:Creature Elemental Warrior
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Creature.Black+YouCtrl+Other | Description$ CARDNAME gets +1/+1 as long as you control another black creature.
+SVar:BuffedBy:Creature.Black
+Oracle:Ashenmoor Cohort gets +1/+1 as long as you control another black creature.

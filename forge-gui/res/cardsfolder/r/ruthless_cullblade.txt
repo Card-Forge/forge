@@ -1,0 +1,7 @@
+Name:Ruthless Cullblade
+ManaCost:1 B
+Types:Creature Vampire Warrior
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ LE10 | Description$ CARDNAME gets +2/+1 as long as an opponent has 10 or less life.
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+Oracle:Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.

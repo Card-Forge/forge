@@ -1,0 +1,9 @@
+Name:Selfless Samurai
+ManaCost:1 W
+Types:Creature Fox Samurai
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, it gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Lifelink
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Another target creature you control gains indestructible until end of turn.
+DeckHints:Type$Samurai|Warrior
+Oracle:Whenever a Samurai or Warrior you control attacks alone, it gains lifelink until end of turn.\nSacrifice Selfless Samurai: Another target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

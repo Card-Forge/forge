@@ -1,0 +1,6 @@
+Name:Seton, Krosan Protector
+ManaCost:G G G
+Types:Legendary Creature Centaur Druid
+PT:2/2
+A:AB$ Mana | Cost$ tapXType<1/Druid> | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Tap an untapped Druid you control: Add {G}.

@@ -1,0 +1,7 @@
+Name:Magmaw
+ManaCost:3 R R
+Types:Creature Elemental
+PT:4/4
+A:AB$ DealDamage | Cost$ 1 Sac<1/Permanent.nonLand/nonland permanent> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+Oracle:{1}, Sacrifice a nonland permanent: Magmaw deals 1 damage to any target.

@@ -1,0 +1,18 @@
+Name:Dread Linnorm
+ManaCost:6 G
+Types:Creature Snake Dragon
+PT:7/6
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE3 | Description$ CARDNAME can't be blocked by creatures with power 3 or less.
+AlternateMode:Adventure
+Oracle:Dread Linnorm can't be blocked by creatures with power 3 or less.
+
+ALTERNATE
+
+Name:Scale Deflection
+ManaCost:3 G
+Types:Instant Adventure
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on target creature and untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Hexproof
+DeckHas:Ability$Counters
+Oracle:Put two +1/+1 counters on target creature and untap it. It gains hexproof until the end of turn.

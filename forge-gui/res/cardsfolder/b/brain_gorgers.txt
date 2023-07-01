@@ -1,0 +1,8 @@
+Name:Brain Gorgers
+ManaCost:3 B
+Types:Creature Zombie
+PT:4/2
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast CARDNAME, any player may sacrifice a creature. If a player does, counter CARDNAME.
+SVar:TrigCounter:DB$ Counter | UnlessCost$ Sac<1/Creature> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True
+K:Madness:1 B
+Oracle:When you cast this spell, any player may sacrifice a creature. If a player does, counter Brain Gorgers.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

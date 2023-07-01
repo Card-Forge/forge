@@ -1,0 +1,6 @@
+Name:Makindi Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/4
+K:Flying
+Oracle:Flying

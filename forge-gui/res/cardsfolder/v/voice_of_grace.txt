@@ -1,0 +1,7 @@
+Name:Voice of Grace
+ManaCost:3 W
+Types:Creature Angel
+PT:2/2
+K:Flying
+K:Protection from black
+Oracle:Flying, protection from black

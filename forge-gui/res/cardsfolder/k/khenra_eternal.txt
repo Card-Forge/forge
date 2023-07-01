@@ -1,0 +1,6 @@
+Name:Khenra Eternal
+ManaCost:1 B
+Types:Creature Zombie Jackal Warrior
+PT:2/2
+K:Afflict:1
+Oracle:Afflict 1 (Whenever this creature becomes blocked, defending player loses 1 life.)

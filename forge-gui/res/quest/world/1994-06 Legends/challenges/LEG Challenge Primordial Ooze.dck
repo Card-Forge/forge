@@ -1,0 +1,18 @@
+[quest]
+id=LEG Challenge: Primordial Ooze
+OpponentName=The Ooze
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Primordial Ooze|Mountain
+[metadata]
+Name=LEG Challenge: Primordial Ooze
+Title=The Ooze
+Difficulty=medium
+Description="Listen, and understand! That ooze is out there! It can't be bargained with. It can't be reasoned with. It doesn't feel pity, or remorse, or fear. And it absolutely will not stop, ever, until you are dead!" -Kyle Reese, Terminator (sort of)
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+60 Mountain|LEB|1

@@ -1,0 +1,6 @@
+Name:Final Flare
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 2 R Sac<1/Creature;Enchantment/creature or enchantment> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature or enchantment.\nFinal Flare deals 5 damage to target creature.

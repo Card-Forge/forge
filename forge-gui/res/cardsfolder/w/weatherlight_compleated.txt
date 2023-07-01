@@ -1,0 +1,13 @@
+Name:Weatherlight Compleated
+ManaCost:2
+Types:Legendary Artifact Vehicle
+PT:5/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_PHYRESIS | AddType$ Creature & Phyrexian | Description$ As long as CARDNAME has four or more phyresis counters on it, it's a Phyrexian creature in addition to its other types.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put a phyresis counter on CARDNAME. Then draw a card if it has seven or more phyresis counters on it. If it doesn't, scry 1.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PHYRESIS | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.Self+counters_GE7_PHYRESIS | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.Self+counters_LE6_PHYRESIS
+DeckHints:Ability$Graveyard|Sacrifice & Type$Phyrexian
+DeckHas:Ability$Counters
+Oracle:Flying\nAs long as Weatherlight Compleated has four or more phyresis counters on it, it's a Phyrexian creature in addition to its other types.\nWhenever a creature you control dies, put a phyresis counter on Weatherlight Compleated. Then draw a card if it has seven or more phyresis counters on it. If it doesn't, scry 1.

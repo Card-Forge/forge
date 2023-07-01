@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Man-o'-War
+OpponentName=The Man-o'-Wars
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=MIR Challenge: Man-o'-War
+Title=The Man-o'-Wars
+Difficulty=hard
+Description="Beauty to the eye does not always translate to the touch." -Naimah, Femeref philosopher
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+20 Island|MIR|2
+40 Man-o'-War|VIS

@@ -1,0 +1,8 @@
+Name:Canyon Drake
+ManaCost:2 R R
+Types:Creature Drake
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ 1 Discard<1/Random> | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+AI:RemoveDeck:All
+Oracle:Flying\n{1}, Discard a card at random: Canyon Drake gets +2/+0 until end of turn.

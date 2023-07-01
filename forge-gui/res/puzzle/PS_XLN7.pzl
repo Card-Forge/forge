@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #07
+URL:http://www.possibilitystorm.com/ixalan-season-puzzle-7/
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=11
+AILife=13
+humanhand=Duskborne Skymarcher; Gilded Sentinel; Regisaur Alpha; Merciless Javelineer;
+humanprecast=
+humangraveyard=Reckless Fireweaver; Gearseeker Serpent; Storm Sculptor; Temmet, Vizier of Naktamun;
+humanlibrary=
+humanbattlefield=Mechanized Production|AttachedTo:420; God-Pharaoh's Gift|Id:420; God-Pharaoh's Gift; Huatli, Warrior Poet|Counters:LOYALTY=3; Pia Nalaar; Anointed Procession; Spire of Industry; Spire of Industry; Spire of Industry; Inspiring Vantage|Set:KLD; Inspiring Vantage|Set:KLD; Inspiring Vantage|Set:KLD; Inspiring Vantage|Set:KLD;
+aibattlefield=Trueheart Duelist; Trueheart Duelist; Trueheart Duelist; Trueheart Duelist; Queen's Agent|Counters:P1P1=1; Queen's Agent|Counters:P1P1=1; Queen's Agent|Counters:P1P1=1; Queen's Agent|Counters:P1P1=1; Ashes of the Abhorrent;
+aiprecast=Trespasser's Curse;
+aigraveyard=
+ailibrary=
+aiexile=

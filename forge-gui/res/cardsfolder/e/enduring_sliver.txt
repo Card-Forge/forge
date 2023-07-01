@@ -1,0 +1,9 @@
+Name:Enduring Sliver
+ManaCost:1 W
+Types:Creature Sliver
+PT:2/2
+K:Outlast:2
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Sliver.YouCtrl+Other | AddKeyword$ Outlast:2 | Description$ Other Sliver creatures you control have outlast {2}.
+SVar:PlayMain1:TRUE
+Oracle:Outlast {2} ({2}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nOther Sliver creatures you control have outlast {2}.

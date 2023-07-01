@@ -1,0 +1,10 @@
+Name:Shahrazad
+ManaCost:W W
+Types:Sorcery
+A:SP$ Subgame | RememberPlayers$ NotWin | SubAbility$ DBRepeatEachPlayer | SpellDescription$ Players play a Magic subgame, using their libraries as their decks. Each player who doesn't win the subgame loses half their life, rounded up. | StackDescription$ SpellDescription
+SVar:DBRepeatEachPlayer:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBLoseLife | SpellDescription$ Each player who doesn't win the subgame loses half their life, rounded up. | StackDescription$ SpellDescription
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.IsRemembered
+SVar:X:PlayerCountRemembered$LifeTotal/HalfUp
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Players play a Magic subgame, using their libraries as their decks. Each player who doesn't win the subgame loses half their life, rounded up.

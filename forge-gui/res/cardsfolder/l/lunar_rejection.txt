@@ -1,0 +1,8 @@
+Name:Lunar Rejection
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.Wolf,Creature.Werewolf | TgtPrompt$ Select target Wolf or Werewolf | SubAbility$ DBDraw | SpellDescription$ Return target [Wolf or Werewolf] creature to its owner's hand.
+A:SP$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Cleave | CostDesc$ {3}{U} | NonBasicSpell$ True | SubAbility$ DBDraw | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.) | StackDescription$ Return {c:Targeted} to its owner's hand.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+Oracle:Cleave {3}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nReturn target [Wolf or Werewolf] creature to its owner's hand.\nDraw a card.

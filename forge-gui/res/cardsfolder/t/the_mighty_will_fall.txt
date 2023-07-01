@@ -1,0 +1,8 @@
+Name:The Mighty Will Fall
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoosePlayer | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent with the highest life total among your opponents. That player loses 7 life.
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent+lifeEQX | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ ChosenPlayer | LifeAmount$ 7
+SVar:X:PlayerCountOpponents$HighestLifeTotal
+Oracle:When you set this scheme in motion, choose an opponent with the highest life total among your opponents. That player loses 7 life.

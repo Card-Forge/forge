@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #14 - A Bird In The Hand
+URL:https://pauperpuzzles.wordpress.com/2017/02/18/14-a-bird-in-the-hand/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Survive the incoming attack and win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=COMBAT_DECLARE_BLOCKERS
+HumanLife=1
+AILife=8
+humanhand=Rites of Initiation;Smash to Smithereens;Pulse of Murasa
+humanlibrary=Aerial Volley;Death Spark;Lightning Bolt;Vithian Stinger
+humanbattlefield=Forest|Tapped;Plains|Tapped;Mountain;Mountain;Mountain|Id:12;Unbridled Growth|AttachedTo:12;Auramancer;Shambling Shell;Aerie Ouphes|Id:16;Stupefying Touch|AttachedTo:16;Angelic Renewal
+aibattlefield=Dawnfeather Eagle|Tapped|Attacking;War Falcon|Tapped|Attacking;War Falcon|Tapped|Attacking;Daru Cavalier|Tapped|Attacking;Veteran Cathar|Id:22|Attacking;Bonesplitter|AttachedTo:22;Lifelink|AttachedTo:22

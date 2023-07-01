@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (IKO)
+Type:Archived
+Subtype:Standard
+Effective:2020-04-16
+Sets:ANA, PANA, GRN, RNA, WAR, M20, ELD, THB, IKO
+Banned:Field of the Dead; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

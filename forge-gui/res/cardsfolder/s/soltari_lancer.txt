@@ -1,0 +1,7 @@
+Name:Soltari Lancer
+ManaCost:2 W
+Types:Creature Soltari Knight
+PT:2/2
+K:Shadow
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nSoltari Lancer has first strike as long as it's attacking.

@@ -1,0 +1,18 @@
+Name:Kazandu Mammoth
+ManaCost:1 G G
+Types:Creature Elephant
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+SVar:BuffedBy:Land
+AlternateMode:Modal
+Oracle:Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+
+ALTERNATE
+
+Name:Kazandu Valley
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Kazandu Valley enters the battlefield tapped.\n{T}: Add {G}.

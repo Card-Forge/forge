@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=MIR 1 Tales: Afari
+Title=Afari
+Difficulty=easy
+Description="Defiantly, the young cyclops popped the brushwagg into his mouth. His cheeks suddenly puffed, his eye bulged, and he was forced to agree with his elder." -Afari, Tales
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Bad River|MIR
+4 Brood of Cockroaches|VIS
+4 Brushwagg|MIR
+1 Flood Plain|MIR
+7 Forest|MIR|1
+2 Giant Caterpillar|VIS
+2 Grasslands|MIR
+4 Hazerider Drake|MIR
+4 Hulking Cyclops|VIS
+3 Igneous Golem|MIR
+2 Island|MIR|3
+4 Mountain|MIR|1
+2 Mountain Valley|MIR
+2 Mtenda Lion|MIR
+1 Mystical Tutor|MIR
+1 Plains|MIR|1
+4 River Boa|VIS
+1 Rocky Tar Pit|MIR
+1 Swamp|MIR|4
+2 Tranquil Domain|MIR
+4 Undiscovered Paradise|VIS
+2 Worldly Tutor|MIR
+2 Zuberi, Golden Feather|MIR

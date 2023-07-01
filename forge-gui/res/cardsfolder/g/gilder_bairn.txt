@@ -1,0 +1,7 @@
+Name:Gilder Bairn
+ManaCost:1 GU GU
+Types:Creature Ouphe
+PT:1/3
+A:AB$ MultiplyCounter | Cost$ 2 GU Untap | ValidTgts$ Permanent | StackDescription$ SpellDescription | SpellDescription$ Double the number of each kind of counter on target permanent.
+DeckHints:Ability$Counters
+Oracle:{2}{G/U}, {Q}: Double the number of each kind of counter on target permanent. ({Q} is the untap symbol.)

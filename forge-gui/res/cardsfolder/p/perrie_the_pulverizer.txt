@@ -1,0 +1,14 @@
+Name:Perrie, the Pulverizer
+ManaCost:1 G U W
+Types:Legendary Creature Rhino Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When NICKNAME enters the battlefield, put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | CounterType$ SHIELD
+SVar:PlayMain1:TRUE
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, target creature you control gains trample and gets +X/+X, where X is the number of different kinds of counters among permanents you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Trample | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$DifferentCounterKinds_Permanent.YouCtrl
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Planeswalker & Keyword$Devour|Modular|Fading
+Oracle:When Perrie enters the battlefield, put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nWhenever Perrie attacks, target creature you control gains trample and gets +X/+X, where X is the number of different kinds of counters among permanents you control.

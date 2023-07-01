@@ -1,0 +1,6 @@
+Name:Cunning Evasion
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | Execute$ TrigBounce | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control becomes blocked, you may return it to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttackerLKICopy
+Oracle:Whenever a creature you control becomes blocked, you may return it to its owner's hand.

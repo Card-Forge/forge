@@ -1,0 +1,9 @@
+Name:Trove Tracker
+ManaCost:2 U
+Types:Creature Human Pirate
+PT:2/2
+K:Encore:5 U U
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$Token
+Oracle:When Trove Tracker dies, draw a card.\nEncore {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

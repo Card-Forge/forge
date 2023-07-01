@@ -1,0 +1,11 @@
+Name:All Suns' Dawn
+ManaCost:4 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target white card in your graveyard | ValidTgts$ Card.White+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnU | SpellDescription$ For each color, return up to one target card of that color from your graveyard to your hand. Exile CARDNAME.
+SVar:ReturnU:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target blue card in your graveyard | ValidTgts$ Card.Blue+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnB
+SVar:ReturnB:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target black card in your graveyard | ValidTgts$ Card.Black+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnR
+SVar:ReturnR:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target red card in your graveyard | ValidTgts$ Card.Red+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnG
+SVar:ReturnG:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target green card in your graveyard | ValidTgts$ Card.Green+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+AI:RemoveDeck:Random
+Oracle:For each color, return up to one target card of that color from your graveyard to your hand. Exile All Suns' Dawn.

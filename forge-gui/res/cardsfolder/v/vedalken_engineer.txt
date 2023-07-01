@@ -1,0 +1,6 @@
+Name:Vedalken Engineer
+ManaCost:1 U
+Types:Creature Vedalken Artificer
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Artifact,Activated.Artifact+inZoneBattlefield | SpellDescription$ Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+Oracle:{T}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.

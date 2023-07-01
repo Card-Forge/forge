@@ -1,0 +1,7 @@
+Name:Furious Assault
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a creature spell, CARDNAME deals 1 damage to target player or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+SVar:BuffedBy:Creature
+Oracle:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player or planeswalker.

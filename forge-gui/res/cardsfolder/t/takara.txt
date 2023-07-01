@@ -1,0 +1,7 @@
+Name:Takara
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+3/-8
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+Oracle:Hand +3, life -8\nSacrifice a creature: Takara deals 1 damage to any target.

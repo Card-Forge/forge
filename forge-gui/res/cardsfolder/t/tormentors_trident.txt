@@ -1,0 +1,7 @@
+Name:Tormentor's Trident
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0 and attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.EquippedBy | Secondary$ True
+Oracle:Equipped creature gets +3/+0 and attacks each combat if able.\nEquip {3}

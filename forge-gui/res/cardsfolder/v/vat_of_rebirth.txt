@@ -1,0 +1,8 @@
+Name:Vat of Rebirth
+ManaCost:B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other,Artifact.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another artifact or creature you control is put into a graveyard from the battlefield, put an oil counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ 2 B T SubCounter<4/OIL> | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
+DeckHas:Ability$Graveyard|Counters
+Oracle:Whenever another artifact or creature you control is put into a graveyard from the battlefield, put an oil counter on Vat of Rebirth.\n{2}{B}, {T}, Remove four oil counters from Vat of Rebirth: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.

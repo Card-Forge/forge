@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Shamanism
+Description=Nature's roots run deep in Lorwyn, and shamans are in touch with its primeval ways. With the wisdom of ancient treefolk as your guide, overcome your enemies through subtlety, mysticism, and if needed, raw power.
+Deck Type=constructed
+Set=MOR
+Image=shamanism.jpg
+[main]
+3 Bog-Strider Ash|LRW
+1 Oblivion Ring|LRW
+2 Wanderer's Twig|LRW
+1 Guardian of Cloverdell|LRW
+2 Lignify|LRW
+2 Vivid Grove|LRW
+1 Thorntooth Witch|LRW
+1 Moonglove Changeling|MOR
+3 Nameless Inversion|LRW
+15 Forest|LRW
+5 Swamp|LRW
+2 Plains|LRW
+2 Gilt-Leaf Seer|LRW
+2 Woodland Changeling|LRW
+1 Sylvan Echoes|LRW
+3 Bosk Banneret|MOR
+1 Redeem the Lost|MOR
+1 Leaf-Crowned Elder|MOR
+1 Wolf-Skull Shaman|MOR
+1 Revive the Fallen|MOR
+2 Squeaking Pie Grubfellows|MOR
+2 Recross the Paths|MOR
+1 Thornbite Staff|MOR
+1 Everbark Shaman|MOR
+2 Orchard Warden|MOR
+1 Luminescent Rain|MOR
+1 Reach of Branches|MOR
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Sepulcher Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/1
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+SVar:AIPreference:SacCost$Creature.token+powerLE2,Creature.cmcLE1+powerLE1
+Oracle:Sacrifice another creature: Sepulcher Ghoul gets +2/+2 until end of turn. Activate only once each turn.

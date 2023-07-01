@@ -1,0 +1,10 @@
+Name:Elite Inquisitor
+ManaCost:W W
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+K:Vigilance
+K:Protection from Vampires
+K:Protection from Werewolves
+K:Protection from Zombies
+Oracle:First strike, vigilance\nProtection from Vampires, from Werewolves, and from Zombies

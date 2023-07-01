@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Swarming Instinct
+Description=The Eldrazi are loose on Zendikar in their twisted multitudes, and these monstrosities seek only to feed. Use your swarm of Eldrazi Scion tokens to overwhelm the enemy, or sacrifice them to call on even greater Eldrazi.
+Deck Type=constructed
+Set=BFZ
+Image=swarming_instinct.jpg
+[Main]
+1 Drowner of Hope+|BFZ
+3 Blisterpod|BFZ
+2 Tide Drifter|BFZ
+1 Pilgrim's Eye|BFZ
+3 Eldrazi Skyspawner|BFZ
+3 Incubator Drone|BFZ
+2 Eyeless Watcher|BFZ
+2 Kozilek's Channeler|BFZ
+1 Brood Monitor|BFZ
+1 Bane of Bala Ged|BFZ
+2 Breaker of Armies|BFZ
+1 Desolation Twin|BFZ
+3 Call the Scions|BFZ
+1 Titan's Presence|BFZ
+2 Spell Shrivel|BFZ
+1 Unnatural Aggression|BFZ
+1 Adverse Conditions|BFZ
+2 Scour from Existence|BFZ
+2 Hedron Archive|BFZ
+1 Blighted Cataract|BFZ
+2 Evolving Wilds|BFZ
+2 Skyline Cascade|BFZ
+10 Island|BFZ
+11 Forest|BFZ

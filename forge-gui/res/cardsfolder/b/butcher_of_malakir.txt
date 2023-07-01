@@ -1,0 +1,8 @@
+Name:Butcher of Malakir
+ManaCost:5 B B
+Types:Creature Vampire Warrior
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME or another creature you control dies, each opponent sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature
+Oracle:Flying\nWhenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.

@@ -1,0 +1,7 @@
+Name:Twins of Maurer Estate
+ManaCost:4 B
+Types:Creature Vampire
+PT:3/5
+K:Madness:2 B
+DeckHints:Ability$Discard
+Oracle:Madness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

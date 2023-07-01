@@ -1,0 +1,8 @@
+Name:Azorius Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
+A:AB$ Draw | Cost$ W U T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White|Blue
+Oracle:{T}: Add {W} or {U}.\n{W}{U}, {T}, Sacrifice Azorius Cluestone: Draw a card.

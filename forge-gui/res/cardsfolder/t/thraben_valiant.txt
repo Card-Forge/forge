@@ -1,0 +1,6 @@
+Name:Thraben Valiant
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+K:Vigilance
+Oracle:Vigilance

@@ -1,0 +1,18 @@
+Name:Mirror-Style Master
+ManaCost:4 R R
+Types:Creature Human Warrior
+PT:3/3
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Animate | Triggers$ AttackTrig | sVars$ AE
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Creature.attacking+modified+YouCtrl | UseImprinted$ True | RepeatSubAbility$ DBClone | SubAbility$ DelTrig | ChangeZoneTable$ True
+SVar:DBClone:DB$ CopyPermanent | Defined$ Imprinted | TokenTapped$ True | TokenAttacking$ True | RememberTokens$ True
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile those tokens at end of combat. | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)
+SVar:HasAttackEffect:TRUE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)

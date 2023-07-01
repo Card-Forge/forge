@@ -1,0 +1,6 @@
+Name:Reparations
+ManaCost:1 W U
+Types:Enchantment
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TargetsValid$ You,Creature.YouCtrl+inZoneBattlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell that targets you or a creature you control, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Whenever an opponent casts a spell that targets you or a creature you control, you may draw a card.

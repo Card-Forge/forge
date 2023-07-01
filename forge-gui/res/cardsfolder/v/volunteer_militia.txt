@@ -1,0 +1,5 @@
+Name:Volunteer Militia
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/2
+Oracle:

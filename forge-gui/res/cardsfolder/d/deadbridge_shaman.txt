@@ -1,0 +1,7 @@
+Name:Deadbridge Shaman
+ManaCost:2 B
+Types:Creature Elf Shaman
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, target opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:When Deadbridge Shaman dies, target opponent discards a card.

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Agrus 2
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=medium
+Description=Ein, Zwei, Polizei
+Deck Type=constructed
+[main]
+4 Ash Zealot|RTR
+2 Boros Charm|GTC
+4 Boros Elite|GTC
+4 Boros Recruit|RAV
+2 Five-Alarm Fire|GTC
+4 Foundry Street Denizen|GTC
+4 Legion Loyalist|GTC
+4 Lightning Helix|RAV
+10 Mountain|RTR
+8 Plains|RTR
+2 Proclamation of Rebirth|DIS
+4 Sacred Foundry|GTC
+4 Seal of Fire|DIS
+2 Skyknight Legionnaire|GTC
+2 Wojek Halberdiers|GTC
+[sideboard]
+[planes]
+[schemes]

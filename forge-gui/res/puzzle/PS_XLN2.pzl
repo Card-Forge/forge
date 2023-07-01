@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Ixalan #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/10/W_XLN02.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn.
+[state]
+humanlife=2
+ailife=9
+activeplayer=human
+activephase=MAIN1
+humanhand=Savage Stomp;Regisaur Alpha;Verdant Sun's Avatar;Dinosaur Stampede
+humanlibrary=
+humangraveyard=
+humanbattlefield=t:Dinosaur,P:3,T:3,Cost:no cost,Color:G,Types:Creature-Dinosaur,Keywords:Trample,Image:g_3_3_dinosaur;Huatli, Warrior Poet|Counters:LOYALTY=1;Drover of the Mighty;Kinjalli's Caller;Sheltered Thicket|Set:AKH;Sheltered Thicket|Set:AKH;Sheltered Thicket|Set:AKH;Rootbound Crag|Set:XLN;Rootbound Crag|Set:XLN;Rootbound Crag|Set:XLN
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Sun-Crowned Hunters;Sun-Crowned Hunters
+aiexile=
+aicommand=

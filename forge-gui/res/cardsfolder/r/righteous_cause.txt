@@ -1,0 +1,6 @@
+Name:Righteous Cause
+ManaCost:3 W W
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SpellDescription$ You gain 1 life for each attacking creature.
+Oracle:Whenever a creature attacks, you gain 1 life.

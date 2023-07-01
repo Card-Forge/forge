@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 1 Heavenly Fury
+Title=Heavenly Fury
+Difficulty=easy
+Description="Give us breath. Give us life. Prepare us for the day we make."\n-The Alaborn "Rite of Battle"
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Angel of Fury|PO2
+4 Angel of Mercy|PO2
+4 Angelic Blessing|PO2
+4 Angelic Wall|PO2
+4 Archangel|PO2
+4 Armored Griffin|PO2
+24 Plains|PO2|3
+4 Temple Acolyte|PO2
+4 Temple Elder|PO2
+4 Wild Griffin|PO2

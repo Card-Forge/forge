@@ -1,0 +1,10 @@
+Name:Stronghold Furnace
+ManaCost:no cost
+Types:Plane Rath
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card,Emblem | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Y
+SVar:Y:ReplaceCount$DamageAmount/Twice
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, CARDNAME deals 1 damage to any target.
+SVar:RolledChaos:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
+Oracle:If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.\nWhenever chaos ensues, Stronghold Furnace deals 1 damage to any target.

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Nox 2
+Title=Nox
+Difficulty=medium
+Description=Mono Blue Artifacts deck with Tezzeret, Artifice Master, Karn, Scion of Urza, and The Antiquities War.
+Deck Type=constructed
+Icon=Nox.jpg
+[main]
+2 Arcane Encyclopedia|M19
+1 Arch of Orazca|RIX
+2 Chemister's Insight|GRN
+3 Diamond Mare|M19
+1 Dream Eater|GRN
+3 Essence Scatter|M19
+2 Field of Ruin|XLN
+14 Island|GRN
+3 Karn, Scion of Urza|DOM
+2 Memorial to Genius|DOM
+2 Mishra's Self-Replicator|DOM
+1 One with the Machine|M19
+3 Sai, Master Thopterist|M19
+2 Search for Azcanta|XLN
+4 Sinister Sabotage|GRN
+3 Tezzeret, Artifice Master|M19
+3 Thaumatic Compass|XLN
+2 The Antiquities War|DOM
+3 Treasure Map|XLN
+4 Zhalfirin Void|DOM

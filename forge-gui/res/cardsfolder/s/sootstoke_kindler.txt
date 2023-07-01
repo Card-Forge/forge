@@ -1,0 +1,7 @@
+Name:Sootstoke Kindler
+ManaCost:1 BR
+Types:Creature Elemental Shaman
+PT:1/1
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Black,Creature.Red | TgtPrompt$ Select target black or red creature | KW$ Haste | SpellDescription$ Target black or red creature gains haste until end of turn.
+Oracle:Haste\n{T}: Target black or red creature gains haste until end of turn.

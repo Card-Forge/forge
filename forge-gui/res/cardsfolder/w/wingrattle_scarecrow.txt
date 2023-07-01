@@ -1,0 +1,8 @@
+Name:Wingrattle Scarecrow
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Creature.Blue+YouCtrl | Description$ CARDNAME has flying as long as you control a blue creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | IsPresent$ Creature.Black+YouCtrl | Description$ CARDNAME has persist as long as you control a black creature.
+SVar:BuffedBy:Creature.Black,Creature.Blue
+Oracle:Wingrattle Scarecrow has flying as long as you control a blue creature.\nWingrattle Scarecrow has persist as long as you control a black creature. (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

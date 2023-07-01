@@ -1,0 +1,8 @@
+Name:Price of Glory
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigDestroy | TriggerZones$ Battlefield | Activator$ Player.NonActive | TriggerDescription$ Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
+SVar:AICurseEffect:NonActive
+AI:RemoveDeck:All
+Oracle:Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.

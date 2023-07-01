@@ -1,0 +1,7 @@
+Name:Steam Spitter
+ManaCost:4 G
+Types:Creature Spider
+PT:1/5
+K:Reach
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Reach (This creature can block creatures with flying.)\n{R}: Steam Spitter gets +1/+0 until end of turn.

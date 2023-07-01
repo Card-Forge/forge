@@ -1,0 +1,14 @@
+Name:Jack-in-the-Mox
+ManaCost:0
+Types:Artifact
+A:AB$ RollDice | Cost$ T | ResultSubAbilities$ 1:DBSac,2:AddW,3:AddU,4:AddB,5:AddR,6:AddG | InstantSpeed$ True | SubAbility$ Add0 | SpellDescription$ Roll a six-sided die. This ability has the indicated effect.
+SVar:DBSac:DB$ Sacrifice | SubAbility$ DBLoseLife | SpellDescription$ 1 — Sacrifice CARDNAME and you lose 5 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5
+SVar:AddW:DB$ Mana | Produced$ W | SpellDescription$ 2 — Add {W}.
+SVar:AddU:DB$ Mana | Produced$ U | SpellDescription$ 3 — Add {U}.
+SVar:AddB:DB$ Mana | Produced$ B | SpellDescription$ 4 — Add {B}.
+SVar:AddR:DB$ Mana | Produced$ R | SpellDescription$ 5 — Add {R}.
+SVar:AddG:DB$ Mana | Produced$ G | SpellDescription$ 6 — Add {G}.
+SVar:Add0:DB$ Mana | Produced$ C | Amount$ 0
+SVar:PlayMain1:TRUE
+Oracle:{T}: Roll a six-sided die. This ability has the indicated effect.\n1 — Sacrifice Jack-in-the-Mox and you lose 5 life.\n2 — Add {W}.\n3 — Add {U}.\n4 — Add {B}.\n5 — Add {R}.\n6 — Add {G}.

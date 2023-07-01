@@ -1,0 +1,11 @@
+Name:Haywire Mite
+ManaCost:1
+Types:Artifact Creature Insect
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ ChangeZone | Cost$ G Sac<1/CARDNAME> | ValidTgts$ Enchantment.nonCreature,Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact or noncreature enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target noncreature artifact or noncreature enchantment.
+DeckHas:Ability$LifeGain|Sacrifice 
+DeckHints:Color$Green
+SVar:SacMe:1
+Oracle:When Haywire Mite dies, you gain 2 life.\n{G}, Sacrifice Haywire Mite: Exile target noncreature artifact or noncreature enchantment.

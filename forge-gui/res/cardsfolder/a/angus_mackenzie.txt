@@ -1,0 +1,7 @@
+Name:Angus Mackenzie
+ManaCost:G W U
+Types:Legendary Creature Human Cleric
+PT:2/2
+A:AB$ Fog | Cost$ G W U T | ActivationPhases$ Upkeep->Declare Blockers | ActivationFirstCombat$ True | SpellDescription$ Prevent all combat damage that would be dealt this turn. Activate only before the combat damage step.
+SVar:NonCombatPriority:2
+Oracle:{G}{W}{U}, {T}: Prevent all combat damage that would be dealt this turn. Activate only before the combat damage step.

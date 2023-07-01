@@ -1,0 +1,6 @@
+Name:Unexpected Fangs
+ManaCost:1 B
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterTypes$ P1P1,Lifelink | SpellDescription$ Put a +1/+1 counter and a lifelink counter on target creature.
+DeckHas:Ability$Counters|LifeGain
+Oracle:Put a +1/+1 counter and a lifelink counter on target creature.

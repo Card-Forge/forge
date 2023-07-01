@@ -1,0 +1,7 @@
+Name:Yuan Shao, the Indecisive
+ManaCost:4 R
+Types:Legendary Creature Human Soldier
+PT:2/3
+K:Horsemanship
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl | Max$ 1 | Description$ Each creature you control can't be blocked by more than one creature.
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nEach creature you control can't be blocked by more than one creature.

@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #01
+URL:https://i.redd.it/sdfdhawyzavy.png
+Goal:Win
+Turns:1
+Difficulty:Easy
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=14
+humanhand=Brilliant Spectrum;Horror of the Broken Lands;Elder Deep-Fiend;Floodwaters
+humanbattlefield=Island;Island;Island;Island;Swamp;Swamp;Swamp;Shadowstorm Vizier;Archfiend of Ifnir;Stromkirk Condemned
+humanlibrary=Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp
+aibattlefield=Winding Constrictor|Counters:P1P1=5;Verdurous Gearhulk|Counters:P1P1=5;Rishkar, Peema Renegade|Counters:P1P1=2;Tireless Tracker|Counters:P1P1=2

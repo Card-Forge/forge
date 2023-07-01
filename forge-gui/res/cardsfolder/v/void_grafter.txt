@@ -1,0 +1,9 @@
+Name:Void Grafter
+ManaCost:1 G U
+Types:Creature Eldrazi Drone
+PT:2/4
+K:Devoid
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target creature you control gains hexproof until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Hexproof
+Oracle:Devoid (This card has no color.)\nFlash (You may cast this spell any time you could cast an instant.)\nWhen Void Grafter enters the battlefield, another target creature you control gains hexproof until end of turn.

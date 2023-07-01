@@ -1,0 +1,7 @@
+Name:Touch of the Eternal
+ManaCost:5 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, your life total becomes equal to the number of permanents you control.
+SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Permanent.YouCtrl
+Oracle:At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.

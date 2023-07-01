@@ -1,0 +1,6 @@
+Name:Edgewalker
+ManaCost:1 W B
+Types:Creature Human Cleric
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Cleric | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W B | IgnoreGeneric$ True | Description$ Cleric spells you cast cost {W}{B} less to cast. This effect reduces only the amount of colored mana you pay. (For example, if you cast a Cleric spell with mana cost {1}{W}, it costs {1} to cast.)
+Oracle:Cleric spells you cast cost {W}{B} less to cast. This effect reduces only the amount of colored mana you pay. (For example, if you cast a Cleric spell with mana cost {1}{W}, it costs {1} to cast.)

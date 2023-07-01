@@ -1,0 +1,5 @@
+Name:Tusked Colossodon
+ManaCost:4 G G
+Types:Creature Beast
+PT:6/5
+Oracle:

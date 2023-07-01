@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: False Strategy
+Title=False Strategy
+Difficulty=medium
+Description="Plans evolved within the tent decide a victory 1,000 li away."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 False Defeat|PTK
+1 Guan Yu, Sainted Warrior|PTK
+2 Huang Zhong, Shu General|PTK
+12 Island|PTK|2
+2 Kongming, "Sleeping Dragon"|PTK
+2 Liu Bei, Lord of Shu|PTK
+4 Loyal Retainers|PTK
+2 Lu Meng, Wu General|PTK
+2 Lu Su, Wu Advisor|PTK
+2 Lu Xun, Scholar General|PTK
+12 Plains|PTK|2
+4 Strategic Planning|PTK
+2 Sun Ce, Young Conquerer|PTK
+2 Sun Quan, Lord of Wu|PTK
+2 Zhang Fei, Fierce Warrior|PTK
+2 Zhao Zilong, Tiger General|PTK
+2 Zhou Yu, Chief Commander|PTK
+1 Zhuge Jin, Wu Strategist|PTK

@@ -1,0 +1,7 @@
+[format]
+Name:Extended (1999-04-01)
+Type:Archived
+Subtype:Extended
+Effective:1999-04-01
+Sets:3ED, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG
+Banned:Amulet of Quoz; Balance; Black Vise; Bronze Tablet; Channel; Contract from Below; Darkpact; Demonic Attorney; Demonic Tutor; Fastbond; Hypnotic Specter; Ivory Tower; Jeweled Bird; Kird Ape; Land Tax; Mana Crypt; Maze of Ith; Memory Jar; Mind Twist; Rebirth; Regrowth; Serendib Efreet; Sol Ring; Strip Mine; Tempest Efreet; Timmerian Fiends; Tolarian Academy; Wheel of Fortune; Windfall; Zuran Orb

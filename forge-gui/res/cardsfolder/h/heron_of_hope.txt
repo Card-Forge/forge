@@ -1,0 +1,11 @@
+Name:Heron of Hope
+ManaCost:3 W
+Types:Creature Bird
+PT:2/3
+K:Flying
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/Plus.1
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
+DeckHas:Ability$LifeGain
+Oracle:Flying\nIf you would gain life, you gain that much life plus 1 instead.\n{1}{W}: Heron of Hope gains lifelink until end of turn.

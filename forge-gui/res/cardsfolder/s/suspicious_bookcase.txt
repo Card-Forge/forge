@@ -1,0 +1,8 @@
+Name:Suspicious Bookcase
+ManaCost:2
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+A:AB$ Effect | Cost$ 3 T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Defender (This creature can't attack.)\n{3}, {T}: Target creature can't be blocked this turn.

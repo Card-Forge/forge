@@ -1,0 +1,6 @@
+Name:Goblin Bird-Grabber
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/1
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Flying | IsPresent$ Creature.YouCtrl+withFlying | SpellDescription$ CARDNAME gains flying until end of turn. Activate only if you control a creature with flying.
+Oracle:{R}: Goblin Bird-Grabber gains flying until end of turn. Activate only if you control a creature with flying.

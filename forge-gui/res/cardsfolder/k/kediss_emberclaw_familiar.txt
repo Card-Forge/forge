@@ -1,0 +1,11 @@
+Name:Kediss, Emberclaw Familiar
+ManaCost:1 R
+Types:Legendary Creature Elemental Lizard
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Creature.IsCommander+YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSlug | TriggerZones$ Battlefield | TriggerDescription$ Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.
+SVar:TrigSlug:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X | DamageSource$ TriggeredSource
+SVar:X:TriggerCount$DamageAmount
+K:Partner
+SVar:BuffedBy:Card.IsCommander
+AI:RemoveDeck:NonCommander
+Oracle:Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.\nPartner (You can have two commanders if both have partner.)

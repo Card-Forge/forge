@@ -1,0 +1,10 @@
+Name:Sworn Defender
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:1/3
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.blockedBySource,Creature.blockingSource | TgtPrompt$ Select target creature blocking or being blocked by this creature | SubAbility$ DBAnimate | StackDescription$ None | SpellDescription$ CARDNAME's power becomes the toughness of target creature blocking or being blocked by CARDNAME minus 1 until end of turn, and CARDNAME's toughness becomes 1 plus the power of that creature until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ Y
+SVar:X:Targeted$CardToughness/Minus.1
+SVar:Y:Targeted$CardPower/Plus.1
+AI:RemoveDeck:All
+Oracle:{1}: Sworn Defender's power becomes the toughness of target creature blocking or being blocked by Sworn Defender minus 1 until end of turn, and Sworn Defender's toughness becomes 1 plus the power of that creature until end of turn.

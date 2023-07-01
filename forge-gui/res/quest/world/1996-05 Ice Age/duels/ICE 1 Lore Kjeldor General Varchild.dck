@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: General Varchild
+Title=General Varchild
+Difficulty=easy
+Description="Let Balduvia burn to warm Kjeldor's hearth!" -General Varchild
+
+As a little girl in the Kjeldoran hinterlands Varchild had a hard life, losing a brother in a Balduvian raid, an uncle who was a skyknight to Balduvian arrows and two aunts in battle with Lim-Dul's undead. When she moved to Krov in order to become a knight, she quickly discovered that many of the knights considered her, as a hinterland Kjeldoran, almost as bad as the Balduvians she so despised. Still, hiding her accent, Varchild managed to work her way up to the highest regions of the military, becoming the right hand of Avram Garrison, the de facto leader of the Kjeldoran troops.
+
+Garrison had been the favorite of the queen, and was lobbying for the unification of the splintered military orders into a single army with him as its general. But the queen died before she could make it so, and her son King Darien kept saying he'd "consider" it, not wanting to insult other knights and nobles. This, plus the general decadence and stagnation Kjeldor was getting into, drove Garrison to form the Knights of Stromgald, an organization planning to kill the king and blame it on the Balduvians and the wizards in order to take control of the nation and declare war on the Balduvians. Although she hated the barbarians, Varchild could not go along with murdering the king of the nation and defended him with her life when the eventual coup came.
+
+When the Stromgalds were defeated and Lim-Dul was revealed as the secret benefactor behind the group, the king managed to use this to take direct control of the remains of the various military orders and to use it as the foundation for a powerful rule. Varchild was honored to become the first general of the nations unified army in generations, but immediately had to swallow a hard pill: in the war against the necromancer, Kjeldor would have to ally with the Balduvians. Still, she set aside her personal feelings and fought alongside the barbarian forces in the battle that would defeat Lim-Dul forever.
+
+But it would not last. In the years after the battle, when the Ice Age ended and the Flood Age began, Varchild eventually resigned as general and rallied a militia of her own against the Balduvians.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Dwarven Armory|ICE
+2 Enslaved Scout|ALL|1
+2 Enslaved Scout|ALL|2
+4 Errantry|ICE
+24 Mountain|ICE|2
+2 Omen of Fire|ALL
+4 Orcish Conscripts|ICE
+4 Pillage|ALL
+4 Rogue Skycaptain|ALL
+4 Soldier of Fortune|ALL
+2 Varchild's Crusader|ALL|1
+2 Varchild's Crusader|ALL|2
+4 Varchild's War-Riders|ALL

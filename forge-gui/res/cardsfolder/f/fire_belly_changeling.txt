@@ -1,0 +1,7 @@
+Name:Fire-Belly Changeling
+ManaCost:1 R
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.
+Oracle:Changeling (This card is every creature type.)\n{R}: Fire-Belly Changeling gets +1/+0 until end of turn. Activate no more than twice each turn.

@@ -1,0 +1,81 @@
+[quest]
+id=32
+AILife=50
+Repeat=false
+Persistent=true
+WinMessage=Congratulations!\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents!\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again!
+Wins=100
+Card Reward=10 random rares;Mox Pearl;Mox Sapphire;Mox Jet;Mox Ruby;Mox Emerald
+Credit Reward=1000
+HumanExtras=Library of Alexandria|Mox Opal|Mox Pearl|Mox Sapphire|Mox Jet|Mox Ruby|Mox Emerald|Sol Ring|Black Lotus
+AIExtras=Omniscience|Omniscience|Greater Auramancy
+[metadata]
+Name=quest32
+Title=Against All Odds
+Difficulty=hard
+Description=You have the most sought-after treasures, the world has everything else
+Icon=Against All Odds.jpg
+Deck Type=constructed
+[main]
+4 City of Brass
+4 Grand Coliseum
+2 Arcane Sanctum
+2 Crumbling Necropolis
+2 Frontier Bivouac
+2 Jungle Shrine
+2 Mystic Monastery
+2 Nomad Outpost
+2 Opulent Palace
+2 Sandsteppe Citadel
+2 Seaside Citadel
+2 Savage Lands
+4 Tendo Ice Bridge
+1 Ancient Ooze
+1 Archetype of Endurance
+1 Avatar of Woe
+1 Bane of Bala Ged
+1 Blazing Archon
+1 Blightsteel Colossus
+1 Bogardan Hellkite
+1 Damia, Sage of Stone
+1 Draining Whelk
+1 Elderscale Wurm
+1 Empyrial Archangel
+1 Emrakul, the Aeons Torn
+1 Inkwell Leviathan
+1 Iona, Shield of Emeria
+1 Jin-Gitaxias, Core Augur
+1 Kozilek, Butcher of Truth
+1 Maelstrom Wanderer
+1 Mindleech Mass
+1 Novablast Wurm
+1 Pearl Lake Ancient
+1 Platinum Angel
+1 Prince of Thralls
+1 Progenitus
+1 Reya Dawnbringer
+1 Sphinx of the Steel Wind
+1 Surrak Dragonclaw
+1 Ulamog, the Ceaseless Hunger
+1 Ulamog, the Infinite Gyre
+1 Void Winnower
+1 Worldspine Wurm
+1 Nicol Bolas, Planeswalker
+1 Ugin, the Spirit Dragon
+1 Desertion
+1 Overwhelming Intellect
+1 Spelljack
+1 Summoning Trap
+1 Beacon of Tomorrows
+1 Conflux
+1 Cruel Ultimatum
+1 Enter the Infinite
+1 Heroes Remembered
+1 Overwhelming Forces
+1 Plague Wind
+1 Praetor's Counsel
+1 Time Stretch
+1 Titanic Ultimatum
+1 Violent Ultimatum
+1 Warp World
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Golem Token
+ManaCost:no cost
+Types:Artifact Creature Golem
+PT:*/*
+K:Haste
+Oracle:Haste

@@ -1,0 +1,9 @@
+Name:Arasta of the Endless Web
+ManaCost:2 G G
+Types:Legendary Enchantment Creature Spider
+PT:3/5
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever an opponent casts an instant or sorcery spell, create a 1/2 green Spider creature token with reach.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Reach\nWhenever an opponent casts an instant or sorcery spell, create a 1/2 green Spider creature token with reach.

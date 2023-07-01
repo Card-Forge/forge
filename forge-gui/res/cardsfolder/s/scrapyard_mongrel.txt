@@ -1,0 +1,7 @@
+Name:Scrapyard Mongrel
+ManaCost:3 R
+Types:Creature Dog
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, CARDNAME gets +2/+0 and has trample.
+SVar:BuffedBy:Artifact
+Oracle:As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)

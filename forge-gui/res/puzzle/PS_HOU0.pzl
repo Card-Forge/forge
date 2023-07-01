@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #00
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/Patreon-JFF2.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=11
+activeplayer=human
+activephase=MAIN1
+humanhand=Precise Strike
+humanlibrary=Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;
+humangraveyard=
+humanbattlefield=Swamp|Set:ZEN;Swamp|Set:ZEN;Canyon Slough;Canyon Slough;Canyon Slough;Key to the City;The Scorpion God;Furyblade Vampire|Id:420;Stitcher's Graft|AttachedTo:420;Skirsdag Supplicant;
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Grim Flayer;Grim Flayer;Hapatra, Vizier of Poisons;Druid of the Cowl
+aiexile=
+aicommand=

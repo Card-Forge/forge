@@ -1,0 +1,5 @@
+Name:Dispeller's Capsule
+ManaCost:W
+Types:Artifact
+A:AB$ Destroy | Cost$ 2 W T Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:{2}{W}, {T}, Sacrifice Dispeller's Capsule: Destroy target artifact or enchantment.

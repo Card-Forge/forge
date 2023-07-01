@@ -1,0 +1,7 @@
+Name:Creakwood Ghoul
+ManaCost:4 B
+Types:Creature Plant Zombie
+PT:3/3
+A:AB$ ChangeZone | Cost$ BG BG | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBGainLife | SpellDescription$ Exile target card from a graveyard. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:{B/G}{B/G}: Exile target card from a graveyard. You gain 1 life.

@@ -1,0 +1,6 @@
+Name:Selesnya Sentry
+ManaCost:2 W
+Types:Creature Elephant Soldier
+PT:3/2
+A:AB$ Regenerate | Cost$ 5 G | SpellDescription$ Regenerate CARDNAME.
+Oracle:{5}{G}: Regenerate Selesnya Sentry.

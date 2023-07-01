@@ -1,0 +1,6 @@
+Name:Mine Bearer
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | AITgts$ BetterThanSource | SpellDescription$ Destroy target attacking creature.
+Oracle:{T}, Sacrifice Mine Bearer: Destroy target attacking creature.

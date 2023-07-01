@@ -1,0 +1,6 @@
+Name:Merciless Resolve
+ManaCost:2 B
+Types:Instant
+A:SP$ Draw | Cost$ 2 B Sac<1/Creature;Land/creature or land> | NumCards$ 2 | SpellDescription$ Draw two cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature or land.\nDraw two cards.

@@ -1,0 +1,9 @@
+Name:Hidden Dragonslayer
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/1
+K:Lifelink
+K:Megamorph:2 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target creature with power 4 or greater an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4+OppCtrl | TgtPrompt$ Select target creature with power 4 or greater an opponent controls.
+Oracle:Lifelink\nMegamorph {2}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Hidden Dragonslayer is turned face up, destroy target creature with power 4 or greater an opponent controls.

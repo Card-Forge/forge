@@ -1,0 +1,8 @@
+Name:Worthy Cause
+ManaCost:W
+Types:Instant
+K:Buyback:2
+A:SP$ GainLife | Cost$ W Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+SVar:X:Sacrificed$CardToughness
+AI:RemoveDeck:All
+Oracle:Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nAs an additional cost to cast this spell, sacrifice a creature.\nYou gain life equal to the sacrificed creature's toughness.

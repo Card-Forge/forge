@@ -1,0 +1,11 @@
+Name:Merfolk Windrobber
+ManaCost:U
+Types:Creature Merfolk Rogue
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 1
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | CheckSVar$ X | SVarCompare$ GE8 | SpellDescription$ Draw a card. Activate only if an opponent has eight or more cards in their graveyard.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+DeckHas:Ability$Mill|Sacrifice
+Oracle:Flying\nWhenever Merfolk Windrobber deals combat damage to a player, that player mills a card. (They put the top card of their library into their graveyard.)\nSacrifice Merfolk Windrobber: Draw a card. Activate only if an opponent has eight or more cards in their graveyard.

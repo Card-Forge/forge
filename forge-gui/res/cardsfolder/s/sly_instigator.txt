@@ -1,0 +1,9 @@
+Name:Sly Instigator
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:2/4
+A:AB$ Effect | Cost$ U T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | Duration$ UntilYourNextTurn | SubAbility$ DBGoad | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked until your next turn.
+SVar:DBGoad:DB$ Goad | Defined$ Targeted | SpellDescription$ Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+AI:RemoveDeck:Random
+Oracle:{U}, {T}: Until your next turn, target creature an opponent controls can't be blocked. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

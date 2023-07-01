@@ -1,0 +1,6 @@
+Name:Birthing Boughs
+ManaCost:3
+Types:Artifact
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ c_2_2_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Shapeshifter creature token with changeling. (It has every creature type.)
+DeckHas:Ability$Token
+Oracle:{4}, {T}: Create a 2/2 colorless Shapeshifter creature token with changeling. (It has every creature type.)

@@ -1,0 +1,6 @@
+Name:Loreseeker's Stone
+ManaCost:6
+Types:Artifact
+A:AB$ Draw | Cost$ 3 T | NumCards$ 3 | RaiseCost$ X | SpellDescription$ Draw three cards. This ability costs {1} more to activate for each card in your hand.
+SVar:X:Count$InYourHand
+Oracle:{3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand.

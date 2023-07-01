@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Isis 3
+Title=Isis
+Icon=Isis.jpg
+Difficulty=hard
+Description=A monoblue deck with some milling and control elements.
+Deck Type=constructed
+[main]
+2 Air Elemental|LEB
+4 Arcane Denial|ALL
+4 Azure Drake|LEG
+1 Boomerang|MIR
+4 Counterspell|5ED
+2 Desertion|VIS
+4 Dissipate|MIR
+1 Flood|DRK
+4 Force of Will|ALL
+2 Foreshadow|VIS
+21 Island|MIR
+2 Millstone|ATQ
+4 Power Sink|5ED
+3 Snake Basket|VIS
+2 Spell Blast|5ED
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,10 @@
+Name:Explosive Singularity
+ManaCost:8 R R
+Types:Sorcery
+A:SP$ DealDamage | AnnounceTitle$ how many creatures to tap | Announce$ Tapped | ValidTgts$ Any | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to any target.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ tapXType<Tapped/Creature> | EffectZone$ All | Description$ As an additional cost to cast this spell, you may tap any number of untapped creatures you control. This spell costs {1} less to cast for each creature tapped this way.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Tapped | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {1} less to cast for each creature tapped this way.
+SVar:Tapped:Number$0
+DeckHints:Ability$Token
+DeckNeeds:Type$Creature
+Oracle:As an additional cost to cast this spell, you may tap any number of untapped creatures you control. This spell costs {1} less to cast for each creature tapped this way.\nExplosive Singularity deals 10 damage to any target.

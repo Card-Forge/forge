@@ -1,0 +1,6 @@
+Name:Goliath Sphinx
+ManaCost:5 U U
+Types:Creature Sphinx
+PT:8/7
+K:Flying
+Oracle:Flying

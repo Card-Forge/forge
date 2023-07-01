@@ -1,0 +1,9 @@
+Name:Powerstone Minefield
+ManaCost:2 R W
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature attacks or blocks, CARDNAME deals 2 damage to it.
+T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage2 | Secondary$ True | TriggerDescription$ Whenever a creature attacks or blocks, CARDNAME deals 2 damage to it.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredAttackerLKICopy | NumDmg$ 2
+SVar:TrigDamage2:DB$ DealDamage | Defined$ TriggeredBlockerLKICopy | NumDmg$ 2
+AI:RemoveDeck:Random
+Oracle:Whenever a creature attacks or blocks, Powerstone Minefield deals 2 damage to it.

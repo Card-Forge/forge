@@ -1,0 +1,6 @@
+Name:Hostile Minotaur
+ManaCost:3 R
+Types:Creature Minotaur
+PT:3/3
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

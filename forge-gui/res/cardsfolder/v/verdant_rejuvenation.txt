@@ -1,0 +1,7 @@
+Name:Verdant Rejuvenation
+ManaCost:6 G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ X | ChangeType$ Creature,Enchantment,Planeswalker | StackDescription$ SpellDescription | SpellDescription$ Seek X creature, enchantment, and/or planeswalker cards, where X is the highest mana value among creatures you control. Put those cards onto the battlefield.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCMC
+DeckHints:Type$Enchantment|Planeswalker
+Oracle:Seek X creature, enchantment, and/or planeswalker cards, where X is the highest mana value among creatures you control. Put those cards onto the battlefield.

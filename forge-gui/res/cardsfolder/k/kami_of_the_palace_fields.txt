@@ -1,0 +1,9 @@
+Name:Kami of the Palace Fields
+ManaCost:5 W
+Types:Creature Spirit
+PT:3/2
+K:Flying
+K:First Strike
+K:Soulshift:5
+DeckHints:Type$Spirit
+Oracle:Flying, first strike\nSoulshift 5 (When this creature dies, you may return target Spirit card with mana value 5 or less from your graveyard to your hand.)

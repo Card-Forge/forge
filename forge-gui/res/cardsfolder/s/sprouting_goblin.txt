@@ -1,0 +1,11 @@
+Name:Sprouting Goblin
+ManaCost:1 R
+Types:Creature Goblin Druid
+PT:2/2
+K:Kicker:G
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.hasABasicLandType
+A:AB$ Draw | Cost$ R T Sac<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+DeckHints:Color$Green
+Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nWhen Sprouting Goblin enters the battlefield, if it was kicked, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle.\n{R}, {T}, Sacrifice a land: Draw a card.

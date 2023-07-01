@@ -1,0 +1,10 @@
+Name:Magma Phoenix
+ManaCost:3 R R
+Types:Creature Phoenix
+PT:3/3
+K:Flying
+A:AB$ ChangeZone | Cost$ 3 R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals 3 damage to each creature and each player.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3 | ValidDescription$ each creature and each player.
+SVar:DiscardMe:2
+Oracle:Flying\nWhen Magma Phoenix dies, it deals 3 damage to each creature and each player.\n{3}{R}{R}: Return Magma Phoenix from your graveyard to your hand.

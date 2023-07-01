@@ -1,0 +1,9 @@
+Name:Excavation Mole
+ManaCost:2 G
+Types:Creature Mole
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+DeckHas:Ability$Graveyard
+Oracle:Trample\nWhen Excavation Mole enters the battlefield, mill three cards.

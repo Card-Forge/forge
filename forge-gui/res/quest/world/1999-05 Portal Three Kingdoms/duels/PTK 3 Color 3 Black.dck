@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PTK 3 Color: 3 Black
+Title=The Color Black
+Difficulty=hard
+Description=Though he held the title of prime minister, Cao Cao used the emperor's name to exert his own influence on the empire.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+2 Cao Cao, Lord of Wei|PTK
+1 Cao Ren, Wei Commander|PTK
+4 Corrupt Court Official|PTK
+4 Ghostly Visit|PTK
+2 Overwhelming Forces|PTK
+4 Poison Arrow|PTK
+2 Sima Yi, Wei Field Marshal|PTK
+2 Stone Catapult|PTK
+25 Swamp|PTK|2
+4 Wei Ambush Force|PTK
+4 Wei Assassins|PTK
+2 Wei Night Raiders|PTK
+2 Xiahou Dun, the One-Eyed|PTK
+2 Zhang He, Wei General|PTK

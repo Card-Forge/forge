@@ -1,0 +1,11 @@
+Name:Poultrygeist
+ManaCost:2 B
+Types:Creature Bird Spirit
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ Whenever a creature dies, you may roll a six-sided die. If you roll a 1, sacrifice CARDNAME. Otherwise, put a +1/+1 counter on CARDNAME.
+SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 1:DBSac,Else:DBCounter
+SVar:DBSac:DB$ Sacrifice
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever a creature dies, you may roll a six-sided die. If you roll a 1, sacrifice Poultrygeist. Otherwise, put a +1/+1 counter on Poultrygeist.

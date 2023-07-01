@@ -1,0 +1,8 @@
+Name:Whisper of the Dross
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBProliferate | SpellDescription$ Target creature gets -1/-1 until end of turn.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Target creature gets -1/-1 until end of turn. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

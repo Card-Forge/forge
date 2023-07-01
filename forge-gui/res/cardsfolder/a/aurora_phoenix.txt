@@ -1,0 +1,9 @@
+Name:Aurora Phoenix
+ManaCost:4 R R
+Types:Creature Phoenix
+PT:5/3
+K:Flying
+K:Cascade
+T:Mode$ SpellCast | ValidCard$ Card.withCascade | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a spell with cascade, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Flying\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nWhenever you cast a spell with cascade, return Aurora Phoenix from your graveyard to your hand.

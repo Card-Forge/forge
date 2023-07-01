@@ -1,0 +1,7 @@
+Name:Fire Drake
+ManaCost:1 R R
+Types:Creature Drake
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate only once each turn.
+Oracle:Flying\n{R}: Fire Drake gets +1/+0 until end of turn. Activate only once each turn.

@@ -1,0 +1,8 @@
+Name:Disciple of Kangee
+ManaCost:2 W
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ Blue | SpellDescription$ Target creature gains flying and becomes blue until end of turn.
+SVar:Blue:DB$ Animate | Defined$ Targeted | Colors$ Blue | OverwriteColors$ True
+AI:RemoveDeck:Random
+Oracle:{U}, {T}: Target creature gains flying and becomes blue until end of turn.

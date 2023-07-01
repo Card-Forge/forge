@@ -1,0 +1,6 @@
+Name:Alaborn Grenadier
+ManaCost:W W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #05 - Blitzkrieg
+URL:https://pauperpuzzles.wordpress.com/2017/01/21/5-blitzkrieg/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Survive the incoming attack and win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=COMBAT_DECLARE_BLOCKERS
+HumanLife=4
+AILife=52
+humanhand=Twin Bolt;Hydroblast;Borrowed Hostility;Gush
+humanbattlefield=Mountain;Mountain;Island;Island;Insectile Aberration|Transformed;Kiln Fiend;Nivix Cyclops
+humanlibrary=Brainstorm;Apostle's Blessing;Mutagenic Growth;Temur Battle Rage;Echoing Truth;Swiftwater Cliffs
+aibattlefield=Gurmag Angler|Id:18|Counters:P1P0=1|Attacking;Dragon Scales|AttachedTo:18;Goblin Bushwhacker|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking;Perilous Myr|Tapped|Counters:P1P0=1|Attacking

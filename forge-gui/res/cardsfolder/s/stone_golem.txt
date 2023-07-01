@@ -1,0 +1,5 @@
+Name:Stone Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:4/4
+Oracle:

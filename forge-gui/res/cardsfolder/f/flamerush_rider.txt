@@ -1,0 +1,8 @@
+Name:Flamerush Rider
+ManaCost:4 R
+Types:Creature Human Warrior
+PT:3/3
+K:Dash:2 R R
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat. Exile the token at the end of combat.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target creature | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
+Oracle:Whenever Flamerush Rider attacks, create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat.\nDash {2}{R}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

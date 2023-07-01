@@ -1,0 +1,9 @@
+Name:Wildfire Cerberus
+ManaCost:4 R
+Types:Creature Dog
+PT:4/3
+K:Monstrosity:1:5 R R
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME becomes monstrous, it deals 2 damage to each opponent and each creature they control.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.OppCtrl | ValidPlayers$ Player.Opponent | NumDmg$ 2 | ValidDescription$ each opponent and each creature they control.
+DeckHas:Ability$Counters
+Oracle:{5}{R}{R}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nWhen Wildfire Cerberus becomes monstrous, it deals 2 damage to each opponent and each creature they control.

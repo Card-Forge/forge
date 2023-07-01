@@ -1,0 +1,8 @@
+Name:Nyxbloom Ancient
+ManaCost:4 G G G
+Types:Enchantment Creature Elemental
+PT:5/5
+K:Trample
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidActivator$ You | ValidCard$ Permanent | ReplaceWith$ ProduceThrice | Description$ If you tap a permanent for mana, it produces three times as much of that mana instead.
+SVar:ProduceThrice:DB$ ReplaceMana | ReplaceAmount$ 3
+Oracle:Trample\nIf you tap a permanent for mana, it produces three times as much of that mana instead.

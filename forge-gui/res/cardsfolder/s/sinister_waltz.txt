@@ -1,0 +1,7 @@
+Name:Sinister Waltz
+ManaCost:3 B R
+Types:Sorcery
+A:SP$ Pump | TargetMin$ 3 | TargetMax$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select three target creature cards in your graveyard | TgtZone$ Graveyard | RememberObjects$ Targeted | SubAbility$ ReturnTwo | StackDescription$ {p:You} chooses {c:Targeted}, | SpellDescription$ Choose three target creature cards in your graveyard. Return two of them at random to the battlefield and put the other on the bottom of your library.
+SVar:ReturnTwo:DB$ ChangeZone | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Origin$ Graveyard | Destination$ Battlefield | AtRandom$ True | Hidden$ True | ForgetChanged$ True | SubAbility$ Wallflower | StackDescription$ returns two of them at random to the battlefield
+SVar:Wallflower:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | ForgetChanged$ True | StackDescription$ and puts the other on the bottom of their library.
+Oracle:Choose three target creature cards in your graveyard. Return two of them at random to the battlefield and put the other on the bottom of your library.

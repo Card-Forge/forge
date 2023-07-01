@@ -1,0 +1,6 @@
+Name:Dromoka Dunecaster
+ManaCost:W
+Types:Creature Human Wizard
+PT:0/2
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
+Oracle:{1}{W}, {T}: Tap target creature without flying.

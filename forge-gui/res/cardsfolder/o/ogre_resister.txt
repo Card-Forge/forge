@@ -1,0 +1,5 @@
+Name:Ogre Resister
+ManaCost:2 R R
+Types:Creature Ogre
+PT:4/3
+Oracle:

@@ -1,0 +1,7 @@
+Name:Make Disappear
+ManaCost:1 U
+Types:Instant
+K:Casualty:1
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+DeckHas:Ability$Sacrifice
+Oracle:Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose new targets for the copy.)\nCounter target spell unless its controller pays {2}.

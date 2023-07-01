@@ -1,0 +1,10 @@
+Name:Heron-Blessed Geist
+ManaCost:4 W
+Types:Creature Spirit
+PT:3/3
+K:Flying
+A:AB$ Token | Cost$ 3 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 2 | IsPresent$ Enchantment.YouCtrl | TokenScript$ w_1_1_spirit_flying | StackDescription$ Create two 1/1 white Spirit creature tokens with flying. | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying. Activate only if you control and enchantment and only as a sorcery.
+SVar:BuffedBy:Enchantment
+DeckHas:Ability$Token
+DeckHints:Type$Enchantment
+Oracle:Flying\n{3}{W}, Exile Heron-Blessed Geist from your graveyard: Create two 1/1 white Spirit creature tokens with flying. Activate only if you control an enchantment and only as a sorcery.

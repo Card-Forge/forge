@@ -1,0 +1,7 @@
+Name:Flowstone Hellion
+ManaCost:4 R
+Types:Creature Hellion Beast
+PT:3/3
+K:Haste
+A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:Haste\n{0}: Flowstone Hellion gets +1/-1 until end of turn.

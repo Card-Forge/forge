@@ -1,0 +1,11 @@
+Name:Rampaging Raptor
+ManaCost:2 R R
+Types:Creature Dinosaur
+PT:4/4
+K:Trample
+K:Haste
+A:AB$ Pump | Cost$ 2 R | NumAtt$ 2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls or battle that player protects.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Planeswalker.ControlledBy TriggeredTarget,Battle.ProtectedBy TriggeredTarget | TgtPrompt$ Select target planeswalker that player controls or battle that player protects | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample, haste\n{2}{R}: Rampaging Raptor gets +2/+0 until end of turn.\nWhenever Rampaging Raptor deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls or battle that player protects.

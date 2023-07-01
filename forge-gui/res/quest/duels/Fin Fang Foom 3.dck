@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom 3
+Title=Fin Fang Foom
+Difficulty=hard
+Description=GB Infect deck
+Icon=Fin Fang Foom.jpg
+Deck Type=constructed
+[main]
+2 Ichor Rats|SOM
+2 Cystbearer|SOM
+2 Phyrexian Vatmother|MBS
+3 Plague Stinger|SOM
+2 Corpse Cur|SOM
+4 Hand of the Praetors|SOM
+3 Lead the Stampede|MBS
+2 Skithiryx, the Blight Dragon|SOM
+3 Glistener Elf|NPH
+2 Phyrexian Swarmlord|NPH
+10 Swamp|MBS
+2 Septic Rats|MBS
+2 Putrefax|SOM
+3 Ichorclaw Myr|SOM
+3 Phyrexian Crusader|MBS
+1 Viridian Corrupter|MBS
+10 Forest|MBS
+4 Verdant Catacombs|ZEN
+[sideboard]

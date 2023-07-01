@@ -1,0 +1,10 @@
+Name:Only Blood Ends Your Nightmares
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigSacEach | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent sacrifices a creature. Then each opponent who didn't sacrifice a creature discards two cards.
+SVar:TrigSacEach:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
+SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ TgtChoose | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
+Oracle:When you set this scheme in motion, each opponent sacrifices a creature. Then each opponent who didn't sacrifice a creature discards two cards.

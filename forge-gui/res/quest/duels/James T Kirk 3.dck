@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=James T Kirk 3
+Title=James T Kirk
+Difficulty=hard
+Description=Mono B discard deck with Waste Not, Megrim and Liliana's Caress
+Icon=James T Kirk.jpg
+Deck Type=constructed
+[main]
+2 Waste Not
+1 Megrim
+4 Liliana's Caress
+4 Animate Dead
+23 Swamp|M12
+4 Hymn to Tourach
+4 Stupor
+4 Wrench Mind
+1 Deception
+1 Mind Rot
+1 Unhinge
+1 Waking Nightmare
+1 Nekrataal
+1 Bone Shredder
+2 Liliana Vess
+2 Hypnotic Specter
+1 Keening Banshee
+2 Doom Blade
+1 Go for the Throat
+[sideboard]

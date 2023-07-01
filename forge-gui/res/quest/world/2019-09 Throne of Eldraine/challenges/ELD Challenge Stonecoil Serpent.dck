@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Stonecoil Serpent
+OpponentName=The Serpents
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Stonecoil Serpent
+Difficulty=medium
+Description=Cast out of Garenbrig for his crimes, Ennor turned to fae magic to fashion the perfect weapon for his revenge.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+Name=ELD Challenge: Stonecoil Serpent
+[Main]
+30 Forest|ELD|2
+30 Stonecoil Serpent|ELD|2

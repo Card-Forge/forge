@@ -1,0 +1,9 @@
+Name:Longshot Squad
+ManaCost:3 G
+Types:Creature Dog Archer
+PT:3/3
+K:Outlast:1 G
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Reach | Description$ Each creature you control with a +1/+1 counter on it has reach.
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:Outlast {1}{G} ({1}{G}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has reach. (A creature with reach can block creatures with flying.)

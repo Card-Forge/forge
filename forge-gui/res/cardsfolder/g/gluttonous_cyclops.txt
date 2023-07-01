@@ -1,0 +1,7 @@
+Name:Gluttonous Cyclops
+ManaCost:5 R
+Types:Creature Cyclops
+PT:5/4
+K:Monstrosity:3:5 R R
+DeckHas:Ability$Counters
+Oracle:{5}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)

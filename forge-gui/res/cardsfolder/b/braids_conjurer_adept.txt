@@ -1,0 +1,8 @@
+Name:Braids, Conjurer Adept
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from their hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Artifact,Land | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from their hand onto the battlefield.

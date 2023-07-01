@@ -1,0 +1,7 @@
+Name:Cleric of Chill Depths
+ManaCost:1 U
+Types:Creature Merfolk Cleric
+PT:1/3
+T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature doesn't untap during its controller's next untap step.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+Oracle:Whenever Cleric of Chill Depths blocks a creature, that creature doesn't untap during its controller's next untap step.

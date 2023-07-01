@@ -1,0 +1,8 @@
+Name:Pitiless Pontiff
+ManaCost:W B
+Types:Creature Vampire Cleric
+PT:2/2
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Deathtouch & Indestructible | AILogic$ Aristocrat | SpellDescription$ CARDNAME gains deathtouch and indestructible until end of turn.
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+DeckHas:Ability$Sacrifice
+Oracle:{1}, Sacrifice another creature: Pitiless Pontiff gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

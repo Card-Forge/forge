@@ -1,0 +1,8 @@
+Name:Aysen Abbey
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ 2 T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Add {W}.\n{2}, {T}: Add {G} or {U}.

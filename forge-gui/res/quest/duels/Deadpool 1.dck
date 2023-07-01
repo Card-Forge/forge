@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Deadpool 1
+Title=Deadpool
+Difficulty=easy
+Description=BR deck with Emberstrike Duo
+Icon=Deadpool.jpg
+Deck Type=constructed
+[main]
+9 Mountain|ISD
+9 Swamp|ISD
+1 Tresserhorn Sinks
+1 Cinder Marsh
+1 Lantern-Lit Graveyard
+1 Lava Tubes
+1 Tainted Peak
+1 Urborg Volcano
+1 Bloodstone Cameo
+4 Emberstrike Duo
+1 Scar
+1 Bump in the Night
+1 Kederekt Parasite
+1 Marsh Goblins
+1 Crimson Muckwader
+1 Barbarian Outcast
+1 Slavering Nulls
+1 Kathari Bomber
+2 Sanity Gnawers
+1 Sedge Troll
+1 Pyre Zombie
+1 Strangling Soot
+1 Hellhole Rats
+1 Singe-Mind Ogre
+1 Smoldering Tar
+1 Sootwalkers
+1 Mire Kavu
+1 Wrecking Ball
+1 Trench Wurm
+1 Cultbrand Cinder
+1 Bituminous Blast
+1 Boris Devilboon
+1 Skeletonize
+1 Balduvian Dead
+1 Rattleblaze Scarecrow
+1 Plague Spores
+1 Barktooth Warbeard
+1 Lady Orca
+1 Axelrod Gunnarson
+1 Rakdos Ringleader
+[sideboard]

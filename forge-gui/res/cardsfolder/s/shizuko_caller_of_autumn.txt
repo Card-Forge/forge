@@ -1,0 +1,7 @@
+Name:Shizuko, Caller of Autumn
+ManaCost:1 G G
+Types:Legendary Creature Snake Shaman
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | Execute$ SakuraManaTriple | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player adds {G}{G}{G}. Until end of turn, they don't lose this mana as steps and phases end.
+SVar:SakuraManaTriple:DB$ Mana | Produced$ G | Amount$ 3 | PersistentMana$ True | Defined$ TriggeredPlayer
+Oracle:At the beginning of each player's upkeep, that player adds {G}{G}{G}. Until end of turn, they don't lose this mana as steps and phases end.

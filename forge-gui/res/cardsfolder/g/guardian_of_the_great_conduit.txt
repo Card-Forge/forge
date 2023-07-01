@@ -1,0 +1,8 @@
+Name:Guardian of the Great Conduit
+ManaCost:3 G
+Types:Creature Elemental
+PT:2/4
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | AddPower$ 2 | IsPresent$ Planeswalker.Nissa+YouCtrl | Description$ As long as you control a Nissa planeswalker, CARDNAME gets +2/+0 and has vigilance.
+SVar:BuffedBy:Nissa
+Oracle:Reach (This creature can block creatures with flying.)\nAs long as you control a Nissa planeswalker, Guardian of the Great Conduit gets +2/+0 and has vigilance. (Attacking doesn't cause it to tap.)

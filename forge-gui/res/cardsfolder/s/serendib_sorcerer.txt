@@ -1,0 +1,7 @@
+Name:Serendib Sorcerer
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Power$ 0 | Toughness$ 2 | IsCurse$ True | SpellDescription$ Target creature other than CARDNAME has base power and toughness 0/2 until end of turn.
+SVar:NonCombatPriority:1
+Oracle:{T}: Target creature other than Serendib Sorcerer has base power and toughness 0/2 until end of turn.

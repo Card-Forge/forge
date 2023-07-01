@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Chaos
+OpponentName=The Chaos
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Chaos Lord|Freyalise's Winds
+[metadata]
+Name=ICE Challenge: Chaos
+Title=The Chaos
+Difficulty=easy
+Description="Introduce a little anarchy. Upset the established order and everything becomes... chaos. I'm an agent of chaos. Oh, and you know the thing about chaos? It's fair!" -The Joker, The Dark Knight Returns
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+40 Incinerate|ICE
+20 Mountain|ICE|2

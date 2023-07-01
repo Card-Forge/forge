@@ -1,0 +1,8 @@
+Name:Nantuko Husk
+ManaCost:2 B
+Types:Creature Zombie Insect
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.

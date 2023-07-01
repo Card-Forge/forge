@@ -1,0 +1,6 @@
+Name:Hornet Cobra
+ManaCost:1 G G
+Types:Creature Snake
+PT:2/1
+K:First Strike
+Oracle:First strike

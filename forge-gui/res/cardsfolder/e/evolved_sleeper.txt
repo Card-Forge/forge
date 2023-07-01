@@ -1,0 +1,12 @@
+Name:Evolved Sleeper
+ManaCost:B
+Types:Creature Human
+PT:1/1
+A:AB$ Animate | Cost$ B | Types$ Human,Cleric | Duration$ Permanent | Power$ 2 | Toughness$ 2 | SpellDescription$ CARDNAME becomes a Human Cleric with base power and toughness 2/2.
+A:AB$ PutCounter | Cost$ 1 B | ConditionPresent$ Card.Self+Cleric | CounterType$ Deathtouch | CounterNum$ 1 | SubAbility$ TrigAnimate | StackDescription$ SpellDescription | SpellDescription$ If CARDNAME is a Cleric, put a deathtouch counter on it and it becomes a Phyrexian Human Cleric with base power and toughness 3/3.
+SVar:TrigAnimate:DB$ Animate | ConditionPresent$ Card.Self+Cleric | Types$ Phyrexian,Human,Cleric | Duration$ Permanent | Power$ 3 | Toughness$ 3
+A:AB$ PutCounter | Cost$ 1 B B | ConditionPresent$ Card.Self+Phyrexian | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigDraw | StackDescription$ SpellDescription | SpellDescription$ If CARDNAME is a Phyrexian, put a +1/+1 counter on it, then you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | ConditionPresent$ Card.Self+Phyrexian | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | ConditionPresent$ Card.Self+Phyrexian
+DeckHas:Type$Cleric|Phyrexian & Ability$Counters
+Oracle:{B}: Evolved Sleeper becomes a Human Cleric with base power and toughness 2/2.\n{1}{B}: If Evolved Sleeper is a Cleric, put a deathtouch counter on it and it becomes a Phyrexian Human Cleric with base power and toughness 3/3.\n{1}{B}{B}: If Evolved Sleeper is a Phyrexian, put a +1/+1 counter on it, then you draw a card and you lose 1 life.

@@ -1,0 +1,11 @@
+Name:Rashmi, Eternities Crafter
+ManaCost:2 G U
+Types:Legendary Creature Elf Druid
+PT:2/3
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | ValidCard$ Card | Execute$ DBReveal | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell each turn, reveal the top card of your library. You may cast it without paying its mana cost if it's a spell with lesser mana value. If you don't cast it, put it into your hand.
+SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ DBMayCast
+SVar:DBMayCast:DB$ Play | Defined$ Remembered | ForgetRemembered$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | NoShuffle$ True | ForgetChanged$ True
+SVar:X:TriggeredCard$CardManaCost
+SVar:Y:Remembered$CardManaCost
+Oracle:Whenever you cast your first spell each turn, reveal the top card of your library. You may cast it without paying its mana cost if it's a spell with lesser mana value. If you don't cast it, put it into your hand.

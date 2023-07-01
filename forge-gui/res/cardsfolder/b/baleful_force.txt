@@ -1,0 +1,8 @@
+Name:Baleful Force
+ManaCost:5 B B B
+Types:Creature Elemental
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each upkeep, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:At the beginning of each upkeep, you draw a card and you lose 1 life.

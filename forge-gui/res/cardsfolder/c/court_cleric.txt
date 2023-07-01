@@ -1,0 +1,9 @@
+Name:Court Cleric
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Planeswalker.Ajani+YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an Ajani planeswalker.
+SVar:BuffedBy:Ajani
+DeckNeeds:Type$Ajani
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nCourt Cleric gets +1/+1 as long as you control an Ajani planeswalker.

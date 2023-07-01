@@ -1,0 +1,6 @@
+Name:Vedalken Outlander
+ManaCost:W U
+Types:Artifact Creature Vedalken Scout
+PT:2/2
+K:Protection from red
+Oracle:Protection from red

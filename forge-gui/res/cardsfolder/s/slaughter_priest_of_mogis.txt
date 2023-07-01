@@ -1,0 +1,10 @@
+Name:Slaughter-Priest of Mogis
+ManaCost:B R
+Types:Creature Minotaur Shaman
+PT:2/2
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a permanent, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+SVar:BuffedBy:Permanent.YouCtrl
+A:AB$ Pump | Cost$ 2 Sac<1/Creature.Other;Enchantment/creature or enchantment> | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+AI:RemoveDeck:All
+Oracle:Whenever you sacrifice a permanent, Slaughter-Priest of Mogis gets +2/+0 until end of turn.\n{2}, Sacrifice another creature or an enchantment: Slaughter-Priest of Mogis gains first strike until end of turn.

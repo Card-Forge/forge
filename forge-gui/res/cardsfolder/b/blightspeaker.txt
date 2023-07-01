@@ -1,0 +1,7 @@
+Name:Blightspeaker
+ManaCost:1 B
+Types:Creature Human Rebel Cleric
+PT:1/1
+A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
+Oracle:{T}: Target player loses 1 life.\n{4}, {T}: Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.

@@ -1,0 +1,6 @@
+Name:Nantuko Elder
+ManaCost:2 G
+Types:Creature Insect Druid
+PT:1/2
+A:AB$ Mana | Cost$ T | Produced$ C G | SpellDescription$ Add {C}{G}.
+Oracle:{T}: Add {C}{G}.

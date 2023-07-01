@@ -1,0 +1,19 @@
+Name:Grizzled Outcasts
+ManaCost:4 G
+Types:Creature Human Werewolf
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Grizzled Outcasts.
+
+ALTERNATE
+
+Name:Krallenhorde Wantons
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Wantons.

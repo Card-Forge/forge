@@ -1,0 +1,6 @@
+Name:Ice Cave
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a spell, any other player may pay that spell's mana cost. If a player does, counter the spell. (Mana cost includes color.)
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ DefinedSACost_TriggeredSpellAbility | UnlessPayer$ NonTriggeredCardController | UnlessSwitched$ True
+Oracle:Whenever a player casts a spell, any other player may pay that spell's mana cost. If a player does, counter the spell. (Mana cost includes color.)

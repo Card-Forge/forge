@@ -1,0 +1,7 @@
+Name:Fallaji Excavation
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Create three tapped Powerstone tokens. You gain 3 life. (The tokens are artifacts with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Token|LifeGain & Type$Artifact
+Oracle:Create three tapped Powerstone tokens. You gain 3 life. (The tokens are artifacts with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

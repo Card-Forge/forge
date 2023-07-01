@@ -1,0 +1,7 @@
+Name:Merrow Grimeblotter
+ManaCost:3 UB
+Types:Creature Merfolk Wizard
+PT:2/2
+A:AB$ Pump | Cost$ 1 UB Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
+AI:RemoveDeck:All
+Oracle:{1}{U/B}, {Q}: Target creature gets -2/-0 until end of turn. ({Q} is the untap symbol.)

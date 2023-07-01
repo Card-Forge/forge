@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU2.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=7
+activeplayer=human
+activephase=MAIN1
+humanhand=Lightning Axe;Plague Belcher;Lethal Sting;Grind // Dust
+humanlibrary=
+humangraveyard=
+humanbattlefield=Canyon Slough;Canyon Slough;Canyon Slough;Concealed Courtyard;Concealed Courtyard;Nest of Scarabs;Zulaport Cutthroat;Festering Mummy;Firebrand Archer
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Bloodmad Vampire;Kari Zev, Skyship Raider;Goblin Dark-Dwellers;Bloodmad Vampire
+aiexile=
+aicommand=

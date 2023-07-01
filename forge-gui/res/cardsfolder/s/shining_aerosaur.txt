@@ -1,0 +1,6 @@
+Name:Shining Aerosaur
+ManaCost:4 W
+Types:Creature Dinosaur
+PT:3/4
+K:Flying
+Oracle:Flying

@@ -1,0 +1,10 @@
+Name:Markov Retribution
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpAll,DBBite
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+SVar:DBBite:DB$ Pump | ValidTgts$ Vampire.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target Vampire you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target Vampire you control deals damage equal to its power to another target creature.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature | AILogic$ PowerDmg | TgtPrompt$ Select another target creature | TargetUnique$ True | NumDmg$ X | DamageSource$ ParentTarget | StackDescription$ {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+DeckHints:Type$Vampire
+Oracle:Choose one or both —\n• Creatures you control get +1/+0 until end of turn.\n• Target Vampire you control deals damage equal to its power to another target creature.

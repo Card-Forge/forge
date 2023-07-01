@@ -1,0 +1,10 @@
+Name:Lightfoot Rogue
+ManaCost:1 B
+Types:Creature Halfling Rogue
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Sneak Attack — Whenever CARDNAME attacks, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Pump1,10-19:Pump2,20:Pump3 | SpellDescription$ roll a d20.
+SVar:Pump1:DB$ Pump | Defined$ Self | KW$ Deathtouch | SpellDescription$ 1—9 VERT CARDNAME gains deathtouch until end of turn.
+SVar:Pump2:DB$ Pump | Defined$ Self | KW$ Deathtouch | NumAtt$ 1 | SpellDescription$ 10—19 VERT It gets +1/+0 and gains deathtouch until end of turn.
+SVar:Pump3:DB$ Pump | Defined$ Self | KW$ First Strike & Deathtouch | NumAtt$ 3 | SpellDescription$ 20 VERT It gets +3/+0 and gains first strike and deathtouch until end of turn.
+Oracle:Sneak Attack — Whenever Lightfoot Rogue attacks, roll a d20.\n1—9 | Lightfoot Rogue gains deathtouch until end of turn.\n10—19 | It gets +1/+0 and gains deathtouch until end of turn.\n20 | It gets +3/+0 and gains first strike and deathtouch until end of turn.

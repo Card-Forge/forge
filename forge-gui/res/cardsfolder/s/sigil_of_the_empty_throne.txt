@@ -1,0 +1,6 @@
+Name:Sigil of the Empty Throne
+ManaCost:3 W W
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
+Oracle:Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying.

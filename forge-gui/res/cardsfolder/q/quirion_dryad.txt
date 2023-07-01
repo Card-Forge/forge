@@ -1,0 +1,10 @@
+Name:Quirion Dryad
+ManaCost:1 G
+Types:Creature Dryad
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.White,Card.Blue,Card.Black,Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.White,Card.Blue,Card.Black,Card.Red
+DeckHas:Ability$Counters
+DeckNeeds:Color$White|Blue|Black|Red
+Oracle:Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on Quirion Dryad.

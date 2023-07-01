@@ -1,0 +1,7 @@
+Name:Rakka Mar
+ManaCost:2 R R
+Types:Legendary Creature Human Shaman
+PT:2/2
+K:Haste
+A:AB$ Token | Cost$ R T | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_haste | TokenOwner$ You | SpellDescription$ Create a 3/1 red Elemental creature token with haste.
+Oracle:Haste\n{R}, {T}: Create a 3/1 red Elemental creature token with haste.

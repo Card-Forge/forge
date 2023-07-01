@@ -1,0 +1,7 @@
+Name:Phantasmal Fiend
+ManaCost:3 B
+Types:Creature Illusion
+PT:1/5
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+Oracle:{B}: Phantasmal Fiend gets +1/-1 until end of turn.\n{1}{U}: Switch Phantasmal Fiend's power and toughness until end of turn.

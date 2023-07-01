@@ -1,0 +1,11 @@
+Name:Pink Horror
+ManaCost:3 U R
+Types:Creature Demon Horror
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Coruscating Flames — Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Split — When CARDNAME dies, create two 2/2 blue and red Demon Horror creature tokens named Blue Horror with "Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ blue_horror | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery
+Oracle:Coruscating Flames — Whenever you cast an instant or sorcery spell, Pink Horror deals 2 damage to any target.\nSplit — When Pink Horror dies, create two 2/2 blue and red Demon Horror creature tokens named Blue Horror with "Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target."

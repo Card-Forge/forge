@@ -1,0 +1,7 @@
+Name:Mizzium Transreliquat
+ManaCost:3
+Types:Artifact
+A:AB$ Clone | Cost$ 3 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to copy until end of turn. | Duration$ UntilEndOfTurn | SpellDescription$ CARDNAME becomes a copy of target artifact until end of turn.
+A:AB$ Clone | Cost$ 1 U R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to copy. | GainThisAbility$ True | SpellDescription$ CARDNAME becomes a copy of target artifact, except it has this ability.
+AI:RemoveDeck:All
+Oracle:{3}: Mizzium Transreliquat becomes a copy of target artifact until end of turn.\n{1}{U}{R}: Mizzium Transreliquat becomes a copy of target artifact, except it has this ability.

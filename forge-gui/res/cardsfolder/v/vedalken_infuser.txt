@@ -1,0 +1,8 @@
+Name:Vedalken Infuser
+ManaCost:3 U
+Types:Creature Vedalken Wizard
+PT:1/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on target artifact.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, you may put a charge counter on target artifact.

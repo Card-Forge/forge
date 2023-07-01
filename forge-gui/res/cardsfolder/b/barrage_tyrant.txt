@@ -1,0 +1,10 @@
+Name:Barrage Tyrant
+ManaCost:4 R
+Types:Creature Eldrazi
+PT:5/3
+K:Devoid
+A:AB$ DealDamage | Cost$ 2 R Sac<1/Creature.Colorless+Other/another colorless creature> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+DeckHints:Color$Colorless & Keyword$Devoid
+Oracle:Devoid (This card has no color.)\n{2}{R}, Sacrifice another colorless creature: Barrage Tyrant deals damage equal to the sacrificed creature's power to any target.

@@ -1,0 +1,8 @@
+Name:Reaper of Sheoldred
+ManaCost:4 B
+Types:Creature Phyrexian Horror
+PT:2/5
+K:Infect
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller gets a poison counter.
+SVar:TrigSac:DB$ Poison | Num$ 1 | Defined$ TriggeredSourceController
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever a source deals damage to Reaper of Sheoldred, that source's controller gets a poison counter.

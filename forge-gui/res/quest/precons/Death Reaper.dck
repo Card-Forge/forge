@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=M14
+Image=death_reaper.jpg
+Name=Death Reaper
+Description=Embrace your inner necromancer! Plague your opponent with ghastly horrors, deadly charms, and mind-rotting diseases while inexorably building your undead horde. Your lesser minions will serve as willing sacrifices so you can attain your ultimate goal.
+[Main]
+2 Academy Raider|M14
+1 Act of Treason|M14
+1 Barrage of Expendables|M14
+2 Blood Bairn|M14
+1 Bogbrew Witch|M14
+1 Bubbling Cauldron|M14
+2 Child of Night|M14
+2 Corrupt|M14
+1 Deathgaze Cockatrice|M14
+3 Festering Newt|M14
+2 Gnawing Zombie|M14
+1 Liliana's Reaver+|M14
+1 Minotaur Abomination|M14
+8 Mountain|M14
+2 Sengir Vampire|M14
+1 Smelt|M14
+1 Staff of the Death Magus|M14
+17 Swamp|M14
+2 Tenacious Dead|M14
+3 Thunder Strike|M14
+2 Undead Minotaur|M14
+1 Vampire Warlord|M14
+3 Wring Flesh|M14

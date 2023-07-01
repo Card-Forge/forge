@@ -1,0 +1,7 @@
+Name:Diamond Lion
+ManaCost:2
+Types:Artifact Creature Cat
+PT:2/2
+A:AB$ Mana | Cost$ T Discard<0/Hand> Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | InstantSpeed$ True | SpellDescription$ Add three mana of any one color. Activate only as an instant.
+AI:RemoveDeck:All
+Oracle:{T}, Discard your hand, Sacrifice Diamond Lion: Add three mana of any one color. Activate only as an instant.

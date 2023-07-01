@@ -1,0 +1,5 @@
+Name:Courier's Capsule
+ManaCost:1 U
+Types:Artifact
+A:AB$ Draw | Cost$ 1 U T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{1}{U}, {T}, Sacrifice Courier's Capsule: Draw two cards.

@@ -1,0 +1,8 @@
+Name:Wizened Snitches
+ManaCost:3 U
+Types:Creature Faerie Rogue
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
+AI:RemoveDeck:Random
+Oracle:Flying\nPlayers play with the top card of their libraries revealed.

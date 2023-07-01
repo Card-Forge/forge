@@ -1,0 +1,11 @@
+Name:Cosmos Elixir
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your end step, draw a card if your life total is greater than your starting life total. Otherwise, you gain 2 life.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GTY | TrueSubAbility$ DBDraw | FalseSubAbility$ DBGainLife
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of your end step, draw a card if your life total is greater than your starting life total. Otherwise, you gain 2 life.

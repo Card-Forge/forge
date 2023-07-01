@@ -1,0 +1,7 @@
+Name:Symbiotic Wurm
+ManaCost:5 G G G
+Types:Creature Wurm
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create seven 1/1 green Insect creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 7 | TokenScript$ g_1_1_insect | TokenOwner$ TriggeredCardController
+Oracle:When Symbiotic Wurm dies, create seven 1/1 green Insect creature tokens.

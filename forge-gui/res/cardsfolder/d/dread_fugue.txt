@@ -1,0 +1,6 @@
+Name:Dread Fugue
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLE2 | DiscardValidDesc$ nonland card from it with mana value 2 or less | SpellDescription$ Target player reveals their hand. You choose a nonland card from it [with mana value 2 or less]. That player discards that card.
+A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | PrecostDesc$ Cleave | CostDesc$ {2}{B} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Oracle:Cleave {2}{B} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nTarget player reveals their hand. You choose a nonland card from it [with mana value 2 or less]. That player discards that card.

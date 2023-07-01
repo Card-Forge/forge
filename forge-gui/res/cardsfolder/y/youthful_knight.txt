@@ -1,0 +1,6 @@
+Name:Youthful Knight
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/1
+K:First Strike
+Oracle:First strike

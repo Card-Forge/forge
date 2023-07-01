@@ -1,0 +1,38 @@
+[quest]
+id=5004
+OpponentName=Marego
+AILife=30
+Repeat=true
+Wins=25
+Card Reward=2 black rares;duplicate card;Arid Mesa|ZEN
+Credit Reward=200
+HumanExtras=Bloodchief Ascension
+AIExtras=Bloodchief Ascension|Baneful Omen
+[metadata]
+Name=quest5004
+Title=Marego
+Difficulty=hard
+Description="Until then, may you find a mirror and spend some time enjoying the view"
+Icon=Marego.png
+Deck Type=constructed
+[Main]
+4 Akoum Refuge|ZEN
+2 Arid Mesa|ZEN
+4 Bloodghast|ZEN
+4 Burst Lightning|ZEN
+4 Lavaclaw Reaches|WWK
+4 Mindcrank|NPH
+4 Mountain|LEB
+4 Night's Whisper|5DN
+2 Ob Nixilis, the Fallen|ZEN
+2 Guul Draz Specter|ZEN
+2 Pulse Tracker|WWK
+4 Blightning|ALA
+4 Staggershock|ROE
+6 Swamp|LEB
+2 Vampire Lacerator|ZEN
+4 Vampire Nighthawk|ZEN
+4 Verdant Catacombs|ZEN
+[sideboard]
+[planes]
+[schemes]

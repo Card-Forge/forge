@@ -1,0 +1,8 @@
+Name:Cinder Pyromancer
+ManaCost:2 R
+Types:Creature Elemental Shaman
+PT:0/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a red spell, you may untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:{T}: Cinder Pyromancer deals 1 damage to target player or planeswalker.\nWhenever you cast a red spell, you may untap Cinder Pyromancer.

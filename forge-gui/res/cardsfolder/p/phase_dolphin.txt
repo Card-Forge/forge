@@ -1,0 +1,8 @@
+Name:Phase Dolphin
+ManaCost:2 U
+Types:Creature Elemental Whale
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Whenever Phase Dolphin attacks, another target attacking creature can't be blocked this turn.

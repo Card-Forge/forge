@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Adventures in the Forgotten Realms #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/08/181.-AFR3-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Start in your first main phase (with Elspeth's Nightmare chapter II ability resolving) and win this turn. You topdecked Pharika's Libation this draw step. Your opponent resolved Revel in Silence during your upkeep. Assume your opponent is tapped out.
+[state]
+humanlife=20
+ailife=3
+turn=1
+activeplayer=human
+activephase=DRAW
+activephaseadvance=MAIN1
+humanhand=Pharika's Libation
+humanbattlefield=Spare Dagger;Elspeth's Nightmare|Counters:LORE=1;Hive of the Eye Tyrant;Hive of the Eye Tyrant;Hive of the Eye Tyrant;Swamp;Swamp;Swamp;Swamp;Swamp
+aihand=Indomitable Will;Indomitable Will;Indomitable Will
+aibattlefield=Nine Lives|Counters:INCARNATION=6;Speaker of the Heavens
+aiprecast=Revel in Silence

@@ -1,0 +1,6 @@
+Name:Kor Scythemaster
+ManaCost:2 W
+Types:Creature Kor Soldier Ally
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
+Oracle:Kor Scythemaster has first strike as long as it's attacking.

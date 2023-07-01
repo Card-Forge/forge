@@ -1,0 +1,24 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 101315 - Inherit the Earth
+URL:http://www.gatheringmagic.com/seanuy-101315-inherit-the-earth/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=5
+AILife=13
+humanhand=Lithomancer's Focus|Set:BFZ; Tandem Tactics|Set:BFZ; Unnatural Aggression|Set:BFZ; Aligned Hedron Network|Set:BFZ; Reclaiming Vines|Set:BFZ
+humangraveyard=
+humanlibrary=
+humanbattlefield=Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Shrine of the Forsaken Gods|Set:BFZ; Blisterpod|Set:BFZ; Fortified Rampart|Set:BFZ; Stone Haven Medic|Set:BFZ; Snapping Gnarlid|Set:BFZ; Felidar Cub|Set:BFZ; Tajuru Warcaller|Set:BFZ; Hedron Archive|Set:BFZ
+aibattlefield=Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mortuary Mire|Set:BFZ|Tapped; Hedron Blade|Set:BFZ|AttachedTo:420; Silent Skimmer|Set:BFZ|Tapped|Id:420; Skitterskin|Set:BFZ; Goblin War Paint|Set:BFZ|AttachedTo:422; Shatterskull Recruit|Set:BFZ|Id:422|Tapped; Endless One|Set:BFZ|Counters:P1P1=13; Mountain|Set:BFZ|Id:424; Retreat to Hagra|Set:BFZ
+# Precast Ondu Rising with Awaken for the AI, targeting mountain - requires KW Awaken implementation
+# with the target for Awaken set in its first subability.
+aiprecast=Ondu Rising:KW#AwakenOnly->424
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

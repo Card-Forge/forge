@@ -1,0 +1,8 @@
+Name:Slavering Nulls
+ManaCost:1 R
+Types:Creature Goblin Zombie
+PT:2/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Swamp.YouCtrl | CombatDamage$ True | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control a Swamp, you may have that player discard a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+DeckHints:Color$Black
+Oracle:Whenever Slavering Nulls deals combat damage to a player, if you control a Swamp, you may have that player discard a card.

@@ -1,0 +1,10 @@
+Name:Empyreal Voyager
+ManaCost:1 G U
+Types:Creature Vedalken Scout
+PT:2/3
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get that many {E} (energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying, trample\nWhenever Empyreal Voyager deals combat damage to a player, you get that many {E} (energy counters).

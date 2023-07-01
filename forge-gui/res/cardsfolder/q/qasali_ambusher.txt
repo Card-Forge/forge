@@ -1,0 +1,10 @@
+Name:Qasali Ambusher
+ManaCost:1 G W
+Types:Creature Cat Warrior
+PT:2/3
+K:Reach
+S:Mode$ Continuous | CharacteristicDefining$ True | CheckSVar$ X | CheckSecondSVar$ Y | CheckThirdSVar$ Z | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | MayPlayDontGrantZonePermissions$ True | Description$ If a creature is attacking you and you control a Forest and a Plains, you may cast CARDNAME without paying its mana cost and as though it had flash.
+SVar:X:Count$Valid Creature.attackingYou
+SVar:Y:Count$Valid Forest.YouCtrl
+SVar:Z:Count$Valid Plains.YouCtrl
+Oracle:Reach\nIf a creature is attacking you and you control a Forest and a Plains, you may cast Qasali Ambusher without paying its mana cost and as though it had flash.

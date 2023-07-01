@@ -1,0 +1,12 @@
+Name:Cemetery Illuminator
+ManaCost:1 U U
+Types:Creature Spirit
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield or attacks, exile a card from a graveyard.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile a card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | SelectPrompt$ Select a card from a graveyard | Mandatory$ True | Hidden$ True | Imprint$ True | AILogic$ ExilePreference:MostProminentOwnType
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.nonLand+TopLibrary+YouCtrl+sharesCardTypeWith Imprinted.ExiledWithSource | AffectedZone$ Library | MayPlay$ True | MayPlayLimit$ 1 | Description$ Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with CARDNAME.
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhenever Cemetery Illuminator enters the battlefield or attacks, exile a card from a graveyard.\nYou may look at the top card of your library any time.\nOnce each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with Cemetery Illuminator.

@@ -1,0 +1,6 @@
+Name:Vampire Token
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire
+PT:*/*
+Oracle:

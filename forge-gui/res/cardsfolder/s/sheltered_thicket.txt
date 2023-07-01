@@ -1,0 +1,6 @@
+Name:Sheltered Thicket
+ManaCost:no cost
+Types:Land Mountain Forest
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:2
+Oracle:({T}: Add {R} or {G}.)\nSheltered Thicket enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

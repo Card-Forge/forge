@@ -1,0 +1,10 @@
+Name:Boros Reckoner
+ManaCost:RW RW RW
+Types:Creature Minotaur Wizard
+PT:3/3
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+A:AB$ Pump | Cost$ RW | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Boros Reckoner is dealt damage, it deals that much damage to any target.\n{R/W}: Boros Reckoner gains first strike until end of turn.

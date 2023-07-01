@@ -1,0 +1,7 @@
+Name:Final Strike
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Opponent,Planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target opponent or planeswalker equal to the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFinal Strike deals damage to target opponent or planeswalker equal to the sacrificed creature's power.

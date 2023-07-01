@@ -1,0 +1,6 @@
+Name:Brightwood Tracker
+ManaCost:3 G
+Types:Creature Elf Scout
+PT:2/4
+A:AB$ Dig | Cost$ 5 G T | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:{5}{G}, {T}: Look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

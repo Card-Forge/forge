@@ -1,0 +1,7 @@
+Name:Feral Animist
+ManaCost:1 R G
+Types:Creature Goblin Shaman
+PT:2/1
+A:AB$ Pump | Cost$ 3 | Defined$ Self | NumAtt$ +X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is its power.
+SVar:X:Count$CardPower
+Oracle:{3}: Feral Animist gets +X/+0 until end of turn, where X is its power.

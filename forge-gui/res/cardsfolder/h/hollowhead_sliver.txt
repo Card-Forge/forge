@@ -1,0 +1,9 @@
+Name:Hollowhead Sliver
+ManaCost:2 R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddAbility$ Rummage | Description$ Sliver creatures you control have "{T}, Discard a card: Draw a card."
+SVar:Rummage:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have "{T}, Discard a card: Draw a card."

@@ -1,0 +1,12 @@
+Name:Norin the Wary
+ManaCost:R
+Types:Legendary Creature Human Warrior
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ When a player casts a spell or a creature attacks, exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
+T:Mode$ Attacks | ValidCard$ Creature | Execute$ TrigExile | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When a player casts a spell or a creature attacks, exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile,Command | Destination$ Battlefield
+SVar:MustAttack:True
+AI:RemoveDeck:Random
+Oracle:When a player casts a spell or a creature attacks, exile Norin the Wary. Return it to the battlefield under its owner's control at the beginning of the next end step.

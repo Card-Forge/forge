@@ -1,0 +1,7 @@
+Name:Oxidda Finisher
+ManaCost:5 R R
+Types:Creature Ogre Rebel
+PT:7/5
+K:Affinity:Artifact.Equipment:equipment
+K:Trample
+Oracle:Affinity for Equipment (This spell costs {1} less to cast for each equipment you control.)\nTrample

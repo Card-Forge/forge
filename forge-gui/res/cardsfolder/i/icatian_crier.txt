@@ -1,0 +1,8 @@
+Name:Icatian Crier
+ManaCost:2 W
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 2 | TokenScript$ w_1_1_citizen | TokenOwner$ You | SpellDescription$ Create two 1/1 white Citizen creature tokens.
+SVar:AIPreference:DiscardCost$Card.cmcLE1
+AI:RemoveDeck:Random
+Oracle:{1}{W}, {T}, Discard a card: Create two 1/1 white Citizen creature tokens.

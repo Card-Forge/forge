@@ -1,0 +1,8 @@
+Name:Charging War Boar
+ManaCost:1 R G
+Types:Creature Boar
+PT:3/1
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Planeswalker.Domri+YouCtrl | Description$ As long as you control a Domri planeswalker, CARDNAME gets +1/+1 and has trample.
+SVar:BuffedBy:Domri
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nAs long as you control a Domri planeswalker, Charging War Boar gets +1/+1 and has trample. (It can deal excess damage to the player or planeswalker it's attacking.)

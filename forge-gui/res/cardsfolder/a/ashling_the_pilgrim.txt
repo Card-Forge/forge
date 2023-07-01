@@ -1,0 +1,12 @@
+Name:Ashling the Pilgrim
+ManaCost:1 R
+Types:Legendary Creature Elemental Shaman
+PT:1/1
+A:AB$ PutCounter | Cost$ 1 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBRemoveCounter | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on CARDNAME. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from CARDNAME, and it deals that much damage to each creature and each player.
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBDmg | ConditionCheckSVar$ AshlingNum | ConditionSVarCompare$ EQ3 | StackDescription$ None
+SVar:DBDmg:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SubAbility$ DBCleanup | ConditionCheckSVar$ AshlingNum | ConditionSVarCompare$ EQ3 | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AshlingNum:Count$ResolvedThisTurn
+SVar:X:Count$RememberedSize
+AI:RemoveDeck:All
+Oracle:{1}{R}: Put a +1/+1 counter on Ashling the Pilgrim. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from Ashling the Pilgrim, and it deals that much damage to each creature and each player.

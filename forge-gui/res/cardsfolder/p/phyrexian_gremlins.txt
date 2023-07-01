@@ -1,0 +1,11 @@
+Name:Phyrexian Gremlins
+ManaCost:2 B
+Types:Creature Phyrexian Gremlin
+PT:1/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Tap | Cost$ T | ValidTgts$ Artifact | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target artifact. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
+SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:You may choose not to untap Phyrexian Gremlins during your untap step.\n{T}: Tap target artifact. It doesn't untap during its controller's untap step for as long as Phyrexian Gremlins remains tapped.

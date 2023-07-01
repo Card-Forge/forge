@@ -1,0 +1,11 @@
+Name:Lyzolda, the Blood Witch Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/-1
+R:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | Hellbent$ True | ReplaceWith$ DmgTwice | Description$ Hellbent — As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Hellbent$ True | Execute$ LyzoldasDiscard | TriggerDescription$ Hellbent — At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.
+SVar:LyzoldasDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+DeckHints:Ability$Discard
+Oracle:Hand -1, life -1\nHellbent — As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.\nHellbent — At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.

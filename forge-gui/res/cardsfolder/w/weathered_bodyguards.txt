@@ -1,0 +1,8 @@
+Name:Weathered Bodyguards
+ManaCost:5 W
+Types:Creature Human Soldier
+PT:2/5
+K:Morph:3 W
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ True | IsPresent$ Card.Self+untapped | DamageTarget$ Self | Description$ As long as CARDNAME is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
+SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
+Oracle:As long as Weathered Bodyguards is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to Weathered Bodyguards instead.\nMorph {3}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

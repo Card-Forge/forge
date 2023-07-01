@@ -1,0 +1,9 @@
+Name:Dreadship Reef
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 1 T | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
+A:AB$ Mana | Cost$ 1 SubCounter<X/STORAGE> | Produced$ Combo U B | Amount$ X | CostDesc$ {1}, Remove X storage counters from CARDNAME: | SpellDescription$ Add X mana in any combination of {U} and/or {B}.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Put a storage counter on Dreadship Reef.\n{1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B}.

@@ -1,0 +1,8 @@
+Name:Wall of Denial
+ManaCost:1 W U
+Types:Creature Wall
+PT:0/8
+K:Defender
+K:Flying
+K:Shroud
+Oracle:Defender, flying\nShroud (This creature can't be the target of spells or abilities.)

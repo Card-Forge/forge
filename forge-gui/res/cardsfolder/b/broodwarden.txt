@@ -1,0 +1,7 @@
+Name:Broodwarden
+ManaCost:3 G G
+Types:Creature Eldrazi Drone
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Eldrazi+Spawn+YouCtrl | AddPower$ 2 | AddToughness$ 1 | Description$ Eldrazi Spawn creatures you control get +2/+1.
+SVar:PlayMain1:TRUE
+Oracle:Eldrazi Spawn creatures you control get +2/+1.

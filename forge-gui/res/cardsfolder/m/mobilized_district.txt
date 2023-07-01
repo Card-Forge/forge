@@ -1,0 +1,9 @@
+Name:Mobilized District
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Citizen | Keywords$ Vigilance | ReduceCost$ X | SpellDescription$ CARDNAME becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control.
+SVar:X:Count$Valid Creature.Legendary+YouCtrl,Planeswalker.Legendary+YouCtrl
+SVar:BuffedBy:Creature.Legendary,Planeswalker.Legendary
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{4}: Mobilized District becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control.

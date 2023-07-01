@@ -1,0 +1,7 @@
+Name:Aven Augur
+ManaCost:3 U
+Types:Creature Bird Wizard
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Return up to two target creatures to their owners' hands. Activate only during your upkeep.
+Oracle:Flying\nSacrifice Aven Augur: Return up to two target creatures to their owners' hands. Activate only during your upkeep.

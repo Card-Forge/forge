@@ -1,0 +1,7 @@
+Name:Primoc Escapee
+ManaCost:6 U
+Types:Creature Bird Beast
+PT:4/4
+K:Flying
+K:Cycling:2
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)

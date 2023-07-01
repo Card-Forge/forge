@@ -1,0 +1,6 @@
+Name:Mountain Bandit
+ManaCost:R
+Types:Creature Human Soldier Rogue
+PT:1/1
+K:Haste
+Oracle:Haste

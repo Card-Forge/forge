@@ -1,0 +1,6 @@
+Name:Ironclaw Orcs
+ManaCost:1 R
+Types:Creature Orc
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or greater.
+Oracle:Ironclaw Orcs can't block creatures with power 2 or greater.

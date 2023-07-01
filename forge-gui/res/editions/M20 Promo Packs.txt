@@ -1,0 +1,13 @@
+[metadata]
+Code=PPP1
+Date=2019-07-12
+Name=M20 Promo Packs
+Type=Promo
+ScryfallCode=PPP1
+
+[cards]
+1 R Plains @Daniel Ljunggren
+2 R Island @Piotr Dura
+3 R Swamp @Alexander Forssberg
+4 R Mountain @Piotr Dura
+5 R Forest @Alayna Danner

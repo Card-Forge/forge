@@ -1,0 +1,6 @@
+Name:War Horn
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:Attacking creatures you control get +1/+0.

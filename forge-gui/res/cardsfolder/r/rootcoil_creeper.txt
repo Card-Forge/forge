@@ -1,0 +1,9 @@
+Name:Rootcoil Creeper
+ManaCost:G U
+Types:Creature Plant Horror
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.wasCastFromYourGraveyard | SpellDescription$ Add two mana of any one color. Spend this mana only to cast spells from your graveyard.
+A:AB$ ChangeZone | Cost$ G U T Exile<1/CARDNAME> | Origin$ Exile | Destination$ Hand | ValidTgts$ Card.withFlashback+YouOwn | TgtPrompt$ Select target card with flashback you own in exile | SpellDescription$ Return target card with flashback you own in exile to your hand.
+DeckHints:Ability$Graveyard & Keyword$Flashback
+Oracle:{T}: Add one mana of any color.\n{T}: Add two mana of any one color. Spend this mana only to cast spells from your graveyard.\n{G}{U}, {T}, Exile Rootcoil Creeper: Return target card with flashback you own in exile to your hand.

@@ -1,0 +1,9 @@
+Name:Loyal Guardian
+ManaCost:4 G
+Types:Creature Rhino
+PT:4/4
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$IsCommander
+Oracle:Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control.

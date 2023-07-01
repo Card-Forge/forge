@@ -1,0 +1,9 @@
+Name:Sedge Troll
+ManaCost:2 R
+Types:Creature Troll
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:BuffedBy:Swamp
+DeckNeeds:Color$Black
+Oracle:Sedge Troll gets +1/+1 as long as you control a Swamp.\n{B}: Regenerate Sedge Troll.

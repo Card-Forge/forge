@@ -1,0 +1,5 @@
+Name:Barbtooth Wurm
+ManaCost:5 G
+Types:Creature Wurm
+PT:6/4
+Oracle:

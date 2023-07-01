@@ -1,0 +1,7 @@
+Name:Talisman of Indulgence
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SubAbility$ DBPain | SpellDescription$ Add {B} or {R}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {B} or {R}. Talisman of Indulgence deals 1 damage to you.

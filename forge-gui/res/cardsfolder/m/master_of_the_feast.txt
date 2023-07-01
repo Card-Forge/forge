@@ -1,0 +1,9 @@
+Name:Master of the Feast
+ManaCost:1 B B
+Types:Enchantment Creature Demon
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each opponent draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Player.Opponent | NumCards$ 1
+SVar:DonateMe:3
+Oracle:Flying\nAt the beginning of your upkeep, each opponent draws a card.

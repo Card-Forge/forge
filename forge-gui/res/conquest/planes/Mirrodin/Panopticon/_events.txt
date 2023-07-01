@@ -1,0 +1,9 @@
+Name:Karn Liberated|Deck:Karn Liberated.dck|Variant:Planeswalker|Avatar:Karn Liberated|Desc:
+Name:March of the Myr|Deck:March of the Myr.dck|Variant:None|Avatar:Myr Battlesphere|Desc:
+Name:Memnarch|Deck:Memnarch.dck|Variant:Commander|Avatar:Memnarch|Desc:
+Name:Arcbound Overseer|Deck:Arcbound Overseer Vanguard.dck|Variant:Vanguard|Avatar:Arcbound Overseer|Desc:
+Name:Tezzeret, Agent of Bolas|Deck:Tezzeret, Agent of Bolas.dck|Variant:Planeswalker|Avatar:Tezzeret, Agent of Bolas|Desc:
+Name:Replicas|Deck:Replicas.dck|Variant:None|Avatar:Wizard Replica|Desc:
+Name:Death or Darksteel|Deck:Death or Darksteel.dck|Variant:None|Avatar:Withstand Death|Desc:
+Name:Phyrexia's Core|Deck:Phyrexia's Core.dck|Variant:None|Avatar:Phyrexia's Core|Desc:
+Name:Stations|Deck:Stations.dck|Variant:None|Avatar:Salvaging Station|Desc:

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boris Karloff 3
+Title=Boris Karloff
+Difficulty=hard
+Description=WR Boros Aggro deck with Kors, levelers and threat removal
+Icon=Boris Karloff.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Teetering Peaks
+2 Sacred Foundry
+4 Plateau
+4 Arid Mesa
+4 Scalding Tarn
+4 Marsh Flats
+2 Plains|M11
+4 Goblin Guide
+1 Plated Geopede
+2 Steppe Lynx
+2 Loam Lion
+4 Flame Slash
+4 Hellspark Elemental
+2 Path to Exile
+2 Valorous Stance
+4 Lightning Bolt
+3 Ranger of Eos
+3 Stoneforge Mystic
+2 Journey to Nowhere
+1 Sword of Fire and Ice
+1 Sword of Feast and Famine
+1 Sword of Body and Mind
+[sideboard]

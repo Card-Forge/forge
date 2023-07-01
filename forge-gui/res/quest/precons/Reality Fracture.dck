@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Reality Fracture
+Description=The Reality Fracture deck highlights the interaction between suspend and storm. Manipulate the time stream just right, and you'll set up a single, explosive, game-winning turn!
+Deck Type=constructed
+Set=TSP
+Image=reality_fracture.jpg
+
+[Main]
+1 Careful Consideration|TSP
+2 Claws of Gix|TSB
+2 Clockspinning|TSP
+1 Clockwork Hydra|TSP
+2 Coal Stoker|TSP
+1 Deep-Sea Kraken|TSP
+1 Dreadship Reef|TSP
+3 Empty the Warrens|TSP
+1 Errant Ephemeron|TSP
+2 Giant Oyster|TSB
+4 Grapeshot|TSP
+1 Ground Rift|TSP
+2 Ignite Memories|TSP
+12 Island|TSP|1
+1 Jhoira's Timebug|TSP
+2 Keldon Halberdier|TSP
+11 Mountain|TSP|1
+1 Pardic Dragon|TSP
+1 Rift Bolt|TSP
+3 Riftwing Cloudskate|TSP
+1 Sage of Epityr|TSP
+1 Serrated Arrows|TSB
+3 Viscerid Deepwalker|TSP
+1 Whispers of the Muse|TSB
+[Sideboard]

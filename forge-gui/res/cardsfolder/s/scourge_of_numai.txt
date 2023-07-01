@@ -1,0 +1,9 @@
+Name:Scourge of Numai
+ManaCost:3 B
+Types:Creature Demon Spirit
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 2 life if you don't control an Ogre.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
+AI:RemoveDeck:Random
+DeckHints:Type$Ogre
+Oracle:At the beginning of your upkeep, you lose 2 life if you don't control an Ogre.

@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Pantheon's Power
+Description=Those who question the power of the gods do so at their own peril. Your opponents will be punished for their hubris as you bring an unstoppable army of enchantment creatures to the battlefield.
+Deck Type=constructed
+Set=JOU
+Image=pantheon's_power.jpg
+[Main]
+2 Akroan Mastiff|JOU
+1 Archetype of Courage|BNG
+1 Archetype of Finality|BNG
+1 Brain Maggot|JOU
+1 Doomwake Giant+|JOU
+2 Dreadbringer Lampads|JOU
+1 Eagle of the Watch|JOU
+1 Fate Unraveler|BNG
+2 Grim Guardian|JOU
+2 Harvestguard Alseids|JOU
+2 Nyx-Fleece Ram|JOU
+2 Odunos River Trawler|BNG
+1 Pharika's Chosen|JOU
+1 Rotted Hulk|JOU
+2 Thoughtrender Lamia|JOU
+2 Underworld Coinsmith|JOU
+1 Armament of Nyx|JOU
+1 Aspect of Gorgon|JOU
+1 Banishing Light|JOU
+1 Cast into Darkness|JOU
+1 Font of Return|JOU
+1 Font of Vigor|JOU
+2 Nyx Infusion|JOU
+2 Oppressive Rays|JOU
+11 Plains|THS
+15 Swamp|THS
+[sideboard]
+

@@ -1,0 +1,8 @@
+Name:Aphetto Vulture
+ManaCost:4 B B
+Types:Creature Zombie Bird
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, you may put target Zombie card from your graveyard on top of your library.
+SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie | TargetsWithDefinedController$ TriggeredCardController | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target Zombie card from your graveyard on top of your library.
+Oracle:Flying\nWhen Aphetto Vulture dies, you may put target Zombie card from your graveyard on top of your library.

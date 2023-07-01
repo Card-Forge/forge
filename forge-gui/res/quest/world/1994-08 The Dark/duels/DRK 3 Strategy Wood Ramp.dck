@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=DRK 3 Strategy: Wood Ramp
+Title=Wood Ramp
+Difficulty=hard
+Description=They are aberrations who have turned on everything we hold sacred. Let them be cast out." -Ailheen, Speaker of the Council
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Diabolic Machine|DRK
+4 Elves of Deep Shadow|DRK
+4 Fellwar Stone|DRK
+24 Forest|LEB|3
+4 People of the Woods|DRK
+4 Scarwood Bandits|DRK
+4 Spitting Slug|DRK
+4 Tracker|DRK
+4 Wand of Ith|DRK
+4 Wormwood Treefolk|DRK

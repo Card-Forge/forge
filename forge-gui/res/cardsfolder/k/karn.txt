@@ -1,0 +1,7 @@
+Name:Karn
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+6
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.nonCreature+YouCtrl | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each noncreature artifact you control is an artifact creature with power and toughness each equal to its mana value.
+SVar:AffectedX:Count$CardManaCost
+Oracle:Hand +1, life +6\nEach noncreature artifact you control is an artifact creature with power and toughness each equal to its mana value.

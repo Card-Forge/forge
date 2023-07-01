@@ -1,0 +1,5 @@
+Name:Walking Corpse
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/2
+Oracle:

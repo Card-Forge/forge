@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #18 - Yet So Far
+URL:https://perplexingchimera.com/2015/01/16/18-yet-so-far/
+Goal:Win
+Turns:1
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=4
+AILife=4
+HumanPlay=Zodiac Dog; Xiahou Dun, the One-Eyed; Barbarian Horde; Lu Bu, Master-at-Arms; Plains; Plains; Swamp; Swamp; Mountain; Mountain; Mountain
+HumanHand=Loyal Retainers
+HumanLibrary=
+HumanGraveyard=Dong Zhou, the Tyrant; Return to Battle; Ghostly Visit; Fire Bowman
+AIPlay=Wu Elite Cavalry|Tapped; Zodiac Pig|Tapped; Corrupt Court Official; Wu Scout; Wei Infantry; Wei Strike Force; Straw Soldiers; Wu Warship; Island|Tapped; Island|Tapped; Island|Tapped; Island|Tapped; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped
+AIGraveyard=
+

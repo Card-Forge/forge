@@ -1,0 +1,8 @@
+Name:Elvish Branchbender
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:2/2
+A:AB$ Animate | Cost$ T | ValidTgts$ Forest | TgtPrompt$ Select target Forest | Power$ X | Toughness$ X | Types$ Creature,Treefolk | SpellDescription$ Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.
+SVar:X:Count$Valid Elf.YouCtrl
+AI:RemoveDeck:Random
+Oracle:{T}: Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.

@@ -1,0 +1,6 @@
+Name:Latch Seeker
+ManaCost:1 U U
+Types:Creature Spirit
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Latch Seeker can't be blocked.

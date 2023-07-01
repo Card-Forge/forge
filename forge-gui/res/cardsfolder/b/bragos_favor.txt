@@ -1,0 +1,7 @@
+Name:Brago's Favor
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+S:Mode$ ReduceCost | ValidCard$ Card.NamedCard | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells of the named card cost 1 less.
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nSpells with the chosen name you cast cost {1} less to cast.

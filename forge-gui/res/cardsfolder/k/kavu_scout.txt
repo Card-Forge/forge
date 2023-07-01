@@ -1,0 +1,8 @@
+Name:Kavu Scout
+ManaCost:2 R
+Types:Creature Kavu Scout
+PT:0/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ Domain — CARDNAME gets +1/+0 for each basic land type among lands you control.
+SVar:X:Count$Domain
+AI:RemoveDeck:Random
+Oracle:Domain — Kavu Scout gets +1/+0 for each basic land type among lands you control.

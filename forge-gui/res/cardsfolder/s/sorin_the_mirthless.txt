@@ -1,0 +1,14 @@
+Name:Sorin the Mirthless
+ManaCost:2 B B
+Types:Legendary Planeswalker Sorin
+Loyalty:4
+A:AB$ PeekAndReveal | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | PeekAmount$ 1 | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Look at the top card of your library. You may reveal that card and put it into your hand. If you do, you lose life equal to its mana value.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBLoseLife | StackDescription$ None
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ b_2_3_vampire_flying_lifelink | SpellDescription$ Create a 2/3 black Vampire creature token with flying and lifelink.
+A:AB$ DealDamage | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Any | NumDmg$ 13 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 13 damage to any target. You gain 13 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 13
+DeckHas:Ability$Token|LifeGain & Type$Vampire
+Oracle:[+1]: Look at the top card of your library. You may reveal that card and put it into your hand. If you do, you lose life equal to its mana value.\n[-2]: Create a 2/3 black Vampire creature token with flying and lifelink.\n[-7]: Sorin the Mirthless deals 13 damage to any target. You gain 13 life.

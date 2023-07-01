@@ -1,0 +1,5 @@
+Name:Femeref Scouts
+ManaCost:2 W
+Types:Creature Human Scout
+PT:1/4
+Oracle:

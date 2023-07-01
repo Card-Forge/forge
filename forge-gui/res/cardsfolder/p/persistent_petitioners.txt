@@ -1,0 +1,10 @@
+Name:Persistent Petitioners
+ManaCost:1 U
+Types:Creature Human Advisor
+PT:1/3
+K:A deck can have any number of cards named CARDNAME.
+A:AB$ Mill | Cost$ 1 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills a card.
+A:AB$ Mill | Cost$ tapXType<4/Advisor> | NumCards$ 12 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills twelve cards.
+SVar:BuffedBy:Creature.namedPersistent Petitioners
+DeckNeeds:Type$Advisor
+Oracle:{1}, {T}: Target player mills a card.\nTap four untapped Advisors you control: Target player mills twelve cards.\nA deck can have any number of cards named Persistent Petitioners.

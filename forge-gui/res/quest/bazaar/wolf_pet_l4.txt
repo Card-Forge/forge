@@ -1,0 +1,8 @@
+Name:Wolf Pet
+ManaCost:no cost
+Colors:white
+Types:Creature Wolf Pet
+PT:2/1
+K:Lifelink
+K:Vigilance
+Oracle:Lifelink, vigilance

@@ -1,0 +1,8 @@
+Name:Cadaverous Bloom
+ManaCost:3 B G
+Types:Enchantment
+A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ B | Amount$ 2 | SpellDescription$ Add {B}{B}.
+A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:Exile a card from your hand: Add {B}{B} or {G}{G}.

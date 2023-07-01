@@ -1,0 +1,8 @@
+Name:Blight Keeper
+ManaCost:B
+Types:Creature Bat Imp
+PT:1/1
+K:Flying
+A:AB$ LoseLife | Cost$ 7 B T Sac<1/CARDNAME> | ValidTgts$ Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 4 life and you gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+Oracle:Flying\n{7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.

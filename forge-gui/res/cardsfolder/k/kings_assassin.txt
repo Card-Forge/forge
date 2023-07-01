@@ -1,0 +1,6 @@
+Name:King's Assassin
+ManaCost:1 B B
+Types:Creature Human Assassin
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Destroy target tapped creature. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Destroy target tapped creature. Activate only during your turn, before attackers are declared.

@@ -1,0 +1,7 @@
+Name:Razor Pendulum
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | LifeTotal$ ActivePlayer | LifeAmount$ LE5 | TriggerDescription$ At the beginning of each player's end step, if that player has 5 or less life, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+AI:RemoveDeck:All
+Oracle:At the beginning of each player's end step, if that player has 5 or less life, Razor Pendulum deals 2 damage to that player.

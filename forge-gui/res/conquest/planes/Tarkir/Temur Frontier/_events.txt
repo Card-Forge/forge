@@ -1,0 +1,9 @@
+Name:Temur Ferocious|Deck:Temur Ferocious.dck|Variant:None|Avatar:Heir of the Wilds|Desc:
+Name:Temur Formidable|Deck:Temur Formidable.dck|Variant:None|Avatar:Atarka Pummeler|Desc:
+Name:Atarka, World Render|Deck:Atarka, World Render.dck|Variant:Commander|Avatar:Atarka, World Render|Desc:
+Name:Dragonlord Atarka|Deck:Dragonlord Atarka.dck|Variant:Commander|Avatar:Dragonlord Atarka|Desc:
+Name:Surrak Dragonclaw|Deck:Surrak Dragonclaw.dck|Variant:Commander|Avatar:Surrak Dragonclaw|Desc:
+Name:Surrak, the Hunt Caller|Deck:Surrak, the Hunt Caller.dck|Variant:Commander|Avatar:Surrak, the Hunt Caller|Desc:
+Name:Yasova Dragonclaw|Deck:Yasova Dragonclaw.dck|Variant:Commander|Avatar:Yasova Dragonclaw|Desc:
+Name:Heartwood Storyteller|Deck:Heartwood Storyteller.dck|Variant:Vanguard|Avatar:Heartwood Storyteller|Desc:
+Name:Sarkhan Unbroken|Deck:Sarkhan Unbroken.dck|Variant:Planeswalker|Avatar:Sarkhan Unbroken|Desc:

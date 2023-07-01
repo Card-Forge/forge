@@ -1,0 +1,6 @@
+[format]
+Name:Theros Block
+Type:Archived
+Subtype:Block
+Order:117
+Sets:JOU, BNG, THS

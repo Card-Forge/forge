@@ -1,0 +1,7 @@
+Name:Wall of Blood
+ManaCost:2 B
+Types:Creature Wall
+PT:0/2
+K:Defender
+A:AB$ Pump | Cost$ PayLife<1> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Defender (This creature can't attack.)\nPay 1 life: Wall of Blood gets +1/+1 until end of turn.

@@ -1,0 +1,8 @@
+Name:Sacrifice
+ManaCost:B
+Types:Instant
+A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed creature's mana value.
+SVar:X:Sacrificed$CardManaCost
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nAdd an amount of {B} equal to the sacrificed creature's mana value.

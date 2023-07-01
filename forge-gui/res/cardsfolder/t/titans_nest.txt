@@ -1,0 +1,9 @@
+Name:Titans' Nest
+ManaCost:1 B G U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ Mana | Cost$ ExileFromGrave<1/Card> | Produced$ C | RestrictValid$ Spell.nonColorless+!hasXCost | SpellDescription$ Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.
+AI:RemoveDeck:All
+DeckHas:Ability$Surveil|Graveyard
+Oracle:At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\nExile a card from your graveyard: Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.

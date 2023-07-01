@@ -1,0 +1,7 @@
+Name:Pack Attack
+ManaCost:2 R
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ X | SubAbility$ DBDraw | SpellDescription$ Attacking creatures get +X/+0 until end of turn, where X the number of players being attacked.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+SVar:X:PlayerCountPlayers$HasPropertyDefending
+Oracle:Attacking creatures get +X/+0 until end of turn, where X is the number of players being attacked.\nDraw a card.

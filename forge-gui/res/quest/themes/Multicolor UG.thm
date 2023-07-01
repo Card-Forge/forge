@@ -1,0 +1,46 @@
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=21]
+Tropical Island
+Breeding Pool
+Seaside Citadel
+Misty Rainforest
+[/Group]
+
+[Group MaxCnt=4 Percentage=24]
+Murkfiend Liege
+Sturdy Hatchling
+Shorecrasher Mimic
+Fable of Wolf and Owl
+Favor of the Overbeing
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Gaea's Skyfolk
+Jhessian Infiltrator
+Slippery Bogle
+Vedalken Heretic
+[/Group]
+
+[Group MaxCnt=4 Percentage=17]
+Cold-Eyed Selkie
+Lorescale Coatl
+Shielding Plax
+Temporal Spring
+Voidslime
+Winged Coatl
+Wistful Selkie
+[/Group]
+
+[Group MaxCnt=1 Percentage=9]
+Assault Zeppelid
+AEther Mutation
+Jungle Barrier
+Leafdrake Roost
+Overbeing of Myth
+Simic Sky Swallower
+Trapjaw Kelpie
+Yavimaya's Embrace
+[/Group]
+
+End

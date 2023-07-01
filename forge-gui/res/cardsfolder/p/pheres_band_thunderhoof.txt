@@ -1,0 +1,7 @@
+Name:Pheres-Band Thunderhoof
+ManaCost:4 G
+Types:Creature Centaur Warrior
+PT:3/4
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Heroic — Whenever you cast a spell that targets Pheres-Band Thunderhoof, put two +1/+1 counters on Pheres-Band Thunderhoof.

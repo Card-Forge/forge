@@ -1,0 +1,31 @@
+Name:Volatile Arsonist
+ManaCost:3 R R
+Types:Creature Human Werewolf
+PT:4/4
+K:Menace
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage1 | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
+SVar:TrigDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | DamageMap$ True | SubAbility$ TrigDamage2
+SVar:TrigDamage2:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select up to one target player | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | DamageMap$ True | SubAbility$ TrigDamage3
+SVar:TrigDamage3:DB$ DealDamage | ValidTgts$ Planeswalker | TgtPrompt$ Select up to one target planeswalker | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Menace, haste\nWhenever Volatile Arsonist attacks, it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Dire-Strain Anarchist
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:5/5
+K:Menace
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage1 | TriggerDescription$ Whenever CARDNAME attacks, it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
+SVar:TrigDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | DamageMap$ True | SubAbility$ TrigDamage2
+SVar:TrigDamage2:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select up to one target player | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | DamageMap$ True | SubAbility$ TrigDamage3
+SVar:TrigDamage3:DB$ DealDamage | ValidTgts$ Planeswalker | TgtPrompt$ Select up to one target planeswalker | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+K:Nightbound
+Oracle:Menace, haste\nWhenever Dire-Strain Anarchist attacks, it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

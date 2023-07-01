@@ -1,0 +1,7 @@
+Name:Skitter Eel
+ManaCost:3 U
+Types:Creature Fish Crab
+PT:3/3
+K:Adapt:2:2 U
+DeckHas:Ability$Counters
+Oracle:{2}{U}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)

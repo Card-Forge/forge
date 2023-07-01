@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Radiant 3
+Title=Radiant
+Difficulty=hard
+Description=WU flying creature deck with Radiant, Archangel, Gravitational Shift and Moat
+Icon=Radiant.jpg
+Deck Type=constructed
+[main]
+2 Plains|M12
+2 Island|M12
+4 Tundra
+4 Sejiri Refuge
+4 Glacial Fortress
+4 Flooded Strand
+1 Mox Sapphire
+1 Mox Pearl
+2 Radiant, Archangel
+3 Archon of Redemption
+2 Pride of the Clouds
+4 Squadron Hawk
+1 Azorius First-Wing
+1 Serra Avenger
+1 Cloud of Faeries
+1 Commander Eesha
+1 Seraph of the Sword
+1 Courier Hawk
+1 Godhead of Awe
+1 Emeria Angel
+1 Guardian Seraph
+1 Hunted Lammasu
+1 Iridescent Angel
+1 Drogskol Reaver
+1 Serendib Efreet
+2 Warden of Evos Isle
+1 Spectral Procession
+1 Windreader Sphinx
+1 Favorable Winds
+4 Moat
+3 Gravitational Shift
+1 Spell Snare
+1 Disenchant
+[sideboard]

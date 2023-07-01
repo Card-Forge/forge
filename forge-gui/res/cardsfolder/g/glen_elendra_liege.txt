@@ -1,0 +1,9 @@
+Name:Glen Elendra Liege
+ManaCost:1 UB UB UB
+Types:Creature Faerie Knight
+PT:2/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther blue creatures you control get +1/+1.\nOther black creatures you control get +1/+1.

@@ -1,0 +1,7 @@
+Name:Chronosavant
+ManaCost:5 W
+Types:Creature Giant
+PT:5/5
+A:AB$ ChangeZone | Cost$ 1 W | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SubAbility$ SkipTurn | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. You skip your next turn.
+SVar:SkipTurn:DB$ SkipTurn | Defined$ You | NumTurns$ 1
+Oracle:{1}{W}: Return Chronosavant from your graveyard to the battlefield tapped. You skip your next turn.

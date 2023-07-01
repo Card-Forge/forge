@@ -1,0 +1,9 @@
+Name:Village Bell-Ringer
+ManaCost:2 W
+Types:Creature Human Scout
+PT:1/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+SVar:AmbushAI:True
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Village Bell-Ringer enters the battlefield, untap all creatures you control.

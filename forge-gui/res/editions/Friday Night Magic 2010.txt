@@ -1,0 +1,20 @@
+[metadata]
+Code=F10
+Date=2010-01-01
+Name=Friday Night Magic 2010
+Type=Promo
+ScryfallCode=F10
+
+[cards]
+1 R Tidehollow Sculler @Carl Critchlow
+2 R Ghostly Prison @Wayne England
+3 R Ancient Ziggurat @Randy Gallegos
+4 R Bloodbraid Elf @Steve Argyle
+5 R Cloudpost @Jim Nelson
+6 R Elvish Visionary @Lucio Parrillo
+7 R Anathemancer @Mark Hyzer
+8 R Krosan Grip @Franz Vohwinkel
+9 R Qasali Pridemage @Dave Allsop
+10 R Rift Bolt @Daniel Ljunggren
+11 R Gatekeeper of Malakir @Jason Felix
+12 R Wild Nacatl @Kev Walker

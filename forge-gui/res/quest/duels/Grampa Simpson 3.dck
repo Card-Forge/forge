@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Grampa Simpson 3
+Title=Grampa Simpson
+Difficulty=hard
+Description=WRG Double Strike deck with equipments and auras
+Icon=Grampa Simpson.jpg
+Deck Type=constructed
+[main]
+4 Jungle Shrine
+4 Plateau
+1 Taiga
+1 Savannah
+1 Scrubland
+4 Arid Mesa
+3 Windswept Heath
+1 Plains|MBS
+1 Mox Ruby
+1 Mox Pearl
+1 Glorious Anthem
+4 Bonesplitter
+1 Basilisk Collar
+3 Loxodon Warhammer
+1 Rancor
+2 Student of Warfare
+4 Viashino Slaughtermaster
+4 Fencing Ace
+4 Boros Swiftblade
+4 Mirran Crusader
+2 Fabled Hero
+2 Prophetic Flamespeaker
+3 Hearthfire Hobgoblin
+1 Iroas's Champion
+2 Skyhunter Skirmisher
+1 Marisi's Twinclaws
+[sideboard]

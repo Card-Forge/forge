@@ -1,0 +1,7 @@
+Name:Ethersworn Canonist
+ManaCost:1 W
+Types:Artifact Creature Human Cleric
+PT:2/2
+S:Mode$ CantBeCast | ValidCard$ Card.nonArtifact | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
+AI:RemoveDeck:Random
+Oracle:Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.

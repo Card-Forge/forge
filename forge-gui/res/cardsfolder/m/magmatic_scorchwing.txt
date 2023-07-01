@@ -1,0 +1,9 @@
+Name:Magmatic Scorchwing
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Land.YouCtrl+nonBasic | PresentCompare$ EQ0 | PresentZone$ Library | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if there are no nonbasic land cards in your library, CARDNAME deals 3 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+AI:RemoveDeck:Random
+Oracle:Flying\nWhen Magmatic Scorchwing enters the battlefield, if there are no nonbasic land cards in your library, Magmatic Scorchwing deals 3 damage to any target.

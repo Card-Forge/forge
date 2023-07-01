@@ -1,0 +1,6 @@
+Name:Akrasan Squire
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+K:Exalted
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

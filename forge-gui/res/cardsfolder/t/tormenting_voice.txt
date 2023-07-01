@@ -1,0 +1,7 @@
+Name:Tormenting Voice
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Draw | Cost$ 1 R Discard<1/Card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards.

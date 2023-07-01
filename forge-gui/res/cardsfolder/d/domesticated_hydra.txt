@@ -1,0 +1,9 @@
+Name:Domesticated Hydra
+ManaCost:2 G G
+Types:Creature Hydra
+PT:3/3
+K:Monstrosity:X:X G G G
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Trample | Description$ As long as CARDNAME is monstrous, it has trample.
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:{X}{G}{G}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nAs long as Domesticated Hydra is monstrous, it has trample.

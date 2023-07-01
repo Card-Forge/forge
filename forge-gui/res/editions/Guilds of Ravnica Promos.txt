@@ -1,0 +1,15 @@
+[metadata]
+Code=PGRN
+Date=2018-10-05
+Name=Guilds of Ravnica Promos
+Type=Promo
+ScryfallCode=PGRN
+
+[cards]
+6 U Conclave Tribunal @Seb McKinnon
+54 U Sinister Sabotage @Mathias Kollros
+79 U Necrotic Wound @Randy Vargas
+156 U Boros Challenger @Lucas Graciano
+168 R Emmara, Soul of the Accord @Randy Vargas
+171 R Firemind's Research @Robbie Trevino
+206 U Thought Erasure @Anna Steinbauer

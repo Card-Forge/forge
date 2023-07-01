@@ -1,0 +1,9 @@
+Name:Flinthoof Boar
+ManaCost:1 G
+Types:Creature Boar
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Mountain.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Mountain.
+A:AB$ Pump | Cost$ R | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn. (It can attack and {T} this turn.)
+SVar:BuffedBy:Mountain
+DeckNeeds:Type$Mountain
+Oracle:Flinthoof Boar gets +1/+1 as long as you control a Mountain.\n{R}: Flinthoof Boar gains haste until end of turn. (It can attack and {T} this turn.)

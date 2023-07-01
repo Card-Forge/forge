@@ -1,0 +1,6 @@
+Name:Everbark Shaman
+ManaCost:4 G
+Types:Creature Treefolk Shaman
+PT:3/5
+A:AB$ ChangeZone | Cost$ T ExileFromGrave<1/Treefolk> | Origin$ Library | Tapped$ True | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, put them onto the battlefield tapped, then shuffle.
+Oracle:{T}, Exile a Treefolk card from your graveyard: Search your library for up to two Forest cards, put them onto the battlefield tapped, then shuffle.

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/05/112.-WAR2.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has at least four cards in their library, but has zero cards in hand and cannot cast anything they draw.
+[state]
+humanlife=20
+ailife=4
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Kaya's Ghostform;Dreadhorde Butcher;Merfolk Trickster;Massacre Girl
+humanbattlefield=Flux Channeler|Counters:P1P1=2;Rigging Runner|Counters:P1P1=3;Spellgorger Weird|Counters:P1P1=1;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs
+ailibrary=Blood Crypt;Blood Crypt;Blood Crypt;Blood Crypt
+aibattlefield=Midnight Reaper;Drover of the Mighty;Zetalpa, Primal Dawn;God-Eternal Rhonas

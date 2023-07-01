@@ -1,0 +1,10 @@
+Name:Blood Hound
+ManaCost:2 R
+Types:Creature Dog
+PT:1/1
+T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may put that many +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your end step, remove all +1/+1 counters from CARDNAME.
+SVar:TrigRemove:DB$ RemoveCounterAll | ValidCards$ Card.Self | CounterType$ P1P1 | AllCounters$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever you're dealt damage, you may put that many +1/+1 counters on Blood Hound.\nAt the beginning of your end step, remove all +1/+1 counters from Blood Hound.

@@ -1,0 +1,7 @@
+Name:Manor Guardian
+ManaCost:2 B
+Types:Creature Demon
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME dies, each player seeks a nonland card with mana value 2 or less.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.nonLand+cmcLE2 | ChangeNum$ 1 | DefinedPlayer$ Player
+Oracle:When Manor Guardian dies, each player seeks a nonland card with mana value 2 or less.

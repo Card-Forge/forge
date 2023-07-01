@@ -1,0 +1,17 @@
+[metadata]
+Code=PORI
+Date=2015-07-17
+Name=Magic Origins Promos
+Type=Promo
+ScryfallCode=PORI
+
+[cards]
+19 R Hixus, Prison Warden @Magali Villeneuve
+29 R Relic Seeker @Deruchenko Alexander
+43 R Alhammarret, High Arbiter @Richard Wright
+64 R Mizzium Meddler @Chris Rallis
+104 R Kothophed, Soul Hoarder @Tianhua X
+105 R Languish @Jeff Simpson
+157 R Pia and Kiran Nalaar @Tyler Jacobson
+171 U Conclave Naturalists @Howard Lyon
+172 R Dwynen, Gilt-Leaf Daen @Steven Belledin

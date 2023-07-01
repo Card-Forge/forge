@@ -1,0 +1,5 @@
+Name:Iron Lance
+ManaCost:2
+Types:Artifact
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
+Oracle:{3}, {T}: Target creature gains first strike until end of turn.

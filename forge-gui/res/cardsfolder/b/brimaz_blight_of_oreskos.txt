@@ -1,0 +1,12 @@
+Name:Brimaz, Blight of Oreskos
+ManaCost:2 W B
+Types:Legendary Creature Phyrexian Cat
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Creature.Phyrexian,Creature.Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigIncubate | TriggerDescription$ Whenever you cast a Phyrexian creature or artifact creature spell, incubate X, where X is that spell's mana value. (Create an Incubator token with X +1/+1 counters on it and "2: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ TriggeredStackInstance$CardManaCostLKI
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigProliferate | TriggerDescription$ At the beginning of each end step, if a Phyrexian died under your control this turn, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Phyrexian.YouCtrl
+DeckHints:Type$Phyrexian & Ability$Sacrifice
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:Whenever you cast a Phyrexian creature or artifact creature spell, incubate X, where X is that spell's mana value. (Create an Incubator token with X +1/+1 counters on it and "2: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\nAt the beginning of each end step, if a Phyrexian died under your control this turn, proliferate.

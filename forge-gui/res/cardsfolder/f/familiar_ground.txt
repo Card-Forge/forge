@@ -1,0 +1,7 @@
+Name:Familiar Ground
+ManaCost:2 G
+Types:Enchantment
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl | Max$ 1 | Description$ Each creature you control can't be blocked by more than one creature.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Each creature you control can't be blocked by more than one creature.

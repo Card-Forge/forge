@@ -1,0 +1,7 @@
+Name:Infiltration Lens
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.AttachedBy | ValidBlocker$ Creature | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature becomes blocked by a creature, you may draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | OptionalDecider$ You
+Oracle:Whenever equipped creature becomes blocked by a creature, you may draw two cards.\nEquip {1}

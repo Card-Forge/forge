@@ -1,0 +1,10 @@
+Name:Diviner's Portent
+ManaCost:X U U U
+Types:Instant
+A:SP$ RollDice | Sides$ 20 | Modifier$ Y | ResultSubAbilities$ 1-14:DBDraw,Else:DBScry | SpellDescription$ Roll a d20 and add the number of cards in your hand.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ 1—14 VERT Draw X cards.
+SVar:DBScry:DB$ Scry | ScryNum$ X | SubAbility$ DBDraw2 | SpellDescription$ 15+ VERT Scry X, then draw X cards.
+SVar:DBDraw2:DB$ Draw | NumCards$ X
+SVar:X:Count$xPaid
+SVar:Y:Count$InYourHand
+Oracle:Roll a d20 and add the number of cards in your hand.\n1—14 | Draw X cards.\n15+ | Scry X, then draw X cards.

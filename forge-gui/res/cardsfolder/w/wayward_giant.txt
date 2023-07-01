@@ -1,0 +1,6 @@
+Name:Wayward Giant
+ManaCost:4 R
+Types:Creature Giant
+PT:4/5
+K:Menace
+Oracle:Menace

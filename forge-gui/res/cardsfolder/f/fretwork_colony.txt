@@ -1,0 +1,9 @@
+Name:Fretwork Colony
+ManaCost:1 B
+Types:Creature Insect
+PT:1/1
+K:CARDNAME can't block.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME and you lose 1 life.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Fretwork Colony can't block.\nAt the beginning of your upkeep, put a +1/+1 counter on Fretwork Colony and you lose 1 life.

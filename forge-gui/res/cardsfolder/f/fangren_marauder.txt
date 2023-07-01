@@ -1,0 +1,7 @@
+Name:Fangren Marauder
+ManaCost:5 G
+Types:Creature Beast
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
+Oracle:Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.

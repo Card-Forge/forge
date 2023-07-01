@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1499
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Chandra, Bold Pyromancer
+Description=Chandra is an expert pyromancer. Use her flames to incinerate the opposition before finishing them with massive creatures.
+Deck Type=constructed
+Set=DOM
+Image=chandra_bold_pyromancer.jpg
+[Main]
+2 Baloth Gorger|DOM
+2 Chandra's Outburst|DOM
+1 Chandra, Bold Pyromancer+|DOM
+3 Elfhame Druid|DOM
+1 Fiery Intervention|DOM
+1 Fight with Fire|DOM
+3 Fire Elemental|DOM
+3 Forest|DOM|1
+3 Forest|DOM|2
+3 Forest|DOM|3
+2 Forest|DOM|4
+1 Gaea's Protector|DOM
+1 Ghitu Chronicler|DOM
+2 Gift of Growth|DOM
+1 Gilded Lotus|DOM
+1 Grunn, the Lonely King|DOM
+3 Karplusan Hound|DOM
+1 Krosan Druid|DOM
+2 Llanowar Elves|DOM
+1 Marwyn, the Nurturer|DOM
+3 Mountain|DOM|1
+3 Mountain|DOM|2
+3 Mountain|DOM|3
+2 Mountain|DOM|4
+1 Pierce the Sky|DOM
+1 Primordial Wurm|DOM
+4 Pyromantic Pilgrim|DOM
+2 Shivan Fire|DOM
+4 Timber Gorge|DOM

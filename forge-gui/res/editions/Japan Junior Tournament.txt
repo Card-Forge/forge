@@ -1,0 +1,21 @@
+[metadata]
+Code=PJJT
+Date=2003-01-01
+Name=Japan Junior Tournament
+Type=Promo
+CardLang=ja
+ScryfallCode=PJJT
+
+[cards]
+1N03 R Volcanic Hammer @Christopher Rush
+1N04 R Giant Growth @Terese Nielsen
+1N05 R Slith Firewalker @Justin Sweet
+1N06 R Sakura-Tribe Elder @Carl Critchlow
+1N07 R Soltari Priest @Dany Orizio
+1N08 R Glorious Anthem @Raymond Swanland
+2N04 R Two-Headed Dragon @Sam Wood
+2N05 R Royal Assassin @Tom Wänerstrand
+2N06 R Shard Phoenix @Ron Spencer
+2N07 R Whirling Dervish @Alex Horley-Orlandelli
+2N08 R Elvish Champion @Matt Cavotta
+3N08 R Mad Auntie @Wayne Reynolds

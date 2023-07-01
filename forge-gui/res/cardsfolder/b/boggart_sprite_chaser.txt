@@ -1,0 +1,8 @@
+Name:Boggart Sprite-Chaser
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | IsPresent$ Faerie.YouCtrl | Description$ As long as you control a Faerie, CARDNAME gets +1/+1 and has flying.
+SVar:BuffedBy:Faerie
+DeckNeeds:Type$Faerie
+Oracle:As long as you control a Faerie, Boggart Sprite-Chaser gets +1/+1 and has flying.

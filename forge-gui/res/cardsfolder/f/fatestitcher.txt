@@ -1,0 +1,8 @@
+Name:Fatestitcher
+ManaCost:3 U
+Types:Creature Zombie Wizard
+PT:1/2
+K:Unearth:U
+A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | SpellDescription$ You may tap or untap another target permanent.
+AI:RemoveDeck:All
+Oracle:{T}: You may tap or untap another target permanent.\nUnearth {U} ({U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

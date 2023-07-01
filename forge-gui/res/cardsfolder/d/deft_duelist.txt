@@ -1,0 +1,7 @@
+Name:Deft Duelist
+ManaCost:W U
+Types:Creature Human Rogue
+PT:2/1
+K:First Strike
+K:Shroud
+Oracle:First strike\nShroud (This creature can't be the target of spells or abilities.)

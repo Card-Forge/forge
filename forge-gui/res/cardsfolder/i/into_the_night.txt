@@ -1,0 +1,9 @@
+Name:Into the Night
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DayTime | Value$ Night | SubAbility$ DBDiscard | SpellDescription$ It becomes night.
+SVar:DBDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | StackDescription$ {p:You} discards any number of cards, | SpellDescription$ Discard any number of cards,
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup | StackDescription$ then draws that many cards plus one. | SpellDescription$ then draw that many cards plus one.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Amount/Plus.1
+Oracle:It becomes night. Discard any number of cards, then draw that many cards plus one.

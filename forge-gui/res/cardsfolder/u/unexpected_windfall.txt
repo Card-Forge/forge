@@ -1,0 +1,8 @@
+Name:Unexpected Windfall
+ManaCost:2 R R
+Types:Instant
+A:SP$ Draw | Cost$ 2 R R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two Treasure tokens. | StackDescription$ SpellDescription
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHints:Keyword$Madness & Ability$Delirium
+DeckHas:Ability$Token|Discard
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

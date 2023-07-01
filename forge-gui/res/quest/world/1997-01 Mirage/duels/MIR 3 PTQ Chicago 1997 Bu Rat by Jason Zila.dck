@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=MIR 3 PTQ Chicago 1997: Bu Rat by Jason Zila
+Title=Bu Rat
+Difficulty=hard
+Description=Played by Jason Zila at Pro Tour Qualifier: Chicago 1997.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bad River|MIR
+4 Cloud Elemental|VIS
+1 Coercion|VIS
+4 Crypt Rats|VIS
+2 Dissipate|MIR
+3 Impulse|VIS
+6 Island|MIR|2
+4 Man-o'-War|VIS
+4 Necromancy|VIS
+4 Nekrataal|VIS
+4 Power Sink|MIR
+2 Quicksand|VIS
+2 Snake Basket|VIS
+4 Stupor|MIR
+12 Swamp|MIR|2

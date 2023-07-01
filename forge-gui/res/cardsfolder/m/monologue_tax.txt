@@ -1,0 +1,7 @@
+Name:Monologue Tax
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts their second spell each turn, you create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice
+Oracle:Whenever an opponent casts their second spell each turn, you create a Treasure token.

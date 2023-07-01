@@ -1,0 +1,8 @@
+Name:Igneous Pouncer
+ManaCost:4 B R
+Types:Creature Elemental
+PT:5/1
+K:Haste
+K:TypeCycling:Swamp:2
+K:TypeCycling:Mountain:2
+Oracle:Haste\nSwampcycling {2}, mountaincycling {2} ({2}, Discard this card: Search your library for a Swamp or Mountain card, reveal it, put it into your hand, then shuffle.)

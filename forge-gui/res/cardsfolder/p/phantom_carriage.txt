@@ -1,0 +1,8 @@
+Name:Phantom Carriage
+ManaCost:4 U U
+Types:Creature Spirit
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PhantomSearch | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card with flashback or disturb, put it into your graveyard, then shuffle.
+SVar:PhantomSearch:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card.withFlashback+YouOwn,Card.withDisturb+YouOwn
+Oracle:Flying\nWhen Phantom Carriage enters the battlefield, you may search your library for a card with flashback or disturb, put it into your graveyard, then shuffle.

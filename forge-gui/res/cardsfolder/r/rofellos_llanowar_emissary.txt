@@ -1,0 +1,7 @@
+Name:Rofellos, Llanowar Emissary
+ManaCost:G G
+Types:Legendary Creature Elf Druid
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Forest you control.
+SVar:X:Count$Valid Forest.YouCtrl
+Oracle:{T}: Add {G} for each Forest you control.

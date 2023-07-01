@@ -1,0 +1,8 @@
+Name:Jhoira's Familiar
+ManaCost:4
+Types:Artifact Creature Bird
+PT:2/2
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card.Historic | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Historic spells you cast cost {1} less to cast. (Artifacts, legendaries, and Sagas are historic.)
+SVar:BuffedBy:Card.Historic
+Oracle:Flying\nHistoric spells you cast cost {1} less to cast. (Artifacts, legendaries, and Sagas are historic.)

@@ -1,0 +1,6 @@
+Name:Raven's Run Dragoon
+ManaCost:2 GW GW
+Types:Creature Elf Knight
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Black | Description$ CARDNAME can't be blocked by black creatures.
+Oracle:Raven's Run Dragoon can't be blocked by black creatures.

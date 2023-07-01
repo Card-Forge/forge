@@ -1,0 +1,6 @@
+Name:Rip-Clan Crasher
+ManaCost:R G
+Types:Creature Human Warrior
+PT:2/2
+K:Haste
+Oracle:Haste

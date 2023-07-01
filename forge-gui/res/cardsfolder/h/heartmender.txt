@@ -1,0 +1,8 @@
+Name:Heartmender
+ManaCost:2 GW GW
+Types:Creature Elemental
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMend | TriggerDescription$ At the beginning of your upkeep, remove a -1/-1 counter from each creature you control.
+SVar:TrigMend:DB$ RemoveCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ M1M1 | CounterNum$ 1
+K:Persist
+Oracle:At the beginning of your upkeep, remove a -1/-1 counter from each creature you control.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

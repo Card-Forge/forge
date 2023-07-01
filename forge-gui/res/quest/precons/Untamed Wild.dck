@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Untamed Wild
+Description=As the land of Innistrad warps and twists into a foul mockery of itself, it threatens the denizens of the wilds with a similar fate. But they will not go quietly, and you will wield their primal ferocity against your enemies.
+Deck Type=constructed
+Set=EMN
+Image=untamed_wild.jpg
+[Main]
+1 Assembled Alphas+|EMN
+2 Blood Mist|EMN
+2 Bold Impaler|EMN
+3 Brazen Wolves|EMN
+1 Clear Shot|EMN
+1 Clip Wings|SOI
+12 Forest|SOI
+2 Furyblade Vampire|EMN
+2 Howlpack Wolf|SOI
+1 Lightning Axe|SOI
+1 Mad Prophet|SOI
+1 Magmatic Chasm|SOI
+13 Mountain|SOI
+1 Noose Constrictor|EMN
+2 Prey Upon|EMN
+2 Primal Druid|EMN
+2 Quilled Wolf|SOI
+1 Rush of Adrenaline|SOI
+1 Silverfur Partisan|SOI
+2 Somberwald Stag|EMN
+2 Spreading Flames|EMN
+1 Uncaged Fury|SOI
+1 Voldaren Duelist|SOI
+3 Wolfkin Bond|EMN

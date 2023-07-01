@@ -1,0 +1,9 @@
+Name:Bloodstoke Howler
+ManaCost:5 R
+Types:Creature Beast
+PT:3/4
+K:Morph:6 R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, Beast creatures you control get +3/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Beast+YouCtrl | NumAtt$ +3
+DeckHints:Type$Beast
+Oracle:Morph {6}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Bloodstoke Howler is turned face up, Beast creatures you control get +3/+0 until end of turn.

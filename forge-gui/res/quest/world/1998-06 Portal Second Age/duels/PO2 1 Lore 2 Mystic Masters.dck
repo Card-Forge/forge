@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 2 Mystic Masters
+Title=Mystic Masters
+Difficulty=easy
+Description=From time, knowledge.\nFrom knowledge, power.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|PO2
+4 Apprentice Sorcerer|PO2
+3 Extinguish|PO2
+3 False Summoning|PO2
+24 Island|PO2|2
+3 Mystic Denial|PO2
+3 Remove|PO2
+4 Talas Researcher|PO2
+3 Temporal Manipulation|PO2
+3 Time Ebb|PO2
+3 Touch of Brilliance|PO2
+3 Undo|PO2

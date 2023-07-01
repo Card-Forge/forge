@@ -1,0 +1,7 @@
+Name:Storage Matrix
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ OnlyUntapChosen:Artifact,Creature,Land | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.

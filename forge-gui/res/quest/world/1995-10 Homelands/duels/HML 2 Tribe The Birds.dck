@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=HML 2 Tribe: The Birds
+Title=The Birds
+Difficulty=medium
+Description="The faith of Serra is borne on wings of hope." -Gulsen, Abbey Matron
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Abbey Gargoyles|HML
+2 Giant Albatross|HML|1
+2 Giant Albatross|HML|2
+11 Island|LEB|3
+2 Marjhan|HML
+2 Mesa Falcon|HML|1
+2 Mesa Falcon|HML|2
+15 Plains|LEB|3
+4 Roterothopter|HML
+4 Sea Sprite|HML
+4 Serra Aviary|HML
+4 Soraya the Falconer|HML
+4 Wall of Kelp|HML

@@ -1,0 +1,8 @@
+Name:Living Twister
+ManaCost:R R G
+Types:Creature Elemental
+PT:2/5
+A:AB$ DealDamage | Cost$ 1 R Discard<1/Land> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land.YouCtrl+tapped | ChangeNum$ 1 | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Return a tapped land you control to its owner's hand.
+AI:RemoveDeck:Random
+Oracle:{1}{R}, Discard a land card: Living Twister deals 2 damage to any target.\n{G}: Return a tapped land you control to its owner's hand.

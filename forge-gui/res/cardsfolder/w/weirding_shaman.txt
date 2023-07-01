@@ -1,0 +1,6 @@
+Name:Weirding Shaman
+ManaCost:1 B
+Types:Creature Goblin Shaman
+PT:2/1
+A:AB$ Token | Cost$ 3 B Sac<1/Goblin> | TokenAmount$ 2 | TokenScript$ b_1_1_goblin_rogue | TokenOwner$ You | SpellDescription$ Create two 1/1 black Goblin Rogue creature tokens.
+Oracle:{3}{B}, Sacrifice a Goblin: Create two 1/1 black Goblin Rogue creature tokens.

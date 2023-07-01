@@ -1,0 +1,6 @@
+Name:Llanowar Tribe
+ManaCost:G G G
+Types:Creature Elf Druid
+PT:3/3
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 3 | SpellDescription$ Add {G}{G}{G}.
+Oracle:{T}: Add {G}{G}{G}.

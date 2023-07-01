@@ -1,0 +1,8 @@
+Name:Sindbad
+ManaCost:1 U
+Types:Creature Human
+PT:1/1
+A:AB$ Draw | Cost$ T | NumCards$ 1 | Reveal$ All | RememberDrawn$ True | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
+SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}: Draw a card and reveal it. If it isn't a land card, discard it.

@@ -1,0 +1,7 @@
+Name:Pontiff of Blight
+ManaCost:4 B B
+Types:Creature Zombie Cleric
+PT:2/7
+K:Extort
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Extort | Description$ Other creatures you control have Extort.
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nOther creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)

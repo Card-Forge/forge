@@ -1,0 +1,6 @@
+Name:Kitesail Corsair
+ManaCost:1 U
+Types:Creature Human Pirate
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's attacking.
+Oracle:Kitesail Corsair has flying as long as it's attacking.

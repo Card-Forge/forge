@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Hit The Ground Running
+Description=Roll your opponents over with a host of creatures that make an impact upon entering the battlefield. Then, use spells that return your creatures to your hand to do it all again!
+Deck Type=constructed
+Set=M15
+Image=hit_the_ground_running.jpg
+[Main]
+1 Fugitive Wizard|M15
+2 Runeclaw Bear|M15
+2 Satyr Wayfinder|M15
+1 Illusory Angel|M15
+2 Roaring Primadox|M15
+1 Stormtide Leviathan|M15
+2 Into the Void|M15
+1 Restock|M15
+1 Encrust|M15
+1 Negate|M15
+2 Peel from Reality|M15
+1 Turn to Frog|M15
+1 Plummet|M15
+1 Research Assistant|M15
+2 Coral Barrier|M15
+2 Frost Lynx|M15
+2 Invasive Species|M15
+2 Reclamation Sage|M15
+3 Shaman of Spring|M15
+1 Mercurial Pretender+|M15
+2 Kapsho Kitefins|M15
+1 Carnivorous Moss-Beast|M15
+1 Meteorite|M15
+13 Island|M15
+12 Forest|M15

@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #17 - There And Back Again
+URL:https://pauperpuzzles.wordpress.com/2017/03/11/17-there-and-back-again/
+Goal:Win
+Turns:2
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=5
+AILife=10
+humanhand=Boros Garrison;Burning-Tree Emissary;Needle Drop;Magma Jet;Thunderous Wrath
+humanlibrary=Jund Hackblade;Otherworldly Journey;Kor Skyfisher;Firebolt
+humanbattlefield=Secluded Steppe;Forgotten Cave;Boros Garrison;Mountain;Mountain;Mountain;Foundry Street Denizen;Cerodon Yearling|Id:17
+aihand=Goblin Bushwhacker;Burning-Tree Emissary;Burning-Tree Emissary;Burning-Tree Emissary;Burning-Tree Emissary;Manamorphose
+ailibrary=Thunderous Wrath;Mountain
+aibattlefield=Greel's Caress|AttachedTo:17;Mountain|Tapped;Mountain|Tapped;Swamp|Tapped;Swamp|Tapped;Chittering Rats

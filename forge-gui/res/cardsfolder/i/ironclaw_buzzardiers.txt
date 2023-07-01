@@ -1,0 +1,7 @@
+Name:Ironclaw Buzzardiers
+ManaCost:2 R
+Types:Creature Orc Scout
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or greater.
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:Ironclaw Buzzardiers can't block creatures with power 2 or greater.\n{R}: Ironclaw Buzzardiers gains flying until end of turn.

@@ -1,0 +1,9 @@
+Name:Kyoki, Sanity's Eclipse
+ManaCost:4 B B
+Types:Legendary Creature Demon Spirit
+PT:6/4
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target opponent exiles a card from their hand.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ValidTgts$ Opponent | Chooser$ Targeted | TgtPrompt$ Select target opponent | ChangeNum$ 1 | Mandatory$ True
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, target opponent exiles a card from their hand.

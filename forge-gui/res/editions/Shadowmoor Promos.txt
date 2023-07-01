@@ -1,0 +1,10 @@
+[metadata]
+Code=PSHM
+Date=2008-05-02
+Name=Shadowmoor Promos
+Type=Promo
+ScryfallCode=PSHM
+
+[cards]
+183★ R Demigod of Revenge @Izzy
+222★ R Vexing Shusher @Cyril Van Der Haegen

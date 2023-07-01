@@ -1,0 +1,9 @@
+Name:Death's-Head Buzzard
+ManaCost:1 B B
+Types:Creature Bird
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME dies, all creatures get -1/-1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1
+AI:RemoveDeck:Random
+Oracle:Flying\nWhen Death's-Head Buzzard dies, all creatures get -1/-1 until end of turn.

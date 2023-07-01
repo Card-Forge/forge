@@ -1,0 +1,12 @@
+Name:Alibou, Ancient Witness
+ManaCost:3 R W
+Types:Legendary Artifact Creature Golem
+PT:4/5
+S:Mode$ Continuous | Affected$ Creature.Artifact+Other+YouCtrl | AddKeyword$ Haste | Description$ Other artifact creatures you control have haste.
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.Artifact+YouCtrl | Execute$ DBDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more artifact creatures you control attack, CARDNAME deals X damage to any target and you scry X, where X is the number of tapped artifacts you control.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | Defined$ You | ScryNum$ X
+SVar:X:Count$Valid Artifact.YouCtrl+tapped
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+Oracle:Other artifact creatures you control have haste.\nWhenever one or more artifact creatures you control attack, Alibou, Ancient Witness deals X damage to any target and you scry X, where X is the number of tapped artifacts you control.

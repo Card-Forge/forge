@@ -1,0 +1,8 @@
+Name:Taunting Arbormage
+ManaCost:2 G
+Types:Creature Elf Wizard
+PT:2/3
+K:Kicker:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, all creatures able to block target creature this turn do so.
+SVar:TrigKicker:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so.
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nWhen Taunting Arbormage enters the battlefield, if it was kicked, all creatures able to block target creature this turn do so.

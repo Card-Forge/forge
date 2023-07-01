@@ -1,0 +1,6 @@
+Name:Treetop Scout
+ManaCost:G
+Types:Creature Elf Scout
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying | Description$ CARDNAME can't be blocked except by creatures with flying.
+Oracle:Treetop Scout can't be blocked except by creatures with flying.

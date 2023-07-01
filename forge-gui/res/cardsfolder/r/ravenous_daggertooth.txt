@@ -1,0 +1,8 @@
+Name:Ravenous Daggertooth
+ManaCost:2 G
+Types:Creature Dinosaur
+PT:3/2
+T:Mode$ DamageDoneOnce | Execute$ TrigGainLife | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:HasCombatEffect:TRUE
+Oracle:Enrage — Whenever Ravenous Daggertooth is dealt damage, you gain 2 life.

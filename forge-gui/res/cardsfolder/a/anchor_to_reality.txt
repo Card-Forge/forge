@@ -1,0 +1,12 @@
+Name:Anchor to Reality
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 U U Sac<1/Artifact;Creature/artifact or creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment,Vehicle | ChangeTypeDesc$ Equipment or Vehicle card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBScry | SpellDescription$ Search your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle.
+SVar:DBScry:DB$ Scry | ConditionDefined$ Remembered | ConditionPresent$ Card | ScryNum$ X | SubAbility$ DBCleanup | SpellDescription$ If it has mana value less than the sacrificed permanent's mana value, scry 2.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Compare Y LTZ.2.0
+SVar:Y:Remembered$CardManaCost
+SVar:Z:Sacrificed$CardManaCost
+DeckNeeds:Type$Artifact|Creature|Equipment|Vehicle
+AI:RemoveDeck:Random
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nSearch your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.

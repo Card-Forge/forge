@@ -1,0 +1,11 @@
+Name:Twinblade Paladin
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/3
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE25 | Description$ As long as you have 25 or more life, CARDNAME has double strike. (It deals both first-strike and regular combat damage.)
+SVar:X:Count$YourLifeTotal
+Oracle:Whenever you gain life, put a +1/+1 counter on Twinblade Paladin.\nAs long as you have 25 or more life, Twinblade Paladin has double strike. (It deals both first-strike and regular combat damage.)

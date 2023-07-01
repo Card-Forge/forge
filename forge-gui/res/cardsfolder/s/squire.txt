@@ -1,0 +1,5 @@
+Name:Squire
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+Oracle:

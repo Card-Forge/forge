@@ -1,0 +1,7 @@
+Name:Jade Mage
+ManaCost:1 G
+Types:Creature Human Shaman
+PT:2/1
+A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+DeckHas:Ability$Token
+Oracle:{2}{G}: Create a 1/1 green Saproling creature token.

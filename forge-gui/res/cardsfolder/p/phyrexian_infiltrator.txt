@@ -1,0 +1,6 @@
+Name:Phyrexian Infiltrator
+ManaCost:2 B
+Types:Creature Phyrexian Minion
+PT:2/2
+A:AB$ ExchangeControl | Cost$ 2 U U | Defined$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Exchange control of CARDNAME and target creature. (This effect lasts indefinitely.)
+Oracle:{2}{U}{U}: Exchange control of Phyrexian Infiltrator and target creature. (This effect lasts indefinitely.)

@@ -1,0 +1,13 @@
+Name:Lord Windgrace
+ManaCost:2 B R G
+Types:Legendary Planeswalker Windgrace
+Loyalty:5
+A:AB$ Discard | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card. If a land card is discarded this way, draw an additional card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDraw2
+SVar:DBDraw2:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return up to two target land cards from your graveyard to the battlefield.
+A:AB$ Destroy | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMin$ 0 | TargetMax$ 6 | SubAbility$ DBToken | SpellDescription$ Destroy up to six target nonland permanents, then create six 2/2 green Cat Warrior creature tokens with forestwalk.
+SVar:DBToken:DB$ Token | TokenAmount$ 6 | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk
+K:CARDNAME can be your commander.
+Oracle:[+2]: Discard a card, then draw a card. If a land card is discarded this way, draw an additional card.\n[-3]: Return up to two target land cards from your graveyard to the battlefield.\n[-11]: Destroy up to six target nonland permanents, then create six 2/2 green Cat Warrior creature tokens with forestwalk.\nLord Windgrace can be your commander.

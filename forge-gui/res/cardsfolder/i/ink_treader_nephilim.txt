@@ -1,0 +1,7 @@
+Name:Ink-Treader Nephilim
+ManaCost:R G W U
+Types:Creature Nephilim
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player | IsSingleTarget$ True | TargetsValid$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery spell, if that spell targets only CARDNAME, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ You | CopyForEachCanTarget$ Creature
+Oracle:Whenever a player casts an instant or sorcery spell, if that spell targets only Ink-Treader Nephilim, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.

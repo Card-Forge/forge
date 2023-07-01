@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=POR 2 Strategy Card: Gargantuans
+Title=Gargantuans
+Difficulty=medium
+Description="Land is perhaps the most valuable resource in Magic. Without it a player is quickly vanquished. The idea behind this deck is to destroy that resource and then play powerful creatures to deal the death blow." -The Gargantuans Strategy Card
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Boiling Seas|POR
+1 Charging Rhino|POR
+1 Fire Snake|POR
+1 Flashfires|POR
+7 Forest|POR|2
+1 Hill Giant|POR
+1 Hulking Cyclops|POR
+1 Lava Flow|POR
+7 Mountain|POR|3
+1 Nature's Lore|POR
+1 Panther Warriors|POR
+1 Pillaging Horde|POR
+1 Rain of Salt|POR
+1 Redwood Treefolk|POR
+1 Rowan Treefolk|POR
+1 Spined Wurm|POR
+1 Stone Rain|POR
+1 Thundermare|POR
+1 Untamed Wilds|POR
+1 Volcanic Dragon|POR
+1 Whiptail Wurm|POR
+1 Winter's Grasp|POR
+1 Wood Elves|POR

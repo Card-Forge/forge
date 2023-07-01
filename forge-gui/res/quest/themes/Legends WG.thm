@@ -1,0 +1,84 @@
+BasicLandPercentage=14
+
+[Group MaxCnt=4 Percentage=23]
+Savannah
+Graypelt Refuge
+Windswept Heath
+Razorverge Thicket
+Sunpetal Grove
+[/Group]
+
+[Group MaxCnt=2 Percentage=14]
+Captain Sisay
+Day of Destiny
+Loyal Retainers
+Reki, the History of Kamigawa
+Sword of the Chosen
+Tenza, Godo's Maul
+Yomiji, Who Bars the Way
+[/Group]
+
+[Group MaxCnt=2 Percentage=8]
+Gaddock Teeg
+Isamaru, Hound of Konda
+Kataki, War's Wage
+Rhys the Redeemed
+[/Group]
+
+[Group MaxCnt=2 Percentage=8]
+Azusa, Lost but Seeking
+Isao, Enlightened Bushi
+Masako the Humorless
+Mirri, Cat Warrior
+Tivadar of Thorn
+Zuo Ci, the Mocking Sage
+[/Group]
+
+[Group MaxCnt=2 Percentage=8]
+Cho-Manno, Revolutionary
+Commander Eesha
+Huang Zhong, Shu General
+Iwamori of the Open Fist
+Kongming, "Sleeping Dragon"
+Linvala, Keeper of Silence
+Sosuke, Son of Seshiro
+Thrun, the Last Troll
+[/Group]
+
+[Group MaxCnt=1 Percentage=11]
+Ayumi, the Last Visitor
+Guan Yu, Sainted Warrior
+Jasmine Boreal
+Kaysa
+Kodama of the North Tree
+Lady Zhurong, Warrior Queen
+Liu Bei, Lord of Shu
+Meng Huo, Barbarian King
+Radiant, Archangel
+Sapling of Colfenor
+Zhao Zilong, Tiger General
+[/Group]
+
+[Group MaxCnt=1 Percentage=10]
+Darien, King of Kjeldor
+Jedit Ojanen of Efrava
+Jugan, the Rising Star
+Lord Magnus
+Nemata, Grove Guardian
+Silvos, Rogue Elemental
+Sir Shandlar of Eberyn
+Tolsimir Wolfblood
+Torsten Von Ursus
+Yosei, the Morning Star
+Zhang Fei, Fierce Warrior
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Akroma, Angel of Wrath
+Iona, Shield of Emeria
+Konda, Lord of Eiganjo
+Reya Dawnbringer
+Thriss, Nantuko Primus
+[/Group]
+
+End

@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Black Plague
+Title=Black Plague
+Difficulty=medium
+Description=The tiniest cough can be deadlier than the fiercest dragon.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Cruel Edict|PO2
+4 Dakmor Plague|PO2
+4 Dakmor Sorceress|PO2
+4 Dark Offering|PO2
+4 Hand of Death|PO2
+4 Hidden Horror|PO2
+4 Kiss of Death|PO2
+4 Raise Dead|PO2
+4 Ravenous Rats|PO2
+24 Swamp|PO2|2

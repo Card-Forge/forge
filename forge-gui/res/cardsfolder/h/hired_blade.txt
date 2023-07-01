@@ -1,0 +1,6 @@
+Name:Hired Blade
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:3/2
+K:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)

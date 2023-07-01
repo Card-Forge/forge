@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Miffy 1
+Title=Miffy
+Difficulty=easy
+Description="Alea Iacta Est"
+Icon=Miffy.png
+Deck Type=constructed
+[Main]
+2 Affa Guard Hound|ROE
+4 Aura Gnarlid|ROE
+1 Bear Umbra|ROE
+1 Boar Umbra|ROE
+1 Celestial Mantle|ZEN
+1 Drake Umbra|ROE
+1 Eel Umbra|ROE
+1 Eland Umbra|ROE
+1 Eldrazi Conscription|ROE
+5 Forest|ZEN|1
+1 Guardian Zendikon|WWK
+1 Hyena Umbra|ROE
+5 Island|ZEN|1
+4 Kor Spiritdancer|ROE
+4 Kraken Hatchling|ZEN
+1 Mammoth Umbra|ROE
+4 Misty Rainforest|ZEN
+1 Nimbus Wings|ZEN
+6 Plains|ZEN|1
+1 Savage Silhouette|ZEN
+1 Snake Umbra|ROE
+1 Spider Umbra|ROE
+4 Evolving Wilds|ROE
+2 Totem-Guide Hartebeest|ROE
+4 Umbra Mystic|ROE
+1 Vastwood Zendikon|WWK
+1 Wind Zendikon|WWK
+[sideboard]

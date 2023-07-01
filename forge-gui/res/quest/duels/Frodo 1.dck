@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Frodo 1
+Title=Frodo
+Difficulty=easy
+Description=WRG Zoo deck with some threat removal
+Icon=Frodo.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Sacred Foundry
+4 Stomping Ground
+2 Kird Ape
+4 Striped Bears
+4 Plains|M10
+1 Grizzled Leotau
+1 Flinthoof Boar
+1 Savannah Lions
+2 Castle Raptors
+4 Forest|M10
+2 Iona's Judgment
+2 Reprisal
+1 Nacatl Outlander
+1 Strafe
+2 Scorching Spear
+1 Loam Lion
+2 Serra's Blessing
+4 Barbary Apes
+4 Temple Garden
+1 Wild Nacatl
+4 Mountain|M10
+1 Spoils of Victory
+1 Hedge Troll
+1 Might Weaver
+1 Quirion Dryad
+1 Thornscape Familiar
+1 Kird Chieftain
+1 Prized Elephant
+1 Summit Apes
+1 Sunblade Elf
+[sideboard]

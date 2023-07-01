@@ -1,0 +1,9 @@
+Name:Nissa, Nature's Artisan
+ManaCost:4 G G
+Types:Legendary Planeswalker Nissa
+Loyalty:5
+A:AB$ GainLife | Cost$ AddCounter<3/LOYALTY> | Planeswalker$ True | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ Dig | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand | SpellDescription$ Reveal the top two cards of your library. Put all land cards from among them onto the battlefield and the rest into your hand.
+A:AB$ PumpAll | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +5 | NumDef$ +5 | KW$ Trample | SpellDescription$ Creatures you control get +5/+5 and gain trample until end of turn.
+DeckHints:Name$Verdant Crescendo
+Oracle:[+3]: You gain 3 life.\n[-4]: Reveal the top two cards of your library. Put all land cards from among them onto the battlefield and the rest into your hand.\n[-12]: Creatures you control get +5/+5 and gain trample until end of turn.

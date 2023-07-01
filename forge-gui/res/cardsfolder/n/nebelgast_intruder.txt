@@ -1,0 +1,9 @@
+Name:Nebelgast Intruder
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBPump | TriggerDescription$ When CARDNAME enters the battlefield, up to one target creature an opponent controls gets -2/-0 until end of turn.
+SVar:DBPump:DB$ Pump | NumAtt$ -2 | IsCurse$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls
+Oracle:Flash\nFlying\nWhen Nebelgast Intruder enters the battlefield, up to one target creature an opponent controls gets -2/-0 until end of turn.

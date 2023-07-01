@@ -1,0 +1,8 @@
+Name:Bolrac-Clan Crusher
+ManaCost:3 R G
+Types:Creature Ogre Warrior
+PT:4/4
+A:AB$ DealDamage | Cost$ T SubCounter<1/P1P1/Creature.YouCtrl/a creature you control> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+AI:RemoveDeck:Random
+DeckHints:Ability$Counters
+Oracle:{T}, Remove a +1/+1 counter from a creature you control: Bolrac-Clan Crusher deals 2 damage to any target.

@@ -1,0 +1,20 @@
+Name:Baithook Angler
+ManaCost:1 U
+Types:Creature Human Peasant
+PT:2/1
+K:Disturb:1 U
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Disturb {1}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Hook-Haunt Drifter
+ManaCost:no cost
+Colors:blue
+Types:Creature Spirit
+PT:1/2
+K:Flying
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nIf Hook-Haunt Drifter would be put into a graveyard from anywhere, exile it instead.

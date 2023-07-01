@@ -1,0 +1,8 @@
+Name:Fin-Clade Fugitives
+ManaCost:5 G
+Types:Creature Elf Salamander Rogue
+PT:7/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+K:Encore:4 G
+DeckHas:Ability$Token
+Oracle:Fin-Clade Fugitives can't be blocked by creatures with power 2 or less.\nEncore {4}{G} ({4}{G}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

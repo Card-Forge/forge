@@ -1,0 +1,8 @@
+Name:Goblin Cratermaker
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+A:AB$ Charm | Cost$ 1 Sac<1/CARDNAME> | Choices$ DBDamage,DBDestroy
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+Colorless | SpellDescription$ Destroy target colorless nonland permanent.
+Oracle:{1}, Sacrifice Goblin Cratermaker: Choose one —\n• Goblin Cratermaker deals 2 damage to target creature.\n• Destroy target colorless nonland permanent.

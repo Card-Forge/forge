@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ghost Rider 3
+Title=Ghost Rider
+Difficulty=hard
+Description=WB loner deck with Divine Reckoning, Homicidal Seclusion and The Abyss
+Icon=Ghost Rider.jpg
+Deck Type=constructed
+[main]
+3 Swamp|AVR
+3 Plains|AVR
+4 Scrubland
+4 Isolated Chapel
+4 Marsh Flats
+3 Cathedral of War
+1 Mox Jet
+1 Mox Pearl
+4 Steel Golem
+4 Grid Monitor
+4 Divine Reckoning
+3 Homicidal Seclusion
+1 Deadly Wanderings
+4 Predator's Gambit
+4 The Abyss
+1 Angelic Benediction
+1 Swiftfoot Boots
+1 Sword of Vengeance
+2 Gerrard's Verdict
+1 Disenchant
+2 Drown in Sorrow
+1 Mana Tithe
+1 Abeyance
+1 Condemn
+1 Rebuff the Wicked
+1 Inquisition of Kozilek
+[sideboard]

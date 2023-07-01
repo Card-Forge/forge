@@ -1,0 +1,12 @@
+Name:Hikari, Twilight Guardian
+ManaCost:3 W W
+Types:Legendary Creature Spirit
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may exile CARDNAME. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | AILogic$ IfNotBuffed | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.

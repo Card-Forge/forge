@@ -1,0 +1,8 @@
+Name:Turri Island
+ManaCost:no cost
+Types:Plane Ir
+S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Creature | Type$ Spell | Amount$ 2 | Description$ Creature spells cost {2} less to cast.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
+SVar:RolledChaos:DB$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone2$ Graveyard
+SVar:AIRollPlanarDieParams:Mode$ Random
+Oracle:Creature spells cost {2} less to cast.\nWhenever chaos ensues, reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.

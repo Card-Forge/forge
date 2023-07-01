@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death 3
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=hard
+Description=Some creatures that really want to eat you
+Deck Type=constructed
+[main]
+4 Birds of Paradise|M12
+3 Deadbridge Goliath|RTR
+3 Desecration Demon|RTR
+4 Dreg Mangler|RTR
+4 Elves of Deep Shadow|RAV
+8 Forest|RTR
+4 Golgari Guildgate|RTR
+4 Abrupt Decay|RTR
+4 Lotleth Troll|RTR
+4 Overgrown Tomb|RTR
+3 Sewer Shambler|RTR
+3 Shambling Shell|RAV
+4 Slitherhead|RTR
+8 Swamp|RTR
+[sideboard]
+[planes]
+[schemes]

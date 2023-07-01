@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Owlman 3
+Title=Owlman
+Difficulty=hard
+Description=UB Rogue deck
+Icon=Owlman.jpg
+Deck Type=constructed
+[main]
+4 Darkslick Shores
+2 Frogtosser Banneret
+2 Invisible Stalker
+4 Island
+4 Morsel Theft
+1 Mox Jet
+1 Mox Sapphire
+2 Nightshade Stinger
+2 Notorious Throng
+4 Oona's Blackguard
+2 Oona's Prowler
+4 Polluted Delta
+4 Stinkdrinker Bandit
+4 Swamp
+4 Underground Sea
+1 Urborg, Tomb of Yawgmoth
+1 Rogue's Passage
+4 Triton Shorestalker
+2 Prickly Boggart
+2 True-Name Nemesis
+2 Inkfathom Infiltrator
+1 Sygg, River Cutthroat
+2 Latchkey Faerie
+1 Invisible Stalker
+[sideboard]

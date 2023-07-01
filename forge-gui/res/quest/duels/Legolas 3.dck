@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Legolas 3
+Title=Legolas
+Difficulty=hard
+Description=Mono G Forest Elf deck with Joraga Warcaller and Ambush Commander
+Icon=Legolas.jpg
+Deck Type=constructed
+[main]
+4 Joraga Warcaller
+4 Elvish Champion
+22 Forest
+1 Ezuri, Renegade Leader
+4 Wirewood Hivemaster
+4 Ambush Commander
+4 Wood Elves
+2 Farhaven Elf
+3 Oracle of Mul Daya
+1 Frontier Guide
+1 Sylvan Ranger
+2 Fyndhorn Elves
+4 Imperious Perfect
+4 Elvish Archdruid
+[sideboard]

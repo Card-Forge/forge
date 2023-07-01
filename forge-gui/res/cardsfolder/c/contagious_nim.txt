@@ -1,0 +1,6 @@
+Name:Contagious Nim
+ManaCost:2 B
+Types:Creature Phyrexian Zombie
+PT:2/2
+K:Infect
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

@@ -1,0 +1,9 @@
+Name:Zulaport Cutthroat
+ManaCost:1 B
+Types:Creature Human Rogue Ally
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another creature you control dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Whenever Zulaport Cutthroat or another creature you control dies, each opponent loses 1 life and you gain 1 life.

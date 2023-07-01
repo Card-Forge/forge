@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=LEB 2 Color: 5 Green
+Title=The Color Green
+Difficulty=medium
+Description=The most terrifying thing about the Craw Wurm is probably the horrible crashing sound it makes as it speeds through the forest. This noise is so loud it echoes through the trees and seems to come from all directions at once.
+Icon=The Color Green.jpg
+Deck Type=constructed
+[Main]
+4 Aspect of Wolf|LEB
+1 Black Lotus|LEB
+4 Craw Wurm|LEB
+4 Elvish Archers|LEB
+4 Force of Nature|LEB
+21 Forest|LEB|2
+4 Giant Growth|LEB
+2 Hurricane|LEB
+4 Icy Manipulator|LEB
+2 Jayemdae Tome|LEB
+4 Llanowar Elves|LEB
+1 Mox Emerald|LEB
+2 Regrowth|LEB
+1 Sol Ring|LEB
+2 Tranquility|LEB

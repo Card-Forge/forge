@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Krov: The Plague
+Title=The Plague
+Difficulty=easy
+Description="My lord, there is only so much I can do. This plague infests Krov worse than any other city." -Halvor Arensson, Kjeldoran Priest
+
+Krov was the capital city of the kingdom of Kjeldor on Terisiare in Dominaria near the last five hundred years of the Ice Age. Once a center of learning famed for its elementalist wizards, it was ravaged by plagues after the World Spell triggered the Thaw, creating a warmer climate in which disease proliferated.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Diseased Vermin|ALL
+2 Dystopia|ALL
+2 Fevered Strength|ALL|1
+2 Fevered Strength|ALL|2
+3 Island|ICE|2
+2 Krovikan Elementalist|ICE
+4 Krovikan Fetish|ICE
+4 Krovikan Horror|ALL
+2 Krovikan Plague|ALL
+4 Krovikan Sorcerer|ICE
+4 Pestilence Rats|ICE
+2 Pox|ICE
+2 Stench of Decay|ALL|1
+2 Stench of Decay|ALL|2
+17 Swamp|ICE|1
+4 Underground River|ICE

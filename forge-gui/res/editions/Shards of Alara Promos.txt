@@ -1,0 +1,9 @@
+[metadata]
+Code=PALA
+Date=2008-10-03
+Name=Shards of Alara Promos
+Type=Promo
+ScryfallCode=PALA
+
+[cards]
+154★ M Ajani Vengeant @Jason Chan

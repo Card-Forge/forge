@@ -1,0 +1,6 @@
+Name:Conjurer's Bauble
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card from your graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | SpellDescription$ Put up to one target card from your graveyard on the bottom of your library. Draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:{T}, Sacrifice Conjurer's Bauble: Put up to one target card from your graveyard on the bottom of your library. Draw a card.

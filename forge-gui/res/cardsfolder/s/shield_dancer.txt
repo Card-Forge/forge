@@ -1,0 +1,10 @@
+Name:Shield Dancer
+ManaCost:2 W
+Types:Creature Human Rebel
+PT:1/3
+A:AB$ Effect | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | ReplacementEffects$ DamageShielded | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | AILogic$ Fog | SpellDescription$ The next time target attacking creature would deal combat damage to CARDNAME this turn, that creature deals that damage to itself instead.
+SVar:DamageShielded:Event$ DamageDone | IsCombat$ True | ValidSource$ Card.IsRemembered | ValidTarget$ Card.EffectSource | ReplaceWith$ DmgSelf | DamageTarget$ Remembered | Description$ The next time the targeted attacking creature would deal combat damage to EFFECTSOURCE this turn, that creature deals that damage to itself instead.
+SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+Oracle:{2}{W}: The next time target attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.

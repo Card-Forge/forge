@@ -1,0 +1,7 @@
+Name:Patron Wizard
+ManaCost:U U U
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Counter | Cost$ tapXType<1/Wizard> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+AI:RemoveDeck:Random
+Oracle:Tap an untapped Wizard you control: Counter target spell unless its controller pays {1}.

@@ -1,0 +1,6 @@
+Name:Unlikely Alliance
+ManaCost:1 W
+Types:Enchantment
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.notattacking+notblocking | TgtPrompt$ Select target nonattacking, nonblocking creature | NumDef$ +2 | SpellDescription$ Target nonattacking, nonblocking creature gets +0/+2 until end of turn.
+AI:RemoveDeck:All
+Oracle:{1}{W}: Target nonattacking, nonblocking creature gets +0/+2 until end of turn.

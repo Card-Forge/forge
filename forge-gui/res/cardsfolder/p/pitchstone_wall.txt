@@ -1,0 +1,9 @@
+Name:Pitchstone Wall
+ManaCost:2 R
+Types:Creature Wall
+PT:2/5
+K:Defender
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever you discard a card, you may sacrifice CARDNAME. If you do, return the discarded card from your graveyard to your hand.
+SVar:TrigChange:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+AI:RemoveDeck:All
+Oracle:Defender (This creature can't attack.)\nWhenever you discard a card, you may sacrifice Pitchstone Wall. If you do, return the discarded card from your graveyard to your hand.

@@ -1,0 +1,5 @@
+Name:Blanchwood Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+PT:4/5
+Oracle:

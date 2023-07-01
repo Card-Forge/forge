@@ -1,0 +1,9 @@
+Name:Talas Lookout
+ManaCost:2 U U
+Types:Creature Human Pirate
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME dies, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhen Talas Lookout dies, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

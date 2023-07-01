@@ -1,0 +1,26 @@
+Name:Avabruck Caretaker
+ManaCost:4 G G
+Types:Creature Human Werewolf
+PT:4/4
+K:Hexproof
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 2
+K:Daybound
+DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
+Oracle:Hexproof\nAt the beginning of combat on your turn, put two +1/+1 counters on another target creature you control.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Hollowhenge Huntmaster
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:6/6
+K:Hexproof
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Hexproof | Description$ Other permanents you control have hexproof.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2
+K:Nightbound
+DeckHas:Ability$Counters
+Oracle:Hexproof\nOther permanents you control have hexproof.\nAt the beginning of combat on your turn, put two +1/+1 counters on each creature you control.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

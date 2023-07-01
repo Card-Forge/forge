@@ -1,0 +1,11 @@
+Name:Glarecaster
+ManaCost:4 W W
+Types:Creature Bird Cleric
+PT:3/3
+K:Flying
+A:AB$ Effect | Cost$ 5 W | ValidTgts$ Any | TgtPrompt$ Select any target to redirect the damage to | ReplacementEffects$ SelflessDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next time damage would be dealt to CARDNAME and/or you this turn, that damage is dealt to any target instead.
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource,You | ReplaceWith$ SelflessDmg | DamageTarget$ Remembered | Description$ The next time damage would be dealt to EFFECTSOURCE and/or you this turn, that damage is dealt to any target instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ GameEntity | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+Oracle:Flying\n{5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.

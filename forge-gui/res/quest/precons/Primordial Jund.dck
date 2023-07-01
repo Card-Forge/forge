@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Primordial Jund
+Description=The plane of Jund is a savage, volcanic world of infinite dangers where dragons top the food chain. Amass a swarm of barbarians, vicious predators, and even dragons, and swallow up the meek forces of your fellow planeswalkers.
+Deck Type=constructed
+Set=ALA
+Image=primordial_jund.jpg
+[main]
+2 Carrion Thrash|ALA
+2 Dragon Fodder|ALA
+1 Flameblast Dragon+|ALA
+3 Forest|ALA|1
+2 Goblin Deathraiders|ALA
+2 Goblin Piker|10E
+2 Hissing Iguanar|ALA
+2 Jund Battlemage|ALA
+2 Jund Panorama|ALA
+4 Mountain|ALA|2
+3 Mountain|ALA|3
+1 Mycoloth|ALA
+1 Obelisk of Jund|ALA
+1 Resounding Thunder|ALA
+1 Rip-Clan Crasher|ALA
+2 Savage Lands|ALA
+2 Shock|10E
+2 Sprouting Thrinax|ALA
+3 Swamp|ALA|4
+2 Thorn-Thrash Viashino|ALA
+1 Thunder-Thrash Elder|ALA
+[sideboard]

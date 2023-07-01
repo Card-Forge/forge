@@ -1,0 +1,9 @@
+Name:Mech Hangar
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Vehicle,Spell.Pilot | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Pilot or Vehicle spell.
+A:AB$ Animate | Cost$ 3 T | ValidTgts$ Vehicle | TgtPrompt$ Choose target Vehicle | Types$ Artifact,Creature | SpellDescription$ Target Vehicle becomes an artifact creature until end of turn. | StackDescription$ {c:Targeted} becomes an artifact creature until end of turn.
+DeckHints:Type$Pilot
+DeckNeeds:Type$Vehicle
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Pilot or Vehicle spell.\n{3}, {T}: Target Vehicle becomes an artifact creature until end of turn.

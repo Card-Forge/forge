@@ -1,0 +1,6 @@
+Name:Galecaster Colossus
+ManaCost:5 U U
+Types:Creature Giant Wizard
+PT:5/6
+A:AB$ ChangeZone | Cost$ tapXType<1/Wizard> | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent you don't control to its owner's hand.
+Oracle:Tap an untapped Wizard you control: Return target nonland permanent you don't control to its owner's hand.

@@ -1,0 +1,5 @@
+Name:Water Elemental
+ManaCost:3 U U
+Types:Creature Elemental
+PT:5/4
+Oracle:

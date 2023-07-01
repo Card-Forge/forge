@@ -1,0 +1,8 @@
+Name:The Autonomous Furnace
+ManaCost:no cost
+Types:Land Sphere
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$  R | SpellDescription$ Add {R}.
+A:AB$ Draw | Cost$ 1 R T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:The Autonomous Furnace enters the battlefield tapped.\n{T}: Add {R}.\n{1}{R}, {T}, Sacrifice The Autonomous Furnace: Draw a card.

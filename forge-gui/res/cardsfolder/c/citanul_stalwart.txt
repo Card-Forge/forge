@@ -1,0 +1,7 @@
+Name:Citanul Stalwart
+ManaCost:G
+Types:Creature Elf Druid Soldier
+PT:1/1
+A:AB$ Mana | Cost$ T tapXType<1/Creature;Artifact/artifact or creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHints:Type$Artifact
+Oracle:{T}, Tap an untapped artifact or creature you control: Add one mana of any color.

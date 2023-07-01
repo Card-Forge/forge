@@ -1,0 +1,5 @@
+Name:Vastwood Gorger
+ManaCost:5 G
+Types:Creature Wurm
+PT:5/6
+Oracle:

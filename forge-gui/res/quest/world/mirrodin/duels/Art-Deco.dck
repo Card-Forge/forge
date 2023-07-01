@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Art-Deco
+Title=Art-Deco
+Difficulty=easy
+Description=Art-Deco contains many small artifacts; all you ever needed to pimp your mantelpiece 
+Icon=Art-Deco.jpg
+Deck Type=constructed
+[Main]
+1 Auriok Glaivemaster|DST
+2 Auriok Salvagers|5DN
+1 Bonesplitter|MRD
+2 Clockwork Beetle|MRD
+1 Conjurer's Bauble|5DN
+1 Ferropede|5DN
+1 Flayer Husk|MBS
+2 Fold into AEther|5DN
+1 Healer's Headdress|5DN
+9 Island|MRD|1
+1 Leonin Bola|DST
+2 Leonin Elder|MRD
+3 Leonin Squire|5DN
+1 Myr Moonvessel|DST
+2 Ornithopter|AQ
+14 Plains|MRD|1
+2 Qumulox|5DN
+2 Signal Pest|MBS
+2 Skyhunter Prowler|5DN
+1 Skyhunter Skirmisher|5DN
+1 Slagwurm Armor|MRD
+1 Sylvok Lifestaff|SOM
+2 Synod Centurion|5DN
+1 Tower of Fortunes|MRD
+2 Trinket Mage|SOM
+1 Vanquish|5DN
+1 Viridian Longbow|MRD
+[sideboard]

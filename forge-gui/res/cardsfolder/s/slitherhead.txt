@@ -1,0 +1,8 @@
+Name:Slitherhead
+ManaCost:BG
+Types:Creature Plant Zombie
+PT:1/1
+K:Scavenge:0
+SVar:SacMe:1
+SVar:DiscardMe:1
+Oracle:Scavenge {0} ({0}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

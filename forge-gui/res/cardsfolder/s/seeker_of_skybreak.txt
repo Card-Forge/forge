@@ -1,0 +1,6 @@
+Name:Seeker of Skybreak
+ManaCost:1 G
+Types:Creature Elf
+PT:2/1
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
+Oracle:{T}: Untap target creature.

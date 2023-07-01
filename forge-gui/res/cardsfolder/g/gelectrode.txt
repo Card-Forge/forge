@@ -1,0 +1,9 @@
+Name:Gelectrode
+ManaCost:1 U R
+Types:Creature Weird
+PT:0/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:NonCombatPriority:1
+Oracle:{T}: Gelectrode deals 1 damage to any target.\nWhenever you cast an instant or sorcery spell, you may untap Gelectrode.

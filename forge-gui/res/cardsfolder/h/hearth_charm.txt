@@ -1,0 +1,9 @@
+Name:Hearth Charm
+ManaCost:R
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy,DBPumpAll,DBUnblockable
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
+SVar:DBUnblockable:DB$ Effect | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Choose one —\n• Destroy target artifact creature.\n• Attacking creatures get +1/+0 until end of turn.\n• Target creature with power 2 or less can't be blocked this turn.

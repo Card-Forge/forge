@@ -1,0 +1,6 @@
+Name:Memory Crystal
+ManaCost:3
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Spell.Buyback | Activator$ Player | Amount$ 2 | Description$ Buyback costs cost {2} less.
+AI:RemoveDeck:Random
+Oracle:Buyback costs cost {2} less.

@@ -1,0 +1,9 @@
+Name:Flesh Reaver
+ManaCost:1 B
+Types:Creature Phyrexian Horror
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature,Opponent | Execute$ TrigFleshReaverDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a creature or opponent, CARDNAME deals that much damage to you.
+SVar:TrigFleshReaverDamage:DB$ DealDamage | NumDmg$ FleshReaverX | Defined$ You
+SVar:FleshReaverX:TriggerCount$DamageAmount
+AI:RemoveDeck:All
+Oracle:Whenever Flesh Reaver deals damage to a creature or opponent, Flesh Reaver deals that much damage to you.

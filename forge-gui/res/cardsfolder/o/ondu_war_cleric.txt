@@ -1,0 +1,7 @@
+Name:Ondu War Cleric
+ManaCost:1 W
+Types:Creature Human Cleric Ally
+PT:2/2
+A:AB$ GainLife | Cost$ T tapXType<1/Ally> | LifeAmount$ 2 | PrecostDesc$ Cohort — | SpellDescription$ You gain 2 life.
+DeckHints:Type$Ally
+Oracle:Cohort — {T}, Tap an untapped Ally you control: You gain 2 life.

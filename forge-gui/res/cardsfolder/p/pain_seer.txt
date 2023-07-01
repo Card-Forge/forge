@@ -1,0 +1,10 @@
+Name:Pain Seer
+ManaCost:1 B
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ SeerDig | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.
+SVar:SeerDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ SeersCost
+SVar:SeersCost:DB$ LoseLife | LifeAmount$ PainX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PainX:Remembered$CardManaCost
+Oracle:Inspired — Whenever Pain Seer becomes untapped, reveal the top card of your library and put that card into your hand. You lose life equal to that card's mana value.

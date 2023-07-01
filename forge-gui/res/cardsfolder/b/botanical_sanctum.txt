@@ -1,0 +1,7 @@
+Name:Botanical Sanctum
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+Oracle:Botanical Sanctum enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {G} or {U}.

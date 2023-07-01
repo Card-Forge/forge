@@ -1,0 +1,13 @@
+Name:The Magic Mirror
+ManaCost:6 U U U
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Ability$Graveyard
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a knowledge counter on CARDNAME, then draw a card for each knowledge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KNOWLEDGE | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y
+SVar:Y:Count$CardCounters.KNOWLEDGE
+DeckHas:Ability$Counters
+Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nYou have no maximum hand size.\nAt the beginning of your upkeep, put a knowledge counter on The Magic Mirror, then draw a card for each knowledge counter on The Magic Mirror.

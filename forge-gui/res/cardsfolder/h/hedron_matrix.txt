@@ -1,0 +1,7 @@
+Name:Hedron Matrix
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is its mana value.
+SVar:X:Equipped$CardManaCost
+Oracle:Equipped creature gets +X/+X, where X is its mana value.\nEquip {4}

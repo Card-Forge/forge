@@ -1,0 +1,6 @@
+Name:Raging Spirit
+ManaCost:3 R
+Types:Creature Spirit
+PT:3/3
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Colors$ Colorless | SpellDescription$ CARDNAME becomes colorless until end of turn.
+Oracle:{2}: Raging Spirit becomes colorless until end of turn.

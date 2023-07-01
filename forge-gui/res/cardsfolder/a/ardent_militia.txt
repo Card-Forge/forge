@@ -1,0 +1,6 @@
+Name:Ardent Militia
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:2/5
+K:Vigilance
+Oracle:Vigilance

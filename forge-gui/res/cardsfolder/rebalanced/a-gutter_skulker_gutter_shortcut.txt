@@ -1,0 +1,23 @@
+Name:A-Gutter Skulker
+ManaCost:2 U
+Types:Creature Spirit
+PT:3/3
+K:Disturb:2 U
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Gutter Skulker can't be blocked as long as it's attacking alone.\nDisturb {2}{U}
+
+ALTERNATE
+
+Name:A-Gutter Shortcut
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | Description$ Enchanted creature gets +3/+0. It can't be blocked as long as it's attacking alone.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy+attacking | IsPresent$ Card.attacking | PresentCompare$ EQ1 | Secondary$ True | Description$ It can't be blocked as long as it's attacking alone.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nEnchanted creature gets +3/+0. It can't be blocked as long as it's attacking alone.\nIf Gutter Shortcut would be put into a graveyard from anywhere, exile it instead.

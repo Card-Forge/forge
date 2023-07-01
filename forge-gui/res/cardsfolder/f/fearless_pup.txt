@@ -1,0 +1,7 @@
+Name:Fearless Pup
+ManaCost:R
+Types:Creature Wolf
+PT:1/1
+K:First Strike
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +2 | Boast$ True | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:First strike\nBoast — {2}{R}: Fearless Pup gets +2/+0 until end of turn. (Activate only if this creature attacked this turn and only once each turn.)

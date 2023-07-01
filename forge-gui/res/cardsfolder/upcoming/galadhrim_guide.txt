@@ -1,0 +1,7 @@
+Name:Galadhrim Guide
+Types:Creature Elf Scout
+ManaCost:3 G
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:When Galadhrim Guide enters the battlefield, scry 2.

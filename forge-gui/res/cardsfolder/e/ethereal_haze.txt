@@ -1,0 +1,6 @@
+Name:Ethereal Haze
+ManaCost:W
+Types:Instant Arcane
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt by creatures this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Creature.inZoneBattlefield | Description$ Prevent all damage that would be dealt by creatures this turn.
+Oracle:Prevent all damage that would be dealt by creatures this turn.

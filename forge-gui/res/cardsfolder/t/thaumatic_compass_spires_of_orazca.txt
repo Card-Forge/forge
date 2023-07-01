@@ -1,0 +1,18 @@
+Name:Thaumatic Compass
+ManaCost:2
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card into your hand, then shuffle.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | Execute$ DBTransform | TriggerDescription$ At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:{3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nAt the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
+
+ALTERNATE
+
+Name:Spires of Orazca
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking+OppCtrl | IsCurse$ True | TgtPrompt$ Select target attacking creature an opponent controls | SubAbility$ RemCombat | SpellDescription$ Untap target attacking creature an opponent controls and remove it from combat.
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted | AILogic$ RemoveBestAttacker
+Oracle:(Transforms from Thaumatic Compass.)\n{T}: Add {C}.\n{T}: Untap target attacking creature an opponent controls and remove it from combat.

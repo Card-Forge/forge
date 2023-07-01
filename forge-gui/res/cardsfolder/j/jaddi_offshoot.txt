@@ -1,0 +1,8 @@
+Name:Jaddi Offshoot
+ManaCost:G
+Types:Creature Plant
+PT:0/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Defender\nLandfall — Whenever a land enters the battlefield under your control, you gain 1 life.

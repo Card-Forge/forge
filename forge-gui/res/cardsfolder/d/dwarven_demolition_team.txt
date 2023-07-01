@@ -1,0 +1,6 @@
+Name:Dwarven Demolition Team
+ManaCost:2 R
+Types:Creature Dwarf
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SpellDescription$ Destroy target Wall.
+Oracle:{T}: Destroy target Wall.

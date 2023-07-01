@@ -1,0 +1,9 @@
+Name:Eater of the Dead
+ManaCost:4 B
+Types:Creature Horror
+PT:3/4
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBUntap | IsPresent$ Card.Self+tapped | SpellDescription$ If CARDNAME is tapped, exile target creature card from a graveyard and untap CARDNAME.
+SVar:DBUntap:DB$ Untap | Defined$ Self
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill & Keyword$Dredge
+Oracle:{0}: If Eater of the Dead is tapped, exile target creature card from a graveyard and untap Eater of the Dead.

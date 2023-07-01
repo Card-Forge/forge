@@ -1,0 +1,10 @@
+Name:Archfiend of Ifnir
+ManaCost:3 B B
+Types:Creature Demon
+PT:5/4
+K:Flying
+T:Mode$ Discarded | ValidCard$ Card.Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.OppCtrl | CounterType$ M1M1 | CounterNum$ 1
+K:Cycling:2
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,6 @@
+Name:Zoetic Cavern
+ManaCost:no cost
+Types:Land
+K:Morph:2
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+Oracle:{T}: Add {C}.\nMorph {2} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

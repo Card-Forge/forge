@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Owlman 2
+Title=Owlman
+Difficulty=medium
+Description=UB Rogue deck
+Icon=Owlman.jpg
+Deck Type=constructed
+[main]
+10 Swamp|ISD
+2 Island|ISD
+4 Darkslick Shores
+4 Drowned Catacomb
+4 Secluded Glen
+1 Polluted Delta
+1 Jwar Isle Refuge
+1 Tainted Isle
+3 Auntie's Snitch
+3 Cloak and Dagger
+3 Frogtosser Banneret
+1 Morsel Theft
+4 Oona's Blackguard
+3 Stinkdrinker Bandit
+1 Amphin Cutthroat
+1 Charging Bandits
+1 Corrosive Mentor
+1 Dewdrop Spy
+1 Dream Thief
+1 Dunerider Outlaw
+1 Grave Robbers
+1 Gravelgill Duo
+1 Guul Draz Vampire
+1 Hada Spy Patrol
+1 Highway Robber
+1 Inkfathom Infiltrator
+1 Invisible Stalker
+1 Krovikan Scoundrel
+1 Master Thief
+1 Moonglove Winnower
+1 Neurok Commando
+1 Neurok Spy
+1 Nightshade Stinger
+1 Prickly Boggart
+1 Scroll Thief 
+1 Surveilling Sprite
+1 Sygg, River Cutthroat
+2 Violet Pall
+[sideboard]

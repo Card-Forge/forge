@@ -1,0 +1,7 @@
+Name:Thornscape Familiar
+ManaCost:1 G
+Types:Creature Insect
+PT:2/1
+S:Mode$ ReduceCost | ValidCard$ Card.White,Card.Red | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Red spells and white spells you cast cost {1} less to cast.
+DeckHints:Color$White|Red
+Oracle:Red spells and white spells you cast cost {1} less to cast.

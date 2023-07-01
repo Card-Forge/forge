@@ -1,0 +1,9 @@
+Name:Welcoming Vampire
+ManaCost:2 W
+Types:Creature Vampire
+PT:2/3
+K:Flying
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.powerLE2+YouCtrl+Other | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more other creatures with power 2 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Creature.powerLE2
+Oracle:Flying\nWhenever one or more other creatures with power 2 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.

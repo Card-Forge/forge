@@ -1,0 +1,13 @@
+Name:Coalition Construct
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/2
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control of the chosen type and creature cards of that type in your hand perpetually get +1/+1.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl+Other+ChosenType,ValidHand Creature.YouOwn+Other+ChosenType | StaticAbilities$ PerpetualP1P1 | Name$ Coalition Constructs's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Other creatures you control of the chosen type and creature cards of that type in your hand perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:As Coalition Construct enters the battlefield choose a creature type.\nCoalition Construct is the chosen type in addition to its other types.\nWhen Coalition Construct enters the battlefield, other creatures you control of the chosen type and creature cards of that type in your hand perpetually get +1/+1.

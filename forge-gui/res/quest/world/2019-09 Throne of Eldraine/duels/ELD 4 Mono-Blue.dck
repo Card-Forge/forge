@@ -1,0 +1,24 @@
+[metadata]
+Title=Mono-Blue
+Difficulty=very hard
+Description=Blue cheese or bleu cheese is cheese made with cultures of the mold Penicillium, giving it spots or veins of the mold throughout the cheese, which can vary in color through various shades of blue and green. This carries a distinct smell, either from that or various specially cultivated bacteria.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD 4 Mono-Blue
+[Main]
+4 Arcanist's Owl|ELD
+4 Brazen Borrower|ELD|1
+3 Charmed Sleep|ELD
+3 Didn't Say Please|ELD
+4 Fae of Wishes|ELD|1
+2 Faerie Formation|ELD
+3 Gadwick, the Wizened|ELD|1
+4 Hypnotic Sprite|ELD|1
+26 Island|ELD|1
+4 Vantress Gargoyle|ELD|1
+3 Witching Well|ELD
+[Sideboard]
+1 Charmed Sleep|ELD
+1 Didn't Say Please|ELD
+1 Turn into a Pumpkin|ELD
+1 Witching Well|ELD

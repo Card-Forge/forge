@@ -1,0 +1,8 @@
+Name:Captain Eberhart
+ManaCost:1 W
+Types:Legendary Creature Human Soldier
+PT:1/2
+K:Double Strike
+S:Mode$ ReduceCost | ValidCard$ Card.YouOwn+DrawnThisTurn | Type$ Spell | Amount$ 1 | Description$ Spells cast from among cards you drew this turn cost {1} less to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.OppOwn+DrawnThisTurn | Type$ Spell | Amount$ 1 | Description$ Spells cast from among cards your opponents drew this turn cost {1} more to cast.
+Oracle:Double strike\nSpells cast from among cards you drew this turn cost {1} less to cast.\nSpells cast from among cards your opponents drew this turn cost {1} more to cast.

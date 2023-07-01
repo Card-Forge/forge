@@ -1,0 +1,11 @@
+Name:Isareth the Awakener
+ManaCost:1 B B
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may pay {X}. When you do, return target creature card with mana value X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigChange | SpellDescription$ When you do, return target creature card with mana value X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:X:Count$xPaid
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQX | TgtPrompt$ Choose target creature card with mana value X | WithCountersType$ CORPSE | AILogic$ BeforeCombat | LeaveBattlefield$ Exile | SpellDescription$ Return target creature card with mana value X from your graveyard to the battlefield.
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Isareth the Awakener attacks, you may pay {X}. When you do, return target creature card with mana value X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.

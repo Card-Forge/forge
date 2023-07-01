@@ -1,0 +1,6 @@
+Name:Mobilization
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Soldier | AddKeyword$ Vigilance | Description$ Soldier creatures have vigilance.
+A:AB$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
+Oracle:Soldier creatures have vigilance.\n{2}{W}: Create a 1/1 white Soldier creature token.

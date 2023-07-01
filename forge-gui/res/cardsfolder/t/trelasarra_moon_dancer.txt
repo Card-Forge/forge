@@ -1,0 +1,10 @@
+Name:Trelasarra, Moon Dancer
+ManaCost:G W
+Types:Legendary Creature Elf Cleric
+PT:2/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME and scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Whenever you gain life, put a +1/+1 counter on Trelasarra, Moon Dancer and scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

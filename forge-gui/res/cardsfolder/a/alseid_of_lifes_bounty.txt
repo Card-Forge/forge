@@ -1,0 +1,8 @@
+Name:Alseid of Life's Bounty
+ManaCost:W
+Types:Enchantment Creature Nymph
+PT:1/1
+K:Lifelink
+A:AB$ Protection | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target creature or enchantment you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature or enchantment you control gains protection from the color of your choice until end of turn.
+SVar:NonCombatPriority:1
+Oracle:Lifelink\n{1}, Sacrifice Alseid of Life's Bounty: Target creature or enchantment you control gains protection from the color of your choice until end of turn.

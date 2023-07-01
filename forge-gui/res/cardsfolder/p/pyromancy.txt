@@ -1,0 +1,8 @@
+Name:Pyromancy
+ManaCost:2 R R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the mana value of the discarded card.
+SVar:X:Discarded$CardManaCost
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{3}, Discard a card at random: Pyromancy deals damage to any target equal to the mana value of the discarded card.

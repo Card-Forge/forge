@@ -1,0 +1,6 @@
+Name:Zombie Infestation
+ManaCost:1 B
+Types:Enchantment
+A:AB$ Token | Cost$ Discard<2/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
+AI:RemoveDeck:All
+Oracle:Discard two cards: Create a 2/2 black Zombie creature token.

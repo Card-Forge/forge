@@ -1,0 +1,7 @@
+Name:Loyal Pegasus
+ManaCost:W
+Types:Creature Pegasus
+PT:2/1
+K:Flying
+K:CARDNAME can't attack or block alone.
+Oracle:Flying\nLoyal Pegasus can't attack or block alone.

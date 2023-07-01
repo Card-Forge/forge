@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (BRO)
+Type:Archived
+Subtype:Standard
+Effective:2022-11-15
+Sets:MID, VOW, NEO, SNC, DMU, BRO
+Banned:The Meathook Massacre

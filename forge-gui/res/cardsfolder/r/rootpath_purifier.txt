@@ -1,0 +1,6 @@
+Name:Rootpath Purifier
+ManaCost:3 G
+Types:Creature Elf Druid
+PT:3/4
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AffectedZone$ Battlefield,Library | AddType$ Basic | Description$ Lands you control and land cards in your library are basic.
+Oracle:Lands you control and land cards in your library are basic.

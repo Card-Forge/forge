@@ -1,0 +1,7 @@
+Name:Firemind Vessel
+ManaCost:4
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ Combo AnyDifferent | SpellDescription$ Add two mana of different colors.
+AI:RemoveDeck:All
+Oracle:Firemind Vessel enters the battlefield tapped.\n{T}: Add two mana of different colors.

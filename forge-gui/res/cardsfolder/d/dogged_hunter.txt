@@ -1,0 +1,6 @@
+Name:Dogged Hunter
+ManaCost:2 W
+Types:Creature Human Nomad
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.token | TgtPrompt$ Select target creature token | SpellDescription$ Destroy target creature token.
+Oracle:{T}: Destroy target creature token.

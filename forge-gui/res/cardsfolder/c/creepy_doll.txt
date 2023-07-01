@@ -1,0 +1,10 @@
+Name:Creepy Doll
+ManaCost:5
+Types:Artifact Creature Construct
+PT:1/1
+K:Indestructible
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.
+SVar:TrigFlip:DB$ FlipACoin | Defined$ You | WinSubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | NoRegen$ False
+SVar:HasCombatEffect:TRUE
+Oracle:Indestructible\nWhenever Creepy Doll deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.

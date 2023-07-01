@@ -1,0 +1,9 @@
+Name:Necropolis Regent
+ManaCost:3 B B B
+Types:Creature Vampire
+PT:6/5
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.

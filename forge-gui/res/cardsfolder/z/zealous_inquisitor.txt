@@ -1,0 +1,9 @@
+Name:Zealous Inquisitor
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ Effect | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ Zealous | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature instead.
+SVar:Zealous:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ ZealousDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature instead.
+SVar:ZealousDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
+AI:RemoveDeck:All
+Oracle:{1}{W}: The next 1 damage that would be dealt to Zealous Inquisitor this turn is dealt to target creature instead.

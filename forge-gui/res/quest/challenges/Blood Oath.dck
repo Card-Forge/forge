@@ -1,0 +1,47 @@
+[quest]
+id=20
+AILife=30
+Repeat=false
+Wins=80
+Card Reward=5 colorless rares
+Credit Reward=300
+HumanExtras=Counterbalance|Hatching Plans|Ley Druid
+AIExtras=Ior Ruin Expedition|Oversold Cemetery|Trapjaw Kelpie
+[metadata]
+Name=quest20
+Title=Blood Oath
+Difficulty=hard
+Description=A druid saves your life and the two of you take a blood oath. It is now time to fulfill your oath.
+Icon=Blood Oath.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Tropical Island
+1 Mox Emerald
+4 Oath of Druids
+1 Kozilek, Butcher of Truth
+1 Thirst for Knowledge
+4 Island|M11
+1 Brainstorm
+1 Ancestral Recall
+4 Spell Pierce
+1 Sphinx of the Steel Wind
+2 Duress
+1 Mox Pearl
+1 Iona, Shield of Emeria
+1 Mox Jet
+1 Balance
+1 Ulamog, the Infinite Gyre
+1 Mox Sapphire
+4 Accumulated Knowledge
+1 Tinker
+2 Echoing Truth
+4 Forbidden Orchard
+1 Mox Ruby
+3 Serum Visions
+4 Volcanic Island
+1 Time Walk
+4 Counterspell
+1 Thoughtseize
+1 Emrakul, the Aeons Torn
+[sideboard]

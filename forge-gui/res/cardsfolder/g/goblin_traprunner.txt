@@ -1,0 +1,9 @@
+Name:Goblin Traprunner
+ManaCost:3 R
+Types:Creature Goblin
+PT:4/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigFlipCoins | TriggerDescription$ Whenever CARDNAME attacks, flip three coins. For each flip you win, create a 1/1 red Goblin creature token that's tapped and attacking.
+SVar:TrigFlipCoins:DB$ FlipACoin | Amount$ 3 | WinSubAbility$ DBToken | RememberNumber$ Wins
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenAmount$ Wins | TokenScript$ r_1_1_goblin | TokenTapped$ True | TokenAttacking$ True
+DeckHas:Ability$Token
+Oracle:Whenever Goblin Traprunner attacks, flip three coins. For each flip you win, create a 1/1 red Goblin creature token that's tapped and attacking.

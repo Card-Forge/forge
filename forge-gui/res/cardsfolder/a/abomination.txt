@@ -1,0 +1,10 @@
+Name:Abomination
+ManaCost:3 B B
+Types:Creature Horror
+PT:2/6
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.Green,Creature.White | ValidBlocker$ Card.Self | Execute$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.Green,Creature.White | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
+SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ Destroy blocking creature at end of combat.
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
+Oracle:Whenever Abomination blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.

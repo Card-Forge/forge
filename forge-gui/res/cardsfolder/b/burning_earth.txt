@@ -1,0 +1,7 @@
+Name:Burning Earth
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land.nonBasic | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player taps a nonbasic land for mana, CARDNAME deals 1 damage to that player.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.

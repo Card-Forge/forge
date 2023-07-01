@@ -1,0 +1,8 @@
+Name:Herald of the Sun
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+A:AB$ PutCounter | Cost$ 3 W | ValidTgts$ Creature.Other+withFlying | TgtPrompt$ Select another target creature with flying | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on another target creature with flying.
+DeckHas:Ability$Counters
+Oracle:Flying\n{3}{W}: Put a +1/+1 counter on another target creature with flying.

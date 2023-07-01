@@ -1,0 +1,5 @@
+Name:Moss Monster
+ManaCost:3 G G
+Types:Creature Elemental
+PT:3/6
+Oracle:

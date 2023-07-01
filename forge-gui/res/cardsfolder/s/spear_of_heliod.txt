@@ -1,0 +1,7 @@
+Name:Spear of Heliod
+ManaCost:1 W W
+Types:Legendary Enchantment Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+A:AB$ Destroy | Cost$ 1 W W T | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtPrompt$ Select target creature that dealt damage to you this turn | SpellDescription$ Destroy target creature that dealt damage to you this turn.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +1/+1.\n{1}{W}{W}, {T}: Destroy target creature that dealt damage to you this turn.

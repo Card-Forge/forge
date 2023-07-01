@@ -1,0 +1,9 @@
+Name:Looter il-Kor
+ManaCost:1 U
+Types:Creature Kor Rogue
+PT:1/1
+K:Shadow
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Looter il-Kor deals damage to an opponent, draw a card, then discard a card.

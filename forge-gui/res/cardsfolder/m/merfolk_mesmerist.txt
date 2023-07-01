@@ -1,0 +1,6 @@
+Name:Merfolk Mesmerist
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/2
+A:AB$ Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards.
+Oracle:{U}, {T}: Target player mills two cards.

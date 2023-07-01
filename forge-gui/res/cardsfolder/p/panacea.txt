@@ -1,0 +1,7 @@
+Name:Panacea
+ManaCost:4
+Types:Artifact
+A:AB$ PreventDamage | Cost$ X X T | ValidTgts$ Any | Amount$ X | SpellDescription$ Prevent the next X damage that would be dealt to any target this turn.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}{X}, {T}: Prevent the next X damage that would be dealt to any target this turn.

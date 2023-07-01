@@ -1,0 +1,24 @@
+[metadata]
+Title=Stompy
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Stompy
+[Main]
+3 Feasting Troll King|ELD|1
+23 Forest|ELD|4
+4 Gilded Goose|ELD|1
+4 Lovestruck Beast|ELD|1
+3 Questing Beast|ELD|1
+1 Return of the Wildspeaker|ELD|1
+3 Rosethorn Halberd|ELD
+3 Syr Faren, the Hengehammer|ELD
+2 The Great Henge|ELD|1
+2 Wildborn Preserver|ELD|1
+4 Wildwood Tracker|ELD
+3 Yorvo, Lord of Garenbrig|ELD|1
+[Sideboard]
+4 Castle Garenbrig|ELD|1
+1 Forest|ELD|4
+4 Wicked Wolf|ELD|1

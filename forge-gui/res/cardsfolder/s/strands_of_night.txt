@@ -1,0 +1,7 @@
+Name:Strands of Night
+ManaCost:2 B B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ B B PayLife<2> Sac<1/Swamp> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{B}{B}, Pay 2 life, Sacrifice a Swamp: Return target creature card from your graveyard to the battlefield.

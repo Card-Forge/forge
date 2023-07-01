@@ -1,0 +1,7 @@
+Name:Flamewright
+ManaCost:R W
+Types:Creature Human Artificer
+PT:1/1
+A:AB$ Token | Cost$ 1 T | TokenAmount$ 1 | TokenScript$ c_1_1_a_construct_defender | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Construct artifact creature token with defender.
+A:AB$ DealDamage | Cost$ T Sac<1/Creature.withDefender/creature with defender> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{1}, {T}: Create a 1/1 colorless Construct artifact creature token with defender.\n{T}, Sacrifice a creature with defender: Flamewright deals 1 damage to any target.

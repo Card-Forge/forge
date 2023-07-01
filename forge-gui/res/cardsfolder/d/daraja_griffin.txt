@@ -1,0 +1,7 @@
+Name:Daraja Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | AITgts$ BetterThanSource | SpellDescription$ Destroy target black creature.
+Oracle:Flying\nSacrifice Daraja Griffin: Destroy target black creature.

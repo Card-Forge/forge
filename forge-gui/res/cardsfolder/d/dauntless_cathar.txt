@@ -1,0 +1,7 @@
+Name:Dauntless Cathar
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+A:AB$ Token | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token with flying. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:{1}{W}, Exile Dauntless Cathar from your graveyard: Create a 1/1 white Spirit creature token with flying. Activate only as a sorcery.

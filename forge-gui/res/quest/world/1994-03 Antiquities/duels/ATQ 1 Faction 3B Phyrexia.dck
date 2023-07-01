@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 3B Phyrexia
+Title=Phyrexia
+Difficulty=easy
+Description="The warm rain of grease on my face immediately made it clear I had entered Phyrexia." -Jarsyl, Diary
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Artifact Possession|ATQ
+4 Clockwork Avian|ATQ
+4 Colossus of Sardia|ATQ
+4 Haunting Wind|ATQ
+4 Onulet|ATQ
+4 Ornithopter|ATQ
+4 Phyrexian Gremlins|ATQ
+4 Priest of Yawgmoth|ATQ
+24 Swamp|LEB|2
+4 Yawgmoth Demon|ATQ

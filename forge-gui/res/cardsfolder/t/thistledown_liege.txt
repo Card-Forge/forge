@@ -1,0 +1,9 @@
+Name:Thistledown Liege
+ManaCost:1 WU WU WU
+Types:Creature Kithkin Knight
+PT:1/3
+K:Flash
+S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nOther white creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.

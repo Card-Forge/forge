@@ -1,0 +1,10 @@
+Name:Gilded Assault Cart
+ManaCost:1 R R
+Types:Artifact Vehicle
+PT:5/1
+K:Trample
+K:Crew:2
+A:AB$ ChangeZone | Cost$ Sac<2/Treasure> | CostDesc$ Sacrifice two Treasures: | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Sacrifice
+AI:RemoveDeck:Random
+Oracle:Trample\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)\nSacrifice two Treasures: Return Gilded Assault Cart from your graveyard to your hand.

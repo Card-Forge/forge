@@ -1,0 +1,7 @@
+Name:Thunder Spirit
+ManaCost:1 W W
+Types:Creature Elemental Spirit
+PT:2/2
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

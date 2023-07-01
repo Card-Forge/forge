@@ -1,0 +1,13 @@
+Name:Wand of Wonder
+ManaCost:3 R
+Types:Artifact
+A:AB$ RollDice | Cost$ 4 T | Sides$ 20 | ResultSubAbilities$ 1-9:DBX1,10-19:DBX2,20:DBX3 | StackDescription$ SpellDescription | SpellDescription$ Roll a d20. Each opponent exiles cards from the top of their library until they exile an instant or sorcery card, then shuffles the rest into their library. You may cast up to X instant and/or sorcery spells from among cards exiled this way without paying their mana costs.
+SVar:DBX1:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | SubAbility$ DBExile | SpellDescription$ 1—9 VERT X is one.
+SVar:DBX2:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 2 | SubAbility$ DBExile | SpellDescription$ 10—19 VERT X is two.
+SVar:DBX3:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 3 | SubAbility$ DBExile | SpellDescription$ 20 VERT X is three.
+SVar:DBExile:DB$ DigUntil | Defined$ Player.Opponent | Valid$ Instant,Sorcery | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | RememberRevealed$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Library | Shuffle$ True | ForgetChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | ValidSA$ Instant,Sorcery | Optional$ True | Amount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Number$0
+Oracle:{4}, {T}: Roll a d20. Each opponent exiles cards from the top of their library until they exile an instant or sorcery card, then shuffles the rest into their library. You may cast up to X instant and/or sorcery spells from among cards exiled this way without paying their mana costs.\n19 | X is one.\n10-19 | X is two.\n20 | X is three.

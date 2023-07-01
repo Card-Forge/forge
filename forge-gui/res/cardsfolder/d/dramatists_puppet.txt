@@ -1,0 +1,8 @@
+Name:Dramatist's Puppet
+ManaCost:4
+Types:Artifact Creature Construct
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAddOrRemoveCounter | TriggerDescription$ When CARDNAME enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
+SVar:TrigAddOrRemoveCounter:DB$ AddOrRemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | EachExistingCounter$ True | CounterNum$ 1
+DeckHints:Ability$Counters
+Oracle:When Dramatist's Puppet enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.

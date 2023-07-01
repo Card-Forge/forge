@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Thundermare
+Icon=Dungeon Crawling Red.jpg
+Difficulty=hard
+Description=Red-Green deck with big creatures
+Deck Type=constructed
+Name=Wildfire3
+[Main]
+4 Burning of Xinye|PTK
+4 Earth Elemental|S99
+6 Forest|PTK|1
+4 Forest|PTK|2
+3 Forest|PTK|3
+3 Mountain|PTK|1
+5 Mountain|PTK|2
+3 Mountain|PTK|3
+4 Nature's Lore|POR
+2 Redwood Treefolk|POR
+2 Rolling Earthquake|PTK
+4 Silverback Ape|S99
+4 Three Visits|PTK
+4 Thundermare|POR
+4 Untamed Wilds|POR
+4 Wildfire|PO2

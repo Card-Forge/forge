@@ -1,0 +1,7 @@
+Name:Conversion Chamber
+ManaCost:3
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Artifact | TgtPrompt$ Select target artifact card in a graveyard | SubAbility$ DBPutCounter | SpellDescription$ Exile target artifact card from a graveyard. Put a charge counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Token | Cost$ 2 T SubCounter<1/CHARGE> | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Phyrexian Golem artifact creature token.
+Oracle:{2}, {T}: Exile target artifact card from a graveyard. Put a charge counter on Conversion Chamber.\n{2}, {T}, Remove a charge counter from Conversion Chamber: Create a 3/3 colorless Phyrexian Golem artifact creature token.

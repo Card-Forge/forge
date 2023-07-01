@@ -1,0 +1,41 @@
+[quest]
+id=17
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 colorless rares
+Credit Reward=250
+HumanExtras=Hopping Automaton|Honden of Life's Web|Forbidden Orchard
+AIExtras=Honden of Infinite Rage|Mikokoro, Center of the Sea
+[metadata]
+Name=quest17
+Title=House Party
+Difficulty=hard
+Description=Your friends decide to hold a house party at your home tonight. Later that night uninvited guests show up and disrupt the party.
+Icon=House Party.jpg
+Deck Type=constructed
+[main]
+4 Terminate
+4 Taiga
+2 Dragonskull Summit
+1 Mox Emerald
+1 Swamp|M12
+4 Putrid Leech
+2 Bituminous Blast
+2 Siege-Gang Commander
+1 Garruk Wildspeaker
+3 Savage Lands
+1 Forest|M12
+4 Badlands
+4 Blightning
+4 Lightning Bolt
+1 Mox Ruby
+4 Maelstrom Pulse
+2 Rootbound Crag
+4 Bayou
+4 Bloodbraid Elf
+2 Sarkhan the Mad
+1 Mox Jet
+4 Sprouting Thrinax
+1 Mountain|M12
+[sideboard]

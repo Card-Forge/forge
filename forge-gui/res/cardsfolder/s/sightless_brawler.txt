@@ -1,0 +1,8 @@
+Name:Sightless Brawler
+ManaCost:1 W
+Types:Enchantment Creature Human Warrior
+PT:3/2
+K:Bestow:4 W
+K:CARDNAME can't attack alone.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't attack alone. | Description$ Enchanted creature gets +3/+2 and can't attack alone.
+Oracle:Bestow {4}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nSightless Brawler can't attack alone.\nEnchanted creature gets +3/+2 and can't attack alone.

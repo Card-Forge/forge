@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Ravaging Recruits
+Title=Ravaging Recruits
+Difficulty=medium
+Description="To send the common people to war untrained is to throw them away."\n-Confucius, The Analects (trans. Lau)
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ghostly Visit|PTK
+4 Kongming, "Sleeping Dragon"|PTK
+9 Plains|PTK|1
+4 Ravages of War|PTK
+4 Shu Cavalry|PTK
+11 Swamp|PTK|3
+4 Volunteer Militia|PTK
+4 Wei Ambush Force|PTK
+4 Wei Infantry|PTK
+4 Wei Scout|PTK
+4 Young Wei Recruits|PTK
+4 Zodiac Rat|PTK

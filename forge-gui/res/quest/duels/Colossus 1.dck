@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Colossus 1
+Title=Colossus
+Difficulty=easy
+Description=Mono W control
+Icon=Colossus.jpg
+Deck Type=constructed
+[main]
+24 Plains
+2 Abeyance
+1 Archangel's Light
+1 Due Respect
+1 Silence
+1 Cease-Fire
+1 Disempower
+1 Illumination
+1 Blessed Wine
+1 Chastise
+1 Condemn
+1 Ethereal Haze
+1 Excommunicate
+1 Pollen Lullaby
+1 Holy Day
+1 Lapse of Certainty
+1 Soothing Balm
+1 Ajani's Mantra
+1 Resurrection
+1 Angel's Feather
+1 Sunlance
+1 Pacifism
+2 Rebuff the Wicked
+1 Prophecy
+1 Alabaster Wall
+1 Angelic Wall
+1 Elder Land Wurm
+1 Guardians of Akrasa
+1 Wall of Essence
+1 Angel of Fury
+1 Alabaster Dragon
+1 Ardent Militia
+1 Grand Abolisher
+1 Staunch Defenders
+1 Warrior Angel
+[sideboard]

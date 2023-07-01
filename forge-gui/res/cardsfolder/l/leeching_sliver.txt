@@ -1,0 +1,10 @@
+Name:Leeching Sliver
+ManaCost:1 B
+Types:Creature Sliver
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Sliver.YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Sliver you control attacks, defending player loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1
+S:Mode$ Continuous | Affected$ Sliver.YouCtrl | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+Oracle:Whenever a Sliver you control attacks, defending player loses 1 life.

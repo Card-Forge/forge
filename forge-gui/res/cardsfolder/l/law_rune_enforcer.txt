@@ -1,0 +1,6 @@
+Name:Law-Rune Enforcer
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/2
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature.cmcGE2 | TgtPrompt$ Select target creature with mana value 2 or greater | SpellDescription$ Tap target creature with mana value 2 or greater.
+Oracle:{1}, {T}: Tap target creature with mana value 2 or greater.

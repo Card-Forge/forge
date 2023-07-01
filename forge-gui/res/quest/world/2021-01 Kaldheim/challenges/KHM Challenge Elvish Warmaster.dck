@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Elvish Warmaster
+OpponentName=The Warmasters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Elvish Warmaster
+Difficulty=medium
+Description=Good things come in pairs.\n--Chinese proverb
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Elvish Warmaster
+[Main]
+40 Elvish Warmaster|KHM|2
+20 Forest|KHM|1

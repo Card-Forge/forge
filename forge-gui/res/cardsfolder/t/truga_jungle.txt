@@ -1,0 +1,9 @@
+Name:Truga Jungle
+ManaCost:no cost
+Types:Plane Ergamon
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land | AddAbility$ AnyMana | Description$ All lands have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
+SVar:RolledChaos:DB$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land
+SVar:AIRollPlanarDieParams:Mode$ Random | Chance$ 20
+Oracle:All lands have "{T}: Add one mana of any color."\nWhenever chaos ensues, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.

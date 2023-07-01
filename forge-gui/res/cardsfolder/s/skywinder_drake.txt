@@ -1,0 +1,7 @@
+Name:Skywinder Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:3/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nSkywinder Drake can block only creatures with flying.

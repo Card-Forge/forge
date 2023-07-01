@@ -1,0 +1,23 @@
+[metadata]
+Title=Sorcerer's Broom
+Difficulty=hard
+Description="Maintain a firm grip on your broom or you will surely fall to your death."\n-Madam Rolanda Hooch, Harry Potter: Hogwarts Mystery
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Sorcerer's Broom - Doom
+[Main]
+4 Bake into a Pie|ELD
+4 Cauldron Familiar|ELD
+4 Chittering Witch|ELD
+4 Doom Foretold|ELD|1
+4 Fabled Passage|ELD|1
+2 Fortifying Provisions|ELD
+2 Giant's Skewer|ELD
+4 Gingerbrute|ELD
+4 Golden Egg|ELD
+7 Plains|ELD|1
+4 Rankle, Master of Pranks|ELD|1
+4 Sorcerer's Broom|ELD
+13 Swamp|ELD|3
+[Sideboard]
+4 Witch's Oven|ELD

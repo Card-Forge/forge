@@ -1,0 +1,7 @@
+Name:Elminster's Simulacrum
+ManaCost:4 U U
+Types:Instant
+A:SP$ CopyPermanent | ValidTgts$ Creature.OppCtrl | TgtPrompt$ For each opponent, select up to one target creature that they control | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, you create a token that's a copy of up to one target creature that player controls.
+SVar:OneEach:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:For each opponent, you create a token that's a copy of up to one target creature that player controls.

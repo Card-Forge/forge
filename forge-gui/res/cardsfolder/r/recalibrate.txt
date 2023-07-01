@@ -1,0 +1,8 @@
+Name:Recalibrate
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. If you've discarded a card this turn, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHints:Ability$Discard
+Oracle:Return target creature to its owner's hand. If you've discarded a card this turn, draw a card.

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Merfolk Shaman 3
+Title=Merfolk Shaman
+Icon=MerfolkShaman.jpg
+Difficulty=hard
+Description=Blue Merfolk theme deck.
+Deck Type=constructed
+[main]
+4 Counterspell|LEB
+1 Dance of Many|DRK
+4 Invisibility|2ED
+23 Island|4ED
+4 Lord of Atlantis|4ED
+4 Merfolk Assassin|DRK
+4 Merfolk of the Pearl Trident|4ED
+4 Phantasmal Terrain|LEB
+3 Psionic Blast|2ED
+4 Sunken City|DRK
+1 Time Walk|LEB
+4 Unstable Mutation|4ED
+[sideboard]

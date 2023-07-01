@@ -1,0 +1,7 @@
+Name:Mana Prism
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.

@@ -1,0 +1,8 @@
+Name:Calculating Lich
+ManaCost:4 B B
+Types:Creature Zombie Wizard
+PT:5/5
+K:Menace
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks one of your opponents, that player loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefender | LifeAmount$ 1
+Oracle:Menace\nWhenever a creature attacks one of your opponents, that player loses 1 life.

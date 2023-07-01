@@ -1,0 +1,22 @@
+Name:Lone Rider
+ManaCost:1 W
+Types:Creature Human Knight
+PT:1/1
+K:First Strike
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of the end step, if you gained 3 or more life this turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+AlternateMode:DoubleFaced
+Oracle:First strike, lifelink\nAt the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
+
+ALTERNATE
+
+Name:It That Rides as One
+ManaCost:no cost
+Types:Creature Eldrazi Horror
+PT:4/4
+K:First Strike
+K:Trample
+K:Lifelink
+Oracle:First strike, trample, lifelink

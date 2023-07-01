@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Spirit of the Aldergard
+OpponentName=The Spirits
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Spirit of the Aldergard
+Difficulty=medium
+Description=Not your average spirit animal.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Spirit of the Aldergard
+[Main]
+30 Snow-Covered Forest|KHM|1
+30 Spirit of the Aldergard|KHM|1

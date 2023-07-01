@@ -1,0 +1,8 @@
+Name:Hired Torturer
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/3
+K:Defender
+A:AB$ LoseLife | Cost$ 3 B T | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBReveal | SpellDescription$ Target opponent loses 2 life and reveals a card at random from their hand.
+SVar:DBReveal:DB$ Reveal | Random$ True | Defined$ Targeted
+Oracle:Defender\n{3}{B}, {T}: Target opponent loses 2 life, then reveals a card at random from their hand.

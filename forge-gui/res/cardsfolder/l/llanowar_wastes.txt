@@ -1,0 +1,7 @@
+Name:Llanowar Wastes
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SubAbility$ DBPain | SpellDescription$ Add {B} or {G}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {B} or {G}. Llanowar Wastes deals 1 damage to you.

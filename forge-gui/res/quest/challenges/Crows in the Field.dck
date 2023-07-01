@@ -1,0 +1,38 @@
+[quest]
+id=18
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=5 random rares
+Credit Reward=300
+HumanExtras=Straw Soldiers|Femeref Archers|Moonglove Extract
+AIExtras=Defiant Falcon|Soulcatcher|Storm Crow|Hypnotic Specter
+[metadata]
+Name=quest18
+Title=Crows in the Field
+Difficulty=hard
+Description=Crows are eating the seed planted in the local farm fields. The farmers are scared. Those crows are big, you will need some help.
+Icon=Crows in the Field.jpg
+Deck Type=constructed
+[main]
+4 Birds of Paradise
+4 Knight of the Reliquary
+2 Sejiri Steppe
+1 Mox Emerald
+4 Tropical Island
+2 Elspeth, Knight-Errant
+1 Mox Sapphire
+2 Plains|M12
+2 Island|M12
+4 Forest|M12
+4 Sovereigns of Lost Alara
+3 Jace Beleren
+1 Mox Pearl
+4 Dauntless Escort
+4 Tundra
+4 Steppe Lynx
+4 Baneslayer Angel
+4 Noble Hierarch
+4 Savannah
+2 Eldrazi Conscription
+[sideboard]

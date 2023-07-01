@@ -1,0 +1,11 @@
+Name:A-Umara Mystic
+ManaCost:1 U R
+Types:Creature Merfolk Wizard
+PT:1/3
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a instant, sorcery, or Wizard spell, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+SVar:BuffedBy:Instant,Sorcery,Wizard
+DeckHints:Type$Instant|Sorcery|Wizard
+Oracle:Flying, haste\nWhenever you cast an instant, sorcery, or Wizard spell, Umara Mystic gets +2/+0 until end of turn.

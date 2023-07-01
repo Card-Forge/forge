@@ -1,0 +1,6 @@
+Name:Gold Myr
+ManaCost:2
+Types:Artifact Creature Myr
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:{T}: Add {W}.

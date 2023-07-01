@@ -1,0 +1,10 @@
+Name:Malakir Familiar
+ManaCost:2 B
+Types:Creature Bat
+PT:2/1
+K:Flying
+K:Deathtouch
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+DeckHints:Ability$LifeGain
+Oracle:Flying, deathtouch\nWhenever you gain life, Malakir Familiar gets +1/+1 until end of turn.

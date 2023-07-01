@@ -1,0 +1,8 @@
+Name:Dega Disciple
+ManaCost:W
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -2 | SpellDescription$ Target creature gets -2/-0 until end of turn.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
+DeckHints:Color$Black|Red
+Oracle:{B}, {T}: Target creature gets -2/-0 until end of turn.\n{R}, {T}: Target creature gets +2/+0 until end of turn.

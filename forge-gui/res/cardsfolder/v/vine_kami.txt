@@ -1,0 +1,8 @@
+Name:Vine Kami
+ManaCost:6 G
+Types:Creature Spirit
+PT:4/4
+K:Menace
+K:Soulshift:6
+DeckHints:Type$Spirit
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nSoulshift 6 (When this creature dies, you may return target Spirit card with mana value 6 or less from your graveyard to your hand.)

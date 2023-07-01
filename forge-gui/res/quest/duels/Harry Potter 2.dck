@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Harry Potter 2
+Title=Harry Potter
+Difficulty=medium
+Description=UB Mill and counter spell deck
+Icon=Harry Potter.jpg
+Deck Type=constructed
+[main]
+4 Swamp|M12
+11 Island|M12
+2 Darkslick Shores
+2 Drowned Catacomb
+2 Jwar Isle Refuge
+1 Nephalia Drownyard
+1 Vedalken Entrancer
+2 Remove Soul
+1 Glimpse the Unthinkable
+1 Traumatize
+3 Hedron Crab
+1 Sage's Row Denizen
+2 Mind Funeral
+1 Damnation
+1 Keening Stone
+1 Brain Freeze
+1 Jace Beleren
+1 Ambassador Laquatus
+1 Tome Scour
+1 Nemesis of Reason
+1 Counterspell
+2 Psychic Strike
+2 Howling Mine
+1 Millstone
+1 Unsummon
+1 Jace's Erasure
+1 Shriekhorn
+1 Memory Erosion
+1 Riddlekeeper
+1 Curse of the Bloody Tome
+1 Dreadwaters
+1 Dream Twist
+1 Horrifying Revelation
+1 Increasing Confusion
+1 Thought Scour
+1 Undead Alchemist
+1 Thassa's Bounty
+1 Balustrade Spy
+[sideboard]

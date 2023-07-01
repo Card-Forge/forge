@@ -1,0 +1,8 @@
+Name:Yuan Shao's Infantry
+ManaCost:3 R
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks alone, it can't be blocked this combat.
+SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | Duration$ UntilEndOfCombat
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this combat.
+Oracle:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry can't be blocked this combat.

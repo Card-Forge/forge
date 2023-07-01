@@ -1,0 +1,7 @@
+Name:Greater Auramancy
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Enchantment.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other enchantments you control have shroud.
+S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddKeyword$ Shroud | Description$ Enchanted creatures you control have shroud.
+SVar:PlayMain1:TRUE
+Oracle:Other enchantments you control have shroud. (A permanent with shroud can't be the target of spells or abilities.)\nEnchanted creatures you control have shroud.

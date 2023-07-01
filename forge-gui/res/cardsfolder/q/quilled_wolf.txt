@@ -1,0 +1,6 @@
+Name:Quilled Wolf
+ManaCost:1 G
+Types:Creature Wolf
+PT:2/2
+A:AB$ Pump | Cost$ 5 G | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ CARDNAME gets +4/+4 until end of turn.
+Oracle:{5}{G}: Quilled Wolf gets +4/+4 until end of turn.

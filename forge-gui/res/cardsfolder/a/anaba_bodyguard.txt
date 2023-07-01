@@ -1,0 +1,6 @@
+Name:Anaba Bodyguard
+ManaCost:3 R
+Types:Creature Minotaur
+PT:2/3
+K:First Strike
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)

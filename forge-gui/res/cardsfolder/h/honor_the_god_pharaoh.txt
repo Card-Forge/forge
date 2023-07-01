@@ -1,0 +1,8 @@
+Name:Honor the God-Pharaoh
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Draw | Cost$ 2 R Discard<1/Card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBAmass | SpellDescription$ Draw two cards. Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ 1
+DeckHas:Ability$Discard|Amass|Counters|Token
+DeckHints:Keyword$Madness & Ability$Delirium|Amass & Type$Zombie
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards. Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

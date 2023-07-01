@@ -1,0 +1,7 @@
+Name:Nimbus Maze
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Island.YouCtrl | SpellDescription$ Add {W}. Activate only if you control an Island.
+A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Plains.YouCtrl | SpellDescription$ Add {U}. Activate only if you control a Plains.
+Oracle:{T}: Add {C}.\n{T}: Add {W}. Activate only if you control an Island.\n{T}: Add {U}. Activate only if you control a Plains.

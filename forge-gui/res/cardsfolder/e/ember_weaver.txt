@@ -1,0 +1,9 @@
+Name:Ember Weaver
+ManaCost:2 G
+Types:Creature Spider
+PT:2/3
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ First Strike | IsPresent$ Permanent.Red+YouCtrl | Description$ As long as you control a red permanent, CARDNAME gets +1/+0 and has first strike.
+SVar:BuffedBy:Permanent.Red
+DeckHints:Color$Red
+Oracle:Reach (This creature can block creatures with flying.)\nAs long as you control a red permanent, Ember Weaver gets +1/+0 and has first strike.

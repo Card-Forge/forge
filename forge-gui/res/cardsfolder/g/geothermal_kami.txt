@@ -1,0 +1,11 @@
+Name:Geothermal Kami
+ManaCost:3 G
+Types:Creature Spirit
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | IsPresent$ Enchantment.YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, you may return an enchantment you control to its owner's hand. If you do, you gain 3 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Enchantment.YouCtrl | ChangeNum$ 1 | SelectPrompt$ Choose an enchantment you control to return to its owner's hand | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Enchantment
+DeckHas:Ability$LifeGain
+Oracle:When Geothermal Kami enters the battlefield, you may return an enchantment you control to its owner's hand. If you do, you gain 3 life.

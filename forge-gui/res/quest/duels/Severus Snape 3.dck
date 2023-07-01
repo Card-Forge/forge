@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Severus Snape 3
+Title=Severus Snape
+Difficulty=hard
+Description=WB Token deck
+Icon=Severus Snape.jpg
+Deck Type=constructed
+[main]
+2 Swamp|M12
+6 Plains|M12
+4 Scrubland
+4 Marsh Flats
+4 Isolated Chapel
+4 Bloodstained Mire
+4 Intangible Virtue
+1 Leyline of the Meek
+3 Honor of the Pure
+1 Bitterblossom
+1 Elspeth, Knight-Errant
+1 Grave Titan
+4 Lingering Souls
+1 Midnight Haunting
+4 Raise the Alarm
+1 Sorin, Lord of Innistrad
+4 Spectral Procession
+4 Unmake
+1 Gerrard's Verdict
+3 Mortify
+3 Zealous Persecution
+[sideboard]

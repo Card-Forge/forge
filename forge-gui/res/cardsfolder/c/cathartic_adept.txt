@@ -1,0 +1,6 @@
+Name:Cathartic Adept
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills a card.
+Oracle:{T}: Target player mills a card.

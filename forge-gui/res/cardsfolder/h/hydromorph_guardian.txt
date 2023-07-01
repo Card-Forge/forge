@@ -1,0 +1,7 @@
+Name:Hydromorph Guardian
+ManaCost:2 U
+Types:Creature Elemental
+PT:2/2
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a creature you control.
+AI:RemoveDeck:All
+Oracle:{U}, Sacrifice Hydromorph Guardian: Counter target spell that targets a creature you control.

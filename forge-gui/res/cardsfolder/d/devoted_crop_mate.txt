@@ -1,0 +1,7 @@
+Name:Devoted Crop-Mate
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:3/2
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigChangeZone | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, return target creature card with mana value 2 or less from your graveyard to the battlefield. (An exerted creature won't untap during your next untap step.)
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | TgtPrompt$ Select target creature card with mana value 2 or less in your graveyard | SpellDescription$ When you do, return target creature card with mana value 2 or less from your graveyard to the battlefield.
+Oracle:You may exert Devoted Crop-Mate as it attacks. When you do, return target creature card with mana value 2 or less from your graveyard to the battlefield. (An exerted creature won't untap during your next untap step.)

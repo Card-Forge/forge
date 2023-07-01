@@ -1,0 +1,6 @@
+Name:Sunhome, Fortress of the Legion
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ 2 R W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+Oracle:{T}: Add {C}.\n{2}{R}{W}, {T}: Target creature gains double strike until end of turn.

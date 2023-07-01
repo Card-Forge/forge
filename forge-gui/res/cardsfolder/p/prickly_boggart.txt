@@ -1,0 +1,6 @@
+Name:Prickly Boggart
+ManaCost:B
+Types:Creature Goblin Rogue
+PT:1/1
+K:Fear
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)

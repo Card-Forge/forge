@@ -1,0 +1,7 @@
+Name:Your Will Is Not Your Own
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, gain control of target creature an opponent controls until end of turn. Untap that creature. It gets +3/+3 and gains trample and haste until end of turn.
+SVar:DarkEffect:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +3 | NumDef$ +3 | KW$ Haste & Trample
+Oracle:When you set this scheme in motion, gain control of target creature an opponent controls until end of turn. Untap that creature. It gets +3/+3 and gains trample and haste until end of turn.

@@ -1,0 +1,7 @@
+Name:Graven Abomination
+ManaCost:3
+Types:Artifact Creature Horror
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target card from defending player's graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in defending player's graveyard | ValidTgts$ Card | TargetsWithDefinedController$ TriggeredDefendingPlayer
+Oracle:Whenever Graven Abomination attacks, exile target card from defending player's graveyard.

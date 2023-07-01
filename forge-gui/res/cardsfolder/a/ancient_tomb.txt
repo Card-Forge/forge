@@ -1,0 +1,7 @@
+Name:Ancient Tomb
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SubAbility$ DBPain | SpellDescription$ Add {C}{C}. CARDNAME deals 2 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 2 | Defined$ You
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}{C}. Ancient Tomb deals 2 damage to you.

@@ -1,0 +1,8 @@
+Name:Caustic Wasps
+ManaCost:2 G
+Types:Creature Insect
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact damaged player controls
+Oracle:Flying\nWhenever Caustic Wasps deals combat damage to a player, you may destroy target artifact that player controls.

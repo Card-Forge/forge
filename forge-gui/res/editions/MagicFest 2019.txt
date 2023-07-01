@@ -1,0 +1,15 @@
+[metadata]
+Code=PF19
+Date=2019-01-01
+Name=MagicFest 2019
+Type=Promo
+ScryfallCode=PF19
+
+[cards]
+1 R Lightning Bolt @Kekai Kotaki
+2 R Plains @Sam Burley
+3 R Island @Sam Burley
+4 R Swamp @Sam Burley
+5 R Mountain @Sam Burley
+6 R Forest @Sam Burley
+7 R Sol Ring @Mark Tedin

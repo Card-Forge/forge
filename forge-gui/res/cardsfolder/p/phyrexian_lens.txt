@@ -1,0 +1,5 @@
+Name:Phyrexian Lens
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}, Pay 1 life: Add one mana of any color.

@@ -1,0 +1,9 @@
+Name:Cryptek
+ManaCost:3 B
+Types:Artifact Creature Necron Wizard
+PT:3/3
+A:AB$ ChooseCard | Cost$ 1 B T | ValidTgts$ Artifact.Creature+YouCtrl+Other | TgtPrompt$ Choose another target artifact creature you control | SubAbility$ DBDelayedTrigger | StackDescription$ When {c:Targeted} dies this turn, return that card to the battlefield tapped. | SpellDescription$ Choose another target artifact creature you control.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigReturn | StackDescription$ None | SpellDescription$ When that creature dies this turn, return it to the battlefield tapped under your control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | Tapped$ True | GainControl$ True
+DeckHints:Ability$Graveyard
+Oracle:{1}{B}, {T}: Choose another target artifact creature you control. When that creature dies this turn, return it to the battlefield tapped under your control.

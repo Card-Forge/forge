@@ -1,0 +1,10 @@
+Name:Prophecy
+ManaCost:W
+Types:Sorcery
+A:SP$ PeekAndReveal | ValidTgts$ Opponent | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBGainLife | SpellDescription$ Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles. Draw a card at the beginning of the next turn's upkeep.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1 | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ ParentTarget | SubAbility$ DelTrigSlowtrip
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card at the beginning of the next turn's upkeep.
+SVar:DrawSlowtrip:DB$ Draw
+DeckHas:Ability$LifeGain
+Oracle:Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles.\nDraw a card at the beginning of the next turn's upkeep.

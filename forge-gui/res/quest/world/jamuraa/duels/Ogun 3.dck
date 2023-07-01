@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ogun 3
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=hard
+Description=Ogun plays a fast and aggressive 'Flanker' deck.
+Deck Type=constructed
+[main]
+4 Burning Shield Askari|MIR
+3 Charcoal Diamond|MIR
+2 Death Watch|VIS
+2 Dormant Volcano|VIS
+3 Drain Life|MIR
+2 Everglades|VIS
+4 Fallen Askari|VIS
+2 Hammer of Bogardan|MIR
+3 Incinerate|MIR
+4 Jabari's Banner|WTH
+3 Kaervek's Torch|MIR
+8 Mountain|MIR
+2 Nekrataal|VIS
+4 Rocky Tar Pit|MIR
+4 Searing Spear Askari|MIR
+4 Suq'Ata Lancer|VIS
+6 Swamp|MIR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,9 @@
+Name:Thopter Spy Network
+ManaCost:2 U U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Token
+Oracle:At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card.

@@ -1,0 +1,9 @@
+Name:Divinity of Pride
+ManaCost:WB WB WB WB WB
+Types:Creature Spirit Avatar
+PT:4/4
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | CheckSVar$ X | SVarCompare$ GE25 | Description$ CARDNAME gets +4/+4 as long as you have 25 or more life.
+SVar:X:Count$YourLifeTotal
+Oracle:Flying, lifelink\nDivinity of Pride gets +4/+4 as long as you have 25 or more life.

@@ -1,0 +1,14 @@
+[metadata]
+Code=PROE
+Date=2010-04-23
+Name=Rise of the Eldrazi Promos
+Type=Promo
+ScryfallCode=PROE
+
+[cards]
+4★ M Emrakul, the Aeons Torn @Justin Sweet
+48 R Staggershock @Raymond Swanland
+49 R Deathless Angel @Johann Bodin
+*112 R Guul Draz Assassin @Jason A. Engle
+*124 R Pestilence Demon @Justin Sweet
+156★ R Lord of Shatterskull Pass @Igor Kieryluk

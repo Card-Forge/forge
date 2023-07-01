@@ -1,0 +1,10 @@
+[metadata]
+Code=PLRW
+Date=2007-10-12
+Name=Lorwyn Promos
+Type=Promo
+ScryfallCode=PLRW
+
+[cards]
+139★ R Shriekmaw @Steve Prescott
+244★ R Wren's Run Packmaster @Steve Prescott

@@ -1,0 +1,7 @@
+Name:Panglacial Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+PT:9/5
+K:Trample
+K:While you're searching your library, you may cast CARDNAME from your library.
+Oracle:Trample\nWhile you're searching your library, you may cast Panglacial Wurm from your library.

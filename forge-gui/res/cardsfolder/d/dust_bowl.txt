@@ -1,0 +1,6 @@
+Name:Dust Bowl
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Destroy | Cost$ 3 T Sac<1/Land> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
+Oracle:{T}: Add {C}.\n{3}, {T}, Sacrifice a land: Destroy target nonbasic land.

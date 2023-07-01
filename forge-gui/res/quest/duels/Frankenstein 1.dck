@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Frankenstein 1
+Title=Frankenstein
+Difficulty=easy
+Description=WG Golem deck with several Splicers
+Icon=Frankenstein.jpg
+Deck Type=constructed
+[main]
+12 Plains|NPH
+8 Forest|NPH
+4 Elfhame Palace
+1 Master Splicer
+4 Sensor Splicer
+3 Maul Splicer
+1 Arcbound Bruiser
+1 Battered Golem
+1 Clay Statue
+1 Dodecapod
+1 Enatu Golem
+1 Flint Golem
+1 Glass Golem
+1 Hexplate Golem
+2 Lead Golem
+1 Obsianus Golem
+1 Phyrexian Hulk
+2 Sparring Golem
+1 Stone Golem
+2 Straw Golem
+1 Transguild Courier
+1 Reknit
+1 Bee Sting
+1 Deglamer
+1 Fog
+1 Wing Snare
+1 Topple
+1 Reciprocate
+1 Terashi's Verdict
+1 Shieldmate's Blessing
+1 Sacred Nectar
+[sideboard]

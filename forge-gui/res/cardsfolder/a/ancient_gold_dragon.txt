@@ -1,0 +1,10 @@
+Name:Ancient Gold Dragon
+ManaCost:5 W W
+Types:Creature Elder Dragon
+PT:7/10
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRoll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, roll a d20. You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying | TokenAmount$ Result
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever Ancient Gold Dragon deals combat damage to a player, roll a d20. You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.

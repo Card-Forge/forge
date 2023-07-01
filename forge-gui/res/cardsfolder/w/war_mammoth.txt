@@ -1,0 +1,6 @@
+Name:War Mammoth
+ManaCost:3 G
+Types:Creature Elephant
+PT:3/3
+K:Trample
+Oracle:Trample

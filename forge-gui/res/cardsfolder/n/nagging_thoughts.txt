@@ -1,0 +1,8 @@
+Name:Nagging Thoughts
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+K:Madness:1 U
+DeckHints:Ability$Delirium|Discard
+DeckHas:Ability$Graveyard
+Oracle:Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\nMadness {1}{U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

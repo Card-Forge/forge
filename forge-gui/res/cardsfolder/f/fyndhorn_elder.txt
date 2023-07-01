@@ -1,0 +1,6 @@
+Name:Fyndhorn Elder
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+Oracle:{T}: Add {G}{G}.

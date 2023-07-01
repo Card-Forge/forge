@@ -1,0 +1,8 @@
+Name:Faith Healer
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ GainLife | Cost$ Sac<1/Enchantment> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed enchantment's mana value.
+SVar:X:Sacrificed$CardManaCost
+AI:RemoveDeck:All
+Oracle:Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's mana value.

@@ -1,0 +1,9 @@
+Name:Equal Treatment
+ManaCost:1 W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ EqualEvent | SubAbility$ DBDraw | SpellDescription$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead. Draw a card.
+SVar:EqualEvent:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwo | Description$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.
+SVar:DmgTwo:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 2
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:All
+Oracle:If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.\nDraw a card.

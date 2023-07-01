@@ -1,0 +1,7 @@
+Name:Eastern Paladin
+ManaCost:2 B B
+Types:Creature Phyrexian Zombie Knight
+PT:3/3
+A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
+AI:RemoveDeck:Random
+Oracle:{B}{B}, {T}: Destroy target green creature.

@@ -1,0 +1,8 @@
+Name:Incendiary Dissent
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.NamedCard+YouCtrl | AddAbility$ IDPump | Description$ Creatures you control with the chosen name have "{R}: This creature gets +1/+0 until end of turn."
+SVar:IDPump:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nCreatures you control with the chosen name have "{R}: This creature gets +1/+0 until end of turn."

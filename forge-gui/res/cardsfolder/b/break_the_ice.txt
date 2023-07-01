@@ -1,0 +1,7 @@
+Name:Break the Ice
+ManaCost:B B
+Types:Sorcery
+A:SP$ Destroy | Cost$ B B | ValidTgts$ Land.Snow,Land.canProduceManaColor Colorless | TgtPrompt$ Select target land that is snow or could produce {C} | SpellDescription$ Destroy target land that is snow or could produce {C}.
+A:SP$ DestroyAll | Cost$ 4 B B | NonBasicSpell$ True | ValidCards$ Land.Snow,Land.canProduceManaColor Colorless | PrecostDesc$ Overload | CostDesc$ {4}{B}{B} | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+AI:RemoveDeck:Random
+Oracle:Destroy target land that is snow or could produce {C}.\nOverload {4}{B}{B} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

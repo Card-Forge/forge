@@ -1,0 +1,9 @@
+Name:Dunes of the Dead
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ TriggeredCardController
+SVar:SacMe:1
+DeckHas:Ability$Token
+Oracle:{T}: Add {C}.\nWhen Dunes of the Dead is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.

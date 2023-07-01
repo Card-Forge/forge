@@ -1,0 +1,8 @@
+Name:Lavaborn Muse
+ManaCost:3 R
+Types:Creature Spirit
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ CardsInHand | SVarCompare$ LE2 | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, CARDNAME deals 3 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 3
+SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
+Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to that player.

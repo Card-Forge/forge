@@ -1,0 +1,6 @@
+Name:Talon Trooper
+ManaCost:1 W U
+Types:Creature Bird Scout
+PT:2/3
+K:Flying
+Oracle:Flying

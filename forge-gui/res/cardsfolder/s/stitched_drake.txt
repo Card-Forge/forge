@@ -1,0 +1,7 @@
+Name:Stitched Drake
+ManaCost:1 U U
+Types:Creature Zombie Drake
+PT:3/4
+K:Flying
+A:SP$ PermanentCreature | Cost$ 1 U U ExileFromGrave<1/Creature>
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nFlying

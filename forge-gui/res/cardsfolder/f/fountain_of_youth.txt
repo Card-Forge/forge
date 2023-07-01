@@ -1,0 +1,6 @@
+Name:Fountain of Youth
+ManaCost:0
+Types:Artifact
+A:AB$ GainLife | Cost$ 2 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+DeckHas:Ability$LifeGain
+Oracle:{2}, {T}: You gain 1 life.

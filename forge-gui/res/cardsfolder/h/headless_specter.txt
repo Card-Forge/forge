@@ -1,0 +1,8 @@
+Name:Headless Specter
+ManaCost:1 B B
+Types:Creature Specter
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Hellbent$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Hellbent Whenever CARDNAME deals combat damage to a player, if you have no cards in hand, that player discards a card at random.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ Random
+Oracle:Flying\nHellbent — Whenever Headless Specter deals combat damage to a player, if you have no cards in hand, that player discards a card at random.

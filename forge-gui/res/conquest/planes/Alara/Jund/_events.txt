@@ -1,0 +1,9 @@
+Name:Jund Devour|Deck:Jund Devour.dck|Variant:None|Avatar:Skullmulcher|Desc:
+Name:Jund Top Cards|Deck:Jund Top Cards.dck|Variant:None|Avatar:Broodmate Dragon|Desc:
+Name:Rakka Mar|Deck:Rakka Mar.dck|Variant:Commander|Avatar:Rakka Mar|Desc:
+Name:Thromok the Insatiable|Deck:Thromok the Insatiable.dck|Variant:Commander|Avatar:Thromok the Insatiable|Desc:
+Name:Karrthus, Tyrant of Jund|Deck:Karrthus, Tyrant of Jund.dck|Variant:Commander|Avatar:Karrthus, Tyrant of Jund|Desc:
+Name:Kresh the Bloodbraided|Deck:Kresh the Bloodbraided.dck|Variant:Commander|Avatar:Kresh the Bloodbraided|Desc:
+Name:Meren of Clan Nel Toth|Deck:Meren of Clan Nel Toth.dck|Variant:Commander|Avatar:Meren of Clan Nel Toth|Desc:
+Name:Kresh Vanguard|Deck:Kresh Vanguard.dck|Variant:Vanguard|Avatar:Kresh the Bloodbraided|Desc:
+Name:Sarkhan Vol|Deck:Sarkhan Vol.dck|Variant:Planeswalker|Avatar:Sarkhan Vol|Desc:

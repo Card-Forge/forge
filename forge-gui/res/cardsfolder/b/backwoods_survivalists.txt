@@ -1,0 +1,8 @@
+Name:Backwoods Survivalists
+ManaCost:3 G
+Types:Creature Human Warrior
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Condition$ Delirium | Description$ Delirium — CARDNAME gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Backwoods Survivalists gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.

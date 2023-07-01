@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Phyrexian Assault
+Description=While Urza builds his Legacy and the famed ship Weatherlight, he must defend against an onslaught of foul beasts. "Phyrexian Assault" gives you an unending barrage of creatures and creature removal cards that can quickly break down even the most formidable defense.
+Deck Type=constructed
+Set=ULG
+Image=phyrexian_assault.jpg
+[main]
+2 Arc Lightning|USG
+1 Avalanche Riders|ULG
+2 Bone Shredder|ULG
+1 Corrupt|USG
+2 Defender of Chaos|ULG
+1 Engineered Plague|ULG
+2 Expunge|USG
+1 Fog of Gnats|ULG
+1 Ghitu Encampment|ULG
+2 Ghitu Slinger|ULG
+1 Giant Cockroach|ULG
+2 Goblin Medics|ULG
+1 Headlong Rush|USG
+1 Heat Ray|USG
+1 Looming Shade|USG
+1 Molten Hydra|ULG
+10 Mountain|USG
+1 Phyrexian Broodlings|ULG
+2 Phyrexian Debaser|ULG
+2 Phyrexian Defiler|ULG
+1 Phyrexian Denouncer|ULG
+1 Phyrexian Plaguelord|ULG
+1 Phyrexian Reclamation|ULG
+1 Polluted Mire|USG
+1 Smoldering Crater|USG
+1 Spawning Pool|ULG
+12 Swamp|USG
+1 Tethered Skirge|ULG
+1 Treacherous Link|ULG
+1 Viashino Cutthroat|ULG
+1 Viashino Heretic|ULG
+1 Viashino Runner|USG
+[sideboard]

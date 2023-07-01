@@ -1,0 +1,7 @@
+Name:Apprentice Wizard
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:0/1
+A:AB$ Mana | Cost$ U T | Produced$ C | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {C}{C}{C}.
+DeckHints:Color$Colorless & Type$Artifact|Eldrazi|Karn|Ugin
+Oracle:{U}, {T}: Add {C}{C}{C}.

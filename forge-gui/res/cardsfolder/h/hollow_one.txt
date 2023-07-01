@@ -1,0 +1,8 @@
+Name:Hollow One
+ManaCost:5
+Types:Artifact Creature Golem
+PT:4/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | Relative$ True | EffectZone$ All | Description$ This spell costs {2} less to cast for each card you've cycled or discarded this turn.
+K:Cycling:2
+SVar:Y:PlayerCountPropertyYou$CardsDiscardedThisTurn/Twice
+Oracle:This spell costs {2} less to cast for each card you've cycled or discarded this turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

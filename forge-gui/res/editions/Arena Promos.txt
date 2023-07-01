@@ -1,0 +1,20 @@
+[metadata]
+Code=PANA
+Date=2018-07-14
+Name=Arena Promos
+Type=Online
+ScryfallCode=PANA
+
+[cards]
+1 M Ral, Izzet Viceroy @Daniel Ljunggren
+2 M Teferi, Hero of Dominaria @Yongjae Choi
+3 M Vraska, Golgari Queen @Livia Prima
+4 C Llanowar Elves @Victor Adame Minguez
+5 R Firemind's Research @Robbie Trevino
+6 C Duress @Lawrence Snelly
+7 R Ghalta, Primal Hunger @Johann Bodin
+101 R Rhys the Redeemed @Steve Prescott
+102 R Talrand, Sky Summoner @Svetlin Velinov
+103 M The Gitrog Monster @Jason Kang
+104 R Bladewing the Risen @Kev Walker
+105 R Hanna, Ship's Navigator @Dave Dorman

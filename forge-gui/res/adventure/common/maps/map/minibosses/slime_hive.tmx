@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="37" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="135">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="13" name="subsublaag" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4Ay4MY50C7ABF4D7KYPWMSQ3URqmD1jpcg5YPCBAbu7SHUHOqaGu6jtJmq4Cx2w8UIwKe7hEKCdu37xQDCxgFsAtzth+AA79dyHDKahpXdHGsTPUAUDWX7iynuDsUwfrG6ipbtAeRaGSXUTPdxFiptoCUh1DwjQ2k1hZJhPazeRY/5gzHeDEQAAOM4lLQ==
+  </data>
+ </layer>
+ <layer id="10" name="sublaag" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJy1lk1OAzEMhbNp0RRKgV4AuEolzsICLlHuwHLOwmm67hGQlVo8np7z07SWnqo4E+cb25N0uU5pWdDPjRY/s7u/nFpZDousiAnHGB/tmkzqWfaVmHCsTPG838U1KzGpd1Z2+6BVYsI8cc1aVDPcX/kUi3OgehhHmZhLMSCLWcRbY/qesmq1K+XE9bxN6QX0utXralZiMn/EpGpxeEzpY/O3Zv+kuUaYfJ7rpnrbcmQ8n5v/+WWumqm8IKN96y7ksbnVSbX4zvV1YutlYjHTMWXV1jmL/66oN0eYTG9TVsQUMaJ5TqP5Fg7UPOVz1rh688QWsfXw4Nnfy4T9hjUcYeK7yJk4pu/vNea6R0yqdiU+4+CxxVfvWWJyv9pTxWHxfwfFlII8OQ/uf0za3ys/e1TePHaNyWvMvkszzVMfk9I8wNXChH3VwnMNLq5dDwer1Nuqj83wDMA5u18sJt435yhiOUe/IfLYdQ==
+  </data>
+ </layer>
+ <layer id="9" name="slim" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJylVltuwjAQTFVa2RQEp+kNTFBO0o/Sa4VHbxUeOQPqR7NKRhlvNg/alUY2MfbOjtdrJ0nXNr5F6utvgfoZ9cW2voa216WNv5hwObok+Xa177xqy8Yv+lM5yTqnZi1Zlzk9whn6FBUuTXtu+qHhe5nIiXUGJwZiB/ez764hkLnXCrcGB9f+J9DY3tUtOFkxs87Hxufb2oast3ddTsgj5s2aZLQ2UFBfYmb9hX+pYu/jJP7ui67e0NLaC9YJMR1UXFnPvDFOgXTQtqU86jPRgzXMXbuXWhNtm2afNaeSYuU90Ps0ZNeX+Pe3EZ/mAmhOmY/Hn5cx9F7APldJsqvwtbLHwwR9OFfBRzQONGbN4/N2o//IfLTMS/QChozPxcV3c+ljUftHOwZwAcR2SrexPEqNcZ2DG2q1bieqA9LO17FOGn26j3GCH5w19FGzsab4Z/TVEhj6qFGIhWvzydlnR587655l09zmig/zghU+7r8/2f/T8zUfnE1Y7tp6COB+6dPK8jP0jb/z3jOudKcVPr7HmXfm4zzkWJgraih/t2KGPvrtYGklFpT/1OBkxa510b+DoYn4vhs+wSlXMWAcdyl/mxlvHXCY9+wjc0LNQv4zJzFw0nUe/q2awbzABftmvXP0+vCJuZlaH/df6e19sQxrz5bdfER+pD5+P2Bc1/Pc8N2nxVReP8a7hzXB2w61e+/id2E54PsRPjyHz64Yx63zccpd9l9DvnKtts7XVPwCwzvlKg==
+  </data>
+ </layer>
+ <layer id="12" name="clutter" width="37" height="23">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFVltSwzAMNHxATCeQ+8Bvkk5PwCG4AafgAPDLq7fqgx4Da5KdKGpty9hMd0bjpPZIq5Wl1Ji/obPTc2vn7+eCllNnJ4vt5eQlY5TgFDqXwgnm4+SL+VUZ8y1sXeVxktgl8CFbOls0xry6c2/O3h2fg1InOvtZpXMM8eGc7i+MeXC2sXqd6KzUYKPQNsSHsHfrjx3yJW4pOsUAHcEzxkVy7ke9cvB0N3+XOmo44ZlqRZygUQqgcQyryB0CiAvdJ+SDu3RVT6ZBH8iD8vwYOcc4QZOlPe4fHyfMjst6WAHK57ke/PC7SdZG9OGcSJPtqM/KznOVfSf7tBXnEZ980nzb2flv29G431D/QK+e+ZHg8xU1pvWmOTb4IN0WzdxkvrLm0PnAYvnANfKB6gWfMF7DU7WUOkBnaB3quU7B2wcek1bef5jXXNP/Ap/HfBZjfnItTtU3BY/X6dxQb9xBGTeXUw5C8Wjv5Ta8r+Fb6n/MPuLnHPrloJQuJaD5Lmi+GyXxCxKjjW8=
+  </data>
+ </layer>
+ <objectgroup id="11" name="obj">
+  <object id="75" gid="303" x="506.5" y="325" width="16" height="16"/>
+  <object id="89" template="../../obj/enemy.tx" x="132" y="219">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="131,132"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="400.659" y="222.385">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="122,123,120"/>
+   </properties>
+  </object>
+  <object id="95" template="../../obj/enemy.tx" x="55.1667" y="238.667">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="96" template="../../obj/enemy.tx" x="273.167" y="294.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="120,128"/>
+   </properties>
+  </object>
+  <object id="97" template="../../obj/enemy.tx" x="281.666" y="232.167">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="130,129"/>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/enemy.tx" x="508.5" y="130.5">
+   <properties>
+    <property name="enemy" value="Horror"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/enemy.tx" x="178.088" y="149.029">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slime Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Ooze Boss"/>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/enemy.tx" x="476" y="330.333">
+   <properties>
+    <property name="enemy" value="Horror"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="127,121,120"/>
+   </properties>
+  </object>
+  <object id="104" template="../../obj/gold.tx" x="532" y="73"/>
+  <object id="106" template="../../obj/gold.tx" x="522.333" y="202.833"/>
+  <object id="107" template="../../obj/gold.tx" x="169.5" y="276"/>
+  <object id="109" template="../../obj/treasure.tx" x="476.75" y="76"/>
+  <object id="110" template="../../obj/treasure.tx" x="545.5" y="289"/>
+  <object id="111" template="../../obj/entry_up.tx" x="288" y="375" width="80" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="117" template="../../obj/manashards.tx" x="425.333" y="174"/>
+  <object id="118" template="../../obj/manashards.tx" x="544.667" y="267"/>
+  <object id="119" template="../../obj/manashards.tx" x="48" y="313.333"/>
+  <object id="120" template="../../obj/waypoint.tx" x="421" y="263.667"/>
+  <object id="121" template="../../obj/waypoint.tx" x="426" y="331.667"/>
+  <object id="122" template="../../obj/waypoint.tx" x="379.333" y="222.333"/>
+  <object id="123" template="../../obj/waypoint.tx" x="423.333" y="223"/>
+  <object id="127" template="../../obj/waypoint.tx" x="531" y="329.667"/>
+  <object id="128" template="../../obj/waypoint.tx" x="308.667" y="301"/>
+  <object id="129" template="../../obj/waypoint.tx" x="229.667" y="190.667"/>
+  <object id="130" template="../../obj/waypoint.tx" x="249.333" y="228"/>
+  <object id="131" template="../../obj/waypoint.tx" x="161.667" y="222"/>
+  <object id="132" template="../../obj/waypoint.tx" x="199.667" y="222.667"/>
+  <object id="134" template="../../obj/booster.tx" x="84.6667" y="276.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

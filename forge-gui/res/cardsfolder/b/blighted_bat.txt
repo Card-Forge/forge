@@ -1,0 +1,8 @@
+Name:Blighted Bat
+ManaCost:2 B
+Types:Creature Zombie Bat
+PT:2/1
+K:Flying
+A:AB$ Pump | Cost$ 1 | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
+SVar:X:Count$Valid Mountain.YouCtrl
+Oracle:Flying\n{1}: Blighted Bat gains haste until end of turn.

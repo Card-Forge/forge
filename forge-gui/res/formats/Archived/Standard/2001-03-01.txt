@@ -1,0 +1,6 @@
+[format]
+Name:Standard (PLS)
+Type:Archived
+Subtype:Standard
+Effective:2001-03-01
+Sets:6ED, MMQ, NMS, PCY, INV, PLS

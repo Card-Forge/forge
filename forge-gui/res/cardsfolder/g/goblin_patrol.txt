@@ -1,0 +1,6 @@
+Name:Goblin Patrol
+ManaCost:R
+Types:Creature Goblin
+PT:2/1
+K:Echo:R
+Oracle:Echo {R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

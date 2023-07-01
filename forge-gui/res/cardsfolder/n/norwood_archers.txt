@@ -1,0 +1,6 @@
+Name:Norwood Archers
+ManaCost:3 G
+Types:Creature Elf Archer
+PT:3/3
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

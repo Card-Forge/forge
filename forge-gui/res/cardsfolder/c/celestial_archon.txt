@@ -1,0 +1,9 @@
+Name:Celestial Archon
+ManaCost:3 W W
+Types:Enchantment Creature Archon
+PT:4/4
+K:Bestow:5 W W
+K:Flying
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Flying & First Strike | Description$ Enchanted creature gets +4/+4 and has flying and first strike.
+Oracle:Bestow {5}{W}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nFlying, first strike\nEnchanted creature gets +4/+4 and has flying and first strike.

@@ -1,0 +1,6 @@
+Name:Dinosaur Cat Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Dinosaur Cat
+PT:2/2
+Oracle:

@@ -1,0 +1,8 @@
+Name:Treasure Vault
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ X X T Sac<1/CARDNAME> | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SpellDescription$ Create X Treasure tokens.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Sacrifice
+Oracle:{T}: Add {C}.\n{X}{X}, {T}, Sacrifice Treasure Vault: Create X Treasure tokens.

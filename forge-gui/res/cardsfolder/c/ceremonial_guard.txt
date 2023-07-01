@@ -1,0 +1,9 @@
+Name:Ceremonial Guard
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, destroy it at end of combat.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, destroy it at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Destroy CARDNAME at end of combat.
+SVar:TrigSacrifice:DB$ Destroy | Defined$ Self
+Oracle:When Ceremonial Guard attacks or blocks, destroy it at end of combat.

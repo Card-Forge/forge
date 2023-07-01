@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Quicksilver 3
+Title=Quicksilver
+Difficulty=hard
+Description=WUG Hypergenesis/Show and Tell deck with huge creatures
+Icon=Quicksilver.jpg
+Deck Type=constructed
+[main]
+2 Tropical Island
+3 Tundra
+4 Misty Rainforest
+3 Polluted Delta
+3 Scalding Tarn
+2 Flooded Strand
+1 Island
+1 Plains
+4 Elvish Spirit Guide
+4 Simian Spirit Guide
+2 Hypergenesis
+4 Ardent Plea
+4 Shardless Agent
+4 Show and Tell
+1 Angel of Serenity
+1 Angel of Despair
+1 Avacyn, Angel of Hope
+1 Blazing Archon
+1 Blightsteel Colossus
+1 Bogardan Hellkite
+1 Elesh Norn, Grand Cenobite
+1 Emrakul, the Aeons Torn
+1 Gisela, Blade of Goldnight
+1 Iona, Shield of Emeria
+1 Jin-Gitaxias, Core Augur
+1 Karrthus, Tyrant of Jund
+2 Maelstrom Wanderer
+1 Molten Primordial
+1 Pelakka Wurm
+1 Platinum Emperion
+1 Progenitus
+1 Thraximundar
+[sideboard]

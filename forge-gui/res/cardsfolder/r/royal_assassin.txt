@@ -1,0 +1,7 @@
+Name:Royal Assassin
+ManaCost:1 B B
+Types:Creature Human Assassin
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+SVar:NonCombatPriority:1
+Oracle:{T}: Destroy target tapped creature.

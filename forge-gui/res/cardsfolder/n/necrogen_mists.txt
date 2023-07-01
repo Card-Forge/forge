@@ -1,0 +1,7 @@
+Name:Necrogen Mists
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each player's upkeep, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player discards a card.

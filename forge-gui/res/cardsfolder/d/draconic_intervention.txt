@@ -1,0 +1,8 @@
+Name:Draconic Intervention
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ DamageAll | Cost$ 2 R R ExileFromGrave<1/Instant;Sorcery> | NumDmg$ X | ValidCards$ Creature.nonDragon | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals X damage to each non-Dragon creature, where X is the exiled card's mana value. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Exiled$CardManaCost
+Oracle:As an additional cost to cast this spell, exile an instant or sorcery card from your graveyard.\nDraconic Intervention deals X damage to each non-Dragon creature, where X is the exiled card's mana value. If a creature dealt damage this way would die this turn, exile it instead.\nExile Draconic Intervention.

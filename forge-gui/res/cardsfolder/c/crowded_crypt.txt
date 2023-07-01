@@ -1,0 +1,11 @@
+Name:Crowded Crypt
+ManaCost:2 B
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put a corpse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CORPSE | CounterNum$ 1
+A:AB$ Token | Cost$ 4 B B T Sac<1/CARDNAME> | TokenAmount$ X | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ Create a 2/2 black Zombie token for each corpse counter on CARDNAME. (A creature with decayed can't block. When it attacks, sacrifice it at the end of combat.)
+SVar:X:Count$CardCounters.CORPSE
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Sacrifice
+Oracle:{T}: Add {B}.\nWhenever a creature you control dies, put a corpse counter on Crowded Crypt.\n{4}{B}{B}, {T}, Sacrifice Crowded Crypt: Create a 2/2 black Zombie token with decayed for each corpse counter on Crowded Crypt. (A creature with decayed can't block. When it attacks, sacrifice it at the end of combat.)

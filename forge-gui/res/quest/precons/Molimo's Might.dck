@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Molimo's Might
+Description=Summon the crushing might of the forest. First you'll create a burgeoning woodland as far as the eye can see. Then you'll unleash a stampede of colossal creatures that only get bigger as you expand your forest-- just like your general, the enormous maro-sorcerer Molimo.
+Deck Type=constructed
+Set=10E
+Image=molimos_might.jpg
+[main]
+2 Blanchwood Armor|10E
+2 Canopy Spider|10E
+2 Civic Wayfinder|10E
+2 Commune with Nature|10E
+1 Craw Wurm|10E
+1 Enormous Baloth|10E
+16 Forest|10E
+1 Giant Growth|10E
+1 Hurricane|10E
+1 Kavu Climber|10E
+1 Mantis Engine|10E
+1 Molimo, Maro-Sorcerer|10E
+1 Overrun|10E
+2 Rampant Growth|10E
+2 Rootwalla|10E
+2 Spined Wurm|10E
+1 Stampeding Wildebeests|10E
+1 Wurm's Tooth|10E
+[sideboard]

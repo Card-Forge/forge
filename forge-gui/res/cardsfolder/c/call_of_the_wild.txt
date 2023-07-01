@@ -1,0 +1,6 @@
+Name:Call of the Wild
+ManaCost:2 G G
+Types:Enchantment
+A:AB$ Dig | Cost$ 2 G G | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
+SVar:NonStackingEffect:True
+Oracle:{2}{G}{G}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.

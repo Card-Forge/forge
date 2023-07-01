@@ -1,0 +1,6 @@
+Name:Consulate Dreadnought
+ManaCost:1
+Types:Artifact Vehicle
+PT:7/11
+K:Crew:6
+Oracle:Crew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)

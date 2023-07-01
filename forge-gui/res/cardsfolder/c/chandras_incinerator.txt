@@ -1,0 +1,12 @@
+Name:Chandra's Incinerator
+ManaCost:5 R
+Types:Creature Elemental
+PT:6/6
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total amount of noncombat damage dealt to your opponents this turn.
+SVar:X:PlayerCountRegisteredOpponents$NonCombatDamageDealtThisTurn
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a source you control deals noncombat damage to an opponent, CARDNAME deals that much damage to target creature or planeswalker that player controls.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker that player controls | TargetsWithDefinedController$ TriggeredTarget | NumDmg$ Y
+SVar:Y:TriggerCount$DamageAmount
+SVar:PlayMain1:TRUE
+Oracle:This spell costs {X} less to cast, where X is the total amount of noncombat damage dealt to your opponents this turn.\nTrample\nWhenever a source you control deals noncombat damage to an opponent, Chandra's Incinerator deals that much damage to target creature or planeswalker that player controls.

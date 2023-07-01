@@ -1,0 +1,5 @@
+Name:Mass of Ghouls
+ManaCost:3 B B
+Types:Creature Zombie Warrior
+PT:5/3
+Oracle:

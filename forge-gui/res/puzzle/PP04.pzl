@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #04 - Make Love, Not War
+URL:https://pauperpuzzles.wordpress.com/2017/01/20/4-make-love-not-war/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=5
+humanhand=Kor Skyfisher;Oblivion Ring;Chainer's Edict;Holy Light
+humanbattlefield=Swamp;Swamp;Swamp;Plains;Plains;Plains;Plains;Plains;Thraben Inspector;Foundry Screecher;Kor Sanctifiers;Lone Missionary;Pacifism|AttachedTo:18
+humanlibrary=Leave No Trace
+aibattlefield=Aura Gnarlid|Id:18;Slippery Bogle|Id:19;Ethereal Armor|AttachedTo:19;Armadillo Cloak|AttachedTo:19;Ancestral Mask|AttachedTo:19;Children of Korlis

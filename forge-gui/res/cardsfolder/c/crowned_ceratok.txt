@@ -1,0 +1,8 @@
+Name:Crowned Ceratok
+ManaCost:3 G
+Types:Creature Rhino
+PT:4/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.counters_GE1_P1P1+YouCtrl | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+DeckHints:Ability$Counters
+Oracle:Trample\nEach creature you control with a +1/+1 counter on it has trample.

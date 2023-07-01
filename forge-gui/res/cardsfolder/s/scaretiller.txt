@@ -1,0 +1,9 @@
+Name:Scaretiller
+ManaCost:4
+Types:Artifact Creature Scarecrow
+PT:1/4
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME becomes tapped, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBLand,DBLand2
+SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl | SpellDescription$ You may put a land card from your hand onto the battlefield tapped.
+SVar:DBLand2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land card from your graveyard | Tapped$ True | SpellDescription$ Return target land card from your graveyard to the battlefield tapped.
+Oracle:Whenever Scaretiller becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped.

@@ -1,0 +1,11 @@
+Name:God-Eternal Oketra
+ManaCost:3 W W
+Types:Legendary Creature Zombie God
+PT:3/6
+K:Double Strike
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, create a 4/4 black Zombie Warrior creature token with vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_4_4_zombie_warrior_vigilance | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TriReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
+SVar:TriReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Destination$ Library | LibraryPosition$ 2
+DeckHas:Ability$Token
+Oracle:Double strike\nWhenever you cast a creature spell, create a 4/4 black Zombie Warrior creature token with vigilance.\nWhen God-Eternal Oketra dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

@@ -1,0 +1,13 @@
+Name:Nightpack Ambusher
+ManaCost:2 G G
+Types:Creature Wolf
+PT:4/4
+K:Flash
+S:Mode$ Continuous | Affected$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Wolves and Werewolves you control get +1/+1.
+SVar:PlayMain1:TRUE
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you didn't cast a spell this turn, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_2_2_wolf | TokenAmount$ 1
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+DeckHints:Type$Wolf|Werewolf
+DeckHas:Ability$Token
+Oracle:Flash\nOther Wolves and Werewolves you control get +1/+1.\nAt the beginning of your end step, if you didn't cast a spell this turn, create a 2/2 green Wolf creature token.

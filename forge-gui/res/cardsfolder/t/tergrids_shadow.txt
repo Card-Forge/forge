@@ -1,0 +1,8 @@
+Name:Tergrid's Shadow
+ManaCost:3 B B
+Types:Instant
+A:SP$ Sacrifice | Cost$ 3 B B | Amount$ 2 | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices two creatures. | StackDescription$ SpellDescription
+AI:RemoveDeck:All
+K:Foretell:2 B B
+DeckHas:Ability$Sacrifice
+Oracle:Each player sacrifices two creatures.\nForetell {2}{B}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

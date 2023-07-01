@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+
+Name=Aura Mastery
+
+Description=Unleash the power of enchantments. Buff up your own creatures, put the whammy on your opponent's, and then snap your fingers to scramble Auras around at your whim. Your enemies will grudgingly applaud even as their plans are ruined.
+Deck Type=constructed
+Set=SHM
+Image=aura_mastery.jpg
+
+[main]
+
+10 Island|SHM
+14 Plains|SHM
+1 Barrenton Medic|SHM
+3 Glamer Spinners|SHM
+1 Kithkin Rabble|SHM
+1 Mistmeadow Witch|SHM
+2 Niveous Wisps|SHM
+2 Parapet Watchers|SHM
+2 Puresight Merrow|SHM
+1 Scrapbasket|SHM
+1 Silkbind Faerie|SHM
+2 Somnomancer|SHM
+2 Thistledown Duo|SHM
+1 Thistledown Liege|SHM
+1 Twilight Shepherd|SHM
+1 Watchwing Scarecrow|SHM
+3 Zealous Guardian|SHM
+1 Armored Ascension|SHM
+2 Curse of Chains|SHM
+1 Mine Excavation|SHM
+2 Prison Term|SHM
+1 Repel Intruders|SHM
+3 Steel of the Godhead|SHM
+2 Thoughtweft Gambit|SHM
+
+[sideboard]

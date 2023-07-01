@@ -1,0 +1,8 @@
+Name:Mirran Spy
+ManaCost:2 U
+Types:Creature Drone
+PT:1/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigUntap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may untap target creature.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature
+Oracle:Flying\nWhenever you cast an artifact spell, you may untap target creature.

@@ -1,0 +1,14 @@
+Name:Xenagos, the Reveler
+ManaCost:2 R G
+Types:Legendary Planeswalker Xenagos
+Loyalty:3
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Amount$ X | Produced$ Combo R G | Planeswalker$ True | SpellDescription$ Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ rg_2_2_satyr_haste | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 red and green Satyr creature token with haste.
+A:AB$ Dig | Cost$ SubCounter<6/LOYALTY> | DigNum$ 7 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Planeswalker$ True | Ultimate$ True | SubAbility$ DBChangeZone | SpellDescription$ Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered,Land.IsRemembered | Hidden$ True | ChangeNum$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$ValidExile Creature.IsRemembered,Land.IsRemembered
+AI:RemoveDeck:All
+DeckHas:Ability$Token
+Oracle:[+1]: Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control.\n[0]: Create a 2/2 red and green Satyr creature token with haste.\n[-6]: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.

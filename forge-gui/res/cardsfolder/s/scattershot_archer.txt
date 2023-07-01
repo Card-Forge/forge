@@ -1,0 +1,6 @@
+Name:Scattershot Archer
+ManaCost:G
+Types:Creature Elf Archer
+PT:1/2
+A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withFlying | NumDmg$ 1 | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
+Oracle:{T}: Scattershot Archer deals 1 damage to each creature with flying.

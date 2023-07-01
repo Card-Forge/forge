@@ -1,0 +1,9 @@
+Name:Firesong and Sunspeaker
+ManaCost:4 R W
+Types:Legendary Creature Minotaur Cleric
+PT:4/6
+S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Instant.Red+YouCtrl,Sorcery.Red+YouCtrl | AffectedZone$ Stack | Description$ Red instant and sorcery spells you control have lifelink.
+T:Mode$ LifeGained | ValidPlayer$ You | ValidSource$ Instant.White,Sorcery.White | Spell$ True | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a white instant or sorcery spell causes you to gain life, CARDNAME deals 3 damage to target creature or player.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
+DeckHas:Ability$LifeGain
+Oracle:Red instant and sorcery spells you control have lifelink.\nWhenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to target creature or player.

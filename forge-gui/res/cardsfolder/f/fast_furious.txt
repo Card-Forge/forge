@@ -1,0 +1,16 @@
+Name:Fast
+ManaCost:2 R
+Types:Instant
+A:SP$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+DeckHas:Ability$Discard
+AlternateMode:Split
+Oracle:Discard a card, then draw two cards.
+
+ALTERNATE
+
+Name:Furious
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 3 | ValidDescription$ each creature without flying | SpellDescription$ CARDNAME deals 3 damage to each creature without flying.
+Oracle:Furious deals 3 damage to each creature without flying.

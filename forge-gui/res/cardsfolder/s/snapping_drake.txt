@@ -1,0 +1,6 @@
+Name:Snapping Drake
+ManaCost:3 U
+Types:Creature Drake
+PT:3/2
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

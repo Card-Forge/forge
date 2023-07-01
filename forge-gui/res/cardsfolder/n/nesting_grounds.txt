@@ -1,0 +1,8 @@
+Name:Nesting Grounds
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ 1 T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ DBMove | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Move a counter from target permanent you control onto another target permanent. Activate only as a sorcery.
+SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to move counter to | TargetUnique$ True | CounterType$ Any | CounterNum$ 1 | StackDescription$ None
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{1}, {T}: Move a counter from target permanent you control onto another target permanent. Activate only as a sorcery.

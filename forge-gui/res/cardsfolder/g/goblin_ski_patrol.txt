@@ -1,0 +1,7 @@
+Name:Goblin Ski Patrol
+ManaCost:1 R
+Types:Creature Goblin
+PT:1/1
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | KW$ Flying | Duration$ Permanent | GameActivationLimit$ 1 | IsPresent$ Mountain.Snow+YouCtrl | AtEOT$ SacrificeCtrl | SpellDescription$ CARDNAME gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate only once and only if you control a snow Mountain.
+AI:RemoveDeck:All
+Oracle:{1}{R}: Goblin Ski Patrol gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate only once and only if you control a snow Mountain.

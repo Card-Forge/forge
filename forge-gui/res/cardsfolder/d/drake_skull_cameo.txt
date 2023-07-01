@@ -1,0 +1,7 @@
+Name:Drake-Skull Cameo
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Blue|Black
+Oracle:{T}: Add {U} or {B}.

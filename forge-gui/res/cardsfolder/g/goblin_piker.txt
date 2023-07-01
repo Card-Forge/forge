@@ -1,0 +1,5 @@
+Name:Goblin Piker
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/1
+Oracle:

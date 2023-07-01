@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=The Great Gazoo 3
+Title=The Great Gazoo
+Difficulty=hard
+Description=WR deck with, red damage all spells and pro from red creatures
+Icon=The Great Gazoo.jpg
+Deck Type=constructed
+[main]
+4 Sacred Foundry
+4 Plateau
+4 Jungle Shrine
+1 Soltari Priest
+1 Stuffy Doll
+2 Rolling Earthquake
+5 Plains|M11
+1 Voice of Law
+3 Flamebreak
+3 Thermal Glider
+3 Silver Knight
+2 Starstorm
+1 Abbey Gargoyles
+1 Mox Ruby
+1 Mox Pearl
+1 Ryusei, the Falling Star
+4 Freewind Falcon
+4 Paladin en-Vec
+1 Earthquake
+4 Mountain|M11
+4 Kor Firewalker
+1 Wildfire
+4 Chain Reaction
+1 Seismic Shudder
+[sideboard]

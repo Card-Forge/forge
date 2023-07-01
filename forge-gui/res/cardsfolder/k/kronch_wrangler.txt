@@ -1,0 +1,10 @@
+Name:Kronch Wrangler
+ManaCost:1 G
+Types:Creature Human Warrior
+PT:2/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Creature.powerGE4
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever a creature with power 4 or greater enters the battlefield under your control, put a +1/+1 counter on Kronch Wrangler.

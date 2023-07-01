@@ -1,0 +1,8 @@
+Name:Vedalken Ghoul
+ManaCost:U B
+Types:Creature Vedalken Zombie
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player loses 4 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 4
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.

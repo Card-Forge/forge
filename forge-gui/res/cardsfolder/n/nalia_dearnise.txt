@@ -1,0 +1,13 @@
+Name:Nalia de'Arnise
+ManaCost:1 W B
+Types:Legendary Creature Human Rogue
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Cleric.TopLibrary+YouOwn+nonLand,Rogue.TopLibrary+YouOwn+nonLand,Warrior.TopLibrary+YouOwn+nonLand,Wizard.TopLibrary+YouOwn+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Cleric, Rogue, Warrior, and Wizard spells from the top of your library.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | Execute$ PutCounterAll | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, put a +1/+1 counter on each creature you control and those creatures gain deathtouch until end of turn.
+SVar:PutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch
+SVar:X:Count$Party
+DeckHas:Ability$Party|Counters
+DeckHints:Type$Cleric|Warrior|Wizard
+Oracle:You may look at the top card of your library any time.\nYou may cast Cleric, Rogue, Warrior, and Wizard spells from the top of your library.\nAt the beginning of combat on your turn, if you have a full party, put a +1/+1 counter on each creature you control and those creatures gain deathtouch until end of turn.

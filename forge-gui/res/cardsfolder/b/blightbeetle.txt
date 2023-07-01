@@ -1,0 +1,8 @@
+Name:Blightbeetle
+ManaCost:1 B
+Types:Creature Insect
+PT:1/1
+K:Protection from green
+S:Mode$ CantPutCounter | ValidCard$ Creature.OppCtrl | CounterType$ P1P1 | Description$ Creatures your opponents control can't have +1/+1 counters put on them.
+SVar:PlayMain1:TRUE
+Oracle:Protection from green (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything green.)\nCreatures your opponents control can't have +1/+1 counters put on them.

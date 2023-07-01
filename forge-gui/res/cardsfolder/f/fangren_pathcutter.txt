@@ -1,0 +1,7 @@
+Name:Fangren Pathcutter
+ManaCost:4 G G
+Types:Creature Beast
+PT:4/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures gain trample until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ Trample
+Oracle:Whenever Fangren Pathcutter attacks, attacking creatures gain trample until end of turn.

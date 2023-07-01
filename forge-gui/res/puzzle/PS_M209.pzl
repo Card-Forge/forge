@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/09/128.-M209-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. You have 14 cards remaining in your library. Your opponent has 25 in theirs. Assume any cards drawn are unknown and cannot be relied upon as part of the solution. Assume your opponent has no cards in hand and no mana available, but remember your solution must account for other abilities they could activate as well as blocking decisions.
+[state]
+humanlife=5
+ailife=42
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Role Reversal;Act of Treason;Atzocan Archer;Chandra's Flame Wave;Polyraptor;Metamorphic Alteration;Slice in Twain
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Marauding Raptor|Id:6;Pacifism|AttachedTo:6|Owner:AI;Polyraptor|Id:8;Curator's Ward|AttachedTo:8;Dragon Mage;Cacophodon|Id:11;Curator's Ward|AttachedTo:11;Leyline of Anticipation;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Senate Guildmage;Glint-Horn Buccaneer;Niv-Mizzet, Parun|Id:3;Atemsis, All-Seeing;Hard Cover|AttachedTo:3

@@ -1,0 +1,19 @@
+[quest]
+id=ATQ Challenge: Colossus of Sardia
+OpponentName=The Colosseum
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ATQ
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ATQ Challenge: Colossus of Sardia
+Title=The Colosseum
+Difficulty=hard
+Description=Buried under a thin layer of dirt, it was known for centuries as Mount Sardia.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+30 Colossus of Sardia|ATQ
+30 Mishra's Workshop|ATQ

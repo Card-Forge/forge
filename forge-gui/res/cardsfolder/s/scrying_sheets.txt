@@ -1,0 +1,8 @@
+Name:Scrying Sheets
+ManaCost:no cost
+Types:Snow Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Dig | Cost$ 1 S T | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Card.Snow | Optional$ True | LibraryPosition2$ 0 | ForceRevealToController$ True | SpellDescription$ Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand. ({S} can be paid with one mana from a snow source.)
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand. ({S} can be paid with one mana from a snow source.)

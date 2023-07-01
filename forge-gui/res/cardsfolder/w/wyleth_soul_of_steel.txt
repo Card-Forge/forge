@@ -1,0 +1,13 @@
+Name:Wyleth, Soul of Steel
+ManaCost:1 R W
+Types:Legendary Creature Human Warrior
+PT:2/2
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card for each Aura and Equipment attached to it.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Equipment.Attached,Aura.Attached
+SVar:HasAttackEffect:TRUE
+SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
+DeckHints:Type$Aura|Equipment
+Oracle:Trample\nWhenever Wyleth, Soul of Steel attacks, draw a card for each Aura and Equipment attached to it.

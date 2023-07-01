@@ -1,0 +1,8 @@
+Name:Pale Recluse
+ManaCost:4 G W
+Types:Creature Spider
+PT:4/5
+K:Reach
+K:TypeCycling:Forest:2
+K:TypeCycling:Plains:2
+Oracle:Reach (This creature can block creatures with flying.)\nForestcycling {2}, plainscycling {2} ({2}, Discard this card: Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle.)

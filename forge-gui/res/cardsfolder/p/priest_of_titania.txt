@@ -1,0 +1,7 @@
+Name:Priest of Titania
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Elf on the battlefield.
+SVar:X:Count$Valid Elf
+Oracle:{T}: Add {G} for each Elf on the battlefield.

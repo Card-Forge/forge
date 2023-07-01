@@ -1,0 +1,9 @@
+Name:Rite of Harmony
+ManaCost:G W
+Types:Instant
+K:Flashback:2 G W
+A:SP$ Effect | Triggers$ CreatureEnchantmentETB | SpellDescription$ Whenever a creature or enchantment enters the battlefield under your control this turn, draw a card.
+SVar:CreatureEnchantmentETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl,Enchantment.YouCtrl | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a creature or enchantment enters the battlefield under your control this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Enchantment
+Oracle:Whenever a creature or enchantment enters the battlefield under your control this turn, draw a card.\nFlashback {2}{G}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

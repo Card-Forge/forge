@@ -1,0 +1,8 @@
+Name:Undead Augur
+ManaCost:B B
+Types:Creature Zombie Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Zombie.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Zombie you control dies, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Whenever Undead Augur or another Zombie you control dies, you draw a card and you lose 1 life.

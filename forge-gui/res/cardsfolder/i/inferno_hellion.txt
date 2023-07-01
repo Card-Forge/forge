@@ -1,0 +1,8 @@
+Name:Inferno Hellion
+ManaCost:3 R
+Types:Creature Hellion
+PT:7/3
+K:Trample
+T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | IsPresent$ Card.Self+attackedThisTurn,Card.Self+blockedThisTurn | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each end step, if CARDNAME attacked or blocked this turn, its owner shuffles it into their library.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Library | Shuffle$ True
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nAt the beginning of each end step, if Inferno Hellion attacked or blocked this turn, its owner shuffles it into their library.

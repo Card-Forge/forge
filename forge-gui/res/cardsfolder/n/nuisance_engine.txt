@@ -1,0 +1,5 @@
+Name:Nuisance Engine
+ManaCost:3
+Types:Artifact
+A:AB$ Token | Cost$ 2 T | TokenAmount$ 1 | TokenScript$ c_0_1_a_pest | TokenOwner$ You | SpellDescription$ Create a 0/1 colorless Pest artifact creature token.
+Oracle:{2}, {T}: Create a 0/1 colorless Pest artifact creature token.

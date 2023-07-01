@@ -1,0 +1,9 @@
+Name:Mardu Strike Leader
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:3/2
+K:Dash:3 B
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a 2/1 black Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_1_warrior | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Mardu Strike Leader attacks, create a 2/1 black Warrior creature token.\nDash {3}{B} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

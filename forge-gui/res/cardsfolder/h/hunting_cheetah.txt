@@ -1,0 +1,7 @@
+Name:Hunting Cheetah
+ManaCost:2 G
+Types:Creature Cat
+PT:2/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may search your library for a Forest card, reveal that card, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:Whenever Hunting Cheetah deals damage to an opponent, you may search your library for a Forest card, reveal that card, put it into your hand, then shuffle.

@@ -1,0 +1,6 @@
+Name:Prologue to Phyresis
+ManaCost:1 U
+Types:Instant
+A:SP$ Poison | Defined$ Player.Opponent | Num$ 1 | SubAbility$ DBDraw | SpellDescription$ Each opponent gets a poison counter. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Each opponent gets a poison counter.\nDraw a card.

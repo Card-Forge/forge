@@ -1,0 +1,6 @@
+Name:Tonic Peddler
+ManaCost:1 W
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ GainLife | Cost$ W T Discard<1/Card> | LifeAmount$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 3 life.
+Oracle:{W}, {T}, Discard a card: Target player gains 3 life.

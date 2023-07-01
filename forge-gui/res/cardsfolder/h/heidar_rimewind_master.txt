@@ -1,0 +1,7 @@
+Name:Heidar, Rimewind Master
+ManaCost:4 U
+Types:Legendary Creature Human Wizard
+PT:3/3
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent | TgtPrompt$ Select target Permanent | Origin$ Battlefield | Destination$ Hand | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ Return target permanent to its owner's hand. Activate only if you control four or more snow permanents.
+AI:RemoveDeck:Random
+Oracle:{2}, {T}: Return target permanent to its owner's hand. Activate only if you control four or more snow permanents.

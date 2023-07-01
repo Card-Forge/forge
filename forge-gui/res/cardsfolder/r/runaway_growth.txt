@@ -1,0 +1,11 @@
+Name:Runaway Growth
+ManaCost:3 G
+Types:Enchantment Aura
+K:Starting intensity:1
+K:Enchant land
+A:SP$ Attach | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+T:Mode$ TapsForMana | ValidCard$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional amount of {G} equal to CARDNAME's intensity, then perpetually increase its intensity by 1.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | Defined$ TriggeredCardController | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify
+SVar:X:Count$Intensity
+Oracle:Starting intensity 1\nEnchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional amount of {G} equal to Runaway Growth's intensity, then perpetually increase its intensity by 1.

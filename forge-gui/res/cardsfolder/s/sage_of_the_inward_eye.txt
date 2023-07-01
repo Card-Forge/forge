@@ -1,0 +1,9 @@
+Name:Sage of the Inward Eye
+ManaCost:2 U R W
+Types:Creature Djinn Wizard
+PT:3/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, creatures you control gain lifelink until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Flying\nWhenever you cast a noncreature spell, creatures you control gain lifelink until end of turn.

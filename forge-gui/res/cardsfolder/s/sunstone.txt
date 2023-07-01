@@ -1,0 +1,6 @@
+Name:Sunstone
+ManaCost:3
+Types:Artifact
+A:AB$ Fog | Cost$ 2 Sac<1/Land.Snow/snow land> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+AI:RemoveDeck:Random
+Oracle:{2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.

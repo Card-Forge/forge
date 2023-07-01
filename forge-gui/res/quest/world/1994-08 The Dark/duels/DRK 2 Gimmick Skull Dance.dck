@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 2 Gimmick: Skull Dance
+Title=Skull Dance
+Difficulty=medium
+Description=Though lifeless, the Skull still possessed a strange power over the flow of magic.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bog Imp|DRK
+4 Curse Artifact|DRK
+4 Dance of Many|DRK
+4 Drowned|DRK
+4 Eater of the Dead|DRK
+4 Fellwar Stone|DRK
+4 Ghost Ship|DRK
+12 Island|LEB|1
+4 Psychic Allergy|DRK
+4 Skull of Orm|DRK
+12 Swamp|LEB|2

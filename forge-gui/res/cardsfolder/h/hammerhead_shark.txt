@@ -1,0 +1,6 @@
+Name:Hammerhead Shark
+ManaCost:1 U
+Types:Creature Shark
+PT:2/3
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+Oracle:Hammerhead Shark can't attack unless defending player controls an Island.

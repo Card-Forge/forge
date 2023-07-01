@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Battalion
+Description=Raise an army of exquisitely trained soldiers. Take up arms against Lorwyn's undisciplined rabble. Summon the masters of blade and shield, claim dominion over combat and defend the most important banner of all-- yours.
+Deck Type=constructed
+Set=MOR
+Image=battalion.jpg
+
+[main]
+9  Island|LRW
+12  Plains|LRW
+1  Vivid Creek|LRW
+1  Vivid Meadow|LRW
+
+2  Ballyrush Banneret|MOR
+2  Burrenton Bombardier|MOR
+1  Burrenton Shield-Bearers|MOR
+3  Cenn's Tactician|MOR
+2  Fencer Clique|MOR
+2  Inkfathom Divers|LRW
+2  Kinsbaile Skirmisher|LRW
+3  Kithkin Zephyrnaut|MOR
+1  Mosquito Guard|MOR
+2  Mothdust Changeling|MOR
+1  Preeminent Captain|MOR
+1  Reveillark|MOR
+2  Sentinels of Glen Elendra|LRW
+1  Turtleshell Changeling|LRW
+1  Veteran of the Depths|LRW
+
+1  Disperse|MOR
+1  Ego Erasure|LRW
+2  Oblivion Ring|LRW
+1  Redeem the Lost|MOR
+2  Swell of Courage|MOR
+2  Veteran's Armaments|MOR
+1  Wanderer's Twig|LRW
+1  Weight of Conscience|MOR
+
+[sideboard]

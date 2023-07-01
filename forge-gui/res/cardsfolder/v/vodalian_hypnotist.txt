@@ -1,0 +1,8 @@
+Name:Vodalian Hypnotist
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:{2}{B}, {T}: Target player discards a card. Activate only as a sorcery.

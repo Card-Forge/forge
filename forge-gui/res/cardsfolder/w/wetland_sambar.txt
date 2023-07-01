@@ -1,0 +1,5 @@
+Name:Wetland Sambar
+ManaCost:1 U
+Types:Creature Elk
+PT:2/1
+Oracle:

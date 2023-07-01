@@ -1,0 +1,5 @@
+Name:Ironroot Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+PT:3/5
+Oracle:

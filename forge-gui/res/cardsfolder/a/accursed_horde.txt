@@ -1,0 +1,7 @@
+Name:Accursed Horde
+ManaCost:3 B
+Types:Creature Zombie
+PT:3/3
+A:AB$ Pump | Cost$ 1 B | ValidTgts$ Zombie.attacking | TgtPrompt$ Select target attacking Zombie | KW$ Indestructible | SpellDescription$ Target attacking Zombie gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
+DeckHints:Type$Zombie
+Oracle:{1}{B}: Target attacking Zombie gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)

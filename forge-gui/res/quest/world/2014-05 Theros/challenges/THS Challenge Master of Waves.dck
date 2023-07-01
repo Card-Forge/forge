@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Master of Waves
+OpponentName=The Masters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nykthos, Shrine to Nyx
+HumanExtras=
+[metadata]
+Name=THS Challenge: Master of Waves
+Title=Masters of the Waves
+Difficulty=easy
+Description=Total power = 2m+(m(m+1)/2)(1+m)
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+30 Island|THS|2
+30 Master of Waves|THS

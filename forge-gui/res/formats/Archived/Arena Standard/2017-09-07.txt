@@ -1,0 +1,6 @@
+[format]
+Name:Arena Standard (2017-09-07)
+Type:Archived
+Subtype:Standard
+Effective:2017-09-07
+Sets:XLN

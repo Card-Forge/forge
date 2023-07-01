@@ -1,0 +1,8 @@
+Name:Soul Charmer
+ManaCost:2 W
+Types:Creature Human Rebel
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, you gain 2 life unless that creature's controller pays {2}.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredTargetController
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Soul Charmer deals combat damage to a creature, you gain 2 life unless that creature's controller pays {2}.

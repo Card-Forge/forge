@@ -1,0 +1,17 @@
+Name:Gyox, Brutal Carnivora
+ManaCost:1 B G
+Types:Legendary Creature Phyrexian Warlock
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put an oil counter on up to one target creature.
+SVar:TrigPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ OIL
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+counters_GE1_OIL | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a nontoken creature you control with one or more oil counters on it dies, conjure X duplicates of it into exile, where X is the number of oil counters on it. Those duplicates perpetually get +X/+X. Then shuffle those duplicates into your library.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCardLKICopy | Amount$ X | Zone$ Exile | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualPXPX | Name$ Gyox, Brutal Carnivora's Perpetual Effect | SetChosenNumber$ X | Duration$ Permanent | SubAbility$ DBShuffle
+SVar:PerpetualPXPX:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ Num | AddToughness$ Num | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Those duplicates perpetually get +X/+X.
+SVar:DBShuffle:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardCounters.OIL
+SVar:Num:Count$ChosenNumber
+DeckHints:Ability$Sacrifice|Counters
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, put an oil counter on up to one target creature.\nWhenever a nontoken creature you control with one or more oil counters on it dies, conjure X duplicates of it into exile, where X is the number of oil counters on it. Those duplicates perpetually get +X/+X. Then shuffle those duplicates into your library.

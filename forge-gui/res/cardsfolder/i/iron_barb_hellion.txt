@@ -1,0 +1,7 @@
+Name:Iron-Barb Hellion
+ManaCost:5 R
+Types:Creature Hellion Beast
+PT:5/4
+K:CARDNAME can't block.
+K:Haste
+Oracle:Haste\nIron-Barb Hellion can't block.

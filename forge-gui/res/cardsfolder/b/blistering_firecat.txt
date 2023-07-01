@@ -1,0 +1,12 @@
+Name:Blistering Firecat
+ManaCost:1 R R R
+Types:Creature Elemental Cat
+PT:7/1
+K:Morph:R R
+K:Trample
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste\nAt the beginning of the end step, sacrifice Blistering Firecat.\nMorph {R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

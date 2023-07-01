@@ -1,0 +1,9 @@
+Name:Earsplitting Rats
+ManaCost:3 B
+Types:Creature Rat
+PT:2/1
+A:AB$ Regenerate | Cost$ Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
+SVar:AIPreference:DiscardCost$Card.cmcLE1
+Oracle:When Earsplitting Rats enters the battlefield, each player discards a card.\nDiscard a card: Regenerate Earsplitting Rats.

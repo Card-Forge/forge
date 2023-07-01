@@ -1,0 +1,7 @@
+Name:Nurgle's Conscription
+ManaCost:4 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature from an opponent's graveyard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBChangeZoneAll | Tapped$ True | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Defined$ TargetedOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile
+DeckHas:Ability$Graveyard
+Oracle:Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard.

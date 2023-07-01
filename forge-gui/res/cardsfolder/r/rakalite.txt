@@ -1,0 +1,8 @@
+Name:Rakalite
+ManaCost:6
+Types:Artifact
+A:AB$ PreventDamage | Cost$ 2 | ValidTgts$ Any | Amount$ 1 | SubAbility$ DBReturn | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn. Return CARDNAME to its owner's hand at the beginning of the next end step.
+SVar:DBReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return CARDNAME to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+AI:RemoveDeck:All
+Oracle:{2}: Prevent the next 1 damage that would be dealt to any target this turn. Return Rakalite to its owner's hand at the beginning of the next end step.

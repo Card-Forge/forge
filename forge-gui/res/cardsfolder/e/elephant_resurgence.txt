@@ -1,0 +1,10 @@
+Name:Elephant Resurgence
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Token | TokenScript$ g_x_x_elephant_resurgence | TokenOwner$ Player | SpellDescription$ Each player creates a green Elephant creature token. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:SVar$Z1/Minus.Z2
+SVar:Z1:Count$ValidGraveyard Creature.YouOwn
+SVar:Z2:Count$ValidGraveyard Creature.OppOwn
+AI:RemoveDeck:Random
+Oracle:Each player creates a green Elephant creature token. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."

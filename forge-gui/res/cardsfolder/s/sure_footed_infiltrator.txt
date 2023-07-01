@@ -1,0 +1,10 @@
+Name:Sure-Footed Infiltrator
+ManaCost:3 U
+Types:Creature Merfolk Rogue
+PT:2/3
+A:AB$ Effect | Cost$ tapXType<1/Rogue.Other> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckNeeds:Type$Rogue
+Oracle:Tap another untapped Rogue you control: Sure-Footed Infiltrator can't be blocked this turn.\nWhenever Sure-Footed Infiltrator deals combat damage to a player, draw a card.

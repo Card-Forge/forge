@@ -1,0 +1,9 @@
+Name:Relic Seeker
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:Renown:1
+T:Mode$ BecomeRenowned | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME becomes renowned, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Equipment | ChangeNum$ 1 | ShuffleNonMandatory$ True
+DeckHas:Ability$Counters
+Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhen Relic Seeker becomes renowned, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle.

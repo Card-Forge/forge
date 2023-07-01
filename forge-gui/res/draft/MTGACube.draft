@@ -1,0 +1,6 @@
+Name:MTGACube
+DeckFile:MTGACube
+Singleton:True
+
+Booster: 15 Any
+NumPacks: 3

@@ -1,0 +1,7 @@
+Name:Oketra's Avenger
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:3/1
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, prevent all combat damage that would be dealt to it this turn. (An exerted creature won't untap during your next untap step.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt to CARDNAME. | SpellDescription$ When you do, prevent all combat damage that would be dealt to it this turn.
+Oracle:You may exert Oketra's Avenger as it attacks. When you do, prevent all combat damage that would be dealt to it this turn. (An exerted creature won't untap during your next untap step.)

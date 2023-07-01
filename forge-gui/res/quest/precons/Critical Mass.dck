@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Critical Mass
+Description=Sometimes not playing your cards can be more powerful than playing them. Creatures and spells that reward you for a full hand are coupled with devastating sweep cards that rebuild your resources while demolishing your opponent's.
+Deck Type=constructed
+Set=SOK
+Image=critical_mass.jpg
+[main]
+2 Godo's Irregulars|SOK
+1 Hand of Cruelty|SOK
+1 Sokenzan Renegade|SOK
+1 Akuta, Born of Ash|SOK
+3 Barrel Down Sokenzan|SOK
+1 Death of a Thousand Stings|SOK
+1 Thoughts of Ruin|SOK
+1 Locust Miser|SOK
+1 Sokenzan Spellblade|SOK
+1 Ghost-Lit Stalker|SOK
+1 Shuko|BOK
+1 Goblin Cohort|BOK
+2 Spiraling Embers|SOK
+1 Kagemaro's Clutch|SOK
+1 Okiba-Gang Shinobi|BOK
+1 Flames of the Blood Hand|BOK
+1 Cruel Deceiver|CHK
+13 Swamp|CHK
+11 Mountain|CHK
+1 Honden of Night's Reach|CHK
+1 Honden of Infinite Rage|CHK
+3 Akki Underling|SOK
+3 Deathmask Nezumi|SOK
+2 Kemuri-Onna|SOK
+2 Sink into Takenuma|SOK
+2 Gnat Miser|SOK
+1 Skull Collector|SOK
+[sideboard]

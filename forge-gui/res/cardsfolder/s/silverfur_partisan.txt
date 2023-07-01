@@ -1,0 +1,9 @@
+Name:Silverfur Partisan
+ManaCost:2 G
+Types:Creature Wolf Warrior
+PT:2/2
+K:Trample
+T:Mode$ BecomesTarget | ValidTarget$ Wolf.YouCtrl+inZoneBattlefield,Werewolf.YouCtrl+inZoneBattlefield | ValidSource$ Instant,Sorcery | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
+DeckHints:Type$Wolf|Werewolf
+Oracle:Trample\nWhenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.

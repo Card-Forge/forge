@@ -1,0 +1,6 @@
+Name:Kraul Warrior
+ManaCost:1 G
+Types:Creature Insect Warrior
+PT:2/2
+A:AB$ Pump | Cost$ 5 G | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+Oracle:{5}{G}: Kraul Warrior gets +3/+3 until end of turn.

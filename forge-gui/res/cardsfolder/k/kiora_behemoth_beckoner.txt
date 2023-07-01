@@ -1,0 +1,9 @@
+Name:Kiora, Behemoth Beckoner
+ManaCost:2 G/U
+Types:Legendary Planeswalker Kiora
+Loyalty:7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Untap | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ true | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Untap target Permanent.
+AI:RemoveDeck:Random
+Oracle:Whenever a creature with power 4 or greater enters the battlefield under your control, draw a card.\n[-1]: Untap target permanent.

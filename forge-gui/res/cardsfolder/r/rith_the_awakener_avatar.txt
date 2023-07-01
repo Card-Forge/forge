@@ -1,0 +1,7 @@
+Name:Rith, the Awakener Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+6
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you may pay {5}. If you do, create a 5/5 red Dragon creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ 5 | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | SpellDescription$ Put a 5/5 red Dragon creature token with flying onto the battlefield.
+Oracle:Hand +0, life +6\nWhenever a creature you control deals combat damage to a player, you may pay {5}. If you do, create a 5/5 red Dragon creature token with flying.

@@ -1,0 +1,6 @@
+Name:Icy Manalith
+ManaCost:no cost
+Types:Snow Artifact
+Colors:colorless
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

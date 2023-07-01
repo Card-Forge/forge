@@ -1,0 +1,7 @@
+Name:Orim, Samite Healer
+ManaCost:1 W W
+Types:Legendary Creature Human Cleric
+PT:1/3
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
+SVar:NonCombatPriority:1
+Oracle:{T}: Prevent the next 3 damage that would be dealt to any target this turn.

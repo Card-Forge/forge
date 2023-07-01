@@ -1,0 +1,8 @@
+Name:Sanctum Seeker
+ManaCost:2 B B
+Types:Creature Vampire Knight
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Creature.Vampire+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life.

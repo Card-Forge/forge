@@ -1,0 +1,5 @@
+Name:Cobblebrute
+ManaCost:3 R
+Types:Creature Elemental
+PT:5/2
+Oracle:

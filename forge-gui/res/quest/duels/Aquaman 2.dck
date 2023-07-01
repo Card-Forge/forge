@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Aquaman 2
+Title=Aquaman
+Difficulty=medium
+Description=WU Caw-Blade deck
+Icon=Aquaman.jpg
+Deck Type=constructed
+[main]
+1 Loxodon Warhammer
+1 Sword of Vengeance
+2 Condemn
+4 Wall of Omens
+4 Squadron Hawk
+4 Stoneforge Mystic
+4 Counterspell
+3 Remove Soul
+1 Sun Titan
+4 War Priest of Thune
+2 Day of Judgment
+4 Counsel of the Soratami
+5 Island|M12
+5 Plains|M12
+2 Flooded Strand
+4 Celestial Colonnade
+2 Glacial Fortress
+4 Seachrome Coast
+4 Tectonic Edge
+[sideboard]

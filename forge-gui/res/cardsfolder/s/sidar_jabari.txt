@@ -1,0 +1,8 @@
+Name:Sidar Jabari
+ManaCost:3 W
+Types:Legendary Creature Human Knight
+PT:2/2
+K:Flanking
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Sidar Jabari attacks, tap target creature defending player controls.

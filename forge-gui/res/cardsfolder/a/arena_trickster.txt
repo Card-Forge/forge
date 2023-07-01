@@ -1,0 +1,8 @@
+Name:Arena Trickster
+ManaCost:3 R
+Types:Creature Human Shaman
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your first spell during each opponent's turn, put a +1/+1 counter on Arena Trickster.

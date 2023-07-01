@@ -1,0 +1,8 @@
+Name:Notion Thief
+ManaCost:2 U B
+Types:Creature Human Rogue
+PT:3/1
+K:Flash
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RepYouDraw | NotFirstCardInDrawStep$ True | Description$ If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card.
+SVar:RepYouDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Flash\nIf an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card.

@@ -1,0 +1,7 @@
+Name:One-Clown Band
+ManaCost:1 R
+Types:Artifact Creature Clown Robot Bard
+PT:1/3
+A:AB$ Pump | Cost$ 2 R | ValidTgts$ Robot | NumAtt$ +2 | TgtPrompt$ Select target Robot | SpellDescription$ Target Robot gets +2/+0 until end of turn.
+DeckHints:Type$Robot
+Oracle:{2}{R}: Target Robot gets +2/+0 until end of turn.

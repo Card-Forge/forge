@@ -1,0 +1,5 @@
+Name:Torsten Von Ursus
+ManaCost:3 G G W
+Types:Legendary Creature Human Soldier
+PT:5/5
+Oracle:

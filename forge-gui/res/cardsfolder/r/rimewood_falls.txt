@@ -1,0 +1,5 @@
+Name:Rimewood Falls
+ManaCost:no cost
+Types:Snow Land Forest Island
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {G} or {U}.)\nRimewood Falls enters the battlefield tapped.

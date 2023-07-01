@@ -1,0 +1,14 @@
+Name:Maralen of the Mornsong Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-3
+T:Mode$ NewGame | Execute$ TrigPayLife | TriggerZones$ Command | TriggerDescription$ At the beginning of the game, you may pay any amount of life.
+SVar:TrigPayLife:AB$ StoreSVar | Cost$ PayLife<X> | SVar$ LifePaidOnNewGame | Type$ CountSVar | Expression$ X
+SVar:X:Count$xPaid
+SVar:LifePaidOnNewGame:Number$0
+S:Mode$ CantDraw | ValidPlayer$ You | EffectZone$ Command | Description$ You can't draw cards.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ At the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with CARDNAME. Put one of them into your hand, then shuffle.
+SVar:TrigDig:DB$ Dig | DigNum$ LifePaidOnNewGame | ChangeNum$ 1 | LibraryPosition$ 0 | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You
+AI:RemoveDeck:All
+Oracle:Hand +0, life -3\nAt the beginning of the game, you may pay any amount of life.\nYou can't draw cards.\nAt the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with Maralen of the Mornsong Avatar. Put one of them into your hand, then shuffle.

@@ -1,0 +1,8 @@
+Name:Goblin Kites
+ManaCost:1 R
+Types:Enchantment
+A:AB$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl+toughnessLE2 | TgtPrompt$ Choose creature you control with toughness 2 or less | KW$ Flying | SubAbility$ DelTrig | SpellDescription$ Target creature you control with toughness 2 or less gains flying until end of turn. Flip a coin at the beginning of the next end step. If you lose the flip, sacrifice that creature.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigFlip | RememberObjects$ Targeted | TriggerDescription$ Flip a coin at the beginning of the next end step. If you lose the flip, sacrifice that creature.
+SVar:TrigFlip:DB$ FlipACoin | LoseSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ SacrificeAll | Controller$ You | Defined$ DelayTriggerRememberedLKI
+Oracle:{R}: Target creature you control with toughness 2 or less gains flying until end of turn. Flip a coin at the beginning of the next end step. If you lose the flip, sacrifice that creature.

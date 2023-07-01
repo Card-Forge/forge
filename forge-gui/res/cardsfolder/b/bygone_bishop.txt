@@ -1,0 +1,9 @@
+Name:Bygone Bishop
+ManaCost:2 W
+Types:Creature Spirit Cleric
+PT:2/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Creature.cmcLE3 | ValidActivatingPlayer$ You | Execute$ DBInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with mana value 3 or less, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:Flying\nWhenever you cast a creature spell with mana value 3 or less, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

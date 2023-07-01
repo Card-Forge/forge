@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Winged Stallion 3
+Title=Winged Stallion
+Icon=WingedStallion.jpg
+Difficulty=hard
+Description=UW deck with emphasis on fliers.
+Deck Type=constructed
+[main]
+1 Air Elemental|4ED
+1 Azure Drake|LEG
+2 Dancing Scimitar|ARN
+2 Disenchant|4ED
+1 Holy Armor|LEB
+2 Holy Strength|4ED
+3 Howling Mine|4ED
+10 Island|4ED
+1 Ivory Tower|ATQ
+2 Mana Drain|LEG
+3 Moat|LEG
+2 Osai Vultures|LEG
+1 Phantom Monster|LEB
+2 Phantasmal Forces|LEB
+10 Plains|4ED
+3 Serra Angel|4ED
+4 Swords to Plowshares|LEB
+4 Thunder Spirit|LEG
+4 Tundra|LEB
+2 Unsummon|LEB
+[sideboard]

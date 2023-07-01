@@ -1,0 +1,11 @@
+Name:Incandescent Soulstoke
+ManaCost:2 R
+Types:Creature Elemental Shaman
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Elemental+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elemental creatures you control get +1/+1.
+A:AB$ ChangeZone | Cost$ 1 R T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Elemental+YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+SVar:PlayMain1:TRUE
+Oracle:Other Elemental creatures you control get +1/+1.\n{1}{R}, {T}: You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.

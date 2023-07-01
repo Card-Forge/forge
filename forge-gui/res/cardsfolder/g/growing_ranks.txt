@@ -1,0 +1,7 @@
+Name:Growing Ranks
+ManaCost:2 GW GW
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ DBCopy | TriggerDescription$ At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
+DeckNeeds:Ability$Token
+Oracle:At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)

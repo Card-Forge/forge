@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Forged in Battle
+Description=Raise your banners and take the field. Your enemies will crumble against the might of your heroes, who become more than mere mortals when empowered by your spells.
+Deck Type=constructed
+Set=BNG
+Image=forged_in_battle.jpg
+[Main]
+1 Akroan Conscriptor|BNG
+2 Akroan Crusader|THS
+1 Akroan Hoplite|THS
+1 Akroan Phalanx|BNG
+2 Akroan Skyguard|BNG
+2 Arena Athlete|THS
+1 Coordinated Assault|THS
+2 Cyclops of One-Eyed Pass|BNG
+1 Dauntless Onslaught|THS
+2 Elite Skirmisher|BNG
+2 Fall of the Hammer|BNG
+1 Forgestoker Dragon+|BNG
+2 Hold at Bay|BNG
+1 Labyrinth Champion|THS
+1 Loyal Pegasus|BNG
+2 Mortal's Ardor|BNG
+14 Mountain|THS
+2 Ordeal of Purphoros|THS
+1 Phalanx Leader|THS
+1 Pinnacle of Rage|BNG
+11 Plains|THS
+1 Priest of Iroas|THS
+1 Reckless Reveler|BNG
+2 Rise to the Challenge|BNG
+1 Searing Blood|BNG
+1 Two-Headed Cerberus|THS
+1 Wingsteed Rider|THS
+[sideboard]
+

@@ -1,0 +1,6 @@
+Name:Dwarven Miner
+ManaCost:1 R
+Types:Creature Dwarf
+PT:1/2
+A:AB$ Destroy | Cost$ 2 R T | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
+Oracle:{2}{R}, {T}: Destroy target nonbasic land.

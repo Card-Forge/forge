@@ -1,0 +1,18 @@
+[metadata]
+Code=J20
+Date=2020-01-01
+Name=Judge Gift Cards 2020
+Type=Promo
+ScryfallCode=J20
+
+[cards]
+1 R Arena Rector @Jason Rainville
+2 R Enlightened Tutor @Aaron Miller
+3 R Spellseeker @Anna Podedworna
+4 R Demonic Tutor @Anna Steinbauer
+5 R Infernal Tutor @Jason A. Engle
+6 R Gamble @Rudy Siswanto
+7 R Birthing Pod @Titus Lunter
+8 R Sylvan Tutor @Iris Compiet
+9 R Sterling Grove @Seb McKinnon
+10 R Eye of Ugin @Daniel Ljunggren

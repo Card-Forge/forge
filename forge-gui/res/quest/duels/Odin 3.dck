@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Odin 3
+Title=Odin
+Difficulty=hard
+Description=WU deck with Thistledown Liege and Grand Arbiter Augustin IV
+Icon=Odin.jpg
+Deck Type=constructed
+[main]
+2 Augury Adept
+4 Bant Sureblade
+2 Esper Cormorants
+4 Esper Stormblade
+2 Lyev Skyknight
+4 Sky Hussar
+4 Thistledown Liege
+1 Grand Arbiter Augustin IV
+1 Isperia, Supreme Judge
+4 Absorb
+4 Curse of Chains
+4 Steel of the Godhead
+4 Celestial Colonnade
+4 Glacial Fortress
+6 Island|M12
+6 Plains|M12
+4 Seachrome Coast
+[sideboard]

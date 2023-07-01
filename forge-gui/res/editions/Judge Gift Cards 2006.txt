@@ -1,0 +1,12 @@
+[metadata]
+Code=G06
+Date=2006-01-01
+Name=Judge Gift Cards 2006
+Type=Promo
+ScryfallCode=G06
+
+[cards]
+1 R Exalted Angel @Rob Alexander
+2 R Grim Lavamancer @Michael Sutfin
+3 R Meddling Mage @Nottsuo
+4 R Pernicious Deed @Ittoku

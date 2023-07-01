@@ -1,0 +1,6 @@
+Name:Sigiled Behemoth
+ManaCost:4 G W
+Types:Creature Beast
+PT:5/4
+K:Exalted
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

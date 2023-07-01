@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=HML 2 Gimmick: The Aviary
+Title=The Aviary
+Difficulty=medium
+Description="No one can catch what won't be caught." -Kakra, sea troll
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Abbey Gargoyles|HML
+4 Faerie Noble|HML
+8 Forest|LEB|3
+2 Giant Albatross|HML|1
+2 Giant Albatross|HML|2
+6 Island|LEB|3
+2 Mesa Falcon|HML|1
+2 Mesa Falcon|HML|2
+10 Plains|LEB|3
+4 Renewal|HML
+4 Roterothopter|HML
+4 Sea Sprite|HML
+4 Serra Aviary|HML
+2 Soraya the Falconer|HML
+2 Willow Faerie|HML|1
+2 Willow Faerie|HML|2

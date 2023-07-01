@@ -1,0 +1,7 @@
+Name:Undead Leotau
+ManaCost:5 B
+Types:Creature Zombie Cat
+PT:3/4
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+K:Unearth:2 B
+Oracle:{R}: Undead Leotau gets +1/-1 until end of turn.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

@@ -1,0 +1,8 @@
+Name:Challenger Troll
+ManaCost:4 G
+Types:Creature Troll
+PT:6/5
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl+powerGE4 | Max$ 1 | Description$ Each creature you control with power 4 or greater can't be blocked by more than one creature.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Each creature you control with power 4 or greater can't be blocked by more than one creature.

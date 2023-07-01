@@ -1,0 +1,22 @@
+[metadata]
+Title=Paint-by-Numbers: Mono-Red
+Difficulty=very hard
+Description=Built according to Frank Karsten's Pick Order and mana curve.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD 4 Pick Order: 104 Red
+[Main]
+4 Bonecrusher Giant|ELD|2
+4 Castle Embereth|ELD|2
+4 Dwarven Mine|ELD
+3 Embercleave|ELD|2
+2 Merchant of the Vale|ELD|2
+18 Mountain|ELD|4
+4 Opportunistic Dragon|ELD|2
+2 Rampart Smasher|ELD
+4 Robber of the Rich|ELD|2
+3 Scorching Dragonfire|ELD
+4 Slaying Fire|ELD|1
+4 Stonecoil Serpent|ELD|2
+1 Syr Carah, the Bold|ELD
+3 Torbran, Thane of Red Fell|ELD|2

@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Bay Falcon
+OpponentName=The Bay Falcons
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Barbed Foliage
+[metadata]
+Name=MIR Challenge: Bay Falcon
+Title=The Bay Falcons
+Difficulty=easy
+Description="Wear the falcon's feathers in your hair- be fast as the falcon, bright as the Sun." -"Rise on Wings," Zhalfirin song
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+40 Bay Falcon|MIR
+20 Island|MIR|1

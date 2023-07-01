@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Spiderman 3
+Title=Spiderman
+Difficulty=hard
+Description=Mono W weenie deck with Honor of the Pure and Mass Calcify
+Icon=Spiderman.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+18 Plains|M12
+4 Flagstones of Trokair
+1 Karakas
+1 Mox Pearl
+1 Isamaru, Hound of Konda
+2 Elite Vanguard
+2 Savannah Lions
+2 Soldier of the Pantheon
+2 Soul Warden
+4 Path to Exile
+2 Soltari Priest
+2 Hand of Honor
+2 Kazandu Blademaster
+2 Knight of Meadowgrain
+1 Leonin Skyhunter
+1 Silver Knight
+1 Soltari Monk
+1 White Knight
+2 Aven Riftwatcher
+1 Elspeth, Knight-Errant
+4 Honor of the Pure
+1 Ajani Goldmane
+1 Mass Calcify
+2 Ranger of Eos
+[sideboard]

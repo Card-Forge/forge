@@ -1,0 +1,9 @@
+Name:Phyrexian Triniform
+ManaCost:9
+Types:Artifact Creature Phyrexian Golem
+PT:9/9
+K:Encore:12
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create three 3/3 colorless Phyrexian Golem artifact creature tokens.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_phyrexian_golem | TokenAmount$ 3
+DeckHas:Ability$Token
+Oracle:When Phyrexian Triniform dies, create three 3/3 colorless Phyrexian Golem artifact creature tokens.\nEncore {12} ({12}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

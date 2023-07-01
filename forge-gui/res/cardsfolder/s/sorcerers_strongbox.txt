@@ -1,0 +1,7 @@
+Name:Sorcerer's Strongbox
+ManaCost:4
+Types:Artifact
+A:AB$ FlipACoin | Cost$ 2 T | WinSubAbility$ DBSac | SpellDescription$ Flip a coin. If you win the flip, sacrifice CARDNAME and draw three cards.
+SVar:DBSac:DB$ Sacrifice | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+Oracle:{2}, {T}: Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.

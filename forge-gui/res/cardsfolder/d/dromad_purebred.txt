@@ -1,0 +1,8 @@
+Name:Dromad Purebred
+ManaCost:4 W
+Types:Creature Camel Beast
+PT:1/5
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Dromad Purebred is dealt damage, you gain 1 life.

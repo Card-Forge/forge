@@ -1,0 +1,8 @@
+Name:Wolf of Devil's Breach
+ManaCost:3 R R
+Types:Creature Elemental Wolf
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}{R} and discard a card. If you do, CARDNAME deals damage to target creature or planeswalker equal to the discarded card's mana value.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 1 R Discard<1/Card> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X
+SVar:X:Discarded$CardManaCost
+Oracle:Whenever Wolf of Devil's Breach attacks, you may pay {1}{R} and discard a card. If you do, Wolf of Devil's Breach deals damage to target creature or planeswalker equal to the discarded card's mana value.

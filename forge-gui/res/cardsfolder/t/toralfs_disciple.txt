@@ -1,0 +1,9 @@
+Name:Toralf's Disciple
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:3/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME attacks, conjure four cards named Lightning Bolt into your library, then shuffle.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Lightning Bolt | Zone$ Library | Amount$ 4
+DeckHas:Type$Instant
+Oracle:Haste\nWhenever Toralf's Disciple attacks, conjure four cards named Lightning Bolt into your library, then shuffle.

@@ -1,0 +1,7 @@
+Name:Cerodon Yearling
+ManaCost:R W
+Types:Creature Beast
+PT:2/2
+K:Vigilance
+K:Haste
+Oracle:Vigilance, haste

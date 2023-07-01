@@ -1,0 +1,6 @@
+Name:Spellskite
+ManaCost:2
+Types:Artifact Creature Phyrexian Horror
+PT:0/4
+A:AB$ ChangeTargets | Cost$ UP | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card,Emblem | DefinedMagnet$ Self | ChangeSingleTarget$ True | SpellDescription$ Change a target of target spell or ability to CARDNAME.
+Oracle:{U/P}: Change a target of target spell or ability to Spellskite. ({U/P} can be paid with either {U} or 2 life.)

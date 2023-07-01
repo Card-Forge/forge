@@ -1,0 +1,7 @@
+Name:Skyhunter Patrol
+ManaCost:2 W W
+Types:Creature Cat Knight
+PT:2/3
+K:Flying
+K:First Strike
+Oracle:Flying, first strike (This creature can't be blocked except by creatures with flying or reach, and it deals combat damage before creatures without first strike.)

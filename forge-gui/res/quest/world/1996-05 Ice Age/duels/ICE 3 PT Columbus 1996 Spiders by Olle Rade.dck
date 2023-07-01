@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=ICE 3 PT Columbus 1996: Spiders by Olle Rade
+Title=Spiders
+Difficulty=Hard
+Description=Played by champion Olle Rade at Pro Tour: Columbus 1996.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Deadly Insect|ALL|1
+2 Deadly Insect|ALL|2
+3 Forest|ICE|1
+2 Forest|ICE|2
+2 Forest|ICE|3
+4 Fyndhorn Elves|ICE
+2 Giant Growth|ICE
+4 Giant Trap Door Spider|ICE
+1 Gorilla Shaman|ALL|1
+4 Incinerate|ICE
+1 Jokulhaups|ICE
+4 Karplusan Forest|ICE
+3 Mountain|ICE|1
+2 Mountain|ICE|2
+2 Mountain|ICE|3
+2 Orcish Cannoneers|ICE
+3 Pillage|ALL
+1 Pyroclasm|ICE
+1 Storm Shaman|ALL|1
+1 Storm Shaman|ALL|2
+2 Stormbind|ICE
+4 Urza's Bauble|ICE
+4 Woolly Spider|ICE
+[Sideboard]
+1 Anarchy|ICE
+2 Essence Filter|ICE
+1 Icy Manipulator|10E
+1 Jester's Cap|9ED
+1 Jokulhaups|6ED
+1 Monsoon|ICE
+2 Pyroblast|5ED
+2 Pyroclasm|M11
+2 Vexing Arcanix|8ED
+1 Zuran Orb|ICE

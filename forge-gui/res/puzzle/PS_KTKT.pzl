@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Khans of Tarkir Throwback Puzzle
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/07/069.-KTK1-2.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You own both Satyr Wayfinders, but one is controlled by your opponent with Dragonlord Silumgar's ability. Start with no cards in either graveyard.
+[state]
+humanlife=20
+ailife=16
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Rite of Undoing;Silumgar Butcher;Sunbringer's Touch;Debilitating Injury
+humanbattlefield=Dictate of Karametra;Polukranos, World Eater;Satyr Wayfinder;Rakshasa Vizier;Forest|Set:KTK;Forest|Set:KTK;Forest|Set:KTK;Island|Set:KTK;Island|Set:KTK;Swamp|Set:KTK;Swamp|Set:KTK;Satyr Wayfinder|Id:1
+aibattlefield=Silumgar Sorcerer;Palace Familiar;Vulturous Aven;Dragonlord Silumgar|ExecuteScript:TrigChange->1

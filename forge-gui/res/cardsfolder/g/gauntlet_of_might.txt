@@ -1,0 +1,9 @@
+Name:Gauntlet of Might
+ManaCost:4
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.Red | AddPower$ 1 | AddToughness$ 1 | Description$ Red creatures get +1/+1.
+T:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Mountain is tapped for mana, its controller adds an additional {R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1 | Defined$ TriggeredCardController
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red & Type$Mountain
+Oracle:Red creatures get +1/+1.\nWhenever a Mountain is tapped for mana, its controller adds an additional {R}.

@@ -1,0 +1,11 @@
+Name:Plague Boiler
+ManaCost:3
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutPlagueCounter | TriggerDescription$ At the beginning of your upkeep, put a plague counter on CARDNAME.
+SVar:PutPlagueCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
+A:AB$ AddOrRemoveCounter | Cost$ 1 B G | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1 | SpellDescription$ Put a plague counter on CARDNAME or remove a plague counter from it.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_PLAGUE | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
+SVar:TrigDestroyAll:AB$ DestroyAll | ValidCards$ Permanent.nonLand | Cost$ Mandatory Sac<1/CARDNAME>
+AI:RemoveDeck:All
+DeckHas:Ability$Counters|Sacrifice
+Oracle:At the beginning of your upkeep, put a plague counter on Plague Boiler.\n{1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.\nWhen Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.

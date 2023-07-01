@@ -1,0 +1,7 @@
+Name:Gorilla Shaman
+ManaCost:R
+Types:Creature Ape Shaman
+PT:1/1
+A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact.nonCreature+cmcEQX | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact with mana value X.
+SVar:X:Count$xPaid
+Oracle:{X}{X}{1}: Destroy target noncreature artifact with mana value X.

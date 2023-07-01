@@ -1,0 +1,10 @@
+Name:Covetous Dragon
+ManaCost:4 R
+Types:Creature Dragon
+PT:6/5
+K:Flying
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no artifacts, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Artifact.YouCtrl
+AI:RemoveDeck:Random
+Oracle:Flying\nWhen you control no artifacts, sacrifice Covetous Dragon.

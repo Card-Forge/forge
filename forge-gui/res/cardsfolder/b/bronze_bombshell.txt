@@ -1,0 +1,10 @@
+Name:Bronze Bombshell
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/1
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+OwnerDoesntControl | Execute$ TrigSac | TriggerDescription$ When a player other than CARDNAME's owner controls it, that player sacrifices it. If the player does, CARDNAME deals 7 damage to the player.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ RememberedController | NumDmg$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DonateMe:5
+Oracle:When a player other than Bronze Bombshell's owner controls it, that player sacrifices it. If the player does, Bronze Bombshell deals 7 damage to the player.

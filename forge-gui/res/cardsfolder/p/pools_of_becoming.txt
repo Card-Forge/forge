@@ -1,0 +1,14 @@
+Name:Pools of Becoming
+ManaCost:no cost
+Types:Plane Bolas's Meditation Realm
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
+SVar:TrigChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Amount
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, reveal the top three cards of your planar deck. Each of the revealed cards' {CHAOS} abilities triggers. Then put the revealed cards on the bottom of your planar deck in any order.
+SVar:RolledChaos:DB$ PeekAndReveal | PeekAmount$ 3 | NoPeek$ True | SourceZone$ PlanarDeck | RememberRevealed$ True | SubAbility$ DBRunChaos
+SVar:DBRunChaos:DB$ RunChaos | Defined$ Remembered | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ PlanarDeck | Destination$ PlanarDeck | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:At the beginning of your end step, put the cards in your hand on the bottom of your library in any order, then draw that many cards.\nWhenever chaos ensues, reveal the top three cards of your planar deck. Each of the revealed cards' {CHAOS} abilities triggers. Then put the revealed cards on the bottom of your planar deck in any order.

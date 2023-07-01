@@ -1,0 +1,8 @@
+Name:Observant Alseid
+ManaCost:2 W
+Types:Enchantment Creature Nymph
+PT:2/2
+K:Bestow:4 W
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
+Oracle:Bestow {4}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nVigilance\nEnchanted creature gets +2/+2 and has vigilance.

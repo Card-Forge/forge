@@ -1,0 +1,7 @@
+Name:Benevolent Ancestor
+ManaCost:2 W
+Types:Creature Spirit
+PT:0/4
+K:Defender
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+Oracle:Defender (This creature can't attack.)\n{T}: Prevent the next 1 damage that would be dealt to any target this turn.

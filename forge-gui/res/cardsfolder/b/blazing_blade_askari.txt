@@ -1,0 +1,7 @@
+Name:Blazing Blade Askari
+ManaCost:2 R
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Colors$ Colorless | OverwriteColors$ True | SpellDescription$ CARDNAME becomes colorless until end of turn.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{2}: Blazing Blade Askari becomes colorless until end of turn.

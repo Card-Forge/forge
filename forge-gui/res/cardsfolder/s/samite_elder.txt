@@ -1,0 +1,7 @@
+Name:Samite Elder
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:1/2
+A:AB$ ProtectionAll | Cost$ T | ValidCards$ Creature.YouCtrl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ TargetedCardColor | StackDescription$ SpellDescription | SpellDescription$ Creatures you control gain protection from the colors of target permanent you control until end of turn.
+AI:RemoveDeck:All
+Oracle:{T}: Creatures you control gain protection from the colors of target permanent you control until end of turn.

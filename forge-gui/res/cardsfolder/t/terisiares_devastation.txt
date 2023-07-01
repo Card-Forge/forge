@@ -1,0 +1,11 @@
+Name:Terisiare's Devastation
+ManaCost:X 2 B B
+Types:Sorcery
+A:SP$ LoseLife | LifeAmount$ X | SubAbility$ DBToken | SpellDescription$ You lose X life and create X tapped Powerstone tokens. Then all creatures get -1/-1 until end of turn for each artifact you control. (The tokens are artifacts with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_powerstone | TokenTapped$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -Y | NumDef$ -Y | StackDescription$ Then all creatures get -1/-1 until end of turn for each artifact {p:You} controls.
+SVar:Y:Count$Valid Artifact.YouCtrl
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Artifact
+DeckHints:Type$Artifact
+Oracle:You lose X life and create X tapped Powerstone tokens. Then all creatures get -1/-1 until end of turn for each artifact you control. (The tokens are artifacts with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

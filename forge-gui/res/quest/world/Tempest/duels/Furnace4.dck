@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Title=Furnace
+Icon=Dungeon Crawling Red.jpg
+Difficulty=very hard
+Description=Red aggro deck with goblins, furnace, burn spells.
+Deck Type=constructed
+Profile=Reckless
+Name=Furnace4
+[Main]
+4 Canyon Wildcat|TMP
+4 Furnace of Rath|TMP
+4 Kindle|TMP
+4 Mogg Fanatic|TMP
+4 Mogg Flunkies|STH
+4 Mogg Maniac|STH
+2 Mogg Raider|TMP
+2 Shock|STH
+1 Mountain|TMP|1
+3 Mountain|TMP|2
+8 Mountain|TMP|3
+4 Mountain|TMP|4
+4 Price of Progress|EXO
+4 Raging Goblin|EXO
+4 Sudden Impact|TMP
+4 Wasteland|TMP

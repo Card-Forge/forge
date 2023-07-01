@@ -1,0 +1,10 @@
+Name:Nacatl Hunt-Pride
+ManaCost:5 W
+Types:Creature Cat Warrior
+PT:5/4
+K:Vigilance
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
+A:AB$ Effect | Cost$ G T | ValidTgts$ Creature | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ MustBlock | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+AI:RemoveDeck:All
+Oracle:Vigilance\n{R}, {T}: Target creature can't block this turn.\n{G}, {T}: Target creature blocks this turn if able.

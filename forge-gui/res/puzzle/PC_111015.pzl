@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 111015 - Indigestion
+URL:http://www.gatheringmagic.com/seanuy-111015-indigestion/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=main2
+HumanLife=5
+AILife=6
+humanhand=Cliffside Lookout|Set:BFZ; Kozilek's Sentinel|Set:BFZ; Encircling Fissure|Set:BFZ; Sheer Drop|Set:BFZ
+humangraveyard=
+humanlibrary=Evolving Wilds|Set:BFZ
+humanbattlefield=Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Kozilek's Sentinel|Set:BFZ; Makindi Patrol|Set:BFZ; Hero of Goma Fada|Set:BFZ; Barrage Tyrant|Set:BFZ
+aibattlefield=Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Sludge Crawler|Set:BFZ; Benthic Infiltrator|Set:BFZ; Benthic Infiltrator|Set:BFZ; Dominator Drone|Set:BFZ; Mind Raker|Set:BFZ; Kozilek's Channeler|Set:BFZ
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

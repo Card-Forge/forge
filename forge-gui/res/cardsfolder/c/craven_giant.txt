@@ -1,0 +1,6 @@
+Name:Craven Giant
+ManaCost:2 R
+Types:Creature Giant
+PT:4/1
+K:CARDNAME can't block.
+Oracle:Craven Giant can't block.

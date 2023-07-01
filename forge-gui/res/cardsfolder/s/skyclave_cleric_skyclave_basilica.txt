@@ -1,0 +1,18 @@
+Name:Skyclave Cleric
+ManaCost:1 W
+Types:Creature Kor Cleric
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+AlternateMode:Modal
+Oracle:When Skyclave Cleric enters the battlefield, you gain 2 life.
+
+ALTERNATE
+
+Name:Skyclave Basilica
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:Skyclave Basilica enters the battlefield tapped.\n{T}: Add {W}.

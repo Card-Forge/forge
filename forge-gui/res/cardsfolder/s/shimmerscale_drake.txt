@@ -1,0 +1,7 @@
+Name:Shimmerscale Drake
+ManaCost:4 U
+Types:Creature Drake
+PT:3/4
+K:Flying
+K:Cycling:2
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)

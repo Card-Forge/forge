@@ -1,0 +1,6 @@
+Name:Glowrider
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/1
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
+Oracle:Noncreature spells cost {1} more to cast.

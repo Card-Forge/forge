@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 112415 - The Art of the Lie
+URL:http://www.gatheringmagic.com/seanuy-112415-the-art-of-the-lie/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=3
+AILife=12
+humanhand=Sky Hussar
+humangraveyard=Sea Gate Oracle; Weathered Wayfarer; Azorius Guildmage; Wall of Omens
+humanlibrary=Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; 
+humanbattlefield=Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Island|Set:C15; Island|Set:C15; Island|Set:C15; Island|Set:C15; Grixis Illusionist; True Believer; Kitsune Palliator; Courtly Provocateur; Headless Skaab; Djinn of Infinite Deceits; Hot Soup
+aibattlefield=Swamp|Set:C15|Tapped; Swamp|Set:C15|Tapped; Swamp|Set:C15|Tapped; Swamp|Set:C15|Tapped; Swamp|Set:C15|Tapped; Gaea's Cradle|Tapped; Quirion Ranger; Wight of Precinct Six; Plague Spitter; Tiger Claws|AttachedTo:420; Corpse Augur|Id:420; Thrashing Wumpus; Primeval Force|Tapped; Jungle Weaver
+aihand=
+aigraveyard=Fleshbag Marauder; Acidic Slime
+ailibrary=Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; Swamp|Set:C15; 
+aiexile=

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gambit 2
+Title=Gambit
+Difficulty=medium
+Description=URG Bounce deck with Taurean Mauler and Forgotten Ancient
+Icon=Gambit.jpg
+Deck Type=constructed
+[main]
+1 Predatory Hunger
+4 Vapor Snag
+3 Veil of Birds
+4 Snap
+3 Veiled Apparition
+3 Taurean Mauler
+3 Managorger Hydra
+3 AEther Adept
+3 Man-o'-War
+1 Equilibrium
+1 Rhystic Study
+2 Soul Barrier
+3 Forgotten Ancient
+1 AEther Sting
+1 Isolation Cell
+1 Guided Passage
+4 Island|ISD
+2 Forest|ISD
+2 Mountain|ISD
+1 Taiga
+1 Tropical Island
+1 Volcanic Island
+1 Wooded Foothills
+1 Scalding Tarn
+1 Misty Rainforest
+2 Hinterland Harbor
+2 Sulfur Falls
+1 Copperline Gorge
+4 Frontier Bivouac
+[sideboard]

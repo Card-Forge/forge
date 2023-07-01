@@ -1,0 +1,11 @@
+Name:Timebender
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+K:Morph:U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, ABILITY
+SVar:TrigChoose:DB$ Charm | CharmNum$ 1 | Choices$ LoseTime,GainTime
+SVar:LoseTime:DB$ RemoveCounter | ValidTgts$ Permanent.inZoneBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+inZoneBattlefield+YouDontCtrl,Card.suspended+YouCtrl | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Remove two time counters from target permanent or suspended card.
+SVar:GainTime:DB$ PutCounter | ValidTgts$ Permanent.counters_GE1_TIME+inZoneBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+inZoneBattlefield+YouCtrl,Card.suspended+YouDontCtrl | TgtPrompt$ Select target permanent with a time counter on it or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Put two time counters target permanent with a time counter on it or suspended card.
+AI:RemoveDeck:All
+Oracle:Morph {U}\nWhen Timebender is turned face up, choose one —\n• Remove two time counters from target permanent or suspended card.\n• Put two time counters on target permanent with a time counter on it or suspended card.

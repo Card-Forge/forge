@@ -1,0 +1,12 @@
+Name:Killer Service
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a number of Food tokens equal to the number of opponents you have. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac
+SVar:X:PlayerCountOpponents$Amount
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token.
+SVar:TrigToken:AB$ Token | Cost$ 2 Sac<1/Permanent.token/token> | TokenScript$ g_4_4_rhino_warrior
+SVar:AIPreference:SacCost$Card.token+Food,Card.token+Treasure,Card.token+Artifact,Card.token+powerLE2+toughnessLE2
+DeckHas:Ability$Token|Food|Sacrifice & Type$Artifact|Food|Rhino|Warrior
+DeckHints:Ability$Food
+Oracle:When Killer Service enters the battlefield, create a number of Food tokens equal to the number of opponents you have. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nAt the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token.

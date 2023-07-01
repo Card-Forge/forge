@@ -1,0 +1,10 @@
+Name:General's Enforcer
+ManaCost:W B
+Types:Creature Human Soldier
+PT:2/3
+S:Mode$ Continuous | Affected$ Human.YouCtrl+Legendary | AddKeyword$ Indestructible | Description$ Legendary Humans you control have indestructible.
+A:AB$ ChangeZone | Cost$ 2 W B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. If it was a creature card, create a 1/1 white Human Soldier creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StackDescription$ If it was a creature card, create a 1/1 white Human Soldier creature token.
+DeckHints:Type$Human
+DeckHas:Ability$Token
+Oracle:Legendary Humans you control have indestructible.\n{2}{W}{B}: Exile target card from a graveyard. If it was a creature card, create a 1/1 white Human Soldier creature token.

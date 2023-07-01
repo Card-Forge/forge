@@ -1,0 +1,9 @@
+Name:Runaway Steam-Kin
+ManaCost:1 R
+Types:Creature Elemental
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_P1P1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a red spell, if CARDNAME has fewer than three +1/+1 counters on it, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Mana | Cost$ SubCounter<3/P1P1> | Produced$ R | Amount$ 3 | SpellDescription$ Add {R}{R}{R}.
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a red spell, if Runaway Steam-Kin has fewer than three +1/+1 counters on it, put a +1/+1 counter on Runaway Steam-Kin.\nRemove three +1/+1 counters from Runaway Steam-Kin: Add {R}{R}{R}.

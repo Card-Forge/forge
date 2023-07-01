@@ -1,0 +1,21 @@
+Name:Callow Jushi
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
+DeckHints:Type$Spirit|Arcane
+AlternateMode:Flip
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Callow Jushi.\nAt the beginning of the end step, if there are two or more ki counters on Callow Jushi, you may flip it.
+
+ALTERNATE
+
+Name:Jaraku the Interloper
+ManaCost:1 U U
+Colors:blue
+Types:Legendary Creature Spirit
+PT:3/4
+A:AB$ Counter | Cost$ SubCounter<1/KI> | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell. | Destination$ Graveyard | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays 2.
+Oracle:Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.

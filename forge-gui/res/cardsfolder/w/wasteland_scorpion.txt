@@ -1,0 +1,7 @@
+Name:Wasteland Scorpion
+ManaCost:2 B
+Types:Creature Scorpion
+PT:2/2
+K:Deathtouch
+K:Cycling:2
+Oracle:Deathtouch\nCycling {2} ({2}, Discard this card: Draw a card.)

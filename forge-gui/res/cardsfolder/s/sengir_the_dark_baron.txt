@@ -1,0 +1,13 @@
+Name:Sengir, the Dark Baron
+ManaCost:4 B B
+Types:Legendary Creature Vampire Noble
+PT:4/4
+K:Flying
+K:Partner
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ LosesGame | ValidPlayer$ Player.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another player loses the game, you gain life equal to that player's life total as the turn began.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredPlayer$LifeStartedThisTurnWith
+DeckHas:Ability$Counters|LifeGain
+Oracle:Flying\nWhenever another creature dies, put two +1/+1 counters on Sengir, the Dark Baron.\nWhenever another player loses the game, you gain life equal to that player's life total as the turn began.\nPartner (You can have two commanders if both have partner.)

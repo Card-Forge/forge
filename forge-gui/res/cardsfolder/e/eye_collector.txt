@@ -1,0 +1,9 @@
+Name:Eye Collector
+ManaCost:B
+Types:Creature Faerie
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player mills a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ Player
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhenever Eye Collector deals combat damage to a player, each player mills a card.

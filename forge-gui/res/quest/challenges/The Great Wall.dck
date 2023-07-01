@@ -1,0 +1,34 @@
+[quest]
+id=38
+AILife=20
+Repeat=true
+Wins=15
+Card Reward=3 creature rares
+Credit Reward=500
+HumanExtras=
+AIExtras=Great Wall|Ageless Sentinels|Ageless Sentinels|Wall of Essence|Wall of Essence|Fog Bank|Fog Bank|Personal Sanctuary|Karmic Justice
+[metadata]
+Name=quest38
+Title=The Great Wall
+Difficulty=hard
+Description=Your opponent starts the game with lots of creatures with defender to block your attacks. His deck on the other hand is designed to counter and prevent any non-creature spell you want to play. His offense is weak though, so you might find a way to break his defense...
+Icon=The Great Wall.jpg
+Deck Type=constructed
+[main]
+8 Plains
+8 Island
+4 Tundra
+4 Seachrome Coast
+2 Rebuff the Wicked
+2 Silence
+2 Abeyance
+4 Telim'Tor's Darts
+4 Disenchant
+4 Negate
+2 Scatter Arc
+4 Spell Pierce
+4 Stubborn Denial
+2 Hindering Light
+4 Accumulated Knowledge
+2 Wall of Reverence
+[sideboard]

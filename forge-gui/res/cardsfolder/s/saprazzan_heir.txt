@@ -1,0 +1,8 @@
+Name:Saprazzan Heir
+ManaCost:1 U
+Types:Creature Merfolk
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | OptionalDecider$ You
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Saprazzan Heir becomes blocked, you may draw three cards.

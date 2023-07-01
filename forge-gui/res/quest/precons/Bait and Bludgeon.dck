@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bait & Bludgeon
+Description=With "Bait & Bludgeon," your opponent will have to develop an affinity for punishment or suffer the consequences. This deck is heavy with the new affinity cards, which cost less to play for each aftifact you control.
+Deck Type=constructed
+Set=MRD
+Image=bait_and_bludgeon.jpg
+[main]
+2 AEther Spellbomb|MRD
+2 Assert Authority|MRD
+2 Bottle Gnomes|MRD
+1 Broodstar|MRD
+3 Frogmite|MRD
+2 Irradiate|MRD
+11 Island|MRD
+2 Leaden Myr|MRD
+1 Lodestone Myr|MRD
+3 Myr Enforcer|MRD
+2 Myr Retriever|MRD
+2 Nim Shrieker|MRD
+1 Scale of Chiss-Goria|MRD
+4 Seat of the Synod|MRD
+1 Serum Tank|MRD
+2 Silver Myr|MRD
+2 Somber Hoverguard|MRD
+2 Steel Wall|MRD
+3 Swamp|MRD
+4 Talisman of Dominance|MRD
+2 Thirst for Knowledge|MRD
+1 Thoughtcast|MRD
+1 Tooth of Chiss-Goria|MRD
+4 Vault of Whispers|MRD
+[sideboard]

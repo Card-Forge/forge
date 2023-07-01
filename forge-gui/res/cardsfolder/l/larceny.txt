@@ -1,0 +1,7 @@
+Name:Larceny
+ManaCost:3 B B
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a creature you control deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control deals combat damage to a player, that player discards a card.

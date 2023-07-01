@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Spyro 3
+Title=Spyro
+Difficulty=hard
+Description=WUBRG Dragon deck with Haven of the Spirit Dragon
+Icon=Spyro.jpg
+Deck Type=constructed
+[main]
+3 Ancient Ziggurat
+1 Badlands
+4 Cavern of Souls
+4 Haven of the Spirit Dragon
+2 Mountain
+1 Plateau
+1 Taiga
+2 Tarnished Citadel
+4 Tendo Ice Bridge
+1 Volcanic Island
+1 Mana Crypt
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+1 Sol Ring
+1 Atarka, World Render
+1 Balefire Dragon
+1 Broodmate Dragon
+1 Dragonlord Dromoka
+1 Dragonlord Ojutai
+3 Dragonlord's Servant
+3 Dragonspeaker Shaman
+1 Dromoka, the Eternal
+1 Icefall Regent
+1 Karrthus, Tyrant of Jund
+1 Kolaghan, the Storm's Fury
+1 Necromaster Dragon
+1 Ojutai, Soul of Winter
+1 Savage Ventmaw
+2 Scourge of Valkas
+1 Siege Dragon
+1 Silumgar, the Drifting Death
+1 Spellbound Dragon
+1 Steel Hellkite
+1 Sunscorch Regent
+1 Thunder Dragon
+1 Thunderbreak Regent
+1 Utvara Hellkite
+1 Call to the Kindred
+1 Descendants' Path
+[sideboard]

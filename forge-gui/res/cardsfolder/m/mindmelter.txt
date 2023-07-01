@@ -1,0 +1,9 @@
+Name:Mindmelter
+ManaCost:1 U B
+Types:Creature Eldrazi Drone
+PT:2/2
+K:Devoid
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+A:AB$ ChangeZone | Cost$ 3 C | ValidTgts$ Opponent | SorcerySpeed$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | IsCurse$ True | Mandatory$ True | Hidden$ True | StackDescription$ {p:Targeted} exiles a card from their hand. | SpellDescription$ Target opponent exiles a card from their hand. Activate only as a sorcery. ({C} represents colorless mana.)
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\nMindmelter can't be blocked.\n{3}{C}: Target opponent exiles a card from their hand. Activate only as a sorcery. ({C} represents colorless mana.)

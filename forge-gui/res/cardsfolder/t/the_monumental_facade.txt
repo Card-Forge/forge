@@ -1,0 +1,8 @@
+Name:The Monumental Facade
+ManaCost:no cost
+Types:Land Sphere
+K:etbCounter:OIL:2
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ T SubCounter<1/OIL> | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target Artifact of Creature you control | SorcerySpeed$ True | CounterType$ OIL | SpellDescription$ Put an oil counter on target artifact or creature you control. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:The Monumental Facade enters the battlefield with two oil counters on it.\n{T}: Add {C}.\n{T}, Remove an oil counter from The Monumental Facade: Put an oil counter on target artifact or creature you control. Activate only as a sorcery.

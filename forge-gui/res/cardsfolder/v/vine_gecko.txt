@@ -1,0 +1,10 @@
+Name:Vine Gecko
+ManaCost:1 G
+Types:Creature Elemental Lizard
+PT:2/2
+S:Mode$ ReduceCost | OnlyFirstSpell$ True | Type$ Spell | ValidSpell$ Spell.Kicked | Activator$ You | Amount$ 1 | Description$ The first kicked spell you cast each turn costs {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Card.kicked+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a kicked spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.withKicker,Card.withMultikicker
+DeckHas:Ability$Counters
+Oracle:The first kicked spell you cast each turn costs {1} less to cast.\nWhenever you cast a kicked spell, put a +1/+1 counter on Vine Gecko.

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Rofellos2
+Title=Rofellos
+Difficulty=medium
+Description=Green deck
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Albino Troll|USG
+4 Blanchwood Armor|USG
+2 Child of Gaea|USG
+4 Deranged Hermit|ULG
+4 Might of Oaks|ULG
+4 Forest|USG|1
+17 Forest|USG|4
+2 Gaea's Cradle|USG
+2 Gaea's Embrace|USG
+1 Pattern of Rebirth|UDS
+4 Pouncing Jaguar|USG
+4 Rofellos, Llanowar Emissary|UDS
+2 Thorn Elemental|UDS
+4 Yavimaya Elder|UDS
+2 Cradle Guard|USG

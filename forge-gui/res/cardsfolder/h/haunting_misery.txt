@@ -1,0 +1,7 @@
+Name:Haunting Misery
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 1 B B ExileFromGrave<X/Creature> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, exile X creature cards from your graveyard.\nHaunting Misery deals X damage to target player or planeswalker.

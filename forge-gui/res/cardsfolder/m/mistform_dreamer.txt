@@ -1,0 +1,9 @@
+Name:Mistform Dreamer
+ManaCost:2 U
+Types:Creature Illusion
+PT:2/1
+K:Flying
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
+AI:RemoveDeck:All
+Oracle:Flying\n{1}: Mistform Dreamer becomes the creature type of your choice until end of turn.

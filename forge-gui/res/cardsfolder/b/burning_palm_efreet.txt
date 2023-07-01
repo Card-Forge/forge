@@ -1,0 +1,7 @@
+Name:Burning Palm Efreet
+ManaCost:2 R R
+Types:Creature Efreet
+PT:2/2
+A:AB$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 2 | SubAbility$ DBDebuff | SpellDescription$ CARDNAME deals 2 damage to target creature with flying and that creature loses flying until end of turn.
+SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying
+Oracle:{1}{R}{R}: Burning Palm Efreet deals 2 damage to target creature with flying and that creature loses flying until end of turn.

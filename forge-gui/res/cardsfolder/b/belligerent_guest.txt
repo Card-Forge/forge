@@ -1,0 +1,9 @@
+Name:Belligerent Guest
+ManaCost:2 R
+Types:Creature Vampire
+PT:3/2
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+DeckHas:Ability$Token|Sacrifice & Type$Blood
+Oracle:Trample\nWhenever Belligerent Guest deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

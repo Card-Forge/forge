@@ -1,0 +1,9 @@
+Name:Sedgemoor Witch
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:3/2
+K:Menace
+K:Ward:PayLife<3>
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
+Oracle:Menace\nWard—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.)\nMagecraft — Whenever you cast or copy an instant or sorcery spell, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."

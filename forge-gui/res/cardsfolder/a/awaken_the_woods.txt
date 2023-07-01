@@ -1,0 +1,7 @@
+Name:Awaken the Woods
+ManaCost:X G G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_forest_dryad | TokenOwner$ You | SpellDescription$ Create X 1/1 green Forest Dryad land creature tokens.
+SVar:X:Count$xPaid
+DeckHas:Type$Dryad & Ability$Token
+Oracle:Create X 1/1 green Forest Dryad land creature tokens.

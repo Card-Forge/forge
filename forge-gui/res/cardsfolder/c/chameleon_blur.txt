@@ -1,0 +1,6 @@
+Name:Chameleon Blur
+ManaCost:3 G
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that creatures would deal to players this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ Player | Description$ Prevent all damage that creatures would deal to players this turn.
+Oracle:Prevent all damage that creatures would deal to players this turn.

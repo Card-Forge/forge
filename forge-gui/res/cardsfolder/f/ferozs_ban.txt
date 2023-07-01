@@ -1,0 +1,6 @@
+Name:Feroz's Ban
+ManaCost:6
+Types:Artifact
+S:Mode$ RaiseCost | ValidCard$ Creature | Type$ Spell | Amount$ 2 | Description$ Creature spells cost {2} more to cast.
+AI:RemoveDeck:Random
+Oracle:Creature spells cost {2} more to cast.

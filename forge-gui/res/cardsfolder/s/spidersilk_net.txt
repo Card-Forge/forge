@@ -1,0 +1,6 @@
+Name:Spidersilk Net
+ManaCost:0
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +0/+2 and has reach.
+Oracle:Equipped creature gets +0/+2 and has reach. (It can block creatures with flying.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

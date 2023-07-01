@@ -1,0 +1,8 @@
+Name:Nessian Boar
+ManaCost:3 G G
+Types:Creature Boar
+PT:10/6
+K:All creatures able to block CARDNAME do so.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature's controller draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredBlockerController | NumCards$ 1
+Oracle:All creatures able to block Nessian Boar do so.\nWhenever Nessian Boar becomes blocked by a creature, that creature's controller draws a card.

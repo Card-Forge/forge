@@ -1,0 +1,6 @@
+Name:Putrid Raptor
+ManaCost:4 B B
+Types:Creature Zombie Dinosaur Beast
+PT:4/4
+K:Morph:Discard<1/Zombie>
+Oracle:Morph—Discard a Zombie card. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

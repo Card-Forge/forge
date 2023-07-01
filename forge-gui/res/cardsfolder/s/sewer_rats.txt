@@ -1,0 +1,6 @@
+Name:Sewer Rats
+ManaCost:B
+Types:Creature Rat
+PT:1/1
+A:AB$ Pump | Cost$ B PayLife<1> | Defined$ Self | NumAtt$ +1 | ActivationLimit$ 3 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than three times each turn.
+Oracle:{B}, Pay 1 life: Sewer Rats gets +1/+0 until end of turn. Activate no more than three times each turn.

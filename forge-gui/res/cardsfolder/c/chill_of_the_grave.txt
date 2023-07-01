@@ -1,0 +1,10 @@
+Name:Chill of the Grave
+ManaCost:2 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Zombie.YouCtrl | Description$ This spell costs {1} less to cast if you control a Zombie.
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ It doesn't untap during its controller's next untap step.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:BuffedBy:Zombie
+DeckHints:Type$Zombie
+Oracle:This spell costs {1} less to cast if you control a Zombie.\nTap target creature. It doesn't untap during its controller's next untap step.\nDraw a card.

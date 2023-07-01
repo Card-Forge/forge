@@ -1,0 +1,5 @@
+Name:Omega Myr
+ManaCost:2
+Types:Artifact Creature Myr
+PT:1/2
+Oracle:

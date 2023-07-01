@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Neith 4
+Title=Neith
+Icon=Neith.jpg
+Difficulty=very hard
+Description=Neith plays a T1 'French Keeper' deck.
+Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:artifact rarity:C,U desc:an Artifact
+[main]
+1 Amnesia|DRK
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Braingeyser|LEB
+4 City of Brass|5ED
+3 Counterspell|5ED
+1 Demonic Tutor|LEB
+2 Disenchant|5ED
+1 Disrupting Scepter|LEB
+1 Dwarven Miner|MIR
+1 Enlightened Tutor|MIR
+2 Fireball|LEB
+1 Gemstone Mine|WTH
+3 Island|MIR
+2 Jayemdae Tome|LEB
+1 Library of Alexandria|ARN
+2 Lightning Bolt|LEB
+4 Mana Drain|LEG
+1 Mirror Universe|LEG
+2 Moat|LEG
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+3 Mystical Tutor|MIR
+1 Recall|LEG
+1 Reflecting Pool|TMP
+1 Regrowth|LEB
+1 Sol Ring|LEB
+1 Strip Mine|ATQ
+2 Swords to Plowshares|LEB
+1 Timetwister|LEB
+4 Tundra|LEB
+4 Volcanic Island|LEB
+1 Wasteland|TMP
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

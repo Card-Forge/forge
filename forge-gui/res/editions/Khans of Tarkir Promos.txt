@@ -1,0 +1,18 @@
+[metadata]
+Code=PKTK
+Date=2014-09-26
+Name=Khans of Tarkir Promos
+Type=Promo
+ScryfallCode=PKTK
+
+[cards]
+134 U Heir of the Wilds @David Palumbo
+144 R Rattleclaw Mystic @Min Yum
+164 R Ankle Shanker @Steven Belledin
+166 R Avalanche Tusker @Eric Deschamps
+179 R Ivorytusk Fortress @Matt Stewart
+193 R Rakshasa Vizier @Peter Mohrbacher
+195 R Sage of the Inward Eye @Anastasia Ovchinnikova
+204 U Sultai Charm @Ryan Yee
+210 R Utter End @Jack Wang
+219 R Dragon Throne of Tarkir @Daarken

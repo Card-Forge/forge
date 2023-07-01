@@ -1,0 +1,18 @@
+[metadata]
+Code=PTHS
+Date=2013-09-21
+Name=Theros Promos
+Type=Promo
+ScryfallCode=PTHS
+
+[cards]
+3★ R Celestial Archon @Wesley Burt
+26 U Phalanx Leader @Raymond Swanland
+42★ R Bident of Thassa @Ryan Yee
+63★ R Shipbreaker Kraken @Svetlin Velinov
+75★ R Abhorrent Overlord @Dave Kendall
+98 R Nighthowler @Seb McKinnon
+120★ R Ember Swallower @Vincent Proce
+149★ R Anthousa, Setessan Hero @Howard Lyon
+160 U Karametra's Acolyte @Dan Scott
+*180 R Sylvan Caryatid @Lars Grant-West

@@ -1,0 +1,10 @@
+Name:Cabaretti Charm
+ManaCost:R G W
+Types:Instant
+A:SP$ Charm | Choices$ DBDealDamage,DBPumpAll,DBToken
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control to target creature or planeswalker.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_1_1_citizen | SpellDescription$ Create two 1/1 green and white Citizen creature tokens.
+DeckHas:Ability$Token & Type$Citizen
+Oracle:Choose one —\n• Cabaretti Charm deals damage equal to the number of creatures you control to target creature or planeswalker.\n• Creatures you control get +1/+1 and gain trample until end of turn.\n• Create two 1/1 green and white Citizen creature tokens.

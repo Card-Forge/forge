@@ -1,0 +1,14 @@
+Name:Hiveheart Shaman
+ManaCost:3 G
+Types:Creature Human Shaman
+PT:3/5
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME attacks, you may search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic+!sharesLandTypeWith Valid Land.YouCtrl | ChangeNum$ 1 | ShuffleNonMandatory$ True
+A:AB$ Token | Cost$ 5 G | TokenScript$ g_1_1_insect | RememberTokens$ True | SorcerySpeed$ True | SubAbility$ DBCounters | StackDescription$ SpellDescription | SpellDescription$ Create a 1/1 green Insect creature token. Put X +1/+1 counters on it, where X is the number of basic land types among lands you control.
+SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup | SpellDescription$ Activate only as a sorcery.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Domain
+SVar:HasAttackEffect:TRUE
+DeckHints:Color$White|Blue|Red|Black
+DeckHas:Ability$Token|Counters
+Oracle:Whenever Hiveheart Shaman attacks, you may search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.\n{5}{G}: Create a 1/1 green Insect creature token. Put X +1/+1 counters on it, where X is the number of basic land types among lands you control. Activate only as a sorcery.

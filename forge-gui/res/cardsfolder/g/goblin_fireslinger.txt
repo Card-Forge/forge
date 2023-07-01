@@ -1,0 +1,7 @@
+Name:Goblin Fireslinger
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+SVar:NonCombatPriority:1
+Oracle:{T}: Goblin Fireslinger deals 1 damage to target player or planeswalker.

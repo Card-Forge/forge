@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=George of the Jungle 3
+Title=George of the Jungle
+Difficulty=hard
+Description=WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant
+Icon=George of the Jungle.jpg
+Deck Type=constructed
+[main]
+4 Clifftop Retreat
+4 Plateau
+4 Arid Mesa
+5 Mountain|ISD
+5 Plains|ISD
+1 Mox Ruby
+1 Mox Pearl
+1 Bull Cerodon
+1 Squee's Embrace
+4 Belligerent Hatchling
+4 Lightning Helix
+1 Warleader's Helix
+1 Stun Sniper
+2 Boros Swiftblade
+2 Boros Reckoner
+2 Ajani Vengeant
+2 Figure of Destiny
+2 Hearthfire Hobgoblin
+4 Battlegate Mimic
+2 Skyknight Legionnaire
+4 Balefire Liege
+1 Brion Stoutarm
+1 Cerodon Yearling
+1 Duergar Hedge-Mage
+1 Nobilis of War
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Lore Broker
+ManaCost:1 U
+Types:Creature Human Rogue
+PT:1/2
+A:AB$ Draw | Cost$ T | Defined$ Player | SpellDescription$ Each player draws a card, then discards a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player
+Oracle:{T}: Each player draws a card, then discards a card.

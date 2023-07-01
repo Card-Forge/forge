@@ -1,0 +1,7 @@
+Name:Vine Trellis
+ManaCost:1 G
+Types:Creature Plant Wall
+PT:0/4
+K:Defender
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Defender (This creature can't attack.)\n{T}: Add {G}.

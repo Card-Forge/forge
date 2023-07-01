@@ -1,0 +1,9 @@
+Name:Rubblebelt Raiders
+ManaCost:1 RG RG RG
+Types:Creature Human Warrior
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ RubblebeltWarCry | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it for each attacking creature you control.
+SVar:RubblebeltWarCry:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$Valid Creature.attacking+YouCtrl
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Rubblebelt Raiders attacks, put a +1/+1 counter on it for each attacking creature you control.

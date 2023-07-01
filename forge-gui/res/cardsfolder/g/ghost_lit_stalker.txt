@@ -1,0 +1,7 @@
+Name:Ghost-Lit Stalker
+ManaCost:B
+Types:Creature Spirit
+PT:1/1
+A:AB$ Discard | Cost$ 4 B T | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards two cards. Activate only as a sorcery.
+A:AB$ Discard | Cost$ 5 B B Discard<1/CARDNAME> | ValidTgts$ Player | NumCards$ 4 | Mode$ TgtChoose | SorcerySpeed$ True | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ Target player discards four cards. Activate only as a sorcery.
+Oracle:{4}{B}, {T}: Target player discards two cards. Activate only as a sorcery.\nChannel — {5}{B}{B}, Discard Ghost-Lit Stalker: Target player discards four cards. Activate only as a sorcery.

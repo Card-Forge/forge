@@ -1,0 +1,11 @@
+Name:Thought Harvester
+ManaCost:3 U
+Types:Creature Eldrazi Drone
+PT:2/4
+K:Devoid
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you cast a colorless spell, target opponent exiles the top card of their library.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent
+SVar:BuffedBy:Card.Colorless
+DeckHints:Color$Colorless
+Oracle:Devoid (This card has no color.)\nFlying\nWhenever you cast a colorless spell, target opponent exiles the top card of their library.

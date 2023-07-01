@@ -1,0 +1,10 @@
+Name:Teferi's Puzzle Box
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeAll | TriggerDescription$ At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.
+SVar:TrigChangeAll:DB$ ChangeZoneAll | DefinedPlayer$ TriggeredPlayer | Defined$ TriggeredPlayer | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredPlayer | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.

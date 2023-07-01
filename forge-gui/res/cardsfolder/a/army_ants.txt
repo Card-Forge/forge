@@ -1,0 +1,6 @@
+Name:Army Ants
+ManaCost:1 B R
+Types:Creature Insect
+PT:1/1
+A:AB$ Destroy | Cost$ T Sac<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+Oracle:{T}, Sacrifice a land: Destroy target land.

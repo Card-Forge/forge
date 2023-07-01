@@ -1,0 +1,10 @@
+Name:Eloise, Nephalia Sleuth
+ManaCost:3 U B
+Types:Legendary Creature Human Rogue
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever another creature you control dies, investigate (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Permanent.token+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ DBSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a token, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+DeckHas:Ability$Investigate|Token
+Oracle:Whenever another creature you control dies, investigate (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a token, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

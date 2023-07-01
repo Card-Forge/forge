@@ -1,0 +1,9 @@
+Name:Digsite Engineer
+ManaCost:2 W
+Types:Creature Dwarf Artificer
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigToken | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may pay {2}. If you do, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+DeckHints:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Whenever you cast an artifact spell, you may pay {2}. If you do, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."

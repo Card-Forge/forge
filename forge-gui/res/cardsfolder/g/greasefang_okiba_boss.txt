@@ -1,0 +1,11 @@
+Name:Greasefang, Okiba Boss
+ManaCost:1 W B
+Types:Legendary Creature Rat Pilot
+PT:4/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of combat on your turn, return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it to its owner's hand at the beginning of your next end step.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target Vehicle card in your graveyard | ValidTgts$ Vehicle.YouOwn | SubAbility$ Animate | RememberChanged$ True | AtEOT$ Hand
+SVar:Animate:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Vehicle
+Oracle:At the beginning of combat on your turn, return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it to its owner's hand at the beginning of your next end step.

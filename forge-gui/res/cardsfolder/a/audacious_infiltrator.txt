@@ -1,0 +1,6 @@
+Name:Audacious Infiltrator
+ManaCost:1 W
+Types:Creature Dwarf Rogue
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Artifact.Creature | Description$ CARDNAME can't be blocked by artifact creatures.
+Oracle:Audacious Infiltrator can't be blocked by artifact creatures.

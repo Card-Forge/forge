@@ -1,0 +1,10 @@
+Name:Jorubai Murk Lurker
+ManaCost:2 U
+Types:Creature Leech
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
+A:AB$ Pump | Cost$ 1 B | ValidTgts$ Creature | KW$ Lifelink | SpellDescription$ Target creature gains lifelink until end of turn.
+SVar:BuffedBy:Swamp
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:Jorubai Murk Lurker gets +1/+1 as long as you control a Swamp.\n{1}{B}: Target creature gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)

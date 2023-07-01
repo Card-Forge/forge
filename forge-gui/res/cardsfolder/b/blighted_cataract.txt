@@ -1,0 +1,8 @@
+Name:Blighted Cataract
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 5 U T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHas:Ability$Mana.Colorless
+DeckNeeds:Color$Blue
+Oracle:{T}: Add {C}.\n{5}{U}, {T}, Sacrifice Blighted Cataract: Draw two cards.

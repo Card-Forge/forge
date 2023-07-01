@@ -1,0 +1,6 @@
+Name:Hundroog
+ManaCost:6 G
+Types:Creature Beast
+PT:4/7
+K:Cycling:3
+Oracle:Cycling {3} ({3}, Discard this card: Draw a card.)

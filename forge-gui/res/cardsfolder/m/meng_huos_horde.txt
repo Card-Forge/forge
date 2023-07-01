@@ -1,0 +1,5 @@
+Name:Meng Huo's Horde
+ManaCost:4 G
+Types:Creature Human Soldier
+PT:4/5
+Oracle:

@@ -1,0 +1,35 @@
+[quest]
+id=8
+AILife=25
+Repeat=false
+Wins=16
+Card Reward=3 random rares
+Credit Reward=200
+HumanExtras=TOKEN;G;0;1;Sheep;Creature;Sheep|TOKEN;G;0;1;Sheep;Creature;Sheep|TOKEN;G;0;1;Sheep;Creature;Sheep
+AIExtras=
+[metadata]
+Name=quest8
+Title=A Wolf in Sheep's Clothing
+Difficulty=medium
+Description=The local sheep farm is under attack by a pack of wolves. Kill the wolves, save the sheep!
+Icon=A Wolf in Sheeps Clothing.jpg
+Deck Type=constructed
+[main]
+1 Temple Garden
+1 Mox Emerald
+1 Arctic Wolves
+4 Sound the Call
+2 Wolfbriar Elemental
+1 Plains|M12
+4 Wyluli Wolf
+4 Rampant Growth
+4 Watchwolf
+1 Overrun
+4 Howl of the Night Pack
+18 Forest|M12
+4 Kodama's Reach
+2 Muraganda Petroglyphs
+1 Bestial Menace
+4 Tundra Wolves
+4 Savannah
+[sideboard]

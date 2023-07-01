@@ -1,0 +1,6 @@
+Name:Empress Galina
+ManaCost:3 U U
+Types:Legendary Creature Merfolk Noble
+PT:1/3
+A:AB$ GainControl | Cost$ U U T | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select target legendary permanent | SpellDescription$ Gain control of target legendary permanent. (This effect lasts indefinitely.)
+Oracle:{U}{U}, {T}: Gain control of target legendary permanent. (This effect lasts indefinitely.)

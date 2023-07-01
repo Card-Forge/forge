@@ -1,0 +1,15 @@
+[metadata]
+Code=PARL
+Date=1996-08-02
+Name=Arena League 1996
+Type=Promo
+ScryfallCode=PARL
+
+[cards]
+1 R Plains @Tony Roberts
+2 R Island @Tony Roberts
+3 R Swamp @Tony Roberts
+4 R Mountain @Tony Roberts
+5 R Forest @Tony Roberts
+6 R Disenchant @Kevin McCann
+7 R Fireball @Jock

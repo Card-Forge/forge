@@ -1,0 +1,5 @@
+Name:Marble Chalice
+ManaCost:2 W
+Types:Artifact
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+Oracle:{T}: You gain 1 life.

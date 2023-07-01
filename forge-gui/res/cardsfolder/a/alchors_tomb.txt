@@ -1,0 +1,8 @@
+Name:Alchor's Tomb
+ManaCost:4
+Types:Artifact
+A:AB$ ChooseColor | Cost$ 2 T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target permanent you control becomes the color of your choice. (This effect lasts indefinitely.)
+SVar:Animate:DB$ Animate | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{2}, {T}: Target permanent you control becomes the color of your choice. (This effect lasts indefinitely.)

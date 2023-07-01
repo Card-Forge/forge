@@ -1,0 +1,8 @@
+Name:Havoc Sower
+ManaCost:3 B
+Types:Creature Eldrazi Drone
+PT:3/3
+K:Devoid
+A:AB$ Pump | Cost$ 1 C | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{1}{C}: Havoc Sower gets +2/+1 until end of turn. ({C} represents colorless mana.)

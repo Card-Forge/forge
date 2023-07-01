@@ -1,0 +1,10 @@
+Name:Creepy Puppeteer
+ManaCost:3 R
+Types:Creature Human Rogue
+PT:4/3
+K:Haste
+Oracle:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | OptionalDecider$ You | IsPresent$ Creature.attacking+Other | PresentCompare$ EQ1 | TriggerDescription$ Whenever CARDNAME attacks, if you attacked with exactly one other creature this combat, you may have that creature's base power and toughness become 4/3 until end of turn.
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.attacking+Other | Power$ 4 | Toughness$ 3
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Creepy Puppeteer attacks, if you attacked with exactly one other creature this combat, you may have that creature's base power and toughness become 4/3 until end of turn.

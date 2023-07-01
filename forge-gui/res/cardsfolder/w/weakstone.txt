@@ -1,0 +1,6 @@
+Name:Weakstone
+ManaCost:4
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ -1 | Description$ Attacking creatures get -1/-0.
+AI:RemoveDeck:Random
+Oracle:Attacking creatures get -1/-0.

@@ -1,0 +1,7 @@
+Name:Urborg Drake
+ManaCost:1 U B
+Types:Creature Drake
+PT:2/3
+K:Flying
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Flying\nUrborg Drake attacks each combat if able.

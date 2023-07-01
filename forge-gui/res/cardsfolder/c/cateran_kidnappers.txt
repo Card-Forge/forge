@@ -1,0 +1,7 @@
+Name:Cateran Kidnappers
+ManaCost:2 B B
+Types:Creature Human Mercenary
+PT:4/2
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
+AI:RemoveDeck:Random
+Oracle:{3}, {T}: Search your library for a Mercenary permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.

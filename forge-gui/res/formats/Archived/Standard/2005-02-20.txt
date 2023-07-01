@@ -1,0 +1,7 @@
+[format]
+Name:Standard (BOK)
+Type:Archived
+Subtype:Standard
+Effective:2005-02-20
+Sets:8ED, MRD, DST, 5DN, CHK, BOK
+Banned:Skullclamp

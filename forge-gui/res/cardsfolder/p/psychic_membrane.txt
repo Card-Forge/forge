@@ -1,0 +1,9 @@
+Name:Psychic Membrane
+ManaCost:2 U
+Types:Creature Wall
+PT:0/3
+K:Defender
+T:Mode$ Blocks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME blocks, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:HasBlockEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Psychic Membrane blocks, you may draw a card.

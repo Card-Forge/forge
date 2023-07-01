@@ -1,0 +1,7 @@
+Name:Crystal Quarry
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 5 T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{5}, {T}: Add {W}{U}{B}{R}{G}.

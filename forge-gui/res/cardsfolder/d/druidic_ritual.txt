@@ -1,0 +1,7 @@
+Name:Druidic Ritual
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Mill | NumCards$ 3 | Optional$ True | SubAbility$ DBReturn | SpellDescription$ You may mill three cards.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ EACH Creature.YouOwn & Land.YouOwn | ChangeTypeDesc$ creature card they own and up to one land card they own | SpellDescription$ Then return up to one creature card and up to one land card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+DeckHas:Ability$Mill|Graveyard
+Oracle:You may mill three cards. Then return up to one creature card and up to one land card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)

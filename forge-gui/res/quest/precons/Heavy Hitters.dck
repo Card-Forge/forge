@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Heavy Hitters
+Description=Size up your opponents, and then cut them down with a heap of big, fat creatures. With lots of ways to get mana quickly, this deck makes it easy for you to start the beatdown ASAP.
+Deck Type=constructed
+Set=8ED
+Image=heavy_hitters.jpg
+[main]
+2 Elvish Pioneer|8ED
+17 Forest|8ED
+1 Fyndhorn Elder|8ED
+2 Giant Growth|8ED
+2 Hunted Wumpus|8ED
+1 Llanowar Behemoth|8ED
+2 Lone Wolf|8ED
+1 Lure|8ED
+1 Nantuko Disciple|8ED
+1 Naturalize|8ED
+1 Primeval Force|8ED
+2 Rampant Growth|8ED
+1 Rhox|8ED
+1 Rod of Ruin|8ED
+2 Spined Wurm|8ED
+1 Wing Snare|8ED
+2 Wood Elves|8ED
+[sideboard]

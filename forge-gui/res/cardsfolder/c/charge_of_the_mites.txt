@@ -1,0 +1,9 @@
+Name:Charge of the Mites
+ManaCost:2 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDealDamage,DBToken
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control to target creature or planeswalker.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | SpellDescription$ Create two 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block." (Players dealt combat damage by them also get a poison counter.)
+DeckHas:Ability$Token & Type$Mite|Phyrexian
+Oracle:Choose one—\n• Charge of the Mites deals damage equal to the number of creatures you control to target creature or planeswalker.\n• Create two 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block." (Players dealt combat damage by them also get a poison counter.)

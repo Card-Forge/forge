@@ -1,0 +1,7 @@
+Name:Lurking Chupacabra
+ManaCost:3 B
+Types:Creature Beast Horror
+PT:2/3
+T:Mode$ Explores | Execute$ TrigDebuff | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control explores, target creature an opponent controls gets -2/-2 until end of turn.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
+Oracle:Whenever a creature you control explores, target creature an opponent controls gets -2/-2 until end of turn.

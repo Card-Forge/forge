@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1500
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Elvish Predation
+Description=In a world of beauty, the most beautiful role-- with savage disdain for their inferiors. Amass an army of imperious elves and punish the weak and ugly who blight the land. The law of the elves is the law of the hunt: seek your prey with a predator's grace.
+Deck Type=constructed
+Set=LRW
+Image=elvish_predation.jpg
+
+[main]
+14 Forest|LRW
+9  Swamp|LRW
+
+2  Elvish Eulogist|LRW
+2  Elvish Harbinger|LRW
+3  Gilt-Leaf Seer|LRW
+1  Hunter of Eyeblights|LRW
+1  Immaculate Magistrate|LRW
+2  Imperious Perfect|LRW
+2  Jagged-Scar Archers|LRW
+2  Leaf Gilder|LRW
+2  Lys Alana Huntmaster|LRW
+1  Lys Alana Scarblade|LRW
+3  Moonglove Winnower|LRW
+1  Nath of the Gilt-Leaf|LRW
+2  Nath's Elite|LRW
+3  Scarred Vinebreeder|LRW
+1  Wren's Run Vanquisher|LRW
+
+2  Elvish Promenade|LRW
+2  Eyeblight's Ending|LRW
+2  Gilt-Leaf Ambush|LRW
+1  Lammastide Weave|LRW
+1  Prowess of the Fair|LRW
+1  Wanderer's Twig|LRW
+
+[sideboard]

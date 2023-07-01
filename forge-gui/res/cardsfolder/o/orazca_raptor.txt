@@ -1,0 +1,5 @@
+Name:Orazca Raptor
+ManaCost:2 R R
+Types:Creature Dinosaur
+PT:3/4
+Oracle:

@@ -1,0 +1,10 @@
+Name:Ravenous Slime
+ManaCost:2 G
+Types:Creature Ooze
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on CARDNAME.
+SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Defined$ Self
+SVar:X:ReplacedCardLKI$CardPower
+Oracle:Ravenous Slime can't be blocked by creatures with power 2 or less.\nIf a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on Ravenous Slime.

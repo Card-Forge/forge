@@ -1,0 +1,8 @@
+Name:Essence Bottle
+ManaCost:2
+Types:Artifact
+A:AB$ PutCounter | Cost$ 3 T | Defined$ Self | CounterType$ ELIXIR | CounterNum$ 1 | SpellDescription$ Put an elixir counter on CARDNAME.
+A:AB$ GainLife | Cost$ T SubCounter<All/ELIXIR> | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each elixir counter removed this way.
+SVar:X:SVar$CostCountersRemoved/Twice
+AI:RemoveDeck:All
+Oracle:{3}, {T}: Put an elixir counter on Essence Bottle.\n{T}, Remove all elixir counters from Essence Bottle: You gain 2 life for each elixir counter removed this way.

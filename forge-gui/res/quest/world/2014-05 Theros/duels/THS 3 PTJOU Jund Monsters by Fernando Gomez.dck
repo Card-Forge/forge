@@ -1,0 +1,34 @@
+[metadata]
+Name=THS 3 PTJOU: Jund Monsters by Fernando Gomez
+Title=Jund Monsters
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Fernando Gomez.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+1 Arbor Colossus|THS
+3 Courser of Kruphix|BNG
+4 Fanatic of Xenagos|BNG
+6 Forest|THS|1
+4 Hero's Downfall|THS
+3 Lightning Strike|THS
+4 Mountain|THS|1
+4 Polis Crusher|THS
+1 Silence the Believers|JOU
+4 Stormbreath Dragon|THS
+4 Swamp|THS|1
+4 Sylvan Caryatid|THS
+4 Temple of Abandon|THS
+4 Temple of Malady|JOU
+3 Temple of Malice|BNG
+4 Thoughtseize|THS
+3 Xenagos, the Reveler|THS
+[Sideboard]
+2 Anger of the Gods|THS
+1 Arbor Colossus|THS
+3 Destructive Revelry|THS
+1 Fated Return|BNG
+1 Hammer of Purphoros|THS
+2 Magma Spray|JOU
+2 Pharika, God of Affliction|JOU
+3 Silence the Believers|JOU

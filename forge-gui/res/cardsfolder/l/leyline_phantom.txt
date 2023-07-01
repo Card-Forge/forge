@@ -1,0 +1,7 @@
+Name:Leyline Phantom
+ManaCost:4 U
+Types:Creature Illusion
+PT:5/5
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME deals combat damage, return it to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+Oracle:When Leyline Phantom deals combat damage, return it to its owner's hand. (Return it only if it survived combat.)

@@ -1,0 +1,8 @@
+Name:Goblin Elite Infantry
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -1/-1 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1
+Oracle:Whenever Goblin Elite Infantry blocks or becomes blocked, it gets -1/-1 until end of turn.

@@ -1,0 +1,7 @@
+Name:Fallowsage
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+PT:2/2
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes tapped, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever Fallowsage becomes tapped, you may draw a card.

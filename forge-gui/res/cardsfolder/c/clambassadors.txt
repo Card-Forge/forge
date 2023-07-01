@@ -1,0 +1,8 @@
+Name:Clambassadors
+ManaCost:3 U
+Types:Creature Clamfolk
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ DBChoosePermanent | TriggerDescription$ Whenever CARDNAME deals damage to a player, choose an artifact, creature, or land you control. That player gains control of that permanent. | StackDescription$ None
+SVar:DBChoosePermanent:DB$ ChooseCard | Mandatory$ True | AILogic$ WorstCard | Choices$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | Amount$ 1 | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ TriggeredTarget
+Oracle:Whenever Clambassadors deals damage to a player, choose an artifact, creature, or land you control. That player gains control of that permanent.

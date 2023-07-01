@@ -1,0 +1,29 @@
+name: Test build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '8', '11' ]
+    name: Test with Java ${{ matrix.Java }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: 'maven'
+
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+
+      - name: Run tests in virtual framebuffer
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          mvn -U -B clean -P windows-linux test

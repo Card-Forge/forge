@@ -1,0 +1,8 @@
+Name:Ecologist's Terrarium
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ChangeTypeDesc$ basic land card | ShuffleNonMandatory$ True
+A:AB$ PutCounter | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Creature | SorcerySpeed$ True | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:When Ecologist's Terrarium enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{2}, {T}, Sacrifice Ecologist's Terrarium: Put a +1/+1 counter on target creature. Activate only as a sorcery.

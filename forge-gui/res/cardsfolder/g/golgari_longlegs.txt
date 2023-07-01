@@ -1,0 +1,5 @@
+Name:Golgari Longlegs
+ManaCost:3 BG BG
+Types:Creature Insect
+PT:5/4
+Oracle:

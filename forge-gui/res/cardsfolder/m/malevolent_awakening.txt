@@ -1,0 +1,6 @@
+Name:Malevolent Awakening
+ManaCost:1 B B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 B B Sac<1/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
+AI:RemoveDeck:All
+Oracle:{1}{B}{B}, Sacrifice a creature: Return target creature card from your graveyard to your hand.

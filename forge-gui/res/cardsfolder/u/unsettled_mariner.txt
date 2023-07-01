@@ -1,0 +1,8 @@
+Name:Unsettled Mariner
+ManaCost:W U
+Types:Creature Shapeshifter
+PT:2/2
+K:Changeling
+T:Mode$ BecomesTarget | ValidTarget$ You,Permanent.YouCtrl+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ 1 | UnlessPayer$ TriggeredSourceSAController
+Oracle:Changeling (This card is every creature type.)\nWhenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.

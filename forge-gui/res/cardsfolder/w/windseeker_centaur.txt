@@ -1,0 +1,6 @@
+Name:Windseeker Centaur
+ManaCost:1 R R
+Types:Creature Centaur
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

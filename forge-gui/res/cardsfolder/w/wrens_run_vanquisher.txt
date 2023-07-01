@@ -1,0 +1,7 @@
+Name:Wren's Run Vanquisher
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:3/3
+K:Deathtouch
+K:AlternateAdditionalCost:Reveal<1/Elf>:3
+Oracle:As an additional cost to cast this spell, reveal an Elf card from your hand or pay {3}.\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

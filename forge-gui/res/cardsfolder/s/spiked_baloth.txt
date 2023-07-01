@@ -1,0 +1,6 @@
+Name:Spiked Baloth
+ManaCost:3 G
+Types:Creature Beast
+PT:4/2
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

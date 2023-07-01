@@ -1,0 +1,29 @@
+[metadata]
+Title=Commander: Oko
+Difficulty=hard
+Description="My advisors recommend I let them eat you."\n-Oko
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: Oko, Thief of Crowns
+[Main]
+4 Brazen Borrower|ELD|1
+4 Edgewall Innkeeper|ELD
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+5 Forest|ELD|1
+4 Gilded Goose|ELD|1
+4 Gingerbread Cabin|ELD
+8 Island|ELD|3
+1 Keeper of Fables|ELD
+4 Lovestruck Beast|ELD|1
+4 Maraleaf Pixie|ELD
+4 Oko, Thief of Crowns|ELD|2
+1 Questing Beast|ELD|1
+4 Thornwood Falls|ELD
+4 Witching Well|ELD
+1 Yorvo, Lord of Garenbrig|ELD|1
+[Sideboard]
+1 Into the Story|ELD
+1 Return of the Wildspeaker|ELD|1
+1 The Great Henge|ELD|1
+1 Turn into a Pumpkin|ELD

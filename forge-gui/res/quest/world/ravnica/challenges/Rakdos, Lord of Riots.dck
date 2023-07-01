@@ -1,0 +1,34 @@
+[quest]
+id=4002
+OpponentName=Rakdos, Lord of Riots
+AILife=40
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Blood Crypt|DIS
+Credit Reward=200
+HumanExtras=Pariah's Shield|Rakdos Signet
+AIExtras=Rakdos, Lord of Riots
+[metadata]
+Name=quest4002
+Title=Rakdos, Lord of Riots
+Difficulty=hard
+Description=Big Fellas
+Icon=Rakdos.jpg
+Deck Type=constructed
+[main]
+4 Blood Crypt|RTR
+4 Char|RAV
+4 Crypt Champion|DIS
+4 Dark Confidant|RAV
+2 Hellkite Tyrant|GTC
+4 Hellraiser Goblin|GTC
+2 Lord of the Void|GTC
+9 Mountain|RTR
+2 Molten Primordial|GTC
+2 Sepulchral Primordial|GTC
+4 Rakdos Guildgate|RTR
+4 Seal of Fire|DIS
+2 Smog Elemental|GTC
+9 Swamp|RTR
+4 Rakdos's Return|RTR
+[sideboard]

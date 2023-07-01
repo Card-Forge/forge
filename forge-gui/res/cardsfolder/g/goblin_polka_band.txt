@@ -1,0 +1,9 @@
+Name:Goblin Polka Band
+ManaCost:R R
+Types:Creature Goblin
+PT:1/1
+A:AB$ Tap | Announce$ TgtNum | AnnounceTitle$ any number of creatures to target | Cost$ X 2 T | XColor$ R | CostDesc$ {2}, {T}: | ValidTgts$ Creature.untapped | TargetMin$ TgtNum | TargetMax$ TgtNum | TargetsAtRandom$ True | RememberTapped$ True | AILogic$ GoblinPolkaBand | SubAbility$ GoblinHangover | SpellDescription$ Tap any number of random target creatures. Goblins tapped in this way do not untap during their controllers' next untap phases. This ability costs {R} more to activate for each target.
+SVar:GoblinHangover:DB$ PumpAll | ValidCards$ Goblin.IsRemembered | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:TgtNum:Number$0
+SVar:X:SVar$TgtNum
+Oracle:{2}, {T}: Tap any number of random target creatures. Goblins tapped in this way do not untap during their controllers' next untap phases. This ability costs {R} more to activate for each target.

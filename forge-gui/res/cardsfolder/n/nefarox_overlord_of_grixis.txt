@@ -1,0 +1,10 @@
+Name:Nefarox, Overlord of Grixis
+ManaCost:4 B B
+Types:Legendary Creature Demon
+PT:5/5
+K:Flying
+K:Exalted
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks alone, defending player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayer | SacValid$ Creature
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.

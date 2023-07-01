@@ -1,0 +1,10 @@
+Name:Wave of Rats
+ManaCost:3 B
+Types:Creature Rat
+PT:4/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+dealtCombatDamageThisTurn Player | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner's control.
+SVar:TrigReturn:DB$ ChangeZone | DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
+K:Blitz:4 B
+DeckHas:Ability$Sacrifice
+Oracle:Trample\nWhen Wave of Rats dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner's control.\nBlitz {4}{B} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

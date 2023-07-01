@@ -1,0 +1,9 @@
+Name:Soulbright Flamekin
+ManaCost:1 R
+Types:Creature Elemental Shaman
+PT:2/1
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ SoulbrightMana | SpellDescription$ Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
+SVar:SoulbrightMana:DB$ Mana | Produced$ R R R R R R R R | ConditionCheckSVar$ SoulbrightNum | ConditionSVarCompare$ EQ3 | Optional$ True
+SVar:SoulbrightNum:Count$ResolvedThisTurn
+AI:RemoveDeck:All
+Oracle:{2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.

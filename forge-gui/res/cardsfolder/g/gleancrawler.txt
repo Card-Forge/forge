@@ -1,0 +1,8 @@
+Name:Gleancrawler
+ManaCost:3 BG BG BG
+Types:Creature Insect Horror
+PT:6/6
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ValidGraveyard Creature.YouCtrl+ThisTurnEnteredFrom_Battlefield
+Oracle:({B/G} can be paid with either {B} or {G}.)\nTrample\nAt the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.

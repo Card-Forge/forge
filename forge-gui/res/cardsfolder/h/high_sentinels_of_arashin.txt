@@ -1,0 +1,11 @@
+Name:High Sentinels of Arashin
+ManaCost:3 W
+Types:Creature Bird Soldier
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature you control with a +1/+1 counter on it.
+A:AB$ PutCounter | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:X:Count$Valid Creature.Other+YouCtrl+counters_GE1_P1P1
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:Flying\nHigh Sentinels of Arashin gets +1/+1 for each other creature you control with a +1/+1 counter on it.\n{3}{W}: Put a +1/+1 counter on target creature.

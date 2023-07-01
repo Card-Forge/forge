@@ -1,0 +1,8 @@
+Name:Human Cleric Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Human Cleric
+PT:2/1
+K:Lifelink
+K:Haste
+Oracle:Lifelink, haste

@@ -1,0 +1,10 @@
+[metadata]
+Code=PPTK
+Date=1999-07-01
+Name=Portal: Three Kingdoms Promos
+Type=Promo
+ScryfallCode=PPTK
+
+[cards]
+115a R Lu Bu, Master-at-Arms @Gao Jianzhang
+115b R Lu Bu, Master-at-Arms @Gao Jianzhang

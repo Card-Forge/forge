@@ -1,0 +1,9 @@
+Name:Daxos the Returned
+ManaCost:1 W B
+Types:Legendary Creature Zombie Soldier
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, you get an experience counter.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+A:AB$ Token | Cost$ 1 W B | TokenAmount$ 1 | TokenScript$ wb_x_x_e_spirit_experience | TokenOwner$ You | SpellDescription$ Create a white and black Spirit enchantment creature token. It has "This creature's power and toughness are each equal to the number of experience counters you have."
+SVar:BuffedBy:Enchantment
+Oracle:Whenever you cast an enchantment spell, you get an experience counter.\n{1}{W}{B}: Create a white and black Spirit enchantment creature token. It has "This creature's power and toughness are each equal to the number of experience counters you have."

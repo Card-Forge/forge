@@ -1,0 +1,9 @@
+Name:Krosan Archer
+ManaCost:3 G
+Types:Creature Centaur Archer
+PT:2/3
+K:Reach
+A:AB$ Pump | Cost$ G Discard<1/Card> | Defined$ Self | NumDef$ +2 | SpellDescription$ CARDNAME gets +0/+2 until end of turn.
+AI:RemoveDeck:All
+DeckHas:Ability$Discard
+Oracle:Reach (This creature can block creatures with flying.)\n{G}, Discard a card: Krosan Archer gets +0/+2 until end of turn.

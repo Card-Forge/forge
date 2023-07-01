@@ -1,0 +1,9 @@
+Name:Gateway Shade
+ManaCost:2 B
+Types:Creature Shade
+PT:1/1
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ tapXType<1/Gate> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Type$Gate
+Oracle:{B}: Gateway Shade gets +1/+1 until end of turn.\nTap an untapped Gate you control: Gateway Shade gets +2/+2 until end of turn.

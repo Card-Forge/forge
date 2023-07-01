@@ -1,0 +1,7 @@
+Name:Utvara Scalper
+ManaCost:1 R
+Types:Creature Goblin Scout
+PT:1/2
+K:Flying
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Flying\nUtvara Scalper attacks each combat if able.

@@ -1,0 +1,11 @@
+Name:Ghost of Ramirez DePietro
+ManaCost:2 U
+Types:Legendary Creature Spirit Pirate
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.toughnessGE3 | Description$ CARDNAME can't be blocked by creatures with toughness 3 or greater.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose up to one target card in a graveyard that was discarded or put there from a library this turn. Put that card into its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.DiscardedThisTurn,Card.ThisTurnEnteredFrom_Library | TgtPrompt$ Choose up to one target card in any graveyard that has been discarded or put there from a library this turn
+K:Partner
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill
+Oracle:Ghost of Ramirez DePietro can't be blocked by creatures with toughness 3 or greater.\nWhenever Ghost of Ramirez DePietro deals combat damage to a player, choose up to one target card in a graveyard that was discarded or put there from a library this turn. Put that card into its owner's hand.\nPartner (You can have two commanders if both have partner.)

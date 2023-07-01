@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Mortal Coil
+Description=Mortality is annoying, but these creatures don't mind. The persist mechanic allows them to laugh in the face of death, or even benefit from dying. You'll weave combos and frustrate your opponent as your minions repeatedly jump back to play.
+Deck Type=constructed
+Set=SHM
+Image=mortal_coil.jpg
+
+[main]
+12  Island|SHM
+12  Swamp|SHM
+
+2  Chainbreaker|SHM
+1  Faerie Macabre|SHM
+3  Gravelgill Axeshark|SHM
+1  Grim Poppet|SHM
+1  Inkfathom Infiltrator|SHM
+1  Inkfathom Witch|SHM
+2  Leech Bonder|SHM
+1  Loch Korrigan|SHM
+1  Oona's Gatewarden|SHM
+1  River Kelpie|SHM
+1  Sickle Ripper|SHM
+2  Wanderbrine Rootcutters|SHM
+2  Wasp Lancer|SHM
+3  Wingrattle Scarecrow|SHM
+
+1  Biting Tether|SHM
+2  Fate Transfer|SHM
+1  Gloomlance|SHM
+1  Gnarled Effigy|SHM
+1  Helm of the Ghastlord|SHM
+1  Incremental Blight|SHM
+2  River's Grasp|SHM
+2  Scarscale Ritual|SHM
+1  Torture|SHM
+2  Trip Noose|SHM
+
+[sideboard]

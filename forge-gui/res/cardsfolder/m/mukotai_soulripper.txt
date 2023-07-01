@@ -1,0 +1,10 @@
+Name:Mukotai Soulripper
+ManaCost:1 B
+Types:Artifact Vehicle
+PT:4/3
+K:Crew:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature or artifact. If you do, put a +1/+1 counter on CARDNAME and it gains menace until end of turn.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Creature.Other;Artifact.Other/another artifact or creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Menace
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Whenever Mukotai Soulripper attacks, you may sacrifice another artifact or creature. If you do, put a +1/+1 counter on Mukotail Soulripper and it gains menace until end of turn.\nCrew 2

@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 11: Defenders of the Realm
+Title=Defenders of the Realm
+Difficulty=easy
+Description=Some fight for honor and some for gold, but the militia fights for hearth and home.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Ardent Militia|POR
+4 Armored Pegasus|POR
+4 Border Guard|POR
+4 Foot Soldiers|POR
+4 Path of Peace|POR
+24 Plains|POR|1
+4 Seasoned Marshal|POR
+4 Steadfastness|POR
+4 Stern Marshal|POR
+4 Warrior's Charge|POR|2

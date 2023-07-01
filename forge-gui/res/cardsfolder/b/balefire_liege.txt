@@ -1,0 +1,13 @@
+Name:Balefire Liege
+ManaCost:2 RW RW RW
+Types:Creature Spirit Horror
+PT:2/4
+S:Mode$ Continuous | Affected$ Creature.Red+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other red creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a red spell, CARDNAME deals 3 damage to target player or planeswalker.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell, you gain 3 life.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Card.Red,Card.White
+Oracle:Other red creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\nWhenever you cast a red spell, Balefire Liege deals 3 damage to target player or planeswalker.\nWhenever you cast a white spell, you gain 3 life.

@@ -1,0 +1,7 @@
+Name:Scroll of Avacyn
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SubAbility$ BlessedLife | SpellDescription$ Draw a card. If you control an Angel, you gain 5 life.
+SVar:BlessedLife:DB$ GainLife | Defined$ You | ConditionPresent$ Angel.YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 5 | ConditionDescription$ If you control an Angel,
+AI:RemoveDeck:Random
+Oracle:{1}, Sacrifice Scroll of Avacyn: Draw a card. If you control an Angel, you gain 5 life.

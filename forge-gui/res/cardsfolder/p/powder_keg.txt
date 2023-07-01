@@ -1,0 +1,9 @@
+Name:Powder Keg
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a fuse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FUSE | CounterNum$ 1
+A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX | SpellDescription$ Destroy each artifact and creature with mana value equal to the number of fuse counters on CARDNAME.
+SVar:X:Count$CardCounters.FUSE
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, you may put a fuse counter on Powder Keg.\n{T}, Sacrifice Powder Keg: Destroy each artifact and creature with mana value equal to the number of fuse counters on Powder Keg.

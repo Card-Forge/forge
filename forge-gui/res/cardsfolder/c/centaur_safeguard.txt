@@ -1,0 +1,7 @@
+Name:Centaur Safeguard
+ManaCost:2 GW
+Types:Creature Centaur Warrior
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you may gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
+Oracle:({G/W} can be paid with either {G} or {W}.)\nWhen Centaur Safeguard dies, you may gain 3 life.

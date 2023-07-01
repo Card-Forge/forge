@@ -1,0 +1,6 @@
+Name:Scalebane's Elite
+ManaCost:3 G W
+Types:Creature Human Soldier
+PT:4/4
+K:Protection from black
+Oracle:Protection from black

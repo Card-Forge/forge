@@ -1,0 +1,8 @@
+Name:Dire Fleet Hoarder
+ManaCost:1 B
+Types:Creature Human Pirate
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Dire Fleet Hoarder dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

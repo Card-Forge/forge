@@ -1,0 +1,6 @@
+Name:Golem's Heart
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Artifact | Execute$ TrigGainLife | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player casts an artifact spell, you may gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Whenever a player casts an artifact spell, you may gain 1 life.

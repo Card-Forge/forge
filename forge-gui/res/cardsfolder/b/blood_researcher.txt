@@ -1,0 +1,10 @@
+Name:Blood Researcher
+ManaCost:1 B G
+Types:Creature Vampire Druid
+PT:2/2
+K:Menace
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever you gain life, put a +1/+1 counter on Blood Researcher.

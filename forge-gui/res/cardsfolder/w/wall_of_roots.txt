@@ -1,0 +1,7 @@
+Name:Wall of Roots
+ManaCost:1 G
+Types:Creature Plant Wall
+PT:0/5
+K:Defender
+A:AB$ Mana | Cost$ AddCounter<1/M0M1> | Produced$ G | ActivationLimit$ 1 | SpellDescription$ Add {G}. Activate only once each turn.
+Oracle:Defender\nPut a -0/-1 counter on Wall of Roots: Add {G}. Activate only once each turn.

@@ -1,0 +1,6 @@
+Name:Rootwater Diver
+ManaCost:U
+Types:Creature Merfolk
+PT:1/1
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+Oracle:{T}, Sacrifice Rootwater Diver: Return target artifact card from your graveyard to your hand.

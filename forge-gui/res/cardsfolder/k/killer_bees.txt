@@ -1,0 +1,7 @@
+Name:Killer Bees
+ManaCost:1 G G
+Types:Creature Insect
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ G | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Flying\n{G}: Killer Bees gets +1/+1 until end of turn.

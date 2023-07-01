@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 092215 - Queen's Gambit
+URL:http://www.gatheringmagic.com/seanuy-092215-queens-gambit/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=3
+AILife=5
+humanhand=
+humangraveyard=
+humanlibrary=
+humanbattlefield=Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Coffin Queen; Silverskin Armor|AttachedTo:420; Krark-Clan Stoker|Id:420; Dross Scorpion; Firemaw Kavu; Liquimetal Coating
+aibattlefield=Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Llanowar Elves|Tapped; Beacon Hawk|Tapped; Canopy Cover|AttachedTo:422; Scavenging Ooze|Id:422|Counters:P1P1=5|Tapped; Blessed Orator; t:Rhino,P:4,T:4,Cost:no cost,Color:G,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr; t:Rhino,P:4,T:4,Cost:no cost,Color:G,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

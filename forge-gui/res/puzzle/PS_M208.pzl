@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/08/127.-M208.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. One of your Temple Gardens is enchanted with New Horizons (controlled by you).
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Ancient Animus;Dauntless Bodyguard;Band Together;Demonic Vigor
+humanbattlefield=Ajani's Pridemate;Angelic Guardian;Trapjaw Tyrant|Counters:P1P1=1;Sorin, Vengeful Bloodlord|Counters:LOYALTY=3;Temple Garden|Id:10|NoETBTrigs;Temple Garden|NoETBTrigs;New Horizons|AttachedTo:10;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs
+aibattlefield=Polyraptor;Shalai, Voice of Plenty;Imperial Ceratops;Ghalta, Primal Hunger

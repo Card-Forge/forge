@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Uuserk Marshes
+Title=The Uuserk Marshes
+Difficulty=easy
+Description="Of the six who went down the Uuserek Trail to scout ahead, one returned. She clawed at her eyes and nostrils and sobbed with horror. I was curious about what she saw, but we chose another path." -Scout Ekemet, final journal
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Cadaverous Knight|MIR
+4 Dirtwater Wraith|MIR
+4 Dread Specter|MIR
+4 Everglades|VIS
+4 Fetid Horror|MIR
+4 Harbinger of Night|MIR
+4 Mire Shade|MIR
+2 Painful Memories|MIR
+2 Stupor|MIR
+20 Swamp|MIR|2
+4 Tainted Specter|MIR
+4 Zombie Mob|MIR

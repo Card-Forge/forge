@@ -1,0 +1,31 @@
+[metadata]
+Name=Rowan, Fearless Sparkmage
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+Description=Throne of Eldraine W/R Planeswalker Deck
+Set=ELD
+Image=rowan_fearless_sparkmage.jpg
+[Main]
+1 Acclaimed Contender|ELD
+2 Ardenvale Tactician|ELD
+4 Garrison Griffin|ELD
+1 Giant Killer|ELD
+2 Inspiring Veteran|ELD
+2 Joust|ELD
+2 Knight of the Keep|ELD
+10 Mountain|ELD
+11 Plains|ELD
+2 Prized Griffin|ELD
+3 Rimrock Knight|ELD
+3 Rowan's Battleguard|ELD
+2 Rowan's Stalwarts|ELD
+1 Rowan, Fearless Sparkmage+|ELD
+3 Scorching Dragonfire|ELD
+2 Venerable Knight|ELD
+2 Weapon Rack|ELD
+1 Weaselback Redcap|ELD
+4 Wind-Scarred Crag|ELD
+2 Youthful Knight|ELD

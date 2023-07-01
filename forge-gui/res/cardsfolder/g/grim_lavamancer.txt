@@ -1,0 +1,7 @@
+Name:Grim Lavamancer
+ManaCost:R
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ DealDamage | Cost$ R T ExileFromGrave<2/Card> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:NonCombatPriority:1
+Oracle:{R}, {T}, Exile two cards from your graveyard: Grim Lavamancer deals 2 damage to any target.

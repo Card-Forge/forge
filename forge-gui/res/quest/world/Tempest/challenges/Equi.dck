@@ -1,0 +1,32 @@
+[quest]
+id=TempestQuest9
+OpponentName=Nature
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=3 green rares;booster pack TMP
+Credit Reward=500
+AIExtras=Forest|Forest|Forest|Forest
+HumanExtras=Forest|Forest|Equilibrium
+[metadata]
+Title=Natural Equilibrium
+Icon=Dungeon Crawling Green.jpg
+Difficulty=medium
+Description=Unnaturally excessive growth seems to happen around here, can you preserve the natural equilibrium of this world?
+Deck Type=constructed
+Name=Equi
+[Main]
+4 Apes of Rath|TMP
+2 Carnassid|STH
+4 Endangered Armodon|STH
+4 Forest|TMP|1
+4 Forest|TMP|2
+12 Forest|TMP|3
+3 Forest|TMP|4
+2 Heartwood Treefolk|TMP
+4 Primal Rage|STH
+3 Rootbreaker Wurm|TMP
+4 Skyshroud Troopers|STH
+4 Spined Wurm|STH
+8 Verdant Force|TMP
+2 Overrun|TMP

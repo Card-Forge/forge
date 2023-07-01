@@ -1,0 +1,6 @@
+Name:Norwood Riders
+ManaCost:3 G
+Types:Creature Elf
+PT:3/3
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+Oracle:Norwood Riders can't be blocked by more than one creature.

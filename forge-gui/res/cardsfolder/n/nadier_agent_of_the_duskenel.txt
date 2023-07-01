@@ -1,0 +1,13 @@
+Name:Nadier, Agent of the Duskenel
+ManaCost:5 B
+Types:Legendary Creature Elf Warrior
+PT:3/3
+K:Partner
+T:Mode$ ChangesZone | ValidCard$ Card.token+YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a token you control leaves the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigToken | TriggerDescription$ When NICKNAME leaves the battlefield, create a number of 1/1 green Elf Warrior creature tokens equal to its power.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_elf_warrior | TokenAmount$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Token|Counters
+DeckHints:Ability$Token & Type$Elf
+Oracle:Whenever a token you control leaves the battlefield, put a +1/+1 counter on Nadier, Agent of the Duskenel.\nWhen Nadier leaves the battlefield, create a number of 1/1 green Elf Warrior creature tokens equal to its power.\nPartner (You can have two commanders if both have partner.)

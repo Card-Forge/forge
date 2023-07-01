@@ -1,0 +1,9 @@
+Name:Marisi, Breaker of the Coil
+ManaCost:1 R G W
+Types:Legendary Creature Cat Warrior
+PT:5/4
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.Opponent | Phases$ BeginCombat->EndCombat | Description$ Your opponents can't cast spells during combat.
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGoad | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, goad each creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | Defined$ Valid Creature.ControlledBy Player.TriggeredTarget
+SVar:PlayMain1:TRUE
+Oracle:Your opponents can't cast spells during combat.\nWhenever a creature you control deals combat damage to a player, goad each creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)

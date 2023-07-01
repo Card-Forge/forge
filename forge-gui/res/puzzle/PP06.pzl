@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #06 - Let It Snow
+URL:https://www.reddit.com/r/Pauper/comments/5k460d/pauper_puzzles_6_let_it_snow_ft_new_visual_design
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=10
+humanhand=Appetite for the Unnatural;Aurochs Herd;Relic of Progenitus;Exhume;Act of Treason;Burst of Speed
+humanbattlefield=Snow-Covered Forest;Snow-Covered Forest;Snow-Covered Forest;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Swamp;Aurochs Herd
+humanlibrary=Skred
+humangraveyard=Aurochs Herd;Fume Spitter
+aibattlefield=Aurochs Herd|Counters:M1M1=1;Night Soil;Snow-Covered Forest|Tapped;Snow-Covered Forest|Tapped;Snow-Covered Forest|Tapped;Snow-Covered Forest|Tapped;Snow-Covered Forest|Tapped;Snow-Covered Forest|Tapped
+aigraveyard=Nylea's Disciple;Snow-Covered Swamp

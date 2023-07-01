@@ -1,0 +1,5 @@
+Name:Flame Slash
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+Oracle:Flame Slash deals 4 damage to target creature.

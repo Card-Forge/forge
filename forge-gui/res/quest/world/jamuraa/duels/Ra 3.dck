@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ra 3
+Title=Ra
+Icon=Ra.jpg
+Difficulty=hard
+Description=Ra plays a variant of Jakub Slemr's 'Czech Gun' deck from the 1997 Worlds tournament.
+Deck Type=constructed
+[main]
+2 Armageddon|5ED
+2 Disenchant|5ED
+4 Erhnam Djinn|ARN
+2 Grasslands|MIR
+2 Guerrilla Tactics|ALL
+2 Incinerate|MIR
+1 Lifeblood|LEG
+4 Lightning Bolt|LEB
+1 Mountain Valley|MIR
+4 Order of Leitbur|FEM
+3 Order of the White Shield|ICE
+5 Plains|5ED
+4 Plateau|LEB
+2 Reverse Damage|LEB
+4 Savannah|LEB
+3 Savannah Lions|LEB
+1 Stormbind|ICE
+3 Swords to Plowshares|LEB
+4 Taiga|LEB
+2 Tithe|VIS
+3 White Knight|5ED
+2 Wildfire Emissary|MIR
+[sideboard]
+[planes]
+[schemes]

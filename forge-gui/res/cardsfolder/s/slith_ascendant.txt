@@ -1,0 +1,8 @@
+Name:Slith Ascendant
+ManaCost:1 W W
+Types:Creature Slith
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying\nWhenever Slith Ascendant deals combat damage to a player, put a +1/+1 counter on it.

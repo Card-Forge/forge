@@ -1,0 +1,7 @@
+Name:Cloud Dragon
+ManaCost:5 U
+Types:Creature Illusion Dragon
+PT:5/4
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nCloud Dragon can block only creatures with flying.

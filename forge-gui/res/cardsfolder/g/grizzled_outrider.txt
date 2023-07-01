@@ -1,0 +1,5 @@
+Name:Grizzled Outrider
+ManaCost:4 G
+Types:Creature Elf Warrior
+PT:5/5
+Oracle:

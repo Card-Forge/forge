@@ -1,0 +1,11 @@
+Name:Heroism
+ManaCost:2 W
+Types:Enchantment
+A:AB$ RepeatEach | Cost$ Sac<1/Creature.White/White Creature> | RepeatCards$ Creature.attacking+Red | UseImprinted$ True | RepeatSubAbility$ DBPump | SubAbility$ DBEffect | SpellDescription$ For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.
+SVar:DBPump:DB$ Pump | RememberObjects$ Imprinted | UnlessCost$ 2 R | UnlessPayer$ ImprintedController | ShowCurrentCard$ Imprinted
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AIPreference:SacCost$Creature.token
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:Sacrifice a white creature: For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.

@@ -1,0 +1,8 @@
+Name:Spore Crawler
+ManaCost:2 G
+Types:Creature Fungus
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:SacMe:1
+Oracle:When Spore Crawler dies, draw a card.

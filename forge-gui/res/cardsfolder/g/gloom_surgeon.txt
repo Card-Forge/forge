@@ -1,0 +1,8 @@
+Name:Gloom Surgeon
+ManaCost:1 B
+Types:Creature Spirit
+PT:2/1
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | IsCombat$ True | ReplaceWith$ Exile | PreventionEffect$ True | AlwaysReplace$ True | Description$ If combat damage would be dealt to CARDNAME, prevent that damage and exile that many cards from the top of your library.
+SVar:Exile:DB$ Dig | DigNum$ X | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile
+SVar:X:ReplaceCount$DamageAmount
+Oracle:If combat damage would be dealt to Gloom Surgeon, prevent that damage and exile that many cards from the top of your library.

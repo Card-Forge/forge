@@ -1,0 +1,6 @@
+Name:Foundry Assembler
+ManaCost:5
+Types:Artifact Creature Assembly-Worker
+PT:3/3
+K:Improvise
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)

@@ -1,0 +1,11 @@
+Name:Neyam Shai Murad
+ManaCost:2 W B
+Types:Legendary Creature Human Rogue
+PT:3/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Rogue Trader — Whenever CARDNAME deals combat damage to a player, you may have that player return target permanent card from their graveyard to their hand. If you do, that player chooses a permanent card in your graveyard, then you put it onto the battlefield under your control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target permanent in their graveyard | ValidTgts$ Permanent.OwnedBy TriggeredTarget | AILogic$ WorstCard | RememberChanged$ True | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ TriggeredTarget | Mandatory$ True | Choices$ Permanent.YouOwn | AILogic$ WorstCard | ChoiceZone$ Graveyard | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+DeckHas:Ability$Graveyard
+Oracle:Rogue Trader — Whenever Neyam Shai Murad deals combat damage to a player, you may have that player return target permanent card from their graveyard to their hand. If you do, that player chooses a permanent card in your graveyard, then you put it onto the battlefield under your control.

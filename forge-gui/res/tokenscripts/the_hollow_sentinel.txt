@@ -1,0 +1,5 @@
+Name:The Hollow Sentinel
+ManaCost:no cost
+Types:Legendary Artifact Creature Phyrexian Golem
+PT:3/3
+Oracle:

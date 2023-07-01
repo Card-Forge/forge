@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Piper 2
+Title=Piper
+Difficulty=medium
+Description=Mono B rat deck with Ogre Slumlord, Pack Rat and Ratcatcher 
+Icon=Piper.jpg
+Deck Type=constructed
+[main]
+3 Carrion Rats
+2 Chittering Rats
+2 Drainpipe Vermin
+2 Marrow-Gnawer
+4 Ogre Slumlord
+4 Pack Rat
+4 Pestilence Rats
+4 Ratcatcher
+2 Ravenous Rats
+2 Razortooth Rats
+24 Swamp
+4 Swarm of Rats
+3 Typhoid Rats
+[sideboard]

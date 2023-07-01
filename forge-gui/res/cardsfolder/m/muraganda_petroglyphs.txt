@@ -1,0 +1,5 @@
+Name:Muraganda Petroglyphs
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.NoAbilities | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures with no abilities get +2/+2.
+Oracle:Creatures with no abilities get +2/+2.

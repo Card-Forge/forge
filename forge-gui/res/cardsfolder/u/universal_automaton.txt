@@ -1,0 +1,6 @@
+Name:Universal Automaton
+ManaCost:1
+Types:Artifact Creature Shapeshifter
+PT:1/1
+K:Changeling
+Oracle:Changeling (This card is every creature type.)

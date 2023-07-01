@@ -1,0 +1,7 @@
+Name:Pyrite Spellbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Any | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ It deals 2 damage to any target.
+AI:RemoveDeck:Random
+Oracle:{R}, Sacrifice Pyrite Spellbomb: It deals 2 damage to any target.\n{1}, Sacrifice Pyrite Spellbomb: Draw a card.

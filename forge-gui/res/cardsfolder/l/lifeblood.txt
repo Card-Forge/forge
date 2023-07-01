@@ -1,0 +1,8 @@
+Name:Lifeblood
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ Taps | ValidCard$ Mountain.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Mountain an opponent controls becomes tapped, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
+AI:RemoveDeck:Random
+DeckHas:Ability$LifeGain
+Oracle:Whenever a Mountain an opponent controls becomes tapped, you gain 1 life.

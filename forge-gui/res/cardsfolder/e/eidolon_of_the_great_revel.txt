@@ -1,0 +1,8 @@
+Name:Eidolon of the Great Revel
+ManaCost:R R
+Types:Enchantment Creature Spirit
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.cmcLE3 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player casts a spell with mana value 3 or less, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 2
+AI:RemoveDeck:Random
+Oracle:Whenever a player casts a spell with mana value 3 or less, Eidolon of the Great Revel deals 2 damage to that player.

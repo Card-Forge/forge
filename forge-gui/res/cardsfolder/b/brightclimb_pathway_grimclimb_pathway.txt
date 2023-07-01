@@ -1,0 +1,14 @@
+Name:Brightclimb Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+AlternateMode:Modal
+Oracle:{T}: Add {W}.
+
+ALTERNATE
+
+Name:Grimclimb Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:{T}: Add {B}.

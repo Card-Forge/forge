@@ -1,0 +1,6 @@
+Name:Wish
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Effect | StaticAbilities$ PlaySideboard | SpellDescription$ You may play a card you own from outside the game this turn.
+SVar:PlaySideboard:Mode$ Continuous | Affected$ Card.YouOwn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Sideboard | Description$ You may play a card you own from outside the game this turn.
+Oracle:You may play a card you own from outside the game this turn.

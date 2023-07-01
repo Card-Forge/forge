@@ -1,0 +1,6 @@
+Name:Fleshwrither
+ManaCost:2 B B
+Types:Creature Horror
+PT:3/3
+K:Transfigure:1 B B
+Oracle:Transfigure {1}{B}{B} ({1}{B}{B}, Sacrifice this creature: Search your library for a creature card with the same mana value as this creature, put that card onto the battlefield, then shuffle. Transfigure only as a sorcery.)

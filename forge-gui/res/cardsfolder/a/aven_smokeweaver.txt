@@ -1,0 +1,7 @@
+Name:Aven Smokeweaver
+ManaCost:2 U U
+Types:Creature Bird Soldier
+PT:2/3
+K:Flying
+K:Protection from red
+Oracle:Flying, protection from red

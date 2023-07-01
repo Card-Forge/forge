@@ -1,0 +1,7 @@
+Name:Bull Cerodon
+ManaCost:4 R W
+Types:Creature Beast
+PT:5/5
+K:Vigilance
+K:Haste
+Oracle:Vigilance, haste

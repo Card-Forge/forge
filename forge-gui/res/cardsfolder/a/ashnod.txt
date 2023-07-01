@@ -1,0 +1,7 @@
+Name:Ashnod
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/-8
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | Execute$ TrigDestroy | TriggerZones$ Command | TriggerDescription$ Whenever a creature deals damage to you, destroy it.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy
+Oracle:Hand +1, life -8\nWhenever a creature deals damage to you, destroy it.

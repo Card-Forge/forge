@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/07/122.m203.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has no mana available.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Shatter;Teferi's Time Twist;Role Reversal;Trumpet Blast
+humanbattlefield=Viashino Pyromancer;Retributive Wand;Captain's Hook;Saheeli, Sublime Artificer|Counters:LOYALTY=3;Island;Island;Mountain;Mountain
+aibattlefield=Pardic Wanderer

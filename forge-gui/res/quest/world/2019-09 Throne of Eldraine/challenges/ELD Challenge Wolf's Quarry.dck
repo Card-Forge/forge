@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Wolf's Quarry
+OpponentName=The Little Piggies
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Gingerbread Cabin|Gingerbread Cabin|Gingerbread Cabin|Gingerbread Cabin
+HumanExtras=
+[metadata]
+Title=Wolf's Quarry
+Difficulty=medium
+Description=This little piggy went to market,\nThis little piggy stayed home,\nAnd this little piggy started with four lands.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Wolf's Quarry
+[Main]
+30 Forest|ELD|2
+30 Wolf's Quarry|ELD

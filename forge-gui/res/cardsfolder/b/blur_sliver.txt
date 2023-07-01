@@ -1,0 +1,8 @@
+Name:Blur Sliver
+ManaCost:2 R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Haste | Description$ Sliver creatures you control have haste.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have haste. (They can attack and {T} as soon as they come under your control.)

@@ -1,0 +1,6 @@
+Name:Look at Me, I'm the DCI
+ManaCost:5 W W
+Types:Sorcery
+A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | SelectPrompt$ Choose a card other than a basic land card to ban | SubAbility$ DBRemove | AILogic$ MostProminentInHumanDeck | StackDescription$ None | SpellDescription$ Ban a card other than a basic land card for the rest of the match. (All cards with that name in any zone or sideboard are removed from the match.)
+SVar:DBRemove:DB$ RemoveFromMatch | RemoveType$ Card.NamedCard | IncludeSideboard$ True | StackDescription$ Ban a card other than a basic land card for the rest of the match. (All cards with that name in any zone or sideboard are removed from the match.)
+Oracle:Ban a card other than a basic land card for the rest of the match. (All cards with that name in any zone or sideboard are removed from the match.)

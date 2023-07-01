@@ -1,0 +1,7 @@
+Name:Zenith Chronicler
+ManaCost:2
+Types:Artifact Creature Phyrexian Construct
+PT:3/1
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | ActivatorThisTurnCast$ EQ1 | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts their first multicolored spell each turn, each other player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ NonTriggeredCardController
+Oracle:Whenever a player casts their first multicolored spell each turn, each other player draws a card.

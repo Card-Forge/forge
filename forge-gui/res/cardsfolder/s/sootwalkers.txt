@@ -1,0 +1,6 @@
+Name:Sootwalkers
+ManaCost:2 BR BR
+Types:Creature Elemental Rogue
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.White | Description$ CARDNAME can't be blocked by white creatures.
+Oracle:Sootwalkers can't be blocked by white creatures.

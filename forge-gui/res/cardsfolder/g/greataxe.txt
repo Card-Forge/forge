@@ -1,0 +1,6 @@
+Name:Greataxe
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:5
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
+Oracle:Equipped creature gets +4/+0.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)

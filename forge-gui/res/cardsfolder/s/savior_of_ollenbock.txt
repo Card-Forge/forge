@@ -1,0 +1,11 @@
+Name:Savior of Ollenbock
+ManaCost:1 W W
+Types:Creature Human Soldier
+PT:1/2
+K:Training
+T:Mode$ Trains | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME trains, exile up to one other target creature from the battlefield or creature card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield,Graveyard | Destination$ Exile | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature from the battlefield or creature card from a graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Battlefield,Graveyard | AILogic$ SaviorOfOllenbock
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME leaves the battlefield, put the exiled cards onto the battlefield under their owners' control.
+SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
+DeckHas:Ability$Counters
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever Savior of Ollenbock trains, exile up to one other target creature from the battlefield or creature card from a graveyard.\nWhen Savior of Ollenbock leaves the battlefield, put the exiled cards onto the battlefield under their owners' control.

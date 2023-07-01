@@ -1,0 +1,9 @@
+Name:Mask of the Schemer
+ManaCost:2 U
+Types:Artifact Equipment
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, it connives X, where X is the amount of damage it dealt to that player. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)
+SVar:TrigConnive:DB$ Connive | Defined$ Equipped | ConniveNum$ X
+SVar:X:TriggerCount$DamageAmount
+K:Equip:2
+DeckHas:Ability$Discard|Counters
+Oracle:Whenever equipped creature deals combat damage to a player, it connives X, where X is the amount of damage it dealt to that player. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)\nEquip {2}

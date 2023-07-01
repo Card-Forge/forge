@@ -1,0 +1,7 @@
+Name:Heralds of Tzeentch
+ManaCost:4 U
+Types:Creature Demon
+PT:3/3
+K:Flying
+K:Cascade
+Oracle:Flying\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

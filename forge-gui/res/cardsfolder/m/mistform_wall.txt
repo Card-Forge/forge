@@ -1,0 +1,9 @@
+Name:Mistform Wall
+ManaCost:2 U
+Types:Creature Illusion Wall
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.Self+Wall | AddKeyword$ Defender | Description$ CARDNAME has defender as long as it's a Wall.
+A:AB$ ChooseType | Cost$ 1 | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
+AI:RemoveDeck:All
+Oracle:Mistform Wall has defender as long as it's a Wall.\n{1}: Mistform Wall becomes the creature type of your choice until end of turn.

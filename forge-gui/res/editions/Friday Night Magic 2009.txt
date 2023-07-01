@@ -1,0 +1,20 @@
+[metadata]
+Code=F09
+Date=2009-01-01
+Name=Friday Night Magic 2009
+Type=Promo
+ScryfallCode=F09
+
+[cards]
+1 R Magma Jet @Darrell Riche
+2 R Myr Enforcer @Jim Murray
+3 R Kitchen Finks @Larry MacDougall
+4 R Merrow Reejerey @Thomas M. Baxa
+5 R Wren's Run Vanquisher @Jesper Ejsing
+6 R Mulldrifter @Wayne England
+7 R Murderous Redcap @Mark Hyzer
+8 R Lightning Greaves @Michael Komarck
+9 R Watchwolf @Dave Kendall
+10 R Browbeat @Kieran Yanner
+11 R Oblivion Ring @Chuck Lukacs
+12 R Sakura-Tribe Elder @Ted Galaday

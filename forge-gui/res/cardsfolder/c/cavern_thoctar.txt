@@ -1,0 +1,6 @@
+Name:Cavern Thoctar
+ManaCost:5 G
+Types:Creature Beast
+PT:5/5
+A:AB$ Pump | Defined$ Self | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:{1}{R}: Cavern Thoctar gets +1/+0 until end of turn.

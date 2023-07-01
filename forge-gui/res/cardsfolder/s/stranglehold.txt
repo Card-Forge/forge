@@ -1,0 +1,8 @@
+Name:Stranglehold
+ManaCost:3 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ CantSearchLibrary | Description$ Your opponents can't search libraries.
+R:Event$ BeginTurn | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ExtraTurn$ True | Skip$ True | Description$ If an opponent would begin an extra turn, that player skips that turn instead.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Your opponents can't search libraries.\nIf an opponent would begin an extra turn, that player skips that turn instead.

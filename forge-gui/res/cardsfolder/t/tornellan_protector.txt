@@ -1,0 +1,9 @@
+Name:Tornellan Protector
+ManaCost:2 W
+Types:Creature Cleric
+PT:1/2
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | RememberObjects$ Targeted | ReplacementEffects$ Protect | SpellDescription$ Until end of turn, each time damage is dealt to target creature or player, prevent X of that damage, where X is a number from 1 to 3 chosen at random each time.
+SVar:Protect:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.IsRemembered,Player.IsRemembered | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ Until end of turn, each time damage is dealt to target creature or player, prevent X of that damage, where X is a number from 1 to 3 chosen at random each time.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ X
+SVar:X:Count$Random.1.3
+Oracle:{T}: Until end of turn, each time damage is dealt to target creature or player, prevent X of that damage, where X is a number from 1 to 3 chosen at random each time.

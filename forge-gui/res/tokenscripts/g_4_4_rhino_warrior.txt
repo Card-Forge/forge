@@ -1,0 +1,6 @@
+Name:Rhino Warrior Token
+ManaCost:no cost
+Colors:green
+Types:Creature Rhino Warrior
+PT:4/4
+Oracle:

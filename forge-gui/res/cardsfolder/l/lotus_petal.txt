@@ -1,0 +1,6 @@
+Name:Lotus Petal
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice Lotus Petal: Add one mana of any color.

@@ -1,0 +1,10 @@
+Name:Pollywog Symbiote
+ManaCost:1 U
+Types:Creature Frog
+PT:1/3
+S:Mode$ ReduceCost | ValidCard$ Creature.withMutate | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Each creature spell you cast costs {1} less to cast if it has mutate.
+T:Mode$ SpellCast | ValidCard$ Creature.withMutate | ValidActivatingPlayer$ You | Execute$ TrigLoot | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, if it has mutate, draw a card, then discard a card.
+SVar:TrigLoot:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:BuffedBy:Card.withMutate
+Oracle:Each creature spell you cast costs {1} less to cast if it has mutate.\nWhenever you cast a creature spell, if it has mutate, draw a card, then discard a card.

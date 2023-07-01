@@ -1,0 +1,11 @@
+Name:Demon's Disciple
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature or planeswalker.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature,Planeswalker | SacMessage$ creature or planeswalker
+DeckHas:Ability$Sacrifice
+SVar:X:Count$Valid Creature.OppCtrl/Plus.Y
+SVar:Y:Count$Valid Planeswalker.OppCtrl
+SVar:NeedsToPlayVar:X GE1
+Oracle:When Demon's Disciple enters the battlefield, each player sacrifices a creature or planeswalker.

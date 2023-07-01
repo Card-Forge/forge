@@ -1,0 +1,6 @@
+Name:Phantom Warrior
+ManaCost:1 U U
+Types:Creature Illusion Warrior
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Phantom Warrior can't be blocked.

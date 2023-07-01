@@ -1,0 +1,6 @@
+Name:Scourglass
+ManaCost:3 W W
+Types:Artifact
+A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonArtifact+nonLand | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Destroy all permanents except for artifacts and lands. Activate only during your upkeep.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate only during your upkeep.

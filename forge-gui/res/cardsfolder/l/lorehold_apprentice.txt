@@ -1,0 +1,9 @@
+Name:Lorehold Apprentice
+ManaCost:R W
+Types:Creature Human Cleric
+PT:2/2
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, until end of turn, Spirit creatures you control gain "{T}: This creature deals 1 damage to each opponent."
+SVar:TrigPumpAll:DB$ AnimateAll | ValidCards$ Creature.Spirit+YouCtrl | Abilities$ Sizzle
+SVar:Sizzle:AB$ DealDamage | Cost$ T | Defined$ Opponent | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to each opponent.
+DeckHints:Type$Instant|Sorcery
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, until end of turn, Spirit creatures you control gain "{T}: This creature deals 1 damage to each opponent."

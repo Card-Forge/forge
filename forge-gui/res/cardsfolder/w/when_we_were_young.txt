@@ -1,0 +1,8 @@
+Name:When We Were Young
+ManaCost:3 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creatures | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Up to two target creatures each get +2/+2 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink | ConditionPresent$ Artifact.YouCtrl | ConditionPresent2$ Enchantment.YouCtrl | SpellDescription$ If you control an artifact and an enchantment, those creatures also gain lifelink until end of turn.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Artifact|Enchantment
+Oracle:Up to two target creatures each get +2/+2 until end of turn. If you control an artifact and an enchantment, those creatures also gain lifelink until end of turn.

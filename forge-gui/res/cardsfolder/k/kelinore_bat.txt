@@ -1,0 +1,6 @@
+Name:Kelinore Bat
+ManaCost:2 B
+Types:Creature Bat
+PT:2/1
+K:Flying
+Oracle:Flying

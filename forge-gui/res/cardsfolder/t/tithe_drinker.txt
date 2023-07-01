@@ -1,0 +1,7 @@
+Name:Tithe Drinker
+ManaCost:W B
+Types:Creature Vampire
+PT:2/1
+K:Lifelink
+K:Extort
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)

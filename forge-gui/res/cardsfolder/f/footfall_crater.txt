@@ -1,0 +1,11 @@
+Name:Footfall Crater
+ManaCost:R
+Types:Enchantment Aura
+K:Enchant land
+K:Cycling:1
+A:SP$ Attach | Cost$ R | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ DBPump | Description$ Enchanted land has "{T}: Target creature gains trample and haste until end of turn."
+SVar:DBPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample & Haste | SpellDescription$ Target creature gains trample and haste until end of turn.
+SVar:NonStackingAttachEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Enchant land\nEnchanted land has "{T}: Target creature gains trample and haste until end of turn."\nCycling {1} ({1}, Discard this card: Draw a card.)

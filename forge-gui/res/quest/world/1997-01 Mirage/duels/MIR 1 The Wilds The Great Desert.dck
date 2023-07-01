@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Great Desert
+Title=The Great Desert
+Difficulty=easy
+Description="When traveling the Great Desert avoid wearing the scales of lizards, for the Viashino rule the sands and look poorly on the skinning of their cousins." -Zhalfirin Guide to the Desert
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Afiya Grove|MIR
+7 Forest|MIR|1
+2 Heat Wave|VIS
+2 Hivis of the Scale|MIR
+4 Kyscu Drake|VIS
+9 Mountain|MIR|1
+4 Mountain Valley|MIR
+4 Pyric Salamander|MIR
+4 Quicksand|VIS
+2 Sandstorm|MIR
+2 Simoon|VIS
+2 Sirocco|MIR
+4 Spitting Drake|VIS
+2 Superior Numbers|MIR
+2 Viashino Sandstalker|VIS
+4 Viashino Warrior|MIR
+2 Viashivan Dragon|VIS

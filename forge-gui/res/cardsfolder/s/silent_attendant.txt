@@ -1,0 +1,6 @@
+Name:Silent Attendant
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:0/2
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+Oracle:{T}: You gain 1 life.

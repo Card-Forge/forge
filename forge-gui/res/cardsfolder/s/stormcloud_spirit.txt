@@ -1,0 +1,6 @@
+Name:Stormcloud Spirit
+ManaCost:3 U U
+Types:Creature Spirit
+PT:4/4
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

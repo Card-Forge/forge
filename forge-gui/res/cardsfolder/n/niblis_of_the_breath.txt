@@ -1,0 +1,8 @@
+Name:Niblis of the Breath
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/1
+K:Flying
+A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+AI:RemoveDeck:All
+Oracle:Flying\n{U}, {T}: You may tap or untap target creature.

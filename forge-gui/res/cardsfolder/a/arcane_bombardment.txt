@@ -1,0 +1,8 @@
+Name:Arcane Bombardment
+ManaCost:4 R R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigExile | TriggerZones$ Battlefield | OrderDuplicates$ True | TriggerDescription$ Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at random from your graveyard. Then copy each card exiled with CARDNAME. You may cast any number of the copies without paying their mana costs.
+SVar:TrigExile:DB$ ChangeZone | DefinedPlayer$ You | Destination$ Exile | ChangeNum$ 1 | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | AtRandom$ True | Origin$ Graveyard | Hidden$ True | Mandatory$ True | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | Valid$ Card.ExiledWithSource | ValidSA$ Spell | ValidZone$ Exile | Amount$ All | CopyCard$ True | Optional$ True | WithoutManaCost$ True
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at random from your graveyard. Then copy each card exiled with Arcane Bombardment. You may cast any number of the copies without paying their mana costs.

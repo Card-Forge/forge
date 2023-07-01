@@ -1,0 +1,6 @@
+Name:Pride of Lions
+ManaCost:3 G G
+Types:Creature Cat
+PT:4/4
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+Oracle:You may have Pride of Lions assign its combat damage as though it weren't blocked.

@@ -1,0 +1,7 @@
+Name:Thunderstaff
+ManaCost:3
+Types:Artifact
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature | ValidTarget$ You | IsCombat$ True | ReplaceWith$ DBReplace | PreventionEffect$ True | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+A:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
+Oracle:As long as Thunderstaff is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.\n{2}, {T}: Attacking creatures get +1/+0 until end of turn.

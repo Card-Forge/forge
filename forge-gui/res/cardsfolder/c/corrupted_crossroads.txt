@@ -1,0 +1,9 @@
+Name:Corrupted Crossroads
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}. ({C} represents colorless mana.)
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.withDevoid | SpellDescription$ Add one mana of any color. Spend this mana only to cast a spell with devoid.
+AI:RemoveDeck:Random
+DeckHas:Ability$Mana.Colorless
+DeckNeeds:Keyword$Devoid
+Oracle:{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid.

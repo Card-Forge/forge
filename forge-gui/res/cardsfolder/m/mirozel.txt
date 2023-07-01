@@ -1,0 +1,9 @@
+Name:Mirozel
+ManaCost:3 U
+Types:Creature Illusion
+PT:2/3
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
+AI:RemoveDeck:All
+Oracle:Flying\nWhen Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.

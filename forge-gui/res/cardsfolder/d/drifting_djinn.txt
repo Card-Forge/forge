@@ -1,0 +1,8 @@
+Name:Drifting Djinn
+ManaCost:4 U U
+Types:Creature Djinn
+PT:5/5
+K:Flying
+K:Cycling:2
+K:UpkeepCost:1 U
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Drifting Djinn unless you pay {1}{U}.\nCycling {2} ({2}, Discard this card: Draw a card.)

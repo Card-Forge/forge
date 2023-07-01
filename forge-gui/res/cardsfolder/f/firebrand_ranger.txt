@@ -1,0 +1,6 @@
+Name:Firebrand Ranger
+ManaCost:1 R
+Types:Creature Human Soldier Ranger
+PT:2/1
+A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a basic land card from your hand onto the battlefield.
+Oracle:{G}, {T}: You may put a basic land card from your hand onto the battlefield.

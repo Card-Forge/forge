@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: Zur the Enchanter
+Title=Zur the Enchanter
+Difficulty=easy
+Description="I will go to any length to achieve my goal. Eternal life is worth any sacrifice." -Zur the Enchanter
+
+Also called Zur the Mad, he was a rival of the famous Gerda Aagesdotter, the archmage of the School of the Unseen. A former Kjeldoran, Zur was exiled for his insane attempts to achieve eternal life. He later assembled a formidable array of mages and soldiers and attacked his former homeland.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+2 Enduring Renewal|ICE
+4 Essence Vortex|ICE
+2 False Demise|ALL|1
+5 Island|ICE|2
+4 Island|ICE|3
+1 Merieke Ri Berit|ICE
+4 Musician|ICE
+5 Plains|ICE|2
+4 Ray of Command|ICE
+4 Spectral Shield|ICE
+2 Swamp|ICE|1
+4 Underground River|ICE
+4 Wandering Mage|ALL
+4 Wings of Aesthir|ICE
+2 Zur's Weirding|ICE
+1 Zuran Orb|ICE
+4 Zuran Spellcaster|ICE

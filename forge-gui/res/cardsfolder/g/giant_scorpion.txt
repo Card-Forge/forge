@@ -1,0 +1,6 @@
+Name:Giant Scorpion
+ManaCost:2 B
+Types:Creature Scorpion
+PT:1/3
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

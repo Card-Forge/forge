@@ -1,0 +1,6 @@
+Name:Strip Mine
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T Sac<1/CARDNAME> | AILogic$ LandForLand | SpellDescription$ Destroy target land.
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Strip Mine: Destroy target land.

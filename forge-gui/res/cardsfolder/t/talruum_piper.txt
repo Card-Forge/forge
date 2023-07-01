@@ -1,0 +1,6 @@
+Name:Talruum Piper
+ManaCost:4 R
+Types:Creature Minotaur
+PT:3/3
+K:MustBeBlockedByAll:Creature.withFlying:All creatures with flying able to block CARDNAME do so.
+Oracle:All creatures with flying able to block Talruum Piper do so.

@@ -1,0 +1,52 @@
+[quest]
+id=7
+AILife=30
+Repeat=true
+Wins=28
+Card Reward=3 multicolor rares
+Credit Reward=150
+HumanExtras=
+AIExtras=Darksteel Ingot
+[metadata]
+Name=quest7
+Title=Dungeon Crawling (Gold)
+Difficulty=hard
+Description=Clever sorcerers draw energy from countless sources - can you outwit them?
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Glimmervoid
+4 Reflecting Pool
+4 Rupture Spire
+4 Undiscovered Paradise
+4 Grand Coliseum
+1 Tendo Ice Bridge
+1 Vivid Crag
+1 Vivid Creek
+1 Vivid Grove
+1 Vivid Marsh
+1 Vivid Meadow
+4 Manalith
+2 Bant Sureblade
+2 Esper Stormblade
+2 Grixis Grimblade
+2 Jund Hackblade
+2 Naya Hushblade
+1 Gloryscale Viashino
+4 Knight of New Alara
+1 Dune-Brood Nephilim
+1 Glint-Eye Nephilim
+1 Witch-Maw Nephilim
+1 Yore-Tiller Nephilim
+1 Transguild Courier
+1 Defiler of Souls
+1 Cromat
+3 Fusion Elemental
+1 Genju of the Realm
+1 Horde of Notions
+1 Progenitus
+2 Blessing of the Nephilim
+2 Dragon Arch
+1 Conflux
+1 Maelstrom Nexus
+[sideboard]

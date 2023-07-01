@@ -1,0 +1,7 @@
+Name:Smothering Tithe
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws a card, that player may pay {2}. If the player doesn't, you create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | UnlessCost$ 2 | UnlessPayer$ TriggeredCardController | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Whenever an opponent draws a card, that player may pay {2}. If the player doesn't, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

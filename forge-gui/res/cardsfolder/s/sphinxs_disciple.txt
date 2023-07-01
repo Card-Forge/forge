@@ -1,0 +1,8 @@
+Name:Sphinx's Disciple
+ManaCost:3 U U
+Types:Creature Human Wizard
+PT:2/2
+K:Flying
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Flying\nInspired — Whenever Sphinx's Disciple becomes untapped, draw a card.

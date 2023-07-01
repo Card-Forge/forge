@@ -1,0 +1,7 @@
+Name:Didgeridoo
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 3 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Minotaur | ChangeNum$ 1 | SpellDescription$ You may put a Minotaur permanent card from your hand onto the battlefield.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:{3}: You may put a Minotaur permanent card from your hand onto the battlefield.

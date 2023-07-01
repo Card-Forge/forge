@@ -1,0 +1,9 @@
+Name:Kestia, the Cultivator
+ManaCost:1 G W U
+Types:Legendary Enchantment Creature Nymph
+PT:4/4
+K:Bestow:3 G W U
+S:Mode$ Continuous | Affected$ Card.AttachedBy | AddPower$ 4 | AddToughness$ 4 | Description$ Enchanted creature gets +4/+4.
+T:Mode$ Attacks | ValidCard$ Creature.enchanted+YouCtrl,Creature.Enchantment+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an enchanted creature or enchantment creature you control attacks, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Bestow {3}{G}{W}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nEnchanted creature gets +4/+4.\nWhenever an enchanted creature or enchantment creature you control attacks, draw a card.

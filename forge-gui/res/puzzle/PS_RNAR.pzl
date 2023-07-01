@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance Preview Card Puzzle Revisited
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/03/107.-RNA003.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards you could draw are irrelevant to the puzzle.
+[state]
+humanlife=20
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Macabre Mockery;Makeshift Munitions;Strider Harness;Captivating Crew
+humanbattlefield=Dead Weight|AttachedTo:1;Rowdy Crew|Counters:P1P1=2;Rowdy Crew|Counters:P1P1=2;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Mountain;Mountain;Mountain;Mountain
+humanlibrary=Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace
+aigraveyard=Majestic Heliopterus;Hostage Taker;Ravenous Chupacabra;Bishop of Binding
+aibattlefield=Baird, Steward of Argive|Id:1;Dire Fleet Poisoner;Dire Fleet Poisoner;Dire Fleet Poisoner;Dire Fleet Poisoner

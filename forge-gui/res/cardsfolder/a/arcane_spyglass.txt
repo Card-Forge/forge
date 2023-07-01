@@ -1,0 +1,8 @@
+Name:Arcane Spyglass
+ManaCost:4
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T Sac<1/Land> | SubAbility$ DBPutCounter | SpellDescription$ Draw a card and put a charge counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Draw | Cost$ SubCounter<3/CHARGE> | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:{2}, {T}, Sacrifice a land: Draw a card and put a charge counter on Arcane Spyglass.\nRemove three charge counters from Arcane Spyglass: Draw a card.

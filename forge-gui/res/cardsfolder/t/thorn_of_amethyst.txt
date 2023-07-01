@@ -1,0 +1,6 @@
+Name:Thorn of Amethyst
+ManaCost:2
+Types:Artifact
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
+AI:RemoveDeck:Random
+Oracle:Noncreature spells cost {1} more to cast.

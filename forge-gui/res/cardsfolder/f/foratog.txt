@@ -1,0 +1,7 @@
+Name:Foratog
+ManaCost:2 G
+Types:Creature Atog
+PT:1/2
+A:AB$ Pump | Cost$ G Sac<1/Forest> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Sacrifice
+Oracle:{G}, Sacrifice a Forest: Foratog gets +2/+2 until end of turn.

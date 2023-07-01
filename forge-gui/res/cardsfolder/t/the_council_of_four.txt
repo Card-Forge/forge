@@ -1,0 +1,11 @@
+Name:The Council of Four
+ManaCost:3 W U
+Types:Legendary Creature Human Noble
+PT:0/8
+T:Mode$ Drawn | ValidPlayer$ Player.Active | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player draws their second card during their turn, you draw a card.
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Active | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a player casts their second spell during their turn, you create a 2/2 white Knight creature token.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_knight
+DeckHints:Type$Knight
+DeckHas:Ability$Token
+Oracle:Whenever a player draws their second card during their turn, you draw a card.\nWhenever a player casts their second spell during their turn, you create a 2/2 white Knight creature token.

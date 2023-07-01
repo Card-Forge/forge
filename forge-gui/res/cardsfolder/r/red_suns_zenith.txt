@@ -1,0 +1,8 @@
+Name:Red Sun's Zenith
+ManaCost:X R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals X damage to any target. If a creature dealt damage this way would die this turn, exile it instead. Shuffle CARDNAME into its owner's library.
+SVar:X:Count$xPaid
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Library | Shuffle$ True | StackDescription$ Shuffle CARDNAME into {p:You}'s library.
+Oracle:Red Sun's Zenith deals X damage to any target. If a creature dealt damage this way would die this turn, exile it instead. Shuffle Red Sun's Zenith into its owner's library.

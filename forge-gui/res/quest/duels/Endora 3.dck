@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Endora 3
+Title=Endora
+Difficulty=hard
+Description=WG Enchantress deck with enchantments and cards with enchantment effects
+Icon=Endora.jpg
+Deck Type=constructed
+[main]
+1 Hoofprints of the Stag
+1 Privileged Position
+1 Seal of Cleansing
+1 Verduran Enchantress
+2 Exploration
+4 Savannah
+4 Windswept Heath
+3 Ghostly Prison
+4 Enchantress's Presence
+2 Sphere of Safety
+4 Journey to Nowhere
+1 Kismet
+4 Oblivion Ring
+4 Plains|M12
+1 Mox Emerald
+1 Mox Pearl
+4 Graypelt Refuge
+1 Centaur Glade
+4 Argothian Enchantress
+1 Seal of Primordium
+4 Forest|M12
+1 Yavimaya Enchantress
+1 Mesa Enchantress
+2 Sigil of the Empty Throne
+1 Awakening Zone
+1 Eidolon of Blossoms
+1 Herald of the Pantheon
+1 Pacifism
+[sideboard]

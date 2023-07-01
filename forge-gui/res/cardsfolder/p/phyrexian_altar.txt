@@ -1,0 +1,6 @@
+Name:Phyrexian Altar
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:Random
+Oracle:Sacrifice a creature: Add one mana of any color.

@@ -1,0 +1,11 @@
+Name:Disorder in the Court
+ManaCost:X W U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBInvestigate | SpellDescription$ Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate | Num$ X | SubAbility$ DBDelTrig
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | Tapped$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Investigate|Token|Sacrifice
+Oracle:Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

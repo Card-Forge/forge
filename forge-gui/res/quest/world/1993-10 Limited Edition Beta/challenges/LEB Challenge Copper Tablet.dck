@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Copper Tablet
+OpponentName=The Runes
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Copper Tablet
+Title=The Runes
+Difficulty=hard
+Description=You spot an inscription on a tablet.  It reads: "I prepared Explosive Runes this morning."
+Icon=Copper Tablet.jpg
+Deck Type=constructed
+[main]
+40 Copper Tablet|LEB
+20 Mountain|LEB|2

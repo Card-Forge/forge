@@ -1,0 +1,7 @@
+Name:Angler Turtle
+ManaCost:5 U U
+Types:Creature Turtle
+PT:5/7
+K:Hexproof
+S:Mode$ MustAttack | ValidCreature$ Creature.OppCtrl | Description$ Creatures your opponents control attack each combat if able.
+Oracle:Hexproof\nCreatures your opponents control attack each combat if able.

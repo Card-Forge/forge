@@ -1,0 +1,8 @@
+Name:Satoru Umezawa
+ManaCost:1 U B
+Types:Legendary Creature Human Ninja
+PT:2/4
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Ninjutsu | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDig | TriggerDescription$ Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True
+S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand | AddKeyword$ Ninjutsu:2 U B | Description$ Each creature card in your hand has ninjutsu {2}{U}{B}.
+Oracle:Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn.\nEach creature card in your hand has ninjutsu {2}{U}{B}.

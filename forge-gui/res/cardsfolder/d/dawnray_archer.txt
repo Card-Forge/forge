@@ -1,0 +1,9 @@
+Name:Dawnray Archer
+ManaCost:2 U
+Types:Creature Human Archer
+PT:1/1
+K:Exalted
+A:AB$ DealDamage | Cost$ W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{W}, {T}: Dawnray Archer deals 1 damage to target attacking or blocking creature.

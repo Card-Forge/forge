@@ -1,0 +1,6 @@
+Name:Renowned Weaver
+ManaCost:G
+Types:Creature Human Shaman
+PT:1/1
+A:AB$ Token | Cost$ 1 G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_1_3_e_spider_reach | TokenOwner$ You | SpellDescription$ Create a 1/3 green Spider enchantment creature token with reach.
+Oracle:{1}{G}, Sacrifice Renowned Weaver: Create a 1/3 green Spider enchantment creature token with reach. (It can block creatures with flying.)

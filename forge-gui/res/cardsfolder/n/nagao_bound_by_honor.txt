@@ -1,0 +1,9 @@
+Name:Nagao, Bound by Honor
+ManaCost:3 W
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Bushido:1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Samurai creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Samurai+YouCtrl | NumAtt$ +1 | NumDef$ +1
+AI:RemoveDeck:Random
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever Nagao, Bound by Honor attacks, Samurai creatures you control get +1/+1 until end of turn.

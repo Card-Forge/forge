@@ -1,0 +1,9 @@
+Name:Underrealm Lich
+ManaCost:3 B G
+Types:Creature Zombie Elf Shaman
+PT:4/3
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.
+SVar:Dig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone2$ Graveyard | NoReveal$ True
+A:AB$ Pump | Cost$ PayLife<4> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+Oracle:If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.\nPay 4 life: Underrealm Lich gains indestructible until end of turn. Tap it.

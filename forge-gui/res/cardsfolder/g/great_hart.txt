@@ -1,0 +1,5 @@
+Name:Great Hart
+ManaCost:3 W
+Types:Creature Elk
+PT:2/4
+Oracle:

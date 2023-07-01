@@ -1,0 +1,11 @@
+Name:Insatiable Hemophage
+ManaCost:3 B
+Types:Creature Nightmare
+PT:3/3
+K:Mutate:2 B
+K:Deathtouch
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever this creature mutates, each opponent loses X life and you gain X life, where X is the number of times this creature has mutated.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$TimesMutated
+Oracle:Mutate {2}{B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nDeathtouch\nWhenever this creature mutates, each opponent loses X life and you gain X life, where X is the number of times this creature has mutated.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Gold Finger 2
+Title=Gold Finger
+Difficulty=medium
+Description=Mono U control deck with various counter spells
+Icon=Gold Finger.jpg
+Deck Type=constructed
+[main]
+24 Island|M11
+1 Remove Soul
+1 Preemptive Strike
+1 Essence Scatter
+1 False Summoning
+1 Spell Snare
+1 Dismiss
+1 Annul
+1 Cancel
+1 Dissipate
+1 Dissolve
+1 Exclude
+1 Mana Leak
+1 Repulse
+1 Snap
+1 Ancestral Vision
+1 Ior Ruin Expedition
+4 Accumulated Knowledge
+2 Think Twice
+1 Serra Sphinx
+1 Cloud of Faeries
+1 Peregrine Drake
+1 Darksteel Sentinel
+1 Spire Golem
+1 Dungeon Geists
+1 Sower of Temptation
+1 Deceiver Exarch
+1 Teferi, Mage of Zhalfir
+1 Pearl Lake Ancient
+1 Threads of Disloyalty
+1 Treachery
+1 Spreading Seas
+1 Sun Droplet
+[sideboard]

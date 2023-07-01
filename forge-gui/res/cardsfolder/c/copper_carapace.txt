@@ -1,0 +1,7 @@
+Name:Copper Carapace
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Equipped creature gets +2/+2 and can't block.
+AI:RemoveDeck:Random
+Oracle:Equipped creature gets +2/+2 and can't block.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

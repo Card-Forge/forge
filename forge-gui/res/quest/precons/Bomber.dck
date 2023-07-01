@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bomber
+Description=For heads-up play, take off with the blue "Bomber" deck. Launch aerial assaults. Rain havoc on your opponents. When faced with your damaging flying creatures, opponents will be running for cover.
+Deck Type=constructed
+Set=7ED
+Image=bomber.jpg
+[main]
+1 Air Elemental|7ED
+1 Ancestral Memories|7ED
+2 Boomerang|7ED
+1 Confiscate|7ED
+1 Coral Merfolk|7ED
+2 Counterspell|7ED
+1 Daring Apprentice|7ED
+1 Fighting Drake|7ED
+1 Force Spike|7ED
+1 Glacial Wall|7ED
+1 Horned Turtle|7ED
+1 Inspiration|7ED
+17 Island|7ED
+1 Merfolk Looter|7ED
+1 Merfolk of the Pearl Trident|7ED
+1 Prodigal Sorcerer|7ED
+1 Sage Owl|7ED
+1 Thieving Magpie|7ED
+1 Unsummon|7ED
+1 Wall of Air|7ED
+2 Wind Drake|7ED
+[sideboard]

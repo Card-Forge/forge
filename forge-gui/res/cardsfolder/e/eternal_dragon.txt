@@ -1,0 +1,8 @@
+Name:Eternal Dragon
+ManaCost:5 W W
+Types:Creature Dragon Spirit
+PT:5/5
+K:Flying
+K:TypeCycling:Plains:2
+A:AB$ ChangeZone | Cost$ 3 W W | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only during your upkeep.
+Oracle:Flying\n{3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate only during your upkeep.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

@@ -1,0 +1,9 @@
+Name:Gloomwidow's Feast
+ManaCost:3 G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature with flying.
+SVar:DBToken:DB$ Token | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.Blue,Card.Black | TokenScript$ g_1_2_spider_reach | SubAbility$ DBCleanup | SpellDescription$ If that creature was blue or black, create a 1/2 green Spider creature token with reach. (It can block creatures with flying.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+DeckHas:Ability$Token & Type$Spider
+Oracle:Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach. (It can block creatures with flying.)

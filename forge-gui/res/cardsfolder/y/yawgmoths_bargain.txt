@@ -1,0 +1,9 @@
+Name:Yawgmoth's Bargain
+ManaCost:4 B B
+Types:Enchantment
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
+A:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1 | AILogic$ YawgmothsBargain | AILifeThreshold$ 1 | SpellDescription$ Draw a card.
+SVar:AICastPreference:NeverCastIfLifeBelow$ 7
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Skip your draw step.\nPay 1 life: Draw a card.

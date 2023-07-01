@@ -1,0 +1,9 @@
+Name:Erebos's Titan
+ManaCost:1 B B B
+Types:Creature Giant
+PT:5/5
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | IsPresent$ Creature.OppCtrl | PresentCompare$ EQ0 | Description$ As long as your opponents control no creatures, CARDNAME has indestructible. (Damage and effects that say "destroy" don't destroy it.)
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Creature.OppOwn | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ Whenever a creature card leaves an opponent's graveyard, you may discard a card. If you do, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ Discard<1/Card> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+Oracle:As long as your opponents control no creatures, Erebos's Titan has indestructible. (Damage and effects that say "destroy" don't destroy it.)\nWhenever a creature card leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.

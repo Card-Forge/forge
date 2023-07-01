@@ -1,0 +1,7 @@
+Name:Yeva, Nature's Herald
+ManaCost:2 G G
+Types:Legendary Creature Elf Shaman
+PT:4/4
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Creature.Green | ValidSA$ Spell | Caster$ You | Description$ You may cast green creature spells as though they had flash.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nYou may cast green creature spells as though they had flash.

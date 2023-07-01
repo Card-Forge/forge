@@ -1,0 +1,6 @@
+Name:Carrion Howler
+ManaCost:3 B
+Types:Creature Zombie Wolf
+PT:2/2
+A:AB$ Pump | Cost$ PayLife<1> | Defined$ Self | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ CARDNAME gets +2/-1 until end of turn.
+Oracle:Pay 1 life: Carrion Howler gets +2/-1 until end of turn.

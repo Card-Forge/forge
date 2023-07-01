@@ -1,0 +1,7 @@
+Name:Carnivorous Canopy
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, enchantment, or creature with flying. | SubAbility$ DBProliferate | SpellDescription$ Destroy target artifact, enchantment, or creature with flying.
+SVar:DBProliferate:DB$ Proliferate | ConditionDefined$ Targeted | ConditionPresent$ Permanent.cmcLE3 | SpellDescription$ If that permanent's mana value was 3 or less, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Proliferate
+Oracle:Destroy target artifact, enchantment, or creature with flying.\nIf that permanent's mana value was 3 or less, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

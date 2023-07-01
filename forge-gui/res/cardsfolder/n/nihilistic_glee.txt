@@ -1,0 +1,8 @@
+Name:Nihilistic Glee
+ManaCost:2 B B
+Types:Enchantment
+A:AB$ LoseLife | Cost$ 2 B Discard<1/Card> | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
+A:AB$ Draw | Cost$ 1 PayLife<2> | NumCards$ 1 | Activation$ Hellbent | PrecostDesc$ Hellbent — | SpellDescription$ Draw a card. Activate only if you have no cards in hand.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+AI:RemoveDeck:All
+Oracle:{2}{B}, Discard a card: Target opponent loses 1 life and you gain 1 life.\nHellbent — {1}, Pay 2 life: Draw a card. Activate only if you have no cards in hand.

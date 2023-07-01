@@ -1,0 +1,25 @@
+[metadata]
+Title=Mono-Blue
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Mono-Blue
+[Main]
+4 Brazen Borrower|ELD|1
+4 Didn't Say Please|ELD
+3 Fae of Wishes|ELD|1
+1 Gadwick, the Wizened|ELD|1
+18 Island|ELD|1
+4 Merfolk Secretkeeper|ELD|1
+4 Overwhelmed Apprentice|ELD
+3 Queen of Ice|ELD|1
+4 So Tiny|ELD
+3 Turn into a Pumpkin|ELD
+4 Vantress Gargoyle|ELD|1
+[Sideboard]
+3 Frogify|ELD
+1 Gadwick, the Wizened|ELD|1
+2 Into the Story|ELD
+1 Lucky Clover|ELD
+1 Stonecoil Serpent|ELD|1

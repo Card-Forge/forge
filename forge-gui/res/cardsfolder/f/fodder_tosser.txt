@@ -1,0 +1,5 @@
+Name:Fodder Tosser
+ManaCost:3
+Types:Artifact
+A:AB$ DealDamage | Cost$ T Discard<1/Card> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or planeswalker.
+Oracle:{T}, Discard a card: Fodder Tosser deals 2 damage to target player or planeswalker.

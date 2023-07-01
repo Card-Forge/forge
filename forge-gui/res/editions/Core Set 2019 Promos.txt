@@ -1,0 +1,16 @@
+[metadata]
+Code=PM19
+Date=2018-07-13
+Name=Core Set 2019 Promos
+Type=Promo
+ScryfallCode=PM19
+
+[cards]
+29 U Militia Bugler @David Gaillet
+90 R Death Baron @Slawomir Maniak
+91 R Demon of Catastrophes @Igor Kieryluk
+110 U Murder @Tyler Jacobson
+145 U Guttersnipe @Izzy
+180 C Elvish Rejuvenator @Winona Nelson
+230 R Desecrated Tomb @Mark Poole
+254 U Reliquary Tower @Mark Poole

@@ -1,0 +1,8 @@
+Name:Jiwari, the Earth Aflame
+ManaCost:3 R R
+Types:Legendary Creature Spirit
+PT:3/3
+A:AB$ DealDamage | Cost$ X R T | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying.
+A:AB$ DamageAll | PrecostDesc$ Channel — | Cost$ X R R R Discard<1/NICKNAME> | ActivationZone$ Hand | ValidCards$ Creature.withoutFlying | NumDmg$ X | ValidDescription$ each creature without flying. | SpellDescription$ NICKNAME deals X damage to each creature without flying.
+SVar:X:Count$xPaid
+Oracle:{X}{R}, {T}: Jiwari, the Earth Aflame deals X damage to target creature without flying.\nChannel — {X}{R}{R}{R}, Discard Jiwari: Jiwari deals X damage to each creature without flying.

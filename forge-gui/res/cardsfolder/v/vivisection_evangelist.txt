@@ -1,0 +1,10 @@
+Name:Vivisection Evangelist
+ManaCost:3 W B
+Types:Creature Phyrexian Cleric
+PT:4/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ Corrupted — When CARDNAME enters the battlefield, if an opponent has three or more poison counters, destroy target creature or planeswalker an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckNeeds:Keyword$Toxic|Infect
+Oracle:Vigilance\nCorrupted — When Vivisection Evangelist enters the battlefield, if an opponent has three or more poison counters, destroy target creature or planeswalker an opponent controls.

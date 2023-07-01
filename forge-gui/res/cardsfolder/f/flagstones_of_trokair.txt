@@ -1,0 +1,8 @@
+Name:Flagstones of Trokair
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Card.Plains | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:SacMe:3
+Oracle:{T}: Add {W}.\nWhen Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.

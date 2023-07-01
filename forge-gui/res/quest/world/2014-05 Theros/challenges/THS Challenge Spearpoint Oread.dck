@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Spearpoint Oread
+OpponentName=The Oreads
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=Dictate of the Twin Gods
+[metadata]
+Name=THS Challenge: Spearpoint Oread
+Title=The Oreads
+Difficulty=easy
+Description=The most aggressive and dangerous nymphs, these creatures dwell in remote mountain crevasses and near volcanoes. Purphoros is fond of their company, and these nymphs also take part in satyr bakkeia--but only the very wildest ones.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+30 Mountain|THS|4
+30 Spearpoint Oread|THS

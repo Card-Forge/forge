@@ -1,0 +1,5 @@
+Name:Felhide Minotaur
+ManaCost:2 B
+Types:Creature Minotaur
+PT:2/3
+Oracle:

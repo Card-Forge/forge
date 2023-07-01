@@ -1,0 +1,37 @@
+BasicLandPercentage=20
+
+[Group MaxCnt=4 Percentage=19]
+Scrubland
+Arcane Sanctum
+Darksteel Citadel
+[/Group]
+
+[Group MaxCnt=4 Percentage=33]
+Darksteel Ingot
+Darksteel Gargoyle
+Stuffy Doll
+Phylactery Lich
+Darksteel Axe
+Darksteel Myr
+Darksteel Sentinel
+[/Group]
+
+[Group MaxCnt=1 Percentage=5]
+Myr Matrix
+Darksteel Colossus
+Darksteel Juggernaut
+Sapling of Colfenor
+Ulamog, the Infinite Gyre
+Konda, Lord of Eiganjo
+[/Group]
+
+[Group MaxCnt=4 Percentage=23]
+Wrath of God
+Damnation
+Day of Judgment
+Planar Cleansing
+Akroma's Vengeance
+Winds of Rath
+[/Group]
+
+End

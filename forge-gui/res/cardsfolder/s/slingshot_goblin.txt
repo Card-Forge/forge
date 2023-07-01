@@ -1,0 +1,7 @@
+Name:Slingshot Goblin
+ManaCost:2 R
+Types:Creature Goblin
+PT:2/2
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target blue creature.
+AI:RemoveDeck:Random
+Oracle:{R}, {T}: Slingshot Goblin deals 2 damage to target blue creature.

@@ -1,0 +1,7 @@
+Name:Fleshmad Steed
+ManaCost:1 B
+Types:Creature Horse
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever another creature dies, tap CARDNAME.
+SVar:TrigTap:DB$ Tap | Defined$ Self
+Oracle:Whenever another creature dies, tap Fleshmad Steed.

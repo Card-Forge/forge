@@ -1,0 +1,7 @@
+Name:Undersea Invader
+ManaCost:4 U U
+Types:Creature Giant Rogue
+PT:5/6
+K:Flash
+K:CARDNAME enters the battlefield tapped.
+Oracle:Flash\nUndersea Invader enters the battlefield tapped.

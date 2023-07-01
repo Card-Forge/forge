@@ -1,0 +1,7 @@
+Name:Giver of Runes
+ManaCost:W
+Types:Creature Kor Cleric
+PT:1/2
+A:AB$ Protection | Cost$ T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor,colorless | SpellDescription$ Another target creature you control gains protection from colorless or from the color of your choice until end of turn.
+SVar:NonCombatPriority:1
+Oracle:{T}: Another target creature you control gains protection from colorless or from the color of your choice until end of turn.

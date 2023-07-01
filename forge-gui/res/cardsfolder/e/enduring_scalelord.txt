@@ -1,0 +1,9 @@
+Name:Enduring Scalelord
+ManaCost:4 G W
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ CounterAddedOnce | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | CounterType$ P1P1 | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Counters
+Oracle:Flying\nWhenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on Enduring Scalelord.

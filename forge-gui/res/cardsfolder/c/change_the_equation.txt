@@ -1,0 +1,7 @@
+Name:Change the Equation
+ManaCost:1 U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBCounterBis
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 2 or less | ValidTgts$ Card.cmcLE2 | SpellDescription$ Counter target spell with mana value 2 or less.
+SVar:DBCounterBis:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 2 or less | ValidTgts$ Card.cmcLE6+Red,Card.cmcLE6+Green| SpellDescription$ Counter target red or green spell with mana value 6 or less.
+Oracle:Choose one —\n• Counter target spell with mana value 2 or less.\n• Counter target red or green spell with mana value 6 or less.

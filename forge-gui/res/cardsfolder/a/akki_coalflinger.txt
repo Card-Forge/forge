@@ -1,0 +1,7 @@
+Name:Akki Coalflinger
+ManaCost:1 R R
+Types:Creature Goblin Shaman
+PT:2/2
+K:First Strike
+A:AB$ PumpAll | Cost$ R T | ValidCards$ Creature.attacking | KW$ First Strike | SpellDescription$ Attacking creatures gain first strike until end of turn.
+Oracle:First strike\n{R}, {T}: Attacking creatures gain first strike until end of turn.

@@ -1,0 +1,8 @@
+Name:Sphinx of the Guildpact
+ManaCost:7
+Types:Artifact Creature Sphinx
+PT:5/5
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
+K:Flying
+K:Hexproof:Card.MonoColor:monocolored
+Oracle:Sphinx of the Guildpact is all colors.\nFlying\nHexproof from monocolored (This creature can't be the target of monocolored spells or abilities your opponents control.)

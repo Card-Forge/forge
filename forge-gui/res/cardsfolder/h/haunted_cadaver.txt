@@ -1,0 +1,8 @@
+Name:Haunted Cadaver
+ManaCost:3 B
+Types:Creature Zombie
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, that player discards three cards.
+SVar:TrigDiscard:AB$ Discard | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredTarget | NumCards$ 3 | Mode$ TgtChoose
+K:Morph:1 B
+Oracle:Whenever Haunted Cadaver deals combat damage to a player, you may sacrifice it. If you do, that player discards three cards.\nMorph {1}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

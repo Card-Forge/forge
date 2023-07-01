@@ -1,0 +1,7 @@
+Name:Manticore Eternal
+ManaCost:3 R R
+Types:Creature Zombie Manticore
+PT:5/4
+K:Afflict:3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nManticore Eternal attacks each combat if able.

@@ -1,0 +1,14 @@
+Name:Forsaken Crossroads
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters the battlefield, scry 1. If you weren't the starting player, you may untap CARDNAME instead.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBGenericChoice | FalseSubAbility$ DBScry
+SVar:DBGenericChoice:DB$ GenericChoice | Choices$ DBScry,DBUntap
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
+SVar:DBUntap:DB$ Untap | Defined$ Self | SpellDescription$ Untap CARDNAME.
+SVar:X:Count$StartingPlayer.1.0
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+Oracle:Forsaken Crossroads enters the battlefield tapped.\nAs Forsaken Crossroads enters the battlefield, choose a color.\nWhen Forsaken Crossroads enters the battlefield, scry 1. If you weren't the starting player, you may untap Forsaken Crossroads instead.\n{T}: Add one mana of the chosen color.

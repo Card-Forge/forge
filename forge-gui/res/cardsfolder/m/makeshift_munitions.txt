@@ -1,0 +1,6 @@
+Name:Makeshift Munitions
+ManaCost:1 R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 1 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:AIPreference:SacCost$Artifact.token+nonCreature,Creature.token+powerLE1,Creature.cmcLE1+powerLE1
+Oracle:{1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to any target.

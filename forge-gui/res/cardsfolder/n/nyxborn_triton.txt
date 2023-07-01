@@ -1,0 +1,7 @@
+Name:Nyxborn Triton
+ManaCost:2 U
+Types:Enchantment Creature Merfolk
+PT:2/3
+K:Bestow:4 U
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 3 | Description$ Enchanted creature gets +2/+3.
+Oracle:Bestow {4}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nEnchanted creature gets +2/+3.

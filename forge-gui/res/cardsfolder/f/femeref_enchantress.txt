@@ -1,0 +1,7 @@
+Name:Femeref Enchantress
+ManaCost:G W
+Types:Creature Human Druid
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever an enchantment is put into a graveyard from the battlefield, draw a card.

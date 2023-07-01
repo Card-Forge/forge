@@ -1,0 +1,11 @@
+Name:Bogardan Phoenix
+ManaCost:2 R R R
+Types:Creature Phoenix
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_EQ0_DEATH | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_DEATH | Execute$ DBExile | Secondary$ True | TriggerDescription$ When CARDNAME dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.
+SVar:DBExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ DEATH | CounterNum$ 1
+Oracle:Flying\nWhen Bogardan Phoenix dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.

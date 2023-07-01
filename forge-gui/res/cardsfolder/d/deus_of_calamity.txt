@@ -1,0 +1,8 @@
+Name:Deus of Calamity
+ManaCost:RG RG RG RG RG
+Types:Creature Spirit Avatar
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | DamageAmount$ GE6 | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals 6 or more damage to an opponent, destroy target land that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target land opponent controls.
+Oracle:Trample\nWhenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.

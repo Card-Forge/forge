@@ -1,0 +1,6 @@
+Name:Predator, Flagship
+ManaCost:5
+Types:Legendary Artifact
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+A:AB$ Destroy | Cost$ 5 T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+Oracle:{2}: Target creature gains flying until end of turn.\n{5}, {T}: Destroy target creature with flying.

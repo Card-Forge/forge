@@ -1,0 +1,6 @@
+Name:Bold Impaler
+ManaCost:R
+Types:Creature Vampire Knight
+PT:1/2
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:{2}{R}: Bold Impaler gets +2/+0 until end of turn.

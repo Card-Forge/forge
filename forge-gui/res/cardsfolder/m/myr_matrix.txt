@@ -1,0 +1,9 @@
+Name:Myr Matrix
+ManaCost:5
+Types:Artifact
+K:Indestructible
+S:Mode$ Continuous | Affected$ Creature.Myr | AddPower$ 1 | AddToughness$ 1 | Description$ Myr creatures get +1/+1.
+A:AB$ Token | Cost$ 5 | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Myr artifact creature token.
+DeckHints:Type$Myr
+DeckHas:Ability$Token
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\nMyr creatures get +1/+1.\n{5}: Create a 1/1 colorless Myr artifact creature token.

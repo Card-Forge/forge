@@ -1,0 +1,8 @@
+Name:Force of Nature
+ManaCost:2 G G G G
+Types:Creature Elemental
+PT:8/8
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay {G}{G}{G}{G}.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 8 | UnlessCost$ G G G G | UnlessPayer$ You
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nAt the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.

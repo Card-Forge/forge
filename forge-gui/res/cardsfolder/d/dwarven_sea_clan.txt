@@ -1,0 +1,12 @@
+Name:Dwarven Sea Clan
+ManaCost:2 R
+Types:Creature Dwarf
+PT:1/1
+A:AB$ Pump | Cost$ T | IsCurse$ True | ValidTgts$ Creature.ControllerControlsIsland+attacking,Creature.ControllerControlsIsland+blocking | TgtPrompt$ Select target attacking or blocking creature whose controller controls an Island | ActivationPhases$ BeginCombat->Combat Damage | ActivationFirstCombat$ True | ConditionDefined$ Targeted | ConditionPresent$ Creature.ControllerControlsIsland | ConditionCompare$ GE1 | SubAbility$ DBDelayTrig | StackDescription$ SpellDescription | SpellDescription$ Choose target attacking or blocking creature whose controller controls an Island. CARDNAME deals 2 damage to that creature at end of combat. Activate only before the end of combat step.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigDmg | TriggerDescription$ CARDNAME deals 2 damage to that creature at end of combat. | RememberObjects$ ParentTarget | SubAbility$ DBCleanup
+SVar:TrigDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NeedsToPlay:Island.OppCtrl
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}: Choose target attacking or blocking creature whose controller controls an Island. Dwarven Sea Clan deals 2 damage to that creature at end of combat. Activate only before the end of combat step.

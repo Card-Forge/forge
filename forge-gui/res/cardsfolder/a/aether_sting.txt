@@ -1,0 +1,6 @@
+Name:Aether Sting
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a creature spell, CARDNAME deals 1 damage to that player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 1
+Oracle:Whenever an opponent casts a creature spell, Aether Sting deals 1 damage to that player.

@@ -1,0 +1,8 @@
+Name:Elesh Norn, Mother of Machines
+ManaCost:4 W
+Types:Legendary Creature Phyrexian Praetor
+PT:4/7
+K:Vigilance
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ DisableTriggers | ValidCause$ Permanent | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | ValidCard$ Permanent.OppCtrl | Description$ Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
+Oracle:Vigilance\nIf a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nPermanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.

@@ -1,0 +1,10 @@
+Name:Roc Egg
+ManaCost:2 W
+Types:Creature Bird Egg
+PT:0/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 3/3 white Bird creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_3_3_bird_flying | TokenOwner$ TriggeredCardController
+SVar:SacMe:4
+DeckHas:Ability$Token
+Oracle:Defender (This creature can't attack.)\nWhen Roc Egg dies, create a 3/3 white Bird creature token with flying.

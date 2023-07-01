@@ -1,0 +1,7 @@
+Name:Mirri's Guile
+ManaCost:G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigRearrange | TriggerDescription$ At the beginning of your upkeep, you may look at the top three cards of your library, then put them back in any order.
+SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 3
+SVar:NonStackingEffect:True
+Oracle:At the beginning of your upkeep, you may look at the top three cards of your library, then put them back in any order.

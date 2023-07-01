@@ -1,0 +1,6 @@
+Name:Woodwraith Strangler
+ManaCost:2 B G
+Types:Creature Plant Zombie
+PT:2/2
+A:AB$ Regenerate | Cost$ ExileFromGrave<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+Oracle:Exile a creature card from your graveyard: Regenerate Woodwraith Strangler.

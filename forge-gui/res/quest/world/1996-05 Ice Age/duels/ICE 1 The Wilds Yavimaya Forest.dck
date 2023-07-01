@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: Yavimaya Forest
+Title=Yavimaya Forest
+Difficulty=easy
+Description="We orphans of Fyndhorn have found no welcome in this alien place." -Taaveti of Kelsinko, elvish hunter
+
+Yavimaya is a thickly forested mountainous region off the southern coasts of the Dominarian continent Terisiare.  Some say the forest is a single, sentient mind driving out its inhabitants.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+2 Deadly Insect|ALL|1
+2 Deadly Insect|ALL|2
+24 Forest|ICE|3
+4 Heart of Yavimaya|ALL
+3 Hot Springs|ICE
+2 Nature's Wrath|ALL
+3 Stunted Growth|ICE
+4 Wall of Pine Needles|ICE
+2 Whip Vine|ALL|1
+2 Whip Vine|ALL|2
+2 Yavimaya Ancients|ALL|1
+2 Yavimaya Ancients|ALL|2
+4 Yavimaya Ants|ALL
+4 Yavimaya Gnats|ICE

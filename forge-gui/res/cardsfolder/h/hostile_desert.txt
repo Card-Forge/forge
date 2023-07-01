@@ -1,0 +1,6 @@
+Name:Hostile Desert
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ 2 ExileFromGrave<1/Land> | Defined$ Self | Power$ 3 | Toughness$ 4 | Types$ Creature,Elemental | SpellDescription$ CARDNAME becomes a 3/4 Elemental creature until end of turn. It's still a land.
+Oracle:{T}: Add {C}.\n{2}, Exile a land card from your graveyard: Hostile Desert becomes a 3/4 Elemental creature until end of turn. It's still a land.

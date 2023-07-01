@@ -1,0 +1,8 @@
+Name:Sporecrown Thallid
+ManaCost:1 G
+Types:Creature Fungus
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Fungus+Other+YouCtrl,Creature.Saproling+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Each other creature you control that's a Fungus or Saproling gets +1/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Fungus|Saproling
+Oracle:Each other creature you control that's a Fungus or Saproling gets +1/+1.

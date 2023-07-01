@@ -1,0 +1,5 @@
+Name:Arctic Treeline
+ManaCost:no cost
+Types:Snow Land Forest Plains
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {G} or {W}.)\nArctic Treeline enters the battlefield tapped.

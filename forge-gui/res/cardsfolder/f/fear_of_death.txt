@@ -1,0 +1,12 @@
+Name:Fear of Death
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | Description$ Enchanted creature gets -X/-0, where X is the number of cards in your graveyard.
+SVar:X:Count$InYourYard
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:Enchant creature\nWhen Fear of Death enters the battlefield, mill two cards. (Put the top two cards of your library into your graveyard.)\nEnchanted creature gets -X/-0, where X is the number of cards in your graveyard.

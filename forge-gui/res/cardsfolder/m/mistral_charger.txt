@@ -1,0 +1,6 @@
+Name:Mistral Charger
+ManaCost:1 W
+Types:Creature Pegasus
+PT:2/1
+K:Flying
+Oracle:Flying

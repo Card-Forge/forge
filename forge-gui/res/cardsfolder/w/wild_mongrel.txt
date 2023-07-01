@@ -1,0 +1,8 @@
+Name:Wild Mongrel
+ManaCost:1 G
+Types:Creature Dog
+PT:2/2
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SubAbility$ ChangeColor | SpellDescription$ CARDNAME gets +1/+1 and becomes the color of your choice until end of turn.
+SVar:ChangeColor:DB$ ChooseColor | Defined$ You | SubAbility$ Animate
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
+Oracle:Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.

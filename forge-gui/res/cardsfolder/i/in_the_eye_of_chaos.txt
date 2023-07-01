@@ -1,0 +1,9 @@
+Name:In the Eye of Chaos
+ManaCost:2 U
+Types:World Enchantment
+T:Mode$ SpellCast | ValidCard$ Instant | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its mana value.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator
+SVar:X:TriggeredCard$CardManaCost
+AI:RemoveDeck:Random
+DeckHints:Type$Artifact|Enchantment|Creature|Planeswalker|Sorcery
+Oracle:Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its mana value.

@@ -1,0 +1,9 @@
+Name:Copper-Leaf Angel
+ManaCost:5
+Types:Artifact Creature Angel
+PT:2/2
+K:Flying
+A:AB$ PutCounter | Cost$ T Sac<X/Land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on CARDNAME.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:Flying\n{T}, Sacrifice X lands: Put X +1/+1 counters on Copper-Leaf Angel.

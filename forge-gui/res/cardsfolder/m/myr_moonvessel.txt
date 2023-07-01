@@ -1,0 +1,7 @@
+Name:Myr Moonvessel
+ManaCost:1
+Types:Artifact Creature Myr
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerDescription$ When CARDNAME dies, add {C}.
+SVar:TrigAddMana:DB$ Mana | Produced$ C
+Oracle:When Myr Moonvessel dies, add {C}.

@@ -1,0 +1,9 @@
+Name:Plague Dogs
+ManaCost:4 B
+Types:Creature Phyrexian Zombie Dog
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigNausea | TriggerDescription$ When CARDNAME dies, all creatures get -1/-1 until end of turn.
+SVar:TrigNausea:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+Oracle:When Plague Dogs dies, all creatures get -1/-1 until end of turn.\n{2}, Sacrifice Plague Dogs: Draw a card.

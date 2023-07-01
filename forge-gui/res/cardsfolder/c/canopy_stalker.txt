@@ -1,0 +1,10 @@
+Name:Canopy Stalker
+ManaCost:3 G
+Types:Creature Cat
+PT:4/2
+K:CARDNAME must be blocked if able.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain 1 life for each creature that died this turn.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$LifeGain
+Oracle:Canopy Stalker must be blocked if able.\nWhen Canopy Stalker dies, you gain 1 life for each creature that died this turn.

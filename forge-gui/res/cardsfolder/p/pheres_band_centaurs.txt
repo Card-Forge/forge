@@ -1,0 +1,5 @@
+Name:Pheres-Band Centaurs
+ManaCost:4 G
+Types:Creature Centaur Warrior
+PT:3/7
+Oracle:

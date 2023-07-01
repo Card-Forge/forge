@@ -1,0 +1,8 @@
+Name:Thalakos Seer
+ManaCost:U U
+Types:Creature Thalakos Wizard
+PT:1/1
+K:Shadow
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Thalakos Seer leaves the battlefield, draw a card.

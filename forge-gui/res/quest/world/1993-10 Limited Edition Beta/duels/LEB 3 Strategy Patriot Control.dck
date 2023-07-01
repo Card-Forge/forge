@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=LEB 3 Strategy: Patriot Control
+Title=Patriot Control
+Difficulty=hard
+Description="Peace hath her victories // No less renownd than war."-John Milton, "To the Lord General Cromwell"
+Icon=Patriot Control.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+1 Braingeyser|LEB
+4 Control Magic|LEB
+1 Copy Artifact|LEB
+4 Counterspell|LEB
+2 Disenchant|LEB
+1 Disrupting Scepter|LEB
+6 Island|LEB|2
+1 Jayemdae Tome|LEB
+4 Juggernaut|LEB
+4 Lightning Bolt|LEB
+1 Manabarbs|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+2 Plains|LEB|1
+4 Plateau|LEB
+4 Serra Angel|LEB
+1 Sol Ring|LEB
+4 Swords to Plowshares|LEB
+1 Time Walk|LEB
+4 Tundra|LEB
+4 Volcanic Island|LEB
+1 Wrath of God|LEB

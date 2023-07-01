@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 111715 - Closing the Gap
+URL:http://www.gatheringmagic.com/seanuy-111715-closing-the-gap/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=5
+AILife=9
+humanhand=Mutant's Prey; Remember the Fallen; Feral Contest
+humangraveyard=Conch Horn; Veteran Armorer; Zealous Inquisitor; Rustspore Ram
+humanlibrary=
+humanbattlefield=Mountain|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Gruul Turf; Frostling; Arcbound Hybrid|Counters:P1P1=2; Raven's Run Dragoon; Fangren Firstborn; Rakeclaw Gargantuan|Id:420; Ashnod's Transmogrant
+aibattlefield=Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Pin to the Earth|AttachedTo:420; Grafted Wargear|AttachedTo:422; Brood of Cockroaches|Id:422; Dream Fighter; Escaped Null; Midnight Covenant|AttachedTo:424; Ghost Ship|Id:424|Tapped; Scion of Glaciers
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

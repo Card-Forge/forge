@@ -1,0 +1,6 @@
+Name:Gluttonous Zombie
+ManaCost:4 B
+Types:Creature Zombie
+PT:3/3
+K:Fear
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)

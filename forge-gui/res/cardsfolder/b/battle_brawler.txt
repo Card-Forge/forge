@@ -1,0 +1,8 @@
+Name:Battle Brawler
+ManaCost:1 B
+Types:Creature Orc Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ First Strike | IsPresent$ Permanent.White+YouCtrl,Permanent.Red+YouCtrl | Description$ As long as you control a red or white permanent, CARDNAME gets +1/+0 and has first strike.
+SVar:BuffedBy:Permanent.White,Permanent.Red
+DeckHints:Color$White|Red
+Oracle:As long as you control a red or white permanent, Battle Brawler gets +1/+0 and has first strike.

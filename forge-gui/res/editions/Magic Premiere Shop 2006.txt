@@ -1,0 +1,14 @@
+[metadata]
+Code=PMPS06
+Date=2006-01-01
+Name=Magic Premiere Shop 2006
+Type=Promo
+CardLang=ja
+ScryfallCode=PMPS06
+
+[cards]
+1 R Plains @Daren Bader
+2 R Island @John Avon
+3 R Swamp @Puddnhead
+4 R Mountain @Kev Walker
+5 R Forest @Martina Pilcerova

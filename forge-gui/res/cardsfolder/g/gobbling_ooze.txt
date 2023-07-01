@@ -1,0 +1,6 @@
+Name:Gobbling Ooze
+ManaCost:4 G
+Types:Creature Ooze
+PT:3/3
+A:AB$ PutCounter | Cost$ G Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:{G}, Sacrifice another creature: Put a +1/+1 counter on Gobbling Ooze.

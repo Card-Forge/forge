@@ -1,0 +1,7 @@
+Name:Stinging Barrier
+ManaCost:2 U U
+Types:Creature Wall
+PT:0/4
+K:Defender
+A:AB$ DealDamage | Cost$ U T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Defender (This creature can't attack.)\n{U}, {T}: Stinging Barrier deals 1 damage to any target.

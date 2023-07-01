@@ -1,0 +1,6 @@
+Name:Goblin Brigand
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Goblin Brigand attacks each combat if able.

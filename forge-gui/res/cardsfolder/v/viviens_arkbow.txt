@@ -1,0 +1,6 @@
+Name:Vivien's Arkbow
+ManaCost:1 G
+Types:Legendary Artifact
+A:AB$ Dig | Cost$ X T Discard<1/Card> | DigNum$ X | AILogic$ AtOppEOT | Optional$ True | Reveal$ False | ChangeNum$ 1 | ChangeValid$ Creature.cmcLEX | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SpellDescription$ Look at the top X cards of your library. You may put a creature card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:X:Count$xPaid
+Oracle:{X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

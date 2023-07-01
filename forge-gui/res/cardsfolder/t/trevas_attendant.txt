@@ -1,0 +1,7 @@
+Name:Treva's Attendant
+ManaCost:5
+Types:Artifact Creature Golem
+PT:3/3
+A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced$ G W U | SpellDescription$ Add {G}{W}{U}.
+AI:RemoveDeck:All
+Oracle:{1}, Sacrifice Treva's Attendant: Add {G}{W}{U}.

@@ -1,0 +1,7 @@
+Name:Unholy Grotto
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ B T | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target Zombie card from your graveyard on top of your library.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{B}, {T}: Put target Zombie card from your graveyard on top of your library.

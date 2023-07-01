@@ -1,0 +1,6 @@
+Name:Ramosian Revivalist
+ManaCost:3 W
+Types:Creature Human Rebel Cleric
+PT:2/2
+A:AB$ ChangeZone | Cost$ 6 T | TgtPrompt$ Choose target Rebel permanent card with mana value 5 or less | ValidTgts$ Permanent.Rebel+YouCtrl+cmcLE5 | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target Rebel permanent card with mana value 5 or less from your graveyard to the battlefield.
+Oracle:{6}, {T}: Return target Rebel permanent card with mana value 5 or less from your graveyard to the battlefield.

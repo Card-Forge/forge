@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Seer 2
+Title=Seer
+Icon=Seer.jpg
+Difficulty=medium
+Description=Blue fliers and recycling.
+Deck Type=constructed
+[main]
+1 Control Magic|LEB
+2 Counterspell|4ED
+4 Crystal Rod|LEB
+3 Ghost Ship|DRK
+2 Hurkyl's Recall|ATQ
+22 Island|4ED
+2 Jayemdae Tome|4ED
+2 Mana Drain|LEG
+3 Ornithopter|ATQ
+2 Psionic Blast|LEB
+1 Steal Artifact|LEB
+3 Tetravus|ATQ
+2 Time Elemental|LEG
+3 Triskelion|4ED
+2 Unstable Mutation|4ED
+3 Unsummon|4ED
+3 Zephyr Falcon|LEG
+[sideboard]

@@ -1,0 +1,11 @@
+Name:Teferi's Imp
+ManaCost:2 U
+Types:Creature Imp
+PT:1/1
+K:Flying
+K:Phasing
+T:Mode$ PhaseOut | ValidCard$ Card.phasedOutSelf | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME phases out, discard a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+T:Mode$ PhaseIn | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME phases in, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Flying\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nWhenever Teferi's Imp phases out, discard a card.\nWhenever Teferi's Imp phases in, draw a card.

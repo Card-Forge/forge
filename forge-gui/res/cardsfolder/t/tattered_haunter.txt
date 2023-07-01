@@ -1,0 +1,7 @@
+Name:Tattered Haunter
+ManaCost:1 U
+Types:Creature Spirit
+PT:2/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nTattered Haunter can block only creatures with flying.

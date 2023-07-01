@@ -1,0 +1,6 @@
+Name:Ogre Berserker
+ManaCost:4 R
+Types:Creature Ogre Berserker
+PT:4/2
+K:Haste
+Oracle:Haste

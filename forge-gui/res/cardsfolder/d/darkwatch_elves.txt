@@ -1,0 +1,7 @@
+Name:Darkwatch Elves
+ManaCost:2 G
+Types:Creature Elf
+PT:2/2
+K:Protection from black
+K:Cycling:2
+Oracle:Protection from black\nCycling {2} ({2}, Discard this card: Draw a card.)

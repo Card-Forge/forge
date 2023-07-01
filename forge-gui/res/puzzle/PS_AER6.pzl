@@ -1,0 +1,15 @@
+#AI can't counter CopyCat combo properly
+[metadata]
+Name:Possibility Storm - Aether Revolt #06
+URL:https://i.redd.it/zv5olcxq95ry.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=10
+humanhand=Shock;Felidar Guardian;Harnessed Lightning;Island
+humanbattlefield=Spirebluff Canal;Spirebluff Canal;Needle Spires;Needle Spires;Spell Queller;Reckless Fireweaver;Whirler Virtuoso;Saheeli Rai|Counters:LOYALTY=5;
+aibattlefield=Walking Ballista|Counters:P1P1=4;Winding Constrictor

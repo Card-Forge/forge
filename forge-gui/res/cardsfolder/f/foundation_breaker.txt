@@ -1,0 +1,8 @@
+Name:Foundation Breaker
+ManaCost:3 G
+Types:Creature Elemental
+PT:2/2
+K:Evoke:1 G
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+Oracle:When Foundation Breaker enters the battlefield, you may destroy target artifact or enchantment.\nEvoke {1}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

@@ -1,0 +1,6 @@
+Name:Amnesia
+ManaCost:3 U U U
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand | SpellDescription$ Target player reveals their hand and discards all nonland cards.
+DeckHas:Ability$Discard
+Oracle:Target player reveals their hand and discards all nonland cards.

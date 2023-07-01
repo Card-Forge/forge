@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Tribe: Gorgons
+Title=The Gorgons
+Difficulty=easy
+Description=It is not known how many gorgons exist. On occasion, mortals attempt to capture a gorgon in order to force her to tell the secret of immortality. These mortals usually end up as statues, petrified by the gorgon's gaze; only the favor of the gods can turn stone back to flesh. Gorgons take delight in dispensing valuable secrets at the cost of deadly risk, and more than one medicinal breakthrough has come from someone surviving a gorgon's test.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Archetype of Finality|BNG
+4 Asphyxiate|BNG
+8 Forest|THS|4
+4 Hythonia the Cruel|THS
+4 Keepsake Gorgon|THS
+4 Pharika's Cure|THS
+4 Pharika's Mender|THS
+4 Pharika, God of Affliction|JOU
+4 Reaper of the Wilds|THS
+16 Swamp|THS|4
+4 Temple of Malady|JOU

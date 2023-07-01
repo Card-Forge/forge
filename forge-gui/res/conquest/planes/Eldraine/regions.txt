@@ -1,0 +1,5 @@
+Name:Ardenvale|Art:Castle Ardenvale|Colors:W
+Name:Vantress|Art:Castle Vantress|Colors:U
+Name:Locthwain|Art:Castle Locthwain|Colors:B
+Name:Embereth|Art:Castle Embereth|Colors:R
+Name:Garenbrig|Art:Castle Garenbrig|Colors:G

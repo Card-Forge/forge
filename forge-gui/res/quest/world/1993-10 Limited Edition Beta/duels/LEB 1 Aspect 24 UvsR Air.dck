@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 24 UvR Air
+Title=Aspect of Air
+Difficulty=easy
+Description=These spirits of the air are winsome and wild and cannot be truly contained. Only marginally intelligent, they often substitute whimsy for strategy, delighting in mischief and mayhem.
+Icon=Aspect of Air.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|LEB
+2 Crystal Rod|LEB
+1 Flight|LEB
+4 Invisibility|LEB
+24 Island|LEB|2
+1 Jump|LEB
+4 Mahamoti Djinn|LEB
+4 Phantasmal Forces|LEB
+4 Phantasmal Terrain|LEB
+4 Phantom Monster|LEB
+4 Twiddle|LEB
+4 Wall of Air|LEB

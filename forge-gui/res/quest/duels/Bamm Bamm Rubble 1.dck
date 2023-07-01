@@ -1,0 +1,56 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble 1
+Title=Bamm Bamm Rubble
+Difficulty=easy
+Description=WUBRG Domain deck
+Icon=Bamm Bamm Rubble.jpg
+Deck Type=constructed
+[main]
+1 Smoldering Marsh
+1 Canopy Vista
+1 Cinder Glade
+1 Prairie Stream
+1 Sunken Hollow
+2 Forest|M10
+1 Island|M10
+1 Mountain|M10
+1 Plains|M10
+1 Swamp|M10
+2 Bad River
+2 Flood Plain
+3 Grasslands
+3 Mountain Valley
+2 Rocky Tar Pit
+1 Tromp the Domains
+1 Might of Alara
+1 Gaea's Might
+1 Wandering Goblins
+2 Kavu Scout
+2 Aven Trailblazer
+1 Exotic Disease
+2 Tribal Flames
+1 Power Armor
+2 Allied Strategies
+1 Collective Restraint
+1 Wandering Stream
+2 Matca Rioters
+1 Voices from the Void
+1 Manaforce Mace
+1 Ordered Migration
+1 Exploding Borders
+2 Exotic Curse
+1 Drag Down
+1 Evasive Action
+1 Spore Burst
+1 Stratadon
+1 Tek
+1 Strength of Unity
+1 Wayfaring Giant
+1 Sejiri Merfolk
+1 Hedge Troll
+1 Loam Lion
+1 Sedge Troll
+1 Wild Nacatl
+1 Kird Ape
+[sideboard]

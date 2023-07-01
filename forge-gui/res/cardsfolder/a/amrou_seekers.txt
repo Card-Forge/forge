@@ -1,0 +1,6 @@
+Name:Amrou Seekers
+ManaCost:2 W
+Types:Creature Kithkin Rebel
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonWhite | Description$ CARDNAME can't be blocked except by artifact creatures and/or white creatures.
+Oracle:Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.

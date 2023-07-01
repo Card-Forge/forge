@@ -1,0 +1,9 @@
+Name:Falkenrath Noble
+ManaCost:3 B
+Types:Creature Vampire Noble
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another creature dies, target player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Choose a player | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nWhenever Falkenrath Noble or another creature dies, target player loses 1 life and you gain 1 life.

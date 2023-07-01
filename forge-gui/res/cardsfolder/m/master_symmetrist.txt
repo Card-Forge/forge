@@ -1,0 +1,9 @@
+Name:Master Symmetrist
+ManaCost:2 G G
+Types:Creature Rhino Druid
+PT:4/4
+K:Reach
+T:Mode$ Attacks | ValidCard$ Creature.equalPT+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control with power equal to its toughness attacks, it gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Trample
+SVar:PlayMain1:TRUE
+Oracle:Reach\nWhenever a creature you control with power equal to its toughness attacks, it gains trample until end of turn.

@@ -1,0 +1,7 @@
+Name:Epic Struggle
+ManaCost:2 G G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentCompare$ GE20 | IsPresent$ Creature.YouCtrl | Execute$ TrigWinsLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
+SVar:TrigWinsLife:DB$ WinsGame | Defined$ You
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if you control twenty or more creatures, you win the game.

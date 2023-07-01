@@ -1,0 +1,11 @@
+Name:Biowaste Blob
+ManaCost:2 G G
+Types:Creature Ooze
+PT:0/0
+S:Mode$ Continuous | Affected$ Ooze.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Oozes you control get +1/+1.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouCtrl | PresentCompare$ GE1 | TriggerDescription$ At the beginning of your upkeep, if you control a commander, create a token that's a copy of CARDNAME.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
+DeckNeeds:Type$Ooze
+DeckHas:Ability$Token
+AI:RemoveDeck:NonCommander
+Oracle:Oozes you control get +1/+1.\nAt the beginning of your upkeep, if you control a commander, create a token that's a copy of Biowaste Blob.

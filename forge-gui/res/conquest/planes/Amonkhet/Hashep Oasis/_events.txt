@@ -1,0 +1,9 @@
+Name:Rhonas the Indomitable|Deck:Rhonas the Indomitable.dck|Variant:Commander|Avatar:Rhonas the Indomitable|Desc:
+Name:Hapatra, Vizier of Poisons|Deck:Hapatra, Vizier of Poisons.dck|Variant:Commander|Avatar:Hapatra, Vizier of Poisons|Desc:
+Name:Nissa, Genesis Mage|Deck:Nissa, Genesis Mage.dck|Variant:Planeswalker|Avatar:Nissa, Genesis Mage|Desc:
+Name:Nissa, Steward of Elements|Deck:Nissa, Steward of Elements.dck|Variant:Planeswalker|Avatar:Nissa, Steward of Elements|Desc:
+Name:Nest of Scarabs|Deck:Nest of Scarabs.dck|Variant:None|Avatar:Nest of Scarabs|Desc:
+Name:Champions of Rhonas|Deck:Exert.dck|Variant:None|Avatar:Champion of Rhonas|Desc:
+Name:Building a Better Tomorrow|Deck:Building a Better Tomorrow.dck|Variant:None|Avatar:Oracle's Vault|Desc:
+Name:Trial of Strength|Deck:Trial of Strength.dck|Variant:None|Avatar:Trial of Strength|Desc:
+Name:Sovereigns of the Pride|Deck:Sovereigns of the Pride.dck|Variant:None|Avatar:Pride Sovereign|Desc:

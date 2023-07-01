@@ -1,0 +1,8 @@
+Name:Spawnbinder Mage
+ManaCost:3 W
+Types:Creature Human Wizard Ally
+PT:2/4
+A:AB$ Tap | Cost$ T tapXType<1/Ally> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Cohort — | SpellDescription$ Tap target creature.
+AI:RemoveDeck:All
+DeckHints:Type$Ally
+Oracle:Cohort — {T}, Tap an untapped Ally you control: Tap target creature.

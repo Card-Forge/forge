@@ -1,0 +1,7 @@
+Name:Roughshod Mentor
+ManaCost:5 G
+Types:Creature Giant Warrior
+PT:5/4
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddKeyword$ Trample | Description$ Green creatures you control have trample.
+SVar:PlayMain1:TRUE
+Oracle:Green creatures you control have trample.

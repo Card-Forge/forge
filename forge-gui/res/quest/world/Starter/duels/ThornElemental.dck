@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Thorn Elemental
+Icon=Dungeon Crawling Green.jpg
+Difficulty=easy
+Description=Big green creatures that like to hit directly.
+Deck Type=constructed
+Name=ThornElemental
+[Main]
+3 Deathcoil Wurm|PO2
+11 Forest|PO2|1
+7 Forest|PO2|2
+6 Forest|PO2|3
+1 Jungle Lion|POR
+1 Lady Zhurong, Warrior Queen|PTK
+4 Moon Sprite|POR
+4 Natural Order|POR
+4 Norwood Priestess|PO2
+4 Pride of Lions|S99
+4 Thorn Elemental|S99
+4 Three Visits|PTK
+3 Wolf Pack|PTK
+4 Wood Elves|POR

@@ -1,0 +1,6 @@
+Name:Needlepeak Spider
+ManaCost:3 R
+Types:Creature Spider
+PT:4/2
+K:Reach
+Oracle:Reach

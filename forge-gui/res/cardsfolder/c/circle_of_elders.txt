@@ -1,0 +1,8 @@
+Name:Circle of Elders
+ManaCost:2 G G
+Types:Creature Human Shaman
+PT:2/4
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ Add {C}{C}{C}. Activate only if creatures you control have total power 8 or greater.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+Oracle:Vigilance\nFormidable — {T}: Add {C}{C}{C}. Activate only if creatures you control have total power 8 or greater.

@@ -1,0 +1,9 @@
+Name:Pulsating Illusion
+ManaCost:4 U
+Types:Creature Illusion
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ Discard<1/Card> | NumAtt$ +4 | NumDef$ +4 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +4/+4 until end of turn. Activate only once each turn.
+SVar:AIPreference:DiscardCost$Card
+AI:RemoveDeck:Random
+Oracle:Flying\nDiscard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate only once each turn.

@@ -1,0 +1,8 @@
+Name:Titan of Eternal Fire
+ManaCost:5 R
+Types:Creature Giant
+PT:5/6
+S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddAbility$ Damage | Description$ Each Human creature you control has "{R}, {T}: This creature deals 1 damage to any target."
+SVar:Damage:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+DeckHints:Type$Human
+Oracle:Each Human creature you control has "{R}, {T}: This creature deals 1 damage to any target."

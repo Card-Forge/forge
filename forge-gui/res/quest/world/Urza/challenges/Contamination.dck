@@ -1,0 +1,25 @@
+[quest]
+id=16
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=tournament pack USG;chosen card rarity:R sets:USG;50% Contamination|USG
+Credit Reward=300
+Ticket Reward=true
+HumanExtras=
+AIExtras=Contamination|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature|TOKEN;B;0;1;Thrull;Creature
+[metadata]
+Name=quest16
+Title=The Plague
+Difficulty=hard
+Description=The contamination of mana is so strong around here, you can't even cast spells.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+24 Swamp|USG
+4 Despondency|USG
+4 Fog of Gnats|ULG
+16 Giant Cockroach|ULG
+4 Mana Leech|USG
+4 Carrion Beetles|USG
+4 Befoul|USG

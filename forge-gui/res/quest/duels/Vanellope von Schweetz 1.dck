@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz 1
+Title=Vanellope von Schweetz
+Difficulty=easy
+Description=WR Haste tokens aggro deck with a singleton Goblin Rabblemaster
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Arid Mesa
+3 Captain's Call
+4 Dragon Fodder
+2 Fervor
+1 Goblin Rabblemaster
+4 Goblin Assault
+2 Hordeling Outburst
+4 Journey to Nowhere
+4 Legion Loyalist
+2 Mobilization
+13 Mountain
+6 Plains
+4 Raging Goblin
+4 Raise the Alarm
+3 Slith Firewalker
+[sideboard]

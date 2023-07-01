@@ -1,0 +1,6 @@
+Name:Kranioceros
+ManaCost:4 R
+Types:Creature Beast
+PT:5/2
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumDef$ +3 | SpellDescription$ CARDNAME gets +0/+3 until end of turn.
+Oracle:{1}{W}: Kranioceros gets +0/+3 until end of turn.

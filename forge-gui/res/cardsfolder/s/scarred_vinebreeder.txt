@@ -1,0 +1,7 @@
+Name:Scarred Vinebreeder
+ManaCost:1 B
+Types:Creature Elf Shaman
+PT:1/1
+A:AB$ Pump | Cost$ 2 B ExileFromGrave<1/Elf> | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+AI:RemoveDeck:Random
+Oracle:{2}{B}, Exile an Elf card from your graveyard: Scarred Vinebreeder gets +3/+3 until end of turn.

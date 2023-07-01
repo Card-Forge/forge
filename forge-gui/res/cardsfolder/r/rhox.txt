@@ -1,0 +1,7 @@
+Name:Rhox
+ManaCost:4 G G
+Types:Creature Rhino Beast
+PT:5/5
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
+Oracle:You may have Rhox assign its combat damage as though it weren't blocked.\n{2}{G}: Regenerate Rhox. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)

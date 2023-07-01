@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mandarung 2
+Title=Mandurang
+Icon=Mandarung.jpg
+Difficulty=medium
+Description=BRU flying weenies with enchantments.
+Deck Type=constructed
+[main]
+4 Badlands|LEB
+1 Black Lotus|LEB
+1 Blood Lust|LEG
+2 Bog Imp|DRK
+1 Braingeyser|LEB
+2 Carrion Ants|LEG
+3 Cursed Land|LEB
+3 Dancing Scimitar|ARN
+2 Nicol Bolas|LEG
+2 Giant Strength|4ED
+2 Island|4ED
+2 Jayemdae Tome|4ED
+2 Mountain|4ED
+1 Mox Jet|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+3 Ornithopter|4ED
+1 Sol Ring|LEB
+2 Swamp|4ED
+4 Underground Sea|LEB
+4 Unholy Strength|4ED
+4 Unstable Mutation|4ED
+4 Volcanic Island|LEB
+4 Will-o'-the-Wisp|LEB
+4 Zephyr Falcon|LEG
+[sideboard]

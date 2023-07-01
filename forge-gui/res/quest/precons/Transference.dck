@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Transference
+Description=If one of your modular creatures is destroyed, make your opponent pay dearly by using that creature's +1/+1 counters to pump up another artifact creature.
+Deck Type=constructed
+Set=DST
+Image=transference.jpg
+[Main]
+2 Arcbound Bruiser|DST
+2 Arcbound Crusher|DST
+1 Arcbound Fiend|DST
+2 Arcbound Hybrid|DST
+1 Arcbound Lancer|DST
+1 Arcbound Reclaimer|DST
+2 Arcbound Stinger|DST
+4 Arcbound Worker|DST
+2 Cobalt Golem|MRD
+1 Dragon Blood|MRD
+1 Dross Scorpion|MRD
+2 Echoing Truth|DST
+7 Island|MRD|1
+7 Island|MRD|2
+7 Island|MRD|3
+1 Juggernaut|DST
+3 Neurok Familiar|MRD
+1 Neurok Transmuter|DST
+1 Reshape|DST
+2 Rust Elemental|MRD
+2 Seat of the Synod|MRD
+2 Skullclamp|DST
+1 Spincrusher|DST
+1 Spire Golem|DST
+1 Ur-Golem's Eye|DST
+2 Vedalken Engineer|DST
+1 Voltaic Construct|DST
+[sideboard]

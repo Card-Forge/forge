@@ -1,0 +1,8 @@
+Name:Molder Slug
+ManaCost:3 G G
+Types:Creature Slug Beast
+PT:4/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Artifact | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice an artifact.
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact.

@@ -1,0 +1,9 @@
+Name:Tolsimir Wolfblood
+ManaCost:4 G W
+Types:Legendary Creature Elf Warrior
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other green creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ voja | TokenOwner$ You | SpellDescription$ Create Voja, a legendary 2/2 green and white Wolf creature token.
+SVar:PlayMain1:TRUE
+Oracle:Other green creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\n{T}: Create Voja, a legendary 2/2 green and white Wolf creature token.

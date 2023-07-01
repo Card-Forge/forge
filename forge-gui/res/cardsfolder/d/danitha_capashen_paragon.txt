@@ -1,0 +1,9 @@
+Name:Danitha Capashen, Paragon
+ManaCost:2 W
+Types:Legendary Creature Human Knight
+PT:2/2
+K:First Strike
+K:Vigilance
+K:Lifelink
+S:Mode$ ReduceCost | ValidCard$ Aura,Equipment | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Aura and Equipment spells you cast cost {1} less to cast.
+Oracle:First strike, vigilance, lifelink\nAura and Equipment spells you cast cost {1} less to cast.

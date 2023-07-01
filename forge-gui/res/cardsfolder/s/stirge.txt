@@ -1,0 +1,9 @@
+Name:Stirge
+ManaCost:B
+Types:Creature Insect Bat
+PT:1/1
+A:AB$ Draw | Cost$ 1 B PayLife<1> Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+K:Flying
+K:CARDNAME can't block.
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nStirge can't block.\nBlood Drain — {1}{B}, Pay 1 life, Sacrifice Stirge: Draw a card.

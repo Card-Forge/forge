@@ -1,0 +1,45 @@
+[quest]
+id=33005
+OpponentName=Onna
+AILife=30
+Repeat=true
+Wins=5
+Card Reward=2 random rares
+Credit Reward=100
+AIExtras=
+HumanExtras=
+[metadata]
+Name=quest33005
+Title=Hurricane of Onna
+Difficulty=medium
+Description="This storm blows gales through the dreams of men.""
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+1 Bounteous Kirin|SOK
+2 Cloudcrest Lake|CHK
+3 Elder Pine of Jukai|SOK
+4 Forbidden Orchard|CHK
+1 Forest|CHK|2
+4 Forest|CHK|4
+4 Haru-Onna|SOK
+1 Island|CHK|1
+3 Island|CHK|2
+1 Island|CHK|4
+3 Kemuri-Onna|SOK
+4 Kiri-Onna|SOK
+4 Kodama's Reach|CHK
+2 Loam Dweller|BOK
+4 Long-Forgotten Gohei|CHK
+3 Nikko-Onna|SOK
+2 Oyobi, Who Split the Heavens|BOK
+1 Plains|CHK|2
+1 Plains|CHK|4
+1 Swamp|CHK|1
+1 Swamp|CHK|4
+1 Tamiyo, the Moon Sage|AVR
+4 Thief of Hope|CHK
+3 Tranquil Garden|CHK
+2 Waterveil Cavern|CHK
+[Sideboard]
+

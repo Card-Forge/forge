@@ -1,0 +1,9 @@
+Name:Pandora's Box
+ManaCost:5
+Types:Artifact
+A:AB$ ChooseCard | Cost$ 3 T | Choices$ Creature | AtRandom$ True | AllCards$ True | SubAbility$ DBRepeatEach | AILogic$ AtOppEOT | StackDescription$ SpellDescription | SpellDescription$ Choose a creature card at random from all players' decklists. Each player flips a coin. Each player whose coin comes up heads creates a token that's a copy of that card.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFlip | SubAbility$ DBCleanup
+SVar:DBFlip:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | HeadsSubAbility$ DBCopyPermanent
+SVar:DBCopyPermanent:DB$ CopyPermanent | Defined$ ChosenCard | Controller$ Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:{3}, {T}: Choose a creature card at random from all players' decklists. Each player flips a coin. Each player whose coin comes up heads creates a token that's a copy of that card.

@@ -1,0 +1,6 @@
+Name:Moon Heron
+ManaCost:3 U
+Types:Creature Spirit Bird
+PT:3/2
+K:Flying
+Oracle:Flying

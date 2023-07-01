@@ -1,0 +1,10 @@
+Name:Mass Hysteria
+ManaCost:R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All creatures have haste.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+SVar:BuffedBy:Creature
+SVar:AntiBuffedBy:Creature
+SVar:AICastPreference:MaxControlledGlobally$ 1
+Oracle:All creatures have haste.

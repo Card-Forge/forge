@@ -1,0 +1,7 @@
+Name:Myr Convert
+ManaCost:2
+Types:Artifact Creature Phyrexian Myr
+PT:2/1
+K:Toxic:1
+A:AB$ Mana | Cost$ T PayLife<2> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\n{T}, Pay 2 life: Add one mana of any color.

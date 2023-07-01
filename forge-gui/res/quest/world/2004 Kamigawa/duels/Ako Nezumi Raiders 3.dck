@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ako Nezumi Raiders 3
+Title=The Tale of Nezumi Shortfang
+Difficulty=hard
+Description="These nezumi, they disgust me. The things they will do for money, no other thinking creature would consider. This, of course, makes them useful beyond words." -- Meloku the Clouded Mirror
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Ashen-Skin Zubera|CHK
+4 Distress|CHK
+4 Horobi's Whisper|BOK
+2 Ink-Eyes, Servant of Oni|BOK
+2 Marrow-Gnawer|CHK
+4 Nezumi Cutthroat|CHK
+3 Nezumi Ronin|CHK
+4 Nezumi Shortfang|CHK
+2 Okiba-Gang Shinobi|BOK
+1 Patron of the Nezumi|BOK
+3 Rend Flesh|CHK
+2 Ronin Warclub|BOK
+1 Shizo, Death's Storehouse|CHK
+7 Swamp|CHK|1
+6 Swamp|CHK|2
+4 Swamp|CHK|3
+4 Swamp|CHK|4
+2 Throat Slitter|BOK
+2 Untaidake, the Cloud Keeper|CHK
+[Sideboard]
+

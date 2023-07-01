@@ -1,0 +1,7 @@
+Name:Xiahou Dun, the One-Eyed
+ManaCost:2 B B
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:Horsemanship
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Black+YouCtrl | TgtPrompt$ Select a target black card from your graveyard | ChangeNum$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Return target black card from your graveyard to your hand. Activate only during your turn, before attackers are declared.
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nSacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate only during your turn, before attackers are declared.

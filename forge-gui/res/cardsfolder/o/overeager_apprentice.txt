@@ -1,0 +1,7 @@
+Name:Overeager Apprentice
+ManaCost:2 B
+Types:Creature Human Minion
+PT:1/2
+A:AB$ Mana | Cost$ Discard<1/Card> Sac<1/CARDNAME> | Produced$ B | Amount$ 3 | SpellDescription$ Add {B}{B}{B}.
+AI:RemoveDeck:All
+Oracle:Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B}.

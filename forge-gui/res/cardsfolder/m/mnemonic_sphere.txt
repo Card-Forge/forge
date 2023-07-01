@@ -1,0 +1,7 @@
+Name:Mnemonic Sphere
+ManaCost:1 U
+Types:Artifact
+A:AB$ Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:AB$ Draw | Cost$ U Discard<1/CARDNAME> | NumCards$ 1 | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice|Discard
+Oracle:{1}{U}, Sacrifice Mnemonic Sphere: Draw two cards.\nChannel - {U}, Discard Mnemonic Sphere: Draw a card.

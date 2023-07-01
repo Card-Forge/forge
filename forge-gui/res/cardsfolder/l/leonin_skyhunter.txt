@@ -1,0 +1,6 @@
+Name:Leonin Skyhunter
+ManaCost:W W
+Types:Creature Cat Knight
+PT:2/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #18 - It's Raining, It's Sporing
+URL:https://pauperpuzzles.wordpress.com/2017/03/18/18-its-raining-its-sporing/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=16
+humanhand=Shrivel;Exhume;Disturbing Plot;Grim Affliction;Scatter the Seeds
+humangraveyard=Shambling Shell;Ivy Lane Denizen
+humanbattlefield=Swamp;Swamp;Swamp;Forest;Forest;Forest;Forest;Rendclaw Trow;Falkenrath Noble|Counters:P1P1=1;Deathspore Thallid|Counters:SPORE=2;t:Saproling,,P:1,T:1,Cost:no cost,Color:G,Types:Creature-Saproling,Keywords:,Image:g_1_1_saproling_M12;t:Saproling,,P:1,T:1,Cost:no cost,Color:G,Types:Creature-Saproling,Keywords:,Image:g_1_1_saproling_M12;t:Saproling,,P:1,T:1,Cost:no cost,Color:G,Types:Creature-Saproling,Keywords:,Image:g_1_1_saproling_M12
+ailibrary=Mnemonic Wall;Ghostly Flicker
+aigraveyard=Stonehorn Dignitary
+aibattlefield=Urza's Tower;Urza's Tower;Urza's Mine;Urza's Mine;Urza's Power Plant;Urza's Power Plant;Mulldrifter;Sea Gate Oracle;Lone Missionary;Rhystic Circle

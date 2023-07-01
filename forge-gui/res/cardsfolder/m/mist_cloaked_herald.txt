@@ -1,0 +1,6 @@
+Name:Mist-Cloaked Herald
+ManaCost:U
+Types:Creature Merfolk Warrior
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Mist-Cloaked Herald can't be blocked.

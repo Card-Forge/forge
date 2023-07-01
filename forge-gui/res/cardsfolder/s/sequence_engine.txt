@@ -1,0 +1,10 @@
+Name:Sequence Engine
+ManaCost:2 G
+Types:Artifact
+A:AB$ ChangeZone | Cost$ X T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature card from a graveyard | SubAbility$ DBToken | SorcerySpeed$ True | SpellDescription$ Exile target creature card with mana value X from a graveyard. Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. Activate only as a sorcery.
+SVar:DBToken:DB$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup | StackDescription$ None
+SVar:X:Count$xPaid
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters
+Oracle:{X}, {T}: Exile target creature card with mana value X from a graveyard. Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. Activate only as a sorcery.

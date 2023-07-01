@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Clackbridge Troll
+OpponentName=The Trolls
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Witch's Cottage
+HumanExtras=
+[metadata]
+Title=Clackbridge Troll
+Difficulty=medium
+Description="Lolololo lol, lololol, lololol. La la la la yaah.\nTrolololol, la-la-la, la-la-la,\nOhoh hahahoh! Hahah hahahoh! Ohoh hahahoh! Hahah hahahoh!\nLolol lol lololol, lolol lol lololol, lolol lol lololol, lolol lolol!"\n-Eduard Khil
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Clackbridge Troll
+[Main]
+30 Clackbridge Troll|ELD|2
+30 Swamp|ELD|1

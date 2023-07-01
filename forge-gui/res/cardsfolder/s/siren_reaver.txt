@@ -1,0 +1,8 @@
+Name:Siren Reaver
+ManaCost:3 U
+Types:Creature Siren Pirate
+PT:3/2
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ RaidTest | SVarCompare$ GE1 | Description$ Raid — This spell costs {1} less to cast if you attacked this turn.
+K:Flying
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — This spell costs {1} less to cast if you attacked this turn.\nFlying

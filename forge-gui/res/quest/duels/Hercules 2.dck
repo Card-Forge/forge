@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Hercules 2
+Title=Hercules
+Difficulty=medium
+Description=GW Deck with Bant Sureblade and Naya Hushblade
+Icon=Hercules.jpg
+Deck Type=constructed
+[main]
+1 Ancient Spider
+3 Bant Sureblade
+1 Centaur Healer
+1 Centaur Safeguard
+1 Kitchen Finks
+1 Leonin Armorguard
+1 Messenger Falcons
+3 Naya Hushblade
+1 Armadillo Cloak
+1 Aura Shards
+1 Behemoth Sledge
+1 Enlisted Wurm
+1 Crystallization
+1 Asmira, Holy Avenger
+1 Safehold Duo
+1 Captured Sunlight
+1 Charging Troll
+1 Grizzled Leotau
+1 Heartmender
+1 Shield of the Oversoul
+1 Sigil Blessing
+1 Loxodon Hierarch
+1 Mirari's Wake
+1 Mycoid Shepherd
+1 Mystic Enforcer
+1 Oversoul of Dusk
+1 Phantom Nishoba
+1 Risen Sanctuary
+1 Tolsimir Wolfblood
+1 Wilt-Leaf Liege
+1 Watchwolf
+1 Wilt-Leaf Cavaliers
+3 Sunpetal Grove
+6 Forest|M12
+4 Grasslands
+4 Graypelt Refuge
+6 Plains|M12
+1 Vitu-Ghazi, the City-Tree
+[sideboard]

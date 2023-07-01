@@ -1,0 +1,7 @@
+Name:Castle Raptors
+ManaCost:4 W
+Types:Creature Bird Soldier
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddToughness$ 2 | Description$ As long as CARDNAME is untapped, it gets +0/+2.
+Oracle:Flying\nAs long as Castle Raptors is untapped, it gets +0/+2.

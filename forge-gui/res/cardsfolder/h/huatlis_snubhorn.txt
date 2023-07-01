@@ -1,0 +1,6 @@
+Name:Huatli's Snubhorn
+ManaCost:1 W
+Types:Creature Dinosaur
+PT:2/2
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

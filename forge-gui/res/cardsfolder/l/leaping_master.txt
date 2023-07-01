@@ -1,0 +1,6 @@
+Name:Leaping Master
+ManaCost:1 R
+Types:Creature Human Monk
+PT:2/1
+A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:{2}{W}: Leaping Master gains flying until end of turn.

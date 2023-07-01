@@ -1,0 +1,8 @@
+Name:Zhang Fei, Fierce Warrior
+ManaCost:4 W W
+Types:Legendary Creature Human Soldier Warrior
+PT:4/4
+K:Vigilance
+K:Horsemanship
+DeckHints:Name$Liu Bei, Lord of Shu
+Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)

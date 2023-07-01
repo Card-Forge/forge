@@ -1,0 +1,10 @@
+Name:Rousing of Souls
+ManaCost:2 W
+Types:Sorcery
+A:SP$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Parley — Each player reveals the top card of their library.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | SubAbility$ DBDraw | SpellDescription$ For each nonland card revealed this way, you create a 1/1 white Spirit creature token with flying.
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Then each player draws a card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Parley — Each player reveals the top card of their library. For each nonland card revealed this way, you create a 1/1 white Spirit creature token with flying. Then each player draws a card.

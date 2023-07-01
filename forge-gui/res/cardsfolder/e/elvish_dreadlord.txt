@@ -1,0 +1,11 @@
+Name:Elvish Dreadlord
+ManaCost:3 B B
+Types:Creature Zombie Elf
+PT:3/3
+K:Deathtouch
+K:Encore:5 B B
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerDescription$ When CARDNAME dies, non-Elf creatures get -3/-3 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.nonElf | NumAtt$ -3 | NumDef$ -3
+DeckHints:Type$Elf
+DeckHas:Ability$Token
+Oracle:Deathtouch\nWhen Elvish Dreadlord dies, non-Elf creatures get -3/-3 until end of turn.\nEncore {5}{B}{B} ({5}{B}{B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

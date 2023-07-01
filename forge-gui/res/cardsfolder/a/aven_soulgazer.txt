@@ -1,0 +1,7 @@
+Name:Aven Soulgazer
+ManaCost:3 W W
+Types:Creature Bird Cleric
+PT:3/3
+K:Flying
+A:AB$ LookAt | Cost$ 2 W | ValidTgts$ Creature.faceDown | TgtPrompt$ Select target face-down creature. | SpellDescription$ Look at target face-down creature.
+Oracle:Flying\n{2}{W}: Look at target face-down creature.

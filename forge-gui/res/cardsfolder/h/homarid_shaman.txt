@@ -1,0 +1,7 @@
+Name:Homarid Shaman
+ManaCost:2 U U
+Types:Creature Homarid Shaman
+PT:2/1
+A:AB$ Tap | Cost$ U | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Tap target green creature.
+AI:RemoveDeck:Random
+Oracle:{U}: Tap target green creature.

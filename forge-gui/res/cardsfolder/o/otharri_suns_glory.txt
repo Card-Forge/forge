@@ -1,0 +1,18 @@
+Name:Otharri, Suns' Glory
+ManaCost:3 R W
+Types:Legendary Creature Phoenix
+PT:3/3
+K:Flying
+K:Lifelink
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExperience | TriggerDescription$ Whenever CARDNAME attacks, you get an experience counter. Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | TokenAmount$ X | TokenAttacking$ True | TokenTapped$ True | SpellDescription$ Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.
+A:AB$ ChangeZone | Cost$ 2 R W tapXType<1/Rebel> | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return NICKNAME from your graveyard to the battlefield tapped.
+SVar:X:Count$YourCountersExperience
+DeckHas:Ability$Graveyard|Counters|Token & Type$Rebel
+DeckHints:Type$Rebel
+SVar:HasAttackEffect:TRUE
+SVar:DiscardMe:2
+SVar:SacMe:1
+Oracle:Flying, lifelink, haste\nWhenever Otharri, Suns' Glory attacks, you get an experience counter. Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.\n{2}{R}{W}, Tap an untapped Rebel you control: Return Otharri from your graveyard to the battlefield tapped.

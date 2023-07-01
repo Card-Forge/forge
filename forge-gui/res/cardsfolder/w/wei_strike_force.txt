@@ -1,0 +1,6 @@
+Name:Wei Strike Force
+ManaCost:2 B
+Types:Creature Human Soldier
+PT:2/1
+K:Horsemanship
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)

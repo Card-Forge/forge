@@ -1,0 +1,9 @@
+Name:Wizards' School
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ 2 T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{1}, {T}: Add {U}.\n{2}, {T}: Add {W} or {B}.

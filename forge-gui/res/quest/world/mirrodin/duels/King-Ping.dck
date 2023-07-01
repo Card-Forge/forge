@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=King-Ping
+Title=King-Ping
+Difficulty=hard
+Description=PING, You're dead!
+Icon=King-Ping.jpg
+Deck Type=constructed
+[Main]
+4 Bloodshot Trainee|SOM
+4 Bonesplitter|MRD
+2 Darksteel Axe|SOM
+2 Grafted Exoskeleton|SOM
+2 Grafted Wargear|5DN
+4 Iron Myr|SOM
+3 Lightning Greaves|MRD
+1 Loxodon Warhammer|MRD
+24 Mountain|SOM|1
+4 Plague Myr|MBS
+4 Spikeshot Elder|SOM
+4 Spikeshot Goblin|MRD
+2 Vulshok Sorcerer|5DN
+[sideboard]

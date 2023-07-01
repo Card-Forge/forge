@@ -1,0 +1,8 @@
+Name:Blind Creeper
+ManaCost:1 B
+Types:Creature Zombie Beast
+PT:3/3
+T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a spell, CARDNAME gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1
+SVar:AntiBuffedBy:Card
+Oracle:Whenever a player casts a spell, Blind Creeper gets -1/-1 until end of turn.

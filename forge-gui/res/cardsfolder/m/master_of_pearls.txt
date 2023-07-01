@@ -1,0 +1,8 @@
+Name:Master of Pearls
+ManaCost:1 W
+Types:Creature Human Monk
+PT:2/2
+K:Morph:3 W W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, creatures you control get +2/+2 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2
+Oracle:Morph {3}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Master of Pearls is turned face up, creatures you control get +2/+2 until end of turn.

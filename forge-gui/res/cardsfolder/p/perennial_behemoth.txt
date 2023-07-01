@@ -1,0 +1,9 @@
+Name:Perennial Behemoth
+ManaCost:5
+Types:Artifact Creature Beast
+PT:2/7
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+K:Unearth:G G
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill & Color$Green
+Oracle:You may play land cards from your graveyard.\nUnearth {G}{G} ({G}{G}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

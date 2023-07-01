@@ -1,0 +1,6 @@
+Name:Pilfer
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+DeckHas:Ability$Discard
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.

@@ -1,0 +1,7 @@
+Name:Vengeful Dead
+ManaCost:3 B
+Types:Creature Zombie
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Zombie.Other | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Zombie dies, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:Whenever Vengeful Dead or another Zombie dies, each opponent loses 1 life.

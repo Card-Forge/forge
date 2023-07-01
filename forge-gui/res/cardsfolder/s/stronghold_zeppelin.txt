@@ -1,0 +1,7 @@
+Name:Stronghold Zeppelin
+ManaCost:2 U U
+Types:Creature Human
+PT:3/3
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nStronghold Zeppelin can block only creatures with flying.

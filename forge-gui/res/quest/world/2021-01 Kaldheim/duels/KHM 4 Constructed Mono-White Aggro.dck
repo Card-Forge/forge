@@ -1,0 +1,22 @@
+[metadata]
+Title=Mono-White Aggro
+Difficulty=very hard
+Description=Played in the Kaldheim Constructed Event, 13 Februari 2021.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM 4 Constructed: Mono-White Aggro
+[Main]
+4 Battlefield Raptor|KHM
+2 Bound in Gold|KHM
+4 Clarion Spirit|KHM
+4 Codespell Cleric|KHM
+4 Faceless Haven|KHM|1
+4 Halvar, God of Battle|KHM|1
+3 Reidane, God of the Worthy|KHM|1
+3 Sigrid, God-Favored|KHM|1
+19 Snow-Covered Plains|KHM|1
+4 Spectral Steel|KHM
+4 Story Seeker|KHM
+4 Usher of the Fallen|KHM|1
+[Sideboard]
+1 Starnheim Unleashed|KHM|1

@@ -1,0 +1,12 @@
+Name:Phyrexian Fleshgorger
+ManaCost:7
+Types:Artifact Creature Phyrexian Wurm
+PT:7/5
+K:Prototype:1 B B:3:3
+K:Menace
+K:Lifelink
+K:Ward:PayLife<X/life equal to CARDNAME's power>
+SVar:X:Count$CardPower
+DeckHas:Ability$LifeGain
+DeckHints:Color$Black
+Oracle:Prototype {1}{B}{B} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nMenace, lifelink\nWard—Pay life equal to Phyrexian Fleshgorger's power.

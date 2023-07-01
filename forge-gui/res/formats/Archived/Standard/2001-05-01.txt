@@ -1,0 +1,6 @@
+[format]
+Name:Standard (7ED)
+Type:Archived
+Subtype:Standard
+Effective:2001-05-01
+Sets:MMQ, NMS, PCY, INV, PLS, 7ED

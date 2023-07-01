@@ -1,0 +1,8 @@
+Name:Shyft
+ManaCost:4 U
+Types:Creature Shapeshifter
+PT:4/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigColor | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME become the color or colors of your choice. (This effect lasts indefinitely.)
+SVar:TrigColor:DB$ ChooseColor | Defined$ You | OrColors$ True | SubAbility$ Animate
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent
+Oracle:At the beginning of your upkeep, you may have Shyft become the color or colors of your choice. (This effect lasts indefinitely.)

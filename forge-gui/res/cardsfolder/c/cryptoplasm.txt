@@ -1,0 +1,8 @@
+Name:Cryptoplasm
+ManaCost:1 U U
+Types:Creature Shapeshifter
+PT:2/2
+# Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CryptoplasmCopy | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME become a copy of another target creature, except it has this ability.
+SVar:CryptoplasmCopy:DB$ Clone | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature to copy. | Optional$ True | GainThisAbility$ True | AddSVars$ CryptoplasmCopy | AILogic$ CloneBestCreature
+Oracle:At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature, except it has this ability.

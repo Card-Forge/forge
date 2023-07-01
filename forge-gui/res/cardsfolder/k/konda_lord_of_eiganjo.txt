@@ -1,0 +1,8 @@
+Name:Konda, Lord of Eiganjo
+ManaCost:5 W W
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Vigilance
+K:Bushido:5
+K:Indestructible
+Oracle:Vigilance, indestructible\nBushido 5 (Whenever this creature blocks or becomes blocked, it gets +5/+5 until end of turn.)

@@ -1,0 +1,9 @@
+Name:Implement of Improvement
+ManaCost:1
+Types:Artifact
+A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:{W}, Sacrifice Implement of Improvement: You gain 2 life.\nWhen Implement of Improvement is put into a graveyard from the battlefield, draw a card.

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ned Flanders 3
+Title=Ned Flanders
+Difficulty=hard
+Description=Mono B reanimator deck with a few large creatures and some spells
+Icon=Ned Flanders.jpg
+Deck Type=constructed
+[main]
+1 Hellkite Overlord
+22 Swamp|ISD
+4 Hymn to Tourach
+1 Terror
+1 Sinkhole
+1 Eyeblight's Ending
+1 It That Betrays
+1 Zombify
+1 Necromancy
+1 Dance of the Dead
+4 Buried Alive
+3 Night's Whisper
+4 Exhume
+1 Pestilence Demon
+4 Animate Dead
+4 Entomb
+1 Smother
+1 Inkwell Leviathan
+1 Doom Blade
+2 Drown in Sorrow
+1 Hidden Horror
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Deadly Insect
+ManaCost:4 G
+Types:Creature Insect
+PT:6/1
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)

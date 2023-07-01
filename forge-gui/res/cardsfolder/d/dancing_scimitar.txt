@@ -1,0 +1,6 @@
+Name:Dancing Scimitar
+ManaCost:4
+Types:Artifact Creature Spirit
+PT:1/5
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

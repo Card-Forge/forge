@@ -1,0 +1,8 @@
+Name:Angelic Voices
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Creature.nonWhite+nonArtifact+YouCtrl | PresentCompare$ EQ0 | Description$ Creatures you control get +1/+1 as long as you control no nonartifact, nonwhite creatures.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact & Color$White
+Oracle:Creatures you control get +1/+1 as long as you control no nonartifact, nonwhite creatures.

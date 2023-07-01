@@ -1,0 +1,8 @@
+Name:Graceblade Artisan
+ManaCost:2 W
+Types:Creature Human Monk
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+Oracle:Graceblade Artisan gets +2/+2 for each Aura attached to it.

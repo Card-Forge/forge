@@ -1,0 +1,5 @@
+Name:Mox Amber
+ManaCost:0
+Types:Legendary Artifact
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Creature.Legendary+YouCtrl,Planeswalker.Legendary+YouCtrl | ReflectProperty$ Is | SpellDescription$ Add one mana of any color among legendary creatures and planeswalkers you control.
+Oracle:{T}: Add one mana of any color among legendary creatures and planeswalkers you control.

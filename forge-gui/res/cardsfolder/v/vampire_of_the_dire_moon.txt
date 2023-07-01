@@ -1,0 +1,7 @@
+Name:Vampire of the Dire Moon
+ManaCost:B
+Types:Creature Vampire
+PT:1/1
+K:Deathtouch
+K:Lifelink
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

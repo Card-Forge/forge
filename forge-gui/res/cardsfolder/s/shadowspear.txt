@@ -1,0 +1,8 @@
+Name:Shadowspear
+ManaCost:1
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample & Lifelink | Description$ Equipped creature gets +1/+1 and has trample and lifelink.
+A:AB$ AnimateAll | Cost$ 1 | ValidCards$ Permanent.OppCtrl | RemoveKeywords$ Hexproof & Indestructible | SpellDescription$ Permanents your opponents control lose hexproof and indestructible until end of turn. | StackDescription$ SpellDescription
+K:Equip:2
+DeckHas:Ability$LifeGain
+Oracle:Equipped creature gets +1/+1 and has trample and lifelink.\n{1}: Permanents your opponents control lose hexproof and indestructible until end of turn.\nEquip {2}

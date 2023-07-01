@@ -1,0 +1,9 @@
+Name:Grenzo's Ruffians
+ManaCost:2 R R
+Types:Creature Goblin
+PT:2/2
+K:Melee
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to each other opponent.
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nWhenever Grenzo's Ruffians deals combat damage to an opponent, it deals that much damage to each other opponent.

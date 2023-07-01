@@ -1,0 +1,9 @@
+Name:Dawnhart Rejuvenator
+ManaCost:3 G
+Types:Creature Human Warlock
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$LifeGain
+Oracle:When Dawnhart Rejuvenator enters the battlefield, you gain 3 life.\n{T}: Add one mana of any color.

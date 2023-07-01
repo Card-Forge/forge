@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Brother Voodoo 3
+Title=Brother Voodoo
+Difficulty=hard
+Description=BG Constellation deck with Argothian Enchantress and lots of Enchantment Creatures
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+[main]
+4 Bayou
+3 Misty Rainforest
+3 Polluted Delta
+4 Verdant Catacombs
+3 Forest
+3 Swamp
+1 Mox Emerald
+1 Mox Jet
+2 Argothian Enchantress
+1 Herald of the Pantheon
+4 Brain Maggot
+4 Grim Guardian
+3 Oakheart Dryads
+4 Courser of Kruphix
+4 Eidolon of Blossoms
+4 Doomwake Giant
+3 Font of Fertility
+1 Pharika, God of Affliction
+2 Enchantress's Presence
+3 Exploration
+1 Rancor
+1 Seal of Doom 
+1 Seal of Primordium
+[sideboard]

@@ -1,0 +1,9 @@
+Name:Thassa's Emissary
+ManaCost:3 U
+Types:Enchantment Creature Crab
+PT:3/3
+K:Bestow:5 U
+T:Mode$ DamageDone | ValidSource$ Card.Self,Creature.EnchantedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or enchanted creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
+Oracle:Bestow {5}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nWhenever Thassa's Emissary or enchanted creature deals combat damage to a player, draw a card.\nEnchanted creature gets +3/+3.

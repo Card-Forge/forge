@@ -1,0 +1,8 @@
+Name:Sanctum of Ugin
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+T:Mode$ SpellCast | ValidCard$ Card.Colorless+cmcGE7 | ValidActivatingPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a colorless spell with mana value 7 or greater, you may sacrifice CARDNAME. If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Colorless | ChangeNum$ 1
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}.\nWhenever you cast a colorless spell with mana value 7 or greater, you may sacrifice Sanctum of Ugin. If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,7 @@
+Name:Vengeful Vampire
+ManaCost:4 B B
+Types:Creature Vampire
+PT:3/2
+K:Flying
+K:Undying
+Oracle:Flying\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

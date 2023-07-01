@@ -1,0 +1,9 @@
+Name:Bant Exalted|Deck:Bant Exalted.dck|Variant:None|Avatar:Battlegrace Angel|Desc:
+Name:Bant Renowned|Deck:Bant Renowned.dck|Variant:None|Avatar:Citadel Castellan|Desc:
+Name:Bant Top Cards|Deck:Bant Top Cards.dck|Variant:None|Avatar:Noble Hierarch|Desc:
+Name:Roon of the Hidden Realm|Deck:Roon of the Hidden Realm.dck|Variant:Commander|Avatar:Roon of the Hidden Realm|Desc:
+Name:Derevi, Empyrial Tactician|Deck:Derevi, Empyrial Tactician.dck|Variant:Commander|Avatar:Derevi, Empyrial Tactician|Desc:
+Name:Jenara, Asura of War|Deck:Jenara, Asura of War.dck|Variant:Commander|Avatar:Jenara, Asura of War|Desc:
+Name:Rafiq of the Many|Deck:Rafiq of the Many.dck|Variant:Commander|Avatar:Rafiq of the Many|Desc:
+Name:Dauntless Escort Vanguard|Deck:Dauntless Escort Vanguard.dck|Variant:Vanguard|Avatar:Dauntless Escort|Desc:
+Name:Elspeth Soldiers|Deck:Elspeth Soldiers.dck|Variant:Planeswalker|Avatar:Elspeth, Knight-Errant|Desc:

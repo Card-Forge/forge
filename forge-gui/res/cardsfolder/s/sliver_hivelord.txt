@@ -1,0 +1,8 @@
+Name:Sliver Hivelord
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Indestructible | Description$ Sliver creatures you control have indestructible.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have indestructible. (Damage and effects that say "destroy" don't destroy them.)

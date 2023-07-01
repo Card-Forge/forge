@@ -1,0 +1,8 @@
+Name:Cabal Interrogator
+ManaCost:1 B
+Types:Creature Zombie Wizard
+PT:1/1
+A:AB$ Discard | Cost$ X B T | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | Mode$ RevealYouChoose | DiscardValid$ Card | SorcerySpeed$ True | SpellDescription$ Target player reveals X cards from their hand and you choose one of them. That player discards that card. Activate only as a sorcery.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}{B}, {T}: Target player reveals X cards from their hand and you choose one of them. That player discards that card. Activate only as a sorcery.

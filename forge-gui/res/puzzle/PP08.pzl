@@ -1,0 +1,14 @@
+[metadata]
+Name:Pauper Puzzles #08 - Taste The Rainbow
+URL:https://pauperpuzzles.wordpress.com/2017/01/24/8-taste-the-rainbow/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=4
+humanhand=Cloudshift;Tideshaper Mystic;Dead Ringers;Fiery Conclusion;Rancor;Prismatic Strands
+humanbattlefield=Plains;Plains;Island;Swamp;Swamp;Mountain;Mountain;Forest;Forest;Cinder Hellion;Wild Mongrel
+aibattlefield=Court Homunculus;Neurok Familiar;Vault Skirge;Atog;Thundering Tanadon;Prophetic Prism

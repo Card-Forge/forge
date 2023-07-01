@@ -1,0 +1,17 @@
+[metadata]
+Code=PAL99
+Date=1999-01-01
+Name=Arena League 1999
+Type=Promo
+ScryfallCode=PAL99
+
+[cards]
+1 R Forest @Anthony S. Waters
+2 R Pouncing Jaguar @Daren Bader
+3 R Island @Donato Giancola
+4 R Skittering Skirge @Ron Spencer
+5 R Mountain @John Avon
+6 R Rewind @Dermot Power
+7 R Plains @Rob Alexander
+9 R Swamp @John Avon
+3† R Island @Donato Giancola

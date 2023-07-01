@@ -1,0 +1,9 @@
+Name:House Stromkirk|Deck:House Stromkirk.dck|Variant:None|Avatar:Stromkirk Captain|Desc:
+Name:Madness|Deck:Madness.dck|Variant:None|Avatar:Bloodhall Priest|Desc:
+Name:Curses|Deck:Curses.dck|Variant:None|Avatar:Curse of Misfortunes|Desc:
+Name:House Falkenrath|Deck:House Falkenrath.dck|Variant:None|Avatar:Falkenrath Aristocrat|Desc:
+Name:Nekrataal|Deck:Nekrataal.dck|Variant:Vanguard|Avatar:Nekrataal|Desc:
+Name:House Voldaren|Deck:House Voldaren.dck|Variant:Commander|Avatar:Olivia Voldaren|Desc:
+Name:Olivia, Mobilized for War|Deck:Olivia, Mobilized for War.dck|Variant:Commander|Avatar:Olivia, Mobilized for War|Desc:
+Name:House Markov|Deck:House Markov.dck|Variant:Planeswalker|Avatar:Sorin Markov|Desc:
+Name:Sorin, Lord of Innistrad|Deck:Sorin, Lord of Innistrad.dck|Variant:Planeswalker|Avatar:Sorin, Lord of Innistrad|Desc:

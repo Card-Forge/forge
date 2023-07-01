@@ -1,0 +1,11 @@
+Name:Breach the Multiverse
+ManaCost:5 B B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 10 | Defined$ Player | SubAbility$ DBForEach | SpellDescription$ Each player mills ten cards. For each player, choose a creature or planeswalker card in that player's graveyard. Put those cards onto the battlefield under your control. Then each creature you control becomes a Phyrexian in addition to its other types.
+SVar:DBForEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZone
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl | ChoiceZone$ Graveyard | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose a creature or planeswalker card in this player's graveyard | ImprintChosen$ True
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | GainControl$ True | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate | StackDescription$ None
+SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Types$ Phyrexian | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearImprinted$ True
+DeckHas:Ability$Graveyard|Mill
+Oracle:Each player mills ten cards. For each player, choose a creature or planeswalker card in that player's graveyard. Put those cards onto the battlefield under your control. Then each creature you control becomes a Phyrexian in addition to its other types.

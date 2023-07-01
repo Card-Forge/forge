@@ -1,0 +1,6 @@
+Name:Sunspire Griffin
+ManaCost:1 W W
+Types:Creature Griffin
+PT:2/3
+K:Flying
+Oracle:Flying

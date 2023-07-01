@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1400
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Jiang Yanggu
+Description=Jiang Yanggu wanders the world accompanied by his faithful companion, Mowu, searching for clues to a past he can't remember. Mu Yanling, an enigmatic storm mage, remembers her tragic past all too clearly but will never give up hope of saving those she loves. When their paths collide on a sacred magical mountain, they realize they both may be caught up in a greater mystery than they ever imagined.
+Deck Type=constructed
+Set=GS1
+Image=jiang_yanggu.jpg
+[main]
+2 Giant Spider|GS1
+4 Timber Gorge|GS1
+9 Mountain|GS1
+12 Forest|GS1
+1 Jiang Yanggu|GS1
+2 Leopard-Spotted Jiao|GS1
+3 Feiyi Snake|GS1
+3 Sacred White Deer|GS1
+4 Reckless Pangolin|GS1
+3 Ferocious Zheng|GS1
+2 Fire-Omen Crane|GS1
+1 Screeching Phoenix|GS1
+2 Earthshaking Si|GS1
+2 Hardened-Scale Armor|GS1
+2 Breath of Fire|GS1
+2 Aggressive Instinct|GS1
+2 Confidence from Strength|GS1
+2 Journey for the Elixir|GS1
+2 Cleansing Screech|GS1

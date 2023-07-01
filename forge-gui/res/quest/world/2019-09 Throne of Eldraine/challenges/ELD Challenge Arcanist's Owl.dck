@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Arcanist's Owl
+OpponentName=The Owls
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Mystic Sanctuary
+HumanExtras=
+[metadata]
+Title=Arcanist's Owl
+Difficulty=hard
+Description=The owls start with a land.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Arcanist's Owl
+[Main]
+30 Arcanist's Owl|ELD
+30 Island|ELD|1

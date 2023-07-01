@@ -1,0 +1,6 @@
+Name:Shadow Rider
+ManaCost:2 B B
+Types:Creature Knight
+PT:3/3
+K:Flanking
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)

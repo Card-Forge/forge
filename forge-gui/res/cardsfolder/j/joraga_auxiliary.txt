@@ -1,0 +1,6 @@
+Name:Joraga Auxiliary
+ManaCost:1 G W
+Types:Creature Elf Soldier Ally
+PT:2/3
+A:AB$ PutCounter | Cost$ 4 G W | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
+Oracle:{4}{G}{W}: Support 2. (Put a +1/+1 counter on each of up to two other target creatures.)

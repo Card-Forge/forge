@@ -1,0 +1,8 @@
+Name:Bladed Ambassador
+ManaCost:1 W
+Types:Creature Phyrexian Soldier
+PT:3/1
+K:etbCounter:OIL:1
+A:AB$ Pump | Cost$ 1 SubCounter<1/OIL> | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+DeckHas:Ability$Counters
+Oracle:Bladed Ambassador enters the battlefield with an oil counter on it.\n{1}, Remove an oil counter from Bladed Ambassador: Bladed Ambassador gains indestructible until end of turn.

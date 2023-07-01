@@ -1,0 +1,6 @@
+Name:Send to Sleep
+ManaCost:1 U
+Types:Instant
+A:SP$ Tap | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures.Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps.
+SVar:TrigPump:DB$ Pump | Defined$ Targeted | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE2 | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+Oracle:Tap up to two target creatures.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps.

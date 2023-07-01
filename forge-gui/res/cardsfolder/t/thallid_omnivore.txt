@@ -1,0 +1,9 @@
+Name:Thallid Omnivore
+ManaCost:3 B
+Types:Creature Fungus
+PT:3/3
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SubAbility$ DBGainLife | SpellDescription$ CARDNAME gets +2/+2 until end of turn. If a Saproling was sacrificed this way, you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ Sacrificed | ConditionPresent$ Card.Saproling | ConditionCompare$ GE1
+SVar:AIPreference:SacCost$Creature.Saproling,Creature.Other
+DeckHints:Type$Saproling
+Oracle:{1}, Sacrifice another creature: Thallid Omnivore gets +2/+2 until end of turn. If a Saproling was sacrificed this way, you gain 2 life.

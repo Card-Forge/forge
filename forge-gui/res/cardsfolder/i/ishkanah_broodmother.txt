@@ -1,0 +1,9 @@
+Name:Ishkanah, Broodmother
+ManaCost:3 G
+Types:Legendary Creature Spider
+PT:3/5
+K:Reach
+S:Mode$ Continuous | Affected$ Creature.Spider+Other+YouCtrl | AddPower$ 1 | AddToughness$ 2 | Description$ Other Spiders you control get +1/+2.
+A:AB$ Draft | Cost$ 1 BG ExileFromGrave<2/Card> | Spellbook$ Twin-Silk Spider,Drider,Brood Weaver,Glowstone Recluse,Gnottvold Recluse,Hatchery Spider,Mammoth Spider,Netcaster Spider,Sentinel Spider,Snarespinner,Sporecap Spider,Spidery Grasp,Spider Spawning,Prey Upon,Arachnoform | SpellDescription$ Draft a card from CARDNAME's spellbook.
+DeckHints:Type$Spider
+Oracle:Reach\nOther Spiders you control get +1/+2.\n{1}{B/G}, Exile two cards from your graveyard: Draft a card from Ishkanah, Broodmother's spellbook.

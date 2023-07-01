@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wonder Woman 3
+Title=Wonder Woman
+Difficulty=hard
+Description=Mono W Equipment deck
+Icon=Wonder Woman.jpg
+Deck Type=constructed
+[main]
+22 Plains|MBS
+1 Mox Pearl
+2 Auriok Glaivemaster
+2 Kitesail Apprentice
+2 Kor Duelist
+2 Leonin Den-Guard
+2 Auriok Steelshaper
+2 Sunspear Shikari
+3 Stoneforge Mystic
+3 Puresteel Paladin
+1 Kemba, Kha Regent
+1 Gorgon Flail
+1 Mask of Avacyn
+2 Sword of Body and Mind
+2 Sword of Feast and Famine
+2 Sword of Fire and Ice
+2 Sword of Light and Shadow
+2 Sword of War and Peace
+1 Loxodon Warhammer
+2 Sword of Vengeance
+1 Vulshok Battlegear
+1 Sword of Kaldra
+1 Batterskull
+[sideboard]

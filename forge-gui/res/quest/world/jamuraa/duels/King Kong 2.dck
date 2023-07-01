@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=King Kong 2
+Title=King Kong
+Icon=KingKong.jpg
+Difficulty=medium
+Description=King Kong plays a variant of Newman's RG 'Powerhouse' deck.
+Deck Type=constructed
+[main]
+1 Fire Diamond|MIR
+8 Forest|MIR
+1 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+2 Jokulhaups|ICE
+4 Jolrael's Centaur|MIR
+2 Kaervek's Torch|MIR
+4 Karplusan Forest|ICE
+2 Lhurgoyf|ICE
+2 Llanowar Elves|LEB
+1 Moss Diamond|MIR
+8 Mountain|MIR
+1 Orcish Artillery|LEB
+1 Orgg|5ED
+2 Pyrokinesis|ALL
+2 Quirion Ranger|VIS
+3 River Boa|VIS
+4 Suq'Ata Lancer|VIS
+2 Sylvan Library|LEG
+2 Thawing Glaciers|ALL
+4 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

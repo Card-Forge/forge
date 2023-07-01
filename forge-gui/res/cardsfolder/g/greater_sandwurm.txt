@@ -1,0 +1,7 @@
+Name:Greater Sandwurm
+ManaCost:5 G G
+Types:Creature Wurm
+PT:7/7
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+K:Cycling:2
+Oracle:Greater Sandwurm can't be blocked by creatures with power 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)

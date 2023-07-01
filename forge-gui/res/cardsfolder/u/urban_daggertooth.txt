@@ -1,0 +1,9 @@
+Name:Urban Daggertooth
+ManaCost:2 G G
+Types:Creature Dinosaur
+PT:4/3
+K:Vigilance
+T:Mode$ DamageDoneOnce | Execute$ TrigProliferate | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+SVar:HasCombatEffect:TRUE
+Oracle:Vigilance\nEnrage — Whenever Urban Daggertooth is dealt damage, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

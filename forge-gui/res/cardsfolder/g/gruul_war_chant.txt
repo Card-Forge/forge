@@ -1,0 +1,6 @@
+Name:Gruul War Chant
+ManaCost:2 R G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddKeyword$ Menace | Description$ Attacking creatures you control get +1/+0 and have menace.
+SVar:PlayMain1:TRUE
+Oracle:Attacking creatures you control get +1/+0 and have menace.

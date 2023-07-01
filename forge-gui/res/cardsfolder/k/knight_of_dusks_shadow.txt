@@ -1,0 +1,8 @@
+Name:Knight of Dusk's Shadow
+ManaCost:1 B
+Types:Creature Human Knight
+PT:2/2
+K:Menace
+S:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life.
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nYour opponents can't gain life.\n{1}{B}: Knight of Dusk's Shadow gets +1/+1 until end of turn.

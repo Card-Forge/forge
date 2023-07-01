@@ -1,0 +1,7 @@
+Name:Grand Melee
+ManaCost:3 R
+Types:Enchantment
+S:Mode$ MustAttack | ValidCreature$ Creature | Description$ All creatures attack each combat if able.
+S:Mode$ MustBlock | ValidCreature$ Creature | Description$ All creatures block each combat if able.
+SVar:NonStackingEffect:True
+Oracle:All creatures attack each combat if able.\nAll creatures block each combat if able.

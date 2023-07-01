@@ -1,0 +1,10 @@
+Name:Netherese Puzzle-Ward
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Focus Beam — At the beginning of your upkeep, roll a d4. Scry X, where X is the result.
+SVar:TrigRollDice:DB$ RollDice | Sides$ 4 | ResultSVar$ X | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ X
+SVar:X:Number$0
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Natural$ True | ValidResult$ Highest | ValidPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Perfect Illumination — Whenever you roll a die's highest natural result, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Focus Beam — At the beginning of your upkeep, roll a d4. Scry X, where X is the result.\nPerfect Illumination — Whenever you roll a die's highest natural result, draw a card.

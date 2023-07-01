@@ -1,0 +1,8 @@
+Name:Ruin Rat
+ManaCost:1 B
+Types:Creature Rat
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile target card from an opponent's graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppOwn
+Oracle:Deathtouch\nWhen Ruin Rat dies, exile target card from an opponent's graveyard.

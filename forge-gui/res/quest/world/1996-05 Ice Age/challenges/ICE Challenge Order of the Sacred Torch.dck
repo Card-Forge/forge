@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Order of the Sacred Torch
+OpponentName=The Order
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Necropotence
+[metadata]
+Name=ICE Challenge: Order of the Sacred Torch
+Title=The Order
+Difficulty=medium
+Description="There is only one man who could do something so foul--Lim-Dul!" -Zaraya of the Knights of Kjeldor
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+30 Order of the Sacred Torch|ICE
+30 Plains|ICE|2

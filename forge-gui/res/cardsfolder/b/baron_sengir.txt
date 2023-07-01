@@ -1,0 +1,9 @@
+Name:Baron Sengir
+ManaCost:5 B B B
+Types:Legendary Creature Vampire Noble
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +2/+2 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P2P2
+A:AB$ Regenerate | ValidTgts$ Creature.Vampire+Other | TgtPrompt$ Select another target Vampire | Cost$ T | SpellDescription$ Regenerate another target Vampire.
+Oracle:Flying\nWhenever a creature dealt damage by Baron Sengir this turn dies, put a +2/+2 counter on Baron Sengir.\n{T}: Regenerate another target Vampire.

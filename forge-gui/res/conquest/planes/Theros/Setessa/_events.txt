@@ -1,0 +1,10 @@
+Name:Anthousa|Deck:Anthousa.dck|Variant:Commander|Avatar:Anthousa, Setessan Hero|Desc:
+Name:Karametra|Deck:Karametra.dck|Variant:Commander|Avatar:Karametra, God of Harvests|Desc:
+Name:Wild Monsters|Deck:WildMonsters.dck|Variant:None|Avatar:Fleecemane Lion|Desc:
+Name:Pharika|Deck:Pharika.dck|Variant:Commander|Avatar:Pharika, God of Affliction|Desc:
+Name:Polukranos|Deck:Hydra.dck|Variant:None|Avatar:Polukranos, World Eater|Desc:
+Name:Devotion to the Hunt|Deck:MonoGDev.dck|Variant:None|Avatar:Courser of Kruphix|Desc:
+Name:Dark Setessan Night|Deck:BGConstellation.dck|Variant:None|Avatar:Doomwake Giant|Desc:
+Name:Ajani, Mentor of Heroes|Deck:AjaniPW.dck|Variant:Planeswalker|Avatar:Ajani, Mentor of Heroes|Desc:
+Name:Random Setessa|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+

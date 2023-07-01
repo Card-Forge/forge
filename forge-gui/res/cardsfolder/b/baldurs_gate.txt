@@ -1,0 +1,8 @@
+Name:Baldur's Gate
+ManaCost:no cost
+Types:Legendary Land Gate
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 2 T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of other Gates you control.
+SVar:X:Count$Valid Gate.YouCtrl+Other
+DeckHints:Type$Gate
+Oracle:{T}: Add {C}.\n{2}, {T}: Add X mana of any one color, where X is the number of other Gates you control.

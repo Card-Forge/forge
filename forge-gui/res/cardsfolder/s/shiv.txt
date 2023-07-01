@@ -1,0 +1,9 @@
+Name:Shiv
+ManaCost:no cost
+Types:Plane Dominaria
+S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ Pump | Description$ All creatures have "{R}: This creature gets +1/+0 until end of turn."
+SVar:Pump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create a 5/5 red Dragon creature token with flying.
+SVar:RolledChaos:DB$ Token | TokenScript$ r_5_5_dragon_flying
+SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
+Oracle:All creatures have "{R}: This creature gets +1/+0 until end of turn."\nWhenever chaos ensues, create a 5/5 red Dragon creature token with flying.

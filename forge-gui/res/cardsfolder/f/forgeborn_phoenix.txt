@@ -1,0 +1,14 @@
+Name:Forgeborn Phoenix
+ManaCost:1 R R
+Types:Artifact Creature Equipment Phoenix
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EquippedBy,Creature.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME or equipped creature dies, it perpetually gains "Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped."
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Forgeborn Phoenix's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | AddTrigger$ EquippedCombatDamage | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually gains "Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped."
+SVar:EquippedCombatDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+equipped | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigReturn | TriggerDescription$ Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+K:Reconfigure:R
+DeckHints:Type$Equipment
+Oracle:Flying\nEquipped creature has flying.\nWhenever Forgeborn Phoenix or equipped creature dies, it perpetually gains "Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped."\nReconfigure {R}

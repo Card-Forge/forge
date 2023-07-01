@@ -1,0 +1,9 @@
+Name:Kyren Archive
+ManaCost:3
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigKyrenExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile the top card of your library face down.
+SVar:TrigKyrenExile:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True
+A:AB$ ChangeZoneAll | Cost$ 5 Discard<1/Hand> Sac<1/CARDNAME> | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Hand | Hidden$ True | AILogic$ DiscardAllAndRetExiled.minAdv2 | SpellDescription$ Put all cards exiled with CARDNAME into their owner's hand.
+SVar:AIPreference:DiscardCost$Card
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, you may exile the top card of your library face down.\n{5}, Discard your hand, Sacrifice Kyren Archive: Put all cards exiled with Kyren Archive into their owner's hand.

@@ -1,0 +1,7 @@
+Name:Siege Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+PT:5/5
+K:Trample
+K:Convoke
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTrample

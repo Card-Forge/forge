@@ -1,0 +1,15 @@
+Name:Tanazir Quandrix
+ManaCost:3 G U
+Types:Legendary Creature Elder Dragon
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDouble | TriggerDescription$ When CARDNAME enters the battlefield, double the number of +1/+1 counters on target creature you control.
+SVar:TrigDouble:DB$ MultiplyCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimateAll | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have the base power and toughness of other creatures you control become equal to CARDNAME's power and toughness until end of turn.
+SVar:TrigAnimateAll:DB$ AnimateAll | Power$ X | Toughness$ Y | ValidCards$ Creature.YouCtrl+Other
+SVar:X:Count$CardPower
+SVar:Y:Count$CardToughness
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Flying, trample\nWhen Tanazir Quandrix enters the battlefield, double the number of +1/+1 counters on target creature you control.\nWhenever Tanazir Quandrix attacks, you may have the base power and toughness of other creatures you control become equal to Tanazir Quandrix's power and toughness until end of turn.

@@ -1,0 +1,7 @@
+Name:Precognition
+ManaCost:4 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
+SVar:TrigDig:DB$ Dig | ValidTgts$ Opponent | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.

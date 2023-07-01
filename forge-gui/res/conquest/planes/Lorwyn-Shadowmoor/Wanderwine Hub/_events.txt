@@ -1,0 +1,9 @@
+Name:Defenders of Thoughtweft|Deck:Defenders of Thoughtweft.dck|Variant:None|Avatar:Parapet Watchers|Desc:
+Name:Enchanted Evening|Deck:Enchanted Evening.dck|Variant:None|Avatar:Enchanted Evening|Desc:
+Name:Evoking the Wanderwine|Deck:Evoking the Wanderwine.dck|Variant:None|Avatar:Benthicore|Desc:
+Name:Knights of the Wanderwine|Deck:Knights of the Wanderwine.dck|Variant:None|Avatar:Kinsbaile Cavalier|Desc:
+Name:Millfolk|Deck:Millfolk.dck|Variant:None|Avatar:Drowner of Secrets|Desc:
+Name:Wanderwine Rogues|Deck:Wanderwine Rogues.dck|Variant:None|Avatar:Cache Raiders|Desc:
+Name:Wizards of Wanderwine Hub|Deck:Wizards of Wanderwine Hub.dck|Variant:None|Avatar:Puresight Merrow|Desc:
+Name:Sygg, River Cutthroat|Deck:Sygg, River Cutthroat.dck|Variant:Commander|Avatar:Sygg, River Cutthroat|Desc:
+Name:Sygg, River Guide|Deck:Sygg, River Guide.dck|Variant:Commander|Avatar:Sygg, River Guide|Desc:

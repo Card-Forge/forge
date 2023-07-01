@@ -1,0 +1,7 @@
+Name:Heart of Ramos
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add {R}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {R}.\nSacrifice Heart of Ramos: Add {R}.

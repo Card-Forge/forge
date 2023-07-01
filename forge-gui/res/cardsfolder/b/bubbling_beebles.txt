@@ -1,0 +1,6 @@
+Name:Bubbling Beebles
+ManaCost:4 U
+Types:Creature Beeble
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Enchantment.DefenderCtrl | Description$ CARDNAME can't be blocked as long as defending player controls an enchantment.
+Oracle:Bubbling Beebles can't be blocked as long as defending player controls an enchantment.

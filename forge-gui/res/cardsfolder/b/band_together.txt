@@ -1,0 +1,6 @@
+Name:Band Together
+ManaCost:2 G
+Types:Instant
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | AILogic$ PowerDmg | SubAbility$ DBEachDamage | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Up to two target creatures you control
+SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | NumDmg$ Count$CardPower | StackDescription$ REP another target creature_{c:ThisTargetedCard} | SpellDescription$ each deal damage equal to their power to another target creature.
+Oracle:Up to two target creatures you control each deal damage equal to their power to another target creature.

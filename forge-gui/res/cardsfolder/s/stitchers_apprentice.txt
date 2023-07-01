@@ -1,0 +1,8 @@
+Name:Stitcher's Apprentice
+ManaCost:1 U
+Types:Creature Homunculus
+PT:1/2
+A:AB$ Token | Cost$ 1 U T | TokenAmount$ 1 | TokenScript$ u_2_2_homunculus | TokenOwner$ You | SubAbility$ DBSac | SpellDescription$ Create a 2/2 blue Homunculus creature token, then sacrifice a creature.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ You | Amount$ 1
+AI:RemoveDeck:All
+Oracle:{1}{U}, {T}: Create a 2/2 blue Homunculus creature token, then sacrifice a creature.

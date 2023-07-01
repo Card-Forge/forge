@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: The Kitu Mountains
+Title=The Kitu Mountains
+Difficulty=easy
+Description="Air hot with sulfur. / Earth heaves beneath me. / Could it be the mountain / ate something bad?" -Dwarven mining song
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blistering Barrier|MIR
+2 Chaosphere|MIR
+4 Dormant Volcano|VIS
+4 Dwarven Miner|MIR
+4 Dwarven Nomad|MIR
+4 Dwarven Vigilantes|VIS
+2 Elkin Lair|VIS
+2 Lightning Cloud|VIS
+20 Mountain|MIR|3
+4 Raging Spirit|MIR
+3 Solfatara|VIS
+4 Subterranean Spirit|MIR
+3 Volcanic Geyser|MIR

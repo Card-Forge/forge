@@ -1,0 +1,6 @@
+Name:Vedalken Blademaster
+ManaCost:2 U
+Types:Creature Vedalken Soldier
+PT:2/3
+K:Prowess
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

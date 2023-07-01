@@ -1,0 +1,8 @@
+Name:Graaz, Unstoppable Juggernaut
+ManaCost:8
+Types:Legendary Artifact Creature Juggernaut
+PT:7/5
+S:Mode$ MustAttack | ValidCreature$ Juggernaut.YouCtrl | Description$ Juggernauts you control attack each combat if able.
+S:Mode$ CantBlockBy | ValidAttacker$ Juggernaut.YouCtrl | ValidBlocker$ Creature.Wall | Description$ Juggernauts you control can't be blocked by Walls.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AffectedZone$ Battlefield | SetPower$ 5 | SetToughness$ 3 | AddType$ Juggernaut | Description$ Other creatures you control have base power and toughness 5/3 and are Juggernauts in addition to their other creature types.
+Oracle:Juggernauts you control attack each combat if able.\nJuggernauts you control can't be blocked by Walls.\nOther creatures you control have base power and toughness 5/3 and are Juggernauts in addition to their other creature types.

@@ -1,0 +1,5 @@
+Name:Weaponize the Monsters
+ManaCost:R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:{2}, Sacrifice a creature: Weaponize the Monsters deals 2 damage to any target.

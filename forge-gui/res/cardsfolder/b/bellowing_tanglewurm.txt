@@ -1,0 +1,7 @@
+Name:Bellowing Tanglewurm
+ManaCost:3 G G
+Types:Creature Wurm
+PT:4/4
+K:Intimidate
+S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddKeyword$ Intimidate | Description$ Other green creatures you control have Intimidate.
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nOther green creatures you control have intimidate.

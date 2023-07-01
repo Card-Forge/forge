@@ -1,0 +1,4 @@
+Name:Forest Token
+ManaCost:no cost
+Types:Land Forest
+Oracle:

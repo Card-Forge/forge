@@ -1,0 +1,6 @@
+Name:Oak Street Innkeeper
+ManaCost:2 G
+Types:Creature Elf
+PT:1/2
+S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl | AddKeyword$ Hexproof | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, tapped creatures you control have hexproof.
+Oracle:As long as it's not your turn, tapped creatures you control have hexproof.

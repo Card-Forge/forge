@@ -1,0 +1,13 @@
+[metadata]
+Code=PHPR
+Date=1994-09-01
+Name=HarperPrism Book Promos
+Type=Promo
+ScryfallCode=PHPR
+
+[cards]
+1 R Arena @Rob Alexander
+2 R Sewers of Estark @Melissa A. Benson
+3 R Windseeker Centaur @Anson Maddocks
+4 R Giant Badger @Liz Danforth
+5 R Mana Crypt @Mark Tedin

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet 3
+Title=Flandre Scarlet
+Difficulty=hard
+Description=WB Nihilith deck with Phyrexian Obliterator
+Icon=Flandre Scarlet.jpg
+Deck Type=constructed
+[main]
+7 Swamp
+1 Plains
+4 Marsh Flats
+4 Scrubland
+3 Isolated Chapel
+1 Urborg, Tomb of Yawgmoth
+1 Tainted Field
+1 Mox Jet
+1 Mox Pearl
+1 Sol Ring
+4 Nihilith
+2 Sangromancer
+1 Ob Nixilis, Unshackled
+2 No Mercy
+4 Phyrexian Obliterator
+1 Michiko Konda, Truth Seeker
+4 Vindicate
+3 Mortify
+3 Sinkhole
+2 Curse of the Cabal
+2 Dead Drop
+4 Gerrard's Verdict
+4 Geth's Verdict
+[sideboard]

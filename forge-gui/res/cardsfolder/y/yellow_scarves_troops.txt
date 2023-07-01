@@ -1,0 +1,6 @@
+Name:Yellow Scarves Troops
+ManaCost:1 R
+Types:Creature Human Soldier
+PT:2/2
+K:CARDNAME can't block.
+Oracle:Yellow Scarves Troops can't block.

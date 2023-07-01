@@ -1,0 +1,9 @@
+Name:Hesitation
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME and counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:When a player casts a spell, sacrifice Hesitation and counter that spell.

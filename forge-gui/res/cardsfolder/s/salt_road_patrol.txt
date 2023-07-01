@@ -1,0 +1,7 @@
+Name:Salt Road Patrol
+ManaCost:3 W
+Types:Creature Human Scout
+PT:2/5
+K:Outlast:1 W
+DeckHas:Ability$Counters
+Oracle:Outlast {1}{W} ({1}{W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)

@@ -1,0 +1,8 @@
+Name:Titanic Brawl
+ManaCost:1 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | ValidTarget$ Creature.YouCtrl+counters_GE1_P1P1 | Description$ This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.
+DeckHints:Ability$Counters
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+Oracle:This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.\nTarget creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)

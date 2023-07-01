@@ -1,0 +1,10 @@
+Name:Boneyard Aberration
+ManaCost:4 B
+Types:Creature Skeleton Dog
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile it. If you do, conjure three Reassembling Skeleton cards into your graveyard.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | Name$ Reassembling Skeleton | Zone$ Graveyard | Amount$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+Oracle:When Boneyard Aberration dies, exile it. If you do, conjure three Reassembling Skeleton cards into your graveyard.

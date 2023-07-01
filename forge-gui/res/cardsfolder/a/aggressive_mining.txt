@@ -1,0 +1,8 @@
+Name:Aggressive Mining
+ManaCost:3 R
+Types:Enchantment
+S:Mode$ CantPlayLand | Player$ You | Description$ You can't play lands.
+A:AB$ Draw | Cost$ Sac<1/Land> | NumCards$ 2 | ActivationLimit$ 1 | SpellDescription$ Draw two cards. Activate only once each turn.
+SVar:DonateMe:5
+AI:RemoveDeck:All
+Oracle:You can't play lands.\nSacrifice a land: Draw two cards. Activate only once each turn.

@@ -1,0 +1,22 @@
+[quest]
+id=Sun
+OpponentName=Moon Sprite
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=booster pack POR;booster pack PTK
+Credit Reward=100
+AIExtras=Forest|Forest|Swamp
+HumanExtras=Island|Island|Lady Sun
+[metadata]
+Title=Sun vs Moon
+Icon=Dungeon Crawling Green.jpg
+Difficulty=easy
+Description=Such an uneven battle, the sun is clearly brighter!
+Deck Type=constructed
+Name=Sun
+[Main]
+14 Feral Shadow|POR
+14 Moon Sprite|POR
+6 Swamp|PTK
+6 Forest|PTK

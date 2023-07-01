@@ -1,0 +1,8 @@
+Name:Spectral Sailor
+ManaCost:U
+Types:Creature Spirit Pirate
+PT:1/1
+K:Flash
+K:Flying
+A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\n{3}{U}: Draw a card.

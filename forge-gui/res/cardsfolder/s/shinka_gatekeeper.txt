@@ -1,0 +1,8 @@
+Name:Shinka Gatekeeper
+ManaCost:2 R
+Types:Creature Ogre Warrior
+PT:3/2
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.

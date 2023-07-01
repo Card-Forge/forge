@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Madame Hydra 2
+Title=Madame Hydra
+Difficulty=medium
+Description=BG High Power deck with Triumph of Ferocity and Overwhelming Stampede
+Icon=Madame Hydra.jpg
+Deck Type=constructed
+[main]
+8 Forest
+8 Swamp
+4 Verdant Catacombs
+1 Bayou
+2 Woodland Cemetery
+4 Brushstrider
+1 Bloodrite Invoker
+1 Branchsnap Lorian
+1 Daggerclaw Imp
+1 Dauthi Marauder
+1 Elvish Ranger
+1 Krosan Avenger
+1 Markov Patrician
+1 Nezumi Ronin
+1 Nyxborn Wolf
+1 Sacred Wolf
+1 Servant of Nefarox
+1 Smokespew Invoker
+1 Skeletal Crocodile
+1 Rotting Fensnake
+1 Dross Crocodile
+1 Gigapede
+1 Ayumi, the Last Visitor
+1 Phytotitan
+2 Viridian Claw
+1 Bladed Pinions
+1 Wretched Banquet
+1 Essence Harvest
+2 Fungal Sprouting
+2 Miming Slime
+2 Overwhelming Stampede
+2 Triumph of Cruelty
+2 Triumph of Ferocity
+[sideboard]

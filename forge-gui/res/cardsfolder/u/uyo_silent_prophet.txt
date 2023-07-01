@@ -1,0 +1,8 @@
+Name:Uyo, Silent Prophet
+ManaCost:4 U U
+Types:Legendary Creature Moonfolk Wizard
+PT:4/4
+K:Flying
+A:AB$ CopySpellAbility | Cost$ 2 Return<2/Land> | ValidTgts$ Instant,Sorcery | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+AI:RemoveDeck:Random
+Oracle:Flying\n{2}, Return two lands you control to their owner's hand: Copy target instant or sorcery spell. You may choose new targets for the copy.

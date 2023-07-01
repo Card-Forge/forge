@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Magnum 1
+Title=Magnum
+Difficulty=easy
+Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Icon=Magnum.jpg
+Deck Type=constructed
+[main]
+3 Thornwood Falls
+8 Island|10E
+7 Forest|10E
+2 Breeding Pool
+2 Yavimaya Coast
+1 Novijen, Heart of Progress
+2 Skyshroud Forest
+2 Temporal Spring
+1 Cold-Eyed Selkie
+2 Shielding Plax
+1 Gaea's Skyfolk
+1 Drakewing Krasis
+1 Gilder Bairn
+2 Trapjaw Kelpie
+2 Slippery Bogle
+1 Plasm Capture
+2 Wistful Selkie
+2 Sturdy Hatchling
+2 Shorecrasher Mimic
+1 Fable of Wolf and Owl
+1 Horizon Chimera
+1 Lorescale Coatl
+1 Favor of the Overbeing
+1 Coiling Oracle
+1 AEther Mutation
+1 Biomantic Mastery
+1 Groundling Pouncer
+1 Jungle Barrier
+1 Leafdrake Roost
+2 Selkie Hedge-Mage
+1 Vedalken Heretic
+1 Living Airship
+1 Merfolk of the Depths
+1 Urban Evolution
+[sideboard]

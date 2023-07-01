@@ -1,0 +1,6 @@
+Name:Sliver Queen, Brood Mother
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+8
+A:AB$ Token | ActivationZone$ Command | Cost$ 3 | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Sliver creature token.
+Oracle:Hand +0, life +8\n{3}: Create a 1/1 colorless Sliver creature token.

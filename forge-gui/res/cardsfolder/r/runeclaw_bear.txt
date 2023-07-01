@@ -1,0 +1,5 @@
+Name:Runeclaw Bear
+ManaCost:1 G
+Types:Creature Bear
+PT:2/2
+Oracle:

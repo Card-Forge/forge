@@ -1,0 +1,7 @@
+Name:Angel of the God-Pharaoh
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Cycling:2
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)

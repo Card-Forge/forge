@@ -1,0 +1,10 @@
+Name:Herald of Torment
+ManaCost:1 B B
+Types:Enchantment Creature Demon
+PT:3/3
+K:Bestow:3 B B
+K:Flying
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Flying | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3 and has flying.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Bestow {3}{B}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nFlying\nAt the beginning of your upkeep, you lose 1 life.\nEnchanted creature gets +3/+3 and has flying.

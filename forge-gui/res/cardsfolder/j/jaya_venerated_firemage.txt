@@ -1,0 +1,10 @@
+Name:Jaya, Venerated Firemage
+ManaCost:4 R
+Types:Legendary Planeswalker Jaya
+Loyalty:5
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+SVar:PlayMain1:TRUE
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ true | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.\n[-2]: Jaya, Venerated Firemage deals 2 damage to any target.

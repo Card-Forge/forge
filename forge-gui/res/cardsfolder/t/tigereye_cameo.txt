@@ -1,0 +1,7 @@
+Name:Tigereye Cameo
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green|White
+Oracle:{T}: Add {G} or {W}.

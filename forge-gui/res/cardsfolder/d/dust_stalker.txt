@@ -1,0 +1,12 @@
+Name:Dust Stalker
+ManaCost:2 B R
+Types:Creature Eldrazi
+PT:5/3
+K:Devoid
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+Colorless+Other | PresentCompare$ EQ0 | Execute$ TrigReturn | TriggerDescription$ At the beginning of each end step, if you control no other colorless creatures, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.YouCtrl+Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
+Oracle:Devoid (This card has no color.)\nHaste\nAt the beginning of each end step, if you control no other colorless creatures, return Dust Stalker to its owner's hand.

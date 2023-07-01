@@ -1,0 +1,7 @@
+Name:Marble Priest
+ManaCost:5
+Types:Artifact Creature Cleric
+PT:3/3
+K:MustBeBlockedByAll:Creature.Wall:All Walls able to block CARDNAME do so.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.Self | ValidSource$ Wall | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by Walls.
+Oracle:All Walls able to block Marble Priest do so.\nPrevent all combat damage that would be dealt to Marble Priest by Walls.

@@ -1,0 +1,8 @@
+Name:Howling Golem
+ManaCost:3
+Types:Artifact Creature Golem
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, each player draws a card.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, each player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SpellDescription$ Each player draws a card.
+Oracle:Whenever Howling Golem attacks or blocks, each player draws a card.

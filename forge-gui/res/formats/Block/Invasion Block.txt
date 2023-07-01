@@ -1,0 +1,6 @@
+[format]
+Name:Invasion Block
+Type:Archived
+Subtype:Block
+Order:130
+Sets:APC, PLS, INV

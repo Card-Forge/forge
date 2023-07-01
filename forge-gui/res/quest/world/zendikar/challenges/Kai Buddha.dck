@@ -1,0 +1,35 @@
+[quest]
+id=5001
+OpponentName=Kai Buddha
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 red rares;scalding tarn|ZEN
+Credit Reward=200
+HumanExtras=Pyromancer ascension
+AIExtras=Pyromancer ascension
+[metadata]
+Name=quest5001
+Title=Kai Buddha
+Difficulty=hard
+Description="Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment"
+Icon=Kai.png
+Deck Type=constructed
+[Main]
+4 Burst Lightning|ZEN
+3 Cast Through Time|ROE
+4 Flame Slash|ROE
+4 Forked Bolt|ROE
+4 Intuition|TMP
+8 Island|LEB
+8 Mountain|LEB
+4 Mysteries of the Deep|WWK
+4 Time Warp|TMP
+4 Rite of Replication|ZEN
+4 Scalding Tarn|ZEN
+1 Sphinx-Bone Wand|ROE
+4 Staggershock|ROE
+4 Evolving Wilds|ROE
+[sideboard]
+[planes]
+[schemes]

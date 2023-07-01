@@ -1,0 +1,8 @@
+Name:Unfulfilled Desires
+ManaCost:1 U B
+Types:Enchantment
+A:AB$ Draw | Cost$ 1 PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{1}, Pay 1 life: Draw a card, then discard a card.

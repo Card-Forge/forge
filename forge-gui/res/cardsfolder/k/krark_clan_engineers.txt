@@ -1,0 +1,7 @@
+Name:Krark-Clan Engineers
+ManaCost:3 R
+Types:Creature Goblin Artificer
+PT:2/2
+A:AB$ Destroy | Cost$ R Sac<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+AI:RemoveDeck:All
+Oracle:{R}, Sacrifice two artifacts: Destroy target artifact.

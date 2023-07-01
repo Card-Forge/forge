@@ -1,0 +1,7 @@
+Name:Thrash of Raptors
+ManaCost:3 R
+Types:Creature Dinosaur
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | IsPresent$ Dinosaur.Other+YouCtrl | Description$ As long as you control another Dinosaur, CARDNAME gets +2/+0 and has trample.
+SVar:BuffedBy:Dinosaur
+Oracle:As long as you control another Dinosaur, Thrash of Raptors gets +2/+0 and has trample.

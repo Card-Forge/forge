@@ -1,0 +1,9 @@
+Name:Thermo-Alchemist
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:0/3
+K:Defender
+A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast an instant or sorcery spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Defender\n{T}: Thermo-Alchemist deals 1 damage to each opponent.\nWhenever you cast an instant or sorcery spell, untap Thermo-Alchemist.

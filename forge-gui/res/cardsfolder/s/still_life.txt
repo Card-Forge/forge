@@ -1,0 +1,5 @@
+Name:Still Life
+ManaCost:1 G G
+Types:Enchantment
+A:AB$ Animate | Cost$ G G | Defined$ Self | Power$ 4 | Toughness$ 3 | Types$ Creature,Centaur | SpellDescription$ CARDNAME becomes a 4/3 Centaur creature in addition to its other types until end of turn.
+Oracle:{G}{G}: Still Life becomes a 4/3 Centaur creature in addition to its other types until end of turn.

@@ -1,0 +1,8 @@
+Name:Barbed Sliver
+ManaCost:2 R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddAbility$ Pump | Description$ All Sliver creatures have "{2}: This creature gets +1/+0 until end of turn."
+SVar:Pump:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have "{2}: This creature gets +1/+0 until end of turn."

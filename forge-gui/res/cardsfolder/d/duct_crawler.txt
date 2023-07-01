@@ -1,0 +1,8 @@
+Name:Duct Crawler
+ManaCost:R
+Types:Creature Insect
+PT:1/1
+A:AB$ Effect | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ ThisTargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.IsRemembered | Description$ {c:Remembered} can't block EFFECTSOURCE this turn.
+AI:RemoveDeck:All
+Oracle:{1}{R}: Target creature can't block Duct Crawler this turn.

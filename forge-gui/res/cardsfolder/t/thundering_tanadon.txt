@@ -1,0 +1,6 @@
+Name:Thundering Tanadon
+ManaCost:4 GP GP
+Types:Artifact Creature Phyrexian Beast
+PT:5/4
+K:Trample
+Oracle:({G/P} can be paid with either {G} or 2 life.)\nTrample

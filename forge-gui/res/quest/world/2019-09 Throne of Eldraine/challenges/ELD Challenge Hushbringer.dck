@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Hushbringer
+OpponentName=The Hushbringers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Fires of Invention
+HumanExtras=
+[metadata]
+Title=Hushbringer
+Difficulty=hard
+Description=The hushbringers start with the Fires of Invention.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=ELD Challenge: Hushbringer
+[Main]
+20 Hushbringer|ELD|2
+20 Plains|ELD|4
+20 Heraldic Banner|ELD

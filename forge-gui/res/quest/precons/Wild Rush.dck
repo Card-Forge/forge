@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Wild Rush
+Description=Massive creatures hit the ground running with this explosive deck. Legendary elf Yeva, Nature's Herald adds an element of surprise to your game, letting you cast creatures just about whenever you want to. Crush your enemies when they least expect it.
+Deck Type=constructed
+Set=M13
+Image=wild_rush.jpg
+[main]
+1 Primal Huntbeast|M13
+1 Yeva, Nature's Herald|M13
+1 Sentinel Spider|M13
+1 Mwonvuli Beast Tracker|M13
+2 Spiked Baloth|M13
+1 Fungal Sprouting|M13
+1 Predatory Rampage|M13
+3 Arbor Elf|M13
+1 Naturalize|M13
+2 Garruk's Packleader|M13
+1 Crippling Blight|M13
+2 Public Execution|M13
+1 Ring of Kalonia|M13
+1 Rise from the Grave|M13
+2 Deadly Recluse|M13
+1 Acidic Slime|M13
+1 Yeva's Forcemage|M13
+1 Evolving Wilds|M13
+1 Prey Upon|M13
+1 Rancor|M13
+2 Ranger's Path|M13
+2 Essence Drain|M13
+16 Forest|M13
+8 Swamp|M13
+2 Duskdale Wurm|M13
+2 Vastwood Gorger|M13
+2 Centaur Courser|M13
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Goblinslide
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an noncreature spell you may pay {1}. If you do, create a 1/1 red Goblin creature token with haste.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_haste | TokenOwner$ You
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, create a 1/1 red Goblin creature token with haste.

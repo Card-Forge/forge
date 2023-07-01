@@ -1,0 +1,6 @@
+Name:Jandor's Saddlebags
+ManaCost:2
+Types:Artifact
+A:AB$ Untap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
+AI:RemoveDeck:All
+Oracle:{3}, {T}: Untap target creature.

@@ -1,0 +1,14 @@
+[metadata]
+Code=WMC
+Date=2013-04-06
+Name=World Magic Cup Qualifiers
+Code2=PWCQ
+Type=Promo
+ScryfallCode=WMC
+
+[cards]
+2013 M Vengevine @Trevor Claxton
+2014 M Geist of Saint Traft @Izzy
+2015 R Thalia, Guardian of Thraben @Steve Argyle
+2016 R Abrupt Decay @Seb McKinnon
+2017 R Inkmoth Nexus @Sung Choi

@@ -1,0 +1,8 @@
+Name:Forebear's Blade
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddKeyword$ Vigilance & Trample | Description$ Equipped creature gets +3/+0 and has vigilance and trample.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigAttach | TriggerDescription$ Whenever equipped creature dies, attach CARDNAME to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl
+Oracle:Equipped creature gets +3/+0 and has vigilance and trample.\nWhenever equipped creature dies, attach Forebear's Blade to target creature you control.\nEquip {3}

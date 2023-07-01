@@ -1,0 +1,10 @@
+Name:Death Tyrant
+ManaCost:4 B
+Types:Creature Beholder Skeleton
+PT:4/6
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attacking+YouCtrl,Creature.blocking+OppCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Negative Energy Cone — Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
+A:AB$ ChangeZone | Cost$ 5 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+DeckHas:Ability$Token
+Oracle:Menace\nNegative Energy Cone — Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token.\n{5}{B}: Return Death Tyrant from your graveyard to the battlefield tapped.

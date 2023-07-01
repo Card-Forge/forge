@@ -1,0 +1,9 @@
+Name:Tainted Specter
+ManaCost:3 B
+Types:Creature Specter
+PT:2/2
+K:Flying
+A:AB$ Discard | Cost$ 1 B B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | RememberDiscarded$ True | SubAbility$ DBDmg | UnlessPayer$ Targeted | UnlessCost$ PutCardToLibFromHand<1/0/Card> | SpellDescription$ Target player discards a card unless they put a card from their hand on top of their library. If that player discards a card this way, CARDNAME deals 1 damage to each creature and each player. Activate only as a sorcery.
+SVar:DBDmg:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\n{1}{B}{B}, {T}: Target player discards a card unless they put a card from their hand on top of their library. If that player discards a card this way, Tainted Specter deals 1 damage to each creature and each player. Activate only as a sorcery.

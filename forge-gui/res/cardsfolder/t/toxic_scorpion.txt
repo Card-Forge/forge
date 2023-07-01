@@ -1,0 +1,8 @@
+Name:Toxic Scorpion
+ManaCost:1 G
+Types:Creature Scorpion
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target creature you control gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Deathtouch
+Oracle:Deathtouch\nWhen Toxic Scorpion enters the battlefield, another target creature you control gains deathtouch until end of turn.

@@ -1,0 +1,7 @@
+Name:Perilous Myr
+ManaCost:2
+Types:Artifact Creature Phyrexian Myr
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+Oracle:When Perilous Myr dies, it deals 2 damage to any target.

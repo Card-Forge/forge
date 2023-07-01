@@ -1,0 +1,5 @@
+Name:Seat of the Synod
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:(Seat of the Synod isn't a spell.)\n{T}: Add {U}.

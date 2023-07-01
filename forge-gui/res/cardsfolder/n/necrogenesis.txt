@@ -1,0 +1,8 @@
+Name:Necrogenesis
+ManaCost:B G
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature from a graveyard | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Create a 1/1 green Saproling creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:{2}: Exile target creature card from a graveyard. Create a 1/1 green Saproling creature token.

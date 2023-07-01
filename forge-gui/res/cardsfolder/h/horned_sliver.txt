@@ -1,0 +1,7 @@
+Name:Horned Sliver
+ManaCost:2 G
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Trample | Description$ All Sliver creatures have trample.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have trample.

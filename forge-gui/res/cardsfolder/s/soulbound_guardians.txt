@@ -1,0 +1,7 @@
+Name:Soulbound Guardians
+ManaCost:4 W
+Types:Creature Kor Spirit
+PT:4/5
+K:Defender
+K:Flying
+Oracle:Defender, flying

@@ -1,0 +1,9 @@
+Name:Kambal, Consul of Allocation
+ManaCost:1 W B
+Types:Legendary Creature Human Advisor
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent casts a noncreature spell, that player loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent casts a noncreature spell, that player loses 2 life and you gain 2 life.

@@ -1,0 +1,7 @@
+Name:Verity Circle
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Taps | ValidCard$ Creature.OppCtrl | Attacker$ False | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature an opponent controls becomes tapped, if it isn't being declared as an attacker, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Tap | Cost$ 4 U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
+Oracle:Whenever a creature an opponent controls becomes tapped, if it isn't being declared as an attacker, you may draw a card.\n{4}{U}: Tap target creature without flying.

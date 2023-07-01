@@ -1,0 +1,6 @@
+Name:Callous Giant
+ManaCost:4 R R
+Types:Creature Giant
+PT:4/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.Self | DamageAmount$ LE3 | Description$ If a source would deal 3 or less damage to CARDNAME, prevent that damage.
+Oracle:If a source would deal 3 or less damage to Callous Giant, prevent that damage.

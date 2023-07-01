@@ -1,0 +1,9 @@
+Name:Guardian Augmenter
+ManaCost:2 G
+Types:Creature Troll Wizard
+PT:2/2
+K:Flash
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Commander creatures you control get +2/+2.
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AddKeyword$ Hexproof | Description$ Commanders you control have hexproof.
+AI:RemoveDeck:NonCommander
+Oracle:Flash\nCommander creatures you control get +2/+2.\nCommanders you control have hexproof.

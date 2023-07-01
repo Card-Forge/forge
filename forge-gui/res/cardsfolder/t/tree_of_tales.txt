@@ -1,0 +1,5 @@
+Name:Tree of Tales
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:(Tree of Tales isn't a spell.)\n{T}: Add {G}.

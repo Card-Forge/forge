@@ -1,0 +1,6 @@
+Name:Grandmother Sengir
+ManaCost:4 B
+Types:Legendary Creature Human Wizard
+PT:3/3
+A:AB$ Pump | Cost$ 1 B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
+Oracle:{1}{B}, {T}: Target creature gets -1/-1 until end of turn.

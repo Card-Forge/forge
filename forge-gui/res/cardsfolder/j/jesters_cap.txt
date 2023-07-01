@@ -1,0 +1,6 @@
+Name:Jester's Cap
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Player | Chooser$ You | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 3 | Mandatory$ True | IsCurse$ True | SpellDescription$ Search target player's library for three cards and exile them. Then that player shuffles.
+AI:RemoveDeck:All
+Oracle:{2}, {T}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles.

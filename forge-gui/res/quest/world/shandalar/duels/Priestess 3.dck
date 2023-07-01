@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Priestess 3
+Title=Priestess
+Icon=Priestess.jpg
+Difficulty=hard
+Description=Defensive White deck.
+Deck Type=constructed
+[main]
+4 Angelic Voices|LEG
+4 Animate Wall|LEB
+2 Blessing|LEB
+2 Castle|LEB
+2 Disenchant|4ED
+2 Healing Salve|4ED
+3 Ivory Cup|LEB
+23 Plains|4ED
+2 Righteousness|4ED
+2 Savannah Lions|4ED
+2 Spirit Link|LEG
+2 Swords to Plowshares|LEB
+2 Thunder Spirit|LEG
+3 Wall of Light|LEG
+3 Wall of Spears|ATQ
+4 Wall of Swords|4ED
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Nightsky Mimic
+ManaCost:1 WB
+Types:Creature Shapeshifter
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.White+Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both white and black, CARDNAME has base power and toughness 4/4 until end of turn and gains flying until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Flying
+SVar:BuffedBy:Card.Black+White
+Oracle:Whenever you cast a spell that's both white and black, Nightsky Mimic has base power and toughness 4/4 until end of turn and gains flying until end of turn.

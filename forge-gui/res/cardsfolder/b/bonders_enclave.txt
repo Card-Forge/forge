@@ -1,0 +1,6 @@
+Name:Bonders' Enclave
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 3 T | NumCards$ 1 | IsPresent$ Creature.YouCtrl+powerGE4 | SpellDescription$ Draw a card. Activate only if you control a creature with power 4 or greater.
+Oracle:{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater.

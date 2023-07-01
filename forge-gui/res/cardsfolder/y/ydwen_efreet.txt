@@ -1,0 +1,9 @@
+Name:Ydwen Efreet
+ManaCost:R R R
+Types:Creature Efreet
+PT:3/6
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ Whenever CARDNAME blocks, flip a coin. If you lose the flip, remove CARDNAME from combat and it can't block this turn. Creatures it was blocking that had become blocked by only CARDNAME this combat become unblocked.
+SVar:FlipCoin:DB$ FlipACoin | LoseSubAbility$ DBRemoveFromCombat
+SVar:DBRemoveFromCombat:DB$ RemoveFromCombat | Defined$ Self | UnblockCreaturesBlockedOnlyBy$ Self | SubAbility$ DBCantBlock
+SVar:DBCantBlock:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can't block.
+Oracle:Whenever Ydwen Efreet blocks, flip a coin. If you lose the flip, remove Ydwen Efreet from combat and it can't block this turn. Creatures it was blocking that had become blocked by only Ydwen Efreet this combat become unblocked.

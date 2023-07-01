@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gruul Goliaths
+Description=The brutish outsiders of the Gruul Clans are sick of being kicked around. It's time to taste sweet revenge. You'll build up a base of speedy mana, then knock the smirk off your opponent's face with the "Gruul Goliaths" deck's stream of hulking monsters.
+Deck Type=constructed
+Set=GTC
+Image=gruul_goliaths.jpg
+[main]
+13  Forest|RTR
+1  Gruul Guildgate|GTC
+12  Mountain|RTR
+1  Arbor Elf|M13
+2  Centaur Courser|M13
+2  Disciple of the Old Ways|GTC
+1  Duskdale Wurm|M13
+2  Fire Elemental|M13
+1  Foundry Street Denizen|GTC
+1  Ghor-Clan Rampager|GTC
+1  Gruul Ragebeast|GTC
+1  Primal Huntbeast|M13
+1  Ripscale Predator|GTC
+1  Rubblehulk+|GTC
+2  Ruination Wurm|GTC
+1  Scab-Clan Charger|GTC
+1  Skarrg Guildmage|GTC
+1  Skinbrand Goblin|GTC
+1  Slaughterhorn|GTC
+2  Viashino Shanktail|GTC
+2  Zhur-Taa Swine|GTC
+1  Alpha Authority|GTC
+2  Ground Assault|GTC
+2  Gruul Keyrune|GTC
+1  Pit Fight|GTC
+1  Predator's Rapport|GTC
+1  Ranger's Path|M13
+1  Verdant Haven|GTC
+1  Volcanic Geyser|M13
+[sideboard]

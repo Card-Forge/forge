@@ -1,0 +1,169 @@
+BasicLandPercentage=36
+
+[Group MaxCnt=4 Percentage=21]
+Plateau
+Sacred Foundry
+Jungle Shrine
+Arid Mesa
+[/Group]
+
+[Group MaxCnt=4 Percentage=19]
+Soulcatcher
+Moat
+Radiant, Archangel
+Serra Aviary
+Archon of Redemption
+Ryusei, the Falling Star
+Thunder Dragon
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Earthquake
+Fault Line
+Flamebreak
+Seismic Shudder
+Tremor
+Volcanic Spray
+[/Group]
+
+
+[Group MaxCnt=4 Percentage=3]
+Goldenglow Moth
+Lantern Kami
+Suntail Hawk
+[/Group]
+
+[Group MaxCnt=3 Percentage=8]
+Hoofprints of the Stag
+Angelic Curator
+Araba Mothrider
+Armored Pegasus
+Aven Squire
+Courier Hawk
+Duskrider Falcon
+Freewind Falcon
+Leonin Skyhunter
+Mistral Charger
+Mourning Thrull
+Mystic Familiar
+Royal Falcon
+Serra Avenger
+Skyshroud Falcon
+Squadron Hawk
+Squall Drifter
+Stormfront Pegasus
+Arcbound Stinger
+Goblin Glider
+Kyren Glider
+Utvara Scalper
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Spectral Procession
+Aven Riftwatcher
+Avian Changeling
+Diving Griffin
+Griffin Sentinel
+Haunted Angel
+Hobgoblin Dragoon
+Kemba's Skyguard
+Moonwing Moth
+Nightwind Glider
+Pegasus Charger
+Skyhunter Prowler
+Skyhunter Skirmisher
+Slith Ascendant
+Thermal Glider
+Thunder Spirit
+Wild Griffin
+Aesthir Glider
+Pilgrim's Eye
+Bird Maiden
+Goblin Sky Raider
+Granite Gargoyle
+Hobgoblin Dragoon
+[/Group]
+
+[Group MaxCnt=3 Percentage=8]
+Armored Griffin
+Assault Griffin
+Battlewise Aven
+Cloud Crusader
+Commander Eesha
+Daraja Griffin
+Ekundu Griffin
+Emeria Angel
+Herald of Serra
+Hunted Lammasu
+Indomitable Archangel
+Linvala, Keeper of Silence
+Makindi Griffin
+Malach of the Dawn
+Mothrider Samurai
+Razorfoot Griffin
+Sanctum Gargoyle
+Skyhunter Patrol
+Spotted Griffin
+Tormented Angel
+Voice of Duty
+Voice of Grace
+Voice of Law
+Voice of Reason
+Voice of Truth
+Windborn Muse
+Drill-Skimmer
+Desert Drake
+Furnace Whelp
+Roc of Kher Ridges
+[/Group]
+
+[Group MaxCnt=1 Percentage=5]
+Abbey Gargoyles
+Angel of Light
+Angel of Mercy
+Archon of Justice
+Baneslayer Angel
+Battlegrace Angel
+Castle Raptors
+Dragonstalker
+Karmic Guide
+Lucent Liminid
+Melesse Spirit
+Nobilis of War
+Plover Knights
+Reveillark
+Serra Angel
+Shepherd of the Lost
+Starlit Angel
+Dancing Scimitar
+Hunted Dragon
+Kulrath Knight
+Sabertooth Wyvern
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Storm Herd
+Angel of Retribution
+Archangel
+Blazing Archon
+Exalted Angel
+Harrier Griffin
+Kjeldoran Gargoyle
+Pearl Dragon
+Pristine Angel
+Warrior Angel
+Windbrisk Raptor
+Darksteel Gargoyle
+Lotus Guardian
+Platinum Angel
+Teeka's Dragon
+Bogardan Hellkite
+Brimstone Dragon
+Rorix Bladewing
+Scourge of Kher Ridges
+Shivan Dragon
+Shivan Phoenix
+Volcanic Dragon
+[/Group]
+
+End

@@ -1,0 +1,7 @@
+Name:Thran Turbine
+ManaCost:1
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ DBMana | TriggerDescription$ At the beginning of your upkeep, you may add {C}{C}. You can't spend this mana to cast spells.
+SVar:DBMana:DB$ Mana | Amount$ 2 | Produced$ C | RestrictValid$ nonSpell
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, you may add {C}{C}. You can't spend this mana to cast spells.

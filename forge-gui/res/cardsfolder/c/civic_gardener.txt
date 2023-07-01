@@ -1,0 +1,8 @@
+Name:Civic Gardener
+ManaCost:1 G
+Types:Creature Human Citizen
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap target creature or land.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Civic Gardener attacks, untap target creature or land.

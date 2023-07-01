@@ -1,0 +1,9 @@
+Name:Stone Haven Outfitter
+ManaCost:1 W
+Types:Creature Kor Artificer Ally
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creatures you control get +1/+1.
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+equipped | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an equipped creature you control dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:PlayMain1:TRUE
+Oracle:Equipped creatures you control get +1/+1.\nWhenever an equipped creature you control dies, draw a card.

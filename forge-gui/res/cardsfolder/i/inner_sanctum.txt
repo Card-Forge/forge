@@ -1,0 +1,8 @@
+Name:Inner Sanctum
+ManaCost:1 W W
+Types:Enchantment
+K:Cumulative upkeep:PayLife<2>:Pay 2 life.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:Cumulative upkeep—Pay 2 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nPrevent all damage that would be dealt to creatures you control.

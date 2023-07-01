@@ -1,0 +1,11 @@
+[metadata]
+Code=PDP13
+Date=2012-01-01
+Name=Duels of the Planeswalkers 2013 Promos
+Type=Promo
+ScryfallCode=PDP13
+
+[cards]
+1 M Primordial Hydra @Chase Stone
+2 M Serra Avatar @Igor Kieryluk
+3 M Vampire Nocturnus @Jason Felix

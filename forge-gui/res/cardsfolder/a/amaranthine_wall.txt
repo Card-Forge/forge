@@ -1,0 +1,7 @@
+Name:Amaranthine Wall
+ManaCost:4
+Types:Artifact Creature Wall
+PT:0/6
+K:Defender
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+Oracle:Defender\n{2}: Amaranthine Wall gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

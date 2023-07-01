@@ -1,0 +1,24 @@
+Name:Ravenous Demon
+ManaCost:3 B B
+Types:Creature Demon
+PT:4/4
+A:AB$ SetState | Cost$ Sac<1/Human> | Defined$ Self | SorcerySpeed$ True | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate this only any time you could cast a sorcery.
+AlternateMode:DoubleFaced
+Oracle:Sacrifice a Human: Transform Ravenous Demon. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Archdemon of Greed
+ManaCost:no cost
+Colors:black
+Types:Creature Demon
+PT:9/9
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a Human. If you can't, tap CARDNAME and it deals 9 damage to you.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Human | SubAbility$ DBTap | RememberSacrificed$ True
+SVar:DBTap:DB$ Tap | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 9 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.

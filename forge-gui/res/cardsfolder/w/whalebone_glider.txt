@@ -1,0 +1,5 @@
+Name:Whalebone Glider
+ManaCost:2
+Types:Artifact
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | KW$ Flying | SpellDescription$ Target creature with power 3 or less gains flying until end of turn.
+Oracle:{2}, {T}: Target creature with power 3 or less gains flying until end of turn.

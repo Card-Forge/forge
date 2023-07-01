@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Wicked Big
+Description=The point of "Wicked Big"? Creatures destroy real good. While some decks are heavy with artifacts, this one is big. And wicked. With creatures. Lots and lots of creatures. Bad ones, too. Get it? Good.
+Deck Type=constructed
+Set=MRD
+Image=wicked_big.jpg
+[main]
+2 Tel-Jilad Chosen|MRD
+2 Tel-Jilad Archers|MRD
+2 Brown Ouphe|MRD
+4 Copper Myr|MRD
+1 Slith Predator|MRD
+4 Fangren Hunter|MRD
+2 Trolls of Tel-Jilad|MRD
+2 Viridian Shaman|MRD
+1 Living Hive|MRD
+1 Plated Slagwurm|MRD
+2 Battlegrowth|MRD
+1 One Dozen Eyes|MRD
+24 Forest|MRD
+2 Predator's Strike|MRD
+1 Bloodscent|MRD
+2 Needlebug|MRD
+1 Deconstruct|MRD
+2 Creeping Mold|MRD
+2 Tel-Jilad Exile|MRD
+2 Journey of Discovery|MRD
+[sideboard]

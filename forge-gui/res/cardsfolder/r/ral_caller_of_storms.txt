@@ -1,0 +1,9 @@
+Name:Ral, Caller of Storms
+ManaCost:4 U R
+Types:Legendary Planeswalker Ral
+Loyalty:4
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
+A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 7 | SubAbility$ DBDamage | SpellDescription$ Draw seven cards. CARDNAME deals 7 damage to each creature your opponents control.
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 7
+Oracle:[+1]: Draw a card.\n[-2]: Ral, Caller of Storms deals 3 damage divided as you choose among one, two, or three targets.\n[-7]: Draw seven cards. Ral, Caller of Storms deals 7 damage to each creature your opponents control.

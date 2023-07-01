@@ -1,0 +1,13 @@
+Name:Imperious Mindbreaker
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:1/4
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddTrigger$ AttackTrig | AddSVar$ AE & TrigMill | Description$ As long as CARDNAME is paired with another creature, each of those creatures has "Whenever this creature attacks, each opponent mills cards equal to its toughness."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature attacks, each opponent mills cards equal to its toughness.
+SVar:TrigMill:DB$ Mill | NumCards$ X | Defined$ Player.Opponent
+SVar:X:TriggeredAttacker$CardToughness
+SVar:AE:SVar:HasAttackEffect:TRUE
+SVar:BuffedBy:Creature
+DeckHas:Ability$Mill
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Imperious Mindbreaker is paired with another creature, each of those creatures has "Whenever this creature attacks, each opponent mills cards equal to its toughness."

@@ -1,0 +1,8 @@
+Name:Behind the Scenes
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Skulk | Description$ Creatures you control have skulk. (They can't be blocked by creatures with greater power.)
+A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have skulk. (They can't be blocked by creatures with greater power.)\n{4}{W}: Creatures you control get +1/+1 until end of turn.

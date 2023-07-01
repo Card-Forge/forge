@@ -1,0 +1,6 @@
+Name:Hunding Gjornersen
+ManaCost:3 W U U
+Types:Legendary Creature Human Warrior
+PT:5/4
+K:Rampage:1
+Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)

@@ -1,0 +1,8 @@
+Name:Helm of the Host
+ManaCost:4
+Types:Legendary Artifact Equipment
+K:Equip:5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Equipped | PumpKeywords$ Haste | NonLegendary$ True
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.\nEquip {5}

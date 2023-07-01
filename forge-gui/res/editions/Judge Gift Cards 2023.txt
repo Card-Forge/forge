@@ -1,0 +1,13 @@
+[metadata]
+Code=P23
+Date=2023-01-01
+Name=Judge Gift Cards 2023
+Type=Promo
+ScryfallCode=P23
+
+[cards]
+1 R Painter's Servant @Mike Dringenberg
+2 R Grindstone @Dan Scott
+3 R Mycosynth Lattice @Anthony S. Waters
+4 R Retrofitter Foundry @Dmitry Burmak
+5 M Sword of War and Peace @Chris Rahn

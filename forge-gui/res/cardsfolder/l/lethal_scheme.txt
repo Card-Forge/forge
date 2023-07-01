@@ -1,0 +1,8 @@
+Name:Lethal Scheme
+ManaCost:2 B B
+Types:Instant
+K:Convoke
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBConnive | SpellDescription$ Destroy target creature or planeswalker.
+SVar:DBConnive:DB$ Connive | Defined$ Convoked | SpellDescription$ Each creature that convoked CARDNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+DeckHas:Ability$Discard|Counters
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked Lethal Scheme connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

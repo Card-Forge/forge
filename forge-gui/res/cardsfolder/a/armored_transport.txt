@@ -1,0 +1,6 @@
+Name:Armored Transport
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/1
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.blockingSource | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures blocking it.
+Oracle:Prevent all combat damage that would be dealt to Armored Transport by creatures blocking it.

@@ -1,0 +1,9 @@
+Name:Savage Stomp
+ManaCost:2 G
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Dinosaur.YouCtrl | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a Dinosaur you control.
+A:SP$ PutCounter | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to put a +1/+1 counter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | AILogic$ Always | TgtPrompt$ Select target creature you don't control
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Dinosaur
+Oracle:This spell costs {2} less to cast if it targets a Dinosaur you control.\nPut a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control. (Each deals damage equal to its power to the other.)

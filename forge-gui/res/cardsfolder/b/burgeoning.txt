@@ -1,0 +1,6 @@
+Name:Burgeoning
+ManaCost:G
+Types:Enchantment
+T:Mode$ LandPlayed | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDropLand | TriggerDescription$ Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
+SVar:TrigDropLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
+Oracle:Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.

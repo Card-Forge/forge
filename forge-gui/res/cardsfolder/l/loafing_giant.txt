@@ -1,0 +1,11 @@
+Name:Loafing Giant
+ManaCost:4 R
+Types:Creature Giant
+PT:4/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, mill a card. If a land card was milled this way, prevent all combat damage CARDNAME would deal this turn.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, mill a card. If a land card was milled this way, prevent all combat damage CARDNAME would deal this turn.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Self | ExileOnMoved$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage EFFECTSOURCE would deal this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Loafing Giant attacks or blocks, mill a card. If a land card was milled this way, prevent all combat damage Loafing Giant would deal this turn.

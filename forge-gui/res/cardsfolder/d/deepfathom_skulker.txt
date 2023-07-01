@@ -1,0 +1,11 @@
+Name:Deepfathom Skulker
+ManaCost:5 U
+Types:Creature Eldrazi
+PT:4/4
+K:Devoid
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control deals combat damage to an opponent, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+A:AB$ Effect | Cost$ 3 C | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\nWhenever a creature you control deals combat damage to a player, you may draw a card.\n{3}{C}: Target creature can't be blocked this turn. ({C} represents colorless mana.)

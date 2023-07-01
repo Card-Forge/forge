@@ -1,0 +1,7 @@
+Name:Lifespark Spellbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Animate | Cost$ G Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land.
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+Oracle:{G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.\n{1}, Sacrifice Lifespark Spellbomb: Draw a card.

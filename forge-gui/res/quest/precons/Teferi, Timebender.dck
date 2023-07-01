@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1499
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Teferi, Timebender
+Description=Teferi is a master of temporal magic. Use his powers to manipuluate time and accelerate your deck to certain victory.
+Deck Type=constructed
+Set=DOM
+Image=teferi_timebender.jpg
+[Main]
+3 Aesthir Glider|DOM
+2 Befuddle|DOM
+1 Daring Archaeologist|DOM
+1 Divination|DOM
+3 Gideon's Reproach|DOM
+3 Island|DOM|1
+3 Island|DOM|2
+3 Island|DOM|3
+2 Island|DOM|4
+2 Jhoira's Familiar|DOM
+2 Juggernaut|DOM
+3 Knight of New Benalia|DOM
+4 Meandering River|DOM
+2 Niambi, Faithful Healer|DOM
+3 Plains|DOM|1
+3 Plains|DOM|2
+3 Plains|DOM|3
+2 Plains|DOM|4
+2 Relic Runner|DOM
+1 Serra Angel|DOM
+2 Sparring Construct|DOM
+1 Teferi, Timebender+|DOM
+3 Teferi's Sentinel|DOM
+4 Temporal Machinations|DOM
+1 Tetsuko Umezawa, Fugitive|DOM
+1 Zahid, Djinn of the Lamp|DOM

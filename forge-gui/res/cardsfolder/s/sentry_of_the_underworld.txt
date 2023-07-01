@@ -1,0 +1,8 @@
+Name:Sentry of the Underworld
+ManaCost:3 W B
+Types:Creature Griffin Skeleton
+PT:3/3
+K:Flying
+K:Vigilance
+A:AB$ Regenerate | Cost$ W B PayLife<3> | SpellDescription$ Regenerate CARDNAME.
+Oracle:Flying, vigilance\n{W}{B}, Pay 3 life: Regenerate Sentry of the Underworld.

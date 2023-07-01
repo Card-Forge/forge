@@ -1,0 +1,10 @@
+Name:Brokers Charm
+ManaCost:G W U
+Types:Instant
+A:SP$ Charm | Choices$ DBPump,DBDestroy,DBDraw
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBDealDamage | AILogic$ PowerDmg | StackDescription$ {c:ThisTargetedCard} gets +1/+0 until end of turn. | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to target creature or planeswalker an opponent controls.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X | DamageSource$ ParentTarget | StackDescription$ It deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Choose one —\n• Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to target creature or planeswalker an opponent controls.\n• Destroy target enchantment.\n• Draw two cards.

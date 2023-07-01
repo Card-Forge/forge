@@ -1,0 +1,7 @@
+Name:Cranial Archive
+ManaCost:2
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ 2 Exile<1/CARDNAME> | ValidTgts$ Player | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:All
+Oracle:{2}, Exile Cranial Archive: Target player shuffles their graveyard into their library. Draw a card.

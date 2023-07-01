@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mortals of Myth
+Description=When enemies gather at your gates, your heroes will send them fleeing. Bolstered by strive spells, lead your heroes to deeds that are worthy of truly epic tales.
+Deck Type=constructed
+Set=JOU
+Image=mortals_of_myth.jpg
+[Main]
+2 Akroan Mastiff|JOU
+1 Akroan Skyguard|BNG
+1 Dawnbringer Charioteers+|JOU
+1 Elite Skirmisher|BNG
+2 Golden Hind|JOU
+2 Lagonna-Band Trailblazer|JOU
+1 Oreskos Swiftclaw|JOU
+1 Phalanx Leader|THS
+2 Pheres-Band Thunderhoof|JOU
+1 Quarry Colossus|JOU
+1 Skyspear Cavalry|JOU
+2 Supply-Line Cranes|JOU
+1 Vanguard of Brimaz|BNG
+1 Wingsteed Rider|THS
+2 Ajani's Presence|JOU
+2 Banishing Light|JOU
+2 Colossal Heroics|JOU
+1 Consign to Dust|JOU
+1 Font of Vigor|JOU
+1 Nature's Panoply|JOU
+2 Oppressive Rays|JOU
+1 Phalanx Formation|JOU
+1 Raised by Wolves|BNG
+1 Solidarity of Heroes|JOU
+1 Spear of Heliod|THS
+15 Plains|THS
+11 Forest|THS
+[sideboard]
+

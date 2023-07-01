@@ -1,0 +1,7 @@
+Name:Alpha Kavu
+ManaCost:2 G
+Types:Creature Kavu
+PT:2/2
+A:AB$ Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | ValidTgts$ Creature.Kavu | TgtPrompt$ Select target Kavu creature | SpellDescription$ Target Kavu creature gets -1/+1 until end of turn.
+AI:RemoveDeck:All
+Oracle:{1}{G}: Target Kavu creature gets -1/+1 until end of turn.

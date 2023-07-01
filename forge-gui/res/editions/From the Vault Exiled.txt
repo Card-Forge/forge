@@ -1,0 +1,24 @@
+[metadata]
+Code=FVE
+Date=2009-08-28
+Name=From the Vault: Exiled
+Type=Collector_Edition
+Alias=V09
+ScryfallCode=V09
+
+[cards]
+1 M Balance @Randy Gallegos
+2 M Berserk @Steve Prescott
+3 M Channel @Rebecca Guay
+4 M Gifts Ungiven @D. Alexander Gregory
+5 M Goblin Lackey @Christopher Moeller
+6 M Kird Ape @Terese Nielsen
+7 M Lotus Petal @April Lee
+8 M Mystical Tutor @David O'Connor
+9 M Necropotence @Dave Kendall
+10 M Sensei's Divining Top @Michael Sutfin
+11 M Serendib Efreet @Matt Stewart
+12 M Skullclamp @Luca Zontini
+13 M Strip Mine @John Avon
+14 M Tinker @Chris Rahn
+15 M Trinisphere @Tim Hildebrandt

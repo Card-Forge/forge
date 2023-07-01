@@ -1,0 +1,8 @@
+Name:Bladegriff Prototype
+ManaCost:5
+Types:Artifact Creature Griffin
+PT:3/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target nonland permanent of that player's choice that one of your opponents controls.
+SVar:TrigDestroy:DB$ Destroy | TargetingPlayer$ TriggeredTarget | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent controlled by opponent of damaging player
+Oracle:Flying\nWhenever Bladegriff Prototype deals combat damage to a player, destroy target nonland permanent of that player's choice that one of your opponents controls.

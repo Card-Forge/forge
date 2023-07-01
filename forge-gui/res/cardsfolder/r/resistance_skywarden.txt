@@ -1,0 +1,7 @@
+Name:Resistance Skywarden
+ManaCost:3 R R
+Types:Creature Ogre Rebel
+PT:5/5
+K:Menace
+K:Reach
+Oracle:Menace, reach

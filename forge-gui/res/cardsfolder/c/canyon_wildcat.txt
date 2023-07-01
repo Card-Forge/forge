@@ -1,0 +1,6 @@
+Name:Canyon Wildcat
+ManaCost:1 R
+Types:Creature Cat
+PT:2/1
+K:Mountainwalk
+Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

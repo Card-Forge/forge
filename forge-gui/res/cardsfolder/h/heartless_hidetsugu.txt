@@ -1,0 +1,9 @@
+Name:Heartless Hidetsugu
+ManaCost:3 R R
+Types:Legendary Creature Ogre Shaman
+PT:4/3
+A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | RepeatSubAbility$ DBDealDamage | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each player equal to half that player's life total, rounded down.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ HeartlessX
+SVar:HeartlessX:PlayerCountRemembered$LifeTotal/HalfDown
+AI:RemoveDeck:Random
+Oracle:{T}: Heartless Hidetsugu deals damage to each player equal to half that player's life total, rounded down.

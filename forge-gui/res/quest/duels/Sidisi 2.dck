@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sidisi 2
+Title=Sidisi
+Difficulty=medium
+Description=BUG Delve deck
+Icon=Sidisi.jpg
+Deck Type=constructed
+[main]
+1 Thornwood Falls
+4 Misty Rainforest
+1 Temple of Mystery
+4 Opulent Palace
+2 Tropical Island
+2 Terramorphic Expanse
+2 Evolving Wilds
+2 Island
+2 Forest
+1 Swamp
+2 Sidisi, Brood Tyrant
+4 Mental Note
+4 Commune with the Gods
+4 Grisly Salvage
+4 Satyr Wayfinder
+4 Tracker's Instincts
+1 Strategic Planning
+1 Scout the Borders
+1 Dead Drop
+1 Death Rattle
+1 Gurmag Angler
+4 Hooting Mandrills
+1 Murderous Cut
+1 Set Adrift
+1 Shambling Attendants
+4 Sultai Scavenger
+1 Tasigur's Cruelty
+[sideboard]

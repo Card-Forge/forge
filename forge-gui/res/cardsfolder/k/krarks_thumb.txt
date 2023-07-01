@@ -1,0 +1,6 @@
+Name:Krark's Thumb
+ManaCost:2
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ You | AddKeyword$ If you would flip a coin, instead flip two coins and ignore one. | Description$ If you would flip a coin, instead flip two coins and ignore one.
+AI:RemoveDeck:Random
+Oracle:If you would flip a coin, instead flip two coins and ignore one.

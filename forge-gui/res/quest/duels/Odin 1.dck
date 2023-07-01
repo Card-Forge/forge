@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Odin 1
+Title=Odin
+Difficulty=easy
+Description=WU deck with Thistledown Duo
+Icon=Odin.jpg
+Deck Type=constructed
+[main]
+2 Boreal Shelf
+1 Cloudcrest Lake
+2 Coastal Tower
+1 Land Cap
+1 Nimbus Maze
+1 Thalakos Lowlands
+1 Wanderwine Hub
+7 Island|M10
+7 Plains|M10
+1 Sejiri Merfolk
+4 Thistledown Duo
+1 Augury Adept
+1 Azorius AEthermage
+1 Azorius First-Wing
+1 Barrenton Cragtreads
+1 Benalish Heralds
+1 Curse of Chains
+1 Daring Leap
+1 Dawnray Archer
+1 Deft Duelist
+1 Escape Routes
+1 Esper Cormorants
+1 Ethercaste Knight
+1 Gosta Dirk
+1 Harbor Guardian
+1 Hazerider Drake
+1 Hindering Light
+1 Hunding Gjornersen
+1 Kiss of the Amesha
+1 Mistmeadow Witch
+1 Offering to Asha
+1 Palliation Accord
+1 Reparations
+1 Riptide Crab
+1 Shield of the Righteous
+1 Sky Spirit
+1 Somnomancer
+1 Spectral Shield
+1 Talon Trooper
+1 Tempest Drake
+1 View from Above
+1 Watchwing Scarecrow
+1 Wings of Aesthir
+[sideboard]

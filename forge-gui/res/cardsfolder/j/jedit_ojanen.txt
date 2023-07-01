@@ -1,0 +1,5 @@
+Name:Jedit Ojanen
+ManaCost:4 W W U
+Types:Legendary Creature Cat Warrior
+PT:5/5
+Oracle:

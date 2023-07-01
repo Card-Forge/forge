@@ -1,0 +1,5 @@
+Name:Exotic Orchard
+ManaCost:no cost
+Types:Land
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Land.OppCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any color that a land an opponent controls could produce.
+Oracle:{T}: Add one mana of any color that a land an opponent controls could produce.

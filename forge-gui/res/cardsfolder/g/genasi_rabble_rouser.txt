@@ -1,0 +1,8 @@
+Name:Genasi Rabble-Rouser
+ManaCost:1 R
+Types:Creature Elemental Shaman
+PT:1/3
+K:Double team
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl+namedGenasi Rabble-Rouser | NumAtt$ +1 | SpellDescription$ Creatures you control named Genasi Rabble-Rouser get +1/+0 until end of turn.
+DeckHints:Name$Genasi Rabble-Rouser
+Oracle:Double team\n{1}{R}: Creatures you control named Genasi Rabble-Rouser gets +1/+0 until end of turn.

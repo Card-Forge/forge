@@ -1,0 +1,5 @@
+Name:Vahd|Art:Inspiring Vantage|Colors:W
+Name:Inventors' Fair|Art:Inventors' Fair|Colors:U
+Name:Ghirapur|Art:Concealed Courtyard|Colors:B
+Name:Lathnu|Art:Spirebluff Canal|Colors:R
+Name:Peema|Art:Botanical Sanctum|Colors:G

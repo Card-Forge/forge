@@ -1,0 +1,8 @@
+Name:Gravitational Shift
+ManaCost:3 U U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.withFlying | AddPower$ 2 | Description$ Creatures with flying get +2/+0.
+S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddPower$ -2 | Description$ Creatures without flying get -2/-0.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Allies 2
+Title=& Allies
+Difficulty=medium
+Description="An army is a team. It lives, eats, sleeps, fights as a team.
+This individuality stuff is a bunch of bullshit." 
+Icon=Allies.png
+Deck Type=constructed
+[Main]
+3 Bala Ged Thief|ZEN
+4 Forest|ZEN|1
+3 Hagra Diabolist|ZEN
+4 Harabaz Druid|WWK
+4 Inquisition of Kozilek|ROE
+4 Island|ZEN|1
+4 Jwari Shapeshifter|WWK
+4 Misty Rainforest|ZEN
+4 Oran-Rief Survivalist|ZEN
+4 Sea Gate Loremaster|ZEN
+4 Swamp|ZEN|1
+4 Evolving Wilds|ROE
+2 Turntimber Ranger|ZEN
+4 Umara Raptor|ZEN
+4 Vendetta|ROE
+4 Verdant Catacombs|ZEN
+[sideboard]

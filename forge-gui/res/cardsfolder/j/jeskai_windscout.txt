@@ -1,0 +1,7 @@
+Name:Jeskai Windscout
+ManaCost:2 U
+Types:Creature Bird Scout
+PT:2/1
+K:Flying
+K:Prowess
+Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Fates Foreseen
+Description=The strands of fate stretch out before you. Weave them together to portend doom for your foes. With scry spells, you will be able to shape your own destiny for ultimate victory.
+Deck Type=constructed
+Set=JOU
+Image=fates_foreseen.jpg
+[Main]
+1 Bladetusk Boar|JOU
+1 Cloaked Siren|JOU
+1 Crackling Triton|THS
+1 Cyclops of Eternal Fury|JOU
+2 Flamespeaker Adept|THS
+1 Omenspeaker|THS
+2 Pensive Minotaur|JOU
+1 Prescient Chimera|THS
+1 Prognostic Sphinx|THS
+1 Scourge of Fleets+|JOU
+2 Sigiled Skink|JOU
+2 Sigiled Starfish|JOU
+2 Stormcaller of Keranos|BNG
+2 Divination|BNG
+1 Font of Fortunes|JOU
+1 Font of Ire|JOU
+1 Interpret the Signs|JOU
+2 Knowledge and Power|JOU
+1 Lost in a Labyrinth|THS
+1 Magma Spray|JOU
+1 Pull from the Deep|JOU
+1 Rage of Purphoros|THS
+2 Riddle of Lightning|JOU
+2 Rise of Eagles|JOU
+1 Spite of Mogis|JOU
+13 Island|THS
+13 Mountain|THS
+[sideboard]
+

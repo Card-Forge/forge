@@ -1,0 +1,10 @@
+Name:Fallen Angel
+ManaCost:3 B B
+Types:Creature Angel
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
+SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token
+Oracle:Flying\nSacrifice a creature: Fallen Angel gets +2/+1 until end of turn.

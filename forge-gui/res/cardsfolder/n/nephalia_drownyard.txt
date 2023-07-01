@@ -1,0 +1,6 @@
+Name:Nephalia Drownyard
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mill | Cost$ 1 U B T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+Oracle:{T}: Add {C}.\n{1}{U}{B}, {T}: Target player mills three cards.

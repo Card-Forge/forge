@@ -1,0 +1,6 @@
+Name:Alchemist's Gift
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KWChoice$ Deathtouch,Lifelink | StackDescription$ REP Target creature_{c:Targeted} & your_{p:You}'s | SpellDescription$ Target creature gets +1/+1 and gains your choice of deathtouch or lifelink until end of turn. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it. Damage dealt by a creature with lifelink also causes its controller to gain that much life.)
+DeckHas:Ability$LifeGain
+Oracle:Target creature gets +1/+1 and gains your choice of deathtouch or lifelink until end of turn. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it. Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

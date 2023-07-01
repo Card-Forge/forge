@@ -1,0 +1,9 @@
+Name:Salt Road Ambushers
+ManaCost:3 G
+Types:Creature Dog Warrior
+PT:3/3
+K:Megamorph:3 G G
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.Creature+YouCtrl+Other | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another permanent you control is turned face up, if it's a creature, put two +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2 | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature
+DeckHas:Ability$Counters
+Oracle:Whenever another permanent you control is turned face up, if it's a creature, put two +1/+1 counters on it.\nMegamorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)

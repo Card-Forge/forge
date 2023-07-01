@@ -1,0 +1,6 @@
+Name:Enraged Revolutionary
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/1
+K:Dethrone
+Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)

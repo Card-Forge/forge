@@ -1,0 +1,6 @@
+Name:Breakneck Berserker
+ManaCost:2 R
+Types:Creature Dwarf Berserker
+PT:3/2
+K:Haste
+Oracle:Haste

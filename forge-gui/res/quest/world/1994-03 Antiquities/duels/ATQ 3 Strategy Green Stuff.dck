@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ATQ 3 Strategy: Green Stuff
+Title=Green Stuff
+Difficulty=hard
+Description=After the destruction of Argoth, Gaea was willing to instill a portion of her own powers into some of her more vengeful followers.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Argothian Pixies|ATQ
+4 Argothian Treefolk|ATQ
+4 Citanul Druid|ATQ
+4 Clay Statue|ATQ
+2 Colossus of Sardia|ATQ
+4 Crumble|ATQ
+21 Forest|LEB|1
+4 Gaea's Avenger|ATQ
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Powerleech|ATQ
+1 Strip Mine|ATQ|3
+4 Tetravus|ATQ

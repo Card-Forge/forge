@@ -1,0 +1,7 @@
+Name:Wall of Diffusion
+ManaCost:1 R
+Types:Creature Wall
+PT:0/5
+K:Defender
+K:CARDNAME can block creatures with shadow as though they didn't have shadow.
+Oracle:Defender (This creature can't attack.)\nWall of Diffusion can block creatures with shadow as though Wall of Diffusion had shadow.

@@ -1,0 +1,10 @@
+Name:Scrapwork Cohort
+ManaCost:4
+Types:Artifact Creature Soldier
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Soldier artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_soldier
+K:Unearth:2 W
+DeckHas:Ability$Token|Graveyard
+DeckHints:Color$White
+Oracle:When Scrapwork Cohort enters the battlefield, create a 1/1 colorless Soldier artifact creature token.\nUnearth {2}{W} ({2}{W}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

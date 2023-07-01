@@ -1,0 +1,42 @@
+[metadata]
+
+Name:Forge Puzzle Tutorial #02 - Background Count
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Easy
+
+Description:You can often get an idea of what a puzzle expects you to do by counting your mana. The amount of mana you have will dictate the spells or abilities you can or can't use. Don't forget to take additional sources into account when you figure out what's available to you.\n\nIn this puzzle, you have to get past some tough blockers. Fortunately you have a lot of mana available - enough to cast the spells in your hand, and some left over to activate your Waker of the Wilds. But creating a single good-sized Elemental out of one of your lands won't get you too far here. Where should the extra mana go?
+[state]
+
+humanlife=7
+
+ailife=6
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Guilty Conscience|Set:SCG; Fists of Ironwood|Set:RAV; Cleansing Meditation
+|Set:TOR
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Llanowar Druid|Set:WTH; Gustrider Exuberant|Set:ALA; Herd Gnarr|Set:TSP; Waker of the Wilds|Set:XLN; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH; Plains|Set:AKH|Id:141; Wild Growth|Set:7ED|AttachedTo:141; Forest|Set:AKH; Forest|Set:AKH; Forest|Set:AKH
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=Augury Owl|Set:M11; Seacoast Drake|Set:M14; Desperate Castaways|Set:XLN; Grim Guardian|Set:JOU; Ukud Cobra|Set:DTK
+aiexile=
+aicommand=

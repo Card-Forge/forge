@@ -1,0 +1,8 @@
+Name:Hero of Leina Tower
+ManaCost:G
+Types:Creature Human Warrior
+PT:1/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, you may pay {X}. If you do, put X +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ X | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$xPaid
+Oracle:Heroic — Whenever you cast a spell that targets Hero of Leina Tower, you may pay {X}. If you do, put X +1/+1 counters on Hero of Leina Tower.

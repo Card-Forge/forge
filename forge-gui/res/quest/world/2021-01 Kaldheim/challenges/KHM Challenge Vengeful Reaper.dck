@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Vengeful Reaper
+OpponentName=The Reapers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Great Hall of Starnheim|Great Hall of Starnheim
+HumanExtras=
+[metadata]
+Title=Vengeful Reaper
+Difficulty=easy
+Description="Starnheim is closed to you, coward."
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Vengeful Reaper
+[Main]
+30 Swamp|KHM|1
+30 Vengeful Reaper|KHM|1

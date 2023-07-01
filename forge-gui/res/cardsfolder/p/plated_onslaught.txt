@@ -1,0 +1,8 @@
+Name:Plated Onslaught
+ManaCost:3 W W
+Types:Instant
+K:Affinity:Artifact
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nCreatures you control get +2/+1 until end of turn.

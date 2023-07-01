@@ -1,0 +1,7 @@
+Name:Goblin War Drums
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have menace. (They can't be blocked except by two or more creatures.)

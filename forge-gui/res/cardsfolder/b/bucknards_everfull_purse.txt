@@ -1,0 +1,8 @@
+Name:Bucknard's Everfull Purse
+ManaCost:2
+Types:Artifact
+A:AB$ RollDice | Cost$ 1 T | Defined$ You | Sides$ 4 | ResultSVar$ X | SubAbility$ DBTreasure | StackDescription$ SpellDescription | SpellDescription$ Roll a d4 and create a number of Treasure tokens equal to the result. The player to your right gains control of CARDNAME.
+SVar:DBTreasure:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBPass
+SVar:DBPass:DB$ GainControl | Defined$ Self | NewController$ NextPlayerToYourRight
+DeckHas:Ability$Token
+Oracle:{1}, {T}: Roll a d4 and create a number of Treasure tokens equal to the result. The player to your right gains control of Bucknard's Everfull Purse.

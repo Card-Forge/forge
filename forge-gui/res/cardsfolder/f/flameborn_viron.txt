@@ -1,0 +1,5 @@
+Name:Flameborn Viron
+ManaCost:4 R R
+Types:Creature Phyrexian Insect
+PT:6/4
+Oracle:

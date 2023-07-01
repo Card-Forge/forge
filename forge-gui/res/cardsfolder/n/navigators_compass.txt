@@ -1,0 +1,8 @@
+Name:Navigator's Compass
+ManaCost:1
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target land you control becomes the basic land type of your choice in addition to its other types.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Types$ ChosenType
+Oracle:When Navigator's Compass enters the battlefield, you gain 3 life.\n{T}: Until end of turn, target land you control becomes the basic land type of your choice in addition to its other types.

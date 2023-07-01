@@ -1,0 +1,8 @@
+Name:Magus of the Candelabra
+ManaCost:G
+Types:Creature Human Wizard
+PT:1/2
+A:AB$ Untap | Cost$ X T | TargetMin$ X | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select X target lands | SpellDescription$ Untap X target lands.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}, {T}: Untap X target lands.

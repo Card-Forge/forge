@@ -1,0 +1,23 @@
+[quest]
+id=Eternal
+OpponentName=The Eternal Phantom
+AILife=20
+Repeat=true
+Wins=40
+Card Reward=booster pack POR;booster pack PO2;booster pack PTK
+Ticket Reward=true
+Credit Reward=300
+AIExtras=Merfolk of the Pearl Trident|Merfolk of the Pearl Trident|Phantom Warrior|Island|Island
+HumanExtras=
+[metadata]
+Title=The Eternal Phantom
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=The phantasmal assault never ends!
+Deck Type=constructed
+Name=Eternal
+[Main]
+4 Capture of Jingzhou|PTK
+4 Temporal Manipulation|PO2
+4 Time Warp|S99
+12 Island|POR

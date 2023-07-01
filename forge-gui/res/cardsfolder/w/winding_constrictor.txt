@@ -1,0 +1,11 @@
+Name:Winding Constrictor
+ManaCost:B G
+Types:Creature Snake
+PT:2/3
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Artifact.YouCtrl+inZoneBattlefield,Creature.YouCtrl+inZoneBattlefield | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be put on an artifact or creature you control, that many plus one of each of those kinds of counters are put on that permanent instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ AddOneMoreCounters | Description$ If you would get one or more counters, you get that many plus one of each of those kinds of counters instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+AI:RemoveDeck:Random
+DeckNeeds:Ability$Counters
+Oracle:If one or more counters would be put on an artifact or creature you control, that many plus one of each of those kinds of counters are put on that permanent instead.\nIf you would get one or more counters, you get that many plus one of each of those kinds of counters instead.

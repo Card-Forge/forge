@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Storm 3
+Title=Storm
+Difficulty=hard
+Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
+Icon=Storm.jpg
+Deck Type=constructed
+[main]
+1 Bayou
+4 Savannah
+4 Scrubland
+3 Marsh Flats
+2 Verdant Catacombs
+3 Windswept Heath
+3 Graypelt Refuge
+1 Kabira Crossroads
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+4 Serra Ascendant
+4 Ajani's Pridemate
+2 Ageless Entity
+3 Divinity of Pride
+2 Felidar Sovereign
+1 Karlov of the Ghost Council
+1 Sanguine Bond
+1 Feudkiller's Verdict
+3 Ranger of Eos
+4 Kitchen Finks
+1 Essence Warden
+1 Soul Warden
+1 Soul's Attendant
+1 Ajani Goldmane
+1 Loxodon Hierarch
+1 Wall of Reverence
+1 Leyline of Vitality
+2 Swords to Plowshares
+1 Rhox Faithmender
+1 Sun Droplet
+[sideboard]

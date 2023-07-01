@@ -1,0 +1,6 @@
+Name:Prized Griffin
+ManaCost:4 W
+Types:Creature Griffin
+PT:3/4
+K:Flying
+Oracle:Flying

@@ -1,0 +1,9 @@
+Name:Verdant Eidolon
+ManaCost:3 G
+Types:Creature Spirit
+PT:2/2
+A:AB$ Mana | Cost$ G Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a multicolored spell, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+AI:RemoveDeck:All
+Oracle:{G}, Sacrifice Verdant Eidolon: Add three mana of any one color.\nWhenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.

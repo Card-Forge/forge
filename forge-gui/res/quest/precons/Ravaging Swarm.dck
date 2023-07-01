@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ravaging Swarm
+Description=Get under your opponents' skin . . . and devour them from within! Command your virulent swarm of Phyrexians as they spread their foul infection. Once the poison takes hold, proliferate it. Foes will reel in horror as phyresis claims their feeble flesh.
+Deck Type=constructed
+Set=NPH
+Image=ravaging_swarm.jpg
+[main]
+3 Leeching Bite|NPH
+1 Naturalize|M11
+1 Steady Progress|SOM
+2 Trigon of Infestation|SOM
+3 Glistener Elf|NPH
+1 Corrupted Conscience|MBS
+12 Forest|NPH
+1 Contagion Clasp|SOM
+2 Mycosynth Fiend|NPH
+12 Island|NPH
+1 Rot Wolf|MBS
+2 Chained Throatseeker|NPH
+1 Inexorable Tide|SOM
+1 Core Prowler|MBS
+1 Spinebiter|NPH
+1 Blight Mamba|SOM
+2 Cystbearer|SOM
+1 Defensive Stance|NPH
+1 Phyrexian Swarmlord+|NPH
+1 Plaguemaw Beast|MBS
+1 Wall of Tanglecord|SOM
+2 Viridian Betrayers|NPH
+1 Fuel for the Cause|MBS
+3 Blighted Agent|NPH
+2 Viral Drake|NPH
+1 Corrupted Resolve|NPH
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Lotleth Troll
+ManaCost:B G
+Types:Creature Zombie Troll
+PT:2/1
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+K:Trample
+A:AB$ PutCounter | Cost$ Discard<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:Trample\nDiscard a creature card: Put a +1/+1 counter on Lotleth Troll.\n{B}: Regenerate Lotleth Troll.

@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Chorus of Woe
+OpponentName=The Chorus
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Prowling Nightstalker|Prowling Nightstalker
+[metadata]
+Name=PO2 Challenge: Chorus of Woe
+Title=The Chorus
+Difficulty=medium
+Description=When nightstalkers sing, nothing in creation sleeps.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+40 Chorus of Woe|PO2
+20 Swamp|PO2|2

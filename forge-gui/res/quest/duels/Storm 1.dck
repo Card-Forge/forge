@@ -1,0 +1,57 @@
+[duel]
+[metadata]
+Name=Storm 1
+Title=Storm
+Difficulty=easy
+Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
+Icon=Storm.jpg
+Deck Type=constructed
+[main]
+2 Plains|M12
+1 Forest|M12
+2 Swamp|M12
+4 Blossoming Sands
+4 Jungle Hollow
+4 Scoured Barrens
+4 Graypelt Refuge
+4 Kabira Crossroads
+1 Serra Ascendant
+1 Ajani's Pridemate
+1 Bloodbond Vampire
+1 Kalastria Nightwatch
+1 Malakir Familiar
+1 Nirkana Assassin
+1 Serene Steward
+1 Ageless Entity
+1 Cradle of Vitality
+1 Sanguine Bond
+1 Feudkiller's Verdict
+1 Apothecary Initiate
+1 Deathgreeter
+1 Devout Monk
+1 Essence Warden
+1 Soul Warden
+1 Soul's Attendant
+1 Child of Night
+1 Lone Missionary
+1 Mourning Thrull
+1 Temple Acolyte
+1 Aven Riftwatcher
+1 Grazing Gladehart
+1 Kemba's Skyguard
+1 Divine Offering
+1 Douse in Gloom
+1 Contemplation
+1 Last Kiss
+1 Sacred Nectar
+1 Divine Offering
+1 Bargain
+1 Shadowfeed
+1 Ajani's Mantra
+1 Blessed Wine
+1 Marble Chalice
+1 Recumbent Bliss
+1 Reviving Dose
+1 Touch of Death
+1 Angel's Mercy
+[sideboard]

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ekolo 2
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=medium
+Description=GR aggro, burn and big creatures.
+Deck Type=constructed
+[main]
+2 Balduvian Horde|ALL
+4 Deadly Insect|ALL
+1 Erhnam Djinn|ARN
+2 Fellwar Stone|DRK
+1 Fire Diamond|MIR
+2 Fireball|LEB
+8 Forest|MIR
+1 Giant Mantis|MIR
+1 Goblin Tinkerer|MIR
+1 Gorilla Shaman|ALL
+1 Jalum Tome|ATQ
+1 Jayemdae Tome|LEB
+4 Jolrael's Centaur|MIR
+4 Lightning Bolt|LEB
+2 Moss Diamond|MIR
+8 Mountain|LEB
+3 Mountain Valley|MIR
+2 Nettletooth Djinn|MIR
+4 Savage Twister|MIR
+1 Sol Grail|ALL
+2 Thawing Glaciers|ALL
+1 Tranquility|LEB
+1 Volcanic Dragon|MIR
+3 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,44 @@
+[quest]
+id=21
+AILife=50
+Repeat=false
+Wins=96
+Card Reward=6 random rares
+Credit Reward=500
+HumanExtras=Strip Mine
+AIExtras=Plains|Island|Mountain|Swamp|Forest
+[metadata]
+Name=quest21
+Title=Private Domain
+Difficulty=expert
+Description=During your travels, you accidentally stumble upon the domain of an evil, powerful wizard. A fight to the death ensues.
+Icon=Private Domain.jpg
+Deck Type=constructed
+[main]
+2 Underground Sea
+2 Plateau
+2 Taiga
+2 Tropical Island
+1 Tromp the Domains
+1 Sejiri Merfolk
+2 Scrubland
+2 Tundra
+2 Bayou
+2 Savannah
+3 Wandering Goblins
+3 Kird Ape
+4 Matca Rioters
+1 Aven Trailblazer
+3 Exotic Disease
+4 Tribal Flames
+2 Badlands
+1 Forest|M10
+4 Allied Strategies
+3 Loam Lion
+4 Collective Restraint
+2 Volcanic Island
+4 Wild Nacatl
+1 Legacy Weapon
+1 Mountain|M10
+2 Wandering Stream
+[sideboard]

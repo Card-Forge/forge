@@ -1,0 +1,7 @@
+Name:Anthousa, Setessan Hero
+ManaCost:3 G G
+Types:Legendary Creature Human Warrior
+PT:4/5
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select up to three target lands you control | TargetMin$ 0 | TargetMax$ 3 | Power$ 2 | Toughness$ 2 | Types$ Creature,Warrior
+Oracle:Heroic — Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.

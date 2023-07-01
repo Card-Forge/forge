@@ -1,0 +1,22 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 072115 - Stand Against the Waves
+URL:http://www.gatheringmagic.com/seanuy-072115-stand-against-the-waves/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Survive your Opponent's attack and win on your next turn. Opponent cast Joraga Invocation earlier.
+[state]
+ActivePlayer=AI
+ActivePhase=COMBAT_DECLARE_ATTACKERS
+HumanLife=1
+AILife=9
+humanhand=Touch of Moonglove|Set:ORI; Celestial Flare|Set:ORI
+humangraveyard=Fetid Imp|Set:ORI; Fleshbag Marauder|Set:ORI; Eyeblight Assassin|Set:ORI; Blood-Cursed Knight|Set:ORI
+humanlibrary=Plains|Set:ORI; 
+humanbattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI|Tapped; Plains|Set:ORI|Tapped; Swamp|Set:ORI; Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Anointer of Champions|Set:ORI; Topan Freeblade|Set:ORI|Counters:P1P1=1|Renowned; Guardian Automaton|Set:ORI; Undead Servant|Set:ORI; Murder Investigation|Set:ORI|AttachedTo:421; Catacomb Slug|Set:ORI|Id:421; Revenant|Set:ORI; Valor in Akros|Set:ORI
+aibattlefield=Forest|Set:ORI; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Plains|Set:ORI; Plains|Set:ORI|Tapped; Plains|Set:ORI|Tapped; Plains|Set:ORI|Tapped; Consul's Lieutenant|Set:ORI|Attacking|Tapped; Knightly Valor|Set:ORI|AttachedTo:420; Charging Griffin|Set:ORI|Id:420|Attacking; t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_rtr|Attacking; Rhox Maulers|Set:ORI|Counters:P1P1=2|Renowned|Attacking|Tapped; Skysnare Spider|Set:ORI|Attacking
+aiprecast=Joraga Invocation
+aihand=
+aigraveyard=Joraga Invocation|Set:ORI
+ailibrary=
+aiexile=

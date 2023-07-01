@@ -1,0 +1,7 @@
+[format]
+Name:China Standard (RNA)
+Type:Archived
+Subtype:Standard
+Effective:2019-01-25
+Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA
+Banned:Rampaging Ferocidon

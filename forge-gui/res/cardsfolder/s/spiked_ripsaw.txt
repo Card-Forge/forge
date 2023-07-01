@@ -1,0 +1,9 @@
+Name:Spiked Ripsaw
+ManaCost:2 G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddSVar$ AE | Description$ Equipped creature gets +3/+3.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks, you may sacrifice a Forest. If you do, that creature gains trample until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Forest> | Defined$ TriggeredAttackerLKICopy | KW$ Trample
+K:Equip:3
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature attacks, you may sacrifice a Forest. If you do, that creature gains trample until end of turn.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

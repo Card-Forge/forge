@@ -1,0 +1,63 @@
+BasicLandPercentage=17
+
+[Group MaxCnt=4 Percentage=19]
+Savannah
+Graypelt Refuge
+Windswept Heath
+Razorverge Thicket
+Sunpetal Grove
+[/Group]
+
+[Group MaxCnt=4 Percentage=19]
+Haunted Angel
+Hunted Lammasu
+Painter's Servant
+Painter's Servant
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Mold Adder
+Whirling Dervish
+Death Speakers
+Disciple of Grace
+Duskrider Falcon
+Hand of Honor
+Nightwind Glider
+Order of Leitbur
+Order of the White Shield
+Soltari Monk
+White Knight
+White Shield Crusader
+[/Group]
+
+[Group MaxCnt=4 Percentage=16]
+Chameleon Colossus
+Darkwatch Elves
+Great Sable Stag
+Nantuko Blightcutter
+Devout Lightcaster
+Devout Lightcaster
+Paladin en-Vec
+Voice of Grace
+Wall of Light
+[/Group]
+
+[Group MaxCnt=2 Percentage=4]
+Bog Gnarr
+Melesse Spirit
+Oversoul of Dusk
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Celestial Purge
+Celestial Purge
+Purge
+Purge
+Sphere of Grace
+Sphere of Grace
+Starlight
+Demon's Horn
+Throne of Bone
+[/Group]
+
+End

@@ -1,0 +1,6 @@
+Name:Gavony Township
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounterAll | Cost$ 2 G W T | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each creature you control.
+Oracle:{T}: Add {C}.\n{2}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.

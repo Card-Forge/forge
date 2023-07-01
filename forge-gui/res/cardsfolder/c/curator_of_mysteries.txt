@@ -1,0 +1,9 @@
+Name:Curator of Mysteries
+ManaCost:2 U U
+Types:Creature Sphinx
+PT:4/4
+K:Flying
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever you cycle or discard another card, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+K:Cycling:U
+Oracle:Flying\nWhenever you cycle or discard another card, scry 1.\nCycling {U} ({U}, Discard this card: Draw a card.)

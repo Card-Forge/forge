@@ -1,0 +1,5 @@
+Name:Devour in Flames
+ManaCost:2 R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 2 R Return<1/Land> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+Oracle:As an additional cost to cast this spell, return a land you control to its owner's hand.\nDevour in Flames deals 5 damage to target creature or planeswalker.

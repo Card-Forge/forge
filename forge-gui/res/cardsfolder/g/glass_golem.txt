@@ -1,0 +1,5 @@
+Name:Glass Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:6/2
+Oracle:

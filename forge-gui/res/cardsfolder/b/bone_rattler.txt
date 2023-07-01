@@ -1,0 +1,11 @@
+Name:Bone Rattler
+ManaCost:3 B B
+Types:Creature Skeleton
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME is put into your graveyard from anywhere, exile it. When you do, create four Reassembling Skeleton token cards and put them into your graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | Execute$ TrigMakeCard | SubAbility$ DBCleanup | TriggerDescription$ When you do, create four Reassembling Skeleton token cards and put them into your graveyard.
+SVar:TrigMakeCard:DB$ MakeCard | TokenCard$ True | Name$ Reassembling Skeleton | Zone$ Graveyard | Amount$ 4
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+Oracle:When Bone Rattler is put into your graveyard from anywhere, exile it. When you do, create four Reassembling Skeleton token cards and put them into your graveyard.

@@ -1,0 +1,9 @@
+Name:Bad Moon
+ManaCost:1 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Black | AddPower$ 1 | AddToughness$ 1 | Description$ Black creatures get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlayVar:CountOpps LTCountMe
+SVar:CountOpps:Count$Valid Creature.OppCtrl+Black/LimitMax.5
+SVar:CountMe:Count$Valid Creature.YouCtrl+Black
+Oracle:Black creatures get +1/+1.

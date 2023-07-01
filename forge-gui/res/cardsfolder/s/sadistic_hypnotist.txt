@@ -1,0 +1,6 @@
+Name:Sadistic Hypnotist
+ManaCost:3 B B
+Types:Creature Human Minion
+PT:2/2
+A:AB$ Discard | Cost$ Sac<1/Creature> | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards two cards. Activate only as a sorcery.
+Oracle:Sacrifice a creature: Target player discards two cards. Activate only as a sorcery.

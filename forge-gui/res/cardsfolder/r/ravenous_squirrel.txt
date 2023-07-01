@@ -1,0 +1,10 @@
+Name:Ravenous Squirrel
+ManaCost:BG
+Types:Creature Squirrel
+PT:1/1
+T:Mode$ Sacrificed | ValidCard$ Artifact.YouCtrl,Creature.YouCtrl | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact or creature, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ GainLife | Cost$ 1 B G Sac<1/Artifact;Creature/artifact or creature> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Sacrifice|Counters|LifeGain
+Oracle:Whenever you sacrifice an artifact or creature, put a +1/+1 counter on Ravenous Squirrel.\n{1}{B}{G}, Sacrifice an artifact or creature: You gain 1 life and draw a card.

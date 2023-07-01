@@ -1,0 +1,9 @@
+Name:Wolfhunter's Quiver
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:5
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage & DamageWerewolf | Description$ Equipped creature has "{T}: This creature deals 1 damage to any target" and "{T}: This creature deals 3 damage to target Werewolf creature."
+SVar:Damage:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:DamageWerewolf:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Werewolf | TgtPrompt$ Select target Werewolf creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target Werewolf creature.
+SVar:NonStackingAttachEffect:True
+Oracle:Equipped creature has "{T}: This creature deals 1 damage to any target" and "{T}: This creature deals 3 damage to target Werewolf creature."\nEquip {5}

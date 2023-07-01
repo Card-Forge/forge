@@ -1,0 +1,6 @@
+Name:No Mercy
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals damage to you, destroy it.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy
+Oracle:Whenever a creature deals damage to you, destroy it.

@@ -1,0 +1,7 @@
+Name:Thran War Machine
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/5
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+K:Echo:4
+Oracle:Echo {4} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nThran War Machine attacks each combat if able.

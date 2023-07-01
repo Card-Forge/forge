@@ -1,0 +1,7 @@
+Name:Screaming Shield
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | AddAbility$ Mill | Description$ Equipped creature gets +0/+3 and has "{2}, {T}: Target player mills three cards."
+SVar:Mill:AB$ Mill | Cost$ 2 T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+Oracle:Equipped creature gets +0/+3 and has "{2}, {T}: Target player mills three cards."\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

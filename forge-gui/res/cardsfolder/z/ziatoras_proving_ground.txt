@@ -1,0 +1,6 @@
+Name:Ziatora's Proving Ground
+ManaCost:no cost
+Types:Land Swamp Mountain Forest
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {B}, {R}, or {G}.)\nZiatora's Proving Ground enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

@@ -1,0 +1,7 @@
+Name:Zhang Liao, Hero of Hefei
+ManaCost:4 B B
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.

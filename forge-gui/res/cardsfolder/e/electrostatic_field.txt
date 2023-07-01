@@ -1,0 +1,9 @@
+Name:Electrostatic Field
+ManaCost:1 R
+Types:Creature Wall
+PT:0/4
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckHints:Type$Instant|Sorcery
+Oracle:Defender\nWhenever you cast an instant or sorcery spell, Electrostatic Field deals 1 damage to each opponent.

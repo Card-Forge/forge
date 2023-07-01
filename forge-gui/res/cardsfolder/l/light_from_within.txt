@@ -1,0 +1,7 @@
+Name:Light from Within
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Chroma — Each creature you control gets +1/+1 for each white mana symbol in its mana cost.
+SVar:AffectedX:Count$ChromaSource.White
+SVar:PlayMain1:TRUE
+Oracle:Chroma — Each creature you control gets +1/+1 for each white mana symbol in its mana cost.

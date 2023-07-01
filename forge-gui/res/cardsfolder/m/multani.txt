@@ -1,0 +1,7 @@
+Name:Multani
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-3/-2
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ X | Description$ Creatures you control get +X/+0, where X is the number of cards in your hand.
+SVar:X:Count$CardsInYourHand
+Oracle:Hand -3, life -2\nCreatures you control get +X/+0, where X is the number of cards in your hand.

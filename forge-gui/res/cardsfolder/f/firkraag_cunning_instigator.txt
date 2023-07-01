@@ -1,0 +1,14 @@
+Name:Firkraag, Cunning Instigator
+ManaCost:3 U R
+Types:Legendary Creature Dragon
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Dragon.YouCtrl | AttackedTarget$ Opponent | Execute$ TrigGoad | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Dragons you control attack an opponent, goad target creature that player controls.
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredAttackedTarget | TgtPrompt$ Select target creature that player controls
+T:Mode$ DamageDone | ValidSource$ Creature.hadToAttackThisCombat | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on CARDNAME and you draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHints:Type$Dragon
+DeckHas:Ability$Counters
+Oracle:Flying, haste\nWhenever one or more Dragons you control attack an opponent, goad target creature that player controls.\nWhenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on Firkraag, Cunning Instigator and you draw a card.

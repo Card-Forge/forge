@@ -1,0 +1,9 @@
+Name:Dawnhart Disciple
+ManaCost:1 G
+Types:Creature Human Warlock
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another Human enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+DeckHints:Type$Human
+SVar:BuffedBy:Human
+Oracle:Whenever another Human enters the battlefield under your control, Dawnhart Disciple gets +1/+1 until end of turn.

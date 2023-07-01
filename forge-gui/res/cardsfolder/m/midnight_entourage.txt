@@ -1,0 +1,11 @@
+Name:Midnight Entourage
+ManaCost:2 B B
+Types:Creature Aetherborn Rogue
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Aetherborn.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Aetherborn you control dies, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+S:Mode$ Continuous | Affected$ Aetherborn.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Aetherborn you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Aetherborn
+Oracle:Other Aetherborn you control get +1/+1.\nWhenever Midnight Entourage or another Aetherborn you control dies, you draw a card and you lose 1 life.

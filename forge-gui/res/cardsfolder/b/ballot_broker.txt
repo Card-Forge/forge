@@ -1,0 +1,6 @@
+Name:Ballot Broker
+ManaCost:2 W
+Types:Creature Human Advisor
+PT:2/3
+S:Mode$ Continuous | Affected$ You | AdditionalOptionalVote$ 1 | Description$ While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)
+Oracle:While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)

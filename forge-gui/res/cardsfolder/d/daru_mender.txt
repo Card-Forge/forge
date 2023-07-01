@@ -1,0 +1,8 @@
+Name:Daru Mender
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+K:Morph:W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigRegenerate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, regenerate target creature.
+SVar:TrigRegenerate:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Morph {W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Daru Mender is turned face up, regenerate target creature.

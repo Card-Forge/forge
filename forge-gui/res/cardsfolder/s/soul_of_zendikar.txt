@@ -1,0 +1,8 @@
+Name:Soul of Zendikar
+ManaCost:4 G G
+Types:Creature Avatar
+PT:6/6
+K:Reach
+A:AB$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
+A:AB$ Token | Cost$ 3 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
+Oracle:Reach\n{3}{G}{G}: Create a 3/3 green Beast creature token.\n{3}{G}{G}, Exile Soul of Zendikar from your graveyard: Create a 3/3 green Beast creature token.

@@ -1,0 +1,6 @@
+Name:Flamekin Spitfire
+ManaCost:1 R
+Types:Creature Elemental Shaman
+PT:1/1
+A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{3}{R}: Flamekin Spitfire deals 1 damage to any target.

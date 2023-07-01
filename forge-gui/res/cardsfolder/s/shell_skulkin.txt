@@ -1,0 +1,7 @@
+Name:Shell Skulkin
+ManaCost:4
+Types:Artifact Creature Scarecrow
+PT:3/2
+A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | KW$ Shroud | SpellDescription$ Target blue creature gains shroud until end of turn.
+DeckNeeds:Color$Blue
+Oracle:{3}: Target blue creature gains shroud until end of turn. (It can't be the target of spells or abilities.)

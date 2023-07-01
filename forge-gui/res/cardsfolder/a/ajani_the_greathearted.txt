@@ -1,0 +1,12 @@
+Name:Ajani, the Greathearted
+ManaCost:2 G W
+Types:Legendary Planeswalker Ajani
+Loyalty:5
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | ValidCards2$ Planeswalker.YouCtrl+StrictlyOther | CounterType2$ LOYALTY | AILogic$ OwnCreatsAndOtherPWs | SpellDescription$ Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
+DeckHas:Ability$Counters|LifeGain
+DeckHints:Type$Planeswalker
+Oracle:Creatures you control have vigilance.\n[+1]: You gain 3 life.\n[-2]: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.

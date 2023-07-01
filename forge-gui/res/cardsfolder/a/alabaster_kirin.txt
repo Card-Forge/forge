@@ -1,0 +1,7 @@
+Name:Alabaster Kirin
+ManaCost:3 W
+Types:Creature Kirin
+PT:2/3
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

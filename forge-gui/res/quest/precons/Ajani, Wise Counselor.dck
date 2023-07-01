@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ajani, Wise Counselor
+Description=A veteran warrior of unmatched skill, Ajani protects the weak and mentors aspiring heroes. Gather battalions of small fighters, bolster their strength, and overwhelm your opponent.
+Deck Type=constructed
+Set=M19
+Image=ajani_wise_counselor.jpg
+[Main]
+2 Ajani's Influence|M19
+2 Ajani's Pridemate|M19
+1 Ajani, Wise Counselor+|M19
+2 Cavalry Drillmaster|M19
+3 Court Cleric|M19
+2 Dwarven Priest|M19
+2 Herald of Faith|M19
+1 Inspired Charge|M19
+1 Knight's Pledge|M19
+2 Luminous Bonds|M19
+1 Mentor of the Meek|M19
+1 Meteor Golem|M19
+1 Mighty Leap|M19
+2 Militia Bugler|M19
+2 Oreskos Swiftclaw|M19
+1 Pegasus Courser|M19
+7 Plains|M19|1
+6 Plains|M19|2
+6 Plains|M19|3
+6 Plains|M19|4
+1 Revitalize|M19
+3 Rustwing Falcon|M19
+1 Serra's Guardian|M19
+4 Silverbeak Griffin|M19

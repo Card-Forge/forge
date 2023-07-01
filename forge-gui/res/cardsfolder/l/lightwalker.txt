@@ -1,0 +1,7 @@
+Name:Lightwalker
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it has a +1/+1 counter on it.
+DeckHints:Ability$Counters
+Oracle:Lightwalker has flying as long as it has a +1/+1 counter on it.

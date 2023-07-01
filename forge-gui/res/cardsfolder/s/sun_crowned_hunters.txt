@@ -1,0 +1,8 @@
+Name:Sun-Crowned Hunters
+ManaCost:4 R R
+Types:Creature Dinosaur
+PT:5/4
+T:Mode$ DamageDoneOnce | Execute$ DealDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, it deals 3 damage to target opponent or planeswalker.
+SVar:DealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 3
+SVar:HasCombatEffect:TRUE
+Oracle:Enrage — Whenever Sun-Crowned Hunters is dealt damage, it deals 3 damage to target opponent or planeswalker.

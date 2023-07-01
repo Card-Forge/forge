@@ -1,0 +1,6 @@
+Name:Leech Fanatic
+ManaCost:1 B
+Types:Creature Human Warlock
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+Oracle:As long as it's your turn, Leech Fanatic has lifelink.

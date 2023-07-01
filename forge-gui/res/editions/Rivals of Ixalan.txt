@@ -1,0 +1,247 @@
+[metadata]
+Code=RIX
+Date=2018-01-19
+Name=Rivals of Ixalan
+Code2=RIX
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common:fromSheet("RIX cards"), 3 Uncommon:fromSheet("RIX cards"), 1 RareMythic:fromSheet("RIX cards"), 1 BasicLand:fromSheet("RIX Basic Lands")
+FatPack=10
+FatPackExtraSlots=80 BasicLands
+TreatAsSmallSet=true
+ScryfallCode=RIX
+
+[cards]
+1 U Baffling End @Mathias Kollros
+2 R Bishop of Binding @Bastien L. Deharme
+3 U Blazing Hope @Clint Cearley
+4 C Cleansing Ray @Anthony Palumbo
+5 C Divine Verdict @Slawomir Maniak
+6 U Everdawn Champion @Sara Winters
+7 C Exultant Skymarcher @Ryan Yee
+8 U Famished Paladin @Tommy Arnold
+9 U Forerunner of the Legion @Josh Hass
+10 U Imperial Ceratops @Bayard Wu
+11 C Legion Conquistador @Sidharth Chaturvedi
+12 C Luminous Bonds @Steve Argyle
+13 U Majestic Heliopterus @Filip Burburan
+14 C Martyr of Dusk @Greg Staples
+15 C Moment of Triumph @Steven Belledin
+16 R Paladin of Atonement @Lius Lasahido
+17 U Pride of Conquerors @Tomasz Jedruszek
+18 R Radiant Destiny @Emrah Elmasli
+19 C Raptor Companion @Slawomir Maniak
+20 C Sanguine Glorifier @Sara Winters
+21 U Skymarcher Aspirant @Winona Nelson
+22 R Slaughter the Strong @Randy Vargas
+23 C Snubhorn Sentry @Aaron Miller
+24 R Sphinx's Decree @Daarken
+25 C Squire's Devotion @Winona Nelson
+26 C Sun Sentinel @James Ryman
+27 C Sun-Crested Pterodon @Lars Grant-West
+28 R Temple Altisaur @Daarken
+29 M Trapjaw Tyrant @Chris Rahn
+30 R Zetalpa, Primal Dawn @Chris Rallis
+31 R Admiral's Order @Slawomir Maniak
+32 U Aquatic Incursion @Jason Rainville
+33 R Crafty Cutpurse @Grzegorz Rutkowski
+34 C Crashing Tide @Carmen Sinek
+35 U Curious Obsession @Daniel Ljunggren
+36 C Deadeye Rig-Hauler @Victor Adame Minguez
+37 U Expel from Orazca @Steven Belledin
+38 U Flood of Recollection @Magali Villeneuve
+39 U Hornswoggle @Deruchenko Alexander
+40 R Induced Amnesia @Chris Rallis
+41 C Kitesail Corsair @Greg Opalinski
+42 R Kumena's Awakening @Zack Stella
+43 C Mist-Cloaked Herald @Anthony Palumbo
+44 C Negate @Magali Villeneuve
+45 R Nezahal, Primal Tide @Sam Burley
+46 R Release to the Wind @Joseph Meehan
+47 C River Darter @Winona Nelson
+48 U Riverwise Augur @Alayna Danner
+49 C Sailor of Means @Ryan Pancoast
+50 C Sea Legs @Deruchenko Alexander
+51 R Seafloor Oracle @Simon Dominic
+52 C Secrets of the Golden City @Jason Felix
+53 U Silvergill Adept @Magali Villeneuve
+54 U Siren Reaver @Tomasz Jedruszek
+55 U Slippery Scoundrel @Dan Scott
+56 C Soul of the Rapids @Anthony Palumbo
+57 C Spire Winder @Titus Lunter
+58 C Sworn Guardian @Sara Winters
+59 M Timestream Navigator @Zezhou Chen
+60 R Warkite Marauder @Victor Adame Minguez
+61 C Waterknot @Wayne Reynolds
+62 U Arterial Flow @Josh Hass
+63 C Canal Monitor @Zezhou Chen
+64 R Champion of Dusk @Josh Hass
+65 C Dark Inquiry @Naomi Baker
+66 R Dead Man's Chest @Jason A. Engle
+67 C Dinosaur Hunter @Tianhua X
+68 R Dire Fleet Poisoner @Ben Maier
+69 C Dusk Charger @Lucas Graciano
+70 C Dusk Legion Zealot @Winona Nelson
+71 C Fathom Fleet Boarder @Sidharth Chaturvedi
+72 U Forerunner of the Coalition @James Ryman
+73 U Golden Demise @Deruchenko Alexander
+74 C Grasping Scoundrel @Steve Prescott
+75 C Gruesome Fate @Even Amundsen
+76 C Impale @Josh Hass
+77 R Mastermind's Acquisition @Svetlin Velinov
+78 U Mausoleum Harpy @Randy Vargas
+79 C Moment of Craving @Steven Belledin
+80 U Oathsworn Vampire @Greg Opalinski
+81 U Pitiless Plunderer @David Palumbo
+82 U Ravenous Chupacabra @Daarken
+83 U Reaver Ambush @Sidharth Chaturvedi
+84 C Recover @Nils Hamm
+85 U Sadistic Skymarcher @Seb McKinnon
+86 R Tetzimoc, Primal Death @Zack Stella
+87 R Tomb Robber @Xi Zhang
+88 M Twilight Prophet @Seb McKinnon
+89 C Vampire Revenant @Nils Hamm
+90 R Vona's Hunger @Zack Stella
+91 C Voracious Vampire @Kieran Yanner
+92 R Blood Sun @Emrah Elmasli
+93 C Bombard @Alex Konstad
+94 R Brass's Bounty @Grzegorz Rutkowski
+95 C Brazen Freebooter @Randy Gallegos
+96 C Buccaneer's Bravado @Bram Sels
+97 U Charging Tuskodon @Izzy
+98 U Daring Buccaneer @Jason Rainville
+99 R Dire Fleet Daredevil @Zoltan Boros
+100 R Etali, Primal Storm @Raymond Swanland
+101 C Fanatical Firebrand @Wayne Reynolds
+102 U Forerunner of the Empire @Dan Scott
+103 R Form of the Dinosaur @Daarken
+104 C Frilled Deathspitter @Zoltan Boros
+105 C Goblin Trailblazer @Josh Hass
+106 C Mutiny @Gabor Szikszai
+107 U Needletooth Raptor @Winona Nelson
+108 C Orazca Raptor @Jakub Kasper
+109 U Pirate's Pillage @Wayne Reynolds
+110 U Reckless Rage @Slawomir Maniak
+111 M Rekindling Phoenix @Jason Rainville
+112 U See Red @Steve Prescott
+113 U Shake the Foundations @Zack Stella
+114 C Shatter @Jonas De Ro
+115 R Silverclad Ferocidons @Simon Dominic
+116 C Stampeding Horncrest @Jonathan Kuo
+117 U Storm Fleet Swashbuckler @Kieran Yanner
+118 C Sun-Collared Raptor @Zoltan Boros
+119 C Swaggering Corsair @Scott Murphy
+120 C Tilonalli's Crown @Suzanne Helmigh
+121 R Tilonalli's Summoner @Lius Lasahido
+122 C Aggressive Urge @Jakub Kasper
+123 U Cacophodon @Johann Bodin
+124 U Cherished Hatchling @Sam Rowan
+125 C Colossal Dreadmaw @Jesper Ejsing
+126 U Crested Herdcaller @Lucas Graciano
+127 R Deeproot Elite @Winona Nelson
+128 U Enter the Unknown @Howard Lyon
+129 U Forerunner of the Heralds @Chris Seaman
+130 R Ghalta, Primal Hunger @Chase Stone
+131 C Giltgrove Stalker @Chris Seaman
+132 C Hardy Veteran @Suzanne Helmigh
+133 C Hunt the Weak @Mathias Kollros
+134 C Jade Bearer @Alex Konstad
+135 C Jadecraft Artisan @Izzy
+136 R Jadelight Ranger @Jason Rainville
+137 C Jungleborn Pioneer @Scott Murphy
+138 C Knight of the Stampede @Steve Argyle
+139 C Naturalize @Simon Dominic
+140 C Orazca Frillback @Simon Dominic
+141 C Overgrown Armasaur @Joseph Meehan
+142 R Path of Discovery @Howard Lyon
+143 C Plummet @Filip Burburan
+144 M Polyraptor @Mark Behm
+145 U Strength of the Pack @Tomasz Jedruszek
+146 U Swift Warden @Viktor Titov
+147 R Tendershoot Dryad @Yongjae Choi
+148 U Thrashing Brontodon @Jakub Kasper
+149 U Thunderherd Migration @Lars Grant-West
+150 R Wayward Swordtooth @Chris Rahn
+151 R World Shaper @Raymond Swanland
+152 M Angrath, the Flame-Chained @Raymond Swanland
+153 U Atzocan Seer @Joseph Meehan
+154 M Azor, the Lawbringer @Ryan Pancoast
+155 U Deadeye Brawler @Jesper Ejsing
+156 U Dire Fleet Neckbreaker @Daarken
+157 M Elenda, the Dusk Rose @Chris Rahn
+158 R Hadana's Climb @Titus Lunter
+159 M Huatli, Radiant Champion @Chris Rahn
+160 R Journey to Eternity @Deruchenko Alexander
+161 U Jungle Creeper @Matt Stewart
+162 M Kumena, Tyrant of Orazca @Tyler Jacobson
+163 U Legion Lieutenant @Zezhou Chen
+164 U Merfolk Mistbinder @Clint Cearley
+165 R Path of Mettle @Victor Adame Minguez
+166 R Profane Procession @Bastien L. Deharme
+167 R Protean Raider @Izzy
+168 U Raging Regisaur @Bayard Wu
+169 U Relentless Raptor @Matt Stewart
+170 U Resplendent Griffin @Sam Rowan
+171 R Siegehorn Ceratops @Filip Burburan
+172 U Storm Fleet Sprinter @G-host Lee
+173 R Storm the Vault @Victor Adame Minguez
+174 M Zacama, Primal Calamity @Jaime Jones
+175 R Awakened Amalgam @Zack Stella
+176 M Azor's Gateway @Yeong-Hao Han
+177 R Captain's Hook @Sara Winters
+178 C Gleaming Barrier @Jason Felix
+179 R Golden Guardian @Svetlin Velinov
+180 M The Immortal Sun @Kieran Yanner
+181 C Orazca Relic @Kieran Yanner
+182 R Silent Gravestone @Suzanne Helmigh
+183 C Strider Harness @Kev Walker
+184 C Traveler's Amulet @Yeong-Hao Han
+185 R Arch of Orazca @Titus Lunter
+186 C Evolving Wilds @Jonas De Ro
+187 U Forsaken Sanctuary @Jonas De Ro
+188 U Foul Orchard @Yeong-Hao Han
+189 U Highland Lake @Noah Bradley
+190 U Stone Quarry @Noah Bradley
+191 U Woodland Stream @James Paick
+192 L Plains @Dimitar Marinski
+193 L Island @Dimitar Marinski
+194 L Swamp @Dimitar Marinski
+195 L Mountain @Dimitar Marinski
+196 L Forest @Dimitar Marinski
+
+[precon product]
+197 M Vraska, Scheming Gorgon @Grzegorz Rutkowski
+198 C Vampire Champion @Craig J Spearing
+199 U Vraska's Conquistador @Sidharth Chaturvedi
+200 R Vraska's Scorn @James Ryman
+201 M Angrath, Minotaur Pirate @Chris Rahn
+202 U Angrath's Ambusher @David Palumbo
+203 C Swab Goblin @Josu Hernaiz
+204 R Angrath's Fury @Lake Hurwitz
+205 C Cinder Barrens @Jonas De Ro
+
+[Basic Lands]
+4 Plains|XLN
+4 Island|XLN
+4 Swamp|XLN
+4 Mountain|XLN
+4 Forest|XLN
+1 Plains|RIX
+1 Island|RIX
+1 Swamp|RIX
+1 Mountain|RIX
+1 Forest|RIX
+
+[tokens]
+w_1_1_vampire_lifelink
+u_1_1_merfolk_hexproof
+r_1_1_elemental
+r_0_1_elemental_rekindling_phoenix
+g_3_3_dinosaur_trample
+g_1_1_saproling
+c_4_4_a_golem
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac

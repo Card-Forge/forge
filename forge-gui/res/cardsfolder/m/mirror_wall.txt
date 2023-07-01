@@ -1,0 +1,9 @@
+Name:Mirror Wall
+ManaCost:3 U
+Types:Creature Wall
+PT:3/4
+K:Defender
+A:AB$ Effect | Cost$ W | StaticAbilities$ CanAttack | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+DeckNeeds:Color$White
+Oracle:Defender (This creature can't attack.)\n{W}: Mirror Wall can attack this turn as though it didn't have defender.

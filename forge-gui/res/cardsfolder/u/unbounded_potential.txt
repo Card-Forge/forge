@@ -1,0 +1,9 @@
+Name:Unbounded Potential
+ManaCost:1 W
+Types:Instant
+K:Entwine:3 W
+A:SP$ Charm | Choices$ DBCounter,DBProliferate
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Counters|Proliferate
+Oracle:Choose one —\n• Put a +1/+1 counter on each of up to two target creatures.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nEntwine {3}{W} (Choose both if you pay the entwine cost.)

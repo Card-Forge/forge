@@ -1,0 +1,6 @@
+Name:Kher Keep
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 1 R T | TokenAmount$ 1 | TokenScript$ kobolds_of_kher_keep | TokenOwner$ You | SpellDescription$ Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
+Oracle:{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.

@@ -1,0 +1,7 @@
+Name:Stronghold Assassin
+ManaCost:1 B B
+Types:Creature Phyrexian Zombie Assassin
+PT:2/1
+A:AB$ Destroy | Cost$ T Sac<1/Creature> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a creature: Destroy target nonblack creature.

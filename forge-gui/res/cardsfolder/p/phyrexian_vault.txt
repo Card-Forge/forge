@@ -1,0 +1,7 @@
+Name:Phyrexian Vault
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:AIPreference:SacCost$Creature.cmcLE2
+AI:RemoveDeck:All
+Oracle:{2}, {T}, Sacrifice a creature: Draw a card.

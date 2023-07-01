@@ -1,0 +1,6 @@
+Name:Shadow Glider
+ManaCost:2 W
+Types:Creature Kor Soldier
+PT:2/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,7 @@
+Name:Renegade Wheelsmith
+ManaCost:1 R W
+Types:Creature Dwarf Pilot
+PT:3/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ Whenever CARDNAME becomes tapped, target creature can't block this turn.
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True
+Oracle:Whenever Renegade Wheelsmith becomes tapped, target creature can't block this turn.

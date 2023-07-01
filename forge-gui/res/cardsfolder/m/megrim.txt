@@ -1,0 +1,6 @@
+Name:Megrim
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent discards a card, CARDNAME deals 2 damage to that player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
+Oracle:Whenever an opponent discards a card, Megrim deals 2 damage to that player.

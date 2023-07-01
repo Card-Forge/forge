@@ -1,0 +1,7 @@
+Name:Glimmering Angel
+ManaCost:3 W
+Types:Creature Angel
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ U | KW$ Shroud | Defined$ Self | SpellDescription$ CARDNAME gains shroud until end of turn.
+Oracle:Flying\n{U}: Glimmering Angel gains shroud until end of turn. (It can't be the target of spells or abilities.)

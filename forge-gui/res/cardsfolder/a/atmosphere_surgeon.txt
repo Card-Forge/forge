@@ -1,0 +1,9 @@
+Name:Atmosphere Surgeon
+ManaCost:1 U
+Types:Creature Phyrexian Wizard
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+A:AB$ Pump | Cost$ SubCounter<1/OIL> | SorcerySpeed$ True | KW$ Flying | ValidTgts$ Creature | SpellDescription$ Target creature gains flying until end of turn. Activate only as a sorcery.
+DeckHas:Keyword$Flying & Ability$Counters
+Oracle:Whenever you cast a noncreature spell, put an oil counter on Atmosphere Surgeon.\nRemove an oil counter from Atmosphere Surgeon: Target creature gains flying until end of turn. Activate only as a sorcery.

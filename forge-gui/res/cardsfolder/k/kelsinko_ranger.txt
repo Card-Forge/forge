@@ -1,0 +1,8 @@
+Name:Kelsinko Ranger
+ManaCost:W
+Types:Creature Human Ranger
+PT:1/1
+A:AB$ Pump | Cost$ 1 W | TgtPrompt$ Choose target green creature | ValidTgts$ Creature.Green | KW$ First Strike | SpellDescription$ Target green creature gains first strike until end of turn.
+AI:RemoveDeck:Random
+DeckHints:Color$Green
+Oracle:{1}{W}: Target green creature gains first strike until end of turn.

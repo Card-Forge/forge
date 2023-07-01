@@ -1,0 +1,7 @@
+Name:Jwar Isle Avenger
+ManaCost:4 U
+Types:Creature Sphinx
+PT:3/3
+K:Surge:2 U
+K:Flying
+Oracle:Surge {2}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nFlying

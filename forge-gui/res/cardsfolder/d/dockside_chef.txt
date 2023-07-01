@@ -1,0 +1,8 @@
+Name:Dockside Chef
+ManaCost:B
+Types:Enchantment Creature Human Citizen
+PT:1/2
+A:AB$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact|Creature
+Oracle:{1}{B}, Sacrifice an artifact or creature: Draw a card.

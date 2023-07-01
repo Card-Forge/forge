@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEG 1 Land: 3 Urborg
+Title=Urborg
+Difficulty=easy
+Description="Resignedly beneath the sky/The melancholy waters lie./So blend the turrets and shadows there/That all seem pendulous in air,/While from a proud tower in town/Death looks gigantically down." -Edgar Allan Poe, "The City in the Sea"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Abomination|LEG
+2 Black Mana Battery|LEG
+4 Cosmic Horror|LEG
+2 Greed|LEG
+4 Hellfire|LEG
+2 Horror of Horrors|LEG
+4 Lost Soul|LEG
+2 Quagmire|LEG
+20 Swamp|LEB|2
+4 Underworld Dreams|LEG
+4 Urborg|LEG
+4 Vampire Bats|LEG
+4 Wall of Shadows|LEG

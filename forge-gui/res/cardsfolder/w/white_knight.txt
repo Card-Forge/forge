@@ -1,0 +1,7 @@
+Name:White Knight
+ManaCost:W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Protection from black
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nProtection from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)

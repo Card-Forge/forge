@@ -1,0 +1,9 @@
+Name:Battlefield Thaumaturge
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+S:Mode$ ReduceCost | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Relative$ True | Type$ Spell | Amount$ ReduceCost | EffectZone$ All | Description$ Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.
+SVar:ReduceCost:TargetedObjectsDistinct$Valid Creature.inZoneBattlefield
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, CARDNAME gains hexproof until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Hexproof
+Oracle:Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.\nHeroic — Whenever you cast a spell that targets Battlefield Thaumaturge, Battlefield Thaumaturge gains hexproof until end of turn.

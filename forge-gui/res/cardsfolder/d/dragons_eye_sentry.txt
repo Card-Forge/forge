@@ -1,0 +1,7 @@
+Name:Dragon's Eye Sentry
+ManaCost:W
+Types:Creature Human Monk
+PT:1/3
+K:Defender
+K:First Strike
+Oracle:Defender, first strike

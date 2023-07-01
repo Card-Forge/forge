@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Swan 2
+Title=Swan
+Difficulty=medium
+Description=Mono G Warrior/Elf hybrid deck with Bramblewood Paragon, Nath's Elite and Winnower Patrol
+Icon=Swan.jpg
+Deck Type=constructed
+[main]
+2 Warren-Scourge Elf
+1 Wren's Run Packmaster
+20 Forest|M12
+2 Epic Proportions
+3 Elvish Promenade
+1 Door of Destinies
+1 Rhys the Exiled
+1 Imperious Perfect
+4 Ambassador Oak
+4 Bramblewood Paragon
+4 Evolving Wilds
+3 Nath's Elite
+4 Elvish Warrior
+4 Winnower Patrol
+2 Lys Alana Huntmaster
+2 Changeling Titan
+2 Deglamer
+[sideboard]

@@ -1,0 +1,11 @@
+Name:Seraph of the Masses
+ManaCost:5 W W
+Types:Creature Angel
+PT:*/*
+K:Convoke
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+SVar:NoZeroToughnessAI:True
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying\nSeraph of the Masses's power and toughness are each equal to the number of creatures you control.

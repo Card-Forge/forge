@@ -1,0 +1,6 @@
+Name:True Believer
+ManaCost:W W
+Types:Creature Human Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
+Oracle:You have shroud. (You can't be the target of spells or abilities.)

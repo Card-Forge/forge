@@ -1,0 +1,8 @@
+Name:Sultai Scavenger
+ManaCost:5 B
+Types:Creature Bird Warrior
+PT:3/3
+K:Delve
+K:Flying
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying

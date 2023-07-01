@@ -1,0 +1,9 @@
+Name:Mardu Dash|Deck:Mardu Dash.dck|Variant:None|Avatar:Mardu Shadowspear|Desc:
+Name:Mardu Raid|Deck:Mardu Raid.dck|Variant:None|Avatar:Mardu Heart-Piercer|Desc:
+Name:Alesha, Who Smiles at Death|Deck:Alesha, Who Smiles at Death.dck|Variant:Commander|Avatar:Alesha, Who Smiles at Death|Desc:
+Name:Dragonlord Kolaghan|Deck:Dragonlord Kolaghan.dck|Variant:Commander|Avatar:Dragonlord Kolaghan|Desc:
+Name:Kolaghan, the Storm's Fury|Deck:Kolaghan, the Storm's Fury.dck|Variant:Commander|Avatar:Kolaghan, the Storm's Fury|Desc:
+Name:Zurgo Bellstriker|Deck:Zurgo Bellstriker.dck|Variant:Commander|Avatar:Zurgo Bellstriker|Desc:
+Name:Zurgo Helmsmasher|Deck:Zurgo Helmsmasher.dck|Variant:Commander|Avatar:Zurgo Helmsmasher|Desc:
+Name:Tahngarth|Deck:Tahngarth.dck|Variant:Vanguard|Avatar:Tahngarth|Desc:
+Name:Sarkhan, the Dragonspeaker|Deck:Sarkhan, the Dragonspeaker.dck|Variant:Planeswalker|Avatar:Sarkhan, the Dragonspeaker|Desc:

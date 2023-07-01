@@ -1,0 +1,8 @@
+Name:Shield of Kaldra
+ManaCost:4
+Types:Legendary Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Indestructible | Description$ Equipped creature has indestructible.
+S:Mode$ Continuous | Affected$ Equipment.namedSword of Kaldra,Equipment.namedShield of Kaldra,Equipment.namedHelm of Kaldra | AddKeyword$ Indestructible | Description$ Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra have indestructible.
+DeckHints:Name$Sword of Kaldra|Helm of Kaldra
+Oracle:Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra have indestructible.\nEquipped creature has indestructible. (Damage and effects that say "destroy" don't destroy it.)\nEquip {4}

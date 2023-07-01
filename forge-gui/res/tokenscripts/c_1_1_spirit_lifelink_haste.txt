@@ -1,0 +1,7 @@
+Name:Spirit Token
+ManaCost:no cost
+Types:Creature Spirit
+PT:1/1
+K:Lifelink
+K:Haste
+Oracle:Lifelink\nHaste

@@ -1,0 +1,8 @@
+Name:Su-Chi
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerDescription$ When CARDNAME dies, add {C}{C}{C}{C}.
+SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ 4
+SVar:SacMe:4
+Oracle:When Su-Chi dies, add {C}{C}{C}{C}.

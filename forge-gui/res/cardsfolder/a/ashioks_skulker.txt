@@ -1,0 +1,7 @@
+Name:Ashiok's Skulker
+ManaCost:4 U
+Types:Creature Nightmare
+PT:3/5
+A:AB$ Effect | Cost$ 3 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:{3}{U}: Ashiok's Skulker can't be blocked this turn.

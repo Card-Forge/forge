@@ -1,0 +1,9 @@
+Name:Goblin Razerunners
+ManaCost:2 R R
+Types:Creature Goblin Warrior
+PT:3/4
+A:AB$ PutCounter | Cost$ 1 R Sac<1/Land> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may have CARDNAME deal damage equal to the number of +1/+1 counters on it to target player or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player, Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
+SVar:X:Count$CardCounters.P1P1
+Oracle:{1}{R}, Sacrifice a land: Put a +1/+1 counter on Goblin Razerunners.\nAt the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player or planeswalker.

@@ -1,0 +1,8 @@
+Name:Spitting Spider
+ManaCost:3 G G
+Types:Creature Spider
+PT:3/5
+K:Reach
+A:AB$ DamageAll | Cost$ Sac<1/Land> | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidDescription$ each creature and with flying. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
+AI:RemoveDeck:All
+Oracle:Reach (This creature can block creatures with flying.)\nSacrifice a land: Spitting Spider deals 1 damage to each creature with flying.

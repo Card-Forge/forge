@@ -1,0 +1,7 @@
+Name:Keeper of the Nine Gales
+ManaCost:2 U
+Types:Creature Bird Wizard
+PT:1/2
+K:Flying
+A:AB$ ChangeZone | Cost$ T tapXType<2/Bird> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | AILogic$ AtOppEOT | SpellDescription$ Return target permanent to its owner's hand.
+Oracle:Flying\n{T}, Tap two untapped Birds you control: Return target permanent to its owner's hand.

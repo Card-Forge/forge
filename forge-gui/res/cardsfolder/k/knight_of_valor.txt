@@ -1,0 +1,7 @@
+Name:Knight of Valor
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.withoutFlanking+blockingSource | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | ActivationLimit$ 1 | SpellDescription$ Each creature without flanking blocking CARDNAME gets -1/-1 until end of turn. Activate only once each turn.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}: Each creature without flanking blocking Knight of Valor gets -1/-1 until end of turn. Activate only once each turn.

@@ -1,0 +1,6 @@
+Name:Dragonspeaker Shaman
+ManaCost:1 R R
+Types:Creature Human Barbarian Shaman
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Dragon | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Dragon spells you cast cost {2} less to cast.
+Oracle:Dragon spells you cast cost {2} less to cast.

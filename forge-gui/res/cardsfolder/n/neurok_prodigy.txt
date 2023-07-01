@@ -1,0 +1,7 @@
+Name:Neurok Prodigy
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ Discard<1/Artifact> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying\nDiscard an artifact card: Return Neurok Prodigy to its owner's hand.

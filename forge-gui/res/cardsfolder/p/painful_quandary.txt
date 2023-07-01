@@ -1,0 +1,6 @@
+Name:Painful Quandary
+ManaCost:3 B B
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 5 | UnlessCost$ Discard<1/Card> | UnlessPayer$ TriggeredCardController
+Oracle:Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.

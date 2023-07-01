@@ -1,0 +1,6 @@
+Name:Mirage Mirror
+ManaCost:3
+Types:Artifact
+A:AB$ Clone | Cost$ 2 | ValidTgts$ Artifact,Creature,Enchantment,Land | TgtPrompt$ Select target artifact, creature, enchantment, or land. | Duration$ UntilEndOfTurn | SpellDescription$ CARDNAME becomes a copy of target artifact, creature, enchantment, or land until end of turn.
+AI:RemoveDeck:All
+Oracle:{2}: Mirage Mirror becomes a copy of target artifact, creature, enchantment, or land until end of turn.

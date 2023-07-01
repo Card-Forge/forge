@@ -1,0 +1,9 @@
+Name:Peregrine Drake
+ManaCost:4 U
+Types:Creature Drake
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to five lands.
+SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 5
+SVar:FreeSpellAI:True
+Oracle:Flying\nWhen Peregrine Drake enters the battlefield, untap up to five lands.

@@ -1,0 +1,37 @@
+[quest]
+id=5009
+OpponentName=Phoebe
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=3 rares;33% 1 black rare;33% 1 white rare;33% Thoughtseize|LRW
+Credit Reward=250
+HumanExtras=
+AIExtras=Glorious Anthem
+
+[metadata]
+Name=quest5009
+Title=Phoebe
+Difficulty=hard
+Description=There is no safety in the light or dark.
+Icon=Phoebe.jpg
+Deck Type=constructed
+
+[Main]
+2 Austere Command|LRW
+4 Beckon Apparition|EVE
+2 Deathbringer Liege|EVE
+4 Divinity of Pride|EVE
+4 Edge of the Divinity|EVE
+4 Knight of Meadowgrain|LRW
+2 Light from Within|EVE
+4 Nip Gwyllion|EVE
+12 Plains|SHM
+2 Profane Command|LRW
+12 Swamp|SHM
+4 Thoughtseize|LRW
+4 Unmake|EVE
+
+[sideboard]
+[planes]
+[schemes]

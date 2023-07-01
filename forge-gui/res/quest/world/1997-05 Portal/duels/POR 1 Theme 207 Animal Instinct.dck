@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 207: Animal Instinct
+Title=Animal Instinct
+Difficulty=easy
+Description=Don't worry about provoking grizzly bears; they come that way.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Anaconda|POR|2
+2 Bull Hippo|POR
+4 Charging Rhino|POR
+16 Forest|POR|2
+4 Gorilla Warrior|POR
+4 Grizzly Bears|POR
+4 Jungle Lion|POR
+4 Monstrous Growth|POR|2
+8 Mountain|POR|3
+4 Mountain Goat|POR
+4 Raging Cougar|POR
+4 Stalking Tiger|POR

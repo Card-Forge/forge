@@ -1,0 +1,41 @@
+[quest]
+id=16
+AILife=30
+Repeat=false
+Wins=52
+Card Reward=4 green rares
+Credit Reward=250
+HumanExtras=Dwarven Demolition Team|Dwarven Pony|Dwarven Trader
+AIExtras=Wall of Earth|Wall of Air|Wall of Ice|Wall of Light|Carrion Wall|Steel Wall
+[metadata]
+Name=quest16
+Title=Mines of Kazum Durl
+Difficulty=hard
+Description=While exploring a mine with a group of dwarves the mine caves in. You start to dig out and then realize that your group is not alone.
+Icon=Mines of Kazum Durl.jpg
+Deck Type=constructed
+[main]
+1 Proper Burial
+2 Disenchant
+1 Mox Emerald
+4 Sporesower Thallid
+2 Psychotrope Thallid
+5 Plains|M12
+4 Graypelt Refuge
+2 Mycoloth
+4 Sunpetal Grove
+2 Rampant Growth
+1 Enlightened Tutor
+4 Mycologist
+2 Kodama's Reach
+5 Forest|M12
+4 Thallid
+1 Mox Pearl
+1 Desert Twister
+1 Exploration
+4 Pallid Mycoderm
+2 Defense of the Heart
+4 Savannah
+1 Doubling Season
+3 Thelonite Hermit
+[sideboard]

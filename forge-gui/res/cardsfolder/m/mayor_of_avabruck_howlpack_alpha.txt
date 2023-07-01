@@ -1,0 +1,23 @@
+Name:Mayor of Avabruck
+ManaCost:1 G
+Types:Creature Human Advisor Werewolf
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Human+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Human creatures you control get +1/+1.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Other Human creatures you control get +1/+1.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
+
+ALTERNATE
+
+Name:Howlpack Alpha
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Werewolf+Other+YouCtrl,Creature.Wolf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Each other creature you control that's a Werewolf or a Wolf gets +1/+1.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 2/2 green Wolf creature token.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
+Oracle:Each other creature you control that's a Werewolf or a Wolf gets +1/+1.\nAt the beginning of your end step, create a 2/2 green Wolf creature token.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.

@@ -1,0 +1,8 @@
+Name:Dauntless River Marshal
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Island.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an Island.
+SVar:BuffedBy:Island
+A:AB$ Tap | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+Oracle:Dauntless River Marshal gets +1/+1 as long as you control an Island.\n{3}{U}: Tap target creature.

@@ -1,0 +1,8 @@
+Name:Blade Historian
+ManaCost:RW RW RW RW
+Types:Creature Human Cleric
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ Double Strike | Description$ Attacking creatures you control have double strike.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Attacking creatures you control have double strike.

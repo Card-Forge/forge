@@ -1,0 +1,7 @@
+Name:Drill-Skimmer
+ManaCost:4
+Types:Artifact Creature Thopter
+PT:2/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shroud | IsPresent$ Creature.Artifact+Other+YouCtrl | Description$ CARDNAME has shroud as long as you control another artifact creature. (It can't be the target of spells or abilities.)
+Oracle:Flying\nDrill-Skimmer has shroud as long as you control another artifact creature. (It can't be the target of spells or abilities.)

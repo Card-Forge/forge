@@ -1,0 +1,9 @@
+Name:Leyline of the Meek
+ManaCost:2 W W
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ Continuous | Affected$ Creature.token | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens get +1/+1.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:If Leyline of the Meek is in your opening hand, you may begin the game with it on the battlefield.\nCreature tokens get +1/+1.

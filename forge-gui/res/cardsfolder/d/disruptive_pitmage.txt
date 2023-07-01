@@ -1,0 +1,8 @@
+Name:Disruptive Pitmage
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+K:Morph:U
+SVar:NonCombatPriority:5
+Oracle:{T}: Counter target spell unless its controller pays {1}.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

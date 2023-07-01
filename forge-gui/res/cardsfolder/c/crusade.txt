@@ -1,0 +1,9 @@
+Name:Crusade
+ManaCost:W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | Description$ White creatures get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlayVar:CountOpps LTCountMe
+SVar:CountOpps:Count$Valid Creature.OppCtrl+White/LimitMax.5
+SVar:CountMe:Count$Valid Creature.YouCtrl+White
+Oracle:White creatures get +1/+1.

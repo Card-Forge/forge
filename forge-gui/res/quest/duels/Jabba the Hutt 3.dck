@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Jabba the Hutt 3
+Title=Jabba the Hutt
+Difficulty=hard
+Description=UB Infect deck
+Icon=Jabba the Hutt.jpg
+Deck Type=constructed
+[main]
+2 Bonesplitter
+3 Hand of the Praetors
+3 Ichorclaw Myr
+3 Necropede
+3 Plague Stinger
+4 Phyrexian Crusader
+3 Phyrexian Vatmother
+2 Doom Blade
+3 Counterspell
+3 Corrupted Conscience
+3 Despise
+4 Blighted Agent
+5 Island|M12
+7 Swamp|M12
+4 Darkslick Shores
+4 Drowned Catacomb
+4 Inkmoth Nexus
+[sideboard]

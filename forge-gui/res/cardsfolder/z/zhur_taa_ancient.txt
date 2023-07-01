@@ -1,0 +1,7 @@
+Name:Zhur-Taa Ancient
+ManaCost:3 R G
+Types:Creature Beast
+PT:7/5
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+Oracle:Whenever a player taps a land for mana, that player adds one mana of any type that land produced.

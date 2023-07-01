@@ -1,0 +1,10 @@
+Name:Starlit Sanctum
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ GainLife | Cost$ W T Sac<1/Creature.Cleric/Cleric creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+SVar:X:Sacrificed$CardToughness
+A:AB$ LoseLife | Cost$ B T Sac<1/Creature.Cleric/Cleric creature> | ValidTgts$ Player | LifeAmount$ Y | TgtPrompt$ Select a player | SpellDescription$ Target player loses life equal to the sacrificed creature's power.
+SVar:Y:Sacrificed$CardPower
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{W}, {T}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.\n{B}, {T}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.

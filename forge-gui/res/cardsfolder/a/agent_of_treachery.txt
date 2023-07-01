@@ -1,0 +1,10 @@
+Name:Agent of Treachery
+ManaCost:5 U U
+Types:Creature Human Rogue
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target permanent.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | IsPresent$ Permanent.YouDontOwn+YouCtrl | PresentCompare$ GE3 | TriggerDescription$ At the beginning of your end step, if you control three or more permanents you don't own, draw three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
+SVar:PlayMain1:TRUE
+Oracle:When Agent of Treachery enters the battlefield, gain control of target permanent.\nAt the beginning of your end step, if you control three or more permanents you don't own, draw three cards.

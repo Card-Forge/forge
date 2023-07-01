@@ -1,0 +1,11 @@
+Name:Xander's Pact
+ManaCost:4 B B
+Types:Sorcery
+K:Casualty:2
+A:SP$ Dig | Defined$ Opponent | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles the top card of their library.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | SpellDescription$ You may cast spells from among those cards this turn. If you cast a spell this way, pay life equal to that spell's mana value rather than pay its mana cost.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ You may cast spells from among those cards this turn. If you cast a spell this way, pay life equal to that spell's mana value rather than pay its mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
+SVar:AIPreference:SacCost$Creature.token+powerEQ2,Creature.powerEQ2
+Oracle:Casualty 2 (As you cast this spell, you may sacrifice a creature with power 2 or greater. When you do, copy this spell.)\nEach opponent exiles the top card of their library. You may cast spells from among those cards this turn. If you cast a spell this way, pay life equal to that spell's mana value rather than pay its mana cost.

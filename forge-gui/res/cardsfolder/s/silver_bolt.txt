@@ -1,0 +1,7 @@
+Name:Silver Bolt
+ManaCost:1
+Types:Artifact
+A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | RememberDamaged$ True | SubAbility$ DBDestroy | StackDescription$ CARDNAME deals 3 damage to {c:Targeted}. | SpellDescription$ CARDNAME deals 3 damage to target creature. If a Werewolf is dealt damage this way, destroy it.
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Creature.Werewolf | SubAbility$ DBCleanup | StackDescription$ If a Werewolf is dealt damage this way, destroy it.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{3}, {T}, Sacrifice Silver Bolt: It deals 3 damage to target creature. If a Werewolf is dealt damage this way, destroy it.

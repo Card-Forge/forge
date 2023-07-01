@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Hobbes 4
+Title=Hobbes
+Difficulty=very hard
+Description=UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba
+Icon=Hobbes.jpg
+Deck Type=constructed
+[main]
+1 Mox Emerald
+1 Mox Sapphire
+4 Tropical Island
+4 Flooded Strand
+4 Polluted Delta
+1 Scalding Tarn
+4 Bazaar of Baghdad
+2 Forest|M11
+3 Hermit Druid
+3 Careful Study
+4 Mental Note
+4 Narcomoeba
+4 Bridge from Below
+4 Ichorid
+4 Bloodghast
+4 Golgari Grave-Troll
+4 Stinkweed Imp
+1 Dread Return
+1 Darkblast
+1 Life from the Loam
+1 Wonder
+1 Brawn
+[sideboard]

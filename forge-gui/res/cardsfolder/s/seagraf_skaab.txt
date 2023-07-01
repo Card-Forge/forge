@@ -1,0 +1,5 @@
+Name:Seagraf Skaab
+ManaCost:1 U
+Types:Creature Zombie
+PT:1/3
+Oracle:

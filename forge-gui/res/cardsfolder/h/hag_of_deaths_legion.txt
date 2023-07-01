@@ -1,0 +1,8 @@
+Name:Hag of Death's Legion
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 black Skeleton creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_skeleton
+DeckHas:Ability$Token & Type$Skeleton
+Oracle:At the beginning of your upkeep, create a 1/1 black Skeleton creature token.

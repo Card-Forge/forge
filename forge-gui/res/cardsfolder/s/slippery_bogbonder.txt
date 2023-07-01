@@ -1,0 +1,10 @@
+Name:Slippery Bogbonder
+ManaCost:3 G
+Types:Creature Human Druid
+PT:3/3
+K:Flash
+K:Hexproof
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a hexproof counter on target creature. Then move any number of counters from among creatures you control onto that creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Hexproof | CounterNum$ 1 | SubAbility$ MoveAllCounter
+SVar:MoveAllCounter:DB$ MoveCounter | ValidSource$ Creature.YouCtrl | CounterType$ All | CounterNum$ Any | Defined$ Targeted
+Oracle:Flash\nHexproof\nWhen Slippery Bogbonder enters the battlefield, put a hexproof counter on target creature. Then move any number of counters from among creatures you control onto that creature.

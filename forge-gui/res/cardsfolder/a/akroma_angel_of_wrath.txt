@@ -1,0 +1,12 @@
+Name:Akroma, Angel of Wrath
+ManaCost:5 W W W
+Types:Legendary Creature Angel
+PT:6/6
+K:Flying
+K:Vigilance
+K:First Strike
+K:Trample
+K:Haste
+K:Protection from red
+K:Protection from black
+Oracle:Flying, first strike, vigilance, trample, haste, protection from black and from red

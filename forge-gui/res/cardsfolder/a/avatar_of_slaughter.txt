@@ -1,0 +1,7 @@
+Name:Avatar of Slaughter
+ManaCost:6 R R
+Types:Creature Avatar
+PT:8/8
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Double Strike | Description$ All creatures have double strike and attack each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Creature | Secondary$ True
+Oracle:All creatures have double strike and attack each combat if able.

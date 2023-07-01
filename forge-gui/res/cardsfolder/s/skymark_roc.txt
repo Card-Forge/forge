@@ -1,0 +1,8 @@
+Name:Skymark Roc
+ManaCost:2 W U
+Types:Creature Bird
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.toughnessLE2+ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Choose creature defending player controls with toughness 2 or less | Origin$ Battlefield | Destination$ Hand
+Oracle:Flying\nWhenever Skymark Roc attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.

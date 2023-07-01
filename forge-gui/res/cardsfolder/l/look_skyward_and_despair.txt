@@ -1,0 +1,6 @@
+Name:Look Skyward and Despair
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a 5/5 red Dragon creature token with flying.
+SVar:DarkEffect:DB$ Token | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You
+Oracle:When you set this scheme in motion, create a 5/5 red Dragon creature token with flying.

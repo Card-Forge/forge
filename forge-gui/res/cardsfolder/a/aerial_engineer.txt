@@ -1,0 +1,8 @@
+Name:Aerial Engineer
+ManaCost:2 W U
+Types:Creature Human Artificer
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Flying | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, CARDNAME gets +2/+0 and has flying.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:As long as you control an artifact, Aerial Engineer gets +2/+0 and has flying.

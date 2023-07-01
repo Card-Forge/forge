@@ -1,0 +1,8 @@
+Name:Proper Burial
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever a creature you control dies, you gain life equal to that creature's toughness.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredCard$CardToughness
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control dies, you gain life equal to that creature's toughness.

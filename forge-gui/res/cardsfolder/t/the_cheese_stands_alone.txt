@@ -1,0 +1,6 @@
+Name:The Cheese Stands Alone
+ManaCost:4 W W
+Types:Enchantment
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Other | PresentZone$ Battlefield | PresentPlayer$ You | PresentCompare$ EQ0 | IsPresent2$ Card | PresentZone2$ Hand | PresentPlayer2$ You | PresentCompare2$ EQ0 | Execute$ TrigWin | TriggerDescription$ When you control no permanents other than CARDNAME and have no cards in hand, you win the game.
+SVar:TrigWin:DB$ WinsGame | Defined$ You
+Oracle:When you control no permanents other than The Cheese Stands Alone and have no cards in hand, you win the game.

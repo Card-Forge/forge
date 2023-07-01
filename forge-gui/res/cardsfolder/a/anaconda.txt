@@ -1,0 +1,6 @@
+Name:Anaconda
+ManaCost:3 G
+Types:Creature Snake
+PT:3/3
+K:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

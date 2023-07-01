@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Guybrush Threepwood 1
+Title=Guybrush Threepwood
+Difficulty=easy
+Description=UB Ixalan Pirates deck with Treasure tokens and Revel in Riches
+Icon=Guybrush Threepwood.jpg
+Deck Type=constructed
+[main]
+1 Captain's Hook|RIX
+4 Deadeye Tracker|XLN
+2 Depths of Desire|XLN
+2 Dire Fleet Hoarder|XLN
+2 Dire Fleet Interloper|XLN
+4 Dragonskull Summit|XLN
+4 Drowned Catacomb|XLN
+1 Dusk Legion Dreadnought|XLN
+2 Fathom Fleet Captain|XLN
+1 Fell Flagship|XLN
+4 Highland Lake|RIX
+1 Island|RIX
+2 Island|XLN
+1 Mountain|RIX
+1 Pirate's Cutlass|XLN
+3 Pitiless Plunderer|RIX
+4 Prosperous Pirates|XLN
+2 Prying Blade|XLN
+2 Revel in Riches|XLN
+4 Sailor of Means|RIX
+1 Sleek Schooner|XLN
+1 Swamp|RIX
+2 Swamp|XLN
+3 Treasure Map|XLN
+4 Unclaimed Territory|XLN
+2 Warkite Marauder|RIX
+[sideboard]

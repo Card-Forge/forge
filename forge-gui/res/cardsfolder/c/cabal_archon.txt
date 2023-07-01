@@ -1,0 +1,7 @@
+Name:Cabal Archon
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ LoseLife | Cost$ B Sac<1/Cleric> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:{B}, Sacrifice a Cleric: Target player loses 2 life and you gain 2 life.

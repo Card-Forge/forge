@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Will Of The Masses
+Description=The masses have spoken, and that spells doom for your opponent. With the convoke mechanic, your creatures become a resource that enable you to bring out even bigger creatures faster.
+Deck Type=constructed
+Set=M15
+Image=will_of_the_masses.jpg
+[Main]
+2 Selfless Cathar|M15
+1 Wall of Mulch|M15
+2 Oreskos Swiftclaw|M15
+2 Midnight Guard|M15
+2 Siege Wurm|M15
+1 Hornet Queen|M15
+1 Overwhelm|M15
+1 Gather Courage|M15
+1 Naturalize|M15
+1 Titanic Growth|M15
+3 Raise the Alarm|M15
+2 Devouring Light|M15
+2 Sunblade Elf|M15
+2 Living Totem|M15
+2 Will-Forged Golem|M15
+1 Phytotitan+|M15
+2 Seraph of the Masses|M15
+1 Nissa's Expedition|M15
+1 Sanctified Charge|M15
+1 Meditation Puzzle|M15
+2 Triplicate Spirits|M15
+2 Feral Incarnation|M15
+13 Forest|M15
+12 Plains|M15

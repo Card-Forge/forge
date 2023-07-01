@@ -1,0 +1,7 @@
+Name:Blood Vassal
+ManaCost:2 B
+Types:Creature Thrull
+PT:2/2
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescription$ Add {B}{B}.
+AI:RemoveDeck:All
+Oracle:Sacrifice Blood Vassal: Add {B}{B}.

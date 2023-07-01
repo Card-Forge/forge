@@ -1,0 +1,7 @@
+Name:Grotag Siege-Runner
+ManaCost:1 R
+Types:Creature Goblin Rogue
+PT:2/1
+A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender | SubAbility$ DBDealDamage | SpellDescription$ Destroy target creature with defender. CARDNAME deals 2 damage to that creature's controller.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TargetedController
+Oracle:{R}, Sacrifice Grotag Siege-Runner: Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.

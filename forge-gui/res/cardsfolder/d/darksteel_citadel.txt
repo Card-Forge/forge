@@ -1,0 +1,6 @@
+Name:Darksteel Citadel
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+K:Indestructible
+Oracle:Indestructible\n{T}: Add {C}.

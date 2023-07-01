@@ -1,0 +1,9 @@
+Name:Vampire Nocturnus
+ManaCost:1 B B B
+Types:Creature Vampire
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl,Card.Self | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Flying | TopCardOfLibraryIs$ Card.Black | Description$ As long as the top card of your library is black, CARDNAME and other Vampire creatures you control get +2/+1 and have flying.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Vampire
+Oracle:Play with the top card of your library revealed.\nAs long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.

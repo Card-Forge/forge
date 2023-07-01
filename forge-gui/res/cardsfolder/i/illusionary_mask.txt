@@ -1,0 +1,7 @@
+Name:Illusionary Mask
+ManaCost:2
+Types:Artifact
+A:AB$ Play | Cost$ X | Valid$ Card.Creature+YouOwn+CanPayManaCost | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | CastFaceDown$ True | ReplaceIlluMask$ True | SorcerySpeed$ True | SpellDescription$ You may choose a creature card in your hand whose mana cost could be paid by some amount of, or all of, the mana you spent on {X}. If you do, you may cast that card face down as a 2/2 creature spell without paying its mana cost. If the creature that spell becomes as it resolves has not been turned face up and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up and assigns or deals damage, is dealt damage, or becomes tapped. Activate only as a sorcery.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}: You may choose a creature card in your hand whose mana cost could be paid by some amount of, or all of, the mana you spent on {X}. If you do, you may cast that card face down as a 2/2 creature spell without paying its mana cost. If the creature that spell becomes as it resolves has not been turned face up and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up and assigns or deals damage, is dealt damage, or becomes tapped. Activate only as a sorcery.

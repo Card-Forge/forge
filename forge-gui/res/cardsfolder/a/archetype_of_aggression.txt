@@ -1,0 +1,8 @@
+Name:Archetype of Aggression
+ManaCost:1 R R
+Types:Enchantment Creature Human Warrior
+PT:3/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Trample | CantHaveKeyword$ Trample | Description$ Creatures your opponents control lose trample and can't have or gain trample.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have trample.\nCreatures your opponents control lose trample and can't have or gain trample.

@@ -1,0 +1,13 @@
+Name:Parhelion II
+ManaCost:6 W W
+Types:Legendary Artifact Vehicle
+PT:5/5
+K:Flying
+K:First Strike
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+K:Crew:4
+DeckHas:Ability$Token
+Oracle:Flying, first strike, vigilance\nWhenever Parhelion II attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)

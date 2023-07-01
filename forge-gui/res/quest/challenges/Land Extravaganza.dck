@@ -1,0 +1,44 @@
+[quest]
+id=31
+AILife=20
+Repeat=true
+Wins=24
+Card Reward=3 land rares
+Credit Reward=200
+HumanExtras=
+AIExtras=Choke|Monsoon|Scald|Thoughtleech|Lifeblood|Sanctimony|Lifetap|Karma|Naked Singularity|Thran Dynamo|Thran Dynamo|Thran Dynamo|Thran Dynamo|Thran Dynamo
+[metadata]
+Name=quest31
+Title=Land Extravaganza
+Difficulty=hard
+Description=Lands with basic land types are frowned upon here
+Icon=Land Extravaganza.jpg
+Deck Type=constructed
+[main]
+2 Frontier Bivouac
+2 Mystic Monastery
+2 Nomad Outpost
+2 Opulent Palace
+2 Sandsteppe Citadel
+2 Arcane Sanctum
+2 Crumbling Necropolis
+2 Jungle Shrine
+2 Savage Lands
+2 Seaside Citadel
+4 Bant Sureblade
+4 Esper Stormblade
+4 Grixis Grimblade
+4 Jund Hackblade
+4 Naya Hushblade
+2 Boros Recruit
+2 Dryad Militant
+2 Figure of Destiny
+1 Nip Gwyllion
+2 Oona's Gatewarden
+2 Rakdos Cackler
+2 Scar
+2 Scuzzback Scrapper
+2 Slitherhead
+2 Tattermunge Maniac
+1 Beckon Apparition
+[sideboard]

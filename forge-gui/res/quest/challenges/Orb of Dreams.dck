@@ -1,0 +1,29 @@
+[quest]
+id=30
+AILife=20
+Repeat=true
+Wins=16
+Card Reward=3 black rares
+Credit Reward=500
+HumanExtras=Orb of Dreams
+AIExtras=Orb of Dreams|Orb of Dreams
+[metadata]
+Name=quest30
+Title=Orb of Dreams
+Difficulty=medium
+Description=Somehow everything seems to move sluggishly here
+Icon=Orb of Dreams.jpg
+Deck Type=constructed
+[main]
+24 Swamp|SOM
+1 Amulet of Vigor
+4 Meekstone
+4 Juntu Stakes
+4 Carrion Crow
+4 Diregraf Ghoul
+4 Tormented Hero
+4 Mardu Skullhunter
+3 Guardian Beast
+4 Death Stroke
+4 Assassinate
+[sideboard]

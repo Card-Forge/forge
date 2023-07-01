@@ -1,0 +1,7 @@
+Name:Alaborn Cavalier
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Whenever Alaborn Cavalier attacks, you may tap target creature.

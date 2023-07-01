@@ -1,0 +1,18 @@
+[metadata]
+Code=PRW2
+Date=2019-02-16
+Name=RNA Ravnica Weekend
+Type=Promo
+ScryfallCode=PRW2
+
+[cards]
+B01 C Plains @Alayna Danner
+B02 C Island @Alayna Danner
+B03 C Plains @Ravenna Tran
+B04 C Swamp @Ravenna Tran
+B05 C Swamp @Dimitar Marinski
+B06 C Mountain @Dimitar Marinski
+B07 C Mountain @James Paick
+B08 C Forest @James Paick
+B09 C Forest @Yeong-Hao Han
+B10 C Island @Yeong-Hao Han

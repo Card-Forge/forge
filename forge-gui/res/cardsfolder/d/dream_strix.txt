@@ -1,0 +1,11 @@
+Name:Dream Strix
+ManaCost:2 U
+Types:Creature Bird Illusion
+PT:3/2
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice | ValidCard$ Card.Self
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLearn | TriggerDescription$ When CARDNAME dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+SVar:TrigLearn:DB$ Learn
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nWhen Dream Strix becomes the target of a spell, sacrifice it.\nWhen Dream Strix dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

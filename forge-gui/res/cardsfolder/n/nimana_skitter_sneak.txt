@@ -1,0 +1,7 @@
+Name:Nimana Skitter-Sneak
+ManaCost:3 B
+Types:Creature Human Rogue
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE8 | Description$ As long as an opponent has eight or more cards in their graveyard, CARDNAME gets +1/+0 and has menace.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+Oracle:As long as an opponent has eight or more cards in their graveyard, Nimana Skitter-Sneak gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)

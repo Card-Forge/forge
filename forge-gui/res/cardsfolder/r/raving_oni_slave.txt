@@ -1,0 +1,9 @@
+Name:Raving Oni-Slave
+ManaCost:1 B
+Types:Creature Ogre Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters or leaves the battlefield, you lose 3 life if you don't control a Demon.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, you lose 3 life if you don't control a Demon.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0
+AI:RemoveDeck:Random
+Oracle:When Raving Oni-Slave enters or leaves the battlefield, you lose 3 life if you don't control a Demon.

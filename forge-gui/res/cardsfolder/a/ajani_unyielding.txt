@@ -1,0 +1,13 @@
+Name:Ajani Unyielding
+ManaCost:4 G W
+Types:Legendary Planeswalker Ajani
+Loyalty:4
+A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Permanent.nonLand | SpellDescription$ Reveal the top three cards of your library. Put all nonland permanent cards revealed this way into your hand and the rest on the bottom of your library in any order.
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | RememberLKI$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup | SpellDescription$ Its controller gains life equal to its power.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardPower
+A:AB$ PutCounterAll | Cost$ SubCounter<9/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 5 | Planeswalker$ True | Ultimate$ True | ValidCards2$ Planeswalker.YouCtrl+StrictlyOther | CounterType2$ LOYALTY | AILogic$ OwnCreatsAndOtherPWs | SpellDescription$ Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
+DeckHas:Ability$Counters
+DeckHints:Type$Planeswalker
+Oracle:[+2]: Reveal the top three cards of your library. Put all nonland permanent cards revealed this way into your hand and the rest on the bottom of your library in any order.\n[-2]: Exile target creature. Its controller gains life equal to its power.\n[-9]: Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.

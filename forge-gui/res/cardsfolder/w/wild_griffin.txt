@@ -1,0 +1,6 @@
+Name:Wild Griffin
+ManaCost:2 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+Oracle:Flying

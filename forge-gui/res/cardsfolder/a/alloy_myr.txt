@@ -1,0 +1,6 @@
+Name:Alloy Myr
+ManaCost:3
+Types:Artifact Creature Myr
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

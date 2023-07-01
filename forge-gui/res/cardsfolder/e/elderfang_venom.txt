@@ -1,0 +1,10 @@
+Name:Elderfang Venom
+ManaCost:2 B G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Elf.attacking+YouCtrl | AddKeyword$ Deathtouch | Description$ Attacking Elves you control have deathtouch.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elf.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an Elf you control dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHints:Type$Elf
+DeckHas:Ability$LifeGain
+Oracle:Attacking Elves you control have deathtouch.\nWhenever an Elf you control dies, each opponent loses 1 life and you gain 1 life.

@@ -1,0 +1,8 @@
+Name:Hobgoblin Captain
+ManaCost:1 R
+Types:Creature Goblin Barbarian
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, CARDNAME gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike
+SVar:PackTactics:Count$SumPower_Creature.attacking
+Oracle:Pack tactics — Whenever Hobgoblin Captain attacks, if you attacked with creatures with total power 6 or greater this combat, Hobgoblin Captain gains first strike until end of turn.

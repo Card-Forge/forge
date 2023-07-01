@@ -1,0 +1,7 @@
+Name:Tend the Pests
+ManaCost:B G
+Types:Instant
+A:SP$ Token | Cost$ B G Sac<1/Creature> | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | TokenAmount$ X | SpellDescription$ Create X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Token
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nCreate X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.

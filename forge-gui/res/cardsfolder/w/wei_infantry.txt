@@ -1,0 +1,5 @@
+Name:Wei Infantry
+ManaCost:1 B
+Types:Creature Human Soldier
+PT:2/1
+Oracle:

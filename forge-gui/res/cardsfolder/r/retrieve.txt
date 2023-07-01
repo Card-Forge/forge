@@ -1,0 +1,7 @@
+Name:Retrieve
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target creature card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouOwn | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Return up to one target creature card
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land.YouOwn | TgtPrompt$ Select up to one target noncreature permanent card in your graveyard | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ and up to one target noncreature permanent card
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ SpellDescription | SpellDescription$ to your hand. Exile CARDNAME.
+Oracle:Return up to one target creature card and up to one target noncreature permanent card from your graveyard to your hand. Exile Retrieve.

@@ -1,0 +1,12 @@
+[metadata]
+Code=PAER
+Date=2017-01-20
+Name=Aether Revolt Promos
+Type=Promo
+ScryfallCode=PAER
+
+[cards]
+48 U Trophy Mage @Anna Steinbauer
+75 R Yahenni's Expertise @Jason A. Engle
+93 R Quicksmith Rebel @Raymond Swanland
+175 R Scrap Trawler @Daniel Ljunggren

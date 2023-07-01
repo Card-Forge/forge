@@ -1,0 +1,17 @@
+Name:Chalice of Life
+ManaCost:3
+Types:Artifact
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | Defined$ You | SubAbility$ DBTransform | SpellDescription$ You gain 1 life. Then if you have at least 10 more life than your starting life total, transform CARDNAME.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GEY
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife/Plus.10
+AlternateMode:DoubleFaced
+Oracle:{T}: You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life.
+
+ALTERNATE
+
+Name:Chalice of Death
+ManaCost:no cost
+Types:Artifact
+A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Target a player to lose 5 life | LifeAmount$ 5 | SpellDescription$ Target player loses 5 life.
+Oracle:{T}: Target player loses 5 life.

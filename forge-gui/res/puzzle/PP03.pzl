@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #03 - Gnarly Plays
+URL:https://pauperpuzzles.wordpress.com/2017/01/19/3-gnarly-plays/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=3
+AILife=9
+humanhand=Auramancer;Sign in Blood;Hunger of the Howlpack
+humanbattlefield=Swamp;Plains;Plains;Plains;Forest;Forest;Forest;Forest;Forest;Aura Gnarlid
+humanlibrary=Fists of Ironwood;Ancestral Mask;Swamp;Lunarch Mantle
+humangraveyard=Moldervine Cloak;Abundant Growth
+aibattlefield=Ulamog's Crusher;Myr Enforcer
+ailibrary=Swamp;Swamp

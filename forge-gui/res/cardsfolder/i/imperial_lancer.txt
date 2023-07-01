@@ -1,0 +1,7 @@
+Name:Imperial Lancer
+ManaCost:W
+Types:Creature Human Knight
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | IsPresent$ Dinosaur.YouCtrl | Description$ CARDNAME has double strike as long as you control a Dinosaur.
+DeckHints:Type$Dinosaur
+Oracle:Imperial Lancer has double strike as long as you control a Dinosaur.

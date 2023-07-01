@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Solitary Fiends
+Description=Direct the theater of war and put a deadly force center stage. The "Solitary Fiends" deck contains spells that clear the way for your singular threats to dominate the scene. The battle is yours to control.
+Deck Type=constructed
+Set=AVR
+Image=solitary_fiends.jpg
+[main]
+1 Swiftfoot Boots|M12
+2 Tormentor's Trident|AVR
+11 Island|AVR
+13 Swamp|AVR
+3 Alchemist's Apprentice|AVR
+1 Corpse Traders|AVR
+1 Crypt Creeper|AVR
+2 Fettergeist|AVR
+1 Havengul Skaab|AVR
+1 Lone Revenant+|AVR
+2 Marrow Bats|AVR
+2 Mist Raven|AVR
+2 Renegade Demon|AVR
+2 Undead Executioner|AVR
+1 Demonic Rising|AVR
+1 Homicidal Seclusion|AVR
+1 Predator's Gambit|AVR
+1 Triumph of Cruelty|AVR
+2 Crippling Chill|AVR
+2 Doom Blade|M12
+2 Frost Breath|M12
+2 Peel from Reality|AVR
+2 Essence Harvest|AVR
+2 Into the Void|AVR
+[sideboard]

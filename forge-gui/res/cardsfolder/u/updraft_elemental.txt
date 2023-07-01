@@ -1,0 +1,6 @@
+Name:Updraft Elemental
+ManaCost:2 U
+Types:Creature Elemental
+PT:1/4
+K:Flying
+Oracle:Flying

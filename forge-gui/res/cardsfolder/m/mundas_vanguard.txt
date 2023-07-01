@@ -1,0 +1,7 @@
+Name:Munda's Vanguard
+ManaCost:4 W
+Types:Creature Kor Knight Ally
+PT:3/3
+A:AB$ PutCounterAll | Cost$ T tapXType<1/Ally> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | PrecostDesc$ Cohort — | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHints:Type$Ally
+Oracle:Cohort — {T}, Tap an untapped Ally you control: Put a +1/+1 counter on each creature you control.

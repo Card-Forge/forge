@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Wrenn's Rallying 1
+Title=Wrenn
+Difficulty=easy
+Description=RGB treefolk reanimator theme with some burn spells
+Icon=Wrenn 1.jpg
+Deck Type=constructed
+[Main]
+2 Ancient Lumberknot
+2 Black Poplar Shaman
+3 Burn from Within
+2 Call the Bloodline
+1 Dauntless Dourbark
+2 Ebony Treefolk
+6 Forest
+1 Ghoultree
+2 Kardur's Vicious Return
+1 Leaf-Crowned Elder
+2 Lignify
+2 Lumberknot
+5 Mountain
+1 Reach of Branches
+1 Sapling of Colfenor
+2 Savage Lands
+3 Slice in Twain
+6 Swamp
+1 Thorntooth Witch
+2 Treefolk Harbinger
+2 Treefolk Umbra
+3 Wild Guess
+1 Woodfall Primus
+1 Wrenn and Seven
+1 Wrenn and Six
+3 Ziatora's Proving Ground
+2 Zombify
+[Sideboard]

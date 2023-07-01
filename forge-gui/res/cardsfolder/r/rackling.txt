@@ -1,0 +1,8 @@
+Name:Rackling
+ManaCost:4
+Types:Artifact Creature Phyrexian Construct
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is 3 minus the number of cards in their hand.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
+SVar:X:TriggeredPlayer$CardsInHand/NMinus.3
+Oracle:At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in their hand.

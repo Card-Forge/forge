@@ -1,0 +1,11 @@
+Name:Tameshi, Reality Architect
+ManaCost:2 U
+Types:Legendary Creature Moonfolk Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent.nonCreature | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more noncreature permanents are returned to hand, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+A:AB$ ChangeZone | Cost$ X W Return<1/Land/land> | ValidTgts$ Artifact.cmcLEX+YouOwn,Enchantment.cmcLEX+YouOwn | TgtPrompt$ Select target artifact or enchantment card with mana value X or less | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Return target artifact or enchantment card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact|Enchantment
+DeckHas:Ability$Graveyard
+Oracle:Whenever one or more noncreature permanents are returned to hand, draw a card. This ability triggers only once each turn.\n{X}{W}, Return a land you control its owner's hand: Return target artifact or enchantment card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.

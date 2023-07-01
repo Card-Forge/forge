@@ -1,0 +1,6 @@
+Name:Loxodon Partisan
+ManaCost:4 W
+Types:Creature Elephant Soldier
+PT:3/4
+K:Battle cry
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)

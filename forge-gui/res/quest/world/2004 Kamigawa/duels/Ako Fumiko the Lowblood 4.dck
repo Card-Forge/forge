@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ako Fumiko the Lowblood 4
+Title=Fumiko the Lowblood
+Difficulty=hard
+Description=A powerful, bitter samurai in Godo's service.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Devoted Retainer|CHK
+1 Eiganjo Castle|CHK
+4 Forbidden Orchard|CHK
+4 Fumiko the Lowblood|BOK
+4 Glacial Ray|CHK
+4 Hand of Honor|SOK
+2 Kentaro, the Smiling Cat|BOK
+2 Mountain|CHK|1
+3 Mountain|CHK|2
+2 Mountain|CHK|3
+3 Oathkeeper, Takeno's Daisho|CHK
+2 Plains|CHK|1
+1 Plains|CHK|2
+3 Plains|CHK|3
+2 Plains|CHK|4
+4 Reciprocate|CHK
+1 Ronin Cliffrider|BOK
+1 Shinka, the Bloodsoaked Keep|CHK
+2 Takeno, Samurai General|CHK
+4 Tendo Ice Bridge|BOK
+3 Tenza, Godo's Maul|CHK
+4 Umezawa's Jitte|BOK
+1 Yosei, the Morning Star|CHK
+[Sideboard]
+
+

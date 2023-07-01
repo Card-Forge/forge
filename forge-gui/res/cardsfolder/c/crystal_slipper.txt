@@ -1,0 +1,6 @@
+Name:Crystal Slipper
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ Equipped creature gets +1/+0 and has haste.
+K:Equip:1
+Oracle:Equipped creature gets +1/+0 and has haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

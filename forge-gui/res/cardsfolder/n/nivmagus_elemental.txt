@@ -1,0 +1,7 @@
+Name:Nivmagus Elemental
+ManaCost:UR
+Types:Creature Elemental
+PT:1/2
+A:AB$ PutCounter | Cost$ ExileFromStack<1/Spell.Instant+YouCtrl;Spell.Sorcery+YouCtrl/instant or sorcery spell> | CostDesc$ Exile an instant or sorcery spell you control: | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME. (That spell won't resolve.)
+AI:RemoveDeck:All
+Oracle:Exile an instant or sorcery spell you control: Put two +1/+1 counters on Nivmagus Elemental. (That spell won't resolve.)

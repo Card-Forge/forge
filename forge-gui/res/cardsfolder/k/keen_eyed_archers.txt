@@ -1,0 +1,6 @@
+Name:Keen-Eyed Archers
+ManaCost:2 W
+Types:Creature Elf Archer
+PT:2/2
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

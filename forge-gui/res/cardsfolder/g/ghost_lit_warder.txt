@@ -1,0 +1,7 @@
+Name:Ghost-Lit Warder
+ManaCost:1 U
+Types:Creature Spirit
+PT:1/1
+A:AB$ Counter | Cost$ 3 U T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+A:AB$ Counter | Cost$ 3 U Discard<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ Counter target spell unless its controller pays {4}.
+Oracle:{3}{U}, {T}: Counter target spell unless its controller pays {2}.\nChannel — {3}{U}, Discard Ghost-Lit Warder: Counter target spell unless its controller pays {4}.

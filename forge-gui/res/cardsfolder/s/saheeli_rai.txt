@@ -1,0 +1,11 @@
+Name:Saheeli Rai
+ManaCost:1 U R
+Types:Legendary Planeswalker Saheeli
+Loyalty:3
+A:AB$ Scry | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SubAbility$ DBDealDamage | SpellDescription$ Scry 1. CARDNAME deals 1 damage to each opponent.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | AILogic$ Good
+A:AB$ CopyPermanent | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | AddTypes$ Artifact | PumpKeywords$ Haste | AtEOT$ Exile | SpellDescription$ Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. That token gains haste. Exile it at the beginning of the next end step.
+A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 3 | DifferentNames$ True | SpellDescription$ Search your library for up to three artifact cards with different names, put them onto the battlefield, then shuffle.
+DeckHints:Type$Artifact
+DeckNeeds:Type$Artifact
+Oracle:[+1]: Scry 1. Saheeli Rai deals 1 damage to each opponent.\n[-2]: Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. That token gains haste. Exile it at the beginning of the next end step.\n[-7]: Search your library for up to three artifact cards with different names, put them onto the battlefield, then shuffle.

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ako Kuro's Slaves 3
+Title=Kuro's Slaves
+Difficulty=hard
+Description=After their worship of oni began, only a few of Kamigawa's ogres remained in the bitter cold of the Tendo Peaks. Most were drawn to the darkness of Takenuma.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+1 Gutwrencher Oni|CHK
+1 Kuro, Pitlord|CHK
+4 Mark of the Oni|BOK
+3 Ogre Marauder|BOK
+1 Painwracker Oni|CHK
+4 Raving Oni-Slave|SOK
+3 Razorjaw Oni|SOK
+4 Rend Flesh|CHK
+2 Scourge of Numai|BOK
+3 Seizan, Perverter of Truth|CHK
+1 Shizo, Death's Storehouse|CHK
+6 Swamp|CHK|1
+8 Swamp|CHK|2
+4 Swamp|CHK|3
+4 Swamp|CHK|4
+1 Swamp|ZEN|5
+3 Takenuma Bleeder|BOK
+1 Untaidake, the Cloud Keeper|CHK
+3 Villainous Ogre|CHK
+4 Yukora, the Prisoner|BOK
+[Sideboard]
+

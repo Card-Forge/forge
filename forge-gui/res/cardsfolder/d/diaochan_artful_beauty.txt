@@ -1,0 +1,7 @@
+Name:Diaochan, Artful Beauty
+ManaCost:3 R
+Types:Legendary Creature Human Advisor
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | SubAbility$ DBDestroy | AILogic$ OppDestroyYours | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Destroy target creature of your choice, then destroy target creature of an opponent's choice. Activate only during your turn, before attackers are declared.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent
+Oracle:{T}: Destroy target creature of your choice, then destroy target creature of an opponent's choice. Activate only during your turn, before attackers are declared.

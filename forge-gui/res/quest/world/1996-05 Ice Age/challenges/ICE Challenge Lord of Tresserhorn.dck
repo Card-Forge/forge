@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Lord of Tresserhorn
+OpponentName=The Lord of Tresserhorn
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Lord of Tresserhorn
+HumanExtras=Sheltered Valley
+[metadata]
+Name=ICE Challenge: Lord of Tresserhorn
+Title=The Lord of Tresserhorn
+Difficulty=hard
+Description="Death does not prevent us from service to our absent master. As long as Tresserhorn stands, so shall we." -Chaeska, Keeper of Tresserhorn
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+60 Swamp|ICE|3

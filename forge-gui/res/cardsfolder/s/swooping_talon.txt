@@ -1,0 +1,8 @@
+Name:Swooping Talon
+ManaCost:4 W W
+Types:Creature Bird Soldier
+PT:2/6
+K:Flying
+K:Provoke
+A:AB$ Debuff | Cost$ 1 | Keywords$ Flying | Defined$ Self | SpellDescription$ CARDNAME loses flying until end of turn.
+Oracle:Flying\n{1}: Swooping Talon loses flying until end of turn.\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

@@ -1,0 +1,8 @@
+Name:Skirk Outrider
+ManaCost:3 R
+Types:Creature Goblin
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | IsPresent$ Beast.YouCtrl | Description$ As long as you control a Beast, CARDNAME gets +2/+2 and has trample.
+AI:RemoveDeck:Random
+SVar:BuffedBy:Beast
+Oracle:As long as you control a Beast, Skirk Outrider gets +2/+2 and has trample.

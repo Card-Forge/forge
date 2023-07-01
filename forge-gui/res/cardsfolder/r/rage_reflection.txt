@@ -1,0 +1,7 @@
+Name:Rage Reflection
+ManaCost:4 R R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Double Strike | Description$ Creatures you control have double strike.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have double strike.

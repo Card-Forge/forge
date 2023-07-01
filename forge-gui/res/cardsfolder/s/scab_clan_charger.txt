@@ -1,0 +1,6 @@
+Name:Scab-Clan Charger
+ManaCost:3 G
+Types:Creature Centaur Warrior
+PT:2/4
+A:AB$ Pump | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +2 | NumDef$ +4 | SpellDescription$ Target attacking creature gets +2/+4 until end of turn.
+Oracle:Bloodrush — {1}{G}, Discard Scab-Clan Charger: Target attacking creature gets +2/+4 until end of turn.

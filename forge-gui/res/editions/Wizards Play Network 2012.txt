@@ -1,0 +1,12 @@
+[metadata]
+Code=PW12
+Date=2012-01-01
+Name=Wizards Play Network 2012
+Code2=PWP12
+Type=Promo
+ScryfallCode=PW12
+
+[cards]
+79 R Gather the Townsfolk @Bud Cook
+81 R Curse of Thirst @Dave Kendall
+82 R Nearheath Stalker @Steve Prescott

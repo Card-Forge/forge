@@ -1,0 +1,6 @@
+Name:Severed Legion
+ManaCost:1 B B
+Types:Creature Zombie
+PT:2/2
+K:Fear
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)

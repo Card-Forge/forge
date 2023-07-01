@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 5 The Great Wood
+Title=The Great Wood
+Difficulty=easy
+Description="I hear there are bears-or spirits-that guard caravans passing through the forest." -Gulsen, abbey matron
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+2 Carapace|HML|2
+2 Daughter of Autumn|HML
+4 Faerie Noble|HML
+24 Forest|LEB|1
+2 Hungry Mist|HML|1
+2 Hungry Mist|HML|2
+4 Leaping Lizard|HML
+2 Primal Order|HML
+4 Roots|HML
+2 Shrink|HML|1
+4 Spectral Bears|HML
+2 Willow Faerie|HML|1
+2 Willow Faerie|HML|2
+4 Willow Priestess|HML

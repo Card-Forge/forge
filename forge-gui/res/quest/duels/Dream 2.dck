@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dream 2
+Title=Dream
+Difficulty=medium
+Description=Mono U Illusion deck with Lord of the Unreal and Krovikan Mist
+Icon=Dream.jpg
+Deck Type=constructed
+[main]
+4 Lord of the Unreal
+4 Krovikan Mist
+2 Phantasmal Bear
+2 Gossamer Phantasm
+1 AEther Figment
+1 Mistfolk
+1 Narcomoeba
+1 Sneaky Homunculus
+1 Blind Phantasm
+2 Illusionary Servant
+1 Phantasmal Abomination
+1 Phantom Warrior
+1 Chronozoa
+1 Phantasmal Dragon
+2 Phantom Beast
+1 Phantom Monster
+1 Riftwing Cloudskate
+1 Cloud Dragon
+1 Errant Ephemeron
+1 Treasure Hunt
+1 Counsel of the Soratami
+1 Concentrate
+1 Compulsive Research
+1 Psychic Barrier
+1 Summoner's Bane
+1 Inundate
+1 Sleep
+23 Island|M12
+[sideboard]

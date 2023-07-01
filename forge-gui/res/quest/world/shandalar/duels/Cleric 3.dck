@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Cleric 3
+Title=Cleric
+Icon=Cleric.jpg
+Difficulty=hard
+Description=White weenie with some extra annoying cards.
+Deck Type=constructed
+[main]
+3 Amrou Kithkin|LEG
+1 Blessing|LEB
+1 Clergy of the Holy Nimbus|LEG
+1 D'Avenant Archer|LEG
+2 Disenchant|2ED
+1 Exorcist|DRK
+3 Keepers of the Faith|LEG
+4 Meekstone|LEB
+1 Morale|4ED
+22 Plains|4ED
+2 Samite Healer|LEB
+4 Savannah Lions|LEB
+4 Swords to Plowshares|LEB
+3 Thunder Spirit|LEG
+1 Tundra Wolves|LEG
+4 White Knight|4ED
+3 Witch Hunter|DRK
+[sideboard]

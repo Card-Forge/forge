@@ -1,0 +1,9 @@
+Name:Carnage Tyrant|Deck:Carnage Tyrant_13.dck|Variant:None|Avatar:Carnage Tyrant|Desc:
+Name:Tetzimoc, Primal Death|Deck:Tetzimoc, Primal Death_5.dck|Variant:Commander|Avatar:Tetzimoc, Primal Death|Desc:
+Name:Ranging Raptors|Deck:Ranging Raptors_16.dck|Variant:None|Avatar:Ranging Raptors|Desc:
+Name:Huatli Planeswalker|Deck:Huatli Planeswalker.dck|Variant:Planeswalker|Avatar:Huatli, Warrior Poet|Desc:
+Name:Zacama, Primal Calamity|Deck:Zacama, Primal Calamity_1.dck|Variant:Commander|Avatar:Zacama, Primal Calamity|Desc:
+Name:Ghalta, Primal Hunger|Deck:Ghalta, Primal Hunger_19.dck|Variant:None|Avatar:Ghalta, Primal Hunger|Desc:
+Name:Gishath, Suns Avatar|Deck:Gishath, Suns Avatar_6.dck|Variant:Commander|Avatar:Gishath, Sun's Avatar|Desc:
+Name:Drover of the Mighty|Deck:Drover of the Mighty_3.dck|Variant:None|Avatar:Drover of the Mighty|Desc:
+Name:Otepec Huntmaster|Deck:Otepec Huntmaster_9.dck|Variant:None|Avatar:Otepec Huntmaster|Desc:

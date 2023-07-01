@@ -1,0 +1,8 @@
+Name:Sygg, River Cutthroat
+ManaCost:UB UB
+Types:Legendary Creature Merfolk Rogue
+PT:1/3
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card. (Damage causes loss of life.)
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:PlayerCountRegisteredOpponents$HighestLifeLostThisTurn
+Oracle:At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card. (Damage causes loss of life.)

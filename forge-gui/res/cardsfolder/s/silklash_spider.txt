@@ -1,0 +1,8 @@
+Name:Silklash Spider
+ManaCost:3 G G
+Types:Creature Spider
+PT:2/7
+K:Reach
+A:AB$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+SVar:X:Count$xPaid
+Oracle:Reach\n{X}{G}{G}: Silklash Spider deals X damage to each creature with flying.

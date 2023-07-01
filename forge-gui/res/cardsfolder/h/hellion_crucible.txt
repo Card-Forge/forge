@@ -1,0 +1,7 @@
+Name:Hellion Crucible
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 1 R T | CounterType$ PRESSURE | CounterNum$ 1 | SpellDescription$ Put a pressure counter on CARDNAME.
+A:AB$ Token | Cost$ 1 R T SubCounter<2/PRESSURE> Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ r_4_4_hellion_haste | TokenOwner$ You | SpellDescription$ Create a 4/4 red Hellion creature token with haste.
+Oracle:{T}: Add {C}.\n{1}{R}, {T}: Put a pressure counter on Hellion Crucible.\n{1}{R}, {T}, Remove two pressure counters from Hellion Crucible and sacrifice it: Create a 4/4 red Hellion creature token with haste. (It can attack and {T} as soon as it comes under your control.)

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 205: Dastardly Raiders
+Title=Dastardly Raiders
+Difficulty=easy
+Description=There is much talk about the art of creation. What about the art of destruction?
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bog Raiders|POR
+4 Charging Bandits|POR
+4 Devastation|POR
+4 Dread Charge|POR
+2 Flashfires|POR
+4 Howling Fury|POR
+8 Mountain|POR|2
+4 Pillaging Horde|POR
+4 Pyroclasm|POR
+16 Swamp|POR|1
+2 Virtue's Ruin|POR
+4 Winds of Change|POR

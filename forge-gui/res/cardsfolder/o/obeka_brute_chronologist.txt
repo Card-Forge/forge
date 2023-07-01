@@ -1,0 +1,7 @@
+Name:Obeka, Brute Chronologist
+ManaCost:1 U B R
+Types:Legendary Creature Ogre Wizard
+PT:3/4
+A:AB$ EndTurn | Cost$ T | Defined$ ActivePlayer | Optional$ True | StackDescription$ REP The player whose turn it is_{p:ActivePlayer} | SpellDescription$ The player whose turn it is may end the turn. (Exile all spells and abilities from the stack. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+AI:RemoveDeck:All
+Oracle:{T}: The player whose turn it is may end the turn. (Exile all spells and abilities from the stack. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

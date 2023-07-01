@@ -1,0 +1,21 @@
+Name:Hanweir Watchkeep
+ManaCost:2 R
+Types:Creature Human Warrior Werewolf
+PT:1/5
+K:Defender
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Defender\nAt the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.
+
+ALTERNATE
+
+Name:Bane of Hanweir
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:5/5
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Bane of Hanweir attacks each combat if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Bane of Hanweir.

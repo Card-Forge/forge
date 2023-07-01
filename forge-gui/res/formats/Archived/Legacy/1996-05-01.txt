@@ -1,0 +1,7 @@
+[format]
+Name:Type 1.5 (1996-05-01)
+Type:Archived
+Subtype:Legacy
+Effective:1996-05-01
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML
+Banned:Amulet of Quoz; Ancestral Recall; Balance; Berserk; Black Lotus; Black Vise; Braingeyser; Bronze Tablet; Candelabra of Tawnos; Channel; Chaos Orb; Contract from Below; Copy Artifact; Darkpact; Demonic Attorney; Demonic Tutor; Divine Intervention; Falling Star; Feldon's Cane; Fork; Ivory Tower; Jeweled Bird; Library of Alexandria; Maze of Ith; Mind Twist; Mirror Universe; Mishra's Workshop; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Rebirth; Recall; Regrowth; Shahrazad; Sol Ring; Tempest Efreet; Time Walk; Timetwister; Timmerian Fiends; Underworld Dreams; Wheel of Fortune; Zuran Orb

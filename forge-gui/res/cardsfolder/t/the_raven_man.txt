@@ -1,0 +1,11 @@
+Name:The Raven Man
+ManaCost:1 B
+Types:Legendary Creature Human Wizard
+PT:2/1
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if a player discarded a card this turn, create a 1/1 black Bird creature token with flying and "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bird_flying_noblock
+A:AB$ Discard | Cost$ 3 B T | Defined$ Opponent | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Each opponent discards a card.
+SVar:X:PlayerCountPlayers$CardsDiscardedThisTurn
+DeckHints:Ability$Discard
+DeckHas:Ability$Token & Type$Bird
+Oracle:At the beginning of each end step, if a player discarded a card this turn, create a 1/1 black Bird creature token with flying and "This creature can't block."\n{3}{B}, {T}: Each opponent discards a card. Activate only as a sorcery.

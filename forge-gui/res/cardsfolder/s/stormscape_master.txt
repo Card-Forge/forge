@@ -1,0 +1,10 @@
+Name:Stormscape Master
+ManaCost:2 U U
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Protection | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
+A:AB$ LoseLife | Cost$ B B T | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black|White
+Oracle:{W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.\n{B}{B}, {T}: Target player loses 2 life and you gain 2 life.

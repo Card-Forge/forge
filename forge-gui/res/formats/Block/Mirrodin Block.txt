@@ -1,0 +1,7 @@
+[format]
+Name:Mirrodin Block
+Type:Archived
+Subtype:Block
+Order:127
+Sets:5DN, DST, MRD
+Banned:Aether Vial; Ancient Den; Arcbound Ravager; Darksteel Citadel; Disciple of the Vault; Great Furnace; Seat of the Synod; Tree of Tales; Vault of Whispers; Skullclamp

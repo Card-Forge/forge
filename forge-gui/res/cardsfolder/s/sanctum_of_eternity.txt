@@ -1,0 +1,7 @@
+Name:Sanctum of Eternity
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Card.IsCommander+YouOwn | TgtPrompt$ Select target commander you own | Origin$ Battlefield | Destination$ Hand | PlayerTurn$ True | SpellDescription$ Return target commander you own from the battlefield to your hand. Activate only during your turn.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{2}, {T}: Return target commander you own from the battlefield to your hand. Activate only during your turn.

@@ -1,0 +1,7 @@
+Name:Trickster Mage
+ManaCost:U
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ TapOrUntap | Cost$ U T Discard<1/Card> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
+AI:RemoveDeck:All
+Oracle:{U}, {T}, Discard a card: You may tap or untap target artifact, creature, or land.

@@ -1,0 +1,6 @@
+Name:Wily Bandar
+ManaCost:G
+Types:Creature Cat Monkey
+PT:1/1
+A:AB$ Pump | Cost$ 2 G | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:{2}{G}: Wily Bandar gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

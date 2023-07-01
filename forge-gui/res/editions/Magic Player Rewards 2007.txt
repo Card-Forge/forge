@@ -1,0 +1,15 @@
+[metadata]
+Code=P07
+Date=2007-01-01
+Name=Magic Player Rewards 2007
+Type=Promo
+ScryfallCode=P07
+
+[cards]
+1 R Wrath of God @Ron Spencer
+2 R Condemn @Kev Walker
+3 R Mortify @Brian Snõddy
+4 R Psionic Blast @Aleksi Briclot
+5 R Cruel Edict @Steve Ellis
+6 R Disenchant @Heather Hudson
+7 R Recollect @Michael Sutfin

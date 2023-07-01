@@ -1,0 +1,8 @@
+Name:Sheltering Ancient
+ManaCost:1 G
+Types:Creature Treefolk
+PT:5/5
+K:Trample
+K:Cumulative upkeep:AddCounter<1/P1P1/Creature.OppCtrl/creature an opponent controls>:Put a +1/+1 counter on a creature an opponent controls.
+AI:RemoveDeck:All
+Oracle:Trample\nCumulative upkeep—Put a +1/+1 counter on a creature an opponent controls. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

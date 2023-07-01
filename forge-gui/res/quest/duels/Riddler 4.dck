@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Riddler 4
+Title=Riddler
+Difficulty=very hard
+Description=WR deck with mass damage spells, Stuffy Doll and Guilty Conscience
+Icon=Riddler.jpg
+Deck Type=constructed
+[main]
+4 Arid Mesa
+4 Plateau
+4 Windswept Heath
+3 Flooded Strand
+1 Plains|M11
+1 Mountain|M11
+1 Mox Emerald
+1 Mox Sapphire
+1 Mox Jet
+1 Mox Ruby
+1 Mox Pearl
+4 Boros Reckoner
+4 Spitemare
+2 Swans of Bryn Argoll
+4 Stuffy Doll
+2 Wall of Hope
+4 Guilty Conscience
+4 Pyroclasm
+4 Volcanic Fallout
+2 Tremor
+2 Chain Reaction
+2 Idyllic Tutor
+4 Blasphemous Act
+[sideboard]

@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Suspended Sentence
+Description=Frustrate your enemies with deception and delay tactics while your powerful suspend cards count down to their doom. You'll be safe behind your defending forces, but once time's up on your incubating monsters, your opponents will be anything but safe.
+Deck Type=constructed
+Set=FUT
+Image=suspended_sentence.jpg
+
+[main]
+10 Island|TSP
+9 Swamp|TSP
+3 Terramorphic Expanse|TSP
+2 Zoetic Cavern|FUT
+
+2 Timebender|PLC
+2 Dream Stalker|TSP
+1 Unblinking Bleb|FUT
+4 Infiltrator il-Kor|FUT
+1 Riftwing Cloudskate|TSP
+2 Augur of Skulls|FUT
+1 Deathspore Thallid|TSP
+1 Deadly Grub|PLC
+1 Shimian Specter|FUT
+1 Nihilith|FUT
+
+2 Clockspinning|TSP
+3 Paradox Haze|TSP
+3 Reality Acid|PLC
+2 Reality Strobe|FUT
+1 Lost Hours|FUT
+3 Ichor Slick|FUT
+2 Festering March|FUT
+1 Death Rattle|FUT
+2 Mindstab|TSP
+1 Phthisis|TSP
+
+[sideboard]

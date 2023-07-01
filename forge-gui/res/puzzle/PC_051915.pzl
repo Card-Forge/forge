@@ -1,0 +1,19 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 051915 - Weapon of Choice
+URL:http://www.gatheringmagic.com/seanuy-051915-perplexing-chimera-8-weapon-of-choice/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=5
+AILife=11
+humanhand=Flayer Husk; Darksteel Axe; Nameless Inversion
+humanbattlefield=Plains|Set:CHK; Plains|Set:CHK; Plains|Set:CHK; Plains|Set:CHK; Swamp|Set:CHK; Swamp|Set:CHK; Swamp|Set:CHK; Kor Duelist; Scavenger Drake; Moonlit Strider; Copper Carapace
+humangraveyard=Thief of Hope
+humanlibrary=
+aibattlefield=Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Bloodshot Trainee; Kozilek's Predator|Id:420; Kitesail|AttachedTo:420; Gorehorn Minotaurs|Counters:P1P1=2; Kavu Primarch|Counters:P1P1=4|Tapped
+aigraveyard=
+ailibrary=

@@ -1,0 +1,9 @@
+Name:Crimson Honor Guard
+ManaCost:3 R R
+Types:Creature Vampire Knight
+PT:4/5
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals 4 damage to that player unless they control a commander.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 4 | ConditionPresent$ Permanent.IsCommander+ControlledBy TriggeredPlayer | ConditionCompare$ EQ0
+AI:RemoveDeck:NonCommander
+Oracle:Trample\nAt the beginning of each player's end step, Crimson Honor Guard deals 4 damage to that player unless they control a commander.

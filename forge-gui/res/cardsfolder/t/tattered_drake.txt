@@ -1,0 +1,9 @@
+Name:Tattered Drake
+ManaCost:4 U
+Types:Creature Zombie Drake
+PT:2/2
+K:Flying
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:Flying\n{B}: Regenerate Tattered Drake.

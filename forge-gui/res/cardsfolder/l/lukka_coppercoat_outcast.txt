@@ -1,0 +1,15 @@
+Name:Lukka, Coppercoat Outcast
+ManaCost:3 R R
+Types:Legendary Planeswalker Lukka
+Loyalty:5
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Exile the top three cards of your library. Creature cards exiled this way gain "You may cast this card from exile as long as you control a Lukka planeswalker."
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatSubAbility$ DBAnimate | RepeatCards$ Creature.IsRemembered | Zone$ Exile | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | staticAbilities$ STMayPlay | Duration$ Permanent
+SVar:STMayPlay:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Exile | EffectZone$ Exile | MayPlay$ True | IsPresent$ Planeswalker.Lukka+YouCtrl | Description$ You may cast this card from exile as long as you control a Lukka planeswalker.
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDigUntil | RememberChanged$ True | StackDescription$ SpellDescription | SpellDescription$ Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher mana value. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature.cmcGEX | ValidDescription$ creature card with higher mana value | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ EachDamage | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | DefinedDamagers$ Valid Creature.YouCtrl | Defined$ Opponent | NumDmg$ Count$CardPower | SpellDescription$ Each creature you control deals damage equal to its power to each opponent.
+SVar:X:Remembered$CardManaCost/Plus.1
+SVar:NonStackingEffect:True
+Oracle:[+1]: Exile the top three cards of your library. Creature cards exiled this way gain "You may cast this card from exile as long as you control a Lukka planeswalker."\n[-2]: Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher mana value. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\n[-7]: Each creature you control deals damage equal to its power to each opponent.

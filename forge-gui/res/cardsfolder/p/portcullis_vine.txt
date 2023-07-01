@@ -1,0 +1,8 @@
+Name:Portcullis Vine
+ManaCost:G
+Types:Creature Plant Wall
+PT:0/3
+K:Defender
+A:AB$ Draw | Cost$ 2 T Sac<1/Creature.withDefender/creature with defender> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.withDefender+cmcLE2+powerLE1
+Oracle:Defender (This creature can't attack.)\n{2}, {T}, Sacrifice a creature with defender: Draw a card.

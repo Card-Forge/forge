@@ -1,0 +1,13 @@
+[metadata]
+Code=PGRU
+Date=1999-07-12
+Name=Guru
+Type=Promo
+ScryfallCode=PGRU
+
+[cards]
+1 R Plains @Terese Nielsen
+2 R Island @Terese Nielsen
+3 R Swamp @Terese Nielsen
+4 R Mountain @Terese Nielsen
+5 R Forest @Terese Nielsen

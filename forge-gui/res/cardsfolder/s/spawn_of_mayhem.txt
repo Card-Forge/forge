@@ -1,0 +1,13 @@
+Name:Spawn of Mayhem
+ManaCost:2 B B
+Types:Creature Demon
+PT:4/4
+K:Spectacle:1 B B
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each player. Then if you have 10 or less life, put a +1/+1 counter on CARDNAME.
+SVar:TrigDmg:DB$ DealDamage | Defined$ Player | NumDmg$ 1 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE10
+SVar:X:Count$YourLifeTotal
+DeckHas:Ability$Counters
+Oracle:Spectacle {1}{B}{B} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nFlying, trample\nAt the beginning of your upkeep, Spawn of Mayhem deals 1 damage to each player. Then if you have 10 or less life, put a +1/+1 counter on Spawn of Mayhem.

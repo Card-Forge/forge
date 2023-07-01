@@ -1,0 +1,6 @@
+Name:Aggravated Assault
+ManaCost:2 R
+Types:Enchantment
+A:AB$ UntapAll | Cost$ 3 R R | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SorcerySpeed$ True | SpellDescription$ Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate only as a sorcery.
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
+Oracle:{3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate only as a sorcery.

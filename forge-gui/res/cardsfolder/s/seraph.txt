@@ -1,0 +1,14 @@
+Name:Seraph
+ManaCost:6 W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Creature.DamagedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ DelTrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put that card onto the battlefield under your control at the beginning of the next end step. Sacrifice the creature when you lose control of CARDNAME.
+SVar:DelTrigReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Return that card to the battlefield at the beginning of the next end step.
+SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | SubAbility$ TrigDelay
+SVar:TrigDelay:DB$ DelayedTrigger | Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.StrictlySelf | RememberObjects$ RememberedLKI | Execute$ TrigSac | SubAbility$ TrigDelay2 | SpellDescription$ Sacrifice the creature when you lose control of CARDNAME.
+SVar:TrigDelay2:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.StrictlySelf | ValidOriginalController$ You | RememberObjects$ RememberedLKI | Execute$ TrigSac | SubAbility$ DBCleanup | SpellDescription$ Sacrifice the creature when you lose control of CARDNAME.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You | SubAbility$ DBCleanup2
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup2:DB$ Cleanup | ClearTriggered$ True
+Oracle:Flying\nWhenever a creature dealt damage by Seraph this turn dies, put that card onto the battlefield under your control at the beginning of the next end step. Sacrifice the creature when you lose control of Seraph.

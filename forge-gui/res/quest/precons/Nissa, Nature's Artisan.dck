@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nissa, Nature's Artisan
+Description=Get started playing Magic right away! You'll summon mighty creatures onto the streets of Kaladesh and build reserves of aetheric energy to power them up so they can tear through your enemies' defenses. Call on the power of the Planeswalker Nissa Revane-- with a card unique to this deck-- to clinch your victory.
+Deck Type=constructed
+Set=KLD
+Image=nissa_natures_artisan.jpg
+[Main]
+1 Nissa, Nature's Artisan+|KLD
+2 Thriving Turtle|KLD
+2 Longtusk Cub|KLD
+1 Sage of Shaila's Claim|KLD
+2 Servant of the Conduit|KLD
+4 Terrain Elemental|KLD
+2 Thriving Rhino|KLD
+2 Janjeet Sentry|KLD
+2 Empyreal Voyager|KLD
+3 Guardian of the Great Conduit|KLD
+1 Bristling Hydra|KLD
+2 Long-Finned Skywhale|KLD
+2 Arborback Stomper|KLD
+1 Riparian Tiger|KLD
+1 Aethersquall Ancient|KLD
+3 Attune with Aether|KLD
+2 Verdant Crescendo|KLD
+2 Appetite for the Unnatural|KLD
+2 Malfunction|KLD
+4 Woodland Stream|KLD
+11 Forest|KLD
+8 Island|KLD

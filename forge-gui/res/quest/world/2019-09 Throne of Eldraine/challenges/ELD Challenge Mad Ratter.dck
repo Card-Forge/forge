@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Mad Ratter
+OpponentName=The Ratters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Mad Ratter
+Difficulty=easy
+Description="Gather round and tell me all from the courts and castles."
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Mad Ratter
+[Main]
+20 Golden Egg|ELD
+20 Mad Ratter|ELD
+20 Mountain|ELD|3

@@ -1,0 +1,7 @@
+Name:Shameless Charlatan
+ManaCost:1 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddAbility$ Copy | Description$ Commander creatures you own have "{2}{U}: This creature becomes a copy of another target creature."
+SVar:Copy:AB$ Clone | Cost$ 2 U | ValidTgts$ Creature.Other | TgtPrompt$ Select another creature | SpellDescription$ This creature becomes a copy of another target creature.
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "{2}{U}: This creature becomes a copy of another target creature."

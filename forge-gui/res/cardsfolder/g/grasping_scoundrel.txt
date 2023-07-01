@@ -1,0 +1,6 @@
+Name:Grasping Scoundrel
+ManaCost:B
+Types:Creature Human Pirate
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddPower$ 1 | Description$ CARDNAME gets +1/+0 as long as it's attacking.
+Oracle:Grasping Scoundrel gets +1/+0 as long as it's attacking.

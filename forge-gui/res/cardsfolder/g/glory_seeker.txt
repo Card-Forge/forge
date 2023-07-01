@@ -1,0 +1,5 @@
+Name:Glory Seeker
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+Oracle:

@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #50 - Toothless
+URL:https://perplexingchimera.com/2015/04/01/50-toothless/
+Goal:Win
+Turns:1
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=5
+AILife=4
+HumanPlay=Blood Seeker; Undertaker; Crypt Creeper; Bladewing's Thrall; Zombie Assassin; Kuldotha Flamefiend; Mogg Cannon; Swamp; Swamp; Swamp|Tapped; Mountain; Mountain; Mountain|Tapped
+HumanHand=Faerie Macabre; Search for Survivors; Scourge of Valkas; Urborg Volcano
+HumanLibrary=
+HumanGraveyard=Crested Craghorn; Mountain; No Rest for the Wicked; Mind Rot; Fountain of Youth; Nova Chaser; Goblin Lore
+AIPlay=Martyr of Spores; Veteran Cavalier; Palace Guard; Hornet Nest; Shepherd of the Lost; Yavimaya Scion; Archangel; Forest|Tapped; Forest|Tapped; Forest|Tapped; Forest|Tapped; Plains|Tapped; Plains|Tapped; Plains|Tapped
+AIGraveyard=Thrill of the Hunt; Ray of Revelation; Drudge Beetle; Brawn
+

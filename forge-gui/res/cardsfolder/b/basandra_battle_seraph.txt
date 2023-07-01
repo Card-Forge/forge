@@ -1,0 +1,9 @@
+Name:Basandra, Battle Seraph
+ManaCost:3 R W
+Types:Legendary Creature Angel
+PT:4/4
+K:Flying
+S:Mode$ CantBeCast | ValidCard$ Card | Phases$ BeginCombat->EndCombat | Description$ Players can't cast spells during combat.
+A:AB$ Effect | Cost$ R | ValidTgts$ Creature | StaticAbilities$ MustAttack | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+Oracle:Flying\nPlayers can't cast spells during combat.\n{R}: Target creature attacks this turn if able.

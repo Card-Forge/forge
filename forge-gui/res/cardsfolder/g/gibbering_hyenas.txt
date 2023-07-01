@@ -1,0 +1,6 @@
+Name:Gibbering Hyenas
+ManaCost:2 G
+Types:Creature Hyena
+PT:3/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Black | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block black creatures.
+Oracle:Gibbering Hyenas can't block black creatures.

@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Hunting Pack
+Description=Elves share a common bond-- a desire to protect their lands and destroy any that would threaten them. Join the elves in battle as their leader, commanding them to take victory from those undeserving of it.
+Deck Type=constructed
+Set=ORI
+Image=hunting_pack.jpg
+[Main]
+1 Consecrated by Blood|ORI
+2 Deadbridge Shaman|ORI
+2 Dwynen's Elite|ORI
+1 Dwynen, Gilt-Leaf Daen+|ORI
+2 Elvish Visionary|ORI
+1 Evolving Wilds|ORI
+2 Eyeblight Assassin|ORI
+2 Eyeblight Massacre|ORI
+3 Forest|ORI|1
+3 Forest|ORI|2
+3 Forest|ORI|3
+2 Forest|ORI|4
+1 Hitchclaw Recluse|ORI
+2 Joraga Invocation|ORI
+2 Leaf Gilder|ORI
+1 Macabre Waltz|ORI
+1 Managorger Hydra|ORI
+2 Might of the Masses|ORI
+1 Nightsnare|ORI
+2 Shaman of the Pack|ORI
+1 Skysnare Spider|ORI
+3 Swamp|ORI|1
+3 Swamp|ORI|2
+3 Swamp|ORI|3
+3 Swamp|ORI|4
+2 Sylvan Messenger|ORI
+2 Thornbow Archer|ORI
+3 Timberpack Wolf|ORI
+2 Weight of the Underworld|ORI
+2 Yeva's Forcemage|ORI

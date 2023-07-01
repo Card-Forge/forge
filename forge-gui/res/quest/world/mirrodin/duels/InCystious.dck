@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=InCystious
+Title=InCystious
+Difficulty=medium
+Description=The Phyrexian infection has spread, and will keep on spreading, and spreading, and spreading...
+Icon=InCystious.jpg
+Deck Type=constructed
+[Main]
+2 Blight Mamba|SOM
+3 Blighted Agent|NPH
+2 Chained Throatseeker|NPH
+1 Contagion Clasp|SOM
+1 Core Prowler|MBS
+1 Corrupted Conscience|MBS
+1 Corrupted Resolve|NPH
+2 Cystbearer|SOM
+12 Forest|SOM|1
+1 Fuel for the Cause|MBS
+3 Glistener Elf|NPH
+1 Inexorable Tide|SOM
+12 Island|SOM|1
+3 Leeching Bite|NPH
+2 Mycosynth Fiend|NPH
+1 Phyrexian Swarmlord|NPH
+2 Rot Wolf|MBS
+1 Spinebiter|NPH
+1 Steady Progress|SOM
+2 Trigon of Infestation|SOM
+2 Viral Drake|NPH
+2 Viridian Betrayers|NPH
+2 Wall of Tanglecord|SOM
+[sideboard]

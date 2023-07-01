@@ -1,0 +1,5 @@
+Name:Ancient Crab
+ManaCost:1 U U
+Types:Creature Crab
+PT:1/5
+Oracle:

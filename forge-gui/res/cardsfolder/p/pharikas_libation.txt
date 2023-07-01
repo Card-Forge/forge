@@ -1,0 +1,8 @@
+Name:Pharika's Libation
+ManaCost:2 B
+Types:Instant
+A:SP$ Charm | Cost$ 2 B | Choices$ SacCreature,SacEnchantment | Defined$ You
+SVar:SacCreature:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SpellDescription$ Target opponent sacrifices a creature.
+SVar:SacEnchantment:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Enchantment | SpellDescription$ Target opponent sacrifices an enchantment.
+DeckHas:Ability$Sacrifice
+Oracle:Choose one —\n• Target opponent sacrifices a creature.\n• Target opponent sacrifices an enchantment.

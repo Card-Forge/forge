@@ -1,0 +1,7 @@
+Name:Ghost Ship
+ManaCost:2 U U
+Types:Creature Spirit
+PT:2/4
+K:Flying
+A:AB$ Regenerate | Cost$ U U U | SpellDescription$ Regenerate CARDNAME.
+Oracle:Flying\n{U}{U}{U}: Regenerate Ghost Ship.

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Grugaloragran 2
+Title=Grugaloragran
+Difficulty=medium
+Description=Rakdos Burn deck with cheap direct damage spells, small Haste creatures, Sword-Point Diplomacy and The Flame of Keld.
+Deck Type=constructed
+Icon=Grugaloragran.jpg
+[main]
+4 Cinder Barrens|M19
+4 Dragonskull Summit|XLN
+4 Fanatical Firebrand|RIX
+4 Ghitu Lavarunner|DOM
+4 Lightning Strike|M19
+11 Mountain
+4 Risk Factor|GRN
+4 Shock|M19
+4 Sovereign's Bite|M19
+3 Swamp
+4 Sword-Point Diplomacy|XLN
+2 The Flame of Keld|DOM
+4 Viashino Pyromancer|M19
+4 Wizard's Lightning|DOM
+[sideboard]

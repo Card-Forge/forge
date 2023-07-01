@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=Dream 3
+Title=Dream
+Difficulty=hard
+Description=Mono U Illusion deck with Lord of the Unreal and Krovikan Mist
+Icon=Dream.jpg
+Deck Type=constructed
+[main]
+4 Phantom Beast
+4 Gossamer Phantasm
+4 Krovikan Mist
+4 Sleep
+4 Phantasmal Bear
+4 Lord of the Unreal
+4 Illusionary Servant
+4 Phantasmal Abomination
+4 Phantasmal Dragon
+1 Mox Sapphire
+23 Island|M12
+[sideboard]

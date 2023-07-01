@@ -1,0 +1,7 @@
+Name:Abzan Guide
+ManaCost:3 W B G
+Types:Creature Human Warrior
+PT:4/4
+K:Lifelink
+K:Morph:2 W B G
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nMorph {2}{W}{B}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

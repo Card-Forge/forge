@@ -1,0 +1,8 @@
+Name:Rabid Elephant
+ManaCost:4 G
+Types:Creature Elephant
+PT:3/4
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker/Times.2
+Oracle:Whenever Rabid Elephant becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.

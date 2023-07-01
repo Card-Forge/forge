@@ -1,0 +1,7 @@
+Name:Soulblast
+ManaCost:3 R R R
+Types:Instant
+A:SP$ DealDamage | Cost$ 3 R R R Sac<All/Creature> | NumDmg$ X | ValidTgts$ Any | CostDesc$ As an additional cost to cast this spell, sacrifice all creatures you control. | SpellDescription$ CARDNAME deals damage to any target equal to the total power of the sacrificed creatures.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice all creatures you control.\nSoulblast deals damage to any target equal to the total power of the sacrificed creatures.

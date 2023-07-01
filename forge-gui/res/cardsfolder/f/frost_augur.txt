@@ -1,0 +1,9 @@
+Name:Frost Augur
+ManaCost:U
+Types:Snow Creature Human Wizard
+PT:1/2
+A:AB$ PeekAndReveal | Cost$ S T | PeekAmount$ 1 | RevealValid$ Snow | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Look at the top card of your library. If it's a snow card, you may reveal it and put it into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Snow | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ If it's a snow card, {p:You} may reveal it and put it into their hand.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Snow
+Oracle:{S}, {T}: Look at the top card of your library. If it's a snow card, you may reveal it and put it into your hand. ({S} can be paid with one mana from a snow source.)

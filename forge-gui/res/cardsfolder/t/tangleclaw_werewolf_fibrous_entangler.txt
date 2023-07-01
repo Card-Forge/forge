@@ -1,0 +1,19 @@
+Name:Tangleclaw Werewolf
+ManaCost:2 G G
+Types:Creature Werewolf Horror
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+A:AB$ SetState | Cost$ 6 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+Oracle:Tangleclaw Werewolf can block an additional creature each combat.\n{6}{G}: Transform Tangleclaw Werewolf.
+
+ALTERNATE
+
+Name:Fibrous Entangler
+ManaCost:no cost
+Types:Creature Eldrazi Werewolf
+PT:4/6
+K:Vigilance
+K:CARDNAME must be blocked if able.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+Oracle:Vigilance\nFibrous Entangler must be blocked if able.\nFibrous Entangler can block an additional creature each combat.

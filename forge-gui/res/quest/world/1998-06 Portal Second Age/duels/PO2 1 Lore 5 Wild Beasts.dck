@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 5 Wild Beasts
+Title=Wild Beasts
+Difficulty=easy
+Description=very little cub has its mother's teeth to guard it.\n-Elvish saying
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Bear Cub|PO2
+24 Forest|PO2|3
+4 Golden Bear|PO2
+4 Ironhoof Ox|PO2
+4 Lone Wolf|PO2
+4 Lynx|PO2
+4 Monstrous Growth|PO2
+4 Razorclaw Bear|PO2
+2 River Bear|PO2
+4 Tree Monkey|PO2
+2 Wild Ox|PO2

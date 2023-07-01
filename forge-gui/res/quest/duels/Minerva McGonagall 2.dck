@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall 2
+Title=Minerva McGonagall
+Difficulty=medium
+Description=Mono U Wizard deck
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+[main]
+1 AEther Adept
+1 Arcanis the Omnipotent
+1 Archivist
+1 Azami, Lady of Scrolls
+1 Beguiler of Wills
+1 Ertai, Wizard Adept
+1 Fugitive Wizard
+1 Ixidor's Will
+1 Keeper of the Mind
+23 Island
+1 Riptide Laboratory
+4 Nameless One
+2 Patron Wizard
+1 Prodigal Sorcerer
+2 Riptide Director
+4 Sage of Fables
+1 Sage's Dousing
+1 Sea Gate Oracle
+1 Sower of Temptation
+4 Stonybrook Banneret
+1 Stream of Unconsciousness
+1 Teferi, Mage of Zhalfir
+1 Temporal Adept
+1 Voidwielder
+1 Waterspout Weavers
+1 Wingcrafter
+1 Zuran Spellcaster
+[sideboard]

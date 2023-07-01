@@ -1,0 +1,8 @@
+Name:Voldaren Stinger
+ManaCost:R
+Types:Creature Vampire Warrior
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Voldaren Stinger has first strike as long as it's attacking.\n{2}{R}: Voldaren Stinger gets +2/+0 until end of turn.

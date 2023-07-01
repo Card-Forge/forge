@@ -1,0 +1,5 @@
+Name:Welding Jar
+ManaCost:0
+Types:Artifact
+A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
+Oracle:Sacrifice Welding Jar: Regenerate target artifact.

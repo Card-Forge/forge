@@ -1,0 +1,7 @@
+Name:Slobad, Goblin Tinkerer
+ManaCost:1 R
+Types:Legendary Creature Goblin Artificer
+PT:1/2
+A:AB$ Pump | Cost$ Sac<1/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | KW$ Indestructible | SpellDescription$ Target artifact gains indestructible until end of turn.
+AI:RemoveDeck:All
+Oracle:Sacrifice an artifact: Target artifact gains indestructible until end of turn.

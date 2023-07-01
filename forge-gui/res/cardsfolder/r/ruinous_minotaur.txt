@@ -1,0 +1,7 @@
+Name:Ruinous Minotaur
+ManaCost:1 R R
+Types:Creature Minotaur Warrior
+PT:5/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, sacrifice a land.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Land | Defined$ You
+Oracle:Whenever Ruinous Minotaur deals damage to an opponent, sacrifice a land.

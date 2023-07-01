@@ -1,0 +1,9 @@
+Name:Uril, the Miststalker
+ManaCost:2 R G W
+Types:Legendary Creature Beast
+PT:5/5
+K:Hexproof
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nUril, the Miststalker gets +2/+2 for each Aura attached to it.

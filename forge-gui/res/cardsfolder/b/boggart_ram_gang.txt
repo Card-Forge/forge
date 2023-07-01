@@ -1,0 +1,7 @@
+Name:Boggart Ram-Gang
+ManaCost:RG RG RG
+Types:Creature Goblin Warrior
+PT:3/3
+K:Haste
+K:Wither
+Oracle:Haste\nWither (This deals damage to creatures in the form of -1/-1 counters.)

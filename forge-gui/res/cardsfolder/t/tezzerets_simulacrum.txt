@@ -1,0 +1,9 @@
+Name:Tezzeret's Simulacrum
+ManaCost:3
+Types:Artifact Creature Golem
+PT:2/3
+A:AB$ LoseLife | Cost$ T | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Target opponent loses 1 life. If you control a Tezzeret planeswalker, that player loses 3 life instead.
+SVar:Y:Count$Valid Planeswalker.Tezzeret+YouCtrl
+SVar:X:Count$Compare Y GE1.3.1
+DeckHints:Type$Tezzeret
+Oracle:{T}: Target opponent loses 1 life. If you control a Tezzeret planeswalker, that player loses 3 life instead.

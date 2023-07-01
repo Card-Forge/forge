@@ -1,0 +1,9 @@
+Name:Implement of Examination
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ U Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+AI:RemoveDeck:Random
+DeckNeeds:Color$Blue
+Oracle:{U}, Sacrifice Implement of Examination: Draw a card.\nWhen Implement of Examination is put into a graveyard from the battlefield, draw a card.

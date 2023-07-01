@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Wilderness: Fanged Coast
+Title=The Fanged Coast
+Difficulty=easy
+Description="That is not the voice of the wind singing on the stones."\n-Callaphe the mariner
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Benthic Giant|THS
+4 Chorus of the Tides|BNG
+4 Cloaked Siren|JOU
+4 Hypnotic Siren|JOU
+16 Island|THS|2
+4 Rotted Hulk|JOU
+4 Shipwreck Singer|THS
+4 Siren of the Fanged Coast|BNG
+4 Sudden Storm|BNG
+8 Swamp|THS|2
+4 War-Wing Siren|JOU

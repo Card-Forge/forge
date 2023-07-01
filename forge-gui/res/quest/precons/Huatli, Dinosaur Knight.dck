@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Huatli, Dinosaur Knight
+Description=Summon massive dinosaurs and crush foes underfoot.
+Deck Type=constructed
+Set=XLN
+Image=huatli_dinosaur_knight.jpg
+[Main]
+2 Sun-Blessed Mount|XLN
+1 Goring Ceratops|XLN
+1 Burning Sun's Avatar|XLN
+2 Kinjalli's Caller|XLN
+4 Huatli's Snubhorn|XLN
+2 Raptor Companion|XLN
+2 Tilonalli's Knight|XLN
+2 Frenzied Raptor|XLN
+2 Territorial Hammerskull|XLN
+2 Bonded Horncrest|XLN
+2 Pterodon Knight|XLN
+2 Shining Aerosaur|XLN
+3 Huatli's Spurring|XLN
+2 Slash of Talons|XLN
+2 Lightning Strike|XLN
+2 Rallying Roar|XLN
+4 Stone Quarry|XLN
+11 Mountain|XLN
+11 Plains|XLN
+1 Huatli, Dinosaur Knight+|XLN

@@ -1,0 +1,9 @@
+Name:Pillar of War
+ManaCost:3
+Types:Artifact Creature Golem
+PT:3/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self+enchanted | Description$ As long as CARDNAME is enchanted, it can attack as though it didn't have defender.
+SVar:EnchantMe:Once
+DeckHints:Type$Enchantment
+Oracle:Defender\nAs long as Pillar of War is enchanted, it can attack as though it didn't have defender.

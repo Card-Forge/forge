@@ -1,0 +1,7 @@
+Name:Court Archers
+ManaCost:2 G
+Types:Creature Human Archer
+PT:1/3
+K:Reach
+K:Exalted
+Oracle:Reach (This creature can block creatures with flying.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

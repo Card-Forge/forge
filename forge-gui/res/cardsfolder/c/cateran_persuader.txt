@@ -1,0 +1,7 @@
+Name:Cateran Persuader
+ManaCost:B B
+Types:Creature Human Mercenary
+PT:2/1
+A:AB$ ChangeZone | Cost$ 1 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE1 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with mana value 1 or less, put it onto the battlefield, then shuffle.
+AI:RemoveDeck:Random
+Oracle:{1}, {T}: Search your library for a Mercenary permanent card with mana value 1 or less, put it onto the battlefield, then shuffle.

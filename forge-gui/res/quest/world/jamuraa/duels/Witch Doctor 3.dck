@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Witch Doctor 3
+Title=Witch Doctor
+Icon=WitchDoctor.jpg
+Difficulty=hard
+Description=A monored 'weenieburn' deck.
+Deck Type=constructed
+[main]
+3 Bloodrock Cyclops|WTH
+4 Fireblast|VIS
+4 Goblin Elite Infantry|MIR
+4 Goblin Soothsayer|MIR
+4 Goblin Tinkerer|MIR
+4 Incinerate|MIR
+2 Kaervek's Torch|MIR
+4 Keeper of Kookus|VIS
+1 Lightning Cloud|VIS
+24 Mountain|MIR
+4 Suq'Ata Lancer|VIS
+2 Thunderbolt|WTH
+[sideboard]
+[planes]
+[schemes]

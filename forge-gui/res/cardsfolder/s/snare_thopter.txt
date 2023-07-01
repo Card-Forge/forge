@@ -1,0 +1,7 @@
+Name:Snare Thopter
+ManaCost:4
+Types:Artifact Creature Thopter
+PT:3/2
+K:Flying
+K:Haste
+Oracle:Flying, haste

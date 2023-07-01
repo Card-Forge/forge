@@ -1,0 +1,6 @@
+Name:Mox Ruby
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+SVar:PlayMain1:TRUE
+Oracle:{T}: Add {R}.

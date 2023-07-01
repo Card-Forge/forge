@@ -1,0 +1,8 @@
+Name:Perimeter Sergeant
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME attacks, other Humans you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Human.StrictlyOther+YouCtrl | NumAtt$ +1
+DeckHints:Type$Human
+Oracle:Whenever Perimeter Sergeant attacks, other Humans you control get +1/+0 until end of turn.

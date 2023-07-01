@@ -1,0 +1,5 @@
+Name:Onyx Goblet
+ManaCost:2 B
+Types:Artifact
+A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+Oracle:{T}: Target player loses 1 life.

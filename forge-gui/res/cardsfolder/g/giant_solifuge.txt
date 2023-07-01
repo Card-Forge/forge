@@ -1,0 +1,8 @@
+Name:Giant Solifuge
+ManaCost:2 RG RG
+Types:Creature Insect
+PT:4/1
+K:Trample
+K:Haste
+K:Shroud
+Oracle:({R/G} can be paid with either {R} or {G}.)\nTrample; haste; shroud (This creature can't be the target of spells or abilities.)

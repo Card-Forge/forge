@@ -1,0 +1,8 @@
+Name:Knight of Sorrows
+ManaCost:4 W
+Types:Creature Human Knight
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+K:Afterlife:1
+DeckHas:Ability$Token
+Oracle:Knight of Sorrows can block an additional creature each combat.\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)

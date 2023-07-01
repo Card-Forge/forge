@@ -1,0 +1,8 @@
+Name:Ulrich's Kindred
+ManaCost:2 R
+Types:Creature Wolf
+PT:3/2
+K:Trample
+A:AB$ Pump | Cost$ 3 G | ValidTgts$ Wolf.attacking,Werewolf.attacking | TgtPrompt$ Select target attacking Wolf or Werewolf | KW$ Indestructible | SpellDescription$ Target attacking Wolf or Werewolf gains indestructible until end of turn.
+DeckHints:Type$Wolf|Werewolf
+Oracle:Trample\n{3}{G}: Target attacking Wolf or Werewolf gains indestructible until end of turn.

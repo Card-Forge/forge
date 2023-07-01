@@ -1,0 +1,8 @@
+Name:Wolf Token
+ManaCost:no cost
+Colors:green
+Types:Creature Wolf
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ CallCount | AddToughness$ CallCount | EffectZone$ Battlefield | Description$ This creature gets +1/+1 for each card named Sound the Call in each graveyard.
+SVar:CallCount:Count$ValidGraveyard Card.namedSound the Call
+Oracle:This creature gets +1/+1 for each card named Sound the Call in each graveyard.

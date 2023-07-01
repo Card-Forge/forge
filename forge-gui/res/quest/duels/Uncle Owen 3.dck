@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Uncle Owen 3
+Title=Uncle Owen
+Difficulty=hard
+Description=WUB Control deck
+Icon=Uncle Owen.jpg
+Deck Type=constructed
+[main]
+2 Underground Sea
+4 Polluted Delta
+2 Mana Leak
+1 Keiga, the Tide Star
+1 Mox Sapphire
+2 Go for the Throat
+2 Doom Blade
+1 Swamp|ISD
+1 Concentrate
+1 Fact or Fiction
+1 Esper Charm
+1 Disenchant
+1 Plains|ISD
+2 Shadowmage Infiltrator
+2 Sower of Temptation
+4 Terror
+4 Control Magic
+1 Island|ISD
+1 Ancestral Recall
+2 Scrubland
+4 Marsh Flats
+4 Swords to Plowshares
+1 Mox Pearl
+1 Liliana Vess
+2 Tundra
+4 Flooded Strand
+1 Bribery
+1 Mox Jet
+2 Gerrard's Verdict
+2 Wrath of God
+2 Damnation
+[sideboard]

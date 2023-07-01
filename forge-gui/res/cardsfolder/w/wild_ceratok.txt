@@ -1,0 +1,5 @@
+Name:Wild Ceratok
+ManaCost:3 G
+Types:Creature Rhino
+PT:4/3
+Oracle:

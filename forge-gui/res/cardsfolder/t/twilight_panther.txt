@@ -1,0 +1,6 @@
+Name:Twilight Panther
+ManaCost:W
+Types:Creature Cat Spirit
+PT:1/2
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:{B}: Twilight Panther gains deathtouch until end of turn.

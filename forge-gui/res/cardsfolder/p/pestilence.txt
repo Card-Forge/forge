@@ -1,0 +1,10 @@
+Name:Pestilence
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | AILogic$ DmgAllCreaturesAndPlayers | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+SVar:NeedsToPlay:Creature
+SVar:NonStackingEffect:True
+DeckHas:Ability$Sacrifice
+Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.\n{B}: Pestilence deals 1 damage to each creature and each player.

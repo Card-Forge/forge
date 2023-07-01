@@ -1,0 +1,8 @@
+Name:Savage Ventmaw
+ManaCost:4 R G
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ R R R G G G | PersistentMana$ True | SpellDescription$ Add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.
+Oracle:Flying\nWhenever Savage Ventmaw attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.

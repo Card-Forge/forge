@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Death of Rats 3
+Title=Death of Rats
+Difficulty=hard
+Description=Mono W Humility Deck with Godhead of Awe
+Icon=Death of Rats.jpg
+Deck Type=constructed
+[main]
+23 Plains
+4 Godhead of Awe
+4 Humility
+4 Reverence
+4 Arcbound Worker
+4 Arcbound Stinger
+4 Arcbound Slith
+4 Phantom Nomad
+3 Shinewend
+1 Phantom Flock
+1 Sword of Vengeance
+1 Viridian Claw
+1 Vorrac Battlehorns
+1 Disenchant
+1 Mana Tithe
+[sideboard]

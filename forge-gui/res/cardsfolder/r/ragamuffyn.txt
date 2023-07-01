@@ -1,0 +1,7 @@
+Name:Ragamuffyn
+ManaCost:2 B
+Types:Creature Zombie Cleric
+PT:2/2
+A:AB$ Draw | Cost$ T Sac<1/Creature;Land/creature or land> | PrecostDesc$ Hellbent — | NumCards$ 1 | Activation$ Hellbent | SpellDescription$ Draw a card. Activate only if you have no cards in hand.
+AI:RemoveDeck:All
+Oracle:Hellbent — {T}, Sacrifice a creature or land: Draw a card. Activate only if you have no cards in hand.

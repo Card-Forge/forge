@@ -1,0 +1,8 @@
+Name:Angel of Mercy
+ManaCost:4 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:Flying\nWhen Angel of Mercy enters the battlefield, you gain 3 life.

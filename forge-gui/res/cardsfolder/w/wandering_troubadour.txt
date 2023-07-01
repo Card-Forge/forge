@@ -1,0 +1,8 @@
+Name:Wandering Troubadour
+ManaCost:3 G
+Types:Creature Dragon Bard
+PT:4/2
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigVenture | TriggerDescription$ At the beginning of your end step, if you had a land enter the battlefield under your control this turn, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+SVar:X:Count$ThisTurnEntered_Battlefield_Land.YouCtrl
+Oracle:At the beginning of your end step, if you had a land enter the battlefield under your control this turn, venture into the dungeon. (Enter the first room or advance to the next room.)

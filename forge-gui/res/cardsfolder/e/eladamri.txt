@@ -1,0 +1,9 @@
+Name:Eladamri
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/+15
+A:AB$ Effect | ActivationZone$ Command | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ RedirectDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | Duration$ Permanent | SpellDescription$ The next 1 damage that would be dealt to target creature you control is dealt to you instead.
+SVar:RedirectDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ RedirectDmg | DamageTarget$ You | Description$ The next 1 damage that would be dealt to target creature you control is dealt to you instead.
+SVar:RedirectDmg:DB$ ReplaceSplitDamage | DamageTarget$ You
+AI:RemoveDeck:All
+Oracle:Hand -1, life +15\n{0}: The next 1 damage that would be dealt to target creature you control is dealt to you instead.

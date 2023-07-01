@@ -1,0 +1,7 @@
+Name:Triton Fortune Hunter
+ManaCost:2 U
+Types:Creature Merfolk Soldier
+PT:2/2
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Heroic — Whenever you cast a spell that targets Triton Fortune Hunter, draw a card.

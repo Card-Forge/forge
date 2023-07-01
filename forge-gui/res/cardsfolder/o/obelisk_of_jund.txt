@@ -1,0 +1,5 @@
+Name:Obelisk of Jund
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo B R G | SpellDescription$ Add {B}, {R}, or {G}.
+Oracle:{T}: Add {B}, {R}, or {G}.

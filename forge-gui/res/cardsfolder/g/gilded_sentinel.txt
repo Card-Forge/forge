@@ -1,0 +1,5 @@
+Name:Gilded Sentinel
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/3
+Oracle:

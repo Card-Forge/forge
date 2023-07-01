@@ -1,0 +1,9 @@
+Name:Maze Skullbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+A:AB$ Pump | Cost$ 2 G Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Target creature you control gets +3/+3 and gains trample until end of turn. Draw a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw
+AI:RemoveDeck:Random
+DeckHas:Color$Green & Ability$Sacrifice
+Oracle:{1}, Sacrifice Maze Skullbomb: Draw a card.\n{2}{G}, Sacrifice Maze Skullbomb: Target creature you control gets +3/+3 and gains trample until end of turn. Draw a card. Activate only as a sorcery.

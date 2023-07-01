@@ -1,0 +1,7 @@
+Name:Hinterland Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/3
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Artifact | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block artifact creatures.
+Oracle:Flying\nHinterland Drake can't block artifact creatures.

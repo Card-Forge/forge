@@ -1,0 +1,9 @@
+Name:Bloodcrazed Hoplite
+ManaCost:1 B
+Types:Creature Human Soldier
+PT:2/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ FathomDraw | TriggerDescription$ Whenever a +1/+1 counter is put on CARDNAME, remove a +1/+1 counter from target creature an opponent controls.
+SVar:FathomDraw:DB$ RemoveCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Heroic — Whenever you cast a spell that targets Bloodcrazed Hoplite, put a +1/+1 counter on it.\nWhenever a +1/+1 counter is put on Bloodcrazed Hoplite, remove a +1/+1 counter from target creature an opponent controls.

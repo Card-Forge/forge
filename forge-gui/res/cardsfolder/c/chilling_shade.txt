@@ -1,0 +1,8 @@
+Name:Chilling Shade
+ManaCost:2 B
+Types:Snow Creature Shade
+PT:1/1
+K:Flying
+A:AB$ Pump | Cost$ S | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+DeckNeeds:Type$Snow
+Oracle:Flying\n{S}: Chilling Shade gets +1/+1 until end of turn. ({S} can be paid with one mana from a snow source.)

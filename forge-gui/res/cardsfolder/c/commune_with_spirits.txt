@@ -1,0 +1,6 @@
+Name:Commune with Spirits
+ManaCost:G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 1 | ChangeValid$ Enchantment,Land | RestRandomOrder$ True | Optional$ True | ForceRevealToController$ True | SpellDescription$ Look at the top four cards of your library. You may reveal an enchantment or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+DeckHints:Type$Enchantment|Land
+Oracle:Look at the top four cards of your library. You may reveal an enchantment or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

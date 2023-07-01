@@ -1,0 +1,8 @@
+Name:Scavenging Ooze
+ManaCost:1 G
+Types:Creature Ooze
+PT:2/2
+A:AB$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBPutCounter | SpellDescription$ Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on CARDNAME and you gain 1 life.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1
+Oracle:{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.

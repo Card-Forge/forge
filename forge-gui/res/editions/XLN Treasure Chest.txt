@@ -1,0 +1,18 @@
+[metadata]
+Code=PXTC
+Date=2017-11-24
+Name=XLN Treasure Chest
+Type=Promo
+ScryfallCode=PXTC
+
+[cards]
+22 R Legion's Landing @Svetlin Velinov & Jared Blando
+74 R Search for Azcanta @Magali Villeneuve & Jared Blando
+90 R Arguel's Blood Fast @Daarken & Jared Blando
+173 R Vance's Blasting Cannons @Jonas De Ro & Jared Blando
+191 R Growing Rites of Itlimoc @Grzegorz Rutkowski & Jared Blando
+234 R Conqueror's Galleon @Emrah Elmasli & Jared Blando
+235 R Dowsing Dagger @Florian de Gesincourt & Jared Blando
+243 R Primal Amulet @John Avon & Jared Blando
+249 R Thaumatic Compass @Yeong-Hao Han & Jared Blando
+250 R Treasure Map @Cliff Childs & Jared Blando

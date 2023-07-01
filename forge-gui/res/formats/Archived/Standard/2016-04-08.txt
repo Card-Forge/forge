@@ -1,0 +1,6 @@
+[format]
+Name:Standard (SOI)
+Type:Archived
+Subtype:Standard
+Effective:2016-04-08
+Sets:DTK, ORI, BFZ, OGW, SOI, W16

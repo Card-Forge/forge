@@ -1,0 +1,45 @@
+[quest]
+id=3
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 black rares
+Credit Reward=100
+HumanExtras=
+AIExtras=Infernal Genesis
+[metadata]
+Name=quest3
+Title=Dungeon Crawling (Black)
+Difficulty=medium
+Description=The dead cannot be silenced, and want you to join their ranks.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+20 Swamp|M11
+4 Charcoal Diamond
+1 Armillary Sphere
+1 Pilgrim's Eye
+1 Cabal Torturer
+1 Caustic Crawler
+3 Consumptive Goo
+1 Disciple of Tevesh Szat
+1 Grandmother Sengir
+3 Weed-Pruner Poplar
+1 Corrosive Mentor
+4 Creakwood Liege
+1 Akroma's Memorial
+4 Dross Golem
+1 Scornful Egotist
+1 Krosan Cloudscraper
+1 Krosan Colossus
+1 Titanic Bulvox
+1 Viridian Longbow
+1 Rod of Ruin
+1 Avatar of Woe
+1 Delraich
+1 Spirit of the Night
+1 Stillmoon Cavalier
+2 Pennon Blade
+1 Beacon of Unrest
+1 Zombify
+[sideboard]

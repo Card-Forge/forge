@@ -1,0 +1,6 @@
+Name:Thumbscrews
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ GE5 | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, if you have five or more cards in hand, CARDNAME deals 1 damage to target opponent or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | NumDmg$ 1
+Oracle:At the beginning of your upkeep, if you have five or more cards in hand, Thumbscrews deals 1 damage to target opponent or planeswalker.

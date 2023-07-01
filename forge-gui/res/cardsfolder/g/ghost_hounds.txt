@@ -1,0 +1,9 @@
+Name:Ghost Hounds
+ManaCost:1 B
+Types:Creature Dog Spirit
+PT:1/1
+K:Vigilance
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.White | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.White | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike
+Oracle:Vigilance\nWhenever Ghost Hounds blocks or becomes blocked by a white creature, Ghost Hounds gains first strike until end of turn.

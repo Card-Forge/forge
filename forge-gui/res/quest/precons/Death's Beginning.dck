@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Death's Beginning
+Description=Even in death, your creatures serve you. You control life and death on the battlefield, and as your graveyard fills with creatures, your dark power swells. 
+Deck Type=constructed
+Set=BNG
+Image=deaths_beginning.jpg
+[Main]
+1 Archetype of Finality|BNG
+2 Asphyxiate|BNG
+2 Commune with the Gods|THS
+1 Cutthroat Maneuver|THS
+1 Eater of Hope+|BNG
+2 Felhide Brawler|BNG
+1 Felhide Minotaur|THS
+11 Forest|THS
+2 Forsaken Drifters|BNG
+2 Graverobber Spider|BNG
+1 Keepsake Gorgon|THS
+1 Loathsome Catoblepas|THS
+1 March of the Returned|THS
+2 Mortal's Resolve|BNG
+2 Nemesis of Mortals|THS
+1 Nighthowler|THS
+1 Pharika's Mender|THS
+1 Pheres-Band Centaurs|THS
+1 Raised by Wolves|BNG
+1 Rescue from the Underworld|THS
+2 Returned Centaur|THS
+1 Satyr Piper|THS
+2 Satyr Wayfinder|BNG
+15 Swamp|THS
+1 Unravel the AEther|BNG
+2 Weight of the Underworld|BNG
+[sideboard]
+

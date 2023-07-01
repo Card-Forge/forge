@@ -1,0 +1,20 @@
+# TODO: Leyline Tyrant needs additional AI logic to handle paying mana when it dies
+[metadata]
+Name:Possibility Storm - Strixhaven: School of Mages #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/06/175.-STX4-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has seven red mana floating and no other mana sources available. Assume any cards you could draw are not relevant to the puzzle.
+[state]
+humanlife=1
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Silverquill Command;Killian, Ink Duelist;Heated Debate;Tome Shredder
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Bonecrusher Giant;Blade Historian;Dogged Pursuit;Dogged Pursuit;Dogged Pursuit;Savai Triome;Savai Triome;Savai Triome;Furycalm Snarl;Furycalm Snarl;Furycalm Snarl
+aibattlefield=Leyline Tyrant
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aipersistentmana=R R R R R R R

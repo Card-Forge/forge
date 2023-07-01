@@ -1,0 +1,7 @@
+Name:Storm Spirit
+ManaCost:3 G W U
+Types:Creature Elemental Spirit
+PT:3/3
+K:Flying
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+Oracle:Flying\n{T}: Storm Spirit deals 2 damage to target creature.

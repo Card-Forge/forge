@@ -1,0 +1,7 @@
+Name:Wandering Wolf
+ManaCost:1 G
+Types:Creature Wolf
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:X:Count$CardPower
+Oracle:Creatures with power less than Wandering Wolf's power can't block it.

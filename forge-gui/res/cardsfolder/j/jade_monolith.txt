@@ -1,0 +1,11 @@
+Name:Jade Monolith
+ManaCost:4
+Types:Artifact
+A:AB$ ChooseSource | Cost$ 1 | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to you instead.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessDamage | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ You | Description$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to you instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+AI:RemoveDeck:All
+Oracle:{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.

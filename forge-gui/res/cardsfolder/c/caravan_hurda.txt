@@ -1,0 +1,6 @@
+Name:Caravan Hurda
+ManaCost:4 W
+Types:Creature Giant
+PT:1/5
+K:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

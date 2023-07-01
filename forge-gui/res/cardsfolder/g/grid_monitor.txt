@@ -1,0 +1,8 @@
+Name:Grid Monitor
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/6
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't cast creature spells.
+AI:RemoveDeck:All
+SVar:DonateMe:5
+Oracle:You can't cast creature spells.

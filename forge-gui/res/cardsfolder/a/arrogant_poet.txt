@@ -1,0 +1,7 @@
+Name:Arrogant Poet
+ManaCost:1 B
+Types:Creature Human Warlock
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay 2 life. If you do, it gains flying until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ PayLife<2> | Defined$ Self | KW$ Flying
+Oracle:Whenever Arrogant Poet attacks, you may pay 2 life. If you do, it gains flying until end of turn.

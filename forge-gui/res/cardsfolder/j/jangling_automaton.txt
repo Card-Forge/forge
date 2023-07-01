@@ -1,0 +1,8 @@
+Name:Jangling Automaton
+ManaCost:3
+Types:Artifact Creature Construct
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap all creatures defending player controls.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.ControlledBy TriggeredDefendingPlayer
+AI:RemoveDeck:All
+Oracle:Whenever Jangling Automaton attacks, untap all creatures defending player controls.

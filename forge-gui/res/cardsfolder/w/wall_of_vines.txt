@@ -1,0 +1,7 @@
+Name:Wall of Vines
+ManaCost:G
+Types:Creature Plant Wall
+PT:0/3
+K:Defender
+K:Reach
+Oracle:Defender (This creature can't attack.)\nReach (This creature can block creatures with flying.)

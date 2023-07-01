@@ -1,0 +1,6 @@
+Name:Ridge Rannet
+ManaCost:5 R R
+Types:Creature Beast
+PT:6/4
+K:Cycling:2
+Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

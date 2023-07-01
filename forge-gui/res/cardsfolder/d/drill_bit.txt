@@ -1,0 +1,6 @@
+Name:Drill Bit
+ManaCost:2 B
+Types:Sorcery
+K:Spectacle:B
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player discards that card.
+Oracle:Spectacle {B} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nTarget player reveals their hand. You choose a nonland card from it. That player discards that card.

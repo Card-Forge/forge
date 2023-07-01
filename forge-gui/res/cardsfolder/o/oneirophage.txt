@@ -1,0 +1,9 @@
+Name:Oneirophage
+ManaCost:3 U
+Types:Creature Squid Illusion
+PT:1/2
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you draw a card, put a +1/+1 counter on Oneirophage.

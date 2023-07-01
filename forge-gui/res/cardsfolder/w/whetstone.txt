@@ -1,0 +1,6 @@
+Name:Whetstone
+ManaCost:3
+Types:Artifact
+A:AB$ Mill | Cost$ 3 | NumCards$ 2 | Defined$ Player | SpellDescription$ Each player mills two cards.
+AI:RemoveDeck:Random
+Oracle:{3}: Each player mills two cards.

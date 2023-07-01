@@ -1,0 +1,8 @@
+Name:Anhelo, the Painter
+ManaCost:U B R
+Types:Legendary Creature Vampire Assassin
+K:Deathtouch
+PT:1/3
+S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Casualty:2 | Description$ The first instant or sorcery spell you cast each turn has casualty 2. (As you cast that spell, you may sacrifice a creature with power 2 or greater. When you do, copy the spell and you may choose new targets for the copy.)
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+Oracle:Deathtouch\nThe first instant or sorcery spell you cast each turn has casualty 2. (As you cast that spell, you may sacrifice a creature with power 2 or greater. When you do, copy the spell and you may choose new targets for the copy.)

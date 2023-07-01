@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 071415 - No Matter What
+URL:http://www.gatheringmagic.com/seanuy-071415-no-matter-what/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win on this turn.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=4
+AILife=13
+humanhand=Might of the Masses|Set:ORI; Reclaim|Set:ORI; Subterranean Scout|Set:ORI
+humangraveyard=Timberpack Wolf|Set:ORI; Titanic Growth|Set:ORI; Act of Treason|Set:ORI; Chandra's Fury|Set:ORI
+humanlibrary=
+humanbattlefield=Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Forest|Set:ORI; Forest|Set:ORI; Forest|Set:ORI; Bellows Lizard|Set:ORI; Valeron Wardens|Set:ORI; Akroan Sergeant|Set:ORI; Call of the Full Moon|Set:ORI|AttachedTo:420; Llanowar Empath|Set:ORI|Id:420
+aibattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI|Tapped; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Anointer of Champions|Set:ORI|Tapped; Maritime Guard|Set:ORI; Ampryn Tactician|Set:ORI; Ringwarden Owl|Set:ORI|Tapped; Heavy Infantry|Set:ORI
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

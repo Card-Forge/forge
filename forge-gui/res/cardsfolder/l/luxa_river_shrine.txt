@@ -1,0 +1,8 @@
+Name:Luxa River Shrine
+ManaCost:3
+Types:Artifact
+A:AB$ GainLife | Cost$ 1 T | LifeAmount$ 1 | SubAbility$ DBPutCounter | SpellDescription$ You gain 1 life. Put a brick counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1
+A:AB$ GainLife | Cost$ T | LifeAmount$ 2 | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ You gain 2 life. Activate only if there are three or more brick counters on CARDNAME.
+SVar:X:Count$CardCounters.BRICK
+Oracle:{1}, {T}: You gain 1 life. Put a brick counter on Luxa River Shrine.\n{T}: You gain 2 life. Activate only if there are three or more brick counters on Luxa River Shrine.

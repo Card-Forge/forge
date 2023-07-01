@@ -1,0 +1,8 @@
+Name:Donate
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGiveControl | AILogic$ DonateTargetPlayer | SpellDescription$ Target player gains control of target permanent you control. | StackDescription$ None
+SVar:DBGiveControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Defined$ Targeted | NewController$ ParentTarget | AILogic$ DonateTargetPerm
+AI:RemoveDeck:Random
+SVar:DoNotDiscardIfAble:TRUE
+Oracle:Target player gains control of target permanent you control.

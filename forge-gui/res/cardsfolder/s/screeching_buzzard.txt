@@ -1,0 +1,9 @@
+Name:Screeching Buzzard
+ManaCost:3 B
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:SacMe:1
+Oracle:Flying\nWhen Screeching Buzzard dies, each opponent discards a card.

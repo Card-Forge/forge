@@ -1,0 +1,17 @@
+[metadata]
+Code=PURL
+Date=2009-02-08
+Name=URL Convention Promos
+Type=Promo
+ScryfallCode=PURL
+
+[cards]
+1 R Steward of Valeron @Greg Staples
+2 R Kor Skyfisher @Dan Scott
+3 R Bloodthrone Vampire @Steve Argyle
+4 R Merfolk Mesmerist @Jana Schirmer & Johannes Voss
+5 R Chandra's Fury @Volkan Baǵa
+7 R Stealer of Secrets @Michael C. Hayes
+8 C Aeronaut Tinkerer @Willian Murai
+9 R Relentless Rats @Thomas M. Baxa
+34★ U Shepherd of the Lost @Kekai Kotaki

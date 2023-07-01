@@ -1,0 +1,8 @@
+Name:Mobile Garrison
+ManaCost:3
+Types:Artifact Vehicle
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap another target artifact or creature you control.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact.Other+YouCtrl,Creature.Other+YouCtrl | TgtPrompt$ Select another target artifact or creature you control.
+K:Crew:2
+Oracle:Whenever Mobile Garrison attacks, untap another target artifact or creature you control.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

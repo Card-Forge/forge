@@ -1,0 +1,8 @@
+Name:Soul Exchange
+ManaCost:B B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ B B Exile<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.
+SVar:DBPutCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P2P2 | Defined$ Targeted
+SVar:X:Exiled$Valid Thrull
+AI:RemoveDeck:Random
+Oracle:As an additional cost to cast this spell, exile a creature you control.\nReturn target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.

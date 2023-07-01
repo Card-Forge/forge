@@ -1,0 +1,8 @@
+Name:Stealth Mission
+ManaCost:2 U
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUnblockable | SpellDescription$ Put two +1/+1 counters on target creature you control.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ That creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Put two +1/+1 counters on target creature you control. That creature can't be blocked this turn.

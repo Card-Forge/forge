@@ -1,0 +1,11 @@
+Name:Gixian Puppeteer
+ManaCost:3 B
+Types:Creature Phyrexian Warlock
+PT:4/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ LoseGain | TriggerDescription$ Whenever you draw your second card each turn, each opponent loses 2 life and you gain 2 life.
+SVar:LoseGain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, return another target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE3+Other
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Whenever you draw your second card each turn, each opponent loses 2 life and you gain 2 life.\nWhen Gixian Puppeteer dies, return another target creature card with mana value 3 or less from your graveyard to the battlefield.

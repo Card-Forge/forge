@@ -1,0 +1,10 @@
+Name:Novice Knight
+ManaCost:W
+Types:Creature Human Knight
+PT:2/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self+enchanted,Card.Self+equipped | Description$ As long as CARDNAME is enchanted or equipped, it can attack as though it didn't have defender.
+SVar:EnchantMe:Once
+SVar:EquipMe:Once
+DeckHints:Type$Enchantment|Equipment
+Oracle:Defender (This creature can't attack.)\nAs long as Novice Knight is enchanted or equipped, it can attack as though it didn't have defender.

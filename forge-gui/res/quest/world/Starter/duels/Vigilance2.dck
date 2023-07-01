@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Angel of Light
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=A vigilance deck.
+Deck Type=constructed
+Name=Vigilance2
+[Main]
+4 Alaborn Grenadier|PO2
+4 Angel of Light|S99
+4 Ardent Militia|POR
+4 Armored Griffin|PO2
+4 Gift of Estates|POR
+4 Guan Yu's 1,000-Li March|PTK
+2 Hero's Resolve|S00
+5 Plains|POR|1
+5 Plains|POR|2
+5 Plains|POR|3
+7 Plains|POR|4
+4 Righteous Fury|PO2
+2 Shu General|PTK
+4 Veteran Cavalier|S99
+2 Zhang Fei, Fierce Warrior|PTK

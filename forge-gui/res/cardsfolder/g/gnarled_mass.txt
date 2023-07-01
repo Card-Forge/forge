@@ -1,0 +1,5 @@
+Name:Gnarled Mass
+ManaCost:1 G G
+Types:Creature Spirit
+PT:3/3
+Oracle:

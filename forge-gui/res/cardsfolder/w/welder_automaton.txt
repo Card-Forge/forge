@@ -1,0 +1,6 @@
+Name:Welder Automaton
+ManaCost:2
+Types:Artifact Creature Construct
+PT:2/1
+A:AB$ DealDamage | Cost$ 3 R | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+Oracle:{3}{R}: Welder Automaton deals 1 damage to each opponent.

@@ -1,0 +1,5 @@
+Name:Elvish Ranger
+ManaCost:2 G
+Types:Creature Elf Ranger
+PT:4/1
+Oracle:

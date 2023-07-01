@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Platinum Man
+Title=Platinum Man
+Difficulty=medium
+Description=“The First Laws of Robotics: A robot may not injure a human being or, through inaction, allow a human being to come to harm”
+Icon=Platinum.jpg
+Deck Type=constructed
+[Main]
+2 Bottle Gnomes|MRD
+1 Emissary of Hope|DST
+3 Golem's Heart|SOM
+1 Kemba's Skyguard|SOM
+1 Leonin Elder|MRD
+3 Lightning Greaves|MRD
+2 Mycosynth Lattice|DST
+3 Norn's Annex|NPH
+24 Plains|MRD|1
+3 Platinum Angel|MRD
+3 Platinum Emperion|SOM
+2 Pristine Talisman|NPH
+1 Shattered Angel|NPH
+1 Sphere of Purity|MRD
+4 Suture Priest|NPH
+4 Thunderstaff|DST
+1 War Report|NPH
+1 Whitesun's Passage|SOM
+[sideboard]

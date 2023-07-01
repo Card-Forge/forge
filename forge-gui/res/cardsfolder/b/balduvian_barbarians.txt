@@ -1,0 +1,5 @@
+Name:Balduvian Barbarians
+ManaCost:1 R R
+Types:Creature Human Barbarian
+PT:3/2
+Oracle:

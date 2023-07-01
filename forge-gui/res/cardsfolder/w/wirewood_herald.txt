@@ -1,0 +1,7 @@
+Name:Wirewood Herald
+ManaCost:1 G
+Types:Creature Elf
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Elf | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:When Wirewood Herald dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle.

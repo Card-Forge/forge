@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=M11
+Image=power_of_prophecy.jpg
+Name=Power of Prophecy
+Description=Seize control of your opponents' forces, manipulate the flow of battle, and leave your opposition confused and disoriented. Gain knowledge of the future and use Conundrum Sphinx to hasten your foretold dominance.
+[Main]
+2 AEther Adept|M11
+2 Air Servant|M11
+1 Armored Cancrix|M11
+2 Augury Owl|M11
+1 Azure Drake|M11
+1 Blinding Mage|M11
+2 Cloud Elemental|M11
+1 Condemn|M11
+1 Conundrum Sphinx+|M11
+1 Crystal Ball|M11
+2 Foresee|M11
+1 Harbor Serpent|M11
+16 Island|M11
+2 Jace's Ingenuity|M11
+2 Maritime Guard|M11
+1 Mighty Leap|M11
+1 Mind Control|M11
+2 Negate|M11
+1 Pacifism|M11
+9 Plains|M11
+1 Safe Passage|M11
+1 Scroll Thief|M11
+2 Sleep|M11
+1 Solemn Offering|M11
+1 Stormtide Leviathan|M11
+1 Wall of Frost|M11
+2 Water Servant|M11

@@ -1,0 +1,9 @@
+Name:Shield of the Avatar
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.EquippedBy | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ X
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+Oracle:If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

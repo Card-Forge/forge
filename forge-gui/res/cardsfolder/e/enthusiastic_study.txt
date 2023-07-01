@@ -1,0 +1,6 @@
+Name:Enthusiastic Study
+ManaCost:2 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | KW$ Trample | SubAbility$ DBLearn | SpellDescription$ Target creature gets +3/+1 and gains trample until end of turn.
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+Oracle:Target creature gets +3/+1 and gains trample until end of turn.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

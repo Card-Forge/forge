@@ -1,0 +1,14 @@
+[metadata]
+Name:Pauper Puzzles #02 - They See Me Rollin'
+URL:https://pauperpuzzles.wordpress.com/2017/01/18/2-they-see-me-rollin/
+Goal:Win
+Turns:1
+Difficulty:Medium
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=2
+AILife=8
+humanhand=Swamp;Jungle Hollow;Armadillo Cloak;Prey Upon;Shrink;Complete Disregard
+humanbattlefield=Swamp;Swamp;Forest;Forest;Forest;Orzhov Basilica;Pharika's Chosen;Putrid Leech;Pestilence
+aibattlefield=Ulamog's Crusher;Sea Gate Oracle

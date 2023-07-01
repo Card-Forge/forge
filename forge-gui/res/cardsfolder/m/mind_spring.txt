@@ -1,0 +1,6 @@
+Name:Mind Spring
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Draw | Cost$ X U U | NumCards$ X | SpellDescription$ Draw X cards.
+SVar:X:Count$xPaid
+Oracle:Draw X cards.

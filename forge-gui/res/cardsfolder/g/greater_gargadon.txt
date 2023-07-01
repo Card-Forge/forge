@@ -1,0 +1,7 @@
+Name:Greater Gargadon
+ManaCost:9 R
+Types:Creature Beast
+PT:9/7
+K:Suspend:10:R
+A:AB$ RemoveCounter | Cost$ Sac<1/Artifact;Creature;Land/artifact, creature or land> | CostDesc$ Sacrifice an artifact, creature, or land: | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | ActivationZone$ Exile | IsPresent$ Card.Self+suspended | PresentZone$ Exile | SpellDescription$ Remove a time counter from CARDNAME. Activate only if CARDNAME is suspended.
+Oracle:Suspend 10—{R}\nSacrifice an artifact, creature, or land: Remove a time counter from Greater Gargadon. Activate only if Greater Gargadon is suspended.

@@ -1,0 +1,11 @@
+Name:Biblioplex Kraken
+ManaCost:4 U
+Types:Creature Kraken
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 3.
+SVar:TrigScry:DB$ Scry | ScryNum$ 3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may return another creature you control to it's owner's hand. If you do, CARDNAME can't be blocked this turn.
+SVar:TrigUnblockable:AB$ Effect | Cost$ Return<1/Creature.Other> | RememberObjects$ TriggeredAttacker | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+Oracle:When Biblioplex Kraken enters the battlefield, scry 3.\nWhenever Biblioplex Kraken attacks, you may return another creature you control to it's owner's hand. If you do, Biblioplex Kraken can't be blocked this turn.

@@ -1,0 +1,5 @@
+Name:Font of Fertility
+ManaCost:G
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped, then shuffle.
+Oracle:{1}{G}, Sacrifice Font of Fertility: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

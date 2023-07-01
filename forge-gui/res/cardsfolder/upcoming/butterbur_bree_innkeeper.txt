@@ -1,0 +1,8 @@
+Name:Butterbur, Bree Innkeeper
+ManaCost:2 G W
+Types:Legendary Creature Human Peasant
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Food.YouCtrl | PresentCompare$ EQ0 | TriggerDescription$ At the beginning of your end step, if you don't control a Food, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food
+Oracle:At the beginning of your end step, if you don't control a Food, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

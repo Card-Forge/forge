@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Charging Badger
+OpponentName=The Cete
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Bident of Thassa|Bow of Nylea
+HumanExtras=
+[metadata]
+Name=THS Challenge: Charging Badger
+Title=A Cete of Badgers
+Difficulty=easy
+Description="Badger badger badger badger badger badger badger badger badger badger badger badger"\n-Badger Badger Badger by Weebl
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+40 Charging Badger|BNG
+20 Forest|THS|4

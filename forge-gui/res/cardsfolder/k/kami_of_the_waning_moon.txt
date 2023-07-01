@@ -1,0 +1,11 @@
+Name:Kami of the Waning Moon
+ManaCost:2 B
+Types:Creature Spirit
+PT:1/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear
+SVar:BuffedBy:Arcane,Spirit
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)

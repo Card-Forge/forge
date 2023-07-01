@@ -1,0 +1,8 @@
+Name:Stalwart Aven
+ManaCost:2 W
+Types:Creature Bird Soldier
+PT:1/3
+K:Flying
+K:Renown:1
+DeckHas:Ability$Counters
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

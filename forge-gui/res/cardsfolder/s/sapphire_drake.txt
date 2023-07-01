@@ -1,0 +1,8 @@
+Name:Sapphire Drake
+ManaCost:5 U
+Types:Creature Drake
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control with a +1/+1 counter on it has flying.
+DeckHints:Ability$Counters
+Oracle:Flying\nEach creature you control with a +1/+1 counter on it has flying.

@@ -1,0 +1,8 @@
+Name:Thran Quarry
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:NeedsToPlay:Creature.YouCtrl
+Oracle:At the beginning of the end step, if you control no creatures, sacrifice Thran Quarry.\n{T}: Add one mana of any color.

@@ -1,0 +1,12 @@
+Name:Valduk, Keeper of the Flame
+ManaCost:2 R
+Types:Legendary Creature Human Shaman
+PT:3/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, for each Aura and Equipment attached to CARDNAME, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_trample_haste | AtEOT$ Exile
+SVar:X:Count$Valid Equipment.Attached,Aura.Attached
+SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
+DeckHints:Type$Equipment|Aura
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.

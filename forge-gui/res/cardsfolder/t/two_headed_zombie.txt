@@ -1,0 +1,6 @@
+Name:Two-Headed Zombie
+ManaCost:3 B
+Types:Creature Zombie
+PT:4/2
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

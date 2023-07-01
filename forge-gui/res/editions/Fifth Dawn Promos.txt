@@ -1,0 +1,9 @@
+[metadata]
+Code=P5DN
+Date=2004-06-04
+Name=Fifth Dawn Promos
+Type=Promo
+ScryfallCode=P5DN
+
+[cards]
+131★ R Helm of Kaldra @Donato Giancola

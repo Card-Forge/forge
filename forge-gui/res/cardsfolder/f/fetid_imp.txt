@@ -1,0 +1,7 @@
+Name:Fetid Imp
+ManaCost:1 B
+Types:Creature Imp
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:Flying\n{B}: Fetid Imp gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

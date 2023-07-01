@@ -1,0 +1,8 @@
+Name:Wild Endeavor
+ManaCost:4 G G
+Types:Sorcery
+A:SP$ RollDice | Amount$ 2 | Sides$ 4 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Roll two d4 and choose one result. Create a number of 3/3 green Beast creature tokens equal to that result. Then search your library for a number of basic land cards equal to the other result, put them onto the battlefield tapped, then shuffle.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_3_3_beast | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | ChangeNum$ Y | ChangeType$ Land.Basic | Destination$ Battlefield | Tapped$ True | StackDescription$ None
+DeckHas:Ability$Token
+Oracle:Roll two d4 and choose one result. Create a number of 3/3 green Beast creature tokens equal to that result. Then search your library for a number of basic land cards equal to the other result, put them onto the battlefield tapped, then shuffle.

@@ -1,0 +1,7 @@
+Name:Weed-Pruner Poplar
+ManaCost:4 B
+Types:Creature Treefolk Assassin
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, target creature other than CARDNAME gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+Oracle:At the beginning of your upkeep, target creature other than Weed-Pruner Poplar gets -1/-1 until end of turn.

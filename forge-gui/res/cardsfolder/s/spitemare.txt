@@ -1,0 +1,9 @@
+Name:Spitemare
+ManaCost:2 RW RW
+Types:Creature Elemental
+PT:3/3
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Spitemare is dealt damage, it deals that much damage to any target.

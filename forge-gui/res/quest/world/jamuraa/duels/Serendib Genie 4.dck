@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Serendib Genie 4
+Title=Serendib Genie
+Icon=SerendibGenie.jpg
+Difficulty=very hard
+Description=Serendib Genie plays a T1 'Djinns'n'juice' deck.
+Deck Type=constructed
+Card Reward=25% Serendib Efreet|ARN
+[main]
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+1 Braingeyser|LEB
+4 City of Brass|5ED
+1 Demonic Tutor|LEB
+1 Disenchant|5ED
+4 Erhnam Djinn|ARN
+4 Incinerate|MIR
+1 Library of Alexandria|ARN
+4 Lightning Bolt|LEB
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+3 Mystical Tutor|MIR
+2 Plateau|LEB
+2 Psionic Blast|LEB
+1 Regrowth|LEB
+1 Savannah|LEB
+4 Serendib Efreet|ARN
+3 Storm Seeker|LEG
+3 Strip Mine|ATQ
+1 Swords to Plowshares|LEB
+3 Taiga|LEB
+1 Time Walk|LEB
+1 Timetwister|LEB
+3 Tropical Island|LEB
+2 Tundra|LEB
+1 Underground Sea|LEB
+1 Wheel of Fortune|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

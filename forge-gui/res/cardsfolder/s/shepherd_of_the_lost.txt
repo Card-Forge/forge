@@ -1,0 +1,8 @@
+Name:Shepherd of the Lost
+ManaCost:4 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:First Strike
+K:Vigilance
+Oracle:Flying, first strike, vigilance

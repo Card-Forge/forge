@@ -1,0 +1,7 @@
+Name:Wall of Faith
+ManaCost:3 W
+Types:Creature Wall
+PT:0/5
+K:Defender
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+Oracle:Defender (This creature can't attack.)\n{W}: Wall of Faith gets +0/+1 until end of turn.

@@ -1,0 +1,6 @@
+Name:Wall of Earth
+ManaCost:1 R
+Types:Creature Wall
+PT:0/6
+K:Defender
+Oracle:Defender (This creature can't attack.)

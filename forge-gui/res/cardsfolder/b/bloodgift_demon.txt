@@ -1,0 +1,9 @@
+Name:Bloodgift Demon
+ManaCost:3 B B
+Types:Creature Demon
+PT:5/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, target player draws a card and loses 1 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1
+Oracle:Flying\nAt the beginning of your upkeep, target player draws a card and loses 1 life.

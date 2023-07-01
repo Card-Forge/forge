@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Skulking Ghost
+OpponentName=The Skulking Ghosts
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Reparations
+[metadata]
+Name=MIR Challenge: Skulking Ghost
+Title=The Skulking Ghosts
+Difficulty=medium
+Description="They exist only so long as the living take no notice." -Kifimbo, Shadow Guildmage
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+40 Skulking Ghost|MIR
+20 Swamp|MIR|2

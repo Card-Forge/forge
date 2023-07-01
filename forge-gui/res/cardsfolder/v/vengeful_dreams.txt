@@ -1,0 +1,7 @@
+Name:Vengeful Dreams
+ManaCost:W W
+Types:Instant
+A:SP$ ChangeZone | Cost$ W W Discard<X/Card/card(s)> | CostDesc$ As an additional cost to cast this spell, discard X cards. | Origin$ Battlefield | Destination$ Exile | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.attacking | TgtPrompt$ Select X target attacking creatures | StackDescription$ Exile {c:Targeted}. | SpellDescription$ Exile X target attacking creatures.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard X cards.\nExile X target attacking creatures.

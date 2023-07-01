@@ -1,0 +1,4 @@
+Name:Bayou
+ManaCost:no cost
+Types:Land Swamp Forest
+Oracle:({T}: Add {B} or {G}.)

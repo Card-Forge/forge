@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 3 Reanimator
+Title=Reanimator
+Difficulty=hard
+Description=Death claims all but the darkest souls.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Archangel|POR
+4 Armageddon|POR
+4 Assassin's Blade|POR
+4 Breath of Life|POR
+4 Gravedigger|POR
+4 Hand of Death|POR|2
+4 Mercenary Knight|POR
+13 Plains|POR|2
+4 Serpent Assassin|POR
+13 Swamp|POR|2
+4 Wrath of God|POR

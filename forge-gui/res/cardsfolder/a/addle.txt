@@ -1,0 +1,6 @@
+Name:Addle
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard | SpellDescription$ Choose a color. Target player reveals their hand and you choose a card of that color from it. That player discards that card.
+SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealYouChoose | DiscardValid$ Card.ChosenColor | DiscardValidDesc$ card of that color | ValidTgts$ Player
+Oracle:Choose a color. Target player reveals their hand and you choose a card of that color from it. That player discards that card.

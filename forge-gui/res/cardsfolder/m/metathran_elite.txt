@@ -1,0 +1,8 @@
+Name:Metathran Elite
+ManaCost:1 U U
+Types:Creature Metathran Soldier
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+enchanted | Description$ CARDNAME can't be blocked as long as it's enchanted.
+SVar:EnchantMe:Once
+DeckHints:Type$Enchantment
+Oracle:Metathran Elite can't be blocked as long as it's enchanted.

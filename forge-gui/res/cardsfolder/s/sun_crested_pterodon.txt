@@ -1,0 +1,8 @@
+Name:Sun-Crested Pterodon
+ManaCost:4 W
+Types:Creature Dinosaur
+PT:2/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Permanent.Dinosaur+YouCtrl+Other | Description$ CARDNAME has vigilance as long as you control another Dinosaur.
+DeckHints:Type$Dinosaur
+Oracle:Flying\nSun-Crested Pterodon has vigilance as long as you control another Dinosaur.

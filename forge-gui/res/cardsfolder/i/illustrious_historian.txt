@@ -1,0 +1,7 @@
+Name:Illustrious Historian
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:2/1
+A:AB$ Token | Cost$ 5 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 3/2 red and white Spirit creature token.
+DeckHas:Ability$Token
+Oracle:{5}, Exile Illustrious Historian from your graveyard: Create a tapped 3/2 red and white Spirit creature token.

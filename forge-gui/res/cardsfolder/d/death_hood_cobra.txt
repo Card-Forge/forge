@@ -1,0 +1,7 @@
+Name:Death-Hood Cobra
+ManaCost:1 G
+Types:Creature Phyrexian Snake
+PT:2/2
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | KW$ Reach | SpellDescription$ CARDNAME gains reach until end of turn.
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:{1}{G}: Death-Hood Cobra gains reach until end of turn.\n{1}{G}: Death-Hood Cobra gains deathtouch until end of turn.

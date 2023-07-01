@@ -1,0 +1,12 @@
+Name:Mind Flayer, the Shadow
+ManaCost:4 B B B
+Types:Legendary Enchantment Creature Horror
+PT:9/9
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | IsPresent$ Permanent.YouCtrl+YouDontOwn | PresentCompare$ LT3 | Description$ CARDNAME isn't a creature unless you control three or more permanents you don't own.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:TrigExile:DB$ ChangeZoneAll | Defined$ Opponent | ChangeType$ Card.BottomLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook,STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered+Permanent+nonLand | AffectedZone$ Exile | Secondary$ True | Description$ For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mind Flayer, the Shadow isn't a creature unless you control three or more permanents you don't own.\nAt the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.

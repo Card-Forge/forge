@@ -1,0 +1,6 @@
+Name:Tajuru Blightblade
+ManaCost:G
+Types:Creature Elf Rogue
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch

@@ -1,0 +1,9 @@
+Name:Kemba's Banner
+ManaCost:3 W
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
+K:Equip:2 W
+SVar:X:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Token & Type$Rebel & Color$Red
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each creature you control.\nEquip {2}{W}

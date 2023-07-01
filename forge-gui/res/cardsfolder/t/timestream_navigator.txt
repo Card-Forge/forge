@@ -1,0 +1,7 @@
+Name:Timestream Navigator
+ManaCost:1 U
+Types:Creature Human Pirate Wizard
+PT:1/1
+K:Ascend
+A:AB$ AddTurn | Cost$ 2 U U T PutCardToLibFromBattlefield<1/-1/CARDNAME> | NumTurns$ 1 | Activation$ Blessing | SpellDescription$ Take an extra turn after this one. Activate only if you have the city's blessing.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{2}{U}{U}, {T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate only if you have the city's blessing.

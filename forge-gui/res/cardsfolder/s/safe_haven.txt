@@ -1,0 +1,9 @@
+Name:Safe Haven
+ManaCost:no cost
+Types:Land
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature you control.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, return each card exiled with CARDNAME to the battlefield under its owner's control.
+SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:{2}, {T}: Exile target creature you control.\nAt the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.

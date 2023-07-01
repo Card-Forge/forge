@@ -1,0 +1,7 @@
+[format]
+Name:Standard (MOM)
+Type:Archived
+Subtype:Standard
+Effective:2023-04-14
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM
+Banned:The Meathook Massacre

@@ -1,0 +1,296 @@
+[metadata]
+Code=GRN
+Date=2018-10-05
+Name=Guilds of Ravnica
+Code2=GRN
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
+AdditionalSetUnlockedInQuest=GK1
+FatPack=10
+FatPackExtraSlots=80 BasicLands
+ChaosDraftThemes=RAVNICA;GRAVEYARD_MATTERS
+ScryfallCode=GRN
+
+[cards]
+1 C Blade Instructor @Zoltan Boros
+2 R Bounty Agent @Randy Vargas
+3 C Candlelight Vigil @Alexander Forssberg
+4 R Citywide Bust @Victor Adame Minguez
+5 C Collar the Culprit @Victor Adame Minguez
+6 U Conclave Tribunal @Seb McKinnon
+7 U Crush Contraband @Jason A. Engle
+8 R Dawn of Hope @Sung Choi
+9 U Demotion @Joe Slucher
+10 M Divine Visitation @Victor Adame Minguez
+11 U Flight of Equenauts @Zezhou Chen
+12 U Gird for Battle @Jakub Kasper
+13 U Haazda Marshal @Josh Hass
+14 C Healer's Hawk @Milivoj Ćeran
+15 C Hunted Witness @David Palumbo
+16 U Inspiring Unicorn @Even Amundsen
+17 C Intrusive Packbeast @Jason Felix
+18 C Ledev Guardian @Kimonas Theodossiou
+19 R Light of the Legion @Alex Konstad
+20 C Loxodon Restorer @Svetlin Velinov
+21 C Luminous Bonds @Mark Behm
+22 C Parhelion Patrol @Even Amundsen
+23 C Righteous Blow @Izzy
+24 U Roc Charger @Titus Lunter
+25 C Skyline Scout @Paul Scott Canavan
+26 U Sunhome Stalwart @Matt Stewart
+27 C Sworn Companions @Jason Rainville
+28 C Take Heart @Lucas Graciano
+29 C Tenth District Guard @Craig J Spearing
+30 R Venerated Loxodon @Zack Stella
+31 C Capture Sphere @Mark Behm
+32 U Chemister's Insight @Josh Hass
+33 U Citywatch Sphinx @Magali Villeneuve
+34 C Dazzling Lights @Robbie Trevino
+35 C Devious Cover-Up @Micah Epstein
+36 C Dimir Informant @Lucas Graciano
+37 C Disdainful Stroke @Deruchenko Alexander
+38 M Dream Eater @Daarken
+39 R Drowned Secrets @Alexander Forssberg
+40 U Enhanced Surveillance @Grzegorz Rutkowski
+41 U Guild Summit @Sidharth Chaturvedi
+42 C Leapfrog @Aaron Miller
+43 C Maximize Altitude @Mike Bierek
+44 R Mission Briefing @Matt Stewart
+45 U Murmuring Mystic @Mark Winters
+46 C Muse Drake @Titus Lunter
+47 R Narcomoeba @Howard Lyon
+48 U Nightveil Sprite @Uriah Voth
+49 R Omnispell Adept @Jason Rainville
+50 C Passwall Adept @John Thacker
+51 R Quasiduplicate @Dmitry Burmak
+52 C Radical Idea @Izzy
+53 U Selective Snare @Alex Konstad
+54 U Sinister Sabotage @Mathias Kollros
+55 U Thoughtbound Phantasm @Johann Bodin
+56 C Unexplained Disappearance @Izzy
+57 C Vedalken Mesmerist @Zezhou Chen
+58 C Wall of Mist @Tianhua X
+59 C Watcher in the Mist @Ryan Yee
+60 C Wishcoin Crab @James Paick
+61 C Barrier of Bones @Vincent Proce
+62 C Bartizan Bats @Nils Hamm
+63 R Blood Operative @Livia Prima
+64 C Burglar Rat @Tyler Walpole
+65 C Child of Night @Igor Kieryluk
+66 U Creeping Chill @Wisnu Tan
+67 C Dead Weight @Lake Hurwitz
+68 C Deadly Visit @Scott Murphy
+69 M Doom Whisperer @Vincent Proce
+70 C Douser of Lights @Darek Zabrocki
+71 R Gruesome Menagerie @Yeong-Hao Han
+72 C Hired Poisoner @Joe Slucher
+73 U Kraul Swarm @Jehan Choo
+74 U Lotleth Giant @Alex Konstad
+75 R Mausoleum Secrets @Adam Paquette
+76 C Mephitic Vapors @Darek Zabrocki
+77 R Midnight Reaper @Sidharth Chaturvedi
+78 C Moodmark Painter @Scott Murphy
+79 U Necrotic Wound @Randy Vargas
+80 C Never Happened @Aaron Miller
+81 U Pilfering Imp @Igor Kieryluk
+82 U Plaguecrafter @Anna Steinbauer
+83 U Price of Fame @Winona Nelson
+84 R Ritual of Soot @Dimitar Marinski
+85 C Severed Strands @Zack Stella
+86 C Spinal Centipede @Zezhou Chen
+87 U Undercity Necrolisk @Tomasz Jedruszek
+88 C Veiled Shade @Anna Steinbauer
+89 C Vicious Rumors @David Palumbo
+90 U Whispering Snitch @Jason Rainville
+91 M Arclight Phoenix @Slawomir Maniak
+92 C Barging Sergeant @Filip Burburan
+93 U Book Devourer @Kev Walker
+94 C Command the Storm @Jason Rainville
+95 C Cosmotronic Wave @Titus Lunter
+96 C Direct Current @Dan Scott
+97 U Electrostatic Field @Dan Scott
+98 R Erratic Cyclops @Milivoj Ćeran
+99 R Experimental Frenzy @Simon Dominic
+100 C Fearless Halberdier @Suzanne Helmigh
+101 C Fire Urchin @Deruchenko Alexander
+102 U Goblin Banneret @Viktor Titov
+103 U Goblin Cratermaker @Svetlin Velinov
+104 C Goblin Locksmith @Mark Behm
+105 C Gravitic Punch @Randy Vargas
+106 U Hellkite Whelp @Johann Bodin
+107 U Inescapable Blaze @Steve Argyle
+108 U Lava Coil @Wesley Burt
+109 R Legion Warboss @Alex Konstad
+110 C Maniacal Rage @Heonhwa Choe
+111 C Maximize Velocity @Svetlin Velinov
+112 C Ornery Goblin @Johann Bodin
+113 R Risk Factor @Chris Seaman
+114 C Rubblebelt Boar @Tomasz Jedruszek
+115 R Runaway Steam-Kin @Jason Felix
+116 U Smelt-Ward Minotaur @Wisnu Tan
+117 U Street Riot @Tomasz Jedruszek
+118 C Sure Strike @Steve Argyle
+119 C Torch Courier @Mark Zug
+120 C Wojek Bodyguard @Tyler Walpole
+121 U Affectionate Indrik @Steve Prescott
+122 U Arboretum Elemental @James Paick
+123 R Beast Whisperer @Matt Stewart
+124 R Bounty of Might @Even Amundsen
+125 U Circuitous Route @Milivoj Ćeran
+126 C Crushing Canopy @Simon Dominic
+127 C Devkarin Dissident @Mark Zug
+128 U District Guide @Tianhua X
+129 C Generous Stray @Milivoj Ćeran
+130 U Golgari Raiders @David Palumbo
+131 U Grappling Sundew @Sung Choi
+132 R Hatchery Spider @Livia Prima
+133 C Hitchclaw Recluse @Mike Bierek
+134 C Ironshell Beetle @Kev Walker
+135 C Kraul Foragers @Aaron Miller
+136 U Kraul Harpooner @Kev Walker
+137 U Might of the Masses @Alex Konstad
+138 M Nullhide Ferox @Filip Burburan
+139 C Pack's Favor @Lius Lasahido
+140 C Pause for Reflection @Alayna Danner
+141 R Pelt Collector @Zoltan Boros
+142 C Portcullis Vine @James Paick
+143 C Prey Upon @G-host Lee
+144 C Siege Wurm @Filip Burburan
+145 U Sprouting Renewal @James Paick
+146 C Urban Utopia @Jedd Chevrier
+147 C Vigorspore Wurm @Jason Felix
+148 R Vivid Revival @Yeong-Hao Han
+149 C Wary Okapi @Jason Felix
+150 C Wild Ceratok @Svetlin Velinov
+151 C Artful Takedown @Mike Bierek
+152 R Assassin's Trophy @Seb McKinnon
+153 M Aurelia, Exemplar of Justice @Chris Rahn
+154 U Beacon Bolt @Titus Lunter
+155 U Beamsplitter Mage @Svetlin Velinov
+156 U Boros Challenger @Gabor Szikszai
+157 R Camaraderie @Sidharth Chaturvedi
+158 C Centaur Peacemaker @Raoul Vitale
+159 M Chance for Glory @Bram Sels
+160 R Charnel Troll @Daniel Ljunggren
+161 U Conclave Cavalier @Tomasz Jedruszek
+162 U Conclave Guildmage @Jason Rainville
+163 U Crackling Drake @Victor Adame Minguez
+164 C Darkblade Agent @Joe Slucher
+165 R Deafening Clarion @Adam Paquette
+166 U Dimir Spybug @James Paick
+167 U Disinformation Campaign @Anthony Palumbo
+168 R Emmara, Soul of the Accord @Mark Winters
+169 C Erstwhile Trooper @Jason A. Engle
+170 R Etrata, the Silencer @Bastien L. Deharme
+171 R Firemind's Research @Grzegorz Rutkowski
+172 C Garrison Sergeant @Gabor Szikszai
+173 U Glowspore Shaman @Lars Grant-West
+174 C Goblin Electromancer @Svetlin Velinov
+175 U Golgari Findbroker @Bram Sels
+176 C Hammer Dropper @Lake Hurwitz
+177 U House Guildmage @Winona Nelson
+178 C Hypothesizzle @Chris Seaman
+179 R Ionize @Chase Stone
+180 R Izoni, Thousand-Eyed @Eric Deschamps
+181 U Join Shields @Winona Nelson
+182 U Justice Strike @Clint Cearley
+183 R Knight of Autumn @Ryan Pancoast
+184 M Lazav, the Multifarious @Yongjae Choi
+185 U League Guildmage @Svetlin Velinov
+186 U Ledev Champion @Daarken
+187 U Legion Guildmage @Zack Stella
+188 M March of the Multitudes @Zack Stella
+189 M Mnemonic Betrayal @Clint Cearley
+190 U Molderhulk @Titus Lunter
+191 U Nightveil Predator @Darek Zabrocki
+192 R Niv-Mizzet, Parun @Svetlin Velinov
+193 C Notion Rain @Lius Lasahido
+194 U Ochran Assassin @Anna Steinbauer
+195 M Ral, Izzet Viceroy @Kieran Yanner
+196 C Rhizome Lurcher @Mathias Kollros
+197 C Rosemane Centaur @Nils Hamm
+198 C Skyknight Legionnaire @Chase Stone
+199 C Sonic Assault @Tyler Walpole
+200 C Sumala Woodshaper @Sara Winters
+201 U Swarm Guildmage @Simon Dominic
+202 U Swathcutter Giant @Aaron Miller
+203 R Swiftblade Vindicator @Viktor Titov
+204 R Tajic, Legion's Edge @Anthony Palumbo
+205 R Thief of Sanity @Igor Kieryluk
+206 U Thought Erasure @Anna Steinbauer
+207 M Thousand-Year Storm @Dimitar Marinski
+208 M Trostani Discordant @Chase Stone
+209 U Truefire Captain @Chris Rallis
+210 C Undercity Uprising @Magali Villeneuve
+211 M Underrealm Lich @Anna Steinbauer
+212 R Unmoored Ego @Volkan Baǵa
+213 M Vraska, Golgari Queen @Magali Villeneuve
+214 U Wee Dragonauts @Greg Staples
+215 U Worldsoul Colossus @James Paick
+216 C Fresh-Faced Recruit @Anthony Palumbo
+217 C Piston-Fist Cyclops @Wayne Reynolds
+218 C Pitiless Gorgon @Alex Konstad
+219 C Vernadi Shieldmate @Matt Stewart
+220 C Whisper Agent @Deruchenko Alexander
+221 R Assure // Assemble @Jason A. Engle
+222 R Connive // Concoct @Dan Scott
+223 U Discovery // Dispersal @Mark Behm
+224 R Expansion // Explosion @Deruchenko Alexander
+225 R Find // Finality @Tomasz Jedruszek
+226 U Flower // Flourish @Dmitry Burmak
+227 U Integrity // Intervention @Ben Maier
+228 U Invert // Invent @Mathias Kollros
+229 R Response // Resurgence @Daarken
+230 U Status // Statue @Ben Wootten
+231 C Boros Locket @Aaron Miller
+232 R Chamber Sentry @Adam Paquette
+233 R Chromatic Lantern @Jung Park
+234 C Dimir Locket @Zezhou Chen
+235 U Gatekeeper Gargoyle @Adam Paquette
+236 U Glaive of the Guildpact @Volkan Baǵa
+237 C Golgari Locket @Milivoj Ćeran
+238 C Izzet Locket @Dmitry Burmak
+239 U Rampaging Monument @Tyler Walpole
+240 C Selesnya Locket @Winona Nelson
+241 U Silent Dart @Yeong-Hao Han
+242 U Wand of Vertebrae @Volkan Baǵa
+243 C Boros Guildgate @Titus Lunter
+244 C Boros Guildgate @Titus Lunter
+245 C Dimir Guildgate @Cliff Childs
+246 C Dimir Guildgate @Cliff Childs
+247 C Gateway Plaza @Jedd Chevrier
+248 C Golgari Guildgate @Eytan Zana
+249 C Golgari Guildgate @Eytan Zana
+250 R Guildmages' Forum @Adam Paquette
+251 C Izzet Guildgate @Kirsten Zirngibl
+252 C Izzet Guildgate @Kirsten Zirngibl
+253 R Overgrown Tomb @Yeong-Hao Han
+254 R Sacred Foundry @Adam Paquette
+255 C Selesnya Guildgate @Dimitar Marinski
+256 C Selesnya Guildgate @Dimitar Marinski
+257 R Steam Vents @Jonas De Ro
+258 R Temple Garden @Titus Lunter
+259 R Watery Grave @Cliff Childs
+260 L Plains @Richard Wright
+261 L Island @Richard Wright
+262 L Swamp @Richard Wright
+263 L Mountain @Richard Wright
+264 L Forest @Richard Wright
+265 M Ral, Caller of Storms @Kieran Yanner
+266 R Ral's Dispersal @Lake Hurwitz
+267 C Precision Bolt @Grzegorz Rutkowski
+268 U Ral's Staticaster @Even Amundsen
+269 M Vraska, Regal Gorgon @Magali Villeneuve
+270 C Kraul Raider @Ben Wootten
+271 U Attendant of Vraska @Magali Villeneuve
+272 R Vraska's Stoneglare @Yongjae Choi
+273 M Impervious Greatwurm @Simon Dominic
+
+[tokens]
+w_4_4_angel_flying_vigilance
+w_1_1_soldier_lifelink
+u_1_1_bird_illusion_flying
+r_1_1_goblin
+gw_2_2_elf_knight_vigilance
+bg_1_1_insect

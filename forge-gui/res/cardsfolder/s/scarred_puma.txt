@@ -1,0 +1,7 @@
+Name:Scarred Puma
+ManaCost:R
+Types:Creature Cat
+PT:2/1
+K:CARDNAME can't attack unless a black or green creature also attacks.
+DeckHints:Color$Black|Green
+Oracle:Scarred Puma can't attack unless a black or green creature also attacks.

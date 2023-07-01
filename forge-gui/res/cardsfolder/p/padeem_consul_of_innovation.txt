@@ -1,0 +1,9 @@
+Name:Padeem, Consul of Innovation
+ManaCost:3 U
+Types:Legendary Creature Vedalken Artificer
+PT:1/4
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Hexproof | Description$ Artifacts you control have hexproof.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control the artifact with the highest mana value or tied for the highest mana value, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:Count$Valid Artifact.greatestCMC_Artifact+YouCtrl
+Oracle:Artifacts you control have hexproof.\nAt the beginning of your upkeep, if you control the artifact with the highest mana value or tied for the highest mana value, draw a card.

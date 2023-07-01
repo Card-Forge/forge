@@ -1,0 +1,5 @@
+Name:Dakmor Scorpion
+ManaCost:1 B
+Types:Creature Scorpion
+PT:2/1
+Oracle:

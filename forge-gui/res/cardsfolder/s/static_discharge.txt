@@ -1,0 +1,8 @@
+Name:Static Discharge
+ManaCost:1 R
+Types:Sorcery
+K:Starting intensity:3
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBIntensify | SpellDescription$ CARDNAME deals damage equal to its intensity to any target, then perpetually increase the intensity of all cards you own named Static Discharge by 1.
+SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+namedStatic Discharge | DefinedDesc$ all cards they own named Static Discharge
+SVar:X:Count$Intensity
+Oracle:Starting intensity 3\nStatic Discharge deals damage equal to its intensity to any target, then perpetually increase the intensity of all cards you own named Static Discharge by 1.

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Theme: The Elements
+Title=The Elements
+Difficulty=easy
+Description="With fire he broke the battle at Bowang . . . .\nStriking fear deep into Cao Cao's soul, thus Kongming scored a coup at his debut."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PTK
+4 Borrowing the East Wind|PTK
+4 Burning Fields|PTK
+4 Desert Sandstorm|PTK
+4 Fire Ambush|PTK
+8 Forest|PTK|3
+16 Mountain|PTK|1
+4 Rockslide Ambush|PTK
+4 Rolling Earthquake|PTK
+4 Spring of Eternal Peace|PTK
+4 Stone Rain|PTK

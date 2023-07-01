@@ -1,0 +1,7 @@
+Name:Chittering Doom
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigToken | ValidPlayer$ You | ValidResult$ GE4 | TriggerDescription$ Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_squirrel
+DeckHas:Ability$Token
+Oracle:Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token.

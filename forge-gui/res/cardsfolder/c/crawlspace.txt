@@ -1,0 +1,6 @@
+Name:Crawlspace
+ManaCost:3
+Types:Artifact
+S:Mode$ AttackRestrict | MaxAttackers$ 2 | ValidDefender$ You | Description$ No more than two creatures can attack you each combat.
+SVar:NonStackingEffect:True
+Oracle:No more than two creatures can attack you each combat.

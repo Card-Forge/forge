@@ -1,0 +1,10 @@
+Name:Veteran Ghoulcaller
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+K:Menace
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Hand | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a card in your graveyard is put into your hand, conjure a duplicate of that card into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand
+AI:RemoveDeck:Random
+DeckNeeds:Ability$Graveyard
+Oracle:Menace\nWhenever a card in your graveyard is put into your hand, conjure a duplicate of that card into your hand.

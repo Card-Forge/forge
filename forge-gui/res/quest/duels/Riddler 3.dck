@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Riddler 3
+Title=Riddler
+Difficulty=hard
+Description=WR deck with mass damage spells, Spitemare and Swans of Bryn Argoll
+Icon=Riddler.jpg
+Deck Type=constructed
+[main]
+4 Arid Mesa
+4 Plateau
+4 Windswept Heath
+5 Plains|M11
+5 Mountain|M11
+1 Mox Pearl
+1 Mox Ruby
+4 Spitemare
+4 Swans of Bryn Argoll
+3 Deep-Slumber Titan
+3 Stuffy Doll
+4 Wall of Hope
+1 Cinder Giant
+1 Subterranean Spirit
+2 AEther Flash
+1 Caltrops
+1 Powerstone Minefield
+3 Pyrohemia
+4 Pyroclasm
+2 Volcanic Fallout
+2 Tremor
+1 Chain Reaction
+[sideboard]

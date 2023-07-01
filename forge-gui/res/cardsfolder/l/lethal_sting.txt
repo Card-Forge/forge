@@ -1,0 +1,6 @@
+Name:Lethal Sting
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Destroy | Cost$ 2 B AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+DeckHas:Ability$Counters
+Oracle:As an additional cost to cast this spell, put a -1/-1 counter on a creature you control.\nDestroy target creature.

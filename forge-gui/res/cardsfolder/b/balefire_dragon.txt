@@ -1,0 +1,10 @@
+Name:Balefire Dragon
+ManaCost:5 R R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals that much damage to each creature that player controls.
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TriggeredTarget
+SVar:X:TriggerCount$DamageAmount
+SVar:MustBeBlocked:True
+Oracle:Flying\nWhenever Balefire Dragon deals combat damage to a player, it deals that much damage to each creature that player controls.

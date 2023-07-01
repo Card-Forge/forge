@@ -1,0 +1,7 @@
+Name:Steward of Solidarity
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/2
+A:AB$ Token | Cost$ T Exert<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance. (An exerted creature won't untap during your next untap step.)
+DeckHas:Ability$Token
+Oracle:{T}, Exert Steward of Solidarity: Create a 1/1 white Warrior creature token with vigilance. (An exerted creature won't untap during your next untap step.)

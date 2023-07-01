@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 25 UvG Civilization
+Title=Aspect of Civilization
+Difficulty=easy
+Description="The foot stone is connected to the ankle stone, the ankle stone is connected to the leg stone..."-"Song of the Artificer"
+Icon=Aspect of Civilization.jpg
+Deck Type=constructed
+[Main]
+3 Animate Artifact|LEB
+3 Basalt Monolith|LEB
+4 Clockwork Beast|LEB
+4 Clone|LEB
+3 Copy Artifact|LEB
+2 Crystal Rod|LEB
+24 Island|LEB|3
+4 Jade Statue|LEB
+1 Mana Vault|LEB
+4 Obsianus Golem|LEB
+3 Stasis|LEB
+1 Timetwister|LEB
+4 Vesuvan Doppelganger|LEB

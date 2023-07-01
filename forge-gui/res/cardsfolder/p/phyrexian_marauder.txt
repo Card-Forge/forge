@@ -1,0 +1,10 @@
+Name:Phyrexian Marauder
+ManaCost:X
+Types:Artifact Creature Phyrexian Construct
+PT:0/0
+K:CARDNAME can't block.
+S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ Y | Description$ CARDNAME can't attack unless you pay {1} for each +1/+1 counter on it.
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+SVar:Y:Count$CardCounters.P1P1
+Oracle:Phyrexian Marauder enters the battlefield with X +1/+1 counters on it.\nPhyrexian Marauder can't block.\nPhyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.

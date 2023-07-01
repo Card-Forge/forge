@@ -1,0 +1,7 @@
+Name:Boneknitter
+ManaCost:1 B
+Types:Creature Zombie Cleric
+PT:1/1
+A:AB$ Regenerate | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie. | Cost$ 1 B | SpellDescription$ Regenerate target Zombie.
+K:Morph:2 B
+Oracle:{1}{B}: Regenerate target Zombie.\nMorph {2}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -1,0 +1,38 @@
+[quest]
+id=5003
+OpponentName=Poseidon
+AILife=30
+Repeat=true
+Wins=25
+Card Reward=3 rares;33% 1 blue rare;33% 1 blue rare; 33% Mutavault|MOR
+Credit Reward=200
+HumanExtras=Cauldron of Souls
+AIExtras=Jace Beleren
+
+[metadata]
+Name=quest5003
+Title=Poseidon
+Difficulty=hard
+Description=The ocean beneath your ship feels calm, but there is something there...
+Icon=Poseidon.jpg
+Deck Type=constructed
+
+[Main]
+19 Island|LRW
+4 Mutavault|MOR
+
+4 Aquitect's Will|LRW
+4 Cryptic Command|LRW
+2 Mirrorweave|SHM
+4 Ponder|M10
+4 Sage's Dousing|MOR
+
+3 Wistful Selkie|EVE
+4 Cursecatcher|SHM
+4 Merrow Reejerey|LRW
+4 Silvergill Adept|LRW
+4 Stonybrook Banneret|MOR
+
+[sideboard]
+[planes]
+[schemes]

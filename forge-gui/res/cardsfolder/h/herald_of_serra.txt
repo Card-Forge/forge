@@ -1,0 +1,8 @@
+Name:Herald of Serra
+ManaCost:2 W W
+Types:Creature Angel
+PT:3/4
+K:Flying
+K:Vigilance
+K:Echo:2 W W
+Oracle:Flying, vigilance\nEcho {2}{W}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

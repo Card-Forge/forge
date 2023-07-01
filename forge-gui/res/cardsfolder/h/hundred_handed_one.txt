@@ -1,0 +1,9 @@
+Name:Hundred-Handed One
+ManaCost:2 W W
+Types:Creature Giant
+PT:3/5
+K:Vigilance
+K:Monstrosity:3:3 W W W
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Reach | CanBlockAmount$ 99 | Description$ As long as CARDNAME is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
+DeckHas:Ability$Counters
+Oracle:Vigilance\n{3}{W}{W}{W}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nAs long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.

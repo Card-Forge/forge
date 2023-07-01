@@ -1,0 +1,20 @@
+[quest]
+id=POR Challenge: Axemage
+OpponentName=The Axemage
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Axemage
+Title=The Axemage
+Difficulty=medium
+Description=Swing your axe as a broom, to sweep away the foe.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+15 Lava Axe|POR
+30 Mountain|POR|1
+15 Pyroclasm|POR

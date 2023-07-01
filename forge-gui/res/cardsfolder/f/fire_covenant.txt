@@ -1,0 +1,8 @@
+Name:Fire Covenant
+ManaCost:1 B R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 B R PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures.
+SVar:MaxTgts:Count$Valid Creature
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, pay X life.\nFire Covenant deals X damage divided as you choose among any number of target creatures.

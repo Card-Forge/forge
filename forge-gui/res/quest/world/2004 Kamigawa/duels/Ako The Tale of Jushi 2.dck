@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Jushi 2
+Title=The Tale of Jushi
+Difficulty=medium
+Description="Do not react to force in kind. Turn it aside. Direct it to where it can do no harm." --Meloku the Clouded Mirror
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Azami, Lady of Scrolls|CHK
+3 Evermind|SOK
+4 Graceful Adept|CHK
+2 Island|CHK|2
+5 Island|CHK|3
+5 Island|CHK|4
+1 Island|LRW|2
+1 Island|LRW|3
+2 Island|LRW|4
+4 Ivory Crane Netsuke|SOK
+4 Jushi Apprentice|CHK
+2 Kami of the Crescent Moon|SOK
+2 Meishin, the Mind Cage|SOK
+3 Minamo Scrollkeeper|SOK
+1 Minamo, School at Water's Edge|CHK
+1 Neverending Torment|SOK
+1 Oboro, Palace in the Clouds|SOK
+4 Reach Through Mists|CHK
+3 Scroll of Origins|SOK
+1 Swamp|CHK|4
+2 Tendo Ice Bridge|BOK
+4 Trusted Advisor|SOK
+2 Waterveil Cavern|CHK
+[Sideboard]
+

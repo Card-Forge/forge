@@ -1,0 +1,8 @@
+Name:Carnage Gladiator
+ManaCost:2 B R
+Types:Creature Skeleton Warrior
+PT:4/2
+T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature blocks, that creature's controller loses 1 life.
+SVar:TrigDamage:DB$ LoseLife | Defined$ TriggeredBlockerController | LifeAmount$ 1
+A:AB$ Regenerate | Cost$ 1 B R | SpellDescription$ Regenerate CARDNAME.
+Oracle:Whenever a creature blocks, that creature's controller loses 1 life.\n{1}{B}{R}: Regenerate Carnage Gladiator.

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Archon of Absolution
+OpponentName=The Archons
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=ELD Challenge: Archon of Absolution
+Title=Archon of Absolution
+Difficulty=medium
+Description="It is the confession, not the priest, that gives us absolution."\n-Oscar Wilde
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+30 Archon of Absolution|ELD
+30 Plains|ELD|3

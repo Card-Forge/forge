@@ -1,0 +1,7 @@
+Name:Cerulean Wyvern
+ManaCost:4 U
+Types:Creature Drake
+PT:3/3
+K:Flying
+K:Protection from green
+Oracle:Flying, protection from green

@@ -1,0 +1,5 @@
+Name:Helm of Awakening
+ManaCost:2
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Amount$ 1 | Description$ Spells cost {1} less to cast.
+Oracle:Spells cost {1} less to cast.

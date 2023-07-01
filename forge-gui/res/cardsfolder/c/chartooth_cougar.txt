@@ -1,0 +1,7 @@
+Name:Chartooth Cougar
+ManaCost:5 R
+Types:Creature Cat Beast
+PT:4/4
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+K:TypeCycling:Mountain:2
+Oracle:{R}: Chartooth Cougar gets +1/+0 until end of turn.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

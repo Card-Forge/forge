@@ -1,0 +1,11 @@
+Name:Krovikan Sorcerer
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Draw | Cost$ T Discard<1/Card.nonBlack> | NumCards$ 1 | CostDesc$ {T}, Discard a non-black card: | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ T Discard<1/Card.Black> | NumCards$ 2 | CostDesc$ {T}, Discard a black card: | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard one of them.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+DeckHints:Color$Black
+Oracle:{T}, Discard a nonblack card: Draw a card.\n{T}, Discard a black card: Draw two cards, then discard one of them.

@@ -1,0 +1,7 @@
+Name:Goblin Medics
+ManaCost:2 R
+Types:Creature Goblin Shaman
+PT:1/1
+T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes tapped, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Whenever Goblin Medics becomes tapped, it deals 1 damage to any target.

@@ -1,0 +1,6 @@
+Name:Dreamstone Hedron
+ManaCost:6
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
+A:AB$ Draw | Cost$ 3 T Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
+Oracle:{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice Dreamstone Hedron: Draw three cards.

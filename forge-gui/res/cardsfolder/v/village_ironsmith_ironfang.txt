@@ -1,0 +1,21 @@
+Name:Village Ironsmith
+ManaCost:1 R
+Types:Creature Human Werewolf
+PT:1/1
+K:First Strike
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:First strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Village Ironsmith.
+
+ALTERNATE
+
+Name:Ironfang
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/1
+K:First Strike
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:First strike\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ironfang.

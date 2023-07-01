@@ -1,0 +1,7 @@
+Name:Thieving Otter
+ManaCost:2 U
+Types:Creature Otter
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever Thieving Otter deals damage to an opponent, draw a card.

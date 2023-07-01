@@ -1,0 +1,7 @@
+Name:Scorched Rusalka
+ManaCost:R
+Types:Creature Spirit
+PT:1/1
+A:AB$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+AI:RemoveDeck:Random
+Oracle:{R}, Sacrifice a creature: Scorched Rusalka deals 1 damage to target player or planeswalker.

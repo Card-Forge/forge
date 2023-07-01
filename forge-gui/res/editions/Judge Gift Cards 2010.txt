@@ -1,0 +1,16 @@
+[metadata]
+Code=G10
+Date=2010-01-01
+Name=Judge Gift Cards 2010
+Type=Promo
+ScryfallCode=G10
+
+[cards]
+1 R Sinkhole @Dave Allsop
+2 R Natural Order @Terese Nielsen
+3 R Phyrexian Dreadnought @Pete Venters
+4 R Thawing Glaciers @Jim Nelson
+5 R Land Tax @Chuck Lukacs
+6 R Morphling @rk post
+7 R Wheel of Fortune @John Matson
+8 R Wasteland @Carl Critchlow

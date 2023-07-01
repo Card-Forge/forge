@@ -1,0 +1,6 @@
+Name:Eldrazi Devastator
+ManaCost:8
+Types:Creature Eldrazi
+PT:8/9
+K:Trample
+Oracle:Trample

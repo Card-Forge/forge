@@ -1,0 +1,36 @@
+[duel]
+
+[metadata]
+Name=Hera's Army 3
+Title=Hera
+Icon=Hera.jpg
+Difficulty=hard
+Description=[B/R] Aggro. (Wither)
+Deck Type=constructed
+
+[Main]
+12 Swamp|SHM
+12 Mountain|SHM
+
+1 Ashenmoor Cohort|SHM
+2 Ashenmoor Liege|SHM
+2 Blowfly Infestation|SHM
+2 Cinderbones|SHM
+1 Din of the Fireherd|SHM
+2 Emberstrike Duo|SHM
+2 Everlasting Torment|SHM
+2 Fists of the Demigod|SHM
+2 Kulrath Knight|SHM
+2 Mudbrawler Cohort|SHM
+2 Murderous Redcap|MMA
+4 Murderous Redcap|SHM
+2 Necroskitter|EVE
+3 Puncture Bolt|SHM
+1 Rattleblaze Scarecrow|SHM
+4 Scar|SHM
+2 Stigma Lasher|EVE
+2 Torrent of Souls|SHM
+
+[sideboard]
+[planes]
+[schemes]

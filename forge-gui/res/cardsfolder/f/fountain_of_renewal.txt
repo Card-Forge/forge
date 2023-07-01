@@ -1,0 +1,8 @@
+Name:Fountain of Renewal
+ManaCost:1
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Draw | Cost$ 3 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of your upkeep, you gain 1 life.\n{3}, Sacrifice Fountain of Renewal: Draw a card.

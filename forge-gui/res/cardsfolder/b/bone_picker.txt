@@ -1,0 +1,9 @@
+Name:Bone Picker
+ManaCost:3 B
+Types:Creature Bird
+PT:3/2
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {3} less to cast if a creature died this turn.
+SVar:X:Count$Morbid.1.0
+K:Flying
+K:Deathtouch
+Oracle:This spell costs {3} less to cast if a creature died this turn.\nFlying, deathtouch

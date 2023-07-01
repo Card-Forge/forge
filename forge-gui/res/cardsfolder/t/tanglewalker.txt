@@ -1,0 +1,6 @@
+Name:Tanglewalker
+ManaCost:2 G
+Types:Creature Dryad
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | IsPresent$ Artifact.DefenderCtrl+Land | Description$ Each creature you control can't be blocked as long as defending player controls an artifact land.
+Oracle:Each creature you control can't be blocked as long as defending player controls an artifact land.

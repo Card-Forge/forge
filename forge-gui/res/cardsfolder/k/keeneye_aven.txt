@@ -1,0 +1,7 @@
+Name:Keeneye Aven
+ManaCost:3 U
+Types:Creature Bird Soldier
+PT:2/3
+K:Flying
+K:Cycling:2
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)

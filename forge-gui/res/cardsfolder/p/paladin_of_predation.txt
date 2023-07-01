@@ -1,0 +1,7 @@
+Name:Paladin of Predation
+ManaCost:5 G G
+Types:Creature Phyrexian Knight
+PT:6/7
+K:Toxic:6
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Toxic 6 (Plavers dealt combat damage by this creature also get six poison counters.)\nPaladin of Predation can't be blocked by creatures with power 2 or less.

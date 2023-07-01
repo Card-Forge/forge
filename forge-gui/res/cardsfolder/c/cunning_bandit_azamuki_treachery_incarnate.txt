@@ -1,0 +1,21 @@
+Name:Cunning Bandit
+ManaCost:1 R R
+Types:Creature Human Warrior
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
+DeckHints:Type$Spirit|Arcane
+AlternateMode:Flip
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.\nAt the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
+
+ALTERNATE
+
+Name:Azamuki, Treachery Incarnate
+ManaCost:1 R R
+Colors:red
+Types:Legendary Creature Spirit
+PT:5/2
+A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
+Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.

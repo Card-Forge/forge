@@ -1,0 +1,14 @@
+[metadata]
+Name:Pauper Puzzles #24 - Fight Club
+URL:https://pauperpuzzles.wordpress.com/2017/04/29/24-fight-club/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=6
+humanhand=Nourish;Pit Fight;Mutagenic Growth;Elemental Uprising
+humanbattlefield=Vault Skirge|Id:5;Rancor|AttachedTo:5;Quirion Ranger;Skarrgan Pit-Skulk|Id:6;Bonesplitter|AttachedTo:6;Forest;Forest;Forest
+aibattlefield=Twisted Abomination;Falkenrath Noble;Sultai Scavenger

@@ -1,0 +1,10 @@
+Name:Volrath, the Shapestealer
+ManaCost:2 B G U
+Types:Legendary Creature Phyrexian Shapeshifter
+PT:7/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | TargetMin$ 0 | TargetMax$ 1 | CounterNum$ 1 | IsCurse$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+A:AB$ Clone | Cost$ 1 | ValidTgts$ Creature.HasCounters | TgtPrompt$ Select target creature with a counter on it | Duration$ UntilYourNextTurn | SetPower$ 7 | SetToughness$ 5 | GainThisAbility$ True | SpellDescription$ Until your next turn, CARDNAME becomes a copy of target creature with a counter on it, except it's 7/5 and it has this ability.
+Oracle:At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.\n{1}: Until your next turn, Volrath, the Shapestealer becomes a copy of target creature with a counter on it, except it's 7/5 and it has this ability.

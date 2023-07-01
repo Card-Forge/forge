@@ -1,0 +1,8 @@
+Name:Shefet Monitor
+ManaCost:5 G
+Types:Creature Lizard
+PT:6/5
+K:Cycling:3 G
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle. (Do this before you draw.)
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic,Desert | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:Cycling {3}{G} ({3}{G}, Discard this card: Draw a card.)\nWhen you cycle Shefet Monitor, you may search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle. (Do this before you draw.)

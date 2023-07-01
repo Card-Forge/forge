@@ -1,0 +1,7 @@
+Name:Baird, Steward of Argive
+ManaCost:2 W W
+Types:Legendary Creature Human Soldier
+PT:2/4
+K:Vigilance
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ 1 | Description$ Creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.
+Oracle:Vigilance\nCreatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.

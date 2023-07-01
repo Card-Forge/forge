@@ -1,0 +1,7 @@
+Name:Noble Purpose
+ManaCost:3 W W
+Types:Enchantment
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever a creature you control deals combat damage, you gain that much life.

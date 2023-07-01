@@ -1,0 +1,5 @@
+Name:Naga Eternal
+ManaCost:2 U
+Types:Creature Zombie Naga
+PT:3/2
+Oracle:

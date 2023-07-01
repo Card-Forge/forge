@@ -1,0 +1,33 @@
+[metadata]
+Code=HA4
+Date=2021-03-11
+Name=Historic Anthology 4
+Type=Online
+ScryfallCode=HA4
+
+[cards]
+1 R Adorned Pouncer @Slawomir Maniak
+2 R Declaration in Stone @Tyler Jacobson
+3 C Thraben Inspector @Matt Stewart
+4 M Triumphant Reckoning @Svetlin Velinov
+5 C Iceberg Cancrix @Ravenna Tran
+6 R Marit Lage's Slumber @Randy Vargas
+7 C Think Twice @Anthony Francisco
+8 R Ammit Eternal @Mike Bierek
+9 R Death's Shadow @Howard Lyon
+10 U Faith of the Devoted @Raoul Vitale
+11 U Torment of Scarabs @Bastien L. Deharme
+12 U Flameblade Adept @Tomasz Jedruszek
+13 C Goblin Gaveleer @Svetlin Velinov
+14 R Harmless Offering @Howard Lyon
+15 C Lys Alana Huntmaster @Pete Venters
+16 R Sawtusk Demolisher @Aaron Miller
+17 U Spider Spawning @Daniel Ljunggren
+18 U Hamza, Guardian of Arashin @Wisnu Tan
+19 R Collected Conjuring @Steve Argyle
+20 U Abomination of Llanowar @Vincent Proce
+21 C Bonesplitter @Darrell Riche
+22 U Coldsteel Heart @Mark Romanoski
+23 R Inspiring Statuary @Kirsten Zirngibl
+24 M Sword of Body and Mind @Chris Rahn
+25 R Blinkmoth Nexus @Sam Burley

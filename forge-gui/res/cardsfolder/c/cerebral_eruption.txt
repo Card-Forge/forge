@@ -1,0 +1,9 @@
+Name:Cerebral Eruption
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ PeekAndReveal | ValidTgts$ Opponent | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBDamage | SpellDescription$ Target opponent reveals the top card of their library.
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.TargetedPlayerCtrl | ValidPlayers$ Targeted | NumDmg$ X | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals damage equal to the revealed card's mana value to that player and each creature that player controls.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Land | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ If a land card is revealed this way, return CARDNAME to its owner's hand.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's mana value to that player and each creature that player controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.

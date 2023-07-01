@@ -1,0 +1,7 @@
+Name:Phyrexian Soulgorger
+ManaCost:3
+Types:Snow Artifact Creature Phyrexian Construct
+PT:8/8
+K:Cumulative upkeep:Sac<1/Creature>:Sacrifice a creature.
+AI:RemoveDeck:All
+Oracle:Cumulative upkeep—Sacrifice a creature. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

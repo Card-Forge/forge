@@ -1,0 +1,7 @@
+Name:Yavimaya Gnats
+ManaCost:2 G
+Types:Creature Insect
+PT:0/1
+K:Flying
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Flying\n{G}: Regenerate Yavimaya Gnats.

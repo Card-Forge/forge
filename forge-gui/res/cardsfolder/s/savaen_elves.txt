@@ -1,0 +1,6 @@
+Name:Savaen Elves
+ManaCost:G
+Types:Creature Elf
+PT:1/1
+A:AB$ Destroy | Cost$ G G T | ValidTgts$ Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a land | SpellDescription$ Destroy target Aura attached to a land.
+Oracle:{G}{G}, {T}: Destroy target Aura attached to a land.

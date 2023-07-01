@@ -1,0 +1,7 @@
+Name:Grisly Survivor
+ManaCost:2 B
+Types:Creature Minotaur Warrior
+PT:2/3
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+Oracle:Whenever you cycle or discard a card, Grisly Survivor gets +2/+0 until end of turn.

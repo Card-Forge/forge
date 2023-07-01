@@ -1,0 +1,8 @@
+Name:Locust Swarm
+ManaCost:3 G
+Types:Creature Insect
+PT:1/1
+K:Flying
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Untap | Cost$ G | ActivationLimit$ 1 | SpellDescription$ Untap CARDNAME. Activate only once each turn.
+Oracle:Flying\n{G}: Regenerate Locust Swarm.\n{G}: Untap Locust Swarm. Activate only once each turn.

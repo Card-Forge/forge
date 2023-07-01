@@ -1,0 +1,7 @@
+Name:Granitic Titan
+ManaCost:4 R R
+Types:Creature Elemental
+PT:5/4
+K:Menace
+K:Cycling:2
+Oracle:Menace\nCycling {2} ({2}, Discard this card: Draw a card.)

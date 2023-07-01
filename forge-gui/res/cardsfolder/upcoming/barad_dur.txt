@@ -1,0 +1,12 @@
+Name:Barad-Dur
+ManaCost:no cost
+Types:Legendary Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary creature.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Amass | Cost$ X X B T | Type$ Orc | Num$ X | CheckSVar$ Morbid | SVarCompare$ GE1 | SpellDescription$ Amass Orcs X. Activate only if a creature died this turn.
+SVar:Morbid:Count$Morbid.1.0
+SVar:X:Count$xPaid
+DeckHints:Type$Legendary & Type$Creature
+DeckHas:Ability$Token|Counters & Type$Orc
+Oracle:Barad-Dur enters the battlefield tapped unless you control a legendary creature.\n{T}: Add {B}.\n{X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.

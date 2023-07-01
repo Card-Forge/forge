@@ -1,0 +1,8 @@
+Name:Possessed Nomad
+ManaCost:2 W W
+Types:Creature Human Nomad Horror
+PT:3/3
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | SetColor$ Black | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target white creature."
+SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | SpellDescription$ Destroy target white creature.
+Oracle:Vigilance\nThreshold — As long as seven or more cards are in your graveyard, Possessed Nomad gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target white creature."

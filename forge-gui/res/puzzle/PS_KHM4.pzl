@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/02/168.-KHM4-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no cards in hand. Your solution must account for all possible decisions the opponent could make!
+[state]
+humanlife=20
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Tergrid's Shadow;Gadrak, the Crown-Scourge;Tergrid, God of Fright;Minion's Return
+humanbattlefield=Goldspan Dragon;Labyrinth Raptor;Embereth Skyblazer;Snow-Covered Mountain|Set:KHM;Snow-Covered Mountain|Set:KHM;Snow-Covered Mountain|Set:KHM;Snow-Covered Swamp|Set:KHM;Snow-Covered Swamp|Set:KHM;Snow-Covered Swamp|Set:KHM
+aibattlefield=Starnheim Courser;Conclave Mentor;Gemrazer

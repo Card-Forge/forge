@@ -1,0 +1,9 @@
+Name:Windriddle Palaces
+ManaCost:no cost
+Types:Plane Belenon
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | MayPlay$ You | Description$ You may play lands and cast spells from the top of any player's library.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each player mills a card.
+SVar:RolledChaos:DB$ Mill | NumCards$ 1 | Defined$ Player
+SVar:AIRollPlanarDieParams:Mode$ Random | Chance$ 30
+Oracle:Players play with the top card of their libraries revealed.\nYou may play lands and cast spells from the top of any player's library.\nWhenever chaos ensues, each player mills a card.

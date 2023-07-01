@@ -1,0 +1,9 @@
+Name:Smelt-Ward Minotaur
+ManaCost:2 R
+Types:Creature Minotaur Warrior
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, target creature an opponent controls can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, target creature an opponent controls can't block this turn.

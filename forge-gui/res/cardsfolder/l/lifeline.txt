@@ -1,0 +1,9 @@
+Name:Lifeline
+ManaCost:5
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Creature | Origin$ Battlefield | Destination$ Graveyard | IsPresent$ Creature | Execute$ TrigLifelineDelay | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigLifelineDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigLifelineReturn | TriggerDescription$ Return that creature to the battlefield. | RememberObjects$ TriggeredNewCardLKICopy
+SVar:TrigLifelineReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.

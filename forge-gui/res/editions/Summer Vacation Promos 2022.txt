@@ -1,0 +1,11 @@
+[metadata]
+Code=PSVC
+Date=2022-08-01
+Name=Summer Vacation Promos 2022
+Type=Promo
+ScryfallCode=PSVC
+
+[cards]
+1 R Ephemerate @Bastien L. Deharme
+2 R Infernal Grasp @Naomi Baker
+3 R Arcane Signet @Dan Scott

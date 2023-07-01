@@ -1,0 +1,6 @@
+Name:Notorious Assassin
+ManaCost:3 B
+Types:Creature Human Spellshaper Assassin
+PT:2/2
+A:AB$ Destroy | Cost$ 2 B T Discard<1/Card> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
+Oracle:{2}{B}, {T}, Discard a card: Destroy target nonblack creature. It can't be regenerated.

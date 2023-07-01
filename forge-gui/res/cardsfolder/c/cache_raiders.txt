@@ -1,0 +1,8 @@
+Name:Cache Raiders
+ManaCost:3 U U
+Types:Creature Merfolk Rogue
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return a permanent you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, return a permanent you control to its owner's hand.

@@ -1,0 +1,8 @@
+Name:Mists of Littjara
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature or Vehicle
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature,Vehicle | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ -3 | Description$ Enchanted permanent gets -3/-0.
+Oracle:Flash\nEnchant creature or Vehicle\nEnchanted creature gets -3/-0.

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Kongming, "Sleeping Dragon"
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=White Weenie
+Deck Type=constructed
+Name=WhiteWeenie
+[Main]
+4 Alaborn Grenadier|PO2
+4 Alaborn Zealot|PO2
+1 Angelic Blessing|POR
+1 Armageddon|PO2
+2 Armageddon|POR
+1 Blinding Light|POR
+2 Disenchant|S00
+2 Eightfold Maze|PTK
+4 Knight Errant|POR
+3 Kongming, "Sleeping Dragon"|PTK
+3 Plains|PO2|1
+5 Plains|PO2|2
+5 Plains|PO2|3
+6 Plains|PTK|1
+4 Plains|PTK|2
+2 Riding Red Hare|PTK
+1 Righteous Charge|PO2
+2 Royal Falcon|S99
+2 Shu Cavalry|PTK
+4 Veteran Cavalier|S99
+2 Wild Griffin|PO2

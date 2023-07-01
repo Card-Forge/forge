@@ -1,0 +1,7 @@
+Name:Shinen of Flight's Wings
+ManaCost:4 U
+Types:Creature Spirit
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ U Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel — | KW$ Flying | ActivationZone$ Hand | SpellDescription$ Target creature gains flying until end of turn.
+Oracle:Flying\nChannel — {U}, Discard Shinen of Flight's Wings: Target creature gains flying until end of turn.

@@ -1,0 +1,8 @@
+Name:Archetype of Courage
+ManaCost:1 W W
+Types:Enchantment Creature Human Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ First Strike | Description$ Creatures you control have first strike.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ First Strike | CantHaveKeyword$ First Strike | Description$ Creatures your opponents control lose first strike and can't have or gain first strike.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have first strike.\nCreatures your opponents control lose first strike and can't have or gain first strike.

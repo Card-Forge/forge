@@ -1,0 +1,10 @@
+Name:Cosmic Horror
+ManaCost:3 B B B
+Types:Creature Horror
+PT:7/7
+K:First Strike
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you pay {3}{B}{B}{B}. If CARDNAME is destroyed this way, it deals 7 damage to you.
+SVar:TrigDestroy:DB$ Destroy | Defined$ Self | RememberDestroyed$ True | UnlessCost$ 3 B B B | UnlessPayer$ You | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:First strike\nAt the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.

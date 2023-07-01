@@ -1,0 +1,8 @@
+Name:Slith Bloodletter
+ManaCost:B B
+Types:Creature Slith
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Whenever Slith Bloodletter deals combat damage to a player, put a +1/+1 counter on it.\n{1}{B}: Regenerate Slith Bloodletter.

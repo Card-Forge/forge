@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Hellboy 3
+Title=Hellboy
+Difficulty=hard
+Description=BR direct damage deck
+Icon=Hellboy.jpg
+Deck Type=constructed
+[main]
+5 Swamp|ISD
+7 Mountain 
+4 Badlands
+4 Bloodstained Mire
+1 Mox Ruby
+1 Mox Jet
+4 Blightning
+2 Breath of Malfegor
+3 Flames of the Blood Hand
+4 Bump in the Night
+4 Lava Spike
+4 Keldon Marauders
+4 Spark Elemental
+2 Night's Whisper
+4 Tyrant's Choice
+1 Hidetsugu's Second Rite
+1 Ball Lightning
+2 Hellspark Elemental
+1 Keldon Champion
+1 Fire Servant
+1 Smash to Smithereens
+[sideboard]

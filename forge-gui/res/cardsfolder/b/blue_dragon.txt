@@ -1,0 +1,12 @@
+Name:Blue Dragon
+ManaCost:5 U U
+Types:Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Lightning Breath — When CARDNAME enters the battlefield, until your next turn, target creature an opponent controls gets -3/-0, up to one other target creature gets -2/-0, and up to one other target creature gets -1/-0.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls (-3/-0) | NumAtt$ -3 | Duration$ UntilYourNextTurn | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one other target creature an opponent controls (-2/-0) | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ -2 | TargetUnique$ True | Duration$ UntilYourNextTurn | SubAbility$ DBPump2
+SVar:DBPump2:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one other target creature an opponent controls (-1/-0) | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ -1 | TargetUnique$ True | Duration$ UntilYourNextTurn
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+Oracle:Flying\nLightning Breath — When Blue Dragon enters the battlefield, until your next turn, target creature an opponent controls gets -3/-0, up to one other target creature gets -2/-0, and up to one other target creature gets -1/-0.

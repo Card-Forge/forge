@@ -1,0 +1,11 @@
+Name:Nephalia
+ManaCost:no cost
+Types:Plane Innistrad
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ At the beginning of your end step, mill seven cards. Then return a card at random from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 7 | SubAbility$ DBRandom
+SVar:DBRandom:DB$ ChooseCard | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target card from your graveyard to your hand.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn
+SVar:AIRollPlanarDieParams:Mode$ Always | CardsInGraveyardGE$ 1
+Oracle:At the beginning of your end step, mill seven cards. Then return a card at random from your graveyard to your hand.\nWhenever chaos ensues, return target card from your graveyard to your hand.

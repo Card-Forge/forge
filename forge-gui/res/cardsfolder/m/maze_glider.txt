@@ -1,0 +1,8 @@
+Name:Maze Glider
+ManaCost:5 U
+Types:Creature Elemental
+PT:3/5
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Flying | Description$ Multicolored creatures you control have flying.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nMulticolored creatures you control have flying.

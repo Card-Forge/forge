@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/05/114.-WAR4.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has no cards in hand. Assume your library has 6 lands remaining, all of which are basics in your colors. All other cards in your library are irrelevant.
+[state]
+humanlife=20
+ailife=19
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Vivien Reid;Forest;Sylvan Awakening;Scapeshift;Kaya's Ghostform
+humanlibrary=Swamp;Swamp;Mountain;Mountain;Forest;Forest;No Escape;No Escape;No Escape;No Escape
+humanbattlefield=Evolution Sage;Angrath, the Flame-Chained|Counters:LOYALTY=4;Vraska, Relic Seeker|Counters:LOYALTY=1;Marwyn, the Nurturer|Counters:P1P1=1;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs
+aibattlefield=World Shaper;Benalish Marshal;Pelt Collector;Siegehorn Ceratops

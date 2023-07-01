@@ -1,0 +1,11 @@
+Name:Dimir Cipher|Deck:Dimir Cipher.dck|Variant:None|Avatar:Stolen Identity|Desc:
+Name:Dimir Mill|Deck:Dimir Mill.dck|Variant:None|Avatar:Belltower Sphinx|Desc:
+Name:Dimir Transmute|Deck:Dimir Transmute.dck|Variant:None|Avatar:Dimir House Guard|Desc:
+Name:Circu, Dimir Lobotomist|Deck:Circu, Dimir Lobotomist.dck|Variant:Commander|Avatar:Circu, Dimir Lobotomist|Desc:
+Name:Lazav, Dimir Mastermind|Deck:Lazav, Dimir Mastermind.dck|Variant:Commander|Avatar:Lazav, Dimir Mastermind|Desc:
+Name:Mirko Vosk, Mind Drinker|Deck:Mirko Vosk, Mind Drinker.dck|Variant:Commander|Avatar:Mirko Vosk, Mind Drinker|Desc:
+Name:Szadek, Lord of Secrets|Deck:Szadek, Lord of Secrets.dck|Variant:Commander|Avatar:Szadek, Lord of Secrets|Desc:
+Name:Etrata, the Silencer|Deck:Etrata, the Silencer.dck|Variant:Commander|Avatar:Etrata, the Silencer|Desc:
+Name:Royal Assassin|Deck:Royal Assassin.dck|Variant:Vanguard|Avatar:Royal Assassin|Desc:
+
+Name:Defender Mill|Deck:Defender Mill.dck|Variant:None|Avatar:Doorkeeper|Desc:

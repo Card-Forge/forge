@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Invisible Man 4
+Title=Invisible Man
+Difficulty=very hard
+Description=Mono U True-Name Nemesis deck with Invisible Stalker and equipment
+Icon=Invisible Man.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall
+1 Basilisk Collar
+3 Bonesplitter
+4 Mana Drain
+2 Curiosity
+2 Eel Umbra
+4 Invisible Stalker
+20 Island
+1 Loxodon Warhammer
+1 Mox Sapphire
+2 Negate
+2 Psychic Barrier
+3 Propaganda
+2 Sigil of Sleep
+1 Spell Pierce
+2 Spell Snare
+1 Sword of Feast and Famine
+1 Time Walk
+4 True-Name Nemesis
+2 Web of Inertia
+1 Treasure Cruise
+[sideboard]

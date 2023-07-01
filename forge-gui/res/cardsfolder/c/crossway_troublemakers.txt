@@ -1,0 +1,10 @@
+Name:Crossway Troublemakers
+ManaCost:5 B
+Types:Creature Vampire
+PT:5/5
+S:Mode$ Continuous | Affected$ Vampire.attacking+YouCtrl | AddKeyword$ Deathtouch & Lifelink | Description$ Attacking Vampires you control have deathtouch and lifelink.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Vampire.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a Vampire you control dies, you may pay 2 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<2> | Defined$ You | NumCards$ 1
+DeckHints:Type$Vampire
+DeckHas:Ability$LifeGain
+Oracle:Attacking Vampires you control have deathtouch and lifelink.\nWhenever a Vampire you control dies, you may pay 2 life. If you do, draw a card.

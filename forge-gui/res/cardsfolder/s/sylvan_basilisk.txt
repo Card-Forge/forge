@@ -1,0 +1,7 @@
+Name:Sylvan Basilisk
+ManaCost:3 G G
+Types:Creature Basilisk
+PT:2/4
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, destroy that creature.
+SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
+Oracle:Whenever Sylvan Basilisk becomes blocked by a creature, destroy that creature.

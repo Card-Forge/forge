@@ -1,0 +1,10 @@
+Name:Komainu Battle Armor
+ManaCost:2 R
+Types:Artifact Creature Equipment Dog
+PT:2/2
+K:Menace
+K:Reconfigure:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
+T:Mode$ DamageDone | ValidSource$ Card.Self,Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGoad | TriggerDescription$ Whenever CARDNAME or equipped creature deals combat damage to a player, goad each creature that player controls.
+SVar:TrigGoad:DB$ Goad | Defined$ Valid Creature.ControlledBy Player.TriggeredTarget
+Oracle:Menace\nEquipped creature gets +2/+2 and has menace.\nWhenever Komainu Battle Armor or equipped creature deals combat damage to a player, goad each creature that player controls.\nReconfigure {4} ({4}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)

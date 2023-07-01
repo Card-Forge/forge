@@ -1,0 +1,8 @@
+Name:Scrapyard Steelbreaker
+ManaCost:3 R
+Types:Artifact Creature Human Warrior
+PT:3/4
+A:AB$ Pump | Cost$ 1 Sac<1/Artifact.Other/another artifact> | NumAtt$ 2 | NumDef$ 1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:{1}, Sacrifice another artifact: Scrapyard Steelbreaker gets +2/+1 until end of turn.

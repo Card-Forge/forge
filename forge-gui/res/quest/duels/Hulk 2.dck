@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Hulk 2
+Title=Hulk
+Difficulty=medium
+Description=Mono G stompy deck with Rogue Elephant and Harvest Wurm
+Icon=Hulk.jpg
+Deck Type=constructed
+[main]
+24 Forest|M12
+4 Fallow Wurm
+4 Harvest Wurm
+4 Plant Elemental
+4 Rogue Elephant
+4 Scythe Tiger
+3 Thundering Wurm
+1 Primeval Force
+1 Groundskeeper
+1 Forgotten Harvest
+1 Overwhelming Stampede
+1 Predatory Rampage
+4 Harmonize
+1 Canopy Cover
+1 Treetop Bracers
+1 Life from the Loam
+1 Crucible of Worlds
+[sideboard]

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Tradewind Rider
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Mono-blue creature deck
+Deck Type=constructed
+Name=TradewindRider3
+[Main]
+4 Cloud Spirit|STH
+4 Counterspell|TMP
+4 Curiosity|EXO
+9 Island|TMP|1
+4 Island|TMP|2
+2 Island|TMP|3
+3 Island|TMP|4
+4 Legacy's Allure|TMP
+4 Rootwater Hunter|TMP
+4 Thalakos Deceiver|STH
+1 Thalakos Scout|EXO
+4 Thalakos Seer|TMP
+4 Time Warp|TMP
+4 Tradewind Rider|TMP
+4 Wasteland|TMP
+1 Wayward Soul|EXO

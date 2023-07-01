@@ -1,0 +1,363 @@
+[metadata]
+Name=Mono Blue Cube
+[main]
+1 Academy Ruins|2XM
+1 Adaptive Automaton|2XM
+1 Aeolipile|FEM
+1 Aeon Chronicler|PLC
+1 Aether Spellbomb|MMA
+1 Aether Vial|IMA
+1 Aetherling|DGM
+1 All Is Dust|UMA
+1 Ambassador Laquatus|10E
+1 Amnesia|DRK
+1 Ancestral Recall|VMA
+1 Ancestral Vision|IMA
+1 Ancient Tomb|UMA
+1 Ankh of Mishra|VMA
+1 Annul|KHM
+1 Arcanis the Omnipotent|EMA
+1 Archaeomancer|UMA
+1 Archive Trap|ZEN
+1 Augur of Bolas|WAR
+1 Basalt Monolith|2XM
+1 Bident of Thassa|A25
+1 Black Lotus|VMA
+1 Black Vise|MPS_KLD
+1 Blightsteel Colossus|2XM
+1 Blinkmoth Nexus|2XM
+1 Blue Sun's Zenith|STA
+1 Bonesplitter|MMA
+1 Boomerang|10E
+1 Braids, Conjurer Adept|2XM
+1 Brain Freeze|VMA
+1 Braingeyser|3ED
+1 Brainstorm|STA
+1 Briarberry Cohort|SHM
+1 Brittle Effigy|M11
+1 Broken Ambitions|LRW
+1 Buried Ruin|2XM
+1 Caged Sun|NPH
+1 Call to Mind|M11
+1 Candelabra of Tawnos|ATQ
+1 Capsize|MPS_AKH
+1 Careful Consideration|MMA
+1 Cavern of Souls|UMA
+1 Chalice of the Void|A25
+1 Chancellor of the Spires|NPH
+1 Chronomaton|M13
+1 Claustrophobia|IMA
+1 Cloud of Faeries|VMA
+1 Cloudfin Raptor|GTC
+1 Coalition Relic|A25
+1 Coat of Arms|TPR
+1 Codex Shredder|RTR
+1 Cold-Eyed Selkie|MMA
+1 Commandeer|CSP
+1 Complicate|ONS
+1 Compulsive Research|STA
+1 Condescend|IMA
+1 Contested War Zone|MBS
+1 Control Magic|EMA
+1 Conundrum Sphinx|M11
+1 Copper Gnomes|USG
+1 Coralhelm Commander|ROE
+1 Counterspell|MH2
+1 Crippling Chill|MM3
+1 Cryptic Command|IMA
+1 Cursecatcher|A25
+1 Cyclonic Rift|2XM
+1 Darksteel Colossus|M10
+1 Daze|MPS_AKH
+1 Deep Analysis|EMA
+1 Delay|FUT
+1 Delver of Secrets|ISD
+1 Deprive|ROE
+1 Desert|TSB
+1 Devastation Tide|AVR
+1 Dewdrop Spy|MOR
+1 Dismiss|CN2
+1 Dispel|BFZ
+1 Disrupt|INV
+1 Dissipate|M15
+1 Dissolve|IMA
+1 Dizzy Spell|RAV
+1 Draining Whelk|TSP
+1 Dream Twist|EMA
+1 Drift of Phantasms|RAV
+1 Drowner Initiate|SHM
+1 Dungeon Geists|M20
+1 Duplicant|2XM
+1 Elite Arcanist|M14
+1 Elixir of Immortality|M14
+1 Emrakul, the Aeons Torn|UMA
+1 Enclave Cryptologist|ROE
+1 Enter the Infinite|GTC
+1 Errant Ephemeron|MMA
+1 Ertai, Wizard Adept|EXO
+1 Evacuation|10E
+1 Exclude|MH1
+1 Extraplanar Lens|MPS_KLD
+1 Eye of the Storm|RAV
+1 Fabricate|M10
+1 Fact or Fiction|MH1
+1 Faerie Conclave|10E
+1 Faerie Harbinger|LRW
+1 Flash of Insight|JUD
+1 Flusterstorm|IMA
+1 Foil|UMA
+1 Forbid|MPS_AKH
+1 Force of Will|2XM
+1 Force Spike|7ED
+1 Frantic Search|UMA
+1 Frost Titan|M12
+1 Gainsay|THS
+1 Geralf's Mindcrusher|DKA
+1 Gilded Lotus|DOM
+1 Gitaxian Probe|NPH
+1 Glen Elendra Archmage|UMA
+1 Gomazoa|ZEN
+1 Grafted Wargear|5DN
+1 Grand Architect|2XM
+1 Grim Monolith|ULG
+1 Grindclock|M15
+1 Grindstone|MPS_KLD
+1 Gush|VMA
+1 Hammerhead Shark|TPR
+1 Hedron Crab|ZEN
+1 High Tide|VMA
+1 Horizon Drake|WWK
+1 Howling Mine|M10
+1 Ideas Unbound|SOK
+1 Illusionary Servant|M10
+1 Illusory Angel|IMA
+1 Impulse|VIS
+1 Increasing Confusion|DKA
+1 Inkfathom Infiltrator|SHM
+1 Inkmoth Nexus|MBS
+1 Inkwell Leviathan|2XM
+1 Inspired Sprite|MOR
+1 Into the Roil|ZNR
+1 Isochron Scepter|2XM
+1 Jace Beleren|M11
+1 Jace, Architect of Thought|RTR
+1 Jace, Memory Adept|M14
+1 Jace, the Mind Sculptor|VMA
+1 Jace's Archivist|M12
+1 Jushi Apprentice|CHK
+1 Karn Liberated|2XM
+1 Kederekt Leviathan|ALA
+1 Keening Stone|ROE
+1 Knowledge Pool|MBS
+1 Kuldotha Forgemaster|2XM
+1 Laboratory Maniac|UMA
+1 Legerdemain|TPR
+1 Leyline of Anticipation|M20
+1 Library of Alexandria|VMA
+1 Lighthouse Chronologist|ROE
+1 Llawan, Cephalid Empress|TOR
+1 Logic Knot|MMA
+1 Lonely Sandbar|MH1
+1 Long-Term Plans|SCG
+1 Looter il-Kor|TSP
+1 Lord of Atlantis|TSB
+1 Lotus Bloom|MMA
+1 Lullmage Mentor|ZEN
+1 Mana Crypt|2XM
+1 Mana Drain|IMA
+1 Mana Leak|IMA
+1 Mana Vault|UMA
+1 Master of the Pearl Trident|M13
+1 Master of Waves|THS
+1 Master Thief|M12
+1 Master Transmuter|2XM
+1 Maze of Ith|2XM
+1 Meditate|TPR
+1 Meishin, the Mind Cage|SOK
+1 Meloku the Clouded Mirror|MMA
+1 Memory Jar|VMA
+1 Memory Sluice|SHM
+1 Mental Misstep|NPH
+1 Merchant Scroll|8ED
+1 Merfolk Looter|A25
+1 Merfolk Mesmerist|M12
+1 Merfolk Sovereign|M11
+1 Merfolk Spy|M14
+1 Merrow Reejerey|LRW
+1 Metalworker|UDS
+1 Mind Over Matter|EXO
+1 Mind Sculpt|M15
+1 Mind Stone|IMA
+1 Mind's Desire|STA
+1 Mindslaver|SOM
+1 Minister of Impediments|DIS
+1 Miscalculation|ULG
+1 Misdirection|CNS
+1 Mishra's Factory|MH2
+1 Mishra's Helix|USG
+1 Mishra's Workshop|ATQ
+1 Mortarpod|MM2
+1 Mothdust Changeling|MMA
+1 Mox Diamond|TPR
+1 Mox Sapphire|VMA
+1 Muddle the Mixture|RAV
+1 Mulldrifter|MM2
+1 Mutavault|M14
+1 Myr Battlesphere|2XM
+1 Mystical Tutor|EMA
+1 Negate|STA
+1 Nevinyrral's Disk|MH2
+1 Nightveil Specter|GTC
+1 Nimbus Naiad|THS
+1 Ninja of the Deep Hours|BOK
+1 Oblivion Stone|2XM
+1 Omniscience|M19
+1 Oona, Queen of the Fae|MMA
+1 Opportunity|MM3
+1 Overtaker|MMQ
+1 Pact of Negation|AKR
+1 Painter's Servant|MPS_KLD
+1 Palinchron|VMA
+1 Patron Wizard|ODY
+1 Peek|10E
+1 Peer Through Depths|MMA
+1 Personal Tutor|POR
+1 Pestermite|MMA
+1 Phantasmal Bear|A25
+1 Phantasmal Dragon|M12
+1 Phantasmal Image|MM3
+1 Phyrexian Ingester|EMA
+1 Phyrexian Metamorph|2XM
+1 Piracy Charm|PLC
+1 Platinum Angel|MPS_KLD
+1 Plumeveil|UMA
+1 Ponder|M12
+1 Pongify|2XM
+1 Portent|5ED
+1 Powder Keg|UDS
+1 Power Artifact|ATQ
+1 Precursor Golem|MM2
+1 Preordain|M11
+1 Prognostic Sphinx|THS
+1 Propaganda|TMP
+1 Psionic Blast|TSB
+1 Psychic Barrier|NPH
+1 Puresight Merrow|SHM
+1 Quicksand|A25
+1 Rapid Hybridization|GTC
+1 Ratchet Bomb|2XM
+1 Rath's Edge|NMS
+1 Raven Guild Master|SCG
+1 Ray of Command|5ED
+1 Reconstruction|3ED
+1 Reliquary Tower|M19
+1 Remand|MM2
+1 Remote Isle|USG
+1 Repeal|IMA
+1 Rewind|M21
+1 Riftwing Cloudskate|MMA
+1 Riptide Director|LGN
+1 Riptide Laboratory|MH2
+1 Rishadan Port|A25
+1 Runechanter's Pike|ISD
+1 Sage of Fables|MOR
+1 Sand Squid|MMQ
+1 Sands of Delirium|M13
+1 Sapphire Medallion|TMP
+1 Sea Drake|MH2
+1 Sea Gate Oracle|MM3
+1 Sea Scryer|MIR
+1 Seasinger|5ED
+1 Sensei's Divining Top|EMA
+1 Sensory Deprivation|M14
+1 Serendib Efreet|EMA
+1 Serum Visions|MM3
+1 Shape Anew|SOM
+1 Shapesharer|LRW
+1 Shelldock Isle|LRW
+1 Show and Tell|CN2
+1 Signal Pest|MBS
+1 Silvergill Adept|RIX
+1 Skullclamp|VMA
+1 Skywatcher Adept|ROE
+1 Sleight of Hand|UMA
+1 Smokestack|VMA
+1 Snapcaster Mage|UMA
+1 Sol Ring|MPS_KLD
+1 Sower of Temptation|LRW
+1 Spell Pierce|XLN
+1 Spell Snare|MMA
+1 Spellstutter Sprite|MMA
+1 Spiketail Drakeling|TSP
+1 Spire Golem|DST
+1 Sprite Noble|EMA
+1 Standstill|ODY
+1 Steel Hellkite|SOM
+1 Steel Sabotage|2XM
+1 Stern Mentor|AVR
+1 Stonybrook Banneret|MOR
+1 Strata Scythe|SOM
+1 Strip Mine|EXP
+1 Stroke of Genius|VMA
+1 Swan Song|THS
+1 Sword of Body and Mind|2XM
+1 Sword of Fire and Ice|2XM
+1 Sygg, River Cutthroat|SHM
+1 Take Possession|MMA
+1 Talrand, Sky Summoner|M13
+1 Tangle Wire|NMS
+1 Teferi, Mage of Zhalfir|IMA
+1 Telling Time|MM2
+1 Temporal Adept|9ED
+1 Temporal Fissure|VMA
+1 Thada Adel, Acquisitor|WWK
+1 Thalakos Deceiver|STH
+1 Thassa, God of the Sea|THS
+1 The Tabernacle at Pendrell Vale|LEG
+1 Think Twice|UMA
+1 Thistledown Liege|SHM
+1 Thought Scour|IMA
+1 Thran Dynamo|IMA
+1 Thwart|MMQ
+1 Time Spiral|USG
+1 Time Stretch|10E
+1 Time Vault|VMA
+1 Time Walk|VMA
+1 Timetwister|VMA
+1 Tinker|ULG
+1 Tolaria West|FUT
+1 Tolarian Academy|VMA
+1 Tome Scour|M14
+1 Tower of the Magistrate|MMQ
+1 Treachery|UDS
+1 True-Name Nemesis|C13
+1 Turnabout|VMA
+1 Ulamog, the Infinite Gyre|UMA
+1 Umezawa's Jitte|BOK
+1 Undo|VIS
+1 Upheaval|MH2
+1 Vapor Snag|MM2
+1 Vaporkin|CN2
+1 Vedalken Aethermage|FUT
+1 Vedalken Shackles|MPS_KLD
+1 Veiled Serpent|USG
+1 Vendilion Clique|A25
+1 Venser, Shaper Savant|MM3
+1 Vesuvan Shapeshifter|A25
+1 Vexing Sphinx|CSP
+1 Vision Charm|VIS
+1 Visions of Beyond|UMA
+1 Vodalian Knights|FEM
+1 Void Stalker|M13
+1 Voidmage Prodigy|TSB
+1 Voltaic Key|M11
+1 Wake Thrasher|EVE
+1 Wasp Lancer|SHM
+1 Waterfront Bouncer|VMA
+1 Welkin Tern|M15
+1 Wheel and Deal|ONS
+1 Windfall|IMA
+1 Winter Orb|EMA
+1 Withdraw|PCY
+1 Worn Powerstone|EMA
+1 Wurmcoil Engine|2XM

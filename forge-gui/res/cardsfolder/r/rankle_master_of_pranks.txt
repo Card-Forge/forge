@@ -1,0 +1,13 @@
+Name:Rankle, Master of Pranks
+ManaCost:2 B B
+Types:Legendary Creature Faerie Rogue
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDiscard,DBLoseLife,DBSac | MinCharmNum$ 0 | CharmNum$ 3
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | AILogic$ AnyPhaseIfFavored | SpellDescription$ Each player discards a card.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Player | SubAbility$ DBDraw | AILogic$ AnyPhase | SpellDescription$ Each player loses 1 life and draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | StackDescription$ None
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices a creature.
+Oracle:Flying, haste\nWhenever Rankle, Master of Pranks deals combat damage to a player, choose any number —\n• Each player discards a card.\n• Each player loses 1 life and draws a card.\n• Each player sacrifices a creature.

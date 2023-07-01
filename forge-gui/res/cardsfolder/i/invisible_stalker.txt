@@ -1,0 +1,7 @@
+Name:Invisible Stalker
+ManaCost:1 U
+Types:Creature Human Rogue
+PT:1/1
+K:Hexproof
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nInvisible Stalker can't be blocked.

@@ -1,0 +1,7 @@
+Name:Gloom Stalker
+ManaCost:2 W
+Types:Creature Dwarf Ranger
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you've completed a dungeon, CARDNAME has double strike.
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:As long as you've completed a dungeon, Gloom Stalker has double strike.

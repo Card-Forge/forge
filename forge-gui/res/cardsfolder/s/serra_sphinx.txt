@@ -1,0 +1,7 @@
+Name:Serra Sphinx
+ManaCost:3 U U
+Types:Creature Sphinx
+PT:4/4
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

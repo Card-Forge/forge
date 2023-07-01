@@ -1,0 +1,6 @@
+Name:Undercity Informer
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/3
+A:AB$ DigUntil | Cost$ 1 Sac<1/Creature> | ValidTgts$ Player | TgtPrompt$ Choose a player | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | SpellDescription$ Target player reveals the top card of their library until they reveal a land card, then puts those cards into their graveyard.
+Oracle:{1}, Sacrifice a creature: Target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.

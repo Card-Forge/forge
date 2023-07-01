@@ -1,0 +1,7 @@
+Name:Faces of the Past
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigTaporUntapAll | TriggerDescription$ Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.
+SVar:TrigTaporUntapAll:DB$ TaporUntapAll | ValidCards$ TriggeredCard.sharesCreatureTypeWith | ValidMessage$ creatures that share a creature type with the triggered creature
+AI:RemoveDeck:Random
+Oracle:Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.

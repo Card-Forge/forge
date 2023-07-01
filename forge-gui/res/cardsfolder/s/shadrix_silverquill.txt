@@ -1,0 +1,14 @@
+Name:Shadrix Silverquill
+ManaCost:3 W B
+Types:Legendary Creature Elder Dragon
+PT:2/5
+K:Flying
+K:Double Strike
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of combat on your turn, you may ABILITY
+SVar:TrigCharm:DB$ Charm | CharmNum$ 2 | Optional$ True | Choices$ Token,Card,Counters | AdditionalDescription$ Each mode must target a different player.
+SVar:Token:DB$ Token | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to create a 2/1 white and black inkling creature token with flying | TokenAmount$ 1 | TokenScript$ wb_2_1_inkling_flying | TokenOwner$ ThisTargetedPlayer | SpellDescription$ Target player creates a 2/1 white and black Inkling creature token with flying.
+SVar:Card:DB$ Draw | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to draw a card and lose 1 life | SubAbility$ DBLoseLife | SpellDescription$ Target player draws a card and loses 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ 1
+SVar:Counters:DB$ PutCounterAll | ValidTgts$ Player | Placer$ TargetedPlayer | TargetUnique$ True | TgtPrompt$ Select target player to put a +1/+1 counter on each creature they control | ValidCards$ Creature.TargetedPlayerCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Target player puts a +1/+1 counter on each creature they control.
+DeckHas:Ability$Token|Counters
+Oracle:Flying, double strike\nAt the beginning of combat on your turn, you may choose two. Each mode must target a different player.\n• Target player creates a 2/1 white and black Inkling creature token with flying.\n• Target player draws a card and loses 1 life.\n• Target player puts a +1/+1 counter on each creature they control.

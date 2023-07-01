@@ -1,0 +1,11 @@
+Name:Treefolk Mystic
+ManaCost:3 G
+Types:Creature Treefolk
+PT:2/4
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDestroyBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
+SVar:TrigDestroyBlocked:DB$ Pump | Defined$ TriggeredAttacker | RememberObjects$ TriggeredAttacker | SubAbility$ DBDestroy
+SVar:TrigDestroyBlocker:DB$ Pump | Defined$ TriggeredBlocker | RememberObjects$ TriggeredBlocker | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Aura.AttachedTo Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Treefolk Mystic blocks or becomes blocked by a creature, destroy all Auras attached to that creature.

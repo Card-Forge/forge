@@ -1,0 +1,10 @@
+Name:Horizon Seed
+ManaCost:4 W
+Types:Creature Spirit
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRegenerate | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, regenerate target creature.
+SVar:TrigRegenerate:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:BuffedBy:Spirit,Arcane
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, regenerate target creature.

@@ -1,0 +1,6 @@
+Name:Ghostflame Sliver
+ManaCost:B R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | SetColor$ Colorless | Description$ All Slivers are colorless.
+Oracle:All Slivers are colorless.

@@ -1,0 +1,7 @@
+Name:Coalition Skyknight
+ManaCost:3 W
+Types:Creature Human Knight
+PT:2/2
+K:Flying
+K:Enlist
+Oracle:Flying\nEnlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)

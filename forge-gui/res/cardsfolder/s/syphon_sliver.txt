@@ -1,0 +1,7 @@
+Name:Syphon Sliver
+ManaCost:2 B
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Lifelink | Description$ Sliver creatures you control have lifelink.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have lifelink. (Damage dealt by a Sliver creature you control also causes you to gain that much life.)

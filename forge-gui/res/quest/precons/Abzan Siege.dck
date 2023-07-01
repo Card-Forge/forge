@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Abzan Siege
+Description=The Abzan rely on endurance and fortitude to outlast the other clans. Build a resilient army, survive your enemy's rash attacks, and then march to an eventual victory.
+Deck Type=constructed
+Set=KTK
+Image=abzan_siege.jpg
+[Main]
+6 Forest|KTK
+7 Swamp|KTK
+8 Plains|KTK
+1 Scoured Barrens|KTK
+2 Sandsteppe Citadel|KTK
+1 Jungle Hollow|KTK
+1 Blossoming Sands|KTK
+1 Mer-ek Nightblade|KTK
+1 Carnivorous Moss-beast|M15
+1 Ivorytusk Fortress+|KTK
+1 Armament Corps|KTK
+2 Longshot Squad|KTK
+2 Disowned Ancestor|KTK
+3 Ainok Bond-kin|KTK
+1 Sungrace Pegasus|M15
+2 Child Of Night|M15
+2 Abzan Falconer|KTK
+2 Tuskguard Captain|KTK
+1 Abzan Battle Priest|KTK
+1 High Sentinels Of Arashin|KTK
+1 Razorfoot Griffin|M15
+2 Salt Road Patrol|KTK
+1 Incremental Growth|KTK
+1 Flesh To Dust|M15
+1 Hunt The Weak|M15
+1 Dragonscale Boon|KTK
+1 Abzan Charm|KTK
+2 Kill Shot|KTK
+2 Abzan Banner|KTK
+1 Eternal Thirst|M15
+1 Suspension Field|KTK

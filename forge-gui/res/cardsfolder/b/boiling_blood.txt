@@ -1,0 +1,7 @@
+Name:Boiling Blood
+ManaCost:2 R
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature | StaticAbilities$ MustAttack | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDraw | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Target creature attacks this turn if able.\nDraw a card.

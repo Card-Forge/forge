@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Catwoman 2
+Title=Catwoman
+Difficulty=medium
+Description=WRG Cat deck with Lightning Helix
+Icon=Catwoman.jpg
+Deck Type=constructed
+[main]
+4 Plateau
+4 Taiga
+2 Elite Cat Warrior
+4 Kjeldoran War Cry
+4 Lightning Helix
+3 Plains|ALA
+3 Savannah Lions
+3 Commune with Nature
+4 Penumbra Bobcat
+3 Forest|ALA
+2 Canyon Wildcat
+2 Horned Cheetah
+2 Obelisk of Naya
+1 Marble Diamond
+2 King Cheetah
+1 Regrowth
+1 Jedit Ojanen of Efrava
+1 Mirri, Cat Warrior
+2 Raging Cougar
+4 Savannah
+1 Loam Lion
+3 Wild Nacatl
+2 Mountain|ALA
+1 Leonin Relic-Warder
+1 Qasali Ambusher
+[sideboard]

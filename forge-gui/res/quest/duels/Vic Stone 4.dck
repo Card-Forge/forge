@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Vic Stone 4
+Title=Vic Stone
+Difficulty=very hard
+Description=GW Aura deck with Hexproof creatures, Daybreak Coronet and Kor Spiritdancer
+Icon=Vic Stone.jpg
+Deck Type=constructed
+[main]
+2 Plains|M12
+2 Forest|M12
+3 Razorverge Thicket
+4 Savannah
+1 Misty Rainforest
+4 Windswept Heath
+4 Flooded Strand
+1 Mox Emerald
+1 Mox Pearl
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Silhana Ledgewalker
+4 Slippery Bogle
+4 Daybreak Coronet
+4 Rancor
+4 Ethereal Armor
+1 Ancestral Mask
+3 Hyena Umbra
+1 Spider Umbra
+1 Spirit Mantle
+4 Swords to Plowshares
+[sideboard]

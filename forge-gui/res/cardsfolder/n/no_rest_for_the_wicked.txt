@@ -1,0 +1,5 @@
+Name:No Rest for the Wicked
+ManaCost:1 B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | Defined$ ValidGraveyard Creature.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
+Oracle:Sacrifice No Rest for the Wicked: Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.

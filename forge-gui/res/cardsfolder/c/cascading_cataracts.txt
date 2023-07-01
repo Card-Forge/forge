@@ -1,0 +1,7 @@
+Name:Cascading Cataracts
+ManaCost:no cost
+Types:Land
+K:Indestructible
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 5 T | Produced$ Combo Any | Amount$ 5 | SpellDescription$ Add five mana in any combination of colors.
+Oracle:Indestructible\n{T}: Add {C}.\n{5}, {T}: Add five mana in any combination of colors.

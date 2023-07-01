@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: The Forest Folk
+Title=The Forest Folk
+Difficulty=medium
+Description="Our friends of the forest take many forms, yet all serve the will of Freyalise." -Laina of the Elvish Council
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+2 Blizzard|ICE
+4 Brown Ouphe|ICE
+4 Folk of the Pines|ICE
+2 Forbidden Lore|ICE
+4 Fyndhorn Brownie|ICE
+2 Lure|ICE
+4 Pyknite|ICE
+4 Rime Dryad|ICE
+24 Snow-Covered Forest|ICE
+4 Snowblind|ICE
+2 Splintering Wind|ALL
+2 Tornado|ALL
+2 Touch of Vitae|ICE

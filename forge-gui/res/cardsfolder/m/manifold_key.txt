@@ -1,0 +1,8 @@
+Name:Manifold Key
+ManaCost:1
+Types:Artifact
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Artifact.Other | TgtPrompt$ Select another target artifact | SpellDescription$ Untap another target artifact.
+AI:RemoveDeck:All
+A:AB$ Effect | Cost$ 3 T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:{1}, {T}: Untap another target artifact.\n{3}, {T}: Target creature can't be blocked this turn.

@@ -1,0 +1,7 @@
+Name:Pheres-Band Raiders
+ManaCost:5 G
+Types:Creature Centaur Warrior
+PT:5/5
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {2}{G}. If you do, create a 3/3 green Centaur enchantment creature token.
+SVar:GFGToken:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_3_3_e_centaur | TokenOwner$ You
+Oracle:Inspired — Whenever Pheres-Band Raiders becomes untapped, you may pay {2}{G}. If you do, create a 3/3 green Centaur enchantment creature token.

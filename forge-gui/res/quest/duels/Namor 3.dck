@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Namor 3
+Title=Namor
+Difficulty=hard
+Description=Mono U Merfolk Aggro deck with merfolk lords, Tidal Courier and True-Name Nemesis
+Icon=Namor.jpg
+Deck Type=constructed
+[main]
+21 Island
+3 Adaptive Automaton
+3 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Sovereign
+4 Merrow Reejerey
+4 Stonybrook Banneret
+4 Tidal Courier
+4 Triton Shorestalker
+4 True-Name Nemesis
+3 Call to the Kindred
+2 Merrow Commerce
+[sideboard]

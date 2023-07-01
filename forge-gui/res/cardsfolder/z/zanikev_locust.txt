@@ -1,0 +1,7 @@
+Name:Zanikev Locust
+ManaCost:5 B
+Types:Creature Insect
+PT:3/3
+K:Flying
+K:Scavenge:2 B B
+Oracle:Flying\nScavenge {2}{B}{B} ({2}{B}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

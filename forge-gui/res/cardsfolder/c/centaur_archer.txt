@@ -1,0 +1,6 @@
+Name:Centaur Archer
+ManaCost:1 R G
+Types:Creature Centaur Archer
+PT:3/2
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
+Oracle:{T}: Centaur Archer deals 1 damage to target creature with flying.

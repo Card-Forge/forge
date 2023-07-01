@@ -1,0 +1,8 @@
+Name:Darksteel Sentinel
+ManaCost:6
+Types:Artifact Creature Golem
+PT:3/3
+K:Vigilance
+K:Indestructible
+K:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nVigilance\nIndestructible (Damage and effects that say "destroy" don't destroy this creature. If its toughness is 0 or less, it's still put into its owner's graveyard.)

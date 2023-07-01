@@ -1,0 +1,6 @@
+Name:Barbarian Riftcutter
+ManaCost:4 R
+Types:Creature Human Barbarian
+PT:3/3
+A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+Oracle:{R}, Sacrifice Barbarian Riftcutter: Destroy target land.

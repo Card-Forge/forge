@@ -1,0 +1,7 @@
+Name:Safeguard
+ManaCost:3 W W
+Types:Enchantment
+A:AB$ Effect | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature whose combat damage will be prevented | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target creature this turn.
+SVar:NonStackingEffect:True
+Oracle:{2}{W}: Prevent all combat damage that would be dealt by target creature this turn.

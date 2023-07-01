@@ -1,0 +1,7 @@
+Name:Armory Veteran
+ManaCost:1 R
+Types:Creature Orc Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Menace | Description$ As long as CARDNAME is equipped, it has menace. (It can't be blocked except by two or more creatures.)
+SVar:EquipMe:Once
+Oracle:As long as Armory Veteran is equipped, it has menace. (It can't be blocked except by two or more creatures.)

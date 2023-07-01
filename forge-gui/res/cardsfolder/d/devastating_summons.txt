@@ -1,0 +1,7 @@
+Name:Devastating Summons
+ManaCost:R
+Types:Sorcery
+A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenScript$ r_x_x_elemental | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create two X/X red Elemental creature tokens.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice X lands.\nCreate two X/X red Elemental creature tokens.

@@ -1,0 +1,9 @@
+Name:Sewer Crocodile
+ManaCost:5 U
+Types:Creature Crocodile
+PT:4/6
+A:AB$ Effect | Cost$ 3 U | RememberObjects$ Self | ReduceCost$ X | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ CARDNAME can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn. This ability costs {3} less to activate if there are five or more mana values among cards in your graveyard.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:X:Count$Compare Y GE5.3.0
+SVar:Y:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+Oracle:{3}{U}: Sewer Crocodile can't be blocked this turn. This ability costs {3} less to activate if there are five or more mana values among cards in your graveyard.

@@ -1,0 +1,8 @@
+Name:Sunrise Sovereign
+ManaCost:5 R
+Types:Creature Giant Warrior
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Giant+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Other Giant creatures you control get +2/+2 and have trample.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Other Giant creatures you control get +2/+2 and have trample.

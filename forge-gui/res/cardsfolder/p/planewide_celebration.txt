@@ -1,0 +1,10 @@
+Name:Planewide Celebration
+ManaCost:5 G G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBReturn,DBProliferate,DBGainLife | CharmNum$ 4 | CanRepeatModes$ True
+SVar:DBToken:DB$ Token | TokenScript$ all_2_2_citizen | SpellDescription$ Create a 2/2 Citizen creature token that's all colors.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Choose target permanent in your graveyard. | SpellDescription$ Return target permanent from your graveyard to your hand.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+DeckHas:Ability$Proliferate|Token|LifeGain|Counters|Graveyard & Type$Citizen
+Oracle:Choose four. You may choose the same mode more than once.\n• Create a 2/2 Citizen creature token that's all colors.\n• Return target permanent card from your graveyard to your hand.\n• Proliferate.\n• You gain 4 life.

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Waking the Trolls
+OpponentName=The Trolls
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Gnottvold Slumbermound|Gnottvold Slumbermound
+HumanExtras=
+[metadata]
+Title=Waking the Trolls
+Difficulty=easy
+Description=Trollin', trollin', trollin'\nThough the streams are swollen\nKeep them tokens trollin'\nTrollhiiide!
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Waking the Trolls
+[Main]
+40 Highland Forest|KHM|1
+20 Waking the Trolls|KHM|1

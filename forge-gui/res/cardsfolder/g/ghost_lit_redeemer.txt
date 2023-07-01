@@ -1,0 +1,7 @@
+Name:Ghost-Lit Redeemer
+ManaCost:W
+Types:Creature Spirit
+PT:1/1
+A:AB$ GainLife | Cost$ W T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+A:AB$ GainLife | Cost$ 1 W Discard<1/CARDNAME> | LifeAmount$ 4 | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ You gain 4 life.
+Oracle:{W}, {T}: You gain 2 life.\nChannel — {1}{W}, Discard Ghost-Lit Redeemer: You gain 4 life.

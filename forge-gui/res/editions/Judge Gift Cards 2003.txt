@@ -1,0 +1,11 @@
+[metadata]
+Code=G03
+Date=2003-01-01
+Name=Judge Gift Cards 2003
+Type=Promo
+ScryfallCode=G03
+
+[cards]
+1 R Intuition @April Lee
+2 R Argothian Enchantress @Daren Bader
+3 R Living Death @Charles Gillespie

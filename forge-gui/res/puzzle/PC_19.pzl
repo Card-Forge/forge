@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #19 - Demons and Dragons
+URL:https://perplexingchimera.com/2015/01/19/19-demons-and-dragons/
+Goal:Win
+Turns:1
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=6
+AILife=5
+HumanPlay=Everflowing Chalice|Counters:CHARGE=3; Power Conduit; Bottle Gnomes; Coretapper; Dimir Doppelganger; Island; Island; Island; Swamp; Swamp; Swamp
+HumanHand=
+HumanLibrary=
+HumanGraveyard=Serra Sphinx; Rootwater Diver; Spawning Pit; Go for the Throat; Riddlesmith
+AIPlay=Grim Haruspex; Ember Swallower; Bloodgift Demon; Malfegor; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Mountain|Tapped; Mountain|Tapped
+AIGraveyard=Scorched Rusalka; Lightning Reaver; Bone Shredder; Smash; Incinerate; Hellspark Elemental; Goblin Arsonist
+

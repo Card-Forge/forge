@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Frankenstein 2
+Title=Frankenstein
+Difficulty=medium
+Description=WU Golem deck with several Splicers
+Icon=Frankenstein.jpg
+Deck Type=constructed
+[main]
+10 Plains|M12
+10 Island|M12
+4 Glacial Fortress
+3 Blade Splicer
+4 Master Splicer
+2 Sensor Splicer
+3 Wing Splicer
+1 Oblivion Ring
+1 Curse of Chains
+1 Soul Snare
+1 Ior Ruin Expedition
+1 Courier's Capsule
+1 Cancel
+1 Offering to Asha
+1 Battered Golem
+1 Brass Herald
+1 Clay Statue
+1 Darksteel Sentinel
+1 Dodecapod
+1 Enatu Golem
+1 Flint Golem
+1 Glass Golem
+1 Glassdust Hulk
+1 Lead Golem
+1 Obsianus Golem
+1 Phyrexian Hulk
+1 Rusted Sentinel
+1 Solemn Simulacrum
+1 Stone Golem
+1 Straw Golem
+1 Precursor Golem
+[sideboard]

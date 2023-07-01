@@ -1,0 +1,6 @@
+Name:Sedge Scorpion
+ManaCost:G
+Types:Creature Scorpion
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

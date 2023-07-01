@@ -1,0 +1,7 @@
+Name:Jungle Delver
+ManaCost:G
+Types:Creature Merfolk Warrior
+PT:1/1
+A:AB$ PutCounter | Cost$ 3 G | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:{3}{G}: Put a +1/+1 counter on Jungle Delver.

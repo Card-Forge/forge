@@ -1,0 +1,7 @@
+Name:Barricade Breaker
+ManaCost:7
+Types:Artifact Creature Juggernaut
+PT:7/5
+K:Improvise
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nBarricade Breaker attacks each combat if able.

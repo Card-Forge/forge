@@ -1,0 +1,7 @@
+Name:Forfend
+ManaCost:1 W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to creatures this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature | Description$ Prevent all damage that would be dealt to creatures this turn.
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt to creatures this turn.

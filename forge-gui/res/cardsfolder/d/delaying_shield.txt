@@ -1,0 +1,14 @@
+Name:Delaying Shield
+ManaCost:3 W
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ Counters | Description$ If damage would be dealt to you, put that many delay counters on CARDNAME instead.
+SVar:Counters:DB$ PutCounter | CounterType$ DELAY | CounterNum$ NumDamage | Defined$ Self
+SVar:NumDamage:ReplaceCount$DamageAmount
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE1_DELAY | Execute$ RemoveCounters | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, remove all delay counters from CARDNAME. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.
+SVar:RemoveCounters:DB$ RemoveCounter | CounterType$ DELAY | CounterNum$ All | RememberRemoved$ True | SubAbility$ RepeatOnUpkeep
+SVar:RepeatOnUpkeep:DB$ Repeat | MaxRepeat$ NumRemoved | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ You | UnlessCost$ 1 W | UnlessPayer$ You
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumRemoved:Count$RememberedSize
+AI:RemoveDeck:Random
+Oracle:If damage would be dealt to you, put that many delay counters on Delaying Shield instead.\nAt the beginning of your upkeep, remove all delay counters from Delaying Shield. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.

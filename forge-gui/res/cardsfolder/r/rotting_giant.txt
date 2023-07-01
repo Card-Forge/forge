@@ -1,0 +1,9 @@
+Name:Rotting Giant
+ManaCost:1 B
+Types:Creature Zombie Giant
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you exile a card from your graveyard.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you exile a card from your graveyard.
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ You
+AI:RemoveDeck:All
+Oracle:Whenever Rotting Giant attacks or blocks, sacrifice it unless you exile a card from your graveyard.

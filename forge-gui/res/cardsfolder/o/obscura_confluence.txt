@@ -1,0 +1,9 @@
+Name:Obscura Confluence
+ManaCost:1 W U B
+Types:Instant
+A:SP$ Charm | Choices$ Animate,Connive,Return | CharmNum$ 3 | CanRepeatModes$ True
+SVar:Animate:DB$ Animate | ValidTgts$ Creature | RemoveAllAbilities$ True | Power$ 1 | Toughness$ 1 | SpellDescription$ Until end of turn, target creature loses all abilities and has base power and toughness 1/1.
+SVar:Connive:DB$ Connive | ValidTgts$ Creature | SpellDescription$ Target creature connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:Return:DB$ ChangeZone | ValidTgts$ Player | Hidden$ True | Mandatory$ True | ChangeType$ Creature.TargetedPlayerOwn | ChangeTypeDesc$ creature | Chooser$ Targeted | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Target player returns a creature card from their graveyard to their hand.
+DeckHas:Ability$Discard|Counters|Graveyard
+Oracle:Choose three. You may choose the same mode more than once.\n• Until end of turn, target creature loses all abilities and has base power and toughness 1/1.\n• Target creature connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)\n• Target player returns a creature card from their graveyard to their hand.

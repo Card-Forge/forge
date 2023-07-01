@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Liliana, Death Mage
+Description=The black deck cares about the graveyard. When your creatures die, you get all sorts of benefits. Then you can get them back from the grave with Liliana or with some other cards.
+Deck Type=constructed
+Set=M21
+Image=liliana_death_mage.jpg
+[Main]
+2 Alchemist's Gift|M21
+2 Bushmeat Poacher|IKO
+1 Demonic Embrace|M21
+3 Durable Coilbug|IKO
+2 Goremand|M21
+3 Grasp of Darkness|OGW
+3 Grim Physician|THB
+2 Liliana's Scorn|M21
+3 Liliana's Scrounger|M21
+1 Liliana's Standard Bearer|M21
+1 Liliana, Death Mage+|M21
+2 Lurking Deadeye|IKO
+4 Masked Blackguard|M21
+4 Spirit of Malevolence|M21
+25 Swamp|M21
+2 Unlikely Aid|IKO
+[Sideboard]

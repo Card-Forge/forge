@@ -1,0 +1,10 @@
+Name:Marchesa's Smuggler
+ManaCost:U R
+Types:Creature Human Rogue
+PT:1/1
+K:Dethrone
+A:AB$ Pump | Cost$ 1 U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Haste | SubAbility$ DBUnblockable | StackDescription$ {c:Targeted} gains haste until end of turn and can't be blocked this turn. | SpellDescription$ Target creature you control gains haste until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\n{1}{U}{R}: Target creature you control gains haste until end of turn and can't be blocked this turn.

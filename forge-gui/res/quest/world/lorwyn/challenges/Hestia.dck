@@ -1,0 +1,36 @@
+[quest]
+id=5006
+OpponentName=Hestia
+AILife=30
+Repeat=true
+Wins=25
+Card Reward=3 rares;33% 1 white rare;33% 1 green rare;33% Kitchen Finks|SHM
+Credit Reward=250
+HumanExtras=
+AIExtras=Heartmender
+
+[metadata]
+Name=quest5006
+Title=Hestia
+Difficulty=hard
+Description=You felt an overwhelming feeling of joy when you saw the elves, until you realized they were coming for you.
+Icon=Hestia.jpg
+Deck Type=constructed
+
+[Main]
+21 Forest|LRW
+3 Heartmender|SHM
+4 Imperious Perfect|LRW
+4 Kitchen Finks|SHM
+4 Llanowar Elves|10E
+2 Overrun|10E
+2 Oversoul of Dusk|SHM
+4 Safehold Elite|SHM
+4 Shield of the Oversoul|SHM
+4 Wilt-Leaf Cavaliers|SHM
+4 Wilt-Leaf Liege|SHM
+4 Wren's Run Vanquisher|LRW
+
+[sideboard]
+[planes]
+[schemes]

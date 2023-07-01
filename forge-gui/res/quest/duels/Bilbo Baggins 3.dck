@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins 3
+Title=Bilbo Baggins
+Difficulty=hard
+Description=WU Heroic deck
+Icon=Bilbo Baggins.jpg
+Deck Type=constructed
+[main]
+4 Tundra
+4 Flooded Strand
+4 Windswept Heath
+4 Marsh Flats
+1 Arid Mesa
+2 Plains
+1 Island
+1 Mox Pearl
+1 Mox Sapphire
+4 Favored Hoplite
+3 Hero of Iroas
+4 Meletis Astronomer
+3 Phalanx Leader
+2 Fabled Hero
+4 Ethereal Armor
+2 Hyena Umbra
+4 Spectral Flight
+4 Spirit Mantle
+1 Asha's Favor
+1 Angelic Destiny
+1 Ancestral Recall
+1 Time Walk
+3 Swords to Plowshares
+1 Valorous Stance
+[sideboard]

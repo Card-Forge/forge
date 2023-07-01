@@ -1,0 +1,5 @@
+Name:Wicker Witch
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:3/1
+Oracle:

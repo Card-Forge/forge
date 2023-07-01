@@ -1,0 +1,9 @@
+Name:Deathless Knight
+ManaCost:B/G B/G B/G B/G
+Types:Creature Skeleton Knight
+PT:4/2
+K:Haste
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Graveyard | FirstTime$ True | Execute$ TrigReturn | TriggerDescription$ When you gain life for the first time each turn, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHints:Ability$LifeGain
+Oracle:Haste\nWhen you gain life for the first time each turn, return Deathless Knight from your graveyard to your hand.

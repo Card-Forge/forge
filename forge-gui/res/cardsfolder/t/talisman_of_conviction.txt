@@ -1,0 +1,7 @@
+Name:Talisman of Conviction
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SubAbility$ DBPain | SpellDescription$ Add {R} or {W}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {R} or {W}. Talisman of Conviction deals 1 damage to you.

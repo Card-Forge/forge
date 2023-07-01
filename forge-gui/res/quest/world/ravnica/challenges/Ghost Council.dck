@@ -1,0 +1,39 @@
+[quest]
+id=4004
+OpponentName=Ghost Council
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Godless Shrine|GPT
+Credit Reward=200
+AIExtras=Debtors' Knell
+[metadata]
+Name=quest4004
+Title=Ghost Council
+Difficulty=hard
+Description=Whether it's heaven or hell, those who believe can live forever
+Icon=Ghost Council.jpg
+Deck Type=constructed
+[main]
+2 Angel of Despair|COM
+2 Basilica Guards|GTC
+4 Condemn|DIS
+1 Deathpact Angel|GTC
+4 Delirium Skeins|DIS
+2 Dimir House Guard|RAV
+2 Volatile Rig|RTR
+2 Ghost Council of Orzhova|GPT
+4 Godless Shrine|GTC
+4 High Priest of Penance|GTC
+2 Last Gasp|RAV
+2 Merciless Eviction|GTC
+4 Mortify|GPT
+2 Obzedat, Ghost Council|GTC
+4 Orzhov Guildgate|GTC
+8 Plains|RTR
+1 Skeletal Vampire|GPT
+8 Swamp|RTR
+2 Underworld Connections|RTR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,8 @@
+Name:Void Winnower
+ManaCost:9
+Types:Creature Eldrazi
+PT:11/9
+S:Mode$ CantBeCast | ValidCard$ Card.cmcEven | Caster$ Opponent | Description$ Your opponents can't cast spells with even mana values. (Zero is even.)
+S:Mode$ CantBlockBy | ValidAttacker$ Creature | ValidBlocker$ Creature.OppCtrl+cmcEven | Description$ Your opponents can't block with creatures with even mana values.
+SVar:PlayMain1:TRUE
+Oracle:Your opponents can't cast spells with even mana values. (Zero is even.)\nYour opponents can't block with creatures with even mana values.

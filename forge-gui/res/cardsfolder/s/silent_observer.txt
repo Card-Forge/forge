@@ -1,0 +1,6 @@
+Name:Silent Observer
+ManaCost:3 U
+Types:Creature Spirit
+PT:1/5
+K:Flying
+Oracle:Flying

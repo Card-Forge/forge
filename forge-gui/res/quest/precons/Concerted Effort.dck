@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Concerted Effort
+Description=Faced with the threat of the world-devouring Eldrazi, the people of Zendikar band together like never before. Use the support mechanic to shore up multiple creatures with +1/+1 counters, and your army will become greater than the sum of its parts. Stand united and fight for Zendikar's survival!
+Deck Type=constructed
+Set=OGW
+Image=concerted_effort.jpg
+[Main]
+1 Allied Reinforcements|OGW
+1 Angel of Renewal|BFZ
+2 Cliffside Lookout|BFZ
+1 Evolving Wilds|BFZ
+2 Expedition Envoy|BFZ
+2 Expedition Raptor|OGW
+7 Forest|BFZ
+1 Gladehart Cavalry+|OGW
+1 Immolating Glare|OGW
+1 Iona's Blessing|OGW
+2 Isolation Zone|OGW
+2 Joraga Auxiliary|OGW
+2 Kitesail Scout|BFZ
+2 Kor Castigator|BFZ
+2 Kor Sky Climber|OGW
+2 Lead by Example|OGW
+2 Makindi Aeronaut|OGW
+1 Mighty Leap|OGW
+1 Oran-Rief Invoker|BFZ
+15 Plains|BFZ
+2 Relief Captain|OGW
+1 Saddleback Lagac|OGW
+2 Shadow Glider|BFZ
+2 Shoulder to Shoulder|OGW
+1 Steppe Glider|OGW
+1 Tranquil Expanse|OGW
+1 Veteran Warleader|BFZ

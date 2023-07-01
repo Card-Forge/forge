@@ -1,0 +1,9 @@
+Name:Mirror-Sigil Sergeant
+ManaCost:5 W
+Types:Creature Rhino Soldier
+PT:4/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Blue | PresentCompare$ GE1 | Execute$ TrigCopyPermanent | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of CARDNAME.
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Self
+DeckHints:Color$Blue
+Oracle:Trample\nAt the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of Mirror-Sigil Sergeant.

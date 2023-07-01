@@ -1,0 +1,9 @@
+Name:Orcish Mechanics
+ManaCost:2 R
+Types:Creature Orc
+PT:1/1
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:{T}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to any target.

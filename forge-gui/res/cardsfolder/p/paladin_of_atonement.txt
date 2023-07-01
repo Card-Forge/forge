@@ -1,0 +1,11 @@
+Name:Paladin of Atonement
+ManaCost:1 W
+Types:Creature Vampire Knight
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain life equal to its toughness.
+SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ Y
+SVar:X:PlayerCountPropertyYou$LifeLostLastTurn
+SVar:Y:TriggeredCard$CardToughness
+Oracle:At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on Paladin of Atonement.\nWhen Paladin of Atonement dies, you gain life equal to its toughness.

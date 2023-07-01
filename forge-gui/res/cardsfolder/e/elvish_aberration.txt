@@ -1,0 +1,7 @@
+Name:Elvish Aberration
+ManaCost:5 G
+Types:Creature Elf Mutant
+PT:4/5
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 3 | SpellDescription$ Add {G}{G}{G}.
+K:TypeCycling:Forest:2
+Oracle:{T}: Add {G}{G}{G}.\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

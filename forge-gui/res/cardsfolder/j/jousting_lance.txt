@@ -1,0 +1,7 @@
+Name:Jousting Lance
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creature has first strike.
+Oracle:Equipped creature gets +2/+0.\nAs long as it's your turn, equipped creature has first strike.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

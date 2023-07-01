@@ -1,0 +1,9 @@
+Name:Torbran, Thane of Red Fell
+ManaCost:1 R R R
+Types:Legendary Creature Dwarf Noble
+PT:2/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+YouCtrl | ValidTarget$ Player.Opponent,Permanent.OppCtrl | ReplaceWith$ DmgPlus2 | Description$ If a red source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.2
+SVar:PlayMain1:TRUE
+Oracle:If a red source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.

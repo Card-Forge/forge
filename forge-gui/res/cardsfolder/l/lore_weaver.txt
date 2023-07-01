@@ -1,0 +1,8 @@
+Name:Lore Weaver
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:2/2
+K:Partner:Ley Weaver
+A:AB$ Draw | Cost$ 5 U U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
+DeckHints:Name$Ley Weaver
+Oracle:Partner with Ley Weaver (When this creature enters the battlefield, target player may put Ley Weaver into their hand from their library, then shuffle.)\n{5}{U}{U}: Target player draws two cards.

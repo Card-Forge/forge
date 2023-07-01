@@ -1,0 +1,9 @@
+Name:Corpse Cobble
+ManaCost:U B
+Types:Instant
+A:SP$ Token | Cost$ U B Sac<X/Creature/creature> | TokenScript$ ub_x_x_zombie_menace | AnnounceTitle$ number of creatures to sacrifice | TokenPower$ Y | TokenToughness$ Y | SpellDescription$ Create an X/X blue and black Zombie creature token with menace, where X is the total power of the sacrificed creatures.
+K:Flashback:3 U B
+SVar:X:Count$xPaid
+SVar:Y:Sacrificed$CardPower
+DeckHas:Ability$Sacrifice|Token
+Oracle:As an additional cost to cast this spell, sacrifice any number of creatures.\nCreate an X/X blue and black Zombie creature token with menace, where X is the total power of the sacrificed creatures.\nFlashback {3}{U}{B} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)

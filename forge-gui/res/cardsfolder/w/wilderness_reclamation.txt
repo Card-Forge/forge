@@ -1,0 +1,6 @@
+Name:Wilderness Reclamation
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap all lands you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl
+Oracle:At the beginning of your end step, untap all lands you control.

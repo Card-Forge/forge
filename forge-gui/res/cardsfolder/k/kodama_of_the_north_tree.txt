@@ -1,0 +1,7 @@
+Name:Kodama of the North Tree
+ManaCost:2 G G G
+Types:Legendary Creature Spirit
+PT:6/4
+K:Trample
+K:Shroud
+Oracle:Trample\nShroud (This creature can't be the target of spells or abilities.)

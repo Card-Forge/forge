@@ -1,0 +1,8 @@
+Name:Balshan Beguiler
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ BalshanDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals the top two cards of their library. You choose one of those cards and put it into their graveyard.
+SVar:BalshanDig:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | Reveal$ True
+AI:RemoveDeck:Random
+Oracle:Whenever Balshan Beguiler deals combat damage to a player, that player reveals the top two cards of their library. You choose one of those cards and put it into their graveyard.

@@ -1,0 +1,13 @@
+Name:Aminatou, the Fateshifter
+ManaCost:W U B
+Types:Legendary Planeswalker Aminatou
+Loyalty:3
+Text:CARDNAME can be your commander.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBTop | SpellDescription$ Draw a card, then put a card from your hand on top of your library.
+SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | Mandatory$ True
+A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.Other+YouOwn | TgtPrompt$ Select another target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile another target permanent you own, then return it to the battlefield under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChooseDirection | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | SubAbility$ DBControl | AILogic$ Aminatou | SpellDescription$ Choose left or right. Each player gains control of all nonland permanents other than CARDNAME controlled by the next player in the chosen direction.
+SVar:DBControl:DB$ GainControlVariant | AllValid$ Permanent.nonLand+Other | ChangeController$ NextPlayerInChosenDirection
+Oracle:[+1]: Draw a card, then put a card from your hand on top of your library.\n[-1]: Exile another target permanent you own, then return it to the battlefield under your control.\n[-6]: Choose left or right. Each player gains control of all nonland permanents other than Aminatou, the Fateshifter controlled by the next player in the chosen direction.\nAminatou, the Fateshifter can be your commander.

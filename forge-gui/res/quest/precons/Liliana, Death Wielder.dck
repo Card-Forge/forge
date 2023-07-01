@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Liliana, Death Wielder
+Description=Harness the power of death itself to debilitate and destroy all who stand in your way, then raise a horde of undead minions to overwhelm your enemies. Call on the dark magic of the Planeswalker Liliana Vess-- with a card unique to this deck-- to claim ultimate victory.
+Deck Type=constructed
+Set=AKH
+Image=liliana_death_wielder.jpg
+[Main]
+1 Liliana, Death Wielder+|AKH
+1 Festering Mummy|AKH
+2 Dune Beetle|AKH
+4 Tattered Mummy|AKH
+1 Channeler Initiate|AKH
+2 Baleful Ammit|AKH
+3 Desiccated Naga|AKH
+2 Gravedigger|AKH
+1 Crocodile of the Crossing|AKH
+2 Giant Spider|AKH
+2 Decimator Beetle|AKH
+2 Liliana's Influence|AKH
+2 Splendid Agony|AKH
+1 Edifice of Authority|AKH
+1 Luxa River Shrine|AKH
+1 Oracle's Vault|AKH
+2 Trial of Ambition|AKH
+2 Cartouche of Ambition|AKH
+2 Cartouche of Strength|AKH
+1 Gift of Paradise|AKH
+4 Foul Orchard|AKH
+1 Grasping Dunes|AKH
+11 Swamp|AKH
+9 Forest|AKH

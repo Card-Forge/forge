@@ -1,0 +1,10 @@
+Name:Paliano
+ManaCost:no cost
+Types:Plane Fiora
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CheckSVar$ Monarch | SVarCompare$ EQ0 | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Command | TriggerDescription$ When one or more creatures you control deal combat damage to a player, if there is no monarch, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You 
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create a 1/1 black Assassin creature token with deathtouch and haste.
+SVar:RolledChaos:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_assassin_deathtouch_haste | TokenOwner$ You
+SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch
+DeckHas:Ability$Token & Type$Assassin
+Oracle:When one or more creatures you control deal combat damage to a player, if there is no monarch, you become the monarch.\nWhenever chaos ensues, create a 1/1 black Assassin creature token with deathtouch and haste.

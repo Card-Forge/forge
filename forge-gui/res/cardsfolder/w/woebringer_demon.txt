@@ -1,0 +1,13 @@
+Name:Woebringer Demon
+ManaCost:3 B B
+Types:Creature Demon
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature. If the player can't, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature | SubAbility$ DBSacSelf | RememberSacrificed$ True
+SVar:DBSacSelf:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:NeedsToPlayVar:Y GE2
+SVar:Y:Count$Valid Creature.YouDontCtrl
+Oracle:Flying\nAt the beginning of each player's upkeep, that player sacrifices a creature. If the player can't, sacrifice Woebringer Demon.

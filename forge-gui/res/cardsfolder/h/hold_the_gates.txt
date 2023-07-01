@@ -1,0 +1,8 @@
+Name:Hold the Gates
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ X | AddKeyword$ Vigilance | Description$ Creatures you control get +0/+1 for each Gate you control and have vigilance.
+SVar:X:Count$Valid Gate.YouCtrl
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Gate
+Oracle:Creatures you control get +0/+1 for each Gate you control and have vigilance.

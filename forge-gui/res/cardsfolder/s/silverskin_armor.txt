@@ -1,0 +1,6 @@
+Name:Silverskin Armor
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Artifact | Description$ Equipped creature gets +1/+1 and is an artifact in addition to its other types.
+Oracle:Equipped creature gets +1/+1 and is an artifact in addition to its other types.\nEquip {2}

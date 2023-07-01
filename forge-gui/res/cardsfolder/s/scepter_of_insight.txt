@@ -1,0 +1,5 @@
+Name:Scepter of Insight
+ManaCost:1 U U
+Types:Artifact
+A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{3}{U}, {T}: Draw a card.

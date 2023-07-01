@@ -1,0 +1,7 @@
+Name:Rise of Extus
+ManaCost:4 W/B W/B
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBExile | SpellDescription$ Exile target creature.
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select up to one target instant or sorcery card from a graveyard | SubAbility$ DBLearn | SpellDescription$ Exile up to one target instant or sorcery card from a graveyard.
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+Oracle:Exile target creature. Exile up to one target instant or sorcery card from a graveyard.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

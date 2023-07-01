@@ -1,0 +1,7 @@
+Name:Goblin Racketeer
+ManaCost:3 R
+Types:Creature Goblin Rogue
+PT:4/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGoad | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may goad target creature defending player controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls.
+Oracle:Whenever Goblin Racketeer attacks, you may goad target creature defending player controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

@@ -1,0 +1,7 @@
+Name:Epitaph Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:3/5
+A:AB$ ChangeZone | Cost$ 2 | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from your graveyard on the bottom of your library.
+DeckHas:Ability$Graveyard
+Oracle:{2}: Put target card from your graveyard on the bottom of your library.

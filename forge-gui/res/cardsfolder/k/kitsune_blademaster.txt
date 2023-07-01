@@ -1,0 +1,7 @@
+Name:Kitsune Blademaster
+ManaCost:2 W
+Types:Creature Fox Samurai
+PT:2/2
+K:First Strike
+K:Bushido:1
+Oracle:First strike\nBushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

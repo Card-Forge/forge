@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Reign of Vampirism
+Description=Unleash a horde of the undead! As your army of vampires descends upon your opponent, your Captivating Vampire will boost your odds of victory.
+Deck Type=constructed
+Set=M11
+Image=reign_of_vampirism.jpg
+[main]
+1 Sorcerer's Strongbox|M11
+9 Forest|M11
+16 Swamp|M11
+3 Barony Vampire|M11
+3 Bloodthrone Vampire|M11
+1 Captivating Vampire+|M11
+3 Child of Night|M11
+1 Giant Spider|M11
+2 Howling Banshee|M11
+2 Reassembling Skeleton|M11
+1 Royal Assassin|M11
+1 Spined Wurm|M11
+3 Viscera Seer|M11
+2 Quag Sickness|M11
+2 Doom Blade|M11
+1 Giant Growth|M11
+1 Naturalize|M11
+2 Corrupt|M11
+1 Cultivate|M11
+2 Diabolic Tutor|M11
+1 Nature's Spiral|M11
+2 Rise from the Grave|M11
+[sideboard]

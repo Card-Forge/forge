@@ -1,0 +1,6 @@
+Name:Haunted Fengraf
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True | SpellDescription$ Return a creature card at random from your graveyard to your hand.
+Oracle:{T}: Add {C}.\n{3}, {T}, Sacrifice Haunted Fengraf: Return a creature card at random from your graveyard to your hand.

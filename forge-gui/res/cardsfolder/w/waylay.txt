@@ -1,0 +1,9 @@
+Name:Waylay
+ManaCost:2 W
+Types:Instant
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_2_2_knight | RememberTokens$ True | SubAbility$ DBDelayedTrigger | SpellDescription$ Create three 2/2 white Knight creature tokens.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ Cleanup | Execute$ TrigExileAll | SubAbility$ DBCleanup | SpellDescription$ Exile them at the beginning of the next cleanup step.
+SVar:TrigExileAll:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Knight
+Oracle:Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.

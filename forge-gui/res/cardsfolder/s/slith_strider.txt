@@ -1,0 +1,10 @@
+Name:Slith Strider
+ManaCost:1 U U
+Types:Creature Slith
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Slith Strider becomes blocked, draw a card.\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.

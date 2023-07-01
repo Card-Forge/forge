@@ -1,0 +1,13 @@
+Name:Shadowgrange Archfiend
+ManaCost:6 B
+Types:Creature Demon
+PT:8/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a creature with the greatest power among creatures they control. You gain life equal to the greatest power among creatures sacrificed this way.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | ImprintChosen$ True | AILogic$ WorstCard
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsImprinted | RememberSacrificed$ True | SubAbility$ DBLifeGain
+SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
+SVar:X:RememberedLKI$GreatestPower
+K:Madness:2 B PayLife<8>
+Oracle:When Shadowgrange Archfiend enters the battlefield, each opponent sacrifices a creature with the greatest power among creatures they control. You gain life equal to the greatest power among creatures sacrificed this way.\nMadness—{2}{B}, Pay 8 life. (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

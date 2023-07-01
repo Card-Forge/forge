@@ -1,0 +1,10 @@
+Name:Goblin Warchief
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Goblin | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Goblin spells you cast cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Goblin.YouCtrl | AddKeyword$ Haste | Description$ Goblins you control have haste.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
+DeckNeeds:Type$Goblin
+Oracle:Goblin spells you cast cost {1} less to cast.\nGoblins you control have haste.

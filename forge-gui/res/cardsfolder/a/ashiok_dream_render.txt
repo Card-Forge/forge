@@ -1,0 +1,8 @@
+Name:Ashiok, Dream Render
+ManaCost:1 UB UB
+Types:Legendary Planeswalker Ashiok
+Loyalty:5
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ Spells and abilities you control can't cause you to search your library. | Description$ Spells and abilities your opponents control can't cause their controller to search their library.
+A:AB$ Mill | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBExileGrave | SpellDescription$ Target player mills four cards. Then exile each opponent's graveyard.
+SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Opponent | ChangeType$ Card
+Oracle:Spells and abilities your opponents control can't cause their controller to search their library.\n[-1]: Target player mills four cards. Then exile each opponent's graveyard.

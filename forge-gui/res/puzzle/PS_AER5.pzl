@@ -1,0 +1,14 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt #05
+URL:https://i.redd.it/3hmqf7hrbrpy.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=16
+humanhand=Night Market Lookout;Yahenni's Expertise;Fatal Push;Deadlock Trap;Fourth Bridge Prowler
+humanbattlefield=Swamp;Swamp;Swamp;Swamp;Swamp;Captain's Claws;Night Market Lookout;Aethersphere Harvester;Defiant Bloodlord;Crackdown Construct
+aibattlefield=t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo_kld;Gloomwidow;Gloomwidow

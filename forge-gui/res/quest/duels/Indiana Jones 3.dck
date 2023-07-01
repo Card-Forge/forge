@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Indiana Jones 3
+Title=Indiana Jones
+Difficulty=hard
+Description=UBR Sol'kanar the Swamp King deck with Grixis Grimblade and Terminate
+Icon=Indiana Jones.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Badlands
+2 Volcanic Island
+3 Swamp|ISD
+3 Polluted Delta
+3 Bloodstained Mire
+2 Scalding Tarn
+1 Mox Jet
+1 Mox Sapphire
+1 Mox Ruby
+1 Ancestral Recall
+1 Bad Moon
+4 Grixis Grimblade
+1 Esper Stormblade
+1 Jund Hackblade
+1 Tidehollow Strix
+2 Nightscape Familiar
+4 Terminate
+1 Terror
+1 Doom Blade
+2 Kederekt Creeper
+1 Tetsuo Umezawa
+4 Sedraxis Specter
+3 Shadowmage Infiltrator
+2 Blightning
+1 Crosis, the Purger
+1 Blazing Specter
+2 Sol'kanar the Swamp King
+2 Slave of Bolas
+1 Nicol Bolas, Planeswalker
+[sideboard]

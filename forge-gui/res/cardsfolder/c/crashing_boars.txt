@@ -1,0 +1,7 @@
+Name:Crashing Boars
+ManaCost:3 G G
+Types:Creature Boar
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBMustBlock | TriggerDescription$ Whenever CARDNAME attacks, defending player chooses an untapped creature they control. That creature blocks CARDNAME this turn if able.
+SVar:DBMustBlock:DB$ MustBlock | Choices$ Creature.untapped+DefenderCtrl | Chooser$ TriggeredDefendingPlayer
+Oracle:Whenever Crashing Boars attacks, defending player chooses an untapped creature they control. That creature blocks Crashing Boars this turn if able.

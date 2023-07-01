@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 070715 - Saving Grace
+URL:http://www.gatheringmagic.com/seanuy-070715-saving-grace/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win on this turn.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=3
+AILife=16
+humanhand=Kitesail|Set:MM2; Wings of Velis Vel|Set:MM2; Nameless Inversion|Set:MM2
+humanbattlefield=Island|Set:M15; Island|Set:M15; Swamp|Set:M15; Swamp|Set:M15; Swamp|Set:M15; Darksteel Citadel|Set:MM2; Plagued Rusalka|Set:MM2; Alloy Myr|Set:MM2; Cathodion|Set:MM2; Thief of Hope|Set:MM2; Rusted Relic|Set:MM2|Id:420
+humangraveyard=
+humanlibrary=
+aibattlefield=Forest|Set:M15; Forest|Set:M15|Tapped; Forest|Set:M15|Tapped; Forest|Set:M15|Tapped; Forest|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Arrest|Set:MM2|AttachedTo:420; t:Eldrazi Spawn,P:0,T:1,Cost:no cost,Types:Creature-Eldrazi-Spawn,Keywords:,Image:c_0_1_eldrazi_spawn3; Aquastrand Spider|Set:MM2|Counters:P1P1=1; Algae Gharial|Set:MM2; Precursor Golem|Set:MM2|Counters:P1P1=1; Flayer Husk|Set:MM2|AttachedTo:422; t:Golem,P:3,T:3,Cost:no cost,Types:Artifact-Creature-Golem,Keywords:,Image:c_3_3_golem|Id:422; Copper Carapace|Set:MM2|AttachedTo:424; Battlegrace Angel|Set:MM2|Id:424|Tapped
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

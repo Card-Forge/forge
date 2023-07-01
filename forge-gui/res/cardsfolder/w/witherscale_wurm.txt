@@ -1,0 +1,12 @@
+Name:Witherscale Wurm
+ManaCost:4 G G
+Types:Creature Wurm
+PT:9/9
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigPumpAttacker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it.
+SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Wither
+SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlockerLKICopy | KW$ Wither
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ All
+SVar:All:Count$CardCounters.M1M1
+Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.

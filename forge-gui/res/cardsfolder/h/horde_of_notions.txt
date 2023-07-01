@@ -1,0 +1,9 @@
+Name:Horde of Notions
+ManaCost:W U B R G
+Types:Legendary Creature Elemental
+PT:5/5
+K:Vigilance
+K:Trample
+K:Haste
+A:AB$ Play | Cost$ W U B R G | TgtZone$ Graveyard | WithoutManaCost$ True | AILogic$ ReplaySpell | ValidTgts$ Elemental.YouCtrl | TgtPrompt$ Choose target Elemental card from your graveyard | Optional$ True | SpellDescription$ You may play target Elemental card from your graveyard without paying its mana cost.
+Oracle:Vigilance, trample, haste\n{W}{U}{B}{R}{G}: You may play target Elemental card from your graveyard without paying its mana cost.

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Shrike 3
+Title=The Shrike
+Difficulty=hard
+Description=“There is a fullness and calmness there which can come only from knowing pain.” 
+Icon=Shrike.png
+Deck Type=constructed
+[Main]
+1 Adventuring Gear|ZEN
+4 Arid Mesa|ZEN
+3 Basilisk Collar|WWK
+4 Burst Lightning|ZEN
+4 Cunning Sparkmage|WWK
+2 Evolving Wilds|ROE
+3 Goblin Guide|ZEN
+1 Kitesail|WWK
+3 Kor Duelist|ZEN
+4 Marsh Flats|ZEN
+4 Mountain|ZEN|1
+7 Plains|ZEN|1
+4 Plated Geopede|ZEN
+4 Scalding Tarn|ZEN
+4 Steppe Lynx|ZEN
+4 Stoneforge Mystic|WWK
+4 Student of Warfare|ROE
+[sideboard]

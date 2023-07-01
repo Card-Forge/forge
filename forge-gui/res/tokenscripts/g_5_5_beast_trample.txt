@@ -1,0 +1,7 @@
+Name:Beast Token
+ManaCost:no cost
+Colors:green
+Types:Creature Beast
+PT:5/5
+K:Trample
+Oracle:Trample

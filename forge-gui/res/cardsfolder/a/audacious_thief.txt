@@ -1,0 +1,8 @@
+Name:Audacious Thief
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Whenever Audacious Thief attacks, you draw a card and you lose 1 life.

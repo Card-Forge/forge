@@ -1,0 +1,6 @@
+Name:Reckless Reveler
+ManaCost:1 R
+Types:Creature Satyr
+PT:2/1
+A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+Oracle:{R}, Sacrifice Reckless Reveler: Destroy target artifact.

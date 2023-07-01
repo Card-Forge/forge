@@ -1,0 +1,6 @@
+Name:Ertai's Trickery
+ManaCost:U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell if it was kicked | ValidTgts$ Card | ConditionDefined$ Targeted | ConditionPresent$ Spell.kicked | SpellDescription$ Counter target spell if it was kicked.
+AI:RemoveDeck:Random
+Oracle:Counter target spell if it was kicked.

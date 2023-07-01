@@ -1,0 +1,7 @@
+Name:Kindred Denial
+ManaCost:2 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | RememberCounteredCMC$ True | SubAbility$ DBSeek | SpellDescription$ Counter target spell.
+SVar:DBSeek:DB$ Seek | Type$ Card.cmcEQX | StackDescription$ REP Seek_{p:You} seeks | SpellDescription$ Seek a card with the same mana value as that spell.
+SVar:X:Count$RememberedNumber
+Oracle:Counter target spell. Seek a card with the same mana value as that spell.

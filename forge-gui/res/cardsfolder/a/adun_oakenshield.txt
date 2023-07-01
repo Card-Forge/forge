@@ -1,0 +1,8 @@
+Name:Adun Oakenshield
+ManaCost:B R G
+Types:Legendary Creature Human Knight
+PT:1/2
+A:AB$ ChangeZone | Cost$ B R G T | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
+SVar:NonCombatPriority:3
+DeckHas:Ability$Graveyard
+Oracle:{B}{R}{G}, {T}: Return target creature card from your graveyard to your hand.

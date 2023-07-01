@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Thing 2
+Title=Thing
+Difficulty=medium
+Description=Mono W creatureless deck with Urza's Armor, Sphere of Purity, Copper Tablet and Ankh of Mishra
+Icon=Thing 2.jpg
+Deck Type=constructed
+[main]
+10 Plains|M12
+4 Mystifying Maze
+4 Kabira Crossroads
+1 Desert
+1 Maze of Ith
+1 Gods' Eye, Gate to the Reikai
+1 Karakas
+2 The Tabernacle at Pendrell Vale
+2 Pristine Talisman
+4 Urza's Armor
+4 Sphere of Purity
+4 Angelheart Vial
+3 Armageddon Clock
+4 Copper Tablet
+3 Razor Pendulum
+4 Ankh of Mishra
+3 Scourglass
+2 Day of Judgment
+2 March of Souls
+1 Wrath of God
+[sideboard]

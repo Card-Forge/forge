@@ -1,0 +1,7 @@
+Name:Peacewalker Colossus
+ManaCost:3
+Types:Artifact Vehicle
+PT:6/6
+A:AB$ Animate | Cost$ 1 W | ValidTgts$ Vehicle.Other+YouCtrl | TgtPrompt$ Select another target Vehicle you control | Types$ Artifact,Creature | SpellDescription$ Another target Vehicle you control becomes an artifact creature until end of turn.
+K:Crew:4
+Oracle:{1}{W}: Another target Vehicle you control becomes an artifact creature until end of turn.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)

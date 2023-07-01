@@ -1,0 +1,7 @@
+Name:Sarcatog
+ManaCost:1 B R
+Types:Creature Atog
+PT:1/2
+A:AB$ Pump | Cost$ ExileFromGrave<2/card> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Artifact> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Exile two cards from your graveyard: Sarcatog gets +1/+1 until end of turn.\nSacrifice an artifact: Sarcatog gets +1/+1 until end of turn.

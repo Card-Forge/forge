@@ -1,0 +1,6 @@
+Name:Awaken the Sleeper
+ManaCost:3 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ ChompEquip | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached | ValidDescription$ each equipment equipped to target creature | Optional$ True | SpellDescription$ If it's equipped, you may destroy all Equipment attached to that creature.
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If it's equipped, you may destroy all Equipment attached to that creature.

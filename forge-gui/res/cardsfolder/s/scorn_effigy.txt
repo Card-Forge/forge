@@ -1,0 +1,6 @@
+Name:Scorn Effigy
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:2/3
+K:Foretell:0
+Oracle:Foretell {0} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,0 +1,5 @@
+Name:Sworn Guardian
+ManaCost:1 U
+Types:Creature Merfolk Warrior
+PT:1/3
+Oracle:

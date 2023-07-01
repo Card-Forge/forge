@@ -1,0 +1,6 @@
+Name:Radiate
+ManaCost:3 R R
+Types:Instant
+A:SP$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TgtPrompt$ Choose target instant or sorcery spell that targets only a single permanent or player | TargetType$ Spell.numTargets EQ1 | TargetValidTargeting$ Permanent.inRealZoneBattlefield,Player | Controller$ You | CopyForEachCanTarget$ Permanent.inRealZoneBattlefield,Player | SpellDescription$ Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.
+AI:RemoveDeck:Random
+Oracle:Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.

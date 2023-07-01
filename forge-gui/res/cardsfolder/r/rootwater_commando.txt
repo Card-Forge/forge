@@ -1,0 +1,6 @@
+Name:Rootwater Commando
+ManaCost:2 U
+Types:Creature Merfolk
+PT:2/2
+K:Islandwalk
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

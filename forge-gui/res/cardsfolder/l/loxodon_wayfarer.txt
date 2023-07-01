@@ -1,0 +1,5 @@
+Name:Loxodon Wayfarer
+ManaCost:2 W
+Types:Creature Elephant Monk
+PT:1/5
+Oracle:

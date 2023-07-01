@@ -1,0 +1,7 @@
+Name:Navigator's Ruin
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ RaidTest | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, target opponent mills four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — At the beginning of your end step, if you attacked this turn, target opponent mills four cards.

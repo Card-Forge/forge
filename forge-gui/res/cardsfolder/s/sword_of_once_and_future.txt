@@ -1,0 +1,10 @@
+Name:Sword of Once and Future
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddSVar$ SwordOfOnceAndFutureCE | AddKeyword$ Protection from blue & Protection from black | Description$ Equipped creature gets +2/+2 and has protection from blue and from black.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, surveil 2. Then you may cast an instant or sorcery spell with mana value 2 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBCastFromYard
+SVar:DBCastFromYard:DB$ Play | Valid$ Card.YouOwn | ValidSA$ Instant.cmcLE2,Sorcery.cmcLE2 | ValidZone$ Graveyard | Optional$ True | WithoutManaCost$ True | Amount$ 1 | Controller$ You | ReplaceGraveyard$ Exile
+SVar:SwordOfOnceAndFutureCE:SVar:MustBeBlocked:AttackingPlayerConservative
+Oracle:Equipped creature gets +2/+2 and has protection from blue and from black.\nWhenever equipped creature deals combat damage to a player, surveil 2. Then you may cast an instant or sorcery spell with mana value 2 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.\nEquip {2}

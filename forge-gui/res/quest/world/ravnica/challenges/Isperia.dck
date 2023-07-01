@@ -1,0 +1,38 @@
+[quest]
+id=4001
+OpponentName=Isperia
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;duplicate card;Hallowed Fountain|DIS
+Credit Reward=200
+HumanExtras=Leyline of the Meek|Drowned Rusalka
+AIExtras=Dovescape
+[metadata]
+Name=quest4001
+Title=Isperia
+Difficulty=hard
+Description=The dove from above
+Icon=Isperia.jpg
+Deck Type=constructed
+[main]
+1 Angel of Serenity|RTR
+4 Azorius Guildgate|RTR
+4 Cyclonic Rift|RTR
+3 Droning Bureaucrats|GPT
+2 Faith's Fetters|RAV
+4 Hallowed Fountain|RTR
+9 Island|RTR
+1 Isperia, Supreme Judge|RTR
+3 Jace, Architect of Thought|RTR
+9 Plains|RTR
+3 Pride of the Clouds|DIS
+4 Sphinx's Revelation|RTR
+4 Supreme Verdict|RTR
+3 Twilight Drover|RAV
+4 Veteran Armorer|RAV
+1 Diluvian Primordial|GTC
+1 Grand Arbiter Augustin IV|DIS
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,6 @@
+Name:Jhovall Rider
+ManaCost:4 W
+Types:Creature Human Rebel
+PT:3/3
+K:Trample
+Oracle:Trample

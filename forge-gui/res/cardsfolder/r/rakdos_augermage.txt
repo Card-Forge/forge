@@ -1,0 +1,9 @@
+Name:Rakdos Augermage
+ManaCost:B B R
+Types:Creature Human Wizard
+PT:3/2
+K:First Strike
+A:AB$ Discard | Cost$ T | Defined$ You | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ RevealTgtChoose | SubAbility$ DBDiscard | SpellDescription$ Reveal your hand and discard a card of target opponent's choice. Then that player reveals their hand and discards a card of your choice. Activate only as a sorcery.
+SVar:DBDiscard:DB$ Discard | Defined$ ParentTarget | NumCards$ 1 | Mode$ RevealYouChoose
+AI:RemoveDeck:All
+Oracle:First strike\n{T}: Reveal your hand and discard a card of target opponent's choice. Then that player reveals their hand and discards a card of your choice. Activate only as a sorcery.

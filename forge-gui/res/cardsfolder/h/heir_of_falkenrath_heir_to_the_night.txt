@@ -1,0 +1,20 @@
+Name:Heir of Falkenrath
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/1
+A:AB$ SetState | Cost$ Discard<1/Card> | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate only once each turn.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+SVar:AIPreference:DiscardCost$Card.cmcEQ1,Card.cmcEQ2
+AlternateMode:DoubleFaced
+Oracle:Discard a card: Transform Heir of Falkenrath. Activate only once each turn.
+
+ALTERNATE
+
+Name:Heir to the Night
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire Berserker
+PT:3/2
+K:Flying
+Oracle:Flying

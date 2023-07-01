@@ -1,0 +1,7 @@
+Name:Ochran Assassin
+ManaCost:1 B G
+Types:Creature Elf Assassin
+PT:1/1
+K:Deathtouch
+K:All creatures able to block CARDNAME do so.
+Oracle:Deathtouch\nAll creatures able to block Ochran Assassin do so.

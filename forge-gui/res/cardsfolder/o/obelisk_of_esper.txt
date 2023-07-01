@@ -1,0 +1,5 @@
+Name:Obelisk of Esper
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo W U B | SpellDescription$ Add {W}, {U}, or {B}.
+Oracle:{T}: Add {W}, {U}, or {B}.

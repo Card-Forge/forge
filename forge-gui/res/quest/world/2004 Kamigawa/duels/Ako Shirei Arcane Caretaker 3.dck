@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ako Shirei the Caretaker 2
+Title=Shirei the Caretaker
+Difficulty=hard
+Description=It grew in lands lit by pride and watered by tears.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Choice of Damnations|SOK
+5 Forest|CHK|1
+1 Forest|CHK|2
+1 Forest|CHK|3
+2 Forest|CHK|4
+4 Hana Kami|CHK
+2 Horobi's Whisper|BOK
+1 Iname as One|SOK
+2 Kodama of the South Tree|CHK
+2 Lifegift|BOK
+1 Mikokoro, Center of the Sea|SOK
+1 Okina, Temple to the Grandfathers|CHK
+2 Promised Kannushi|SOK
+4 Rend Flesh|CHK
+1 Rending Vines|SOK
+4 Sakura-Tribe Elder|CHK
+1 Sekki, Seasons' Guide|SOK
+4 Shirei, Shizo's Caretaker|BOK
+3 Swamp|CHK|1
+3 Swamp|CHK|2
+4 Swamp|CHK|3
+1 Swamp|CHK|4
+2 Tendo Ice Bridge|BOK
+3 Thief of Hope|CHK
+4 Waking Nightmare|CHK
+[Sideboard]
+

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: The Bloodsky Massacre
+OpponentName=The Berserkers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Immersturm Skullcairn|Immersturm Skullcairn|Tormentor's Helm
+HumanExtras=
+[metadata]
+Title=The Bloodsky Massacre
+Difficulty=medium
+Description="How soft your fields of green\nCan whisper tales of gore"\n--Led Zeppelin, Immigrant Song
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: The Bloodsky Massacre
+[Main]
+30 Sulfurous Mire|KHM|1
+30 The Bloodsky Massacre|KHM|1

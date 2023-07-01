@@ -1,0 +1,5 @@
+Name:Obsianus Golem
+ManaCost:6
+Types:Artifact Creature Golem
+PT:4/6
+Oracle:

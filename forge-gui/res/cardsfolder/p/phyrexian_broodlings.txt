@@ -1,0 +1,6 @@
+Name:Phyrexian Broodlings
+ManaCost:1 B B
+Types:Creature Phyrexian Minion
+PT:2/2
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:{1}, Sacrifice a creature: Put a +1/+1 counter on Phyrexian Broodlings.

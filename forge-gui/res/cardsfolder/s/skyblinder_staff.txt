@@ -1,0 +1,7 @@
+Name:Skyblinder Staff
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | ValidBlocker$ Creature.withFlying | Secondary$ True | Description$ Equipped creature can't be blocked by creatures with flying.
+Oracle:Equipped creature gets +1/+0 and can't be blocked by creatures with flying.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

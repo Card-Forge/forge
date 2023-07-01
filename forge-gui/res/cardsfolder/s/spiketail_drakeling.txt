@@ -1,0 +1,7 @@
+Name:Spiketail Drakeling
+ManaCost:1 U U
+Types:Creature Drake
+PT:2/2
+K:Flying
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+Oracle:Flying\nSacrifice Spiketail Drakeling: Counter target spell unless its controller pays {2}.

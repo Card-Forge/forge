@@ -1,0 +1,7 @@
+Name:Ignoble Hierarch
+ManaCost:G
+Types:Creature Goblin Shaman
+PT:0/1
+K:Exalted
+A:AB$ Mana | Cost$ T | Produced$ Combo B R G | SpellDescription$ Add {B}, {R}, or {G}.
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {B}, {R}, or {G}.

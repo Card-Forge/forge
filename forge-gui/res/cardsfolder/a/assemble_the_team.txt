@@ -1,0 +1,5 @@
+Name:Assemble the Team
+ManaCost:B G
+Types:Sorcery
+A:SP$ ChangeZone | Defined$ TopThirdOfLibrary | ChooseFromDefined$ True | Origin$ Library | ChangeNum$ 1 | Destination$ Hand | ChangeType$ Card | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Search the top third of your library, rounded up, for a card. Put that card into your hand, then shuffle.
+Oracle:Search the top third of your library, rounded up, for a card. Put that card into your hand, then shuffle.

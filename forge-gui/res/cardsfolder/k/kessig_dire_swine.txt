@@ -1,0 +1,8 @@
+Name:Kessig Dire Swine
+ManaCost:4 G G
+Types:Creature Boar Horror
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | Condition$ Delirium | Description$ Delirium — CARDNAME has trample as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Kessig Dire Swine has trample as long as there are four or more card types among cards in your graveyard.

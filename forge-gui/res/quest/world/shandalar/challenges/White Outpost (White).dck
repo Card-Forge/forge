@@ -1,0 +1,38 @@
+[quest]
+id=1011
+OpponentName=Sainted One
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 white rares
+Credit Reward=150
+HumanExtras=Ivory Cup
+AIExtras=Ivory Cup
+[metadata]
+Name=quest11
+Title=White Outpost (White)
+Difficulty=medium
+Description=This is a remote outpost the powerful White Wizard, The Sainted One. Here he is at his weakest.
+Icon=SaintedOne.jpg
+Deck Type=constructed
+[main]
+3 Armageddon|4ED
+3 Armageddon Clock|ATQ
+1 Balance|LEB
+1 Black Lotus|LEB
+2 Blessing|LEB
+3 Bottle of Suleiman|ARN
+4 Circle of Protection: Artifacts|ATQ
+3 D'Avenant Archer|LEG
+3 Dingus Egg|LEB
+1 Disenchant|4ED
+1 Mishra's Workshop|ATQ
+1 Mox Pearl|LEB
+22 Plains|4ED
+4 Serra Angel|4ED
+1 Sol Ring|LEB
+2 Swords to Plowshares|LEB
+1 Veteran Bodyguard|LEA
+2 White Mana Battery|LEG
+2 Witch Hunter|CHR
+[sideboard]

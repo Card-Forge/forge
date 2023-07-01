@@ -1,0 +1,7 @@
+Name:Grinning Ignus
+ManaCost:2 R
+Types:Creature Elemental
+PT:2/2
+A:AB$ Mana | Cost$ R Return<1/CARDNAME> | Produced$ C C R | Amount$ 1 | SorcerySpeed$ True | SpellDescription$ Add {C}{C}{R}. Activate only as a sorcery.
+AI:RemoveDeck:All
+Oracle:{R}, Return Grinning Ignus to its owner's hand: Add {C}{C}{R}. Activate only as a sorcery.

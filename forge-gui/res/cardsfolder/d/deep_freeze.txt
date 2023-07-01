@@ -1,0 +1,8 @@
+Name:Deep Freeze
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 4 | AddType$ Wall | AddColor$ Blue | RemoveAllAbilities$ True | AddKeyword$ Defender | Description$ Enchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types.
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nEnchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types.

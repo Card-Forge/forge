@@ -1,0 +1,10 @@
+Name:Skinshifter
+ManaCost:1 G
+Types:Creature Human Shaman
+PT:1/1
+A:AB$ Charm | Cost$ G | Choices$ DBRhino,DBBird,DBPlant | CharmNum$ 1 | ActivationLimit$ 1
+SVar:DBRhino:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Rhino | RemoveCreatureTypes$ True | Keywords$ Trample | SpellDescription$ Until end of turn, CARDNAME becomes a Rhino with base power and toughness 4/4 and gains trample.
+SVar:DBBird:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Bird | RemoveCreatureTypes$ True | Keywords$ Flying | SpellDescription$ Until end of turn, CARDNAME becomes a Bird with base power and toughness 2/2 and gains flying.
+SVar:DBPlant:DB$ Animate | Defined$ Self | Power$ 0 | Toughness$ 8 | Types$ Plant | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, CARDNAME becomes a Plant with base power and toughness 0/8.
+AI:RemoveDeck:All
+Oracle:{G}: Choose one. Activate only once each turn.\n• Until end of turn, Skinshifter becomes a Rhino with base power and toughness 4/4 and gains trample.\n• Until end of turn, Skinshifter becomes a Bird with base power and toughness 2/2 and gains flying.\n• Until end of turn, Skinshifter becomes a Plant with base power and toughness 0/8.

@@ -1,0 +1,7 @@
+Name:Spinal Villain
+ManaCost:2 R
+Types:Creature Beast
+PT:1/2
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | SpellDescription$ Destroy target blue creature.
+AI:RemoveDeck:Random
+Oracle:{T}: Destroy target blue creature.

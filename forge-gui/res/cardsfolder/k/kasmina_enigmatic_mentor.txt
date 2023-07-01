@@ -1,0 +1,11 @@
+Name:Kasmina, Enigmatic Mentor
+ManaCost:3 U
+Types:Legendary Planeswalker Kasmina
+Loyalty:5
+S:Mode$ RaiseCost | ValidTarget$ Creature.YouCtrl+inZoneBattlefield,Planeswalker.YouCtrl+inZoneBattlefield | Activator$ Player.Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ u_2_2_wizard | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ Create a 2/2 blue Wizard creature token. Draw a card, then discard a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.\n[-2]: Create a 2/2 blue Wizard creature token. Draw a card, then discard a card.

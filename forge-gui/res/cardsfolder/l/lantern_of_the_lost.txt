@@ -1,0 +1,8 @@
+Name:Lantern of the Lost
+ManaCost:1
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from a graveyard.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target card in a graveyard | ValidTgts$ Card
+A:AB$ ChangeZoneAll | Cost$ 1 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | AILogic$ ExileGraveyards | SubAbility$ DBDraw | SpellDescription$ Exile all cards from all graveyards, then draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | StackDescription$ None
+Oracle:When Lantern of the Lost enters the battlefield, exile target card from a graveyard.\n{1}, {T}, Exile Lantern of the Lost: Exile all cards from all graveyards, then draw a card.

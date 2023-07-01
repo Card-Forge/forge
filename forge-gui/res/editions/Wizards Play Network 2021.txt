@@ -1,0 +1,15 @@
+[metadata]
+Code=PW21
+Date=2021-06-18
+Name=Wizards Play Network 2021
+Code2=PWP21
+Type=Promo
+ScryfallCode=PW21
+
+[cards]
+1 R Arbor Elf @Rk Post
+2 R Collected Company @Lake Hurwitz
+3 M Wurmcoil Engine @Raymond Swanland
+4 R Fabled Passage @Howard Lyon
+5 R Mind Stone @Jason Felix
+6 R Conjurer's Closet @Johann Bodin

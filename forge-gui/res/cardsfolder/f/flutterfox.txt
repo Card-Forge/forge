@@ -1,0 +1,8 @@
+Name:Flutterfox
+ManaCost:1 W
+Types:Creature Fox
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Artifact.YouCtrl,Enchantment.YouCtrl | Description$ As long as you control an artifact or enchantment, CARDNAME has flying.
+SVar:BuffedBy:Artifact,Enchantment
+DeckHints:Type$Artifact|Enchantment
+Oracle:As long as you control an artifact or enchantment, Flutterfox has flying.

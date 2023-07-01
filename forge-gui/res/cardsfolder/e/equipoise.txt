@@ -1,0 +1,26 @@
+Name:Equipoise
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEquipoise | TriggerDescription$ At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)
+SVar:TrigEquipoise:DB$ Pump | ValidTgts$ Player | IsCurse$ True | RememberTargets$ True | SubAbility$ ChooseLand
+SVar:ChooseLand:DB$ ChooseCard | Choices$ Land.TargetedPlayerCtrl | Mandatory$ True | Amount$ LandX | ChoiceTitle$ Choose a land that player controls | SubAbility$ PhasesLand
+SVar:PhasesLand:DB$ Phases | Defined$ ChosenCard | SubAbility$ ChooseArtifact
+SVar:ChooseArtifact:DB$ ChooseCard | Choices$ Artifact.TargetedPlayerCtrl | Mandatory$ True | Amount$ ArtifactX | ChoiceTitle$ Choose a artifact that player controls | SubAbility$ PhasesArtifact
+SVar:PhasesArtifact:DB$ Phases | Defined$ ChosenCard | SubAbility$ ChooseCreature
+SVar:ChooseCreature:DB$ ChooseCard | Choices$ Creature.TargetedPlayerCtrl | Mandatory$ True | Amount$ CreatureX | ChoiceTitle$ Choose a creature that player controls | SubAbility$ PhasesCreature
+SVar:PhasesCreature:DB$ Phases | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:LandX:SVar$ExcessLand/LimitMin.0
+SVar:OppLand:Count$Valid Land.RememberedPlayerCtrl
+SVar:YourLand:Count$Valid Land.YouCtrl
+SVar:ExcessLand:SVar$OppLand/Minus.YourLand
+SVar:ArtifactX:SVar$ExcessArtifact/LimitMin.0
+SVar:OppArtifact:Count$Valid Artifact.RememberedPlayerCtrl
+SVar:YourArtifact:Count$Valid Artifact.YouCtrl
+SVar:ExcessArtifact:SVar$OppArtifact/Minus.YourArtifact
+SVar:CreatureX:SVar$ExcessCreature/LimitMin.0
+SVar:OppCreature:Count$Valid Creature.RememberedPlayerCtrl
+SVar:YourCreature:Count$Valid Creature.YouCtrl
+SVar:ExcessCreature:SVar$OppCreature/Minus.YourCreature
+SVar:NonStackingEffect:True
+Oracle:At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)

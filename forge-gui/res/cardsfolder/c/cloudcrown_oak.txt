@@ -1,0 +1,6 @@
+Name:Cloudcrown Oak
+ManaCost:2 G G
+Types:Creature Treefolk Warrior
+PT:3/4
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

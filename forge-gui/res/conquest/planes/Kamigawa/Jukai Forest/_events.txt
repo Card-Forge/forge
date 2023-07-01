@@ -1,0 +1,9 @@
+Name:Seshiro the Anointed|Deck:Seshiro the Anointed.dck|Variant:Commander|Avatar:Seshiro the Anointed|Desc:
+Name:Shizuko, Caller of Autumn|Deck:Shizuko, Caller of Autumn.dck|Variant:Commander|Avatar:Shizuko, Caller of Autumn|Desc:
+Name:Tranquil Garden|Deck:Tranquil Garden.dck|Variant:Planechase|Avatar:Tranquil Garden|Desc:
+Name:Kodama of the South Tree|Deck:Kodama of the South Tree.dck|Variant:Commander|Avatar:Kodama of the South Tree|Desc:
+Name:Kodama of the Center Tree|Deck:Kodama of the Center Tree.dck|Variant:Commander|Avatar:Kodama of the Center Tree|Desc:
+Name:Kodama of the North Tree|Deck:Kodama of the North Tree.dck|Variant:Commander|Avatar:Kodama of the North Tree|Desc:
+Name:Iwamori of the Open Fist|Deck:Iwamori of the Open Fist.dck|Variant:Commander|Avatar:Iwamori of the Open Fist|Desc:
+Name:Seshiro the Anointed Avatar|Deck:Seshiro the Anointed Avatar.dck|Variant:Vanguard|Avatar:Seshiro the Anointed Avatar|Desc:
+Name:Random Jukai Forest|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

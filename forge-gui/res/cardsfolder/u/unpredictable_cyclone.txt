@@ -1,0 +1,10 @@
+Name:Unpredictable Cyclone
+ManaCost:3 R R
+Types:Enchantment
+K:Cycling:2
+R:Event$ Draw | ValidCause$ Activated.Cycling+nonLand | ValidPlayer$ You | ActiveZones$ Battlefield | ReplaceWith$ DBDig | Description$ If a cycling ability of another nonland card would cause you to draw a card, instead exile cards from the top of your library until you exile a card that shares a card type with the cycled card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of your library in a random order.
+SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Card.sharesCardTypeWith ReplacedSource | ValidDescription$ shares a card type with exiled card | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered.nonLand+sharesCardTypeWith ReplacedSource | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ForgetPlayed$ True | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:If a cycling ability of another nonland card would cause you to draw a card, instead exile cards from the top of your library until you exile a card that shares a card type with the cycled card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of your library in a random order.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,10 @@
+Name:Leinore, Autumn Sovereign
+ManaCost:2 G W
+Types:Legendary Creature Human Noble
+PT:0/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Coven — At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control three or more creatures with different powers, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:Coven — At the beginning of combat on your turn, put a +1/+1 counter on up to one creature you control. Then if you control three or more creatures with different powers, draw a card.

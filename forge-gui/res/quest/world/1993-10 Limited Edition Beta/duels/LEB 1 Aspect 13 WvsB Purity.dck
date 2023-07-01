@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 13 WvB Purity
+Title=Aspect of Purity
+Difficulty=easy
+Description=Before a woman marries in the village of Sursi, she must visit the land of the mesa pegasus. Legend has it that if the woman is pure of heart and her love is true, a mesa pegasus will appear, blessing her family with long life and good fortune.
+Icon=Aspect of Purity.jpg
+Deck Type=constructed
+[Main]
+2 Black Ward|LEB
+2 Blue Ward|LEB
+2 Circle of Protection: Black|LEB
+2 Circle of Protection: Blue|LEB
+2 Circle of Protection: Green|LEB
+2 Circle of Protection: Red|LEB
+2 Circle of Protection: White|LEB
+2 Consecrate Land|LEB
+2 Green Ward|LEB
+2 Ivory Cup|LEB
+4 Mesa Pegasus|LEB
+4 Pearled Unicorn|LEB
+24 Plains|LEB|1
+2 Red Ward|LEB
+4 Savannah Lions|LEB
+2 White Ward|LEB

@@ -1,0 +1,7 @@
+Name:Mongrel Pack
+ManaCost:3 G
+Types:Creature Dog
+PT:4/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Phase$ BeginCombat->EndCombat | TriggerDescription$ When CARDNAME dies during combat, create four 1/1 green Dog creature tokens.
+SVar:TrigToken:DB$ Token | ActivationPhases$ BeginCombat->EndCombat | TokenAmount$ 4 | TokenScript$ g_1_1_dog | TokenOwner$ You
+Oracle:When Mongrel Pack dies during combat, create four 1/1 green Dog creature tokens.

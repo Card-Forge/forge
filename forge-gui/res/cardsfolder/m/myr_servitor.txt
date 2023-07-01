@@ -1,0 +1,8 @@
+Name:Myr Servitor
+ManaCost:1
+Types:Artifact Creature Myr
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self | PresentZone$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.namedMyr Servitor | Origin$ Graveyard | Destination$ Battlefield
+DeckHints:Name$Myr Servitor
+Oracle:At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield.

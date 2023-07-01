@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Teferi, Timeless Voyager
+Description=Teferi's deck does what blue decks do best – it draws tons of cards! Deck also contains a bunch of cards that synergize with card draw.
+Deck Type=constructed
+Set=M21
+Image=teferi_timeless_voyager.jpg
+[Main]
+2 Charmed Sleep|ELD
+3 Faerie Vandal|ELD
+4 Frantic Inventory|M21
+2 Gust of Wind|IKO
+3 Historian of Zhalfir|M21
+25 Island|M21
+2 Jeskai Elder|KTK
+2 Mantle of Tides|ELD
+4 Mystic Skyfish|M21
+3 Opt|ELD
+2 Shipwreck Dowser|M21
+1 Stern Dismissal|THB
+1 Stormwing Entity|M21
+1 Teferi's Ageless Insight|M21
+2 Teferi's Wavecaster|M21
+1 Teferi, Timeless Voyager|M21
+2 Tome Anima|M21
+[Sideboard]

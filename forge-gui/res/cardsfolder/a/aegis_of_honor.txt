@@ -1,0 +1,9 @@
+Name:Aegis of Honor
+ManaCost:W
+Types:Enchantment
+A:AB$ Effect | Cost$ 1 | ReplacementEffects$ SelflessDamage | AILogic$ RedirectSpellDamageFromPlayer | Stackable$ False | SpellDescription$ The next time an instant or sorcery spell would deal damage to you this turn, that spell deals that damage to its controller instead.
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Instant,Sorcery | ReplaceWith$ SelflessDmg | DamageTarget$ ReplacedSourceController | Description$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:NonStackingEffect:True
+Oracle:{1}: The next time an instant or sorcery spell would deal damage to you this turn, that spell deals that damage to its controller instead.

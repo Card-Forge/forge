@@ -1,0 +1,8 @@
+[format]
+Name:Block: Ice Age (ALL)
+Type:Archived
+Subtype:Block
+Effective:1996-10-01
+Sets:ICE, ALL
+Restricted:Zuran Orb
+Banned:Amulet of Quoz

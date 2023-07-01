@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 2F The Homarid Invasion
+Title=The Homarid Invasion
+Difficulty=easy
+Description="The cooling climate introduced a new threat to Vodalia: the Homarids. Once a minor nuisance, they thrived in the changing environment. Their ceaseless attacks strained Vodalia's defenses to their limit, eventually overwhelming the empire." -Sarpadian Empires, vol. V
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Balm of Restoration|FEM
+4 Conch Horn|FEM
+4 Deep Spawn|FEM
+1 Homarid|FEM|1
+1 Homarid|FEM|2
+1 Homarid|FEM|3
+1 Homarid|FEM|4
+4 Homarid Shaman|FEM
+1 Homarid Warrior|FEM|1
+1 Homarid Warrior|FEM|2
+2 Homarid Warrior|FEM|3
+28 Island|LEB|1
+4 Tidal Influence|FEM

@@ -1,0 +1,8 @@
+Name:Riptide Pilferer
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:1/1
+K:Morph:U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

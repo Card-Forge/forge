@@ -1,0 +1,8 @@
+Name:Gearsmith Guardian
+ManaCost:5
+Types:Artifact Creature Construct
+PT:3/5
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Creature.YouCtrl+Blue | Description$ CARDNAME gets +2/+0 as long as you control a blue creature.
+SVar:BuffedBy:Creature.Blue
+DeckHints:Color$Blue
+Oracle:Gearsmith Guardian gets +2/+0 as long as you control a blue creature.

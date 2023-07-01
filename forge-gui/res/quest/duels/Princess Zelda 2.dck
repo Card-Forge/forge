@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Princess Zelda 2
+Title=Princess Zelda
+Difficulty=medium
+Description=WG Dominaria Standard-legal Midrange deck with Elves, Knights, and Angels, also featuring Legendary creatures and Helm of the Host.
+Icon=Princess Zelda.jpg
+Deck Type=constructed
+[main]
+2 Benalish Honor Guard
+1 Danitha Capashen, Paragon
+3 Dub
+4 Evolving Wilds
+8 Forest|DOM
+2 Helm of the Host
+3 History of Benalia
+2 Kwende, Pride of Femeref
+4 Llanowar Elves
+2 Lyra Dawnbringer
+8 Plains|DOM
+3 Serra Angel|DOM
+2 Shalai, Voice of Plenty
+1 Shanna, Sisay's Legacy
+2 Song of Freyalise
+4 Steel Leaf Champion
+4 Sunpetal Grove
+2 Untamed Kavu
+3 Verdant Force
+[sideboard]

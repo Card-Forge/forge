@@ -1,0 +1,7 @@
+Name:Deathless Ancient
+ManaCost:4 B B
+Types:Creature Vampire Knight
+PT:4/4
+K:Flying
+A:AB$ ChangeZone | Cost$ tapXType<3/Vampire> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+Oracle:Flying\nTap three untapped Vampires you control: Return Deathless Ancient from your graveyard to your hand.

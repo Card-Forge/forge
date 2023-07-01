@@ -1,0 +1,6 @@
+Name:Pouncing Cheetah
+ManaCost:2 G
+Types:Creature Cat
+PT:3/2
+K:Flash
+Oracle:Flash

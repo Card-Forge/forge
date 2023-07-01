@@ -1,0 +1,6 @@
+Name:Furtive Homunculus
+ManaCost:1 U
+Types:Creature Homunculus
+PT:2/1
+K:Skulk
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)

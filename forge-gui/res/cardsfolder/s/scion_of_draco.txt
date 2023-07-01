@@ -1,0 +1,13 @@
+Name:Scion of Draco
+ManaCost:12
+Types:Artifact Creature Dragon
+PT:4/4
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain — This spell costs {2} less to cast for each basic land type among lands you control.
+S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddKeyword$ Vigilance | Description$ Each creature you control gains vigilance if it's white.
+S:Mode$ Continuous | Affected$ Creature.Blue+YouCtrl | AddKeyword$ Hexproof | Description$ Each creature you control gains hexproof if it's blue.
+S:Mode$ Continuous | Affected$ Creature.Black+YouCtrl | AddKeyword$ Lifelink | Description$ Each creature you control gains lifelink if it's black.
+S:Mode$ Continuous | Affected$ Creature.Red+YouCtrl | AddKeyword$ First Strike | Description$ Each creature you control gains first strike if it's red.
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddKeyword$ Trample | Description$ Each creature you control gains trample if it's green.
+SVar:X:Count$Domain/Twice
+Oracle:Domain — This spell costs {2} less to cast for each basic land type among lands you control.\nFlying\nEach creature you control has vigilance if it's white, hexproof if it's blue, lifelink if it's black, first strike if it's red, and trample if it's green.

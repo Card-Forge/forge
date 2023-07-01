@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Asanbosam 2
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=medium
+Description=Asanbosam plays a monoblack 'Night Terrors' deck.
+Deck Type=constructed
+[main]
+1 Blighted Shaman|MIR
+2 Bone Harvest|MIR
+3 Breathstealer|MIR
+2 Charcoal Diamond|MIR
+2 Dark Banishing|ICE
+1 Drain Life|MIR
+2 Dread Specter|MIR
+2 Feral Shadow|MIR
+1 Fetid Horror|MIR
+1 Gravebane Zombie|MIR
+2 Hypnotic Specter|LEB
+2 Junun Efreet|ARN
+1 Kaervek's Hex|MIR
+1 Mox Jet|LEB
+1 Nocturnal Raid|MIR
+1 Phyrexian Vault|MIR
+1 Ravenous Vampire|MIR
+2 Restless Dead|MIR
+1 Shallow Grave|MIR
+2 Skulking Ghost|MIR
+1 Soulshriek|MIR
+1 Spirit of the Night|MIR
+2 Stupor|MIR
+22 Swamp|MIR
+2 Wall of Corpses|MIR
+1 Withering Boon|MIR
+[sideboard]
+[planes]
+[schemes]

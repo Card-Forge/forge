@@ -1,0 +1,6 @@
+Name:Command the Chaff
+ManaCost:4 U U
+Types:Instant
+A:SP$ Play | Optional$ True | Valid$ Card.TargetedPlayerCtrl | ValidTgts$ Opponent | ValidZone$ Sideboard | WithoutManaCost$ True | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Look at target opponent's sideboard. You may cast a card from that sideboard without paying its mana cost.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Look at target opponent's sideboard. You may cast a card from that sideboard without paying its mana cost.\nExile Command the Chaff.

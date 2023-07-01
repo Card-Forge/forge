@@ -1,0 +1,7 @@
+Name:Talisman of Curiosity
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SubAbility$ DBPain | SpellDescription$ Add {G} or {U}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {G} or {U}. Talisman of Curiosity deals 1 damage to you.

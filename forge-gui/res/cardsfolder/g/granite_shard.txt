@@ -1,0 +1,5 @@
+Name:Granite Shard
+ManaCost:3
+Types:Artifact
+A:AB$ DealDamage | Cost$ 3 T | AlternateCost$ R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{3}, {T} or {R}, {T}: Granite Shard deals 1 damage to any target.

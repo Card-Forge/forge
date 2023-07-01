@@ -1,0 +1,8 @@
+Name:Death Charmer
+ManaCost:2 B
+Types:Creature Worm Mercenary
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, that creature's controller loses 2 life unless they pay {2}.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTargetController | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredTargetController
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Death Charmer deals combat damage to a creature, that creature's controller loses 2 life unless they pay {2}.

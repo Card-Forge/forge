@@ -1,0 +1,6 @@
+Name:Ogre Shaman
+ManaCost:3 R R
+Types:Creature Ogre Shaman
+PT:3/3
+A:AB$ DealDamage | Cost$ 2 Discard<1/Random> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:{2}, Discard a card at random: Ogre Shaman deals 2 damage to any target.

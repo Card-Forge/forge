@@ -1,0 +1,8 @@
+Name:Aeromunculus
+ManaCost:1 G U
+Types:Creature Homunculus Mutant
+PT:2/3
+K:Flying
+K:Adapt:1:2 G U
+DeckHas:Ability$Counters
+Oracle:Flying\n{2}{G}{U}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)

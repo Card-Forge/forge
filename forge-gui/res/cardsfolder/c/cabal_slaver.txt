@@ -1,0 +1,7 @@
+Name:Cabal Slaver
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:2/1
+T:Mode$ DamageDone | ValidSource$ Goblin | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever a Goblin deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever a Goblin deals combat damage to a player, that player discards a card.

@@ -1,0 +1,7 @@
+Name:Arcanis the Omnipotent
+ManaCost:3 U U U
+Types:Legendary Creature Wizard
+PT:3/4
+A:AB$ Draw | Cost$ T | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:{T}: Draw three cards.\n{2}{U}{U}: Return Arcanis the Omnipotent to its owner's hand.

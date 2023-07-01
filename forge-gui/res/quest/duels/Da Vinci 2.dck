@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Da Vinci 2
+Title=Da Vinci
+Difficulty=medium
+Description=Mono B deck with Korlash, Heir to Blackblade, Bad Moon and threat removal
+Icon=Da Vinci.jpg
+Deck Type=constructed
+[main]
+22 Swamp|M12
+1 Jet Medallion
+1 Ascendant Evincar
+2 Ashenmoor Cohort
+2 Bad Moon
+2 Corrosive Mentor
+2 Crowd of Cinders
+1 Hellfire
+1 Corrupt
+1 Intimidation
+4 Korlash, Heir to Blackblade
+1 Mind Sludge
+1 Nightmare
+1 Tendrils of Corruption
+1 Halo Hunter
+1 Helldozer
+1 Visara the Dreadful
+1 Black Knight
+1 Dauthi Slayer
+1 Death Stroke
+1 Enfeeblement
+1 Hand of Cruelty
+1 Distress
+1 Nether Traitor
+1 Sign in Blood
+1 Gatekeeper of Malakir
+1 Nocturnal Raid
+1 Vicious Hunger
+1 Cosmic Horror
+1 Ihsan's Shade
+1 Underworld Dreams
+1 Dunerider Outlaw
+[sideboard]

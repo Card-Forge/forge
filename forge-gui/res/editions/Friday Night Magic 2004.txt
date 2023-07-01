@@ -1,0 +1,20 @@
+[metadata]
+Code=F04
+Date=2004-01-01
+Name=Friday Night Magic 2004
+Type=Promo
+ScryfallCode=F04
+
+[cards]
+1 R Willbender @Eric Peterson
+2 R Slice and Dice @Mark Brill
+3 R Silver Knight @Eric Peterson
+4 R Krosan Warchief @Greg Hildebrandt
+5 R Lightning Rift @Eric Peterson
+6 R Carrion Feeder @Brian Snõddy
+7 R Treetop Village @Anthony S. Waters
+8 R Accumulated Knowledge @Randy Gallegos
+9 R Avalanche Riders @Edward P. Beard, Jr.
+10 R Reanimate @Robert Bliss
+11 R Mother of Runes @Scott M. Fischer
+12 R Brainstorm @DiTerlizzi

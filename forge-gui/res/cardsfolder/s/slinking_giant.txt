@@ -1,0 +1,9 @@
+Name:Slinking Giant
+ManaCost:2 R R
+Types:Creature Giant Rogue
+PT:4/4
+K:Wither
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -3/-0 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -3/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -3
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Slinking Giant blocks or becomes blocked, it gets -3/-0 until end of turn.

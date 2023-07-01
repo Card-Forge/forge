@@ -1,0 +1,7 @@
+Name:Momir Vig, Simic Visionary Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+4
+A:AB$ CopyPermanent | Cost$ X Discard<1/Card> | AILogic$ MomirAvatar | ActivationZone$ Command | NumCopies$ 1 | ValidSupportedCopy$ Creature.cmcEQX | RandomCopied$ True | RandomNum$ 1 | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Create a token that's a copy of a creature card with mana value X chosen at random. Activate only as a sorcery and only once each turn. | StackDescription$ SpellDescription
+SVar:X:Count$xPaid
+Oracle:Hand +0, life +4\n{X}, Discard a card: Create a token that's a copy of a creature card with mana value X chosen at random. Activate only as a sorcery and only once each turn.

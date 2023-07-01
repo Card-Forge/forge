@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Ixidor's Legacy
+Description=Ixidor was the master illusionist who created morph magic, and his legacy is one of trickery and deceit. While playing the Ixidor's Legacy deck, you'll pick up right where he left off.
+Deck Type=constructed
+Set=PLC
+Image=ixidors_legacy.jpg
+
+[Main]
+1 Aeon Chronicler|PLC
+2 Aquamorph Entity|PLC
+1 Brine Elemental|TSP
+2 Coral Trickster|TSP
+1 Crookclaw Transmuter|TSP
+1 Desert|TSB
+2 Dream Stalker|TSP
+2 Erratic Mutation|PLC
+3 Fathom Seer|TSP
+2 Fledgling Mawcor|TSP
+23 Island|TSP|1
+1 Jodah's Avenger|PLC
+1 Merfolk Thaumaturgist|PLC
+2 Ovinize|PLC
+1 Ovinomancer|TSB
+1 Piracy Charm|PLC
+1 Pongify|PLC
+2 Primal Plasma|PLC
+2 Riptide Pilferer|PLC
+1 Serendib Sorcerer|PLC
+2 Shaper Parasite|PLC
+1 Slipstream Serpent|TSP
+2 Tidewalker|PLC
+2 Unstable Mutation|TSB
+1 Willbender|TSB
+[Sideboard]
+
+

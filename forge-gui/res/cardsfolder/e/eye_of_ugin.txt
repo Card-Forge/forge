@@ -1,0 +1,9 @@
+Name:Eye of Ugin
+ManaCost:no cost
+Types:Legendary Land
+S:Mode$ ReduceCost | ValidCard$ Eldrazi.Colorless | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Colorless Eldrazi spells you cast cost {2} less to cast.
+A:AB$ ChangeZone | Cost$ 7 T | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Colorless | ChangeTypeDesc$ colorless creature | ChangeNum$ 1 | SpellDescription$ Search your library for a colorless creature card, reveal it, put it into your hand, then shuffle.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Colorless
+DeckHints:Type$Eldrazi
+Oracle:Colorless Eldrazi spells you cast cost {2} less to cast.\n{7}, {T}: Search your library for a colorless creature card, reveal it, put it into your hand, then shuffle.

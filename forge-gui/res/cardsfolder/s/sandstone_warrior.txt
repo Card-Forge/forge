@@ -1,0 +1,7 @@
+Name:Sandstone Warrior
+ManaCost:2 R R
+Types:Creature Human Soldier Warrior
+PT:1/3
+K:First Strike
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\n{R}: Sandstone Warrior gets +1/+0 until end of turn.

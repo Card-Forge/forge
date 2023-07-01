@@ -1,0 +1,12 @@
+Name:Curse of Hospitality
+ManaCost:2 R
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | TgtPrompt$ Select player to curse | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.attacking EnchantedPlayer | AddKeyword$ Trample | Description$ Creatures attacking enchanted player have trample.
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Player.EnchantedBy | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever a creature deals combat damage to enchanted player, that player exiles the top card of their library. Until end of turn, that creature's controller may play that card and they may spend mana as though it were mana of any color to cast that spell.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | EffectOwner$ TriggeredSourceController | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may play the exiled card and may spend mana as though it were mana of any color to cast it.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Enchant player\nCreatures attacking enchanted player have trample.\nWhenever a creature deals combat damage to enchanted player, that player exiles the top card of their library. Until end of turn, that creature's controller may play that card and they may spend mana as though it were mana of any color to cast that spell.

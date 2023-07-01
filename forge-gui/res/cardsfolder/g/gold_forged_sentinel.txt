@@ -1,0 +1,6 @@
+Name:Gold-Forged Sentinel
+ManaCost:6
+Types:Artifact Creature Chimera
+PT:4/4
+K:Flying
+Oracle:Flying

@@ -1,0 +1,15 @@
+Name:Skullpiercer Gnat
+ManaCost:G U
+Types:Creature Phyrexian Insect
+PT:1/1
+K:Flying
+K:Toxic:1
+T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ TrigRandom | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, a random nonland card in that player's hand perpetually gains "When you cast this spell, you get a poison counter."
+SVar:TrigRandom:DB$ ChooseCard | Defined$ You | Choices$ Card.nonLand+OwnedBy TriggeredTarget | ChoiceZone$ Hand | AtRandom$ True | Amount$ 1 | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualEffect | Name$ Skullpiercer Gnat's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.ChosenCard | AddTrigger$ CastSpellGetPoison | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The randomly chosen card perpetually gains "When you cast this spell, you get a poison counter."
+SVar:CastSpellGetPoison:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigPoison | TriggerDescription$ When you cast this spell, you get a poison counter.
+SVar:TrigPoison:DB$ Poison | Num$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHints:Ability$Counters|Proliferate
+Oracle:Flying\nToxic 1\nWhenever Skullpiercer Gnat deals combat damage to a player, a random nonland card in that player's hand perpetually gains "When you cast this spell, you get a poison counter."

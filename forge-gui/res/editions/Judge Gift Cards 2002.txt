@@ -1,0 +1,10 @@
+[metadata]
+Code=G02
+Date=2002-01-01
+Name=Judge Gift Cards 2002
+Type=Promo
+ScryfallCode=G02
+
+[cards]
+1 R Hammer of Bogardan @Ron Spencer
+2 R Tradewind Rider @John Matson

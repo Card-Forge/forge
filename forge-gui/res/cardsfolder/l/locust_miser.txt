@@ -1,0 +1,6 @@
+Name:Locust Miser
+ManaCost:2 B B
+Types:Creature Rat Shaman
+PT:2/2
+S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -2 | Description$ Each opponent's maximum hand size is reduced by two.
+Oracle:Each opponent's maximum hand size is reduced by two.

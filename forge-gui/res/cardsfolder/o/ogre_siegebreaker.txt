@@ -1,0 +1,6 @@
+Name:Ogre Siegebreaker
+ManaCost:2 B R
+Types:Creature Ogre Berserker
+PT:4/3
+A:AB$ Destroy | Cost$ 2 B R | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | SpellDescription$ Destroy target creature that was dealt damage this turn.
+Oracle:{2}{B}{R}: Destroy target creature that was dealt damage this turn.

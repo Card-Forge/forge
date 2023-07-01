@@ -1,0 +1,7 @@
+Name:Soul Sculptor
+ManaCost:2 W
+Types:Creature Human
+PT:1/1
+A:AB$ Animate | Cost$ 1 W T | ValidTgts$ Creature | Types$ Enchantment | RemoveAllAbilities$ True | RemoveCardTypes$ True | Duration$ UntilAPlayerCastSpell Creature | SpellDescription$ Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
+AI:RemoveDeck:All
+Oracle:{1}{W}, {T}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.

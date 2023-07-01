@@ -1,0 +1,8 @@
+Name:Drowsing Tyrannodon
+ManaCost:1 G
+Types:Creature Dinosaur
+PT:3/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | IsPresent$ Creature.powerGE4+YouCtrl | Description$ As long as you control a creature with power 4 or greater, CARDNAME can attack as though it didn't have defender.
+SVar:BuffedBy:Creature.powerGE4
+Oracle:Defender (This creature can't attack.)\nAs long as you control a creature with power 4 or greater, Drowsing Tyrannodon can attack as though it didn't have defender.

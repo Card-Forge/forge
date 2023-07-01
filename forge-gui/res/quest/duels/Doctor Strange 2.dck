@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Doctor Strange 2
+Title=Doctor Strange
+Difficulty=medium
+Description=WUR Paradox Haze deck with Chronomantic Escape, Reality Strobe and Arc Blade
+Icon=Doctor Strange.jpg
+Deck Type=constructed
+[main]
+2 Arid Mesa
+3 Flooded Strand
+4 Island
+1 Mountain
+1 Plains
+1 Plateau
+2 Reliquary Tower
+2 Scalding Tarn
+4 Tundra
+2 Volcanic Island
+2 Coercive Portal
+1 Darksteel Reactor
+1 Pristine Talisman
+1 Sun Droplet
+2 Dominus of Fealty
+1 Fog Bank
+2 Luminous Angel
+3 Nyx-Fleece Ram
+3 Wall of Denial
+4 Paradox Haze
+3 Ancestral Vision
+4 Arc Blade
+4 Chronomantic Escape
+1 Heroes Remembered
+2 Idyllic Tutor
+4 Reality Strobe
+[sideboard]

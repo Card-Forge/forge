@@ -1,0 +1,7 @@
+Name:Aven Fleetwing
+ManaCost:3 U
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+K:Hexproof
+Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

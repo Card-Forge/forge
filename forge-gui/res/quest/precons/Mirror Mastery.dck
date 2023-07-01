@@ -1,0 +1,87 @@
+[metadata]
+Name=Mirror Mastery
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Why play a great spell once, especially when you have a deck of 100 awesome cards? Riku of Two Reflections gives you twice the fun as you confound and dazzle your foes into oblivion with a barrage of Riku's mirrored magic.
+Set=CMD
+Image=mirror_mastery.png
+[commander]
+1 Riku of Two Reflections+|CMD
+[main]
+1 Magmatic Force|CMD
+1 Trench Gorger|CMD
+1 Hydra Omnivore|CMD
+1 Death by Dragons|CMD
+1 Edric, Spymaster of Trest|CMD
+1 Homeward Path|CMD
+1 Animar, Soul of Elements|CMD
+1 Tribute to the Wild|CMD
+1 Vow of Lightning|CMD
+1 Command Tower|CMD
+1 Spell Crumple|CMD
+1 Vow of Wildness|CMD
+1 Vow of Flight|CMD
+1 Collective Voyage|CMD
+1 Fire // Ice|CMD
+1 Prophetic Bolt|CMD
+1 Colossal Might|CMD
+1 Valley Rannet|CMD
+1 Vengeful Rebirth|CMD
+1 Kodama's Reach|CMD
+1 Armillary Sphere|CMD
+1 Rupture Spire|CMD
+1 Simic Growth Chamber|CMD
+1 Simic Signet|CMD
+1 Simic Sky Swallower|CMD
+1 Call the Skybreaker|CMD
+1 Nucklavee|CMD
+1 Magus of the Vineyard|CMD
+1 Electrolyze|CMD
+1 Gruul Signet|CMD
+1 Gruul Turf|CMD
+1 Izzet Boilerworks|CMD
+1 Izzet Signet|CMD
+1 Savage Twister|CMD
+1 AEthersnipe|CMD
+1 Faultgrinder|CMD
+1 Vivid Crag|CMD
+1 Vivid Creek|CMD
+1 Vivid Grove|CMD
+1 Conundrum Sphinx|CMD
+1 Cultivate|CMD
+1 Garruk Wildspeaker|CMD
+1 Ray of Command|CMD
+1 Brainstorm|CMD
+1 Invigorate|CMD
+1 Spitebellows|CMD
+1 Lightning Greaves|CMD
+1 Explosive Vegetation|CMD
+1 Krosan Tusker|CMD
+1 Deadwood Treefolk|CMD
+1 Intet, the Dreamer|CMD
+1 Avatar of Fury|CMD
+1 Hull Breach|CMD
+1 Artisan of Kozilek|CMD
+1 Disaster Radius|CMD
+1 Evolving Wilds|CMD
+1 Prophetic Prism|CMD
+1 Rapacious One|CMD
+1 Chartooth Cougar|CMD
+1 Elvish Aberration|CMD
+1 Fierce Empath|CMD
+1 Hunting Pack|CMD
+1 Temple of the False God|CMD
+1 Firespout|CMD
+1 Ruination|CMD
+1 Fungal Reaches|CMD
+1 Sol Ring|CMD
+1 Veteran Explorer|CMD
+1 Chain Reaction|CMD
+1 Baloth Woodcrasher|CMD
+1 Kazandu Refuge|CMD
+13 Forest|CMD
+7 Island|CMD
+8 Mountain|CMD

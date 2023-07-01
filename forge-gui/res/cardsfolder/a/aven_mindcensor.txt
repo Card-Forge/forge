@@ -1,0 +1,8 @@
+Name:Aven Mindcensor
+ManaCost:2 W
+Types:Creature Bird Wizard
+PT:2/1
+K:Flash
+K:Flying
+S:Mode$ Continuous | Affected$ Player.Opponent | AddKeyword$ LimitSearchLibrary | Description$ If an opponent would search a library, that player searches the top four cards of that library instead.
+Oracle:Flash\nFlying\nIf an opponent would search a library, that player searches the top four cards of that library instead.

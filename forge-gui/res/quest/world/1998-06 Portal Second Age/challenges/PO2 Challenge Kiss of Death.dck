@@ -1,0 +1,21 @@
+[quest]
+id=PO2 Challenge: Kiss of Death
+OpponentName=From Dakmor with Love
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Kiss of Death
+Title=From Dakmor with Love
+Difficulty=medium
+Description="I'd sooner lock lips with a viper. At least I might walk away from that."\n-Elvish scout
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+10 Ancient Craving|PO2
+40 Kiss of Death|PO2
+50 Swamp|PO2|3
+

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Devouring Skies
+Description=When can you be assured that no enemies stand in your way? When you dive at them from above! 
+Deck Type=constructed
+Set=NPH
+Image=devouring_skies.jpg
+[main]
+1 Argentum Armor
+2 Copper Carapace
+1 Necropouncer
+2 Sickleslicer
+2 Viridian Claw
+2 Warlord's Axe
+2 Brass Squire
+3 Hovermyr
+1 Kiln Walker
+1 Silver Myr
+13 Island
+11 Swamp
+2 Augury Owl
+2 Blind Zealot
+1 Darkslick Drake
+2 Dementia Bat
+2 Impaler Shrike
+2 Mortis Dogs
+1 Necrogen Scudder
+1 Neurok Invisimancer
+1 Phyrexian Ingester
+2 Spire Monitor
+1 Doom Blade
+2 Vapor Snag
+[sideboard]

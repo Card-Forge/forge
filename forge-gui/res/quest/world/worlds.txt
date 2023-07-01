@@ -1,0 +1,40 @@
+Name:Main world
+Name:Random Standard
+Name:Random Pioneer
+Name:Random Modern
+Name:Random Commander
+Name:Evolving Wilds
+Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
+Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH
+Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
+Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E
+Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH
+Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM
+Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
+Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE
+Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEB|Banned:Chaos Orb
+Name:Rabiah|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
+Name:Terisiare: The Brothers' War|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
+Name:Dominaria: Legends|Dir:1994-06 Legends|Sets:LEG|Banned:Arena of the Ancients; Falling Star; Karakas
+Name:Terisiare: The Dark|Dir:1994-08 The Dark|Sets:DRK|Banned:Maze of Ith
+Name:Sarpadia|Dir:1994-11 Fallen Empires|Sets:FEM
+Name:Homelands|Dir:1995-10 Homelands|Sets:HML|Banned:Apocalypse Chime
+Name:Terisiare: Ice Age|Dir:1996-05 Ice Age|Sets:ICE, ALL
+Name:Jamuraa: The Mirage Wars|Dir:1997-01 Mirage|Sets:MIR, VIS
+Name:Portal|Dir:1997-05 Portal|Sets:POR
+Name:Caliman|Dir:1998-06 Portal Second Age|Sets:PO2
+Name:The Three Kingdoms|Dir:1999-05 Portal Three Kingdoms|Sets:PTK
+Name:Theros: The Hero's Path|Dir:2014-05 Theros|Sets:THS, BNG, JOU
+Name:Eldraine: Throne of Eldraine|Dir:2019-09 Throne of Eldraine|Sets:ELD
+Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
+Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
+Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC
+Name:Tempest|Dir:Tempest|Sets:TMP, STH, EXO
+Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E, M10, M11, M12, M13, M14, M15, ORI, M19, M20, M21
+Name:Ixalan|Sets:XLN, RIX
+Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
+Name:Kaladesh|Sets:AER, KLD, MPS, KLR
+Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR, CMR, KHM
+Name:Tarkir|Sets:KTK, FRF, DTK
+Name:Alara|Sets:ALA, CFX, ARB
+Name:Kaldheim: The Battle for Kaldheim|Dir:2021-01 Kaldheim|Sets:KHM

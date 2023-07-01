@@ -1,0 +1,8 @@
+Name:When Will You Learn?
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBExile | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent exiles the top card of their library. You may cast any number of spells from among cards exiled this way without paying their mana costs.
+SVar:DBExile:DB$ Dig | Defined$ Player.Opponent | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered+nonLand | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Amount$ All | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When you set this scheme in motion, each opponent exiles the top card of their library. You may cast any number of spells from among cards exiled this way without paying their mana costs.

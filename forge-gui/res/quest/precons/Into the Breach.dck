@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Into the Breach
+Description=Victory or death! Blast the rot-fiends off the face of Mirrodin with lightning and fire. Unleash the forces of fury as you swarm the Phyrexians with overwhelming rage and shimmering steel.
+Set=MBS
+Image=into_the_breach.jpg
+[main]
+1 Contested War Zone|MBS
+2 Darksteel Axe|SOM
+2 Devastating Summons|ROE
+2 Galvanic Blast|SOM
+2 Goblin Bushwhacker|ZEN
+2 Goblin Guide|ZEN
+4 Goblin Wardriver|MBS
+1 Iron Myr|SOM
+4 Kuldotha Rebirth|SOM
+4 Lightning Bolt|M11
+4 Memnite|SOM
+21 Mountain|ISD
+4 Ornithopter|M11
+2 Panic Spellbomb|SOM
+4 Signal Pest|MBS
+1 Spikeshot Elder|SOM
+[sideboard]
+2 Act of Treason|M12
+4 Goblin Ruinblaster|ZEN
+2 Into the Core|MBS
+1 Leyline of Punishment|M11
+4 Searing Blaze|WWK
+2 Unstable Footing|ZEN

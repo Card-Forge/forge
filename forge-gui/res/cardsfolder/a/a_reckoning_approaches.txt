@@ -1,0 +1,6 @@
+Name:A Reckoning Approaches
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDig | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, look at the top six cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+SVar:DBDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Battlefield | Optional$ True | StackDescription$ Look at the top six cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+Oracle:When you set this scheme in motion, look at the top six cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.

@@ -1,0 +1,7 @@
+Name:Pitchburn Devils
+ManaCost:4 R
+Types:Creature Devil
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals 3 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:When Pitchburn Devils dies, it deals 3 damage to any target.

@@ -1,0 +1,10 @@
+Name:Academy Rector
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, search your library for an enchantment card and put that card onto the battlefield, then shuffle.
+SVar:TrigExile:AB$ ChangeZone | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
+SVar:SacMe:4
+AI:RemoveDeck:Random
+DeckNeeds:Type$Enchantment
+Oracle:When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle.

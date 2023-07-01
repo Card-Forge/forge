@@ -1,0 +1,6 @@
+Name:Snake Basket
+ManaCost:4
+Types:Artifact
+A:AB$ Token | Cost$ X Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ X | TokenScript$ g_1_1_snake | SorcerySpeed$ True | SpellDescription$ Create X 1/1 green Snake creature tokens. Activate only as a sorcery.
+SVar:X:Count$xPaid
+Oracle:{X}, Sacrifice Snake Basket: Create X 1/1 green Snake creature tokens. Activate only as a sorcery.

@@ -1,0 +1,7 @@
+Name:Oracle of Nectars
+ManaCost:2 GW
+Types:Creature Elf Cleric
+PT:2/2
+A:AB$ GainLife | LifeAmount$ X | Cost$ T X | SpellDescription$ You gain X life.
+SVar:X:Count$xPaid
+Oracle:{X}, {T}: You gain X life.

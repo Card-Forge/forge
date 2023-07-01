@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #06
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/02/149.-THB6-1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any unknown cards drawn by either player are not relevant to solving the puzzle. Your opponent starts with 13 cards in their library. Your opponent has a Pollenbright Druid on top of their library, and twelve other unknown cards in it.
+[state]
+humanlife=20
+ailife=18
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Assassin's Trophy;Unmoored Ego;Applied Biomancy;Underworld Dreams;Tyrant's Scorn
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Ob Nixilis, the Hate-Twisted|Counters:LOYALTY=2;Nessian Boar;Thief of Sanity;Thief of Sanity;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+ailibrary=Pollenbright Druid;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Silhana Wayfinder;Silhana Wayfinder;Blightbeetle;Wavebreak Hippocamp

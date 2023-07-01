@@ -1,0 +1,9 @@
+Name:Urborg Panther
+ManaCost:2 B
+Types:Creature Nightstalker Cat
+PT:2/2
+A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.blockingSource | TgtPrompt$ Destroy target creature blocking this creature | SpellDescription$ Destroy target creature blocking CARDNAME.
+A:AB$ ChangeZone | Cost$ Sac<1/Creature.namedFeral Shadow/creature named Feral Shadow> Sac<1/Creature.namedBreathstealer/creature named Breathstealer> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedSpirit of the Night | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Spirit of the Night, put that card onto the battlefield, then shuffle.
+AI:RemoveDeck:All
+DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
+Oracle:{B}, Sacrifice Urborg Panther: Destroy target creature blocking Urborg Panther.\nSacrifice a creature named Feral Shadow, a creature named Breathstealer, and Urborg Panther: Search your library for a card named Spirit of the Night, put that card onto the battlefield, then shuffle.

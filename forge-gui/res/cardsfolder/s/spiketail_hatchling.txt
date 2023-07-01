@@ -1,0 +1,7 @@
+Name:Spiketail Hatchling
+ManaCost:1 U
+Types:Creature Drake
+PT:1/1
+K:Flying
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nSacrifice Spiketail Hatchling: Counter target spell unless its controller pays {1}.

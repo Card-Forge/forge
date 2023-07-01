@@ -1,0 +1,9 @@
+Name:Ruthless Ripper
+ManaCost:B
+Types:Creature Human Assassin
+PT:1/1
+K:Deathtouch
+K:Morph:Reveal<1/Card.Black/black>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
+Oracle:Deathtouch\nMorph—Reveal a black card in your hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Ruthless Ripper is turned face up, target player loses 2 life.

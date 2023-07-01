@@ -1,0 +1,6 @@
+Name:Irenicus's Vile Duplication
+ManaCost:3 U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AddKeywords$ Flying | NonLegendary$ True | SpellDescription$ Create a token that's a copy of target creature you control, except the token has flying and isn't legendary if that creature is legendary.
+DeckHas:Ability$Token
+Oracle:Create a token that's a copy of target creature you control, except the token has flying and isn't legendary if that creature is legendary.

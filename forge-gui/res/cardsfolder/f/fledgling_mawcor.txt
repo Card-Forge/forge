@@ -1,0 +1,8 @@
+Name:Fledgling Mawcor
+ManaCost:3 U
+Types:Creature Beast
+PT:2/2
+K:Flying
+K:Morph:U U
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Flying\n{T}: Fledgling Mawcor deals 1 damage to any target.\nMorph {U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

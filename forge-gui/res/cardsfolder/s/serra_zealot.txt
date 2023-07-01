@@ -1,0 +1,6 @@
+Name:Serra Zealot
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+K:First Strike
+Oracle:First strike

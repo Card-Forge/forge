@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 3 Color: 3 Black
+Title=The Color Black
+Difficulty=hard
+Description=Grieve for the soul in death dishonored. -Shadow Guild saying
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Cadaverous Knight|MIR
+4 Charcoal Diamond|MIR
+2 Crypt Rats|VIS
+4 Dark Banishing|MIR
+4 Everglades|VIS
+4 Fallen Askari|VIS
+1 Infernal Contract|MIR
+4 Nekrataal|VIS
+4 Quicksand|VIS
+4 Skulking Ghost|MIR
+1 Spirit of the Night|MIR
+4 Stupor|MIR
+16 Swamp|MIR|2
+4 Tar Pit Warrior|VIS

@@ -1,0 +1,9 @@
+Name:Kodama of the South Tree
+ManaCost:2 G G
+Types:Legendary Creature Spirit
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, each other creature you control gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+StrictlyOther | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+SVar:BuffedBy:Arcane,Spirit
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, each other creature you control gets +1/+1 and gains trample until end of turn.

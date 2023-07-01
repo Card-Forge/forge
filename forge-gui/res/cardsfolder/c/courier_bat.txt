@@ -1,0 +1,12 @@
+Name:Courier Bat
+ManaCost:2 B
+Types:Creature Bat
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you gained life this turn, return up to one target creature card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:NeedsToPlayVar:X GE1
+DeckHas:Ability$Graveyard
+DeckHints:Ability$LifeGain
+Oracle:Flying\nWhen Courier Bat enters the battlefield, if you gained life this turn, return up to one target creature card from your graveyard to your hand.

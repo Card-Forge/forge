@@ -1,0 +1,9 @@
+Name:Tanuki Transplanter
+ManaCost:3 G
+Types:Artifact Creature Equipment Dog
+PT:2/4
+T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME or equipped creature attacks, add an amount of {G} equal to its power. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | PersistentMana$ True
+SVar:X:TriggeredAttacker$CardPower
+K:Reconfigure:3
+Oracle:Whenever Tanuki Transplanter or equipped creature attacks, add an amount of {G} equal to its power. Until end of turn, you don't lose this mana as steps and phases end.\nReconfigure {3} ({3}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)

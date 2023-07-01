@@ -1,0 +1,11 @@
+Name:Pride Sovereign
+ManaCost:2 G
+Types:Creature Cat
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other Cat you control.
+A:AB$ Token | Cost$ W T Exert<1/CARDNAME> | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You | SpellDescription$ Create two 1/1 white Cat creature tokens with lifelink. (An exerted creature won't untap during your next untap step.)
+SVar:X:Count$Valid Cat.Other+YouCtrl
+SVar:BuffedBy:Cat
+DeckHas:Ability$Token
+DeckHints:Type$Cat
+Oracle:Pride Sovereign gets +1/+1 for each other Cat you control.\n{W}, {T}, Exert Pride Sovereign: Create two 1/1 white Cat creature tokens with lifelink. (An exerted creature won't untap during your next untap step.)

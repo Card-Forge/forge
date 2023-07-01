@@ -1,0 +1,8 @@
+Name:Winged Shepherd
+ManaCost:5 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:Vigilance
+K:Cycling:W
+Oracle:Flying, vigilance\nCycling {W} ({W}, Discard this card: Draw a card.)

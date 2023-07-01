@@ -1,0 +1,9 @@
+Name:Doom Whisperer
+ManaCost:3 B B
+Types:Creature Nightmare Demon
+PT:6/6
+K:Flying
+K:Trample
+A:AB$ Surveil | Cost$ PayLife<2> | Amount$ 2 | AILogic$ Once | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying, trample\nPay 2 life: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

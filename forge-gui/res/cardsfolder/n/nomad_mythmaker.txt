@@ -1,0 +1,6 @@
+Name:Nomad Mythmaker
+ManaCost:2 W
+Types:Creature Human Nomad Cleric
+PT:2/2
+A:AB$ ChangeZone | Cost$ W T | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | GainControl$ True | AttachedTo$ Creature.YouCtrl | AILogic$ Pump | SpellDescription$ Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
+Oracle:{W}, {T}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.

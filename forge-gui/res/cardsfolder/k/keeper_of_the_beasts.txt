@@ -1,0 +1,6 @@
+Name:Keeper of the Beasts
+ManaCost:G G
+Types:Creature Human Wizard
+PT:1/2
+A:AB$ Token | Cost$ G T | ValidTgts$ Opponent.withMoreCreaturesThanYou | TokenAmount$ 1 | TokenScript$ g_2_2_beast | TokenOwner$ You | SpellDescription$ Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token.
+Oracle:{G}, {T}: Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token.

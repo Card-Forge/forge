@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Thanos 3
+Title=Thanos
+Difficulty=hard
+Description=WUBRG Fist of Suns deck with mana dorks and powerful spells
+Icon=Thanos.jpg
+Deck Type=constructed
+[main]
+1 Arid Mesa
+1 Bayou
+1 Bloodstained Mire
+3 City of Brass
+1 Forest
+1 Glimmervoid
+1 Island
+1 Marsh Flats
+1 Savannah
+1 Taiga
+3 Tarnished Citadel
+1 Tendo Ice Bridge
+3 Transguild Promenade
+2 Tropical Island
+4 Fist of Suns
+1 Archetype of Endurance
+4 Birds of Paradise
+1 Bringer of the Blue Dawn
+1 Consecrated Sphinx
+1 Damia, Sage of Stone
+1 Dread
+2 Empyrial Archangel
+1 Godsire
+1 Harvester Druid
+3 Manaweft Sliver
+1 Pathrazer of Ulamog
+3 Purity
+4 Sylvan Caryatid
+2 Vigor
+1 Vorinclex, Voice of Hunger
+1 Worldspine Wurm
+2 Fabricate
+1 Overwhelming Forces
+2 Sorin's Vengeance
+2 Time Stretch
+[sideboard]

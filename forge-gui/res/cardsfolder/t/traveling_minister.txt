@@ -1,0 +1,8 @@
+Name:Traveling Minister
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SorcerySpeed$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets +1/+0 until end of turn. You gain 1 life. Activate only as a sorcery.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:{T}: Target creature gets +1/+0 until end of turn. You gain 1 life. Activate only as a sorcery.

@@ -1,0 +1,10 @@
+Name:Shambling Ghast
+ManaCost:B
+Types:Creature Zombie
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ BraveTheStench,SearchTheBody
+SVar:BraveTheStench:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Brave the Stench — Target creature an opponent controls gets -1/-1 until end of turn.
+SVar:SearchTheBody:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Search the Body — Create a Treasure token.
+DeckHas:Ability$Token
+Oracle:When Shambling Ghast dies, choose one —\n• Brave the Stench — Target creature an opponent controls gets -1/-1 until end of turn.\n• Search the Body — Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

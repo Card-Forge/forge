@@ -1,0 +1,9 @@
+Name:Boggarts|Deck:Boggarts.dck|Variant:None|Avatar:Mad Auntie|Desc:
+Name:Chroma Burn|Deck:Chroma Burn.dck|Variant:None|Avatar:Fiery Bombardment|Desc:
+Name:Demigod of Revenge|Deck:Demigod of Revenge.dck|Variant:None|Avatar:Demigod of Revenge|Desc:
+Name:Evoking Flames|Deck:Evoking Flames.dck|Variant:None|Avatar:Glarewielder|Desc:
+Name:Hovel Rogues|Deck:Hovel Rogues.dck|Variant:None|Avatar:Boggart Mob|Desc:
+Name:Murderous Redcap|Deck:Murderous Redcap.dck|Variant:Vanguard|Avatar:Murderous Redcap|Desc:
+Name:Scars of the Cinders|Deck:Scars of the Cinders.dck|Variant:None|Avatar:Ashenmoor Liege|Desc:
+Name:Wort, Boggart Auntie|Deck:Wort, Boggart Auntie.dck|Variant:Commander|Avatar:Wort, Boggart Auntie|Desc:
+Name:Wort, the Raidmother|Deck:Wort, the Raidmother.dck|Variant:Commander|Avatar:Wort, the Raidmother|Desc:

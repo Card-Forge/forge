@@ -1,0 +1,14 @@
+Name:Liege of the Pit
+ManaCost:5 B B B
+Types:Creature Demon
+PT:7/7
+K:Flying
+K:Trample
+K:Morph:B B B B
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME. If you can't, CARDNAME deals 7 damage to you.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | SubAbility$ DBDamage | RememberSacrificed$ True
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+AI:RemoveDeck:Random
+Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.\nMorph {B}{B}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

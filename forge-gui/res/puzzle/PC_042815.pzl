@@ -1,0 +1,22 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 042815 - Dracophobia
+URL:http://www.gatheringmagic.com/seanuy-042815-perplexing-chimera-5-dracophobia/
+Goal:Destroy Specified Creatures
+Targets:Creature.Dragon+OppCtrl
+Turns:1
+Difficulty:Hard
+Description:Destroy all opponent's Dragons. Windstorm is on top of your library.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=5
+AILife=17
+humanhand=Sidisi's Faithful|Set:DTK; Sudden Reclamation|Set:FRF; Trap Essence|Set:KTK; Mystic of the Hidden Way|Set:KTK
+humangraveyard=Servant of the Scale|Set:DTK; Naturalize|Set:DTK; Savage Punch|Set:KTK; Sultai Skullkeeper|Set:FRF; Bathe in Dragonfire|Set:FRF; Write into Being|Set:FRF
+humanlibrary=Windstorm|Set:KTK
+humanbattlefield=Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Mountain|Set:DTK; Mountain|Set:DTK; Forest|Set:DTK; Forest|Set:DTK; Rugged Highlands|Set:FRF; Whisperer of the Wilds|Set:FRF; Heir of the Wilds|Set:KTK; Roar of Challenge|Set:KTK|FaceDown; Den Protector|Set:DTK|FaceDown; Herdchaser Dragon|Set:DTK; Briber's Purse|Set:KTK
+aibattlefield=t:Dragon,P:4,T:4,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying,Image:r_4_4_dragon_dtk|Id:420; t:Dragon,P:4,T:4,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying,Image:r_4_4_dragon_dtk|Id:421; t:Dragon,P:4,T:4,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying,Image:r_4_4_dragon_dtk|Id:422; t:Dragon,P:4,T:4,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying,Image:r_4_4_dragon_dtk|Id:423; Sultai Runemark|AttachedTo:424|Set:FRF; Herdchaser Dragon|Set:DTK|Counters:P1P1=1|Id:424; Plains|Set:DTK|Tapped; Island|Set:DTK|Tapped; Swamp|Set:DTK|Tapped; Mountain|Set:DTK|Tapped; Mountain|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Scoured Barrens|Set:KTK|Tapped; Swiftwater Cliffs|Set:FRF|Tapped; Thornwood Falls|Set:FRF|Tapped
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

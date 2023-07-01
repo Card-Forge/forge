@@ -1,0 +1,7 @@
+Name:Hurloon Shaman
+ManaCost:1 R R
+Types:Creature Minotaur Shaman
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, each player sacrifices a land.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ Player
+Oracle:When Hurloon Shaman dies, each player sacrifices a land.

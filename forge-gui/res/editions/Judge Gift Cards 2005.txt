@@ -1,0 +1,12 @@
+[metadata]
+Code=G05
+Date=2005-01-01
+Name=Judge Gift Cards 2005
+Type=Promo
+ScryfallCode=G05
+
+[cards]
+1 R Gemstone Mine @Brom
+2 R Regrowth @Dameon Willich
+3 R Sol Ring @Mark Tedin
+4 R Mishra's Factory @Kaja Foglio & Phil Foglio

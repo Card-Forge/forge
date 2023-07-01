@@ -1,0 +1,6 @@
+Name:Marble Diamond
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+K:CARDNAME enters the battlefield tapped.
+Oracle:Marble Diamond enters the battlefield tapped.\n{T}: Add {W}.

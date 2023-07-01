@@ -1,0 +1,5 @@
+Name:Phyrexian Hulk
+ManaCost:6
+Types:Artifact Creature Phyrexian Golem
+PT:5/4
+Oracle:

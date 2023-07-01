@@ -1,0 +1,9 @@
+Name:Witch Hunt
+ManaCost:4 R
+Types:Enchantment
+S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 4 damage to you.
+SVar:TrigDmg:DB$ DealDamage | Defined$ You | NumDmg$ 4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of your end step, target opponent chosen at random gains control of CARDNAME.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | TargetsAtRandom$ True | Defined$ Self
+Oracle:Players can't gain life.\nAt the beginning of your upkeep, Witch Hunt deals 4 damage to you.\nAt the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.

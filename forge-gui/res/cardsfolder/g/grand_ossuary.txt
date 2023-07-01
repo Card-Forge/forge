@@ -1,0 +1,16 @@
+Name:Grand Ossuary
+ManaCost:no cost
+Types:Plane Ravnica
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Command | Execute$ OssuaryCounters | TriggerDescription$ Whenever a creature dies, its controller distributes a number of +1/+1 counters equal to its power among any number of target creatures they control.
+SVar:OssuaryCounters:DB$ PutCounter | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredCardController | TargetingPlayer$ TriggeredCardController | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ OssuaryX | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ OssuaryX
+SVar:OssuaryX:TriggeredCard$CardPower
+SVar:MaxTgts:TriggeredCardController$Valid Creature.YouCtrl
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each player exiles all creatures they control and creates X 1/1 green Saproling creature tokens, where X is the total power of the creatures they exiled this way. Then planeswalk.
+SVar:RolledChaos:DB$ ChangeZoneAll | ChangeType$ Creature | Imprint$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ OssuaryRepeat
+SVar:OssuaryRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ OssuaryTokens | SubAbility$ WalkAway | ChangeZoneTable$ True
+SVar:OssuaryTokens:DB$ Token | TokenAmount$ OsX | TokenScript$ g_1_1_saproling | TokenOwner$ Player.IsRemembered
+SVar:WalkAway:DB$ Planeswalk | SubAbility$ ClearImprinted
+SVar:ClearImprinted:DB$ Cleanup | ClearImprinted$ True
+SVar:OsX:ImprintedLKI$FilterControlledByRemembered_CardPower
+SVar:AIRollPlanarDieParams:Mode$ Random | MinTurn$ 5
+Oracle:Whenever a creature dies, its controller distributes a number of +1/+1 counters equal to its power among any number of target creatures they control.\nWhenever chaos ensues, each player exiles all creatures they control and creates X 1/1 green Saproling creature tokens, where X is the total power of the creatures they exiled this way. Then planeswalk.

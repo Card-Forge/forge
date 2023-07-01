@@ -1,0 +1,10 @@
+Name:Apex Altisaur
+ManaCost:7 G G
+Types:Creature Dinosaur
+PT:10/10
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, it fights up to one target creature you don't control.
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
+T:Mode$ DamageDoneOnce | Execute$ TrigFight2 | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, it fights up to one target creature you don't control.
+SVar:TrigFight2:DB$ Fight | Defined$ TriggeredTargetLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
+SVar:HasCombatEffect:TRUE
+Oracle:When Apex Altisaur enters the battlefield, it fights up to one target creature you don't control.\nEnrage — Whenever Apex Altisaur is dealt damage, it fights up to one target creature you don't control.

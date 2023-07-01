@@ -1,0 +1,7 @@
+Name:Dictate of Kruphix
+ManaCost:1 U U
+Types:Enchantment
+K:Flash
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+Oracle:Flash\nAt the beginning of each player's draw step, that player draws an additional card.

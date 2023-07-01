@@ -1,0 +1,7 @@
+Name:Soltari Monk
+ManaCost:W W
+Types:Creature Soltari Monk Cleric
+PT:2/1
+K:Protection from black
+K:Shadow
+Oracle:Protection from black\nShadow (This creature can block or be blocked by only creatures with shadow.)

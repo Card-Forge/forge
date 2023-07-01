@@ -1,0 +1,10 @@
+Name:Wooden Stake
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.Vampire | ValidBlocker$ Card.AttachedBy | Execute$ TrigDestroyBlocked | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.AttachedBy | ValidBlocker$ Creature.Vampire | Execute$ TrigDestroyBlocker | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.
+SVar:TrigDestroyBlocked:DB$ Destroy | Defined$ TriggeredAttackerLKICopy | NoRegen$ True
+SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy | NoRegen$ True
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

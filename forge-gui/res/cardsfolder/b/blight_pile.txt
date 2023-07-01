@@ -1,0 +1,9 @@
+Name:Blight Pile
+ManaCost:1 B
+Types:Creature Phyrexian
+K:Defender
+PT:3/3
+A:AB$ LoseLife | Cost$ T 2 B | Defined$ Player.Opponent | LifeAmount$ X | SpellDescription$ Each opponent loses X life, where X is the number of creatures with defender you control.
+SVar:X:Count$Valid Creature.withDefender+YouCtrl
+DeckHints:Keyword$Defender
+Oracle:Defender\n{2}{B}, {T}: Each opponent loses X life, where X is the number of creatures with defender you control.

@@ -1,0 +1,5 @@
+Name:Expedition Envoy
+ManaCost:W
+Types:Creature Human Scout Ally
+PT:2/1
+Oracle:

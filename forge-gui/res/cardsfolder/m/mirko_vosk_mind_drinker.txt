@@ -1,0 +1,8 @@
+Name:Mirko Vosk, Mind Drinker
+ManaCost:3 U B
+Types:Legendary Creature Vampire
+PT:2/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard.
+SVar:TrigDig:DB$ DigUntil | Defined$ TriggeredTarget | Amount$ 4 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
+Oracle:Flying\nWhenever Mirko Vosk, Mind Drinker deals combat damage to a player, that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard.

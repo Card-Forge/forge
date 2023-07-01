@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oreius 2
+Title=Oreius
+Difficulty=medium
+Description=GU Threshold deck
+Icon=Oreius.jpg
+Deck Type=constructed
+[main]
+8 Forest|ODY
+1 Hinterland Harbor
+1 Island|ODY
+4 Misty Rainforest
+4 Evolving Wilds|ROE
+4 Terramorphic Expanse|M11
+2 Mulch
+3 Tracker's Instincts
+2 Commune with the Gods
+1 Scout the Borders
+3 Nimble Mongoose|ODY
+1 Wreath of Geists
+3 Millikin|ODY
+2 Seton's Scout
+3 Werebear|ODY
+2 Anurid Barkripper
+2 Krosan Avenger
+1 Far Wanderings|TOR
+1 Beast Hunt
+1 Centaur Chieftain|TOR
+1 Krosan Beast
+1 Otarian Juggernaut
+3 Springing Tiger|ODY
+2 Grizzly Fate
+1 Animal Magnetism
+2 Metamorphic Wurm
+1 Stone-Tongue Basilisk
+[sideboard]

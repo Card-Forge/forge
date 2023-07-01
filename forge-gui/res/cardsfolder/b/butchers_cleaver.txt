@@ -1,0 +1,7 @@
+Name:Butcher's Cleaver
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+S:Mode$ Continuous | Affected$ Card.EquippedBy+Human | AddKeyword$ Lifelink | Description$ As long as equipped creature is a Human, it has lifelink.
+Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is a Human, it has lifelink.\nEquip {3}

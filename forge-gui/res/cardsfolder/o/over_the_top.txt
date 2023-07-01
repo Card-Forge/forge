@@ -1,0 +1,12 @@
+Name:Over the Top
+ManaCost:5 R R
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ Reveal | SubAbility$ Battlefield | SpellDescription$ Each player reveals a number of cards from the top of their library equal to the number of nonland permanents they control, puts all permanent cards they revealed this way onto the battlefield, and puts the rest into their graveyard.
+SVar:Reveal:DB$ PeekAndReveal | Defined$ RememberedPlayer | NoPeek$ True | PeekAmount$ X | RememberRevealed$ True
+SVar:Battlefield:DB$ ChangeZoneAll | ChangeType$ Permanent.IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ Graveyard
+SVar:Graveyard:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.nonLand+RememberedPlayerCtrl
+DeckHints:Ability$Graveyard
+AI:RemoveDeck:Random
+Oracle:Each player reveals a number of cards from the top of their library equal to the number of nonland permanents they control, puts all permanent cards they revealed this way onto the battlefield, and puts the rest into their graveyard.

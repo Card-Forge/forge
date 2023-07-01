@@ -1,0 +1,10 @@
+Name:Oil-Gorger Troll
+ManaCost:3 G G
+Types:Creature Phyrexian Troll Warrior
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life. 
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionPresent$ Permanent.YouCtrl+counters_GE1_OIL | SpellDescription$ Then if you control a permanent with an oil counter on it, draw a card.
+DeckHas:Ability$LifeGain
+DeckHints:Ability$Counters
+Oracle:When Oil-Gorger Troll enters the battlefield, you gain 3 life. Then if you control a permanent with an oil counter on it, draw a card.

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Shattered Isles
+Title=The Shattered Isles
+Difficulty=easy
+Description="That phantom prow split the storm as lightning cast its long shadow on the battlefield below." -Mireille Gaetane, The Valeriad
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Amnesia|DRK
+4 Drowned|DRK
+4 Ghost Ship|DRK
+16 Island|LEB|3
+4 Mana Vortex|DRK
+4 Merfolk Assassin|DRK
+4 Mind Bomb|DRK
+4 Psychic Allergy|DRK
+4 Sunken City|DRK
+8 Swamp|LEB|3
+4 Word of Binding|DRK

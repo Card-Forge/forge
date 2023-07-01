@@ -1,0 +1,9 @@
+Name:Nightmare Lash
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:PayLife<3>
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:BuffedBy:Swamp
+AI:RemoveDeck:Random
+Oracle:Equipped creature gets +1/+1 for each Swamp you control.\nEquip—Pay 3 life. (Pay 3 life: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

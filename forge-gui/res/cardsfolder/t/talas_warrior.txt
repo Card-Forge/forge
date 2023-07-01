@@ -1,0 +1,6 @@
+Name:Talas Warrior
+ManaCost:1 U U
+Types:Creature Human Pirate Warrior
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Talas Warrior can't be blocked.

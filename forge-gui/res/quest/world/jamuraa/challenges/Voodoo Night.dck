@@ -1,0 +1,39 @@
+[quest]
+id=3009
+OpponentName=Baron Samedi
+AILife=35
+Repeat=true
+Wins=20
+Card Reward=70% Bad Moon|2ED;2 black rares
+Credit Reward=300
+HumanExtras=Bad Moon
+AIExtras=TOKEN;B;1;1;Skeleton;Creature|TOKEN;B;1;1;Skeleton;Creature|TOKEN;B;1;1;Skeleton;Creature
+[metadata]
+Name=quest3009
+Title=Voodoo Night
+Difficulty=hard
+Description=It is a pitch-black night, and an eerie howl echoes in the distance. Something moves towards you...
+Icon=BaronSamedi.jpg
+Deck Type=constructed
+[main]
+4 Coercion|VIS
+4 Fallen Askari|VIS
+4 Fireblast|VIS
+1 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+1 Kaervek's Spite|VIS
+3 Kaervek's Torch|MIR
+10 Mountain|MIR
+1 Animate Dead|5ED
+2 Quicksand|VIS
+4 Rocky Tar Pit|MIR
+3 Shadow Guildmage|MIR
+1 Snake Basket|VIS
+1 Stupor|MIR
+8 Swamp|MIR
+4 Talruum Minotaur|MIR
+1 Undiscovered Paradise|VIS
+4 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

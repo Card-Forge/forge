@@ -1,0 +1,7 @@
+Name:Sky Spirit
+ManaCost:1 W U
+Types:Creature Spirit
+PT:2/2
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Harry Potter 1
+Title=Harry Potter
+Difficulty=easy
+Description=Mono U Mill and counter spell deck
+Icon=Harry Potter.jpg
+Deck Type=constructed
+[main]
+4 Vedalken Entrancer
+1 Remove Soul
+1 Traumatize
+3 Hedron Crab
+2 Essence Scatter
+1 Keening Stone
+22 Island|M12
+1 Brain Freeze
+1 Boomerang
+1 Jace Beleren
+2 Tome Scour
+1 Vision Skeins
+1 Cancel
+4 Howling Mine
+1 Millstone
+2 Unsummon
+2 Cathartic Adept
+1 Ray of Erasure
+1 Shriekhorn
+1 Merrow Witsniper
+1 Drowner Initiate
+1 Flint Golem
+1 Rotcrown Ghoul
+1 Shriekgeist
+1 Mind Sculpt
+1 Countermand
+1 Altar of the Brood
+[sideboard]

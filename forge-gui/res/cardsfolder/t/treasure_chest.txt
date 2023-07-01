@@ -1,0 +1,15 @@
+Name:Treasure Chest
+ManaCost:3
+Types:Artifact
+A:AB$ RollDice | Cost$ 4 Sac<1/CARDNAME> | Sides$ 20 | ResultSubAbilities$ 1:Trapped,2-9:DBToken,10-19:DBGainLife,20:DBChangeZone | SpellDescription$ Roll a d20.
+SVar:Trapped:DB$ LoseLife | Defined$ You | LifeAmount$ 3 | SpellDescription$ 1 VERT Trapped! — You lose 3 life.
+SVar:DBToken:DB$ Token | TokenAmount$ 5 | TokenScript$ c_a_treasure_sac | SpellDescription$ 2—9 VERT Create five Treasure tokens.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ 10—19 VERT You gain 3 life and draw three cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 3
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone1 | SpellDescription$ 20 VERT Search your library for a card. If it's an artifact card, you may put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.
+SVar:DBChangeZone1:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Artifact | Optional$ True | ForgetChanged$ True | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Sacrifice|LifeGain
+Oracle:{4}, Sacrifice Treasure Chest: Roll a d20.\n1 | Trapped! — You lose 3 life.\n2—9 | Create five Treasure tokens.\n10—19 | You gain 3 life and draw three cards.\n20 | Search your library for a card. If it's an artifact card, you may put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.

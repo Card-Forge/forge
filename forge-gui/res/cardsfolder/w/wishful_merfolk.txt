@@ -1,0 +1,8 @@
+Name:Wishful Merfolk
+ManaCost:1 U
+Types:Creature Merfolk
+PT:3/2
+K:Defender
+A:AB$ Debuff | Cost$ 1 U | Defined$ Self | Keywords$ Defender | SubAbility$ DBAnimate | SpellDescription$ CARDNAME loses defender and becomes a Human until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Human | RemoveCreatureTypes$ True
+Oracle:Defender\n{1}{U}: Wishful Merfolk loses defender and becomes a Human until end of turn.

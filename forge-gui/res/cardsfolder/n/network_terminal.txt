@@ -1,0 +1,9 @@
+Name:Network Terminal
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 1 T tapXType<1/Artifact.Other> | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHints:Type$Artifact
+DeckHas:Ability$Discard
+Oracle:{T}: Add one mana of any color.\n{1}, {T}, Tap another untapped artifact you control: Draw a card, then discard a card.

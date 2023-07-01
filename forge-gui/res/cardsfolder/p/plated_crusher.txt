@@ -1,0 +1,7 @@
+Name:Plated Crusher
+ManaCost:4 G G G
+Types:Creature Beast
+PT:7/6
+K:Trample
+K:Hexproof
+Oracle:Trample\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

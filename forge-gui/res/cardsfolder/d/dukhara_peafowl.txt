@@ -1,0 +1,7 @@
+Name:Dukhara Peafowl
+ManaCost:4
+Types:Artifact Creature Bird
+PT:2/4
+A:AB$ Pump | Cost$ U | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+AI:RemoveDeck:Random
+Oracle:{U}: Dukhara Peafowl gains flying until end of turn.

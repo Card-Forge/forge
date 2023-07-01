@@ -1,0 +1,8 @@
+Name:Flameblade Angel
+ManaCost:4 R R
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You,Permanent.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | OptionalDecider$ You | TriggerDescription$ Whenever a source an opponent controls deals damage to you or a permanent you control, you may have CARDNAME deal 1 damage to that source's controller.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ 1
+Oracle:Flying\nWhenever a source an opponent controls deals damage to you or a permanent you control, you may have Flameblade Angel deal 1 damage to that source's controller.

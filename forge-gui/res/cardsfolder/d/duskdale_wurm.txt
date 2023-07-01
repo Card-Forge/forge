@@ -1,0 +1,6 @@
+Name:Duskdale Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+PT:7/7
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

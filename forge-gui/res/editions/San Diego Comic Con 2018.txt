@@ -1,0 +1,13 @@
+[metadata]
+Code=PS18
+Date=2018-07-19
+Name=San Diego Comic-Con 2018
+Type=Promo
+ScryfallCode=PS18
+
+[cards]
+14 M Gideon of the Trials @Terese Nielsen
+60 M Jace, Cunning Castaway @Terese Nielsen
+106 M Liliana, Untouched by Death @Terese Nielsen
+110 M Chandra, Torch of Defiance @Terese Nielsen
+163 M Nissa, Vital Force @Terese Nielsen

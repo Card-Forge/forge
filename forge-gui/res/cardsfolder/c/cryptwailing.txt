@@ -1,0 +1,6 @@
+Name:Cryptwailing
+ManaCost:3 B
+Types:Enchantment
+A:AB$ Discard | Cost$ 1 ExileFromGrave<2/Creature> | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+SVar:NonStackingEffect:True
+Oracle:{1}, Exile two creature cards from your graveyard: Target player discards a card. Activate only as a sorcery.

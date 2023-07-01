@@ -1,0 +1,25 @@
+[metadata]
+Title=Midnight Clock
+Difficulty=hard
+Description="Hone the knife and mourn the least.\nThree chimes to sound the sweet, grim feast."\n-Barrow witch incantation
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Midnight Clock - Black Knights
+[Main]
+4 Bake into a Pie|ELD
+4 Drown in the Loch|ELD
+4 Epic Downfall|ELD
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+9 Island|ELD|2
+4 Midnight Clock|ELD|2
+4 Murderous Rider|ELD|1
+13 Swamp|ELD|3
+2 Syr Konrad, the Grim|ELD
+4 Taste of Death|ELD
+4 Witch's Vengeance|ELD|1
+[Sideboard]
+1 Enchanted Carriage|ELD
+1 Reave Soul|ELD
+1 Revenge of Ravens|ELD
+1 Turn into a Pumpkin|ELD

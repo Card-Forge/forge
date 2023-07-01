@@ -1,0 +1,9 @@
+Name:Abzan Bolster|Deck:Abzan Bolster.dck|Variant:None|Avatar:Abzan Skycaptain|Desc:
+Name:Abzan Outlast|Deck:Abzan Outlast.dck|Variant:None|Avatar:Abzan Battle Priest|Desc:
+Name:Anafenza, Kin-Tree Spirit|Deck:Anafenza, Kin-Tree Spirit.dck|Variant:Commander|Avatar:Anafenza, Kin-Tree Spirit|Desc:
+Name:Anafenza, the Foremost|Deck:Anafenza, the Foremost.dck|Variant:Commander|Avatar:Anafenza, the Foremost|Desc:
+Name:Daghatar the Adamant|Deck:Daghatar the Adamant.dck|Variant:Commander|Avatar:Daghatar the Adamant|Desc:
+Name:Dragonlord Dromoka|Deck:Dragonlord Dromoka.dck|Variant:Commander|Avatar:Dragonlord Dromoka|Desc:
+Name:Dromoka, the Eternal|Deck:Dromoka, the Eternal.dck|Variant:Commander|Avatar:Dromoka, the Eternal|Desc:
+Name:Figure of Destiny|Deck:Figure of Destiny.dck|Variant:Vanguard|Avatar:Figure of Destiny|Desc:
+Name:Sorin, Solemn Visitor|Deck:Sorin, Solemn Visitor.dck|Variant:Planeswalker|Avatar:Sorin, Solemn Visitor|Desc:

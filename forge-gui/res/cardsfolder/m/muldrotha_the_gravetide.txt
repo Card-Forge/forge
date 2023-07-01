@@ -1,0 +1,11 @@
+Name:Muldrotha, the Gravetide
+ManaCost:3 B G U
+Types:Legendary Creature Elemental Avatar
+PT:6/6
+S:Mode$ Continuous | Affected$ Land.YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Land | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. (If a card has multiple permanent types, choose one as you play it.)
+S:Mode$ Continuous | Affected$ Creature.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Creature | EffectZone$ Battlefield | AffectedZone$ Graveyard
+S:Mode$ Continuous | Affected$ Planeswalker.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Planeswalker | EffectZone$ Battlefield | AffectedZone$ Graveyard
+S:Mode$ Continuous | Affected$ Artifact.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Artifact | EffectZone$ Battlefield | AffectedZone$ Graveyard
+S:Mode$ Continuous | Affected$ Enchantment.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Enchantment | EffectZone$ Battlefield | AffectedZone$ Graveyard
+S:Mode$ Continuous | Affected$ Battle.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Battle | EffectZone$ Battlefield | AffectedZone$ Graveyard
+Oracle:During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. (If a card has multiple permanent types, choose one as you play it.)

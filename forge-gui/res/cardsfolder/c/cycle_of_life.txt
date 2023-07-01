@@ -1,0 +1,7 @@
+Name:Cycle of Life
+ManaCost:1 G G
+Types:Enchantment
+A:AB$ Animate | Cost$ Return<1/CARDNAME> | ValidTgts$ Creature.wasCastByYou+ThisTurnCast | TgtPrompt$ Select target creature you cast this turn | Power$ 0 | Toughness$ 1 | Duration$ UntilYourNextUpkeep | SubAbility$ DelTrig | SpellDescription$ Target creature you cast this turn has base power and toughness 0/1 until your next upkeep. At the beginning of your next upkeep, put a +1/+1 counter on that creature.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | RememberObjects$ Targeted | Execute$ TrigGrowth | TriggerDescription$ Put a +1/+1 counter on that creature.
+SVar:TrigGrowth:DB$ PutCounter | Defined$ DelayTriggerRememberedLKI | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Return Cycle of Life to its owner's hand: Target creature you cast this turn has base power and toughness 0/1 until your next upkeep. At the beginning of your next upkeep, put a +1/+1 counter on that creature.

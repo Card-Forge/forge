@@ -1,0 +1,6 @@
+Name:Capricious Sorcerer
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ CARDNAME deals 1 damage to any target. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Capricious Sorcerer deals 1 damage to any target. Activate only during your turn, before attackers are declared.

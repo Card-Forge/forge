@@ -1,0 +1,10 @@
+Name:Dreadhound
+ManaCost:4 B B
+Types:Creature Demon Dog
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature dies or a creature card is put into a graveyard from a library, each opponent loses 1 life.
+T:Mode$ ChangesZone | Origin$ Library | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever a creature dies or a creature card is put into a graveyard from a library, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:When Dreadhound enters the battlefield, mill three cards. (Put the top three cards of your library into your graveyard.)\nWhenever a creature dies or a creature card is put into a graveyard from a library, each opponent loses 1 life.

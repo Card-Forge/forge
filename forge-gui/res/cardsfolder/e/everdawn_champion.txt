@@ -1,0 +1,6 @@
+Name:Everdawn Champion
+ManaCost:1 W W
+Types:Creature Human Soldier
+PT:2/2
+K:Prevent all combat damage that would be dealt to CARDNAME.
+Oracle:Prevent all combat damage that would be dealt to Everdawn Champion.

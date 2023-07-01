@@ -1,0 +1,7 @@
+Name:Deepchannel Mentor
+ManaCost:5 U
+Types:Creature Merfolk Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Blue+YouCtrl | Description$ Blue creatures you control can't be blocked.
+SVar:PlayMain1:TRUE
+Oracle:Blue creatures you control can't be blocked.

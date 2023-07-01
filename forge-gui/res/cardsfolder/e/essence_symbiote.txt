@@ -1,0 +1,9 @@
+Name:Essence Symbiote
+ManaCost:1 G
+Types:Creature Beast
+PT:2/2
+T:Mode$ Mutates | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control mutates, put a +1/+1 counter on that creature and you gain 2 life.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$Counters
+Oracle:Whenever a creature you control mutates, put a +1/+1 counter on that creature and you gain 2 life.

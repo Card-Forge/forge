@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Buffy 2
+Title=Buffy
+Difficulty=medium
+Description=Mono B Zombie deck
+Icon=Buffy.jpg
+Deck Type=constructed
+[main]
+1 Skulking Knight|TSP
+1 Withered Wretch|TSB
+1 Grixis Slavedriver|CFX
+1 Undead Warchief|TSB
+1 Cemetery Reaper|M10
+1 Smokespew Invoker|LGN
+25 Swamp|MBS
+1 Zombie Master|6ED
+1 Null Champion|ROE
+1 Wretched Anurid|ONS
+1 Tendrils of Corruption|M10
+1 Grasp of Darkness|SOM
+1 Unholy Grotto|ONS
+1 Spined Basher|ONS
+1 Noxious Ghoul|LGN
+1 Stromgald Crusader|CSP
+1 Dreg Reaver|ALA
+1 Dross Crocodile|10E
+1 Nefashu|SCG
+1 Shambling Goblin
+1 Anurid Murkdiver|ONS
+1 Nested Ghoul|MBS
+1 Infectious Horror|CFX
+1 Mass of Ghouls|10E
+1 Aphetto Vulture|ONS
+1 Grave Pact|10E
+1 Cadaverous Knight|MIR
+2 Cruel Revival|ONS
+1 Feeding Frenzy|ONS
+1 Spineless Thug|10E
+1 Call to the Grave|SCG
+1 Lim-Dul the Necromancer|TSP
+1 Lord of the Undead|PLS
+1 Vengeful Dead|SCG
+1 Grave Defiler|APC
+1 Soulless One|ONS
+1 Boneknitter
+1 Endless Ranks of the Dead
+1 Cellar Door
+1 Gravecrawler
+1 Mikaeus, the Unhallowed
+1 Risen Executioner
+[sideboard]

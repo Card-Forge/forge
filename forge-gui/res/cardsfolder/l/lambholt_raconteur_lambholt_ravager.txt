@@ -1,0 +1,23 @@
+Name:Lambholt Raconteur
+ManaCost:3 R
+Types:Creature Human Werewolf
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent
+K:Daybound
+SVar:BuffedBy:Card.nonCreature+nonLand
+AlternateMode:DoubleFaced
+Oracle:Whenever you cast a noncreature spell, Lambholt Raconteur deals 1 damage to each opponent.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Lambholt Ravager
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Player.Opponent
+K:Nightbound
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Whenever you cast a noncreature spell, Lambholt Ravager deals 2 damage to each opponent.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

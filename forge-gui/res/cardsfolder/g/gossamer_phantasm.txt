@@ -1,0 +1,9 @@
+Name:Gossamer Phantasm
+ManaCost:1 U
+Types:Creature Illusion
+PT:2/1
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+SVar:Targeting:Dies
+Oracle:Flying\nWhen Gossamer Phantasm becomes the target of a spell or ability, sacrifice it.

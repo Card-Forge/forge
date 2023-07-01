@@ -1,0 +1,6 @@
+Name:Scion of Glaciers
+ManaCost:2 U U
+Types:Creature Elemental
+PT:2/5
+A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:{U}: Scion of Glaciers gets +1/-1 until end of turn.

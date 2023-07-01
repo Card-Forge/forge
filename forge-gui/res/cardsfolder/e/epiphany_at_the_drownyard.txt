@@ -1,0 +1,12 @@
+Name:Epiphany at the Drownyard
+ManaCost:X U
+Types:Instant
+A:SP$ PeekAndReveal | PeekAmount$ Y | RememberRevealed$ True | NoPeek$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
+SVar:DBTwoPiles:DB$ TwoPiles | Chooser$ Opponent | DefinedCards$ Remembered | Separator$ You | ChosenPile$ DBHand | UnchosenPile$ DBGrave | AILogic$ Worst
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
+SVar:Y:Count$xPaid/Plus.1
+SVar:X:Count$xPaid
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
+Oracle:Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.

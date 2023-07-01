@@ -1,0 +1,9 @@
+Name:Marsh Viper
+ManaCost:3 G
+Types:Creature Snake
+PT:1/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player gets two poison counters. (A player with ten or more poison counters loses the game.)
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredTarget | Num$ 2
+DeckHas:Ability$Counters
+DeckHints:Keyword$Infect
+Oracle:Whenever Marsh Viper deals damage to a player, that player gets two poison counters. (A player with ten or more poison counters loses the game.)

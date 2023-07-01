@@ -1,0 +1,6 @@
+Name:Promise of Bunrei
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a creature you control dies, sacrifice CARDNAME. If you do, create four 1/1 colorless Spirit creature tokens.
+SVar:TrigSac:AB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_spirit | TokenOwner$ You | Cost$ Mandatory Sac<1/CARDNAME>
+Oracle:When a creature you control dies, sacrifice Promise of Bunrei. If you do, create four 1/1 colorless Spirit creature tokens.

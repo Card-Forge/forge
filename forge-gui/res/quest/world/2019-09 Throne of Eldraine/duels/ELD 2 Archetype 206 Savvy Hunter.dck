@@ -1,0 +1,22 @@
+[metadata]
+Title=Archetype: Savvy Hunter
+Difficulty=medium
+Description=None of the other villagers dare venture into the wilds, so she feeds the whole hamlet herself.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Archetype 206 Savvy Hunter
+[Main]
+4 Bake into a Pie|ELD
+4 Bog Naughty|ELD
+4 Cauldron Familiar|ELD
+4 Deathless Knight|ELD
+2 Fell the Pheasant|ELD
+4 Fierce Witchstalker|ELD
+10 Forest|ELD|4
+4 Giant Opportunity|ELD
+4 Gingerbread Cabin|ELD
+4 Savvy Hunter|ELD
+12 Swamp|ELD|3
+4 Trail of Crumbs|ELD
+[Sideboard]
+4 Witch's Oven|ELD

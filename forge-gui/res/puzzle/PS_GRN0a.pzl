@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #00a (Pre-Season Puzzle #2)
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/09/082.-GRN002.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Impervious Greatwurm;Rhizome Lurcher;Ochran Assassin;Lava Coil
+humangraveyard=Devkarin Dissident;Underrealm Lich;Golgari Findbroker;Erstwhile Trooper;Bone Dragon
+humanbattlefield=Whisper Agent;Whisper, Blood Liturgist;Torch Courier;Dragonskull Summit;Dragonskull Summit;Dragonskull Summit;Woodland Cemetery;Woodland Cemetery;Woodland Cemetery;Woodland Cemetery
+aibattlefield=Flight of Equenauts;Sunhome Stalwart;Wall of Mist;Hitchclaw Recluse

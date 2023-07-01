@@ -1,0 +1,11 @@
+Name:Willowdusk, Essence Seer
+ManaCost:1 B G
+Types:Legendary Creature Dryad Druid
+PT:3/3
+A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Creature.Other | TgtPrompt$ Choose another target creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | SpellDescription$ Choose another target creature. Put a number of +1/+1 counters on it equal to the amount of life you gained this turn or the amount of life you lost this turn, whichever is greater. Activate only as a sorcery.
+SVar:X:SVar$Y/LimitMin.Z
+SVar:Y:Count$LifeYouGainedThisTurn
+SVar:Z:Count$LifeYouLostThisTurn
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:{1}, {T}: Choose another target creature. Put a number of +1/+1 counters on it equal to the amount of life you gained this turn or the amount of life you lost this turn, whichever is greater. Activate only as a sorcery.

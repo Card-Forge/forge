@@ -1,0 +1,9 @@
+Name:A-Metropolis Angel
+ManaCost:3 W U
+Types:Creature Angel Soldier
+PT:3/3
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+HasCounters | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you attack with one or more creatures with counters on them, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Ability$Counters
+Oracle:Flying\nWhenever you attack with one or more creatures with counters on them, draw a card.

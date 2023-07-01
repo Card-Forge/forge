@@ -1,0 +1,8 @@
+Name:Discordant Dirge
+ManaCost:3 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | Mode$ LookYouChoose | Optional$ True | NumCards$ X | SpellDescription$ Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on CARDNAME. That player discards those cards.
+SVar:X:Count$CardCounters.VERSE
+Oracle:At the beginning of your upkeep, you may put a verse counter on Discordant Dirge.\n{B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.

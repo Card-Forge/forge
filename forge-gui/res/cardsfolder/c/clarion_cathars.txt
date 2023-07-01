@@ -1,0 +1,8 @@
+Name:Clarion Cathars
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Clarion Cathars enters the battlefield, create a 1/1 white Human creature token.

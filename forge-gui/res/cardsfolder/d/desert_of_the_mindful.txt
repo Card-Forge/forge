@@ -1,0 +1,7 @@
+Name:Desert of the Mindful
+ManaCost:no cost
+Types:Land Desert
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+K:Cycling:1 U
+Oracle:Desert of the Mindful enters the battlefield tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)

@@ -1,0 +1,7 @@
+Name:Seedguide Ash
+ManaCost:4 G
+Types:Creature Treefolk Druid
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for up to three Forest cards, put them onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | Tapped$ True | ChangeNum$ 3 | ShuffleNonMandatory$ True
+Oracle:When Seedguide Ash dies, you may search your library for up to three Forest cards, put them onto the battlefield tapped, then shuffle.

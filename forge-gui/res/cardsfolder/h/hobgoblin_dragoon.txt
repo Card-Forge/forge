@@ -1,0 +1,7 @@
+Name:Hobgoblin Dragoon
+ManaCost:2 RW
+Types:Creature Goblin Knight
+PT:1/2
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

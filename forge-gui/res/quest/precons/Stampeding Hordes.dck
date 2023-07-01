@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Stampeding Hordes
+Description=Let the plains resound with the thunder of hooves! Use the dash mechanic to swell your attacking troops and launch an overwhelming assault. Crush your opponent's forces by powering up your creatures. Leave behind nothing but the dust and the defeated.
+Deck Type=constructed
+Set=FRF
+Image=stampeding_hordes.jpg
+[main]
+1 Act of Treason|KTK
+1 Bathe in Dragonfire|FRF
+1 Collateral Damage|FRF
+1 Deflecting Palm|KTK
+1 Dragonrage|FRF
+2 Firehoof Cavalry|KTK
+1 Flamerush Rider+|FRF
+1 Geist of the Moors|M15
+2 Goblin Heelcutter|FRF
+2 Goblin Roughrider|M15
+2 Heat Ray|M15
+2 Highspire Mantis|KTK
+2 Leaping Master|KTK
+2 Mardu Scout|FRF
+7 Mountain|FRF|1
+6 Mountain|FRF|2
+5 Plains|FRF|1
+4 Plains|FRF|2
+1 Pyrotechnics|FRF
+1 Razorfoot Griffin|M15
+1 Ride Down|KTK
+2 Sandsteppe Outcast|FRF
+1 Thundering Giant|M15
+2 Valley Dasher|KTK
+2 Vaultbreaker|FRF
+2 Wandering Champion|FRF
+2 War Flare|FRF
+3 Wind-Scarred Crag|FRF

@@ -1,0 +1,8 @@
+Name:Serum Raker
+ManaCost:2 U U
+Types:Creature Phyrexian Drake
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, each player discards a card.
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Defined$ Player | Mode$ TgtChoose
+Oracle:Flying\nWhen Serum Raker dies, each player discards a card.

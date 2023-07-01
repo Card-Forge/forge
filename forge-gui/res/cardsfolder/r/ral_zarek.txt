@@ -1,0 +1,10 @@
+Name:Ral Zarek
+ManaCost:2 U R
+Types:Legendary Planeswalker Ral
+Loyalty:4
+A:AB$ Tap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | Planeswalker$ True | SubAbility$ DBUntap | SpellDescription$ Tap target permanent, then untap another target permanent.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TargetUnique$ True | TgtPrompt$ Select target permanent to untap
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:AB$ FlipACoin | Cost$ SubCounter<7/LOYALTY> | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBAddTurn | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | SpellDescription$ Flip 5 coins. Take an extra turn after this one for each coin that comes up heads.
+SVar:DBAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ X
+Oracle:[+1]: Tap target permanent, then untap another target permanent.\n[-2]: Ral Zarek deals 3 damage to any target.\n[-7]: Flip five coins. Take an extra turn after this one for each coin that comes up heads.

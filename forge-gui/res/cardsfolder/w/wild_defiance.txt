@@ -1,0 +1,6 @@
+Name:Wild Defiance
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | ValidSource$ Instant,Sorcery | TriggerZones$ Battlefield | Execute$ WildPump | TriggerDescription$ Whenever a creature you control becomes the target of an instant or sorcery spell, it gets +3/+3 until end of turn.
+SVar:WildPump:DB$ Pump | Defined$ TriggeredTarget | NumAtt$ +3 | NumDef$ +3
+Oracle:Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.

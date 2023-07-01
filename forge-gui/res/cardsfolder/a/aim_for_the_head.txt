@@ -1,0 +1,7 @@
+Name:Aim for the Head
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBChangeZone1,DBChangeZone2 | Defined$ You
+SVar:DBChangeZone1:DB$ ChangeZone | ValidTgts$ Creature.Zombie | TgtPrompt$ Choose target Zombie | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target Zombie.
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 2 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target opponent exiles two cards from their hand.
+Oracle:Choose one —\n• Exile target Zombie.\n• Target opponent exiles two cards from their hand.

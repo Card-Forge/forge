@@ -1,0 +1,12 @@
+Name:Duskmantle Seer
+ManaCost:2 U B
+Types:Creature Vampire Wizard
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's mana value, then puts it into their hand.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ EachDig
+SVar:EachDig:DB$ Dig | Defined$ Remembered | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | Imprint$ True | SubAbility$ EachLose
+SVar:EachLose:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+Oracle:Flying\nAt the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's mana value, then puts it into their hand.

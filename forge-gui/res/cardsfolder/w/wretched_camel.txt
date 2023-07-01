@@ -1,0 +1,8 @@
+Name:Wretched Camel
+ManaCost:1 B
+Types:Creature Zombie Camel
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | Desert$ True | TriggerDescription$ When CARDNAME dies, if you control a Desert or there is a Desert card in your graveyard, target player discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose
+DeckHints:Type$Desert
+Oracle:When Wretched Camel dies, if you control a Desert or there is a Desert card in your graveyard, target player discards a card.

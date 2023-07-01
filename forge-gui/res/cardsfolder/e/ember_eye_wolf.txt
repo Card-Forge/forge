@@ -1,0 +1,7 @@
+Name:Ember-Eye Wolf
+ManaCost:1 R
+Types:Creature Wolf
+PT:1/2
+K:Haste
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:Haste\n{1}{R}: Ember-Eye Wolf gets +2/+0 until end of turn.

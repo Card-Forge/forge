@@ -1,0 +1,9 @@
+Name:The Antiquities War
+ManaCost:3 U
+Types:Enchantment Saga
+K:Saga:3:TrigDig,TrigDig,TrigAnimateAll
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Artifact | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigAnimateAll:DB$ AnimateAll | Power$ 5 | Toughness$ 5 | Types$ Creature,Artifact | ValidCards$ Artifact.YouCtrl | SpellDescription$ Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.
+SVar:NeedsToPlay:Artifact.YouCtrl
+DeckHints:Type$Artifact
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nIII — Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.

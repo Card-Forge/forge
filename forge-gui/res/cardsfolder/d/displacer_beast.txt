@@ -1,0 +1,8 @@
+Name:Displacer Beast
+ManaCost:2 U
+Types:Creature Cat Beast
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:DBVenture:DB$ Venture | Defined$ You
+A:AB$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Displacement — Return CARDNAME to its owner's hand.
+Oracle:When Displacer Beast enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)\nDisplacement — {3}{U}: Return Displacer Beast to its owner's hand.

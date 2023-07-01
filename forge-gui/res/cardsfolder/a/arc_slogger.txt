@@ -1,0 +1,6 @@
+Name:Arc-Slogger
+ManaCost:3 R R
+Types:Creature Beast
+PT:4/5
+A:AB$ DealDamage | Cost$ R ExileFromTop<10/Card> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:{R}, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to any target.

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Eldrazi Assault
+Description=Hailing from the space between planes, the Eldrazi are relentless destroyers, and the smaller Eldrazi no longer wait for their superiors to arrive. Overwhelm your opponent with wave after wave of colorless creatures, and take the fight to the inhabitants of Zendikar.
+Deck Type=constructed
+Set=BFZ
+Image=eldrazi_assault.jpg
+[Main]
+2 Sludge Crawler|BFZ
+2 Kozilek's Sentinel|BFZ
+3 Culling Drone|BFZ
+2 Forerunner of Slaughter|BFZ
+2 Nettle Drone|BFZ
+2 Vile Aggregate|BFZ
+2 Dominator Drone|BFZ
+3 Vestige of Emrakul|BFZ
+2 Mind Raker|BFZ
+1 Silent Skimmer|BFZ
+1 Barrage Tyrant+|BFZ
+2 Processor Assault|BFZ
+2 Transgress the Mind|BFZ
+2 Touch of the Void|BFZ
+2 Swarm Surge|BFZ
+1 Serpentine Spike|BFZ
+1 Complete Disregard|BFZ
+1 Grip of Desolation|BFZ
+2 Molten Nursery|BFZ
+1 Blighted Fen|BFZ
+2 Evolving Wilds|BFZ
+2 Looming Spires|BFZ
+10 Mountain|BFZ
+10 Swamp|BFZ

@@ -1,0 +1,6 @@
+Name:Azure Mage
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+A:AB$ Draw | Cost$ 3 U | Defined$ You | SpellDescription$ Draw a card.
+Oracle:{3}{U}: Draw a card.

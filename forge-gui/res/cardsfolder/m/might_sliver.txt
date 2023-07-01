@@ -1,0 +1,7 @@
+Name:Might Sliver
+ManaCost:4 G
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 2 | AddToughness$ 2 | Description$ All Sliver creatures get +2/+2.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +2/+2.

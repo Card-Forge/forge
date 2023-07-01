@@ -1,0 +1,8 @@
+Name:Pharika's Disciple
+ManaCost:3 G
+Types:Creature Centaur Warrior
+PT:2/3
+K:Deathtouch
+K:Renown:1
+DeckHas:Ability$Counters
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

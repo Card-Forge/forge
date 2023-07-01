@@ -1,0 +1,8 @@
+[format]
+Name:Type 2 (1996-10-01)
+Type:Archived
+Subtype:Standard
+Effective:1996-10-01
+Sets:FEM, 4ED, ICE, CHR, HML, ALL
+Restricted:Balance; Black Vise; Hymn to Tourach; Ivory Tower; Land Tax; Strip Mine; Zuran Orb
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Jeweled Bird; Mind Twist; Rebirth; Tempest Efreet; Timmerian Fiends

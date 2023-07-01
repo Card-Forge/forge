@@ -1,0 +1,9 @@
+Name:Blaze Commando
+ManaCost:3 R W
+Types:Creature Minotaur Soldier
+PT:5/3
+T:Mode$ DamageDoneOnce | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an instant or sorcery spell you control deals damage, create two 1/1 red and white Soldier creature tokens with haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rw_1_1_soldier_haste | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever an instant or sorcery spell you control deals damage, create two 1/1 red and white Soldier creature tokens with haste.

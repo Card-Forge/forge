@@ -1,0 +1,6 @@
+Name:Priest of Iroas
+ManaCost:R
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Destroy | Cost$ 3 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+Oracle:{3}{W}, Sacrifice Priest of Iroas: Destroy target enchantment.

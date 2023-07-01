@@ -1,0 +1,8 @@
+Name:Elvish Reclaimer
+ManaCost:G
+Types:Creature Elf Warrior
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Land.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Description$ CARDNAME gets +2/+2 as long as there are three or more land cards in your graveyard.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/Land> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a land card, put it onto the battlefield tapped, then shuffle.
+AI:RemoveDeck:Random
+Oracle:Elvish Reclaimer gets +2/+2 as long as there are three or more land cards in your graveyard.\n{2}, {T}, Sacrifice a land: Search your library for a land card, put it onto the battlefield tapped, then shuffle.

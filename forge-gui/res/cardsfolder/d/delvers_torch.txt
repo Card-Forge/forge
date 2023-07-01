@@ -1,0 +1,8 @@
+Name:Delver's Torch
+ManaCost:1 W
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ DBVenture | TriggerDescription$ Whenever equipped creature attacks, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:DBVenture:DB$ Venture | Defined$ You
+Oracle:Equipped creature gets +1/+1.\nWhenever equipped creature attacks, venture into the dungeon. (Enter the first room or advance to the next room.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

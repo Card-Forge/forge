@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme: Earth, Wind and Fire
+Title=Earth, Wind and Fire
+Difficulty=easy
+Description=You're a shining star\nNo matter who you are\nShining bright to see\n
+What you could truly be\n-Shining Star, Earth, Wind & Fire
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|PO2
+4 Blaze|PO2
+4 Brimstone Dragon|PO2
+4 Earthquake|PO2
+10 Island|PO2|1
+14 Mountain|PO2|1
+4 Spitting Earth|PO2
+4 Talas Air Ship|PO2
+4 Talas Explorer|PO2
+4 Talas Scout|PO2
+4 Tremor|PO2

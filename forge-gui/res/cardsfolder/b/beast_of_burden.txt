@@ -1,0 +1,9 @@
+Name:Beast of Burden
+ManaCost:6
+Types:Artifact Creature Golem
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures on the battlefield.
+SVar:X:Count$Valid Creature
+SVar:BuffedBy:Creature
+SVar:NoZeroToughnessAI:True
+Oracle:Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.

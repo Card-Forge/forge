@@ -1,0 +1,7 @@
+Name:Skill Borrower
+ManaCost:2 U
+Types:Artifact Creature Human Wizard
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.TopLibrary+YouCtrl,Artifact.TopLibrary+YouCtrl | TopCardOfLibraryIs$ Creature,Artifact | GainsAbilitiesOfZones$ Library | Description$ As long as the top card of your library is an artifact or creature card, CARDNAME has all activated abilities of that card. (If any of the abilities use that card's name, use this creature's name instead.)
+Oracle:Play with the top card of your library revealed.\nAs long as the top card of your library is an artifact or creature card, Skill Borrower has all activated abilities of that card. (If any of the abilities use that card's name, use this creature's name instead.)

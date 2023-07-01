@@ -1,0 +1,7 @@
+Name:Jalira, Master Polymorphist
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:2/2
+A:AB$ DigUntil | Cost$ 2 U T Sac<1/Creature.Other/another creature> | Valid$ Creature.nonLegendary | ValidDescription$ nonlegendary creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Reveal cards from the top of your library until you reveal a nonlegendary creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+AI:RemoveDeck:All
+Oracle:{2}{U}, {T}, Sacrifice another creature: Reveal cards from the top of your library until you reveal a nonlegendary creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.

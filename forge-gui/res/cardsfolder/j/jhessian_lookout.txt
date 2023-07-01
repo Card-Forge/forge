@@ -1,0 +1,5 @@
+Name:Jhessian Lookout
+ManaCost:1 U
+Types:Creature Human Scout
+PT:2/1
+Oracle:

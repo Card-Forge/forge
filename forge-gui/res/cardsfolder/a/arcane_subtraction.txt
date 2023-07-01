@@ -1,0 +1,6 @@
+Name:Arcane Subtraction
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBLearn | SpellDescription$ Target creature gets -4/-0 until end of turn.
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+Oracle:Target creature gets -4/-0 until end of turn.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

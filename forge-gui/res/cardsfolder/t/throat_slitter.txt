@@ -1,0 +1,9 @@
+Name:Throat Slitter
+ManaCost:4 B
+Types:Creature Rat Ninja
+PT:2/2
+K:Ninjutsu:2 B
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target nonblack creature that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+ControlledBy TriggeredTarget | TgtPrompt$ Select target nonblack creature damaged player controls
+SVar:MustBeBlocked:True
+Oracle:Ninjutsu {2}{B} ({2}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Throat Slitter deals combat damage to a player, destroy target nonblack creature that player controls.

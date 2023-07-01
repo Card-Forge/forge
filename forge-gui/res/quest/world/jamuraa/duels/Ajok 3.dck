@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ajok 3
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=hard
+Description=Lauer's CounterPost deck.
+Deck Type=constructed
+[main]
+1 Circle of Protection: Red|5ED
+4 Counterspell|5ED
+1 Disenchant|5ED
+4 Dissipate|MIR
+8 Island|MIR
+4 Inspiration|VIS
+4 Kjeldoran Outpost|ALL
+4 Mana Drain|LEG
+1 Millstone|ATQ
+4 Mishra's Factory|ATQ
+4 Nevinyrral's Disk|LEB
+6 Plains|MIR
+3 Swords to Plowshares|LEB
+4 Thawing Glaciers|ALL
+4 Tundra|LEB
+4 Wrath of God|5ED
+[sideboard]
+[planes]
+[schemes]

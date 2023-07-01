@@ -1,0 +1,8 @@
+Name:Isleback Spawn
+ManaCost:5 U U
+Types:Creature Kraken
+PT:4/8
+K:Shroud
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 8 | CheckSVar$ X | SVarCompare$ LE20 | Description$ CARDNAME gets +4/+8 as long as a library has twenty or fewer cards in it.
+SVar:X:PlayerCountPlayers$LowestValidLibrary Card.YouOwn
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nIsleback Spawn gets +4/+8 as long as a library has twenty or fewer cards in it.

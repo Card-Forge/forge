@@ -1,0 +1,6 @@
+Name:Xun Yu, Wei Advisor
+ManaCost:1 B B
+Types:Legendary Creature Human Advisor
+PT:1/1
+A:AB$ Pump | Cost$ T | NumAtt$ +2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Target creature you control gets +2/+0 until end of turn. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Target creature you control gets +2/+0 until end of turn. Activate only during your turn, before attackers are declared.

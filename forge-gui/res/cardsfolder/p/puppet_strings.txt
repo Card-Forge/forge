@@ -1,0 +1,6 @@
+Name:Puppet Strings
+ManaCost:3
+Types:Artifact
+A:AB$ TapOrUntap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+AI:RemoveDeck:All
+Oracle:{2}, {T}: You may tap or untap target creature.

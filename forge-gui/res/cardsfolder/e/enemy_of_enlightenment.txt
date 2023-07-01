@@ -1,0 +1,11 @@
+Name:Enemy of Enlightenment
+ManaCost:5 B
+Types:Enchantment Creature Demon
+PT:5/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your opponents' hands.
+SVar:X:PlayerCountOpponents$CardsInHand
+SVar:NeedsToPlayVar:X LE3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Flying\nEnemy of Enlightenment gets -1/-1 for each card in your opponents' hands.\nAt the beginning of your upkeep, each player discards a card.

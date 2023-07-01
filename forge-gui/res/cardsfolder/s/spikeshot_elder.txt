@@ -1,0 +1,7 @@
+Name:Spikeshot Elder
+ManaCost:R
+Types:Creature Goblin Shaman
+PT:1/1
+A:AB$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
+SVar:X:Count$CardPower
+Oracle:{1}{R}{R}: Spikeshot Elder deals damage equal to its power to any target.

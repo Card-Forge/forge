@@ -1,0 +1,7 @@
+Name:Yomiji, Who Bars the Way
+ManaCost:5 W W
+Types:Legendary Creature Spirit
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.Legendary+Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a legendary permanent other than CARDNAME is put into a graveyard from the battlefield, return that card to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+Oracle:Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.

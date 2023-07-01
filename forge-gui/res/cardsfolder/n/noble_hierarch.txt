@@ -1,0 +1,7 @@
+Name:Noble Hierarch
+ManaCost:G
+Types:Creature Human Druid
+PT:0/1
+K:Exalted
+A:AB$ Mana | Cost$ T | Produced$ Combo W U G | SpellDescription$ Add {W}, {U}, {G}.
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {G}, {W}, or {U}.

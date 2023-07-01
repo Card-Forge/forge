@@ -1,0 +1,16 @@
+Name:Timesifter
+ManaCost:5
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each upkeep, each player exiles the top card of their library. The player who exiled the card with the highest mana value takes an extra turn after this one. If two or more players' cards are tied for highest, the tied players repeat this process until the tie is broken.
+SVar:TrigExile:DB$ Dig | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ FindHighestCMCFirst
+SVar:FindHighestCMCFirst:DB$ Pump | ImprintCards$ ValidAll Card.greatestRememberedCMC | SubAbility$ FindOne
+SVar:FindOne:DB$ Repeat | RepeatCheckSVar$ X | RepeatSVarCompare$ GE2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | RepeatSubAbility$ DBClear | SubAbility$ DBAddTurn
+SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ ImprintedController | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ ClearImprint
+SVar:ClearImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ FindHighestCMC
+SVar:FindHighestCMC:DB$ Pump | ImprintCards$ ValidAll Card.greatestRememberedCMC
+SVar:X:Count$ValidExile Card.IsImprinted
+SVar:DBAddTurn:DB$ AddTurn | Defined$ ImprintedController | NumTurns$ 1 | ShowMessage$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AI:RemoveDeck:Random
+Oracle:At the beginning of each upkeep, each player exiles the top card of their library. The player who exiled the card with the highest mana value takes an extra turn after this one. If two or more players' cards are tied for highest, the tied players repeat this process until the tie is broken.

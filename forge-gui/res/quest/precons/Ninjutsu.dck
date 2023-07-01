@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ninjutsu
+Description=Assassins, Spies, Saboteurs. By any name they are ninja, mysterious masters of concealment and infiltration. The deadly ninjutsu mechanic lets you slip them past enemy lines, and once they're through, the real havoc begins.
+Deck Type=constructed
+Set=BOK
+Image=ninjutsu.jpg
+[Main]
+1 Field of Reality|CHK
+2 Genju of the Falls|BOK
+1 Higure, the Still Wind|BOK
+1 Hinder|CHK
+6 Island|CHK|1
+6 Island|CHK|2
+6 Island|CHK|3
+6 Island|CHK|4
+2 Kaijin of the Vanishing Touch|BOK
+1 Lifted by Clouds|CHK
+2 Minamo Sightbender|BOK
+1 Minamo's Meddling|BOK
+3 Mistblade Shinobi|BOK
+3 Mystic Restraints|CHK
+3 Ninja of the Deep Hours|BOK
+2 Phantom Wings|BOK
+3 River Kaijin|CHK
+2 Ronin Warclub|BOK
+1 Shuriken|BOK
+2 Soratami Cloudskater|CHK
+1 Soratami Mirror-Guard|CHK
+2 Student of Elements|CHK
+1 Teardrop Kami|BOK
+1 Tomorrow, Azami's Familiar|BOK
+1 Walker of Secret Ways|BOK
+[sideboard]

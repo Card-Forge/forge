@@ -1,0 +1,7 @@
+Name:Imi Statue
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Artifact:1 | Description$ Players can't untap more than one artifact during their untap steps.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Players can't untap more than one artifact during their untap steps.

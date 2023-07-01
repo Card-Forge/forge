@@ -1,0 +1,21 @@
+[quest]
+id=ICE Challenge: Death Spark
+OpponentName=The Herd
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Vibrating Sphere
+[metadata]
+Name=ICE Challenge: Death Spark
+Title=The Herd
+Difficulty=easy
+Description="Folklore has it that to capture a Mountain Goat is a sign of divine blessing. I just know it's a sign that dinner is on the way." -Klazina Jansdotter, Leader of the Order of the Sacred Torch
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+30 Death Spark|ALL
+15 Mountain|ICE|3
+15 Mountain Goat|ICE

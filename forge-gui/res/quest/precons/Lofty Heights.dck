@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Lofty Heights
+Description=This deck's dazzling array of flying creatures soars over unsuspecting opponents' heads and leaves them feeling blue. And the sheer number of extra cards you'll be drawing means you'll never fall behind.
+Deck Type=constructed
+Set=9ED
+Image=lofty_heights.jpg
+[main]
+1 Archivist|9ED
+1 Aven Fisher|9ED
+1 Aven Windreader|9ED
+1 Azure Drake|9ED
+2 Boomerang|9ED
+1 Confiscate|9ED
+3 Horned Turtle|9ED
+17 Island|9ED
+1 Kraken's Eye|9ED
+1 Mahamoti Djinn|9ED
+1 Mana Leak|9ED
+1 Puppeteer|9ED
+1 Remove Soul|9ED
+1 Rod of Ruin|9ED
+1 Sleight of Hand|9ED
+1 Storm Crow|9ED
+1 Telepathy|9ED
+1 Thieving Magpie|9ED
+3 Wind Drake|9ED
+[sideboard]

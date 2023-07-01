@@ -1,0 +1,11 @@
+Name:Lulu, Loyal Hollyphant
+ManaCost:3 W
+Types:Legendary Creature Elephant Angel
+PT:3/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | Execute$ TrigPutCounters | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on each tapped creature you control, then untap them.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.tapped+YouCtrl | CounterType$ P1P1 | SubAbility$ DBUntapAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.tapped+YouCtrl
+K:Choose a Background
+DeckHas:Ability$Counters
+Oracle:Flying\nAt the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on each tapped creature you control, then untap them.\nChoose a Background (You can have a Background as a second commander.)

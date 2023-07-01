@@ -1,0 +1,14 @@
+[metadata]
+Code=CP2
+Date=2015-01-23
+Name=Fate Reforged Clash Pack
+Type=Starter
+ScryfallCode=CP2
+
+[cards]
+1 R Necropolis Fiend @Svetlin Velinov
+2 R Hero's Downfall @Johannes Voss
+3 R Sultai Ascendancy @Karl Kopinski
+4 R Reaper of the Wilds @Jeff Simpson
+5 R Whip of Erebos @Marco Nelor
+6 R Courser of Kruphix @Slawomir Maniak

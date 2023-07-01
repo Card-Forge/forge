@@ -1,0 +1,6 @@
+Name:Infantry Veteran
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature. | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +1/+1 until end of turn.
+Oracle:{T}: Target attacking creature gets +1/+1 until end of turn.

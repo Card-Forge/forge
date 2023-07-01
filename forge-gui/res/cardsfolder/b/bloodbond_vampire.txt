@@ -1,0 +1,8 @@
+Name:Bloodbond Vampire
+ManaCost:2 B B
+Types:Creature Vampire Shaman Ally
+PT:3/3
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, put a +1/+1 counter on Bloodbond Vampire.

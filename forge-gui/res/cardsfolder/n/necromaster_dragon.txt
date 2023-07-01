@@ -1,0 +1,10 @@
+Name:Necromaster Dragon
+ManaCost:3 U B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}. If you do, create a 2/2 black Zombie creature token and each opponent mills two cards.
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever Necromaster Dragon deals combat damage to a player, you may pay {2}. If you do, create a 2/2 black Zombie creature token and each opponent mills two cards.

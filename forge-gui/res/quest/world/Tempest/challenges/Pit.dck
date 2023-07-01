@@ -1,0 +1,25 @@
+[quest]
+id=TempestQuest6
+OpponentName=Spirit of the Pit
+AILife=400
+Repeat=true
+Wins=60
+Card Reward=duplicate card;booster pack TMP;booster pack STH;booster pack EXO
+Credit Reward=7777
+Ticket Reward=true
+AIExtras=Bottomless Pit|Bottomless Pit|Bottomless Pit|Bottomless Pit|Bottomless Pit|Bottomless Pit|Bottomless Pit
+HumanExtras=
+[metadata]
+Title=The Ancient Pit of Cursed Snake Tombs
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=very hard
+Description=A regular snake pit would be bad enough...
+Deck Type=constructed
+Name=Pit
+[Main]
+27 Ancient Tomb|TMP
+1 Coat of Arms|EXO
+18 Coiled Tinviper|TMP
+5 Cursed Scroll|TMP
+4 Manakin|TMP
+5 Sphere of Resistance|EXO

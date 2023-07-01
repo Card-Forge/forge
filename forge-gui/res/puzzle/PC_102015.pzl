@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 102015 - Tightrope
+URL:http://www.gatheringmagic.com/seanuy-102015-tightrope/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=6
+AILife=14
+humanhand=Gods Willing; Mogg War Marshal; Temporal Isolation; War Flare
+humangraveyard=
+humanlibrary=
+humanbattlefield=Mountain|Set:MIR; Mountain|Set:MIR; Mountain|Set:MIR; Mountain|Set:MIR; Plains|Set:MIR; Plains|Set:MIR; Plains|Set:MIR; Plains|Set:MIR; Plains|Set:MIR; Mogg Fanatic; Sparksmith; Hissing Iguanar; Daring Skyjek
+aibattlefield=Island|Set:MIR|Tapped; Island|Set:MIR|Tapped; Island|Set:MIR|Tapped; Island|Set:MIR|Tapped; Swamp|Set:MIR|Tapped; Swamp|Set:MIR|Tapped; Swamp|Set:MIR|Tapped; Swamp|Set:MIR|Tapped; Swamp|Set:MIR|Tapped; Halimar Wavewatch|Counters:LEVEL=2; Vulshok Morningstar|AttachedTo:420; Dauthi Horror|Id:420|Tapped; Dauthi Slayer; Flayer Husk|AttachedTo:422; Yotian Soldier|Id:422; Lotus Path Djinn; Gray Merchant of Asphodel
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

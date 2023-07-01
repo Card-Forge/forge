@@ -1,0 +1,8 @@
+Name:Landscaper Colos
+ManaCost:5 W
+Types:Creature Goat Beast
+PT:4/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, put target card from an opponent's graveyard on the bottom of their library.
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Card.OppOwn | TgtPrompt$ Select target card in an opponent's graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
+K:TypeCycling:Basic:1 W
+Oracle:When Landscaper Colos enters the battlefield, put target card from an opponent's graveyard on the bottom of their library.\nBasic landcycling {1}{W} ({1}{W}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

@@ -1,0 +1,7 @@
+Name:Mind Slash
+ManaCost:1 B B
+Types:Enchantment
+A:AB$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a card from it. That player discards that card. Activate only as a sorcery.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{B}, Sacrifice a creature: Target opponent reveals their hand. You choose a card from it. That player discards that card. Activate only as a sorcery.

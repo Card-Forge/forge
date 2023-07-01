@@ -1,0 +1,8 @@
+Name:Goblin Grenade
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ R Sac<1/Goblin> | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
+SVar:AIPreference:SacCost$Creature.Goblin+cmcLE1
+AI:RemoveDeck:Random
+DeckNeeds:Type$Goblin
+Oracle:As an additional cost to cast this spell, sacrifice a Goblin.\nGoblin Grenade deals 5 damage to any target.

@@ -1,0 +1,6 @@
+Name:Ogre Sentry
+ManaCost:1 R
+Types:Creature Ogre Warrior
+PT:3/3
+K:Defender
+Oracle:Defender

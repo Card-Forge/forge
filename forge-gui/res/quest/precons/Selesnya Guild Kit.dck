@@ -1,0 +1,48 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Selesnya Guild Kit
+Description=Welcome to the Selesnya Conclave. This box contains our gifts to you: the weapons and tools you need to stand as a defender of nature. Know that you fight with the might of life united!
+Set=GK1
+Image=selesnya_guild_kit.jpg
+[main]
+1 Advent of the Wurm|GK1
+1 Armada Wurm|GK1
+1 Bounty of Might|GRN
+1 Call of the Conclave|GK1
+1 Camaraderie|GRN
+1 Centaur Healer|GK1
+1 Conclave Cavalier|GRN
+1 Conclave Tribunal|GRN
+2 Devouring Light|GK1
+1 Dryad Militant|GK1
+4 Forest|GK1|1
+4 Forest|GK1|2
+1 Gather Courage|GK1
+1 Glare of Subdual|GK1
+1 Grove of the Guardian|GK1
+1 Growing Ranks|GK1
+1 Hour of Reckoning|GK1
+1 Loxodon Hierarch|GK1
+4 Plains|GK1|1
+4 Plains|GK1|2
+1 Pollenbright Wings|GK1
+1 Privileged Position|GK1
+2 Scatter the Seeds|GK1
+1 Selesnya Charm|GK1
+2 Selesnya Evangel|GK1
+2 Selesnya Guildgate|GRN|1
+2 Selesnya Guildgate|GRN|2
+2 Selesnya Guildmage|GK1
+4 Selesnya Sanctuary|GK1
+2 Selesnya Signet|GK1
+1 Siege Wurm|GRN
+1 Sundering Growth|GK1
+1 Tolsimir Wolfblood|GK1
+1 Trostani, Selesnya's Voice+|GK1
+1 Venerated Loxodon|GRN
+1 Vernadi Shieldmate|GRN
+2 Watchwolf|GK1

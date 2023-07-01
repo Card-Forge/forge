@@ -1,0 +1,11 @@
+Name:Chandra, Pyrogenius
+ManaCost:4 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:5
+A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumDmg$ 2 | AILogic$ Good | SpellDescription$ CARDNAME deals 2 damage to each opponent.
+A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+A:AB$ DealDamage | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 6 | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+SVar:DmgAll:DB$ DamageAll | NumDmg$ 6 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+DeckHints:Name$Liberating Combustion
+Oracle:[+2]: Chandra, Pyrogenius deals 2 damage to each opponent.\n[-3]: Chandra, Pyrogenius deals 4 damage to target creature.\n[-10]: Chandra, Pyrogenius deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.

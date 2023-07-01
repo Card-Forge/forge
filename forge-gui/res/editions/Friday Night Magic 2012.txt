@@ -1,0 +1,24 @@
+[metadata]
+Code=F12
+Date=2012-01-01
+Name=Friday Night Magic 2012
+Type=Promo
+ScryfallCode=F12
+
+[cards]
+1 R Glistener Elf @Mark Zug
+2 R Despise @Raymond Swanland
+3 R Tectonic Edge @Eytan Zana
+4 R Dismember @Jason Felix
+5 R Ancient Grudge @Wayne England
+6 R Acidic Slime @Brad Rigney
+7 R Forbidden Alchemy @Randy Gallegos
+8 R Avacyn's Pilgrim @Greg Staples
+9 R Lingering Souls @John Stanko
+10 R Evolving Wilds @Sam Burley
+11 R Pillar of Flame @Dave Kendall
+12 R Gitaxian Probe @Trevor Claxton
+
+[tokens]
+w_1_1_human
+g_2_2_wolf

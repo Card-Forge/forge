@@ -1,0 +1,10 @@
+Name:Witch's Oven
+ManaCost:1
+Types:Artifact
+A:AB$ Token | Cost$ T Sac<1/Creature> | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:AIPreference:SacCost$Creature.token
+SVar:X:Count$Compare Y GE4.2.1
+SVar:Y:Sacrificed$CardToughness
+AI:RemoveDeck:Random
+DeckHas:Ability$Token|LifeGain|Food
+Oracle:{T}, Sacrifice a creature: Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

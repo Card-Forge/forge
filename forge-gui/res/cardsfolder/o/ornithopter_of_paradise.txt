@@ -1,0 +1,7 @@
+Name:Ornithopter of Paradise
+ManaCost:2
+Types:Artifact Creature Thopter
+PT:0/2
+K:Flying
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Flying\n{T}: Add one mana of any color.

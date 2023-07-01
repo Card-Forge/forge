@@ -1,0 +1,6 @@
+Name:Flamekin Brawler
+ManaCost:R
+Types:Creature Elemental Warrior
+PT:0/2
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:{R}: Flamekin Brawler gets +1/+0 until end of turn.

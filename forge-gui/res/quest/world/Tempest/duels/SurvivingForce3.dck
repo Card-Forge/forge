@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=The Surviving Force
+Icon=Dungeon Crawling Green.jpg
+Difficulty=hard
+Description=Survival of Fittest deck
+Deck Type=constructed
+Name=SurvivingForce3
+[Main]
+2 Forest|TMP|1
+3 Forest|TMP|2
+3 Forest|TMP|3
+3 Forest|TMP|4
+4 Hermit Druid|STH
+4 Living Death|TMP
+1 Mirri, Cat Warrior|EXO
+2 Mongrel Pack|TMP
+4 Pit Spawn|EXO
+4 Recurring Nightmare|EXO
+1 Spike Feeder|STH
+4 Spike Weaver|EXO
+4 Survival of the Fittest|EXO
+3 Swamp|TMP|1
+1 Swamp|TMP|2
+5 Swamp|TMP|3
+2 Swamp|TMP|4
+4 Verdant Force|TMP
+4 Wall of Blossoms|STH
+2 Wood Elves|EXO

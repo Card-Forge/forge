@@ -1,0 +1,8 @@
+Name:Seize the Spoils
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Draw | Cost$ 2 R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create a Treasure token. | StackDescription$ SpellDescription
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Discard|Token
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

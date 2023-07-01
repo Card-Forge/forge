@@ -1,0 +1,8 @@
+Name:Phantasmagorian
+ManaCost:5 B B
+Types:Creature Horror
+PT:6/6
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast this spell, any player may discard three cards. If a player does, counter CARDNAME.
+SVar:TrigCounter:DB$ Counter | UnlessCost$ Discard<3/Card> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True
+A:AB$ ChangeZone | Cost$ Discard<3/Card> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+Oracle:When you cast this spell, any player may discard three cards. If a player does, counter Phantasmagorian.\nDiscard three cards: Return Phantasmagorian from your graveyard to your hand.

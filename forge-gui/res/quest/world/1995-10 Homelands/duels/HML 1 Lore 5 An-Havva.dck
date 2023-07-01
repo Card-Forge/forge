@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 5 An-Havva
+Title=An-Havva
+Difficulty=easy
+Description=Folk of good heart will always find a home.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 An-Havva Constable|HML
+4 An-Havva Inn|HML
+2 Carapace|HML|1
+2 Folk of An-Havva|HML|1
+2 Folk of An-Havva|HML|2
+24 Forest|LEB|2
+4 Joven's Ferrets|HML
+4 Mammoth Harness|HML
+2 Renewal|HML
+4 Root Spider|HML
+4 Rysorian Badger|HML
+4 Shrink|HML|2

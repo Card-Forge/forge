@@ -1,0 +1,6 @@
+Name:Metallurgeon
+ManaCost:1 W
+Types:Artifact Creature Human Artificer
+PT:1/2
+A:AB$ Regenerate | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
+Oracle:{W}, {T}: Regenerate target artifact.

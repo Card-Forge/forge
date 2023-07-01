@@ -1,0 +1,9 @@
+Name:Exquisite Huntmaster
+ManaCost:3 B
+Types:Creature Elf Warrior
+PT:4/2
+K:Encore:4 B
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 green Elf Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_elf_warrior | TokenAmount$ 1
+DeckHas:Ability$Token
+Oracle:When Exquisite Huntmaster dies, create a 1/1 green Elf Warrior creature token.\nEncore {4}{B} ({4}{B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

@@ -1,0 +1,7 @@
+Name:Qumulox
+ManaCost:6 U U
+Types:Creature Beast
+PT:5/4
+K:Affinity:Artifact
+K:Flying
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying

@@ -1,0 +1,12 @@
+Name:Triskaidekaphobia
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBLoseGame1,DBLoseGame2 | CharmNum$ 1
+SVar:DBLoseGame1:DB$ LosesGame | Defined$ Player.lifeEQ13 | SubAbility$ DBGainLife | SpellDescription$ Each player with exactly 13 life loses the game, then each player gains 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 1
+SVar:DBLoseGame2:DB$ LosesGame | Defined$ Player.lifeEQ13 | SubAbility$ DBLoseLife | SpellDescription$ Each player with exactly 13 life loses the game, then each player loses 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1
+AI:RemoveDeck:Random
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of your upkeep, choose one —\n• Each player with exactly 13 life loses the game, then each player gains 1 life.\n• Each player with exactly 13 life loses the game, then each player loses 1 life.

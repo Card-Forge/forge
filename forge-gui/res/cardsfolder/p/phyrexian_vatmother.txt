@@ -1,0 +1,9 @@
+Name:Phyrexian Vatmother
+ManaCost:2 B B
+Types:Creature Phyrexian Horror
+PT:4/5
+K:Infect
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ At the beginning of your upkeep, you get a poison counter.
+SVar:TrigPoison:DB$ Poison | Defined$ You | Num$ 1
+AI:RemoveDeck:Random
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nAt the beginning of your upkeep, you get a poison counter.

@@ -1,0 +1,6 @@
+Name:Gruul Guildgate
+ManaCost:no cost
+Types:Land Gate
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+Oracle:Gruul Guildgate enters the battlefield tapped.\n{T}: Add {R} or {G}.

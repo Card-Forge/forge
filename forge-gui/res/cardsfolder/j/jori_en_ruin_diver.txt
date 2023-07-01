@@ -1,0 +1,8 @@
+Name:Jori En, Ruin Diver
+ManaCost:1 U R
+Types:Legendary Creature Merfolk Wizard
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:BuffedBy:Card
+Oracle:Whenever you cast your second spell each turn, draw a card.

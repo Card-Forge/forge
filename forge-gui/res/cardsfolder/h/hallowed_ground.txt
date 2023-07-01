@@ -1,0 +1,6 @@
+Name:Hallowed Ground
+ManaCost:1 W
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ W W | ValidTgts$ Land.nonSnow+YouCtrl | TgtPrompt$ Target nonsnow land you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonsnow land you control to its owner's hand.
+AI:RemoveDeck:All
+Oracle:{W}{W}: Return target nonsnow land you control to its owner's hand.

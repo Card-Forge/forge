@@ -1,0 +1,7 @@
+Name:Rotlung Reanimator
+ManaCost:2 B
+Types:Creature Zombie Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Cleric dies, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
+Oracle:Whenever Rotlung Reanimator or another Cleric dies, create a 2/2 black Zombie creature token.

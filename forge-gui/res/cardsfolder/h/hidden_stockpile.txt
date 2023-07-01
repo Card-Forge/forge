@@ -1,0 +1,7 @@
+Name:Hidden Stockpile
+ManaCost:W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Revolt — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You
+A:AB$ Scry | Cost$ 1 Sac<1/Creature> | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Revolt — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.\n{1}, Sacrifice a creature: Scry 1.

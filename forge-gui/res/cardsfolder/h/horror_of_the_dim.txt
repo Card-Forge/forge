@@ -1,0 +1,6 @@
+Name:Horror of the Dim
+ManaCost:4 B
+Types:Creature Horror
+PT:3/4
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Hexproof | SpellDescription$ CARDNAME gains hexproof until end of turn.
+Oracle:{U}: Horror of the Dim gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

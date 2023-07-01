@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 1W Argive
+Title=Argive
+Difficulty=easy
+Description=Through years of study and training, the Blacksmiths of Argive became adept at reassembling the mangled remains of the strange, mechanical creatures abounding in their native land.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Argivian Archaeologist|ATQ
+4 Argivian Blacksmith|ATQ
+4 Artifact Ward|ATQ
+4 Circle of Protection: Artifacts|ATQ
+4 Colossus of Sardia|ATQ
+4 Damping Field|ATQ
+4 Martyrs of Korlis|ATQ
+24 Plains|LEB|2
+4 Reverse Polarity|ATQ
+4 Tablet of Epityr|ATQ

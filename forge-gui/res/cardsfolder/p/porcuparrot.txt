@@ -1,0 +1,8 @@
+Name:Porcuparrot
+ManaCost:3 R
+Types:Creature Bird Beast
+PT:3/4
+K:Mutate:2 R
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ X | SpellDescription$ This creature deals X damage to any target, where X is the number of times this creature has mutated.
+SVar:X:Count$TimesMutated
+Oracle:Mutate {2}{R} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\n{T}: This creature deals X damage to any target, where X is the number of times this creature has mutated.

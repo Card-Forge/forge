@@ -1,0 +1,20 @@
+Name:Calim, Djinn Emperor
+ManaCost:3 U U U
+Types:Legendary Creature Djinn Noble
+PT:5/6
+K:Flying
+K:Ward:2
+A:AB$ Tap | Cost$ 1 U Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | SpellDescription$ Tap up to one target nonland permanent. Draw a card. Then you may exile two other cards named Calim, Djinn Emperor from your graveyard.
+SVar:DBDraw:DB$ Draw | Defined$ You | SubAbility$ CalimChooseTwo
+SVar:CalimChooseTwo:DB$ ChooseCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Defined$ You | Amount$ 2 | ChoiceTitle$ Choose two other cards named Calim, Djinn Emperor from your graveyard | Choices$ Card.namedCalim; Djinn Emperor+YouOwn+Other | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ CalimExile
+SVar:CalimExile:DB$ ChangeZoneAll | ConditionCheckSVar$ CalimNumRemembered | ConditionSVarCompare$ EQ2 | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ CalimNumRemembered | ConditionSVarCompare$ EQ2 | Execute$ TrigReturn | SpellDescription$ When you do, return CARDNAME from your graveyard to the battlefield tapped.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Discarded | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerController$ TriggeredCardController | TriggerDescription$ When you discard CARDNAME, conjure a card named Calim, Djinn Emperor into your library seventh from the top.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Calim, Djinn Emperor | Zone$ Library | RememberMade$ True | SubAbility$ DBReorder
+SVar:DBReorder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ 6 | SubAbility$ DBCleanup
+SVar:X:Count$ValidGraveyard Card.namedCalim; Djinn Emperor+YouOwn+Other
+SVar:CalimNumRemembered:Remembered$Amount
+SVar:DiscardMe:1
+Oracle:Flying\nWard {2}\nCalim's Breath — {1}{U}, Discard Calim: Tap up to one target nonland permanent. Draw a card. Then you may exile two other cards named Calim, Djinn Emperor from your graveyard. When you do, return Calim, Djinn Emperor from your graveyard to the battlefield tapped.\nWhen you discard Calim, conjure a card named Calim, Djinn Emperor into your library seventh from the top.

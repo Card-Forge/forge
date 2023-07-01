@@ -1,0 +1,7 @@
+Name:Voltaic Servant
+ManaCost:2
+Types:Artifact Creature Construct
+PT:1/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap target artifact.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
+Oracle:At the beginning of your end step, untap target artifact.

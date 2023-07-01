@@ -1,0 +1,7 @@
+Name:Exiled Doomsayer
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/2
+S:Mode$ RaiseCost | ValidCard$ Creature.faceDown | ValidSpell$ Static.MorphUp | Amount$ 2 | Description$ All morph costs cost {2} more. (This doesn't affect the cost to cast creature spells face down.)
+AI:RemoveDeck:Random
+Oracle:All morph costs cost {2} more. (This doesn't affect the cost to cast creature spells face down.)

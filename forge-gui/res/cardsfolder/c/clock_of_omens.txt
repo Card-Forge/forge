@@ -1,0 +1,8 @@
+Name:Clock of Omens
+ManaCost:4
+Types:Artifact
+A:AB$ Untap | Cost$ tapXType<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Tap two untapped artifacts you control: Untap target artifact.

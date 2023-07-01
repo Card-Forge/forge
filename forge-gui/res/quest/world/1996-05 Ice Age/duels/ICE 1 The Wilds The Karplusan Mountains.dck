@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Karplusan Mountains
+Title=The Karplusan Mountains
+Difficulty=easy
+Description="Centaurs will kill our aesthir if they can; they've always been enemies. Destroy the horse-people on sight." -Arna Kennerud, Skyknight
+
+Known as the Sardian Mountains prior to the Brothers' War, the forested Karplusan Mountains form the northern border of Kjeldor.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Balduvian Bears|ICE
+4 Centaur Archer|ICE
+1 Curse of Marit Lage|ICE
+11 Forest|ICE|2
+4 Giant Trap Door Spider|ICE
+1 Jokulhaups|ICE
+4 Karplusan Forest|ICE
+4 Karplusan Yeti|ICE
+1 Monsoon|ICE
+8 Mountain|ICE|1
+2 Pale Bears|ICE
+2 Sabretooth Tiger|ICE
+3 Scaled Wurm|ICE
+4 Shambling Strider|ICE
+1 Timberline Ridge|ICE
+2 Tinder Wall|ICE
+4 Woolly Mammoths|ICE

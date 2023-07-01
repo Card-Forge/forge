@@ -1,0 +1,5 @@
+Name:Scaled Wurm
+ManaCost:7 G
+Types:Creature Wurm
+PT:7/6
+Oracle:

@@ -1,0 +1,6 @@
+Name:Auriok Salvagers
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/4
+A:AB$ ChangeZone | Cost$ 1 W | TgtPrompt$ Choose target artifact card with mana value 1 or less in your graveyard | ValidTgts$ Artifact.cmcLE1+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card with mana value 1 or less from your graveyard to your hand.
+Oracle:{1}{W}: Return target artifact card with mana value 1 or less from your graveyard to your hand.

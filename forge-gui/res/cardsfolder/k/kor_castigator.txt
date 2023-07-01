@@ -1,0 +1,6 @@
+Name:Kor Castigator
+ManaCost:1 W
+Types:Creature Kor Wizard Ally
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Eldrazi+Scion | Description$ CARDNAME can't be blocked by Eldrazi Scions.
+Oracle:Kor Castigator can't be blocked by Eldrazi Scions.

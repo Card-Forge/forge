@@ -1,0 +1,8 @@
+Name:Spinning Wheel Kick
+ManaCost:X X G G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select X target creatures and/or planeswalkers | TargetMin$ X | TargetMax$ X | DamageSource$ ParentTarget | NumDmg$ Y | SpellDescription$ deals damage equal to its power to each of X target creatures and/or planeswalkers.
+SVar:X:Count$xPaid
+SVar:Y:ParentTargeted$CardPower
+Oracle:Target creature you control deals damage equal to its power to each of X target creatures and/or planeswalkers.

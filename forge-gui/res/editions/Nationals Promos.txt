@@ -1,0 +1,9 @@
+[metadata]
+Code=PNAT
+Date=2018-01-25
+Name=Nationals Promos
+Type=Promo
+ScryfallCode=PNAT
+
+[cards]
+2018 R Flooded Strand @Zack Stella

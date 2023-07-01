@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 25 UvG Intellect
+Title=Aspect of Intellect
+Difficulty=easy
+Description=Occasionally a member of the Institute of Arcane Study acquires a taste for worldly pleasures. Seldom do they have trouble finding employment.
+Icon=Aspect of Intellect.jpg
+Deck Type=constructed
+[Main]
+2 Braingeyser|LEB
+4 Control Magic|LEB
+2 Counterspell|LEB
+2 Creature Bond|LEB
+2 Crystal Rod|LEB
+2 Feedback|LEB
+2 Howling Mine|LEB
+24 Island|LEB|1
+2 Jayemdae Tome|LEB
+2 Library of Leng|LEB
+2 Lifetap|LEB
+4 Prodigal Sorcerer|LEB
+2 Psionic Blast|LEB
+2 Psychic Venom|LEB
+2 Spell Blast|LEB
+2 Steal Artifact|LEB
+2 Unsummon|LEB

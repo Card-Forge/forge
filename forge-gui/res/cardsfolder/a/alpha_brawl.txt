@@ -1,0 +1,9 @@
+Name:Alpha Brawl
+ManaCost:6 R R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberTargets$ True | SubAbility$ AlphaAttack | StackDescription$ {c:Targeted} | SpellDescription$ Target creature an opponent controls
+SVar:AlphaAttack:DB$ DamageAll | ValidCards$ Creature.IsNotRemembered+ControlledBy TargetedController | DamageSource$ Targeted | NumDmg$ Remembered$CardPower | SubAbility$ SucksToBeAlpha | StackDescription$ SpellDescription | SpellDescription$ deals damage equal to its power to each other creature that player controls,
+SVar:SucksToBeAlpha:DB$ EachDamage | ValidCards$ Creature.IsNotRemembered+ControlledBy TargetedController | NumDmg$ Count$CardPower | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ then each of those creatures deals damage equal to its power to that creature.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.

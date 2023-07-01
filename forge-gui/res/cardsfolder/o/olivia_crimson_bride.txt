@@ -1,0 +1,16 @@
+Name:Olivia, Crimson Bride
+ManaCost:4 B R
+Types:Legendary Creature Vampire Noble
+PT:3/4
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, return target creature card from your graveyard to the battlefield tapped and attacking. It gains "When you don't control a legendary Vampire, exile this creature."
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ Permanent | Triggers$ TrigOlivia | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigOlivia:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Vampire.YouCtrl+Legendary | PresentCompare$ EQ0 | Execute$ TrigExile | TriggerDescription$ When you don't control a legendary Vampire, exile this creature.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
+DeckHints:Type$Vampire|Legendary
+Oracle:Flying, haste\nWhenever Olivia, Crimson Bride attacks, return target creature card from your graveyard to the battlefield tapped and attacking. It gains "When you don't control a legendary Vampire, exile this creature."

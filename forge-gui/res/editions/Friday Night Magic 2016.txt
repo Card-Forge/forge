@@ -1,0 +1,20 @@
+[metadata]
+Code=F16
+Date=2016-01-01
+Name=Friday Night Magic 2016
+Type=Promo
+ScryfallCode=F16
+
+[cards]
+1 R Nissa's Pilgrimage @Christine Choi
+2 R Clash of Wills @Anna Steinbauer
+3 R Smash to Smithereens @Darek Zabrocki
+4 R Blighted Fen @Jason Felix
+5 R Goblin Warchief @Mark Zug
+6 R Sylvan Scrying @Christine Choi
+7 R Spatial Contortion @Joseph Meehan
+8 R Crumbling Vestige @Jonas De Ro
+9 R Flaying Tendrils @Svetlin Velinov
+10 R Rise from the Tides @Lucas Graciano
+11 R Fiery Temper @Eric Deschamps
+12 R Call the Bloodline @Magali Villeneuve

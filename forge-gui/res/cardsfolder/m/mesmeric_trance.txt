@@ -1,0 +1,7 @@
+Name:Mesmeric Trance
+ManaCost:1 U U
+Types:Enchantment
+K:Cumulative upkeep:1
+A:AB$ Draw | Cost$ U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{U}, Discard a card: Draw a card.

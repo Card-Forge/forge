@@ -1,0 +1,10 @@
+Name:Take Flight
+ManaCost:3 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Flying | AddTrigger$ AttackTrig | AddSVar$ AE | Description$ Enchanted creature gets +1/+0 and has flying and "Whenever this creature attacks, draw a card."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has flying and "Whenever this creature attacks, draw a card."

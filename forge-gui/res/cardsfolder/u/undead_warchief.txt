@@ -1,0 +1,9 @@
+Name:Undead Warchief
+ManaCost:2 B B
+Types:Creature Zombie
+PT:1/1
+S:Mode$ ReduceCost | ValidCard$ Zombie | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Zombie spells you cast cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Creature.Zombie+YouCtrl | AddPower$ 2 | AddToughness$ 1 | Description$ Zombie creatures you control get +2/+1.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Zombie spells you cast cost {1} less to cast.\nZombie creatures you control get +2/+1.

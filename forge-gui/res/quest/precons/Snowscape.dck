@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Snowscape
+Description=There's an old saying about life during an ice age: Those that adapt survive, but those that harness its chill power to fuel their cryptic magic thrive. Join the Rimewind mages deep amid the snow-covered terrain.
+Deck Type=constructed
+Set=CSP
+Image=snowscape.jpg
+[main]
+1 Arcum's Weathervane|ICE
+2 Drift of the Dead|ICE
+1 Gangrenous Zombies|ICE
+2 Legions of Lim-Dul|ICE
+2 Essence Flare|ICE
+1 Iceberg|ICE
+2 Mistfolk|ICE
+2 Snow Devil|ICE
+1 Phantasmal Fiend|ALL
+1 Browse|6ED
+1 Storm Elemental|ALL
+1 Viscerid Drone|ALL
+1 Coldsteel Heart|CSP
+12 Snow-Covered Island|CSP
+2 Frost Raptor|CSP
+3 Rimebound Dead|CSP
+1 Heidar, Rimewind Master|CSP
+1 Blizzard Specter|CSP
+2 Zombie Musher|CSP
+1 Balduvian Frostwaker|CSP
+1 Chill to the Bone|CSP
+1 Frost Marsh|CSP
+2 Rimewind Cryomancer|CSP
+3 Rimewind Taskmage|CSP
+11 Snow-Covered Swamp|CSP
+1 Chilling Shade|CSP
+1 Rimefeather Owl|CSP
+[sideboard]

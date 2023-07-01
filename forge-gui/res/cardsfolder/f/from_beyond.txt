@@ -1,0 +1,10 @@
+Name:From Beyond
+ManaCost:3 G
+Types:Enchantment
+K:Devoid
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Eldrazi | ChangeNum$ 1 | SpellDescription$ Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle.
+DeckHints:Type$Eldrazi
+DeckHas:Ability$Mana.Colorless|Token
+Oracle:Devoid (This card has no color.)\nAt the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\n{1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,16 @@
+Name:Reaper of Night
+ManaCost:5 B B
+Types:Creature Specter
+PT:4/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Card.DefenderCtrl | PresentZone$ Hand | PresentCompare$ LE2 | TriggerDescription$ Whenever CARDNAME attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+AlternateMode:Adventure
+Oracle:Whenever Reaper of Night attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
+
+ALTERNATE
+
+Name:Harvest Fear
+ManaCost:3 B
+Types:Sorcery Adventure
+A:SP$ Discard | Cost$ 3 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target opponent discards two cards. (Then exile this card. You may cast the creature later from exile.)

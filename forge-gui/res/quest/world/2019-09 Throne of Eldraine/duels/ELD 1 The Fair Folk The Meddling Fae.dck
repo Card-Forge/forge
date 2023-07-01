@@ -1,0 +1,24 @@
+[metadata]
+Title=The Fair Folk: The Meddling Fae
+Difficulty=easy
+Description=Meddling fae love to pry into human lives, either to help those in need or harm those they deem deserving. These fae are about the size of an adult human with long, flowing white garments and an eerie, angelic glow. They are fickle, helping you one day and becoming your enemy the next. Occasionally a meddling faerie will actively attempt to lure knights away from their company with floating lights or magical visions. Unlike other kinds of fae, meddling fae are known to sometimes be truly benevolent, helping unfortunate souls or granting desperate wishes. Still, most humans are wary to put their fates in the hands of a faerie.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 The Fair Folk: The Meddling Fae
+[Main]
+4 Animating Faerie|ELD|1
+4 Enchanted Carriage|ELD
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Faerie Guidemother|ELD|1
+4 Glass Casket|ELD|1
+4 Hushbringer|ELD|1
+4 Inquisitive Puppet|ELD
+8 Island|ELD|3
+4 Mysterious Pathlighter|ELD
+12 Plains|ELD|4
+4 Spinning Wheel|ELD
+[Sideboard]
+2 Charmed Sleep|ELD
+2 Frogify|ELD
+2 Turn into a Pumpkin|ELD

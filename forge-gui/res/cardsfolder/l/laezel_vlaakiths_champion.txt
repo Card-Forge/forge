@@ -1,0 +1,10 @@
+Name:Lae'zel, Vlaakith's Champion
+ManaCost:2 W
+Types:Legendary Creature Gith Warrior
+PT:3/3
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ You | ValidObject$ Creature.YouCtrl+inZoneBattlefield,Planeswalker.YouCtrl+inZoneBattlefield,You | ReplaceWith$ AddOneMoreCounters | Description$ If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+K:Choose a Background
+DeckNeeds:Ability$Counters
+Oracle:If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.\nChoose a Background (You can have a Background as a second commander.)

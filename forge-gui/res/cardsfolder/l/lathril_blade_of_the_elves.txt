@@ -1,0 +1,13 @@
+Name:Lathril, Blade of the Elves
+ManaCost:2 B G
+Types:Legendary Creature Elf Noble
+PT:2/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+A:AB$ LoseLife | Cost$ T tapXType<10/Elf> | Defined$ Player.Opponent | LifeAmount$ 10 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 10 life and you gain 10 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 10
+DeckHas:Ability$Token|LifeGain
+DeckHints:Type$Elf
+Oracle:Menace\nWhenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.

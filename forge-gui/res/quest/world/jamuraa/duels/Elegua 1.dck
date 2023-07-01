@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Elegua 1
+Title=Elegua 
+Icon=Elegua.jpg
+Difficulty=easy
+Description=Elegua plays a limited GR deck.
+Deck Type=constructed
+[main]
+1 Brassclaw Orcs|5ED
+1 Burning Shield Askari|MIR
+1 Cinder Cloud|MIR
+1 Craw Giant|5ED
+1 Desert Twister|ARN
+1 Fire Diamond|MIR
+1 Fireblast|VIS
+9 Forest|MIR
+1 Giant Growth|5ED
+1 Giant Mantis|MIR
+1 Inferno|5ED
+1 Jolrael's Centaur|MIR
+1 Kaervek's Torch|MIR
+9 Mountain|MIR
+1 Raging Gorilla|VIS
+2 Raging Spirit|MIR
+1 River Boa|VIS
+1 Rukh Egg|ARN
+1 Sawtooth Ogre|WTH
+1 Scryb Sprites|5ED
+1 Talruum Minotaur|MIR
+1 Wall of Roots|MIR
+1 Whirling Dervish|5ED
+[sideboard]
+[planes]
+[schemes]

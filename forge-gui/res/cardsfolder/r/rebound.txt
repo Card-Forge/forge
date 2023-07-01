@@ -1,0 +1,6 @@
+Name:Rebound
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeTargets | TargetType$ Spell.numTargets EQ1 | TargetValidTargeting$ Player | ValidTgts$ Card | TgtPrompt$ Select target spell that targets only a player | TargetRestriction$ Player | SpellDescription$ Change the target of target spell that targets only a player. The new target must be a player.
+AI:RemoveDeck:All
+Oracle:Change the target of target spell that targets only a player. The new target must be a player.

@@ -1,0 +1,9 @@
+Name:Molten Nursery
+ManaCost:2 R
+Types:Enchantment
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a colorless spell, CARDNAME deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+SVar:BuffedBy:Card.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
+Oracle:Devoid (This card has no color.)\nWhenever you cast a colorless spell, Molten Nursery deals 1 damage to any target.

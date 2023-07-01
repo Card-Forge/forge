@@ -1,0 +1,8 @@
+Name:Homarid Spawning Bed
+ManaCost:U U
+Types:Enchantment
+A:AB$ Token | Cost$ 1 U U Sac<1/Creature.Blue/blue creature> | TokenAmount$ X | TokenScript$ u_1_1_camarid | TokenOwner$ You | SpellDescription$ Create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's mana value.
+SVar:X:Sacrificed$CardManaCost
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{1}{U}{U}, Sacrifice a blue creature: Create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's mana value.

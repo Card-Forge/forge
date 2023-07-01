@@ -1,0 +1,11 @@
+Name:Ayli, Eternal Pilgrim
+ManaCost:W B
+Types:Legendary Creature Kor Cleric
+PT:2/3
+K:Deathtouch
+A:AB$ GainLife | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ Toughness | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+A:AB$ ChangeZone | Cost$ 1 W B Sac<1/Creature.Other/another creature> | CheckSVar$ X | SVarCompare$ GEY | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.
+SVar:Toughness:Sacrificed$CardToughness
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife/Plus.10
+Oracle:Deathtouch\n{1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.\n{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.

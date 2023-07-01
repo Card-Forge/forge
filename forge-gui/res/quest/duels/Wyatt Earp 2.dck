@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Wyatt Earp 2
+Title=Wyatt Earp
+Difficulty=medium
+Description=Mono W deck with Crovax, Ascendant Hero, Crusade and Kithkin Rabble
+Icon=Wyatt Earp.jpg
+Deck Type=constructed
+[main]
+22 Plains|MBS
+1 Pearl Medallion
+3 Ballynock Cohort
+1 Ballynock Trapper
+1 Blinding Light
+1 Celestial Crusader
+1 Crovax, Ascendant Hero
+2 Crusade
+1 Divine Sacrament
+1 Hand of Justice
+1 Holy Light
+3 Kithkin Rabble
+1 Knight of the White Orchid
+1 Mass Calcify
+1 Springjack Shepherd
+1 Sunlance
+1 Abbey Gargoyles
+1 Unmake
+1 Saltblast
+1 Alaborn Grenadier
+1 Auriok Champion
+1 Hand of Honor
+1 Knight of Meadowgrain
+1 Leonin Skyhunter
+1 Longbow Archer
+1 Serra Avenger
+1 Soltari Monk
+1 Valorous Charge
+1 Landbind Ritual
+1 Devout Lightcaster
+1 Opal Guardian
+1 White Knight
+1 Silver Knight
+1 Loyal Gyrfalcon
+[sideboard]

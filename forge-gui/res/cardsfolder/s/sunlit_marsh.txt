@@ -1,0 +1,5 @@
+Name:Sunlit Marsh
+ManaCost:no cost
+Types:Land Plains Swamp
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {W} or {B}.)\nSunlit Marsh enters the battlefield tapped.

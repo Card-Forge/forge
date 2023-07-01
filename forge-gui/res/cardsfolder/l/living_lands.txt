@@ -1,0 +1,8 @@
+Name:Living Lands
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Forest | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | Description$ All Forests are 1/1 creatures that are still lands.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckHints:Name$Yavimaya, Cradle of Growth
+Oracle:All Forests are 1/1 creatures that are still lands.

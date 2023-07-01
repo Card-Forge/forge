@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Iconoclastic Fury
+Title=Iconoclastic Fury
+Difficulty=medium
+Description=This world is rich with artifacts, and the green & red mages are out to crush them all
+Icon=Iconoclastic Fury.jpg
+Deck Type=constructed
+[Main]
+2 Acid Web Spider|SOM
+2 Arc Trail|SOM
+1 Asceticism|SOM
+1 Barbed Battlegear|SOM
+1 Copper Myr|SOM
+2 Ferocious Charge|5DN
+1 Fireball|LEA
+1 Flameborn Hellion|SOM
+12 Forest|SOM|1
+1 Hoard-Smelter Dragon|SOM
+1 Horizon Spellbomb|SOM
+2 Iron Myr|SOM
+2 Molder Beast|SOM
+2 Molder Slug|MRD
+12 Mountain|SOM|1
+2 Oxidda Scrapmelter|SOM
+1 Panic Spellbomb|SOM
+2 Shatter|LEA
+2 Sylvok Replica|SOM
+2 Tel-Jilad Outrider|DST
+1 Turn to Slag|SOM
+1 Viridian Revel|SOM
+3 Vulshok Heartstoker|SOM
+3 Vulshok Replica|SOM
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Drudge Spell
+ManaCost:B B
+Types:Enchantment
+A:AB$ Token | Cost$ B ExileFromGrave<2/Creature> | CostDesc$ {B}, Exile two creature cards from your graveyard: | TokenAmount$ 1 | TokenScript$ b_1_1_skeleton_regenerate | TokenOwner$ You | SpellDescription$ Create a 1/1 black Skeleton creature token. It has "{B}: Regenerate this creature."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all Skeleton tokens. They can't be regenerated.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Skeleton.token | NoRegen$ True
+SVar:NonStackingEffect:True
+Oracle:{B}, Exile two creature cards from your graveyard: Create a 1/1 black Skeleton creature token. It has "{B}: Regenerate this creature."\nWhen Drudge Spell leaves the battlefield, destroy all Skeleton tokens. They can't be regenerated.

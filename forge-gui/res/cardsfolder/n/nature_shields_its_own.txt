@@ -1,0 +1,10 @@
+Name:Nature Shields Its Own
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ AttackerUnblocked | ValidCard$ Creature | ValidDefender$ You,Planeswalker.YouCtrl | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever a creature attacks and isn't blocked, if you're the defending player, create a 0/1 green Plant creature token that's blocking that creature.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ g_0_1_plant | TokenBlocking$ TriggeredAttacker
+T:Mode$ AttackersDeclared | Execute$ DelTrigEOC | CheckSVar$ NatureShields | SVarCompare$ GE4 | NoResolvingCheck$ True | TriggerZones$ Command | AttackedTarget$ You | TriggerDescription$ When four or more creatures attack you, abandon this scheme at end of combat.
+SVar:DelTrigEOC:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Abandon | TriggerDescription$ Abandon this scheme at end of combat.
+SVar:Abandon:DB$ Abandon
+SVar:NatureShields:Count$Valid Creature.attackingYou
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever a creature attacks and isn't blocked, if you're the defending player, create a 0/1 green Plant creature token that's blocking that creature.\nWhen four or more creatures attack you, abandon this scheme at end of combat.

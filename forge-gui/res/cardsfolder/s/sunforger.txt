@@ -1,0 +1,12 @@
+Name:Sunforger
+ManaCost:3
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
+A:AB$ ChangeZone | Cost$ R W Unattach<CARDNAME/CARDNAME> | ChangeType$ Instant.White+cmcLE4,Instant.Red+cmcLE4 | ChangeNum$ 1 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | Shuffle$ False | SubAbility$ CastFound | StackDescription$ SpellDescription | SpellDescription$ Search your library for a red or white instant card with mana value 4 or less and cast that card without paying its mana cost. Then shuffle.
+SVar:CastFound:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | SubAbility$ YouShuffle | StackDescription$ None
+SVar:YouShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Equip:3
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|White
+Oracle:Equipped creature gets +4/+0.\n{R}{W}, Unattach Sunforger: Search your library for a red or white instant card with mana value 4 or less and cast that card without paying its mana cost. Then shuffle.\nEquip {3}

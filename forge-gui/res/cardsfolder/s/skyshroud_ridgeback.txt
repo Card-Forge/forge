@@ -1,0 +1,6 @@
+Name:Skyshroud Ridgeback
+ManaCost:G
+Types:Creature Beast
+PT:2/3
+K:Fading:2
+Oracle:Fading 2 (This creature enters the battlefield with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)

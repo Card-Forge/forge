@@ -1,0 +1,7 @@
+Name:Darksteel Gargoyle
+ManaCost:7
+Types:Artifact Creature Gargoyle
+PT:3/3
+K:Flying
+K:Indestructible
+Oracle:Flying\nIndestructible (Damage and effects that say "destroy" don't destroy this creature.)

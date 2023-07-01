@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Darkseid 3
+Title=Darkseid
+Difficulty=hard
+Description=Mono B Smallpox deck
+Icon=Darkseid.jpg
+Deck Type=constructed
+[main]
+19 Swamp|ISD
+4 Mishra's Factory
+1 Urborg, Tomb of Yawgmoth
+1 Mox Jet
+4 Hymn to Tourach
+4 Smallpox
+4 Innocent Blood
+4 Sinkhole
+4 Bloodghast
+2 Reassembling Skeleton
+1 Geth's Verdict
+1 Bile Blight
+1 Barter in Blood
+2 Entomb
+3 Liliana of the Veil
+1 Crucible of Worlds
+1 Vengeful Pharaoh
+1 Squee, Goblin Nabob
+2 The Rack
+[sideboard]

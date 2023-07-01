@@ -1,0 +1,6 @@
+Name:Ashen Firebeast
+ManaCost:6 R R
+Types:Creature Elemental Beast
+PT:6/6
+A:AB$ DamageAll | Cost$ 1 R | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+Oracle:{1}{R}: Ashen Firebeast deals 1 damage to each creature without flying.

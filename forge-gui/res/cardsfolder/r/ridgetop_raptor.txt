@@ -1,0 +1,6 @@
+Name:Ridgetop Raptor
+ManaCost:3 R
+Types:Creature Dinosaur Beast
+PT:2/1
+K:Double Strike
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)

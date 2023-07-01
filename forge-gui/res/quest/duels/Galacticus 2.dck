@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Galacticus 2
+Title=Galacticus
+Difficulty=medium
+Description=UB Processor deck
+Icon=Galacticus.jpg
+Deck Type=constructed
+[main]
+5 Swamp|ISD
+5 Island|ISD
+4 Darkslick Shores
+4 Drowned Catacomb
+1 Sunken Hollow
+1 Polluted Delta
+1 Jwar Isle Refuge
+1 Dismal Backwater
+1 Temple of Deceit
+1 Sludge Crawler|BFZ
+4 Mist Intruder|BFZ
+4 Fathom Feeder|BFZ
+4 Benthic Infiltrator|BFZ
+2 Ruination Guide|BFZ
+1 Dominator Drone|BFZ
+3 Wasteland Strangler
+3 Murk Strider|BFZ
+2 Mind Raker|BFZ
+1 Blight Herder|BFZ
+1 Ulamog's Reclaimer|BFZ
+1 Ulamog's Despoiler|BFZ
+1 Ruin Processor|BFZ
+1 Spell Shrivel
+4 Complete Disregard
+1 Grave Birthing
+1 Cremate
+1 Brittle Effigy
+1 Leyline of the Void
+[sideboard]

@@ -1,0 +1,14 @@
+Name:Polukranos, World Eater
+ManaCost:2 G G
+Types:Legendary Creature Hydra
+PT:5/5
+K:Monstrosity:X:X X G
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When CARDNAME becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to NICKNAME.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ Polukranos | TgtPrompt$ Select any number of target creatures your opponents control to distribute damage to | NumDmg$ MonstrosityX | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ MonstrosityX | SubAbility$ DBDmg
+SVar:DBDmg:DB$ EachDamage | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | Defined$ Self
+SVar:X:Count$xPaid
+SVar:MonstrosityX:TriggerCount$MonstrosityAmount
+SVar:MaxTgts:Count$Valid Creature.OppCtrl
+SVar:MonstrosityAILogic:Polukranos
+DeckHas:Ability$Counters
+Oracle:{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.

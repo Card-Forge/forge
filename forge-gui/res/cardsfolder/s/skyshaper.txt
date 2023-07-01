@@ -1,0 +1,5 @@
+Name:Skyshaper
+ManaCost:2
+Types:Artifact
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescription$ Creatures you control gain flying until end of turn.
+Oracle:Sacrifice Skyshaper: Creatures you control gain flying until end of turn.

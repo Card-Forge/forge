@@ -1,0 +1,11 @@
+Name:Careful Cultivation
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AITgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 3 | AddKeyword$ Reach | AddAbility$ ABManaGG | Description$ As long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."
+SVar:ABManaGG:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add {G}{G}.
+A:AB$ Token | PrecostDesc$ Channel — | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | TokenAmount$ 1 | TokenScript$ g_1_1_human_monk_g | SpellDescription$ Create a 1/1 green Human Monk creature token with "{T}: Add {G}."
+DeckHas:Ability$Token|Discard & Type$Human
+DeckHints:Type$Artifact|Creature|Vehicle
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."\nChannel — {1}{G}, Discard Careful Cultivation: Create a 1/1 green Human Monk creature token with "{T}: Add {G}."

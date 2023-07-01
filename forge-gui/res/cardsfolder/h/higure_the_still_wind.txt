@@ -1,0 +1,11 @@
+Name:Higure, the Still Wind
+ManaCost:3 U U
+Types:Legendary Creature Human Ninja
+PT:3/4
+K:Ninjutsu:2 U U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSearch | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may search your library for a Ninja card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Ninja | ChangeNum$ 1 | ShuffleNonMandatory$ True
+A:AB$ Effect | Cost$ 2 | ValidTgts$ Creature.Ninja | TgtPrompt$ Select target Ninja creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target Ninja creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHints:Type$Ninja
+Oracle:Ninjutsu {2}{U}{U} ({2}{U}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Higure, the Still Wind deals combat damage to a player, you may search your library for a Ninja card, reveal it, put it into your hand, then shuffle.\n{2}: Target Ninja creature can't be blocked this turn.

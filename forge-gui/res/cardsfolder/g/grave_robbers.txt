@@ -1,0 +1,8 @@
+Name:Grave Robbers
+ManaCost:1 B B
+Types:Creature Human Rogue
+PT:1/1
+A:AB$ ChangeZone | Cost$ B T | Origin$ Graveyard | Destination$ Exile | AILogic$ AtOppEOT | AITgtOwnCards$ True | TgtPrompt$ Choose target artifact card in a graveyard | ValidTgts$ Artifact | SubAbility$ DBGainLife | SpellDescription$ Exile target artifact card from a graveyard. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:{B}, {T}: Exile target artifact card from a graveyard. You gain 2 life.

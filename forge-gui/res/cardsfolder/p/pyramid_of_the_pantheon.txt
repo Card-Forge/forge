@@ -1,0 +1,8 @@
+Name:Pyramid of the Pantheon
+ManaCost:1
+Types:Artifact
+A:AB$ Mana | Cost$ 2 T | Produced$ Any | SubAbility$ DBPutCounter | SpellDescription$ Add one mana of any color. Put a brick counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Add three mana of any one color. Activate only if there are three or more brick counters on CARDNAME.
+SVar:X:Count$CardCounters.BRICK
+Oracle:{2}, {T}: Add one mana of any color. Put a brick counter on Pyramid of the Pantheon.\n{T}: Add three mana of any one color. Activate only if there are three or more brick counters on Pyramid of the Pantheon.

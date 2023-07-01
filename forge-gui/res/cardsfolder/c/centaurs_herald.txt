@@ -1,0 +1,6 @@
+Name:Centaur's Herald
+ManaCost:G
+Types:Creature Elf Scout
+PT:0/1
+A:AB$ Token | Cost$ 2 G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SpellDescription$ Create a 3/3 green Centaur creature token.
+Oracle:{2}{G}, Sacrifice Centaur's Herald: Create a 3/3 green Centaur creature token.

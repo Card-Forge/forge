@@ -1,0 +1,8 @@
+Name:Keskit, the Flesh Sculptor
+ManaCost:2 B
+Types:Legendary Creature Phyrexian Human Artificer
+PT:1/3
+K:Partner
+A:AB$ Dig | Cost$ T Sac<3/Artifact.Other;Creature.Other/other artifacts and/or creature> | DigNum$ 3 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard.
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:{T}, Sacrifice three other artifacts and/or creatures: Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard.\nPartner (You can have two commanders if both have partner.)

@@ -1,0 +1,9 @@
+Name:Stick Together
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ Player | ChooseParty$ True | SubAbility$ SacAllOthers | StackDescription$ SpellDescription | SpellDescription$ Each player chooses a party from among creatures they control,
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.nonChosenCard | StackDescription$ then sacrifices the rest. | SpellDescription$ then sacrifices the rest. (To choose a party, choose up to one each of Cleric, Rogue, Warrior, and Wizard.)
+DeckHints:Ability$Party
+DeckNeeds:Type$Cleric|Rogue|Warrior|Wizard
+AI:RemoveDeck:Random
+Oracle:Each player chooses a party from among creatures they control, then sacrifices the rest. (To choose a party, choose up to one each of Cleric, Rogue, Warrior, and Wizard.)

@@ -1,0 +1,7 @@
+Name:Frost Raptor
+ManaCost:2 U
+Types:Snow Creature Bird
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ S S | KW$ Shroud | Defined$ Self | SpellDescription$ CARDNAME gains shroud until end of turn.
+Oracle:Flying\n{S}{S}: Frost Raptor gains shroud until end of turn. ({S} can be paid with one mana from a snow source. A creature with shroud can't be the target of spells or abilities.)

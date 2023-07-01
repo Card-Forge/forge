@@ -1,0 +1,9 @@
+Name:Moonmist
+ManaCost:1 G
+Types:Instant
+A:SP$ SetState | Defined$ Valid Creature.Human | Mode$ Transform | SubAbility$ DBCurseNonWolves | StackDescription$ SpellDescription | SpellDescription$ Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves. (Only double-faced cards can be transformed.)
+SVar:DBCurseNonWolves:DB$ Effect | ReplacementEffects$ RPrevent
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.nonWerewolf+nonWolf | Description$ Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves.
+SVar:NeedsToPlay:Human.YouCtrl+CanTransform
+AI:RemoveDeck:All
+Oracle:Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves. (Only double-faced cards can be transformed.)

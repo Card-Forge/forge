@@ -1,0 +1,6 @@
+Name:Krenko's Enforcer
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+PT:2/2
+K:Intimidate
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)

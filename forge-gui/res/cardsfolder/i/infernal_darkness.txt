@@ -1,0 +1,9 @@
+Name:Infernal Darkness
+ManaCost:2 B B
+Types:Enchantment
+K:Cumulative upkeep:B PayLife<1>:Pay {B} and 1 life.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ReplaceWith$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type.
+SVar:ProduceB:DB$ ReplaceMana | ReplaceType$ B
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Cumulative upkeep—Pay {B} and 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nIf a land is tapped for mana, it produces {B} instead of any other type.

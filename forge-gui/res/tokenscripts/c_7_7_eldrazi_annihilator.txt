@@ -1,0 +1,6 @@
+Name:Eldrazi Token
+ManaCost:no cost
+Types:Creature Eldrazi
+PT:7/7
+K:Annihilator:1
+Oracle:Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)

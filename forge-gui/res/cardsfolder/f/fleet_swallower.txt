@@ -1,0 +1,9 @@
+Name:Fleet Swallower
+ManaCost:5 U U
+Types:Creature Fish
+PT:6/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, target player mills half their library, rounded up.
+SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:X:TargetedPlayer$CardsInLibrary/HalfUp
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Fleet Swallower attacks, target player mills half their library, rounded up.

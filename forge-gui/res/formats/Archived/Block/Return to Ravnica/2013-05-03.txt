@@ -1,0 +1,6 @@
+[format]
+Name:Block: Return to Ravnica (DGM)
+Type:Archived
+Subtype:Block
+Effective:2013-05-03
+Sets:RTR, GTC, DGM

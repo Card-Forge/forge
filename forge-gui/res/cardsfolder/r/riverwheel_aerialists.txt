@@ -1,0 +1,7 @@
+Name:Riverwheel Aerialists
+ManaCost:5 U
+Types:Creature Djinn Monk
+PT:4/5
+K:Flying
+K:Prowess
+Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

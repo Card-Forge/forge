@@ -1,0 +1,7 @@
+Name:Hanna's Custody
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ Shroud | Description$ All artifacts have shroud. (They can't be the targets of spells or abilities.)
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All artifacts have shroud. (They can't be the targets of spells or abilities.)

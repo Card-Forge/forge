@@ -1,0 +1,6 @@
+Name:Thud
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ R Sac<1/Creature> | NumDmg$ X | ValidTgts$ Any | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+SVar:X:Sacrificed$CardPower
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nThud deals damage equal to the sacrificed creature's power to any target.

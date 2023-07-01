@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ARN 3 Strategy: Patriarch Control
+Title=Patriarch Control
+Difficulty=hard
+Description="We made tempestuous winds obedient to Solomon... And many of the devils We also made obedient to him." -The Qur'an, 21:81
+Icon=Patriarch Control.jpg
+Deck Type=constructed
+[Main]
+4 Abu Ja'far|ARN
+2 Aladdin's Ring|ARN
+4 City of Brass|ARN
+4 Dancing Scimitar|ARN
+4 Elephant Graveyard|ARN
+12 Island|LEA|1
+1 Jandor's Ring|ARN
+4 King Suleiman|ARN
+1 Library of Alexandria|ARN
+4 Old Man of the Sea|ARN
+7 Plains|LEA|2
+2 Serendib Djinn|ARN
+4 Serendib Efreet|ARN
+3 Sindbad|ARN
+4 War Elephant|ARN|2

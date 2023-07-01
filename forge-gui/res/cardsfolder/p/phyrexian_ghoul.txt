@@ -1,0 +1,7 @@
+Name:Phyrexian Ghoul
+ManaCost:2 B
+Types:Creature Phyrexian Zombie
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:AIPreference:SacCost$Creature.Other
+Oracle:Sacrifice a creature: Phyrexian Ghoul gets +2/+2 until end of turn.

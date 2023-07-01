@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Strength in Numbers
+Description=Build up a powerful army and overrun the battlefield. Find glory and strength in numbers.
+Deck Type=constructed
+Set=ANA
+[Main]
+1 Act of Treason|M19
+2 Boggart Brute|M19
+1 Burning Sun's Avatar|XLN
+1 Captivating Crew|XLN
+2 Cavalry Drillmaster|M19
+1 Clifftop Retreat|DOM
+3 Goblin Instigator|M19
+3 Heroic Reinforcements|M19
+2 Hieromancer's Cage|M19
+1 Inspired Charge|M19
+1 Kinjalli's Sunwing|XLN
+3 Leonin Vanguard|M19
+1 Leonin Warleader|M19
+3 Lightning Strike|M19
+1 Make a Stand|M19
+2 Martyr of Dusk|RIX
+1 Mentor of the Meek|M19
+3 Militia Bugler|M19
+9 Mountain|GRN
+2 Paladin of the Bloodstained|XLN
+10 Plains|GRN
+1 Siege-Gang Commander|DOM
+4 Stone Quarry|M19
+2 Trumpet Blast|M19
+
+

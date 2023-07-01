@@ -1,0 +1,12 @@
+Name:Junkyard Scrapper
+ManaCost:2 R
+Types:Creature Goblin Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a nontoken artifact enters the battlefield under your control, exile a random nonland artifact card with lesser mana value from your library. You may cast that card until the end of your next turn.
+SVar:TrigExile:DB$ ChangeZone | ChangeType$ Artifact.nonLand+cmcLTX | Origin$ Library | Destination$ Exile | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckNeeds:Type$Artifact
+Oracle:Whenever a nontoken artifact enters the battlefield under your control, exile a random nonland artifact card with lesser mana value from your library. You may cast that card until the end of your next turn.

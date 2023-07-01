@@ -1,0 +1,5 @@
+Name:Jasmine Boreal
+ManaCost:3 G W
+Types:Legendary Creature Human
+PT:4/5
+Oracle:

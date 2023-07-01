@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=MIR 2 Theme Deck: Jungle Jam
+Title=Jungle Jam
+Difficulty=medium
+Description=Constructed by Magic Online tournament winner Markus Pettersson, the "Jungle Jam" deck lets you truly unleash your animal instincts. This aggressive deck can accumulate an unstoppable Griffin air force, aided by an array of angry animals on the ground. Bare your claws, growl, and attack!
+Icon=Theme Deck - 1996-10 Mirage - Jungle Jam.jpg
+Deck Type=constructed
+[Main]
+1 Afterlife|MIR
+2 Armor of Thorns|MIR
+1 Benevolent Unicorn|MIR
+1 Disenchant|MIR
+2 Ekundu Griffin|MIR
+2 Foratog|MIR
+11 Forest|MIR|1
+3 Gibbering Hyenas|MIR
+1 Grasslands|MIR
+3 Jolrael's Centaur|MIR
+2 Mtenda Griffin|MIR
+2 Nettletooth Djinn|MIR
+2 Pacifism|MIR
+10 Plains|MIR|2
+3 Quirion Elves|MIR
+3 Rampant Growth|MIR
+1 Ritual of Steel|MIR
+2 Teremko Griffin|MIR
+2 Unyaro Griffin|MIR
+1 Vitalizing Cascade|MIR
+1 Worldly Tutor|MIR
+1 Zuberi, Golden Feather|MIR

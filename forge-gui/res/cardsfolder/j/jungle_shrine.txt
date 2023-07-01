@@ -1,0 +1,6 @@
+Name:Jungle Shrine
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G W | SpellDescription$ Add {R}, {G}, or {W}.
+Oracle:Jungle Shrine enters the battlefield tapped.\n{T}: Add {R}, {G}, or {W}.

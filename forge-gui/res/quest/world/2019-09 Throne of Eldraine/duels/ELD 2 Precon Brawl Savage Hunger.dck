@@ -1,0 +1,22 @@
+[metadata]
+Title=Brawl Deck: Savage Hunger
+Difficulty=medium
+Description=A curated version of the official Brawl Deck, with the non-Eldraine cards replaced.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Precon: Brawl: Savage Hunger
+[Main]
+4 Bake into a Pie|ELD
+3 Chittering Witch|ELD
+9 Forest|ELD|2
+3 Gluttonous Troll|ELD
+4 Golden Egg|ELD
+4 Keeper of Fables|ELD
+4 Korvold, Fae-Cursed King|ELD
+6 Mountain|ELD|1
+4 Savvy Hunter|ELD
+13 Swamp|ELD|1
+4 Syr Konrad, the Grim|ELD
+2 Taste of Death|ELD
+[Sideboard]
+1 Witch's Oven|ELD

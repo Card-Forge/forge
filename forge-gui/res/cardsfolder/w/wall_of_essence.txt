@@ -1,0 +1,10 @@
+Name:Wall of Essence
+ManaCost:1 W
+Types:Creature Wall
+PT:0/4
+K:Defender
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Essence is dealt combat damage, you gain that much life.

@@ -1,0 +1,7 @@
+Name:Archangel
+ManaCost:5 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

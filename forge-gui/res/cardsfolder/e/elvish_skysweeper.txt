@@ -1,0 +1,6 @@
+Name:Elvish Skysweeper
+ManaCost:G
+Types:Creature Elf Warrior
+PT:1/1
+A:AB$ Destroy | Cost$ 4 G Sac<1/Creature> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+Oracle:{4}{G}, Sacrifice a creature: Destroy target creature with flying.

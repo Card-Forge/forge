@@ -1,0 +1,7 @@
+Name:Hound of Griselbrand
+ManaCost:2 R R
+Types:Creature Elemental Dog
+PT:2/2
+K:Double Strike
+K:Undying
+Oracle:Double strike\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

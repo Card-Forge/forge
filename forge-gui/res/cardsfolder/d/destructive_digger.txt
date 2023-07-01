@@ -1,0 +1,8 @@
+Name:Destructive Digger
+ManaCost:2 R
+Types:Creature Goblin
+PT:3/2
+A:AB$ Draw | Cost$ 3 T Sac<1/Artifact;Land/artifact or land> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:AIPreference:SacCost$Artifact.token+nonCreature,Artifact.token+powerLE1,Artifact.cmcEQ1,Artifact.cmcEQ2
+AI:RemoveDeck:Random
+Oracle:{3}, {T}, Sacrifice an artifact or land: Draw a card.

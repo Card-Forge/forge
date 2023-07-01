@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Sliver Evolution
+Description=Slivers share a hive mind. Whatever one thinks, they all think. Whatever one can do, they can all do. Slivers have mutated over the years, and the Sliver Evolution deck shows off their new, deadlier skills. But they still think the same thing they always did: "Smash anything that's not a Sliver."
+Deck Type=constructed
+Set=TSP
+Image=sliver_evolution.jpg
+
+[Main]
+1 Avoid Fate|TSB
+3 Bonesplitter Sliver|TSP
+8 Forest|TSP|1
+1 Fungus Sliver|TSP
+2 Fury Sliver|TSP
+4 Gemhide Sliver|TSP
+1 Gemstone Mine|TSB
+1 Harmonic Sliver|TSP
+2 Might Sliver|TSP
+1 Molder|TSP
+6 Mountain|TSP|1
+8 Plains|TSP|1
+1 Pulmonic Sliver|TSP
+3 Quilled Sliver|TSP
+3 Sidewinder Sliver|TSP
+2 Spined Sliver|TSB
+2 Spirit Loop|TSP
+2 Strength in Numbers|TSP
+2 Terramorphic Expanse|TSP
+2 Two-Headed Sliver|TSP
+2 Venser's Sliver|TSP
+3 Watcher Sliver|TSP
+[Sideboard]

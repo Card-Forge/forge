@@ -1,0 +1,8 @@
+Name:Bloodfire Enforcers
+ManaCost:3 R
+Types:Creature Human Monk
+PT:5/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike & Trample | CheckSVar$ X | CheckSecondSVar$ Y | Description$ CARDNAME has first strike and trample as long as an instant card and a sorcery card are in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn
+SVar:Y:Count$ValidGraveyard Sorcery.YouOwn
+Oracle:Bloodfire Enforcers has first strike and trample as long as an instant card and a sorcery card are in your graveyard.

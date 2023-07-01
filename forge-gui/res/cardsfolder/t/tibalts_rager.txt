@@ -1,0 +1,8 @@
+Name:Tibalt's Rager
+ManaCost:1 R
+Types:Creature Devil
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:When Tibalt's Rager dies, it deals 1 damage to any target.\n{1}{R}: Tibalt's Rager gets +2/+0 until end of turn.

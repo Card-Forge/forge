@@ -1,0 +1,6 @@
+Name:Ancient Silverback
+ManaCost:4 G G
+Types:Creature Ape
+PT:6/5
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:{G}: Regenerate Ancient Silverback. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)

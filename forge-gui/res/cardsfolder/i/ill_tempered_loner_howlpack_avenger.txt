@@ -1,0 +1,28 @@
+Name:Ill-Tempered Loner
+ManaCost:2 R R
+Types:Creature Human Werewolf
+PT:3/3
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Whenever Ill-Tempered Loner is dealt damage, it deals that much damage to any target.\n{1}{R}: Ill-Tempered Loner gets +2/+0 until end of turn.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Howlpack Avenger
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:4/4
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Permanent.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control is dealt damage, CARDNAME deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+SVar:X:TriggerCount$DamageAmount
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddSVar$ CE
+SVar:CE:SVar:HasCombatEffect:TRUE
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+K:Nightbound
+Oracle:Whenever a permanent you control is dealt damage, Howlpack Avenger deals that much damage to any target.\n{1}{R}: Howlpack Avenger gets +2/+0 until end of turn.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

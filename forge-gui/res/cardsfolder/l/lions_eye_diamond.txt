@@ -1,0 +1,6 @@
+Name:Lion's Eye Diamond
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> Discard<0/Hand> | Produced$ Any | Amount$ 3 | InstantSpeed$ True | SpellDescription$ Add three mana of any one color. Activate only as an instant.
+AI:RemoveDeck:All
+Oracle:Discard your hand, Sacrifice Lion's Eye Diamond: Add three mana of any one color. Activate only as an instant.

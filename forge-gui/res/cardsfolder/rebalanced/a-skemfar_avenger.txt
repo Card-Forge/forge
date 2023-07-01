@@ -1,0 +1,9 @@
+Name:A-Skemfar Avenger
+ManaCost:1 B
+Types:Creature Elf Berserker
+PT:3/1
+T:Mode$ ChangesZone | ValidCard$ Elf.Other+YouCtrl,Berserker.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Elf or Berserker you control dies, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+DeckHints:Type$Elf|Berserker
+Oracle:Whenever another Elf or Berserker you control dies, you draw a card and you lose 1 life.

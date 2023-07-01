@@ -1,0 +1,13 @@
+Name:Pixie Illusionist
+ManaCost:U
+Types:Creature Faerie Wizard
+PT:1/1
+K:Kicker:3 G
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+K:Flying
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land you control becomes the basic land type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
+SVar:WasKicked:Count$Kicked.1.0
+DeckHas:Ability$Counters
+DeckHints:Color$Green
+Oracle:Kicker {3}{G} (You may pay an additional {3}{G} as you cast this spell.)\nFlying\nIf Pixie Illusionist was kicked, it enters the battlefield with two +1/+1 counters on it.\n{T}: Target land you control becomes the basic land type of your choice until end of turn.

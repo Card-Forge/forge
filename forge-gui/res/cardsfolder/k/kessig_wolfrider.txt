@@ -1,0 +1,9 @@
+Name:Kessig Wolfrider
+ManaCost:R
+Types:Creature Human Knight
+PT:1/2
+K:Menace
+A:AB$ Token | Cost$ 2 R T ExileFromGrave<3/Card> | TokenScript$ r_3_2_wolf | StackDescription$ SpellDescription | SpellDescription$ Create a 3/2 red Wolf creature token.
+SVar:AIPreference:ExileFromGraveCost$Card
+DeckHas:Ability$Token
+Oracle:Menace\n{2}{R}, {T}, Exile three cards from your graveyard: Create a 3/2 red Wolf creature token.

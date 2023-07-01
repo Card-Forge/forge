@@ -1,0 +1,8 @@
+Name:Stoic Champion
+ManaCost:W W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+AI:RemoveDeck:Random
+Oracle:Whenever a player cycles a card, Stoic Champion gets +2/+2 until end of turn.

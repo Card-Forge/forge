@@ -1,0 +1,7 @@
+Name:Seaside Haven
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ W U T Sac<1/Bird> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{W}{U}, {T}, Sacrifice a Bird: Draw a card.

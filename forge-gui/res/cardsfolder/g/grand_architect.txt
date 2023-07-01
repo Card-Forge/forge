@@ -1,0 +1,9 @@
+Name:Grand Architect
+ManaCost:1 U U
+Types:Creature Vedalken Artificer
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
+A:AB$ Animate | Cost$ U | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | Colors$ Blue | OverwriteColors$ True | SpellDescription$ Target artifact creature becomes blue until end of turn.
+A:AB$ Mana | Cost$ tapXType<1/Creature.Blue> | Produced$ C | Amount$ 2 | RestrictValid$ Spell.Artifact,Activated.Artifact+inZoneBattlefield | SpellDescription$ Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+AI:RemoveDeck:Random
+Oracle:Other blue creatures you control get +1/+1.\n{U}: Target artifact creature becomes blue until end of turn.\nTap an untapped blue creature you control: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.

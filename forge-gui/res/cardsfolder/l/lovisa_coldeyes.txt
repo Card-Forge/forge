@@ -1,0 +1,8 @@
+Name:Lovisa Coldeyes
+ManaCost:3 R R
+Types:Legendary Creature Human
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Warrior,Creature.Berserker,Creature.Barbarian | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Each creature that's a Barbarian, a Warrior, or a Berserker gets +2/+2 and has haste.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature.Warrior,Creature.Berserker,Creature.Barbarian
+Oracle:Each creature that's a Barbarian, a Warrior, or a Berserker gets +2/+2 and has haste.

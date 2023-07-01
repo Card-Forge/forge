@@ -1,0 +1,8 @@
+Name:Vedalken Infiltrator
+ManaCost:1 U
+Types:Creature Vedalken Rogue
+PT:1/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME gets +1/+0 as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+Oracle:Vedalken Infiltrator can't be blocked.\nMetalcraft — Vedalken Infiltrator gets +1/+0 as long as you control three or more artifacts.

@@ -1,0 +1,7 @@
+Name:Soul of the Rapids
+ManaCost:3 U U
+Types:Creature Elemental
+PT:3/2
+K:Flying
+K:Hexproof
+Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

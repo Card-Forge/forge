@@ -1,0 +1,8 @@
+Name:Blinding Fog
+ManaCost:2 G
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | SubAbility$ DBPumpAll | SpellDescription$ Prevent all damage that would be dealt to creatures this turn. Creatures you control gain hexproof until end of turn. (They can't be the targets of spells or abilities your opponents control.)
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature | Description$ Prevent all damage that would be dealt to creatures this turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Hexproof
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt to creatures this turn. Creatures you control gain hexproof until end of turn. (They can't be the targets of spells or abilities your opponents control.)

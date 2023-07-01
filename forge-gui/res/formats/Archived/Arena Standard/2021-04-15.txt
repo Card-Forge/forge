@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (STX)
+Type:Archived
+Subtype:Standard
+Effective:2021-04-15
+Sets:ANA, PANA, ELD, THB, IKO, M21, ANB, ZNR, KHM, STX
+Banned:Cauldron Familiar; Escape to the Wilds; Fires of Invention; Lucky Clover; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Uro, Titan of Nature's Wrath

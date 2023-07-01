@@ -1,0 +1,12 @@
+Name:Halana and Alena, Partners
+ManaCost:2 R G
+Types:Legendary Creature Human Ranger
+PT:2/3
+K:Reach
+K:First Strike
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is NICKNAME's power. That creature gains haste until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:First strike, reach\nAt the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.

@@ -1,0 +1,8 @@
+Name:Barkhide Troll
+ManaCost:G G
+Types:Creature Troll
+PT:2/2
+K:etbCounter:P1P1:1
+A:AB$ Pump | Cost$ 1 SubCounter<1/P1P1> | KW$ Hexproof | Defined$ Self | SpellDescription$ CARDNAME gains hexproof until end of turn.
+DeckHas:Ability$Counters
+Oracle:Barkhide Troll enters the battlefield with a +1/+1 counter on it.\n{1}, Remove a +1/+1 counter from Barkhide Troll: Barkhide Troll gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

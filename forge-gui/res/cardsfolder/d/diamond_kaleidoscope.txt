@@ -1,0 +1,6 @@
+Name:Diamond Kaleidoscope
+ManaCost:4
+Types:Artifact
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ c_0_1_a_prism | TokenOwner$ You | SpellDescription$ Create a 0/1 colorless Prism artifact creature token.
+A:AB$ Mana | Cost$ Sac<1/Prism.token/Prism token> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{3}, {T}: Create a 0/1 colorless Prism artifact creature token.\nSacrifice a Prism token: Add one mana of any color.

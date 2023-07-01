@@ -1,0 +1,7 @@
+Name:Jandor's Ring
+ManaCost:6
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T Discard<1/LastDrawn> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+DeckHas:Ability$Discard
+Oracle:{2}, {T}, Discard the last card you drew this turn: Draw a card.

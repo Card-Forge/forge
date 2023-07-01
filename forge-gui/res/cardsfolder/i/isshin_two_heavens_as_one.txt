@@ -1,0 +1,6 @@
+Name:Isshin, Two Heavens as One
+ManaCost:R W B
+Types:Legendary Creature Human Samurai
+PT:3/4
+S:Mode$ Panharmonicon | ValidMode$ Attacks,AttackersDeclared,AttackersDeclaredOneTarget | ValidCard$ Permanent.YouCtrl | ValidCause$ Creature | Description$ If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

@@ -1,0 +1,10 @@
+Name:Old Gnawbone
+ManaCost:5 G G
+Types:Legendary Creature Dragon
+PT:7/7
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control deals combat damage to a player, create that many Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever a creature you control deals combat damage to a player, create that many Treasure tokens.

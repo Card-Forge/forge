@@ -1,0 +1,10 @@
+Name:Treva, the Renewer
+ManaCost:3 G W U
+Types:Legendary Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.
+SVar:TrigChoose:AB$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentPermanent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Card.ChosenColor
+Oracle:Flying\nWhenever Treva, the Renewer deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.

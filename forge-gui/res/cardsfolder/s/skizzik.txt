@@ -1,0 +1,14 @@
+Name:Skizzik
+ManaCost:3 R
+Types:Creature Elemental
+PT:5/3
+K:Haste
+K:Trample
+K:Kicker:R
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+!kicked | Execute$ TrigNotKicked | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if CARDNAME wasn't kicked, sacrifice it.
+SVar:TrigNotKicked:DB$ Sacrifice
+# The following construct specifies that the AI always plays the spell kicked, and plays it unkicked on its own turn only if it will attack
+SVar:NeedsToPlay:WillAttack
+SVar:NeedsToPlayKickedVar:Z GE1
+SVar:Z:Number$1
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nTrample, haste\nAt the beginning of the end step, if Skizzik wasn't kicked, sacrifice it.

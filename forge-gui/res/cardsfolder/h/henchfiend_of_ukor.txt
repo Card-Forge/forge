@@ -1,0 +1,12 @@
+Name:Henchfiend of Ukor
+ManaCost:3 R
+Types:Creature Ogre
+PT:3/2
+K:Haste
+K:Echo:1 B
+A:AB$ Pump | Cost$ BR | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$Valid Swamp.YouCtrl
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:Haste\nEcho {1}{B} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{B/R}: Henchfiend of Ukor gets +1/+0 until end of turn.

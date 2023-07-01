@@ -1,0 +1,8 @@
+Name:Incarnation Technique
+ManaCost:4 B
+Types:Sorcery
+K:Demonstrate
+A:SP$ Mill | Defined$ You | NumCards$ 5 | SubAbility$ DBChangeZone | StackDescription$ {p:You} mills five cards, | SpellDescription$ Mill five cards,
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Choose a creature card to return to the battlefield | Hidden$ True | StackDescription$ then returns a creature card from their graveyard to the battlefield. | SpellDescription$ then return a creature card from your graveyard to the battlefield.
+DeckHas:Ability$Mill|Graveyard
+Oracle:Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it.)\nMill five cards, then return a creature card from your graveyard to the battlefield.

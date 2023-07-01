@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Time Drain
+Description=As Urza builds his Legacy by completing the famed ship Weatherlight, an unlikely band of faeries aids him. Use legions of free creatures and cycling cards in "Time Drain" to crush your opponents before they have a chance to prepare for battle. Make sure time is on your side.
+Deck Type=constructed
+Set=ULG
+Image=time_drain.jpg
+[main]
+1 Thran War Machine|ULG
+8 Forest|USG
+11 Island|USG
+2 Acridian|USG
+1 Anthroplasm|ULG
+1 Archivist|ULG
+1 Bloated Toad|ULG
+3 Cloud of Faeries|ULG
+1 Darkwatch Elves|ULG
+2 Peregrine Drake|USG
+3 Simian Grunts|ULG
+2 Thornwind Faeries|ULG
+1 Walking Sponge|ULG
+1 Weatherseed Faeries|ULG
+1 Confiscate|USG
+1 Zephid's Embrace|USG
+2 Frantic Search|ULG
+2 Intervene|ULG
+2 Miscalculation|ULG
+1 Opportunity|ULG
+1 Rewind|USG
+2 Snap|ULG
+1 Faerie Conclave|ULG
+2 Remote Isle|USG
+2 Slippery Karst|USG
+1 Treetop Village|ULG
+2 Exhaustion|USG
+2 Hush|USG
+[sideboard]

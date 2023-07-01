@@ -1,0 +1,7 @@
+Name:Master Transmuter
+ManaCost:3 U
+Types:Artifact Creature Human Artificer
+PT:1/2
+A:AB$ ChangeZone | Cost$ U T Return<1/Artifact> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ You may put an artifact card from your hand onto the battlefield.
+AI:RemoveDeck:Random
+Oracle:{U}, {T}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.

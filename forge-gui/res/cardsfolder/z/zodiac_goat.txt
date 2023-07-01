@@ -1,0 +1,6 @@
+Name:Zodiac Goat
+ManaCost:R
+Types:Creature Goat
+PT:1/1
+K:Mountainwalk
+Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 3 Dangers of Dakmor
+Title=Dangers of Dakmor
+Difficulty=easy
+Description=The dead sing their own lullabies.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Dakmor Bat|PO2
+3 Dakmor Plague|PO2
+4 Dakmor Scorpion|PO2
+3 Foul Spirit|PO2
+3 Hidden Horror|PO2
+4 Moaning Spirit|PO2
+4 Muck Rats|PO2
+4 Ravenous Rats|PO2
+24 Swamp|PO2|2
+4 Swarm of Rats|PO2
+3 Vampiric Spirit|PO2

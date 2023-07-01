@@ -1,0 +1,10 @@
+Name:Mourning Thrull
+ManaCost:1 WB
+Types:Creature Thrull
+PT:1/1
+K:Flying
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:({W/B} can be paid with either {W} or {B}.)\nFlying\nWhenever Mourning Thrull deals damage, you gain that much life.

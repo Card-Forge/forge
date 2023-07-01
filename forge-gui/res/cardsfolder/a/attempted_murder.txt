@@ -1,0 +1,10 @@
+Name:Attempted Murder
+ManaCost:X B B
+Types:Sorcery
+A:SP$ RollDice | Amount$ X | Sides$ 6 | EvenOddResults$ True | SubAbility$ DBPutCounter | SpellDescription$ Choose target creature. Roll X six-sided dice.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ Y | SubAbility$ DBToken | StackDescription$ For each even result, put two -1/-1 counters on {c:Targeted}. | SpellDescription$ For each even result, put two -1/-1 counters on that creature.
+SVar:DBToken:DB$ Token | TokenAmount$ OddResults | TokenScript$ storm_crow | SpellDescription$ For each odd result, create a 1/2 blue Bird creature token with flying named Storm Crow.
+SVar:X:Count$xPaid
+SVar:Y:SVar$EvenResults/Twice
+DeckHas:Ability$Counters|Token & Type$Bird
+Oracle:Choose target creature. Roll X six-sided dice. For each even result, put two -1/-1 counters on that creature. For each odd result, create a 1/2 blue Bird creature token with flying named Storm Crow.

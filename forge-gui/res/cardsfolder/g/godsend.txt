@@ -1,0 +1,16 @@
+Name:Godsend
+ManaCost:1 W W
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Equipped creature gets +3/+3.
+T:Mode$ Blocks | ValidCard$ Card.EquippedBy | ValidBlocked$ Creature | Execute$ TrigChooseAttackers | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
+T:Mode$ AttackerBlocked | ValidCard$ Card.EquippedBy | ValidBlocker$ Creature | Execute$ TrigChooseBlockers | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
+SVar:TrigChooseAttackers:DB$ ChooseCard | DefinedCards$ TriggeredAttackers | SubAbility$ DBExile
+SVar:TrigChooseBlockers:DB$ ChooseCard | DefinedCards$ TriggeredBlockers | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
+S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as a card exiled with CARDNAME.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Equip:3
+Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.\nYour opponents can't cast spells with the same name as a card exiled with Godsend.\nEquip {3}

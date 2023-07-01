@@ -1,0 +1,71 @@
+BasicLandPercentage=0
+
+[Group MaxCnt=4 Percentage=34]
+Ancient Den
+Darksteel Citadel
+Great Furnace
+Seat of the Synod
+Tree of Tales
+Vault of Whispers
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Arcbound Worker
+Arcbound Worker
+Arcbound Worker
+Tablet of Epityr
+Urza's Chalice
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Arcbound Ravager
+Arcbound Slith
+Arcbound Stinger
+Frogmite
+Frogmite
+Golem's Heart
+Steel Overseer
+Steel Overseer
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Battered Golem
+Etched Champion
+Golem Foundry
+Scale of Chiss-Goria
+Scrapheap
+Serum Tank
+Snapsail Glider
+Tooth of Chiss-Goria
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Arcbound Crusher
+Arcbound Hybrid
+Chrome Steed
+Drill-Skimmer
+Lodestone Golem
+Lodestone Golem
+Myr Enforcer
+Myr Enforcer
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Arcbound Bruiser
+Darksteel Juggernaut
+Darksteel Juggernaut
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+All Is Dust
+All Is Dust
+Arcbound Lancer
+Darksteel Forge
+Darksteel Forge
+Mycosynth Golem
+Mycosynth Golem
+Razorfield Rhino
+Summoning Station
+[/Group]
+
+End

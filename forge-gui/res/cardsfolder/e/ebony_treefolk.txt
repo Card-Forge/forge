@@ -1,0 +1,6 @@
+Name:Ebony Treefolk
+ManaCost:1 B G
+Types:Creature Treefolk
+PT:3/3
+A:AB$ Pump | Cost$ B G | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:{B}{G}: Ebony Treefolk gets +1/+1 until end of turn.

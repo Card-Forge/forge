@@ -1,0 +1,9 @@
+Name:Loyal Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Flying\nLieutenant — At the beginning of combat on your turn, if you control your commander, draw a card.

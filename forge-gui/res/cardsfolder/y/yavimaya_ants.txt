@@ -1,0 +1,8 @@
+Name:Yavimaya Ants
+ManaCost:2 G G
+Types:Creature Insect
+PT:5/1
+K:Trample
+K:Haste
+K:Cumulative upkeep:G G
+Oracle:Trample, haste\nCumulative upkeep {G}{G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

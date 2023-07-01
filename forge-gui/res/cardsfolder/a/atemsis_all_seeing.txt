@@ -1,0 +1,13 @@
+Name:Atemsis, All-Seeing
+ManaCost:3 U U U
+Types:Legendary Creature Sphinx
+PT:4/5
+K:Flying
+A:AB$ Draw | Cost$ 2 U T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may reveal your hand. If cards with at least six different mana values are revealed this way, that player loses the game.
+SVar:TrigReveal:DB$ RevealHand | Defined$ You | RememberRevealed$ True | SubAbility$ DBLoseGame
+SVar:DBLoseGame:DB$ LosesGame | Defined$ TriggeredTarget | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$DifferentCMC
+Oracle:Flying\n{2}{U}, {T}: Draw two cards, then discard a card.\nWhenever Atemsis, All-Seeing deals damage to an opponent, you may reveal your hand. If cards with at least six different mana values are revealed this way, that player loses the game.

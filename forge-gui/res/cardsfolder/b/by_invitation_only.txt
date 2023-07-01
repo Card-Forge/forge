@@ -1,0 +1,7 @@
+Name:By Invitation Only
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChooseNumber | Defined$ You | Min$ 0 | Max$ 13 | SubAbility$ DBSac | AILogic$ SweepCreatures | StackDescription$ SpellDescription | SpellDescription$ Choose a number between 0 and 13. Each player sacrifices that many creatures.
+SVar:DBSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature | Amount$ X | StackDescription$ None
+SVar:X:Count$ChosenNumber
+Oracle:Choose a number between 0 and 13. Each player sacrifices that many creatures.

@@ -1,0 +1,10 @@
+Name:Lin Sivvi, Defiant Hero
+ManaCost:1 W W
+Types:Legendary Creature Human Rebel
+PT:1/3
+A:AB$ ChangeZone | Cost$ X T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLEX | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle.
+A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Rebel.YouCtrl | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | TgtPrompt$ Select target Rebel card in your graveyard | SpellDescription$ Put target Rebel card in your graveyard on the bottom of your library.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+SVar:NonCombatPriority:1
+Oracle:{X}, {T}: Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle.\n{3}: Put target Rebel card from your graveyard on the bottom of your library.

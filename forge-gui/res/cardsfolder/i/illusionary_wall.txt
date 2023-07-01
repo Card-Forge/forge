@@ -1,0 +1,9 @@
+Name:Illusionary Wall
+ManaCost:4 U
+Types:Creature Illusion Wall
+PT:7/4
+K:Defender
+K:Flying
+K:First Strike
+K:Cumulative upkeep:U
+Oracle:Defender, flying, first strike\nCumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

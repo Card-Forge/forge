@@ -1,0 +1,11 @@
+Name:Spotter Thopter
+ManaCost:8
+Types:Artifact Creature Thopter
+PT:4/5
+K:Prototype:3 U:2:3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry X, where X is its power.
+SVar:TrigScry:DB$ Scry | ScryNum$ X
+SVar:X:Count$CardPower
+DeckHints:Color$Blue
+Oracle:Prototype {3}{U} — 2/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nFlying\nWhen Spotter Thopter enters the battlefield, scry X, where X is its power.

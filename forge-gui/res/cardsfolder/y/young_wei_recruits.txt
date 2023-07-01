@@ -1,0 +1,6 @@
+Name:Young Wei Recruits
+ManaCost:1 B
+Types:Creature Human Soldier
+PT:2/2
+K:CARDNAME can't block.
+Oracle:Young Wei Recruits can't block.

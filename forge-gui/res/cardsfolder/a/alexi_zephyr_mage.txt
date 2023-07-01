@@ -1,0 +1,8 @@
+Name:Alexi, Zephyr Mage
+ManaCost:3 U U
+Types:Legendary Creature Human Spellshaper
+PT:3/3
+A:AB$ ChangeZone | Cost$ X U T Discard<2/Card/cards> | Origin$ Battlefield | Destination$ Hand | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Return X target creatures to their owners' hands.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}{U}, {T}, Discard two cards: Return X target creatures to their owners' hands.

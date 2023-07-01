@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grampa Simpson 2
+Title=Grampa Simpson
+Difficulty=medium
+Description=WR Double Strike deck with equipments and auras
+Icon=Grampa Simpson.jpg
+Deck Type=constructed
+[main]
+3 Mountain|ISD
+4 Clifftop Retreat
+4 Jungle Shrine
+4 Plateau
+4 Plains|ISD
+2 Arid Mesa
+2 Glorious Anthem
+2 Bonesplitter
+1 Skyblinder Staff
+1 Blight Sickle
+1 Kitesail
+1 Livewire Lash
+1 Gorgon Flail
+1 Quietus Spike
+1 Loxodon Warhammer
+1 Ogre's Cleaver
+2 Kor Duelist
+1 Student of Warfare
+3 Boros Swiftblade
+3 Viashino Slaughtermaster
+3 Fencing Ace
+2 Skyhunter Skirmisher
+1 Two-Headed Cerberus
+1 Arashin Foremost
+1 Rakdos Pit Dragon
+2 Iroas's Champion
+2 Hearthfire Hobgoblin
+1 Kinsbaile Cavalier
+1 Hound of Griselbrand
+1 Ridgetop Raptor
+1 Dragon-Style Twins
+1 Skyspear Cavalry
+1 Valorous Stance
+[sideboard]

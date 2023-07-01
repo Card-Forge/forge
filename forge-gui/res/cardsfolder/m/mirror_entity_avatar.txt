@@ -1,0 +1,8 @@
+Name:Mirror Entity Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/-2
+A:AB$ ChooseType | ActivationZone$ Command | Cost$ X | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBAnimate | SpellDescription$ Choose a creature type. Until end of turn, creatures you control of the chosen type have base power and toughness X/X and gain all creature types.
+SVar:DBAnimate:DB$ AnimateAll | Power$ X | Toughness$ X | AddAllCreatureTypes$ True | ValidCards$ Creature.YouCtrl+ChosenType
+SVar:X:Count$xPaid
+Oracle:Hand +1, life -2\n{X}: Choose a creature type. Until end of turn, creatures you control of the chosen type have base power and toughness X/X and gain all creature types.

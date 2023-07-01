@@ -1,0 +1,9 @@
+Name:Drana, Liberator of Malakir
+ManaCost:1 B B
+Types:Legendary Creature Vampire Ally
+PT:2/3
+K:Flying
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounters | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on each attacking creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+attacking | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying, first strike\nWhenever Drana, Liberator of Malakir deals combat damage to a player, put a +1/+1 counter on each attacking creature you control.

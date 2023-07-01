@@ -1,0 +1,6 @@
+Name:Mana Reflection
+ManaCost:4 G G
+Types:Enchantment
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidActivator$ You | ValidCard$ Permanent | ReplaceWith$ ProduceTwice | Description$ If you tap a permanent for mana, it produces twice as much of that mana instead.
+SVar:ProduceTwice:DB$ ReplaceMana | ReplaceAmount$ 2
+Oracle:If you tap a permanent for mana, it produces twice as much of that mana instead.

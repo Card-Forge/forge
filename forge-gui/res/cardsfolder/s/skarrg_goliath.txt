@@ -1,0 +1,7 @@
+Name:Skarrg Goliath
+ManaCost:6 G G
+Types:Creature Beast
+PT:9/9
+K:Trample
+A:AB$ Pump | Cost$ 5 G G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +9 | NumDef$ +9 | KW$ Trample | SpellDescription$ Target attacking creature gets +9/+9 and gains trample until end of turn.
+Oracle:Trample\nBloodrush — {5}{G}{G}, Discard Skarrg Goliath: Target attacking creature gets +9/+9 and gains trample until end of turn.

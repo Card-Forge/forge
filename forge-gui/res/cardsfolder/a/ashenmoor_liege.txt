@@ -1,0 +1,10 @@
+Name:Ashenmoor Liege
+ManaCost:1 BR BR BR
+Types:Creature Elemental Knight
+PT:4/1
+S:Mode$ Continuous | Affected$ Creature.Red+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other red creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures you control get +1/+1.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, that player loses 4 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredSourceSAController | LifeAmount$ 4
+SVar:PlayMain1:TRUE
+Oracle:Other black creatures you control get +1/+1.\nOther red creatures you control get +1/+1.\nWhenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.

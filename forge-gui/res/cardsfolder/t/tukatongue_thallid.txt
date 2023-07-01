@@ -1,0 +1,9 @@
+Name:Tukatongue Thallid
+ManaCost:G
+Types:Creature Fungus
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ TriggeredCardController
+SVar:SacMe:1
+DeckHas:Ability$Token
+Oracle:When Tukatongue Thallid dies, create a 1/1 green Saproling creature token.

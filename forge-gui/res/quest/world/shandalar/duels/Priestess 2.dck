@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Priestess 2
+Title=Priestess
+Icon=Priestess.jpg
+Difficulty=medium
+Description=Defensive White deck.
+Deck Type=constructed
+[main]
+1 Angelic Voices|LEG
+4 Animate Wall|LEB
+2 Blessing|LEB
+2 Castle|LEB
+1 Disenchant|4ED
+2 Elder Land Wurm|LEG
+2 Exorcist|DRK
+2 Guardian Angel|LEB
+3 Healing Salve|4ED
+3 Ivory Cup|LEB
+2 Pearled Unicorn|4ED
+23 Plains|4ED
+3 Spirit Link|LEG
+2 Swords to Plowshares|LEB
+2 Thunder Spirit|LEG
+4 Wall of Spears|ATQ
+4 Wall of Swords|4ED
+[sideboard]

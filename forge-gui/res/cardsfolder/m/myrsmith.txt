@@ -1,0 +1,9 @@
+Name:Myrsmith
+ManaCost:1 W
+Types:Creature Human Artificer
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an artifact spell, you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | TokenOwner$ You
+DeckHints:Type$Myr
+DeckHas:Ability$Token
+Oracle:Whenever you cast an artifact spell, you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token.

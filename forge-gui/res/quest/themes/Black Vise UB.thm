@@ -1,0 +1,74 @@
+BasicLandPercentage=22
+
+[Group MaxCnt=4 Percentage=13]
+Underground Sea
+Polluted Delta
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Black Vise
+Black Vise
+Black Vise
+Black Vise
+Ebony Owl Netsuke
+Iron Maiden
+Misers' Cage
+Trinket Mage
+Viseling
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Vision Skeins
+Wheel and Deal
+Timetwister
+Words of Wisdom
+Time Reversal
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Howling Mine
+Howling Mine
+Howling Mine
+Howling Mine
+Font of Mythos
+Spiteful Visions
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Jace Beleren
+Jace Beleren
+Kami of the Crescent Moon
+Kami of the Crescent Moon
+Seizan, Perverter of Truth
+Mikokoro, Center of the Sea
+[/Group]
+
+[Group MaxCnt=4 Percentage=9]
+Aven Fogbringer
+Clutch of the Undercity
+Deny Reality
+Glowing Anemone
+Hoodwink
+Regress
+Temporal Eddy
+Remand
+[/Group]
+
+[Group MaxCnt=3 Percentage=8]
+Befoul
+Caustic Rain
+Despoil
+Drain the Well
+Poison the Well
+Rain of Tears
+Sinkhole
+Stream of Acid
+[/Group]
+
+[Group MaxCnt=3 Percentage=5]
+Frozen AEther
+Winter Orb
+Sphere of Resistance
+[/Group]
+
+End

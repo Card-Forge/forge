@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Title=Pursuit of Knowledge
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=Black-White control with Necrologia
+Deck Type=constructed
+Name=Pursuit2
+[Main]
+3 Coffin Queen|TMP
+2 Commander Greven il-Vec|TMP
+4 Diabolic Edict|TMP
+1 Disenchant|TMP
+1 Erratic Portal|EXO
+2 Grave Pact|STH
+2 Helm of Possession|TMP
+2 Mox Diamond|STH
+4 Necrologia|EXO
+1 Plains|TMP|2
+6 Plains|TMP|3
+1 Plains|TMP|4
+2 Pursuit of Knowledge|STH
+1 Selenia, Dark Angel|TMP
+2 Soul Warden|EXO
+2 Spirit Mirror|TMP
+4 Staunch Defenders|TMP
+4 Reflecting Pool|TMP
+4 Salt Flats|TMP
+5 Swamp|TMP|2
+1 Swamp|TMP|3
+1 Swamp|TMP|4
+3 Wall of Essence|STH
+2 Warrior Angel|STH

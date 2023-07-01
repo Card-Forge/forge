@@ -1,0 +1,7 @@
+Name:Galerider Sliver
+ManaCost:U
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Flying | Description$ Sliver creatures you control have flying.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have flying.

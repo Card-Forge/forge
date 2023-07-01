@@ -1,0 +1,8 @@
+Name:Shriekgeist
+ManaCost:1 U
+Types:Creature Spirit
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player mills two cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 2
+Oracle:Flying\nWhenever Shriekgeist deals combat damage to a player, that player mills two cards.

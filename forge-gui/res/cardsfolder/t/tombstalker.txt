@@ -1,0 +1,7 @@
+Name:Tombstalker
+ManaCost:6 B B
+Types:Creature Demon
+PT:5/5
+K:Flying
+K:Delve
+Oracle:Flying\nDelve (Each card you exile from your graveyard while casting this spell pays for {1}.)

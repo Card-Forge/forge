@@ -1,0 +1,8 @@
+Name:Windbrisk Raptor
+ManaCost:5 W W
+Types:Creature Bird
+PT:5/7
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ Lifelink | Description$ Attacking creatures you control have lifelink.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nAttacking creatures you control have lifelink.

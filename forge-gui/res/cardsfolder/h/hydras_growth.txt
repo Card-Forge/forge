@@ -1,0 +1,11 @@
+Name:Hydra's Growth
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on enchanted creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of your upkeep, double the number of +1/+1 counters on enchanted creature.
+SVar:DBPump:DB$ MultiplyCounter | Defined$ Enchanted | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Enchant creature\nWhen Hydra's Growth enters the battlefield, put a +1/+1 counter on enchanted creature.\nAt the beginning of your upkeep, double the number of +1/+1 counters on enchanted creature.

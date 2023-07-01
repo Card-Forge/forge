@@ -1,0 +1,8 @@
+Name:Goreclaw, Terror of Qal Sisma
+ManaCost:3 G
+Types:Legendary Creature Bear
+PT:4/3
+S:Mode$ ReduceCost | ValidCard$ Creature.powerGE4 | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast with power 4 or greater cost {2} less to cast.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, each creature you control with power 4 or greater gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+powerGE4 | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+Oracle:Creature spells you cast with power 4 or greater cost {2} less to cast.\nWhenever Goreclaw, Terror of Qal Sisma attacks, each creature you control with power 4 or greater gets +1/+1 and gains trample until end of turn.

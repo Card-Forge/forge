@@ -1,0 +1,11 @@
+Name:Kunoros, Hound of Athreos
+ManaCost:1 W B
+Types:Legendary Creature Dog
+PT:3/3
+K:Vigilance
+K:Menace
+K:Lifelink
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Graveyard | Destination$ Battlefield | ValidLKI$ Creature.Other | Prevent$ True | Layer$ CantHappen | Description$ Creature cards in graveyards can't enter the battlefield.
+S:Mode$ CantBeCast | Origin$ Graveyard | Description$ Players can't cast spells from graveyards.
+SVar:NonStackingEffect:True
+Oracle:Vigilance, menace, lifelink\nCreature cards in graveyards can't enter the battlefield.\nPlayers can't cast spells from graveyards.

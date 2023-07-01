@@ -1,0 +1,12 @@
+Name:Jace, Arcane Strategist
+ManaCost:4 U U
+Types:Legendary Planeswalker Jace
+Loyalty:4
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SpellDescription$ Draw a card.
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | StaticAbilities$ Unblockable | SpellDescription$ Creatures you control can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | Description$ Creatures you control can't be blocked this turn.
+AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+Oracle:Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.\n[+1]: Draw a card.\n[-7]: Creatures you control can't be blocked this turn.

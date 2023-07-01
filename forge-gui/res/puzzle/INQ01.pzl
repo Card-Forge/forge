@@ -1,0 +1,25 @@
+[metadata]
+Name:Inquest Gamer - Dead Man's Hand #01
+URL:http://imgur.com/a/EeY71
+Goal:Play the Specified Permanent
+Targets:Card.YouCtrl+namedBroodstar
+Turns:1
+Difficulty:Hard
+Description:You can't win the game. Instead, play Broodstar before the end of your turn.\nYou know that the top four cards in your library are Ancient Tomb, Voltaic Key, Channel, and Welding Jar (in this order).
+[state]
+humanlife=7
+ailife=20
+activeplayer=ai
+activephase=CLEANUP
+humanhand=Broodstar;Gilded Lotus;Accumulated Knowledge;Grim Monolith
+humanlibrary=Ancient Tomb;Voltaic Key;Channel;Welding Jar;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+humangraveyard=
+humanbattlefield=City of Traitors;Voltaic Key;Teferi's Imp;Isochron Scepter|Id:9|Imprinting:8
+humanexile=Accumulated Knowledge|Id:8|ExiledWith:9
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=Squee, Goblin Nabob
+aibattlefield=Solitary Confinement;Millstone;Sterling Grove;Sterling Grove
+aiexile=
+aicommand=

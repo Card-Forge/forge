@@ -1,0 +1,11 @@
+Name:Devouring Strossus
+ManaCost:5 B B B
+Types:Creature Phyrexian Horror
+PT:9/9
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
+A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+AI:RemoveDeck:All
+Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature.\nSacrifice a creature: Regenerate Devouring Strossus.

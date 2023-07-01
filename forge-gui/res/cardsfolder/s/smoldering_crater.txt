@@ -1,0 +1,7 @@
+Name:Smoldering Crater
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+K:Cycling:2
+Oracle:Smoldering Crater enters the battlefield tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,7 @@
+Name:River Boa
+ManaCost:1 G
+Types:Creature Snake
+PT:2/1
+K:Islandwalk
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{G}: Regenerate River Boa.

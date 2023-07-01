@@ -1,0 +1,7 @@
+Name:Rustmouth Ogre
+ManaCost:4 R R
+Types:Creature Ogre
+PT:5/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact damaged player controls
+Oracle:Whenever Rustmouth Ogre deals combat damage to a player, you may destroy target artifact that player controls.

@@ -1,0 +1,9 @@
+Name:Sliver Legion
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+PT:7/7
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ X | AddToughness$ X | Description$ All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
+SVar:X:Count$Valid Sliver.Other
+SVar:BuffedBy:Sliver
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +1/+1 for each other Sliver on the battlefield.

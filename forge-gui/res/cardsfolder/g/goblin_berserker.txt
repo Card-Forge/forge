@@ -1,0 +1,7 @@
+Name:Goblin Berserker
+ManaCost:3 R
+Types:Creature Goblin Berserker
+PT:2/2
+K:First Strike
+K:Haste
+Oracle:First strike, haste

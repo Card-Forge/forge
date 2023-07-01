@@ -1,0 +1,8 @@
+Name:Synapse Sliver
+ManaCost:4 U
+Types:Creature Sliver
+PT:3/3
+T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | OptionalDecider$ TriggeredSourceController | Execute$ TrigDraw | TriggerDescription$ Whenever a Sliver deals combat damage to a player, its controller may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredSourceController | NumCards$ 1
+SVar:PlayMain1:TRUE
+Oracle:Whenever a Sliver deals combat damage to a player, its controller may draw a card.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #12 - To The Skies
+URL:https://pauperpuzzles.wordpress.com/2017/02/04/12-to-the-skies/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=8
+humanhand=Shimmering Grotto;Ghostly Flicker;Flame Slash;Diabolic Edict
+humanlibrary=Flame Slash;Urza's Tower;Echoing Decay;Rolling Thunder
+humanbattlefield=Urza's Mine;Urza's Power Plant;Urza's Tower;Swiftwater Cliffs;Wretched Gryff;Wretched Gryff;Mulldrifter;Prophetic Prism;Relic of Progenitus
+aibattlefield=Stormbound Geist;Stormbound Geist;Stormbound Geist
+aigraveyard=Scornful Egotist

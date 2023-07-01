@@ -1,0 +1,6 @@
+Name:Orchard Spirit
+ManaCost:2 G
+Types:Creature Spirit
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Description$ CARDNAME can't be blocked except by creatures with flying or reach.
+Oracle:Orchard Spirit can't be blocked except by creatures with flying or reach.

@@ -1,0 +1,7 @@
+Name:Virulent Sliver
+ManaCost:G
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Poisonous:1 | Description$ All Sliver creatures have poisonous 1. (Whenever a Sliver deals combat damage to a player, that player gets a poison counter. A player with ten or more poison counters loses the game.)
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have poisonous 1. (Whenever a Sliver deals combat damage to a player, that player gets a poison counter. A player with ten or more poison counters loses the game.)

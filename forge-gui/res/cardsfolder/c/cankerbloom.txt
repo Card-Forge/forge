@@ -1,0 +1,12 @@
+Name:Cankerbloom
+ManaCost:1 G
+Types:Creature Phyrexian Fungus
+PT:3/2
+A:AB$ Charm | Cost$ 1 Sac<1/CARDNAME> | Choices$ Artifact,Enchantment,Proliferate
+SVar:Artifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:Enchantment:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Proliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Sacrifice|Proliferate
+DeckHints:Ability$Counters
+AI:RemoveDeck:Random
+Oracle:{1}, Sacrifice Cankerbloom: Choose one —\n•Destroy target artifact.\n•Destroy target enchantment.\n•Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

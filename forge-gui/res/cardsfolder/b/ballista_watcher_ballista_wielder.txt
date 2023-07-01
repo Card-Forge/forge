@@ -1,0 +1,21 @@
+Name:Ballista Watcher
+ManaCost:2 R R
+Types:Creature Human Soldier Werewolf
+PT:4/3
+K:Daybound
+A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AlternateMode:DoubleFaced
+Oracle:{2}{R}, {T}: Ballista Watcher deals 1 damage to any target.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Ballista Wielder
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:5/5
+K:Nightbound
+A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 1 | RememberDamaged$ True | SubAbility$ DBNoBlock | SpellDescription$ CARDNAME deals 1 damage to any target. A creature dealt damage this way can't block this turn.
+SVar:DBNoBlock:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Creature | KW$ HIDDEN CARDNAME can't block. | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ A creature dealt damage this way can't block this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{2}{R}: Ballista Wielder deals 1 damage to any target. A creature dealt damage this way can't block this turn.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

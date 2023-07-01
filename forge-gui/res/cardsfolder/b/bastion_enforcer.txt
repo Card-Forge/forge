@@ -1,0 +1,5 @@
+Name:Bastion Enforcer
+ManaCost:2 W
+Types:Creature Dwarf Soldier
+PT:3/2
+Oracle:

@@ -1,0 +1,7 @@
+Name:Geier Reach Sanitarium
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 T | Defined$ Player | SpellDescription$ Each player draws a card, then discards a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player
+Oracle:{T}: Add {C}.\n{2}, {T}: Each player draws a card, then discards a card.

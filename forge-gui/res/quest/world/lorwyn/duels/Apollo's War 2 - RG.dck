@@ -1,0 +1,31 @@
+[duel]
+
+[metadata]
+Name=Apollo's War 2
+Title=Apollo
+Icon=Apollo.jpg
+Difficulty=medium
+Description=[R/G] Tibal Warrior Aggro.
+Deck Type=constructed
+
+[Main]
+8 Forest|SHM
+8 Mountain|SHM
+4 Mutavault|MOR
+4 Fire-Lit Thicket|SHM
+
+4 Boggart Ram-Gang|SHM
+4 Bramblewood Paragon|MOR
+4 Chameleon Colossus|MOR
+4 Countryside Crusher|MOR
+3 Flame Javelin|SHM
+1 Hurricane|10E
+4 Imperious Perfect|LRW
+2 Lash Out|LRW
+2 Tarfire|LRW
+4 Tattermunge Maniac|SHM
+4 Wren's Run Vanquisher|LRW
+
+[Sideboard]
+[Planes]
+[Schemes]

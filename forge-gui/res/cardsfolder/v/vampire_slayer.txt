@@ -1,0 +1,7 @@
+Name:Vampire Slayer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Vampire | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals damage to a Vampire, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Whenever Vampire Slayer deals damage to a Vampire, destroy that creature.

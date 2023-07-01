@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Infernal Pet
+OpponentName=The Pets
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Infernal Pet
+Difficulty=medium
+Description=Here, my pet. Another little light for you to snuff out."\n--Kzarakh, Immersturm gamekeeper
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Infernal Pet
+[Main]
+20 Infernal Pet|KHM|1
+10 Rune of Mortality|KHM|1
+30 Swamp|KHM|1

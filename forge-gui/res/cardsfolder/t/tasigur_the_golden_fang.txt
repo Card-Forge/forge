@@ -1,0 +1,9 @@
+Name:Tasigur, the Golden Fang
+ManaCost:5 B
+Types:Legendary Creature Human Shaman
+PT:4/5
+K:Delve
+A:AB$ Mill | Cost$ 2 GU GU | Defined$ You | NumCards$ 2 | SubAbility$ DBReturn | SpellDescription$ Mill two cards, then return a nonland card of an opponent's choice from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | DefinedPlayer$ You | Chooser$ Opponent | Hidden$ True | Mandatory$ True | ChangeType$ Card.nonLand+YouOwn | AILogic$ WorstCard
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\n{2}{G/U}{G/U}: Mill two cards, then return a nonland card of an opponent's choice from your graveyard to your hand.

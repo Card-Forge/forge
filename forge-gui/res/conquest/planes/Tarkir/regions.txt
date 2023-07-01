@@ -1,0 +1,5 @@
+Name:Abzan Houses|Art:Sandsteppe Citadel|Colors:WBG
+Name:Jeskai Way|Art:Mystic Monastery|Colors:URW
+Name:Mardu Horde|Art:Nomad Outpost|Colors:RWB
+Name:Sultai Brood|Art:Opulent Palace|Colors:BGU
+Name:Temur Frontier|Art:Frontier Bivouac|Colors:GUR

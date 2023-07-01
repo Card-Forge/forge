@@ -1,0 +1,9 @@
+Name:Avatar of Might
+ManaCost:6 G G
+Types:Creature Avatar
+PT:8/8
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ LEY | Description$ If an opponent controls at least four more creatures than you, CARDNAME costs {6} less to cast.
+SVar:X:Count$Valid Creature.YouCtrl/Plus.4
+SVar:Y:PlayerCountOpponents$HighestValid Creature.YouCtrl
+Oracle:If an opponent controls at least four more creatures than you, this spell costs {6} less to cast.\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

@@ -1,0 +1,11 @@
+Name:Tolarian Contempt
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a rejection counter on each creature your opponents control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.OppCtrl | CounterType$ REJECTION
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTarget | TriggerDescription$ At the beginning of your end step, for each opponent, choose up to one target creature they control with a rejection counter on it. That creature's owner puts it on the top or bottom of their library.
+SVar:TrigTarget:DB$ Pump | ValidTgts$ Creature.counters_GE1_REJECTION+OppCtrl | TgtPrompt$ Select up to one target creature each opponent controls with a rejection counter on it | TargetMin$ 0 | TargetMax$ PlayerCountOpponents$Amount | TargetsWithDifferentControllers$ True | SubAbility$ DBRepeat | IsCurse$ True
+SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Targeted | RepeatSubAbility$ DBLibrary
+SVar:DBLibrary:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDecider$ RememberedOwner | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)?
+DeckHas:Ability$Counters
+Oracle:When Tolarian Contempt enters the battlefield, put a rejection counter on each creature your opponents control.\nAt the beginning of your end step, for each opponent, choose up to one target creature they control with a rejection counter on it. That creature's owner puts it on the top or bottom of their library.

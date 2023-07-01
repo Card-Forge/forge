@@ -1,0 +1,8 @@
+Name:Sylvan Caryatid
+ManaCost:1 G
+Types:Creature Plant
+PT:0/3
+K:Defender
+K:Hexproof
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Defender, hexproof\n{T}: Add one mana of any color.

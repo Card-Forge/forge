@@ -1,0 +1,6 @@
+Name:Llanowar Knight
+ManaCost:G W
+Types:Creature Elf Knight
+PT:2/2
+K:Protection from black
+Oracle:Protection from black

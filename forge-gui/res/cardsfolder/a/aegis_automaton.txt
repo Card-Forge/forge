@@ -1,0 +1,6 @@
+Name:Aegis Automaton
+ManaCost:2
+Types:Artifact Creature Construct
+PT:0/3
+A:AB$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return another target creature you control to its owner's hand.
+Oracle:{4}{W}: Return another target creature you control to its owner's hand.

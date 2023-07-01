@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=MIR 2 Theme Deck: Legion of Glory
+Title=Legion of Glory
+Difficulty=medium
+Description=It's said that fortune favors the bold, and the noble fighters that make up the "Legion of Glory" deck are both bold and fortunate. Control the battlefield, keep your opponent's forces off balance, and your determined little army will march to victory!
+Icon=Theme Deck - 1997-01 Visions - Legion of Glory.jpg
+Deck Type=constructed
+[Main]
+1 Afterlife|MIR
+1 Blinding Light|MIR
+2 Favorable Destiny|MIR
+2 Femeref Healer|MIR
+3 Femeref Scouts|MIR
+1 Hope Charm|VIS
+3 Infantry Veteran|VIS
+2 Jamuraan Lion|VIS
+2 Knight of Valor|VIS
+1 Longbow Archer|VIS
+2 Magma Mine|VIS
+2 Miraculous Recovery|VIS
+2 Pacifism|MIR
+22 Plains|MIR|4
+2 Remedy|VIS
+1 Retribution of the Meek|VIS
+2 Sun Clasp|VIS
+2 Vigilant Martyr|MIR
+1 Warrior's Honor|VIS
+2 Zhalfirin Commander|MIR
+1 Zhalfirin Crusader|VIS

@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Totem Power
+Description=Generate powerful Auras with the totem armor mechanic to ensure that your threats survive any assault. And with Gigantomancer, you can turn any of your creatures-- or all of them-- into 7/7 threats.
+Deck Type=constructed
+Set=ROE
+Image=totem_power.jpg
+[main]
+1 Ornithopter|M10
+9 Forest|ROE
+9 Plains|ROE
+1 Cudgel Troll|M10
+1 Daggerback Basilisk|ROE
+2 Elvish Visionary|M10
+1 Gigantomancer+|ROE
+1 Kor Spiritdancer|ROE
+1 Nema Siltlurker|ROE
+1 Pelakka Wurm|ROE
+1 Prized Unicorn|M10
+1 Soul's Attendant|ROE
+2 Sporecap Spider|ROE
+1 Stomper Cub|ROE
+1 Boar Umbra|ROE
+1 Eland Umbra|ROE
+1 Mammoth Umbra|ROE
+2 Pacifism|M10
+1 Spider Umbra|ROE
+1 Angel's Mercy|M10
+1 Harmless Assault|ROE
+1 Righteousness|M10
+[sideboard]

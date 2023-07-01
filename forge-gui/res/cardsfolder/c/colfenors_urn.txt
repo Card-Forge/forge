@@ -1,0 +1,9 @@
+Name:Colfenor's Urn
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.toughnessGE4+YouOwn | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Whenever a creature with toughness 4 or greater is put into your graveyard from the battlefield, you may exile it.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturnAll | TriggerDescription$ At the beginning of the end step, if three or more cards have been exiled with CARDNAME, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
+SVar:TrigReturnAll:AB$ ChangeZone | Cost$ Mandatory Sac<1/CARDNAME> | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield
+SVar:X:ExiledWith$Amount
+Oracle:Whenever a creature with toughness 4 or greater is put into your graveyard from the battlefield, you may exile it.\nAt the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.

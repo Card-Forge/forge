@@ -1,0 +1,7 @@
+Name:Generator Servant
+ManaCost:1 R
+Types:Creature Elemental
+PT:2/1
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ C | Amount$ 2 | AddsKeywords$ Haste | AddsKeywordsValid$ Spell.Creature | AddsKeywordsUntil$ UntilEOT | SpellDescription$ Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice Generator Servant: Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn. (That creature can attack and {T} as soon as it comes under your control.)

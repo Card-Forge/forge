@@ -1,0 +1,8 @@
+Name:I Delight in Your Convulsions
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent loses 3 life. You gain life equal to the life lost this way.
+SVar:DarkEffect:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
+SVar:AFLifeLost:Number$0
+Oracle:When you set this scheme in motion, each opponent loses 3 life. You gain life equal to the life lost this way.

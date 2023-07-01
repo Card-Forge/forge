@@ -1,0 +1,14 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #08
+URL:https://i.redd.it/jpay2m5k6z4z.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=8
+humanhand=Harmless Offering;Fatal Push;Heart-Piercer Manticore;Cartouche of Zeal
+humanbattlefield=Mountain;Mountain;Swamp;Swamp;Swamp;Alley Strangler;Glorybringer;Goldnight Castigator
+aibattlefield=Olivia, Mobilized for War|Counters:P1P1=2;Drana, Liberator of Malakir|Counters:P1P1=2;Drana's Emissary|Counters:P1P1=2

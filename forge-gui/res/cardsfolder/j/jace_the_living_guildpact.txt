@@ -1,0 +1,10 @@
+Name:Jace, the Living Guildpact
+ManaCost:2 U U
+Types:Legendary Planeswalker Jace
+Loyalty:5
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Defined$ You | DigNum$ 2 | DestinationZone$ Graveyard | NoReveal$ True | LibraryPosition2$ 0 | Planeswalker$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your graveyard.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select another target nonland permanent | Planeswalker$ True | SpellDescription$ Return another target nonland permanent to its owner's hand.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | Planeswalker$ True | Ultimate$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library. You draw seven cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
+AI:RemoveDeck:All
+Oracle:[+1]: Look at the top two cards of your library. Put one of them into your graveyard.\n[-3]: Return another target nonland permanent to its owner's hand.\n[-8]: Each player shuffles their hand and graveyard into their library. You draw seven cards.

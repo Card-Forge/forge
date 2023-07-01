@@ -1,0 +1,6 @@
+Name:Canyon Lurkers
+ManaCost:4 R
+Types:Creature Human Rogue
+PT:5/2
+K:Morph:3 R
+Oracle:Morph {3}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

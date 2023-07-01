@@ -1,0 +1,6 @@
+Name:Blazing Hellhound
+ManaCost:2 B R
+Types:Creature Elemental Dog
+PT:4/3
+A:AB$ DealDamage | Cost$ 1 Sac<1/Creature.Other/another creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:{1}, Sacrifice another creature: Blazing Hellhound deals 1 damage to any target.

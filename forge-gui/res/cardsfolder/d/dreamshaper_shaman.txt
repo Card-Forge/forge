@@ -1,0 +1,7 @@
+Name:Dreamshaper Shaman
+ManaCost:5 R
+Types:Enchantment Creature Minotaur Shaman
+PT:5/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your end step, you may pay {2}{R} and sacrifice a nonland permanent. If you do, reveal cards from the top of your library until you reveal a nonland permanent card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:TrigDig:AB$ DigUntil | Cost$ 2 R Sac<1/Permanent.nonLand/nonland permanent> | Reveal$ True | Valid$ Permanent.nonLand | ValidDescription$ nonland permanent | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | GainControl$ True
+Oracle:At the beginning of your end step, you may pay {2}{R} and sacrifice a nonland permanent. If you do, reveal cards from the top of your library until you reveal a nonland permanent card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.

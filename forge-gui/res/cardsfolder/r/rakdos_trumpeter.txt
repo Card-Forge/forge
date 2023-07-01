@@ -1,0 +1,7 @@
+Name:Rakdos Trumpeter
+ManaCost:1 B
+Types:Creature Human Shaman
+PT:1/3
+K:Menace
+A:AB$ Pump | Cost$ 3 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{3}{R}: Rakdos Trumpeter gets +2/+0 until end of turn.

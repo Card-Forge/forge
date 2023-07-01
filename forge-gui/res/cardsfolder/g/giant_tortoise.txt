@@ -1,0 +1,6 @@
+Name:Giant Tortoise
+ManaCost:1 U
+Types:Creature Turtle
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddToughness$ 3 | Description$ As long as CARDNAME is untapped, it gets +0/+3.
+Oracle:Giant Tortoise gets +0/+3 as long as it's untapped.

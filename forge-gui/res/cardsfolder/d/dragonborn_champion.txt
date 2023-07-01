@@ -1,0 +1,8 @@
+Name:Dragonborn Champion
+ManaCost:2 R G
+Types:Creature Dragon Warrior
+PT:5/3
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | DamageAmount$ GE5 | Execute$ TrigDraw | TriggerDescription$ Whenever a source you control deals 5 or more damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Trample\nWhenever a source you control deals 5 or more damage to a player, draw a card.

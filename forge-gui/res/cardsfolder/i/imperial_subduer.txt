@@ -1,0 +1,8 @@
+Name:Imperial Subduer
+ManaCost:2 W
+Types:Creature Human Samurai
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, tap target creature you don't control.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
+DeckHints:Type$Samurai|Warrior
+Oracle:Whenever a Samurai or Warrior you control attacks alone, tap target creature you don't control.

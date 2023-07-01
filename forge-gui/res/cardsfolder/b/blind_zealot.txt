@@ -1,0 +1,9 @@
+Name:Blind Zealot
+ManaCost:1 B B
+Types:Creature Phyrexian Human Cleric
+PT:2/2
+K:Intimidate
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, destroy target creature that player controls.
+SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.ControlledBy TriggeredTarget | AITgts$ BetterThanSource | TgtPrompt$ Select target creature damaged player controls
+DeckHas:Ability$Sacrifice
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever Blind Zealot deals combat damage to a player, you may sacrifice it. If you do, destroy target creature that player controls.

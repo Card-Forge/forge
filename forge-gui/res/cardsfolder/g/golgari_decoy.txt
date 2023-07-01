@@ -1,0 +1,7 @@
+Name:Golgari Decoy
+ManaCost:3 G
+Types:Creature Elf Rogue
+PT:2/2
+K:All creatures able to block CARDNAME do so.
+K:Scavenge:3 G G
+Oracle:All creatures able to block Golgari Decoy do so.\nScavenge {3}{G}{G} ({3}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

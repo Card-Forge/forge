@@ -1,0 +1,10 @@
+Name:Angrath's Marauders
+ManaCost:5 R R
+Types:Creature Human Pirate
+PT:4/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.

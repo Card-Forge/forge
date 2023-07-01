@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/02/100.-RNA3.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your solution must satisfy all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=15
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Status // Statue;Grand Warlord Radha;Hero of Precinct One;Gruul Spellbreaker
+humanbattlefield=Judith, the Scourge Diva;Novice Knight;Pitiless Pontiff;Teysa Karlov;Elenda, the Dusk Rose;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs
+aibattlefield=Shalai, Voice of Plenty;Humongulus;Rakdos, the Showstopper

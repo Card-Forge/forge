@@ -1,0 +1,10 @@
+Name:Migloz, Maze Crusher
+ManaCost:1 R G
+Types:Legendary Creature Phyrexian Beast
+PT:4/4
+K:etbCounter:OIL:5
+A:AB$ Pump | Cost$ 1 SubCounter<1/OIL/NICKNAME> | Defined$ Self | KW$ Vigilance & Menace | SpellDescription$ It gains vigilance and menace until end of turn.
+A:AB$ Pump | Cost$ 2 SubCounter<2/OIL/NICKNAME> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ It gets +2/+2 until end of turn.
+A:AB$ Destroy | Cost$ 3 SubCounter<3/OIL/NICKNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+DeckHas:Ability$Counters
+Oracle:Migloz, Maze Crusher enters the battlefield with five oil counters on it.\n{1}, Remove an oil counter from Migloz: It gains vigilance and menace until end of turn.\n{2}, Remove two oil counters from Migloz: It gets +2/+2 until end of turn.\n{3}, Remove three oil counters from Migloz: Destroy target artifact or enchantment.

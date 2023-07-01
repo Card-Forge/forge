@@ -1,0 +1,8 @@
+Name:Goblin Anarchomancer
+ManaCost:R G
+Types:Creature Goblin Shaman
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Card.Red,Card.Green | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Each spell you cast that's red or green costs {1} less to cast.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|Green
+Oracle:Each spell you cast that's red or green costs {1} less to cast.

@@ -1,0 +1,7 @@
+Name:Flowstone Kavu
+ManaCost:2 R
+Types:Creature Kavu
+PT:2/3
+K:Menace
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{R}: Flowstone Kavu gets +1/-1 until end of turn.

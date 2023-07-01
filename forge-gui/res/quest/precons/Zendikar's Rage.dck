@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Zendikar's Rage
+Description=Zendikar's inhabitants are ready to meet the Eldrazi head-on, and they'll have help from the plane itself. Your cards with landfill abilities provide bonuses every time a land enters the battlefield under your control!
+Deck Type=constructed
+Set=BFZ
+Image=zendikars_rage.jpg
+[Main]
+1 Scythe Leopard|BFZ
+2 Lavastep Raider|BFZ
+2 Oran-Rief Invoker|BFZ
+1 Rot Shambler|BFZ
+2 Snapping Gnarlid|BFZ
+1 Makindi Sliderunner|BFZ
+2 Tunneling Geopede|BFZ
+2 Valakut Invoker|BFZ
+1 Valakut Predator|BFZ
+2 Broodhunter Wurm|BFZ
+1 Murasa Ranger|BFZ
+1 Grove Rumbler|BFZ
+2 Territorial Baloth|BFZ
+1 Oran-Rief Hydra+|BFZ
+2 Seek the Wilds|BFZ
+2 Sylvan Scrying|BFZ
+1 Reclaiming Vines|BFZ
+1 Nissa's Renewal|BFZ
+1 Rolling Thunder|BFZ
+1 Swell of Growth|BFZ
+1 Sure Strike|BFZ
+1 Natural Connection|BFZ
+1 Stonefury|BFZ
+1 Retreat to Kazandu|BFZ
+1 Retreat to Valakut|BFZ
+1 Blighted Woodland|BFZ
+3 Evolving Wilds|BFZ
+2 Fertile Thicket|BFZ
+10 Forest|BFZ
+10 Mountain|BFZ

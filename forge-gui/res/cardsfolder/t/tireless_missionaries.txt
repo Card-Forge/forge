@@ -1,0 +1,7 @@
+Name:Tireless Missionaries
+ManaCost:4 W
+Types:Creature Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:When Tireless Missionaries enters the battlefield, you gain 3 life.

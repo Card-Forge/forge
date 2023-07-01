@@ -1,0 +1,10 @@
+[metadata]
+Code=PDIS
+Date=2006-05-05
+Name=Dissension Promos
+Type=Promo
+ScryfallCode=PDIS
+
+[cards]
+140★ R Avatar of Discord @rk post
+141★ R Azorius Guildmage @Christopher Moeller

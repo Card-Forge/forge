@@ -1,0 +1,9 @@
+Name:Militia Rallier
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/3
+K:CARDNAME can't attack alone.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap target creature.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:HasAttackEffect:TRUE
+Oracle:Militia Rallier can't attack alone.\nWhenever Militia Rallier attacks, untap target creature.

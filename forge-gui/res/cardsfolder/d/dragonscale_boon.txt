@@ -1,0 +1,7 @@
+Name:Dragonscale Boon
+ManaCost:3 G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on target creature and untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+DeckHas:Ability$Counters
+Oracle:Put two +1/+1 counters on target creature and untap it.

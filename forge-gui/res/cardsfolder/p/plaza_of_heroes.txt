@@ -1,0 +1,9 @@
+Name:Plaza of Heroes
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}
+A:AB$ Mana | Cost$ T | Produced$ Any  | Amount$ 1 | RestrictValid$ Spell.Legendary | SpellDescription$ Add one mana of any color. Spend this mana only to cast a legendary spell.
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Permanent.Legendary+YouCtrl | ReflectProperty$ Is | SpellDescription$ Add one mana of any color among legendary permanents you control.
+A:AB$ Pump | Cost$ 3 T Exile<1/CARDNAME> | ValidTgts$ Creature.Legendary | KW$ Hexproof & Indestructible | SpellDescription$ Target legendary creature gains hexproof and indestructible until end of turn.
+DeckHints:Type$Legendary
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell.\n{T}: Add one mana of any color among legendary permanents you control.\n{3}, {T}, Exile Plaza of Heroes: Target legendary creature gains hexproof and indestructible until end of turn.

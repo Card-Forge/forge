@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Endless March
+Description=For the creatures in the Endless March deck, the battle never ends—and they wouldn't have it any other way. This deck revolves around the interaction of vanishing and "rescue." It's an ideal match: When a vanishing creature gets low on time counters, play a rescue creature and return it to your hand. You can replay it fully restocked with time counters!
+Deck Type=constructed
+Set=PLC
+Image=endless_march.jpg
+
+[Main]
+1 Avalanche Riders|TSB
+3 Aven Riftwatcher|PLC
+2 Brute Force|PLC
+2 Calciderm|PLC
+1 Children of Korlis|TSP
+1 Dawn Charm|PLC
+1 Dead // Gone|PLC
+1 Dust Elemental|PLC
+2 Errant Doomsayers|TSP
+1 Fatal Frenzy|PLC
+2 Icatian Javelineers|TSB
+2 Jhoira's Timebug|TSP
+1 Keldon Marauders|PLC
+2 Lavacore Elemental|PLC
+2 Mogg War Marshal|TSP
+10 Mountain|TSP|1
+11 Plains|TSP|1
+1 Riftmarked Knight|PLC
+1 Soltari Priest|TSB
+2 Stonecloaker|PLC
+2 Stormfront Riders|PLC
+1 Sunlance|PLC
+3 Terramorphic Expanse|TSP
+2 Timecrafting|PLC
+3 Whitemane Lion|PLC
+[Sideboard]

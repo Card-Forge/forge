@@ -1,0 +1,7 @@
+Name:Cacophodon
+ManaCost:3 G
+Types:Creature Dinosaur
+PT:2/5
+T:Mode$ DamageDoneOnce | Execute$ TrigUntap | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, untap target permanent.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+Oracle:Enrage — Whenever Cacophodon is dealt damage, untap target permanent.

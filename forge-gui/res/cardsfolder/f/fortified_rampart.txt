@@ -1,0 +1,6 @@
+Name:Fortified Rampart
+ManaCost:1 W
+Types:Creature Wall
+PT:0/6
+K:Defender
+Oracle:Defender

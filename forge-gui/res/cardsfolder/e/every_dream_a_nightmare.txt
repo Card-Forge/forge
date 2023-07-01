@@ -1,0 +1,10 @@
+Name:Every Dream a Nightmare
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBRepeat | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent discards a card. You draw a card for each land card discarded this way.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ Dream | SubAbility$ Nightmare
+SVar:Dream:DB$ Discard | Defined$ Player.IsRemembered | Mode$ TgtChoose | NumCards$ 1 | Mandatory$ True | RememberDiscarded$ True
+SVar:Nightmare:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Land.RememberedPlayerCtrl
+Oracle:When you set this scheme in motion, each opponent discards a card. You draw a card for each land card discarded this way.

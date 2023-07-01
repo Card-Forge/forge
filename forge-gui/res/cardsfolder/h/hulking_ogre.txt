@@ -1,0 +1,6 @@
+Name:Hulking Ogre
+ManaCost:2 R
+Types:Creature Ogre
+PT:3/3
+K:CARDNAME can't block.
+Oracle:Hulking Ogre can't block.

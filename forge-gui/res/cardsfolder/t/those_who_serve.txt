@@ -1,0 +1,5 @@
+Name:Those Who Serve
+ManaCost:2 W
+Types:Creature Zombie
+PT:2/4
+Oracle:

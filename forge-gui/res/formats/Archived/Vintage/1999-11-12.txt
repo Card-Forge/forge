@@ -1,0 +1,8 @@
+[format]
+Name:Type 1 (BRB)
+Type:Archived
+Subtype:Vintage
+Effective:1999-11-12
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ATH, ULG, 6ED, UDS, MMQ, BRB
+Restricted:Ancestral Recall; Balance; Berserk; Black Lotus; Black Vise; Braingeyser; Crop Rotation; Demonic Tutor; Doomsday; Dream Halls; Enlightened Tutor; Fastbond; Fork; Frantic Search; Grim Monolith; Hurkyl's Recall; Library of Alexandria; Lotus Petal; Mana Crypt; Mana Vault; Memory Jar; Mind Over Matter; Mox Diamond; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Mystical Tutor; Recall; Regrowth; Sol Ring; Strip Mine; Stroke of Genius; Time Spiral; Time Walk; Timetwister; Tinker; Tolarian Academy; Vampiric Tutor; Voltaic Key; Wheel of Fortune; Windfall; Yawgmoth's Bargain; Yawgmoth's Will
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Chaos Orb; Contract from Below; Darkpact; Demonic Attorney; Falling Star; Jeweled Bird; Mind Twist; Rebirth; Tempest Efreet; Timmerian Fiends

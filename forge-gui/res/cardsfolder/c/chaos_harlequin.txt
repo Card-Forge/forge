@@ -1,0 +1,10 @@
+Name:Chaos Harlequin
+ManaCost:2 R R
+Types:Creature Human
+PT:2/4
+A:AB$ Dig | Cost$ R | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBLand | SpellDescription$ Exile the top card of your library. If that card is a land card, CARDNAME gets -4/-0 until end of turn. Otherwise, CARDNAME gets +2/+0 until end of turn. | StackDescription$ SpellDescription
+SVar:DBLand:DB$ Pump | Defined$ Self | NumAtt$ -4 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GT0 | ConditionDescription$ If that card is a land card, | SubAbility$ DBNonLand | StackDescription$ None
+SVar:DBNonLand:DB$ Pump | Defined$ Self | NumAtt$ +2 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ0 | ConditionDescription$ Otherwise, | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:{R}: Exile the top card of your library. If that card is a land card, Chaos Harlequin gets -4/-0 until end of turn. Otherwise, Chaos Harlequin gets +2/+0 until end of turn.

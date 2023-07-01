@@ -1,0 +1,12 @@
+Name:Darling of the Masses
+ManaCost:2 G W
+Types:Creature Elf Citizen
+PT:2/4
+S:Mode$ Continuous | Affected$ Creature.Citizen+Other+YouCtrl | AddPower$ 1 | Description$ Other Citizens you control get +1/+0.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 green and white Citizen creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+DeckHints:Type$Citizen
+Oracle:Other Citizens you control get +1/+0.\nWhenever Darling of the Masses attacks, create a 1/1 green and white Citizen creature token.

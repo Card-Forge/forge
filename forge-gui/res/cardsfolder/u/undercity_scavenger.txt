@@ -1,0 +1,11 @@
+Name:Undercity Scavenger
+ManaCost:3 B
+Types:Creature Ogre Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature. If you do, put two +1/+1 counters on CARDNAME, then scry 2.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+DeckHas:Ability$Counters
+Oracle:When Undercity Scavenger enters the battlefield, you may sacrifice another creature. If you do, put two +1/+1 counters on Undercity Scavenger, then scry 2.

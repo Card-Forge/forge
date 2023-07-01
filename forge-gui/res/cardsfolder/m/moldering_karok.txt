@@ -1,0 +1,7 @@
+Name:Moldering Karok
+ManaCost:2 B G
+Types:Creature Zombie Crocodile
+PT:3/3
+K:Trample
+K:Lifelink
+Oracle:Trample, lifelink

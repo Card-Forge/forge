@@ -1,0 +1,9 @@
+Name:Goblin Bangchuckers
+ManaCost:2 R R
+Types:Creature Goblin Warrior
+PT:2/2
+A:AB$ FlipACoin | Cost$ T | ValidTgts$ Any | WinSubAbility$ DBDamageTarget | LoseSubAbility$ DBDamageSelf | AILogic$ Bangchuckers | SpellDescription$ Flip a coin. If you win the flip, CARDNAME deals 2 damage to any target. If you lose the flip, CARDNAME deals 2 damage to itself.
+SVar:DBDamageTarget:DB$ DealDamage | Defined$ Targeted | NumDmg$ 2
+SVar:DBDamageSelf:DB$ DealDamage | Defined$ Self | NumDmg$ 2
+AI:RemoveDeck:All
+Oracle:{T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to any target. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.

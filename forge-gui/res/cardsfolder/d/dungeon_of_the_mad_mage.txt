@@ -1,0 +1,18 @@
+Name:Dungeon of the Mad Mage
+ManaCost:no cost
+Types:Dungeon
+K:Dungeon:DBPortal,DBDungeon,DBBazaar,DBCaverns,DBLost,DBRunestone,DBGraveyard,DBMines,DBLair
+SVar:DBPortal:DB$ GainLife | Defined$ You | LifeAmount$ 1 | RoomName$ Yawning Portal | SpellDescription$ You gain 1 life. | NextRoom$ DBDungeon
+SVar:DBDungeon:DB$ Scry | ScryNum$ 1 | RoomName$ Dungeon Level | SpellDescription$ Scry 1. | NextRoom$ DBBazaar,DBCaverns
+SVar:DBBazaar:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | RoomName$ Goblin Bazaar | SpellDescription$ Create a Treasure token. | NextRoom$ DBLost
+SVar:DBCaverns:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't attack. | Duration$ UntilYourNextTurn | IsCurse$ True | RoomName$ Twisted Caverns | SpellDescription$ Target creature can't attack until your next turn. | NextRoom$ DBLost
+SVar:DBLost:DB$ Scry | ScryNum$ 2 | RoomName$ Lost Level | SpellDescription$ Scry 2. | NextRoom$ DBRunestone,DBGraveyard
+SVar:DBRunestone:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlayExiled | RoomName$ Runestone Caverns | SpellDescription$ Exile the top two cards of your library. You may play them. | NextRoom$ DBMines
+SVar:DBPlayExiled:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ All | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBGraveyard:DB$ Token | TokenScript$ b_1_1_skeleton | TokenOwner$ You | TokenAmount$ 2 | RoomName$ Muiral's Graveyard | SpellDescription$ Create two 1/1 black Skeleton creature tokens. | NextRoom$ DBMines
+SVar:DBMines:DB$ Scry | ScryNum$ 3 | RoomName$ Deep Mines | SpellDescription$ Scry 3. | NextRoom$ DBLair
+SVar:DBLair:DB$ Draw | Defined$ You | NumCards$ 3 | RememberDrawn$ True | SubAbility$ DBReveal | RoomName$ Mad Wizard's Lair | SpellDescription$ Draw three cards and reveal them. You may cast one of them without paying its mana cost.
+SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ Remembered | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+Oracle:Yawning Portal — You gain 1 life. (Leads to: Dungeon Level)\nDungeon Level — Scry 1. (Leads to: Goblin Bazaar, Twisted Caverns)\nGoblin Bazaar — Create a Treasure token. (Leads to: Lost Level)\nTwisted Caverns — Target creature can't attack until your next turn. (Leads to: Lost Level)\nLost Level — Scry 2. (Leads to: Runestone Caverns, Muiral's Graveyard)\nRunestone Caverns — Exile the top two cards of your library. You may play them. (Leads to: Deep Mines)\nMuiral's Graveyard — Create two 1/1 black Skeleton creature tokens. (Leads to: Deep Mines)\nDeep Mines — Scry 3. (Leads to: Mad Wizard's Lair)\nMad Wizard's Lair — Draw three cards and reveal them. You may cast one of them without paying its mana cost.

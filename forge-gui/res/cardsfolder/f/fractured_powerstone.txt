@@ -1,0 +1,7 @@
+Name:Fractured Powerstone
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ RollPlanarDice | Cost$ T | SorcerySpeed$ True | SpellDescription$ Roll the planar die. Activate only as a sorcery.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery.

@@ -1,0 +1,6 @@
+Name:Knight of the Stampede
+ManaCost:3 G
+Types:Creature Human Knight
+PT:2/4
+S:Mode$ ReduceCost | ValidCard$ Dinosaur | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Dinosaur spells you cast cost {2} less to cast.
+Oracle:Dinosaur spells you cast cost {2} less to cast.

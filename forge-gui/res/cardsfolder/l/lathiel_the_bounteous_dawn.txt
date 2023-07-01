@@ -1,0 +1,11 @@
+Name:Lathiel, the Bounteous Dawn
+ManaCost:2 G W
+Types:Legendary Creature Unicorn
+PT:2/2
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if you gained life this turn, distribute up to that many +1/+1 counters among any number of other target creatures.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select any number of other target creatures to distribute counters to | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X | DividedUpTo$ True
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
+Oracle:Lifelink\nAt the beginning of each end step, if you gained life this turn, distribute up to that many +1/+1 counters among any number of other target creatures.

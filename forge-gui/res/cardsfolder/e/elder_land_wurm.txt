@@ -1,0 +1,9 @@
+Name:Elder Land Wurm
+ManaCost:4 W W W
+Types:Creature Dragon Wurm
+PT:5/5
+K:Defender
+K:Trample
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME blocks, it loses defender.
+SVar:TrigDebuff:DB$ Debuff | Keywords$ Defender | Defined$ TriggeredBlockerLKICopy | Duration$ Permanent
+Oracle:Defender, trample\nWhen Elder Land Wurm blocks, it loses defender.

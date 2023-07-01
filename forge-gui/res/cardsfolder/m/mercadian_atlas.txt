@@ -1,0 +1,7 @@
+Name:Mercadian Atlas
+ManaCost:5
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ AtlasDraw | CheckSVar$ X | SVarCompare$ EQ0 | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you didn't play a land this turn, you may draw a card.
+SVar:AtlasDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:PlayerCountPropertyYou$LandsPlayed
+Oracle:At the beginning of your end step, if you didn't play a land this turn, you may draw a card.

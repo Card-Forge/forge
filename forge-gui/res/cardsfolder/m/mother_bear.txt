@@ -1,0 +1,7 @@
+Name:Mother Bear
+ManaCost:1 G
+Types:Creature Bear
+PT:2/2
+A:AB$ Token | Cost$ 3 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 2 | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create two 2/2 green Bear creature tokens. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:{3}{G}{G}, Exile Mother Bear from your graveyard: Create two 2/2 green Bear creature tokens. Activate only as a sorcery.

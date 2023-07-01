@@ -1,0 +1,9 @@
+Name:Vazal, the Compleat
+ManaCost:3 G G G
+Types:Legendary Artifact Creature Phyrexian
+PT:7/7
+K:DeckLimit:1:Megalegendary (Your deck can have only one copy of this card.)
+K:Vigilance
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Permanent.Other | Description$ CARDNAME has all activated abilities of each other permanent on the battlefield.
+Oracle:Megalegendary (Your deck can have only one copy of this card.)\nVigilance, trample\nVazal, the Compleat has the activated abilities of all other permanents on the battlefield.

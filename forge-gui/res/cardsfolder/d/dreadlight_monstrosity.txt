@@ -1,0 +1,8 @@
+Name:Dreadlight Monstrosity
+ManaCost:4 U U
+Types:Creature Crab Horror
+PT:5/5
+K:Ward:2
+A:AB$ Effect | Cost$ 3 U U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | IsPresent$ Card.YouOwn | PresentZone$ Exile | StackDescription$ CARDNAME can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn. Activate only if you own a card in exile.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\n{3}{U}{U}: Dreadlight Monstrosity can't be blocked this turn. Activate only if you own a card in exile.

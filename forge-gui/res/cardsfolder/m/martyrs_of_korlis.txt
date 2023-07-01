@@ -1,0 +1,7 @@
+Name:Martyrs of Korlis
+ManaCost:3 W W
+Types:Creature Human
+PT:1/6
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Artifact | ValidTarget$ You | ReplaceWith$ DmgMe | IsPresent$ Card.Self+untapped | DamageTarget$ Self | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by artifacts is dealt to CARDNAME instead.
+SVar:DmgMe:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
+Oracle:As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.

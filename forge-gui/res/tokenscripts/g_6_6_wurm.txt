@@ -1,0 +1,6 @@
+Name:Wurm Token
+ManaCost:no cost
+Colors:green
+Types:Creature Wurm
+PT:6/6
+Oracle:

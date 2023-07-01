@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Temur Avalanche
+Description=The Temur embody the claws-out savagery of the wild frontier. Crush the weaker clans under a landslide of brutal warriors toughened by ice, meat, and ferocious magic.
+Deck Type=constructed
+Set=KTK
+Image=temur_avalanche.jpg
+[Main]
+2 Frontier Bivouac|KTK
+1 Rugged Highlands|KTK
+1 Swiftwater Cliffs|KTK
+1 Thornwood Falls|KTK
+8 Forest|KTK
+5 Island|KTK
+7 Mountain|KTK
+2 Elvish Mystic|M15
+2 Heir Of The Wilds|KTK
+2 Runeclaw Bear|M15
+1 Icefeather Aven|KTK
+2 Alpine Grizzly|KTK
+2 Summit Prowler|KTK
+1 Pine Walker|KTK
+1 Thundering Giant|M15
+1 Avalanche Tusker|KTK
+1 Bear's Companion|KTK
+2 Glacial Stalker|KTK
+1 Tusked Colossodon|KTK
+2 Snowhorn Rider|KTK
+2 Woolly Loxodon|KTK
+1 Stubborn Denial|KTK
+2 Savage Punch|KTK
+1 Titanic Growth|M15
+1 Force Away|KTK
+1 Lightning Strike|M15
+2 Temur Banner|KTK
+1 Roar Of Challenge|KTK
+1 Dragon Grip|KTK
+1 Temur Charm|KTK
+1 Windstorm|KTK
+1 Icy Blast|KTK

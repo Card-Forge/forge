@@ -1,0 +1,6 @@
+Name:Celebrate the Harvest
+ManaCost:3 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | Tapped$ True | SelectPrompt$ Select up to X basic land cards | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to X basic land cards, where X is the number of different powers among creatures you control. Put those cards onto the battlefield tapped, then shuffle.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Search your library for up to X basic land cards, where X is the number of different powers among creatures you control. Put those cards onto the battlefield tapped, then shuffle.

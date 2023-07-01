@@ -1,0 +1,12 @@
+Name:Dredging Claw
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 and has menace.
+T:Mode$ ChangesZone | Destination$ Battlefield | Origin$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | ValidCard$ Creature.YouOwn | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield from your graveyard, you may attach CARDNAME to it.
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
+K:Equip:1 B
+AI:RemoveDeck:Random
+DeckHas:Keyword$Menace
+DeckNeeds:Color$Black
+DeckHints:Ability$Graveyard
+Oracle:Equipped creature gets +1/+0 and has menace. (It's can't be blocked except by two or more creatures.)\nWhenever a creature enters the battlefield from your graveyard, you may attach Dredging Claw to it.\nEquip {1}{B} ({1}{B}: Attach to target creature you control. Equip only as a sorcery.)

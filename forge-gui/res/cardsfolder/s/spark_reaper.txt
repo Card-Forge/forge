@@ -1,0 +1,9 @@
+Name:Spark Reaper
+ManaCost:2 B
+Types:Creature Zombie
+PT:2/3
+A:AB$ GainLife | Cost$ 3 Sac<1/Creature;Planeswalker/creature or planeswalker> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:{3}, Sacrifice a creature or planeswalker: You gain 1 life and draw a card.

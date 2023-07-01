@@ -1,0 +1,8 @@
+Name:Revivify
+ManaCost:2 W
+Types:Instant
+A:SP$ RollDice | Sides$ 20 | Modifier$ X | ResultSubAbilities$ 1-14:DBToHand,Else:DBToField | SpellDescription$ Roll a d20 and add the number of creature cards in your graveyard that were put there from the battlefield this turn.
+SVar:DBToHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ValidGraveyard Creature.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ 1—14 VERT Return all creature cards in your graveyard that were put there from the battlefield this turn to your hand.
+SVar:DBToField:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ 15+ VERT Return those cards from your graveyard to the battlefield.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouOwn
+Oracle:Roll a d20 and add the number of creature cards in your graveyard that were put there from the battlefield this turn.\n1—14 | Return all creature cards in your graveyard that were put there from the battlefield this turn to your hand.\n15+ | Return those cards from your graveyard to the battlefield.

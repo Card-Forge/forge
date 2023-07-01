@@ -1,0 +1,8 @@
+Name:Pygmy Troll
+ManaCost:1 G
+Types:Creature Troll
+PT:1/1
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever Pygmy Troll becomes blocked by a creature, Pygmy Troll gets +1/+1 until end of turn.\n{G}: Regenerate Pygmy Troll.

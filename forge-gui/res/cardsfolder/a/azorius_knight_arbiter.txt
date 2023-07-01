@@ -1,0 +1,7 @@
+Name:Azorius Knight-Arbiter
+ManaCost:3 W U
+Types:Creature Human Knight
+PT:2/5
+K:Vigilance
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Vigilance\nAzorius Knight-Arbiter can't be blocked.

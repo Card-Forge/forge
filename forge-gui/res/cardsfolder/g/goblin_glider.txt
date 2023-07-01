@@ -1,0 +1,7 @@
+Name:Goblin Glider
+ManaCost:1 R
+Types:Creature Goblin
+PT:1/1
+K:Flying
+K:CARDNAME can't block.
+Oracle:Flying\nGoblin Glider can't block.

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Time Loop
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Blue-Red control
+Deck Type=constructed
+Name=TimeLoop
+[Main]
+4 Anarchist|EXO
+2 Cloud Spirit|STH
+4 Counterspell|TMP
+4 Erratic Portal|EXO
+1 Furnace Brood|EXO
+4 Intuition|TMP
+4 Island|TMP|1
+2 Island|TMP|2
+4 Island|TMP|3
+2 Island|TMP|4
+3 Lightning Blast|TMP
+4 Mana Leak|STH
+2 Mountain|TMP|1
+4 Mountain|TMP|2
+3 Mountain|TMP|3
+3 Mountain|TMP|4
+4 Propaganda|TMP
+2 Thalakos Mistfolk|TMP
+4 Time Warp|TMP

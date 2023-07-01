@@ -1,0 +1,6 @@
+Name:Ghosts of the Damned
+ManaCost:1 B B
+Types:Creature Spirit
+PT:0/2
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | NumAtt$ -1 | IsCurse$ True | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -1/-0 until end of turn.
+Oracle:{T}: Target creature gets -1/-0 until end of turn.

@@ -1,0 +1,11 @@
+Name:Leyline Tyrant
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Red | Description$ You don't lose unspent red mana as steps and phases end.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | XColor$ R | XAnnounceTitle$ any amount of red mana to pay | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$xPaid
+Oracle:Flying\nYou don't lose unspent red mana as steps and phases end.\nWhen Leyline Tyrant dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.

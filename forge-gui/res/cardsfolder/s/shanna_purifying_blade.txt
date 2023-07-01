@@ -1,0 +1,11 @@
+Name:Shanna, Purifying Blade
+ManaCost:G W U
+Types:Legendary Creature Human Warrior
+PT:3/3
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may pay {X}. If you do, draw X cards. X can't be greater than the amount of life you gained this turn.
+SVar:TrigDraw:AB$ Draw | Cost$ X | XMaxLimit$ LifeGained | NumCards$ X
+SVar:X:Count$xPaid
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nAt the beginning of your end step, you may pay {X}. If you do, draw X cards. X can't be greater than the amount of life you gained this turn.

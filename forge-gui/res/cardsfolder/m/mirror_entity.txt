@@ -1,0 +1,9 @@
+Name:Mirror Entity
+ManaCost:2 W
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | AddAllCreatureTypes$ True | ValidCards$ Creature.YouCtrl | SpellDescription$ Until end of turn, creatures you control have base power and toughness X/X and gain all creature types. | StackDescription$ SpellDescription
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.

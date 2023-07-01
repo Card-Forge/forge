@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Heinz Doofenshmirtz 2
+Title=Heinz Doofenshmirtz
+Difficulty=medium
+Description=URG Electrostatic Pummeler deck with many energy producing cards and Mechanized Production
+Icon=Heinz Doofenshmirtz.jpg
+Deck Type=constructed
+[main]
+4 Aether Hub
+4 Attune with Aether
+3 Awaken the Bear
+3 Brute Strength
+4 Colossal Might
+4 Electrostatic Pummeler
+3 Fog
+5 Forest
+4 Frontier Bivouac
+2 Hinterland Harbor
+2 Island
+2 Mechanized Production
+2 Mountain
+2 Rhonas the Indomitable|AKH
+2 Rootbound Crag
+4 Servant of the Conduit
+2 Sulfur Falls
+4 Trophy Mage
+4 Woodweaver's Puzzleknot
+[sideboard]

@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=20
+Credits=2000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Conquering Hordes
+Description=The clans battle for supremacy in war-torn Tarkir. Banners fly above the battlefield as warlords clash with their sworn enemies. Spur your hordes of warriors onward across the steppes as they spill blood in the fight for ultimate domination.
+Set=KTK
+Image=conquering_hordes.jpg
+[main]
+2 Banishing Light|JOU
+1 Bile Blight|BNG
+1 Bloodsoaked Champion|KTK
+1 Caves of Koilos|M15
+2 Chief of the Edge|KTK
+2 Chief of the Scale|KTK
+1 Dictate of Erebos|JOU
+1 Dictate of Heliod|JOU
+1 Herald of Anafenza|KTK
+1 Herald of Torment|BNG
+3 Mardu Hateblade|KTK
+1 Mardu Hordechief|KTK
+3 Mardu Skullhunter|KTK
+3 Oreskos Swiftclaw|M15
+1 Pain Seer|BNG
+10 Plains|KTK
+2 Raiders' Spoils|KTK
+1 Rush of Battle|KTK
+4 Scoured Barrens|KTK
+2 Seeker of the Way|KTK
+1 Silence the Believers|JOU
+1 Spear of Heliod|THS
+1 Spirit Bonds|M15
+9 Swamp|KTK
+2 Timely Hordemate|KTK
+3 Tormented Hero|THS
+[sideboard]
+2 Brain Maggot|JOU
+3 Dark Betrayal|THS
+2 Despise|KTK
+1 Drown in Sorrow|BNG
+3 Glare of Heresy|THS
+2 Solemn Offering|M15
+2 Tormod's Crypt|M15

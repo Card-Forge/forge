@@ -1,0 +1,8 @@
+Name:Bride's Gown
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0. It gets an additional +0/+2 and has deathtouch as long as an Equipment named Groom's Finery is attached to a creature you control.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ First Strike | IsPresent$ Equipment.AttachedTo Creature.YouCtrl+namedGroom's Finery | Secondary$ True
+K:Equip:2
+DeckHints:Name$Groom's Finery
+Oracle:Equipped creature gets +2/+0. It gets an additional +0/+2 and has first strike as long as an Equipment named Groom's Finery is attached to a creature you control.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

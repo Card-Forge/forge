@@ -1,0 +1,10 @@
+Name:Mu Yanling
+ManaCost:4 U U
+Types:Legendary Planeswalker Yanling
+Loyalty:5
+A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:AB$ TapAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.OppCtrl | SubAbility$ DBAddTurn | AILogic$ AtLeast3 | StackDescription$ SpellDescription | SpellDescription$ Tap all creatures your opponents control. You take an extra turn after this one.
+SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1
+Oracle:[+2]: Target creature can't be blocked this turn.\n[-3]: Draw two cards.\n[-10]: Tap all creatures your opponents control. You take an extra turn after this one.

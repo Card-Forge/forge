@@ -1,0 +1,5 @@
+Name:Cowl Prowler
+ManaCost:4 G G
+Types:Creature Wurm
+PT:6/6
+Oracle:

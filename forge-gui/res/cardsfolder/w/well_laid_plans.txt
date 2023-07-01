@@ -1,0 +1,7 @@
+Name:Well-Laid Plans
+ManaCost:2 U
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature | ValidSource$ Creature.inZoneBattlefield | RelativeToSource$ Creature.SharesColorWith | Description$ Prevent all damage that would be dealt to a creature by another creature if they share a color.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Prevent all damage that would be dealt to a creature by another creature if they share a color.

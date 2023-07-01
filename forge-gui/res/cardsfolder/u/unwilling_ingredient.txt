@@ -1,0 +1,8 @@
+Name:Unwilling Ingredient
+ManaCost:B
+Types:Creature Frog
+PT:1/1
+K:Menace
+A:AB$ Draw | Cost$ 2 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{2}{B}, Exile Unwilling Ingredient from your graveyard: You draw a card and you lose 1 life.

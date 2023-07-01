@@ -1,0 +1,7 @@
+Name:Wakeroot Elemental
+ManaCost:4 G G
+Types:Creature Elemental
+PT:5/5
+A:AB$ Untap | Cost$ G G G G G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$ DBAnimate | SpellDescription$ Untap target land you control. It becomes a 5/5 Elemental creature with haste. It's still a land. (This effect lasts as long as that land remains on the battlefield.)
+SVar:DBAnimate:DB$ Animate | Power$ 5 | Toughness$ 5 | Defined$ Targeted | Types$ Creature,Elemental | Keywords$ Haste | Duration$ Permanent
+Oracle:{G}{G}{G}{G}{G}: Untap target land you control. It becomes a 5/5 Elemental creature with haste. It's still a land. (This effect lasts as long as that land remains on the battlefield.)

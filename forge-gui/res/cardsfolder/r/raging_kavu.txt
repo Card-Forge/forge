@@ -1,0 +1,7 @@
+Name:Raging Kavu
+ManaCost:1 R G
+Types:Creature Kavu
+PT:3/1
+K:Flash
+K:Haste
+Oracle:Flash\nHaste

@@ -1,0 +1,8 @@
+Name:Warden of Geometries
+ManaCost:4
+Types:Creature Eldrazi Drone
+PT:2/3
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}. ({C} represents colorless mana.)
+DeckHas:Ability$Mana.Colorless
+Oracle:Vigilance\n{T}: Add {C}. ({C} represents colorless mana.)

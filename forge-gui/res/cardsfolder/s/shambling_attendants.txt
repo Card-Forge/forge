@@ -1,0 +1,8 @@
+Name:Shambling Attendants
+ManaCost:7 B
+Types:Creature Zombie
+PT:3/5
+K:Delve
+K:Deathtouch
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

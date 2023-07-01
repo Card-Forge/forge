@@ -1,0 +1,7 @@
+Name:I Call on the Ancient Magics
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ OppTutor | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each other player searches their library for a card, reveals it, and puts it into their hand. Then you search your library for two cards and put them into your hand. Each player shuffles.
+SVar:OppTutor:DB$ ChangeZone | DefinedPlayer$ Player.Other | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Reveal$ True | Mandatory$ True | SubAbility$ MyMagic
+SVar:MyMagic:DB$ ChangeZone | DefinedPlayer$ You | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True
+Oracle:When you set this scheme in motion, each other player searches their library for a card, reveals it, and puts it into their hand. Then you search your library for two cards and put them into your hand. Each player shuffles.

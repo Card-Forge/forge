@@ -1,0 +1,9 @@
+Name:Geth, Lord of the Vault
+ManaCost:4 B B
+Types:Legendary Creature Phyrexian Zombie
+PT:5/5
+K:Intimidate
+A:AB$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target artifact or creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn+cmcEQX,Artifact.OppOwn+cmcEQX | Tapped$ True | SubAbility$ DBMill | SpellDescription$ Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards.
+SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedOwner
+SVar:X:Count$xPaid
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{X}{B}: Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards.

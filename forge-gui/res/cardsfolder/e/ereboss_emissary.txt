@@ -1,0 +1,10 @@
+Name:Erebos's Emissary
+ManaCost:3 B
+Types:Enchantment Creature Snake
+PT:3/3
+K:Bestow:5 B
+A:AB$ Pump | Cost$ Discard<1/Creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ConditionPresent$ Card.Self+nonAura | SubAbility$ DBPump | SpellDescription$ CARDNAME gets +2/+2 until end of turn. If CARDNAME is an Aura, enchanted creature gets +2/+2 until end of turn instead.
+SVar:DBPump:DB$ Pump | NumAtt$ +2 | NumDef$ +2 | Defined$ Enchanted | ConditionPresent$ Card.Self+Aura
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
+DeckHas:Ability$Discard
+Oracle:Bestow {5}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nDiscard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.\nEnchanted creature gets +3/+3.

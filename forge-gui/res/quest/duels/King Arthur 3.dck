@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=King Arthur 3
+Title=King Arthur
+Difficulty=hard
+Description=WG Knight deck with Wilt-Leaf Liege, Knight of New Alara and equipments
+Icon=King Arthur.jpg
+Deck Type=constructed
+[main]
+4 Steward of Valeron
+2 Knight Exemplar
+2 Knight of the White Orchid
+2 Knight of the Reliquary
+4 Wilt-Leaf Cavaliers
+2 Knight of New Alara
+2 Kinsbaile Cavalier
+4 Wilt-Leaf Liege
+4 Juniper Order Ranger
+1 Swords to Plowshares
+1 Aura Shards
+1 Armadillo Cloak
+1 Behemoth Sledge
+1 Shield of the Oversoul
+1 Sigil of the Nayan Gods
+1 Mirari's Wake
+1 Hymn of Rebirth
+1 Sword of Vengeance
+1 Sword of Feast and Famine
+1 Mox Emerald
+1 Mox Pearl
+4 Savannah
+4 Forest|M11
+4 Plains|M11
+4 Windswept Heath
+3 Sunpetal Grove
+3 Graypelt Refuge
+[sideboard]

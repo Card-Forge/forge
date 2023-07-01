@@ -1,0 +1,7 @@
+Name:Duskwielder
+ManaCost:B
+Types:Creature Elf Berserker
+PT:1/2
+A:AB$ LoseLife | Cost$ 1 | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | Boast$ True | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Boast — {1}: Target opponent loses 1 life and you gain 1 life. (Activate only if this creature attacked this turn and only once each turn.)

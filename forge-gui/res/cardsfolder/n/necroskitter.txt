@@ -1,0 +1,8 @@
+Name:Necroskitter
+ManaCost:1 B B
+Types:Creature Elemental
+PT:1/4
+K:Wither
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+counters_GE1_M1M1 | TriggerZones$ Battlefield | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls with a -1/-1 counter on it dies, you may return that card to the battlefield under your control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever a creature an opponent controls with a -1/-1 counter on it dies, you may return that card to the battlefield under your control.

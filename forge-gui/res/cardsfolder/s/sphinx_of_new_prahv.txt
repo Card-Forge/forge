@@ -1,0 +1,8 @@
+Name:Sphinx of New Prahv
+ManaCost:W W U U
+Types:Creature Sphinx
+PT:4/3
+K:Flying
+K:Vigilance
+S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
+Oracle:Flying, vigilance\nSpells your opponents cast that target Sphinx of New Prahv cost {2} more to cast.

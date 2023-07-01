@@ -1,0 +1,56 @@
+[quest]
+id=29
+AILife=20
+HumanLife=20
+HumanDeck=Tibalt vs Sorin.dck
+UseBazaar=False
+ForceAnte=False
+Repeat=false
+Wins=20
+Card Reward=2 random rares
+Credit Reward=200
+[metadata]
+Name=quest29
+Title=Tibalt (as Sorin)
+Difficulty=hard
+Description=Play as Sorin vs Tibalt the Pain Mage. NOTE: This challenge uses a preselected deck and ignores specific Bazaar settings.
+Icon=Tibalt.jpg
+Deck Type=constructed
+[main]
+14 Mountain
+6 Swamp
+2 Ashmouth Hound
+1 Coal Stoker
+1 Corpse Connoisseur
+1 Gang of Devils
+1 Goblin Arsonist
+1 Hellrider
+2 Hellspark Elemental
+1 Lavaborn Muse
+1 Mad Prophet
+1 Reassembling Skeleton
+1 Scorched Rusalka
+1 Scourge Devil
+1 Shambling Remains
+1 Skirsdag Cultist
+2 Vithian Stinger
+1 Sulfuric Vortex
+1 Blazing Salvo
+1 Flame Javelin
+1 Geistflame
+1 Strangling Soot
+1 Terminate
+2 Akoum Refuge
+2 Rakdos Carnarium
+1 Tibalt, the Fiend-Blooded
+1 Blightning
+1 Breaking Point
+2 Browbeat
+1 Bump in the Night
+1 Devil's Play
+1 Faithless Looting
+1 Flame Slash
+1 Pyroclasm
+1 Recoup
+1 Torrent of Souls
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Jhoira's Toolbox
+ManaCost:2
+Types:Artifact Creature Insect
+PT:1/1
+A:AB$ Regenerate | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature. | SpellDescription$ Regenerate target artifact creature.
+Oracle:{2}: Regenerate target artifact creature.

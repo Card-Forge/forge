@@ -1,0 +1,7 @@
+Name:Dawnstrike Paladin
+ManaCost:3 W W
+Types:Creature Human Knight
+PT:2/4
+K:Vigilance
+K:Lifelink
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

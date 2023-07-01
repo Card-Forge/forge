@@ -1,0 +1,8 @@
+Name:Okiba Salvage
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Vehicle.YouOwn | TgtPrompt$ Select target creature or Vehicle card | SubAbility$ DBPutCounter | SpellDescription$ Return target creature or Vehicle card from your graveyard to the battlefield.
+SVar:DBPutCounter:DB$ PutCounter | ConditionPresent$ Artifact.YouCtrl | ConditionPresent2$ Enchantment.YouCtrl | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2 | ConditionDescription$ Then, if you control an artifact and an enchantment, | SpellDescription$ Then put two +1/+1 counters on that permanent if you control an artifact and an enchantment.
+DeckHints:Type$Creature|Vehicle|Artifact|Enchantment
+DeckHas:Ability$Graveyard|Counters
+Oracle:Return target creature or Vehicle card from your graveyard to the battlefield. Then put two +1/+1 counters on that permanent if you control an artifact and an enchantment.

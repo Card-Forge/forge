@@ -1,0 +1,8 @@
+Name:Battered Golem
+ManaCost:3
+Types:Artifact Creature Golem
+PT:3/2
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | IsPresent$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters the battlefield, you may untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Battered Golem doesn't untap during your untap step.\nWhenever an artifact enters the battlefield, you may untap Battered Golem.

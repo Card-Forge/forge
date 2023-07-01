@@ -1,0 +1,7 @@
+Name:Sphere of Reason
+ManaCost:3 W
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.BlueSource | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a blue source would deal damage to you, prevent 2 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 2
+AI:RemoveDeck:Random
+Oracle:If a blue source would deal damage to you, prevent 2 of that damage.

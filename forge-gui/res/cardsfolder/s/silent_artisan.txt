@@ -1,0 +1,5 @@
+Name:Silent Artisan
+ManaCost:3 W W
+Types:Creature Giant
+PT:3/5
+Oracle:

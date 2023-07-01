@@ -1,0 +1,12 @@
+Name:Immovable Rod
+ManaCost:W
+Types:Artifact
+K:You may choose not to untap CARDNAME during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigVenture | TriggerDescription$ Whenever CARDNAME becomes untapped, venture into the dungeon.
+SVar:TrigVenture:DB$ Venture
+A:AB$ Pump | Cost$ 3 W T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | RememberObjects$ Targeted | SpellDescription$ For as long as CARDNAME remains tapped, another target permanent loses all abilities and can't attack or block.
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME can't attack or block. | RemoveAllAbilities$ True
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
+SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:You may choose not to untap Immovable Rod during your untap step.\nWhenever Immovable Rod becomes untapped, venture into the dungeon.\n{3}{W}, {T}: For as long as Immovable Rod remains tapped, another target permanent loses all abilities and can't attack or block.

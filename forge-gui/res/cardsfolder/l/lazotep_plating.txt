@@ -1,0 +1,9 @@
+Name:Lazotep Plating
+ManaCost:1 U
+Types:Instant
+A:SP$ Amass | Type$ Zombie | Num$ 1 | SubAbility$ DBPump | SpellDescription$ Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Hexproof | SubAbility$ DBPumpAll | SpellDescription$ You and permanents you control gain hexproof until end of turn. (You and they can't be the targets of spells or abilities your opponents control.)
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof
+DeckHints:Ability$Amass & Type$Zombie
+DeckHas:Ability$Amass|Counters|Token
+Oracle:Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)\nYou and permanents you control gain hexproof until end of turn. (You and they can't be the targets of spells or abilities your opponents control.)

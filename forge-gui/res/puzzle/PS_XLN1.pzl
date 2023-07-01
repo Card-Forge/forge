@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Ixalan #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/09/W_XLN01.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Your opponent does not have mana available and therefore can't activate Oketra's ability.
+[state]
+humanlife=20
+ailife=15
+activeplayer=human
+activephase=MAIN1
+humanhand=Walking Ballista;Skulduggery;Ovalchase Dragster;Hungry Flames
+humanlibrary=
+humangraveyard=
+humanbattlefield=Sun-Crowned Hunters;Desperate Castaways;Vicious Conquistador;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Oketra the True;Adorned Pouncer;Adorned Pouncer;t:Warrior,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Warrior,Keywords:Vigilance,Image:w_1_1_warrior_akh
+aiexile=
+aicommand=

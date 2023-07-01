@@ -1,0 +1,10 @@
+Name:Guul Draz Specter
+ManaCost:2 B B
+Types:Creature Specter
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as an opponent has no cards in hand.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:X:PlayerCountOpponents$LowestCardsInHand
+Oracle:Flying\nGuul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.\nWhenever Guul Draz Specter deals combat damage to a player, that player discards a card.

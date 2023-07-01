@@ -1,0 +1,11 @@
+Name:Champion of the Flame
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:1/1
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura and Equipment attached to it.
+SVar:X:Count$Valid Equipment.Attached,Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
+DeckHints:Type$Equipment|Aura
+Oracle:Trample\nChampion of the Flame gets +2/+2 for each Aura and Equipment attached to it.

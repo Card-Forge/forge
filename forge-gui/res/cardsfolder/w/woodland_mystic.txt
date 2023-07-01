@@ -1,0 +1,6 @@
+Name:Woodland Mystic
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

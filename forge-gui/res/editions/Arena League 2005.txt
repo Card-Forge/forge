@@ -1,0 +1,16 @@
+[metadata]
+Code=PAL05
+Date=2005-01-01
+Name=Arena League 2005
+Type=Promo
+ScryfallCode=PAL05
+
+[cards]
+1 R Plains @Don Thompson
+2 R Island @Don Thompson
+3 R Swamp @Don Thompson
+4 R Mountain @Don Thompson
+5 R Forest @Don Thompson
+6 R Genju of the Spires @Joel Thomas
+7 R Okina Nightwatch @Heather Hudson
+8 R Skyknight Legionnaire @Jim Murray

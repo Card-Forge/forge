@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Aga Galneer 2
+Title=Aga Galneer
+Difficulty=medium
+Description=UBW Shandalar Djinn deck, spells that add life and cost life.
+Icon=Aga.jpg
+Deck Type=constructed
+[main]
+2 Ashes to Ashes|DRK
+2 City of Brass|CHR
+3 Drain Life|2ED
+2 El-Hajjaj|ARN
+2 Erg Raiders|ARN
+6 Forest|2ED
+2 Fungusaur|LEB
+2 Giant Growth|2ED
+2 Giant Spider|2ED
+2 Greed|LEG
+3 Healing Salve|2ED
+2 Hurricane|2ED
+3 Onulet|ATQ
+8 Plains|2ED
+1 Ring of Immortals|LEG
+2 Savannah Lions|2ED
+2 Sengir Vampire|2ED
+2 Serra Angel|2ED
+1 Sol Ring|2ED
+3 Spirit Link|LEG
+2 Stream of Life|LEB
+8 Swamp|2ED
+2 Unholy Strength|2ED
+[sideboard]

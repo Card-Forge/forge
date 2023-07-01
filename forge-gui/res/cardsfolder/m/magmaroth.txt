@@ -1,0 +1,10 @@
+Name:Magmaroth
+ManaCost:3 R
+Types:Creature Elemental
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a noncreature spell, remove a -1/-1 counter from CARDNAME.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:At the beginning of your upkeep, put a -1/-1 counter on Magmaroth.\nWhenever you cast a noncreature spell, remove a -1/-1 counter from Magmaroth.

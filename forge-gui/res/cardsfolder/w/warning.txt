@@ -1,0 +1,6 @@
+Name:Warning
+ManaCost:W
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target attacking creature this turn.
+Oracle:Prevent all combat damage that would be dealt by target attacking creature this turn.

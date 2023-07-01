@@ -1,0 +1,14 @@
+[metadata]
+Name:Pauper Puzzles #11 - I'd Tap That
+URL:https://pauperpuzzles.wordpress.com/2017/01/28/11-id-tap-that/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=22
+humanhand=Goblin Bushwhacker;Mogg War Marshal;Lightning Bolt;Living Totem;Living Totem;Might of the Masses;Sprout Swarm;Scatter the Seeds
+humanbattlefield=Gruul Turf;Mountain;Mountain;Forest;Nettle Sentinel;Thermo-Alchemist;Renegade Freighter;Impact Tremors
+aibattlefield=Safehold Elite;Young Wolf;Safehold Elite;Young Wolf;Safehold Elite;Spidersilk Armor

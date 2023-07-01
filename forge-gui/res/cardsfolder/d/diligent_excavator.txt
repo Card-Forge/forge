@@ -1,0 +1,8 @@
+Name:Diligent Excavator
+ManaCost:1 U
+Types:Creature Human Artificer
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, target player mills two cards. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
+DeckHas:Ability$Graveyard
+Oracle:Whenever you cast a historic spell, target player mills two cards. (Artifacts, legendaries, and Sagas are historic.)

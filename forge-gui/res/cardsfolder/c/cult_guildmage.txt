@@ -1,0 +1,7 @@
+Name:Cult Guildmage
+ManaCost:B R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Discard | Cost$ 3 B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent or planeswalker.
+Oracle:{3}{B}, {T}: Target player discards a card. Activate only as a sorcery.\n{R}, {T}: Cult Guildmage deals 1 damage to target opponent or planeswalker.

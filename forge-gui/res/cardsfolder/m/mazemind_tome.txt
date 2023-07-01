@@ -1,0 +1,10 @@
+Name:Mazemind Tome
+ManaCost:2
+Types:Artifact
+A:AB$ Scry | Cost$ T AddCounter<1/PAGE> | ScryNum$ 1 | SpellDescription$ Scry 1.
+A:AB$ Draw | Cost$ 2 T AddCounter<1/PAGE> | NumCards$ 1 | SpellDescription$ Draw a card.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE4_PAGE | Execute$ TrigChange | TriggerDescription$ When there are four or more page counters on CARDNAME, exile it. If you do, you gain 4 life.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | LifeAmount$ 4
+DeckHas:Ability$Counters|LifeGain
+Oracle:{T}, Put a page counter on Mazemind Tome: Scry 1.\n{2}, {T}, Put a page counter on Mazemind Tome: Draw a card.\nWhen there are four or more page counters on Mazemind Tome, exile it. If you do, you gain 4 life.

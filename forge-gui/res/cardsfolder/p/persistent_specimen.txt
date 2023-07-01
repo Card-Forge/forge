@@ -1,0 +1,9 @@
+Name:Persistent Specimen
+ManaCost:B
+Types:Creature Skeleton
+PT:1/1
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:SacMe:2
+SVar:DiscardMe:2
+DeckHas:Ability$Graveyard
+Oracle:{2}{B}: Return Persistent Specimen from your graveyard to the battlefield tapped.

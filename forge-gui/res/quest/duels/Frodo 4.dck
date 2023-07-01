@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Frodo 4
+Title=Frodo
+Difficulty=very hard
+Description=WRG Zoo deck
+Icon=Frodo.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+2 Plateau
+2 Taiga
+2 Savannah
+4 Arid Mesa
+4 Wooded Foothills
+3 Windswept Heath
+1 Forest|ZEN
+1 Mox Ruby
+1 Mox Pearl
+1 Mox Emerald
+4 Kird Ape
+3 Path to Exile
+4 Lightning Bolt
+4 Wild Nacatl
+4 Loam Lion
+2 Steppe Lynx
+1 Isamaru, Hound of Konda
+1 Goblin Guide
+1 Vexing Devil
+4 Tarmogoyf
+4 Lightning Helix
+1 Gaddock Teeg
+4 Woolly Thoctar
+1 Thalia, Guardian of Thraben
+1 Wheel of Fortune
+[sideboard]

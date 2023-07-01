@@ -1,0 +1,7 @@
+Name:Urborg Stalker
+ManaCost:3 B
+Types:Creature Horror
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Permanent.nonBlack+nonLand+ActivePlayerCtrl | PresentCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+Oracle:At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, Urborg Stalker deals 1 damage to that player.

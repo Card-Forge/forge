@@ -1,0 +1,11 @@
+Name:Silumgar, the Drifting Death
+ManaCost:4 U B
+Types:Legendary Creature Dragon
+PT:3/7
+K:Flying
+K:Hexproof
+T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMassacre | TriggerDescription$ Whenever a Dragon you control attacks, creatures defending player control each get -1/-1 until end of turn.
+SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ TriggeredAttacker.Creature+ControlledBy TriggeredDefendingPlayer | IsCurse$ True
+SVar:BuffedBy:Dragon
+DeckHints:Type$Dragon
+Oracle:Flying, hexproof\nWhenever a Dragon you control attacks, creatures defending player controls get -1/-1 until end of turn.

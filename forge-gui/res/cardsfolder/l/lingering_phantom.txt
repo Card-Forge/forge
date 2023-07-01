@@ -1,0 +1,7 @@
+Name:Lingering Phantom
+ManaCost:5 B
+Types:Creature Spirit
+PT:5/4
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a historic spell, you may pay {B}. If you do, return CARDNAME from your graveyard to your hand. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigReturn:AB$ ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Whenever you cast a historic spell, you may pay {B}. If you do, return Lingering Phantom from your graveyard to your hand. (Artifacts, legendaries, and Sagas are historic.)

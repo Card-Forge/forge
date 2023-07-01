@@ -1,0 +1,8 @@
+Name:Glaring Spotlight
+ManaCost:1
+Types:Artifact
+S:Mode$ IgnoreHexproof | Activator$ You | ValidEntity$ Creature.OppCtrl | Description$ Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
+A:AB$ PumpAll | Cost$ 3 Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Hexproof | SubAbility$ GSEffect | SpellDescription$ Creatures you control gain hexproof until end of turn and can't be blocked this turn.
+SVar:GSEffect:DB$ Effect | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | Description$ Creatures you control can't be blocked this turn.
+Oracle:Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.\n{3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and can't be blocked this turn.

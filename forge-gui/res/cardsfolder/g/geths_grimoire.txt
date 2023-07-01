@@ -1,0 +1,6 @@
+Name:Geth's Grimoire
+ManaCost:4
+Types:Artifact
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent discards a card, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever an opponent discards a card, you may draw a card.

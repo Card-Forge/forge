@@ -1,0 +1,10 @@
+Name:Offspring's Revenge
+ManaCost:2 R W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of combat on your turn, exile target red, white, or black creature card from your graveyard. Create a token that's a copy of that card, except it's 1/1. It gains haste until your next turn.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Red+YouCtrl,Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target red, white, or black creature card in your graveyard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 1 | SetToughness$ 1 | PumpKeywords$ Haste | PumpDuration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, exile target red, white, or black creature card from your graveyard. Create a token that's a copy of that card, except it's 1/1. It gains haste until your next turn.

@@ -1,0 +1,17 @@
+[metadata]
+Code=PAL06
+Date=2006-01-01
+Name=Arena League 2006
+Type=Promo
+ScryfallCode=PAL06
+
+[cards]
+1 R Plains @John Avon
+2 R Island @John Avon
+3 R Swamp @John Avon
+4 R Mountain @John Avon
+5 R Forest @John Avon
+6 R Castigate @Darrell Riche
+7 R Wee Dragonauts @Greg Staples
+8 R Coiling Oracle @Mark Zug
+9 R Surging Flame @Ron Spencer

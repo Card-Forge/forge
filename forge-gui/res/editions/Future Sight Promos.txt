@@ -1,0 +1,10 @@
+[metadata]
+Code=PFUT
+Date=2007-05-04
+Name=Future Sight Promos
+Type=Promo
+ScryfallCode=PFUT
+
+[cards]
+87★ R Korlash, Heir to Blackblade @Richard Kane Ferguson
+122★ R Storm Entity @Lucio Parrillo

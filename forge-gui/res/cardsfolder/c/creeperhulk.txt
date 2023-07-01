@@ -1,0 +1,7 @@
+Name:Creeperhulk
+ManaCost:3 G G
+Types:Creature Plant Elemental
+PT:5/5
+K:Trample
+A:AB$ Animate | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 5 | Toughness$ 5 | Keywords$ Trample | SpellDescription$ Until end of turn, target creature you control has base power and toughness 5/5 and gains trample.
+Oracle:Trample\n{1}{G}: Until end of turn, target creature you control has base power and toughness 5/5 and gains trample.

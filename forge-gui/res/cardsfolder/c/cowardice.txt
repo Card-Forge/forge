@@ -1,0 +1,8 @@
+Name:Cowardice
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ BecomesTarget | ValidTarget$ Card.Creature+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredTargetLKICopy | Origin$ Battlefield | Destination$ Hand
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)

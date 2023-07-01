@@ -1,0 +1,8 @@
+Name:Garth One-Eye
+ManaCost:W U B R G
+Types:Legendary Creature Human Wizard
+PT:5/5
+A:AB$ NameCard | Cost$ T | Defined$ You | ChooseFromOneTimeList$ Disenchant,Braingeyser,Terror,Shivan Dragon,Regrowth,Black Lotus | SubAbility$ DBCast | StackDescription$ SpellDescription | SpellDescription$ Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy. (You still pay its costs.)
+SVar:DBCast:DB$ Play | CopyFromChosenName$ True | Optional$ True | StackDescription$ None
+AI:RemoveDeck:All
+Oracle:{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy. (You still pay its costs.)

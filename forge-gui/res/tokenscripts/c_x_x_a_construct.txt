@@ -1,0 +1,5 @@
+Name:Construct Token
+ManaCost:no cost
+Types:Artifact Creature Construct
+PT:*/*
+Oracle:

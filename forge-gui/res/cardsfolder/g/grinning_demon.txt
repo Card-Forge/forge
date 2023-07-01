@@ -1,0 +1,8 @@
+Name:Grinning Demon
+ManaCost:2 B B
+Types:Creature Demon
+PT:6/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+K:Morph:2 B B
+Oracle:At the beginning of your upkeep, you lose 2 life.\nMorph {2}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

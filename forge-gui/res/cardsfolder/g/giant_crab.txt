@@ -1,0 +1,6 @@
+Name:Giant Crab
+ManaCost:4 U
+Types:Creature Crab
+PT:3/3
+A:AB$ Pump | Cost$ U | KW$ Shroud | Defined$ Self | SpellDescription$ CARDNAME gains shroud until end of turn.
+Oracle:{U}: Giant Crab gains shroud until end of turn. (It can't be the target of spells or abilities.)

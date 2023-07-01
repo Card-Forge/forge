@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 3F The Thrull Rebellion
+Title=The Thrull Rebellion
+Difficulty=easy
+Description=Initially bred for sacrifice, the Thrulls eventually turned on their masters, the Order of the Ebon Hand, with gruesome results. -Sarpadian Empires, vol. II
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+2 Armor Thrull|FEM|2
+2 Armor Thrull|FEM|3
+2 Basal Thrull|FEM|1
+2 Basal Thrull|FEM|4
+4 Breeding Pit|FEM
+4 Derelor|FEM
+1 Mindstab Thrull|FEM|1
+1 Mindstab Thrull|FEM|2
+2 Mindstab Thrull|FEM|3
+2 Necrite|FEM|1
+1 Necrite|FEM|2
+1 Necrite|FEM|3
+24 Swamp|LEB|2
+4 Thrull Champion|FEM
+4 Thrull Retainer|FEM
+4 Thrull Wizard|FEM

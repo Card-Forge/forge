@@ -1,0 +1,7 @@
+Name:Mike, the Dungeon Master
+ManaCost:1 G W
+Types:Legendary Creature Human
+PT:2/2
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard that was put there from the battlefield this turn | ValidTgts$ Card.Creature+ThisTurnEnteredFrom_Battlefield+YouOwn | Tapped$ True | SpellDescription$ Choose target creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield tapped.
+K:Friends forever
+Oracle:{2}, {T}: Choose target creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield tapped.\nFriends forever (You can have two commanders if both have friends forever.)

@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (GRN)
+Type:Archived
+Subtype:Standard
+Effective:2018-09-27
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN
+Banned:Rampaging Ferocidon

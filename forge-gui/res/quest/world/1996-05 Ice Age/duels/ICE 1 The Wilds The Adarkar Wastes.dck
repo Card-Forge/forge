@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Adarkar Wastes
+Title=The Adarkar Wastes
+Difficulty=easy
+Description="We encountered the sentinels in the wastes, near no living thing. Their purpose was inscrutable." -Disa the Restless, journal entry
+
+The Adarkar Wastes were barren, frozen plains, populated by giants, unicorns, yetis and mysterious artificial sentinels. They were located between the Yavimaya River and the Kher Ridges.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Sentinel|ICE
+4 Adarkar Unicorn|ICE
+4 Adarkar Wastes|ICE
+4 Arctic Foxes|ICE
+3 Energy Storm|ICE
+2 Glaciers|ICE
+3 Icy Prison|ICE
+10 Island|ICE|3
+1 Land Cap|ICE
+4 Mistfolk|ICE
+9 Plains|ICE|2
+4 Power Sink|ICE
+4 Sibilant Spirit|ICE
+4 Silver Erne|ICE

@@ -1,0 +1,9 @@
+Name:Jace's Sentinel
+ManaCost:1 U
+Types:Creature Merfolk Warrior
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Planeswalker.Jace+YouCtrl | Description$ As long as you control a Jace planeswalker, CARDNAME gets +1/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Planeswalker.Jace+YouCtrl
+SVar:BuffedBy:Jace
+DeckNeeds:Type$Jace
+Oracle:As long as you control a Jace planeswalker, Jace's Sentinel gets +1/+0 and can't be blocked.

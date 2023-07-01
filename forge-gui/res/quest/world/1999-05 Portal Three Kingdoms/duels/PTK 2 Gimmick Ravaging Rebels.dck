@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Ravaging Rebels
+Title=Ravaging Rebels
+Difficulty=medium
+Description="Thorn bushes spring up wherever the army has passed. Lean years follow in the wake of a great war."\n-Lao Tzu, Tao Te Ching (trans. Feng and English)
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Fire Ambush|PTK
+4 Fire Bowman|PTK
+4 Independent Troops|PTK
+12 Mountain|PTK|1
+4 Mountain Bandit|PTK
+8 Plains|PTK|3
+4 Ravages of War|PTK
+4 Shu Cavalry|PTK
+4 Volunteer Militia|PTK
+4 Yellow Scarves Cavalry|PTK
+4 Yellow Scarves Troops|PTK
+4 Zodiac Goat|PTK

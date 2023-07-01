@@ -1,0 +1,17 @@
+Name:Mysterious Tome
+ManaCost:2 U
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SubAbility$ DBTransform | SpellDescription$ Draw a card. Transform CARDNAME.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:{2}, {T}: Draw a card. Transform Mysterious Tome.
+
+ALTERNATE
+
+Name:Chilling Chronicle
+ManaCost:no cost
+Colors:blue
+Types:Artifact
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent | SubAbility$ DBTransform1 | SpellDescription$ Tap target nonland permanent. Transform CARDNAME.
+SVar:DBTransform1:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:{1}, {T}: Tap target nonland permanent. Transform Chilling Chronicle.

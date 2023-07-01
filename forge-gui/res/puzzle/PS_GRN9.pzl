@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #09
+URL:http://www.possibilitystorm.com/091-guilds-of-ravnica-season-puzzle-9/
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has no mana available.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Plummet;Torgaar, Famine Incarnate;Quasiduplicate;Doublecast;Undercity Uprising;Waterknot
+humanbattlefield=Thousand-Year Storm;Adeliz, the Cinder Wind|Id:13;Maniacal Rage|AttachedTo:13;Atzocan Archer;Primal Amulet;Submerged Boneyard;Submerged Boneyard;Submerged Boneyard;Submerged Boneyard;Highland Lake;Highland Lake;Highland Lake;Highland Lake;Timber Gorge;Timber Gorge;Timber Gorge;Timber Gorge
+aibattlefield=t:Angel,P:4,T:4,Cost:no cost,Color:W,Types:Creature-Angel,Keywords:Flying-Hexproof-Lifelink-Vigilance,Image:w_4_4_angel_flying_vigilance_grn;t:Angel,P:4,T:4,Cost:no cost,Color:W,Types:Creature-Angel,Keywords:Flying-Hexproof-Lifelink-Vigilance,Image:w_4_4_angel_flying_vigilance_grn;t:Angel,P:4,T:4,Cost:no cost,Color:W,Types:Creature-Angel,Keywords:Flying-Hexproof-Lifelink-Vigilance,Image:w_4_4_angel_flying_vigilance_grn;Kopala, Warden of Waves;Merfolk Mistbinder;Merfolk Mistbinder|Counters:P1P1=1;Lyra Dawnbringer;Shalai, Voice of Plenty

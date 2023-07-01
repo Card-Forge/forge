@@ -1,0 +1,6 @@
+Name:Breaker of Armies
+ManaCost:8
+Types:Creature Eldrazi
+PT:10/8
+K:All creatures able to block CARDNAME do so.
+Oracle:All creatures able to block Breaker of Armies do so.

@@ -1,0 +1,7 @@
+Name:Beloved Princess
+ManaCost:W
+Types:Creature Human Noble
+PT:1/1
+K:Lifelink
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE3 | Description$ CARDNAME can't be blocked by creatures with power 3 or greater.
+Oracle:Lifelink\nBeloved Princess can't be blocked by creatures with power 3 or greater.

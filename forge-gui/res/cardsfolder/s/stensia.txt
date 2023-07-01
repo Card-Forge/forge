@@ -1,0 +1,11 @@
+Name:Stensia
+ManaCost:no cost
+Types:Plane Innistrad
+T:Mode$ DamageDone | ValidSource$ Creature.IsNotRemembered | ValidTarget$ Player | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever a creature deals damage to one or more players for the first time each turn, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1 | RememberCards$ True
+T:Mode$ Phase | Phase$ End of Turn | Execute$ DBCleanup | TriggerZones$ Command | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each creature you control gains "{T}: This creature deals 1 damage to target player or planeswalker" until end of turn.
+SVar:RolledChaos:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Abilities$ LVAbs | SpellDescription$ Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to target player or planeswalker."
+SVar:LVAbs:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to target player or planeswalker.
+Oracle:Whenever a creature deals damage to one or more players for the first time each turn, put a +1/+1 counter on it.\nWhenever chaos ensues, each creature you control gains "{T}: This creature deals 1 damage to target player or planeswalker" until end of turn.

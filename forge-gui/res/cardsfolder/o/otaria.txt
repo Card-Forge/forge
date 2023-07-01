@@ -1,0 +1,9 @@
+Name:Otaria
+ManaCost:no cost
+Types:Plane Dominaria
+S:Mode$ Continuous | Affected$ Instant,Sorcery | EffectZone$ Command | AffectedZone$ Graveyard | AddKeyword$ Flashback | Description$ Instant and sorcery cards in graveyards have flashback. The flashback cost is equal to the card's mana cost. (Its owner may cast the card from their graveyard for its mana cost. Then they exile it.)
+S:Mode$ Continuous | Affected$ Instant.wasCastFromGraveyard,Sorcery.wasCastFromGraveyard | EffectZone$ Command | AffectedZone$ Stack | AddKeyword$ Flashback | Secondary$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, take an extra turn after this one.
+SVar:RolledChaos:DB$ AddTurn | NumTurns$ 1
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:Instant and sorcery cards in graveyards have flashback. The flashback cost is equal to the card's mana cost. (Its owner may cast the card from their graveyard for its mana cost. Then they exile it.)\nWhenever chaos ensues, take an extra turn after this one.

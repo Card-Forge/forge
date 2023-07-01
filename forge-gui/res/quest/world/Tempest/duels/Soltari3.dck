@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Soltari Champion
+Icon=Dungeon Crawling White.jpg
+Difficulty=hard
+Description=Soltari deck
+Deck Type=constructed
+Name=Soltari3
+[Main]
+2 Disenchant|TMP
+4 Cursed Scroll|TMP
+3 Gerrard's Battle Cry|TMP
+5 Plains|TMP|1
+6 Plains|TMP|2
+6 Plains|TMP|3
+6 Plains|TMP|4
+4 Soltari Champion|STH
+4 Soltari Emissary|TMP
+4 Soltari Foot Soldier|TMP
+4 Soltari Monk|TMP
+4 Soltari Priest|TMP
+4 Soltari Trooper|TMP
+4 Soltari Visionary|EXO

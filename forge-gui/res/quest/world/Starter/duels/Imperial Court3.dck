@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Imperial Court3
+Title=Imperial Court
+Icon=Dungeon Crawling Black.jpg
+Difficulty=hard
+Description=Black deck with assassins and officials.
+Deck Type=constructed
+[Main]
+4 Brutal Nightstalker|PO2
+1 Cao Cao, Lord of Wei|PTK
+4 Corrupt Court Official|PTK
+2 Cunning Advisor|PTK
+4 Gravedigger|POR
+4 Imperial Edict|PTK
+4 King's Assassin|POR
+1 Nightstalker Engine|PO2
+4 Predatory Nightstalker|PO2
+4 Ravenous Rats|PO2
+10 Swamp|PO2|1
+3 Swamp|PO2|2
+11 Swamp|PO2|3
+4 Wei Assassins|PTK

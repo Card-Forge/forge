@@ -1,0 +1,9 @@
+Name:Defenders of Zendikar|Deck:Defenders of Zendikar.dck|Variant:None|Avatar:Avenger of Zendikar|Desc:
+Name:Kazandu Landfall|Deck:Kazandu Landfall.dck|Variant:None|Avatar:Baloth Woodcrasher|Desc:
+Name:Kazandu Rally|Deck:Kazandu Rally.dck|Variant:None|Avatar:Chasm Guide|Desc:
+Name:Kazuul, Tyrant of the Cliffs|Deck:Kazuul, Tyrant of the Cliffs.dck|Variant:Commander|Avatar:Kazuul, Tyrant of the Cliffs|Desc:
+Name:Mina and Denn, Wildborn|Deck:Mina and Denn, Wildborn.dck|Variant:Commander|Avatar:Mina and Denn, Wildborn|Desc:
+Name:Omnath, Locus of Rage|Deck:Omnath, Locus of Rage.dck|Variant:Commander|Avatar:Omnath, Locus of Rage|Desc:
+Name:Zada, Hedron Grinder|Deck:Zada, Hedron Grinder.dck|Variant:Commander|Avatar:Zada, Hedron Grinder|Desc:
+Name:Nissa, Voice of Zendikar|Deck:Nissa, Voice of Zendikar.dck|Variant:Planeswalker|Avatar:Nissa, Voice of Zendikar|Desc:
+Name:Chandra Ablaze|Deck:Chandra Ablaze.dck|Variant:Planeswalker|Avatar:Chandra Ablaze|Desc:

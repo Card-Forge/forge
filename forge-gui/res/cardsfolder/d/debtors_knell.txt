@@ -1,0 +1,6 @@
+Name:Debtors' Knell
+ManaCost:4 WB WB WB
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ChangeNum$ 1 | Mandatory$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature
+Oracle:({W/B} can be paid with either {W} or {B}.)\nAt the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.

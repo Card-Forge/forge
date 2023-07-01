@@ -1,0 +1,7 @@
+Name:Songstitcher
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Effect | Cost$ 1 W | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$ Select target attacking creature with flying | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt this turn by target attacking creature with flying.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt this turn by target attacking creature with flying.
+Oracle:{1}{W}: Prevent all combat damage that would be dealt this turn by target attacking creature with flying.

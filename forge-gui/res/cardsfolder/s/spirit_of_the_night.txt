@@ -1,0 +1,11 @@
+Name:Spirit of the Night
+ManaCost:6 B B B
+Types:Legendary Creature Demon Spirit
+PT:6/5
+K:Flying
+K:Trample
+K:Haste
+K:Protection from black
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
+DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
+Oracle:Flying, trample, haste, protection from black\nSpirit of the Night has first strike as long as it's attacking.

@@ -1,0 +1,9 @@
+Name:The Zephyr Maze
+ManaCost:no cost
+Types:Plane Kyneth
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withFlying | AddPower$ 2 | Description$ Creatures with flying get +2/+0.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withoutFlying | AddPower$ -2 | Description$ Creatures without flying get -2/-0.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target creature gains flying until end of turn.
+SVar:RolledChaos:DB$ Pump | ValidTgts$ Creature | KW$ Flying
+SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
+Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.\nWhenever chaos ensues, target creature gains flying until end of turn.

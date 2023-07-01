@@ -1,0 +1,8 @@
+Name:Drumhunter
+ManaCost:3 G
+Types:Creature Human Druid Warrior
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Creature.powerGE5+YouCtrl | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control a creature with power 5 or greater, you may draw a card.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may draw a card.\n{T}: Add {C}.

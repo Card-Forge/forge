@@ -1,0 +1,5 @@
+Name:Servo Token
+ManaCost:no cost
+Types:Artifact Creature Servo
+PT:1/1
+Oracle:

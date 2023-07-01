@@ -1,0 +1,7 @@
+Name:Circuits Act
+ManaCost:2 R
+Types:Sorcery
+A:SP$ RollDice | Amount$ 3 | Sides$ 6 | DifferentResults$ True | SubAbility$ DBToken | SpellDescription$ Roll three six-sided dice.
+SVar:DBToken:DB$ Token | TokenAmount$ DifferentResults | TokenScript$ w_1_1_a_clown_robot | SpellDescription$ For each different result, create a 1/1 white Clown Robot artifact creature token.
+DeckHas:Ability$Token & Type$Clown|Robot
+Oracle:Roll three six-sided dice. For each different result, create a 1/1 white Clown Robot artifact creature token.

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #05
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/11/087.-GRN5.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your graveyard starts empty. Your opponent's Aggressive Mammoth is enchanted with One with the Wind. From Dream Eater, you know the two cards of your library, Ghitu Lavarunner and Academy Journeymage.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Mutiny;Metamorphic Alteration;Direct Current;Maximize Velocity;Enigma Drake
+humanlibrary=Ghitu Lavarunner;Academy Journeymage
+humanbattlefield=Sparring Construct;Dream Eater;Ral, Izzet Viceroy|Counters:LOYALTY=3;Mountain|Set:GRN;Mountain|Set:GRN;Island|Set:GRN;Island|Set:GRN;Island|Set:GRN;Island|Set:GRN
+aibattlefield=Nullhide Ferox;Muldrotha, the Gravetide;Aggressive Mammoth|Id:1;One With the Wind|AttachedTo:1

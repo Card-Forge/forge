@@ -1,0 +1,7 @@
+Name:Blood Clock
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | UnlessCost$ PayLife<2> | UnlessPayer$ TriggeredPlayer
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.

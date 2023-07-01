@@ -1,0 +1,7 @@
+Name:Moaning Wall
+ManaCost:2 B
+Types:Creature Zombie Wall
+PT:0/5
+K:Defender
+K:Cycling:2
+Oracle:Defender\nCycling {2} ({2}, Discard this card: Draw a card.)

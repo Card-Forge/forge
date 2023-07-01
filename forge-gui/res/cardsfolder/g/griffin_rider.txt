@@ -1,0 +1,9 @@
+Name:Griffin Rider
+ManaCost:1 W
+Types:Creature Human Knight
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | IsPresent$ Griffin.YouCtrl | Description$ As long as you control a Griffin, CARDNAME gets +3/+3 and has flying.
+SVar:BuffedBy:Griffin
+AI:RemoveDeck:Random
+DeckHints:Type$Griffin
+Oracle:As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.

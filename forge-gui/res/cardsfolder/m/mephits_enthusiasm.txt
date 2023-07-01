@@ -1,0 +1,10 @@
+Name:Mephit's Enthusiasm
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | ExcessSVar$ Excess | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
+SVar:DBEffect:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | SetChosenNumber$ Excess | SpellDescription$ If excess damage was dealt this way, note that excess damage, then you get a boon with "When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number."
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Mephit's Enthusiasm's Boon's Perpetual Effect
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ X | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +X/+0, where X is the noted number.
+SVar:X:Count$ChosenNumber
+Oracle:Mephit's Enthusiasm deals 4 damage to target creature or planeswalker. If excess damage was dealt this way, note that excess damage, then you get a boon with "When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number."

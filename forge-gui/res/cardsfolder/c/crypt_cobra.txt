@@ -1,0 +1,7 @@
+Name:Crypt Cobra
+ManaCost:3 B
+Types:Creature Snake
+PT:3/3
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredDefendingPlayer | Num$ 1
+Oracle:Whenever Crypt Cobra attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)

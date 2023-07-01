@@ -1,0 +1,8 @@
+Name:Cho-Arrim Bruiser
+ManaCost:5 W
+Types:Creature Ogre Rebel
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap up to two target creatures.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Cho-Arrim Bruiser attacks, you may tap up to two target creatures.

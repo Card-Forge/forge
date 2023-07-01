@@ -1,0 +1,9 @@
+Name:Admiral Beckett Brass
+ManaCost:1 U B R
+Types:Legendary Creature Human Pirate
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Pirate+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Pirates you control get +1/+1.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainCtrl | TriggerDescription$ At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
+SVar:TrigGainCtrl:DB$ GainControl | ValidTgts$ Permanent.nonLand+ControlledBy Player.wasDealtCombatDamageThisTurnBy Creature.Pirate GE3 | TgtPrompt$ Select target creature controlled by a player who was dealt damage by three or more Pirates this turn | SpellDescription$ Gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
+DeckHints:Type$Pirate
+Oracle:Other Pirates you control get +1/+1.\nAt the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.

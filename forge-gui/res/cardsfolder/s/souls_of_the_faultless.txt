@@ -1,0 +1,11 @@
+Name:Souls of the Faultless
+ManaCost:W B B
+Types:Creature Spirit
+PT:0/4
+K:Defender
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life and attacking player loses that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBDrain
+SVar:DBDrain:DB$ LoseLife | Defined$ AttackingPlayer | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Souls of the Faultless is dealt combat damage, you gain that much life and attacking player loses that much life.

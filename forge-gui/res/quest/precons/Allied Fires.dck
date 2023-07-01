@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Allied Fires - Challenger 2020
+Description=Jeskai Fires of Invention deck, featuring 24 rares and 1 mythic rare.
+Deck Type=constructed
+Set=THB
+Image=allied_fires.jpg
+[Main]
+2 Banishing Light|THB
+3 Deafening Clarion|GRN
+2 Drawn from Dreams|M20
+2 Fae of Wishes|ELD
+4 Fires of Invention|ELD
+4 Interplanar Beacon|WAR
+5 Island|M20
+3 Kasmina, Enigmatic Mentor|WAR
+1 Kenrith, the Returned King|ELD
+2 Mountain|M20
+4 Narset, Parter of Veils|WAR
+4 Omen of the Sea|THB
+2 Plains|M20
+2 Saheeli, Sublime Artificer|WAR
+3 Sarkhan the Masterless|WAR
+1 Steam Vents|GRN
+3 Swiftwater Cliffs|M20
+1 Temple of Enlightenment|THB
+1 Temple of Epiphany|M20
+1 Temple of Triumph|M20
+2 Time Wipe|WAR
+3 Tranquil Cove|M20
+1 Ugin, the Ineffable|WAR
+4 Wind-Scarred Crag|M20
+[Sideboard]
+1 Ashiok, Dream Render|WAR
+2 Devout Decree|M20
+1 Dovin's Veto|WAR
+1 Dovin, Hand of Control|WAR
+2 Fry|M20
+1 Mass Manipulation|RNA
+2 Revoke Existence|THB
+1 Sarkhan the Masterless|WAR
+3 Thirst for Meaning|THB
+1 Time Wipe|WAR

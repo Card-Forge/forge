@@ -1,0 +1,9 @@
+Name:Benthic Infiltrator
+ManaCost:2 U
+Types:Creature Eldrazi Drone
+PT:1/4
+K:Devoid
+K:Ingest
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+DeckHints:Type$Processor
+Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)\nBenthic Infiltrator can't be blocked.

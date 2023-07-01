@@ -1,0 +1,11 @@
+Name:Path of Bravery
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GEY | Description$ As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife
+SVar:Z:Count$Valid Creature.attacking+YouCtrl
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Z
+SVar:PlayMain1:TRUE
+Oracle:As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.\nWhenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.

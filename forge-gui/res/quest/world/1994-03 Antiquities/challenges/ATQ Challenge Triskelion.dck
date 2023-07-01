@@ -1,0 +1,19 @@
+[quest]
+id=ATQ Challenge: Triskelion
+OpponentName=The Artillery
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ATQ
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ATQ Challenge: Triskelion
+Title=The Artillery
+Difficulty=hard
+Description=A brainchild of Tawnos, the Triskelion proved its versatility ans usefulness in many of the later battles between the brothers.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+40 Triskelion|ATQ
+20 Mishra's Workshop|ATQ

@@ -1,0 +1,11 @@
+Name:Ghastly Gloomhunter
+ManaCost:1 B
+Types:Creature Zombie Bat
+PT:1/1
+K:Kicker:3 B
+K:Flying
+K:Lifelink
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+DeckHas:Ability$Counters
+Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nFlying, lifelink\nIf Ghastly Gloomhunter was kicked, it enters the battlefield with two +1/+1 counters on it.

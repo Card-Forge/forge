@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Hydra 2
+Title=Crag Hydra
+Icon=Hydra.jpg
+Difficulty=medium
+Description=Red burn/dragon deck.
+Deck Type=constructed
+[main]
+1 Detonate|4ED
+4 Disintegrate|4ED
+4 Dragon Whelp|4ED
+4 Fireball|4ED
+4 Inferno|DRK
+2 Lightning Bolt|4ED
+22 Mountain|4ED
+4 Onulet|ATQ
+4 Red Mana Battery|4ED
+2 Shivan Dragon|4ED
+2 Soul Net|LEB
+3 The Hive|LEB
+4 Wall of Fire|4ED
+[sideboard]

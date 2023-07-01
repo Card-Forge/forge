@@ -1,0 +1,11 @@
+[metadata]
+Code=PLG20
+Date=2020-05-18
+Name=Love Your LGS 2020
+Code2=PLGS
+Type=Promo
+ScryfallCode=PLG20
+
+[cards]
+1 R Reliquary Tower @Daniel Ljunggren
+2 R Hangarback Walker @Nicholas Gregory

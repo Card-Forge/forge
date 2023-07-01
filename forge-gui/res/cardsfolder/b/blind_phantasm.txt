@@ -1,0 +1,5 @@
+Name:Blind Phantasm
+ManaCost:2 U
+Types:Creature Illusion
+PT:2/3
+Oracle:

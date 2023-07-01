@@ -1,0 +1,28 @@
+Name:Kianne, Dean of Substance
+ManaCost:2 G
+Types:Legendary Creature Elf Druid
+PT:2/2
+A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GE1 | StackDescription$ None | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ STUDY | TgtZone$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ LT1 | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+A:AB$ Token | Cost$ 4 G | TokenScript$ gu_0_0_fractal | ImprintTokens$ True | SubAbility$ DBCounters | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
+SVar:DBCounters:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup
+SVar:X:Count$ValidExile Card.YouOwn+nonLand+counters_GE1_STUDY$DifferentCMC
+DeckHas:Ability$Counters|Token
+AlternateMode:Modal
+Oracle:{T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.\n{4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
+
+ALTERNATE
+
+Name:Imbraham, Dean of Theory
+ManaCost:2 U U
+Types:Legendary Creature Bird Wizard
+PT:3/3
+K:Flying
+A:AB$ Dig | Cost$ X U U T | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBCounter | StackDescription$ SpellDescription | SpellDescription$ Exile the top X cards of your library and put a study counter on each of them. Then you may put a card you own in exile with a study counter on it into your hand.
+SVar:DBCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ STUDY | TgtZone$ Exile | StackDescription$ None | SubAbility$ DBHand
+SVar:DBHand:DB$ ChangeZone | Hidden$ True | Origin$ Exile | Destination$ Hand | ChangeType$ Card.YouOwn+counters_GE1_STUDY | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+Oracle:Flying\n{X}{U}{U}, {T}: Exile the top X cards of your library and put a study counter on each of them. Then you may put a card you own in exile with a study counter on it into your hand.

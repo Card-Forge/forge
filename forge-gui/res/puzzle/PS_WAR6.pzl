@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/06/116.-WAR6-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. From a scry last turn, you know the top card of your library - Flood of Recollection. Assume both graveyards are empty.
+[state]
+humanlife=20
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Fanatical Firebrand;Knight's Pledge;Dual Shot;Role Reversal
+humanlibrary=Flood of Recollection;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus
+humanbattlefield=Chandra, Fire Artisan|Counters:LOYALTY=6;The Wanderer|Counters:LOYALTY=4;Teyo, the Shieldmage|Counters:LOYALTY=5;Sage's Row Savant;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs
+aibattlefield=Senate Courier;Sarkhan the Masterless|Counters:LOYALTY=2;Rising Populace|Counters:P1P1=1

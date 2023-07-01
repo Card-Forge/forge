@@ -1,0 +1,10 @@
+Name:Excavation Elephant
+ManaCost:4 W
+Types:Creature Elephant
+PT:3/5
+K:Kicker:1 W
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return target artifact card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouOwn
+SVar:NeedsToPlayKickedVar:Z GE1
+SVar:Z:Count$ValidGraveyard Artifact.YouOwn
+Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nWhen Excavation Elephant enters the battlefield, if it was kicked, return target artifact card from your graveyard to your hand.

@@ -1,0 +1,13 @@
+Name:Liesa, Shroud of Dusk
+ManaCost:2 W W B
+Types:Legendary Creature Angel
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self+wasCastFromCommand | Type$ Spell | Amount$ X | EffectZone$ Stack | Description$ Rather than pay {2} for each previous time you've cast this spell from the command zone this game, pay 2 life that many times.
+S:Mode$ RaiseCost | ValidCard$ Card.Self+wasCastFromCommand | Type$ Spell | Cost$ PayLife<X> | EffectZone$ Stack | Secondary$ True
+SVar:X:Count$CommanderCastFromCommandZone/Times.2
+K:Flying
+K:Lifelink
+T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, they lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Rather than pay {2} for each previous time you've cast this spell from the command zone this game, pay 2 life that many times.\nFlying, lifelink\nWhenever a player casts a spell, they lose 2 life.

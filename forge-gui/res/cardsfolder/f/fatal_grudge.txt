@@ -1,0 +1,7 @@
+Name:Fatal Grudge
+ManaCost:B R
+Types:Sorcery
+A:SP$ Sacrifice | Cost$ B R Sac<1/Permanent.nonLand/nonland permanent> | Defined$ Opponent | SacValid$ Permanent.sharesCardTypeWith Sacrificed | SacMessage$ permanent that shares a type with the sacrificed permanent | SubAbility$ DBDraw | SpellDescription$ Each opponent chooses a permanent they control that shares a type with the sacrificed permanent and sacrifices it.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, sacrifice a nonland permanent.\nEach opponent chooses a permanent they control that shares a type with the sacrificed permanent and sacrifices it.\nDraw a card.

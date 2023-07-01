@@ -1,0 +1,6 @@
+Name:Llanowar Vanguard
+ManaCost:2 G
+Types:Creature Dryad
+PT:1/1
+A:AB$ Pump | Cost$ T | Defined$ Self | NumDef$ +4 | SpellDescription$ CARDNAME gets +0/+4 until end of turn.
+Oracle:{T}: Llanowar Vanguard gets +0/+4 until end of turn.

@@ -1,0 +1,6 @@
+Name:Crystal Chimes
+ManaCost:3
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ 3 T Sac<1/CARDNAME> | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all enchantment cards from your graveyard to your hand.
+AI:RemoveDeck:Random
+Oracle:{3}, {T}, Sacrifice Crystal Chimes: Return all enchantment cards from your graveyard to your hand.

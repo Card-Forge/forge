@@ -1,0 +1,6 @@
+Name:Shadowcloak Vampire
+ManaCost:4 B
+Types:Creature Vampire
+PT:4/3
+A:AB$ Pump | Cost$ PayLife<2> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:Pay 2 life: Shadowcloak Vampire gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)

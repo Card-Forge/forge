@@ -1,0 +1,8 @@
+Name:Latulla, Keldon Overseer
+ManaCost:3 R R
+Types:Legendary Creature Human Spellshaper
+PT:3/3
+A:AB$ DealDamage | Cost$ X R T Discard<2/Card> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}{R}, {T}, Discard two cards: Latulla, Keldon Overseer deals X damage to any target.

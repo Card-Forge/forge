@@ -1,0 +1,8 @@
+Name:Selesnya Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+A:AB$ Draw | Cost$ G W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green|White
+Oracle:{T}: Add {G} or {W}.\n{G}{W}, {T}, Sacrifice Selesnya Cluestone: Draw a card.

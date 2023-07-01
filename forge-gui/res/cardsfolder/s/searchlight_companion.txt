@@ -1,0 +1,9 @@
+Name:Searchlight Companion
+ManaCost:3
+Types:Artifact Creature Drone
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Flying\nWhen Searchlight Companion enters the battlefield, create a 1/1 colorless Spirit creature token.

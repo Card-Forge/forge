@@ -1,0 +1,6 @@
+Name:Tortured Existence
+ManaCost:B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ B Discard<1/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
+AI:RemoveDeck:All
+Oracle:{B}, Discard a creature card: Return target creature card from your graveyard to your hand.

@@ -1,0 +1,6 @@
+Name:Sword of the Chosen
+ManaCost:2
+Types:Legendary Artifact
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Legendary | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target legendary creature gets +2/+2 until end of turn. | TgtPrompt$ Select target legendary creature.
+AI:RemoveDeck:Random
+Oracle:{T}: Target legendary creature gets +2/+2 until end of turn.

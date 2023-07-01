@@ -1,0 +1,6 @@
+Name:Sandbar Serpent
+ManaCost:4 U
+Types:Creature Serpent
+PT:3/4
+K:Cycling:2
+Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

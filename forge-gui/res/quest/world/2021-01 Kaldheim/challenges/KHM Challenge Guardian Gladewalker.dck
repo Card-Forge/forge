@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Guardian Gladewalker
+OpponentName=The Gladewalkers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Aegar, the Freezing Flame|Toski, Bearer of Secrets
+HumanExtras=
+[metadata]
+Title=Guardian Gladewalker
+Difficulty=medium
+Description=The raiders' only warning was a whisper floating through the mist: "Trespassers."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Guardian Gladewalker
+[Main]
+30 Guardian Gladewalker|KHM|1
+30 The World Tree|KHM|2

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 2U Lat-Nam
+Title=Lat-Nam
+Difficulty=easy
+Description=Drafna, founder of the College of Lat-Nam, could create a working model from even the smallest remnants of a newly unearthed artifact.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Clockwork Avian|ATQ
+4 Drafna's Restoration|ATQ
+4 Energy Flux|ATQ
+4 Hurkyl's Recall|ATQ
+24 Island|LEB|2
+4 Ivory Tower|ATQ
+2 Power Artifact|ATQ
+4 Reconstruction|ATQ
+4 Sage of Lat-Nam|ATQ
+4 Tetravus|ATQ
+2 Transmute Artifact|ATQ

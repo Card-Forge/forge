@@ -1,0 +1,8 @@
+Name:Pestilent Kathari
+ManaCost:2 B
+Types:Creature Bird Warrior
+PT:1/1
+K:Flying
+K:Deathtouch
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\n{2}{R}: Pestilent Kathari gains first strike until end of turn.

@@ -1,0 +1,5 @@
+Name:Reflecting Pool
+ManaCost:no cost
+Types:Land
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that a land you control could produce.
+Oracle:{T}: Add one mana of any type that a land you control could produce.

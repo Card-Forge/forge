@@ -1,0 +1,9 @@
+Name:Maeve, Insidious Singer
+ManaCost:2 U U
+Types:Legendary Creature Siren
+PT:3/4
+A:AB$ Goad | Cost$ 2 U | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Goad target creature.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigAttacks | RememberObjects$ Targeted | SpellDescription$ Whenever that creature attacks one of your opponents this turn, you draw a card. (A goaded creature attacks each combat if able and attacks a player other than you if able, until your next turn.)
+SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature.IsRemembered | Attacked$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever that creature attacks one of your opponents this turn, you draw a card. (A goaded creature attacks each combat if able and attacks a player other than you if able, until your next turn.)
+SVar:TrigDraw:DB$ Draw
+Oracle:{2}{U}: Goad target creature. Whenever that creature attacks one of your opponents this turn, you draw a card. (A goaded creature attacks each combat if able and attacks a player other than you if able, until your next turn.)

@@ -1,0 +1,8 @@
+Name:Homing Sliver
+ManaCost:2 R
+Types:Creature Sliver
+PT:2/2
+K:TypeCycling:Sliver:3
+S:Mode$ Continuous | Affected$ Sliver | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ TypeCycling:Sliver:3 | Description$ Each Sliver card in each player's hand has slivercycling {3}.
+AI:RemoveDeck:All
+Oracle:Each Sliver card in each player's hand has slivercycling {3}.\nSlivercycling {3} ({3}, Discard this card: Search your library for a Sliver card, reveal it, put it into your hand, then shuffle.)

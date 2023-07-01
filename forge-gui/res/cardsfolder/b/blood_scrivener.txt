@@ -1,0 +1,8 @@
+Name:Blood Scrivener
+ManaCost:1 B
+Types:Creature Zombie Wizard
+PT:2/1
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Hellbent$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life.
+SVar:DrawTwo:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life.

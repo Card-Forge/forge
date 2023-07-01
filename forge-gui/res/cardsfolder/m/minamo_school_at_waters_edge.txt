@@ -1,0 +1,7 @@
+Name:Minamo, School at Water's Edge
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Untap | Cost$ U T | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select target legendary permanent | SpellDescription$ Untap target legendary permanent.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {U}.\n{U}, {T}: Untap target legendary permanent.

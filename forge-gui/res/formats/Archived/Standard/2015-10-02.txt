@@ -1,0 +1,6 @@
+[format]
+Name:Standard (BFZ)
+Type:Archived
+Subtype:Standard
+Effective:2015-10-02
+Sets:KTK, FRF, UGF, DTK, ORI, BFZ

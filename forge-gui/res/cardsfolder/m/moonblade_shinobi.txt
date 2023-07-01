@@ -1,0 +1,9 @@
+Name:Moonblade Shinobi
+ManaCost:3 U
+Types:Creature Human Ninja
+PT:3/2
+K:Ninjutsu:2 U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a 1/1 blue Illusion creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_illusion_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Ninjutsu {2}{U} ({2}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Moonblade Shinobi deals combat damage to a player, create a 1/1 blue Illusion creature token with flying.

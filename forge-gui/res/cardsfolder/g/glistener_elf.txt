@@ -1,0 +1,6 @@
+Name:Glistener Elf
+ManaCost:G
+Types:Creature Phyrexian Elf Warrior
+PT:1/1
+K:Infect
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

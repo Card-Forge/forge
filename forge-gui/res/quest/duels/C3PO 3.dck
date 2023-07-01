@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=C3PO 3
+Title=C3PO
+Difficulty=hard
+Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Frogtosser Banneret
+Icon=C3PO.jpg
+Deck Type=constructed
+[main]
+6 Mountain|M12
+4 Swamp|M12
+4 Bloodstained Mire
+4 Blood Crypt
+1 Mox Ruby
+1 Mox Jet
+1 Wort, Boggart Auntie
+4 Mad Auntie
+3 Frogtosser Banneret
+4 Goblin Ringleader
+3 Knucklebone Witch
+3 Goblin Lackey
+1 Sensation Gorger
+1 Goblin Chieftain
+1 Goblin King
+1 Goblin Piledriver
+1 Goblin Warchief
+1 Reckless One
+1 Siege-Gang Commander
+1 Mogg War Marshal
+1 Goblin Guide
+1 Goblin Arsonist
+1 Goblin Deathraiders
+1 Prickly Boggart
+1 Squeaking Pie Sneak
+3 Murderous Redcap
+4 Lightning Bolt
+1 Goblin Grenade
+1 Patriarch's Bidding
+[sideboard]

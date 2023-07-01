@@ -1,0 +1,8 @@
+Name:Suicidal Charge
+ManaCost:3 B R
+Types:Enchantment
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | SubAbility$ DBEffect | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.OppCtrl | StaticAbilities$ MustAttack
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ Those creatures attack this turn if able.
+AI:RemoveDeck:All
+Oracle:Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.

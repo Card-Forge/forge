@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Blue Devil 2
+Title=Blue Devil
+Difficulty=medium
+Description=Mono U multiple spells per turn deck with Illusory Angel, Skyshroud Condor and Incursion Specialist
+Icon=Blue Devil.jpg
+Deck Type=constructed
+[main]
+23 Island
+4 Illusory Angel
+3 Skyshroud Condor
+3 Incursion Specialist
+2 Hewed Stone Retainers
+1 Erayo, Soratami Ascendant
+4 Ancestral Vision
+4 Cloud of Faeries
+4 Treachery
+4 Peregrine Drake
+2 Riftwing Cloudskate
+2 Snap
+2 Distortion Strike
+1 Hands of Binding
+1 Infiltrator il-Kor
+[sideboard]

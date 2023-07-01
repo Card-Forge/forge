@@ -1,0 +1,8 @@
+Name:Cinderhaze Wretch
+ManaCost:4 B
+Types:Creature Elemental Shaman
+PT:3/2
+A:AB$ Discard | Cost$ T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate only during your turn.
+A:AB$ Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
+AI:RemoveDeck:All
+Oracle:{T}: Target player discards a card. Activate only during your turn.\nPut a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.

@@ -1,0 +1,42 @@
+[quest]
+id=3004
+OpponentName=Baal
+AILife=40
+Repeat=true
+Wins=35
+Card Reward=50% duplicate card;3 rares;66% 1 black rare;66% 1 black rare;66% Sinkhole|2ED
+Credit Reward=500
+HumanExtras=Dingus Egg
+AIExtras=Dingus Egg
+[metadata]
+Name=quest3004
+Title=Jahim
+Difficulty=very hard
+Description=Before you, you see the plane Jahim, a barren wasteland, rocky and forbidding. What kind of creature could live there?
+Icon=Baal.jpg
+Deck Type=constructed
+[main]
+4 Badlands|LEB
+1 Black Vise|LEB
+2 Choking Sands|MIR
+2 City of Brass|5ED
+3 Coercion|VIS
+1 Demonic Torment|LEG
+4 Terror|LEB
+1 Earthquake|LEB
+2 Gorilla Shaman|ALL
+3 Hypnotic Specter|LEB
+4 Icequake|ICE
+2 Lightning Bolt|LEB
+2 Mishra's Factory|ATQ
+2 Nevinyrral's Disk|LEB
+2 Order of the Ebon Hand|FEM
+4 Sinkhole|LEB
+1 Sol Ring|LEB
+4 Strip Mine|ATQ
+10 Swamp|MIR
+2 Undiscovered Paradise|VIS
+4 Wasteland|TMP
+[sideboard]
+[planes]
+[schemes]

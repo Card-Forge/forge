@@ -1,0 +1,6 @@
+Name:Tangle Mantis
+ManaCost:2 G G
+Types:Creature Insect
+PT:3/4
+K:Trample
+Oracle:Trample

@@ -1,0 +1,7 @@
+Name:Pool of Vigorous Growth
+ManaCost:1 G
+Types:Artifact
+A:AB$ CopyPermanent | Cost$ X T Discard<1/Card> | AILogic$ MomirAvatar | NumCopies$ 1 | ValidSupportedCopy$ Creature.cmcEQX | RandomCopied$ True | RandomNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of a random creature card with mana value X. Activate only as a sorcery.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token
+Oracle:{X}, {T}, Discard a card: Create a token that's a copy of a random creature card with mana value X. Activate only as a sorcery.

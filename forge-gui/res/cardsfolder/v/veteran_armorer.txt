@@ -1,0 +1,7 @@
+Name:Veteran Armorer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 1 | Description$ Other creatures you control get +0/+1.
+SVar:PlayMain1:TRUE
+Oracle:Other creatures you control get +0/+1.

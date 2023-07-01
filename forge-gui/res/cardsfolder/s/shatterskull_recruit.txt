@@ -1,0 +1,8 @@
+Name:Shatterskull Recruit
+ManaCost:3 R R
+Types:Creature Giant Warrior Ally
+PT:4/4
+K:Menace
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

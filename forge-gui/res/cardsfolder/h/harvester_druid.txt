@@ -1,0 +1,6 @@
+Name:Harvester Druid
+ManaCost:1 G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any color that a land you control could produce.
+Oracle:{T}: Add one mana of any color that a land you control could produce.

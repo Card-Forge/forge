@@ -1,0 +1,11 @@
+Name:Rhoda, Geist Avenger
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:Partner:Timin, Youthful Geist
+K:Vigilance
+T:Mode$ Taps | ValidCard$ Creature.OppCtrl | Attacker$ False | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls becomes tapped, if it isn't being declared as an attacker, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Name$Timin, Youthful Geist
+DeckHas:Ability$Counters
+Oracle:Partner with Timin, Youthful Geist (When this creature enters the battlefield, target player may put Timin, Youthful Geist into their hand from their library, then shuffle.)\nVigilance\nWhenever a creature an opponent controls becomes tapped, if it isn't being declared as an attacker, put a +1/+1 counter on Rhoda, Geist Avenger.

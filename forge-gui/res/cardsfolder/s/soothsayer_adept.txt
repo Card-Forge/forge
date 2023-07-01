@@ -1,0 +1,7 @@
+Name:Soothsayer Adept
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/3
+A:AB$ Draw | Cost$ 1 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:{1}{U}, {T}: Draw a card, then discard a card.

@@ -1,0 +1,11 @@
+Name:Karazikar, the Eye Tyrant
+ManaCost:3 B R
+Types:Legendary Creature Beholder
+PT:5/5
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player, tap target creature that player controls and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature that player controls | TargetsWithDefinedController$ TriggeredAttackedTarget | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+T:Mode$ AttackersDeclaredOneTarget | AttackingPlayer$ Player.Opponent | AttackedTarget$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent attacks another one of your opponents, you and the attacking player each draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayerAndYou | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredAttackingPlayerAndYou | LifeAmount$ 1
+Oracle:Whenever you attack a player, tap target creature that player controls and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever an opponent attacks another one of your opponents, you and the attacking player each draw a card and lose 1 life.

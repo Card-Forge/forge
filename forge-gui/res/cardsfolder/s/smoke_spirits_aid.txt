@@ -1,0 +1,8 @@
+Name:Smoke Spirits' Aid
+ManaCost:X R
+Types:Sorcery
+A:SP$ RepeatEach | ChangeZoneTable$ True | DefinedCards$ Targeted | RepeatSubAbility$ DBToken | ValidTgts$ Creature | TgtPrompt$ Select up to X target creatures | TargetMin$ 0 | TargetMax$ X | SpellDescription$ For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and "When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token."
+SVar:DBToken:DB$ Token | TokenScript$ smoke_blessing | AttachedTo$ Remembered
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Sacrifice & Type$Enchantment|Aura|Treasure|Artifact
+Oracle:For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and "When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token."

@@ -1,0 +1,9 @@
+Name:Mischievous Chimera
+ManaCost:U R
+Types:Enchantment Creature Chimera
+PT:2/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigDmg | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, CARDNAME deals 1 damage to each opponent. Scry 1.
+SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhenever you cast your first spell during each opponent's turn, Mischievous Chimera deals 1 damage to each opponent. Scry 1.

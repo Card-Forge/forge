@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Horus 4
+Title=Horus
+Icon=Horus.jpg
+Difficulty=very hard
+Description=Horus plays a big UWR deck with some big creatures and burn.
+Deck Type=constructed
+Card Reward=14% chosen card sets:5ED,MIR,VIS rules:white,creature rarity:C,U desc:a White Creature
+[main]
+1 Basalt Monolith|LEB
+3 Clone|LEB
+3 Counterspell|5ED
+3 Fireball|LEB
+3 Icy Manipulator|LEB
+7 Island|MIR
+3 Kismet|LEG
+3 Lightning Bolt|LEB
+3 Man-o'-War|VIS
+6 Mountain|MIR
+7 Plains|MIR
+2 Plateau|LEB
+3 Savannah Lions|LEB
+3 Serra Angel|LEB
+3 Smoke|LEB
+1 Sol Ring|LEB
+3 Stasis|LEB
+3 Suq'Ata Lancer|VIS
+3 Swords to Plowshares|LEB
+2 Tundra|LEB
+2 Volcanic Island|LEB
+3 Winter Orb|LEB
+[sideboard]
+[planes]
+[schemes]

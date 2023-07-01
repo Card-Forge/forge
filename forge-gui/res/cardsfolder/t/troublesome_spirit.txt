@@ -1,0 +1,8 @@
+Name:Troublesome Spirit
+ManaCost:2 U U
+Types:Creature Spirit
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ At the beginning of your end step, tap all lands you control.
+SVar:TrigTapAll:DB$ TapAll | ValidCards$ Land.YouCtrl
+Oracle:Flying\nAt the beginning of your end step, tap all lands you control.

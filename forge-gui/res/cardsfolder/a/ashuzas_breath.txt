@@ -1,0 +1,7 @@
+Name:Ashuza's Breath
+ManaCost:1 R
+Types:Sorcery
+A:SP$ RepeatEach | RepeatCards$ Creature | Zone$ Battlefield | RepeatSubAbility$ DBDealDamage | SpellDescription$ For each creature, choose a number from 0 to 2 at random. CARDNAME deals that much damage to that creature.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ Remembered
+SVar:X:Count$Random.0.2
+Oracle:For each creature, choose a number from 0 to 2 at random. Ashuza's Breath deals that much damage to that creature.

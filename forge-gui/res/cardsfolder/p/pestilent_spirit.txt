@@ -1,0 +1,9 @@
+Name:Pestilent Spirit
+ManaCost:2 B
+Types:Creature Spirit
+PT:3/2
+K:Menace
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AddKeyword$ Deathtouch | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have deathtouch.
+SVar:PlayMain1:TRUE
+Oracle:Menace, deathtouch\nInstant and sorcery spells you control have deathtouch. (Any amount of damage they deal to a creature is enough to destroy it.)

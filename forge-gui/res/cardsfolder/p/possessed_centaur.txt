@@ -1,0 +1,8 @@
+Name:Possessed Centaur
+ManaCost:2 G G
+Types:Creature Centaur Horror
+PT:3/3
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | SetColor$ Black | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target green creature."
+SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
+Oracle:Trample\nThreshold — As long as seven or more cards are in your graveyard, Possessed Centaur gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target green creature."

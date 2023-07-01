@@ -1,0 +1,8 @@
+Name:Thundercloud Elemental
+ManaCost:5 U U
+Types:Creature Elemental
+PT:3/4
+K:Flying
+A:AB$ TapAll | Cost$ 3 U | ValidCards$ Creature.toughnessLE2 | SpellDescription$ Tap all creatures with toughness 2 or less.
+A:AB$ AnimateAll | Cost$ 3 U | ValidCards$ Creature.StrictlyOther | RemoveKeywords$ Flying | SpellDescription$ All other creatures lose flying until end of turn.
+Oracle:Flying\n{3}{U}: Tap all creatures with toughness 2 or less.\n{3}{U}: All other creatures lose flying until end of turn.

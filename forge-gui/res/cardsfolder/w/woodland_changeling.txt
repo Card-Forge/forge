@@ -1,0 +1,6 @@
+Name:Woodland Changeling
+ManaCost:1 G
+Types:Creature Shapeshifter
+PT:2/2
+K:Changeling
+Oracle:Changeling (This card is every creature type.)

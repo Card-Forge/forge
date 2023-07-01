@@ -1,0 +1,6 @@
+Name:Umara Entangler
+ManaCost:1 U
+Types:Creature Merfolk Rogue Ally
+PT:2/1
+K:Prowess
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

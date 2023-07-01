@@ -1,0 +1,6 @@
+Name:Pilot Token
+ManaCost:no cost
+Types:Creature Pilot
+PT:1/1
+S:Mode$ CrewValue | ValidCard$ Card.Self | Value$ 2 | Description$ This creature crews Vehicles as though its power were 2 greater.
+Oracle:This creature crews Vehicles as though its power were 2 greater.

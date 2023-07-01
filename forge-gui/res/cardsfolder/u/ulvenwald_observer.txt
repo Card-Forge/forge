@@ -1,0 +1,7 @@
+Name:Ulvenwald Observer
+ManaCost:4 G G
+Types:Creature Treefolk
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+toughnessGE4 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with toughness 4 or greater dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever a creature you control with toughness 4 or greater dies, draw a card.

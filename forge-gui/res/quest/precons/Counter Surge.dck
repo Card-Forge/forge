@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Counter Surge
+Description=Power up your creatures with bonus +1/+1 counters from Winding Constrictor and fill the board with resilient creatures that keep growing bigger. Leverage the counters for both utility and strength, then crush your opponent with your superior resources.
+Deck Type=constructed
+Set=RIX
+Image=counter_surge.jpg
+[Main]
+4 Aether Hub|KLD
+4 Blossoming Defense|KLD
+3 Dreamstealer|HOU
+1 Fatal Push|AER
+7 Forest|RIX
+4 Foul Orchard|RIX
+4 Glint-Sleeve Siphoner|AER
+2 Gonti, Lord of Luxury|KLD
+2 Hashep Oasis|HOU
+2 Hour of Glory|HOU
+4 Longtusk Cub|KLD
+3 Rishkar, Peema Renegade|AER
+2 Scrapheap Scrounger|KLD
+8 Swamp|RIX
+3 Verdurous Gearhulk|KLD
+2 Walk the Plank|XLN
+1 Walking Ballista|AER
+4 Winding Constrictor|AER
+[Sideboard]
+2 Appetite for the Unnatural|KLD
+3 Cartouche of Ambition|AKH
+2 Die Young|KLD
+1 Dispossess|AKH
+4 Duress|XLN
+2 Lifecrafter's Bestiary|AER
+1 Slice in Twain|XLN

@@ -1,0 +1,10 @@
+Name:Night Scythe
+ManaCost:3
+Types:Artifact Vehicle
+PT:3/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Invasion Beams — When CARDNAME enters the battlefield, create a 2/2 black Necron Warrior artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_a_necron_warrior
+K:Crew:2
+DeckHas:Type$Necron|Warrior & Ability$Token
+Oracle:Flying\nInvasion Beams — When Night Scythe enters the battlefield, create a 2/2 black Necron Warrior artifact creature token.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -1,0 +1,13 @@
+[metadata]
+Code=PSS2
+Date=2017-09-29
+Name=XLN Standard Showdown
+Type=Promo
+ScryfallCode=PSS2
+
+[cards]
+1 R Plains @Rebecca Guay
+2 R Island @Rebecca Guay
+3 R Swamp @Rebecca Guay
+4 R Mountain @Rebecca Guay
+5 R Forest @Rebecca Guay

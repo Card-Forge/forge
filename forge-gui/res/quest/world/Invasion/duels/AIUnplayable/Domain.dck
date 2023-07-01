@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Title=Draco
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=easy
+Description=5 color domain deck 
+Deck Type=constructed
+Name=Domain
+[Main]
+1 Allied Strategies+|PLS
+3 Allied Strategies|PLS
+2 Collapsing Borders|INV
+4 Collective Restraint|INV
+1 Crosis, the Purger|INV
+1 Destructive Flow|PLS
+3 Draco|PLS
+2 Dueling Grounds|INV
+1 Evasive Action|APC
+9 Forest|INV|1
+4 Harrow|INV
+3 Island|INV|2
+2 Island|INV|3
+3 Legacy Weapon|APC
+1 Mountain|INV|2
+1 Mountain|INV|3
+1 Plains|INV|2
+1 Plains|INV|3
+3 Prophetic Bolt|APC
+4 Rampant Growth|7ED
+2 Rith, the Awakener|INV
+1 Spiritmonger|APC
+1 Swamp|INV|2
+1 Swamp|INV|3
+1 Treva, the Renewer|INV
+1 Vindicate+|APC
+3 Vindicate|APC

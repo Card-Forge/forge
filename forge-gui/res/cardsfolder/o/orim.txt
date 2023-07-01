@@ -1,0 +1,6 @@
+Name:Orim
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+12
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Reach | Description$ Creatures you control have reach.
+Oracle:Hand +0, life +12\nCreatures you control have reach.

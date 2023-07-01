@@ -1,0 +1,8 @@
+Name:Shinen of Life's Roar
+ManaCost:1 G
+Types:Creature Spirit
+PT:1/2
+K:All creatures able to block CARDNAME do so.
+A:AB$ Pump | Cost$ 2 G G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel — | KW$ HIDDEN All creatures able to block CARDNAME do so. | ActivationZone$ Hand | SpellDescription$ All creatures able to block target creature this turn do so.
+AI:RemoveDeck:All
+Oracle:All creatures able to block Shinen of Life's Roar do so.\nChannel — {2}{G}{G}, Discard Shinen of Life's Roar: All creatures able to block target creature this turn do so.

@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #04
+URL:http://www.possibilitystorm.com/034-ixalan-season-puzzle-4/
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume the top card of your library is a Mountain.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=8
+humanhand=Claim // Fame; Faith of the Devoted; Fling|Set:AKH; Flame Lash|Set:KLD;
+humanprecast=
+humangraveyard=Hollow One; River Sneak; Vile Manifestation; Horror of the Broken Lands;
+humanlibrary=Mountain|Set:XLN; 
+humanbattlefield=Marauding Looter; Drake Haven; Faith of the Devoted; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh; t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh; t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh; t:Drake,P:2,T:2,Cost:no cost,Color:U,Types:Creature-Drake,Keywords:Flying,Image:u_2_2_drake_akh; 
+aibattlefield=Kinjalli's Sunwing; Hinterland Drake; Hinterland Drake; Kinjalli's Sunwing;
+aiprecast=
+aigraveyard=
+ailibrary=
+aiexile=

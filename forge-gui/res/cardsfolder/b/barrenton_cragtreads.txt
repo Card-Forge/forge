@@ -1,0 +1,6 @@
+Name:Barrenton Cragtreads
+ManaCost:2 WU WU
+Types:Creature Kithkin Scout
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Red | Description$ CARDNAME can't be blocked by red creatures.
+Oracle:Barrenton Cragtreads can't be blocked by red creatures.

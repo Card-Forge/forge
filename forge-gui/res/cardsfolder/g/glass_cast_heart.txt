@@ -1,0 +1,11 @@
+Name:Glass-Cast Heart
+ManaCost:2 B
+Types:Artifact
+T:Mode$ AttackersDeclared | ValidAttackers$ Vampire.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Vampires you control attack, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+A:AB$ Token | Cost$ B T PayLife<1> | TokenScript$ wb_1_1_vampire_lifelink | StackDescription$ SpellDescription | SpellDescription$ Create a 1/1 white and black Vampire creature token with lifelink.
+A:AB$ LoseLife | Cost$ B B T Sac<1/CARDNAME> Sac<13/Blood.token/Blood token> | CostDesc$ {B}{B}, {T}, Sacrifice CARDNAME and thirteen Blood tokens: | Defined$ Player.Opponent | LifeAmount$ 13 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 13 life and you gain 13 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 13
+DeckHints:Type$Vampire
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood|Vampire
+Oracle:Whenever one or more Vampires you control attack, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\n{B}, {T}, Pay 1 life: Create a 1/1 white and black Vampire creature token with lifelink.\n{B}{B}, {T}, Sacrifice Glass-Cast Heart and thirteen Blood tokens: Each opponent loses 13 life and you gain 13 life.

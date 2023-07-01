@@ -1,0 +1,20 @@
+[quest]
+id=PTK Challenge: Wei Ambush Force
+OpponentName=The Ambush
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PTK Challenge: Wei Ambush Force
+Title=The Ambush
+Difficulty=easy
+Description="A superior man is modest in speech, but exceeds in his actions."\n-Confucius
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+10 Desperate Charge|PTK
+20 Swamp|PTK|1
+30 Wei Ambush Force|PTK

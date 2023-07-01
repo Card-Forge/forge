@@ -1,0 +1,7 @@
+Name:Saprazzan Raider
+ManaCost:2 U
+Types:Creature Merfolk
+PT:1/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME becomes blocked, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+Oracle:When Saprazzan Raider becomes blocked, return it to its owner's hand.

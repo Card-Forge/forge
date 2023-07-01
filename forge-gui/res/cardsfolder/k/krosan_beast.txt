@@ -1,0 +1,6 @@
+Name:Krosan Beast
+ManaCost:3 G
+Types:Creature Squirrel Beast
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 7 | AddToughness$ 7 | Condition$ Threshold | Description$ Threshold — CARDNAME gets +7/+7 as long as seven or more cards are in your graveyard.
+Oracle:Threshold — Krosan Beast gets +7/+7 as long as seven or more cards are in your graveyard.

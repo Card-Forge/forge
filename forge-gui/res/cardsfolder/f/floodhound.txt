@@ -1,0 +1,7 @@
+Name:Floodhound
+ManaCost:U
+Types:Creature Elemental Dog
+PT:1/2
+A:AB$ Investigate | Cost$ 3 T | SpellDescription$ Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHints:Ability$Investigate|Token
+Oracle:{3}, {T}: Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

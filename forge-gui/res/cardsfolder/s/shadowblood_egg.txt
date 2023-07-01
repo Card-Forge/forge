@@ -1,0 +1,8 @@
+Name:Shadowblood Egg
+ManaCost:1
+Types:Artifact
+A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ B R | SubAbility$ DBDraw | SpellDescription$ Add {B}{R}. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{2}, {T}, Sacrifice Shadowblood Egg: Add {B}{R}. Draw a card.

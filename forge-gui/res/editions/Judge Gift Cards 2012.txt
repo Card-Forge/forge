@@ -1,0 +1,19 @@
+[metadata]
+Code=J12
+Date=2012-01-01
+Name=Judge Gift Cards 2012
+Type=Promo
+ScryfallCode=J12
+
+[cards]
+1 R Xiahou Dun, the One-Eyed @Junko Taguchi
+2 R Flusterstorm @Erica Yang
+3 R Noble Hierarch @Mark Zug
+4 R Karmic Guide @Allen Williams
+5 R Sneak Attack @Tyler Jacobson
+6 R Karakas @Drew Baker
+7 R Sword of Light and Shadow @Mark Zug
+8 R Command Tower @Ryan Yee
+
+[tokens]
+g_3_3_centaur

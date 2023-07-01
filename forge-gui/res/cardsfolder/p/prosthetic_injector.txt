@@ -1,0 +1,6 @@
+Name:Prosthetic Injector
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Toxic:1 | Description$ Equipped creature gets +0/+2 and has toxic 1. (Players dealt damage by equipped creature also get a poison counter.)
+K:Equip:1
+Oracle:Equipped creature gets +0/+2 and has toxic 1. (Players dealt damage by equipped creature also get a poison counter.)\nEquip {1}

@@ -1,0 +1,6 @@
+Name:Tendrils of Despair
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nTarget opponent discards two cards.

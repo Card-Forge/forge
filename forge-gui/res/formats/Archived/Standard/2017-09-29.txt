@@ -1,0 +1,7 @@
+[format]
+Name:Standard (XLN)
+Type:Archived
+Subtype:Standard
+Effective:2017-09-29
+Sets:KLD, AER, AKH, W17, HOU, XLN
+Banned:Aetherworks Marvel; Felidar Guardian; Smuggler's Copter

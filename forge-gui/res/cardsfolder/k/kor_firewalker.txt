@@ -1,0 +1,8 @@
+Name:Kor Firewalker
+ManaCost:W W
+Types:Creature Kor Soldier
+PT:2/2
+K:Protection from red
+T:Mode$ SpellCast | ValidCard$ Card.Red | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a red spell, you may gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Protection from red\nWhenever a player casts a red spell, you may gain 1 life.

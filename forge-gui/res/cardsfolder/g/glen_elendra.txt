@@ -1,0 +1,10 @@
+Name:Glen Elendra
+ManaCost:no cost
+Types:Plane Lorwyn
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | TriggerZones$ Command | OptionalDecider$ You | Execute$ TrigExchange | TriggerDescription$ At end of combat, you may exchange control of target creature you control that dealt combat damage to a player this combat and target creature that player controls.
+SVar:TrigExchange:DB$ Pump | ValidTgts$ Creature.YouCtrl+dealtCombatDamageThisCombat | TgtPrompt$ Select target creature you control that dealt combat damage to a player | SubAbility$ DBExchange
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creature.ControlledBy Player.wasDealtCombatDamageThisCombatBy ParentTarget | TgtPrompt$ Select target creature that player controls.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, gain control of target creature you own.
+SVar:RolledChaos:DB$ GainControl | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature you own to gain control of
+AI:RemoveDeck:All
+Oracle:At end of combat, you may exchange control of target creature you control that dealt combat damage to a player this combat and target creature that player controls.\nWhenever chaos ensues, gain control of target creature you own.

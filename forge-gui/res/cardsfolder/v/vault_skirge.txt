@@ -1,0 +1,7 @@
+Name:Vault Skirge
+ManaCost:1 BP
+Types:Artifact Creature Phyrexian Imp
+PT:1/1
+K:Flying
+K:Lifelink
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nFlying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

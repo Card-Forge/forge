@@ -1,0 +1,6 @@
+Name:Seismic Assault
+ManaCost:R R R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ Discard<1/Land> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:NonStackingEffect:True
+Oracle:Discard a land card: Seismic Assault deals 2 damage to any target.

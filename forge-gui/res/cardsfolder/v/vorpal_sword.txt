@@ -1,0 +1,11 @@
+Name:Vorpal Sword
+ManaCost:B
+Types:Artifact Equipment
+K:Equip:B B
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Deathtouch | Description$ Equipped creature gets +2/+0 and has deathtouch.
+A:AB$ Animate | Cost$ 5 B B B | Defined$ Self | Triggers$ TrigDamageDone | SubAbility$ DBAddSVar | SpellDescription$ Until end of turn, CARDNAME gains "Whenever equipped creature deals combat damage to a player, that player loses the game."
+SVar:DBAddSVar:DB$ Animate | Defined$ Equipped | sVars$ MustBeBlocked
+SVar:MustBeBlocked:True
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ DBLose | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player loses the game.
+SVar:DBLose:DB$ LosesGame | Defined$ TriggeredTarget
+Oracle:Equipped creature gets +2/+0 and has deathtouch.\n{5}{B}{B}{B}: Until end of turn, Vorpal Sword gains "Whenever equipped creature deals combat damage to a player, that player loses the game."\nEquip {B}{B}

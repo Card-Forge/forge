@@ -1,0 +1,11 @@
+Name:Chitterspitter
+ManaCost:2 G
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a token. If you do, put an acorn counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Permanent.token/token> | CounterType$ ACORN | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Squirrel.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Squirrels you control get +1/+1 for each acorn counter on CARDNAME.
+A:AB$ Token | Cost$ G T | TokenScript$ g_1_1_squirrel | SpellDescription$ Create a 1/1 green Squirrel creature token.
+SVar:X:Count$CardCounters.ACORN
+DeckHas:Ability$Sacrifice|Counters|Token
+DeckHints:Type$Squirrel
+Oracle:At the beginning of your upkeep, you may sacrifice a token. If you do, put an acorn counter on Chitterspitter.\nSquirrels you control get +1/+1 for each acorn counter on Chitterspitter.\n{G}, {T}: Create a 1/1 green Squirrel creature token.

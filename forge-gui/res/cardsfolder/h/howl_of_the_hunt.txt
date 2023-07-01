@@ -1,0 +1,11 @@
+Name:Howl of the Hunt
+ManaCost:2 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.EnchantedBy+Wolf,Creature.EnchantedBy+Werewolf | PresentCompare$ EQ1 | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted creature is a Wolf or Werewolf, untap that creature.
+SVar:TrigUntap:DB$ Untap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
+DeckHints:Type$Wolf|Werewolf
+Oracle:Flash\nEnchant creature\nWhen Howl of the Hunt enters the battlefield, if enchanted creature is a Wolf or Werewolf, untap that creature.\nEnchanted creature gets +2/+2 and has vigilance.

@@ -1,0 +1,9 @@
+Name:Vizier of Remedies
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/1
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl | ValidCounterType$ M1M1 | ReplaceWith$ AddOneLessCounters | Description$ If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead.
+SVar:AddOneLessCounters:DB$ ReplaceCounter | ValidCounterType$ M1M1 | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Minus.1
+DeckHints:Ability$Counters
+Oracle:If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead.

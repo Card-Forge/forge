@@ -1,0 +1,9 @@
+Name:Zhentarim Bandit
+ManaCost:1 B
+Types:Creature Halfling Rogue
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, you may pay 1 life. If you do, create a Treasure token.
+SVar:TrigToken:AB$ Token | Cost$ PayLife<1> | TokenScript$ c_a_treasure_sac
+SVar:HasAttackEffect:TRUE
+DeckHas:Type$Artifact|Treasure & Ability$Token|Sacrifice
+Oracle:Whenever Zhentarim Bandit attacks, you may pay 1 life. If you do, create a Treasure token.

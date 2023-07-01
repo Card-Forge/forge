@@ -1,0 +1,9 @@
+Name:Sharding Sphinx
+ManaCost:4 U U
+Types:Artifact Creature Sphinx
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_a_thopter_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying.

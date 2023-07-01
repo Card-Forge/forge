@@ -1,0 +1,11 @@
+Name:Omen Machine
+ManaCost:6
+Types:Artifact
+S:Mode$ CantDraw | ValidPlayer$ Player | Description$ Players can't draw cards.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | Execute$ TrigOmenExileCard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+SVar:TrigOmenExileCard:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredPlayer | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBOmenLand
+SVar:DBOmenLand:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Land.IsRemembered+ActivePlayerCtrl | ChangeNum$ 1 | DefinedPlayer$ TriggeredPlayer | Chooser$ TriggeredPlayer | Hidden$ True | Mandatory$ True | SubAbility$ DBOmenPlay
+SVar:DBOmenPlay:DB$ Play | ValidZone$ Exile | Controller$ TriggeredPlayer | Valid$ Card.IsRemembered | ValidSA$ Spell | WithoutManaCost$ True | SubAbility$ DBOmenCleanup
+SVar:DBOmenCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+Oracle:Players can't draw cards.\nAt the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.

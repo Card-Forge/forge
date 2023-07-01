@@ -1,0 +1,10 @@
+Name:Thunder Drake
+ManaCost:3 U
+Types:Creature Elemental Drake
+PT:2/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you cast your second spell each turn, put a +1/+1 counter on Thunder Drake.

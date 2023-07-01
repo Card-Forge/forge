@@ -1,0 +1,9 @@
+Name:Purging Scythe
+ManaCost:5
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChooseDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to the creature with the least toughness. If two or more creatures are tied for least toughness, you choose one of them.
+SVar:TrigChooseDmg:DB$ ChooseCard | Defined$ You | Choices$ Creature.leastToughness | Mandatory$ True | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ ChosenCard
+SVar:NeedsToPlay:Creature.YouDontCtrl+leastToughness
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, Purging Scythe deals 2 damage to the creature with the least toughness. If two or more creatures are tied for least toughness, you choose one of them.

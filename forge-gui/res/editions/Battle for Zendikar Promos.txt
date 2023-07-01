@@ -1,0 +1,18 @@
+[metadata]
+Code=PBFZ
+Date=2015-10-02
+Name=Battle for Zendikar Promos
+Type=Promo
+ScryfallCode=PBFZ
+
+[cards]
+2 R Blight Herder @Jaime Jones
+31 R Hero of Goma Fada @Willian Murai
+50 U Stasis Snare @Slawomir Maniak
+57 R Drowner of Hope @James Zapata
+107 R Defiant Bloodlord @Ben Maier
+123 R Ruinous Path @Aaron Miller
+127 R Barrage Tyrant @Slawomir Maniak
+151 R Radiant Flames @Ryan Barger
+181 R Oran-Rief Hydra @Zack Stella
+188 U Scythe Leopard @Winona Nelson

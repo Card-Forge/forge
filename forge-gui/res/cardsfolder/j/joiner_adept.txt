@@ -1,0 +1,7 @@
+Name:Joiner Adept
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:2/1
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Lands you control have "{T}: Add one mana of any color."

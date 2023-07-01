@@ -1,0 +1,6 @@
+Name:Vanish into Eternity
+ManaCost:2 W
+Types:Instant
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Creature | EffectZone$ All | Description$ This spell costs {3} more to cast if it targets a creature.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | StackDescription$ SpellDescription | SpellDescription$ Exile target nonland permanent.
+Oracle:This spell costs {3} more to cast if it targets a creature.\nExile target nonland permanent.

@@ -1,0 +1,6 @@
+Name:Seer's Vision
+ManaCost:2 U B
+Types:Enchantment
+S:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.OppOwn | MayLookAt$ Player | Description$ Your opponents play with their hands revealed.
+A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player. | Mode$ LookYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Look at target player's hand and choose a card from it. That player discards that card. Activate only as a sorcery.
+Oracle:Your opponents play with their hands revealed.\nSacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate only as a sorcery.

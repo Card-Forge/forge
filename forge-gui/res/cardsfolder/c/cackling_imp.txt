@@ -1,0 +1,7 @@
+Name:Cackling Imp
+ManaCost:2 B B
+Types:Creature Imp
+PT:2/2
+K:Flying
+A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+Oracle:Flying\n{T}: Target player loses 1 life.

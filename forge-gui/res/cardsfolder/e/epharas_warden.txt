@@ -1,0 +1,6 @@
+Name:Ephara's Warden
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:1/2
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | SpellDescription$ Tap target creature with power 3 or less.
+Oracle:{T}: Tap target creature with power 3 or less.

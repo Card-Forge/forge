@@ -1,0 +1,9 @@
+Name:Nethroi, Apex of Death|Deck:Nethroi, Apex of Death.dck|Variant:Commander|Avatar:Nethroi, Apex of Death|Desc:
+Name:Kaheera, the Orphanguard|Deck:Kaheera, the Orphanguard.dck|Variant:Commander|Avatar:Kaheera, the Orphanguard|Desc:
+Name:Ajani Unyielding|Deck:Ajani Unyielding.dck|Variant:Planeswalker|Avatar:Ajani Unyielding|Desc:
+Name:Chevill, Bane of Monsters|Deck:Chevill, Bane of Monsters.dck|Variant:Commander|Avatar:Chevill, Bane of Monsters|Desc:
+Name:General Kudro of Drannith|Deck:General Kudro of Drannith.dck|Variant:Commander|Avatar:General Kudro of Drannith|Desc:
+Name:Kathril, Aspect Warper|Deck:Kathril, Aspect Warper.dck|Variant:Commander|Avatar:Kathril, Aspect Warper|Desc:
+Name:Umori, the Collector|Deck:Umori, the Collector.dck|Variant:Commander|Avatar:Umori, the Collector|Desc:
+Name:Tayam, Luminous Enigma|Deck:Tayam, Luminous Enigma.dck|Variant:Commander|Avatar:Tayam, Luminous Enigma|Desc:
+Name:Random Indatha|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

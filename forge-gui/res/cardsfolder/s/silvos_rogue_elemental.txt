@@ -1,0 +1,7 @@
+Name:Silvos, Rogue Elemental
+ManaCost:3 G G G
+Types:Legendary Creature Elemental
+PT:8/5
+K:Trample
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Trample\n{G}: Regenerate Silvos, Rogue Elemental.

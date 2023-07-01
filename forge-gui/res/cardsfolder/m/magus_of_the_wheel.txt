@@ -1,0 +1,8 @@
+Name:Magus of the Wheel
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:3/3
+A:AB$ Discard | Cost$ 1 R T Sac<1/CARDNAME> | Defined$ Player | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
+SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
+AI:RemoveDeck:All
+Oracle:{1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards their hand, then draws seven cards.

@@ -1,0 +1,6 @@
+Name:Knowledge and Power
+ManaCost:4 R
+Types:Enchantment
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you scry, you may pay {2}. If you do, CARDNAME deals 2 damage to any target.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 2 | ValidTgts$ Any | NumDmg$ 2
+Oracle:Whenever you scry, you may pay {2}. If you do, Knowledge and Power deals 2 damage to any target.

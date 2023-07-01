@@ -1,0 +1,7 @@
+Name:Tooth of Chiss-Goria
+ManaCost:3
+Types:Artifact
+K:Flash
+K:Affinity:Artifact
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
+Oracle:Flash\nAffinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\n{T}: Target creature gets +1/+0 until end of turn.

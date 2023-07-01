@@ -1,0 +1,7 @@
+Name:Vampire Cutthroat
+ManaCost:B
+Types:Creature Vampire Rogue
+PT:1/1
+K:Skulk
+K:Lifelink
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

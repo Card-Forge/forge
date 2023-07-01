@@ -1,0 +1,10 @@
+Name:Druidic Satchel
+ManaCost:3
+Types:Artifact
+A:AB$ PeekAndReveal | Cost$ 2 T | RememberRevealed$ True | SubAbility$ DBToken | SpellDescription$ Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature token. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SubAbility$ DBMove | StackDescription$ If it's a creature card, create a 1/1 green Saproling creature token.
+SVar:DBMove:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBGainLife | StackDescription$ If it's a land card, put that card onto the battlefield under your control.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand+nonCreature | SubAbility$ DBCleanup | StackDescription$ If it's a noncreature, nonland card, you gain 2 life.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|LifeGain & Type$Saproling
+Oracle:{2}, {T}: Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature token. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.

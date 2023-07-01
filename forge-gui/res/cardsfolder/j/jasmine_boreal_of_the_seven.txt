@@ -1,0 +1,7 @@
+Name:Jasmine Boreal of the Seven
+ManaCost:1 G W
+Types:Legendary Creature Human Druid
+PT:2/4
+A:AB$ Mana | Cost$ T | Produced$ G W | RestrictValid$ Spell.Creature+NoAbilities | SpellDescription$ Add {G}{W}. Spend this mana only to cast creature spells with no abilities.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.NoAbilities+YouCtrl | ValidBlocker$ Creature.!NoAbilities | Description$ Creatures you control with no abilities can't be blocked by creatures with abilities.
+Oracle:{T}: Add {G}{W}. Spend this mana only to cast creature spells with no abilities.\nCreatures you control with no abilities can't be blocked by creatures with abilities.

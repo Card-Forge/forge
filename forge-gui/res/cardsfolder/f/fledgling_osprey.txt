@@ -1,0 +1,7 @@
+Name:Fledgling Osprey
+ManaCost:U
+Types:Creature Bird
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
+SVar:EnchantMe:Once
+Oracle:Fledgling Osprey has flying as long as it's enchanted.

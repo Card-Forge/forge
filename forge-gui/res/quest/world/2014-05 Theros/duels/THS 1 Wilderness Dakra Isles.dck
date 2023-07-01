@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Wilderness: Dakra Isles
+Title=The Dakra, Isles of Enchantment
+Difficulty=easy
+Description=Meletis sits on the Siren Sea, surrounded by a host of small islands called the Dakra. The Dakra are said to have been created when Thassa, god of the sea, felt sorrow that Korinna, ancient queen of the tritons, had been killed by a human's harpoon. Thassa's tears fell onto the sea in the form of an archipelago of misty isles. The Dakra have rarely been settled by humans, as they harbor strange nymphs and fierce monsters, and are enchanted with the magic of the gods.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Arbiter of the Ideal|BNG
+4 Dakra Mystic|JOU
+4 Font of Fortunes|JOU
+4 Horizon Scholar|THS
+24 Island|THS|4
+4 Prognostic Sphinx|THS
+4 Sea God's Revenge|THS
+4 Sphinx's Disciple|BNG
+4 Swan Song|THS
+4 Vaporkin|THS

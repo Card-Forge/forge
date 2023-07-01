@@ -1,0 +1,48 @@
+[metadata]
+Code=PUMA
+Date=2018-12-07
+Name=Ultimate Box Topper - Ultimate Masters
+Type=Reprint
+ScryfallCode=puma
+
+[cards]
+U1 M Emrakul, the Aeons Torn @Mark Tedin
+U2 M Karn Liberated @Jason Chan
+U3 M Kozilek, Butcher of Truth @Michael Komarck
+U4 M Ulamog, the Infinite Gyre @Aleksi Briclot
+U5 M Snapcaster Mage @Ryan Alexander Lee
+U6 M Temporal Manipulation @Franz Vohwinkel
+U7 M Bitterblossom @Jesper Ejsing
+U8 M Demonic Tutor @Zack Stella
+U9 M Goryo's Vengeance @Randy Vargas
+U10 M Liliana of the Veil @Steve Argyle
+U11 M Mikaeus, the Unhallowed @Chris Rahn
+U12 M Reanimate @Johann Bodin
+U13 M Tasigur, the Golden Fang @Igor Kieryluk
+U14 M Balefire Dragon @Eric Deschamps
+U15 M Through the Breach @Randy Vargas
+U16 M Eternal Witness @Chris Rahn
+U17 M Life from the Loam @Sung Choi
+U18 M Noble Hierarch @Mark Zug
+U19 M Tarmogoyf @Filip Burburan
+U20 M Vengevine @Raymond Swanland
+U21 M Gaddock Teeg @Greg Staples
+U22 M Leovold, Emissary of Trest @Magali Villeneuve
+U23 M Lord of Extinction @Izzy
+U24 M Maelstrom Pulse @John Avon
+U25 M Sigarda, Host of Herons @Chris Rahn
+U26 M Fulminator Mage @Lucas Graciano
+U27 M Kitchen Finks @Kev Walker
+U28 M Engineered Explosives @Lars Grant-West
+U29 M Mana Vault @Christine Choi
+U30 M Platinum Emperion @Igor Kieryluk
+U31 M Ancient Tomb @Yeong-Hao Han
+U32 M Cavern of Souls @Richard Wright
+U33 M Celestial Colonnade @Eric Deschamps
+U34 M Creeping Tar Pit @Jason Felix
+U35 M Dark Depths @Mathias Kollros
+U36 M Karakas @Drew Baker
+U37 M Lavaclaw Reaches @Véronique Meignaud
+U38 M Raging Ravine @Todd Lockwood
+U39 M Stirring Wildwood @Eric Deschamps
+U40 M Urborg, Tomb of Yawgmoth @Jung Park

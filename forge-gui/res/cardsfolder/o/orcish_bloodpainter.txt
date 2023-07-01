@@ -1,0 +1,7 @@
+Name:Orcish Bloodpainter
+ManaCost:2 R
+Types:Creature Orc Shaman
+PT:2/1
+A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a creature: Orcish Bloodpainter deals 1 damage to any target.

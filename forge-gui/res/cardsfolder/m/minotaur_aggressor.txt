@@ -1,0 +1,7 @@
+Name:Minotaur Aggressor
+ManaCost:6 R
+Types:Creature Minotaur Berserker
+PT:6/2
+K:First Strike
+K:Haste
+Oracle:First strike, haste

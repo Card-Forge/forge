@@ -1,0 +1,37 @@
+[duel]
+
+[metadata]
+Name=Hades' March 1
+Title=Hades
+Icon=Hades.jpg
+Difficulty=easy
+Description=[B/G] Preconstructed
+Deck Type=constructed
+
+[Main]
+12 Swamp|SHM
+12 Forest|SHM
+
+2 Merrow Bonegnawer|EVE
+2 Wickerbough Elder|EVE
+2 Roughshod Mentor|SHM
+3 Odious Trow|EVE
+3 Woodlurker Mimic|EVE
+2 Hag Hedge-Mage|EVE
+2 Quillspike|EVE
+3 Rendclaw Trow|EVE
+2 Stalker Hag|EVE
+2 Noxious Hatchling|EVE
+2 Desecrator Hag|EVE
+1 Creakwood Liege|EVE
+1 Doomgape|EVE
+2 Soul Reap|EVE
+1 Syphon Life|EVE
+2 Viridescent Wisps|SHM
+1 Savage Conception|EVE
+1 Cankerous Thirst|EVE
+2 Gift of the Deity|EVE
+
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,7 @@
+Name:Wanted Scoundrels
+ManaCost:1 B
+Types:Creature Human Pirate
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, target opponent creates two Treasure tokens.
+SVar:TrigToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ Targeted
+Oracle:When Wanted Scoundrels dies, target opponent creates two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

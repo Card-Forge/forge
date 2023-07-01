@@ -1,0 +1,5 @@
+Name:Rumbling Baloth
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+Oracle:

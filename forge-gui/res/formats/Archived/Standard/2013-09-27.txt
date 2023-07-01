@@ -1,0 +1,6 @@
+[format]
+Name:Standard (THS)
+Type:Archived
+Subtype:Standard
+Effective:2013-09-27
+Sets:RTR, GTC, DGM, M14, THS

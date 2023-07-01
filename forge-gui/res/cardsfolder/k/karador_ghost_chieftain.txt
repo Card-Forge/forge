@@ -1,0 +1,8 @@
+Name:Karador, Ghost Chieftain
+ManaCost:5 W B G
+Types:Legendary Creature Centaur Spirit
+PT:3/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+S:Mode$ Continuous | Affected$ Creature.nonLand+YouCtrl | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast a creature spell from your graveyard.
+Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nDuring each of your turns, you may cast a creature spell from your graveyard.

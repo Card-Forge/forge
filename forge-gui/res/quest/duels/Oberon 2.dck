@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Oberon 2
+Title=Oberon
+Difficulty=medium
+Description=UB Faeries deck
+Icon=Oberon.jpg
+Deck Type=constructed
+[main]
+2 Briarberry Cohort|SHM
+1 Faerie Swarm|SHM
+1 Bitterblossom|MOR
+2 Nightshade Schemers|MOR
+1 Dire Undercurrents|SHM
+1 Biting Tether|SHM
+2 Ringskipper|LRW
+8 Swamp|MBS
+1 Puppeteer Clique|SHM
+1 Vendilion Clique|MOR
+1 Oona's Gatewarden|SHM
+2 Violet Pall|MOR
+1 Dewdrop Spy|MOR
+1 Zephyr Sprite
+2 Faerie Trickery|LRW
+4 Drowned Catacomb|M11
+2 Scion of Oona|LRW
+1 Faerie Harbinger|LRW
+2 Nightshade Stinger|LRW
+1 Glen Elendra Archmage|EVE
+1 Wasp Lancer|SHM
+8 Island|MBS
+4 Secluded Glen|LRW
+1 Glen Elendra Liege|SHM
+2 Familiar's Ruse|LRW
+1 Final-Sting Faerie|MOR
+2 Mistbind Clique|LRW
+1 Sower of Temptation|LRW
+1 Wydwen, the Biting Gale|LRW
+1 Sprite Noble|TSP
+1 Spellstutter Sprite
+[sideboard]

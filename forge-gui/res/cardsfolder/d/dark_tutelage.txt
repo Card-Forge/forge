@@ -1,0 +1,10 @@
+Name:Dark Tutelage
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ DBLose
+SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.

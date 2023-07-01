@@ -1,0 +1,8 @@
+Name:Rhox Pikemaster
+ManaCost:2 W W
+Types:Creature Rhino Soldier
+PT:3/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.Soldier+Other+YouCtrl | AddKeyword$ First Strike | Description$ Other Soldier creatures you control have first strike.
+SVar:PlayMain1:TRUE
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nOther Soldier creatures you control have first strike.

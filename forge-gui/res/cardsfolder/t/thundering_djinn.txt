@@ -1,0 +1,10 @@
+Name:Thundering Djinn
+ManaCost:3 U R
+Types:Creature Djinn
+PT:3/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to any target equal to the number of cards you've drawn this turn.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$YouDrewThisTurn
+AI:RemoveDeck:All
+Oracle:Flying\nWhenever Thundering Djinn attacks, it deals damage to any target equal to the number of cards you've drawn this turn.

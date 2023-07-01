@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Deep Breath
+Title=Deep Breath
+Difficulty=medium
+Description=According to merfolk legend, a denizen of the deep swallows the horizon at the end of each day, bringing on the cold blanket of night.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Angelic Wall|PO2
+2 Apprentice Sorcerer|PO2
+4 Archangel|PO2
+4 Breath of Life|PO2
+4 Denizen of the Deep|PO2
+14 Island|PO2|1
+10 Plains|PO2|3
+4 Screeching Drake|PO2
+4 Sea Drake|PO2
+4 Talas Researcher|PO2
+4 Temple Acolyte|PO2
+4 Touch of Brilliance|PO2

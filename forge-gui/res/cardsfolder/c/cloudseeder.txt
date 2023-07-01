@@ -1,0 +1,7 @@
+Name:Cloudseeder
+ManaCost:1 U
+Types:Creature Faerie Spellshaper
+PT:1/1
+K:Flying
+A:AB$ Token | Cost$ U T Discard<1/Card> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ cloud_sprite | SpellDescription$ Create a 1/1 blue Faerie creature token named Cloud Sprite. It has flying and "Cloud Sprite can block only creatures with flying."
+Oracle:Flying\n{U}, {T}, Discard a card: Create a 1/1 blue Faerie creature token named Cloud Sprite. It has flying and "Cloud Sprite can block only creatures with flying."

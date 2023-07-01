@@ -1,0 +1,7 @@
+Name:Advanced Hoverguard
+ManaCost:3 U
+Types:Creature Drone
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ U | KW$ Shroud | Defined$ Self | SpellDescription$ CARDNAME gains shroud until end of turn.
+Oracle:Flying\n{U}: Advanced Hoverguard gains shroud until end of turn. (It can't be the target of spells or abilities.)

@@ -1,0 +1,5 @@
+Name:Planar Portal
+ManaCost:6
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 6 T | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+Oracle:{6}, {T}: Search your library for a card, put that card into your hand, then shuffle.

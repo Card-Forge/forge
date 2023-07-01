@@ -1,0 +1,8 @@
+Name:Battlegate Mimic
+ManaCost:1 RW
+Types:Creature Shapeshifter
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.Red+White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both red and white, CARDNAME has base power and toughness 4/2 until end of turn and gains first strike until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 2 | Keywords$ First Strike
+SVar:BuffedBy:Card.Red+White
+Oracle:Whenever you cast a spell that's both red and white, Battlegate Mimic has base power and toughness 4/2 until end of turn and gains first strike until end of turn.

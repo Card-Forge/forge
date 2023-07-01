@@ -1,0 +1,10 @@
+Name:Thalisse, Reverent Medium
+ManaCost:3 W B
+Types:Legendary Creature Human Cleric
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of tokens you created this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+YouOwn
+DeckHas:Ability$Token & Type$Spirit
+DeckNeeds:Ability$Token
+Oracle:At the beginning of each end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of tokens you created this turn.

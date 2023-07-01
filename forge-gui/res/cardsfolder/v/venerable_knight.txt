@@ -1,0 +1,9 @@
+Name:Venerable Knight
+ManaCost:W
+Types:Creature Human Knight
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on target Knight you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Knight.YouCtrl | TgtPrompt$ Select target Knight you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Knight
+Oracle:When Venerable Knight dies, put a +1/+1 counter on target Knight you control.

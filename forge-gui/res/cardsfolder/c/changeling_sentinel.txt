@@ -1,0 +1,7 @@
+Name:Changeling Sentinel
+ManaCost:3 W
+Types:Creature Shapeshifter
+PT:3/2
+K:Changeling
+K:Vigilance
+Oracle:Changeling (This card is every creature type.)\nVigilance

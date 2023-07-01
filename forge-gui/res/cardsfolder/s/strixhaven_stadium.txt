@@ -1,0 +1,15 @@
+Name:Strixhaven Stadium
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SubAbility$ DBPutCounter | AILogic$ AtOppEOT | SpellDescription$ Add {C}. Put a point counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ POINT | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | Execute$ TrigRemove | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, remove a point counter from CARDNAME.
+SVar:TrigRemove:DB$ RemoveCounter | Defined$ Self | CounterType$ POINT | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to an opponent, put a point counter on CARDNAME. Then if it has ten or more point counters on it, remove them all and that player loses the game.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ POINT | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE10 | TrueSubAbility$ DBRemoveAll
+SVar:DBRemoveAll:DB$ RemoveCounter | Defined$ Self | CounterType$ POINT | CounterNum$ All | SubAbility$ DBLosesGame
+SVar:DBLosesGame:DB$ LosesGame | Defined$ TriggeredTarget
+SVar:X:Count$CardCounters.POINT
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}. Put a point counter on Strixhaven Stadium.\nWhenever a creature deals combat damage to you, remove a point counter from Strixhaven Stadium.\nWhenever a creature you control deals combat damage to an opponent, put a point counter on Strixhaven Stadium. Then if it has ten or more point counters on it, remove them all and that player loses the game.

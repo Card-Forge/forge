@@ -1,0 +1,8 @@
+Name:Gavony
+ManaCost:no cost
+Types:Plane Innistrad
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Vigilance | Description$ All creatures have vigilance.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures you control gain indestructible until end of turn.
+SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:All creatures have vigilance.\nWhenever chaos ensues, creatures you control gain indestructible until end of turn.

@@ -1,0 +1,15 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 033115 - Ground Control
+URL:http://www.gatheringmagic.com/seanuy-033115-perplexing-chimera-1-ground-control/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=4
+AILife=4
+humanhand=Glaring Aegis|Set:DTK; Jeskai Barricade|Set:FRF; Epic Confrontation|Set:DTK; Dromoka's Gift|Set:DTK
+humanbattlefield=Forest|Set:DTK; Forest|Set:DTK; Forest|Set:DTK; Forest|Set:DTK; Plains|Set:DTK; Plains|Set:DTK; Plains|Set:DTK; Plains|Set:DTK; Plains|Set:DTK; Lightwalker|Set:DTK; Dragon-Scarred Bear|Set:DTK; Abzan Skycaptain|Set:FRF|Tapped|Id:420; Battlefront Krushok|Set:FRF; Ambush Krotiq|Set:FRF; Dromoka Monument|Set:DTK; Stormrider Rig|AttachedTo:420|Set:DTK
+aibattlefield=Plains|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Island|Set:DTK|Tapped; Island|Set:DTK|Tapped; Island|Set:DTK|Tapped; Island|Set:DTK|Tapped; Dromoka Dunecaster|Set:DTK; Territorial Roc|Set:DTK; Orator of Ojutai|Set:DTK; Updraft Elemental|Set:DTK; Ancient Carp|Set:DTK; Strongarm Monk|Set:DTK; Ojutai, Soul of Winter|Set:FRF; Cunning Breezedancer|Tapped|Set:DTK

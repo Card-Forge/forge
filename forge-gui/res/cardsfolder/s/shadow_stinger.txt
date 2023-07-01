@@ -1,0 +1,10 @@
+Name:Shadow Stinger
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:1/4
+A:AB$ Pump | Cost$ tapXType<1/Rogue.Other> | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player mills three cards. (They put the top three cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 3
+DeckHas:Ability$Mill
+DeckHints:Type$Rogue
+Oracle:Tap another untapped Rogue you control: Shadow Stinger gains deathtouch until end of turn.\nWhenever Shadow Stinger deals combat damage to a player, that player mills three cards. (They put the top three cards of their library into their graveyard.)

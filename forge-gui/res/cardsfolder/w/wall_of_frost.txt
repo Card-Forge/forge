@@ -1,0 +1,9 @@
+Name:Wall of Frost
+ManaCost:1 U U
+Types:Creature Wall
+PT:0/7
+K:Defender
+T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature doesn't untap during its controller's next untap step.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:HasBlockEffect:TRUE
+Oracle:Defender\nWhenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.

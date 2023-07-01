@@ -1,0 +1,7 @@
+Name:Consulate Skygate
+ManaCost:2
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+K:Reach
+Oracle:Defender\nReach (This creature can block creatures with flying.)

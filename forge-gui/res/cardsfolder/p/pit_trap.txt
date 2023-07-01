@@ -1,0 +1,5 @@
+Name:Pit Trap
+ManaCost:2
+Types:Artifact
+A:AB$ Destroy | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | NoRegen$ True | SpellDescription$ Destroy target attacking creature without flying. It can't be regenerated.
+Oracle:{2}, {T}, Sacrifice Pit Trap: Destroy target attacking creature without flying. It can't be regenerated.

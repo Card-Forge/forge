@@ -1,0 +1,7 @@
+Name:Righteous Indignation
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ AttackerBlocked | ValidCard$ Creature.Black,Creature.Red | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ TriggeredBlockerLKICopy | SpellDescription$ The blocking creature gets +1/+1 until end of turn.
+AI:RemoveDeck:Random
+Oracle:Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.

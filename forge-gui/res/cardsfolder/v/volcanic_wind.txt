@@ -1,0 +1,6 @@
+Name:Volcanic Wind
+ManaCost:4 R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creatures to distribute damage to | NumDmg$ NumCreatures | TargetMin$ 0 | TargetMax$ NumCreatures | DividedAsYouChoose$ NumCreatures | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell.
+SVar:NumCreatures:Count$LastStateBattlefieldWithFallback Creature
+Oracle:Volcanic Wind deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell.

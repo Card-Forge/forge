@@ -1,0 +1,6 @@
+Name:Oraxid
+ManaCost:3 U
+Types:Creature Crab Beast
+PT:2/3
+K:Protection from red
+Oracle:Protection from red

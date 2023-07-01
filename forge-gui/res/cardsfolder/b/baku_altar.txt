@@ -1,0 +1,9 @@
+Name:Baku Altar
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+A:AB$ Token | Cost$ 2 T SubCounter<1/KI> | TokenAmount$ 1 | TokenScript$ c_1_1_spirit | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Spirit creature token.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Baku Altar.\n{2}, {T}, Remove a ki counter from Baku Altar: Create a 1/1 colorless Spirit creature token.

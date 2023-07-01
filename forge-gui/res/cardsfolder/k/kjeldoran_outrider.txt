@@ -1,0 +1,6 @@
+Name:Kjeldoran Outrider
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+Oracle:{W}: Kjeldoran Outrider gets +0/+1 until end of turn.

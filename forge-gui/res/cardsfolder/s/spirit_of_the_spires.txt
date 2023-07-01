@@ -1,0 +1,8 @@
+Name:Spirit of the Spires
+ManaCost:3 W
+Types:Creature Spirit
+PT:2/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+Other+YouCtrl | AddToughness$ 1 | Description$ Other creatures you control with flying get +0/+1.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther creatures you control with flying get +0/+1.

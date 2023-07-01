@@ -1,0 +1,7 @@
+Name:Dazzling Ramparts
+ManaCost:4 W
+Types:Creature Wall
+PT:0/7
+K:Defender
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+Oracle:Defender\n{1}{W}, {T}: Tap target creature.

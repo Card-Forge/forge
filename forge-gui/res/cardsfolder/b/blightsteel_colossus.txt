@@ -1,0 +1,9 @@
+Name:Blightsteel Colossus
+ManaCost:12
+Types:Artifact Creature Phyrexian Golem
+PT:11/11
+K:Trample
+K:Infect
+K:Indestructible
+K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+Oracle:Trample, infect, indestructible\nIf Blightsteel Colossus would be put into a graveyard from anywhere, reveal Blightsteel Colossus and shuffle it into its owner's library instead.

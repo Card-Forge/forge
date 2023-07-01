@@ -1,0 +1,35 @@
+[duel]
+
+[metadata]
+Name=Hades' March 3
+Title=Hades
+Icon=Hades.jpg
+Difficulty=hard
+Description=[B/G] Beatdown
+Deck Type=constructed
+
+[Main]
+6 Swamp|SHM
+4 Terramorphic Expanse|10E
+6 Forest|SHM
+4 Twilight Mire|EVE
+4 Llanowar Wastes|10E
+
+2 Beacon of Unrest|10E
+3 Cankerous Thirst|EVE
+4 Creakwood Liege|EVE
+2 Deity of Scars|EVE
+1 Doomgape|EVE
+2 Gift of the Deity|EVE
+2 Gleeful Sabotage|SHM
+1 Grave Pact|10E
+3 Hurricane|10E
+4 Odious Trow|EVE
+3 Quirion Dryad|10E
+1 Sapling of Colfenor|EVE
+4 Stalker Hag|EVE
+4 Troll Ascetic|10E
+
+[sideboard]
+[planes]
+[schemes]

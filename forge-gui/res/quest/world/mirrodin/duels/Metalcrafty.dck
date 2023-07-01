@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Metalcrafty
+Title=Metalcrafty
+Difficulty=easy
+Description=Metalcraft puts this deck in 5th gear
+Icon=Metalcrafty.jpg
+Deck Type=constructed
+[Main]
+1 Accorder's Shield|SOM
+1 Argent Sphinx|SOM
+2 Blade-Tribe Berserkers|SOM
+2 Chrome Steed|SOM
+1 Darksteel Axe|SOM
+2 Disperse|SOM
+1 Echo Circlet|SOM
+2 Embersmith|SOM
+1 Etched Champion|SOM
+2 Galvanic Blast|SOM
+1 Golem Foundry|SOM
+1 Golem's Heart|SOM
+1 Iron Myr|SOM
+13 Island|SOM|1
+2 Lumengrid Drake|SOM
+2 Memnite|SOM
+13 Mountain|SOM|1
+2 Riddlesmith|SOM
+2 Rusted Relic|SOM
+1 Silver Myr|SOM
+3 Snapsail Glider|SOM
+2 Sylvok Lifestaff|SOM
+2 Trinket Mage|SOM
+[sideboard]

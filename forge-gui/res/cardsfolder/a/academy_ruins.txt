@@ -1,0 +1,6 @@
+Name:Academy Ruins
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 1 U T | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.
+Oracle:{T}: Add {C}.\n{1}{U}, {T}: Put target artifact card from your graveyard on top of your library.

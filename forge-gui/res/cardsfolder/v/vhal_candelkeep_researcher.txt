@@ -1,0 +1,10 @@
+Name:Vhal, Candlekeep Researcher
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:2/3
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | RestrictValid$ CantCastSpellFromHand | SpellDescription$ Add an amount of {C} equal to CARDNAME's toughness. This mana can't be spent to cast spells from your hand.
+SVar:X:Count$CardToughness
+K:Choose a Background
+AI:RemoveDeck:Random
+Oracle:Vigilance\n{T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness. This mana can't be spent to cast spells from your hand.\nChoose a Background (You can have a Background as a second commander.)

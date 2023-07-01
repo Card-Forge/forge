@@ -1,0 +1,6 @@
+Name:Chill
+ManaCost:1 U
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Card.Red | Type$ Spell | Amount$ 2 | Description$ Red spells cost {2} more to cast.
+AI:RemoveDeck:Random
+Oracle:Red spells cost {2} more to cast.

@@ -1,0 +1,7 @@
+Name:Horn of Ramos
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add {G}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {G}.\nSacrifice Horn of Ramos: Add {G}.

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Merrow Riverways
+Description=Lorwyn's waterways teem with merrow, a bemused and crafty race of merfolk. Their intentions are never reflected in their fishy eyes. Will they sneak around your defenses for a quick victory or combine their forces to overcome you with bewildering complexity?
+Deck Type=constructed
+Set=LRW
+Image=merrow_riverways.jpg
+[main]
+3 Judge of Currents|LRW
+2 Harpoon Sniper|LRW
+3 Oblivion Ring|LRW
+1 Merrow Harbinger|LRW
+3 Streambed Aquitects|LRW
+2 Springleaf Drum|LRW
+1 Ponder|LRW
+1 Merrow Commerce|LRW
+2 Silvergill Adept|LRW
+2 Merrow Reejerey|LRW
+1 Sygg, River Guide|LRW
+1 Wanderwine Prophets|LRW
+3 Silvergill Douser|LRW
+2 Stonybrook Angler|LRW
+2 Tideshaper Mystic|LRW
+9 Plains|LRW
+13 Island|LRW
+2 Summon the School|LRW
+1 Fallowsage|LRW
+2 Avian Changeling|LRW
+1 Whirlpool Whelm|LRW
+2 Drowner of Secrets|LRW
+1 Broken Ambitions|LRW
+[sideboard]

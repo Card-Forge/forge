@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bant on the March
+Description=Now you can answer that call to war. You'll assemble a quick force of heroic soldiers, rhoxes, and flying aven to defend the noble realm of Bant from the other planes. Then you can continue the attack one of two ways: build up a single, unstoppable champion using the exalted mechanic, or overrun your enemy with a game-ending spell that empowers your whole army at once. Nothing will stand between you and glorious victory.
+Deck Type=constructed
+Set=CFX
+Image=bant_on_the_march.jpg
+[main]
+1 Aerie Mystics|CFX
+1 Asha's Favor|CFX
+2 Aven Squire|CFX
+1 Deft Duelist|ALA
+3 Forest|ALA|4
+1 Frontline Sage|CFX
+1 Giltspire Avenger+|CFX
+2 Gleam of Resistance|CFX
+1 Gwafa Hazid, Profiteer|CFX
+3 Island|ALA|1
+1 Jhessian Balmgiver|CFX
+1 Outrider of Jhess|ALA
+2 Pacifism|10E
+4 Plains|ALA|2
+3 Plains|ALA|3
+2 Rhox Bodyguard|CFX
+1 Rhox Meditant|CFX
+1 Rhox War Monk|ALA
+2 Seaside Citadel|ALA
+2 Skyward Eye Prophets|CFX
+1 Suntail Hawk|10E
+2 Terramorphic Expanse|10E
+1 Unsummon|CFX
+2 Valeron Outlander|CFX
+[sideboard]

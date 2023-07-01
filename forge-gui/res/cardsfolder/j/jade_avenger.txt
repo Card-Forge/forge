@@ -1,0 +1,6 @@
+Name:Jade Avenger
+ManaCost:1 G
+Types:Creature Frog Samurai
+PT:2/2
+K:Bushido:2
+Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)

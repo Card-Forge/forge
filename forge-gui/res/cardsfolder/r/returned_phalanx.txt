@@ -1,0 +1,9 @@
+Name:Returned Phalanx
+ManaCost:1 B
+Types:Creature Zombie Soldier
+PT:3/3
+K:Defender
+A:AB$ Effect | Cost$ 1 U | StaticAbilities$ CanAttack | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+DeckNeeds:Color$Blue
+Oracle:Defender\n{1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.

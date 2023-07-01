@@ -1,0 +1,7 @@
+Name:Joraga Visionary
+ManaCost:3 G
+Types:Creature Elf Wizard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:When Joraga Visionary enters the battlefield, draw a card.

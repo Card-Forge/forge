@@ -1,0 +1,11 @@
+Name:Dusk Urchins
+ManaCost:2 B
+Types:Creature Ouphe
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ M1M1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card for each -1/-1 counter on it.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:TriggeredCard$CardCounters.M1M1
+Oracle:Whenever Dusk Urchins attacks or blocks, put a -1/-1 counter on it.\nWhen Dusk Urchins dies, draw a card for each -1/-1 counter on it.

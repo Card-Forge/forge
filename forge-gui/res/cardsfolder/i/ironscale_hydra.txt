@@ -1,0 +1,8 @@
+Name:Ironscale Hydra
+ManaCost:3 G G
+Types:Creature Hydra
+PT:5/5
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ValidSource$ Creature | IsCombat$ True | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | ExecuteMode$ PerSource | Description$ If a creature would deal combat damage to CARDNAME, prevent that damage and put a +1/+1 counter on CARDNAME.
+SVar:Counters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:If a creature would deal combat damage to Ironscale Hydra, prevent that damage and put a +1/+1 counter on Ironscale Hydra.

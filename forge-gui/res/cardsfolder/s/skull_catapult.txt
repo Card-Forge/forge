@@ -1,0 +1,6 @@
+Name:Skull Catapult
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 1 T Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:AIPreference:SacCost$Creature.cmcLE2+powerLE2
+Oracle:{1}, {T}, Sacrifice a creature: Skull Catapult deals 2 damage to any target.

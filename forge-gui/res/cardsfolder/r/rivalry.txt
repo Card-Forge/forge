@@ -1,0 +1,8 @@
+Name:Rivalry
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ RivalDamage | CheckSVar$ ActiveLands | SVarCompare$ GTRivalLands | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, CARDNAME deals 2 damage to them.
+SVar:RivalDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer
+SVar:ActiveLands:Count$Valid Land.ActivePlayerCtrl
+SVar:RivalLands:PlayerCountNonActive$HighestValid Land.YouCtrl
+Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to them.

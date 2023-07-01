@@ -1,0 +1,11 @@
+Name:Raffine's Silencer
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, target creature an opponent controls gets -X/-X until end of turn, where X is Raffine's Silencer's power.
+SVar:TrigReturn:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Discard|Counters
+Oracle:When Raffine's Silencer enters the battlefield, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhen Raffine's Silencer dies, target creature an opponent controls gets -X/-X until end of turn, where X is Raffine's Silencer's power.

@@ -1,0 +1,6 @@
+Name:Tainted Wood
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {B} or {G}. Activate only if you control a Swamp.
+Oracle:{T}: Add {C}.\n{T}: Add {B} or {G}. Activate only if you control a Swamp.

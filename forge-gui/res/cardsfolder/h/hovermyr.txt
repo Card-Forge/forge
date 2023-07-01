@@ -1,0 +1,7 @@
+Name:Hovermyr
+ManaCost:2
+Types:Artifact Creature Myr
+PT:1/2
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

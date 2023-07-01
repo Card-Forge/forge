@@ -1,0 +1,7 @@
+Name:Captain Sisay
+ManaCost:2 G W
+Types:Legendary Creature Human Soldier
+PT:2/2
+A:AB$ ChangeZone | Cost$ T | Origin$ Library | Destination$ Hand | ChangeType$ Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary card, reveal that card, put it into your hand, then shuffle.
+SVar:NonCombatPriority:3
+Oracle:{T}: Search your library for a legendary card, reveal that card, put it into your hand, then shuffle.

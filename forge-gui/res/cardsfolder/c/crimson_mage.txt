@@ -1,0 +1,6 @@
+Name:Crimson Mage
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:2/1
+A:AB$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Haste | SpellDescription$ Target creature you control gains haste until end of turn.
+Oracle:{R}: Target creature you control gains haste until end of turn. (It can attack and {T} this turn.)

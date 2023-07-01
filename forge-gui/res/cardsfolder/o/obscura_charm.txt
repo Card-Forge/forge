@@ -1,0 +1,9 @@
+Name:Obscura Charm
+ManaCost:W U B
+Types:Instant
+A:SP$ Charm | Choices$ DBReturn,DBCounter,DBDestroy
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target multicolored permanent card with mana value 3 or less from your graveyard | ValidTgts$ Permanent.cmcLE3+MultiColor+YouCtrl | Tapped$ True | SpellDescription$ Return target multicolored permanent card with mana value 3 or less from your graveyard to the battlefield tapped.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | SpellDescription$ Counter target instant or sorcery spell.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3,Planeswalker.cmcLE3 | TgtPrompt$ Select target creature or planeswalker with mana value 3 or less | SpellDescription$ Destroy target creature or planeswalker with mana value 3 or less.
+DeckHas:Ability$Graveyard
+Oracle:Choose one —\n• Return target multicolored permanent card with mana value 3 or less from your graveyard to the battlefield tapped.\n• Counter target instant or sorcery spell.\n• Destroy target creature or planeswalker with mana value 3 or less.

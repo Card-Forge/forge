@@ -1,0 +1,33 @@
+[quest]
+id=1006
+OpponentName=Morgane
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 green rares
+Credit Reward=150
+HumanExtras=Wooden Sphere
+AIExtras=Wooden Sphere
+[metadata]
+Name=quest6
+Title=Green Outpost (Green)
+Difficulty=medium
+Description=This is a remote outpost the powerful Green Wizard, Morgane the Great Druid. Here he is at his weakest.
+Icon=Morgane.jpg
+Deck Type=constructed
+[main]
+4 Aspect of Wolf|LEB
+3 Birds of Paradise|4ED
+3 Desert Twister|4ED
+22 Forest|4ED
+3 Gaea's Liege|4ED
+3 Instill Energy|LEB
+3 Jayemdae Tome|4ED
+4 Killer Bees|LEG
+2 Living Artifact|LEB
+2 Living Lands|LEB
+3 Llanowar Elves|4ED
+3 Stream of Life|LEB
+3 Untamed Wilds|4ED
+2 Verduran Enchantress|LEB
+[sideboard]

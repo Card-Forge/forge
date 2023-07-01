@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1300
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Path of Blight
+Description=Flesh is feeble. Phyrexia finds new "life" through green and white mana, giving rise to a host of horrors who seek to cull the Mirran weaklings. Infect unchecked with this deck of Phyrexian predators and priests.
+Deck Type=constructed
+Set=MBS
+Image=path_of_blight.jpg
+[main]
+1 Decimator Web|MBS
+2 Trigon of Infestation|SOM
+1 Core Prowler|MBS
+1 Corpse Cur|SOM
+2 Phyrexian Digester|MBS
+2 Phyrexian Juggernaut|MBS
+2 Plague Myr|MBS
+14 Forest|MBS
+11 Plains|MBS
+2 Blight Mamba|SOM
+1 Blightwidow|MBS
+1 Phyrexian Hydra+|MBS
+2 Priests of Norn|MBS
+2 Rot Wolf|MBS
+2 Tangle Angler|SOM
+2 Tine Shrike|MBS
+1 Viridian Corrupter|MBS
+2 Banishment Decree|MBS
+2 Choking Fumes|MBS
+1 Mighty Leap|M11
+1 Pistus Strike|MBS
+1 Safe Passage|M11
+2 Unnatural Predation|MBS
+2 Hunters' Feast|M11
+[sideboard]

@@ -1,0 +1,10 @@
+Name:Tasha's Hideous Laughter
+ManaCost:1 U U
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBRepeat | SpellDescription$ Each opponent exiles cards from the top of their library until that player has exiled cards with total mana value 20 or more.
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBExile | RepeatCheckSVar$ X | RepeatSVarCompare$ LT20 | MaxRepeat$ Y | SubAbility$ DBCleanup
+SVar:DBExile:DB$ Dig | Defined$ Remembered | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+SVar:Y:PlayerCountRemembered$CardsInLibrary
+Oracle:Each opponent exiles cards from the top of their library until that player has exiled cards with total mana value 20 or more.

@@ -1,0 +1,8 @@
+Name:Blue Sun's Twilight
+ManaCost:X U U
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature with mana value X or less | SubAbility$ DBCopy | SpellDescription$ Gain control of target creature with mana value X or less. If X is 5 or more, create a token that's a copy of that creature.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:Count$xPaid
+DeckHas:Ability$Token
+Oracle:Gain control of target creature with mana value X or less. If X is 5 or more, create a token that's a copy of that creature.

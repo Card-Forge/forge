@@ -1,0 +1,8 @@
+Name:Price of Knowledge
+ManaCost:6 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals damage to that player equal to the number of cards in that player's hand.
+SVar:TrigDmg:DB$ DealDamage | NumDmg$ X | Defined$ TriggeredPlayer
+SVar:X:TriggeredPlayer$CardsInHand
+Oracle:Players have no maximum hand size.\nAt the beginning of each opponent's upkeep, Price of Knowledge deals damage to that player equal to the number of cards in that player's hand.

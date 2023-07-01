@@ -1,0 +1,9 @@
+Name:Ardenn, Intrepid Archaeologist
+ManaCost:2 W
+Types:Legendary Creature Kor Scout
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigAttach | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, you may attach any number of Auras and Equipment you control to target permanent or player.
+SVar:TrigAttach:DB$ Attach | Defined$ Targeted | ValidTgts$ Permanent,Player | TgtPrompt$ Select target permanent or player | Object$ Valid Aura.YouCtrl,Equipment.YouCtrl | Optional$ True
+K:Partner
+DeckHints:Type$Aura|Equipment
+Oracle:At the beginning of combat on your turn, you may attach any number of Auras and Equipment you control to target permanent or player.\nPartner (You can have two commanders if both have partner.)

@@ -1,0 +1,10 @@
+[metadata]
+Code=PUST
+Date=2017-12-08
+Name=Unstable Promos
+Type=Funny
+Border=Silver
+ScryfallCode=PUST
+
+[cards]
+108 R Earl of Squirrel @Matt Cavotta

@@ -1,0 +1,9 @@
+Name:A-Rockslide Sorcerer
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant, sorcery, or Wizard spell, CARDNAME deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+SVar:BuffedBy:Instant,Sorcery,Wizard
+DeckNeeds:Type$Instant|Sorcery|Wizard
+Oracle:Whenever you cast an instant, sorcery, or Wizard spell, Rockslide Sorcerer deals 1 damage to any target.

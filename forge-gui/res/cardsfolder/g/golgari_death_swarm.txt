@@ -1,0 +1,7 @@
+Name:Golgari Death Swarm
+ManaCost:3 B G
+Types:Creature Bat Fungus Horror
+PT:4/4
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

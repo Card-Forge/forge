@@ -1,0 +1,6 @@
+Name:Kytheon's Tactics
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +2/+1 until end of turn. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE2 | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+Oracle:Creatures you control get +2/+1 until end of turn.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn. (Attacking doesn't cause them to tap.)

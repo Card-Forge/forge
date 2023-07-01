@@ -1,0 +1,20 @@
+#Surviving until next turn is the winning condition
+[metadata]
+Name:Pauper Puzzles #10 - Running On Empty
+URL:https://pauperpuzzles.wordpress.com/2017/01/26/10-running-on-empty/
+Goal:Survive
+Turns:2
+Difficulty:Hard
+Description:Survive until your next turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=5
+AILife=20
+humanhand=Radiant Fountain;Simic Growth Chamber;Thought Scour
+humanlibrary=Respite;Think Twice;Piracy Charm
+humangraveyard=Fog;Deep Analysis;Pulse of Murasa
+humanbattlefield=Tranquil Thicket;Simic Growth Chamber;Simic Growth Chamber;Simic Growth Chamber;Thornwood Falls;Thornwood Falls;Thornwood Falls;Thornwood Falls;Island;Island;Battlefield Scrounger
+aihand=Goblin Bushwhacker;Lava Spike;Goblin War Strike;Searing Blaze;Needle Drop
+ailibrary=Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+aibattlefield=Beetleback Chief;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped

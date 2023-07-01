@@ -1,0 +1,27 @@
+Name:Hostile Hostel
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 1 T Sac<1/Creature/creature> | CounterType$ SOUL | CounterNum$ 1 | SubAbility$ DBBranch | SorcerySpeed$ True | SpellDescription$ Put a soul counter on CARDNAME. Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Soul | TrueSubAbility$ DBRemoveCtrs | StackDescription$ Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ SOUL | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap
+SVar:Soul:Count$Valid Card.Self+counters_GE3_SOUL
+DeckHas:Ability$Mana.Colorless|Sacrifice|Counters|LifeGain|Graveyard
+AlternateMode:DoubleFaced
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice a creature: Put a soul counter on Hostile Hostel. Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Creeping Inn
+ManaCost:no cost
+Colors:black
+Types:Artifact Creature Horror Construct
+PT:3/7
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may exile a creature card from your graveyard. If you do, each opponent loses X life and you gain X life, where X is the number of creature cards exiled with CARDNAME.
+SVar:TrigDrain:AB$ LoseLife | Cost$ ExileFromGrave<1/Creature/creature card> | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$ValidExile Creature.ExiledWithSource
+A:AB$ Phases | Cost$ 4 | Defined$ Self | SpellDescription$ CARDNAME phases out.
+Oracle:Whenever Creeping Inn attacks, you may exile a creature card from your graveyard. If you do, each opponent loses X life and you gain X life, where X is the number of creature cards exiled with Creeping Inn.\n{4}: Creeping Inn phases out.

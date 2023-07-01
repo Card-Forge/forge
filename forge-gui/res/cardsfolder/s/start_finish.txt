@@ -1,0 +1,16 @@
+Name:Start
+ManaCost:2 W
+Types:Instant
+A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | SpellDescription$ Create two 1/1 white Warrior creature tokens with vigilance.
+DeckHas:Ability$Token
+AlternateMode:Split
+Oracle:Create two 1/1 white Warrior creature tokens with vigilance.
+
+ALTERNATE
+
+Name:Finish
+ManaCost:2 B
+Types:Sorcery
+K:Aftermath
+A:SP$ Destroy | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nAs an additional cost to cast Finish, sacrifice a creature.\nDestroy target creature.

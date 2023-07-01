@@ -1,0 +1,8 @@
+Name:Ominous Sphinx
+ManaCost:3 U U
+Types:Creature Sphinx
+PT:4/4
+K:Flying
+T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, target creature an opponent controls gets -2/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | IsCurse$ True
+Oracle:Flying\nWhenever you cycle or discard a card, target creature an opponent controls gets -2/-0 until end of turn.

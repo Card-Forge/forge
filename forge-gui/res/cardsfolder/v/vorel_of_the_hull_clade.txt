@@ -1,0 +1,7 @@
+Name:Vorel of the Hull Clade
+ManaCost:1 G U
+Types:Legendary Creature Human Merfolk
+PT:1/4
+A:AB$ MultiplyCounter | Cost$ G U T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | StackDescription$ SpellDescription | SpellDescription$ Double the number of each kind of counter on target artifact, creature, or land.
+DeckHints:Ability$Counters
+Oracle:{G}{U}, {T}: Double the number of each kind of counter on target artifact, creature, or land.

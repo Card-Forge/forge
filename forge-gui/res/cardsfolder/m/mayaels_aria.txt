@@ -1,0 +1,8 @@
+Name:Mayael's Aria
+ManaCost:R G W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Creature.YouCtrl+powerGE5 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 10 | Defined$ You | ConditionPresent$ Creature.YouCtrl+powerGE10 | SubAbility$ DBWinGame
+SVar:DBWinGame:DB$ WinsGame | Defined$ You | ConditionPresent$ Creature.YouCtrl+powerGE20
+Oracle:At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater.

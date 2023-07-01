@@ -1,0 +1,11 @@
+Name:Earth-Cult Elemental
+ManaCost:4 R R
+Types:Creature Elemental
+PT:6/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Siege Monster — When CARDNAME enters the battlefield, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Sac1,10-19:SacOpp,20:SacOpp2 | SpellDescription$ roll a d20.
+SVar:Sac1:DB$ Sacrifice | SacValid$ Permanent | Defined$ Player | SpellDescription$ 1—9 VERT Each player sacrifices a permanent.
+SVar:SacOpp:DB$ Sacrifice | SacValid$ Permanent | Defined$ Player.Opponent | SpellDescription$ 10—19 VERT Each opponent sacrifices a permanent.
+SVar:SacOpp2:DB$ Sacrifice | SacValid$ Permanent | Amount$ 2 | Defined$ Player.Opponent | SpellDescription$ 20 VERT Each opponent sacrifices two permanents.
+DeckHas:Ability$Sacrifice
+Oracle:Siege Monster — When Earth-Cult Elemental enters the battlefield, roll a d20.\n1—9 | Each player sacrifices a permanent.\n10—19 | Each opponent sacrifices a permanent.\n20 | Each opponent sacrifices two permanents.

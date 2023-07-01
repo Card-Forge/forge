@@ -1,0 +1,10 @@
+Name:Freyalise, Llanowar's Fury
+ManaCost:3 G G
+Types:Legendary Planeswalker Freyalise
+Loyalty:3
+Text:CARDNAME can be your commander.
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_1_1_elf_druid_g | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Druid creature token with "{T}: Add {G}."
+A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:AB$ Draw | Cost$ SubCounter<6/LOYALTY> | NumCards$ X | Planeswalker$ True | Ultimate$ True | Defined$ You | SpellDescription$ Draw a card for each green creature you control.
+SVar:X:Count$Valid Creature.Green+YouCtrl
+Oracle:[+2]: Create a 1/1 green Elf Druid creature token with "{T}: Add {G}."\n[-2]: Destroy target artifact or enchantment.\n[-6]: Draw a card for each green creature you control.\nFreyalise, Llanowar's Fury can be your commander.

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=War of Attrition
+Description=Swiftness and superior Equipment enable your forces to get out fast and hit hard. But tactics and patience will also pay off when your reinforcements withstand the enemy's onslaught and then strike the killing blow!
+Set=NPH
+Image=war_of_attrition.jpg
+[main]
+1 Apostle's Blessing|NPH
+1 Bonehoard|MBS
+1 Darksteel Axe|SOM
+2 Dread Statuary|WWK
+4 Elite Vanguard|M11
+4 Flayer Husk|MBS
+4 Journey to Nowhere|COM
+1 Kemba, Kha Regent|SOM
+2 Kor Duelist|ZEN
+4 Leonin Relic-Warder|MBS
+4 Leonin Skyhunter|MBS
+1 Mirran Crusader|MBS
+21 Plains|SOM
+4 Porcelain Legionnaire|NPH
+1 Puresteel Paladin|NPH
+1 Sickleslicer|NPH
+1 Skinwing|MBS
+2 Stoneforge Mystic|WWK
+1 Sword of Vengeance|M11
+[sideboard]
+1 Apostle's Blessing|NPH
+2 Arrest|SOM
+3 Celestial Purge|M11
+1 Kor Duelist|ZEN
+4 Kor Firewalker|WWK
+4 Revoke Existence|SOM

@@ -1,0 +1,10 @@
+Name:Krond the Dawn-Clad
+ManaCost:G G G W W W
+Types:Legendary Creature Archon
+PT:6/6
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | IsPresent$ Card.Self+enchanted | TriggerDescription$ Whenever CARDNAME attacks, if it's enchanted, exile target permanent.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile
+SVar:EnchantMe:Once
+Oracle:Flying, vigilance\nWhenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.

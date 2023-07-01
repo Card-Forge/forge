@@ -1,0 +1,10 @@
+Name:Swarm Saboteur
+ManaCost:1 B
+Types:Creature Human Ninja
+PT:2/2
+K:Ninjutsu:B
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, conjure a card named Virus Beetle into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Virus Beetle | Zone$ Hand
+SVar:MustBeBlocked:True
+Oracle:Ninjutsu {B}\nDeathtouch\nWhenever Swarm Saboteur deals combat damage to a player, conjure a card named Virus Beetle into your hand.

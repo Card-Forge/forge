@@ -1,0 +1,8 @@
+Name:Ordruun Commando
+ManaCost:3 R
+Types:Creature Minotaur Soldier
+PT:4/1
+A:AB$ PreventDamage | Cost$ W | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:{W}: Prevent the next 1 damage that would be dealt to Ordruun Commando this turn.

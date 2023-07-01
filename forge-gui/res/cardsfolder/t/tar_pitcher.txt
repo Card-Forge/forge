@@ -1,0 +1,8 @@
+Name:Tar Pitcher
+ManaCost:3 R
+Types:Creature Goblin Shaman
+PT:2/2
+A:AB$ DealDamage | Cost$ T Sac<1/Goblin> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:AIPreference:SacCost$Goblin.token,Goblin.Other
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice a Goblin: Tar Pitcher deals 2 damage to any target.

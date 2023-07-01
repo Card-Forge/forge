@@ -1,0 +1,10 @@
+Name:Outrider en-Kor
+ManaCost:2 W
+Types:Creature Kor Rebel Knight
+PT:2/2
+K:Flanking
+A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKor | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
+SVar:EnKor:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ EnKorDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature you control instead.
+SVar:EnKorDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
+AI:RemoveDeck:All
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{0}: The next 1 damage that would be dealt to Outrider en-Kor this turn is dealt to target creature you control instead.

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Card of War
+Title=Card of War
+Difficulty=medium
+Description="It is said that if you know your opponent's deck and know your own deck, you will not be imperiled in a hundred games; if you do not know your opponent's deck but do know your own deck, you will win one and lose one; if you do not know your opponent's deck nor your own deck, you will be imperiled in every single game."\n-Sun Tzu, Art of War (sort of)
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Cao Cao, Lord of Wei|PTK
+4 Corrupt Court Official|PTK
+4 Corrupt Eunuchs|PTK
+4 Council of Advisors|PTK
+4 Imperial Recruiter|PTK
+7 Island|PTK|1
+1 Lu Su, Wu Advisor|PTK
+1 Lu Xun, Scholar General|PTK
+8 Mountain|PTK|1
+2 Overwhelming Forces|PTK
+4 Ravaging Horde|PTK
+1 Stone Catapult|PTK
+2 Sun Ce, Young Conquerer|PTK
+11 Swamp|PTK|3
+4 Wei Assassins|PTK
+1 Wu Longbowman|PTK

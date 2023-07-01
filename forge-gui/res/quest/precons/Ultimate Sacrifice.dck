@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=20
+Credits=2000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ultimate Sacrifice
+Description=The battle is joined! The Eldrazi rampage across Zendikar, heedless of the losses they suffer. The plane's defenders lay down their lives to stop them. Harness the powers of life and death to drive your enemies to extinction.
+Deck Type=constructed
+Set=BFZ
+Image=ultimate_sacrifice.jpg
+[Main]
+4 Blisterpod
+1 Warden of the First Tree
+2 Sultai Emissary
+2 Zulaport Cutthroat
+4 Rot Shambler
+1 Grim Haruspex
+2 Nantuko Husk
+4 Catacomb Sifter
+1 Eyeless Watcher
+1 Smothering Abomination
+1 Whisperwood Elemental
+1 Brood Butcher
+1 Tasigur, the Golden Fang
+1 Hangarback Walker 
+2 Murderous Cut
+2 Vampiric Rites
+1 Evolutionary Leap
+1 Corpseweft
+4 Bone Splinters
+4 Evolving Wilds
+4 Jungle Hollow
+1 Llanowar Wastes
+2 Rogue's Passage
+6 Swamp
+7 Forest 
+[Sideboard]
+3 Duress
+3 Caustic Caterpillar
+4 Jaddi Offshoot
+3 Cranial Archive
+2 Ultimate Price 
+

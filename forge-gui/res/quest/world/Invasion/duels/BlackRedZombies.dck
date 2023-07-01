@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Title=Shivan zombie
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Black - Red zombies
+Deck Type=constructed
+Name=BlackRedZombies
+[Main]
+2 Blazing Specter|INV
+2 Deadapult|PLS
+2 Grave Defiler|APC
+4 Hate Weaver|INV
+4 Lava Zombie|PLS
+4 Lord of the Undead|PLS
+1 Marauding Knight|INV
+2 Mountain|INV|1
+2 Mountain|INV|2
+2 Mountain|INV|3
+2 Mountain|INV|4
+4 Nightscape Familiar|PLS
+1 Phyrexian Reaper|INV
+2 Phyrexian Scuta|PLS
+4 Pyre Zombie|INV
+4 Shivan Zombie|INV
+2 Swamp|INV|1
+2 Swamp|INV|2
+2 Swamp|INV|3
+2 Swamp|INV|4
+4 Terminate|PLS
+2 Trench Wurm|INV
+4 Urborg Volcano|INV

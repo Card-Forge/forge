@@ -1,0 +1,10 @@
+Name:Licia, Sanguine Tribune
+ManaCost:5 R W B
+Types:Legendary Creature Vampire Soldier
+PT:4/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each life you gained this turn.
+K:First Strike
+K:Lifelink
+A:AB$ PutCounter | Cost$ PayLife<5> | CounterType$ P1P1 | CounterNum$ 3 | PlayerTurn$ True | ActivationLimit$ 1 | SpellDescription$ Put 3 +1/+1 counters on CARDNAME. Activate only during your turn, and only once each turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:This spell costs {1} less to cast for each 1 life you gained this turn.\nFirst strike, lifelink\nPay 5 life: Put three +1/+1 counters on Licia, Sanguine Tribune. Activate only during your turn and only once each turn.

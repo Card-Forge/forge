@@ -1,0 +1,6 @@
+Name:Irrigated Farmland
+ManaCost:no cost
+Types:Land Plains Island
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:2
+Oracle:({T}: Add {W} or {U}.)\nIrrigated Farmland enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

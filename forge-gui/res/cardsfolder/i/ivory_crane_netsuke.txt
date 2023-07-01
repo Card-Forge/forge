@@ -1,0 +1,7 @@
+Name:Ivory Crane Netsuke
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ GT6 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.

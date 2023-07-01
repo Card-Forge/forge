@@ -1,0 +1,543 @@
+[metadata]
+Name=MTGO Core Cube 2018 (540 cards)
+[main]
+1 Abbot of Keral Keep|ORI
+1 Acidic Slime|M13
+1 Adaptive Automaton|M12
+1 Adarkar Wastes|10E
+1 Aether Adept|M12
+1 Aetherspouts|M15
+1 Ajani Goldmane|M11
+1 Ajani Steadfast|M15
+1 Ajani's Chosen|M14
+1 Ajani, Adversary of Tyrants|M19
+1 Ajani, Caller of the Pride|M14
+1 Alchemist's Vial|ORI
+1 Alhammarret's Archive|ORI
+1 Ambassador Laquatus|10E
+1 Angelic Accord|IMA
+1 Angelic Destiny|M12
+1 Ant Queen|MM2
+1 Arachnus Web|MM3
+1 Arbor Elf|A25
+1 Archaeomancer|M14
+1 Archangel of Thune|IMA
+1 Archangel of Tithes|ORI
+1 Armored Ascension|M11
+1 Arms Dealer|M13
+1 Assassinate|M11
+1 Attended Knight|MM3
+1 Augur of Bolas|MM3
+1 Augury Owl|M11
+1 Auramancer|A25
+1 Avaricious Dragon|ORI
+1 Aviation Pioneer|M19
+1 Baneslayer Angel|M11
+1 Banisher Priest|M14
+1 Battlefield Forge|ORI
+1 Beacon of Destruction|10E
+1 Beacon of Immortality|10E
+1 Beacon of Unrest|10E
+1 Birds of Paradise|M12
+1 Black Cat|M15
+1 Blackmail|9ED
+1 Blanchwood Armor|M19
+1 Blessed Spirits|ORI
+1 Blinding Angel|9ED
+1 Blood Seeker|M12
+1 Bloodfire Colossus|10E
+1 Bloodthrone Vampire|MM2
+1 Bogardan Hellkite|IMA
+1 Bone Dragon|M19
+1 Boomerang|10E
+1 Borderland Marauder|IMA
+1 Bottle Gnomes|10E
+1 Bramblecrush|M14
+1 Brave the Elements|M14
+1 Bribery|8ED
+1 Brittle Effigy|M11
+1 Brushland|10E
+1 Buried Ruin|M12
+1 Call to Mind|M11
+1 Captain of the Watch|M13
+1 Captain's Call|M13
+1 Catalog|SOI
+1 Caustic Caterpillar|ORI
+1 Caves of Koilos|ORI
+1 Celestial Flare|ORI
+1 Chandra Nalaar|M11
+1 Chandra's Phoenix|M14
+1 Chandra, Fire of Kaladesh|ORI
+1 Chandra, Pyromaster|M15
+1 Chandra, the Firebrand|M13
+1 Charcoal Diamond|7ED
+1 Chasm Skulker|M15
+1 Chastise|9ED
+1 Chief Engineer|M15
+1 Chord of Calling|M15
+1 Chromatic Star|10E
+1 City of Brass|MMA
+1 Claustrophobia|IMA
+1 Cleansing Nova|M19
+1 Clone|M14
+1 Coat of Arms|M10
+1 Concentrate|8ED
+1 Conclave Naturalists|ORI
+1 Condemn|M11
+1 Cone of Flame|M15
+1 Confiscate|9ED
+1 Consul's Lieutenant|ORI
+1 Consume Spirit|M12
+1 Corrupt|M14
+1 Counterspell|SS1
+1 Covenant of Blood|M15
+1 Cruel Edict|10E
+1 Crusader of Odric|M13
+1 Crypt Rats|7ED
+1 Cultivate|A25
+1 Daring Apprentice|9ED
+1 Dark-Dweller Oracle|M19
+1 Darksteel Citadel|MM2
+1 Darksteel Colossus|M10
+1 Darksteel Ingot|M14
+1 Day of Judgment|M12
+1 Deadly Recluse|M14
+1 Demon of Catastrophes|M19
+1 Demon of Death's Gate|M11
+1 Demonic Pact|ORI
+1 Destructive Force|M11
+1 Devouring Light|M15
+1 Disciple of Bolas|M13
+1 Disciple of the Ring|ORI
+1 Disenchant|A25
+1 Disperse|M19
+1 Displacement Wave|ORI
+1 Dissipate|M15
+1 Divination|M19
+1 Doom Blade|IMA
+1 Doomed Dissenter|M19
+1 Doomed Necromancer|10E
+1 Door to Nothingness|M13
+1 Dragon Egg|M19
+1 Dragon Fodder|MM3
+1 Dragonskull Summit|XLN
+1 Drowned Catacomb|XLN
+1 Druid of the Cowl|M19
+1 Druidic Satchel|M12
+1 Duress|M19
+1 Dwynen's Elite|ORI
+1 Dwynen, Gilt-Leaf Daen|ORI
+1 Earthquake|M10
+1 Elite Arcanist|M14
+1 Elite Vanguard|EMA
+1 Elixir of Immortality|M14
+1 Elvish Archdruid|M13
+1 Elvish Champion|10E
+1 Elvish Mystic|M15
+1 Elvish Piper|A25
+1 Elvish Rejuvenator|M19
+1 Elvish Visionary|ORI
+1 Ember Hauler|M11
+1 Encrust|M15
+1 Enigma Drake|M19
+1 Ensoul Artifact|M15
+1 Enthralling Victor|A25
+1 Equilibrium|7ED
+1 Essence Scatter|M19
+1 Eternal Thirst|IMA
+1 Evacuation|10E
+1 Evolutionary Leap|ORI
+1 Evolving Wilds|RIX
+1 Exclusion Mage|M19
+1 Exquisite Firecraft|ORI
+1 Faerie Conclave|10E
+1 Fallen Angel|A25
+1 Farseek|M13
+1 Fauna Shaman|M11
+1 Fell Specter|M19
+1 Fellwar Stone|9ED
+1 Fertile Ground|LRW
+1 Festering Goblin|MMA
+1 Fiendslayer Paladin|M14
+1 Fiery Conclusion|ORI
+1 Fiery Impulse|ORI
+1 Fire Diamond|7ED
+1 Fireball|IMA
+1 First Response|M15
+1 Flames of the Firebrand|M14
+1 Fleshbag Marauder|ORI
+1 Fling|AKH
+1 Flinthoof Boar|EMA
+1 Force Spike|7ED
+1 Forsaken Sanctuary|M19
+1 Fortify|MM2
+1 Foul Orchard|M19
+1 Foundry Street Denizen|M15
+1 Frenzied Goblin|A25
+1 Frost Lynx|IMA
+1 Frost Titan|M12
+1 Garruk Wildspeaker|M11
+1 Garruk, Apex Predator|M15
+1 Gather the Pack|ORI
+1 Generator Servant|M15
+1 Genesis Hydra|IMA
+1 Ghirapur Gearcrafter|ORI
+1 Giant Growth|A25
+1 Gideon Jura|M12
+1 Gideon's Lawkeeper|MM3
+1 Gift of Paradise|M19
+1 Gilded Lotus|DOM
+1 Glacial Fortress|XLN
+1 Gladecover Scout|M14
+1 Glorious Anthem|10E
+1 Goblin Arsonist|M13
+1 Goblin Chieftain|M12
+1 Goblin Glory Chaser|ORI
+1 Goblin Grenade|M12
+1 Goblin Instigator|M19
+1 Goblin Kaboomist|M15
+1 Goblin King|10E
+1 Goblin Matron|7ED
+1 Goblin Piledriver|ORI
+1 Goblin Rabblemaster|M15
+1 Goblin Shortcutter|M14
+1 Goblin Trashmaster|M19
+1 Grand Abolisher|M12
+1 Grave Pact|10E
+1 Grave Titan|M12
+1 Graveblade Marauder|ORI
+1 Graveborn Muse|10E
+1 Gravedigger|M19
+1 Great Sable Stag|M10
+1 Greater Good|9ED
+1 Grim Lavamancer|M12
+1 Guttersnipe|M19
+1 Harm's Way|M10
+1 Hammer of Bogardan|8ED
+1 Hangarback Walker|ORI
+1 Harbinger of the Tides|ORI
+1 Heliod's Pilgrim|M15
+1 Hell's Caretaker|A25
+1 Heroic Reinforcements|M19
+1 Hieromancer's Cage|M19
+1 Highland Lake|M19
+1 Hoarding Dragon|IMA
+1 Honor of the Pure|M12
+1 Honored Hierarch|ORI
+1 Hornet Nest|M15
+1 Hornet Queen|M15
+1 Hurricane|10E
+1 Hushwing Gryff|M15
+1 Hypnotic Specter|M10
+1 Icy Manipulator|DOM
+1 Imposing Sovereign|M14
+1 Incinerate|M12
+1 Inferno|8ED
+1 Inferno Titan|M12
+1 Intruder Alarm|8ED
+1 Invoke the Divine|M19
+1 Isareth the Awakener|M19
+1 Jace Beleren|SS1
+1 Jace's Ingenuity|M15
+1 Jace's Mindseeker|M14
+1 Jace's Sanctum|ORI
+1 Jace, the Living Guildpact|M15
+1 Jace, Vryn's Prodigy|ORI
+1 Jade Mage|M12
+1 Joiner Adept|10E
+1 Kalonian Hydra|M14
+1 Karplusan Forest|10E
+1 Kird Ape|EMA
+1 Knight of Glory|M13
+1 Knight of Infamy|M13
+1 Knight of the White Orchid|ORI
+1 Krenko's Command|M13
+1 Krenko, Mob Boss|M13
+1 Kytheon, Hero of Akros|ORI
+1 Languish|ORI
+1 Leaf Gilder|ORI
+1 Leonin Warleader|M19
+1 Lhurgoyf|8ED
+1 Lifebane Zombie|M14
+1 Lightning Bolt|A25
+1 Lightning Strike|M19
+1 Liliana of the Dark Realms|M14
+1 Liliana Vess|M15
+1 Liliana's Contract|M19
+1 Liliana's Specter|M11
+1 Liliana, Heretical Healer|ORI
+1 Llanowar Elves|M19
+1 Llanowar Wastes|ORI
+1 Loxodon Warhammer|10E
+1 Loyal Sentry|A25
+1 Macabre Waltz|M19
+1 Magma Phoenix|M11
+1 Mana Leak|IMA
+1 Manalith|M19
+1 Manic Vandal|M12
+1 Marble Diamond|7ED
+1 March of the Machines|10E
+1 Mark of Mutiny|IMA
+1 Mark of the Vampire|XLN
+1 Master Decoy|9ED
+1 Master of the Wild Hunt|A25
+1 Memory Lapse|EMA
+1 Mentor of the Meek|M19
+1 Merfolk Looter|A25
+1 Mesa Enchantress|EMA
+1 Might of Oaks|M10
+1 Militia Bugler|M19
+1 Mind Control|M12
+1 Mind Shatter|MM3
+1 Mind Spring|M10
+1 Mind Stone|IMA
+1 Mindclaw Shaman|M13
+1 Mindslicer|9ED
+1 Mirror Image|M19
+1 Mitotic Slime|M11
+1 Mobilization|10E
+1 Mogg Fanatic|EMA
+1 Mogg Flunkies|A25
+1 Molten Birth|M14
+1 Mortivore|10E
+1 Moss Diamond|7ED
+1 Murder|M19
+1 Mutavault|M14
+1 Mutilate|M13
+1 Mystifying Maze|M11
+1 Nantuko Husk|ORI
+1 Nantuko Shade|M11
+1 Nature's Spiral|DOM
+1 Necromantic Summons|ORI
+1 Negate|SS1
+1 Nekrataal|EMA
+1 Nexus of Fate|M19
+1 Nicol Bolas, Planeswalker|M13
+1 Nicol Bolas, the Ravager|M19
+1 Nightmare|ORI
+1 Nightmare's Thirst|M19
+1 Nissa, Vastwood Seer|ORI
+1 Nissa, Worldwaker|M15
+1 Obelisk of Urd|M15
+1 Oblivion Ring|MM2
+1 Obstinate Baloth|IMA
+1 Ogre Battledriver|M14
+1 Opportunity|MM3
+1 Oppressive Rays|M15
+1 Ostracize|7ED
+1 Overgrowth|10E
+1 Overrun|M12
+1 Pacifism|A25
+1 Paragon of New Dawns|M15
+1 Pariah|10E
+1 Path of Bravery|IMA
+1 Peek|10E
+1 Peel from Reality|M15
+1 Pelakka Wurm|M19
+1 Pentavus|M12
+1 Perilous Vault|M15
+1 Phantasmal Image|MM3
+1 Phyrexian Arena|9ED
+1 Phyrexian Plaguelord|8ED
+1 Phyrexian Rager|IMA
+1 Phyrexian Revoker|M15
+1 Pia and Kiran Nalaar|ORI
+1 Pithing Needle|RTR
+1 Plague Mare|M19
+1 Platinum Angel|M11
+1 Plow Under|8ED
+1 Plummet|M19
+1 Polymorph|M10
+1 Ponder|M12
+1 Possessed Skaab|ORI
+1 Preordain|M11
+1 Prey Upon|GRN
+1 Priest of the Blood Rite|ORI
+1 Primeval Bounty|M14
+1 Primeval Titan|IMA
+1 Primordial Hydra|M13
+1 Prodigious Growth|M19
+1 Pyroclasm|A25
+1 Pyrotechnics|FRF
+1 Quag Sickness|M14
+1 Quicken|M14
+1 Quickling|M15
+1 Quicksilver Amulet|M12
+1 Rabid Bite|M19
+1 Raise Dead|9ED
+1 Raise the Alarm|EMA
+1 Rampant Growth|MM2
+1 Rancor|A25
+1 Ranger's Guile|M15
+1 Ratchet Bomb|M14
+1 Ravaging Blaze|ORI
+1 Ravenous Rats|M13
+1 Read the Bones|ORI
+1 Reassembling Skeleton|M19
+1 Reclamation Sage|M19
+1 Relic Seeker|ORI
+1 Remorseful Cleric|M19
+1 Remove Soul|10E
+1 Reprisal|JOU
+1 Resplendent Angel|M19
+1 Returned Centaur|ORI
+1 Revenant|ORI
+1 Reverberate|M13
+1 Rewind|MM3
+1 Rhox Faithmender|M13
+1 Righteousness|M10
+1 Rise from the Grave|M19
+1 Roaring Primadox|M15
+1 Rootbound Crag|XLN
+1 Rukh Egg|9ED
+1 Rune-Scarred Demon|IMA
+1 Rupture Spire|M19
+1 Safe Passage|M13
+1 Sai, Master Thopterist|M19
+1 Salvager of Secrets|M19
+1 Sands of Delirium|M13
+1 Sanguine Bond|IMA
+1 Satyr Enchanter|M19
+1 Satyr Wayfinder|M15
+1 Savannah Lions|A25
+1 Scab-Clan Berserker|ORI
+1 Scavenging Ooze|MM3
+1 Sculpting Steel|10E
+1 Scuttling Doom Engine|M15
+1 Searing Spear|M13
+1 Seedborn Muse|10E
+1 Sentinel of the Eternal Watch|ORI
+1 Serra Angel|DOM
+1 Serra Ascendant|IMA
+1 Serra Avatar|M13
+1 Shadowborn Demon|M14
+1 Shivan Dragon|M19
+1 Shivan Reef|ORI
+1 Shock|M19
+1 Shrapnel Blast|M15
+1 Siege-Gang Commander|DOM
+1 Sift|M19
+1 Sigil of the Empty Throne|ORI
+1 Sign in Blood|MM2
+1 Silklash Spider|M13
+1 Sisay's Ring|7ED
+1 Skilled Animator|M19
+1 Skinshifter|M12
+1 Sky Diamond|7ED
+1 Skyscanner|M19
+1 Sleep|M19
+1 Sleight of Hand|9ED
+1 Smallpox|M12
+1 Smash|10E
+1 Smash to Smithereens|ORI
+1 Solemn Simulacrum|M12
+1 Sorin Markov|M12
+1 Sorin's Vengeance|M12
+1 Soul of Innistrad|M15
+1 Soul of New Phyrexia|M15
+1 Soul of Ravnica|M15
+1 Soul of Shandalar|M15
+1 Soul of Theros|M15
+1 Soul of Zendikar|M15
+1 Soul Warden|MM3
+1 Soulblade Djinn|ORI
+1 Spectra Ward|M15
+1 Spelltwine|M13
+1 Sphinx of Uthuun|IMA
+1 Sphinx's Tutelage|ORI
+1 Spiketail Hatchling|10E
+1 Spirit Link|10E
+1 Squee, Goblin Nabob|MMA
+1 Stab Wound|M15
+1 Staff of Nin|M13
+1 Stampeding Wildebeests|10E
+1 Star Compass|IMA
+1 Steel Overseer|M11
+1 Stitcher's Supplier|M19
+1 Stoke the Flames|M15
+1 Stone Quarry|M19
+1 Stormblood Berserker|MM2
+1 Stormtide Leviathan|M15
+1 Strands of Night|7ED
+1 Sublime Archangel|M13
+1 Sulfurous Springs|10E
+1 Sun Titan|M12
+1 Sunken Hope|10E
+1 Sunpetal Grove|XLN
+1 Swift Reckoning|ORI
+1 Sword of the Animist|ORI
+1 Sword of Vengeance|M11
+1 Sylvan Ranger|MM3
+1 Talent of the Telepath|ORI
+1 Talons of Wildwood|M19
+1 Talrand's Invocation|M13
+1 Talrand, Sky Summoner|M13
+1 Telling Time|MM2
+1 Temple Bell|M11
+1 Tenacious Dead|M14
+1 Tendrils of Corruption|M10
+1 Terramorphic Expanse|MMA
+1 Terror|10E
+1 Tezzeret, Artifice Master|M19
+1 Thopter Engineer|ORI
+1 Thopter Spy Network|ORI
+1 Thorn Lieutenant|M19
+1 Thought Courier|9ED
+1 Thragtusk|MM3
+1 Threaten|10E
+1 Thud|M19
+1 Thundermaw Hellkite|IMA
+1 Tidebinder Mage|M14
+1 Time Stop|10E
+1 Time Warp|M10
+1 Timely Reinforcements|M12
+1 Topan Freeblade|IMA
+1 Torch Fiend|M15
+1 Tormenting Voice|M19
+1 Touch of Moonglove|ORI
+1 Tower Geist|ORI
+1 Trading Post|M14
+1 Treetop Bracers|10E
+1 Treetop Village|10E
+1 Triplicate Spirits|M15
+1 Triskelion|M11
+1 Troll Ascetic|10E
+1 True Believer|10E
+1 Trumpet Blast|M19
+1 Turn to Frog|ORI
+1 Twincast|M10
+1 Typhoid Rats|FRF
+1 Ulcerate|IMA
+1 Underground River|10E
+1 Undergrowth Scavenger|M15
+1 Unsummon|HOU
+1 Urborg, Tomb of Yawgmoth|M15
+1 Vampire Nighthawk|MM3
+1 Vengeful Pharaoh|M12
+1 Verdant Haven|M15
+1 Verduran Enchantress|9ED
+1 Vernal Bloom|8ED
+1 Veteran Swordsmith|M10
+1 Vine Trellis|8ED
+1 Viscera Seer|M11
+1 Vivien Reid|M19
+1 Volcanic Hammer|9ED
+1 Vryn Wingmare|ORI
+1 War Falcon|M13
+1 War Priest of Thune|EMA
+1 Warp World|M10
+1 Whirler Rogue|ORI
+1 Wild Growth|7ED
+1 Wildfire|MM2
+1 Windborn Muse|10E
+1 Wood Elves|9ED
+1 Woodland Bellower|ORI
+1 Woodland Stream|M19
+1 Wrath of God|EMA
+1 Xathrid Necromancer|M14
+1 Yavimaya Coast|ORI
+1 Yavimaya Enchantress|EMA
+1 Yeva, Nature's Herald|M13
+1 Young Pyromancer|EMA
+1 Zombie Infestation|M12
+1 Zombify|A25

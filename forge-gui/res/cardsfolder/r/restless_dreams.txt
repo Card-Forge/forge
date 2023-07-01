@@ -1,0 +1,7 @@
+Name:Restless Dreams
+ManaCost:B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ B Discard<X/Card/card(s)> | CostDesc$ As an additional cost to cast this spell, discard X cards. | Origin$ Graveyard | Destination$ Hand | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn | SpellDescription$ Return X target creature cards from your graveyard to your hand.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard X cards.\nReturn X target creature cards from your graveyard to your hand.

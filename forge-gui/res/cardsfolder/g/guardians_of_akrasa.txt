@@ -1,0 +1,7 @@
+Name:Guardians of Akrasa
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:0/4
+K:Defender
+K:Exalted
+Oracle:Defender (This creature can't attack.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

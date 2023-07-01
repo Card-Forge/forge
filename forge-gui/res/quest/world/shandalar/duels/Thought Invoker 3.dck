@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Thought Invoker 3
+Title=Thought Invoker
+Icon=ThoughtInvoker.jpg
+Difficulty=hard
+Description=Big Blue fliers and effects to impede opponent's progress.
+Deck Type=constructed
+[main]
+4 Air Elemental|LEB
+2 Control Magic|LEB
+3 Counterspell|LEB
+2 Energy Flux|4ED
+4 Ghost Ship|DRK
+4 Giant Tortoise|ARN
+22 Island|4ED
+2 Mahamoti Djinn|LEB
+4 Phantom Monster|LEB
+4 Power Sink|4ED
+4 Psychic Venom|LEB
+2 Time Elemental|LEG
+3 Unsummon|LEB
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Ever-Watching Threshold
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | TriggerZones$ Battlefield | AttackedTarget$ You,Planeswalker.YouCtrl | TriggerDescription$ Whenever an opponent attacks, if they attacked you and/or a planeswalker you control, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+Oracle:Whenever an opponent attacks, if they attacked you and/or a planeswalker you control, draw a card.

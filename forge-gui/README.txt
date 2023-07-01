@@ -1,0 +1,1 @@
+This file is automatically updated by our release bot on Discord, Blacksmith. It is created from the files present in the 'release-files' directory. Please do not hand-edit this file if using the bot to perform a release, as your changes will be overwritten.

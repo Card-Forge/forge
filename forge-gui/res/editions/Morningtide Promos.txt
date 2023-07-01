@@ -1,0 +1,10 @@
+[metadata]
+Code=PMOR
+Date=2008-02-01
+Name=Morningtide Promos
+Type=Promo
+ScryfallCode=PMOR
+
+[cards]
+60★ R Earwig Squad @Warren Mahy
+143★ R Door of Destinies @Rob Alexander

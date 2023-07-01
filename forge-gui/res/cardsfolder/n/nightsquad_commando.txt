@@ -1,0 +1,9 @@
+Name:Nightsquad Commando
+ManaCost:2 B
+Types:Creature Human Soldier
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you attacked this turn, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+DeckHas:Ability$Token
+Oracle:When Nightsquad Commando enters the battlefield, if you attacked this turn, create a 1/1 white Human Soldier creature token.

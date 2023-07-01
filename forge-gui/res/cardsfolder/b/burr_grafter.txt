@@ -1,0 +1,9 @@
+Name:Burr Grafter
+ManaCost:3 G
+Types:Creature Spirit
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+K:Soulshift:3
+AI:RemoveDeck:All
+DeckHints:Type$Spirit
+Oracle:Sacrifice Burr Grafter: Target creature gets +2/+2 until end of turn.\nSoulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)

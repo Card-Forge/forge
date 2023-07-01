@@ -1,0 +1,6 @@
+Name:Dwarven Driller
+ManaCost:3 R
+Types:Creature Dwarf
+PT:2/2
+A:AB$ Destroy | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | UnlessCost$ DamageYou<2> | SpellDescription$ Destroy target land unless its controller has CARDNAME deal 2 damage to them.
+Oracle:{T}: Destroy target land unless its controller has Dwarven Driller deal 2 damage to them.

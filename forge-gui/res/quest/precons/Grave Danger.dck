@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grave Danger
+Description=Turn your graveyard into a resource. The "Grave Danger" deck makes your opponents pay dearly for each card in your graveyard, leaving their creatures bruised and confused.
+Deck Type=constructed
+Set=TOR
+Image=grave_danger.jpg
+[main]
+2 Afflict|ODY
+3 Aquamoeba|TOR
+1 Balshan Collaborator|TOR
+1 Breakthrough|TOR
+2 Careful Study|ODY
+1 Cephalid Aristocrat|TOR
+1 Cephalid Broker|ODY
+1 Cephalid Illusionist|TOR
+2 Cephalid Looter|ODY
+1 Cephalid Vandal|TOR
+2 Chainer's Edict|TOR
+2 Churning Eddy|TOR
+2 Compulsion|TOR
+2 Crypt Creeper|ODY
+1 False Memories|TOR
+11 Island|ODY
+1 Morgue Theft|ODY
+2 Obsessive Search|TOR
+4 Organ Grinder|TOR
+1 Painbringer|ODY
+2 Psychatog|ODY
+1 Skywing Aven|TOR
+11 Swamp|ODY
+2 Tainted Isle|TOR
+1 Zombie Assassin|ODY
+[sideboard]

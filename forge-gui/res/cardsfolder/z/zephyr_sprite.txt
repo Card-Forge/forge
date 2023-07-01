@@ -1,0 +1,6 @@
+Name:Zephyr Sprite
+ManaCost:U
+Types:Creature Faerie
+PT:1/1
+K:Flying
+Oracle:Flying

@@ -1,0 +1,6 @@
+Name:Gigantomancer
+ManaCost:7 G
+Types:Creature Human Shaman
+PT:1/1
+A:AB$ Animate | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 7 | Toughness$ 7 | SpellDescription$ Target creature you control has base power and toughness 7/7 until end of turn.
+Oracle:{1}: Target creature you control has base power and toughness 7/7 until end of turn.

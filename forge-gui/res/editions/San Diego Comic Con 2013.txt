@@ -1,0 +1,13 @@
+[metadata]
+Code=PSDC
+Date=2013-07-18
+Name=San Diego Comic-Con 2013
+Type=Promo
+ScryfallCode=PSDC
+
+[cards]
+1★ M Ajani, Caller of the Pride @Steve Prescott
+60★ M Jace, Memory Adept @Steve Prescott
+102★ M Liliana of the Dark Realms @Steve Prescott
+132★ M Chandra, Pyromaster @Steve Prescott
+172★ M Garruk, Caller of Beasts @Steve Prescott

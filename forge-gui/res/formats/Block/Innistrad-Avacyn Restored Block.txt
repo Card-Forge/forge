@@ -1,0 +1,7 @@
+[format]
+Name:Innistrad-Avacyn Restored Block
+Type:Archived
+Subtype:Block
+Order:119
+Sets:ISD, AVR, DKA
+Banned:Intangible Virtue; Lingering Souls

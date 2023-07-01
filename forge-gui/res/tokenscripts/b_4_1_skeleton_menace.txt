@@ -1,0 +1,7 @@
+Name:Skeleton Token
+ManaCost:no cost
+Types:Creature Skeleton
+Colors:black
+PT:4/1
+K:Menace
+Oracle:Menace

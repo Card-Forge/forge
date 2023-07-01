@@ -1,0 +1,10 @@
+Name:Nadier's Nightblade
+ManaCost:2 B
+Types:Creature Elf Warrior
+PT:1/3
+T:Mode$ ChangesZone | ValidCard$ Card.token+YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a token you control leaves the battlefield, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+DeckNeeds:Ability$Token
+DeckHas:Ability$LifeGain
+Oracle:Whenever a token you control leaves the battlefield, each opponent loses 1 life and you gain 1 life.

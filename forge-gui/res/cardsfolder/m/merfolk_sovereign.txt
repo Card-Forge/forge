@@ -1,0 +1,10 @@
+Name:Merfolk Sovereign
+ManaCost:1 U U
+Types:Creature Merfolk Noble
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk creatures you control get +1/+1.
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.Merfolk | TgtPrompt$ Select target Merfolk creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target Merfolk creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Merfolk
+Oracle:Other Merfolk creatures you control get +1/+1.\n{T}: Target Merfolk creature can't be blocked this turn.

@@ -1,0 +1,8 @@
+Name:Silent Submersible
+ManaCost:U U
+Types:Artifact Vehicle
+PT:2/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Crew:2
+Oracle:Whenever Silent Submersible deals combat damage to a player or planeswalker, draw a card.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

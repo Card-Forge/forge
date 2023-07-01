@@ -1,0 +1,6 @@
+Name:Metamorphic Wurm
+ManaCost:3 G G
+Types:Creature Elephant Wurm
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | Condition$ Threshold | Description$ Threshold — CARDNAME gets +4/+4 as long as seven or more cards are in your graveyard.
+Oracle:Threshold — Metamorphic Wurm gets +4/+4 as long as seven or more cards are in your graveyard.

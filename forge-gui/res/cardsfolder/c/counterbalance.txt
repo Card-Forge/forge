@@ -1,0 +1,8 @@
+Name:Counterbalance
+ManaCost:U U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card.
+SVar:TrigReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionPresent$ Card.cmcEQX | ConditionDefined$ TriggeredCard | ConditionCompare$ GE1
+SVar:X:Count$TopOfLibraryCMC
+Oracle:Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card.

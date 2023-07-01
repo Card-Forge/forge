@@ -1,0 +1,6 @@
+Name:Makindi Aeronaut
+ManaCost:1 W
+Types:Creature Kor Scout Ally
+PT:1/3
+K:Flying
+Oracle:Flying

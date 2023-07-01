@@ -1,0 +1,8 @@
+Name:Defense of the Heart
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice CARDNAME, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle.
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 2
+SVar:X:PlayerCountOpponents$HighestValid Creature.YouCtrl
+Oracle:At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle.

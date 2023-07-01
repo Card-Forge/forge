@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Havok 3
+Title=Havok
+Difficulty=hard
+Description=WB Lifegain deck with Archangel of Thune, Ajani's Pridemate and Extort
+Icon=Havok.jpg
+Deck Type=constructed
+[main]
+1 Flagstones of Trokair
+4 Marsh Flats
+4 Polluted Delta
+6 Plains
+4 Scrubland
+1 Urborg, Tomb of Yawgmoth
+2 Swamp
+1 Mox Pearl
+1 Mox Jet
+3 Ajani's Pridemate
+4 Archangel of Thune
+1 Karlov of the Ghost Council
+1 Sorin, Lord of Innistrad
+4 Basilica Screecher
+4 Vampire Nighthawk
+4 Soul Warden
+4 Soul's Attendant
+3 Syndic of Tithes
+2 Thrull Parasite
+3 Tithe Drinker
+3 Vault Skirge
+[sideboard]

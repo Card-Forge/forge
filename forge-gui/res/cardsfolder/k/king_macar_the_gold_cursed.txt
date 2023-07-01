@@ -1,0 +1,10 @@
+Name:King Macar, the Gold-Cursed
+ManaCost:2 B B
+Types:Legendary Creature Human Noble
+PT:2/3
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may exile target creature. If you do, create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_gold_sac | TokenOwner$ You | TokenAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Inspired — Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")

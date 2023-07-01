@@ -1,0 +1,10 @@
+Name:Geology Enthusiast
+ManaCost:3 U U
+Types:Creature Human Artificer
+PT:2/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+A:AB$ Draw | Cost$ 6 | SubAbility$ DBCounter | SpellDescription$ Draw a card and put a +1/+1 counter on CARDNAME.
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:At the beginning of your end step, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n{6}: Draw a card and put a +1/+1 counter on Geology Enthusiast.

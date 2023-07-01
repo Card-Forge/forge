@@ -1,0 +1,6 @@
+Name:Nova Cleric
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/2
+A:AB$ DestroyAll | Cost$ 2 W T Sac<1/CARDNAME> | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+Oracle:{2}{W}, {T}, Sacrifice Nova Cleric: Destroy all enchantments.

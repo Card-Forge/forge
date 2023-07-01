@@ -1,0 +1,6 @@
+Name:Twinning Glass
+ManaCost:4
+Types:Artifact
+A:AB$ Play | Cost$ 1 T | Valid$ Card.nonLand+sharesNameWith ThisTurnCast | ValidZone$ Hand | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Optional$ True | SpellDescription$ You may cast a spell from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.
+AI:RemoveDeck:All
+Oracle:{1}, {T}: You may cast a spell from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.

@@ -1,0 +1,10 @@
+Name:Cyberdrive Awakener
+ManaCost:5 U
+Types:Artifact Creature Construct
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Artifact.Creature+YouCtrl+Other | AddKeyword$ Flying | Description$ Other artifact creatures you control have flying.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, until end of turn, each noncreature artifact you control becomes an artifact creature with base power and toughness 4/4.
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Artifact.nonCreature+YouCtrl | Types$ Artifact,Creature | Power$ 4 | Toughness$ 4
+DeckHints:Type$Artifact
+Oracle:Flying\nOther artifact creatures you control have flying.\nWhen Cyberdrive Awakener enters the battlefield, until end of turn, each noncreature artifact you control becomes an artifact creature with base power and toughness 4/4.

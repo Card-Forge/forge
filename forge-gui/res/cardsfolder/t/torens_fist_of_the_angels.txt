@@ -1,0 +1,9 @@
+Name:Torens, Fist of the Angels
+ManaCost:1 G W
+Types:Legendary Creature Human Cleric
+PT:2/2
+K:Training
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, create a 1/1 green and white Human Soldier creature token with training.
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_human_soldier_training
+DeckHas:Ability$Counters|Token
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever you cast a creature spell, create a 1/1 green and white Human Soldier creature token with training.

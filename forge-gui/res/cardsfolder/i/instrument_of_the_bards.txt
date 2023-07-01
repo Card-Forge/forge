@@ -1,0 +1,11 @@
+Name:Instrument of the Bards
+ManaCost:G
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ HARMONY | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Search your library for a creature card with mana value equal to the number of harmony counters on CARDNAME, reveal it, and put it into your hand. If that card is legendary, create a Treasure token. Then shuffle.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card.Legendary | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardCounters.HARMONY
+DeckHas:Ability$Token|Counters
+Oracle:At the beginning of your upkeep, you may put a harmony counter on Instrument of the Bards.\n{3}{G}, {T}: Search your library for a creature card with mana value equal to the number of harmony counters on Instrument of the Bards, reveal it, and put it into your hand. If that card is legendary, create a Treasure token. Then shuffle.

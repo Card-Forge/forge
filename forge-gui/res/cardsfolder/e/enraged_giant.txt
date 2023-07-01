@@ -1,0 +1,8 @@
+Name:Enraged Giant
+ManaCost:5 R
+Types:Creature Giant
+PT:4/4
+K:Improvise
+K:Trample
+K:Haste
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nTrample, haste

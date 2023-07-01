@@ -1,0 +1,7 @@
+Name:Siren Stormtamer
+ManaCost:U
+Types:Creature Siren Pirate Wizard
+PT:1/1
+K:Flying
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | TargetValidTargeting$ You,Creature.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell or ability that targets you or a creature you control.
+Oracle:Flying\n{U}, Sacrifice Siren Stormtamer: Counter target spell or ability that targets you or a creature you control.

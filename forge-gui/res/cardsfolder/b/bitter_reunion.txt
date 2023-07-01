@@ -1,0 +1,8 @@
+Name:Bitter Reunion
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw two cards.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 2
+A:AB$ PumpAll | Cost$ 1 Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+DeckHas:Ability$Discard|Sacrifice & Keyword$Haste
+Oracle:When Bitter Reunion enters the battlefield, you may discard a card. If you do, draw two cards.\n{1}, Sacrifice Bitter Reunion: Creatures you control gain haste until end of turn.

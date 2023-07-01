@@ -1,0 +1,11 @@
+Name:Teferi, Master of Time
+ManaCost:2 U U
+Types:Legendary Planeswalker Teferi
+Loyalty:3
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Activated.Loyalty | Caster$ You | Description$ You may activate loyalty abilities of CARDNAME on any player's turn any time you could cast an instant.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ Phases | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | IsCurse$ True | SpellDescription$ Target creature you don't control phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
+A:AB$ AddTurn | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumTurns$ 2 | SpellDescription$ Take two extra turns after this one.
+DeckHas:Ability$Discard
+Oracle:You may activate loyalty abilities of Teferi, Master of Time on any player's turn any time you could cast an instant.\n[+1]: Draw a card, then discard a card.\n[-3]: Target creature you don't control phases out. (Treat it and anything attached to it as though they don't exist until its controller's next turn.)\n[-10]: Take two extra turns after this one.

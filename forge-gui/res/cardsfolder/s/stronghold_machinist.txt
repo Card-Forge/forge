@@ -1,0 +1,7 @@
+Name:Stronghold Machinist
+ManaCost:2 U
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+AI:RemoveDeck:Random
+Oracle:{U}{U}, {T}, Discard a card: Counter target noncreature spell.

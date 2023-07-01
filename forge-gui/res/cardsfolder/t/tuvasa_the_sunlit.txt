@@ -1,0 +1,10 @@
+Name:Tuvasa the Sunlit
+ManaCost:G W U
+Types:Legendary Creature Merfolk Shaman
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast your first enchantment spell each turn, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:BuffedBy:Enchantment
+Oracle:Tuvasa the Sunlit gets +1/+1 for each enchantment you control.\nWhenever you cast your first enchantment spell each turn, draw a card.

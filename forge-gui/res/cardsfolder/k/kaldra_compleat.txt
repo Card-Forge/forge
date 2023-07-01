@@ -1,0 +1,10 @@
+Name:Kaldra Compleat
+ManaCost:7
+Types:Legendary Artifact Equipment
+K:Living Weapon
+K:Indestructible
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ First Strike & Trample & Indestructible & Haste | AddTrigger$ TrigDamageDone | Description$ Equipped creature gets +5/+5 and has first strike, trample, indestructible, haste, and "Whenever this creature deals combat damage to a creature, exile that creature."
+SVar:TrigDamageDone:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature deals combat damage to a creature, exile that creature.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
+K:Equip:7
+Oracle:Living weapon\nIndestructible\nEquipped creature gets +5/+5 and has first strike, trample, indestructible, haste, and "Whenever this creature deals combat damage to a creature, exile that creature."\nEquip {7}

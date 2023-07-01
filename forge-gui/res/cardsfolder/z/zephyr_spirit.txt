@@ -1,0 +1,7 @@
+Name:Zephyr Spirit
+ManaCost:5 U
+Types:Creature Spirit
+PT:0/6
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME blocks, return it to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
+Oracle:When Zephyr Spirit blocks, return it to its owner's hand.

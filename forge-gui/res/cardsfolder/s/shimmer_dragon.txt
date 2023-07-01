@@ -1,0 +1,10 @@
+Name:Shimmer Dragon
+ManaCost:4 U U
+Types:Creature Dragon
+PT:5/6
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE4 | Description$ As long as you control four or more artifacts, CARDNAME has hexproof.
+A:AB$ Draw | Cost$ tapXType<2/Artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Flying\nAs long as you control four or more artifacts, Shimmer Dragon has hexproof.\nTap two untapped artifacts you control: Draw a card.

@@ -1,0 +1,8 @@
+Name:Sylvan Hierophant
+ManaCost:1 G
+Types:Creature Human Cleric
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile CARDNAME, then return another target creature card from your graveyard to your hand.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ HierophantChange
+SVar:HierophantChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl
+Oracle:When Sylvan Hierophant dies, exile Sylvan Hierophant, then return another target creature card from your graveyard to your hand.

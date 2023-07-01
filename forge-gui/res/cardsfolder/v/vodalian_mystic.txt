@@ -1,0 +1,9 @@
+Name:Vodalian Mystic
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target instant or sorcery spell becomes the color of your choice.
+SVar:Animate:DB$ Animate | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell to change the color of | TgtZone$ Stack | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}: Target instant or sorcery spell becomes the color of your choice.

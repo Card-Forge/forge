@@ -1,0 +1,10 @@
+[metadata]
+Code=PTSP
+Date=2006-10-06
+Name=Time Spiral Promos
+Type=Promo
+ScryfallCode=PTSP
+
+[cards]
+179★ R Sudden Shock @Vance Kovacs
+259★ R Lotus Bloom @Christopher Rush

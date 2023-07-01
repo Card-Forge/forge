@@ -1,0 +1,8 @@
+Name:Mtenda Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ W T | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand and return target Griffin card from your graveyard to your hand. Activate only during your upkeep.
+SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Griffin.YouCtrl | TgtPrompt$ Select target Griffin from your graveyard | Origin$ Graveyard | Destination$ Hand
+Oracle:Flying\n{W}, {T}: Return Mtenda Griffin to its owner's hand and return target Griffin card from your graveyard to your hand. Activate only during your upkeep.

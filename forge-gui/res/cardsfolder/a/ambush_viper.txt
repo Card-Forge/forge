@@ -1,0 +1,7 @@
+Name:Ambush Viper
+ManaCost:1 G
+Types:Creature Snake
+PT:2/1
+K:Flash
+K:Deathtouch
+Oracle:Flash\nDeathtouch

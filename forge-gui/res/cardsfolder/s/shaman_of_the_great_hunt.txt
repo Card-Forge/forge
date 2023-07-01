@@ -1,0 +1,10 @@
+Name:Shaman of the Great Hunt
+ManaCost:3 R
+Types:Creature Orc Shaman
+PT:4/2
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Draw | Cost$ 2 UG UG | NumCards$ X | PrecostDesc$ Ferocious — | SpellDescription$ Draw a card for each creature with power 4 or greater you control.
+SVar:X:Count$Valid Creature.powerGE4+YouCtrl
+Oracle:Haste\nWhenever a creature you control deals combat damage to a player, put a +1/+1 counter on it.\nFerocious — {2}{G/U}{G/U}: Draw a card for each creature you control with power 4 or greater.

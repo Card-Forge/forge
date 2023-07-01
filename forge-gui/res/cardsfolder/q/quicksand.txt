@@ -1,0 +1,6 @@
+Name:Quicksand
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | NumAtt$ -1 | NumDef$ -2 | IsCurse$ True | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Target attacking creature without flying gets -1/-2 until end of turn.
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Quicksand: Target attacking creature without flying gets -1/-2 until end of turn.

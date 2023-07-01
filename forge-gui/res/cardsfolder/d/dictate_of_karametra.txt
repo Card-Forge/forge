@@ -1,0 +1,7 @@
+Name:Dictate of Karametra
+ManaCost:3 G G
+Types:Enchantment
+K:Flash
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+Oracle:Flash\nWhenever a player taps a land for mana, that player adds one mana of any type that land produced.

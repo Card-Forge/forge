@@ -1,0 +1,9 @@
+Name:Shipwreck Singer
+ManaCost:U B
+Types:Creature Siren
+PT:1/2
+K:Flying
+A:AB$ Effect | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | StaticAbilities$ MustAttack | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Target creature an opponent controls attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+A:AB$ PumpAll | Cost$ 1 B T | ValidCards$ Creature.attacking | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Attacking creatures get -1/-1 until end of turn.
+Oracle:Flying\n{1}{U}: Target creature an opponent controls attacks this turn if able.\n{1}{B}, {T}: Attacking creatures get -1/-1 until end of turn.

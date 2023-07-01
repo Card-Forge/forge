@@ -1,0 +1,10 @@
+Name:Unscythe, Killer of Kings
+ManaCost:U B B R
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike | Description$ Equipped creature gets +3/+3 and has first strike.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy Equipped | Execute$ UnscytheTrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
+SVar:UnscytheTrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ UnscytheDBToken
+SVar:UnscytheDBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ UnscytheDBCleanup
+SVar:UnscytheDBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Equipped creature gets +3/+3 and has first strike.\nWhenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.\nEquip {2}

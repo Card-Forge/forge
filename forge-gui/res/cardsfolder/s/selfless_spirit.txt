@@ -1,0 +1,7 @@
+Name:Selfless Spirit
+ManaCost:1 W
+Types:Creature Spirit Cleric
+PT:2/1
+K:Flying
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
+Oracle:Flying\nSacrifice Selfless Spirit: Creatures you control gain indestructible until end of turn.

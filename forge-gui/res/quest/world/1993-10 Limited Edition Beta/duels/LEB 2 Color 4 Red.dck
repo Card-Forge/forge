@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=LEB 2 Color: 4 Red
+Title=The Color Red
+Difficulty=medium
+Description=To become king of the Goblins, one must assassinate the previous king. Thus, only the most foolish seek positions of leadership.
+Icon=The Color Red.jpg
+Deck Type=constructed
+[Main]
+1 Black Lotus|LEB
+4 Black Vise|LEB
+2 Dragon Whelp|LEB
+1 Fireball|LEB
+4 Goblin Balloon Brigade|LEB
+4 Goblin King|LEB
+4 Ironclaw Orcs|LEB
+4 Juggernaut|LEB
+4 Lightning Bolt|LEB
+4 Mons's Goblin Raiders|LEB
+18 Mountain|LEB|1
+1 Mox Ruby|LEB
+4 Orcish Artillery|LEB
+1 Red Elemental Blast|LEB
+1 Shatter|LEB
+1 Sol Ring|LEB
+2 Winter Orb|LEB

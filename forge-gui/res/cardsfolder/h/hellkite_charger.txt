@@ -1,0 +1,11 @@
+Name:Hellkite Charger
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, you may pay {5}{R}{R}. If you do, untap all attacking creatures and after this phase, there is an additional combat phase.
+SVar:TrigUntap:AB$ UntapAll | Cost$ 5 R R | ValidCards$ Creature.attacking | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+SVar:PlayMain1:TRUE
+Oracle:Flying, haste\nWhenever Hellkite Charger attacks, you may pay {5}{R}{R}. If you do, untap all attacking creatures and after this phase, there is an additional combat phase.

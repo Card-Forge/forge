@@ -1,0 +1,8 @@
+Name:Accomplished Alchemist
+ManaCost:3 G
+Types:Creature Elf Druid
+PT:2/5
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of life you gained this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:{T}: Add one mana of any color.\n{T}: Add X mana of any one color, where X is the amount of life you gained this turn.

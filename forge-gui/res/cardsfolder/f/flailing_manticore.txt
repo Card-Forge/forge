@@ -1,0 +1,10 @@
+Name:Flailing Manticore
+ManaCost:3 R
+Types:Creature Manticore
+PT:3/3
+K:Flying
+K:First Strike
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self | Activator$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | Defined$ Self | Activator$ Player | IsCurse$ True | SpellDescription$ CARDNAME gets -1/-1 until end of turn. Any player may activate this ability.
+AI:RemoveDeck:All
+Oracle:Flying, first strike\n{1}: Flailing Manticore gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Manticore gets -1/-1 until end of turn. Any player may activate this ability.

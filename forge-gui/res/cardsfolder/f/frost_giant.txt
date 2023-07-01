@@ -1,0 +1,6 @@
+Name:Frost Giant
+ManaCost:3 R R R
+Types:Creature Giant
+PT:4/4
+K:Rampage:2
+Oracle:Rampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)

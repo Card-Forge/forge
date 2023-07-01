@@ -1,0 +1,6 @@
+Name:Concordia Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+PT:1/3
+K:Flying
+Oracle:Flying

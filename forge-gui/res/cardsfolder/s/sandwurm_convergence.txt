@@ -1,0 +1,8 @@
+Name:Sandwurm Convergence
+ManaCost:6 G G
+Types:Enchantment
+S:Mode$ CantAttack | ValidCard$ Creature.withFlying | Target$ You,Planeswalker.YouCtrl | Description$ Creatures with flying can't attack you or planeswalkers you control.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 5/5 green Wurm creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_wurm | TokenOwner$ TriggeredPlayer
+DeckHas:Ability$Token
+Oracle:Creatures with flying can't attack you or planeswalkers you control.\nAt the beginning of your end step, create a 5/5 green Wurm creature token.

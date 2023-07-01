@@ -1,0 +1,12 @@
+Name:Celestine, the Living Saint
+ManaCost:4 W
+Types:Legendary Creature Human Warrior
+PT:3/4
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Healing Tears — At the beginning of your end step, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX+YouOwn | TgtPrompt$ Select target creature card with mana value X or less | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Graveyard
+DeckHints:Ability$LifeGain
+Oracle:Flying, lifelink\nHealing Tears — At the beginning of your end step, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.

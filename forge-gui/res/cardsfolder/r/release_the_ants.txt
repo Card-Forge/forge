@@ -1,0 +1,7 @@
+Name:Release the Ants
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBClash | SpellDescription$ CARDNAME deals 1 damage to any target. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
+SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand
+Oracle:Release the Ants deals 1 damage to any target. Clash with an opponent. If you win, return Release the Ants to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

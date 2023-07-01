@@ -1,0 +1,7 @@
+Name:Vedalken Humiliator
+ManaCost:3 U
+Types:Creature Vedalken Wizard
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Metalcraft$ True | TriggerDescription$ Metalcraft Whenever CARDNAME attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn.
+SVar:TrigPump:DB$ AnimateAll | ValidCards$ Creature.OppCtrl | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | IsCurse$ True
+Oracle:Metalcraft — Whenever Vedalken Humiliator attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn.

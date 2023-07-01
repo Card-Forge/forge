@@ -1,0 +1,7 @@
+Name:Akki Blizzard-Herder
+ManaCost:1 R
+Types:Creature Goblin Shaman
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, each player sacrifices a land.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ Player
+Oracle:When Akki Blizzard-Herder dies, each player sacrifices a land.

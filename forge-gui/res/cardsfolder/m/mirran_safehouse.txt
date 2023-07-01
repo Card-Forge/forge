@@ -1,0 +1,6 @@
+Name:Mirran Safehouse
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Land | GainsAbilitiesOfZones$ Graveyard | Description$ As long as CARDNAME is on the battlefield, it has all activated abilities of all land cards in all graveyards.
+DeckHints:Ability$Graveyard
+Oracle:As long as Mirran Safehouse is on the battlefield, it has all activated abilities of all land cards in all graveyards.

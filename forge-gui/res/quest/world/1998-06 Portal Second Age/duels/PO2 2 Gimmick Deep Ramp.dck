@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Deep Ramp
+Title=Deep Ramp
+Difficulty=medium
+Description="Every seed planted is another lesson the forest can teach us."\n-Arathel, elvish queen
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Denizen of the Deep|PO2
+4 False Summoning|PO2
+10 Forest|PO2|2
+2 Hurricane|PO2
+16 Island|PO2|2
+4 Nature's Lore|PO2
+4 Temporal Manipulation|PO2
+4 Time Ebb|PO2
+4 Touch of Brilliance|PO2
+4 Undo|PO2
+4 Untamed Wilds|PO2

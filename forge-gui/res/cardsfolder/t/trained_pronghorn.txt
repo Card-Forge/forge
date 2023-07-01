@@ -1,0 +1,6 @@
+Name:Trained Pronghorn
+ManaCost:1 W
+Types:Creature Antelope
+PT:1/1
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all damage that would be dealt to CARDNAME this turn.
+Oracle:Discard a card: Prevent all damage that would be dealt to Trained Pronghorn this turn.

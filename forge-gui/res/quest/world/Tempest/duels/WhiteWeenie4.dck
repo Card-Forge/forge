@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Title=Knight of Dawn
+Icon=Dungeon Crawling White.jpg
+Difficulty=very hard
+Description=White weenie
+Deck Type=constructed
+Name=WhiteWeenie4
+[Main]
+4 Cursed Scroll|TMP
+1 Disenchant|TMP
+3 Flickering Ward|TMP
+1 Gerrard's Battle Cry|TMP
+4 Knight of Dawn|TMP
+1 Master Decoy|TMP
+2 Paladin en-Vec|EXO
+6 Plains|TMP|1
+5 Plains|TMP|2
+6 Plains|TMP|3
+6 Plains|TMP|4
+3 Soltari Champion|STH
+4 Soltari Monk|TMP
+4 Soltari Priest|TMP
+4 Soltari Trooper|TMP
+2 Soul Warden|EXO
+4 Warrior en-Kor|STH

@@ -1,0 +1,6 @@
+Name:Wall of Heat
+ManaCost:2 R
+Types:Creature Wall
+PT:2/6
+K:Defender
+Oracle:Defender (This creature can't attack.)

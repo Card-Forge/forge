@@ -1,0 +1,9 @@
+[metadata]
+Code=PDTP
+Date=2009-01-01
+Name=Duels of the Planeswalkers 2009 Promos
+Type=Promo
+ScryfallCode=PDTP
+
+[cards]
+1 M Garruk Wildspeaker @Nils Hamm

@@ -1,0 +1,35 @@
+[quest]
+id=4005
+OpponentName=Aurelia
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Sacred Foundry|RAV
+Credit Reward=200
+AIExtras=Assemble the Legion
+[metadata]
+Name=quest4005
+Title=Aurelia
+Difficulty=hard
+Description=Ein, Zwei, Polizei
+Icon=Aurelia.jpg
+Deck Type=constructed
+[main]
+2 Angel of Serenity|RTR
+4 Boros Guildgate|GTC
+4 Concordia Pegasus|RTR
+4 Faith's Fetters|RAV
+3 Firemane Angel|RAV
+2 Foundry Champion|GTC
+4 Lightning Helix|RAV
+2 Seal of Fire|DIS
+4 Mizzium Mortars|RTR
+8 Mountain|RTR
+8 Plains|RTR
+4 Sacred Foundry|GTC
+4 Stoic Ephemera|DIS
+3 Sunhome Guildmage|GTC
+4 Wakestone Gargoyle|DIS
+[sideboard]
+[planes]
+[schemes]

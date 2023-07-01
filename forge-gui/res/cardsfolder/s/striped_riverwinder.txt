@@ -1,0 +1,7 @@
+Name:Striped Riverwinder
+ManaCost:6 U
+Types:Creature Serpent
+PT:5/5
+K:Hexproof
+K:Cycling:U
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nCycling {U} ({U}, Discard this card: Draw a card.)

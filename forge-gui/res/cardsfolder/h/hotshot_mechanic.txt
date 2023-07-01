@@ -1,0 +1,7 @@
+Name:Hotshot Mechanic
+ManaCost:W
+Types:Artifact Creature Fox Pilot
+PT:2/1
+S:Mode$ CrewValue | ValidCard$ Card.Self | Value$ 2 | Description$ CARDNAME crews Vehicles as though its power were 2 greater.
+DeckHints:Type$Vehicle
+Oracle:Hotshot Mechanic crews Vehicles as though its power were 2 greater.

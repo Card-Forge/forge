@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=ICE 2 Color: 3BRG Misfortune
+Title=Misfortune
+Difficulty=medium
+Description=Misfortune awaits those who dare venture forth.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Agent of Stromgald|ALL|1
+1 Agent of Stromgald|ALL|2
+4 Balduvian Dead|ALL
+4 Centaur Archer|ICE
+2 Earthlink|ICE
+2 Forest|ICE|2
+2 Forest|ICE|3
+2 Fumarole|ICE
+4 Giant Trap Door Spider|ICE
+4 Karplusan Forest|ICE
+4 Misfortune|ALL
+1 Monsoon|ICE
+2 Mountain|ICE|1
+4 Mountain|ICE|2
+2 Mountain|ICE|3
+2 Orcish Healer|ICE
+3 Shambling Strider|ICE
+4 Soul Burn|ICE
+2 Stormbind|ICE
+4 Sulfurous Springs|ICE
+2 Swamp|ICE|2
+2 Swamp|ICE|3
+2 Tinder Wall|ICE

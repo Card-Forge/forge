@@ -1,0 +1,6 @@
+Name:Wasp Lancer
+ManaCost:UB UB UB
+Types:Creature Faerie Soldier
+PT:3/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,7 @@
+Name:Marauding Maulhorn
+ManaCost:2 R R
+Types:Creature Beast
+PT:5/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | IsPresent$ Card.namedAdvocate of the Beast+YouCtrl | PresentCompare$ EQ0 | Description$ CARDNAME attacks each combat if able unless you control a creature named Advocate of the Beast.
+DeckHints:Name$Advocate of the Beast
+Oracle:Marauding Maulhorn attacks each combat if able unless you control a creature named Advocate of the Beast.

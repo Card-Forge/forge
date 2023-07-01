@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=HML 3 Color: 1 Hazduhr the Abbot
+Title=Hazduhr the Abbot
+Difficulty=hard
+Description="Soon, Serra will return and choose the Abbot's successor, else we are lost." -Gulsen, Abbey Matron
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Abbey Gargoyles|HML
+2 Aysen Bureaucrats|HML|1
+2 Aysen Bureaucrats|HML|2
+4 Ebony Rhino|HML
+2 Mesa Falcon|HML|1
+2 Mesa Falcon|HML|2
+24 Plains|LEB|1
+4 Prophecy|HML
+1 Rashka the Slayer|HML
+2 Roterothopter|HML
+1 Samite Alchemist|HML|1
+1 Samite Alchemist|HML|2
+2 Serra Aviary|HML
+4 Serra Paladin|HML
+4 Serrated Arrows|HML
+1 Soraya the Falconer|HML

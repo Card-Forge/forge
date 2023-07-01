@@ -1,0 +1,9 @@
+Name:Demonic Taskmaster
+ManaCost:2 B
+Types:Creature Demon
+PT:4/3
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other
+AI:RemoveDeck:Random
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice a creature other than Demonic Taskmaster.

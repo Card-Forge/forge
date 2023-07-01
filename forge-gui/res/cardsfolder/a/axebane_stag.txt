@@ -1,0 +1,5 @@
+Name:Axebane Stag
+ManaCost:6 G
+Types:Creature Elk
+PT:6/7
+Oracle:

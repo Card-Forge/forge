@@ -1,0 +1,9 @@
+Name:Myojin of Grim Betrayal
+ManaCost:5 B B B
+Types:Legendary Creature Spirit
+PT:5/2
+K:etbCounter:Indestructible:1:CheckSVar$ FromHand:CARDNAME enters the battlefield with an indestructible counter on it if you cast it from your hand.
+SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
+A:AB$ ChangeZone | Cost$ SubCounter<1/Indestructible> | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.ThisTurnEntered | GainControl$ True | SpellDescription$ Put onto the battlefield under your control all creature cards in all graveyards that were put there from anywhere this turn.
+DeckHas:Ability$Graveyard
+Oracle:Myojin of Grim Betrayal enters the battlefield with an indestructible counter on it if you cast it from your hand.\nRemove an indestructible counter from Myojin of Grim Betrayal: Put onto the battlefield under your control all creature cards in all graveyards that were put there from anywhere this turn.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #05
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/03/169.-KHM5-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no mana available and no cards in hand.
+[state]
+humanlife=4
+ailife=56
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Shatterskull Smashing;Moritte of the Frost;Primal Might;Chandra's Incinerator
+humanbattlefield=Ilysian Caryatid;Toralf, God of Fury;Calamity Bearer;Temple of Abandon|NoETBTrigs;Temple of Abandon|NoETBTrigs;Temple of Abandon|NoETBTrigs;Temple of Epiphany|NoETBTrigs;Temple of Epiphany|NoETBTrigs
+aibattlefield=Charix, the Raging Isle;Syr Elenora, the Discerning;Valkyrie Harbinger

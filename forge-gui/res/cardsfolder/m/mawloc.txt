@@ -1,0 +1,10 @@
+Name:Mawloc
+ManaCost:X R G
+Types:Creature Tyranid
+PT:2/2
+K:Ravenous
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ Terror from the Deep — When CARDNAME enters the battlefield, it fights up to one target creature an opponent controls. If that creature would die this turn, exile it instead.
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | ReplaceDyingDefined$ Targeted
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTerror from the Deep — When Mawloc enters the battlefield, it fights up to one target creature an opponent controls. If that creature would die this turn, exile it instead.

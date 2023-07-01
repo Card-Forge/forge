@@ -1,0 +1,7 @@
+Name:Jawbone Skulkin
+ManaCost:1
+Types:Artifact Creature Scarecrow
+PT:1/1
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Red | TgtPrompt$ Select target red creature | KW$ Haste | SpellDescription$ Target red creature gains haste until end of turn.
+DeckNeeds:Color$Red
+Oracle:{2}: Target red creature gains haste until end of turn.

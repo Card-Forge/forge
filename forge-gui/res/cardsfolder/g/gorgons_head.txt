@@ -1,0 +1,6 @@
+Name:Gorgon's Head
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Description$ Equipped creature has deathtouch.
+Oracle:Equipped creature has deathtouch.\nEquip {2}

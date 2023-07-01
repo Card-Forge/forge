@@ -1,0 +1,9 @@
+Name:Shimmering Efreet
+ManaCost:2 U
+Types:Creature Efreet
+PT:2/2
+K:Flying
+K:Phasing
+T:Mode$ PhaseIn | ValidCard$ Card.Self | Execute$ TrigWarp | TriggerDescription$ Whenever CARDNAME phases in, target creature phases out.
+SVar:TrigWarp:DB$ Phases | ValidTgts$ Creature | SpellDescription$ Target creature phases out.
+Oracle:Flying\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nWhenever Shimmering Efreet phases in, target creature phases out. (It phases in before its controller untaps during their next untap step.)

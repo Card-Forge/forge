@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 3 Color: 2 Blue
+Title=The Color Blue
+Difficulty=hard
+Description=Doing something at the last minute isn't so bad when you can make that minute last.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|PO2
+4 Apprentice Sorcerer|PO2
+4 False Summoning|PO2
+24 Island|PO2|1
+4 Mystic Denial|PO2
+2 Remove|PO2
+4 Screeching Drake|PO2
+4 Sea Drake|PO2
+2 Temporal Manipulation|PO2
+4 Time Ebb|PO2
+4 Undo|PO2

@@ -1,0 +1,7 @@
+Name:Henge of Ramos
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 2 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{2}, {T}: Add one mana of any color.

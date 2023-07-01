@@ -1,0 +1,7 @@
+Name:Scuttling Butler
+ManaCost:3
+Types:Artifact Creature Construct
+PT:4/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.MultiColor+YouCtrl | PresentCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you control two or more multicolored permanents, CARDNAME gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+Oracle:At the beginning of combat on your turn, if you control two or more multicolored permanents, Scuttling Butler gains double strike until end of turn.

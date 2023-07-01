@@ -1,0 +1,7 @@
+Name:Murk Dwellers
+ManaCost:3 B
+Types:Creature Zombie
+PT:2/2
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it gets +2/+0 until end of combat.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | Duration$ UntilEndOfCombat
+Oracle:Whenever Murk Dwellers attacks and isn't blocked, it gets +2/+0 until end of combat.

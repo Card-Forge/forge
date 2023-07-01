@@ -1,0 +1,10 @@
+Name:Nissa, Voice of Zendikar
+ManaCost:1 G G
+Types:Legendary Planeswalker Nissa
+Loyalty:3
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_0_1_plant | SpellDescription$ Create a 0/1 green Plant creature token.
+A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+A:AB$ GainLife | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the number of lands you control.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:[+1]: Create a 0/1 green Plant creature token.\n[-2]: Put a +1/+1 counter on each creature you control.\n[-7]: You gain X life and draw X cards, where X is the number of lands you control.

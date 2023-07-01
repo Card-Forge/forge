@@ -1,0 +1,7 @@
+Name:Moon-Eating Dog
+ManaCost:3 U
+Types:Creature Dog
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Planeswalker.Yanling+YouCtrl | Description$ As long as you control a Yanling planeswalker, CARDNAME has flying.
+SVar:BuffedBy:Yanling
+Oracle:As long as you control a Yanling planeswalker, Moon-Eating Dog has flying. (It can't be blocked except by creatures with flying or reach.)

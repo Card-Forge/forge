@@ -1,0 +1,23 @@
+Name:Hermit of the Natterknolls
+ManaCost:2 G
+Types:Creature Human Werewolf
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell during your turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Whenever an opponent casts a spell during your turn, draw a card.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Hermit of the Natterknolls.
+
+ALTERNATE
+
+Name:Lone Wolf of the Natterknolls
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:3/5
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell during your turn, draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Whenever an opponent casts a spell during your turn, draw two cards.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Lone Wolf of the Natterknolls.

@@ -1,0 +1,6 @@
+Name:Vampire Champion
+ManaCost:3 B
+Types:Creature Vampire Soldier
+PT:3/3
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

@@ -1,0 +1,12 @@
+Name:Malcolm, Keen-Eyed Navigator
+ManaCost:2 U
+Types:Legendary Creature Siren Pirate
+PT:2/2
+K:Flying
+K:Partner
+T:Mode$ DamageAll | ValidSource$ Pirate.YouCtrl+inZoneBattlefield | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more Pirates you control deal damage to your opponents, you create a Treasure token for each opponent dealt damage. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:TriggeredPlayersTargets$Amount
+DeckHints:Type$Pirate
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever one or more Pirates you control deal damage to your opponents, you create a Treasure token for each opponent dealt damage. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nPartner (You can have two commanders if both have partner.)

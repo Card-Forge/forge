@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Elrond 3
+Title=Elrond
+Difficulty=hard
+Description=RGW Aura deck with Aura Gnarlid, Uril, the Miststalker and Kor Spiritdancer
+Icon=Elrond.jpg
+Deck Type=constructed
+[main]
+1 Plains|M12
+1 Forest|M12
+4 Savannah
+4 Graypelt Refuge
+4 Windswept Heath
+4 Jungle Shrine
+1 Taiga
+1 Plateau
+1 Mox Emerald
+1 Mox Pearl
+2 Winds of Rath
+2 Swords to Plowshares
+2 Lightning Helix
+4 Aura Gnarlid
+3 Kor Spiritdancer
+3 Uril, the Miststalker
+1 Eidolon of Countless Battles
+1 Gatherer of Graces
+1 Krond the Dawn-Clad
+1 Thran Golem
+1 Troll Ascetic
+1 Silhana Ledgewalker
+1 Bassara Tower Archer
+3 Rancor
+2 Ethereal Armor
+1 Dust Corona
+1 Hyena Umbra
+1 Spider Umbra
+1 Armadillo Cloak
+1 Unquestioned Authority
+1 Fencer's Magemark
+1 Ancestral Mask
+1 Canopy Cover
+1 Angelic Destiny
+1 Madcap Skills
+[sideboard]

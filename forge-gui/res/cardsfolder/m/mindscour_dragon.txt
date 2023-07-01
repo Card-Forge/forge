@@ -1,0 +1,8 @@
+Name:Mindscour Dragon
+ManaCost:4 U U
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, target player mills four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
+Oracle:Flying\nWhenever Mindscour Dragon deals combat damage to an opponent, target player mills four cards.

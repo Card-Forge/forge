@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PTK 1 Theme Deck: Shu Kingdom
+Title=Theme Deck: Shu Kingdom
+Difficulty=easy
+Description="Shu Kingdom is a well-balanced deck that features many of the famous heroes from the Three Kingdoms story."\n(Portal Three Kingdoms Theme Deck)
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Flanking Troops|PTK
+1 Guan Yu, Sainted Warrior|PTK
+1 Kongming, "Sleeping Dragon"|PTK
+1 Liu Bei, Lord of Shu|PTK
+2 Misfortune's Gain|PTK
+15 Plains|PTK|1
+3 Shu Cavalry|PTK
+2 Shu Farmer|PTK
+3 Shu Foot Soldiers|PTK
+2 Shu General|PTK
+2 Shu Grain Caravan|PTK
+2 Vengeance|PTK
+2 Virtuous Charge|PTK
+2 Volunteer Militia|PTK

@@ -1,0 +1,5 @@
+Name:Moriok Reaver
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:3/2
+Oracle:

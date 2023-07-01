@@ -1,0 +1,7 @@
+Name:Sphinx's Herald
+ManaCost:U
+Types:Artifact Creature Vedalken Wizard
+PT:1/1
+A:AB$ ChangeZone | Cost$ 2 U T Sac<1/Creature.White> Sac<1/Creature.Blue> Sac<1/Creature.Black> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedSphinx Sovereign | ChangeNum$ 1 | CostDesc$ {2}{U}, {T}, Sacrifice a white creature, a blue creature, and a black creature: | SpellDescription$ Search your library for a card named Sphinx Sovereign, put it onto the battlefield, then shuffle.
+DeckHints:Name$Sphinx Sovereign & Color$White|Black
+Oracle:{2}{U}, {T}, Sacrifice a white creature, a blue creature, and a black creature: Search your library for a card named Sphinx Sovereign, put it onto the battlefield, then shuffle.

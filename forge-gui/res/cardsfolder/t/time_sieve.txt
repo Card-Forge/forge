@@ -1,0 +1,6 @@
+Name:Time Sieve
+ManaCost:U B
+Types:Artifact
+A:AB$ AddTurn | Cost$ T Sac<5/Artifact> | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice five artifacts: Take an extra turn after this one.

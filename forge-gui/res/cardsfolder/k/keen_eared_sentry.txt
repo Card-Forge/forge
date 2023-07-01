@@ -1,0 +1,7 @@
+Name:Keen-Eared Sentry
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+S:Mode$ CantVenture | ValidPlayer$ Opponent.VenturedThisTurn | Description$ Each opponent can't venture into the dungeon more than once each turn.
+Oracle:You have hexproof. (You can't be the target of spells or abilities your opponents control.)\nEach opponent can't venture into the dungeon more than once each turn.

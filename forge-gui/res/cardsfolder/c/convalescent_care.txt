@@ -1,0 +1,7 @@
+Name:Convalescent Care
+ManaCost:1 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | LifeTotal$ You | LifeAmount$ LE5 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have 5 life or less, you gain 3 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.

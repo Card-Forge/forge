@@ -1,0 +1,8 @@
+Name:Kargan Dragonrider
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Dragon.YouCtrl | Description$ As long as you control a Dragon, CARDNAME has flying. (It can't be blocked except by creatures with flying or reach.)
+SVar:BuffedBy:Dragon
+DeckHints:Type$Dragon
+Oracle:As long as you control a Dragon, Kargan Dragonrider has flying. (It can't be blocked except by creatures with flying or reach.)

@@ -1,0 +1,7 @@
+Name:Goblin Balloon Brigade
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+A:AB$ Pump | Cost$ R | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+DeckHas:Keyword$Flying
+Oracle:{R}: Goblin Balloon Brigade gains flying until end of turn.

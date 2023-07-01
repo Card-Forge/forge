@@ -1,0 +1,9 @@
+Name:O-Kagachi, Vengeful Kami
+ManaCost:1 W U B R G
+Types:Legendary Creature Dragon Spirit
+PT:6/6
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.attackedYouTheirLastTurn | Execute$ TrigExile | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+ControlledBy TriggeredTarget | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
+Oracle:Flying, trample\nWhenever O-Kagachi, Vengeful Kami deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls.

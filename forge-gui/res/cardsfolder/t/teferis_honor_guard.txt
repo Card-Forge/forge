@@ -1,0 +1,7 @@
+Name:Teferi's Honor Guard
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Phases | Cost$ U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{U}{U}: Teferi's Honor Guard phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

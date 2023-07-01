@@ -1,0 +1,9 @@
+Name:Deathcap Cultivator
+ManaCost:1 G
+Types:Creature Human Druid
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | Condition$ Delirium | Description$ Delirium — CARDNAME has deathtouch as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:{T}: Add {B} or {G}.\nDelirium — Deathcap Cultivator has deathtouch as long as there are four or more card types among cards in your graveyard.

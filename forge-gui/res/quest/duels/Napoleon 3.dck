@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Napoleon 3
+Title=Napoleon
+Difficulty=hard
+Description=WBG Wall deck with Rolling Stones and Doran, the Siege Tower
+Icon=Napoleon.jpg
+Deck Type=constructed
+[main]
+1 Sandsteppe Citadel
+3 Angelic Wall
+1 Mox Emerald
+1 Swamp|M11
+4 Shield Sphere
+1 Plains|M11
+2 Stalwart Shield-Bearers
+1 Darksteel Ingot
+4 Rolling Stones
+1 Forest|M11
+3 Scrubland
+4 Windswept Heath
+1 Mox Pearl
+2 Perimeter Captain
+4 Bayou
+2 Vindicate
+1 Convalescent Care
+2 Phyrexian Walker
+4 Wall of Blossoms
+1 Convalescence
+3 Savannah
+1 Vine Trellis
+1 Mox Jet
+3 Doran, the Siege Tower
+1 Wall of Ice
+3 Wall of Omens
+1 Wall of Vines
+1 Wall of Reverence
+3 Retribution of the Meek
+[sideboard]

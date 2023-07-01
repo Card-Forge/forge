@@ -1,0 +1,10 @@
+Name:Soul-Scar Mage
+ManaCost:R
+Types:Creature Human Wizard
+PT:1/2
+K:Prowess
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Creature.OppCtrl | ReplaceWith$ Counters | IsCombat$ False | ExecuteMode$ PerTarget | Description$ If a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.
+SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ M1M1 | CounterNum$ X
+SVar:X:ReplaceCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Prowess\nIf a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.

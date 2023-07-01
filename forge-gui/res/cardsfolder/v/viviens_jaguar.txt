@@ -1,0 +1,8 @@
+Name:Vivien's Jaguar
+ManaCost:2 G
+Types:Creature Cat Spirit
+PT:3/2
+K:Reach
+A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | IsPresent$ Planeswalker.Vivien+YouCtrl | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only if you control a Vivien planeswalker.
+DeckHints:Type$Vivien
+Oracle:Reach (This creature can block creatures with flying.)\n{2}{G}: Return Vivien's Jaguar from your graveyard to your hand. Activate only if you control a Vivien planeswalker.

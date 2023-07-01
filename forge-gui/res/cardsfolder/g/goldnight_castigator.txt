@@ -1,0 +1,11 @@
+Name:Goldnight Castigator
+ManaCost:2 R R
+Types:Creature Angel
+PT:4/9
+K:Flying
+K:Haste
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ You | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to you, it deals double that damage to you instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Card.Self | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:Flying, haste\nIf a source would deal damage to you, it deals double that damage to you instead.\nIf a source would deal damage to Goldnight Castigator, it deals double that damage to Goldnight Castigator instead.

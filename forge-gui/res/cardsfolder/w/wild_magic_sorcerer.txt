@@ -1,0 +1,9 @@
+Name:Wild-Magic Sorcerer
+ManaCost:3 R
+Types:Creature Orc Shaman
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.YouCtrl+wasCastFromExile | AffectedZone$ Stack | AddKeyword$ Cascade | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ The first spell you cast from exile each turn has cascade.
+SVar:Y:Count$ThisTurnCast_Card.YouCtrl+wasCastFromExile
+DeckNeeds:Keyword$Cascade
+AI:RemoveDeck:Random
+Oracle:The first spell you cast from exile each turn has cascade. (When you cast your first spell from exile, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

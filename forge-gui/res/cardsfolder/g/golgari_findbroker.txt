@@ -1,0 +1,7 @@
+Name:Golgari Findbroker
+ManaCost:B B G G
+Types:Creature Elf Shaman
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl
+Oracle:When Golgari Findbroker enters the battlefield, return target permanent card from your graveyard to your hand.

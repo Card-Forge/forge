@@ -1,0 +1,6 @@
+Name:Tooth and Claw
+ManaCost:3 R
+Types:Enchantment
+A:AB$ Token | Cost$ Sac<2/Creature> | TokenAmount$ 1 | TokenScript$ carnivore | TokenOwner$ You | SpellDescription$ Create a 3/1 red Beast creature token named Carnivore.
+AI:RemoveDeck:Random
+Oracle:Sacrifice two creatures: Create a 3/1 red Beast creature token named Carnivore.

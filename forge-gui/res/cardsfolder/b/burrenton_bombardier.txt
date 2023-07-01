@@ -1,0 +1,9 @@
+Name:Burrenton Bombardier
+ManaCost:2 W
+Types:Creature Kithkin Soldier
+PT:2/2
+K:Flying
+K:Reinforce:2:2 W
+DeckHas:Ability$Counters
+DeckNeeds:Type$Creature
+Oracle:Flying\nReinforce 2—{2}{W} ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)

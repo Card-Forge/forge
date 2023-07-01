@@ -1,0 +1,7 @@
+Name:Snubhorn Sentry
+ManaCost:W
+Types:Creature Dinosaur
+PT:0/3
+K:Ascend
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Blessing | Description$ CARDNAME gets +3/+0 as long as you have the city's blessing.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nSnubhorn Sentry gets +3/+0 as long as you have the city's blessing.

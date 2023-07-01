@@ -1,0 +1,8 @@
+Name:Paragon of Eternal Wilds
+ManaCost:3 G
+Types:Creature Human Druid
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other green creatures you control get +1/+1.
+A:AB$ Pump | Cost$ G T | ValidTgts$ Creature.Green+Other+YouCtrl | TgtPrompt$ Select target green creature | KW$ Trample | SpellDescription$ Another target green creature you control gains trample until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Other green creatures you control get +1/+1.\n{G}, {T}: Another target green creature you control gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

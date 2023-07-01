@@ -1,0 +1,8 @@
+Name:Makeshift Battalion
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | PresentCompare$ GE2 | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME and at least two other creatures attack, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever Makeshift Battalion and at least two other creatures attack, put a +1/+1 counter on Makeshift Battalion.

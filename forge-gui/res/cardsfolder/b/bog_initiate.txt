@@ -1,0 +1,7 @@
+Name:Bog Initiate
+ManaCost:1 B
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Mana | Cost$ 1 | Produced$ B | SpellDescription$ Add {B}.
+AI:RemoveDeck:All
+Oracle:{1}: Add {B}.

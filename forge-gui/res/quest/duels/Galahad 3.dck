@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Galahad 3
+Title=Galahad
+Difficulty=hard
+Description=WB Knight deck with Kinsbaile Cavalier and Knight Exemplar
+Icon=Galahad.jpg
+Deck Type=constructed
+[main]
+2 Armageddon
+6 Swamp|M12
+6 Plains|M12
+4 Scrubland
+4 Godless Shrine
+1 Day of Judgment
+4 Knight Exemplar
+4 Knight of Meadowgrain
+3 Knight of the White Orchid
+2 Black Knight
+4 Swords to Plowshares
+2 Silver Knight
+2 Kinsbaile Cavalier
+1 Mox Pearl
+1 Serra's Blessing
+3 Paladin en-Vec
+2 Path to Exile
+1 Mox Jet
+2 White Knight
+3 Doom Blade
+1 Kulrath Knight
+1 Thistledown Liege
+1 Wilt-Leaf Cavaliers
+[sideboard]

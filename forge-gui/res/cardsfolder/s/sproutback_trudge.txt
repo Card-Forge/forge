@@ -1,0 +1,12 @@
+Name:Sproutback Trudge
+ManaCost:7 G G
+Types:Creature Fungus Beast
+PT:9/7
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the amount of life you gained this turn.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPlay | TriggerDescription$ At the beginning of your end step, if you gained life this turn, you may cast CARDNAME from your graveyard.
+SVar:TrigPlay:DB$ Play | Defined$ Self | Optional$ True
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Graveyard
+Oracle:This spell costs {X} less to cast, where X is the amount of life you gained this turn.\nTrample\nAt the beginning of your end step, if you gained life this turn, you may cast Sproutback Trudge from your graveyard.

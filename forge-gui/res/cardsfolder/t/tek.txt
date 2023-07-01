@@ -1,0 +1,12 @@
+Name:Tek
+ManaCost:5
+Types:Artifact Creature Dragon
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 2 | IsPresent$ Plains.YouCtrl | Description$ CARDNAME gets +0/+2 as long as you control a Plains.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Island.YouCtrl | Description$ CARDNAME has flying as long as you control an Island.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +2/+0 as long as you control a Swamp.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | IsPresent$ Mountain.YouCtrl | Description$ CARDNAME has first strike as long as you control a Mountain.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | IsPresent$ Forest.YouCtrl | Description$ CARDNAME has trample as long as you control a Forest.
+AI:RemoveDeck:Random
+SVar:BuffedBy:Land
+Oracle:Tek gets +0/+2 as long as you control a Plains, has flying as long as you control an Island, gets +2/+0 as long as you control a Swamp, has first strike as long as you control a Mountain, and has trample as long as you control a Forest.

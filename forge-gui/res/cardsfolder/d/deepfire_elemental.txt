@@ -1,0 +1,8 @@
+Name:Deepfire Elemental
+ManaCost:4 B R
+Types:Creature Elemental
+PT:4/4
+A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact.cmcEQX,Creature.cmcEQX | TgtPrompt$ Select target artifact or creature | AILogic$ AtOpponentsCombatOrAfter | SpellDescription$ Destroy target artifact or creature with mana value X.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+Oracle:{X}{X}{1}: Destroy target artifact or creature with mana value X.

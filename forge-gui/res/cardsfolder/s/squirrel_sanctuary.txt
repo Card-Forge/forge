@@ -1,0 +1,9 @@
+Name:Squirrel Sanctuary
+ManaCost:G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green Squirrel creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_squirrel
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a nontoken creature you control dies, you may pay {1}. If you do, return CARDNAME to its owner's hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+DeckHas:Ability$Token
+Oracle:When Squirrel Sanctuary enters the battlefield, create a 1/1 green Squirrel creature token.\nWhenever a nontoken creature you control dies, you may pay {1}. If you do, return Squirrel Sanctuary to its owner's hand.

@@ -1,0 +1,14 @@
+[metadata]
+Code=PS17
+Date=2017-07-20
+Name=San Diego Comic-Con 2017
+Type=Promo
+ScryfallCode=PS17
+
+[cards]
+14 M Gideon of the Trials @Vincent Proce
+69 M Jace, Unraveler of Secrets @Vincent Proce
+97 M Liliana, Death's Majesty @Vincent Proce
+110 M Chandra, Torch of Defiance @Vincent Proce
+140 M Nicol Bolas, God-Pharaoh @Vincent Proce
+204 M Nissa, Steward of Elements @Vincent Proce

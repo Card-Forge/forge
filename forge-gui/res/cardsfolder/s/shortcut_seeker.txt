@@ -1,0 +1,7 @@
+Name:Shortcut Seeker
+ManaCost:3 U
+Types:Creature Human Rogue
+PT:2/5
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBVenture | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:DBVenture:DB$ Venture | Defined$ You
+Oracle:Whenever Shortcut Seeker deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)

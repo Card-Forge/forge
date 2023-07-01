@@ -1,0 +1,7 @@
+Name:Wall of Pine Needles
+ManaCost:3 G
+Types:Creature Plant Wall
+PT:3/3
+K:Defender
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Defender (This creature can't attack.)\n{G}: Regenerate Wall of Pine Needles.

@@ -1,0 +1,6 @@
+Name:Manaforge Cinder
+ManaCost:BR
+Types:Creature Elemental Shaman
+PT:1/1
+A:AB$ Mana | Cost$ 1 | Produced$ Combo B R | Amount$ 1 | ActivationLimit$ 3 | SpellDescription$ Add {B} or {R}. Activate no more than three times each turn.
+Oracle:{1}: Add {B} or {R}. Activate no more than three times each turn.

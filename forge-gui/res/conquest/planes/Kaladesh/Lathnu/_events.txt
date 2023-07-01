@@ -1,0 +1,9 @@
+Name:Depala, Pilot Exemplar|Deck:Depala, Pilot Exemplar.dck|Variant:Commander|Avatar:Depala, Pilot Exemplar|Desc:
+Name:Pia Nalaar|Deck:Pia Nalaar.dck|Variant:Commander|Avatar:Pia Nalaar|Desc:
+Name:Kari Zev, Skyship Raider|Deck:Kari Zev, Skyship Raider.dck|Variant:Commander|Avatar:Kari Zev, Skyship Raider|Desc:
+Name:Chandra, Pyrogenius|Deck:Chandra, Pyrogenius.dck|Variant:Planeswalker|Avatar:Chandra, Pyrogenius|Desc:
+Name:Chandra, Torch of Defiance|Deck:Chandra, Torch of Defiance.dck|Variant:Planeswalker|Avatar:Chandra, Torch of Defiance|Desc:
+Name:Chandra, Fire of Kaladesh|Deck:Chandra, Fire of Kaladesh.dck|Variant:Commander|Avatar:Chandra, Fire of Kaladesh|Desc:
+Name:Pia and Kiran Nalaar|Deck:Pia and Kiran Nalaar.dck|Variant:Commander|Avatar:Pia and Kiran Nalaar|Desc:
+Name:Voltaic Brawler|Deck:Voltaic Brawler.dck|Variant:None|Avatar:Voltaic Brawler|Desc:
+Name:Revolutionaries|Deck:Revolutionaries.dck|Variant:None|Avatar:Pia's Revolution|Desc:

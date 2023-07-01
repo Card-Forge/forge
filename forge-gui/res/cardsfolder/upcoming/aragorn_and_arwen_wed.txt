@@ -1,0 +1,13 @@
+Name:Aragorn and Arwen, Wed
+ManaCost:4 G W
+Types:Legendary Creature Human Elf Noble
+PT:3/6
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a +1/+1 counter on each other creature you control. You gain 1 life for each other creature you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a +1/+1 counter on each other creature you control. You gain 1 life for each other creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Creature.YouCtrl+StrictlyOther
+DeckHas:Ability$Counters|LifeGain
+SVar:HasAttackEffect:TRUE
+Oracle:Vigilance\nWhenever Aragorn and Arwen, Wed enters the battlefield or attacks, put a +1/+1 counter on each other creature you control. You gain 1 life for each other creature you control.

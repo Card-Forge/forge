@@ -1,0 +1,8 @@
+Name:Riddleform
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | OptionalDecider$ You | TriggerDescription$ Whenever you cast a noncreature spell, you may have CARDNAME become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Sphinx | Keywords$ Flying
+A:AB$ Scry | Cost$ 2 U | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Whenever you cast a noncreature spell, you may have Riddleform become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.\n{2}{U}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

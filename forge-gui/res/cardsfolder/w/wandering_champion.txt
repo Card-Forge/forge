@@ -1,0 +1,8 @@
+Name:Wandering Champion
+ManaCost:1 W
+Types:Creature Human Monk
+PT:3/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Permanent.Blue+YouCtrl,Permanent.Red+YouCtrl | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control a blue or red permanent, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
+DeckHints:Color$Blue|Red
+Oracle:Whenever Wandering Champion deals combat damage to a player, if you control a blue or red permanent, you may discard a card. If you do, draw a card.

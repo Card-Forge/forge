@@ -1,0 +1,11 @@
+Name:Orochi Merge-Keeper
+ManaCost:1 G
+Types:Creature Snake Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+S:Mode$ Continuous | Affected$ Card.Self+modified | AddAbility$ ManaGG | Description$ As long as CARDNAME is modified, it has "{T}: Add {G}{G}." (Equipment, Auras you control, and counters are modifications.)
+SVar:ManaGG:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+DeckHints:Type$Equipment|Aura & Ability$Counters
+SVar:EquipMe:Once
+SVar:EnchantMe:Once
+Oracle:{T}: Add {G}.\nAs long as Orochi Merge-Keeper is modified, it has "{T}: Add {G}{G}." (Equipment, Auras you control, and counters are modifications.)

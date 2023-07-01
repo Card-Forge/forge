@@ -1,0 +1,10 @@
+Name:Kraum, Ludevic's Opus
+ManaCost:3 U R
+Types:Legendary Creature Zombie Horror
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts their second spell each turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Partner
+Oracle:Flying, haste\nWhenever an opponent casts their second spell each turn, draw a card.\nPartner (You can have two commanders if both have partner.)

@@ -1,0 +1,10 @@
+[metadata]
+Code=PBOK
+Date=2005-02-04
+Name=Betrayers of Kamigawa Promos
+Type=Promo
+ScryfallCode=PBOK
+
+[cards]
+71★ R Ink-Eyes, Servant of Oni @Ron Spears
+122★ U Budoka Pupil @Shishizaru

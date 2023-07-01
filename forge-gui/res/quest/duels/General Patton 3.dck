@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=General Patton 3
+Title=General Patton
+Difficulty=hard
+Description=WBR Aggro deck with Fervent Charge
+Icon=General Patton.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Arid Mesa
+3 Badlands
+4 Bloodstained Mire
+1 Mountain
+1 Plains
+3 Plateau
+2 Scrubland
+1 Swamp
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Cerodon Yearling
+2 Dauthi Horror
+1 Deathbellow Raider
+1 Goblin Deathraiders
+1 Goblin Guide
+1 Hellrider
+1 Isamaru, Hound of Konda
+1 Legion Loyalist
+1 Mirran Crusader
+2 Signal Pest
+4 Soltari Foot Soldier
+1 Spike Jester
+2 Stormblood Berserker
+3 Tormented Soul
+1 Wojek Halberdiers
+4 Fervent Charge
+1 Glorious Anthem
+1 Mardu Ascendancy
+1 Path of Bravery
+1 Crackling Doom
+1 Disenchant
+1 Terminate
+3 Chainer's Edict
+1 Vindicate
+1 Wheel of Fortune
+[sideboard]

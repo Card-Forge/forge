@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Centaur Warchief 2
+Title=Centaur War-Chief
+Difficulty=medium
+Description=RW Smoke deck
+Icon=CentaurWarchief.jpg
+Deck Type=constructed
+[main]
+2 Ali Baba|ARN
+2 Cave People|DRK
+2 Colossus of Sardia|ATQ
+2 Dragon Whelp|4ED
+2 Eternal Warrior|LEG
+2 Healing Salve|4ED
+3 Kismet|LEG
+1 Land Tax|LEG
+2 Lightning Bolt|4ED
+12 Mountain|4ED
+12 Plains|4ED
+2 Savannah Lions|LEB
+4 Serra Angel|4ED
+3 Smoke|LEB
+3 Swords to Plowshares|LEB
+2 Wall of Swords|4ED
+4 Yotian Soldier|ATQ
+[sideboard]

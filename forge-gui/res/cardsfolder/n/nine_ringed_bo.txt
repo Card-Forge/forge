@@ -1,0 +1,6 @@
+Name:Nine-Ringed Bo
+ManaCost:3
+Types:Artifact
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Spirit | NumDmg$ 1 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
+AI:RemoveDeck:Random
+Oracle:{T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.

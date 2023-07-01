@@ -1,0 +1,7 @@
+Name:Vine Mare
+ManaCost:2 G G
+Types:Creature Elemental Horse
+PT:5/3
+K:Hexproof
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Black | Description$ CARDNAME can't be blocked by black creatures.
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nVine Mare can't be blocked by black creatures.

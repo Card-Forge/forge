@@ -1,0 +1,7 @@
+Name:Cradle Guard
+ManaCost:1 G G
+Types:Creature Treefolk
+PT:4/4
+K:Trample
+K:Echo:1 G G
+Oracle:Trample\nEcho {1}{G}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

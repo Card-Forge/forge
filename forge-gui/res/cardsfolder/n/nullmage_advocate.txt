@@ -1,0 +1,8 @@
+Name:Nullmage Advocate
+ManaCost:2 G
+Types:Creature Insect Druid
+PT:2/3
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.OppOwn | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBDestroy | SpellDescription$ Return two target cards from an opponent's graveyard to their hand. Destroy target artifact or enchantment.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+AI:RemoveDeck:All
+Oracle:{T}: Return two target cards from an opponent's graveyard to their hand. Destroy target artifact or enchantment.

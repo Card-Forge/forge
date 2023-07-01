@@ -1,0 +1,8 @@
+Name:Reclusive Taxidermist
+ManaCost:1 G
+Types:Creature Human Druid
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 2 | IsPresent$ Creature.YouOwn | PresentCompare$ GE4 | PresentZone$ Graveyard | Description$ CARDNAME gets +3/+2 as long as there are four or more creature cards in your graveyard.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHints:Ability$Graveyard|Discard
+Oracle:Reclusive Taxidermist gets +3/+2 as long as there are four or more creature cards in your graveyard.\n{T}: Add one mana of any color.

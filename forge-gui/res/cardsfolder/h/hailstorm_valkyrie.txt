@@ -1,0 +1,9 @@
+Name:Hailstorm Valkyrie
+ManaCost:3 B
+Types:Snow Creature Angel Wizard
+PT:2/2
+K:Flying
+K:Trample
+A:AB$ Pump | Cost$ S S | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckNeeds:Type$Snow
+Oracle:Flying, trample\n{S}{S}: Hailstorm Valkyrie gets +2/+2 until end of turn. ({S} can be paid with one mana from a snow source.)

@@ -1,0 +1,7 @@
+Name:Knight Token
+ManaCost:no cost
+Colors:white
+Types:Creature Knight
+PT:1/1
+K:Banding
+Oracle:Banding

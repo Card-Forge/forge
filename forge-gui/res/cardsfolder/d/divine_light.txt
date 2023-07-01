@@ -1,0 +1,7 @@
+Name:Divine Light
+ManaCost:W
+Types:Sorcery
+A:SP$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt this turn to creatures you control.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt this turn to creatures you control.
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt this turn to creatures you control.

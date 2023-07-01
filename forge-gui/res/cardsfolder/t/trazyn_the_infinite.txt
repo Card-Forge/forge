@@ -1,0 +1,8 @@
+Name:Trazyn the Infinite
+ManaCost:4 B B
+Types:Legendary Artifact Creature Necron
+PT:4/6
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Artifact.YouOwn | GainsAbilitiesOfZones$ Graveyard | Description$ Prismatic Gallery — As long as CARDNAME is on the battlefield, it has all activated abilities of all artifact cards in your graveyard.
+DeckHints:Type$Artifact & Ability$Graveyard
+Oracle:Deathtouch\nPrismatic Gallery — As long as Trazyn the Infinite is on the battlefield, it has all activated abilities of all artifact cards in your graveyard.

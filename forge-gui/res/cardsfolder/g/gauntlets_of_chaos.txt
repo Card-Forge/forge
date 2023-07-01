@@ -1,0 +1,10 @@
+Name:Gauntlets of Chaos
+ManaCost:5
+Types:Artifact
+A:AB$ Pump | Cost$ 5 Sac<1/CARDNAME> | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ target artifact, creature, or land you control | StackDescription$ None | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it. If those permanents are exchanged this way, destroy all Auras attached to them.
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls that shares one of those types | TargetsWithSharedCardType$ ParentTarget | TargetsWithSharedTypes$ Artifact,Creature,Land | RememberExchanged$ True | SubAbility$ DBDestroyAll
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Aura.AttachedTo Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:{5}, Sacrifice Gauntlets of Chaos: Exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it. If those permanents are exchanged this way, destroy all Auras attached to them.

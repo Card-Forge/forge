@@ -1,0 +1,9 @@
+Name:Oswald Fiddlebender|Deck:Oswald Fiddlebender.dck|Variant:Commander|Avatar:Oswald Fiddlebender|Desc:
+Name:Nadaar, Selfless Paladin|Deck:Nadaar, Selfless Paladin.dck|Variant:Commander|Avatar:Nadaar, Selfless Paladin|Desc:
+Name:Drizzt Do'Urden|Deck:Drizzt Do'Urden.dck|Variant:Commander|Avatar:Drizzt Do'Urden|Desc:
+Name:Bruenor Battlehammer|Deck:Bruenor Battlehammer.dck|Variant:Commander|Avatar:Bruenor Battlehammer|Desc:
+Name:Grand Master of Flowers|Deck:Grand Master of Flowers.dck|Variant:Planeswalker|Avatar:Grand Master of Flowers|Desc:
+Name:Sram, Senior Edificer|Deck:Sram, Senior Edificer.dck|Variant:Commander|Avatar:Sram, Senior Edificer|Desc:
+Name:Braids, Conjurer Adept|Deck:Braids, Conjurer Adept.dck|Variant:Vanguard|Avatar:Braids, Conjurer Adept|Desc:
+Name:Icingdeath, Frost Tyrant|Deck:Icingdeath, Frost Tyrant.dck|Variant:Commander|Avatar:Icingdeath, Frost Tyrant|Desc:
+Name:White Planar Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

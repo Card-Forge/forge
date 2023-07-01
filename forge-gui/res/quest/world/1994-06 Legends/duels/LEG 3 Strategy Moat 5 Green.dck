@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 3 Strategy: Moat: 5 Green
+Title=Green Skies
+Difficulty=hard
+Description="Blow, winds, and crack your cheeks! rage! blow!" -William Shakespeare, King Lear
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Divine Offering|LEG
+4 Divine Transformation|LEG
+4 Emerald Dragonfly|LEG
+10 Forest|LEB|2
+4 Killer Bees|LEG
+2 Land Tax|LEG
+4 Moat|LEG
+4 Osai Vultures|LEG
+4 Pendelhaven|LEG
+12 Plains|LEB|2
+4 Thunder Spirit|LEG
+4 Winter Blast|LEG

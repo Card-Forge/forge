@@ -1,0 +1,8 @@
+Name:Garrison Sergeant
+ManaCost:3 R W
+Types:Creature Viashino Soldier
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | IsPresent$ Gate.YouCtrl | Description$ CARDNAME has double strike as long as you control a Gate.
+DeckNeeds:Type$Gate
+SVar:BuffedBy:Gate
+Oracle:Garrison Sergeant has double strike as long as you control a Gate.

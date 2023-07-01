@@ -1,0 +1,10 @@
+Name:Jeskai Infiltrator
+ManaCost:2 U
+Types:Creature Human Monk
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Creature.YouCtrl+Other | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as you control no other creatures.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. You may turn it face up at any time for its mana cost if it is a creature card.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBExileTopCard
+SVar:DBExileTopCard:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBManifest
+SVar:DBManifest:DB$ Manifest | Amount$ 2 | Defined$ Remembered | Shuffle$ True
+Oracle:Jeskai Infiltrator can't be blocked as long as you control no other creatures.\nWhen Jeskai Infiltrator deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

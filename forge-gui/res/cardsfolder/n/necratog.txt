@@ -1,0 +1,7 @@
+Name:Necratog
+ManaCost:1 B B
+Types:Creature Atog
+PT:1/2
+A:AB$ Pump | Cost$ ExileFromGrave<1/Card.TopGraveyardCreature> | CostDesc$ Exile the top creature card of your graveyard: | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:NeedsOrderedGraveyard:TRUE
+Oracle:Exile the top creature card of your graveyard: Necratog gets +2/+2 until end of turn.

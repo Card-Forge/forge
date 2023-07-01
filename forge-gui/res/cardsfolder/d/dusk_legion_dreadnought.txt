@@ -1,0 +1,7 @@
+Name:Dusk Legion Dreadnought
+ManaCost:5
+Types:Artifact Vehicle
+PT:4/6
+K:Vigilance
+K:Crew:2
+Oracle:Vigilance\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

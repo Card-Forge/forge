@@ -1,0 +1,6 @@
+Name:Ghoulcaller's Accomplice
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+A:AB$ Token | Cost$ 3 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token. Activate only as a sorcery.
+Oracle:{3}{B}, Exile Ghoulcaller's Accomplice from your graveyard: Create a 2/2 black Zombie creature token. Activate only as a sorcery.

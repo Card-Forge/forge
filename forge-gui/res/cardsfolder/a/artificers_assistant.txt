@@ -1,0 +1,8 @@
+Name:Artificer's Assistant
+ManaCost:U
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, scry 1. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhenever you cast a historic spell, scry 1. (Artifacts, legendaries, and Sagas are historic. To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

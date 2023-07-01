@@ -1,0 +1,5 @@
+Name:Gore Swine
+ManaCost:2 R
+Types:Creature Boar
+PT:4/1
+Oracle:

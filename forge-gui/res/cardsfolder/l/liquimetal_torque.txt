@@ -1,0 +1,7 @@
+Name:Liquimetal Torque
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ T | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target permanent | Types$ Artifact | SpellDescription$ Target nonland permanent becomes an artifact in addition to its other types until end of turn.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}: Target nonland permanent becomes an artifact in addition to its other types until end of turn.

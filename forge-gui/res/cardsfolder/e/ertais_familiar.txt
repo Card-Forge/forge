@@ -1,0 +1,12 @@
+Name:Ertai's Familiar
+ManaCost:1 U
+Types:Creature Illusion
+PT:2/2
+K:Phasing
+T:Mode$ PhaseOut | ValidCard$ Card.phasedOutSelf | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, mill three cards.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3
+A:AB$ Effect | Cost$ U | RememberObjects$ Self | ForgetOnMoved$ Battlefield | StaticAbilities$ CantPhaseOut | Duration$ UntilYourNextUpkeep | SpellDescription$ Until your next upkeep, CARDNAME can't phase out.
+SVar:CantPhaseOut:Mode$ CantPhaseOut | ValidCard$ Card.IsRemembered | Description$ Until your next upkeep, EFFECTSOURCE can't phase out.
+DeckHas:Ability$Mill
+Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nWhen Ertai's Familiar phases out or leaves the battlefield, mill three cards.\n{U}: Until your next upkeep, Ertai's Familiar can't phase out.

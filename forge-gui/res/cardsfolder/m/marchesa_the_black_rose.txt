@@ -1,0 +1,10 @@
+Name:Marchesa, the Black Rose
+ManaCost:1 U B R
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Dethrone
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Dethrone | Description$ Other creatures you control have dethrone.
+T:Mode$ ChangesZone | ValidCard$ Card.YouCtrl+counters_GE1_P1P1 | Origin$ Battlefield | Destination$ Graveyard | Execute$ DelTrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.
+SVar:DelTrigReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Return that card to the battlefield at the beginning under your control of the next end step.
+SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nOther creatures you control have dethrone.\nWhenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.

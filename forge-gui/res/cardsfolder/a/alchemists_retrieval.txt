@@ -1,0 +1,6 @@
+Name:Alchemist's Retrieval
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent [you control] to its owner's hand.
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | PrecostDesc$ Cleave | CostDesc$ {1}{U} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Oracle:Cleave {1}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nReturn target nonland permanent [you control] to its owner's hand.

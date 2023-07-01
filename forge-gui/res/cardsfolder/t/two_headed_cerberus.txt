@@ -1,0 +1,6 @@
+Name:Two-Headed Cerberus
+ManaCost:1 R R
+Types:Creature Dog
+PT:1/2
+K:Double Strike
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)

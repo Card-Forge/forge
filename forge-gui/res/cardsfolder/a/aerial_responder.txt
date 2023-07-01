@@ -1,0 +1,8 @@
+Name:Aerial Responder
+ManaCost:1 W W
+Types:Creature Dwarf Soldier
+PT:2/3
+K:Flying
+K:Vigilance
+K:Lifelink
+Oracle:Flying, vigilance, lifelink

@@ -1,0 +1,7 @@
+Name:Necrologia
+ManaCost:3 B B
+Types:Instant
+Text:Cast this spell only during your end step.\r\n
+A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ X | Defined$ You | ActivationPhases$ End of Turn | PlayerTurn$ True | SpellDescription$ Draw X cards.
+SVar:X:Count$xPaid
+Oracle:Cast this spell only during your end step.\nAs an additional cost to cast this spell, pay X life.\nDraw X cards.

@@ -1,0 +1,6 @@
+Name:Pardic Wanderer
+ManaCost:6
+Types:Artifact Creature Golem
+PT:5/5
+K:Trample
+Oracle:Trample

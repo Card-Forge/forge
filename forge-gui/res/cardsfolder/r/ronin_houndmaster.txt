@@ -1,0 +1,7 @@
+Name:Ronin Houndmaster
+ManaCost:2 R
+Types:Creature Human Samurai
+PT:2/2
+K:Haste
+K:Bushido:1
+Oracle:Haste\nBushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

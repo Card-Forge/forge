@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Toys for Rats and Bats
+Title=Toys for Rats and Bats
+Difficulty=medium
+Description=The black weenies have found some equipment.
+Icon=Toys for Rats.jpg
+Deck Type=constructed
+[Main]
+1 Bonesplitter|MRD
+3 Chittering Rats|DST
+1 Clockwork Vorrac|MRD
+2 Dementia Bat|NPH
+3 Dross Golem|DST
+2 Emissary of Despair|DST
+1 Essence Drain|M13
+2 Geth's Grimoire|DST
+3 Grimclaw Bats|DST
+2 Leaden Myr|MRD
+1 Leonin Bola|DST
+1 Leonin Scimitar|10E
+1 Mephitic Ooze|DST
+2 Murderous Spoils|DST
+1 Pulse of the Dross|DST
+2 Relic Bane|MRD
+1 Scavenging Scarab|DST
+1 Skeleton Shard|MRD
+2 Slith Bloodletter|MRD
+2 Specter's Shroud|DST
+21 Swamp|MRD|1
+2 Terror|MRD
+3 Wrench Mind|MRD
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Dhund Operative
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Deathtouch | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, CARDNAME +1/+0 and has deathtouch. (Any amount of damage it deals to a creature is enough to destroy it.)
+SVar:BuffedBy:Artifact
+Oracle:As long as you control an artifact, Dhund Operative gets +1/+0 and has deathtouch.

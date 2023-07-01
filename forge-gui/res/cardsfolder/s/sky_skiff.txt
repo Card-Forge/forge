@@ -1,0 +1,7 @@
+Name:Sky Skiff
+ManaCost:2
+Types:Artifact Vehicle
+PT:2/3
+K:Flying
+K:Crew:1
+Oracle:Flying\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -1,0 +1,7 @@
+Name:Wand of the Elements
+ManaCost:4
+Types:Artifact
+A:AB$ Token | Cost$ T Sac<1/Island> | TokenAmount$ 1 | TokenScript$ u_2_2_elemental_flying | TokenOwner$ You | SpellDescription$ Create a 2/2 blue Elemental creature token with flying.
+A:AB$ Token | Cost$ T Sac<1/Mountain> | TokenAmount$ 1 | TokenScript$ r_3_3_elemental | TokenOwner$ You | SpellDescription$ Create a 3/3 red Elemental creature token.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice an Island: Create a 2/2 blue Elemental creature token with flying.\n{T}, Sacrifice a Mountain: Create a 3/3 red Elemental creature token.

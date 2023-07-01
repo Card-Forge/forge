@@ -1,0 +1,5 @@
+Name:Perilous Vault
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ 5 T Exile<1/CARDNAME> | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand | IsCurse$ True | SpellDescription$ Exile all nonland permanents.
+Oracle:{5}, {T}, Exile Perilous Vault: Exile all nonland permanents.

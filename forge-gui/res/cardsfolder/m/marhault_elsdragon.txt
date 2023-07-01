@@ -1,0 +1,6 @@
+Name:Marhault Elsdragon
+ManaCost:3 R R G
+Types:Legendary Creature Elf Warrior
+PT:4/6
+K:Rampage:1
+Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)

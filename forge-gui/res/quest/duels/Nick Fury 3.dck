@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Nick Fury 3
+Title=Nick Fury
+Difficulty=hard
+Description=WUG Collected Company deck
+Icon=Nick Fury.jpg
+Deck Type=constructed
+[main]
+1 Flooded Strand
+3 Forest
+1 Horizon Canopy
+1 Island
+4 Misty Rainforest
+1 Plains
+4 Windswept Heath
+2 Tundra
+3 Savannah
+1 Tropical Island
+3 AEther Vial
+1 Augur of Bolas
+4 Birds of Paradise
+1 Champion of Lambholt
+1 Dryad Arbor
+4 Epochrasite
+4 Myr Superion
+4 Noble Hierarch
+1 Serra Avenger
+4 Skaab Ruinator
+4 Talara's Battalion
+4 Collected Company
+4 Swords to Plowshares
+[sideboard]

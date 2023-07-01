@@ -1,0 +1,25 @@
+[metadata]
+Name=Fungus Master 2
+Title=Fungus Master
+Icon=FungusMaster.jpg
+Difficulty=medium
+Description=Fungusaur + Prodigal Sorcerer = ...
+Deck Type=constructed
+[main]
+2 Carnivorous Plant|DRK
+9 Forest|4ED
+4 Fungusaur|LEB
+3 Ironroot Treefolk|LEB
+9 Island|4ED
+2 Oasis|ARN
+3 Power Sink|4ED
+4 Prodigal Sorcerer|4ED
+4 Regeneration|4ED
+4 Rod of Ruin|4ED
+4 Tropical Island|LEB
+4 Unsummon|4ED
+2 Untamed Wilds|4ED
+2 Wall of Brambles|LEB
+2 Wall of Wood|LEB
+2 Wild Growth|LEB
+[sideboard]

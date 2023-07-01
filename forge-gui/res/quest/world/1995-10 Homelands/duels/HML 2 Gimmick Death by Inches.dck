@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=HML 2 Gimmick: Death by Inches
+Title=Death by Inches
+Difficulty=medium
+Description="Rarely have power and madness been so delightfully wed as they have in our dear grandmother." -Baron Sengir
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Anaba Shaman|HML|1
+2 Anaba Shaman|HML|2
+2 Chandler|HML
+2 Dry Spell|HML|1
+2 Dry Spell|HML|2
+4 Evaporate|HML
+4 Grandmother Sengir|HML
+4 Ironclaw Curse|HML
+2 Joven|HML
+14 Mountain|LEB|1
+4 Serrated Arrows|HML
+10 Swamp|LEB|3
+2 Torture|HML|1
+2 Torture|HML|2
+4 Winter Sky|HML

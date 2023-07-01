@@ -1,0 +1,5 @@
+Name:Watchwolf
+ManaCost:G W
+Types:Creature Wolf
+PT:3/3
+Oracle:

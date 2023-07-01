@@ -1,0 +1,7 @@
+Name:Brine Hag
+ManaCost:2 U U
+Types:Creature Hag
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME dies, change the base power and toughness of all creatures that dealt damage to it this turn to 0/2. (This effect lasts indefinitely.)
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.Damaged | Power$ 0 | Toughness$ 2 | Duration$ Permanent
+Oracle:When Brine Hag dies, change the base power and toughness of all creatures that dealt damage to it this turn to 0/2. (This effect lasts indefinitely.)

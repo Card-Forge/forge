@@ -1,0 +1,7 @@
+Name:Runic Shot
+ManaCost:W
+Types:Sorcery
+K:Kicker:U
+A:SP$ Destroy | ValidTgts$ Creature.tapped | SubAbility$ DBScry | SpellDescription$ Destroy target tapped creature. If this spell was kicked, scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | Condition$ Kicked
+Oracle:Kicker {U} (You may pay an additional {U} as you cast this spell.)\nDestroy target tapped creature. If this spell was kicked, scry 2.

@@ -1,0 +1,8 @@
+Name:Lightning Angel
+ManaCost:1 U R W
+Types:Creature Angel
+PT:3/4
+K:Flying
+K:Vigilance
+K:Haste
+Oracle:Flying, vigilance, haste

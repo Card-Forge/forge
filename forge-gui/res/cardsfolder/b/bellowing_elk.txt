@@ -1,0 +1,7 @@
+Name:Bellowing Elk
+ManaCost:3 G
+Types:Creature Elk
+PT:4/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample & Indestructible | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you had another creature enter the battlefield under your control this turn, CARDNAME has trample and indestructible.
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl+StrictlyOther
+Oracle:As long as you had another creature enter the battlefield under your control this turn, Bellowing Elk has trample and indestructible.

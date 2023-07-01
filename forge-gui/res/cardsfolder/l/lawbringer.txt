@@ -1,0 +1,7 @@
+Name:Lawbringer
+ManaCost:2 W
+Types:Creature Kor Rebel
+PT:2/2
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Red | TgtPrompt$ Select target red Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target red creature.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice Lawbringer: Exile target red creature.

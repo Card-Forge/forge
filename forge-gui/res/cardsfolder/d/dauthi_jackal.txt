@@ -1,0 +1,7 @@
+Name:Dauthi Jackal
+ManaCost:2 B
+Types:Creature Dauthi Jackal
+PT:2/1
+K:Shadow
+A:AB$ Destroy | Cost$ B B Sac<1/CARDNAME> | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | AITgts$ BetterThanSource | SpellDescription$ Destroy target blocking creature.
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{B}{B}, Sacrifice Dauthi Jackal: Destroy target blocking creature.

@@ -1,0 +1,20 @@
+Name:Desperate Farmer
+ManaCost:2 B
+Types:Creature Human Peasant
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When another creature you control dies, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
+Oracle:Lifelink\nWhen another creature you control dies, transform Desperate Farmer.
+
+ALTERNATE
+
+Name:Depraved Harvester
+ManaCost:no cost
+Colors:black
+Types:Creature Human Knight
+PT:4/3
+K:Lifelink
+Oracle:Lifelink

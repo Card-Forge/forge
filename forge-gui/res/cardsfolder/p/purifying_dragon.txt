@@ -1,0 +1,10 @@
+Name:Purifying Dragon
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to target creature an opponent controls. If that creature is a Zombie, CARDNAME deals 2 damage to that creature instead.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ X
+SVar:X:Targeted$Valid Creature.Zombie/Plus.1
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Purifying Dragon attacks, it deals 1 damage to target creature defending player controls. If that creature is a Zombie, Purifying Dragon deals 2 damage to that creature instead.

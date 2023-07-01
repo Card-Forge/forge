@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Crimson Vow #04 (w/ Alchemy)
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/01/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible blocking options.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Sinister Reflections;Serpentine Ambush;Goblin Javelineer;Ravenous Pursuit
+humanbattlefield=Shatterskull Charger|Counters:P1P1=1;Island;Island;Island;Mountain;Mountain;Forest;Forest
+aibattlefield=Grizzled Huntmaster

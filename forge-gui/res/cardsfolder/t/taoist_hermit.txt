@@ -1,0 +1,6 @@
+Name:Taoist Hermit
+ManaCost:2 G
+Types:Creature Human Mystic
+PT:2/2
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

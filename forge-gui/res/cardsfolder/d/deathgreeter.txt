@@ -1,0 +1,7 @@
+Name:Deathgreeter
+ManaCost:B
+Types:Creature Human Shaman
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever another creature dies, you may gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Whenever another creature dies, you may gain 1 life.

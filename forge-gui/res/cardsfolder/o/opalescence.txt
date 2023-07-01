@@ -1,0 +1,8 @@
+Name:Opalescence
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Enchantment.nonAura+Other | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each other non-Aura enchantment is a creature in addition to its other types and has base power and base toughness each equal to its mana value.
+SVar:AffectedX:Count$CardManaCost
+SVar:PlayMain1:ALWAYS
+AI:RemoveDeck:Random
+Oracle:Each other non-Aura enchantment is a creature in addition to its other types and has base power and base toughness each equal to its mana value.

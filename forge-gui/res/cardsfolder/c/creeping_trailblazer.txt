@@ -1,0 +1,11 @@
+Name:Creeping Trailblazer
+ManaCost:R G
+Types:Creature Elemental
+PT:2/2
+S:Mode$ Continuous | Affected$ Elemental.YouCtrl+Other | AddPower$ 1 | Description$ Other Elementals you control get +1/+0.
+SVar:PlayMain1:TRUE
+A:AB$ Pump | Cost$ 2 R G | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +1/+1 until end of turn for each Elemental you control.
+SVar:X:Count$Valid Elemental.YouCtrl
+SVar:BuffedBy:Card.Elemental
+DeckHints:Type$Elemental
+Oracle:Other Elementals you control get +1/+0.\n{2}{R}{G}: Creeping Trailblazer gets +1/+1 until end of turn for each Elemental you control.

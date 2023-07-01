@@ -1,0 +1,7 @@
+Name:Trespassing Souleater
+ManaCost:3
+Types:Artifact Creature Phyrexian Construct
+PT:2/2
+A:AB$ Effect | Cost$ UP | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:{U/P}: Trespassing Souleater can't be blocked this turn. ({U/P} can be paid with either {U} or 2 life.)

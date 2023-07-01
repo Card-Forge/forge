@@ -1,0 +1,21 @@
+[quest]
+id=LEB Challenge: Rough Weather
+OpponentName=Rough Weather
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Rough Weather
+Title=Rough Weather
+Difficulty=hard
+Description=Weather forecast: earthquakes and hurricanes.
+Icon=Rough Weather.jpg
+Deck Type=constructed
+[main]
+15 Earthquake|LEB
+15 Forest|LEB|1
+15 Hurricane|LEB
+15 Mountain|LEB|2

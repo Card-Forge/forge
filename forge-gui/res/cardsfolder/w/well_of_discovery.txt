@@ -1,0 +1,8 @@
+Name:Well of Discovery
+ManaCost:6
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Land.untapped+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control no untapped lands, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddSVar$ AITap
+SVar:AITap:SVar:AITapDown:True
+Oracle:At the beginning of your end step, if you control no untapped lands, draw a card.

@@ -1,0 +1,6 @@
+Name:Scoria Cat
+ManaCost:3 R R
+Types:Creature Cat
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Land.YouCtrl+untapped | PresentCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as you control no untapped lands.
+Oracle:Scoria Cat gets +3/+3 as long as you control no untapped lands.

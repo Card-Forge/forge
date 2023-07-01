@@ -1,0 +1,9 @@
+Name:Shapesharer
+ManaCost:1 U
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+A:AB$ Pump | Cost$ 2 U | ValidTgts$ Creature.Shapeshifter | TgtPrompt$ Choose target Shapeshifter | AILogic$ Pump | SubAbility$ ShapesharerCopy | StackDescription$ None | SpellDescription$ Target Shapeshifter becomes a copy of target creature until your next turn.
+SVar:ShapesharerCopy:DB$ Clone | ValidTgts$ Creature | TgtPrompt$ Choose target creature to copy | CloneTarget$ ParentTarget | Duration$ UntilYourNextTurn
+AI:RemoveDeck:All
+Oracle:Changeling (This card is every creature type.)\n{2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.

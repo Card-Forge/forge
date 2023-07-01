@@ -1,0 +1,10 @@
+Name:Maestros Charm
+ManaCost:U B R
+Types:Instant
+A:SP$ Charm | Cost$ U B R | Choices$ DBDig,DBLoseLife,DBDmg
+SVar:DBDig:DB$ Dig | DigNum$ 5 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top five cards of your library. Put one of those cards into your hand and the rest into your graveyard.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Choose one —\n• Look at the top five cards of your library. Put one of those cards into your hand and the rest into your graveyard.\n• Each opponent loses 3 life and you gain 3 life.\n• Maestros Charm deals 5 damage to target creature or planeswalker.

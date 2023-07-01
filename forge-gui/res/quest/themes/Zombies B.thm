@@ -1,0 +1,90 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=20]
+Cemetery Reaper
+Death Baron
+Grave Defiler
+Lord of the Undead
+Undead Warchief
+Zombie Master
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Festering Goblin
+Quest for the Gravelord
+[/Group]
+
+[Group MaxCnt=4 Percentage=11]
+Boneknitter
+Dauthi Ghoul
+Deathspore Thallid
+Dregscape Zombie
+Null Champion
+Spineless Thug
+Stromgald Crusader
+Walking Dead
+[/Group]
+
+[Group MaxCnt=3 Percentage=10]
+Bog Raiders
+Cadaverous Knight
+Dross Prowler
+Feeding Frenzy
+Headless Horseman
+Infectious Host
+Lim-Dul's Cohort
+Organ Grinder
+Phyrexian Crusader
+Rotlung Reanimator
+Sanguine Guard
+Scathe Zombies
+Severed Legion
+Smokespew Invoker
+Stillmoon Cavalier
+Warpath Ghoul
+[/Group]
+
+[Group MaxCnt=1 Percentage=9]
+Cackling Fiend
+Dakmor Ghoul
+Dross Crocodile
+Eastern Paladin
+Gravedigger
+Infectious Horror
+Marauding Knight
+Order of Yawgmoth
+Shadow Rider
+Skinrender
+Vengeful Dead
+Vengeful Dead
+Viscera Dragger
+Waning Wurm
+Western Paladin
+[/Group]
+
+[Group MaxCnt=2 Percentage=9]
+Cruel Revival
+Dreg Reaver
+Fallen Cleric
+Gluttonous Zombie
+Gristle Grinner
+Grotesque Hybrid
+Mass of Ghouls
+Nested Ghoul
+Rotting Legion
+Woebearer
+Zombie Goliath
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Anurid Murkdiver
+Dripping Dead
+Geth, Lord of the Vault
+Grixis Slavedriver
+Helldozer
+Lim-Dul the Necromancer
+Tresserhorn Skyknight
+Twisted Abomination
+[/Group]
+
+End

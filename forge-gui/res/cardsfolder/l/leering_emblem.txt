@@ -1,0 +1,8 @@
+Name:Leering Emblem
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Equipped | NumAtt$ +2 | NumDef$ +2
+SVar:BuffedBy:Card
+Oracle:Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.\nEquip {2}

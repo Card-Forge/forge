@@ -1,0 +1,11 @@
+Name:Timin, Youthful Geist
+ManaCost:4 U
+Types:Legendary Creature Spirit
+PT:3/4
+K:Partner:Rhoda, Geist Avenger
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each combat, tap up to one target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1
+SVar:PlayMain1:TRUE
+DeckHints:Name$Rhoda, Geist Avenger
+Oracle:Partner with Rhoda, Geist Avenger (When this creature enters the battlefield, target player may put Rhoda, Geist Avenger into their hand from their library, then shuffle.)\nFlying\nAt the beginning of each combat, tap up to one target creature.

@@ -1,0 +1,7 @@
+Name:Marang River Skeleton
+ManaCost:1 B
+Types:Creature Skeleton
+PT:1/1
+K:Megamorph:3 B
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:{B}: Regenerate Marang River Skeleton.\nMegamorph {3}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)

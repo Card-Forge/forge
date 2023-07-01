@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 210: Forces of Nature
+Title=Forces of Nature
+Difficulty=easy
+Description="'Twas when the seas were roaring // With hollow blasts of wind . . . ." -John Gay, "The What D'Ye Call It"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Deep-Sea Serpent|POR
+18 Forest|POR|3
+4 Hurricane|POR
+6 Island|POR|1
+4 Needle Storm|POR
+4 Spined Wurm|POR
+4 Thundering Wurm|POR
+4 Tidal Surge|POR
+4 Untamed Wilds|POR
+4 Whiptail Wurm|POR
+4 Winter's Grasp|POR

@@ -1,0 +1,8 @@
+Name:Saheeli's Silverwing
+ManaCost:4
+Types:Artifact Creature Drake
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at the top card of target opponent's library.
+SVar:TrigPeek:DB$ RearrangeTopOfLibrary | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | NumCards$ 1 | SpellDescription$ Look at the top card of target opponent's library.
+Oracle:Flying\nWhen Saheeli's Silverwing enters the battlefield, look at the top card of target opponent's library.

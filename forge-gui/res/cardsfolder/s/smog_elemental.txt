@@ -1,0 +1,7 @@
+Name:Smog Elemental
+ManaCost:4 B B
+Types:Creature Elemental
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+OppCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures with flying your opponents control get -1/-1.
+Oracle:Flying\nCreatures with flying your opponents control get -1/-1.

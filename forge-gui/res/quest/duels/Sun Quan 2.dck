@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sun Quan 2
+Title=Sun Quan
+Difficulty=medium
+Description=Mono U Horsemanship deck
+Icon=Sun Quan.jpg
+Deck Type=constructed
+[main]
+2 Wu Scout|PTK
+1 Lu Xun, Scholar General|PTK
+1 Lu Su, Wu Advisor|PTK
+1 Champion's Victory|PTK
+2 Red Cliffs Armada|PTK
+1 Sun Quan, Lord of Wu|PTK
+1 Mystic Denial|PTK
+1 Counterintelligence|PTK
+2 Wu Warship|PTK
+2 Wu Admiral|PTK
+2 Council of Advisors|PTK
+1 Sun Ce, Young Conquerer|PTK
+4 Terramorphic Expanse|M11
+2 Wu Elite Cavalry|PTK
+2 Forced Retreat|PTK
+2 Wu Light Cavalry|PTK
+20 Island|MBS
+1 Zhou Yu, Chief Commander|PTK
+2 Wu Infantry|PTK
+1 Preemptive Strike|PTK
+1 Capture of Jingzhou|PTK
+1 Borrowing 100,000 Arrows|PTK
+2 Zhuge Jin, Wu Strategist|PTK
+2 Wu Longbowman|PTK
+2 Straw Soldiers|PTK
+1 Brilliant Plan|PTK
+[sideboard]

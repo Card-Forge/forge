@@ -1,0 +1,24 @@
+Name:Chaplain of Alms
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+K:First Strike
+K:Ward:1
+K:Disturb:3 W
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:First strike\nWard {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nDisturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Chapel Shieldgeist
+ManaCost:no cost
+Colors:white
+Types:Creature Spirit Cleric
+PT:2/1
+K:Flying
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Ward:1 | Description$ Each creature you control has ward {1}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying, first strike\nEach creature you control has ward {1}. (Whenever it becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nIf Chapel Shieldgeist would be put into a graveyard from anywhere, exile it instead.

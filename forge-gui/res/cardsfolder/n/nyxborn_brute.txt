@@ -1,0 +1,5 @@
+Name:Nyxborn Brute
+ManaCost:3 R R
+Types:Enchantment Creature Cyclops
+PT:7/3
+Oracle:

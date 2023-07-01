@@ -1,0 +1,24 @@
+[quest]
+id=THS Challenge: Chromanticore
+OpponentName=The Chromanticores
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Chromanticore
+Title=The Chromanticores
+Difficulty=medium
+Description=Hexproof, flying, first strike, vigilance, trample, lifelink, flying, first strike, vigilance, trample, lifelink
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+20 Chromanticore|BNG
+20 Sylvan Caryatid|THS
+5 Temple of Abandon|THS
+5 Temple of Malady|JOU
+5 Temple of Mystery|THS
+5 Temple of Plenty|BNG

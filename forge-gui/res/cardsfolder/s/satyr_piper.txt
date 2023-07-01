@@ -1,0 +1,7 @@
+Name:Satyr Piper
+ManaCost:2 G
+Types:Creature Satyr Rogue
+PT:2/1
+A:AB$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ Target creature must be blocked this turn if able.
+AI:RemoveDeck:All
+Oracle:{3}{G}: Target creature must be blocked this turn if able.

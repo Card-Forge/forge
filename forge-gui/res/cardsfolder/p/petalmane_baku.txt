@@ -1,0 +1,11 @@
+Name:Petalmane Baku
+ManaCost:1 G
+Types:Creature Spirit
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+A:AB$ Mana | Cost$ 1 SubCounter<X/KI> | Produced$ Any | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add X mana of any one color.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Petalmane Baku.\n{1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color.

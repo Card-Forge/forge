@@ -1,0 +1,8 @@
+Name:Boros Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
+A:AB$ Draw | Cost$ R W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|White
+Oracle:{T}: Add {R} or {W}.\n{R}{W}, {T}, Sacrifice Boros Cluestone: Draw a card.

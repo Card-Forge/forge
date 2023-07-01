@@ -1,0 +1,10 @@
+Name:Earthshaker
+ManaCost:4 R R
+Types:Creature Spirit
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTremor | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME deals 2 damage to each creature without flying.
+SVar:TrigTremor:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 2 damage to each creature without flying.
+SVar:BuffedBy:Arcane,Spirit
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, Earthshaker deals 2 damage to each creature without flying.

@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 090115 - The Writing on the Wall
+URL:http://www.gatheringmagic.com/seanuy-090115-the-writing-on-the-wall/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Opponent has Nivix Barrier in hand. All library cards are useless.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=9
+AILife=8
+humanhand=Enshrouding Mist|Set:ORI; Touch of Moonglove|Set:ORI; Grasp of the Hieromancer|Set:ORI; Auramancer|Set:ORI
+humangraveyard=
+humanlibrary=Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI
+humanbattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Bonded Construct|Set:ORI; Fleshbag Marauder|Set:ORI; Knight of the Pilgrim's Road|Set:ORI; Undead Servant|Set:ORI; Grasp of the Hieromancer|Set:ORI|AttachedTo:420; Blightcaster|Set:ORI|Tapped|Id:420; Kothophed, Soul Hoarder|Set:ORI; Demonic Pact|Set:ORI; Weight of the Underworld|Set:ORI|AttachedTo:422
+aibattlefield=Forest|Set:ORI; Forest|Set:ORI; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Tower Geist|Set:ORI; Willbreaker|Set:ORI; Woodland Bellower|Id:422; Skysnare Spider|Set:ORI; Claustrophobia|Set:ORI|AttachedTo:420
+aihand=Nivix Barrier|Set:ORI
+aigraveyard=
+ailibrary=Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI; Evolving Wilds|Set:ORI
+aiexile=

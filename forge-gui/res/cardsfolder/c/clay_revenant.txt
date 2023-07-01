@@ -1,0 +1,10 @@
+Name:Clay Revenant
+ManaCost:1
+Types:Artifact Creature Golem
+PT:1/2
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+DeckHints:Color$Black
+SVar:SacMe:1
+Oracle:Clay Revenant enters the battlefield tapped.\n{2}{B}: Return Clay Revenant from your graveyard to your hand.

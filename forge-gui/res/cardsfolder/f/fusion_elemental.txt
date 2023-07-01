@@ -1,0 +1,5 @@
+Name:Fusion Elemental
+ManaCost:W U B R G
+Types:Creature Elemental
+PT:8/8
+Oracle:

@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Swarm of Rats
+OpponentName=The Swarm
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Swarm of Rats
+Title=The Swarm
+Difficulty=medium
+Description="Rats, rats, rats Hundreds, thousands, millions of them, and every one a life."\n-Bram Stoker, Dracula
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+20 Swamp|PO2|1
+40 Swarm of Rats|PO2

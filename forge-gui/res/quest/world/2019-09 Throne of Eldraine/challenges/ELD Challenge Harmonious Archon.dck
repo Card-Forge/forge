@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Harmonious Archon
+OpponentName=The Archons
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Idyllic Grange|Idyllic Grange
+HumanExtras=
+[metadata]
+Title=Harmonious Archon
+Difficulty=very hard
+Description=The archons start with two lands.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=ELD Challenge: Harmonious Archon
+[Main]
+30 Harmonious Archon|ELD|2
+30 Plains|ELD|2

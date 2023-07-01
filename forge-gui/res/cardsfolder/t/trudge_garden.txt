@@ -1,0 +1,8 @@
+Name:Trudge Garden
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trample.
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ g_4_4_fungus_beast_trample | TokenOwner$ You
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:Whenever you gain life, you may pay {2}. If you do, create a 4/4 green Fungus Beast creature token with trample.

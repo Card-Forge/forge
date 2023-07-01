@@ -1,0 +1,11 @@
+Name:Lich's Mirror
+ManaCost:5
+Types:Artifact
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ShuffleDrawSetLife | Description$ If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
+SVar:ShuffleDrawSetLife:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ Shuffle2
+SVar:Shuffle2:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ Shuffle3
+SVar:Shuffle3:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ Draw
+SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ SetLife
+SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ 20
+SVar:NonStackingEffect:True
+Oracle:If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.

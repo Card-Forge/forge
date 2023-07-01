@@ -1,0 +1,12 @@
+Name:Force Bubble
+ManaCost:2 W W
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ Counters | Description$ If damage would be dealt to you, put that many depletion counters on CARDNAME instead.
+SVar:Counters:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ X
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE4_DEPLETION | Execute$ TrigSac | TriggerDescription$ When there are four or more depletion counters on CARDNAME, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of each end step, remove all depletion counters from CARDNAME.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ DEPLETION | CounterNum$ All
+SVar:X:ReplaceCount$DamageAmount
+SVar:All:Count$CardCounters.DEPLETION
+Oracle:If damage would be dealt to you, put that many depletion counters on Force Bubble instead.\nWhen there are four or more depletion counters on Force Bubble, sacrifice it.\nAt the beginning of each end step, remove all depletion counters from Force Bubble.

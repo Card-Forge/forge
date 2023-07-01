@@ -1,0 +1,33 @@
+[metadata]
+Code=HA5
+Date=2021-05-27
+Name=Historic Anthology 5
+Type=Online
+ScryfallCode=HA5
+
+[cards]
+1 C Court Homunculus @Matt Cavotta
+2 M Elesh Norn, Grand Cenobite @Igor Kieryluk
+3 U Intangible Virtue @Clint Cearley
+4 C Ray of Revelation @Cliff Childs
+5 M Jin-Gitaxias, Core Augur @Eric Deschamps
+6 C Merfolk Looter @Austin Hsu
+7 U Reverse Engineer @Chase Stone
+8 R Stifle @Dany Orizio
+9 U Whirler Rogue @Winona Nelson
+10 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
+11 C Vault Skirge @Brad Rigney
+12 U Ancient Grudge @Ryan Yee
+13 R Dragonstorm @Kev Walker
+14 U Trash for Treasure @Lars Grant-West
+15 M Urabrask the Hidden @Brad Rigney
+16 C Into the North @Richard Sardinha
+17 M Vorinclex, Voice of Hunger @Karl Kopinski
+18 R Ojutai's Command @Willian Murai
+19 R Silumgar's Command @Nils Hamm
+20 R Kolaghan's Command @Daarken
+21 R Atarka's Command @Chris Rahn
+22 R Dromoka's Command @James Ryman
+23 C Grisly Salvage @Dave Kendall
+24 C Ichor Wellspring @Steven Belledin
+25 C Relic of Progenitus @Jean-Sébastien Rossbach

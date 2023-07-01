@@ -1,0 +1,7 @@
+Name:Endless Sands
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SpellDescription$ Exile target creature you control.
+A:AB$ ChangeZoneAll | Cost$ 4 T Sac<1/CARDNAME> | ChangeType$ Creature.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Return each creature card exiled with CARDNAME to the battlefield under its owner's control.
+Oracle:{T}: Add {C}.\n{2}, {T}: Exile target creature you control.\n{4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner's control.

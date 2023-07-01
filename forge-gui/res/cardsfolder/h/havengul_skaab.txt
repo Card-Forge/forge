@@ -1,0 +1,8 @@
+Name:Havengul Skaab
+ManaCost:5 U
+Types:Creature Zombie Horror
+PT:4/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, return another creature you control to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Other+YouCtrl
+AI:RemoveDeck:Random
+Oracle:Whenever Havengul Skaab attacks, return another creature you control to its owner's hand.

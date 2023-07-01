@@ -1,0 +1,7 @@
+Name:Orcish Librarian
+ManaCost:1 R
+Types:Creature Orc
+PT:1/1
+A:AB$ Dig | Cost$ R T | Defined$ You | DigNum$ 8 | ChangeNum$ 4 | RandomChange$ True | DestinationZone$ Exile | LibraryPosition2$ 0 | DestinationZone2$ Library | SpellDescription$ Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
+AI:RemoveDeck:All
+Oracle:{R}, {T}: Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.

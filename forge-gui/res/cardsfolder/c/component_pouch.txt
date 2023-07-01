@@ -1,0 +1,9 @@
+Name:Component Pouch
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T SubCounter<1/COMPONENT> | Amount$ 2 | Produced$ Combo AnyDifferent | SpellDescription$ Add two mana of different colors.
+A:AB$ RollDice | Cost$ T | Sides$ 20 | ResultSubAbilities$ 1-9:PutOne,10-20:PutTwo | SpellDescription$ Roll a d20.
+SVar:PutOne:DB$ PutCounter | Defined$ Self | CounterType$ COMPONENT | CounterNum$ 1 | SpellDescription$ 1—9 VERT Put a component counter on CARDNAME.
+SVar:PutTwo:DB$ PutCounter | Defined$ Self | CounterType$ COMPONENT | CounterNum$ 2 | SpellDescription$ 10—20 VERT Put two component counters on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:{T}, Remove a component counter from Component Pouch: Add two mana of different colors.\n{T}: Roll a d20.\n1—9 | Put a component counter on Component Pouch.\n10—20 | Put two component counters on Component Pouch.

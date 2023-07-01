@@ -1,0 +1,8 @@
+Name:Domesticated Mammoth
+ManaCost:1 G
+Types:Snow Creature Mammoth
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | Static$ True | TriggerDescription$ CARDNAME enters the battlefield with a token copy of Pacifism attached to it.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ pacifism | TokenOwner$ You | AttachedTo$ Self
+DeckHas:Ability$Token
+Oracle:Domesticated Mammoth enters the battlefield with a token copy of Pacifism attached to it.

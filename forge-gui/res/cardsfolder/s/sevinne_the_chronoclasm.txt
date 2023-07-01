@@ -1,0 +1,9 @@
+Name:Sevinne, the Chronoclasm
+ManaCost:2 U R W
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:Prevent all damage that would be dealt to CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl+wasCastFromYourGraveyard,Sorcery.YouCtrl+wasCastFromYourGraveyard | ActivatorThisTurnCast$ EQ1 | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first instant or sorcery spell from your graveyard each turn, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:AIPriorityModifier:9
+Oracle:Prevent all damage that would be dealt to Sevinne, the Chronoclasm.\nWhenever you cast your first instant or sorcery spell from your graveyard each turn, copy that spell. You may choose new targets for the copy.

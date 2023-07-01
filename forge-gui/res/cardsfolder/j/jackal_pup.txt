@@ -1,0 +1,8 @@
+Name:Jackal Pup
+ManaCost:R
+Types:Creature Jackal
+PT:2/1
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever Jackal Pup is dealt damage, it deals that much damage to you.

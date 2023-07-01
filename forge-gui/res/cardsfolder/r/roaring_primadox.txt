@@ -1,0 +1,9 @@
+Name:Roaring Primadox
+ManaCost:3 G
+Types:Creature Beast
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return a creature you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1
+AI:RemoveDeck:Random
+SVar:NeedsToPlay:Creature.YouCtrl
+Oracle:At the beginning of your upkeep, return a creature you control to its owner's hand.

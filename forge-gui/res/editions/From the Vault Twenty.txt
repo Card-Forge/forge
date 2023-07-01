@@ -1,0 +1,29 @@
+[metadata]
+Code=V13
+Alias=V20
+Date=2013-08-23
+Name=From the Vault: Twenty
+Type=Collector_Edition
+ScryfallCode=V13
+
+[cards]
+1 M Dark Ritual @Clint Langley
+2 M Swords to Plowshares @Terese Nielsen
+3 M Hymn to Tourach @Greg Staples
+4 M Fyndhorn Elves @Igor Kieryluk
+5 M Impulse @Izzy
+6 M Wall of Blossoms @Heather Hudson
+7 M Thran Dynamo @Ron Spears
+8 M Tangle Wire @Marco Nelor
+9 M Fact or Fiction @Terese Nielsen
+10 M Chainer's Edict @Mark Zug
+11 M Akroma's Vengeance @Aleksi Briclot
+12 M Gilded Lotus @Daniel Ljunggren
+13 M Ink-Eyes, Servant of Oni @Wayne Reynolds
+14 M Char @Adam Rex
+15 M Venser, Shaper Savant @Eric Deschamps
+16 M Chameleon Colossus @Darrell Riche
+17 M Cruel Ultimatum @Todd Lockwood
+18 M Jace, the Mind Sculptor @Jason Chan
+19 M Green Sun's Zenith @David Rapoza
+20 M Kessig Wolf Run @Eytan Zana

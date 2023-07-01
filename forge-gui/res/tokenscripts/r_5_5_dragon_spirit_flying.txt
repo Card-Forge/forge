@@ -1,0 +1,7 @@
+Name:Dragon Spirit Token
+ManaCost:no cost
+Types:Creature Dragon Spirit
+Colors:red
+K:Flying
+PT:5/5
+Oracle:Flying

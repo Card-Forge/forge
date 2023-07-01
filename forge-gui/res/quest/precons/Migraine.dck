@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Migraine
+Description=In the second episode of the Rath Cycle, Gerrard and the heroes of the Weatherlight penetrate Volrath's stronghold on the plane of Rath. With discard spells and fast creatures, "Migraine" gives you control of one valuable resource. Your opponent's mind.
+Deck Type=constructed
+Set=STH
+Image=migraine.jpg
+[main]
+2 Bottomless Pit|STH
+3 Coercion|TMP
+1 Dark Banishing|TMP
+1 Dark Ritual|TMP
+4 Dauthi Horror|TMP
+1 Dauthi Mindripper|TMP
+2 Dauthi Slayer|TMP
+4 Death Stroke|STH
+2 Diabolic Edict|TMP
+1 Ensnaring Bridge|STH
+4 Foul Imp|STH
+1 Hornet Cannon|STH
+3 Megrim|STH
+2 Mind Peel|STH
+1 Mindwarper|STH
+2 Pit Imp|TMP
+1 Portcullis|STH
+1 Rabid Rats|STH
+24 Swamp|TMP
+[sideboard]

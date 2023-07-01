@@ -1,0 +1,8 @@
+Name:Lightning-Rig Crew
+ManaCost:2 R
+Types:Creature Goblin Pirate
+PT:0/5
+A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Card.Pirate | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a Pirate spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:{T}: Lightning-Rig Crew deals 1 damage to each opponent.\nWhenever you cast a Pirate spell, untap Lightning-Rig Crew.

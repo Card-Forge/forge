@@ -1,0 +1,8 @@
+Name:Bane of Bala Ged
+ManaCost:7
+Types:Creature Eldrazi
+PT:7/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, defending player exiles two permanents they control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | DefinedPlayer$ TriggeredDefendingPlayer | Mandatory$ True | ChangeType$ Permanent | ChangeNum$ 2 | Chooser$ DefendingPlayer | Hidden$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Bane of Bala Ged attacks, defending player exiles two permanents they control.

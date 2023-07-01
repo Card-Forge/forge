@@ -1,0 +1,104 @@
+dog.png
+size: 384,100
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 261, 34
+  size: 16, 16     
+Idle 
+  xy: 8, 3
+  size: 18, 16   
+Idle 
+  xy: 40, 3
+  size: 18, 16
+Idle 
+  xy: 72, 3
+  size: 18, 16
+Idle 
+  xy: 104, 3
+  size: 18, 16
+Idle 
+  xy: 136, 3
+  size: 18, 16   
+Idle 
+  xy: 168, 3
+  size: 18, 16   
+Idle 
+  xy: 200, 3
+  size: 18, 16
+Idle 
+  xy: 232, 3
+  size: 18, 16
+Idle 
+  xy: 264, 3
+  size: 18, 16
+Idle 
+  xy: 296, 3
+  size: 18, 16   
+Idle 
+  xy: 328, 3
+  size: 18, 16
+Idle 
+  xy: 360, 3
+  size: 18, 16
+Walk 
+  xy: 8, 31
+  size: 18, 16  
+Walk 
+  xy: 40, 31
+  size: 18, 16  
+Walk 
+  xy: 72, 31
+  size: 18, 16  
+Walk 
+  xy: 104, 31
+  size: 18, 16  
+Attack 
+  xy: 10, 58
+  size: 24, 20  
+Attack 
+  xy: 42, 58
+  size: 24, 20  
+Attack 
+  xy: 74, 58
+  size: 24, 20  
+Attack 
+  xy: 106, 58
+  size: 24, 20  
+Death 
+  xy: 8, 81
+  size: 18, 16
+Death 
+  xy: 40, 81
+  size: 18, 16
+Death 
+  xy: 72, 81
+  size: 18, 16
+Death 
+  xy: 104, 81
+  size: 18, 16
+Death 
+  xy: 136, 81
+  size: 18, 16
+Death 
+  xy: 168, 81
+  size: 18, 16
+Death 
+  xy: 200, 81
+  size: 18, 16
+Death 
+  xy: 232, 81
+  size: 18, 16
+Death 
+  xy: 264, 81
+  size: 18, 16
+Death 
+  xy: 296, 81
+  size: 18, 16
+Death 
+  xy: 328, 81
+  size: 18, 16
+Death 
+  xy: 360, 81
+  size: 18, 16

@@ -1,0 +1,14 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt #03
+URL:https://i.redd.it/79qtquq6fzmy.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=10
+humanhand=Brutal Expulsion;Shock|AER;Stormchaser Mage;Welding Sparks
+humanbattlefield=Mountain|KLD;Mountain|PCA;Mountain|A;Mountain;Mountain;Wandering Fumarole;Wandering Fumarole;Dynavolt Tower;Thermo-Alchemist;Weldfast Monitor
+aibattlefield=Kalitas, Traitor of Ghet|Counters:P1P1=2;Indulgent Aristocrat|Counters:P1P1=2;Hinterland Drake

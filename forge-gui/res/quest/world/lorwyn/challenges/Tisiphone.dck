@@ -1,0 +1,37 @@
+[quest]
+id=5007
+OpponentName=Tisiphone
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=3 rares;33% 1 black rare;33% 1 red rare;33% Ashenmoor Liege|SHM
+Credit Reward=250
+HumanExtras=
+AIExtras=Liliana Vess
+
+[metadata]
+Name=quest5007
+Title=Tisiphone
+Difficulty=hard
+Description=Tisiphone stares at you. Your chest begins to burn.
+Icon=Tisiphone.jpg
+Deck Type=constructed
+
+[Main]
+4 Ashenmoor Liege|SHM
+2 Brighthearth Banneret|MOR
+2 Din of the Fireherd|SHM
+4 Fists of the Demigod|SHM
+4 Flamekin Harbinger|LRW
+4 Incandescent Soulstoke|LRW
+4 Kulrath Knight|SHM
+4 Manamorphose|SHM
+18 Mountain|LRW
+4 Primal Beyond|MOR
+4 Scar|SHM
+4 Smokebraider|LRW
+2 Stigma Lasher|EVE
+
+[sideboard]
+[planes]
+[schemes]

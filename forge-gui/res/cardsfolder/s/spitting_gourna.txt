@@ -1,0 +1,7 @@
+Name:Spitting Gourna
+ManaCost:3 G G
+Types:Creature Beast
+PT:3/4
+K:Reach
+K:Morph:4 G
+Oracle:Reach (This creature can block creatures with flying.)\nMorph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

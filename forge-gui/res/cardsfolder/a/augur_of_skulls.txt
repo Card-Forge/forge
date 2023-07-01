@@ -1,0 +1,7 @@
+Name:Augur of Skulls
+ManaCost:1 B
+Types:Creature Skeleton Wizard
+PT:1/1
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Target player discards two cards. Activate only during your upkeep.
+Oracle:{1}{B}: Regenerate Augur of Skulls.\nSacrifice Augur of Skulls: Target player discards two cards. Activate only during your upkeep.

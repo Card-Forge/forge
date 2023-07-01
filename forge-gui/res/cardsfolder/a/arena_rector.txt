@@ -1,0 +1,10 @@
+Name:Arena Rector
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle.
+SVar:TrigExile:AB$ ChangeZone | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Origin$ Library | Destination$ Battlefield | ChangeType$ Planeswalker.YouOwn | ChangeNum$ 1
+SVar:SacMe:4
+AI:RemoveDeck:Random
+DeckNeeds:Type$Planeswalker
+Oracle:When Arena Rector dies, you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle.

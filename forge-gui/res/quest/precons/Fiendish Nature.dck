@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Fiendish Nature
+Description=Use fast mana sources to power up a horde of big, green uglies with attitude. A touch of black regrowth keeps the hits coming. "Fiendish Nature" will give your game a mean streak.
+Deck Type=constructed
+Set=ULG
+Image=fiendish_nature.jpg
+[main]
+2 Symbiosis|USG
+1 Cradle Guard|USG
+2 Elvish Lyrist|USG
+2 Slippery Karst|USG
+1 Polluted Mire|USG
+2 Expunge|USG
+1 Winding Wurm|USG
+6 Swamp|6ED
+13 Forest|6ED
+1 No Rest for the Wicked|USG
+1 Diabolic Servitude|USG
+1 Victimize|USG
+1 Rancor|ULG
+1 Phyrexian Reclamation|ULG
+2 Plague Dogs|UDS
+1 Splinter|UDS
+2 Hunting Moa|UDS
+3 Heart Warden|UDS
+1 Marker Beetles|UDS
+1 Goliath Beetle|UDS
+3 Yavimaya Elder|UDS
+2 Gamekeeper|UDS
+1 Pattern of Rebirth|UDS
+1 Braidwood Cup|UDS
+1 Chime of Night|UDS
+1 Ancient Silverback|UDS
+1 Phyrexian Monitor|UDS
+2 Twisted Experiment|UDS
+3 Plated Spider|UDS
+[sideboard]

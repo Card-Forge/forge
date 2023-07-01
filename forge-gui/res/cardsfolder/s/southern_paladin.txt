@@ -1,0 +1,7 @@
+Name:Southern Paladin
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:3/3
+A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent | SpellDescription$ Destroy target red permanent.
+AI:RemoveDeck:Random
+Oracle:{W}{W}, {T}: Destroy target red permanent.

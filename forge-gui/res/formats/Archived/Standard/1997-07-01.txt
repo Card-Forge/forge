@@ -1,0 +1,7 @@
+[format]
+Name:Standard (WTH)
+Type:Archived
+Subtype:Standard
+Effective:1997-07-01
+Sets:ICE, HML, ALL, MIR, VIS, 5ED, WTH
+Banned:Amulet of Quoz; Timmerian Fiends; Zuran Orb

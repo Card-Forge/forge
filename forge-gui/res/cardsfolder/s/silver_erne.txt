@@ -1,0 +1,7 @@
+Name:Silver Erne
+ManaCost:3 U
+Types:Creature Bird
+PT:2/2
+K:Flying
+K:Trample
+Oracle:Flying, trample

@@ -1,0 +1,8 @@
+Name:Mysterious Egg
+ManaCost:1
+Types:Creature Egg
+PT:0/2
+T:Mode$ Mutates | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature mutates, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever this creature mutates, put a +1/+1 counter on it.

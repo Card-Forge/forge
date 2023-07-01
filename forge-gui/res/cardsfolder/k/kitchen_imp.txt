@@ -1,0 +1,9 @@
+Name:Kitchen Imp
+ManaCost:3 B
+Types:Creature Imp
+PT:2/2
+K:Flying
+K:Haste
+K:Madness:B
+DeckHints:Ability$Discard
+Oracle:Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

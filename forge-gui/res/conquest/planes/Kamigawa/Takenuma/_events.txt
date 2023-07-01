@@ -1,0 +1,9 @@
+Name:Infernal Kirin|Deck:Infernal Kirin.dck|Variant:Commander|Avatar:Infernal Kirin|Desc:
+Name:Marrow-Gnawer|Deck:Marrow-Gnawer.dck|Variant:Commander|Avatar:Marrow-Gnawer|Desc:
+Name:Kuro, Pitlord|Deck:Kuro, Pitlord.dck|Variant:Commander|Avatar:Kuro, Pitlord|Desc:
+Name:Maga, Traitor to Mortals|Deck:Maga, Traitor to Mortals.dck|Variant:Commander|Avatar:Maga, Traitor to Mortals|Desc:
+Name:Lantern-Lit Graveyard|Deck:Lantern-Lit Graveyard.dck|Variant:Planechase|Avatar:Lantern-Lit Graveyard|Desc:
+Name:Toshiro Umezawa|Deck:Toshiro Umezawa.dck|Variant:Commander|Avatar:Toshiro Umezawa|Desc:
+Name:Yukora, the Prisoner|Deck:Yukora, the Prisoner.dck|Variant:Commander|Avatar:Yukora, the Prisoner|Desc:
+Name:Gix|Deck:Gix.dck|Variant:Vanguard|Avatar:Gix|Desc:
+Name:Random Takenuma|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

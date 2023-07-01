@@ -1,0 +1,7 @@
+Name:Sheoldred's Headcleaver
+ManaCost:3 B
+Types:Creature Phyrexian Warrior
+PT:2/4
+K:Menace
+K:Toxic:2
+Oracle:Menace\nToxic 2 (Players dealt combat damage by this creature also gets two poison counter.)

@@ -1,0 +1,9 @@
+Name:Untethered Express
+ManaCost:4
+Types:Artifact Vehicle
+PT:4/4
+K:Trample
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Crew:1
+Oracle:Trample\nWhenever Untethered Express attacks, put a +1/+1 counter on it.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

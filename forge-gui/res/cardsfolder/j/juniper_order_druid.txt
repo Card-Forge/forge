@@ -1,0 +1,6 @@
+Name:Juniper Order Druid
+ManaCost:2 G
+Types:Creature Human Cleric Druid
+PT:1/1
+A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ PoolExtraMana | SpellDescription$ Untap target land.
+Oracle:{T}: Untap target land.

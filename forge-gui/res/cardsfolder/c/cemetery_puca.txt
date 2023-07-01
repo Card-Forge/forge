@@ -1,0 +1,9 @@
+Name:Cemetery Puca
+ManaCost:1 UB UB
+Types:Creature Shapeshifter
+PT:1/2
+# Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ CemeteryPucaCopy | TriggerDescription$ Whenever a creature dies, you may pay {1}. If you do, CARDNAME becomes a copy of that creature, except it has this ability.
+SVar:CemeteryPucaCopy:AB$ Clone | Cost$ 1 | Defined$ TriggeredCardLKICopy | GainThisAbility$ True
+AI:RemoveDeck:All
+Oracle:Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature, except it has this ability.

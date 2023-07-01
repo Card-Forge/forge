@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Orzhov Oppression
+Description=The Orzhov Syndicate hides its racketeering enterprises under a veneer of piety. Lead the corrupt hierarchy to victory with the "Orzhov Oppression" deck. Clamp down on your opponents and bleed them dry, drop by inevitable drop.
+Deck Type=constructed
+Set=GTC
+Image=orzhov_oppression.jpg
+[main]
+1  Orzhov Guildgate|GTC
+12  Plains|RTR
+13  Swamp|RTR
+2  Basilica Guards|GTC
+3  Basilica Screecher|GTC
+1  Guardian Lions|M13
+1  High Priest of Penance|GTC
+2  Kingpin's Pet|GTC
+1  Knight of Obligation|GTC
+1  Shadow Alley Denizen|GTC
+2  Silvercoat Lion|M13
+1  Smog Elemental|GTC
+2  Syndicate Enforcer|GTC
+1  Tormented Soul|M13
+1  Treasury Thrull+|GTC
+1  Vizkopa Guildmage|GTC
+1  Zombie Goliath|M13
+2  Angelic Edict|GTC
+1  Blood Reckoning|M13
+2  Dying Wish|GTC
+1  Executioner's Swing|GTC
+1  Gift of Orzhova|GTC
+1  Jayemdae Tome|M13
+1  Murder|M13
+1  One Thousand Lashes|GTC
+2  Orzhov Keyrune|GTC
+1  Purge the Profane|GTC
+1  Rain of Blades|M13
+[sideboard]

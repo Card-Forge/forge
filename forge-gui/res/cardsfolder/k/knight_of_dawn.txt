@@ -1,0 +1,7 @@
+Name:Knight of Dawn
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+A:AB$ Protection | Cost$ W W | Defined$ Self | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
+Oracle:First strike\n{W}{W}: Knight of Dawn gains protection from the color of your choice until end of turn.

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Black4
+Title=Yawgmoth
+Difficulty=very hard
+Description=Black deck
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Academy Rector|UDS
+4 Corrupt|USG
+4 Dark Ritual|USG
+4 Duress|USG
+4 No Mercy|ULG
+4 Persecute|USG
+1 Phyrexian Tower|USG
+4 Drain Life|LEA
+4 Soul Feast|UDS
+1 Subversion|ULG
+16 Swamp|USG|2
+4 Yawgmoth's Bargain|UDS
+4 Scrubland|LEA
+2 Godless Shrine|GPT

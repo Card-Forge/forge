@@ -1,0 +1,7 @@
+Name:Dragon Token
+ManaCost:no cost
+Types:Creature Dragon
+Colors:red
+K:Flying
+PT:4/4
+Oracle:Flying

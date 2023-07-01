@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/07/071.-M191.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your Overwhelming Splendor is attached to your opponent. Start with no cards in either graveyard.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Switcheroo;Atzocan Archer;Strider Harness;Recollect
+humanbattlefield=Overwhelming Splendor|EnchantingPlayer:AI;Daybreak Chaplain;Aggressive Mammoth;Thrashing Brontodon;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor
+aibattlefield=Hungering Hydra|Id:1|Counters:P1P1=3;Oakenform|AttachedTo:1;Darigaaz Reincarnated|SummonSick;Glorybringer|SummonSick;Guttersnipe

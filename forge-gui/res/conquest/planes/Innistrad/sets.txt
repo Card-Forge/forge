@@ -1,0 +1,6 @@
+ISD
+DKA
+AVR
+SOI
+EMN
+C14

@@ -1,0 +1,6 @@
+Name:Thrashing Brontodon
+ManaCost:1 G G
+Types:Creature Dinosaur
+PT:3/4
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:{1}, Sacrifice Thrashing Brontodon: Destroy target artifact or enchantment.

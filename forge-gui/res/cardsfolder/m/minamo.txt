@@ -1,0 +1,12 @@
+Name:Minamo
+ManaCost:no cost
+Types:Plane Kamigawa
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts a spell, that player may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredActivator | OptionalDecider$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each player may return a blue card from their graveyard to their hand.
+SVar:RolledChaos:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZoneAll
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Graveyard | Defined$ Player.IsRemembered | Amount$ 1 | RememberChosen$ True
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasColorInGraveyard$ U
+Oracle:Whenever a player casts a spell, that player may draw a card.\nWhenever chaos ensues, each player may return a blue card from their graveyard to their hand.

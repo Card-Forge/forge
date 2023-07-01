@@ -1,0 +1,12 @@
+Name:Woodvine Elemental
+ManaCost:4 G W
+Types:Creature Elemental
+PT:4/4
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ Parley — Whenever CARDNAME attacks, each player reveals the top card of their library. For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | NumDef$ +X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+Oracle:Trample\nParley — Whenever Woodvine Elemental attacks, each player reveals the top card of their library. For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.

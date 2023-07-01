@@ -1,0 +1,11 @@
+Name:Alora, Merry Thief
+ManaCost:2 U
+Types:Legendary Creature Halfling Rogue
+PT:3/2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. Return that creature to its owner's hand at the beginning of the next end step.
+SVar:TrigUnblockable:DB$ Effect | TgtPrompt$ Select up to one target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | SubAbility$ DBDelTrig
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | SpellDescription$ Return that creature to its owner's hand at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
+K:Choose a Background
+Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. Return that creature to its owner's hand at the beginning of the next end step.\nChoose a Background (You can have a Background as a second commander.)

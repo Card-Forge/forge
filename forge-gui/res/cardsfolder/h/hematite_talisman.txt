@@ -1,0 +1,7 @@
+Name:Hematite Talisman
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a red spell, you may pay {3}. If you do, untap target permanent.
+SVar:TrigUntap:AB$ Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+AI:RemoveDeck:Random
+Oracle:Whenever a player casts a red spell, you may pay {3}. If you do, untap target permanent.

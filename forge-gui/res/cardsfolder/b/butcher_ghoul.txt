@@ -1,0 +1,6 @@
+Name:Butcher Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:1/1
+K:Undying
+Oracle:Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

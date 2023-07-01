@@ -1,0 +1,35 @@
+[metadata]
+Name=GAS_23_6_Golgari Midrange Sultai Generated Deck_784_16
+[Main]
+1 Forest|DOM|1
+2 Forest|DOM|3
+3 Forest|GRN
+1 Forest|M19|1
+2 Forest|M19|4
+1 Forest|RIX
+1 Forest|RNA
+1 Forest|WAR|2
+1 Forest|XLN|4
+3 Golgari Findbroker|GRN
+4 Jadelight Ranger|RIX
+4 Llanowar Elves|GNT
+3 Memorial to Unity|DOM
+3 Merfolk Branchwalker|XLN
+2 Midnight Reaper|GRN
+4 Ravenous Chupacabra|A25
+4 Seekers' Squire|XLN
+1 Swamp|DOM|1
+1 Swamp|GRN
+2 Swamp|RIX
+2 Swamp|RNA
+1 Swamp|WAR|2
+4 Thrashing Brontodon|GNT
+2 Untamed Kavu|DOM
+3 Vivien Reid|M19
+4 Wildgrowth Walker|XLN
+[Sideboard]
+3 Aggressive Mammoth|M19
+3 Arboreal Grazer|WAR
+3 Axebane Beast|RNA
+1 Midnight Reaper|GRN
+4 Vivien, Champion of the Wilds|WAR

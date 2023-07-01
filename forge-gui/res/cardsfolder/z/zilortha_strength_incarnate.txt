@@ -1,0 +1,7 @@
+Name:Zilortha, Strength Incarnate
+ManaCost:3 R G
+Types:Legendary Creature Dinosaur
+PT:7/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Lethal damage dealt to CARDNAME is determined by its power rather than its toughness. | Description$ Lethal damage dealt to creatures you control is determined by their power rather than their toughness.
+Oracle:Trample\nLethal damage dealt to creatures you control is determined by their power rather than their toughness.

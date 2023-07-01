@@ -1,0 +1,5 @@
+Name:Tower of Eons
+ManaCost:4
+Types:Artifact
+A:AB$ GainLife | Cost$ 8 T | LifeAmount$ 10 | SpellDescription$ You gain 10 life.
+Oracle:{8}, {T}: You gain 10 life.

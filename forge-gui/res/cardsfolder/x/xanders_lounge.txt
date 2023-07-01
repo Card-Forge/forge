@@ -1,0 +1,6 @@
+Name:Xander's Lounge
+ManaCost:no cost
+Types:Land Island Swamp Mountain
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {U}, {B}, or {R}.)\nXander's Lounge enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

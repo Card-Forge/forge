@@ -1,0 +1,7 @@
+Name:Cenn's Tactician
+ManaCost:W
+Types:Creature Kithkin Soldier
+PT:1/1
+A:AB$ PutCounter | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target soldier creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target Soldier creature.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | CanBlockAmount$ 1 | Description$ Each creature you control with a +1/+1 counter on it can block an additional creature each combat.
+Oracle:{W}, {T}: Put a +1/+1 counter on target Soldier creature.\nEach creature you control with a +1/+1 counter on it can block an additional creature each combat.

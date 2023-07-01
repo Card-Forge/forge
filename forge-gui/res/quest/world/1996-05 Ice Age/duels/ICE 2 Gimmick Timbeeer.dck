@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=ICE 2 Gimmick: Timbeeer!
+Title=Timbeeer!
+Difficulty=medium
+Description="Wood is wasted in the dirt." -Orcish proverb
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Balduvian Horde|ALL
+2 Deadly Insect|ALL|1
+2 Deadly Insect|ALL|2
+2 Essence Filter|ICE
+12 Forest|ICE|2
+4 Fyndhorn Elves|ICE
+4 Karplusan Forest|ICE
+6 Mountain|ICE|1
+4 Nature's Lore|ICE
+4 Orcish Lumberjack|ICE
+2 Phyrexian War Beast|ALL|1
+2 Phyrexian War Beast|ALL|2
+2 Pyroclasm|ICE
+4 Scaled Wurm|ICE
+2 Shatter|ICE
+2 Stunted Growth|ICE
+2 Thawing Glaciers|ALL

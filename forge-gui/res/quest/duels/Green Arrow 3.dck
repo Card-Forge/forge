@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Green Arrow 3
+Title=Green Arrow
+Difficulty=hard
+Description=WRG Archer deck with Greatbow Doyen and Changelings
+Icon=Green Arrow.jpg
+Deck Type=constructed
+[main]
+3 Ezuri's Archers
+2 Thornweald Archer
+2 Stun Sniper
+2 Elvish Hunter
+2 Longbow Archer
+2 Femeref Archers
+2 Jagged-Scar Archers
+2 Lys Alana Bowmaster
+2 Tajuru Archer
+1 Centaur Archer
+2 Ranger en-Vec
+1 Taurean Mauler
+3 Avian Changeling
+1 Chameleon Colossus
+1 Changeling Berserker
+1 War-Spike Changeling
+4 Greatbow Doyen
+1 Changeling Hero
+2 Changeling Titan
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Ruby
+4 Plateau
+4 Savannah
+4 Taiga
+2 Temple Garden
+3 Windswept Heath
+1 Stomping Ground
+3 Grasslands
+[sideboard]

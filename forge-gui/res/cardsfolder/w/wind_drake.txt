@@ -1,0 +1,6 @@
+Name:Wind Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+Oracle:Flying

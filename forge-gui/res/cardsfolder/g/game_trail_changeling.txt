@@ -1,0 +1,7 @@
+Name:Game-Trail Changeling
+ManaCost:3 G G
+Types:Creature Shapeshifter
+PT:4/4
+K:Changeling
+K:Trample
+Oracle:Changeling (This card is every creature type.)\nTrample

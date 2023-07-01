@@ -1,0 +1,6 @@
+Name:Sandbar Merfolk
+ManaCost:U
+Types:Creature Merfolk
+PT:1/1
+K:Cycling:2
+Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

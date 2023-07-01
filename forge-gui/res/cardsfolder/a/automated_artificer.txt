@@ -1,0 +1,7 @@
+Name:Automated Artificer
+ManaCost:2
+Types:Artifact Creature Artificer
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ Spell.Artifact,Activated | SpellDescription$ Add {C}. Spend this mana only to activate an ability or cast an artifact spell.
+DeckNeeds:Type$Artifact
+Oracle:{T}: Add {C}. Spend this mana only to activate an ability or cast an artifact spell.

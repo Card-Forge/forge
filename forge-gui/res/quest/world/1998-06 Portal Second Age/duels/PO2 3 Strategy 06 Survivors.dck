@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 06 Survivors
+Title=Survivors
+Difficulty=hard
+Description=A custom strategy for the Black/Green color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Barbtooth Wurm|PO2
+4 Dakmor Plague|PO2
+2 Deathcoil Wurm|PO2
+12 Forest|PO2|2
+4 Hand of Death|PO2
+4 Hidden Horror|PO2
+2 Hurricane|PO2
+4 Ironhoof Ox|PO2
+4 Nature's Lore|PO2
+4 Plated Wurm|PO2
+4 Ravenous Rats|PO2
+12 Swamp|PO2|1

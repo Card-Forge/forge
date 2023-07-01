@@ -1,0 +1,8 @@
+Name:Silver Wyvern
+ManaCost:3 U U
+Types:Creature Drake
+PT:4/3
+K:Flying
+A:AB$ ChangeTargets | Cost$ U | TargetType$ SpellAbility.numTargets EQ1+IsTargeting Self | ValidTgts$ Card,Emblem | TgtPrompt$ Select target spell or ability that targets only CARDNAME | TargetRestriction$ Creature | SpellDescription$ Change the target of target spell or ability that targets only CARDNAME. The new target must be a creature.
+AI:RemoveDeck:All
+Oracle:Flying\n{U}: Change the target of target spell or ability that targets only Silver Wyvern. The new target must be a creature.

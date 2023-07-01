@@ -1,0 +1,7 @@
+Name:Godhunter Octopus
+ManaCost:5 U
+Types:Creature Octopus
+PT:5/5
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Enchantment,Permanent.enchanted | Description$ CARDNAME can't attack unless defending player controls an enchantment or an enchanted permanent.
+AI:RemoveDeck:Random
+Oracle:Godhunter Octopus can't attack unless defending player controls an enchantment or an enchanted permanent.

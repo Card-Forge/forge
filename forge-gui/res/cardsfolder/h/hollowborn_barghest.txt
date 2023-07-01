@@ -1,0 +1,9 @@
+Name:Hollowborn Barghest
+ManaCost:5 B B
+Types:Creature Demon Dog
+PT:7/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.YouCtrl | PresentCompare$ EQ0 | PresentZone$ Hand | Execute$ TrigLoseLifeEachOpp | TriggerDescription$ At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
+SVar:TrigLoseLifeEachOpp:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.ActivePlayerCtrl | PresentCompare$ EQ0 | PresentZone$ Hand | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2
+Oracle:At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.\nAt the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.

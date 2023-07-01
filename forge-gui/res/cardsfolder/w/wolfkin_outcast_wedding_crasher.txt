@@ -1,0 +1,22 @@
+Name:Wolfkin Outcast
+ManaCost:5 G
+Types:Creature Human Werewolf
+PT:5/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Wolf.YouCtrl,Werewolf.YouCtrl | Description$ This spell costs {2} less to cast if you control a Wolf or a Werewolf.
+K:Daybound
+SVar:BuffedBy:Wolf,Werewolf
+DeckHints:Type$Wolf|Werewolf
+AlternateMode:DoubleFaced
+Oracle:This spell costs {2} less to cast if you control a Wolf or Werewolf.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Wedding Crasher
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:6/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Wolf or Werewolf you control dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+K:Nightbound
+Oracle:Whenever Wedding Crasher or another Wolf or Werewolf you control dies, draw a card.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

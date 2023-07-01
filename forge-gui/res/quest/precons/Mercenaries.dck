@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mercenaries
+Description=With "Mercenaries," you enlist an infantry of vile fiends to do your bidding. Where there is one, there are many as you use these creatures' recruiting ability to spawn other monstrosities until the victory is secured.
+Deck Type=constructed
+Set=NMS
+Image=mercenaries.jpg
+[main]
+1 Alley Grifters|MMQ
+1 Battlefield Percher|NMS
+1 Belbe's Portal|NMS
+1 Carrion Wall|NMS
+1 Cateran Brute|MMQ
+1 Cateran Enforcer|MMQ
+1 Cateran Kidnappers|MMQ
+1 Cateran Summons|MMQ
+2 Dark Ritual|MMQ
+1 Dark Triumph|NMS
+1 Haunted Crossroads|MMQ
+1 Intimidation|MMQ
+1 Massacre|NMS
+2 Mind Swords|NMS
+3 Misshapen Fiend|MMQ
+3 Parallax Dementia|NMS
+2 Phyrexian Driver|NMS
+1 Phyrexian Prowler|NMS
+1 Rampart Crawler|MMQ
+1 Rathi Assassin|NMS
+1 Rathi Fiend|NMS
+1 Rathi Intimidator|NMS
+1 Seal of Doom|NMS
+1 Skulking Fugitive|MMQ
+4 Spineless Thug|NMS
+2 Strongarm Thug|MMQ
+23 Swamp|MMQ
+[sideboard]

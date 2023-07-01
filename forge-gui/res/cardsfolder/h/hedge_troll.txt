@@ -1,0 +1,8 @@
+Name:Hedge Troll
+ManaCost:2 G
+Types:Creature Troll Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Plains.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
+A:AB$ Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
+SVar:BuffedBy:Plains
+Oracle:Hedge Troll gets +1/+1 as long as you control a Plains.\n{W}: Regenerate Hedge Troll.

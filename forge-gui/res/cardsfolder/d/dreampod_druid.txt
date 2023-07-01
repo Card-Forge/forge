@@ -1,0 +1,10 @@
+Name:Dreampod Druid
+ManaCost:1 G
+Types:Creature Human Druid
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Card.Self+enchanted | TriggerDescription$ At the beginning of each upkeep, if CARDNAME is enchanted, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+SVar:EnchantMe:Once
+DeckHints:Type$Fungus
+DeckHas:Ability$Token
+Oracle:At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token.

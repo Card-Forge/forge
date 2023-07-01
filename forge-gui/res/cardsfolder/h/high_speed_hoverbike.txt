@@ -1,0 +1,10 @@
+Name:High-Speed Hoverbike
+ManaCost:2
+Types:Artifact Vehicle
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap up to one target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1
+K:Crew:1
+Oracle:Flash\nFlying\nWhen High-Speed Hoverbike enters the battlefield, tap up to one target creature.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -1,0 +1,8 @@
+Name:Ajani's Comrade
+ManaCost:1 G
+Types:Creature Elf Soldier
+PT:2/2
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Planeswalker.Ajani+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Trample\nAt the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on Ajani's Comrade.

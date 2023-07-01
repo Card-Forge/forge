@@ -1,0 +1,16 @@
+[metadata]
+Code=SS2
+Date=2019-06-28
+Name=Signature Spellbook: Gideon
+Type=Collector_Edition
+ScryfallCode=SS2
+
+[cards]
+1 M Gideon Jura @Aleksi Briclot
+2 R Martyr's Bond @Seb McKinnon
+3 R Path to Exile @Daarken
+4 R Rest in Peace @Jason Rainville
+5 R Shielded by Faith @Zack Stella
+6 R True Conviction @Ekaterina Burmak
+7 R Worship @Matt Stewart
+8 R Blackblade Reforged @Richard Kane Ferguson

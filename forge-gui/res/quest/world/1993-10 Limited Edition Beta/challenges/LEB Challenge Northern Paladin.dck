@@ -1,0 +1,20 @@
+[quest]
+id=LEB Challenge: Northern Paladin
+OpponentName=The Paladins
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+HumanExtras=Lich
+[metadata]
+Name=LEB Challenge: Northern Paladin
+Title=The Paladins
+Difficulty=very hard
+Description="Look to the north; there you will find aid and comfort." -The Book of Tal
+Icon=Northern Paladin.jpg
+Deck Type=constructed
+[main]
+30 Northern Paladin|LEB
+30 Plains|LEB|1

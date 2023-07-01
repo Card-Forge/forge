@@ -1,0 +1,10 @@
+Name:Perplexing Chimera
+ManaCost:4 U
+Types:Enchantment Creature Chimera
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | OptionalDecider$ You | Execute$ ExchangeControlSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell, you may exchange control of CARDNAME and that spell. If you do, you may choose new targets for the spell. (If the spell becomes a permanent, you control that permanent.)
+SVar:ExchangeControlSpell:DB$ ControlSpell | Defined$ TriggeredSpellAbility | Mode$ Exchange | Remember$ True | SubAbility$ DBChooseTargets
+SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ TriggeredSpellAbility | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Whenever an opponent casts a spell, you may exchange control of Perplexing Chimera and that spell. If you do, you may choose new targets for the spell. (If the spell becomes a permanent, you control that permanent.)

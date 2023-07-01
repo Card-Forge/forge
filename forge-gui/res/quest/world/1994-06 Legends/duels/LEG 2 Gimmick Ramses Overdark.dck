@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=LEG 2 Gimmick: Ramses Overdark
+Title=Ramses Overdark
+Difficulty=medium
+Description=The highway of fear is the shortest route to defeat.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Backfire|LEG
+4 Demonic Torment|LEG
+4 Evil Eye of Orms-by-Gore|LEG
+4 Gaseous Form|LEG
+12 Island|LEB|3
+4 Ramses Overdark|LEG
+4 Spirit Shackle|LEG
+12 Swamp|LEB|3
+4 Takklemaggot|LEG
+4 Venarian Gold|LEG
+4 Wall of Putrid Flesh|LEG

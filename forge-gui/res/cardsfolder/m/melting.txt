@@ -1,0 +1,7 @@
+Name:Melting
+ManaCost:3 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land | RemoveType$ Snow | Description$ All lands are no longer snow.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All lands are no longer snow.

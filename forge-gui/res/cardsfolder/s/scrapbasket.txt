@@ -1,0 +1,6 @@
+Name:Scrapbasket
+ManaCost:4
+Types:Artifact Creature Scarecrow
+PT:3/2
+A:AB$ Animate | Cost$ 1 | Defined$ Self | Colors$ White,Blue,Black,Red,Green | SpellDescription$ CARDNAME becomes all colors until end of turn.
+Oracle:{1}: Scrapbasket becomes all colors until end of turn.

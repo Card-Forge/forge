@@ -1,0 +1,5 @@
+Name:Armored Cancrix
+ManaCost:4 U
+Types:Creature Crab
+PT:2/5
+Oracle:

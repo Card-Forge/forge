@@ -1,0 +1,7 @@
+Name:Nissa's Triumph
+ManaCost:G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic+Forest | ChangeNum$ 2 | ConditionPresent$ Planeswalker.Nissa+YouCtrl | ConditionCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for up to two basic Forest cards. If you control a Nissa planeswalker, instead search your library for up to three land cards. Reveal those cards, put them into your hand, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 3 | ConditionPresent$ Planeswalker.Nissa+YouCtrl | ConditionCompare$ GE1
+DeckHints:Type$Nissa
+Oracle:Search your library for up to two basic Forest cards. If you control a Nissa planeswalker, instead search your library for up to three land cards. Reveal those cards, put them into your hand, then shuffle.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Magnum 3
+Title=Magnum
+Difficulty=hard
+Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Icon=Magnum.jpg
+Deck Type=constructed
+[main]
+2 Cold-Eyed Selkie
+2 Assault Zeppelid
+1 Mox Emerald
+1 Shielding Plax
+4 Tropical Island
+4 Misty Rainforest
+2 Gaea's Skyfolk
+1 Mox Sapphire
+1 Yavimaya's Embrace
+3 Island|ISD
+1 Slippery Bogle
+3 Forest|ISD
+4 Dryad Arbor
+1 Wistful Selkie
+1 Jungle Barrier
+3 Temporal Spring
+3 Sturdy Hatchling
+1 Leafdrake Roost
+1 Simic Sky Swallower
+2 Hinterland Harbor
+4 Shorecrasher Mimic
+2 Favor of the Overbeing
+1 Fable of Wolf and Owl
+1 Overbeing of Myth
+1 Vedalken Heretic
+1 Jhessian Infiltrator
+2 Lorescale Coatl
+1 Mystic Snake
+3 Murkfiend Liege
+2 Coiling Oracle
+1 Shambleshark
+[sideboard]

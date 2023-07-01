@@ -1,0 +1,6 @@
+Name:Coiled Tinviper
+ManaCost:3
+Types:Artifact Creature Snake
+PT:2/1
+K:First Strike
+Oracle:First strike

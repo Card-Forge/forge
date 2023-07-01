@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Erebos 3
+Title=Erebos
+Difficulty=hard
+Description=Mono B Devotion deck
+Icon=Erebos.jpg
+Deck Type=constructed
+[main]
+2 Nightveil Specter
+4 Gatekeeper of Malakir
+4 Phyrexian Obliterator
+3 Will-o'-the-Wisp
+2 Duty-Bound Dead
+1 Mox Jet
+1 Sygg, River Cutthroat
+2 Erebos, God of the Dead
+2 Mogis's Marauder
+2 Nantuko Shade
+2 Black Knight
+5 Swamp
+1 Dark Prophecy
+11 Swamp
+2 Thrull Parasite
+3 Swamp
+3 Geralf's Messenger
+4 Swamp
+4 Gray Merchant of Asphodel
+2 Wasp Lancer
+[sideboard]

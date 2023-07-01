@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Jesse James 1
+Title=Jesse James
+Difficulty=easy
+Description=UG Morph deck with Ixidron and Primal Whisperer
+Icon=Jesse James.jpg
+Deck Type=constructed
+[main]
+4 Ixidron
+4 Primal Whisperer
+4 Dermoplasm
+8 Forest
+16 Island
+3 Brine Elemental
+2 Hystrodon
+2 Krosan Cloudscraper
+2 Krosan Colossus
+3 Root Elemental
+2 Spitting Gourna
+2 Titanic Bulvox
+2 Towering Baloth
+2 Treespring Lorian
+2 Venomspout Brackus
+2 Woodcloaker
+[sideboard]

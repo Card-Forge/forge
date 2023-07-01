@@ -1,0 +1,9 @@
+Name:Bellowing Fiend
+ManaCost:4 B
+Types:Creature Spirit
+PT:3/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME deals damage to a creature, CARDNAME deals 3 damage to that creature's controller and 3 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ 3 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
+Oracle:Flying\nWhenever Bellowing Fiend deals damage to a creature, Bellowing Fiend deals 3 damage to that creature's controller and 3 damage to you.

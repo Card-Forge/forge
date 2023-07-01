@@ -1,0 +1,7 @@
+Name:Blizzard Elemental
+ManaCost:5 U U
+Types:Creature Elemental
+PT:5/5
+K:Flying
+A:AB$ Untap | Cost$ 3 U | SpellDescription$ Untap CARDNAME.
+Oracle:Flying\n{3}{U}: Untap Blizzard Elemental.

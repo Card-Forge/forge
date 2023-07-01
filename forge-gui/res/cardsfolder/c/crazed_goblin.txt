@@ -1,0 +1,6 @@
+Name:Crazed Goblin
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Crazed Goblin attacks each combat if able.

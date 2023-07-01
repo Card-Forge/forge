@@ -1,0 +1,7 @@
+Name:Cat Dragon Token
+ManaCost:no cost
+Types:Creature Cat Dragon
+Colors:black,red,green
+PT:3/3
+K:Flying
+Oracle:Flying

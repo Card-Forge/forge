@@ -1,0 +1,11 @@
+Name:Ganax, Astral Hunter
+ManaCost:4 R
+Types:Legendary Creature Dragon
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Dragon.Other+YouCtrl | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+K:Choose a Background
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever Ganax, Astral Hunter or another Dragon you control enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nChoose a Background (You can have a Background as a second commander.)

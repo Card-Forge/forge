@@ -1,0 +1,6 @@
+Name:Hymn of the Wilds
+ManaCost:no cost
+Types:Conspiracy
+S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card.Creature | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 1 | Description$ The first creature spell you cast each turn costs {1} less to cast.
+S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Instant,Sorcery | Caster$ You | Description$ You can't cast instant or sorcery spells.
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nThe first creature spell you cast each turn costs {1} less to cast.\nYou can't cast instant or sorcery spells.

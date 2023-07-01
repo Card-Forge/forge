@@ -1,0 +1,8 @@
+Name:Convergence of Dominion
+ManaCost:3
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.YouOwn | Type$ Ability | Amount$ 2 | MinMana$ 1 | AffectedZone$ Graveyard | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Description$ Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can't reduce the mana in that ability's activation cost to less than one mana.
+A:AB$ Mill | Cost$ T 3 | Defined$ You | NumCards$ 3 | PrecostDesc$ Translocation Protocols - | SpellDescription$ Mill three cards.
+AI:RemoveDeck:NonCommander
+DeckHas:Ability$Mill|Graveyard
+Oracle:Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can't reduce the mana in that ability's activation cost to less than one mana.\nTranslocation Protocols — {3}, {T}: Mill three cards.

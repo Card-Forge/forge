@@ -1,0 +1,9 @@
+Name:Chandra, Bold Pyromancer
+ManaCost:4 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:5
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | AILogic$ Always | SubAbility$ DBDealDamage | SpellDescription$ Add {R}{R}. CARDNAME deals 2 damage to target player.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2
+A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker.
+A:AB$ DamageAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumDmg$ 10 | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature,Planeswalker | ValidPlayers$ Targeted | ValidDescription$ target player and each creature and planeswalker they control. | SpellDescription$ CARDNAME deals 10 damage to target player and each creature and planeswalker they control.
+Oracle:[+1]: Add {R}{R}. Chandra, Bold Pyromancer deals 2 damage to target player.\n[-3]: Chandra, Bold Pyromancer deals 3 damage to target creature or planeswalker.\n[-7]: Chandra, Bold Pyromancer deals 10 damage to target player and each creature and planeswalker they control.

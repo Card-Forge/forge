@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mob Rule
+Description=Hordes of goblins are spoiling for a fight in this aggressive deck. Get ready to raze the city, as legendary goblin Krenko, Mob Boss recruits another goblin for every goblin you already have. As your mob grows, your opponent will have no place to hide.
+Deck Type=constructed
+Set=M13
+Image=mob_rule.jpg
+[main]
+1 Serpent's Gift|M13
+1 Chandra's Fury|M13
+1 Rummaging Goblin|M13
+2 Mogg Flunkies|M13
+2 Flinthoof Boar|M13
+1 Krenko, Mob Boss+|M13
+2 Reckless Brute|M13
+2 Dragon Hatchling|M13
+2 Fire Elemental|M13
+2 Krenko's Command|M13
+2 Flames of the Firebrand|M13
+1 Ring of Valkas|M13
+1 Arms Dealer|M13
+3 Goblin Arsonist|M13
+1 Evolving Wilds|M13
+1 Cleaver Riot|M13
+2 Volcanic Geyser|M13
+8 Forest|M13
+1 Trumpet Blast|M13
+1 Goblin Battle Jester|M13
+1 Bladetusk Boar|M13
+1 Fervor|M13
+1 Torch Fiend|M13
+1 Kindled Fury|M13
+15 Mountain|M13
+2 Titanic Growth|M13
+2 Furnace Whelp|M13
+[sideboard]

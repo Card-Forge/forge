@@ -1,0 +1,13 @@
+Name:Timmerian Fiends
+ManaCost:1 B B
+Types:Creature Horror
+PT:1/1
+K:Remove CARDNAME from your deck before playing if you're not playing for ante.
+A:AB$ Pump | Cost$ B B B Sac<1/CARDNAME> | ValidTgts$ Artifact | SubAbility$ DBAnte | ImprintCards$ Targeted | RememberObjects$ TargetedController | StackDescription$ SpellDescription | SpellDescription$ The owner of target artifact may ante the top card of their library. If that player doesn't, exchange ownership of that artifact and CARDNAME. Put the artifact card into your graveyard and CARDNAME from anywhere into that player's graveyard. This change in ownership is permanent.
+SVar:DBAnte:DB$ Dig | Defined$ Player.IsRemembered | DestinationZone$ Ante | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | Optional$ True | PromptToSkipOptionalAbility$ True | SubAbility$ ExchangeOwn1 | AILogic$ TimmerianFiends | StackDescription$ None
+SVar:ExchangeOwn1:DB$ GainOwnership | Defined$ Imprinted | DefinedPlayer$ You | SubAbility$ ToGrave1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+SVar:ToGrave1:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield | Destination$ Graveyard | SubAbility$ ExchangeOwn2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | StackDescription$ None
+SVar:ExchangeOwn2:DB$ GainOwnership | Defined$ Self | DefinedPlayer$ Remembered | SubAbility$ ToGrave | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+SVar:ToGrave:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Graveyard | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:Remove Timmerian Fiends from your deck before playing if you're not playing for ante.\n{B}{B}{B}, Sacrifice Timmerian Fiends: The owner of target artifact may ante the top card of their library. If that player doesn't, exchange ownership of that artifact and Timmerian Fiends. Put the artifact card into your graveyard and Timmerian Fiends from anywhere into that player's graveyard. This change in ownership is permanent.

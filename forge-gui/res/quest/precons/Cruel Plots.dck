@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Cruel Plots
+Description=Feed your power with the corpses of the weak. This deck features the exploit mechanic, which lets you reap benefits by sacrificing creatures. Effects that trigger when creatures die will serve to further your advantage. Only the most ruthless will survive.
+Deck Type=constructed
+Set=DTK
+Image=cruel_plots.jpg
+[Main]
+2 Shambling Goblin|DTK
+2 Sidisi's Faithful|DTK
+1 Hand of Silumgar|DTK
+2 Qarsi Sadist|DTK
+2 Palace Familiar|DTK
+2 Dutiful Attendant|DTK
+1 Minister of Pain|DTK
+1 Ukud Cobra|DTK
+1 Vulturous Aven|DTK
+1 Wandering Tombshell|DTK
+1 Gurmag Drowner|DTK
+1 Profaner of the Dead|DTK
+2 Youthful Scholar|DTK
+2 Rakshasa Gravecaller|DTK
+2 Silumgar Butcher|DTK
+1 Necromaster Dragon+|DTK
+2 Ruthless Deathfang|DTK
+1 Coat with Venom|DTK
+1 Ultimate Price|DTK
+1 Negate|DTK
+1 Silumgar's Scorn|DTK
+1 Silumgar Monument|DTK
+1 Gravepurge|DTK
+1 Mind Rot|DTK
+1 Reduce in Stature|DTK
+1 Death Wind|DTK
+1 Evolving Wilds|DTK
+13 Swamp|DTK
+11 Island|DTK

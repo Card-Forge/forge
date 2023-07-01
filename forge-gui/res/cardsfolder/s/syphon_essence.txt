@@ -1,0 +1,7 @@
+Name:Syphon Essence
+ManaCost:2 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | SubAbility$ DBToken | SpellDescription$ Counter target creature or planeswalker spell.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | SpellDescription$ Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Token|Sacrifice & Type$Blood
+Oracle:Counter target creature or planeswalker spell. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

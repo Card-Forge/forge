@@ -1,0 +1,9 @@
+Name:Barrow Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:4/4
+K:UpkeepCost:ExileFromGrave<1/Card.TopGraveyardCreature>
+SVar:NeedsToPlayVar:Y GE2
+SVar:Y:Count$TypeInYourYard.Creature
+SVar:NeedsOrderedGraveyard:TRUE
+Oracle:At the beginning of your upkeep, sacrifice Barrow Ghoul unless you exile the top creature card of your graveyard.

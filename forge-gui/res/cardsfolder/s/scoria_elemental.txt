@@ -1,0 +1,5 @@
+Name:Scoria Elemental
+ManaCost:4 R
+Types:Creature Elemental
+PT:6/1
+Oracle:

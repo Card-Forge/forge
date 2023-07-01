@@ -1,0 +1,6 @@
+Name:Mutavault
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature | AddAllCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 2/2 creature with all creature types until end of turn. It's still a land.
+Oracle:{T}: Add {C}.\n{1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.

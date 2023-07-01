@@ -1,0 +1,6 @@
+Name:Vedalken Entrancer
+ManaCost:3 U
+Types:Creature Vedalken Wizard
+PT:1/4
+A:AB$ Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards.
+Oracle:{U}, {T}: Target player mills two cards.

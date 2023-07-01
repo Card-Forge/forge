@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=LSV 2
+Title=Luis Scotch Vollgas
+Difficulty=medium
+Description="I dare you to find a better combination of magic cards"
+Icon=LSV.png
+Deck Type=constructed
+[Main]
+2 All Is Dust|ROE
+2 Angelheart Vial|ROE
+2 Cancel|ZEN
+4 Celestial Colonnade|WWK
+4 Day of Judgment|ZEN
+1 Deathless Angel|ROE
+2 Domestication|ROE
+1 Goliath Sphinx|WWK
+2 Guard Duty|ROE
+2 Guard Gomazoa|ROE
+4 Halimar Depths|WWK
+4 Island|ZEN|1
+2 Kraken Hatchling|ZEN
+2 Linvala, Keeper of Silence|ROE
+2 Oust|ROE
+4 Plains|ZEN|1
+2 Puncturing Light|ROE
+2 Rite of Replication|ZEN
+4 Sejiri Refuge|ZEN
+2 Spreading Seas|ZEN
+4 Tectonic Edge|WWK
+2 Vapor Snare|WWK
+4 Wall of Omens|ROE
+[sideboard]

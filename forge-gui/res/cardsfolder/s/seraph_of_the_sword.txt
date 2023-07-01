@@ -1,0 +1,7 @@
+Name:Seraph of the Sword
+ManaCost:3 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:Prevent all combat damage that would be dealt to CARDNAME.
+Oracle:Flying\nPrevent all combat damage that would be dealt to Seraph of the Sword.

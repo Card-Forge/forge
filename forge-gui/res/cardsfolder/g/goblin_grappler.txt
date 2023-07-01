@@ -1,0 +1,6 @@
+Name:Goblin Grappler
+ManaCost:R
+Types:Creature Goblin
+PT:1/1
+K:Provoke
+Oracle:Provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

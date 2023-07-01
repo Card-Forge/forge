@@ -1,0 +1,8 @@
+Name:Vanguard of Brimaz
+ManaCost:W W
+Types:Creature Cat Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, create a 1/1 white Cat Soldier creature token with vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat_soldier_vigilance | TokenOwner$ You
+Oracle:Vigilance\nHeroic — Whenever you cast a spell that targets Vanguard of Brimaz, create a 1/1 white Cat Soldier creature token with vigilance.

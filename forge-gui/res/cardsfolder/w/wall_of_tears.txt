@@ -1,0 +1,10 @@
+Name:Wall of Tears
+ManaCost:1 U
+Types:Creature Wall
+PT:0/4
+K:Defender
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+SVar:HasBlockEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.

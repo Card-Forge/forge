@@ -1,0 +1,8 @@
+Name:Magus of the Bazaar
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:0/1
+A:AB$ Draw | Cost$ T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
+AI:RemoveDeck:All
+Oracle:{T}: Draw two cards, then discard three cards.

@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 2 Wild at Heart
+Title=Wild at Heart
+Difficulty=medium
+Description=Thaumaturges remain silent around chimeras, lest their words conjure even stranger beasts.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Fated Infatuation|BNG
+4 Flurry of Horns|JOU
+12 Island|THS|2
+4 Keranos, God of Storms|JOU
+4 Lightning Strike|THS
+8 Mountain|THS|1
+4 Pull from the Deep|JOU
+4 Rise of Eagles|JOU
+4 Spellheart Chimera|THS
+4 Spite of Mogis|JOU
+4 Steam Augury|THS
+4 Temple of Epiphany|JOU

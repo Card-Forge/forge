@@ -1,0 +1,6 @@
+Name:Akroma, Angel of Wrath|Deck:Akroma, Angel of Wrath.dck|Variant:Commander|Avatar:Akroma, Angel of Wrath|Desc:
+Name:Akroma, Angel of Fury|Deck:Akroma, Angel of Fury.dck|Variant:Commander|Avatar:Akroma, Angel of Fury|Desc:
+Name:Diamond Faerie|Deck:Diamond Faerie.dck|Variant:Planechase|Avatar:Diamond Faerie|Desc:
+Name:Storm|Deck:Storm.dck|Variant:Vanguard|Avatar:Titania|Desc:
+Name:Red Deck Wins|Deck:Red Deck Wins.dck|Variant:Planechase|Avatar:Blistering Firecat|Desc:
+Name:Kaysa|Deck:Kaysa.dck|Variant:Commander|Avatar:Kaysa|Desc:

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (CSP)
+Type:Archived
+Subtype:Standard
+Effective:2006-08-20
+Sets:CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP

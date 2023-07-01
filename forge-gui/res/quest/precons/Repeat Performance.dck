@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=20
+Credits=2500
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Repeat Performance
+Description=Your creatures arrive ready to battle, bringing friends and beneficial effects, then they return to your hand with the help of Roaring Primadox. And when you summon them again . . . more friends and benefits!
+Deck Type=constructed
+Set=M13
+Image=repeat_performance.jpg
+[main]
+1 Glimmerpoint Stag|SOM
+2 Razorverge Thicket|SOM
+1 Stingerfling Spider|M12
+1 Stonehorn Dignitary|M12
+1 Green Sun's Zenith|MBS
+4 Llanowar Elves|M12
+1 Fiend Hunter|ISD
+1 Geist-Honored Monk|ISD
+1 Blade Splicer|NPH
+3 Borderland Ranger|AVR
+4 Avacyn's Pilgrim|ISD
+4 Lead the Stampede|MBS
+1 Thragtusk|M13
+4 Roaring Primadox|M13
+1 Mwonvuli Beast Tracker|M13
+2 Arbor Elf|M13
+1 Acidic Slime|M13
+3 Attended Knight|M13
+1 Brutalizer Exarch|NPH
+12 Forest|M13
+2 Elvish Visionary|M13
+1 Sunblast Angel|SOM
+8 Plains|M13
+[sideboard]
+3  Cloudshift|AVR
+2  Dismember|NPH
+3  Kemba's Skyguard|SOM
+4  Oblivion Ring|M13
+3  War Priest of Thune|M13

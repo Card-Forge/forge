@@ -1,0 +1,8 @@
+Name:Quagmire Lamprey
+ManaCost:2 B
+Types:Creature Fish
+PT:1/1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, put a -1/-1 counter on that creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredBlockerLKICopy | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Quagmire Lamprey becomes blocked by a creature, put a -1/-1 counter on that creature.

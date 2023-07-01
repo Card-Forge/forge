@@ -1,0 +1,5 @@
+Name:Call the Bloodline
+ManaCost:1 B
+Types:Enchantment
+A:AB$ Token | Cost$ 1 Discard<1/Card> | ActivationLimit$ 1 | TokenAmount$ 1 | TokenScript$ b_1_1_vampire_knight_lifelink | TokenOwner$ You | SpellDescription$ Create a 1/1 black Vampire Knight creature token with lifelink. Activate only once each turn.
+Oracle:{1}, Discard a card: Create a 1/1 black Vampire Knight creature token with lifelink. Activate only once each turn.

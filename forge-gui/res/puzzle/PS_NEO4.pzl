@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Kamigawa: Neon Dynasty #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/03/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your Cloudsteel Kirin is equipped to your Icingdeath, Frost Tyrant.
+[state]
+humanlife=-2
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Grafted Identity;When We Were Young;Mirrorhall Mimic;Otawara, Soaring City
+humanbattlefield=Icingdeath, Frost Tyrant|Id:1;Cloudsteel Kirin|AttachedTo:1;Devoted Paladin;Eiganjo, Seat of the Empire;Boseiju, Who Endures;Deserted Beach;Deserted Beach;Deserted Beach;Dreamroot Cascade;Dreamroot Cascade;Dreamroot Cascade
+aibattlefield=Kura, the Boundless Sky;The Shattered States Era|Transformed

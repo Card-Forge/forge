@@ -1,0 +1,10 @@
+Name:Scarecrow Totem
+ManaCost:no cost
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an Artifact Scarecrow in addition to it's other types and has alternative manacost {4}.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Scarecrow Captain's Perpetual Effect | SubAbility$ DBClearChosen
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Alternative Cost:4 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ Artifact & Scarecrow | Description$ That duplicate perpetually becomes an Artifact Scarecrow in addition to it's other types and has alternative manacost {4}.
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an Artifact Scarecrow in addition to it's other types and has alternative manacost {4}.

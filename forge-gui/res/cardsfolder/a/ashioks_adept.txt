@@ -1,0 +1,7 @@
+Name:Ashiok's Adept
+ManaCost:2 B
+Types:Creature Human Wizard
+PT:1/3
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose
+Oracle:Heroic — Whenever you cast a spell that targets Ashiok's Adept, each opponent discards a card.

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Saladin 4
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=very hard
+Description=Kyle Rose's Type 1.x WRG 'Gun' deck.
+Deck Type=constructed
+Card Reward=20% White Knight|5ED
+[main]
+3 Armageddon|5ED
+2 Disenchant|5ED
+3 Erhnam Djinn|ARN
+2 Flood Plain|MIR
+3 Incinerate|MIR
+3 Kjeldoran Outpost|ALL
+4 Lightning Bolt|LEB
+4 Mishra's Factory|ATQ
+4 Order of Leitbur|FEM
+3 Plains|MIR
+4 Plateau|LEB
+4 Savannah|LEB
+3 Savannah Lions|LEB
+2 Serrated Arrows|HML
+4 Suq'Ata Lancer|VIS
+2 Swords to Plowshares|LEB
+4 Tithe|VIS
+2 Tundra|LEB
+4 White Knight|5ED
+[sideboard]
+[planes]
+[schemes]

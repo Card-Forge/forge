@@ -1,0 +1,22 @@
+Name:Instigator Gang
+ManaCost:3 R
+Types:Creature Human Werewolf
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Attacking creatures you control get +1/+0.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
+
+ALTERNATE
+
+Name:Wildblood Pack
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 3 | Description$ Attacking creatures you control get +3/+0.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Trample\nAttacking creatures you control get +3/+0.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.

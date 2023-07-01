@@ -1,0 +1,8 @@
+Name:Mournful Zombie
+ManaCost:2 B
+Types:Creature Zombie
+PT:2/1
+A:AB$ GainLife | Cost$ W T | LifeAmount$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 1 life | SpellDescription$ Target player gains 1 life.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:{W}, {T}: Target player gains 1 life.

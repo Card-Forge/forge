@@ -1,0 +1,18 @@
+Name:Naked Singularity
+ManaCost:5
+Types:Artifact
+Text:If tapped for mana, Plains produce {R}, Islands produce {G}, Swamps produce {W}, Mountains produce {U}, and Forests produce {B} instead of any other type.
+K:Cumulative upkeep:3
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ReplaceWith$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
+SVar:ProduceR:DB$ ReplaceMana | ReplaceType$ R
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Island | ReplaceWith$ ProduceG | Secondary$ True | Description$ If tapped for mana, Islands produce G.
+SVar:ProduceG:DB$ ReplaceMana | ReplaceType$ G
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Swamp | ReplaceWith$ ProduceW | Secondary$ True | Description$ If tapped for mana, Swamps produce W.
+SVar:ProduceW:DB$ ReplaceMana | ReplaceType$ W
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Mountain | ReplaceWith$ ProduceU | Secondary$ True | Description$ If tapped for mana, Mountains produce U.
+SVar:ProduceU:DB$ ReplaceMana | ReplaceType$ U
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Forest | ReplaceWith$ ProduceB | Secondary$ True | Description$ If tapped for mana, Forests produce B.
+SVar:ProduceB:DB$ ReplaceMana | ReplaceType$ B
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Cumulative upkeep {3} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nIf tapped for mana, Plains produce {R}, Islands produce {G}, Swamps produce {W}, Mountains produce {U}, and Forests produce {B} instead of any other type.

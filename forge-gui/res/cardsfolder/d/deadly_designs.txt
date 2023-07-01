@@ -1,0 +1,7 @@
+Name:Deadly Designs
+ManaCost:1 B
+Types:Enchantment
+A:AB$ PutCounter | Cost$ 2 | CounterType$ PLOT | CounterNum$ 1 | Activator$ Player | SpellDescription$ Put a plot counter on CARDNAME. Any player may activate this ability.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE5_PLOT | Execute$ TrigDestroy | TriggerDescription$ When there are five or more plot counters on CARDNAME, sacrifice it. If you do, destroy up to two target creatures.
+SVar:TrigDestroy:AB$ Destroy | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | Cost$ Mandatory Sac<1/CARDNAME>
+Oracle:{2}: Put a plot counter on Deadly Designs. Any player may activate this ability.\nWhen there are five or more plot counters on Deadly Designs, sacrifice it. If you do, destroy up to two target creatures.

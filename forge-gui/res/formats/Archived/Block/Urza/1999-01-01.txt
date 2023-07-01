@@ -1,0 +1,6 @@
+[format]
+Name:Block: Urza (USG)
+Type:Archived
+Subtype:Block
+Effective:1999-01-01
+Sets:USG

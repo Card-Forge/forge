@@ -1,0 +1,5 @@
+Name:Heroes' Reunion
+ManaCost:G W
+Types:Instant
+A:SP$ GainLife | Cost$ G W | LifeAmount$ 7 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 7 life.
+Oracle:Target player gains 7 life.

@@ -1,0 +1,7 @@
+Name:Pegasus Charger
+ManaCost:2 W
+Types:Creature Pegasus
+PT:2/1
+K:Flying
+K:First Strike
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

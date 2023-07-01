@@ -1,0 +1,7 @@
+Name:Golden-Tail Disciple
+ManaCost:2 W
+Types:Enchantment Creature Fox Monk
+PT:2/3
+K:Lifelink
+DeckHas:Ability$LifeGain
+Oracle:Lifelink

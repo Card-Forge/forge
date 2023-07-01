@@ -1,0 +1,7 @@
+Name:Dauthi Mercenary
+ManaCost:2 B
+Types:Creature Dauthi Knight Mercenary
+PT:2/1
+K:Shadow
+A:AB$ Pump | Cost$ 1 B | NumAtt$ +1 | Defined$ Self | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{1}{B}: Dauthi Mercenary gets +1/+0 until end of turn.

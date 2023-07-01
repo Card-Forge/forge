@@ -1,0 +1,7 @@
+Name:Blackcleave Goblin
+ManaCost:3 B
+Types:Creature Phyrexian Goblin Zombie
+PT:2/1
+K:Haste
+K:Infect
+Oracle:Haste\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

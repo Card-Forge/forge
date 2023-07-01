@@ -1,0 +1,8 @@
+Name:Fungal Bloom
+ManaCost:G G
+Types:Enchantment
+A:AB$ PutCounter | Cost$ G G | ValidTgts$ Fungus | TgtPrompt$ Select target Fungus | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on target Fungus.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckNeeds:Type$Fungus
+Oracle:{G}{G}: Put a spore counter on target Fungus.

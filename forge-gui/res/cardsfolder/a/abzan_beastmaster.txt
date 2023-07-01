@@ -1,0 +1,9 @@
+Name:Abzan Beastmaster
+ManaCost:2 G
+Types:Creature Dog Shaman
+PT:2/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToughDraw | TriggerDescription$ At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
+SVar:TrigToughDraw:DB$ Draw | Defined$ You | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | ConditionCheckSVar$ YourTough | ConditionSVarCompare$ GEOppsTough
+SVar:YourTough:Count$Valid Creature.YouCtrl$GreatestToughness
+SVar:OppsTough:Count$Valid Creature.YouDontCtrl$GreatestToughness
+Oracle:At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.

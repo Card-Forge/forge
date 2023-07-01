@@ -1,0 +1,6 @@
+Name:Samurai Enforcers
+ManaCost:4 W W
+Types:Creature Human Samurai
+PT:4/4
+K:Bushido:2
+Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)

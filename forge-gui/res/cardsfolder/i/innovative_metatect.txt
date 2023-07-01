@@ -1,0 +1,9 @@
+Name:Innovative Metatect
+ManaCost:W U
+Types:Creature Phyrexian Artificer
+PT:1/3
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigSeek | TriggerDescription$ Whenever one or more artifact creatures you control deal combat damage to a player, seek a nonland card with mana value 2 or less.
+SVar:TrigSeek:DB$ Seek | Type$ Card.nonLand+cmcLE2
+DeckNeeds:Type$Artifact
+AI:RemoveDeck:Random
+Oracle:Whenever one or more artifact creatures you control deal combat damage to a player, seek a nonland card with mana value 2 or less.

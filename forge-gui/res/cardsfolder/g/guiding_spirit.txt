@@ -1,0 +1,9 @@
+Name:Guiding Spirit
+ManaCost:1 W U
+Types:Creature Angel Spirit
+PT:1/2
+K:Flying
+A:AB$ ChangeZoneAll | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card.TopGraveyardCreature | SpellDescription$ If the top card of target player's graveyard is a creature card, put that card on top of that player's library.
+AI:RemoveDeck:All
+SVar:NeedsOrderedGraveyard:TRUE
+Oracle:Flying\n{T}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.

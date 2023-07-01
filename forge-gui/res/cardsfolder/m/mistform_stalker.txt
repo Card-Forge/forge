@@ -1,0 +1,9 @@
+Name:Mistform Stalker
+ManaCost:1 U
+Types:Creature Illusion
+PT:1/1
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
+A:AB$ Pump | Cost$ 2 U U | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+2 and gains flying until end of turn.
+AI:RemoveDeck:All
+Oracle:{1}: Mistform Stalker becomes the creature type of your choice until end of turn.\n{2}{U}{U}: Mistform Stalker gets +2/+2 and gains flying until end of turn.

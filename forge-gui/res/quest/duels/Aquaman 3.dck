@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Aquaman 3
+Title=Aquaman
+Difficulty=hard
+Description=WU Caw-Blade deck
+Icon=Aquaman.jpg
+Deck Type=constructed
+[main]
+4 Baneslayer Angel
+1 Linvala, Keeper of Silence
+4 Squadron Hawk
+4 Stoneforge Mystic
+4 Absorb
+1 Bribery
+4 Counterspell
+4 Wrath of God
+1 Jace Beleren
+4 Repulse
+1 Swords to Plowshares
+2 Sword of Feast and Famine
+1 Arid Mesa
+4 Celestial Colonnade
+2 Glacial Fortress
+5 Island|M12
+5 Plains|M12
+1 Scalding Tarn
+4 Seachrome Coast
+4 Tectonic Edge
+[sideboard]

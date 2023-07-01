@@ -1,0 +1,10 @@
+Name:Petals of Insight
+ManaCost:4 U
+Types:Sorcery Arcane
+A:SP$ PeekAndReveal | PeekAmount$ 3 | NoReveal$ True | SubAbility$ DBPetalChoose | SpellDescription$ Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return CARDNAME to its owner's hand. Otherwise, draw three cards.
+SVar:DBPetalChoose:DB$ GenericChoice | Choices$ ReturnPetals,DrawCards | Defined$ You
+SVar:ReturnPetals:DB$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Library | LibraryPosition$ -1 | SubAbility$ DBChangeZone | SpellDescription$ You may put those cards on the bottom of your library in any order. If you do, return CARDNAME to its owner's hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Parent
+SVar:DrawCards:DB$ Draw | NumCards$ 3 | SpellDescription$ Otherwise, draw three cards.
+AI:RemoveDeck:All
+Oracle:Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.

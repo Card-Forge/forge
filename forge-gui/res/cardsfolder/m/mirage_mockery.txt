@@ -1,0 +1,9 @@
+Name:Mirage Mockery
+ManaCost:2 U
+Types:Sorcery
+K:Entwine:2 U
+A:SP$ Charm | Choices$ DBCopy1,DBCopy2 | CharmNum$ 1
+SVar:DBCopy1:DB$ CopyPermanent | ValidTgts$ Artifact.Creature+YouCtrl | TgtPrompt$ Select target artifact creature you control | SpellDescription$ Create a token that's a copy of target artifact creature you control.
+SVar:DBCopy2:DB$ CopyPermanent | ValidTgts$ Creature.nonArtifact+YouCtrl | TgtPrompt$ Select target nonartifact creature you control | SpellDescription$ Create a token that's a copy of target nonartifact creature you control.
+DeckHas:Ability$Token
+Oracle:Choose one —\n• Create a token that's a copy of target artifact creature you control.\n• Create a token that's a copy of target nonartifact creature you control.\nEntwine {2}{U} (Choose both if you pay the entwine cost.)

@@ -1,0 +1,17 @@
+[metadata]
+Code=P09
+Date=2009-01-01
+Name=Magic Player Rewards 2009
+Type=Promo
+ScryfallCode=P09
+
+[cards]
+1 R Cryptic Command @Wayne England
+2 R Flame Javelin @Zoltan Boros & Gabor Szikszai
+3 R Unmake @Chris Rahn
+4 R Nameless Inversion @Jesper Ejsing
+5 R Remove Soul @Mike Dringenberg
+6 R Blightning @Jim Pavelec
+7 R Rampant Growth @Terese Nielsen
+8 R Negate @Ralph Horsley
+9 R Terminate @Thomas M. Baxa

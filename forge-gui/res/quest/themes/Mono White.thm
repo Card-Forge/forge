@@ -1,0 +1,81 @@
+BasicLandPercentage=36
+
+[Group MaxCnt=2 Percentage=13]
+Angelic Voices
+Celestial Crusader
+Crovax, Ascendant Hero
+Crusade
+Divine Sacrament
+Honor of the Pure
+[/Group]
+
+[Group MaxCnt=4 Percentage=22]
+Apothecary Initiate
+Gaze of Justice
+Angel's Feather
+Ivory Cup
+Pearl Medallion
+Alaborn Grenadier
+Amrou Kithkin
+Auriok Champion
+Exorcist
+Hand of Honor
+Kazandu Blademaster
+Knight of Meadowgrain
+Knight of the White Orchid
+Kor Firewalker
+Leonin Skyhunter
+Longbow Archer
+Order of Leitbur
+Order of the White Shield
+Serra Avenger
+Sigiled Paladin
+Silver Knight
+Soltari Monk
+Soltari Priest
+Steadfast Guard
+Veteran Armorsmith
+Veteran Cavalier
+White Knight
+White Shield Crusader
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Ballynock Cohort
+Blinding Light
+Crackdown
+Holy Light
+Spectral Procession
+Valorous Charge
+Razor Golem
+Devout Lightcaster
+Unmake
+Wilt-Leaf Cavaliers
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Ballynock Trapper
+Kithkin Rabble
+Springjack Shepherd
+Dawn Elemental
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Landbind Ritual
+Abbey Gargoyles
+Divinity of Pride
+Oversoul of Dusk
+Resplendent Mentor
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+Hand of Justice
+Mass Calcify
+Akroma, Angel of Wrath
+Blazing Archon
+Luminous Angel
+Purity
+True Conviction
+[/Group]
+
+End

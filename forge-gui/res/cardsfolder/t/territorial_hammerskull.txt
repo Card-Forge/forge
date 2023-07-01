@@ -1,0 +1,7 @@
+Name:Territorial Hammerskull
+ManaCost:2 W
+Types:Creature Dinosaur
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Whenever Territorial Hammerskull attacks, tap target creature an opponent controls.

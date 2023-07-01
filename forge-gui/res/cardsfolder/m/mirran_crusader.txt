@@ -1,0 +1,8 @@
+Name:Mirran Crusader
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/2
+K:Double Strike
+K:Protection from black
+K:Protection from green
+Oracle:Double strike, protection from black and from green

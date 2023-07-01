@@ -1,0 +1,18 @@
+[metadata]
+Name:Puzzling Magic #03 - Critical to Win
+URL:http://www.gatheringmagic.com/puzzling-magic-3-%E2%80%93-critical-to-win/
+Goal:Win
+Turns:1
+Difficulty:Medium
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=7
+AILife=5
+HumanHand=Gut Shot; Karn Liberated; Noxious Revival; Phyrexian Metamorph
+HumanPlay=Shrine of Boundless Growth|Counters:CHARGE=7|Id:5;Viridian Harvest|AttachedTo:5;Mortis Dogs|Id:7;Strider Harness|AttachedTo:7;Blind Zealot;Plains;Forest;Swamp;Swamp
+AIPlay=Caustic Hound|Id:14;Batterskull|AttachedTo:14;Alpha Tyrranax;Fangren Marauder|Tapped;Soul Conduit;Forest;Forest;Forest;Mountain;Mountain;Mountain
+# Ramp difficulty by changing
+# A) Noxious Revival => Surgical Extraction
+# B) Blind Zealot => Pro Artifacts, Apostle's Blessing => Your graveyard
+# C) Blind Zealout => -1/-1 Counter

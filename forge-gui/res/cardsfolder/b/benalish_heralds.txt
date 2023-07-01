@@ -1,0 +1,6 @@
+Name:Benalish Heralds
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/4
+A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{3}{U}, {T}: Draw a card.

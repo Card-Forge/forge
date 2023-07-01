@@ -1,0 +1,7 @@
+Name:Repel the Abominable
+ManaCost:1 W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt this turn by non-Human sources.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidSource$ Card.nonHuman,Emblem | ActiveZones$ Command | Description$ Prevent all damage that would be dealt this turn by non-Human sources.
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt this turn by non-Human sources.

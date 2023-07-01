@@ -1,0 +1,6 @@
+Name:Thrashing Wumpus
+ManaCost:3 B B
+Types:Creature Beast
+PT:3/3
+A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+Oracle:{B}: Thrashing Wumpus deals 1 damage to each creature and each player.

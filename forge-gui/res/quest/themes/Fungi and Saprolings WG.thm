@@ -1,0 +1,59 @@
+BasicLandPercentage=12
+
+[Group MaxCnt=4 Percentage=23]
+Savannah
+Graypelt Refuge
+Windswept Heath
+Razorverge Thicket
+Sunpetal Grove
+[/Group]
+
+[Group MaxCnt=4 Percentage=9]
+Thallid
+Tukatongue Thallid
+Utopia Mycon
+[/Group]
+
+[Group MaxCnt=4 Percentage=18]
+Elvish Farmer
+Fists of Ironwood
+Fungal Bloom
+Mycologist
+Selesnya Guildmage
+Spore Flower
+Thallid Shell-Dweller
+Vitaspore Thallid
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Psychotrope Thallid
+Thallid Devourer
+Thallid Germinator
+Thorn Thallid
+[/Group]
+
+[Group MaxCnt=3 Percentage=14]
+Leyline of the Meek
+Pallid Mycoderm
+Sporesower Thallid
+Sporesower Thallid
+Spontaneous Generation
+Thelonite Hermit
+Thelonite Hermit
+[/Group]
+
+[Group MaxCnt=3 Percentage=12]
+Doubling Season
+Doubling Season
+Parallel Evolution
+Savage Thallid
+Sporoloth Ancient
+Sporoloth Ancient
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Feral Thallid
+Nemata, Grove Guardian
+[/Group]
+
+End

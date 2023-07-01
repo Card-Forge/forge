@@ -1,0 +1,6 @@
+Name:Island of Wak-Wak
+ManaCost:no cost
+Types:Land
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Power$ 0 | SpellDescription$ Target creature with flying has base power 0 until end of turn.
+AI:RemoveDeck:All
+Oracle:{T}: Target creature with flying has base power 0 until end of turn.

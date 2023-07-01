@@ -1,0 +1,6 @@
+Name:Lavafume Invoker
+ManaCost:2 R
+Types:Creature Goblin Shaman
+PT:2/2
+A:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | SpellDescription$ Creatures you control get +3/+0 until end of turn.
+Oracle:{8}: Creatures you control get +3/+0 until end of turn.

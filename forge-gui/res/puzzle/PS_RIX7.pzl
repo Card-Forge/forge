@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/03/RIX7-Mar-5.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your solution must work for all possible blocking and Spires of Orazca targeting decisions your opponent could make. Be sure to account for how Spires of Orazca and Tilonalli's Skinshifter can interact.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Radiant Destiny;Sure Strike;Hazoret's Favor;Fanatical Firebrand
+humanlibrary=
+humangraveyard=
+humanbattlefield=Path of Mettle;Tah-Crop Elite;Rowdy Crew|Counters:P1P1=2;Needletooth Raptor;Tilonalli's Skinshifter;Mountain|Set:XLN;Mountain|Set:XLN;Plains|Set:XLN;Plains|Set:XLN
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Aerial Responder;Bellowing Aegisaur;Bellowing Aegisaur;Thaumatic Compass|Transformed
+aiexile=
+aicommand=

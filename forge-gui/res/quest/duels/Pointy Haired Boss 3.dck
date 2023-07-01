@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss 3
+Title=Pointy Haired Boss
+Difficulty=hard
+Description=WUG Winter Orb deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master
+Icon=Pointy Haired Boss.jpg
+Deck Type=constructed
+[main]
+3 Perimeter Captain
+4 Wall of Denial
+3 Wall of Tears
+3 Mana Leak
+2 Miscalculation
+3 Disruptive Student
+3 Disruptive Pitmage
+3 Sunscape Master
+1 Seedborn Muse
+2 Hokori, Dust Drinker
+2 Winter Orb
+1 Ajani Goldmane
+1 Garruk Wildspeaker
+3 Birds of Paradise
+3 Noble Hierarch
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Sapphire
+3 Forest|M12
+1 Plains|M12
+4 Savannah
+4 Tropical Island
+4 Tundra
+4 Undiscovered Paradise
+[sideboard]

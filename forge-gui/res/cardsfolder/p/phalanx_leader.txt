@@ -1,0 +1,7 @@
+Name:Phalanx Leader
+ManaCost:W W
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, put a +1/+1 counter on each creature you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Heroic — Whenever you cast a spell that targets Phalanx Leader, put a +1/+1 counter on each creature you control.

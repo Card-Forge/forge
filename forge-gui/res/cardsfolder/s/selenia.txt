@@ -1,0 +1,6 @@
+Name:Selenia
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+7
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance.
+Oracle:Hand +1, life +7\nCreatures you control have vigilance.

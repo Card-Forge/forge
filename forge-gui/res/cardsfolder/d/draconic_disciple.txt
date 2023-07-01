@@ -1,0 +1,8 @@
+Name:Draconic Disciple
+ManaCost:1 R G
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Token | Cost$ 7 T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | SpellDescription$ Create a 5/5 red Dragon creature token with flying.
+DeckHas:Ability$Token
+Oracle:{T}: Add one mana of any color.\n{7}, {T}, Sacrifice Draconic Disciple: Create a 5/5 red Dragon creature token with flying.

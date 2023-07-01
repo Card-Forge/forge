@@ -1,0 +1,7 @@
+Name:Humble Defector
+ManaCost:1 R
+Types:Creature Human Rogue
+PT:2/1
+A:AB$ Draw | Cost$ T | NumCards$ 2 | SubAbility$ DBGainControl | PlayerTurn$ True | SpellDescription$ Draw two cards. Target opponent gains control of CARDNAME. Activate only during your turn.
+SVar:DBGainControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+Oracle:{T}: Draw two cards. Target opponent gains control of Humble Defector. Activate only during your turn.

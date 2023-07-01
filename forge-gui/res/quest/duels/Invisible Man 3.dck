@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Invisible Man 3
+Title=Invisible Man
+Difficulty=hard
+Description=Mono U Invisible Stalker deck with Auras and equipment
+Icon=Invisible Man.jpg
+Deck Type=constructed
+[main]
+4 Invisible Stalker
+1 AEther Figment
+1 Basilisk Collar
+1 Bident of Thassa
+3 Bonesplitter
+4 Counterspell
+3 Curiosity
+1 Deep-Sea Kraken
+2 Gudul Lurker
+4 Inkfathom Infiltrator
+22 Island
+3 Latch Seeker
+1 Loxodon Warhammer
+2 Sigil of Sleep
+1 Sword of Feast and Famine
+4 Triton Shorestalker
+2 Wu Light Cavalry
+1 Time Walk
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Child of Gaea
+ManaCost:3 G G G
+Types:Creature Elemental
+PT:7/7
+K:Trample
+K:UpkeepCost:G G
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Trample\nAt the beginning of your upkeep, sacrifice Child of Gaea unless you pay {G}{G}.\n{1}{G}: Regenerate Child of Gaea.

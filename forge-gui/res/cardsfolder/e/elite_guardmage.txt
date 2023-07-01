@@ -1,0 +1,10 @@
+Name:Elite Guardmage
+ManaCost:2 W U
+Types:Creature Human Wizard
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhen Elite Guardmage enters the battlefield, you gain 3 life and draw a card.

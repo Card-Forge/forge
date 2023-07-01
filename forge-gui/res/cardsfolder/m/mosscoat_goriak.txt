@@ -1,0 +1,6 @@
+Name:Mosscoat Goriak
+ManaCost:2 G
+Types:Creature Beast
+PT:2/4
+K:Vigilance
+Oracle:Vigilance

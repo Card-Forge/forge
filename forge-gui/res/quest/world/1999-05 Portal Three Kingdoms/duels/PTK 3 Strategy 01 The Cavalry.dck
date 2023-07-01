@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=PTK 3 Strategy: 01 The Cavalry
+Title=The Cavalry
+Difficulty=hard
+Description=Zhang Fei's uncharacteristic alliance with a defeated Riverlands general, Yan Yan, allowed Shu forces to advance through forty-five Riverlands strongpoints with no casualties.
+Deck Type=constructed
+[Main]
+4 Eightfold Maze|PTK
+4 Forced Retreat|PTK
+1 Guan Yu, Sainted Warrior|PTK
+14 Island|PTK|1
+2 Kongming, "Sleeping Dragon"|PTK
+1 Liu Bei, Lord of Shu|PTK
+2 Lu Meng, Wu General|PTK
+2 Lu Xun, Scholar General|PTK
+12 Plains|PTK|1
+4 Shu Cavalry|PTK
+4 Strategic Planning|PTK
+4 Straw Soldiers|PTK
+2 Sun Ce, Young Conquerer|PTK
+1 Sun Quan, Lord of Wu|PTK
+2 Zhang Fei, Fierce Warrior|PTK
+1 Zhao Zilong, Tiger General|PTK

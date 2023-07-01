@@ -1,0 +1,5 @@
+Name:Headwater Sentries
+ManaCost:3 U
+Types:Creature Merfolk Warrior
+PT:2/5
+Oracle:

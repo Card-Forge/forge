@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Stolen Grain
+OpponentName=Grain Thieves
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Zhou Yu, Chief Commander|Red Cliffs Armada|Wu Warship
+[metadata]
+Name=PTK Challenge: Stolen Grain
+Title=Grain Thieves
+Difficulty=hard
+Description=Watch out for Zhou Yu.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+30 Stolen Grain|PTK
+30 Swamp|PTK|2

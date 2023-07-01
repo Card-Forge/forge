@@ -1,0 +1,11 @@
+Name:Snooping Newsie
+ManaCost:U B
+Types:Creature Human Rogue
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | CheckSVar$ X | SVarCompare$ GE5 | Description$ As long as there are five or more mana values among cards in your graveyard, CARDNAME gets +1/+1 and has lifelink.
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+DeckHas:Ability$Mill|LifeGain
+DeckHints:Ability$Discard
+Oracle:When Snooping Newsie enters the battlefield, mill two cards. (Put the top two cards of your library into your graveyard.)\nAs long as there are five or more mana values among cards in your graveyard, Snooping Newsie gets +1/+1 and has lifelink.

@@ -1,0 +1,7 @@
+Name:Ice Age|Art:Dark Depths|Sets:ICE,ALL,CSP
+Name:Mirage|Art:Teferi's Isle|Sets:MIR,VIS,WTH
+Name:Urza's Saga|Art:Tolarian Academy|Sets:USG,ULG,UDS
+Name:Invasion|Art:Legacy Weapon|Sets:INV,PLS,APC
+Name:Odyssey|Art:Cabal Coffers|Sets:ODY,TOR,JUD
+Name:Onslaught|Art:Grand Coliseum|Sets:ONS,LGN,SCG
+Name:Time Spiral|Art:Vesuva|Sets:TSP,TSB,PLC,FUT

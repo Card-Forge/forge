@@ -1,0 +1,22 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 122215 - Stocking Stuffer
+URL:http://www.gatheringmagic.com/seanuy-122215-stocking-stuffer/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Venser's Sliver is standing in for a Stocking Tiger, which you just attacked with earning a booster of cards into your hand.  Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main2
+HumanLife=3
+AILife=9
+humanhand=Jeskai Windscout; Rush of Battle; Bring Low; Highland Game; Dismal Backwater; Krumar Bond-Kin; Barrage of Boulders; Sultai Banner; Savage Punch; Snowhorn Rider; Sultai Flayer; Abzan Falconer; Dragon Grip; Thousand Winds; Mountain|Set:KTK
+humangraveyard=
+humanlibrary=
+humanprecast=
+humanbattlefield=Forest|Set:KTK; Forest|Set:KTK; Forest|Set:KTK; Forest|Set:KTK; Forest|Set:KTK; Plains|Set:KTK; Plains|Set:KTK; Plains|Set:KTK; Plains|Set:KTK; Ghost Warden; Sacellum Godspeaker; Devout Witness; Spike Feeder|Counters:P1P1=2; Venser's Sliver|Tapped; Mox Pearl; Oblivion Ring|ExecuteScript:TrigExile->420
+aibattlefield=Island|Set:KTK; Island|Set:KTK; Island|Set:KTK; Mountain|Set:KTK; Mountain|Set:KTK; Mountain|Set:KTK; Mountain|Set:KTK; Mountain|Set:KTK; Mountain|Set:KTK|Tapped; Thunder Dragon|Id:420; Goblin Arsonist; Rockslide Elemental; Telepathic Spies; Air Elemental|Tapped; Coalhauler Swine|Tapped
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

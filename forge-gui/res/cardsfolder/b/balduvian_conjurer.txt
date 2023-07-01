@@ -1,0 +1,7 @@
+Name:Balduvian Conjurer
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:0/2
+A:AB$ Animate | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | Power$ 2 | Toughness$ 2 | Types$ Creature | SpellDescription$ Target snow land becomes a 2/2 creature until end of turn. It's still a land.
+AI:RemoveDeck:Random
+Oracle:{T}: Target snow land becomes a 2/2 creature until end of turn. It's still a land.

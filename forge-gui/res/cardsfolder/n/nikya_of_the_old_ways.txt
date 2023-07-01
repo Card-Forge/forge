@@ -1,0 +1,8 @@
+Name:Nikya of the Old Ways
+ManaCost:3 R G
+Types:Legendary Creature Centaur Druid
+PT:5/5
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ You | Description$ You can't cast noncreature spells.
+T:Mode$ TapsForMana | ValidCard$ Land | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
+Oracle:You can't cast noncreature spells.\nWhenever you tap a land for mana, add one mana of any type that land produced.

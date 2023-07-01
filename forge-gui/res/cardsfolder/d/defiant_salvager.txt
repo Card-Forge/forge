@@ -1,0 +1,8 @@
+Name:Defiant Salvager
+ManaCost:2 B
+Types:Creature Aetherborn Artificer
+PT:2/2
+A:AB$ PutCounter | Cost$ Sac<1/Artifact;Creature/artifact or creature> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only as a sorcery.
+SVar:BuffedBy:Artifact,Creature
+DeckHas:Ability$Counters
+Oracle:Sacrifice an artifact or creature: Put a +1/+1 counter on Defiant Salvager. Activate only as a sorcery.

@@ -1,0 +1,6 @@
+Name:Vulshok Refugee
+ManaCost:1 R R
+Types:Creature Human Warrior
+PT:3/2
+K:Protection from red
+Oracle:Protection from red

@@ -1,0 +1,8 @@
+Name:Teferi's Sentinel
+ManaCost:5
+Types:Artifact Creature Golem
+PT:2/6
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | IsPresent$ Planeswalker.Teferi+YouCtrl | Description$ As long as you control a Teferi planeswalker, CARDNAME gets +4/+0.
+SVar:BuffedBy:Teferi
+DeckNeeds:Type$Teferi
+Oracle:As long as you control a Teferi planeswalker, Teferi's Sentinel gets +4/+0.

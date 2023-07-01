@@ -1,0 +1,9 @@
+Name:Gustcloak Skirmisher
+ManaCost:3 W
+Types:Creature Bird Soldier
+PT:2/3
+K:Flying
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
+Oracle:Flying\nWhenever Gustcloak Skirmisher becomes blocked, you may untap it and remove it from combat.

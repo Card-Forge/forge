@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Mad Jeweler
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=easy
+Description=Blue-Red Buyback deck
+Deck Type=constructed
+Name=CrystalMedallion
+[Main]
+4 Capsize|TMP
+4 Fanning the Flames|STH
+3 Island|TMP|1
+3 Island|TMP|2
+4 Island|TMP|3
+2 Island|TMP|4
+4 Memory Crystal|EXO
+3 Mountain|TMP|1
+6 Mountain|TMP|2
+2 Mountain|TMP|3
+4 Reflecting Pool|TMP
+2 Ruby Medallion|TMP
+2 Sapphire Medallion|TMP
+2 Searing Touch|TMP
+2 Shattering Pulse|EXO
+3 Wall of Diffusion|TMP
+2 Wall of Razors|STH
+4 Wall of Tears|STH
+4 Whispers of the Muse|TMP

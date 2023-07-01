@@ -1,0 +1,11 @@
+Name:Hisoka's Guard
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 1 U T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature other than CARDNAME that you control | RememberTargets$ True | SpellDescription$ Target creature you control other than CARDNAME has shroud for as long as CARDNAME remains tapped. (It can't be the target of spells or abilities.) | StackDescription$ SpellDescription
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddKeyword$ Shroud
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
+SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:You may choose not to untap Hisoka's Guard during your untap step.\n{1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Galadriel 1
+Title=Galadriel
+Difficulty=easy
+Description=Mono G Deck with Amulet of Vigor and mana ramp
+Icon=Galadriel.jpg
+Deck Type=constructed
+[main]
+36 Forest
+4 Amulet of Vigor
+1 Root Maze
+4 Rampant Growth
+1 Ranger's Path
+2 Boundless Realms
+2 Cultivate
+2 Explosive Vegetation
+4 Hunting Wilds
+4 Khalni Heart Expedition
+2 Kodama's Reach
+2 Primeval Bounty
+2 Seed the Land
+2 Seer's Sundial
+4 Elvish Pioneer
+2 Lotus Cobra
+4 Sporemound
+4 Grazing Gladehart
+1 Coiling Woodworm
+1 Fruition
+1 Beacon of Creation
+1 People of the Woods
+1 Traproot Kami
+1 Treefolk Seedlings
+2 Ant Queen
+1 Sylvan Primordial
+[sideboard]

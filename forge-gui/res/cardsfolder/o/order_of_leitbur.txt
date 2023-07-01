@@ -1,0 +1,8 @@
+Name:Order of Leitbur
+ManaCost:W W
+Types:Creature Human Cleric Knight
+PT:2/1
+K:Protection from black
+A:AB$ Pump | Cost$ W | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ W W | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Protection from black\n{W}: Order of Leitbur gains first strike until end of turn.\n{W}{W}: Order of Leitbur gets +1/+0 until end of turn.

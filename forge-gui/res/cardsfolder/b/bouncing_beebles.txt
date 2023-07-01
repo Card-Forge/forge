@@ -1,0 +1,6 @@
+Name:Bouncing Beebles
+ManaCost:2 U
+Types:Creature Beeble
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Artifact.DefenderCtrl | Description$ CARDNAME can't be blocked as long as defending player controls an artifact.
+Oracle:Bouncing Beebles can't be blocked as long as defending player controls an artifact.

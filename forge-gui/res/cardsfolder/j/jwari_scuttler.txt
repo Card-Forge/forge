@@ -1,0 +1,5 @@
+Name:Jwari Scuttler
+ManaCost:2 U
+Types:Creature Crab
+PT:2/3
+Oracle:

@@ -1,0 +1,8 @@
+Name:Mantis Rider
+ManaCost:U R W
+Types:Creature Human Monk
+PT:3/3
+K:Flying
+K:Vigilance
+K:Haste
+Oracle:Flying, vigilance, haste

@@ -1,0 +1,8 @@
+Name:Adriana, Captain of the Guard
+ManaCost:3 R W
+Types:Legendary Creature Human Knight
+PT:4/4
+K:Melee
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Melee | Description$ Other creatures you control have melee. (If a creature has multiple instances of melee, each triggers separately.)
+SVar:PlayMain1:TRUE
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther creatures you control have melee. (If a creature has multiple instances of melee, each triggers separately.)

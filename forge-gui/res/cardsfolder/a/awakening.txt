@@ -1,0 +1,8 @@
+Name:Awakening
+ManaCost:2 G G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of each upkeep, untap all creatures and lands.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature,Land
+SVar:UntapsEachTurn:Creature,Land
+AI:RemoveDeck:Random
+Oracle:At the beginning of each upkeep, untap all creatures and lands.

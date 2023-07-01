@@ -1,0 +1,7 @@
+Name:Burning-Fist Minotaur
+ManaCost:1 R
+Types:Creature Minotaur Wizard
+PT:2/1
+K:First Strike
+A:AB$ Pump | Cost$ 1 R Discard<1/Card> | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:First strike\n{1}{R}, Discard a card: Burning-Fist Minotaur gets +2/+0 until end of turn.

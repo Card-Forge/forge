@@ -1,0 +1,6 @@
+Name:Nimbus of the Isles
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/3
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

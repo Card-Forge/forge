@@ -1,0 +1,9 @@
+Name:Aurora Eidolon
+ManaCost:3 W
+Types:Creature Spirit
+PT:2/2
+A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Any | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a multicolored spell, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+AI:RemoveDeck:All
+Oracle:{W}, Sacrifice Aurora Eidolon: Prevent the next 3 damage that would be dealt to any target this turn.\nWhenever you cast a multicolored spell, you may return Aurora Eidolon from your graveyard to your hand.

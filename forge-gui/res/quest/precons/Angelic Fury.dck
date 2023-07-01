@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Angelic Fury
+Description=Violence and destruction sweep across the land. While horrors emerge from smoldering chasms and angels turn on humanity, the people of Innistrad are caught up in the fires of vengeance. Fueled by the flames, your creatures will sweep over their enemies to claim victory.
+Deck Type=constructed
+Set=SOI
+Image=angelic_fury.jpg
+[Main]
+2 Stern Constable|SOI
+2 Ember-Eye Wolf|SOI
+3 Devilthorn Fox|SOI
+1 Unruly Mob|SOI
+2 Howlpack Wolf|SOI
+3 Cathar's Companion|SOI
+2 Pyre Hound|SOI
+1 Runaway Carriage|SOI
+2 Inspiring Captain|SOI
+1 Flameblade Angel+|SOI
+1 Magmatic Chasm|SOI
+1 Angelic Purge|SOI
+1 Devils' Playground|SOI
+2 Lightning Axe|SOI
+2 Rush of Adrenaline|SOI
+2 Dance with Devils|SOI
+2 Inner Struggle|SOI
+1 Dissension in the Ranks|SOI
+1 Murderer's Axe|SOI
+1 Gryff's Boon|SOI
+2 Nahiri's Machinations|SOI
+13 Mountain|SOI
+12 Plains|SOI
+[Sideboard]
+

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Double Tap
+Title=Double Tap
+Difficulty=medium
+Description="First they fight, then they sleep, then they dream. And finally I receive my reward."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Cavalier|PO2
+4 Apprentice Sorcerer|PO2
+10 Island|PO2|3
+4 Just Fate|PO2
+14 Plains|PO2|3
+4 Righteous Fury|PO2
+4 Steam Catapult|PO2
+4 Talas Researcher|PO2
+4 Theft of Dreams|PO2
+4 Tidal Surge|PO2
+4 Vengeance|PO2

@@ -1,0 +1,8 @@
+Name:Drowned Rusalka
+ManaCost:U
+Types:Creature Spirit
+PT:1/1
+A:AB$ Discard | Cost$ U Sac<1/Creature> | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:All
+Oracle:{U}, Sacrifice a creature: Discard a card, then draw a card.

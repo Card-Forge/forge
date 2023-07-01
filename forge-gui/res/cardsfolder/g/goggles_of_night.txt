@@ -1,0 +1,8 @@
+Name:Goggles of Night
+ManaCost:1 U
+Types:Artifact Equipment
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, scry 1, then draw a card. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Equip:2
+Oracle:Whenever equipped creature deals combat damage to a player, scry 1, then draw a card. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

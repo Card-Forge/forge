@@ -1,0 +1,7 @@
+Name:Ghostfire Blade
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+S:Mode$ ReduceCost | ValidTarget$ Creature.Colorless | ValidSpell$ Activated.Equip | Amount$ 2 | ValidCard$ Card.Self | Description$ CARDNAME's equip ability costs {2} less to activate if it targets a colorless creature.
+Oracle:Equipped creature gets +2/+2.\nEquip {3}\nGhostfire Blade's equip ability costs {2} less to activate if it targets a colorless creature.

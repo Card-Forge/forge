@@ -1,0 +1,10 @@
+Name:Constable of the Realm
+ManaCost:4 W
+Types:Creature Giant Soldier
+PT:3/3
+K:Renown:2
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | CounterType$ P1P1 | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, exile up to one other target nonland permanent until CARDNAME leaves the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select up to one other target nonland permanent | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
+Oracle:Renown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)\nWhenever one or more +1/+1 counters are put on Constable of the Realm, exile up to one other target nonland permanent until Constable of the Realm leaves the battlefield.

@@ -1,0 +1,6 @@
+Name:Zombie Outlander
+ManaCost:U B
+Types:Creature Zombie Scout
+PT:2/2
+K:Protection from green
+Oracle:Protection from green

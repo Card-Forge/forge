@@ -1,0 +1,18 @@
+[metadata]
+Code=PRWK
+Date=2018-11-09
+Name=GRN Ravnica Weekend
+Type=Promo
+ScryfallCode=PRWK
+
+[cards]
+A01 C Island @Jung Park
+A02 C Swamp @Noah Bradley
+A03 C Island @Adam Paquette
+A04 C Mountain @Svetlin Velinov
+A05 C Swamp @Florian de Gesincourt
+A06 C Forest @Svetlin Velinov
+A07 C Mountain @Noah Bradley
+A08 C Plains @Yeong-Hao Han
+A09 C Forest @Alayna Danner
+A10 C Plains @James Paick

@@ -1,0 +1,7 @@
+Name:Wave Elemental
+ManaCost:2 U U
+Types:Creature Elemental
+PT:2/3
+A:AB$ Tap | Cost$ U T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creatures without flying | ValidTgts$ Creature.withoutFlying | SpellDescription$ Tap up to three target creatures without flying.
+AI:RemoveDeck:All
+Oracle:{U}, {T}, Sacrifice Wave Elemental: Tap up to three target creatures without flying.

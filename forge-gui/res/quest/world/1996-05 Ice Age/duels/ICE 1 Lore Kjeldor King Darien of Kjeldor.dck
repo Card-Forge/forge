@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: King Darien of Kjeldor
+Title=King Darien of Kjeldor
+Difficulty=easy
+Description="Kjeldor's borders are secure, and its citizens are prepared to take up arms in defense of their families." -King Darien of Kjeldor
+
+Generally thought of as a weak king, Darien struggles to control the splintered factions of the Kjeldoran nation all working for their own gain.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Carrier Pigeons|ALL|1
+2 Carrier Pigeons|ALL|2
+4 Exile|ALL
+2 Kjeldoran Elite Guard|ICE
+4 Kjeldoran Guard|ICE
+4 Kjeldoran Knight|ICE
+4 Kjeldoran Royal Guard|ICE
+2 Kjeldoran Skycaptain|ICE
+4 Kjeldoran Skyknight|ICE
+24 Plains|ICE|1
+4 Reprisal|ALL|2
+2 Royal Decree|ALL
+2 Wall of Shields|ICE

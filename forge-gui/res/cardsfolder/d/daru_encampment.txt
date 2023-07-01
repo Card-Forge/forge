@@ -1,0 +1,6 @@
+Name:Daru Encampment
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target Soldier creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target Soldier creature gets +1/+1 until end of turn.
+Oracle:{T}: Add {C}.\n{W}, {T}: Target Soldier creature gets +1/+1 until end of turn.

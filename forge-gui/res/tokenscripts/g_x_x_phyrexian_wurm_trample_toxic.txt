@@ -1,0 +1,8 @@
+Name:Phyrexian Wurm Token
+ManaCost:no cost
+Colors:green
+Types:Creature Phyrexian Wurm
+PT:*/*
+K:Trample
+K:Toxic:1
+Oracle:Trample, toxic 1.

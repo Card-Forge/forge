@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #07
+URL:https://i.redd.it/dta3769jvm3z.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. You have activated Gideon, Ally of Zendikar's emblem-granting ultimate ability earlier in the game.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=7
+humanhand=Illusory Wrappings;Dead Weight;Temmet, Vizier of Naktamun;Anguished Unmaking
+humanbattlefield=Irrigated Farmland;Irrigated Farmland;Irrigated Farmland;Irrigated Farmland;Swamp;Swamp;Swamp;Gideon, Ally of Zendikar|Counters:LOYALTY=4;t:Knight Ally,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight-Ally,Keywords:,Image:w_2_2_knight_ally;Behind the Scenes
+humanprecast=Gideon, Ally of Zendikar:3
+aibattlefield=Seraph of the Suns;Sparring Mummy;Labyrinth Guardian

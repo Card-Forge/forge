@@ -1,0 +1,8 @@
+Name:Wandermare
+ManaCost:1 G W
+Types:Creature Horse
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Creature.AdventureCard | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell that has an Adventure, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a creature spell that has an Adventure, put a +1/+1 counter on Wandermare. (It doesn't need to have gone on the adventure first.)

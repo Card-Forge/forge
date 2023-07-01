@@ -1,0 +1,10 @@
+Name:Hallowed Haunting
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | IsPresent$ Enchantment.YouCtrl | PresentCompare$ GE7 | Affected$ Creature.YouCtrl | AddKeyword$ Flying & Vigilance | Description$ As long as you control seven or more enchantments, creatures you control have flying and vigilance.
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an enchantment spell, create a white Spirit Cleric creature token with "This creature's power and toughness are each equal to the number of Spirits you control."
+SVar:TrigToken:DB$ Token | TokenScript$ w_x_x_spirit_cleric_total_spirits
+DeckNeeds:Type$Enchantment
+DeckHints:Type$Spirit
+DeckHas:Ability$Token
+Oracle:As long as you control seven or more enchantments, creatures you control have flying and vigilance.\nWhenever you cast an enchantment spell, create a white Spirit Cleric creature token with "This creature's power and toughness are each equal to the number of Spirits you control."

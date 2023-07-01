@@ -1,0 +1,8 @@
+Name:Earnest Fellowship
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from CardColors | Description$ Each creature has protection from its colors.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Each creature has protection from its colors.

@@ -1,0 +1,8 @@
+Name:Night Soil
+ManaCost:G G
+Types:Enchantment
+A:AB$ Token | Cost$ 1 ExileSameGrave<2/Creature> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+AI:RemoveDeck:All
+DeckHas:Ability$Token
+DeckHints:Type$Fungus
+Oracle:{1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token.

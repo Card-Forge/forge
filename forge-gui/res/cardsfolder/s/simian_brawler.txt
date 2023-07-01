@@ -1,0 +1,7 @@
+Name:Simian Brawler
+ManaCost:3 G
+Types:Creature Ape Warrior
+PT:3/3
+A:AB$ Pump | Cost$ Discard<1/Land> | NumAtt$ +1 | NumDef$ +1 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:AIPreference:DiscardCost$Land.Basic,Land.nonBasic
+Oracle:Discard a land card: Simian Brawler gets +1/+1 until end of turn.

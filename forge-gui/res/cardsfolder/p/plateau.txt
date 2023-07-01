@@ -1,0 +1,4 @@
+Name:Plateau
+ManaCost:no cost
+Types:Land Mountain Plains
+Oracle:({T}: Add {R} or {W}.)

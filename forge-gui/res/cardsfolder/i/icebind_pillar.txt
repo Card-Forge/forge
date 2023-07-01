@@ -1,0 +1,5 @@
+Name:Icebind Pillar
+ManaCost:2 U
+Types:Snow Artifact
+A:AB$ Tap | Cost$ S T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature. | SpellDescription$ Tap target artifact or creature.
+Oracle:{S}, {T}: Tap target artifact or creature. ({S} can be paid with one mana from a snow source.)

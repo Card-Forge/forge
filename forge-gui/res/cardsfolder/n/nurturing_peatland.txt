@@ -1,0 +1,6 @@
+Name:Nurturing Peatland
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{T}, Pay 1 life: Add {B} or {G}.\n{1}, {T}, Sacrifice Nurturing Peatland: Draw a card.

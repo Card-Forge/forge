@@ -1,0 +1,7 @@
+Name:Neurok Stealthsuit
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Shroud | Description$ Equipped creature has shroud. (It can't be the target of spells or abilities.)
+A:AB$ Attach | Cost$ U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
+Oracle:Equipped creature has shroud. (It can't be the target of spells or abilities.)\n{U}{U}: Attach Neurok Stealthsuit to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

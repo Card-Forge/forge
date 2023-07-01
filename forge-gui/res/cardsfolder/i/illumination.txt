@@ -1,0 +1,7 @@
+Name:Illumination
+ManaCost:W W
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target artifact or enchantment spell | ValidTgts$ Artifact,Enchantment | SubAbility$ DBGainLife | SpellDescription$ Counter target artifact or enchantment spell.
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | SpellDescription$ Its controller gains life equal to its mana value.
+SVar:X:Targeted$CardManaCost
+Oracle:Counter target artifact or enchantment spell. Its controller gains life equal to its mana value.

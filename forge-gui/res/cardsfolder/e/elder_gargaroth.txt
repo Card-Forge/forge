@@ -1,0 +1,17 @@
+Name:Elder Gargaroth
+ManaCost:3 G G
+Types:Creature Beast
+PT:6/6
+K:Vigilance
+K:Reach
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks or blocks, ABILITY
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or blocks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBCreateToken,DBGainLife,DBDraw
+SVar:DBCreateToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
+DeckHas:Ability$Token|LifeGain
+Oracle:Vigilance, reach, trample\nWhenever Elder Gargaroth attacks or blocks, choose one —\n• Create a 3/3 green Beast creature token.\n• You gain 3 life.\n• Draw a card.

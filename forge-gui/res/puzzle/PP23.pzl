@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #23 - Scrapheap Samba
+URL:https://pauperpuzzles.wordpress.com/2017/04/22/23-scrapheap-samba/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=11
+humanhand=Thoughtcast;Disciple of the Vault;Atog;Aether Spellbomb;Myr Enforcer
+humanlibrary=Seat of the Synod;Galvanic Blast;Fling
+humanbattlefield=Vault of Whispers;Great Furnace;Embraal Gear-Smasher;Mobile Garrison;Lotus Petal
+aibattlefield=Dinrova Horror

@@ -1,0 +1,8 @@
+Name:Crypt Ghast
+ManaCost:3 B
+Types:Creature Spirit
+PT:2/2
+K:Extort
+T:Mode$ TapsForMana | ValidCard$ Swamp | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a Swamp for mana, add an additional {B}.
+SVar:TrigMana:DB$ Mana | Produced$ B | Amount$ 1
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever you tap a Swamp for mana, add an additional {B}.

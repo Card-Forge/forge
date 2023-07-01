@@ -1,0 +1,10 @@
+Name:Surge Mare
+ManaCost:U U
+Types:Creature Horse Fish
+PT:0/5
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Green | Description$ CARDNAME can't be blocked by green creatures.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may draw a card. If you do, discard a card.
+SVar:TrigDraw:AB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cost$ Draw<1/You>
+A:AB$ Pump | Cost$ 1 U | ValidCard$ Card.Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Surge Mare can't be blocked by green creatures.\nWhenever Surge Mare deals damage to an opponent, you may draw a card. If you do, discard a card.\n{1}{U}: Surge Mare gets +2/-2 until end of turn.

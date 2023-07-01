@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (2019-02-14)
+Type:Archived
+Subtype:Standard
+Effective:2019-02-14
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA
+Banned:Nexus of Fate; Rampaging Ferocidon

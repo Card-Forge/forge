@@ -1,0 +1,6 @@
+Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
+Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
+Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
+Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
+Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
+Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:

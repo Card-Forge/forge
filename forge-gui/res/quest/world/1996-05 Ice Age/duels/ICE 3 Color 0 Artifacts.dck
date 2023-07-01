@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 0C
+Title=The Artifacts
+Difficulty=Hard
+Description="Knowing its origins, how could they have thought they could control it?" -Sorine Relicbane, Soldevi heretic
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+2 Adarkar Sentinel|ICE
+2 Aesthir Glider|ALL|1
+2 Aesthir Glider|ALL|2
+2 Elkin Bottle|ICE
+1 Forest|ICE|1
+1 Forest|ICE|2
+2 Forest|ICE|3
+4 Icy Manipulator|ICE
+1 Island|ICE|1
+1 Island|ICE|2
+1 Island|ICE|3
+1 Mountain|ICE|1
+2 Mountain|ICE|2
+1 Mountain|ICE|3
+2 Phyrexian War Beast|ALL|1
+2 Phyrexian War Beast|ALL|2
+4 Pit Trap|ICE
+2 Plains|ICE|1
+1 Plains|ICE|2
+1 Plains|ICE|3
+1 Sheltered Valley|ALL
+1 Shield of the Ages|ICE
+4 Soldevi Simulacrum|ICE
+2 Soldevi Steam Beast|ALL|1
+2 Soldevi Steam Beast|ALL|2
+1 Swamp|ICE|1
+1 Swamp|ICE|2
+2 Swamp|ICE|3
+4 Thawing Glaciers|ALL
+4 Urza's Bauble|ICE
+2 Walking Wall|ICE
+1 Zuran Orb|ICE

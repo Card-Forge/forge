@@ -1,0 +1,25 @@
+[metadata]
+Title=Pyromancer
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Pyromancer
+[Main]
+4 Bonecrusher Giant|ELD|1
+4 Brazen Borrower|ELD|1
+2 Castle Embereth|ELD|1
+4 Fabled Passage|ELD|1
+4 Improbable Alliance|ELD|1
+4 Irencrag Pyromancer|ELD|1
+11 Island|ELD|4
+4 Merchant of the Vale|ELD|1
+7 Mountain|ELD|3
+1 Mystic Sanctuary|ELD
+4 Opt|ELD
+1 Scorching Dragonfire|ELD
+4 The Royal Scions|ELD|1
+4 Thrill of Possibility|ELD
+2 Witching Well|ELD
+[Sideboard]
+2 Castle Vantress|ELD|1

@@ -1,0 +1,9 @@
+Name:Herald of Faith
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever Herald of Faith attacks, you gain 2 life.

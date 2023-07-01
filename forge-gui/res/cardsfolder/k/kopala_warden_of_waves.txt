@@ -1,0 +1,7 @@
+Name:Kopala, Warden of Waves
+ManaCost:1 U U
+Types:Legendary Creature Merfolk Wizard
+PT:2/2
+S:Mode$ RaiseCost | ValidTarget$ Merfolk.YouCtrl+inZoneBattlefield | Activator$ Player.Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target a Merfolk you control cost {2} more to cast.
+S:Mode$ RaiseCost | ValidTarget$ Merfolk.YouCtrl+inZoneBattlefield | Activator$ Player.Opponent | Type$ Ability | Amount$ 2 | Description$ Abilities your opponents activate that target a Merfolk you control cost {2} more to activate.
+Oracle:Spells your opponents cast that target a Merfolk you control cost {2} more to cast.\nAbilities your opponents activate that target a Merfolk you control cost {2} more to activate.

@@ -1,0 +1,8 @@
+Name:Aurora Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ White | OverwriteColors$ True | SpellDescription$ Target permanent becomes white until end of turn.
+AI:RemoveDeck:All
+Oracle:Flying\n{W}: Target permanent becomes white until end of turn.

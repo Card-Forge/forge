@@ -1,0 +1,14 @@
+Name:Midnight Clock
+ManaCost:2 U
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ PutCounter | Cost$ 2 U | CounterType$ HOUR | CounterNum$ 1 | SpellDescription$ Put an hour counter on CARDNAME.
+AI:RemoveDeck:Random
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each upkeep, put an hour counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ HOUR | CounterNum$ 1
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ HOUR | CounterAmount$ EQ12 | Execute$ TrigChangeAll | TriggerDescription$ When the twelfth hour counter is put on CARDNAME, shuffle your hand and graveyard into your library, then draw seven cards. Exile CARDNAME.
+SVar:TrigChangeAll:DB$ ChangeZoneAll | Origin$ Graveyard,Hand | Destination$ Library | ChangeType$ Card.YouOwn | Shuffle$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile
+DeckHas:Ability$Counters
+Oracle:{T}: Add {U}.\n{2}{U}: Put an hour counter on Midnight Clock.\nAt the beginning of each upkeep, put an hour counter on Midnight Clock.\nWhen the twelfth hour counter is put on Midnight Clock, shuffle your hand and graveyard into your library, then draw seven cards. Exile Midnight Clock.

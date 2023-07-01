@@ -1,0 +1,7 @@
+Name:Arch of Orazca
+ManaCost:no cost
+Types:Land
+K:Ascend
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 5 T | Activation$ Blessing | AILogic$ AtOppEOT | SpellDescription$ Draw a card. Activate only if you have the city's blessing.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{5}, {T}: Draw a card. Activate only if you have the city's blessing.

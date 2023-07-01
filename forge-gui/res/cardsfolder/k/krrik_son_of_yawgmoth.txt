@@ -1,0 +1,10 @@
+Name:K'rrik, Son of Yawgmoth
+ManaCost:4 BP BP BP
+Types:Legendary Creature Phyrexian Horror Minion
+PT:2/2
+K:Lifelink
+S:Mode$ Continuous | Affected$ You | AddKeyword$ PayLifeInsteadOf:B | Description$ For each {B} in a cost, you may pay 2 life rather than pay that mana.
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.Black
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nLifelink\nFor each {B} in a cost, you may pay 2 life rather than pay that mana.\nWhenever you cast a black spell, put a +1/+1 counter on K'rrik, Son of Yawgmoth.

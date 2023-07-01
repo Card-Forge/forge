@@ -1,0 +1,5 @@
+Name:Horror Token
+ManaCost:no cost
+Types:Artifact Creature Horror
+PT:*/*
+Oracle:

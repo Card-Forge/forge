@@ -1,0 +1,9 @@
+Name:Into the Fire
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Charm | Choices$ DamageAll,Tuck
+SVar:DamageAll:DB$ DamageAll | ValidCards$ Creature,Planeswalker,Battle | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature, planeswalker, and battle.
+SVar:Tuck:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card | ChangeNum$ Count$InYourHand | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
+SVar:DBDraw:DB$ Draw | NumCards$ Count$RememberedSize/Plus.1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose one —\n• Into the Fire deals 2 damage to each creature, planeswalker, and battle.\n• Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.

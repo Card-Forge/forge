@@ -1,0 +1,7 @@
+Name:Long-Finned Skywhale
+ManaCost:2 U U
+Types:Creature Whale
+PT:4/3
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nLong-Finned Skywhale can block only creatures with flying.

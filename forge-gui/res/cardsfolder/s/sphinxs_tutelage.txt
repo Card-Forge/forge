@@ -1,0 +1,14 @@
+Name:Sphinx's Tutelage
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.
+SVar:TrigMill:DB$ Repeat | ValidTgts$ Opponent | IsCurse$ True | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledSharesColor | RepeatSVarCompare$ GE2 | SubAbility$ DBCleanup
+SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBGrind
+SVar:DBGrind:DB$ Mill | NumCards$ 2 | Defined$ Targeted | NoReveal$ True | RememberMilled$ True
+SVar:MaxRepeats:TargetedPlayer$CardsInLibrary
+SVar:MilledSharesColor:Remembered$Valid Card.nonLand+SharesColorWithOther Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Draw | Cost$ 5 U | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Whenever you draw a card, target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.\n{5}{U}: Draw a card, then discard a card.

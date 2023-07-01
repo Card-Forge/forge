@@ -1,0 +1,7 @@
+Name:Angrath's Ambusher
+ManaCost:2 B
+Types:Creature Orc Pirate
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Planeswalker.Angrath+YouCtrl | Description$ CARDNAME gets +2/+0 as long as you control an Angrath planeswalker.
+SVar:BuffedBy:Angrath
+Oracle:Angrath's Ambusher gets +2/+0 as long as you control an Angrath planeswalker.

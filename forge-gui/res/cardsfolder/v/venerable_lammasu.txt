@@ -1,0 +1,6 @@
+Name:Venerable Lammasu
+ManaCost:6 W
+Types:Creature Lammasu
+PT:5/4
+K:Flying
+Oracle:Flying

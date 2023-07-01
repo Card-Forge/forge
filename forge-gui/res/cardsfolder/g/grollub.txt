@@ -1,0 +1,9 @@
+Name:Grollub
+ManaCost:2 B
+Types:Creature Beast
+PT:3/3
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, each opponent gains that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+AI:RemoveDeck:Random
+Oracle:Whenever Grollub is dealt damage, each opponent gains that much life.

@@ -1,0 +1,8 @@
+Name:Unwavering Initiate
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:3/2
+K:Vigilance
+K:Embalm:4 W
+DeckHas:Ability$Token
+Oracle:Vigilance\nEmbalm {4}{W} ({4}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Human Warrior with no mana cost. Embalm only as a sorcery.)

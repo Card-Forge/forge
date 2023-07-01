@@ -1,0 +1,7 @@
+Name:Mantis Engine
+ManaCost:5
+Types:Artifact Creature Insect
+PT:3/3
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
+Oracle:{2}: Mantis Engine gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)\n{2}: Mantis Engine gains first strike until end of turn. (It deals combat damage before creatures without first strike.)

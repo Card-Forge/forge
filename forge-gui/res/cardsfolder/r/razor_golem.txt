@@ -1,0 +1,9 @@
+Name:Razor Golem
+ManaCost:6
+Types:Artifact Creature Golem
+PT:3/4
+K:Affinity:Plains
+K:Vigilance
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:Affinity for Plains (This spell costs {1} less to cast for each Plains you control.)\nVigilance

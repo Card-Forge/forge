@@ -1,0 +1,11 @@
+Name:Witch-Maw Nephilim
+ManaCost:G W U B
+Types:Creature Nephilim
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell, you may put two +1/+1 counters on CARDNAME.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ PumpTrample | TriggerDescription$ Whenever CARDNAME attacks, it gains trample until end of turn if its power is 10 or greater.
+SVar:PumpTrample:DB$ Pump | Defined$ Self | KW$ Trample | ConditionCheckSVar$ MyPower | ConditionSVarCompare$ GT9
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:BuffedBy:Card
+SVar:MyPower:Count$CardPower
+Oracle:Whenever you cast a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.

@@ -1,0 +1,6 @@
+Name:Talas Air Ship
+ManaCost:3 U
+Types:Creature Human Pirate
+PT:3/2
+K:Flying
+Oracle:Flying

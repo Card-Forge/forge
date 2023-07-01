@@ -1,0 +1,14 @@
+Name:Serendib Djinn
+ManaCost:2 U U
+Types:Creature Djinn
+PT:5/6
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac2 | TriggerDescription$ At the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, CARDNAME deals 3 damage to you.
+SVar:TrigSac2:DB$ Sacrifice | Defined$ You | SacValid$ Land | RememberSacrificed$ True | SubAbility$ Dmg
+SVar:Dmg:DB$ DealDamage | NumDmg$ 3 | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Card.Island | ConditionCompare$ EQ1 | SubAbility$ Clean
+SVar:Clean:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no lands, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Island.YouCtrl
+AI:RemoveDeck:All
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, Serendib Djinn deals 3 damage to you.\nWhen you control no lands, sacrifice Serendib Djinn.

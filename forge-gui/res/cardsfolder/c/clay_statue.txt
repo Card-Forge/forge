@@ -1,0 +1,6 @@
+Name:Clay Statue
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/1
+A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
+Oracle:{2}: Regenerate Clay Statue.

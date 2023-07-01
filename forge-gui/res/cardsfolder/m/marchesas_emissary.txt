@@ -1,0 +1,7 @@
+Name:Marchesa's Emissary
+ManaCost:3 U
+Types:Creature Human Rogue
+PT:2/2
+K:Hexproof
+K:Dethrone
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)

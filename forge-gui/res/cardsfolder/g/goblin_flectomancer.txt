@@ -1,0 +1,7 @@
+Name:Goblin Flectomancer
+ManaCost:U R R
+Types:Creature Goblin Wizard
+PT:2/2
+A:AB$ ChangeTargets | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell | SpellDescription$ You may change the targets of target instant or sorcery spell.
+AI:RemoveDeck:All
+Oracle:Sacrifice Goblin Flectomancer: You may change the targets of target instant or sorcery spell.

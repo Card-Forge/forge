@@ -1,0 +1,5 @@
+Name:Shared Discovery
+ManaCost:U
+Types:Sorcery
+A:SP$ Draw | Cost$ U tapXType<4/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
+Oracle:As an additional cost to cast this spell, tap four untapped creatures you control.\nDraw three cards.

@@ -1,0 +1,11 @@
+Name:Rapacious One
+ManaCost:5 R
+Types:Creature Eldrazi Drone
+PT:5/4
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Eldrazi
+DeckHas:Ability$Mana.Colorless|Token
+Oracle:Trample\nWhenever Rapacious One deals combat damage to a player, create that many 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."

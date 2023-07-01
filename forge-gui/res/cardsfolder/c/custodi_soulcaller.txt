@@ -1,0 +1,9 @@
+Name:Custodi Soulcaller
+ManaCost:1 W W
+Types:Creature Human Cleric
+PT:1/2
+K:Melee
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSoulcall | TriggerDescription$ Whenever CARDNAME attacks, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of players you attacked this combat.
+SVar:TrigSoulcall:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLEX
+SVar:X:TriggeredPlayersDefenders$Amount
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nWhenever Custodi Soulcaller attacks, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of players you attacked this combat.

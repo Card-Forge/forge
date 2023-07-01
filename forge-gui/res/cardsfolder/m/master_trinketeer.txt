@@ -1,0 +1,8 @@
+Name:Master Trinketeer
+ManaCost:2 W
+Types:Creature Dwarf Artificer
+PT:3/2
+S:Mode$ Continuous | Affected$ Permanent.Servo+YouCtrl,Permanent.Thopter+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Servos and Thopters you control get +1/+1.
+A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
+SVar:PlayMain1:TRUE
+Oracle:Servos and Thopters you control get +1/+1.\n{3}{W}: Create a 1/1 colorless Servo artifact creature token.

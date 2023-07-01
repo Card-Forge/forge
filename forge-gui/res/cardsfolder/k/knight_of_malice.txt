@@ -1,0 +1,8 @@
+Name:Knight of Malice
+ManaCost:1 B
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Hexproof:Card.White:white
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Permanent.White | Description$ CARDNAME gets +1/+0 as long as any player controls a white permanent.
+Oracle:First strike\nHexproof from white (This creature can't be the target of white spells or abilities your opponents control.)\nKnight of Malice gets +1/+0 as long as any player controls a white permanent.

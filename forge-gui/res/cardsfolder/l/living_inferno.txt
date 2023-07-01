@@ -1,0 +1,8 @@
+Name:Living Inferno
+ManaCost:6 R R
+Types:Creature Elemental
+PT:8/5
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | NumDmg$ Count$CardPower | TargetMin$ 0 | TargetMax$ Count$CardPower | DividedAsYouChoose$ Count$CardPower | SubAbility$ Retribution | SpellDescription$ CARDNAME deals damage equal to its power divided as you choose among any number of target creatures.
+SVar:Retribution:DB$ EachDamage | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Each of those creatures deals damage equal to its power to CARDNAME.
+AI:RemoveDeck:Random
+Oracle:{T}: Living Inferno deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to Living Inferno.

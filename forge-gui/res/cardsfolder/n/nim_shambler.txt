@@ -1,0 +1,10 @@
+Name:Nim Shambler
+ManaCost:2 B B
+Types:Creature Zombie
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+AI:RemoveDeck:All
+Oracle:Nim Shambler gets +1/+0 for each artifact you control.\nSacrifice a creature: Regenerate Nim Shambler.

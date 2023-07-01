@@ -1,0 +1,8 @@
+Name:Acidic Sliver
+ManaCost:B R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "{2}, Sacrifice this permanent: This permanent deals 2 damage to any target."
+SVar:Damage:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:BuffedBy:Sliver
+Oracle:All Slivers have "{2}, Sacrifice this permanent: This permanent deals 2 damage to any target."

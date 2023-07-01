@@ -1,0 +1,6 @@
+Name:Guardian Lions
+ManaCost:4 W
+Types:Creature Cat
+PT:1/6
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

@@ -1,0 +1,9 @@
+Name:Breathstealer's Crypt
+ManaCost:2 U B
+Types:Enchantment
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RevealedDraw | Description$ If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life.
+SVar:RevealedDraw:DB$ Draw | Defined$ ReplacedPlayer | NumCards$ 1 | SubAbility$ TrigReveal | RememberDrawn$ True
+SVar:TrigReveal:DB$ Reveal | Defined$ ReplacedPlayer | RevealDefined$ Remembered | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | UnlessPayer$ ReplacedPlayer | UnlessCost$ PayLife<3> | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life.

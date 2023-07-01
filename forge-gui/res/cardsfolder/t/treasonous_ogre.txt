@@ -1,0 +1,7 @@
+Name:Treasonous Ogre
+ManaCost:3 R
+Types:Creature Ogre Shaman
+PT:2/3
+K:Dethrone
+A:AB$ Mana | Cost$ PayLife<3> | Produced$ R | SpellDescription$ Add {R}.
+Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nPay 3 life: Add {R}.

@@ -1,0 +1,7 @@
+Name:Beast Token
+ManaCost:no cost
+Types:Creature Beast
+Colors:black
+PT:3/3
+K:Deathtouch
+Oracle:Deathtouch

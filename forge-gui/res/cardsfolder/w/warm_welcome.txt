@@ -1,0 +1,7 @@
+Name:Warm Welcome
+ManaCost:2 G
+Types:Instant
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | SubAbility$ DBToken | SpellDescription$ Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. Create a 1/1 green and white Citizen creature token.
+SVar:DBToken:DB$ Token | TokenScript$ gw_1_1_citizen
+DeckHas:Ability$Token & Type$Citizen
+Oracle:Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. Create a 1/1 green and white Citizen creature token.

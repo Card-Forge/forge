@@ -1,0 +1,9 @@
+Name:Panopticon
+ManaCost:no cost
+Types:Plane Mirrodin
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ PanopticonDraw | TriggerDescription$ When you planeswalk to CARDNAME, draw a card.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ PanopticonDraw | TriggerZones$ Command | TriggerDescription$ At the beginning of your draw step, draw an additional card.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ Whenever chaos ensues, draw a card.
+SVar:PanopticonDraw:DB$ Draw
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:When you planeswalk to Panopticon, draw a card.\nAt the beginning of your draw step, draw an additional card.\nWhenever chaos ensues, draw a card.

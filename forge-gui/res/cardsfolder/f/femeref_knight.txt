@@ -1,0 +1,7 @@
+Name:Femeref Knight
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance until end of turn.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{W}: Femeref Knight gains vigilance until end of turn.

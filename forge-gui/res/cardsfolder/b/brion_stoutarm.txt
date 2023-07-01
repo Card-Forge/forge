@@ -1,0 +1,8 @@
+Name:Brion Stoutarm
+ManaCost:2 R W
+Types:Legendary Creature Giant Warrior
+PT:4/4
+K:Lifelink
+A:AB$ DealDamage | Cost$ R T Sac<1/Creature.Other/another creature> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target player or planeswalker.
+SVar:X:Sacrificed$CardPower
+Oracle:Lifelink\n{R}, {T}, Sacrifice another creature: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player or planeswalker.

@@ -1,0 +1,7 @@
+Name:Bloodflow Connoisseur
+ManaCost:2 B
+Types:Creature Vampire
+PT:1/1
+A:AB$ PutCounter | Cost$ Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+AI:RemoveDeck:All
+Oracle:Sacrifice a creature: Put a +1/+1 counter on Bloodflow Connoisseur.

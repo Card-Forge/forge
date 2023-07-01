@@ -1,0 +1,7 @@
+Name:Karfell Harbinger
+ManaCost:1 U
+Types:Creature Zombie Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Static.Foretelling,Spell.Instant,Spell.Sorcery | SpellDescription$ Add {U}. Spend this mana only to foretell a card from your hand or cast an instant or sorcery spell.
+DeckHints:Type$Instant|Sorcery
+Oracle:{T}: Add {U}. Spend this mana only to foretell a card from your hand or cast an instant or sorcery spell.

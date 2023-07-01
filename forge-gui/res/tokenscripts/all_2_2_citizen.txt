@@ -1,0 +1,7 @@
+Name:Citizen Token
+ManaCost:no cost
+Colors:all
+Types:Creature Citizen
+PT:2/2
+Text:This creature is all colors.
+Oracle:This creature is all colors.

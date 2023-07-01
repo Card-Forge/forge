@@ -1,0 +1,8 @@
+Name:Mirri
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+5
+R:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land.Basic+YouCtrl | ReplaceWith$ ProduceAny | Description$ If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.
+SVar:ProduceAny:DB$ ReplaceMana | ReplaceType$ Any
+AI:RemoveDeck:All
+Oracle:Hand +0, life +5\nIf a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.

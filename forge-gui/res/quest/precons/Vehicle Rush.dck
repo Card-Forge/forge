@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Vehicle Rush
+Description=Cast powerful Vehicles early and crew them with low-cost creatures to launch a speedy assault. Get extra momentum from your artifact synergies, and use targeted removal to keep your opponent's board clear as you crash through their defenses.
+Deck Type=constructed
+Set=RIX
+Image=vehicle_rush.jpg
+[Main]
+3 Aether Hub|KLD
+1 Aethersphere Harvester|AER
+4 Bomat Courier|KLD
+1 Concealed Courtyard|KLD
+1 Cultivator's Caravan|KLD
+3 Depala, Pilot Exemplar|KLD
+1 Dragonskull Summit|XLN
+2 Evolving Wilds|RIX
+4 Heart of Kiran|AER
+1 Inspiring Vantage|KLD
+4 Lightning Strike|XLN
+3 Mountain|RIX
+2 Pia Nalaar|KLD
+5 Plains|RIX
+4 Scrapheap Scrounger|KLD
+1 Skysovereign, Consul Flagship|KLD
+4 Spire of Industry|AER
+1 Swamp|RIX
+4 Toolcraft Exemplar|KLD
+3 Unclaimed Territory|XLN
+4 Unlicensed Disintegration|KLD
+4 Veteran Motorist|KLD
+[Sideboard]
+1 Aethersphere Harvester|AER
+1 Cast Out|AKH
+2 Chandra's Defeat|HOU
+2 Crook of Condemnation|HOU
+4 Duress|XLN
+3 Harsh Mentor|AKH
+2 Magma Spray|AKH

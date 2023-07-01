@@ -1,0 +1,8 @@
+Name:Fastbond
+ManaCost:G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ Unlimited | Description$ You may play any number of lands on each of your turns.
+T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | NotFirstLand$ True | Execute$ DBPain | TriggerZones$ Battlefield | TriggerDescription$ Whenever you play a land, if it wasn't the first land you played this turn, CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+SVar:NonStackingEffect:True
+Oracle:You may play any number of lands on each of your turns.\nWhenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.

@@ -1,0 +1,10 @@
+Name:Chicken Egg
+ManaCost:1 R
+Types:Creature Egg
+PT:0/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. If you roll a 6, sacrifice CARDNAME and create a 4/4 red Giant Bird creature token.
+SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 6:DBSac
+SVar:DBSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ r_4_4_giant_bird
+DeckHas:Ability$Token|Sacrifice & Type$Bird|Giant
+Oracle:At the beginning of your upkeep, roll a six-sided die. If you roll a 6, sacrifice Chicken Egg and create a 4/4 red Giant Bird creature token.

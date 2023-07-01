@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (ANB)
+Type:Archived
+Subtype:Standard
+Effective:2020-08-12
+Sets:ANA, PANA, GRN, RNA, WAR, M20, ELD, THB, IKO, M21, ANB
+Banned:Agent of Treachery; Cauldron Familiar; Field of the Dead; Fires of Invention; Growth Spiral; Oko, Thief of Crowns; Once Upon a Time; Teferi, Time Raveler; Veil of Summer; Wilderness Reclamation

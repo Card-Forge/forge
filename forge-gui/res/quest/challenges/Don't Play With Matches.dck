@@ -1,0 +1,37 @@
+[quest]
+id=15
+AILife=30
+Repeat=false
+Wins=52
+Card Reward=4 red rares
+Credit Reward=200
+HumanExtras=Mudbutton Torchrunner|Scuzzback Scrapper
+AIExtras=Heedless One|Norwood Archers|Wildslayer Elves
+[metadata]
+Name=quest15
+Title=Don't Play With Matches
+Difficulty=hard
+Description=The goblins are battling the elves. Those pesky elves, will they ever learn. Do not play with fire!
+Icon=Dont Play With Matches.jpg
+Deck Type=constructed
+[main]
+4 Plateau
+4 Druid of the Anima
+4 Taiga
+1 Mox Emerald
+3 Temple Garden
+3 Glorious Anthem
+3 Stomping Ground
+4 Elvish Champion
+4 Lightning Bolt
+1 Mox Ruby
+1 Mox Pearl
+3 Gaea's Anthem
+4 Blaze
+3 Fireball
+4 Savannah
+3 Beastmaster Ascension
+3 Keen-Eyed Archers
+4 Elvish Harbinger
+4 Llanowar Elves
+[sideboard]

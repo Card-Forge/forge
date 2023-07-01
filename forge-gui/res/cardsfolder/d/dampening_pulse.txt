@@ -1,0 +1,6 @@
+Name:Dampening Pulse
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1 | Description$ Creatures your opponents control get -1/-0.
+SVar:PlayMain1:TRUE
+Oracle:Creatures your opponents control get -1/-0.

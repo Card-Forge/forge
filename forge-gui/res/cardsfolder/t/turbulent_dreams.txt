@@ -1,0 +1,7 @@
+Name:Turbulent Dreams
+ManaCost:U U
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ U U Discard<X/Card/card(s)> | CostDesc$ As an additional cost to cast this spell, discard X cards. | Origin$ Battlefield | Destination$ Hand | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Return X target nonland permanents to their owners' hands.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard X cards.\nReturn X target nonland permanents to their owners' hands.

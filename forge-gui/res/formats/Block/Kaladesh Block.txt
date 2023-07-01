@@ -1,0 +1,6 @@
+[format]
+Name:Kaladesh Block
+Type:Archived
+Subtype:Block
+Order:113
+Sets:AER, KLD

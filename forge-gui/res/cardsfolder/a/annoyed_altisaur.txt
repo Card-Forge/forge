@@ -1,0 +1,8 @@
+Name:Annoyed Altisaur
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:6/5
+K:Reach
+K:Trample
+K:Cascade
+Oracle:Reach, trample\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

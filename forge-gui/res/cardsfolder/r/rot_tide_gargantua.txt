@@ -1,0 +1,9 @@
+Name:Rot-Tide Gargantua
+ManaCost:3 B B
+Types:Creature Zombie Kraken
+PT:5/4
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME exploits a creature, each opponent sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature
+DeckHas:Ability$Sacrifice
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Rot-Tide Gargantua exploits a creature, each opponent sacrifices a creature.

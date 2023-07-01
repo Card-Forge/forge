@@ -1,0 +1,9 @@
+Name:The Filigree Sylex
+ManaCost:2
+Types:Legendary Artifact
+A:AB$ PutCounter | Cost$ T | CounterType$ OIL | CounterNum$ 1 | SpellDescription$ Put an oil counter on CARDNAME.
+A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | SpellDescription$ Destroy each nonland permanent with mana value equal to the number of oil counters on CARDNAME.
+A:AB$ DealDamage | Cost$ T RemoveAnyCounter<10/OIL/Permanent.YouCtrl/among permanents you control> Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 10 | SpellDescription$ It deals 10 damage to any target.
+SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{T}: Put an oil counter on The Filigree Sylex.\n{T}, Sacrifice The Filigree Sylex: Destroy each nonland permanent with mana value equal to the number of oil counters on The Filigree Sylex.\n{T}, Remove ten oil counters from among permanents you control and sacrifice The Filigree Sylex: It deals 10 damage to any target.

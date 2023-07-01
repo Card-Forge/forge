@@ -1,0 +1,7 @@
+Name:Jhoira's Timebug
+ManaCost:2
+Types:Artifact Creature Insect
+PT:1/2
+A:AB$ AddOrRemoveCounter | Cost$ T | CounterNum$ 1 | CounterType$ TIME | ValidTgts$ Permanent.inZoneBattlefield+YouCtrl,Card.suspended+YouOwn | TgtPrompt$ Choose target permanent you control or suspended card you own | TgtZone$ Battlefield,Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.counters_GE1_TIME | SpellDescription$ Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it.
+DeckNeeds:Keyword$Suspend|Vanishing
+Oracle:{T}: Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it.

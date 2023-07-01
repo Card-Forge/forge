@@ -1,0 +1,8 @@
+Name:Samurai of the Pale Curtain
+ManaCost:W W
+Types:Creature Fox Samurai
+PT:2/2
+K:Bushido:1
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent | ReplaceWith$ Exile | Description$ If a permanent would be put into a graveyard, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf a permanent would be put into a graveyard, exile it instead.

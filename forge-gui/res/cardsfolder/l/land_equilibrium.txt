@@ -1,0 +1,8 @@
+Name:Land Equilibrium
+ManaCost:2 U U
+Types:Enchantment
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Land.OppCtrl+ControllerControlsAtLeastAsManyLand | ReplaceWith$ MoveToPlay | Description$ If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.
+SVar:MoveToPlay:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ SacLand
+SVar:SacLand:DB$ Sacrifice | SacValid$ Land | Defined$ ReplacedCardController
+DeckHas:Ability$Sacrifice
+Oracle:If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.

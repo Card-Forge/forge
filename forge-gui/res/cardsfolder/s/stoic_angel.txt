@@ -1,0 +1,8 @@
+Name:Stoic Angel
+ManaCost:1 G W U
+Types:Creature Angel
+PT:3/4
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Creature:1 | Description$ Players can't untap more than one creature during their untap steps.
+Oracle:Flying, vigilance\nPlayers can't untap more than one creature during their untap steps.

@@ -1,0 +1,6 @@
+Name:Boros Recruit
+ManaCost:RW
+Types:Creature Goblin Soldier
+PT:1/1
+K:First Strike
+Oracle:({R/W} can be paid with either {R} or {W}.)\nFirst strike

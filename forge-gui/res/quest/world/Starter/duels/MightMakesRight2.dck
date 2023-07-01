@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Might Makes Right2
+Title=Might Makes Right
+Icon=Dungeon Crawling Red.jpg
+Difficulty=medium
+Description=Big red creatures...giants, barbarians, etc
+Deck Type=constructed
+[Main]
+2 Blaze|PO2
+2 Cunning Giant|PO2
+2 Dong Zhou, the Tyrant|PTK
+4 Earth Elemental|S99
+4 Fire Elemental|S99
+4 Highland Giant|POR
+1 Lu Bu, Master-at-Arms|PTK
+2 Ma Chao, Western Warrior|PTK
+5 Mountain|POR|1
+8 Mountain|POR|2
+7 Mountain|POR|3
+6 Mountain|POR|4
+4 Pillaging Horde|POR
+2 Thunder Dragon|S99
+2 Volcanic Dragon|POR
+2 Volcanic Hammer|POR
+3 Yuan Shao, the Indecisive|PTK

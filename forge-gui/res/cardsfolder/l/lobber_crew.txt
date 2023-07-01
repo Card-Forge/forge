@@ -1,0 +1,9 @@
+Name:Lobber Crew
+ManaCost:2 R
+Types:Creature Goblin Warrior
+PT:0/4
+K:Defender
+A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a multicolored spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Defender\n{T}: Lobber Crew deals 1 damage to each opponent.\nWhenever you cast a multicolored spell, untap Lobber Crew.

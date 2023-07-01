@@ -1,0 +1,9 @@
+Name:A-Bruenor Battlehammer
+ManaCost:2 R W
+Types:Legendary Creature Dwarf Warrior
+PT:5/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | Description$ Each creature you control gets +2/+0 for each Equipment attached to it.
+SVar:AffectedX:Count$Valid Equipment.Attached/Times.2
+A:AB$ Pump | Cost$ 0 | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ BruenorAttach | SorcerySpeed$ True | ActivationLimit$ 1 | StackDescription$ None | SpellDescription$ Attach target Equipment you control to target creature you control. Activate only as a sorcery and only once each turn.
+SVar:BruenorAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+Oracle:Each creature you control gets +2/+0 for each Equipment attached to it.\n{0}: Attach target Equipment you control to target creature you control. Activate only as a sorcery and only once each turn.

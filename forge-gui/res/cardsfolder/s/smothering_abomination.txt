@@ -1,0 +1,14 @@
+Name:Smothering Abomination
+ManaCost:2 B B
+Types:Creature Eldrazi
+PT:4/3
+K:Devoid
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ Creature
+T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigDrawCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, draw a card.
+SVar:TrigDrawCard:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$Valid Creature.YouCtrl
+Oracle:Devoid (This card has no color.)\nFlying\nAt the beginning of your upkeep, sacrifice a creature.\nWhenever you sacrifice a creature, draw a card.

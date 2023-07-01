@@ -1,0 +1,6 @@
+Name:General's Kabuto
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Shroud & Prevent all combat damage that would be dealt to CARDNAME. | Description$ Equipped creature has shroud. (It can't be the target of spells or abilities.) Prevent all combat damage that would be dealt to equipped creature.
+Oracle:Equipped creature has shroud. (It can't be the target of spells or abilities.)\nPrevent all combat damage that would be dealt to equipped creature.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

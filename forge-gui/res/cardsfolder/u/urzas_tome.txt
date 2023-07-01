@@ -1,0 +1,6 @@
+Name:Urza's Tome
+ManaCost:2
+Types:Artifact
+A:AB$ Draw | Cost$ 3 T | NumCards$ 1 | SpellDescription$ Draw a card. Then discard a card unless you exile a historic card from your graveyard. (Artifacts, legendaries, and Sagas are historic.) | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ ExileFromGrave<1/Card.Historic> | UnlessPayer$ You
+Oracle:{3}, {T}: Draw a card. Then discard a card unless you exile a historic card from your graveyard. (Artifacts, legendaries, and Sagas are historic.)

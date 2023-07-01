@@ -1,0 +1,8 @@
+Name:Distorting Lens
+ManaCost:2
+Types:Artifact
+A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target permanent becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}: Target permanent becomes the color of your choice until end of turn.

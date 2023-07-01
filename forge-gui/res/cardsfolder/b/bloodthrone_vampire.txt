@@ -1,0 +1,8 @@
+Name:Bloodthrone Vampire
+ManaCost:1 B
+Types:Creature Vampire
+PT:1/1
+A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice a creature: Bloodthrone Vampire gets +2/+2 until end of turn.

@@ -1,0 +1,9 @@
+Name:Planar Collapse
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ GE4 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice CARDNAME and destroy all creatures. They can't be regenerated.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBDestroyAll
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice Planar Collapse and destroy all creatures. They can't be regenerated.

@@ -1,0 +1,42 @@
+[quest]
+id=2
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 blue rares
+Credit Reward=100
+HumanExtras=Quest for Ancient Secrets
+AIExtras=Forced Fruition
+[metadata]
+Name=quest2
+Title=Dungeon Crawling (Blue)
+Difficulty=medium
+Description=This realm holds knowledge so vast it can overburden the unwary.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+20 Island|M12
+4 Wasteland
+1 Cognivore
+4 Visions of Beyond
+1 Bonehoard
+1 Conversion Chamber
+4 Veil of Birds
+1 Veiled Apparition
+1 Veiled Serpent
+1 Straw Golem
+1 Isolation Cell
+1 Chimeric Egg
+1 Soul Barrier
+4 Aven Fogbringer
+4 Glowing Anemone
+2 Cloud Pirates
+2 Cloud Sprite
+1 Cosi's Trickster
+1 Water Wurm
+1 Wandering Ones
+1 Slippery Bogle
+1 Merfolk of the Pearl Trident
+1 Fugitive Wizard
+1 Grayscaled Gharial
+[sideboard]

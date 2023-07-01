@@ -1,0 +1,6 @@
+Name:Soliton
+ManaCost:5
+Types:Artifact Creature Construct
+PT:3/4
+A:AB$ Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
+Oracle:{U}: Untap Soliton.

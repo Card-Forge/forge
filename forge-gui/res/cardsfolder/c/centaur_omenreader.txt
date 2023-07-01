@@ -1,0 +1,6 @@
+Name:Centaur Omenreader
+ManaCost:3 G
+Types:Snow Creature Centaur Shaman
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | IsPresent$ Card.Self+tapped | Description$ As long as CARDNAME is tapped, creature spells you cast cost {2} less to cast.
+Oracle:As long as Centaur Omenreader is tapped, creature spells you cast cost {2} less to cast.

@@ -1,0 +1,9 @@
+Name:Momentous Fall
+ManaCost:2 G G
+Types:Instant
+A:SP$ Draw | Cost$ 2 G G Sac<1/Creature> | NumCards$ XPower | SubAbility$ DBGainLife | SpellDescription$ You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ XToughness
+SVar:XPower:Sacrificed$CardPower
+SVar:XToughness:Sacrificed$CardToughness
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.

@@ -1,0 +1,8 @@
+Name:Huatli's Spurring
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +X | SpellDescription$ Target creature gets +2/+0 until end of turn. If you control a Huatli planeswalker, that creature gets +4/+0 until end of turn instead.
+SVar:Y:Count$Valid Planeswalker.Huatli+YouCtrl
+SVar:X:Count$Compare Y GE1.4.2
+DeckHints:Type$Huatli
+Oracle:Target creature gets +2/+0 until end of turn. If you control a Huatli planeswalker, that creature gets +4/+0 until end of turn instead.

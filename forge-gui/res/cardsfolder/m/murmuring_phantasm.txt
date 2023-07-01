@@ -1,0 +1,6 @@
+Name:Murmuring Phantasm
+ManaCost:1 U
+Types:Creature Spirit
+PT:0/5
+K:Defender
+Oracle:Defender

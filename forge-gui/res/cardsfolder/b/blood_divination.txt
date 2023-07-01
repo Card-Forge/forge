@@ -1,0 +1,6 @@
+Name:Blood Divination
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Draw | Cost$ 3 B Sac<1/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw three cards.

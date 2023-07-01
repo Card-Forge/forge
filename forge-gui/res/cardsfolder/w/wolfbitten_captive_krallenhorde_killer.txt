@@ -1,0 +1,21 @@
+Name:Wolfbitten Captive
+ManaCost:G
+Types:Creature Human Werewolf
+PT:1/1
+A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:{1}{G}: Wolfbitten Captive gets +2/+2 until end of turn. Activate only once each turn.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Wolfbitten Captive.
+
+ALTERNATE
+
+Name:Krallenhorde Killer
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:2/2
+A:AB$ Pump | Cost$ 3 G | NumAtt$ +4 | NumDef$ +4 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +4/+4 until end of turn. Activate only once each turn.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:{3}{G}: Krallenhorde Killer gets +4/+4 until end of turn. Activate only once each turn.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Killer.

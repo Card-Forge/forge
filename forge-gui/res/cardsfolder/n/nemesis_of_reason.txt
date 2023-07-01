@@ -1,0 +1,8 @@
+Name:Nemesis of Reason
+ManaCost:3 U B
+Types:Creature Leviathan Horror
+PT:3/7
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, defending player mills ten cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredDefendingPlayer | NumCards$ 10
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Nemesis of Reason attacks, defending player mills ten cards.

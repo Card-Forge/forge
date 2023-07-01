@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/07/072.-M192.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Start with Hidden Herbalists in your graveyard. Assume your opponent has no mana available.
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Cleansing Nova;Renegade Rallier;One With the Wind;Prey Upon
+humangraveyard=Hidden Herbalists
+humanbattlefield=Benalish Marshal;Valiant Knight;Leonin Warleader;Aerial Guide;Bishop of Rebirth;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor
+aibattlefield=Sandwurm Convergence;t:Wurm,P:5,T:5,Cost:no cost,Color:G,Types:Creature-Wurm,Keywords:Hexproof,Image:g_5_5_wurm_akh;Shalai, Voice of Plenty|Counters:P1P1=2;Baird, Steward of Argive|Counters:P1P1=2

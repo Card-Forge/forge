@@ -1,0 +1,8 @@
+Name:Unbreakable Formation
+ManaCost:2 W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBAddendum | SpellDescription$ Creatures you control gain indestructible until end of turn.
+SVar:DBAddendum:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBPutCounters | SpellDescription$ Addendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn.
+SVar:DBPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn.

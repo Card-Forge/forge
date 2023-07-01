@@ -1,0 +1,8 @@
+Name:Baloth Gorger
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+K:Kicker:4
+K:etbCounter:P1P1:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nIf Baloth Gorger was kicked, it enters the battlefield with three +1/+1 counters on it.

@@ -1,0 +1,8 @@
+Name:Civic Saber
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ AffectedX | Description$ Equipped creature gets +1/+0 for each of its colors.
+SVar:AffectedX:Count$CardNumColors
+SVar:AttachAi:AITgts$ Card.nonColorless
+Oracle:Equipped creature gets +1/+0 for each of its colors.\nEquip {1}

@@ -1,0 +1,13 @@
+Name:Sapling of Colfenor
+ManaCost:3 BG BG
+Types:Legendary Creature Treefolk Shaman
+PT:2/5
+K:Indestructible
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Hand | RememberChanged$ True | DestinationZone2$ Library | LibraryPosition2$ 0 | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | LifeAmount$ Y | SubAbility$ DBLose
+SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$CardToughness
+SVar:X:Remembered$CardPower
+Oracle:Indestructible\nWhenever Sapling of Colfenor attacks, reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand.

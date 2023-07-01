@@ -1,0 +1,6 @@
+Name:Chardalyn Dragon
+ManaCost:6
+Types:Artifact Creature Dragon
+PT:4/4
+K:Flying
+Oracle:Flying

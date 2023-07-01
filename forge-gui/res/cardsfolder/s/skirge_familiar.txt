@@ -1,0 +1,8 @@
+Name:Skirge Familiar
+ManaCost:4 B
+Types:Creature Phyrexian Imp
+PT:3/2
+K:Flying
+A:AB$ Mana | Cost$ Discard<1/Card> | Produced$ B | SpellDescription$ Add {B}.
+AI:RemoveDeck:All
+Oracle:Flying\nDiscard a card: Add {B}.

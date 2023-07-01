@@ -1,0 +1,5 @@
+Name:Lady Orca
+ManaCost:5 B R
+Types:Legendary Creature Demon
+PT:7/4
+Oracle:

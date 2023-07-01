@@ -1,0 +1,7 @@
+Name:Moonveil Dragon
+ManaCost:3 R R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+A:AB$ PumpAll | Cost$ R | NumAtt$ +1 | ValidCards$ Creature.YouCtrl | SpellDescription$ Each creature you control gets +1/+0 until end of turn.
+Oracle:Flying\n{R}: Each creature you control gets +1/+0 until end of turn.

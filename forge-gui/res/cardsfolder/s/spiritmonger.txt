@@ -1,0 +1,11 @@
+Name:Spiritmonger
+ManaCost:3 B G
+Types:Creature Beast
+PT:6/6
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals damage to a creature, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+A:AB$ ChooseColor | Cost$ G | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.\n{B}: Regenerate Spiritmonger.\n{G}: Spiritmonger becomes the color of your choice until end of turn.

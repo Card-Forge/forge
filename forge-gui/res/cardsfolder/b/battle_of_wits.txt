@@ -1,0 +1,8 @@
+Name:Battle of Wits
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Library | PresentCompare$ GE200 | Execute$ TrigWinGame | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.

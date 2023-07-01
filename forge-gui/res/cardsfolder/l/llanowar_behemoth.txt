@@ -1,0 +1,6 @@
+Name:Llanowar Behemoth
+ManaCost:3 G G
+Types:Creature Elemental
+PT:4/4
+A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Tap an untapped creature you control: Llanowar Behemoth gets +1/+1 until end of turn.

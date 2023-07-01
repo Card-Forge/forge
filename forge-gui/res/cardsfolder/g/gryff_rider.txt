@@ -1,0 +1,8 @@
+Name:Gryff Rider
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/1
+K:Flying
+K:Training
+DeckHas:Ability$Counters
+Oracle:Flying\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)

@@ -1,0 +1,9 @@
+Name:Serenity
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Artifact,Enchantment | NoRegen$ True
+SVar:NeedsToPlay:Artifact.YouDontCtrl,Enchantment.YouDontCtrl
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.

@@ -1,0 +1,7 @@
+Name:Torch Drake
+ManaCost:3 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Flying\n{1}{R}: Torch Drake gets +1/+0 until end of turn.

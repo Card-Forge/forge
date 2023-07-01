@@ -1,0 +1,9 @@
+Name:Chillerpillar
+ManaCost:3 U
+Types:Snow Creature Insect
+PT:3/3
+K:Monstrosity:2:4 S S
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Flying | Description$ As long as CARDNAME is monstrous, it has flying.
+SVar:PlayMain1:TRUE
+Oracle:{4}{S}{S}: Monstrosity 2. (If this creature isn't monstrous, put two +1/+1 counters on it and it becomes monstrous. {S} can be paid with one mana from a snow source.)\nAs long as Chillerpillar is monstrous, it has flying.

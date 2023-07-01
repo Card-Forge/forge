@@ -1,0 +1,6 @@
+Name:Killer Whale
+ManaCost:3 U U
+Types:Creature Whale
+PT:3/5
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:{U}: Killer Whale gains flying until end of turn.

@@ -1,0 +1,6 @@
+Name:Gutless Ghoul
+ManaCost:2 B
+Types:Snow Creature Zombie
+PT:2/2
+A:AB$ GainLife | Cost$ 1 Sac<1/Creature> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+Oracle:{1}, Sacrifice a creature: You gain 2 life.

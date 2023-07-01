@@ -1,0 +1,19 @@
+[metadata]
+Title=Bad Food
+Difficulty=hard
+Description="The faerie plucked an acorn off the ground. One knight's quest was about to come to a bitter end."\n-Tales of the Fae
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD 3 Food 3B Bad Food
+[Main]
+4 Bake into a Pie|ELD
+4 Bog Naughty|ELD
+4 Cauldron Familiar|ELD
+4 Foreboding Fruit|ELD
+4 Giant's Skewer|ELD
+4 Gingerbrute|ELD
+28 Swamp|ELD|1
+4 Taste of Death|ELD
+4 Tempting Witch|ELD
+[Sideboard]
+4 Witch's Oven|ELD

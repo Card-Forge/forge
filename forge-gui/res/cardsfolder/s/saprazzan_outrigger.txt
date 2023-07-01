@@ -1,0 +1,10 @@
+Name:Saprazzan Outrigger
+ManaCost:3 U
+Types:Creature Merfolk
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, put it on top of its owner's library at end of combat.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put it on top of its owner's library at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigChange | TriggerDescription$ Put CARDNAME on top of its owner's library.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ Self
+AI:RemoveDeck:All
+Oracle:When Saprazzan Outrigger attacks or blocks, put it on top of its owner's library at end of combat.

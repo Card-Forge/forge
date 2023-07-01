@@ -1,0 +1,7 @@
+Name:Blinkmoth Well
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Tap | Cost$ 2 T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Tap target noncreature artifact.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{2}, {T}: Tap target noncreature artifact.

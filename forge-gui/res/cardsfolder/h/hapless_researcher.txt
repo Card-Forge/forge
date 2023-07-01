@@ -1,0 +1,8 @@
+Name:Hapless Researcher
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:All
+Oracle:Sacrifice Hapless Researcher: Draw a card, then discard a card.

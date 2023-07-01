@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Ape Lord 2
+Title=Ape Lord
+Difficulty=medium
+Description=RG aggro/burn deck with accelerated mana.
+Icon=ApeLord.jpg
+Deck Type=constructed
+[main]
+4 Barbary Apes|LEG
+4 Birds of Paradise|2ED
+2 Craw Wurm|2ED
+3 Disintegrate|2ED
+3 Fireball|2ED
+10 Forest|2ED
+4 Killer Bees|LEG
+4 Kird Ape|ARN
+1 Lightning Bolt|2ED
+4 Llanowar Elves|2ED
+8 Mountain|2ED
+2 Shivan Dragon|2ED
+1 Stream of Life|LEB
+2 Untamed Wilds|LEG
+4 Taiga|2ED
+4 Winter Blast|LEG
+[sideboard]

@@ -1,0 +1,9 @@
+Name:Lord of the Accursed
+ManaCost:2 B
+Types:Creature Zombie
+PT:2/3
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombies you control get +1/+1.
+A:AB$ PumpAll | Cost$ 1 B T | ValidCards$ Zombie | KW$ Menace | SpellDescription$ All Zombies gain menace until end of turn.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Zombie
+Oracle:Other Zombies you control get +1/+1.\n{1}{B}, {T}: All Zombies gain menace until end of turn.

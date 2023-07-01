@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 3 Strategy: RDW
+Title=RDW
+Difficulty=hard
+Description=Red Deck Wins!
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Craven Giant|POR
+4 Fire Imp|POR
+4 Goblin Bully|POR
+4 Hulking Goblin|POR
+20 Mountain|POR|2
+4 Mountain Goat|POR
+2 Pillaging Horde|POR
+4 Raging Cougar|POR
+4 Raging Goblin|POR|2
+2 Raging Minotaur|POR
+4 Stone Rain|POR
+4 Volcanic Hammer|POR

@@ -1,0 +1,9 @@
+Name:Shrouded Serpent
+ManaCost:4 U U U
+Types:Creature Serpent
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay {4}. If that player doesn't, CARDNAME can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | UnlessCost$ 4 | UnlessPayer$ TriggeredDefendingPlayer | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If that player doesn't, Shrouded Serpent can't be blocked this turn.

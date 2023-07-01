@@ -1,0 +1,9 @@
+Name:Withercrown
+ManaCost:1 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | AddTrigger$ WitherTrig | AddSVar$ TrigLoseLife | Description$ Enchanted creature has base power 0 and has "At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature."
+SVar:WitherTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | UnlessCost$ Sac<1/CARDNAME> | UnlessPayer$ You | UnlessAI$ LifeLE10
+Oracle:Enchant creature\nEnchanted creature has base power 0 and has "At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature."

@@ -1,0 +1,6 @@
+Name:Hammerfist Giant
+ManaCost:4 R R
+Types:Creature Giant Warrior
+PT:5/4
+A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | ValidDescription$ each creature without flying and each player. | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to each creature without flying and each player.
+Oracle:{T}: Hammerfist Giant deals 4 damage to each creature without flying and each player.

@@ -1,0 +1,8 @@
+Name:Braids, Conjurer Adept Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+3
+A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 2 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Player | ChangeNum$ 1 | Tapped$ True | AILogic$ AtOppEOT | SpellDescription$ Each player may put a land card from their hand onto the battlefield tapped.
+A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 3 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.nonCreature | DefinedPlayer$ Player | ChangeNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Each player may put a noncreature artifact card from their hand onto the battlefield.
+A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 4 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Player | ChangeNum$ 1 | SorcerySpeed$ True | SpellDescription$ Each player may put a creature card from their hand onto the battlefield. Activate only as a sorcery.
+Oracle:Hand +0, life +3\n{2}: Each player may put a land card from their hand onto the battlefield tapped.\n{3}: Each player may put a noncreature artifact card from their hand onto the battlefield.\n{4}: Each player may put a creature card from their hand onto the battlefield. Activate only as a sorcery.

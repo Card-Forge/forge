@@ -1,0 +1,21 @@
+[metadata]
+Name:MTG Puzzles #06 - Lucky Number 13
+URL:https://mtgpuzzles.com/puzzle/6
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. It is your untap step and you and your opponent are dancing around 13 life. Can you find a way to win this turn? It's the beginning of your Untap Step. Assume the card you draw in your draw step is not necessary to solve this puzzle.
+[state]
+turn=1
+activeplayer=p1
+activephase=CLEANUP
+p0life=10
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Blazing Salvo
+p0battlefield=Oreskos Sun Guide|Tapped;Nocturnal Feeder;Axis of Mortality;Triskaidekaphobia;Savai Triome|Tapped|NoETBTrigs;Savai Triome|Tapped|NoETBTrigs;Savai Triome|Tapped|NoETBTrigs
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1life=14
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Bogardan Firefiend

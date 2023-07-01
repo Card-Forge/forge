@@ -1,0 +1,10 @@
+Name:Thoughtbound Primoc
+ManaCost:2 R
+Types:Creature Bird Beast
+PT:2/3
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ Player.withMostTypeWizardOnly | Execute$ TrigGain | TriggerDescription$ At the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of CARDNAME.
+SVar:TrigGain:DB$ GainControl | Defined$ Self | NewController$ Player.withMostTypeWizardOnly
+AI:RemoveDeck:Random
+DeckHints:Type$Wizard
+Oracle:Flying\nAt the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of Thoughtbound Primoc.

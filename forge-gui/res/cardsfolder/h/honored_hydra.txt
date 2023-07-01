@@ -1,0 +1,8 @@
+Name:Honored Hydra
+ManaCost:5 G
+Types:Creature Snake Hydra
+PT:6/6
+K:Trample
+K:Embalm:3 G
+DeckHas:Ability$Token
+Oracle:Trample\nEmbalm {3}{G} ({3}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Snake Hydra with no mana cost. Embalm only as a sorcery.)

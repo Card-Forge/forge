@@ -1,0 +1,7 @@
+Name:Cartographer
+ManaCost:2 G
+Types:Creature Human
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl
+Oracle:When Cartographer enters the battlefield, you may return target land card from your graveyard to your hand.

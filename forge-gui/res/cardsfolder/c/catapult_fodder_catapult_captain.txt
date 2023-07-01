@@ -1,0 +1,20 @@
+Name:Catapult Fodder
+ManaCost:2 B
+Types:Creature Zombie
+PT:1/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerLTtoughness | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:PlayMain1:TRUE
+AlternateMode:DoubleFaced
+Oracle:At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform Catapult Fodder.
+
+ALTERNATE
+
+Name:Catapult Captain
+ManaCost:no cost
+Colors:black
+Types:Creature Zombie
+PT:2/6
+A:AB$ LoseLife | Cost$ 2 B T Sac<1/Creature.Other/another creature> | ValidTgts$ Opponent | LifeAmount$ X | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent loses life equal to the sacrificed creature's toughness.
+SVar:X:Sacrificed$CardToughness
+Oracle:{2}{B}, {T}, Sacrifice another creature: Target opponent loses life equal to the sacrificed creature's toughness.

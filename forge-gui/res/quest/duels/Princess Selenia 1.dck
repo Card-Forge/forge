@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Princess Selenia 1
+Title=Princess Selenia
+Difficulty=easy
+Description=BUG Song of Serenity deck
+Icon=Princess Selenia.jpg
+Deck Type=constructed
+[main]
+4 Opulent Palace
+4 Terramorphic Expanse
+4 Thornwood Falls
+4 Frost Marsh
+4 Forest|M11
+3 Island|M11
+1 Swamp|M11
+4 Song of Serenity
+4 Wanderlust
+3 Aura Gnarlid
+3 Yavimaya Enchantress
+1 Maddening Wind
+2 Curse of Chains
+1 Followed Footsteps
+2 Paralyzing Grasp
+2 Narcolepsy
+2 Slow Motion
+4 Stupefying Touch
+4 Parasitic Bond
+3 Soul Bleed
+3 Wall of Putrid Flesh
+[sideboard]

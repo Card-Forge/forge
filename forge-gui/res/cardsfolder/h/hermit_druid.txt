@@ -1,0 +1,8 @@
+Name:Hermit Druid
+ManaCost:1 G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ DigUntil | Cost$ G T | Valid$ Land.Basic | ValidDescription$ basic land | FoundDestination$ Hand | RevealedDestination$ Graveyard | AILogic$ DontMillSelf | SpellDescription$ Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
+AI:RemoveDeck:Random
+SVar:NonCombatPriority:4
+Oracle:{G}, {T}: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.

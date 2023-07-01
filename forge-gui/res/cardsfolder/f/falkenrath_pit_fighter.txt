@@ -1,0 +1,9 @@
+Name:Falkenrath Pit Fighter
+ManaCost:R
+Types:Creature Vampire Warrior
+PT:2/1
+A:AB$ Draw | Cost$ 1 R Discard<1/Card> Sac<1/Vampire> | Defined$ You | NumCards$ 2 | CheckSVar$ X | SpellDescription$ Draw two cards. Activate only if an opponent lost life this turn.
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Sacrifice|Discard
+DeckHints:Type$Vampire
+Oracle:{1}{R}, Discard a card, Sacrifice a Vampire: Draw two cards. Activate only if an opponent lost life this turn.

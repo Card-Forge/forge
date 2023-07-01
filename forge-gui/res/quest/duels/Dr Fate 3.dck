@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dr Fate 3
+Title=Dr Fate
+Difficulty=hard
+Description=UG Creature deck with Momir Vig, Murkfiend Liege and Sages of the Anima
+Icon=Dr Fate.jpg
+Deck Type=constructed
+[main]
+4 Tropical Island
+2 Hinterland Harbor
+2 Ancient Ziggurat
+4 Misty Rainforest
+2 Wooded Foothills
+4 Dryad Arbor
+2 Forest|ISD
+1 Island|ISD
+2 Essence Warden
+2 Fyndhorn Elves
+2 Llanowar Elves
+4 Noble Hierarch
+4 Coiling Oracle
+2 Gaea's Skyfolk
+2 Icefeather Aven
+1 Shambleshark
+2 Jhessian Infiltrator
+1 Edric, Spymaster of Trest
+1 Farhaven Elf
+2 Nulltread Gargantuan
+1 Trygon Predator
+3 Winged Coatl
+2 Momir Vig, Simic Visionary
+3 Murkfiend Liege
+3 Sages of the Anima
+1 Prophet of Kruphix
+1 Horizon Chimera
+[sideboard]

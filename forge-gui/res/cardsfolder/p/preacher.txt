@@ -1,0 +1,7 @@
+Name:Preacher
+ManaCost:1 W W
+Types:Creature Human Cleric
+PT:1/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | TgtPrompt$ Select target creature you control | LoseControl$ Untap,LeavesPlay | SpellDescription$ For as long as CARDNAME remains tapped, gain control of target creature of an opponent's choice they control.
+Oracle:You may choose not to untap Preacher during your untap step.\n{T}: For as long as Preacher remains tapped, gain control of target creature of an opponent's choice they control.

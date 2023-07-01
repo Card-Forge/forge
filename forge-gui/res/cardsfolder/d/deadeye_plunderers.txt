@@ -1,0 +1,11 @@
+Name:Deadeye Plunderers
+ManaCost:3 U B
+Types:Creature Human Pirate
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each artifact you control.
+A:AB$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Deadeye Plunderers gets +1/+1 for each artifact you control.\n{2}{U}{B}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

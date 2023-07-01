@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Wing and Claw
+Description=Soar over your opponent's defense while protecting your front-line with tactical spells.
+Deck Type=constructed
+Set=ANA
+[Main]
+1 Azor, the Lawbringer|RIX
+2 Blade Instructor|GRN
+3 Disperse|M19
+3 Favorable Winds|XLN
+1 Glacial Fortress|XLN
+1 Goring Ceratops|XLN
+2 Healer's Hawk|GRN
+2 Imperial Aerosaur|XLN
+10 Island|GRN
+3 Kitesail Corsair|RIX
+1 Light of the Legion|GRN
+4 Meandering River|M19
+1 Nezahal, Primal Tide|RIX
+2 One With the Wind|XLN
+2 Pegasus Courser|M19
+10 Plains|GRN
+3 Seal Away|DOM
+2 Serra Angel|DOM
+1 Settle the Wreckage|XLN
+3 Sunhome Stalwart|GRN
+2 Territorial Hammerskull|XLN
+1 Warkite Marauder|RIX
+
+

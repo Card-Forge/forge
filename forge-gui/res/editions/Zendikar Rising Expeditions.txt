@@ -1,0 +1,38 @@
+[metadata]
+Code=ZNE
+Date=2020-09-25
+Name=Zendikar Rising Expeditions
+Type=Collector_Edition
+ScryfallCode=ZNE
+
+[cards]
+1 M Flooded Strand @Adam Paquette
+2 M Polluted Delta @Titus Lunter
+3 M Bloodstained Mire @Sam Burley
+4 M Wooded Foothills @Daarken
+5 M Windswept Heath @Johannes Voss
+6 M Marsh Flats @Sam Burley
+7 M Scalding Tarn @Jonas De Ro
+8 M Verdant Catacombs @Alayna Danner
+9 M Arid Mesa @Adam Paquette
+10 M Misty Rainforest @Sam Burley
+11 M Seachrome Coast @Adam Paquette
+12 M Darkslick Shores @Jonas De Ro
+13 M Blackcleave Cliffs @Richard Wright
+14 M Copperline Gorge @Chris Ostrowski
+15 M Razorverge Thicket @Alayna Danner
+16 M Sea of Clouds @Sam Burley
+17 M Morphic Pool @Steven Belledin
+18 M Luxury Suite @Kieran Yanner
+19 M Spire Garden @Titus Lunter
+20 M Bountiful Promenade @Piotr Dura
+21 M Ancient Tomb @Adam Paquette
+22 M Cavern of Souls @Sam Burley
+23 M Celestial Colonnade @Piotr Dura
+24 M Creeping Tar Pit @Adam Paquette
+25 M Grove of the Burnwillows @Donato Giancola
+26 M Horizon Canopy @Alayna Danner
+27 M Prismatic Vista @Sam Burley
+28 M Strip Mine @Adam Paquette
+29 M Valakut, the Molten Pinnacle @Kieran Yanner
+30 M Wasteland @Adam Paquette

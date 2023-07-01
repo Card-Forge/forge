@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #06
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/03/170.-KHM6-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start in your draw step. Last turn, you exchanged control of Rankle and Goldmaw Champion. Archon of Sun's Grace is enchanted with your opponent's Valor of the Worthy.
+[state]
+humanlife=4
+ailife=7
+turn=2
+activeplayer=human
+activephase=DRAW
+humanhand=Liliana, Death Mage;Bala Ged Recovery;Brazen Borrower;Omen of the Dead;Thorn Mammoth
+humangraveyard=Demon's Disciple;Gingerbrute;Fruit of Tizerus
+humanbattlefield=Nissa of Shadowed Boughs|Counters:LOYALTY=3;Vorinclex, Monstrous Raider|Counters:P1P1=4;The Trickster-God's Heist|Counters:LORE=1;Island;Island;Swamp;Swamp;Forest;Forest;Goldmaw Champion|Owner:AI
+aibattlefield=Archon of Sun's Grace|Id:100;Basri Ket|Counters:LOYALTY=3;Nine Lives|Counters:INCARNATION=5;Valor of the Worthy|AttachedTo:100;Rankle, Master of Pranks|Owner:Human
+aiprecast=Basri Ket:CustomScript:DB$ Token | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_soldier
+removesummoningsickness=true

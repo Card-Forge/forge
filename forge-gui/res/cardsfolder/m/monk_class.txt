@@ -1,0 +1,16 @@
+Name:Monk Class
+ManaCost:W U
+Types:Enchantment Class
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ1 | Description$ The second spell you cast each turn costs {1} less to cast.
+K:Class:2:W U:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBounce | Secondary$ True | TriggerDescription$ When this Class becomes level 2, return up to one target nonland permanent to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand
+K:Class:3:1 W U:AddTrigger$ TriggerUpkeep
+SVar:TriggerUpkeep:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. For as long as it remains exiled, it has "You may cast this card from exile as long as you've cast another spell this turn."
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay
+SVar:DBMayPlay:DB$ Animate | Defined$ Remembered | staticAbilities$ StPlay | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:StPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Exile | Affected$ Card.Self+nonLand | AffectedZone$ Exile | CheckSVar$ YouCastThisTurn | SVarCompare$ GE1 | Description$ You may cast this card from exile as long as you've cast another spell this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:(Gain the next level as a sorcery to add its ability.)\nThe second spell you cast each turn costs {1} less to cast.\n{W}{U}: Level 2\nWhen this Class becomes level 2, return up to one target nonland permanent to its owner's hand.\n{1}{W}{U}: Level 3\nAt the beginning of your upkeep, exile the top card of your library. For as long as it remains exiled, it has "You may cast this card from exile as long as you've cast another spell this turn."

@@ -1,0 +1,8 @@
+Name:Human Warrior Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Human Warrior
+PT:3/1
+K:Trample
+K:Haste
+Oracle:Trample, haste

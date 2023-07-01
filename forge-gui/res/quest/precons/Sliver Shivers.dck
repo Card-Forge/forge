@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sliver Shivers
+Description=A fan favorite returns-- the Slivers are loose! Each Sliver splices its own ability onto all other Slivers in play. And now, some even power up Slivers in your hand. Team up and take down.
+Deck Type=constructed
+Set=LGN
+Image=sliver_shivers.jpg
+[main]
+7 Forest|ONS
+5 Island|ONS
+9 Plains|ONS
+1 Brood Sliver|LGN
+1 Essence Sliver|LGN
+3 Mistform Dreamer|ONS
+4 Plated Sliver|LGN
+4 Quick Sliver|LGN
+1 Root Sliver|LGN
+3 Shifting Sliver|LGN
+3 Ward Sliver|LGN
+1 Crown of Vigor|ONS
+4 Pacifism|ONS
+2 Akroma's Blessing|ONS
+2 Mage's Guile|ONS
+2 Tribal Unity|ONS
+2 Lonely Sandbar|ONS
+4 Secluded Steppe|ONS
+2 Explosive Vegetation|ONS
+[sideboard]

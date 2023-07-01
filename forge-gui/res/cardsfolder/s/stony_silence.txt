@@ -1,0 +1,7 @@
+Name:Stony Silence
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ CantBeActivated | AffectedZone$ Battlefield | ValidCard$ Artifact | ValidSA$ Activated | Description$ Activated abilities of artifacts can't be activated.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Activated abilities of artifacts can't be activated.

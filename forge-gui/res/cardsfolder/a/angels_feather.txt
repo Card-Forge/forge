@@ -1,0 +1,8 @@
+Name:Angel's Feather
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:Whenever a player casts a white spell, you may gain 1 life.

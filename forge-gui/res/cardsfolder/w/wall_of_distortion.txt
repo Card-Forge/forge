@@ -1,0 +1,7 @@
+Name:Wall of Distortion
+ManaCost:2 B B
+Types:Creature Wall
+PT:1/3
+K:Defender
+A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+Oracle:Defender (This creature can't attack.)\n{2}{B}, {T}: Target player discards a card. Activate only as a sorcery.

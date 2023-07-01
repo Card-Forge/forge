@@ -1,0 +1,6 @@
+Name:Somberwald Sage
+ManaCost:2 G
+Types:Creature Human Druid
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | RestrictValid$ Spell.Creature | SpellDescription$ Add three mana of any one color. Spend this mana only to cast creature spells.
+Oracle:{T}: Add three mana of any one color. Spend this mana only to cast creature spells.

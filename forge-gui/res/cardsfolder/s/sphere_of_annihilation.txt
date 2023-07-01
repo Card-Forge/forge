@@ -1,0 +1,12 @@
+Name:Sphere of Annihilation
+ManaCost:X B
+Types:Artifact
+K:etbCounter:VOID:X
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigExileSelf | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, exile CARDNAME, all creatures and planeswalkers with mana value less than or equal to the number of void counters on it, and all creature and planeswalker cards in graveyards with mana value less than or equal to the number of void counters on it.
+SVar:TrigExileSelf:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBExileAll
+SVar:DBExileAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.cmcLEY,Planeswalker.cmcLEY | SubAbility$ DBExileAllGraveyard
+SVar:DBExileAllGraveyard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature.cmcLEY,Planeswalker.cmcLEY
+SVar:X:Count$xPaid
+SVar:Y:Count$CardCounters.VOID
+DeckHas:Ability$Counters
+Oracle:Sphere of Annihilation enters the battlefield with X void counters on it.\nAt the beginning of your upkeep, exile Sphere of Annihilation, all creatures and planeswalkers with mana value less than or equal to the number of void counters on it, and all creature and planeswalker cards in graveyards with mana value less than or equal to the number of void counters on it.

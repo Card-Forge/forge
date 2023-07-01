@@ -1,0 +1,9 @@
+[metadata]
+Code=PUSG
+Date=1998-10-12
+Name=Urza's Saga Promos
+Type=Promo
+ScryfallCode=PUSG
+
+[cards]
+202 R Lightning Dragon @Ron Spencer

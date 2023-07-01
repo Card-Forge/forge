@@ -1,0 +1,5 @@
+Name:Plains
+ManaCost:no cost
+Types:Basic Land Plains
+SVar:PicCount:4
+Oracle:({T}: Add {W}.)

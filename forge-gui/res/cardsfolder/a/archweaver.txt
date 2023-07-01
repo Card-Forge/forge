@@ -1,0 +1,7 @@
+Name:Archweaver
+ManaCost:5 G G
+Types:Creature Spider
+PT:5/5
+K:Reach
+K:Trample
+Oracle:Reach, trample

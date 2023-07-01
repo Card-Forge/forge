@@ -1,0 +1,6 @@
+Name:Mirri the Cursed|Deck:Mirri the Cursed.dck|Variant:Commander|Avatar:Mirri the Cursed|Desc:
+Name:Teneb, the Harvester|Deck:Teneb, the Harvester.dck|Variant:Commander|Avatar:Teneb, the Harvester|Desc:
+Name:Lovisa Coldeyes|Deck:Lovisa Coldeyes.dck|Variant:Commander|Avatar:Lovisa Coldeyes|Desc:
+Name:Zur the Enchanter|Deck:Zur the Enchanter.dck|Variant:Commander|Avatar:Zur the Enchanter|Desc:
+Name:Birds of Paradise|Deck:Birds of Paradise.dck|Variant:Vanguard|Avatar:Birds of Paradise|Desc:
+Name:Rofellos, Llanowar Emissary|Deck:Rofellos, Llanowar Emissary.dck|Variant:Commander|Avatar:Rofellos, Llanowar Emissary|Desc:

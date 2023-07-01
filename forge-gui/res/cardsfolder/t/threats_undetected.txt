@@ -1,0 +1,11 @@
+Name:Threats Undetected
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature | ChangeNum$ 4 | DifferentPower$ True | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBChoosePlayer | SpellDescription$ Search your library for up to four creature cards with different powers and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest into your hand.
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ OppPickTwo
+SVar:OppPickTwo:DB$ ChooseCard | Defined$ ChosenPlayer | Amount$ 2 | Mandatory$ True | ChoiceTitle$ Choose two cards to shuffle into opponent's library | Choices$ Card.IsRemembered | ChoiceZone$ Library | ForgetChosen$ True | SubAbility$ MoveNotChosen
+SVar:MoveNotChosen:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Creature
+Oracle:Search your library for up to four creature cards with different powers and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest into your hand.

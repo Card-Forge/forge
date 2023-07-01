@@ -1,0 +1,6 @@
+Name:Joven
+ManaCost:3 R R
+Types:Legendary Creature Human Rogue
+PT:3/3
+A:AB$ Destroy | Cost$ R R R T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact.
+Oracle:{R}{R}{R}, {T}: Destroy target noncreature artifact.

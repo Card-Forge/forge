@@ -1,0 +1,9 @@
+Name:Skyclave Geopede
+ManaCost:2 R
+Types:Creature Insect
+PT:3/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:BuffedBy:Land
+Oracle:Trample\nLandfall — Whenever a land enters the battlefield under your control, Skyclave Geopede gets +2/+2 until end of turn.

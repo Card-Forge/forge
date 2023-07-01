@@ -1,0 +1,7 @@
+Name:Tetravite Token
+ManaCost:no cost
+Types:Artifact Creature Tetravite
+PT:1/1
+K:Flying
+S:Mode$ CantAttach | ValidCard$ Card.Aura | Target$ Card.Self | Description$ CARDNAME can't be enchanted.
+Oracle:Flying\nThis creature can't be enchanted.

@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (NEO)
+Type:Archived
+Subtype:Standard
+Effective:2022-02-10
+Sets:ANA, PANA, ANB, ZNR, KHM, STX, AFR, MID, VOW, NEO
+Banned:Alrund's Epiphany; Divide by Zero; Faceless Haven; Omnath, Locus of Creation

@@ -1,0 +1,9 @@
+Name:Geth, Lord of the Vault|Deck:Geth, Lord of the Vault.dck|Variant:Commander|Avatar:Geth, Lord of the Vault|Desc:
+Name:Nim Death Squad|Deck:Nim Death Squad.dck|Variant:None|Avatar:Wail of the Nim|Desc:
+Name:Sheoldred, Whispering One|Deck:Sheoldred, Whispering One.dck|Variant:Commander|Avatar:Sheoldred, Whispering One|Desc:
+Name:Skithiryx, the Blight Dragon|Deck:Skithiryx, the Blight Dragon.dck|Variant:Commander|Avatar:Skithiryx, the Blight Dragon|Desc:
+Name:Germs|Deck:Germs.dck|Variant:None|Avatar:Flayer Husk|Desc:
+Name:Disciples of the Vault|Deck:Disciples of the Vault.dck|Variant:None|Avatar:Disciple of the Vault|Desc:
+Name:Phyrexian Infection|Deck:phyrexian Infection.dck|Variant:None|Avatar:Phyrexian Crusader|Desc:
+Name:Relentless Rats|Deck:Relentless Rats.dck|Variant:None|Avatar:Relentless Rats|Desc:
+Name:Phyrexian Mana|Deck:Phyrexian Mana.dck|Variant:None|Avatar:Rage Extractor|Desc:

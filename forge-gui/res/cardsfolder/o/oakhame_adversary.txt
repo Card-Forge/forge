@@ -1,0 +1,9 @@
+Name:Oakhame Adversary
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:2/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Permanent.Green+OppCtrl | Description$ CARDNAME costs {2} less to cast if your opponent controls a green permanent.
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:This spell costs {2} less to cast if an opponent controls a green permanent.\nDeathtouch\nWhenever Oakhame Adversary deals combat damage to a player, draw a card.

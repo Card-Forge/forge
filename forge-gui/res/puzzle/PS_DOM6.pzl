@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Dominaria #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/06/065.DOM6_.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=11
+turn=2
+activeplayer=human
+activephase=MAIN1
+humanhand=Shivan Fire;Jaya's Immolating Inferno;Squee, the Immortal;Goblin Chainwhirler
+humanbattlefield=Skirk Prospector|Set:DOM;Siege-Gang Commander|Set:DOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_dom;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_dom;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_dom;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_dom;Bloodstone Goblin;Mountain|Set:DOM;Mountain|Set:DOM;Mountain|Set:DOM;Mountain|Set:DOM;Mountain|Set:DOM
+aibattlefield=Arvad the Cursed|Id:1;Short Sword|AttachedTo:1;Vona, Butcher of Magan;Dusk Legion Zealot;Hope of Ghirapur

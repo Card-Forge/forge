@@ -1,0 +1,9 @@
+Name:Thorough Investigation
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigVenture | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, venture into the dungeon.
+SVar:TrigVenture:DB$ Venture
+DeckHas:Ability$Investigate|Token
+Oracle:Whenever you attack, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, venture into the dungeon. (Enter the first room or advance to the next room.)

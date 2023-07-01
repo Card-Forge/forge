@@ -1,0 +1,32 @@
+[quest]
+id=TempestQuest5
+OpponentName=Sliver Queen
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=3 rares
+Credit Reward=500
+AIExtras=Mountain|Island|Swamp|Forest|Plains
+HumanExtras=Mountain|Island|Swamp|Forest|Plains
+[metadata]
+Title=Sliver Outbreak!
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=The abundant sources of mana are causing a Sliver outbreak!
+Deck Type=constructed
+Name=Sliver
+[Main]
+2 Acidic Sliver|STH
+3 Clot Sliver|TMP
+4 Crystalline Sliver|STH
+2 Heart Sliver|TMP
+4 Heartstone|STH
+2 Hibernation Sliver|STH
+3 Horned Sliver|TMP
+4 Muscle Sliver|TMP
+24 Reflecting Pool|TMP
+4 Sliver Queen|STH
+2 Spined Sliver|STH
+2 Talon Sliver|TMP
+2 Victual Sliver|STH
+2 Winged Sliver|TMP

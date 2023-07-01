@@ -1,0 +1,11 @@
+Name:Prismari Command
+ManaCost:1 U R
+Types:Instant
+A:SP$ Charm | Choices$ DBShock,DBLoot,DBTreasure,DBShatter | CharmNum$ 2
+SVar:DBShock:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to deal 2 damage to | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:DBLoot:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player to draw two cards, then discard two cards | Defined$ ThisTargetedPlayer | SubAbility$ DBDiscard | SpellDescription$ Target player draws two cards, then discards two cards.
+SVar:DBDiscard:DB$ Discard | Defined$ ParentTarget | NumCards$ 2 | Mode$ TgtChoose
+SVar:DBTreasure:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to create a Treasure token | TokenScript$ c_a_treasure_sac | TokenOwner$ ThisTargetedPlayer | SpellDescription$ Target player creates a Treasure token.
+SVar:DBShatter:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to destroy | Defined$ ThisTargetedCard | SpellDescription$ Destroy target artifact.
+DeckHas:Ability$Token
+Oracle:Choose two —\n• Prismari Command deals 2 damage to any target.\n• Target player draws two cards, then discards two cards.\n• Target player creates a Treasure token.\n• Destroy target artifact.

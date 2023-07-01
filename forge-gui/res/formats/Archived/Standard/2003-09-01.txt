@@ -1,0 +1,6 @@
+[format]
+Name:Standard (8ED)
+Type:Archived
+Subtype:Standard
+Effective:2003-09-01
+Sets:ODY, TOR, JUD, ONS, LGN, SCG, 8ED

@@ -1,0 +1,5 @@
+Name:Loxodon Convert
+ManaCost:3 W
+Types:Creature Phyrexian Elephant Soldier
+PT:4/2
+Oracle:

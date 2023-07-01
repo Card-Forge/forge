@@ -1,0 +1,6 @@
+Name:Snake Pit
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.Blue,Card.Black | ValidActivatingPlayer$ Opponent | Execute$ TrigToken | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a blue or black spell, you may create a 1/1 green Snake creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_snake | TokenOwner$ You
+Oracle:Whenever an opponent casts a blue or black spell, you may create a 1/1 green Snake creature token.

@@ -1,0 +1,8 @@
+Name:Destructor Dragon
+ManaCost:4 G G
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy target noncreature permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent
+Oracle:Flying\nWhen Destructor Dragon dies, destroy target noncreature permanent.

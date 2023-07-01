@@ -1,0 +1,6 @@
+Name:Grave Pact
+ManaCost:1 B B B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control dies, each other player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Other | SacValid$ Creature
+Oracle:Whenever a creature you control dies, each other player sacrifices a creature.

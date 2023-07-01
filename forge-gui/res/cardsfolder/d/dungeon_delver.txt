@@ -1,0 +1,8 @@
+Name:Dungeon Delver
+ManaCost:1 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddStaticAbility$ Roomharmonicon | Description$ Commander creatures you own have "Room abilities of dungeons you own trigger an additional time."
+SVar:Roomharmonicon:Mode$ Panharmonicon | ValidMode$ RoomEntered | ValidCard$ Dungeon.YouOwn | Description$ Room abilities of dungeons you own trigger an additional time.
+AI:RemoveDeck:Random
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Room abilities of dungeons you own trigger an additional time."

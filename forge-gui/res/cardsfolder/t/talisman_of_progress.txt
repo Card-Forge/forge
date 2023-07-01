@@ -1,0 +1,7 @@
+Name:Talisman of Progress
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SubAbility$ DBPain | SpellDescription$ Add {W} or {U}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {W} or {U}. Talisman of Progress deals 1 damage to you.

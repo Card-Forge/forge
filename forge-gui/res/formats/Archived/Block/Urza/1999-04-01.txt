@@ -1,0 +1,7 @@
+[format]
+Name:Block: Urza (1999-04-01)
+Type:Archived
+Subtype:Block
+Effective:1999-04-01
+Sets:USG, ULG
+Banned:Memory Jar, Time Spiral, Windfall

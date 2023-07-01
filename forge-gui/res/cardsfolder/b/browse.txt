@@ -1,0 +1,7 @@
+Name:Browse
+ManaCost:2 U U
+Types:Enchantment
+A:AB$ Dig | Cost$ 2 U U | DigNum$ 5 | ChangeNum$ 1 | DestinationZone2$ Exile | SpellDescription$ Look at the top five cards of your library, put one of them into your hand, and exile the rest.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:{2}{U}{U}: Look at the top five cards of your library, put one of them into your hand, and exile the rest.

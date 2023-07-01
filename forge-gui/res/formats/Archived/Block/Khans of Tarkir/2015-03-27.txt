@@ -1,0 +1,6 @@
+[format]
+Name:Block: Khans of Tarkir (DTK)
+Type:Archived
+Subtype:Block
+Effective:2015-03-27
+Sets:KTK, FRF, DTK

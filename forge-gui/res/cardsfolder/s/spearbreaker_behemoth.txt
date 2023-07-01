@@ -1,0 +1,7 @@
+Name:Spearbreaker Behemoth
+ManaCost:5 G G
+Types:Creature Beast
+PT:5/5
+K:Indestructible
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater | KW$ Indestructible | SpellDescription$ Target creature with power 5 or greater gains indestructible until end of turn.
+Oracle:Indestructible\n{1}: Target creature with power 5 or greater gains indestructible until end of turn.

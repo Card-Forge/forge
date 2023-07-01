@@ -1,0 +1,9 @@
+Name:Thunderbreak Regent
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Dragon.YouCtrl+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, CARDNAME deals 3 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ 3
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, Thunderbreak Regent deals 3 damage to that player.

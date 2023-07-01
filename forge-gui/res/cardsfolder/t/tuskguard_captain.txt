@@ -1,0 +1,10 @@
+Name:Tuskguard Captain
+ManaCost:2 G
+Types:Creature Human Warrior
+PT:2/3
+K:Outlast:G
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:Outlast {G} ({G}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has trample.

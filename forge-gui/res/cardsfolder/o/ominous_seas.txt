@@ -1,0 +1,9 @@
+Name:Ominous Seas
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a foreshadow counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FORESHADOW | CounterNum$ 1
+A:AB$ Token | Cost$ SubCounter<8/FORESHADOW> | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ u_8_8_kraken | SpellDescription$ Create an 8/8 blue Kraken creature token.
+K:Cycling:2
+DeckHas:Ability$Token
+Oracle:Whenever you draw a card, put a foreshadow counter on Ominous Seas.\nRemove eight foreshadow counters from Ominous Seas: Create an 8/8 blue Kraken creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)

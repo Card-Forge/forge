@@ -1,0 +1,8 @@
+Name:Sylvok Battle-Chair
+ManaCost:4 G G
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Trample | Description$ Equipped creature gets +4/+4 and has trample.
+K:Equip:5 G G
+DeckHas:Type$Rebel & Color$Red & Ability$Token
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +4/+4 and has trample.\nEquip {5}{G}{G}

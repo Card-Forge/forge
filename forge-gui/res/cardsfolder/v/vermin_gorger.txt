@@ -1,0 +1,8 @@
+Name:Vermin Gorger
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/2
+A:AB$ LoseLife | Cost$ T Sac<1/Creature.Other/another creature> | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:{T}, Sacrifice another creature: Each opponent loses 2 life and you gain 2 life.

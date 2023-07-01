@@ -1,0 +1,10 @@
+Name:Umbris, Fear Manifest
+ManaCost:3 U B
+Types:Legendary Creature Nightmare Horror
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each card your opponents own in exile.
+SVar:X:Count$ValidExile Card.OppOwn
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Nightmare.Other+YouCtrl,Horror.Other+YouCtrl | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or another Nightmare or Horror enters the battlefield under your control, target opponent exiles cards from the top of their library until they exile a land card.
+SVar:TrigExile:DB$ DigUntil | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Valid$ Land | ValidDescription$ land | FoundDestination$ Exile | RevealedDestination$ Exile | IsCurse$ True
+DeckHints:Type$Nightmare|Horror
+Oracle:Umbris, Fear Manifest gets +1/+1 for each card your opponents own in exile.\nWhenever Umbris or another Nightmare or Horror enters the battlefield under your control, target opponent exiles cards from the top of their library until they exile a land card.

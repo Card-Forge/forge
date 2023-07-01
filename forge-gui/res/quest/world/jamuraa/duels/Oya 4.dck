@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Oya 4
+Title=Oya
+Icon=Oya.jpg
+Difficulty=very hard
+Description=Oya plays RB 'Blue Fire' deck.
+Deck Type=constructed
+Card Reward=20% Kaervek's Torch|MIR
+[main]
+3 Dissipate|MIR
+3 Fireblast|VIS
+2 Goblin Elite Infantry|MIR
+4 Incinerate|MIR
+10 Island|MIR
+4 Kaervek's Torch|MIR
+4 Man-o'-War|VIS
+4 Memory Lapse|MIR
+14 Mountain|MIR
+4 Ophidian|WTH
+2 Straw Golem|WTH
+4 Suq'Ata Lancer|VIS
+2 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,20 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 022416 - He Who Hesitates
+URL:http://www.gatheringmagic.com/seanuy-022416-he-who-hesitates/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.  Living Lore has exiled a Howl of the Horde.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=5
+AILife=9
+humanhand=Turn to Frog|Set:ORI; Brute Strength|Set:OGW; Makindi Aeronaut|Set:OGW;
+humangraveyard=Howl of the Horde;
+humanlibrary=
+humanbattlefield=Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Plains|Set:BFZ; Mystic Monastery;Kor Bladewhirl; Scaldkin; Chasm Guide; Living Lore; 
+aibattlefield=Swamp|Set:BFZ; Swamp|Tapped|Set:BFZ; Swamp|Tapped|Set:BFZ; Swamp|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ;  Forest|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ; Sky Scourer; Shambling Ghoul; Malakir Familiar; Alpine Grizzly; Abzan Kin-Guard; Plated Crusher;
+aigraveyard=
+ailibrary=
+aiexile=

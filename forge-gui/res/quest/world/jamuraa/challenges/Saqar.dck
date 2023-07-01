@@ -1,0 +1,40 @@
+[quest]
+id=3005
+OpponentName=Iblis
+AILife=40
+Repeat=true
+Wins=45
+Card Reward=50% duplicate card;3 rares;66% 1 black rare;66% 1 black rare;66% Wasteland|TMP
+Credit Reward=400
+HumanExtras=Ivory Tower
+AIExtras=Crucible of Worlds
+[metadata]
+Name=quest3005
+Title=Saqar
+Difficulty=very hard
+Description=The ground itself shakes in agony beneath your feet as you enter this uncanny and frightening plane, Saqar. What dire menace lurks here?
+Icon=Iblis.jpg
+Deck Type=constructed
+[main]
+4 Balduvian Horde|ALL
+1 Black Lotus|LEB
+4 Erhnam Djinn|ARN
+8 Forest|MIR
+3 Gorilla Shaman|ALL
+4 Ice Storm|LEB
+1 Library of Alexandria|ARN
+4 Lightning Bolt|LEB
+8 Mountain|MIR
+1 Mox Emerald|LEB
+1 Mox Ruby|LEB
+4 Pillage|ALL
+4 Stone Rain|5ED
+4 Strip Mine|ATQ
+4 Taiga|LEB
+2 Tinder Wall|ICE
+2 Wall of Roots|MIR
+4 Wasteland|TMP
+3 Wildfire Emissary|MIR
+[sideboard]
+[planes]
+[schemes]

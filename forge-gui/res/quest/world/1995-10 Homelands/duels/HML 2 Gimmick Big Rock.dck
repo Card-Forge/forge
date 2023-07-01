@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=HML 2 Gimmick: Big Rock
+Title=Big Rock
+Difficulty=medium
+Description="Ihsan, the weak. Ihsan, the fallen. Ihsan, the betrayer. He has brought shame to the Serra Paladins where none existed before. May his suffering equal his betrayal." -Baris, Serra Inquisitor
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Baron Sengir|HML
+4 Broken Visage|HML
+2 Dry Spell|HML|1
+2 Dry Spell|HML|2
+2 Folk of An-Havva|HML|1
+2 Folk of An-Havva|HML|2
+11 Forest|LEB|3
+4 Greater Werewolf|HML
+2 Hungry Mist|HML|1
+2 Hungry Mist|HML|2
+2 Ihsan's Shade|HML
+4 Roots|HML
+4 Spectral Bears|HML
+15 Swamp|LEB|3
+2 Veldrane of Sengir|HML

@@ -1,0 +1,10 @@
+Name:Hornet Nest
+ManaCost:2 G
+Types:Creature Insect
+PT:0/2
+K:Defender
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect_flying_deathtouch | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Defender (This creature can't attack.)\nWhenever Hornet Nest is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)

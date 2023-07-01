@@ -1,0 +1,7 @@
+Name:Jace's Erasure
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, you may have target player mill a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player
+DeckHas:Ability$Mill
+Oracle:Whenever you draw a card, you may have target player mill a card.

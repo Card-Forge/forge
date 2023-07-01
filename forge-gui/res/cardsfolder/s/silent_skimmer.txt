@@ -1,0 +1,10 @@
+Name:Silent Skimmer
+ManaCost:3 B
+Types:Creature Eldrazi Drone
+PT:0/4
+K:Devoid
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, defending player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2
+SVar:HasAttackEffect:TRUE
+Oracle:Devoid (This card has no color.)\nFlying\nWhenever Silent Skimmer attacks, defending player loses 2 life.

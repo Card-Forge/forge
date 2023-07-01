@@ -1,0 +1,7 @@
+Name:Burning Vengeance
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromYourGraveyard | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, CARDNAME deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+AI:RemoveDeck:Random
+Oracle:Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target.

@@ -1,0 +1,7 @@
+Name:Dinosaur Beast Token
+ManaCost:no cost
+Colors:green
+Types:Creature Dinosaur Beast
+PT:*/*
+K:Trample
+Oracle:Trample

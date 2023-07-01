@@ -1,0 +1,7 @@
+Name:Deep Wood
+ManaCost:1 G
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Prevent all damage that would be dealt to you this turn by attacking creatures.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | ValidSource$ Creature.attacking | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures.
+SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
+Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nPrevent all damage that would be dealt to you this turn by attacking creatures.

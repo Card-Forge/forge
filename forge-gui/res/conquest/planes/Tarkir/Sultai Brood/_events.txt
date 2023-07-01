@@ -1,0 +1,9 @@
+Name:Sultai Delve|Deck:Sultai Delve.dck|Variant:None|Avatar:Necropolis Fiend|Desc:
+Name:Sultai Exploit|Deck:Sultai Exploit.dck|Variant:None|Avatar:Profaner of the Dead|Desc:
+Name:Dragonlord Silumgar|Deck:Dragonlord Silumgar.dck|Variant:Commander|Avatar:Dragonlord Silumgar|Desc:
+Name:Silumgar, the Drifting Death|Deck:Silumgar, the Drifting Death.dck|Variant:Commander|Avatar:Silumgar, the Drifting Death|Desc:
+Name:Tasigur, the Golden Fang|Deck:Tasigur, the Golden Fang.dck|Variant:Commander|Avatar:Tasigur, the Golden Fang|Desc:
+Name:Sidisi, Brood Tyrant|Deck:Sidisi, Brood Tyrant.dck|Variant:Commander|Avatar:Sidisi, Brood Tyrant|Desc:
+Name:Sidisi, Undread Vizier|Deck:Sidisi, Undread Vizier.dck|Variant:Commander|Avatar:Sidisi, Undread Vizier|Desc:
+Name:Fallen Angel|Deck:Fallen Angel.dck|Variant:Vanguard|Avatar:Fallen Angel|Desc:
+Name:Ugin, the Spirit Dragon|Deck:Ugin, the Spirit Dragon.dck|Variant:Planeswalker|Avatar:Ugin, the Spirit Dragon|Desc:

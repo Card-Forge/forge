@@ -1,0 +1,8 @@
+Name:Prophet of Kruphix
+ManaCost:3 G U
+Types:Creature Human Wizard
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl,Land.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all creatures and lands you control during each other player's untap step.
+S:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | Caster$ You | Description$ You may cast creature spells as though they had flash.
+SVar:UntapsEachOtherPlayerTurn:Creature,Land
+Oracle:Untap all creatures and lands you control during each other player's untap step.\nYou may cast creature spells as though they had flash.

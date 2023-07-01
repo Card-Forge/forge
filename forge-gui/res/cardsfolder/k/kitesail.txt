@@ -1,0 +1,6 @@
+Name:Kitesail
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Flying | Description$ Equipped creature gets +1/+0 and has flying.
+Oracle:Equipped creature gets +1/+0 and has flying.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

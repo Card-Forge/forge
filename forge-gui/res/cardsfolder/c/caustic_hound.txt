@@ -1,0 +1,7 @@
+Name:Caustic Hound
+ManaCost:5 B
+Types:Creature Phyrexian Dog
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each player loses 4 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ Player
+Oracle:When Caustic Hound dies, each player loses 4 life.

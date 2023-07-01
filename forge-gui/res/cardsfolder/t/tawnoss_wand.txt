@@ -1,0 +1,7 @@
+Name:Tawnos's Wand
+ManaCost:4
+Types:Artifact
+A:AB$ Effect | Cost$ 2 T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+AI:RemoveDeck:Random
+Oracle:{2}, {T}: Target creature with power 2 or less can't be blocked this turn.

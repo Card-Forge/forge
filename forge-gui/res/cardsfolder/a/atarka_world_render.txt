@@ -1,0 +1,12 @@
+Name:Atarka, World Render
+ManaCost:5 R G
+Types:Legendary Creature Dragon
+PT:6/4
+K:Flying
+K:Trample
+T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Dragon you control attacks, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike
+SVar:BuffedBy:Dragon
+SVar:PlayMain1:TRUE
+DeckHints:Type$Dragon
+Oracle:Flying, trample\nWhenever a Dragon you control attacks, it gains double strike until end of turn.

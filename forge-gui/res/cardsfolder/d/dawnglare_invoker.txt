@@ -1,0 +1,8 @@
+Name:Dawnglare Invoker
+ManaCost:2 W
+Types:Creature Kor Wizard
+PT:2/1
+K:Flying
+A:AB$ TapAll | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SpellDescription$ Tap all creatures target player controls.
+AI:RemoveDeck:All
+Oracle:Flying\n{8}: Tap all creatures target player controls.

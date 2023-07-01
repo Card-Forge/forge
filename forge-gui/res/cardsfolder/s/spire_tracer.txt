@@ -1,0 +1,6 @@
+Name:Spire Tracer
+ManaCost:G
+Types:Creature Elf Scout
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Description$ CARDNAME can't be blocked except by creatures with flying or reach.
+Oracle:Spire Tracer can't be blocked except by creatures with flying or reach.

@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (KLD/AER)
+Type:Archived
+Subtype:Standard
+Effective:2018-06-07
+Sets:XLN, RIX, AKH, HOU, DOM, KLD, AER, W17
+Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

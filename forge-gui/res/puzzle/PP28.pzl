@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #28 - The Gift That Keeps On Giving
+URL:https://pauperpuzzles.wordpress.com/2017/05/27/28-the-gift-that-keeps-on-giving/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=5
+humanhand=Izzet Boilerworks;Snap;Mortuary Mire
+humanlibrary=Mnemonic Wall;Nightscape Familiar;Lightning Bolt;Fireball
+humanbattlefield=Simic Growth Chamber;Island;Forest;Forest;Mulldrifter;Sakura-Tribe Scout
+aibattlefield=Ulamog's Crusher

@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU3.jpg
+Goal:Win
+Turns:1
+Difficulty:Very Hard
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=17
+activeplayer=human
+activephase=MAIN1
+humanhand=Kozilek, the Great Distortion;Prophetic Ravings;Sweltering Suns;Walking Ballista
+humanlibrary=Glorybringer;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+humangraveyard=
+humanbattlefield=Lumbering Falls;Lumbering Falls;Lumbering Falls;Lumbering Falls;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal;Shrine of the Forsaken Gods;Shrine of the Forsaken Gods;Chandra, Flamecaller|Counters:LOYALTY=3;Nissa, Vital Force|Counters:LOYALTY=6;Vizier of the Menagerie|Counters:M1M1=1;Cunning Survivor
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Decimator Beetle;Glyph Keeper;Blisterpod
+aiexile=
+aicommand=

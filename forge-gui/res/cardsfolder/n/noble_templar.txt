@@ -1,0 +1,7 @@
+Name:Noble Templar
+ManaCost:5 W
+Types:Creature Human Cleric Soldier
+PT:3/6
+K:Vigilance
+K:TypeCycling:Plains:2
+Oracle:Vigilance\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

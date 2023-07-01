@@ -1,0 +1,7 @@
+[format]
+Name:Masques Block
+Type:Archived
+Subtype:Block
+Order:131
+Sets:MMQ, NMS, PCY
+Banned:Lin Sivvi, Defiant Hero; Rishadan Port

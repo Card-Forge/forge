@@ -1,0 +1,8 @@
+Name:Changeling Outcast
+ManaCost:B
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self
+Oracle:Changeling (This card is every creature type.)\nChangeling Outcast can't block and can't be blocked.

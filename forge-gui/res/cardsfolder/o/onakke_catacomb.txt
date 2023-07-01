@@ -1,0 +1,8 @@
+Name:Onakke Catacomb
+ManaCost:no cost
+Types:Plane Shandalar
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | SetColor$ Black | AddKeyword$ Deathtouch | Description$ All creatures are black and have deathtouch.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures you control get +1/+0 and gain first strike until end of turn.
+SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ First Strike
+SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True | RollInMain1$ True
+Oracle:All creatures are black and have deathtouch.\nWhenever chaos ensues, creatures you control get +1/+0 and gain first strike until end of turn.

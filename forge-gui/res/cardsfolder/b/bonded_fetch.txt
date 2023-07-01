@@ -1,0 +1,9 @@
+Name:Bonded Fetch
+ManaCost:2 U
+Types:Creature Homunculus
+PT:0/2
+K:Defender
+K:Haste
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Defender, haste\n{T}: Draw a card, then discard a card.

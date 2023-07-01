@@ -1,0 +1,5 @@
+Name:Despise
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | DiscardValid$ Creature,Planeswalker | DiscardValidDesc$ creature or planeswalker | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card.
+Oracle:Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card.

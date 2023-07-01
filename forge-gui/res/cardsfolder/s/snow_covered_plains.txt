@@ -1,0 +1,4 @@
+Name:Snow-Covered Plains
+ManaCost:no cost
+Types:Basic Snow Land Plains
+Oracle:({T}: Add {W}.)

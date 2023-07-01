@@ -1,0 +1,8 @@
+Name:Archangel of Tithes
+ManaCost:1 W W W
+Types:Creature Angel
+PT:3/5
+K:Flying
+S:Mode$ CantAttackUnless | IsPresent$ Card.Self+untapped | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ 1 | Description$ As long as CARDNAME is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.
+S:Mode$ CantBlockUnless | IsPresent$ Card.Self+attacking | ValidCard$ Creature | Cost$ 1 | Description$ As long as CARDNAME is attacking, creatures can't block unless their controller pays {1} for each of those creatures.
+Oracle:Flying\nAs long as Archangel of Tithes is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.\nAs long as Archangel of Tithes is attacking, creatures can't block unless their controller pays {1} for each of those creatures.

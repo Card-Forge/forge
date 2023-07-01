@@ -1,0 +1,8 @@
+Name:Supreme Phantom
+ManaCost:1 U
+Types:Creature Spirit
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Spirit.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Spirits you control get +1/+1.
+DeckHints:Type$Spirit
+Oracle:Flying\nOther Spirits you control get +1/+1.

@@ -1,0 +1,9 @@
+Name:Kyren Toy
+ManaCost:3
+Types:Artifact
+A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
+A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ C | Amount$ Y | AILogic$ ManaRitualBattery.1 | SpellDescription$ Add an amount of {C} equal to X plus one.
+SVar:Y:SVar$X/Plus.1
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+Oracle:{1}, {T}: Put a charge counter on Kyren Toy.\n{T}, Remove X charge counters from Kyren Toy: Add an amount of {C} equal to X plus one.

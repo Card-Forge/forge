@@ -1,0 +1,7 @@
+Name:Zuo Ci, the Mocking Sage
+ManaCost:1 G G
+Types:Legendary Creature Human Advisor
+PT:1/2
+K:Hexproof
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withHorsemanship | Description$ CARDNAME can't be blocked by creatures with horsemanship.
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nZuo Ci, the Mocking Sage can't be blocked by creatures with horsemanship.

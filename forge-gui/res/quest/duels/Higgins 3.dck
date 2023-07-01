@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Higgins 3
+Title=Higgins
+Difficulty=hard
+Description=UBR Grixis Control deck
+Icon=Higgins.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+2 Badlands
+4 Volcanic Island
+2 Crumbling Necropolis
+4 Bloodstained Mire
+4 Polluted Delta
+1 Swamp|M11
+1 Island|M11
+1 Mox Jet
+1 Mox Ruby
+1 Mox Sapphire
+3 Spreading Seas
+4 Terminate
+1 Fog Bank
+1 Ancestral Recall
+1 Time Walk
+1 Undermine
+1 Spell Snare
+1 Countersquall
+2 Propaganda
+1 Recoil
+1 Consecrated Sphinx
+1 Slave of Bolas
+4 Blightning
+1 Burst Lightning
+1 Jace, the Mind Sculptor
+1 Liliana Vess
+4 Lightning Bolt
+4 Sedraxis Specter
+1 Cruel Ultimatum
+1 Treasure Cruise
+[sideboard]

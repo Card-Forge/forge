@@ -1,0 +1,7 @@
+Name:Grand Abolisher
+ManaCost:W W
+Types:Creature Human Cleric
+PT:2/2
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.
+S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature,Enchantment | AffectedZone$ Battlefield | Condition$ PlayerTurn | Activator$ Opponent
+Oracle:During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.

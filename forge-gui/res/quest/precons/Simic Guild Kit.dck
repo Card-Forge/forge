@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Simic Guild Kit
+Description=Welcome to the Simic Combine. This box contains the materials you need to delve into the deepest mysteries of biology and bring new truths to light. Let nothing stop your discovery.
+Set=GK2
+Image=simic_guild_kit.jpg
+[Main]
+1 Applied Biomancy|RNA
+2 Cloudfin Raptor|GK2
+2 Coiling Oracle|GK2
+1 Cytoplast Root-Kin|GK2
+1 Elusive Krasis|GK2
+1 Experiment Kraj|GK2
+1 Experiment One|GK2
+1 Fathom Mage|GK2
+8 Forest|GK2|2
+1 Frilled Mystic|RNA
+1 Galloping Lizrog|RNA
+1 Guardian Project|RNA
+1 Gyre Sage|GK2
+8 Island|GK2|2
+1 Miming Slime|GK2
+1 Momir Vig, Simic Visionary|GK2
+1 Nimbus Swimmer|GK2
+1 Omnibian|GK2
+1 Plaxcaster Frogling|GK2
+1 Progenitor Mimic|GK2
+2 Rapid Hybridization|GK2
+1 Simic Ascendancy|RNA
+4 Simic Growth Chamber|GK2
+2 Simic Guildgate|RNA|1
+2 Simic Guildgate|RNA|2
+2 Simic Signet|GK2
+1 Simic Sky Swallower|GK2
+1 Skitter Eel|RNA
+1 Trollbred Guardian|RNA
+1 Trygon Predator|GK2
+1 Urban Evolution|GK2
+1 Vinelasher Kudzu|GK2
+1 Voidslime|GK2
+1 Vorel of the Hull Clade|GK2
+2 Zameck Guildmage|GK2
+1 Zegana, Utopian Speaker|GK2

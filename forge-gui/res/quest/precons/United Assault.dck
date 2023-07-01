@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=United Assault
+Description=White Weenie with Conclave Tribunal, pumping with Benalish Marshal and Pride of Conquerors - go wide and swing in!
+Deck Type=constructed
+Set=RNA
+Image=united_assault.jpg
+
+[Main]
+4 Adanto Vanguard|XLN
+4 Ajani's Pridemate|M19
+4 Benalish Marshal|DOM
+3 Conclave Tribunal|GRN
+4 Dauntless Bodyguard|DOM
+4 Healer's Hawk|GRN
+2 History of Benalia|DOM
+2 Legion's Landing|XLN
+4 Leonin Vanguard|M19
+1 Hunted Witness|GRN
+21 Plains|M19
+3 Pride of Conquerors|RIX
+4 Skymarcher Aspirant|RIX
+[Sideboard]
+3 Baffling End|RIX
+1 Conclave Tribunal|GRN
+3 Knight of Grace|DOM
+2 Make a Stand|M19
+1 Remorseful Cleric|M19
+3 Shield Mare|M19
+2 Tocatli Honor Guard|XLN

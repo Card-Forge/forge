@@ -1,0 +1,7 @@
+Name:Sterling Grove
+ManaCost:G W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Enchantment.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other enchantments you control have shroud. (They can't be the targets of spells or abilities.)
+A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Library | Destination$ Library | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card, reveal it, then shuffle and put that card on top.
+AI:RemoveDeck:Random
+Oracle:Other enchantments you control have shroud. (They can't be the targets of spells or abilities.)\n{1}, Sacrifice Sterling Grove: Search your library for an enchantment card, reveal it, then shuffle and put that card on top.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Leprechaun 1
+Title=Leprechaun
+Difficulty=easy
+Description=WBG anti green deck with Aisling Leprechaun, Seed the Land and Beast Within
+Icon=Leprechaun.jpg
+Deck Type=constructed
+[main]
+4 Forest|M12
+4 Murmuring Bosk
+3 Gilt-Leaf Palace
+2 Savage Lands
+1 Llanowar Wastes
+2 Arctic Flats
+2 Elfhame Palace
+2 Graypelt Refuge
+2 Jungle Shrine
+1 Tranquil Garden
+1 Vec Townships
+4 Aisling Leprechaun
+4 Beast Within
+3 Seed the Land
+1 Greener Pastures
+1 Disturbed Burial
+1 An-Havva Inn
+1 An-Havva Constable
+2 Deathmark
+2 Slay
+1 Abomination
+2 Dunerider Outlaw
+1 Eastern Paladin
+2 Wanderbrine Rootcutters
+2 Sphere of Duty
+2 Green Scarab
+1 Green Ward
+2 Shield of Duty and Reason
+1 Spectral Lynx
+2 Voice of Duty
+1 Castle
+[sideboard]

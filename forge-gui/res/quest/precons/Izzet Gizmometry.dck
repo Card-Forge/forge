@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=GPT
+Image=izzet_gizmometry.jpg
+Name=Izzet Gizmometry
+Description=The mad scientists of the Izzet guild are always running experiments to find the next breakthrough in weird science. The replicate mechanic, which turns a single spell into a cluster of them, is the latest weapon in their toy box of magical technology.
+[Main]
+2 Convolute|RAV
+1 Electrolyze|GPT
+2 Frazzle|GPT
+1 Gelectrode|GPT
+12 Island|RAV
+2 Izzet Boilerworks|GPT
+2 Izzet Chronarch|GPT
+1 Izzet Guildmage|GPT
+1 Leyline of Lightning|GPT
+1 Mark of Eviction|RAV
+10 Mountain|RAV
+1 Nivix, Aerie of the Firemind|GPT
+2 Peel from Reality|RAV
+2 Petrahydrox|GPT
+3 Pyromatics|GPT
+1 Rain of Embers|RAV
+2 Repeal|GPT
+1 Reroute|RAV
+2 Runeboggle|GPT
+2 Telling Time|RAV
+2 Thunderheads|GPT
+1 Tibor and Lumia|GPT
+3 Train of Thought|GPT
+1 Vacuumelt|GPT
+2 Wee Dragonauts|GPT

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Scarecrow 2
+Title=Scarecrow
+Difficulty=medium
+Description=WUBRG Scarecrow deck
+Icon=Scarecrow.jpg
+Deck Type=constructed
+[main]
+3 Terramorphic Expanse
+2 Evolving Wilds
+4 Chromatic Lantern
+4 Fang Skulkin
+4 Forest
+4 Island
+4 Jawbone Skulkin
+4 Mountain
+2 Painter's Servant
+4 Plains
+4 Reaper King
+4 Scarecrone
+2 Scuttlemutt
+4 Swamp
+1 Tatterkite
+2 Wingrattle Scarecrow
+4 Adaptive Automaton
+4 Door of Destinies
+[sideboard]

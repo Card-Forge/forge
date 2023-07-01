@@ -1,0 +1,6 @@
+Name:Fighting Drake
+ManaCost:2 U U
+Types:Creature Drake
+PT:2/4
+K:Flying
+Oracle:Flying

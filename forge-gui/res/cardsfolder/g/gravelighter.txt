@@ -1,0 +1,13 @@
+Name:Gravelighter
+ManaCost:2 B
+Types:Creature Spirit
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters the battlefield, draw a card if a creature died this turn. Otherwise, each player sacrifices a creature.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBDraw | FalseSubAbility$ DBSac
+SVar:DBDraw:DB$ Draw
+SVar:DBSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:NeedsToPlayVar:X GE1
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nWhen Gravelighter enters the battlefield, draw a card if a creature died this turn. Otherwise, each player sacrifices a creature.

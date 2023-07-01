@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Arcane Inventions
+Description=As a blue mage, you control the battlefield through illusions. Always think three steps ahead of your foe.
+Deck Type=constructed
+Set=ANA
+[Main]
+3 Air Elemental|M19
+1 Arcane Encyclopedia|M19
+2 Aven Wind Mage|M19
+3 Aviation Pioneer|M19
+1 Befuddle|M19
+1 Diamond Mare|M19
+2 Disperse|M19
+1 Divination|M19
+4 Field Creeper|M19
+2 Gearsmith Guardian|M19
+3 Gearsmith Prodigy|M19
+2 Gilded Sentinel|XLN
+25 Island|GRN
+1 Meteor Golem|M19
+1 Riddlemaster Sphinx|M19
+1 Sai, Master Thopterist|M19
+2 Scholar of Stars|M19
+1 Tempest Djinn|DOM
+3 Waterknot|M19
+1 Zahid, Djinn of the Lamp|DOM

@@ -1,0 +1,7 @@
+Name:Eldrazi Temple
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Spell.Eldrazi+Colorless,Activated.Eldrazi+Colorless+inZoneBattlefield | SpellDescription$ Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.

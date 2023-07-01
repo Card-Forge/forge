@@ -1,0 +1,5 @@
+Name:Ogre Warrior
+ManaCost:3 R
+Types:Creature Ogre Warrior
+PT:3/3
+Oracle:

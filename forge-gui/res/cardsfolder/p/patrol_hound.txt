@@ -1,0 +1,6 @@
+Name:Patrol Hound
+ManaCost:1 W
+Types:Creature Dog
+PT:2/2
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:Discard a card: Patrol Hound gains first strike until end of turn.

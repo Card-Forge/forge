@@ -1,0 +1,8 @@
+Name:Vile Requiem
+ManaCost:2 B B
+Types:Enchantment
+A:AB$ Destroy | Cost$ 1 B Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy up to X target nonblack creatures, where X is the number of verse counters on CARDNAME. They can't be regenerated.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+SVar:X:Count$CardCounters.VERSE
+Oracle:At the beginning of your upkeep, you may put a verse counter on Vile Requiem.\n{1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.

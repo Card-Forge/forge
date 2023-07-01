@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 42 RvU Earth
+Title=Aspect of Earth
+Difficulty=easy
+Description=Earth Elementals have the eternal strength of stone and the endurance of mountains. Primordially connected to the land they inhabit, they take a long-term view of things, scorning the impetuous haste of short-lived mortal creatures.
+Icon=Aspect of Earth.jpg
+Deck Type=constructed
+[Main]
+2 Burrowing|LEB
+3 Dwarven Demolition Team|LEB
+3 Dwarven Warriors|LEB
+4 Earth Elemental|LEB
+2 Earthbind|LEB
+2 Earthquake|LEB
+4 Granite Gargoyle|LEB
+3 Hill Giant|LEB
+2 Iron Star|LEB
+24 Mountain|LEB|1
+3 Stone Giant|LEB
+2 Tunnel|LEB
+3 Two-Headed Giant of Foriys|LEB
+3 Wall of Stone|LEB

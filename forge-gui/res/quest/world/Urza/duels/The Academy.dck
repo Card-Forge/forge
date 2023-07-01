@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=The Academy
+Title=Tolarian Academy
+Difficulty=hard
+Description=Time and Space are unstable around here.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Aura Thief|UDS
+2 Blizzard Elemental|UDS
+4 Confiscate|USG
+4 Faerie Conclave|ULG
+4 Fog Bank|USG
+4 Island|USG|1
+5 Island|USG|2
+8 Island|USG|3
+1 Island|USG|4
+2 Morphling|USG
+4 Palinchron|ULG
+3 Stroke of Genius|USG
+4 Thran Dynamo|UDS
+4 Time Warp|TMP
+1 Tolarian Academy|USG
+4 Urza's Blueprints|ULG
+4 Worn Powerstone|USG

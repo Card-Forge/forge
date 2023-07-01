@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Gix 2
+Title=Gix
+Difficulty=medium
+Description=UB Sacrifice deck with Claws of Gix, Barrin, Master Wizard and Perilous Research
+Icon=Gix.jpg
+Deck Type=constructed
+[main]
+4 Reliquary Tower
+19 Island
+3 Claws of Gix
+4 Barrin, Master Wizard
+4 Perilous Research
+4 Hatching Plans
+4 Mycosynth Wellspring
+4 Ichor Wellspring
+3 Spell Snare
+4 Mental Misstep
+4 Rewind
+2 Cloud of Faeries
+1 Pearl Lake Ancient
+[sideboard]

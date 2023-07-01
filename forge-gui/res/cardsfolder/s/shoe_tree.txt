@@ -1,0 +1,10 @@
+Name:Shoe Tree
+ManaCost:4 G
+Types:Creature Treefolk
+PT:3/3
+K:ETBReplacement:Other:PutCounter
+SVar:PutCounter:DB$ PutCounter | UpTo$ True | Defined$ Self | CounterType$ SHOE | CounterNum$ 2 | ETB$ True | SpellDescription$ CARDNAME enters the battlefield with up to two shoe counters on it. Use your shoes as counters.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each shoe counter on it.
+SVar:X:Count$CardCounters.SHOE
+DeckHas:Ability$Counters
+Oracle:Shoe Tree enters the battlefield with up to two shoe counters on it. Use your shoes as counters.\nShoe Tree gets +1/+1 for each shoe counter on it.

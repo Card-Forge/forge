@@ -1,0 +1,7 @@
+Name:Skyknight Legionnaire
+ManaCost:1 R W
+Types:Creature Human Knight
+PT:2/2
+K:Flying
+K:Haste
+Oracle:Flying, haste

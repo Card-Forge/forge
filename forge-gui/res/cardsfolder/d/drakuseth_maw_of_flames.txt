@@ -1,0 +1,10 @@
+Name:Drakuseth, Maw of Flames
+ManaCost:4 R R R
+Types:Legendary Creature Dragon
+PT:7/7
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ Whenever CARDNAME attacks, it deals 4 damage to any target and 3 damage to each of up to two other targets.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | DamageMap$ True | SubAbility$ MoreDamage
+SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two other targets | TargetUnique$ True | NumDmg$ 3 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:Flying\nWhenever Drakuseth, Maw of Flames attacks, it deals 4 damage to any target and 3 damage to each of up to two other targets.

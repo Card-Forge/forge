@@ -1,0 +1,9 @@
+Name:Bond of Insight
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Mill | NumCards$ 4 | Defined$ Player | SubAbility$ DBChangeZone | SpellDescription$ Each player mills four cards. Return up to two instant and/or sorcery cards from your graveyard to your hand. Exile CARDNAME.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | ChangeTypeDesc$ instant and/or sorcery | SelectPrompt$ Select up to two instant and/or sorcery cards from your graveyard to return to your hand | Hidden$ True | SubAbility$ DBExile | StackDescription$ {p:You} returns up to two instant and/or sorcery cards from their graveyard to their hand.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ Exile CARDNAME.
+DeckHas:Ability$Graveyard|Mill
+DeckHints:Type$Instant|Sorcery
+Oracle:Each player mills four cards. Return up to two instant and/or sorcery cards from your graveyard to your hand. Exile Bond of Insight.

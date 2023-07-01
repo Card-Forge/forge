@@ -1,0 +1,8 @@
+Name:Revelation
+ManaCost:G
+Types:World Enchantment
+S:Mode$ Continuous | AffectedZone$ Hand | MayLookAt$ Player | Description$ Players play with their hands revealed.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Players play with their hands revealed.

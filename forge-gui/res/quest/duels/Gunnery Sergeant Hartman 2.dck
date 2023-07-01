@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman 2
+Title=Gunnery Sergeant Hartman
+Difficulty=medium
+Description=Mono W token deck with Cathars' Crusade and Mentor of the Meek
+Icon=Gunnery Sergeant Hartman.jpg
+Deck Type=constructed
+[main]
+23 Plains
+4 Cathars' Crusade
+4 Mentor of the Meek
+1 Goldnight Commander
+1 Twilight Drover
+1 Phantom General
+1 Attended Knight
+3 Doomed Traveler
+1 Raise the Alarm
+1 Commander's Authority
+1 Midnight Haunting
+1 Spectral Procession
+1 Gather the Townsfolk
+1 Wall of Omens
+1 Precinct Captain
+1 Thraben Doomsayer
+1 Belfry Spirit
+1 Elgaud Inquisitor
+1 Kjeldoran Home Guard
+1 Knight-Captain of Eos
+1 Mausoleum Guard
+1 Seller of Songbirds
+1 Springjack Shepherd
+1 Battle Screech
+1 Captain's Call
+1 Join the Ranks
+1 Knight Watch
+1 Master's Call
+1 Beckon Apparition
+1 Evangel of Heliod
+[sideboard]

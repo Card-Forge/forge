@@ -1,0 +1,6 @@
+Name:Ghoulcaller's Bell
+ManaCost:1
+Types:Artifact
+A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player mills a card.
+AI:RemoveDeck:Random
+Oracle:{T}: Each player mills a card.

@@ -1,0 +1,9 @@
+Name:Soothsaying
+ManaCost:U
+Types:Enchantment
+A:AB$ Shuffle | Cost$ 3 U U | Defined$ You | SpellDescription$ Shuffle your library.
+A:AB$ RearrangeTopOfLibrary | Cost$ X | Defined$ You | NumCards$ X | SpellDescription$ Look at the top X cards of your library, then put them back in any order.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{3}{U}{U}: Shuffle your library.\n{X}: Look at the top X cards of your library, then put them back in any order.

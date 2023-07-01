@@ -1,0 +1,7 @@
+Name:Spectral Shepherd
+ManaCost:2 W
+Types:Creature Spirit
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U | ValidTgts$ Spirit.YouCtrl | TgtPrompt$ Select target Spirit you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Spirit you control to its owner's hand.
+Oracle:Flying\n{1}{U}: Return target Spirit you control to its owner's hand.

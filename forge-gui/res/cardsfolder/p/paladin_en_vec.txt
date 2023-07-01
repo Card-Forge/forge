@@ -1,0 +1,8 @@
+Name:Paladin en-Vec
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Protection from black
+K:Protection from red
+Oracle:First strike, protection from black and from red (This creature deals combat damage before creatures without first strike. It can't be blocked, targeted, dealt damage, or enchanted by anything black or red.)

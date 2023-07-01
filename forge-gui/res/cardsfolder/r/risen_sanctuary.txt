@@ -1,0 +1,6 @@
+Name:Risen Sanctuary
+ManaCost:5 G W
+Types:Creature Elemental
+PT:8/8
+K:Vigilance
+Oracle:Vigilance

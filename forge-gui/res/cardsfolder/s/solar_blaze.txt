@@ -1,0 +1,7 @@
+Name:Solar Blaze
+ManaCost:2 R W
+Types:Sorcery
+A:SP$ EachDamage | ValidCards$ Creature | EachToItself$ True | NumDmg$ Count$CardPower | StackDescription$ SpellDescription | SpellDescription$ Each creature deals damage to itself equal to its power.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Each creature deals damage to itself equal to its power.

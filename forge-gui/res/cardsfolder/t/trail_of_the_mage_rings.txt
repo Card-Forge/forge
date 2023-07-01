@@ -1,0 +1,8 @@
+Name:Trail of the Mage-Rings
+ManaCost:no cost
+Types:Plane Vryn
+S:Mode$ Continuous | AddKeyword$ Rebound | Affected$ Instant,Sorcery | AffectedZone$ Stack | EffectZone$ Command | Description$ Instant and sorcery spells have rebound.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you may search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:Instant and sorcery spells have rebound. (The spell's controller exiles the spell as it resolves if they cast it from their hand. At the beginning of that player's next upkeep, they may cast that card from exile without paying its mana cost.)\nWhenever chaos ensues, you may search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,7 @@
+Name:Capashen Knight
+ManaCost:1 W
+Types:Creature Human Knight
+PT:1/1
+K:First Strike
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\n{1}{W}: Capashen Knight gets +1/+0 until end of turn.

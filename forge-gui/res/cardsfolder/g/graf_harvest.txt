@@ -1,0 +1,9 @@
+Name:Graf Harvest
+ManaCost:B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.Zombie+YouCtrl | AddKeyword$ Menace | Description$ Zombies you control have menace. (They can't be blocked except by two or more creatures.)
+A:AB$ Token | Cost$ 3 B ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+DeckHints:Type$Zombie
+Oracle:Zombies you control have menace. (They can't be blocked except by two or more creatures.)\n{3}{B}, Exile a creature card from your graveyard: Create a 2/2 black Zombie creature token.

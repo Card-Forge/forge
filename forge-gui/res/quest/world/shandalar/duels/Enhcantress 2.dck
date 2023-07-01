@@ -1,0 +1,25 @@
+[metadata]
+Name=Enchantress 2
+Title=Enchantress
+Icon=Enchantress.jpg
+Difficulty=medium
+Description=Green Lure + Regenerating Basilisk/Cockatrice.
+Deck Type=constructed
+[main]
+2 Amulet of Kroog|ATQ
+4 Aspect of Wolf|LEB
+3 Cockatrice|4ED
+2 Desert Twister|4ED
+1 Durkwood Boars|4ED
+22 Forest|4ED
+1 Ivory Tower|ATQ
+2 Living Artifact|LEB
+4 Llanowar Elves|4ED
+3 Lure|4ED
+3 Rabid Wombat|LEG
+3 Regeneration|4ED
+3 Thicket Basilisk|LEB
+4 Verduran Enchantress|LEB
+2 Web|LEB
+2 Wild Growth|LEB
+[sideboard]

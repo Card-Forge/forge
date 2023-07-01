@@ -1,0 +1,7 @@
+Name:Vanquish the Horde
+ManaCost:6 W W
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature on the battlefield.
+SVar:X:Count$Valid Creature
+A:SP$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+Oracle:This spell costs {1} less to cast for each creature on the battlefield.\nDestroy all creatures.

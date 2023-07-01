@@ -1,0 +1,7 @@
+Name:Gem of Becoming
+ManaCost:3
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ EACH Island & Swamp & Mountain | SpellDescription$ Search your library for an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Blue|Black|Red
+Oracle:{3}, {T}, Sacrifice Gem of Becoming: Search your library for an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.

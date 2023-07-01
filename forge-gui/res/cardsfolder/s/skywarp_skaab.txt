@@ -1,0 +1,10 @@
+Name:Skywarp Skaab
+ManaCost:3 U U
+Types:Creature Zombie Drake
+PT:2/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When CARDNAME enters the battlefield, you may exile two creature cards from your graveyard. If you do, draw a card.
+SVar:DBDraw:AB$ Draw | Cost$ ExileFromGrave<2/Creature/creature card> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Graveyard
+SVar:AIPreference:ExileFromGraveCost$Creature.cmcLE1+inZoneGraveyard+withoutDisturb
+Oracle:Flying\nWhen Skywarp Skaab enters the battlefield, you may exile two creature cards from your graveyard. If you do, draw a card.

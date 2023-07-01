@@ -1,0 +1,9 @@
+Name:Bellowing Aegisaur
+ManaCost:5 W
+Types:Creature Dinosaur
+PT:3/5
+T:Mode$ DamageDoneOnce | Execute$ PutCounterAll | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, put a +1/+1 counter on each other creature you control.
+SVar:PutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.StrictlyOther+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each other creature you control.
+SVar:HasCombatEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Enrage — Whenever Bellowing Aegisaur is dealt damage, put a +1/+1 counter on each other creature you control.

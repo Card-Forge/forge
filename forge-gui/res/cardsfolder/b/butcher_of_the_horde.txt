@@ -1,0 +1,8 @@
+Name:Butcher of the Horde
+ManaCost:1 R W B
+Types:Creature Demon
+PT:5/4
+K:Flying
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | KWChoice$ Vigilance,Lifelink,Haste | SpellDescription$ CARDNAME gains your choice of vigilance, lifelink, or haste until end of turn.
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:Flying\nSacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.

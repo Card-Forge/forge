@@ -1,0 +1,5 @@
+Name:Shu Elite Infantry
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/3
+Oracle:

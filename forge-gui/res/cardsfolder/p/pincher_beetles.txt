@@ -1,0 +1,6 @@
+Name:Pincher Beetles
+ManaCost:2 G
+Types:Creature Insect
+PT:3/1
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)

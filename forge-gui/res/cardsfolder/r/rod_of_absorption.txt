@@ -1,0 +1,16 @@
+Name:Rod of Absorption
+ManaCost:2 U
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigForget | Static$ True
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery spell, exile it instead of putting it into a graveyard as it resolves.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ DBExile | Description$ Exile it instead of putting it into a graveyard as it resolves.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | SubAbility$ DBRemember
+SVar:DBRemember:DB$ Animate | Defined$ EffectSource | RememberObjects$ ReplacedCard | Duration$ Permanent | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+A:AB$ Play | Cost$ X T Sac<1/CARDNAME> | Defined$ ValidExile Card.IsRemembered | ValidSA$ Spell | Amount$ All | WithTotalCMC$ X | WithoutManaCost$ True | Optional$ True | AILogic$ WithTotalCMC | SpellDescription$ You may cast any number of spells from among cards exiled with CARDNAME with total mana value X or less without paying their mana costs.
+SVar:X:Count$xPaid
+Oracle:Whenever a player casts an instant or sorcery spell, exile it instead of putting it into a graveyard as it resolves.\n{X}, {T}, Sacrifice Rod of Absorption: You may cast any number of spells from among cards exiled with Rod of Absorption with total mana value X or less without paying their mana costs.

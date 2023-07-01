@@ -1,0 +1,9 @@
+Name:Tamiyo's Journal
+ManaCost:5
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ At the beginning of your upkeep, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+A:AB$ ChangeZone | Cost$ T Sac<3/Clue> | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:At the beginning of your upkeep, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\n{T}, Sacrifice three Clues: Search your library for a card, put that card into your hand, then shuffle.

@@ -1,0 +1,20 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 020816 - And If You Should Fall
+URL:http://www.gatheringmagic.com/seanuy-020816-and-if-you-should-fall/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Win on your turn.
+[state]
+ActivePlayer=AI
+ActivePhase=END_OF_TURN
+HumanLife=4
+AILife=11
+humanhand=
+humangraveyard=Soul Snare; Zektar Shrine Expedition; Call to Arms; Pursuit of Knowledge; Seal of Fire;
+humanlibrary=Fell the Mighty
+humanbattlefield=Mountain|Set:C15; Mountain|Set:C15; Mountain|Set:C15; Mountain|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Plains|Set:C15; Boros Garrison; Temple of Triumph; Perilous Myr; Circle of Flame; Battle Strain; Burning Earth; Blockbuster|Id:420; Starfield of Nyx; Cage of Hands|AttachedTo:422;
+aibattlefield=Island|Set:C15; Island|Tapped|Set:C15; Island|Tapped|Set:C15; Island|Tapped|Set:C15; Swamp|Tapped|Set:C15; Swamp|Tapped|Set:C15; Swamp|Tapped|Set:C15; Piranha Marsh; Underground Sea; Dismal Backwater; Radiant Fountain; Vampire Nighthawk|Id:422; Fallowsage; Whirlwind Adept; Air Servant; Argentum Armor; Greel's Caress|AttachedTo:420;
+aigraveyard=
+ailibrary=
+aiexile=

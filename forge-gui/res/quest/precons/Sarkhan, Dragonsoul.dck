@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sarkhan, Dragonsoul
+Description=Sarkhan worships and communes with dragons, taking on their power as his own. Mobilize his mighty draconic forces to incinerate your opponent's defenses and expose them to an aerial attack.
+Deck Type=constructed
+Set=M19
+Image=sarkhan_dragonsoul.jpg
+[Main]
+1 Act of Treason|M19
+1 Demanding Dragon|M19
+2 Electrify|M19
+1 Fiery Finish|M19
+2 Goblin Motivator|M19
+1 Hostile Minotaur|M19
+4 Kargan Dragonrider|M19
+2 Lightning Strike|M19
+1 Meteor Golem|M19
+7 Mountain|M19|1
+7 Mountain|M19|2
+6 Mountain|M19|3
+6 Mountain|M19|4
+2 Onakke Ogre|M19
+2 Sarkhan's Dragonfire|M19
+3 Sarkhan's Whelp|M19
+1 Sarkhan, Dragonsoul+|M19
+1 Shivan Dragon|M19
+2 Shock|M19
+2 Sparktongue Dragon|M19
+1 Thud|M19
+1 Trumpet Blast|M19
+2 Viashino Pyromancer|M19
+2 Volcanic Dragon|M19

@@ -1,0 +1,7 @@
+Name:Crucible of Fire
+ManaCost:3 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Dragon+YouCtrl | AddPower$ 3 | AddToughness$ 3 | Description$ Dragon creatures you control get +3/+3.
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
+Oracle:Dragon creatures you control get +3/+3.

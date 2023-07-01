@@ -1,0 +1,11 @@
+Name:Stampeding Serow
+ManaCost:2 G G
+Types:Creature Antelope Beast
+PT:5/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$Valid Creature.Green+YouCtrl+inZoneBattlefield
+AI:RemoveDeck:Random
+Oracle:Trample\nAt the beginning of your upkeep, return a green creature you control to its owner's hand.

@@ -1,0 +1,5 @@
+Name:Durkwood Boars
+ManaCost:4 G
+Types:Creature Boar
+PT:4/4
+Oracle:

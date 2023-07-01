@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 12: Clouded Skies
+Title=Clouded Skies
+Difficulty=easy
+Description="No bird soars too high, if he soars with his own wings." -William Blake, The Marriage of Heaven and Hell
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Cloud Dragon|POR
+4 Cloud Pirates|POR
+4 Cloud Spirit|POR
+4 Djinn of the Lamp|POR
+4 Ingenious Thief|POR
+24 Island|POR|3
+4 Prosperity|POR
+4 Snapping Drake|POR
+4 Storm Crow|POR
+4 Wind Drake|POR

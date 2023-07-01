@@ -1,0 +1,8 @@
+Name:Red Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Fire Breath — When CARDNAME enters the battlefield, it deals 4 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 4 | Defined$ Player.Opponent
+Oracle:Flying\nFire Breath — When Red Dragon enters the battlefield, it deals 4 damage to each opponent.

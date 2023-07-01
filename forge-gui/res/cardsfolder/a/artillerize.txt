@@ -1,0 +1,6 @@
+Name:Artillerize
+ManaCost:3 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 3 R Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nArtillerize deals 5 damage to any target.

@@ -1,0 +1,9 @@
+Name:Whirling Dervish
+ManaCost:G G
+Types:Creature Human Monk
+PT:1/1
+K:Protection from black
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+dealtDamageToOppThisTurn | TriggerDescription$ At the beginning of each end step, if CARDNAME dealt damage to an opponent this turn, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Protection from black\nAt the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.

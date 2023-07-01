@@ -1,0 +1,8 @@
+Name:Endless Wurm
+ManaCost:3 G G
+Types:Creature Wurm
+PT:9/9
+K:Trample
+K:UpkeepCost:Sac<1/Enchantment>
+SVar:NeedsToPlay:Enchantment.YouCtrl
+Oracle:Trample\nAt the beginning of your upkeep, sacrifice Endless Wurm unless you sacrifice an enchantment.

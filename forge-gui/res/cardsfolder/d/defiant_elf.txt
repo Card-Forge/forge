@@ -1,0 +1,6 @@
+Name:Defiant Elf
+ManaCost:G
+Types:Creature Elf
+PT:1/1
+K:Trample
+Oracle:Trample

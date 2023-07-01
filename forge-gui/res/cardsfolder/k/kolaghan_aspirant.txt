@@ -1,0 +1,7 @@
+Name:Kolaghan Aspirant
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:2/1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredBlockerLKICopy | NumDmg$ 1
+Oracle:Whenever Kolaghan Aspirant becomes blocked by a creature, Kolaghan Aspirant deals 1 damage to that creature.

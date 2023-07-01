@@ -1,0 +1,11 @@
+Name:Poxwalkers
+ManaCost:2 B
+Types:Creature Zombie
+PT:3/1
+K:Deathtouch
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Curse of the Walking Pox — Whenever you cast a spell from anywhere other than your hand, return CARDNAME from your graveyard to the battlefield tapped.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+DeckHas:Ability$Graveyard
+SVar:SacMe:3
+SVar:DiscardMe:3
+Oracle:Deathtouch\nCurse of the Walking Pox — Whenever you cast a spell from anywhere other than your hand, return Poxwalkers from your graveyard to the battlefield tapped.

@@ -1,0 +1,7 @@
+Name:Kuldotha Ringleader
+ManaCost:4 R
+Types:Creature Giant Berserker
+PT:4/4
+K:Battle cry
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nKuldotha Ringleader attacks each combat if able.

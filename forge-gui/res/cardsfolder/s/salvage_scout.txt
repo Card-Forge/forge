@@ -1,0 +1,7 @@
+Name:Salvage Scout
+ManaCost:W
+Types:Creature Human Scout
+PT:1/1
+A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+AI:RemoveDeck:Random
+Oracle:{W}, Sacrifice Salvage Scout: Return target artifact card from your graveyard to your hand.

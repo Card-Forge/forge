@@ -1,0 +1,6 @@
+Name:Story Seeker
+ManaCost:1 W
+Types:Creature Dwarf Cleric
+PT:2/2
+K:Lifelink
+Oracle:Lifelink

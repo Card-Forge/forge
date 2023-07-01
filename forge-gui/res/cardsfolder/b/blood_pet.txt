@@ -1,0 +1,6 @@
+Name:Blood Pet
+ManaCost:B
+Types:Creature Thrull
+PT:1/1
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add {B}.
+Oracle:Sacrifice Blood Pet: Add {B}.

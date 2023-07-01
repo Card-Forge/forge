@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ako Classic Gifts 4
+Title=Classic Gifts
+Difficulty=very hard
+Description=Kamigawa Gifts Ungiven deck from GP 2005.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Death Denied|SOK
+1 Distress|CHK
+2 Forest|CHK|1
+2 Forest|CHK|2
+4 Forest|CHK|3
+4 Gifts Ungiven|CHK
+1 Goryo's Vengeance|BOK
+1 Hana Kami|CHK
+1 Ink-Eyes, Servant of Oni|BOK
+1 Island|CHK|4
+3 Kagemaro, First to Suffer|SOK
+1 Keiga, the Tide Star|CHK
+4 Kodama's Reach|CHK
+4 Kokusho, the Evening Star|CHK
+1 Meloku the Clouded Mirror|CHK
+1 Miren, the Moaning Well|SOK
+1 Myojin of Night's Reach|CHK
+1 Okina, Temple to the Grandfathers|CHK
+4 Rend Flesh|CHK
+4 Sakura-Tribe Elder|CHK
+1 Shizo, Death's Storehouse|CHK
+4 Sickening Shoal|BOK
+1 Soulless Revival|CHK
+2 Swamp|CHK|1
+1 Swamp|CHK|2
+2 Swamp|CHK|3
+2 Swamp|CHK|4
+4 Tendo Ice Bridge|BOK
+[Sideboard]
+

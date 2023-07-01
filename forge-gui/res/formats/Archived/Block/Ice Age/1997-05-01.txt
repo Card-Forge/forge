@@ -1,0 +1,7 @@
+[format]
+Name:Block: Ice Age (ICE)
+Type:Archived
+Subtype:Block
+Effective:1997-05-01
+Sets:ICE
+Banned:Amulet of Quoz, Thawing Glaciers, Zuran Orb

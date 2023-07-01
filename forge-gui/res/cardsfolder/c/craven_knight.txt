@@ -1,0 +1,6 @@
+Name:Craven Knight
+ManaCost:1 B
+Types:Creature Human Knight
+PT:2/2
+K:CARDNAME can't block.
+Oracle:Craven Knight can't block.

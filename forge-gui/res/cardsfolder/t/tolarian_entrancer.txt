@@ -1,0 +1,9 @@
+Name:Tolarian Entrancer
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, gain control of that creature at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigGainControl | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ Gain control of blocking creature.
+SVar:TrigGainControl:DB$ GainControl | Defined$ DelayTriggerRememberedLKI | NewController$ You
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Tolarian Entrancer becomes blocked by a creature, gain control of that creature at end of combat.

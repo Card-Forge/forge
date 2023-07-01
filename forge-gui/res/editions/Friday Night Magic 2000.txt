@@ -1,0 +1,19 @@
+[metadata]
+Code=FNM
+Date=2000-01-01
+Name=Friday Night Magic 2000
+Type=Promo
+ScryfallCode=FNM
+
+[cards]
+1 R River Boa @Steve White
+2 R Terror @Ron Spencer
+3 R Longbow Archer @Eric Peterson
+4 R Volcanic Geyser @David O'Connor
+5 R Mind Warp @Liz Danforth
+6 R Shock @Randy Gallegos
+8 R Giant Growth @Sandra Everingham
+9 R Prodigal Sorcerer @Douglas Shuler
+10 R Stone Rain @Daniel Gelon
+11 R Llanowar Elves @Anson Maddocks
+12 R Staunch Defenders @Mark Poole

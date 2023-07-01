@@ -1,0 +1,7 @@
+Name:Port Inspector
+ManaCost:1 U
+Types:Creature Human
+PT:1/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ Whenever CARDNAME becomes blocked, you may look at defending player's hand.
+SVar:TrigPeek:DB$ RevealHand | Defined$ TriggeredDefendingPlayer | Look$ True
+Oracle:Whenever Port Inspector becomes blocked, you may look at defending player's hand.

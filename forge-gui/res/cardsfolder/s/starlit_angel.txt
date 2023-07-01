@@ -1,0 +1,6 @@
+Name:Starlit Angel
+ManaCost:3 W W
+Types:Creature Angel
+PT:3/4
+K:Flying
+Oracle:Flying

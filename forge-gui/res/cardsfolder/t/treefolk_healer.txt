@@ -1,0 +1,8 @@
+Name:Treefolk Healer
+ManaCost:4 G
+Types:Creature Treefolk Cleric
+PT:2/3
+A:AB$ PreventDamage | Cost$ 2 W T | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:{2}{W}, {T}: Prevent the next 2 damage that would be dealt to any target this turn.

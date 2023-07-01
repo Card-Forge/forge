@@ -1,0 +1,9 @@
+Name:Mad Ratter
+ManaCost:3 R
+Types:Creature Goblin
+PT:1/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create two 1/1 black Rat creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_rat | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:Whenever you draw your second card each turn, create two 1/1 black Rat creature tokens.

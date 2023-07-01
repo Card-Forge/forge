@@ -1,0 +1,11 @@
+Name:Heart of Bogardan
+ManaCost:2 R R
+Types:Enchantment
+K:Cumulative upkeep:2
+T:Mode$ PayCumulativeUpkeep | ValidCard$ Card.Self | Paid$ False | Execute$ TrigDmg | TriggerDescription$ When a player doesn't pay CARDNAME's cumulative upkeep, CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls, where X is twice the number of age counters on CARDNAME minus 2.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ Y | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals X damage to target player or planeswalker and each creature that player or planeswalker's controller controls.
+SVar:DmgAll:DB$ DamageAll | NumDmg$ Y | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:X:TriggeredCard$CardCounters.AGE/Twice
+SVar:Y:SVar$X/Minus.2
+Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen a player doesn't pay Heart of Bogardan's cumulative upkeep, Heart of Bogardan deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls, where X is twice the number of age counters on Heart of Bogardan minus 2.

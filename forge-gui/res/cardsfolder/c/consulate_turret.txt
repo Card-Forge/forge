@@ -1,0 +1,6 @@
+Name:Consulate Turret
+ManaCost:3
+Types:Artifact
+A:AB$ PutCounter | Cost$ T | Defined$ You | CounterType$ ENERGY | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ You get {E} (an energy counter).
+A:AB$ DealDamage | Cost$ T PayEnergy<3> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or planeswalker.
+Oracle:{T}: You get {E} (an energy counter).\n{T}, Pay {E}{E}{E}: Consulate Turret deals 2 damage to target player or planeswalker.

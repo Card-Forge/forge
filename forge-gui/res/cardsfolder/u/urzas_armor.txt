@@ -1,0 +1,6 @@
+Name:Urza's Armor
+ManaCost:6
+Types:Artifact
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to you, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+Oracle:If a source would deal damage to you, prevent 1 of that damage.

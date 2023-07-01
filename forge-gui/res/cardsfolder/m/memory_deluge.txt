@@ -1,0 +1,8 @@
+Name:Memory Deluge
+ManaCost:2 U U
+Types:Instant
+A:SP$ Dig | DigNum$ X | ChangeNum$ 2 | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top X cards of your library, where X is the amount of mana spent to cast this spell. Put two of them into your hand and the rest on the bottom of your library in a random order.
+SVar:X:Count$CastTotalManaSpent
+K:Flashback:5 U U
+DeckHas:Ability$Graveyard
+Oracle:Look at the top X cards of your library, where X is the amount of mana spent to cast this spell. Put two of them into your hand and the rest on the bottom of your library in a random order.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

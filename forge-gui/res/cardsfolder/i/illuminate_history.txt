@@ -1,0 +1,12 @@
+Name:Illuminate History
+ManaCost:2 R R
+Types:Sorcery Lesson
+A:SP$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | AILogic$ DiscardUncastableAndExcess | StackDescription$ SpellDescription | SpellDescription$ Discard any number of cards, then draw that many cards. Then if there are seven or more cards in your graveyard, create a 3/2 red and white Spirit creature token.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You
+SVar:X:Count$ValidGraveyard Card.YouOwn
+SVar:Y:Count$RememberedSize
+DeckHas:Ability$Discard|Token
+DeckHints:Ability$Graveyard
+Oracle:Discard any number of cards, then draw that many cards. Then if there are seven or more cards in your graveyard, create a 3/2 red and white Spirit creature token.

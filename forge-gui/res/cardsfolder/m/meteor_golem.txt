@@ -1,0 +1,7 @@
+Name:Meteor Golem
+ManaCost:7
+Types:Artifact Creature Golem
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonland permanent an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonland | TgtPrompt$ Select target permanent.
+Oracle:When Meteor Golem enters the battlefield, destroy target nonland permanent an opponent controls.

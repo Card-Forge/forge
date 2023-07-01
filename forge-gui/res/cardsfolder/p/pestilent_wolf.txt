@@ -1,0 +1,6 @@
+Name:Pestilent Wolf
+ManaCost:1 G
+Types:Creature Wolf
+PT:2/2
+A:AB$ Pump | Cost$ 2 G | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:{2}{G}: Pestilent Wolf gains deathtouch until end of turn.

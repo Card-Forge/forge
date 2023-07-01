@@ -1,0 +1,7 @@
+Name:Crystal Golem
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPhase | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, CARDNAME phases out.
+SVar:TrigPhase:DB$ Phases | Defined$ Self
+Oracle:At the beginning of your end step, Crystal Golem phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

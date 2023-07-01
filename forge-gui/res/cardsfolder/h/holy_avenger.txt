@@ -1,0 +1,9 @@
+Name:Holy Avenger
+ManaCost:2 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike | Description$ Equipped creature has double strike.
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigChangeZone | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature deals combat damage, you may put an Aura card from your hand onto the battlefield attached to it.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Aura.CanEnchantEquippedBy | AttachedTo$ TriggeredSource
+K:Equip:2 W
+DeckHints:Type$Aura
+Oracle:Equipped creature has double strike.\nWhenever equipped creature deals combat damage, you may put an Aura card from your hand onto the battlefield attached to it.\nEquip {2}{W}

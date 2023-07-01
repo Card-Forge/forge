@@ -1,0 +1,7 @@
+Name:Oppression
+ManaCost:1 B B
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a player casts a spell, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredActivator | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:Random
+Oracle:Whenever a player casts a spell, that player discards a card.

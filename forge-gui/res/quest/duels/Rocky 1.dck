@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rocky 1
+Title=Rocky
+Difficulty=easy
+Description=WUR Pro red deck with Flamebreak, Tremor, Pyroclasm
+Icon=Rocky.jpg
+Deck Type=constructed
+[main]
+4 Mystic Monastery
+2 Swiftwater Cliffs
+2 Wind-Scarred Crag
+2 Beasts of Bogardan
+1 Air Elemental
+3 Plains|M11
+2 Manalith
+3 Island|M11
+1 Threaten
+2 Oraxid
+3 Repentant Blacksmith
+2 Galina's Knight
+2 Disciple of Law
+2 Talon Trooper
+1 Shield Wall
+1 Guided Strike
+3 Freewind Falcon
+4 Coastal Tower
+1 Vulshok Refugee
+4 Mountain|M11
+2 Vedalken Outlander
+2 Hazerider Drake
+1 Defender of Law
+1 Volcanic Fallout
+1 Pyroclasm
+1 Tremor
+1 Flamebreak
+1 Desert Sandstorm
+1 Devastate
+1 Whipflare
+1 Steam Blast
+1 Hindering Light
+1 Orcish Mine
+[sideboard]

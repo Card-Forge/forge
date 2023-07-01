@@ -1,0 +1,10 @@
+Name:Sythis, Harvest's Hand
+ManaCost:G W
+Types:Legendary Enchantment Creature Nymph
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast an enchantment spell, you gain 1 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Enchantment
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cast an enchantment spell, you gain 1 life and draw a card.

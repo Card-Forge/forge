@@ -1,0 +1,7 @@
+Name:Cursed Totem
+ManaCost:2
+Types:Artifact
+S:Mode$ CantBeActivated | Activator$ Player | AffectedZone$ Battlefield | ValidCard$ Creature | ValidSA$ Activated | Description$ Activated abilities of creatures can't be activated.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Activated abilities of creatures can't be activated.

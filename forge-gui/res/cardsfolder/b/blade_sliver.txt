@@ -1,0 +1,7 @@
+Name:Blade Sliver
+ManaCost:2 R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 1 | Description$ All Sliver creatures get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +1/+0.

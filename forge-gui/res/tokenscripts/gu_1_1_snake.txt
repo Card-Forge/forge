@@ -1,0 +1,6 @@
+Name:Snake Token
+ManaCost:no cost
+Colors:green,blue
+Types:Creature Snake
+PT:1/1
+Oracle:

@@ -1,0 +1,21 @@
+[metadata]
+Code=F03
+Date=2003-01-01
+Name=Friday Night Magic 2003
+Type=Promo
+ScryfallCode=F03
+
+[cards]
+1 R Bottle Gnomes @Kaja Foglio
+2 R Muscle Sliver @Richard Kane Ferguson
+3 R Crystalline Sliver @Allen Williams
+4 R Capsize @Tom Wänerstrand
+5 R Priest of Titania @Rebecca Guay
+6 R Goblin Bombardment @Brian Snõddy
+7 R Scragnoth @Jeff Laubenstein
+8 R Smother @Carl Critchlow
+9 R Whipcorder @Ron Spencer
+10 R Sparksmith @Jim Nelson
+11 R Krosan Tusker @Kev Walker
+12 R Withered Wretch @Tim Hildebrandt
+13 R Disenchant @Kevin McCann

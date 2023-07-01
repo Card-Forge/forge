@@ -1,0 +1,15 @@
+[metadata]
+Code=F01
+Date=2001-01-01
+Name=Friday Night Magic 2001
+Type=Promo
+ScryfallCode=F01
+
+[cards]
+6 R Swords to Plowshares @Jeff A. Menges
+7 R Ophidian @Cliff Nielsen
+8 R Jackal Pup @Susan Van Camp
+9 R Quirion Ranger @Tom Kyffin
+10 R Carnophage @Pete Venters
+11 R Impulse @Bryan Talbot
+12 R Fireblast @Michael Danza

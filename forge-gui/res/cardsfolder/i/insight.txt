@@ -1,0 +1,7 @@
+Name:Insight
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a green spell, you draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent casts a green spell, you draw a card.

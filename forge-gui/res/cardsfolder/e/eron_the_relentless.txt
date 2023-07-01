@@ -1,0 +1,7 @@
+Name:Eron the Relentless
+ManaCost:3 R R
+Types:Legendary Creature Human Rogue
+PT:5/2
+K:Haste
+A:AB$ Regenerate | Cost$ R R R | SpellDescription$ Regenerate CARDNAME.
+Oracle:Haste\n{R}{R}{R}: Regenerate Eron the Relentless.

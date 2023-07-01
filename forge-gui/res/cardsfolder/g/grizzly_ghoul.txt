@@ -1,0 +1,9 @@
+Name:Grizzly Ghoul
+ManaCost:2 B G
+Types:Creature Zombie Bear
+PT:4/3
+K:Trample
+K:etbCounter:P1P1:X:no condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Counters
+Oracle:Trample\nGrizzly Ghoul enters the battlefield with a +1/+1 counter on it for each creature that died this turn.

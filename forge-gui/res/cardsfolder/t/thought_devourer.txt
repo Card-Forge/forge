@@ -1,0 +1,8 @@
+Name:Thought Devourer
+ManaCost:2 U U
+Types:Creature Beast
+PT:4/4
+S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -4 | Description$ Your maximum hand size is reduced by four.
+K:Flying
+AI:RemoveDeck:Random
+Oracle:Flying\nYour maximum hand size is reduced by four.

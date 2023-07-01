@@ -1,0 +1,17 @@
+Name:Mystic Skull
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ SetState | Cost$ 5 T | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+Oracle:{1}, {T}: Add one mana of any color.\n{5}, {T}: Transform Mystic Skull.
+
+ALTERNATE
+
+Name:Mystic Monstrosity
+ManaCost:no cost
+Types:Artifact Creature Construct
+PT:5/6
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Lands you control have "{T}: Add one mana of any color."

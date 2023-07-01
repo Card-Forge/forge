@@ -1,0 +1,9 @@
+Name:Oketra the True|Deck:Oketra the True.dck|Variant:Commander|Avatar:Oketra the True|Desc:
+Name:Djeru, With Eyes Open|Deck:Djeru, With Eyes Open.dck|Variant:Commander|Avatar:Djeru, With Eyes Open|Desc:
+Name:Temmet, Vizier of Naktamun|Deck:Temmet, Vizier of Naktamun.dck|Variant:Commander|Avatar:Temmet, Vizier of Naktamun|Desc:
+Name:Gideon, Martial Paragon|Deck:Gideon, Martial Paragon.dck|Variant:Planeswalker|Avatar:Gideon, Martial Paragon|Desc:
+Name:Gideon of the Trials|Deck:Gideon of the Trials.dck|Variant:Planeswalker|Avatar:Gideon of the Trials|Desc:
+Name:Annointed of Amonkhet|Deck:Annointed of Amonkhet.dck|Variant:None|Avatar:Vizier of the Anointed|Desc:
+Name:Eternalize|Deck:Eternalize.dck|Variant:None|Avatar:Dreamstealer|Desc:
+Name:Rise of the Accursed|Deck:Rise of the Accursed.dck|Variant:None|Avatar:Lord of the Accursed|Desc:
+Name:Trial of Solidarity|Deck:Trial of Solidarity.dck|Variant:None|Avatar:Trial of Solidarity|Desc:

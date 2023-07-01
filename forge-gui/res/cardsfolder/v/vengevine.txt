@@ -1,0 +1,9 @@
+Name:Vengevine
+ManaCost:2 G G
+Types:Creature Elemental
+PT:4/3
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | CheckSVar$ X | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerZones$ Graveyard | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return CARDNAME from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$ThisTurnCast_Creature.YouCtrl
+Oracle:Haste\nWhenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.

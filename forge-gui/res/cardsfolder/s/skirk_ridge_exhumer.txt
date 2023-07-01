@@ -1,0 +1,6 @@
+Name:Skirk Ridge Exhumer
+ManaCost:1 B
+Types:Creature Zombie Spellshaper
+PT:1/1
+A:AB$ Token | Cost$ B T Discard<1/Card> | TokenScript$ festering_goblin | TokenOwner$ You | TokenAmount$ 1 | SpellDescription$ Create a 1/1 black Zombie Goblin creature token named Festering Goblin. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."
+Oracle:{B}, {T}, Discard a card: Create a 1/1 black Zombie Goblin creature token named Festering Goblin. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."

@@ -1,0 +1,8 @@
+Name:Thundering Spineback
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Dinosaur+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Dinosaurs you control get +1/+1.
+A:AB$ Token | Cost$ 5 G | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | TokenAmount$ 1 | SpellDescription$ Create a 3/3 green Dinosaur creature token with trample.
+DeckHas:Ability$Token
+Oracle:Other Dinosaurs you control get +1/+1.\n{5}{G}: Create a 3/3 green Dinosaur creature token with trample.

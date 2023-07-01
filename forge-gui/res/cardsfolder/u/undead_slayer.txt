@@ -1,0 +1,6 @@
+Name:Undead Slayer
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ ChangeZone | Cost$ W T | ValidTgts$ Card.Skeleton,Card.Vampire,Card.Zombie | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target Skeleton, Vampire or Zombie creature. | SpellDescription$ Exile target Skeleton, Vampire or Zombie.
+Oracle:{W}, {T}: Exile target Skeleton, Vampire, or Zombie.

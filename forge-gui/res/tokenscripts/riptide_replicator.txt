@@ -1,0 +1,5 @@
+Name:ChosenType Token
+ManaCost:no cost
+Types:Creature
+PT:*/*
+Oracle:

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Isperia 3
+Title=Isperia 3
+Icon=Isperia.jpg
+Difficulty=hard
+Description=a tiny bit controllish
+Deck Type=constructed
+[main]
+2 Angel of Serenity|RTR
+2 Azorius Charm|RTR
+4 Azorius Guildgate|RTR
+1 Cerulean Sphinx|RAV
+3 Compulsive Research|RAV
+2 Condemn|M11
+3 Court Hussar|DIS
+2 Detention Sphere|RTR
+2 Faith's Fetters|RAV
+4 Hallowed Fountain|RTR
+9 Island|RTR
+2 Azorius Herald|DIS
+2 Jace, Architect of Thought|RTR
+2 Muddle the Mixture|RAV
+9 Plains|RTR
+1 Pride of the Clouds|DIS
+4 Remand|RAV
+2 Sphinx's Revelation|RTR
+4 Supreme Verdict|RTR
+[sideboard]
+[planes]
+[schemes]

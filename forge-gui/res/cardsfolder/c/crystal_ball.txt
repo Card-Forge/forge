@@ -1,0 +1,5 @@
+Name:Crystal Ball
+ManaCost:3
+Types:Artifact
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 | SpellDescription$ Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+Oracle:{1}, {T}: Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

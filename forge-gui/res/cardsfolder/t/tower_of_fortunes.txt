@@ -1,0 +1,5 @@
+Name:Tower of Fortunes
+ManaCost:4
+Types:Artifact
+A:AB$ Draw | Cost$ 8 T | NumCards$ 4 | SpellDescription$ Draw four cards.
+Oracle:{8}, {T}: Draw four cards.

@@ -1,0 +1,6 @@
+Name:Arrogant Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+PT:4/3
+K:Flying
+Oracle:Flying

@@ -1,0 +1,5 @@
+Name:Skeletal Snake
+ManaCost:1 B
+Types:Creature Snake Skeleton
+PT:2/1
+Oracle:

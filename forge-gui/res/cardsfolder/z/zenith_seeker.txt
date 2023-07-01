@@ -1,0 +1,9 @@
+Name:Zenith Seeker
+ManaCost:3 U
+Types:Creature Bird Wizard
+PT:2/2
+K:Flying
+T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, target creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever you cycle or discard a card, target creature gains flying until end of turn.

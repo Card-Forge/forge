@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ned Flanders 2
+Title=Ned Flanders
+Difficulty=medium
+Description=Mono B reanimator deck with a few large creatures and some spells
+Icon=Ned Flanders.jpg
+Deck Type=constructed
+[main]
+1 Hellkite Overlord
+4 Zombify
+2 Necromancy
+22 Swamp|ISD
+2 Terror
+1 Douse in Gloom
+1 Last Caress
+4 Buried Alive
+4 Night's Whisper
+1 Avatar of Woe
+2 Beacon of Unrest
+3 Animate Dead
+4 Entomb
+1 Smother
+1 Angel of Despair
+1 Delirium Skeins
+1 Doom Blade
+1 Dark Banishing
+1 Simic Sky Swallower
+2 Infest
+1 Hidden Horror
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Wirefly
+ManaCost:no cost
+Types:Artifact Creature Insect
+K:Flying
+PT:2/2
+Oracle:Flying

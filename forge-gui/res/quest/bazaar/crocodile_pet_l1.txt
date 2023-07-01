@@ -1,0 +1,6 @@
+Name:Crocodile Pet
+ManaCost:no cost
+Colors:black
+Types:Creature Crocodile Pet
+PT:1/1
+Oracle:

@@ -1,0 +1,9 @@
+Name:Goblin Assault Team
+ManaCost:3 R
+Types:Creature Goblin Warrior
+PT:4/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Haste\nWhen Goblin Assault Team dies, put a +1/+1 counter on target creature you control.

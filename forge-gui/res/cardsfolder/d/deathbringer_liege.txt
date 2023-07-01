@@ -1,0 +1,12 @@
+Name:Deathbringer Liege
+ManaCost:2 WB WB WB
+Types:Creature Horror
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures you control get +1/+1.
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever you cast a black spell, you may destroy target creature if it's tapped.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ Whenever you cast a white spell, you may tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature to tap
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature to destroy | ConditionDefined$ Targeted | ConditionPresent$ Creature.tapped
+SVar:BuffedBy:Card.White,Card.Black
+Oracle:Other white creatures you control get +1/+1.\nOther black creatures you control get +1/+1.\nWhenever you cast a white spell, you may tap target creature.\nWhenever you cast a black spell, you may destroy target creature if it's tapped.

@@ -1,0 +1,6 @@
+Name:Null Caller
+ManaCost:3 B
+Types:Creature Vampire Shaman
+PT:2/4
+A:AB$ Token | Cost$ 3 B ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token.
+Oracle:{3}{B}, Exile a creature card from your graveyard: Create a tapped 2/2 black Zombie creature token.

@@ -1,0 +1,7 @@
+Name:Riot Ringleader
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Human creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Human+YouCtrl | NumAtt$ +1
+Oracle:Whenever Riot Ringleader attacks, Human creatures you control get +1/+0 until end of turn.

@@ -1,0 +1,12 @@
+Name:Quillmane Baku
+ManaCost:4 U
+Types:Creature Spirit
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ 1 T SubCounter<X/KI> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcLEX | ChangeNum$ 1 | SpellDescription$ Return target creature with mana value X or less to its owner's hand.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+# We'll need to improve the script at some stage, especially if we add Hunter of Eyeblights or Razorfin Abolisher.
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Quillmane Baku.\n{1}, {T}, Remove X ki counters from Quillmane Baku: Return target creature with mana value X or less to its owner's hand.

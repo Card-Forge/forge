@@ -1,0 +1,7 @@
+Name:Sakura-Tribe Springcaller
+ManaCost:3 G
+Types:Creature Snake Shaman
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ SakuraManaSingle | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, add {G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:SakuraManaSingle:DB$ Mana | Produced$ G | PersistentMana$ True
+Oracle:At the beginning of your upkeep, add {G}. Until end of turn, you don't lose this mana as steps and phases end.

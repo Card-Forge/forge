@@ -1,0 +1,11 @@
+Name:Biomancer's Familiar
+ManaCost:G U
+Types:Creature Mutant
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Creature.YouCtrl | Type$ Ability | Amount$ 2 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature | RememberObjects$ ThisTargetedCard | StaticAbilities$ StaticAllowAdapt | Triggers$ TriggerClearAdapt | TgtPrompt$ Select target creature. | StackDescription$ SpellDescription | SpellDescription$ The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters on it.
+SVar:StaticAllowAdapt:Mode$ CanAdapt | ValidCard$ Card.IsRemembered | Description$ Remembered adapts as though it had no +1/+1 counters on it.
+SVar:TriggerClearAdapt:Mode$ Adapt | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+DeckHints:Keyword$Adapt
+Oracle:Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.\n{T}: The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters on it.

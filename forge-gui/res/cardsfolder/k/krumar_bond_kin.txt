@@ -1,0 +1,6 @@
+Name:Krumar Bond-Kin
+ManaCost:3 B B
+Types:Creature Orc Warrior
+PT:5/3
+K:Morph:4 B
+Oracle:Morph {4}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

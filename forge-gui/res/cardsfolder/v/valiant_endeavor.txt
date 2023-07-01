@@ -1,0 +1,8 @@
+Name:Valiant Endeavor
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ RollDice | Amount$ 2 | Sides$ 6 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Roll two d6 and choose one result. Destroy each creature with power greater than or equal to that result. Then create a number of 2/2 white Knight creature tokens with vigilance equal to the other result.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.powerGEX | SubAbility$ DBToken | StackDescription$
+SVar:DBToken:DB$ Token | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | TokenAmount$ Y
+DeckHas:Ability$Token
+Oracle:Roll two d6 and choose one result. Destroy each creature with power greater than or equal to that result. Then create a number of 2/2 white Knight creature tokens with vigilance equal to the other result.

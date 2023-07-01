@@ -1,0 +1,20 @@
+[quest]
+id=LEB Challenge: Moon Shadow
+OpponentName=Moon Shadow
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Moon Shadow
+Title=Moon Shadow
+Difficulty=hard
+Description="Yes, I'm bein' followed by a moon shadow/ Moon shadow, moon shadow"
+Icon=Moon Shadow.jpg
+Deck Type=constructed
+[main]
+10 Bad Moon|LEB
+30 Nether Shadow|LEB
+20 Swamp|LEB|3

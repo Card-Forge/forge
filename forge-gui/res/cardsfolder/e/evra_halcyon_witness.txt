@@ -1,0 +1,7 @@
+Name:Evra, Halcyon Witness
+ManaCost:4 W W
+Types:Legendary Creature Avatar
+PT:4/4
+K:Lifelink
+A:AB$ ExchangeLifeVariant | Cost$ 4 | ConditionPresent$ Creature.StrictlySelf | Defined$ You | Mode$ Power | SpellDescription$ Exchange your life total with CARDNAME's power.
+Oracle:Lifelink\n{4}: Exchange your life total with Evra, Halcyon Witness's power.

@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Renowned Weaver
+OpponentName=The Weavers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Dictate of Erebos
+HumanExtras=
+[metadata]
+Name=THS Challenge: Renowned Weaver
+Title=The Weavers
+Difficulty=medium
+Description="You think your weaving as beautiful as mine? Let me show you the true meaning of the craft."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+30 Forest|THS|2
+30 Renowned Weaver|JOU

@@ -1,0 +1,9 @@
+Name:Minamo Sightbender
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/2
+A:AB$ Effect | Cost$ X T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power X or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}, {T}: Target creature with power X or less can't be blocked this turn.

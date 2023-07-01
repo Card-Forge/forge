@@ -1,0 +1,10 @@
+Name:Juniper Order Advocate
+ManaCost:2 W
+Types:Creature Human Knight
+PT:1/2
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, green creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green
+DeckHints:Color$Green
+Oracle:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.

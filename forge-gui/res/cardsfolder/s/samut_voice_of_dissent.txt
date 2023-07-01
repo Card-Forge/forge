@@ -1,0 +1,12 @@
+Name:Samut, Voice of Dissent
+ManaCost:3 R G
+Types:Legendary Creature Human Warrior
+PT:3/4
+K:Flash
+K:Double Strike
+K:Vigilance
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Haste | Description$ Other creatures you control have haste.
+A:AB$ Untap | Cost$ W T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature. | SpellDescription$ Untap another target creature.
+SVar:BuffedBy:Creature
+Oracle:Flash\nDouble strike, vigilance, haste\nOther creatures you control have haste.\n{W}, {T}: Untap another target creature.

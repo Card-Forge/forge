@@ -1,0 +1,10 @@
+Name:Supernatural Rescue
+ManaCost:3 W
+Types:Enchantment Aura
+K:Enchant creature
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Flash | IsPresent$ Spirit.YouCtrl | Description$ This spell has flash as long as you control a Spirit.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast this spell, tap up to two target creatures you don't control.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures you don't control | ValidTgts$ Creature.YouDontCtrl
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2.
+Oracle:This spell has flash as long as you control a Spirit.\nWhen you cast this spell, tap up to two target creatures you don't control.\nEnchant creature\nEnchanted creature gets +1/+2.

@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gideon, Martial Paragon
+Description=Use your courage and passion to assemble a massive army, then empower it with the strength to drive your foes into the ground. Stand alongside the Planeswalker Gideon Jura-- with a card unique to this deck-- to lead your allies to glory.
+Deck Type=constructed
+Set=AKH
+Image=gideon_martial_paragon.jpg
+[Main]
+1 Gideon, Martial Paragon+|AKH
+1 Glory-Bound Initiate|AKH
+3 Gust Walker|AKH
+1 Nef-Crop Entangler|AKH
+1 Pathmaker Initiate|AKH
+2 Honored Crop-Captain|AKH
+3 Companion of the Trials|AKH
+1 Devoted Crop-Mate|AKH
+4 Graceful Cat|AKH
+3 Ahn-Crop Crasher|AKH
+2 Sparring Mummy|AKH
+1 Tah-Crop Elite|AKH
+2 Hyena Pack|AKH
+1 Impeccable Timing|AKH
+2 Electrify|AKH
+2 Cartouche of Zeal|AKH
+1 Hazoret's Favor|AKH
+3 Trial of Zeal|AKH
+2 Gideon's Resolve|AKH
+4 Stone Quarry|AKH
+10 Plains|AKH
+10 Mountain|AKH

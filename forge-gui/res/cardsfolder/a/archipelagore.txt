@@ -1,0 +1,11 @@
+Name:Archipelagore
+ManaCost:5 U U
+Types:Creature Leviathan
+PT:7/7
+K:Mutate:5 U
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever this creature mutates, tap up to X target creatures, where X is the number of times this creature has mutated. Those creatures don't untap during their controller's next untap step.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select up to X target creatures to tap | ValidTgts$ Creature | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:X:Count$TimesMutated
+AI:RemoveDeck:Random
+Oracle:Mutate {5}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, tap up to X target creatures, where X is the number of times this creature has mutated. Those creatures don't untap during their controller's next untap step.

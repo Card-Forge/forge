@@ -1,0 +1,7 @@
+Name:Dimir Infiltrator
+ManaCost:U B
+Types:Creature Spirit
+PT:1/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+K:Transmute:1 U B
+Oracle:Dimir Infiltrator can't be blocked.\nTransmute {1}{U}{B} ({1}{U}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

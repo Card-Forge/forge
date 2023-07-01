@@ -1,0 +1,7 @@
+Name:Wall of Mulch
+ManaCost:1 G
+Types:Creature Wall
+PT:0/4
+K:Defender
+A:AB$ Draw | Cost$ G Sac<1/Wall> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Defender (This creature can't attack.)\n{G}, Sacrifice a Wall: Draw a card.

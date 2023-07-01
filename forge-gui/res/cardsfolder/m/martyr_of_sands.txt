@@ -1,0 +1,9 @@
+Name:Martyr of Sands
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ GainLife | Cost$ 1 Reveal<X/Card.White> Sac<1/CARDNAME> | CostDesc$ {1}, Reveal X white cards from your hand, Sacrifice CARDNAME: | LifeAmount$ Y | SpellDescription$ You gain three times X life.
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Times.3
+AI:RemoveDeck:All
+Oracle:{1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.

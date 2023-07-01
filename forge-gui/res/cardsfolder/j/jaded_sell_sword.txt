@@ -1,0 +1,9 @@
+Name:Jaded Sell-Sword
+ManaCost:3 R
+Types:Creature Dragon Warrior
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ TreasureCheck | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, if mana from a Treasure was spent to cast it, it gains first strike and haste until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike & Haste
+SVar:TreasureCheck:Count$CastTotalManaSpent Treasure
+SVar:AIPreference:ManaFrom$Treasure
+Oracle:When Jaded Sell-Sword enters the battlefield, if mana from a Treasure was spent to cast it, it gains first strike and haste until end of turn.

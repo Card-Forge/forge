@@ -1,0 +1,7 @@
+Name:Spinebiter
+ManaCost:4 G G
+Types:Creature Phyrexian Beast
+PT:3/4
+K:Infect
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nYou may have Spinebiter assign its combat damage as though it weren't blocked.

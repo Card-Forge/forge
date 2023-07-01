@@ -1,0 +1,5 @@
+Name:Ironclad Krovod
+ManaCost:3 W
+Types:Creature Beast
+PT:2/5
+Oracle:

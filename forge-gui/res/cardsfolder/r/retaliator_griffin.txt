@@ -1,0 +1,9 @@
+Name:Retaliator Griffin
+ManaCost:1 R G W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever a source an opponent controls deals damage to you, you may put that many +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever a source an opponent controls deals damage to you, you may put that many +1/+1 counters on Retaliator Griffin.

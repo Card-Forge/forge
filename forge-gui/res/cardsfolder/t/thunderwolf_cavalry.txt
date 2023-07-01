@@ -1,0 +1,9 @@
+Name:Thunderwolf Cavalry
+ManaCost:4 W
+Types:Creature Astartes Warrior
+PT:4/4
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPutCounter | CombatDamage$ True | TriggerDescription$ Crushing Teeth — Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:First strike\nCrushing Teeth — Whenever Thunderwolf Cavalry deals combat damage to a player, put a +1/+1 counter on each other creature you control.

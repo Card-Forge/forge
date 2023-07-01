@@ -1,0 +1,6 @@
+Name:Desert Cerodon
+ManaCost:5 R
+Types:Creature Beast
+PT:6/4
+K:Cycling:R
+Oracle:Cycling {R} ({R}, Discard this card: Draw a card.)

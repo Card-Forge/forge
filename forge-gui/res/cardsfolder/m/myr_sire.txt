@@ -1,0 +1,9 @@
+Name:Myr Sire
+ManaCost:2
+Types:Artifact Creature Phyrexian Myr
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Phyrexian Myr artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_phyrexian_myr | TokenOwner$ You
+SVar:SacMe:1
+DeckHas:Ability$Token
+Oracle:When Myr Sire dies, create a 1/1 colorless Phyrexian Myr artifact creature token.

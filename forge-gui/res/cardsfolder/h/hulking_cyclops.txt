@@ -1,0 +1,6 @@
+Name:Hulking Cyclops
+ManaCost:3 R R
+Types:Creature Cyclops
+PT:5/5
+K:CARDNAME can't block.
+Oracle:Hulking Cyclops can't block.

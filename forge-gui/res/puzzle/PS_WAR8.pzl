@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/06/118.-WAR8.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards you could draw are irrelevant to the puzzle. Your opponent has Join Shields in hand and has {6}{G}{W} available.
+[state]
+humanlife=20
+ailife=15
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Sarkhan the Masterless;Palladia-Mors, the Ruiner;Heroic Reinforcements;Demanding Dragon
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Sarkhan, Fireblood|Counters:LOYALTY=7;Sarkhan's Whelp;Vraska, Relic Seeker|Counters:LOYALTY=4;Verix Bladewing;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs
+aihand=Join Shields
+aibattlefield=Gargoyle Sentinel;Sphinx of New Prahv;Sphinx of New Prahv;Sphinx of the Guildpact;Sphinx of the Guildpact;Roalesk, Apex Hybrid
+aipersistentmana=C C C C C C G W

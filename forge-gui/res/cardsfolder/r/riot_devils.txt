@@ -1,0 +1,5 @@
+Name:Riot Devils
+ManaCost:2 R
+Types:Creature Devil
+PT:2/3
+Oracle:

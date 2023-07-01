@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Leela 3
+Title=Leela
+Difficulty=hard
+Description=UB Sunken Hope deck with Baleful Strix, Man-o'-War and Sea Gate Oracle
+Icon=Leela.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Polluted Delta
+4 Flooded Strand
+1 Drowned Catacomb
+4 Swamp
+4 Island
+1 Mox Jet
+1 Mox Sapphire
+1 Sol Ring
+1 Ancestral Recall
+1 Time Walk
+4 Sunken Hope
+4 Familiar's Ruse
+4 Baleful Strix
+4 Ravenous Rats
+4 Man-o'-War
+4 Sedraxis Alchemist
+4 Parasitic Strix
+1 Bloodhunter Bat
+1 Pierce Strider
+4 Sea Gate Oracle
+[sideboard]

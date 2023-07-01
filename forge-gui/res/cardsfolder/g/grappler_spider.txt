@@ -1,0 +1,6 @@
+Name:Grappler Spider
+ManaCost:1 G
+Types:Creature Spider
+PT:2/1
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

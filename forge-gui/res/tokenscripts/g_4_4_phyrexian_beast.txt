@@ -1,0 +1,6 @@
+Name:Phyrexian Beast Token
+ManaCost:no cost
+Colors:green
+Types:Creature Phyrexian Beast
+PT:4/4
+Oracle:

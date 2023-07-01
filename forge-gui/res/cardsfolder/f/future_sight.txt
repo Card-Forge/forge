@@ -1,0 +1,6 @@
+Name:Future Sight
+ManaCost:2 U U U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | MayPlay$ True | Description$ Play with the top card of your library revealed. You may play lands and cast spells from the top of your library.
+SVar:NonStackingEffect:True
+Oracle:Play with the top card of your library revealed.\nYou may play lands and cast spells from the top of your library.

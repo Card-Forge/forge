@@ -1,0 +1,11 @@
+Name:Maestros Diabolist
+ManaCost:U B R
+Types:Creature Vampire Warrior
+PT:1/4
+K:Deathtouch
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | IsPresent$ Devil.token+YouCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if you don't control a Devil token, create a tapped and attacking 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_devil_burn | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Devil
+Oracle:Deathtouch, haste\nWhenever Maestros Diabolist attacks, if you don't control a Devil token, create a tapped and attacking 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."

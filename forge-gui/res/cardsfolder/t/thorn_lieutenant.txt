@@ -1,0 +1,9 @@
+Name:Thorn Lieutenant
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/3
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME becomes the target of a spell or ability an opponent controls, create a 1/1 green Elf Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior
+A:AB$ Pump | Cost$ 5 G | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ CARDNAME gets +4/+4 until end of turn.
+DeckHas:Ability$Token
+Oracle:Whenever Thorn Lieutenant becomes the target of a spell or ability an opponent controls, create a 1/1 green Elf Warrior creature token.\n{5}{G}: Thorn Lieutenant gets +4/+4 until end of turn.

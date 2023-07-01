@@ -1,0 +1,13 @@
+[metadata]
+Code=PS19
+Date=2019-07-18
+Name=San Diego Comic-Con 2019
+Type=Promo
+ScryfallCode=PS19
+
+[cards]
+16 M God-Eternal Oketra @Adam Paquette
+53 M God-Eternal Kefnet @Adam Paquette
+92 M God-Eternal Bontu @Adam Paquette
+163 M God-Eternal Rhonas @Adam Paquette
+207 M Nicol Bolas, Dragon-God @Adam Paquette

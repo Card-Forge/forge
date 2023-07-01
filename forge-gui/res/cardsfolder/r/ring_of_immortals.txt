@@ -1,0 +1,5 @@
+Name:Ring of Immortals
+ManaCost:5
+Types:Artifact
+A:AB$ Counter | Cost$ 3 T | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | TgtPrompt$ Select target instant or Aura spell | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control.
+Oracle:{3}, {T}: Counter target instant or Aura spell that targets a permanent you control.

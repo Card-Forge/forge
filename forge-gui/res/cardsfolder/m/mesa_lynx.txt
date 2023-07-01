@@ -1,0 +1,6 @@
+Name:Mesa Lynx
+ManaCost:1 W
+Types:Creature Cat
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ NotPlayerTurn | EffectZone$ Battlefield | AddToughness$ 2 | Description$ As long as it's not your turn, CARDNAME gets +0/+2.
+Oracle:As long as it's not your turn, Mesa Lynx gets +0/+2.

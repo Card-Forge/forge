@@ -1,0 +1,8 @@
+Name:Anax and Cymede|Deck:AnaxCymede.dck|Variant:Commander|Avatar:Anax and Cymede|Desc:
+Name:Devotion to Fight|Deck:MonoRDev.dck|Variant:None|Avatar:Firedrinker Satyr|Desc:
+Name:Brimaz|Deck:Brimaz.dck|Variant:Commander|Avatar:Brimaz, King of Oreskos|Desc:
+Name:Akroan Soldiers|Deck:WRSoldiers.dck|Variant:None|Avatar:Akroan Hoplite|Desc:
+Name:Iroas|Deck:Iroas.dck|Variant:Commander|Avatar:Iroas, God of Victory|Desc:
+Name:Kalemne|Deck:Kalemne.dck|Variant:Commander|Avatar:Kalemne, Disciple of Iroas|Desc:
+Name:Mogis|Deck:Mogis.dck|Variant:Commander|Avatar:Mogis, God of Slaughter|Desc:
+Name:Elspeth|Deck:ElspethPW.dck|Variant:Planeswalker|Avatar:Elspeth, Sun's Champion|Desc:

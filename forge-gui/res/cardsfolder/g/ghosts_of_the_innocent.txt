@@ -1,0 +1,9 @@
+Name:Ghosts of the Innocent
+ManaCost:5 W W
+Types:Creature Spirit
+PT:4/5
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player,Permanent | ReplaceWith$ DmgHalfDown | Description$ If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead.
+SVar:DmgHalfDown:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/HalfDown
+AI:RemoveDeck:Random
+Oracle:If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead.

@@ -1,0 +1,9 @@
+Name:Coiling Stalker
+ManaCost:1 G
+Types:Creature Snake Ninja
+PT:2/1
+K:Ninjutsu:1 G
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPutCounter | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on target creature you control that doesn't have a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+counters_EQ0_P1P1 | TgtPrompt$ Select target creature you control that doesn't have a +1/+1 counter on it | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Ninjutsu {1}{G} ({1}{G}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Coiling Stalker deals combat damage to a player, put a +1/+1 counter on target creature you control that doesn't have a +1/+1 counter on it.

@@ -1,0 +1,6 @@
+Name:Steel Leaf Champion
+ManaCost:G G G
+Types:Creature Elf Knight
+PT:5/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Steel Leaf Champion can't be blocked by creatures with power 2 or less.

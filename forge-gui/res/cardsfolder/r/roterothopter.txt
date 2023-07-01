@@ -1,0 +1,7 @@
+Name:Roterothopter
+ManaCost:1
+Types:Artifact Creature Thopter
+PT:0/2
+K:Flying
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.
+Oracle:Flying\n{2}: Roterothopter gets +1/+0 until end of turn. Activate no more than twice each turn.

@@ -1,0 +1,10 @@
+Name:Glint-Eye Nephilim
+ManaCost:U B R G
+Types:Creature Nephilim
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+A:AB$ Pump | Cost$ 1 Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Whenever Glint-Eye Nephilim deals combat damage to a player, draw that many cards.\n{1}, Discard a card: Glint-Eye Nephilim gets +1/+1 until end of turn.

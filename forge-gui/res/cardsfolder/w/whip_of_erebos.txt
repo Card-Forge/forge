@@ -1,0 +1,10 @@
+Name:Whip of Erebos
+ManaCost:2 B B
+Types:Legendary Enchantment Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Lifelink | Description$ Creatures you control have lifelink.
+A:AB$ ChangeZone | Cost$ 2 B B T | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature you control to return | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBUnearthed | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. Activate only as a sorcery.
+SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | Keywords$ Haste | LeaveBattlefield$ Exile | sVars$ WhipMustAttack | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup | StackDescription$ It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
+SVar:WhipMustAttack:SVar:MustAttack:True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have lifelink.\n{2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. Activate only as a sorcery.

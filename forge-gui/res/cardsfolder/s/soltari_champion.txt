@@ -1,0 +1,8 @@
+Name:Soltari Champion
+ManaCost:2 W
+Types:Creature Soltari Soldier
+PT:2/2
+K:Shadow
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Champion attacks, other creatures you control get +1/+1 until end of turn.

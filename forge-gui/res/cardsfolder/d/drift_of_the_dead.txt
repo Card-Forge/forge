@@ -1,0 +1,10 @@
+Name:Drift of the Dead
+ManaCost:3 B
+Types:Creature Wall
+PT:*/*
+K:Defender
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of snow lands you control.
+SVar:X:Count$Valid Land.Snow+YouCtrl
+SVar:NeedsToPlayVar:X GE2
+AI:RemoveDeck:Random
+Oracle:Defender (This creature can't attack.)\nDrift of the Dead's power and toughness are each equal to the number of snow lands you control.

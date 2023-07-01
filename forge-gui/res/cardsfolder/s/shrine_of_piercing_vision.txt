@@ -1,0 +1,10 @@
+Name:Shrine of Piercing Vision
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on CARDNAME.
+SVar:TrigAddCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | DigNum$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of charge counters on CARDNAME. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+SVar:X:Count$CardCounters.CHARGE
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on Shrine of Piercing Vision.\n{T}, Sacrifice Shrine of Piercing Vision: Look at the top X cards of your library, where X is the number of charge counters on Shrine of Piercing Vision. Put one of those cards into your hand and the rest on the bottom of your library in any order.

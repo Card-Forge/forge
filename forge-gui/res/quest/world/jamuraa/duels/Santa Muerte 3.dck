@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Santa Muerte 3
+Title=Santa Muerte
+Icon=SantaMuerte.jpg
+Difficulty=hard
+Description=Santa Muerte plays RB 'Direct Advantage' deck.
+Deck Type=constructed
+[main]
+2 Abyssal Specter|5ED
+3 Charcoal Diamond|MIR
+3 Choking Sands|MIR
+3 Dark Banishing|MIR
+2 Doomsday|WTH
+3 Dormant Volcano|VIS
+3 Drain Life|MIR
+2 Everglades|VIS
+4 Incinerate|MIR
+2 Infernal Contract|MIR
+4 Kaervek's Torch|MIR
+8 Mountain|MIR
+1 Mox Jet|LEB
+1 Rag Man|DRK
+3 Stone Rain|MIR
+3 Stupor|MIR
+11 Swamp|MIR
+2 Thundermare|WTH
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Angelic Might
+Description=Dawn arrives on white wings! The flights of angels under Avacyn's command are your weapons, carrying divine retribution to your enemies. The "Angelic Might" deck unites celestial shepherds and their earthly flock.
+Deck Type=constructed
+Set=AVR
+Image=angelic_might.jpg
+[main]
+2 Angel's Tomb|AVR
+1 Bladed Bracers|AVR
+1 Scroll of Avacyn|AVR
+11 Forest|AVR
+13 Plains|AVR
+1 Angel of Glory's Rise|AVR
+2 Angelic Wall|AVR
+1 Archangel|AVR
+3 Borderland Ranger|AVR
+2 Cathedral Sanctifier|AVR
+2 Emancipation Angel|AVR
+2 Gideon's Lawkeeper|M12
+1 Goldnight Redeemer|AVR
+1 Herald of War+|AVR
+2 Seraph of Dawn|AVR
+2 Serra Angel|M12
+1 Timberland Guide|AVR
+1 Voice of the Provinces|AVR
+1 Builder's Blessing|AVR
+2 Defang|AVR
+1 Oblivion Ring|M12
+1 Triumph of Ferocity|AVR
+2 Righteous Blow|AVR
+1 Seraph Sanctuary|AVR
+1 Defy Death|AVR
+2 Rampant Growth|M12
+[sideboard]

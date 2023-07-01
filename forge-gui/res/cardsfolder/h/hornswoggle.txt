@@ -1,0 +1,7 @@
+Name:Hornswoggle
+ManaCost:2 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Creature | SubAbility$ DBTreasure | SpellDescription$ Counter target creature spell. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Counter target creature spell. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

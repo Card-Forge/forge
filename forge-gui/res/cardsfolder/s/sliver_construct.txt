@@ -1,0 +1,5 @@
+Name:Sliver Construct
+ManaCost:3
+Types:Artifact Creature Sliver Construct
+PT:2/2
+Oracle:

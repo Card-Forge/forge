@@ -1,0 +1,8 @@
+Name:Hazoret's Monument
+ManaCost:3
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Creature.Red | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Red creature spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cost$ Discard<1/Card>
+DeckNeeds:Color$Red
+Oracle:Red creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, you may discard a card. If you do, draw a card.

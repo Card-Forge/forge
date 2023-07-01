@@ -1,0 +1,21 @@
+Name:Galedrifter
+ManaCost:3 U
+Types:Creature Hippogriff
+PT:3/2
+K:Flying
+K:Disturb:4 U
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Flying\nDisturb {4}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Waildrifter
+ManaCost:no cost
+Colors:blue
+Types:Creature Hippogriff Spirit
+PT:2/2
+K:Flying
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nIf Waildrifter would be put into a graveyard from anywhere, exile it instead.

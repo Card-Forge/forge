@@ -1,0 +1,12 @@
+Name:Phyrexian Etchings
+ManaCost:B B B
+Types:Enchantment
+K:Cumulative upkeep:B
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, draw a card for each age counter on CARDNAME.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLife | ValidCard$ Card.Self | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ Y
+SVar:X:Count$CardCounters.AGE
+SVar:Y:TriggeredCard$CardCounters.AGE/Times.2
+AI:RemoveDeck:All
+Oracle:Cumulative upkeep {B} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your end step, draw a card for each age counter on Phyrexian Etchings.\nWhen Phyrexian Etchings is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.

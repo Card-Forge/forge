@@ -1,0 +1,7 @@
+Name:Demolition Stomper
+ManaCost:6
+Types:Artifact Vehicle
+PT:10/7
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+K:Crew:5
+Oracle:Demolition Stomper can't be blocked by creatures with power 2 or less.\nCrew 5 (Tap any number of creatures you control with total power 5 or more: This Vehicle becomes an artifact creature until end of turn.)

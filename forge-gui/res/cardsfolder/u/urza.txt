@@ -1,0 +1,6 @@
+Name:Urza
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/+10
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ 3 | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Hand -1, life +10\n{3}: Urza deals 1 damage to any target.

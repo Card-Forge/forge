@@ -1,0 +1,8 @@
+Name:Oculus
+ManaCost:1 U
+Types:Creature Phyrexian Homunculus
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:SacMe:1
+Oracle:When Oculus dies, you may draw a card.

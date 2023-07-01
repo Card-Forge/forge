@@ -1,0 +1,6 @@
+Name:Excruciator
+ManaCost:6 R R
+Types:Creature Avatar
+PT:7/7
+S:Mode$ CantPreventDamage | ValidSource$ Card.Self | Description$ Damage that would be dealt by CARDNAME can't be prevented.
+Oracle:Damage that would be dealt by Excruciator can't be prevented.

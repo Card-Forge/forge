@@ -1,0 +1,9 @@
+Name:Volrath's Shapeshifter
+ManaCost:1 U U
+Types:Creature Phyrexian Shapeshifter
+PT:0/1
+A:AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainTextOf$ TopOfGraveyard.Creature | GainTextAbilities$ VolrathDiscard | Description$ As long as the top card of your graveyard is a creature card, CARDNAME has the full text of that card and has the text "{2}: Discard a card." (CARDNAME has that card's name, mana cost, color, types, abilities, power, and toughness.)
+SVar:VolrathDiscard:AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.
+SVar:NeedsOrderedGraveyard:TRUE
+Oracle:As long as the top card of your graveyard is a creature card, Volrath's Shapeshifter has the full text of that card and has the text "{2}: Discard a card." (Volrath's Shapeshifter has that card's name, mana cost, color, types, abilities, power, and toughness.)\n{2}: Discard a card.

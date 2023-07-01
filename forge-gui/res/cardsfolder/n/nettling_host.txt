@@ -1,0 +1,12 @@
+Name:Nettling Host
+ManaCost:2 W
+Types:Creature Phyrexian Rat
+PT:3/3
+K:Toxic:2
+A:AB$ MakeCard | Cost$ ExileFromGrave<1/CARDNAME> | Conjure$ True | Name$ Nettlecyst | Zone$ Hand | ActivationZone$ Graveyard | PrecostDesc$ Corrupted — | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Conjure a card named Nettlecyst into your hand. Activate only if an opponent has three or more poison counters
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:SacMe:1
+SVar:DiscardMe:1
+DeckHas:Ability$Graveyard|Token & Type$Artifact|Germ
+DeckNeeds:Keyword$Toxic|Infect
+Oracle:Toxic 2\nCorrupted - Exile Nettling Host from your graveyard: Conjure a card named Nettlecyst into your hand. Activate only if an opponent has three or more poison counters.

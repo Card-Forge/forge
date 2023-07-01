@@ -1,0 +1,7 @@
+Name:Squee
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+3/-4
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Hand | Affected$ Card.OppOwn | MayLookAt$ Player | Description$ Your opponents play with their hands revealed.
+AI:RemoveDeck:All
+Oracle:Hand +3, life -4\nYour opponents play with their hands revealed.

@@ -1,0 +1,6 @@
+Name:Weaselback Redcap
+ManaCost:R
+Types:Creature Goblin Knight
+PT:1/1
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:{1}{R}: Weaselback Redcap gets +2/+0 until end of turn.

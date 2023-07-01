@@ -1,0 +1,7 @@
+Name:Tangleroot
+ManaCost:3
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Creature | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a creature spell, that player adds {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredActivator
+AI:RemoveDeck:Random
+Oracle:Whenever a player casts a creature spell, that player adds {G}.

@@ -1,0 +1,6 @@
+Name:Canopy Spider
+ManaCost:1 G
+Types:Creature Spider
+PT:1/3
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

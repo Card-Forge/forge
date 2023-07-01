@@ -1,0 +1,9 @@
+Name:Skittish Valesk
+ManaCost:6 R
+Types:Creature Beast
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, turn CARDNAME face down.
+SVar:TrigFlipACoin:DB$ FlipACoin | LoseSubAbility$ DBChange
+SVar:DBChange:DB$ SetState | NewState$ FaceDown
+K:Morph:5 R
+Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, turn Skittish Valesk face down.\nMorph {5}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -1,0 +1,7 @@
+Name:Goblin Striker
+ManaCost:1 R
+Types:Creature Goblin Berserker
+PT:1/1
+K:First Strike
+K:Haste
+Oracle:First strike, haste

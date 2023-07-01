@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rallying Cry
+Description=Allies from all over the embattled plane of Zendikar gather to face the world-devouring Eldrazi. Every addition to your squad of Allies can trigger new benefits for all of them.
+Deck Type=constructed
+Set=BFZ
+Image=rallying_cry.jpg
+[Main]
+3 Cliffside Lookout|BFZ
+2 Expedition Envoy|BFZ
+2 Kor Bladewhirl|BFZ
+2 Kor Castigator|BFZ
+3 Reckless Cohort|BFZ
+2 Makindi Patrol|BFZ
+2 Firemantle Mage|BFZ
+1 Chasm Guide|BFZ
+1 Ondu Champion|BFZ
+1 Hero of Goma Fada+|BFZ
+2 Kor Entanglers|BFZ
+2 Shatterskull Recruit|BFZ
+1 Angelic Captain|BFZ
+1 Resolute Blademaster|BFZ
+1 Angel of Renewal|BFZ
+2 Lithomancer's Focus|BFZ
+2 Outnumber|BFZ
+2 Smite the Monstrous|BFZ
+2 Inspired Charge|BFZ
+1 Angelic Gift|BFZ
+1 Blighted Gorge|BFZ
+2 Evolving Wilds|BFZ
+2 Sandstone Bridge|BFZ
+10 Plains|BFZ
+10 Mountain|BFZ

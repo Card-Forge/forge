@@ -1,0 +1,9 @@
+Name:Obsessive Stitcher
+ManaCost:1 U B
+Types:Creature Human Wizard
+PT:0/3
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ ChangeZone | Cost$ 2 U B T Sac<1/CARDNAME> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard|Discard
+Oracle:{T}: Draw a card, then discard a card.\n{2}{U}{B}, {T}, Sacrifice Obsessive Stitcher: Return target creature card from your graveyard to the battlefield.

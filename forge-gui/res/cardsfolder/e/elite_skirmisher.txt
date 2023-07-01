@@ -1,0 +1,8 @@
+Name:Elite Skirmisher
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, you may tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:PlayMain1:TRUE
+Oracle:Heroic — Whenever you cast a spell that targets Elite Skirmisher, you may tap target creature.

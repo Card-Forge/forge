@@ -1,0 +1,6 @@
+Name:Blanket of Night
+ManaCost:1 B B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land | AddType$ Swamp | Description$ Each land is a Swamp in addition to its other land types.
+AI:RemoveDeck:Random
+Oracle:Each land is a Swamp in addition to its other land types.

@@ -1,0 +1,9 @@
+Name:Teferi's Protection
+ManaCost:2 W
+Types:Instant
+A:SP$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ STCantChange | SubAbility$ DBPump | SpellDescription$ Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.) Exile CARDNAME.
+SVar:DBPump:DB$ Pump | Defined$ You | Duration$ UntilYourNextTurn | KW$ Protection from everything | SubAbility$ DBPhases
+SVar:STCantChange:Mode$ CantChangeLife | ValidPlayer$ You | Description$ Your life total can't change.
+SVar:DBPhases:DB$ Phases | Defined$ Valid Permanent.YouCtrl | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)\nExile Teferi's Protection.

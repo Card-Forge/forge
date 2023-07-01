@@ -1,0 +1,7 @@
+Name:Ramosian Sky Marshal
+ManaCost:3 W W
+Types:Creature Human Rebel
+PT:3/3
+K:Flying
+A:AB$ ChangeZone | Cost$ 7 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE6 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 6 or less, put it onto the battlefield, then shuffle.
+Oracle:Flying\n{7}, {T}: Search your library for a Rebel permanent card with mana value 6 or less, put it onto the battlefield, then shuffle.

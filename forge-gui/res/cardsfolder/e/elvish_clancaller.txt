@@ -1,0 +1,9 @@
+Name:Elvish Clancaller
+ManaCost:G G
+Types:Creature Elf Druid
+PT:1/1
+S:Mode$ Continuous | Affected$ Elf.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+A:AB$ ChangeZone | Cost$ 4 G G T | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedElvish Clancaller | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Elvish Clancaller, put it onto the battlefield, then shuffle.
+DeckHints:Type$Elf
+DeckNeeds:Name$Elvish Clancaller
+Oracle:Other Elves you control get +1/+1.\n{4}{G}{G}, {T}: Search your library for a card named Elvish Clancaller, put it onto the battlefield, then shuffle.

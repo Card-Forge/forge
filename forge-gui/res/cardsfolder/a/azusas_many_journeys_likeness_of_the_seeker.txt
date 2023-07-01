@@ -1,0 +1,24 @@
+Name:Azusa's Many Journeys
+ManaCost:1 G
+Types:Enchantment Saga
+K:Saga:3:DBEffect,DBGainLife,DBTransform
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration | SpellDescription$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — You may play an additional land this turn.\nII — You gain 3 life.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Likeness of the Seeker
+ManaCost:no cost
+Colors:green
+Types:Enchantment Creature Human Monk
+PT:3/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, untap up to three lands you control.
+SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land.YouCtrl | Amount$ 3
+Oracle:Whenever Likeness of the Seeker becomes blocked, untap up to three lands you control.

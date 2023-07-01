@@ -1,0 +1,6 @@
+Name:Greater Forgeling
+ManaCost:3 R R
+Types:Creature Elemental
+PT:3/4
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +3 | NumDef$ -3 | SpellDescription$ CARDNAME gets +3/-3 until end of turn.
+Oracle:{1}{R}: Greater Forgeling gets +3/-3 until end of turn.

@@ -1,0 +1,7 @@
+Name:Returned Reveler
+ManaCost:1 B
+Types:Creature Zombie Satyr
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, each player mills three cards.
+SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 3
+Oracle:When Returned Reveler dies, each player mills three cards.

@@ -1,0 +1,10 @@
+Name:Worthy Knight
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Knight | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Knight spell, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human
+SVar:BuffedBy:Knight
+DeckHints:Type$Knight
+DeckHas:Ability$Token
+Oracle:Whenever you cast a Knight spell, create a 1/1 white Human creature token.

@@ -1,0 +1,32 @@
+[quest]
+id=4Horsemen
+OpponentName=4 Horsemen of Apocalypse
+AILife=25
+Repeat=true
+Wins=40
+Card Reward=duplicate card
+Ticket Reward=true
+Credit Reward=500
+AIExtras=Cao Ren, Wei Commander|Ma Chao, Western Warrior|Yuan Shao, the Indecisive|Zhang He, Wei General
+HumanExtras=Plains|Island
+[metadata]
+Title=The 4 Horsemen of Apocalypse
+Icon=Dungeon Crawling Black.jpg
+Difficulty=very hard
+Description=The end is near!
+Deck Type=constructed
+Name=4Horsemen
+[Main]
+2 Boiling Seas|POR
+2 Dread Reaper|POR
+2 Famine|PTK
+2 Flashfires|POR
+5 Mountain|PTK|1
+2 Mountain|PTK|2
+3 Mountain|PTK|3
+2 Rain of Salt|POR
+4 Rolling Earthquake|PTK
+4 Swamp|PTK|1
+2 Swamp|PTK|2
+4 Swamp|PTK|3
+4 Terror|S00

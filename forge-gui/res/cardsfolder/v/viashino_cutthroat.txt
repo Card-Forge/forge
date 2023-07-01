@@ -1,0 +1,9 @@
+Name:Viashino Cutthroat
+ManaCost:2 R R
+Types:Creature Viashino
+PT:5/3
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+Oracle:Haste\nAt the beginning of the end step, return Viashino Cutthroat to its owner's hand.

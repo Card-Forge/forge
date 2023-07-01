@@ -1,0 +1,8 @@
+Name:Marit Lage
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Avatar
+PT:20/20
+K:Flying
+K:Indestructible
+Oracle:Flying, indestructible

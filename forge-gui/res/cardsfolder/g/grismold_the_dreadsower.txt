@@ -1,0 +1,11 @@
+Name:Grismold, the Dreadsower
+ManaCost:1 B G
+Types:Legendary Creature Troll Shaman
+PT:3/3
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, each player creates a 1/1 green Plant creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_plant | TokenOwner$ Player
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.token | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature token dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+AI:RemoveDeck:Random
+Oracle:Trample\nAt the beginning of your end step, each player creates a 1/1 green Plant creature token.\nWhenever a creature token dies, put a +1/+1 counter on Grismold, the Dreadsower.

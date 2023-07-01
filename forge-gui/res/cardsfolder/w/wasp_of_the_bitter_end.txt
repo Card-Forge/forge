@@ -1,0 +1,8 @@
+Name:Wasp of the Bitter End
+ManaCost:1 B
+Types:Creature Insect Horror
+PT:2/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Planeswalker.Bolas | ValidActivatingPlayer$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Bolas planeswalker spell, you may sacrifice CARDNAME. If you do, destroy target creature.
+SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature.
+Oracle:Flying\nWhenever you cast a Bolas planeswalker spell, you may sacrifice Wasp of the Bitter End. If you do, destroy target creature.

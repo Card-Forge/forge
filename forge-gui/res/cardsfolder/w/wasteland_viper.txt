@@ -1,0 +1,7 @@
+Name:Wasteland Viper
+ManaCost:G
+Types:Creature Snake
+PT:1/2
+K:Deathtouch
+A:AB$ Pump | Cost$ G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +1 | NumDef$ +2 | KW$ Deathtouch | SpellDescription$ Target attacking creature gets +1/+2 and gains deathtouch until end of turn.
+Oracle:Deathtouch\nBloodrush — {G}, Discard Wasteland Viper: Target attacking creature gets +1/+2 and gains deathtouch until end of turn.

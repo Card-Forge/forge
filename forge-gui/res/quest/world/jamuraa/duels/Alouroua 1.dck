@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Alouroua 1
+Title=Alouroua
+Icon=Alouroua.jpg
+Difficulty=easy
+Description=Green stompy, fast mana and big creatures.
+Deck Type=constructed
+[main]
+2 Armor of Thorns|MIR
+2 Crumble|ATQ
+3 Elvish Spirit Guide|ALL
+4 Erhnam Djinn|ARN
+1 Femeref Archers|MIR
+2 Force of Nature|LEB
+19 Forest|MIR
+4 Llanowar Elves|5ED
+2 Giant Growth|LEB
+2 Icy Manipulator|LEB
+2 Killer Bees|LEG
+1 Lhurgoyf|ICE
+1 Natural Selection|LEB
+3 Nature's Lore|ICE
+1 Nettletooth Djinn|MIR
+1 Sylvan Library|LEG
+2 Thermokarst|ICE
+1 Tornado|ALL
+4 Woolly Spider|ICE
+1 Worldly Tutor|MIR
+4 Yavimaya Ants|ALL
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

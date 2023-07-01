@@ -1,0 +1,8 @@
+Name:Kithkin Mourncaller
+ManaCost:2 G
+Types:Creature Kithkin Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Kithkin+YouOwn+attacking,Creature.Elf+YouOwn+attacking | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.

@@ -1,0 +1,9 @@
+Name:Ellyn Harbreeze, Busybody
+ManaCost:3 W
+Types:Legendary Creature Human Peasant
+PT:2/4
+A:AB$ Dig | Cost$ T | DigNum$ X | RestRandomOrder$ True | SpellDescription$ Look at the top X cards of your library, where X is the number of tokens you created this turn. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+YouOwn
+DeckNeeds:Ability$Token
+K:Choose a Background
+Oracle:{T}: Look at the top X cards of your library, where X is the number of tokens you created this turn. Put one of those cards into your hand and the rest on the bottom of your library in a random order.\nChoose a Background (You can have a Background as a second commander.)

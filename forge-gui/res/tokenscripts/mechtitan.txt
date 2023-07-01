@@ -1,0 +1,12 @@
+Name:Mechtitan
+ManaCost:no cost
+Colors:all
+Types:Legendary Artifact Creature Construct
+PT:10/10
+K:Flying
+K:Vigilance
+K:Trample
+K:Lifelink
+K:Haste
+Text:CARDNAME is all colors.
+Oracle:Mechtitan is all colors.\nFlying, vigilance, trample, lifelink, haste

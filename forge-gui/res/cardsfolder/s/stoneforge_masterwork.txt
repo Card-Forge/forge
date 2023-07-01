@@ -1,0 +1,9 @@
+Name:Stoneforge Masterwork
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Battlefield | Description$ Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.
+SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other+YouCtrl
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+K:Equip:2
+Oracle:Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.\nEquip {2}

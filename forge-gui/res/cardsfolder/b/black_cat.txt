@@ -1,0 +1,7 @@
+Name:Black Cat
+ManaCost:1 B
+Types:Creature Zombie Cat
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, target opponent discards a card at random.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random
+Oracle:When Black Cat dies, target opponent discards a card at random.

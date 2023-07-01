@@ -1,0 +1,7 @@
+Name:Spellbook
+ManaCost:0
+Types:Artifact
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:You have no maximum hand size.

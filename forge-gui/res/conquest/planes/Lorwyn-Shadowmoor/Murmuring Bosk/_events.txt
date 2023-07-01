@@ -1,0 +1,9 @@
+Name:Daggerdares & Treefolk|Deck:Daggerdares & Treefolk.dck|Variant:None|Avatar:Kithkin Daggerdare|Desc:
+Name:Doran, the Siege Tower|Deck:Doran, the Siege Tower.dck|Variant:Commander|Avatar:Doran, the Siege Tower|Desc:
+Name:Protectors of the Forest|Deck:Protectors of the Forest.dck|Variant:None|Avatar:Timber Protector|Desc:
+Name:Sapling of Colfenor|Deck:Sapling of Colfenor.dck|Variant:Commander|Avatar:Sapling of Colfenor|Desc:
+Name:Shields of the Forest|Deck:Shields of the Forest.dck|Variant:None|Avatar:Leaf-Crowned Elder|Desc:
+Name:Reaper King|Deck:Reaper King.dck|Variant:Vanguard|Avatar:Reaper King|Desc:
+Name:Garruk Wildspeaker|Deck:Garruk Wildspeaker.dck|Variant:Planeswalker|Avatar:Garruk Wildspeaker|Desc:
+Name:Towers of Siege|Deck:Towers of Siege.dck|Variant:None|Avatar:Indomitable Ancients|Desc:
+Name:Under the Bridge|Deck:Under the Bridge.dck|Variant:None|Avatar:Mossbridge Troll|Desc:

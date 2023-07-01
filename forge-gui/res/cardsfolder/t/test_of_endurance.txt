@@ -1,0 +1,7 @@
+Name:Test of Endurance
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | LifeTotal$ You | LifeAmount$ GE50 | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if you have 50 or more life, you win the game.
+SVar:TrigWin:DB$ WinsGame | Defined$ You
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if you have 50 or more life, you win the game.

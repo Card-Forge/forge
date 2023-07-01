@@ -1,0 +1,7 @@
+Name:Hermit Druid Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-2/-2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | AtRandom$ True | ChangeType$ Land
+Oracle:Hand -2, life -2\nAt the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.

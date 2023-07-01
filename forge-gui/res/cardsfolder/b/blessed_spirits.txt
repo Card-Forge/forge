@@ -1,0 +1,9 @@
+Name:Blessed Spirits
+ManaCost:2 W
+Types:Creature Spirit
+PT:2/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Enchantment
+Oracle:Flying\nWhenever you cast an enchantment spell, put a +1/+1 counter on Blessed Spirits.

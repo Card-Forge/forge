@@ -1,0 +1,24 @@
+[quest]
+id=TempestQuest2
+OpponentName=Mad Hatter
+AILife=50000
+Repeat=true
+Wins=20
+Card Reward=tournament pack TMP;chosen card rarity:R sets:TMP,STH,EXO
+Credit Reward=2500
+Ticket Reward=true
+AIExtras=Swamp|Swamp|Swamp|Jet Medallion
+HumanExtras=Avenging Angel|Plains|Plains|Pearl Medallion|Pearl Medallion|Pearl Medallion|Altar of Dementia
+[metadata]
+Title=Avenger
+Icon=Dungeon Crawling Black.jpg
+Difficulty=very hard
+Description=This evil being unleashed vicious rabbit monsters to destroy your favorite grasslands. You must return the favor!
+Deck Type=constructed
+Name=Avenger
+[Main]
+5 Dark Banishing|TMP
+5 Death Stroke|STH
+5 Diabolic Edict|TMP
+25 Kezzerdrix|TMP
+20 Swamp|TMP

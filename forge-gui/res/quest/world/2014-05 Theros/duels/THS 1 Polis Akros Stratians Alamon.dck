@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Polis: Akros: Stratians: Alamon
+Title=The Alamon
+Difficulty=easy
+Description=The Alamon (wanderers) are the forces that are always on the move about the borders of the kingdom of Akros. They are tough and rugged warriors armed for speed, so they can move and strike without warning. They are the forces who find new domains for conquering.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Akroan Hoplite|THS
+4 Akroan Horse|THS
+4 Archetype of Courage|BNG
+4 Desperate Stand|JOU
+4 Elite Skirmisher|BNG
+4 God-Favored General|BNG
+4 Labyrinth Champion|THS
+4 Messenger's Speed|THS
+11 Mountain|THS|4
+13 Plains|THS|3
+4 Satyr Hoplite|JOU

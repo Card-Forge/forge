@@ -1,0 +1,8 @@
+Name:Adriana's Valor
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+T:Mode$ Attacks | ValidCard$ Creature.NamedCard+YouCtrl | Execute$ TrigPump | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control with the chosen name attacks, you may pay {W}. If you do, that creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPump:AB$ Pump | Cost$ W | Defined$ TriggeredAttackerLKICopy | KW$ Indestructible
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nWhenever a creature you control with the chosen name attacks, you may pay {W}. If you do, that creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

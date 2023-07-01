@@ -1,0 +1,7 @@
+Name:Arcane Endeavor
+ManaCost:5 U U
+Types:Sorcery
+A:SP$ RollDice | Amount$ 2 | Sides$ 8 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Roll two d8 and choose one result. Draw cards equal to that result. Then you may cast an instant or sorcery spell with mana value less than or equal to the other result from your hand without paying its mana cost.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBPlay | StackDescription$ None
+SVar:DBPlay:DB$ Play | Valid$ Card.YouOwn | ValidSA$ Instant.cmcLEY,Sorcery.cmcLEY | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
+Oracle:Roll two d8 and choose one result. Draw cards equal to that result. Then you may cast an instant or sorcery spell with mana value less than or equal to the other result from your hand without paying its mana cost.

@@ -1,0 +1,7 @@
+Name:Circle of Dreams Druid
+ManaCost:G G G
+Types:Creature Elf Druid
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:{T}: Add {G} for each creature you control.

@@ -1,0 +1,11 @@
+Name:Moonring Mirror
+ManaCost:5
+Types:Artifact
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you draw a card, exile the top card of your library face down.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ You | DestinationZone$ Exile | ExileFaceDown$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
+SVar:TrigChangeHandExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | Imprint$ True | SubAbility$ ChangeBack
+SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsNotImprinted+ExiledWithSource+YouOwn | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+AI:RemoveDeck:All
+Oracle:Whenever you draw a card, exile the top card of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.

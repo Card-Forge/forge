@@ -1,0 +1,15 @@
+[metadata]
+Code=P06
+Date=2006-01-01
+Name=Magic Player Rewards 2006
+Type=Promo
+ScryfallCode=P06
+
+[cards]
+1 R Hypnotic Specter @Douglas Shuler
+2 R Hinder @Anthony S. Waters
+3 R Pyroclasm @Dave Dorman
+4 R Giant Growth @Joel Thomas
+5 R Putrefy @Richard Sardinha
+6 R Zombify @Alan Pollack
+7 R Lightning Helix @Kev Walker

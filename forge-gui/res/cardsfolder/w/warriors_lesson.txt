@@ -1,0 +1,8 @@
+Name:Warriors' Lesson
+ManaCost:G
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | TargetMin$ 0 | TargetMax$ 2 | Triggers$ WarriorLessonDmg | SpellDescription$ Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."
+SVar:WarriorLessonDmg:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ WarriorLessonDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:WarriorLessonDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:All
+Oracle:Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."

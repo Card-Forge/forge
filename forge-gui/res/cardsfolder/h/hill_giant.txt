@@ -1,0 +1,5 @@
+Name:Hill Giant
+ManaCost:3 R
+Types:Creature Giant
+PT:3/3
+Oracle:

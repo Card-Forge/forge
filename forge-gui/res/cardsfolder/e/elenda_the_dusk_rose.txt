@@ -1,0 +1,12 @@
+Name:Elenda, the Dusk Rose
+ManaCost:2 W B
+Types:Legendary Creature Vampire Knight
+PT:1/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME dies, create X 1/1 white Vampire creature tokens with lifelink, where X is NICKNAME's power.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
+SVar:X:TriggeredCard$CardPower
+DeckHints:Type$Vampire
+Oracle:Lifelink\nWhenever another creature dies, put a +1/+1 counter on Elenda, the Dusk Rose.\nWhen Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power.

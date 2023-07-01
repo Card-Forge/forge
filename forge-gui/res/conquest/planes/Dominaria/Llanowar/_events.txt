@@ -1,0 +1,9 @@
+Name:Shanna, Sisay's Legacy|Deck:Shanna, Sisay's Legacy.dck|Variant:Commander|Avatar:Shanna, Sisay's Legacy|Desc:
+Name:Marwyn, the Nurturer|Deck:Marwyn, the Nurturer.dck|Variant:Commander|Avatar:Marwyn, the Nurturer|Desc:
+Name:Slimefoot, the Stowaway|Deck:Slimefoot, the Stowaway.dck|Variant:Commander|Avatar:Slimefoot, the Stowaway|Desc:
+Name:Hallar, the Firefletcher|Deck:Hallar, the Firefletcher.dck|Variant:Commander|Avatar:Hallar, the Firefletcher|Desc:
+Name:Vivien Reid|Deck:Vivien Reid.dck|Variant:Planeswalker|Avatar:Vivien Reid|Desc:
+Name:Grunn, the Lonely King|Deck:Grunn, the Lonely King.dck|Variant:Commander|Avatar:Grunn, the Lonely King|Desc:
+Name:Multani, Yavimaya's Avatar|Deck:Multani, Yavimayas Avatar.dck|Variant:Commander|Avatar:Multani, Yavimaya's Avatar|Desc:
+Name:Titania|Deck:Titania.dck|Variant:Vanguard|Avatar:Titania|Desc:
+Name:Random Llanowar|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

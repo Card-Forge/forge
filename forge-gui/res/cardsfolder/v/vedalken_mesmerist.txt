@@ -1,0 +1,7 @@
+Name:Vedalken Mesmerist
+ManaCost:1 U
+Types:Creature Vedalken Wizard
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature an opponent controls gets -2/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | IsCurse$ True
+Oracle:Whenever Vedalken Mesmerist attacks, target creature an opponent controls gets -2/-0 until end of turn.

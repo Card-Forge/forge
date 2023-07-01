@@ -1,0 +1,7 @@
+Name:Minamo Scrollkeeper
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/3
+S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 1 | Description$ Your maximum hand size is increased by one.
+K:Defender
+Oracle:Defender\nYour maximum hand size is increased by one.

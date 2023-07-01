@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/03/106.RNA9_.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has 8 cards remaining in their library. Assume your opponent has one {U} available. Assume your opponent has a Swamp as their only card in hand. Assume your library cannot be emptied, and that all cards in all libraries are irrelevant to the puzzle. Remember that your solution must satisfy all possibilities for opponent decisions!
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Fiery Finish;Salvager of Secrets;Homarid Explorer;Mnemonic Betrayal;Thud
+humanlibrary=Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace
+humanbattlefield=Goblin Electromancer;Fanatical Firebrand;Jaya Ballard|Counters:LOYALTY=7;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Island;Island
+aihand=Swamp
+ailibrary=Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace;Angel of Grace
+aigraveyard=Drowned Secrets;Howling Golem;Homarid Explorer;Arclight Phoenix;Act of Treason;Millstone;Vicious Rumors;Screaming Shield;Act of Treason
+aibattlefield=Fleet Swallower;The Haunt of Hightower;Omnispell Adept;Siren Stormtamer;Nightveil Predator;Wand of Vertebrae|Tapped
+aipersistentmana=U

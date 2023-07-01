@@ -1,0 +1,11 @@
+Name:Spiteful Repossession
+ManaCost:4 R
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBTreasure | SpellDescription$ CARDNAME deals damage to each opponent who controls more lands than you equal to the difference.
+SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ Y | ConditionCheckSVar$ Y
+SVar:DBTreasure:DB$ Token | TokenAmount$ Z | TokenScript$ c_a_treasure_sac | SpellDescription$ Then create a number of Treasure tokens equal to the damage dealt this way.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:Count$Valid Land.RememberedPlayerCtrl/Minus.X
+SVar:Z:Count$TotalDamageDoneByThisTurn
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Spiteful Repossession deals damage to each opponent who controls more lands than you equal to the difference. Then create a number of Treasure tokens equal to the damage dealt this way.

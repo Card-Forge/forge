@@ -1,0 +1,6 @@
+Name:Kithkin Shielddare
+ManaCost:1 W
+Types:Creature Kithkin Soldier
+PT:1/1
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.blocking | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target blocking creature gets +2/+2 until end of turn. | TgtPrompt$ Select target blocking creature.
+Oracle:{W}, {T}: Target blocking creature gets +2/+2 until end of turn.

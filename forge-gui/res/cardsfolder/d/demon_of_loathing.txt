@@ -1,0 +1,10 @@
+Name:Demon of Loathing
+ManaCost:5 B B
+Types:Creature Demon
+PT:7/7
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Creature
+SVar:MustBeBlocked:True
+Oracle:Flying, trample\nWhenever Demon of Loathing deals combat damage to a player, that player sacrifices a creature.

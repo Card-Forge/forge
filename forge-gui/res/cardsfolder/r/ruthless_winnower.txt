@@ -1,0 +1,10 @@
+Name:Ruthless Winnower
+ManaCost:3 B B
+Types:Creature Elf Rogue
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a non-Elf creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.nonElf | Defined$ TriggeredPlayer
+AI:RemoveDeck:Random
+DeckHints:Type$Elf
+DeckHas:Ability$Sacrifice
+Oracle:At the beginning of each player's upkeep, that player sacrifices a non-Elf creature.

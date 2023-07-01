@@ -1,0 +1,5 @@
+Name:Isamaru, Hound of Konda
+ManaCost:W
+Types:Legendary Creature Dog
+PT:2/2
+Oracle:

@@ -1,0 +1,7 @@
+Name:Mindslicer
+ManaCost:2 B B
+Types:Creature Horror
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, each player discards their hand.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | Mode$ Hand
+Oracle:When Mindslicer dies, each player discards their hand.

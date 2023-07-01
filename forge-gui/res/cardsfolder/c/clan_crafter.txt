@@ -1,0 +1,11 @@
+Name:Clan Crafter
+ManaCost:1 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddAbility$ SacArt | Description$ Commander creatures you own have "{2}, Sacrifice an artifact: Put a +1/+1 counter on this creature and draw a card."
+SVar:SacArt:AB$ PutCounter | Cost$ 2 Sac<1/Artifact> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a +1/+1 counter on this creature and draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice|Counters
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "{2}, Sacrifice an artifact: Put a +1/+1 counter on this creature and draw a card."

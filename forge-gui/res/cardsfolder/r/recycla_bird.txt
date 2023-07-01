@@ -1,0 +1,9 @@
+Name:Recycla-bird
+ManaCost:U
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put a flying counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ Flying | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Recycla-bird dies, put a flying counter on target creature you control.

@@ -1,0 +1,6 @@
+Name:Rix Maadi, Dungeon Palace
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Discard | Cost$ 1 B R T | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SorcerySpeed$ True | SpellDescription$ Each player discards a card. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{1}{B}{R}, {T}: Each player discards a card. Activate only as a sorcery.

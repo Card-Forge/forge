@@ -1,0 +1,10 @@
+Name:Cabaretti Revels
+ManaCost:R R G
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ Whenever you cast a creature spell, seek a creature card with lesser mana value, then put it onto the battlefield.
+SVar:TrigSeek:DB$ Seek | Type$ Creature.cmcLTX | RememberFound$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+SVar:BuffedBy:Creature
+Oracle:Whenever you cast a creature spell, seek a creature card with lesser mana value, then put it onto the battlefield.

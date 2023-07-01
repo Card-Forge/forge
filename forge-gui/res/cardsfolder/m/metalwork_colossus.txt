@@ -1,0 +1,10 @@
+Name:Metalwork Colossus
+ManaCost:11
+Types:Artifact Creature Construct
+PT:10/10
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control.
+A:AB$ ChangeZone | Cost$ Sac<2/Artifact> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+SVar:DiscardMe:1
+SVar:X:Count$Valid Artifact.nonCreature+YouCtrl$SumCMC
+SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ1,Artifact.cmcEQ2
+Oracle:This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control.\nSacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.

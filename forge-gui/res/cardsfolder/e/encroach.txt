@@ -1,0 +1,5 @@
+Name:Encroach
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Land.nonBasic | DiscardValidDesc$ nonbasic land | SpellDescription$ Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.
+Oracle:Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.

@@ -1,0 +1,8 @@
+Name:Candlelit Cavalry
+ManaCost:4 G
+Types:Creature Human Knight
+PT:5/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPump | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, CARDNAME gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Trample
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Candlelit Cavalry gains trample until end of turn.

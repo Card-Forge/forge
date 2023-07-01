@@ -1,0 +1,10 @@
+Name:Kira, Great Glass-Spinner
+ManaCost:1 U U
+Types:Legendary Creature Spirit
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ KiraGlassSpinnerTrig | AddSVar$ KiraGlassSpinnerCounter & Targeting | Description$ Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability."
+SVar:KiraGlassSpinnerTrig:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | FirstTime$ True | Execute$ KiraGlassSpinnerCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability for the first time each turn, counter that spell or ability.
+SVar:KiraGlassSpinnerCounter:DB$ Counter | Defined$ TriggeredSourceSA
+SVar:Targeting:Counter
+Oracle:Flying\nCreatures you control have "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability."

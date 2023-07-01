@@ -1,0 +1,50 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Core Set 2019 Welcome Deck (BG)
+Description=As a black mage, you seek power at any price. Every advantage comes at a cost, and you will sacrifice whatever is necessary to control the forces of death and darkness. Boundless ambition drives you to victory!
+Deck Type=constructed
+Set=M19
+Image=m19_black.jpg
+[Main]
+1 Aggressive Mammoth|M19
+1 Bogstomper|M19
+1 Bristling Boar|M19
+1 Centaur Courser|M19
+1 Colossal Dreadmaw|M19
+1 Diregraf Ghoul|M19
+3 Forest|M19|1
+3 Forest|M19|2
+3 Forest|M19|3
+4 Forest|M19|4
+1 Ghastbark Twins|M19
+1 Giant Spider|M19
+1 Grasping Scoundrel|M19
+1 Gravedigger|M19
+1 Gravewaker|M19
+1 Highland Game|M19
+1 Infernal Scarring|M19
+1 Lich's Caress|M19
+2 Llanowar Elves|M19
+1 Murder|M19
+1 Oakenform|M19
+1 Plummet|M19
+1 Rabid Bite|M19
+1 Skeleton Archer|M19
+1 Skymarch Bloodletter|M19
+1 Sovereign's Bite|M19
+2 Strangling Spores|M19
+3 Swamp|M19|1
+3 Swamp|M19|2
+3 Swamp|M19|3
+4 Swamp|M19|4
+1 Tattered Mummy|M19
+1 Thornhide Wolves|M19
+2 Titanic Growth|M19
+1 Ursine Champion|M19
+1 Vampire Sovereign|M19
+2 Walking Corpse|M19
+1 Wall of Vines|M19

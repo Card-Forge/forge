@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Radioactive Man 4
+Title=Radioactive Man
+Difficulty=very hard
+Description=WR Sneak Attack deck
+Icon=Radioactive Man.jpg
+Deck Type=constructed
+[main]
+4 Arid Mesa
+4 Plateau
+4 Scalding Tarn
+4 Flooded Strand
+1 Plains|M12
+1 Mountain|M12
+1 Mox Jet
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+4 Sneak Attack
+4 Idyllic Tutor
+4 Lightning Bolt
+4 Lightning Helix
+4 Swords to Plowshares
+1 Ajani Vengeant
+4 Wrath of God
+1 Day of Judgment
+4 Emrakul, the Aeons Torn
+1 It That Betrays
+1 Kozilek, Butcher of Truth
+3 Ulamog, the Infinite Gyre
+1 Nicol Bolas
+1 Woodfall Primus
+[sideboard]

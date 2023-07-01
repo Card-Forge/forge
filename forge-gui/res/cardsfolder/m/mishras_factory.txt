@@ -1,0 +1,9 @@
+Name:Mishra's Factory
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Assembly-Worker | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select target Assembly-Worker creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target Assembly-Worker creature gets +1/+1 until end of turn.
+DeckHas:Type$Artifact|Assembly-Worker
+DeckHints:Type$Assembly-Worker
+Oracle:{T}: Add {C}.\n{1}: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.\n{T}: Target Assembly-Worker creature gets +1/+1 until end of turn.

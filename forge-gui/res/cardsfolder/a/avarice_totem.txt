@@ -1,0 +1,6 @@
+Name:Avarice Totem
+ManaCost:1
+Types:Artifact
+A:AB$ ExchangeControl | Cost$ 5 | Defined$ Self | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Exchange control of CARDNAME and target nonland permanent.
+AI:RemoveDeck:All
+Oracle:{5}: Exchange control of Avarice Totem and target nonland permanent.

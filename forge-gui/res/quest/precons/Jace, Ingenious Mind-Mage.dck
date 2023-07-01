@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Jace, Ingenious Mind-Mage
+Description=Outwit your opponent with deception and elusive mind magic.
+Deck Type=constructed
+Set=XLN
+Image=jace_ingenious_mind_mage.jpg
+[Main]
+1 Herald of Secret Streams|XLN
+1 Fleet Swallower|XLN
+2 Kumena's Speaker|XLN
+2 Jungle Delver|XLN
+2 Deeproot Warrior|XLN
+3 Jace's Sentinel|XLN
+2 Shaper Apprentice|XLN
+2 Vineshaper Mystic|XLN
+2 Shapers of Nature|XLN
+2 Jade Guardian|XLN
+2 Headwater Sentries|XLN
+1 Tempest Caller|XLN
+2 Air Elemental|XLN
+2 Grasping Current|XLN
+3 River Heralds' Boon|XLN
+4 Castaway's Despair|XLN
+4 Woodland Stream|XLN
+11 Forest|XLN
+11 Island|XLN
+1 Jace, Ingenious Mind-Mage+|XLN

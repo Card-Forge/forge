@@ -1,0 +1,6 @@
+Name:Ramses Overdark
+ManaCost:2 U U B B
+Types:Legendary Creature Human Assassin
+PT:4/3
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.enchanted | TgtPrompt$ Select target enchanted creature | SpellDescription$ Destroy target enchanted creature.
+Oracle:{T}: Destroy target enchanted creature.

@@ -1,0 +1,18 @@
+Name:Xathrid Demon
+ManaCost:3 B B B
+Types:Creature Demon
+PT:7/7
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap CARDNAME and you lose 7 life.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | RememberSacrificed$ True | SubAbility$ DBLoseLifeOpp
+SVar:DBLoseLifeOpp:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBLoseLifeYou
+SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ 7 | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardPower
+SVar:Y:Remembered$Amount
+SVar:NeedsToPlayVar:Z GE6
+SVar:Z:Count$Valid Creature.YouCtrl
+AI:RemoveDeck:Random
+Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Xathrid Demon, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap Xathrid Demon and you lose 7 life.

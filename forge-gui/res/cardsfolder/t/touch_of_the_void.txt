@@ -1,0 +1,7 @@
+Name:Touch of the Void
+ManaCost:2 R
+Types:Sorcery
+K:Devoid
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Devoid (This card has no color.)\nTouch of the Void deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.

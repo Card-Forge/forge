@@ -1,0 +1,6 @@
+Name:Huang Zhong, Shu General
+ManaCost:2 W W
+Types:Legendary Creature Human Soldier
+PT:2/3
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+Oracle:Huang Zhong, Shu General can't be blocked by more than one creature.

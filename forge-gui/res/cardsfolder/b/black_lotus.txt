@@ -1,0 +1,6 @@
+Name:Black Lotus
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | SpellDescription$ Add three mana of any one color.
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Sacrifice Black Lotus: Add three mana of any one color.

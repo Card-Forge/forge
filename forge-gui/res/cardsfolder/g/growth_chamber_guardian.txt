@@ -1,0 +1,10 @@
+Name:Growth-Chamber Guardian
+ManaCost:1 G
+Types:Creature Elf Crab Warrior
+PT:2/2
+K:Adapt:2:2 G
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, you may search your library for a card named Growth-Chamber Guardian, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedGrowth-Chamber Guardian | ChangeNum$ 1 | ShuffleNonMandatory$ True
+DeckHints:Name$Growth-Chamber Guardian
+DeckHas:Ability$Counters
+Oracle:{2}{G}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nWhenever one or more +1/+1 counters are put on Growth-Chamber Guardian, you may search your library for a card named Growth-Chamber Guardian, reveal it, put it into your hand, then shuffle.

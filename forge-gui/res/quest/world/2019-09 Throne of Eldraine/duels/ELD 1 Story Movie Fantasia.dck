@@ -1,0 +1,21 @@
+[metadata]
+Title=Movie: Fantasia
+Difficulty=easy
+Description=Disney's 1940 animated feature film.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 Story: Movie: Phantasia
+[Main]
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Folio of Fancies|ELD|1
+4 Gadwick, the Wizened|ELD|1
+4 Hushbringer|ELD|1
+13 Island|ELD|4
+4 Lonesome Unicorn|ELD|1
+4 Mysterious Pathlighter|ELD
+4 Overwhelmed Apprentice|ELD
+11 Plains|ELD|2
+4 Sorcerer's Broom|ELD
+[Sideboard]
+4 Into the Story|ELD

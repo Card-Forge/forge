@@ -1,0 +1,5 @@
+Name:Trained Orgg
+ManaCost:6 R
+Types:Creature Orgg
+PT:6/6
+Oracle:

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Nature's Diversity
+Icon=Dungeon Crawling Green.jpg
+Difficulty=easy
+Description=Green creature deck with all sorts of creatures.
+Deck Type=constructed
+Name=Nature
+[Main]
+4 Apes of Rath|TMP
+4 Charging Rhino|TMP
+7 Forest|TMP|1
+4 Forest|TMP|2
+7 Forest|TMP|3
+5 Forest|TMP|4
+1 Horned Sliver|TMP
+2 Mirri, Cat Warrior|EXO
+3 Mongrel Pack|TMP
+4 Muscle Sliver|TMP
+1 Plated Rootwalla|EXO
+2 Rabid Wolverines|EXO
+2 Skyshroud Archer|STH
+2 Skyshroud Elite|EXO
+2 Spike Weaver|EXO
+2 Spined Wurm|STH
+4 Trained Armodon|TMP
+4 Wall of Blossoms|STH

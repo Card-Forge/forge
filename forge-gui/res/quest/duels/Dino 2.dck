@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Dino 2
+Title=Dino
+Difficulty=medium
+Description=Mono brown affinity deck with Affinity for artifacts, Metalcraft and Modular cards
+Icon=Dino.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+1 Tomb of the Spirit Dragon
+1 Steel Wall
+1 Mycosynth Golem
+3 Frogmite
+3 Ancient Den
+1 Tanglebloom
+1 Defense Grid
+3 Seat of the Synod
+1 Darksteel Axe
+1 Shuko
+1 Ornithopter
+1 Tooth of Chiss-Goria
+3 Vault of Whispers
+1 Scale of Chiss-Goria
+2 Metallic Sliver
+1 Arcbound Slith
+1 Shield Sphere
+1 Alpha Myr
+4 Darksteel Citadel
+1 Arcbound Stinger
+1 Lodestone Golem
+2 Myr Enforcer
+1 Phyrexian Walker
+3 Great Furnace
+1 Skullclamp
+3 Tree of Tales
+4 Arcbound Worker
+1 Tablet of Epityr
+1 Brass Gnat
+1 Steel Overseer
+1 Myr Moonvessel
+1 Hovermyr
+1 Chrome Steed
+2 Snapsail Glider
+1 Rusted Relic
+1 Razorfield Rhino
+1 Ugin's Construct
+1 Chief of the Foundry
+1 Ramroller
+[sideboard]

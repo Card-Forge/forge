@@ -1,0 +1,8 @@
+Name:Nahiri's Machinations
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target blocking creature.
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.\n{1}{R}: Nahiri's Machinations deals 1 damage to target blocking creature.

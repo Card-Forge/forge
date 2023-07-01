@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Murderous Rider
+OpponentName=The Riders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Murderous Rider
+Difficulty=medium
+Description="And I looked, and behold a pale horse: and his name that sat on him was Death, and Hell followed with him."\n-The Bible, Revelation 6:8
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Murderous Rider
+[Main]
+30 Murderous Rider|ELD|2
+30 Swamp|ELD|1

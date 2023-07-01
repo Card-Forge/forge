@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=DRK 3 Strategy: Goblins
+Title=Goblins
+Difficulty=hard
+Description=They attack in an orgy of rage and madness, but only one seemed as focused on killing us as the sheer joy of battle.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Ball Lightning|DRK
+4 Eternal Flame|DRK
+4 Fissure|DRK
+4 Goblin Caves|DRK
+4 Goblin Digging Team|DRK
+4 Goblin Hero|DRK
+4 Goblin Shrine|DRK
+4 Goblin Wizard|DRK
+4 Goblins of the Flarg|DRK
+24 Mountain|LEB|3

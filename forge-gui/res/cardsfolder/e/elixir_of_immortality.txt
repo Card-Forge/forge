@@ -1,0 +1,9 @@
+Name:Elixir of Immortality
+ManaCost:1
+Types:Artifact
+A:AB$ GainLife | Cost$ 2 T | LifeAmount$ 5 | SubAbility$ DBShuffleElixir | SpellDescription$ You gain 5 life. Shuffle CARDNAME and your graveyard into their owner's library. | StackDescription$ SpellDescription
+SVar:DBShuffleElixir:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ False | RememberChanged$ True | Defined$ Self | SubAbility$ DBShuffleGrave | StackDescription$ None
+SVar:DBShuffleGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Library | Shuffle$ False | RememberChanged$ True | ChangeType$ Card.YouCtrl | SubAbility$ DBShuffleChanged | StackDescription$ None
+SVar:DBShuffleChanged:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{2}, {T}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.

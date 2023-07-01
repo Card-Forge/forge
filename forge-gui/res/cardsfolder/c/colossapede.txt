@@ -1,0 +1,5 @@
+Name:Colossapede
+ManaCost:4 G
+Types:Creature Insect
+PT:5/5
+Oracle:

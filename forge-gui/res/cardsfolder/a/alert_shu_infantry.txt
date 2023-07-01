@@ -1,0 +1,6 @@
+Name:Alert Shu Infantry
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

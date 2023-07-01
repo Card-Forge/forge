@@ -1,0 +1,8 @@
+Name:Chief of the Scale
+ManaCost:W B
+Types:Creature Human Warrior
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.Warrior+Other+YouCtrl | AddToughness$ 1 | Description$ Other Warrior creatures you control get +0/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Warrior
+Oracle:Other Warrior creatures you control get +0/+1.

@@ -1,0 +1,11 @@
+Name:Covenant of Minds
+ManaCost:4 U
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ 3 | NoPeek$ True | SubAbility$ DBChoice | RememberRevealed$ True | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If they don't, put those cards into your graveyard and draw five cards.
+SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CovenantPutIntoHand,CovenantMillDraw | SubAbility$ DBCleanup
+SVar:CovenantPutIntoHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SpellDescription$ You may choose to put those cards into that player's hand.
+SVar:CovenantMillDraw:DB$ Mill | Defined$ SourceController | NumCards$ X | SubAbility$ DBDraw | SpellDescription$ If you don't, put those cards into that player's graveyard and that player draws five cards.
+SVar:DBDraw:DB$ Draw | Defined$ SourceController | NumCards$ 5
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+Oracle:Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If they don't, put those cards into your graveyard and draw five cards.

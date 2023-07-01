@@ -1,0 +1,11 @@
+Name:Shalai's Acolyte
+ManaCost:4 W
+Types:Creature Angel
+PT:3/4
+K:Kicker:1 G
+K:Flying
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+DeckHas:Ability$Counters
+DeckHints:Color$Green
+Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nFlying\nIf Shalai's Acolyte was kicked, it enters the battlefield with two +1/+1 counters on it.

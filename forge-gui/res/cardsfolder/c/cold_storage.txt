@@ -1,0 +1,8 @@
+Name:Cold Storage
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SpellDescription$ Exile target creature you control.
+A:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ChangeType$ Creature.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SpellDescription$ Return each creature card exiled with CARDNAME to the battlefield under your control.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:{3}: Exile target creature you control.\nSacrifice Cold Storage: Return each creature card exiled with Cold Storage to the battlefield under your control.

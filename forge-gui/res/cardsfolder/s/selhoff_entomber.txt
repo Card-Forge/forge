@@ -1,0 +1,7 @@
+Name:Selhoff Entomber
+ManaCost:1 U
+Types:Creature Zombie
+PT:1/3
+A:AB$ Draw | Cost$ T Discard<1/Creature/creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Discard
+Oracle:{T}, Discard a creature card: Draw a card.

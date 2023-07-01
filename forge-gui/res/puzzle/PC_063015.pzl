@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 063015 - Turning the Wurm
+URL:http://www.gatheringmagic.com/seanuy-063015-turning-the-wurm/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win on this turn. Opponent has Debt to the Deathless on top of the library.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=5
+AILife=8
+humanhand=Emerald Charm; Hornet Sting; Mercy Killing; Pouncing Wurm; Argothian Wurm
+humanbattlefield=Forest|Set:ZEN; Forest|Set:ZEN; Forest|Set:ZEN; Forest|Set:ZEN; Forest|Set:ZEN; Mistveil Plains; Sunpetal Grove; Pelakka Wurm|Id:420; Novablast Wurm; Symbiotic Wurm; Cream of the Crop; Urza's Incubator|ChosenType:Wurm; Jar of Eyeballs; Heartbeat of Spring
+humangraveyard=Ravaging Riftwurm
+humanlibrary=Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN;Forest|Set:ZEN
+aibattlefield=Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Swamp|Set:ZEN; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Swamp|Set:ZEN|Tapped; Pillory of the Sleepless|AttachedTo:420; t:Soldier,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Soldier,Keywords:,Image:w_1_1_soldier_m13; t:Soldier,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Soldier,Keywords:,Image:w_1_1_soldier_m13; Pentarch Ward|ChosenColor:white|AttachedTo:422; Peacekeeper|Id:422; Seizan, Perverter of Truth; Mobilization; Baneful Omen
+aihand=
+aigraveyard=
+ailibrary=Debt to the Deathless
+aiexile=Obzedat, Ghost Council

@@ -1,0 +1,6 @@
+Name:Tapestry of the Ages
+ManaCost:4
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | CheckSVar$ CastTest | SVarCompare$ GE1 | SpellDescription$ Draw a card. Activate only if you've cast a noncreature spell this turn.
+SVar:CastTest:Count$ThisTurnCast_Card.YouCtrl+nonCreature
+Oracle:{2}, {T}: Draw a card. Activate only if you've cast a noncreature spell this turn.

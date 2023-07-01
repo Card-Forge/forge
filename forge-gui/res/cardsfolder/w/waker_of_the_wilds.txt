@@ -1,0 +1,8 @@
+Name:Waker of the Wilds
+ManaCost:2 G G
+Types:Creature Merfolk Shaman
+PT:3/3
+A:AB$ PutCounter | Cost$ X G G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAnimate | SpellDescription$ Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Keywords$ Haste | Duration$ Permanent
+SVar:X:Count$xPaid
+Oracle:{X}{G}{G}: Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land.

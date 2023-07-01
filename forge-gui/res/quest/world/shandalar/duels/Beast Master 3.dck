@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Beast Master 3
+Title=Beast Master
+Difficulty=hard
+Description=Creature-heavy Green aggro deck
+Icon=Beastmaster.jpg
+Deck Type=constructed
+[main]
+4 Aspect of Wolf|LEB
+3 Barbary Apes|LEG
+2 Birds of Paradise|2ED
+2 Desert Twister|4ED
+2 Durkwood Boars|4ED
+21 Forest|2ED
+2 Giant Badger|8ED
+3 Giant Growth|2ED
+2 Giant Spider|2ED
+2 Giant Turtle|LEG
+2 Grizzly Bears|2ED
+1 Hornet Cobra|LEG
+2 Killer Bees|LEG
+2 Land Leeches|DRK
+2 Lurker|DRK
+2 Moss Monster|LEG
+2 Untamed Wilds|4ED
+2 Web|LEB
+1 War Mammoth|2ED
+1 Wyluli Wolf|ARN
+[sideboard]

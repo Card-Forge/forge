@@ -1,0 +1,11 @@
+Name:Briar Hydra
+ManaCost:5 G
+Types:Creature Plant Hydra
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBCounter | TriggerZones$ Battlefield | TriggerDescription$ Domain — Whenever CARDNAME deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.
+SVar:DBCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature.YouCtrl
+SVar:X:Count$Domain
+DeckHas:Ability$Counters
+AI:RemoveDeck:Random (
+Oracle:Trample\nDomain — Whenever Briar Hydra deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.

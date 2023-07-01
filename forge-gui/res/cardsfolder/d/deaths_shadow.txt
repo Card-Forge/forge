@@ -1,0 +1,8 @@
+Name:Death's Shadow
+ManaCost:B
+Types:Creature Avatar
+PT:13/13
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -X/-X, where X is your life total.
+SVar:X:Count$YourLifeTotal
+SVar:NeedsToPlayVar:X LE12
+Oracle:Death's Shadow gets -X/-X, where X is your life total.

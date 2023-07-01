@@ -1,0 +1,7 @@
+Name:Kjeldoran Frostbeast
+ManaCost:3 G W
+Types:Creature Elemental Beast
+PT:2/4
+T:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy all creatures blocking or blocked by CARDNAME.
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource
+Oracle:At end of combat, destroy all creatures blocking or blocked by Kjeldoran Frostbeast.

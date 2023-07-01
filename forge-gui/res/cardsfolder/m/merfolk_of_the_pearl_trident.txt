@@ -1,0 +1,5 @@
+Name:Merfolk of the Pearl Trident
+ManaCost:U
+Types:Creature Merfolk
+PT:1/1
+Oracle:

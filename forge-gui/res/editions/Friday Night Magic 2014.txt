@@ -1,0 +1,20 @@
+[metadata]
+Code=F14
+Date=2014-01-01
+Name=Friday Night Magic 2014
+Type=Promo
+ScryfallCode=F14
+
+[cards]
+1 R Warleader's Helix @Wesley Burt
+2 R Elvish Mystic @Winona Nelson
+3 R Banisher Priest @James Zapata
+4 R Encroaching Wastes @Richard Wright
+5 R Tormented Hero @Wesley Burt
+6 R Dissolve @Jeff Simpson
+7 R Magma Spray @Mathias Kollros
+8 R Bile Blight @Nils Hamm
+9 R Banishing Light @Wesley Burt
+10 R Fanatic of Xenagos @Zoltan Boros
+11 R Brain Maggot @Dave Kendall
+12 R Stoke the Flames @Mathias Kollros

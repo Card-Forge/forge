@@ -1,0 +1,6 @@
+Name:Leonin Abunas
+ManaCost:3 W
+Types:Creature Cat Cleric
+PT:2/5
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Hexproof | Description$ Artifacts you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
+Oracle:Artifacts you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)

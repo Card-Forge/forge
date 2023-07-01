@@ -1,0 +1,8 @@
+Name:Thrull Champion
+ManaCost:4 B
+Types:Creature Thrull
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Thrull | AddPower$ 1 | AddToughness$ 1 | Description$ Thrull creatures get +1/+1.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Thrull | TgtPrompt$ Select target Thrull | LoseControl$ LoseControl,LeavesPlay | SpellDescription$ Gain control of target Thrull for as long as you control CARDNAME.
+AI:RemoveDeck:Random
+Oracle:Thrull creatures get +1/+1.\n{T}: Gain control of target Thrull for as long as you control Thrull Champion.

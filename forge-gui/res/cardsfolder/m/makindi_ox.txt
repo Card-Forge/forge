@@ -1,0 +1,8 @@
+Name:Makindi Ox
+ManaCost:4 W
+Types:Creature Ox
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+SVar:BuffedBy:Land
+Oracle:Landfall — Whenever a land enters the battlefield under your control, tap target creature an opponent controls.

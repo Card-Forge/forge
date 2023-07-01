@@ -1,0 +1,9 @@
+Name:Shah of Naar Isle
+ManaCost:3 R
+Types:Creature Efreet
+PT:6/6
+K:Trample
+K:Echo:0
+T:Mode$ PayEcho | ValidCard$ Card.Self | Paid$ True | Execute$ TrigDraw | TriggerDescription$ When CARDNAME's echo cost is paid, each opponent may draw up to three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ Player.Opponent | Upto$ True | NumCards$ 3 | AILogic$ OptionalDraw
+Oracle:Trample\nEcho {0} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Shah of Naar Isle's echo cost is paid, each opponent may draw up to three cards.

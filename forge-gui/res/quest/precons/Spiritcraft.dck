@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spiritcraft
+Description=Each kami in the spirit world is in tune with each other kami, their energies flowing together in an arcane magical dance. The "spiritcraft" and splice mechanics feed off that energy, generating mind-blowing effects for little cost.
+Deck Type=constructed
+Set=BOK
+Image=spiritcraft.jpg
+[main]
+1 Otherworldly Journey|CHK
+1 Orbweaver Kumo|CHK
+1 Wear Away|CHK
+2 Blessed Breath|CHK
+1 Oyobi, Who Split the Heavens|BOK
+1 Kodama of the Center Tree|BOK
+2 Faithful Squire|BOK
+2 Petalmane Baku|BOK
+1 Kami of Tattered Shoji|BOK
+2 Terashi's Verdict|BOK
+2 Waxmane Baku|BOK
+1 Budoka Pupil|BOK
+2 Scaled Hulk|BOK
+2 Loam Dweller|BOK
+2 Vital Surge|BOK
+1 Traproot Kami|BOK
+1 Roar of Jukai|BOK
+2 Unchecked Growth|BOK
+2 Lantern Kami|CHK
+10 Plains|CHK
+14 Forest|CHK
+3 Kami of the Hunt|CHK
+2 Horizon Seed|CHK
+2 Kodama's Might|CHK
+[sideboard]

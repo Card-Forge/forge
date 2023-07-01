@@ -1,0 +1,8 @@
+Name:Takeno's Cavalry
+ManaCost:3 W
+Types:Creature Human Samurai Archer
+PT:1/1
+K:Bushido:1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Spirit.attacking,Spirit.blocking | TgtPrompt$ Select target attacking or blocking Spirit | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking Spirit.
+AI:RemoveDeck:Random
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{T}: Takeno's Cavalry deals 1 damage to target attacking or blocking Spirit.

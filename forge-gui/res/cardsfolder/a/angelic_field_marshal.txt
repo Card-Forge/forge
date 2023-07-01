@@ -1,0 +1,10 @@
+Name:Angelic Field Marshal
+ManaCost:2 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Description$ Lieutenant — As long as you control your commander, CARDNAME gets +2/+2 and creatures you control have vigilance.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.IsCommander+YouOwn+YouCtrl
+SVar:BuffedBy:Card.IsCommander
+AI:RemoveDeck:NonCommander
+Oracle:Flying\nLieutenant — As long as you control your commander, Angelic Field Marshal gets +2/+2 and creatures you control have vigilance.

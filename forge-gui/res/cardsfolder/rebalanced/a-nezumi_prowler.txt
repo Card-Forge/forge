@@ -1,0 +1,9 @@
+Name:A-Nezumi Prowler
+ManaCost:1 B
+Types:Artifact Creature Rat Ninja
+PT:3/1
+K:Ninjutsu:1 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a deathtouch counter and a lifelink counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterTypes$ Deathtouch,Lifelink | CounterNum$ 1
+DeckHas:Ability$Counters|LifeGain
+Oracle:Ninjutsu {1}{B}\nWhen Nezumi Prowler enters the battlefield, put a deathtouch counter and a lifelink counter on target creature you control.

@@ -1,0 +1,8 @@
+Name:Tar Pit Warrior
+ManaCost:2 B
+Types:Creature Cyclops Warrior
+PT:3/4
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+SVar:Targeting:Dies
+Oracle:When Tar Pit Warrior becomes the target of a spell or ability, sacrifice it.

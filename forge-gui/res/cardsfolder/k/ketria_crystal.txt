@@ -1,0 +1,6 @@
+Name:Ketria Crystal
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G U R | SpellDescription$ Add {G}, {U}, {R}.
+K:Cycling:2
+Oracle:{T}: Add {G}, {U}, or {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)

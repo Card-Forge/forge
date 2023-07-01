@@ -1,0 +1,8 @@
+Name:Brink of Madness
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigSacDiscard | TriggerDescription$ At the beginning of your upkeep, if you have no cards in hand, sacrifice CARDNAME and target opponent discards their hand.
+SVar:TrigSacDiscard:DB$ Sacrifice | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to discard their hand | Mode$ Hand
+SVar:NonStackingEffect:True
+Oracle:At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards their hand.

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Vantress Gargoyle
+OpponentName=The Gargoyles
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Vantress Gargoyle
+Difficulty=medium
+Description="Take it from an old spectator. Life's not a spectator sport. If watchin' is all you're gonna do, then you're gonna watch your life go by without ya."\n-Laverne the Gargoyle, Disney's 1996 animated feature film Hunchback of the Notre Dame
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD Challenge: Vantress Gargoyle
+[Main]
+30 Castle Vantress|ELD|2
+30 Vantress Gargoyle|ELD|2

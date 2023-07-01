@@ -1,0 +1,8 @@
+Name:Mirrorwing Dragon
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | IsSingleTarget$ True | TargetsValid$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery spell that targets only CARDNAME, that player copies that spell for each other creature they control that the spell could target. Each copy targets a different one of those creatures.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ TriggeredActivator | CopyForEachCanTarget$ Creature.ControlledBy TriggeredActivator
+Oracle:Flying\nWhenever a player casts an instant or sorcery spell that targets only Mirrorwing Dragon, that player copies that spell for each other creature they control that the spell could target. Each copy targets a different one of those creatures.

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Brazen Borrower
+OpponentName=The Borrowers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Brazen Borrower
+Difficulty=medium
+Description="Human beans are for Borrowers--like bread's for butter!"\n-Arrietty, Mary Norton's The Borrowers
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD Challenge: Brazen Borrower
+[Main]
+30 Brazen Borrower|ELD|2
+30 Island|ELD|1

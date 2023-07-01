@@ -1,0 +1,8 @@
+Name:Unstable Frontier
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land you control becomes the basic land type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{T}: Target land you control becomes the basic land type of your choice until end of turn.

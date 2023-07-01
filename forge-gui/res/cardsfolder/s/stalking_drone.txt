@@ -1,0 +1,8 @@
+Name:Stalking Drone
+ManaCost:1 G
+Types:Creature Eldrazi Drone
+PT:2/2
+K:Devoid
+A:AB$ Pump | Cost$ C | NumAtt$ +1 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{C}: Stalking Drone gets +1/+2 until end of turn. Activate only once each turn. ({C} represents colorless mana.)

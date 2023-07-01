@@ -1,0 +1,8 @@
+Name:Blood Funnel
+ManaCost:1 B
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Noncreature spells you cast cost {2} less to cast.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You
+AI:RemoveDeck:Random
+Oracle:Noncreature spells you cast cost {2} less to cast.\nWhenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.

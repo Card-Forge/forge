@@ -1,0 +1,9 @@
+Name:Liliana's Scrounger
+ManaCost:2 B
+Types:Creature Human Wizard
+PT:3/2
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control.
+SVar:TrigPutCounter:DB$ PutCounter | Choices$ Planeswalker.Liliana+YouCtrl | CounterType$ LOYALTY | CounterNum$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckNeeds:Type$Liliana
+Oracle:At the beginning of each end step, if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control.

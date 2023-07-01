@@ -1,0 +1,6 @@
+Name:Red Cliffs Armada
+ManaCost:4 U
+Types:Creature Human Soldier
+PT:5/4
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+Oracle:Red Cliffs Armada can't attack unless defending player controls an Island.

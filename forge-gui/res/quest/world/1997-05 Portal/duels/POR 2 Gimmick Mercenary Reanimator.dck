@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Mercenary Reanimator
+Title=Mercenary Reanimator
+Difficulty=medium
+Description="Nothing can stop the power of life—not even death." -Onean cleric
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Archangel|POR
+4 Assassin's Blade|POR
+4 Breath of Life|POR
+4 Ebon Dragon|POR
+4 Hand of Death|POR|2
+4 Mercenary Knight|POR
+4 Path of Peace|POR
+13 Plains|POR|2
+11 Swamp|POR|2
+4 Temporary Truce|POR
+4 Wrath of God|POR

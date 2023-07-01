@@ -1,0 +1,8 @@
+Name:Mistblade Shinobi
+ManaCost:2 U
+Types:Creature Human Ninja
+PT:1/1
+K:Ninjutsu:U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigBounce | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may return target creature that player controls to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Choose target creature your opponent controls. | Origin$ Battlefield | Destination$ Hand
+Oracle:Ninjutsu {U} ({U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Mistblade Shinobi deals combat damage to a player, you may return target creature that player controls to its owner's hand.

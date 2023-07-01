@@ -1,0 +1,12 @@
+Name:Indulgent Aristocrat
+ManaCost:B
+Types:Creature Vampire Noble
+PT:1/1
+K:Lifelink
+A:AB$ PutCounterAll | Cost$ 2 Sac<1/Creature/creature> | ValidCards$ Vampire.YouCtrl | ValidCardsDesc$ Vampire you control | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Vampire you control.
+SVar:AIPreference:SacCost$Creature.token+nonVampire,Creature.nonVampire+cmcEQ1,Creature.nonVampire+cmcEQ2+powerLE1
+DeckHas:Ability$LifeGain|Counters|Sacrifice
+DeckHints:Type$Vampire
+# TODO: improve the logic when the AI wants to sac creatures
+AI:RemoveDeck:Random
+Oracle:Lifelink\n{2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control.

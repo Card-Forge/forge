@@ -1,0 +1,134 @@
+[metadata]
+Code=STA
+Date=2021-04-23
+Name=Strixhaven Mystical Archive
+Type=Collector_Edition
+ScryfallCode=STA
+
+[cards]
+1 M Approach of the Second Sun @Minttu Hynninen
+2 M Day of Judgment @Anato Finnstark
+3 U Defiant Strike @Dominik Mayer
+4 U Divine Gambit @Matthew G. Lewis
+5 R Ephemerate @Rovina Cai
+6 R Gift of Estates @Justin Hernandez & Alexis Hernandez
+7 R Gods Willing @Dominik Mayer
+8 R Mana Tithe @Robbie Trevino
+9 U Revitalize @Justin Hernandez & Alexis Hernandez
+10 R Swords to Plowshares @Mark Tedin
+11 M Teferi's Protection @Minttu Hynninen
+12 M Blue Sun's Zenith @Dominik Mayer
+13 R Brainstorm @Justin Hernandez & Alexis Hernandez
+14 R Compulsive Research @Kristina Collantes
+15 R Counterspell @Olena Richards
+16 R Memory Lapse @Kristina Collantes
+17 M Mind's Desire @Minttu Hynninen
+18 U Negate @Dominik Mayer
+19 U Opt @Kristina Collantes
+20 U Strategic Planning @Robbie Trevino
+21 R Tezzeret's Gambit @Jason Felix
+22 M Time Warp @Dominik Mayer
+23 U Whirlwind Denial @Anato Finnstark
+24 U Agonizing Remorse @Robbie Trevino
+25 M Crux of Fate @Jason Felix
+26 R Dark Ritual @Robbie Trevino
+27 M Demonic Tutor @Anato Finnstark
+28 R Doom Blade @Matthew G. Lewis
+29 U Duress @Kristina Collantes
+30 U Eliminate @Rovina Cai
+31 R Inquisition of Kozilek @Matthew G. Lewis
+32 R Sign in Blood @Minttu Hynninen
+33 M Tainted Pact @Benjamin Ee
+34 R Tendrils of Agony @Rovina Cai
+35 U Village Rites @Matthew G. Lewis
+36 M Chaos Warp @Anato Finnstark
+37 U Claim the Firstborn @Anato Finnstark
+38 R Faithless Looting @Carly Mazur
+39 R Grapeshot @Minttu Hynninen
+40 M Increasing Vengeance @Dominik Mayer
+41 U Infuriate @Benjamin Ee
+42 R Lightning Bolt @Anato Finnstark
+43 M Mizzix's Mastery @Olena Richards
+44 U Shock @Dominik Mayer
+45 R Stone Rain @Justin Hernandez & Alexis Hernandez
+46 U Thrill of Possibility @Minttu Hynninen
+47 R Urza's Rage @Dominik Mayer
+48 R Abundant Harvest @Barbara Rosiak
+49 U Adventurous Impulse @Minttu Hynninen
+50 M Channel @Kristina Collantes
+51 U Cultivate @Jason Felix
+52 R Harmonize @Carly Mazur
+53 R Krosan Grip @Minttu Hynninen
+54 M Natural Order @Anato Finnstark
+55 M Primal Command @Olena Richards
+56 R Regrowth @Minttu Hynninen
+57 U Snakeskin Veil @Anato Finnstark
+58 R Weather the Storm @Justin Hernandez & Alexis Hernandez
+59 R Despark @Mark Tedin
+60 R Electrolyze @Dominik Mayer
+61 R Growth Spiral @Barbara Rosiak
+62 R Lightning Helix @Minttu Hynninen
+63 R Putrefy @Minttu Hynninen
+64 M Approach of the Second Sun @Nagano
+65 M Day of Judgment @Maiko Yoshizawa
+66 U Defiant Strike @Amayagido
+67 U Divine Gambit @Kiritada
+68 R Ephemerate @Yumeko
+69 R Gift of Estates @Yaya
+70 R Gods Willing @Tada
+71 R Mana Tithe @Magane Okuda
+72 U Revitalize @Yaomojun
+73 R Swords to Plowshares @Nagano
+74 M Teferi's Protection @So-Taro
+75 M Blue Sun's Zenith @Ezoi
+76 R Brainstorm @Ayako Ishiguro
+77 R Compulsive Research @Tomohito
+78 R Counterspell @Rindo Karasuba
+79 R Memory Lapse @Yumeko
+80 M Mind's Desire @Yaya
+81 U Negate @Koji Nishino
+82 U Opt @Rien.
+83 U Strategic Planning @Hatori Kyoka
+84 R Tezzeret's Gambit @Tomohito
+85 M Time Warp @Shie Nanahara
+86 U Whirlwind Denial @Aogachou
+87 U Agonizing Remorse @Maiko Aoji
+88 M Crux of Fate @Kota Nakatsubo
+89 R Dark Ritual @Rien.
+90 M Demonic Tutor @Sumie Okazu
+91 R Doom Blade @Rindo Karasuba
+92 U Duress @Romiy
+93 U Eliminate @Karuta Shiki
+94 R Inquisition of Kozilek @Yuka Oka
+95 R Sign in Blood @Kaoru Yukishiro
+96 M Tainted Pact @Yusuke Katekari
+97 R Tendrils of Agony @Daken
+98 U Village Rites @Hagiya Kaoru
+99 M Chaos Warp @Hisashi Momose
+100 U Claim the Firstborn @Norikatsu Miyoshi
+101 R Faithless Looting @Shiro Yayoi
+102 R Grapeshot @Hatori Kyoka
+103 M Increasing Vengeance @D-suzuki
+104 U Infuriate @Yangygan & Xiaji
+105 R Lightning Bolt @Ezoi
+106 M Mizzix's Mastery @Hiro Suda
+107 U Shock @Ryanroro
+108 R Stone Rain @Tobihachi
+109 U Thrill of Possibility @Ayako Ishiguro
+110 R Urza's Rage @Maiko Aoji
+111 R Abundant Harvest @Yuka Sakuma
+112 U Adventurous Impulse @Sakura Tomo
+113 M Channel @Shie Nanahara
+114 U Cultivate @Uichi Ukumo
+115 R Harmonize @Yuka Sakuma
+116 R Krosan Grip @Norikatsu Miyoshi
+117 M Natural Order @Ayami Nakashima
+118 M Primal Command @Kukka
+119 R Regrowth @Romiy
+120 U Snakeskin Veil @Yuhki Takeuchi
+121 R Weather the Storm @Kukka
+122 R Despark @Kiritada
+123 R Electrolyze @Hatori Kyoka
+124 R Growth Spiral @Karuta Shiki
+125 R Lightning Helix @Daken
+126 R Putrefy @Magane Okuda

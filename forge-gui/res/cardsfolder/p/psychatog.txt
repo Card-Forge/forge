@@ -1,0 +1,8 @@
+Name:Psychatog
+ManaCost:1 U B
+Types:Creature Atog
+PT:1/2
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ ExileFromGrave<2/card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+AI:RemoveDeck:All
+Oracle:Discard a card: Psychatog gets +1/+1 until end of turn.\nExile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.

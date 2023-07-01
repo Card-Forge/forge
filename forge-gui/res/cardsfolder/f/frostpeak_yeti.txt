@@ -1,0 +1,8 @@
+Name:Frostpeak Yeti
+ManaCost:3 U
+Types:Snow Creature Yeti
+PT:3/3
+A:AB$ Effect | Cost$ 1 S | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ CARDNAME can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn. ({S} can be paid with one mana from a snow source.)
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHints:Type$Snow
+Oracle:{1}{S}: Frostpeak Yeti can't be blocked this turn. ({S} can be paid with one mana from a snow source.)

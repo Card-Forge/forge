@@ -1,0 +1,7 @@
+Name:Alloy Animist
+ManaCost:G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ Animate | Cost$ 2 G | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | SpellDescription$ Until end of turn, target noncreature artifact you control becomes a 4/4 artifact creature.
+DeckNeeds:Type$Artifact
+Oracle:{2}{G}: Until end of turn, target noncreature artifact you control becomes a 4/4 artifact creature.

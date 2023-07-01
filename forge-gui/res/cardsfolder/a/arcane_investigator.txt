@@ -1,0 +1,8 @@
+Name:Arcane Investigator
+ManaCost:1 U
+Types:Creature Elf Wizard
+PT:2/1
+A:AB$ RollDice | Cost$ 5 U | Sides$ 20 | ResultSubAbilities$ 1-9:DBDraw,10-20:DBDig | PrecostDesc$ Search the Room — | SpellDescription$ Roll a d20.
+SVar:DBDraw:DB$ Draw | SpellDescription$ 1—9 VERT Draw a card.
+SVar:DBDig:DB$ Dig | DigNum$ 3 | NoReveal$ True | ChangeNum$ 1 | SpellDescription$ 10—20 VERT Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+Oracle:Search the Room — {5}{U}: Roll a d20.\n1—9 | Draw a card.\n10—20 | Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

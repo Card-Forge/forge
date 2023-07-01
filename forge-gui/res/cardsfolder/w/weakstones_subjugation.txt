@@ -1,0 +1,9 @@
+Name:Weakstone's Subjugation
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {3}. If you do, tap enchanted permanent.
+SVar:TrigTap:AB$ Tap | Cost$ 3 | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Permanent.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted permanent doesn't untap during its controller's untap step.
+Oracle:Enchant artifact or creature\nWhen Weakstone's Subjugation enters the battlefield, you may pay {3}. If you do, tap enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step.

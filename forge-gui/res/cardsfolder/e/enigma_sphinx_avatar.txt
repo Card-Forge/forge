@@ -1,0 +1,11 @@
+Name:Enigma Sphinx Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+5
+T:Mode$ SpellCast | ValidCard$ Artifact.nonColorless | ValidActivatingPlayer$ You | CheckSVar$ NumColoredCast | SVarCompare$ EQ1 | Execute$ TrigSearch | NoResolvingCheck$ True | TriggerZones$ Command | TriggerDescription$ Whenever you cast a colored artifact spell for the first time each turn, search your library for a colored artifact card chosen at random whose mana value is less than that spell's mana value. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.
+SVar:TrigSearch:DB$ ChangeZone | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Artifact.nonColorless+cmcLTX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumColoredCast:Count$ThisTurnCast_Artifact.nonColorless+YouCtrl
+SVar:X:Count$TriggeredCardManaCost
+Oracle:Hand -1, life +5\nWhenever you cast a colored artifact spell for the first time each turn, search your library for a colored artifact card chosen at random whose mana value is less than that spell's mana value. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.

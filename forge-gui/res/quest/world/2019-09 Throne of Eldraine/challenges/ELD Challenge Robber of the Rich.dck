@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Robber of the Rich
+OpponentName=The Robbers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Fires of Invention
+HumanExtras=
+[metadata]
+Title=Robber of the Rich
+Difficulty=hard
+Description=The robbers start with the Fires of Invention.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Robber of the Rich
+[Main]
+30 Mountain|ELD|4
+30 Robber of the Rich|ELD|2

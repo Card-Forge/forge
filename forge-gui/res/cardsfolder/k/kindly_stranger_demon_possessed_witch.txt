@@ -1,0 +1,20 @@
+Name:Kindly Stranger
+ManaCost:2 B
+Types:Creature Human
+PT:2/3
+A:AB$ SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ Transform CARDNAME. Activate only if there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+AlternateMode:DoubleFaced
+Oracle:Delirium — {2}{B}: Transform Kindly Stranger. Activate only if there are four or more card types among cards in your graveyard.
+
+ALTERNATE
+
+Name:Demon-Possessed Witch
+ManaCost:no cost
+Colors:black
+Types:Creature Human Shaman
+PT:4/3
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature transforms into CARDNAME, you may destroy target creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature.
+Oracle:When this creature transforms into Demon-Possessed Witch, you may destroy target creature.

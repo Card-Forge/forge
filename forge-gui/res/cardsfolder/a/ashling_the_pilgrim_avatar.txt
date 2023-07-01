@@ -1,0 +1,6 @@
+Name:Ashling the Pilgrim Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/+6
+A:AB$ DamageAll | ActivationZone$ Command | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+Oracle:Hand -1, life +6\n{2}: Ashling the Pilgrim Avatar deals 1 damage to each creature and each player.

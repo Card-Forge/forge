@@ -1,0 +1,6 @@
+Name:Valakut Invoker
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:2/3
+A:AB$ DealDamage | Cost$ 8 | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:{8}: Valakut Invoker deals 3 damage to any target.

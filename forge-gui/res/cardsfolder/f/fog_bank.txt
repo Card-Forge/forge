@@ -1,0 +1,8 @@
+Name:Fog Bank
+ManaCost:1 U
+Types:Creature Wall
+PT:0/2
+K:Defender
+K:Flying
+K:Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+Oracle:Defender, flying\nPrevent all combat damage that would be dealt to and dealt by Fog Bank.

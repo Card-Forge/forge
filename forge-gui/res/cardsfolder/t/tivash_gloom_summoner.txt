@@ -1,0 +1,10 @@
+Name:Tivash, Gloom Summoner
+ManaCost:4 B
+Types:Legendary Creature Human Warlock
+PT:4/4
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you gained life this turn, you may pay X life, where X is the amount of life you gained this turn. If you do, create an X/X black Demon creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ PayLife<X> | TokenAmount$ 1 | TokenScript$ b_x_x_demon_flying | TokenOwner$ You | TokenPower$ X | TokenToughness$ X
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Token
+Oracle:Lifelink\nAt the beginning of your end step, if you gained life this turn, you may pay X life, where X is the amount of life you gained this turn. If you do, create an X/X black Demon creature token with flying.

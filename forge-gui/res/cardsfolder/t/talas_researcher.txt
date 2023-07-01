@@ -1,0 +1,6 @@
+Name:Talas Researcher
+ManaCost:4 U
+Types:Creature Human Pirate Wizard
+PT:1/1
+A:AB$ Draw | Cost$ T | NumCards$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Draw a card. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Draw a card. Activate only during your turn, before attackers are declared.

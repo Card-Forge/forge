@@ -1,0 +1,8 @@
+Name:Krosa
+ManaCost:no cost
+Types:Plane Dominaria
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | Description$ All creatures get +2/+2.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | OptionalDecider$ You | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you may add {W}{U}{B}{R}{G}.
+SVar:RolledChaos:DB$ Mana | Produced$ W U B R G
+SVar:AIRollPlanarDieParams:Mode$ Always | RollInMain1$ True
+Oracle:All creatures get +2/+2.\nWhenever chaos ensues, you may add {W}{U}{B}{R}{G}.

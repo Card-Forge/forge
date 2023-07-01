@@ -1,0 +1,9 @@
+Name:Thran Tome
+ManaCost:4
+Types:Artifact
+A:AB$ PeekAndReveal | Cost$ 5 T | PeekAmount$ 3 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
+SVar:DBChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Card.IsRemembered | ChoiceZone$ Library | Amount$ 1 | SubAbility$ DBDig | Mandatory$ True | StackDescription$ None
+SVar:DBDig:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ ChosenCard | Shuffle$ False | StackDescription$ None | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{5}, {T}: Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.

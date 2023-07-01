@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Way of the Warrior
+Description=The "Way of the Warrior" deck enlists a new brigade into your army: Samurai! These fearless warriors showcase the Champions of Kamigawa set's new combat ability: bushido. Whenever a creature with bushido 1 blocks or becomes blocked, it gets +1/+1 until end of turn. Some creatures have bushido 2, or even more. This evocative talent comes as standard for Samurai, and that makes them a force to be reckoned with. Since the bushido bonus is given on both offense and defense, your side should always have the upper hand in battle.
+Deck Type=constructed
+Set=CHK
+Image=way_of_the_warrior.jpg
+
+[Main]
+1 Blessed Breath|CHK
+1 Bushi Tenderfoot|CHK
+2 Cage of Hands|CHK
+2 Call to Glory|CHK
+1 Candles' Glow|CHK
+4 Devoted Retainer|CHK
+1 Hold the Line|CHK
+2 Indomitable Will|CHK
+4 Kitsune Blademaster|CHK
+3 Konda's Hatamoto|CHK
+4 Mothrider Samurai|CHK
+1 Nagao, Bound by Honor|CHK
+2 No-Dachi|CHK
+1 Otherworldly Journey|CHK
+24 Plains|CHK|1
+2 Reciprocate|CHK
+2 Samurai Enforcers|CHK
+1 Takeno, Samurai General|CHK
+2 Vigilance|CHK
+[Sideboard]

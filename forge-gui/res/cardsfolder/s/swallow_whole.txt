@@ -1,0 +1,7 @@
+Name:Swallow Whole
+ManaCost:W
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ W tapXType<1/Creature> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutCounter | SpellDescription$ Exile target tapped creature.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Tapped | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on the creature tapped to cast this spell.
+DeckHas:Ability$Counters
+Oracle:As an additional cost to cast this spell, tap an untapped creature you control.\nExile target tapped creature. Put a +1/+1 counter on the creature tapped to pay this spell's additional cost.

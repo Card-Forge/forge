@@ -1,0 +1,8 @@
+Name:Skulking Fugitive
+ManaCost:2 B
+Types:Creature Horror Mercenary
+PT:3/4
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+SVar:Targeting:Dies
+Oracle:When Skulking Fugitive becomes the target of a spell or ability, sacrifice it.

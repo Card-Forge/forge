@@ -1,0 +1,7 @@
+Name:Carnassid
+ManaCost:4 G G
+Types:Creature Beast
+PT:5/4
+K:Trample
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Trample\n{1}{G}: Regenerate Carnassid.

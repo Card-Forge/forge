@@ -1,0 +1,6 @@
+Name:Lightning Greaves
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:0
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Shroud | Description$ Equipped creature has haste and shroud.
+Oracle:Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}

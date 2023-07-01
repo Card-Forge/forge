@@ -1,0 +1,9 @@
+Name:Cruel Celebrant
+ManaCost:W B
+Types:Creature Vampire
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl,Planeswalker.YouCtrl+Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Whenever Cruel Celebrant or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life.

@@ -1,0 +1,7 @@
+Name:Star-Crowned Stag
+ManaCost:3 W
+Types:Creature Elk
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls.
+Oracle:Whenever Star-Crowned Stag attacks, tap target creature defending player controls.

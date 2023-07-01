@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Bearer of the Heavens
+OpponentName=The Bearer of the Heavens
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Bearer of the Heavens
+HumanExtras=Guardians of Meletis|Guardians of Meletis|Guardians of Meletis|Guardians of Meletis
+[metadata]
+Name=THS Challenge: Bearer of the Heavens
+Title=The Bearer of the Heavens
+Difficulty=easy
+Description="When you give offense to heaven, to whom can you pray?"\n-Confucius
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+20 Gift of Immortality|THS
+20 Mountain|THS|3
+20 Plains|THS|3

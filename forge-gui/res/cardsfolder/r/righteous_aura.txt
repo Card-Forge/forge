@@ -1,0 +1,11 @@
+Name:Righteous Aura
+ManaCost:1 W
+Types:Enchantment
+A:AB$ ChooseSource | Cost$ W PayLife<2> | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.

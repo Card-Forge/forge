@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Nana Buruku 2
+Title=Nana Buruku
+Icon=NanaBuruku.jpg
+Difficulty=medium
+Description=Jakub Slemr's '4-color Black' deck from the 1997 Worlds tournament.
+Deck Type=constructed
+[main]
+4 Black Knight|5ED
+4 Choking Sands|MIR
+3 City of Brass|5ED
+3 Serrated Arrows|HML
+1 Pestilence|5ED
+2 Earthquake|LEB
+4 Fallen Askari|VIS
+3 Gemstone Mine|WTH
+4 Incinerate|MIR
+4 Knight of Stromgald|ICE
+4 Man-o'-War|VIS
+1 Necratog|WTH
+4 Nekrataal|VIS
+2 Shadow Guildmage|MIR
+2 Sulfurous Springs|ICE
+10 Swamp|MIR
+2 Uktabi Orangutan|VIS
+1 Underground River|ICE
+3 Undiscovered Paradise|VIS
+[sideboard]
+[planes]
+[schemes]

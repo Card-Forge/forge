@@ -1,0 +1,6 @@
+Name:Cobalt Golem
+ManaCost:4
+Types:Artifact Creature Golem
+PT:2/3
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+Oracle:{1}{U}: Cobalt Golem gains flying until end of turn.

@@ -1,0 +1,7 @@
+Name:Flamespeaker Adept
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:2/3
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you scry, CARDNAME gets +2/+0 and gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ +2 | KW$ First Strike | Defined$ Self
+Oracle:Whenever you scry, Flamespeaker Adept gets +2/+0 and gains first strike until end of turn.

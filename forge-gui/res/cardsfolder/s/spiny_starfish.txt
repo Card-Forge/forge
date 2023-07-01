@@ -1,0 +1,9 @@
+Name:Spiny Starfish
+ManaCost:2 U
+Types:Creature Starfish
+PT:0/1
+A:AB$ Regenerate | Cost$ U | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | CheckSVar$ X | SVarCompare$ GE1 | TriggerDescription$ At the beginning of each end step, if CARDNAME regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ u_0_1_starfish | TokenOwner$ You
+SVar:X:Count$RegeneratedThisTurn
+Oracle:{U}: Regenerate Spiny Starfish.\nAt the beginning of each end step, if Spiny Starfish regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.

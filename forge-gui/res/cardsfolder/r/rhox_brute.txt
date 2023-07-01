@@ -1,0 +1,5 @@
+Name:Rhox Brute
+ManaCost:2 R G
+Types:Creature Rhino Warrior
+PT:4/4
+Oracle:

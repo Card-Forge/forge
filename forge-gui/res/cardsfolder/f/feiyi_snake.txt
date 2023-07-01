@@ -1,0 +1,6 @@
+Name:Feiyi Snake
+ManaCost:1 G
+Types:Creature Snake
+PT:2/1
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

@@ -1,0 +1,8 @@
+Name:Abyssal Specter
+ManaCost:2 B B
+Types:Creature Specter
+PT:2/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | Mode$ TgtChoose
+Oracle:Flying\nWhenever Abyssal Specter deals damage to a player, that player discards a card.

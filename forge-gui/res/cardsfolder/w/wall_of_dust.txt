@@ -1,0 +1,9 @@
+Name:Wall of Dust
+ManaCost:2 R
+Types:Creature Wall
+PT:1/4
+K:Defender
+T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature can't attack during its controller's next turn.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep-> | ValidPlayer$ Player.controlsCard.IsTriggerRemembered | UpcomingTurn$ True | Static$ True | Execute$ TrigPump | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Creatures blocked by CARDNAME can't attack this turn.
+SVar:TrigPump:DB$ Pump | IsCurse$ True | Defined$ DelayTriggerRememberedLKI | KW$ HIDDEN CARDNAME can't attack.
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Dust blocks a creature, that creature can't attack during its controller's next turn.

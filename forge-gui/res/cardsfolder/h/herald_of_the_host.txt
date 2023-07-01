@@ -1,0 +1,9 @@
+Name:Herald of the Host
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Vigilance
+K:Myriad
+DeckHas:Ability$Token
+Oracle:Flying, vigilance\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)

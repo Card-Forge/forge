@@ -1,0 +1,6 @@
+Name:Servant of Nefarox
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:3/1
+K:Exalted
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

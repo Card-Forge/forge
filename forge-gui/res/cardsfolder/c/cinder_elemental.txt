@@ -1,0 +1,7 @@
+Name:Cinder Elemental
+ManaCost:3 R
+Types:Creature Elemental
+PT:2/2
+A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | AITgts$ BetterThanSource | SpellDescription$ CARDNAME deals X damage to any target.
+SVar:X:Count$xPaid
+Oracle:{X}{R}, {T}, Sacrifice Cinder Elemental: It deals X damage to any target.

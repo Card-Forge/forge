@@ -1,0 +1,14 @@
+Name:Blim, Comedic Genius
+ManaCost:2 B R
+Types:Legendary Creature Imp
+PT:4/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player gains control of target permanent you control. Then each player loses life and discards cards equal to the number of permanents they control but don't own.
+SVar:TrigControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TargetMin$ 1 | TgtPrompt$ Choose a permanent you control for damaged player to gain control of | NewController$ TriggeredTarget | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | NumCards$ X | Mode$ TgtChoose
+SVar:X:Count$Valid Permanent.RememberedPlayerCtrl/Minus.Y
+SVar:Y:Count$Valid Permanent.RememberedPlayerCtrl+RememberedPlayerOwn
+DeckHints:Ability$Token
+Oracle:Flying\nWhenever Blim, Comedic Genius deals combat damage to a player, that player gains control of target permanent you control. Then each player loses life and discards cards equal to the number of permanents they control but don't own.

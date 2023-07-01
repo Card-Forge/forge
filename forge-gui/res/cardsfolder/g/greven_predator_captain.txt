@@ -1,0 +1,13 @@
+Name:Greven, Predator Captain
+ManaCost:3 B R
+Types:Legendary Creature Phyrexian Human Warrior
+PT:5/5
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the amount of life you've lost this turn.
+SVar:X:Count$LifeYouLostThisTurn
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, you draw cards equal to that creature's power and you lose life equal to that creature's toughness.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | Defined$ You | NumCards$ Y | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Z
+SVar:Y:Sacrificed$CardPower
+SVar:Z:Sacrificed$CardToughness
+Oracle:Menace\nGreven, Predator Captain gets +X/+0, where X is the amount of life you've lost this turn.\nWhenever Greven attacks, you may sacrifice another creature. If you do, you draw cards equal to that creature's power and you lose life equal to that creature's toughness.

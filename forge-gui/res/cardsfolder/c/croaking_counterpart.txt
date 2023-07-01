@@ -1,0 +1,7 @@
+Name:Croaking Counterpart
+ManaCost:1 G U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.nonFrog | TgtPrompt$ Select target non-Frog creature | SetPower$ 1 | SetToughness$ 1 | SetColor$ Green | SetCreatureTypes$ Frog | StackDescription$ Create a token that's a copy of {c:Targeted}, except it's a 1/1 green Frog. | SpellDescription$ Create a token that's a copy of target non-Frog creature, except it's a 1/1 green Frog.
+K:Flashback:3 G U
+DeckHas:Ability$Token|Graveyard
+Oracle:Create a token that's a copy of target non-Frog creature, except it's a 1/1 green Frog.\nFlashback {3}{G}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

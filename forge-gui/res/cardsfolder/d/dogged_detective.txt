@@ -1,0 +1,10 @@
+Name:Dogged Detective
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+T:Mode$ Drawn | ValidPlayer$ Player.Opponent | Number$ 2 | TriggerZones$ Graveyard | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever an opponent draws their second card each turn, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+Oracle:When Dogged Detective enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nWhenever an opponent draws their second card each turn, you may return Dogged Detective from your graveyard to your hand.

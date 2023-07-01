@@ -1,0 +1,19 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 060215 - Burning Bright
+URL:http://www.gatheringmagic.com/seanuy-060215-burning-bright/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=6
+AILife=8
+humanhand=Blades of Velis Vel|Set:MM2; Smash to Smithereens|Set:MM2; Thrive|Set:MM2
+humanbattlefield=Island|Set:M15; Island|Set:M15; Mountain|Set:M15; Mountain|Set:M15; Mountain|Set:M15; Forest|Set:M15; Forest|Set:M15; Forest|Set:M15; Forest|Set:M15; Noble Hierarch|Set:MM2; Thrummingbird|Set:MM2; Smokebraider|Set:MM2; Soulbright Flamekin|Set:MM2; Vigean Graftmage|Set:MM2|Counters:P1P1=2; Bloodshot Trainee|Set:MM2
+humangraveyard=
+humanlibrary=
+aibattlefield=Mountain|Set:M15|Tapped; Mountain|Set:M15|Tapped; Mountain|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Boros Garrison|Set:MM2|Tapped; Goblin Fireslinger|Set:MM2; Skyhunter Skirmisher|Set|MM2|Tapped|Id:420; Goblin War Paint|Set:MM2|AttachedTo:420; Taj-Nar Swordsmith|Set:MM2|Id:421; Sickleslicer|Set:MM2|AttachedTo:421; Conclave Phalanx|Set:MM2; Iona, Shield of Emeria|Set:MM2|ChosenColor:red
+aigraveyard=
+ailibrary=

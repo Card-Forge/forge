@@ -1,0 +1,8 @@
+Name:Bronze Horse
+ManaCost:7
+Types:Artifact Creature Horse
+PT:4/4
+K:Trample
+R:Event$ DamageDone | Prevent$ True | ValidCause$ Spell.IsTargeting Self | ValidTarget$ Creature.Self | CauseIsSource$ True | IsPresent$ Creature.YouCtrl+Other | Description$ As long as you control another creature, prevent all damage that would be dealt to CARDNAME by spells that target it.
+SVar:BuffedBy:Creature
+Oracle:Trample\nAs long as you control another creature, prevent all damage that would be dealt to Bronze Horse by spells that target it.

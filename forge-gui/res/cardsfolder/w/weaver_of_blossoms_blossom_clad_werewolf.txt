@@ -1,0 +1,19 @@
+Name:Weaver of Blossoms
+ManaCost:2 G
+Types:Creature Human Werewolf
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:{T}: Add one mana of any color.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Blossom-Clad Werewolf
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:3/4
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+K:Nightbound
+Oracle:{T}: Add two mana of any one color.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

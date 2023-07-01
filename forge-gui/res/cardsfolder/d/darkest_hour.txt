@@ -1,0 +1,7 @@
+Name:Darkest Hour
+ManaCost:B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | SetColor$ Black | Description$ All creatures are black.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All creatures are black.

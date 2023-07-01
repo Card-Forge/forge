@@ -1,0 +1,12 @@
+Name:Geth, Thane of Contracts
+ManaCost:1 B B
+Types:Legendary Creature Phyrexian Zombie
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Other creatures you control get -1/-1.
+A:AB$ ChangeZone | Cost$ 1 B B T | Origin$ Graveyard | SorcerySpeed$ True | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | SubAbility$ DBAnimate | SpellDescription$ Return target creature card from your graveyard to the battlefield. It gains "If this creature would leave the battlefield, exile it instead of putting it anywhere else." Activate only as a sorcery.
+SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceLeaves | Defined$ Targeted | Duration$ Permanent
+SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this creature would leave the battlefield, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHints:Ability$Graveyard|Mill|Dredge|Sacrifice
+DeckHas:Ability$Graveyard
+Oracle:Other creatures you control get -1/-1.\n{1}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. It gains "If this creature would leave the battlefield, exile it instead of putting it anywhere else." Activate only as a sorcery.

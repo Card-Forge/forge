@@ -1,0 +1,10 @@
+Name:Dross Harvester
+ManaCost:1 B B
+Types:Creature Horror
+PT:4/4
+K:Protection from white
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature dies, you gain 2 life.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 4 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4
+Oracle:Protection from white\nAt the beginning of your end step, you lose 4 life.\nWhenever a creature dies, you gain 2 life.

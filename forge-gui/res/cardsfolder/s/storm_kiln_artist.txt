@@ -1,0 +1,12 @@
+Name:Storm-Kiln Artist
+ManaCost:3 R
+Types:Creature Dwarf Shaman
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:BuffedBy:Artifact,Instant,Sorcery
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery|Artifact
+Oracle:Storm-Kiln Artist gets +1/+0 for each artifact you control.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token.

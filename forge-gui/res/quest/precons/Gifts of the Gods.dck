@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gifts of the Gods
+Description=Channel the power of the gods! Supercharge your forces with creatures from Nyx, the realm of the gods. Your enemies will be humbled as you wield the gods' might.
+Deck Type=constructed
+Set=BNG
+Image=gifts_of_the_gods.jpg
+[Main]
+1 Coastline Chimera|THS
+1 Divination|BNG
+1 Eternity Snare|BNG
+1 Excoriate|BNG
+1 Flitterstep Eidolon|BNG
+2 Floodtide Serpent|BNG
+2 Ghostblade Eidolon|BNG
+1 Gift of Immortality|THS
+2 Great Hart|BNG
+2 Griffin Dreamfinder|BNG
+1 Griptide|THS
+2 Heliod's Emissary|THS
+1 Hold at Bay|BNG
+1 Hopeful Eidolon|THS
+10 Island|THS
+1 Lagonna-Band Elder|THS
+2 Nyxborn Shieldmate|BNG
+2 Nyxborn Triton|BNG
+2 Ordeal of Heliod|THS
+1 Pillar of War|BNG
+16 Plains|THS
+1 Silent Sentinel+|BNG
+1 Sunbond|BNG
+1 Thassa's Emissary|THS
+2 Traveling Philosopher|THS
+1 Vanquish the Foul|THS
+1 Yoked Ox|THS
+[sideboard]
+

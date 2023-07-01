@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Bottomless Pit
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=A deck built around having no cards in hand.
+Deck Type=constructed
+Name=BottomlessPit2
+[Main]
+4 Bottomless Pit|STH
+2 Bounty Hunter|TMP
+2 Coffin Queen|TMP
+4 Cursed Scroll|TMP
+4 Dark Ritual|TMP
+2 Dauthi Mindripper|TMP
+2 Dungeon Shade|STH
+4 Ensnaring Bridge|STH
+4 Megrim|STH
+4 Null Brooch|EXO
+4 Scalding Tongs|TMP
+6 Swamp|TMP|1
+3 Swamp|TMP|2
+4 Swamp|TMP|3
+7 Swamp|TMP|4
+4 Wasteland|TMP

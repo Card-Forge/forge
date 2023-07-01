@@ -1,0 +1,8 @@
+Name:Gigapede
+ManaCost:3 G G
+Types:Creature Insect
+PT:6/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may discard a card. If you do, return CARDNAME to your hand.
+SVar:TrigChange:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nAt the beginning of your upkeep, if Gigapede is in your graveyard, you may discard a card. If you do, return Gigapede to your hand.

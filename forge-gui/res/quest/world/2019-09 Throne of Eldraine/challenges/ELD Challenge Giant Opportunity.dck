@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Giant Opportunity
+OpponentName=The Giants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Giant Opportunity
+Difficulty=medium
+Description="Look, if you had one shot\nOne Giant Opportunity\nTo get a 7/7 Giant token\nWould you sac the Food, or just let it slip?"\n-Eminem, Lose Yourself
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Giant Opportunity
+[Main]
+30 Giant Opportunity|ELD
+30 Gingerbread Cabin|ELD

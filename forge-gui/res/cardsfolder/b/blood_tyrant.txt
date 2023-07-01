@@ -1,0 +1,13 @@
+Name:Blood Tyrant
+ManaCost:4 U B R
+Types:Creature Vampire
+PT:5/5
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, each player loses 1 life. Put a +1/+1 counter on CARDNAME for each 1 life lost this way.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ AFLifeLost
+T:Mode$ LosesGame | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player loses the game, put five +1/+1 counters on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 5
+SVar:AFLifeLost:Number$0
+Oracle:Flying, trample\nAt the beginning of your upkeep, each player loses 1 life. Put a +1/+1 counter on Blood Tyrant for each 1 life lost this way.\nWhenever a player loses the game, put five +1/+1 counters on Blood Tyrant.

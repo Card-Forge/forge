@@ -1,0 +1,7 @@
+Name:Blink Dog
+ManaCost:2 W
+Types:Creature Dog
+PT:1/1
+K:Double Strike
+A:AB$ Phases | Cost$ 3 W | Defined$ Self | PrecostDesc$ Teleport — | SpellDescription$ CARDNAME phases out.
+Oracle:Double strike\nTeleport — {3}{W}: Blink Dog phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)

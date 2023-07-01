@@ -1,0 +1,9 @@
+Name:Celestial Gatekeeper
+ManaCost:3 W W
+Types:Creature Bird Cleric
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.Bird,Permanent.Cleric | TargetsWithDefinedController$ TriggeredCardController | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Flying\nWhen Celestial Gatekeeper dies, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.

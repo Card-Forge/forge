@@ -1,0 +1,8 @@
+Name:Purphoros's Emissary
+ManaCost:3 R
+Types:Enchantment Creature Ox
+PT:3/3
+K:Bestow:6 R
+K:Menace
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Menace | Description$ Enchanted creature gets +3/+3 and has menace.
+Oracle:Bestow {6}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nMenace (This creature can't be blocked except by two or more creatures.)\nEnchanted creature gets +3/+3 and has menace.

@@ -1,0 +1,6 @@
+Name:Embraal Gear-Smasher
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/3
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | NumDmg$ 2 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 2 damage to each opponent.
+Oracle:{T}, Sacrifice an artifact: Embraal Gear-Smasher deals 2 damage to each opponent.

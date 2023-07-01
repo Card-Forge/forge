@@ -1,0 +1,6 @@
+Name:Venser's Sliver
+ManaCost:5
+Types:Artifact Creature Sliver
+PT:3/3
+SVar:PlayMain1:TRUE
+Oracle:

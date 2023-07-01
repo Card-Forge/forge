@@ -1,0 +1,9 @@
+Name:Grazilaxx, Illithid Scholar
+ManaCost:1 U U
+Types:Legendary Creature Horror
+PT:3/2
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | Execute$ TrigBounce | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control becomes blocked, you may return it to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttackerLKICopy
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Whenever a creature you control becomes blocked, you may return it to its owner's hand.\nWhenever one or more creatures you control deal combat damage to a player, draw a card.

@@ -1,0 +1,9 @@
+Name:Xathrid Necromancer
+ManaCost:2 B
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Human+YouCtrl+Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Human creature you control dies, create a tapped 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True
+DeckHints:Type$Human
+DeckHas:Ability$Token
+Oracle:Whenever Xathrid Necromancer or another Human creature you control dies, create a tapped 2/2 black Zombie creature token.

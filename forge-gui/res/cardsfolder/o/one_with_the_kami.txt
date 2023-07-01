@@ -1,0 +1,12 @@
+Name:One with the Kami
+ManaCost:3 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature you control
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy,Creature.modified+NotEnchantedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_spirit | TokenAmount$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Token & Type$Spirit
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Flash\nEnchant creature you control\nWhenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power. (Equipment, Auras you control, and counters are modifications.)

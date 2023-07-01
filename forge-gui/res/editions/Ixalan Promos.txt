@@ -1,0 +1,13 @@
+[metadata]
+Code=PXLN
+Date=2017-09-29
+Name=Ixalan Promos
+Type=Promo
+ScryfallCode=PXLN
+
+[cards]
+5 R Bishop of Rebirth @Matt Stewart
+130 U Walk the Plank @Christopher Moeller
+135 R Burning Sun's Avatar @Svetlin Velinov
+185 R Deeproot Champion @Alex Konstad
+258 U Unclaimed Territory @Dimitar Marinski

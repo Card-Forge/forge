@@ -1,0 +1,10 @@
+Name:Norn's Wellspring
+ManaCost:1 W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever a creature you control dies, scry 1 and put an oil counter on CARDNAME.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+A:AB$ Draw | Cost$ 1 T SubCounter<2/OIL> | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice
+Oracle:Whenever a creature you control dies, scry 1 and put an oil counter on Norn's Wellspring.\n{1}, {T}, Remove two oil counters from Norn's Wellspring: Draw a card.

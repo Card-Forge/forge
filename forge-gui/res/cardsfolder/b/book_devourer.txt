@@ -1,0 +1,11 @@
+Name:Book Devourer
+ManaCost:5 R
+Types:Creature Beast
+PT:4/5
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may discard all the cards in your hand. If you do, draw that many cards.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:Discarded$Amount
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Trample\nWhenever Book Devourer deals combat damage to a player, you may discard all the cards in your hand. If you do, draw that many cards.

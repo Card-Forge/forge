@@ -1,0 +1,7 @@
+Name:Kuro's Taken
+ManaCost:1 B
+Types:Creature Rat Samurai
+PT:1/1
+K:Bushido:1
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{B}: Regenerate Kuro's Taken.

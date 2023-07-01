@@ -1,0 +1,8 @@
+Name:Food Chain
+ManaCost:2 G
+Types:Enchantment
+A:AB$ Mana | Cost$ Exile<1/Creature> | Produced$ Any | Amount$ X | RestrictValid$ Spell.Creature | SpellDescription$ Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells.
+SVar:X:Exiled$CardManaCost/Plus.1
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:Exile a creature you control: Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells.

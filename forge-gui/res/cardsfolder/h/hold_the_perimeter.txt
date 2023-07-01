@@ -1,0 +1,11 @@
+Name:Hold the Perimeter
+ManaCost:no cost
+Types:Conspiracy
+Text:(Start the game with this conspiracy face up in the command zone.)
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ EQ1 | ValidPlayer$ You | Execute$ TrigToken1 | EffectZone$ Command | TriggerDescription$ At the beginning of your first upkeep, create a 1/2 white Soldier creature token with defender.
+SVar:X:Count$YourTurns
+SVar:TrigToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_2_soldier_defender | TokenOwner$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Other+IsNotRemembered | Execute$ TrigToken2 | EffectZone$ Command | TriggerDescription$ At the beginning of each other player's first upkeep, that player creates a 1/1 red Goblin creature token with "This creature can't block."
+SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_noblock | TokenOwner$ TriggeredPlayer | SubAbility$ RememberPlayer
+SVar:RememberPlayer:DB$ Pump | RememberObjects$ TriggeredPlayer
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nAt the beginning of your first upkeep, create a 1/2 white Soldier creature token with defender.\nAt the beginning of each other player's first upkeep, that player creates a 1/1 red Goblin creature token with "This creature can't block."

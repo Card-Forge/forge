@@ -1,0 +1,7 @@
+Name:Blood Burglar
+ManaCost:1 B
+Types:Creature Vampire Rogue
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has lifelink.
+DeckHas:Ability$LifeGain
+Oracle:As long as it's your turn, Blood Burglar has lifelink. (Damage dealt by this creature also causes you to gain that much life.)

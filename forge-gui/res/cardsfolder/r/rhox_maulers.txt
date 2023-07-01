@@ -1,0 +1,8 @@
+Name:Rhox Maulers
+ManaCost:4 G
+Types:Creature Rhino Soldier
+PT:4/4
+K:Trample
+K:Renown:2
+DeckHas:Ability$Counters
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nRenown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)

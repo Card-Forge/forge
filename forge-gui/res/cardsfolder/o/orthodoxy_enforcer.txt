@@ -1,0 +1,9 @@
+Name:Orthodoxy Enforcer
+ManaCost:3 W
+Types:Creature Phyrexian Cleric
+PT:2/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE2 | Description$ CARDNAME gets +2/+0 as long as you control two or more artifacts.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Vigilance\nOrthodoxy Enforcer gets +2/+0 as long as you control two or more artifacts.

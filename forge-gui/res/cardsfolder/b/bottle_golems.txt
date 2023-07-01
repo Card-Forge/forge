@@ -1,0 +1,10 @@
+Name:Bottle Golems
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain life equal to its power.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ XPower
+SVar:XPower:TriggeredCard$CardPower
+DeckHas:Ability$LifeGain
+Oracle:Trample\nWhen Bottle Golems dies, you gain life equal to its power.

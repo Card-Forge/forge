@@ -1,0 +1,7 @@
+Name:Archers of Qarsi
+ManaCost:3 G
+Types:Creature Naga Archer
+PT:5/2
+K:Defender
+K:Reach
+Oracle:Defender\nReach (This creature can block creatures with flying.)

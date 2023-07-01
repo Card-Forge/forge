@@ -1,0 +1,9 @@
+Name:Statecraft
+ManaCost:3 U
+Types:Enchantment
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Creature.YouCtrl | ActiveZones$ Battlefield | Description$ Prevent all combat damage that would be dealt to and dealt by creatures you control.
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.YouCtrl | ActiveZones$ Battlefield | Secondary$ True | Description$ Prevent all combat damage that would be dealt to and dealt by creatures you control.
+SVar:NonStackingEffect:True
+SVar:DonateMe:4
+AI:RemoveDeck:Random
+Oracle:Prevent all combat damage that would be dealt to and dealt by creatures you control.

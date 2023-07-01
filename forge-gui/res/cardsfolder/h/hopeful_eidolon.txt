@@ -1,0 +1,8 @@
+Name:Hopeful Eidolon
+ManaCost:W
+Types:Enchantment Creature Spirit
+PT:1/1
+K:Bestow:3 W
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Enchanted creature gets +1/+1 and has lifelink.
+Oracle:Bestow {3}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nEnchanted creature gets +1/+1 and has lifelink.

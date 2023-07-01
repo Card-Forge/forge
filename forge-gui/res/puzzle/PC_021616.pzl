@@ -1,0 +1,20 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 021616 - Old Artists Never Die
+URL:http://www.gatheringmagic.com/seanuy-021616-old-artists-never-die/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win on your turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=7
+AILife=7
+humanhand=Fate Transfer; Spawnbroker; Hysterical Blindness; Krosan Groundshaker;
+humangraveyard=Essence Fracture; Temporal Eddy; Sylvok Explorer; Moonglove Changeling; Martyr of Frost;
+humanlibrary=
+humanbattlefield=Forest|Set:INV; Forest|Set:INV; Island|Set:INV; Island|Set:INV; Island|Set:INV; Island|Set:INV; Swamp|Set:INV; Swamp|Set:INV; Swamp|Set:INV; Putrid Imp; Phantom Nantuko|Counters:P1P1=2; Symbiotic Elf; Nephalia Seakite; Faces of the Past;
+aibattlefield=Plains|Tapped|Set:INV; Plains|Tapped|Set:INV; Plains|Tapped|Set:INV; Swamp|Tapped|Set:INV; Swamp|Tapped|Set:INV; Swamp|Tapped|Set:INV; Swamp|Tapped|Set:INV; Swamp|Tapped|Set:INV; Yotian Soldier; Junun Efreet; Krovikan Horror; Rashka the Slayer; Ihsan's Shade|Tapped; Dread Reaper;
+aigraveyard=Descendant of Kiyomaro; Nether Shadow; Indomitable Will; Basal Thrull; Urza's Bauble;
+ailibrary=
+aiexile=

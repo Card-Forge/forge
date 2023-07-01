@@ -1,0 +1,7 @@
+Name:Wild Nacatl
+ManaCost:G
+Types:Creature Cat Warrior
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Mountain.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Mountain.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Plains.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
+Oracle:Wild Nacatl gets +1/+1 as long as you control a Mountain.\nWild Nacatl gets +1/+1 as long as you control a Plains.

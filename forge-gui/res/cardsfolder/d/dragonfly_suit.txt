@@ -1,0 +1,7 @@
+Name:Dragonfly Suit
+ManaCost:2 W
+Types:Artifact Vehicle
+PT:3/2
+K:Flying
+K:Crew:1
+Oracle:Flying\nCrew 1

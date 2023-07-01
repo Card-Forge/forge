@@ -1,0 +1,10 @@
+Name:Rug of Smothering
+ManaCost:3
+Types:Artifact Creature Construct
+PT:1/3
+K:Flying
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, they lose 1 life for each spell they've cast this turn.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ X
+SVar:X:TriggeredPlayer$SpellsCastThisTurn
+AI:RemoveDeck:All
+Oracle:Flying\nWhenever a player casts a spell, they lose 1 life for each spell they've cast this turn.

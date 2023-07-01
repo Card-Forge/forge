@@ -1,0 +1,8 @@
+Name:Hydromorph Gull
+ManaCost:3 U U
+Types:Creature Elemental Bird
+PT:3/3
+K:Flying
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a creature you control.
+AI:RemoveDeck:All
+Oracle:Flying\n{U}, Sacrifice Hydromorph Gull: Counter target spell that targets a creature you control.

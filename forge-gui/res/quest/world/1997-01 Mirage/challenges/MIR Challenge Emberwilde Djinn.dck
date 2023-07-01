@@ -1,0 +1,18 @@
+[quest]
+id=MIR Challenge: Emberwilde Djinn
+OpponentName=The Emberwilde Djinn
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Emberwilde Djinn
+[metadata]
+Name=MIR Challenge: Emberwilde Djinn
+Title=The Emberwilde Djinn
+Difficulty=easy
+Description=A hefty price is no guarantee of quality merchandise.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+60 Mountain|MIR|4

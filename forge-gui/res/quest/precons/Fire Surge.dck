@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=M14
+Image=fire_surge.jpg
+Name=Fire Surge
+Description=Send forth a blistering army of speedy creatures to hit your opponents like a flaming wave of rage. As they try to regain their footing, take advantage of your instants and sorceries and blaze them to smithereens!
+[Main]
+1 Chandra's Outrage|M14
+1 Chandra's Phoenix+|M14
+2 Disperse|M14
+2 Dragon Hatchling|M14
+1 Essence Scatter|M14
+2 Flames of the Firebrand|M14
+2 Fleshpulper Giant|M14
+3 Goblin Shortcutter|M14
+10 Island|M14
+3 Lava Axe|M14
+16 Mountain|M14
+1 Negate|M14
+2 Nephalia Seakite|M14
+2 Opportunity|M14
+2 Phantom Warrior|M14
+3 Regathan Firecat|M14
+2 Shiv's Embrace|M14
+1 Shivan Dragon|M14
+1 Staff of the Flame Magus|M14
+2 Trained Condor|M14
+1 Volcanic Geyser|M14

@@ -1,0 +1,9 @@
+Name:Goblin Bowling Team
+ManaCost:3 R
+Types:Creature Goblin
+PT:1/1
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ReplaceWith$ RollDamage | Description$ If CARDNAME would deal damage to a permanent or player, it deals that much damage plus the result of a six-sided die roll to that permanent or player instead.
+SVar:RollDamage:DB$ RollDice | ResultSVar$ Result | SubAbility$ DmgPlus
+SVar:DmgPlus:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.Result
+Oracle:If Goblin Bowling Team would deal damage to a permanent or player, it deals that much damage plus the result of a six-sided die roll to that permanent or player instead.

@@ -1,0 +1,6 @@
+Name:Sacred Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:3/1
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

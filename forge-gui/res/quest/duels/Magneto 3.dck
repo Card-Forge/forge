@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Magneto 3
+Title=Magneto
+Difficulty=hard
+Description=Mono B Ashen Powder deck with creature removal and discard
+Icon=Magneto.jpg
+Deck Type=constructed
+[main]
+3 Big Game Hunter
+3 Bone Shredder
+3 Nekrataal
+3 Shriekmaw
+3 Dark Hatchling
+3 Animate Dead
+2 Puppeteer Clique
+1 Beacon of Unrest
+1 Liliana Vess
+23 Swamp|M11
+1 Mox Jet
+2 Ashen Powder
+4 Go for the Throat
+4 Horrifying Revelation
+4 Hymn to Tourach
+[sideboard]

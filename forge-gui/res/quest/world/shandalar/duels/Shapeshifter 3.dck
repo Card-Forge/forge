@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Shapesifter 3
+Title=Shapeshifter
+Icon=Shapeshifter.jpg
+Difficulty=hard
+Description=Blue deck with artifact creatures.
+Deck Type=constructed
+[main]
+1 Clay Statue|ATQ
+1 Clockwork Avian|ATQ
+1 Clockwork Beast|LEB
+2 Clone|2ED
+1 Control Magic|LEA
+1 Copy Artifact|LEB
+1 Dancing Scimitar|ARN
+1 Diabolic Machine|DRK
+20 Island|4ED
+4 Juggernaut|LEB
+4 Mana Drain|LEG
+4 Mana Vault|LEB
+4 Mishra's Factory|ATQ
+1 Mishra's Workshop|ATQ
+1 Sol Ring|LEB
+4 Su-Chi|ATQ
+2 Tetravus|ATQ
+2 Triskelion|4ED
+4 Unsummon|4ED
+1 Vesuvan Doppelganger|LEB
+[sideboard]

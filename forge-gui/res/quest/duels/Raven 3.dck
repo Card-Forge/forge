@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Raven 3
+Title=Raven
+Difficulty=hard
+Description=WU Spirit deck
+Icon=Raven.jpg
+Deck Type=constructed
+[main]
+2 Plains|M12
+2 Island|M12
+4 Tundra
+4 Seachrome Coast
+4 Glacial Fortress
+4 Flooded Strand
+1 Moorland Haunt
+1 Mox Sapphire
+1 Mox Pearl
+4 Lantern Kami
+4 Drogskol Captain
+2 Midnight Haunting
+1 Kira, Great Glass-Spinner
+1 Stormbound Geist
+1 Cloudhoof Kirin
+4 Dungeon Geists
+1 Windborn Muse
+1 Godhead of Awe
+1 Battleground Geist
+1 Sire of the Storm
+1 Drogskol Reaver
+4 Swords to Plowshares
+1 Journey to Nowhere
+1 Disenchant
+2 Spell Snare
+1 Mental Misstep
+1 Ancestral Recall
+1 Time Walk
+2 Moat
+1 Favorable Winds
+1 Gravitational Shift
+[sideboard]

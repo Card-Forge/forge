@@ -1,0 +1,6 @@
+Name:Hornet Cannon
+ManaCost:4
+Types:Artifact
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ hornet | TokenOwner$ You | AtEOT$ Destroy | SpellDescription$ Create a 1/1 colorless Insect artifact creature token with flying and haste named Hornet. Destroy it at the beginning of the next end step.
+DeckHas:Ability$Token
+Oracle:{3}, {T}: Create a 1/1 colorless Insect artifact creature token with flying and haste named Hornet. Destroy it at the beginning of the next end step.

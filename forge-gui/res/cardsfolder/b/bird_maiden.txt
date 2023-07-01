@@ -1,0 +1,6 @@
+Name:Bird Maiden
+ManaCost:2 R
+Types:Creature Human Bird
+PT:1/2
+K:Flying
+Oracle:Flying

@@ -1,0 +1,24 @@
+Name:The Fall of Lord Konda
+ManaCost:2 W
+Types:Enchantment Saga
+K:Saga:3:DBExile,DBRetake,DBTransform
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+cmcGE4 | TgtPrompt$ Choose target creature an opponent controls with mana value 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature an opponent controls with mana value 4 or greater.
+SVar:DBRetake:DB$ GainControlVariant | AllValid$ Permanent | ChangeController$ CardOwner | SpellDescription$ Each player gains control of all permanents they own.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Exile target creature an opponent controls with mana value 4 or greater.\nII — Each player gains control of all permanents they own.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Fragment of Konda
+ManaCost:no cost
+Colors:white
+Types:Enchantment Creature Human Noble
+PT:1/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:SacMe:1
+Oracle:Defender\nWhen Fragment of Konda dies, draw a card.

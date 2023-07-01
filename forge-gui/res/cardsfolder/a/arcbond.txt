@@ -1,0 +1,9 @@
+Name:Arcbond
+ManaCost:2 R
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature | Triggers$ TrigDealtDmg | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | SpellDescription$ Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
+SVar:TrigDealtDmg:Mode$ DamageDoneOnce | ValidTarget$ Card.IsRemembered | Execute$ DmgOther | TriggerDescription$ Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
+SVar:DmgOther:DB$ DamageAll | ValidCards$ Creature.IsNotRemembered | ValidPlayers$ Player | NumDmg$ X | DamageSource$ Remembered
+SVar:X:TriggerCount$DamageAmount
+AI:RemoveDeck:All
+Oracle:Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.

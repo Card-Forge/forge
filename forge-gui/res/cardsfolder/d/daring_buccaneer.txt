@@ -1,0 +1,6 @@
+Name:Daring Buccaneer
+ManaCost:R
+Types:Creature Human Pirate
+PT:2/2
+K:AlternateAdditionalCost:Reveal<1/Pirate>:2
+Oracle:As an additional cost to cast this spell, reveal a Pirate card from your hand or pay {2}.

@@ -1,0 +1,6 @@
+Name:Benthic Giant
+ManaCost:5 U
+Types:Creature Giant
+PT:4/5
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

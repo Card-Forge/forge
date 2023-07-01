@@ -1,0 +1,7 @@
+Name:Thoughtpicker Witch
+ManaCost:B
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Dig | Cost$ 1 Sac<1/Creature> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 2 | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition2$ 0 | SpellDescription$ Look at the top two cards of target opponent's library, then exile one of them.
+AI:RemoveDeck:All
+Oracle:{1}, Sacrifice a creature: Look at the top two cards of target opponent's library, then exile one of them.

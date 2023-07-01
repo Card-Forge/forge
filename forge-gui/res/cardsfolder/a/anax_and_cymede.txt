@@ -1,0 +1,9 @@
+Name:Anax and Cymede
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:First Strike
+K:Vigilance
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+1 and gain trample until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +1 | NumDef$ +1
+Oracle:First strike, vigilance\nHeroic — Whenever you cast a spell that targets Anax and Cymede, creatures you control get +1/+1 and gain trample until end of turn.

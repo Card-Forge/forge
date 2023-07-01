@@ -1,0 +1,8 @@
+Name:Voice of the Provinces
+ManaCost:4 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You
+Oracle:Flying\nWhen Voice of the Provinces enters the battlefield, create a 1/1 white Human creature token.

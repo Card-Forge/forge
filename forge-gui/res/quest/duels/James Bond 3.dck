@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=James Bond 3
+Title=James Bond
+Difficulty=hard
+Description=WG Sliver deck
+Icon=James Bond.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Windswept Heath
+4 Wooded Foothills
+4 Sliver Hive
+3 Plains|M12
+1 Forest|M12
+1 Mox Emerald
+1 Mox Pearl
+4 Plated Sliver
+4 Virulent Sliver
+4 Sidewinder Sliver
+4 Predatory Sliver
+4 Sinew Sliver
+1 Venom Sliver
+1 Talon Sliver
+1 Bonescythe Sliver
+1 Sentinel Sliver
+1 Spinneret Sliver
+1 Horned Sliver
+1 Reflex Sliver
+1 Watcher Sliver
+1 Essence Sliver
+1 Might Sliver
+3 Oblivion Ring
+2 Path to Exile
+2 Valorous Stance
+1 Harmonize
+[sideboard]

@@ -1,0 +1,26 @@
+[metadata]
+Name=Elspeth, Undaunted Hero
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+Description=Elspeth is a renowned warrior, who has defeated everything from gods to death itself. With Elspeth's deck, you'll build up a battalion of devoted soldiers and lead them fearlessly to a glorious victory.
+Set=THB
+Image=elspeth_undaunted_hero.jpg
+[Main]
+2 Archon of Falling Stars|THB
+1 Daxos, Blessed by the Sun|THB
+4 Daybreak Chimera|THB
+3 Dreadful Apathy|THB
+3 Eidolon of Inspiration|THB
+2 Elspeth's Devotee|THB
+1 Elspeth, Undaunted Hero+|THB
+2 Hero of the Winds|THB
+3 Indomitable Will|THB
+3 Karametra's Blessing|THB
+4 Leonin of the Lost Pride|THB
+2 Phalanx Tactics|THB
+25 Plains|THB
+4 Sunlit Hoplite|THB
+1 Taranika, Akroan Veteran|THB

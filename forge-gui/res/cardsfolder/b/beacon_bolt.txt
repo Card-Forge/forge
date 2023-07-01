@@ -1,0 +1,8 @@
+Name:Beacon Bolt
+ManaCost:1 U R
+Types:Sorcery
+K:Jump-start
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
+SVar:X:Count$ValidGraveyard,Exile Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Type$Instant|Sorcery
+Oracle:Beacon Bolt deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

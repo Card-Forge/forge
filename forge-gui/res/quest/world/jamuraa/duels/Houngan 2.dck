@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Houngan 2
+Title=Houngan
+Icon=Houngan.jpg
+Difficulty=medium
+Description=Fast BR aggro and burn deck.
+Deck Type=constructed
+[main]
+4 Dark Ritual|LEB
+4 Fallen Askari|VIS
+2 Fireball|LEB
+2 Guerrilla Tactics|ALL
+4 Incinerate|MIR
+9 Mountain|MIR
+4 Phyrexian War Beast|ALL
+2 Shadow Guildmage|MIR
+4 Skulking Ghost|MIR
+2 Sulfurous Springs|ICE
+4 Suq'Ata Lancer|VIS
+9 Swamp|MIR
+4 Talruum Minotaur|MIR
+4 Tar Pit Warrior|VIS
+2 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

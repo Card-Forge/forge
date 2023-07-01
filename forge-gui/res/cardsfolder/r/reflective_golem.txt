@@ -1,0 +1,7 @@
+Name:Reflective Golem
+ManaCost:3
+Types:Artifact Creature Golem
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | IsSingleTarget$ True | TargetsValid$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets only CARDNAME, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 2 | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Whenever you cast an instant or sorcery spell that targets only Reflective Golem, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy.

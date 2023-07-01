@@ -1,0 +1,7 @@
+Name:Rewards of Diversity
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent casts a multicolored spell, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent casts a multicolored spell, you gain 4 life.

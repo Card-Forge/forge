@@ -1,0 +1,8 @@
+Name:Ramroller
+ManaCost:3
+Types:Artifact Creature Juggernaut
+PT:2/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Artifact.YouCtrl+Other | Description$ CARDNAME gets +2/+0 as long as you control another artifact.
+SVar:BuffedBy:Artifact
+Oracle:Ramroller attacks each combat if able.\nRamroller gets +2/+0 as long as you control another artifact.

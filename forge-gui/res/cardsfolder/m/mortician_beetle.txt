@@ -1,0 +1,7 @@
+Name:Mortician Beetle
+ManaCost:B
+Types:Creature Insect
+PT:1/1
+T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player sacrifices a creature, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.

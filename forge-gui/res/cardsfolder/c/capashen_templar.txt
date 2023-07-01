@@ -1,0 +1,6 @@
+Name:Capashen Templar
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/2
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+Oracle:{W}: Capashen Templar gets +0/+1 until end of turn.

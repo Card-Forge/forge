@@ -1,0 +1,6 @@
+Name:Flamecore Elemental
+ManaCost:2 R R
+Types:Creature Elemental
+PT:5/4
+K:Echo:2 R R
+Oracle:Echo {2}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

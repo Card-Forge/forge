@@ -1,0 +1,7 @@
+Name:Boris Devilboon
+ManaCost:3 B R
+Types:Legendary Creature Zombie Wizard
+PT:2/2
+A:AB$ Token | Cost$ 2 B R T | TokenAmount$ 1 | TokenScript$ minor_demon | TokenOwner$ You | SpellDescription$ Create a 1/1 black and red Demon creature token named Minor Demon.
+DeckHas:Ability$Token & Type$Demon
+Oracle:{2}{B}{R}, {T}: Create a 1/1 black and red Demon creature token named Minor Demon.

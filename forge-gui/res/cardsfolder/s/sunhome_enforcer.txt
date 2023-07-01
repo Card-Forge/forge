@@ -1,0 +1,10 @@
+Name:Sunhome Enforcer
+ManaCost:2 R W
+Types:Creature Giant Soldier
+PT:2/4
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Sunhome Enforcer deals combat damage, you gain that much life.\n{1}{R}: Sunhome Enforcer gets +1/+0 until end of turn.

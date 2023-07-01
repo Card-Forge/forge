@@ -1,0 +1,8 @@
+Name:Drinker of Sorrow
+ManaCost:2 B
+Types:Creature Horror
+PT:5/3
+K:CARDNAME can't block.
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME deals combat damage, sacrifice a permanent.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Permanent
+Oracle:Drinker of Sorrow can't block.\nWhenever Drinker of Sorrow deals combat damage, sacrifice a permanent.

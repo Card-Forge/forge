@@ -1,0 +1,7 @@
+Name:Lymph Sliver
+ManaCost:4 W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Absorb:1 | Description$ All Sliver creatures have absorb 1. (If a source would deal damage to a Sliver, prevent 1 of that damage.)
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have absorb 1. (If a source would deal damage to a Sliver, prevent 1 of that damage.)

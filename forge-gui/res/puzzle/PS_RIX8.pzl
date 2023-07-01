@@ -1,0 +1,26 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/03/RIX8-Mar-12.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You only have one card left in your library. Assume it is irrelevant to the puzzle. You have many cards in your graveard, but they also aren't relevant to the puzzle.
+[state]
+humanlife=3
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Fling;Reckless Rage;Fateful Showdown;Golden Demise
+humanlibrary=Riparian Tiger
+humangraveyard=Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger;Riparian Tiger
+humanbattlefield=Perpetual Timepiece;Filigree Familiar;Grim Strider;Frilled Deathspitter;Mountain|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;Swamp|Set:XLN
+humanexile=
+humancommand=
+humanprecast=Pirate's Prize:DBTreasure
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Sun-Crowned Hunters;Sun-Crowned Hunters;t:Merfolk,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Merfolk,Keywords:Hexproof,Image:u_1_1_merfolk_xln
+aiexile=
+aicommand=

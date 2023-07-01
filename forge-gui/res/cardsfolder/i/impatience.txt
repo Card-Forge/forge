@@ -1,0 +1,8 @@
+Name:Impatience
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ TrigCast | SVarCompare$ EQ0 | Execute$ ImpatientDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to that player.
+SVar:ImpatientDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+SVar:TrigCast:Count$ThisTurnCast_Card.ActivePlayerCtrl
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to that player.

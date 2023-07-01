@@ -1,0 +1,10 @@
+Name:Caldera Lake|Art:Caldera Lake|Colors:UR
+Name:Cinder Marsh|Art:Cinder Marsh|Colors:BR
+Name:Mogg Hollows|Art:Mogg Hollows|Colors:RG
+Name:Pine Barrens|Art:Pine Barrens|Colors:BG
+Name:Rootwater Depths|Art:Rootwater Depths|Colors:UB
+Name:Salt Flats|Art:Salt Flats|Colors:WB
+Name:Scabland|Art:Scabland|Colors:RW
+Name:Skyshroud Forest|Art:Skyshroud Forest|Colors:GU
+Name:Thalakos Lowlands|Art:Thalakos Lowlands|Colors:WU
+Name:Vec Townships|Art:Vec Townships|Colors:GW

@@ -1,0 +1,7 @@
+Name:Reroute
+ManaCost:1 R
+Types:Instant
+A:SP$ ChangeTargets | TargetType$ Activated.singleTarget | ValidTgts$ Card | TgtPrompt$ Select target activated ability with a single target | SubAbility$ DBDraw | SpellDescription$ Change the target of target activated ability with a single target. (Mana abilities can't be targeted.) Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:All
+Oracle:Change the target of target activated ability with a single target. (Mana abilities can't be targeted.)\nDraw a card.

@@ -1,0 +1,11 @@
+Name:Ammit Eternal
+ManaCost:2 B
+Types:Creature Zombie Crocodile Demon
+PT:5/5
+K:Afflict:3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, put a -1/-1 counter on CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, remove all -1/-1 counters from it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ All
+SVar:All:Count$CardCounters.M1M1
+Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nWhenever an opponent casts a spell, put a -1/-1 counter on Ammit Eternal.\nWhenever Ammit Eternal deals combat damage to a player, remove all -1/-1 counters from it.

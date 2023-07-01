@@ -1,0 +1,7 @@
+Name:Tireless Tribe
+ManaCost:W
+Types:Creature Human Nomad
+PT:1/1
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumDef$ +4 | SpellDescription$ CARDNAME gets +0/+4 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Discard a card: Tireless Tribe gets +0/+4 until end of turn.

@@ -1,0 +1,12 @@
+Name:Minion of Leshrac
+ManaCost:4 B B B
+Types:Creature Demon Minion
+PT:5/5
+K:Protection from black
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 5 damage to you unless you sacrifice a creature other than CARDNAME. If CARDNAME deals damage to you this way, tap it.
+SVar:TrigDmg:DB$ DealDamage | Defined$ You | NumDmg$ 5 | UnlessCost$ Sac<1/Creature.Other/a creature other than CARDNAME> | RememberDamaged$ True | UnlessPayer$ TriggeredPlayer | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Destroy | Cost$ T | ValidTgts$ Land,Creature | TgtPrompt$ Select target creature or land | SpellDescription$ Destroy target creature or land.
+AI:RemoveDeck:All
+Oracle:Protection from black\nAt the beginning of your upkeep, Minion of Leshrac deals 5 damage to you unless you sacrifice a creature other than Minion of Leshrac. If Minion of Leshrac deals damage to you this way, tap it.\n{T}: Destroy target creature or land.

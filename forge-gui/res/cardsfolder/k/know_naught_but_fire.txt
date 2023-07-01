@@ -1,0 +1,8 @@
+Name:Know Naught but Fire
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DmgAll | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, it deals damage to each opponent equal to the number of cards in that player's hand.
+SVar:DmgAll:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDamage | DamageMap$ True
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X
+SVar:X:PlayerCountRemembered$CardsInHand
+Oracle:When you set this scheme in motion, it deals damage to each opponent equal to the number of cards in that player's hand.

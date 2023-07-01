@@ -1,0 +1,6 @@
+Name:Magmatic Insight
+ManaCost:R
+Types:Sorcery
+A:SP$ Draw | Cost$ R Discard<1/Land/land card> | CostDesc$ As an additional cost to cast this spell, discard a land card. | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard a land card.\nDraw two cards.

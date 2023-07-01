@@ -1,0 +1,8 @@
+Name:Garrulous Sycophant
+ManaCost:2 B
+Types:Creature Human Advisor
+PT:1/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigDrain | TriggerDescription$ At the beginning of your end step, if you're the monarch, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:At the beginning of your end step, if you're the monarch, each opponent loses 1 life and you gain 1 life.

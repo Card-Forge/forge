@@ -1,0 +1,11 @@
+Name:Chishiro, the Shattered Blade
+ManaCost:2 R G
+Types:Legendary Creature Snake Samurai
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Aura.YouCtrl,Equipment.YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever an Aura or Equipment enters the battlefield under your control, create a 2/2 red Spirit creature token with menace.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_spirit_menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each modified creature you control. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+modified | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Aura|Equipment & Ability$Counters
+DeckHas:Ability$Token & Type$Spirit & Ability$Counters
+Oracle:Whenever an Aura or Equipment enters the battlefield under your control, create a 2/2 red Spirit creature token with menace.\nAt the beginning of your end step, put a +1/+1 counter on each modified creature you control. (Equipment, Auras you control, and counters are modifications.)

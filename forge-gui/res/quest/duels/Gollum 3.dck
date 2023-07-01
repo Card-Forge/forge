@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gollum 3
+Title=Gollum
+Difficulty=hard
+Description=BG +1/+1 counter deck with Corpsejack Menace
+Icon=Gollum.jpg
+Deck Type=constructed
+[main]
+4 Corpsejack Menace
+2 Hardened Scales
+4 Bayou
+4 Verdant Catacombs
+4 Windswept Heath
+4 Woodland Cemetery
+2 Swamp
+3 Forest
+1 Mox Jet
+1 Mox Emerald
+2 Abrupt Decay
+1 Maelstrom Pulse
+1 Putrefy
+1 Cytoplast Root-Kin
+1 Deadbridge Goliath
+1 Desecration Demon
+2 Dreg Mangler
+2 Feral Hydra
+1 Forgotten Ancient
+1 Fungal Behemoth
+1 Mirri the Cursed
+1 Necropolis Regent
+1 Ob Nixilis, the Fallen
+2 Primordial Hydra
+4 Scute Mob
+1 Skullbriar, the Walking Grave
+1 Slitherhead
+1 Spiritmonger
+1 Vigor
+4 Vinelasher Kudzu
+1 Vulturous Zombie
+[sideboard]

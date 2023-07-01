@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wonder Woman 4
+Title=Wonder Woman
+Difficulty=very hard
+Description=Mono W Equipment deck
+Icon=Wonder Woman.jpg
+Deck Type=constructed
+[main]
+10 Plains|MBS
+4 Ancient Den
+1 Darksteel Citadel
+1 Mox Emerald
+1 Mox Jet
+1 Mox Opal
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+1 Sol Ring
+4 Kitesail Apprentice
+4 Kor Duelist
+3 Auriok Steelshaper
+4 Stoneforge Mystic
+4 Puresteel Paladin
+3 Sword of Feast and Famine
+3 Sword of Fire and Ice
+3 Sword of Light and Shadow
+3 Sword of War and Peace
+1 Loxodon Warhammer
+1 Batterskull
+4 Dispatch
+1 Swords to Plowshares
+[sideboard]

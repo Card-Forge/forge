@@ -1,0 +1,11 @@
+Name:Waste Not
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Creature.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
+T:Mode$ Discarded | ValidCard$ Land.OppOwn | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever an opponent discards a land card, add {B}{B}.
+SVar:TrigMana:DB$ Mana | Produced$ B | Amount$ 2 | Defined$ You
+T:Mode$ Discarded | ValidCard$ Card.nonLand+nonCreature+OppOwn | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent discards a noncreature, nonland card, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.\nWhenever an opponent discards a land card, add {B}{B}.\nWhenever an opponent discards a noncreature, nonland card, draw a card.

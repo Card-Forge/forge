@@ -1,0 +1,8 @@
+Name:Quiet Contemplation
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {1}. If you do, tap target creature an opponent controls. It doesn't untap during its controller's next untap step.
+SVar:TrigTap:AB$ Tap | Cost$ 1 | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPump | TgtPrompt$ Select target creature an opponent controls.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, tap target creature an opponent controls and it doesn't untap during its controller's next untap step.

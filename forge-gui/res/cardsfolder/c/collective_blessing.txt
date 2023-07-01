@@ -1,0 +1,6 @@
+Name:Collective Blessing
+ManaCost:3 G G W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | AddToughness$ 3 | Description$ Creatures you control get +3/+3.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +3/+3.

@@ -1,0 +1,8 @@
+Name:Armament Master
+ManaCost:W W
+Types:Creature Kor Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Kor+Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other Kor creatures you control get +2/+2 for each Equipment attached to CARDNAME.
+SVar:X:Count$Valid Equipment.Attached/Times.2
+SVar:EquipMe:Multiple
+Oracle:Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master.

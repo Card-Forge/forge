@@ -1,0 +1,9 @@
+Name:Akim, the Soaring Wind|Deck:Akim, the Soaring Wind.dck|Variant:Commander|Avatar:Akim, the Soaring Wind|Desc:
+Name:Shabraz, the Skyshark|Deck:Shabraz, the Skyshark.dck|Variant:Commander|Avatar:Shabraz, the Skyshark|Desc:
+Name:Narset of the Ancient Way|Deck:Narset of the Ancient Way.dck|Variant:Planeswalker|Avatar:Narset of the Ancient Way|Desc:
+Name:Vadrok, Apex of Thunder|Deck:Vadrok, Apex of Thunder.dck|Variant:Commander|Avatar:Vadrok, Apex of Thunder|Desc:
+Name:Yorion, Sky Nomad|Deck:Yorion, Sky Nomad.dck|Variant:Commander|Avatar:Yorion, Sky Nomad|Desc:
+Name:Winota, Joiner of Forces|Deck:Winota, Joiner of Forces.dck|Variant:Commander|Avatar:Winota, Joiner of Forces|Desc:
+Name:Yidaro, Wandering Monster|Deck:Yidaro, Wandering Monster.dck|Variant:Commander|Avatar:Yidaro, Wandering Monster|Desc:
+Name:Isperia, Supreme Judge|Deck:Isperia, Supreme Judge.dck|Variant:Commander|Avatar:Isperia, Supreme Judge|Desc:
+Name:Random Raugrin|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

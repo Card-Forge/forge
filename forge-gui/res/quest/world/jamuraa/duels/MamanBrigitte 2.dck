@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Maman Brigitte 2
+Title=Maman Brigitte
+Icon=MamanBrigitte.jpg
+Difficulty=medium
+Description=Maman Brigitte plays a BU 'Unnatural Forces' deck.
+Deck Type=constructed
+[main]
+1 Blue Elemental Blast|LEB
+2 Boomerang|MIR
+2 Brood of Cockroaches|VIS
+2 Coercion|VIS
+1 Coral Fighters|MIR
+2 Enfeeblement|MIR
+2 Fetid Horror|MIR
+1 Flight|LEB
+1 Flooded Shoreline|VIS
+1 Funeral Charm|VIS
+2 Impulse|VIS
+2 Inspiration|VIS
+12 Island|MIR
+2 Kukemssa Serpent|MIR
+2 Man-o'-War|VIS
+2 Animate Dead|5ED
+1 Necrosavant|VIS
+1 Nekrataal|VIS
+1 Ray of Command|MIR
+2 Restless Dead|MIR
+2 Sealed Fate|MIR
+1 Shrieking Drake|VIS
+12 Swamp|MIR
+2 Waterspout Djinn|VIS
+1 Zombie Mob|MIR
+[sideboard]
+[planes]
+[schemes]

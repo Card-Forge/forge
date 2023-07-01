@@ -1,0 +1,10 @@
+Name:Azorius Chancery|Art:Azorius Chancery|Colors:WU
+Name:Boros Garrison|Art:Boros Garrison|Colors:RW
+Name:Dimir Aqueduct|Art:Dimir Aqueduct|Colors:UB
+Name:Golgari Rot Farm|Art:Golgari Rot Farm|Colors:BG
+Name:Gruul Turf|Art:Gruul Turf|Colors:RG
+Name:Izzet Boilerworks|Art:Izzet Boilerworks|Colors:UR
+Name:Orzhov Basilica|Art:Orzhov Basilica|Colors:WB
+Name:Rakdos Carnarium|Art:Rakdos Carnarium|Colors:BR
+Name:Selesnya Sanctuary|Art:Selesnya Sanctuary|Colors:GW
+Name:Simic Growth Chamber|Art:Simic Growth Chamber|Colors:GU

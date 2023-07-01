@@ -1,0 +1,6 @@
+Name:Demonic Rising
+ManaCost:3 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You
+Oracle:At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying.

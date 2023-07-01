@@ -1,0 +1,5 @@
+Name:Goblin Cavaliers
+ManaCost:2 R
+Types:Creature Goblin
+PT:3/2
+Oracle:

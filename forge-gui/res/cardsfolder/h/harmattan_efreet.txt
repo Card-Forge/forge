@@ -1,0 +1,7 @@
+Name:Harmattan Efreet
+ManaCost:2 U U
+Types:Creature Efreet
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+Oracle:Flying\n{1}{U}{U}: Target creature gains flying until end of turn.

@@ -1,0 +1,8 @@
+Name:Reconstructed Thopter
+ManaCost:3
+Types:Artifact Creature Thopter
+PT:2/1
+K:Flying
+K:Unearth:2
+DeckHas:Ability$Graveyard
+Oracle:Flying\nUnearth {2}({2}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

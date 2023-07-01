@@ -1,0 +1,7 @@
+Name:Sylvan Safekeeper
+ManaCost:G
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Pump | Cost$ Sac<1/Land> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Shroud | SpellDescription$ Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
+AI:RemoveDeck:All
+Oracle:Sacrifice a land: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)

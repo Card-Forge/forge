@@ -1,0 +1,7 @@
+Name:Mina and Denn, Wildborn
+ManaCost:2 R G
+Types:Legendary Creature Elf Ally
+PT:4/4
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+A:AB$ Pump | Cost$ R G Return<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
+Oracle:You may play an additional land on each of your turns.\n{R}{G}, Return a land you control to its owner's hand: Target creature gains trample until end of turn.

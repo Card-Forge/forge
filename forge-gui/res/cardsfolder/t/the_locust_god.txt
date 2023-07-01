@@ -1,0 +1,14 @@
+Name:The Locust God
+ManaCost:4 U R
+Types:Legendary Creature God
+PT:4/4
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ur_1_1_insect_flying_haste | TokenOwner$ You
+A:AB$ Draw | Cost$ 2 U R | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to its owner's hand at the beginning of the next end step.
+SVar:TrigDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ TriggeredNewCardLKICopy | Execute$ TrigReturn | SpellDescription$ Return that creature to its owner's hand at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.\n{2}{U}{R}: Draw a card, then discard a card.\nWhen The Locust God dies, return it to its owner's hand at the beginning of the next end step.

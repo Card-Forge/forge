@@ -1,0 +1,15 @@
+Name:Merchant of the Vale
+ManaCost:2 R
+Types:Creature Human Peasant
+PT:2/3
+A:AB$ Draw | Cost$ 2 R Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+AlternateMode:Adventure
+Oracle:{2}{R}, Discard a card: Draw a card.
+
+ALTERNATE
+
+Name:Haggle
+ManaCost:R
+Types:Instant Adventure
+A:SP$ Draw | Cost$ R | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | SpellDescription$ You may discard a card. If you do, draw a card.
+Oracle:You may discard a card. If you do, draw a card. (Then exile this card. You may cast the creature later from exile.)

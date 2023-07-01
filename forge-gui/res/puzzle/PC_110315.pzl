@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 110315 - Challenge the Pack
+URL:http://www.gatheringmagic.com/seanuy-110315-challenge-the-pack/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=7
+AILife=3
+humanhand=Forest|Set:BFZ; Outnumber|Set:BFZ; Call the Scions|Set:BFZ; Unnatural Aggression|Set:BFZ; Infuse with the Elements|Set:BFZ; Tajuru Beastmaster|Set:BFZ
+humangraveyard=
+humanlibrary=
+humanbattlefield=Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Mortuary Mire|Set:BFZ; Akoum Stonewaker|Set:BFZ; Void Attendant|Set:BFZ; Bane of Bala Ged|Set:BFZ
+aibattlefield=Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Salvage Drone|Set:BFZ; Eldrazi Skyspawner|Set:BFZ|Tapped; Dominator Drone|Set:BFZ; Oracle of Dust|Set:BFZ; Deathless Behemoth|Set:BFZ; Void Winnower|Set:BFZ; Retreat to Coralhelm|Set:BFZ
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

@@ -1,0 +1,8 @@
+Name:Ghoulcaller Gisa
+ManaCost:3 B B
+Types:Legendary Creature Human Wizard
+PT:3/4
+A:AB$ Token | Cost$ B T Sac<1/Creature.Other/another creature> | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:{B}, {T}, Sacrifice another creature: Create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.

@@ -1,0 +1,6 @@
+Name:Mist Leopard
+ManaCost:3 G
+Types:Creature Cat
+PT:3/2
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)

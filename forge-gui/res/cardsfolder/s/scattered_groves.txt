@@ -1,0 +1,6 @@
+Name:Scattered Groves
+ManaCost:no cost
+Types:Land Forest Plains
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:2
+Oracle:({T}: Add {G} or {W}.)\nScattered Groves enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

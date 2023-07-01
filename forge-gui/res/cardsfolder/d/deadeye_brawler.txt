@@ -1,0 +1,9 @@
+Name:Deadeye Brawler
+ManaCost:2 U B
+Types:Creature Human Pirate
+PT:2/4
+K:Deathtouch
+K:Ascend
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | Blessing$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you have the city's blessing, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Deathtouch\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nWhenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.

@@ -1,0 +1,16 @@
+Name:Selfless Glyphweaver
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/3
+A:AB$ PumpAll | Cost$ Exile<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
+AlternateMode:Modal
+Oracle:Exile Selfless Glyphweaver: Creatures you control gain indestructible until end of turn.
+
+ALTERNATE
+
+Name:Deadly Vanity
+ManaCost:5 B B B
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature,Planeswalker | ChoiceTitle$ Choose a creature or planeswalker | Mandatory$ True | ChoiceZone$ Battlefield | SubAbility$ DBDestroyAll | StackDescription$ SpellDescription | SpellDescription$ Choose a creature or planeswalker,
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard,Planeswalker.nonChosenCard | StackDescription$ SpellDescription | SpellDescription$ then destroy all other creatures and planeswalkers.
+Oracle:Choose a creature or planeswalker, then destroy all other creatures and planeswalkers.

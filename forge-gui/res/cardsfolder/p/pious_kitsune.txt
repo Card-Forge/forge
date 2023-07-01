@@ -1,0 +1,12 @@
+Name:Pious Kitsune
+ManaCost:2 W
+Types:Creature Fox Cleric
+PT:1/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a devotion counter on CARDNAME. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEVOTION | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | ConditionCheckSVar$ PiousCheckName | ConditionSVarCompare$ GE1
+SVar:PiousCheckName:Count$Valid Creature.namedEight-and-a-Half-Tails
+SVar:X:Count$CardCounters.DEVOTION
+A:AB$ GainLife | Cost$ T SubCounter<1/DEVOTION> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+DeckHints:Name$Eight-and-a-Half-Tails
+Oracle:At the beginning of your upkeep, put a devotion counter on Pious Kitsune. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on Pious Kitsune.\n{T}, Remove a devotion counter from Pious Kitsune: You gain 1 life.

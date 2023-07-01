@@ -1,0 +1,20 @@
+[metadata]
+Code=F07
+Date=2007-01-01
+Name=Friday Night Magic 2007
+Type=Promo
+ScryfallCode=F07
+
+[cards]
+1 R Firebolt @Ron Spencer
+2 R Deep Analysis @Daren Bader
+3 R Gerrard's Verdict @Carl Critchlow
+4 R Basking Rootwalla @Heather Hudson
+5 R Wonder @Rebecca Guay
+6 R Goblin Legionnaire @Mark Romanoski
+7 R Engineered Plague @Michael Sutfin
+8 R Goblin Ringleader @Mark Romanoski
+9 R Wing Shards @Daren Bader
+10 R Cabal Coffers @Don Hazeltine
+11 R Roar of the Wurm @Kev Walker
+12 R Force Spike @Bryon Wackwitz

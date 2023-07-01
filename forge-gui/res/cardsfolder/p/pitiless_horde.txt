@@ -1,0 +1,8 @@
+Name:Pitiless Horde
+ManaCost:2 B
+Types:Creature Orc Berserker
+PT:5/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+K:Dash:2 B B
+Oracle:At the beginning of your upkeep, you lose 2 life.\nDash {2}{B}{B} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

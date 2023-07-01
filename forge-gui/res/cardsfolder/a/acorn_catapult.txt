@@ -1,0 +1,7 @@
+Name:Acorn Catapult
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 1 T | NumDmg$ 1 | ValidTgts$ Any | SubAbility$ SquirrelToken | SpellDescription$ CARDNAME deals 1 damage to any target. That permanent's controller or that player creates a 1/1 green Squirrel creature token.
+SVar:SquirrelToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ TargetedOrController
+AI:RemoveDeck:All
+Oracle:{1}, {T}: Acorn Catapult deals 1 damage to any target. That permanent's controller or that player creates a 1/1 green Squirrel creature token.

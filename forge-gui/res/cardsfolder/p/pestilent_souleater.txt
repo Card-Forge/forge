@@ -1,0 +1,6 @@
+Name:Pestilent Souleater
+ManaCost:5
+Types:Artifact Creature Phyrexian Insect
+PT:3/3
+A:AB$ Pump | Cost$ BP | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
+Oracle:{B/P}: Pestilent Souleater gains infect until end of turn. ({B/P} can be paid with either {B} or 2 life. A creature with infect deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

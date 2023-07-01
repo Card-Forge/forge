@@ -1,0 +1,7 @@
+Name:Autochthon Wurm
+ManaCost:10 G G G W W
+Types:Creature Wurm
+PT:9/14
+K:Trample
+K:Convoke
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTrample

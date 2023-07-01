@@ -1,0 +1,8 @@
+Name:Penumbra Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 6/6 black Wurm creature token with trample.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_6_6_wurm_trample | TokenOwner$ TriggeredCardController
+Oracle:Trample\nWhen Penumbra Wurm dies, create a 6/6 black Wurm creature token with trample.

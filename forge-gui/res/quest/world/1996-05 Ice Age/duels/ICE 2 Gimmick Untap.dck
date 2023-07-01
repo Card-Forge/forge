@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=ICE 2 Gimmick: Untap
+Title=Untap
+Difficulty=medium
+Description="The potential for change lies in all things. Know a thing's nature, know its possibilities, and know it anew." -Gustha Ebbasdotter, Kjeldoran Royal Mage
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+2 Benthic Explorers|ALL|1
+2 Benthic Explorers|ALL|2
+2 Icy Manipulator|ICE
+4 Infuse|ICE
+4 Island|ICE|2
+4 Kjeldoran Elite Guard|ICE
+1 Lapis Lazuli Talisman|ICE
+4 Merieke Ri Berit|ICE
+4 Minion of Tevesh Szat|ICE
+4 Norritt|ICE
+1 Onyx Talisman|ICE
+2 Plains|ICE|2
+4 Soldevi Golem|ICE
+6 Swamp|ICE|1
+4 Thawing Glaciers|ALL
+4 Underground River|ICE
+4 Zuran Spellcaster|ICE

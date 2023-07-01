@@ -1,0 +1,7 @@
+Name:Twinblade Slasher
+ManaCost:G
+Types:Creature Elf Warrior
+PT:1/1
+A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+K:Wither
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{1}{G}: Twinblade Slasher gets +2/+2 until end of turn. Activate only once each turn.

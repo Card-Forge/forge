@@ -1,0 +1,9 @@
+Name:Jeskai Sage
+ManaCost:1 U
+Types:Creature Human Monk
+PT:1/1
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:SacMe:1
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Jeskai Sage dies, draw a card.

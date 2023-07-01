@@ -1,0 +1,6 @@
+Name:Ravenous Baloth
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+A:AB$ GainLife | Cost$ Sac<1/Beast> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+Oracle:Sacrifice a Beast: You gain 4 life.

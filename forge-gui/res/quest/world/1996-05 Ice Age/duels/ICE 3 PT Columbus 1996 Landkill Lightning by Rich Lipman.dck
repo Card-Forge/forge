@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=ICE 3 PT Columbus 1996: Landkill Lightning by Rich Lipman
+Title=Landkill Lightning
+Difficulty=Hard
+Description=Played by Rich Lipman at Pro Tour: Columbus 1996.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Balduvian Horde|ALL
+1 Elvish Ranger|ALL|1
+4 Forest|ICE|1
+3 Forest|ICE|2
+3 Forest|ICE|3
+4 Fyndhorn Elves|ICE
+1 Icy Manipulator|ICE
+3 Incinerate|ICE
+1 Johtull Wurm|ICE
+4 Karplusan Forest|ICE
+4 Mountain|ICE|1
+3 Mountain|ICE|2
+3 Mountain|ICE|3
+1 Phyrexian Portal|ALL
+4 Pillage|ALL
+2 Rogue Skycaptain|ALL
+4 Stone Rain|ICE
+2 Stormbind|ICE
+4 Thermokarst|ICE
+2 Yavimaya Ants|ALL
+1 Zuran Orb|ICE
+[Sideboard]
+4 Anarchy|ICE
+2 Burnout|ALL
+1 Essence Filter|ICE
+2 Jokulhaups|ICE
+1 Monsoon|ICE
+2 Nature's Wrath|ALL
+3 Pyroblast|ICE

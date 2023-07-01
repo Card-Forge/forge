@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Adventures in the Forgotten Realms #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/08/180.-AFR2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent's Mind Flayer is controlling your Treeshaker Chimera 'mutate stack'. Both players start with 12 cards remaining in their libraries. Assume whatever they are is not relevant to the solution.
+[state]
+humanlife=20
+ailife=18
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Lore Drakkis;Struggle for Skemfar;Witherbloom Command
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Mordenkainen|Counters:LOYALTY=3;Pestilent Cauldron;Koma's Faithful;Vineglimmer Snarl;Vineglimmer Snarl;Vineglimmer Snarl;Temple of Deceit;Temple of Deceit;Temple of Deceit;Island;Treeshaker Chimera|MergedCards:Dreamtail Heron,Dreamtail Heron,Dreamtail Heron|Counters:P1P1=1|Id:1
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Mind Flayer|ExecuteScript:TrigChange->1;Cogwork Archivist|Tapped
+humanprecast=Mordenkainen:2
+removesummoningsickness=true

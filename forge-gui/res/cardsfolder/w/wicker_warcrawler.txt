@@ -1,0 +1,9 @@
+Name:Wicker Warcrawler
+ManaCost:5
+Types:Artifact Creature Scarecrow
+PT:6/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it at end of combat.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigAddCounter | TriggerDescription$ Put a -1/-1 counter on CARDNAME.
+SVar:TrigAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+Oracle:Whenever Wicker Warcrawler attacks or blocks, put a -1/-1 counter on it at end of combat.

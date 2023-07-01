@@ -1,0 +1,15 @@
+Name:Dragonborn Immolator
+ManaCost:3 R
+Types:Creature Dragon Shaman
+PT:2/4
+A:AB$ Pump | Cost$ 2 R | NumAtt$ 2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigNote | TriggerDescription$ Gift of Tiamat — When CARDNAME dies, if its power is greater than 0, note its power. You get a boon with "When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number."
+SVar:TrigNote:DB$ StoreSVar | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SVar$ NotedPower | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
+SVar:NotedPower:Number$0
+SVar:X:Count$CardPower
+SVar:DBEffect:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | SetChosenNumber$ NotedPower
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Flaming Fist Duskguard's Boon's Perpetual Effect
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ Y | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +X/+0, where X is the noted number.
+SVar:Y:Count$ChosenNumber
+Oracle:{2}{R}: Dragonborn Immolator gets +2/+0 until end of turn.\nGift of Tiamat — When Dragonborn Immolator dies, if its power is greater than 0, note its power. You get a boon with "When you cast your next creature spell, it perpetually gets +X/+0, where X is the noted number."

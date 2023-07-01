@@ -1,0 +1,10 @@
+Name:Jin-Gitaxias, Progress Tyrant
+ManaCost:5 U U
+Types:Legendary Creature Phyrexian Praetor
+PT:5/5
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant,Sorcery,Artifact | ValidActivatingPlayer$ You | ActivationLimit$ 1 | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an artifact, instant or sorcery spell, copy that spell. You may choose new targets for the copy. This ability triggers only once each turn. (A copy of a permanent spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant,Sorcery,Artifact | ValidActivatingPlayer$ Opponent | ActivationLimit$ 1 | Execute$ TrigCounter | TriggerDescription$ Whenever an opponent casts an artifact, instant or sorcery spell, counter that spell. This ability triggers only once each turn.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
+DeckHints:Type$Artifact|Instant|Sorcery
+Oracle:Whenever you cast an artifact, instant or sorcery spell, copy that spell. You may choose new targets for the copy. This ability triggers only once each turn. (A copy of a permanent spell becomes a token.)\nWhenever an opponent casts an artifact, instant or sorcery spell, counter that spell. This ability triggers only once each turn.

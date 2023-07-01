@@ -1,0 +1,9 @@
+Name:Orcish Artillery
+ManaCost:1 R R
+Types:Creature Orc Warrior
+PT:1/3
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 2 | DamageMap$ True | AILogic$ SelfDamage | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to you.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:SelfDamageAmount:3
+Oracle:{T}: Orcish Artillery deals 2 damage to any target and 3 damage to you.

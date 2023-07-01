@@ -1,0 +1,8 @@
+Name:Icehide Troll
+ManaCost:2 G
+Types:Snow Creature Troll Warrior
+PT:2/3
+A:AB$ Pump | Cost$ S S | Defined$ Self | NumAtt$ +2 | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gets +2/+0 and gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+DeckNeeds:Type$Snow
+Oracle:{S}{S}: Icehide Troll gets +2/+0 and gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it. {S} can be paid with one mana from a snow source.)

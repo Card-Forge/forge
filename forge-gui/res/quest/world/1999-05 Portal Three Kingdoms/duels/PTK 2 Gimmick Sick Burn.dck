@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Sick Burn
+Title=Sick Burn
+Difficulty=medium
+Description="In raiding and plundering, be like fire, in immovability like a mountain."\n-Sun Tzu, Art of War (trans. Giles)
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PTK
+4 Burning Fields|PTK
+4 Dong Zhou, the Tyrant|PTK
+4 Famine|PTK
+4 Fire Ambush|PTK
+2 Fire Bowman|PTK
+2 Lu Bu, Master-at-Arms|PTK
+12 Mountain|PTK|3
+4 Rolling Earthquake|PTK
+4 Stolen Grain|PTK
+12 Swamp|PTK|1
+4 Xiahou Dun, the One-Eyed|PTK

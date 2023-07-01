@@ -1,0 +1,10 @@
+Name:Aven Liberator
+ManaCost:2 W W
+Types:Creature Bird Soldier
+PT:2/3
+K:Flying
+K:Morph:3 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigProtect | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature you control gains protection from the color of your choice until end of turn.
+SVar:TrigProtect:DB$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor
+AI:RemoveDeck:All
+Oracle:Flying\nMorph {3}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Aven Liberator is turned face up, target creature you control gains protection from the color of your choice until end of turn.

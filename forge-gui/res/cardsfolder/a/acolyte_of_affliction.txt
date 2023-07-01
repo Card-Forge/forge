@@ -1,0 +1,9 @@
+Name:Acolyte of Affliction
+ManaCost:2 B G
+Types:Creature Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards, then you may return a permanent card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Permanent.YouOwn | Hidden$ True | Optional$ True
+DeckHas:Ability$Graveyard
+Oracle:When Acolyte of Affliction enters the battlefield, mill two cards, then you may return a permanent card from your graveyard to your hand.

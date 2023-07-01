@@ -1,0 +1,10 @@
+Name:Svella, Ice Shaper
+ManaCost:1 R G
+Types:Legendary Snow Creature Troll Warrior
+PT:2/4
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ icy_manalith | TokenOwner$ You | SpellDescription$ Create a colorless snow artifact token named Icy Manalith with "{T}: Add one mana of any color."
+A:AB$ PeekAndReveal | Cost$ 6 R G T | Defined$ You | PeekAmount$ 4 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBPlay | SpellDescription$ Look at the top four cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
+SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.IsRemembered+nonLand | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ DBRestRandomOrder | StackDescription$ None
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{3}, {T}: Create a colorless snow artifact token named Icy Manalith with "{T}: Add one mana of any color."\n{6}{R}{G}, {T}: Look at the top four cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.

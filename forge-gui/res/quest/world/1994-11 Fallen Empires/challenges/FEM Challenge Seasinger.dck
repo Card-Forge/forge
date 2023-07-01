@@ -1,0 +1,21 @@
+[quest]
+id=FEM Challenge: Seasinger
+OpponentName=The Seasingers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:FEM
+Credit Reward=120
+AIExtras=
+HumanExtras=Island
+[metadata]
+Name=FEM Challenge: Seasinger
+Title=The Seasingers
+Difficulty=medium
+Description="I know the odds are against us. I know she's a siren. I know she's eaten people. I know she's five thousand years older than me. But I really like her." ?Simon Rich, The Last Girlfriend on Earth: And Other Love Stories
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+24 Island|LEB|2
+24 Seasinger|FEM
+12 Tidal Influence|FEM

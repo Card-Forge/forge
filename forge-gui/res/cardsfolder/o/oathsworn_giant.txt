@@ -1,0 +1,8 @@
+Name:Oathsworn Giant
+ManaCost:4 W W
+Types:Creature Giant Soldier
+PT:3/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Other creatures you control get +0/+2 and have vigilance.
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nOther creatures you control get +0/+2 and have vigilance.

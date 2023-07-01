@@ -1,0 +1,9 @@
+Name:Elder Deep-Fiend
+ManaCost:8
+Types:Creature Eldrazi Octopus
+PT:5/6
+K:Flash
+K:Emerge:5 U U
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast this spell, tap up to four target permanents.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 4 | TgtPrompt$ Select up to four target permanents | ValidTgts$ Permanent
+Oracle:Flash\nEmerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, tap up to four target permanents.

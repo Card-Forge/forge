@@ -1,0 +1,8 @@
+Name:Balm of Restoration
+ManaCost:2
+Types:Artifact
+A:AB$ Charm | Cost$ 1 T Sac<1/CARDNAME> | Choices$ DBGainLife,DBPrevent | Defined$ You
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You | SpellDescription$ You gain 2 life.
+SVar:DBPrevent:DB$ PreventDamage | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
+AI:RemoveDeck:All
+Oracle:{1}, {T}, Sacrifice Balm of Restoration: Choose one —\n• You gain 2 life.\n• Prevent the next 2 damage that would be dealt to any target this turn.

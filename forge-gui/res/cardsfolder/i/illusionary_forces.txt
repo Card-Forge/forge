@@ -1,0 +1,7 @@
+Name:Illusionary Forces
+ManaCost:3 U
+Types:Creature Illusion
+PT:4/4
+K:Flying
+K:Cumulative upkeep:U
+Oracle:Flying\nCumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

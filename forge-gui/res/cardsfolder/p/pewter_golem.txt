@@ -1,0 +1,6 @@
+Name:Pewter Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:4/2
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:{1}{B}: Regenerate Pewter Golem.

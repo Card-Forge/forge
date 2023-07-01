@@ -1,0 +1,8 @@
+Name:Flameblade Adept
+ManaCost:R
+Types:Creature Jackal Warrior
+PT:1/2
+K:Menace
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+Oracle:Menace\nWhenever you cycle or discard a card, Flameblade Adept gets +1/+0 until end of turn.

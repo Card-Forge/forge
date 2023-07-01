@@ -1,0 +1,6 @@
+Name:Graceful Adept
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/3
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+Oracle:You have no maximum hand size.

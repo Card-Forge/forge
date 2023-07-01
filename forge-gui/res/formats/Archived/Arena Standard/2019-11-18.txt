@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (2019-11-18)
+Type:Archived
+Subtype:Standard
+Effective:2019-11-18
+Sets:ANA, PANA, GRN, RNA, WAR, M20, ELD
+Banned:Field of the Dead; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

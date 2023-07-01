@@ -1,0 +1,7 @@
+Name:Mesmeric Orb
+ManaCost:2
+Types:Artifact
+T:Mode$ Untaps | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a permanent becomes untapped, that permanent's controller mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredCardController | NumCards$ 1 | NoReveal$ True
+AI:RemoveDeck:Random
+Oracle:Whenever a permanent becomes untapped, that permanent's controller mills a card.

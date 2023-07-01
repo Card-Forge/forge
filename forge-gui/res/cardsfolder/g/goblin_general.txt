@@ -1,0 +1,8 @@
+Name:Goblin General
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Goblin creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Goblin+YouCtrl | NumAtt$ +1 | NumDef$ +1
+DeckHints:Type$Goblin
+Oracle:Whenever Goblin General attacks, Goblin creatures you control get +1/+1 until end of turn.

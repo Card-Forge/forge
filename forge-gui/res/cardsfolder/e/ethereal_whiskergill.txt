@@ -1,0 +1,7 @@
+Name:Ethereal Whiskergill
+ManaCost:3 U
+Types:Creature Elemental
+PT:4/3
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+K:Flying
+Oracle:Flying\nEthereal Whiskergill can't attack unless defending player controls an Island.

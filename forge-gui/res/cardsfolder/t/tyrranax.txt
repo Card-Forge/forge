@@ -1,0 +1,6 @@
+Name:Tyrranax
+ManaCost:4 G G
+Types:Creature Dinosaur Beast
+PT:5/4
+A:AB$ Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
+Oracle:{1}{G}: Tyrranax gets -1/+1 until end of turn.

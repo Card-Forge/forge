@@ -1,0 +1,9 @@
+Name:Harbor Bandit
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Island.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an Island.
+SVar:BuffedBy:Island
+A:AB$ Effect | Cost$ 1 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Harbor Bandit gets +1/+1 as long as you control an Island.\n{1}{U}: Harbor Bandit can't be blocked this turn.

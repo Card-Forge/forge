@@ -1,0 +1,7 @@
+Name:Kongming's Contraptions
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/4
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 2 | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ CARDNAME deals 2 damage to target attacking creature. Activate only during the declare attackers step and only if you've been attacked this step.
+SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
+Oracle:{T}: Kongming's Contraptions deals 2 damage to target attacking creature. Activate only during the declare attackers step and only if you've been attacked this step.

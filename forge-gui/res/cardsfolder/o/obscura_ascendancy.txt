@@ -1,0 +1,12 @@
+Name:Obscura Ascendancy
+ManaCost:W U B
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQX | ValidActivatingPlayer$ You | Execute$ DBPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, if its mana value is equal to 1 plus the number of soul counters on CARDNAME, put a soul counter on CARDNAME, then create a 2/2 white Spirit creature token with flying.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ SOUL | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_2_2_spirit_flying
+S:Mode$ Continuous | Affected$ Spirit.YouCtrl | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Card.Self+counters_GE5_SOUL | Description$ As long as there are five or more soul counters on CARDNAME, Spirits you control get +3/+3.
+SVar:X:Count$CardCounters.SOUL/Plus.1
+SVar:BuffedBy:Card.cmcEQX
+DeckHas:Ability$Token & Type$Spirit
+DeckHints:Type$Spirit
+Oracle:Whenever you cast a spell, if its mana value is equal to 1 plus the number of soul counters on Obscura Ascendancy, put a soul counter on Obscura Ascendancy, then create a 2/2 white Spirit creature token with flying.\nAs long as there are five or more soul counters on Obscura Ascendancy, Spirits you control get +3/+3.

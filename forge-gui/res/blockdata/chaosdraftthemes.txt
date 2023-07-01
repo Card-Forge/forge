@@ -1,0 +1,10 @@
+# Order, Tag, Label
+1, DEFAULT, All sets (default)
+11, MODERN, Modern legal expansions
+12, PIONEER, Pioneer legal expansions
+13, STANDARD, Standard legal expansions
+21, CORE_SET, Core Sets
+22, MASTERS_SET, Masters Sets (paper only)
+30, MIRRODIN, Mirrodin (Plane)
+30, RAVNICA, Ravnica (Plane)
+40, GRAVEYARD_MATTERS, Graveyard matters

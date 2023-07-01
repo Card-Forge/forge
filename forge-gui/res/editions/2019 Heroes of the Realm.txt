@@ -1,0 +1,16 @@
+[metadata]
+Code=PH19
+Date=2020-08-01
+Name=2019 Heroes of the Realm
+Alias=HTR19
+Type=Funny
+ScryfallCode=PH19
+
+[cards]
+1 M Collectigull @Wylie Beckert
+2 M Keeper of the Secret Lair @Brigitte Roka
+3 M War of the Spark @Chris Seaman
+4 M Champions of Archery @Donato Giancola
+5 M Myntasha, Honored One @Liiga Smilshkalne
+6 M The Cinematic Phoenix @Chuck Lukacs
+7 M Fabled Path of Searo Point @Tom Wänerstrand

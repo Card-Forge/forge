@@ -1,0 +1,5 @@
+Name:Barbary Apes
+ManaCost:1 G
+Types:Creature Ape
+PT:2/2
+Oracle:

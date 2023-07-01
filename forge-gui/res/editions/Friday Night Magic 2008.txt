@@ -1,0 +1,20 @@
+[metadata]
+Code=F08
+Date=2008-01-01
+Name=Friday Night Magic 2008
+Type=Promo
+ScryfallCode=F08
+
+[cards]
+1 R Remand @Hideaki Takamura
+2 R Tormod's Crypt @Lars Grant-West
+3 R Eternal Witness @Terese Nielsen
+4 R Tendrils of Agony @Volkan Baǵa
+5 R Pendelhaven @Philip Straub
+6 R Resurrection @Michael Komarck
+7 R Wall of Roots @Matt Stewart
+8 R Desert @Glen Angus
+9 R Thirst for Knowledge @Bud Cook
+10 R Serrated Arrows @John Avon
+11 R Isochron Scepter @Brian Despain
+12 R Shrapnel Blast @Hideaki Takamura

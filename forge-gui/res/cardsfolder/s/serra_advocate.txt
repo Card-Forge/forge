@@ -1,0 +1,7 @@
+Name:Serra Advocate
+ManaCost:3 W
+Types:Creature Angel
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target attacking or blocking creature gets +2/+2 until end of turn.
+Oracle:Flying\n{T}: Target attacking or blocking creature gets +2/+2 until end of turn.

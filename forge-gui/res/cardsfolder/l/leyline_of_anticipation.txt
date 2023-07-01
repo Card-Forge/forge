@@ -1,0 +1,8 @@
+Name:Leyline of Anticipation
+ManaCost:2 U U
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | Description$ You may cast spells as though they had flash.
+SVar:NonStackingEffect:True
+Oracle:If Leyline of Anticipation is in your opening hand, you may begin the game with it on the battlefield.\nYou may cast spells as though they had flash.

@@ -1,0 +1,7 @@
+Name:Dawnglow Infusion
+ManaCost:X GW
+Types:Sorcery
+A:SP$ GainLife | Cost$ X GW | LifeAmount$ X | ConditionManaSpent$ G | SubAbility$ WPaid | SpellDescription$ You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)
+SVar:WPaid:DB$ GainLife | LifeAmount$ X | ConditionManaSpent$ W
+SVar:X:Count$xPaid
+Oracle:You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)

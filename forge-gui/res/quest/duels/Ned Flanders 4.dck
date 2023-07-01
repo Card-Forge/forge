@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ned Flanders 4
+Title=Ned Flanders
+Difficulty=very hard
+Description=Mono B reanimator deck
+Icon=Ned Flanders.jpg
+Deck Type=constructed
+[main]
+1 Blazing Archon
+21 Swamp|ISD
+4 Hymn to Tourach
+1 Terror
+1 Sinkhole
+1 Geth's Verdict
+1 Sheoldred, Whispering One
+3 Dance of the Dead
+4 Buried Alive
+3 Night's Whisper
+4 Exhume
+1 Sphinx of the Steel Wind
+4 Animate Dead
+4 Entomb
+1 Go for the Throat
+1 Inkwell Leviathan
+1 Doom Blade
+1 Mox Jet
+2 Drown in Sorrow
+1 Mercenary Knight
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Doubling Cube
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ 3 T | Produced$ Special DoubleManaInPool | SpellDescription$ Double the amount of each type of unspent mana you have.
+AI:RemoveDeck:All
+Oracle:{3}, {T}: Double the amount of each type of unspent mana you have.

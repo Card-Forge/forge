@@ -1,0 +1,8 @@
+Name:Stormchaser Drake
+ManaCost:1 U
+Types:Creature Drake
+PT:2/1
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell you control, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Flying\nWhenever Stormchaser Drake becomes the target of a spell you control, draw a card.

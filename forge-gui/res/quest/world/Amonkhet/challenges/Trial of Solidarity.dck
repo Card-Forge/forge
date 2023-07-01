@@ -1,0 +1,44 @@
+[quest]
+id=7014
+OpponentName=Oketra
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=Cartouche of Solidarity|AKH
+Credit Reward=20000
+AIExtras=Oketra's Monument|Plains
+HumanExtras=Plains
+[metadata]
+Name=Trial of Solidarity
+Title=Trial of Solidarity
+Difficulty=Hard
+Description="You're one of mine."
+Icon=Oketra the True.jpg
+Deck Type=constructed
+[Main]
+2 Angel of Condemnation|HOU
+2 Angel of Sanctions|AKH
+2 Angel of the God-Pharaoh|HOU
+2 Aven Mindcensor|AKH
+2 Aven Mindcensor|MPS_AKH
+4 Brave the Sands|C16
+4 Cartouche of Solidarity|AKH
+4 Containment Priest|MPS_AKH
+4 Even the Odds|FUT
+4 Fan Bearer|AKH
+2 Fight or Flight|INV
+4 Graceful Antelope|ODY
+4 Gust Walker|AKH
+4 Intangible Virtue|MM3
+4 Loyal Retainers|MPS_AKH
+2 Oketra's Attendant|AKH
+9 Plains|AKH|1
+9 Plains|AKH|2
+7 Plains|AKH|3
+9 Plains|AKH|4
+2 Seraph of the Suns|AKH
+4 Trueheart Duelist|AKH
+2 Vizier of Deferment|AKH
+4 Vizier of Remedies|AKH
+2 Vizier of the True|HOU
+2 Winged Shepherd|AKH

@@ -1,0 +1,7 @@
+Name:Dungeon Descent
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Venture | Cost$ 4 T tapXType<1/Creature.Legendary/legendary creature> | SorcerySpeed$ True | SpellDescription$ Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)
+Oracle:Dungeon Descent enters the battlefield tapped.\n{T}: Add {C}.\n{4}, {T}, Tap an untapped legendary creature you control: Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)

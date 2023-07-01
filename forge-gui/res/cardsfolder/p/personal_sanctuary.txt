@@ -1,0 +1,6 @@
+Name:Personal Sanctuary
+ManaCost:2 W
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You | PlayerTurn$ True | Description$ During your turn, prevent all damage that would be dealt to you.
+SVar:NonStackingEffect:True
+Oracle:During your turn, prevent all damage that would be dealt to you.

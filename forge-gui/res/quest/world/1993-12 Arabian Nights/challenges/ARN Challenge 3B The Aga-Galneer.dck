@@ -1,0 +1,19 @@
+[quest]
+id=ARN Challenge: 3B The Aga-Galneer
+OpponentName=The Aga-Galneer
+AILife=30
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ARN Challenge: 3B The Aga-Galneer
+Title=The Aga-Galneer
+Difficulty=medium
+Description=A black cloud lies over the city of Alexandria, covering it in eternal darkness.  The black djinn has plunged the city's inhabitants into a nightmarish sleep from which there is no escape.  Can you free Alexandria from oblivion?
+Icon=Aga Galneer.jpg
+Deck Type=constructed
+[main]
+600 Oubliette|ARN|2
+400 Swamp|LEB|1

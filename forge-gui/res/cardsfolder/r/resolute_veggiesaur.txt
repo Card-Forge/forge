@@ -1,0 +1,9 @@
+Name:Resolute Veggiesaur
+ManaCost:2 G
+Types:Creature Dinosaur Employee
+PT:3/3
+K:Trample
+T:Mode$ RolledDie | ValidPlayer$ You | TriggerZones$ Battlefield | Number$ 3 | Execute$ TrigPutCounter | TriggerDescription$ Whenever you roll your third die each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever you roll your third die each turn, put a +1/+1 counter on Resolute Veggiesaur.

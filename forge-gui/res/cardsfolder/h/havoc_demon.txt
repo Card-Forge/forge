@@ -1,0 +1,9 @@
+Name:Havoc Demon
+ManaCost:5 B B
+Types:Creature Demon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME dies, all creatures get -5/-5 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -5 | NumDef$ -5
+AI:RemoveDeck:Random
+Oracle:Flying\nWhen Havoc Demon dies, all creatures get -5/-5 until end of turn.

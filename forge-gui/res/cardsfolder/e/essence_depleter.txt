@@ -1,0 +1,9 @@
+Name:Essence Depleter
+ManaCost:2 B
+Types:Creature Eldrazi Drone
+PT:2/3
+K:Devoid
+A:AB$ LoseLife | Cost$ 1 C | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{1}{C}: Target opponent loses 1 life and you gain 1 life. ({C} represents colorless mana.)

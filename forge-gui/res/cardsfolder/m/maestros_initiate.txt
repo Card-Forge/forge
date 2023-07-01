@@ -1,0 +1,9 @@
+Name:Maestros Initiate
+ManaCost:2 B
+Types:Creature Human Citizen
+PT:3/1
+A:AB$ Draw | Cost$ 4 UR ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+DeckHas:Ability$Discard
+DeckHints:Color$Blue|Red
+Oracle:{4}{U/R}, Exile Maestros Initiate from your graveyard: Draw two cards, then discard a card.

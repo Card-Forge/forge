@@ -1,0 +1,6 @@
+Name:Arlinn's Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:3/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Arlinn's Wolf can't be blocked by creatures with power 2 or less.

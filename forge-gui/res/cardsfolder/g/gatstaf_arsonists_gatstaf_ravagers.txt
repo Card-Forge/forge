@@ -1,0 +1,20 @@
+Name:Gatstaf Arsonists
+ManaCost:4 R
+Types:Creature Human Werewolf
+PT:5/4
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Arsonists.
+
+ALTERNATE
+
+Name:Gatstaf Ravagers
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:6/5
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.

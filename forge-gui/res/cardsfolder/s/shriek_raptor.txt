@@ -1,0 +1,7 @@
+Name:Shriek Raptor
+ManaCost:3 W W
+Types:Creature Phyrexian Bird
+PT:2/3
+K:Flying
+K:Infect
+Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Feast of Flesh Precon
+Description=Have your enemy over for dinner! Flesh on Mirrodin is at a premium, and your hordes of Phyrexian fiends are clamoring for more. Release them on your prey, using necromantic magic to remove their meager hopes for survival.
+Deck Type=constructed
+Set=NPH
+Image=feast_of_flesh.jpg
+[main]
+2 Shrine of Burning Rage
+1 Tower of Calamities
+11 Mountain
+13 Swamp
+2 Blistergrub
+2 Blisterstick Shaman
+2 Caustic Hound
+1 Chancellor of the Dross+
+2 Entomber Exarch
+2 Flameborn Viron
+2 Furnace Scamp
+2 Phyrexian Rager
+1 Prodigal Pyromancer
+1 Scoria Elemental
+2 Tormentor Exarch
+1 Enslave
+2 Parasitic Implant
+2 Artillerize
+1 Fling
+2 Geth's Verdict
+1 Go for the Throat
+1 Despise
+1 Disentomb
+1 Ichor Explosion
+1 Morbid Plunder
+1 Whipflare
+[sideboard]

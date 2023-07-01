@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=PTK 3 Color: 2 Blue
+Title=The Color Blue
+Difficulty=hard
+Description="One score and four he reigned, the Southland king: / A dragon coiled, a tiger poised below the mighty Yangtze."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+1 Extinguish|PTK
+4 Forced Retreat|PTK
+26 Island|PTK|1
+3 Lu Meng, Wu General|PTK
+1 Lu Su, Wu Advisor|PTK
+3 Lu Xun, Scholar General|PTK
+2 Mystic Denial|PTK
+4 Preemptive Strike|PTK
+4 Strategic Planning|PTK
+2 Sun Ce, Young Conquerer|PTK
+2 Sun Quan, Lord of Wu|PTK
+4 Wu Infantry|PTK
+4 Wu Longbowman|PTK

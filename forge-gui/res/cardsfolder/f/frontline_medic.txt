@@ -1,0 +1,8 @@
+Name:Frontline Medic
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionEffect | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, creatures you control gain indestructible until end of turn.
+SVar:TrigBattalionEffect:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell with X in its mana cost | ValidTgts$ Card.hasXCost | UnlessCost$ 3 | SpellDescription$ Counter target spell with {X} in its mana cost unless its controller pays {3}.
+Oracle:Battalion — Whenever Frontline Medic and at least two other creatures attack, creatures you control gain indestructible until end of turn.\nSacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays {3}.

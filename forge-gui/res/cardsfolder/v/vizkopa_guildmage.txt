@@ -1,0 +1,10 @@
+Name:Vizkopa Guildmage
+ManaCost:W B
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Pump | Cost$ 1 W B | ValidTgts$ Creature | KW$ Lifelink | SpellDescription$ Target creature gains lifelink until end of turn.
+A:AB$ Effect | Cost$ 1 W B | Triggers$ VizkopaMageTrig | SpellDescription$ Whenever you gain life this turn, each opponent loses that much life.
+SVar:VizkopaMageTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Command | Execute$ VizkopaMageDrain | TriggerDescription$ Whenever you gain life, each opponent loses that much life.
+SVar:VizkopaMageDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ VizkopaMageX
+SVar:VizkopaMageX:TriggerCount$LifeAmount
+Oracle:{1}{W}{B}: Target creature gains lifelink until end of turn.\n{1}{W}{B}: Whenever you gain life this turn, each opponent loses that much life.

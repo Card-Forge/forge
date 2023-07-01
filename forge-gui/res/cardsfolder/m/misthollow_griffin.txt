@@ -1,0 +1,7 @@
+Name:Misthollow Griffin
+ManaCost:2 U U
+Types:Creature Griffin
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
+Oracle:Flying\nYou may cast Misthollow Griffin from exile.

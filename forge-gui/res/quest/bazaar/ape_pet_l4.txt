@@ -1,0 +1,10 @@
+Name:Ape Pet
+ManaCost:no cost
+Colors:green
+Types:Creature Ape Pet
+PT:2/1
+K:Trample
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you pay {2}. If you do, it gets +2/+2 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you may pay {2}. If you do, it gets +2/+2 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+Oracle:Trample\nWhenever Ape Pet blocks or becomes blocked, you may pay {2}. If you do, it gets +2/+2 until end of turn.

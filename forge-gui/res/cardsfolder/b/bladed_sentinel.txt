@@ -1,0 +1,7 @@
+Name:Bladed Sentinel
+ManaCost:4
+Types:Artifact Creature Construct
+PT:2/4
+A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance until end of turn.
+AI:RemoveDeck:Random
+Oracle:{W}: Bladed Sentinel gains vigilance until end of turn.

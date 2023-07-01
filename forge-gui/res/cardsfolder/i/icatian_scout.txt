@@ -1,0 +1,6 @@
+Name:Icatian Scout
+ManaCost:W
+Types:Creature Human Soldier Scout
+PT:1/1
+A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
+Oracle:{1}, {T}: Target creature gains first strike until end of turn.

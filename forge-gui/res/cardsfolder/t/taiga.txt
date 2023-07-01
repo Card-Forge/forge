@@ -1,0 +1,4 @@
+Name:Taiga
+ManaCost:no cost
+Types:Land Mountain Forest
+Oracle:({T}: Add {R} or {G}.)

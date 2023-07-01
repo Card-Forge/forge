@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spirit Flames
+Description=Pound your enemies senseless with kami of forest and flame! Your devious channel creatures will surprise your opponents and then return to wreak more havoc as the soulshift ability renews your horde.
+Deck Type=constructed
+Set=SOK
+Image=spirit_flames.jpg
+[main]
+2 Burr Grafter|CHK
+2 Crushing Pain|CHK
+1 Shinen of Life's Roar|SOK
+3 Promised Kannushi|SOK
+1 Jiwari, the Earth Aflame|SOK
+2 Inner Calm, Outer Strength|SOK
+2 Ghost-Lit Nourisher|SOK
+1 Briarknit Kami|SOK
+1 Rending Vines|SOK
+2 Elder Pine of Jukai|SOK
+2 Kami of the Tended Garden|SOK
+2 Forked-Branch Garami|BOK
+2 Petalmane Baku|BOK
+1 Frostling|BOK
+2 Unchecked Growth|BOK
+1 Strength of Cedars|CHK
+1 Devouring Rage|CHK
+1 Hana Kami|CHK
+1 Venerable Kumo|CHK
+11 Mountain|CHK
+13 Forest|CHK
+1 Glacial Ray|CHK
+1 Kodama's Might|CHK
+1 Arashi, the Sky Asunder|SOK
+2 Ghost-Lit Raider|SOK
+1 Glitterfang|SOK
+[sideboard]

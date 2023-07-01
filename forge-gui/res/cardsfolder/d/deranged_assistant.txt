@@ -1,0 +1,6 @@
+Name:Deranged Assistant
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Mana | Cost$ T Mill<1> | Produced$ C | SpellDescription$ Add {C}. (To mill a card, put the top card of your library into your graveyard.)
+Oracle:{T}, Mill a card: Add {C}. (To mill a card, put the top card of your library into your graveyard.)

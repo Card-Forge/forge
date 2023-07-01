@@ -1,0 +1,59 @@
+[duel]
+[metadata]
+Name=Cyclops 3
+Title=Cyclops
+Difficulty=hard
+Description=WUBRG Sliver deck
+Icon=Cyclops.jpg
+Deck Type=constructed
+[main]
+1 Underground Sea
+1 Plateau
+1 Taiga
+1 Tundra
+1 Bayou
+1 Savannah
+1 Wooded Foothills
+1 Misty Rainforest
+1 Ancient Ziggurat
+4 Cavern of Souls
+4 Sliver Hive
+1 Windswept Heath
+1 Mox Pearl
+1 Mox Emerald
+1 Mox Jet
+1 Mox Ruby
+1 Mox Sapphire
+1 Ancestral Recall
+1 Call to the Kindred
+1 Descendants' Path
+1 Horned Sliver
+1 Hunter Sliver
+1 Frenzy Sliver
+1 Blade Sliver
+1 Watcher Sliver
+1 Harmonic Sliver
+1 Bonescythe Sliver
+1 Heart Sliver
+1 Metallic Sliver
+1 Screeching Sliver
+1 Sentinel Sliver
+1 Galerider Sliver
+1 Plated Sliver
+1 Might Sliver
+1 Battering Sliver
+4 Manaweft Sliver
+1 Diffusion Sliver
+1 Bonesplitter Sliver
+1 Essence Sliver
+1 Blur Sliver
+1 Brood Sliver
+1 Clot Sliver
+1 Crystalline Sliver
+1 Lymph Sliver
+1 Sidewinder Sliver
+1 Syphon Sliver
+3 Predatory Sliver
+1 Sliver Legion
+1 Sliver Hivelord
+[sideboard]

@@ -1,0 +1,11 @@
+Name:Belltoll Dragon
+ManaCost:5 U
+Types:Creature Dragon
+PT:3/3
+K:Flying
+K:Hexproof
+K:Megamorph:5 U U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounters | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put a +1/+1 counter on each other Dragon creature you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.Dragon+YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Dragon
+Oracle:Flying, hexproof\nMegamorph {5}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Belltoll Dragon is turned face up, put a +1/+1 counter on each other Dragon creature you control.

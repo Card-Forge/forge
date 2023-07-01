@@ -1,0 +1,9 @@
+Name:Behold My Grandeur
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBAddMana | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, add {U}{B}{R}.
+SVar:DBAddMana:DB$ Mana | Produced$ U B R
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBSearch | TriggerZones$ Command | OptionalDecider$ You | CheckSVar$ X | SVarCompare$ GE6 | TriggerDescription$ When you set this scheme in motion, if you control six or more lands, you may search your library for a card with mana value 6 or greater, reveal it, put it into your hand, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcGE6 | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:When you set this scheme in motion, add {U}{B}{R}.\nWhen you set this scheme in motion, if you control six or more lands, you may search your library for a card with mana value 6 or greater, reveal it, put it into your hand, then shuffle.

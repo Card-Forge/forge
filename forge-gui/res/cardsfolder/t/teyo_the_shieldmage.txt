@@ -1,0 +1,8 @@
+Name:Teyo, the Shieldmage
+ManaCost:2 W
+Types:Legendary Planeswalker Teyo
+Loyalty:5
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_0_3_wall_defender | TokenOwner$ You | SpellDescription$ Create a 0/3 white Wall creature token with defender.
+DeckHas:Ability$Token
+Oracle:You have hexproof. (You can't be the target of spells or abilities your opponents control.)\n[-2]: Create a 0/3 white Wall creature token with defender.

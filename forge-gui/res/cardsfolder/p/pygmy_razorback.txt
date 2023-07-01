@@ -1,0 +1,6 @@
+Name:Pygmy Razorback
+ManaCost:1 G
+Types:Creature Boar
+PT:2/1
+K:Trample
+Oracle:Trample

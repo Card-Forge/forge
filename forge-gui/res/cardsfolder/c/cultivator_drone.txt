@@ -1,0 +1,8 @@
+Name:Cultivator Drone
+ManaCost:2 U
+Types:Creature Eldrazi Drone
+PT:2/3
+K:Devoid
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ Spell.Colorless,Activated.Permanent+Colorless+inZoneBattlefield,CostContainsC | SpellDescription$ Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}. ({C} represents colorless mana.)
+DeckHas:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}. ({C} represents colorless mana.)

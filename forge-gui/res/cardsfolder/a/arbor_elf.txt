@@ -1,0 +1,6 @@
+Name:Arbor Elf
+ManaCost:G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Untap | Cost$ T | ValidTgts$ Forest | TgtPrompt$ Select target forest | AILogic$ PoolExtraMana | SpellDescription$ Untap target Forest.
+Oracle:{T}: Untap target Forest.

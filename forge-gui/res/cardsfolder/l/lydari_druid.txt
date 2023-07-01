@@ -1,0 +1,10 @@
+Name:Lydari Druid
+ManaCost:2 G
+Types:Creature Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, for each land on the battlefield, choose a basic land type at random. Those lands become the land types chosen this way. (This effect lasts indefinitely.)
+SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Land | RepeatSubAbility$ DBChooseLT | SubAbility$ DBCleanup
+SVar:DBChooseLT:DB$ ChooseType | Defined$ You | AtRandom$ True | Type$ Basic Land | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Duration$ Permanent
+SVar:DBCleanup:DB$ Cleanup | ClearChosenType$ True
+Oracle:When Lydari Druid enters the battlefield, for each land on the battlefield, choose a basic land type at random. Those lands become the land types chosen this way. (This effect lasts indefinitely.)

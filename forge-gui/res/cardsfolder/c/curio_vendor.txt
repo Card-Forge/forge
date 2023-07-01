@@ -1,0 +1,5 @@
+Name:Curio Vendor
+ManaCost:1 U
+Types:Creature Vedalken
+PT:2/1
+Oracle:

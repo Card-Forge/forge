@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Green Arrow 2
+Title=Green Arrow
+Difficulty=medium
+Description=Mono G Archer deck with Greatbow Doyen and Jagged-Scar Archers
+Icon=Green Arrow.jpg
+Deck Type=constructed
+[main]
+1 Gaea's Anthem|PLC
+4 Elvish Archers|7ED
+1 Overwhelming Stampede|M11
+1 Deglamer
+4 Jagged-Scar Archers|LRW
+4 Thornweald Archer|FUT
+4 Greatbow Doyen|MOR
+4 Norwood Archers|S99
+1 Viridian Longbow|MRD
+1 Overrun|M10
+1 Leyline of Vitality|M11
+4 Ezuri's Archers|SOM
+2 Plow Under|8ED
+24 Forest|MBS
+1 Howl of the Night Pack|M10
+2 Harmonize|PLC
+1 Rancor|ULG
+[sideboard]

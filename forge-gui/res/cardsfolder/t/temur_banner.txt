@@ -1,0 +1,8 @@
+Name:Temur Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G U R | SpellDescription$ Add {G}, {U}, or {R}.
+A:AB$ Draw | Cost$ G U R T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green|Blue|Red
+Oracle:{T}: Add {G}, {U}, or {R}.\n{G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.

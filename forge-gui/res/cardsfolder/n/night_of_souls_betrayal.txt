@@ -1,0 +1,6 @@
+Name:Night of Souls' Betrayal
+ManaCost:2 B B
+Types:Legendary Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddPower$ -1 | AddToughness$ -1 | Description$ All creatures get -1/-1.
+AI:RemoveDeck:Random
+Oracle:All creatures get -1/-1.

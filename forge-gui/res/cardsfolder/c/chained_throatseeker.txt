@@ -1,0 +1,7 @@
+Name:Chained Throatseeker
+ManaCost:5 U
+Types:Creature Phyrexian Horror
+PT:5/5
+K:Infect
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ IsPoisoned | Description$ CARDNAME can't attack unless defending player is poisoned.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nChained Throatseeker can't attack unless defending player is poisoned.

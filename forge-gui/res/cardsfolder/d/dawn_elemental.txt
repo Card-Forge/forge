@@ -1,0 +1,7 @@
+Name:Dawn Elemental
+ManaCost:W W W W
+Types:Creature Elemental
+PT:3/3
+K:Flying
+K:Prevent all damage that would be dealt to CARDNAME.
+Oracle:Flying\nPrevent all damage that would be dealt to Dawn Elemental.

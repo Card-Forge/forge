@@ -1,0 +1,8 @@
+Name:Goblin Fire Fiend
+ManaCost:3 R
+Types:Creature Goblin Berserker
+PT:1/1
+K:Haste
+K:CARDNAME must be blocked if able.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Haste\nGoblin Fire Fiend must be blocked if able.\n{R}: Goblin Fire Fiend gets +1/+0 until end of turn.

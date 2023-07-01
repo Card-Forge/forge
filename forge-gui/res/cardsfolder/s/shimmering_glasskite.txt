@@ -1,0 +1,9 @@
+Name:Shimmering Glasskite
+ManaCost:3 U
+Types:Creature Spirit
+PT:2/3
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | FirstTime$ True | Execute$ GlasskiteCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability for the first time each turn, counter that spell or ability.
+SVar:GlasskiteCounter:DB$ Counter | Defined$ TriggeredSourceSA
+SVar:Targeting:Counter
+Oracle:Flying\nWhenever Shimmering Glasskite becomes the target of a spell or ability for the first time each turn, counter that spell or ability.

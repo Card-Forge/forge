@@ -1,0 +1,7 @@
+Name:Mana Maze
+ManaCost:1 U
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card.SharesColorWith LastCastThisTurn | Description$ Players can't cast spells that share a color with the spell most recently cast this turn.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Players can't cast spells that share a color with the spell most recently cast this turn.

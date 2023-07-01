@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2020 #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/07/120.-M201-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. No cards have been put into any graveyard from anywhere yet this turn.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Chamber Sentry;Sorin, Vengeful Bloodlord;Spark Harvest;Brought Back;Thud
+humangraveyard=Hanged Executioner;Rotting Regisaur;Pestilent Spirit;Glint-Horn Buccaneer
+humanbattlefield=Wily Goblin;Dreadhorde Arcanist;Embodiment of Agonies|Counters:P1P1=3;Dreadhorde Butcher;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+aibattlefield=Feather, the Redeemed;Lyra Dawnbringer;Bishop of Wings

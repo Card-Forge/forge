@@ -1,0 +1,9 @@
+Name:Freyalise Supplicant
+ManaCost:1 G
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ DealDamage | Cost$ T Sac<1/Creature.Red;Creature.White/red or white creature> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to half the sacrificed creature's power, rounded down.
+SVar:X:Sacrificed$CardPower/HalfDown
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice a red or white creature: Freyalise Supplicant deals damage to any target equal to half the sacrificed creature's power, rounded down.

@@ -1,0 +1,7 @@
+Name:Cloudkill
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ All creatures get -X/-X until end of turn, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.
+SVar:X:Count$ValidBattlefield,Command Card.IsCommander+YouOwn$GreatestCMC
+AI:RemoveDeck:NonCommander
+Oracle:All creatures get -X/-X until end of turn, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.

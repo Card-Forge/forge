@@ -1,0 +1,8 @@
+Name:Azami, Lady of Scrolls
+ManaCost:2 U U U
+Types:Legendary Creature Human Wizard
+PT:0/2
+A:AB$ Draw | Cost$ tapXType<1/Wizard> | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckHints:Type$Wizard
+Oracle:Tap an untapped Wizard you control: Draw a card.

@@ -1,0 +1,7 @@
+Name:Veteran Dungeoneer
+ManaCost:3 W
+Types:Creature Human Warrior
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+Oracle:When Veteran Dungeoneer enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)

@@ -1,0 +1,13 @@
+[metadata]
+Code=PSS3
+Date=2018-07-13
+Name=M19 Standard Showdown
+Type=Promo
+ScryfallCode=PSS3
+
+[cards]
+1 R Plains @Alayna Danner
+2 R Island @Alayna Danner
+3 R Swamp @Alayna Danner
+4 R Mountain @Alayna Danner
+5 R Forest @Alayna Danner

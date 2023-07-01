@@ -1,0 +1,7 @@
+Name:Arboretum Elemental
+ManaCost:7 G G
+Types:Creature Elemental
+PT:7/5
+K:Convoke
+K:Hexproof
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

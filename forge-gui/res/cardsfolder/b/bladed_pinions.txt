@@ -1,0 +1,6 @@
+Name:Bladed Pinions
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & First Strike | Description$ Equipped creature has flying and first strike.
+Oracle:Equipped creature has flying and first strike.\nEquip {2}

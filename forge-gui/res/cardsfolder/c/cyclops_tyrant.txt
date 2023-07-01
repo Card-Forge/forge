@@ -1,0 +1,7 @@
+Name:Cyclops Tyrant
+ManaCost:5 R
+Types:Creature Cyclops
+PT:3/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerLE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or less.
+K:Intimidate
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nCyclops Tyrant can't block creatures with power 2 or less.

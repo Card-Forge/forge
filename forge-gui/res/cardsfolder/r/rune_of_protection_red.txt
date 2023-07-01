@@ -1,0 +1,11 @@
+Name:Rune of Protection: Red
+ManaCost:1 W
+Types:Enchantment
+A:AB$ ChooseSource | Cost$ W | Choices$ Card.RedSource | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a red source of your choice would deal damage to you this turn, prevent that damage.
+K:Cycling:2
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict+RedSource | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen red source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+AI:RemoveDeck:All
+Oracle:{W}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.\nCycling {2} ({2}, Discard this card: Draw a card.)

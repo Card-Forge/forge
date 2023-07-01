@@ -1,0 +1,32 @@
+[metadata]
+Name=GAS_16_28_Orzhov Afterlife Of Generated Deck_918_19
+[Main]
+4 Consecrate // Consume|RNA
+2 Ethereal Absolution|RNA
+3 Godless Shrine|RNA
+3 Hunted Witness|GRN
+4 Imperious Oligarch|RNA
+3 Isolated Chapel|DOM
+2 Kaya, Orzhov Usurper|RNA
+4 Ministrant of Obligation|RNA
+2 Mortify|RNA
+4 Orzhov Enforcer|RNA
+3 Orzhov Guildgate|RNA|1
+3 Pitiless Pontiff|RNA
+2 Plains|DOM|1
+1 Plains|DOM|3
+1 Plains|GRN
+2 Plains|RIX
+2 Plains|RNA
+3 Seraph of the Scales|RNA
+1 Swamp|DOM|4
+1 Swamp|M19|2
+4 Swamp|RIX
+1 Swamp|RNA
+4 Teysa Karlov|RNA
+1 Tithe Taker|RNA
+[Sideboard]
+4 Elenda, the Dusk Rose|RIX
+4 Final Payment|RNA
+4 Kaya's Wrath|RNA
+3 Tithe Taker|RNA

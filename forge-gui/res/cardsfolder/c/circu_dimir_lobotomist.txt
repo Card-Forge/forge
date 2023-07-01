@@ -1,0 +1,9 @@
+Name:Circu, Dimir Lobotomist
+ManaCost:2 U B
+Types:Legendary Creature Human Wizard
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ ExileTop | TriggerDescription$ Whenever you cast a blue spell, exile the top card of target player's library.
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ ExileTop | TriggerDescription$ Whenever you cast a black spell, exile the top card of target player's library.
+SVar:ExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | TgtPrompt$ Choose a player | DestinationZone$ Exile
+S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith ValidExile Card.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as a card exiled with CARDNAME.
+Oracle:Whenever you cast a blue spell, exile the top card of target player's library.\nWhenever you cast a black spell, exile the top card of target player's library.\nYour opponents can't cast spells with the same name as a card exiled with Circu, Dimir Lobotomist.

@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Disrupter
+Description=Lay down some good old-fashioned, gruesome carnage. The "Disrupter" is all about punishment and pain, with land and hand destruction galore.
+Deck Type=constructed
+Set=MMQ
+Image=disrupter.jpg
+[main]
+1 Bog Witch|MMQ
+2 Wall of Distortion|MMQ
+1 Alley Grifters|MMQ
+2 Deepwood Ghoul|MMQ
+1 Vendetta|MMQ
+1 Sever Soul|MMQ
+2 Dark Ritual|MMQ
+1 Maggot Therapy|MMQ
+2 Snuff Out|MMQ
+3 Specter's Wail|MMQ
+1 Cinder Elemental|MMQ
+1 Shock Troops|MMQ
+3 Stone Rain|MMQ
+2 Thunderclap|MMQ
+1 Lunge|MMQ
+1 Cateran Enforcer|MMQ
+1 Silent Assassin|MMQ
+1 Henge Guardian|MMQ
+1 Cackling Witch|MMQ
+1 Enslaved Horror|MMQ
+2 Molting Harpy|MMQ
+1 Thrashing Wumpus|MMQ
+1 Primeval Shambler|MMQ
+1 Larceny|MMQ
+2 Rain of Tears|MMQ
+1 Gerrard's Irregulars|MMQ
+1 Ogre Taskmaster|MMQ
+1 Subterranean Hangar|MMQ
+12 Swamp|MMQ
+8 Mountain|MMQ
+1 Undertaker|MMQ
+[sideboard]

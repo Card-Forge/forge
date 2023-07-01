@@ -1,0 +1,8 @@
+Name:A Display of My Dark Power
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:DarkEffect:DB$ Effect | Name$ Dark Power Scheme | Duration$ UntilYourNextTurn | Triggers$ DarkPower
+SVar:DarkPower:Mode$ TapsForMana | ValidCard$ Land | Execute$ DarkMana | TriggerZones$ Command | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:DarkMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+Oracle:When you set this scheme in motion, until your next turn, whenever a player taps a land for mana, that player adds one mana of any type that land produced.

@@ -1,0 +1,5 @@
+Name:Obsidian Giant
+ManaCost:4 R
+Types:Creature Giant
+PT:4/4
+Oracle:

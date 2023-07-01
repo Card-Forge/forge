@@ -1,0 +1,7 @@
+Name:Stromkirk Captain
+ManaCost:1 B R
+Types:Creature Vampire Soldier
+PT:2/2
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ Other Vampire creatures you control get +1/+1 and have first strike.
+Oracle:First strike\nOther Vampire creatures you control get +1/+1 and have first strike.

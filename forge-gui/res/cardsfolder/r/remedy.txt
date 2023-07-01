@@ -1,0 +1,6 @@
+Name:Remedy
+ManaCost:1 W
+Types:Instant
+A:SP$ PreventDamage | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | Amount$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.
+AI:RemoveDeck:All
+Oracle:Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.

@@ -1,0 +1,12 @@
+Name:Death-Priest of Myrkul
+ManaCost:2 B B
+Types:Creature Tiefling Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl,Skeleton.YouCtrl,Vampire.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Skeletons, Vampires, and Zombies you control get +1/+1.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if a creature died this turn, you may pay {1}. If you do, create a 1/1 black Skeleton creature token.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ b_1_1_skeleton | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Token
+SVar:PlayMain1:TRUE
+DeckHints:Type$Skeleton|Zombie|Vampire
+Oracle:Skeletons, Vampires, and Zombies you control get +1/+1.\nAt the beginning of your end step, if a creature died this turn, you may pay {1}. If you do, create a 1/1 black Skeleton creature token.

@@ -1,0 +1,11 @@
+[metadata]
+Code=JGP
+Date=1998-01-01
+Name=Judge Gift Cards 1998
+Type=Promo
+ScryfallCode=JGP
+
+[cards]
+1 R Lightning Bolt @Christopher Rush
+2 R Stroke of Genius @Stephen Daniele
+3 R Gaea's Cradle @Mark Zug

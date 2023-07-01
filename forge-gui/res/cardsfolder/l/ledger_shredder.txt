@@ -1,0 +1,9 @@
+Name:Ledger Shredder
+ManaCost:1 U
+Types:Creature Bird Advisor
+PT:1/3
+K:Flying
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever a player casts their second spell each turn, CARDNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+DeckHas:Ability$Discard|Counters
+Oracle:Flying\nWhenever a player casts their second spell each turn, Ledger Shredder connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

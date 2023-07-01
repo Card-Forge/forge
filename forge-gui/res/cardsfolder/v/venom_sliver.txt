@@ -1,0 +1,7 @@
+Name:Venom Sliver
+ManaCost:1 G
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Deathtouch | Description$ Sliver creatures you control have deathtouch.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have deathtouch. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)

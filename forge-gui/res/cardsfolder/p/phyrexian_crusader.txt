@@ -1,0 +1,9 @@
+Name:Phyrexian Crusader
+ManaCost:1 B B
+Types:Creature Phyrexian Zombie Knight
+PT:2/2
+K:First Strike
+K:Protection from red
+K:Protection from white
+K:Infect
+Oracle:First strike, protection from red and from white\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

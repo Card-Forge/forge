@@ -1,0 +1,7 @@
+Name:Storm Fleet Sprinter
+ManaCost:1 U R
+Types:Creature Human Pirate
+PT:2/2
+K:Haste
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Haste\nStorm Fleet Sprinter can't be blocked.

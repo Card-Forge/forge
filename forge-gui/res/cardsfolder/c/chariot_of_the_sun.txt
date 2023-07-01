@@ -1,0 +1,6 @@
+Name:Chariot of the Sun
+ManaCost:3
+Types:Artifact
+A:AB$ Animate | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Toughness$ 1 | Keywords$ Flying | SpellDescription$ Until end of turn, target creature you control gains flying and has base toughness 1.
+AI:RemoveDeck:All
+Oracle:{2}, {T}: Until end of turn, target creature you control gains flying and has base toughness 1.

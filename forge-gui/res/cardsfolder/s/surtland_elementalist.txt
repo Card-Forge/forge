@@ -1,0 +1,10 @@
+Name:Surtland Elementalist
+ManaCost:5 U U
+Types:Creature Giant Wizard
+PT:8/8
+K:AlternateAdditionalCost:Reveal<1/Giant/Giant>:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ Whenever CARDNAME attacks, you may cast an instant or sorcery spell from your hand without paying its mana cost.
+SVar:TrigPlay:DB$ Play | ValidZone$ Hand | Valid$ Card | ValidSA$ Instant.YouOwn,Sorcery.YouOwn | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Instant|Sorcery|Giant
+Oracle:As an additional cost to cast this spell, reveal a Giant card from your hand or pay {2}.\nWhenever Surtland Elementalist attacks, you may cast an instant or sorcery spell from your hand without paying its mana cost.

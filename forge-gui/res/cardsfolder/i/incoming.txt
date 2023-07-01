@@ -1,0 +1,6 @@
+Name:Incoming!
+ManaCost:4 G G G G
+Types:Sorcery
+SVar:X:Count$ValidLibrary Card
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | DefinedPlayer$ Player | ChangeNum$ X | Shuffle$ True | SpellDescription$ Each player searches their library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles.
+Oracle:Each player searches their library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles.

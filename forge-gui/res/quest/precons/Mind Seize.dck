@@ -1,0 +1,102 @@
+[metadata]
+Name=Mind Seize
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Jeleva, Nephalia's Scourge sends her enemies flying in terror while co-opting their arsenals for herself. Each time she shows up on the battlefield, she snatches new and powerful spells to further her nefarious plans.
+Set=C13
+Image=mind_seize.png
+[commander]
+1 Jeleva, Nephalia's Scourge+|C13
+[main]
+1 Akoum Refuge|C13
+1 Annihilate|C13
+1 Arcane Melee|C13
+1 Armillary Sphere|C13
+1 Army of the Damned|C13
+1 Augur of Bolas|C13
+1 Baleful Force|C13
+1 Baleful Strix|C13
+1 Bojuka Bog|C13
+1 Charmbreaker Devils|C13
+1 Command Tower|C13
+1 Crosis's Charm|C13
+1 Cruel Ultimatum|C13
+1 Crumbling Necropolis|C13
+1 Curse of Chaos|C13
+1 Curse of Inertia|C13
+1 Curse of Shallow Graves|C13
+1 Decree of Pain|C13
+1 Dimir Guildgate|C13
+1 Dismiss|C13
+1 Diviner Spirit|C13
+1 Echo Mage|C13
+1 Evolving Wilds|C13
+1 Eye of Doom|C13
+1 Fissure Vent|C13
+1 Fog Bank|C13
+1 Grixis Charm|C13
+1 Grixis Panorama|C13
+1 Guard Gomazoa|C13
+1 Guttersnipe|C13
+1 Hooded Horror|C13
+1 Illusionist's Gambit|C13
+1 Incendiary Command|C13
+1 Infest|C13
+3 Island|C13
+2 Island|C13
+2 Island|C13
+2 Island|C13
+1 Izzet Boilerworks|C13
+1 Izzet Guildgate|C13
+1 Jace's Archivist|C13
+1 Mirari|C13
+1 Mnemonic Wall|C13
+1 Molten Disaster|C13
+1 Molten Slagheap|C13
+1 Mountain|C13
+2 Mountain|C13
+1 Mountain|C13
+1 Mountain|C13
+1 Nekusar, the Mindrazer|C13
+1 Nightscape Familiar|C13
+1 Nivix Guildmage|C13
+1 Obelisk of Grixis|C13
+1 Opal Palace|C13
+1 Opportunity|C13
+1 Phthisis|C13
+1 Price of Knowledge|C13
+1 Propaganda|C13
+1 Prosperity|C13
+1 Rakdos Carnarium|C13
+1 Rakdos Guildgate|C13
+1 Rupture Spire|C13
+1 Skyscribing|C13
+1 Sol Ring|C13
+1 Soul Manipulation|C13
+1 Spiteful Visions|C13
+1 Starstorm|C13
+1 Strategic Planning|C13
+1 Sudden Spoiling|C13
+2 Swamp|C13
+2 Swamp|C13
+2 Swamp|C13
+2 Swamp|C13
+1 Swiftfoot Boots|C13
+1 Temple Bell|C13
+1 Temple of the False God|C13
+1 Tempt with Reflections|C13
+1 Terra Ravager|C13
+1 Thraximundar|C13
+1 True-Name Nemesis|C13
+1 Urza's Factory|C13
+1 Uyo, Silent Prophet|C13
+1 Vampire Nighthawk|C13
+1 Viseling|C13
+1 Vision Skeins|C13
+1 Vivid Creek|C13
+1 Vivid Marsh|C13
+1 Wayfarer's Bauble|C13
+1 Wild Ricochet|C13

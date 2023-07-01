@@ -1,0 +1,7 @@
+Name:Crimson Manticore
+ManaCost:2 R R
+Types:Creature Manticore
+PT:2/2
+K:Flying
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
+Oracle:Flying\n{R}, {T}: Crimson Manticore deals 1 damage to target attacking or blocking creature.

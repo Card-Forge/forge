@@ -1,0 +1,11 @@
+Name:Ral, Izzet Viceroy|Deck:Ral, Izzet Viceroy.dck|Variant:Planeswalker|Avatar:Ral, Izzet Viceroy|Desc:
+Name:Melek, Izzet Paragon|Deck:Melek, Izzet Paragon.dck|Variant:Commander|Avatar:Melek, Izzet Paragon|Desc:
+Name:Niv-Mizzet, Dracogenius|Deck:Niv-Mizzet, Dracogenius.dck|Variant:Commander|Avatar:Niv-Mizzet, Dracogenius|Desc:
+Name:Mizzix of the Izmagnus|Deck:Mizzix of the Izmagus.dck|Variant:Commander|Avatar:Mizzix of the Izmagnus|Desc:
+Name:Niv-Mizzet, the Firemind|Deck:Niv-Mizzet, the Firemind.dck|Variant:Commander|Avatar:Niv-Mizzet, the Firemind|Desc:
+Name:Tibor and Lumia|Deck:Tibor and Lumia.dck|Variant:Commander|Avatar:Tibor and Lumia|Desc:
+Name:Jhoira of the Ghitu|Deck:Jhoira of the Ghitu.dck|Variant:Vanguard|Avatar:Jhoira of the Ghitu|Desc:
+Name:Ral Zarek|Deck:Ral Zarek.dck|Variant:Planeswalker|Avatar:Ral Zarek|Desc:
+Name:Niv-Mizzet, Parun|Deck:Niv-Mizzet, Parun.dck|Variant:Commander|Avatar:Niv-Mizzet, Parun|Desc:
+
+Name:Izzet Replicate|Deck:Izzet Replicate.dck|Variant:None|Avatar:Djinn Illuminatus|Desc:

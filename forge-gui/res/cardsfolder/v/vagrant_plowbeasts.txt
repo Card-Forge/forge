@@ -1,0 +1,6 @@
+Name:Vagrant Plowbeasts
+ManaCost:5 G W
+Types:Creature Beast
+PT:6/6
+A:AB$ Regenerate | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater. | SpellDescription$ Regenerate target creature with power 5 or greater.
+Oracle:{1}: Regenerate target creature with power 5 or greater.

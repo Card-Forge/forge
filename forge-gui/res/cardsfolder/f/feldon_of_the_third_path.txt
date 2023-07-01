@@ -1,0 +1,6 @@
+Name:Feldon of the Third Path
+ManaCost:1 R R
+Types:Legendary Creature Human Artificer
+PT:2/3
+A:AB$ CopyPermanent | Cost$ 2 R T | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | NumCopies$ 1 | AddTypes$ Artifact | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
+Oracle:{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.

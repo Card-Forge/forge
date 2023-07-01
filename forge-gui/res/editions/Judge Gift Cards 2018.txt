@@ -1,0 +1,16 @@
+[metadata]
+Code=J18
+Date=2018-01-01
+Name=Judge Gift Cards 2018
+Type=Promo
+ScryfallCode=J18
+
+[cards]
+1 R Merchant Scroll @Scott Murphy
+2 R Vampiric Tutor @Lucas Graciano
+3 R Nin, the Pain Artist @Brad Rigney
+4 R Commander's Sphere @Ryan Alexander Lee
+5 R Teferi's Protection @Chase Stone
+6 R Lord of Atlantis @Gabor Szikszai
+7 R Rhystic Study @Paul Scott Canavan
+8 R Food Chain @Craig J Spearing

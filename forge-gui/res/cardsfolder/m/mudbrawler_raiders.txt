@@ -1,0 +1,6 @@
+Name:Mudbrawler Raiders
+ManaCost:2 RG RG
+Types:Creature Goblin Warrior
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Blue | Description$ CARDNAME can't be blocked by blue creatures.
+Oracle:Mudbrawler Raiders can't be blocked by blue creatures.

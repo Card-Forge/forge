@@ -1,0 +1,7 @@
+Name:Cabal Paladin
+ManaCost:3 B
+Types:Creature Human Knight
+PT:4/2
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, CARDNAME deals 2 damage to each opponent. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+Oracle:Whenever you cast a historic spell, Cabal Paladin deals 2 damage to each opponent. (Artifacts, legendaries, and Sagas are historic.)

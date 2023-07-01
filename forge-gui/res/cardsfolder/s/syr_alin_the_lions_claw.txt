@@ -1,0 +1,8 @@
+Name:Syr Alin, the Lion's Claw
+ManaCost:3 W W
+Types:Legendary Creature Human Knight
+PT:4/4
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1
+Oracle:First strike\nWhenever Syr Alin, the Lion's Claw attacks, other creatures you control get +1/+1 until end of turn.

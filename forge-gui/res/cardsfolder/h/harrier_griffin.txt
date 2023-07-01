@@ -1,0 +1,8 @@
+Name:Harrier Griffin
+ManaCost:5 W
+Types:Creature Griffin
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Flying\nAt the beginning of your upkeep, tap target creature.

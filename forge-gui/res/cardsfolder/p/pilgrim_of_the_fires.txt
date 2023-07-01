@@ -1,0 +1,7 @@
+Name:Pilgrim of the Fires
+ManaCost:7
+Types:Artifact Creature Golem
+PT:6/4
+K:First Strike
+K:Trample
+Oracle:First strike, trample

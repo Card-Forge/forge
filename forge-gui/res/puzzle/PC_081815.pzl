@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 081815 - Broken Dreams
+URL:http://www.gatheringmagic.com/seanuy-081815-broken-dreams/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Act of Treason is on top of your library.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=4
+AILife=5
+humanhand=Stratus Walk|Set:ORI; Fiery Conclusion|Set:ORI; Helm of the Gods|Set:ORI
+humangraveyard=
+humanlibrary=Act of Treason|Set:ORI; Infectious Bloodlust|Set:ORI
+humanbattlefield=Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Infectious Bloodlust|Set:ORI|AttachedTo:420; Aspiring Aeronaut|Set:ORI|Id:420; Reclusive Artificer|Set:ORI; Ghirapur Aether Grid|Set:ORI; Jayemdae Tome|Set:ORI
+aibattlefield=Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Mantle of Webs|Set:ORI|AttachedTo:421; Thornbow Archer|Set:ORI|Id:421; Dwynen's Elite|Set:ORI; Scrapskin Drake|Set:ORI|Counters:P1P1=2; Deadbridge Shaman|Set:ORI; Hitchclaw Recluse|Set:ORI
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

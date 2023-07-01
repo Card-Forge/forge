@@ -1,0 +1,7 @@
+Name:Culling Mark
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Effect | ValidTgts$ Creature | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | IsCurse$ True | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+AI:RemoveDeck:All
+Oracle:Target creature blocks this turn if able.

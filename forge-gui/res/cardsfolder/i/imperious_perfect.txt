@@ -1,0 +1,8 @@
+Name:Imperious Perfect
+ManaCost:2 G
+Types:Creature Elf Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Elf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+A:AB$ Token | Cost$ G T | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
+SVar:PlayMain1:TRUE
+Oracle:Other Elves you control get +1/+1.\n{G}, {T}: Create a 1/1 green Elf Warrior creature token.

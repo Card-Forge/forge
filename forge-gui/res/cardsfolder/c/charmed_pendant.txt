@@ -1,0 +1,5 @@
+Name:Charmed Pendant
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T Mill<1> | Produced$ Special EachColoredManaSymbol_Milled | InstantSpeed$ True | SpellDescription$ For each colored mana symbol in the milled card's mana cost, add one mana of that color. Activate only as an instant. (For example, if the card's mana cost is {3}{U}{U}{B}, you add {U}{U}{B}.)
+Oracle:{T}, Mill a card: For each colored mana symbol in the milled card's mana cost, add one mana of that color. Activate only as an instant. (For example, if the card's mana cost is {3}{U}{U}{B}, you add {U}{U}{B}.)

@@ -1,0 +1,6 @@
+Name:Krosan Wayfarer
+ManaCost:G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a land card from your hand onto the battlefield.
+Oracle:Sacrifice Krosan Wayfarer: You may put a land card from your hand onto the battlefield.

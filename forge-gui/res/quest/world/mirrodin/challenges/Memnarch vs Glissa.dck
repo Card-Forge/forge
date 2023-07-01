@@ -1,0 +1,38 @@
+[quest]
+id=6002
+AILife=20
+HumanLife=20
+HumanDeck=Glissa vs Memnarch.dck
+UseBazaar=False
+ForceAnte=False
+Repeat=false
+Wins=30
+Card Reward=duplicate card
+Credit Reward=200
+[metadata]
+Name=quest6002
+Title=Memnarch (as Glissa)
+Difficulty=hard
+Description=“It is all in my grasp. Every petty dream, every grand scheme, every soul, every fear. It all flows through me and from me.”
+Icon=Memnarch.jpg
+Deck Type=constructed
+[Main]
+1 Acquire|5DN
+24 Island|MRD|1
+2 Lumengrid Warden|MRD
+2 Memnarch|DST
+1 Myr Retriever|MRD
+1 Regress|MRD
+2 Silent Arbiter|5DN
+4 Silver Myr|SOM
+1 Skeleton Shard|MRD
+3 Solemn Simulacrum|MRD
+2 Spire Golem|DST
+3 Steel Wall|MRD
+2 Thirst for Knowledge|MRD
+4 Vedalken Archmage|MRD
+4 Vedalken Shackles|5DN
+2 Duplicant|MRD
+1 Altar of Shadows|MRD
+1 Carry Away|DST
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Dimir Guildmage
+ManaCost:UB UB
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Draw | Cost$ 3 U | ValidTgts$ Player | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player draws a card. Activate only as a sorcery.
+A:AB$ Discard | Cost$ 3 B | ValidTgts$ Player | Mode$ TgtChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+Oracle:({U/B} can be paid with either {U} or {B}.)\n{3}{U}: Target player draws a card. Activate only as a sorcery.\n{3}{B}: Target player discards a card. Activate only as a sorcery.

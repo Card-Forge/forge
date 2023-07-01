@@ -1,0 +1,9 @@
+Name:Tempest Djinn
+ManaCost:U U U
+Types:Creature Djinn
+PT:0/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each basic Island you control.
+SVar:X:Count$Valid Island.Basic+YouCtrl
+SVar:BuffedBy:Island.Basic+YouCtrl
+Oracle:Flying\nTempest Djinn gets +1/+0 for each basic Island you control.

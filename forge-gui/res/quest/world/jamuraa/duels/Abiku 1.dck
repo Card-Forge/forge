@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Abiku 1
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=easy
+Description=Abiku plays a RW 'Ride Like the Wind' deck.
+Deck Type=constructed
+[main]
+1 Agility|MIR
+1 Alarum|MIR
+2 Aleatory|MIR
+2 Blistering Barrier|MIR
+3 Burning Shield Askari|MIR
+1 Crimson Roc|MIR
+2 Favorable Destiny|MIR
+3 Femeref Knight|MIR
+1 Iron Tusk Elephant|MIR
+1 Melesse Spirit|MIR
+12 Mountain|MIR
+3 Mtenda Herder|MIR
+12 Plains|MIR
+1 Reverse Damage|LEB
+3 Searing Spear Askari|MIR
+1 Sidar Jabari|MIR
+2 Spitting Earth|MIR
+1 Telim'Tor|MIR
+2 Telim'Tor's Darts|MIR
+1 Vigilant Martyr|MIR
+2 Zhalfirin Commander|MIR
+3 Zhalfirin Knight|MIR
+[sideboard]
+[planes]
+[schemes]

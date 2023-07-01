@@ -1,0 +1,8 @@
+Name:Needletooth Raptor
+ManaCost:3 R
+Types:Creature Dinosaur
+PT:2/2
+T:Mode$ DamageDoneOnce | Execute$ DealDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, it deals 5 damage to target creature an opponent controls.
+SVar:DealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 5
+SVar:HasCombatEffect:TRUE
+Oracle:Enrage — Whenever Needletooth Raptor is dealt damage, it deals 5 damage to target creature an opponent controls.

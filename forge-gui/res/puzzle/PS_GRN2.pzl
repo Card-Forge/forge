@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/10/084.-GRN2.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume you have no instant or sorcery spells left in your library.
+[state]
+humanlife=20
+ailife=12
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Arclight Phoenix;Sonic Assault;Invert // Invent;Response // Resurgence
+humanlibrary=Plains|Set:GRN;Island|Set:GRN;Swamp|Set:GRN;Mountain|Set:GRN;Forest|Set:GRN
+humanbattlefield=Runaway Steam-Kin|Counters:P1P1=1|Id:1;Tilonalli's Crown|AttachedTo:1;Rampaging Monument|Counters:P1P1=3;Sacred Foundry|Set:GRN|NoETBTrigs;Sacred Foundry|Set:GRN|NoETBTrigs;Steam Vents|Set:GRN|NoETBTrigs;Steam Vents|Set:GRN|NoETBTrigs;Izzet Guildgate|Set:GRN;Izzet Guildgate|Set:GRN
+aibattlefield=Looming Altisaur;Territorial Allosaurus;Verdant Sun's Avatar;Polyraptor;Emissary of Sunrise|Id:2;Forebear's Blade|AttachedTo:2

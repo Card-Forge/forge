@@ -1,0 +1,7 @@
+Name:Defender of Law
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/1
+K:Flash
+K:Protection from red
+Oracle:Flash\nProtection from red

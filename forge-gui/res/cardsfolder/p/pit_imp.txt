@@ -1,0 +1,7 @@
+Name:Pit Imp
+ManaCost:B
+Types:Creature Imp
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.
+Oracle:Flying\n{B}: Pit Imp gets +1/+0 until end of turn. Activate no more than twice each turn.

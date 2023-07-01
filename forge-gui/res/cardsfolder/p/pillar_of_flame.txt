@@ -1,0 +1,6 @@
+Name:Pillar of Flame
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 2 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Pillar of Flame deals 2 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.

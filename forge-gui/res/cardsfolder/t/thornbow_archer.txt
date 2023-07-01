@@ -1,0 +1,8 @@
+Name:Thornbow Archer
+ManaCost:B
+Types:Creature Elf Archer
+PT:1/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, each opponent who doesn't control an Elf loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent+controlsElf_EQ0 | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Thornbow Archer attacks, each opponent who doesn't control an Elf loses 1 life.

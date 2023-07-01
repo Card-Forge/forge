@@ -1,0 +1,11 @@
+Name:Kitesail Skirmisher
+ManaCost:3 U
+Types:Creature Human Pirate
+PT:3/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature attacking the same player or planeswalker gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attackingSame | TgtPrompt$ Choose another target creature attacking the same player or planeswalker | KW$ Flying
+K:Encore:4 U
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever Kitesail Skirmisher attacks, another target creature attacking the same player or planeswalker gains flying until end of turn.\nEncore {4}{U} ({4}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Jund Appetite for War
+Description=As the worlds collide, you need a deck designed to eat your new neighbors alive. Summon a force of goblins, dragons, and other voracious creatures from Jund who only get bigger as they consume other creatures. Flood the board with fodder for your hungry beasts, then summon the best-fed dragon your fellow planeswalkers have ever seen.
+Deck Type=constructed
+Set=CFX
+Image=jund_appetite_for_war.jpg
+[main]
+1 Branching Bolt|ALA
+2 Carrion Thrash|ALA
+1 Charnelhoard Wurm+|CFX
+2 Dark Temper|CFX
+2 Dragon Fodder|ALA
+1 Ember Weaver|CFX
+2 Fiery Fall|CFX
+4 Forest|ALA|1
+1 Gluttonous Slime|CFX
+2 Goblin Outlander|CFX
+1 Hellkite Hatchling|CFX
+2 Incinerate|10E
+3 Mountain|ALA|2
+2 Mountain|ALA|3
+2 Savage Lands|ALA
+1 Scarland Thrinax|CFX
+1 Sprouting Thrinax|ALA
+4 Swamp|ALA|4
+2 Terramorphic Expanse|10E
+1 Toxic Iguanar|CFX
+2 Tukatongue Thallid|CFX
+1 Viashino Slaughtermaster|CFX
+1 Voracious Dragon|CFX
+[sideboard]

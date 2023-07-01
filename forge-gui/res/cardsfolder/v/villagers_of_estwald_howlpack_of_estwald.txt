@@ -1,0 +1,19 @@
+Name:Villagers of Estwald
+ManaCost:2 G
+Types:Creature Human Werewolf
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Villagers of Estwald.
+
+ALTERNATE
+
+Name:Howlpack of Estwald
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:4/6
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack of Estwald.

@@ -1,0 +1,13 @@
+Name:Herald of Hadar
+ManaCost:4 B
+Types:Creature Human Warlock
+PT:4/4
+A:AB$ RollDice | Cost$ 5 B | Sides$ 20 | ResultSubAbilities$ 1-9:LoseTwo,10-19:LoseGain,20:LoseTrea | PrecostDesc$ Circle of Death — | SpellDescription$ Roll a d20.
+SVar:LoseTwo:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SpellDescription$ 1—9 VERT Each opponent loses 2 life.
+SVar:LoseGain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGain2 | SpellDescription$ 10—19 VERT Each opponent loses 2 life and you gain 2 life.
+SVar:DBGain2:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:LoseTrea:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainTrea | SpellDescription$ 20 VERT Each opponent loses 2 life and you gain 2 life. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBGainTrea:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBTreasure
+SVar:DBTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$LifeGain|Token
+Oracle:Circle of Death — {5}{B}: Roll a d20.\n1—9 | Each opponent loses 2 life.\n10—19 | Each opponent loses 2 life and you gain 2 life.\n20 | Each opponent loses 2 life and you gain 2 life. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

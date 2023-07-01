@@ -1,0 +1,41 @@
+[metadata]
+Name=GAM_24_30_Mono Black Devotion Generated Deck_34_19
+[Main]
+2 Dismember|MM2
+4 Duress|M19
+4 Fatal Push|AER
+3 Gatekeeper of Malakir|ZEN
+4 Geralf's Messenger|DKA
+3 Gifted Aetherborn|AER
+4 Go for the Throat|C17
+4 Gray Merchant of Asphodel|C14
+3 Inquisition of Kozilek|MM3
+4 Phyrexian Arena|CN2
+3 Sign in Blood|CM2
+1 Swamp|10E|4
+1 Swamp|ALA|4
+2 Swamp|BBD
+1 Swamp|BFZ|2
+1 Swamp|C14|1
+1 Swamp|C14|2
+1 Swamp|C15|4
+1 Swamp|C18|2
+1 Swamp|CHK|2
+1 Swamp|HOU|3
+1 Swamp|ISD|1
+1 Swamp|KLD|1
+1 Swamp|LRW|4
+1 Swamp|PCA|2
+1 Swamp|SHM|1
+1 Swamp|THS|4
+1 Swamp|WAR|1
+1 Swamp|WAR|2
+1 Swamp|WAR|3
+1 Swamp|ZEN|1
+1 Swamp|ZEN|2
+[Sideboard]
+2 Cast Down|DOM
+4 Defile|MH1
+3 Doom Blade|E02
+2 Thoughtseize|IMA
+4 Victim of Night|ISD

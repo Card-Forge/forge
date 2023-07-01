@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Balduvian Marshes
+Title=The Balduvian Marshes
+Difficulty=easy
+Description="The spirit of the flame is the spirit of change." -Lovisa Coldeyes, Balduvian chieftain
+
+Near the fortress of Tresserhorn, volcanic activity has melted holes in the ice of the Balduvian steppe.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Balduvian Dead|ALL
+4 Balduvian Hydra|ICE
+4 Bone Shaman|ICE
+4 Flame Spirit|ICE
+4 Fumarole|ICE
+4 Grizzled Wolverine|ICE
+1 Lava Tubes|ICE
+4 Mole Worms|ICE
+11 Mountain|ICE|3
+2 Sabretooth Tiger|ICE
+2 Stench of Evil|ICE
+4 Stone Spirit|ICE
+4 Sulfurous Springs|ICE
+8 Swamp|ICE|2

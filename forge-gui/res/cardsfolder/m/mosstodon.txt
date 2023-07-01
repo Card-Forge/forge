@@ -1,0 +1,6 @@
+Name:Mosstodon
+ManaCost:4 G
+Types:Creature Plant Elephant
+PT:5/3
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater | KW$ Trample | SpellDescription$ Target creature with power 5 or greater gains trample until end of turn.
+Oracle:{1}: Target creature with power 5 or greater gains trample until end of turn.

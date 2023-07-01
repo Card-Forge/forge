@@ -1,0 +1,7 @@
+Name:Hypochondria
+ManaCost:1 W
+Types:Enchantment
+A:AB$ PreventDamage | Cost$ W Discard<1/Card> | ValidTgts$ Any | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
+A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Any | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
+AI:RemoveDeck:All
+Oracle:{W}, Discard a card: Prevent the next 3 damage that would be dealt to any target this turn.\n{W}, Sacrifice Hypochondria: Prevent the next 3 damage that would be dealt to any target this turn.

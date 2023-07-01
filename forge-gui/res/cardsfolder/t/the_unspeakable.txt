@@ -1,0 +1,10 @@
+Name:The Unspeakable
+ManaCost:6 U U U
+Types:Legendary Creature Spirit
+PT:6/7
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Arcane.YouCtrl
+DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable & Type$Arcane|Spirit
+Oracle:Flying, trample\nWhenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.

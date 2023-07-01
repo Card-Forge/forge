@@ -1,0 +1,10 @@
+Name:Rograkh, Son of Rohgahh
+ManaCost:0
+Colors:red
+Types:Legendary Creature Kobold Warrior
+PT:0/1
+K:First Strike
+K:Menace
+K:Trample
+K:Partner
+Oracle:First strike, menace, trample\nPartner (You can have two commanders if both have partner.)

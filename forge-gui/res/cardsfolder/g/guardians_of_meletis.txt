@@ -1,0 +1,6 @@
+Name:Guardians of Meletis
+ManaCost:3
+Types:Artifact Creature Golem
+PT:0/6
+K:Defender
+Oracle:Defender (This creature can't attack.)

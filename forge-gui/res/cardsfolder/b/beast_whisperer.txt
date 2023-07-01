@@ -1,0 +1,7 @@
+Name:Beast Whisperer
+ManaCost:2 G G
+Types:Creature Elf Druid
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever you cast a creature spell, draw a card.

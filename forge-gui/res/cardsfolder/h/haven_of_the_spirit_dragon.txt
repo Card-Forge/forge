@@ -1,0 +1,8 @@
+Name:Haven of the Spirit Dragon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Creature+Dragon | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Dragon creature spell.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target Dragon creature card or Ugin planeswalker card in your graveyard | ValidTgts$ Creature.Dragon+YouCtrl,Planeswalker.Ugin+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Dragon creature spell.\n{2}, {T}, Sacrifice Haven of the Spirit Dragon: Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand.

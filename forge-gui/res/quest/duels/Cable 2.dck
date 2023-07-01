@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Cable 2
+Title=Cable
+Difficulty=medium
+Description=UR Instant and Sorcery deck with Kiln Fiend and Wee Dragonauts
+Icon=Cable.jpg
+Deck Type=constructed
+[main]
+8 Mountain|ISD
+8 Island|ISD
+4 Scalding Tarn
+4 Sulfur Falls
+1 Capsize
+2 Seething Anger
+1 Act of Treason
+1 Assault Strobe
+1 Cloak of Feathers
+2 Leap
+4 Reckless Charge
+2 Repulse
+2 Shadow Rift
+1 Artful Dodge
+2 Sleep
+3 Symbol of Unsummoning
+1 Threaten
+1 Distortion Strike
+2 Charmbreaker Devils
+4 Kiln Fiend
+1 Surrakar Spellblade
+3 Wee Dragonauts
+2 Jhessian Thief
+[sideboard]

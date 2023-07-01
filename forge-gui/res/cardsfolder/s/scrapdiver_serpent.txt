@@ -1,0 +1,6 @@
+Name:Scrapdiver Serpent
+ManaCost:5 U U
+Types:Creature Serpent
+PT:5/5
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Artifact.DefenderCtrl | Description$ CARDNAME can't be blocked as long as defending player controls an artifact.
+Oracle:Scrapdiver Serpent can't be blocked as long as defending player controls an artifact.

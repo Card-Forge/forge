@@ -1,0 +1,6 @@
+Name:Devoted Retainer
+ManaCost:W
+Types:Creature Human Samurai
+PT:1/1
+K:Bushido:1
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

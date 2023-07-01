@@ -1,0 +1,10 @@
+Name:Gemrazer
+ManaCost:3 G
+Types:Creature Beast
+PT:4/4
+K:Mutate:1 G G
+K:Reach
+K:Trample
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever this creature mutates, destroy target artifact or enchantment an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls
+Oracle:Mutate {1}{G}{G} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nReach, trample\nWhenever this creature mutates, destroy target artifact or enchantment an opponent controls.

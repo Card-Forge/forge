@@ -1,0 +1,6 @@
+Name:Horrible Hordes
+ManaCost:3
+Types:Artifact Creature Spirit
+PT:2/2
+K:Rampage:1
+Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)

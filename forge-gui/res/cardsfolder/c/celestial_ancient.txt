@@ -1,0 +1,9 @@
+Name:Celestial Ancient
+ManaCost:3 W W
+Types:Creature Elemental
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Enchantment
+Oracle:Flying\nWhenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.

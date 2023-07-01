@@ -1,0 +1,7 @@
+Name:Eliminate the Competition
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Destroy | Cost$ 4 B Sac<X/Creature/creature(s)> | CostDesc$ As an additional cost to cast this spell, sacrifice X creatures. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | AIMaxTgtsCount$ Valid Creature.YouCtrl+cmcLE2 | SpellDescription$ Destroy X target creatures.
+SVar:X:Count$xPaid
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+Oracle:As an additional cost to cast this spell, sacrifice X creatures.\nDestroy X target creatures.

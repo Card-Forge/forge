@@ -1,0 +1,7 @@
+Name:Widespread Panic
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Shuffled | ValidPlayer$ Player | ShuffleFromEffect$ True | ShuffleBySelfControlled$ True | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library.
+SVar:TrigChangeZone:DB$ ChangeZone | DefinedPlayer$ TriggeredPlayer | Chooser$ TriggeredPlayer | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True
+AI:RemoveDeck:Random
+Oracle:Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library.

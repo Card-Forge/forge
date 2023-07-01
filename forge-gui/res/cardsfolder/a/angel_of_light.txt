@@ -1,0 +1,7 @@
+Name:Angel of Light
+ManaCost:4 W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

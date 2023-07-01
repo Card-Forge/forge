@@ -1,0 +1,5 @@
+Name:Looming Altisaur
+ManaCost:3 W
+Types:Creature Dinosaur
+PT:1/7
+Oracle:

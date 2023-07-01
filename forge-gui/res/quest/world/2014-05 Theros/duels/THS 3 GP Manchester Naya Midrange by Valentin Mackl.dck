@@ -1,0 +1,37 @@
+[metadata]
+Name=THS 3 GP Manchester: Naya Midrange by Valentin Mackl
+Title=Naya Midrange
+Difficulty=hard
+Description=Block Constructed deck played by Valentin Mackl at GP Manchester.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+1 Ajani, Mentor of Heroes|JOU
+4 Banishing Light|JOU
+3 Brimaz, King of Oreskos|BNG
+4 Courser of Kruphix|BNG
+2 Destructive Revelry|THS
+4 Elspeth, Sun's Champion|THS
+4 Fleecemane Lion|THS
+4 Forest|THS|1
+4 Mana Confluence|JOU
+3 Mountain|THS|1
+3 Plains|THS|1
+1 Polis Crusher|THS
+4 Stormbreath Dragon|THS
+4 Sylvan Caryatid|THS
+3 Temple of Abandon|THS
+4 Temple of Plenty|BNG
+3 Temple of Triumph|THS
+1 Voyaging Satyr|THS
+4 Xenagos, the Reveler|THS
+[Sideboard]
+1 Ajani, Mentor of Heroes|JOU
+3 Anger of the Gods|THS
+1 Arbor Colossus|THS
+1 Destructive Revelry|THS
+3 Glare of Heresy|THS
+1 Hammer of Purphoros|THS
+3 Magma Spray|JOU
+1 Polis Crusher|THS
+1 Purphoros, God of the Forge|THS

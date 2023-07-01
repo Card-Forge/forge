@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Catwoman 1
+Title=Catwoman
+Difficulty=easy
+Description=WG Cat deck with Kjeldoran War Cry
+Icon=Catwoman.jpg
+Deck Type=constructed
+[main]
+1 Ajani's Sunstriker
+1 Guardian Lions
+1 Healer of the Pride
+1 Hunting Cheetah
+1 Jedit's Dragoons
+1 Leonin Armorguard
+1 Leonin Relic-Warder
+1 Leonin Skyhunter
+1 Leonin Snarecaster
+1 Mist Leopard
+1 Nacatl Savage
+1 Oreskos Sun Guide
+3 Elite Cat Warrior
+4 Kjeldoran War Cry
+2 Jungle Lion
+4 Blossoming Sands
+6 Plains|SOM
+3 Commune with Nature
+1 Savannah Lions
+2 Unyaro Bee Sting
+2 Penumbra Bobcat
+6 Forest|SOM
+2 Horned Cheetah
+1 Marble Diamond
+2 King Cheetah
+1 Regrowth
+1 Jedit Ojanen of Efrava
+1 Mirri, Cat Warrior
+2 Sunlance
+4 Razorverge Thicket
+1 Moss Diamond
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Rootwalla
+ManaCost:2 G
+Types:Creature Lizard
+PT:2/2
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{1}{G}: Rootwalla gets +2/+2 until end of turn. Activate only once each turn.

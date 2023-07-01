@@ -1,0 +1,10 @@
+Name:Garruk's Harbinger
+ManaCost:1 G G
+Types:Creature Beast
+PT:4/3
+K:Hexproof:Card.Black:black
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, look at that many cards from the top of your library. You may reveal a creature card or Garruk planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | ChangeValid$ Creature,Planeswalker.Garruk | Optional$ True | DestinationZone$ Hand | RestRandomOrder$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Garruk
+Oracle:Hexproof from black\nWhenever Garruk's Harbinger deals combat damage to a player or planeswalker, look at that many cards from the top of your library. You may reveal a creature card or Garruk planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

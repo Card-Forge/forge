@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: Steel Island
+Title=Steel Island
+Difficulty=easy
+Description="I have heard terrible tales of black rains, ashen fields, and metal that screams. I have consoled myself that the tales were a myth of some fevered mind. But today I saw a walker-and now I fear the truth." -Kasib Ibn Naji, Letters
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Army Ants|VIS
+4 Delirium|MIR
+4 Discordant Spirit|MIR
+2 Forsaken Wastes|MIR
+4 Horrible Hordes|MIR
+11 Mountain|MIR|2
+4 Painful Memories|MIR
+4 Phyrexian Marauder|VIS
+4 Phyrexian Purge|MIR
+4 Phyrexian Walker|VIS
+4 Rocky Tar Pit|MIR
+11 Swamp|MIR|1

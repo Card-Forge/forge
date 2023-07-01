@@ -1,0 +1,6 @@
+Name:Heartwood Dryad
+ManaCost:1 G
+Types:Creature Dryad
+PT:2/1
+K:CARDNAME can block creatures with shadow as though they didn't have shadow.
+Oracle:Heartwood Dryad can block creatures with shadow as though Heartwood Dryad had shadow.

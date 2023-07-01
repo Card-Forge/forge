@@ -1,0 +1,8 @@
+Name:Battlefly Swarm
+ManaCost:B
+Types:Creature Phyrexian Insect
+PT:1/1
+K:Flying
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+DeckHas:Keyword$Deathtouch
+Oracle:Flying\n{B}: Battlefly Swarm gains deathtouch until end of turn.

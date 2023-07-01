@@ -1,0 +1,7 @@
+Name:Spikeshot Goblin
+ManaCost:2 R
+Types:Creature Goblin Shaman
+PT:1/2
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
+SVar:X:Count$CardPower
+Oracle:{R}, {T}: Spikeshot Goblin deals damage equal to its power to any target.

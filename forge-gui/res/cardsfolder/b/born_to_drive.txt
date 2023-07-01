@@ -1,0 +1,12 @@
+Name:Born to Drive
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ As long as enchanted permanent is a creature, it gets +1/+1 for each creature and/or Vehicle you control.
+SVar:X:Count$Valid Creature.YouCtrl,Vehicle.YouCtrl
+A:AB$ Token | PrecostDesc$ Channel — | Cost$ 2 W Discard<1/CARDNAME> | TokenAmount$ 2 | TokenScript$ c_1_1_pilot_crewbuff | ActivationZone$ Hand | SpellDescription$ Create two 1/1 colorless Pilot creature tokens with "This creature crews Vehicles as though its power were 2 greater."
+SVar:BuffedBy:Creature,Vehicle
+DeckHints:Type$Creature|Vehicle
+DeckHas:Ability$Token|Discard & Type$Pilot
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+1 for each creature and/or Vehicle you control.\nChannel — {2}{W}, Discard Born to Drive: Create two 1/1 colorless Pilot creature tokens with "This creature crews Vehicles as though its power were 2 greater."

@@ -1,0 +1,7 @@
+Name:Drudge Reavers
+ManaCost:3 B
+Types:Creature Skeleton
+PT:2/1
+K:Flash
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\n{B}: Regenerate Drudge Reavers.

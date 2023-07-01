@@ -1,0 +1,10 @@
+Name:Spoils of the Hunt
+ManaCost:2 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ Treasure | SubAbility$ DBDealDamage | StackDescription$ {c:ThisTargetedCard} gets +1/+0 until end of turn for each mana from a Treasure that was spent to cast this spell. | SpellDescription$ Target creature you control gets +1/+0 until end of turn for each mana from a Treasure that was spent to cast this spell. Then that creature deals damage equal to its power to target creature an opponent controls.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+SVar:Treasure:Count$CastTotalManaSpent Treasure
+SVar:AIPreference:ManaFrom$Treasure
+AI:RemoveDeck:Random
+Oracle:Target creature you control gets +1/+0 until end of turn for each mana from a Treasure that was spent to cast this spell. Then that creature deals damage equal to its power to target creature an opponent controls.

@@ -1,0 +1,7 @@
+Name:Windwright Mage
+ManaCost:W U B
+Types:Artifact Creature Human Wizard
+PT:2/2
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Artifact.YouOwn | PresentZone$ Graveyard | Description$ CARDNAME has flying as long as an artifact card is in your graveyard.
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWindwright Mage has flying as long as an artifact card is in your graveyard.

@@ -1,0 +1,9 @@
+Name:Defenders of Humanity
+ManaCost:X 2 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X 2/2 white Astartes Warrior creature tokens with vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenOwner$ You
+A:AB$ Token | Cost$ X 2 W Exile<1/CARDNAME> | IsPresent$ Creature.YouCtrl | PlayerTurn$ True | PresentCompare$ EQ0 | ActivationZone$ Battlefield | TokenAmount$ X | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenOwner$ You | Description$ Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|LifeGain & Type$Astartes|Soldier & Keyword$Vigilance
+Oracle:When Defenders of Humanity enters the battlefield, create X 2/2 white Astartes Warrior creature tokens with vigilance.\n{X}{2}{W}, Exile Defenders of Humanity: Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn.

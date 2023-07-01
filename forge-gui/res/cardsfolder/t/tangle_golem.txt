@@ -1,0 +1,7 @@
+Name:Tangle Golem
+ManaCost:7
+Types:Artifact Creature Golem
+PT:5/4
+K:Affinity:Forest
+DeckNeeds:Color$Green
+Oracle:Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)

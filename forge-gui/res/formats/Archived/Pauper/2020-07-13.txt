@@ -1,0 +1,7 @@
+[format]
+Name:Pauper (2020-07-13)
+Type:Archived
+Subtype:Pauper
+Effective:2020-07-13
+Rarities:L, C
+Banned:Arcum's Astrolabe; Daze; Expedition Map; Fall from Favor; Gush; Gitaxian Probe; Mystic Sanctuary

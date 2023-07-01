@@ -1,0 +1,9 @@
+Name:Herald of the Dreadhorde
+ManaCost:3 B
+Types:Creature Zombie Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBAmass | TriggerDescription$ When CARDNAME dies, amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ 2
+DeckHints:Ability$Amass & Type$Zombie
+DeckHas:Ability$Amass|Counters|Token
+Oracle:When Herald of the Dreadhorde dies, amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

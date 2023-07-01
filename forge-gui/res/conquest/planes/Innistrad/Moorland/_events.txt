@@ -1,0 +1,9 @@
+Name:The Ghost with the Most|Deck:The Ghost with the Most.dck|Variant:None|Avatar:Geist of Saint Traft|Desc:
+Name:Who Ya Gonna Call?|Deck:Who Ya Gonna Call.dck|Variant:None|Avatar:Geistcatcher's Rig|Desc:
+Name:Strength in Numbers|Deck:Strength in Numbers.dck|Variant:None|Avatar:Geist-Honored Monk|Desc:
+Name:Heavenly Host|Deck:Heavenly Host.dck|Variant:Vanguard|Avatar:Serra Angel|Desc:
+Name:Oppressive Faith|Deck:Oppressive Faith.dck|Variant:Commander|Avatar:Thalia, Guardian of Thraben|Desc:
+Name:Gisela, the Broken Blade|Deck:Gisela, the Broken Blade.dck|Variant:Commander|Avatar:Gisela, the Broken Blade|Desc:
+Name:Bruna, the Fading Light|Deck:Bruna, the Fading Light.dck|Variant:Commander|Avatar:Bruna, the Fading Light|Desc:
+Name:Odric, Master Tactician|Deck:Odric, Master Tactician.dck|Variant:Commander|Avatar:Odric, Master Tactician|Desc:
+Name:Knowledge is Power|Deck:Knowledge is Power.dck|Variant:Planeswalker|Avatar:Tamiyo, the Moon Sage|Desc:

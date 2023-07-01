@@ -1,0 +1,6 @@
+Name:Raging Goblin
+ManaCost:R
+Types:Creature Goblin Berserker
+PT:1/1
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

@@ -1,0 +1,9 @@
+Name:Shielded Aether Thief
+ManaCost:1 U
+Types:Creature Vedalken Rogue
+PT:0/4
+K:Flash
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME blocks, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Draw | Cost$ T PayEnergy<3> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhenever Shielded Aether Thief blocks, you get {E} (an energy counter).\n{T}, Pay {E}{E}{E}: Draw a card.

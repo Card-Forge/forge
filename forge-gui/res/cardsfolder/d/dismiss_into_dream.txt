@@ -1,0 +1,9 @@
+Name:Dismiss into Dream
+ManaCost:6 U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddType$ Illusion | AddTrigger$ DismissTarget | AddSVar$ DismissSac & TargetingSac | Description$ Each creature your opponents control is an Illusion in addition to its other types and has "When this creature becomes the target of a spell or ability, sacrifice it."
+SVar:DismissTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ DismissSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:DismissSac:DB$ Sacrifice
+SVar:NonStackingEffect:True
+SVar:TargetingSac:SVar:Targeting:Dies
+Oracle:Each creature your opponents control is an Illusion in addition to its other types and has "When this creature becomes the target of a spell or ability, sacrifice it."

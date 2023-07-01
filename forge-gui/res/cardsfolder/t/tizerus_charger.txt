@@ -1,0 +1,11 @@
+Name:Tizerus Charger
+ManaCost:2 B
+Types:Creature Pegasus
+PT:3/2
+K:Escape:4 B ExileFromGrave<5/Card.Other/other card>
+K:ETBReplacement:Other:Choice:Mandatory::Card.Self+escaped
+SVar:Choice:DB$ GenericChoice | Defined$ You | Choices$ P1P1,Flying | SpellDescription$ CARDNAME escapes with your choice of a +1/+1 counter or a flying counter on it.
+SVar:P1P1:DB$ PutCounter | ETB$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ +1/+1 counter
+SVar:Flying:DB$ PutCounter | ETB$ True | CounterType$ Flying | CounterNum$ 1 | SpellDescription$ Flying counter
+DeckHas:Ability$Counters
+Oracle:Escape—{4}{B}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nTizerus Charger escapes with your choice of a +1/+1 counter or a flying counter on it.

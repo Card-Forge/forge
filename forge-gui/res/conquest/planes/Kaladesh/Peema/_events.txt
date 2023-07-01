@@ -1,0 +1,9 @@
+Name:Rishkar, Peema Renegade|Deck:Rishkar, Peema Renegade.dck|Variant:Commander|Avatar:Rishkar, Peema Renegade|Desc:
+Name:Oviya Pashiri, Sage Lifecrafter|Deck: Oviya Pashiri, Sage Lifecrafter.dck|Variant:Commander|Avatar: Oviya Pashiri, Sage Lifecrafter|Desc:
+Name:Rashmi, Eternities Crafter|Deck: Rashmi, Eternities Crafter.dck|Variant:Commander|Avatar: Rashmi, Eternities Crafter|Desc:
+Name:Nissa, Nature's Artisan|Deck:Nissa, Nature's Artisan.dck|Variant:Planeswalker|Avatar:Nissa, Nature's Artisan|Desc:
+Name:Nissa, Vital Force|Deck:Nissa, Vital Force.dck|Variant:Planeswalker|Avatar:Nissa, Vital Force|Desc:
+Name:Energy|Deck:Energy.dck|Variant:None|Avatar:Aethertide Whale|Desc:
+Name:Servants of the Conduit|Deck:Elves.dck|Variant:None|Avatar:Servant of the Conduit|Desc:
+Name:Armorcraft Judge|Deck:Counters.dck|Variant:None|Avatar:Armorcraft Judge|Desc:
+Name:Monstrous Onslaught|Deck:Monstrous Onslaught.dck|Variant:None|Avatar:Monstrous Onslaught|Desc:

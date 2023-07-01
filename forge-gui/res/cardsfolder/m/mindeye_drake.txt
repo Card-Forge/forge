@@ -1,0 +1,8 @@
+Name:Mindeye Drake
+ManaCost:4 U
+Types:Creature Drake
+PT:2/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, target player mills five cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
+Oracle:Flying\nWhen Mindeye Drake dies, target player mills five cards.

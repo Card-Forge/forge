@@ -1,0 +1,10 @@
+Name:Knighted Myr
+ManaCost:2 W
+Types:Artifact Creature Myr Knight
+PT:2/2
+K:Adapt:1:2 W
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | CounterType$ P1P1 | Execute$ TrigPump | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Double Strike
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:{2}{W}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever one or more +1/+1 counters are put on Knighted Myr, it gains double strike until end of turn.

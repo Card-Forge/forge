@@ -1,0 +1,7 @@
+Name:Fire Snake
+ManaCost:4 R
+Types:Creature Snake
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy target land.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+Oracle:When Fire Snake dies, destroy target land.

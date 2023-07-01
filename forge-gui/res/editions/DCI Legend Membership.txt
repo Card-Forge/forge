@@ -1,0 +1,10 @@
+[metadata]
+Code=PLGM
+Date=1995-01-01
+Name=DCI Legend Membership
+Type=Promo
+ScryfallCode=PLGM
+
+[cards]
+1 R Counterspell @Dom!
+2 R Incinerate @Jock

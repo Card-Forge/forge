@@ -1,0 +1,7 @@
+Name:Avenging Druid
+ManaCost:2 G
+Types:Creature Human Druid
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may reveal cards from the top of your library until you reveal a land card. If you do, put that card onto the battlefield and put all other cards revealed this way into your graveyard.
+SVar:TrigDig:DB$ DigUntil | Valid$ Land | ValidDescription$ land | FoundDestination$ Battlefield | RevealedDestination$ Graveyard
+Oracle:Whenever Avenging Druid deals damage to an opponent, you may reveal cards from the top of your library until you reveal a land card. If you do, put that card onto the battlefield and put all other cards revealed this way into your graveyard.

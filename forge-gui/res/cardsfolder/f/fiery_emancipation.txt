@@ -1,0 +1,8 @@
+Name:Fiery Emancipation
+ManaCost:3 R R R
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ Dmg3 | Description$ If a source you control would deal damage to a permanent or player, it deals triple that damage to that permanent or player instead.
+SVar:Dmg3:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Thrice
+SVar:PlayMain1:TRUE
+Oracle:If a source you control would deal damage to a permanent or player, it deals triple that damage to that permanent or player instead.

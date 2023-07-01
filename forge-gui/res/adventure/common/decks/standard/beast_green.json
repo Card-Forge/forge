@@ -1,0 +1,10 @@
+{                                    
+"name":"Green Beast",
+  "template":
+  {
+   "count":60,
+   "colors":["Green"],
+   "tribe":"Beast",        
+   "rares":0.8
+  }
+}

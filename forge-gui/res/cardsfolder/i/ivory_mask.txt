@@ -1,0 +1,6 @@
+Name:Ivory Mask
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
+SVar:NonStackingEffect:True
+Oracle:You have shroud. (You can't be the target of spells or abilities.)

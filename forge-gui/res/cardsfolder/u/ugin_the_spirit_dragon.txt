@@ -1,0 +1,11 @@
+Name:Ugin, the Spirit Dragon
+ManaCost:8
+Types:Legendary Planeswalker Ugin
+Loyalty:7
+A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<X/LOYALTY> | UseAllOriginZones$ True | Planeswalker$ True | ChangeType$ Permanent.nonColorless+cmcLEX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each permanent with mana value X or less that's one or more colors.
+SVar:X:Count$xPaid
+A:AB$ GainLife | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | LifeAmount$ 7 | SubAbility$ DBDraw | SpellDescription$ You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 7
+Oracle:[+2]: Ugin, the Spirit Dragon deals 3 damage to any target.\n[-X]: Exile each permanent with mana value X or less that's one or more colors.\n[-10]: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.

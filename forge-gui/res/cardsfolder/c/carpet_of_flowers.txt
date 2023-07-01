@@ -1,0 +1,15 @@
+Name:Carpet of Flowers
+ManaCost:G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | CheckSVar$ CarpetX | SVarCompare$ EQ0 | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls.
+SVar:TrigMana:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent. You may add X mana, where X is the number of Islands target opponent controls | IsCurse$ True | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Amount$ NumManaMax | Produced$ Any | SubAbility$ CheckPlus
+SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 0
+SVar:NumManaMax:Count$Valid Island.TargetedPlayerCtrl
+SVar:CarpetX:Number$0
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls.

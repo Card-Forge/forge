@@ -1,0 +1,7 @@
+Name:Hammer Dropper
+ManaCost:2 R W
+Types:Creature Giant Soldier
+PT:5/2
+K:Mentor
+DeckHas:Ability$Counters
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)

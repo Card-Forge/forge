@@ -1,0 +1,10 @@
+Name:Fey Steed
+ManaCost:2 W W
+Types:Creature Elk
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature you control gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other+attacking | TgtPrompt$ Select another target attacking creature you control | KW$ Indestructible
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.YouCtrl+inZoneBattlefield,Planeswalker.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a creature or planeswalker you control becomes the target of a spell or ability an opponent controls, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Fey Steed attacks, another target attacking creature you control gains indestructible until end of turn.\nWhenever a creature or planeswalker you control becomes the target of a spell or ability an opponent controls, you may draw a card.

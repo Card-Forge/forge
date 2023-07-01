@@ -1,0 +1,7 @@
+Name:Centaur Veteran
+ManaCost:5 G
+Types:Creature Centaur
+PT:3/3
+K:Trample
+A:AB$ Regenerate | Cost$ G Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
+Oracle:Trample\n{G}, Discard a card: Regenerate Centaur Veteran.

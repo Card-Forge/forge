@@ -1,0 +1,8 @@
+Name:Jace's Triumph
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw two cards. If you control a Jace planeswalker, draw three cards instead.
+SVar:Y:Count$Valid Planeswalker.Jace+YouCtrl
+SVar:X:Count$Compare Y GE1.3.2
+DeckHints:Type$Jace
+Oracle:Draw two cards. If you control a Jace planeswalker, draw three cards instead.

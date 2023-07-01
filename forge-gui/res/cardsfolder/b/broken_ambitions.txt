@@ -1,0 +1,8 @@
+Name:Broken Ambitions
+ManaCost:X U
+Types:Instant
+A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBClash | SpellDescription$ Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards.
+SVar:DBClash:DB$ Clash | WinSubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ TargetedController | NumCards$ 4
+SVar:X:Count$xPaid
+Oracle:Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

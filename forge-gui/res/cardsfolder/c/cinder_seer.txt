@@ -1,0 +1,10 @@
+Name:Cinder Seer
+ManaCost:3 R
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Reveal | Cost$ 2 R T | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBCinderDamage | SpellDescription$ Reveal any number of red cards in your hand. CARDNAME deals X damage to any target, where X is the number of cards revealed this way.
+SVar:DBCinderDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBCinderCleanup
+SVar:X:Remembered$Amount
+SVar:DBCinderCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:{2}{R}, {T}: Reveal any number of red cards in your hand. Cinder Seer deals X damage to any target, where X is the number of cards revealed this way.

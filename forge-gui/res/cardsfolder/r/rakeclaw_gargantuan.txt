@@ -1,0 +1,6 @@
+Name:Rakeclaw Gargantuan
+ManaCost:2 R G W
+Types:Creature Beast
+PT:5/3
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater | KW$ First Strike | SpellDescription$ Target creature with power 5 or greater gains first strike until end of turn.
+Oracle:{1}: Target creature with power 5 or greater gains first strike until end of turn.

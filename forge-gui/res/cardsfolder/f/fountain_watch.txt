@@ -1,0 +1,6 @@
+Name:Fountain Watch
+ManaCost:3 W W
+Types:Creature Human Cleric
+PT:2/4
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl,Enchantment.YouCtrl | AddKeyword$ Shroud | Description$ Artifacts and enchantments you control have shroud.
+Oracle:Artifacts and enchantments you control have shroud. (They can't be the targets of spells or abilities.)

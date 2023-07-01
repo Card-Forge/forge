@@ -1,0 +1,13 @@
+Name:Hallowed Respite
+ManaCost:W U
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBReturn | StackDescription$ Exile {c:Targeted}, | SpellDescription$ Exile target nonlegendary creature, then return it to the battlefield under its owner's control. If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBBranch | StackDescription$ then return it to the battlefield under its owner's control.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ PutCounter | FalseSubAbility$ Tap | StackDescription$ If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it.
+SVar:PutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:Tap:DB$ Tap | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature.YouCtrl
+K:Flashback:1 W U
+DeckHas:Ability$Graveyard|Counters
+Oracle:Exile target nonlegendary creature, then return it to the battlefield under its owner's control. If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it.\nFlashback {1}{W}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

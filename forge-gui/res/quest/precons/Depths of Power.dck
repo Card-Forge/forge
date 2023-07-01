@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Depths of Power
+Description=Seize the power of wind and waves with the help of legendary merfolk Talrand, Sky Summoner. While drakes assault your enemies from the skies, you manipulate the battlefield and burn immediate threats, steering the course to victory.
+Deck Type=constructed
+Set=M13
+Image=depths_of_power.jpg
+[main]
+2 Augur of Bolas|M13
+3 Searing Spear|M13
+1 Smelt|M13
+2 Mindclaw Shaman|M13
+1 Ring of Evos Isle|M13
+1 Talrand, Sky Summoner+|M13
+1 Switcheroo|M13
+1 Harbor Serpent|M13
+1 Negate|M13
+2 Talrand's Invocation|M13
+1 Sleep|M13
+2 Divination|M13
+1 Unsummon|M13
+2 Archaeomancer|M13
+1 Evolving Wilds|M13
+1 Fog Bank|M13
+1 Hydrosurge|M13
+2 Scroll Thief|M13
+1 Essence Scatter|M13
+1 Turn to Slag|M13
+1 Stormtide Leviathan|M13
+3 Kraken Hatchling|M13
+1 Elixir of Immortality|M13
+3 Wind Drake|M13
+1 Rewind|M13
+15 Island|M13
+8 Mountain|M13
+[sideboard]

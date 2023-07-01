@@ -1,0 +1,11 @@
+Name:Skullslither Worm
+ManaCost:3 B
+Types:Creature Worm
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card. For each opponent who can't, put two +1/+1 counters on CARDNAME.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | RememberDiscarded$ True | Mode$ TgtChoose | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X
+SVar:X:SVar$Y/Times.2
+SVar:Y:PlayerCountOpponents$Amount/Minus.Remembered$Amount
+DeckHas:Ability$Counters
+Oracle:When Skullslither Worm enters the battlefield, each opponent discards a card. For each opponent who can't, put two +1/+1 counters on Skullslither Worm.

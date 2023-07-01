@@ -1,0 +1,5 @@
+Name:Kami of Old Stone
+ManaCost:3 W
+Types:Creature Spirit
+PT:1/7
+Oracle:

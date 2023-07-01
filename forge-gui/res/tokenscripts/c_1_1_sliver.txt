@@ -1,0 +1,5 @@
+Name:Sliver Token
+ManaCost:no cost
+Types:Creature Sliver
+PT:1/1
+Oracle:

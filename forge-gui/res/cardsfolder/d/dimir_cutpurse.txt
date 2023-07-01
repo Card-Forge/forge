@@ -1,0 +1,8 @@
+Name:Dimir Cutpurse
+ManaCost:1 U B
+Types:Creature Spirit
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDrawDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card and you draw a card.
+SVar:TrigDrawDiscard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever Dimir Cutpurse deals combat damage to a player, that player discards a card and you draw a card.

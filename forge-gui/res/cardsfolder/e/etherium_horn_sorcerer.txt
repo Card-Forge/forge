@@ -1,0 +1,7 @@
+Name:Etherium-Horn Sorcerer
+ManaCost:4 U R
+Types:Artifact Creature Minotaur Wizard
+PT:3/6
+A:AB$ ChangeZone | Cost$ 1 U R | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+K:Cascade
+Oracle:{1}{U}{R}: Return Etherium-Horn Sorcerer to its owner's hand.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

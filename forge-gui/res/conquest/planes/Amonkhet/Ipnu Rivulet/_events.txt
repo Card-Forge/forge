@@ -1,0 +1,9 @@
+Name:Unesh, Criosphinx Sovereign|Deck:Unesh, Criosphinx Sovereign.dck|Variant:Commander|Avatar:Unesh, Criosphinx Sovereign|Desc:
+Name:Kefnet the Mindful|Deck:Kefnet the Mindful.dck|Variant:Commander|Avatar:Kefnet the Mindful|Desc:
+Name:The Locust God|Deck:The Locust God.dck|Variant:Commander|Avatar:The Locust God|Desc:
+Name:The Scarab God|Deck:The Scarab God.dck|Variant:Commander|Avatar:The Scarab God|Desc:
+Name:Nicol Bolas, the Deceiver|Deck:Nicol Bolas, the Deceiver.dck|Variant:Planeswalker|Avatar:Nicol Bolas, the Deceiver|Desc:
+Name:Nicol Bolas, God-Pharaoh|Deck:Nicol Bolas, God-Pharaoh.dck|Variant:Planeswalker|Avatar:Nicol Bolas, God-Pharaoh|Desc:
+Name:Fiends of Ifnir|Deck:Fiends of Ifnir.dck|Variant:None|Avatar:Archfiend of Ifnir|Desc:
+Name:March of the Eternals|Deck:March of the Eternals.dck|Variant:None|Avatar:Khenra Eternal|Desc:
+Name:Trial of Knowledge|Deck:Trial of Knowledge.dck|Variant:None|Avatar:Trial of Knowledge|Desc:

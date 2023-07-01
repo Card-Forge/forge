@@ -1,0 +1,7 @@
+Name:Scuttling Sliver
+ManaCost:2 U
+Types:Creature Sliver Trilobite
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddAbility$ SliverUntap | Description$ Sliver creatures you control have "{2}: Untap this creature."
+SVar:SliverUntap:AB$ Untap | Cost$ 2 | SpellDescription$ Untap this creature.
+Oracle:Sliver creatures you control have "{2}: Untap this creature."

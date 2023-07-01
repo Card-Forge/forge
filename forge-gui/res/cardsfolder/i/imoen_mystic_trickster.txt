@@ -1,0 +1,11 @@
+Name:Imoen, Mystic Trickster
+ManaCost:2 U
+Types:Legendary Creature Human Rogue Wizard
+PT:2/3
+K:Ward:2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.hasInitiative | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you have the initiative, draw a card. Draw another card if you've completed a dungeon.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X
+K:Choose a Background
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nAt the beginning of your end step, if you have the initiative, draw a card. Draw another card if you've completed a dungeon.\nChoose a Background (You can have a Background as a second commander.)

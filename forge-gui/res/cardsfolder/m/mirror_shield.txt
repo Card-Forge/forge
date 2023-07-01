@@ -1,0 +1,10 @@
+Name:Mirror Shield
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddToughness$ 2 | AddKeyword$ Hexproof | AddTrigger$ TrigBlocks & TrigBecomeBlocked | Description$ Equipped creature gets +0/+2 and has hexproof and "Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature."
+SVar:TrigBlocks:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withDeathtouch | Execute$ TrigDestroyBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature.
+SVar:TrigBecomeBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.withDeathtouch | ValidBlocker$ Card.Self | Execute$ TrigDestroyAttacker | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature.
+SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
+SVar:TrigDestroyAttacker:DB$ Destroy | Defined$ TriggeredAttackerLKICopy
+K:Equip:2
+Oracle:Equipped creature gets +0/+2 and has hexproof and "Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

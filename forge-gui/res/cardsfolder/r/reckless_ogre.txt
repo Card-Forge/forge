@@ -1,0 +1,7 @@
+Name:Reckless Ogre
+ManaCost:3 R
+Types:Creature Ogre
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +3/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3
+Oracle:Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.

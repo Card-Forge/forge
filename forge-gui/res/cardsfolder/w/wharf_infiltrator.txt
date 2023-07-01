@@ -1,0 +1,12 @@
+Name:Wharf Infiltrator
+ManaCost:1 U
+Types:Creature Human Horror
+PT:1/1
+K:Skulk
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card. If you do, discard a card.
+SVar:TrigDraw:AB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cost$ Draw<1/You>
+T:Mode$ Discarded | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you discard a creature card, you may pay {2}. If you do, create a 3/2 colorless Eldrazi Horror creature token.
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You
+DeckHas:Ability$Token|Discard
+DeckHints:Ability$Discard
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhenever Wharf Infiltrator deals combat damage to a player, you may draw a card. If you do, discard a card.\nWhenever you discard a creature card, you may pay {2}. If you do, create a 3/2 colorless Eldrazi Horror creature token.

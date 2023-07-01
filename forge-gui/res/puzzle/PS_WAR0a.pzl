@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #00a (Pre-release Puzzle)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/04/110.-WAR002.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Start in your first main phase (after Flame of Keld's Chapter II trigger has resolved). Assume your opponent has no mana available. Assume that any card(s) you draw or exile from your library do not contribute to the solution.
+[state]
+humanlife=20
+ailife=30
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Inspired Charge;Jaya's Immolating Inferno;Sky Tether;Tenth District Legionnaire;Chandra, Fire Artisan
+humanlibrary=Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate
+humanbattlefield=Angrath's Marauders;Truefire Captain;The Flame of Keld|Counters:LORE=2;Grateful Apparition;Mountain;Mountain;Mountain;Mountain;Plains;Plains;Plains;Plains
+aibattlefield=Leonin Warleader;Shalai, Voice of Plenty
+aiprecast=Leonin Warleader:CustomScript:DB$ Token | TokenAmount$ 4 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You
+removesummoningsickness=true

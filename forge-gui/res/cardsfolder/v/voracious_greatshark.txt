@@ -1,0 +1,8 @@
+Name:Voracious Greatshark
+ManaCost:3 U U
+Types:Creature Shark
+PT:5/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target artifact or creature spell.
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature spell
+Oracle:Flash\nWhen Voracious Greatshark enters the battlefield, counter target artifact or creature spell.

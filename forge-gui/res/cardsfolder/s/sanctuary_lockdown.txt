@@ -1,0 +1,8 @@
+Name:Sanctuary Lockdown
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Humans you control get +1/+1.
+A:AB$ Tap | Cost$ 2 tapXType<2/Human> | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Tap target creature an opponent controls.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Human
+Oracle:Humans you control get +1/+1.\n{2}, Tap two untapped Humans you control: Tap target creature an opponent controls.

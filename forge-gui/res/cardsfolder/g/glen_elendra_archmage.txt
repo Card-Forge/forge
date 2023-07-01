@@ -1,0 +1,8 @@
+Name:Glen Elendra Archmage
+ManaCost:3 U
+Types:Creature Faerie Wizard
+PT:2/2
+K:Flying
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+K:Persist
+Oracle:Flying\n{U}, Sacrifice Glen Elendra Archmage: Counter target noncreature spell.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

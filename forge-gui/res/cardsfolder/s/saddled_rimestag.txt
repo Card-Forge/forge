@@ -1,0 +1,7 @@
+Name:Saddled Rimestag
+ManaCost:1 G
+Types:Snow Creature Elk
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +2/+2 as long as you had another creature enter the battlefield under your control this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl+StrictlyOther
+Oracle:Saddled Rimestag gets +2/+2 as long as you had another creature enter the battlefield under your control this turn.

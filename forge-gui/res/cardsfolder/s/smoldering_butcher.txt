@@ -1,0 +1,6 @@
+Name:Smoldering Butcher
+ManaCost:3 B
+Types:Creature Elemental Warrior
+PT:4/2
+K:Wither
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Call of Blood
+Description=With the coming of the world-devouring Eldrazi, Zendikar's vampires have been forced into uneasy alliances with the plane's other inhabitants. This deck lets you combine cards that shore up your life total with creatures that get bonuses every time you gain life.
+Deck Type=constructed
+Set=BFZ
+Image=call_of_blood.jpg
+[Main]
+2 Kitesail Scout|BFZ
+1 Zulaport Cutthroat|BFZ
+2 Serene Steward|BFZ
+3 Stone Haven Medic|BFZ
+1 Hagra Sharpshooter|BFZ
+2 Malakir Familiar|BFZ
+3 Nirkana Assassin|BFZ
+1 Shadow Glider|BFZ
+2 Drana's Emissary|BFZ
+2 Courier Griffin|BFZ
+2 Bloodbond Vampire|BFZ
+2 Kalastria Nightwatch|BFZ
+1 Felidar Sovereign|BFZ
+1 Defiant Bloodlord+|BFZ
+2 Dutiful Return|BFZ
+2 Demon's Grasp|BFZ
+2 Gideon's Reproach|BFZ
+2 Tandem Tactics|BFZ
+1 Roil's Retribution|BFZ
+1 Blighted Steppe|BFZ
+2 Evolving Wilds|BFZ
+2 Mortuary Mire|BFZ
+10 Swamp|BFZ
+11 Plains|BFZ

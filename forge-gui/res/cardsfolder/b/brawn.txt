@@ -1,0 +1,8 @@
+Name:Brawn
+ManaCost:3 G
+Types:Creature Incarnation
+PT:3/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Trample | IsPresent$ Forest.YouCtrl | Description$ As long as CARDNAME is in your graveyard and you control a Forest, creatures you control have trample.
+SVar:DiscardMe:2
+Oracle:Trample\nAs long as Brawn is in your graveyard and you control a Forest, creatures you control have trample.

@@ -1,0 +1,6 @@
+Name:Dryad Sophisticate
+ManaCost:1 G
+Types:Creature Dryad
+PT:2/1
+K:Nonbasic landwalk
+Oracle:Nonbasic landwalk (This creature can't be blocked as long as defending player controls a nonbasic land.)

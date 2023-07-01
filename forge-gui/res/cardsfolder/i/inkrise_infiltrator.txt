@@ -1,0 +1,7 @@
+Name:Inkrise Infiltrator
+ManaCost:1 B
+Types:Creature Human Ninja
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ 3 B | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+Oracle:Flying\n{3}{B}: Inkrise Infiltrator gets +2/+2 until end of turn.

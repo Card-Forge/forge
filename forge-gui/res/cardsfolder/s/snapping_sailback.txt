@@ -1,0 +1,9 @@
+Name:Snapping Sailback
+ManaCost:4 G
+Types:Creature Dinosaur
+PT:4/4
+K:Flash
+T:Mode$ DamageDoneOnce | Execute$ TrigPutCounter | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, put a +1/+1 counter on it. (It must survive the damage to get the counter.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasCombatEffect:TRUE
+Oracle:Flash\nEnrage — Whenever Snapping Sailback is dealt damage, put a +1/+1 counter on it. (It must survive the damage to get the counter.)

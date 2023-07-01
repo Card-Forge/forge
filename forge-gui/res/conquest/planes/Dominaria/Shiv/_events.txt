@@ -1,0 +1,9 @@
+Name:Squee, the Immortal|Deck:Squee, the Immortal.dck|Variant:Commander|Avatar:Squee, the Immortal|Desc:
+Name:Jaya Ballard|Deck:Jaya Ballard.dck|Variant:Planeswalker|Avatar:Jaya Ballard|Desc:
+Name:Tiana, Ship's Caretaker|Deck:Tiana, Ships Caretaker.dck|Variant:Commander|Avatar:Tiana, Ship's Caretaker|Desc:
+Name:Verix Bladewing|Deck:Verix Bladewing.dck|Variant:Commander|Avatar:Verix Bladewing|Desc:
+Name:Jhoira, Weatherlight Captain|Deck:Jhoira, Weatherlight Captain.dck|Variant:Commander|Avatar:Jhoira, Weatherlight Captain|Desc:
+Name:Chandra, Bold Pyromancer|Deck:Chandra, Bold Pyromancer.dck|Variant:Planeswalker|Avatar:Chandra, Bold Pyromancer|Desc:
+Name:Goblin Warchief|Deck:Goblin Warchief.dck|Variant:Vanguard|Avatar:Goblin Warchief|Desc:
+Name:Firesong and Sunspeaker|Deck:Firesong and Sunspeaker.dck|Variant:Commander|Avatar:Firesong and Sunspeaker|Desc:
+Name:Random Shiv|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

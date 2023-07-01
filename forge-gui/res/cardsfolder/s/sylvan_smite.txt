@@ -1,0 +1,10 @@
+Name:Sylvan Smite
+ManaCost:1 G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | RememberTargets$ True | ConditionSVarCompare$ EQ0 | SubAbility$ DBDealDamage | SpellDescription$ Put a +1/+1 counter on target creature you control if you weren't the starting player. Then that creature deals damage equal to its power to target creature you don't control.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Y | ValidTgts$ Creature.OppCtrl | DamageSource$ Remembered | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$StartingPlayer.1.0
+SVar:Y:Remembered$CardPower
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature you control if you weren't the starting player. Then that creature deals damage equal to its power to target creature you don't control.

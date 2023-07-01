@@ -1,0 +1,7 @@
+Name:Public Execution
+ManaCost:5 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ WeakenOther | SpellDescription$ Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+SVar:WeakenOther:DB$ PumpAll | ValidCards$ Creature.ControlledBy RememberedController+IsNotRemembered | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.

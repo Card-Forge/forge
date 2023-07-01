@@ -1,0 +1,8 @@
+Name:Loxodon Punisher
+ManaCost:3 W
+Types:Creature Elephant Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Equipment attached to it.
+SVar:X:Count$Valid Equipment.Attached/Times.2
+SVar:EquipMe:Multiple
+Oracle:Loxodon Punisher gets +2/+2 for each Equipment attached to it.

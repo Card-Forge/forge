@@ -1,0 +1,30 @@
+[metadata]
+Name=R.U.R.
+Title=R.U.R.
+Difficulty=medium
+Description=It's got tempo, it's got burn, but where are those delvers if you need them!
+Icon=RUR.jpg
+Deck Type=constructed
+[Main]
+2 Arc Trail|SOM
+2 Blisterstick Shaman|MBS
+2 Burn the Impure|MBS
+2 Crush|MBS
+2 Dismantle|DST
+2 Fabricate|MRD
+1 Galvanoth|MBS
+12 Island|SOM|1
+2 Koth's Courier|MBS
+1 Melt Terrain|SOM
+12 Mountain|SOM|1
+1 Mycosynth Lattice|DST
+4 Neurok Commando|MBS
+2 Ogre Resister|MBS
+2 Quicksilver Geyser|MBS
+1 Rally the Forces|MBS
+1 Red Sun's Zenith|MBS
+1 Rustmouth Ogre|MRD
+3 Shatter|LEA
+1 Turn the Tide|MBS
+4 Vapor Snag|NPH
+[sideboard]

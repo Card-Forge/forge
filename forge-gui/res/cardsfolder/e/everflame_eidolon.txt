@@ -1,0 +1,9 @@
+Name:Everflame Eidolon
+ManaCost:1 R
+Types:Enchantment Creature Spirit
+PT:1/1
+K:Bestow:2 R
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | ConditionPresent$ Card.Self+nonAura | SubAbility$ DBPump | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
+SVar:DBPump:DB$ Pump | Defined$ Enchanted | NumAtt$ +1 | ConditionPresent$ Card.Self+Aura
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Bestow {2}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\n{R}: Everflame Eidolon gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.\nEnchanted creature gets +1/+1.

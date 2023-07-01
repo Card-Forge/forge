@@ -1,0 +1,8 @@
+Name:Shield of the Righteous
+ManaCost:W U
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+2 and has vigilance.
+T:Mode$ AttackerBlocked | ValidBlocker$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+Oracle:Equipped creature gets +0/+2 and has vigilance.\nWhenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.\nEquip {2}

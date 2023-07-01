@@ -1,0 +1,9 @@
+Name:Cunning Breezedancer
+ManaCost:4 W U
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying\nWhenever you cast a noncreature spell, Cunning Breezedancer gets +2/+2 until end of turn.

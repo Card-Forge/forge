@@ -1,0 +1,6 @@
+Name:Tooth, Claw, and Tail
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy up to three target nonland permanents.
+SVar:DarkEffect:DB$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+Oracle:When you set this scheme in motion, destroy up to three target nonland permanents.

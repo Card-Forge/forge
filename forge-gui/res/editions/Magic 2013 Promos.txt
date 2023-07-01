@@ -1,0 +1,13 @@
+[metadata]
+Code=PM13
+Date=2012-07-12
+Name=Magic 2013 Promos
+Type=Promo
+ScryfallCode=PM13
+
+[cards]
+118★ R Xathrid Gorgon @Wesley Burt
+140★ R Magmaquake @Sam Burley
+177★ U Mwonvuli Beast Tracker @Jason A. Engle
+217★ R Staff of Nin @Brad Rigney
+221★ R Cathedral of War @Franz Vohwinkel

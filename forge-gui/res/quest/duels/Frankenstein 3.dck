@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frankenstein 3
+Title=Frankenstein
+Difficulty=hard
+Description=WUG Golem deck with several Splicers
+Icon=Frankenstein.jpg
+Deck Type=constructed
+[main]
+1 Forest|M12
+4 Flooded Strand
+1 Island|M12
+2 Misty Rainforest
+2 Plains|M12
+3 Savannah
+1 Tropical Island
+4 Tundra
+3 Windswept Heath
+1 Courier's Capsule
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Sapphire
+1 Sword of Fire and Ice
+1 Ancestral Statue
+1 Battered Golem
+3 Blade Splicer
+2 Brass Herald
+1 Chronomaton
+2 Glassdust Hulk
+1 Lodestone Golem
+4 Master Splicer
+1 Maul Splicer
+1 Razor Golem
+1 Sensor Splicer
+3 Solemn Simulacrum
+2 Spire Golem
+2 Vital Splicer
+2 Wing Splicer
+1 Ancestral Recall
+2 Mana Leak
+3 Swords to Plowshares
+1 Time Walk
+
+[sideboard]

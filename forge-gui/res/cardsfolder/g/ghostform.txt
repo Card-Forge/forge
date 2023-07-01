@@ -1,0 +1,7 @@
+Name:Ghostform
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ SpellDescription | SpellDescription$ Up to two target creatures can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ These creatures can't be blocked this turn.
+SVar:PlayMain1:TRUE
+Oracle:Up to two target creatures can't be blocked this turn.

@@ -1,0 +1,8 @@
+Name:Kozilek's Pathfinder
+ManaCost:6
+Types:Creature Eldrazi
+PT:5/5
+A:AB$ Effect | Cost$ C | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ ThisTargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.IsRemembered | Description$ {c:Remembered} can't block EFFECTSOURCE this turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:{C}: Target creature can't block Kozilek's Pathfinder this turn. ({C} represents colorless mana.)

@@ -1,0 +1,7 @@
+Name:First Response
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:X:PlayerCountPropertyYou$LifeLostLastTurn
+Oracle:At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.

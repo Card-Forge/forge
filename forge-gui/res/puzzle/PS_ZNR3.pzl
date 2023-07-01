@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/10/159.-ZNR3-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all blocking scenarios.
+[state]
+humanlife=1
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Kazandu Mammoth;Glasspool Mimic;Khalni Ambush
+humanbattlefield=Forest;Forest;Forest;Island;Island;Springmantle Cleric|Counters:P1P1=2;Canopy Baloth;Lotus Cobra
+aibattlefield=Goremand;Massacre Wurm

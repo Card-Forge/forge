@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (G18)
+Type:Archived
+Subtype:Standard
+Effective:2018-11-15
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18
+Banned:Rampaging Ferocidon

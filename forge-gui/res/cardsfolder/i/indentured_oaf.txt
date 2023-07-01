@@ -1,0 +1,6 @@
+Name:Indentured Oaf
+ManaCost:3 R
+Types:Creature Ogre Warrior
+PT:4/3
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.Red | ValidSource$ Card.Self | Description$ Prevent all damage that CARDNAME would deal to red creatures.
+Oracle:Prevent all damage that Indentured Oaf would deal to red creatures.

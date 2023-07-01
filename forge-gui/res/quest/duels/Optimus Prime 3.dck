@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Optimus Prime 3
+Title=Optimus Prime
+Difficulty=hard
+Description=Mono U deck with Modular creatures and proliferate spells
+Icon=Optimus Prime.jpg
+Deck Type=constructed
+[main]
+4 Counterspell|7ED
+4 Arcbound Worker|DST
+4 Seat of the Synod
+1 Mox Opal|SOM
+4 Tezzeret's Gambit|NPH
+4 Steel Overseer|M11
+1 Mox Sapphire|2ED
+4 Arcbound Slith|DST
+18 Island|MBS
+4 Steady Progress|SOM
+2 Arcbound Crusher|DST
+4 Arcbound Stinger|DST
+2 Contagion Engine|SOM
+2 Contagion Clasp
+1 Inexorable Tide
+1 Viral Drake
+[sideboard]

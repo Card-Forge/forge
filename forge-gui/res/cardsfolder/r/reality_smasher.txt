@@ -1,0 +1,10 @@
+Name:Reality Smasher
+ManaCost:4 C
+Types:Creature Eldrazi
+PT:5/5
+K:Trample
+K:Haste
+T:Mode$ BecomesTarget | ValidSource$ Spell.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ Discard<1/Card> | UnlessPayer$ TriggeredSourceSAController
+DeckNeeds:Ability$Mana.Colorless
+Oracle:({C} represents colorless mana.)\nTrample, haste\nWhenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.

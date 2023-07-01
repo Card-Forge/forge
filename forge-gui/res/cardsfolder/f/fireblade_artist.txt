@@ -1,0 +1,12 @@
+Name:Fireblade Artist
+ManaCost:B R
+Types:Creature Human Shaman
+PT:2/2
+K:Haste
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a creature. When you do, CARDNAME deals 2 damage to target opponent or planeswalker.
+SVar:TrigSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ TrigImmediate
+SVar:TrigImmediate:DB$ ImmediateTrigger | Execute$ TrigDealDamage | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | TriggerDescription$ When you do, CARDNAME deals 2 damage to target opponent or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Haste\nAt the beginning of your upkeep, you may sacrifice a creature. When you do, Fireblade Artist deals 2 damage to target opponent or planeswalker.

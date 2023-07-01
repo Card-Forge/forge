@@ -1,0 +1,7 @@
+Name:Vecna
+ManaCost:no cost
+Types:Legendary Creature Zombie God
+Colors:black
+PT:8/8
+K:Indestructible
+Oracle:Indestructible

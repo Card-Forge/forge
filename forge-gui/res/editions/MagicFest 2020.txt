@@ -1,0 +1,14 @@
+[metadata]
+Code=PF20
+Date=2020-01-01
+Name=MagicFest 2020
+Type=Promo
+ScryfallCode=PF20
+
+[cards]
+1 R Path to Exile @Chris Seaman
+2 R Plains @Jonas De Ro
+3 R Island @Jonas De Ro
+4 R Swamp @Jonas De Ro
+5 R Mountain @Jonas De Ro
+6 R Forest @Jonas De Ro

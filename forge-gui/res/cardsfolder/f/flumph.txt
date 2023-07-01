@@ -1,0 +1,9 @@
+Name:Flumph
+ManaCost:1 W
+Types:Creature Jellyfish
+PT:0/4
+K:Defender
+K:Flying
+T:Mode$ DamageDoneOnce | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, you and target opponent each draw a card.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 1
+Oracle:Defender, flying\nWhenever Flumph is dealt damage, you and target opponent each draw a card.

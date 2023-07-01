@@ -1,0 +1,12 @@
+Name:Tyrant's Familiar
+ManaCost:5 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigAttacks | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Description$ Lieutenant — As long as you control your commander, CARDNAME gets +2/+2 and has "Whenever CARDNAME attacks, it deals 7 damage to target creature defending player controls."
+SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 7 damage to target creature defending player controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7
+SVar:BuffedBy:Card.IsCommander
+AI:RemoveDeck:Random
+Oracle:Flying, haste\nLieutenant — As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."

@@ -1,0 +1,10 @@
+Name:Oath of Ghouls
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigOathofGhouls | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand.
+SVar:TrigOathofGhouls:DB$ Pump | TargetingPlayer$ TriggeredPlayer | ValidTgts$ Player.OpponentToActive+hasFewerCreaturesInYardThanActive | TgtPrompt$ Choose target opponent whose graveyard has fewer creature cards in it than you | IsCurse$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ TriggeredPlayer | Chooser$ TriggeredPlayer | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.ActivePlayerCtrl | ChangeNum$ 1 | Optional$ True | Hidden$ True
+SVar:NeedsToPlayVar:Z LEY
+SVar:Z:Count$Valid Creature.YouDontCtrl+inZoneGraveyard
+SVar:Y:Count$Valid Creature.YouCtrl+inZoneGraveyard
+Oracle:At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand.

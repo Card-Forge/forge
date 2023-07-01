@@ -1,0 +1,8 @@
+Name:Sultai Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo B G U | SpellDescription$ Add {B}, {G}, or {U}.
+A:AB$ Draw | Cost$ B G U T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black|Green|Blue
+Oracle:{T}: Add {B}, {G}, or {U}.\n{B}{G}{U}, {T}, Sacrifice Sultai Banner: Draw a card.

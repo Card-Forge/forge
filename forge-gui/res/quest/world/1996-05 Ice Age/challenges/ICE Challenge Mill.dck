@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Mill
+OpponentName=The Jester
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Ashnod's Cylix|Halls of Mist|Mudslide|Sheltered Valley|Sheltered Valley|Sheltered Valley|Sheltered Valley|School of the Unseen|School of the Unseen|School of the Unseen|School of the Unseen|Sunstone
+[metadata]
+Name=ICE Challenge: Mill
+Title=The Jester
+Difficulty=medium
+Description="I dispute Relicbane's hysterical allegations, Commissioner, but it is true that these artifacts can be dangerous." -Arcum Dagsson, Soldevi Machinist
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+30 Snow-Covered Island|ICE
+30 Jester's Cap|ICE

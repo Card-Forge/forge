@@ -1,0 +1,10 @@
+Name:Cloudsteel Kirin
+ManaCost:2 W
+Types:Artifact Creature Equipment Kirin
+PT:3/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | AddStaticAbility$ YouCantLose & OppCantWin | Description$ Equipped creature has flying and "You can't lose the game and your opponents can't win the game."
+SVar:YouCantLose:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
+SVar:OppCantWin:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Description$ Opponents can't win the game.
+K:Reconfigure:5
+Oracle:Flying\nEquipped creature has flying and "You can't lose the game and your opponents can't win the game."\nReconfigure {5}

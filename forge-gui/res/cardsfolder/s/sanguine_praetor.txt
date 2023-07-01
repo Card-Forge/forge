@@ -1,0 +1,8 @@
+Name:Sanguine Praetor
+ManaCost:6 B B
+Types:Creature Avatar Praetor
+PT:7/5
+A:AB$ DestroyAll | Cost$ B Sac<1/Creature> | ValidCards$ Creature.cmcEQX | SpellDescription$ Destroy each creature with the same mana value as the sacrificed creature.
+SVar:X:Sacrificed$CardManaCost
+AI:RemoveDeck:All
+Oracle:{B}, Sacrifice a creature: Destroy each creature with the same mana value as the sacrificed creature.

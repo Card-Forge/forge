@@ -1,0 +1,8 @@
+Name:Inventors' Fair
+ManaCost:no cost
+Types:Legendary Land
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Metalcraft$ True | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 4 T Sac<1/CARDNAME> | Activation$ Metalcraft | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.
+Oracle:At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C}.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts.

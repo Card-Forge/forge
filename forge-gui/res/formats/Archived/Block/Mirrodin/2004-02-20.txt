@@ -1,0 +1,6 @@
+[format]
+Name:Block: Mirrodin (DST)
+Type:Archived
+Subtype:Block
+Effective:2004-02-20
+Sets:MRD, DST

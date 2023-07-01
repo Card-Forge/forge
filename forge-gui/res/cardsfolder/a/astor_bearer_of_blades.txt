@@ -1,0 +1,10 @@
+Name:Astor, Bearer of Blades
+ManaCost:2 R W
+Types:Legendary Creature Human Warrior
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top seven cards of your library. You may reveal an Equipment or Vehicle card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 7 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Equipment,Vehicle | RestRandomOrder$ True | Reveal$ True
+S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddKeyword$ Equip:1 | Description$ Equipment you control have equip {1}.
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Crew:1 | Description$ Vehicles you control have crew 1.
+DeckNeeds:Type$Equipment|Vehicle
+Oracle:When Astor, Bearer of Blades enters the battlefield, look at the top seven cards of your library. You may reveal an Equipment or Vehicle card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nEquipment you control have equip {1}.\nVehicles you control have crew 1.

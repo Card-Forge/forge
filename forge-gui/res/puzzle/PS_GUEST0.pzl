@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Special Guest Puzzle with Noah Bradley
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/09/080.-NB01.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Start at the beginning of your draw step (card already drawn.) You will put a third lore counter on History of Benalia as you begin your first main phase. You have not played a land yet this turn. Your Extraplanar Lens is imprinted with a Plains.
+[state]
+humanlife=20
+ailife=4
+humanlandsplayed=0
+turn=1
+activeplayer=human
+activephase=DRAW
+humanhand=Strionic Resonator;Extraplanar Lens;Dusk // Dawn;Seal of Cleansing;Guardian of Pilgrims;Endless Sands
+humanbattlefield=Extraplanar Lens|Id:6|Imprinting:5;Cloudstone Curio;History of Benalia|Counters:LORE=2;t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_dom;t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_dom;Seal of Cleansing;Kjeldoran Outpost;Plains;Plains;Plains;Plains;Plains;Plains
+humanexile=Plains|Id:5|ExiledWith:6
+aibattlefield=Jeskai Barricade;Self-Assembler;Self-Assembler;Self-Assembler

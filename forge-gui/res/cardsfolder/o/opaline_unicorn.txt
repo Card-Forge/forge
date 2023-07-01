@@ -1,0 +1,6 @@
+Name:Opaline Unicorn
+ManaCost:3
+Types:Artifact Creature Unicorn
+PT:1/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

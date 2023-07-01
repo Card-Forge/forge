@@ -1,0 +1,8 @@
+Name:Root Greevil
+ManaCost:3 G
+Types:Creature Beast
+PT:2/3
+A:AB$ ChooseColor | Cost$ 2 G T Sac<1/CARDNAME> | Defined$ You | SubAbility$ DestroyAll | SpellDescription$ Destroy all enchantments of the color of your choice.
+SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Enchantment.ChosenColor
+AI:RemoveDeck:All
+Oracle:{2}{G}, {T}, Sacrifice Root Greevil: Destroy all enchantments of the color of your choice.

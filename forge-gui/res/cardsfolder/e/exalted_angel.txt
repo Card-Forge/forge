@@ -1,0 +1,11 @@
+Name:Exalted Angel
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/5
+K:Flying
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+K:Morph:2 W W
+SVar:HasCombatEffect:TRUE
+Oracle:Flying\nWhenever Exalted Angel deals damage, you gain that much life.\nMorph {2}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

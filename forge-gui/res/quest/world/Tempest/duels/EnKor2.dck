@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Warrior en-Kor
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=White creature deck with many En-Kor creatures
+Deck Type=constructed
+Name=EnKor2
+[Main]
+2 Disenchant|TMP
+2 Flickering Ward|TMP
+4 Knight of Dawn|TMP
+4 Lancers en-Kor|STH
+1 Nomads en-Kor|STH
+1 Orim, Samite Healer|TMP
+4 Paladin en-Vec|EXO
+6 Plains|TMP|1
+5 Plains|TMP|2
+6 Plains|TMP|3
+7 Plains|TMP|4
+4 Soltari Champion|STH
+2 Soltari Visionary|EXO
+4 Spirit en-Kor|STH
+4 Wall of Essence|STH
+4 Warrior en-Kor|STH

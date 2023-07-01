@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Beast Master 2
+Title=Beast Master
+Difficulty=medium
+Description=Creature-heavy Green aggro deck
+Icon=Beastmaster.jpg
+Deck Type=constructed
+[main]
+4 Aspect of Wolf|LEB
+4 Barbary Apes|LEG
+2 Birds of Paradise|2ED
+2 Desert Twister|4ED
+2 Durkwood Boars|4ED
+21 Forest|4ED
+4 Giant Growth|2ED
+2 Giant Spider|2ED
+2 Giant Turtle|LEG
+4 Grizzly Bears|2ED
+4 Hornet Cobra|LEG
+2 Land Leeches|DRK
+1 Lurker|DRK
+2 Stream of Life|LEB
+2 Untamed Wilds|4ED
+2 Web|LEB
+[sideboard]

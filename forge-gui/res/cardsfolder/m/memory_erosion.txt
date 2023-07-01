@@ -1,0 +1,6 @@
+Name:Memory Erosion
+ManaCost:1 U U
+Types:Enchantment
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent casts a spell, that player mills two cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredActivator | NumCards$ 2
+Oracle:Whenever an opponent casts a spell, that player mills two cards.

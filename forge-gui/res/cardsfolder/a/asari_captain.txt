@@ -1,0 +1,10 @@
+Name:Asari Captain
+ManaCost:3 R W
+Types:Creature Human Samurai
+PT:4/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, it gets +1/+0 until end of turn for each Samurai or Warrior you control.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X
+SVar:X:Count$Valid Samurai.YouCtrl,Warrior.YouCtrl
+DeckHints:Type$Samurai|Warrior
+Oracle:Haste\nWhenever a Samurai or Warrior you control attacks alone, it gets +1/+0 until end of turn for each Samurai or Warrior you control.

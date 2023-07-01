@@ -1,0 +1,12 @@
+Name:Hand of Vecna
+ManaCost:3
+Types:Legendary Artifact Equipment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, equipped creature or a creature you control named Vecna gets +X/+X until end of turn, where X is the number of cards in your hand.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.EquippedBy,Creature.YouCtrl+namedVecna | Mandatory$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | NumAtt$ +X | NumDef$ +X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+K:Equip:PayLife<X/1 life for each card in your hand>
+K:Equip:2
+SVar:X:Count$CardsInYourHand
+DeckHints:Name$Eye of Vecna|The Book of Vile Darkness
+Oracle:At the beginning of combat on your turn, equipped creature or a creature you control named Vecna gets +X/+X until end of turn, where X is the number of cards in your hand.\nEquip—Pay 1 life for each card in your hand.\nEquip {2}

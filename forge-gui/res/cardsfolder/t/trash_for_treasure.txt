@@ -1,0 +1,6 @@
+Name:Trash for Treasure
+ManaCost:2 R
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 R Sac<1/Artifact> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nReturn target artifact card from your graveyard to the battlefield.

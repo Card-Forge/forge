@@ -1,0 +1,8 @@
+Name:Sacred Prey
+ManaCost:G
+Types:Creature Horse
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME becomes blocked, you gain 1 life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Sacred Prey becomes blocked, you gain 1 life.

@@ -1,0 +1,6 @@
+Name:Well of Knowledge
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ 2 | NumCards$ 1 | Activator$ Player | PlayerTurn$ True | ActivationPhases$ Draw | SpellDescription$ Draw a card. Any player may activate this ability but only during their draw step.
+SVar:NonStackingEffect:True
+Oracle:{2}: Draw a card. Any player may activate this ability but only during their draw step.

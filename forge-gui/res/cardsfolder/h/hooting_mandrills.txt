@@ -1,0 +1,8 @@
+Name:Hooting Mandrills
+ManaCost:5 G
+Types:Creature Ape
+PT:4/4
+K:Delve
+K:Trample
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTrample

@@ -1,0 +1,8 @@
+Name:Menagerie Curator
+ManaCost:1 G
+Types:Creature Human Citizen
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast creature spells.
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.Creature+!sharesCreatureTypeWith ValidLibrary Creature.YouOwn | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a creature spell that doesn't share a creature type with a creature type in your library, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:{T}: Add one mana of any color. Spend this mana only to cast a creature spell.\nWhenever you cast a creature spell that doesn't share a creature type with a creature card in your library, draw a card.

@@ -1,0 +1,10 @@
+Name:Thornling
+ManaCost:3 G G
+Types:Creature Elemental Shapeshifter
+PT:4/4
+A:AB$ Pump | Cost$ G | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
+A:AB$ Pump | Cost$ G | KW$ Trample | Defined$ Self | SpellDescription$ CARDNAME gains trample until end of turn.
+A:AB$ Pump | Cost$ G | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | Defined$ Self | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | Defined$ Self | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
+Oracle:{G}: Thornling gains haste until end of turn.\n{G}: Thornling gains trample until end of turn.\n{G}: Thornling gains indestructible until end of turn.\n{1}: Thornling gets +1/-1 until end of turn.\n{1}: Thornling gets -1/+1 until end of turn.

@@ -1,0 +1,12 @@
+Name:Ramunap Hydra
+ManaCost:3 G
+Types:Creature Snake Hydra
+PT:3/3
+K:Vigilance
+K:Reach
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Desert.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Desert.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Desert.YouCtrl | PresentZone$ Graveyard | Description$ CARDNAME gets +1/+1 as long as there is a Desert card in your graveyard.
+SVar:BuffedBy:Desert
+DeckHints:Type$Desert
+Oracle:Vigilance, reach, trample\nRamunap Hydra gets +1/+1 as long as you control a Desert.\nRamunap Hydra gets +1/+1 as long as there is a Desert card in your graveyard.

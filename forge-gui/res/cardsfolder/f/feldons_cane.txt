@@ -1,0 +1,7 @@
+Name:Feldon's Cane
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ T Exile<1/CARDNAME> | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle your graveyard into your library.
+AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
+Oracle:{T}, Exile Feldon's Cane: Shuffle your graveyard into your library.

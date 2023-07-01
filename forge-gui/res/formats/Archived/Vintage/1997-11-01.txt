@@ -1,0 +1,8 @@
+[format]
+Name:Type 1 (TMP)
+Type:Archived
+Subtype:Vintage
+Effective:1997-11-01
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP
+Restricted:Ancestral Recall; Balance; Berserk; Black Lotus; Black Vise; Braingeyser; Demonic Tutor; Fastbond; Fork; Ivory Tower; Library of Alexandria; Maze of Ith; Mirror Universe; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Recall; Regrowth; Sol Ring; Time Walk; Timetwister; Underworld Dreams; Wheel of Fortune
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Chaos Orb; Contract from Below; Darkpact; Demonic Attorney; Divine Intervention; Falling Star; Jeweled Bird; Mind Twist; Rebirth; Shahrazad; Tempest Efreet; Timmerian Fiends

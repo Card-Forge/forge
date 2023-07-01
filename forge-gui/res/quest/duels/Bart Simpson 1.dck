@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bart Simpson 1
+Title=Bart Simpson
+Difficulty=easy
+Description=UBG deck with Rathi Trapper and Paralyzing Grasp
+Icon=Bart Simpson.jpg
+Deck Type=constructed
+[main]
+4 Forest|ISD
+4 Island|ISD
+4 Swamp|ISD
+4 Opulent Palace
+2 Verdant Catacombs
+2 Misty Rainforest
+4 Drowned Catacomb
+1 Gnarled Mass
+1 Scavenged Weaponry
+1 Wanderbrine Rootcutters
+2 Wall of Air
+1 Somnomancer
+2 Minister of Impediments
+1 Grappler Spider
+1 Messenger Falcons
+1 Flight
+1 Moonglove Winnower
+2 Rathi Trapper
+1 Yavimaya Enchantress
+3 Wall of Blossoms
+1 Ambassador Oak
+1 Simic Ragworm
+1 Abomination
+1 Theft of Dreams
+3 Roots
+3 Dehydration
+3 Paralyzing Grasp
+3 Glimmerdust Nap
+2 Eternity Snare
+[sideboard]

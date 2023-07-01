@@ -1,0 +1,7 @@
+Name:Muscle Sliver
+ManaCost:1 G
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 1 | AddToughness$ 1 | Description$ All Sliver creatures get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +1/+1.

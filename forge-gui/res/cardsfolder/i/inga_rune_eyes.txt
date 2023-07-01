@@ -1,0 +1,10 @@
+Name:Inga Rune-Eyes
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 3. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw three cards if three or more creatures died this turn.
+SVar:TrigScry:DB$ Scry | ScryNum$ 3
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:TrigDraw:DB$ Draw | NumCards$ 3
+Oracle:When Inga Rune-Eyes enters the battlefield, scry 3.\nWhen Inga Rune-Eyes dies, draw three cards if three or more creatures died this turn.

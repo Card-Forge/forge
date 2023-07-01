@@ -1,0 +1,7 @@
+Name:Mental Discipline
+ManaCost:1 U U
+Types:Enchantment
+A:AB$ Draw | Cost$ 1 U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{1}{U}, Discard a card: Draw a card.

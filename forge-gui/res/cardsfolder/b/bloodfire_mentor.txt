@@ -1,0 +1,7 @@
+Name:Bloodfire Mentor
+ManaCost:2 R
+Types:Creature Efreet Shaman
+PT:0/5
+A:AB$ Draw | Cost$ 2 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:{2}{U}, {T}: Draw a card, then discard a card.

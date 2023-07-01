@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Grumpy 1
+Title=Grumpy
+Difficulty=easy
+Description=BR Snow deck with Rimescale Dragon, Karplusan Giant, Skred and Chill to the Bone
+Icon=Grumpy.jpg
+Deck Type=Constructed
+[main]
+2 Chill to the Bone|CSP
+2 Chilling Shade|CSP
+2 Drift of the Dead|ICE
+1 Errantry|ICE
+1 Gangrenous Zombies|ICE
+1 Glacial Crevasses|ICE
+2 Goblin Rimerunner|CSP
+1 Goblin Ski Patrol|ICE
+1 Grim Harvest|CSP
+1 Gutless Ghoul|CSP
+2 Karplusan Giant|ICE
+4 Karplusan Wolverine|CSP
+2 Ohran Yeti|CSP
+2 Phyrexian Ironfoot|CSP
+1 Phyrexian Snowcrusher|CSP
+2 Rimebound Dead|CSP
+1 Rimescale Dragon|CSP
+1 Shield of the Ages|ICE
+3 Skred|CSP
+1 Snow Fortress|ICE
+10 Snow-Covered Mountain|ICE
+10 Snow-Covered Swamp|ICE
+4 Tresserhorn Sinks|CSP
+3 Zombie Musher|CSP
+[sideboard]

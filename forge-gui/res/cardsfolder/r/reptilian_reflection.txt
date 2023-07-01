@@ -1,0 +1,8 @@
+Name:Reptilian Reflection
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Cycled | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ Whenever you cycle a card, you may have CARDNAME become a 5/4 Dinosaur creature with trample and haste in addition to its other types until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 4 | Types$ Creature,Dinosaur | Keywords$ Trample & Haste
+SVar:PlayMain1:ALWAYS
+DeckHas:Type$Dinosaur
+Oracle:Whenever you cycle a card, you may have Reptilian Reflection become a 5/4 Dinosaur creature with trample and haste in addition to its other types until end of turn.

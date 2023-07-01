@@ -1,0 +1,7 @@
+Name:Tocasia's Dig Site
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Surveil | Cost$ 3 T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+DeckHas:Ability$Graveyard
+Oracle:{T}: Add {C}.\n{3}, {T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

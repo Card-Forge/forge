@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Monstrous Surprise
+Description=Just when your enemies think you're down, you emerge stronger than before. If your creatures die, they return with a bloodthirsty vengeance.
+Deck Type=constructed
+Set=DKA
+Image=monstrous_surprise.jpg
+[main]
+1 Greatsword|M12
+13 Forest|ISD
+11 Mountain|ISD
+1 Flayer of the Hatebound+|DKA
+2 Goblin Arsonist|M12
+1 Lumberknot|ISD
+3 Nearheath Stalker|DKA
+2 Orchard Spirit|ISD
+1 Pitchburn Devils|ISD
+2 Pyreheart Wolf|DKA
+1 Rage Thrower|ISD
+2 Russet Wolves|DKA
+2 Skirsdag Cultist|ISD
+2 Strangleroot Geist|DKA
+3 Young Wolf|DKA
+1 Gutter Grime|ISD
+2 Fling|DKA
+1 Naturalize|ISD
+2 Wild Hunger|DKA
+1 Overrun|M12
+2 Prey Upon|ISD
+2 Rampant Growth|M12
+2 Rolling Temblor|ISD
+[sideboard]

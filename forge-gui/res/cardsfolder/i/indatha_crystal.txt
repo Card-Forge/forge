@@ -1,0 +1,6 @@
+Name:Indatha Crystal
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo W B G | SpellDescription$ Add {W}, {B} or {G}.
+K:Cycling:2
+Oracle:{T}: Add {W}, {B}, or {G}.\nCycling {2} ({2}, Discard this card: Draw a card.)

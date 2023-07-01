@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=GravePact
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Black-White control
+Deck Type=constructed
+Name=GravePact2
+[Main]
+3 Commander Greven il-Vec|TMP
+4 Grave Pact|STH
+4 Helm of Possession|TMP
+4 Lab Rats|STH
+4 Oath of Lieges|EXO
+4 Pegasus Stampede|EXO
+2 Plains|TMP|1
+1 Plains|TMP|2
+1 Plains|TMP|3
+5 Plains|TMP|4
+1 Selenia, Dark Angel|TMP
+3 Soltari Visionary|EXO
+4 Spirit Mirror|TMP
+3 Staunch Defenders|TMP
+1 Swamp|TMP|1
+3 Swamp|TMP|2
+2 Swamp|TMP|3
+3 Swamp|TMP|4
+4 Reflecting Pool|TMP
+4 Wall of Essence|STH

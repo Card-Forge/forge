@@ -1,0 +1,7 @@
+Name:Lowland Tracker
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+K:Provoke
+Oracle:First strike\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

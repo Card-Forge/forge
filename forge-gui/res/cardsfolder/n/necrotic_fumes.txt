@@ -1,0 +1,5 @@
+Name:Necrotic Fumes
+ManaCost:1 B B
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Cost$ 1 B B Exile<1/Creature> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or planeswalker.
+Oracle:As an additional cost to cast this spell, exile a creature you control.\nExile target creature or planeswalker.

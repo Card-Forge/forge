@@ -1,0 +1,6 @@
+Name:Cystbearer
+ManaCost:2 G
+Types:Creature Phyrexian Beast
+PT:2/3
+K:Infect
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

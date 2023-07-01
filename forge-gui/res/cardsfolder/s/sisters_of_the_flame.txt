@@ -1,0 +1,6 @@
+Name:Sisters of the Flame
+ManaCost:1 R R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:{T}: Add {R}.

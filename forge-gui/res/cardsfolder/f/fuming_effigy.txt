@@ -1,0 +1,8 @@
+Name:Fuming Effigy
+ManaCost:3 R
+Types:Creature Spirit
+PT:4/3
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever one or more cards leave your graveyard, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckHas:Ability$Graveyard
+Oracle:Whenever one or more cards leave your graveyard, Fuming Effigy deals 1 damage to each opponent.

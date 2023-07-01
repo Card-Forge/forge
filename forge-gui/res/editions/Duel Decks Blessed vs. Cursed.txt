@@ -1,0 +1,91 @@
+[metadata]
+Code=DDQ
+Date=2016-02-26
+Name=Duel Decks: Blessed vs. Cursed
+Code2=DDQ
+Type=Duel_Deck
+ScryfallCode=DDQ
+
+[cards]
+1 M Geist of Saint Traft @Daarken
+2 C Bonds of Faith @Steve Argyle
+3 C Cathedral Sanctifier @Michael C. Hayes
+4 R Champion of the Parish @Svetlin Velinov
+5 C Chapel Geist @Peter Mohrbacher
+6 R Dearly Departed @Daniel Ljunggren
+7 C Doomed Traveler @Lars Grant-West
+8 R Eerie Interlude @Svetlin Velinov
+9 C Elder Cathar @Chris Rahn
+10 U Emancipation Angel @Scott Chou
+11 U Fiend Hunter @Wayne Reynolds
+12 C Gather the Townsfolk @Dan Scott
+13 U Goldnight Redeemer @Karl Kopinski
+14 R Increasing Devotion @Daniel Ljunggren
+15 C Momentary Blink @Evan Shipard
+16 C Moorland Inquisitor @David Palumbo
+17 C Rebuke @Igor Kieryluk
+18 U Slayer of the Wicked @Anthony Palumbo
+19 C Spectral Gateguards @Wayne England
+20 U Thraben Heretic @James Ryman
+21 U Topplegeist @Seb McKinnon
+22 C Village Bell-Ringer @David Palumbo
+23 C Voice of the Provinces @Igor Kieryluk
+24 R Captain of the Mists @Allen Williams
+25 C Gryff Vanguard @Jason Chan
+26 C Mist Raven @John Avon
+27 U Nephalia Smuggler @Matt Stewart
+28 U Pore Over the Pages @Magali Villeneuve
+29 U Tandem Lookout @Kev Walker
+30 U Tower Geist @Izzy
+31 U Butcher's Cleaver @Jason Felix
+32 U Sharpened Pitchfork @Winona Nelson
+33 C Seraph Sanctuary @David Palumbo
+34 C Tranquil Cove @John Avon
+35 L Island @James Paick
+36 L Island @Adam Paquette
+37 L Island @Jung Park
+38 L Plains @Adam Paquette
+39 L Plains @Jung Park
+40 L Plains @Eytan Zana
+41 M Mindwrack Demon @Daarken
+42 U Compelling Deterrence @Seb McKinnon
+43 C Forbidden Alchemy @David Rapoza
+44 R Havengul Runebinder @Bud Cook
+45 C Makeshift Mauler @James Ryman
+46 U Relentless Skaabs @Karl Kopinski
+47 C Scrapskin Drake @Kev Walker
+48 C Screeching Skaab @Clint Cearley
+49 C Stitched Drake @Chris Rahn
+50 U Abattoir Ghoul @Volkan Baǵa
+51 U Appetite for Brains @Michael C. Hayes
+52 U Barter in Blood @Eric Deschamps
+53 C Butcher Ghoul @Christopher Moeller
+54 U Diregraf Ghoul @Dave Kendall
+55 U Dread Return @Svetlin Velinov
+56 C Driver of the Dead @James Ryman
+57 U Falkenrath Noble @Slawomir Maniak
+58 C Ghoulraiser @Steve Prescott
+59 R Gravecrawler @Steven Belledin
+60 R Harvester of Souls @Slawomir Maniak
+61 U Human Frailty @David Palumbo
+62 U Moan of the Unhallowed @Nils Hamm
+63 R Sever the Bloodline @Clint Cearley
+64 U Tooth Collector @Bud Cook
+65 U Tribute to Hunger @Dave Kendall
+66 R Unbreathing Horde @Dave Kendall
+67 C Victim of Night @Winona Nelson
+68 U Diregraf Captain @Slawomir Maniak
+69 C Cobbled Wings @Matt Stewart
+70 C Dismal Backwater @Sam Burley
+71 L Island @James Paick
+72 L Island @Adam Paquette
+73 L Island @Jung Park
+74 L Swamp @James Paick
+75 L Swamp @Adam Paquette
+76 L Swamp @Jung Park
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_human
+w_1_1_spirit_flying
+b_2_2_zombie

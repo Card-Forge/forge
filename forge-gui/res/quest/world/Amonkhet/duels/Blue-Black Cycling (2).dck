@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Blue-Black Cycling (2)
+Title=Shadowstorm Vizier
+Difficulty=medium
+Icon=Shadowstorm Vizier.jpg
+Description=She can coil a breeze like a string around her finger-- or twist it into a noose.
+Deck Type=constructed
+[Main]
+1 Censor|AKH
+1 Commit // Memory|AKH
+1 Compelling Argument|AKH
+1 Cryptic Serpent|AKH
+1 Drake Haven|AKH
+1 Final Reward|AKH
+2 Hekma Sentinels|AKH
+1 Hieroglyphic Illumination|AKH
+4 Island|E01|1
+4 Island|E01|2
+1 Kefnet the Mindful|MPS_AKH
+1 Naga Oracle|AKH
+1 Pitiless Vizier|AKH
+1 Ruthless Sniper|AKH
+2 Scarab Feast|AKH
+2 Seeker of Insight|AKH
+1 Shadowstorm Vizier|AKH
+1 Shimmerscale Drake|AKH
+1 Splendid Agony|AKH
+4 Swamp|E01|1
+4 Swamp|E01|2
+2 Violent Impact|AKH
+1 Vizier of Tumbling Sands|AKH
+1 Wasteland Scorpion|AKH
+[Sideboard]
+1 Bontu's Monument|AKH
+1 Emberhorn Minotaur|AKH
+1 Faith of the Devoted|AKH
+1 Fling|AKH
+1 In Oketra's Name|AKH
+1 Kefnet's Monument|AKH
+1 Mighty Leap|AKH
+2 Minotaur Sureshot|AKH
+1 Naga Vitalist|AKH
+1 Nimble-Blade Khenra|AKH
+1 Pursue Glory|AKH
+1 Scribe of the Mindful|AKH
+1 Shadow of the Grave|AKH
+1 Sparring Mummy|AKH
+1 Stinging Shot|AKH
+1 Trespasser's Curse|AKH
+1 Warfire Javelineer|AKH

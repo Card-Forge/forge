@@ -1,0 +1,9 @@
+Name:Ohabi Caleria
+ManaCost:1 G W
+Types:Legendary Creature Elf Archer
+PT:1/3
+K:Reach
+S:Mode$ Continuous | Affected$ Archer.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all Archers you control during each other player's untap step.
+T:Mode$ DamageDone | ValidSource$ Archer.YouCtrl+inZoneBattlefield | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever an Archer you control deals damage to a creature, you may pay {2}. If you do, draw a card.
+SVar:DBDraw:AB$ Draw | Cost$ 2
+Oracle:Reach\nUntap all Archers you control during each other player's untap step.\nWhenever an Archer you control deals damage to a creature, you may pay {2}. If you do, draw a card.

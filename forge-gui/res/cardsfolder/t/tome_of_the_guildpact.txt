@@ -1,0 +1,8 @@
+Name:Tome of the Guildpact
+ManaCost:5
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Whenever you cast a multicolored spell, draw a card.\n{T}: Add one mana of any color.

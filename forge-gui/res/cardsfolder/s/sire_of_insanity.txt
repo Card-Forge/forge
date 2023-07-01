@@ -1,0 +1,7 @@
+Name:Sire of Insanity
+ManaCost:4 B R
+Types:Creature Demon
+PT:6/4
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each end step, each player discards their hand.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | Mode$ Hand
+Oracle:At the beginning of each end step, each player discards their hand.

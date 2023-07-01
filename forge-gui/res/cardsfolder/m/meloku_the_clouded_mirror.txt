@@ -1,0 +1,8 @@
+Name:Meloku the Clouded Mirror
+ManaCost:4 U
+Types:Legendary Creature Moonfolk Wizard
+PT:2/4
+K:Flying
+A:AB$ Token | Cost$ 1 Return<1/Land> | TokenAmount$ 1 | TokenScript$ u_1_1_illusion_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 blue Illusion creature token with flying.
+AI:RemoveDeck:Random
+Oracle:Flying\n{1}, Return a land you control to its owner's hand: Create a 1/1 blue Illusion creature token with flying.

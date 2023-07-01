@@ -1,0 +1,7 @@
+Name:Shapeshifter Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Shapeshifter
+PT:2/2
+K:Changeling
+Oracle:Changeling (This token is every creature type.)

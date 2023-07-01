@@ -1,0 +1,10 @@
+Name:Quintorius, Field Historian
+ManaCost:3 R W
+Types:Legendary Creature Elephant Cleric
+PT:2/4
+S:Mode$ Continuous | Affected$ Spirit.YouCtrl | AddPower$ 1 | Description$ Spirits you control get +1/+0.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ rw_3_2_spirit
+DeckHas:Ability$Graveyard|Token
+DeckHints:Type$Spirit
+Oracle:Spirits you control get +1/+0.\nWhenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.

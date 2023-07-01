@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (ONE)
+Type:Archived
+Subtype:Standard
+Effective:2023-02-07
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE
+Banned:The Meathook Massacre

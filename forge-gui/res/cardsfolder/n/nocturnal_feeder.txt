@@ -1,0 +1,10 @@
+Name:Nocturnal Feeder
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each opponent loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhen Nocturnal Feeder dies, each opponent loses 2 life and you gain 2 life.

@@ -1,0 +1,6 @@
+Name:Blood Reckoning
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 1
+Oracle:Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.

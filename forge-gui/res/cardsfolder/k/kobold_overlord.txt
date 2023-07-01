@@ -1,0 +1,9 @@
+Name:Kobold Overlord
+ManaCost:1 R
+Types:Creature Kobold
+PT:1/2
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddKeyword$ First Strike | Description$ Other Kobold creatures you control have first strike.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Kobold
+Oracle:First strike\nOther Kobold creatures you control have first strike.

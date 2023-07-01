@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Dino 1
+Title=Dino
+Difficulty=easy
+Description=Mono brown artifact deck with Affinity for artifacts, Metalcraft and Modular cards
+Icon=Dino.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Blasted Landscape
+2 Desert
+4 Glimmerpost
+4 Gods' Eye, Gate to the Reikai
+1 Quicksand
+4 Reliquary Tower
+3 Tectonic Edge
+1 Urza's Factory
+1 Aeolipile
+1 Amulet of Kroog
+2 Arcbound Bruiser
+1 Arcbound Hybrid
+1 Arcbound Slith
+1 Arcbound Stinger
+2 Arcbound Worker
+1 Battered Golem
+1 Chrome Steed
+1 Clockwork Beetle
+1 Clockwork Gnomes
+1 Defense Grid
+2 Drill-Skimmer
+2 Frogmite
+1 Golem Foundry
+1 Golem's Heart
+1 Junk Diver
+1 Manakin
+1 Metallic Sliver
+1 Mirrorworks
+1 Myr Retriever
+1 Myr Sire
+1 Omega Myr
+1 Pristine Talisman
+1 Scrapheap
+1 Serum Tank
+2 Snapsail Glider
+1 Straw Golem
+1 Summoning Station
+1 Tablet of Epityr
+1 Tooth of Chiss-Goria
+1 Urza's Chalice
+[sideboard]

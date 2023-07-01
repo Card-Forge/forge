@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Iconoclastic Controversy
+Title=Iconoclastic Controversy
+Difficulty=easy
+Description=This world is rich with artifacts, and the green & red mages are out to crush them all
+Icon=Iconoclastic Controversy.jpg
+Deck Type=constructed
+[Main]
+1 Eternal Witness|5DN
+1 Fangren Hunter|MRD
+2 Fangren Pathcutter|5DN
+1 Ferocious Charge|5DN
+12 Forest|MRD|1
+2 Goblin Brawler|5DN
+2 Goblin Replica|MRD
+1 Iron-Barb Hellion|5DN
+2 Magma Jet|5DN
+12 Mountain|MRD|1
+1 Pyrite Spellbomb|MMA
+1 Rite of Passage|5DN
+1 Slith Firewalker|MRD
+2 Spark Elemental|5DN
+2 Spikeshot Goblin|MRD
+2 Sylvok Explorer|5DN
+2 Talisman of Impulse|MRD
+1 Tangle Asp|5DN
+1 Tel-Jilad Chosen|MRD
+2 Tel-Jilad Exile|MRD
+2 Tel-Jilad Justice|5DN
+1 Tel-Jilad Lifebreather|5DN
+2 Tyrranax|5DN
+2 Viridian Lorebearers|5DN
+1 Vulshok Berserker|MRD
+1 Vulshok Sorcerer|5DN
+[sideboard]

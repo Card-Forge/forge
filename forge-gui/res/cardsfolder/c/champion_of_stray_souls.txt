@@ -1,0 +1,10 @@
+Name:Champion of Stray Souls
+ManaCost:4 B B
+Types:Creature Skeleton Warrior
+PT:4/4
+A:AB$ ChangeZone | Cost$ 3 B B T Sac<X/Creature.Other/other creature(s)> | CostDesc$ {3}{B}{B}, {T}, Sacrifice X other creatures: | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creature cards from your graveyard | TargetMin$ X | TargetMax$ X | AIMinTgts$ 3 | SpellDescription$ Return X target creatures from your graveyard to the battlefield.
+A:AB$ ChangeZone | Cost$ 5 B B | Origin$ Graveyard | Destination$ Library | ActivationZone$ Graveyard | Defined$ Self | SpellDescription$ Put CARDNAME on top of your library from your graveyard.
+SVar:X:Count$xPaid
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+AI:RemoveDeck:All
+Oracle:{3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creature cards from your graveyard to the battlefield.\n{5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.

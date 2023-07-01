@@ -1,0 +1,9 @@
+Name:Gustcloak Harrier
+ManaCost:1 W W
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
+Oracle:Flying\nWhenever Gustcloak Harrier becomes blocked, you may untap it and remove it from combat.

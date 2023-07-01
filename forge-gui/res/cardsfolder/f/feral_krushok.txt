@@ -1,0 +1,5 @@
+Name:Feral Krushok
+ManaCost:4 G
+Types:Creature Beast
+PT:5/4
+Oracle:

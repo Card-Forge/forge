@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Akros: Stratians: Oromai
+Title=The Oromai
+Difficulty=easy
+Description=The Oromai (watchers) are the forces that never stray far from the Kolophon, protecting the fortress from invaders. The Oromai also keep the large population of serfs in check while the main part of the Akroan army is away for long periods of time.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Akroan Mastiff|JOU
+4 Akroan Phalanx|BNG
+4 Akroan Skyguard|BNG
+4 Colossus of Akros|THS
+4 Eagle of the Watch|JOU
+4 Eidolon of Countless Battles|BNG
+4 Favored Hoplite|THS
+4 Nyxborn Shieldmate|BNG
+24 Plains|THS|4
+4 Sightless Brawler|JOU

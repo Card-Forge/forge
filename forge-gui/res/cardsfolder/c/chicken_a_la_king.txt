@@ -1,0 +1,9 @@
+Name:Chicken à la King
+ManaCost:1 U U
+Types:Creature Bird Noble
+PT:2/2
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigCounters | ValidResult$ 6 | ValidSides$ 6 | TriggerDescription$ Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Bird | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ RollDice | Cost$ tapXType<1/Bird> | AILogic$ AtOppEOT | SpellDescription$ Roll a six-sided die.
+DeckHas:Ability$Counters
+Oracle:Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird. (You may roll dice only when instructed to.)\nTap an untapped Bird you control: Roll a six-sided die. (Like now.)

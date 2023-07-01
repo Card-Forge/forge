@@ -1,0 +1,9 @@
+Name:Deathpact Angel
+ManaCost:3 W B B
+Types:Creature Angel
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white and black Cleric creature token. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_cleric_deathpact | TokenOwner$ You
+SVar:SacMe:1
+Oracle:Flying\nWhen Deathpact Angel dies, create a 1/1 white and black Cleric creature token. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."

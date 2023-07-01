@@ -1,0 +1,9 @@
+Name:Basilica Skullbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+A:AB$ Pump | Cost$ 2 W Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBDraw | KW$ Flying | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | SpellDescription$ Target creature you control gets +2/+2 and gains flying until end of turn. Draw a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw
+AI:RemoveDeck:Random
+DeckHas:Color$White & Ability$Sacrifice
+Oracle:{1}, Sacrifice Basilica Skullbomb: Draw a card.\n{2}{W}, Sacrifice Basilica Skullbomb: Target creature you control gets +2/+2 and gains flying until end of turn. Draw a card. Activate only as a sorcery.

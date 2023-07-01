@@ -1,0 +1,9 @@
+Name:Kavu Glider
+ManaCost:2 R
+Types:Creature Kavu
+PT:2/1
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White|Blue
+Oracle:{W}: Kavu Glider gets +0/+1 until end of turn.\n{U}: Kavu Glider gains flying until end of turn.

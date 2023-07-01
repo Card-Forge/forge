@@ -1,0 +1,8 @@
+Name:Blade of Selves
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Myriad | Description$ Equipped creature has myriad. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+K:Equip:4
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:Equipped creature has myriad. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nEquip {4}

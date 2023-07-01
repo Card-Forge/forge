@@ -1,0 +1,7 @@
+Name:Grenzo's Cutthroat
+ManaCost:1 R
+Types:Creature Goblin Rogue
+PT:1/1
+K:First Strike
+K:Dethrone
+Oracle:First strike\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)

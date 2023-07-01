@@ -1,0 +1,5 @@
+Name:Loxodon Line Breaker
+ManaCost:2 W
+Types:Creature Elephant Soldier
+PT:3/2
+Oracle:

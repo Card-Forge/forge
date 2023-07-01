@@ -1,0 +1,8 @@
+Name:Horobi, Death's Wail
+ManaCost:2 B B
+Types:Legendary Creature Spirit
+PT:4/4
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Creature.inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Flying\nWhenever a creature becomes the target of a spell or ability, destroy that creature.

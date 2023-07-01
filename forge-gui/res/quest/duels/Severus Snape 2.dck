@@ -1,0 +1,61 @@
+[duel]
+[metadata]
+Name=Severus Snape 2
+Title=Severus Snape
+Difficulty=medium
+Description=WB Token deck
+Icon=Severus Snape.jpg
+Deck Type=constructed
+[main]
+8 Swamp|M12
+8 Plains|M12
+4 Isolated Chapel
+4 Scoured Barrens
+4 Marsh Flats
+1 Terramorphic Expanse
+1 Evolving Wilds
+4 Intangible Virtue
+1 Leyline of the Meek
+1 Attended Knight
+1 Beckon Apparition
+1 Belfry Spirit
+1 Breeding Pit
+1 Captain's Call
+1 Commander's Authority
+1 Conqueror's Pledge
+1 Corpsehatch
+1 Darien, King of Kjeldor
+1 Dread Drone
+1 Emeria Angel
+1 Essence Feed
+1 Gather the Townsfolk
+1 Geist-Honored Monk
+1 Hoofprints of the Stag
+1 Icatian Town
+1 Increasing Devotion
+1 Join the Ranks
+1 Kjeldoran Home Guard
+1 Lab Rats
+1 Lingering Souls
+1 Luminarch Ascension
+1 Luminous Angel
+1 Master's Call
+1 Midnight Haunting
+1 Moan of the Unhallowed
+1 Mobilization
+1 Nomads' Assembly
+1 Promise of Bunrei
+1 Quest for the Gravelord
+1 Raise the Alarm
+1 Requiem Angel
+1 Rhys the Redeemed
+1 Seize the Soul
+1 Sengir Autocrat
+1 Spectral Procession
+1 Syphon Flesh
+1 Thraben Doomsayer
+1 Twilight Drover
+1 Vile Rebirth
+1 Violet Pall
+1 Voice of the Provinces
+[sideboard]

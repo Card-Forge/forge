@@ -1,0 +1,9 @@
+Name:Warmonger's Chariot
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+S:Mode$ CanAttackDefender | ValidCard$ Card.EquippedBy+withDefender | Description$ As long as equipped creature has defender, it can attack as though it didn't have defender.
+SVar:AttachAi:AITgts$ Card.withDefender
+DeckHints:Keyword$Defender
+Oracle:Equipped creature gets +2/+2.\nAs long as equipped creature has defender, it can attack as though it didn't have defender.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

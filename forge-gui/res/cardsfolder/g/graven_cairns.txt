@@ -1,0 +1,7 @@
+Name:Graven Cairns
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ BR T | Produced$ Combo B R | Amount$ 2 | SpellDescription$ Add {B}{B}, {B}{R}, or {R}{R}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{B/R}, {T}: Add {B}{B}, {B}{R}, or {R}{R}.

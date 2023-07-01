@@ -1,0 +1,9 @@
+Name:Inner Demon
+ManaCost:2 B B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddType$ Demon | Description$ Enchanted creature gets +2/+2, has flying, and is a Demon in addition to its other types.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, all other creatures get -2/-2 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.nonDemon | IsCurse$ True
+Oracle:Enchant creature\nEnchanted creature gets +2/+2, has flying, and is a Demon in addition to its other types.\nWhen Inner Demon enters the battlefield, all non-Demon creatures get -2/-2 until end of turn.

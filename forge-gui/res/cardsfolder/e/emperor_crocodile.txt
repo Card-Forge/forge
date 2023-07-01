@@ -1,0 +1,8 @@
+Name:Emperor Crocodile
+ManaCost:3 G
+Types:Creature Crocodile
+PT:5/5
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no other creatures, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Creature.YouCtrl
+Oracle:When you control no other creatures, sacrifice Emperor Crocodile.

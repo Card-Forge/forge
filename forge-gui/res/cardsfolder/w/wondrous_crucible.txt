@@ -1,0 +1,11 @@
+Name:Wondrous Crucible
+ManaCost:7
+Types:Artifact
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddKeyword$ Ward:2 | Description$ Permanents you control have ward {2}.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your end step, mill two cards, then exile a nonland card at random from your graveyard. Copy it. You may cast the copy without paying its mana cost. (A copy of a permanent spell becomes a token.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ You | Destination$ Exile | ChangeNum$ 1 | ChangeType$ Card.nonLand | AtRandom$ True | Origin$ Graveyard | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | CopyCard$ True | WithoutManaCost$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard|Token|Mill
+Oracle:Permanents you control have ward {2}.\nAt the beginning of your end step, mill two cards, then exile a nonland card at random from your graveyard. Copy it. You may cast the copy without paying its mana cost. (A copy of a permanent spell becomes a token.)

@@ -1,0 +1,6 @@
+Name:Derelor
+ManaCost:3 B
+Types:Creature Thrull
+PT:4/4
+S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Cost$ B | Description$ Black spells you cast cost {B} more to cast.
+Oracle:Black spells you cast cost {B} more to cast.

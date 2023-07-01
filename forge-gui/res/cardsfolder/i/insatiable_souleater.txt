@@ -1,0 +1,6 @@
+Name:Insatiable Souleater
+ManaCost:4
+Types:Artifact Creature Phyrexian Beast
+PT:5/1
+A:AB$ Pump | Cost$ GP | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+Oracle:{G/P}: Insatiable Souleater gains trample until end of turn. ({G/P} can be paid with either {G} or 2 life.)

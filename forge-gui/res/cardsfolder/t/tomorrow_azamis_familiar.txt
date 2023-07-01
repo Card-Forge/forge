@@ -1,0 +1,8 @@
+Name:Tomorrow, Azami's Familiar
+ManaCost:5 U
+Types:Legendary Creature Spirit
+PT:1/5
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+SVar:Dig:DB$ Dig | DigNum$ 3
+AI:RemoveDeck:All
+Oracle:If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.

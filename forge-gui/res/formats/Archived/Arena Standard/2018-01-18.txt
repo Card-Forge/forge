@@ -1,0 +1,6 @@
+[format]
+Name:Arena Standard (RIX)
+Type:Archived
+Subtype:Standard
+Effective:2018-01-18
+Sets:XLN, RIX

@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 5 The Elves of Norwood
+Title=The Elves of Norwood
+Difficulty=easy
+Description="The woods hold peace for those who desire it, but those who seek battle will find me."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+24 Forest|PO2|1
+4 Nature's Lore|PO2
+4 Norwood Archers|PO2
+4 Norwood Priestess|PO2
+4 Norwood Ranger|PO2
+4 Norwood Riders|PO2
+4 Norwood Warrior|PO2
+4 Renewing Touch|PO2
+4 Salvage|PO2
+4 Untamed Wilds|PO2

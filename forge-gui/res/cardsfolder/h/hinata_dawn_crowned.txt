@@ -1,0 +1,10 @@
+Name:Hinata, Dawn-Crowned
+ManaCost:1 U R W
+Types:Legendary Creature Spirit Kirin
+PT:4/4
+K:Flying
+K:Trample
+S:Mode$ ReduceCost | Activator$ You | Type$ Spell | Amount$ X | Relative$ True | Description$ Spells you cast cost {1} less to cast for each target they have.
+S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ X | Relative$ True | Description$ Spells your opponents cast cost {1} more to cast for each target they have.
+SVar:X:TargetedObjectsDistinct$Amount
+Oracle:Flying, trample\nSpells you cast cost {1} less to cast for each target they have.\nSpells your opponents cast cost {1} more to cast for each target they have.

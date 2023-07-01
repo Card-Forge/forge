@@ -1,0 +1,5 @@
+Name:Thraben Exorcism
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.Spirit,Creature.withDisturb,Enchantment | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target Spirit, creature with disturb, or enchantment. | SpellDescription$ Exile target Spirit, creature with disturb, or enchantment.
+Oracle:Exile target Spirit, creature with disturb, or enchantment.

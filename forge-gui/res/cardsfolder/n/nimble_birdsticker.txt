@@ -1,0 +1,6 @@
+Name:Nimble Birdsticker
+ManaCost:2 R
+Types:Creature Goblin
+PT:2/3
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

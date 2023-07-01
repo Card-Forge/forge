@@ -1,0 +1,37 @@
+[quest]
+id=4008
+OpponentName=Borborygmos
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Stomping Ground|GPT
+Credit Reward=200
+HumanExtras=Crown of Convergence|Martial Law
+AIExtras=Guild Feud
+[metadata]
+Name=quest4008
+Title=Borborygmos
+Difficulty=hard
+Description=Fightclub anyone?
+Icon=Borborygmos.jpg
+Deck Type=constructed
+[main]
+4 Domri Rade|GTC
+4 Birds of Paradise|M12
+2 Borborygmos|GPT
+2 Borborygmos Enraged|GTC
+4 Carven Caryatid|RAV
+8 Forest|RTR
+4 Gruul Guildgate|GTC
+2 Gruul Ragebeast|GTC
+4 Indrik Stomphowler|DIS
+2 Molten Primordial|GTC
+8 Mountain|RTR
+4 Sprouting Phytohydra|DIS
+4 Stomping Ground|GTC
+2 Sylvan Primordial|GTC
+4 Wasteland Viper|GTC
+2 Worldspine Wurm|RTR
+[sideboard]
+[planes]
+[schemes]

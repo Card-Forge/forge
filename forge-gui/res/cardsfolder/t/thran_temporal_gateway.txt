@@ -1,0 +1,5 @@
+Name:Thran Temporal Gateway
+ManaCost:4
+Types:Legendary Artifact
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Historic | ChangeNum$ 1 | SpellDescription$ You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)
+Oracle:{4}, {T}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)

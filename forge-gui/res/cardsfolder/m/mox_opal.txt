@@ -1,0 +1,6 @@
+Name:Mox Opal
+ManaCost:0
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | Activation$ Metalcraft | PrecostDesc$ Metalcraft — | SpellDescription$ Add one mana of any color. Activate only if you control three or more artifacts.
+AI:RemoveDeck:Random
+Oracle:Metalcraft — {T}: Add one mana of any color. Activate only if you control three or more artifacts.

@@ -1,0 +1,9 @@
+Name:Pious Warrior
+ManaCost:3 W
+Types:Creature Human Rebel Warrior
+PT:2/3
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Pious Warrior is dealt combat damage, you gain that much life.

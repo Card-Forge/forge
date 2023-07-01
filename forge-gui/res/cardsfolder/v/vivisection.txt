@@ -1,0 +1,6 @@
+Name:Vivisection
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Draw | Cost$ 3 U Sac<1/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw three cards.

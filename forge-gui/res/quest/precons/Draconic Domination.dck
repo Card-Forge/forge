@@ -1,0 +1,109 @@
+[metadata]
+Name=Draconic Domination
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=When time began, the Ur-Dragon began with it. As the primordial ancestor and lifeblood of all dragons, the Ur-Dragon imbues strength into dragons from every corner of the multiverse so that they may rain endless fire and destruction upon the enemies of dragonkind.
+Set=C17
+Image=draconic_domination.png
+[Commander]
+1 The Ur-Dragon+|C17
+[main]
+1 Arcane Sanctum|C17
+1 Armillary Sphere|C17
+1 Atarka, World Render|C17
+1 Bladewing the Risen|C17
+1 Boneyard Scourge|C17
+1 Broodmate Dragon|C17
+1 Command Tower|C17
+1 Commander's Sphere|C17
+1 Crosis, the Purger|C17
+1 Crucible of Fire|C17
+1 Crucible of the Spirit Dragon|C17
+1 Crumbling Necropolis|C17
+1 Crux of Fate|C17
+1 Cultivate|C17
+1 Curse of Bounty|C17
+1 Curse of Opulence|C17
+1 Curse of Verbosity|C17
+1 Darksteel Ingot|C17
+1 Deathbringer Regent|C17
+1 Dragon Tempest|C17
+1 Dragonlord's Servant|C17
+1 Dragonspeaker Shaman|C17
+1 Dreamstone Hedron|C17
+1 Dromoka, the Eternal|C17
+1 Earthquake|C17
+1 Elemental Bond|C17
+1 Farseek|C17
+1 Fist of Suns|C17
+1 Forest|C17|1
+1 Forest|C17|2
+1 Forest|C17|3
+1 Fortunate Few|C17
+1 Fractured Identity|C17
+1 Frontier Bivouac|C17
+1 Frontier Siege|C17
+1 Haven of the Spirit Dragon|C17
+1 Hellkite Charger|C17
+1 Herald's Horn|C17
+1 Intet, the Dreamer|C17
+1 Island|C17|1
+1 Island|C17|2
+1 Island|C17|3
+1 Jungle Shrine|C17
+1 Kindred Discovery|C17
+1 Kodama's Reach|C17
+1 Kolaghan, the Storm's Fury|C17
+1 Lightning Greaves|C17
+1 Mirror of the Forebears|C17
+1 Monastery Siege|C17
+2 Mountain|C17|1
+2 Mountain|C17|2
+2 Mountain|C17|3
+1 Mystic Monastery|C17
+1 Nihil Spellbomb|C17
+1 Niv-Mizzet, Dracogenius|C17
+1 Nomad Outpost|C17
+1 O-Kagachi, Vengeful Kami|C17
+1 Ojutai, Soul of Winter|C17
+1 Opulent Palace|C17
+1 Orator of Ojutai|C17
+1 Painful Truths|C17
+1 Palace Siege|C17
+1 Path of Ancestry|C17
+1 Plains|C17|1
+1 Plains|C17|2
+1 Plains|C17|3
+1 Rain of Thorns|C17
+1 Ramos, Dragon Engine|C17
+1 Ryusei, the Falling Star|C17
+1 Sandsteppe Citadel|C17
+1 Savage Lands|ALA|1
+1 Savage Ventmaw|C17
+1 Scalelord Reckoner|C17
+1 Scion of the Ur-Dragon|C17
+1 Scourge of Valkas|C17
+1 Seaside Citadel|C17
+1 Silumgar, the Drifting Death|C17
+1 Sol Ring|C17
+1 Spellbound Dragon|C17
+1 Steel Hellkite|C17
+1 Sunscorch Regent|C17
+1 Swamp|C17|1
+1 Swamp|C17|2
+1 Swamp|C17|3
+1 Taigam, Ojutai Master|C17
+1 Teneb, the Harvester|C17
+1 Territorial Hellkite|C17
+1 Tyrant's Familiar|C17
+1 Utvara Hellkite|C17
+1 Vivid Crag|C17
+1 Vivid Grove|C17
+1 Vivid Marsh|C17
+1 Vivid Meadow|C17
+1 Wasitora, Nekoru Queen|C17
+1 Wayfarer's Bauble|C17
+1 Vivid Creek|C17

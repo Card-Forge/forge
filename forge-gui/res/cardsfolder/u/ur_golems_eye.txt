@@ -1,0 +1,5 @@
+Name:Ur-Golem's Eye
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+Oracle:{T}: Add {C}{C}.

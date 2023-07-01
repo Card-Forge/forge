@@ -1,0 +1,6 @@
+Name:Waterlogged Grove
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{T}, Pay 1 life: Add {G} or {U}.\n{1}, {T}, Sacrifice Waterlogged Grove: Draw a card.

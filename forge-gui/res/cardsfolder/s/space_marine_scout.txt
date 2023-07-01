@@ -1,0 +1,11 @@
+Name:Space Marine Scout
+ManaCost:2 W
+Types:Creature Astartes Scout
+PT:2/1
+K:First Strike
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Concealed Position — When CARDNAME enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains | ChangeNum$ 1 | Tapped$ True
+SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:First strike, vigilance\nConcealed Position — When Space Marine Scout enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.

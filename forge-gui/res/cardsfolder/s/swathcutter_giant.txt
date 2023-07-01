@@ -1,0 +1,9 @@
+Name:Swathcutter Giant
+ManaCost:4 R W
+Types:Creature Giant Soldier
+PT:5/5
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to each creature defending player controls.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.ControlledBy TriggeredDefendingPlayer | NumDmg$ 1 | ValidDescription$ each creature defending player controls.
+SVar:HasAttackEffect:TRUE
+Oracle:Vigilance\nWhenever Swathcutter Giant attacks, it deals 1 damage to each creature defending player controls.

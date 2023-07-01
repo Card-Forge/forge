@@ -1,0 +1,7 @@
+Name:Reckless Brute
+ManaCost:2 R
+Types:Creature Ogre Warrior
+PT:3/1
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nReckless Brute attacks each combat if able.

@@ -1,0 +1,9 @@
+Name:Chameleon Colossus
+ManaCost:2 G G
+Types:Creature Shapeshifter
+PT:4/4
+K:Changeling
+K:Protection from black
+A:AB$ Pump | Cost$ 2 G G | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
+SVar:X:Count$CardPower
+Oracle:Changeling (This card is every creature type.)\nProtection from black\n{2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.

@@ -1,0 +1,10 @@
+Name:Willing Test Subject
+ManaCost:2 G
+Types:Creature Spider Monkey Scientist
+PT:2/2
+K:Reach
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigCounter | ValidPlayer$ You | ValidResult$ GE4 | TriggerDescription$ Whenever you roll a 4 or higher on a die, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ RollDice | Cost$ 6 | SpellDescription$ Roll a six-sided die.
+DeckHas:Ability$Counters
+Oracle:Reach\nWhenever you roll a 4 or higher on a die, put a +1/+1 counter on Willing Test Subject.\n{6}: Roll a six-sided die.

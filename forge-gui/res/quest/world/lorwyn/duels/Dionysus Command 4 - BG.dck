@@ -1,0 +1,33 @@
+[duel]
+
+[metadata]
+Name=Dionysus Command 4
+Title=Dionysus
+Icon=Dionysus.jpg
+Difficulty=very hard
+Description=[B/G] Elves aggro/disrupt.
+Deck Type=constructed
+
+[Main]
+4 Swamp|LRW
+5 Forest|LRW
+4 Treetop Village|10E
+3 Mutavault|MOR
+4 Gilt-Leaf Palace|LRW
+4 Llanowar Wastes|10E
+
+2 Chameleon Colossus|MOR
+2 Civic Wayfinder|10E
+2 Garruk Wildspeaker|LRW
+4 Imperious Perfect|LRW
+4 Llanowar Elves|10E
+4 Nameless Inversion|LRW
+4 Profane Command|LRW
+2 Troll Ascetic|10E
+4 Terror|10E
+4 Thoughtseize|LRW
+4 Wren's Run Vanquisher|LRW
+
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,13 @@
+Name:Chaos Channeler
+ManaCost:2 R R
+Types:Creature Human Shaman
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Wild Magic Surge — Whenever CARDNAME attacks, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Exile1,10-19:Exile2,20:Exile3 | SpellDescription$ roll a d20.
+SVar:Exile1:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ 1—9 VERT Exile the top card of your library. You may play it this turn.
+SVar:Exile2:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ 10—19 VERT Exile the top two cards of your library. You may play them this turn.
+SVar:Exile3:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ 20 VERT Exile the top three cards of your library. You may play them this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play the card(s) this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Wild Magic Surge — Whenever Chaos Channeler attacks, roll a d20.\n1—9 | Exile the top card of your library. You may play it this turn.\n10—19 | Exile the top two cards of your library. You may play them this turn.\n20 | Exile the top three cards of your library. You may play them this turn.

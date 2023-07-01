@@ -1,0 +1,9 @@
+Name:Golgari Dredge|Deck:Golgari Dredge.dck|Variant:None|Avatar:Golgari Grave-Troll|Desc:
+Name:Golgari Scavenge|Deck:Golgari Scavenge.dck|Variant:None|Avatar:Deadbridge Goliath|Desc:
+Name:Izoni, Thousand-Eyed|Deck:Izoni, Thousand-Eyed.dck|Variant:Commander|Avatar:Izoni, Thousand-Eyed|Desc:
+Name:Mazirek, Kraul Death Priest|Deck:Mazirek, Kraul Death Priest.dck|Variant:Commander|Avatar:Mazirek, Kraul Death Priest|Desc:
+Name:Jarad, Golgari Lich Lord|Deck:Jarad, Golgari Lich Lord.dck|Variant:Commander|Avatar:Jarad, Golgari Lich Lord|Desc:
+Name:Savra, Queen of the Golgari|Deck:Savra, Queen of the Golgari.dck|Variant:Commander|Avatar:Savra, Queen of the Golgari|Desc:
+Name:Varolz, the Scar-Striped|Deck:Varolz, the Scar-Striped.dck|Variant:Commander|Avatar:Varolz, the Scar-Striped|Desc:
+Name:Sisters of Stone Death|Deck:Sisters of Stone Death.dck|Variant:Vanguard|Avatar:Sisters of Stone Death|Desc:
+Name:Vraska the Unseen|Deck:Vraska the Unseen.dck|Variant:Planeswalker|Avatar:Vraska the Unseen|Desc:

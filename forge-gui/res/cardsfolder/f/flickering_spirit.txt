@@ -1,0 +1,9 @@
+Name:Flickering Spirit
+ManaCost:3 W
+Types:Creature Spirit
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ 3 W | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True | SpellDescription$ Exile CARDNAME, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\n{3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.

@@ -1,0 +1,8 @@
+Name:Satyr Nyx-Smith
+ManaCost:2 R
+Types:Creature Satyr Shaman
+PT:2/1
+K:Haste
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {2}{R}. If you do, create a 3/1 red Elemental enchantment creature token with haste.
+SVar:GFGToken:AB$ Token | Cost$ 2 R | TokenAmount$ 1 | TokenScript$ r_3_1_e_elemental_haste | TokenOwner$ You
+Oracle:Haste\nInspired — Whenever Satyr Nyx-Smith becomes untapped, you may pay {2}{R}. If you do, create a 3/1 red Elemental enchantment creature token with haste.

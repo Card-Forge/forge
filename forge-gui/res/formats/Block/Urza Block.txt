@@ -1,0 +1,7 @@
+[format]
+Name:Urza Block
+Type:Archived
+Subtype:Block
+Order:132
+Sets:UDS, ULG, USG
+Banned:Gaea's Cradle; Memory Jar; Serra's Sanctum; Time Spiral; Tolarian Academy; Voltaic Key; Windfall

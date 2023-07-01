@@ -1,0 +1,6 @@
+Name:Gaea's Protector
+ManaCost:3 G
+Types:Creature Elemental Warrior
+PT:4/2
+K:CARDNAME must be blocked if able.
+Oracle:Gaea's Protector must be blocked if able.

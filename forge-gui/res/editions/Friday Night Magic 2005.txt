@@ -1,0 +1,20 @@
+[metadata]
+Code=F05
+Date=2005-01-01
+Name=Friday Night Magic 2005
+Type=Promo
+ScryfallCode=F05
+
+[cards]
+1 R Rancor @Kev Walker
+2 R Seal of Cleansing @Christopher Moeller
+3 R Flametongue Kavu @Pete Venters
+4 R Blastoderm @Eric Peterson
+5 R Cabal Therapy @Ron Spencer
+6 R Fact or Fiction @Terese Nielsen
+7 R Juggernaut @Dan Frazier
+8 R Circle of Protection: Red @Mark Tedin
+9 R Kird Ape @Ken Meyer, Jr.
+10 R Duress @Lawrence Snelly
+11 R Counterspell @Mark Poole
+12 R Icy Manipulator @Douglas Shuler

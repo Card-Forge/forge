@@ -1,0 +1,5 @@
+Name:Aspirant's Ascent
+ManaCost:U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Flying & Toxic:1 | NumAtt$ +1 | NumDef$ +3 | SpellDescription$ Until end of turn, target creature gets +1/+3 and gains flying and toxic 1. (Players dealt combat damage by that creature also get a poison counter.)
+Oracle:Until end of turn, target creature gets +1/+3 and gains flying and toxic 1. (Players dealt combat damage by that creature also get a poison counter.)

@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Talas Scouts
+OpponentName=The Scouts
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Talas Researcher
+[metadata]
+Name=PO2 Challenge: Talas Scout
+Title=The Scouts
+Difficulty=medium
+Description="Scouting a battle before you fight it is just good business."\n-Jefan, Talas ship captain
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+20 Island|PO2|2
+40 Talas Scout|PO2

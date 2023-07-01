@@ -1,0 +1,8 @@
+Name:Mindsparker
+ManaCost:1 R R
+Types:Creature Elemental
+PT:3/2
+K:First Strike
+T:Mode$ SpellCast | ValidCard$ Instant.Blue,Instant.White,Sorcery.Blue,Sorcery.White | ValidActivatingPlayer$ Player.Opponent | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a white or blue instant or sorcery spell, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 2
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever an opponent casts a white or blue instant or sorcery spell, Mindsparker deals 2 damage to that player.

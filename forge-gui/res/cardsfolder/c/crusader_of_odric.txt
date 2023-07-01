@@ -1,0 +1,9 @@
+Name:Crusader of Odric
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+SVar:NoZeroToughnessAI:True
+Oracle:Crusader of Odric's power and toughness are each equal to the number of creatures you control.

@@ -1,0 +1,6 @@
+Name:Harvest Gwyllion
+ManaCost:2 WB WB
+Types:Creature Hag
+PT:2/4
+K:Wither
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)

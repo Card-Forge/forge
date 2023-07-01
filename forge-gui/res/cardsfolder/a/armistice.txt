@@ -1,0 +1,7 @@
+Name:Armistice
+ManaCost:2 W
+Types:Enchantment
+A:AB$ Draw | Cost$ 3 W W | SpellDescription$ You draw a card and target opponent gains 3 life. | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to gain life | LifeAmount$ 3
+SVar:NonStackingEffect:True
+Oracle:{3}{W}{W}: You draw a card and target opponent gains 3 life.

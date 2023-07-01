@@ -1,0 +1,7 @@
+Name:Shivan Hellkite
+ManaCost:5 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{R}: Shivan Hellkite deals 1 damage to any target.

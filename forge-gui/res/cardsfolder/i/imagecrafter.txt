@@ -1,0 +1,8 @@
+Name:Imagecrafter
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Creature | InvalidTypes$ Wall | SubAbility$ DBAnimate | SpellDescription$ Choose a creature type other than Wall. Target creature becomes that type until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ ChosenType | RemoveCreatureTypes$ True
+AI:RemoveDeck:All
+Oracle:{T}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.

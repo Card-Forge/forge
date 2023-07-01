@@ -1,0 +1,5 @@
+Name:Incendiary Sabotage
+ManaCost:2 R R
+Types:Instant
+A:SP$ DamageAll | Cost$ 2 R R Sac<1/Artifact> | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 3 damage to each creature.
+Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nIncendiary Sabotage deals 3 damage to each creature.

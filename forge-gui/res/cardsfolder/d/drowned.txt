@@ -1,0 +1,8 @@
+Name:Drowned
+ManaCost:1 U
+Types:Creature Zombie
+PT:1/1
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:{B}: Regenerate Drowned.

@@ -1,0 +1,12 @@
+Name:Conclave Mentor
+ManaCost:G W
+Types:Creature Centaur Cleric
+PT:2/2
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain life equal to its power.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ XPower
+SVar:XPower:TriggeredCard$CardPower
+DeckNeeds:Ability$Counters
+Oracle:If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on that creature instead.\nWhen Conclave Mentor dies, you gain life equal to its power.

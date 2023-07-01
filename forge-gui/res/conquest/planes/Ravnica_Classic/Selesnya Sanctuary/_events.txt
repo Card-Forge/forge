@@ -1,0 +1,9 @@
+Name:Selesnya Convoke|Deck:Selesnya Convoke.dck|Variant:None|Avatar:Autochthon Wurm|Desc:
+Name:Selesnya Populate|Deck:Selesnya Populate.dck|Variant:None|Avatar:Wayfaring Temple|Desc:
+Name:Gatherer of Graces Voltron|Deck:Gatherer of Graces Voltron.dck|Variant:None|Avatar:Gatherer of Graces|Desc:
+Name:Chorus of the Conclave|Deck:Chorus of the Conclave.dck|Variant:Commander|Avatar:Chorus of the Conclave|Desc:
+Name:Tolsimir Wolfblood|Deck:Tolsimir Wolfblood.dck|Variant:Commander|Avatar:Tolsimir Wolfblood|Desc:
+Name:Emmara Tandris|Deck:Emmara Tandris.dck|Variant:Commander|Avatar:Emmara Tandris|Desc:
+Name:Trostani, Selesnya's Voice|Deck:Trostani, Selesnya's Voice.dck|Variant:Commander|Avatar:Trostani, Selesnya's Voice|Desc:
+Name:Yeva, Nature's Herald|Deck:Yeva, Nature's Herald.dck|Variant:Commander|Avatar:Yeva, Nature's Herald|Desc:
+Name:Loxodon Hierarch|Deck:Loxodon Hierarch.dck|Variant:Vanguard|Avatar:Loxodon Hierarch|Desc:

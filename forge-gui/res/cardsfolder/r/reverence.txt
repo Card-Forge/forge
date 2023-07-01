@@ -1,0 +1,6 @@
+Name:Reverence
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ CantAttack | ValidCard$ Creature.powerLE2 | Target$ You | Description$ Creatures with power 2 or less can't attack you.
+SVar:NonStackingEffect:True
+Oracle:Creatures with power 2 or less can't attack you.

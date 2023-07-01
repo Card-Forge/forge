@@ -1,0 +1,24 @@
+Name:Kessig Naturalist
+ManaCost:R G
+Types:Creature Human Werewolf
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Amount$ 1 | Produced$ Combo R G | PersistentMana$ True
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Whenever Kessig Naturalist attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Lord of the Ulvenwald
+ManaCost:no cost
+Colors:red,green
+Types:Creature Werewolf
+PT:3/3
+S:Mode$ Continuous | Affected$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Wolves and Werewolves you control get +1/+1.
+SVar:PlayMain1:TRUE
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Amount$ 1 | Produced$ Combo R G | PersistentMana$ True
+K:Nightbound
+DeckHints:Type$Wolf|Werewolf
+Oracle:Other Wolves and Werewolves you control get +1/+1.\nWhenever Lord of the Ulvenwald attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

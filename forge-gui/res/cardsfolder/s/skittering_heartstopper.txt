@@ -1,0 +1,6 @@
+Name:Skittering Heartstopper
+ManaCost:B
+Types:Creature Insect
+PT:1/2
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:{B}: Skittering Heartstopper gains deathtouch until end of turn.

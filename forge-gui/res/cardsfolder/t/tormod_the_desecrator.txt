@@ -1,0 +1,10 @@
+Name:Tormod, the Desecrator
+ManaCost:3 B
+Types:Legendary Creature Zombie Wizard
+PT:4/2
+K:Partner
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, create a tapped 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenTapped$ True
+DeckHas:Ability$Graveyard|Token
+DeckHints:Type$Zombie
+Oracle:Whenever one or more cards leave your graveyard, create a tapped 2/2 black Zombie creature token.\nPartner (You can have two commanders if both have partner.)

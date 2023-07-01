@@ -1,0 +1,5 @@
+Name:Molting Skin
+ManaCost:2 G
+Types:Enchantment
+A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
+Oracle:Return Molting Skin to its owner's hand: Regenerate target creature.

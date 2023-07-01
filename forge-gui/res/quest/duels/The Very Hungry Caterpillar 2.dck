@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar 2
+Title=The Very Hungry Caterpillar
+Difficulty=medium
+Description=UG Evolve deck with Bred for the Hunt
+Icon=The Very Hungry Caterpillar.jpg
+Deck Type=constructed
+[main]
+4 Simic Guildgate
+10 Island
+10 Forest
+2 Bred for the Hunt
+2 Adaptive Snapjaw
+2 Battering Krasis
+2 Cloudfin Raptor
+2 Clinging Anemones
+2 Crocanura
+2 Elusive Krasis
+2 Experiment One
+2 Fathom Mage
+2 Gyre Sage
+2 Renegade Krasis
+2 Shambleshark
+2 Vigean Hydropon
+2 Crowned Ceratok
+2 Sapphire Drake
+2 Cytoplast Root-Kin
+1 Jungle Barrier
+1 Merfolk of the Depths
+2 Unexpected Results
+[sideboard]

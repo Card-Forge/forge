@@ -1,0 +1,36 @@
+[quest]
+id=5005
+OpponentName=Dionysus
+AILife=30
+Repeat=true
+Wins=25
+Card Reward=3 rares;33% 1 white rare;33% Ajani Goldmane|LRW
+Credit Reward=200
+HumanExtras=
+AIExtras=Ajani Goldmane
+
+[metadata]
+Name=quest5005
+Title=Dionysus
+Difficulty=hard
+Description=You have vision of your destiny. It doesn't look good.
+Icon=Dionysus.jpg
+Deck Type=constructed
+
+[Main]
+3 Ajani Goldmane|LRW
+4 Burrenton Forge-Tender|LRW
+4 Cloudgoat Ranger|LRW
+4 Figure of Destiny|EVE
+4 Goldmeadow Stalwart|LRW
+17 Plains|LRW
+4 Rustic Clachan|MOR
+4 Spectral Procession|SHM
+4 Stillmoon Cavalier|EVE
+4 Unmake|EVE
+4 Windbrisk Heights|LRW
+4 Wizened Cenn|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

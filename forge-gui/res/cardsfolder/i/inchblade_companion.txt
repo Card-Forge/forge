@@ -1,0 +1,10 @@
+Name:Inchblade Companion
+ManaCost:W
+Types:Artifact Creature Equipment Insect
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigCopy | ActivationLimit$ 1 | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, create a token that's a copy of CARDNAME, except it doesn't have this ability. This ability triggers only once each turn.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1 | DoesntHaveThisAbility$ True
+K:Reconfigure:2
+DeckHas:Ability$Token
+Oracle:Equipped creature gets +1/+1.\nWhenever Inchblade Companion becomes attached to a creature, create a token that's a copy of Inchblade Companion, except it doesn't have this ability. This ability triggers only once each turn.\nReconfigure {2}

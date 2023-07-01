@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Sky Spirit
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=White-Blue control
+Deck Type=constructed
+Name=SkySpirit
+[Main]
+2 Capsize|TMP
+1 Ertai, Wizard Adept|EXO
+4 Island|TMP|1
+4 Island|TMP|2
+4 Island|TMP|4
+4 Legacy's Allure|TMP
+4 Mana Leak|STH
+2 Master Decoy|TMP
+3 Paladin en-Vec|EXO
+2 Reflecting Pool|TMP
+3 Plains|TMP|1
+4 Plains|TMP|2
+1 Plains|TMP|3
+2 Plains|TMP|4
+1 Power Sink|TMP
+4 Propaganda|TMP
+4 Sky Spirit|TMP
+3 Soltari Visionary|EXO
+2 Spirit Mirror|TMP
+2 Treasure Trove|EXO
+4 Winds of Rath|TMP

@@ -1,0 +1,8 @@
+Name:Archetype of Finality
+ManaCost:4 B B
+Types:Enchantment Creature Gorgon
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Deathtouch | Description$ Creatures you control have deathtouch.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Deathtouch | CantHaveKeyword$ Deathtouch | Description$ Creatures your opponents control lose deathtouch and can't have or gain deathtouch.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have deathtouch.\nCreatures your opponents control lose deathtouch and can't have or gain deathtouch.

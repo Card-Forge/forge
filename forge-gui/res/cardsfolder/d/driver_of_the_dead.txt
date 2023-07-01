@@ -1,0 +1,7 @@
+Name:Driver of the Dead
+ManaCost:3 B
+Types:Creature Vampire
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, return target creature with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 2 or less in your graveyard | ValidTgts$ Creature.cmcLE2 | TargetsWithDefinedController$ TriggeredCardController
+Oracle:When Driver of the Dead dies, return target creature card with mana value 2 or less from your graveyard to the battlefield.

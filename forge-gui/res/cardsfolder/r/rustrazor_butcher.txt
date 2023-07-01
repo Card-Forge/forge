@@ -1,0 +1,7 @@
+Name:Rustrazor Butcher
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:1/2
+K:First Strike
+K:Wither
+Oracle:First strike\nWither (This deals damage to creatures in the form of -1/-1 counters.)

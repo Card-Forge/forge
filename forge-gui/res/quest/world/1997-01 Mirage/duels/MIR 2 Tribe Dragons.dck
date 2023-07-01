@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Dragons
+Title=Dragons
+Difficulty=medium
+Description="If it can scar the sky with fire, do not share its destination." -Mwani, Mtenda herder
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Bad River|MIR
+3 Canopy Dragon|MIR
+3 Catacomb Dragon|MIR
+2 Charcoal Diamond|MIR
+3 Crimson Hellkite|MIR
+2 Fire Diamond|MIR
+3 Firestorm Hellkite|VIS
+1 Flood Plain|MIR
+2 Forest|MIR|2
+1 Grasslands|MIR
+3 Island|MIR|4
+2 Marble Diamond|MIR
+3 Mist Dragon|MIR
+2 Moss Diamond|MIR
+7 Mountain|MIR|3
+1 Mountain Valley|MIR
+3 Pearl Dragon|MIR
+2 Plains|MIR|3
+1 Rocky Tar Pit|MIR
+4 Sisay's Ring|VIS
+2 Sky Diamond|MIR
+2 Swamp|MIR|1
+4 Undiscovered Paradise|VIS
+3 Volcanic Dragon|MIR

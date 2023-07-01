@@ -1,0 +1,7 @@
+Name:Talisman of Hierarchy
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SubAbility$ DBPain | SpellDescription$ Add {W} or {B}. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add {W} or {B}. Talisman of Hierarchy deals 1 damage to you.

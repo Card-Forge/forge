@@ -1,0 +1,10 @@
+Name:Arden Angel
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigChooseNumber | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, choose a number from 1 to 4 at random. If the chosen number is 1, return CARDNAME from your graveyard to the battlefield.
+SVar:TrigChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 1 | Max$ 4 | Random$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$ChosenNumber
+Oracle:Flying\nAt the beginning of your upkeep, if Arden Angel is in your graveyard, choose a number from 1 to 4 at random. If the chosen number is 1, return Arden Angel from your graveyard to the battlefield.

@@ -1,0 +1,9 @@
+Name:Ma Chao, Western Warrior
+ManaCost:3 R R
+Types:Legendary Creature Human Soldier Warrior
+PT:3/3
+K:Horsemanship
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks alone, it can't be blocked this combat.
+SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | Duration$ UntilEndOfCombat
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this combat.
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Ma Chao, Western Warrior attacks alone, it can't be blocked this combat.

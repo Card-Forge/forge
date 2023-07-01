@@ -1,0 +1,10 @@
+Name:Zulaport Duelist
+ManaCost:U
+Types:Creature Human Rogue
+PT:1/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBPump | TriggerDescription$ When CARDNAME enters the battlefield, up to one target creature gets -2/-0 until end of turn. Its controller mills two cards.
+SVar:DBPump:DB$ Pump | NumAtt$ -2 | IsCurse$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ TargetedController
+DeckHas:Ability$Mill
+Oracle:Flash\nWhen Zulaport Duelist enters the battlefield, up to one target creature gets -2/-0 until end of turn. Its controller mills two cards. (They put the top two cards of their library into their graveyard.)

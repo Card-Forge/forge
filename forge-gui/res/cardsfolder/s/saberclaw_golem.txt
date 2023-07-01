@@ -1,0 +1,7 @@
+Name:Saberclaw Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:4/2
+A:AB$ Pump | Cost$ R | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
+DeckNeeds:Color$Red
+Oracle:{R}: Saberclaw Golem gains first strike until end of turn.

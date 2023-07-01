@@ -1,0 +1,7 @@
+Name:Wirewood Lodge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Untap | Cost$ G T | ValidTgts$ Elf | TgtPrompt$ Select target Elf | SpellDescription$ Untap target Elf.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{G}, {T}: Untap target Elf.

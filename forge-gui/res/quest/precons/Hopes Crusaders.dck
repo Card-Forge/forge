@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Hope's Crusaders
+Description=Nothing—not even an apocalypse—can keep a noble fighter down, and the "Hope's Crusaders" deck is proof of that. Lead your troops onto the battlefield and give them the one command they want to hear: "Charge!" This deck gives your opponent no good blocking options: Either your creatures will get through, or your opponent's blockers will be overmatched in combat.
+Deck Type=constructed
+Set=TSP
+Image=hopes_crusaders.jpg
+
+[Main]
+3 Benalish Cavalry|TSP
+2 Brass Gnat|TSP
+2 Cavalry Master|TSP
+1 Celestial Crusader|TSP
+1 Cloudchaser Kestrel|TSP
+2 D'Avenant Healer|TSP
+1 Divine Congregation|TSP
+2 Errant Doomsayers|TSP
+2 Foriysian Interceptor|TSP
+1 Fortify|TSP
+3 Gaze of Justice|TSP
+1 Gustcloak Cavalier|TSP
+1 Icatian Crier|TSP
+3 Icatian Javelineers|TSB
+1 Ivory Giant|TSP
+3 Knight of the Holy Nimbus|TSP
+2 Outrider en-Kor|TSP
+1 Pentarch Paladin|TSP
+23 Plains|LRW|1
+1 Sarpadian Empires, Vol. VII|TSP
+2 Thunder Totem|TSP
+2 Zhalfirin Commander|TSB
+[Sideboard]

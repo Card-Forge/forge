@@ -1,0 +1,6 @@
+Name:Neurok Spy
+ManaCost:2 U
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Artifact.DefenderCtrl | Description$ CARDNAME can't be blocked as long as defending player controls an artifact.
+Oracle:Neurok Spy can't be blocked as long as defending player controls an artifact.

@@ -1,0 +1,23 @@
+[metadata]
+Title=Fairytale: Sleeping Beauty
+Difficulty=easy
+Description="Okay, yeah. We're going to have to do the foot inspector thing."\n-Prince "Charming" Marcus, KittyUnpretty.com
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 Story: Fairytale: Sleeping Beauty
+[Main]
+4 Beloved Princess|ELD
+3 Charmed Sleep|ELD
+4 Charming Prince|ELD|1
+4 Fae of Wishes|ELD|2
+4 Faerie Guidemother|ELD|2
+3 Happily Ever After|ELD|1
+9 Island|ELD|3
+17 Plains|ELD|4
+4 Spinning Wheel|ELD
+4 Thornwood Falls|ELD
+4 True Love's Kiss|ELD
+[Sideboard]
+1 Charmed Sleep|ELD
+1 Happily Ever After|ELD|1
+4 Into the Story|ELD

@@ -1,0 +1,7 @@
+Name:Cloud Djinn
+ManaCost:5 U
+Types:Creature Djinn
+PT:5/4
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nCloud Djinn can block only creatures with flying.

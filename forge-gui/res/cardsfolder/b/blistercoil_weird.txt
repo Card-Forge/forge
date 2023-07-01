@@ -1,0 +1,10 @@
+Name:Blistercoil Weird
+ManaCost:UR
+Types:Creature Weird
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a instant or sorcery spell, CARDNAME gets +1/+1 until end of turn. Untap it.
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.

@@ -1,0 +1,8 @@
+Name:High Tide
+ManaCost:U
+Types:Instant
+A:SP$ Effect | Triggers$ IslandTrigger | SpellDescription$ Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.
+SVar:IslandTrigger:Mode$ TapsForMana | ValidCard$ Island | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a player taps an Island for mana, that player adds an additional {U}.
+SVar:TrigMana:DB$ Mana | Produced$ U | Amount$ 1 | Defined$ TriggeredActivator
+AI:RemoveDeck:All
+Oracle:Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.

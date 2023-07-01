@@ -1,0 +1,10 @@
+Name:Stall for Time
+ManaCost:2 W
+Types:Instant
+K:Kicker:1 U
+A:SP$ Tap | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ DBCounter | SpellDescription$ Tap up to two target creatures. If this spell was kicked, put a stun counter on each of those creatures. (If a permanent with a stun counter on it would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Condition$ Kicked | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters
+DeckHints:Color$Blue
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nTap up to two target creatures. If this spell was kicked, put a stun counter on each of those creatures. (If a permanent with a stun counter on it would become untapped, remove one from it instead.)\nDraw a card.

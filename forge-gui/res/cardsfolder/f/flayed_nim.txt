@@ -1,0 +1,10 @@
+Name:Flayed Nim
+ManaCost:3 B
+Types:Creature Skeleton
+PT:2/2
+A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, that creature's controller loses that much life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTargetController | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Flayed Nim deals combat damage to a creature, that creature's controller loses that much life.\n{2}{B}: Regenerate Flayed Nim.

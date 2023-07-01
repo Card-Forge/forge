@@ -1,0 +1,7 @@
+Name:Hivestone
+ManaCost:2
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ Sliver | Description$ Creatures you control are Slivers in addition to their other creature types.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Creatures you control are Slivers in addition to their other creature types.

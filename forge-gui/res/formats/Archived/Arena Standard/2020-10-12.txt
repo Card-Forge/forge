@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (2020-10-12)
+Type:Archived
+Subtype:Standard
+Effective:2020-10-12
+Sets:ANA, PANA, ELD, THB, IKO, M21, ANB, ZNR
+Banned:Cauldron Familiar; Escape to the Wilds; Fires of Invention; Lucky Clover; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Uro, Titan of Nature's Wrath

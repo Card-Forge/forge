@@ -1,0 +1,4 @@
+Name:Tundra
+ManaCost:no cost
+Types:Land Plains Island
+Oracle:({T}: Add {W} or {U}.)

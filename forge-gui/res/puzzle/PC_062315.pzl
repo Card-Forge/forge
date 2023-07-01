@@ -1,0 +1,20 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 062315 - Darker Than Black
+URL:http://www.gatheringmagic.com/seanuy-062315-darker-than-black/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win on this turn. Opponent has Sprinting Warbrute in hand.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=2
+AILife=6
+humanhand=Dismal Backwater|Set:FRF; Evolving Wilds|Set:DTK; Despise|Set:KTK; Grave Strength|Set:FRF; Rite of Undoing|Set:FRF; Set Adrift|Set:KTK
+humanbattlefield=Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Qarsi Sadist|Set:DTK; Heart-Piercer Bow|Set:KTK; Illusory Gains|Set:DTK|AttachedTo:420
+humangraveyard=Douse in Gloom|Set:FRF; Treasure Cruise|Set:KTK
+humanlibrary=
+aihand=Sprinting Warbrute|Set:DTK
+aibattlefield=Swamp|Set:DTK|Tapped; Swamp|Set:DTK|Tapped; Swamp|Set:DTK|Tapped; Mountain|Set:DTK; Mountain|Set:DTK|Tapped; Mountain|Set:DTK|Tapped; Mountain|Set:DTK|Tapped; Pitiless Horde|Set:DTK|Id:420; Ruthless Ripper|Set:KTK; Sultai Emissary|Set:FRF; Kheru Bloodsucker|Set:KTK; Merciless Executioner|Set:FRF; Sultai Scavenger|Set:KTK
+aigraveyard=
+ailibrary=

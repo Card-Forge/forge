@@ -1,0 +1,7 @@
+Name:Soltari Priest
+ManaCost:W W
+Types:Creature Soltari Cleric
+PT:2/1
+K:Protection from red
+K:Shadow
+Oracle:Protection from red\nShadow (This creature can block or be blocked by only creatures with shadow.)

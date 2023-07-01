@@ -1,0 +1,7 @@
+Name:Onslaught
+ManaCost:R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell, tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:BuffedBy:Creature
+Oracle:Whenever you cast a creature spell, tap target creature.

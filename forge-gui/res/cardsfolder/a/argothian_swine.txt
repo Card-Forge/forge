@@ -1,0 +1,6 @@
+Name:Argothian Swine
+ManaCost:3 G
+Types:Creature Boar
+PT:3/3
+K:Trample
+Oracle:Trample

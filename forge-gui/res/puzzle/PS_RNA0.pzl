@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #00 (Card Preview)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/rdr03rf.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Start at the beginning of your first main phase, and win this turn. Assume any cards you could draw are irrelevant to the puzzle.
+[state]
+humanlife=20
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Macabre Mockery;Guttersnipe;Severed Strands;Captivating Crew
+humanbattlefield=Rowdy Crew|Counters:P1P1=2;Rowdy Crew|Counters:P1P1=2;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Mountain;Mountain
+humanlibrary=Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza;Gateway Plaza
+aigraveyard=Warkite Marauder;Hostage Taker;Ravenous Chupacabra;Exclusion Mage
+aibattlefield=Whisper Agent;Whisper Agent;Cold-Water Snapper;Dire Fleet Poisoner;Narcomoeba

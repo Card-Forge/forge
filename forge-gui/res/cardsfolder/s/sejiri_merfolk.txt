@@ -1,0 +1,8 @@
+Name:Sejiri Merfolk
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike & Lifelink | IsPresent$ Plains.YouCtrl | Description$ As long as you control a Plains, CARDNAME has first strike and lifelink.
+SVar:BuffedBy:Plains
+DeckHints:Color$White
+Oracle:As long as you control a Plains, Sejiri Merfolk has first strike and lifelink. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

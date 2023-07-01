@@ -1,0 +1,5 @@
+Name:Catacomb Crocodile
+ManaCost:4 B
+Types:Creature Crocodile
+PT:3/7
+Oracle:

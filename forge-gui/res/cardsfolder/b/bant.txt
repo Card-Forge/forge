@@ -1,0 +1,10 @@
+Name:Bant
+ManaCost:no cost
+Types:Plane Alara
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Exalted | Description$ All creatures have exalted.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, put a divinity counter on target green, white, or blue creature. That creature has indestructible for as long as it has a divinity counter on it.
+SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.Green,Creature.White,Creature.Blue | CounterType$ DIVINITY | CounterNum$ 1 | SubAbility$ DivineCharacter
+SVar:DivineCharacter:DB$ Animate | Defined$ Targeted | staticAbilities$ IndestructibleAspect | Duration$ Permanent
+SVar:IndestructibleAspect:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible
+SVar:AIRollPlanarDieParams:Mode$ Always | HasColorCreatureInPlay$ GWU
+Oracle:All creatures have exalted. (Whenever a creature attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents its controller controls.)\nWhenever chaos ensues, put a divinity counter on target green, white, or blue creature. That creature has indestructible for as long as it has a divinity counter on it.

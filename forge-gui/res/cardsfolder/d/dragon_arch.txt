@@ -1,0 +1,6 @@
+Name:Dragon Arch
+ManaCost:5
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.MultiColor | ChangeNum$ 1 | SpellDescription$ You may put a multicolored creature card from your hand onto the battlefield.
+AI:RemoveDeck:Random
+Oracle:{2}, {T}: You may put a multicolored creature card from your hand onto the battlefield.

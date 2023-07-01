@@ -1,0 +1,21 @@
+Name:Avacynian Missionaries
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+equipped | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if CARDNAME is equipped, transform it.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:EquipMe:Once
+DeckHints:Type$Equipment
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
+
+ALTERNATE
+
+Name:Lunarch Inquisitors
+ManaCost:no cost
+Colors:white
+Types:Creature Human Cleric
+PT:4/4
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When this creature transforms into CARDNAME, you may exile another target creature until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Duration$ UntilHostLeavesPlay
+Oracle:When this creature transforms into Lunarch Inquisitors, you may exile another target creature until Lunarch Inquisitors leaves the battlefield.

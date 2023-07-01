@@ -1,0 +1,9 @@
+Name:Ahn-Crop Champion
+ManaCost:2 G W
+Types:Creature Human Warrior
+PT:4/4
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigUntapAll | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, untap all other creatures you control.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl+StrictlyOther | SpellDescription$ When you do, untap all other creatures you control.
+SVar:AIExertCondition:NumCreats GE3
+SVar:NumCreats:Count$Valid Creature.YouCtrl+tapped
+Oracle:You may exert Ahn-Crop Champion as it attacks. When you do, untap all other creatures you control. (An exerted creature won't untap during your next untap step.)

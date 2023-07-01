@@ -1,0 +1,7 @@
+Name:Shielded Passage
+ManaCost:W
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to that creature this turn.
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt to target creature this turn.

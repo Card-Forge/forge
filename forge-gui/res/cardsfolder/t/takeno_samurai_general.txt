@@ -1,0 +1,10 @@
+Name:Takeno, Samurai General
+ManaCost:5 W
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Bushido:2
+S:Mode$ Continuous | Affected$ Creature.Samurai+Other+YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
+SVar:AffectedX:Count$TotalValue Bushido
+SVar:PlayMain1:TRUE
+DeckHints:Type$Samurai
+Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\nEach other Samurai creature you control gets +1/+1 for each point of bushido it has.

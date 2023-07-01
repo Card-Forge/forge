@@ -1,0 +1,9 @@
+Name:Halsin, Emerald Archdruid
+ManaCost:3 G
+Types:Legendary Creature Elf Druid
+PT:2/4
+A:AB$ Animate | Cost$ 1 | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Bear | SpellDescription$ Until end of turn, target token you control becomes a green Bear creature with base power and toughness 4/4 in addition to its other types and colors.
+K:Choose a Background
+DeckNeeds:Ability$Token
+DeckHas:Type$Bear
+Oracle:{1}: Until end of turn, target token you control becomes a green Bear creature with base power and toughness 4/4 in addition to its other types and colors.\nChoose a Background (You can have a Background as a second commander.)

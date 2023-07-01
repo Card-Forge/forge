@@ -1,0 +1,9 @@
+Name:Avacyn, Angel of Hope
+ManaCost:5 W W W
+Types:Legendary Creature Angel
+PT:8/8
+K:Flying
+K:Vigilance
+K:Indestructible
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other permanents you control have indestructible.
+Oracle:Flying, vigilance, indestructible\nOther permanents you control have indestructible.

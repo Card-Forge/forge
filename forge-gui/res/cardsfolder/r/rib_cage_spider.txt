@@ -1,0 +1,6 @@
+Name:Rib Cage Spider
+ManaCost:2 G
+Types:Creature Spider
+PT:1/4
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

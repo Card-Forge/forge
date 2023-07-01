@@ -1,0 +1,6 @@
+Name:Stone Spirit
+ManaCost:4 R
+Types:Creature Elemental Spirit
+PT:4/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
+Oracle:Stone Spirit can't be blocked by creatures with flying.

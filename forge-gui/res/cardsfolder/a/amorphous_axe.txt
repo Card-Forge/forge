@@ -1,0 +1,6 @@
+Name:Amorphous Axe
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddAllCreatureTypes$ True | Description$ Equipped creature gets +3/+0 and is every creature type.
+K:Equip:3
+Oracle:Equipped creature gets +3/+0 and is every creature type.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

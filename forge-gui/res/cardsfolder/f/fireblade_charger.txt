@@ -1,0 +1,11 @@
+Name:Fireblade Charger
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Haste | Description$ As long as CARDNAME is equipped, it has haste.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals damage equal to its power to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:TriggeredCard$CardPower
+SVar:EquipMe:Once
+DeckHints:Type$Equipment
+Oracle:As long as Fireblade Charger is equipped, it has haste.\nWhen Fireblade Charger dies, it deals damage equal to its power to any target.

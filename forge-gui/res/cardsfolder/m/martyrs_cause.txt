@@ -1,0 +1,11 @@
+Name:Martyr's Cause
+ManaCost:2 W
+Types:Enchantment
+A:AB$ ChooseSource | Cost$ Sac<1/Creature> | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to any target this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | ExileOnMoved$ Battlefield | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the target, prevent that damage.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:Sacrifice a creature: The next time a source of your choice would deal damage to any target this turn, prevent that damage.

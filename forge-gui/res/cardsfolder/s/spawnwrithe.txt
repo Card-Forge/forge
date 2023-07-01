@@ -1,0 +1,8 @@
+Name:Spawnwrithe
+ManaCost:2 G
+Types:Creature Elemental
+PT:2/2
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a token that's a copy of CARDNAME.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
+Oracle:Trample\nWhenever Spawnwrithe deals combat damage to a player, create a token that's a copy of Spawnwrithe.

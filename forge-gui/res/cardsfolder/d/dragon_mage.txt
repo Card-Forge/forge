@@ -1,0 +1,9 @@
+Name:Dragon Mage
+ManaCost:5 R R
+Types:Creature Dragon Wizard
+PT:5/5
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscardDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player discards their hand, then draws seven cards.
+SVar:TrigDiscardDraw:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
+Oracle:Flying\nWhenever Dragon Mage deals combat damage to a player, each player discards their hand, then draws seven cards.

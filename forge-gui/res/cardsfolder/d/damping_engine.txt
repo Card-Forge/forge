@@ -1,0 +1,9 @@
+Name:Damping Engine
+ManaCost:4
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player.withMostPermanentInPlay | AddStaticAbility$ STCantPlayLand & STCantCast | IgnoreEffectCost$ Sac<1/Permanent> | Description$ A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. That player may sacrifice a permanent for that player to ignore this effect until end of turn.
+SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ You | Description$ You can't play land cards.
+SVar:STCantCast:Mode$ CantBeCast | ValidCard$ Artifact,Creature,Enchantment | Caster$ You | EffectZone$ Command | Description$ You can't cast artifact, creature, or enchantment spells.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. That player may sacrifice a permanent for that player to ignore this effect until end of turn.

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 15: Feral Ferocity
+Title=Feral Ferocity
+Difficulty=easy
+Description=A rhino rarely uses its horn to announce its charge, only to end it.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Anaconda|POR|2
+4 Bull Hippo|POR
+4 Charging Rhino|POR
+3 Forest|POR|1
+6 Forest|POR|2
+8 Forest|POR|3
+7 Forest|POR|4
+4 Giant Spider|POR
+4 Gorilla Warrior|POR
+4 Grizzly Bears|POR
+4 Jungle Lion|POR
+4 Monstrous Growth|POR|2
+4 Untamed Wilds|POR

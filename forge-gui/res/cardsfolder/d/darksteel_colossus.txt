@@ -1,0 +1,8 @@
+Name:Darksteel Colossus
+ManaCost:11
+Types:Artifact Creature Golem
+PT:11/11
+K:Trample
+K:Indestructible
+K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+Oracle:Trample, indestructible\nIf Darksteel Colossus would be put into a graveyard from anywhere, reveal Darksteel Colossus and shuffle it into its owner's library instead.

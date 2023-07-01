@@ -1,0 +1,9 @@
+Name:Primal Vigor
+ManaCost:4 G
+Types:Enchantment
+R:Event$ CreateToken | ActiveZones$ Battlefield | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ DoubleCounters | Description$ If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:If one or more tokens would be created, twice that many of those tokens are created instead.\nIf one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.

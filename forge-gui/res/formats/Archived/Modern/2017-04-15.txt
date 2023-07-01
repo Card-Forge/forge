@@ -1,0 +1,7 @@
+[format]
+Name:Modern (W17)
+Type:Archived
+Subtype:Modern
+Effective:2017-04-15
+Sets:8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, DPA, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, MMA, M14, THS, BNG, JOU, MD1, M15, KTK, FRF, DTK, MM2, ORI, BFZ, OGW, SOI, W16, EMN, KLD, AER, MM3, W17
+Banned:Ancient Den; Birthing Pod; Blazing Shoal; Bloodbraid Elf; Chrome Mox; Cloudpost; Dark Depths; Deathrite Shaman; Dig Through Time; Dread Return; Eye of Ugin; Gitaxian Probe; Glimpse of Nature; Golgari Grave-Troll; Great Furnace; Green Sun's Zenith; Hypergenesis; Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Punishing Fire; Rite of Flame; Seat of the Synod; Second Sunrise; Seething Song; Sensei's Divining Top; Skullclamp; Splinter Twin; Stoneforge Mystic; Summer Bloom; Treasure Cruise; Tree of Tales; Umezawa's Jitte; Vault of Whispers

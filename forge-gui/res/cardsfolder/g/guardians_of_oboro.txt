@@ -1,0 +1,8 @@
+Name:Guardians of Oboro
+ManaCost:2 U
+Types:Creature Moonfolk Samurai
+PT:3/4
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Creature.YouCtrl+modified | Description$ Modified creatures you control can attack as though they didn't have defender.
+DeckHints:Type$Aura|Equipment & Ability$Counters & Keyword$Defender
+Oracle:Defender\nModified creatures you control can attack as though they didn't have defender. (Equipment, Auras you control, and counters are modifications.)

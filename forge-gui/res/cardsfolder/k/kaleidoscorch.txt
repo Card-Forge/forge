@@ -1,0 +1,7 @@
+Name:Kaleidoscorch
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Any | SpellDescription$ Converge — CARDNAME deals X damage to any target, where X is the number of colors of mana spent to cast this spell.
+SVar:X:Count$Converge
+K:Flashback:4 R
+Oracle:Converge — Kaleidoscorch deals X damage to any target, where X is the number of colors of mana spent to cast this spell.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,0 +1,10 @@
+Name:Raving Visionary
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ Draw | Cost$ U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+A:AB$ Draw | Cost$ 2 U T | NumCards$ 1 | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ Draw a card. Activate only if there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:{U}, {T}: Draw a card, then discard a card.\nDelirium — {2}{U}, {T}: Draw a card. Activate only if there are four or more card types among cards in your graveyard.

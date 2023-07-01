@@ -1,0 +1,9 @@
+Name:Flaying Tendrils
+ManaCost:1 B B
+Types:Sorcery
+K:Devoid
+A:SP$ PumpAll | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ All creatures get -2/-2 until end of turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ DeathRep | SpellDescription$ If a creature would die this turn, exile it instead.
+SVar:DeathRep:Event$ Moved | ValidLKI$ Creature | Origin$ Battlefield | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If a creature would die this turn, exile it instead.
+SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+Oracle:Devoid (This card has no color.)\nAll creatures get -2/-2 until end of turn. If a creature would die this turn, exile it instead.

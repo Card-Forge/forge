@@ -1,0 +1,8 @@
+Name:Kessig Flamebreather
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Whenever you cast a noncreature spell, Kessig Flamebreather deals 1 damage to each opponent.

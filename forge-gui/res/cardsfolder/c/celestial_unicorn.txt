@@ -1,0 +1,9 @@
+Name:Celestial Unicorn
+ManaCost:2 W
+Types:Creature Unicorn
+PT:3/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Whenever you gain life, put a +1/+1 counter on Celestial Unicorn.

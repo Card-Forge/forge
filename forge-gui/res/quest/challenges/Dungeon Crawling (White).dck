@@ -1,0 +1,55 @@
+[quest]
+id=1
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 white rares
+Credit Reward=100
+HumanExtras=
+AIExtras=Divine Presence
+[metadata]
+Name=quest1
+Title=Dungeon Crawling (White)
+Difficulty=medium
+Description=This realm is guarded by a divine entity laying his protecting hand on each living being.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+24 Plains|M12
+1 Abbey Gargoyles
+1 Archon of Redemption
+1 Border Guard
+1 Cho-Arrim Bruiser
+1 Commander Eesha
+1 Daru Lancer
+1 Femeref Scouts
+1 Foot Soldiers
+1 Fountain Watch
+1 Harvest Gwyllion
+1 Hearthfire Hobgoblin
+1 Herald of Serra
+1 Hero of Bladehold
+1 Linvala, Keeper of Silence
+1 Makindi Griffin
+1 Mirran Crusader
+1 Peregrine Griffin
+1 Spiritual Guardian
+1 Standing Troops
+1 Starlit Angel
+1 Staunch Defenders
+1 Teroh's Faithful
+1 Warrior Angel
+1 Wilt-Leaf Cavaliers
+1 Zealots en-Dal
+1 Beckon Apparition
+1 Blessed Reversal
+1 Chastise
+1 Condemn
+1 Disempower
+1 Excommunicate
+1 Last Breath
+1 Narrow Escape
+1 Rebuff the Wicked
+1 Retribution of the Meek
+1 Sunlance
+[sideboard]

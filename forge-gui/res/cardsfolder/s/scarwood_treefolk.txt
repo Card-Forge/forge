@@ -1,0 +1,6 @@
+Name:Scarwood Treefolk
+ManaCost:3 G
+Types:Creature Treefolk
+PT:3/5
+K:CARDNAME enters the battlefield tapped.
+Oracle:Scarwood Treefolk enters the battlefield tapped.

@@ -1,0 +1,6 @@
+Name:Gilt-Leaf Seer
+ManaCost:2 G
+Types:Creature Elf Shaman
+PT:2/2
+A:AB$ RearrangeTopOfLibrary | Cost$ G T | Defined$ You | NumCards$ 2 | SpellDescription$ Look at the top two cards of your library, then put them back in any order.
+Oracle:{G}, {T}: Look at the top two cards of your library, then put them back in any order.

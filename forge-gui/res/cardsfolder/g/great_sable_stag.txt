@@ -1,0 +1,8 @@
+Name:Great Sable Stag
+ManaCost:1 G G
+Types:Creature Elk
+PT:3/3
+K:Protection from blue
+K:Protection from black
+K:This spell can't be countered.
+Oracle:This spell can't be countered.\nProtection from blue and from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything blue or black.)

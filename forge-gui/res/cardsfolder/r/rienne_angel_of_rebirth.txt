@@ -1,0 +1,11 @@
+Name:Rienne, Angel of Rebirth
+ManaCost:2 R G W
+Types:Legendary Creature Angel
+PT:5/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl | AddPower$ 1 | Description$ Other multicolored creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.MultiColor+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ DelayedTrig | TriggerDescription$ Whenever another multicolored creature you control dies, return it to its owner's hand at the beginning of the next end step.
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Return it to its owner's hand at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Hand
+Oracle:Flying\nOther multicolored creatures you control get +1/+0.\nWhenever another multicolored creature you control dies, return it to its owner's hand at the beginning of the next end step.

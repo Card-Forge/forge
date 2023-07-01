@@ -1,0 +1,13 @@
+Name:Phyrexian Splicer
+ManaCost:2
+Types:Artifact
+A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Keywords$ Flying | SubAbility$ DBGainFly | SpellDescription$ Target creature loses flying until end of turn and another target creature gains it until end of turn.
+A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withFirst Strike | TgtPrompt$ Select target creature with first strike | Keywords$ First Strike | SubAbility$ DBGainFs | SpellDescription$ Target creature loses first strike until end of turn and another target creature gains it until end of turn.
+A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withShadow | TgtPrompt$ Select target creature with shadow | Keywords$ Shadow | SubAbility$ DBGainShdw | SpellDescription$ Target creature loses shadow until end of turn and another target creature gains it until end of turn.
+A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withTrample | TgtPrompt$ Select target creature with trample | Keywords$ Trample | SubAbility$ DBGainTrpl | SpellDescription$ Target creature loses trample until end of turn and another target creature gains it until end of turn.
+SVar:DBGainFly:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain flying | KW$ Flying | TargetUnique$ True
+SVar:DBGainFs:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain first strike | KW$ First Strike | TargetUnique$ True
+SVar:DBGainShdw:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain shadow | KW$ Shadow | TargetUnique$ True
+SVar:DBGainTrpl:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain trample | KW$ Trample | TargetUnique$ True
+AI:RemoveDeck:All
+Oracle:{2}, {T}, Choose flying, first strike, trample, or shadow: Until end of turn, target creature with the chosen ability loses it and another target creature gains it.

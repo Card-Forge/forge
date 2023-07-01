@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Gimli 2
+Title=Gimli
+Difficulty=medium
+Description=WB Indestructible permanents deck with mass removal
+Icon=Gimli.jpg
+Deck Type=constructed
+[main]
+5 Swamp|M12
+5 Plains|M12
+4 Isolated Chapel
+4 Scoured Barrens
+4 Darksteel Citadel
+3 Darksteel Ingot
+1 Darksteel Myr
+1 Darksteel Relic
+2 Darksteel Axe
+3 Darksteel Gargoyle
+2 Darksteel Sentinel
+2 Darksteel Juggernaut
+1 Stuffy Doll
+2 Phylactery Lich
+1 Konda, Lord of Eiganjo
+1 Sapling of Colfenor
+4 Wrath of God
+4 Damnation
+4 Day of Judgment
+4 Planar Cleansing
+3 Akroma's Vengeance
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Balthor the Defiled
+ManaCost:2 B B
+Types:Legendary Creature Zombie Dwarf
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Minion | AddPower$ 1 | AddToughness$ 1 | Description$ Minion creatures get +1/+1.
+A:AB$ ChangeZoneAll | Cost$ B B B Exile<1/CARDNAME> | ChangeType$ Creature.Black,Creature.Red | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Each player returns all black and all red creature cards from their graveyard to the battlefield.
+AI:RemoveDeck:All
+Oracle:Minion creatures get +1/+1.\n{B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from their graveyard to the battlefield.

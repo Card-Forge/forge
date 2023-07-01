@@ -1,0 +1,9 @@
+Name:Willbender
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/2
+K:Morph:1 U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, change the target of target spell or ability with a single target.
+SVar:TrigChange:DB$ ChangeTargets | TargetType$ SpellAbility.singleTarget | ValidTgts$ Card,Emblem | TgtPrompt$ Select target spell or ability with a single target
+AI:RemoveDeck:All
+Oracle:Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Willbender is turned face up, change the target of target spell or ability with a single target.

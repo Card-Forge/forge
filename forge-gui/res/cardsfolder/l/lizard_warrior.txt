@@ -1,0 +1,5 @@
+Name:Lizard Warrior
+ManaCost:3 R
+Types:Creature Lizard Warrior
+PT:4/2
+Oracle:

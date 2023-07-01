@@ -1,0 +1,10 @@
+Name:Vivid Grove
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two charge counters on it.
+SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Counters
+Oracle:Vivid Grove enters the battlefield tapped with two charge counters on it.\n{T}: Add {G}.\n{T}, Remove a charge counter from Vivid Grove: Add one mana of any color.

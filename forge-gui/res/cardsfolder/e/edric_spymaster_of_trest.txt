@@ -1,0 +1,8 @@
+Name:Edric, Spymaster of Trest
+ManaCost:1 G U
+Types:Legendary Creature Elf Rogue
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ TriggeredSourceController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredSourceController
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.

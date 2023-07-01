@@ -1,0 +1,7 @@
+Name:Viridian Revel
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.OppOwn | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.

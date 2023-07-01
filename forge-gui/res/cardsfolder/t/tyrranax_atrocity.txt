@@ -1,0 +1,7 @@
+Name:Tyrranax Atrocity
+ManaCost:3 G G
+Types:Creature Phyrexian Dinosaur
+PT:4/4
+K:Haste
+K:Toxic:3
+Oracle:Haste\nToxic 3 (Players dealt combat damage by this creature also get three poison counters.)

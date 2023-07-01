@@ -1,0 +1,7 @@
+Name:Gnawing Zombie
+ManaCost:1 B
+Types:Creature Zombie
+PT:1/3
+A:AB$ LoseLife | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:{1}{B}, Sacrifice a creature: Target player loses 1 life and you gain 1 life.

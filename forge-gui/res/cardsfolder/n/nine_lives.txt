@@ -1,0 +1,12 @@
+Name:Nine Lives
+ManaCost:1 W W
+Types:Enchantment
+K:Hexproof
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ You | PreventionEffect$ True | ReplaceWith$ AddCounters | AlwaysReplace$ True | ExecuteMode$ PerSource | Description$ If a source would deal damage to you, prevent that damage and put an incarnation counter on CARDNAME.
+SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterType$ INCARNATION | CounterNum$ 1
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE9_INCARNATION | Execute$ TrigExile | TriggerDescription$ When there are nine or more incarnation counters on CARDNAME, exile it.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
+SVar:TrigLose:DB$ LosesGame | Defined$ You
+SVar:DonateMe:3
+Oracle:Hexproof\nIf a source would deal damage to you, prevent that damage and put an incarnation counter on Nine Lives.\nWhen there are nine or more incarnation counters on Nine Lives, exile it.\nWhen Nine Lives leaves the battlefield, you lose the game.

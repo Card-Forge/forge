@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Theme: The Fates
+Title=The Fates
+Difficulty=easy
+Description="And so what was fated has come to pass."\n-Chorus of the Triad
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Agent of the Fates|THS
+4 Divine Verdict|THS
+4 Excoriate|BNG
+4 Fate Unraveler|BNG
+4 Fated Retribution|BNG
+4 Fated Return|BNG
+4 Last Breath|THS
+4 Pain Seer|BNG
+11 Plains|THS|2
+13 Swamp|THS|1
+4 Triad of Fates|THS

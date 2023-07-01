@@ -1,0 +1,9 @@
+Name:Valiant Knight
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/4
+S:Mode$ Continuous | Affected$ Knight.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Knights you control get +1/+1.
+A:AB$ PumpAll | Cost$ 3 W W | ValidCards$ Knight.YouCtrl | KW$ Double Strike | SpellDescription$ Knights you control gain double strike until end of turn.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Knight
+Oracle:Other Knights you control get +1/+1.\n{3}{W}{W}: Knights you control gain double strike until end of turn.

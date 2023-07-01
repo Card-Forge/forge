@@ -1,0 +1,38 @@
+[metadata]
+Name=Dracur 3
+Title=Dracur
+Icon=Dracur.jpg
+Difficulty=hard
+Description=BRU hand & land destruction and burn.
+Deck Type=constructed
+[main]
+4 Badlands|LEB
+4 Bayou|LEB
+1 Black Lotus|LEB
+2 Desert Twister|4ED
+2 Dingus Egg|LEB
+2 Disintegrate|4ED
+2 Disrupting Scepter|LEB
+2 Earthquake|4ED
+2 Fireball|4ED
+3 Fissure|DRK
+2 Forest|4ED
+2 Vaevictis Asmadi|LEG
+4 Hypnotic Specter|4ED
+3 Ice Storm|LEB
+2 Lightning Bolt|4ED
+1 Mind Twist|LEB
+2 Mountain|4ED
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Ruby|LEB
+2 Rag Man|DRK
+2 Sinkhole|LEB
+1 Stone Rain|4ED
+2 Strip Mine|ATQ
+2 Swamp|4ED
+4 Taiga|LEB
+1 Tranquility|4ED
+4 Untamed Wilds|LEG
+2 Wall of Dust|LEG
+[sideboard]

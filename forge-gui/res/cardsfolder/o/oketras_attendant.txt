@@ -1,0 +1,9 @@
+Name:Oketra's Attendant
+ManaCost:3 W W
+Types:Creature Bird Soldier
+PT:3/3
+K:Flying
+K:Cycling:2
+K:Embalm:3 W W
+DeckHas:Ability$Token
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)\nEmbalm {3}{W}{W} ({3}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Bird Soldier with no mana cost. Embalm only as a sorcery.)

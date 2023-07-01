@@ -1,0 +1,23 @@
+Name:Elbrus, the Binding Blade
+ManaCost:7
+Types:Legendary Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.\nEquip {1}
+
+ALTERNATE
+
+Name:Withengar Unbound
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Demon
+PT:13/13
+K:Flying
+K:Trample
+K:Intimidate
+T:Mode$ LosesGame | Execute$ TrigCounter | TriggerDescription$ Whenever a player loses the game, put thirteen +1/+1 counters on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 13
+Oracle:Flying, intimidate, trample (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.

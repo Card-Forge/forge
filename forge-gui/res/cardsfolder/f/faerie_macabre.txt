@@ -1,0 +1,7 @@
+Name:Faerie Macabre
+ManaCost:1 B B
+Types:Creature Faerie Rogue
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target cards in graveyards | ValidTgts$ Card | SpellDescription$ Exile up to two target cards from graveyards.
+Oracle:Flying\nDiscard Faerie Macabre: Exile up to two target cards from graveyards.

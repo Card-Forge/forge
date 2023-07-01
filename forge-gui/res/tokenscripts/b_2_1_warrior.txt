@@ -1,0 +1,6 @@
+Name:Warrior Token
+ManaCost:no cost
+Types:Creature Warrior
+Colors:black
+PT:2/1
+Oracle:

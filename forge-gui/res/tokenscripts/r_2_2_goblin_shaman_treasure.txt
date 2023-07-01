@@ -1,0 +1,9 @@
+Name:Goblin Shaman Token
+ManaCost:no cost
+Types:Creature Goblin Shaman
+Colors:red
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature attacks, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, create a Treasure token.

@@ -1,0 +1,8 @@
+Name:Killian, Ink Duelist
+ManaCost:W B
+Types:Legendary Creature Human Warlock
+PT:2/2
+K:Lifelink
+K:Menace
+S:Mode$ ReduceCost | ValidTarget$ Card.Creature | Activator$ You | Type$ Spell | Amount$ 2 | Description$ Spells you cast that target a creature cost {2} less to cast.
+Oracle:Lifelink\nMenace (This creature can't be blocked except by two or more creatures.)\nSpells you cast that target a creature cost {2} less to cast.

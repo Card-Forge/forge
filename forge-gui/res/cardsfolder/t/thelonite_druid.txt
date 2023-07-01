@@ -1,0 +1,8 @@
+Name:Thelonite Druid
+ManaCost:2 G
+Types:Creature Human Cleric Druid
+PT:1/1
+A:AB$ AnimateAll | Cost$ 1 G T Sac<1/Creature> | ValidCards$ Forest.YouCtrl | Types$ Creature | Power$ 2 | Toughness$ 3 | SpellDescription$ Forests you control become 2/3 creatures until end of turn. They're still lands.
+SVar:AIPreference:SacCost$Creature.token
+AI:RemoveDeck:Random
+Oracle:{1}{G}, {T}, Sacrifice a creature: Forests you control become 2/3 creatures until end of turn. They're still lands.

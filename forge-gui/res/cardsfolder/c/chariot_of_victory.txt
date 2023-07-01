@@ -1,0 +1,6 @@
+Name:Chariot of Victory
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike & Trample & Haste | Description$ Equipped creature has first strike, trample, and haste.
+Oracle:Equipped creature has first strike, trample, and haste.\nEquip {1}

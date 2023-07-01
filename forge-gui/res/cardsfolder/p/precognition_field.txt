@@ -1,0 +1,7 @@
+Name:Precognition Field
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl+nonLand,Sorcery.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast instant and sorcery spells from the top of your library.
+A:AB$ Dig | Cost$ 3 | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Exile the top card of your library.
+Oracle:You may look at the top card of your library any time.\nYou may cast instant and sorcery spells from the top of your library.\n{3}: Exile the top card of your library.

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Hailstorm Valkyrie
+OpponentName=The Valkyries
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Great Hall of Starnheim|Snowfield Sinkhole
+HumanExtras=
+[metadata]
+Title=Hailstorm Valkyrie
+Difficulty=medium
+Description=When the path to Starnheim was opened, vengeance rained down upon the enemies of Bretagard.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Hailstorm Valkyrie
+[Main]
+30 Hailstorm Valkyrie|KHM|1
+30 Snow-Covered Swamp|KHM|1

@@ -1,0 +1,6 @@
+Name:Wilt-Leaf Cavaliers
+ManaCost:GW GW GW
+Types:Creature Elf Knight
+PT:3/4
+K:Vigilance
+Oracle:Vigilance

@@ -1,0 +1,10 @@
+Name:Hard Cover
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddAbility$ ABDraw | AddSVar$ HardCoverDiscard | Description$ Enchanted creature gets +0/+2 and has "{T}: Draw a card, then discard a card.
+SVar:ABDraw:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ HardCoverDiscard
+SVar:HardCoverDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:All
+Oracle:Enchant creature\nEnchanted creature gets +0/+2 and has "{T}: Draw a card, then discard a card."

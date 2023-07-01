@@ -1,0 +1,9 @@
+Name:Experiments in Magic|Deck:Experiments in Magic.dck|Variant:None|Avatar:Laboratory Maniac|Desc:
+Name:Wake the Dead|Deck:Wake the Dead.dck|Variant:None|Avatar:Unbreathing Horde|Desc:
+Name:Dark Powers at Work|Deck:Dark Powers at Work.dck|Variant:None|Avatar:Demonlord of Ashmouth|Desc:
+Name:Grimgrin's Shambling Friends|Deck:Grimgrin's Shambling Friends.dck|Variant:Commander|Avatar:Grimgrin, Corpse-Born|Desc:
+Name:Mikaeus, the Unhallowed|Deck:Mikaeus, the Unhallowed.dck|Variant:Commander|Avatar:Mikaeus, the Unhallowed|Desc:
+Name:Emrakul, the Promised End|Deck:Emrakul, the Promised End.dck|Variant:Commander|Avatar:Emrakul, the Promised End|Desc:
+Name:Jeleva, Nephalia's Scourge|Deck:Jeleva, Nephalia's Scourge.dck|Variant:Commander|Avatar:Jeleva, Nephalia's Scourge|Desc:
+Name:Blood Bonds|Deck:Blood Bonds.dck|Variant:Vanguard|Avatar:Vampire Nocturnus|Desc:
+Name:Nothing Without Sacrifice|Deck:Nothing Without Sacrifice.dck|Variant:Planeswalker|Avatar:Liliana of the Veil|Desc:

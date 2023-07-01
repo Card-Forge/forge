@@ -1,0 +1,8 @@
+Name:Volo, Guide to Monsters
+ManaCost:2 G U
+Types:Legendary Creature Human Wizard
+PT:3/2
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.Creature+!sharesCreatureTypeWith Valid Creature.YouCtrl+!sharesCreatureTypeWith ValidGraveyard Creature.YouOwn | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a creature spell that doesn't share a creature type with a creature you control or a creature card in your graveyard, copy that spell. (A copy of a creature spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+DeckHas:Ability$Token
+Oracle:Whenever you cast a creature spell that doesn't share a creature type with a creature you control or a creature card in your graveyard, copy that spell. (A copy of a creature spell becomes a token.)

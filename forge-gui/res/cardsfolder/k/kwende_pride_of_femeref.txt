@@ -1,0 +1,9 @@
+Name:Kwende, Pride of Femeref
+ManaCost:3 W
+Types:Legendary Creature Human Knight
+PT:2/2
+K:Double Strike
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withFirst Strike | AddKeyword$ Double Strike | Description$ Creatures you control with first strike have double strike.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Double strike\nCreatures you control with first strike have double strike.

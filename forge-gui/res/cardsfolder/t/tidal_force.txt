@@ -1,0 +1,7 @@
+Name:Tidal Force
+ManaCost:5 U U U
+Types:Creature Elemental
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTapOrUntap | TriggerDescription$ At the beginning of each upkeep, you may tap or untap target permanent.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+Oracle:At the beginning of each upkeep, you may tap or untap target permanent.

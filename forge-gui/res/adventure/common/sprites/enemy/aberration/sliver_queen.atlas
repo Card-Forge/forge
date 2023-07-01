@@ -1,0 +1,44 @@
+sliver_queen.png
+size: 256,208
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 16
+  size: 64, 64      
+Idle 
+  xy: 64, 16
+  size: 64, 64 
+Idle 
+  xy: 128, 16
+  size: 64, 64 
+Idle 
+  xy: 192, 16
+  size: 64, 64      
+Attack 
+  xy: 0, 80
+  size: 64, 64      
+Attack 
+  xy: 64, 80
+  size: 64, 64 
+Attack 
+  xy: 128, 80
+  size: 64, 64 
+Attack 
+  xy: 192, 80
+  size: 64, 64
+Death 
+  xy: 0, 144
+  size: 64, 64      
+Death 
+  xy: 64, 144
+  size: 64, 64 
+Death 
+  xy: 128, 144
+  size: 64, 64 
+Death 
+  xy: 192, 144
+  size: 64, 64 

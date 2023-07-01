@@ -1,0 +1,7 @@
+Name:Ancient Spider
+ManaCost:2 G W
+Types:Creature Spider
+PT:2/5
+K:First Strike
+K:Reach
+Oracle:First strike; reach (This creature can block creatures with flying.)

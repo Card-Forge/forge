@@ -1,0 +1,11 @@
+Name:Gale, Waterdeep Prodigy
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourHandByYou | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCastSorcery | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
+SVar:TrigCastSorcery:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Sorcery.YouOwn | ValidSA$ Spell | TgtPrompt$ Select up to one target sorcery card | TargetMin$ 0 | TargetMax$ 1 | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+T:Mode$ SpellCast | ValidCard$ Sorcery.wasCastFromYourHandByYou | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCastInstant | Secondary$ True | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
+SVar:TrigCastInstant:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouOwn | ValidSA$ Spell | TgtPrompt$ Select up to one target instant card | TargetMin$ 0 | TargetMax$ 1 | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+K:Choose a Background
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell from your hand, you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.\nChoose a Background (You can have a Background as a second commander.)

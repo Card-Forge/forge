@@ -1,0 +1,7 @@
+Name:Bonesplitter Sliver
+ManaCost:3 R
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 2 | Description$ All Sliver creatures get +2/+0.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +2/+0.

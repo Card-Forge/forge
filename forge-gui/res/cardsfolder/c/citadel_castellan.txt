@@ -1,0 +1,8 @@
+Name:Citadel Castellan
+ManaCost:1 G W
+Types:Creature Human Knight
+PT:2/3
+K:Vigilance
+K:Renown:2
+DeckHas:Ability$Counters
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nRenown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)

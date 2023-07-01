@@ -1,0 +1,6 @@
+Name:Kraul Stinger
+ManaCost:2 G
+Types:Creature Insect Assassin
+PT:2/2
+K:Deathtouch
+Oracle:Deathtouch

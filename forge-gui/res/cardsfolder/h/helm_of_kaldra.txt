@@ -1,0 +1,16 @@
+Name:Helm of Kaldra
+ManaCost:3
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike & Trample & Haste | Description$ Equipped creature has first strike, trample, and haste.
+A:AB$ Token | Cost$ 1 | TokenScript$ kaldra | SubAbility$ DBAttachEach | RememberTokens$ True | ConditionCheckSVar$ AllThree | ConditionSVarCompare$ EQ3 | AILogic$ Never | StackDescription$ {p:You} creates Kaldra, a legendary 4/4 colorless Avatar creature token. | SpellDescription$ If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it.
+SVar:DBAttachEach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Equipment.YouCtrl+namedHelm of Kaldra,Equipment.YouCtrl+namedSword of Kaldra,Equipment.YouCtrl+namedShield of Kaldra | ConditionDefined$ Remembered | ConditionPresent$ Card | RepeatSubAbility$ DBAttach | SubAbility$ DBCleanup | StackDescription$ {p:You} attaches Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra to it.
+SVar:DBAttach:DB$ Attach | Object$ Imprinted | Defined$ Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AllThree:SVar$Sum/Plus.Shield
+SVar:Helm:Count$Valid Equipment.YouCtrl+namedHelm of Kaldra/LimitMax.1
+SVar:Sword:Count$Valid Equipment.YouCtrl+namedSword of Kaldra/LimitMax.1
+SVar:Shield:Count$Valid Equipment.YouCtrl+namedShield of Kaldra/LimitMax.1
+SVar:Sum:SVar$Helm/Plus.Sword
+DeckHints:Name$Sword of Kaldra|Shield of Kaldra
+Oracle:Equipped creature has first strike, trample, and haste.\n{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it.\nEquip {2}

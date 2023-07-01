@@ -1,0 +1,8 @@
+Name:Mistford River Turtle
+ManaCost:3 U
+Types:Creature Turtle
+PT:1/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking non-Human creature can't be blocked this turn.
+SVar:TrigPump:DB$ Effect | ValidTgts$ Creature.nonHuman+Other+attacking | TgtPrompt$ Select another target attacking non-Human creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Whenever Mistford River Turtle attacks, another target attacking non-Human creature can't be blocked this turn.

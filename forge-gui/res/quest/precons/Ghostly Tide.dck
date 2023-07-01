@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ghostly Tide
+Description=As fog rolls in to blanket the coast, the spirits of the dead swoop into battle. Relentless as the tide, your ghostly creatures are full of surprises. They'll appear out of nowhere, washing over your opponent in an inexorable advance.
+Deck Type=constructed
+Set=SOI
+Image=ghostly_tide.jpg
+[Main]
+1 Rattlechains|SOI
+2 Seagraf Skaab|SOI
+2 Dauntless Cathar|SOI
+2 Spectral Shepherd|SOI
+2 Niblis of Dusk|SOI
+1 Reckless Scholar|SOI
+2 Apothecary Geist|SOI
+2 Nearheath Chaplain|SOI
+1 Silent Observer|SOI
+2 Emissary of the Sleepless|SOI
+2 Stormrider Spirit|SOI
+1 Drogskol Cavalry+|SOI
+1 Chaplain's Blessing|SOI
+2 Not Forgotten|SOI
+1 Pore Over the Pages|SOI
+1 Essence Flux|SOI
+2 Puncturing Light|SOI
+1 Silverstrike|SOI
+1 Catalog|SOI
+1 Deny Existence|SOI
+2 Vessel of Ephemera|SOI
+2 Bound by Moonsilver|SOI
+1 Sleep Paralysis|SOI
+13 Plains|SOI
+12 Island|SOI
+[Sideboard]
+

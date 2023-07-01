@@ -1,0 +1,9 @@
+Name:Mana Skimmer
+ManaCost:3 B
+Types:Creature Leech
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TapTarget | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, tap target land that player controls. That land doesn't untap during its controller's next untap step.
+SVar:TapTarget:DB$ Tap | ValidTgts$ Land | TargetsWithDefinedController$ TriggeredTarget | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+Oracle:Flying\nWhenever Mana Skimmer deals damage to a player, tap target land that player controls. That land doesn't untap during its controller's next untap step.

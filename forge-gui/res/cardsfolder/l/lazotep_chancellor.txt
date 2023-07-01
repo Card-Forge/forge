@@ -1,0 +1,9 @@
+Name:Lazotep Chancellor
+ManaCost:U B
+Types:Creature Zombie Wizard
+PT:1/3
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAmass | TriggerDescription$ Whenever you discard a card, you may pay {1}. If you do, amass zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+SVar:TrigAmass:AB$ Amass | Cost$ 1 | Type$ Zombie | Num$ 2
+DeckHints:Ability$Amass|Discard & Type$Zombie
+DeckHas:Ability$Amass|Counters|Token
+Oracle:Whenever you discard a card, you may pay {1}. If you do, amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

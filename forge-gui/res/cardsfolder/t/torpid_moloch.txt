@@ -1,0 +1,8 @@
+Name:Torpid Moloch
+ManaCost:R
+Types:Creature Lizard
+PT:3/2
+K:Defender
+A:AB$ Debuff | Cost$ Sac<3/Land> | Keywords$ Defender | SpellDescription$ CARDNAME loses defender until end of turn.
+AI:RemoveDeck:All
+Oracle:Defender (This creature can't attack.)\nSacrifice three lands: Torpid Moloch loses defender until end of turn.

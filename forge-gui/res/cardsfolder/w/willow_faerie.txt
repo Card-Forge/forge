@@ -1,0 +1,6 @@
+Name:Willow Faerie
+ManaCost:1 G
+Types:Creature Faerie
+PT:1/2
+K:Flying
+Oracle:Flying

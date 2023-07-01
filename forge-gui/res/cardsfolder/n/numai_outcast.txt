@@ -1,0 +1,8 @@
+Name:Numai Outcast
+ManaCost:3 B
+Types:Creature Human Samurai
+PT:1/1
+K:Bushido:2
+A:AB$ Regenerate | Cost$ B PayLife<5> | SpellDescription$ Regenerate CARDNAME.
+AI:RemoveDeck:Random
+Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{B}, Pay 5 life: Regenerate Numai Outcast.

@@ -1,0 +1,9 @@
+Name:Izzet Chemister
+ManaCost:2 R
+Types:Creature Goblin Wizard
+PT:1/3
+K:Haste
+A:AB$ ChangeZone | Cost$ R T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery card in your graveyard | SpellDescription$ Exile target instant or sorcery card from your graveyard.
+A:AB$ Play | Cost$ 1 R T Sac<1/CARDNAME> | Valid$ Instant.ExiledWithSource,Sorcery.ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True | SpellDescription$ Cast any number of cards exiled with CARDNAME without paying their mana costs.
+AI:RemoveDeck:All
+Oracle:Haste\n{R}, {T}: Exile target instant or sorcery card from your graveyard.\n{1}{R}, {T}, Sacrifice Izzet Chemister: Cast any number of cards exiled with Izzet Chemister without paying their mana costs.

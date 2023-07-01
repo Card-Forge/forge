@@ -1,0 +1,7 @@
+Name:Shefet Dunes
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ PumpAll | Cost$ 2 W W T Sac<1/Desert> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SorcerySpeed$ True | SpellDescription$ Creatures you control get +1/+1 until end of turn. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {W}.\n{2}{W}{W}, {T}, Sacrifice a Desert: Creatures you control get +1/+1 until end of turn. Activate only as a sorcery.

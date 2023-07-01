@@ -1,0 +1,6 @@
+Name:Alabaster Mage
+ManaCost:1 W
+Types:Creature Human Wizard
+PT:2/1
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Lifelink | SpellDescription$ Target creature you control gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
+Oracle:{1}{W}: Target creature you control gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)

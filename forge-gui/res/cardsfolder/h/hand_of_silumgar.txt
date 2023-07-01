@@ -1,0 +1,6 @@
+Name:Hand of Silumgar
+ManaCost:1 B
+Types:Creature Human Warrior
+PT:2/1
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

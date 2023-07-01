@@ -1,0 +1,15 @@
+[metadata]
+Code=P08
+Date=2008-01-01
+Name=Magic Player Rewards 2008
+Type=Promo
+ScryfallCode=P08
+
+[cards]
+1 R Damnation @Ron Spencer
+2 R Tidings @Michael Komarck
+3 R Incinerate @Zoltan Boros & Gabor Szikszai
+4 R Mana Tithe @Donato Giancola
+5 R Harmonize @Vance Kovacs
+6 R Ponder @Steve Argyle
+7 R Corrupt @Philip Straub

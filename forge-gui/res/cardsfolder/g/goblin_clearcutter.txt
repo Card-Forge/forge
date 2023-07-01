@@ -1,0 +1,7 @@
+Name:Goblin Clearcutter
+ManaCost:3 R
+Types:Creature Goblin
+PT:3/3
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ Combo R G | Amount$ 3 | SpellDescription$ Add three mana in any combination of {R} and/or {G}.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.

@@ -1,0 +1,10 @@
+Name:Vraska the Unseen
+ManaCost:3 B G
+Types:Legendary Planeswalker Vraska
+Loyalty:5
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Self | Triggers$ TrigVraska | Duration$ UntilYourNextTurn | AILogic$ EOT | SpellDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature. | StackDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
+SVar:TrigVraska:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ VraskaGaze | TriggerDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
+SVar:VraskaGaze:DB$ Destroy | Defined$ TriggeredSourceLKICopy
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+A:AB$ Token | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ 3 | TokenScript$ b_1_1_assassin_lose_con | TokenOwner$ You | SpellDescription$ Create three 1/1 black Assassin creature tokens with "Whenever this creature deals combat damage to a player, that player loses the game."
+Oracle:[+1]: Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.\n[-3]: Destroy target nonland permanent.\n[-7]: Create three 1/1 black Assassin creature tokens with "Whenever this creature deals combat damage to a player, that player loses the game."

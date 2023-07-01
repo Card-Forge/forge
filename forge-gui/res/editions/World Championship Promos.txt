@@ -1,0 +1,10 @@
+[metadata]
+Code=PWOR
+Date=1999-08-04
+Name=World Championship Promos
+Type=Promo
+ScryfallCode=PWOR
+
+[cards]
+1 R Balduvian Horde @Brian Snõddy
+2019 M Crucible of Worlds @Ralph Horsley

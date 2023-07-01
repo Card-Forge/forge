@@ -1,0 +1,22 @@
+[quest]
+id=KHM Challenge: Priest of the Haunted Edge
+OpponentName=The Priests
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Priest of the Haunted Edge
+Difficulty=medium
+Description="We come from the land of the ice and snow\nFrom the midnight sun where the hot springs flow"\n--Led Zeppelin, Immigrant Song
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Priest of the Haunted Edge
+[Main]
+20 Priest of the Haunted Edge|KHM|1
+10 Raise the Draugr|KHM|1
+10 Rally the Ranks|KHM|2
+20 Snowfield Sinkhole|KHM|1

@@ -1,0 +1,6 @@
+Name:Prowling Nightstalker
+ManaCost:3 B
+Types:Creature Nightstalker
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonBlack | Description$ CARDNAME can't be blocked except by black creatures.
+Oracle:Prowling Nightstalker can't be blocked except by black creatures.

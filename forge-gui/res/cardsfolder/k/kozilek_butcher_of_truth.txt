@@ -1,0 +1,10 @@
+Name:Kozilek, Butcher of Truth
+ManaCost:10
+Types:Legendary Creature Eldrazi
+PT:12/12
+K:Annihilator:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
+SVar:TrigShuffle:DB$ ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, draw four cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 4
+Oracle:When you cast this spell, draw four cards.\nAnnihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)\nWhen Kozilek, Butcher of Truth is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.

@@ -1,0 +1,48 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Jeskai Monks
+Description=The Jeskai use their cunning and their knowledge of mystical arts to defeat their foes. Your monks will blast the other clans with a flurry of combat moves they will never see coming.
+Deck Type=constructed
+Set=KTK
+Image=jeskai_monks.jpg
+[Main]
+2 Mystic Monastery|KTK
+1 Swiftwater Cliffs|KTK
+1 Tranquil Cove|KTK
+1 Wind-scarred Crag|KTK
+8 Island|KTK
+6 Mountain|KTK
+7 Plains|KTK
+1 Monastery Swiftspear|KTK
+2 Jeskai Elder|KTK
+1 Leaping Master|KTK
+1 Jeskai Student|KTK
+2 Seeker Of The Way|KTK
+2 Jeskai Windscout|KTK
+2 Bloodfire Expert|KTK
+1 Bloodfire Mentor|KTK
+1 Alabaster Kirin|KTK
+1 Highspire Mantis|KTK
+1 Whirlwind Adept|KTK
+1 Tireless Missionaries|M15
+1 Serra Angel|M15
+1 Sage Of The Inward Eye+|KTK
+1 Warden Of The Eye|KTK
+1 Riverwheel Aerialists|KTK
+1 Void Snare|M15
+1 Oppressive Rays|M15
+1 Lightning Strike|M15
+2 Jeskai Banner|KTK
+1 Crippling Chill|KTK
+1 Divination|M15
+1 Solemn Offering|M15
+1 Winterflame|KTK
+1 Jeskai Charm|KTK
+1 Weave Fate|KTK
+1 Smite The Monstrous|KTK
+1 Lava Axe|M15
+1 Flying Crane Technique|KTK

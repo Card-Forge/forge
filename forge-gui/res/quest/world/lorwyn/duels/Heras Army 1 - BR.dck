@@ -1,0 +1,37 @@
+[duel]
+
+[metadata]
+Name=Hera's Army 1
+Title=Hera
+Icon=Hera.jpg
+Difficulty=easy
+Description=[B/R] Preconstructed
+Deck Type=constructed
+
+[main]
+12  Mountain|SHM
+12  Swamp|SHM
+
+2  Ashenmoor Cohort|SHM
+3  Ashenmoor Gouger|SHM
+1  Ashenmoor Liege|SHM
+2  Blistering Dieflyn|SHM
+3  Cinderbones|SHM
+2  Emberstrike Duo|SHM
+2  Kulrath Knight|SHM
+2  Mudbrawler Cohort|SHM
+2  Murderous Redcap|SHM
+2  Rattleblaze Scarecrow|SHM
+
+3  Blowfly Infestation|SHM
+1  Din of the Fireherd|SHM
+2  Fists of the Demigod|SHM
+2  Puncture Bolt|SHM
+3  Scar|SHM
+1  Smash to Smithereens|SHM
+2  Torrent of Souls|SHM
+1  Wild Swing|SHM
+
+[sideboard]
+[planes]
+[schemes]

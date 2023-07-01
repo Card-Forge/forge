@@ -1,0 +1,4 @@
+Name:Tropical Island
+ManaCost:no cost
+Types:Land Forest Island
+Oracle:({T}: Add {G} or {U}.)

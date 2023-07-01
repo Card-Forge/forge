@@ -1,0 +1,6 @@
+Name:Border Patrol
+ManaCost:4 W
+Types:Creature Human Nomad
+PT:1/6
+K:Vigilance
+Oracle:Vigilance

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Simic2013 1
+Title=Simic 2013
+Icon=Simic-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+2 Adaptive Snapjaw|GTC
+2 Cloudfin Raptor|GTC
+4 Crocanura|GTC
+1 Crowned Ceratok|GTC
+2 Drakewing Krasis|GTC
+1 Elusive Krasis|GTC
+3 Agoraphobia|GTC
+1 Fathom Mage|GTC
+2 Forced Adaptation|GTC
+12 Forest|RTR
+1 Frilled Oculus|GTC
+1 Hindervines|GTC
+13 Island|RTR
+1 Ivy Lane Denizen|GTC
+4 Kraken Hatchling|M13
+1 Leyline Phantom|GTC
+1 Merfolk of the Depths|GTC
+1 Sapphire Drake|GTC
+2 Shambleshark|GTC
+1 Simic Guildgate|GTC
+2 Simic Keyrune|GTC
+1 Sleep|M13
+2 Unexpected Results|GTC
+1 Urban Evolution|GTC
+1 Zameck Guildmage|GTC
+[sideboard]
+[planes]
+[schemes]

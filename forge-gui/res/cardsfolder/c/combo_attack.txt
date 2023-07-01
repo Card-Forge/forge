@@ -1,0 +1,6 @@
+Name:Combo Attack
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YourTeamCtrl | TgtPrompt$ Select two target creatures your team controls | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBEachDamage | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Two target creatures your team controls
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | StackDescription$ REP target creature_{c:ThisTargetedCard} | SpellDescription$ each deal damage equal to their power to target creature.
+Oracle:Two target creatures your team controls each deal damage equal to their power to target creature.

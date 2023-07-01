@@ -1,0 +1,10 @@
+Name:Protection Racket
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, repeat the following process for each opponent in turn order. Reveal the top card of your library. That player may pay life equal to that card's mana value. If they do, exile that card. Otherwise, put it into your hand.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBReveal
+SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ 1 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | UnlessCost$ PayLife<X> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | Origin$ Library | Destination$ Exile | ForgetChanged$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ForgetChanged$ True
+SVar:X:Remembered$CardManaCost
+Oracle:At the beginning of your upkeep, repeat the following process for each opponent in turn order. Reveal the top card of your library. That player may pay life equal to that card's mana value. If they do, exile that card. Otherwise, put it into your hand.

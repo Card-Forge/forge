@@ -1,0 +1,7 @@
+Name:Hum of the Radix
+ManaCost:2 G G
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Artifact | Activator$ Player | Type$ Spell | Amount$ X | Relative$ True | Description$ Each artifact spell costs {1} more to cast for each artifact its controller controls.
+SVar:X:Count$Valid Artifact.YouCtrl
+AI:RemoveDeck:Random
+Oracle:Each artifact spell costs {1} more to cast for each artifact its controller controls.

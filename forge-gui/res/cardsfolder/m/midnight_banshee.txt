@@ -1,0 +1,9 @@
+Name:Midnight Banshee
+ManaCost:3 B B B
+Types:Creature Spirit
+PT:5/5
+K:Wither
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.nonBlack | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
+AI:RemoveDeck:Random
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nAt the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.

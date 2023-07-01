@@ -1,0 +1,7 @@
+Name:Evernight Shade
+ManaCost:3 B
+Types:Creature Shade
+PT:1/1
+K:Undying
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:{B}: Evernight Shade gets +1/+1 until end of turn.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

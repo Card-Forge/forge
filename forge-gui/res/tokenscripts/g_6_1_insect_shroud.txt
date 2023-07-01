@@ -1,0 +1,7 @@
+Name:Insect Token
+ManaCost:no cost
+Colors:green
+Types:Creature Insect
+PT:6/1
+K:Shroud
+Oracle:Shroud (It can't be the target of spells or abilities.)

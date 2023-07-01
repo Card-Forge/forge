@@ -1,0 +1,8 @@
+Name:Valor Singer
+ManaCost:2 R
+Types:Creature Tiefling Bard
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1
+SVar:PlayMain1:TRUE
+Oracle:Combat Inspiration — At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn.

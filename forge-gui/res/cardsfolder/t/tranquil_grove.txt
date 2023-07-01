@@ -1,0 +1,7 @@
+Name:Tranquil Grove
+ManaCost:1 G
+Types:Enchantment
+A:AB$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.StrictlyOther | SpellDescription$ Destroy all other enchantments.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:{1}{G}{G}: Destroy all other enchantments.

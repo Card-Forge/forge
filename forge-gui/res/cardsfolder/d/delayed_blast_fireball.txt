@@ -1,0 +1,7 @@
+Name:Delayed Blast Fireball
+ManaCost:1 R R
+Types:Instant
+A:SP$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control. | SpellDescription$ CARDNAME deals 2 damage to each opponent and each creature they control. If this spell was cast from exile, it deals 5 damage to each opponent and each creature they control instead.
+K:Foretell:4 R R
+SVar:X:Count$wasCastFromExile.5.2
+Oracle:Delayed Blast Fireball deals 2 damage to each opponent and each creature they control. If this spell was cast from exile, it deals 5 damage to each opponent and each creature they control instead.\nForetell {4}{R}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,0 +1,9 @@
+Name:Mistform Warchief
+ManaCost:2 U
+Types:Creature Illusion
+PT:1/3
+S:Mode$ ReduceCost | ValidCard$ Creature.sharesCreatureTypeWith | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells you cast that share a creature type with CARDNAME cost {1} less to cast.
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
+AI:RemoveDeck:All
+Oracle:Creature spells you cast that share a creature type with Mistform Warchief cost {1} less to cast.\n{T}: Mistform Warchief becomes the creature type of your choice until end of turn.

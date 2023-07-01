@@ -1,0 +1,6 @@
+Name:Satyr Rambler
+ManaCost:1 R
+Types:Creature Satyr
+PT:2/1
+K:Trample
+Oracle:Trample

@@ -1,0 +1,8 @@
+Name:Distorted Curiosity
+ManaCost:2 U
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE3 | Description$ Corrupted — This spell costs {2} less to cast if an opponent has three or more poison counters.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHints:Keyword$Toxic|Infect
+Oracle:Corrupted — This spell costs {2} less to cast if an opponent has three or more poison counters.\nDraw two cards.

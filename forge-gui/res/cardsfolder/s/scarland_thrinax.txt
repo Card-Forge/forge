@@ -1,0 +1,6 @@
+Name:Scarland Thrinax
+ManaCost:B R G
+Types:Creature Lizard
+PT:2/2
+A:AB$ PutCounter | Cost$ Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.

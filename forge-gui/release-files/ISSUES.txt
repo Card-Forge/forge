@@ -1,0 +1,3 @@
+Known issues are here: https://git.cardforge.org/core-developers/forge/issues
+
+Feel free to report your own there if you have any.

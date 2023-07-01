@@ -1,0 +1,9 @@
+Name:Monk of the Open Hand
+ManaCost:W
+Types:Creature Elf Monk
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry of Blows — Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Flurry of Blows — Whenever you cast your second spell each turn, put a +1/+1 counter on Monk of the Open Hand.

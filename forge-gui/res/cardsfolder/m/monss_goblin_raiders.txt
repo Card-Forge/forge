@@ -1,0 +1,5 @@
+Name:Mons's Goblin Raiders
+ManaCost:R
+Types:Creature Goblin
+PT:1/1
+Oracle:

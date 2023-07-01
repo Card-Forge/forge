@@ -1,0 +1,7 @@
+Name:Drakewing Krasis
+ManaCost:1 G U
+Types:Creature Lizard Drake
+PT:3/1
+K:Flying
+K:Trample
+Oracle:Flying, trample

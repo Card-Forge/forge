@@ -1,0 +1,9 @@
+Name:Sokenzan Smelter
+ManaCost:1 R
+Types:Creature Goblin Artificer
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, you may pay {1} and sacrifice an artifact. If you do, create a 3/1 red Construct artifact creature token with haste.
+SVar:TrigToken:AB$ Token | Cost$ 1 Sac<1/Artifact/an artifact> | TokenScript$ r_3_1_a_construct_haste
+DeckHints:Type$Artifact
+DeckHas:Ability$Token & Type$Construct
+Oracle:At the beginning of combat on your turn, you may pay {1} and sacrifice an artifact. If you do, create a 3/1 red Construct artifact creature token with haste.

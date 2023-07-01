@@ -1,0 +1,7 @@
+Name:Auriok Edgewright
+ManaCost:W W
+Types:Creature Human Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME has double strike as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+Oracle:Metalcraft — Auriok Edgewright has double strike as long as you control three or more artifacts.

@@ -1,0 +1,12 @@
+Name:Rilsa Rael, Kingpin
+ManaCost:3 U B
+Types:Legendary Creature Human Rogue
+PT:2/5
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature gains deathtouch until end of turn. If you've completed a dungeon, that creature also gets +5/+0 and gains first strike and menace until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Deathtouch | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ConditionCheckSVar$ X | NumAtt$ 5 | KW$ First Strike & Menace  | Defined$ Targeted
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:Deathtouch\nWhen Rilsa Rael, Kingpin enters the battlefield, you take the initiative.\nWhenever you attack, target attacking creature gains deathtouch until end of turn. If you've completed a dungeon, that creature also gets +5/+0 and gains first strike and menace until end of turn.

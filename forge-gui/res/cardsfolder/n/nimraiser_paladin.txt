@@ -1,0 +1,9 @@
+Name:Nimraiser Paladin
+ManaCost:4 B
+Types:Creature Phyrexian Knight
+PT:4/4
+K:Toxic:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target creature with mana value 3 or less from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl+cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less from your graveyard
+DeckHas:Ability$Graveyard
+Oracle:Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)\nWhen Nimraiser Paladin enters the battlefield, return target creature with mana value 3 or less from your graveyard to your hand.

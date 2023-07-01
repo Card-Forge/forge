@@ -1,0 +1,7 @@
+Name:Knight of Glory
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/1
+K:Exalted
+K:Protection from black
+Oracle:Protection from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

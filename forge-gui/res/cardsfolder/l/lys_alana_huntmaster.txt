@@ -1,0 +1,7 @@
+Name:Lys Alana Huntmaster
+ManaCost:2 G G
+Types:Creature Elf Warrior
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+Oracle:Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token.

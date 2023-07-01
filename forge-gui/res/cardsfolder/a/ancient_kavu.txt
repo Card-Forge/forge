@@ -1,0 +1,6 @@
+Name:Ancient Kavu
+ManaCost:3 R
+Types:Creature Kavu
+PT:3/3
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Colors$ Colorless | OverwriteColors$ True | SpellDescription$ CARDNAME becomes colorless until end of turn.
+Oracle:{2}: Ancient Kavu becomes colorless until end of turn.

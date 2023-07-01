@@ -1,0 +1,8 @@
+Name:Sulfur Elemental
+ManaCost:2 R
+Types:Creature Elemental
+PT:3/2
+K:Flash
+K:Split second
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ -1 | Description$ White creatures get +1/-1.
+Oracle:Flash\nSplit second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nWhite creatures get +1/-1.

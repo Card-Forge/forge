@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Tenga 3
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=hard
+Description=A monogreen Stompy deck.
+Deck Type=constructed
+[main]
+3 Armor of Thorns|MIR
+2 Aspect of Wolf|LEB
+3 Creeping Mold|VIS
+2 Desert Twister|ARN
+24 Forest|MIR
+4 Llanowar Elves|5ED
+3 Ghazban Ogre|ARN
+3 Giant Growth|5ED
+2 Hurricane|5ED
+3 River Boa|VIS
+2 Stampeding Wildebeests|VIS
+4 Uktabi Wildcats|MIR
+3 Whirling Dervish|5ED
+4 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

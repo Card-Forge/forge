@@ -1,0 +1,6 @@
+Name:Leashling
+ManaCost:6
+Types:Artifact Creature Dog
+PT:3/3
+A:AB$ ChangeZone | Cost$ PutCardToLibFromHand<1/0/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Put a card from your hand on top of your library: Return Leashling to its owner's hand.

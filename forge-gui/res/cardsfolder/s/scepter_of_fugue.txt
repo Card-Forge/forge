@@ -1,0 +1,5 @@
+Name:Scepter of Fugue
+ManaCost:B B
+Types:Artifact
+A:AB$ Discard | Cost$ 1 B T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate only during your turn.
+Oracle:{1}{B}, {T}: Target player discards a card. Activate only during your turn.

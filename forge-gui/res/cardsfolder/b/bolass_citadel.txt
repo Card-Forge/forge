@@ -1,0 +1,7 @@
+Name:Bolas's Citadel
+ManaCost:3 B B B
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ You may play lands and cast spells from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+A:AB$ LoseLife | Cost$ T Sac<10/Permanent.nonLand/nonland permanent> | Defined$ Player.Opponent | LifeAmount$ 10 | SpellDescription$ Each opponent loses 10 life.
+Oracle:You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.\n{T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.

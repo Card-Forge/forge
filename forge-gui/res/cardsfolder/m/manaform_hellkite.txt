@@ -1,0 +1,11 @@
+Name:Manaform Hellkite
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create an X/X red Dragon Illusion creature token with flying and haste, where X is the amount of mana spent to cast that spell. Exile that token at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_x_x_dragon_illusion_flying_haste | TokenPower$ X | TokenToughness$ X | AtEOT$ Exile
+SVar:X:TriggeredCard$CastTotalManaSpent
+SVar:BuffedBy:Card.nonLand+nonCreature
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever you cast a noncreature spell, create an X/X red Dragon Illusion creature token with flying and haste, where X is the amount of mana spent to cast that spell. Exile that token at the beginning of the next end step.

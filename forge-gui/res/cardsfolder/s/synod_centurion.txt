@@ -1,0 +1,8 @@
+Name:Synod Centurion
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/4
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Artifact.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no other artifacts, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Artifact.YouCtrl
+Oracle:When you control no other artifacts, sacrifice Synod Centurion.

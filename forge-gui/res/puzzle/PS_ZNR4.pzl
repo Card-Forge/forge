@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/11/160.-ZNR4-M-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent's Opportunistic Dragon is giving them control of your Thundering Chariot. Remember that your solution must satisfy all blocking scenarios.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Fight as One;Scorching Dragonfire;Skyclave Apparition;Daybreak Charger
+humanbattlefield=Thundering Chariot|Id:1;Lithoform Engine;Terror of the Peaks;Plains;Plains;Plains;Mountain;Mountain
+aibattlefield=Shambling Suit;Opportunistic Dragon|ExecuteScript:TrigGainControl->1

@@ -1,0 +1,8 @@
+Name:Spire Golem
+ManaCost:6
+Types:Artifact Creature Golem
+PT:2/4
+K:Affinity:Island
+K:Flying
+DeckNeeds:Color$Blue
+Oracle:Affinity for Islands (This spell costs {1} less to cast for each Island you control.)\nFlying

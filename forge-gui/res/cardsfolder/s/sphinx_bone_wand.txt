@@ -1,0 +1,9 @@
+Name:Sphinx-Bone Wand
+ManaCost:7
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may put a charge counter on CARDNAME. If you do, CARDNAME deals damage equal to the number of charge counters on it to any target.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$CardCounters.CHARGE
+SVar:BuffedBy:Instant,Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target.

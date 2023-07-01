@@ -1,0 +1,6 @@
+Name:Hitchclaw Recluse
+ManaCost:2 G
+Types:Creature Spider
+PT:1/4
+K:Reach
+Oracle:Reach

@@ -1,0 +1,9 @@
+Name:Soratami Mirror-Guard
+ManaCost:3 U
+Types:Creature Moonfolk Wizard
+PT:3/1
+K:Flying
+A:AB$ Effect | Cost$ 2 Return<1/Land> | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+AI:RemoveDeck:Random
+Oracle:Flying\n{2}, Return a land you control to its owner's hand: Target creature with power 2 or less can't be blocked this turn.

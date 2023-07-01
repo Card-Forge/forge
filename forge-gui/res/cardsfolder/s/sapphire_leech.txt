@@ -1,0 +1,7 @@
+Name:Sapphire Leech
+ManaCost:1 U
+Types:Creature Leech
+PT:2/2
+K:Flying
+S:Mode$ RaiseCost | ValidCard$ Card.Blue | Activator$ You | Type$ Spell | Cost$ U | Description$ Blue spells you cast cost {U} more to cast.
+Oracle:Flying\nBlue spells you cast cost {U} more to cast.

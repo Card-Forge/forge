@@ -1,0 +1,9 @@
+Name:Gonti, Lord of Luxury|Deck:Gonti, Lord of Luxury.dck|Variant:Commander|Avatar:Gonti, Lord of Luxury|Desc:
+Name:Kambal, Consul of Allocation|Deck:Kambal, Consul of Allocation.dck|Variant:Commander|Avatar:Kambal, Consul of Allocation|Desc:
+Name:Yahenni, Undying Partisan|Deck:Yahenni, Undying Partisan.dck|Variant:Commander|Avatar:Yahenni, Undying Partisan|Desc:
+Name:Tezzeret, Master of Metal|Deck:Tezzeret, Master of Metal.dck|Variant:Planeswalker|Avatar:Tezzeret, Master of Metal|Desc:
+Name:Aetherborn|Deck:Aetherborn.dck|Variant:None|Avatar:Midnight Entourage|Desc:
+Name:Gremlins|Deck:Gremlins.dck|Variant:None|Avatar:Gremlin Infestation|Desc:
+Name:Streets of Ghirapur|Deck:Streets of Ghirapur.dck|Variant:None|Avatar:Underhanded Designs|Desc:
+Name:Heralds of Anguish|Deck:Heralds of Anguish.dck|Variant:None|Avatar:Herald of Anguish|Desc:
+Name:Cycles|Deck:Cycles.dck|Variant:None|Avatar:Cataclysmic Gearhulk|Desc:

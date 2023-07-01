@@ -1,0 +1,5 @@
+Name:Shard Volley
+ManaCost:R
+Types:Instant
+A:SP$ DealDamage | Cost$ R Sac<1/Land> | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:As an additional cost to cast this spell, sacrifice a land.\nShard Volley deals 3 damage to any target.

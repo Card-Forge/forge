@@ -1,0 +1,8 @@
+Name:Atrocious Experiment
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player mills two cards, draws two cards, and loses 2 life.
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2
+DeckHas:Ability$Mill
+Oracle:Target player mills two cards, draws two cards, and loses 2 life. (To mill a card, a player puts the top card of their library into their graveyard.)

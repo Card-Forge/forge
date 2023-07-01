@@ -1,0 +1,7 @@
+Name:Shivan Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{R}: Shivan Dragon gets +1/+0 until end of turn.

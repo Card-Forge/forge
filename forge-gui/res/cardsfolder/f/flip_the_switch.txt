@@ -1,0 +1,7 @@
+Name:Flip the Switch
+ManaCost:2 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SubAbility$ DBToken | SpellDescription$ Counter target spell unless its controller pays {4}.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+DeckHas:Ability$Token|Sacrifice & Type$Zombie
+Oracle:Counter target spell unless its controller pays {4}. Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)

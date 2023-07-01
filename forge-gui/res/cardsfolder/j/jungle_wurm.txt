@@ -1,0 +1,8 @@
+Name:Jungle Wurm
+ManaCost:3 G G
+Types:Creature Wurm
+PT:5/5
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -X | NumDef$ -X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker/Minus.1
+Oracle:Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.

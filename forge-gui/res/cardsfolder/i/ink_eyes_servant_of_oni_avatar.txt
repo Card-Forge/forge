@@ -1,0 +1,9 @@
+Name:Ink-Eyes, Servant of Oni Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-3
+T:Mode$ NewGame | Execute$ TrigDiscard | TriggerZones$ Command | TriggerDescription$ At the beginning of the game, look at target opponent's hand and choose a nonland card from it. That player discards that card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | DiscardValid$ Card.nonLand
+A:AB$ ChangeZone | ActivationZone$ Command | Cost$ X PayLife<X> | ValidTgts$ Creature.OppOwn+cmcEQX | TgtPrompt$ Select target creature with mana value X from an opponent's graveyard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put target creature card with mana value X from an opponent's graveyard onto the battlefield under your control.
+SVar:X:Count$xPaid
+Oracle:Hand +0, life -3\nAt the beginning of the game, look at target opponent's hand and choose a nonland card from it. That player discards that card.\n{X}, Pay X life: Put target creature card with mana value X from an opponent's graveyard onto the battlefield under your control.

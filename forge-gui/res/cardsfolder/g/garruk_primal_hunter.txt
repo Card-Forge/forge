@@ -1,0 +1,10 @@
+Name:Garruk, Primal Hunter
+ManaCost:2 G G G
+Types:Legendary Planeswalker Garruk
+Loyalty:3
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ Y | TokenScript$ g_6_6_wurm | TokenOwner$ You | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:[+1]: Create a 3/3 green Beast creature token.\n[-3]: Draw cards equal to the greatest power among creatures you control.\n[-6]: Create a 6/6 green Wurm creature token for each land you control.

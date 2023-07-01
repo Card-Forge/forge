@@ -1,0 +1,8 @@
+Name:Salvage Scuttler
+ManaCost:4 U
+Types:Creature Crab
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, return an artifact you control to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Artifact.YouCtrl
+AI:RemoveDeck:Random
+Oracle:Whenever Salvage Scuttler attacks, return an artifact you control to its owner's hand.

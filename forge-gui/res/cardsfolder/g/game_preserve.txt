@@ -1,0 +1,10 @@
+Name:Game Preserve
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners'control.
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ GoToBattlefield
+SVar:GoToBattlefield:DB$ ChangeZoneAll | ChangeType$ Card.TopLibrary | Origin$ Library | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidLibrary Card.nonCreature+IsRemembered
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.

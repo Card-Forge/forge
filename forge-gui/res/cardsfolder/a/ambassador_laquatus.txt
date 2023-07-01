@@ -1,0 +1,6 @@
+Name:Ambassador Laquatus
+ManaCost:1 U U
+Types:Legendary Creature Merfolk Wizard
+PT:1/3
+A:AB$ Mill | Cost$ 3 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+Oracle:{3}: Target player mills three cards.

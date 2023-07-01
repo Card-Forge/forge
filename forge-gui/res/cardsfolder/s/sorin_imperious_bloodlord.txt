@@ -1,0 +1,16 @@
+Name:Sorin, Imperious Bloodlord
+ManaCost:2 B
+Types:Legendary Planeswalker Sorin
+Loyalty:4
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Deathtouch & Lifelink | SubAbility$ DBPutCounter | SpellDescription$ Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.Vampire | ConditionCompare$ GE1
+A:AB$ Sacrifice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | SacValid$ Vampire | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigPayCost | SpellDescription$ You may sacrifice a Vampire.
+SVar:TrigPayCost:DB$ ImmediateTrigger | Execute$ DBDmg | ConditionDefined$ RememberedLKI | ConditionPresent$ Creature | ConditionCompare$ GE1 | SpellDescription$ When you do, CARDNAME deals 3 damage to any target and you gain 3 life. | SubAbility$ DBCleanup
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Ultimate$ True | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Vampire | ChangeNum$ 1 | SpellDescription$ You may put a Vampire creature card from your hand onto the battlefield.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Vampire
+Oracle:[+1]: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.\n[+1]: You may sacrifice a Vampire. When you do, Sorin, Imperious Bloodlord deals 3 damage to any target and you gain 3 life.\n[-3]: You may put a Vampire creature card from your hand onto the battlefield.

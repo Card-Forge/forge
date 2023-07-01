@@ -1,0 +1,8 @@
+Name:Foriysian Interceptor
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:0/5
+K:Flash
+K:Defender
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender\nForiysian Interceptor can block an additional creature each combat.

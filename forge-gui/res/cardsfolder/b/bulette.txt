@@ -1,0 +1,9 @@
+Name:Bulette
+ManaCost:3 G
+Types:Creature Beast
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on Bulette.

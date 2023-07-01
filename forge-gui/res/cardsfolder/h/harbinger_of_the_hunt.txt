@@ -1,0 +1,8 @@
+Name:Harbinger of the Hunt
+ManaCost:3 R G
+Types:Creature Dragon
+PT:5/3
+K:Flying
+A:AB$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+A:AB$ DamageAll | Cost$ 2 G | NumDmg$ 1 | ValidCards$ Creature.withFlying+StrictlyOther | ValidDescription$ each other creature with flying. | SpellDescription$ CARDNAME deals 1 damage to each other creature with flying.
+Oracle:Flying\n{2}{R}: Harbinger of the Hunt deals 1 damage to each creature without flying.\n{2}{G}: Harbinger of the Hunt deals 1 damage to each other creature with flying.

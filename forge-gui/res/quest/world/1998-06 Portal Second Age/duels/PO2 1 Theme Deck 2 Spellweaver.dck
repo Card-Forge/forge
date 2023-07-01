@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme Deck: 2 Spellweaver
+Title=Spellweaver
+Difficulty=easy
+Description="Spellweaver" brings powerful blue magic to your hand. With this deck you can counter your opponent's spells or draw additional cards. Once you've gained control, your creatures move in for a crushing blow.\n\n"Spellweaver." Victory is looming. 
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Air Elemental|PO2
+2 Apprentice Sorcerer|PO2
+2 False Summoning|PO2
+15 Island|PO2|2
+2 Mystic Denial|PO2
+2 Talas Air Ship|PO2
+2 Talas Explorer|PO2
+3 Talas Merchant|PO2
+1 Talas Researcher|PO2
+3 Talas Scout|PO2
+1 Talas Warrior|PO2
+2 Time Ebb|PO2
+2 Touch of Brilliance|PO2

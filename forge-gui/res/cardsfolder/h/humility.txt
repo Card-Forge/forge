@@ -1,0 +1,6 @@
+Name:Humility
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ All creatures lose all abilities and have base power and toughness 1/1.
+AI:RemoveDeck:Random
+Oracle:All creatures lose all abilities and have base power and toughness 1/1.

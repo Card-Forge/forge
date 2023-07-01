@@ -1,0 +1,7 @@
+Name:Retributive Wand
+ManaCost:3
+Types:Artifact
+A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, it deals 5 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 5
+Oracle:{3}, {T}: Retributive Wand deals 1 damage to any target.\nWhen Retributive Wand is put into a graveyard from the battlefield, it deals 5 damage to any target.

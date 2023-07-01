@@ -1,0 +1,6 @@
+Name:Elvish Archers
+ManaCost:1 G
+Types:Creature Elf Archer
+PT:2/1
+K:First Strike
+Oracle:First strike

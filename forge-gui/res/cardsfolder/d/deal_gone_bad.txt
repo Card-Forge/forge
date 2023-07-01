@@ -1,0 +1,7 @@
+Name:Deal Gone Bad
+ManaCost:3 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBMill | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+SVar:DBMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | SpellDescription$ Target player mills three cards. (They put the top three cards of their library into their graveyard.)
+DeckHas:Ability$Mill
+Oracle:Target creature gets -3/-3 until end of turn. Target player mills three cards. (They put the top three cards of their library into their graveyard.)

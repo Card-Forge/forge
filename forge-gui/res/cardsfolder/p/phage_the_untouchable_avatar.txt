@@ -1,0 +1,11 @@
+Name:Phage the Untouchable Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-5
+A:AB$ Effect | Cost$ PayLife<1> | ActivationZone$ Command | Triggers$ TrigPhageDestroy | SpellDescription$ Until end of turn, whenever a creature deals combat damage to you, destroy that creature.
+SVar:TrigPhageDestroy:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | TriggerZones$ Command | CombatDamage$ True | Execute$ PhageAvatarDestroy | TriggerDescription$ Whenever a creature deals combat damage to you, destroy that creature.
+SVar:PhageAvatarDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy
+A:AB$ Effect | Cost$ PayLife<1> | ActivationZone$ Command | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigPhageCreature | RememberObjects$ Targeted | SpellDescription$ Until end of turn, whenever target creature you control deals combat damage to a creature, destroy the damaged creature.
+SVar:TrigPhageCreature:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Creature | TriggerZones$ Command | CombatDamage$ True | Execute$ PhageAvatarDestroy2 | TriggerDescription$ Whenever target creature you control deals combat damage to a creature, destroy the damaged creature.
+SVar:PhageAvatarDestroy2:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Hand +0, life -5\nPay 1 life: Until end of turn, whenever a creature deals combat damage to you, destroy that creature.\nPay 1 life: Until end of turn, whenever target creature you control deals combat damage to a creature, destroy the damaged creature.

@@ -1,0 +1,7 @@
+Name:Jungle Weaver
+ManaCost:5 G G
+Types:Creature Spider
+PT:5/6
+K:Reach
+K:Cycling:2
+Oracle:Reach (This creature can block creatures with flying.)\nCycling {2} ({2}, Discard this card: Draw a card.)

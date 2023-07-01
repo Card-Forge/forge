@@ -1,0 +1,7 @@
+Name:Aradara Express
+ManaCost:5
+Types:Artifact Vehicle
+PT:8/6
+K:Menace
+K:Crew:4
+Oracle:Menace\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)

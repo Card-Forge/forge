@@ -1,0 +1,7 @@
+Name:Gang of Devils
+ManaCost:5 R
+Types:Creature Devil
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTakeYou | TriggerDescription$ When CARDNAME dies, it deals 3 damage divided as you choose among one, two, or three targets.
+SVar:DevilTakeYou:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+Oracle:When Gang of Devils dies, it deals 3 damage divided as you choose among one, two, or three targets.

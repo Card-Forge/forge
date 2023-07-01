@@ -1,0 +1,10 @@
+Name:Grim Strider
+ManaCost:3 B
+Types:Creature Horror
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+SVar:X:Count$InYourHand
+SVar:BuffedBy:Card
+SVar:NeedsToPlayVar:Y LE5
+SVar:Y:Count$CardsInYourHand
+Oracle:Grim Strider gets -1/-1 for each card in your hand.

@@ -1,0 +1,12 @@
+Name:Monsoon
+ManaCost:2 R G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each player's end step, tap all untapped Islands that player controls and CARDNAME deals X damage to the player, where X is the number of Islands tapped this way.
+SVar:TrigTap:DB$ TapAll | ValidCards$ Island.ActivePlayerCtrl+untapped | RememberTapped$ True | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+S:Mode$ Continuous | Affected$ Island | AddSVar$ AITap
+SVar:AITap:SVar:AITapDown:True
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's end step, tap all untapped Islands that player controls and Monsoon deals X damage to the player, where X is the number of Islands tapped this way.

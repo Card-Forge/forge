@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Olokun 3
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=hard
+Description=Olokun plays Fertik's monoblue 'Ranger' deck.
+Deck Type=constructed
+[main]
+2 Air Elemental|LEB
+2 Arcane Denial|ALL
+2 Boomerang|MIR
+3 Browse|ALL
+4 Counterspell|5ED
+2 Desertion|VIS
+2 Dissipate|MIR
+2 Fellwar Stone|DRK
+4 Force of Will|ALL
+2 Impulse|VIS
+15 Island|MIR
+4 Quicksand|VIS
+1 Soldevi Excavations|ALL
+4 Suq'Ata Firewalker|MIR
+4 Thawing Glaciers|ALL
+1 Time Elemental|LEG
+4 Wall of Air|LEB
+2 Waterspout Djinn|VIS
+[sideboard]
+[planes]
+[schemes]

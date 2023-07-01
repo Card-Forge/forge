@@ -1,0 +1,31 @@
+[metadata]
+Name=GAS_14_78_Winds Dimir Tempo Generated Deck_897_18
+[Main]
+2 Artificer's Assistant|DOM
+4 Curious Obsession|RIX
+4 Dreamcaller Siren|XLN
+3 Favorable Winds|XLN
+2 Island|BBD
+1 Island|DOM|1
+3 Island|DOM|2
+5 Island|DOM|3
+1 Island|GRN
+1 Island|M19|1
+1 Island|M19|3
+1 Island|M19|4
+4 Island|RIX
+3 Island|RNA
+3 Lookout's Dispersal|XLN
+3 Nightveil Sprite|GRN
+3 Siren Lookout|XLN
+4 Siren Reaver|RIX
+4 Siren Stormtamer|XLN
+3 Storm Fleet Aerialist|XLN
+1 Tempest Djinn|DOM
+4 Warkite Marauder|RIX
+[Sideboard]
+2 Arcane Flight|DOM
+4 Chart a Course|XLN
+2 Kitesail Corsair|BBD
+3 Sphinx of Foresight|RNA
+4 Weatherlight|DOM

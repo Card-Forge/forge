@@ -1,0 +1,9 @@
+Name:Feywild Visitor
+ManaCost:2 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ Damage | Description$ Commander creatures you own have "Whenever one or more nontoken creatures you control deal combat damage to a player, you create a 1/1 blue Faerie Dragon creature token with flying."
+SVar:Damage:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, you create a 1/1 blue Faerie Dragon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying
+DeckHas:Ability$Token & Type$Faerie|Dragon
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever one or more nontoken creatures you control deal combat damage to a player, you create a 1/1 blue Faerie Dragon creature token with flying."

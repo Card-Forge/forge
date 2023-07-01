@@ -1,0 +1,6 @@
+Name:Gravel-Hide Goblin
+ManaCost:1 R
+Types:Creature Goblin Shaman
+PT:2/1
+A:AB$ Pump | Cost$ 3 G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+Oracle:{3}{G}: Gravel-Hide Goblin gets +2/+2 until end of turn.

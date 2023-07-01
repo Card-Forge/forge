@@ -1,0 +1,7 @@
+Name:Karakas
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target legendary creature to its owner's hand.
+DeckHints:Type$Legendary
+Oracle:{T}: Add {W}.\n{T}: Return target legendary creature to its owner's hand.

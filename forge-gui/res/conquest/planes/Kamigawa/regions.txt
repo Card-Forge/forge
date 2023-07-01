@@ -1,0 +1,5 @@
+Name:Towabara|Art:Eiganjo Castle|Colors:W
+Name:Minamo Academy|Art:Minamo, School at Water's Edge|Colors:U
+Name:Takenuma|Art:Shizo, Death's Storehouse|Colors:B
+Name:Sokenzan Mountains|Art:Shinka, the Bloodsoaked Keep|Colors:R
+Name:Jukai Forest|Art:Okina, Temple to the Grandfathers|Colors:G

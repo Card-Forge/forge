@@ -1,0 +1,8 @@
+Name:Nobilis of War
+ManaCost:RW RW RW RW RW
+Types:Creature Spirit Avatar
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 2 | Description$ Attacking creatures you control get +2/+0.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nAttacking creatures you control get +2/+0.

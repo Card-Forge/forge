@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Wallsrus 2
+Title=Walls'r'us
+Difficulty=medium
+Description="If ugliness was measured in bricks, you would be the great wall of China."
+Icon=Walrus.png
+Deck Type=constructed
+[Main]
+4 Arid Mesa|ZEN
+3 Felidar Sovereign|ZEN
+1 Guard Duty|ROE
+1 Guardian Zendikon|WWK
+4 Kabira Crossroads|ZEN
+1 Lightkeeper of Emeria|WWK
+3 Lone Missionary|ROE
+2 Luminous Wake|ROE
+9 Mountain|ZEN|1
+1 Ogre Sentry|ROE
+4 Perimeter Captain|WWK
+7 Plains|ZEN|1
+4 Rage Nimbus|ROE
+1 Rest for the Weary|WWK
+3 Soul's Attendant|ROE
+1 Soulbound Guardians|ROE
+1 Stalwart Shield-Bearers|ROE
+1 Sunspring Expedition|ZEN
+1 Survival Cache|ROE
+4 Vent Sentinel|ROE
+4 Wall of Omens|ROE
+[sideboard]

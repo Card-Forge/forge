@@ -1,0 +1,23 @@
+[metadata]
+Name=Forest Dragon 3
+Title=Forest Dragon
+Icon=ForestDragon.jpg
+Difficulty=hard
+Description=Green reptile deck.
+Deck Type=constructed
+[main]
+4 Cockatrice|4ED
+4 Craw Wurm|4ED
+1 Crumble|ATQ
+2 Desert Twister|4ED
+22 Forest|4ED
+3 Hornet Cobra|LEG
+2 Living Lands|LEB
+4 Llanowar Elves|4ED
+4 Lure|4ED
+2 Regeneration|4ED
+2 Sandstorm|4ED
+2 Stream of Life|LEB
+4 Thicket Basilisk|LEB
+4 Untamed Wilds|4ED
+[sideboard]

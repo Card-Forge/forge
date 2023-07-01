@@ -1,0 +1,9 @@
+Name:Redcap Heelslasher
+ManaCost:3 R
+Types:Creature Goblin Rogue
+PT:2/3
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Pump | KW$ First Strike
+K:First Strike
+DeckHas:Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nFirst strike

@@ -1,0 +1,6 @@
+Name:Spirit Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Spirit
+PT:3/2
+Oracle:

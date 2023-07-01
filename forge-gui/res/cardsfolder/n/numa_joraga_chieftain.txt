@@ -1,0 +1,12 @@
+Name:Numa, Joraga Chieftain
+ManaCost:2 G
+Types:Legendary Creature Elf Warrior
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPayCost | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.
+SVar:TrigPayCost:AB$ ImmediateTrigger | Cost$ X X | Execute$ TrigPutCounters | TriggerDescription$ When you pay {X}{X}, distribute X +1/+1 counters among any number of target Elves.
+SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Elf | TgtPrompt$ Select any number of target Elves to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X
+SVar:X:Count$xPaid
+K:Partner
+DeckHas:Ability$Counters
+DeckHints:Type$Elf
+Oracle:At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.\nPartner (You can have two commanders if both have partner.)

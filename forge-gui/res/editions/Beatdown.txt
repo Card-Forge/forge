@@ -1,0 +1,100 @@
+[metadata]
+Code=BTD
+Date=2000-10-01
+Name=Beatdown
+Type=Boxed_Set
+Border=White
+Foil=NotSupported
+ScryfallCode=BTD
+
+[cards]
+1 U Air Elemental @Doug Chaffee
+2 R Blizzard Elemental @Thomas M. Baxa
+3 C Brainstorm @Christopher Rush
+4 U Cloud Djinn @Mike Dringenberg
+5 C Cloud Elemental @Adam Rex
+6 C Counterspell @Allen Williams
+7 C Fog Elemental @Jon J Muth
+8 C Gaseous Form @Roger Raupp
+9 C Giant Crab @Tom Kyffin
+10 C Impulse @Bryan Talbot
+11 U Killer Whale @Stephen Daniele
+12 R Leviathan @Mark Tedin
+13 R Mahamoti Djinn @Dan Frazier
+14 C Power Sink @Mark Poole
+15 C Snapping Drake @Christopher Rush
+16 C Tolarian Winds @Lawrence Snelly
+17 C Vigilant Drake @Greg Staples
+18 C Wayward Soul @M. W. Kaluta & DiTerlizzi
+19 C Bone Harvest @Greg Simanson
+20 C Coercion @Pete Venters
+21 C Dark Ritual @Clint Langley
+22 C Death Stroke @Colin MacNeil
+23 C Diabolic Edict @Ron Spencer
+24 C Drain Life @Andrew Robinson
+25 R Fallen Angel @Anson Maddocks
+26 C Feral Shadow @Cliff Nielsen
+27 C Gravedigger @Dermot Power
+28 C Hollow Dogs @Jeff Miracola
+29 U Sengir Vampire @Jeff Easley
+30 C Skittering Horror @Mark Zug
+31 C Skittering Skirge @Ron Spencer
+32 C Tar Pit Warrior @George Pratt
+33 C Terror @Ron Spencer
+34 R Balduvian Horde @Brian Snõddy
+35 R Ball Lightning @Dave Dorman
+36 C Bloodrock Cyclops @Tom Wänerstrand
+37 C Fireball @Mark Tedin
+38 U Hulking Cyclops @Paolo Parente
+39 C Kird Ape @Ken Meyer, Jr.
+40 C Lava Axe @Brian Snõddy
+41 C Lightning Bolt @Christopher Rush
+42 C Lowland Giant @Paolo Parente
+43 C Raging Goblin @Pete Venters
+44 R Shivan Dragon @Melissa A. Benson
+45 C Shock @Randy Gallegos
+46 C Sonic Burst @Brian Snõddy
+47 C Talruum Minotaur @Pete Venters
+48 C Thunderbolt @Dylan Martens
+49 U Thundering Giant @Mark Zug
+50 C Viashino Warrior @Roger Raupp
+51 C Crash of Rhinos @Steve White
+52 U Crashing Boars @Ron Spencer
+53 C Deadly Insect @Randy Gallegos
+54 U Erhnam Djinn @Dave Dorman
+55 C Fog @Harold McNeill
+56 R Force of Nature @Douglas Shuler
+57 C Giant Growth @DiTerlizzi
+58 C Llanowar Elves @Anson Maddocks
+59 C Plated Spider @Ron Spencer
+60 C Quirion Elves @Randy Gallegos
+61 C Rampant Growth @Tom Kyffin
+62 C Scaled Wurm @Daniel Gelon
+63 C Shambling Strider @Douglas Shuler
+64 C Wild Growth @Mike Raabe
+65 C Woolly Spider @Daniel Gelon
+66 C Yavimaya Wurm @Melissa A. Benson
+67 U Diabolic Vision @Anthony S. Waters
+68 U Segmented Wurm @Jeff Miracola
+69 R Clockwork Avian @Randy Asplund-Faith
+70 R Clockwork Beast @Carl Critchlow
+71 U Dwarven Ruins @Liz Danforth
+72 U Ebon Stronghold @Liz Danforth
+73 U Havenwood Battleground @Liz Danforth
+74 C Polluted Mire @Stephen Daniele
+75 C Remote Isle @Ciruelo
+76 C Slippery Karst @Stephen Daniele
+77 C Smoldering Crater @Mark Tedin
+78 U Svyelunite Temple @Liz Danforth
+79 L Island @Tony Szczudlo
+80 L Island @John Avon
+81 L Island @Mark Poole
+82 L Swamp @John Avon
+83 L Swamp @Romas Kukalis
+84 L Swamp @Douglas Shuler
+85 L Mountain @John Avon
+86 L Mountain @Douglas Shuler
+87 L Mountain @Rob Alexander
+88 L Forest @Douglas Shuler
+89 L Forest @John Avon
+90 L Forest @John Avon

@@ -1,0 +1,5 @@
+Name:Devoted Hero
+ManaCost:W
+Types:Creature Elf Soldier
+PT:1/2
+Oracle:

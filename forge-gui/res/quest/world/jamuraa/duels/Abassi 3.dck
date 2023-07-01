@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Abassi 3
+Title=Abassi
+Icon=Abassi.jpg
+Difficulty=hard
+Description=Weenies and burn in a freeform 'Sligh'-style deck.
+Deck Type=constructed
+[main]
+1 Black Vise|LEB
+1 Burning Palm Efreet|MIR
+2 Burning Shield Askari|MIR
+1 Dragon Whelp|LEB
+4 Dwarven Miner|MIR
+4 Dwarven Ruins|FEM
+1 Fireball|LEB
+2 Goblin Balloon Brigade|LEB
+4 Incinerate|MIR
+3 Ironclaw Orcs|LEB
+4 Lightning Bolt|LEB
+4 Mishra's Factory|ATQ
+15 Mountain|MIR
+3 Orcish Cannoneers|ICE
+2 Orcish Librarian|ICE
+4 Pillage|ALL
+1 Searing Spear Askari|MIR
+2 Soldier of Fortune|ALL
+1 Strip Mine|ATQ
+1 Wildfire Emissary|MIR
+[sideboard]
+[planes]
+[schemes]

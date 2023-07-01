@@ -1,0 +1,8 @@
+Name:Angrath, Captain of Chaos
+ManaCost:2 BR BR
+Types:Legendary Planeswalker Angrath
+Loyalty:5
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
+A:AB$ Amass | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Type$ Zombie | Num$ 2 | SpellDescription$ Amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+DeckHints:Ability$Amass & Type$Zombie
+Oracle:Creatures you control have menace.\n[-2]: Amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

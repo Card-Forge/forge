@@ -1,0 +1,7 @@
+Name:Blood Bairn
+ManaCost:2 B
+Types:Creature Vampire
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice another creature: Blood Bairn gets +2/+2 until end of turn.

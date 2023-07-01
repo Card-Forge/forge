@@ -1,0 +1,7 @@
+Name:Immediate Action
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+NamedCard | EffectZone$ Command | AddKeyword$ Haste | Description$ Creatures you control of the named card has haste.
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nCreatures you control with the chosen name have haste.

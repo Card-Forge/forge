@@ -1,0 +1,9 @@
+Name:Scion of the Wild
+ManaCost:1 G G
+Types:Creature Avatar
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+SVar:NoZeroToughnessAI:True
+Oracle:Scion of the Wild's power and toughness are each equal to the number of creatures you control.

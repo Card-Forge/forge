@@ -1,0 +1,7 @@
+Name:Fire-Field Ogre
+ManaCost:1 U B R
+Types:Creature Ogre Mutant
+PT:4/2
+K:First Strike
+K:Unearth:U B R
+Oracle:First strike\nUnearth {U}{B}{R} ({U}{B}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

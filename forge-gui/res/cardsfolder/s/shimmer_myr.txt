@@ -1,0 +1,7 @@
+Name:Shimmer Myr
+ManaCost:3
+Types:Artifact Creature Myr
+PT:2/2
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Artifact | ValidSA$ Spell | Caster$ You | Description$ You may cast artifact spells as though they had flash.
+Oracle:Flash\nYou may cast artifact spells as though they had flash.

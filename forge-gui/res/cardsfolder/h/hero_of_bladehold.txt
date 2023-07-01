@@ -1,0 +1,9 @@
+Name:Hero of Bladehold
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:3/4
+K:Battle cry
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 1/1 white Soldier creature tokens that are tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever Hero of Bladehold attacks, create two 1/1 white Soldier creature tokens that are tapped and attacking.

@@ -1,0 +1,22 @@
+[metadata]
+Code=SCH
+Date=2022-07-09
+Name=Store Championships
+Type=Promo
+ScryfallCode=SCH
+
+[cards]
+1 R Flame Slash @Antonio José Manzanedo
+2 R Archmage's Charm @Hector Ortiz
+3 R Dark Confidant @Livia Prima
+4 R Spell Pierce @Andrew Mar
+5 R Gilded Goose @Chris Seaman
+6 M Omnath, Locus of Creation @John Tedrick
+7 R Annex Sentry @Sam Guay
+8 R Memory Deluge @Sam Guay
+9 R Koth, Fire of Resistance @Kieran Yanner
+10 R Strangle @Sidharth Chaturvedi
+11 R Aether Channeler @Olivier Bernard
+12 M Thalia and The Gitrog Monster @PINDURSKI
+13 R Gifted Aetherborn @Lie Setiawan
+14 R Eidolon of the Great Revel @Yigit Koroglu

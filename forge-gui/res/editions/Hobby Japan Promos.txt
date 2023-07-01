@@ -1,0 +1,14 @@
+[metadata]
+Code=PHJ
+Date=2002-07-01
+Name=Hobby Japan Promos
+Type=Promo
+CardLang=ja
+ScryfallCode=PHJ
+
+[cards]
+1 R Goblin Mutant @Daniel Gelon
+2 R Ihsan's Shade @Christopher Rush
+3 R Krovikan Vampire @Quinton Hoover
+4 R Surge of Strength @Ruth Thompson
+5 R Yavimaya Ants @Pat Lewis

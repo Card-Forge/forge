@@ -1,0 +1,8 @@
+Name:Straw Golem
+ManaCost:1
+Types:Artifact Creature Golem
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When an opponent casts a creature spell, sacrifice CARDNAME.
+SVar:TrigSacrifice:DB$ Sacrifice
+SVar:AntiBuffedBy:Creature
+Oracle:When an opponent casts a creature spell, sacrifice Straw Golem.

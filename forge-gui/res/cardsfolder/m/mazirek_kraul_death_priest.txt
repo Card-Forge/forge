@@ -1,0 +1,8 @@
+Name:Mazirek, Kraul Death Priest
+ManaCost:3 B G
+Types:Legendary Creature Insect Shaman
+PT:2/2
+K:Flying
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigCounters | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player sacrifices another permanent, put a +1/+1 counter on each creature you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying\nWhenever a player sacrifices another permanent, put a +1/+1 counter on each creature you control.

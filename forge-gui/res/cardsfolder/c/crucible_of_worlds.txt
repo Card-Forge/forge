@@ -1,0 +1,6 @@
+Name:Crucible of Worlds
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+SVar:NonStackingEffect:True
+Oracle:You may play lands from your graveyard.

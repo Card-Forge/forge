@@ -1,0 +1,8 @@
+Name:Gruul Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+A:AB$ Draw | Cost$ R G T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|Green
+Oracle:{T}: Add {R} or {G}.\n{R}{G}, {T}, Sacrifice Gruul Cluestone: Draw a card.

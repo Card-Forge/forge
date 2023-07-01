@@ -1,0 +1,7 @@
+Name:Sanctimony
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Mountain | Activator$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever an opponent taps a Mountain for mana, you may gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent taps a Mountain for mana, you may gain 1 life.

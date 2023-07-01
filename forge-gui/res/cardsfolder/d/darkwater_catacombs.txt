@@ -1,0 +1,6 @@
+Name:Darkwater Catacombs
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ 1 T | Produced$ U B | SpellDescription$ Add {U}{B}.
+AI:RemoveDeck:All
+Oracle:{1}, {T}: Add {U}{B}.

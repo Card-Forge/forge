@@ -1,0 +1,5 @@
+Name:Goblin Bully
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/1
+Oracle:

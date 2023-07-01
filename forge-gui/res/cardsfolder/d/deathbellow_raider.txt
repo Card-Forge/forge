@@ -1,0 +1,7 @@
+Name:Deathbellow Raider
+ManaCost:1 R
+Types:Creature Minotaur Berserker
+PT:2/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Deathbellow Raider attacks each combat if able.\n{2}{B}: Regenerate Deathbellow Raider.

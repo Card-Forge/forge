@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Sauron 2
+Title=Sauron
+Difficulty=medium
+Description=UB Underworld Dreams deck with Black Vise and lots of card draw for both players
+Icon=Sauron.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+1 Frost Marsh
+1 Salt Marsh
+4 Jwar Isle Refuge
+4 Dismal Backwater
+2 Darkslick Shores
+2 Reliquary Tower
+3 Swamp|M12
+1 Mikokoro, Center of the Sea
+3 Black Vise
+1 Timetwister
+1 Kami of the Crescent Moon
+4 Underworld Dreams
+1 Temple Bell
+1 Jace Beleren
+1 Forced Fruition
+2 Vision Skeins
+4 Wheel and Deal
+1 Mind's Eye
+2 Howling Mine
+1 Font of Mythos
+1 Seizan, Perverter of Truth
+1 Time Reversal
+2 Propaganda
+1 Frozen AEther
+1 Ivory Tower
+2 Deny Reality
+2 Boomerang
+1 Windfall
+1 Teferi's Puzzle Box
+1 Anvil of Bogardan
+1 Temple Bell
+1 Swans of Bryn Argoll
+1 Consecrated Sphinx
+[sideboard]

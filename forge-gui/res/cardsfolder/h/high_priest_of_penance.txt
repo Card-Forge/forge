@@ -1,0 +1,8 @@
+Name:High Priest of Penance
+ManaCost:W B
+Types:Creature Human Cleric
+PT:1/1
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME is dealt damage, you may destroy target nonland permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever High Priest of Penance is dealt damage, you may destroy target nonland permanent.

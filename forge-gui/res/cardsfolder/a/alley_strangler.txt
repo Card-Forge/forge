@@ -1,0 +1,6 @@
+Name:Alley Strangler
+ManaCost:2 B
+Types:Creature Aetherborn Rogue
+PT:2/3
+K:Menace
+Oracle:Menace

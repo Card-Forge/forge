@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Aqueduct 3
+Title=Aqueduct
+Difficulty=hard
+Description=UG Spreading Seas deck with Choke
+Icon=Aqueduct.jpg
+Deck Type=constructed
+[main]
+4 Thornwood Falls
+4 Hinterland Harbor
+4 Simic Guildgate
+4 Temple of Mystery
+4 Yavimaya Coast
+1 Forest
+1 Mox Sapphire
+1 Mox Emerald
+4 Spreading Seas
+4 Sea's Claim
+4 Lingering Mirage
+4 Choke
+4 River Boa
+4 Hammerhead Shark
+1 Thada Adel, Acquisitor
+4 Kruphix's Insight
+4 Remand
+4 Propaganda
+[sideboard]

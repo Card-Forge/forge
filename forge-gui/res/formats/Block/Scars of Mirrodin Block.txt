@@ -1,0 +1,6 @@
+[format]
+Name:Scars of Mirrodin Block
+Type:Archived
+Subtype:Block
+Order:120
+Sets:NPH, MBS, SOM

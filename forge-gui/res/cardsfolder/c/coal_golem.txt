@@ -1,0 +1,9 @@
+Name:Coal Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:3/3
+A:AB$ Mana | Cost$ 3 Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | SpellDescription$ Add {R}{R}{R}.
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
+DeckNeeds:Color$Red
+Oracle:{3}, Sacrifice Coal Golem: Add {R}{R}{R}.

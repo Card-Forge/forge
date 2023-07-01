@@ -1,0 +1,7 @@
+Name:Siege Behemoth
+ManaCost:5 G G
+Types:Creature Beast
+PT:7/4
+K:Hexproof
+S:Mode$ AssignCombatDamageAsUnblocked | IsPresent$ Card.Self+attacking | ValidCard$ Creature.YouCtrl | Optional$ True | Description$ As long as CARDNAME is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked.
+Oracle:Hexproof\nAs long as Siege Behemoth is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked.

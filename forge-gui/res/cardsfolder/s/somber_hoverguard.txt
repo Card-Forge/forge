@@ -1,0 +1,7 @@
+Name:Somber Hoverguard
+ManaCost:5 U
+Types:Creature Drone
+PT:3/2
+K:Affinity:Artifact
+K:Flying
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying

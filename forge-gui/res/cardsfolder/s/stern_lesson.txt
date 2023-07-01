@@ -1,0 +1,8 @@
+Name:Stern Lesson
+ManaCost:2 U
+Types:Instant
+A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard | SpellDescription$ Draw two cards, then discard a card. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHas:Ability$Token|Discard & Type$Artifact
+Oracle:Draw two cards, then discard a card. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

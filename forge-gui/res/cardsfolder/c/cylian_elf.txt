@@ -1,0 +1,5 @@
+Name:Cylian Elf
+ManaCost:1 G
+Types:Creature Elf Scout
+PT:2/2
+Oracle:

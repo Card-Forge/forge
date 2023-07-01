@@ -1,0 +1,7 @@
+Name:Spinneret Sliver
+ManaCost:1 G
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Reach | Description$ All Sliver creatures have reach.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have reach.

@@ -1,0 +1,7 @@
+Name:Mortal Flesh Is Weak
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ShowTheWeakness | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.
+SVar:ShowTheWeakness:DB$ SetLife | Defined$ Player.Opponent | LifeAmount$ X
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+Oracle:When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.

@@ -1,0 +1,6 @@
+Name:Jhessian Infiltrator
+ManaCost:G U
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Jhessian Infiltrator can't be blocked.

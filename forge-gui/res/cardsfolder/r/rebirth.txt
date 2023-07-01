@@ -1,0 +1,8 @@
+Name:Rebirth
+ManaCost:3 G G G
+Types:Sorcery
+K:Remove CARDNAME from your deck before playing if you're not playing for ante.
+A:SP$ Dig | Defined$ Player | DestinationZone$ Ante | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | Optional$ True | PromptToSkipOptionalAbility$ True | SubAbility$ 20Life | SpellDescription$ Each player may ante the top card of their library. If a player does, that player's life total becomes 20.
+SVar:20Life:DB$ SetLife | Defined$ RememberedOwner | LifeAmount$ 20 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Remove Rebirth from your deck before playing if you're not playing for ante.\nEach player may ante the top card of their library. If a player does, that player's life total becomes 20.

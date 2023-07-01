@@ -1,0 +1,11 @@
+Name:Kjeldoran Gargoyle
+ManaCost:5 W
+Types:Creature Gargoyle
+PT:3/3
+K:Flying
+K:First Strike
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Flying, first strike\nWhenever Kjeldoran Gargoyle deals damage, you gain that much life.

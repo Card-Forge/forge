@@ -1,0 +1,10 @@
+Name:Darkblade Agent
+ManaCost:1 U B
+Types:Creature Human Assassin
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | AddTrigger$ Trig1 | AddSVar$ TrigDraw | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you've surveilled this turn, CARDNAME has deathtouch and "Whenever this creature deals combat damage to a player, you draw a card."
+SVar:Trig1:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:Count$YouSurveilThisTurn
+DeckHints:Ability$Surveil
+Oracle:As long as you've surveilled this turn, Darkblade Agent has deathtouch and "Whenever this creature deals combat damage to a player, you draw a card."

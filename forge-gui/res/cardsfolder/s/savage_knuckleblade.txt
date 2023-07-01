@@ -1,0 +1,9 @@
+Name:Savage Knuckleblade
+ManaCost:G U R
+Types:Creature Ogre Warrior
+PT:4/4
+A:AB$ Pump | Cost$ 2 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+A:AB$ ChangeZone | Cost$ 2 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ Pump | Cost$ R | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:{2}{G}: Savage Knuckleblade gets +2/+2 until end of turn. Activate only once each turn.\n{2}{U}: Return Savage Knuckleblade to its owner's hand.\n{R}: Savage Knuckleblade gains haste until end of turn.

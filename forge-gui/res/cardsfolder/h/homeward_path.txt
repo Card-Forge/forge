@@ -1,0 +1,6 @@
+Name:Homeward Path
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ GainControlVariant | Cost$ T | AILogic$ GainControlOwns | AllValid$ Creature | ChangeController$ CardOwner | SpellDescription$ Each player gains control of all creatures they own.
+Oracle:{T}: Add {C}.\n{T}: Each player gains control of all creatures they own.

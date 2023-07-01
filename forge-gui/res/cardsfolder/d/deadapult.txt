@@ -1,0 +1,7 @@
+Name:Deadapult
+ManaCost:2 R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ R Sac<1/Zombie> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:{R}, Sacrifice a Zombie: Deadapult deals 2 damage to any target.

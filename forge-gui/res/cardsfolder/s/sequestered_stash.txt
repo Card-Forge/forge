@@ -1,0 +1,9 @@
+Name:Sequestered Stash
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mill | Cost$ 4 T Sac<1/CARDNAME> | Defined$ You | NumCards$ 5 | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards.
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Artifact.YouOwn | Origin$ Graveyard | Destination$ Library | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Then you may put an artifact card from your graveyard on top of your library.
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard|Mill|Sacrifice
+Oracle:{T}: Add {C}.\n{4}, {T}, Sacrifice Sequestered Stash: Mill five cards. Then you may put an artifact card from your graveyard on top of your library.

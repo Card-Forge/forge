@@ -1,0 +1,9 @@
+Name:Cloaked Cadet
+ManaCost:4 G
+Types:Creature Human Ranger
+PT:2/4
+K:Training
+T:Mode$ CounterAddedAll | CounterType$ P1P1 | Valid$ Human.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more +1/+1 counters are put on one or more Humans you control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Counters
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever one or more +1/+1 counters are put on one or more Humans you control, draw a card. This ability triggers only once each turn.

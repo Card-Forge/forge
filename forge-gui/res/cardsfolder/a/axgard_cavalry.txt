@@ -1,0 +1,6 @@
+Name:Axgard Cavalry
+ManaCost:1 R
+Types:Creature Dwarf Berserker
+PT:2/2
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+Oracle:{T}: Target creature gains haste until end of turn.

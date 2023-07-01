@@ -1,0 +1,6 @@
+Name:Jetmir's Garden
+ManaCost:no cost
+Types:Land Mountain Forest Plains
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {R}, {G}, or {W}.)\nJetmir's Garden enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

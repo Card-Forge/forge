@@ -1,0 +1,7 @@
+Name:Deathbloom Gardener
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:1/1
+K:Deathtouch
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Deathtouch\n{T}: Add one mana of any color.

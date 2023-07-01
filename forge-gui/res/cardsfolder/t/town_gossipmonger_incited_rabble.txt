@@ -1,0 +1,18 @@
+Name:Town Gossipmonger
+ManaCost:W
+Types:Creature Human
+PT:1/1
+A:AB$ SetState | Cost$ T tapXType<1/Creature> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+Oracle:{T}, Tap an untapped creature you control: Transform Town Gossipmonger.
+
+ALTERNATE
+
+Name:Incited Rabble
+ManaCost:no cost
+Colors:red
+Types:Creature Human
+PT:2/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Incited Rabble attacks each combat if able.\n{2}: Incited Rabble gets +1/+0 until end of turn.

@@ -1,0 +1,5 @@
+Name:Krovikan Scoundrel
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/1
+Oracle:

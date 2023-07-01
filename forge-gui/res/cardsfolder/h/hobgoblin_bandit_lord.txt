@@ -1,0 +1,9 @@
+Name:Hobgoblin Bandit Lord
+ManaCost:1 R R
+Types:Creature Goblin Rogue
+PT:2/3
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Goblin.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Goblins you control get +1/+1.
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target.
+SVar:X:Count$ThisTurnEntered_Battlefield_Goblin.YouCtrl
+DeckNeeds:Type$Goblin
+Oracle:Other Goblins you control get +1/+1.\n{R}, {T}: Hobgoblin Bandit Lord deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target.

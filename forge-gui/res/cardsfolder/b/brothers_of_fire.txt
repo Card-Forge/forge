@@ -1,0 +1,8 @@
+Name:Brothers of Fire
+ManaCost:1 R R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBDealDamage | DamageMap$ True | SpellDescription$ CARDNAME deals 1 damage to any target and 1 damage to you.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:{1}{R}{R}: Brothers of Fire deals 1 damage to any target and 1 damage to you.

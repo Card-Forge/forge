@@ -1,0 +1,11 @@
+Name:Bow of Nylea
+ManaCost:1 G G
+Types:Legendary Enchantment Artifact
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ Deathtouch | Description$ Attacking creatures you control have deathtouch.
+A:AB$ Charm | Cost$ 1 G T | Choices$ DBPutCounter,DBDmg,DBGainLife,DBGrave | CharmNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature with flying.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:DBGrave:DB$ ChangeZone | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to four target cards in your graveyard | TargetMin$ 0 | TargetMax$ 4 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put up to four target cards from your graveyard on the bottom of your library in any order.
+SVar:PlayMain1:TRUE
+Oracle:Attacking creatures you control have deathtouch.\n{1}{G}, {T}: Choose one —\n• Put a +1/+1 counter on target creature.\n• Bow of Nylea deals 2 damage to target creature with flying.\n• You gain 3 life.\n• Put up to four target cards from your graveyard on the bottom of your library in any order.

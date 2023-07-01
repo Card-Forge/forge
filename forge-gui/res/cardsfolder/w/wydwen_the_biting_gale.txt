@@ -1,0 +1,8 @@
+Name:Wydwen, the Biting Gale
+ManaCost:2 U B
+Types:Legendary Creature Faerie Wizard
+PT:3/3
+K:Flying
+K:Flash
+A:AB$ ChangeZone | Cost$ U B PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flash\nFlying\n{U}{B}, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.

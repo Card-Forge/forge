@@ -1,0 +1,10 @@
+Name:Anje Falkenrath
+ManaCost:1 B R
+Types:Legendary Creature Vampire
+PT:1/3
+K:Haste
+A:AB$ Draw | Cost$ T Discard<1/Card> | Defined$ You | SpellDescription$ Draw a card.
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl+withMadness | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you discard a card, if it has madness, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+DeckHints:Ability$Discard
+Oracle:Haste\n{T}, Discard a card: Draw a card.\nWhenever you discard a card, if it has madness, untap Anje Falkenrath.

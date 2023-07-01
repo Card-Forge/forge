@@ -1,0 +1,9 @@
+Name:Jund Battlemage
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ LoseLife | Cost$ B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+A:AB$ Token | Cost$ G T | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+DeckHints:Color$Black|Green
+DeckHas:Ability$Token
+Oracle:{B}, {T}: Target player loses 1 life.\n{G}, {T}: Create a 1/1 green Saproling creature token.

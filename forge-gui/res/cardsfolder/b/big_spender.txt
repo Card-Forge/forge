@@ -1,0 +1,12 @@
+Name:Big Spender
+ManaCost:1 R
+Types:Creature Devil Citizen
+PT:2/1
+K:Haste
+T:Mode$ AttackerBlockedOnce | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more creatures you control become blocked, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+A:AB$ Draft | Cost$ Sac<2/Artifact> | Spellbook$ Arcane Encyclopedia,Daredevil Dragster,Diamond Mare,Filigree Familiar,Fountain of Renewal,Gilded Lotus,Golden Egg,Guild Globe,Heraldic Banner,Honored Heirloom,Key to the City,Prophetic Prism,Stuffed Bear,Treasure Vault,Zephyr Boots | SpellDescription$ Draft a card from CARDNAME's spellbook.
+DeckHas:Ability$Sacrifice|Token|Discard|LifeGain & Type$Treasure|Artifact|Horse|Fox|Food|Equipment|Bear
+DeckHints:Type$Treasure
+SVar:AIPreference:SacCost$Treasure.Token,Artifact.Token
+Oracle:Haste\nWhenever one or more creatures you control become blocked, create a Treasure token.\nSacrifice two artifacts: Draft a card from Big Spender's spellbook.

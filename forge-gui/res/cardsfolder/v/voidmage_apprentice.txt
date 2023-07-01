@@ -1,0 +1,9 @@
+Name:Voidmage Apprentice
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+K:Morph:2 U U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target spell.
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
+AI:RemoveDeck:All
+Oracle:Morph {2}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Voidmage Apprentice is turned face up, counter target spell.

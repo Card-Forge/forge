@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #15 - Shades Of Grey
+URL:https://pauperpuzzles.wordpress.com/2017/02/25/15-shades-of-gray/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=5
+humanhand=Cho-Manno's Blessing;Aurora Eidolon
+humangraveyard=Qarsi Sadist;Agent of Shauku;Blind Hunter;Monk Realist
+humanbattlefield=Swamp;Swamp;Swamp;Plains;Plains;Master of Diversion|Id:12;Lashknife|AttachedTo:12;Sultai Scavenger;Tortured Existence
+aibattlefield=Vampiric Link|AttachedTo:12;Seraph of Dawn;Gurmag Angler|Id:18;Nimbus Wings|AttachedTo:18

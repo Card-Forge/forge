@@ -1,0 +1,8 @@
+Name:Simic Guildmage
+ManaCost:GU GU
+Types:Creature Elf Wizard
+PT:2/2
+A:AB$ MoveCounter | Cost$ 1 G | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target creatures to move +1/+1 counters | TargetsWithSameController$ True | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Move a +1/+1 counter from target creature onto another target creature with the same controller.
+A:AB$ Attach | Cost$ 1 U | ValidTgts$ Aura.AttachedTo Permanent | TgtPrompt$ Select target aura to move | Object$ Targeted | Choices$ Permanent.sharesControllerWith AttachedBy Targeted | Move$ True | StackDescription$ SpellDescription | SpellDescription$ Attach target Aura attached to a permanent to another permanent with the same controller.
+AI:RemoveDeck:All
+Oracle:({G/U} can be paid with either {G} or {U}.)\n{1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.\n{1}{U}: Attach target Aura attached to a permanent to another permanent with the same controller.

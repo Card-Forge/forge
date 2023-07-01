@@ -1,0 +1,17 @@
+[metadata]
+Code=F17
+Date=2017-01-01
+Name=Friday Night Magic 2017
+Type=Promo
+ScryfallCode=F17
+
+[cards]
+1 R Noose Constrictor @Kev Walker
+2 R Fortune's Favor @Grzegorz Rutkowski
+3 R Incendiary Flow @Slawomir Maniak
+4 R Servo Exhibition @Vincent Proce
+5 R Unlicensed Disintegration @Florian de Gesincourt
+6 R Aether Hub @Jonas De Ro
+7 R Reverse Engineer @Jason Kang
+8 R Fatal Push @Alex Konstad
+9 R Renegade Rallier @David Palumbo

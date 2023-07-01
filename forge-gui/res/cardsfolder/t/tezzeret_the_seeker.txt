@@ -1,0 +1,11 @@
+Name:Tezzeret the Seeker
+ManaCost:3 U U
+Types:Legendary Planeswalker Tezzeret
+Loyalty:4
+A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact | TargetMin$ 0 | TargetMax$ 2 | Planeswalker$ True | SpellDescription$ Untap up to two target artifacts.
+A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX | ChangeNum$ 1 | Shuffle$ True | Planeswalker$ True | SpellDescription$ Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle.
+A:AB$ AnimateAll | Cost$ SubCounter<5/LOYALTY> | Power$ 5 | Toughness$ 5 | Types$ Creature,Artifact | ValidCards$ Artifact.YouCtrl | Planeswalker$ True | Ultimate$ True | SpellDescription$ Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact
+Oracle:[+1]: Untap up to two target artifacts.\n[-X]: Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle.\n[-5]: Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.

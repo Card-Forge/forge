@@ -1,0 +1,6 @@
+Name:Steel Wall
+ManaCost:1
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+Oracle:Defender (This creature can't attack.)

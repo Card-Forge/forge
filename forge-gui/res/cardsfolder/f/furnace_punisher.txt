@@ -1,0 +1,11 @@
+Name:Furnace Punisher
+ManaCost:2 R
+Types:Creature Phyrexian Warrior
+PT:3/3
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 2 damage to that player unless they control two or more basic lands.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionPresent$ Land.Basic+ControlledBy TriggeredPlayer | ConditionCompare$ LT2
+AI:RemoveDeck:Random
+SVar:X:Count$Valid Land.Basic+YouCtrl
+SVar:NeedsToPlayVar:X GE2
+Oracle:Menace\nAt the beginning of each player's upkeep, Furnace Punisher deals 2 damage to that player unless they control two or more basic lands.

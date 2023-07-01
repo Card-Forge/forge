@@ -1,0 +1,8 @@
+Name:Battle Sliver
+ManaCost:4 R
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddPower$ 2 | Description$ Sliver creatures you control get +2/+0.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control get +2/+0.

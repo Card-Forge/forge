@@ -1,0 +1,8 @@
+Name:Mystic Crusader
+ManaCost:1 W W
+Types:Creature Human Nomad Mystic
+PT:2/1
+K:Protection from black
+K:Protection from red
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has flying.
+Oracle:Protection from black and from red\nThreshold — As long as seven or more cards are in your graveyard, Mystic Crusader gets +1/+1 and has flying.

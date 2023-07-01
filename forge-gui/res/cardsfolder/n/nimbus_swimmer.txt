@@ -1,0 +1,9 @@
+Name:Nimbus Swimmer
+ManaCost:X G U
+Types:Creature Leviathan
+PT:0/0
+K:Flying
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Flying\nNimbus Swimmer enters the battlefield with X +1/+1 counters on it.

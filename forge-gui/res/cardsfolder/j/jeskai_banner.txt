@@ -1,0 +1,8 @@
+Name:Jeskai Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U R W | SpellDescription$ Add {U}, {R}, or {W}.
+A:AB$ Draw | Cost$ U R W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Blue|Red|White
+Oracle:{T}: Add {U}, {R}, or {W}.\n{U}{R}{W}, {T}, Sacrifice Jeskai Banner: Draw a card.

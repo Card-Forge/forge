@@ -1,0 +1,10 @@
+Name:Bloodtracker
+ManaCost:3 B
+Types:Creature Vampire Wizard
+PT:2/2
+K:Flying
+A:AB$ PutCounter | Cost$ B PayLife<2> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, draw a card for each +1/+1 counter on it.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggeredCard$CardCounters.P1P1
+Oracle:Flying\n{B}, Pay 2 life: Put a +1/+1 counter on Bloodtracker.\nWhen Bloodtracker leaves the battlefield, draw a card for each +1/+1 counter on it.

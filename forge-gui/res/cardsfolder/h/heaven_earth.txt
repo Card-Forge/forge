@@ -1,0 +1,18 @@
+Name:Heaven
+ManaCost:X G
+Types:Instant
+A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+AlternateMode:Split
+Oracle:Heaven deals X damage to each creature with flying.
+
+ALTERNATE
+
+Name:Earth
+ManaCost:X R R
+Types:Sorcery
+K:Aftermath
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying.
+SVar:X:Count$xPaid
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEarth deals X damage to each creature without flying.

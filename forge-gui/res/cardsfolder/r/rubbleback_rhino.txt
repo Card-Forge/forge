@@ -1,0 +1,6 @@
+Name:Rubbleback Rhino
+ManaCost:4 G
+Types:Creature Rhino
+PT:3/4
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

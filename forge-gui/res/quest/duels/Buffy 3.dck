@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Buffy 3
+Title=Buffy
+Difficulty=hard
+Description=Mono B Zombie deck
+Icon=Buffy.jpg
+Deck Type=constructed
+[main]
+1 Graveborn Muse|10E
+3 Undead Warchief|TSB
+1 Festering Goblin|10E
+1 Sarcomancy|TMP
+3 Diregraf Ghoul
+3 Cemetery Reaper|M10
+3 Grave Titan|M11
+1 Grave Pact|10E
+23 Swamp|MBS
+4 Death Baron|ALA
+3 Grave Defiler|APC
+3 Cruel Revival|ONS
+1 Feeding Frenzy|ONS
+3 Tendrils of Corruption|M10
+3 Grasp of Darkness|SOM
+2 Lord of the Undead|PLS
+1 Zombie Master
+1 Noxious Ghoul
+[sideboard]

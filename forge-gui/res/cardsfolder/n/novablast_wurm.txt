@@ -1,0 +1,7 @@
+Name:Novablast Wurm
+ManaCost:3 G G W W
+Types:Creature Wurm
+PT:7/7
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ Whenever CARDNAME attacks, destroy all other creatures.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.StrictlyOther
+Oracle:Whenever Novablast Wurm attacks, destroy all other creatures.

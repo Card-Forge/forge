@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Zuran Spellcaster
+OpponentName=The Spellcasters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ICE Challenge: Zuran Spellcaster
+Title=The Spellcasters
+Difficulty=easy
+Description="A mage must be precise as well as potent; cautious, as well as clever." -Zur the Enchanter
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+24 Island|ICE|1
+36 Zuran Spellcaster|ICE

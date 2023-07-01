@@ -1,0 +1,7 @@
+Name:Symbiotic Elf
+ManaCost:3 G
+Types:Creature Elf
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 1/1 green Insect creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_insect | TokenOwner$ TriggeredCardController
+Oracle:When Symbiotic Elf dies, create two 1/1 green Insect creature tokens.

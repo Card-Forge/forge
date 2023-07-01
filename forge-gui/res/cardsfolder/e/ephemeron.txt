@@ -1,0 +1,7 @@
+Name:Ephemeron
+ManaCost:4 U U
+Types:Creature Illusion
+PT:4/4
+K:Flying
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying\nDiscard a card: Return Ephemeron to its owner's hand.

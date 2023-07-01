@@ -1,0 +1,10 @@
+Name:Balan, Wandering Knight
+ManaCost:2 W W
+Types:Legendary Creature Cat Knight
+PT:3/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | IsPresent$ Equipment.Attached | PresentCompare$ GE2 | Description$ CARDNAME has double strike as long as two or more Equipment are attached to it.
+A:AB$ RepeatEach | Cost$ 1 W | RepeatSubAbility$ DBAttach | RepeatCards$ Equipment.YouCtrl | AILogic$ EquipAll | SpellDescription$ Attach all Equipment you control to NICKNAME.
+SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ Self
+SVar:EquipMe:Multiple
+Oracle:First strike\nBalan, Wandering Knight has double strike as long as two or more Equipment are attached to it.\n{1}{W}: Attach all Equipment you control to Balan.

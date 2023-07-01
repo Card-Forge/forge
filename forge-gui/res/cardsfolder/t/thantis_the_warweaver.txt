@@ -1,0 +1,11 @@
+Name:Thantis, the Warweaver
+ManaCost:3 B R G
+Types:Legendary Creature Spider
+PT:5/5
+K:Vigilance
+K:Reach
+S:Mode$ MustAttack | ValidCreature$ Creature | Description$ All creatures attack each combat if able.
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ DragonWake | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on CARDNAME.
+SVar:DragonWake:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Vigilance, reach\nAll creatures attack each combat if able.\nWhenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Thantis, the Warweaver.

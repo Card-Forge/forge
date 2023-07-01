@@ -1,0 +1,10 @@
+Name:Gnarlback Rhino
+ManaCost:2 G G
+Types:Creature Rhino
+PT:4/4
+K:Trample
+DeckHints:Name$Nissa's Encouragement|Nissa, Genesis Mage|Forest
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever you cast a spell that targets Gnarlback Rhino, draw a card.

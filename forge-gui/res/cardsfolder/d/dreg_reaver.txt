@@ -1,0 +1,5 @@
+Name:Dreg Reaver
+ManaCost:4 B
+Types:Creature Zombie Beast
+PT:4/3
+Oracle:

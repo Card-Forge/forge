@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Aurelia 3
+Title=Aurelia 3
+Icon=Aurelia.jpg
+Difficulty=hard
+Description=Ein, Zwei, Polizei
+Deck Type=constructed
+[main]
+4 Ash Zealot|RTR
+4 Boros Charm|GTC
+4 Boros Elite|GTC
+4 Boros Guildgate|GTC
+2 Boros Reckoner|GTC
+2 Demonfire|DIS
+3 Firemane Avenger|GTC
+3 Flame-Kin Zealot|RAV
+4 Lightning Helix|RAV
+8 Mountain|RTR
+8 Plains|RTR
+4 Precinct Captain|RTR
+4 Sacred Foundry|GTC
+4 Seal of Fire|DIS
+3 Wojek Halberdiers|GTC
+[sideboard]
+[planes]
+[schemes]
+

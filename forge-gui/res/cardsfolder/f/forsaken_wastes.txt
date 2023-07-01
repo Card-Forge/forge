@@ -1,0 +1,10 @@
+Name:Forsaken Wastes
+ManaCost:2 B
+Types:World Enchantment
+S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | Execute$ TrigLoseLife5 | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell, that spell's controller loses 5 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1
+SVar:TrigLoseLife5:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ 5
+AI:RemoveDeck:Random
+Oracle:Players can't gain life.\nAt the beginning of each player's upkeep, that player loses 1 life.\nWhenever Forsaken Wastes becomes the target of a spell, that spell's controller loses 5 life.

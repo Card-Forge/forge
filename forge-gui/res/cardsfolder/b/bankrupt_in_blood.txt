@@ -1,0 +1,6 @@
+Name:Bankrupt in Blood
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Draw | Cost$ 1 B Sac<2/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+Oracle:As an additional cost to cast this spell, sacrifice two creatures.\nDraw three cards.

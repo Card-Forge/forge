@@ -1,0 +1,7 @@
+Name:Wojek Embermage
+ManaCost:3 R
+Types:Creature Human Wizard
+PT:1/2
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | Radiance$ True | PrecostDesc$ Radiance — | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature and each other creature that shares a color with it.
+AI:RemoveDeck:All
+Oracle:Radiance — {T}: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.

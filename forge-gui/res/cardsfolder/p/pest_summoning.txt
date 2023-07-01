@@ -1,0 +1,6 @@
+Name:Pest Summoning
+ManaCost:1 BG BG
+Types:Sorcery Lesson
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | SpellDescription$ Create two 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
+DeckHas:Ability$Token|LifeGain
+Oracle:Create two 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."

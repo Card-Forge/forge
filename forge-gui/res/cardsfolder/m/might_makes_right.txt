@@ -1,0 +1,10 @@
+Name:Might Makes Right
+ManaCost:5 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQY | TriggerDescription$ At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+SVar:X:Count$Valid Creature.greatestPower
+SVar:Y:Count$Valid Creature.greatestPower+YouCtrl
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. (It can attack and {T} this turn.)

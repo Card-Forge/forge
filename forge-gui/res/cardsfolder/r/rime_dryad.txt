@@ -1,0 +1,6 @@
+Name:Rime Dryad
+ManaCost:G
+Types:Creature Dryad
+PT:1/2
+K:Snow forestwalk
+Oracle:Snow forestwalk (This creature can't be blocked as long as defending player controls a snow Forest.)

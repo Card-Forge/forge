@@ -1,0 +1,8 @@
+Name:Weathered Runestone
+ManaCost:2
+Types:Artifact
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Graveyard,Library | Destination$ Battlefield | ValidLKI$ Permanent.nonland | Prevent$ True | Layer$ CantHappen | Description$ Nonland permanent cards in graveyards and libraries can't enter the battlefield.
+S:Mode$ CantBeCast | Origin$ Graveyard,Library | Description$ Players can't cast spells from graveyards or libraries.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Nonland permanent cards in graveyards and libraries can't enter the battlefield.\nPlayers can't cast spells from graveyards or libraries.

@@ -1,0 +1,7 @@
+Name:Glittering Lion
+ManaCost:2 W
+Types:Creature Cat
+PT:2/2
+K:Prevent all damage that would be dealt to CARDNAME.
+A:AB$ Debuff | Cost$ 3 | Defined$ Self | Keywords$ Prevent all damage that would be dealt to CARDNAME. | Activator$ Player | SpellDescription$ Until end of turn, CARDNAME loses "Prevent all damage that would be dealt to CARDNAME." Any player may activate this ability.
+Oracle:Prevent all damage that would be dealt to Glittering Lion.\n{3}: Until end of turn, Glittering Lion loses "Prevent all damage that would be dealt to Glittering Lion." Any player may activate this ability.

@@ -1,0 +1,74 @@
+BasicLandPercentage=10
+
+[Group MaxCnt=4 Percentage=19]
+Savannah
+Graypelt Refuge
+Windswept Heath
+Razorverge Thicket
+Sunpetal Grove
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Oath of Druids
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Forbidden Orchard
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Enlightened Tutor
+Idyllic Tutor
+[/Group]
+
+[Group MaxCnt=4 Percentage=11]
+Afterlife
+Crib Swap
+[/Group]
+
+[Group MaxCnt=4 Percentage=6]
+Deglamer
+Disenchant
+Naturalize
+Nature's Claim
+Revoke Existence
+Slice in Twain
+Solemn Offering
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Harmonize
+Harmonize
+Harmonize
+Ice Storm
+Fallow Earth
+Winter's Grasp
+[/Group]
+
+[Group MaxCnt=3 Percentage=7]
+Captured Sunlight
+Heroes' Reunion
+Nourish
+Soothing Balm
+Whitesun's Passage
+[/Group]
+
+[Group MaxCnt=1 Percentage=6]
+Akroma, Angel of Wrath
+Angel of Despair
+Blazing Archon
+Blightsteel Colossus
+Bogardan Hellkite
+Darksteel Colossus
+Emrakul, the Aeons Torn
+Hellkite Overlord
+Inkwell Leviathan
+Iona, Shield of Emeria
+Platinum Angel
+Progenitus
+Sphinx of the Steel Wind
+Ulamog, the Infinite Gyre
+Woodfall Primus
+[/Group]
+
+End

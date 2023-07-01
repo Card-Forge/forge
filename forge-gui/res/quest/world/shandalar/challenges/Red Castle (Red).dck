@@ -1,0 +1,45 @@
+[quest]
+id=1009
+OpponentName=Kzzy'n
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=33% chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG rules:red desc:a Red card;chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG rules:red desc:a Red card;3 red rares;50% 1 red rare
+Credit Reward=250
+HumanExtras=Gauntlet of Might
+AIExtras=Fire Drake
+[metadata]
+Name=quest9
+Title=Red Castle (Red)
+Difficulty=hard
+Description=This is the castle of the powerful Red Wizardess, Kzzy'n the Dragon Lord.
+Icon=Kzzyn.jpg
+Deck Type=constructed
+[main]
+1 Balance|LEB
+2 City of Brass|CHR
+2 Craw Wurm|4ED
+3 Disenchant|4ED
+3 Dragon Engine|ATQ
+4 Dragon Whelp|4ED
+2 Elder Land Wurm|LEG
+2 Fire Drake|DRK
+2 Fireball|4ED
+1 Forest|4ED
+1 Ivory Tower|ATQ
+4 Lightning Bolt|4ED
+10 Mountain|4ED
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Plains|4ED
+4 Plateau|LEB
+1 Regrowth|LEB
+2 Rukh Egg|ARN
+4 Savannah|LEB
+4 Shivan Dragon|4ED
+1 Sol Ring|LEB
+4 Taiga|LEB
+1 Wheel of Fortune|LEB
+2 Winds of Change|4ED
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Dwarven Strike Force
+ManaCost:4 R
+Types:Creature Dwarf Berserker
+PT:4/3
+A:AB$ Pump | Defined$ Self | Cost$ Discard<1/Random> | KW$ First Strike & Haste | SpellDescription$ CARDNAME gains first strike and haste until end of turn.
+Oracle:Discard a card at random: Dwarven Strike Force gains first strike and haste until end of turn.

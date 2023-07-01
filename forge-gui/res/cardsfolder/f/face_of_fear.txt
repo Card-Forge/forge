@@ -1,0 +1,8 @@
+Name:Face of Fear
+ManaCost:5 B
+Types:Creature Horror
+PT:3/4
+A:AB$ Pump | Cost$ 2 B Discard<1/Card> | Defined$ Self | KW$ Fear | SpellDescription$ CARDNAME gains fear until end of turn.
+SVar:AIPreference:DiscardCost$Card.cmcLE3
+AI:RemoveDeck:Random
+Oracle:{2}{B}, Discard a card: Face of Fear gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)

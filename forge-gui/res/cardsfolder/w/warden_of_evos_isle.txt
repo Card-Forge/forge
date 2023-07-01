@@ -1,0 +1,7 @@
+Name:Warden of Evos Isle
+ManaCost:2 U
+Types:Creature Bird Wizard
+PT:2/2
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Creature.withFlying | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells with flying you cast cost {1} less to cast.
+Oracle:Flying\nCreature spells with flying you cast cost {1} less to cast.

@@ -1,0 +1,8 @@
+Name:Blazing Rootwalla
+ManaCost:R
+Types:Creature Lizard
+PT:1/1
+A:AB$ Pump | Cost$ R | NumAtt$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate only once each turn.
+K:Madness:0
+DeckHints:Ability$Discard
+Oracle:{R}: Blazing Rootwalla gets +2/+0 until end of turn. Activate only once each turn.\nMadness {0} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

@@ -1,0 +1,7 @@
+Name:Magistrate's Veto
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.White,Creature.Blue | AddHiddenKeyword$ CARDNAME can't block. | Description$ White creatures and blue creatures can't block.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:White creatures and blue creatures can't block.

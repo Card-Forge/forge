@@ -1,0 +1,10 @@
+Name:Olivia's Bloodsworn
+ManaCost:1 B
+Types:Creature Vampire Soldier
+PT:2/1
+K:Flying
+K:CARDNAME can't block.
+A:AB$ Pump | Cost$ R | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | KW$ Haste | SpellDescription$ Target Vampire gains haste until end of turn.
+SVar:PlayMain1:ALWAYS
+SVar:BuffedBy:Creature.Vampire
+Oracle:Flying\nOlivia's Bloodsworn can't block.\n{R}: Target Vampire gains haste until end of turn.

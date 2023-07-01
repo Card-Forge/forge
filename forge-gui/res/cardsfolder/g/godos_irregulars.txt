@@ -1,0 +1,6 @@
+Name:Godo's Irregulars
+ManaCost:R
+Types:Creature Human Warrior
+PT:1/1
+A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.blockingSource | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature blocking it.
+Oracle:{R}: Godo's Irregulars deals 1 damage to target creature blocking it.

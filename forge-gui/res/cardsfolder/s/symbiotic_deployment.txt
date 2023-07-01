@@ -1,0 +1,8 @@
+Name:Symbiotic Deployment
+ManaCost:2 G
+Types:Enchantment
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
+A:AB$ Draw | Cost$ 1 tapXType<2/Creature> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Skip your draw step.\n{1}, Tap two untapped creatures you control: Draw a card.

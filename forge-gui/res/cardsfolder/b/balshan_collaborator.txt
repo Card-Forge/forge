@@ -1,0 +1,7 @@
+Name:Balshan Collaborator
+ManaCost:3 U
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Flying\n{B}: Balshan Collaborator gets +1/+1 until end of turn.

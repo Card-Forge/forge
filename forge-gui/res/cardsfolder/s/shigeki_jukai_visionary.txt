@@ -1,0 +1,9 @@
+Name:Shigeki, Jukai Visionary
+ManaCost:1 G
+Types:Legendary Enchantment Creature Snake Druid
+PT:1/3
+A:AB$ Dig | Cost$ 1 G T Return<1/CARDNAME> | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | Optional$ True | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest into your graveyard.
+A:AB$ ChangeZone | PrecostDesc$ Channel — | Cost$ X X G G Discard<1/NICKNAME> | ActivationZone$ Hand | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.nonLegendary+YouOwn | TargetMin$ X | TargetMax$ X | SpellDescription$ Return X target nonlegendary cards from your graveyard to your hand.
+SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard|Discard
+Oracle:{1}{G}, {T}, Return Shigeki, Jukai Visionary to its owner's hand: Reveal the top four cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest into your graveyard.\nChannel — {X}{X}{G}{G}, Discard Shigeki: Return X target nonlegendary cards from your graveyard to your hand.

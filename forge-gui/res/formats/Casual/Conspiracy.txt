@@ -1,0 +1,6 @@
+[format]
+Name:Conspiracy
+Type:Archived
+Subtype:Custom
+Order:138
+Sets:CNS, CN2

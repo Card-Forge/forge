@@ -1,0 +1,19 @@
+[metadata]
+Code=PAST
+Date=1997-04-01
+Name=Astral Cards
+Type=Funny
+
+[cards]
+1 C Aswan Jaguar @Pat Lewis
+2 C Call from the Grave @Quinton Hoover
+3 C Faerie Dragon @NéNé Thomas
+4 C Goblin Polka Band @Quinton Hoover
+5 C Necropolis of Azar @Rob Alexander
+6 C Orcish Catapult @Melissa A. Benson
+7 C Power Struggle @Mark Tedin
+8 C Prismatic Dragon @Amy Weber
+9 C Rainbow Knights @Douglas Shuler
+10 C Whimsy @Anson Maddocks
+11 C Pandora's Box @Amy Weber
+12 C Gem Bazaar @Liz Danforth

@@ -1,0 +1,8 @@
+Name:Trade Routes
+ManaCost:1 U
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SpellDescription$ Return target land you control to its owner's hand.
+A:AB$ Draw | Cost$ 1 Discard<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{1}: Return target land you control to its owner's hand.\n{1}, Discard a land card: Draw a card.

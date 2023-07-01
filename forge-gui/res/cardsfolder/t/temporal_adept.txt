@@ -1,0 +1,7 @@
+Name:Temporal Adept
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ ChangeZone | Cost$ U U U T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+SVar:NonCombatPriority:1
+Oracle:{U}{U}{U}, {T}: Return target permanent to its owner's hand.

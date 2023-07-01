@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/02/RIX6-Feb-26.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards drawn from your library are not relevant to the puzzle. Your life total is also not relevant.
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Vizier of Deferment;Siren's Ruse;Rallying Roar;Aether Tradewinds
+humanlibrary=Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning;Harnessed Lightning
+humangraveyard=
+humanbattlefield=Deadeye Brawler;Angel of Condemnation;Dire Fleet Ravager|Id:6;Inventor's Goggles|AttachedTo:6;Fetid Pools;Fetid Pools;Fetid Pools;Plains|Set:XLN;Plains|Set:XLN
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Midnight Entourage;Weaponcraft Enthusiast;Weaponcraft Enthusiast
+aiexile=
+aicommand=

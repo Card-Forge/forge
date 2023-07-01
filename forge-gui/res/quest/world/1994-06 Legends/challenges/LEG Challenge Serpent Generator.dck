@@ -1,0 +1,18 @@
+[quest]
+id=LEG Challenge: Serpent Generator
+OpponentName=The Serpents
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Serpent Generator|The Abyss
+[metadata]
+Name=LEG Challenge: Serpent Generator
+Title=The Serpents
+Difficulty=hard
+Description="I've had it with these artifact snakes on this abyssal plane!" -Samuel L. Jackson, Snakes on a Plane (sort of)
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+60 Swamp|LEB|1

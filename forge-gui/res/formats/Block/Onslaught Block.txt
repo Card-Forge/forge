@@ -1,0 +1,6 @@
+[format]
+Name:Onslaught Block
+Type:Archived
+Subtype:Block
+Order:128
+Sets:SCG, LGN, ONS

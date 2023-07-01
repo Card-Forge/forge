@@ -1,0 +1,10 @@
+Name:Oath of Druids
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigOathofDruids | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses target player who controls more creatures than they do and is their opponent. The first player may reveal cards from the top of their library until they reveal a creature card. If the first player does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
+SVar:TrigOathofDruids:DB$ Pump | TargetingPlayer$ TriggeredPlayer | ValidTgts$ Player.OpponentToActive+withMoreCreaturesThanActive | TgtPrompt$ Choose target player who controls more creatures than you and is your opponent | IsCurse$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ DigUntil | Defined$ TriggeredPlayer | Valid$ Creature | ValidDescription$ creature card | FoundDestination$ Battlefield | RevealedDestination$ Graveyard | AILogic$ OathOfDruids | Optional$ True
+SVar:NeedsToPlayVar:Z GEY
+SVar:Z:Count$Valid Creature.YouDontCtrl+inZoneBattlefield
+SVar:Y:Count$Valid Creature.YouCtrl+inZoneBattlefield
+Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more creatures than they do and is their opponent. The first player may reveal cards from the top of their library until they reveal a creature card. If the first player does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.

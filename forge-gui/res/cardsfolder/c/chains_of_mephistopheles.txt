@@ -1,0 +1,11 @@
+Name:Chains of Mephistopheles
+ManaCost:1 B
+Types:Enchantment
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ DiscardOne | NotFirstCardInDrawStep$ True | Description$ If a player would draw a card except the first one they draw in each of their draw steps, that player discards a card instead. If the player discards a card this way, they draw a card. If the player doesn't discard a card this way, they mill a card.
+SVar:DiscardOne:DB$ Discard | Defined$ ReplacedPlayer | Mandatory$ True | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ ReplacedPlayer | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | NumCards$ 1 | SubAbility$ MillOne
+SVar:MillOne:DB$ Mill | NumCards$ 1 | Defined$ ReplacedPlayer | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+DeckHas:Ability$Discard|Mill
+Oracle:If a player would draw a card except the first one they draw in each of their draw steps, that player discards a card instead. If the player discards a card this way, they draw a card. If the player doesn't discard a card this way, they mill a card.

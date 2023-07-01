@@ -1,0 +1,17 @@
+[metadata]
+Code=PEMN
+Date=2016-07-22
+Name=Eldritch Moon Promos
+Type=Promo
+ScryfallCode=PEMN
+
+[cards]
+39 R Sanctifier of Souls @David Palumbo
+46 R Thalia, Heretic Cathar @Johannes Voss
+64 R Identity Thief @Dan Scott
+72 R Niblis of Frost @Igor Kieryluk
+79 U Unsubstantiate @Svetlin Velinov
+98 R Noosegraf Mob @Winona Nelson
+117 R Assembled Alphas @Dan Scott
+176 R Ulvenwald Observer @Adam Paquette
+185 R Heron's Grace Champion @Viktor Titov

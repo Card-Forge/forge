@@ -1,0 +1,8 @@
+Name:Orazca Relic
+ManaCost:3
+Types:Artifact
+K:Ascend
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | Activation$ Blessing | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw a card. Activate only if you have the city's blessing.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{T}, Sacrifice Orazca Relic: You gain 3 life and draw a card. Activate only if you have the city's blessing.

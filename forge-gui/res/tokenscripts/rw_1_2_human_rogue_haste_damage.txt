@@ -1,0 +1,9 @@
+Name:Human Rogue Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Human Rogue
+PT:1/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters the battlefield, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Haste\nWhen this creature enters the battlefield, it deals 1 damage to any target.

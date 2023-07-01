@@ -1,0 +1,9 @@
+Name:Relic Golem
+ManaCost:3
+Types:Artifact Creature Golem
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LT8 | Description$ CARDNAME can't attack or block unless an opponent has eight or more cards in their graveyard.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+A:AB$ Mill | Cost$ 2 T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards. (They put the top two cards of their library into their graveyard.)
+DeckHas:Ability$Mill
+Oracle:Relic Golem can't attack or block unless an opponent has eight or more cards in their graveyard.\n{2}, {T}: Target player mills two cards. (They put the top two cards of their library into their graveyard.)

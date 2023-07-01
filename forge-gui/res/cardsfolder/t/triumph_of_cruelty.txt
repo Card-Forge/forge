@@ -1,0 +1,8 @@
+Name:Triumph of Cruelty
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCruelDiscard | TriggerDescription$ At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.
+SVar:TrigCruelDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | ConditionCheckSVar$ YourCruelty | ConditionSVarCompare$ GEOppsCruelty
+SVar:YourCruelty:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:OppsCruelty:Count$Valid Creature.YouDontCtrl$GreatestPower
+Oracle:At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.

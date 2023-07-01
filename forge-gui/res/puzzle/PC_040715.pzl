@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 040715 - Death in Segments
+URL:http://www.gatheringmagic.com/seanuy-040715-perplexing-chimera-2-death-in-segments/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=AI
+ActivePhase=Main2
+HumanLife=6
+AILife=13
+humanhand=Mountain|Set:DTK; Collateral Damage|Set:FRF; Twin Bolt|Set:DTK; Gravepurge|Set:DTK
+humangraveyard=Gurmag Angler|Set:FRF; Atarka Efreet|Set:DTK
+humanlibrary=Mountain|Set:DTK
+humanbattlefield=Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Mountain|Set:DTK; Mountain|Set:DTK; Mountain|Set:DTK; Shambling Goblin|Set:DTK; Kolaghan Stormsinger|Counters:P1P1=1|Set:DTK; Qarsi High Priest|Set:FRF; Qal Sisma Behemoth|Id:420|Set:DTK; Deadly Wanderings|Set:DTK
+aibattlefield=Pacifism|Set:DTK|AttachedTo:420|Set:DTK; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Blossoming Sands|Tapped|Set:FRF; Glade Watcher|Set:DTK; Champion of Arashin|Set:DTK; Segmented Krotiq|Counters:P1P1=1|Set:DTK; Segmented Krotiq|Counters:P1P1=1|Tapped|Set:DTK

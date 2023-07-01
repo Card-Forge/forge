@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Code of the Orzhov
+Description=The Orzhov guild is in the habit of making offers its enemies can't refuse. Led by sinister undead advisors, it demands loyalty at all costs. The haunt mechanic merely increases the influence the dead maintain over the affairs of the living.
+Deck Type=constructed
+Set=GPT
+Image=code_of_the_orzhov.jpg
+[main]
+2 Agent of Masks|GPT
+1 Belfry Spirit|GPT
+2 Blind Hunter|GPT
+2 Castigate|GPT
+1 Festival of the Guildpact|RAV
+2 Hissing Miasma|GPT
+2 Infectious Host|RAV
+1 Martyred Rusalka|GPT
+1 Mortify|GPT
+2 Mourning Thrull|GPT
+2 Orzhov Basilica|GPT
+2 Orzhov Euthanist|GPT
+1 Orzhov Guildmage|GPT
+1 Orzhova, the Church of Deals|GPT
+2 Ostiary Thrull|GPT
+2 Pillory of the Sleepless|GPT
+1 Plagued Rusalka|GPT
+10 Plains|RAV
+2 Poisonbelly Ogre|GPT
+2 Shrieking Grotesque|GPT
+1 Skeletal Vampire|GPT
+2 Souls of the Faultless|GPT
+2 Strands of Undeath|RAV
+11 Swamp|RAV
+1 Teysa, Orzhov Scion|GPT
+2 Thoughtpicker Witch|RAV
+[sideboard]

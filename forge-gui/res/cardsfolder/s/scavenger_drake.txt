@@ -1,0 +1,8 @@
+Name:Scavenger Drake
+ManaCost:3 B
+Types:Creature Drake
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever another creature dies, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying\nWhenever another creature dies, you may put a +1/+1 counter on Scavenger Drake.

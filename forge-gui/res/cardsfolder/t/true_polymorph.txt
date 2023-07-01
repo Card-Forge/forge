@@ -1,0 +1,7 @@
+Name:True Polymorph
+ManaCost:4 U U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature to polymorph | SubAbility$ DBClone | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Target artifact or creature becomes a copy of another target artifact or creature.
+SVar:DBClone:DB$ Clone | CloneTarget$ ParentTarget | ValidTgts$ Artifact,Creature | TgtPrompt$ Select another target artifact or creature to copy | TargetUnique$ True | StackDescription$ becomes a copy of {c:ThisTargetedCard}.
+AI:RemoveDeck:Random
+Oracle:Target artifact or creature becomes a copy of another target artifact or creature.

@@ -1,0 +1,6 @@
+Name:Kithkin Healer
+ManaCost:2 W
+Types:Creature Kithkin Cleric
+PT:2/2
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+Oracle:{T}: Prevent the next 1 damage that would be dealt to any target this turn.

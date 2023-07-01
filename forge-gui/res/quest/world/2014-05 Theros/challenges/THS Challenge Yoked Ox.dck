@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Yoked Ox
+OpponentName=The Herd
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Hall of Triumph|Spear of Heliod
+HumanExtras=
+[metadata]
+Name=THS Challenge: Yoked Ox
+Title=Olly olly oxen free!
+Difficulty=easy
+Description=It was in fields of grain, not fields of battle, that the Champion learned to bear the yoke of duty to the gods. She worked the land long before she was called on to defend it.\n-The Theriad
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+10 Dictate of Heliod|JOU
+20 Plains|THS|1
+30 Yoked Ox|THS

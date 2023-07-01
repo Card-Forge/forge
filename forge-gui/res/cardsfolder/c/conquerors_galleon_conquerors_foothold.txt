@@ -1,0 +1,23 @@
+Name:Conqueror's Galleon
+ManaCost:4
+Types:Artifact Vehicle
+PT:2/10
+K:Crew:4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTransform | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
+SVar:DelayedTransform:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ TriggeredAttacker | Execute$ TrigExile | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True
+AlternateMode:DoubleFaced
+Oracle:When Conqueror's Galleon attacks, exile it at end of combat, then return it to the battlefield transformed under your control.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
+
+ALTERNATE
+
+Name:Conqueror's Foothold
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+A:AB$ Draw | Cost$ 4 T | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ ChangeZone | Cost$ 6 T | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+Oracle:(Transforms from Conqueror's Galleon.)\n{T}: Add {C}.\n{2}, {T}: Draw a card, then discard a card.\n{4}, {T}: Draw a card.\n{6}, {T}: Return target card from your graveyard to your hand.

@@ -1,0 +1,9 @@
+Name:Serra's Guardian
+ManaCost:4 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Vigilance | Description$ Other creatures you control have vigilance.
+SVar:PlayMain1:TRUE
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nVigilance (Attacking doesn't cause this creature to tap.)\nOther creatures you control have vigilance.

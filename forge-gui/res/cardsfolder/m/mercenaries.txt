@@ -1,0 +1,8 @@
+Name:Mercenaries
+ManaCost:3 W
+Types:Creature Human Mercenary
+PT:3/3
+A:AB$ Effect | Cost$ 3 | EffectOwner$ You | Activator$ Player | ReplacementEffects$ Bribe | RememberObjects$ Self | AILogic$ Bribe | SpellDescription$ The next time CARDNAME would deal damage to you this turn, prevent that damage. Any player may activate this ability.
+SVar:Bribe:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time EFFECTSOURCE would deal damage to you this turn, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{3}: The next time Mercenaries would deal damage to you this turn, prevent that damage. Any player may activate this ability.

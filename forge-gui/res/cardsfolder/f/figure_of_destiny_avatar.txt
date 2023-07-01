@@ -1,0 +1,7 @@
+Name:Figure of Destiny Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+3
+A:AB$ PutCounter | ActivationZone$ Command | Cost$ X | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.counters_LTX_P1P1 | TgtPrompt$ Select target creature with fewer than X +1/+1 counters on it | SpellDescription$ Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.
+SVar:X:Count$xPaid
+Oracle:Hand +0, life +3\n{X}: Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.

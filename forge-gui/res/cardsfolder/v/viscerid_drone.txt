@@ -1,0 +1,7 @@
+Name:Viscerid Drone
+ManaCost:1 U
+Types:Creature Homarid Drone
+PT:1/2
+A:AB$ Destroy | Cost$ T Sac<1/Creature> Sac<1/Swamp> | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact creature. It can't be regenerated.
+A:AB$ Destroy | Cost$ T Sac<1/Creature> Sac<1/Swamp.Snow/Snow Swamp> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
+Oracle:{T}, Sacrifice a creature and a Swamp: Destroy target nonartifact creature. It can't be regenerated.\n{T}, Sacrifice a creature and a snow Swamp: Destroy target creature. It can't be regenerated.

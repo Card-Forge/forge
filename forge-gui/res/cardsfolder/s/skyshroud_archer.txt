@@ -1,0 +1,6 @@
+Name:Skyshroud Archer
+ManaCost:G
+Types:Creature Elf Archer
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature with flying gets -1/-1 until end of turn.
+Oracle:{T}: Target creature with flying gets -1/-1 until end of turn.

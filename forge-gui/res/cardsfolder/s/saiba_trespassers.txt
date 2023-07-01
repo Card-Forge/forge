@@ -1,0 +1,8 @@
+Name:Saiba Trespassers
+ManaCost:4 U
+Types:Artifact Creature Moonfolk Rogue
+PT:3/5
+A:AB$ Tap | PrecostDesc$ Channel — | Cost$ 3 U Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to two target creatures you don't control | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ DBPump | SpellDescription$ Tap up to two target creatures you don't control.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SpellDescription$ Those creatures don't untap during their controller's next untap step.
+DeckHas:Ability$Discard
+Oracle:Channel — {3}{U}, Discard Siba Trespassers: Tap up to two target creatures you don't control. Those creatures don't untap during their controller's next untap step.

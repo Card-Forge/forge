@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/06/117.-WAR7-v2.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards you could draw are irrelevant to the puzzle.
+[state]
+humanlife=8
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Narset's Reversal;Siren's Ruse;Fraying Omnipotence;Expansion // Explosion
+humanlibrary=Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus;Gigantosaurus
+humanbattlefield=Saheeli, Sublime Artificer|Counters:LOYALTY=3;Desperate Castaways;Sleek Schooner;Naru Meha, Master Wizard;Firemind Vessel;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Steam Vents|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs;Blood Crypt|NoETBTrigs
+aibattlefield=God-Eternal Oketra;t:Zombie Warrior,P:4,T:4,Cost:no cost,Color:B,Types:Creature-Zombie-Warrior,Keywords:Vigilance,Image:b_4_4_zombie_warrior_vigilance_war;Impassioned Orator;t:Zombie Warrior,P:4,T:4,Cost:no cost,Color:B,Types:Creature-Zombie-Warrior,Keywords:Vigilance,Image:b_4_4_zombie_warrior_vigilance_war;Impassioned Orator;t:Zombie Warrior,P:4,T:4,Cost:no cost,Color:B,Types:Creature-Zombie-Warrior,Keywords:Vigilance,Image:b_4_4_zombie_warrior_vigilance_war;Impassioned Orator

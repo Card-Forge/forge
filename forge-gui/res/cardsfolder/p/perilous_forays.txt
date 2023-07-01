@@ -1,0 +1,6 @@
+Name:Perilous Forays
+ManaCost:3 G G
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 1 Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.hasABasicLandType | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a land card with a basic land type, put it onto the battlefield tapped, then shuffle.
+AI:RemoveDeck:Random
+Oracle:{1}, Sacrifice a creature: Search your library for a land card with a basic land type, put it onto the battlefield tapped, then shuffle.

@@ -1,0 +1,7 @@
+Name:Mirror Gallery
+ManaCost:5
+Types:Artifact
+S:Mode$ IgnoreLegendRule | Description$ The "legend rule" doesn't apply.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:The "legend rule" doesn't apply.

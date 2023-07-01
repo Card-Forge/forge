@@ -1,0 +1,6 @@
+Name:Pitiless Gorgon
+ManaCost:1 B/G B/G
+Types:Creature Gorgon
+PT:2/2
+K:Deathtouch
+Oracle:Deathtouch

@@ -1,0 +1,5 @@
+Name:Angelic Purge
+ManaCost:2 W
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 W Sac<1/Permanent> | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact, creature or enchantment.
+Oracle:As an additional cost to cast this spell, sacrifice a permanent.\nExile target artifact, creature, or enchantment.

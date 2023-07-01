@@ -1,0 +1,8 @@
+Name:Noxious Dragon
+ManaCost:4 B B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may destroy target creature with mana value 3 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less
+Oracle:Flying\nWhen Noxious Dragon dies, you may destroy target creature with mana value 3 or less.

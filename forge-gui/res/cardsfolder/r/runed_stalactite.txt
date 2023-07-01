@@ -1,0 +1,6 @@
+Name:Runed Stalactite
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddAllCreatureTypes$ True | Description$ Equipped creature gets +1/+1 and is every creature type.
+K:Equip:2
+Oracle:Equipped creature gets +1/+1 and is every creature type.\nEquip {2}

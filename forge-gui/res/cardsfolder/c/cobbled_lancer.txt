@@ -1,0 +1,8 @@
+Name:Cobbled Lancer
+ManaCost:U
+Types:Creature Zombie Horse
+PT:3/3
+A:SP$ PermanentCreature | Cost$ U ExileFromGrave<1/Creature/creature card>
+A:AB$ Draw | Cost$ 3 U ExileFromGrave<1/CARDNAME> | NumCards$ 1 | ActivationZone$ Graveyard | SpellDescription$ Draw a card.
+DeckHas:Ability$Graveyard
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\n{3}{U}, Exile Cobbled Lancer from your graveyard: Draw a card.

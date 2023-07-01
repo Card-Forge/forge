@@ -1,0 +1,7 @@
+Name:Leonin Sun Standard
+ManaCost:2
+Types:Artifact
+A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White
+Oracle:{1}{W}: Creatures you control get +1/+1 until end of turn.

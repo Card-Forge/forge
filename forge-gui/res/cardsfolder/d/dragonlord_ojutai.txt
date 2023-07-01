@@ -1,0 +1,9 @@
+Name:Dragonlord Ojutai
+ManaCost:3 W U
+Types:Legendary Creature Elder Dragon
+PT:5/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it's untapped.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | Defined$ You | NoReveal$ True
+Oracle:Flying\nDragonlord Ojutai has hexproof as long as it's untapped.\nWhenever Dragonlord Ojutai deals combat damage to a player, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

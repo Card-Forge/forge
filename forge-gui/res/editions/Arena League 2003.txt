@@ -1,0 +1,16 @@
+[metadata]
+Code=PAL03
+Date=2003-01-01
+Name=Arena League 2003
+Type=Promo
+ScryfallCode=PAL03
+
+[cards]
+1 R Plains @Rob Alexander
+2 R Island @Rob Alexander
+3 R Swamp @Rob Alexander
+4 R Mountain @Rob Alexander
+5 R Forest @Rob Alexander
+6 R Skirk Marauder @Pete Venters
+7 R Elvish Aberration @Matt Cavotta
+8 R Bonesplitter @Darrell Riche

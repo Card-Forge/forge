@@ -1,0 +1,7 @@
+Name:Charging Troll
+ManaCost:2 G W
+Types:Creature Troll
+PT:3/3
+K:Vigilance
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+Oracle:Vigilance\n{G}: Regenerate Charging Troll.

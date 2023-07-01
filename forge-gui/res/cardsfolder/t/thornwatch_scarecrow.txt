@@ -1,0 +1,10 @@
+Name:Thornwatch Scarecrow
+ManaCost:6
+Types:Artifact Creature Scarecrow
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Wither | IsPresent$ Creature.Green+YouCtrl | Description$ CARDNAME has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Creature.White+YouCtrl | Description$ CARDNAME has vigilance as long as you control a white creature.
+SVar:BuffedBy:Creature.White,Creature.Green
+AI:RemoveDeck:Random
+DeckNeeds:Color$White|Green
+Oracle:Thornwatch Scarecrow has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)\nThornwatch Scarecrow has vigilance as long as you control a white creature.

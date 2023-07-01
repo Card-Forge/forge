@@ -1,0 +1,10 @@
+Name:Savai Thundermane
+ManaCost:R W
+Types:Creature Elemental Cat
+PT:3/2
+T:Mode$ Cycled | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever you cycle a card, you may pay {2}. When you do, CARDNAME deals 2 damage to target creature and you gain 2 life.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 2 | Execute$ TrigDealDamage | TriggerDescription$ When you do, CARDNAME deals 2 damage to target creature and you gain 2 life.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cycle a card, you may pay {2}. When you do, Savai Thundermane deals 2 damage to target creature and you gain 2 life.

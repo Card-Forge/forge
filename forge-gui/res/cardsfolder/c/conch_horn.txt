@@ -1,0 +1,6 @@
+Name:Conch Horn
+ManaCost:2
+Types:Artifact
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 2 | SubAbility$ DBTop | SpellDescription$ Draw two cards, then put a card from your hand on top of your library.
+SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
+Oracle:{1}, {T}, Sacrifice Conch Horn: Draw two cards, then put a card from your hand on top of your library.

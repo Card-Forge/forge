@@ -1,0 +1,7 @@
+Name:Weaver of Harmony
+ManaCost:1 G
+Types:Enchantment Creature Snake Druid
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Other+Enchantment+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other enchantment creatures you control get +1/+1.
+A:AB$ CopySpellAbility | Cost$ G T | TgtPrompt$ Select target activated or triggered ability you control from an enchantment source | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Enchantment | AILogic$ AlwaysCopyActivatedAbilities | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+Oracle:Other enchantment creatures you control get +1/+1.\n{G}, {T}: Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy. (Mana abilities can't be targeted.)

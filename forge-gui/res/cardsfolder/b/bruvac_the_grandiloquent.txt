@@ -1,0 +1,9 @@
+Name:Bruvac the Grandiloquent
+ManaCost:2 U
+Types:Legendary Creature Human Advisor
+PT:1/4
+R:Event$ Mill | ActiveZones$ Battlefield | ValidPlayer$ Player.Opponent | ReplaceWith$ MillTwice | Description$ If an opponent would mill one or more cards, they mill twice that many cards instead. (To mill a card, a player puts the top card of their library into their graveyard.)
+SVar:MillTwice:DB$ ReplaceEffect | VarName$ Number | VarValue$ X
+SVar:X:ReplaceCount$Number/Twice
+DeckHints:Ability$Mill
+Oracle:If an opponent would mill one or more cards, they mill twice that many cards instead. (To mill a card, a player puts the top card of their library into their graveyard.)

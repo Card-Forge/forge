@@ -1,0 +1,10 @@
+Name:Neonate's Rush
+ManaCost:2 R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Vampire.YouCtrl | Description$ This spell costs {1} less to cast if you control a Vampire.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature and 1 damage to its controller. Draw a card.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:BuffedBy:Vampire
+DeckHints:Type$Vampire
+Oracle:This spell costs {1} less to cast if you control a Vampire.\nNeonate's Rush deals 1 damage to target creature and 1 damage to its controller. Draw a card.

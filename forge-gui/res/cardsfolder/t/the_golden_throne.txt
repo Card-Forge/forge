@@ -1,0 +1,9 @@
+Name:The Golden Throne
+ManaCost:4
+Types:Legendary Artifact
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ Arcane Life-support — If you would lose the game, instead exile CARDNAME and your life total becomes 1.
+SVar:ExileSetLife:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 1
+A:AB$ Mana | Cost$ T Sac<1/Creature> | PrecostDesc$ A Thousand Souls Die Every Day — | Produced$ Combo Any | Amount$ 3 | SpellDescription$ Add three mana in any combination of colors.
+DeckHas:Ability$Sacrifice
+Oracle:Arcane Life-support — If you would lose the game, instead exile The Golden Throne and your life total becomes 1.\nA Thousand Souls Die Every Day — {T}, Sacrifice a creature: Add three mana in any combination of colors.

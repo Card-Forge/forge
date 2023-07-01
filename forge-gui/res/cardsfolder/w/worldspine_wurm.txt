@@ -1,0 +1,11 @@
+Name:Worldspine Wurm
+ManaCost:8 G G G
+Types:Creature Wurm
+PT:15/15
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create three 5/5 green Wurm creature tokens with trample.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCardLKICopy
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_5_5_wurm_trample | TokenOwner$ TriggeredCardController
+DeckHas:Ability$Token
+Oracle:Trample\nWhen Worldspine Wurm dies, create three 5/5 green Wurm creature tokens with trample.\nWhen Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.

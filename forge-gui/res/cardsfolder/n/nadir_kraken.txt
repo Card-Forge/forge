@@ -1,0 +1,9 @@
+Name:Nadir Kraken
+ManaCost:1 U U
+Types:Creature Kraken
+PT:2/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, you may pay {1}. If you do, put a +1/+1 counter on CARDNAME and create a 1/1 blue Tentacle creature token.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 1 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_tentacle
+DeckHas:Ability$Token|Counters
+Oracle:Whenever you draw a card, you may pay {1}. If you do, put a +1/+1 counter on Nadir Kraken and create a 1/1 blue Tentacle creature token.

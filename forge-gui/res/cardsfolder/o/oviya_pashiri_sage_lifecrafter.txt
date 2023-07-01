@@ -1,0 +1,9 @@
+Name:Oviya Pashiri, Sage Lifecrafter
+ManaCost:G
+Types:Legendary Creature Human Artificer
+PT:1/2
+A:AB$ Token | Cost$ 2 G T | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
+A:AB$ Token | Cost$ 4 G T | TokenAmount$ 1 | TokenScript$ c_x_x_a_construct | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:{2}{G}, {T}: Create a 1/1 colorless Servo artifact creature token.\n{4}{G}, {T}: Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control.

@@ -1,0 +1,7 @@
+Name:Ophiomancer
+ManaCost:2 B
+Types:Creature Human Shaman
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Snake.YouCtrl | PresentCompare$ EQ0 | TriggerDescription$ At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_snake_deathtouch | TokenOwner$ You
+Oracle:At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Jumpstart 2022 #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/01/215.-J22_1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Easy
+Description:Win this turn. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Flicker of Fate;Wicked Wolf;Duskshell Crawler;Kami of Ancient Law;Goldnight Commander
+p0battlefield=Magnanimous Magistrate|Counters:REPR=5;Fierce Witchstalker;Alseid of Life's Bounty;Plains;Plains;Plains;Forest;Forest;Forest
+p1life=11
+p1battlefield=Mizzix, Replica Rider;Transcendent Envoy

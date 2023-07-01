@@ -1,0 +1,7 @@
+Name:Whispersilk Cloak
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Shroud | Description$ Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy
+Oracle:Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}

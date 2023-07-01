@@ -1,0 +1,6 @@
+Name:Aerathi Berserker
+ManaCost:2 R R R
+Types:Creature Human Berserker
+PT:2/4
+K:Rampage:3
+Oracle:Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)

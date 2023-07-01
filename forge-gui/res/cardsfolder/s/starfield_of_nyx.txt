@@ -1,0 +1,11 @@
+Name:Starfield of Nyx
+ManaCost:4 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeNum$ 1 | TgtPrompt$ Select target enchantment card in your graveyard | ValidTgts$ Enchantment.YouOwn
+S:Mode$ Continuous | IsPresent$ Enchantment.YouCtrl | PresentCompare$ GE5 | Affected$ Enchantment.YouCtrl+nonAura+Other | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its mana value.
+SVar:AffectedX:Count$CardManaCost
+SVar:BuffedBy:Enchantment
+SVar:PlayMain1:ALWAYS
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.\nAs long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its mana value.

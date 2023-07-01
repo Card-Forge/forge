@@ -1,0 +1,7 @@
+Name:Thornweald Archer
+ManaCost:1 G
+Types:Creature Elf Archer
+PT:2/1
+K:Deathtouch
+K:Reach
+Oracle:Reach, deathtouch

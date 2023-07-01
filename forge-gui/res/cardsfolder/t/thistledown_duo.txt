@@ -1,0 +1,10 @@
+Name:Thistledown Duo
+ManaCost:2 WU
+Types:Creature Kithkin Soldier Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a white spell, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a blue spell, CARDNAME gains flying until end of turn.
+SVar:TrigPump11:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
+SVar:TrigPumpKW:DB$ Pump | KW$ Flying | Defined$ Self
+SVar:BuffedBy:Card.White,Card.Blue
+Oracle:Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.

@@ -1,0 +1,6 @@
+Name:Balduvian Dead
+ManaCost:3 B
+Types:Creature Zombie
+PT:2/3
+A:AB$ Token | Cost$ 2 R ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ br_3_1_graveborn_haste | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step.
+Oracle:{2}{R}, Exile a creature card from your graveyard: Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step.

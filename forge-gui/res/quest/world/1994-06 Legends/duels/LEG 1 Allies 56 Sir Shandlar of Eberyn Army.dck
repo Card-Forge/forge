@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=LEG 1 Allies: 56 Sir Shandlar of Eberyn (Army)
+Title=Sir Shandlar of Eberyn
+Difficulty=easy
+Description="Remember Sir Shandlar! Remember and stand firm!" -rallying cry of the Eberyn militia
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Akron Legionnaire|LEG
+2 Cleanse|LEG
+2 Concordant Crossroads|LEG
+4 D'Avenant Archer|LEG
+4 Elven Riders|LEG
+14 Forest|LEB|1
+2 Gabriel Angelfire|LEG
+2 Lady Caleria|LEG
+4 Master of the Hunt|LEG
+10 Plains|LEB|2
+4 Shield Wall|LEG
+2 Sir Shandlar of Eberyn|LEG
+2 Torsten Von Ursus|LEG
+4 Whirling Dervish|LEG

@@ -1,0 +1,23 @@
+[metadata]
+Code=PELP
+Date=2000-02-05
+Name=European Land Program
+Type=Promo
+ScryfallCode=PELP
+
+[cards]
+1 C Forest @Scott Bailey
+2 C Island @Ben Thompson
+3 C Mountain @Kev Walker
+4 C Plains @Mike Ploog
+5 C Swamp @Scott Bailey
+6 C Forest @Kev Walker
+7 C Island @Eric Peterson
+8 C Mountain @Scott Bailey
+9 C Plains @Eric Peterson
+10 C Swamp @Kev Walker
+11 C Forest @Mike Ploog
+12 C Island @Ben Thompson
+13 C Mountain @Eric Peterson
+14 C Plains @Ben Thompson
+15 C Swamp @Mike Ploog

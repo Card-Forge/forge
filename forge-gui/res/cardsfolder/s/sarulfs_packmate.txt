@@ -1,0 +1,8 @@
+Name:Sarulf's Packmate
+ManaCost:3 G
+Types:Creature Wolf
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Foretell:1 G
+Oracle:When Sarulf's Packmate enters the battlefield, draw a card.\nForetell {1}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,0 +1,9 @@
+Name:Blazing Specter
+ManaCost:2 B R
+Types:Creature Specter
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Flying, haste\nWhenever Blazing Specter deals combat damage to a player, that player discards a card.

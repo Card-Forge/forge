@@ -1,0 +1,12 @@
+Name:Personal Incarnation
+ManaCost:3 W W W
+Types:Creature Avatar Incarnation
+PT:6/6
+A:AB$ Effect | Cost$ 0 | Activator$ Player.Owner | Name$ Personal Incarnation Redirection | ReplacementEffects$ RedirectDamage | Duration$ UntilHostLeavesPlayOrEOT | EffectOwner$ CardOwner | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to its owner instead. Only CARDNAME's owner may activate this ability.
+SVar:RedirectDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ RedirectDmg | DamageTarget$ You | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to its owner instead. Only EFFECTSOURCE's owner may activate this ability.
+SVar:RedirectDmg:DB$ ReplaceSplitDamage | DamageTarget$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, its owner loses half their life, rounded up.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ HavocX
+SVar:HavocX:PlayerCountDefinedTriggeredCardOwner$LifeTotal/HalfUp
+AI:RemoveDeck:All
+Oracle:{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Only Personal Incarnation's owner may activate this ability.\nWhen Personal Incarnation dies, its owner loses half their life, rounded up.

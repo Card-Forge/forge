@@ -1,0 +1,6 @@
+Name:Marsh Threader
+ManaCost:1 W
+Types:Creature Kor Scout
+PT:2/1
+K:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

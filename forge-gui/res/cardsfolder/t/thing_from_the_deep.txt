@@ -1,0 +1,9 @@
+Name:Thing from the Deep
+ManaCost:6 U U U
+Types:Creature Leviathan
+PT:9/9
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSacUnless | TriggerDescription$ Whenever CARDNAME attacks, sacrifice it unless you sacrifice an Island.
+SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<1/Island> | UnlessPayer$ You
+SVar:NeedsToPlay:Island.YouCtrl
+AI:RemoveDeck:All
+Oracle:Whenever Thing from the Deep attacks, sacrifice it unless you sacrifice an Island.

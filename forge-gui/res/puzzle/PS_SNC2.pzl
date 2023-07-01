@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Streets of New Capenna #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/05/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all blocking possibilities. Your Maestros Diabolist is exiled with the opponent's Mysterious Limousine.
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Feign Death;Hostile Takeover;Murder;Even the Score;Grisly Sigil
+humanbattlefield=Behold the Unspeakable|Transformed;Cormela, Glamour Thief;Professional Face-Breaker;Stormcarved Coast;Stormcarved Coast;Stormcarved Coast;Waterfront District;Waterfront District;Maestros Diabolist|Id:1
+aibattlefield=Disciplined Duelist|Counters:SHIELD=1;White Dragon;Duelcraft Trainer;Mysterious Limousine|ExecuteScript:TrigExile->1

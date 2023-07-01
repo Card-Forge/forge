@@ -1,0 +1,8 @@
+Name:Yavimaya Enchantress
+ManaCost:2 G
+Types:Creature Human Druid
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each enchantment on the battlefield.
+SVar:X:Count$Valid Enchantment
+SVar:BuffedBy:Enchantment
+Oracle:Yavimaya Enchantress gets +1/+1 for each enchantment on the battlefield.

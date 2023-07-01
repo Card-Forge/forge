@@ -1,0 +1,9 @@
+Name:Ossuary Rats
+ManaCost:5 B
+Types:Creature Rat
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to target creature or planeswalker an opponent controls, where X is the number of creature cards in your graveyard.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X
+SVar:X:Count$TypeInYourYard.Creature
+DeckHints:Ability$Graveyard|Mill
+Oracle:When Ossuary Rats enters the battlefield, it deals X damage to target creature or planeswalker an opponent controls, where X is the number of creature cards in your graveyard.

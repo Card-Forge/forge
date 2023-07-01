@@ -1,0 +1,10 @@
+Name:Dromoka, the Eternal
+ManaCost:3 G W
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigBolster | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
+SVar:TrigBolster:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Bolster$ True
+SVar:PlayMain1:TRUE
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever a Dragon you control attacks, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)

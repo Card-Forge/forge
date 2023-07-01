@@ -1,0 +1,5 @@
+Name:Shoot Down
+ManaCost:3 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, enchantment or creature with flying | SpellDescription$ Exile target artifact, enchantment or creature with flying.
+Oracle:Exile target artifact, enchantment, or creature with flying.

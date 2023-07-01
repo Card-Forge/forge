@@ -1,0 +1,6 @@
+Name:Centaur Glade
+ManaCost:3 G G
+Types:Enchantment
+A:AB$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_3_3_centaur | SpellDescription$ Create a 3/3 green Centaur creature token.
+SVar:NonStackingEffect:True
+Oracle:{2}{G}{G}: Create a 3/3 green Centaur creature token.

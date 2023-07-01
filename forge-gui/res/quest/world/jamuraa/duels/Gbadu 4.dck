@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gbadu 4
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=very hard
+Description=Gbadu plays a T1 'Budget Zoo' deck.
+Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:creature rarity:C desc:a Common Creature
+[main]
+1 Balance|LEB
+1 Black Vise|LEB
+4 City of Brass|5ED
+2 Disenchant|5ED
+3 Erhnam Djinn|ARN
+4 Incinerate|MIR
+4 Kird Ape|ARN
+4 Lightning Bolt|LEB
+4 Plateau|LEB
+1 Regrowth|LEB
+4 River Boa|VIS
+4 Savannah|LEB
+3 Savannah Lions|LEB
+1 Stormbind|ICE
+4 Strip Mine|ATQ
+3 Swords to Plowshares|LEB
+4 Taiga|LEB
+2 Tithe|VIS
+3 Wasteland|TMP
+1 Wheel of Fortune|LEB
+2 Wildfire Emissary|MIR
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

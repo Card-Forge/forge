@@ -1,0 +1,7 @@
+Name:Sojourner's Companion
+ManaCost:7
+Types:Artifact Creature Salamander
+PT:4/4
+K:Affinity:Artifact
+K:TypeCycling:Land.Artifact:2
+Oracle:Affinity for artifacts\nArtifact landcycling {2} ({2}, Discard this card: Search your library for an artifact land card, reveal it, put it into your hand, then shuffle.)

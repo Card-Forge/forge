@@ -1,0 +1,6 @@
+Name:Furious Bellow
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | KW$ First Strike | SubAbility$ DBScry | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:DBScry:DB$ Scry
+Oracle:Target creature gets +3/+0 and gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

@@ -1,0 +1,8 @@
+Name:Heavenly Qilin
+ManaCost:2 W
+Types:Creature Kirin
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Heavenly Qilin attacks, another target creature you control gains flying until end of turn.

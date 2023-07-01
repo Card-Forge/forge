@@ -1,0 +1,6 @@
+Name:Medicine Bag
+ManaCost:3
+Types:Artifact
+A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ 1 T Discard<1/Card> | SpellDescription$ Regenerate target creature.
+AI:RemoveDeck:All
+Oracle:{1}, {T}, Discard a card: Regenerate target creature.

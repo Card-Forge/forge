@@ -1,0 +1,9 @@
+Name:Ethereal Forager
+ManaCost:4 U U
+Types:Creature Elemental Whale
+PT:3/3
+K:Delve
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may return an instant or sorcery card exiled with CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Hidden$ True | ChangeType$ Instant.ExiledWithSource,Sorcery.ExiledWithSource | ChangeNum$ 1
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\nWhenever Ethereal Forager attacks, you may return an instant or sorcery card exiled with Ethereal Forager to its owner's hand.

@@ -1,0 +1,8 @@
+Name:Vampire Lacerator
+ManaCost:B
+Types:Creature Vampire Warrior
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | ConditionLifeTotal$ OpponentSmallest | ConditionLifeAmount$ GE11
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.

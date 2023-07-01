@@ -1,0 +1,7 @@
+[format]
+Name:Pauper (2019-05-24)
+Type:Archived
+Subtype:Pauper
+Effective:2019-05-24
+Rarities:L, C
+Banned:Gush; Gitaxian Probe; Daze

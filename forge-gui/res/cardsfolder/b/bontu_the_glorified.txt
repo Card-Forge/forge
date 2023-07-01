@@ -1,0 +1,12 @@
+Name:Bontu the Glorified
+ManaCost:2 B
+Types:Legendary Creature God
+PT:4/6
+K:Menace
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack or block unless a creature died under your control this turn.
+A:AB$ Scry | Cost$ 1 B Sac<1/Creature.Other/another creature> | ScryNum$ 1 | SubAbility$ DBLoseLife | SpellDescription$ Scry 1. Each opponent loses 1 life and you gain 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+Oracle:Menace, indestructible\nBontu the Glorified can't attack or block unless a creature died under your control this turn.\n{1}{B}, Sacrifice another creature: Scry 1. Each opponent loses 1 life and you gain 1 life.

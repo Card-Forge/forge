@@ -1,0 +1,5 @@
+Name:Weight Advantage
+ManaCost:no cost
+Types:Conspiracy
+S:Mode$ CombatDamageToughness | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nEach creature you control assigns combat damage equal to its toughness rather than its power.

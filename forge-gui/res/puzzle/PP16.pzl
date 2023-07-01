@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #16 - Near-Death Experience
+URL:https://pauperpuzzles.wordpress.com/2017/03/04/16-near-death-experience/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=6
+humanhand=Carrion Feeder;Faerie Macabre;Doom Blade;Rite of Consumption;Dark Dabbling
+humanlibrary=Gurmag Angler
+humanbattlefield=Swamp;Swamp;Swamp;Forest;Forest;Forest;Forest;Arrogant Wurm;Gorgon Recluse
+aibattlefield=Stinkweed Imp|Id:16;Demonic Appetite|AttachedTo:16

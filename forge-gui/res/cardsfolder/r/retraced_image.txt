@@ -1,0 +1,9 @@
+Name:Retraced Image
+ManaCost:U
+Types:Sorcery
+A:SP$ Reveal | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Hand | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent.

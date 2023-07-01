@@ -1,0 +1,6 @@
+Name:Defy Death
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Angel
+Oracle:Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.

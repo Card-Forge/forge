@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Prodigal Sorcerer
+OpponentName=The Academy
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Prodigal Sorcerer
+Title=The Academy
+Difficulty=medium
+Description="There are some who call me... Tim?"
+Icon=Prodigal Sorcerer.jpg
+Deck Type=constructed
+[main]
+20 Island|LEB|2
+40 Prodigal Sorcerer|LEB

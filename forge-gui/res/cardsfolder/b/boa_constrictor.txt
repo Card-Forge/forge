@@ -1,0 +1,6 @@
+Name:Boa Constrictor
+ManaCost:4 G
+Types:Creature Snake
+PT:3/3
+A:AB$ Pump | Cost$ T | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+Oracle:{T}: Boa Constrictor gets +3/+3 until end of turn.

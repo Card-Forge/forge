@@ -1,0 +1,6 @@
+Name:Moss Kami
+ManaCost:5 G
+Types:Creature Spirit
+PT:5/5
+K:Trample
+Oracle:Trample

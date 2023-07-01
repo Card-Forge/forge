@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Vraska, Scheming Gorgon
+Description=Lead the vampires of Ixalan to victory as you drain the life from your opponent.
+Deck Type=constructed
+Set=RIX
+Image=vraska_scheming_gorgon.jpg
+[Main]
+1 Bishop of the Bloodstained|XLN
+1 Bright Reprisal|XLN
+1 Champion of Dusk|RIX
+1 Deathless Ancient|XLN
+1 Dusk Legion Zealot|RIX
+1 Exultant Skymarcher|RIX
+2 Famished Paladin|RIX
+4 Forsaken Sanctuary|RIX
+2 Gilded Sentinel|XLN
+2 Inspiring Cleric|XLN
+1 Legion Lieutenant|RIX
+2 Moment of Craving|RIX
+2 Moment of Triumph|RIX
+1 Paladin of Atonement|RIX
+3 Plains|RIX
+3 Plains|XLN|3
+3 Plains|XLN|4
+2 Queen's Bay Soldier|XLN
+1 Recover|RIX
+2 Skyblade of the Legion|XLN
+2 Skymarch Bloodletter|XLN
+4 Swamp|RIX
+4 Swamp|XLN|3
+3 Swamp|XLN|4
+4 Vampire Champion|RIX
+1 Vicious Conquistador|XLN
+3 Vraska's Conquistador|RIX
+2 Vraska's Scorn|RIX
+1 Vraska, Scheming Gorgon+|RIX

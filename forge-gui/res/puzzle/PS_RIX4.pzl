@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/02/RIX4-Feb-12.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has five cards in hand (but can't currently cast any).
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Chandra's Pyrohelix;Angrath, the Flame-Chained;Torment of Hailfire;Torment of Venom
+humanlibrary=
+humangraveyard=
+humanbattlefield=Voracious Vampire;Magmaroth|Counters:M1M1=4;Primal Amulet|Counters:CHARGE=3;Spirebluff Canal;Spirebluff Canal;Dragonskull Summit;Dragonskull Summit;Dragonskull Summit;Dowsing Dagger
+humanexile=
+humancommand=
+aihand=Wanted Scoundrels;Wanted Scoundrels;Wanted Scoundrels;Wanted Scoundrels;Wanted Scoundrels
+ailibrary=
+aigraveyard=
+aibattlefield=Wanted Scoundrels;t:Plant,P:0,T:2,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:Defender,Image:g_0_2_plant;t:Plant,P:0,T:2,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:Defender,Image:g_0_2_plant
+aiexile=
+aicommand=

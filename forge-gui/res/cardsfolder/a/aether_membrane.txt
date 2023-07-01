@@ -1,0 +1,11 @@
+Name:Aether Membrane
+ManaCost:1 R R
+Types:Creature Wall
+PT:0/5
+K:Defender
+K:Reach
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+SVar:HasBlockEffect:TRUE
+Oracle:Defender; reach (This creature can block creatures with flying.)\nWhenever Aether Membrane blocks a creature, return that creature to its owner's hand at end of combat.

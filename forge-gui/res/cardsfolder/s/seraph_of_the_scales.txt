@@ -1,0 +1,10 @@
+Name:Seraph of the Scales
+ManaCost:2 W B
+Types:Creature Angel
+PT:4/3
+K:Flying
+A:AB$ Pump | Cost$ W | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+K:Afterlife:2
+DeckHas:Ability$Token
+Oracle:Flying\n{W}: Seraph of the Scales gains vigilance until end of turn.\n{B}: Seraph of the Scales gains deathtouch until end of turn.\nAfterlife 2 (When this creature dies, create two 1/1 white and black Spirit creature tokens with flying.)

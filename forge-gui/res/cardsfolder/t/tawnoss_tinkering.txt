@@ -1,0 +1,9 @@
+Name:Tawnos's Tinkering
+ManaCost:3 G
+Types:Instant
+A:SP$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact, creature, or land you control | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on target artifact, creature, or land you control.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBAnimate | SpellDescription$ Untap that permanent.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card.nonCreature | Power$ 0 | Toughness$ 0 | Types$ Creature | Duration$ Permanent | StackDescription$ SpellDescription | SpellDescription$ If it isn't a creature, it becomes a 0/0 creature in addition to its other types.
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
+Oracle:Put two +1/+1 counters on target artifact, creature, or land you control. Untap that permanent. If it isn't a creature, it becomes a 0/0 creature in addition to its other types.

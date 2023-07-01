@@ -1,0 +1,7 @@
+Name:Skyline Predator
+ManaCost:4 U U
+Types:Creature Drake
+PT:3/4
+K:Flash
+K:Flying
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying

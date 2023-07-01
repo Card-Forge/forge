@@ -1,0 +1,8 @@
+Name:Stampede Rider
+ManaCost:2 R
+Types:Creature Satyr
+PT:2/3
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+powerGE4 | TriggerDescription$ At the beginning of each combat, if you control a creature with power 4 or greater, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
+Oracle:Trample\nAt the beginning of each combat, if you control a creature with power 4 or greater, Stampede Rider gets +1/+1 until end of turn.

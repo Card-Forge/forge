@@ -1,0 +1,14 @@
+Name:Radagast, Wizard of Wilds
+ManaCost:2 G U
+Types:Legendary Creature Avatar Wizard
+PT:3/5
+K:Ward:1
+S:Mode$ Continuous | Affected$ Beast.YouCtrl,Bird.YouCtrl | AddKeyword$ Ward:1 | Description$ Beasts and Birds you control have ward {1}.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ BeastToken,BirdToken
+SVar:BeastToken:DB$ Token | TokenScript$ g_3_3_beast | SpellDescription$ Create a 3/3 green Beast creature token.
+SVar:BirdToken:DB$ Token | TokenScript$ u_2_2_bird_flying | SpellDescription$ Create a 2/2 blue Bird creature token with flying.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Bird|Beast
+DeckHints:Type$Bird|Beast
+Oracle:Ward {1}\nBeasts and Birds you control have ward {1}.\nWhenever you cast a spell with mana value 5 or greater, choose one —\n• Create a 3/3 green Beast creature token.\n• Create a 2/2 blue Bird creature token with flying.

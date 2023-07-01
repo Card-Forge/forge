@@ -1,0 +1,12 @@
+Name:Lair of the Ashen Idol
+ManaCost:no cost
+Types:Plane Azgol
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ SacToIdol | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.
+SVar:SacToIdol:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SubAbility$ IdolWalk | RememberSacrificed$ True
+SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:IdolX:Remembered$Amount
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, any number of target players each create a 2/2 black Zombie creature token.
+SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | TokenAmount$ 1
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.\nWhenever chaos ensues, any number of target players each create a 2/2 black Zombie creature token.

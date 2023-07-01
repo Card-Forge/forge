@@ -1,0 +1,9 @@
+Name:Sprite Noble
+ManaCost:1 U U
+Types:Creature Faerie Noble
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl+StrictlyOther | AddToughness$ 1 | Description$ Other creatures you control with flying get +0/+1.
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.withFlying+StrictlyOther+YouCtrl | NumAtt$ +1 | SpellDescription$ Other creatures you control with flying get +1/+0 until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther creatures you control with flying get +0/+1.\n{T}: Other creatures you control with flying get +1/+0 until end of turn.

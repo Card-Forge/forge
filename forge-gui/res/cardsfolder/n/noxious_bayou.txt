@@ -1,0 +1,6 @@
+Name:Noxious Bayou
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SubAbility$ DBPain | SpellDescription$ Add {B} or {G}. You get a poison counter.
+SVar:DBPain:DB$ Poison | Defined$ You | Num$ 1
+Oracle:{T}: Add {B} or {G}. You get a poison counter.

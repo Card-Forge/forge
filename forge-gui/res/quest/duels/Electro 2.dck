@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Electro 2
+Title=Electro
+Difficulty=medium
+Description=WRG Naya deck with creatures with power 5 or greater
+Icon=Electro.jpg
+Deck Type=constructed
+[main]
+1 Lightning Bolt|M11
+2 Mountain|MBS
+2 Drumhunter|ALA
+1 Rumbling Slum|GPT
+1 Journey to Nowhere|ZEN
+2 Plateau|3ED
+2 Druid of the Anima|ALA
+1 Mycoid Shepherd|ARB
+1 Mosstodon|ALA
+2 Stomping Ground|GPT
+1 Fires of Yavimaya|INV
+1 Cliffrunner Behemoth|CFX
+2 Mighty Emergence|ALA
+1 Leyline of Vitality|M11
+1 Rakeclaw Gargantuan|ALA
+1 Oust|ROE
+2 Forest|MBS
+1 Spellbreaker Behemoth|ARB
+2 Savannah|3ED
+4 Jungle Shrine|ALA
+1 Relic Crush|ZEN
+2 Sacred Foundry|RAV
+2 Exuberant Firestoker|ALA
+1 Kranioceros|CFX
+2 Taiga|3ED
+2 Where Ancients Tread|ALA
+2 Lightning Helix|RAV
+2 Plains|MBS
+1 Kavu Lair|INV
+1 Enlisted Wurm|ARB
+1 Incurable Ogre|ALA
+1 Rith, the Awakener|INV
+2 Temple Garden|RAV
+1 Reborn Hope|ARB
+2 Sunseed Nurturer|ALA
+2 Rampant Growth|M10
+2 Woolly Thoctar|ALA
+2 Reflecting Pool|SHM
+[sideboard]

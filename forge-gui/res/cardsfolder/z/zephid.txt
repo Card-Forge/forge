@@ -1,0 +1,7 @@
+Name:Zephid
+ManaCost:4 U U
+Types:Creature Illusion
+PT:3/4
+K:Flying
+K:Shroud
+Oracle:Flying\nShroud (This creature can't be the target of spells or abilities.)

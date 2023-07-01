@@ -1,0 +1,9 @@
+Name:Wayward Guide-Beast
+ManaCost:R
+Types:Creature Beast
+PT:2/2
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return a land you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SelectPrompt$ Select a land you control to return to its owner's hand
+Oracle:Trample, haste\nWhenever Wayward Guide-Beast deals combat damage to a player, return a land you control to its owner's hand.

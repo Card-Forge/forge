@@ -1,0 +1,6 @@
+Name:Tidal Kraken
+ManaCost:5 U U U
+Types:Creature Kraken
+PT:6/6
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Tidal Kraken can't be blocked.

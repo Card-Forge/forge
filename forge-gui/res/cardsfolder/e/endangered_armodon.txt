@@ -1,0 +1,8 @@
+Name:Endangered Armodon
+ManaCost:2 G G
+Types:Creature Elephant
+PT:4/5
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.toughnessLE2+YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a creature with toughness 2 or less, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+AI:RemoveDeck:Random
+Oracle:When you control a creature with toughness 2 or less, sacrifice Endangered Armodon.

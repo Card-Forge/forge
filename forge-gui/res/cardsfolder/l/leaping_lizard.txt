@@ -1,0 +1,6 @@
+Name:Leaping Lizard
+ManaCost:1 G G
+Types:Creature Lizard
+PT:2/3
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumDef$ -1 | KW$ Flying | SpellDescription$ CARDNAME gains flying and gets -0/-1 until end of turn.
+Oracle:{1}{G}: Leaping Lizard gets -0/-1 and gains flying until end of turn.

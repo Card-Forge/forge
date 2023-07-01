@@ -1,0 +1,6 @@
+Name:Plated Rootwalla
+ManaCost:4 G
+Types:Creature Lizard
+PT:3/3
+A:AB$ Pump | Cost$ 2 G | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +3/+3 until end of turn. Activate only once each turn.
+Oracle:{2}{G}: Plated Rootwalla gets +3/+3 until end of turn. Activate only once each turn.

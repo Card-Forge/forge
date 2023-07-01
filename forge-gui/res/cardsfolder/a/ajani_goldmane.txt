@@ -1,0 +1,9 @@
+Name:Ajani Goldmane
+ManaCost:2 W W
+Types:Legendary Planeswalker Ajani
+Loyalty:4
+A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | LifeAmount$ 2 | Planeswalker$ True | SpellDescription$ You gain 2 life.
+A:AB$ PutCounterAll | Cost$ SubCounter<1/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | TokenAmount$ 1 | TokenScript$ w_x_x_avatar_life_total | TokenOwner$ You | Planeswalker$ True | Ultimate$ True | SpellDescription$ Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."
+Oracle:[+1]: You gain 2 life.\n[-1]: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.\n[-6]: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."

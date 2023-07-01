@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mr Slate 3
+Title=Mr Slate
+Difficulty=hard
+Description=WU Merfolk deck with Merrow Reejerey, Lord of Atlantis and Stonybrook Banneret
+Icon=Mr Slate.jpg
+Deck Type=constructed
+[main]
+1 Plains|M11
+8 Island|M11
+4 Tundra
+4 Flooded Strand
+4 Wanderwine Hub
+1 Mox Sapphire
+1 Mox Pearl
+2 Spreading Seas
+1 Merrow Commerce
+1 Cold-Eyed Selkie
+4 Merrow Reejerey
+1 Lord of Atlantis
+3 Master of the Pearl Trident
+2 Coralhelm Commander
+3 Stonybrook Banneret
+1 Merfolk Sovereign
+4 Silvergill Adept
+1 Judge of Currents
+1 Stonybrook Schoolmaster
+4 Sejiri Merfolk
+4 Tidal Courier
+1 Wake Thrasher
+1 Time Walk
+1 Ancestral Recall
+2 Path to Exile
+[sideboard]

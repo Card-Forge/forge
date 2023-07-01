@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Breath of Fire
+Description=Play with fire and burn your opponent with this deck packed with direct damage. Heat things up to a fever pitch with Ancient Hellkite, a big flier with one thing in mind: ending the game. 
+Deck Type=constructed
+Set=M11
+Image=breath_of_fire.jpg
+[main]
+1 Stone Golem|M11
+9 Island|M11
+16 Mountain|M11
+1 Ancient Hellkite+|M11
+1 Augury Owl|M11
+2 Berserkers of Blood Ridge|M11
+1 Canyon Minotaur|M11
+2 Chandra's Spitfire|M11
+1 Cyclops Gladiator|M11
+1 Earth Servant|M11
+2 Ember Hauler|M11
+2 Fiery Hellhound|M11
+1 Fire Servant|M11
+1 Goblin Piker|M11
+2 Goblin Tunneler|M11
+2 Prodigal Pyromancer|M11
+1 Shiv's Embrace|M11
+3 Chandra's Outrage|M11
+3 Lightning Bolt|M11
+1 Negate|M11
+1 Unsummon|M11
+1 Call to Mind|M11
+1 Fireball|M11
+1 Foresee|M11
+2 Lava Axe|M11
+1 Preordain|M11
+[sideboard]

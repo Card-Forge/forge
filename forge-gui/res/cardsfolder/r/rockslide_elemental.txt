@@ -1,0 +1,8 @@
+Name:Rockslide Elemental
+ManaCost:2 R
+Types:Creature Elemental
+PT:1/1
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever another creature dies, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:First strike\nWhenever another creature dies, you may put a +1/+1 counter on Rockslide Elemental.

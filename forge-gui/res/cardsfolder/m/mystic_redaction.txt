@@ -1,0 +1,8 @@
+Name:Mystic Redaction
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you discard a card, each opponent mills two cards. (They put the top two cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2
+Oracle:At the beginning of your upkeep, scry 1.\nWhenever you discard a card, each opponent mills two cards. (They put the top two cards of their library into their graveyard.)

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ako Ninjutsu 2
+Title=Ninjutsu
+Difficulty=medium
+Description=BU deck full of ninjas and evasive creatures to get them in.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Dance of Shadows|CHK
+3 Higure, the Still Wind|BOK
+3 Ink-Eyes, Servant of Oni|BOK
+2 Island|CHK|1
+3 Island|CHK|2
+4 Island|CHK|3
+1 Island|CHK|4
+1 Minamo, School at Water's Edge|CHK
+1 Mirror Gallery|BOK
+4 Mistblade Shinobi|BOK
+4 Nezumi Cutthroat|CHK
+3 Ninja of the Deep Hours|BOK
+4 River Kaijin|CHK
+4 Ronin Warclub|BOK
+4 Shuriken|BOK
+2 Swamp|CHK|2
+3 Swamp|CHK|4
+4 Tendo Ice Bridge|BOK
+4 Throat Slitter|BOK
+1 Untaidake, the Cloud Keeper|CHK
+4 Waterveil Cavern|CHK
+[Sideboard]
+

@@ -1,0 +1,18 @@
+[metadata]
+Code=G09
+Date=2009-01-01
+Name=Judge Gift Cards 2009
+Type=Promo
+ScryfallCode=G09
+
+[cards]
+1 R Dark Ritual @Mark Hyzer
+2 R Maze of Ith @Zoltan Boros & Gabor Szikszai
+3 R Stifle @Eric Fortune
+4 R Survival of the Fittest @Shelly Wan
+5 R Burning Wish @Ariel Olivetti
+6 R Bloodstained Mire @Rob Alexander
+7 R Flooded Strand @Rob Alexander
+8 R Polluted Delta @Rob Alexander
+9 R Windswept Heath @Anthony S. Waters
+10 R Wooded Foothills @Rob Alexander

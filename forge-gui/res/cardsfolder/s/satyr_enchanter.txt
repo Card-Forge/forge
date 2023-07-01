@@ -1,0 +1,8 @@
+Name:Satyr Enchanter
+ManaCost:1 G W
+Types:Creature Satyr Druid
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever you cast an enchantment spell, draw a card.

@@ -1,0 +1,6 @@
+Name:Protection of the Hekma
+ManaCost:4 W
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source an opponent controls would deal damage to you, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+Oracle:If a source an opponent controls would deal damage to you, prevent 1 of that damage.

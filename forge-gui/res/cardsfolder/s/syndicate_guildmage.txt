@@ -1,0 +1,7 @@
+Name:Syndicate Guildmage
+ManaCost:W B
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Tap target creature with power 4 or greater.
+A:AB$ DealDamage | Cost$ 4 B T | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target opponent or planeswalker.
+Oracle:{1}{W}, {T}: Tap target creature with power 4 or greater.\n{4}{B}, {T}: Syndicate Guildmage deals 2 damage to target opponent or planeswalker.

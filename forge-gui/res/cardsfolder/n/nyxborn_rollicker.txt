@@ -1,0 +1,7 @@
+Name:Nyxborn Rollicker
+ManaCost:R
+Types:Enchantment Creature Satyr
+PT:1/1
+K:Bestow:1 R
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Bestow {1}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nEnchanted creature gets +1/+1.

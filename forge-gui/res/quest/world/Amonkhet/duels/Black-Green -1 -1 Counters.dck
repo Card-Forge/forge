@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Black-Green -1 -1 Counters
+Title=Hapatra
+Difficulty=medium
+Icon=Hapatra, Vizier of Poisons.jpg
+Description="If you fear poisons, it is because you are ignorant of them."
+Deck Type=constructed
+[Main]
+1 Cartouche of Ambition|AKH
+1 Defiant Greatmaw|AKH
+1 Dune Beetle|AKH
+1 Final Reward|AKH
+4 Forest|E01|1
+4 Forest|E01|2
+1 Gravedigger|AKH
+1 Greater Sandwurm|AKH
+1 Grim Strider|AKH
+1 Hapatra, Vizier of Poisons|AKH
+1 Initiate's Companion|AKH
+1 Miasmic Mummy|AKH
+1 Naga Vitalist|AKH
+1 Oracle's Vault|AKH
+1 Ornery Kudu|AKH
+2 Pouncing Cheetah|AKH
+1 Prowling Serpopard|AKH
+3 Quarry Hauler|AKH
+1 Scaled Behemoth|AKH
+1 Sheltered Thicket|AKH
+1 Spidery Grasp|AKH
+4 Swamp|E01|1
+4 Swamp|E01|2
+1 Unburden|AKH
+1 Wander in Death|AKH
+[Sideboard]
+1 Aven Initiate|AKH
+1 Benefaction of Rhonas|AKH
+1 Blazing Volley|AKH
+1 Blighted Bat|AKH
+1 By Force|AKH
+1 Compulsory Rest|AKH
+1 Decision Paralysis|AKH
+1 Dissenter's Deliverance|AKH
+1 Fling|AKH
+2 Gift of Paradise|AKH
+1 Khenra Charioteer|AKH
+1 Nest of Scarabs|AKH
+1 Onward // Victory|AKH
+1 Pitiless Vizier|AKH
+1 Pursue Glory|AKH
+1 Seraph of the Suns|AKH
+1 Winds of Rebuke|AKH

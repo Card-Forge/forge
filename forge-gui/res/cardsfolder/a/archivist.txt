@@ -1,0 +1,7 @@
+Name:Archivist
+ManaCost:2 U U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Draw | Cost$ T | SpellDescription$ Draw a card.
+SVar:NonCombatPriority:1
+Oracle:{T}: Draw a card.

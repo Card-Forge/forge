@@ -1,0 +1,18 @@
+[metadata]
+Code=PSOI
+Date=2016-04-08
+Name=Shadows over Innistrad Promos
+Type=Promo
+ScryfallCode=PSOI
+
+[cards]
+2 R Angel of Deliverance @Chris Rahn
+15 R Drogskol Cavalry @Johann Bodin
+75 R Nephalia Moondrakes @Chris Rahn
+108 R Elusive Tormentor @Anna Steinbauer
+122 R Markov Dreadknight @Cynthia Sheppard
+157 R Flameblade Angel @Howard Lyon
+166 U Incorrigible Youths @Jason A. Engle
+175 U Ravenous Bloodseeker @Anna Steinbauer
+230 R Soul Swallower @Izzy
+242 R Anguished Unmaking @Viktor Titov

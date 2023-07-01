@@ -1,0 +1,6 @@
+Name:Wild Colos
+ManaCost:2 R
+Types:Creature Goat Beast
+PT:2/2
+K:Haste
+Oracle:Haste

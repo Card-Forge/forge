@@ -1,0 +1,8 @@
+Name:Moldgraf Scavenger
+ManaCost:1 G
+Types:Creature Fungus
+PT:0/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Delirium | Description$ Delirium — CARDNAME gets +3/+0 as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Moldgraf Scavenger gets +3/+0 as long as there are four or more card types among cards in your graveyard.

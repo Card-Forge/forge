@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Obatala 3
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=hard
+Description=Obatala plays a monowhite 'Legion of Glory' deck.
+Deck Type=constructed
+[main]
+1 Afterlife|MIR
+1 Blinding Light|MIR
+2 Favorable Destiny|MIR
+2 Femeref Healer|MIR
+3 Femeref Scouts|MIR
+1 Hope Charm|VIS
+3 Infantry Veteran|VIS
+2 Jamuraan Lion|VIS
+2 Knight of Valor|VIS
+1 Longbow Archer|VIS
+2 Magma Mine|VIS
+2 Miraculous Recovery|VIS
+2 Pacifism|MIR
+23 Plains|MIR
+1 Resistance Fighter|VIS
+1 Retribution of the Meek|VIS
+2 Reverse Damage|LEB
+2 Sun Clasp|VIS
+2 Vigilant Martyr|MIR
+1 Ward of Lights|MIR
+1 Warrior's Honor|VIS
+2 Zhalfirin Commander|MIR
+1 Zhalfirin Crusader|VIS
+[sideboard]
+[planes]
+[schemes]

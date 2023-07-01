@@ -1,0 +1,6 @@
+Name:Scribe of the Mindful
+ManaCost:2 U
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+Oracle:{1}, {T}, Sacrifice Scribe of the Mindful: Return target instant or sorcery card from your graveyard to your hand.

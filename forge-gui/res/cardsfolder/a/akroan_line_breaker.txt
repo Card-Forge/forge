@@ -1,0 +1,7 @@
+Name:Akroan Line Breaker
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, CARDNAME gets +2/+0 and gains intimidate until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ Intimidate
+Oracle:Heroic — Whenever you cast a spell that targets Akroan Line Breaker, Akroan Line Breaker gets +2/+0 and gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)

@@ -1,0 +1,10 @@
+[metadata]
+Code=PODY
+Date=2001-10-01
+Name=Odyssey Promos
+Type=Promo
+CardLang=ar
+ScryfallCode=PODY
+
+[cards]
+276 R Stone-Tongue Basilisk @Wayne England

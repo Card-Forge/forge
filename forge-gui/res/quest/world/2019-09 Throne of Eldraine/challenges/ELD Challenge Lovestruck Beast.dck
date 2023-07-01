@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Lovestruck Beast
+OpponentName=The Beasts
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Lovestruck Beast
+Difficulty=hard
+Description="If he could learn to love another, and earn her love in return by the time the last petal fell, then the spell would be broken. If not, he would be doomed to remain a beast for all time... For who could ever learn to love a beast?"\n-Disney's 1991 animated feature film Beauty & the Beast
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Lovestruck Beast
+[Main]
+30 Forest|ELD|1
+30 Lovestruck Beast|ELD|2

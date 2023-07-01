@@ -1,0 +1,10 @@
+Name:Magus of the Scroll
+ManaCost:R
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ NameCard | Cost$ 3 T | Defined$ You | SubAbility$ DBReveal | AILogic$ CursedScroll | SpellDescription$ Choose a card name, then reveal a card at random from your hand. If that card has the chosen name, CARDNAME deals 2 damage to any target.
+SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Any | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PreferredHandSize:1
+Oracle:{3}, {T}: Choose a card name, then reveal a card at random from your hand. If that card has the chosen name, Magus of the Scroll deals 2 damage to any target.

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Oberon 3
+Title=Oberon
+Difficulty=hard
+Description=UB Faeries deck
+Icon=Oberon.jpg
+Deck Type=constructed
+[main]
+4 Secluded Glen|LRW
+4 Drowned Catacomb|M11
+8 Swamp|MBS
+8 Island|MBS
+4 Scion of Oona|LRW
+4 Bitterblossom|MOR
+3 Wasp Lancer|SHM
+4 Glen Elendra Liege|SHM
+1 Vendilion Clique|MOR
+4 Despise|NPH
+4 Spellstutter Sprite
+4 Violet Pall|MOR
+4 Sower of Temptation|LRW
+1 Wydwen, the Biting Gale|LRW
+3 Faerie Trickery|LRW
+[sideboard]

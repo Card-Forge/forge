@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Link 3
+Title=Link
+Difficulty=hard
+Description=WB Warrior deck with Chief of the Edge and Chief of the Scale
+Icon=Link.jpg
+Deck Type=constructed
+[main]
+2 Godless Shrine
+2 Isolated Chapel
+4 Marsh Flats
+4 Plains
+4 Scrubland
+4 Swamp
+3 Battle Brawler
+3 Blood-Chin Rager
+1 Bloodsoaked Champion
+4 Chief of the Edge
+4 Chief of the Scale
+1 Dragon Hunter
+1 Erg Raiders
+3 Herald of Dromoka
+3 Mardu Woe-Reaper
+1 Ogre Marauder
+1 Secure the Wastes
+2 Arashin Foremost
+1 Mardu Strike Leader
+1 Obsidian Battle-Axe
+1 Shared Triumph
+3 Mortify
+1 Swords to Plowshares
+1 Doom Blade
+1 Terror
+1 Valorous Stance
+1 Zealous Persecution
+1 Night's Whisper
+1 Diplomacy of the Wastes
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Telepathy
+ManaCost:U
+Types:Enchantment
+S:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.OppOwn | MayLookAt$ Player | Description$ Your opponents play with their hands revealed.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:Your opponents play with their hands revealed.

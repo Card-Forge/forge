@@ -1,0 +1,13 @@
+Name:Selvala, Explorer Returned
+ManaCost:1 G W
+Types:Legendary Creature Elf Scout
+PT:2/4
+A:AB$ PeekAndReveal | Cost$ T | PrecostDesc$ Parley — | Defined$ Player | RememberRevealed$ True | SubAbility$ DBMana | SpellDescription$ Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card.
+SVar:DBMana:DB$ Mana | Produced$ G | Amount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+AI:RemoveDeck:All
+DeckHas:Ability$LifeGain
+Oracle:Parley — {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card.

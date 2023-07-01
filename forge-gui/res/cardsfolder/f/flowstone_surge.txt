@@ -1,0 +1,7 @@
+Name:Flowstone Surge
+ManaCost:1 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ -1 | Description$ Creatures you control get +1/-1.
+AI:RemoveDeck:All
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +1/-1.

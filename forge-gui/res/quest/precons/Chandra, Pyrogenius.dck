@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Chandra, Pyrogenius
+Description=You'll fly rings around the dizzying spires of Kaladesh in airships and other magically powered vehicles, raining down fire upon your enemies as they struggle to fight back. Summon the Planeswalker Chandra Nalaar-- with a card unique to this deck-- to clinch your victory.
+Deck Type=constructed
+Set=KLD
+Image=chandra_pyrogenius.jpg
+[Main]
+1 Chandra, Pyrogenius+|KLD
+1 Speedway Fanatic|KLD
+1 Gearshift Ace|KLD
+2 Trusty Companion|KLD
+2 Veteran Motorist|KLD
+1 Weldfast Monitor|KLD
+3 Renegade Firebrand|KLD
+2 Spireside Infiltrator|KLD
+1 Brazen Scourge|KLD
+2 Aerial Responder|KLD
+1 Snare Thopter|KLD
+1 Skyswirl Harrier|KLD
+1 Cathartic Reunion|KLD
+2 Liberating Combustion|KLD
+2 Built to Last|KLD
+4 Flame Lash|KLD
+1 Fateful Showdown|KLD
+2 Sky Skiff|KLD
+2 Renegade Freighter|KLD
+1 Bomat Bazaar Barge|KLD
+1 Fleetwheel Cruiser|KLD
+1 Ovalchase Dragster|KLD
+4 Stone Quarry|KLD
+11 Mountain|KLD
+10 Plains|KLD

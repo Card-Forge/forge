@@ -1,0 +1,7 @@
+Name:Aeromoeba
+ManaCost:3 U
+Types:Creature Elemental Beast
+PT:2/4
+K:Flying
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+Oracle:Flying\nDiscard a card: Switch Aeromoeba's power and toughness until end of turn.

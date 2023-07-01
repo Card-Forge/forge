@@ -1,0 +1,9 @@
+Name:The Countdown Is at One
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Subgame | RememberPlayers$ NotWin | StartingLife$ 1 | SubAbility$ DBEffect | SpellDescription$ Players play a Magic subgame, starting at 1 life and using their libraries as their decks.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Player.IsRemembered | ReplacementEffects$ DmgEvent | Duration$ Permanent | SpellDescription$ For the rest of the main game, if a source would deal damage to a player who didn't win the subgame, it deals double that damage to that player instead.
+SVar:DmgEvent:Event$ DamageDone | ValidTarget$ Player.IsRemembered | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a player who didn't win the subgame, it deals double that damage to that player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:Players play a Magic subgame, starting at 1 life and using their libraries as their decks. For the rest of the main game, if a source would deal damage to a player who didn't win the subgame, it deals double that damage to that player instead.

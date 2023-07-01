@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shanna 3
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=hard
+Description=Shanna plays a T1 GRW speed deck.
+Deck Type=constructed
+[main]
+1 Armageddon|5ED
+2 Army of Allah|ARN
+1 Balance|LEB
+4 Birds of Paradise|LEB
+1 Black Lotus|LEB
+1 Black Vise|LEB
+1 Fastbond|LEB
+2 Fervor|WTH
+4 Fireblast|VIS
+4 Gemstone Mine|WTH
+2 Giant Growth|LEB
+4 Kird Ape|ARN
+1 Library of Alexandria|ARN
+4 Lightning Bolt|LEB
+4 Mishra's Factory|ATQ
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+4 Mtenda Lion|MIR
+4 Plateau|LEB
+4 Reflecting Pool|TMP
+4 Savannah|LEB
+4 Savannah Lions|LEB
+4 Swords to Plowshares|LEB
+4 Taiga|LEB
+4 Tundra Wolves|LEG
+1 Winter Orb|LEB
+[sideboard]
+[planes]
+[schemes]

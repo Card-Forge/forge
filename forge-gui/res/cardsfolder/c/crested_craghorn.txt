@@ -1,0 +1,8 @@
+Name:Crested Craghorn
+ManaCost:4 R
+Types:Creature Goat Beast
+PT:4/1
+K:Haste
+K:Provoke
+AI:RemoveDeck:All
+Oracle:Haste\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

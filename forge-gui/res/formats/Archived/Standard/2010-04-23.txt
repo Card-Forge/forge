@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ROE)
+Type:Archived
+Subtype:Standard
+Effective:2010-04-23
+Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE

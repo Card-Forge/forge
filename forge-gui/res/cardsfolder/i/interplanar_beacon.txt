@@ -1,0 +1,9 @@
+Name:Interplanar Beacon
+ManaCost:no cost
+Types:Land
+T:Mode$ SpellCast | ValidCard$ Planeswalker | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a planeswalker spell, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Combo AnyDifferent | Amount$ 2 | RestrictValid$ Spell.Planeswalker | SpellDescription$ Add two mana of different colors. Spend this mana only to cast planeswalker spells.
+AI:RemoveDeck:All
+Oracle:Whenever you cast a planeswalker spell, you gain 1 life.\n{T}: Add {C}.\n{1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells.

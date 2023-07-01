@@ -1,0 +1,11 @@
+Name:Falkenrath Aristocrat
+ManaCost:2 B R
+Types:Creature Vampire Noble
+PT:4/1
+K:Flying
+K:Haste
+A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | KW$ Indestructible | AILogic$ AristocratCounters.Human | SubAbility$ DBPutCounter | SpellDescription$ CARDNAME gains indestructible until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P1
+SVar:AIPreference:SacCost$Creature.Human+token,Creature.Human,Creature.Other+token,Creature.Other
+SVar:X:Sacrificed$Valid Human
+Oracle:Flying, haste\nSacrifice a creature: Falkenrath Aristocrat gains indestructible until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Aristocrat.

@@ -1,0 +1,9 @@
+Name:Synod Artificer
+ManaCost:2 U
+Types:Creature Vedalken Artificer
+PT:1/2
+A:AB$ Tap | Cost$ X T | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select X target noncreature artifacts | SpellDescription$ Tap X target noncreature artifacts.
+A:AB$ Untap | Cost$ X T | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select X target noncreature artifacts | SpellDescription$ Untap X target noncreature artifacts.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}, {T}: Tap X target noncreature artifacts.\n{X}, {T}: Untap X target noncreature artifacts.

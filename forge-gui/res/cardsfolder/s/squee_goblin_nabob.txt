@@ -1,0 +1,9 @@
+Name:Squee, Goblin Nabob
+ManaCost:2 R
+Types:Legendary Creature Goblin
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+SVar:SacMe:2
+SVar:DiscardMe:2
+Oracle:At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.

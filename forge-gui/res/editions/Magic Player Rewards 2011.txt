@@ -1,0 +1,13 @@
+[metadata]
+Code=P11
+Date=2011-01-01
+Name=Magic Player Rewards 2011
+Type=Promo
+ScryfallCode=P11
+
+[cards]
+1 R Day of Judgment @Svetlin Velinov
+2 R Brave the Elements @Kekai Kotaki
+3 R Doom Blade @Carl Critchlow
+4 R Treasure Hunt @Steve Prescott
+5 R Searing Blaze @Jaime Jones

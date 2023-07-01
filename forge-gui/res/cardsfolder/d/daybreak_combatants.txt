@@ -1,0 +1,9 @@
+Name:Daybreak Combatants
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump | NumAtt$ +2
+SVar:PlayMain1:TRUE
+Oracle:Haste\nWhen Daybreak Combatants enters the battlefield, target creature gets +2/+0 until end of turn.

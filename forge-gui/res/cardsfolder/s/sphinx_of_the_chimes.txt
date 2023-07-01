@@ -1,0 +1,7 @@
+Name:Sphinx of the Chimes
+ManaCost:4 U U
+Types:Creature Sphinx
+PT:5/6
+K:Flying
+A:AB$ Draw | Cost$ Discard<2/Card.nonLand+WithSameName/nonland cards with the same name> | NumCards$ 4 | CostDesc$ Discard two nonland cards with the same name | SpellDescription$ Draw four cards.
+Oracle:Flying\nDiscard two nonland cards with the same name: Draw four cards.

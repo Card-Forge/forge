@@ -1,0 +1,13 @@
+Name:Emrakul, the Aeons Torn
+ManaCost:15
+Types:Legendary Creature Eldrazi
+PT:15/15
+K:This spell can't be countered.
+K:Flying
+K:Protection:Spell.nonColorless:Protection from colored spells
+K:Annihilator:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
+SVar:TrigShuffle:DB$ ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAddTurn | TriggerDescription$ When you cast CARDNAME, take an extra turn after this one.
+SVar:TrigAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1
+Oracle:This spell can't be countered.\nWhen you cast this spell, take an extra turn after this one.\nFlying, protection from spells that are one or more colors, annihilator 6\nWhen Emrakul, the Aeons Torn is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.

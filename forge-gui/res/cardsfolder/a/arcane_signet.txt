@@ -1,0 +1,6 @@
+Name:Arcane Signet
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo ColorIdentity | SpellDescription$ Add one mana of any color in your commander's color identity.
+AI:RemoveDeck:NonCommander
+Oracle:{T}: Add one mana of any color in your commander's color identity.

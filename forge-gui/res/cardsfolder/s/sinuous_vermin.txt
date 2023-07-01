@@ -1,0 +1,8 @@
+Name:Sinuous Vermin
+ManaCost:1 B
+Types:Creature Rat Horror
+PT:2/2
+K:Monstrosity:3:3 B B
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Menace | Description$ As long as CARDNAME is monstrous, it has menace. (It can't be blocked except by two or more creatures.)
+DeckHas:Ability$Counters
+Oracle:{3}{B}{B}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nAs long as Sinuous Vermin is monstrous, it has menace. (It can't be blocked except by two or more creatures.)

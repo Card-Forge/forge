@@ -1,0 +1,7 @@
+Name:Cloaked Siren
+ManaCost:3 U
+Types:Creature Siren
+PT:3/2
+K:Flash
+K:Flying
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying

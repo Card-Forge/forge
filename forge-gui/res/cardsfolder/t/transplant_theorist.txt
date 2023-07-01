@@ -1,0 +1,10 @@
+Name:Transplant Theorist
+ManaCost:3 U
+Types:Artifact Creature Phyrexian Artificer
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+Other | Execute$ TrigLoot | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
+A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card from your graveyard | SpellDescription$ Put target card from your graveyard on the bottom of your library.
+DeckHas:Ability$Discard
+DeckHints:Type$Artifact
+Oracle:Whenever Transplant Theorist or another artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.\n{2}: Put target card from your graveyard on the bottom of your library.

@@ -1,0 +1,11 @@
+Name:Kykar, Wind's Fury
+ManaCost:1 U R W
+Types:Legendary Creature Bird Wizard
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:BuffedBy:Card.nonCreature+nonLand
+DeckHas:Ability$Counters
+A:AB$ Mana | Cost$ Sac<1/Spirit> | Produced$ R | SpellDescription$ Add {R}.
+Oracle:Flying\nWhenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying.\nSacrifice a Spirit: Add {R}.

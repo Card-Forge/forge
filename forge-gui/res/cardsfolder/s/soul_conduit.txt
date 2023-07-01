@@ -1,0 +1,6 @@
+Name:Soul Conduit
+ManaCost:6
+Types:Artifact
+A:AB$ ExchangeLife | Cost$ 6 T | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players exchange life totals.
+AI:RemoveDeck:All
+Oracle:{6}, {T}: Two target players exchange life totals.

@@ -1,0 +1,6 @@
+Name:Wild Guess
+ManaCost:R R
+Types:Sorcery
+A:SP$ Draw | Cost$ R R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards.
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards.

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Hercules 4
+Title=Hercules
+Difficulty=very hard
+Description=GW Deck with Knight of New Alara, Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade
+Icon=Hercules.jpg
+Deck Type=constructed
+[main]
+4 Dryad Militant
+4 Bant Sureblade
+4 Naya Hushblade
+4 Kitchen Finks
+4 Loxodon Smiter
+4 Wilt-Leaf Cavaliers
+4 Wilt-Leaf Liege
+4 Knight of New Alara
+1 Gaddock Teeg
+4 Path to Exile
+1 Shield of the Oversoul
+1 Mox Emerald
+1 Mox Pearl
+4 Savannah
+3 Forest|M11
+4 Windswept Heath
+1 Flooded Strand
+1 Misty Rainforest
+4 Sunpetal Grove
+3 Plains|M11
+[sideboard]

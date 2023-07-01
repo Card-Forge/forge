@@ -1,0 +1,7 @@
+Name:Upwelling
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ UnspentMana | Description$ Players don't lose unspent mana as steps and phases end.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Players don't lose unspent mana as steps and phases end.

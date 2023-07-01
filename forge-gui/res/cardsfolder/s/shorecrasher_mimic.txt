@@ -1,0 +1,8 @@
+Name:Shorecrasher Mimic
+ManaCost:1 GU
+Types:Creature Shapeshifter
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.Green+Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both green and blue, CARDNAME has base power and toughness 5/3 until end of turn and gains trample until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 3 | Keywords$ Trample
+SVar:BuffedBy:Card.Blue+Green
+Oracle:Whenever you cast a spell that's both green and blue, Shorecrasher Mimic has base power and toughness 5/3 until end of turn and gains trample until end of turn.

@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/073.-M193-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=11
+activeplayer=human
+activephase=MAIN1
+humanhand=Metamorphic Alteration;Metamorphic Alteration;Metamorphic Alteration;Strider Harness
+humanbattlefield=Thallid Omnivore;Dragon Egg;Slither Blade;Powerstone Shard;Powerstone Shard;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal;Swamp|Set:M19;Swamp|Set:M19;Swamp|Set:M19
+aibattlefield=Hungering Hydra|Counters:P1P1=6;Boggart Brute|Id:1;Cobbled Wings|AttachedTo:1

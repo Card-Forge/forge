@@ -1,0 +1,6 @@
+Name:Elvish Bard
+ManaCost:3 G G
+Types:Creature Elf Shaman Bard
+PT:2/4
+K:All creatures able to block CARDNAME do so.
+Oracle:All creatures able to block Elvish Bard do so.

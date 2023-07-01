@@ -1,0 +1,5 @@
+Name:Pillarfield Ox
+ManaCost:3 W
+Types:Creature Ox
+PT:2/4
+Oracle:

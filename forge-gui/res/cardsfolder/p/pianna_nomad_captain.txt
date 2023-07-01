@@ -1,0 +1,7 @@
+Name:Pianna, Nomad Captain
+ManaCost:1 W W
+Types:Legendary Creature Human Nomad
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever Pianna, Nomad Captain attacks, attacking creatures get +1/+1 until end of turn.

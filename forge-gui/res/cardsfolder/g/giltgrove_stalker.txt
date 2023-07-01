@@ -1,0 +1,6 @@
+Name:Giltgrove Stalker
+ManaCost:1 G
+Types:Creature Merfolk Warrior
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Giltgrove Stalker can't be blocked by creatures with power 2 or less.

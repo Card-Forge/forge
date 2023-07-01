@@ -1,0 +1,217 @@
+[metadata]
+Code=OGW
+Date=2016-01-22
+Name=Oath of the Gatewatch
+Code2=OGW
+Type=Expansion
+BoosterCovers=4
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
+FatPack=9
+FatPackExtraSlots=66 BasicLands BFZ, 14 name("Wastes")
+AdditionalSheetForFoils=fromSheet("EXP Lands 2")
+AdditionalSetUnlockedInQuest=EXP
+ScryfallCode=OGW
+
+[cards]
+1 R Deceiver of Form @Viktor Titov
+2 R Eldrazi Mimic @Craig J Spearing
+3 R Endbringer @Vincent Proce
+4 M Kozilek, the Great Distortion @Aleksi Briclot
+5 C Kozilek's Pathfinder @James Zapata
+6 R Matter Reshaper @Chris Rahn
+7 R Reality Smasher @Jason Rainville
+8 U Spatial Contortion @Daarken
+9 R Thought-Knot Seer @Svetlin Velinov
+10 U Walker of the Wastes @Joseph Meehan
+11 C Warden of Geometries @Jason Felix
+12 U Warping Wail @Jason Felix
+13 R Eldrazi Displacer @Daarken
+14 C Affa Protector @Izzy
+15 U Allied Reinforcements @Matt Stewart
+16 R Call the Gatewatch @Yefim Kligerman
+17 C Dazzling Reflection @David Palumbo
+18 C Expedition Raptor @Johann Bodin
+19 M General Tazri @Chris Rahn
+20 U Immolating Glare @Daarken
+21 U Iona's Blessing @David Gaillet
+22 C Isolation Zone @Chris Rallis
+23 C Kor Scythemaster @Ryan Pancoast
+24 C Kor Sky Climber @Victor Adame Minguez
+25 M Linvala, the Preserver @Magali Villeneuve
+26 U Make a Stand @Magali Villeneuve
+27 C Makindi Aeronaut @Matt Stewart
+28 C Mighty Leap @Winona Nelson
+29 R Munda's Vanguard @Steve Prescott
+30 R Oath of Gideon @Wesley Burt
+31 C Ondu War Cleric @Ben Maier
+32 U Relief Captain @Anastasia Ovchinnikova
+33 C Searing Light @Marco Nelor
+34 C Shoulder to Shoulder @Chris Rallis
+35 C Spawnbinder Mage @Dan Scott
+36 U Steppe Glider @John Severin Brassell
+37 R Stone Haven Outfitter @Jason Rainville
+38 U Stoneforge Acolyte @Chris Rallis
+39 U Wall of Resurgence @Daniel Ljunggren
+40 C Abstruse Interference @Igor Kieryluk
+41 C Blinding Drone @Lake Hurwitz
+42 C Cultivator Drone @Slawomir Maniak
+43 R Deepfathom Skulker @Joseph Meehan
+44 R Dimensional Infiltrator @Chase Stone
+45 C Gravity Negator @Chase Stone
+46 U Prophet of Distortion @Lius Lasahido
+47 C Slip Through Space @Raymond Swanland
+48 U Thought Harvester @Winona Nelson
+49 U Void Shatter @Jason Felix
+50 C Ancient Crab @Steve Prescott
+51 C Comparative Analysis @Willian Murai
+52 C Containment Membrane @Daarken
+53 M Crush of Tentacles @Jama Jurabaev
+54 U Cyclone Sire @Igor Kieryluk
+55 U Gift of Tusks @Kev Walker
+56 U Grip of the Roil @Volkan Baǵa
+57 R Hedron Alignment @Craig J Spearing
+58 C Jwar Isle Avenger @Ryan Pancoast
+59 C Negate @Ryan Pancoast
+60 R Oath of Jace @Wesley Burt
+61 R Overwhelming Denial @Jama Jurabaev
+62 U Roiling Waters @David Gaillet
+63 M Sphinx of the Final Word @Lius Lasahido
+64 C Sweep Away @Winona Nelson
+65 C Umara Entangler @James Ryman
+66 U Unity of Purpose @Jason Felix
+67 R Bearer of Silence @Tyler Jacobson
+68 R Dread Defiler @Slawomir Maniak
+69 U Essence Depleter @Chase Stone
+70 U Flaying Tendrils @Slawomir Maniak
+71 U Havoc Sower @Svetlin Velinov
+72 M Inverter of Truth @Chase Stone
+73 C Kozilek's Shrieker @Jason Felix
+74 C Kozilek's Translator @Izzy
+75 C Oblivion Strike @Daniel Ljunggren
+76 U Reaver Drone @Chris Rallis
+77 R Sifter of Skulls @Slawomir Maniak
+78 C Sky Scourer @Winona Nelson
+79 C Slaughter Drone @Dan Scott
+80 C Unnatural Endurance @Mathias Kollros
+81 U Visions of Brutality @Jama Jurabaev
+82 C Witness the End @Igor Kieryluk
+83 C Corpse Churn @Magali Villeneuve
+84 R Drana's Chosen @Deruchenko Alexander
+85 U Grasp of Darkness @Daarken
+86 M Kalitas, Traitor of Ghet @Todd Lockwood
+87 U Malakir Soothsayer @Greg Opalinski
+88 U Null Caller @Darek Zabrocki
+89 R Remorseless Punishment @Ryan Barger
+90 C Tar Snare @Karl Kopinski
+91 C Untamed Hunger @Willian Murai
+92 C Vampire Envoy @Johannes Voss
+93 C Zulaport Chainmage @Chris Rallis
+94 C Consuming Sinkhole @Igor Kieryluk
+95 C Eldrazi Aggressor @Mathias Kollros
+96 R Eldrazi Obligator @Jason Felix
+97 U Immobilizer Eldrazi @Svetlin Velinov
+98 M Kozilek's Return @Lius Lasahido
+99 C Maw of Kozilek @Daarken
+100 C Reality Hemorrhage @Chris Rallis
+101 C Akoum Flameseeker @Willian Murai
+102 C Boulder Salvo @Vincent Proce
+103 C Brute Strength @Wayne Reynolds
+104 M Chandra, Flamecaller @Jason Rainville
+105 C Cinder Hellion @Jason Kang
+106 U Devour in Flames @Svetlin Velinov
+107 U Embodiment of Fury @David Palumbo
+108 C Expedite @Kieran Yanner
+109 R Fall of the Titans @Chris Rallis
+110 R Goblin Dark-Dwellers @Steven Belledin
+111 C Goblin Freerunner @Wayne Reynolds
+112 U Kazuul's Toll Collector @Greg Staples
+113 R Oath of Chandra @Wesley Burt
+114 U Press into Service @Steve Prescott
+115 U Pyromancer's Assault @Todd Lockwood
+116 U Reckless Bushwhacker @Kieran Yanner
+117 C Sparkmage's Gambit @Mathias Kollros
+118 U Tears of Valakut @Noah Bradley
+119 R Tyrant of Valakut @Tyler Jacobson
+120 C Zada's Commando @Zack Stella
+121 U Birthing Hulk @Jack Wang
+122 U Ruin in Their Wake @Jason Felix
+123 C Scion Summoner @Johann Bodin
+124 C Stalking Drone @Slawomir Maniak
+125 R Vile Redeemer @Jason Rainville
+126 M World Breaker @Jaime Jones
+127 U Baloth Pup @Steve Prescott
+128 U Bonds of Mortality @Chris Rallis
+129 C Canopy Gorger @Lake Hurwitz
+130 C Elemental Uprising @Svetlin Velinov
+131 U Embodiment of Insight @Marco Nelor
+132 R Gladehart Cavalry @Steven Belledin
+133 U Harvester Troll @Greg Staples
+134 C Lead by Example @Johannes Voss
+135 C Loam Larva @Jason Kang
+136 C Natural State @Volkan Baǵa
+137 C Netcaster Spider @Zoltan Boros
+138 M Nissa, Voice of Zendikar @Raymond Swanland
+139 U Nissa's Judgment @Tyler Jacobson
+140 R Oath of Nissa @Wesley Burt
+141 C Pulse of Murasa @Matt Stewart
+142 C Saddleback Lagac @Jason Kang
+143 U Seed Guardian @Vincent Proce
+144 R Sylvan Advocate @Volkan Baǵa
+145 C Tajuru Pathwarden @Victor Adame Minguez
+146 C Vines of the Recluse @Dan Scott
+147 R Zendikar Resurgent @Chris Rallis
+148 U Flayer Drone @Lius Lasahido
+149 U Mindmelter @Jason Felix
+150 U Void Grafter @Alejandro Mirabal
+151 R Ayli, Eternal Pilgrim @Cynthia Sheppard
+152 U Baloth Null @Jakub Kasper
+153 U Cliffhaven Vampire @David Gaillet
+154 U Joraga Auxiliary @David Gaillet
+155 R Jori En, Ruin Diver @Igor Kieryluk
+156 R Mina and Denn, Wildborn @Izzy
+157 U Reflector Mage @Willian Murai
+158 U Relentless Hunter @Matt Stewart
+159 U Stormchaser Mage @Clint Cearley
+160 U Weapons Trainer @Greg Opalinski
+161 C Bone Saw @Kev Walker
+162 R Captain's Claws @Anthony Palumbo
+163 U Chitinous Cloak @Chris Rahn
+164 C Hedron Crawler @Daniel Ljunggren
+165 C Seer's Lantern @Jung Park
+166 R Stoneforge Masterwork @Ben Maier
+167 U Strider Harness @Kev Walker
+168 U Cinder Barrens @Cliff Childs
+169 R Corrupted Crossroads @Ryan Pancoast
+170 C Crumbling Vestige @Zack Stella
+171 R Hissing Quagmire @Cliff Childs
+172 C Holdout Settlement @Kieran Yanner
+173 U Meandering River @Cliff Childs
+174 M Mirrorpool @Cliff Childs
+175 R Needle Spires @Jonas De Ro
+176 R Ruins of Oran-Rief @Jason Felix
+177 R Sea Gate Wreckage @Zack Stella
+178 U Submerged Boneyard @Cliff Childs
+179 U Timber Gorge @Cliff Childs
+180 U Tranquil Expanse @Cliff Childs
+181 C Unknown Shores @Jung Park
+182 R Wandering Fumarole @Florian de Gesincourt
+183 C Wastes @Jason Felix
+183 C Wastes @Jason Felix
+184 C Wastes @Raymond Swanland
+184 C Wastes @Raymond Swanland
+
+[tokens]
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+w_3_3_angel_flying
+w_2_2_knight_ally
+w_1_1_kor_ally
+u_8_8_octopus
+b_2_2_zombie
+r_3_1_elemental_haste
+g_x_x_elemental
+g_0_1_plant

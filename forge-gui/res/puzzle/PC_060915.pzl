@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 060915 - Now You See It
+URL:http://www.gatheringmagic.com/seanuy-060915-now-you-see-it/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win on this turn.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=9
+AILife=6
+humanhand=Mountain|Set:M15; Bone Splinters|Set:MM2; Brute Force|Set:MM2; Stormblood Berserker|Set:MM2; Goblin War Paint|Set:MM2; Chimeric Mass|Set:MM2
+humanbattlefield=Swamp|Set:M15; Swamp|Set:M15; Mountain|Set:M15; Mountain|Set:M15|Tapped; Rakdos Carnarium; Mortarpod|AttachedTo:420|Set:MM2; t:Germ,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Germ,Keywords:,Image:b_0_0_germ|Id:420; Sickle Ripper|Set:MM2; Necroskitter|Set:MM2
+
+humangraveyard=
+humanlibrary=
+aihand=
+aibattlefield=Plains|Set:M15|Tapped; Plains|Set:M15|Tapped; Island|Set:M15|Tapped; Island|Set:M15|Tapped; Island|Set:M15|Tapped; Darksteel Citadel|Set:MM2|Tapped; Myrsmith|Set:MM2; t:Myr,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Myr,Keywords:,Image:c_1_1_myr_som; t:Myr,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Myr,Keywords:,Image:c_1_1_myr_som; Rusted Relic|Set:MM2|Tapped; Glassdust Hulk|Set:MM2|Tapped; Aethersnipe|Set:MM2
+aigraveyard=
+ailibrary=

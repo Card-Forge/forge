@@ -1,0 +1,6 @@
+Name:Flowstone Channeler
+ManaCost:2 R
+Types:Creature Human Spellshaper
+PT:2/2
+A:AB$ Pump | Cost$ 1 R T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ -1 | KW$ Haste | SpellDescription$ Target creature gets +1/-1 and gains haste until end of turn.
+Oracle:{1}{R}, {T}, Discard a card: Target creature gets +1/-1 and gains haste until end of turn.

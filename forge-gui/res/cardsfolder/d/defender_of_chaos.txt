@@ -1,0 +1,7 @@
+Name:Defender of Chaos
+ManaCost:2 R
+Types:Creature Human Knight
+PT:2/1
+K:Flash
+K:Protection from white
+Oracle:Flash\nProtection from white

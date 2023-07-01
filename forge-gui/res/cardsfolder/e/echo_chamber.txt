@@ -1,0 +1,5 @@
+Name:Echo Chamber
+ManaCost:4
+Types:Artifact
+A:AB$ CopyPermanent | Cost$ 4 T | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | TgtPrompt$ Select target creature you control | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Exile | SorcerySpeed$ True | SpellDescription$ An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate only as a sorcery.
+Oracle:{4}, {T}: An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate only as a sorcery.

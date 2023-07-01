@@ -1,0 +1,23 @@
+[metadata]
+Name=Forest Dragon 2
+Title=Forest Dragon
+Icon=ForestDragon.jpg
+Difficulty=medium
+Description=Green reptile deck.
+Deck Type=constructed
+[main]
+4 Cockatrice|4ED
+4 Craw Wurm|4ED
+1 Crumble|ATQ
+3 Desert Twister|4ED
+22 Forest|4ED
+3 Living Lands|LEB
+4 Llanowar Elves|4ED
+4 Lure|4ED
+2 Regeneration|4ED
+2 Sandstorm|4ED
+2 Stream of Life|LEB
+4 Thicket Basilisk|LEB
+4 Untamed Wilds|4ED
+2 Wall of Brambles|LEB
+[sideboard]

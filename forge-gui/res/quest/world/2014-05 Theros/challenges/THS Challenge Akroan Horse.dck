@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Akroan Horse
+OpponentName=The Horses
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Purphoros, God of the Forge
+HumanExtras=
+[metadata]
+Name=THS Challenge: Akroan Horse
+Title=The Horses
+Difficulty=medium
+Description="I am one with the Horse and the Horse is with me."\n-Chirrut Imwe, Rogue One
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+30 Akroan Horse|THS
+30 Mountain|THS|3

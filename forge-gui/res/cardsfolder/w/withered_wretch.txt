@@ -1,0 +1,6 @@
+Name:Withered Wretch
+ManaCost:B B
+Types:Creature Zombie Cleric
+PT:2/2
+A:AB$ ChangeZone | Cost$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+Oracle:{1}: Exile target card from a graveyard.

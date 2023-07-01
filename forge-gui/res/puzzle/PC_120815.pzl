@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 120815 - Mirror Images
+URL:http://www.gatheringmagic.com/seanuy-120815-mirror-images/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Urza's Incubator will be set to Shapeshifter type no matter what you choose.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=3
+AILife=8
+humanhand=Nameless Inversion; Gigantoplasm
+humangraveyard=Riptide Shapeshifter; Dimir Doppelganger; Chimeric Staff
+humanlibrary=
+humanbattlefield=Island|Set:USG; Island|Set:USG; Island|Set:USG; Island|Set:USG; Island|Set:USG; Island|Set:USG; Swamp|Set:USG; Swamp|Set:USG; Swamp|Set:USG; Temple of Deceit; Reflecting Pool; Mothdust Changeling; Lazav, Dimir Mastermind|ExecuteScript:LazavCopy->420; Cairn Wanderer; Sol Ring; Urza's Incubator|ChosenType:Shapeshifter
+aibattlefield=Plains|Set:USG|Tapped; Island|Set:USG|Tapped; Island|Set:USG|Tapped; Swamp|Set:USG|Tapped; Arcane Sanctum; Arcane Sanctum|Tapped; Urza's Tower|Set:8ED|Tapped; Urza's Power Plant|Set:8ED|Tapped; Urza's Power Plant|Set:8ED|Tapped; Urza's Mine|Set:8ED|Tapped; Sydri, Galvanic Genius; Sanctum Gargoyle; Shield of the Righteous|AttachedTo:420; Sanctum Gargoyle|Id:420; Solemn Simulacrum|Tapped; Salvage Titan|Tapped; Goblin Boom Keg; Sword of Kaldra; Spine of Ish Sah
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

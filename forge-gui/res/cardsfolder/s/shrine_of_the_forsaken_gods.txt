@@ -1,0 +1,9 @@
+Name:Shrine of the Forsaken Gods
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | RestrictValid$ Spell.Colorless | SpellDescription$ Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands.
+AI:RemoveDeck:Random
+DeckHas:Ability$Mana.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
+Oracle:{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands.

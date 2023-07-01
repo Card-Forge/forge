@@ -1,0 +1,7 @@
+Name:Daring Skyjek
+ManaCost:1 W
+Types:Creature Human Knight
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gains flying until end of turn.
+SVar:TrigBattalionPump:DB$ Pump | Defined$ Self | KW$ Flying
+Oracle:Battalion — Whenever Daring Skyjek and at least two other creatures attack, Daring Skyjek gains flying until end of turn.

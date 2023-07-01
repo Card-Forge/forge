@@ -1,0 +1,8 @@
+Name:Wild Magic Surge
+ManaCost:R R
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Permanent.OppCtrl | RememberLKI$ True | AlwaysRemember$ True | TgtPrompt$ Select target permanent an opponent controls | SubAbility$ DBDigUntil | SpellDescription$ Destroy target permanent an opponent controls. Its controller reveals cards from the top of their library until they reveal a permanent card that shares a card type with that permanent. They put that card onto the battlefield and the rest on the bottom of their library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | Valid$ Permanent.sharesCardTypeWith RememberedLKI | ValidDescription$ permanent card that shares a card type with the destroyed permanent | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Destroy target permanent an opponent controls. Its controller reveals cards from the top of their library until they reveal a permanent card that shares a card type with that permanent. They put that card onto the battlefield and the rest on the bottom of their library in a random order.

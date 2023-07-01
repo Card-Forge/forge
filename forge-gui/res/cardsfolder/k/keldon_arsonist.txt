@@ -1,0 +1,6 @@
+Name:Keldon Arsonist
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ Destroy | Cost$ 1 Sac<2/Land> | ValidTgts$ Land | SpellDescription$ Destroy target land.
+Oracle:{1}, Sacrifice two lands: Destroy target land.

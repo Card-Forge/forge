@@ -1,0 +1,9 @@
+Name:Rakdos Pit Dragon
+ManaCost:2 R R
+Types:Creature Dragon
+PT:3/3
+A:AB$ Pump | Cost$ R R | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Hellbent | Description$ Hellbent — CARDNAME has double strike as long as you have no cards in hand.
+SVar:BuffedBy:Card
+Oracle:{R}{R}: Rakdos Pit Dragon gains flying until end of turn.\n{R}: Rakdos Pit Dragon gets +1/+0 until end of turn.\nHellbent — Rakdos Pit Dragon has double strike as long as you have no cards in hand.

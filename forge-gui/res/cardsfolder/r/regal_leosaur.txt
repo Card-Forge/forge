@@ -1,0 +1,8 @@
+Name:Regal Leosaur
+ManaCost:R W
+Types:Creature Dinosaur Cat
+PT:2/2
+K:Mutate:1 RW RW
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever this creature mutates, other creatures you control get +2/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +2 | NumDef$ +1
+Oracle:Mutate {1}{R/W}{R/W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, other creatures you control get +2/+1 until end of turn.

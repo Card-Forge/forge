@@ -1,0 +1,7 @@
+Name:Birds of Paradise
+ManaCost:G
+Types:Creature Bird
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Flying
+Oracle:Flying\n{T}: Add one mana of any color.

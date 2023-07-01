@@ -1,0 +1,9 @@
+Name:Steel Exemplar
+ManaCost:5
+Types:Artifact Creature Wizard
+PT:4/4
+K:Trample
+K:etbCounter:P1P1:2:CheckSVar$ X | SVarCompare$ LT2:CARDNAME enters the battlefield with two +1/+1 counters on it unless two or more colors of mana were spent to cast it.
+SVar:X:Count$Converge
+AI:RemoveDeck:Random
+Oracle:Trample\nSteel Exemplar enters the battlefield with two +1/+1 counters on it unless two or more colors of mana were spent to cast it.

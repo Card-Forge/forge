@@ -1,0 +1,6 @@
+Name:Parallax Inhibitor
+ManaCost:2
+Types:Artifact
+A:AB$ PutCounterAll | Cost$ 1 T Sac<1/CARDNAME> | ValidCards$ Permanent.withFading+YouCtrl | CounterType$ FADE | CounterNum$ 1 | SpellDescription$ Put a fade counter on each permanent with fading you control.
+AI:RemoveDeck:Random
+Oracle:{1}, {T}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.

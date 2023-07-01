@@ -1,0 +1,11 @@
+Name:Kadena, Slinking Sorcerer
+ManaCost:1 B G U
+Types:Legendary Creature Naga Wizard
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Creature.faceDown | Type$ Spell | OnlyFirstSpell$ True | Activator$ You | Amount$ 3 | Description$ The first face-down creature spell you cast each turn costs {3} less to cast.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.faceDown+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a face-down creature enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+DeckNeeds:Keyword$Morph
+Oracle:The first face-down creature spell you cast each turn costs {3} less to cast.\nWhenever a face-down creature enters the battlefield under your control, draw a card.

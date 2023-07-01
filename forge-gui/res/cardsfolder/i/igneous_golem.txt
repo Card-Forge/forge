@@ -1,0 +1,6 @@
+Name:Igneous Golem
+ManaCost:5
+Types:Artifact Creature Golem
+PT:3/4
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+Oracle:{2}: Igneous Golem gains trample until end of turn.

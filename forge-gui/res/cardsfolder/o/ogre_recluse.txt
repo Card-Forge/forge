@@ -1,0 +1,9 @@
+Name:Ogre Recluse
+ManaCost:3 R
+Types:Creature Ogre Warrior
+PT:5/4
+T:Mode$ SpellCast | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, tap CARDNAME.
+SVar:TrigTap:DB$ Tap | Defined$ Self
+SVar:AntiBuffedBy:Card
+AI:RemoveDeck:All
+Oracle:Whenever a player casts a spell, tap Ogre Recluse.

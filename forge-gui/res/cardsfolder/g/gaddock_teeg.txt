@@ -1,0 +1,7 @@
+Name:Gaddock Teeg
+ManaCost:G W
+Types:Legendary Creature Kithkin Advisor
+PT:2/2
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+cmcGE4 | Description$ Noncreature spells with mana value 4 or greater can't be cast.
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+hasXCost | Description$ Noncreature spells with {X} in their mana costs can't be cast.
+Oracle:Noncreature spells with mana value 4 or greater can't be cast.\nNoncreature spells with {X} in their mana costs can't be cast.

@@ -1,0 +1,7 @@
+Name:Rishadan Airship
+ManaCost:2 U
+Types:Creature Human Pirate
+PT:3/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nRishadan Airship can block only creatures with flying.

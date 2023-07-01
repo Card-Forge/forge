@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - March of the Machines #01
+URL:https://twitter.com/mtgpuzzles/status/1648895487607554054/photo/1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that any cards you could access from your library are irrelevant to the solution. Remember that your solution must satisfy all opponent decisions (including both blocking and activated abilities.)
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Annihilating Glare;Boon-Bringer Valkyrie;Night Clubber
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Drana and Linvala;Knight of Dusk's Shadow;Swamp;Swamp;Swamp;Shattered Sanctum;Shattered Sanctum
+p1life=10
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Cutthroat Centurion;Cutthroat Centurion;Mandible Justiciar

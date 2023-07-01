@@ -1,0 +1,6 @@
+[format]
+Name:Block: Scars of Mirrodin (SOM)
+Type:Archived
+Subtype:Block
+Effective:2010-10-01
+Sets:SOM

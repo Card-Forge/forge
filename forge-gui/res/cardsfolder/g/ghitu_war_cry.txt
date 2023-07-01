@@ -1,0 +1,6 @@
+Name:Ghitu War Cry
+ManaCost:2 R
+Types:Enchantment
+A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
+SVar:NonStackingEffect:True
+Oracle:{R}: Target creature gets +1/+0 until end of turn.

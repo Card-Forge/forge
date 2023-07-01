@@ -1,0 +1,11 @@
+Name:Gargos, Vicious Watcher
+ManaCost:3 G G G
+Types:Legendary Creature Hydra
+PT:8/7
+K:Vigilance
+S:Mode$ ReduceCost | ValidCard$ Card.Hydra | Type$ Spell | Activator$ You | Amount$ 4 | Description$ Hydra spells you cast cost {4} less to cast.
+T:Mode$ BecomesTarget | ValidTarget$ Creature.inZoneBattlefield+YouCtrl | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ DBFight | TriggerDescription$ Whenever a creature you control becomes the target of a spell, CARDNAME fights up to one target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ Self | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+SVar:PlayMain1:TRUE
+DeckHints:Type$Hydra
+Oracle:Vigilance\nHydra spells you cast cost {4} less to cast.\nWhenever a creature you control becomes the target of a spell, Gargos, Vicious Watcher fights up to one target creature you don't control.

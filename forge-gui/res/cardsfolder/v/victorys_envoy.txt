@@ -1,0 +1,8 @@
+Name:Victory's Envoy
+ManaCost:3 W W
+Types:Creature Human Cleric
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.StrictlyOther+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:At the beginning of your upkeep, put a +1/+1 counter on each other creature you control.

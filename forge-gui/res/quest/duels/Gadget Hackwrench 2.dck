@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Gadget Hackwrench 2
+Title=Gadget Hackwrench
+Difficulty=medium
+Description=UR Izzet Ramp artifact-centric deck with Kaladesh vehicles and Metalwork Colossus
+Icon=Gadget Hackwrench.jpg
+Deck Type=constructed
+[main]
+4 Bomat Bazaar Barge
+3 Combustible Gearhulk
+4 Cultivator's Caravan
+4 Foundry Inspector
+4 Glint-Nest Crane
+4 Hedron Archive
+3 Hedron Crawler
+4 Herald of Kozilek
+1 Inventors' Fair
+7 Island
+3 Metalwork Colossus
+7 Mountain
+1 Ral Zarek
+1 Saheeli Rai
+2 Skysovereign, Consul Flagship
+4 Spirebluff Canal
+4 Wandering Fumarole

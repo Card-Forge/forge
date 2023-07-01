@@ -1,0 +1,12 @@
+Name:Spark Trooper
+ManaCost:1 R R W
+Types:Creature Elemental Soldier
+PT:6/1
+K:Haste
+K:Trample
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, lifelink, haste\nAt the beginning of the end step, sacrifice Spark Trooper.

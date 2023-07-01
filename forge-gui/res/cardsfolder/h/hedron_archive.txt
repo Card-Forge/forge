@@ -1,0 +1,7 @@
+Name:Hedron Archive
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}{C}.\n{2}, {T}, Sacrifice Hedron Archive: Draw two cards.

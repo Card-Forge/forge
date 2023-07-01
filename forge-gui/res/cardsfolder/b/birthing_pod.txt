@@ -1,0 +1,8 @@
+Name:Birthing Pod
+ManaCost:3 GP
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 GP T Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | AILogic$ SacAndUpgrade | StackDescription$ Search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put that card onto the battlefield, then shuffle. | SpellDescription$ Search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.
+SVar:X:Sacrificed$CardManaCost/Plus.1
+# AI Preference is needed to make the AI consider the ability. Further constraints are defined by AILogic SacAndUpgrade.
+SVar:AIPreference:SacCost$Creature
+Oracle:({G/P} can be paid with either {G} or 2 life.)\n{1}{G/P}, {T}, Sacrifice a creature: Search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.

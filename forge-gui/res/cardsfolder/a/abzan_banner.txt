@@ -1,0 +1,8 @@
+Name:Abzan Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo W B G | SpellDescription$ Add {W}, {B} or {G}.
+A:AB$ Draw | Cost$ W B G T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$White|Black|Green
+Oracle:{T}: Add {W}, {B}, or {G}.\n{W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.

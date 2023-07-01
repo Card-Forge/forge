@@ -1,0 +1,6 @@
+Name:Ajani's Sunstriker
+ManaCost:W W
+Types:Creature Cat Cleric
+PT:2/2
+K:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

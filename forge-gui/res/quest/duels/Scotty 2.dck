@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Scotty 2
+Title=Scotty
+Difficulty=medium
+Description=WBG protection from black Famine deck with Phantom Centaur and Nightwind Glider
+Icon=Scotty.jpg
+Deck Type=constructed
+[main]
+4 Death Speakers
+2 Auriok Champion
+2 Duskrider Falcon
+1 Llanowar Knight
+1 Valeron Outlander
+2 Dry Spell
+1 Nightwind Glider
+1 Mystic Crusader
+1 Paladin en-Vec
+1 Stillmoon Cavalier
+2 Plague Spitter
+1 Last Caress
+1 Lifegift
+1 Voice of Grace
+1 Phantom Centaur
+1 Mystic Enforcer
+1 Chameleon Colossus
+1 Last Laugh
+2 Evincar's Justice
+1 Nihilistic Glee
+1 Scalebane's Elite
+1 Melesse Spirit
+1 Karmic Guide
+2 Festering Evil
+2 Famine
+1 Darksteel Ingot
+3 Forest|M11
+4 Plains|M11
+4 Swamp|M11
+2 Bayou
+2 Savannah
+2 Scrubland
+1 Godless Shrine
+1 Graypelt Refuge
+1 Piranha Marsh
+4 Sandsteppe Citadel
+[sideboard]

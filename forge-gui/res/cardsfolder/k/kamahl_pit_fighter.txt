@@ -1,0 +1,7 @@
+Name:Kamahl, Pit Fighter
+ManaCost:4 R R
+Types:Legendary Creature Human Barbarian
+PT:6/1
+K:Haste
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}: Kamahl, Pit Fighter deals 3 damage to any target.

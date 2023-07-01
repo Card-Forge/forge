@@ -1,0 +1,6 @@
+Name:Nosy Goblin
+ManaCost:2 R
+Types:Creature Goblin
+PT:2/1
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.faceDown | TgtPrompt$ Select target face-down creature | SpellDescription$ Destroy target face-down creature.
+Oracle:{T}, Sacrifice Nosy Goblin: Destroy target face-down creature.

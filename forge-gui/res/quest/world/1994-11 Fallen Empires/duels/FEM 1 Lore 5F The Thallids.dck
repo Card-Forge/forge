@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 5F The Thallids
+Title=The Thallids
+Difficulty=easy
+Description="The danger in cultivating massive plants caught the elves by surprise." -Sarpadian Empires, vol. III
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Elvish Farmer|FEM
+4 Feral Thallid|FEM
+28 Forest|LEB|1
+4 Fungal Bloom|FEM
+1 Spore Cloud|FEM|1
+1 Spore Cloud|FEM|2
+2 Spore Cloud|FEM|3
+4 Spore Flower|FEM
+1 Thallid|FEM|1
+1 Thallid|FEM|2
+1 Thallid|FEM|3
+1 Thallid|FEM|4
+4 Thallid Devourer|FEM
+1 Thorn Thallid|FEM|1
+1 Thorn Thallid|FEM|2
+1 Thorn Thallid|FEM|3
+1 Thorn Thallid|FEM|4

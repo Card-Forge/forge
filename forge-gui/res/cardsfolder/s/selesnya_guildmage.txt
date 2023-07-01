@@ -1,0 +1,8 @@
+Name:Selesnya Guildmage
+ManaCost:GW GW
+Types:Creature Elf Wizard
+PT:2/2
+A:AB$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:AB$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+DeckHas:Ability$Token
+Oracle:{3}{G}: Create a 1/1 green Saproling creature token.\n{3}{W}: Creatures you control get +1/+1 until end of turn.

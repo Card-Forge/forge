@@ -1,0 +1,9 @@
+Name:Conduit of Ruin
+ManaCost:6
+Types:Creature Eldrazi
+PT:5/5
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may search your library for a colorless creature card with mana value 7 or greater, reveal it, then shuffle and put that card on top of it.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature.Colorless+cmcGE7 | ChangeNum$ 1 | ShuffleNonMandatory$ True
+S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Card.Creature | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first creature spell you cast each turn costs {2} less to cast.
+AI:RemoveDeck:Random
+Oracle:When you cast this spell, you may search your library for a colorless creature card with mana value 7 or greater, reveal it, then shuffle and put that card on top.\nThe first creature spell you cast each turn costs {2} less to cast.

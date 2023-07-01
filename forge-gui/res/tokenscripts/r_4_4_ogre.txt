@@ -1,0 +1,6 @@
+Name:Ogre Token
+ManaCost:no cost
+Types:Creature Ogre
+Colors:red
+PT:4/4
+Oracle:

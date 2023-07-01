@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Armada
+Description=With "Armada," a strong defense is a strong offense. Maintain order with this white deck filled with quick creatures, powerful healing, and some unique creatures with equally unique abilities. Or just destroy opponents by making your own Serra Angel.
+Deck Type=constructed
+Set=7ED
+Image=armada.jpg
+[main]
+1 Angelic Page|7ED
+1 Crossbow Infantry|7ED
+1 Disenchant|7ED
+2 Eager Cadet|7ED
+1 Glorious Anthem|7ED
+2 Healing Salve|7ED
+1 Heavy Ballista|7ED
+2 Knight Errant|7ED
+2 Longbow Archer|7ED
+1 Master Healer|7ED
+2 Pacifism|7ED
+15 Plains|7ED
+1 Razorfoot Griffin|7ED
+2 Samite Healer|7ED
+1 Serra Advocate|7ED
+2 Serra's Embrace|7ED
+1 Spirit Link|7ED
+2 Standing Troops|7ED
+[sideboard]

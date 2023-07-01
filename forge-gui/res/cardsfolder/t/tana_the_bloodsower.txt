@@ -1,0 +1,11 @@
+Name:Tana, the Bloodsower
+ManaCost:2 R G
+Types:Legendary Creature Elf Druid
+PT:2/2
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+K:Partner
+DeckHas:Ability$Token
+Oracle:Trample\nWhenever Tana, the Bloodsower deals combat damage to a player, create that many 1/1 green Saproling creature tokens.\nPartner (You can have two commanders if both have partner.)

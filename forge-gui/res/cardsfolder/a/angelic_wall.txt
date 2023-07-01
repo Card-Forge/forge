@@ -1,0 +1,7 @@
+Name:Angelic Wall
+ManaCost:1 W
+Types:Creature Wall
+PT:0/4
+K:Flying
+K:Defender
+Oracle:Defender (This creature can't attack.)\nFlying

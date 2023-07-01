@@ -1,0 +1,6 @@
+Name:Cryptic Caves
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | IsPresent$ Land.YouCtrl | PresentCompare$ GE5 | SpellDescription$ Draw a card. Activate only if you control five or more lands.
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Cryptic Caves: Draw a card. Activate only if you control five or more lands.

@@ -1,0 +1,21 @@
+[metadata]
+Code=CC2
+Date=2022-01-28
+Name=Commander Collection Black
+Type=Collector_Edition
+ScryfallCode=CC2
+
+[cards]
+1 M Liliana, Heretical Healer @Bastien L. Deharme
+2 M Liliana, Defiant Necromancer @Bastien L. Deharme
+3 M Ghoulcaller Gisa @Aaron J. Riley
+4 R Ophiomancer @Caroline Gariba
+5 R Phyrexian Arena @Vincent Proce
+6 R Reanimate @Nils Hamm
+7 R Toxic Deluge @Yeong-Hao Han
+8 R Sol Ring @Yeong-Hao Han
+9 R Command Tower @Julian Kok Joon Wen
+
+[tokens]
+b_1_1_snake_deathtouch
+b_2_2_zombie

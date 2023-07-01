@@ -1,0 +1,9 @@
+Name:Valeron Wardens
+ManaCost:2 G
+Types:Creature Human Monk
+PT:1/3
+K:Renown:2
+T:Mode$ BecomeRenowned | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control becomes renowned, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$Counters
+Oracle:Renown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)\nWhenever a creature you control becomes renowned, draw a card.

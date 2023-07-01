@@ -1,0 +1,8 @@
+Name:Fangren Firstborn
+ManaCost:1 G G G
+Types:Creature Beast
+PT:4/2
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigCounters | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on each attacking creature.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.attacking | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Fangren Firstborn attacks, put a +1/+1 counter on each attacking creature.

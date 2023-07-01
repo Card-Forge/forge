@@ -1,0 +1,26 @@
+Name:Restless Bloodseeker
+ManaCost:1 B
+Types:Creature Vampire
+PT:1/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you gained life this turn, create a Blood token.
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw
+A:AB$ SetState | Cost$ Sac<2/Blood.token/Blood token> | Defined$ Self | SorcerySpeed$ True | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood
+DeckNeeds:Ability$LifeGain
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your end step, if you gained life this turn, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nSacrifice two Blood tokens: Transform Restless Bloodseeker. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Bloodsoaked Reveler
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you gained life this turn, create a Blood token.
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw
+A:AB$ LoseLife | Cost$ 4 B | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:At the beginning of your end step, if you gained life this turn, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\n{4}{B}: Each opponent loses 2 life and you gain 2 life.

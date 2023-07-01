@@ -1,0 +1,25 @@
+[metadata]
+Name=Crusader 3
+Title=Crusader
+Icon=Crusader.jpg
+Difficulty=hard
+Description=Monowhite knights deck with Crusade theme.
+Deck Type=constructed
+[main]
+3 Angry Mob|DRK
+4 Castle|LEB
+1 Cleanse|LEG
+4 Crusade|LEB
+2 Dancing Scimitar|ARN
+2 Diabolic Machine|DRK
+2 Disenchant|2ED
+1 Guardian Angel|LEA
+1 Morale|DRK
+4 Moorish Cavalry|ARN
+4 Northern Paladin|3ED
+22 Plains|2ED
+1 Reverse Polarity|3ED
+1 Righteous Avengers|LEG
+4 Swords to Plowshares|LEB
+4 White Knight|2ED
+[sideboard]

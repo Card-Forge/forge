@@ -1,0 +1,27 @@
+[metadata]
+Title=Cyclone Summoner
+Difficulty=hard
+Description=Locked in the ice of Karfell, the treasures of ancient nobles await in ruins guarded by the dead.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM 3 Cyclone Summoner - Runes
+[Main]
+4 Brinebarrow Intruder|KHM|1
+4 Cyclone Summoner|KHM|2
+4 Glacial Floodplain|KHM|1
+11 Island|KHM|1
+11 Plains|KHM|1
+4 Righteous Valkyrie|KHM|1
+4 Rune of Flight|KHM|1
+4 Rune of Sustenance|KHM|1
+3 Runed Crown|KHM|1
+4 Runeforge Champion|KHM|1
+3 Shepherd of the Cosmos|KHM|1
+4 The Raven's Warning|KHM|1
+[Sideboard]
+1 Alrund, God of the Cosmos|KHM|1
+1 Doomskar|KHM|1
+1 Halvar, God of Battle|KHM|1
+1 Runed Crown|KHM|1
+1 Shepherd of the Cosmos|KHM|1
+1 Valkyrie Harbinger|KHM|1

@@ -1,0 +1,7 @@
+Name:Jungle Patrol
+ManaCost:3 G
+Types:Creature Human Soldier
+PT:3/2
+A:AB$ Token | Cost$ 1 G T | TokenAmount$ 1 | TokenScript$ wood | TokenOwner$ You | SpellDescription$ Create a 0/1 green Wall creature token with defender named Wood.
+A:AB$ Mana | Cost$ Sac<1/Permanent.token+namedWood/token named Wood> | Produced$ R | SpellDescription$ Add {R}.
+Oracle:{1}{G}, {T}: Create a 0/1 green Wall creature token with defender named Wood.\nSacrifice a token named Wood: Add {R}.

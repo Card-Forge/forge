@@ -1,0 +1,9 @@
+Name:Dreadful Apathy
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
+A:AB$ ChangeZone | Cost$ 2 W | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{2}{W}: Exile enchanted creature.

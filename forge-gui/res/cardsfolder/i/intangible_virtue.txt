@@ -1,0 +1,7 @@
+Name:Intangible Virtue
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Creature tokens you control get +1/+1 and have vigilance.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Creature tokens you control get +1/+1 and have vigilance.

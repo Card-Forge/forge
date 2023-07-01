@@ -1,0 +1,9 @@
+Name:Conifer Wurm
+ManaCost:4 G
+Types:Snow Creature Wurm
+PT:4/4
+K:Trample
+A:AB$ Pump | Cost$ 3 G | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the number of snow permanents you control.
+SVar:X:Count$Valid Permanent.Snow+YouCtrl
+DeckNeeds:Type$Snow
+Oracle:Trample\n{3}{G}: Conifer Wurm gets +X/+X until end of turn, where X is the number of snow permanents you control.

@@ -1,0 +1,8 @@
+Name:Trueheart Duelist
+ManaCost:1 W
+Types:Creature Human Warrior
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+K:Embalm:2 W
+DeckHas:Ability$Token
+Oracle:Trueheart Duelist can block an additional creature each combat.\nEmbalm {2}{W} ({2}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Human Warrior with no mana cost. Embalm only as a sorcery.)

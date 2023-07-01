@@ -1,0 +1,9 @@
+Name:Storm World
+ManaCost:R
+Types:World Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals X damage to that player, where X is 4 minus the number of cards in their hand.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
+SVar:X:Count$ValidHand Card.ActivePlayerCtrl/NMinus.4
+AI:RemoveDeck:Random
+DeckHints:Ability$Discard
+Oracle:At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in their hand.

@@ -1,0 +1,10 @@
+Name:Cruel Witness
+ManaCost:2 U U
+Types:Creature Bird Horror
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+SVar:BuffedBy:Card.nonLand+nonCreature
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhenever you cast a noncreature spell, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

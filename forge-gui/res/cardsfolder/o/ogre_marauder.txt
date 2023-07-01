@@ -1,0 +1,9 @@
+Name:Ogre Marauder
+ManaCost:1 B B
+Types:Creature Ogre Warrior
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gains "CARDNAME can't be blocked" until end of turn unless defending player sacrifices a creature.
+SVar:TrigAnimate:DB$ Animate | UnlessCost$ Sac<1/Creature> | UnlessPayer$ DefendingPlayer | staticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.Self | Description$ CARDNAME can't be blocked.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder can't be blocked" until end of turn unless defending player sacrifices a creature.

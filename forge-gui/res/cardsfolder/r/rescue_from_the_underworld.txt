@@ -1,0 +1,8 @@
+Name:Rescue from the Underworld
+ManaCost:4 B
+Types:Instant
+A:SP$ DelayedTrigger | Cost$ 4 B Sac<1/Creature> | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Choose target creature card in your graveyard | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ MoveToPlay | TriggerDescription$ Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. | RememberObjects$ Targeted,SacrificedCards | SubAbility$ DBExile | SpellDescription$ Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile CARDNAME.
+SVar:MoveToPlay:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | GainControl$ True
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nChoose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.

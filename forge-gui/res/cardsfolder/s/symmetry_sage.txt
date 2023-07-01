@@ -1,0 +1,8 @@
+Name:Symmetry Sage
+ManaCost:U
+Types:Creature Human Wizard
+PT:0/2
+K:Flying
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPower | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature you control has base power 2 until end of turn.
+SVar:TrigPower:DB$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 2
+Oracle:Flying\nMagecraft — Whenever you cast or copy an instant or sorcery spell, target creature you control has base power 2 until end of turn.

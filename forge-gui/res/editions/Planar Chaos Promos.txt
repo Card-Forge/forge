@@ -1,0 +1,10 @@
+[metadata]
+Code=PPLC
+Date=2007-02-02
+Name=Planar Chaos Promos
+Type=Promo
+ScryfallCode=PPLC
+
+[cards]
+151★ R Hedge Troll @Paolo Parente
+161★ R Oros, the Avenger @Daren Bader

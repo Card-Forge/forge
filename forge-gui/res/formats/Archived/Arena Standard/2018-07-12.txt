@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (M19)
+Type:Archived
+Subtype:Standard
+Effective:2018-07-12
+Sets:XLN, RIX, AKH, HOU, DOM, KLD, AER, W17, M19, ANA, PANA
+Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

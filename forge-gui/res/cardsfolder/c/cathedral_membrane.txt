@@ -1,0 +1,11 @@
+Name:Cathedral Membrane
+ManaCost:1 WP
+Types:Artifact Creature Phyrexian Wall
+PT:0/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDmg | Phase$ BeginCombat->EndCombat | TriggerDescription$ When CARDNAME dies during combat, it deals 6 damage to each creature it blocked this combat.
+SVar:TrigDmg:DB$ DamageAll | ValidCards$ Creature.IsRemembered | NumDmg$ 6 | ValidDescription$ each creature it blocked this combat.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigRem | Secondary$ True | TriggerZones$ Battlefield | Static$ True
+SVar:TrigRem:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBRem
+SVar:DBRem:DB$ Pump | RememberObjects$ Valid Creature.blockedBySource
+Oracle:({W/P} can be paid with either {W} or 2 life.)\nDefender\nWhen Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.

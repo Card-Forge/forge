@@ -1,0 +1,7 @@
+[format]
+Name:Type 1.5 (LGN)
+Type:Archived
+Subtype:Legacy
+Effective:2003-03-01
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ATH, ULG, 6ED, UDS, MMQ, BRB, NMS, PCY, BTD, INV, PLS, 7ED, APC, ODY, DKM, TOR, JUD, ONS, LGN
+Banned:Amulet of Quoz; Ancestral Recall; Balance; Berserk; Black Lotus; Black Vise; Braingeyser; Bronze Tablet; Channel; Chaos Orb; Contract from Below; Crop Rotation; Darkpact; Demonic Attorney; Demonic Consultation; Demonic Tutor; Doomsday; Dream Halls; Enlightened Tutor; Fact or Fiction; Falling Star; Fastbond; Fork; Frantic Search; Grim Monolith; Hurkyl's Recall; Jeweled Bird; Library of Alexandria; Lotus Petal; Mana Crypt; Mana Vault; Memory Jar; Mind Over Matter; Mind Twist; Mox Diamond; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Mystical Tutor; Necropotence; Rebirth; Recall; Regrowth; Sol Ring; Strip Mine; Stroke of Genius; Tempest Efreet; Time Spiral; Time Walk; Timetwister; Timmerian Fiends; Tinker; Tolarian Academy; Vampiric Tutor; Voltaic Key; Wheel of Fortune; Windfall; Yawgmoth's Bargain; Yawgmoth's Will

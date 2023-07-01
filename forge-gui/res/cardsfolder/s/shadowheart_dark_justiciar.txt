@@ -1,0 +1,9 @@
+Name:Shadowheart, Dark Justiciar
+ManaCost:3 B
+Types:Legendary Creature Human Elf Cleric
+PT:3/4
+A:AB$ Draw | Cost$ 1 B T Sac<1/Creature.Other/another creature> | NumCards$ X | IfDesc$ True | SpellDescription$ Draw X cards, where X is that creature's power.
+SVar:X:Sacrificed$CardPower
+K:Choose a Background
+DeckHas:Ability$Sacrifice
+Oracle:{1}{B}, {T}, Sacrifice another creature: Draw X cards, where X is that creature's power.\nChoose a Background (You can have a Background as a second commander.)

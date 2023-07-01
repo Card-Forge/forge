@@ -1,0 +1,7 @@
+Name:Fang Skulkin
+ManaCost:2
+Types:Artifact Creature Scarecrow
+PT:2/1
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | KW$ Wither | SpellDescription$ Target black creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+DeckNeeds:Color$Black
+Oracle:{2}: Target black creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)

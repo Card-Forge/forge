@@ -1,0 +1,11 @@
+Name:Vulpine Harvester
+ManaCost:3 W
+Types:Creature Phyrexian Fox
+PT:3/3
+T:Mode$ AttackersDeclared | ValidAttackers$ Phyrexian.YouCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Phyrexians you control attack, return target artifact card from your graveyard to the battlefield if its mana value is less than or equal to their total power.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLEX | TgtPrompt$ Select target artifact in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+DeckNeeds:Type$Phyrexian
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard
+SVar:X:Count$SumPower_Phyrexian.YouCtrl+attacking
+Oracle:Whenever one or more Phyrexians you control attack, return target artifact card from your graveyard to the battlefield if its mana value is less than or equal to their total power.

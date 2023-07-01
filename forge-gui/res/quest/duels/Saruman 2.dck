@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Saruman 2
+Title=Saruman
+Difficulty=medium
+Description=UBR discard deck with Waste Not, Megrim, Liliana's Caress and Burning Inquiry 
+Icon=Saruman.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Badlands
+4 Volcanic Island
+4 Crumbling Necropolis
+5 Swamp|M12
+2 Megrim
+2 Waste Not
+4 Liliana's Caress
+1 Geth's Grimoire
+1 Abyssal Nocturnus
+1 Sedraxis Specter
+1 Cunning Lethemancer
+4 Burning Inquiry
+4 Wheel and Deal
+1 Windfall
+4 Blightning
+1 Hymn to Tourach
+4 Stupor
+1 Deception
+1 Unhinge
+1 Mind Rot
+2 Sinkhole
+3 Rain of Tears
+2 Terminate
+[sideboard]

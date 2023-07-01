@@ -1,0 +1,9 @@
+Name:Urza's Mine
+ManaCost:no cost
+Types:Land Urza's Mine
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ UrzaAmount | SpellDescription$ Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
+SVar:UrzaAmount:Count$UrzaLands.2.1
+AI:RemoveDeck:Random
+DeckNeeds:Name$Urza's Power Plant|Urza's Tower
+DeckHints:Type$Ugin|Karn|Urza|Construct|Assembly-Worker|Golem|Artifact|Eldrazi
+Oracle:{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.

@@ -1,0 +1,8 @@
+Name:Grixis Illusionist
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land you control becomes the basic land type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
+AI:RemoveDeck:All
+Oracle:{T}: Target land you control becomes the basic land type of your choice until end of turn.

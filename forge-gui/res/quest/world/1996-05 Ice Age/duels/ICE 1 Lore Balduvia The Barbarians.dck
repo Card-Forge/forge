@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Balduvia: The Balduvian Barbarians
+Title=The Balduvian Barbarians
+Difficulty=easy
+Description="Peace will come only when we have taken Varchild's head." -Lovisa Coldeyes, Balduvian chieftain
+
+Balduvia is a vast steppe of rocky plains due west of the city of Kjeld that is home to barbarians. Balduvian barbarians are mainly hunters, but keep a few more permanent settlements in the area. They were rivals of Kjeldor for some time, but allied with the forces of their enemies to battle against Lim-Dul. With the end of the Ice Age, many of the beasts that the barbarians hunted died out, and the land became suitable for crops. This marked a change in Balduvian lifestyles and further cemented their alliance with the Kjeldorans.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+4 Aggression|ICE
+4 Balduvian Barbarians|ICE
+4 Balduvian Horde|ALL
+4 Balduvian Trading Post|ALL
+2 Balduvian War-Makers|ALL|1
+2 Balduvian War-Makers|ALL|2
+4 Brand of Ill Omen|ICE
+2 Guerrilla Tactics|ALL|1
+2 Guerrilla Tactics|ALL|2
+1 Hematite Talisman|ICE
+24 Mountain|ICE|2
+3 Stonehands|ICE
+2 Storm Shaman|ALL|1
+2 Storm Shaman|ALL|2

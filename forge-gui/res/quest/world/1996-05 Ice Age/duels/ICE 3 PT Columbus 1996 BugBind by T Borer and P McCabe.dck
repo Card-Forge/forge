@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=ICE 3 PT Columbus 1996: BugBind by Terry Borer and Paul McCabe
+Title=BugBind
+Difficulty=Hard
+Description=Played by Terry Borer and Paul McCabe at Pro Tour: Columbus 1996.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Blinking Spirit|ICE
+4 Brushland|ICE
+2 Deadly Insect|ALL|1
+1 Deadly Insect|ALL|2
+3 Disenchant|ICE
+1 Forest|ICE|1
+1 Forest|ICE|3
+4 Fyndhorn Elves|ICE
+2 Icy Manipulator|ICE
+2 Incinerate|ICE
+2 Jokulhaups|ICE
+4 Karplusan Forest|ICE
+2 Kjeldoran Outpost|ALL
+3 Mountain|ICE|1
+3 Mountain|ICE|2
+2 Mountain|ICE|3
+3 Pillage|ALL
+3 Plains|ICE|1
+2 Plains|ICE|2
+2 Plains|ICE|3
+2 Pyroclasm|ICE
+2 Stormbind|ICE
+1 Stunted Growth|ICE
+4 Swords to Plowshares|ICE
+1 Thawing Glaciers|ALL
+1 Zuran Orb|ICE

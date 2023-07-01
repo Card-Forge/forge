@@ -1,0 +1,24 @@
+Name:Panicked Bystander
+ManaCost:1 W
+Types:Creature Human Peasant
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife1 | TriggerDescription$ Whenever CARDNAME or another creature you control dies, you gain 1 life.
+SVar:TrigGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you gained 3 or more life this turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
+Oracle:Whenever Panicked Bystander or another creature you control dies, you gain 1 life.\nAt the beginning of your end step, if you gained 3 or more life this turn, transform Panicked Bystander.
+
+ALTERNATE
+
+Name:Cackling Culprit
+ManaCost:no cost
+Colors:black
+Types:Creature Human Rogue
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife2 | TriggerDescription$ Whenever CARDNAME or another creature you control dies, you gain 1 life.
+SVar:TrigGainLife2:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:Whenever Cackling Culprit or another creature you control dies, you gain 1 life.\n{1}{B}: Cackling Culprit gains deathtouch until end of turn.

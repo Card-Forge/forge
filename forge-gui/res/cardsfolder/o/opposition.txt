@@ -1,0 +1,7 @@
+Name:Opposition
+ManaCost:2 U U
+Types:Enchantment
+A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature or land | SpellDescription$ Tap target artifact, creature or land.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:Tap an untapped creature you control: Tap target artifact, creature, or land.

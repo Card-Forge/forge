@@ -1,0 +1,10 @@
+Name:Fickle Efreet
+ManaCost:3 R
+Types:Creature Efreet
+PT:5/2
+T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DelayTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of CARDNAME.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DelayTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of CARDNAME.
+SVar:DelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigFlip | TriggerDescription$ flip a coin at end of combat. If you lose the flip, an opponent gains control of CARDNAME.
+SVar:TrigFlip:DB$ FlipACoin | LoseSubAbility$ DBGiveControl
+SVar:DBGiveControl:DB$ GainControl | Defined$ CorrectedSelf | NewController$ Opponent
+Oracle:Whenever Fickle Efreet attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of Fickle Efreet.

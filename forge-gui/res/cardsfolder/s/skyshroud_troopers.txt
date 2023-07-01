@@ -1,0 +1,6 @@
+Name:Skyshroud Troopers
+ManaCost:3 G
+Types:Creature Elf Druid Warrior
+PT:3/3
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

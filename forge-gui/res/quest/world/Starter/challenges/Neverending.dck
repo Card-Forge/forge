@@ -1,0 +1,23 @@
+[quest]
+id=Neverending
+OpponentName=Neverending Assault
+AILife=42
+Repeat=true
+Wins=20
+Card Reward=3 white rare;booster pack PTK;booster pack PTK
+Ticket Reward=true
+Credit Reward=300
+AIExtras=Plains|Plains|Plains
+HumanExtras=
+[metadata]
+Title=Neverending Assault
+Icon=Dungeon Crawling White.jpg
+Difficulty=hard
+Description="Sooo...are you going to deck out or not? Make up your mind!"
+Deck Type=constructed
+Name=Neverending
+[Main]
+4 Alabaster Dragon|POR
+4 Angel of Fury|PO2
+4 Guan Yu, Sainted Warrior|PTK
+7 Plains|PTK

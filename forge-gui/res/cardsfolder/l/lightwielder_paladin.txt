@@ -1,0 +1,8 @@
+Name:Lightwielder Paladin
+ManaCost:3 W W
+Types:Creature Human Knight
+PT:4/4
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may exile target black or red permanent that player controls.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Black+ControlledBy TriggeredTarget,Permanent.Red+ControlledBy TriggeredTarget | TgtPrompt$ Choose target black or red permanent. | Origin$ Battlefield | Destination$ Exile | IsCurse$ True
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Lightwielder Paladin deals combat damage to a player, you may exile target black or red permanent that player controls.

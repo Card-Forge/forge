@@ -1,0 +1,7 @@
+Name:Krosan Warchief
+ManaCost:2 G
+Types:Creature Beast
+PT:2/2
+A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Beast | TgtPrompt$ Select target Beast | SpellDescription$ Regenerate target Beast.
+S:Mode$ ReduceCost | ValidCard$ Beast | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Beast spells you cast cost {1} less to cast.
+Oracle:Beast spells you cast cost {1} less to cast.\n{1}{G}: Regenerate target Beast.

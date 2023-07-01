@@ -1,0 +1,5 @@
+Name:Yoked Ox
+ManaCost:W
+Types:Creature Ox
+PT:0/4
+Oracle:

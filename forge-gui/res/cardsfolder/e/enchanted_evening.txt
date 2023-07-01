@@ -1,0 +1,7 @@
+Name:Enchanted Evening
+ManaCost:3 WU WU
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Permanent | AddType$ Enchantment | Description$ All permanents are enchantments in addition to their other types.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All permanents are enchantments in addition to their other types.

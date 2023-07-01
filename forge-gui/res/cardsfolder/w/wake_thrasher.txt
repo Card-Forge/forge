@@ -1,0 +1,7 @@
+Name:Wake Thrasher
+ManaCost:2 U
+Types:Creature Merfolk Soldier
+PT:1/1
+T:Mode$ Untaps | ValidCard$ Permanent.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a permanent you control becomes untapped, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever a permanent you control becomes untapped, Wake Thrasher gets +1/+1 until end of turn.

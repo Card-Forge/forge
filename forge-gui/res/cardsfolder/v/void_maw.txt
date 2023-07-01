@@ -1,0 +1,9 @@
+Name:Void Maw
+ManaCost:4 B B
+Types:Creature Horror
+PT:4/5
+K:Trample
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.Other | ReplaceWith$ Exile | Description$ If another creature would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+A:AB$ Pump | Cost$ ExiledMoveToGrave<1/Card.ExiledWithSource/card exiled with CARDNAME> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+Oracle:Trample\nIf another creature would die, exile it instead.\nPut a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.

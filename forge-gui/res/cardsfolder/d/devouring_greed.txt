@@ -1,0 +1,14 @@
+Name:Devouring Greed
+ManaCost:2 B B
+Types:Sorcery Arcane
+A:SP$ LoseLife | Cost$ 2 B B Sac<X/Spirit> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ C | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ C
+SVar:X:Count$xPaid
+SVar:A:Sacrificed$Amount
+SVar:B:SVar$A/Times.2
+SVar:C:SVar$B/Plus.2
+SVar:AIPreference:SacCost$Creature.Spirit+token,Creature.Spirit+cmcLE2
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit
+Oracle:As an additional cost to cast this spell, you may sacrifice any number of Spirits.\nTarget player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.

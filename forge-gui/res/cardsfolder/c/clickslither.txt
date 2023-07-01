@@ -1,0 +1,7 @@
+Name:Clickslither
+ManaCost:1 R R R
+Types:Creature Insect
+PT:3/3
+K:Haste
+A:AB$ Pump | Cost$ Sac<1/Goblin> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ CARDNAME gets +2/+2 and gains trample until end of turn.
+Oracle:Haste\nSacrifice a Goblin: Clickslither gets +2/+2 and gains trample until end of turn.

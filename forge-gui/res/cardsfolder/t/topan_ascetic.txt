@@ -1,0 +1,6 @@
+Name:Topan Ascetic
+ManaCost:2 G
+Types:Creature Human Monk
+PT:2/2
+A:AB$ Pump | Cost$ tapXType<1/Creature> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Tap an untapped creature you control: Topan Ascetic gets +1/+1 until end of turn.

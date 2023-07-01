@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Ikoria: Lair of Behemoths #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/07/155.-IKO2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards drawn are not relevant to solving the puzzle.
+[state]
+humanlife=20
+ailife=16
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Go for Blood;Lutri, the Spellchaser;Footfall Crater;Searing Barrage;Vadrok, Apex of Thunder
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Silverwing Squadron;Blisterspit Gremlin;Gideon's Company;Huntmaster Liger;Narset of the Ancient Way|Counters:LOYALTY=6;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+aibattlefield=Sanctuary Smasher;Ox of Agonas

@@ -1,0 +1,20 @@
+[metadata]
+Title=Archetype: Inspiring Veteran
+Difficulty=medium
+Description="I fight for my daughter, who may not set foot on a battlefield for many years. Remember who you fight for."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Archetype 208 Inspiring Veteran
+[Main]
+4 Burning-Yard Trainer|ELD
+4 Fireborn Knight|ELD
+4 Inspiring Veteran|ELD|1
+4 Joust|ELD
+11 Mountain|ELD|4
+11 Plains|ELD|1
+4 Raging Redcap|ELD
+4 Rimrock Knight|ELD|1
+2 Syr Alin, the Lion's Claw|ELD
+4 Tournament Grounds|ELD
+4 Venerable Knight|ELD
+4 Youthful Knight|ELD

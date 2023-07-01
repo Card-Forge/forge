@@ -1,0 +1,7 @@
+Name:Anodet Lurker
+ManaCost:5
+Types:Artifact Creature Construct
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain 3 life.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
+Oracle:When Anodet Lurker dies, you gain 3 life.

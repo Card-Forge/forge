@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=General Patton 1
+Title=General Patton
+Difficulty=easy
+Description=WBR Raid deck
+Icon=General Patton.jpg
+Deck Type=constructed
+Profile=Reckless
+[main]
+4 Nomad Outpost
+4 Bloodfell Caves
+4 Scoured Barrens
+4 Wind-Scarred Crag
+2 Terramorphic Expanse
+2 Plains
+1 Mountain
+2 Swamp
+4 Tormented Soul
+4 Soltari Foot Soldier
+1 Prickly Boggart
+1 Crazed Goblin
+1 Battle-Mad Ronin
+1 Dauthi Horror
+1 Nezumi Cutthroat
+1 Soltari Trooper
+1 Stormblood Berserker
+1 Valley Dasher
+1 Utvara Scalper
+1 Impetuous Sunchaser
+1 Yellow Scarves Cavalry
+3 Arrow Storm
+2 Bloodsoaked Champion
+1 Curse of the Forsaken
+1 Mardu Heart-Piercer
+2 Mardu Hordechief
+3 Mardu Skullhunter
+1 Raid Bombardment
+1 Timely Hordemate
+3 War-Name Aspirant
+1 Hellrider
+[sideboard]

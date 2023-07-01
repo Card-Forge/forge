@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Eldrazi Arisen
+Description=Use Eldrazi Spawn tokens to summon enormous Eldrazi, those world-eating titans that are the scourge of Zendikar. Then use Conquering Manticore to steal your opponent's creature and leave the way open for your assault.
+Deck Type=constructed
+Set=ROE
+Image=eldrazi_arisen.jpg
+
+[main]
+10  Forest|ZEN
+8  Mountain|ZEN
+
+1  Akoum Boulderfoot|ROE
+1  Conquering Manticore+|ROE
+1  Daggerback Basilisk|ROE
+1  Goblin Piker|M10
+1  Hand of Emrakul|ROE
+1  Kozilek's Predator|ROE
+1  Nest Invader|ROE
+1  Ondu Giant|ROE
+1  Pathrazer of Ulamog|ROE
+1  Rapacious One|ROE
+1  Runed Servitor|ROE
+2  Sporecap Spider|ROE
+1  Ulamog's Crusher|ROE
+
+1  Act of Treason|M10
+1  Awakening Zone|ROE
+1  Bountiful Harvest|M10
+1  Dreamstone Hedron|ROE
+2  Flame Slash|ROE
+1  Growth Spasm|ROE
+1  Might of the Masses|ROE
+1  Windstorm|M10
+
+[sideboard]

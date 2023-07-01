@@ -1,0 +1,36 @@
+[quest]
+id=5002
+OpponentName=RiGa
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 green rares;Verdant Catacombs|ZEN
+Credit Reward=200
+HumanExtras=Beastmaster Ascension|Curse of the Nightly Hunt
+AIExtras=Beastmaster Ascension|Grand Melee
+[metadata]
+Name=quest5002
+Title=RiGa
+Difficulty=hard
+Description=And God said, “Let the land produce living creatures according to their kinds..."
+Icon=Riga.png
+Deck Type=constructed
+[Main]
+4 Llanowar Elves|LEB
+1 Dread Statuary|WWK
+3 Eldrazi Monument|ZEN
+13 Forest|LEB
+4 Joraga Treespeaker|ROE
+4 Khalni Garden|WWK
+4 Kozilek's Predator|ROE
+2 Leatherback Baloth|WWK
+4 Lotus Cobra|ZEN
+4 Misty Rainforest|ZEN
+4 Nest Invader|ROE
+3 River Boa|ZEN
+4 Vengevine|ROE
+2 Verdant Catacombs|ZEN
+3 Wolfbriar Elemental|WWK
+[sideboard]
+[planes]
+[schemes]

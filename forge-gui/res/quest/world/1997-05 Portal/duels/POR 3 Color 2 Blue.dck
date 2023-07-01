@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 3 Color: 2 Blue
+Title=The Color Blue
+Difficulty=hard
+Description=Like the tide, time both ebbs and flows.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Cloud Spirit|POR
+2 Command of Unsummoning|POR
+4 Djinn of the Lamp|POR
+26 Island|POR|3
+4 Man-o'-War|POR
+4 Mystic Denial|POR
+4 Owl Familiar|POR
+4 Snapping Drake|POR
+4 Symbol of Unsummoning|POR
+4 Time Ebb|POR

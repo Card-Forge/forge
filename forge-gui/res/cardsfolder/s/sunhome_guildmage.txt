@@ -1,0 +1,8 @@
+Name:Sunhome Guildmage
+ManaCost:R W
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ PumpAll | Cost$ 1 R W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+A:AB$ Token | Cost$ 2 R W | TokenAmount$ 1 | TokenScript$ rw_1_1_soldier_haste | TokenOwner$ You | SpellDescription$ Create a 1/1 red and white Soldier creature token with haste.
+DeckHas:Ability$Token
+Oracle:{1}{R}{W}: Creatures you control get +1/+0 until end of turn.\n{2}{R}{W}: Create a 1/1 red and white Soldier creature token with haste.

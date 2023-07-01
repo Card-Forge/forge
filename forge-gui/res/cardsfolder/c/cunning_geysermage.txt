@@ -1,0 +1,8 @@
+Name:Cunning Geysermage
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:3/2
+K:Kicker:2 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return up to one other target creature to its owner's hand.
+SVar:TrigKicker:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | SpellDescription$ Return up to one other target creature to its owner's hand.
+Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nWhen Cunning Geysermage enters the battlefield, if it was kicked, return up to one other target creature to its owner's hand.

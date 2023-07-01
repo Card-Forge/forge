@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Scotty 3
+Title=Scotty
+Difficulty=hard
+Description=WBG protection from black Famine deck with Chameleon Colossus and Oversoul of Dusk
+Icon=Scotty.jpg
+Deck Type=constructed
+[main]
+3 Auriok Champion
+3 White Knight
+1 Hand of Honor
+3 Dry Spell
+3 Mirran Crusader
+1 Noxious Field
+2 Plague Spitter
+2 Great Sable Stag
+2 Mystic Enforcer
+2 Chameleon Colossus
+1 Scalebane's Elite
+1 Melesse Spirit
+1 Oversoul of Dusk
+1 Last Laugh
+3 Evincar's Justice
+1 Sphere of Grace
+3 Festering Evil
+3 Famine
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Jet
+4 Bayou
+4 Savannah
+4 Scrubland
+3 Godless Shrine
+1 Graypelt Refuge
+1 Piranha Marsh
+4 Sandsteppe Citadel
+[sideboard]

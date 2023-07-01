@@ -1,0 +1,6 @@
+Name:Markov Patrician
+ManaCost:2 B
+Types:Creature Vampire
+PT:3/1
+K:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

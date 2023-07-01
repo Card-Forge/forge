@@ -1,0 +1,7 @@
+Name:Restoration Specialist
+ManaCost:1 W
+Types:Creature Dwarf Artificer
+PT:2/1
+A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact.YouOwn | SubAbility$ DBReturn | SpellDescription$ Return up to one target artifact card and up to one target enchantment card from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Enchantment.YouOwn | TgtPrompt$ Select target enchantment card in your graveyard
+Oracle:{W}, Sacrifice Restoration Specialist: Return up to one target artifact card and up to one target enchantment card from your graveyard to your hand.

@@ -1,0 +1,6 @@
+Name:Dolmen Gate
+ManaCost:2
+Types:Artifact
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.attacking+YouCtrl | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to attacking creatures you control.
+SVar:NonStackingEffect:True
+Oracle:Prevent all combat damage that would be dealt to attacking creatures you control.

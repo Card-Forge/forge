@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme Deck: 4 Goblin Fire
+Title=Goblin Fire
+Difficulty=easy
+Description="Goblin Fire" beats your opponent with a pack of wild creatures and the firepower to burn through defenses. Press the attack with your Goblins or incinerate the opposition with decisive flame spells.\n\n"Goblin Fire" will ignite your game. 
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Blaze|PO2
+2 Goblin Cavaliers|PO2
+2 Goblin Firestarter|PO2
+1 Goblin General|PO2
+2 Goblin Glider|PO2
+2 Goblin Matron|PO2
+2 Goblin Piker|PO2
+2 Goblin Raider|PO2
+2 Goblin War Strike|PO2
+15 Mountain|PO2|2
+3 Raging Goblin|PO2
+1 Relentless Assault|PO2
+3 Volcanic Hammer|PO2
+1 Wildfire|PO2

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Life of Ambition
+Title=Life of Ambition
+Description="When you give offense to heaven, to whom can you pray?"\n-Cao Cao, quoting Confucius
+Difficulty=medium
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ambition's Cost|PTK
+4 Cao Ren, Wei Commander|PTK
+4 Famine|PTK
+4 Misfortune's Gain|PTK
+4 Peach Garden Oath|PTK
+10 Plains|PTK|2
+4 Poison Arrow|PTK
+4 Shu Grain Caravan|PTK
+4 Shu Soldier-Farmers|PTK
+4 Stolen Grain|PTK
+14 Swamp|PTK|1

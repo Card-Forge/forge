@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rakdos Bloodsport
+Description=The Rakdos guild goes on killing sprees like people people go on shopping sprees, spreading mayhem across the city for the pure joy of it. As the hellbent mechanic proves, action-- frenzied, violent action-- is far more important than thought.
+Deck Type=constructed
+Set=DIS
+Image=rakdos_bloodsport.jpg
+[main]
+2 Cackling Flames|DIS
+2 Demon's Jester|DIS
+1 Douse in Gloom|GPT
+2 Drekavac|DIS
+3 Gobhobbler Rats|DIS
+2 Ignorant Bliss|DIS
+1 Lyzolda, the Blood Witch|DIS
+11 Mountain|RAV
+1 Nihilistic Glee|DIS
+2 Ragamuffyn|DIS
+1 Rakdos Guildmage|DIS
+1 Rakdos Ickspitter|DIS
+2 Rakdos Signet|DIS
+1 Rix Maadi, Dungeon Palace|DIS
+2 Sadistic Augermage|RAV
+2 Scorched Rusalka|GPT
+3 Seal of Fire|DIS
+1 Slaughterhouse Bouncer|DIS
+2 Slithering Shade|DIS
+12 Swamp|RAV
+2 Taste for Mayhem|DIS
+2 Torpid Moloch|RAV
+1 Twinstrike|DIS
+1 Wrecking Ball|DIS
+[sideboard]

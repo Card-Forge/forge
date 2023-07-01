@@ -1,0 +1,8 @@
+Name:Diffusion Sliver
+ManaCost:1 U
+Types:Creature Sliver
+PT:1/1
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.Sliver+YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ 2 | UnlessPayer$ TriggeredSourceSAController
+SVar:PlayMain1:TRUE
+Oracle:Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.

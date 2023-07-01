@@ -1,0 +1,8 @@
+Name:My Genius Knows No Bounds
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GeniusLife | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ When you set this scheme in motion, you may pay {X}. If you do, you gain X life and draw X cards.
+SVar:GeniusLife:AB$ GainLife | Cost$ X | Defined$ You | LifeAmount$ X | SubAbility$ GeniusCards
+SVar:GeniusCards:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$xPaid
+Oracle:When you set this scheme in motion, you may pay {X}. If you do, you gain X life and draw X cards.

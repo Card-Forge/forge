@@ -1,0 +1,7 @@
+Name:Junun Efreet
+ManaCost:1 B B
+Types:Creature Efreet
+PT:3/3
+K:Flying
+K:UpkeepCost:B B
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Junún Efreet unless you pay {B}{B}.

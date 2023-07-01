@@ -1,0 +1,7 @@
+Name:Cemetery Gate
+ManaCost:2 B
+Types:Creature Wall
+PT:0/5
+K:Defender
+K:Protection from black
+Oracle:Defender (This creature can't attack.)\nProtection from black

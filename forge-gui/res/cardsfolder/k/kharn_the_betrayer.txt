@@ -1,0 +1,14 @@
+Name:Kharn the Betrayer
+ManaCost:3 R
+Types:Legendary Creature Astartes Berserker
+PT:5/1
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ Berzerker — CARDNAME attacks or blocks each combat if able.
+S:Mode$ MustBlock | ValidCreature$ Card.Self
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Sigil of Corruption — When you lose control of CARDNAME, draw two cards.
+T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerController$ TriggeredOriginalController | TriggerDescription$ Sigil of Corruption — When you lose control of CARDNAME, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ ChoosePlayer | PreventionEffect$ True | AlwaysReplace$ True | Description$ The Betrayer — If damage would be dealt to CARDNAME, prevent that damage and an opponent of your choice gains control of it.
+SVar:ChoosePlayer:DB$ ChoosePlayer | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | NewController$ ChosenPlayer | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenPlayer$ True
+Oracle:Berzerker — Kharn the Betrayer attacks or blocks each combat if able.\nSigil of Corruption — When you lose control of Kharn the Betrayer, draw two cards.\nThe Betrayer — If damage would be dealt to Kharn the Betrayer, prevent that damage and an opponent of your choice gains control of it.

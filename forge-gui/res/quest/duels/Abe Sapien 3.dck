@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Abe Sapien 3
+Title=Abe Sapien
+Difficulty=hard
+Description=WUR Splinter Twin deck
+Icon=Abe Sapien.jpg
+Deck Type=constructed
+[main]
+4 Scalding Tarn|ZEN
+4 Polluted Delta
+3 Flooded Strand
+4 Arid Mesa
+1 Mountain|MBS
+1 Island|MBS
+4 Volcanic Island
+2 Tundra
+1 Plateau
+2 Idyllic Tutor
+4 Splinter Twin
+4 Kiki-Jiki, Mirror Breaker
+4 Breaching Hippocamp
+4 Village Bell-Ringer
+3 Sky Hussar
+2 Swords to Plowshares
+1 Lightning Bolt
+2 Lightning Helix
+2 Spell Snare
+2 Mana Leak
+1 Mental Misstep
+1 Rebuff the Wicked
+1 Dispel
+1 Turn Aside
+1 Ancestral Recall
+1 Time Walk
+[sideboard]

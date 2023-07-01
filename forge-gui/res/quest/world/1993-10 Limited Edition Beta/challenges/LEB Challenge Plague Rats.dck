@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Plague Rats
+OpponentName=A Swarm of Rats
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Plague Rats
+Title=A Swarm of Rats
+Difficulty=medium
+Description="Should you a Rat to madness tease/ Why ev'n a Rat may plague you..." -Samuel Coleridge, "Recantation"
+Icon=Plague Rats.jpg
+Deck Type=constructed
+[main]
+40 Plague Rats|LEB
+20 Swamp|LEB|2

@@ -1,0 +1,6 @@
+Name:Syndic of Tithes
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+K:Extort
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)

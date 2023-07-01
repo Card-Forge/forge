@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Zur's Weirding
+OpponentName=The Weirding
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Zur's Weirding
+[metadata]
+Name=ICE Challenge: Zur's Weirding
+Title=The Weirding
+Difficulty=medium
+Description="Teach us this weirding way and you have sanctuary with us as long as you wish." -Stilgar, Frank Herbert's Dune
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+20 Sheltered Valley|ALL
+20 Soldevi Sentry|ALL|1
+20 Soldevi Sentry|ALL|2

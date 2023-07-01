@@ -1,0 +1,6 @@
+Name:Whirlermaker
+ManaCost:3
+Types:Artifact
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
+DeckHas:Ability$Token
+Oracle:{4}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.

@@ -1,0 +1,5 @@
+Name:Quilled Slagwurm
+ManaCost:4 G G G
+Types:Creature Phyrexian Wurm
+PT:8/8
+Oracle:

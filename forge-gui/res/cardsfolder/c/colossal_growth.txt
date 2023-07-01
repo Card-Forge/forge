@@ -1,0 +1,7 @@
+Name:Colossal Growth
+ManaCost:1 G
+Types:Instant
+K:Kicker:R
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ PumpKicked | SpellDescription$ Target creature gets +3/+3 until end of turn.
+SVar:PumpKicked:DB$ Pump | Defined$ Targeted | Condition$ Kicked | KW$ Haste & Trample | NumAtt$ +1 | NumDef$ +1
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nTarget creature gets +3/+3 until end of turn. If this spell was kicked, instead that creature gets +4/+4 and gains trample and haste until end of turn.

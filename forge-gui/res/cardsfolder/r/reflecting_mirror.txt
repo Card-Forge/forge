@@ -1,0 +1,7 @@
+Name:Reflecting Mirror
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeTargets | Cost$ X T | TargetType$ Spell.singleTarget+IsTargeting You | ValidTgts$ Card | TgtPrompt$ Select target spell with a single target targeting you | TargetRestriction$ Player | SpellDescription$ Change the target of target spell with a single target if that target is you. The new target must be a player. X is twice the mana value of that spell.
+AI:RemoveDeck:All
+SVar:X:Targeted$CardManaCost/Twice
+Oracle:{X}, {T}: Change the target of target spell with a single target if that target is you. The new target must be a player. X is twice the mana value of that spell.

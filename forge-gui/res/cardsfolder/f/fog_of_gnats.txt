@@ -1,0 +1,7 @@
+Name:Fog of Gnats
+ManaCost:B B
+Types:Creature Insect
+PT:1/1
+K:Flying
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Flying\n{B}: Regenerate Fog of Gnats.

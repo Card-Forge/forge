@@ -1,0 +1,6 @@
+Name:Belligerent Brontodon
+ManaCost:5 G W
+Types:Creature Dinosaur
+PT:4/6
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
+Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.

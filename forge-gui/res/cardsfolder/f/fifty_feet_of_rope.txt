@@ -1,0 +1,7 @@
+Name:Fifty Feet of Rope
+ManaCost:1
+Types:Artifact
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Wall | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select target creature | PrecostDesc$ Climb Over — | SpellDescription$ Target Wall can't block this turn.
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | PrecostDesc$ Tie Up — | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
+A:AB$ Venture | Cost$ 4 T | SorcerySpeed$ True | PrecostDesc$ Rappel Down — | SpellDescription$ Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)
+Oracle:Climb Over — {T}: Target Wall can't block this turn.\nTie Up — {3}, {T}: Target creature doesn't untap during its controller's next untap step.\nRappel Down — {4}, {T}: Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)

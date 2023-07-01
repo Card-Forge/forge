@@ -1,0 +1,7 @@
+Name:Tresserhorn Skyknight
+ManaCost:5 B B
+Types:Creature Zombie Knight
+PT:5/3
+K:Flying
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.inZoneBattlefield+withFirst Strike | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures with first strike.
+Oracle:Flying\nPrevent all damage that would be dealt to Tresserhorn Skyknight by creatures with first strike.

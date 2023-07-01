@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deadspread
+Description=This Phyrexian deck uses the proliferate mechanic to add harmful -1/-1 counters to your opponent's creatures while adding beneficial charge counters to your weapons of war. Throw in Carnifex Demon and you can count on one frustrated opponent.
+Deck Type=constructed
+Set=SOM
+Image=deadspread.jpg
+[main]
+2 Fume Spitter|SOM
+1 Trigon of Corruption|SOM
+13 Island|SOM
+1 Twisted Image|SOM
+2 Maritime Guard|M11
+2 Sky-Eel School|SOM
+1 Sorcerer's Strongbox|M11
+2 Necrogen Censer|SOM
+1 Doom Blade|M11
+1 Culling Dais|SOM
+2 Thrummingbird|SOM
+1 Contagion Engine|SOM
+13 Swamp|SOM
+2 Silver Myr|SOM
+1 Skinrender|SOM
+2 Steady Progress|SOM
+2 Moriok Reaver|SOM
+2 Instill Infection|SOM
+1 Darkslick Drake|SOM
+2 Contagion Clasp|SOM
+1 Harbor Serpent|M11
+1 Trigon of Thought|SOM
+1 Throne of Geth|SOM
+1 Carnifex Demon+|SOM
+2 Leaden Myr|SOM
+[sideboard]

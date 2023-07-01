@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Inspiration-Struck
+Description=The gods have given you divine inspiration. Now lay your enemies low! Dream up new strategies to outmaneuver your opponents.
+Deck Type=constructed
+Set=BNG
+Image=inspiration-struck.jpg
+[Main]
+2 Aerie Worshippers|BNG
+1 Arbiter of the Ideal+|BNG
+2 Black Oak of Odunos|BNG
+1 Breaching Hippocamp|THS
+1 Curse of the Swine|THS
+2 Deepwater Hypnotist|BNG
+2 Evanescent Intellect|BNG
+1 Felhide Minotaur|THS
+1 Forlorn Pseudamma|BNG
+2 Griptide|THS
+1 Horizon Scholar|THS
+1 Insatiable Harpy|THS
+15 Island|THS
+1 Oracle's Insight|BNG
+2 Retraction Helix|BNG
+2 Returned Phalanx|THS
+2 Servant of Tymaret|BNG
+1 Shipwreck Singer|THS
+1 Sip of Hemlock|THS
+1 Siren of the Silent Song|BNG
+1 Siren Song Lyre|BNG
+2 Sphinx's Disciple|BNG
+1 Springleaf Drum|BNG
+11 Swamp|THS
+1 Thassa's Bounty|THS
+1 Triton Shorethief|THS
+1 Warchanter of Mogis|BNG
+[sideboard]
+

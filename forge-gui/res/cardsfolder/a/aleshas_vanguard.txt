@@ -1,0 +1,6 @@
+Name:Alesha's Vanguard
+ManaCost:3 B
+Types:Creature Orc Warrior
+PT:3/3
+K:Dash:2 B
+Oracle:Dash {2}{B} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

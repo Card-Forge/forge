@@ -1,0 +1,5 @@
+Name:Rotted Hystrix
+ManaCost:4 G
+Types:Creature Phyrexian Beast
+PT:3/6
+Oracle:

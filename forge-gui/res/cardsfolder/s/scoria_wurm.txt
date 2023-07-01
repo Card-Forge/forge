@@ -1,0 +1,8 @@
+Name:Scoria Wurm
+ManaCost:4 R
+Types:Creature Wurm
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, return CARDNAME to its owner's hand.
+SVar:TrigFlipACoin:DB$ FlipACoin | LoseSubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
+Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, return Scoria Wurm to its owner's hand.

@@ -1,0 +1,10 @@
+Name:Avacyn's Collar
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+0 and has vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy+Human | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+DeckHints:Type$Human
+DeckHas:Ability$Token
+Oracle:Equipped creature gets +1/+0 and has vigilance.\nWhenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.\nEquip {2}

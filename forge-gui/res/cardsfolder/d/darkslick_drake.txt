@@ -1,0 +1,9 @@
+Name:Darkslick Drake
+ManaCost:2 U U
+Types:Creature Phyrexian Drake
+PT:2/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:SacMe:1
+Oracle:Flying\nWhen Darkslick Drake dies, draw a card.

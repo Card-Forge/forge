@@ -1,0 +1,8 @@
+Name:Determined Iteration
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPopulate | TriggerDescription$ At the beginning of combat on your turn, populate. The token created this way gains haste. Sacrifice it at the beginning of the next end step. (To populate, create a token that's a copy of a creature token you control.)
+SVar:TrigPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True | PumpKeywords$ Haste | AtEOT$ Sacrifice
+DeckNeeds:Ability$Token
+DeckHas:Ability$Token|Sacrifice
+Oracle:At the beginning of combat on your turn, populate. The token created this way gains haste. Sacrifice it at the beginning of the next end step. (To populate, create a token that's a copy of a creature token you control.)

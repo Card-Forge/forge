@@ -1,0 +1,6 @@
+Name:Bird Pet
+ManaCost:no cost
+Colors:blue
+Types:Creature Bird Pet
+PT:1/1
+Oracle:

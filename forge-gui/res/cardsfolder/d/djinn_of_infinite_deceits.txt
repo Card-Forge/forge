@@ -1,0 +1,8 @@
+Name:Djinn of Infinite Deceits
+ManaCost:4 U U
+Types:Creature Djinn
+PT:2/7
+K:Flying
+A:AB$ ExchangeControl | Cost$ T | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature | TargetMin$ 2 | TargetMax$ 2 | ActivationPhases$ Upkeep->Main1,Main2->Cleanup | SpellDescription$ Exchange control of two target nonlegendary creatures. You can't activate this ability during combat.
+AI:RemoveDeck:All
+Oracle:Flying\n{T}: Exchange control of two target nonlegendary creatures. You can't activate this ability during combat.

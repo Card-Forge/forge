@@ -1,0 +1,7 @@
+Name:Serra Aviary
+ManaCost:3 W
+Types:World Enchantment
+S:Mode$ Continuous | Affected$ Creature.withFlying | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures with flying get +1/+1.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Creatures with flying get +1/+1.

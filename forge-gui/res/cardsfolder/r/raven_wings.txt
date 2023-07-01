@@ -1,0 +1,6 @@
+Name:Raven Wings
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Flying | AddType$ Bird | Description$ Equipped creature gets +1/+0, has flying, and is a Bird in addition to its other types.
+Oracle:Equipped creature gets +1/+0, has flying, and is a Bird in addition to its other types.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

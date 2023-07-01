@@ -1,0 +1,8 @@
+Name:Candlegrove Witch
+ManaCost:1 W
+Types:Creature Human Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPump | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, CARDNAME gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Candlegrove Witch gains flying until end of turn.

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=THS
+Image=blazing_beasts_of_myth.jpg
+Name=Blazing Beasts of Myth
+Description=Burn the path for your enormous beasts to triumph. Flood your enemies in fire while growing your creatures to unmanageable sizes to take down any force in the way.
+[Main]
+1 Artisan's Sorrow|THS
+2 Borderland Minotaur|THS
+1 Destructive Revelry|THS
+1 Dragon Mantle|THS
+1 Ember Swallower+|THS
+11 Forest|THS
+1 Ill-Tempered Cyclops|THS
+2 Lightning Strike|THS
+2 Magma Jet|THS
+2 Minotaur Skullcleaver|THS
+14 Mountain|THS
+2 Nemesis of Mortals|THS
+2 Nessian Asp|THS
+1 Nessian Courser|THS
+1 Polis Crusher|THS
+1 Portent of Betrayal|THS
+2 Rage of Purphoros|THS
+1 Rootwalla|M14
+2 Satyr Hedonist|THS
+1 Satyr Piper|THS
+2 Satyr Rambler|THS
+2 Stoneshock Giant|THS
+2 Volcanic Geyser|M14
+2 Voyaging Satyr|THS
+1 Windstorm|M14

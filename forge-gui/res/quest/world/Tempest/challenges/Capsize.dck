@@ -1,0 +1,21 @@
+[quest]
+id=TempestQuest7
+OpponentName=Capsize
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=3 blue rares
+Credit Reward=500
+AIExtras=Island|Island|Island|Island|Island|Island
+HumanExtras=
+[metadata]
+Title=Capsized!
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Things just don't want to exist around here somehow...
+Deck Type=constructed
+Name=Capsize
+[Main]
+30 Capsize
+22 Island
+8 Fighting Drake

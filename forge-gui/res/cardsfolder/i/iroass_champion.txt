@@ -1,0 +1,6 @@
+Name:Iroas's Champion
+ManaCost:1 R W
+Types:Creature Human Soldier
+PT:2/2
+K:Double Strike
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)

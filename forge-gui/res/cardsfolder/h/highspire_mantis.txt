@@ -1,0 +1,7 @@
+Name:Highspire Mantis
+ManaCost:2 R W
+Types:Creature Insect
+PT:3/3
+K:Flying
+K:Trample
+Oracle:Flying, trample

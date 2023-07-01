@@ -1,0 +1,7 @@
+Name:Razorgrass Screen
+ManaCost:1
+Types:Artifact Creature Wall
+PT:2/1
+K:Defender
+S:Mode$ MustBlock | ValidCreature$ Card.Self | Description$ CARDNAME blocks each combat if able.
+Oracle:Defender (This creature can't attack.)\nRazorgrass Screen blocks each combat if able.

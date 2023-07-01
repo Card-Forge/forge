@@ -1,0 +1,6 @@
+Name:Dowsing Shaman
+ManaCost:4 G
+Types:Creature Centaur Shaman
+PT:3/4
+A:AB$ ChangeZone | Cost$ 2 G T | TgtPrompt$ Choose target enchantment card in your graveyard | ValidTgts$ Enchantment.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target enchantment card from your graveyard to your hand.
+Oracle:{2}{G}, {T}: Return target enchantment card from your graveyard to your hand.

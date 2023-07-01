@@ -1,0 +1,8 @@
+Name:Maze Behemoth
+ManaCost:5 G
+Types:Creature Elemental
+PT:5/4
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Trample | Description$ Multicolored creatures you control have trample.
+SVar:PlayMain1:TRUE
+Oracle:Trample\nMulticolored creatures you control have trample.

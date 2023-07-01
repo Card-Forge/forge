@@ -1,0 +1,6 @@
+Name:Brassclaw Orcs
+ManaCost:2 R
+Types:Creature Orc
+PT:3/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or greater.
+Oracle:Brassclaw Orcs can't block creatures with power 2 or greater.

@@ -1,0 +1,7 @@
+Name:Pearl Dragon
+ManaCost:4 W W
+Types:Creature Dragon
+PT:4/4
+K:Flying
+A:AB$ Pump | Cost$ 1 W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+Oracle:Flying\n{1}{W}: Pearl Dragon gets +0/+1 until end of turn.

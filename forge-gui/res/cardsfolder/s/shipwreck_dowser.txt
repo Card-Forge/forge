@@ -1,0 +1,8 @@
+Name:Shipwreck Dowser
+ManaCost:3 U U
+Types:Creature Merfolk Wizard
+PT:3/3
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Shipwreck Dowser enters the battlefield, return target instant or sorcery card from your graveyard to your hand.

@@ -1,0 +1,6 @@
+Name:Barrage of Expendables
+ManaCost:R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+Oracle:{R}, Sacrifice a creature: Barrage of Expendables deals 1 damage to any target.

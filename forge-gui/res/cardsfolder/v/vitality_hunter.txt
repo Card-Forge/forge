@@ -1,0 +1,12 @@
+Name:Vitality Hunter
+ManaCost:3 W
+Types:Creature Nightmare
+PT:3/4
+K:Lifelink
+K:Monstrosity:X:X W W
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME becomes monstrous, put a lifelink counter on each of up to X target creatures.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ Lifelink | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Put a lifelink counter on each of up to X target creatures.
+SVar:X:Count$xPaid
+SVar:MaxTgts:TriggerCount$MonstrosityAmount
+DeckHas:Ability$Counters|LifeGain
+Oracle:Lifelink\n{X}{W}{W}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Vitality Hunter becomes monstrous, put a lifelink counter on each of up to X target creatures.

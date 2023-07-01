@@ -1,0 +1,7 @@
+Name:Inventor's Apprentice
+ManaCost:R
+Types:Creature Human Artificer
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control an artifact.
+SVar:BuffedBy:Artifact
+Oracle:Inventor's Apprentice gets +1/+1 as long as you control an artifact.

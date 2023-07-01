@@ -1,0 +1,12 @@
+Name:Clattering Augur
+ManaCost:1 B
+Types:Creature Skeleton Shaman
+PT:1/1
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+A:AB$ ChangeZone | Cost$ 2 B B | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+SVar:SacMe:2
+SVar:DiscardMe:2
+Oracle:Clattering Augur can't block.\nWhen Clattering Augur enters the battlefield, you draw a card and you lose 1 life.\n{2}{B}{B}: Return Clattering Augur from your graveyard to your hand.

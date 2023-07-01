@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Tusk Guardian 3
+Title=Tusk Guardian
+Icon=TuskGuardian.jpg
+Difficulty=hard
+Description=GW aggro animals.
+Deck Type=constructed
+[main]
+1 Berserk|LEB
+4 Birds of Paradise|4ED
+1 Colossus of Sardia|ATQ
+1 Craw Wurm|4ED
+2 Desert Twister|4ED
+2 Divine Transformation|LEG
+2 Elephant Graveyard|ARN
+1 Emerald Dragonfly|LEG
+2 Force of Nature|LEB
+9 Forest|4ED
+4 Giant Growth|4ED
+4 Holy Strength|4ED
+9 Plains|4ED
+4 Savannah|LEB
+3 Savannah Lions|LEB
+1 Scryb Sprites|LEB
+3 Tundra Wolves|LEG
+4 War Mammoth|LEB
+3 Woolly Mammoths|ICE
+[sideboard]

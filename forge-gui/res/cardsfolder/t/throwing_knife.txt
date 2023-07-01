@@ -1,0 +1,9 @@
+Name:Throwing Knife
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may sacrifice CARDNAME. If you do, CARDNAME deals 2 damage to any target.
+SVar:TrigDamage:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2
+AI:RemoveDeck:All
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, you may sacrifice Throwing Knife. If you do, Throwing Knife deals 2 damage to any target.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

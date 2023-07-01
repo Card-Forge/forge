@@ -1,0 +1,8 @@
+Name:Protean Thaumaturge
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigProteanCopy | TriggerDescription$ Constellation — Whenever an enchantment enters the battlefield under your control, you may have CARDNAME become a copy of another target creature, except it has this ability.
+SVar:TrigProteanCopy:DB$ Clone | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature to copy | Optional$ True | GainThisAbility$ True | AddSVars$ TrigProteanCopy | AILogic$ CloneBestCreature
+DeckNeeds:Type$Enchantment
+Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, you may have Protean Thaumaturge become a copy of another target creature, except it has this ability.

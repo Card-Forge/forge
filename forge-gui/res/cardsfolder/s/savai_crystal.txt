@@ -1,0 +1,6 @@
+Name:Savai Crystal
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R W B | SpellDescription$ Add {R}, {W}, or {B}.
+K:Cycling:2
+Oracle:{T}: Add {R}, {W}, or {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,9 @@
+Name:Giant's Grasp
+ManaCost:2 U U
+Types:Enchantment Aura
+K:Enchant Giant you control
+A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Giant.YouCtrl | TgtPrompt$ Select Giant you control
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target nonland permanent for as long as CARDNAME remains on the battlefield.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | LoseControl$ LeavesPlay
+DeckNeeds:Type$Giant
+Oracle:Enchant Giant you control\nWhen Giant's Grasp enters the battlefield, gain control of target nonland permanent for as long as Giant's Grasp remains on the battlefield.

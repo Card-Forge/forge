@@ -1,0 +1,6 @@
+Name:Briar Patch
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks you, it gets -1/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ -1
+Oracle:Whenever a creature attacks you, it gets -1/-0 until end of turn.

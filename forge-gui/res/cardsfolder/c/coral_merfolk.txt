@@ -1,0 +1,5 @@
+Name:Coral Merfolk
+ManaCost:1 U
+Types:Creature Merfolk
+PT:2/1
+Oracle:

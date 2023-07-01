@@ -1,0 +1,6 @@
+Name:Hipparion
+ManaCost:1 W
+Types:Creature Horse
+PT:1/3
+S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Attacker$ Creature.powerGE3 | Cost$ 1 | Description$ CARDNAME can't block creatures with power 3 or greater unless you pay {1}.
+Oracle:Hipparion can't block creatures with power 3 or greater unless you pay {1}.

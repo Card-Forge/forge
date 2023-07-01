@@ -1,0 +1,7 @@
+Name:Wulfgar of Icewind Dale
+ManaCost:3 R G
+Types:Legendary Creature Human Barbarian
+PT:4/4
+K:Melee
+S:Mode$ Panharmonicon | ValidMode$ Attacks,AttackersDeclared,AttackersDeclaredOneTarget | ValidCard$ Permanent.YouCtrl | ValidCause$ Creature.YouCtrl | Description$ If a creature you control attacking would cause a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nIf a creature you control attacking would cause a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

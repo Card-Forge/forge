@@ -1,0 +1,9 @@
+Name:Sangromancer
+ManaCost:2 B B
+Types:Creature Vampire Shaman
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls dies, you may gain 3 life.
+T:Mode$ Discarded | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever an opponent discards a card, you may gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | Defined$ You
+Oracle:Flying\nWhenever a creature an opponent controls dies, you may gain 3 life.\nWhenever an opponent discards a card, you may gain 3 life.

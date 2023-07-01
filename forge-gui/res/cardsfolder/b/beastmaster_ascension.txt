@@ -1,0 +1,11 @@
+Name:Beastmaster Ascension
+ManaCost:2 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 5 | AddToughness$ 5 | IsPresent$ Card.Self+counters_GE7_QUEST | Description$ As long as CARDNAME has seven or more quest counters on it, creatures you control get +5/+5.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPut | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control attacks, you may put a quest counter on CARDNAME.
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
+SVar:PlayMain1:TRUE
+SVar:MaxQuestEffect:7
+DeckHints:Ability$Token
+DeckHas:Ability$Counters
+Oracle:Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Snow White 1
+Title=Snow White
+Difficulty=easy
+Description=WUG Snow deck with Diamond Faerie, Gelid Shackles and Into the North
+Icon=Snow White.jpg
+Deck Type=Constructed
+[main]
+4 Arctic Flats|CSP
+2 Boreal Centaur|CSP
+2 Boreal Druid|CSP
+3 Boreal Griffin|CSP
+4 Boreal Shelf|CSP
+2 Centaur Omenreader|FUT
+2 Diamond Faerie|CSP
+1 Dreams of the Dead|ICE
+2 Frostweb Spider|CSP
+3 Gelid Shackles|CSP
+1 Heidar, Rimewind Master|CSP
+4 Into the North|CSP
+1 Ohran Viper|CSP
+2 Phyrexian Ironfoot|CSP
+3 Phyrexian Snowcrusher|CSP
+1 Rimewind Cryomancer|CSP
+1 Ronom Serpent
+1 Scrying Sheets|CSP
+1 Snow Devil|ICE
+9 Snow-Covered Forest|ICE
+5 Snow-Covered Island|CSP
+1 Snow-Covered Plains|CSP
+1 Squall Drifter|CSP
+1 Updraft|ICE
+1 Warning|ICE
+2 Woolly Mammoths|ICE
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Merchant's Dockhand
+ManaCost:1
+Types:Artifact Creature Construct
+PT:1/2
+A:AB$ Dig | Cost$ 3 U T tapXType<X/Artifact> | DigNum$ X | ChangeNum$ 1 | NoReveal$ True | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | SpellDescription$ Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+SVar:X:Count$xPaid
+Oracle:{3}{U}, {T}, Tap X untapped artifacts you control: Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

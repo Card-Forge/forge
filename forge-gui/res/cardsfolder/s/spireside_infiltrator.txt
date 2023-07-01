@@ -1,0 +1,7 @@
+Name:Spireside Infiltrator
+ManaCost:2 R
+Types:Creature Human Rogue
+PT:3/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes tapped, it deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent
+Oracle:Whenever Spireside Infiltrator becomes tapped, it deals 1 damage to each opponent.

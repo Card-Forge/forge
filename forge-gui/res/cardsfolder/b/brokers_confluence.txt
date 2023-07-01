@@ -1,0 +1,10 @@
+Name:Brokers Confluence
+ManaCost:2 G W U
+Types:Instant
+A:SP$ Charm | Choices$ Proliferate,PhaseOut,CounterAbility | CharmNum$ 3 | CanRepeatModes$ True
+SVar:Proliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:PhaseOut:DB$ Phases | ValidTgts$ Creature | SpellDescription$ Target creature phases out. (Treat it and anything attached to it as though they don't exist until its controller's next turn.)
+SVar:CounterAbility:DB$ Counter | TargetType$ Activated,Triggered | ValidTgts$ Card,Emblem | TgtPrompt$ Select target activated or triggered ability | SpellDescription$ Counter target activated or triggered ability.
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters & Type$Planeswalker
+Oracle:Choose three. You may choose the same mode more than once.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\n• Target creature phases out. (Treat it and anything attached to it as though they don't exist until its controller's next turn.)\n• Counter target activated or triggered ability.

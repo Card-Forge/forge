@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Borg 1
+Title=Borg
+Difficulty=easy
+Description="Resistance is futile"
+Icon=Borg.png
+Deck Type=constructed
+[Main]
+2 Beastbreaker of Bala Ged|ROE
+2 Cadaver Imp|ROE
+4 Forest|ZEN|1
+2 Gloomhunter|ROE
+2 Guul Draz Assassin|ROE
+4 Island|ZEN|1
+2 Kazandu Tuskcaller|ROE
+4 Last Kiss|ROE
+2 Leaf Arrow|ROE
+4 Misty Rainforest|ZEN
+2 Nirkana Cutthroat|ROE
+2 Null Champion|ROE
+2 Prey's Vengeance|ROE
+2 Quest for the Gravelord|ZEN
+2 Skywatcher Adept|ROE
+2 Sphinx of Magosi|ROE
+4 Swamp|THS|1
+4 Evolving Wilds|ROE
+4 Training Grounds|ROE
+4 Verdant Catacombs|ZEN
+4 Zulaport Enforcer|ROE
+[sideboard]

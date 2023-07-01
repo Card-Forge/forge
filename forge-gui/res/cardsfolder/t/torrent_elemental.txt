@@ -1,0 +1,9 @@
+Name:Torrent Elemental
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap all creatures defending player controls.
+SVar:TrigTap:DB$ TapAll | ValidCards$ Creature.ControlledBy TriggeredDefendingPlayer
+A:AB$ ChangeZone | Cost$ 3 BG BG | ActivationZone$ Exile | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SorcerySpeed$ True | SpellDescription$ Put CARDNAME from exile onto the battlefield tapped. Activate only as a sorcery.
+Oracle:Flying\nWhenever Torrent Elemental attacks, tap all creatures defending player controls.\n{3}{B/G}{B/G}: Put Torrent Elemental from exile onto the battlefield tapped. Activate only as a sorcery.

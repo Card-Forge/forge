@@ -1,0 +1,11 @@
+Name:Raffine, Scheming Seer
+ManaCost:W U B
+Types:Legendary Creature Sphinx Demon
+PT:1/4
+K:Flying
+K:Ward:1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ConniveNum$ X
+SVar:X:Count$Valid Creature.attacking
+DeckHas:Ability$Discard|Counters
+Oracle:Flying, ward {1}\nWhenever you attack, target attacking creature connives X, where X is the number of attacking creatures. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)

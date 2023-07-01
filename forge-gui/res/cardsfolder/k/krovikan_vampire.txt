@@ -1,0 +1,19 @@
+Name:Krovikan Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPump | Static$ True
+SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.IsRemembered | TriggerZones$ Battlefield | Execute$ LoseTrack | Static$ True
+SVar:LoseTrack:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+T:Mode$ TurnBegin | Execute$ DBCleanup2 | Static$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | IsPresent$ Card.Self | Execute$ TrigChange | TriggerDescription$ At the beginning of each end step, if a creature dealt damage by CARDNAME this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of CARDNAME.
+SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered+ThisTurnEnteredFrom_Battlefield | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ TrigDelay
+SVar:TrigDelay:DB$ DelayedTrigger | Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.StrictlySelf | RememberObjects$ RememberedLKI | Execute$ TrigSac | SubAbility$ TrigDelay2 | SpellDescription$ Sacrifice it when you lose control of CARDNAME.
+SVar:TrigDelay2:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.StrictlySelf | ValidOriginalController$ You | RememberObjects$ RememberedLKI | Execute$ TrigSac | SubAbility$ DBCleanup2 | SpellDescription$ Sacrifice it when you lose control of CARDNAME.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You
+SVar:DBCleanup:DB$ Cleanup | ClearTriggered$ True | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:At the beginning of each end step, if a creature dealt damage by Krovikan Vampire this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of Krovikan Vampire.

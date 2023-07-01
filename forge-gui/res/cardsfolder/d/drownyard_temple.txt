@@ -1,0 +1,8 @@
+Name:Drownyard Temple
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:SacMe:4
+SVar:DiscardMe:3
+Oracle:{T}: Add {C}.\n{3}: Return Drownyard Temple from your graveyard to the battlefield tapped.

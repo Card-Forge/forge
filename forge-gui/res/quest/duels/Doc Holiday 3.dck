@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Doc Holiday 3
+Title=Doc Holiday
+Difficulty=hard
+Description=WUG deck with Stoic Angel, Murkfiend Liege and Knight of New Alara
+Icon=Doc Holiday.jpg
+Deck Type=constructed
+[main]
+4 Bant Sureblade
+4 Giltspire Avenger
+1 Jenara, Asura of War
+3 Knight of New Alara
+4 Murkfiend Liege
+4 Rhox War Monk
+4 Stoic Angel
+1 Treva, the Renewer
+2 Trygon Predator
+3 Crystallization
+3 Temporal Spring
+3 Bant Charm
+4 Forest|SOM
+4 Island|SOM
+4 Plains|SOM
+4 Razorverge Thicket
+4 Seachrome Coast
+4 Seaside Citadel
+[sideboard]

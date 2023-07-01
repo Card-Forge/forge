@@ -1,0 +1,6 @@
+Name:Temple Thief
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.enchanted,Creature.Enchantment | Description$ CARDNAME can't be blocked by enchanted creatures or enchantment creatures.
+Oracle:Temple Thief can't be blocked by enchanted creatures or enchantment creatures.

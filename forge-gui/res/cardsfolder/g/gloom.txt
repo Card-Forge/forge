@@ -1,0 +1,7 @@
+Name:Gloom
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Card.White | Type$ Spell | Amount$ 3 | Description$ White spells cost {3} more to cast.
+S:Mode$ RaiseCost | ValidCard$ Enchantment.White | Type$ Ability | Amount$ 3 | AffectedZone$ Battlefield | Description$ Activated abilities of white enchantments cost {3} more to activate.
+AI:RemoveDeck:Random
+Oracle:White spells cost {3} more to cast.\nActivated abilities of white enchantments cost {3} more to activate.

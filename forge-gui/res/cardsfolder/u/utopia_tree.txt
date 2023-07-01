@@ -1,0 +1,6 @@
+Name:Utopia Tree
+ManaCost:1 G
+Types:Creature Plant
+PT:0/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

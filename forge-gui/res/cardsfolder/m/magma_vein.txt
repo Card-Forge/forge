@@ -1,0 +1,6 @@
+Name:Magma Vein
+ManaCost:2 R
+Types:Enchantment
+A:AB$ DamageAll | Cost$ R Sac<1/Land> | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+AI:RemoveDeck:All
+Oracle:{R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.

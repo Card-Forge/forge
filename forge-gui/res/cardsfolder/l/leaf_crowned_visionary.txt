@@ -1,0 +1,11 @@
+Name:Leaf-Crowned Visionary
+ManaCost:G G
+Types:Creature Elf Druid
+PT:1/1
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Elf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+T:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you cast an Elf spell, you may pay {G}. If you do, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ G
+AI:RemoveDeck:Random
+DeckNeeds:Type$Elf
+DeckHints:Type$Elf
+Oracle:Other Elves you control get +1/+1.\nWhenever you cast an Elf spell, you may pay {G}. If you do, draw a card.

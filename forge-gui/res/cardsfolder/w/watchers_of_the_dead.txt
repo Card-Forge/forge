@@ -1,0 +1,8 @@
+Name:Watchers of the Dead
+ManaCost:2
+Types:Artifact Creature Cat
+PT:2/2
+A:AB$ RepeatEach | Cost$ Exile<1/CARDNAME> | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseTwoGrave | AILogic$ Never | SubAbility$ ExileAllOthers | SpellDescription$ Each opponent chooses two cards in their graveyard and exiles the rest.
+SVar:ChooseTwoGrave:DB$ ChooseCard | Defined$ Remembered | Amount$ 2 | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Graveyard | ChoiceTitle$ Choose two cards not to exile | RememberChosen$ True | Mandatory$ True
+SVar:ExileAllOthers:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsNotRemembered
+Oracle:Exile Watchers of the Dead: Each opponent chooses two cards in their graveyard and exiles the rest.

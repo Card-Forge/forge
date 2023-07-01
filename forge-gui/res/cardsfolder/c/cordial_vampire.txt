@@ -1,0 +1,9 @@
+Name:Cordial Vampire
+ManaCost:B B
+Types:Creature Vampire
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever CARDNAME or another creature dies, put a +1/+1 counter on each Vampire you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Vampire+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Vampire
+Oracle:Whenever Cordial Vampire or another creature dies, put a +1/+1 counter on each Vampire you control.

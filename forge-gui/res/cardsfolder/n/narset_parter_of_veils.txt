@@ -1,0 +1,7 @@
+Name:Narset, Parter of Veils
+ManaCost:1 U U
+Types:Legendary Planeswalker Narset
+Loyalty:5
+S:Mode$ CantDraw | ValidPlayer$ Opponent | DrawLimit$ 1 | Description$ Each opponent can't draw more than one card each turn.
+A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.nonCreature+nonLand | ChangeValidDesc$ noncreature, nonland | RestRandomOrder$ True | ForceRevealToController$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:Each opponent can't draw more than one card each turn.\n[-2]: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

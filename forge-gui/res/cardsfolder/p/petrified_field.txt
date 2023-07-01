@@ -1,0 +1,7 @@
+Name:Petrified Field
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return target land card from your graveyard to your hand.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.

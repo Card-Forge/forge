@@ -1,0 +1,9 @@
+Name:Dire Fleet Neckbreaker
+ManaCost:2 B R
+Types:Creature Orc Pirate
+PT:3/2
+S:Mode$ Continuous | Affected$ Pirate.attacking+YouCtrl | AddPower$ 2 | Description$ Attacking Pirates you control get +2/+0.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Pirate
+DeckHints:Type$Pirate
+Oracle:Attacking Pirates you control get +2/+0.

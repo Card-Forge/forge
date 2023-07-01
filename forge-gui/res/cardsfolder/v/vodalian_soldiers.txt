@@ -1,0 +1,5 @@
+Name:Vodalian Soldiers
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+PT:1/2
+Oracle:

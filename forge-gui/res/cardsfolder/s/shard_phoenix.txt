@@ -1,0 +1,9 @@
+Name:Shard Phoenix
+ManaCost:4 R
+Types:Creature Phoenix
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ R R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only during your upkeep.
+A:AB$ DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | ValidDescription$ each creature without flying. | SpellDescription$ It deals 2 damage to each creature without flying.
+SVar:DiscardMe:1
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nSacrifice Shard Phoenix: It deals 2 damage to each creature without flying.\n{R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate only during your upkeep.

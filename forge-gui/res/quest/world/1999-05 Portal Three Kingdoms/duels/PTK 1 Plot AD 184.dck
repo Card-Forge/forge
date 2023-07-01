@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 184: The Yellow Scarves Rebellion
+Title=AD 184: The Yellow Scarves Rebellion
+Difficulty=easy
+Description=Zhang Jue, leader of the Yellow Scarves rebellion, was a Taoist master and tutored his soldiers in those arts.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+13 Forest|PTK|3
+11 Mountain|PTK|2
+4 Mountain Bandit|PTK
+4 Renegade Troops|PTK
+4 Taoist Hermit|PTK
+4 Taoist Mystic|PTK
+4 Trip Wire|PTK
+4 Yellow Scarves Cavalry|PTK
+4 Yellow Scarves General|PTK
+4 Yellow Scarves Troops|PTK
+4 Zuo Ci, the Mocking Sage|PTK

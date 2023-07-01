@@ -1,0 +1,30 @@
+[metadata]
+Name=Ashiok, Sculptor of Fears
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+Description=Ashiok has power to torment foes by conjuring their darkest memories, fears, and regrets. With Ashiok's deck, you'll fill your graveyard along with your opponent's for massive value as you slowly drive them insane.
+Set=THB
+Image=ashiok_sculptor_of_fears.jpg
+[Main]
+2 Ashiok's Forerunner|THB
+1 Ashiok, Sculptor of Fears+|THB
+2 Devourer of Memory|THB
+2 Elite Instructor|THB
+2 Final Death|THB
+2 Funeral Rites|THB
+2 Glimpse of Freedom|THB
+1 Gravebreaker Lamia|THB
+11 Island|THB
+4 Mindwrack Harpy|THB
+2 Mire's Grasp|THB
+2 Pharika's Spawn|THB
+3 Sleep of the Dead|THB
+12 Swamp|THB
+3 Swimmer in Nightmares|THB
+3 Towering-Wave Mystic|THB
+1 Tymaret, Chosen from Death|THB
+3 Underworld Charger|THB
+2 Unknown Shores|THB

@@ -1,0 +1,8 @@
+Name:Heat Wave
+ManaCost:2 R
+Types:Enchantment
+K:Cumulative upkeep:R
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.Blue | Description$ Blue creatures can't block creatures you control.
+S:Mode$ CantBlockUnless | ValidCard$ Creature.nonBlue | Attacker$ Creature.YouCtrl | Cost$ PayLife<1> | Description$ Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.
+AI:RemoveDeck:All
+Oracle:Cumulative upkeep {R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nBlue creatures can't block creatures you control.\nNonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.

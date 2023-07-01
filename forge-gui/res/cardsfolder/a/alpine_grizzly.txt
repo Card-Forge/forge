@@ -1,0 +1,5 @@
+Name:Alpine Grizzly
+ManaCost:2 G
+Types:Creature Bear
+PT:4/2
+Oracle:

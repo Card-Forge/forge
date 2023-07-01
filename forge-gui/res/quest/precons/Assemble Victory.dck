@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Assemble Victory
+Description=Not all artificers are confined to workshops. You are the architect of your own victory. Bringing your inventions to the battlefield, you use artifacts to empower your already potent magic.
+Deck Type=constructed
+Set=ORI
+Image=assemble_victory.jpg
+[Main]
+2 Alchemist's Vial|ORI
+2 Artificer's Epiphany|ORI
+2 Aspiring Aeronaut|ORI
+1 Bellows Lizard|ORI
+2 Bonded Construct|ORI
+2 Chief of the Foundry|ORI
+1 Disperse|ORI
+1 Evolving Wilds|ORI
+2 Ghirapur AEther Grid|ORI
+2 Ghirapur Gearcrafter|ORI
+2 Guardian Automaton|ORI
+3 Infectious Bloodlust|ORI
+3 Island|ORI|1
+3 Island|ORI|2
+2 Island|ORI|3
+2 Island|ORI|4
+1 Mage-Ring Responder|ORI
+1 Maritime Guard|ORI
+1 Meteorite|ORI
+4 Mountain|ORI|1
+3 Mountain|ORI|2
+3 Mountain|ORI|3
+3 Mountain|ORI|4
+1 Pia and Kiran Nalaar+|ORI
+1 Prism Ring|ORI
+1 Ramroller|ORI
+2 Reclusive Artificer|ORI
+1 Runed Servitor|ORI
+1 Separatist Voidmage|ORI
+1 Subterranean Scout|ORI
+1 Thopter Engineer|ORI
+2 Volcanic Rambler|ORI
+1 Whirler Rogue|ORI

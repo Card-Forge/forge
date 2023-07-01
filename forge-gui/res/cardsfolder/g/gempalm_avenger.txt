@@ -1,0 +1,8 @@
+Name:Gempalm Avenger
+ManaCost:5 W
+Types:Creature Human Soldier
+PT:3/5
+K:Cycling:2 W
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, Soldier creatures get +1/+1 and gain first strike until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Soldier | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike
+Oracle:Cycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.

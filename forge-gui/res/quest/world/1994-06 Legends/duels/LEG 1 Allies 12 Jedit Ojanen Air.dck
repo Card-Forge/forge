@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=LEG 1 Allies: 12 Jedit Ojanen (Air)
+Title=Jedit Ojanen
+Difficulty=easy
+Description=Mightiest of the cat warriors, Jedit Ojanen forsook the forests of his tribe and took service with the Robaran Mercenaries, rising through their ranks to lead them in the battle for Efrava.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Gaseous Form|LEG
+2 Gosta Dirk|LEG
+10 Island|LEB|2
+4 Ivory Guardians|LEG
+2 Jedit Ojanen|LEG
+2 Kasimir the Lone Wolf|LEG
+2 Lifeblood|LEG
+4 Osai Vultures|LEG
+14 Plains|LEB|1
+2 Recall|LEG
+2 Relic Bind|LEG
+4 Seeker|LEG
+4 Wall of Vapor|LEG
+4 Zephyr Falcon|LEG

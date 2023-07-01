@@ -1,0 +1,11 @@
+Name:Elrond, Master of Healing
+ManaCost:2 G U
+Types:Legendary Creature Elf Noble
+PT:4/4
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you scry, put a +1/+1 counter on each of up to X target creatures, where X is the number of cards looked at while scrying this way.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select up to X target creatures
+SVar:X:TriggerCount$ScryNum
+T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl+counters_GE1_P1P1+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it becomes the target of a spell or ability an opponent controls, you may draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+Oracle:Whenever you scry, put a +1/+1 counter on each of up to X target creatures, where X is the number of cards looked at while scrying this way.\nWhenever a creature you control with a +1/+1 counter on it becomes the target of a spell or ability an opponent controls, you may draw a card.

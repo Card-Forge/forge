@@ -1,0 +1,7 @@
+Name:Kessig Recluse
+ManaCost:2 G G
+Types:Creature Spider
+PT:2/3
+K:Reach
+K:Deathtouch
+Oracle:Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

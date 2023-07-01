@@ -1,0 +1,8 @@
+Name:Summit Apes
+ManaCost:3 G
+Types:Creature Ape
+PT:5/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Mountain.YouCtrl | Description$ As long as you control a Mountain, CARDNAME has menace.
+SVar:BuffedBy:Mountain
+DeckHints:Color$Red
+Oracle:As long as you control a Mountain, Summit Apes has menace. (It can't be blocked except by two or more creatures.)

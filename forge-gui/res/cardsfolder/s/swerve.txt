@@ -1,0 +1,6 @@
+Name:Swerve
+ManaCost:U R
+Types:Instant
+A:SP$ ChangeTargets | TargetType$ Spell.singleTarget | ValidTgts$ Card | TgtPrompt$ Select target spell with a single target | SpellDescription$ Change the target of target spell with a single target.
+AI:RemoveDeck:All
+Oracle:Change the target of target spell with a single target.

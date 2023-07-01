@@ -1,0 +1,8 @@
+Name:Vrock
+ManaCost:3 B B
+Types:Creature Bird Demon
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Revolt$ True | Execute$ DBLose | TriggerDescription$ Toxic Spores — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, each opponent loses 3 life.
+SVar:DBLose:DB$ LoseLife | LifeAmount$ 3 | Defined$ Player.Opponent
+Oracle:Flying\nToxic Spores — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, each opponent loses 3 life.

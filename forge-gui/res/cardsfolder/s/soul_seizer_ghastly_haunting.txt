@@ -1,0 +1,22 @@
+Name:Soul Seizer
+ManaCost:3 U U
+Types:Creature Spirit
+PT:1/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl
+AlternateMode:DoubleFaced
+Oracle:Flying\nWhen Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
+
+ALTERNATE
+
+Name:Ghastly Haunting
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+AI:RemoveDeck:All
+Oracle:Enchant creature\nYou control enchanted creature.

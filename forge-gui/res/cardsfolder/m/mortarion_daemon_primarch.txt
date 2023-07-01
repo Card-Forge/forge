@@ -1,0 +1,11 @@
+Name:Mortarion, Daemon Primarch
+ManaCost:5 B
+Types:Legendary Creature Demon Primarch
+PT:5/6
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Primarch of the Death Guard — At the beginning of your end step, you may pay {X}. If you do, create X 2/2 black Astartes Warrior creature tokens with menace. X can't be greater than the amount of life you lost this turn.
+SVar:TrigToken:AB$ Token | Cost$ X | TokenAmount$ X | TokenScript$ b_2_2_astartes_warrior_menace | XMaxLimit$ LifeLost | TokenOwner$ You
+SVar:X:Count$xPaid
+SVar:LifeLost:Count$LifeYouLostThisTurn
+DeckHas:Ability$Token & Type$Astartes|Warrior
+Oracle:Flying\nPrimarch of the Death Guard — At the beginning of your end step, you may pay {X}. If you do, create X 2/2 black Astartes Warrior creature tokens with menace. X can't be greater than the amount of life you lost this turn.

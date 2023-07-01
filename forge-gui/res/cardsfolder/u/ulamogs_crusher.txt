@@ -1,0 +1,7 @@
+Name:Ulamog's Crusher
+ManaCost:8
+Types:Creature Eldrazi
+PT:8/8
+K:Annihilator:2
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)\nUlamog's Crusher attacks each combat if able.

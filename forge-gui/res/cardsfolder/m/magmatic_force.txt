@@ -1,0 +1,7 @@
+Name:Magmatic Force
+ManaCost:5 R R R
+Types:Creature Elemental
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each upkeep, CARDNAME deals 3 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:At the beginning of each upkeep, Magmatic Force deals 3 damage to any target.

@@ -1,0 +1,9 @@
+Name:Demon of Catastrophes
+ManaCost:2 B B
+Types:Creature Demon
+PT:6/6
+K:Flying
+K:Trample
+A:SP$ PermanentCreature | Cost$ 2 B B Sac<1/Creature>
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE4
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFlying, trample

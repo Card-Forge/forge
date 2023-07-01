@@ -1,0 +1,7 @@
+Name:Bloated Toad
+ManaCost:2 G
+Types:Creature Frog
+PT:2/2
+K:Protection from blue
+K:Cycling:2
+Oracle:Protection from blue\nCycling {2} ({2}, Discard this card: Draw a card.)

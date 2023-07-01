@@ -1,0 +1,7 @@
+Name:Scute Mob
+ManaCost:G
+Types:Creature Insect
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ GE5 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4
+Oracle:At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on Scute Mob.

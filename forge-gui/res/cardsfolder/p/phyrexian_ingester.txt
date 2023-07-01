@@ -1,0 +1,14 @@
+Name:Phyrexian Ingester
+ManaCost:6 U
+Types:Creature Phyrexian Beast
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile target nontoken creature.
+SVar:TrigExile:DB$ ChangeZone | Imprint$ True | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ Cleanup | ClearImprinted$ True
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ Y | Description$ CARDNAME gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
+T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSource | Origin$ Exile | Execute$ DBForget | Static$ True
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:X:Imprinted$CardPower
+SVar:Y:Imprinted$CardToughness
+Oracle:Imprint — When Phyrexian Ingester enters the battlefield, you may exile target nontoken creature.\nPhyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.

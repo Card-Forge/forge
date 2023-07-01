@@ -1,0 +1,8 @@
+Name:Jeska, Warrior Adept
+ManaCost:2 R R
+Types:Legendary Creature Human Barbarian Warrior
+PT:3/1
+K:First Strike
+K:Haste
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:First strike, haste\n{T}: Jeska, Warrior Adept deals 1 damage to any target.

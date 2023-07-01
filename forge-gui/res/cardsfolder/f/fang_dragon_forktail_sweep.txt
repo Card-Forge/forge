@@ -1,0 +1,15 @@
+Name:Fang Dragon
+ManaCost:5 R R
+Types:Creature Dragon
+PT:6/3
+K:Flying
+AlternateMode:Adventure
+Oracle:Flying
+
+ALTERNATE
+
+Name:Forktail Sweep
+ManaCost:1 R
+Types:Sorcery Adventure
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | SpellDescription$ CARDNAME deals 1 damage to each creature you don't control.
+Oracle:Forktail Sweep deals 1 damage to each creature you don't control. (Then exile this card. You may cast the creature later from exile.)

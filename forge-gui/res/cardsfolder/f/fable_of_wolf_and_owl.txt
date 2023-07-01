@@ -1,0 +1,9 @@
+Name:Fable of Wolf and Owl
+ManaCost:3 GU GU GU
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigWolf | TriggerDescription$ Whenever you cast a green spell, you may create a 2/2 green Wolf creature token.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigBird | TriggerDescription$ Whenever you cast a blue spell, you may create a 1/1 blue Bird creature token with flying.
+SVar:TrigWolf:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
+SVar:TrigBird:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying | TokenOwner$ You
+SVar:BuffedBy:Card.Green,Card.Blue
+Oracle:Whenever you cast a green spell, you may create a 2/2 green Wolf creature token.\nWhenever you cast a blue spell, you may create a 1/1 blue Bird creature token with flying.

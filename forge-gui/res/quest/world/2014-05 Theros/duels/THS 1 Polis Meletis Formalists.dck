@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 Polis: Meletis: Formalists
+Title=The Formalists
+Difficulty=easy
+Description=The Aether is of particular interest to Meletian scholars, and many study its use in magic. Some believe that the Aether is the realm of abstract entities, such as numbers, concepts, and theories. Some formalists study magics that allow them to cause objects to disappear from physical reality. They say they are "perfecting" real, necessarily flawed, concrete objects by transferring them to the realm of perfect, abstract entities.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Annul|THS
+4 Banishing Light|JOU
+4 Dissolve|THS
+4 Eternity Snare|BNG
+4 Griffin Dreamfinder|BNG
+11 Island|THS|3
+4 Meletis Astronomer|BNG
+4 Omenspeaker|THS
+9 Plains|THS|2
+4 Reprisal|JOU
+4 Revoke Existence|BNG
+4 Temple of Enlightenment|BNG

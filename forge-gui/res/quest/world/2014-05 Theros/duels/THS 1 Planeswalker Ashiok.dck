@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 Planeswalker: Ashiok
+Title=Ashiok, Nightmare Weaver
+Difficulty=easy
+Description=Ashiok is the quintessential fearmonger, spinning his magic to terrorize others with their own darkest, most closely guarded nightmares. Once his Planeswalker spark ignited, Ashiok discovered that not only was he adept at culling the nightmares of others, but he could also make them manifest in reality. He now travels the Multiverse in search of designs for the perfect embodiment of fear. In his search, Ashiok came to Theros, and he recognizes that the dreams of this plane seem more vibrant than those of the other planes where he has traveled.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ashiok's Adept|BNG
+4 Ashiok, Nightmare Weaver|THS
+4 Brain Maggot|JOU
+4 Countermand|JOU
+4 Feast of Dreams|JOU
+7 Island|THS|3
+4 Mindreaver|BNG
+4 Nighthowler|THS
+13 Swamp|THS|2
+4 Temple of Deceit|THS
+4 Thoughtseize|THS
+4 Tormented Hero|THS

@@ -1,0 +1,8 @@
+Name:Atla Palani, Nest Tender
+ManaCost:1 R G W
+Types:Legendary Creature Human Shaman
+PT:2/3
+A:AB$ Token | Cost$ 2 T | TokenAmount$ 1 | TokenScript$ g_0_1_egg_defender | TokenOwner$ You | SpellDescription$ Create a 0/1 green Egg creature token with defender.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Egg.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever an Egg you control dies, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | GainControl$ True
+Oracle:{2}, {T}: Create a 0/1 green Egg creature token with defender.\nWhenever an Egg you control dies, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.

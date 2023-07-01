@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Hazoret Aggro
+Description=Play an aggressive game with hasty creatures and burn spells, turning your extra cards into more direct damage when the game goes long. Keep your opponent on the defensive and finish the game before they can even get started.
+Deck Type=constructed
+Set=RIX
+Image=hazoret_aggro.jpg
+[Main]
+2 Abrade|HOU
+4 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+1 Chandra, Torch of Defiance|KLD
+4 Fanatical Firebrand|RIX
+1 Glorybringer|AKH
+3 Harsh Mentor|AKH
+1 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Lightning Strike|XLN
+2 Magma Spray|AKH
+20 Mountain|RIX
+4 Shock|AER
+3 Soul-Scar Mage|AKH
+4 Sunscorched Desert|AKH
+[Sideboard]
+4 Chandra's Defeat|HOU
+2 Kari Zev's Expertise|AER
+2 Key to the City|KLD
+2 Magma Spray|AKH
+2 Pia Nalaar|KLD
+3 Sentinel Totem|XLN

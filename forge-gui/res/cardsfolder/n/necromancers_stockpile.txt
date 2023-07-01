@@ -1,0 +1,9 @@
+Name:Necromancer's Stockpile
+ManaCost:1 B
+Types:Enchantment
+A:AB$ Draw | Cost$ 1 B Discard<1/Creature> | NumCards$ 1 | SubAbility$ DBToken | SpellDescription$ Draw a card. If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Discarded$Valid Card.Zombie
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{1}{B}, Discard a creature card: Draw a card. If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.

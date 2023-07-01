@@ -1,0 +1,7 @@
+Name:Shinka, the Bloodsoaked Keep
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | KW$ First Strike | SpellDescription$ Target legendary creature gains first strike until end of turn.
+DeckHints:Type$Legendary
+Oracle:{T}: Add {R}.\n{R}, {T}: Target legendary creature gains first strike until end of turn.

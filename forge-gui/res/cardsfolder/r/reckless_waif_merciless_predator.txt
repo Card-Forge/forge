@@ -1,0 +1,19 @@
+Name:Reckless Waif
+ManaCost:R
+Types:Creature Human Rogue Werewolf
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Reckless Waif.
+
+ALTERNATE
+
+Name:Merciless Predator
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/2
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Merciless Predator.

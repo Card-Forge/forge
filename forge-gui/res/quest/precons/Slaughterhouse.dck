@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Slaughterhouse
+Description=Dark mayhem! The destruction of the Helvault released Avacyn-- but also a host of demonic and infernal forces. Show your enemies to death's door with the "Slaughterhouse" deck, brimming with murderous spells.
+Deck Type=constructed
+Set=AVR
+Image=slaughterhouse.jpg
+[main]
+1 Scroll of Griselbrand|AVR
+12 Mountain|AVR
+13 Swamp|AVR
+1 Blood Artist|AVR
+1 Bloodflow Connoisseur|AVR
+3 Butcher Ghoul|AVR
+2 Demonic Taskmaster|AVR
+1 Demonlord of Ashmouth|AVR
+1 Driver of the Dead|AVR
+2 Evernight Shade|AVR
+1 Gang of Devils|AVR
+2 Goblin Arsonist|M12
+1 Harvester of Souls+|AVR
+1 Havengul Vampire|AVR
+1 Hunted Ghoul|AVR
+1 Maalfeld Twins|AVR
+2 Raging Poltergeist|AVR
+2 Reassembling Skeleton|M12
+3 Soulcage Fiend|AVR
+1 Unhallowed Pact|AVR
+2 Fling|DKA
+2 Barter in Blood|AVR
+2 Bone Splinters|AVR
+2 Grave Exchange|AVR
+[sideboard]

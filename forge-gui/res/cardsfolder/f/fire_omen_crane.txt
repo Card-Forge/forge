@@ -1,0 +1,8 @@
+Name:Fire-Omen Crane
+ManaCost:3 R R
+Types:Creature Bird Spirit
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to target creature an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 1
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Fire-Omen Crane attacks, it deals 1 damage to target creature an opponent controls.

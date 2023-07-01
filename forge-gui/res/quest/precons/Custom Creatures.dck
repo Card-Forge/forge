@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Custom Creatures
+Description=Take what's good and make it better! The wide array of enchantments in this deck enhances your Elves and Wurms, turning them into unstoppable monstrosities. If they who have the biggest creatures win, your games will be no contest.
+Deck Type=constructed
+Set=9ED
+Image=custom_creatures.jpg
+[main]
+2 Blanchwood Armor|9ED
+1 Bottle Gnomes|9ED
+2 Craw Wurm|9ED
+2 Elvish Warrior|9ED
+1 Emperor Crocodile|9ED
+16 Forest|9ED
+1 Giant Spider|9ED
+1 Kavu Climber|9ED
+1 Llanowar Elves|9ED
+1 Naturalize|9ED
+2 Norwood Ranger|9ED
+2 Overgrowth|9ED
+1 Regeneration|9ED
+2 Trained Armodon|9ED
+1 Treetop Bracers|9ED
+1 Verduran Enchantress|9ED
+1 Web|9ED
+1 Wurm's Tooth|9ED
+1 Yavimaya Enchantress|9ED
+[sideboard]

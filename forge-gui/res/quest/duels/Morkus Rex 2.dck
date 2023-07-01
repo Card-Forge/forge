@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Morkus Rex 2
+Title=Morkus Rex
+Difficulty=medium
+Description=WRG Ixalan Dinosaurs ramp deck with Carnage Tyrant and Gishath, Sun's Avatar
+Icon=Morkus Rex.jpg
+Deck Type=constructed
+[main]
+4 Abrade
+3 Carnage Tyrant
+4 Commune with Dinosaurs
+3 Drover of the Mighty
+2 Forest|XLN
+1 Forest|RIX
+2 Gishath, Sun's Avatar
+3 Inspiring Vantage
+3 Kinjalli's Caller
+2 Majestic Heliopterus
+1 Mountain|XLN
+1 Mountain|RIX
+3 Otepec Huntmaster
+1 Plains|RIX
+3 Raging Swordtooth
+3 Ranging Raptors
+2 Regisaur Alpha
+3 Ripjaw Raptor
+4 Rootbound Crag
+2 Savage Stomp
+4 Sunpetal Grove
+4 Timber Gorge
+2 Unclaimed Territory
+
+[sideboard]

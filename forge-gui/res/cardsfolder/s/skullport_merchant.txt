@@ -1,0 +1,9 @@
+Name:Skullport Merchant
+ManaCost:2 B
+Types:Creature Dwarf Citizen
+PT:1/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+A:AB$ Draw | Cost$ 1 B Sac<1/Creature.Other;Artifact.Treasure/another creature or treasure> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Token
+Oracle:When Skullport Merchant enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n{1}{B}, Sacrifice another creature or a Treasure: Draw a card.

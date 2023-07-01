@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Seabiscuit 3
+Title=Seabiscuit
+Difficulty=hard
+Description=Mono W Metalcraft deck with Ardent Recruit and Indomitable Archangel
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+[main]
+4 Ancient Den
+4 Darksteel Citadel
+1 Karakas
+8 Plains|M11
+1 Mox Emerald
+1 Mox Jet
+1 Mox Opal
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+4 Ardent Recruit 
+4 Auriok Edgewright
+4 Auriok Sunchaser
+1 Dispense Justice
+3 Ghalma's Warden
+1 Indomitable Archangel
+1 Myrsmith
+4 Court Homunculus
+2 Dispeller's Capsule
+2 Sanctum Gargoyle
+1 Origin Spellbomb
+4 Memnite
+3 Arcbound Worker
+2 Skullclamp
+1 Dispatch
+[sideboard]

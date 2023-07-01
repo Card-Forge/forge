@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - War of the Spark #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/05/115.-WAR5-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=11
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Gird for Battle;Crafty Cutpurse;Pack's Favor;Ajani, the Greathearted;Dowsing Dagger
+humanbattlefield=Bioessence Hydra|Counters:P1P1=2;Parhelion II;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+aibattlefield=Wee Dragonauts;Zahid, Djinn of the Lamp;Mistcaller;Mistcaller

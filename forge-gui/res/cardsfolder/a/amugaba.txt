@@ -1,0 +1,7 @@
+Name:Amugaba
+ManaCost:5 U U
+Types:Creature Illusion
+PT:6/6
+K:Flying
+A:AB$ ChangeZone | Cost$ 2 U Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying\n{2}{U}, Discard a card: Return Amugaba to its owner's hand.

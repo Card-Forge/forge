@@ -1,0 +1,5 @@
+Name:Obelisk of Grixis
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U B R | SpellDescription$ Add {U}, {B}, or {R}.
+Oracle:{T}: Add {U}, {B}, or {R}.

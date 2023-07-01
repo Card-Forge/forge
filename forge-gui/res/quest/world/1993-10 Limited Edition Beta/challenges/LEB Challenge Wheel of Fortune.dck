@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Wheel of Fortune
+OpponentName=The Wheel
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Wheel of Fortune
+Title=The Wheel
+Difficulty=hard
+Description="Fate is not as fixed as you might think."
+Icon=Wheel of Fortune.jpg
+Deck Type=constructed
+[main]
+50 Mox Ruby|LEB
+50 Wheel of Fortune|LEB

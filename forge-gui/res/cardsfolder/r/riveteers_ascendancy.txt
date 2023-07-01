@@ -1,0 +1,9 @@
+Name:Riveteers Ascendancy
+ManaCost:B R G
+Types:Enchantment
+T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigReturn | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, you may return target creature card with lesser mana value from your graveyard to the battlefield tapped. Do this only once each turn.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.cmcLTX+YouOwn | TgtPrompt$ Select target creature card with lesser mana value | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckNeeds:Ability$Sacrifice
+DeckHints:Ability$Discard|Graveyard
+Oracle:Whenever you sacrifice a creature, you may return target creature card with lesser mana value from your graveyard to the battlefield tapped. Do this only once each turn.

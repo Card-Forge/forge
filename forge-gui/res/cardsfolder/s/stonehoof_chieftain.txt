@@ -1,0 +1,10 @@
+Name:Stonehoof Chieftain
+ManaCost:7 G
+Types:Creature Centaur Warrior
+PT:8/8
+K:Trample
+K:Indestructible
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control attacks, it gains trample and indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Trample & Indestructible
+SVar:PlayMain1:TRUE
+Oracle:Trample, indestructible\nWhenever another creature you control attacks, it gains trample and indestructible until end of turn.

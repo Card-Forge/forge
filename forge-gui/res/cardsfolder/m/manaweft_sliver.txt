@@ -1,0 +1,8 @@
+Name:Manaweft Sliver
+ManaCost:1 G
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddAbility$ AnyMana | Description$ Sliver creatures you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+SVar:PlayMain1:TRUE
+Oracle:Sliver creatures you control have "{T}: Add one mana of any color."

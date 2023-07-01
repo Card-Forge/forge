@@ -1,0 +1,6 @@
+Name:Ooze Garden
+ManaCost:1 G
+Types:Enchantment
+A:AB$ Token | Cost$ 1 G Sac<1/Creature.nonOoze/non-Ooze creature> | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SorcerySpeed$ True | SpellDescription$ Create an X/X green Ooze creature token, where X is the sacrificed creature's power. Activate only as a sorcery.
+SVar:X:Sacrificed$CardPower
+Oracle:{1}{G}, Sacrifice a non-Ooze creature: Create an X/X green Ooze creature token, where X is the sacrificed creature's power. Activate only as a sorcery.

@@ -1,0 +1,6 @@
+Name:Goldmeadow Lookout
+ManaCost:3 W
+Types:Creature Kithkin Spellshaper
+PT:2/2
+A:AB$ Token | Cost$ W T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ goldmeadow_harrier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier. It has "{W}, {T}: Tap target creature."
+Oracle:{W}, {T}, Discard a card: Create a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier. It has "{W}, {T}: Tap target creature."

@@ -1,0 +1,9 @@
+Name:Nomads en-Kor
+ManaCost:W
+Types:Creature Kor Nomad Soldier
+PT:1/1
+A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKor | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
+SVar:EnKor:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ EnKorDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature you control instead.
+SVar:EnKorDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
+AI:RemoveDeck:All
+Oracle:{0}: The next 1 damage that would be dealt to Nomads en-Kor this turn is dealt to target creature you control instead.

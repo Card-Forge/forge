@@ -1,0 +1,7 @@
+Name:Blitz Automaton
+ManaCost:7
+Types:Artifact Creature Construct
+PT:6/4
+K:Prototype:2 R:3:2
+K:Haste
+Oracle:Prototype {2}{R} - 3/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nHaste

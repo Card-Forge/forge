@@ -1,0 +1,6 @@
+Name:Outland Boar
+ManaCost:2 R G
+Types:Creature Boar
+PT:4/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Outland Boar can't be blocked by creatures with power 2 or less.

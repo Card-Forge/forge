@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sabertooth 3
+Title=Sabertooth
+Difficulty=hard
+Description=Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar
+Icon=Sabertooth.jpg
+Deck Type=constructed
+[main]
+23 Mountain|M12
+1 Mox Ruby
+1 Sol Ring
+1 Chandra Nalaar
+4 Lightning Bolt
+1 Dragonmaster Outcast
+1 Dragon Roost
+1 Crucible of Fire
+2 Dragonspeaker Shaman
+2 Dragonlord's Servant
+1 Ryusei, the Falling Star
+1 Imperial Hellkite
+1 Scourge of Valkas
+4 Tarox Bladewing
+1 Bogardan Hellkite
+1 Brimstone Dragon
+1 Dragon Tyrant
+1 Furnace Whelp
+1 Hunted Dragon
+1 Lightning Dragon
+1 Rakdos Pit Dragon
+1 Rorix Bladewing
+1 Shivan Hellkite
+1 Zodiac Dragon
+1 Kilnmouth Dragon
+2 Thundermaw Hellkite
+1 Dragon Tempest
+2 Thunderbreak Regent
+[sideboard]

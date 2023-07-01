@@ -1,0 +1,10 @@
+Name:Momentum Rumbler
+ManaCost:3 R
+Types:Creature Dinosaur
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | IsPresent$ Card.Self+withFirst Strike | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if it doesn't have first strike, put a first strike counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ First Strike | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Card.Self+withFirst Strike | PresentCompare$ EQ1 | TriggerDescription$ Whenever CARDNAME attacks, if it has first strike, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike
+DeckHas:Ability$Counters
+Oracle:Whenever Momentum Rumbler attacks, if it doesn't have first strike, put a first strike counter on it.\nWhenever Momentum Rumbler attacks, if it has first strike, it gains double strike until end of turn.

@@ -1,0 +1,8 @@
+Name:Ley Weaver
+ManaCost:3 G
+Types:Creature Human Druid
+PT:2/2
+K:Partner:Lore Weaver
+A:AB$ Untap | Cost$ T | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap two target lands.
+DeckHints:Name$Lore Weaver
+Oracle:Partner with Lore Weaver (When this creature enters the battlefield, target player may put Lore Weaver into their hand from their library, then shuffle.)\n{T}: Untap two target lands.

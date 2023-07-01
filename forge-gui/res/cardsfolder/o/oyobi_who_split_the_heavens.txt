@@ -1,0 +1,10 @@
+Name:Oyobi, Who Split the Heavens
+ManaCost:6 W
+Types:Legendary Creature Spirit
+PT:3/6
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, create a 3/3 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_3_3_spirit_flying | TokenOwner$ You
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, create a 3/3 white Spirit creature token with flying.

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=The NiMillator
+Title=The NiMillator
+Difficulty=medium
+Description=Mirrodin presents it's take on the inevitable milling deck.
+Icon=mill.jpg
+Deck Type=constructed
+[Main]
+2 Beacon of Unrest|5DN
+1 Blightsteel Colossus|MBS
+4 Chancellor of the Spires|NPH
+4 Darkslick Shores|SOM
+1 Darksteel Colossus|DST
+1 Decimator Web|MBS
+1 Geth, Lord of the Vault|SOM
+1 Grindclock|SOM
+10 Island|SOM|1
+2 Life's Finale|NPH
+4 Mesmeric Orb|MRD
+1 Mindcrank|NPH
+4 Myr Servitor|5DN
+4 Screeching Silcaw|SOM
+1 Shriekhorn|MBS
+10 Swamp|SOM|1
+3 Sword of Body and Mind|SOM
+1 Tower of Murmurs|MRD
+3 Vault Skirge|NPH
+2 Yotian Soldier|AQ
+[sideboard]

@@ -1,0 +1,6 @@
+Name:Tainted Field
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {W} or {B}. Activate only if you control a Swamp.
+Oracle:{T}: Add {C}.\n{T}: Add {W} or {B}. Activate only if you control a Swamp.

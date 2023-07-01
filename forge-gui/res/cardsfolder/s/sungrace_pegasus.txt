@@ -1,0 +1,7 @@
+Name:Sungrace Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+PT:1/2
+K:Flying
+K:Lifelink
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

@@ -1,0 +1,12 @@
+Name:Terror Ballista
+ManaCost:7
+Types:Artifact Creature Construct
+PT:5/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. When you do, destroy target creature an opponent controls.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl
+K:Unearth:3 B B
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard|Sacrifice
+Oracle:Menace\nWhenever Terror Ballista attacks, you may sacrifice another creature. When you do, destroy target creature an opponent controls.\nUnearth {3}{B}{B} ({3}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

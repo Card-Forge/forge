@@ -1,0 +1,7 @@
+Name:Tangle Spider
+ManaCost:4 G G
+Types:Creature Spider
+PT:3/4
+K:Flash
+K:Reach
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach (This creature can block creatures with flying.)

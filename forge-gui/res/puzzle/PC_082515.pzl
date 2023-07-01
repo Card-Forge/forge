@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 082515 - Righteous Indignation
+URL:http://www.gatheringmagic.com/seanuy-082515-righteous-indignation/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=main1
+HumanLife=36
+AILife=8
+humanhand=Fling; To Arms!; Warleader's Helix
+humangraveyard=
+humanlibrary=
+humanbattlefield=Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Haunted Angel|Tapped; Serra Advocate; Avenging Angel|Tapped;  Basandra, Battle Seraph|Tapped; Pledge of Loyalty|AttachedTo:420; Twilight Shepherd|Id:420; Akroma, Angel of Fury|Tapped; Mass Hysteria
+aibattlefield=Plains|Set:ORI; Plains|Set:ORI|Tapped; Plains|Set:ORI|Tapped; Plains|Set:ORI|Tapped; Island|Set:ORI; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Sejiri Refuge; Doorkeeper|Tapped; Guard Gomazoa; Guard Gomazoa; Hover Barrier; Wall of Denial; Sunweb; Meekstone; Temple Bell|Tapped; Leyline of Sanctity
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

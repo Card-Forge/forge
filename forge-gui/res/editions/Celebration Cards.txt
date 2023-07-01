@@ -1,0 +1,16 @@
+[metadata]
+Code=PCEL
+Date=1996-08-14
+Name=Celebration Cards
+Type=Funny
+ScryfallCode=PCEL
+
+[cards]
+1 M 1996 World Champion @Christopher Rush
+2 R Shichifukujin Dragon @Christopher Rush
+3 R Proposal @Quinton Hoover
+4 R Splendid Genesis @Monique Thirifay
+5 R Fraternal Exaltation @Susan Garfield
+6 M Robot Chicken @Robot Chicken
+7 M Phoenix Heart @Drew Tucker
+8 R Zur the Enchanter @Chase Stone

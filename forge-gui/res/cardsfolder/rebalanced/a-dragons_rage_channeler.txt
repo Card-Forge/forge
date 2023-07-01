@@ -1,0 +1,10 @@
+Name:A-Dragon's Rage Channeler
+ManaCost:R
+Types:Creature Human Shaman
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBSurveil | TriggerDescription$ Whenever you cast a noncreature spell, surveil 1.
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Flying | Condition$ Delirium | Description$ Delirium — As long as there are four or more card types in your graveyard, CARDNAME gets +2/+0, has flying, and attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Condition$ Delirium | Secondary$ True
+DeckHas:Ability$Delirium|Surveil
+Oracle:Whenever you cast a noncreature spell, surveil 1.\nDelirium — As long as there are four or more card types among cards in your graveyard, Dragon's Rage Channeler gets +2/+0, has flying, and attacks each combat if able.

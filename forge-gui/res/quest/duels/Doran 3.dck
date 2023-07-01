@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Doran 3
+Title=Doran
+Difficulty=hard
+Description=WBG Doran, the Siege Tower deck with high toughness creatures and Assault Formation
+Icon=Doran.jpg
+Deck Type=constructed
+[main]
+1 Swamp|M11
+1 Forest|M11
+1 Plains|M11
+2 Bayou
+4 Scrubland
+4 Savannah
+2 Graypelt Refuge
+2 Verdant Catacombs
+2 Marsh Flats
+2 Windswept Heath
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+4 Doran, the Siege Tower
+1 Time of Need
+3 Assault Formation
+1 Primal Rage
+2 Putrefy
+2 Mortify
+2 Vindicate
+2 Maelstrom Pulse
+4 Retribution of the Meek
+1 Lagonna-Band Trailblazer
+2 Concordia Pegasus
+1 Ancient Spider
+1 Border Patrol
+3 Grizzled Leotau
+3 Nyx-Fleece Ram
+1 Indomitable Ancients
+1 Kami of Old Stone
+1 Sporecap Spider
+1 Tormented Angel
+[sideboard]

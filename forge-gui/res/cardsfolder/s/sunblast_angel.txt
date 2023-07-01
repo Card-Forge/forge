@@ -1,0 +1,8 @@
+Name:Sunblast Angel
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all tapped creatures.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.tapped
+Oracle:Flying\nWhen Sunblast Angel enters the battlefield, destroy all tapped creatures.

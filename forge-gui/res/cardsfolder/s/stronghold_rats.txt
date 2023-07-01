@@ -1,0 +1,9 @@
+Name:Stronghold Rats
+ManaCost:2 B
+Types:Creature Rat
+PT:2/1
+K:Shadow
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
+AI:RemoveDeck:Random
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Stronghold Rats deals combat damage to a player, each player discards a card.

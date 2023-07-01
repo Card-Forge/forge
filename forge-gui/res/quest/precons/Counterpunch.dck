@@ -1,0 +1,89 @@
+[metadata]
+Name=Counterpunch
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Use Ghave, Guru of Spores to create a strangling tangle of vines and vegetation that will crush all who oppose you! The all-consuming power of growth turns your creatures into monstrous behemoths while Saprolings fuel your increasing might.
+Set=CMD
+Image=counterpunch.png
+[commander]
+1 Ghave, Guru of Spores+|CMD
+[main]
+1 Alliance of Arms|CMD
+1 Celestial Force|CMD
+1 Scavenging Ooze|CMD
+1 Acorn Catapult|CMD
+1 Syphon Flesh|CMD
+1 Karador, Ghost Chieftain|CMD
+1 Vish Kal, Blood Arbiter|CMD
+1 Vow of Duty|CMD
+1 Tribute to the Wild|CMD
+1 Command Tower|CMD
+1 Vow of Wildness|CMD
+1 Soul Snare|CMD
+1 Hornet Queen|CMD
+1 Vow of Malice|CMD
+1 Nantuko Husk|CMD
+1 Necrogenesis|CMD
+1 Oblivion Ring|CMD
+1 Death Mutation|CMD
+1 Sigil Captain|CMD
+1 Sakura-Tribe Elder|CMD
+1 Rupture Spire|CMD
+1 Aura Shards|CMD
+1 Aquastrand Spider|CMD
+1 Darksteel Ingot|CMD
+1 Skullclamp|CMD
+1 Mortify|CMD
+1 Orzhov Basilica|CMD
+1 Orzhov Signet|CMD
+1 Storm Herd|CMD
+1 Footbottom Feast|CMD
+1 Shriekmaw|CMD
+1 Vivid Grove|CMD
+1 Vivid Marsh|CMD
+1 Vivid Meadow|CMD
+1 Deadly Recluse|CMD
+1 Cultivate|CMD
+1 Doom Blade|CMD
+1 Afterlife|CMD
+1 Squallmonger|CMD
+1 Fertilid|CMD
+1 Lightning Greaves|CMD
+1 Barren Moor|CMD
+1 Secluded Steppe|CMD
+1 Symbiotic Wurm|CMD
+1 Tranquil Thicket|CMD
+1 Harmonize|CMD
+1 Teneb, the Harvester|CMD
+1 Chorus of the Conclave|CMD
+1 Fists of Ironwood|CMD
+1 Golgari Guildmage|CMD
+1 Golgari Rot Farm|CMD
+1 Golgari Signet|CMD
+1 Hex|CMD
+1 Hour of Reckoning|CMD
+1 Selesnya Evangel|CMD
+1 Selesnya Guildmage|CMD
+1 Selesnya Sanctuary|CMD
+1 Selesnya Signet|CMD
+1 Awakening Zone|CMD
+1 Evolving Wilds|CMD
+1 Temple of the False God|CMD
+1 Penumbra Spider|CMD
+1 Spike Feeder|CMD
+1 Attrition|CMD
+1 Yavimaya Elder|CMD
+1 Dark Hatchling|CMD
+1 Monk Realist|CMD
+1 Sol Ring|CMD
+1 Bestial Menace|CMD
+1 Nemesis Trap|CMD
+1 Cobra Trap|CMD
+1 Vampire Nighthawk|CMD
+10 Forest|CMD
+8 Plains|CMD
+8 Swamp|CMD
+1 Spawnwrithe|CMD

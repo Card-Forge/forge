@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Ala 3
+Title=Ala
+Icon=Ala.jpg
+Difficulty=hard
+Description=Straightforward RG aggro and burn.
+Deck Type=constructed
+[main]
+3 Armor of Thorns|MIR
+1 Balduvian Horde|ALL
+4 Birds of Paradise|LEB
+3 Dragon Whelp|LEB
+4 Erhnam Djinn|ARN
+4 Fireball|LEB
+10 Forest|MIR
+4 Lightning Bolt|LEB
+4 Llanowar Elves|LEB
+10 Mountain|MIR
+2 Shivan Dragon|LEB
+4 Suq'Ata Lancer|VIS
+3 Tinder Wall|ICE
+4 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

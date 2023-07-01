@@ -1,0 +1,6 @@
+Name:Kyren Negotiations
+ManaCost:2 R R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ tapXType<1/Creature> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+SVar:NonStackingEffect:True
+Oracle:Tap an untapped creature you control: Kyren Negotiations deals 1 damage to target player or planeswalker.

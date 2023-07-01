@@ -1,0 +1,9 @@
+Name:Key to the City
+ManaCost:2
+Types:Artifact
+A:AB$ Effect | Cost$ T Discard<1/Card> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ SpellDescription | SpellDescription$ Up to one target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes untapped, you may pay {2}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 2
+DeckHas:Ability$Discard
+Oracle:{T}, Discard a card: Up to one target creature can't be blocked this turn.\nWhenever Key to the City becomes untapped, you may pay {2}. If you do, draw a card.

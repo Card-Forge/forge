@@ -1,0 +1,10 @@
+Name:Silverquill Silencer
+ManaCost:W B
+Types:Creature Human Cleric
+PT:3/2
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
+T:Mode$ SpellCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ Opponent | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent casts a spell with the chosen name, they lose 3 life and you draw a card.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+Oracle:As Silverquill Silencer enters the battlefield, choose a nonland card name.\nWhenever an opponent casts a spell with the chosen name, they lose 3 life and you draw a card.

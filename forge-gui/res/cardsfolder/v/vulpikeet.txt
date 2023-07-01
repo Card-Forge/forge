@@ -1,0 +1,9 @@
+Name:Vulpikeet
+ManaCost:3 W
+Types:Creature Fox Bird
+PT:2/3
+K:Mutate:2 W
+K:Flying
+T:Mode$ Mutates | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature mutates, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Mutate {2}{W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying\nWhenever this creature mutates, put a +1/+1 counter on it.

@@ -1,0 +1,9 @@
+Name:Slithering Shade
+ManaCost:B
+Types:Creature Shade
+PT:0/1
+K:Defender
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | Condition$ Hellbent | Description$ Hellbent — CARDNAME can attack as though it didn't have defender as long as you have no cards in hand.
+SVar:BuffedBy:Card
+Oracle:Defender (This creature can't attack.)\n{B}: Slithering Shade gets +1/+1 until end of turn.\nHellbent — Slithering Shade can attack as though it didn't have defender as long as you have no cards in hand.

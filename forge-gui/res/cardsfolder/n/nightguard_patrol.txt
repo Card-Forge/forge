@@ -1,0 +1,7 @@
+Name:Nightguard Patrol
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/1
+K:First Strike
+K:Vigilance
+Oracle:First strike, vigilance

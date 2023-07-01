@@ -1,0 +1,12 @@
+Name:Tendershoot Dryad
+ManaCost:4 G
+Types:Creature Dryad
+PT:2/2
+K:Ascend
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.Saproling+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Condition$ Blessing | IsPresent$ Card.Self | Description$ Saprolings you control get +2/+2 as long as you have the city's blessing.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Fungus
+DeckHas:Ability$Token
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of each upkeep, create a 1/1 green Saproling creature token.\nSaprolings you control get +2/+2 as long as you have the city's blessing.

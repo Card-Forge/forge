@@ -1,0 +1,11 @@
+Name:Mace of Disruption
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Protection from Demons & Protection from Devils | Description$ Equipped creature gets +0/+2 and has protection from Demons and from Devils.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigEffect | TriggerDescription$ Whenever equipped creature attacks, it perpetually gets +1/+0 if it has the same name as another creature you control or a creature card in your graveyard.
+SVar:TrigEffect:DB$ Effect | ConditionCheckSVar$ X | RememberObjects$ Equipped | Name$ Mace of Disruption's Perpetual Effect | Duration$ Permanent | StaticAbilities$ PerpetualP1P0
+SVar:PerpetualP1P0:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+0.
+K:Equip:1
+SVar:X:Count$Valid Creature.!EquippedBy+YouCtrl+sharesNameWith Equipped/Plus.Y
+SVar:Y:Count$ValidGraveyard Creature.YouOwn+sharesNameWith Equipped
+Oracle:Equipped creature gets +0/+2 and has protection from Demons and from Devils. Whenever equipped creature attacks, it perpetually gets +1/+0 if it has the same name as another creature you control or a creature card in your graveyard.\nEquip {1}

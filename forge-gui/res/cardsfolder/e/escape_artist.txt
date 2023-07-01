@@ -1,0 +1,7 @@
+Name:Escape Artist
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+A:AB$ ChangeZone | Cost$ U Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Escape Artist can't be blocked.\n{U}, Discard a card: Return Escape Artist to its owner's hand.

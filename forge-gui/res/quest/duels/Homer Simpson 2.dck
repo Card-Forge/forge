@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Homer Simpson 2
+Title=Homer Simpson
+Difficulty=medium
+Description=UBR Sacrifice deck with Mortician Beetle
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Badlands
+4 Crumbling Necropolis
+4 Bloodstained Mire
+4 Polluted Delta
+4 Swamp|M12
+4 Mortician Beetle
+1 Thraximundar
+1 Grave Pact
+1 Deathgreeter
+1 Hissing Iguanar
+1 Nether Traitor
+1 Blood Artist
+1 Quest for the Gravelord
+1 Rockslide Elemental
+4 Cruel Edict
+2 Chainer's Edict
+2 Diabolic Edict
+2 Gatekeeper of Malakir
+4 Hellspark Elemental
+4 Spark Elemental
+1 Arc Runner
+1 Hell's Thunder
+1 Predatory Nightstalker
+1 Slave of Bolas
+2 Divination
+[sideboard]

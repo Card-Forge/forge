@@ -1,0 +1,7 @@
+Name:Plated Sliver
+ManaCost:W
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddToughness$ 1 | Description$ All Sliver creatures get +0/+1.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures get +0/+1.

@@ -1,0 +1,6 @@
+Name:Wanderbrine Rootcutters
+ManaCost:2 UB UB
+Types:Creature Merfolk Rogue
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Green | Description$ CARDNAME can't be blocked by green creatures.
+Oracle:Wanderbrine Rootcutters can't be blocked by green creatures.

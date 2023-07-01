@@ -1,0 +1,8 @@
+Name:Shaggy Camel
+ManaCost:3 W
+Types:Host Creature Camel
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | Host$ True | TriggerDescription$ When this creature enters the battlefield, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:PlayMain1:TRUE
+Oracle:When this creature enters the battlefield, creatures you control get +1/+1 until end of turn.

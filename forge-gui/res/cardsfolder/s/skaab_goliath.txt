@@ -1,0 +1,7 @@
+Name:Skaab Goliath
+ManaCost:5 U
+Types:Creature Zombie Giant
+PT:6/9
+K:Trample
+A:SP$ PermanentCreature | Cost$ 5 U ExileFromGrave<2/Creature>
+Oracle:As an additional cost to cast this spell, exile two creature cards from your graveyard.\nTrample

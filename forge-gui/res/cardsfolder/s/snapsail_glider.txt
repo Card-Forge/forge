@@ -1,0 +1,7 @@
+Name:Snapsail Glider
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME has flying as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+Oracle:Metalcraft — Snapsail Glider has flying as long as you control three or more artifacts.

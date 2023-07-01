@@ -1,0 +1,22 @@
+Name:Mourning Patrol
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/3
+K:Vigilance
+K:Disturb:3 W
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Vigilance\nDisturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Morning Apparition
+ManaCost:no cost
+Colors:white
+Types:Creature Spirit Soldier
+PT:2/1
+K:Flying
+K:Vigilance
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying, vigilance\nIf Morning Apparition would be put into a graveyard from anywhere, exile it instead.

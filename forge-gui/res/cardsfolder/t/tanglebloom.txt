@@ -1,0 +1,5 @@
+Name:Tanglebloom
+ManaCost:1
+Types:Artifact
+A:AB$ GainLife | Cost$ 1 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+Oracle:{1}, {T}: You gain 1 life.

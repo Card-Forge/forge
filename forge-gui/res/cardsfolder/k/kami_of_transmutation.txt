@@ -1,0 +1,15 @@
+Name:Kami of Transmutation
+ManaCost:1 W
+Types:Creature Spirit
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters or leaves the battlefield, ABILITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBEffect1,DBEffect2
+SVar:DBEffect1:DB$ Effect | RememberObjects$ ValidHand Permanent.YouOwn | StaticAbilities$ PerpetualArtifact | Triggers$ Update | Duration$ Permanent | Name$ Kami of Transmutation's Perpetual Effect | SpellDescription$ Each permanent card in your hand perpetually becomes an artifact in addition to its other types.
+SVar:PerpetualArtifact:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command
+SVar:DBEffect2:DB$ Effect | RememberObjects$ ValidHand Permanent.YouOwn | StaticAbilities$ PerpetualEnchantment | Triggers$ Update | Duration$ Permanent | Name$ Kami of Transmutation's Perpetual Effect | SpellDescription$ Each permanent card in your hand perpetually becomes an enchantment in addition to its other types.
+SVar:PerpetualEnchantment:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Enchantment | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHints:Type$Artifact|Enchantment
+Oracle:When Kami of Transmutation enters or leaves the battlefield, choose one —\n• Each permanent card in your hand perpetually becomes an artifact in addition to its other types.\n• Each permanent card in your hand perpetually becomes an enchantment in addition to its other types.

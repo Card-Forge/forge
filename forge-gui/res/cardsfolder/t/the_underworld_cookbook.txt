@@ -1,0 +1,8 @@
+Name:The Underworld Cookbook
+ManaCost:1
+Types:Artifact
+A:AB$ Token | Cost$ T Discard<1/Card> | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+A:AB$ ChangeZone | Cost$ 4 T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card | SpellDescription$ Return target creature card from your graveyard to your hand.
+DeckHas:Ability$Discard|Token|Sacrifice|LifeGain|Graveyard
+DeckHints:Name$Asmoranomardicadaistinaculdacar
+Oracle:{T}, Discard a card: Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{4}, {T}, Sacrifice The Underworld Cookbook: Return target creature card from your graveyard to your hand.

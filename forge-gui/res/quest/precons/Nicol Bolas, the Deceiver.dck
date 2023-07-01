@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nicol Bolas, the Deceiver
+Description=Unleash destruction! Ancient and powerful, the dragon Planeswalker Nicol Bolas will stop at nothing to dominate the Multiverse. Join his cause to raise an army of afflicted undead and sap the strength of your foes until all bow before you.
+Deck Type=constructed
+Set=HOU
+Image=nicol_bolas_the_deceiver.jpg
+[Main]
+2 Aerial Guide|HOU
+1 Ammit Eternal|HOU
+2 Burning-Fist Minotaur|HOU
+4 Cinder Barrens|HOU
+4 Crypt of the Eternals|HOU
+2 Eternal of Harsh Truths|HOU
+3 Final Reward|AKH
+5 Island|HOU
+3 Khenra Eternal|HOU
+2 Magma Spray|AKH
+2 Manticore Eternal|HOU
+2 Marauding Boneslasher|HOU
+7 Mountain|HOU
+1 Nicol Bolas, the Deceiver+|HOU
+2 Open Fire|HOU
+2 Supernatural Stamina|AKH
+6 Swamp|HOU
+1 Throne of the God-Pharaoh|AKH
+2 Visage of Bolas|HOU
+3 Wasp of the Bitter End|HOU
+4 Zealot of the God-Pharaoh|HOU

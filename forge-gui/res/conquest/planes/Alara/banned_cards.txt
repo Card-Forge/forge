@@ -1,0 +1,36 @@
+Augury Adept
+Azorius Chancery
+Azorius Guildgate
+Azorius Herald
+Azorius Keyrune
+Boros Charm
+Boros Garrison
+Boros Guildgate
+Dimir Guildgate
+Disciple of Griselbrand
+Endrek Sahr, Master Breeder
+Fires of Yavimaya
+Golgari Guildgate
+Golgari Guildmage
+Golgari Rot Farm
+Gruul Guildgate
+Izzet Boilerworks
+Izzet Guildgate
+Mirror Entity
+Mistmeadow Witch
+Nivix Guildmage
+Orzhov Basilica
+Orzhov Guildgate
+Rakdos Carnarium
+Rakdos Guildgate
+Selesnya Charm
+Selesnya Guildgate
+Selesnya Guildmage
+Selesnya Sanctuary
+Selesnya Signet
+Simic Guildgate
+Simic Signet
+Transguild Promenade
+Urza's Factory
+Vitu-Ghazi, the City-Tree
+Vizkopa Guildmage

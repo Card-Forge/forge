@@ -1,0 +1,487 @@
+[metadata]
+Code=ZNR
+Date=2020-09-25
+Name=Zendikar Rising
+Code2=ZNR
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
+BoosterReplaceSlotFromPrintSheet=ZNR ModalDoubleFaceCards
+Prerelease=6 Boosters, 1 RareMythic+
+#BoosterBox=36 Boosters, 1 fromSheet('ZNR buy a box')+
+FatPackExtraSlots=20 BasicLands, 20 BasicLands+
+#, 1 Charix; the Raging Isle+|ZNR|3
+ScryfallCode=ZNR
+
+[cards]
+1 U Allied Assault @Josh Hass
+2 M Angel of Destiny @Ryan Pancoast
+3 C Angelheart Protector @Cristi Balanescu
+4 R Archon of Emeria @Ryan Pancoast
+5 R Archpriest of Iona @Denman Rooke
+6 U Attended Healer @Wisnu Tan
+7 U Canyon Jerboa @Antonio José Manzanedo
+8 C Cliffhaven Sell-Sword @Jason Rainville
+9 C Dauntless Unity @Josu Hernaiz
+10 C Disenchant @Colin Boyer
+11 U Emeria Captain @Matt Stewart
+12 M Emeria's Call @Matt Stewart
+13 C Expedition Healer @Heonhwa Choe
+14 C Farsight Adept @Cristi Balanescu
+15 U Fearless Fledgling @Jesper Ejsing
+16 R Felidar Retreat @Ralph Horsley
+17 U Journey to Oblivion @Jason Felix
+18 C Kabira Outrider @Izzy
+19 U Kabira Takedown @Randy Vargas
+20 U Kitesail Cleric @PINDURSKI
+21 U Kor Blademaster @Darren Tan
+22 C Kor Celebrant @Jake Murray
+23 R Legion Angel @PINDURSKI
+24 R Luminarch Aspirant @Mads Ahm
+25 C Makindi Ox @Ilse Gort
+26 U Makindi Stampede @Tomasz Jedruszek
+27 R Maul of the Skyclaves @Joseph Meehan
+28 C Mesa Lynx @Svetlin Velinov
+29 C Nahiri's Binding @Magali Villeneuve
+30 R Ondu Inversion @James Paick
+31 U Paired Tactician @Colin Boyer
+32 C Practiced Tactics @Alex Konstad
+33 C Pressure Point @Caio Monteiro
+34 C Prowling Felidar @Ilse Gort
+35 C Resolute Strike @Zezhou Chen
+36 C Sea Gate Banneret @Jesper Ejsing
+37 U Sejiri Shelter @Darek Zabrocki
+38 C Shepherd of Heroes @Livia Prima
+39 R Skyclave Apparition @Donato Giancola
+40 U Skyclave Cleric @Johannes Voss
+41 R Squad Commander @Ekaterina Burmak
+42 C Smite the Monstrous @Izzy
+43 C Tazeem Raptor @Dan Scott
+44 M Tazri, Beacon of Unity @Chris Rahn
+45 C Anticognition @Igor Kieryluk
+46 U Beyeen Veil @YW Tang
+47 C Bubble Snare @Jakub Kasper
+48 C Cascade Seer @Brian Valeza
+49 R Charix, the Raging Isle @Viktor Titov
+50 C Chilling Trap @Johann Bodin
+51 C Cleric of Chill Depths @Livia Prima
+52 U Concerted Defense @Chris Rallis
+53 R Confounding Conundrum @Bryan Sola
+54 R Coralhelm Chronicler @Lie Setiawan
+55 C Cunning Geysermage @Chris Rallis
+56 C Deliberate @Slawomir Maniak
+57 C Expedition Diviner @Heonhwa Choe
+58 C Field Research @PINDURSKI
+59 C Glacial Grasp @Tomasz Jedruszek
+60 R Glasspool Mimic @Johan Grenier
+61 R Inscription of Insight @Zoltan Boros
+62 C Into the Roil @Campbell White
+63 M Jace, Mirror Mage @Tyler Jacobson
+64 U Jwari Disruption @Cliff Childs
+65 C Living Tempest @Campbell White
+66 U Lullmage's Domination @Zezhou Chen
+67 R Maddening Cacophony @Magali Villeneuve
+68 R Master of Winds @Yigit Koroglu
+69 U Merfolk Falconer @Brian Valeza
+70 U Merfolk Windrobber @Colin Boyer
+71 C Negate @Billy Christian
+72 R Nimble Trapfinder @Caio Monteiro
+73 C Risen Riptide @Zezhou Chen
+74 U Roost of Drakes @Bayard Wu
+75 U Ruin Crab @Simon Dominic
+76 M Sea Gate Restoration @Adam Paquette
+77 M Sea Gate Stormcaller @Anna Steinbauer
+78 C Seafloor Stalker @Cristi Balanescu
+79 C Shell Shield @Wisnu Tan
+80 U Silundi Vision @Randy Vargas
+81 U Skyclave Plunder @YW Tang
+82 C Skyclave Squid @Livia Prima
+83 U Sure-Footed Infiltrator @Mathias Kollros
+84 C Tazeem Roilmage @Manuel Castañón
+85 R Thieving Skydiver @Kieran Yanner
+86 U Umara Wizard @Jesper Ejsing
+87 U Windrider Wizard @Slawomir Maniak
+88 C Zulaport Duelist @Bryan Sola
+89 U Acquisitions Expert @Anna Steinbauer
+90 M Agadeem's Awakening @Dmitry Burmak
+91 U Blackbloom Rogue @Jesper Ejsing
+92 C Blood Beckoning @Cristi Balanescu
+93 C Blood Price @Antonio José Manzanedo
+94 U Bloodchief's Thirst @Jason Rainville
+95 R Coveted Prize @Lie Setiawan
+96 C Deadly Alliance @Kieran Yanner
+97 U Demon's Disciple @Kieran Yanner
+98 M Drana, the Last Bloodchief @Tyler Jacobson
+99 C Drana's Silencer @Mads Ahm
+100 C Dreadwurm @Lius Lasahido
+101 C Expedition Skulker @Mathias Kollros
+102 C Feed the Swarm @Andrey Kuzinskiy
+103 C Ghastly Gloomhunter @Zezhou Chen
+104 C Guul Draz Mucklord @Darek Zabrocki
+105 C Hagra Constrictor @Simon Dominic
+106 R Hagra Mauling @Victor Adame Minguez
+107 C Highborn Vampire @Denman Rooke
+108 R Inscription of Ruin @Zoltan Boros
+109 U Lithoform Blight @Denis Nigmatullin
+110 C Malakir Blood-Priest @Scott Murphy
+111 U Malakir Rebirth @Marta Nael
+112 C Marauding Blight-Priest @Caio Monteiro
+113 U Mind Carver @Scott Murphy
+114 C Mind Drain @Grzegorz Rutkowski
+115 R Nighthawk Scavenger @Heonhwa Choe
+116 C Nimana Skitter-Sneak @Campbell White
+117 C Nimana Skydancer @Bryan Sola
+118 R Nullpriest of Oblivion @Yongjae Choi
+119 C Oblivion's Hunger @Izzy
+120 U Pelakka Predation @Jokubas Uogintas
+121 U Scion of the Swarm @Ekaterina Burmak
+122 M Scourge of the Skyclaves @Chase Stone
+123 U Shadow Stinger @John Thacker
+124 R Shadows' Verdict @Lius Lasahido
+125 R Skyclave Shade @Daarken
+126 U Skyclave Shadowcat @Simon Dominic
+127 R Soul Shatter @Wylie Beckert
+128 C Subtle Strike @Brian Valeza
+129 R Taborax, Hope's Demise @G-host Lee
+130 U Thwart the Grave @Wylie Beckert
+131 C Vanquish the Weak @Bayard Wu
+132 U Zof Consumption @Izzy
+133 C Akoum Hellhound @Jason Kang
+134 U Akoum Warrior @Karl Kopinski
+135 C Ardent Electromancer @Lie Setiawan
+136 U Cinderclasm @Campbell White
+137 C Cleansing Wildfire @Mathias Kollros
+138 C Expedition Champion @Bram Sels
+139 U Fireblade Charger @Lie Setiawan
+140 C Fissure Wizard @Lius Lasahido
+141 U Goma Fada Vanguard @Sean Sevestre
+142 C Grotag Bug-Catcher @Jakub Kasper
+143 U Grotag Night-Runner @Caroline Gariba
+144 C Inordinate Rage @Tomasz Jedruszek
+145 R Kargan Intimidator @Kieran Yanner
+146 U Kazuul's Fury @Karl Kopinski
+147 M Leyline Tyrant @Chase Stone
+148 R Magmatic Channeler @Bryan Sola
+149 C Molten Blast @Izzy
+150 M Moraug, Fury of Akoum @Rudy Siswanto
+151 R Nahiri's Lithoforming @Campbell White
+152 C Pyroclastic Hellion @Simon Dominic
+153 R Relic Robber @Slawomir Maniak
+154 U Rockslide Sorcerer @Daarken
+155 C Roil Eruption @Campbell White
+156 R Roiling Vortex @Campbell White
+157 C Scavenged Blade @Antonio José Manzanedo
+158 C Scorch Rider @Andrey Kuzinskiy
+159 R Shatterskull Charger @Lius Lasahido
+160 U Shatterskull Minotaur @Aleksi Briclot
+161 M Shatterskull Smashing @Adam Paquette
+162 C Sizzling Barrage @Johann Bodin
+163 U Skyclave Geopede @Filip Burburan
+164 C Sneaking Guide @Dan Scott
+165 U Song-Mad Treachery @Zoltan Boros
+166 U Spikefield Hazard @Tomasz Jedruszek
+167 C Spitfire Lagac @Antonio José Manzanedo
+168 C Synchronized Spellcraft @Svetlin Velinov
+169 C Teeterpeak Ambusher @Kekai Kotaki
+170 U Thundering Rebuke @Campbell White
+171 U Thundering Sparkmage @Billy Christian
+172 C Tormenting Voice @Izzy
+173 C Tuktuk Rubblefort @Nicholas Gregory
+174 R Valakut Awakening @Campbell White
+175 R Valakut Exploration @Jesper Ejsing
+176 R Wayward Guide-Beast @Filip Burburan
+177 C Adventure Awaits @Billy Christian
+178 M Ancient Greenwarden @Grzegorz Rutkowski
+179 M Ashaya, Soul of the Wild @Chase Stone
+180 U Bala Ged Recovery @Lucas Staniec
+181 C Broken Wings @Ekaterina Burmak
+182 C Canopy Baloth @Filip Burburan
+183 R Cragplate Baloth @Jesper Ejsing
+184 C Dauntless Survivor @David Rapoza
+185 C Gnarlid Colony @Izzy
+186 R Inscription of Abundance @Zoltan Boros
+187 U Iridescent Hornbeetle @Simon Dominic
+188 C Joraga Visionary @Andrey Kuzinskiy
+189 R Kazandu Mammoth @Grzegorz Rutkowski
+190 C Kazandu Nectarpot @Simon Dominic
+191 C Kazandu Stomper @Sam Rowan
+192 U Khalni Ambush @Grzegorz Rutkowski
+193 R Lotus Cobra @Sam Rowan
+194 C Might of Murasa @Lie Setiawan
+195 C Murasa Brute @Caio Monteiro
+196 U Murasa Sproutling @Svetlin Velinov
+197 C Nissa's Zendikon @Campbell White
+198 R Oran-Rief Ooze @Daarken
+199 C Rabid Bite @John Thacker
+200 C Reclaim the Wastes @Wylie Beckert
+201 U Roiling Regrowth @Jonas De Ro
+202 C Scale the Heights @Cristi Balanescu
+203 R Scute Swarm @Alex Konstad
+204 U Skyclave Pick-Axe @Dan Scott
+205 U Springmantle Cleric @Cristi Balanescu
+206 C Strength of Solidarity @Svetlin Velinov
+207 R Swarm Shambler @Nicholas Gregory
+208 C Tajuru Blightblade @Dmitry Burmak
+209 R Tajuru Paragon @Cristi Balanescu
+210 C Tajuru Snarecaster @Rudy Siswanto
+211 U Tangled Florahedron @Randy Vargas
+212 U Taunting Arbormage @Cristi Balanescu
+213 C Territorial Scythecat @Wisnu Tan
+214 C Turntimber Ascetic @Nicholas Gregory
+215 M Turntimber Symbiosis @Randy Vargas
+216 U Vastwood Fortification @Sidharth Chaturvedi
+217 U Vastwood Surge @Jason Rainville
+218 U Veteran Adventurer @Jakub Kasper
+219 U Vine Gecko @Uriah Voth
+220 R Akiri, Fearless Voyager @Ekaterina Burmak
+221 U Brushfire Elemental @Campbell White
+222 U Cleric of Life's Bond @Andrey Kuzinskiy
+223 R Grakmaw, Skyclave Ravager @Filip Burburan
+224 U Kargan Warleader @Colin Boyer
+225 R Kaza, Roil Chaser @Ekaterina Burmak
+226 R Linvala, Shield of Sea Gate @Wayne Reynolds
+227 U Lullmage's Familiar @Gabor Szikszai
+228 U Moss-Pit Skeleton @Bryan Sola
+229 U Murasa Rootgrazer @Mathias Kollros
+230 M Nahiri, Heir of the Ancients @Anna Steinbauer
+231 M Nissa of Shadowed Boughs @Yongjae Choi
+232 M Omnath, Locus of Creation @Chris Rahn
+233 R Orah, Skyclave Hierophant @Heonhwa Choe
+234 R Phylath, World Sculptor @Victor Adame Minguez
+235 U Ravager's Mace @Antonio José Manzanedo
+236 U Soaring Thought-Thief @Lie Setiawan
+237 U Spoils of Adventure @Zezhou Chen
+238 U Umara Mystic @Bryan Sola
+239 R Verazol, the Split Current @Daarken
+240 R Yasharn, Implacable Earth @G-host Lee
+241 R Zagras, Thief of Heartbeats @Anna Steinbauer
+242 R Zareth San, the Trickster @Zack Stella
+243 C Cliffhaven Kitesail @Caroline Gariba
+244 M Forsaken Monument @Piotr Dura
+245 M Lithoform Engine @Colin Boyer
+246 R Myriad Construct @Chase Stone
+247 U Relic Amulet @Yeong-Hao Han
+248 U Relic Axe @Cristi Balanescu
+249 U Relic Golem @Svetlin Velinov
+250 U Relic Vial @Jason Felix
+251 C Sea Gate Colossus @Daniel Ljunggren
+252 R Skyclave Relic @Daniel Ljunggren
+253 C Skyclave Sentinel @Joseph Meehan
+254 C Spare Supplies @Jason Felix
+255 C Stonework Packbeast @Dmitry Burmak
+256 C Utility Knife @Craig J Spearing
+257 U Base Camp @Jokubas Uogintas
+258 R Branchloft Pathway @Titus Lunter
+259 R Brightclimb Pathway @Johannes Voss
+260 R Clearwater Pathway @Daarken
+261 R Cragcrown Pathway @Andreas Rocha
+262 R Crawling Barrens @Jonas De Ro
+263 R Needleverge Pathway @Piotr Dura
+264 R Riverglide Pathway @Kieran Yanner
+265 R Throne of Makindi @Igor Kieryluk
+266 L Plains @Sam Burley
+267 L Plains @Adam Paquette
+268 L Plains @Chris Rahn
+269 L Island @Adam Paquette
+270 L Island @Anna Steinbauer
+271 L Island @Tianhua X
+272 L Swamp @Sam Burley
+273 L Swamp @Slawomir Maniak
+274 L Swamp @Adam Paquette
+275 L Mountain @Sam Burley
+276 L Mountain @Adam Paquette
+277 L Mountain @Chase Stone
+278 L Forest @Sam Burley
+279 L Forest @Adam Paquette
+280 L Forest @Tianhua X
+
+[borderless]
+281 M Jace, Mirror Mage @David Rapoza
+282 M Nahiri, Heir of the Ancients @David Rapoza
+283 M Nissa of Shadowed Boughs @David Rapoza
+284 R Branchloft Pathway @Grady Frederick
+285 R Brightclimb Pathway @Donato Giancola
+286 R Clearwater Pathway @Johannes Voss
+287 R Cragcrown Pathway @Sam Burley
+288 R Needleverge Pathway @Noah Bradley
+289 R Riverglide Pathway @Johan Grenier
+
+[showcase]
+290 U Canyon Jerboa @Dominik Mayer
+291 U Fearless Fledgling @Anato Finnstark
+292 R Felidar Retreat @Tyler Smith
+293 C Makindi Ox @Roman Kuteynikov
+294 C Prowling Felidar @Tyler Smith
+295 U Ruin Crab @Matteo Bassini
+296 C Skyclave Squid @Tyler Smith
+297 C Dreadwurm @Anato Finnstark
+298 R Skyclave Shade @Dominik Mayer
+299 C Akoum Hellhound @Pascal Blanché
+300 M Moraug, Fury of Akoum @Dominik Mayer
+301 U Skyclave Geopede @Lorenzo Lanfranconi
+302 C Spitfire Lagac @Dominik Mayer
+303 R Valakut Exploration @Aenami
+304 C Canopy Baloth @Dominik Mayer
+305 R Kazandu Mammoth @Finnian MacManus
+306 C Kazandu Nectarpot @Daniel Lieske
+307 R Lotus Cobra @Bastien Grivet
+308 R Scute Swarm @Roman Kuteynikov
+309 U Skyclave Pick-Axe @Pascal Blanché
+310 C Territorial Scythecat @Pascal Blanché
+311 U Brushfire Elemental @Roman Kuteynikov
+312 M Omnath, Locus of Creation @Bastien Grivet & Jessica Rossier
+313 R Phylath, World Sculptor @Pascal Blanché
+
+[extended art]
+314 M Angel of Destiny @Ryan Pancoast
+315 R Archon of Emeria @Ryan Pancoast
+316 R Archpriest of Iona @Denman Rooke
+317 M Emeria's Call @Matt Stewart
+318 R Legion Angel @PINDURSKI
+319 R Luminarch Aspirant @Mads Ahm
+320 R Maul of the Skyclaves @Joseph Meehan
+321 R Ondu Inversion @James Paick
+322 R Skyclave Apparition @Donato Giancola
+323 R Squad Commander @Ekaterina Burmak
+324 M Tazri, Beacon of Unity @Chris Rahn
+325 R Charix, the Raging Isle @Viktor Titov
+326 R Confounding Conundrum @Bryan Sola
+327 R Coralhelm Chronicler @Lie Setiawan
+328 R Glasspool Mimic @Johan Grenier
+329 R Inscription of Insight @Zoltan Boros
+330 R Maddening Cacophony @Magali Villeneuve
+331 R Master of Winds @Yigit Koroglu
+332 R Nimble Trapfinder @Caio Monteiro
+333 M Sea Gate Restoration @Adam Paquette
+334 M Sea Gate Stormcaller @Anna Steinbauer
+335 R Thieving Skydiver @Kieran Yanner
+336 M Agadeem's Awakening @Dmitry Burmak
+337 R Coveted Prize @Lie Setiawan
+338 M Drana, the Last Bloodchief @Tyler Jacobson
+339 R Hagra Mauling @Victor Adame Minguez
+340 R Inscription of Ruin @Zoltan Boros
+341 R Nighthawk Scavenger @Heonhwa Choe
+342 R Nullpriest of Oblivion @Yongjae Choi
+343 M Scourge of the Skyclaves @Chase Stone
+344 R Shadows' Verdict @Lius Lasahido
+345 R Soul Shatter @Wylie Beckert
+346 R Taborax, Hope's Demise @G-host Lee
+347 R Kargan Intimidator @Kieran Yanner
+348 M Leyline Tyrant @Chase Stone
+349 R Magmatic Channeler @Bryan Sola
+350 R Nahiri's Lithoforming @Campbell White
+351 R Relic Robber @Slawomir Maniak
+352 R Roiling Vortex @Campbell White
+353 R Shatterskull Charger @Lius Lasahido
+354 M Shatterskull Smashing @Adam Paquette
+355 R Valakut Awakening @Campbell White
+356 R Wayward Guide-Beast @Filip Burburan
+357 M Ancient Greenwarden @Grzegorz Rutkowski
+358 M Ashaya, Soul of the Wild @Chase Stone
+359 R Cragplate Baloth @Jesper Ejsing
+360 R Inscription of Abundance @Zoltan Boros
+361 R Oran-Rief Ooze @Daarken
+362 R Swarm Shambler @Nicholas Gregory
+363 R Tajuru Paragon @Cristi Balanescu
+364 M Turntimber Symbiosis @Randy Vargas
+365 R Akiri, Fearless Voyager @Ekaterina Burmak
+366 R Grakmaw, Skyclave Ravager @Filip Burburan
+367 R Kaza, Roil Chaser @Ekaterina Burmak
+368 R Linvala, Shield of Sea Gate @Wayne Reynolds
+369 R Orah, Skyclave Hierophant @Heonhwa Choe
+370 R Verazol, the Split Current @Daarken
+371 R Yasharn, Implacable Earth @G-host Lee
+372 R Zagras, Thief of Heartbeats @Anna Steinbauer
+373 R Zareth San, the Trickster @Zack Stella
+374 M Forsaken Monument @Piotr Dura
+375 M Lithoform Engine @Colin Boyer
+376 R Myriad Construct @Chase Stone
+377 R Skyclave Relic @Daniel Ljunggren
+378 R Crawling Barrens @Jonas De Ro
+379 R Throne of Makindi @Igor Kieryluk
+380 L Plains @Adam Paquette
+381 L Island @Tianhua X
+382 L Swamp @Adam Paquette
+383 L Mountain @Sam Burley
+384 L Forest @Adam Paquette
+
+[buy a box]
+385 R Orah, Skyclave Hierophant @Anna Steinbauer
+
+[promo]
+386 R Charix, the Raging Isle @Kekai Kotaki
+387 C Into the Roil @Campbell White
+388 U Bloodchief's Thirst @Jason Rainville
+389 C Roil Eruption @Campbell White
+390 U Roiling Regrowth @Jonas De Ro
+391 U Kargan Warleader @Colin Boyer
+
+[rebalanced]
+A24 R A-Luminarch Aspirant @Mads Ahm
+A68 R A-Master of Winds @Yigit Koroglu
+A105 C A-Hagra Constrictor @Simon Dominic
+A126 U A-Skyclave Shadowcat @Simon Dominic
+A141 U A-Goma Fada Vanguard @Sean Sevestre
+A145 R A-Kargan Intimidator @Kieran Yanner
+A154 U A-Rockslide Sorcerer @Daarken
+A185 C A-Gnarlid Colony @Izzy
+A187 U A-Iridescent Hornbeetle @Simon Dominic
+A198 R A-Oran-Rief Ooze @Daarken
+A224 U A-Kargan Warleader @Colin Boyer
+A228 U A-Moss-Pit Skeleton @Bryan Sola
+A230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
+A232 M A-Omnath, Locus of Creation @Chris Rahn
+A234 R A-Phylath, World Sculptor @Victor Adame Minguez
+A238 U A-Umara Mystic @Bryan Sola
+A257 U A-Base Camp @Jokubas Uogintas
+
+[ModalDoubleFaceCards]
+1 Agadeem's Awakening|ZNR
+1 Emeria's Call|ZNR
+1 Sea Gate Restoration|ZNR
+1 Shatterskull Smashing|ZNR
+1 Turntimber Symbiosis|ZNR
+2 Branchloft Pathway|ZNR
+2 Brightclimb Pathway|ZNR
+2 Clearwater Pathway|ZNR
+2 Cragcrown Pathway|ZNR
+2 Glasspool Mimic|ZNR
+2 Hagra Mauling|ZNR
+2 Kazandu Mammoth|ZNR
+2 Needleverge Pathway|ZNR
+2 Ondu Inversion|ZNR
+2 Riverglide Pathway|ZNR
+2 Valakut Awakening|ZNR
+6 Akoum Warrior|ZNR
+6 Bala Ged Recovery|ZNR
+6 Beyeen Veil|ZNR
+6 Blackbloom Rogue|ZNR
+6 Jwari Disruption|ZNR
+6 Kabira Takedown|ZNR
+6 Kazuul's Fury|ZNR
+6 Khalni Ambush|ZNR
+6 Makindi Stampede|ZNR
+6 Malakir Rebirth|ZNR
+6 Pelakka Predation|ZNR
+6 Sejiri Shelter|ZNR
+6 Silundi Vision|ZNR
+6 Skyclave Cleric|ZNR
+6 Song-Mad Treachery|ZNR
+6 Spikefield Hazard|ZNR
+6 Tangled Florahedron|ZNR
+6 Umara Wizard|ZNR
+6 Vastwood Fortification|ZNR
+6 Zof Consumption|ZNR
+
+[tokens]
+w_4_4_angel_warrior_flying
+w_1_1_cat
+w_2_2_cat_beast
+w_1_1_kor_warrior
+u_2_2_drake_flying
+u_x_x_illusion
+g_1_1_insect
+g_0_1_plant
+bg_x_x_hydra
+c_1_1_a_construct
+c_0_1_a_goblin_construct_noblock_ping

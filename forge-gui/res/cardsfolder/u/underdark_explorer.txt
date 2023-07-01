@@ -1,0 +1,8 @@
+Name:Underdark Explorer
+ManaCost:4 B
+Types:Creature Lizard Warrior
+PT:5/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Underdark Explorer enters the battlefield, you take the initiative.

@@ -1,0 +1,9 @@
+Name:Wretched Gryff
+ManaCost:7
+Types:Creature Eldrazi Hippogriff
+PT:3/4
+K:Flying
+K:Emerge:5 U
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, draw a card.\nFlying

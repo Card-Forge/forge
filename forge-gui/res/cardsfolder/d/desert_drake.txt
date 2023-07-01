@@ -1,0 +1,6 @@
+Name:Desert Drake
+ManaCost:3 R
+Types:Creature Drake
+PT:2/2
+K:Flying
+Oracle:Flying

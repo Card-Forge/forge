@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - The Brothers' War #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/01/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that any unknown cards you could draw are not relevant to the puzzle. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Planar Incision;Fateful Handoff;Energy Refractor;Grafted Identity
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Phyrexian Fleshgorger;Teferi, Temporal Pilgrim|Counters:LOYALTY=5;Island;Island;Island;Swamp;Swamp;Swamp;T:u_2_2_spirit_vigilance_drawcounter|Counters:P1P1=1
+p1life=10
+p1battlefield=Devilish Valet

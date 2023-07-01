@@ -1,0 +1,13 @@
+Name:Volatile Rig
+ManaCost:4
+Types:Artifact Creature Construct
+PT:4/4
+K:Trample
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ DamageDoneOnce | Execute$ TrigFlipSac | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, flip a coin. If you lose the flip, sacrifice CARDNAME.
+SVar:TrigFlipSac:DB$ FlipACoin | LoseSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFlipDamage | TriggerDescription$ When CARDNAME dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
+SVar:TrigFlipDamage:DB$ FlipACoin | LoseSubAbility$ DBDamage
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 4 | ValidDescription$ each creature and each player.
+Oracle:Trample\nVolatile Rig attacks each combat if able.\nWhenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.\nWhen Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.

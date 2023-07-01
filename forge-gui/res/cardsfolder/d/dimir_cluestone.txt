@@ -1,0 +1,8 @@
+Name:Dimir Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
+A:AB$ Draw | Cost$ U B T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Blue|Black
+Oracle:{T}: Add {U} or {B}.\n{U}{B}, {T}, Sacrifice Dimir Cluestone: Draw a card.

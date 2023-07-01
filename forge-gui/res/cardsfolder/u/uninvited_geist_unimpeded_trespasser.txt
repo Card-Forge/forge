@@ -1,0 +1,19 @@
+Name:Uninvited Geist
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/2
+K:Skulk
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigTransform | CombatDamage$ True | TriggerDescription$ When CARDNAME deals combat damage to a player, transform it.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Uninvited Geist deals combat damage to a player, transform it.
+
+ALTERNATE
+
+Name:Unimpeded Trespasser
+ManaCost:no cost
+Colors:blue
+Types:Creature Spirit
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Unimpeded Trespasser can't be blocked.

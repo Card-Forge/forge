@@ -1,0 +1,13 @@
+Name:Atraxa, Praetors' Voice
+ManaCost:G W U B
+Types:Legendary Creature Phyrexian Angel Horror
+PT:4/4
+K:Flying
+K:Vigilance
+K:Deathtouch
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ At the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters
+Oracle:Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

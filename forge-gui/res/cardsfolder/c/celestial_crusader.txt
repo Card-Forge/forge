@@ -1,0 +1,9 @@
+Name:Celestial Crusader
+ManaCost:2 W W
+Types:Creature Spirit
+PT:2/2
+K:Split second
+K:Flying
+K:Flash
+S:Mode$ Continuous | Affected$ Creature.White+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures get +1/+1.
+Oracle:Flash\nSplit second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nFlying\nOther white creatures get +1/+1.

@@ -1,0 +1,7 @@
+Name:Rootwater Alligator
+ManaCost:3 G
+Types:Creature Crocodile
+PT:3/2
+A:AB$ Regenerate | Cost$ Sac<1/Forest> | SpellDescription$ Regenerate CARDNAME.
+SVar:AIPreference:SacCost$Forest.Basic
+Oracle:Sacrifice a Forest: Regenerate Rootwater Alligator.

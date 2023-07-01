@@ -1,0 +1,8 @@
+Name:Nessian Hornbeetle
+ManaCost:1 G
+Types:Creature Insect
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.Other+YouCtrl+powerGE4 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you control another creature with power 4 or greater, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, if you control another creature with power 4 or greater, put a +1/+1 counter on Nessian Hornbeetle.

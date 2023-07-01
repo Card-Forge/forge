@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Akongo 1
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=easy
+Description=Akongo plays John's Meta-Weenie PCL deck.
+Deck Type=constructed
+[main]
+11 Forest|MIR
+4 Ghazban Ogre|ARN
+4 Giant Growth|LEB
+3 Granger Guildmage|MIR
+4 Incinerate|MIR
+3 Jolrael's Centaur|MIR
+2 Kaervek's Torch|MIR
+2 Karoo Meerkat|MIR
+3 Karplusan Forest|ICE
+2 Lhurgoyf|ICE
+4 Llanowar Elves|LEB
+2 Mountain|LEB
+2 Mountain Valley|MIR
+4 River Boa|VIS
+2 Uktabi Orangutan|VIS
+2 Undiscovered Paradise|VIS
+3 Whirling Dervish|LEG
+4 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Newton 3
+Title=Newton
+Difficulty=hard
+Description=WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares
+Icon=Newton.jpg
+Deck Type=constructed
+[main]
+4 Marsh Flats
+4 Scrubland
+4 Godless Shrine
+4 Plains|M11
+6 Swamp|M11
+1 Mox Jet
+1 Mox Pearl
+24 Relentless Rats
+3 Vindicate
+4 Thrumming Stone
+4 Swords to Plowshares
+1 Enlightened Tutor
+[sideboard]

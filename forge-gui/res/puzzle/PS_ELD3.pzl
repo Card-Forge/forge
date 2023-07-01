@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Throne of Eldraine #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/10/134.-ELD3.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent owns a Beanstalk Giant in exile. You have a Cryptic Caves in your graveyard.
+[state]
+humanlife=1
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Giant Opportunity;Overgrown Tomb;Shepherd of the Flock;Overcome;Outmuscle
+humangraveyard=Cryptic Caves
+humanbattlefield=Wandermare;Kaya, Orzhov Usurper|Counters:LOYALTY=5;Vengeful Warchief;Trollbred Guardian;Jiang Yanggu, Wildcrafter|Counters:LOYALTY=1;Overgrown Tomb|NoETBTrigs;Overgrown Tomb|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs
+aibattlefield=End-Raze Forerunners;Wardscale Crocodile
+aiexile=Beanstalk Giant

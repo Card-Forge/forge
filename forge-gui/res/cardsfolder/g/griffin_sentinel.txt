@@ -1,0 +1,7 @@
+Name:Griffin Sentinel
+ManaCost:2 W
+Types:Creature Griffin
+PT:1/3
+K:Flying
+K:Vigilance
+Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)

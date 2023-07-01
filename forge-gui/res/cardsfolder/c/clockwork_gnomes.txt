@@ -1,0 +1,6 @@
+Name:Clockwork Gnomes
+ManaCost:4
+Types:Artifact Creature Gnome
+PT:2/2
+A:AB$ Regenerate | Cost$ 3 T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature. | SpellDescription$ Regenerate target artifact creature.
+Oracle:{3}, {T}: Regenerate target artifact creature.

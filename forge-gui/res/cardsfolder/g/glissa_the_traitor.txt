@@ -1,0 +1,9 @@
+Name:Glissa, the Traitor
+ManaCost:B G G
+Types:Legendary Creature Phyrexian Zombie Elf
+PT:3/3
+K:First Strike
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard
+Oracle:First strike, deathtouch\nWhenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.

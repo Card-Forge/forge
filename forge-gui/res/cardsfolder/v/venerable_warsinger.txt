@@ -1,0 +1,11 @@
+Name:Venerable Warsinger
+ManaCost:1 R W
+Types:Creature Spirit Cleric
+PT:3/3
+K:Vigilance
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of damage CARDNAME dealt to that player.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX+YouCtrl | TgtPrompt$ Select target creature card in your graveyard with mana value X or less | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Graveyard
+Oracle:Vigilance, trample\nWhenever Venerable Warsinger deals combat damage to a player, you may return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of damage Venerable Warsinger dealt to that player.

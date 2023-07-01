@@ -1,0 +1,9 @@
+Name:Vorapede
+ManaCost:2 G G G
+Types:Creature Insect
+PT:5/4
+K:Vigilance
+K:Trample
+K:Undying
+DeckHas:Ability$Counters
+Oracle:Vigilance, trample\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

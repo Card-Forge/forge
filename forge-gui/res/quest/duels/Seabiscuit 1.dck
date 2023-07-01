@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Seabiscuit 1
+Title=Seabiscuit
+Difficulty=easy
+Description=Mono W Metalcraft deck with Ardent Recruit and Court Homunculus
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+[main]
+1 Ancient Den
+22 Plains|M12
+3 Ardent Recruit 
+2 Auriok Edgewright
+2 Auriok Sunchaser
+1 Treasure Hunter
+1 Dispense Justice
+2 Ghalma's Warden
+2 Leonin Elder
+1 Razor Hippogriff
+1 Argivian Archaeologist
+1 Master's Call
+1 Myrsmith
+3 Court Homunculus
+2 Dispeller's Capsule
+1 Marble Chalice
+1 Metallurgeon
+2 Sanctum Gargoyle
+2 Gold Myr
+2 Origin Spellbomb
+1 Angel's Feather
+1 Angelic Voices
+1 Arcbound Worker
+1 Battered Golem
+1 Chrome Steed
+1 Frogmite
+1 Porcelain Legionnaire
+[sideboard]

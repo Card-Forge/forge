@@ -1,0 +1,6 @@
+Name:Ursapine
+ManaCost:3 G G
+Types:Creature Beast
+PT:3/3
+A:AB$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
+Oracle:{G}: Target creature gets +1/+1 until end of turn.

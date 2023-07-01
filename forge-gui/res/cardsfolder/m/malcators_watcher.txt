@@ -1,0 +1,9 @@
+Name:Malcator's Watcher
+ManaCost:1 U
+Types:Artifact Creature Phyrexian Drone
+PT:1/1
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Flying, vigilance\nWhen Malcator's Watcher dies, draw a card.

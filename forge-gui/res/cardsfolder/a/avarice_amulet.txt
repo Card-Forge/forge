@@ -1,0 +1,10 @@
+Name:Avarice Amulet
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Vigilance | AddTrigger$ AvariceUpkeepTrig | AddSVar$ AvariceUpkeepSVar | Description$ Equipped creature gets +2/+0 and has vigilance and "At the beginning of your upkeep, draw a card."
+SVar:AvariceUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ AvariceUpkeepSVar | TriggerDescription$ At the beginning of your upkeep, draw a card.
+SVar:AvariceUpkeepSVar:DB$ Draw | Defined$ You
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigGainControl | TriggerDescription$ When equipped creature dies, target opponent gains control of CARDNAME.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | Defined$ Self
+Oracle:Equipped creature gets +2/+0 and has vigilance and "At the beginning of your upkeep, draw a card."\nWhenever equipped creature dies, target opponent gains control of Avarice Amulet.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

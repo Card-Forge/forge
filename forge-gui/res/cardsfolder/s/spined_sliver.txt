@@ -1,0 +1,9 @@
+Name:Spined Sliver
+ManaCost:R G
+Types:Creature Sliver
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Sliver | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker
+SVar:PlayMain1:TRUE
+Oracle:Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Tolsimir 2
+Title=Tolsimir
+Icon=Tolsimir.jpg
+Difficulty=medium
+Description=Creatures'r'us
+Deck Type=constructed
+[main]
+4 Call of the Conclave|RTR
+4 Centaur Healer|RTR
+4 Dryad Militant|RTR
+8 Forest|RTR
+3 Giant Growth|RTR
+4 Loxodon Hierarch|RAV
+4 Loxodon Smiter|RTR
+8 Plains|RTR
+2 Selesnya Guildmage|RAV
+4 Selesnya Guildgate|RTR
+4 Temple Garden|RTR
+2 Tolsimir Wolfblood|RAV
+4 Vinelasher Kudzu|RAV
+4 Watchwolf|RAV
+1 Vitu-Ghazi Guildmage|RTR
+[sideboard]
+[planes]
+[schemes]

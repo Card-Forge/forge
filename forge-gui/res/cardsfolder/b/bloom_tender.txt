@@ -1,0 +1,7 @@
+Name:Bloom Tender
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmong_Permanent.YouCtrl | SpellDescription$ For each color among permanents you control, add one mana of that color.
+AI:RemoveDeck:All
+Oracle:{T}: For each color among permanents you control, add one mana of that color.

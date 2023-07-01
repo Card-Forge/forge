@@ -1,0 +1,8 @@
+Name:Archetype of Endurance
+ManaCost:6 G G
+Types:Enchantment Creature Boar
+PT:6/5
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Hexproof | CantHaveKeyword$ Hexproof | Description$ Creatures your opponents control lose hexproof and can't have or gain hexproof.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have hexproof.\nCreatures your opponents control lose hexproof and can't have or gain hexproof.

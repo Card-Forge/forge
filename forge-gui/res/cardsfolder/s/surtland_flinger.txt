@@ -1,0 +1,15 @@
+Name:Surtland Flinger
+ManaCost:3 R R
+Types:Creature Giant Berserker
+PT:4/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediate | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. When you do, CARDNAME deals damage equal to the sacrificed creature's power to any target. If the sacrificed creature was a Giant, CARDNAME deals twice that much damage instead.
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | RememberObjects$ Sacrificed | Execute$ TrigDamage | AILogic$ SacForDamage.GiantX2 | TriggerDescription$ When you do, CARDNAME deals damage equal to the sacrificed creature's power to any target. If the sacrificed creature was a Giant, CARDNAME deals twice that much damage instead.
+SVar:TrigDamage:DB$ DealDamage | ConditionDefined$ DelayTriggerRememberedLKI | ConditionPresent$ Giant | ConditionCompare$ EQ0 | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGiantDamage
+SVar:DBGiantDamage:DB$ DealDamage | ConditionDefined$ DelayTriggerRememberedLKI | ConditionPresent$ Giant | ConditionCompare$ GE1 | Defined$ Targeted | NumDmg$ Y
+SVar:X:TriggerRemembered$CardPower
+SVar:Y:TriggerRemembered$CardPower/Times.2
+SVar:AIPreferenceParams:CreatureEvalThreshold$ 200
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Giant
+Oracle:Whenever Surtland Flinger attacks, you may sacrifice another creature. When you do, Surtland Flinger deals damage equal to the sacrificed creature's power to any target. If the sacrificed creature was a Giant, Surtland Flinger deals twice that much damage instead.

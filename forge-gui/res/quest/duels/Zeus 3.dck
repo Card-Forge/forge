@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Zeus 3
+Title=Zeus
+Difficulty=hard
+Description=WUR Planeswalker deck
+Icon=Zeus.jpg
+Deck Type=constructed
+[main]
+1 Ugin, the Spirit Dragon
+2 Ajani Vengeant
+2 Chandra, the Firebrand
+1 Jace, Memory Adept
+1 Jace, Architect of Thought
+1 Teferi, Temporal Archmage
+2 Koth of the Hammer
+2 Sarkhan, the Dragonspeaker
+2 Tamiyo, the Moon Sage
+2 The Chain Veil
+2 Soul Snare
+2 Swords to Plowshares
+2 Pyroclasm
+4 Wrath of God
+2 Supreme Verdict
+2 Contagion Clasp
+2 Volt Charge
+1 Lightning Helix
+2 Chromatic Lantern
+1 Sol Ring
+1 Mox Ruby
+1 Mox Pearl
+1 Mox Sapphire
+4 Plateau
+1 Volcanic Island
+4 Tundra
+4 Flooded Strand
+4 Arid Mesa
+4 Scalding Tarn
+[sideboard]

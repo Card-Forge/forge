@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Darrin Stephens 4
+Title=Darrin Stephens
+Difficulty=very hard
+Description=Mono U Affinity deck
+Icon=Darrin Stephens.jpg
+Deck Type=constructed
+[main]
+5 Island|MBS
+4 Seat of the Synod
+4 Darksteel Citadel
+1 Mox Pearl
+1 Mox Jet
+1 Mox Sapphire
+1 Mox Ruby
+1 Mox Emerald
+2 Mox Opal
+1 Sol Ring
+1 Ancestral Recall
+1 Time Walk
+1 Timetwister
+1 Tinker
+1 Blightsteel Colossus
+1 Ethersworn Adjudicator
+3 Myr Enforcer
+1 Etherium Sculptor
+2 Arcbound Worker
+4 Master of Etherium
+4 Frogmite
+4 Thoughtcast
+4 Ornithopter
+4 Memnite
+3 Etched Champion
+4 Cranial Plating
+[sideboard]

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Scooby Doo 3
+Title=Scooby Doo
+Difficulty=hard
+Description=WR Giants deck with a few changelings
+Icon=Scooby Doo.jpg
+Deck Type=constructed
+[main]
+4 Ancient Amphitheater
+4 Sacred Foundry
+4 Plateau
+4 Arid Mesa
+4 Plains|M12
+4 Mountain|M12
+1 Mox Ruby
+1 Mox Pearl
+2 Darksteel Ingot
+4 Avian Changeling
+4 Fire-Belly Changeling
+2 Brion Stoutarm
+4 Stinkdrinker Daredevil
+4 Cloudgoat Ranger
+4 Inferno Titan
+4 Sunrise Sovereign
+1 Feudkiller's Verdict
+2 Blind-Spot Giant
+1 Borderland Behemoth
+1 Thundercloud Shaman
+1 Sunhome Enforcer
+[sideboard]
+
+

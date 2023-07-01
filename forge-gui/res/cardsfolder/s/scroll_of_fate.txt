@@ -1,0 +1,5 @@
+Name:Scroll of Fate
+ManaCost:3
+Types:Artifact
+A:AB$ Manifest | Cost$ T | Choices$ Card.YouCtrl | ChoiceZone$ Hand | SpellDescription$ Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)
+Oracle:{T}: Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

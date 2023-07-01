@@ -1,0 +1,7 @@
+Name:Dog Pet
+ManaCost:no cost
+Colors:red
+Types:Creature Dog Pet
+PT:1/1
+K:Haste
+Oracle:Haste

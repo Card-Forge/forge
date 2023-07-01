@@ -1,0 +1,9 @@
+Name:Algae Gharial
+ManaCost:3 G
+Types:Creature Crocodile
+PT:1/1
+K:Shroud
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever another creature dies, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nWhenever another creature dies, you may put a +1/+1 counter on Algae Gharial.

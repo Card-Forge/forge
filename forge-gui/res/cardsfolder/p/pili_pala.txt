@@ -1,0 +1,8 @@
+Name:Pili-Pala
+ManaCost:2
+Types:Artifact Creature Scarecrow
+PT:1/1
+K:Flying
+A:AB$ Mana | Cost$ 2 Q | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:Flying\n{2}, {Q}: Add one mana of any color. ({Q} is the untap symbol.)

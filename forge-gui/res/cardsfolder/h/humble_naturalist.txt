@@ -1,0 +1,6 @@
+Name:Humble Naturalist
+ManaCost:1 G
+Types:Creature Human Druid
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
+Oracle:{T}: Add one mana of any color. Spend this mana only to cast a creature spell.

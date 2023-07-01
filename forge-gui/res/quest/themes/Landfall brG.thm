@@ -1,0 +1,70 @@
+BasicLandPercentage=10
+
+[Group MaxCnt=4 Percentage=22]
+Bayou
+Taiga
+Bloodstained Mire
+Verdant Catacombs
+Wooded Foothills
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Darigaaz's Caldera
+Undiscovered Paradise
+Undiscovered Paradise
+Undiscovered Paradise
+Undiscovered Paradise
+Undiscovered Paradise
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Exploration
+Exploration
+Exploration
+Exploration
+Farseek
+Spoils of Victory
+Storm Cauldron
+[/Group]
+
+[Group MaxCnt=4 Percentage=17]
+Adventuring Gear
+Bloodghast
+Hedron Scrabbler
+Khalni Heart Expedition
+Plated Geopede
+Soul Stair Expedition
+Surrakar Marauder
+Vinelasher Kudzu
+Zektar Shrine Expedition
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Grazing Gladehart
+Horn of Greed
+Lifegift
+Snapping Creeper
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Cosi's Ravager
+Hagra Crocodile
+Hedron Rover
+Seed the Land
+Seer's Sundial
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Caustic Crawler
+Geyser Glider
+Ob Nixilis, the Fallen
+Territorial Baloth
+[/Group]
+
+[Group MaxCnt=4 Percentage=3]
+Avenger of Zendikar
+Baloth Woodcrasher
+Rampaging Baloths
+[/Group]
+
+End

@@ -1,0 +1,8 @@
+Name:Impetuous Sunchaser
+ManaCost:1 R
+Types:Creature Human Soldier
+PT:1/1
+K:Flying
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Flying, haste\nImpetuous Sunchaser attacks each combat if able.

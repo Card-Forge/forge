@@ -1,0 +1,7 @@
+Name:Carapace Forger
+ManaCost:1 G
+Types:Creature Elf Artificer
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME gets +2/+2 as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+Oracle:Metalcraft — Carapace Forger gets +2/+2 as long as you control three or more artifacts.

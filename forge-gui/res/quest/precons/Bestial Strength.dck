@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Deck Type=constructed
+Set=M14
+Image=bestial_strength.jpg
+Name=Bestial Strength
+Description=It's time to bring the hammer down! While a host of jungle predators keeps your foes at bay, you'll release massive hulks who want nothing more than to smash your enemy's forces into dust. It's a beatdown waiting to happen.
+[Main]
+2 Accursed Spirit|M14
+1 Advocate of the Beast|M14
+2 Briarpack Alpha|M14
+2 Brindle Boar|M14
+1 Corpse Hauler|M14
+2 Deadly Recluse|M14
+2 Doom Blade|M14
+1 Elvish Mystic|M14
+1 Enlarge|M14
+1 Fog|M14
+17 Forest|M14
+1 Garruk's Horde+|M14
+2 Giant Growth|M14
+2 Giant Spider|M14
+1 Into the Wilds|M14
+2 Kalonian Tusker|M14
+1 Mind Rot|M14
+1 Plummet|M14
+2 Rootwalla|M14
+2 Rumbling Baloth|M14
+1 Staff of the Wild Magus|M14
+9 Swamp|M14
+2 Vial of Poison|M14
+2 Woodborn Behemoth|M14

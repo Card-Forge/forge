@@ -1,0 +1,8 @@
+Name:Ghastlord of Fugue
+ManaCost:UB UB UB UB UB
+Types:Creature Spirit Avatar
+PT:4/4
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals their hand. You choose a card from it. That player exiles that card.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ You | ChangeType$ Card | ChangeNum$ 1
+Oracle:Ghastlord of Fugue can't be blocked.\nWhenever Ghastlord of Fugue deals combat damage to a player, that player reveals their hand. You choose a card from it. That player exiles that card.

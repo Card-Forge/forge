@@ -1,0 +1,13 @@
+Name:Huatli, Dinosaur Knight
+ManaCost:4 R W
+Types:Legendary Planeswalker Huatli
+Loyalty:4
+A:AB$ PutCounter | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | CounterNum$ 2 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Dinosaur+YouCtrl | TgtPrompt$ Select target Dinosaur you control | SpellDescription$ Put two +1/+1 counters on up to one target Dinosaur you control.
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.Dinosaur+YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target Dinosaur you control | SubAbility$ DBDealDamage | SpellDescription$ Target Dinosaur you control deals damage equal to its power to target creature you don't control.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+A:AB$ PumpAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.Dinosaur+YouCtrl | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Dinosaurs you control get +4/+4 until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Type$Dinosaur
+DeckHints:Name$Sun Blessed Mount
+Oracle:[+2]: Put two +1/+1 counters on up to one target Dinosaur you control.\n[-3]: Target Dinosaur you control deals damage equal to its power to target creature you don't control.\n[-7]: Dinosaurs you control get +4/+4 until end of turn.

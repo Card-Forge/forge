@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #07
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU7-v2.jpg
+Goal:Win
+Turns:1
+Difficulty:Very Hard
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=15
+activeplayer=human
+activephase=MAIN1
+humanhand=Elder Deep-Fiend;Elder Deep-Fiend;Void Winnower;Fleetwheel Cruiser;Metalwork Colossus
+humanlibrary=Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH
+humangraveyard=Metalwork Colossus
+humanbattlefield=Island|Set:AKH;Island|Set:AKH;Metalwork Colossus;Metalwork Colossus;Hedron Archive;Hedron Archive;Banewhip Punisher|Id:420;Fetid Pools;
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Kalitas, Traitor of Ghet;Ammit Eternal;Liliana, the Last Hope|Counters:LOYALTY=3;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;
+aiprecast=Liliana, the Last Hope:1->420
+aiexile=
+aicommand=

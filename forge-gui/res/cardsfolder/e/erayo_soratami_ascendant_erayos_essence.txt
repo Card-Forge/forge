@@ -1,0 +1,19 @@
+Name:Erayo, Soratami Ascendant
+ManaCost:1 U
+Types:Legendary Creature Moonfolk Monk
+PT:1/1
+K:Flying
+T:Mode$ SpellCast | CheckSVar$ NumCast | SVarCompare$ EQ4 | NoResolvingCheck$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
+SVar:NumCast:Count$ThisTurnCast_Card
+AlternateMode:Flip
+Oracle:Flying\nWhenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
+
+ALTERNATE
+
+Name:Erayo's Essence
+ManaCost:1 U
+Types:Legendary Enchantment
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first spell each turn, counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | Destination$ Graveyard
+Oracle:Whenever an opponent casts their first spell each turn, counter that spell.

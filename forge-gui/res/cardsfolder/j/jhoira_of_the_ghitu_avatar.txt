@@ -1,0 +1,7 @@
+Name:Jhoira of the Ghitu Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+0
+A:AB$ Play | Cost$ 3 Discard<1/Card> | ActivationZone$ Command | AnySupportedCard$ Instant | RandomCopied$ True | RandomNum$ 3 | ChoiceNum$ 1 | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Copy three instant cards chosen at random. You may cast one of the copies without paying its mana cost.
+A:AB$ Play | Cost$ 3 Discard<1/Card> | ActivationZone$ Command | AnySupportedCard$ Sorcery | RandomCopied$ True | RandomNum$ 3 | ChoiceNum$ 1 | CopyCard$ True | WithoutManaCost$ True | SorcerySpeed$ True | SpellDescription$ Copy three sorcery cards chosen at random. You may cast one of the copies without paying its mana cost. Activate only as a sorcery.
+Oracle:Hand +1, life +0\n{3}, Discard a card: Copy three instant cards chosen at random. You may cast one of the copies without paying its mana cost.\n{3}, Discard a card: Copy three sorcery cards chosen at random. You may cast one of the copies without paying its mana cost. Activate only as a sorcery.

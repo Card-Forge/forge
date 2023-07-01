@@ -1,0 +1,9 @@
+Name:Militant Inquisitor
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each Equipment you control.
+SVar:X:Count$Valid Equipment.YouCtrl
+SVar:BuffedBy:Equipment
+DeckHints:Type$Equipment
+Oracle:Militant Inquisitor gets +1/+0 for each Equipment you control.

@@ -1,0 +1,6 @@
+Name:Unworthy Dead
+ManaCost:1 B
+Types:Creature Phyrexian Skeleton
+PT:1/1
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:{B}: Regenerate Unworthy Dead.

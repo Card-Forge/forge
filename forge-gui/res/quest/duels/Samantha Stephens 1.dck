@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Samantha Stephens 1
+Title=Samantha Stephens
+Difficulty=easy
+Description=WU Painter's Servant anti-red deck
+Icon=Samantha Stephens.jpg
+Deck Type=constructed
+[main]
+5 Plains|M12
+5 Island|M12
+4 Cloudcrest Lake
+4 Coastal Tower
+4 Boreal Shelf
+4 Painter's Servant
+4 Enlightened Tutor
+3 Fabricate
+3 Barrenton Cragtreads
+2 Flashfreeze
+2 Galina's Knight
+1 Kor Firewalker
+1 Defender of Law
+1 Disciple of Law
+1 Freewind Falcon
+1 Narwhal
+1 Oraxid
+1 Paladin en-Vec
+1 Repentant Blacksmith
+1 Sea Sprite
+1 Silver Knight
+1 Thermal Glider
+1 Voice of Law
+1 Weatherseed Faeries
+2 Hazerider Drake
+1 Warmth
+1 Celestial Purge
+1 Red Ward
+1 Aven Smokeweaver
+1 Iron Star
+[sideboard]

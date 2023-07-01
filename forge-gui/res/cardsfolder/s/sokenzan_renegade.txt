@@ -1,0 +1,9 @@
+Name:Sokenzan Renegade
+ManaCost:2 R
+Types:Creature Ogre Samurai Mercenary
+PT:3/3
+K:Bushido:1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | APlayerHasMostCardsInHand$ True | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of CARDNAME.
+SVar:TrigGainControl:DB$ GainControl | Defined$ Self | NewController$ Player.withMostCardsInHand
+AI:RemoveDeck:All
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nAt the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of Sokenzan Renegade.

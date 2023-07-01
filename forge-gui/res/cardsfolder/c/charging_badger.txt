@@ -1,0 +1,6 @@
+Name:Charging Badger
+ManaCost:G
+Types:Creature Badger
+PT:1/1
+K:Trample
+Oracle:Trample

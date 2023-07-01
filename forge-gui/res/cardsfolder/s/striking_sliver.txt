@@ -1,0 +1,8 @@
+Name:Striking Sliver
+ManaCost:R
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ First Strike | Description$ Sliver creatures you control have first strike.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have first strike. (They deal combat damage before creatures without first strike.)

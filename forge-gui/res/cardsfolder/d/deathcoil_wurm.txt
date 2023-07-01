@@ -1,0 +1,6 @@
+Name:Deathcoil Wurm
+ManaCost:6 G G
+Types:Creature Wurm
+PT:7/6
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+Oracle:You may have Deathcoil Wurm assign its combat damage as though it weren't blocked.

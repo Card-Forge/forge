@@ -1,0 +1,30 @@
+[metadata]
+Name=Oko, the Trickster
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+Description=Throne of Eldraine U/G Planeswalker Deck
+Set=ELD
+Image=oko_the_trickster.jpg
+[Main]
+1 Beanstalk Giant|ELD
+3 Bramblefort Fink|ELD
+3 Charmed Sleep|ELD
+2 Faerie Vandal|ELD
+11 Forest|ELD
+3 Frogify|ELD
+3 Garenbrig Carver|ELD
+10 Island|ELD
+2 Keeper of Fables|ELD
+3 Maraleaf Pixie|ELD
+2 Mistford River Turtle|ELD
+4 Oko's Accomplices|ELD
+2 Oko's Hospitality|ELD
+1 Oko, the Trickster+|ELD
+1 Return of the Wildspeaker|ELD
+4 Thornwood Falls|ELD
+3 Tome Raider|ELD
+1 Tuinvale Treefolk|ELD
+1 Wildborn Preserver|ELD

@@ -1,0 +1,7 @@
+Name:Cabal Stronghold
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 3 T | Produced$ B | Amount$ X | SpellDescription$ Add {B} for each basic Swamp you control.
+SVar:X:Count$Valid Swamp.Basic+YouCtrl
+Oracle:{T}: Add {C}.\n{3}, {T}: Add {B} for each basic Swamp you control.

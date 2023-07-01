@@ -1,0 +1,9 @@
+Name:Essence of Naya|Deck:Essence of Naya.dck|Variant:None|Avatar:Avatar1|Desc:
+Name:Naya Top Cards|Deck:Naya Top Cards.dck|Variant:None|Avatar:Woolly Thoctar|Desc:
+Name:Naya Power 5+|Deck:Naya Power 5.dck|Variant:None|Avatar:Spearbreaker Behemoth|Desc:
+Name:Jazal Goldmane|Deck:Jazal Goldmane.dck|Variant:Commander|Avatar:Jazal Goldmane|Desc:
+Name:Mayael the Anima|Deck:Mayael the Anima.dck|Variant:Commander|Avatar:Mayael the Anima|Desc:
+Name:Progenitus|Deck:Progenitus.dck|Variant:Commander|Avatar:Progenitus|Desc:
+Name:Uril the Miststalker|Deck:Uril the Miststalker.dck|Variant:Commander|Avatar:Uril the Miststalker|Desc:
+Name:Mayael Vanguard|Deck:Mayael Vanguard.dck|Variant:Vanguard|Avatar:Mayael the Anima|Desc:
+Name:Ajani|Deck:Ajani.dck|Variant:Planeswalker|Avatar:Ajani Vengeant|Desc:

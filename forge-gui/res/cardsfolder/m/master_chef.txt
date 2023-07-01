@@ -1,0 +1,10 @@
+Name:Master Chef
+ManaCost:2 G
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddReplacementEffects$ This & Other | Description$ Commander creatures you own have "This creature enters the battlefield with an additional +1/+1 counter on it" and "Other creatures you control enter with an additional +1/+1 counter on them."
+SVar:This:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | Description$ This creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:Other:Event$ Moved | ValidCard$ Creature.Other+YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | Description$ Other creatures you control enter with an additional +1/+1 counter on them.
+SVar:ExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1
+AI:RemoveDeck:NonCommander
+DeckHas:Ability$Counters
+Oracle:Commander creatures you own have "This creature enters the battlefield with an additional +1/+1 counter on it" and "Other creatures you control enter with an additional +1/+1 counter on them."

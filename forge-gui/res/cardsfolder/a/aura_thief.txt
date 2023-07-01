@@ -1,0 +1,8 @@
+Name:Aura Thief
+ManaCost:3 U
+Types:Creature Illusion
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME dies, you gain control of all enchantments. (You don't get to move Auras.)
+SVar:TrigGainControl:DB$ GainControl | AllValid$ Enchantment | NewController$ You
+Oracle:Flying\nWhen Aura Thief dies, you gain control of all enchantments. (You don't get to move Auras.)

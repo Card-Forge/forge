@@ -1,0 +1,11 @@
+Name:Voice of the Blessed
+ManaCost:W W
+Types:Creature Spirit Cleric
+PT:2/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_P1P1 | AddKeyword$ Flying & Vigilance | Description$ As long as CARDNAME has four or more +1/+1 counters on it, it has flying and vigilance.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE10_P1P1 | AddKeyword$ Indestructible | Description$ As long as CARDNAME has ten or more +1/+1 counters on it, it has indestructible.
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Whenever you gain life, put a +1/+1 counter on Voice of the Blessed.\nAs long as Voice of the Blessed has four or more +1/+1 counters on it, it has flying and vigilance.\nAs long as Voice of the Blessed has ten or more +1/+1 counters on it, it has indestructible.

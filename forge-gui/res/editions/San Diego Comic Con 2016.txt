@@ -1,0 +1,13 @@
+[metadata]
+Code=PS16
+Date=2016-10-01
+Name=San Diego Comic-Con 2016
+Type=Promo
+ScryfallCode=PS16
+
+[cards]
+29 M Gideon, Ally of Zendikar @Eric Deschamps
+69 M Jace, Unraveler of Secrets @Eric Deschamps
+93 M Liliana, the Last Hope @Eric Deschamps
+104 M Chandra, Flamecaller @Eric Deschamps
+138 M Nissa, Voice of Zendikar @Eric Deschamps

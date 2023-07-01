@@ -1,0 +1,8 @@
+Name:Sunweb
+ManaCost:3 W
+Types:Creature Wall
+PT:5/6
+K:Flying
+K:Defender
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerLE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or less.
+Oracle:Defender (This creature can't attack.)\nFlying\nSunweb can't block creatures with power 2 or less.

@@ -1,0 +1,8 @@
+Name:Palladia-Mors
+ManaCost:2 R R G G W W
+Types:Legendary Creature Elder Dragon
+PT:7/7
+K:Flying
+K:Trample
+K:UpkeepCost:R G W
+Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.

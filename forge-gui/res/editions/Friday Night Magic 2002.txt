@@ -1,0 +1,20 @@
+[metadata]
+Code=F02
+Date=2002-01-01
+Name=Friday Night Magic 2002
+Type=Promo
+ScryfallCode=F02
+
+[cards]
+1 R Soltari Priest @Janet Aulisio
+2 R Albino Troll @Paolo Parente
+3 R Dissipate @Richard Kane Ferguson
+4 R Black Knight @Jeff A. Menges
+5 R Wall of Blossoms @Heather Hudson
+6 R Fireslinger @Jeff Reitz
+7 R Drain Life @Douglas Shuler
+8 R Aura of Silence @D. Alexander Gregory
+9 R Forbid @Scott Kirschner
+10 R Spike Feeder @Heather Hudson
+11 R Mogg Fanatic @Brom
+12 R White Knight @Daniel Gelon

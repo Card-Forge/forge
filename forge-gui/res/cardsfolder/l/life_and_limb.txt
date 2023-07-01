@@ -1,0 +1,7 @@
+Name:Life and Limb
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Forest,Saproling | SetPower$ 1 | SetToughness$ 1 | AddType$ Land & Creature & Forest & Saproling | SetColor$ Green | Description$ All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They're affected by summoning sickness.)
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They're affected by summoning sickness.)

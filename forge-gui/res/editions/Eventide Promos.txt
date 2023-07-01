@@ -1,0 +1,10 @@
+[metadata]
+Code=PEVE
+Date=2008-07-25
+Name=Eventide Promos
+Type=Promo
+ScryfallCode=PEVE
+
+[cards]
+139★ R Figure of Destiny @Scott M. Fischer
+157★ R Overbeing of Myth @Zoltan Boros & Gabor Szikszai

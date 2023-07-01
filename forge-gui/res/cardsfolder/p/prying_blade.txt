@@ -1,0 +1,8 @@
+Name:Prying Blade
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+K:Equip:2
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature deals combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

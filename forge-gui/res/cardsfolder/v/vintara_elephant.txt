@@ -1,0 +1,7 @@
+Name:Vintara Elephant
+ManaCost:4 G
+Types:Creature Elephant
+PT:4/3
+K:Trample
+A:AB$ Debuff | Cost$ 3 | Defined$ Self | Keywords$ Trample | Activator$ Player | SpellDescription$ CARDNAME loses trample until end of turn. Any player may activate this ability.
+Oracle:Trample\n{3}: Vintara Elephant loses trample until end of turn. Any player may activate this ability.

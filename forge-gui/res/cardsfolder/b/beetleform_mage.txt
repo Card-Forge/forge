@@ -1,0 +1,6 @@
+Name:Beetleform Mage
+ManaCost:1 G U
+Types:Creature Human Insect Wizard
+PT:2/2
+A:AB$ Pump | Cost$ G U | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 and gains flying until end of turn. Activate only once each turn.
+Oracle:{G}{U}: Beetleform Mage gets +2/+2 and gains flying until end of turn. Activate only once each turn.

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Rakdos the defiler 2
+Title=Rakdos the Defiler
+Icon=Rakdos.jpg
+Difficulty=medium
+Description=Blood, Sweat & Tears
+Deck Type=constructed
+[main]
+4 Blood Crypt|RTR
+4 Char|RAV
+4 Dreadbore|RTR
+4 Grave Betrayal|RTR
+4 Mizzium Mortars|RTR
+9 Mountain|RTR
+4 Rakdos Guildgate|RTR
+4 Rakdos's Return|RTR
+9 Swamp|RTR
+4 Underworld Connections|RTR
+4 Wight of Precinct Six|GTC
+4 Mind Rot|RTR
+2 Seal of Fire|DIS
+[sideboard]
+[planes]
+[schemes]

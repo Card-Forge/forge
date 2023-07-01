@@ -1,0 +1,7 @@
+Name:Candelabra of Tawnos
+ManaCost:1
+Types:Artifact
+A:AB$ Untap | Cost$ X T | TargetMin$ X | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select X target lands | SpellDescription$ Untap X target lands.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:{X}, {T}: Untap X target lands.

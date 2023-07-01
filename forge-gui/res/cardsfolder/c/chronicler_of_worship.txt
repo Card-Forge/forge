@@ -1,0 +1,16 @@
+Name:Chronicler of Worship
+ManaCost:1 G
+Types:Creature Human Monk
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigShrine | TriggerDescription$ When CARDNAME enters the battlefield, put a random Shrine card from among the top seven cards of your library into your hand. It perpetually gains "This spell costs {1} less to cast." Then shuffle.
+SVar:TrigDigShrine:DB$ Dig | Defined$ You | DigNum$ 7 | ChangeNum$ 1 | ChangeValid$ Card.Shrine | RememberChanged$ True | RandomChange$ True | DestinationZone$ Hand | Mandatory$ True | NoLooking$ True | DestinationZone2$ Library | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Name$ Chronicler of Worship's Perpetual Effect | Duration$ Permanent | SubAbility$ DBShuffle | Triggers$ Update
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ PerpetualReduce | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually gains "This spell costs {1} less to cast."
+SVar:PerpetualReduce:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckNeeds:Type$Shrine
+Oracle:When Chronicler of Worship enters the battlefield, put a random Shrine card from among the top seven cards of your library into your hand. It perpetually gains "This spell costs {1} less to cast." Then shuffle.\n{T}: Add one mana of any color.

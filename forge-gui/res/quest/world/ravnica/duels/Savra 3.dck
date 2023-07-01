@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Savra 3
+Title=Savra
+Icon=Savra.jpg
+Difficulty=hard
+Description=Controllish
+Deck Type=constructed
+[main]
+4 Abrupt Decay|RTR
+4 Birds of Paradise|M12
+4 Last Gasp|RAV
+2 Elves of Deep Shadow|RAV
+8 Forest|RTR
+4 Golgari Guildgate|RTR
+3 Dreg Mangler|RTR
+4 Overgrown Tomb|RTR
+4 Putrefy|RAV
+4 Skeletal Vampire|GPT
+8 Swamp|RTR
+3 Trestle Troll|RTR
+4 Underworld Connections|RTR
+4 Vraska the Unseen|RTR
+[sideboard]
+[planes]
+[schemes]

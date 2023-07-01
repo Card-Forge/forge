@@ -1,0 +1,6 @@
+Name:Palladium Myr
+ManaCost:3
+Types:Artifact Creature Myr
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+Oracle:{T}: Add {C}{C}.

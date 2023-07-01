@@ -1,0 +1,9 @@
+Name:Rekindling Phoenix
+ManaCost:2 R R
+Types:Creature Phoenix
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 0/1 red Elemental creature token with "At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_0_1_elemental_rekindling_phoenix
+DeckHas:Ability$Token
+Oracle:Flying\nWhen Rekindling Phoenix dies, create a 0/1 red Elemental creature token with "At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn."

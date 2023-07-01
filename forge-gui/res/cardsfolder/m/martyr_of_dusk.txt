@@ -1,0 +1,9 @@
+Name:Martyr of Dusk
+ManaCost:1 W
+Types:Creature Vampire Soldier
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Vampire creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Vampire
+Oracle:When Martyr of Dusk dies, create a 1/1 white Vampire creature token with lifelink.

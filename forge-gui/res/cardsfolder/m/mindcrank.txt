@@ -1,0 +1,9 @@
+Name:Mindcrank
+ManaCost:2
+Types:Artifact
+T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent loses life, that player mills that many cards. (Damage dealt by sources without infect causes loss of life.)
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ X
+SVar:X:TriggerCount$LifeAmount
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
+Oracle:Whenever an opponent loses life, that player mills that many cards. (Damage dealt by sources without infect causes loss of life.)

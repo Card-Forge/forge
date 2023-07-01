@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=20
+Credits=2000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Landslide Charge
+Description=Call your savage clan mates to battle! On the harsh frontiers of war-torn Tarkir, only the strongest will prevail. Send forth packs of mighty hunters and fierce beasts to crush your enemies into the mountainside.
+Deck Type=constructed
+Set=DTK
+Image=landslide_charge.jpg
+[main]
+1 Arc Lightning|KTK
+1 Boon Satyr|THS
+1 Crater's Claws|KTK
+4 Elvish Mystic|M15
+4 Evolving Wilds|DTK
+4 Fanatic of Xenagos|BNG
+4 Frontier Bivouac|KTK
+2 Golden Hind|JOU
+4 Heir of the Wilds|KTK
+2 Lightning Strike|M15
+1 Mistcutter Hydra|THS
+2 Mogis's Warhound|JOU
+1 Outpost Siege|FRF
+1 Polis Crusher|THS
+2 Roast|DTK
+1 Savage Knuckleblade|KTK
+1 Stubborn Denial|KTK
+1 Surrak, the Hunt Caller|DTK
+1 Temple of Abandon|THS
+2 Temur Charm|KTK
+1 Thunderbreak Regent|DTK
+2 Wild Slash|FRF
+1 Yasova Dragonclaw|FRF
+1 Island|DTK
+10 Forest|DTK
+5 Mountain|DTK
+[sideboard]
+2 Abzan Beastmaster|FRF
+2 Act of Treason|KTK
+2 Arc Lightning|KTK
+2 Disdainful Stroke|KTK
+2 Encase in Ice|DTK
+2 Reclamation Sage|M15
+2 Rending Volley|DTK
+1 Stubborn Denial|KTK

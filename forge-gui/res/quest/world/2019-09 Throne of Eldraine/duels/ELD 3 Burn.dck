@@ -1,0 +1,17 @@
+[metadata]
+Title=Burn
+Difficulty=hard
+Description=The purest virtue burns brighter than the sun and hotter than dragonfire.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Burn
+[Main]
+4 Bonecrusher Giant|ELD|1
+4 Brimstone Trebuchet|ELD
+28 Mountain|ELD|2
+4 Searing Barrage|ELD
+4 Slaying Fire|ELD|1
+4 Sundering Stroke|ELD|1
+4 Syr Carah, the Bold|ELD
+4 Thrill of Possibility|ELD
+4 Torbran, Thane of Red Fell|ELD|1

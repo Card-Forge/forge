@@ -1,0 +1,6 @@
+Name:Thraben Heretic
+ManaCost:1 W
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature card from a graveyard.
+Oracle:{T}: Exile target creature card from a graveyard.

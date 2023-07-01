@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Silverwing Squadron
+OpponentName=The Silverwings
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Castle Ardenvale|Castle Ardenvale
+HumanExtras=
+[metadata]
+Title=Silverwing Squadron
+Difficulty=medium
+Description=The Silverwings start with two lands.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=ELD Challenge: Silverwing Squadron
+[Main]
+30 Plains|ELD|1
+30 Silverwing Squadron|ELD

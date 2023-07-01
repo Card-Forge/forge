@@ -1,0 +1,9 @@
+Name:Thunderclap Wyvern
+ManaCost:2 W U
+Types:Creature Drake
+PT:2/3
+K:Flash
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control with flying get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nOther creatures you control with flying get +1/+1.

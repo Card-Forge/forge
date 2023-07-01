@@ -1,0 +1,8 @@
+Name:Lu Xun, Scholar General
+ManaCost:2 U U
+Types:Legendary Creature Human Soldier
+PT:1/3
+K:Horsemanship
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Lu Xun, Scholar General deals damage to an opponent, you may draw a card.

@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Jack Sparrow 1
+Title=Jack Sparrow
+Difficulty=easy
+Description=UB Pirate deck with Talas Warrior, Coastal Piracy, Drowned and Sea's Claim
+Icon=Jack Sparrow.jpg
+Deck Type=constructed
+[main]
+1 Cloud Pirates
+1 Water Wurm
+1 Caller of Gales
+1 Sea's Claim
+1 Fear
+1 Expedition Map
+1 Talas Merchant
+1 Talas Scout
+1 School of Piranha
+1 Drowned
+1 Spreading Seas
+1 Lingering Mirage
+1 Cruel Edict
+1 Rishadan Airship
+1 Steam Frigate
+1 Reef Pirates
+1 Talas Warrior
+1 Chambered Nautilus
+1 Steam Frigate
+1 Seasinger
+1 Whispersilk Cloak
+1 Scavenged Weaponry
+1 Drag Down
+1 Forced Retreat
+1 Talas Air Ship
+1 Screeching Drake
+1 Giant Octopus
+1 Narwhal
+1 Coastal Piracy
+2 Armored Galleon
+2 Pirate Ship
+1 Sandbar Serpent
+1 Wu Admiral
+1 Ramirez DePietro
+11 Island|M12
+4 Swamp|M12
+1 Drowned Catacomb
+2 Frost Marsh
+2 Darkslick Shores
+2 Polluted Delta
+1 Salt Marsh
+1 Waterveil Cavern
+[sideboard]

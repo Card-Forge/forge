@@ -1,0 +1,8 @@
+Name:Stormwatch Eagle
+ManaCost:3 U
+Types:Creature Bird
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ Sac<1/Land> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+AI:RemoveDeck:All
+Oracle:Flying\nSacrifice a land: Return Stormwatch Eagle to its owner's hand.

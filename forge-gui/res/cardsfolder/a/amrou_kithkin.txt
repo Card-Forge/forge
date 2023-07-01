@@ -1,0 +1,6 @@
+Name:Amrou Kithkin
+ManaCost:W W
+Types:Creature Kithkin
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE3 | Description$ CARDNAME can't be blocked by creatures with power 3 or greater.
+Oracle:Amrou Kithkin can't be blocked by creatures with power 3 or greater.

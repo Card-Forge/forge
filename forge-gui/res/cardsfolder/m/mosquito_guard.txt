@@ -1,0 +1,9 @@
+Name:Mosquito Guard
+ManaCost:W
+Types:Creature Kithkin Soldier
+PT:1/1
+K:First Strike
+K:Reinforce:1:1 W
+DeckHas:Ability$Counters
+DeckNeeds:Type$Creature
+Oracle:First strike\nReinforce 1—{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)

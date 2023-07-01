@@ -1,0 +1,6 @@
+Name:Horseshoe Crab
+ManaCost:2 U
+Types:Creature Crab
+PT:1/3
+A:AB$ Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
+Oracle:{U}: Untap Horseshoe Crab.

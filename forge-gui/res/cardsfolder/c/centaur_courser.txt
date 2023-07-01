@@ -1,0 +1,5 @@
+Name:Centaur Courser
+ManaCost:2 G
+Types:Creature Centaur Warrior
+PT:3/3
+Oracle:

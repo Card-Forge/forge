@@ -1,0 +1,8 @@
+Name:Goblin Assault
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin_haste
+S:Mode$ MustAttack | ValidCreature$ Creature.Goblin | Description$ Goblin creatures attack each combat if able.
+DeckHas:Ability$Token & Type$Goblin
+Oracle:At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.\nGoblin creatures attack each combat if able.

@@ -1,0 +1,7 @@
+Name:Explorer's Scope
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDig | TriggerDescription$ Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ForceRevealToController$ True | Optional$ True | PromptToSkipOptionalAbility$ True | OptionalAbilityPrompt$ Would you like to put the land onto the battlefield tapped? | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | LibraryPosition2$ 0
+Oracle:Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

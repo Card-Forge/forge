@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Charge of the Boros
+Description=The Boros guild, the most militant force in Ravnica, is always ready for battle. The radiance mechanic lets them level swaths of the unworthy all at once. And if there isn't a fight to join, they're likely to just start one themselves.
+Deck Type=constructed
+Set=RAV
+Image=charge_of_the_boros.jpg
+[main]
+1 Agrus Kos, Wojek Veteran|RAV
+1 Bathe in Light|RAV
+2 Boros Garrison|IMA
+1 Boros Guildmage|RAV
+3 Boros Recruit|RAV
+2 Boros Swiftblade|RAV
+2 Cleansing Beam|RAV
+1 Cyclopean Snare|RAV
+2 Dogpile|RAV
+2 Flame-Kin Zealot|RAV
+1 Greater Forgeling|RAV
+2 Lightning Helix|RAV
+10 Mountain|RAV
+2 Nightguard Patrol|RAV
+2 Ordruun Commando|RAV
+10 Plains|RAV
+2 Rally the Righteous|RAV
+1 Screeching Griffin|RAV
+3 Skyknight Legionnaire|RAV
+1 Sunforger|RAV
+1 Sunhome, Fortress of the Legion|HOP
+1 Terrarion|RAV
+3 Thundersong Trumpeter|RAV
+2 Viashino Slasher|RAV
+2 War-Torch Goblin|RAV
+[sideboard]

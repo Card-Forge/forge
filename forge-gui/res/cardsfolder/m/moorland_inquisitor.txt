@@ -1,0 +1,6 @@
+Name:Moorland Inquisitor
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
+Oracle:{2}{W}: Moorland Inquisitor gains first strike until end of turn. (It deals combat damage before creatures without first strike.)

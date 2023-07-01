@@ -1,0 +1,6 @@
+Name:Defense Grid
+ManaCost:2
+Types:Artifact
+S:Mode$ RaiseCost | Activator$ Player.NonActive | Type$ Spell | Amount$ 3 | Description$ Each spell costs {3} more to cast except during its controller's turn.
+AI:RemoveDeck:Random
+Oracle:Each spell costs {3} more to cast except during its controller's turn.

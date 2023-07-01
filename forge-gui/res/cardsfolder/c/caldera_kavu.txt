@@ -1,0 +1,8 @@
+Name:Caldera Kavu
+ManaCost:2 R
+Types:Creature Kavu
+PT:2/2
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ ChooseColor | Cost$ G | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
+Oracle:{1}{B}: Caldera Kavu gets +1/+1 until end of turn.\n{G}: Caldera Kavu becomes the color of your choice until end of turn.

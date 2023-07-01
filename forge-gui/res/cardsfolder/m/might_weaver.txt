@@ -1,0 +1,8 @@
+Name:Might Weaver
+ManaCost:1 G
+Types:Creature Human Wizard
+PT:2/1
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Red,Creature.White | KW$ Trample | SpellDescription$ Target red or white creature gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.) | TgtPrompt$ Select target red or white creature.
+AI:RemoveDeck:Random
+DeckHints:Color$White|Red
+Oracle:{2}: Target red or white creature gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

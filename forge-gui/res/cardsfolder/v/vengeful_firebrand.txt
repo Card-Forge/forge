@@ -1,0 +1,7 @@
+Name:Vengeful Firebrand
+ManaCost:3 R
+Types:Creature Elemental Warrior
+PT:5/2
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Warrior.YouOwn | PresentZone$ Graveyard | Description$ CARDNAME has haste as long as a Warrior card is in your graveyard.
+Oracle:Vengeful Firebrand has haste as long as a Warrior card is in your graveyard.\n{R}: Vengeful Firebrand gets +1/+0 until end of turn.

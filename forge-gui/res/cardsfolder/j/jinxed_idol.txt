@@ -1,0 +1,9 @@
+Name:Jinxed Idol
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
+A:AB$ GainControl | Cost$ Sac<1/Creature> | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME.
+SVar:SacMe:4
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.\nSacrifice a creature: Target opponent gains control of Jinxed Idol.

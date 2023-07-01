@@ -1,0 +1,8 @@
+Name:Lone Revenant
+ManaCost:3 U U
+Types:Creature Spirit
+PT:4/4
+K:Hexproof
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | IsPresent$ Creature.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the others on the bottom of your library in any order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | NoReveal$ True
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever Lone Revenant deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

@@ -1,0 +1,9 @@
+Name:Steadfast Sentry
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhen Steadfast Sentry dies, put a +1/+1 counter on target creature you control.

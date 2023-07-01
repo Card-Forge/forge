@@ -1,0 +1,10 @@
+Name:Teferi's Veil
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ DelayedTrig | TriggerDescription$ Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigPhase | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Attacking creatures you control phase out at end of combat.
+SVar:TrigPhase:DB$ Phases | Defined$ DelayTriggerRememberedLKI
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

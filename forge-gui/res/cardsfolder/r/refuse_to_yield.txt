@@ -1,0 +1,6 @@
+Name:Refuse to Yield
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +7 | SubAbility$ DBUntap | SpellDescription$ Target creature gets +2/+7 until end of turn. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:Target creature gets +2/+7 until end of turn. Untap it.

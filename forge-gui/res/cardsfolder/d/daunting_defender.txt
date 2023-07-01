@@ -1,0 +1,7 @@
+Name:Daunting Defender
+ManaCost:4 W
+Types:Creature Human Cleric
+PT:3/3
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.Cleric+YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to a Cleric creature you control, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+Oracle:If a source would deal damage to a Cleric creature you control, prevent 1 of that damage.

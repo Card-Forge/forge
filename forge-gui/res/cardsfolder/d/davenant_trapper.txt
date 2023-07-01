@@ -1,0 +1,7 @@
+Name:D'Avenant Trapper
+ManaCost:2 W
+Types:Creature Human Archer
+PT:3/2
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, tap target creature an opponent controls. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Whenever you cast a historic spell, tap target creature an opponent controls. (Artifacts, legendaries, and Sagas are historic.)

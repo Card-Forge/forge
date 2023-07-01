@@ -1,0 +1,6 @@
+Name:Uncle Istvan
+ManaCost:1 B B B
+Types:Creature Human
+PT:1/3
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures.
+Oracle:Prevent all damage that would be dealt to Uncle Istvan by creatures.

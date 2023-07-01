@@ -1,0 +1,10 @@
+Name:Pride of the Clouds
+ManaCost:W U
+Types:Creature Elemental Cat
+PT:1/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature with flying on the battlefield.
+A:AB$ Token | Cost$ 2 W U Reveal<1/CARDNAME> | Forecast$ True | TokenAmount$ 1 | TokenScript$ wu_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white and blue Bird creature token with flying. (Activate only during your upkeep and only once each turn.)
+SVar:X:Count$Valid Creature.withFlying+Other
+SVar:BuffedBy:Creature.withFlying
+Oracle:Flying\nPride of the Clouds gets +1/+1 for each other creature with flying on the battlefield.\nForecast — {2}{W}{U}, Reveal Pride of the Clouds from your hand: Create a 1/1 white and blue Bird creature token with flying. (Activate only during your upkeep and only once each turn.)

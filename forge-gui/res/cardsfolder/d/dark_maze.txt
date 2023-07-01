@@ -1,0 +1,9 @@
+Name:Dark Maze
+ManaCost:4 U
+Types:Creature Wall
+PT:4/5
+K:Defender
+A:AB$ Effect | Cost$ 0 | StaticAbilities$ CanAttack | AtEOT$ Exile | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender. Exile it at the beginning of the next end step.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+AI:RemoveDeck:All
+Oracle:Defender (This creature can't attack.)\n{0}: Dark Maze can attack this turn as though it didn't have defender. Exile it at the beginning of the next end step.

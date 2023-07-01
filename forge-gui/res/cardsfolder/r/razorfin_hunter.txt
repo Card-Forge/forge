@@ -1,0 +1,7 @@
+Name:Razorfin Hunter
+ManaCost:U R
+Types:Creature Merfolk Goblin
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:NonCombatPriority:1
+Oracle:{T}: Razorfin Hunter deals 1 damage to any target.

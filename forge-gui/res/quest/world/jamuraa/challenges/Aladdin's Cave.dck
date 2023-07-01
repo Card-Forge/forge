@@ -1,0 +1,57 @@
+[quest]
+id=3003
+OpponentName=Aladdin
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=33% duplicate card;3 rares;80% Aladdin's Lamp|ARN;33% Aladdin's Ring|ARN
+Credit Reward=300
+HumanExtras=Aladdin's Lamp
+AIExtras=Aladdin's Ring
+[metadata]
+Name=quest3003
+Title=Aladdin's Cave
+Difficulty=hard
+Description=You have discovered Aladdin's secret stash. Unfortunately for you, its master is home.
+Icon=Aladdin.jpg
+Deck Type=constructed
+[main]
+2 Aladdin|ARN
+1 Amnesia|DRK
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+1 Braingeyser|LEB
+4 City of Brass|5ED
+1 Counterspell|5ED
+2 Terror|LEB
+1 Disenchant|5ED
+1 Fellwar Stone|DRK
+1 Fireball|LEB
+2 Force of Will|ALL
+2 Gorilla Shaman|ALL
+2 Island|MIR
+2 Jayemdae Tome|LEB
+1 Library of Alexandria|ARN
+1 Lightning Bolt|LEB
+4 Mana Drain|LEG
+1 Sol Ring|LEB
+1 Mirror Universe|LEG
+1 Moat|LEG
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+1 Plains|MIR
+1 Regrowth|LEB
+4 Strip Mine|ATQ
+3 Swords to Plowshares|LEB
+1 The Abyss|LEG
+1 Time Walk|LEB
+4 Tundra|LEB
+2 Underground Sea|LEB
+4 Volcanic Island|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

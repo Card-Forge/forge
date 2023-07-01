@@ -1,0 +1,7 @@
+Name:Faceless Haven
+ManaCost:no cost
+Types:Snow Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ S S S | Defined$ Self | Power$ 4 | Toughness$ 3 | Types$ Creature | AddAllCreatureTypes$ True | Keywords$ Vigilance | StackDescription$ CARDNAME becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land. | SpellDescription$ CARDNAME becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land. ({S} can be paid with one mana from a snow source.)
+DeckNeeds:Type$Snow
+Oracle:{T}: Add {C}.\n{S}{S}{S}: Faceless Haven becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land. ({S} can be paid with one mana from a snow source.)

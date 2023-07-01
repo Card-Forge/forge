@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: The Gorillas
+Title=The Gorillas
+Difficulty=medium
+Description="Their fury is their greatest weapon." -Taaveti of Kelsinko, Elvish Hunter
+
+The gorillas of Yavimaya, at some point during or before the Flood Ages, became a sentient, tribal culture, led by Gorilla Chieftains. They fought against the vines and plant-life that attacked them.
+
+A Gorilla Chieftain had Laina and Kaysa brought to him by his magic-wielding gorilla shamans and warriors; he allied his people with the elves, and aided in the attack against the Heart of Yavimaya, which cleansed the forest.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Battle Frenzy|ICE
+2 Bestial Fury|ALL|1
+2 Bestial Fury|ALL|2
+4 Gargantuan Gorilla|ALL
+2 Gorilla Berserkers|ALL|1
+2 Gorilla Berserkers|ALL|2
+2 Gorilla Chieftain|ALL|1
+2 Gorilla Chieftain|ALL|2
+4 Gorilla Pack|ICE
+2 Gorilla Shaman|ALL|1
+2 Gorilla Shaman|ALL|2
+2 Gorilla War Cry|ALL|1
+2 Gorilla War Cry|ALL|2
+1 Heart of Yavimaya|ALL
+4 Hurricane|ICE
+9 Mountain|ICE|2
+1 Nature's Wrath|ALL
+14 Snow-Covered Forest|ICE
+1 Timberline Ridge|ICE

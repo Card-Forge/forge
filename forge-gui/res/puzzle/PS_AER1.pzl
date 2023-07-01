@@ -1,0 +1,14 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt #01
+URL:https://i.redd.it/wws1h03gy7ky.png
+Goal:Win
+Turns:1
+Difficulty:Easy
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=9
+HumanPlay=Key to the City; Ravenous Intruder; Ruinous Gremlin; Island; Island; Island; Island; Island; Mountain; Mountain
+HumanHand=Welcome to the Fold; Chilling Grasp; Flame Lash; Confirm Suspicions
+AIPlay=Workshop Assistant; Thriving Ibex

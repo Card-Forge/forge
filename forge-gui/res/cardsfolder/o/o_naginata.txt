@@ -1,0 +1,7 @@
+Name:O-Naginata
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ CantAttach | ValidCard$ Card.Self | Target$ Creature.powerLT3 | Description$ CARDNAME can be attached only to a creature with power 3 or greater.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddKeyword$ Trample | Description$ Equipped creature gets +3/+0 and has trample.
+Oracle:O-Naginata can be attached only to a creature with power 3 or greater.\nEquipped creature gets +3/+0 and has trample.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

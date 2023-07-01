@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Relentless Rush
+Description=Strike with the speed of lightning! This deck lets you create a swift horde of unyielding attackers. Use the dash mechanic to hurl creatures into battle before your opponent can even get started. Hesitation is for the weak!
+Deck Type=constructed
+Set=DTK
+Image=relentless_rush.jpg
+[Main]
+2 Lightning Berserker|DTK
+2 Kolaghan Aspirant|DTK
+3 Kolaghan Skirmisher|DTK
+2 Kolaghan Forerunners|DTK
+2 Screamreach Brawler|DTK
+2 Ambuscade Shaman|DTK
+2 Warbringer|DTK
+2 Sprinting Warbrute|DTK
+1 Boltwing Marauder+|DTK
+2 Swift Warkite|DTK
+1 Duress|DTK
+1 Foul-Tongue Shriek|DTK
+1 Vial of Dragonfire|DTK
+2 Impact Tremors|DTK
+2 Tormenting Voice|DTK
+2 Twin Bolt|DTK
+1 Defeat|DTK
+1 Kolaghan Monument|DTK
+1 Foul-Tongue Invocation|DTK
+2 Flatten|DTK
+1 Foul Renewal|DTK
+1 Evolving Wilds|DTK
+13 Mountain|DTK
+11 Swamp|DTK

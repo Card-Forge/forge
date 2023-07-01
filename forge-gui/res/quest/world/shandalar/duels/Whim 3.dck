@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Whim 3
+Title=Whim
+Icon=Whim.jpg
+Difficulty=hard
+Description=UBW tap-dancing deck.
+Deck Type=constructed
+[main]
+1 Alabaster Potion|LEG
+1 Carrion Ants|LEG
+1 Colossus of Sardia|ATQ
+2 Flood|DRK
+3 Icy Manipulator|2ED
+3 Island|4ED
+2 Kismet|LEG
+1 Kormus Bell|LEB
+4 Meekstone|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+2 Plains|4ED
+4 Power Sink|4ED
+4 Psychic Venom|LEB
+4 Royal Assassin|2ED
+4 Scrubland|LEB
+4 Serra Angel|4ED
+2 Swamp|4ED
+4 Tundra|LEB
+4 Underground Sea|LEB
+4 Yotian Soldier|4ED
+3 Zephyr Falcon|LEG
+[sideboard]

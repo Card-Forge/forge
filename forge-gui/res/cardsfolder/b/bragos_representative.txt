@@ -1,0 +1,6 @@
+Name:Brago's Representative
+ManaCost:2 W
+Types:Creature Human Advisor
+PT:1/4
+S:Mode$ Continuous | Affected$ You | AdditionalVote$ 1 | Description$ While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)
+Oracle:While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)

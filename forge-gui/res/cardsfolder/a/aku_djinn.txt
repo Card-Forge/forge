@@ -1,0 +1,8 @@
+Name:Aku Djinn
+ManaCost:3 B B
+Types:Creature Djinn
+PT:5/6
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.OppCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Trample\nAt the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.

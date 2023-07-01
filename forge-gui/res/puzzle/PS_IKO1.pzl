@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Ikoria: Lair of Behemoths #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/06/154.-IKO1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your Chittering Harvester is mutated on top of your Necropanther, and your opponent's Cubwarden is mutated on top of another Cubwarden. Assume any cards drawn are not relevant to solving the puzzle.
+[state]
+humanlife=20
+ailife=16
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Necropanther;Insatiable Hemophage;Bastion of Remembrance
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humangraveyard=Charming Prince;Zagoth Mamba
+humanbattlefield=Chittering Harvester|MergedCards:Necropanther;Lurrus of the Dream-Den;Priest of Forgotten Gods;Gray Merchant of Asphodel;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Godless Shrine|NoETBTrigs;Plains
+aibattlefield=Cubwarden|MergedCards:Cubwarden
+aiprecast=Cubwarden:TrigToken;Cubwarden:TrigToken
+removesummoningsickness=true

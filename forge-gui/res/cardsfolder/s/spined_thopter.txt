@@ -1,0 +1,6 @@
+Name:Spined Thopter
+ManaCost:2 UP
+Types:Artifact Creature Phyrexian Thopter
+PT:2/1
+K:Flying
+Oracle:({U/P} can be paid with either {U} or 2 life.)\nFlying

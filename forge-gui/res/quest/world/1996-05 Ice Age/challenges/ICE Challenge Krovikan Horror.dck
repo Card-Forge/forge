@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Krovikan Horror
+OpponentName=The Horror
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Lake of the Dead|Lake of the Dead|Lake of the Dead|Lake of the Dead
+[metadata]
+Name=ICE Challenge: Krovikan Horror
+Title=The Horror
+Difficulty=medium
+Description="The horror... the horror..." -Kurtz, Apocalypse Now
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+30 Krovikan Horror|ALL
+30 Swamp|ICE|1

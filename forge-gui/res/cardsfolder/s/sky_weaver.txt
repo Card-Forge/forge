@@ -1,0 +1,7 @@
+Name:Sky Weaver
+ManaCost:1 U
+Types:Creature Metathran Wizard
+PT:2/1
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.White,Creature.Black | KW$ Flying | SpellDescription$ Target white or black creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.) | TgtPrompt$ Select target white or black creature.
+DeckHints:Color$White|Black
+Oracle:{2}: Target white or black creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)

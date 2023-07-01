@@ -1,0 +1,6 @@
+Name:Temple of the False God
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE5 | SpellDescription$ Add {C}{C}. Activate only if you control five or more lands.
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}{C}. Activate only if you control five or more lands.

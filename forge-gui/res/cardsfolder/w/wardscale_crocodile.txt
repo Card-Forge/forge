@@ -1,0 +1,6 @@
+Name:Wardscale Crocodile
+ManaCost:4 G
+Types:Creature Crocodile
+PT:5/3
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

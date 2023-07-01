@@ -1,0 +1,11 @@
+Name:Mordant Dragon
+ManaCost:3 R R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredTarget | NumDmg$ X | TgtPrompt$ Select target creature.
+SVar:X:Count$CardPower
+SVar:MustBeBlocked:True
+Oracle:Flying\n{1}{R}: Mordant Dragon gets +1/+0 until end of turn.\nWhenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.

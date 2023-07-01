@@ -1,0 +1,5 @@
+Name:Norwood Ranger
+ManaCost:G
+Types:Creature Elf Scout Ranger
+PT:1/2
+Oracle:

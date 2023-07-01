@@ -1,0 +1,5 @@
+Name:Fugitive Wizard
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+Oracle:

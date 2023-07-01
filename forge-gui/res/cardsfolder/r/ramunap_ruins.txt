@@ -1,0 +1,7 @@
+Name:Ramunap Ruins
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ DealDamage | Cost$ 2 R R T Sac<1/Desert> | Defined$ Player.Opponent | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each opponent.
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {R}.\n{2}{R}{R}, {T}, Sacrifice a Desert: Ramunap Ruins deals 2 damage to each opponent.

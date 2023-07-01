@@ -1,0 +1,7 @@
+Name:Coastal Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Kavu | TgtPrompt$ Select target Kavu | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Kavu to its owner's hand.
+Oracle:Flying\n{1}{U}, {T}: Return target Kavu to its owner's hand.

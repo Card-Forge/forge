@@ -1,0 +1,6 @@
+Name:Icatian Lieutenant
+ManaCost:W W
+Types:Creature Human Soldier
+PT:1/2
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.Soldier | NumAtt$ +1 | SpellDescription$ Target Soldier creature gets +1/+0 until end of turn. | TgtPrompt$ Select target Soldier creature.
+Oracle:{1}{W}: Target Soldier creature gets +1/+0 until end of turn.

@@ -1,0 +1,84 @@
+[metadata]
+Code=SIS
+Date=2023-03-21
+Name=Shadows of the Past
+Type=Online
+ScryfallCode=SIS
+
+[cards]
+1 R Angel of Flight Alabaster @Howard Lyon
+2 M Avacyn, Angel of Hope @Jason Chan
+3 C Bonds of Faith @Steve Argyle
+4 R Divine Reckoning @Greg Staples
+5 C Doomed Traveler @Lars Grant-West
+6 C Elder Cathar @Chris Rahn
+7 C Feeling of Dread @John Stanko
+8 U Fiend Hunter @Wayne Reynolds
+9 U Lingering Souls @Bud Cook
+10 U Rally the Peasants @Jaime Jones
+11 R Requiem Angel @Eric Deschamps
+12 U Seance @David Rapoza
+13 C Battleground Geist @Clint Cearley
+14 R Cackling Counterpart @David Rapoza
+15 C Forbidden Alchemy @David Rapoza
+16 R Havengul Runebinder @Bud Cook
+17 U Invisible Stalker @Bud Cook
+18 C Mist Raven @John Avon
+19 U Murder of Crows @Drew Baker
+20 U Mystic Retrieval @Scott Chou
+21 C Selhoff Occultist @Igor Kieryluk
+22 C Silent Departure @John Avon
+23 M Snapcaster Mage @Volkan Baǵa
+24 C Stitcher's Apprentice @Johann Bodin
+25 U Barter in Blood @Eric Deschamps
+26 C Bloodflow Connoisseur @Slawomir Maniak
+27 M Bloodline Keeper @Jason Chan
+28 C Bump in the Night @Kev Walker
+29 U Falkenrath Noble @Slawomir Maniak
+30 C Ghoulraiser @Steve Prescott
+31 M Griselbrand @Igor Kieryluk
+32 R Increasing Ambition @Volkan Baǵa
+33 U Sever the Bloodline @Clint Cearley
+34 R Skirsdag High Priest @Jason A. Engle
+35 C Tragic Slip @Christopher Moeller
+36 U Unburial Rites @Ryan Pancoast
+37 M Balefire Dragon @Eric Deschamps
+38 U Brimstone Volley @Eytan Zana
+39 R Devil's Play @Austin Hsu
+40 C Faithless Looting @Gabor Szikszai
+41 C Forge Devil @Austin Hsu
+42 R Kruin Outlaw @David Rapoza
+43 M Past in Flames @Anthony Jones
+44 U Skirsdag Cultist @Slawomir Maniak
+45 C Traitorous Blood @Raymond Swanland
+46 C Vampiric Fury @Matt Stewart
+47 R Zealous Conscripts @Steve Prescott
+48 C Avacyn's Pilgrim @Jana Schirmer & Johannes Voss
+49 M Garruk Relentless @Eric Deschamps
+50 C Gnaw to the Bone @Scott Chou
+51 R Gutter Grime @Erica Yang
+52 C Hollowhenge Scavenger @Slawomir Maniak
+53 R Mayor of Avabruck @Svetlin Velinov
+54 C Moonmist @Ryan Yee
+55 U Somberwald Sage @Steve Argyle
+56 U Spider Spawning @Daniel Ljunggren
+57 C Travel Preparations @Vincent Proce
+58 C Young Wolf @Ryan Pancoast
+59 U Diregraf Captain @Slawomir Maniak
+60 U Drogskol Captain @Cristi Balanescu
+61 M Falkenrath Aristocrat @Igor Kieryluk
+62 M Geist of Saint Traft @Igor Kieryluk
+63 M Havengul Lich @James Ryman
+64 M Huntmaster of the Fells @Chris Rahn
+65 U Immerwolf @Cristi Balanescu
+66 M Sigarda, Host of Herons @Chris Rahn
+67 U Stromkirk Captain @Jana Schirmer & Johannes Voss
+68 U Avacyn's Collar @James Paick
+69 C Blazing Torch @Scott Chou
+70 U Butcher's Cleaver @Jason Felix
+71 U Demonmail Hauberk @Jason Felix
+72 U Galvanic Juggernaut @Lucas Graciano
+73 C Traveler's Amulet @Alan Pollack
+74 U Vessel of Endless Rest @John Avon
+75 C Evolving Wilds @Cliff Childs
+76 C Haunted Fengraf @Adam Paquette

@@ -1,0 +1,7 @@
+Name:Bant Sureblade
+ManaCost:GU W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | IsPresent$ Permanent.MultiColor+Other+YouCtrl | Description$ As long as you control another multicolored permanent, CARDNAME gets +1/+1 and has first strike.
+SVar:BuffedBy:Permanent.MultiColor
+Oracle:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.

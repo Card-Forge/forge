@@ -1,0 +1,6 @@
+Name:Scuzzback Scrapper
+ManaCost:RG
+Types:Creature Goblin Warrior
+PT:1/1
+K:Wither
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)

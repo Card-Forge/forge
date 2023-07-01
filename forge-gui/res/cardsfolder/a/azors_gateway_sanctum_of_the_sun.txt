@@ -1,0 +1,25 @@
+Name:Azor's Gateway
+ManaCost:2
+Types:Legendary Artifact
+A:AB$ Draw | Cost$ 1 T | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with CARDNAME, you gain 5 life, untap CARDNAME, and transform it.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | Mandatory$ True | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | SubAbility$ DBUntap | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
+SVar:DBUntap:DB$ Untap | Defined$ Self | SubAbility$ DBTransform | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$DifferentCMC
+AlternateMode:DoubleFaced
+Oracle:{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
+
+ALTERNATE
+
+Name:Sanctum of the Sun
+ManaCost:no cost
+Colors:colorless
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is your life total.
+SVar:X:Count$YourLifeTotal
+Oracle:(Transforms from Azor's Gateway.)\n{T}: Add X mana of any one color, where X is your life total.

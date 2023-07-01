@@ -1,0 +1,7 @@
+Name:Seraph of Dawn
+ManaCost:2 W W
+Types:Creature Angel
+PT:2/4
+K:Flying
+K:Lifelink
+Oracle:Flying, lifelink

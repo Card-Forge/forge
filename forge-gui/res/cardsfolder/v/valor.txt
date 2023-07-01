@@ -1,0 +1,8 @@
+Name:Valor
+ManaCost:3 W
+Types:Creature Incarnation
+PT:2/2
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ First Strike | IsPresent$ Plains.YouCtrl | Description$ As long as CARDNAME is in your graveyard and you control a Plains, creatures you control have first strike.
+SVar:DiscardMe:2
+Oracle:First strike\nAs long as Valor is in your graveyard and you control a Plains, creatures you control have first strike.

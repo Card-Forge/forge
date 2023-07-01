@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Wishmaster 1
+Title=The Wishmaster
+Difficulty=easy
+Description=UBR djinn and non-creature spell theme deck
+Icon=Wishmaster 1.jpg
+Deck Type=constructed
+[Main]
+2 Boon of the Wish-Giver
+1 Burning Wish
+1 Cormela, Glamour Thief
+3 Countersquall
+4 Crumbling Necropolis
+4 Crypt of the Eternals
+1 Cunning Wish
+1 Djinn Illuminatus
+1 Djinn of Infinite Deceits
+1 Djinn of Wishes
+1 Emberwilde Captain
+2 Fledgling Djinn
+5 Island
+3 Izzet Charm
+1 Juzam Djinn
+1 Maelstrom Muse
+2 Mistfire Adept
+5 Mountain
+3 Obelisk of Grixis
+2 Ojutai's Summons
+2 Old Man of the Sea
+2 Silumgar's Command
+2 Skywise Teachings
+2 Sprite Dragon
+1 Stratus Dancer
+4 Swamp
+2 Turn // Burn
+1 Wishclaw Talisman
+[Sideboard]
+1 Cerebral Eruption
+3 Eradicate
+2 Flame Wave
+3 Ionize
+2 Malevolent Whispers
+3 Slave of Bolas
+1 Spinal Embrace

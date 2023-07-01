@@ -1,0 +1,9 @@
+Name:Loch Dragon
+ManaCost:U/R U/R U/R U/R
+Types:Creature Dragon
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may discard a card. If you do, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+Oracle:Flying\nWhenever Loch Dragon enters the battlefield or attacks, you may discard a card. If you do, draw a card.

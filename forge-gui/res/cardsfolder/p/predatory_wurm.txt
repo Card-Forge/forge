@@ -1,0 +1,8 @@
+Name:Predatory Wurm
+ManaCost:3 G
+Types:Creature Wurm
+PT:4/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Planeswalker.Garruk+YouCtrl | Description$ CARDNAME gets +2/+2 as long as you control a Garruk planeswalker.
+DeckNeeds:Type$Garruk
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nPredatory Wurm gets +2/+2 as long as you control a Garruk planeswalker.

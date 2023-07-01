@@ -1,0 +1,6 @@
+Name:Elfhame Palace
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+Oracle:Elfhame Palace enters the battlefield tapped.\n{T}: Add {G} or {W}.

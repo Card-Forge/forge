@@ -1,0 +1,22 @@
+Name:Kruin Outlaw
+ManaCost:1 R R
+Types:Creature Human Rogue Werewolf
+PT:2/2
+K:First Strike
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:First strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Kruin Outlaw.
+
+ALTERNATE
+
+Name:Terror of Kruin Pass
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/3
+K:Double Strike
+S:Mode$ Continuous | Affected$ Werewolf.YouCtrl | AddKeyword$ Menace | Description$ Werewolves you control has menace.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:Double strike\nWerewolves you control have menace. (They can't be blocked except by two or more creatures.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.

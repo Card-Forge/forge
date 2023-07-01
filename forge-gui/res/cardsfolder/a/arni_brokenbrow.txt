@@ -1,0 +1,9 @@
+Name:Arni Brokenbrow
+ManaCost:2 R
+Types:Legendary Creature Human Berserker
+PT:3/3
+K:Haste
+A:AB$ Animate | Cost$ 1 | Power$ Y | Boast$ True | StackDescription$ SpellDescription | SpellDescription$ You may change CARDNAME's base power to 1 plus the greatest power among other creatures you control until end of turn.
+SVar:Y:SVar$X/Plus.1
+SVar:X:Count$Valid Creature.Other+YouCtrl$GreatestPower
+Oracle:Haste\nBoast — {1}: You may change Arni Brokenbrow's base power to 1 plus the greatest power among other creatures you control until end of turn. (Activate only if this creature attacked this turn and only once each turn.)

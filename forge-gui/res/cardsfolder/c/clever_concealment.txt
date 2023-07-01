@@ -1,0 +1,7 @@
+Name:Clever Concealment
+ManaCost:2 W W
+Types:Instant
+K:Convoke
+A:SP$ Phases | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select any number of target nonland permanents you control | TargetMin$ 0 | TargetMax$ MaxTgts | SpellDescription$ Any number of target nonland permanents you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)
+SVar:MaxTgts:Count$Valid Permanent.nonLand+YouCtrl
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAny number of target nonland permanents you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)

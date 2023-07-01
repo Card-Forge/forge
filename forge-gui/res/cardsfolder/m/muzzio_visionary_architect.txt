@@ -1,0 +1,7 @@
+Name:Muzzio, Visionary Architect
+ManaCost:1 U U
+Types:Legendary Creature Human Artificer
+PT:1/3
+A:AB$ Dig | Cost$ 3 U T | DigNum$ X | Optional$ True | ChangeValid$ Artifact | DestinationZone$ Battlefield | AILogic$ AtOppEOT | SpellDescription$ Look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may put an artifact card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+Oracle:{3}{U}, {T}: Look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may put an artifact card from among them onto the battlefield. Put the rest on the bottom of your library in any order.

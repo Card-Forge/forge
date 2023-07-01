@@ -1,0 +1,6 @@
+Name:Fang of Shigeki
+ManaCost:G
+Types:Enchantment Creature Snake Ninja
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch

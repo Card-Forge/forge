@@ -1,0 +1,8 @@
+Name:Skullclamp
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ -1 | Description$ Equipped creature gets +1/-1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature dies, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+Oracle:Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}

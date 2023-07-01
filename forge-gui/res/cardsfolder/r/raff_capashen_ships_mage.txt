@@ -1,0 +1,9 @@
+Name:Raff Capashen, Ship's Mage
+ManaCost:2 W U
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Flash
+K:Flying
+S:Mode$ CastWithFlash | ValidCard$ Card.Historic | ValidSA$ Spell | Caster$ You | Description$ You may cast historic spells as though they had flash. (Artifacts, legendaries, and Sagas are historic.)
+SVar:NonStackingEffect:True
+Oracle:Flash\nFlying\nYou may cast historic spells as though they had flash. (Artifacts, legendaries, and Sagas are historic.)

@@ -1,0 +1,8 @@
+Name:Dragon's Herald
+ManaCost:R
+Types:Creature Goblin Shaman
+PT:1/1
+A:AB$ ChangeZone | Cost$ 2 R T Sac<1/Creature.Black> Sac<1/Creature.Red> Sac<1/Creature.Green> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedHellkite Overlord | ChangeNum$ 1 | CostDesc$ {2}{R}, {T}, Sacrifice a black creature, a red creature, and a green creature: | SpellDescription$ Search your library for a card named Hellkite Overlord, put it onto the battlefield, then shuffle.
+DeckNeeds:Name$Hellkite Overlord
+DeckHints:Color$Black|Green
+Oracle:{2}{R}, {T}, Sacrifice a black creature, a red creature, and a green creature: Search your library for a card named Hellkite Overlord, put it onto the battlefield, then shuffle.

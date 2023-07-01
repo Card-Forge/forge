@@ -1,0 +1,7 @@
+Name:Altac Bloodseeker
+ManaCost:1 R
+Types:Creature Human Berserker
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature an opponent controls dies, CARDNAME gets +2/+0 and gains first strike and haste until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ First Strike & Haste
+Oracle:Whenever a creature an opponent controls dies, Altac Bloodseeker gets +2/+0 and gains first strike and haste until end of turn. (It deals combat damage before creatures without first strike, and it can attack and {T} as soon as it comes under your control.)

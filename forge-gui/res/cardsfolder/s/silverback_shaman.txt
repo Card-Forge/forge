@@ -1,0 +1,9 @@
+Name:Silverback Shaman
+ManaCost:3 G G
+Types:Creature Ape Shaman
+PT:5/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:SacMe:1
+Oracle:Trample\nWhen Silverback Shaman dies, draw a card.

@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Foul Spirit
+OpponentName=Foul Spirits
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Foul Spirit
+Title=Foul Spirits
+Difficulty=easy
+Description=That's the spirit!\n-LSV
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+36 Foul Spirit|PO2
+24 Swamp|PO2|1

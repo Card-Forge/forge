@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Breath of Death
+Title=Breath of Death
+Difficulty=medium
+Description="Nothing can stop the power of life--not even death."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Angel of Mercy|PO2
+4 Archangel|PO2
+4 Breath of Life|PO2
+4 Brutal Nightstalker|PO2
+4 Cruel Edict|PO2
+4 Hidden Horror|PO2
+4 Just Fate|PO2
+12 Plains|PO2|3
+4 Predatory Nightstalker|PO2
+4 Steam Catapult|PO2
+12 Swamp|PO2|3

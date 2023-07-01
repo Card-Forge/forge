@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Levelers' Scorn
+Description=This deck contains may spells that can clear a path for your powerful levelers, creatures that grow to power over time. And just for fun, throw down Sphinx of Magosi, a 6/6 flier, designed to rain terror upon your hapless opponent. 
+Deck Type=constructed
+Set=ROE
+Image=levelers_scorn.jpg
+[main]
+1 Coral Merfolk|M10
+1 Domestication|ROE
+1 Doom Blade|M10
+1 Echo Mage|ROE
+1 Enatu Golem|ROE
+1 Fleeting Distraction|ROE
+1 Hada Spy Patrol|ROE
+11 Island|ROE
+2 Last Kiss|ROE
+1 Negate|M10
+1 Phantasmal Abomination|ROE
+1 Phantom Warrior|M10
+1 Sea Gate Oracle|ROE
+1 See Beyond|ROE
+2 Skywatcher Adept|ROE
+1 Snapping Drake|M10
+1 Sphinx of Magosi+|ROE
+7 Swamp|ROE
+1 Telepathy|M10
+1 Unsummon|M10
+1 Venerated Teacher|ROE
+1 Wall of Bone|M10
+1 Zombie Goliath|M10
+[sideboard]

@@ -1,0 +1,5 @@
+Name:Dutiful Servants
+ManaCost:3 W
+Types:Creature Zombie
+PT:2/5
+Oracle:

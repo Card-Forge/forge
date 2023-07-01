@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Brute Force
+Description=Wreak havoc with a ground assault that features powerful multikicker spells, which deliver bigger effects the more mana you spend on them. Watch your opponent's despair when Wolfbriar Elemental joins the fray and brings along its own army.
+Deck Type=constructed
+Set=WWK
+Image=brute_force.jpg
+
+[main]
+10  Forest|ZEN
+7  Mountain|ZEN
+1  Terramorphic Expanse|M10
+
+2  Borderland Ranger|M10
+1  Deathforge Shaman|WWK
+1  Giant Spider|M10
+2  Gnarlid Pack|WWK
+1  Goblin Roughrider|WWK
+1  Grappler Spider|WWK
+1  Greenweaver Druid|ZEN
+1  Leatherback Baloth|WWK
+1  Skitter of Lizards|WWK
+1  Terastodon|WWK
+1  Wolfbriar Elemental+|WWK
+
+1  Act of Treason|M10
+1  Canopy Cover|WWK
+2  Giant Growth|M10
+2  Lightning Bolt|M10
+1  Overrun|M10
+1  Rumbling Aftershocks|WWK
+2  Vastwood Zendikon|WWK
+
+[sideboard]

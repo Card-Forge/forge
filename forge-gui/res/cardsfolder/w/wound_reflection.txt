@@ -1,0 +1,8 @@
+Name:Wound Reflection
+ManaCost:5 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ RepeatOpps | TriggerDescription$ At the beginning of each end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
+SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
+SVar:X:PlayerCountRemembered$LifeLostThisTurn
+Oracle:At the beginning of each end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)

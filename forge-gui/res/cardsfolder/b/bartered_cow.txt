@@ -1,0 +1,11 @@
+Name:Bartered Cow
+ManaCost:3 W
+Types:Creature Ox
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies or when you discard it, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ Discarded | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or when you discard it, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:SacMe:1
+SVar:DiscardMe:3
+DeckHas:Ability$Token|LifeGain|Food
+Oracle:When Bartered Cow dies or when you discard it, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

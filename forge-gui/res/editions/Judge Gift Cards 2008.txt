@@ -1,0 +1,13 @@
+[metadata]
+Code=G08
+Date=2008-01-01
+Name=Judge Gift Cards 2008
+Type=Promo
+ScryfallCode=G08
+
+[cards]
+1 R Orim's Chant @Chippy
+2 R Mind's Desire @Anthony Francisco
+3 R Demonic Tutor @Daarken
+4 R Goblin Piledriver @Dave Kendall
+5 R Living Wish @Hideaki Takamura

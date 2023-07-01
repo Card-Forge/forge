@@ -1,0 +1,6 @@
+Name:Commander's Insignia
+ManaCost:2 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.
+SVar:X:Count$TotalCommanderCastFromCommandZone
+Oracle:Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.

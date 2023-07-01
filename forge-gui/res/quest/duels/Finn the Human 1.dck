@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Finn the Human 1
+Title=Finn the Human
+Difficulty=easy
+Description=RG Heroic deck
+Icon=Finn the Human.jpg
+Deck Type=constructed
+[main]
+7 Forest
+9 Mountain
+4 Rootbound Crag
+2 Kazandu Refuge
+1 Akroan Crusader
+2 Akroan Line Breaker
+2 Arena Athlete
+2 Centaur Battlemaster
+1 Labyrinth Champion
+2 Pheres-Band Thunderhoof
+4 Satyr Hoplite
+3 Setessan Oathsworn
+2 Staunch-Hearted Warrior
+1 Eternal Warrior
+1 Forced Adaptation
+1 Frog Tongue
+1 Imposing Visage
+1 Mark of Fury
+1 One with Nature
+1 Reflexes
+1 Vineweft
+1 Web
+1 Goblin War Paint
+1 Treetop Bracers
+1 Fencer's Magemark
+1 Galvanic Arc
+1 Lightning Talons
+1 Oakenform
+1 Savage Silhouette
+2 Pit Fight
+1 Naturalize
+[sideboard]

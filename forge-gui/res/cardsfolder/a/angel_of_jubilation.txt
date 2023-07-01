@@ -1,0 +1,10 @@
+Name:Angel of Jubilation
+ManaCost:1 W W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.nonBlack+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other nonblack creatures you control get +1/+1.
+S:Mode$ CantPayLife | ValidPlayer$ Player | ValidCause$ Spell,Activated | ForCost$ True | Description$ Players can't pay life or sacrifice creatures to cast spells or activate abilities.
+S:Mode$ CantSacrifice | ValidCard$ Creature | ValidCause$ Spell,Activated | ForCost$ True | Secondary$ True | Description$ Players can't pay life or sacrifice creatures to cast spells or activate abilities.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther nonblack creatures you control get +1/+1.\nPlayers can't pay life or sacrifice creatures to cast spells or activate abilities.

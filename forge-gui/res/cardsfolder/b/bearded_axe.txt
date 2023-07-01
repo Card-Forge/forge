@@ -1,0 +1,8 @@
+Name:Bearded Axe
+ManaCost:2 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Dwarf, Equipment, and/or Vehicle you control.
+K:Equip:2
+SVar:X:Count$Valid Dwarf.YouCtrl,Equipment.YouCtrl,Vehicle.YouCtrl
+DeckHints:Type$Dwarf|Equipment|Vehicle
+Oracle:Equipped creature gets +1/+1 for each Dwarf, Equipment, and/or Vehicle you control.\nEquip {2}

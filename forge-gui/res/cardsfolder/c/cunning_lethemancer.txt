@@ -1,0 +1,7 @@
+Name:Cunning Lethemancer
+ManaCost:2 B
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
+Oracle:At the beginning of your upkeep, each player discards a card.

@@ -1,0 +1,8 @@
+Name:Bloodshot Cyclops
+ManaCost:5 R
+Types:Creature Cyclops Giant
+PT:4/4
+A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed creature's power to any target.

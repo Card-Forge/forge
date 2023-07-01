@@ -1,0 +1,6 @@
+Name:Myr Enforcer
+ManaCost:7
+Types:Artifact Creature Myr
+PT:4/4
+K:Affinity:Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)

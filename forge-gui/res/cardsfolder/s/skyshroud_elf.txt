@@ -1,0 +1,8 @@
+Name:Skyshroud Elf
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ 1 | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {G}.\n{1}: Add {R} or {W}.

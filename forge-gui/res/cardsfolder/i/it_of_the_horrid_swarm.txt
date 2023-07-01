@@ -1,0 +1,8 @@
+Name:It of the Horrid Swarm
+ManaCost:8
+Types:Creature Eldrazi Insect
+PT:4/4
+K:Emerge:6 G
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create two 1/1 green Insect creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_insect | TokenOwner$ You
+Oracle:Emerge {6}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, create two 1/1 green Insect creature tokens.

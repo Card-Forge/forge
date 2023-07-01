@@ -1,0 +1,6 @@
+Name:Tainted Sigil
+ManaCost:1 W B
+Types:Artifact
+A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)
+SVar:X:PlayerCountPlayers$LifeLostThisTurn
+Oracle:{T}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)

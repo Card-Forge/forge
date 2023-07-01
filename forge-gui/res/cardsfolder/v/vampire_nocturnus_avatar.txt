@@ -1,0 +1,7 @@
+Name:Vampire Nocturnus Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/-2
+S:Mode$ Continuous | EffectZone$ Command | GameStage$ Play | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.Black+YouCtrl | AddPower$ 2 | AddToughness$ 1 | TopCardOfLibraryIs$ Card.Black | Description$ As long as the top card of your library is black, black creatures you control get +2/+1.
+Oracle:Hand -1, life -2\nPlay with the top card of your library revealed.\nAs long as the top card of your library is black, black creatures you control get +2/+1.

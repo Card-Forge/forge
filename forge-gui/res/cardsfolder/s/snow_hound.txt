@@ -1,0 +1,7 @@
+Name:Snow Hound
+ManaCost:2 W
+Types:Creature Dog
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 T | ThisDefinedAndTgts$ Self | ValidTgts$ Creature.Blue+YouCtrl,Creature.Green+YouCtrl | TgtPrompt$ Select target blue or green creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME and target green or blue creature you control to their owner's hand.
+AI:RemoveDeck:Random
+Oracle:{1}, {T}: Return Snow Hound and target green or blue creature you control to their owner's hand.

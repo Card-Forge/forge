@@ -1,0 +1,7 @@
+Name:Troubled Healer
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:1/2
+A:AB$ PreventDamage | Cost$ Sac<1/Land> | ValidTgts$ Any | TgtPrompt$ Select target any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target permanent or player this turn.
+AI:RemoveDeck:All
+Oracle:Sacrifice a land: Prevent the next 2 damage that would be dealt to any target this turn.

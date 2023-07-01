@@ -1,0 +1,7 @@
+Name:Eidolon of Obstruction
+ManaCost:1 W
+Types:Enchantment Creature Spirit
+PT:2/1
+K:First Strike
+S:Mode$ RaiseCost | ValidCard$ Planeswalker.OppCtrl | ValidSpell$ Activated.Loyalty | Amount$ 1 | Description$ Loyalty abilities of planeswalkers your opponents control cost {1} more to activate.
+Oracle:First strike\nLoyalty abilities of planeswalkers your opponents control cost {1} more to activate.

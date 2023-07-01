@@ -1,0 +1,6 @@
+Name:Phyrexian Digester
+ManaCost:3
+Types:Artifact Creature Phyrexian Construct
+PT:2/1
+K:Infect
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

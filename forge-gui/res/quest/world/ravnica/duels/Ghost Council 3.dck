@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ghost Council 3
+Title=Ghost Council 3
+Icon=Ghost Council.jpg
+Difficulty=hard
+Description=Whether it's heaven or hell, those who believe can live forever
+Deck Type=constructed
+[main]
+2 Angel of Despair|COM
+2 Basilica Guards|GTC
+3 Condemn|M11
+2 Crypt Ghast|GTC
+1 Deathpact Angel|GTC
+2 Debtors' Knell|GPT
+1 Dimir House Guard|RAV
+4 Godless Shrine|GTC
+4 High Priest of Penance|GTC
+3 Last Gasp|RAV
+2 Merciless Eviction|GTC
+4 Mortify|COM
+2 Obzedat, Ghost Council|GTC
+2 Order of the Stars|GPT
+4 Orzhov Guildgate|GTC
+8 Plains|RTR
+1 Skeletal Vampire|GPT
+2 Stinkweed Imp|RAV
+8 Swamp|RTR
+3 Underworld Connections|RTR
+[sideboard]
+[planes]
+[schemes]

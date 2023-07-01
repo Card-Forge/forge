@@ -1,0 +1,8 @@
+Name:Bosh, Iron Golem Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-2
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ X Sac<1/Artifact.cmcEQX/artifact with mana value X> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:Hand +0, life -2\n{X}, Sacrifice an artifact with mana value X: Bosh, Iron Golem Avatar deals X damage to any target.

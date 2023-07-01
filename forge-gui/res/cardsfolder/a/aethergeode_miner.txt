@@ -1,0 +1,10 @@
+Name:Aethergeode Miner
+ManaCost:1 W
+Types:Creature Dwarf Scout
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME attacks, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ ChangeZone | Cost$ PayEnergy<2> | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True | SpellDescription$ Exile CARDNAME, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Aethergeode Miner attacks, you get {E}{E} (two energy counters).\nPay {E}{E}: Exile Aethergeode Miner, then return it to the battlefield under its owner's control.

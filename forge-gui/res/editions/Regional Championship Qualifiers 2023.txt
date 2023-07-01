@@ -1,0 +1,11 @@
+[metadata]
+Code=PR23
+Date=2023-01-01
+Name=Regional Championship Qualifiers 2023
+Type=Promo
+ScryfallCode=PR23
+
+[cards]
+1 R Mystical Dispute @Brigitte Roka
+2 M Snapcaster Mage @Jack Hughes
+3 R Thing in the Ice @Brandi Milne

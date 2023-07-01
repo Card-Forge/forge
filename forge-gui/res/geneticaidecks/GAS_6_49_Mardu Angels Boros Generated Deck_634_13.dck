@@ -1,0 +1,27 @@
+[metadata]
+Name=GAS_6_49_Mardu Angels Boros Generated Deck_634_13
+[Main]
+1 Ajani, Adversary of Tyrants|M19
+4 Angel of Grace|RNA
+2 Aurelia, Exemplar of Justice|GRN
+4 Gideon's Reproach|DOM
+4 History of Benalia|DOM
+3 Ixalan's Binding|XLN
+4 Legion's Landing|XLN
+4 Lyra Dawnbringer|DOM
+2 Plains|DOM|3
+2 Plains|DOM|4
+5 Plains|GRN
+2 Plains|M19|4
+6 Plains|RNA
+1 Plains|WAR|1
+3 Plains|WAR|2
+1 Plains|XLN|1
+1 Plains|XLN|2
+3 Resplendent Angel|M19
+4 Shalai, Voice of Plenty|DOM
+4 Tocatli Honor Guard|XLN
+[Sideboard]
+4 Howling Golem|GNT
+4 Karn, Scion of Urza|DOM
+4 Truefire Captain|GRN

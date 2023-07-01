@@ -1,0 +1,5 @@
+Name:Ancient Den
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:{T}: Add {W}.

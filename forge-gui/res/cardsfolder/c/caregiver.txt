@@ -1,0 +1,7 @@
+Name:Caregiver
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ PreventDamage | Cost$ W Sac<1/Creature> | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+AI:RemoveDeck:All
+Oracle:{W}, Sacrifice a creature: Prevent the next 1 damage that would be dealt to any target this turn.

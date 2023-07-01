@@ -1,0 +1,6 @@
+Name:Vivid Flying Fish
+ManaCost:1 U
+Types:Creature Fish Lizard
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's attacking.
+Oracle:Vivid Flying Fish has flying as long as it's attacking. (It can't be blocked except by creatures with flying or reach.)

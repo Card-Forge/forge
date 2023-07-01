@@ -1,0 +1,8 @@
+Name:Rite of Consumption
+ManaCost:1 B
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target player or planeswalker. You gain life equal to the damage dealt this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | StackDescription$ You gain life equal to the damage dealt this way.
+SVar:X:Sacrificed$CardPower
+SVar:Y:Count$TotalDamageDoneByThisTurn
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nRite of Consumption deals damage equal to the sacrificed creature's power to target player or planeswalker. You gain life equal to the damage dealt this way.

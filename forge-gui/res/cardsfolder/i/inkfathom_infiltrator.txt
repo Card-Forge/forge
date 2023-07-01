@@ -1,0 +1,7 @@
+Name:Inkfathom Infiltrator
+ManaCost:UB UB
+Types:Creature Merfolk Rogue
+PT:2/1
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self
+Oracle:Inkfathom Infiltrator can't block and can't be blocked.

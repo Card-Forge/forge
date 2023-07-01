@@ -1,0 +1,7 @@
+Name:Starved Rusalka
+ManaCost:G
+Types:Creature Spirit
+PT:1/1
+A:AB$ GainLife | Cost$ G Sac<1/Creature> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+AI:RemoveDeck:Random
+Oracle:{G}, Sacrifice a creature: You gain 1 life.

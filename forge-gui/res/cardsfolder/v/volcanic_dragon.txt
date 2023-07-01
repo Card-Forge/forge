@@ -1,0 +1,7 @@
+Name:Volcanic Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+Oracle:Flying, haste

@@ -1,0 +1,9 @@
+Name:Murgish Cemetery
+ManaCost:4 B B
+Types:Enchantment
+A:AB$ ChooseNumber | Cost$ 3 B Discard<1/Card> | Min$ 2 | Max$ 6 | Defined$ You | Random$ True | SubAbility$ DBToken | SpellDescription$ Create an X/X black Zombie creature token, where X is a number from 2 to 6 chosen at random.
+SVar:DBToken:DB$ Token | TokenScript$ b_x_x_zombie | TokenPower$ X | TokenToughness$ X
+SVar:X:Count$Random.2.6
+DeckHas:Ability$Token|Discard
+DeckHints:Type$Zombie
+Oracle:{3}{B}, Discard a card: Create an X/X black Zombie creature token, where X is a number from 2 to 6 chosen at random.

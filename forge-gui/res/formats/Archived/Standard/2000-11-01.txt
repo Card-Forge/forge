@@ -1,0 +1,6 @@
+[format]
+Name:Standard (INV)
+Type:Archived
+Subtype:Standard
+Effective:2000-11-01
+Sets:6ED, MMQ, NMS, PCY, INV

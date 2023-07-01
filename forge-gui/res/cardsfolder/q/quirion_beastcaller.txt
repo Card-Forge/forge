@@ -1,0 +1,12 @@
+Name:Quirion Beastcaller
+ManaCost:1 G
+Types:Creature Dryad Warrior
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Creature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigCounterDist | TriggerDescription$ When CARDNAME dies, distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on CARDNAME.
+SVar:TrigCounterDist:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose any number of creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ X | DividedAsYouChoose$ X | TargetMin$ 0 | TargetMax$ X
+SVar:X:TriggeredCard$CardCounters.P1P1
+SVar:BuffedBy:Creature
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a creature spell, put a +1/+1 counter on Quirion Beastcaller.\nWhen Quirion Beastcaller dies, distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on Quirion Beastcaller.

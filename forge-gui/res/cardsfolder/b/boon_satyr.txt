@@ -1,0 +1,8 @@
+Name:Boon Satyr
+ManaCost:1 G G
+Types:Enchantment Creature Satyr
+PT:4/2
+K:Bestow:3 G G
+K:Flash
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Enchanted creature gets +4/+2.
+Oracle:Flash\nBestow {3}{G}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nEnchanted creature gets +4/+2.

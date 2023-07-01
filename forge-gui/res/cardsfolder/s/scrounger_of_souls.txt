@@ -1,0 +1,6 @@
+Name:Scrounger of Souls
+ManaCost:4 B
+Types:Creature Horror
+PT:3/4
+K:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

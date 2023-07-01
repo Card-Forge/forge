@@ -1,0 +1,10 @@
+Name:Darksteel Reactor
+ManaCost:4
+Types:Artifact
+K:Indestructible
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GEX_CHARGE+YouCtrl | PresentCompare$ GE1 | Execute$ TrigWinGame | TriggerDescription$ When CARDNAME has twenty or more charge counters on it, you win the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1 | Defined$ Self
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You
+SVar:X:Number$20
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\nAt the beginning of your upkeep, you may put a charge counter on Darksteel Reactor.\nWhen Darksteel Reactor has twenty or more charge counters on it, you win the game.

@@ -1,0 +1,9 @@
+Name:Malakir Soothsayer
+ManaCost:4 B
+Types:Creature Vampire Shaman Ally
+PT:4/4
+A:AB$ Draw | Cost$ T tapXType<1/Ally> | NumCards$ 1 | PrecostDesc$ Cohort — | SpellDescription$ You draw a card and you lose 1 life. | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+AI:RemoveDeck:All
+DeckHints:Type$Ally
+Oracle:Cohort — {T}, Tap an untapped Ally you control: You draw a card and you lose 1 life.

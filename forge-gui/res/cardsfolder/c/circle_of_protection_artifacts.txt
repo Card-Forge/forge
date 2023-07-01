@@ -1,0 +1,10 @@
+Name:Circle of Protection: Artifacts
+ManaCost:1 W
+Types:Enchantment
+A:AB$ ChooseSource | Cost$ 2 | Choices$ Artifact | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict+Artifact | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen artifact source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:NonStackingEffect:True
+Oracle:{2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.

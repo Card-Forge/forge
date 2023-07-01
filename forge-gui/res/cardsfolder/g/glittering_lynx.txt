@@ -1,0 +1,7 @@
+Name:Glittering Lynx
+ManaCost:W
+Types:Creature Cat
+PT:1/1
+K:Prevent all damage that would be dealt to CARDNAME.
+A:AB$ Debuff | Cost$ 2 | Defined$ Self | Keywords$ Prevent all damage that would be dealt to CARDNAME. | Activator$ Player | SpellDescription$ Until end of turn, CARDNAME loses "Prevent all damage that would be dealt to CARDNAME." Any player may activate this ability.
+Oracle:Prevent all damage that would be dealt to Glittering Lynx.\n{2}: Until end of turn, Glittering Lynx loses "Prevent all damage that would be dealt to Glittering Lynx." Any player may activate this ability.

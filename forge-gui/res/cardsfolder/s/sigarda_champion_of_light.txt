@@ -1,0 +1,12 @@
+Name:Sigarda, Champion of Light
+ManaCost:1 G W W
+Types:Legendary Creature Angel
+PT:4/4
+K:Flying
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Humans you control get +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigDig | TriggerDescription$ Coven — Whenever NICKNAME attacks, if you control three or more creatures with different powers, look at the top five cards of your library. You may reveal a Human creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.Human
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+DeckNeeds:Type$Human
+Oracle:Flying, trample\nHumans you control get +1/+1\nCoven — Whenever Sigarda attacks, if you control three or more creatures with different powers, look at the top five cards of your library. You may reveal a Human creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

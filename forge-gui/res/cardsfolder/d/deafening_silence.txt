@@ -1,0 +1,7 @@
+Name:Deafening Silence
+ManaCost:W
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one noncreature spell each turn.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Each player can't cast more than one noncreature spell each turn.

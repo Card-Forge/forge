@@ -1,0 +1,12 @@
+[metadata]
+Code=PHTR
+Date=2017-09-20
+Name=2016 Heroes of the Realm
+Alias=HTR
+Type=Funny
+ScryfallCode=PHTR
+
+[cards]
+1 M Chandra, Gremlin Wrangler @Kari Christensen
+2 M Dungeon Master @Mike Burns
+3 M Nira, Hellkite Duelist @Yoichi Ito

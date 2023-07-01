@@ -1,0 +1,7 @@
+Name:Razorfoot Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+K:First Strike
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

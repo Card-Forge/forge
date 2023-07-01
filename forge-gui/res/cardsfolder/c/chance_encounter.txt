@@ -1,0 +1,10 @@
+Name:Chance Encounter
+ManaCost:2 R R
+Types:Enchantment
+T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you win a coin flip, put a luck counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ LUCK | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE10_LUCK | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has ten or more luck counters on it, you win the game.
+SVar:TrigWin:DB$ WinsGame | Defined$ You
+SVar:PlayMain1:ALWAYS
+AI:RemoveDeck:Random
+Oracle:Whenever you win a coin flip, put a luck counter on Chance Encounter.\nAt the beginning of your upkeep, if Chance Encounter has ten or more luck counters on it, you win the game.

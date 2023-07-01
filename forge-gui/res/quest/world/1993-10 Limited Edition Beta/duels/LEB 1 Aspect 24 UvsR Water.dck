@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 24 UvR Water
+Title=Aspect of Water
+Difficulty=easy
+Description=Unpredictable as the sea itself, Water Elementals shift without warning from tranquility to tempest. Capricious and fickle, they flow restlessly from one shape to another, expressing their moods with their physical forms.
+Icon=Aspect of Water.jpg
+Deck Type=constructed
+[Main]
+2 Blue Elemental Blast|LEB
+2 Crystal Rod|LEB
+2 Drain Power|LEB
+24 Island|LEB|2
+4 Lord of Atlantis|LEB
+3 Mana Short|LEB
+4 Merfolk of the Pearl Trident|LEB
+4 Pirate Ship|LEB
+3 Power Sink|LEB
+4 Sea Serpent|LEB
+4 Wall of Water|LEB
+4 Water Elemental|LEB

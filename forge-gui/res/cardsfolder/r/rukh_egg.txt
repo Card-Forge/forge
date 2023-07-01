@@ -1,0 +1,11 @@
+Name:Rukh Egg
+ManaCost:3 R
+Types:Creature Bird Egg
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DelTrigLeaves | TriggerDescription$ When CARDNAME dies, create a 4/4 red Bird creature token with flying at the beginning of the next end step.
+SVar:DelTrigLeaves:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | TriggerDescription$ Create a 4/4 red Bird creature token with flying at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_4_4_bird_flying | TokenAmount$ 1
+SVar:SacMe:4
+DeckHas:Ability$Token
+DeckHints:Ability$Sacrifice
+Oracle:When Rukh Egg dies, create a 4/4 red Bird creature token with flying at the beginning of the next end step.

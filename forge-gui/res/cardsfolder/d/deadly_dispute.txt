@@ -1,0 +1,7 @@
+Name:Deadly Dispute
+ManaCost:1 B
+Types:Instant
+A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | NumCards$ 2 | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Draw two cards and create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

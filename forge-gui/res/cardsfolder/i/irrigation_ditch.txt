@@ -1,0 +1,8 @@
+Name:Irrigation Ditch
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G U | SpellDescription$ Add {G}{U}.
+AI:RemoveDeck:All
+Oracle:Irrigation Ditch enters the battlefield tapped.\n{T}: Add {W}.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U}.

@@ -1,0 +1,8 @@
+Name:Kurgadon
+ManaCost:4 G
+Types:Creature Beast
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE6 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a creature spell with mana value 6 or more, put three +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
+SVar:BuffedBy:Creature.cmcGE6
+Oracle:Whenever you cast a creature spell with mana value 6 or greater, put three +1/+1 counters on Kurgadon.

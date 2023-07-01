@@ -1,0 +1,8 @@
+Name:Reckoner's Bargain
+ManaCost:1 B
+Types:Instant
+A:SP$ GainLife | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain life equal to the sacrificed permanent's mana value. Draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$LifeGain
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nYou gain life equal to the sacrificed permanent's mana value. Draw two cards.

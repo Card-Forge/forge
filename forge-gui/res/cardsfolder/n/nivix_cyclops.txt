@@ -1,0 +1,12 @@
+Name:Nivix Cyclops
+ManaCost:1 U R
+Types:Creature Cyclops
+PT:1/4
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.
+SVar:TrigPump:DB$ Pump | NumAtt$ +3 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CanAttack | Duration$ UntilHostLeavesPlayOrEOT
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Defender\nWhenever you cast an instant or sorcery spell, Nivix Cyclops gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.

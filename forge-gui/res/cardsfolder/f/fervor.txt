@@ -1,0 +1,8 @@
+Name:Fervor
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+SVar:BuffedBy:Creature
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have haste. (They can attack and {T} as soon as they come under your control.)

@@ -1,0 +1,7 @@
+Name:Kyren Sniper
+ManaCost:2 R
+Types:Creature Goblin
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME deal 1 damage to target player or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+Oracle:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player or planeswalker.

@@ -1,0 +1,10 @@
+Name:Baneslayer Angel
+ManaCost:3 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+K:First Strike
+K:Lifelink
+K:Protection from Demons
+K:Protection from Dragons
+Oracle:Flying, first strike, lifelink, protection from Demons and from Dragons

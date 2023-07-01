@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Wurmfire
+Title=Wurmfire
+Difficulty=medium
+Description=Fire is always at the top of the food chain, and it has a big appetite.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brimstone Dragon|PO2
+4 Deathcoil Wurm|PO2
+4 Earthquake|PO2
+12 Forest|PO2|1
+4 Magma Giant|PO2
+12 Mountain|PO2|3
+4 Nature's Lore|PO2
+4 Norwood Priestess|PO2
+4 Plated Wurm|PO2
+4 Untamed Wilds|PO2
+4 Wildfire|PO2

@@ -1,0 +1,10 @@
+Name:Merrow Reejerey
+ManaCost:2 U
+Types:Creature Merfolk Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk creatures you control get +1/+1.
+T:Mode$ SpellCast | ValidCard$ Merfolk | ValidActivatingPlayer$ You | Execute$ TrigTapOrUntap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Merfolk spell, you may tap or untap target permanent.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Merfolk
+Oracle:Other Merfolk creatures you control get +1/+1.\nWhenever you cast a Merfolk spell, you may tap or untap target permanent.

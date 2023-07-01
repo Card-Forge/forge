@@ -1,0 +1,6 @@
+Name:Tanglesap
+ManaCost:1 G
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn by creatures without trample.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.withoutTrample | Description$ Prevent all combat damage that would be dealt this turn by creatures without trample.
+Oracle:Prevent all combat damage that would be dealt this turn by creatures without trample.

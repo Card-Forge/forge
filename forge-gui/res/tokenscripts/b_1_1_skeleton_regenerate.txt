@@ -1,0 +1,7 @@
+Name:Skeleton Token
+ManaCost:no cost
+Colors:black
+Types:Creature Skeleton
+PT:1/1
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate this creature.
+Oracle:{B}: Regenerate this creature.

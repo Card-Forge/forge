@@ -1,0 +1,7 @@
+Name:Abjure
+ManaCost:U
+Types:Instant
+A:SP$ Counter | Cost$ U Sac<1/Permanent.Blue/blue permanent> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:NeedsToPlay:Permanent.Blue+cmcLE2+YouCtrl
+AI:RemoveDeck:Random
+Oracle:As an additional cost to cast this spell, sacrifice a blue permanent.\nCounter target spell.

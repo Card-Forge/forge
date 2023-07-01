@@ -1,0 +1,11 @@
+Name:Teferi, Timeless Voyager
+ManaCost:4 U U
+Types:Legendary Planeswalker Teferi
+Loyalty:4
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SpellDescription$ Draw a card.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
+A:AB$ Phases | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | AllValid$ Creature.TargetedPlayerCtrl | RememberValids$ True | SubAbility$ DBEffect | SpellDescription$ Each creature target opponent controls phases out.
+SVar:DBEffect:DB$ Effect | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | StaticAbilities$ CantPhaseIn | SubAbility$ DBCleanup | SpellDescription$ Until the end of your next turn, they can't phase in. (Treat them and anything attached to them as though they don't exist.)
+SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | Description$ Until the end of your next turn, they can't phase in. (Treat them and anything attached to them as though they don't exist.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:[+1]: Draw a card.\n[-3]: Put target creature on top of its owner's library.\n[-8]: Each creature target opponent controls phases out. Until the end of your next turn, they can't phase in. (Treat them and anything attached to them as though they don't exist.)

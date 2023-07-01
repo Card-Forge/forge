@@ -1,0 +1,8 @@
+[format]
+Name:Vintage (WWK)
+Type:Archived
+Subtype:Vintage
+Effective:2010-02-05
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, POR, WTH, TMP, STH, EXO, PO2, USG, ATH, ULG, 6ED, UDS, S99, PTK, MMQ, BRB, NMS, S00, PCY, BTD, INV, PLS, 7ED, APC, ODY, DKM, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E, MED, LRW, DD1, MOR, SHM, EVE, DRB, ME2, ALA, DD2, CFX, DDC, ARB, M10, TD0, FVE, HOP, ME3, ZEN, DDD, PDS, WWK
+Restricted:Ancestral Recall; Balance; Black Lotus; Brainstorm; Burning Wish; Channel; Demonic Consultation; Demonic Tutor; Fact or Fiction; Fastbond; Flash; Frantic Search; Gifts Ungiven; Gush; Imperial Seal; Library of Alexandria; Lion's Eye Diamond; Lotus Petal; Mana Crypt; Mana Vault; Memory Jar; Merchant Scroll; Mind's Desire; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Mystical Tutor; Necropotence; Ponder; Regrowth; Sol Ring; Strip Mine; Thirst for Knowledge; Time Vault; Time Walk; Timetwister; Tinker; Tolarian Academy; Trinisphere; Vampiric Tutor; Wheel of Fortune; Windfall; Yawgmoth's Bargain; Yawgmoth's Will
+Banned:Amulet of Quoz; Bronze Tablet; Chaos Orb; Contract from Below; Darkpact; Demonic Attorney; Falling Star; Jeweled Bird; Rebirth; Shahrazad; Tempest Efreet; Timmerian Fiends

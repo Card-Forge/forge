@@ -1,0 +1,8 @@
+Name:Lieutenant Kirtar
+ManaCost:1 W W
+Types:Legendary Creature Bird Soldier
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
+AI:RemoveDeck:All
+Oracle:Flying\n{1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.

@@ -1,0 +1,6 @@
+Name:Watercourser
+ManaCost:2 U
+Types:Creature Elemental
+PT:2/3
+A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:{U}: Watercourser gets +1/-1 until end of turn.

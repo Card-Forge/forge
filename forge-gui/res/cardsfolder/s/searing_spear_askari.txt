@@ -1,0 +1,8 @@
+Name:Searing Spear Askari
+ManaCost:2 R
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ Menace | SpellDescription$ CARDNAME gains menace until end of turn.
+AI:RemoveDeck:All
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{R}: Searing Spear Askari gains menace until end of turn. (It can't be blocked except by two or more creatures.)

@@ -1,0 +1,11 @@
+Name:Military Discipline
+ManaCost:W
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ First Strike
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nEnchant creature\nWhen Military Discipline enters the battlefield, enchanted creature gains first strike until end of turn.\nEnchanted creature gets +1/+0.

@@ -1,0 +1,10 @@
+Name:Nymris, Oona's Trickster
+ManaCost:3 U B
+Types:Legendary Creature Faerie Knight
+PT:1/6
+K:Flash
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | ActivatorThisTurnCast$ EQ1 | Execute$ TrigDig | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard
+DeckHas:Ability$Graveyard
+Oracle:Flash\nFlying\nWhenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.

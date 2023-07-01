@@ -1,0 +1,9 @@
+Name:Kami of Industry
+ManaCost:4 R
+Types:Creature Spirit
+PT:3/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl+cmcLE3 | TgtPrompt$ Select target artifact card with mana value 3 or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent | AtEOT$ Sacrifice
+DeckHints:Type$Artifact
+Oracle:When Kami of Industry enters the battlefield, return target artifact card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step.

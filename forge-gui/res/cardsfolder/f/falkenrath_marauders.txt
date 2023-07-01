@@ -1,0 +1,9 @@
+Name:Falkenrath Marauders
+ManaCost:3 R R
+Types:Creature Vampire Warrior
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put two +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Flying, haste\nWhenever Falkenrath Marauders deals combat damage to a player, put two +1/+1 counters on it.

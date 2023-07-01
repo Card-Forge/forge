@@ -1,0 +1,8 @@
+Name:Dimir House Guard
+ManaCost:3 B
+Types:Creature Skeleton
+PT:2/3
+K:Fear
+A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+K:Transmute:1 B B
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSacrifice a creature: Regenerate Dimir House Guard.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

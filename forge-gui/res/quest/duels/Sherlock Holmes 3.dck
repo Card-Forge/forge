@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes 3
+Title=Sherlock Holmes
+Difficulty=hard
+Description=Mono G deck with Primalcrux, Bellowing Tanglewurm and lots of green creatures
+Icon=Sherlock Holmes.jpg
+Deck Type=constructed
+[main]
+22 Forest|M12
+1 Mox Emerald
+2 Bellowing Tanglewurm
+1 Champion of Lambholt
+1 Cloudthresher
+1 Crushing Vines
+1 Fyndhorn Elves
+2 Garruk's Companion
+2 Kalonian Tusker
+1 Strangleroot Geist
+1 Kaysa
+1 Khalni Hydra
+1 Kodama of the North Tree
+2 Llanowar Elves
+4 Leatherback Baloth
+1 Meng Huo, Barbarian King
+3 Nettle Sentinel
+1 Obstinate Baloth
+3 Primalcrux
+1 Silvos, Rogue Elemental
+1 Terra Stomper
+1 Thrun, the Last Troll
+1 Troll Ascetic
+1 Vorapede
+1 Wickerbough Elder
+1 Wolfir Avenger
+1 Yeva, Nature's Herald
+1 Nature's Claim
+[sideboard]

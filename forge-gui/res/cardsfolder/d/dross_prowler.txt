@@ -1,0 +1,6 @@
+Name:Dross Prowler
+ManaCost:2 B
+Types:Creature Zombie
+PT:2/1
+K:Fear
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)

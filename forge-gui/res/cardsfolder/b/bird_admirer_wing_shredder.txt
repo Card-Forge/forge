@@ -1,0 +1,19 @@
+Name:Bird Admirer
+ManaCost:2 G
+Types:Creature Human Archer Werewolf
+PT:1/4
+K:Reach
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Reach\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Wing Shredder
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:3/5
+K:Reach
+K:Nightbound
+Oracle:Reach\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

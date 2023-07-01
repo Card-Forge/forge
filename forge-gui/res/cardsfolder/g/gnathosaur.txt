@@ -1,0 +1,7 @@
+Name:Gnathosaur
+ManaCost:4 R R
+Types:Creature Dinosaur
+PT:5/4
+A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+AI:RemoveDeck:All
+Oracle:Sacrifice an artifact: Gnathosaur gains trample until end of turn.

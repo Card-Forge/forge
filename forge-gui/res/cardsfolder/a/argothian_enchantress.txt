@@ -1,0 +1,10 @@
+Name:Argothian Enchantress
+ManaCost:1 G
+Types:Creature Human Druid
+PT:0/1
+K:Shroud
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+DeckNeeds:Type$Enchantment
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nWhenever you cast an enchantment spell, draw a card.

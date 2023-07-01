@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Enlightened Mastery
+Description=This deck is full of tricks, embodying the draconic aspect of cunning. Your spells with the rebound mechanic bounce back to be cast a second time, allowing you to augment your creatures again and again. Make your enemies think twice before confronting you!
+Deck Type=constructed
+Set=DTK
+Image=enlightened_mastery.jpg
+[Main]
+1 Dragon's Eye Sentry|DTK
+3 Elusive Spellfist|DTK
+1 Orator of Ojutai|DTK
+2 Updraft Elemental|DTK
+2 Zephyr Scribe|DTK
+2 Student of Ojutai|DTK
+1 Ancient Carp|DTK
+2 Strongarm Monk|DTK
+2 Cunning Breezedancer|DTK
+1 Pristine Skywise+|DTK
+1 Myth Realized|DTK
+2 Anticipate|DTK
+2 Artful Maneuver|DTK
+2 Silkwrap|DTK
+1 Ojutai Monument|DTK
+2 Ojutai's Breath|DTK
+1 Mystic Meditation|DTK
+1 Sight Beyond Sight|DTK
+1 Skywise Teachings|DTK
+1 Taigam's Strike|DTK
+1 Great Teacher's Decree|DTK
+1 Void Squall|DTK
+2 Ojutai's Summons|DTK
+1 Evolving Wilds|DTK
+13 Island|DTK
+11 Plains|DTK

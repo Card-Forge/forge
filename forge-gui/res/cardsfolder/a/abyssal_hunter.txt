@@ -1,0 +1,9 @@
+Name:Abyssal Hunter
+ManaCost:3 B
+Types:Creature Human Assassin
+PT:1/1
+A:AB$ DealDamage | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBTap | SpellDescription$ Tap target creature. CARDNAME deals damage equal to CARDNAME's power to that creature.
+SVar:DBTap:DB$ Tap | Defined$ Targeted
+SVar:X:Count$CardPower
+SVar:NonCombatPriority:4
+Oracle:{B}, {T}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.

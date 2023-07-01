@@ -1,0 +1,7 @@
+Name:Juggernaut
+ManaCost:4
+Types:Artifact Creature Juggernaut
+PT:5/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Wall | Description$ CARDNAME can't be blocked by Walls.
+Oracle:Juggernaut attacks each combat if able.\nJuggernaut can't be blocked by Walls.

@@ -1,0 +1,9 @@
+Name:Noble Quarry
+ManaCost:2 G
+Types:Enchantment Creature Unicorn
+PT:1/1
+K:Bestow:5 G
+K:All creatures able to block CARDNAME do so.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Bestow {5}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nAll creatures able to block Noble Quarry or enchanted creature do so.\nEnchanted creature gets +1/+1.

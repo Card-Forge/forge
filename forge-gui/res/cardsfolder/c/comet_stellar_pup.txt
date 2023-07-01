@@ -1,0 +1,18 @@
+Name:Comet, Stellar Pup
+ManaCost:2 R W
+Types:Legendary Planeswalker Comet
+Loyalty:5
+A:AB$ RollDice | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ResultSubAbilities$ 1-2:Token,3:Unearth,4-5:Damage,6:CometGo | SpellDescription$ Roll a six-sided die.
+SVar:Token:DB$ PutCounter | CounterType$ LOYALTY | CounterNum$ 2 | SubAbility$ DBToken | SpellDescription$ 1 or 2 – [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | PumpKeywords$ Haste | PumpDuration$ EOT
+SVar:Unearth:DB$ RemoveCounter | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ DBChangeZone | SpellDescription$ 3 – [-1], then return a card with mana value 2 or less from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Card.YouOwn+cmcLE2 | ChangeDescription$ Choose a card with mana value 2 or less | Hidden$ True
+SVar:Damage:DB$ DealDamage | NumDmg$ X | CardChoices$ Creature | PlayerChoices$ Player | SubAbility$ DBRemoveCounters | SpellDescription$ 4 or 5 – CARDNAME deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].
+SVar:X:Count$CardCounters.LOYALTY
+SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ LOYALTY | CounterNum$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CometGo:DB$ PutCounter | CounterType$ LOYALTY | SubAbility$ DBEffect | SpellDescription$ 6 – [+1], and you may activate CARDNAME's loyalty ability two more times this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ LoyaltyAbs | RememberObjects$ Self | ExileOnMoved$ Battlefield
+SVar:LoyaltyAbs:Mode$ NumLoyaltyAct | ValidCard$ Card.EffectSource | Additional$ 2 | OnlySourceAbs$ True | Description$ You may activate EFFECTSOURCE's loyalty ability two more times this turn.
+DeckHas:Ability$Token|Graveyard & Type$Squirrel
+Oracle:[0]: Roll a six-sided die.\n1 or 2 — [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.\n3 — [-1], then return a card with mana value 2 or less from your graveyard to your hand.\n4 or 5 — Comet, Stellar Pup deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].\n6 — [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.

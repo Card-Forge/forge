@@ -1,0 +1,6 @@
+Name:Stormbind
+ManaCost:1 R G
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 2 Discard<1/Random> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:NonStackingEffect:True
+Oracle:{2}, Discard a card at random: Stormbind deals 2 damage to any target.

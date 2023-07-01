@@ -1,0 +1,9 @@
+Name:Angelic Observer
+ManaCost:5 W
+Types:Creature Angel Advisor
+PT:3/3
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Citizen you control.
+SVar:X:Count$TypeYouCtrl.Citizen
+DeckHints:Type$Citizen
+Oracle:This spell costs {1} less to cast for each Citizen you control.\nFlying

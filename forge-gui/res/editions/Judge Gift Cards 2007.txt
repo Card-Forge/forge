@@ -1,0 +1,13 @@
+[metadata]
+Code=G07
+Date=2007-01-01
+Name=Judge Gift Cards 2007
+Type=Promo
+ScryfallCode=G07
+
+[cards]
+1 R Ravenous Baloth @Todd Lockwood
+2 R Cunning Wish @Zoltan Boros & Gabor Szikszai
+3 R Yawgmoth's Will @Ron Spencer
+4 R Vindicate @Mark Zug
+5 R Decree of Justice @Alan Pollack

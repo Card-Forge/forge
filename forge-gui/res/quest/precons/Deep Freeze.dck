@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deep Freeze
+Description=On the shadow plane of Rath, the flying ship Weatherlight encounters chilling new forces of magic. "Deep Freeze" uses new Tempest cards to set up your opponent's permanents, then lock them down. When you want to be cold and calculating, bring out the "Deep Freeze."
+Deck Type=constructed
+Set=TMP
+Image=deep_freeze.jpg
+[main]
+1 Emmessi Tome|TMP
+1 Puppet Strings|TMP
+3 Counterspell|TMP
+2 Dismiss|TMP
+1 Dream Cache|TMP
+2 Gaseous Form|TMP
+2 Horned Turtle|TMP
+1 Legacy's Allure|TMP
+2 Power Sink|TMP
+1 Precognition|TMP
+1 Spell Blast|TMP
+1 Time Ebb|TMP
+2 Wind Drake|TMP
+1 Anoint|TMP
+1 Avenging Angel|TMP
+1 Cloudchaser Eagle|TMP
+1 Disenchant|TMP
+1 Invulnerability|TMP
+1 Knight of Dawn|TMP
+2 Master Decoy|TMP
+3 Pacifism|TMP
+2 Repentance|TMP
+2 Soltari Lancer|TMP
+1 Sky Spirit|TMP
+13 Island|TMP
+11 Plains|TMP
+[sideboard]

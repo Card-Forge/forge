@@ -1,0 +1,10 @@
+Name:Research Thief
+ManaCost:4 U
+Types:Artifact Creature Moonfolk Wizard
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Artifact.Creature+YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact creature you control deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHints:Type$Artifact
+Oracle:Flash\nFlying\nWhenever an artifact creature you control deals combat damage to a player, draw a card.

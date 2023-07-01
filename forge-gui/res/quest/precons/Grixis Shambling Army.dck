@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grixis Shambling Army
+Description=You've chosen a deck based around the plane of Grixis, a world of death naturally suited to destroying its enemies. Your unstoppable undead minions lurch back from the grave, slashing away at your foe's life total. Your spells slay your opponent's defenders on the spot. And if that doesn't do it, then a duo of enormous flying horrors will finish off any enemy planeswalker.
+Deck Type=constructed
+Set=CFX
+Image=grixis_shambling_army.jpg
+[main]
+2 Absorb Vis|CFX
+1 Agony Warp|ALA
+1 Blood Tyrant+|CFX
+1 Bone Saw|CFX
+1 Brackwater Elemental|CFX
+2 Crumbling Necropolis|ALA
+1 Dregscape Zombie|ALA
+1 Elder Mastery|CFX
+1 Extractor Demon|CFX
+1 Fire-Field Ogre|ALA
+2 Grixis Slavedriver|CFX
+1 Infest|ALA
+3 Island|ALA|4
+2 Kathari Screecher|ALA
+1 Kederekt Creeper|ALA
+3 Mountain|ALA|1
+1 Pestilent Kathari|CFX
+2 Sedraxis Alchemist|CFX
+2 Shock|10E
+4 Swamp|ALA|2
+3 Swamp|ALA|3
+2 Terramorphic Expanse|10E
+1 Terror|10E
+2 Zombie Outlander|CFX
+[sideboard]

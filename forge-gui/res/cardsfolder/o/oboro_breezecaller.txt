@@ -1,0 +1,8 @@
+Name:Oboro Breezecaller
+ManaCost:1 U
+Types:Creature Moonfolk Wizard
+PT:1/1
+K:Flying
+A:AB$ Untap | Cost$ 2 Return<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
+AI:RemoveDeck:All
+Oracle:Flying\n{2}, Return a land you control to its owner's hand: Untap target land.

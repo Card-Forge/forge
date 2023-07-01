@@ -1,0 +1,5 @@
+Name:Ice Tunnel
+ManaCost:no cost
+Types:Snow Land Island Swamp
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {U} or {B}.)\nIce Tunnel enters the battlefield tapped.

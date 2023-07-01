@@ -1,0 +1,7 @@
+Name:Riot Piker
+ManaCost:1 R
+Types:Creature Goblin Berserker
+PT:2/1
+K:First Strike
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:First strike\nRiot Piker attacks each combat if able.

@@ -1,0 +1,7 @@
+Name:Psychogenic Probe
+ManaCost:2
+Types:Artifact
+T:Mode$ Shuffled | ValidPlayer$ Player | ShuffleFromEffect$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a spell or ability causes a player to shuffle their library, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+AI:RemoveDeck:Random
+Oracle:Whenever a spell or ability causes a player to shuffle their library, Psychogenic Probe deals 2 damage to that player.

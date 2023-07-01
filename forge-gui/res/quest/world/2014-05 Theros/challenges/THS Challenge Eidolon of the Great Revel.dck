@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Eidolon of the Great Revel
+OpponentName=The Eidolons
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Eidolon of the Great Revel
+Title=The Great Revel
+Difficulty=medium
+Description=Xenagos reveled while Theros burned.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+40 Eidolon of the Great Revel|JOU
+20 Mountain|THS|4

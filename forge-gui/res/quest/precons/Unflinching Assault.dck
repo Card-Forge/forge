@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Unflinching Assault
+Description=Marshal your armies on the battlefield, then use the bolster mechanic to enhance your creatures and hold your ground. Pressure your opponent with continuous offense, and demonstrate your supremacy in the art of war.
+Deck Type=constructed
+Set=FRF
+Image=unflinching_assault.jpg
+[main]
+2 Abzan Skycaptain|FRF
+2 Aven Skirmisher|FRF
+1 Battle Brawler|FRF
+1 Chief of the Edge|KTK
+1 Chief of the Scale|KTK
+1 Cruel Sadist|M15
+2 Debilitating Injury|KTK
+1 Diplomacy of the Wastes|FRF
+1 Dragonscale General+|FRF
+1 Elite Scaleguard|FRF
+1 Gravedigger|M15
+2 Harsh Sustenance|FRF
+2 Honor's Reward|FRF
+1 Hooded Assassin|FRF
+2 Mardu Hateblade|KTK
+1 Merciless Executioner|FRF
+3 Oreskos Swiftclaw|M15
+8 Plains|FRF|1
+5 Plains|FRF|2
+2 Raiders' Spoils|KTK
+1 Razorfoot Griffin|M15
+1 Rush of Battle|KTK
+1 Sandblast|FRF
+2 Sandsteppe Outcast|FRF
+3 Scoured Barrens|FRF
+5 Swamp|FRF|1
+4 Swamp|FRF|2
+1 Take Up Arms|KTK
+1 Throttle|KTK
+1 Unyielding Krumar|KTK

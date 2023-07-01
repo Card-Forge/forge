@@ -1,0 +1,8 @@
+Name:Slate Street Ruffian
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredDefendingPlayer | NumCards$ 1 | Mode$ TgtChoose
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Slate Street Ruffian becomes blocked, defending player discards a card.

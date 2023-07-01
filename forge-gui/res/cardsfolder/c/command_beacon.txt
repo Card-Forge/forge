@@ -1,0 +1,8 @@
+Name:Command Beacon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card.IsCommander+YouOwn | SelectPrompt$ Select a commander | ChangeNum$ 1 | Mandatory$ True | Origin$ Command | Destination$ Hand | Hidden$ True | SpellDescription$ Put your commander into your hand from the command zone.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Command Beacon: Put your commander into your hand from the command zone.

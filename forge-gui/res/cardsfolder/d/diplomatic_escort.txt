@@ -1,0 +1,6 @@
+Name:Diplomatic Escort
+ManaCost:1 U
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ Counter | Cost$ U T Discard<1/Card> | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | TargetValidTargeting$ Creature.inRealZoneBattlefield | SpellDescription$ Counter target spell or ability that targets a creature.
+Oracle:{U}, {T}, Discard a card: Counter target spell or ability that targets a creature.

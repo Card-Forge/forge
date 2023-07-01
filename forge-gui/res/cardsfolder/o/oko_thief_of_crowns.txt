@@ -1,0 +1,10 @@
+Name:Oko, Thief of Crowns
+ManaCost:1 G U
+Types:Legendary Planeswalker Oko
+Loyalty:4
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 3 | Toughness$ 3 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Creature,Elk | RemoveCreatureTypes$ True | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ Target artifact or creature loses all abilities and becomes a green Elk creature with base power and toughness 3/3.
+A:AB$ Pump | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | AITgts$ Artifact.YouCtrl+cmcLE1 | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Choose target artifact or creature you control | SubAbility$ OkoExchange | SpellDescription$ Exchange control of target artifact or creature you control and target creature an opponent controls with power 3 or less.
+SVar:OkoExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl+powerLE3 | TgtPrompt$ Choose target creature an opponent controls with power 3 or less
+DeckHas:Ability$Token|LifeGain|Food
+Oracle:[+2]: Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n[+1]: Target artifact or creature loses all abilities and becomes a green Elk creature with base power and toughness 3/3.\n[-5]: Exchange control of target artifact or creature you control and target creature an opponent controls with power 3 or less.

@@ -1,0 +1,6 @@
+Name:Yamabushi's Flame
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Yamabushi's Flame deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.

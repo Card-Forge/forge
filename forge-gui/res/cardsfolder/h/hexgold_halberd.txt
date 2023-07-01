@@ -1,0 +1,8 @@
+Name:Hexgold Halberd
+ManaCost:1 R
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike & Trample | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creature has first strike and trample.
+K:Equip:2 R
+DeckHas:Type$Rebel & Ability$Token
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)As long as it's your turn, equipped creature has first strike and trample.\nEquip {2}{R}

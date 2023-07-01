@@ -1,0 +1,14 @@
+Name:Currency Converter
+ManaCost:1
+Types:Artifact
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever you discard a card, you may exile that card from your graveyard.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+A:AB$ ChangeZone | Cost$ T | Mandatory$ True | Hidden$ True | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.ExiledWithSource | ChangeTypeDesc$ card exiled with CARDNAME | ChangeNum$ 1 | Imprint$ True | SubAbility$ DBTreasure | SpellDescription$ Put a card exiled with CARDNAME into your graveyard.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionDefined$ Imprinted | ConditionPresent$ Land | SubAbility$ DBRogue | SpellDescription$ If it's a land card, create a Treasure token.
+SVar:DBRogue:DB$ Token | TokenScript$ b_2_2_rogue | ConditionDefined$ Imprinted | ConditionPresent$ Card.nonLand | SubAbility$ DBUnimprint | SpellDescription$ If it's a nonland card, create a 2/2 black Rogue creature token.
+SVar:DBUnimprint:DB$ Cleanup | ClearImprinted$ True
+DeckHas:Ability$Discard|Token|Sacrifice & Type$Treasure|Rogue
+DeckHints:Ability$Discard
+Oracle:Whenever you discard a card, you may exile that card from your graveyard.\n{2}, {T}: Draw a card, then discard a card.\n{T}: Put a card exiled with Currency Converter into your graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token.

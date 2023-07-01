@@ -1,0 +1,6 @@
+Name:Goblin Deathraiders
+ManaCost:B R
+Types:Creature Goblin Warrior
+PT:3/1
+K:Trample
+Oracle:Trample

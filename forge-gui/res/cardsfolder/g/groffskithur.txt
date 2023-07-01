@@ -1,0 +1,8 @@
+Name:Groffskithur
+ManaCost:5 G
+Types:Creature Beast
+PT:3/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When CARDNAME becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidCard$ Card.namedGroffskithur | ChangeNum$ 1
+DeckHints:Name$Groffskithur
+Oracle:Whenever Groffskithur becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.

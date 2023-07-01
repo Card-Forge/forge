@@ -1,0 +1,8 @@
+Name:Rot Wolf
+ManaCost:2 G
+Types:Creature Phyrexian Wolf
+PT:2/2
+K:Infect
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever a creature dealt damage by Rot Wolf this turn dies, you may draw a card.

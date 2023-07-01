@@ -1,0 +1,8 @@
+Name:Union of the Third Path
+ManaCost:2 W
+Types:Instant
+A:SP$ Draw | SubAbility$ DBGainLife | SpellDescription$ Draw a card, then you gain life equal to the number of cards in your hand.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$CardsInYourHand
+DeckHas:Ability$LifeGain
+Oracle:Draw a card, then you gain life equal to the number of cards in your hand.

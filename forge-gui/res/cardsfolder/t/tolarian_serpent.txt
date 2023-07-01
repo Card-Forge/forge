@@ -1,0 +1,8 @@
+Name:Tolarian Serpent
+ManaCost:5 U U
+Types:Creature Serpent
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill seven cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 7
+DeckHints:Ability$Graveyard
+Oracle:At the beginning of your upkeep, mill seven cards.

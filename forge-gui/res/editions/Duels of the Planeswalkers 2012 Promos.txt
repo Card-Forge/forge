@@ -1,0 +1,11 @@
+[metadata]
+Code=PDP12
+Date=2011-01-01
+Name=Duels of the Planeswalkers 2012 Promos
+Type=Promo
+ScryfallCode=PDP12
+
+[cards]
+1 M Frost Titan @Mike Sass
+2 M Grave Titan @Lucas Graciano
+3 M Inferno Titan @Sam Burley

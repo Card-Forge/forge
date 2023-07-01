@@ -1,0 +1,6 @@
+Name:Gemstone Array
+ManaCost:4
+Types:Artifact
+A:AB$ PutCounter | Cost$ 2 | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
+A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{2}: Put a charge counter on Gemstone Array.\nRemove a charge counter from Gemstone Array: Add one mana of any color.

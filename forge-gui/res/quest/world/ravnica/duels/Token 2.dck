@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Token 2
+Title=Token
+Icon=Token.jpg
+Difficulty=medium
+Description=Tokens'r'us
+Deck Type=constructed
+[main]
+4 Birds of Paradise|RAV
+4 Call of the Conclave|RTR
+2 Collective Blessing|RTR
+4 Fists of Ironwood|RAV
+7 Forest|RTR
+4 Glare of Subdual|RAV
+2 Hour of Reckoning|RAV
+4 Leyline of the Meek|GPT
+7 Plains|RTR
+4 Scatter the Seeds|RAV
+4 Seed Spark|RAV
+4 Selesnya Charm|RTR
+4 Selesnya Guildgate|RTR
+4 Temple Garden|RTR
+2 Vitu-Ghazi, the City-Tree|RAV
+[sideboard]
+[planes]
+[schemes]

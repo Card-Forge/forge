@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Bridge Troll 3
+Title=Bridge Troll
+Difficulty=hard
+Description=Mono B Quest for the Nihil Stone deck with The Rack and Bottomless Pit
+Icon=Bridge Troll.jpg
+Deck Type=constructed
+[main]
+2 Go for the Throat|MBS
+1 Chainer's Edict|TOR
+3 Null Brooch|EXO
+3 Ravenous Rats|10E
+2 Executioner's Capsule|ALA
+4 Quicksand|WWK
+1 Liliana Vess|M11
+3 The Rack|TSB
+1 Stupor|TSB
+3 Will-o'-the-Wisp
+1 Disfigure|ZEN
+1 Doom Blade|M11
+4 Ensnaring Bridge|8ED
+19 Swamp|MBS
+4 Bottomless Pit|STH
+1 Hymn to Tourach|FEM
+2 Inquisition of Kozilek|ROE
+1 Grasp of Darkness|SOM
+1 Guiltfeeder|JUD
+3 Quest for the Nihil Stone|WWK
+[sideboard]

@@ -1,0 +1,6 @@
+[format]
+Name:Shadows over Innistrad Block
+Type:Archived
+Subtype:Block
+Order:114
+Sets:EMN, SOI

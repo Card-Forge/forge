@@ -1,0 +1,10 @@
+Name:Tenth District Legionnaire
+ManaCost:R W
+Types:Creature Human Soldier
+PT:2/2
+K:Haste
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, put a +1/+1 counter on CARDNAME, then scry 1.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever you cast a spell that targets Tenth District Legionnaire, put a +1/+1 counter on Tenth District Legionnaire, then scry 1.

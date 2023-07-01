@@ -1,0 +1,10 @@
+Name:Slimefoot, the Stowaway
+ManaCost:1 B G
+Types:Legendary Creature Fungus
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Saproling.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a Saproling you control dies, CARDNAME deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Token | Cost$ 4 | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+DeckHas:Ability$Token
+Oracle:Whenever a Saproling you control dies, Slimefoot, the Stowaway deals 1 damage to each opponent and you gain 1 life.\n{4}: Create a 1/1 green Saproling creature token.

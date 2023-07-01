@@ -1,0 +1,7 @@
+Name:Zurgo Bellstriker
+ManaCost:R
+Types:Legendary Creature Orc Warrior
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or greater.
+K:Dash:1 R
+Oracle:Zurgo Bellstriker can't block creatures with power 2 or greater.\nDash {1}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

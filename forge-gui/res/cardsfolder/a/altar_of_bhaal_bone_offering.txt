@@ -1,0 +1,16 @@
+Name:Altar of Bhaal
+ManaCost:1 B
+Types:Artifact
+AlternateMode:Adventure
+A:AB$ ChangeZone | Cost$ 2 B T Exile<1/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
+AI:RemoveDeck:Random
+Oracle:{2}{B}, {T}, Exile a creature you control: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Bone Offering
+ManaCost:2 B
+Types:Sorcery Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_4_1_skeleton_menace | TokenTapped$ True | TokenOwner$ You | SpellDescription$ Create a tapped 4/1 black Skeleton creature token with menace.
+DeckHas:Ability$Token & Type$Skeleton
+Oracle:Create a tapped 4/1 black Skeleton creature token with menace.

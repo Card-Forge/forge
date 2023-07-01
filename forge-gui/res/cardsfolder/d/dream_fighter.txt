@@ -1,0 +1,10 @@
+Name:Dream Fighter
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPhaseAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME and that creature phase out.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigPhaseBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME and that creature phase out.
+SVar:TrigPhaseAttacker:DB$ Phases | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBPhaseSelf
+SVar:TrigPhaseBlocker:DB$ Phases | Defined$ TriggeredBlockerLKICopy | SubAbility$ DBPhaseSelf
+SVar:DBPhaseSelf:DB$ Phases | Defined$ Self
+Oracle:Whenever Dream Fighter blocks or becomes blocked by a creature, Dream Fighter and that creature phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)

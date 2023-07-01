@@ -1,0 +1,10 @@
+Name:Grove of the Dreampods
+ManaCost:no cost
+Types:Plane Fabacin
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ DreampodsDig | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DreampodsDig | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:DreampodsDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target creature card from your graveyard to the battlefield.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3
+Oracle:When you planeswalk to Grove of the Dreampods or at the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\nWhenever chaos ensues, return target creature card from your graveyard to the battlefield.

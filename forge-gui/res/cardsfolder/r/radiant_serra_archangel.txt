@@ -1,0 +1,10 @@
+Name:Radiant, Serra Archangel
+ManaCost:6 W
+Types:Legendary Creature Angel
+PT:6/4
+K:Flying
+K:Partner
+A:AB$ Protection | Cost$ tapXType<1/Creature.withFlying+Other/creature you control with flying> | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
+SVar:BuffedBy:Creature.withFlying
+DeckNeeds:Keyword$Flying
+Oracle:Flying\nTap another untapped creature you control with flying: Radiant, Serra Archangel gains protection from the color of your choice until end of turn.\nPartner (You can have two commanders if both have partner.)

@@ -1,0 +1,8 @@
+Name:Elvish Soultiller
+ManaCost:3 G G
+Types:Creature Elf Mutant
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME dies, choose a creature type. Shuffle all creature cards of that type from your graveyard into your library.
+SVar:TrigChoose:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerGraveyard | SubAbility$ ShuffleInto
+SVar:ShuffleInto:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+Oracle:When Elvish Soultiller dies, choose a creature type. Shuffle all creature cards of that type from your graveyard into your library.

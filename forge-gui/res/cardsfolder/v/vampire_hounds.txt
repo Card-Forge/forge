@@ -1,0 +1,7 @@
+Name:Vampire Hounds
+ManaCost:2 B
+Types:Creature Vampire Dog
+PT:2/2
+A:AB$ Pump | Cost$ Discard<1/Creature> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+SVar:AIPreference:DiscardCost$Card
+Oracle:Discard a creature card: Vampire Hounds gets +2/+2 until end of turn.

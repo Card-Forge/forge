@@ -1,0 +1,9 @@
+[format]
+Name:Type 1 (CHR)
+Type:Archived
+Subtype:Vintage
+Effective:1995-07-01
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, PHPR, FEM, 4ED, ICE, CHR
+RestrictedLegendary:true
+Restricted:Ali from Cairo; Ancestral Recall; Balance; Berserk; Black Lotus; Braingeyser; Candelabra of Tawnos; Channel; Chaos Orb; Copy Artifact; Demonic Tutor; Falling Star; Feldon's Cane; Fork; Ivory Tower; Library of Alexandria; Maze of Ith; Mind Twist; Mirror Universe; Mishra's Workshop; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Recall; Regrowth; Sol Ring; Sword of the Ages; Time Walk; Timetwister; Underworld Dreams; Wheel of Fortune
+Banned:Amulet of Quoz; Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Divine Intervention; Jeweled Bird; Rebirth; Shahrazad; Tempest Efreet; Time Vault

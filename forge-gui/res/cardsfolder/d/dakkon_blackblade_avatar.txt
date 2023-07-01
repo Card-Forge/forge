@@ -1,0 +1,8 @@
+Name:Dakkon Blackblade Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+0
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Hand | Affected$ Card.nonColorless+YouOwn | AddAbility$ STPlayLand | Description$ You may play any colored card from your hand as a copy of a basic land card chosen at random that can produce mana of one of the card's colors.
+SVar:STPlayLand:ST$ PlayLandVariant | Cost$ 0 | Clone$ BasicLand | SorcerySpeed$ True | ActivationZone$ Hand | SpellDescription$ Play CARDNAME from your hand as a copy of a basic land card chosen at random that can produce mana of one of CARDNAME's colors.
+AI:RemoveDeck:All
+Oracle:Hand +1, life +0\nYou may play any colored card from your hand as a copy of a basic land card chosen at random that can produce mana of one of the card's colors.

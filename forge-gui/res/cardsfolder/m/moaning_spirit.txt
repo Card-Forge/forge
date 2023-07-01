@@ -1,0 +1,6 @@
+Name:Moaning Spirit
+ManaCost:2 B
+Types:Creature Spirit
+PT:2/1
+K:Flying
+Oracle:Flying

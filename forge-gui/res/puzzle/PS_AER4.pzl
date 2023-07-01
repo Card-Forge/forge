@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt #04
+URL:https://i.redd.it/hkzpmj7d9doy.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+humancounters=ENERGY=3
+AILife=13
+humanhand=Highspire Infusion;Chandra's Pyrohelix;Hungry Flames;Dark Salvation;Press into Service
+humanbattlefield=Mountain;Mountain;Forest;Aether Hub;Servant of the Conduit;Aethertorch Renegade;Druid of the Cowl;Zada, Hedron Grinder
+aibattlefield=t:Dragon,P:5,T:5,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying,Image:r_5_5_dragon_wwk;Mirrorwing Dragon;Dragonmaster Outcast;Dragonmaster Outcast

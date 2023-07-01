@@ -1,0 +1,10 @@
+Name:Cunning Survivor
+ManaCost:1 U
+Types:Creature Human Warrior
+PT:1/3
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, CARDNAME gets +1/+0 until end of turn and can't be blocked this turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHints:Ability$Discard
+Oracle:Whenever you cycle or discard a card, Cunning Survivor gets +1/+0 until end of turn and can't be blocked this turn.

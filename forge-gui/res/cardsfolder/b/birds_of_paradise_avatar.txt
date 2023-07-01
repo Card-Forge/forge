@@ -1,0 +1,7 @@
+Name:Birds of Paradise Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-3
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Hand +0, life -3\nLands you control have "{T}: Add one mana of any color."

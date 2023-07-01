@@ -1,0 +1,8 @@
+Name:Biovisionary
+ManaCost:1 G U
+Types:Creature Human Wizard
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedBiovisionary | PresentCompare$ GE4 | Execute$ TrigWinGame | TriggerDescription$ At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You
+DeckNeeds:Name$Biovisionary
+Oracle:At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.

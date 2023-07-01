@@ -1,0 +1,11 @@
+Name:Anje's Ravager
+ManaCost:2 R
+Types:Creature Vampire Berserker
+PT:3/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, discard your hand, then draw three cards.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+K:Madness:1 R
+DeckHints:Ability$Discard
+Oracle:Anje's Ravager attacks each combat if able.\nWhenever Anje's Ravager attacks, discard your hand, then draw three cards.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

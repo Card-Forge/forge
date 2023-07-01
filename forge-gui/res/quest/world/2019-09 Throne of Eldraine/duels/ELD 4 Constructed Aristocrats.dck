@@ -1,0 +1,25 @@
+[metadata]
+Title=Aristocrats
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Aristocrats
+[Main]
+4 Ayara, First of Locthwain|ELD|1
+4 Blacklance Paragon|ELD|1
+4 Castle Locthwain|ELD|1
+4 Cauldron Familiar|ELD
+2 Clackbridge Troll|ELD|1
+2 Epic Downfall|ELD
+2 Forever Young|ELD
+4 Murderous Rider|ELD|1
+4 Order of Midnight|ELD|1
+4 Rankle, Master of Pranks|ELD|1
+2 Reave Soul|ELD
+16 Swamp|ELD|2
+2 Syr Konrad, the Grim|ELD
+1 Witch's Cottage|ELD
+[Sideboard]
+1 Swamp|ELD|2
+4 Witch's Oven|ELD

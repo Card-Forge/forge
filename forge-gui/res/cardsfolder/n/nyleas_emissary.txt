@@ -1,0 +1,8 @@
+Name:Nylea's Emissary
+ManaCost:3 G
+Types:Enchantment Creature Cat
+PT:3/3
+K:Bestow:5 G
+K:Trample
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+3 and has trample.
+Oracle:Bestow {5}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nTrample\nEnchanted creature gets +3/+3 and has trample.

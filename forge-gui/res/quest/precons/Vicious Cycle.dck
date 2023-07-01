@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Vicious Cycle
+Description=On Zendikar, even death is no obstacle. The Eldrazi and the plane's defenders fight, fall, and rise to fight again. Your opponents might think they're winning as your graveyard fills up. But you'll know that for your army of creatures, death is only the beginning.
+Deck Type=constructed
+Set=OGW
+Image=vicious_cycle.jpg
+[Main]
+1 Altar's Reap|BFZ
+1 Baloth Null|OGW
+1 Blighted Woodland|BFZ
+2 Blisterpod|BFZ
+2 Bone Splinters|BFZ
+1 Brood Monitor|BFZ
+1 Broodhunter Wurm|BFZ
+2 Carrier Thrall|BFZ
+2 Corpse Churn|OGW
+1 Dread Defiler+|OGW
+1 Essence Depleter|OGW
+1 Evolving Wilds|BFZ
+2 Fertile Thicket|BFZ
+9 Forest|BFZ
+1 Grasp of Darkness|OGW
+1 Kozilek's Pathfinder|OGW
+2 Loam Larva|OGW
+2 Natural Connection|BFZ
+2 Netcaster Spider|OGW
+1 Null Caller|OGW
+2 Oblivion Strike|OGW
+1 Pulse of Murasa|OGW
+2 Rot Shambler|BFZ
+2 Seed Guardian|OGW
+1 Smothering Abomination|BFZ
+2 Stalking Drone|OGW
+8 Swamp|BFZ
+1 Vines of the Recluse|OGW
+1 Voracious Null|BFZ
+4 Wastes|OGW

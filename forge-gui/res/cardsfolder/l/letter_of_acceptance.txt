@@ -1,0 +1,6 @@
+Name:Letter of Acceptance
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{T}: Add one mana of any color.\n{2}, {T}, Sacrifice Letter of Acceptance: Draw a card.

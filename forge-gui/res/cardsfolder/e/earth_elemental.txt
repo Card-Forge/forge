@@ -1,0 +1,5 @@
+Name:Earth Elemental
+ManaCost:3 R R
+Types:Creature Elemental
+PT:4/5
+Oracle:

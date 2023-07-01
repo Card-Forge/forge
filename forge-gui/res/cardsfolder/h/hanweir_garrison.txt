@@ -1,0 +1,11 @@
+Name:Hanweir Garrison
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 1/1 red Human creature tokens that are tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_human | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+DeckHints:Name$Hanweir Battlements
+MeldPair:Hanweir Battlements
+AlternateMode:Meld
+Oracle:Whenever Hanweir Garrison attacks, create two 1/1 red Human creature tokens that are tapped and attacking.\n(Melds with Hanweir Battlements.)

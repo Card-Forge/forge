@@ -1,0 +1,6 @@
+Name:Purphoros|Deck:Purphoros.dck|Variant:Commander|Avatar:Purphoros, God of the Forge|Desc:
+Name:Nylea|Deck:Nylea.dck|Variant:Commander|Avatar:Nylea, God of the Hunt|Desc:
+Name:Thassa|Deck:Thassa.dck|Variant:Commander|Avatar:Thassa, God of the Sea|Desc:
+Name:Erebos|Deck:Erebos.dck|Variant:Commander|Avatar:Erebos, God of the Dead|Desc:
+Name:Heliod|Deck:Heliod.dck|Variant:Commander|Avatar:Heliod, God of the Sun|Desc:
+Name:Defeat a God|Deck:XenagosPW.dck|Variant:Planeswalker|Avatar:Xenagos, the Reveler|Desc:

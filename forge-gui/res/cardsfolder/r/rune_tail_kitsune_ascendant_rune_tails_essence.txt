@@ -1,0 +1,16 @@
+Name:Rune-Tail, Kitsune Ascendant
+ManaCost:2 W
+Types:Legendary Creature Fox Monk
+PT:2/2
+T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE30 | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When you have 30 or more life, flip CARDNAME.
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
+AlternateMode:Flip
+Oracle:When you have 30 or more life, flip Rune-Tail, Kitsune Ascendant.
+
+ALTERNATE
+
+Name:Rune-Tail's Essence
+ManaCost:2 W
+Types:Legendary Enchantment
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
+Oracle:Prevent all damage that would be dealt to creatures you control.

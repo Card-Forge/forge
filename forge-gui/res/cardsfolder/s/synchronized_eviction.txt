@@ -1,0 +1,7 @@
+Name:Synchronized Eviction
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE2 | Description$ This spell costs {2} less to cast if you control two at least two creatures that share a creature type.
+SVar:X:Count$MostProminentCreatureType Creature.YouCtrl
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | LibraryPosition$ 1 | SpellDescription$ Put target nonland permanent into its owner's library second from the top.
+Oracle:This spell costs {2} less to cast if you control two at least two creatures that share a creature type.\nPut target nonland permanent into its owner's library second from the top.

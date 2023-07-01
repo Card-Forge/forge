@@ -1,0 +1,9 @@
+Name:Faerie Noble
+ManaCost:2 G
+Types:Creature Faerie Noble
+PT:1/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddToughness$ 1 | Description$ Other Faerie creatures you control get +0/+1.
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.Faerie+StrictlyOther+YouCtrl | NumAtt$ +1 | SpellDescription$ Other Faerie creatures you control get +1/+0 until end of turn.
+AI:RemoveDeck:Random
+Oracle:Flying\nOther Faerie creatures you control get +0/+1.\n{T}: Other Faerie creatures you control get +1/+0 until end of turn.

@@ -1,0 +1,7 @@
+Name:Shaper Guildmage
+ManaCost:U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
+A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
+Oracle:{W}, {T}: Target creature gains first strike until end of turn.\n{B}, {T}: Target creature gets +1/+0 until end of turn.

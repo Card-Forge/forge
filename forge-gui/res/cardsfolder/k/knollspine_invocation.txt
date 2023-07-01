@@ -1,0 +1,6 @@
+Name:Knollspine Invocation
+ManaCost:1 R R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ X Discard<1/Card.cmcEQX/card with mana value X> | ValidTgts$ Any | NumDmg$ X | AILogic$ DiscardCMCX | SpellDescription$ CARDNAME deals X damage to any target.
+SVar:X:Count$xPaid
+Oracle:{X}, Discard a card with mana value X: Knollspine Invocation deals X damage to any target.

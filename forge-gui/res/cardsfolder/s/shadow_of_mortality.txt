@@ -1,0 +1,9 @@
+Name:Shadow of Mortality
+ManaCost:13 B B
+Types:Creature Avatar
+PT:7/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | CheckSVar$ Y | SVarCompare$ LTZ | Amount$ X | EffectZone$ All | Description$ If your life total is less than your starting life total, this spell costs {X} less to cast, where X is the difference.
+SVar:X:SVar$Z/Minus.Y
+SVar:Y:Count$YourLifeTotal
+SVar:Z:Count$YourStartingLife
+Oracle:If your life total is less than your starting life total, this spell costs {X} less to cast, where X is the difference.

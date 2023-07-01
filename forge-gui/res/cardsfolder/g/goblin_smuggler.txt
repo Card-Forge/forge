@@ -1,0 +1,9 @@
+Name:Goblin Smuggler
+ManaCost:2 R
+Types:Creature Goblin Rogue
+PT:2/2
+K:Haste
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.Other+powerLE2 | TgtPrompt$ Select another target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Another target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+AI:RemoveDeck:Random
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}: Another target creature with power 2 or less can't be blocked this turn.

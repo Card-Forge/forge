@@ -1,0 +1,6 @@
+Name:Vault of the Archangel
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PumpAll | Cost$ 2 W B T | ValidCards$ Creature.YouCtrl | KW$ Deathtouch & Lifelink | SpellDescription$ Creatures you control gain deathtouch and lifelink until end of turn.
+Oracle:{T}: Add {C}.\n{2}{W}{B}, {T}: Creatures you control gain deathtouch and lifelink until end of turn.

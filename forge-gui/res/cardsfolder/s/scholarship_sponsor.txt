@@ -1,0 +1,14 @@
+Name:Scholarship Sponsor
+ManaCost:3 W
+Types:Creature Human Advisor
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerDescription$ When CARDNAME enters the battlefield, each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, puts those cards onto the battlefield tapped, then shuffles.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeType$ Land.Basic | ChangeNum$ Z | Origin$ Library | Destination$ Battlefield | Tapped$ True
+SVar:X:Count$Valid Land.RememberedPlayerCtrl
+SVar:Y:PlayerCountPlayers$HighestValid Land.YouCtrl
+SVar:Z:SVar$Y/Minus.X
+SVar:Check1:Count$Valid Land.YouCtrl
+SVar:Check2:SVar$Y/Minus.Check1
+SVar:NeedsToPlayVar:Check2 GE2
+Oracle:When Scholarship Sponsor enters the battlefield, each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, puts those cards onto the battlefield tapped, then shuffles.

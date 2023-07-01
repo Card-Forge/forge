@@ -1,0 +1,9 @@
+Name:Utopia Mycon
+ManaCost:G
+Types:Creature Fungus
+PT:0/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
+A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:AB$ Mana | Cost$ Sac<1/Saproling> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:At the beginning of your upkeep, put a spore counter on Utopia Mycon.\nRemove three spore counters from Utopia Mycon: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: Add one mana of any color.

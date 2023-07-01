@@ -1,0 +1,7 @@
+Name:Dinosaur Hunter
+ManaCost:1 B
+Types:Creature Human Pirate
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Dinosaur | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals damage to a Dinosaur, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Whenever Dinosaur Hunter deals damage to a Dinosaur, destroy that creature.

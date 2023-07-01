@@ -1,0 +1,6 @@
+Name:Sudden Insight
+ManaCost:4 U U
+Types:Instant
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each different mana value among nonland cards in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn+nonLand$DifferentCMC
+Oracle:Draw a card for each different mana value among nonland cards in your graveyard.

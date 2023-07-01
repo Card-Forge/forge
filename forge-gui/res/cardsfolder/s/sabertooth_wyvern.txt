@@ -1,0 +1,7 @@
+Name:Sabertooth Wyvern
+ManaCost:4 R
+Types:Creature Drake
+PT:3/2
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

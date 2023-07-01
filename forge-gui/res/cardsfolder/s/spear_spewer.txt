@@ -1,0 +1,8 @@
+Name:Spear Spewer
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:0/2
+K:Defender
+A:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidPlayers$ Player | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 1 damage to each player.
+SVar:NonCombatPriority:1
+Oracle:Defender\n{T}: Spear Spewer deals 1 damage to each player.

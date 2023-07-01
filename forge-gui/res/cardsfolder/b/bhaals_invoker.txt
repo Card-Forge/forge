@@ -1,0 +1,6 @@
+Name:Bhaal's Invoker
+ManaCost:2 R
+Types:Creature Dragon Shaman
+PT:4/2
+A:AB$ DealDamage | Cost$ 8 | Defined$ Opponent | NumDmg$ 4 | PrecostDesc$ Scorching Ray - | SpellDescription$ CARDNAME deals 4 damage to each opponent. 
+Oracle:Scorching Ray - {8}: Bhaal's Invoker deals 4 damage to each opponent.

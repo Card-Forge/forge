@@ -1,0 +1,9 @@
+Name:Broodbirth Viper
+ManaCost:4 U
+Types:Creature Snake
+PT:3/3
+K:Myriad
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.Opponent | CombatDamage$ True | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Token
+Oracle:Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever Broodbirth Viper deals combat damage to a player, you may draw a card.

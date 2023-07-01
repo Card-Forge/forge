@@ -1,0 +1,5 @@
+Name:Thornhide Wolves
+ManaCost:4 G
+Types:Creature Wolf
+PT:4/5
+Oracle:

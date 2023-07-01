@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Serra1
+Title=Serra
+Difficulty=easy
+Description=White deck
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Angelic Curator|ULG
+3 Angelic Page|USG
+2 Brilliant Halo|USG
+2 Congregate|USG
+4 Forbidding Watchtower|ULG
+1 Glorious Anthem|USG
+2 Herald of Serra|USG
+3 Pacifism|USG
+2 Path of Peace|USG
+3 Peace and Quiet|ULG
+20 Plains|USG|4
+4 Radiant's Dragoons|ULG
+1 Radiant, Archangel|ULG
+1 Serra Angel|LEA
+2 Sustainer of the Realm|ULG
+2 Voice of Duty|UDS
+2 Voice of Grace|USG
+2 Voice of Law|USG
+2 Voice of Reason|UDS

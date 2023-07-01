@@ -1,0 +1,7 @@
+Name:Cloud Crusader
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:2/3
+K:Flying
+K:First Strike
+Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)

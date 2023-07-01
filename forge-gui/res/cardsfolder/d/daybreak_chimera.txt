@@ -1,0 +1,8 @@
+Name:Daybreak Chimera
+ManaCost:3 W W
+Types:Creature Chimera
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is your devotion to white.
+SVar:X:Count$Devotion.White
+K:Flying
+Oracle:This spell costs {X} less to cast, where X is your devotion to white. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)\nFlying

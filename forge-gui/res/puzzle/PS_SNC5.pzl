@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Streets of New Capenna #05
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/07/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. In your library, assume you have additional copies of each card on your board and in your hand (and no others - and you don't know the order.) Remember that your solution must satisfy all blocking possibilities. Good luck!
+[state]
+humanlife=20
+ailife=14
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Iron Apprentice;Getaway Car;High-Speed Hoverbike;Vampire's Kiss;Murder
+humanlibrary=Mechtitan Core;Teferi, Who Slows the Sunset;High-Speed Hoverbike;Swamp;Swamp;Swamp;Getaway Car;Iron Apprentice;Deserted Beach;Deserted Beach;Deserted Beach;Vampire's Kiss;Murder;Raffine, Scheming Seer;Oswald Fiddlebender;Surgehacker Mech
+humanbattlefield=Teferi, Who Slows the Sunset|Counters:LOYALTY=1;Raffine, Scheming Seer|Counters:P1P1=1;Oswald Fiddlebender|Counters:P1P1=1;Mechtitan Core;Surgehacker Mech;Deserted Beach;Deserted Beach;Deserted Beach;Swamp;Swamp;Swamp
+aibattlefield=Iymrith, Desert Doom;Master of Winds;Needlethorn Drake
+# Shuffle the human library to randomize the order in which the cards are (since the player is assumed not to know or have any specific fixed order of cards in the library).
+humanprecast=Ancestral Knowledge:TrigShuffle

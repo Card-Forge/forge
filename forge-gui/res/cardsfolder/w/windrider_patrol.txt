@@ -1,0 +1,9 @@
+Name:Windrider Patrol
+ManaCost:3 U U
+Types:Creature Merfolk Wizard
+PT:4/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying\nWhenever Windrider Patrol deals combat damage to a player, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

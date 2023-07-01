@@ -1,0 +1,8 @@
+Name:Unholy Officiant
+ManaCost:W
+Types:Creature Vampire Cleric
+PT:1/2
+K:Vigilance
+A:AB$ PutCounter | Cost$ 4 W | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:Vigilance\n{4}{W}: Put a +1/+1 counter on Unholy Officiant.

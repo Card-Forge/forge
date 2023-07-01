@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Madame Hydra 1
+Title=Madame Hydra
+Difficulty=easy
+Description=BG High Power deck with Essence Harvest and Fungal Sprouting
+Icon=Madame Hydra.jpg
+Deck Type=constructed
+[main]
+9 Forest
+9 Swamp
+4 Golgari Guildgate
+1 Woodland Cemetery
+1 Argothian Pixies
+1 Dakmor Scorpion
+1 Grappler Spider
+1 Nyxborn Eidolon
+1 Bloodrage Vampire
+1 Branchsnap Lorian
+1 Daggerclaw Imp
+1 Dauthi Marauder
+1 Elvish Ranger
+1 Goliath Beetle
+1 Nezumi Ronin
+1 Nyxborn Wolf
+1 Pincher Beetles
+1 Coiling Woodworm
+1 Skeletal Crocodile
+1 Rotting Fensnake
+1 Dross Crocodile
+1 Tel-Jilad Outrider
+1 Veilborn Ghoul
+1 Mass of Ghouls
+1 Deadly Insect
+1 Bone Saw
+1 Greatsword
+1 Hammer of Ruin
+1 Sylvok Lifestaff
+1 Scourgemark
+3 Wretched Banquet
+3 Essence Harvest
+3 Fungal Sprouting
+2 Miming Slime
+[sideboard]

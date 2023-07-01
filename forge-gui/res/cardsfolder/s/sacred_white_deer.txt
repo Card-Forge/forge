@@ -1,0 +1,6 @@
+Name:Sacred White Deer
+ManaCost:1 G
+Types:Creature Elk
+PT:2/2
+A:AB$ GainLife | Cost$ 3 G T | LifeAmount$ 4 | IsPresent$ Planeswalker.Yanggu+YouCtrl | SpellDescription$ You gain 4 life.
+Oracle:{3}{G}, {T}: You gain 4 life. Activate only if you control a Yanggu planeswalker.

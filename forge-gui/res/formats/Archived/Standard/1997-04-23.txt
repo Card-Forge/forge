@@ -1,0 +1,6 @@
+[format]
+Name:Standard (5ED)
+Type:Archived
+Subtype:Standard
+Effective:1997-04-23
+Sets:ALL, MIR, VIS, 5ED

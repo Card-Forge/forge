@@ -1,0 +1,10 @@
+Name:Firja, Judge of Valor
+ManaCost:2 W B B
+Types:Legendary Creature Angel Cleric
+PT:2/4
+K:Flying
+K:Lifelink
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard | NoReveal$ True
+DeckHas:Ability$Graveyard
+Oracle:Flying, lifelink\nWhenever you cast your second spell each turn, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.

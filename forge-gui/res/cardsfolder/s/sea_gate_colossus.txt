@@ -1,0 +1,9 @@
+Name:Sea Gate Colossus
+ManaCost:7
+Types:Artifact Creature Golem Warrior
+PT:7/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)

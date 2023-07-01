@@ -1,0 +1,8 @@
+Name:Forked-Branch Garami
+ManaCost:3 G G
+Types:Creature Spirit
+PT:4/4
+K:Soulshift:4
+K:Soulshift:4
+DeckHints:Type$Spirit
+Oracle:Soulshift 4, soulshift 4 (When this creature dies, you may return up to two target Spirit cards with mana value 4 or less from your graveyard to your hand.)

@@ -1,0 +1,7 @@
+Name:Jhoira, Weatherlight Captain
+ManaCost:2 U R
+Types:Legendary Creature Human Artificer
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)

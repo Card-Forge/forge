@@ -1,0 +1,8 @@
+Name:Teeka's Dragon
+ManaCost:9
+Types:Artifact Creature Dragon
+PT:5/5
+K:Flying
+K:Trample
+K:Rampage:4
+Oracle:Flying; trample; rampage 4 (Whenever this creature becomes blocked, it gets +4/+4 until end of turn for each creature blocking it beyond the first.)

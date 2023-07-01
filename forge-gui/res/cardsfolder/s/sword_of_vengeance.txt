@@ -1,0 +1,6 @@
+Name:Sword of Vengeance
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ First Strike & Vigilance & Trample & Haste | Description$ Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.
+Oracle:Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}

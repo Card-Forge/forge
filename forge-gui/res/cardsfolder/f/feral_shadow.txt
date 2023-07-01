@@ -1,0 +1,7 @@
+Name:Feral Shadow
+ManaCost:2 B
+Types:Creature Nightstalker
+PT:2/1
+K:Flying
+DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
+Oracle:Flying

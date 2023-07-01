@@ -1,0 +1,89 @@
+akaname.png
+size: 256, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 76,17
+  size: 14, 14
+Idle
+  xy: 6, 16
+  size: 24, 16   
+Idle
+  xy: 38, 16
+  size: 24, 16   
+Idle
+  xy: 70, 16
+  size: 24, 16   
+Idle
+  xy: 102, 16
+  size: 24, 16   
+Idle
+  xy: 134, 16
+  size: 24, 16   
+Walk
+  xy: 4, 42
+  size: 26, 22   
+Walk
+  xy: 36, 42
+  size: 26, 22      
+Walk
+  xy: 68, 42
+  size: 26, 22     
+Walk
+  xy: 100, 42
+  size: 26, 22    
+Walk
+  xy: 132, 42
+  size: 26, 22     
+Walk
+  xy: 164, 42
+  size: 26, 22     
+Walk
+  xy: 196, 42
+  size: 26, 22     
+Walk
+  xy: 228, 42
+  size: 26, 22   
+Attack
+  xy: 6, 72
+  size: 26, 24
+Attack
+  xy: 38, 72
+  size: 26, 24
+Attack
+  xy: 70, 72
+  size: 26, 24
+Attack
+  xy: 102, 72
+  size: 26, 24
+Attack
+  xy: 134, 72
+  size: 26, 24
+Attack
+  xy: 166, 72
+  size: 26, 24
+Attack
+  xy: 198, 72
+  size: 26, 24
+Attack
+  xy: 230, 72
+  size: 26, 24
+Death
+  xy: 6, 112
+  size: 26, 16
+Death
+  xy: 38, 112
+  size: 26, 16
+Death
+  xy: 70, 112
+  size: 26, 16
+Death
+  xy: 102, 112
+  size: 26, 16
+Death
+  xy: 134, 112
+  size: 26, 16
+Death
+  xy: 166, 112
+  size: 26, 16

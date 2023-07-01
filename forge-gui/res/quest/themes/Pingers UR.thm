@@ -1,0 +1,63 @@
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=21]
+Volcanic Island
+Steam Vents
+Crumbling Necropolis
+Scalding Tarn
+[/Group]
+
+[Group MaxCnt=4 Percentage=16]
+Basilisk Collar
+Basilisk Collar
+Curiosity
+Gorgon Flail
+Quietus Spike
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Fireslinger
+Flamekin Spitfire
+Razorfin Hunter
+Razorfin Hunter
+Spikeshot Elder
+[/Group]
+
+[Group MaxCnt=4 Percentage=24]
+Apprentice Sorcerer
+Capricious Sorcerer
+Cunning Sparkmage
+Gelectrode
+Ghost-Lit Raider
+Goblin Sharpshooter
+Prodigal Pyromancer
+Prodigal Sorcerer
+Rootwater Hunter
+Spikeshot Goblin
+Suq'Ata Firewalker
+Thornwind Faeries
+Vithian Stinger
+Vulshok Sorcerer
+Wu Longbowman
+Zuran Spellcaster
+[/Group]
+
+[Group MaxCnt=2 Percentage=10]
+Anaba Shaman
+Fledgling Mawcor
+Jeska, Warrior Adept
+Reveka, Wizard Savant
+Stinging Barrier
+Vent Sentinel
+Viashino Fangtail
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Kamahl, Pit Fighter
+Mawcor
+Niv-Mizzet, the Firemind
+Pirate Ship
+Shivan Hellkite
+[/Group]
+
+End

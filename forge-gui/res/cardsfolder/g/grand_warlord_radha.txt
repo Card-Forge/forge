@@ -1,0 +1,9 @@
+Name:Grand Warlord Radha
+ManaCost:2 R G
+Types:Legendary Creature Elf Warrior
+PT:3/4
+K:Haste
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever one or more creatures you control attack, add that much mana in any combination of {R} and/or {G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ Combo R G | Amount$ X | PersistentMana$ True
+SVar:X:TriggerObjectsAttackers$Amount
+Oracle:Haste\nWhenever one or more creatures you control attack, add that much mana in any combination of {R} and/or {G}. Until end of turn, you don't lose this mana as steps and phases end.

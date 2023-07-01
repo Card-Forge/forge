@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Odysseus 3
+Title=Odysseus
+Difficulty=hard
+Description=Mono W Hate Bear deck
+Icon=Odysseus.jpg
+Deck Type=constructed
+[main]
+21 Plains
+1 Karakas
+1 Soul's Attendant
+4 Dryad Militant
+1 Icatian Javelineers
+2 Thalia, Guardian of Thraben
+1 Grand Abolisher
+1 True Believer
+1 Kataki, War's Wage
+1 Leonin Relic-Warder
+1 Samurai of the Pale Curtain
+2 Knight of the White Orchid
+1 Veteran Armorer
+1 Kitchen Finks
+1 Glowrider
+2 Vryn Wingmare
+4 Fiend Hunter
+2 Mentor of the Meek
+1 Mirran Crusader
+1 Archetype of Courage
+1 Silverblade Paladin
+1 Soltari Champion
+1 Linvala, Keeper of Silence
+1 Angel of Jubilation
+1 Celestial Crusader
+1 Loxodon Gatekeeper
+1 Hero of Bladehold
+1 Crovax, Ascendant Hero
+1 Elesh Norn, Grand Cenobite
+1 Imposing Sovereign
+[sideboard]

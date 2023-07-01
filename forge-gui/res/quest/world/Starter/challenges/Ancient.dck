@@ -1,0 +1,29 @@
+[quest]
+id=Ancient
+OpponentName=Ancestral Memories
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=3 rare;10% Ancestral Memories POR
+Ticket Reward=true
+Credit Reward=300
+AIExtras=Plains|Plains|Island|Island|Island
+HumanExtras=
+[metadata]
+Title=Ancestral Memories
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description="Sooo...are you going to deck out or not? Make up your mind!"
+Deck Type=constructed
+Name=Ancient
+[Main]
+20 Ancestral Memories|POR
+3 Archangel|POR
+20 Breath of Life|S99
+3 Champion Lancer|S99
+3 Djinn of the Lamp|POR
+3 Lu Meng, Wu General|PTK
+3 Sun Quan, Lord of Wu|PTK
+3 Thorn Elemental|S99
+3 Thunder Dragon|S99
+3 Zodiac Dragon|PTK

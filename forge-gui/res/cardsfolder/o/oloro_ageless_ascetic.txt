@@ -1,0 +1,11 @@
+Name:Oloro, Ageless Ascetic
+ManaCost:3 W U B
+Types:Legendary Creature Giant Soldier
+PT:4/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.
+SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.Self | PresentZone$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in the command zone, you gain 2 life.
+Oracle:At the beginning of your upkeep, you gain 2 life.\nWhenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.\nAt the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.

@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Price Of Glory
+Description=Power comes at a price . . . but only if you're playing fair. Spend your own life to pay for dark bargains, then gain it all back with the righteous fury of angels. In the end, you'll come out on top.
+Deck Type=constructed
+Set=M15
+Image=price_of_glory.jpg
+[Main]
+3 Soulmender|M15
+2 Ajani's Pridemate|M15
+1 Kinsbaile Skirmisher|M15
+1 Wall of Essence|M15
+2 Child of Night|M15
+1 Accursed Spirit|M15
+1 Tireless Missionaries|M15
+3 Sign in Blood|M15
+1 Solemn Offering|M15
+1 Mass Calcify|M15
+1 Crippling Blight|M15
+1 Divine Favor|M15
+1 Staff of the Sun Magus|M15
+1 Staff of the Death Magus|M15
+2 Sungrace Pegasus|M15
+2 Wall of Limbs|M15
+2 Witch's Familiar|M15
+1 Geist of the Moors|M15
+2 Shadowcloak Vampire|M15
+1 Blood Host|M15
+1 Resolute Archangel+|M15
+2 Ulcerate|M15
+1 Pillar of Light|M15
+1 First Response|M15
+12 Plains|M15
+13 Swamp|M15

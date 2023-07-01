@@ -1,0 +1,8 @@
+Name:Echoing Boon
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | TargetsValid$ Creature.NamedCard+YouCtrl+inZoneBattlefield | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, if it targets a creature you control with the chosen name, you may copy that spell and may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nWhenever you cast an instant or sorcery spell, if it targets a creature you control with the chosen name, you may copy that spell and may choose new targets for the copy.

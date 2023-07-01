@@ -1,0 +1,6 @@
+Name:Roc of Kher Ridges
+ManaCost:3 R
+Types:Creature Bird
+PT:3/3
+K:Flying
+Oracle:Flying

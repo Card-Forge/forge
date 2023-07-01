@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sunburst
+Description=Use mana-filtering cards to get the most from the Fifth Dawn set's sunburst cards. Pay for your artifacts with different colors of mana and sunburst artifacts reward you with raw power.
+Deck Type=constructed
+Set=5DN
+Image=sunburst.jpg
+[main]
+1 Viridian Acolyte|DST
+2 Mirrodin's Core|DST
+2 Darksteel Pendant|DST
+2 Chromatic Sphere|MRD
+2 Energy Chamber|5DN
+3 Darksteel Ingot|DST
+1 Suncrusher|5DN
+3 Plains|MRD
+3 Island|MRD
+3 Mountain|MRD
+9 Forest|MRD
+3 Swamp|MRD
+1 Journey of Discovery|MRD
+2 Tel-Jilad Justice|5DN
+2 Heliophial|5DN
+3 Suntouched Myr|5DN
+1 Wayfarer's Bauble|5DN
+2 Sylvok Explorer|5DN
+1 Sawtooth Thresher|5DN
+2 Infused Arrows|5DN
+1 Dawn's Reflection|5DN
+3 Skyreach Manta|5DN
+2 Etched Oracle|5DN
+2 Pentad Prism|5DN
+1 Lunar Avenger|5DN
+1 Joiner Adept|5DN
+2 Spinal Parasite|5DN
+[sideboard]

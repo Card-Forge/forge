@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Stampede
+Description=h, the purity of good ol' red-green beatdown. The "Stampede" deck contains some of the Mirrodin block's finest face-stompers, all ready and waiting to apply hurt to your opponents.
+Deck Type=constructed
+Set=5DN
+Image=stampede.jpg
+[main]
+1 Goblin Cannon|5DN
+1 Pyrite Spellbomb|MRD
+2 Talisman of Impulse|MRD
+1 Goblin Replica|MRD
+11 Forest|MRD
+12 Mountain|MRD
+1 Cosmic Larva|5DN
+1 Eternal Witness|5DN
+1 Fangren Hunter|MRD
+2 Fangren Pathcutter|5DN
+2 Goblin Brawler|5DN
+1 Iron-Barb Hellion|5DN
+1 Slith Firewalker|MRD
+1 Spark Elemental|5DN
+2 Spikeshot Goblin|MRD
+2 Sylvok Explorer|5DN
+1 Tangle Asp|5DN
+1 Tel-Jilad Chosen|MRD
+2 Tel-Jilad Exile|MRD
+1 Tel-Jilad Lifebreather|5DN
+2 Tyrranax|5DN
+2 Viridian Lorebearers|5DN
+1 Vulshok Berserker|MRD
+1 Vulshok Sorcerer|5DN
+1 Rite of Passage|5DN
+1 Barbed Lightning|DST
+1 Ferocious Charge|5DN
+1 Grab the Reins|MRD
+1 Magma Jet|5DN
+1 Rain of Rust|5DN
+1 Tel-Jilad Justice|5DN
+[sideboard]

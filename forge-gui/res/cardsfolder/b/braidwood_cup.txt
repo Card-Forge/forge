@@ -1,0 +1,5 @@
+Name:Braidwood Cup
+ManaCost:3
+Types:Artifact
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+Oracle:{T}: You gain 1 life.

@@ -1,0 +1,8 @@
+Name:Sanctum Spirit
+ManaCost:3 W
+Types:Creature Spirit
+PT:3/2
+K:Lifelink
+A:AB$ Pump | Cost$ Discard<1/Card.Historic/historic card> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)
+DeckHas:Ability$Discard
+Oracle:Lifelink\nDiscard a historic card: Sanctum Spirit gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)

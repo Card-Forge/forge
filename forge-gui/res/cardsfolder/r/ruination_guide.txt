@@ -1,0 +1,10 @@
+Name:Ruination Guide
+ManaCost:2 U
+Types:Creature Eldrazi Drone
+PT:3/2
+K:Devoid
+K:Ingest
+S:Mode$ Continuous | Affected$ Creature.Colorless+Other+YouCtrl | AddPower$ 1 | Description$ Other colorless creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Processor & Color$Colorless & Keyword$Devoid
+Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)\nOther colorless creatures you control get +1/+0.

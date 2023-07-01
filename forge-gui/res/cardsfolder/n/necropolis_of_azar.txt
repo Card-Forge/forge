@@ -1,0 +1,10 @@
+Name:Necropolis of Azar
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonBlack | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a nonblack creature dies, put a husk counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ HUSK
+A:AB$ Token | Cost$ 5 SubCounter<1/HUSK> | TokenScript$ spawn_of_azar | TokenPower$ X | TokenToughness$ Y | AILogic$ RandomPT | SpellDescription$ Create an X/Y black Spawn creature token with swampwalk named Spawn of Azar, where X and Y are numbers chosen at random from 1 to 3.
+SVar:X:Count$Random.1.3
+SVar:Y:Count$Random.1.3
+DeckHas:Ability$Counters|Token
+Oracle:Whenever a nonblack creature dies, put a husk counter on Necropolis of Azar.\n{5}, Remove a husk counter from Necropolis of Azar: Create an X/Y black Spawn creature token with swampwalk named Spawn of Azar, where X and Y are numbers chosen at random from 1 to 3.

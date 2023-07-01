@@ -1,0 +1,8 @@
+Name:Moonsilver Spear
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | AddSVar$ AE | Description$ Equipped creature has first strike.
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigAngelToken | TriggerDescription$ Whenever equipped creature attacks, create a 4/4 white Angel token with flying.
+SVar:TrigAngelToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
+Oracle:Equipped creature has first strike.\nWhenever equipped creature attacks, create a 4/4 white Angel creature token with flying.\nEquip {4}

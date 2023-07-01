@@ -1,0 +1,7 @@
+Name:Needlebug
+ManaCost:4
+Types:Artifact Creature Insect
+PT:2/2
+K:Flash
+K:Protection from artifacts
+Oracle:Flash\nProtection from artifacts

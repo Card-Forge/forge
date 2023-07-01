@@ -1,0 +1,16 @@
+Name:Fae of Wishes
+ManaCost:1 U
+Types:Creature Faerie Wizard
+PT:1/4
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U Discard<2/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+AlternateMode:Adventure
+Oracle:Flying\n{1}{U}, Discard two cards: Return Fae of Wishes to its owner's hand.
+
+ALTERNATE
+
+Name:Granted
+ManaCost:3 U
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Cost$ 3 U | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.nonCreature+YouOwn | ChangeTypeDesc$ noncreature card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SpellDescription$ You may reveal a noncreature card you own from outside the game and put it into your hand.
+Oracle:You may reveal a noncreature card you own from outside the game and put it into your hand.

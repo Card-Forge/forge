@@ -1,0 +1,8 @@
+Name:Simic Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+A:AB$ Draw | Cost$ G U T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Green|Blue
+Oracle:{T}: Add {G} or {U}.\n{G}{U}, {T}, Sacrifice Simic Cluestone: Draw a card.

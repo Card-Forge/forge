@@ -1,0 +1,7 @@
+Name:Ipnu Rivulet
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mill | Cost$ 1 U T Sac<1/Desert> | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {U}.\n{1}{U}, {T}, Sacrifice a Desert: Target player mills four cards.

@@ -1,0 +1,9 @@
+Name:Quicksilver Dragon
+ManaCost:4 U U
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Morph:4 U
+A:AB$ ChangeTargets | Cost$ U | TargetType$ Spell | ValidTgts$ Card | ConditionTargetValidTargeting$ Card.Self | ConditionTargetsSingleTarget$ True | TargetRestriction$ Creature.Other | SpellDescription$ If target spell has only one target and that target is CARDNAME, change that spell's target to another creature.
+AI:RemoveDeck:All
+Oracle:Flying\n{U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.\nMorph {4}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

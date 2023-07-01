@@ -1,0 +1,10 @@
+Name:Calamity Bearer
+ManaCost:2 R R
+Types:Creature Giant Berserker
+PT:3/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Giant.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a Giant source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+DeckHints:Type$Giant
+Oracle:If a Giant source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.

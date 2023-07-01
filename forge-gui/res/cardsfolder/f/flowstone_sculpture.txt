@@ -1,0 +1,10 @@
+Name:Flowstone Sculpture
+ManaCost:6
+Types:Artifact Creature Shapeshifter
+PT:4/4
+A:AB$ GenericChoice | Cost$ 2 Discard<1/Card> | Choices$ ChooseCounters,ChooseFlying,ChooseFirstStrike,ChooseTrample | SpellDescription$ Put a +1/+1 counter on CARDNAME or CARDNAME gains flying, first strike, or trample. (This effect lasts indefinitely.)
+SVar:ChooseCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:ChooseFlying:DB$ Pump | Defined$ Self | KW$ Flying | Duration$ Permanent | SpellDescription$ CARDNAME gains flying.
+SVar:ChooseFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | Duration$ Permanent | SpellDescription$ CARDNAME gains first strike.
+SVar:ChooseTrample:DB$ Pump | Defined$ Self | KW$ Trample | Duration$ Permanent | SpellDescription$ CARDNAME gains trample.
+Oracle:{2}, Discard a card: Put a +1/+1 counter on Flowstone Sculpture or Flowstone Sculpture gains flying, first strike, or trample. (This effect lasts indefinitely.)

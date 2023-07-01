@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Flutterfox
+OpponentName=The Foxes
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Fortifying Provisions
+HumanExtras=
+[metadata]
+Title=Flutterfox
+Difficulty=easy
+Description="The fox grinned. 'How about a bet, dragon? If I win, the skies are mine.' After he stopped laughing, the dragon agreed."\nTales of the Fae
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=ELD Challenge: Flutterfox
+[Main]
+40 Flutterfox|ELD
+20 Plains|ELD|2

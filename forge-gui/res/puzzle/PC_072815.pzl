@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 072815 - Come Undone
+URL:http://www.gatheringmagic.com/seanuy-072815-come-undone/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=3
+AILife=12
+humanhand=Island|Set:ORI; Rogue's Passage|Set:ORI; Bonded Construct|Set:ORI; Disperse|Set:ORI; Calculated Dismissal|Set:ORI; Tormented Thoughts|Set:ORI; Rabid Bloodsucker|Set:ORI; Necromantic Summons|Set:ORI
+humangraveyard=
+humanlibrary=
+humanbattlefield=Mage-Ring Network|Counters:STORAGE=4; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Swamp|Set:ORI; Claustrophobia|Set:ORI|AttachedTo:420; Nantuko Husk|Set:ORI|Tapped|Id:420; Whirler Rogue|Set:ORI; Willbreaker|Set:ORI; Deep-Sea Terror|Set:ORI; Alchemist's Vial|Set:ORI; t:Thopter,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Thopter,Keywords:Flying,Image:c_1_1_thopter_ori
+aibattlefield=Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Island|Set:ORI|Tapped; Mountain|Set:ORI|Tapped; Mountain|Set:ORI|Tapped; Mountain|Set:ORI|Tapped; Mountain|Set:ORI|Tapped; Mountain|Set:ORI|Tapped; Subterranean Scout|Set:ORI; Watercourser|Set:ORI; Thopter Engineer|Set:ORI; Guardian Automaton|Set:ORI; Reclusive Artificer|Set:ORI; Gold-Forged Sentinel|Set:ORI|Tapped
+aihand=Island; Island; Island; Island; Island; Island; Island
+aigraveyard=
+ailibrary=
+aiexile=

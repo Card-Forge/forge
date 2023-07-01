@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/01/164.-KHM1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume all zones not shown (graveyard, exile, etc.) start empty. Assume your library has one additional copy of each creature you have on board and in your hand, and no others. Your opponent has 20 cards left in their library, no mana available, and 11 hour counters on Midnight Clock.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Thieves' Guild Enforcer;Glasspool Mimic;Pyre of Heroes;Rankle, Master of Pranks;Thornmantle Striker
+humanlibrary=Thornmantle Striker;Rankle, Master of Pranks;Glasspool Mimic;Thieves' Guild Enforcer;Corridor Monitor;Nightmare Shepherd;Soaring Thought-Thief
+humanbattlefield=Soaring Thought-Thief;Nightmare Shepherd;Corridor Monitor;Nyx Lotus;Swamp;Swamp;Swamp;Island;Island
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Kroxa, Titan of Death's Hunger;Skyscanner;Skyscanner;Surtland Flinger;Midnight Clock|Tapped|Counters:HOUR=11

@@ -1,0 +1,7 @@
+Name:Aerial Predation
+ManaCost:2 G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature with flying. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Destroy target creature with flying. You gain 2 life.

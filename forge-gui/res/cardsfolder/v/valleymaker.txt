@@ -1,0 +1,9 @@
+Name:Valleymaker
+ManaCost:5 RG
+Types:Creature Giant Shaman
+PT:5/5
+A:AB$ DealDamage | Cost$ T Sac<1/Mountain> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
+A:AB$ ChoosePlayer | Cost$ T Sac<1/Forest> | Defined$ You | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds {G}{G}{G}.
+SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3 | Defined$ ChosenPlayer
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a Mountain: Valleymaker deals 3 damage to target creature.\n{T}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.

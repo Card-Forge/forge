@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ako Zuberanova Red 2
+Title=Zuberanova
+Difficulty=medium
+Description="When the Hondens were destroyed, its attendants swarmed Kamigawa."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Ayumi, the Last Visitor|SOK
+4 Burning-Eye Zubera|SOK
+4 Commune with Nature|CHK
+4 Dripping-Tongue Zubera|CHK
+4 Ember-Fist Zubera|CHK
+3 Forest|CHK|2
+2 Forest|CHK|3
+3 Forest|CHK|4
+4 Kodama's Reach|CHK
+1 Mountain|CHK|1
+2 Mountain|CHK|2
+4 Mountain|CHK|3
+2 Mountain|CHK|4
+4 Ogre Recluse|BOK
+1 Okina, Temple to the Grandfathers|CHK
+4 Pinecrest Ridge|CHK
+4 Ryusei, the Falling Star|CHK
+3 Sakura-Tribe Elder|CHK
+1 Sekki, Seasons' Guide|SOK
+1 Shinka, the Bloodsoaked Keep|CHK
+1 Tendo Ice Bridge|BOK
+1 Tide of War|CHK
+1 Undying Flames|SOK
+[Sideboard]
+

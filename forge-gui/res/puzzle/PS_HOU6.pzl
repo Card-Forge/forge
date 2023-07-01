@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #06
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU6.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.\nFrom a previous Grim Flayer trigger, you know that the top 2 Cards in your Library are Blur of Blades and a Mountain.
+[state]
+humanlife=20
+ailife=5
+activeplayer=human
+activephase=MAIN1
+humanhand=Goblin Dark-Dwellers;Might Beyond Reason;Precise Strike
+humanlibrary=Blur of Blades|Id:420;Mountain|Id:421|Set:AKH
+humangraveyard=Kari Zev's Expertise;Renegade Tactics;Shard of Broken Glass;Uncaged Fury
+humanbattlefield=Mountain|Set:AKH;Mountain|Set:AKH;Mountain|Set:AKH;Mountain|Set:AKH;Blooming Marsh;Blooming Marsh;Blooming Marsh;Grim Flayer;Grim Flayer
+humanprecast=Preordain:CustomScript:DB$ PeekAndReveal | PeekAmount$ 2
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Mina and Denn, Wildborn;Deathcap Cultivator;Naga Vitalist;Maulfist Revolutionary
+aiexile=
+aicommand=

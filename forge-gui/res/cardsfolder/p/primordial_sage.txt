@@ -1,0 +1,7 @@
+Name:Primordial Sage
+ManaCost:4 G G
+Types:Creature Spirit
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever you cast a creature spell, you may draw a card.

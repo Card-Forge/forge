@@ -1,0 +1,44 @@
+[quest]
+id=26
+AILife=30
+Repeat=false
+Wins=36
+Card Reward=3 blue rares
+Credit Reward=240
+HumanExtras=
+AIExtras=Quest for Ula's Temple
+[metadata]
+Name=quest26
+Title=Quest for Ula's Temple
+Difficulty=hard
+Description=Fight the terrors of the deep.
+Icon=Quest for Ulas Temple.jpg
+Deck Type=constructed
+[main]
+24 Island|M12
+3 Quest for Ula's Temple
+4 Counterspell
+4 Turn Aside
+4 Spreading Seas
+1 Isleback Spawn
+1 Tidal Kraken
+1 Grozoth
+1 Inkwell Leviathan
+1 Nemesis of Reason
+1 Segovian Leviathan
+1 Simic Sky Swallower
+1 Stormtide Leviathan
+1 Giant Octopus
+1 Lorthos, the Tidemaker
+1 Benthic Behemoth
+1 Deep-Sea Serpent
+1 Harbor Serpent
+1 Sandbar Serpent
+1 Sea Monster
+1 Sea Serpent
+1 Serpent of the Endless Sea
+1 Shoal Serpent
+1 Slinking Serpent
+1 Sliptide Serpent
+1 Mistform Ultimus
+[sideboard]

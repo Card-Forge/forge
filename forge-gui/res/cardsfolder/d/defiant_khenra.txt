@@ -1,0 +1,5 @@
+Name:Defiant Khenra
+ManaCost:1 R
+Types:Creature Jackal Warrior
+PT:2/2
+Oracle:

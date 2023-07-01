@@ -1,0 +1,5 @@
+Name:Pyrotechnics
+ManaCost:4 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of target creatures to distribute damage to | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
+Oracle:Pyrotechnics deals 4 damage divided as you choose among any number of targets.

@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Black1
+Title=Knights of Yawgmoth
+Difficulty=easy
+Description=Black deck
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+3 Abyssal Horror|USG
+2 Corrupt|USG
+3 Dark Hatchling|USG
+2 Eastern Paladin|USG
+1 Eradicate|UDS
+4 Expunge|USG
+2 Lurking Skirge|ULG
+3 Order of Yawgmoth|USG
+4 Ravenous Skirge|USG
+2 Sanguine Guard|USG
+2 Soul Feast|UDS
+4 Squirming Mass|UDS
+22 Swamp|USG|2
+2 Twisted Experiment|UDS
+2 Western Paladin|USG
+1 Witch Engine|USG
+1 Yawgmoth's Agenda|INV

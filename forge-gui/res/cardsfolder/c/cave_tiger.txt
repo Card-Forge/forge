@@ -1,0 +1,7 @@
+Name:Cave Tiger
+ManaCost:2 G
+Types:Creature Cat
+PT:2/2
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocked$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever Cave Tiger becomes blocked by a creature, Cave Tiger gets +1/+1 until end of turn.

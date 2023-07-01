@@ -1,0 +1,5 @@
+Name:Gutter Skulk
+ManaCost:1 B
+Types:Creature Zombie Rat
+PT:2/2
+Oracle:

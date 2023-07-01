@@ -1,0 +1,8 @@
+Name:Infernal Idol
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Draw | Cost$ 1 B B T Sac<1/CARDNAME> | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and you lose two life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+DeckNeeds:Color$Black
+Oracle:{T}: Add {B}.\n{1}{B}{B}, {T}, Sacrifice Infernal Idol: You draw two cards and you lose two life.

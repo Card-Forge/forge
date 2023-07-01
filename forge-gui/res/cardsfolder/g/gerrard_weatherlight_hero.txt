@@ -1,0 +1,9 @@
+Name:Gerrard, Weatherlight Hero
+ManaCost:2 R W
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile it and return to the battlefield all artifact and creature cards in your graveyard that were put there from the battlefield this turn.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Artifact.YouOwn+ThisTurnEnteredFrom_Battlefield,Creature.YouOwn+ThisTurnEnteredFrom_Battlefield
+Oracle:First strike\nWhen Gerrard, Weatherlight Hero dies, exile it and return to the battlefield all artifact and creature cards in your graveyard that were put there from the battlefield this turn.

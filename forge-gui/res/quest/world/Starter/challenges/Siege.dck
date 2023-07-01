@@ -1,0 +1,20 @@
+[quest]
+id=Siege
+OpponentName=Shu Cavalry
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=3 rare;25% Blessed Reversal POR
+Credit Reward=300
+AIExtras=Plains|Plains|Plains|Plains|Plains
+HumanExtras=Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet|Eager Cadet
+[metadata]
+Title=Shu Cavalry
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=Ok, ok, they have horses...but WE have numbers!
+Deck Type=constructed
+Name=Siege
+[Main]
+36 Blessed Reversal|POR
+24 Shu Cavalry|PTK

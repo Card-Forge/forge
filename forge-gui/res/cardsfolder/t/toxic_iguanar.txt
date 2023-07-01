@@ -1,0 +1,8 @@
+Name:Toxic Iguanar
+ManaCost:R
+Types:Creature Lizard
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Permanent.Green+YouCtrl | Description$ CARDNAME has deathtouch as long as you control a green permanent. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
+SVar:BuffedBy:Permanent.Green
+DeckHints:Color$Green
+Oracle:Toxic Iguanar has deathtouch as long as you control a green permanent. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)

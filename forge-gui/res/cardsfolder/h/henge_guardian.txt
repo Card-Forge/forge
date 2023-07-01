@@ -1,0 +1,6 @@
+Name:Henge Guardian
+ManaCost:5
+Types:Artifact Creature Dragon Wurm
+PT:3/4
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+Oracle:{2}: Henge Guardian gains trample until end of turn.

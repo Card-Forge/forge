@@ -1,0 +1,5 @@
+Name:Highborn Vampire
+ManaCost:3 B
+Types:Creature Vampire Warrior
+PT:4/3
+Oracle:

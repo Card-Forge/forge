@@ -1,0 +1,8 @@
+Name:Fire Servant
+ManaCost:3 R R
+Types:Creature Elemental
+PT:4/3
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.

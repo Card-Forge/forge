@@ -1,0 +1,7 @@
+Name:Pathrazer of Ulamog
+ManaCost:11
+Types:Creature Eldrazi
+PT:9/9
+K:Annihilator:3
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ CARDNAME can't be blocked except by three or more creatures.
+Oracle:Annihilator 3 (Whenever this creature attacks, defending player sacrifices three permanents.)\nPathrazer of Ulamog can't be blocked except by three or more creatures.

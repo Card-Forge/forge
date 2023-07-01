@@ -1,0 +1,9 @@
+Name:Lavinia, Azorius Renegade
+ManaCost:W U
+Types:Legendary Creature Human Soldier
+PT:2/2
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+nonLand | Caster$ Opponent | cmcGT$ Land | Description$ Each opponent can't cast noncreature spells with mana value greater than the number of lands that player controls.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCounter | ValidSA$ Spell.ManaSpent EQ0 | TriggerDescription$ Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
+AI:RemoveDeck:Random
+Oracle:Each opponent can't cast noncreature spells with mana value greater than the number of lands that player controls.\nWhenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.

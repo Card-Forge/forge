@@ -1,0 +1,9 @@
+Name:Sky Theater Strix
+ManaCost:1 U
+Types:Creature Bird
+PT:1/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying\nWhenever you cast a noncreature spell, Sky Theater Strix gets +1/+0 until end of turn.

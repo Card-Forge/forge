@@ -1,0 +1,7 @@
+Name:Fen Hauler
+ManaCost:6 B
+Types:Creature Insect
+PT:5/5
+K:Improvise
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Artifact.Creature | Description$ CARDNAME can't be blocked by artifact creatures.
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nFen Hauler can't be blocked by artifact creatures.

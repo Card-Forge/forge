@@ -1,0 +1,7 @@
+Name:Singing Tree
+ManaCost:3 G
+Types:Creature Plant
+PT:0/3
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Power$ 0 | SpellDescription$ Target attacking creature has base power 0 until end of turn.
+AI:RemoveDeck:All
+Oracle:{T}: Target attacking creature has base power 0 until end of turn.

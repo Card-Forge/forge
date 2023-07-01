@@ -1,0 +1,6 @@
+Name:Pain Magnification
+ManaCost:1 B R
+Types:Enchantment
+T:Mode$ DamageDone | ValidTarget$ Opponent | DamageAmount$ GE3 | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.
+SVar:TrigDestroy:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.

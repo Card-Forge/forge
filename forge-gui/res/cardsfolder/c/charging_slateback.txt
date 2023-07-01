@@ -1,0 +1,7 @@
+Name:Charging Slateback
+ManaCost:4 R
+Types:Creature Beast
+PT:4/3
+K:CARDNAME can't block.
+K:Morph:4 R
+Oracle:Charging Slateback can't block.\nMorph {4}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

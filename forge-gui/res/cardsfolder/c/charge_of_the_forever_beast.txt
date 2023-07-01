@@ -1,0 +1,7 @@
+Name:Charge of the Forever-Beast
+ManaCost:2 G
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 2 G Reveal<1/Creature> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature or planeswalker equal to the revealed card's power.
+SVar:X:Revealed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, reveal a creature card from your hand.\nCharge of the Forever-Beast deals damage to target creature or planeswalker equal to the revealed card's power.

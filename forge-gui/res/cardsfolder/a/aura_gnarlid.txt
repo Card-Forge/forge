@@ -1,0 +1,10 @@
+Name:Aura Gnarlid
+ManaCost:2 G
+Types:Creature Beast
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:Y:Count$CardPower
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Aura on the battlefield.
+SVar:X:Count$Valid Aura
+SVar:BuffedBy:Aura
+Oracle:Creatures with power less than Aura Gnarlid's power can't block it.\nAura Gnarlid gets +1/+1 for each Aura on the battlefield.

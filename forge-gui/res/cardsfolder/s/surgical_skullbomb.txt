@@ -1,0 +1,9 @@
+Name:Surgical Skullbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+A:AB$ ChangeZone | Cost$ 2 U Sac<1/CARDNAME> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw
+DeckNeeds:Color$Blue
+DeckHas:Ability$Sacrifice
+Oracle:{1}, Sacrifice Surgical Skullbomb: Draw a card.\n{2}{U}, Sacrifice Surgical Skullbomb: Return target creature to its owner's hand. Draw a card. Activate only as a sorcery.

@@ -1,0 +1,6 @@
+Name:Relentless Hunter
+ManaCost:1 R G
+Types:Creature Human Warrior
+PT:3/3
+A:AB$ Pump | Cost$ 1 R G | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ CARDNAME gets +1/+1 and gains trample until end of turn.
+Oracle:{1}{R}{G}: Relentless Hunter gets +1/+1 and gains trample until end of turn.

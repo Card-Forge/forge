@@ -1,0 +1,9 @@
+Name:Faithful Mending
+ManaCost:W U
+Types:Instant
+A:SP$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | StackDescription$ {p:You} gains 2 life, | SpellDescription$ You gain 2 life, draw two cards, then discard two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | StackDescription$ draws two cards,
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | StackDescription$ then discards two cards.
+K:Flashback:1 W U
+DeckHas:Ability$LifeGain|Discard|Graveyard
+Oracle:You gain 2 life, draw two cards, then discard two cards.\nFlashback {1}{W}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

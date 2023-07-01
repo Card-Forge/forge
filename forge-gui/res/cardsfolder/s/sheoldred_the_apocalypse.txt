@@ -1,0 +1,11 @@
+Name:Sheoldred, the Apocalypse
+ManaCost:2 B B
+Types:Legendary Creature Phyrexian Praetor
+PT:4/5
+K:Deathtouch
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ Drawn | ValidCard$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent draws a card, they lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch\nWhenever you draw a card, you gain 2 life.\nWhenever an opponent draws a card, they lose 2 life.

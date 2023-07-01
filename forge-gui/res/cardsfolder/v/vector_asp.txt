@@ -1,0 +1,6 @@
+Name:Vector Asp
+ManaCost:1
+Types:Artifact Creature Phyrexian Snake
+PT:1/1
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
+Oracle:{B}: Vector Asp gains infect until end of turn. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

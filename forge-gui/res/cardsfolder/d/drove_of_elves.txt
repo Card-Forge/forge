@@ -1,0 +1,10 @@
+Name:Drove of Elves
+ManaCost:3 G
+Types:Creature Elf
+PT:*/*
+K:Hexproof
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of green permanents you control.
+SVar:X:Count$Valid Permanent.Green+YouCtrl
+SVar:BuffedBy:Permanent.Green
+SVar:NoZeroToughnessAI:True
+Oracle:Hexproof\nDrove of Elves's power and toughness are each equal to the number of green permanents you control.

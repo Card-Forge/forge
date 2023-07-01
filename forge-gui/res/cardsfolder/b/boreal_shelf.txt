@@ -1,0 +1,6 @@
+Name:Boreal Shelf
+ManaCost:no cost
+Types:Snow Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
+Oracle:Boreal Shelf enters the battlefield tapped.\n{T}: Add {W} or {U}.

@@ -1,0 +1,6 @@
+Name:Serpentine Kavu
+ManaCost:4 G
+Types:Creature Kavu
+PT:4/4
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+Oracle:{R}: Serpentine Kavu gains haste until end of turn.

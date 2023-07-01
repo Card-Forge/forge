@@ -1,0 +1,8 @@
+Name:Cosmic Larva
+ManaCost:1 R R
+Types:Creature Beast
+PT:7/6
+K:Trample
+K:UpkeepCost:Sac<2/Land>
+AI:RemoveDeck:All
+Oracle:Trample\nAt the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.

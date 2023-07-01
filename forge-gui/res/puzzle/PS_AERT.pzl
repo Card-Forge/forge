@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Aether Revolt Throwback Puzzle - how much damage can you deal?
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/03/056.-AER003-April-2.jpg
+Goal:Win
+Turns:1
+Difficulty:Special
+Description:Try to do as much damage to your opponent as possible during your turn.
+[state]
+humanlife=20
+ailife=1
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Nature's Way;Engineered Might;Animation Module;Felidar Guardian;Sram's Expertise;Walking Ballista
+humanbattlefield=Inspiring Statuary;Fabrication Module;Decoction Module;Cultivator's Caravan;Crackdown Construct;Plains|Set:KLD;Plains|Set:KLD;Plains|Set:KLD;Plains|Set:KLD;Forest|Set:KLD;Forest|Set:KLD;Forest|Set:KLD
+aibattlefield=t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo2;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo2;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo3;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo;t:Servo,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Servo,Keywords:,Image:c_1_1_servo2

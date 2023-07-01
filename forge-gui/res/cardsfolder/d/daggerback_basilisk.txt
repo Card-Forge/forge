@@ -1,0 +1,6 @@
+Name:Daggerback Basilisk
+ManaCost:2 G
+Types:Creature Basilisk
+PT:2/2
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

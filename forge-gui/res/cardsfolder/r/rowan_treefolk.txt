@@ -1,0 +1,5 @@
+Name:Rowan Treefolk
+ManaCost:3 G
+Types:Creature Treefolk
+PT:3/4
+Oracle:

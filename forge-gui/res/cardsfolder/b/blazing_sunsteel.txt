@@ -1,0 +1,10 @@
+Name:Blazing Sunsteel
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ Y | Description$ Equipped creature gets +1/+0 for each opponent you have.
+SVar:Y:PlayerCountOpponents$Amount
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Creature.EquippedBy | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature is dealt damage, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any | DamageSource$ TriggeredTargetLKICopy
+SVar:X:TriggerCount$DamageAmount
+K:Equip:4
+Oracle:Equipped creature gets +1/+0 for each opponent you have.\nWhenever equipped creature is dealt damage, it deals that much damage to any target.\nEquip {4}

@@ -1,0 +1,20 @@
+Name:Golden Guardian
+ManaCost:4
+Types:Artifact Creature Golem
+PT:4/4
+K:Defender
+A:AB$ Fight | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SubAbility$ DBDelayedTrigger | StackDescription$ CARDNAME fights {c:Targeted}. | SpellDescription$ CARDNAME fights another target creature you control.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Self | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | SpellDescription$ When CARDNAME dies this turn, return it to the battlefield transformed under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True
+AlternateMode:DoubleFaced
+Oracle:Defender\n{2}: Golden Guardian fights another target creature you control. When Golden Guardian dies this turn, return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Gold-Forge Garrison
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+A:AB$ Token | Cost$ 4 T | TokenScript$ c_4_4_a_golem | SpellDescription$ Create a 4/4 colorless Golem artifact creature token.
+DeckHas:Ability$Token
+Oracle:(Transforms from Golden Guardian.)\n{T}: Add two mana of any one color.\n{4}, {T}: Create a 4/4 colorless Golem artifact creature token.

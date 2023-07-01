@@ -1,0 +1,7 @@
+Name:Gurmag Angler
+ManaCost:6 B
+Types:Creature Zombie Fish
+PT:5/5
+K:Delve
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)

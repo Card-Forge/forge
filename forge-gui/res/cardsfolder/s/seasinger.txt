@@ -1,0 +1,10 @@
+Name:Seasinger
+ManaCost:1 U U
+Types:Creature Merfolk
+PT:0/1
+K:You may choose not to untap CARDNAME during your untap step.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.ControllerControlsIsland | TgtPrompt$ Select target creature whose controller controls an Island | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature whose controller controls an Island for as long as you control CARDNAME and CARDNAME remains tapped.
+SVar:NeedsToPlay:Island.YouCtrl
+Oracle:When you control no Islands, sacrifice Seasinger.\nYou may choose not to untap Seasinger during your untap step.\n{T}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.

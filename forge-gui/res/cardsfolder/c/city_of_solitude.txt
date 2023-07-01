@@ -1,0 +1,8 @@
+Name:City of Solitude
+ManaCost:2 G
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card | NonCasterTurn$ True | Description$ Players can cast spells and activate abilities only during their own turns.
+S:Mode$ CantBeActivated | ValidCard$ Card | NonActivatorTurn$ True
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Players can cast spells and activate abilities only during their own turns.

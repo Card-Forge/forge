@@ -1,0 +1,6 @@
+Name:Tajuru Snarecaster
+ManaCost:2 G
+Types:Creature Elf Rogue
+PT:1/4
+K:Reach
+Oracle:Reach

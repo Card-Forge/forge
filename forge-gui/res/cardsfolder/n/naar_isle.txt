@@ -1,0 +1,11 @@
+Name:Naar Isle
+ManaCost:no cost
+Types:Plane Wildfire
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a flame counter on CARDNAME, then CARDNAME deals damage to you equal to the number of flame counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ FLAME | CounterNum$ 1 | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ You | NumDmg$ Y
+SVar:Y:Count$CardCounters.FLAME
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, CARDNAME deals 3 damage to target player or planeswalker.
+SVar:RolledChaos:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:At the beginning of your upkeep, put a flame counter on Naar Isle, then Naar Isle deals damage to you equal to the number of flame counters on it.\nWhenever chaos ensues, Naar Isle deals 3 damage to target player or planeswalker.

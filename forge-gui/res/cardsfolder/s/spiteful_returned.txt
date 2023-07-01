@@ -1,0 +1,10 @@
+Name:Spiteful Returned
+ManaCost:1 B
+Types:Enchantment Creature Zombie
+PT:1/1
+K:Bestow:3 B
+T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EnchantedBy | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or enchanted creature attacks, defending player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddSVar$ HasAttackEffect | Description$ Enchanted creature gets +1/+1.
+SVar:HasAttackEffect:TRUE
+Oracle:Bestow {3}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nWhenever Spiteful Returned or enchanted creature attacks, defending player loses 2 life.\nEnchanted creature gets +1/+1.

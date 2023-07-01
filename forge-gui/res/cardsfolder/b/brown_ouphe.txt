@@ -1,0 +1,6 @@
+Name:Brown Ouphe
+ManaCost:G
+Types:Creature Ouphe
+PT:1/1
+A:AB$ Counter | Cost$ 1 G T | TargetType$ Activated | TgtPrompt$ Select target activated ability from an artifact source | ValidTgts$ Artifact | SpellDescription$ Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
+Oracle:{1}{G}, {T}: Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)

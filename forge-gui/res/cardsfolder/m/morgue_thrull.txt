@@ -1,0 +1,7 @@
+Name:Morgue Thrull
+ManaCost:2 B
+Types:Creature Thrull
+PT:2/2
+A:AB$ Mill | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3 | SpellDescription$ Mill three cards.
+AI:RemoveDeck:All
+Oracle:Sacrifice Morgue Thrull: Mill three cards.

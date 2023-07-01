@@ -1,0 +1,6 @@
+Name:Repentant Blacksmith
+ManaCost:1 W
+Types:Creature Human
+PT:1/2
+K:Protection from red
+Oracle:Protection from red

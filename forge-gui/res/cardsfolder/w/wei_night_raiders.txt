@@ -1,0 +1,8 @@
+Name:Wei Night Raiders
+ManaCost:2 B B
+Types:Creature Human Soldier
+PT:2/2
+K:Horsemanship
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Wei Night Raiders deals damage to an opponent, that player discards a card.

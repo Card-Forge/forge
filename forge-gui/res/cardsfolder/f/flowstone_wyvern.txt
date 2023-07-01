@@ -1,0 +1,7 @@
+Name:Flowstone Wyvern
+ManaCost:3 R R
+Types:Creature Drake
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
+Oracle:Flying\n{R}: Flowstone Wyvern gets +2/-2 until end of turn.

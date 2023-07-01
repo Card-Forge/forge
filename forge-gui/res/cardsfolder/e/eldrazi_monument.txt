@@ -1,0 +1,13 @@
+Name:Eldrazi Monument
+ManaCost:5
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SubAbility$ DBSacSelf | RememberSacrificed$ True
+SVar:DBSacSelf:DB$ Sacrifice | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying & Indestructible | Description$ Creatures you control get +1/+1 and have flying and indestructible.
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlayVar:Y GE3
+SVar:Y:Count$Valid Creature.YouCtrl
+Oracle:Creatures you control get +1/+1 and have flying and indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.

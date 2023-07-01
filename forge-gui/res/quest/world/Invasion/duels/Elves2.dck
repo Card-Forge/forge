@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Elvish Champion
+Icon=Dungeon Crawling Green.jpg
+Difficulty=medium
+Description=Elf deck
+Deck Type=constructed
+Name=Elves
+[Main]
+2 Armadillo Cloak|INV
+2 Aura Shards|INV
+4 Brass Herald|APC
+4 Coastal Tower|INV
+4 Elfhame Palace|INV
+4 Elvish Champion|INV
+2 Fact or Fiction|INV
+6 Forest|INV|1
+1 Gaea's Herald|PLS
+4 Gaea's Skyfolk|APC
+2 Island|INV|1
+2 Island|INV|2
+4 Llanowar Knight|INV
+2 Nomadic Elf|INV
+2 Plains|INV|1
+2 Plains|INV|3
+1 Quirion Elves|INV
+2 Steel Leaf Paladin|PLS
+4 Sylvan Messenger|APC
+4 Temporal Spring|APC
+2 Wash Out|INV

@@ -1,0 +1,8 @@
+Name:Grafted Wargear
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:0
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 2 | Description$ Equipped creature gets +3/+2.
+T:Mode$ Unattach | ValidAttachment$ Card.Self | ValidObject$ Permanent | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes unattached from a permanent, sacrifice that permanent.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ TriggeredObjectLKICopy | Controller$ You
+Oracle:Equipped creature gets +3/+2.\nWhenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.\nEquip {0} ({0}: Attach to target creature you control. Equip only as a sorcery.)

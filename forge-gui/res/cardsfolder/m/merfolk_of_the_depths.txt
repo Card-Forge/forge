@@ -1,0 +1,6 @@
+Name:Merfolk of the Depths
+ManaCost:4 GU GU
+Types:Creature Merfolk Soldier
+PT:4/2
+K:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)

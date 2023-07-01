@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Lord of Fate 2
+Title=Lord of Fate
+Icon=LordOfFate.jpg
+Difficulty=medium
+Description=BW enchanted fliers and reanimation.
+Deck Type=constructed
+[main]
+2 Animate Dead|4ED
+2 Bog Imp|DRK
+3 Castle|LEB
+2 Divine Transformation|LEG
+3 Drudge Skeletons|4ED
+3 Healing Salve|4ED
+3 Holy Strength|4ED
+3 Ornithopter|4ED
+3 Osai Vultures|LEG
+3 Pestilence|4ED
+11 Plains|4ED
+4 Serra Angel|4ED
+11 Swamp|4ED
+3 Unholy Strength|4ED
+4 Yotian Soldier|4ED
+[sideboard]

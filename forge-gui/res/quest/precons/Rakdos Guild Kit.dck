@@ -1,0 +1,51 @@
+[shop]
+WinsToUnlock=20
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rakdos Guild Kit
+Description=Welcome to the Cult of Rakdos. This box holds all the twisted tools you need to cast off the petty rules of society and indulge your darkest desires with abandon. Unleash chaos on the world!
+Set=GK2
+Image=rakdos_guild_kit.jpg
+[Avatar]
+
+[Main]
+1 Auger Spree|GK2
+1 Avatar of Discord|GK2
+1 Blade Juggler|RNA
+1 Cackling Flames|GK2
+1 Carnival // Carnage|RNA
+1 Carnival Hellsteed|GK2
+1 Crypt Champion|GK2
+1 Dead Revels|RNA
+1 Demonfire|GK2
+1 Dreadbore|GK2
+1 Jagged Poppet|GK2
+1 Lyzolda, the Blood Witch|GK2
+1 Master of Cruelties|GK2
+8 Mountain|GK2|1
+2 Rakdos Cackler|GK2
+4 Rakdos Carnarium|GK2
+1 Rakdos Charm|GK2
+1 Rakdos Firewheeler|RNA
+2 Rakdos Guildgate|RNA|1
+2 Rakdos Guildgate|RNA|2
+2 Rakdos Guildmage|GK2
+1 Rakdos Keyrune|GK2
+1 Rakdos Pit Dragon|GK2
+1 Rakdos Shred-Freak|GK2
+2 Rakdos Signet|GK2
+1 Rakdos the Defiler|GK2
+1 Rakdos's Return|GK2
+1 Rakdos, Lord of Riots+|GK2
+1 Riot Spikes|GK2
+1 Rix Maadi Reveler|RNA
+1 Skewer the Critics|RNA
+1 Spawn of Mayhem|RNA
+1 Splatter Thug|GK2
+8 Swamp|GK2|2
+1 Theater of Horrors|RNA
+1 Thrill-Kill Assassin|GK2
+1 Utvara Hellkite|GK2
+1 Wrecking Ball|GK2

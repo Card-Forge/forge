@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Jengu 4
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=very hard
+Description=Jengu plays Jason Gordon's 'Big Blue' deck from the PT Paris 1997.
+Deck Type=constructed
+Card Reward=20% Waterspout Djinn|VIS
+[main]
+4 Boomerang|MIR
+4 Cloud Elemental|VIS
+2 Desertion|VIS
+4 Dissipate|MIR
+4 Flood Plain|MIR
+1 Flooded Shoreline|VIS
+3 Floodgate|MIR
+3 Impulse|VIS
+16 Island|MIR
+4 Man-o'-War|VIS
+4 Memory Lapse|MIR
+1 Plains|MIR
+4 Quicksand|VIS
+2 Snake Basket|VIS
+4 Waterspout Djinn|VIS
+[sideboard]
+[planes]
+[schemes]

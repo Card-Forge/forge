@@ -1,0 +1,8 @@
+Name:Popular Entertainer
+ManaCost:1 R
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ DamageDealt | Description$ Commander creatures you own have "Whenever one or more creatures you control deal combat damage to a player, goad target creature that player controls." (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:DamageDealt:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigGoad | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, goad target creature that player controls.
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature that player controls
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever one or more creatures you control deal combat damage to a player, goad target creature that player controls." (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

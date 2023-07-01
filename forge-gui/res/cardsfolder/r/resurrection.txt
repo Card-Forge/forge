@@ -1,0 +1,6 @@
+Name:Resurrection
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+Oracle:Return target creature card from your graveyard to the battlefield.

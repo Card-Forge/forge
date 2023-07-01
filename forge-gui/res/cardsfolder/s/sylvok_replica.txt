@@ -1,0 +1,6 @@
+Name:Sylvok Replica
+ManaCost:3
+Types:Artifact Creature Shaman
+PT:1/3
+A:AB$ Destroy | Cost$ G Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:{G}, Sacrifice Sylvok Replica: Destroy target artifact or enchantment.

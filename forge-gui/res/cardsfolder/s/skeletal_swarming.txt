@@ -1,0 +1,12 @@
+Name:Skeletal Swarming
+ManaCost:3 B G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Skeleton.YouCtrl | AddKeyword$ Trample | AddPower$ AffectedX | Description$ Each Skeleton you control has trample, attacks each combat if able, and gets +X/+0, where X is the number of other Skeletons you control.
+S:Mode$ MustAttack | ValidCreature$ Skeleton.YouCtrl | Secondary$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a tapped 1/1 black Skeleton creature token. If a creature died this turn, create two of those tokens instead.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_skeleton | TokenTapped$ True | TokenAmount$ Y
+SVar:AffectedX:Count$Valid Skeleton.YouCtrl+Other
+SVar:Y:Count$Morbid.2.1
+DeckHas:Ability$Token & Type$Skeleton
+DeckHints:Type$Skeleton
+Oracle:Each Skeleton you control has trample, attacks each combat if able, and gets +X/+0, where X is the number of other Skeletons you control.\nAt the beginning of your end step, create a tapped 1/1 black Skeleton creature token. If a creature died this turn, create two of those tokens instead.

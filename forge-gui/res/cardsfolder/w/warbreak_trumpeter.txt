@@ -1,0 +1,10 @@
+Name:Warbreak Trumpeter
+ManaCost:R
+Types:Creature Goblin
+PT:1/1
+K:Morph:X X R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, create X 1/1 red Goblin creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:Morph {X}{X}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Warbreak Trumpeter is turned face up, create X 1/1 red Goblin creature tokens.

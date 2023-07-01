@@ -1,0 +1,8 @@
+Name:Sphinx of Jwar Isle
+ManaCost:4 U U
+Types:Creature Sphinx
+PT:5/5
+K:Flying
+K:Shroud
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+Oracle:Flying\nShroud (This creature can't be the target of spells or abilities.)\nYou may look at the top card of your library any time.

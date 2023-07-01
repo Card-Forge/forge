@@ -1,0 +1,14 @@
+Name:Toxrill, the Corrosive
+ManaCost:5 B B
+Types:Legendary Creature Slug Horror
+PT:7/7
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ At the beginning of each end step, put a slime counter on each creature you don't control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouDontCtrl | CounterType$ SLIME | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AffectedZone$ Battlefield | AddPower$ -AffectedX | AddToughness$ -AffectedX | Description$ Creatures you don't control get -1/-1 for each slime counter on them.
+SVar:AffectedX:Count$CardCounters.SLIME
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl+counters_GE1_SLIME | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you don't control with a slime counter on it dies, create a 1/1 black Slug creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_slug
+A:AB$ Draw | Cost$ U B Sac<1/Slug> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:AIPreference:SacCost$Slug.token
+DeckHas:Ability$Counters|Token|Sacrifice
+Oracle:At the beginning of each end step, put a slime counter on each creature you don't control.\nCreatures you don't control get -1/-1 for each slime counter on them.\nWhenever a creature you don't control with a slime counter on it dies, create a 1/1 black Slug creature token.\n{U}{B}, Sacrifice a Slug: Draw a card.

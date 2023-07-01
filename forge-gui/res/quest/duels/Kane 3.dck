@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Kane 3
+Title=Kane
+Difficulty=hard
+Description=WB Exalted deck
+Icon=Kane.jpg
+Deck Type=constructed
+[main]
+4 Plains
+3 Swamp
+4 Scrubland
+4 Marsh Flats
+4 Isolated Chapel
+1 Urborg, Tomb of Yawgmoth
+4 Cathedral of War
+4 Akrasan Squire
+4 Aven Squire
+4 Battlegrace Angel
+4 Duty-Bound Dead
+4 Knight of Glory
+4 Knight of Infamy
+4 Silent Arbiter
+4 Sublime Archangel
+1 Tormented Soul
+1 Disenchant
+1 Angelic Benediction
+1 Unmake
+[sideboard]

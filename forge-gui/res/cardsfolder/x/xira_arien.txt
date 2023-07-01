@@ -1,0 +1,8 @@
+Name:Xira Arien
+ManaCost:B R G
+Types:Legendary Creature Insect Wizard
+PT:1/2
+K:Flying
+A:AB$ Draw | Cost$ B R G T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
+SVar:NonCombatPriority:2
+Oracle:Flying\n{B}{R}{G}, {T}: Target player draws a card.

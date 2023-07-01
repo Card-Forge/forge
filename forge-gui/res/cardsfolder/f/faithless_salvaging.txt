@@ -1,0 +1,7 @@
+Name:Faithless Salvaging
+ManaCost:1 R
+Types:Instant
+K:Rebound
+A:SP$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDrawOne | SpellDescription$ Discard a card, then draw a card.
+SVar:DBDrawOne:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Discard a card, then draw a card.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

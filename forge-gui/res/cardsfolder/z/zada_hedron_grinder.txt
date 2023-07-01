@@ -1,0 +1,7 @@
+Name:Zada, Hedron Grinder
+ManaCost:3 R
+Types:Legendary Creature Goblin Ally
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | IsSingleTarget$ True | TargetsValid$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets only CARDNAME, copy the spell for each other creature you control that spell could target. Each copy targets a different one of those creatures.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ You | CopyForEachCanTarget$ Creature.YouCtrl
+Oracle:Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.

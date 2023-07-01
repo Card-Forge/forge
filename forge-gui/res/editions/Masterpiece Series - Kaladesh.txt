@@ -1,0 +1,69 @@
+[metadata]
+Code=MPS_KLD
+Alias=MPS
+Date=2016-09-30
+Name=Masterpiece Series - Kaladesh
+Type=Collector_Edition
+ScryfallCode=mps
+
+[cards]
+1 M Cataclysmic Gearhulk @Jason Rainville
+2 M Torrential Gearhulk @Jakub Kasper
+3 M Noxious Gearhulk @Vincent Proce
+4 M Combustible Gearhulk @Greg Opalinski
+5 M Verdurous Gearhulk @Zack Stella
+6 M Aether Vial @Raoul Vitale
+7 M Champion's Helm @Lindsey Look
+8 M Chromatic Lantern @Yeong-Hao Han
+9 M Chrome Mox @Kieran Yanner
+10 M Cloudstone Curio @Noah Bradley
+11 M Crucible of Worlds @Chris Rahn
+12 M Gauntlet of Power @John Severin Brassell
+13 M Hangarback Walker @Adam Paquette
+14 M Lightning Greaves @Slawomir Maniak
+15 M Lotus Petal @Slawomir Maniak
+16 M Mana Crypt @Volkan Baǵa
+17 M Mana Vault @Kirsten Zirngibl
+18 M Mind's Eye @David Gaillet
+19 M Mox Opal @Chris Rahn
+20 M Painter's Servant @Magali Villeneuve
+21 M Rings of Brighthearth @Yeong-Hao Han
+22 M Scroll Rack @Jason A. Engle
+23 M Sculpting Steel @Magali Villeneuve
+24 M Sol Ring @Volkan Baǵa
+25 M Solemn Simulacrum @Daarken
+26 M Static Orb @Tommy Arnold
+27 M Steel Overseer @Adam Paquette
+28 M Sword of Feast and Famine @Steven Belledin
+29 M Sword of Fire and Ice @Volkan Baǵa
+30 M Sword of Light and Shadow @Matt Stewart
+31 M Arcbound Ravager @Daarken
+32 M Black Vise @Igor Kieryluk
+33 M Chalice of the Void @Kieran Yanner
+34 M Defense Grid @Jonas De Ro
+35 M Duplicant @Slawomir Maniak
+36 M Engineered Explosives @James Paick
+37 M Ensnaring Bridge @Florian de Gesincourt
+38 M Extraplanar Lens @Noah Bradley
+39 M Grindstone @Johann Bodin
+40 M Meekstone @Steve Argyle
+41 M Oblivion Stone @Yeong-Hao Han
+42 M Ornithopter @Howard Lyon
+43 M Paradox Engine @Vincent Proce
+44 M Pithing Needle @Joseph Meehan
+45 M Planar Bridge @Raymond Swanland
+46 M Platinum Angel @Victor Adame Minguez
+47 M Sphere of Resistance @Richard Wright
+48 M Staff of Domination @Zezhou Chen
+49 M Sundering Titan @Lius Lasahido
+50 M Sword of Body and Mind @Mark Zug
+51 M Sword of War and Peace @Filip Burburan
+52 M Trinisphere @Daniel Ljunggren
+53 M Vedalken Shackles @Svetlin Velinov
+54 M Wurmcoil Engine @Aleksi Briclot
+
+[tokens]
+g_2_2_wolf
+c_1_1_a_thopter_flying
+c_3_3_a_phyrexian_wurm_deathtouch
+c_3_3_a_phyrexian_wurm_lifelink

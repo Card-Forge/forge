@@ -1,0 +1,6 @@
+Name:Forbidden Friendship
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Token | TokenScript$ r_1_1_dinosaur_haste,w_1_1_human_soldier | SpellDescription$ Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.
+DeckHas:Ability$Token & Type$Dinosaur|Human|Soldier
+Oracle:Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.

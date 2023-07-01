@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #07
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/03/150.-THB7-scaled.jpg
+Goal:Win
+Turns:100
+Difficulty:Mythic
+Description:It's your OPPONENT'S turn (first main phase), and you need to win before you lose. Can you do it? Your opponent has no cards in hand and no available mana (assume they just tapped out to cast Goblin Assault Team). You control your opponent's Dreadhorde Butcher with The Akroan War's first chapter ability. Assume the puzzle starts with no cards in either player's graveyard.
+[state]
+humanlife=3
+ailife=11
+turn=1
+activeplayer=ai
+activephase=MAIN1
+humanhand=Lazotep Plating;Slaying Fire;So Tiny;Shock;Gideon's Triumph;Aspect of Manticore
+humanbattlefield=The Akroan War|Counters:LORE=2|ExecuteScript:DBGainControl->1;Blood Aspirant;Flux Channeler;Naiad of Hidden Coves;Temple of Enlightenment|NoETBTrigs;Temple of Enlightenment|NoETBTrigs;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs
+aibattlefield=Underworld Dreams;Underworld Dreams;Underworld Dreams;Ferocity of the Wilds;Goblin Assault Team;Temple Thief;Mire Triton;Dreadhorde Butcher|Id:1

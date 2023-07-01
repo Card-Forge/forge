@@ -1,0 +1,6 @@
+Name:Portal of Sanctuary
+ManaCost:2 U
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ 1 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ChangeType$ TargetedCard.Self,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Hand | UseAllOriginZones$ True | PlayerTurn$ True | SpellDescription$ Return target creature you control and all Auras attached to it to their owners' hands. Activate only during your turn. | StackDescription$ Return {c:Targeted} and all Auras attached to it to their owners' hands.
+AI:RemoveDeck:All
+Oracle:{1}, {T}: Return target creature you control and each Aura attached to it to their owners' hands. Activate only during your turn.

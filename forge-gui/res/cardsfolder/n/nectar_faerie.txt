@@ -1,0 +1,8 @@
+Name:Nectar Faerie
+ManaCost:1 B
+Types:Creature Faerie Wizard
+PT:1/1
+K:Flying
+A:AB$ Pump | Cost$ B T | ValidTgts$ Faerie,Elf | TgtPrompt$ Select target Faerie or Elf | KW$ Lifelink | SpellDescription$ Target Faerie or Elf gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
+AI:RemoveDeck:Random
+Oracle:Flying\n{B}, {T}: Target Faerie or Elf gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)

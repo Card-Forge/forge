@@ -1,0 +1,6 @@
+Name:Bristling Boar
+ManaCost:3 G
+Types:Creature Boar
+PT:4/3
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+Oracle:Bristling Boar can't be blocked by more than one creature.

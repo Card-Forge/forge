@@ -1,0 +1,7 @@
+Name:Kris Mage
+ManaCost:R
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ DealDamage | Cost$ R T Discard<1/Card> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+Oracle:{R}, {T}, Discard a card: Kris Mage deals 1 damage to any target.

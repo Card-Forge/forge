@@ -1,0 +1,9 @@
+Name:Powerstone Engineer
+ManaCost:1 W
+Types:Creature Human Artificer
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+SVar:SacMe:2
+DeckHas:Ability$Token & Type$Artifact
+Oracle:When Powerstone Engineer dies, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

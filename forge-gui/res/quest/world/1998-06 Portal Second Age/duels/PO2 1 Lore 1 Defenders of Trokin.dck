@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 1 Defenders of Trokin
+Title=Defenders of Trokin
+Difficulty=easy
+Description="I dedicate my body to my country\nAnd my life to my King."\n-Alaborn Soldier's Oath
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Grenadier|PO2
+4 Alaborn Musketeer|PO2
+4 Alaborn Trooper|PO2
+3 Bargain|PO2
+3 Festival of Trokin|PO2
+3 Path of Peace|PO2
+24 Plains|PO2|2
+4 Steam Catapult|PO2
+4 Town Sentry|PO2
+3 Vengeance|PO2
+4 Volunteer Militia|PO2

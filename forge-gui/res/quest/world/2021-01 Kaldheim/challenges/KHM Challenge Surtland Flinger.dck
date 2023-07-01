@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Surtland Flinger
+OpponentName=The Flingers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Surtland Frostpyre|Surtland Frostpyre
+HumanExtras=
+[metadata]
+Title=Surtland Flinger
+Difficulty=medium
+Description=Victory before camaraderie.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=KHM Challenge: Surtland Flinger
+[Main]
+30 Mountain|KHM|1
+30 Surtland Flinger|KHM|1

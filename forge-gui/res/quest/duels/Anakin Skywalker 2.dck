@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker 2
+Title=Anakin Skywalker
+Difficulty=medium
+Description=WB Keyword deck with Cairn Wanderer and Concerted Effort
+Icon=Anakin Skywalker.jpg
+Deck Type=constructed
+[main]
+2 Swamp|M12
+8 Plains|M12
+4 Isolated Chapel
+4 Arcane Sanctum
+4 Marsh Flats
+1 Terramorphic Expanse
+1 Evolving Wilds
+4 Cairn Wanderer
+4 Concerted Effort
+1 Buried Alive
+1 Akroma, Angel of Wrath
+1 Prickly Boggart
+1 Lantern Kami
+2 Fencing Ace
+1 Thraben Valiant
+1 Beloved Chaplain
+1 Mistmeadow Skulk
+1 Spectral Lynx
+1 Angelic Curator
+1 Courier Hawk
+1 Hovermyr
+1 Freewind Falcon
+1 Duskrider Falcon
+1 Disciple of Malice
+1 Elite Inquisitor
+1 Nightguard Patrol
+1 Paladin en-Vec
+1 Skyhunter Skirmisher
+1 Vampire Nighthawk
+1 Commander Eesha
+1 Glorious Anthem
+1 Disenchant
+1 Mortify
+1 Unmake
+1 Condemn
+1 Doom Blade
+[sideboard]

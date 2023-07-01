@@ -1,0 +1,8 @@
+Name:Overwhelming Remorse
+ManaCost:4 B
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature or planeswalker | ValidTgts$ Creature,Planeswalker | SpellDescription$ Exile target creature or planeswalker.
+DeckHints:Ability$Graveyard|Mill
+Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nExile target creature or planeswalker.

@@ -1,0 +1,7 @@
+Name:Wind-Kin Raiders
+ManaCost:4 U U
+Types:Creature Human Artificer
+PT:4/3
+K:Improvise
+K:Flying
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nFlying

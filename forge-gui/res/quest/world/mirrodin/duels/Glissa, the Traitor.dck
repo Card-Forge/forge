@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Glissa, the Traitor
+Title=Glissa, the Traitor
+Difficulty=hard
+Description="There is a secret at the heart of this world, and I will betray it."
+Icon=Glissa the Traitor.jpg
+Deck Type=constructed
+[Main]
+4 Blackcleave Cliffs|SOM
+3 Copperline Gorge|SOM
+6 Forest|SOM|1
+4 Geth's Verdict|NPH
+4 Glissa, the Traitor|MBS
+1 Massacre Wurm|MBS
+1 Mountain|SOM|1
+2 Mycosynth Wellspring|NPH
+3 Necropede|SOM
+3 Perilous Myr|SOM
+4 Pyrite Spellbomb|MRD
+3 Ratchet Bomb|SOM
+4 Sheoldred, Whispering One|NPH
+2 Skinrender|SOM
+2 Solemn Simulacrum|MRD
+6 Swamp|SOM|1
+4 Sylvok Replica|SOM
+2 Talisman of Impulse|MRD
+2 Talisman of Indulgence|MRD
+[sideboard]

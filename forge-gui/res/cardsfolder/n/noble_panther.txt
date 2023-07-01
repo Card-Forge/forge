@@ -1,0 +1,6 @@
+Name:Noble Panther
+ManaCost:1 G W
+Types:Creature Cat
+PT:3/3
+A:AB$ Pump | Cost$ 1 | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:{1}: Noble Panther gains first strike until end of turn.

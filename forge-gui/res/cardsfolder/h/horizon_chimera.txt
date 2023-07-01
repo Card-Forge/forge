@@ -1,0 +1,10 @@
+Name:Horizon Chimera
+ManaCost:2 G U
+Types:Creature Chimera
+PT:3/2
+K:Flash
+K:Flying
+K:Trample
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flash\nFlying, trample\nWhenever you draw a card, you gain 1 life.

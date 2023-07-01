@@ -1,0 +1,10 @@
+Name:Gwenna, Eyes of Gaea
+ManaCost:2 G
+Types:Legendary Creature Elf Druid Scout
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Creature,Activated.Creature | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast creature spells or activate abilities of a creature or creature card.
+T:Mode$ SpellCast | ValidCard$ Creature.powerGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a creature spell with power 5 or greater, put a +1/+1 counter on CARDNAME and untap it.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self
+DeckHas:Ability$Counters
+Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast creature spells or activate abilities of a creature or creature card.\nWhenever you cast a creature spell with power 5 or greater, put a +1/+1 counter on Gwenna, Eyes of Gaea and untap it.

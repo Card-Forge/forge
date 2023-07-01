@@ -1,0 +1,9 @@
+Name:Eyeblight Cullers
+ManaCost:4 B
+Types:Creature Elf Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create three 1/1 green Elf Warrior creature tokens, then mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | NumCards$ 3 | Defined$ You
+DeckHas:Ability$Graveyard|Token
+Oracle:When Eyeblight Cullers dies, create three 1/1 green Elf Warrior creature tokens, then mill three cards. (Put the top three cards of your library into your graveyard.)

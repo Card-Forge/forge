@@ -1,0 +1,34 @@
+[quest]
+id=4003
+OpponentName=Trostani
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Temple Garden|RAV
+Credit Reward=200
+AIExtras=Loxodon Gatekeeper
+[metadata]
+Name=quest4003
+Title=Ramp it up
+Difficulty=hard
+Description=Always one step behind..
+Icon=Trostani.jpg
+Deck Type=constructed
+[main]
+3 Angel of Serenity|RTR
+3 Armada Wurm|RTR
+4 Birds of Paradise|RAV
+3 Carven Caryatid|RAV
+4 Civic Wayfinder|RAV
+4 Condemn|DIS
+4 Faith's Fetters|RAV
+4 Farseek|RAV
+10 Forest|RTR
+8 Plains|RTR
+4 Selesnya Guildgate|RTR
+4 Temple Garden|RTR
+3 Trostani, Selesnya's Voice|RTR
+2 Worldspine Wurm|RTR
+[sideboard]
+[planes]
+[schemes]

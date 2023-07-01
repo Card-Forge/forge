@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grave Advantage
+Description=Harness the power of death to gain ultimate dominance! Cast spells that load up your graveyard, then empty the catacombs to cast truly awesome creatures with the delve mechanic. Your creatures with high toughness will let you reap impressive rewards.
+Deck Type=constructed
+Set=FRF
+Image=grave_advantage.jpg
+[main]
+1 Abzan Beastmaster|FRF
+2 Archers' Parapet|KTK
+1 Archfiend of Depravity+|FRF
+1 Become Immense|KTK
+1 Carrion Crow|M15
+1 Dark Deal|FRF
+5 Forest|FRF|1
+5 Forest|FRF|2
+1 Gravedigger|M15
+2 Grim Contest|FRF
+2 Gurmag Angler|FRF
+1 Highland Game|KTK
+1 Hornet Queen|M15
+1 Hunt the Weak|FRF
+3 Jungle Hollow|FRF
+2 Kheru Bloodsucker|KTK
+1 Kheru Dreadmaw|KTK
+1 Kin-Tree Invocation|KTK
+1 Merciless Executioner|FRF
+1 Rakshasa's Secret|KTK
+1 Rotting Mastodon|KTK
+1 Satyr Wayfinder|M15
+2 Scout the Borders|KTK
+1 Shambling Attendants|KTK
+2 Sibsig Host|FRF
+2 Sudden Reclamation|FRF
+1 Sultai Flayer|KTK
+1 Sultai Scavenger|KTK
+7 Swamp|FRF|1
+6 Swamp|FRF|2
+1 Undergrowth Scavenger|M15
+1 Wall of Mulch|M15

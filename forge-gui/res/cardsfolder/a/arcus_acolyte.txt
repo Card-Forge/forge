@@ -1,0 +1,10 @@
+Name:Arcus Acolyte
+ManaCost:G W
+Types:Creature Human Cleric Archer
+PT:2/2
+K:Reach
+K:Lifelink
+K:Outlast:GW
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other+counters_LT1_P1P1 | AddKeyword$ Outlast:GW | Description$ Each other creature you control without a +1/+1 counter on it has outlast {G/W}.
+DeckHas:Ability$Counters
+Oracle:Reach, lifelink\nOutlast {G/W} ({G/W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach other creature you control without a +1/+1 counter on it has outlast {G/W}.

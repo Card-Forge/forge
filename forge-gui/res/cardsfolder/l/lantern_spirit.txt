@@ -1,0 +1,7 @@
+Name:Lantern Spirit
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying\n{U}: Return Lantern Spirit to its owner's hand.

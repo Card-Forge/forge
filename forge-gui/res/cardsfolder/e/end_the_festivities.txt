@@ -1,0 +1,5 @@
+Name:End the Festivities
+ManaCost:R
+Types:Sorcery
+A:SP$ DamageAll | NumDmg$ 1 | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidDescription$ each opponent and each creature and planeswalker they control. | SpellDescription$ CARDNAME deals 1 damage to each opponent and each creature and planeswalker they control.
+Oracle:End the Festivities deals 1 damage to each opponent and each creature and planeswalker they control.

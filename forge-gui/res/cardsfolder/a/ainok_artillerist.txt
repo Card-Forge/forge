@@ -1,0 +1,7 @@
+Name:Ainok Artillerist
+ManaCost:2 G
+Types:Creature Dog Archer
+PT:4/1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddKeyword$ Reach | Description$ CARDNAME has reach as long as it has a +1/+1 counter on it.
+DeckHints:Ability$Counters
+Oracle:Ainok Artillerist has reach as long as it has a +1/+1 counter on it. (It can block creatures with flying.)

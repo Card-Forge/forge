@@ -1,0 +1,7 @@
+Name:Sheltering Prayers
+ManaCost:W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land.Basic+ControllerControlsLand_LE3 | AddKeyword$ Shroud | Description$ Basic lands each player controls have shroud as long as that player controls three or fewer lands. (They can't be the targets of spells or abilities.)
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Basic lands each player controls have shroud as long as that player controls three or fewer lands. (They can't be the targets of spells or abilities.)

@@ -1,0 +1,9 @@
+Name:Esior, Wardwing Familiar
+ManaCost:1 U
+Types:Legendary Creature Bird
+PT:1/3
+K:Flying
+K:Partner
+S:Mode$ RaiseCost | ValidTarget$ Card.IsCommander+YouCtrl+inZoneBattlefield | Activator$ Opponent | Type$ Spell | Amount$ 3 | Description$ Spells your opponents cast that target one or more commanders you control cost {3} more to cast.
+AI:RemoveDeck:NonCommander
+Oracle:Flying\nSpells your opponents cast that target one or more commanders you control cost {3} more to cast.\nPartner (You can have two commanders if both have partner.)

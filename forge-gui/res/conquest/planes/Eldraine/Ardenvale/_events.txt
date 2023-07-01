@@ -1,0 +1,9 @@
+Name:Queen of the Realm|Deck:Queen of the Realm.dck|Variant:Commander|Avatar:Linden, the Steadfast Queen|Desc:
+Name:Return of the King|Deck:Return of the King.dck|Variant:Commander|Avatar:Kenrith, the Returned King|Desc:
+Name:Syr Alin, the Lion's Claw|Deck:Syr Alin, the Lion's Claw.dck|Variant:Commander|Avatar:Syr Alin, the Lion's Claw|Desc:
+Name:Tales of Archon|Deck:Tales of Archon.dck|Variant:None|Avatar:Harmonious Archon|Desc:
+Name:Ajani, Inspiring Leader|Deck:Ajani, Inspiring Leader.dck|Variant:Planeswalker|Avatar:Ajani, Inspiring Leader|Desc:
+Name:Stonehewer Giant|Deck:Stonehewer Giant.dck|Variant:Vanguard|Avatar:Stonehewer Giant Avatar|Desc:
+Name:Beauty and the Beast|Deck:Beauty and the Beast.dck|Variant:None|Avatar:Lovestruck Beast|Desc:
+Name:Ajani, Strength of the Pride|Deck:Ajani, Strength of the Pride.dck|Variant:Planeswalker|Avatar:Ajani, Strength of the Pride|Desc:
+Name:Random Ardenvale|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

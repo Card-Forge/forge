@@ -1,0 +1,5 @@
+Name:Stonework Puma
+ManaCost:3
+Types:Artifact Creature Cat Ally
+PT:2/2
+Oracle:

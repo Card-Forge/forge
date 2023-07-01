@@ -1,0 +1,7 @@
+Name:Restless Apparition
+ManaCost:WB WB WB
+Types:Creature Spirit
+PT:2/2
+A:AB$ Pump | Cost$ WB WB WB | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+K:Persist
+Oracle:{W/B}{W/B}{W/B}: Restless Apparition gets +3/+3 until end of turn.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

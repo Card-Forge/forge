@@ -1,0 +1,16 @@
+[metadata]
+Code=J15
+Date=2015-01-01
+Name=Judge Gift Cards 2015
+Type=Promo
+ScryfallCode=J15
+
+[cards]
+1 R Temporal Manipulation @Franz Vohwinkel
+2 R Shardless Agent @Izzy
+3 R Rishadan Port @Jonas De Ro
+4 R Ravages of War @Fang Yue
+5 R Damnation @Kev Walker
+6 R Dualcaster Mage @Matt Stewart
+7 M Feldon of the Third Path @Chase Stone
+8 R Wasteland @Steven Belledin

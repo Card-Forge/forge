@@ -1,0 +1,7 @@
+Name:Sarcomite Myr
+ManaCost:2 U
+Types:Artifact Creature Phyrexian Myr
+PT:2/1
+A:AB$ Pump | Cost$ 2 | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{2}: Sarcomite Myr gains flying until end of turn.\n{2}, Sacrifice Sarcomite Myr: Draw a card.

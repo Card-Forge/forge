@@ -1,0 +1,8 @@
+Name:Maw of Kozilek
+ManaCost:3 R
+Types:Creature Eldrazi Drone
+PT:2/5
+K:Devoid
+A:AB$ Pump | Cost$ C | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{C}: Maw of Kozilek gets +2/-2 until end of turn. ({C} represents colorless mana.)

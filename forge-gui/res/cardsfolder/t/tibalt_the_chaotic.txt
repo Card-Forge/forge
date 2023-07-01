@@ -1,0 +1,8 @@
+Name:Tibalt the Chaotic
+ManaCost:1 R R
+Types:Legendary Planeswalker Tibalt
+Loyalty:4
+A:AB$ Play | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AnySupportedCard$ Names:Ignorant Bliss,Crack the Earth,Blazing Volley | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ Trues | SpellDescription$ Cast a copy of one of the following cards chosen at random—Ignorant Bliss, Crack the Earth, Blazing Volley.
+A:AB$ Play | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | AnySupportedCard$ Names:Seething Song,Dance with Devils,Flamebreak | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Cast a copy of one of the following cards chosen at random—Seething Song, Dance with Devils, Flamebreak.
+A:AB$ Play | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | AnySupportedCard$ Names:Hellion Eruption,Insurrection,Warp World | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World.
+Oracle:[+1]: Cast a copy of one of the following cards chosen at random—Ignorant Bliss, Crack the Earth, Blazing Volley.\n[-3]: Cast a copy of one of the following cards chosen at random—Seething Song, Dance with Devils, Flamebreak.\n[-6]: Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World.

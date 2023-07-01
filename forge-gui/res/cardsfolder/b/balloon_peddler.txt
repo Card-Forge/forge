@@ -1,0 +1,6 @@
+Name:Balloon Peddler
+ManaCost:2 U
+Types:Creature Human Spellshaper
+PT:2/2
+A:AB$ Pump | Cost$ U T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+Oracle:{U}, {T}, Discard a card: Target creature gains flying until end of turn.

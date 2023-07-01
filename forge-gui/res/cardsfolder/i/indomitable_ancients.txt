@@ -1,0 +1,5 @@
+Name:Indomitable Ancients
+ManaCost:2 W W
+Types:Creature Treefolk Warrior
+PT:2/10
+Oracle:

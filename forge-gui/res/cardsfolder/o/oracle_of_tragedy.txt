@@ -1,0 +1,12 @@
+Name:Oracle of Tragedy
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield or dies, ABILITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBLoot,DBShuffle
+SVar:DBLoot:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn+cmcGE3 | TgtPrompt$ Select up to four target cards with mana value 3 or greater from your graveyard | TargetMin$ 0 | TargetMax$ 4 | Shuffle$ True | SpellDescription$ Shuffle up to four target cards with mana value 3 or greater from your graveyard into your library.
+DeckHints:Ability$Discard|Graveyard
+Oracle:When Oracle of Tragedy enters the battlefield or dies, choose one —\n• Draw a card, then discard a card.\n• Shuffle up to four target cards with mana value 3 or greater from your graveyard into your library.

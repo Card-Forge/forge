@@ -1,0 +1,8 @@
+Name:Vulshok Splitter
+ManaCost:3 R
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+K:Equip:2 R
+DeckHas:Ability$Token & Type$Rebel
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +2/+0.\nEquip {2}{R}.

@@ -1,0 +1,5 @@
+Name:Conservator
+ManaCost:4
+Types:Artifact
+A:AB$ PreventDamage | Cost$ 3 T | Defined$ You | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to you this turn.
+Oracle:{3}, {T}: Prevent the next 2 damage that would be dealt to you this turn.

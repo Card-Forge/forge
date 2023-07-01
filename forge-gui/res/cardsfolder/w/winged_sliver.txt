@@ -1,0 +1,7 @@
+Name:Winged Sliver
+ManaCost:1 U
+Types:Creature Sliver
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Flying | Description$ All Sliver creatures have flying.
+SVar:PlayMain1:TRUE
+Oracle:All Sliver creatures have flying.

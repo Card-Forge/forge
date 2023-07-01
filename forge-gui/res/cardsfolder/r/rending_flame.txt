@@ -1,0 +1,6 @@
+Name:Rending Flame
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | AITgts$ Spirit.OppCtrl | NumDmg$ 5 | SubAbility$ DBDamagePlayer | SpellDescription$ CARDNAME deals 5 damage to target creature or player. If that permanent is a Spirit, CARDNAME also deals 2 damage to that permanent's controller.
+SVar:DBDamagePlayer:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Spirit | StackDescription$ If that permanent is a Spirit, CARDNAME also deals 2 damage to that permanent's controller.
+Oracle:Rending Flame deals 5 damage to target creature or planeswalker. If that permanent is a Spirit, Rending Flame also deals 2 damage to that permanent's controller.

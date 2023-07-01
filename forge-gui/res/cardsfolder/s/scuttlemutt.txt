@@ -1,0 +1,8 @@
+Name:Scuttlemutt
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ ChooseColor | Cost$ T | Defined$ You | OrColors$ True | SubAbility$ Animate | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn.
+SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
+Oracle:{T}: Add one mana of any color.\n{T}: Target creature becomes the color or colors of your choice until end of turn.

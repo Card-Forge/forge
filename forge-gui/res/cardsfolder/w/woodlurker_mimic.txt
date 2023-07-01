@@ -1,0 +1,8 @@
+Name:Woodlurker Mimic
+ManaCost:1 BG
+Types:Creature Shapeshifter
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.Black+Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both black and green, CARDNAME has base power and toughness 4/5 until end of turn and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 5 | Keywords$ Wither
+SVar:BuffedBy:Card.Black+Green
+Oracle:Whenever you cast a spell that's both black and green, Woodlurker Mimic has base power and toughness 4/5 until end of turn and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)

@@ -1,0 +1,1097 @@
+[metadata]
+Code=PLIST
+Date=2020-09-26
+Name=The List
+Type=Reprint
+ScryfallCode=PLIST
+
+[cards]
+1 U Iterative Analysis @Winona Nelson
+2 M Emrakul, the Aeons Torn @Mark Tedin
+3 U Lashweed Lurker @Igor Kieryluk
+4 R Thought-Knot Seer @Svetlin Velinov
+5 R Ancestor's Prophet @Kev Walker
+6 R Angel's Grace @Mark Zug
+7 C Anointer Priest @Lake Hurwitz
+8 C Aven Riftwatcher @Don Hazeltine
+9 U Belfry Spirit @Daren Bader
+10 U Calming Licid @D. Alexander Gregory
+11 U Cloudgoat Ranger @Adam Rex
+12 R Council's Judgment @Kev Walker
+13 R Disenchant @Heather Hudson
+14 R Eldrazi Displacer @Daarken
+15 R Emeria Angel @Jim Murray
+16 U Enlightened Tutor @Dan Frazier
+17 M Entreat the Angels @Todd Lockwood
+18 M Gideon, Ally of Zendikar @Eric Deschamps
+19 C Goldenglow Moth @Howard Lyon
+20 M History of Benalia @Noah Bradley
+21 R Hundred-Handed One @Brad Rigney
+22 U Kazandu Blademaster @Michael Komarck
+23 M Land Tax @Chuck Lukacs
+24 U Loyal Unicorn @Volkan Baǵa
+25 M Monastery Mentor @Magali Villeneuve
+26 M Nahiri, the Lithomancer @Eric Deschamps
+27 R Parallax Wave @Greg Staples
+28 U Pegasus Stampede @Mark Zug
+29 R Regal Caracal @Filip Burburan
+30 R Rest in Peace @Jason Rainville
+31 R Reveillark @Jim Murray
+32 R Sensei Golden-Tail @Stephen Tappin
+33 C Snubhorn Sentry @Aaron Miller
+34 U Soltari Monk @Janet Aulisio
+35 U Splicer's Skill @Jason Felix
+36 U Springjack Shepherd @Thomas Denmark
+37 U Sunscape Battlemage @Tony Szczudlo
+38 C Triplicate Spirits @Izzy
+39 C Trokin High Guard @Ron Spencer
+40 U Vanguard of Brimaz @Mark Zug
+41 R Winds of Abandon @Noah Bradley
+42 U Wizened Cenn @Kev Walker
+43 R Wrath of God @Mike Raabe
+44 C Amoeboid Changeling @Nils Hamm
+45 R Battle of Wits @Jason Chan
+46 U Brain Freeze @Tim Hildebrandt
+47 R Brainstorm @Daarken
+48 M Brazen Borrower @Iris Compiet
+49 R Broodstar @Glen Angus
+50 U Chemister's Insight @Josh Hass
+51 U Coveted Peacock @Christopher Burdett
+52 R Cryptic Command @Wayne England
+53 C Drift of Phantasms @Michael Phillippi
+54 U Enclave Cryptologist @Igor Kieryluk
+55 R Eternal Dominion @Shishizaru
+56 U Evermind @Matt Thompson
+57 R Eye of the Storm @Hideaki Takamura
+58 U Fabricate @Warren Mahy
+59 R Forced Fruition @William O'Connor
+60 R Ixidor, Reality Sculptor @Kev Walker
+61 R Jwari Shapeshifter @Kev Walker
+62 R Keeper of the Nine Gales @Jim Nelson
+63 C Latchkey Faerie @Warren Mahy
+64 M Lorthos, the Tidemaker @Kekai Kotaki
+65 C Man-o'-War @Jon J Muth
+66 R Mischievous Quanar @Lars Grant-West
+67 U Moon-Eating Dog @Tingting Yeh
+68 R Negate @Ralph Horsley
+69 U Noble Benefactor @DiTerlizzi
+70 R Octopus Umbra @Howard Lyon
+71 R Pact of Negation @Jason Chan
+72 R Patron Wizard @Donato Giancola
+73 U Pouncing Shoreshark @Daniel Warren Johnson
+74 U Pteramander @Simon Dominic
+75 U Reality Shift @Howard Lyon
+76 U Retreat to Coralhelm @Kieran Yanner
+77 U Ruination Guide @Mathias Kollros
+78 C Spined Thopter @Pete Venters
+79 C Stonybrook Banneret @Ralph Horsley
+80 M Temporal Manipulation @Franz Vohwinkel
+81 R Training Grounds @James Ryman
+82 U Vodalian Illusionist @John Matson
+83 R Ancient Craving @Rob Alexander
+84 U Beseech the Queen @Jason Chan
+85 R Bloodghast @Daarken
+86 M Bloodlord of Vaasgoth @Greg Staples
+87 R Body Snatcher @Mark Zug
+88 R Bogbrew Witch @Eric Deschamps
+89 R Brink of Madness @Donato Giancola
+90 C Cadaverous Knight @Dermot Power
+91 R Cruel Tutor @Kev Walker
+92 R Doom Blade @Carl Critchlow
+93 R Doomwake Giant @Kev Walker
+94 R Endling @Livia Prima
+95 R Extinction @Una Fricker
+96 U Gatekeeper of Malakir @Karl Kopinski
+97 C Gempalm Polluter @Dany Orizio
+98 U Golgari Thug @Kev Walker
+99 R Grim Haruspex @Seb McKinnon
+100 C Grim Harvest @Zoltan Boros & Gabor Szikszai
+101 R Kalastria Highborn @D. Alexander Gregory
+102 R Korlash, Heir to Blackblade @Daarken
+103 R Living Death @Mark Winters
+104 R Lord of the Undead @Brom
+105 U Murderous Cut @Yohann Schepacz
+106 R Necravolver @Dave Dorman
+107 U Necromancy @Pete Venters
+108 U Nezumi Graverobber @Jim Nelson
+109 U Oubliette @Jim Pavelec
+110 M Phyrexian Obliterator @Todd Lockwood
+111 R Promise of Power @Kev Walker
+112 U Relentless Rats @Thomas M. Baxa
+113 M Skithiryx, the Blight Dragon @Chippy
+114 R Tombstalker @Aleksi Briclot
+115 C Tortured Existence @Keith Parkinson
+116 U Unburial Rites @Ryan Pancoast
+117 C Urborg Panther @Cliff Nielsen
+118 U Vampire Nighthawk @Jason Chan
+119 M Vampire Nocturnus @Raymond Swanland
+120 U Victimize @Craig J Spearing
+121 R Virtus the Veiled @Johann Bodin
+122 U Abrade @Florian de Gesincourt
+123 U Anax, Hardened in the Forge @Jason A. Engle
+124 C Boggart Arsonists @Jesper Ejsing
+125 U Brothers Yamazaki @Ron Spears
+126 R Burst Lightning @Jung Park
+127 R Decree of Annihilation @John Avon
+128 R Fall of the Titans @Chris Rallis
+129 U The Flame of Keld @Lake Hurwitz
+130 C Fomori Nomad @Raymond Swanland
+131 R Goblin Chieftain @Sam Wood
+132 U Goblin Grenade @Kev Walker
+133 U Goblin Lore @D. Alexander Gregory
+134 U Hammer Mage @Rebecca Guay
+135 R Hammer of Purphoros @Yeong-Hao Han
+136 R Hell's Thunder @Karl Kopinski
+137 R Hidetsugu's Second Rite @Jeff Miracola
+138 R Hunted Dragon @Mark Zug
+139 R Jaya's Immolating Inferno @Noah Bradley
+140 R Kilnmouth Dragon @Carl Critchlow
+141 C Lash Out @Scott Hampton
+142 R Lightning Bolt @Kekai Kotaki
+143 R Lightning Crafter @Dan Scott
+144 U Light Up the Stage @Dmitry Burmak
+145 R Marauding Raptor @Bayard Wu
+146 R Moggcatcher @Pete Venters
+147 R Patron of the Akki @Jim Nelson
+148 C Plated Geopede @Eric Deschamps
+149 R Puppet's Verdict @Edward P. Beard, Jr.
+150 R Pyromancer Ascension @Kev Walker
+151 M Scourge of the Throne @Michael Komarck
+152 R Sedge Sliver @Richard Kane Ferguson
+153 U Shivan Meteor @Chippy
+154 C Simian Spirit Guide @Dave DeVries
+155 C Skred @Christopher Moeller
+156 C Stone Rain @John Matson
+157 R Tuktuk the Explorer @Volkan Baǵa
+158 R Voracious Dragon @Dominick Domingo
+159 R Warp World @Ron Spencer
+160 R Wild Research @Gary Ruddell
+161 U Alpha Kavu @Matt Cavotta
+162 R Awakening @Dan Frazier
+163 U Cradle Guard @Mark Zug
+164 C Curious Pair @Josu Hernaiz
+165 R Elvish Archdruid @Raymond Swanland
+166 U Eternal Witness @Terese Nielsen
+167 R Food Chain @Val Mayerik
+168 R Gaea's Anthem @Greg Staples
+169 R Genesis Hydra @Peter Mohrbacher
+170 R Gigantosaurus @Jonathan Kuo
+171 R Gorm the Great @Johann Bodin
+172 U Grizzly Fate @Dave Dorman
+173 R Groundbreaker @Matt Cavotta
+174 R Harmonize @Vance Kovacs
+175 R Helix Pinnacle @Dan Scott
+176 R Hua Tuo, Honored Physician @Gao Jianzhang
+177 U Imperious Perfect @Scott M. Fischer
+178 M Ishkanah, Grafwidow @Christine Choi
+179 R Jadelight Ranger @Jason Rainville
+180 M Kalonian Hydra @Chris Rahn
+181 M Khalni Hydra @Todd Lockwood
+182 C Moonmist @Ryan Yee
+183 C Muscle Sliver @Richard Kane Ferguson
+184 C Nightshade Peddler @John Stanko
+185 M Nissa Revane @Jaime Jones
+186 M Nylea, God of the Hunt @Chris Rahn
+187 R Parallel Evolution @Matt Cavotta
+188 R Primal Vigor @Matt Stewart
+189 U Rootrunner @Adam Rex
+190 U Saber Ants @Greg Staples
+191 R Skyshroud Behemoth @Eric Peterson
+192 R Song of the Dryads @Lars Grant-West
+193 M Soul of Zendikar @Vincent Proce
+194 R Spike Weaver @Mike Raabe
+195 R Squirrel Mob @Carl Critchlow
+196 U Ulvenwald Mysteries @Greg Opalinski
+197 C Willow Dryad @D. Alexander Gregory
+198 C Yavimaya Scion @DiTerlizzi
+199 R Zendikar Resurgent @Chris Rallis
+200 U Army Ants @Geofrey Darrow & I. Rabarot
+201 U Boros Challenger @Gabor Szikszai
+202 M Chromanticore @Min Yum
+203 M Chulane, Teller of Tales @Victor Adame Minguez
+204 U Crystalline Sliver @Allen Williams
+205 U Diregraf Captain @Slawomir Maniak
+206 R Doran, the Siege Tower @Mark Zug
+207 R Dromar, the Banisher @Dave Dorman
+208 R Dune-Brood Nephilim @Jim Murray
+209 R Etherium-Horn Sorcerer @Franz Vohwinkel
+210 M Ezuri, Claw of Progress @James Ryman
+211 R Fathom Mage @Ryan Pancoast
+212 R Fiery Justice @Mathias Kollros
+213 M Godsire @Jim Murray
+214 R Ith, High Arcanist @Zoltan Boros & Gabor Szikszai
+215 C Kingpin's Pet @Mark Zug
+216 M Lazav, the Multifarious @Yongjae Choi
+217 R Lightning Angel @rk post
+218 M Maelstrom Nexus @Steven Belledin
+219 U Merfolk Mistbinder @Clint Cearley
+220 M Muldrotha, the Gravetide @Jason Rainville
+221 U Necrotic Sliver @Dave Allsop
+222 R Nicol Bolas @D. Alexander Gregory
+223 M Oloro, Ageless Ascetic @Eric Deschamps
+224 M Omnath, Locus of Rage @Brad Rigney
+225 R Phyrexian Tyranny @Kev Walker
+226 M Progenitus @Jaime Jones
+227 C Shambling Shell @Joel Thomas
+228 U Sky Hussar @Kev Walker
+229 U Slimefoot, the Stowaway @Alex Konstad
+230 R Terminate @Thomas M. Baxa
+231 U Vitu-Ghazi Guildmage @Jason Chan
+232 M Wrenn and Six @Chase Stone
+233 U Zendikar Incarnate @Lucas Graciano
+234 U Angrath, Captain of Chaos @Slawomir Maniak
+235 R Djinn Illuminatus @Carl Critchlow
+236 U Murderous Redcap @Dave Allsop
+237 U Noggle Hedge-Mage @Larry MacDougall
+238 R Beck // Call @Adam Paquette
+239 R Cut // Ribbons @Raymond Swanland
+240 R Odds // Ends @Michael Sutfin
+241 R Acorn Catapult @Jesper Ejsing
+242 R Akroma's Memorial @Dan Scott
+243 U Arcbound Slith @Vance Kovacs
+244 C Arcum's Astrolabe @Igor Kieryluk
+245 C Blight Sickle @John Avon
+246 R Bonehoard @Chippy
+247 M The Chain Veil @Volkan Baǵa
+248 R Clearwater Goblet @Dany Orizio
+249 R Contagion Engine @Daarken
+250 U Crown of Empires @John Avon
+251 R Door to Nothingness @Puddnhead
+252 R Electrostatic Pummeler @Slawomir Maniak
+253 R Erratic Portal @John Matson
+254 U Everflowing Chalice @Steve Argyle
+255 U Fellwar Stone @John Avon
+256 U Fodder Cannon @DiTerlizzi
+257 C Fractured Powerstone @Rob Alexander
+258 R Helm of Kaldra @Donato Giancola
+259 U Isochron Scepter @Mark Harrison
+260 R Krark's Thumb @Ron Spencer
+261 R Lotus Bloom @Mark Zug
+262 U Memnite @Svetlin Velinov
+263 R Mycosynth Golem @Paolo Parente
+264 R Panharmonicon @Volkan Baǵa
+265 M Platinum Angel @Brom
+266 R Prismatic Geoscope @Steven Belledin
+267 R Scarecrone @Jesper Ejsing
+268 R Scroll Rack @Heather Hudson
+269 U Shuriken @Matt Cavotta
+270 U Skullclamp @Luca Zontini
+271 U Swiftfoot Boots @Svetlin Velinov
+272 R Tamiyo's Journal @Chase Stone
+273 R Tek @Chippy
+274 C Thought Vessel @rk post
+275 R Thrumming Stone @Rob Alexander
+276 U Trusty Machete @Raymond Swanland
+277 R Urza's Blueprints @Tom Wänerstrand
+278 C Wayfarer's Bauble @Darrell Riche
+279 M Weatherlight @Jaime Jones
+280 R Workhorse @DiTerlizzi
+281 U Worn Powerstone @Henry G. Higginbotham
+282 C Bojuka Bog @Howard Lyon
+283 R Cathedral of War @Kekai Kotaki
+284 R Command Beacon @Jonas De Ro
+285 U Dryad Arbor @Eric Fortune
+286 U Eldrazi Temple @James Paick
+287 R Emeria, the Sky Ruin @Jaime Jones
+288 R Gemstone Mine @Brom
+289 U Hashep Oasis @Jonas De Ro
+290 R Inventors' Fair @Jonas De Ro
+291 R Kher Keep @Paolo Parente
+292 U Llanowar Reborn @Philip Straub
+293 R Nykthos, Shrine to Nyx @Jung Park
+294 R Phyrexian Tower @Chippy
+295 R Riptide Laboratory @John Avon
+296 R Shelldock Isle @Mark Tedin
+297 C Tree of Tales @John Avon
+298 R Vesuva @Zoltan Boros & Gabor Szikszai
+299 L Wastes @Jason Felix
+300 L Plains @Christopher Rush
+301 M Morophon, the Boundless @Victor Adame Minguez
+302 R Adarkar Valkyrie @Jeremy Jarvis
+303 M Crested Sunmare @Lucas Graciano
+304 U Daxos, Blessed by the Sun @Jason A. Engle
+305 R Elspeth Conquers Death @Ryan Yee
+306 R Giver of Runes @Seb McKinnon
+307 U Jotun Grunt @Franz Vohwinkel
+308 U Release the Dogs @Jason Kang
+309 M Frost Titan @Mike Bierek
+310 R Ice Cave @Jerry Tiritilli
+311 R Jokulmorder @Mark Zug
+312 R Kindred Discovery @Lake Hurwitz
+313 R Mystical Tutor @Yongjae Choi
+314 R Read the Runes @Alan Pollack
+315 R Desolation Angel @Brom
+316 U Liliana's Devotee @Colin Boyer
+317 R Skyclave Shade @Dominik Mayer
+318 R Bonecrusher Giant @John Severin Brassell
+319 M Brallin, Skyshark Rider @Paul Scott Canavan
+320 M Combustible Gearhulk @Daarken
+321 C Pillage @Jesper Ejsing
+322 R Rite of Flame @Kieran Yanner
+323 C Seething Song @Jaime Jones
+324 U Tibalt, Rakish Instigator @Chase Stone
+325 U Beanstalk Giant @Nick Southam
+326 M Freyalise, Llanowar's Fury @Adam Paquette
+327 R Hunted Troll @Greg Staples
+328 C Into the North @Richard Sardinha
+329 R Ohran Frostfang @Torstein Nordstrand
+330 R Panglacial Wurm @Jim Pavelec
+331 R Vernal Equinox @Rebecca Guay
+332 M Vorinclex, Voice of Hunger @Karl Kopinski
+333 R Hans Eriksson @Ryan Pancoast
+334 R Ice-Fang Coatl @Filip Burburan
+335 M Kaya, Ghost Assassin @Chris Rallis
+336 M Korvold, Fae-Cursed King @Wisnu Tan
+337 U Parcelbeast @Justine Mara Andersen
+338 M Shabraz, the Skyshark @Paul Scott Canavan
+339 R Yore-Tiller Nephilim @Jeremy Jarvis
+340 U Birthing Boughs @Mike Bierek
+341 R Cold Storage @Greg Simanson
+342 C Cranial Plating @Adam Rex
+343 U Herald's Horn @Jason Felix
+344 C Horned Helm @Martina Pilcerova
+345 C Runed Stalactite @Jim Pavelec
+346 R Cavern of Souls @Cliff Childs
+347 R Dark Depths @Stephan Martiniere
+348 R Scrying Sheets @Thomas M. Baxa
+349 M Kozilek, Butcher of Truth @Michael Komarck
+350 U Great Teacher's Decree @Zoltan Boros
+351 U Jubilant Mascot @Filip Burburan
+352 R Pursuit of Knowledge @DiTerlizzi
+353 C Stonybrook Schoolmaster @Quinton Hoover & Val Mayerik
+354 R Academy Elite @Volkan Baǵa
+355 R Archive Trap @Jason Felix
+356 U Kasmina, Enigmatic Mentor @Magali Villeneuve
+357 R Ormos, Archive Keeper @G-host Lee
+358 R Pedantic Learning @Heather Hudson
+359 U Relearn @Zina Saunders
+360 C Venerated Teacher @Greg Staples
+361 M Will Kenrith @Anna Steinbauer
+362 M Liliana, the Last Hope @Anna Steinbauer
+363 C Painful Lesson @Adrian Majkrzak
+364 C Arcane Teachings @Mark Brill
+365 R Dual Casting @Johannes Voss
+366 C Ghitu Chronicler @Anthony Palumbo
+367 U Guttersnipe @Steve Prescott
+368 M Lukka, Coppercoat Outcast @Chris Rallis
+369 R Mages' Contest @Bradley Williams
+370 M Rowan Kenrith @Anna Steinbauer
+371 U Young Pyromancer @Cynthia Sheppard
+372 R Deeproot Champion @Raymond Swanland
+373 R Heartwood Storyteller @Anthony S. Waters
+374 M Primeval Bounty @Christine Choi
+375 U Renata, Called to the Hunt @Jason A. Engle
+376 M Unbound Flourishing @Tomasz Jedruszek
+377 U Warriors' Lesson @Steve Prescott
+378 M Elenda, the Dusk Rose @Chris Rahn
+379 R Firemane Angel @Matt Cavotta
+380 M Gisela, Blade of Goldnight @Jason Chan
+381 R Mercurial Chemister @Wesley Burt
+382 M Mizzix of the Izmagnus @Cliff Childs
+383 U Moldervine Reclamation @Antonio José Manzanedo
+384 M Niv-Mizzet Reborn @Raymond Swanland
+385 R Skullbriar, the Walking Grave @Nils Hamm
+386 R Spellbound Dragon @Jesper Ejsing
+387 R Unexpected Results @Mike Bierek
+388 M Uro, Titan of Nature's Wrath @Vincent Proce
+389 R Balefire Liege @Ralph Horsley
+390 R Biomass Mutation @Dan Scott
+391 U Bloodied Ghost @Mike Dringenberg
+392 U Deathless Knight @Igor Kieryluk
+393 R Grind // Dust @Josh Hass
+394 R Fool's Tome @Julie Baroh
+395 M Grimoire of the Dead @Steven Belledin
+396 R Knowledge Pool @Mike Bierek
+397 U Nuisance Engine @Stephen Tappin
+398 R Scroll of the Masters @Lake Hurwitz
+399 U Spellbook @Andrew Goldhawk
+400 R Walking Archive @Heather Hudson
+401 M Mirrorpool @Cliff Childs
+402 U Nephalia Academy @Adam Paquette
+403 L Island @Piotr Dura
+404 R Always Watching @Chase Stone
+405 M Angel of Serenity @Aleksi Briclot
+406 U Canyon Jerboa @Dominik Mayer
+407 R Celestial Ancient @Mark Tedin
+408 U Reduce to Memory @Campbell White
+409 U Soulcatchers' Aerie @Rob Alexander
+410 U Stasis Snare @Slawomir Maniak
+411 R Stonehewer Giant @Steve Prescott
+412 M Sun Titan @Todd Lockwood
+413 M Bruvac the Grandiloquent @Ekaterina Burmak
+414 U Callaphe, Beloved of the Sea @Jason A. Engle
+415 U Fact or Fiction @Matt Cavotta
+416 M Orvar, the All-Form @DZO
+417 R Riptide Director @Scott M. Fischer
+418 R Spell Swindle @Victor Adame Minguez
+419 U Time of Ice @Franz Vohwinkel
+420 U Animate Dead @Bastien L. Deharme
+421 R Bone Miser @Antonio José Manzanedo
+422 R Bridge from Below @Greg Hildebrandt & Tim Hildebrandt
+423 R Entreat the Dead @Deruchenko Alexander
+424 R Mindslicer @Kev Walker
+425 U Goblin Assassin @Dave Dorman
+426 R Kari Zev, Skyship Raider @Brad Rigney
+427 U Lesser Gargadon @Rob Alexander
+428 C Lightning Axe @Dan Scott
+429 U Lightning Bolt @Christopher Moeller
+430 R Splinter Twin @Goran Josic
+431 U Storm Entity @Lucio Parrillo
+432 C Chatter of the Squirrel @Jim Nelson
+433 R Nut Collector @Christopher Moeller
+434 R Tarmogoyf @Justin Murray
+435 R Tireless Tracker @Eric Deschamps
+436 U Veil of Summer @Lake Hurwitz
+437 U Aura Shards @Ron Spencer
+438 M Dragonlord Atarka @Karl Kopinski
+439 R Filigree Angel @Richard Whitters
+440 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
+441 U Juniper Order Ranger @Greg Hildebrandt
+442 M Master of Cruelties @Chase Stone
+443 U Obsessive Stitcher @Joe Slucher
+444 M Olivia, Mobilized for War @Eric Deschamps
+445 M Phenax, God of Deception @Ryan Barger
+446 U Guttural Response @Ben Wootten
+447 U Aether Vial @Greg Hildebrandt
+448 R Arcbound Overseer @Carl Critchlow
+449 R Blackblade Reforged @Richard Kane Ferguson
+450 C Ancient Den @Rob Alexander
+451 R Petrified Field @Glen Angus
+452 R Urborg, Tomb of Yawgmoth @Jung Park
+453 L Mountain @John Avon
+454 U Quest for the Holy Relic @Greg Staples
+455 C Resurrection @Michael Komarck
+456 S Silence @Wayne Reynolds
+457 U Twinblade Paladin @Jana Schirmer
+458 U Undead Slayer @Eric Fortune
+459 U Air Elemental @Doug Chaffee
+460 C Invisibility @Pete Venters
+461 U Invisible Stalker @Bud Cook
+462 C Jump @Eric Deschamps
+463 R Polymorph @Robert Bliss
+464 U Raven Familiar @John Avon
+465 U Sleep @Chris Rahn
+466 C Sleeping Potion @Daren Bader
+467 R Tempest Djinn @Zezhou Chen
+468 R Trade Routes @Matt Cavotta
+469 U Treasure Trove @Michael Sutfin
+470 U Assassin's Blade @John Matson
+471 R Captivating Vampire @Eric Deschamps
+472 R Demonic Tutor @Zack Stella
+473 C Dungeon Shade @Jason Alexander Behnke
+474 R Nightmare @Vance Kovacs
+475 U Noxious Ghoul @Luca Zontini
+476 U Tymaret, Chosen from Death @Jason A. Engle
+477 U Will-o'-the-Wisp @Rob Alexander
+478 M Balefire Dragon @Eric Deschamps
+479 U Fireball @Dave Dorman
+480 C Orcish Lumberjack @Steve Prescott
+481 R Sneak Attack @Jerry Tiritilli
+482 U Stone Giant @Warren Mahy
+483 R Hermit Druid @Heather Hudson
+484 R Traverse the Outlands @Daarken
+485 R Yisan, the Wanderer Bard @Chase Stone
+486 M Arcades, the Strategist @Even Amundsen
+487 M Daxos the Returned @Adam Paquette
+488 M Dragonlord Dromoka @Eric Deschamps
+489 R Grenzo, Dungeon Warden @Lucas Graciano
+490 M Hellkite Overlord @Justin Sweet
+491 R Cloud Key @Trevor Hairsine
+492 R Coveted Jewel @Jason A. Engle
+493 R Doubling Cube @Mark Tedin
+494 C Expedition Map @Franz Vohwinkel
+495 R Gauntlet of Power @Greg Hildebrandt
+496 U Golem's Heart @Matt Cavotta
+497 R Haunted Plate Mail @Izzy
+498 U Sorcerer's Wand @Matt Stewart
+499 R Staff of Domination @Ben Thompson
+500 R Transmogrifying Wand @Aaron Miller
+501 R Eiganjo Castle @Wayne England
+502 R Gemstone Caverns @Martina Pilcerova
+503 R Champion of the Parish @Svetlin Velinov
+504 U Cloister Gargoyle @Russ Nicholson
+505 U Emissary of Sunrise @Deruchenko Alexander
+506 C Expose to Daylight @Daniel Ljunggren
+507 R Fiendslayer Paladin @Wesley Burt
+508 R Hokori, Dust Drinker @Darrell Riche
+509 R Selfless Spirit @Seb McKinnon
+510 R Speaker of the Heavens @Randy Vargas
+511 R Student of Warfare @Volkan Baǵa
+512 R Windborn Muse @Adam Rex
+513 C Hard Evidence @Yeong-Hao Han
+514 R Llawan, Cephalid Empress @Mark Zug
+515 R Midnight Clock @Alexander Forssberg
+516 R Moonlace @Mike Dringenberg
+517 R Patron of the Moon @Scott M. Fischer
+518 R Rishadan Brigand @Scott Hampton
+519 R Snapcaster Mage @Volkan Baǵa
+520 C Toils of Night and Day @Matt Cavotta
+521 C Bleak Coven Vampires @Randis Albion
+522 R Divining Witch @Donato Giancola
+523 R Graveborn Muse @Kev Walker
+524 R Gravespawn Sovereign @Adam Rex
+525 R Helldozer @Zoltan Boros
+526 M Mikaeus, the Unhallowed @Chris Rahn
+527 C Rend Flesh @Stephen Tappin
+528 R Sidisi, Undead Vizier @Min Yum
+529 U Stitcher's Supplier @Chris Seaman
+530 C Treacherous Werewolf @Mark Tedin
+531 R Witch of the Moors @Caio Monteiro
+532 U Archetype of Aggression @Mathias Kollros
+533 C Faithless Looting @Gabor Szikszai
+534 U Honden of Infinite Rage @John Avon
+535 R Ib Halfheart, Goblin Tactician @Wayne Reynolds
+536 U Loyal Apprentice @Joe Slucher
+537 R Magus of the Moon @Franz Vohwinkel
+538 M Malignus @Jung Park
+539 R Mindmoil @Alex Horley-Orlandelli
+540 U Shivan Harvest @Daren Bader
+541 R Stigma Lasher @Aleksi Briclot
+542 R Thieves' Auction @Kevin Murphy
+543 R Witch Hunt @Karl Kopinski
+544 R All Suns' Dawn @Glen Angus
+545 U Arlinn, Voice of the Pack @Ryan Pancoast
+546 C Dire Wolf Prowler @Diesel
+547 R Early Harvest @Janine Johnston
+548 C Fierce Witchstalker @Nicholas Gregory
+549 R Gaea's Will @Lucas Graciano
+550 M Master of the Wild Hunt @Kev Walker
+551 U Serene Sunset @David Martin
+552 C Strength of Night @John Avon
+553 R Wolfir Silverheart @Raymond Swanland
+554 R Abrupt Decay @Svetlin Velinov
+555 U Call of the Nightwing @Adam Paquette
+556 M General Kudro of Drannith @Ryan Pancoast
+557 M Karametra, God of Harvests @Eric Deschamps
+F558 R Kaya, Ghost Haunter @Sydney Adams
+559 R Lich Lord of Unx @Dave Allsop
+560 R Lonis, Cryptozoologist @Andrew Mar
+561 R Mortify @Brian Snõddy
+562 M Sedris, the Traitor King @Paul Bonner
+563 M Teferi, Hero of Dominaria @Chris Rallis
+564 U Night // Day @Christopher Moeller
+565 U Gate to the Afterlife @Christine Choi
+566 M Helvault @Jaime Jones
+F567 R Puresteel Angel @Lukas Litzsinger
+568 R Sapphire Medallion @Sue Ellen Brown
+569 U Selesnya Keyrune @Daniel Ljunggren
+570 C Signpost Scarecrow @Jung Park
+571 U Umbral Mantle @Richard Sardinha
+572 R Vedalken Orrery @John Avon
+573 U Witch's Oven @Alexander Forssberg
+574 U Ancient Tomb @Colin MacNeil
+575 U Karoo @Zina Saunders
+576 U Orzhova, the Church of Deals @Martina Pilcerova
+577 R Unholy Grotto @John Avon
+578 C Benediction of Moons @Matt Cavotta
+579 C Late to Dinner @Kev Walker
+580 U Light of Day @Drew Tucker
+581 R Odric, Master Tactician @Michael Komarck
+582 C Sacred Rites @Bradley Williams
+583 R Sanguine Sacrament @Bastien L. Deharme
+584 R Second Sunrise @Greg Staples
+585 U Skymarcher Aspirant @Winona Nelson
+586 U Starnheim Aspirant @Kieran Yanner
+587 R Thalia's Lieutenant @Johannes Voss
+588 S Baral, Chief of Compliance @Wesley Burt
+589 U Brinelin, the Moon Kraken @Adam Paquette
+590 M Day's Undoing @Jonas De Ro
+591 C Floodhound @Lius Lasahido
+592 R Profaner of the Dead @Vincent Proce
+593 U Silumgar Sorcerer @Jeff Simpson
+594 R Bad Moon @Gary Leach
+595 R Bloodchief Ascension @Adi Granov
+596 C Blood Pet @Brom
+597 M Cavalier of Night @Viktor Titov
+598 R Exquisite Blood @Cynthia Sheppard
+599 R Geralf's Messenger @Kev Walker
+600 R Guul Draz Assassin @James Ryman
+601 R Sign in Blood @Alan Pollack
+602 M Sorin Markov @Michael Komarck
+603 R Sorin's Vengeance @Jana Schirmer
+604 M Twilight Prophet @Seb McKinnon
+605 U Vampiric Feast @D. Alexander Gregory
+606 M Vampiric Tutor @Raymond Swanland
+607 U Wall of Blood @Tony Szczudlo
+608 R Blood Moon @Franz Vohwinkel
+609 U Blood Rites @Raymond Swanland
+610 C Boiling Blood @Cliff Nielsen
+611 C Ceremonial Guard @Daren Bader
+612 M Chandra Nalaar @Aleksi Briclot
+613 U Crimson Muckwader @Steven Belledin
+614 U Vow of Lightning @Randy Vargas
+615 U Assault Formation @Kieran Yanner
+616 C Commencement of Festivities @Zack Stella
+617 U Cult of the Waxing Moon @Anastasia Ovchinnikova
+618 R Deathcoil Wurm @Rebecca Guay
+619 U Exuberant Wolfbear @Jesper Ejsing
+620 R Gutter Grime @Erica Yang
+621 U Joraga Treespeaker @Cyril Van Der Haegen
+622 R Mongrel Pack @Jeff Miracola
+623 U Noxious Revival @Matt Stewart
+624 R Pir's Whim @Jakub Kasper
+625 U Song of Freyalise @Min Yum
+626 U Strangleroot Geist @Erica Yang
+627 R Witchstalker @Christopher Moeller
+628 U Belligerent Brontodon @Dan Scott
+629 U Cruel Celebrant @Bastien L. Deharme
+630 M Gisa and Geralf @Karla Ortiz
+631 M Karador, Ghost Chieftain @Todd Lockwood
+632 M Vela the Night-Clad @Allen Williams
+633 R Witch-Maw Nephilim @Greg Staples
+634 U Dryad Militant @Ryan Pancoast
+635 U Mistmeadow Witch @Greg Staples
+636 U Moonhold @Mike Dringenberg
+637 R Murkfiend Liege @Carl Critchlow
+638 R Wheel of Sun and Moon @Zoltan Boros
+639 R Flesh // Blood @Lucas Graciano
+640 R Blood Clock @Keith Garletts
+641 R Howling Mine @Ralph Horsley
+642 R Jet Medallion @Sue Ellen Brown
+643 R Juntu Stakes @Mark Brill
+644 U Lunar Avenger @Paolo Parente
+645 U Perpetual Timepiece @Cliff Childs
+646 C Training Drone @Matt Cavotta
+647 R Unwinding Clock @Mike Bierek
+648 U Witches' Eye @Daniel Ljunggren
+649 C Wooden Stake @David Palumbo
+650 R Blood Crypt @Rob Alexander
+651 R Shinka, the Bloodsoaked Keep @Thomas M. Baxa
+652 R Shivan Gorge @John Matson
+653 U Scion of Ugin @Cliff Childs
+654 R Anointed Procession @Victor Adame Minguez
+655 R Final Judgment @Kev Walker
+656 C Flutterfox @Lucas Graciano
+657 R Michiko Konda, Truth Seeker @Christopher Moeller
+658 U Nagao, Bound by Honor @Dave Dorman
+659 U Novice Knight @Yongjae Choi
+660 R Rune-Tail, Kitsune Ascendant @Randy Gallegos
+661 R Spirit of the Labyrinth @Jason Chan
+662 U Stone Haven Pilgrim @Cristi Balanescu
+663 U The Wanderer @Wesley Burt
+664 U Warchanter Skald @Daniel Zrom
+665 R Aboshan, Cephalid Emperor @Christopher Moeller
+666 C Dispersal Technician @Scott Murphy
+667 U Honden of Seeing Winds @Martina Pilcerova
+668 M Jin-Gitaxias, Core Augur @Eric Deschamps
+669 R Sakashima's Student @Brian Snõddy
+670 U Soratami Savant @Jim Nelson
+671 M Tezzeret, Artifice Master @Josh Hass
+672 R Thousand Winds @Raymond Swanland
+673 R The Unspeakable @Daarken
+674 R Confront the Past @Kieran Yanner
+675 R Ink-Eyes, Servant of Oni @Wayne Reynolds
+676 U Noxious Toad @Adrian Smith
+677 C Rat Colony @Suzanne Helmigh
+678 C Sink into Takenuma @Pat Lee
+679 R Whispersteel Dagger @Svetlin Velinov
+680 U Akki Coalflinger @Nottsuo
+681 R Bedlam @Mike Raabe
+682 R Blazing Shoal @Glen Angus
+683 R Heartless Hidetsugu @Carl Critchlow
+684 R Kiki-Jiki, Mirror Breaker @Pete Venters
+685 R Lavaborn Muse @Brian Snõddy
+686 R Mizzium Tank @Wayne Reynolds
+687 R Pillaging Horde @Kev Walker
+688 R Pyroclasm @John Matson
+689 C Reality Hemorrhage @Chris Rallis
+690 R Ruin Grinder @Hector Ortiz
+691 U Siege Modification @Sung Choi
+692 R Starke of Rath @Dan Frazier
+693 R Eidolon of Blossoms @Min Yum
+694 R Endless Wurm @DiTerlizzi
+695 R Force of Savagery @Dan Scott
+696 U Haru-Onna @Rebecca Guay
+697 C Jade Avenger @Chris Seaman
+698 R Jugan, the Rising Star @Filip Burburan
+699 R Oxidize @Scott M. Fischer
+700 S Reclamation Sage @Christopher Moeller
+701 R Seshiro the Anointed @Daren Bader
+702 U Skullwinder @James Paick
+703 U Sosuke's Summons @Kev Walker
+704 R Spectral Force @Dan Scott
+705 U Vintara Snapper @Joel Biske
+706 C Vulpine Goliath @Adam Paquette
+707 C Architects of Will @Matt Stewart
+708 R Brago, King Eternal @Karla Ortiz
+709 C Deny Reality @Jean-Sébastien Rossbach
+710 M Kaseto, Orochi Archmage @Aaron Miller
+711 U Reyav, Master Smith @Scott Murphy
+712 M Roon of the Hidden Realm @Steve Prescott
+713 R Tamiyo, Collector of Tales @Chase Stone
+714 R Tezzeret's Betrayal @Tyler Jacobson
+715 U Veteran Motorist @Christopher Moeller
+716 U Illusion // Reality @John Avon
+717 M Batterskull @Mark Zug
+718 R Illusionist's Bracers @Svetlin Velinov
+719 R Mirror Gallery @Scott M. Fischer
+720 U O-Naginata @Brian Snõddy
+721 R Sensei's Divining Top @Rob Alexander
+722 U Tapestry of the Ages @Yeong-Hao Han
+723 R That Which Was Taken @Adam Rex
+724 R Thousand-Year Elixir @Richard Sardinha
+725 R Umezawa's Jitte @Christopher Moeller
+726 R Hall of the Bandit Lord @Paolo Parente
+727 R Tendo Ice Bridge @Rob Alexander
+728 M Elspeth, Undaunted Hero @Steven Belledin
+729 R Runed Halo @Steve Prescott
+730 M Ob Nixilis, the Fallen @Jason Felix
+731 R Remorseless Punishment @Ryan Barger
+732 R Krenko, Tin Street Kingpin @Mark Behm
+733 M Urabrask the Hidden @Brad Rigney
+734 M Vivien Reid @Anna Steinbauer
+735 M Admiral Beckett Brass @Jason Rainville
+736 R Asmoranomardicadaistinaculdacar @Ryan Pancoast
+737 R Crosis, the Purger @Chris Rahn
+738 M Outlaws' Merriment @Suzanne Helmigh
+739 R Treasury Thrull @Mark Zug
+740 R Wasitora, Nekoru Queen @Cynthia Sheppard
+741 M Zacama, Primal Calamity @Jaime Jones
+742 R Alabaster Dragon @Ted Naifeh
+743 U Archway Angel @Milivoj Ćeran
+744 R Fountain Watch @Jeff Miracola
+745 R Ghostway @Jim Murray
+746 R Loxodon Gatekeeper @Carl Critchlow
+747 U Nova Cleric @Alan Pollack
+748 R Paladin en-Vec @Dave Kendall
+749 R Pentarch Paladin @Jim Murray
+750 R Puresteel Paladin @Jason Chan
+751 R Ranger of Eos @Volkan Baǵa
+752 U Treasure Hunter @Adam Rex
+753 R Aura Thief @Ron Spears
+754 U Broodbirth Viper @Mathias Kollros
+755 R Cloud Dragon @John Avon
+756 R Curse of Echoes @Slawomir Maniak
+757 U Ominous Seas @Vincent Proce
+758 C Opal Lake Gatekeepers @Seb McKinnon
+759 R Plea for Power @John Severin Brassell
+760 R Quicksilver Dragon @Ron Spencer
+761 C Sea Gate Oracle @Daniel Ljunggren
+762 R Search the City @Jack Wang
+763 R Serendib Sorcerer @Dan Scott
+764 R Sunder @Stephen Daniele
+765 U Wizard Class @Marta Nael
+766 U Wizard's Retort @Grzegorz Rutkowski
+767 M Demon of Death's Gate @Vance Kovacs
+768 R Endrek Sahr, Master Breeder @Mark Tedin
+769 R Kederekt Parasite @Dan Scott
+770 M Lolth, Spider Queen @Tyler Jacobson
+771 U Pitiless Plunderer @David Palumbo
+772 R Quest for the Nihil Stone @Mike Bierek
+773 R Repay in Kind @Vance Kovacs
+774 R Volrath's Dungeon @Stephen Daniele
+775 C Dragon's Approach @Andrew Mar
+776 U Dragon's Rage Channeler @Martina Fackova
+777 M Goldspan Dragon @Andrew Mar
+778 R Lathliss, Dragon Queen @Alex Konstad
+779 U Magic Missile @PINDURSKI
+780 U Thundering Sparkmage @Billy Christian
+781 R Worldgorger Dragon @Wayne England
+782 U Devoted Druid @Kimonas Theodossiou
+783 U Druid's Call @Greg Hildebrandt
+784 U Edgewall Innkeeper @Matt Stewart
+785 R Gilt-Leaf Archdruid @Steve Prescott
+786 M Old Gnawbone @Filip Burburan
+787 U Scryb Ranger @Rebecca Guay
+788 R Silvos, Rogue Elemental @Carl Critchlow
+789 U Tireless Provisioner @Josu Hernaiz
+790 U Clutch of the Undercity @Pete Venters
+791 U Forging the Tyrite Sword @Kieran Yanner
+792 U Invade the City @Sung Choi
+793 U Krydle of Baldur's Gate @Jeff Dee
+794 R Linvala, Shield of Sea Gate @Wayne Reynolds
+795 M Minsc, Beloved Ranger @Howard Lyon
+796 U Risen Reef @Johan Grenier
+797 U Spoils of Adventure @Zezhou Chen
+798 M Tiamat @Chris Rahn
+799 C Yavimaya Barbarian @Don Hazeltine
+800 C Shield of the Oversoul @Steven Belledin
+801 U Bucknard's Everfull Purse @Joe Slucher
+802 R Clockwork Dragon @Arnie Swekel
+803 U Component Pouch @Chris Seaman
+804 U Fifty Feet of Rope @Andrew Mar
+805 U Kite Shield @Jim Pavelec
+806 C Leather Armor @Martina Pilcerova
+807 U Lucky Clover @John Stanko
+808 C Mimic @Diesel
+809 R Pariah's Shield @Doug Chaffee
+810 R Sword of the Chosen @Adam Rex
+811 U Barbarian Ring @John Avon
+812 R Forsaken City @Dana Knutson
+813 M Maze's End @Cliff Childs
+814 U Underdark Rift @Chris Ostrowski
+815 M Karn Liberated @Jason Chan
+816 R Ajani's Last Stand @Slawomir Maniak
+817 M Ajani, Strength of the Pride @Chris Rallis
+818 C Benalish Infantry @Dan Frazier
+819 R Dominaria's Judgment @John Avon
+820 R Graceful Antelope @Heather Hudson
+821 R Orim's Chant @Kev Walker
+822 R Planar Collapse @Mark Zug
+823 R Rout @Ron Spencer
+824 C Teremko Griffin @Martin McKenna
+825 R Braids, Conjurer Adept @Zoltan Boros
+826 R Collective Restraint @Alan Rabinowitz
+827 R Empress Galina @Matt Cavotta
+828 R Ertai's Meddling @Steve Luke
+829 U Ghost of Ramirez DePietro @Grzegorz Rutkowski
+830 U Jodah's Avenger @Pete Venters
+831 U Metathran Elite @Jim Nelson
+832 C Probe @Eric Peterson
+833 R Seahunter @Heather Hudson
+834 U Teferi's Veil @Brom
+835 R Whirlpool Warrior @Kev Walker
+836 U Cast Down @Bastien L. Deharme
+837 U Chain of Smog @Greg Staples
+838 R Contamination @Stephen Daniele
+839 C Crypt Rats @Paul Lee
+840 C Dark Ritual @Tom Fleming
+841 C Dash Hopes @Zoltan Boros
+842 R Doomsday @Adrian Smith
+843 U Hymn to Tourach @Greg Staples
+844 U Imps' Taunt @Colin MacNeil
+845 C Phyresis @Izzy
+846 C Phyrexian Battleflies @Dan Frazier
+847 M Phyrexian Scriptures @Joseph Meehan
+848 M Sheoldred, Whispering One @Jana Schirmer
+849 R Sleeper Agent @Randy Gallegos
+850 U Stitch Together @Arnie Swekel
+851 M Tourach, Dread Cantor @Greg Staples
+852 R Alpine Moon @Alayna Danner
+853 C Brightstone Ritual @Wayne England
+854 C Burning Inquiry @Zoltan Boros
+855 R Ghitu Fire @Glen Angus
+856 R Invasion Plans @Pete Venters
+857 R Jaya Ballard, Task Mage @Matt Cavotta
+858 R Lovisa Coldeyes @Brian Snõddy
+859 R Obliterate @Kev Walker
+860 R Pandemonium @Pete Venters
+861 R Skirk Fire Marshal @Greg Hildebrandt
+862 U Viashino Heretic @Douglas Shuler
+863 R Wake of Destruction @Todd Lockwood
+864 U Wall of Granite @Kev Walker
+865 U Elephant Grass @Tony Roberts
+866 R Elvish Champion @D. Alexander Gregory
+867 R Jedit Ojanen of Efrava @Carl Critchlow
+868 R Magnigoth Treefolk @Peter Bollinger
+869 R The Mending of Dominaria @Adam Paquette
+870 U Riftsweeper @Brian Despain
+871 C Cavern Harpy @Daren Bader
+872 S Coalition Victory @Eric Peterson
+873 R Ertai, the Corrupted @Mark Tedin
+874 R Jhoira of the Ghitu @Kev Walker
+875 R Kangee, Aerie Keeper @Mark Romanoski
+876 M Prossh, Skyraider of Kher @Todd Lockwood
+877 R Tsabo Tavoc @Michael Sutfin
+878 M Vaevictis Asmadi, the Dire @Steven Belledin
+879 U Wall of Denial @Howard Lyon
+880 R Amber Prison @Donato Giancola
+881 R Coalition Relic @Donato Giancola
+882 R Helm of the Host @Igor Kieryluk
+883 R Legacy Weapon @John Avon
+884 U Phyrexian Furnace @George Pratt
+885 C Phyrexian Walker @Bryan Talbot
+886 M Scion of Draco @Greg Staples
+887 U Shifting Wall @Michael Sutfin
+888 U Desert @Glen Angus
+889 U Dromar's Cavern @Franz Vohwinkel
+890 R Archaeomancer's Map @Ovidio Cartagena
+891 U Argivian Find @Roger Raupp
+892 R Blessed Reversal @Pete Venters
+893 R Catastrophe @Andrew Robinson
+894 R Crescendo of War @Daarken
+895 R Death or Glory @Jeff Easley
+896 R Fall of the Thran @Jason Felix
+897 R Kataki, War's Wage @Matt Thompson
+898 U Pledge of Loyalty @Franz Vohwinkel
+899 R The Antiquities War @Mark Tedin
+900 U Argivian Restoration @Roger Raupp
+901 U Energy Flux @Qiao Dafu
+902 U Glacian, Powerstone Engineer @Magali Villeneuve
+903 R Hurkyl's Recall @Ralph Horsley
+904 R March of the Machines @Ben Thompson
+905 M Mechanized Production @Adam Paquette
+906 U Opportunity @Ron Spears
+907 R Beacon of Unrest @Joseph Meehan
+908 R Dark Suspicions @Matt Cavotta
+909 C Grisly Transformation @Tyler Jacobson
+910 R K'rrik, Son of Yawgmoth @Chase Stone
+911 U Order of Yawgmoth @Chippy
+912 U Priest of Gix @Brian Despain
+913 M Tevesh Szat, Doom of Fools @Livia Prima
+914 R Witch Engine @Kev Walker
+915 R Yawgmoth's Agenda @Arnie Swekel
+916 U Acidic Soil @Scott M. Fischer
+917 R Brand @Donato Giancola
+918 U Detonate @Dave Dorman
+919 M Feldon of the Third Path @Chase Stone
+920 R In the Web of War @Ron Spencer
+921 U Shatterstorm @Paolo Parente
+922 R Words of War @Justin Sweet
+923 R World at War @Igor Kieryluk
+924 U Argothian Elder @DiTerlizzi
+925 R Bane of Progress @Lars Grant-West
+926 R Citanul Hierophants @Vincent Evans
+927 R Collector Ouphe @Filip Burburan
+928 R Force of Vigor @Randy Vargas
+929 U Gaea's Embrace @Paolo Parente
+930 R Gaea's Revenge @Kekai Kotaki
+931 R Molder Slug @Heather Hudson
+932 C Priest of Titania @Rebecca Guay
+933 U Retaliation @Tom Fleming
+934 R Tempting Wurm @Bob Petillo
+935 M Titania, Protector of Argoth @Magali Villeneuve
+936 M Verdurous Gearhulk @Jaime Jones
+937 R Mishra, Artificer Prodigy @Scott M. Fischer
+938 R Powerstone Minefield @Greg Hildebrandt
+939 M Saheeli Rai @Willian Murai
+940 M Tawnos, Urza's Apprentice @Matt Stewart
+941 U Thopter Foundry @Ralph Horsley
+942 R Colossus of Sardia @Greg Staples
+943 U Crumbling Colossus @Michael C. Hayes
+944 U Endoskeleton @Mark Tedin
+945 R Eye of Yawgmoth @DiTerlizzi
+946 R Mishra's Helix @Berry
+947 R Mishra's Self-Replicator @Joseph Meehan
+948 R Pentavus @Greg Staples
+949 R Phyrexian Colossus @Mark Tedin
+950 U Power Armor @Doug Chaffee
+951 C Powerstone Shard @Lindsey Look
+952 R Prototype Portal @Drew Baker
+953 R Smokestack @Scott Kirschner
+954 U Thran Forge @Mark Poole
+955 U Thran War Machine @Pete Venters
+956 U Toymaker @Frank Kelly Freas
+957 U Urza's Armor @rk post
+958 C Yotian Soldier @Luca Zontini
+959 U Memorial to Genius @James Paick
+960 U Mishra's Factory @Scott Chou
+961 U Mouth of Ronom @Daren Bader
+962 R Thran Quarry @Michael Sutfin
+963 U Urza's Factory @Mark Tedin
+964 R Urza's Saga @Titus Lunter
+965 U Due Respect @James Ryman
+966 U High Ground @rk post
+967 U Kemba's Legion @Anthony Francisco
+968 R Leonin Arbiter @Shelly Wan
+969 C Priests of Norn @Igor Kieryluk
+970 R Rout @Igor Kieryluk
+971 C Survival Cache @Scott Chou
+972 R Game Plan @Seb McKinnon
+973 C Gitaxian Probe @Chippy
+974 R Mirrodin Besieged @Bram Sels
+975 R Venser, Shaper Savant @Aleksi Briclot
+976 C Geth's Verdict @Whit Brachna
+977 C Lose Hope @Matt Cavotta
+978 C Phyrexian Monitor @Carl Critchlow
+979 U Phyrexian Prowler @Mark Zug
+980 U Reaper of Sheoldred @Stephan Martiniere
+981 U Vile Requiem @Carl Critchlow
+982 C Artillerize @Johann Bodin
+983 U Implode @Arnie Swekel
+984 C Mana Geyser @Martina Pilcerova
+985 R Slobad, Goblin Tinkerer @Kev Walker
+986 C Toxic Iguanar @Brandon Kitkouski
+987 R Ezuri, Renegade Leader @Karl Kopinski
+988 C Glissa's Courier @Dave Kendall
+989 U Melira's Keepers @Eric Deschamps
+990 M Praetor's Counsel @Daarken
+991 C Sabertooth Cobra @Andrew Robinson
+992 M Tyvar Kell @Chris Rallis
+993 C Virulent Sliver @Franz Vohwinkel
+994 M Kaito Shizuki @Yongjae Choi
+995 M Kaya, Orzhov Usurper @Yongjae Choi
+996 R Xantcha, Sleeper Agent @Mark Winters
+997 R Argentum Armor @Matt Cavotta
+998 M Blightsteel Colossus @Chris Rahn
+999 R Fist of Suns @Arnie Swekel
+1000 U Geth's Grimoire @Heather Hudson
+1001 M Kaldra Compleat @Vincent Proce
+1002 U Lantern of Insight @Tim Hildebrandt
+1003 M Mycosynth Lattice @Anthony S. Waters
+1004 C Nihil Spellbomb @Franz Vohwinkel
+1005 R Phyrexian Altar @Yigit Koroglu
+1006 U Phyrexian Snowcrusher @Dave Allsop
+1007 U Phyrexian Splicer @Brom
+1008 M Phyrexian Triniform @Adam Paquette
+1009 U Phyrexian Vault @Hannibal King
+1010 M Soul of New Phyrexia @Daarken
+1011 M Sword of Feast and Famine @Chris Rahn
+1012 M Sword of War and Peace @Chris Rahn
+1013 C Great Furnace @Rob Alexander
+1014 U Interplanar Beacon @Adam Paquette
+1015 R Austere Command @Wayne England
+1016 C Brago's Representative @Anthony Palumbo
+1017 M Heliod, God of the Sun @Jaime Jones
+1018 U Ixalan's Binding @Chase Stone
+1019 R Linden, the Steadfast Queen @Ryan Pancoast
+1020 R Ravnica at War @Adam Paquette
+1021 C Segovian Angel @Simon Dominic
+1022 U Vryn Wingmare @Seb McKinnon
+1023 R Archmage Emeritus @Caio Monteiro
+1024 R Balance of Power @Adam Rex
+1025 U Invasive Surgery @Steven Belledin
+1026 R Laboratory Maniac @Jason Felix
+1027 R Mass Polymorph @Christopher Moeller
+1028 R Pulse of the Grid @Wayne England
+1029 R Reshape @Jon Foster
+1030 R Rite of Replication @Matt Cavotta
+1031 R Rooftop Storm @John Stanko
+1032 R Shared Fate @Matt Cavotta
+1033 U Stormscape Battlemage @Christopher Moeller
+1034 R Time Stretch @Paolo Parente
+1035 R True-Name Nemesis @Zack Stella
+1036 R Aether Snap @Kev Walker
+1037 R Drinker of Sorrow @Carl Critchlow
+1038 U Endless Obedience @Karl Kopinski
+1039 U Ihsan's Shade @Daarken
+1040 M Nashi, Moon Sage's Scion @Valera Lutfullina
+1041 R Needle Specter @Christopher Moeller
+1042 R Phyrexian Crusader @Eric Deschamps
+1043 R Phyrexian Delver @Igor Kieryluk
+1044 R Phyrexian Etchings @Ron Spears
+1045 R Phyrexian Infiltrator @Darrell Riche
+1046 R Phyrexian Vatmother @Stephan Martiniere
+1047 R Rain of Daggers @Melissa A. Benson
+1048 C Siege Zombie @Johann Bodin
+1049 R Unmask @rk post
+1050 R Eidolon of the Great Revel @Cyril Van Der Haegen
+1051 R Etali, Primal Storm @Raymond Swanland
+1052 R Five-Alarm Fire @Karl Kopinski
+1053 U Mercadia's Downfall @Pete Venters
+1054 R Pia and Kiran Nalaar @Eric Deschamps
+1055 R Planeswalker's Fury @Christopher Moeller
+1056 C Regathan Firecat @Eric Velhagen
+1057 C Ruthless Invasion @Svetlin Velinov
+1058 R Scorched Earth @Nicola Leonard
+1059 R Siege of Towers @Anthony S. Waters
+1060 R Slag Fiend @Mike Bierek
+1061 M Soul of Shandalar @Raymond Swanland
+1062 M Avenger of Zendikar @Zoltan Boros
+1063 C Capenna Express @Viko Menezes
+1064 R Dig Up @Slawomir Maniak
+1065 R Ghalta, Primal Hunger @Chase Stone
+1066 M The Great Aurora @Sam Burley
+1067 R Muraganda Petroglyphs @Scott Altmann
+1068 U Path to the World Tree @Daniel Ljunggren
+1069 M Polukranos, World Eater @Johann Bodin
+1070 C Primal Cocoon @Daniel Ljunggren
+1071 C Sprout Swarm @Chippy
+1072 R Anax and Cymede @Willian Murai
+1073 M Borborygmos Enraged @Aleksi Briclot
+1074 M Dragonlord Ojutai @Chase Stone
+1075 M Gisa and Geralf @Karla Ortiz
+1076 U Incubation // Incongruity @Mike Bierek
+1077 M Kalamax, the Stormsire @Nicholas Gregory
+1078 R Mina and Denn, Wildborn @Izzy
+1079 U Reduce // Rubble @Eric Deschamps
+1080 R Sarulf, Realm Eater @Chris Rahn
+1081 R Dragon Throne of Tarkir @Daarken
+1082 R Hope of Ghirapur @Lius Lasahido
+1083 R Planar Portal @Mark Tedin
+1084 R High Market @Carl Critchlow
+1085 R Ketria Triome @Sam Burley
+1086 R Okina, Temple to the Grandfathers @Keith Garletts
+1087 R Sea of Clouds @Florian de Gesincourt
+1088 R The World Tree @Anastasia Ovchinnikova
+1089 U Zhalfirin Void @Chase Stone

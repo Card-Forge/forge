@@ -1,0 +1,8 @@
+Name:Cauldron's Gift
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 4 | SubAbility$ DBChangeZone | ConditionCheckSVar$ X | AIManaPref$ B | IfDesc$ True | SpellDescription$ Adamant — If at least three black mana was spent to cast this spell, mill four cards. You may choose a creature card in your graveyard. If you do, return it to the battlefield with an additional +1/+1 counter on it.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn | ChangeTypeDesc$ creature | Hidden$ True | ChangeNum$ 1 | WithCountersType$ P1P1
+SVar:X:Count$Adamant.Black.1.0
+DeckHas:Ability$Counters|Graveyard|Mill
+Oracle:Adamant — If at least three black mana was spent to cast this spell, mill four cards.\nYou may choose a creature card in your graveyard. If you do, return it to the battlefield with an additional +1/+1 counter on it.

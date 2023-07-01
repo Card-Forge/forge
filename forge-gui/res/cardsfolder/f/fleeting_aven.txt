@@ -1,0 +1,8 @@
+Name:Fleeting Aven
+ManaCost:1 U U
+Types:Creature Bird Wizard
+PT:2/2
+K:Flying
+T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, return CARDNAME to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
+Oracle:Flying\nWhenever a player cycles a card, return Fleeting Aven to its owner's hand.

@@ -1,0 +1,9 @@
+Name:Soot Imp
+ManaCost:1 B B
+Types:Creature Imp
+PT:1/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonBlack | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a nonblack spell, that player loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 1
+AI:RemoveDeck:Random
+Oracle:Flying\nWhenever a player casts a nonblack spell, that player loses 1 life.

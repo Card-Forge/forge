@@ -1,0 +1,10 @@
+[metadata]
+Code=PLG22
+Date=2022-07-01
+Name=Love Your LGS 2022
+Type=Promo
+ScryfallCode=PLG22
+
+[cards]
+1 R Sol Ring @Mike Bierek
+2 R Thought Vessel @Milivoj Ćeran

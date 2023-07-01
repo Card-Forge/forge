@@ -1,0 +1,6 @@
+Name:Blightsoil Druid
+ManaCost:1 B
+Types:Creature Elf Druid
+PT:1/2
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}, Pay 1 life: Add {G}.

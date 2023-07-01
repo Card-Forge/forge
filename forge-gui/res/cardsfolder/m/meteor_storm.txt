@@ -1,0 +1,7 @@
+Name:Meteor Storm
+ManaCost:R G
+Types:Enchantment
+A:AB$ DealDamage | Cost$ 2 R G Discard<2/Random> | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:{2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to any target.

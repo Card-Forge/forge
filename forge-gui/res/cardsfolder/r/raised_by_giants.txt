@@ -1,0 +1,7 @@
+Name:Raised by Giants
+ManaCost:5 G
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | SetPower$ 10 | SetToughness$ 10 | AddType$ Giant | Description$ Commander creatures you own have base power and toughness 10/10 and are Giants in addition to their other types.
+DeckHas:Type$Giant
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have base power and toughness 10/10 and are Giants in addition to their other types.

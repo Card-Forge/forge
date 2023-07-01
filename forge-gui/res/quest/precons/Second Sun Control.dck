@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Second Sun Control
+Description=Do whatever it takes to stay alive until you can cast a second Approach of the Second Sun and win on the spot. Counter your opponent's key spells and neutralize any threats your opponent lands on the battlefield as you build toward victory.
+Deck Type=constructed
+Set=RIX
+Image=second_sun_control.jpg
+[Main]
+4 Aether Meltdown|KLD
+3 Approach of the Second Sun|AKH
+4 Cast Out|AKH
+4 Censor|AKH
+1 Farm // Market|HOU
+2 Field of Ruin|XLN
+3 Fumigate|KLD
+4 Glimmer of Genius|KLD
+2 Ipnu Rivulet|HOU
+4 Irrigated Farmland|AKH
+10 Island|RIX
+1 Kefnet the Mindful|AKH
+4 Opt|XLN
+8 Plains|RIX
+1 Renewed Faith|AKH
+1 Settle the Wreckage|XLN
+4 Supreme Will|HOU
+[Sideboard]
+2 Glyph Keeper|AKH
+1 Kefnet the Mindful|AKH
+4 Negate|RIX
+4 Regal Caracal|AKH
+2 Renewed Faith|AKH
+2 Spell Pierce|XLN

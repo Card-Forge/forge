@@ -1,0 +1,6 @@
+Name:Fulminator Mage
+ManaCost:1 BR BR
+Types:Creature Elemental Shaman
+PT:2/2
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
+Oracle:Sacrifice Fulminator Mage: Destroy target nonbasic land.

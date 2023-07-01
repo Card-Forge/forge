@@ -1,0 +1,8 @@
+Name:Death Baron
+ManaCost:1 B B
+Types:Creature Zombie Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl,Creature.Skeleton+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Deathtouch | Description$ Skeletons you control and other Zombies you control get +1/+1 and have deathtouch.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Skeleton|Zombie
+Oracle:Skeletons you control and other Zombies you control get +1/+1 and have deathtouch.

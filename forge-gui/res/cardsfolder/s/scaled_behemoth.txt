@@ -1,0 +1,6 @@
+Name:Scaled Behemoth
+ManaCost:4 G G
+Types:Creature Crocodile
+PT:6/7
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

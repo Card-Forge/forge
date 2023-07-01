@@ -1,0 +1,6 @@
+Name:Spellbane Centaur
+ManaCost:2 G
+Types:Creature Centaur
+PT:3/2
+S:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | ValidSource$ Card.Blue | Description$ Creatures you control can't be the targets of blue spells or abilities from blue sources.
+Oracle:Creatures you control can't be the targets of blue spells or abilities from blue sources.

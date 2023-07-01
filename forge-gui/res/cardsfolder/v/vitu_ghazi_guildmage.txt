@@ -1,0 +1,9 @@
+Name:Vitu-Ghazi Guildmage
+ManaCost:G W
+Types:Creature Dryad Shaman
+PT:2/2
+A:AB$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SpellDescription$ Create a 3/3 green Centaur creature token.
+A:AB$ CopyPermanent | Cost$ 2 G W | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | StackDescription$ SpellDescription | SpellDescription$ Populate. (Create a token that's a copy of a creature token you control.)
+DeckHas:Ability$Token
+DeckHints:Ability$Token
+Oracle:{4}{G}{W}: Create a 3/3 green Centaur creature token.\n{2}{G}{W}: Populate. (Create a token that's a copy of a creature token you control.)

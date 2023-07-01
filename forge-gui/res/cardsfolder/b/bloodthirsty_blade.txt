@@ -1,0 +1,6 @@
+Name:Bloodthirsty Blade
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Goad$ True | Description$ Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+A:AB$ Attach | Cost$ 1 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | SorcerySpeed$ True | SpellDescription$ Attach CARDNAME to target creature an opponent controls. Activate only as a sorcery.
+Oracle:Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\n{1}: Attach Bloodthirsty Blade to target creature an opponent controls. Activate only as a sorcery.

@@ -1,0 +1,35 @@
+[quest]
+id=Evolution
+OpponentName=Gaia
+AILife=50
+Repeat=true
+Wins=0
+Card Reward=3 random rares;chosen card rarity:U sets:INV,PLS,APC
+Credit Reward=200
+AIExtras=Utopia Tree|Utopia Tree|Utopia Tree
+HumanExtras=Swamp|Phyrexian Battleflies|Phyrexian Infiltrator|Phyrexian Battleflies
+[metadata]
+Title=Evolution
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=Nature always finds a way to evolve...but can it stop the horde of Phyrexians?
+Deck Type=constructed
+Name=Evolution
+[Main]
+8 Anavolver|APC
+2 Angelic Shield|INV
+3 Battlefield Forge|APC
+3 Caves of Koilos|APC
+8 Cetavolver|APC
+8 Degavolver|APC
+2 Fires of Yavimaya|INV
+2 Forest|INV|1
+2 Island|INV|3
+3 Llanowar Wastes|APC
+8 Necravolver|APC
+2 Plains|INV|1
+8 Rakavolver|APC
+3 Shivan Reef|APC
+2 Swamp|INV|2
+3 Utopia Tree|INV
+3 Yavimaya Coast|APC

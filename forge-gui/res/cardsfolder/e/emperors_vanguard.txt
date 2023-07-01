@@ -1,0 +1,8 @@
+Name:Emperor's Vanguard
+ManaCost:3 G
+Types:Creature Human Scout
+PT:4/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExplore | TriggerZones$ Battlefield | TriggerController$ TriggeredSourceController | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
+SVar:TrigExplore:DB$ Explore
+DeckHas:Ability$Counters
+Oracle:Whenever Emperor's Vanguard deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

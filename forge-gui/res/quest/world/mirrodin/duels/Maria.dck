@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Maria
+Title=Maria
+Difficulty=very hard
+Description=“For her, all seven deadly sins!”
+Icon=Maria.jpg
+Deck Type=constructed
+[Main]
+4 Ancient Den|MRD
+4 Arcbound Ravager|DST
+4 Cranial Plating|5DN
+4 Etched Champion|SOM
+4 Memnite|SOM
+4 Mox Opal|SOM
+4 Ornithopter|AQ
+4 Plains|SOM|1
+4 Seachrome Coast|SOM
+4 Seat of the Synod|MRD
+4 Signal Pest|MBS
+4 Somber Hoverguard|MRD
+4 Tempered Steel|SOM
+4 Thoughtcast|MRD
+4 Vault Skirge|NPH
+[sideboard]

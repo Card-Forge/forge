@@ -1,0 +1,7 @@
+Name:Citanul Centaurs
+ManaCost:3 G
+Types:Creature Centaur
+PT:6/3
+K:Echo:3 G
+K:Shroud
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nEcho {3}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

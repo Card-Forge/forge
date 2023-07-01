@@ -1,0 +1,14 @@
+Name:Needleverge Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+AlternateMode:Modal
+Oracle:{T}: Add {R}.
+
+ALTERNATE
+
+Name:Pillarverge Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:{T}: Add {W}.

@@ -1,0 +1,8 @@
+Name:Blood Moon
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | Description$ Nonbasic lands are Mountains.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckHints:Keyword$Mountainwalk & Type$Goblin|Kobold|Phoenix|Minotaur|Orc|Devil
+Oracle:Nonbasic lands are Mountains.

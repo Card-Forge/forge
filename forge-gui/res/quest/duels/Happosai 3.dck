@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Happosai 3
+Title=Happosai
+Difficulty=hard
+Description=WUB Battle Mastery deck with lots of creatures that profit from Double Strike
+Icon=Happosai.jpg
+Deck Type=constructed
+[main]
+1 Swamp|ISD
+1 Plains|ISD
+1 Island|ISD
+4 Scrubland
+1 Underground Sea
+1 Tundra
+4 Flooded Strand
+4 Polluted Delta
+4 Marsh Flats
+1 Mox Pearl
+1 Mox Jet
+1 Mox Sapphire
+1 Sol Ring
+4 Battle Mastery
+4 Fireshrieker
+1 Precinct Captain
+4 Shadowmage Infiltrator
+1 Needle Specter
+4 Hypnotic Specter
+1 Graveblade Marauder
+1 Somnophore
+1 Lu Xun, Scholar General
+1 Dragonlord Ojutai
+1 Medomai the Ageless
+1 Swords to Plowshares
+1 Doom Blade
+1 Journey to Nowhere
+1 Path to Exile
+1 Vindicate
+1 Oust
+1 Go for the Throat
+1 Last Gasp
+1 Mortify
+1 Terror
+1 Hindering Light
+1 Turn Aside
+[sideboard]

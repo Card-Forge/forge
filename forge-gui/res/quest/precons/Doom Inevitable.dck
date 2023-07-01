@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Doom Inevitable
+Description=Resistance will only prolong their suffering. Show the Mirrans the certainty of phyresis with your blue- and black-mana machinations. Contaminate, proliferate, subjugate.
+Deck Type=constructed
+Set=MBS
+Image=doom_inevitable.jpg
+[main]
+1 Barony Vampire
+1 Vedalken Anatomist
+1 Spread the Sickness
+2 Fume Spitter
+2 Trigon of Corruption
+13 Island
+1 Horrifying Revelation
+1 Bonehoard
+1 Flayer Husk
+1 Doom Blade
+2 Phyrexian Rager
+2 Skinwing
+12 Swamp
+2 Pierce Strider
+1 Skinrender
+1 Steady Progress
+2 Vivisection
+1 Caustic Hound
+1 Strandwalker
+2 Contagion Clasp
+1 Disentomb
+2 Myr Sire
+1 Mind Control
+3 Oculus
+1 Psychosis Crawler+
+1 Armored Cancrix
+1 Steel Sabotage
+[sideboard]

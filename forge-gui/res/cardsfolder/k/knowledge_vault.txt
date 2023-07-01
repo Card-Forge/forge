@@ -1,0 +1,13 @@
+Name:Knowledge Vault
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SpellDescription$ Exile the top card of your library face down.
+A:AB$ SacrificeAll | Cost$ 0 | Defined$ Self | ImprintSacrificed$ True | SubAbility$ DBDiscardHand | SpellDescription$ Sacrifice CARDNAME. If you do, discard your hand, then put all cards exiled with CARDNAME into their owner's hand.
+SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | SubAbility$ DBChangeZoneAll | ConditionDefined$ Imprinted | ConditionPresent$ Card
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Hand | ConditionDefined$ Imprinted | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Hidden$ True | Execute$ TrigGraveyard | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with CARDNAME into their owner's graveyard.
+SVar:TrigGraveyard:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Graveyard
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:{2}, {T}: Exile the top card of your library face down.\n{0}: Sacrifice Knowledge Vault. If you do, discard your hand, then put all cards exiled with Knowledge Vault into their owner's hand.\nWhen Knowledge Vault leaves the battlefield, put all cards exiled with Knowledge Vault into their owner's graveyard.

@@ -1,0 +1,11 @@
+Name:Bramble Wurm
+ManaCost:6 G
+Types:Creature Wurm
+PT:7/6
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
+A:AB$ GainLife | Cost$ 2 G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
+DeckHas:Ability$LifeGain
+Oracle:Reach, trample\nWhen Bramble Wurm enters the battlefield, you gain 5 life.\n{2}{G}, Exile Bramble Wurm from your graveyard: You gain 5 life.

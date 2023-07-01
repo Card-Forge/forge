@@ -1,0 +1,6 @@
+Name:Alluring Scent
+ManaCost:1 G G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | StackDescription$ All creatures able to block {c:Targeted} this turn do so. | SpellDescription$ All creatures able to block target creature this turn do so.
+AI:RemoveDeck:All
+Oracle:All creatures able to block target creature this turn do so.

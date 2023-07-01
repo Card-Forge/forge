@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: Halvor Arenson, Kjeldoran Priest
+Title=Halvor Arenson
+Difficulty=easy
+Description="Divine gifts are granted to those who are worthy." -Halvor Arenson, Kjeldoran priest
+
+Halvor hails from Mikkel, a small village in the Kjeldoran hinterlands.  There, he raised Kaysa, who would later become the Elder Druid of the Juniper Order.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Armor of Faith|ICE
+2 Blessed Wine|ICE
+2 Carrier Pigeons|ALL|1
+2 Carrier Pigeons|ALL|2
+2 Death Ward|ICE
+2 Heal|ICE
+2 Inheritance|ALL
+4 Ivory Gargoyle|ALL
+4 Kjeldoran Royal Guard|ICE
+24 Plains|ICE|3
+4 Prismatic Ward|ICE
+2 Reprisal|ALL|1
+4 Royal Herbalist|ALL|2
+2 Sacred Boon|ICE

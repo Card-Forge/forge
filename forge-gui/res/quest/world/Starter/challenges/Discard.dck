@@ -1,0 +1,26 @@
+[quest]
+id=Discard
+OpponentName=Cao Cao, Lord of Wei
+AILife=20
+Repeat=true
+Wins=50
+Card Reward=booster pack PTK;booster pack PTK;booster pack PTK;3 black rares;duplicate card
+Ticket Reward=true
+Credit Reward=800
+AIExtras=Cao Cao, Lord of Wei
+HumanExtras=
+[metadata]
+Title=Cao Cao, Lord of Wei
+Icon=Dungeon Crawling Black.jpg
+Difficulty=very hard
+Description="This empire clearly has a problem with rodents...and its Emperor."
+Deck Type=constructed
+Name=Discard
+[Main]
+4 Ghostly Visit|PTK
+4 Hand of Death|POR|2
+4 Imperial Edict|PTK
+4 Rain of Tears|POR
+16 Ravenous Rats|S99
+4 Stream of Acid|S99
+24 Swamp|PTK

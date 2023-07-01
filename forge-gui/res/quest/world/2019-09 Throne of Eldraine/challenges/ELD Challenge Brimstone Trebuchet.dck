@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Brimstone Trebuchet
+OpponentName=The Trebuchets
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Brimstone Trebuchet
+Difficulty=easy
+Description=Roses are red\nWater comes in liters\nTrebuchets can launch a 90kg stone\nOver 300 meters
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Brimstone Trebuchet
+[Main]
+30 Brimstone Trebuchet|ELD
+4 Castle Embereth|ELD|1
+26 Mountain|ELD|1

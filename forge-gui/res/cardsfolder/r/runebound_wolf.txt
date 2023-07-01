@@ -1,0 +1,8 @@
+Name:Runebound Wolf
+ManaCost:1 R
+Types:Creature Wolf
+PT:2/2
+A:AB$ DealDamage | Cost$ 3 R T | NumDmg$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ CARDNAME deals damage equal to the number of Wolves and Werewolves you control to target opponent.
+SVar:X:Count$Valid Wolf.YouCtrl,Werewolf.YouCtrl
+DeckHints:Type$Wolf|Werewolf
+Oracle:{3}{R}, {T}: Runebound Wolf deals damage equal to the number of Wolves and Werewolves you control to target opponent.

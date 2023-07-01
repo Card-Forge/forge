@@ -1,0 +1,8 @@
+Name:Gravity Sphere
+ManaCost:2 R
+Types:World Enchantment
+S:Mode$ Continuous | Affected$ Creature | RemoveKeyword$ Flying | Description$ All creatures lose flying.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:All creatures lose flying.

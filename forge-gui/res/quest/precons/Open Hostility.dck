@@ -1,0 +1,100 @@
+[metadata]
+Name=Open Hostility
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Saskia the Unyielding thrives in brutal combat calling upon vicious hordes to crush her adversary underfoot. Saskia strikes always find their mark, cleaving through any foe that stands between her and the focus of her fury.
+Set=C16
+Image=open_hostility.png
+[Commander]
+1 Saskia the Unyielding+|C16
+[main]
+1 Wight of Precinct Six|C16
+1 Den Protector|C16
+1 Quirion Explorer|C16
+1 Sakura-Tribe Elder|C16
+1 Sylvok Explorer|C16
+1 Korozda Guildmage|C16
+1 Zhur-Taa Druid|C16
+1 Selesnya Guildmage|C16
+1 Mentor of the Meek|C16
+1 Mirror Entity|C16
+1 Alesha, Who Smiles at Death|C16
+1 Taurean Mauler|C16
+1 Managorger Hydra|C16
+1 Wild Beastmaster|C16
+1 Wilderness Elemental|C16
+1 Dauntless Escort|C16
+1 Brutal Hordechief|C16
+1 Thelonite Hermit|C16
+1 Iroas, God of Victory|C16
+1 Mycoloth|C16
+1 Ankle Shanker|C16
+1 Thunderfoot Baloth|C16
+1 Stalking Vengeance|C16
+1 Farseek|C16
+1 Rampant Growth|C16
+1 Shamanic Revelation|C16
+1 Clan Defiance|C16
+1 Lavalanche|C16
+1 Terminate|C16
+1 Artifact Mutation|C16
+1 Boros Charm|C16
+1 Aura Mutation|C16
+1 Abzan Charm|C16
+1 Naya Charm|C16
+1 Crackling Doom|C16
+1 Grab the Reins|C16
+1 Utter End|C16
+1 Order // Chaos|C16
+1 Skullclamp|C16
+1 Sol Ring|C16
+1 Fellwar Stone|C16
+1 Gruul Signet|C16
+1 Lightning Greaves|C16
+1 Commander's Sphere|C16
+1 Sunforger|C16
+1 Blind Obedience|C16
+1 Necrogenesis|C16
+1 Beastmaster Ascension|C16
+1 Everlasting Torment|C16
+1 Breath of Fury|C16
+1 Caves of Koilos|C16
+1 Command Tower|C16
+1 Dragonskull Summit|C16
+1 Evolving Wilds|C16
+1 Exotic Orchard|C16
+1 Grand Coliseum|C16
+1 Gruul Turf|C16
+1 Jungle Shrine|C16
+1 Karplusan Forest|C16
+1 Mosswort Bridge|C16
+1 Nomad Outpost|C16
+1 Orzhov Basilica|C16
+1 Rootbound Crag|C16
+1 Sandsteppe Citadel|C16
+1 Savage Lands|C16
+1 Spinerock Knoll|C16
+1 Sunpetal Grove|C16
+1 Terramorphic Expanse|C16
+1 Windbrisk Heights|C16
+3 Plains|C16
+3 Swamp|C16
+5 Mountain|C16
+5 Forest|C16
+1 Tymna the Weaver|C16
+1 Charging Cinderhorn|C16
+1 Tana, the Bloodsower|C16
+1 Ravos, Soultender|C16
+1 Stonehoof Chieftain|C16
+1 Primeval Protector|C16
+1 Conqueror's Flail|C16
+1 Evolutionary Escalation|C16
+1 Frenzied Fugue|C16
+1 Sylvan Reclamation|C16
+1 Divergent Transformations|C16
+1 Grave Upheaval|C16
+1 Treacherous Terrain|C16
+1 Ash Barrens|C16

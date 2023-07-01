@@ -1,0 +1,9 @@
+Name:Thicket Crasher
+ManaCost:3 G
+Types:Creature Elemental Rhino
+PT:4/3
+K:Trample
+S:Mode$ Continuous | Affected$ Elemental.Other+YouCtrl | AddKeyword$ Trample | Description$ Other Elementals you control have trample.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Elemental
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nOther Elementals you control have trample.

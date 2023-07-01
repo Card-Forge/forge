@@ -1,0 +1,6 @@
+Name:Benthic Explorers
+ManaCost:3 U
+Types:Creature Merfolk Scout
+PT:2/4
+A:AB$ ManaReflected | Cost$ T untapYType<1/Land.OppCtrl/land> | ColorOrType$ Type | Valid$ Defined.Untapped | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that land could produce.
+Oracle:{T}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.

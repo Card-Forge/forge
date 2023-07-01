@@ -1,0 +1,7 @@
+Name:Restrain
+ManaCost:2 W
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDraw | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target attacking creature this turn.
+Oracle:Prevent all combat damage that would be dealt by target attacking creature this turn.\nDraw a card.

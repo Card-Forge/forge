@@ -1,0 +1,7 @@
+Name:Lucky Clover
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant.Adventure,Sorcery.Adventure | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Adventure instant or sorcery spell, copy it. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+AI:RemoveDeck:Random
+Oracle:Whenever you cast an Adventure instant or sorcery spell, copy it. You may choose new targets for the copy.

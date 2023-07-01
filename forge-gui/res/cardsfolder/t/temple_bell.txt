@@ -1,0 +1,5 @@
+Name:Temple Bell
+ManaCost:3
+Types:Artifact
+A:AB$ Draw | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player draws a card.
+Oracle:{T}: Each player draws a card.

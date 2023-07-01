@@ -1,0 +1,8 @@
+[format]
+Name:Extended
+Type:Archived
+Subtype:Extended
+Effective:2013-09-27
+Retired:2013-10-08
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS
+Banned:Mental Misstep; Ponder

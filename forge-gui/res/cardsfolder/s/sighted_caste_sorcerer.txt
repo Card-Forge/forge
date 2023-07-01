@@ -1,0 +1,7 @@
+Name:Sighted-Caste Sorcerer
+ManaCost:1 W
+Types:Creature Human Wizard
+PT:1/1
+K:Exalted
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{U}: Sighted-Caste Sorcerer gains shroud until end of turn. (It can't be the target of spells or abilities.)

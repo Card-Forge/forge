@@ -1,0 +1,7 @@
+Name:Sanguine Guard
+ManaCost:1 B B
+Types:Creature Phyrexian Zombie Knight
+PT:2/2
+K:First Strike
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:First strike\n{1}{B}: Regenerate Sanguine Guard.

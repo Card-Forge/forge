@@ -1,0 +1,6 @@
+Name:Wirewood Elf
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

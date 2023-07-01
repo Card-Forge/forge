@@ -1,0 +1,8 @@
+Name:Hag of Dark Duress
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:At the beginning of your upkeep, each opponent discards a card.

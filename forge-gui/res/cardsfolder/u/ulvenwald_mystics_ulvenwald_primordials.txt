@@ -1,0 +1,20 @@
+Name:Ulvenwald Mystics
+ManaCost:2 G G
+Types:Creature Human Shaman Werewolf
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Ulvenwald Mystics.
+
+ALTERNATE
+
+Name:Ulvenwald Primordials
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:5/5
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+Oracle:{G}: Regenerate Ulvenwald Primordials.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulvenwald Primordials.

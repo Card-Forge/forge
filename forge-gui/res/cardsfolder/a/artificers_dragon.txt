@@ -1,0 +1,10 @@
+Name:Artificer's Dragon
+ManaCost:6
+Types:Artifact Creature Dragon
+PT:4/4
+K:Flying
+A:AB$ PumpAll | Cost$ R | ValidCards$ Artifact.Creature+YouCtrl | NumAtt$ +1 | SpellDescription$ Artifact creatures you control get +1/+0 until end of turn.
+K:Unearth:3 R R
+DeckHas:Ability$Graveyard
+DeckHints:Type$Artifact & Color$Red
+Oracle:Flying\n{R}: Artifact creatures you control get +1/+0 until end of turn.\nUnearth {3}{R}{R} ({3}{R}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

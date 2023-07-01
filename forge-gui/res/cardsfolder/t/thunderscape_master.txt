@@ -1,0 +1,10 @@
+Name:Thunderscape Master
+ManaCost:2 R R
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ LoseLife | Cost$ B B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+A:AB$ PumpAll | Cost$ G G T | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:{B}{B}, {T}: Target player loses 2 life and you gain 2 life.\n{G}{G}, {T}: Creatures you control get +2/+2 until end of turn.

@@ -1,0 +1,8 @@
+Name:Steelform Sliver
+ManaCost:2 W
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddToughness$ 1 | Description$ Sliver creatures you control get +0/+1.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control get +0/+1.

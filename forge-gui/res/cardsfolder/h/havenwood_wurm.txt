@@ -1,0 +1,7 @@
+Name:Havenwood Wurm
+ManaCost:6 G
+Types:Creature Wurm
+PT:5/6
+K:Flash
+K:Trample
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nTrample

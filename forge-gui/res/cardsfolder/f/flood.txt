@@ -1,0 +1,6 @@
+Name:Flood
+ManaCost:U
+Types:Enchantment
+A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
+SVar:NonStackingEffect:True
+Oracle:{U}{U}: Tap target creature without flying.

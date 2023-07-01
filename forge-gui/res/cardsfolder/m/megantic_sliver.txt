@@ -1,0 +1,8 @@
+Name:Megantic Sliver
+ManaCost:5 G
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddPower$ 3 | AddToughness$ 3 | Description$ Sliver creatures you control get +3/+3.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control get +3/+3.

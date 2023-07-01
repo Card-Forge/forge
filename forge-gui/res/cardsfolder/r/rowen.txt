@@ -1,0 +1,9 @@
+Name:Rowen
+ManaCost:2 G G
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | Number$ 1 | Static$ True | Execute$ DBReveal | ForReveal$ True | TriggerZones$ Battlefield | TriggerDescription$ Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.
+SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | RememberRevealed$ True | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Land.Basic+YouCtrl | SubAbility$ DBCleanup | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a basic land card this way, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.

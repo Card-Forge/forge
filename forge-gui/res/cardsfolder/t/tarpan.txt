@@ -1,0 +1,7 @@
+Name:Tarpan
+ManaCost:G
+Types:Creature Horse
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain 1 life.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 1
+Oracle:When Tarpan dies, you gain 1 life.

@@ -1,0 +1,6 @@
+[format]
+Name:Block: Time Spiral (FUT)
+Type:Archived
+Subtype:Block
+Effective:2007-05-20
+Sets:TSP, TSB, PLC, FUT

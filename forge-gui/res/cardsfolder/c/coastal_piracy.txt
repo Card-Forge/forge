@@ -1,0 +1,7 @@
+Name:Coastal Piracy
+ManaCost:2 U U
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control deals combat damage to an opponent, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control deals combat damage to an opponent, you may draw a card.

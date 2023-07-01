@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Serra2
+Title=Serra
+Difficulty=medium
+Description=White deck
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Angelic Chorus|USG
+1 Angelic Page|USG
+2 Catastrophe|USG
+4 Cessation|ULG
+1 Disenchant|USG
+4 Forbidding Watchtower|ULG
+2 Herald of Serra|USG
+1 Opal Titan|USG
+2 Path of Peace|USG
+1 Peace and Quiet|ULG
+20 Plains|USG|4
+4 Radiant's Dragoons|ULG
+3 Radiant, Archangel|ULG
+2 Serra Avatar|USG
+2 Sustainer of the Realm|ULG
+2 Voice of Duty|UDS
+2 Voice of Grace|USG
+2 Voice of Law|USG
+2 Voice of Reason|UDS
+1 Worship|USG

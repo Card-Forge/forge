@@ -1,0 +1,6 @@
+Name:Eight-and-a-Half-Tails Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+2/-3
+A:AB$ Pump | Cost$ 1 | ActivationZone$ Command | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection from red & Protection from blue & Protection from black & Protection from white & Protection from green | RandomKeyword$ True | NoRepetition$ True | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, target permanent you control gains protection from a color chosen at random from colors it doesn't have protection from.
+Oracle:Hand +2, life -3\n{1}: Until end of turn, target permanent you control gains protection from a color chosen at random from colors it doesn't have protection from.

@@ -1,0 +1,7 @@
+Name:Professor of Symbology
+ManaCost:1 W
+Types:Creature Kor Cleric
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLearn | TriggerDescription$ When CARDNAME enters the battlefield, Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+SVar:TrigLearn:DB$ Learn
+Oracle:When Professor of Symbology enters the battlefield, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

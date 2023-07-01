@@ -1,0 +1,10 @@
+Name:Eligeth, Crossroads Augur
+ManaCost:4 U U
+Types:Legendary Creature Sphinx
+PT:5/6
+K:Flying
+K:Partner
+R:Event$ Scry | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would scry a number of cards, draw that many cards instead.
+SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:ReplaceCount$Num
+Oracle:Flying\nIf you would scry a number of cards, draw that many cards instead.\nPartner (You can have two commanders if both have partner.)

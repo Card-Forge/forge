@@ -1,0 +1,5 @@
+Name:Shock
+ManaCost:R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:Shock deals 2 damage to any target.

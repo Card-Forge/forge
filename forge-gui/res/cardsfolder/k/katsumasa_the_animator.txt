@@ -1,0 +1,12 @@
+Name:Katsumasa, the Animator
+ManaCost:2 U U
+Types:Legendary Creature Moonfolk Artificer
+PT:3/3
+K:Flying
+A:AB$ Animate | Cost$ 2 U | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Types$ Artifact,Creature | Keywords$ Flying | SubAbility$ NonVehicle | SpellDescription$ Until end of turn, target noncreature artifact you control becomes an artifact creature and gains flying.
+SVar:NonVehicle:DB$ Animate | Defined$ Targeted.nonVehicle | Power$ 1 | Toughness$ 1 | IfDesc$ True | SpellDescription$ If it's not a Vehicle, it has base power and toughness 1/1 until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each of up to three target noncreature artifacts.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select up to three target noncreature artifacts
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact|Vehicle
+Oracle:Flying\n{2}{U}: Until end of turn, target noncreature artifact you control becomes an artifact creature and gains flying. If it's not a Vehicle, it has base power and toughness 1/1 until end of turn.\nAt the beginning of your upkeep, put a +1/+1 counter on each of up to three target noncreature artifacts.

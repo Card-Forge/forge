@@ -1,0 +1,7 @@
+Name:Stinging Lionfish
+ManaCost:1 U
+Types:Enchantment Creature Fish
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ActivatorThisTurnCast$ EQ1 | OpponentTurn$ True | Execute$ TrigTapOrUntap | OptionalDecider$ You | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, you may tap or untap target nonland permanent.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+Oracle:Whenever you cast your first spell during each opponent's turn, you may tap or untap target nonland permanent.

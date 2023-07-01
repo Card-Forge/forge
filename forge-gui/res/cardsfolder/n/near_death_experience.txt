@@ -1,0 +1,7 @@
+Name:Near-Death Experience
+ManaCost:2 W W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | LifeTotal$ You | LifeAmount$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if you have exactly 1 life, you win the game.
+SVar:TrigWin:DB$ WinsGame | Defined$ You
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if you have exactly 1 life, you win the game.

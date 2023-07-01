@@ -1,0 +1,6 @@
+Name:Cho-Manno, Revolutionary
+ManaCost:2 W W
+Types:Legendary Creature Human Rebel
+PT:2/2
+K:Prevent all damage that would be dealt to CARDNAME.
+Oracle:Prevent all damage that would be dealt to Cho-Manno, Revolutionary.

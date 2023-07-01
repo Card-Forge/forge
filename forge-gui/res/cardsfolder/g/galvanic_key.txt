@@ -1,0 +1,7 @@
+Name:Galvanic Key
+ManaCost:2
+Types:Artifact
+K:Flash
+A:AB$ Untap | Cost$ 3 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
+AI:RemoveDeck:Random
+Oracle:Flash\n{3}, {T}: Untap target artifact.

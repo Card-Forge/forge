@@ -1,0 +1,8 @@
+Name:Canoptek Wraith
+ManaCost:3
+Types:Artifact Creature Wraith
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ Wraith Form — CARDNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Transdimensional Scout — Whenever CARDNAME deals combat damage to a player, you may pay {3} and sacrifice it. If you do, search your library for up to two basic land cards with the same name as a land you control, put them onto the battlefield tapped, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 3 Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic+sharesNameWith Valid Land.YouCtrl | ChangeNum$ 2 | Tapped$ True
+Oracle:Wraith Form — Canoptek Wraith can't be blocked.\nTransdimensional Scout — When Canoptek Wraith deals combat damage to a player, you may pay {3} and sacrifice it. If you do, search your library for up to two basic land cards with the same name as a land you control, put them onto the battlefield tapped, then shuffle.

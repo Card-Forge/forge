@@ -1,0 +1,9 @@
+Name:Saprazzan Legate
+ManaCost:3 U
+Types:Creature Merfolk Soldier
+PT:1/3
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Mountain and you control an Island, you may cast this spell without paying its mana cost.
+K:Flying
+SVar:X:Count$Valid Mountain.OppCtrl
+SVar:Y:Count$Valid Island.YouCtrl
+Oracle:If an opponent controls a Mountain and you control an Island, you may cast this spell without paying its mana cost.\nFlying

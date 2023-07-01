@@ -1,0 +1,6 @@
+Name:Lady Caleria
+ManaCost:3 G G W W
+Types:Legendary Creature Elf Archer
+PT:3/6
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature.
+Oracle:{T}: Lady Caleria deals 3 damage to target attacking or blocking creature.

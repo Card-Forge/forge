@@ -1,0 +1,6 @@
+Name:Solemnity
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ CantPutCounter | ValidPlayer$ Player | Description$ Players can't get counters.
+S:Mode$ CantPutCounter | AffectedZone$ Battlefield | ValidCard$ Creature.inZoneBattlefield,Artifact.inZoneBattlefield,Enchantment.inZoneBattlefield,Land.inZoneBattlefield | Description$ Counters can't be put on artifacts, creatures, enchantments or lands.
+Oracle:Players can't get counters.\nCounters can't be put on artifacts, creatures, enchantments, or lands.

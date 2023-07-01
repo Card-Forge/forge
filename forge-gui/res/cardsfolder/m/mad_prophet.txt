@@ -1,0 +1,10 @@
+Name:Mad Prophet
+ManaCost:3 R
+Types:Creature Human Shaman
+PT:2/2
+K:Haste
+A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Haste\n{T}, Discard a card: Draw a card.

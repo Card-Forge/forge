@@ -1,0 +1,5 @@
+Name:Divest
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | DiscardValid$ Artifact,Creature | DiscardValidDesc$ artifact or creature | Mode$ RevealYouChoose | SpellDescription$ Target player reveals their hand. You choose an artifact or creature card from it. That player discards that card.
+Oracle:Target player reveals their hand. You choose an artifact or creature card from it. That player discards that card.

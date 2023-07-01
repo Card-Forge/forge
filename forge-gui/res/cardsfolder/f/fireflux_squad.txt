@@ -1,0 +1,11 @@
+Name:Fireflux Squad
+ManaCost:3 R
+Types:Creature Human Soldier
+PT:4/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may exile another target attacking creature you control. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield tapped and attacking and the rest on the bottom of your library in a random order.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.attacking+Other+YouCtrl | TgtPrompt$ Select another target attacking creature you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature | ValidDescription$ Creature | FoundDestination$ Battlefield | Tapped$ True | Attacking$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Haste\nWhenever Fireflux Squad attacks, you may exile another target attacking creature you control. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield tapped and attacking and the rest on the bottom of your library in a random order.

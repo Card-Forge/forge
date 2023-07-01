@@ -1,0 +1,7 @@
+Name:Aggressive Sabotage
+ManaCost:2 B
+Types:Sorcery
+K:Kicker:R
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | SubAbility$ DBDealDamage | SpellDescription$ Target opponent discards two cards, if this spell was kicked, it deals 3 damage to that player.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ ParentTarget | Condition$ Kicked | NumDmg$ 3
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nTarget player discards two cards. If this spell was kicked, it deals 3 damage to that player.

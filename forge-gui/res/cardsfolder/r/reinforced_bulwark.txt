@@ -1,0 +1,7 @@
+Name:Reinforced Bulwark
+ManaCost:3
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+A:AB$ PreventDamage | Cost$ T | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
+Oracle:Defender\n{T}: Prevent the next 1 damage that would be dealt to you this turn.

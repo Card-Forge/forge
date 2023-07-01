@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Walle 3
+Title=Wall-E
+Difficulty=hard
+Description=WB Artifact deck with Tempered Steel
+Icon=Wall-E 3.jpg
+Deck Type=constructed
+[main]
+4 Memnite
+4 Ornithopter
+4 Signal Pest
+4 Vault Skirge
+4 Steel Overseer
+2 Glint Hawk Idol
+2 Porcelain Legionnaire
+3 Go for the Throat
+4 Master's Call
+3 Mox Opal
+4 Tempered Steel
+4 Scrubland
+4 Glimmerpost
+11 Plains|MBS
+3 Swamp|MBS
+[sideboard]

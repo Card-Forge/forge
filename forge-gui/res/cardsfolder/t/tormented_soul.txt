@@ -1,0 +1,7 @@
+Name:Tormented Soul
+ManaCost:B
+Types:Creature Spirit
+PT:1/1
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self
+Oracle:Tormented Soul can't block and can't be blocked.

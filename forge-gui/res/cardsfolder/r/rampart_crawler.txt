@@ -1,0 +1,6 @@
+Name:Rampart Crawler
+ManaCost:B
+Types:Creature Lizard Mercenary
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Wall | Description$ CARDNAME can't be blocked by Walls.
+Oracle:Rampart Crawler can't be blocked by Walls.

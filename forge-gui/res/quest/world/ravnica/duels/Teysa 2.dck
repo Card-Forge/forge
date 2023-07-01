@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Teysa 2
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=medium
+Description=Please let me play my combo
+Deck Type=constructed
+[main]
+4 Belfry Spirit|GPT
+2 Blind Hunter|GPT
+2 Dimir House Guard|RAV
+4 Eyes in the Skies|RTR
+2 Ghost Council of Orzhova|GPT
+4 Godless Shrine|GTC
+4 Knight Watch|GTC
+2 Ogre Slumlord|GTC
+4 Orzhov Guildgate|GTC
+8 Plains|RTR
+4 Precinct Captain|RTR
+4 Skeletal Vampire|GPT
+8 Swamp|RTR
+4 Teysa, Orzhov Scion|GPT
+4 Twilight Drover|RAV
+[sideboard]
+[planes]
+[schemes]

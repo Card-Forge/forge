@@ -1,0 +1,8 @@
+Name:Disciple of the Sun
+ManaCost:4 W
+Types:Creature Human Cleric
+PT:3/3
+K:Lifelink
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card with mana value 3 or less from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | Origin$ Graveyard | Destination$ Hand
+Oracle:Lifelink\nWhen Disciple of the Sun enters the battlefield, return target permanent card with mana value 3 or less from your graveyard to your hand.

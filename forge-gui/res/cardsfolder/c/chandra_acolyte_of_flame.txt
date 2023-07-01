@@ -1,0 +1,9 @@
+Name:Chandra, Acolyte of Flame
+ManaCost:1 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:4
+A:AB$ PutCounterAll | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ValidCards$ Planeswalker.YouCtrl+Red | CounterType$ LOYALTY | CounterNum$ 1 | SpellDescription$ Put a loyalty counter on each red planeswalker you control.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | AtEOT$ Sacrifice | PumpKeywords$ Haste | SpellDescription$ Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.
+A:AB$ Play | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Instant.YouCtrl+cmcLE3,Sorcery.YouCtrl+cmcLE3 | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card with mana cost 3 or less | AILogic$ ReplaySpell | ValidSA$ Spell | Optional$ True | ExileOnMoved$ Graveyard | ReplaceGraveyard$ Exile | SpellDescription$ You may cast target instant or sorcery card with mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
+DeckHas:Ability$Token
+Oracle:[0]: Put a loyalty counter on each red planeswalker you control.\n[0]: Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.\n[-2]: You may cast target instant or sorcery card with mana value 3 or less from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.

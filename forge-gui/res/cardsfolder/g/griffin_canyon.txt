@@ -1,0 +1,8 @@
+Name:Griffin Canyon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Untap | Cost$ T | ValidTgts$ Griffin | TgtPrompt$ Select target Griffin | SubAbility$ DBPump | SpellDescription$ Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.
+SVar:DBPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Targeted
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{T}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.

@@ -1,0 +1,8 @@
+Name:Nirkana Assassin
+ManaCost:2 B
+Types:Creature Vampire Assassin Ally
+PT:2/3
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Deathtouch
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, Nirkana Assassin gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

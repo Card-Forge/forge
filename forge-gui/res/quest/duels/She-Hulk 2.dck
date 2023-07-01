@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=She-Hulk 2
+Title=She-Hulk
+Difficulty=medium
+Description=RG Ball Lightning deck with Primal Forcemage and Smoke
+Icon=She-Hulk.jpg
+Deck Type=constructed
+[main]
+4 Rootbound Crag
+4 Cinder Glade
+4 Temple of Abandon
+4 Game Trail
+3 Forest|M15
+3 Mountain|M15
+4 Farseek
+4 Primal Forcemage
+3 Smoke
+1 Paleoloth
+2 Elemental Bond
+1 Brimstone Volley
+4 Thatcher Revolt
+2 Arc Runner
+4 Hellspark Elemental
+2 Hell's Thunder
+2 Groundbreaker
+2 Ball Lightning
+4 Timbermare
+3 Rite of the Raging Storm
+[sideboard]

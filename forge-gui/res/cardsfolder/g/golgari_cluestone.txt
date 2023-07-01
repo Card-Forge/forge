@@ -1,0 +1,8 @@
+Name:Golgari Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+A:AB$ Draw | Cost$ B G T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black|Green
+Oracle:{T}: Add {B} or {G}.\n{B}{G}, {T}, Sacrifice Golgari Cluestone: Draw a card.

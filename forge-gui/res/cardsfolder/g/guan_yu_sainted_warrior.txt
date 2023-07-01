@@ -1,0 +1,9 @@
+Name:Guan Yu, Sainted Warrior
+ManaCost:3 W W
+Types:Legendary Creature Human Soldier Warrior
+PT:3/5
+K:Horsemanship
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+YouOwn | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, you may shuffle CARDNAME into your library.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy
+DeckHints:Name$Liu Bei, Lord of Shu
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhen Guan Yu, Sainted Warrior is put into your graveyard from the battlefield, you may shuffle Guan Yu into your library.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/099.-RNA2.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your solution must satisfy all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Wild Onslaught;Nikya of the Old Ways;Rally to Battle;Unbreakable Formation;Hadana's Climb
+humanbattlefield=Shield Mare;Incubation Druid;Incubation Druid;Bolrac-Clan Crusher|Counters:P1P1=1;Tetsuko Umezawa, Fugitive;Stomping Ground|NoETBTrigs;Temple Garden|NoETBTrigs;Hallowed Fountain|NoETBTrigs
+aibattlefield=Thief of Sanity;Fireblade Artist;Wee Dragonauts

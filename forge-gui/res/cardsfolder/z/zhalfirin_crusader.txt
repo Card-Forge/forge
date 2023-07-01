@@ -1,0 +1,10 @@
+Name:Zhalfirin Crusader
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/2
+K:Flanking
+A:AB$ Effect | Cost$ 1 W | Name$ Zhalfirin Redirection | ValidTgts$ Any | TgtPrompt$ Select any target to redirect the damage to | ReplacementEffects$ Zhalfirin | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to any target instead.
+SVar:Zhalfirin:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ ZhalfirinDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to any target.
+SVar:ZhalfirinDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
+AI:RemoveDeck:All
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.

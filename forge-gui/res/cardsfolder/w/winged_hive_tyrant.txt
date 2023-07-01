@@ -1,0 +1,11 @@
+Name:Winged Hive Tyrant
+ManaCost:3 U R
+Types:Creature Tyranid
+PT:4/4
+K:Flying
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters+Other | AddKeyword$ Flying & Haste | Description$ The Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
+SVar:PlayMain1:TRUE
+DeckNeeds:Ability$Counters
+DeckHas:Keyword$Flying|Haste
+Oracle:Flying, haste\nThe Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.

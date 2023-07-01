@@ -1,0 +1,6 @@
+Name:Armored Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+PT:1/2
+K:Flying
+Oracle:Flying

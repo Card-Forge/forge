@@ -1,0 +1,6 @@
+Name:Oboro, Palace in the Clouds
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ ChangeZone | Cost$ 1 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:{T}: Add {U}.\n{1}: Return Oboro, Palace in the Clouds to its owner's hand.

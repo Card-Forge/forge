@@ -1,0 +1,7 @@
+Name:Ghirapur Orrery
+ManaCost:4
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AdjustLandPlays$ 1 | Description$ Each player may play an additional land on each of their turns.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.ActivePlayerCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | Defined$ TriggeredPlayer
+Oracle:Each player may play an additional land on each of their turns.\nAt the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.

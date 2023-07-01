@@ -1,0 +1,6 @@
+Name:Golgari Guildgate
+ManaCost:no cost
+Types:Land Gate
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+Oracle:Golgari Guildgate enters the battlefield tapped.\n{T}: Add {B} or {G}.

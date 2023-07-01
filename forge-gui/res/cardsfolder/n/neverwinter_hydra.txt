@@ -1,0 +1,12 @@
+Name:Neverwinter Hydra
+ManaCost:X X G G
+Types:Creature Hydra
+PT:0/0
+K:ETBReplacement:Other:RollCounters
+SVar:RollCounters:DB$ RollDice | Amount$ X | ETB$ True | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll X d6. It enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
+SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result | ETB$ True
+K:Trample
+K:Ward:4
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:As Neverwinter Hydra enters the battlefield, roll X d6. It enters with a number of +1/+1 counters on it equal to the total of those results.\nTrample\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)

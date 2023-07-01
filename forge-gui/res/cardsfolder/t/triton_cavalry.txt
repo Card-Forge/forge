@@ -1,0 +1,7 @@
+Name:Triton Cavalry
+ManaCost:3 U
+Types:Creature Merfolk Soldier
+PT:2/4
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, you may return target enchantment to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Enchantment | Origin$ Battlefield | Destination$ Hand
+Oracle:Heroic — Whenever you cast a spell that targets Triton Cavalry, you may return target enchantment to its owner's hand.

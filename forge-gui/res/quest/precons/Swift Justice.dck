@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Swift Justice
+Description=When you're surrounded by things that want to kill you, kill them first! Fearlessly lead your creatures headlong into battle, and their ferocity will win you the day.
+Deck Type=Constructed
+Set=DKA
+Image=swift_justice.jpg
+[main]
+2 Ashmouth Hound|ISD
+2 Assault Griffin|M12
+1 Bloodcrazed Neonate|ISD
+2 Burning Oil|DKA
+2 Elite Vanguard|M12
+1 Erdwal Ripper|DKA
+1 Fiend Hunter|ISD
+1 Forge Devil|DKA
+2 Lightning Elemental|M12
+2 Markov Warlord|DKA
+2 Midnight Guard|DKA
+12 Mountain|ISD
+2 Niblis of the Mist|DKA
+2 Niblis of the Urn|DKA
+1 Night Revelers|ISD
+1 Nightbird's Clutches|ISD
+12 Plains|ISD
+2 Rally the Peasants|ISD
+1 Requiem Angel|DKA
+1 Serra Angel|M12
+1 Silverchase Fox|ISD
+1 Skillful Lunge|DKA
+1 Stromkirk Noble|ISD
+1 Torch Fiend|DKA
+2 Traveler's Amulet|ISD
+2 Wrack with Madness|DKA
+[sideboard]

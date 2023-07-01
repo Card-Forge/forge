@@ -1,0 +1,8 @@
+Name:Otepec Huntmaster
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:1/2
+S:Mode$ ReduceCost | ValidCard$ Card.Dinosaur | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Dinosaur spells you cast cost {1} less to cast.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Dinosaur | TgtPrompt$ Select target Dinosaur | KW$ Haste | SpellDescription$ Target Dinosaur gains haste until end of turn.
+DeckHints:Type$Dinosaur
+Oracle:Dinosaur spells you cast cost {1} less to cast.\n{T}: Target Dinosaur gains haste until end of turn.

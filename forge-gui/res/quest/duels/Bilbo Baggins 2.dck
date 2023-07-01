@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins 2
+Title=Bilbo Baggins
+Difficulty=medium
+Description=WU Heroic deck
+Icon=Bilbo Baggins.jpg
+Deck Type=constructed
+[main]
+4 Tundra
+4 Glacial Fortress
+4 Seachrome Coast
+1 Wanderwine Hub
+4 Flooded Strand
+4 Plains
+2 Island
+2 Favored Hoplite
+2 Battlewise Hoplite
+2 Hero of Iroas
+2 Phalanx Leader
+2 Meletis Astronomer
+2 Setessan Battle Priest
+2 Triton Fortune Hunter
+1 Wavecrash Triton
+1 Elite Skirmisher
+2 Fabled Hero
+4 Distortion Strike
+1 Chosen by Heliod
+1 Divine Favor
+1 Dragon Scales
+2 Ethereal Armor
+1 Hero's Resolve
+2 Hyena Umbra
+1 Nimbus Wings
+2 Spectral Flight
+2 Spirit Mantle
+1 Wings of Aesthir
+1 Wings of Hope
+[sideboard]

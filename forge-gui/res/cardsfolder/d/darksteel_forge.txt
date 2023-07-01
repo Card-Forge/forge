@@ -1,0 +1,7 @@
+Name:Darksteel Forge
+ManaCost:9
+Types:Artifact
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Indestructible | Description$ Artifacts you control have indestructible.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Artifacts you control have indestructible. (Effects that say "destroy" don't destroy them. Artifact creatures with indestructible can't be destroyed by damage.)

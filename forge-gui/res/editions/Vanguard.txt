@@ -1,0 +1,136 @@
+[metadata]
+Code=VAN
+Date=1997-08
+Name=Vanguard
+Code2=VAN
+Type=Other
+Foil=NotSupported
+
+[cards]
+33 S Akroma, Angel of Wrath Avatar
+70 S Arcanis, the Omnipotent Avatar
+42 S Arcbound Overseer Avatar
+73 S Ashling the Pilgrim Avatar
+81 S Ashling, the Extinguisher Avatar
+S Ashnod
+S Barrin
+8 S Birds of Paradise Avatar
+8 S Birds of Paradise Avatar
+39 S Bosh, Iron Golem Avatar
+66 S Braids, Conjurer Adept Avatar
+59 S Chronatog Avatar
+S Crovax
+72 S Dakkon Blackblade Avatar
+94 S Dauntless Escort Avatar
+63 S Diamond Faerie Avatar
+45 S Eight-and-a-Half-Tails Avatar
+S Eladamri
+88 S Eladamri, Lord of Leaves Avatar
+37 S Elvish Champion Avatar
+95 S Enigma Sphinx Avatar
+27 S Erhnam Djinn Avatar
+27 S Erhnam Djinn Avatar
+S Ertai
+44 S Etched Oracle Avatar
+9 S Fallen Angel Avatar
+82 S Figure of Destiny Avatar
+14 S Flametongue Kavu Avatar
+53 S Frenetic Efreet Avatar
+S Gerrard
+S Gix
+6 S Goblin Warchief Avatar
+6 S Goblin Warchief Avatar
+S Greven il-Vec
+30 S Grinning Demon Avatar
+30 S Grinning Demon Avatar
+62 S Haakon, Stromgald Scourge Avatar
+S Hanna
+68 S Heartwood Storyteller Avatar
+51 S Hell's Caretaker Avatar
+93 S Hermit Druid Avatar
+47 S Higure, the Still Wind Avatar
+48 S Ink-Eyes, Servant of Oni Avatar
+64 S Jaya Ballard Avatar
+69 S Jhoira of the Ghitu Avatar
+S Karn
+34 S Karona, False God Avatar
+87 S Kresh the Bloodbraided Avatar
+54 S Loxodon Hierarch Avatar
+S Lyna
+60 S Lyzolda, the Blood Witch Avatar
+91 S Maelstrom Archangel Avatar
+90 S Malfegor Avatar
+78 S Maralen of the Mornsong Avatar
+S Maraxus
+52 S Maro Avatar
+96 S Master of the Wild Hunt Avatar
+86 S Mayael the Anima Avatar
+S Mirri
+67 S Mirri the Cursed Avatar
+74 S Mirror Entity Avatar
+S Mishra
+61 S Momir Vig, Simic Visionary Avatar
+76 S Morinfen Avatar
+S Multani
+80 S Murderous Redcap Avatar
+83 S Necropotence Avatar
+58 S Nekrataal Avatar
+50 S Oni of Wild Places Avatar
+S Oracle
+84 S Orcish Squatters Avatar
+S Orim
+75 S Peacekeeper Avatar
+31 S Phage the Untouchable Avatar
+108 S Platinum Angel Avatar
+108 S Platinum Angel Avatar
+18 S Prodigal Sorcerer Avatar
+18 S Prodigal Sorcerer Avatar
+43 S Raksha Golden Cub Avatar
+79 S Reaper King Avatar
+85 S Rith, the Awakener Avatar
+85 S Rith, the Awakener Avatar
+S Rofellos
+105 S Royal Assassin Avatar
+105 S Royal Assassin Avatar
+56 S Rumbling Slum Avatar
+49 S Sakashima the Impostor Avatar
+S Selenia
+S Serra
+1 S Serra Angel Avatar
+1 S Serra Angel Avatar
+46 S Seshiro the Anointed Avatar
+S Sidar Kondo
+S Sisay
+55 S Sisters of Stone Death Avatar
+92 S Sliver Queen Avatar
+S Sliver Queen, Brood Mother
+S Squee
+71 S Squee, Goblin Nabob Avatar
+7 S Stalking Tiger Avatar
+S Starke
+77 S Stonehewer Giant Avatar
+65 S Stuffy Doll Avatar
+S Tahngarth
+S Takara
+S Tawnos
+57 S Teysa, Orzhov Scion Avatar
+S Titania
+104 S Tradewind Rider Avatar
+104 S Tradewind Rider Avatar
+36 S Two-Headed Giant of Foriys Avatar
+S Urza
+97 S Vampire Nocturnus Avatar
+41 S Viridian Zealot Avatar
+S Volrath
+S Xantcha
+
+[tokens]
+c_1_1_sliver
+w_1_1_spirit_flying
+r_5_5_dragon_flying
+g_2_3_antelope_forestwalk
+g_3_2_cat_shroud
+g_x_x_ooze
+g_4_4_rhino_trample
+g_1_1_saproling
+g_2_2_wolf

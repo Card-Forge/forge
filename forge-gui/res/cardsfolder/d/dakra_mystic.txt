@@ -1,0 +1,10 @@
+Name:Dakra Mystic
+ManaCost:U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ PeekAndReveal | Cost$ U T | Defined$ Player | RememberRevealed$ True | SubAbility$ DBPutRevealed | SpellDescription$ Each player reveals the top card of their library. You may put the revealed cards into their owners' graveyards. If you don't, each player draws a card.
+SVar:DBPutRevealed:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | Optional$ True | Imprint$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AI:RemoveDeck:All
+Oracle:{U}, {T}: Each player reveals the top card of their library. You may put the revealed cards into their owners' graveyards. If you don't, each player draws a card.

@@ -1,0 +1,7 @@
+Name:Meletis Astronomer
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/3
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, look at the top three cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Enchantment | ForceRevealToController$ True
+Oracle:Heroic — Whenever you cast a spell that targets Meletis Astronomer, look at the top three cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

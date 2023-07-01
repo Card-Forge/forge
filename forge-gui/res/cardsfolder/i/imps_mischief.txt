@@ -1,0 +1,8 @@
+Name:Imp's Mischief
+ManaCost:1 B
+Types:Instant
+A:SP$ ChangeTargets | TargetType$ Spell.singleTarget | ValidTgts$ Card | TgtPrompt$ Select target spell with a single target | SubAbility$ DBLoseLife | SpellDescription$ Change the target of target spell with a single target. You lose life equal to that spell's mana value.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+SVar:X:Targeted$CardManaCost
+AI:RemoveDeck:All
+Oracle:Change the target of target spell with a single target. You lose life equal to that spell's mana value.

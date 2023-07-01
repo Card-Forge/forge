@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 091515 - The Bigger They Are
+URL:http://www.gatheringmagic.com/seanuy-091515-the-bigger-they-are/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.  Forest is on top of your library.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=4
+AILife=13
+humanhand=Spider Umbra|Set:ROE; Aura Finesse|Set:ROE; Eel Umbra|Set:ROE; Domestication|Set:ROE
+humangraveyard=
+humanlibrary=Forest|Set:ROE; Bramblesnap|Set:ROE
+humanbattlefield=Forest|Set:ROE; Forest|Set:ROE; Forest|Set:ROE; Island|Set:ROE; Island|Set:ROE; Island|Set:ROE; Island|Set:ROE; Joraga Treespeaker|Set:ROE|Counters:LEVEL=3; Bramblesnap|Set:ROE; Nest Invader|Set:ROE; Guard Gomazoa|Set:ROE; Daggerback Basilisk|Set:ROE; Aura Gnarlid|Set:ROE; Mul Daya Channelers|Set:ROE; Merfolk Skyscout|Set:ROE; Wildheart Invoker|Set:ROE
+aibattlefield=Plains|Set:ROE|Tapped; Plains|Set:ROE|Tapped; Plains|Set:ROE|Tapped; Plains|Set:ROE|Tapped; Plains|Set:ROE|Tapped; Swamp|Set:ROE|Tapped; Swamp|Set:ROE|Tapped; Swamp|Set:ROE|Tapped; Swamp|Set:ROE|Tapped; Ikiral Outrider|Set:ROE|Counters:LEVEL=1; Knight of Cliffhaven|Set:ROE|Counters:LEVEL=3; Bloodrite Invoker|Set:ROE; Nirkana Cutthroat|Set:ROE|Counters:LEVEL=1; Pawn of Ulamog|Set:ROE; Makindi Griffin|Set:ROE; Pestilence Demon|Set:ROE; Artisan of Kozilek|Set:ROE
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

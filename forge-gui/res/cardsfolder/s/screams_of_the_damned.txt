@@ -1,0 +1,5 @@
+Name:Screams of the Damned
+ManaCost:3 B B
+Types:Enchantment
+A:AB$ DamageAll | Cost$ 1 B ExileFromGrave<1/Card> | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+Oracle:{1}{B}, Exile a card from your graveyard: Screams of the Damned deals 1 damage to each creature and each player.

@@ -1,0 +1,9 @@
+Name:Durkwood Tracker
+ManaCost:4 G
+Types:Creature Giant
+PT:4/3
+A:AB$ DealDamage | Cost$ 1 G T | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ If CARDNAME is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DBDamage:DB$ DealDamage | Defined$ Self | NumDmg$ Y
+SVar:X:Count$CardPower
+SVar:Y:Targeted$CardPower
+Oracle:{1}{G}, {T}: If Durkwood Tracker is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to Durkwood Tracker.

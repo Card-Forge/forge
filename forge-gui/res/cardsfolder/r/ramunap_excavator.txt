@@ -1,0 +1,7 @@
+Name:Ramunap Excavator
+ManaCost:2 G
+Types:Creature Naga Cleric
+PT:2/3
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+SVar:NonStackingEffect:True
+Oracle:You may play lands from your graveyard.

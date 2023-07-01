@@ -1,0 +1,6 @@
+Name:Urborg, Tomb of Yawgmoth
+ManaCost:no cost
+Types:Legendary Land
+S:Mode$ Continuous | Affected$ Land | AddType$ Swamp | Description$ Each land is a Swamp in addition to its other land types.
+AI:RemoveDeck:Random
+Oracle:Each land is a Swamp in addition to its other land types.

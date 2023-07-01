@@ -1,0 +1,7 @@
+Name:Orcish Lumberjack
+ManaCost:R
+Types:Creature Orc
+PT:1/1
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ Combo R G | Amount$ 3 | SpellDescription$ Add three mana in any combination of {R} and/or {G}.
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.

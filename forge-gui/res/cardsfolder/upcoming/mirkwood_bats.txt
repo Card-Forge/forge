@@ -1,0 +1,10 @@
+Name:Mirkwood Bats
+ManaCost:3 B
+Types:Creature Bat
+PT:2/3
+K:Flying
+T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Card.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you create or sacrifice a token, each opponent loses 1 life.
+T:Mode$ Sacrificed | ValidCard$ Card.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever you create or sacrifice a token, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Opponent
+DeckHints:Ability$Tokens|Sacrifice
+Oracle:Flying\nWhenever you create or sacrifice a token, each opponent loses 1 life.

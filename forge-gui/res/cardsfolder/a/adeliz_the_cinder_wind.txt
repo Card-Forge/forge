@@ -1,0 +1,11 @@
+Name:Adeliz, the Cinder Wind
+ManaCost:1 U R
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Wizard.YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying, haste\nWhenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.

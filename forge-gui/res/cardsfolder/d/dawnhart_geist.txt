@@ -1,0 +1,9 @@
+Name:Dawnhart Geist
+ManaCost:1 W
+Types:Creature Spirit Warlock
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast an enchantment spell, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckNeeds:Type$Enchantment
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cast an enchantment spell, you gain 2 life.

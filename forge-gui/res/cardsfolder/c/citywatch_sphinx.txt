@@ -1,0 +1,9 @@
+Name:Citywatch Sphinx
+ManaCost:5 U
+Types:Creature Sphinx
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhen Citywatch Sphinx dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

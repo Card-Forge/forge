@@ -1,0 +1,9 @@
+Name:Goblin Spymaster
+ManaCost:2 R
+Types:Creature Goblin Rogue
+PT:2/1
+K:First Strike
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with "Creatures you control attack each combat if able."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_all_attack | TokenOwner$ TriggeredPlayer
+DeckHas:Ability$Token
+Oracle:First strike\nAt the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with "Creatures you control attack each combat if able."

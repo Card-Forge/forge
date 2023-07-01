@@ -1,0 +1,8 @@
+Name:Squirrel Sovereign
+ManaCost:1 G
+Types:Creature Squirrel Noble
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Squirrel+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Squirrels you control get +1/+1.
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Squirrel
+Oracle:Other Squirrels you control get +1/+1.

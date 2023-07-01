@@ -1,0 +1,6 @@
+Name:Meteor Crater
+ManaCost:no cost
+Types:Land
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Permanent.YouCtrl | ReflectProperty$ Is | SpellDescription$ Choose a color of a permanent you control. Add one mana of that color.
+AI:RemoveDeck:All
+Oracle:{T}: Choose a color of a permanent you control. Add one mana of that color.

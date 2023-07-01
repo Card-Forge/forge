@@ -1,0 +1,7 @@
+Name:Skyway Sniper
+ManaCost:G
+Types:Creature Elf Archer
+PT:1/2
+K:Reach
+A:AB$ DealDamage | Cost$ 2 G | NumDmg$ 1 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
+Oracle:Reach (This creature can block creatures with flying.)\n{2}{G}: Skyway Sniper deals 1 damage to target creature with flying.

@@ -1,0 +1,9 @@
+Name:Hypnotic Specter
+ManaCost:1 B B
+Types:Creature Specter
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards a card at random.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ Random
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.

@@ -1,0 +1,7 @@
+Name:Half-Elf Monk
+ManaCost:3 W
+Types:Creature Human Elf Monk
+PT:1/4
+K:Vigilance
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Stunning Strike — | SpellDescription$ Tap target creature.
+Oracle:Vigilance\nStunning Strike — {1}{W}, {T}: Tap target creature.

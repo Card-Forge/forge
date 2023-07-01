@@ -1,0 +1,7 @@
+Name:Omniscience
+ManaCost:7 U U U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast spells from your hand without paying their mana costs.
+SVar:AllowFreeCast:Always
+AI:RemoveDeck:Random
+Oracle:You may cast spells from your hand without paying their mana costs.

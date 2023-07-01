@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Ultimate Masters Puzzle
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/12/093.-UMA1.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent starts the puzzle with Bridge from Below in the graveyard.
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Through the Breach;Vengeful Rebirth;Emrakul, the Aeons Torn;Goryo's Vengeance;Stingerfling Spider;Reanimate
+humanbattlefield=Engineered Explosives|Counters:CHARGE=5;Liliana of the Veil|Counters:LOYALTY=3;Vengevine|Counters:P1P1=1;Mikaeus, the Unhallowed;Phyrexian Altar;Mountain|Set:UST;Mountain|Set:UST;Mountain|Set:UST;Mountain|Set:UST;Mountain|Set:UST;Mountain|Set:UST;Swamp|Set:UST;Swamp|Set:UST;Swamp|Set:UST;Swamp|Set:UST;Swamp|Set:UST;Swamp|Set:UST
+aigraveyard=Bridge from Below
+aibattlefield=Sigarda, Host of Herons;Reya Dawnbringer;Sublime Archangel;Dark Depths|Counters:ICE=3;Plains|Set:UST;Plains|Set:UST;Plains|Set:UST;Plains|Set:UST;Plains|Set:UST;Plains|Set:UST;Plains|Set:UST;Forest|Set:UST;Forest|Set:UST

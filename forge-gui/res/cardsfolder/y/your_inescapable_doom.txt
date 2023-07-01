@@ -1,0 +1,10 @@
+Name:Your Inescapable Doom
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a doom counter on this scheme, then this scheme deals damage equal to the number of doom counters on it to the opponent with the highest life total among your opponents. If two or more players are tied for highest life total, you choose one.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1 | SubAbility$ DBChoosePlayer
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent+lifeEQX | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ Y
+SVar:X:PlayerCountOpponents$HighestLifeTotal
+SVar:Y:Count$CardCounters.DOOM
+Oracle:(An ongoing scheme remains face up.)\nAt the beginning of your end step, put a doom counter on this scheme, then this scheme deals damage equal to the number of doom counters on it to the opponent with the highest life total among your opponents. If two or more players are tied for highest life total, you choose one.

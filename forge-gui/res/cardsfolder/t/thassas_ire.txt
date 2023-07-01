@@ -1,0 +1,6 @@
+Name:Thassa's Ire
+ManaCost:U
+Types:Enchantment
+A:AB$ TapOrUntap | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+AI:RemoveDeck:All
+Oracle:{3}{U}: You may tap or untap target creature.

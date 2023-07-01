@@ -1,0 +1,26 @@
+[metadata]
+Code=PSUS
+Date=1999-12-01
+Name=Junior Super Series
+Type=Promo
+ScryfallCode=PSUS
+
+[cards]
+1 R Thran Quarry @Michael Sutfin
+2 R Serra Avatar @Dermot Power
+3 R Lord of Atlantis @Melissa A. Benson
+4 R Crusade @Mark Poole
+5 R Elvish Lyrist @Rebecca Guay
+6 R City of Brass @Mark Tedin
+7 R Volcanic Hammer @Christopher Rush
+8 R Giant Growth @Terese Nielsen
+9 R Two-Headed Dragon @Sam Wood
+10 R Slith Firewalker @Justin Sweet
+11 R Royal Assassin @Tom Wänerstrand
+12 R Sakura-Tribe Elder @Carl Critchlow
+13 R Shard Phoenix @Ron Spencer
+14 R Soltari Priest @Dany Orizio
+15 R Whirling Dervish @Alex Horley-Orlandelli
+16 R Glorious Anthem @Raymond Swanland
+17 R Elvish Champion @Matt Cavotta
+18 R Mad Auntie @Wayne Reynolds

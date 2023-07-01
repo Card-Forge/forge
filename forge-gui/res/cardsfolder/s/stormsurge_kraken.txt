@@ -1,0 +1,11 @@
+Name:Stormsurge Kraken
+ManaCost:3 U U
+Types:Creature Kraken
+PT:5/5
+K:Hexproof
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigBlocked | AddSVar$ StormsurgeKrakenDraw | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Description$ Lieutenant — As long as you control your commander, CARDNAME gets +2/+2 and has "Whenever CARDNAME becomes blocked, you may draw two cards."
+SVar:TrigBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ StormsurgeKrakenDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw two cards.
+SVar:StormsurgeKrakenDraw:DB$ Draw | NumCards$ 2 | OptionalDecider$ You
+SVar:BuffedBy:Card.IsCommander
+AI:RemoveDeck:Random
+Oracle:Hexproof\nLieutenant — As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."

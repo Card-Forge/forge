@@ -1,0 +1,6 @@
+Name:Darksteel Ingot
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Indestructible
+Oracle:Indestructible\n{T}: Add one mana of any color.

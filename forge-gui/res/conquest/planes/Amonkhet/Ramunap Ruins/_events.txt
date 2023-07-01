@@ -1,0 +1,9 @@
+Name:Neheb, the Eternal|Deck:Neheb, the Eternal.dck|Variant:Commander|Avatar:Neheb, the Eternal|Desc:
+Name:Hazoret the Fervent|Deck:Hazoret the Fervent.dck|Variant:Commander|Avatar:Hazoret the Fervent|Desc:
+Name:Samut, Voice of Dissent|Deck:Samut, Voice of Dissent.dck|Variant:Commander|Avatar:Samut, Voice of Dissent|Desc:
+Name:Samut, the Tested|Deck:Samut, the Tested.dck|Variant:Planeswalker|Avatar:Samut, the Tested|Desc:
+Name:Trial of Zeal|Deck:Trial of Zeal.dck|Variant:None|Avatar:Trial of Zeal|Desc:
+Name:Endless Sands|Deck:Endless Sands.dck|Variant:None|Avatar:Endless Sands|Desc:
+Name:Approach of the Second Sun|Deck:Approach of the Second Sun.dck|Variant:None|Avatar:Approach of the Second Sun|Desc:
+Name:Hours of Devastation|Deck:Hours of Devastation.dck|Variant:None|Avatar:Hour of Devastation|Desc:
+Name:Gods & Gideons|Deck:Gods & Gideons.dck|Variant:None|Avatar:Gideon's Resolve|Desc:

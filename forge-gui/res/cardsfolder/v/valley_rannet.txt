@@ -1,0 +1,7 @@
+Name:Valley Rannet
+ManaCost:4 R G
+Types:Creature Beast
+PT:6/3
+K:TypeCycling:Forest:2
+K:TypeCycling:Mountain:2
+Oracle:Mountaincycling {2}, forestcycling {2} ({2}, Discard this card: Search your library for a Mountain or Forest card, reveal it, put it into your hand, then shuffle.)

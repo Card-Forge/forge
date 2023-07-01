@@ -1,0 +1,6 @@
+Name:Goblin Sky Raider
+ManaCost:2 R
+Types:Creature Goblin Warrior
+PT:1/2
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

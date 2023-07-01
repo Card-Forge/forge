@@ -1,0 +1,10 @@
+Name:Shatterskull Minotaur
+ManaCost:4 R R
+Types:Creature Minotaur Warrior
+PT:5/4
+K:Haste
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Wizard
+Oracle:This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)\nHaste

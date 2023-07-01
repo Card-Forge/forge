@@ -1,0 +1,7 @@
+Name:Bog Witch
+ManaCost:2 B
+Types:Creature Human Spellshaper
+PT:1/1
+A:AB$ Mana | Cost$ B T Discard<1/Card> | Produced$ B | Amount$ 3 | SpellDescription$ Add {B}{B}{B}.
+AI:RemoveDeck:All
+Oracle:{B}, {T}, Discard a card: Add {B}{B}{B}.

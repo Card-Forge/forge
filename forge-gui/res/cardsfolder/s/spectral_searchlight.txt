@@ -1,0 +1,7 @@
+Name:Spectral Searchlight
+ManaCost:3
+Types:Artifact
+A:AB$ ChoosePlayer | Cost$ T | Defined$ You | Choices$ Player | ChoiceTitle$ Choose a player | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds one mana of any color they choose.
+SVar:DBMana:DB$ Mana | Produced$ Any | Defined$ ChosenPlayer
+AI:RemoveDeck:All
+Oracle:{T}: Choose a player. That player adds one mana of any color they choose.

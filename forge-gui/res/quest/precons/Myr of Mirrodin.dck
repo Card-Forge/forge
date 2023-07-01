@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Myr of Mirrodin
+Description=The Myr are a force looking for a leader and it's time for you to take command. While they collectively overwhelm your opponent, call upon Sunblast Angel to erase any remaining hope.
+Deck Type=constructed
+Set=SOM
+Image=myr_of_mirrodin.jpg
+[main]
+3 Origin Spellbomb|SOM
+2 Darksteel Myr|SOM
+1 Darksteel Sentinel|SOM
+3 Gold Myr|SOM
+1 Myr Battlesphere|SOM
+2 Myr Galvanizer|SOM
+2 Palladium Myr|SOM
+2 Perilous Myr|SOM
+24 Plains|SOM
+1 Auriok Edgewright|SOM
+2 Ghalma's Warden|SOM
+2 Kemba's Skyguard|SOM
+2 Myrsmith|SOM
+1 Razor Hippogriff|SOM
+1 Sunblast Angel+|SOM
+3 Arrest|SOM
+1 Dispense Justice|SOM
+2 Inspired Charge|M11
+2 Seize the Initiative|SOM
+3 Revoke Existence|SOM
+[sideboard]

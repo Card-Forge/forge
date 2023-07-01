@@ -1,0 +1,7 @@
+Name:Thrashing Mossdog
+ManaCost:3 G
+Types:Creature Plant Dog
+PT:3/3
+K:Reach
+K:Scavenge:4 G G
+Oracle:Reach (This creature can block creatures with flying.)\nScavenge {4}{G}{G} ({4}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

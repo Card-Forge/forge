@@ -1,0 +1,6 @@
+Name:Liliana's Caress
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, that player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
+Oracle:Whenever an opponent discards a card, that player loses 2 life.

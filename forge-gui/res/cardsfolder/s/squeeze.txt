@@ -1,0 +1,6 @@
+Name:Squeeze
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Sorcery | Type$ Spell | Amount$ 3 | Description$ Sorcery spells cost {3} more to cast.
+AI:RemoveDeck:Random
+Oracle:Sorcery spells cost {3} more to cast.

@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Pumped Up
+Description=Here's a kicker-- for your opponent. Pay some extra mana when you cast a spell and gain an added effect. Then send out some red Goblins, Elementals, and Minotaurs for a fast and furious assault. Top it off using the haste of the Hellkite Charger, which lets you attack twice!
+Deck Type=constructed
+Set=ZEN
+Image=pumped_up.jpg
+
+[main]
+7  Island|ZEN
+10  Mountain|ZEN
+1  Terramorphic Expanse|M10
+
+1  Aether Figment|ZEN
+1  Canyon Minotaur|M10
+1  Dragon Whelp|M10
+1  Goblin Piker|M10
+1  Hellkite Charger+|ZEN
+2  Molten Ravager|ZEN
+1  Phantom Warrior|M10
+1  Prodigal Pyromancer|M10
+1  Raging Goblin|M10
+2  Torch Slinger|ZEN
+2  Welkin Tern|ZEN
+
+1  Act of Treason|M10
+2  Burst Lightning|ZEN
+1  Fireball|M10
+1  Into the Roil|ZEN
+1  Rite of Replication|ZEN
+1  Sleep|M10
+2  Spire Barrage|ZEN
+
+[sideboard]

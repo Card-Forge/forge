@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 4 The Rogues
+Title=The Rogues
+Difficulty=easy
+Description="The roads to Koskun Keep are mostly safe these days. Mostly." -Joskun, An-Havva Constable
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Ambush|HML
+2 Ambush Party|HML|1
+2 Ambush Party|HML|2
+4 Chandler|HML
+4 Dwarven Pony|HML
+4 Dwarven Sea Clan|HML
+2 Dwarven Trader|HML|1
+2 Dwarven Trader|HML|2
+2 Ebony Rhino|HML
+4 Heart Wolf|HML
+4 Joven|HML
+2 Joven's Tools|HML
+26 Mountain|LEB|2

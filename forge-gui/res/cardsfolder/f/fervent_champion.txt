@@ -1,0 +1,11 @@
+Name:Fervent Champion
+ManaCost:R
+Types:Creature Human Knight
+PT:1/1
+K:First Strike
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking Knight you control gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Knight.YouCtrl+attacking+Other | TgtPrompt$ Select another target attacking Knight you control | NumAtt$ +1
+SVar:HasAttackEffect:TRUE
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 3 | Description$ Equip abilities you activate that target CARDNAME cost {3} less to activate.
+Oracle:First strike, haste\nWhenever Fervent Champion attacks, another target attacking Knight you control gets +1/+0 until end of turn.\nEquip abilities you activate that target Fervent Champion cost {3} less to activate.

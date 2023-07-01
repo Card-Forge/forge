@@ -1,0 +1,6 @@
+Name:Parapet Watchers
+ManaCost:2 U
+Types:Creature Kithkin Soldier
+PT:2/2
+A:AB$ Pump | Cost$ WU | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+Oracle:{W/U}: Parapet Watchers gets +0/+1 until end of turn.

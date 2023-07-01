@@ -1,0 +1,8 @@
+Name:Goldmeadow Harrier
+ManaCost:no cost
+Colors:white
+Types:Creature Kithkin Soldier
+PT:1/1
+A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:NonCombatPriority:1
+Oracle:{W}, {T}: Tap target creature.

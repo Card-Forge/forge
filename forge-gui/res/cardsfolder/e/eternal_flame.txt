@@ -1,0 +1,10 @@
+Name:Eternal Flame
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Opponent,Planeswalker | NumDmg$ X | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to target opponent or planeswalker, where X is the number of mountains you control. It deals half X damage, rounded up, to you.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Y | Defined$ You
+SVar:X:Count$Valid Mountain.YouCtrl
+SVar:Y:Count$Valid Mountain.YouCtrl/HalfUp
+SVar:NeedsToPlayVar:X GE2
+DeckHints:Type$Mountain & Name$Blood Moon
+Oracle:Eternal Flame deals X damage to target opponent or planeswalker and half X damage, rounded up, to you, where X is the number of Mountains you control.

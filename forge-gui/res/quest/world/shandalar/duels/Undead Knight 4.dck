@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Undead Knight 4
+Title=Undead Knight
+Icon=UndeadKnight.jpg
+Difficulty=very hard
+Description=Black weenie/aggro with a Knight theme.
+Deck Type=constructed
+[main]
+4 Bad Moon|4ED
+4 Black Knight|4ED
+1 Black Lotus|2ED
+4 Cyclopean Mummy|4ED
+4 Dark Ritual|4ED
+1 Demonic Tutor|3ED
+4 Erg Raiders|4ED
+4 Hasran Ogress|CHR
+4 Hypnotic Specter|4ED
+1 Mind Twist|4ED
+1 Mox Jet|2ED
+2 Stone-Throwing Devils|ARN
+22 Swamp|4ED
+4 Unholy Strength|4ED
+[sideboard]

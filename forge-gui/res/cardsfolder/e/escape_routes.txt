@@ -1,0 +1,8 @@
+Name:Escape Routes
+ManaCost:2 U
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target white or black creature you control to its owner's hand.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+DeckHints:Color$White|Black
+Oracle:{2}{U}: Return target white or black creature you control to its owner's hand.

@@ -1,0 +1,8 @@
+Name:Frost Walker
+ManaCost:1 U
+Types:Creature Elemental
+PT:4/1
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice
+SVar:Targeting:Dies
+Oracle:When Frost Walker becomes the target of a spell or ability, sacrifice it.

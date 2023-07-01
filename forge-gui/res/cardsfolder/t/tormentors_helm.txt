@@ -1,0 +1,9 @@
+Name:Tormentor's Helm
+ManaCost:R
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.EquippedBy | Execute$ TrigDealDamage | TriggerDescription$ Whenever equipped creature becomes blocked, it deals 1 damage to defending player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
+SVar:HasAttackEffect:Blocked
+Oracle:Equipped creature gets +1/+1.\nWhenever equipped creature becomes blocked, it deals 1 damage to defending player.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Ebony Charm
+OpponentName=Ebony Charm
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Anvil of Bogardan|Anvil of Bogardan
+[metadata]
+Name=MIR Challenge: Ebony Charm
+Title=Ebony Charm
+Difficulty=easy
+Description=<insert witty quote>
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+40 Ebony Charm|MIR
+20 Swamp|MIR|1

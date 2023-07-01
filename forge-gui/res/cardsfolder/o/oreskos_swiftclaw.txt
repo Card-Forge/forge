@@ -1,0 +1,5 @@
+Name:Oreskos Swiftclaw
+ManaCost:1 W
+Types:Creature Cat Warrior
+PT:3/1
+Oracle:

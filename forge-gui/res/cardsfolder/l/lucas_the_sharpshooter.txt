@@ -1,0 +1,12 @@
+Name:Lucas, the Sharpshooter
+ManaCost:U R
+Types:Legendary Creature Human
+PT:1/3
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBGoad | SpellDescription$ CARDNAME deals 1 damage to target creature. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:DBGoad:DB$ Goad | Defined$ Targeted | StackDescription$ Goad {c:Targeted}.
+K:Friends forever
+SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcLE1
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Investigate
+Oracle:{T}, Sacrifice an artifact: Lucas, the Sharpshooter deals 1 damage to target creature. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nFriends forever (You can have two commanders if both have friends forever.)

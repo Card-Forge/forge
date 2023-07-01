@@ -1,0 +1,13 @@
+Name:Lavabrink Floodgates
+ManaCost:3 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R R | SpellDescription$ Add {R}{R}.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDoom | TriggerDescription$ At the beginning of each player's upkeep, that player may put a doom counter on CARDNAME or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice CARDNAME. When you do, it deals 6 damage to each creature.
+SVar:TrigDoom:DB$ AddOrRemoveCounter | Defined$ Self | DefinedPlayer$ TriggeredPlayer | CounterType$ DOOM | CounterNum$ 1 | Optional$ True | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE3_DOOM | RememberSacrificed$ True | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberObjects$ RememberedCard | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, it deals 6 damage to each creature.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 6
+AI:RemoveDeck:All
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{T}: Add {R}{R}.\nAt the beginning of each player's upkeep, that player may put a doom counter on Lavabrink Floodgates or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice Lavabrink Floodgates. When you do, it deals 6 damage to each creature.

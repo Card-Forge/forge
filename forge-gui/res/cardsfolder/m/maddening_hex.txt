@@ -1,0 +1,12 @@
+Name:Maddening Hex
+ManaCost:1 R R
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Whenever enchanted player casts a noncreature spell, roll a d6. CARDNAME deals damage to that player equal to the result. Then attach CARDNAME to another one of your opponents chosen at random.
+SVar:TrigRollDice:DB$ RollDice | ResultSVar$ X | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.EnchantedBy | NumDmg$ X | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent+!EnchantedBy | Random$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+Oracle:Enchant player\nWhenever enchanted player casts a noncreature spell, roll a d6. Maddening Hex deals damage to that player equal to the result. Then attach Maddening Hex to another one of your opponents chosen at random.

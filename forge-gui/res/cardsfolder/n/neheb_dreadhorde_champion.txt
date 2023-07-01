@@ -1,0 +1,12 @@
+Name:Neheb, Dreadhorde Champion
+ManaCost:2 R R
+Types:Legendary Creature Zombie Minotaur Warrior
+PT:5/4
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | Execute$ TrigDiscard | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, you may discard any number of cards. If you do, draw that many cards and add that many {R}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | PersistentMana$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Trample\nWhenever Neheb, Dreadhorde Champion deals combat damage to a player or planeswalker, you may discard any number of cards. If you do, draw that many cards and add that much {R}. Until end of turn, you don't lose this mana as steps and phases end.

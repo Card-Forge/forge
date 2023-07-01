@@ -1,0 +1,9 @@
+Name:Filigree Attendant
+ManaCost:2 U U
+Types:Artifact Creature Homunculus
+PT:*/3
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHints:Type$Artifact
+Oracle:Flying\nFiligree Attendant's power is equal to the number of artifacts you control.

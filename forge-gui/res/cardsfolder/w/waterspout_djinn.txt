@@ -1,0 +1,8 @@
+Name:Waterspout Djinn
+ManaCost:2 U U
+Types:Creature Djinn
+PT:4/4
+K:Flying
+K:UpkeepCost:Return<1/Island.untapped+YouCtrl/untapped Island you control>
+SVar:NeedsToPlay:Island.YouCtrl
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.

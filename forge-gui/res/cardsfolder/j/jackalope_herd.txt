@@ -1,0 +1,8 @@
+Name:Jackalope Herd
+ManaCost:3 G
+Types:Creature Rabbit Beast
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When you cast a spell, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+AI:RemoveDeck:All
+Oracle:When you cast a spell, return Jackalope Herd to its owner's hand.

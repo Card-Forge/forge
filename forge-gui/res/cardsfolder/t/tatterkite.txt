@@ -1,0 +1,7 @@
+Name:Tatterkite
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:2/1
+K:Flying
+S:Mode$ CantPutCounter | ValidCard$ Card.Self+inZoneBattlefield | Description$ CARDNAME can't have counters put on it.
+Oracle:Flying\nTatterkite can't have counters put on it.

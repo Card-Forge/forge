@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Dragon's Fire
+Description=As a red mage, you revel in the chaos of battle. Fire is your weapon and your inspiration.
+Deck Type=constructed
+Set=ANA
+[Main]
+1 Burning Sun's Avatar|XLN
+2 Charging Monstrosaur|XLN
+1 Demanding Dragon|M19
+2 Fiery Finish|M19
+3 Goblin Instigator|M19
+3 Havoc Devils|M19
+3 Kargan Dragonrider|M19
+1 Lathliss, Dragon Queen|M19
+1 Meteor Golem|M19
+25 Mountain|GRN
+2 Onakke Ogre|M19
+3 Pyromantic Pilgrim|DOM
+3 Shock|M19
+2 Sparktongue Dragon|M19
+1 Spit Flame|M19
+3 Sure Strike|GRN
+2 Viashino Pyromancer|M19
+2 Volcanic Dragon|M19
+
+

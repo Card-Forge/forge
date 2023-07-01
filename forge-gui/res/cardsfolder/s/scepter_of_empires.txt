@@ -1,0 +1,11 @@
+Name:Scepter of Empires
+ManaCost:3
+Types:Artifact
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires.
+SVar:X:Count$Compare AllM12Empires GT0.3.1
+SVar:AllM12Empires:SVar$Z/Times.Y
+SVar:Z:Count$Valid Artifact.namedCrown of Empires+YouCtrl
+SVar:Y:Count$Valid Artifact.namedThrone of Empires+YouCtrl
+AI:RemoveDeck:Random
+DeckHints:Name$Throne of Empires|Crown of Empires
+Oracle:{T}: Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires.

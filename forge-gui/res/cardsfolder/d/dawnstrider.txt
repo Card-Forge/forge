@@ -1,0 +1,7 @@
+Name:Dawnstrider
+ManaCost:1 G
+Types:Creature Dryad Spellshaper
+PT:1/1
+A:AB$ Fog | Cost$ G T Discard<1/Card> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:NonCombatPriority:1
+Oracle:{G}, {T}, Discard a card: Prevent all combat damage that would be dealt this turn.

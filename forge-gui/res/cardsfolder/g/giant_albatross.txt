@@ -1,0 +1,9 @@
+Name:Giant Albatross
+ManaCost:1 U
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEach | TriggerDescription$ When CARDNAME dies, you may pay {1}{U}. If you do, for each creature that dealt damage to CARDNAME this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated.
+SVar:TrigEach:AB$ RepeatEach | Cost$ 1 U | RepeatCards$ Creature.Damaged | RepeatSubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | NoRegen$ True | UnlessCost$ PayLife<2> | UnlessPayer$ RememberedController
+Oracle:Flying\nWhen Giant Albatross dies, you may pay {1}{U}. If you do, for each creature that dealt damage to Giant Albatross this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated.

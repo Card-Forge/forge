@@ -1,0 +1,8 @@
+Name:Leyline of Combustion
+ManaCost:2 R R
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+T:Mode$ BecomesTargetOnce | ValidTarget$ You,Permanent.YouCtrl+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you and/or at least one permanent you control becomes the target of a spell or ability an opponent controls, CARDNAME deals 2 damage to that player.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredSourceSAController | NumDmg$ 2
+Oracle:If Leyline of Combustion is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you and/or at least one permanent you control becomes the target of a spell or ability an opponent controls, Leyline of Combustion deals 2 damage to that player.

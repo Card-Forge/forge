@@ -1,0 +1,11 @@
+Name:Akim, the Soaring Wind
+ManaCost:2 U R W
+Types:Legendary Creature Bird Dinosaur
+PT:3/4
+K:Flying
+T:Mode$ TokenCreatedOnce | OnlyFirst$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you create one or more tokens for the first time each turn, create a 1/1 white Bird creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_bird_flying
+A:AB$ PumpAll | Cost$ 3 U R W | ValidCards$ Creature.token+YouCtrl | KW$ Double Strike | SpellDescription$ Creature tokens you control gain double strike until end of turn.
+DeckHas:Ability$Token
+DeckNeeds:Ability$Token
+Oracle:Flying\nWhenever you create one or more tokens for the first time each turn, create a 1/1 white Bird creature token with flying.\n{3}{U}{R}{W}: Creature tokens you control gain double strike until end of turn.

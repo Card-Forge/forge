@@ -1,0 +1,11 @@
+Name:Transluminant
+ManaCost:1 G
+Types:Creature Dryad Shaman
+PT:2/2
+A:AB$ DelayedTrigger | Cost$ W Sac<1/CARDNAME> | Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | SpellDescription$ Create a 1/1 white Spirit creature token with flying at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+DeckHints:Color$White
+DeckHas:Ability$Token
+Oracle:{W}, Sacrifice Transluminant: Create a 1/1 white Spirit creature token with flying at the beginning of the next end step.

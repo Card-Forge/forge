@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Wonder Twins 2
+Title=Wonder Twins
+Difficulty=medium
+Description=WUG Soulbond Human deck
+Icon=Wonder Twins.jpg
+Deck Type=constructed
+[main]
+3 Breeding Pool
+2 Call to the Kindred
+4 Delay
+2 Descendants' Path
+2 Flooded Strand
+2 Forest
+2 Geist Trappers
+1 Hallowed Fountain
+2 Island
+4 Joint Assault
+3 Misty Rainforest
+4 Nearheath Pilgrim
+2 Nightshade Peddler
+4 Oblivion Ring
+2 Plains
+4 Silverblade Paladin
+4 Tandem Lookout
+3 Temple Garden
+4 Trusted Forcemage
+3 Windswept Heath
+3 Wingcrafter
+[sideboard]

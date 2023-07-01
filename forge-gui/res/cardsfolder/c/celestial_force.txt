@@ -1,0 +1,7 @@
+Name:Celestial Force
+ManaCost:5 W W W
+Types:Creature Elemental
+PT:7/7
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of each upkeep, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:At the beginning of each upkeep, you gain 3 life.

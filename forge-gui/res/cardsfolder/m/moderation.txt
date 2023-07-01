@@ -1,0 +1,7 @@
+Name:Moderation
+ManaCost:1 W U
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | NumLimitEachTurn$ 1 | Description$ You can't cast more than one spell each turn.
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:You can't cast more than one spell each turn.\nWhenever you cast a spell, draw a card.

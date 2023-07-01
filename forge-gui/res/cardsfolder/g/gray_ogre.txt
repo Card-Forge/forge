@@ -1,0 +1,5 @@
+Name:Gray Ogre
+ManaCost:2 R
+Types:Creature Ogre
+PT:2/2
+Oracle:

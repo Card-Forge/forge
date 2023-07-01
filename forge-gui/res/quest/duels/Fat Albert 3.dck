@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Fat Albert 3
+Title=Fat Albert
+Difficulty=hard
+Description=UG Winter Orb deck with Seedborn Muse and mana Elves/Slivers
+Icon=Fat Albert.jpg
+Deck Type=constructed
+[main]
+3 Birds of Paradise
+4 Tropical Island
+4 Misty Rainforest
+4 Dryad Arbor
+1 Mox Emerald
+2 Rattleclaw Mystic
+1 Ancestral Recall
+1 Time Walk
+2 Fabricate
+1 Spidersilk Armor
+4 Winter Orb
+1 Naturalize
+1 Temporal Spring
+4 Noble Hierarch
+1 Mox Sapphire
+5 Forest|ISD
+4 Gemhide Sliver
+4 Seedborn Muse
+1 Thrun, the Last Troll
+1 Kalonian Behemoth
+1 Simic Sky Swallower
+1 Gaea's Anthem
+1 Collective Unconscious
+1 Biomantic Mastery
+1 Propaganda
+1 Overrun
+4 Murkfiend Liege
+1 Sea Drake
+[sideboard]

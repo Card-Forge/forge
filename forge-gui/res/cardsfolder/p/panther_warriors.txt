@@ -1,0 +1,5 @@
+Name:Panther Warriors
+ManaCost:4 G
+Types:Creature Cat Warrior
+PT:6/3
+Oracle:

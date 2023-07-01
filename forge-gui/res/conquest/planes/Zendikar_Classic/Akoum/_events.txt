@@ -1,0 +1,9 @@
+Name:Akoum Rally|Deck:Akoum Rally.dck|Variant:None|Avatar:Firemantle Mage|Desc:
+Name:Anowon, the Ruin Sage|Deck:Anowon, the Ruin Sage.dck|Variant:Commander|Avatar:Anowon, the Ruin Sage|Desc:
+Name:Drana, Kalastria Bloodchief|Deck:Drana, Kalastria Bloodchief.dck|Variant:Commander|Avatar:Drana, Kalastria Bloodchief|Desc:
+Name:Kalitas, Bloodchief of Ghet|Deck:Kalitas, Bloodchief of Ghet.dck|Variant:Commander|Avatar:Kalitas, Bloodchief of Ghet|Desc:
+Name:Ob Nixilis, the Fallen|Deck:Ob Nixilis, the Fallen.dck|Variant:Commander|Avatar:Ob Nixilis, the Fallen|Desc:
+Name:Drana, Liberator of Malakir|Deck:Drana, Liberator of Malakir.dck|Variant:Commander|Avatar:Drana, Liberator of Malakir|Desc:
+Name:Kalitas, Traitor of Ghet|Deck:Kalitas, Traitor of Ghet.dck|Variant:Commander|Avatar:Kalitas, Traitor of Ghet|Desc:
+Name:Ob Nixilis, Unshackled|Deck:Ob Nixilis, Unshackled.dck|Variant:Commander|Avatar:Ob Nixilis, Unshackled|Desc:
+Name:Sarkhan the Mad|Deck:Sarkhan the Mad.dck|Variant:Planeswalker|Avatar:Sarkhan the Mad|Desc:

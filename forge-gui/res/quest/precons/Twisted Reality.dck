@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Twisted Reality
+Description=The Eldrazi titan Kozilek has risen, warping mana in new ways to lay waste to the plane of Zendikar. Now, some Eldrazi have abilities powered up by colorless mana. Take advantage of this new kind of magic to slip past any resistance and destroy the opposition.
+Deck Type=constructed
+Set=OGW
+Image=twisted_reality.jpg
+[Main]
+1 Adverse Conditions|BFZ
+1 Bane of Bala Ged|BFZ
+1 Blighted Cataract|BFZ
+3 Blinding Drone|OGW
+3 Cultivator Drone|OGW
+1 Deepfathom Skulker+|OGW
+2 Eldrazi Skyspawner|BFZ
+1 Endless One|BFZ
+1 Evolving Wilds|BFZ
+2 Gravity Negator|OGW
+14 Island|BFZ
+2 Kozilek's Channeler|BFZ
+1 Kozilek's Pathfinder|OGW
+3 Mist Intruder|BFZ
+2 Murk Strider|BFZ
+1 Prophet of Distortion|OGW
+1 Ruination Guide|BFZ
+2 Salvage Drone|BFZ
+1 Scour from Existence|BFZ
+2 Spatial Contortion|OGW
+1 Thought Harvester|OGW
+1 Tide Drifter|BFZ
+1 Titan's Presence|BFZ
+2 Walker of the Wastes|OGW
+10 Wastes|OGW

@@ -1,0 +1,11 @@
+Name:Dreadfeast Demon
+ManaCost:5 B B
+Types:Creature Demon
+PT:6/6
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, sacrifice a non-Demon creature. If you do, create a token that's a copy of CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.nonDemon | SacMessage$ non-Demon creature | RememberSacrificed$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice|Token
+Oracle:Flying\nAt the beginning of your end step, sacrifice a non-Demon creature. If you do, create a token that's a copy of Dreadfeast Demon.

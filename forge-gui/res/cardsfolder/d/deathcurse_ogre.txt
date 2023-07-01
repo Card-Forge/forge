@@ -1,0 +1,7 @@
+Name:Deathcurse Ogre
+ManaCost:5 B
+Types:Creature Ogre Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each player loses 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Player
+Oracle:When Deathcurse Ogre dies, each player loses 3 life.

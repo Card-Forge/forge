@@ -1,0 +1,5 @@
+Name:High Ground
+ManaCost:W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | CanBlockAmount$ 1 | Description$ Each creature you control can block an additional creature each combat.
+Oracle:Each creature you control can block an additional creature each combat.

@@ -1,0 +1,5 @@
+Name:Silverback Ape
+ManaCost:3 G G
+Types:Creature Ape
+PT:5/5
+Oracle:

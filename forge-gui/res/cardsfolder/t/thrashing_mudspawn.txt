@@ -1,0 +1,9 @@
+Name:Thrashing Mudspawn
+ManaCost:3 B B
+Types:Creature Beast
+PT:4/4
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+K:Morph:1 B B
+Oracle:Whenever Thrashing Mudspawn is dealt damage, you lose that much life.\nMorph {1}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

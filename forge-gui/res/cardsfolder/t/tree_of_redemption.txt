@@ -1,0 +1,7 @@
+Name:Tree of Redemption
+ManaCost:3 G
+Types:Creature Plant
+PT:0/13
+K:Defender
+A:AB$ ExchangeLifeVariant | Cost$ T | ConditionPresent$ Creature.StrictlySelf | Defined$ You | Mode$ Toughness | SpellDescription$ Exchange your life total with CARDNAME's toughness.
+Oracle:Defender\n{T}: Exchange your life total with Tree of Redemption's toughness.

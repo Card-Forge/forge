@@ -1,0 +1,6 @@
+Name:Bog Smugglers
+ManaCost:1 B B
+Types:Creature Human Mercenary
+PT:2/2
+K:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

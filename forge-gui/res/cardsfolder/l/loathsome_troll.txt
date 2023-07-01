@@ -1,0 +1,9 @@
+Name:Loathsome Troll
+ManaCost:3 G G
+Types:Creature Troll
+PT:6/2
+A:AB$ RollDice | Cost$ 3 G | ActivationZone$ Graveyard | Sides$ 20 | ResultSubAbilities$ 1-9:ToLib,10-19:ToHand,20:ToField | SpellDescription$ Roll a d20. Activate only if CARDNAME is in your graveyard.
+SVar:ToLib:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Library | SpellDescription$ 1—9 VERT Put CARDNAME on top of your library.
+SVar:ToHand:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand | SpellDescription$ 10—19 VERT Return CARDNAME to your hand.
+SVar:ToField:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ 20 VERT Return CARDNAME to the battlefield tapped.
+Oracle:{3}{G}: Roll a d20. Activate only if Loathsome Troll is in your graveyard.\n1—9 | Put Loathsome Troll on top of your library.\n10—19 | Return Loathsome Troll to your hand.\n20 | Return Loathsome Troll to the battlefield tapped.

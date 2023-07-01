@@ -1,0 +1,8 @@
+Name:Nessian Asp
+ManaCost:4 G
+Types:Creature Snake
+PT:4/5
+K:Reach
+K:Monstrosity:4:6 G
+DeckHas:Ability$Counters
+Oracle:Reach\n{6}{G}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)

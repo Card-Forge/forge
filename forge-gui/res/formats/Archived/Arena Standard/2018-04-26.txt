@@ -1,0 +1,6 @@
+[format]
+Name:Arena Standard (DOM)
+Type:Archived
+Subtype:Standard
+Effective:2018-04-26
+Sets:XLN, RIX, AKH, HOU, DOM

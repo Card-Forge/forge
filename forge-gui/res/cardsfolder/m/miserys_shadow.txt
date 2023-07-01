@@ -1,0 +1,8 @@
+Name:Misery's Shadow
+ManaCost:1 B
+Types:Creature Shade
+PT:2/2
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Card.Creature+OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:If a creature an opponent controls would die, exile it instead.\n{1}: Misery's Shadow gets +1/+1 until end of turn.

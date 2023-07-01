@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Death March
+Description=Send your creatures on the attack, or use them to feed a colossal monster of doom. It won't matter whether your creatures are in play or in the graveyard. The power of the black-green hybrid means that life and death are playthings for your amusement.
+Deck Type=constructed
+Set=EVE
+Image=death_march.jpg
+
+[Main]
+12 Swamp|SHM
+12 Forest|SHM
+2 Merrow Bonegnawer|EVE
+2 Wickerbough Elder|EVE
+2 Roughshod Mentor|SHM
+3 Odious Trow|EVE
+3 Woodlurker Mimic|EVE
+2 Hag Hedge-Mage|EVE
+2 Quillspike|EVE
+3 Rendclaw Trow|EVE
+2 Stalker Hag|EVE
+2 Noxious Hatchling|EVE
+2 Desecrator Hag|EVE
+1 Creakwood Liege|EVE
+1 Doomgape|EVE
+2 Soul Reap|EVE
+1 Syphon Life|EVE
+2 Viridescent Wisps|SHM
+1 Savage Conception|EVE
+1 Cankerous Thirst|EVE
+2 Gift of the Deity|EVE

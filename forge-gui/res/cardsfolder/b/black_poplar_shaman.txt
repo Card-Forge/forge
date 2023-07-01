@@ -1,0 +1,6 @@
+Name:Black Poplar Shaman
+ManaCost:2 B
+Types:Creature Treefolk Shaman
+PT:1/3
+A:AB$ Regenerate | ValidTgts$ Treefolk | TgtPrompt$ Select target Treefolk. | Cost$ 2 B | SpellDescription$ Regenerate target Treefolk.
+Oracle:{2}{B}: Regenerate target Treefolk.

@@ -1,0 +1,12 @@
+Name:Kalemne, Disciple of Iroas
+ManaCost:2 R W
+Types:Legendary Creature Giant Soldier
+PT:3/3
+K:Double Strike
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE5 | ValidActivatingPlayer$ You | Execute$ TrigExperience | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with mana value 5 or greater, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each experience counter you have.
+SVar:X:Count$YourCountersExperience
+SVar:BuffedBy:Creature.cmcGE5
+Oracle:Double strike, vigilance\nWhenever you cast a creature spell with mana value 5 or greater, you get an experience counter.\nKalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.

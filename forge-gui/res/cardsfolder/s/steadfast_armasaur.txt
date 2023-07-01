@@ -1,0 +1,8 @@
+Name:Steadfast Armasaur
+ManaCost:3 W
+Types:Creature Dinosaur
+PT:2/3
+K:Vigilance
+A:AB$ DealDamage | Cost$ 1 W T | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking or blocked by CARDNAME | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its toughness to target creature blocking or blocked by it.
+SVar:X:Count$CardToughness
+Oracle:Vigilance\n{1}{W}, {T}: Steadfast Armasaur deals damage equal to its toughness to target creature blocking or blocked by it.

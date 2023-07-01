@@ -1,0 +1,9 @@
+Name:Elves of Tel-Jilad|Deck:Elves of Tel-Jilad.dck|Variant:None|Avatar:Ezuri's Brigade|Desc:
+Name:Ezuri, Renegade Leader|Deck:Ezuri, Renegade Leader.dck|Variant:Commander|Avatar:Ezuri, Renegade Leader|Desc:
+Name:Glissa Sunseeker|Deck:Glissa Sunseeker.dck|Variant:Commander|Avatar:Glissa Sunseeker|Desc:
+Name:Melira, Sylvok Outcast|Deck:Melira, Sylvok Outcast.dck|Variant:Commander|Avatar:Melira, Sylvok Outcast|Desc:
+Name:Thrun, the Last Troll|Deck:Thrun, the Last Troll.dck|Variant:Commander|Avatar:Thrun, the Last Troll|Desc:
+Name:Vorinclex, Voice of Hunger|Deck:Vorinclex, Voice of Hunger.dck|Variant:Commander|Avatar:Vorinclex, Voice of Hunger|Desc:
+Name:Platinum Angel|Deck:Platinum Angel Vanguard.dck|Variant:Vanguard|Avatar:Platinum Angel|Desc:
+Name:Phyrexian Plague|Deck:Phyrexian Plague.dck|Variant:None|Avatar:Phyrexian Swarmlord|Desc:
+Name:Tel-Jilad Defiance|Deck:Tel-Jilad Defiance.dck|Variant:None|Avatar:Tel-Jilad Defiance|Desc:

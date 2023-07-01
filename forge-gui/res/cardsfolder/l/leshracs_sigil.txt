@@ -1,0 +1,8 @@
+Name:Leshrac's Sigil
+ManaCost:B B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ B B | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a green spell, you may pay {B}{B}. If you do, look at that player's hand and choose a card from it. The player discards that card.
+SVar:TrigDiscard:AB$ Discard | Cost$ B B | Defined$ TriggeredActivator | NumCards$ 1 | Mode$ LookYouChoose
+AI:RemoveDeck:Random
+Oracle:Whenever an opponent casts a green spell, you may pay {B}{B}. If you do, look at that player's hand and choose a card from it. The player discards that card.\n{B}{B}: Return Leshrac's Sigil to its owner's hand.

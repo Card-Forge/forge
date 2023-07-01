@@ -1,0 +1,9 @@
+Name:Precinct Captain
+ManaCost:W W
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenAmount$ 1
+DeckHas:Ability$Token
+Oracle:First strike\nWhenever Precinct Captain deals combat damage to a player, create a 1/1 white Soldier creature token.

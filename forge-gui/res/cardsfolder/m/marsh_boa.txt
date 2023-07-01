@@ -1,0 +1,6 @@
+Name:Marsh Boa
+ManaCost:G
+Types:Creature Snake
+PT:1/1
+K:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

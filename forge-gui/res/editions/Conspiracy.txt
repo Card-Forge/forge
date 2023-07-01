@@ -1,0 +1,231 @@
+[metadata]
+Code=CNS
+Date=2014-06-06
+Name=Conspiracy
+Code2=CNS
+Type=Draft
+BoosterCovers=3
+Booster=10 Common:!fromSheet("CNS Draft Matters"), 3 Uncommon:!fromSheet("CNS Draft Matters"), 1 RareMythic:!fromSheet("CNS Draft Matters"), 1 fromSheet("CNS Draft Matters")
+ScryfallCode=CNS
+
+[cards]
+1 U Advantageous Proclamation @Izzy
+2 R Backup Plan @David Palumbo
+3 C Brago's Favor @Karla Ortiz
+4 U Double Stroke @Christopher Moeller
+5 C Immediate Action @Karl Kopinski
+6 U Iterative Analysis @Winona Nelson
+7 C Muzzio's Preparations @Karl Kopinski
+8 U Power Play @Matt Stewart
+9 U Secret Summoning @Lucas Graciano
+10 C Secrets of Paradise @Tyler Jacobson
+11 C Sentinel Dispatch @Adam Paquette
+12 U Unexpected Potential @Izzy
+13 R Worldknit @Adam Paquette
+14 C Brago's Representative @Anthony Palumbo
+15 U Council Guardian @Volkan Baǵa
+16 R Council's Judgment @Kev Walker
+17 R Custodi Soulbinders @Karla Ortiz
+18 C Custodi Squire @Alex Horley-Orlandelli
+19 C Rousing of Souls @Jeff Simpson
+20 R Academy Elite @Volkan Baǵa
+21 C Marchesa's Emissary @Tyler Jacobson
+22 U Marchesa's Infiltrator @Lucas Graciano
+23 M Muzzio, Visionary Architect @Volkan Baǵa
+24 R Plea for Power @John Severin Brassell
+25 U Split Decision @Robbie Trevino
+26 U Bite of the Black Rose @Franz Vohwinkel
+27 R Drakestown Forgotten @Steve Prescott
+28 C Grudge Keeper @Ryan Barger
+29 R Reign of the Pit @Evan Shipard
+30 C Tyrant's Choice @Daarken
+31 C Enraged Revolutionary @Drew Baker
+32 C Grenzo's Cutthroat @Svetlin Velinov
+33 R Grenzo's Rebuttal @Dave Kendall
+34 R Ignition Team @Karl Kopinski
+35 M Scourge of the Throne @Michael Komarck
+36 U Treasonous Ogre @Randy Gallegos
+37 U Predator's Howl @Ralph Horsley
+38 R Realm Seekers @Mike Sass
+39 U Selvala's Charge @Dan Scott
+40 C Selvala's Enforcer @Jesper Ejsing
+41 R Brago, King Eternal @Karla Ortiz
+42 M Dack Fayden @Eric Deschamps
+43 R Dack's Duplicate @Karl Kopinski
+44 U Deathreap Ritual @Steve Argyle
+45 U Extract from Darkness @Dallas Williams
+46 U Flamewright @Mathias Kollros
+47 R Grenzo, Dungeon Warden @Lucas Graciano
+48 R Magister of Worth @John Stanko
+49 M Marchesa, the Black Rose @Matt Stewart
+50 U Marchesa's Smuggler @Dan Scott
+51 R Selvala, Explorer Returned @Tyler Jacobson
+52 U Woodvine Elemental @Mike Bierek
+53 R Aether Searcher @James Paick
+54 U Agent of Acquisitions @Eytan Zana
+55 R Canal Dredger @John Avon
+56 M Coercive Portal @Yeong-Hao Han
+57 R Cogwork Grinder @Jasper Sandner
+58 C Cogwork Librarian @Dan Scott
+59 C Cogwork Spy @Tomasz Jedruszek
+60 U Cogwork Tracker @Alex Horley-Orlandelli
+61 R Deal Broker @Cliff Childs
+62 R Lore Seeker @Jason Felix
+63 C Lurking Automaton @Yeong-Hao Han
+64 C Whispergear Sneak @Jesper Ejsing
+65 R Paliano, the High City @Adam Paquette
+66 C Ajani's Sunstriker @Matt Stewart
+67 C Apex Hawks @David Palumbo
+68 C Courier Hawk @Mark Poole
+69 C Doomed Traveler @Lars Grant-West
+70 U Glimmerpoint Stag @Ryan Pancoast
+71 C Guardian Zendikon @John Avon
+72 U Intangible Virtue @Clint Cearley
+73 C Kor Chant @Yohann Schepacz
+74 C Moment of Heroism @Christopher Moeller
+75 C Noble Templar @Alex Horley-Orlandelli
+76 C Pillarfield Ox @Andrew Robinson
+77 C Pride Guardian @Chris Rahn
+78 M Pristine Angel @Scott M. Fischer
+79 R Reya Dawnbringer @Matthew D. Wilson
+80 R Rout @Igor Kieryluk
+81 C Silverchase Fox @Howard Lyon
+82 U Soulcatcher @Julie Dillon
+83 C Stave Off @Mark Zug
+84 U Swords to Plowshares @Terese Nielsen
+85 U Unquestioned Authority @Zoltan Boros
+86 C Valor Made Real @Jeff Miracola
+87 U Vow of Duty @Wayne Reynolds
+88 U Wakestone Gargoyle @Jim Murray
+89 C Aether Tradewinds @Kieran Yanner
+90 U Air Servant @Lars Grant-West
+91 C Brainstorm @Willian Murai
+92 U Breakthrough @Raymond Swanland
+93 C Compulsive Research @Michael Sutfin
+94 C Crookclaw Transmuter @Ron Spencer
+95 C Dream Fracture @Howard Lyon
+96 C Enclave Elite @Igor Kieryluk
+97 U Fact or Fiction @Matt Cavotta
+98 U Favorable Winds @Winona Nelson
+99 C Grixis Illusionist @Mark Tedin
+100 U Jetting Glasskite @Shishizaru
+101 C Minamo Scrollkeeper @Paolo Parente
+102 R Misdirection @Mathias Kollros
+103 C Plated Seastrider @Izzy
+104 C Reckless Scholar @Steve Prescott
+105 C Screaming Seahawk @Heather Hudson
+106 C Shoreline Ranger @Michael Sutfin
+107 C Stasis Cell @Mark A. Nelson
+108 R Stifle @Eric Fortune
+109 C Traveler's Cloak @Rebecca Guay
+110 C Turn the Tide @Jason Felix
+111 U Wind Dancer @Cynthia Sheppard
+112 C Altar's Reap @Donato Giancola
+113 C Assassinate @Kev Walker
+114 R Ill-Gotten Gains @Greg Staples
+115 C Infectious Horror @Pete Venters
+116 C Liliana's Specter @Vance Kovacs
+117 R Magus of the Mirror @Christopher Moeller
+118 U Morkrut Banshee @Svetlin Velinov
+119 C Necromantic Thirst @Brandon Kitkouski
+120 M Phage the Untouchable @Ron Spears
+121 U Plagued Rusalka @Alex Horley-Orlandelli
+122 C Quag Vampires @Jason Felix
+123 U Reckless Spite @Karl Kopinski
+124 U Skeletal Scrying @Bob Petillo
+125 U Smallpox @Ryan Pancoast
+126 C Stronghold Discipline @Daarken
+127 C Syphon Soul @Ron Spears
+128 C Tragic Slip @Christopher Moeller
+129 C Twisted Abomination @Daren Bader
+130 C Typhoid Rats @Kev Walker
+131 C Unhallowed Pact @Volkan Baǵa
+132 U Vampire Hexmage @Eric Deschamps
+133 U Victimize @Craig J Spearing
+134 C Wakedancer @Austin Hsu
+135 C Zombie Goliath @E. M. Gist
+136 U Barbed Shocker @Tony Szczudlo
+137 U Boldwyr Intimidator @Esad Ribic
+138 C Brimstone Volley @Eytan Zana
+139 C Chartooth Cougar @Chase Stone
+140 C Cinder Wall @Anthony S. Waters
+141 U Deathforge Shaman @Dave Kendall
+142 U Flaring Flame-Kin @Brian Hagan
+143 C Flowstone Blade @Allen Williams
+144 R Heartless Hidetsugu @Carl Critchlow
+145 U Heckling Fiends @Clint Cearley
+146 C Lizard Warrior @Roger Raupp
+147 C Mana Geyser @Martina Pilcerova
+148 C Orcish Cannonade @Pete Venters
+149 C Pitchburn Devils @Johann Bodin
+150 C Power of Fire @Trevor Hairsine
+151 C Skitter of Lizards @Warren Mahy
+152 R Sulfuric Vortex @Greg Staples
+153 C Torch Fiend @Winona Nelson
+154 C Trumpet Blast @Carl Critchlow
+155 U Uncontrollable Anger @Kev Walker
+156 C Vent Sentinel @Chris Rahn
+157 U Volcanic Fallout @Zoltan Boros & Gabor Szikszai
+158 C Wrap in Flames @Véronique Meignaud
+159 C Charging Rhino @Daren Bader
+160 C Copperhorn Scout @Shelly Wan
+161 C Echoing Courage @Greg Staples
+162 U Elephant Guide @Tomasz Jedruszek
+163 C Elvish Aberration @Matt Cavotta
+164 R Exploration @Florian de Gesincourt
+165 U Gamekeeper @Scott Hampton
+166 C Gnarlid Pack @Johann Bodin
+167 C Howling Wolf @Nils Hamm
+168 C Hunger of the Howlpack @Nils Hamm
+169 M Hydra Omnivore @Svetlin Velinov
+170 U Lead the Stampede @Efrem Palacios
+171 C Nature's Claim @Raoul Vitale
+172 U Pelakka Wurm @Daniel Ljunggren
+173 C Plummet @Pete Venters
+174 C Provoke @Kev Walker
+175 U Relic Crush @Steven Belledin
+176 C Respite @Rebecca Guay
+177 C Sakura-Tribe Elder @Carl Critchlow
+178 C Scaled Wurm @Wayne England
+179 C Sporecap Spider @Lars Grant-West
+180 U Squirrel Nest @Daniel Ljunggren
+181 R Terastodon @Lars Grant-West
+182 R Wolfbriar Elemental @Chippy
+183 C Wrap in Vigor @John Donahue
+184 R Basandra, Battle Seraph @Terese Nielsen
+185 R Decimate @Zoltan Boros
+186 R Dimir Doppelganger @Jim Murray
+187 R Edric, Spymaster of Trest @Volkan Baǵa
+188 U Fires of Yavimaya @Izzy
+189 M Mirari's Wake @Volkan Baǵa
+190 U Mortify @Nils Hamm
+191 M Pernicious Deed @Christopher Moeller
+192 U Sky Spirit @Rebecca Guay
+193 R Spiritmonger @Kev Walker
+194 U Spontaneous Combustion @Jason Rainville
+195 U Wood Sage @Paolo Parente
+196 R Altar of Dementia @Brom
+197 R Deathrender @Martina Pilcerova
+198 U Explorer's Scope @Vincent Proce
+199 U Fireshrieker @Christopher Moeller
+200 U Galvanic Juggernaut @Lucas Graciano
+201 U Peace Strider @Igor Kieryluk
+202 U Reito Lantern @Greg Hildebrandt
+203 U Runed Servitor @Mike Bierek
+204 R Silent Arbiter @Mark Zug
+205 U Spectral Searchlight @Martina Pilcerova
+206 R Vedalken Orrery @John Avon
+207 U Warmonger's Chariot @Warren Mahy
+208 U Mirrodin's Core @Greg Staples
+209 U Quicksand @Matt Stewart
+210 R Reflecting Pool @Fred Fields
+
+[tokens]
+w_1_1_spirit_flying
+b_x_x_demon_flying
+b_2_2_zombie
+r_4_4_ogre
+g_3_3_elephant
+g_1_1_squirrel
+g_2_2_wolf
+c_1_1_a_construct_defender

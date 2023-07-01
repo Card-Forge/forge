@@ -1,0 +1,7 @@
+Name:Research Assistant
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/3
+A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:{3}{U}, {T}: Draw a card, then discard a card.

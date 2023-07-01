@@ -1,0 +1,8 @@
+Name:Sustainer of the Realm
+ManaCost:2 W W
+Types:Creature Angel
+PT:2/3
+K:Flying
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +0/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ 2
+Oracle:Flying\nWhenever Sustainer of the Realm blocks, it gets +0/+2 until end of turn.

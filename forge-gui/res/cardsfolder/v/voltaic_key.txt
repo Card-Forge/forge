@@ -1,0 +1,6 @@
+Name:Voltaic Key
+ManaCost:1
+Types:Artifact
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
+AI:RemoveDeck:Random
+Oracle:{1}, {T}: Untap target artifact.

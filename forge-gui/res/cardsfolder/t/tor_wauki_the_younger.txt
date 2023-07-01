@@ -1,0 +1,13 @@
+Name:Tor Wauki the Younger
+ManaCost:3 B R
+Types:Legendary Creature Human Archer
+PT:3/3
+K:Reach
+K:Lifelink
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Other+YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | IsCombat$ False | Description$ If another source you control would deal noncombat damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+DeckHints:Type$Instant|Sorcery
+Oracle:Reach, lifelink\nIf another source you control would deal noncombat damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.\nWhenever you cast an instant or sorcery spell, Tor Wauki the Younger deals 2 damage to any target.

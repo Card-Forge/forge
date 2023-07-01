@@ -1,0 +1,8 @@
+Name:Bearer of the Heavens
+ManaCost:7 R
+Types:Creature Giant
+PT:10/10
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DelTrigLeaves | TriggerDescription$ When CARDNAME dies, destroy all permanents at the beginning of the next end step.
+SVar:DelTrigLeaves:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroyAll | TriggerDescription$ Destroy all permanents at the beginning of the next end step.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent
+Oracle:When Bearer of the Heavens dies, destroy all permanents at the beginning of the next end step.

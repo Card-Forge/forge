@@ -1,0 +1,16 @@
+[metadata]
+Code=J16
+Date=2016-01-01
+Name=Judge Gift Cards 2016
+Type=Promo
+ScryfallCode=J16
+
+[cards]
+1 R Stoneforge Mystic @Johannes Voss
+2 R Mana Drain @Mike Bierek
+3 R Azusa, Lost but Seeking @Winona Nelson
+4 R Command Beacon @Jonas De Ro
+5 R Mystic Confluence @Kieran Yanner
+6 R Imperial Seal @Li Tie
+7 R Defense of the Heart @Jack Wang
+8 R Zur the Enchanter @Josu Hernaiz

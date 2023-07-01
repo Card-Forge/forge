@@ -1,0 +1,9 @@
+Name:Windrider Wizard
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever you cast an instant, sorcery, or Wizard spell, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
+DeckHints:Type$Instant|Sorcery|Wizard
+Oracle:Flying\nWhenever you cast an instant, sorcery, or Wizard spell, you may draw a card. If you do, discard a card.

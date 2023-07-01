@@ -1,0 +1,8 @@
+Name:Mardu Hateblade
+ManaCost:W
+Types:Creature Human Warrior
+PT:1/1
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black
+Oracle:{B}: Mardu Hateblade gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

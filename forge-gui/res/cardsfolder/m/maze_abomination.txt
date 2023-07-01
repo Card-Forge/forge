@@ -1,0 +1,8 @@
+Name:Maze Abomination
+ManaCost:5 B
+Types:Creature Elemental
+PT:4/5
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Deathtouch | Description$ Multicolored creatures you control have deathtouch.
+SVar:PlayMain1:TRUE
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nMulticolored creatures you control have deathtouch.

@@ -1,0 +1,6 @@
+Name:Heartfire
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature;Planeswalker/creature or planeswalker> | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+SVar:AIPreference:SacCost$Creature.token,Planeswalker.cmcLE2
+Oracle:As an additional cost to cast this spell, sacrifice a creature or planeswalker.\nHeartfire deals 4 damage to any target.

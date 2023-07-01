@@ -1,0 +1,6 @@
+Name:Submerged Boneyard
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
+Oracle:Submerged Boneyard enters the battlefield tapped.\n{T}: Add {U} or {B}.

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ra's al Ghul 4
+Title=Ra's al Ghul
+Icon=RasAlGhul.jpg
+Difficulty=very hard
+Description=Ra's al Ghul plays a T1 'Chinnock Beater' deck.
+Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:land rarity:C,U desc:a Land
+[main]
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+2 City of Brass|5ED
+2 Disenchant|5ED
+2 Dwarven Miner|MIR
+2 Erhnam Djinn|ARN
+2 Gorilla Shaman|ALL
+1 Hammer of Bogardan|MIR
+3 Incinerate|MIR
+1 Library of Alexandria|ARN
+4 Lightning Bolt|LEB
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+2 Mystical Tutor|MIR
+1 Plains|MIR
+2 Plateau|LEB
+1 Regrowth|LEB
+2 Savannah|LEB
+2 Savannah Lions|LEB
+2 Serendib Efreet|ARN
+2 Serra Angel|LEB
+4 Strip Mine|ATQ
+2 Taiga|LEB
+1 Time Walk|LEB
+1 Timetwister|LEB
+2 Tropical Island|LEB
+3 Tundra|LEB
+4 Volcanic Island|LEB
+1 Wheel of Fortune|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

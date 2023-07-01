@@ -1,0 +1,9 @@
+Name:Roost of Drakes
+ManaCost:U
+Types:Enchantment
+K:Kicker:2 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, create a 2/2 blue Drake creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_2_drake_flying | TokenOwner$ You
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a kicked spell, create a 2/2 blue Drake creature token with flying.
+DeckHas:Ability$Token
+Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nWhen Roost of Drakes enters the battlefield, if it was kicked, create a 2/2 blue Drake creature token with flying.\nWhenever you cast a kicked spell, create a 2/2 blue Drake creature token with flying.

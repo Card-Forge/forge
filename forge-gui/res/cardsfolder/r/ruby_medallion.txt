@@ -1,0 +1,7 @@
+Name:Ruby Medallion
+ManaCost:2
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Red | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Red spells you cast cost {1} less to cast.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red
+Oracle:Red spells you cast cost {1} less to cast.

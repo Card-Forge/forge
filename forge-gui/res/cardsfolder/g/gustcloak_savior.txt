@@ -1,0 +1,9 @@
+Name:Gustcloak Savior
+ManaCost:4 W
+Types:Creature Bird Soldier
+PT:3/4
+K:Flying
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | Execute$ TrigUntapRemove | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control becomes blocked, you may untap that creature and remove it from combat.
+SVar:TrigUntapRemove:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBRemoveCombat
+SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttackerLKICopy
+Oracle:Flying\nWhenever a creature you control becomes blocked, you may untap that creature and remove it from combat.

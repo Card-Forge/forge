@@ -1,0 +1,6 @@
+Name:Serra
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+1
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddToughness$ 2 | Description$ Creatures you control get +0/+2.
+Oracle:Hand +1, life +1\nCreatures you control get +0/+2.

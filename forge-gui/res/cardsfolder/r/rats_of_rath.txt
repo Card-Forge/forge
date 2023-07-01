@@ -1,0 +1,6 @@
+Name:Rats of Rath
+ManaCost:1 B
+Types:Creature Rat
+PT:2/1
+A:AB$ Destroy | Cost$ B | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact, creature or land you control | SpellDescription$ Destroy target artifact, creature, or land you control.
+Oracle:{B}: Destroy target artifact, creature, or land you control.

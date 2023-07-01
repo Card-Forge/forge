@@ -1,0 +1,13 @@
+[metadata]
+Code=PSS1
+Date=2015-10-02
+Name=BFZ Standard Series
+Type=Promo
+ScryfallCode=PSS1
+
+[cards]
+234 R Canopy Vista @Titus Lunter
+235 R Cinder Glade @Titus Lunter
+241 R Prairie Stream @Titus Lunter
+247 R Smoldering Marsh @Titus Lunter
+249 R Sunken Hollow @Titus Lunter

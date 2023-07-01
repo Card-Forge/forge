@@ -1,0 +1,6 @@
+Name:Lightning Elemental
+ManaCost:3 R
+Types:Creature Elemental
+PT:4/1
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

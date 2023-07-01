@@ -1,0 +1,7 @@
+Name:Sneaky Homunculus
+ManaCost:1 U
+Types:Creature Homunculus Illusion
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block or be blocked by creatures with power 2 or greater.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE2 | Secondary$ True | Description$ CARDNAME can't block or be blocked by creatures with power 2 or greater.
+Oracle:Sneaky Homunculus can't block or be blocked by creatures with power 2 or greater.

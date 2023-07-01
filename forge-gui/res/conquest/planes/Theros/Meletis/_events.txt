@@ -1,0 +1,9 @@
+Name:Battlewise Hoplites|Deck:UWHeroic.dck|Variant:None|Avatar:Battlewise Hoplite|Desc:
+Name:Daxos|Deck:Daxos.dck|Variant:Commander|Avatar:Daxos of Meletis|Desc:
+Name:Devotion to Wisdom|Deck:MonoUDev.dck|Variant:None|Avatar:Master of Waves|Desc:
+Name:Ephara|Deck:Ephara.dck|Variant:Commander|Avatar:Ephara, God of the Polis|Desc:
+Name:Control your Nightmares|Deck:UWControl.dck|Variant:None|Avatar:Prognostic Sphinx|Desc:
+Name:Keranos|Deck:Keranos.dck|Variant:Commander|Avatar:Keranos, God of Storms|Desc:
+Name:Medomai|Deck:Medomai.dck|Variant:Commander|Avatar:Medomai the Ageless|Desc:
+Name:Kiora|Deck:KioraPW.dck|Variant:Planeswalker|Avatar:Kiora, the Crashing Wave|Desc:
+Name:Random Meletis|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

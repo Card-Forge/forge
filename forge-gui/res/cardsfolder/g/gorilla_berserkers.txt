@@ -1,0 +1,8 @@
+Name:Gorilla Berserkers
+ManaCost:3 G G
+Types:Creature Ape Berserker
+PT:2/3
+K:Trample
+K:Rampage:2
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ CARDNAME can't be blocked except by three or more creatures.
+Oracle:Trample; rampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)\nGorilla Berserkers can't be blocked except by three or more creatures.

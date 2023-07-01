@@ -1,0 +1,7 @@
+Name:Knight of Meadowgrain
+ManaCost:W W
+Types:Creature Kithkin Knight
+PT:2/2
+K:First Strike
+K:Lifelink
+Oracle:First strike\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

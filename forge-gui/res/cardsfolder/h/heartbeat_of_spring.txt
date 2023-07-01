@@ -1,0 +1,6 @@
+Name:Heartbeat of Spring
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+Oracle:Whenever a player taps a land for mana, that player adds one mana of any type that land produced.

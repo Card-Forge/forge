@@ -1,0 +1,6 @@
+Name:Steam Catapult
+ManaCost:3 W W
+Types:Creature Human Soldier
+PT:2/3
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Destroy target tapped creature. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Destroy target tapped creature. Activate only during your turn, before attackers are declared.

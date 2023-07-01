@@ -1,0 +1,9 @@
+Name:Ember-Fist Zubera
+ManaCost:1 R
+Types:Creature Zubera Spirit
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals damage to any target equal to the number of Zubera that died this turn.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
+DeckHints:Type$Zubera
+Oracle:When Ember-Fist Zubera dies, it deals damage to any target equal to the number of Zubera that died this turn.

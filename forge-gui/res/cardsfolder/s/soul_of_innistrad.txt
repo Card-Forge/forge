@@ -1,0 +1,8 @@
+Name:Soul of Innistrad
+ManaCost:4 B B
+Types:Creature Avatar
+PT:6/6
+K:Deathtouch
+A:AB$ ChangeZone | Cost$ 3 B B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to three target creature cards from your graveyard to your hand.
+A:AB$ ChangeZone | Cost$ 3 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to three target creature cards from your graveyard to your hand.
+Oracle:Deathtouch\n{3}{B}{B}: Return up to three target creature cards from your graveyard to your hand.\n{3}{B}{B}, Exile Soul of Innistrad from your graveyard: Return up to three target creature cards from your graveyard to your hand.

@@ -1,0 +1,7 @@
+Name:Shoreline Ranger
+ManaCost:5 U
+Types:Creature Bird Soldier Ranger
+PT:3/4
+K:Flying
+K:TypeCycling:Island:2
+Oracle:Flying\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

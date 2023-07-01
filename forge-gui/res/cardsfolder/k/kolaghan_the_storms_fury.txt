@@ -1,0 +1,10 @@
+Name:Kolaghan, the Storm's Fury
+ManaCost:3 B R
+Types:Legendary Creature Dragon
+PT:4/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+K:Dash:3 B R
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn.\nDash {3}{B}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

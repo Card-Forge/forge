@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Arcanis's Guile
+Description=Manipulate, deceive, humiliate, win. Frustrate your enemies by undoing all their hard work while you tear through your library for whatever spell you need. Then deliver the deathblow at your leisure with a little help from the archmage Arcanis the Omnipotent.
+Deck Type=constructed
+Set=10E
+Image=arcaniss_guile.jpg
+[main]
+1 Air Elemental|10E
+1 Arcanis the Omnipotent|10E
+1 Aven Fisher|10E
+1 Boomerang|10E
+2 Cancel|10E
+2 Cloud Elemental|10E
+2 Counsel of the Soratami|10E
+1 Denizen of the Deep|10E
+17 Island|10E
+1 Kraken's Eye|10E
+1 Phantom Warrior|10E
+2 Remove Soul|10E
+1 Rod of Ruin|10E
+2 Sage Owl|10E
+1 Telling Time|10E
+1 Thieving Magpie|10E
+1 Tidings|10E
+2 Unsummon|10E
+[sideboard]

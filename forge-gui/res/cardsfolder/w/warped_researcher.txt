@@ -1,0 +1,7 @@
+Name:Warped Researcher
+ManaCost:4 U
+Types:Creature Human Wizard Mutant
+PT:3/4
+T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, CARDNAME gains flying and shroud until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying & Shroud
+Oracle:Whenever a player cycles a card, Warped Researcher gains flying and shroud until end of turn. (It can't be the target of spells or abilities.)

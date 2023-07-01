@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=20
+Credits=2500
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rot from Within
+Description=Wield a deadly Phyrexian swarm of virulent horrors! Aberrant growth spells keep you opponent wary of even your smallest creatures. After the initial assault, you hulking abominations will feast on your enemy's wounds.
+Set=NPH
+Image=rot_from_within.jpg
+[main]
+1 Blight Mamba|SOM
+4 Carrion Call|SOM
+1 Contagion Clasp|SOM
+22 Forest|ISD
+4 Glistener Elf|NPH
+1 Green Sun's Zenith|MBS
+4 Groundswell|WWK
+2 Ichorclaw Myr|SOM
+1 Inkmoth Nexus|MBS
+4 Mutagenic Growth|NPH
+4 Overgrown Battlement|ROE
+4 Primal Bellow|ZEN
+2 Putrefax|SOM
+3 Rot Wolf|MBS
+3 Viridian Corrupter|MBS
+[sideboard]
+3 Contagion Clasp|SOM
+1 Melira, Sylvok Outcast|NPH
+2 Obstinate Baloth|M11
+1 Pistus Strike|MBS
+3 Trigon of Infestation|SOM
+2 Unnatural Predation|MBS
+2 Vines of Vastwood|ZEN
+1 Viridian Corrupter|MBS

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Agent Smith 1
+Title=Agent Smith
+Difficulty=easy
+Description=Mono W Opalescence deck
+Icon=Mr Smith.jpg
+Deck Type=constructed
+[main]
+21 Plains
+1 Serra's Sanctum
+1 Aegis of Honor
+1 Ajani's Mantra
+1 Call to Arms
+1 Convalescence
+1 Fight or Flight
+1 Fire at Will
+1 Gerrard's Battle Cry
+1 High Ground
+1 Hopeful Eidolon
+1 Inheritance
+1 Ivory Mask
+1 Karmic Justice
+1 Kill Shot
+1 Lifeblood
+1 Lucent Liminid
+1 Mesa Enchantress
+1 Myth Realized
+1 Oath of Lieges
+1 Opalescence
+1 Replenish
+1 Great Wall
+1 Sacred Ground
+1 Sheltering Prayers
+4 Starfield of Nyx
+1 Exclusion Ritual
+2 Silkwrap
+2 Suspension Field
+1 Lashknife Barrier
+1 Spirit Mirror
+1 First Response
+1 Orim's Prayer
+1 Serra's Blessing
+1 Kismet
+[sideboard]

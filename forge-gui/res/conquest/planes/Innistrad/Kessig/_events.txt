@@ -1,0 +1,9 @@
+Name:Human Might|Deck:Human Might.dck|Variant:None|Avatar:Backwoods Survivalists|Desc:
+Name:Eldrazi overrun|Deck:Eldrazi overrun.dck|Variant:None|Avatar:Emrakul, the Promised End|Desc:
+Name:Wild Beasts|Deck:Wild Beasts.dck|Variant:None|Avatar:Craterhoof Behemoth|Desc:
+Name:Delirium|Deck:Delirium.dck|Variant:None|Avatar:Pick the Brain|Desc:
+Name:Hermit Druid|Deck:Hermit Druid.dck|Variant:Vanguard|Avatar:Hermit Druid|Desc:
+Name:Midnight Werewolves|Deck:Midnight Werewolves.dck|Variant:Commander|Avatar:Ulrich of the Krallenhorde|Desc:
+Name:The Gitrog Monster|Deck:The Gitrog Monster.dck|Variant:Commander|Avatar:The Gitrog Monster|Desc:
+Name:Garruk Relentless|Deck:Garruk Relentless.dck|Variant:Planeswalker|Avatar:Garruk Relentless|Desc:
+Name:Wild Spirit|Deck:Wild Spirit.dck|Variant:Planeswalker|Avatar:Arlinn Kord|Desc:

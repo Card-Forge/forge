@@ -1,0 +1,7 @@
+Name:Endure
+ManaCost:3 W W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and permanents you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | Description$ Prevent all damage that would be dealt to you and permanents you control this turn.
+AI:RemoveDeck:All
+Oracle:Prevent all damage that would be dealt to you and permanents you control this turn.

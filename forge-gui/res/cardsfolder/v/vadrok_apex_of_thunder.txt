@@ -1,0 +1,10 @@
+Name:Vadrok, Apex of Thunder
+ManaCost:U R W
+Types:Legendary Creature Elemental Dinosaur Cat
+PT:3/3
+K:Mutate:1 WU R R
+K:Flying
+K:First Strike
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ Whenever this creature mutates, you may cast target noncreature card with mana value 3 or less from your graveyard without paying its mana cost.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Card.nonCreature+cmcLE3+YouOwn | ValidSA$ Spell | TgtPrompt$ Choose target noncreature card with mana value 3 or less from your graveyard | WithoutManaCost$ True | Optional$ True | AILogic$ ReplaySpell
+Oracle:Mutate {1}{W/U}{R}{R} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying, first strike\nWhenever this creature mutates, you may cast target noncreature card with mana value 3 or less from your graveyard without paying its mana cost.

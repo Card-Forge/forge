@@ -1,0 +1,13 @@
+Name:Primordial Ooze
+ManaCost:R
+Types:Creature Ooze
+PT:1/1
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap CARDNAME and it deals X damage to you.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ You
+SVar:X:Count$CardCounters.P1P1
+AI:RemoveDeck:All
+DeckHas:Ability$Counters
+Oracle:Primordial Ooze attacks each combat if able.\nAt the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.

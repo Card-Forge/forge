@@ -1,0 +1,6 @@
+Name:Groundskeeper
+ManaCost:G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 G | TgtPrompt$ Choose target basic land in your graveyard | ValidTgts$ Land.Basic+YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target basic land card from your graveyard to your hand.
+Oracle:{1}{G}: Return target basic land card from your graveyard to your hand.

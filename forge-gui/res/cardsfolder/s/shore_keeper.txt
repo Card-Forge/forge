@@ -1,0 +1,6 @@
+Name:Shore Keeper
+ManaCost:U
+Types:Creature Trilobite
+PT:0/3
+A:AB$ Draw | Cost$ 7 U T Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
+Oracle:{7}{U}, {T}, Sacrifice Shore Keeper: Draw three cards.

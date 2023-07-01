@@ -1,0 +1,10 @@
+Name:Belltower Sphinx
+ManaCost:4 U
+Types:Creature Sphinx
+PT:2/5
+K:Flying
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller mills that many cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredSourceController | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller mills that many cards.

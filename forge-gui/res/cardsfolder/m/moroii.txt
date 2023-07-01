@@ -1,0 +1,8 @@
+Name:Moroii
+ManaCost:2 U B
+Types:Creature Vampire
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nAt the beginning of your upkeep, you lose 1 life.

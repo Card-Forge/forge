@@ -1,0 +1,11 @@
+[metadata]
+Code=PRCQ
+Date=2022-10-01
+Name=Regional Championship Qualifiers 2022
+Type=Promo
+ScryfallCode=PRCQ
+
+[cards]
+1 M Gideon, Ally of Zendikar @Alexis Ziritt
+2 R Selfless Spirit @Justine Jones
+3 R Thraben Inspector @Yuko Shimizu

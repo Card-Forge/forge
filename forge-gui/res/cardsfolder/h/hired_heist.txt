@@ -1,0 +1,8 @@
+Name:Hired Heist
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+T:Mode$ DamageDone | ValidSource$ Creature.NamedCard+YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with the chosen name deals combat damage to a player, you may pay {U}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ U | NumCards$ 1
+SVar:AgendaLogic:BestCreatureInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nWhenever a creature you control with the chosen name deals combat damage to a player, you may pay {U}. If you do, draw a card.

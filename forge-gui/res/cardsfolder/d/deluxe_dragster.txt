@@ -1,0 +1,9 @@
+Name:Deluxe Dragster
+ManaCost:4 U
+Types:Artifact Vehicle
+PT:4/3
+K:Crew:2
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Card.nonVehicle | Description$ CARDNAME can't be blocked except by Vehicles.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigCast | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast target instant or sorcery card from that plaver's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigCast:DB$ Play | ValidTgts$ Instant.OwnedBy TriggeredTarget,Sorcery.OwnedBy TriggeredTarget | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in attacked player's graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+Oracle:Deluxe Dragster can't be blocked except by Vehicles.\nWhenever Deluxe Dragster deals combat damage to a player, you may cast target instant or sorcery card from that plaver's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.\nCrew 2

@@ -1,0 +1,8 @@
+Name:Sliver Queen
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+PT:7/7
+A:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Sliver creature token.
+DeckHints:Type$Sliver
+DeckHas:Ability$Token
+Oracle:{2}: Create a 1/1 colorless Sliver creature token.

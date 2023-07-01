@@ -1,0 +1,6 @@
+Name:Darksteel Relic
+ManaCost:0
+Types:Artifact
+K:Indestructible
+AI:RemoveDeck:Random
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)

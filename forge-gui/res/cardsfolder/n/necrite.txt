@@ -1,0 +1,7 @@
+Name:Necrite
+ManaCost:1 B B
+Types:Creature Thrull
+PT:2/2
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature defending player controls. It can't be regenerated.
+SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | NoRegen$ True | AITgts$ BetterThanSource | TgtPrompt$ Select target creature defending player controls
+Oracle:Whenever Necrite attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature defending player controls. It can't be regenerated.

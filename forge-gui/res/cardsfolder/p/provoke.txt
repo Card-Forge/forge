@@ -1,0 +1,9 @@
+Name:Provoke
+ManaCost:1 G
+Types:Instant
+A:SP$ Untap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ Untap target creature you don't control.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDraw | SpellDescription$ That creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Untap target creature you don't control. That creature blocks this turn if able.\nDraw a card.

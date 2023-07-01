@@ -1,0 +1,9 @@
+Name:Shrieking Specter
+ManaCost:5 B
+Types:Creature Specter
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME attacks, defending player discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredDefendingPlayer | NumCards$ 1 | Mode$ TgtChoose
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Shrieking Specter attacks, defending player discards a card.

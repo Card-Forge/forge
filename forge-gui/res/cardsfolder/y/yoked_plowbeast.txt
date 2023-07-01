@@ -1,0 +1,6 @@
+Name:Yoked Plowbeast
+ManaCost:5 W W
+Types:Creature Beast
+PT:5/5
+K:Cycling:2
+Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

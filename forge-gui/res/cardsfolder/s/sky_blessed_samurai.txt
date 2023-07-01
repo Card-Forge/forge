@@ -1,0 +1,9 @@
+Name:Sky-Blessed Samurai
+ManaCost:6 W
+Types:Enchantment Creature Human Samurai
+PT:4/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+K:Flying
+DeckHints:Type$Enchantment
+Oracle:This spell costs {1} less to cast for each enchantment you control.\nFlying

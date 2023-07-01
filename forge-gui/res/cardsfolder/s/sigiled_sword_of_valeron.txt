@@ -1,0 +1,9 @@
+Name:Sigiled Sword of Valeron
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Vigilance | AddType$ Knight | Description$ Equipped creature gets +2/+0, has vigilance, and is a Knight in addition to its other types.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature attacks, create a 2/2 white Knight creature token with vigilance that's attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | TokenAttacking$ True
+DeckHas:Ability$Token
+Oracle:Equipped creature gets +2/+0, has vigilance, and is a Knight in addition to its other types.\nWhenever equipped creature attacks, create a 2/2 white Knight creature token with vigilance that's attacking.\nEquip {3}

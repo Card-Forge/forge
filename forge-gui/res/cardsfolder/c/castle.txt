@@ -1,0 +1,5 @@
+Name:Castle
+ManaCost:3 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | Description$ Untapped creatures you control get +0/+2.
+Oracle:Untapped creatures you control get +0/+2.

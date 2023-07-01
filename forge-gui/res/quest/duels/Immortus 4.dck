@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Immortus 4
+Title=Immortus
+Difficulty=very hard
+Description=Mono U Time Vault deck
+Icon=Immortus.jpg
+Deck Type=constructed
+[main]
+18 Island
+1 Mox Jet
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+1 Sol Ring
+1 Ancestral Recall
+1 Time Walk
+1 Time Vault
+4 Voltaic Key
+4 Fabricate
+4 Trinket Mage
+4 Mana Drain
+4 Spell Snare
+4 Think Twice
+4 True-Name Nemesis
+2 Mental Misstep
+2 Daze
+1 Treachery
+[sideboard]

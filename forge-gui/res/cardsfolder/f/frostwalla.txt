@@ -1,0 +1,6 @@
+Name:Frostwalla
+ManaCost:2 G
+Types:Snow Creature Lizard
+PT:2/2
+A:AB$ Pump | Cost$ S | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{S}: Frostwalla gets +2/+2 until end of turn. Activate only once each turn. ({S} can be paid with one mana from a snow source.)

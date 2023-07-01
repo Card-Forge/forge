@@ -1,0 +1,5 @@
+Name:Undead Minotaur
+ManaCost:2 B
+Types:Creature Zombie Minotaur
+PT:2/3
+Oracle:

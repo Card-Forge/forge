@@ -1,0 +1,7 @@
+Name:Cloudreach Cavalry
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | IsPresent$ Bird.YouCtrl | Description$ As long as you control a Bird, CARDNAME gets +2/+2 and has flying.
+SVar:BuffedBy:Bird
+Oracle:As long as you control a Bird, Cloudreach Cavalry gets +2/+2 and has flying.

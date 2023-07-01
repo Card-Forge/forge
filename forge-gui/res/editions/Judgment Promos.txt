@@ -1,0 +1,10 @@
+[metadata]
+Code=PJUD
+Date=2002-05-27
+Name=Judgment Promos
+Type=Promo
+CardLang=he
+ScryfallCode=PJUD
+
+[cards]
+11 R Glory @Donato Giancola

@@ -1,0 +1,9 @@
+Name:Sudden Salvation
+ManaCost:2 W W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.ThisTurnEnteredFrom_Battlefield | TgtPrompt$ Select up to three target permanent cards in graveyards that were put there from the battlefield this turn | TargetMin$ 0 | TargetMax$ 3 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBDraw | SpellDescription$ Choose up to three target permanent cards in graveyards that were put there from the battlefield this turn. Return them to the battlefield tapped under their owners' control. You draw a card for each opponent who controls one or more of those permanents.
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$HasPropertycontrolsPermanent.IsRemembered
+DeckHas:Ability$Graveyard
+Oracle:Choose up to three target permanent cards in graveyards that were put there from the battlefield this turn. Return them to the battlefield tapped under their owners' control. You draw a card for each opponent who controls one or more of those permanents.

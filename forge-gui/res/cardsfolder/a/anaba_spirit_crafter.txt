@@ -1,0 +1,7 @@
+Name:Anaba Spirit Crafter
+ManaCost:2 R R
+Types:Creature Minotaur Shaman
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.Minotaur | AddPower$ 1 | Description$ Minotaur creatures get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:Minotaur creatures get +1/+0.

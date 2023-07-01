@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Ixalan #03
+URL:http://www.possibilitystorm.com/033-ixalan-season-puzzle-3/
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=17
+humanhand=Captain Lannery Storm; Mountain|Set:XLN; Chandra's Pyrohelix; Angrath's Marauders; Final Reward;
+humangraveyard=
+humanlibrary=
+humanbattlefield=Pathmaker Initiate; Combat Celebrant; Tilonalli's Skinshifter; Burning Sun's Avatar|Tapped|Id:420; Carrion Screecher; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; Mountain|Set:XLN; Mountain|Set:XLN; Mountain|Set:XLN; 
+aibattlefield=Seraph of the Suns; Nimble Obstructionist; Protection of the Hekma; Unquenchable Thirst|AttachedTo:420;
+aiprecast=Deeproot Waters:TrigToken;Deeproot Waters:TrigToken;Deeproot Waters:TrigToken; 
+aigraveyard=
+ailibrary=
+aiexile=

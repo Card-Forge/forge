@@ -1,0 +1,9 @@
+Name:Blitz Hellion
+ManaCost:3 R G
+Types:Creature Hellion
+PT:7/7
+K:Trample
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of the end step, CARDNAME's owner shuffles it into their library.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
+Oracle:Trample, haste\nAt the beginning of the end step, Blitz Hellion's owner shuffles it into their library.

@@ -1,0 +1,6 @@
+Name:Lodestone Golem
+ManaCost:4
+Types:Artifact Creature Golem
+PT:5/3
+S:Mode$ RaiseCost | ValidCard$ Card.nonArtifact | Type$ Spell | Amount$ 1 | Description$ Nonartifact spells cost {1} more to cast.
+Oracle:Nonartifact spells cost {1} more to cast.

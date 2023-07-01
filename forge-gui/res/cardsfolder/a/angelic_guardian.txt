@@ -1,0 +1,9 @@
+Name:Angelic Guardian
+ManaCost:4 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigIndestructible | TriggerDescription$ Whenever one or more creatures you control attack, they gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)
+SVar:TrigIndestructible:DB$ PumpAll | ValidCards$ Creature.YouCtrl+attacking | KW$ Indestructible
+SVar:HasAttackEffect:TRUE
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever one or more creatures you control attack, they gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

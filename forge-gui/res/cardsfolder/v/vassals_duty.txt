@@ -1,0 +1,8 @@
+Name:Vassal's Duty
+ManaCost:3 W
+Types:Enchantment
+A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target legendary creature to redirect damage from | ReplacementEffects$ DamageEvent | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
+SVar:DamageEvent:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ DamageEventDmg | DamageTarget$ You | Description$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
+SVar:DamageEventDmg:DB$ ReplaceSplitDamage | DamageTarget$ You
+AI:RemoveDeck:All
+Oracle:{1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.

@@ -1,0 +1,5 @@
+Name:Kasimir the Lone Wolf
+ManaCost:4 W U
+Types:Legendary Creature Human Warrior
+PT:5/3
+Oracle:

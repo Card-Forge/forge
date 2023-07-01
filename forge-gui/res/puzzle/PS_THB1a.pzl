@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #01 (as Player A)
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/01/144.-THB1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that all blocking scenarios must be accounted for. Stonecoil Serpent is owned by you and entered the battlefield for your opponent using Unholy Indenture. 'Blue' was chosen for Diamond Knight. Assume that cards starting in each player's library are not known, and therefore will not be relevant to the puzzle if drawn.
+[state]
+ailife=11
+humanlife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Mystic Sanctuary;Connive // Concoct
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humangraveyard=Sweet Oblivion;Drown in the Loch;Rankle, Master of Pranks;Pharika's Spawn
+humanbattlefield=Ashiok, Sculptor of Fears|Counters:LOYALTY=5;Devourer of Memory;Vantress Gargoyle;Diamond Knight|ChosenColor:blue|NoETBTrigs;Swamp;Swamp;Swamp;Island;Island;Island;Island
+aihand=Rise to Glory;Inspiring Unicorn;All That Glitters;Severed Strands
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aigraveyard=Meteor Golem;Gauntlets of Light;Gray Merchant of Asphodel;Unholy Indenture
+aibattlefield=Elspeth, Sun's Nemesis|Counters:LOYALTY=2;Stonecoil Serpent|Owner:Human|Counters:P1P1=1;Crashing Drawbridge;Ob Nixilis, the Hate-Twisted|Counters:LOYALTY=4;Nyx Lotus|NoETBTrigs;Plains;Plains;Plains;Swamp;Swamp;Swamp

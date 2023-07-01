@@ -1,0 +1,9 @@
+Name:Zeriam, Golden Wind
+ManaCost:3 W
+Types:Legendary Creature Griffin
+PT:3/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Griffin.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a Griffin you control deals combat damage to a player, create a 2/2 white Griffin creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_griffin_flying
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhenever a Griffin you control deals combat damage to a player, create a 2/2 white Griffin creature token with flying.

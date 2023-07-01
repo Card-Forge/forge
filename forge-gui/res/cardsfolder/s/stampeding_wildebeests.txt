@@ -1,0 +1,11 @@
+Name:Stampeding Wildebeests
+ManaCost:2 G G
+Types:Creature Antelope Beast
+PT:5/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$Valid Creature.Green+YouCtrl
+AI:RemoveDeck:Random
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nAt the beginning of your upkeep, return a green creature you control to its owner's hand.

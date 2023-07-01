@@ -1,0 +1,5 @@
+Name:Final Judgment
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures.
+Oracle:Exile all creatures.

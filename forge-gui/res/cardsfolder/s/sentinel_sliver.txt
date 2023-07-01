@@ -1,0 +1,8 @@
+Name:Sentinel Sliver
+ManaCost:1 W
+Types:Creature Sliver
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Vigilance | Description$ Sliver creatures you control have vigilance.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have vigilance. (Attacking doesn't cause them to tap.)

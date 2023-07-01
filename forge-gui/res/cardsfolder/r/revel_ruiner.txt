@@ -1,0 +1,9 @@
+Name:Revel Ruiner
+ManaCost:3 B
+Types:Creature Cephalid Rogue
+PT:3/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+DeckHas:Ability$Discard|Counters
+Oracle:Menace\nWhen Revel Ruiner enters the battlefield, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

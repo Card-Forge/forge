@@ -1,0 +1,9 @@
+Name:Third Path Iconoclast
+ManaCost:U R
+Types:Creature Human Monk
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Soldier artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_soldier
+DeckHas:Ability$Token & Type$Soldier
+DeckHints:Type$Instant|Sorcery|Enchantment|Artifact
+Oracle:Whenever you cast a noncreature spell, create a 1/1 colorless Soldier artifact creature token.

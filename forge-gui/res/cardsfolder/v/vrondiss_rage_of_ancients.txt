@@ -1,0 +1,11 @@
+Name:Vrondiss, Rage of Ancients
+ManaCost:3 R G
+Types:Legendary Creature Dragon Barbarian
+PT:5/4
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you may create a 5/4 red and green Dragon Spirit creature token with "When this creature deals damage, sacrifice it."
+SVar:TrigToken:DB$ Token | TokenScript$ rg_5_4_dragon_spirit_damagesac
+T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDamageSelf | TriggerDescription$ Whenever you roll one or more dice, you may have NICKNAME deal 1 damage to itself.
+SVar:TrigDamageSelf:DB$ DealDamage | Defined$ Self | NumDmg$ 1
+SVar:HasCombatEffect:TRUE
+DeckHas:Ability$Token|Sacrifice
+Oracle:Enrage — Whenever Vrondiss, Rage of Ancients is dealt damage, you may create a 5/4 red and green Dragon Spirit creature token with "When this creature deals damage, sacrifice it."\nWhenever you roll one or more dice, you may have Vrondiss deal 1 damage to itself.

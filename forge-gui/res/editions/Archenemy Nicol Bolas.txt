@@ -1,0 +1,143 @@
+[metadata]
+Code=E01
+Date=2017-06-16
+Name=Archenemy: Nicol Bolas
+Code2=E01
+Type=Multiplayer
+ScryfallCode=E01
+
+[cards]
+1 R Aegis Angel
+2 U Aerial Responder
+3 U Anointer of Champions
+4 C Doomed Traveler
+5 C Excoriate
+6 C Expedition Raptor
+7 U Fencing Ace
+8 R Fiendslayer Paladin
+9 U Flickerwisp
+10 M Gideon Jura
+11 C Gideon's Lawkeeper
+12 R Grand Abolisher
+13 C Grasp of the Hieromancer
+14 R Lightwielder Paladin
+15 R Mentor of the Meek
+16 C Moment of Heroism
+17 R Odric, Master Tactician
+18 R Precinct Captain
+19 U Relief Captain
+20 C Shoulder to Shoulder
+21 M Sun Titan
+22 C Youthful Knight
+23 C Compulsive Research
+24 R Icefall Regent
+25 C Ior Ruin Expedition
+26 R Prognostic Sphinx
+27 U Reckless Scholar
+28 R Sphinx of Jwar Isle
+29 C Vision Skeins
+30 C Windrider Eel
+31 R Archfiend of Depravity
+32 R Deathbringer Regent
+33 U Doom Blade
+34 R Harvester of Souls
+35 C Nightscape Familiar
+36 R Overseer of the Damned
+37 U Reckless Spite
+38 U Vampire Nighthawk
+39 R Avatar of Fury
+40 C Battle-Rattle Shaman
+41 C Blood Ogre
+42 M Chandra, Pyromaster
+43 C Chandra's Outrage
+44 R Chandra's Phoenix
+45 U Coordinated Assault
+46 R Dualcaster Mage
+47 C Fiery Fall
+48 U Flametongue Kavu
+49 C Gorehorn Minotaurs
+50 R Grim Lavamancer
+51 U Guttersnipe
+52 C Hammerhand
+53 M Inferno Titan
+54 U Lightning Bolt
+55 M Obsidian Fireheart
+56 C Searing Spear
+57 U Skarrgan Firebird
+58 U Stormblood Berserker
+59 R Sudden Demise
+60 R Torchling
+61 U Volcanic Geyser
+62 C Cultivate
+63 C Explore
+64 C Fertilid
+65 R Forgotten Ancient
+66 R Hunter's Prowess
+67 C Khalni Heart Expedition
+68 M Nissa, Worldwaker
+69 R Oran-Rief Hydra
+70 U Press the Advantage
+71 M Rampaging Baloths
+72 U Retreat to Kazandu
+73 R Scute Mob
+74 C Sylvan Bounty
+75 R Thragtusk
+76 U Turntimber Basilisk
+77 C Vastwood Zendikon
+78 C Vines of the Recluse
+79 U Woodborn Behemoth
+80 U Baleful Strix
+81 R Blood Tyrant
+82 R Cruel Ultimatum
+83 R Dreadbore
+84 U Extract from Darkness
+85 M Nicol Bolas, Planeswalker
+86 U Slave of Bolas
+87 U Soul Ransom
+88 C Obelisk of Grixis
+89 R Sword of the Animist
+90 U Talisman of Dominance
+91 U Talisman of Indulgence
+92 U Crumbling Necropolis
+93 R Dragonskull Summit
+94 R Drowned Catacomb
+95 C Grixis Panorama
+96 C Smoldering Spires
+97 L Plains
+98 L Island
+99 L Swamp
+100 L Mountain
+101 L Forest
+102 L Plains
+103 L Island
+104 L Swamp
+105 L Mountain
+106 L Forest
+1 C Because I Have Willed It
+2 C Behold My Grandeur
+3 C Bow to My Command
+4 C Choose Your Demise
+5 C Delight in the Hunt
+6 C Every Dream a Nightmare
+7 C For Each of You, a Gift
+8 C Know Evil
+9 C Make Yourself Useful
+10 C The Mighty Will Fall
+11 C My Forces are Innumerable
+12 C My Laughter Echoes
+13 C No One Will Hear Your Cries
+14 C Pay Tribute to Me
+15 C Power Without Equal
+16 C A Reckoning Approaches
+17 C There Is No Refuge
+18 C This World Belongs to Me
+19 C What's Yours Is Now Mine
+20 C When Will You Learn?
+
+[tokens]
+w_1_1_soldier
+w_1_1_spirit_flying
+b_3_3_horror
+b_2_2_zombie
+g_3_3_beast
+g_4_4_beast

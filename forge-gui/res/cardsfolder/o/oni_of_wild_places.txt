@@ -1,0 +1,11 @@
+Name:Oni of Wild Places
+ManaCost:5 R
+Types:Creature Demon Spirit
+PT:6/5
+K:Haste
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a red creature you control to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.Red+YouCtrl
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$Valid Creature.Red+YouCtrl+inZoneBattlefield
+AI:RemoveDeck:Random
+Oracle:Haste\nAt the beginning of your upkeep, return a red creature you control to its owner's hand.

@@ -1,0 +1,6 @@
+Name:Flamewave Invoker
+ManaCost:2 R
+Types:Creature Goblin Mutant
+PT:2/2
+A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Player, Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player or planeswalker.
+Oracle:{7}{R}: Flamewave Invoker deals 5 damage to target player or planeswalker.

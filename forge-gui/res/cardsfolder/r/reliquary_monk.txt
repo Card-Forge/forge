@@ -1,0 +1,7 @@
+Name:Reliquary Monk
+ManaCost:2 W
+Types:Creature Human Monk Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+Oracle:When Reliquary Monk dies, destroy target artifact or enchantment.

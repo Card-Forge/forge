@@ -1,0 +1,11 @@
+Name:Green Sun's Twilight
+ManaCost:X G
+Types:Sorcery
+A:SP$ DigMultiple | DigNum$ SVar$X/Plus.1 | Reveal$ True | ChangeValid$ Creature,Land | ChangeLater$ True | RememberChanged$ True | ImprintRest$ True | SubAbility$ DBBranch | SpellDescription$ Reveal the top X plus one cards of your library. Choose a creature card and/or a land card from among them. Put those cards into your hand and the rest on the bottom of your library in a random order. If X is 5 or more, instead put the chosen cards onto the battlefield or into your hand and the rest on the bottom of your library in a random order.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE5 | TrueSubAbility$ DBChangeZone | FalseSubAbility$ Hand | SubAbility$ RestBottom
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | DestinationAlternative$ Hand | AlternativeDestinationMessage$ Put the chosen card(s) onto the battlefield instead of into your hand?
+SVar:Hand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | NoShuffle$ True
+SVar:RestBottom:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | NoShuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$xPaid
+Oracle:Reveal the top X plus one cards of your library. Choose a creature card and/or a land card from among them. Put those cards into your hand and the rest on the bottom of your library in a random order. If X is 5 or more, instead put the chosen cards onto the battlefield or into your hand and the rest on the bottom of your library in a random order.

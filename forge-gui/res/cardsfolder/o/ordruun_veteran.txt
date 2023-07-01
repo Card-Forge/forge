@@ -1,0 +1,7 @@
+Name:Ordruun Veteran
+ManaCost:2 R W
+Types:Creature Minotaur Soldier
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gains double strike until end of turn.
+SVar:TrigBattalionPump:DB$ Pump | KW$ Double Strike | Defined$ Self
+Oracle:Battalion — Whenever Ordruun Veteran and at least two other creatures attack, Ordruun Veteran gains double strike until end of turn. (It deals both first-strike and regular combat damage.)

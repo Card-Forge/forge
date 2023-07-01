@@ -1,0 +1,8 @@
+Name:Sages of the Anima
+ManaCost:3 G U
+Types:Creature Elf Wizard
+PT:3/4
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
+SVar:Dig:DB$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature
+AI:RemoveDeck:Random
+Oracle:If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.

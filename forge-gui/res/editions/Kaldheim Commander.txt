@@ -1,0 +1,140 @@
+[metadata]
+Code=KHC
+Date=2021-02-05
+Name=Kaldheim Commander
+Type=Commander
+ScryfallCode=KHC
+
+[cards]
+1 M Lathril, Blade of the Elves @Caroline Gariba
+2 M Ranar the Ever-Watchful @Kieran Yanner
+3 R Cosmic Intervention @Alexander Mokhov
+4 R Hero of Bretagard @Heonhwa Choe
+5 R Stoic Farmer @Svetlin Velinov
+6 R Sage of the Beyond @Cristi Balanescu
+7 R Spectral Deluge @Kieran Yanner
+8 R Tales of the Ancestors @Colin Boyer
+9 R Pact of the Serpent @Donato Giancola
+10 R Ruthless Winnower @Zoltan Boros
+11 R Serpent's Soul-Jar @Dan Scott
+12 R Bounty of Skemfar @Colin Boyer
+13 R Crown of Skemfar @Jason Felix
+14 R Wolverine Riders @Jesper Ejsing
+15 R Elderfang Venom @Alessandra Pisano
+16 R Ethereal Valkyrie @Daarken
+17 R Angel of Finality @Howard Lyon
+18 M Angel of Serenity @Aleksi Briclot
+19 U Banishing Light @Willian Murai
+20 R Cleansing Nova @Noah Bradley
+21 U Cloudgoat Ranger @Adam Rex
+22 R Eerie Interlude @Svetlin Velinov
+23 U Evangel of Heliod @Nils Hamm
+24 U Flickerwisp @Jeremy Enecio
+25 R Geist-Honored Monk @Clint Cearley
+26 U Ghostly Prison @Daarken
+27 U Goldnight Commander @Chris Rahn
+28 C Kor Cartographer @Ryan Pancoast
+29 R Marshal's Anthem @Matt Stewart
+30 U Momentary Blink @Evan Shipard
+31 R Restoration Angel @Jake Murray
+32 U Return to Dust @Wayne Reynolds
+33 R Storm Herd @Jim Nelson
+34 M Sun Titan @Todd Lockwood
+35 U Wall of Omens @James Paick
+36 M Arcane Artisan @Tommy Arnold
+37 R Curse of the Swine @James Ryman
+38 R Day of the Dragons @Matthew D. Wilson
+39 C Ghostly Flicker @Raymond Swanland
+40 M Inspired Sphinx @Jesper Ejsing
+41 C Mist Raven @John Avon
+42 U Mulldrifter @Eric Fortune
+43 C Sea Gate Oracle @Daniel Ljunggren
+44 R Synthetic Destiny @Dave Kendall
+45 U Whirler Rogue @Winona Nelson
+46 U Windfall @Scott Murphy
+47 U Ambition's Cost @Zezhou Chen
+48 C Eyeblight Cullers @Randy Vargas
+49 U Eyeblight Massacre @Igor Kieryluk
+50 U Lys Alana Scarblade @Christopher Moeller
+51 U Miara, Thorn of the Glade @Johannes Voss
+52 U Pride of the Perfect @Lie Setiawan
+53 U Prowess of the Fair @Jeremy Jarvis
+54 R Beast Whisperer @Matt Stewart
+55 R Cultivator of Blades @Bastien L. Deharme
+56 R Dwynen, Gilt-Leaf Daen @Johannes Voss
+57 R Elvish Archdruid @Raymond Swanland
+58 C Elvish Mystic @Wesley Burt
+59 U Elvish Promenade @Steve Ellis
+60 C Elvish Rejuvenator @Winona Nelson
+61 R End-Raze Forerunners @Mathias Kollros
+62 C Farhaven Elf @Brandon Kitkouski
+63 R Harvest Season @Shreya Shetty
+64 R Imperious Perfect @Scott M. Fischer
+65 U Jagged-Scar Archers @Paolo Parente
+66 U Llanowar Tribe @Scott Murphy
+67 C Lys Alana Huntmaster @Pete Venters
+68 R Marwyn, the Nurturer @Chris Rahn
+69 R Masked Admirers @Eric Fortune
+70 U Nullmage Shepherd @Campbell White
+71 U Numa, Joraga Chieftain @Kieran Yanner
+72 U Reclamation Sage @Christopher Moeller
+73 R Rhys the Exiled @Steve Prescott
+74 C Springbloom Druid @Randy Gallegos
+75 U Sylvan Messenger @PINDURSKI
+76 C Timberwatch Elf @Yohann Schepacz
+77 U Voice of Many @Greg Staples
+78 R Voice of the Woods @Nestor Ossandon Leal
+79 U Wirewood Channeler @Alan Pollack
+80 C Wood Elves @Josh Hass
+81 U Abomination of Llanowar @Vincent Proce
+82 R Brago, King Eternal @Karla Ortiz
+83 R Casualties of War @Tomasz Jedruszek
+84 U Cloudblazer @Dan Scott
+85 U Empyrean Eagle @Ryan Yee
+86 U Golgari Findbroker @Bram Sels
+87 U Migratory Route @Winona Nelson
+88 U Mistmeadow Witch @Greg Staples
+89 U Moldervine Reclamation @Antonio José Manzanedo
+90 U Poison-Tip Archer @Dmitry Burmak
+91 U Putrefy @Clint Cearley
+92 U Shaman of the Pack @Dan Scott
+93 U Soulherder @Seb McKinnon
+94 U Thunderclap Wyvern @Jason Felix
+95 U Twinblade Assassins @Campbell White
+96 C Arcane Signet @Dan Scott
+97 U Azorius Signet @Raoul Vitale
+98 U Burnished Hart @Yeong-Hao Han
+99 C Commander's Sphere @Ryan Alexander Lee
+100 C Marble Diamond @Lindsey Look
+101 U Meteor Golem @Lake Hurwitz
+102 C Mind Stone @Adam Rex
+103 C Sky Diamond @Lindsey Look
+104 U Sol Ring @Mike Bierek
+105 U Swiftfoot Boots @Svetlin Velinov
+106 U Azorius Chancery @John Avon
+107 C Azorius Guildgate @Drew Baker
+108 C Command Tower @Evan Shipard
+109 U Cryptic Caves @Sung Choi
+110 U Foul Orchard @Yeong-Hao Han
+111 C Golgari Guildgate @Eytan Zana
+112 U Golgari Rot Farm @John Avon
+113 C Jungle Hollow @Eytan Zana
+114 C Meandering River @Cliff Childs
+115 U Myriad Landscape @Richard Wright
+116 C Opal Palace @Andreas Rocha
+117 C Path of Ancestry @Alayna Danner
+118 U Sejiri Refuge @Ryan Pancoast
+119 C Tranquil Cove @John Avon
+
+[tokens]
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+g_1_1_elf_warrior
+g_2_2_boar
+g_7_7_elemental_trample
+r_5_5_dragon_flying
+w_1_1_bird_flying
+w_1_1_kithkin_soldier
+w_1_1_soldier
+w_1_1_pegasus_flying
+w_1_1_spirit_flying

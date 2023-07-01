@@ -1,0 +1,7 @@
+Name:Radiant Essence
+ManaCost:1 G W
+Types:Creature Spirit
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | IsPresent$ Creature.OppCtrl+Black | Description$ CARDNAME gets +1/+2 as long as an opponent controls a black permanent.
+AI:RemoveDeck:Random
+Oracle:Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.

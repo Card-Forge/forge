@@ -1,0 +1,6 @@
+Name:Moonglove Winnower
+ManaCost:3 B
+Types:Creature Elf Rogue
+PT:2/3
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

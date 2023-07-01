@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Jabba the Hutt 4
+Title=Jabba the Hutt
+Difficulty=very hard
+Description=UBG Infect deck
+Icon=Jabba the Hutt.jpg
+Deck Type=constructed
+[main]
+3 Bayou
+4 Tropical Island
+3 Misty Rainforest
+3 Polluted Delta
+3 Verdant Catacombs
+1 Mox Emerald
+1 Mox Sapphire
+1 Mox Jet
+1 Mox Ruby
+1 Mox Pearl
+1 Ancestral Recall
+1 Time Walk
+4 Blighted Agent
+4 Glistener Elf
+4 Plague Stinger
+3 Phyrexian Crusader
+3 Hand of the Praetors
+3 Distortion Strike
+4 Invigorate
+4 Rancor
+1 Bonesplitter
+1 Groundswell
+1 Nature's Claim
+2 Go for the Throat
+2 Terror
+1 Corrupted Conscience
+[sideboard]

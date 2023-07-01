@@ -1,0 +1,9 @@
+Name:Iizuka the Ruthless
+ManaCost:3 R R
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Bushido:2
+A:AB$ PumpAll | Cost$ 2 R Sac<1/Samurai> | ValidCards$ Creature.Samurai+YouCtrl | KW$ Double Strike | SpellDescription$ Samurai creatures you control gain double strike until end of turn.
+SVar:AIPreference:SacCost$Creature.Samurai+token,Creature.Samurai+cmcLE3
+AI:RemoveDeck:All
+Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{2}{R}, Sacrifice a Samurai: Samurai creatures you control gain double strike until end of turn.

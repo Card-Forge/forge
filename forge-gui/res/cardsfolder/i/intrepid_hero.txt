@@ -1,0 +1,6 @@
+Name:Intrepid Hero
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+Oracle:{T}: Destroy target creature with power 4 or greater.

@@ -1,0 +1,7 @@
+Name:Anowon, the Ruin Sage
+ManaCost:3 B B
+Types:Legendary Creature Vampire Shaman
+PT:4/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, each player sacrifices a non-Vampire creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.nonVampire | Defined$ Player
+Oracle:At the beginning of your upkeep, each player sacrifices a non-Vampire creature.

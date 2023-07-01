@@ -1,0 +1,5 @@
+Name:Bronze Sable
+ManaCost:2
+Types:Artifact Creature Sable
+PT:2/1
+Oracle:

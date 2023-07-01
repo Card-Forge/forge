@@ -1,0 +1,14 @@
+Name:Gisela, Blade of Goldnight
+ManaCost:4 R W W
+Types:Legendary Creature Angel
+PT:5/5
+K:Flying
+K:First Strike
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Opponent,Permanent.OppCtrl | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfUp
+SVar:PlayMain1:TRUE
+Oracle:Flying, first strike\nIf a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.\nIf a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.

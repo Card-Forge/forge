@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Starswirl the Bearded 2
+Title=Starswirl the Bearded
+Difficulty=medium
+Description=Esper Midrange deck with various Dominaria legends and sagas, Helm of the Host, and Heroes' Podium.
+Deck Type=constructed
+Icon=Starswirl the Bearded.jpg
+[main]
+2 Arvad the Cursed
+1 Aryel, Knight of Windgrace
+1 Baird, Steward of Argive
+2 Benalish Honor Guard
+2 Blackblade Reforged
+3 Blessing of Belzenlok
+1 Chainer's Torment
+3 D'Avenant Trapper
+2 Danitha Capashen, Paragon
+3 Drowned Catacomb
+3 Glacial Fortress
+1 Helm of the Host
+1 Heroes' Podium
+3 Island|DOM
+3 Isolated Chapel
+1 Josu Vess, Lich Knight
+1 Lyra Dawnbringer
+1 Mox Amber
+1 Niambi, Faithful Healer
+2 On Serra's Wings
+7 Plains|DOM
+1 Shalai, Voice of Plenty
+5 Swamp|DOM
+1 Teferi, Hero of Dominaria
+1 Teferi, Timebender
+1 Teshar, Ancestor's Apostle
+2 The Eldest Reborn
+2 Triumph of Gerrard
+1 Weatherlight
+1 Yargle, Glutton of Urborg
+1 Zahid, Djinn of the Lamp
+[sideboard]

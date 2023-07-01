@@ -1,0 +1,6 @@
+Name:Rampaging Cyclops
+ManaCost:3 R
+Types:Creature Cyclops
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -2 | IsPresent$ Creature.blockingSource | PresentCompare$ GE2 | Description$ CARDNAME gets -2/-0 as long as two or more creatures are blocking it.
+Oracle:Rampaging Cyclops gets -2/-0 as long as two or more creatures are blocking it.

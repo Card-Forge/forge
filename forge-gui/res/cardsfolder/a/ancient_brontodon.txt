@@ -1,0 +1,5 @@
+Name:Ancient Brontodon
+ManaCost:6 G G
+Types:Creature Dinosaur
+PT:9/9
+Oracle:

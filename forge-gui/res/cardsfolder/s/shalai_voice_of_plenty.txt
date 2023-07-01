@@ -1,0 +1,9 @@
+Name:Shalai, Voice of Plenty
+ManaCost:3 W
+Types:Legendary Creature Angel
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ You,Planeswalker.YouCtrl,Creature.YouCtrl+Other | AddKeyword$ Hexproof | Description$ You, planeswalkers you control, and other creatures you control have hexproof.
+A:AB$ PutCounterAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters
+Oracle:Flying\nYou, planeswalkers you control, and other creatures you control have hexproof.\n{4}{G}{G}: Put a +1/+1 counter on each creature you control.

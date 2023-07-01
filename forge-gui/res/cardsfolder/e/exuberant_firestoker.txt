@@ -1,0 +1,8 @@
+Name:Exuberant Firestoker
+ManaCost:2 R
+Types:Creature Human Druid Shaman
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Creature.powerGE5+YouCtrl | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, if you control a creature with power 5 or greater, you may have CARDNAME deal 2 damage to target player or planeswalker.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 2
+Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may have Exuberant Firestoker deal 2 damage to target player or planeswalker.\n{T}: Add {C}.

@@ -1,0 +1,6 @@
+Name:Decanter of Endless Water
+ManaCost:3
+Types:Artifact
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:You have no maximum hand size.\n{T}: Add one mana of any color.

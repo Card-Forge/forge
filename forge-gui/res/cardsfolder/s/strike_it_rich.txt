@@ -1,0 +1,7 @@
+Name:Strike It Rich
+ManaCost:R
+Types:Sorcery
+K:Flashback:2 R
+A:SP$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Token|Sacrifice
+Oracle:Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

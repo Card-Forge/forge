@@ -1,0 +1,6 @@
+Name:Zealot of the God-Pharaoh
+ManaCost:3 R
+Types:Creature Minotaur Archer
+PT:4/3
+A:AB$ DealDamage | Cost$ 4 R | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target opponent or planeswalker.
+Oracle:{4}{R}: Zealot of the God-Pharaoh deals 2 damage to target opponent or planeswalker.

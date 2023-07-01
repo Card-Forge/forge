@@ -1,0 +1,7 @@
+Name:Guenhwyvar
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Cat
+PT:4/1
+K:Trample
+Oracle:Trample

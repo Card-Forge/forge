@@ -1,0 +1,10 @@
+Name:Crowd of Cinders
+ManaCost:3 B
+Types:Creature Elemental
+PT:*/*
+K:Fear
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of black permanents you control.
+SVar:X:Count$Valid Permanent.Black+YouCtrl
+SVar:BuffedBy:Permanent.Black
+SVar:NoZeroToughnessAI:True
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nCrowd of Cinders's power and toughness are each equal to the number of black permanents you control.

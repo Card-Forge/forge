@@ -1,0 +1,7 @@
+Name:Fallen Ferromancer
+ManaCost:3 R
+Types:Creature Phyrexian Human Shaman
+PT:1/1
+K:Infect
+A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{1}{R}, {T}: Fallen Ferromancer deals 1 damage to any target.

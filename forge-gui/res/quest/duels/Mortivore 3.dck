@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mortivore 3
+Title=Mortivore
+Difficulty=hard
+Description=BG Mortivore deck with Mesmeric Orb, Splinterfright and Sewer Nemesis
+Icon=Mortivore.jpg
+Deck Type=constructed
+[main]
+4 Dryad Arbor|FUT
+6 Forest|M10
+7 Swamp|PO2
+4 Bayou
+1 Mox Jet
+1 Mox Emerald
+4 Mesmeric Orb|MRD
+4 Sewer Nemesis
+4 Splinterfright|ISD
+1 Geth, Lord of the Vault
+1 Horrifying Revelation
+1 Ghoulcaller's Bell
+3 Shriekmaw|LRW
+2 Golgari Grave-Troll|RAV
+4 Bonehoard|MBS
+4 Lord of Extinction|ARB
+4 Mortivore|ODY
+1 Lhurgoyf
+1 Exoskeletal Armor
+1 Avatar of Woe
+1 Necrotic Ooze
+1 Brawn|COM
+[sideboard]

@@ -1,0 +1,9 @@
+Name:Ember Swallower
+ManaCost:2 R R
+Types:Creature Elemental
+PT:4/5
+K:Monstrosity:3:5 R R
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes monstrous, each player sacrifices three lands.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Land | Amount$ 3
+DeckHas:Ability$Counters
+Oracle:{5}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Ember Swallower becomes monstrous, each player sacrifices three lands.

@@ -1,0 +1,6 @@
+Name:Null Brooch
+ManaCost:4
+Types:Artifact
+A:AB$ Counter | Cost$ 2 T Discard<0/Hand> | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | AILogic$ NullBrooch | SpellDescription$ Counter target noncreature spell.
+AI:RemoveDeck:Random
+Oracle:{2}, {T}, Discard your hand: Counter target noncreature spell.

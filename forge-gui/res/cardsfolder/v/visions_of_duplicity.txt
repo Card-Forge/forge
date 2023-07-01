@@ -1,0 +1,9 @@
+Name:Visions of Duplicity
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ExchangeControl | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | StackDescription$ SpellDescription | SpellDescription$ Exchange control of two target creatures you don't control.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | GainControl$ True | Destination$ Battlefield
+K:Flashback:8 U U:ReduceCost$ X:This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.
+SVar:X:Count$ValidBattlefield,Command Card.IsCommander+YouOwn$GreatestCMC
+AI:RemoveDeck:All
+Oracle:Exchange control of two target creatures you don't control.\nFlashback {8}{U}{U}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

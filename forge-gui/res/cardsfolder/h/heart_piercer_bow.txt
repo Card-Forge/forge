@@ -1,0 +1,10 @@
+Name:Heart-Piercer Bow
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, CARDNAME deals 1 damage to target creature defending player controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ 1
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHints:Name$Renowned Weaponsmith
+Oracle:Whenever equipped creature attacks, Heart-Piercer Bow deals 1 damage to target creature defending player controls.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,7 @@
+Name:Waveskimmer Aven
+ManaCost:2 G W U
+Types:Creature Bird Soldier
+PT:2/4
+K:Flying
+K:Exalted
+Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

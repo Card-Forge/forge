@@ -1,0 +1,21 @@
+[metadata]
+Title=The Wilds: Maraleaf Forest
+Difficulty=easy
+Description=Both fox and rider hunger for battle.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 The Wilds: Maraleaf Forest
+[Main]
+4 Fae of Wishes|ELD|1
+12 Forest|ELD|1
+12 Island|ELD|3
+4 Maraleaf Pixie|ELD
+4 Maraleaf Rider|ELD
+4 Mystical Dispute|ELD
+4 Sage of the Falls|ELD
+4 Thornwood Falls|ELD
+4 Thunderous Snapper|ELD
+4 Wildborn Preserver|ELD|1
+4 Wildwood Tracker|ELD
+[Sideboard]
+4 Return to Nature|ELD

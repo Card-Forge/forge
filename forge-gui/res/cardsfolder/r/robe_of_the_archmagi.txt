@@ -1,0 +1,10 @@
+Name:Robe of the Archmagi
+ManaCost:2 U
+Types:Artifact Equipment
+K:Equip:1:Creature.YouCtrl+Shaman,Creature.YouCtrl+Warlock,Creature.YouCtrl+Wizard:Shaman, Warlock, or Wizard
+K:Equip:4
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature deals combat damage to a player, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Shaman|Warlock|Wizard
+Oracle:Whenever equipped creature deals combat damage to a player, draw that many cards.\nEquip {4}\nEquip Shaman, Warlock, or Wizard {1}

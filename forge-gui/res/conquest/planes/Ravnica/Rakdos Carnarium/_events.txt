@@ -1,0 +1,9 @@
+Name:Rakdos Hellbent|Deck:Rakdos Hellbent.dck|Variant:None|Avatar:Jagged Poppet|Desc:
+Name:Rakdos Unleash|Deck:Rakdos Unleash.dck|Variant:None|Avatar:Hellhole Flailer|Desc:
+Name:Rakdos Destruction|Deck:Rakdos Destruction.dck|Variant:None|Avatar:Helldozer|Desc:
+Name:Exava, Rakdos Blood Witch|Deck:Exava, Rakdos Blood Witch.dck|Variant:Commander|Avatar:Exava, Rakdos Blood Witch|Desc:
+Name:Lyzolda, the Blood Witch|Deck:Lyzolda, the Blood Witch.dck|Variant:Commander|Avatar:Lyzolda, the Blood Witch|Desc:
+Name:Rakdos the Defiler|Deck:Rakdos the Defiler.dck|Variant:Commander|Avatar:Rakdos the Defiler|Desc:
+Name:Rakdos, Lord of Riots|Deck:Rakdos, Lord of Riots.dck|Variant:Commander|Avatar:Rakdos, Lord of Riots|Desc:
+Name:Shattergang Brothers|Deck:Shattergang Brothers.dck|Variant:Commander|Avatar:Shattergang Brothers|Desc:
+Name:Lyzolda, the Blood Witch|Deck:Lyzolda, the Blood Witch Vanguard.dck|Variant:Vanguard|Avatar:Lyzolda, the Blood Witch|Desc:

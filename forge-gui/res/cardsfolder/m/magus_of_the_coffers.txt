@@ -1,0 +1,7 @@
+Name:Magus of the Coffers
+ManaCost:4 B
+Types:Creature Human Wizard
+PT:4/4
+A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each Swamp you control.
+SVar:X:Count$Valid Swamp.YouCtrl
+Oracle:{2}, {T}: Add {B} for each Swamp you control.

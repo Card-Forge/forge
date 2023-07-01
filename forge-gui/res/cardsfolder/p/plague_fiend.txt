@@ -1,0 +1,7 @@
+Name:Plague Fiend
+ManaCost:1 B
+Types:Creature Insect
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature unless its controller pays {2}.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | UnlessCost$ 2 | UnlessPayer$ TriggeredTargetController
+Oracle:Whenever Plague Fiend deals combat damage to a creature, destroy that creature unless its controller pays {2}.

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Battle Surge
+Description=Use blue stalling tactics to hold off the opposition. Then lay down a host of red creatures without summoning sickness to mount a decisive attack. "Battle Surge" will turn the tide of war in your favor.
+Deck Type=constructed
+Set=ULG
+Image=battle_surge.jpg
+[main]
+3 Arc Lightning|USG
+2 Curfew|USG
+2 Fatigue|UDS
+1 Ghitu War Cry|ULG
+2 Goblin Berserker|UDS
+1 Goblin Marshal|UDS
+2 Goblin War Buggy|USG
+9 Island|6ED
+1 Jagged Lightning|USG
+2 Keldon Champion|UDS
+3 Kingfisher|UDS
+1 Mark of Fury|UDS
+14 Mountain|6ED
+1 Parch|ULG
+1 Raven Familiar|ULG
+2 Thieving Magpie|UDS
+1 Thundering Giant|USG
+1 Trumpet Blast|UDS
+1 Urza's Incubator|UDS
+2 Viashino Cutthroat|ULG
+3 Viashino Sandscout|ULG
+4 Wild Colos|UDS
+1 AEther Sting|UDS
+[sideboard]

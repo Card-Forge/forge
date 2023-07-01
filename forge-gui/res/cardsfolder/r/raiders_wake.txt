@@ -1,0 +1,9 @@
+Name:Raiders' Wake
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, that player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ RaidTest | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Whenever an opponent discards a card, that player loses 2 life.\nRaid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.

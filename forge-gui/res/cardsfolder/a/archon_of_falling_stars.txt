@@ -1,0 +1,8 @@
+Name:Archon of Falling Stars
+ManaCost:4 W W
+Types:Creature Archon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may return target enchantment card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Enchantment.YouOwn
+Oracle:Flying\nWhen Archon of Falling Stars dies, you may return target enchantment card from your graveyard to the battlefield.

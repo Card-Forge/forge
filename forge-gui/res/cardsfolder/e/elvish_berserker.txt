@@ -1,0 +1,8 @@
+Name:Elvish Berserker
+ManaCost:G
+Types:Creature Elf Berserker
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker
+Oracle:Whenever Elvish Berserker becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.

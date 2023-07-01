@@ -1,0 +1,7 @@
+Name:Edgewall Innkeeper
+ManaCost:G
+Types:Creature Human Peasant
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Creature.AdventureCard | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell that has an Adventure, draw a card. (It doesn't need to have gone on the adventure first.)
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever you cast a creature spell that has an Adventure, draw a card. (It doesn't need to have gone on the adventure first.)

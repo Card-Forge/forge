@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Cloud Spirit
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Mono blue aggro
+Name=CloudSpirit2
+[Main]
+4 Cloud Spirit|STH
+3 Counterspell|TMP
+3 Curiosity|EXO
+4 Cursed Scroll|TMP
+2 Equilibrium|EXO
+2 Island|TMP|1
+7 Island|TMP|2
+3 Island|TMP|3
+6 Island|TMP|4
+4 Legacy's Allure|TMP
+4 Propaganda|TMP
+4 Spindrift Drake|STH
+2 Thalakos Mistfolk|TMP
+4 Thalakos Scout|EXO
+2 Wall of Tears|STH
+4 Wasteland|TMP
+2 Wind Drake|TMP

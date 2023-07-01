@@ -1,0 +1,6 @@
+Name:Elvish Herder
+ManaCost:G
+Types:Creature Elf
+PT:1/1
+A:AB$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
+Oracle:{G}: Target creature gains trample until end of turn.

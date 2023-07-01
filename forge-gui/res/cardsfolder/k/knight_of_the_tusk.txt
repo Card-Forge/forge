@@ -1,0 +1,6 @@
+Name:Knight of the Tusk
+ManaCost:4 W W
+Types:Creature Human Knight
+PT:3/7
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

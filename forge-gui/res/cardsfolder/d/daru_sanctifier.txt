@@ -1,0 +1,8 @@
+Name:Daru Sanctifier
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:1/4
+K:Morph:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
+Oracle:Morph {1}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Daru Sanctifier is turned face up, destroy target enchantment.

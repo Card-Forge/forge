@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (SNC)
+Type:Archived
+Subtype:Standard
+Effective:2022-04-28
+Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO, SNC
+Banned:Alrund's Epiphany; Divide by Zero; Faceless Haven; Omnath, Locus of Creation

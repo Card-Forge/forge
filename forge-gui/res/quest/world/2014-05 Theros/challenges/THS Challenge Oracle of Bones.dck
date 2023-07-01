@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Oracle of Bones
+OpponentName=The Oracles
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nykthos, Shrine to Nyx
+HumanExtras=
+[metadata]
+Name=THS Challenge: Oracle of Bones
+Title=The Oracles
+Difficulty=easy
+Description=It's only a gambling problem if you're losing.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+10 Boulderfall|THS
+30 Mountain|THS|1
+20 Oracle of Bones|BNG

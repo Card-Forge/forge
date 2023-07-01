@@ -1,0 +1,9 @@
+Name:Mogg Squad
+ManaCost:1 R
+Types:Creature Goblin
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each other creature on the battlefield.
+SVar:X:Count$Valid Creature.Other
+SVar:AntiBuffedBy:Creature
+AI:RemoveDeck:All
+Oracle:Mogg Squad gets -1/-1 for each other creature on the battlefield.

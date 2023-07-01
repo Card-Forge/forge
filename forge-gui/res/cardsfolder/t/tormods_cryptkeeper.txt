@@ -1,0 +1,8 @@
+Name:Tormod's Cryptkeeper
+ManaCost:3
+Types:Artifact Creature Golem
+PT:3/2
+K:Vigilance
+A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile all cards from target player's graveyard.
+AI:RemoveDeck:Random
+Oracle:Vigilance\n{T}, Sacrifice Tormod's Cryptkeeper: Exile all cards from target player's graveyard.

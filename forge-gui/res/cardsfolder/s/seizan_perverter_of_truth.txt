@@ -1,0 +1,8 @@
+Name:Seizan, Perverter of Truth
+ManaCost:3 B B
+Types:Legendary Creature Demon Spirit
+PT:6/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 2
+Oracle:At the beginning of each player's upkeep, that player loses 2 life and draws two cards.

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Boromir 2
+Title=Boromir
+Difficulty=medium
+Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
+Icon=Boromir.jpg
+Deck Type=constructed
+[main]
+22 Forest|ISD
+4 Elvish Piper
+4 Quicksilver Amulet
+4 Harmonize
+4 Rampant Growth
+2 Wall of Blossoms
+2 Vine Trellis
+2 Elvish Visionary
+1 Carven Caryatid
+1 Wistful Selkie
+1 Naturalize
+3 Nourish
+1 Benthic Behemoth
+1 Body of Jukai
+1 Godsire
+1 Goliath Spider
+1 Scaled Wurm
+1 Skeletal Wurm
+1 Symbiotic Wurm
+1 Teeka's Dragon
+1 Zodiac Dragon
+1 Tidal Kraken
+[sideboard]

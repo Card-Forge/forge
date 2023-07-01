@@ -1,0 +1,5 @@
+Name:Queen's Bay Soldier
+ManaCost:1 B
+Types:Creature Vampire Soldier
+PT:2/2
+Oracle:

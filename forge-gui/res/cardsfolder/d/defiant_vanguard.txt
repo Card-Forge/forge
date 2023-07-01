@@ -1,0 +1,9 @@
+Name:Defiant Vanguard
+ManaCost:2 W
+Types:Creature Human Rebel
+PT:2/2
+A:AB$ ChangeZone | Cost$ 5 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE4 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 4 or less, put it onto the battlefield, then shuffle.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ When CARDNAME blocks, at end of combat, destroy it and all creatures it blocked this turn.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME and all creatures it blocked this turn.
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Card.Self,Card.blockedBySourceThisTurn
+Oracle:When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.\n{5}, {T}: Search your library for a Rebel permanent card with mana value 4 or less, put it onto the battlefield, then shuffle.

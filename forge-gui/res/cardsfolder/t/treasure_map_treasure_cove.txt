@@ -1,0 +1,22 @@
+Name:Treasure Map
+ManaCost:2
+Types:Artifact
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SubAbility$ DBLandmark | SpellDescription$ Scry 1. Put a landmark counter on CARDNAME. Then if there are three or more landmark counters on it, remove those counters, transform CARDNAME, and create three Treasure tokens.
+SVar:DBLandmark:DB$ PutCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ XMarksTheSpot | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBTreasureTokens
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
+DeckHas:Ability$Token
+AlternateMode:DoubleFaced
+Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+
+ALTERNATE
+
+Name:Treasure Cove
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ T Sac<1/Treasure> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:(Transforms from Treasure Map.)\n{T}: Add {C}.\n{T}, Sacrifice a Treasure: Draw a card.

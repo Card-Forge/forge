@@ -1,0 +1,39 @@
+[metadata]
+Code=YNEO
+Date=2022-03-17
+Name=Alchemy: Kamigawa
+Type=Online
+Booster=1 UncommonRareMythic, 8 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
+ScryfallCode=YNEO
+
+[cards]
+1 U Dragonfly Pilot @Jakub Kasper
+2 R Inchblade Companion @Bartek Fedyczak
+3 R Kami of Transmutation @Mirko Failoni
+4 R Fragment Reality @Bastien Grivet
+5 M Mothrider Cavalry @Konstantin Porubov
+6 U Experimental Pilot @Slawomir Maniak
+7 R Holographic Double @Tyler Walpole
+8 R Futurist Spellthief @Michele Giorgi
+9 R Semblance Scanner @Leonardo Santanna
+10 R Better Offer @Dominik Mayer
+11 M Saiba Syphoner @Bartek Fedyczak
+12 U Painful Bond @Jodie Muir
+13 R Swarm Saboteur @Alexey Kruglov
+14 R Kami of Mourning @Josh Hass
+15 R Undercity Plunder @Mirko Failoni
+16 R Soul Servitude @Kim Sokol
+17 M Consuming Oni @Igor Krstic
+18 U Artillery Enthusiast @Anthony Devine
+19 R Foundry Beetle @Jamroz Gary
+20 R Junkyard Scrapper @Wayne Wu
+21 R Bellowsbreath Ogre @Konstantin Porubov
+22 R Molten Impact @Jorge Jacinto
+23 M Forgeborn Phoenix @Devin Platts
+24 U Kami of Bamboo Groves @Nicholas Gregory
+25 R Chronicler of Worship @Armand Baltazar
+26 R Boseiju Pathlighter @Bastien Grivet
+27 R Jukai Liberator @Michele Giorgi
+28 R Runaway Growth @Mauricio Calle
+29 M Forceful Cultivator @Tom Babbey
+30 R Imperial Blademaster @Miguel Mercado

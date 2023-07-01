@@ -1,0 +1,6 @@
+Name:Palace Guard
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
+Oracle:Palace Guard can block any number of creatures.

@@ -1,0 +1,7 @@
+Name:Varragoth, Bloodsky Sire
+ManaCost:2 B
+Types:Legendary Creature Demon Rogue
+PT:2/3
+K:Deathtouch
+A:AB$ ChangeZone | Cost$ 1 B | ValidTgts$ Player | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Boast$ True | Chooser$ Targeted | SpellDescription$ Target player searches their library for a card, then shuffles their library and puts that card on top of it.
+Oracle:Deathtouch\nBoast — {1}{B}: Target player searches their library for a card, then shuffles and puts that card on top. (Activate only if this creature attacked this turn and only once each turn.)

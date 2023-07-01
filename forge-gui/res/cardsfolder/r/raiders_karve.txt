@@ -1,0 +1,8 @@
+Name:Raiders' Karve
+ManaCost:3
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ForceRevealToController$ True | Optional$ True | PromptToSkipOptionalAbility$ True | OptionalAbilityPrompt$ Would you like to put the land onto the battlefield tapped? | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | LibraryPosition2$ 0
+K:Crew:3
+Oracle:Whenever Raiders' Karve attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

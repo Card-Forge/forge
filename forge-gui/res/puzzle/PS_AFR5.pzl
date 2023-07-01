@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Adventures in the Forgotten Realms #05
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/09/183.-AFR5-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You have not ventured into the dungeon yet this game. Your opponent has seven lands (all tapped). The opponent's Bloodline Pretender is naming "Bird".
+[state]
+humanlife=6
+ailife=17
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Nadaar, Selfless Paladin;Kick in the Door;Omen of the Forge;Irreverent Revelers
+humanbattlefield=Delver's Torch;Gloom Stalker;Planar Ally;Tiger-Tribe Hunter;Mountain;Mountain;Mountain;Mountain;Plains;Plains;Plains
+aibattlefield=Roving Keep;Bloodline Pretender|ChosenType:Bird|Counters:P1P1=1|NoETBTrigs;Arcanist's Owl;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped

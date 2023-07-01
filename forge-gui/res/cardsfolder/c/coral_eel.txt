@@ -1,0 +1,5 @@
+Name:Coral Eel
+ManaCost:1 U
+Types:Creature Fish
+PT:2/1
+Oracle:

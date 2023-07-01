@@ -1,0 +1,7 @@
+Name:Trusty Companion
+ManaCost:1 W
+Types:Creature Hyena
+PT:3/2
+K:Vigilance
+K:CARDNAME can't attack alone.
+Oracle:Vigilance\nTrusty Companion can't attack alone.

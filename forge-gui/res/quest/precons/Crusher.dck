@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Crusher
+Description=Before Urza can complete the Legacy and build the famed ship Weatherlight, the planeswalker must overcome some large obstacles: hulking worms and treefolk. They're big, they're bad, and they're worth the wait. Once you bring them out, "Crusher" is bound to leave your opponents hurting.
+Deck Type=constructed
+Set=ULG
+Image=crusher.jpg
+[main]
+1 Argothian Swine|USG
+2 Cradle Guard|USG
+1 Crosswinds|USG
+1 Defense of the Heart|ULG
+1 Disenchant|USG
+3 Drifting Meadow|USG
+1 Elvish Herder|USG
+1 Erase|ULG
+17 Forest|USG
+1 Gaea's Bounty|USG
+1 Gaea's Embrace|USG
+1 Gang of Elk|ULG
+2 Humble|USG
+1 Lone Wolf|ULG
+2 Mother of Runes|ULG
+2 Pacifism|USG
+4 Plains|USG
+1 Radiant's Judgment|ULG
+1 Rancor|ULG
+1 Silk Net|ULG
+3 Simian Grunts|ULG
+1 Symbiosis|USG
+1 Ticking Gnomes|ULG
+1 Treetop Village|ULG
+1 Weatherseed Treefolk|ULG
+1 Wing Snare|ULG
+2 Yavimaya Granger|ULG
+2 Yavimaya Scion|ULG
+3 Yavimaya Wurm|ULG
+[sideboard]

@@ -1,0 +1,15 @@
+[metadata]
+Code=PRNA
+Date=2019-01-25
+Name=Ravnica Allegiance Promos
+Type=Promo
+ScryfallCode=PRNA
+
+[cards]
+107 U Light Up the Stage @Dmitry Burmak
+178 C Growth Spiral @Seb McKinnon
+189 R Lavinia, Azorius Renegade @Matt Stewart
+192 U Mortify @Anthony Palumbo
+197 U Rakdos Firewheeler @Tyler Walpole
+207 R Simic Ascendancy @Simon Dominic
+232 U Gate Colossus @Milivoj Ćeran

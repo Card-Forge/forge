@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Cipher 2
+Title=Cipher
+Difficulty=medium
+Description=UB Cipher Extort Deck
+Icon=Cipher.jpg
+Deck Type=constructed
+[main]
+4 Basilica Screecher
+4 Call of the Nightwing
+1 Circu, Dimir Lobotomist
+2 Crypt Ghast
+4 Drowned Catacomb
+4 Hands of Binding
+4 Invisible Stalker
+6 Island
+3 Last Thoughts
+1 Midnight Recovery
+4 Polluted Delta
+1 Pontiff of Blight
+2 Stolen Identity
+5 Swamp
+2 Tablet of the Guilds
+2 Talrand, Sky Summoner
+4 Tormented Soul
+2 Undercity Plague
+4 Underground Sea
+1 Urborg, Tomb of Yawgmoth
+[sideboard]

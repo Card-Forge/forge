@@ -1,0 +1,6 @@
+Name:Trustworthy Scout
+ManaCost:1 W
+Types:Creature Human Scout
+PT:2/2
+A:AB$ ChangeZone | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedTrustworthy Scout | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Trustworthy Scout, reveal it, put it into your hand, then shuffle.
+Oracle:{1}{W}, Exile Trustworthy Scout from your graveyard: Search your library for a card named Trustworthy Scout, reveal it, put it into your hand, then shuffle.

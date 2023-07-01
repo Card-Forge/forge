@@ -1,0 +1,7 @@
+Name:Sun-Collared Raptor
+ManaCost:1 R
+Types:Creature Dinosaur
+PT:1/2
+K:Trample
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
+Oracle:Trample\n{2}{R}: Sun-Collared Raptor gets +3/+0 until end of turn.

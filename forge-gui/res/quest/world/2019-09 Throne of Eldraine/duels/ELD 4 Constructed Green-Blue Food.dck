@@ -1,0 +1,24 @@
+[metadata]
+Title=Green-Blue Food
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Green-Blue Food
+[Main]
+2 Beanstalk Giant|ELD|1
+4 Brazen Borrower|ELD|1
+4 Fabled Passage|ELD|1
+11 Forest|ELD|1
+4 Gilded Goose|ELD|1
+8 Island|ELD|3
+4 Lovestruck Beast|ELD|1
+4 Maraleaf Pixie|ELD
+4 Oko, Thief of Crowns|ELD|1
+4 Once Upon a Time|ELD|1
+4 Questing Beast|ELD|1
+2 The Great Henge|ELD|1
+[Sideboard]
+2 Castle Garenbrig|ELD|1
+1 Forest|ELD|1
+4 Wicked Wolf|ELD|1

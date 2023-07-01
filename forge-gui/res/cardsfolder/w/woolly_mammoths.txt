@@ -1,0 +1,7 @@
+Name:Woolly Mammoths
+ManaCost:1 G G
+Types:Creature Elephant
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | IsPresent$ Land.Snow+YouCtrl | Description$ CARDNAME has trample as long as you control a snow land.
+SVar:BuffedBy:Land.Snow
+Oracle:Woolly Mammoths has trample as long as you control a snow land.

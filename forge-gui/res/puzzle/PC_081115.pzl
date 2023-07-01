@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 081115 - Elementally My Dear
+URL:http://www.gatheringmagic.com/seanuy-081115-elementally-my-dear/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=Main2
+HumanLife=4
+AILife=16
+humanhand=Noxious Revival; Pit Fight; Briarhorn
+humangraveyard=
+humanlibrary=Wayfarer's Bauble 
+humanbattlefield=Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Forest|Set:ORI; Forest|Set:ORI|Tapped; Raging Ravine; Yavimaya Hollow; Sunflare Shaman; Generator Servant; Grinning Ignus; Flame-Kin War Scout; Flame Elemental; Cytoplast Root-Kin|Counters:P1P1=4; Hollowhenge Scavenger
+aibattlefield=Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Plains|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Wall of Glare; Wall of Denial; Moat; Indentured Djinn|Tapped; Holy Mantle|AttachedTo:420; Angel of Finality|Tapped|Id:420
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

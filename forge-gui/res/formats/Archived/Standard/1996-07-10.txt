@@ -1,0 +1,8 @@
+[format]
+Name:Type 2 (ALL)
+Type:Archived
+Subtype:Standard
+Effective:1996-07-10
+Sets:FEM, 4ED, ICE, CHR, HML, ALL
+Restricted:Balance; Black Vise; Ivory Tower; Land Tax; Zuran Orb
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Jeweled Bird; Mind Twist; Rebirth; Tempest Efreet; Timmerian Fiends

@@ -1,0 +1,5 @@
+Name:Setessa|Art:Temple of Plenty|Colors:GW
+Name:Akros|Art:Temple of Triumph|Colors:RW
+Name:The Underworld|Art:Temple of Silence|Colors:WB
+Name:Meletis|Art:Temple of Enlightenment|Colors:UW
+Name:Nyx|Art:Nykthos, Shrine to Nyx|Colors:WURBG

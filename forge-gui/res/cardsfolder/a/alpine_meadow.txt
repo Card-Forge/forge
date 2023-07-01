@@ -1,0 +1,5 @@
+Name:Alpine Meadow
+ManaCost:no cost
+Types:Snow Land Mountain Plains
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {R} or {W}.)\nAlpine Meadow enters the battlefield tapped.

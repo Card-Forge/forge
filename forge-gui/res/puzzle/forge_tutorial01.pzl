@@ -1,0 +1,42 @@
+[metadata]
+
+Name:Forge Puzzle Tutorial #01 - Bypass Operation
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Easy
+
+Description:Most Magic puzzles will require you to win by reducing your opponent's life total to zero. The most common way of doing this involves dealing damage to your opponent with one or more attacking creatures. As a result, you should look for any evasive abilities on the table - abilities like Flying, Shadow, Horsemanship, and even Trample can help you out.\n\nIn this puzzle, you have a clear source of damage in your hand. But you don't have the mana to cast it, and it wouldn't be enough to defeat your opponent by itself in any case. That means that you've got to attack in some way. With this in mind, how do you get past your opponent's blockers?
+[state]
+
+humanlife=7
+ailife=5
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Unstable Mutation|Set:4ED; Turn // Burn
+
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Knight of Dawn|Set:TMP; Vedalken Mastermind|Set:10E; Mausoleum Guard|Set:ISD; Silver Knight|Set:SCG; Giant Crab|Set:TMP; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Crumbling Vestige|Set:OGW
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=Sylvan Caryatid|Set:THS; Willbender|Set:LGN; Minotaur Sureshot|Set:AKH; Steamcore Weird|Set:GPT; Giant Spider|Set:8ED; Assembled Alphas|Set:EMN
+aiexile=
+aicommand=

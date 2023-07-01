@@ -1,0 +1,4 @@
+Name:Snow-Covered Swamp
+ManaCost:no cost
+Types:Basic Snow Land Swamp
+Oracle:({T}: Add {B}.)

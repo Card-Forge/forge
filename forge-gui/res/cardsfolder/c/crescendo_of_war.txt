@@ -1,0 +1,10 @@
+Name:Crescendo of War
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigStrife | TriggerDescription$ At the beginning of each upkeep, put a strife counter on CARDNAME.
+SVar:TrigStrife:DB$ PutCounter | Defined$ Self | CounterType$ STRIFE | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ X | Description$ Attacking creatures get +1/+0 for each strife counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.blocking+YouCtrl | AddPower$ X | Description$ Blocking creatures you control get +1/+0 for each strife counter on CARDNAME.
+SVar:X:Count$CardCounters.STRIFE
+AI:RemoveDeck:Random
+Oracle:At the beginning of each upkeep, put a strife counter on Crescendo of War.\nAttacking creatures get +1/+0 for each strife counter on Crescendo of War.\nBlocking creatures you control get +1/+0 for each strife counter on Crescendo of War.

@@ -1,0 +1,6 @@
+Name:Mystical Dispute
+ManaCost:2 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Spell.Blue | EffectZone$ All | Description$ CARDNAME costs {2} less to cast if it targets a blue spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
+Oracle:This spell costs {2} less to cast if it targets a blue spell.\nCounter target spell unless its controller pays {3}.

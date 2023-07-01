@@ -1,0 +1,6 @@
+Name:High Seas
+ManaCost:2 U
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Creature.Red,Creature.Green | Type$ Spell | Amount$ 1 | Description$ Red creature spells and green creature spells cost {1} more to cast.
+AI:RemoveDeck:Random
+Oracle:Red creature spells and green creature spells cost {1} more to cast.

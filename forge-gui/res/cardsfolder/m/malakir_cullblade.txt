@@ -1,0 +1,7 @@
+Name:Malakir Cullblade
+ManaCost:1 B
+Types:Creature Vampire Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever a creature an opponent controls dies, put a +1/+1 counter on Malakir Cullblade.

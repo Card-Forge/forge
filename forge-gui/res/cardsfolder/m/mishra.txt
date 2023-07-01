@@ -1,0 +1,8 @@
+Name:Mishra
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-3
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a creature you control would deal damage, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:Hand +0, life -3\nIf a creature you control would deal damage, it deals double that damage instead.

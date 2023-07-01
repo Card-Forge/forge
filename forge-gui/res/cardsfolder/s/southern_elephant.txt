@@ -1,0 +1,5 @@
+Name:Southern Elephant
+ManaCost:3 G
+Types:Creature Elephant
+PT:3/4
+Oracle:

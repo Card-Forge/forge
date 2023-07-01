@@ -1,0 +1,6 @@
+Name:Tawnos
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+3/-4
+S:Mode$ CastWithFlash | ValidCard$ Artifact,Creature,Enchantment | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast artifact, creature, and enchantment spells as though they had flash.
+Oracle:Hand +3, life -4\nYou may cast artifact, creature, and enchantment spells as though they had flash.

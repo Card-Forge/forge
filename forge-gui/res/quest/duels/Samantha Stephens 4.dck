@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Samantha Stephens 4
+Title=Samantha Stephens
+Difficulty=very hard
+Description=WU Painter's Servant - Grindstone combo
+Icon=Samantha Stephens.jpg
+Deck Type=constructed
+[main]
+2 Plains|SOM
+1 Karakas
+3 Island|SOM
+4 Tundra
+4 Flooded Strand
+4 Seachrome Coast
+4 Sejiri Refuge
+1 Ancestral Recall
+1 Time Walk
+4 Painter's Servant
+4 Grindstone
+4 Enlightened Tutor
+4 Fabricate
+4 Trinket Mage
+1 Grand Arbiter Augustin IV
+4 Swords to Plowshares
+4 Spell Snare
+4 Dispel
+3 Disperse
+[sideboard]

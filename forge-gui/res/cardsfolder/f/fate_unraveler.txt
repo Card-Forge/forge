@@ -1,0 +1,7 @@
+Name:Fate Unraveler
+ManaCost:3 B
+Types:Enchantment Creature Hag
+PT:3/4
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+Oracle:Whenever an opponent draws a card, Fate Unraveler deals 1 damage to that player.

@@ -1,0 +1,9 @@
+Name:Erkenbrand, Lord of Westfold
+ManaCost:3 R
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Human+Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME or another Human creature enters the battlefield under your control, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1
+SVar:BuffedBy:Human
+DeckHints:Type$Human
+Oracle:Whenever Erkenbrand, Lord of Westfold or another Human creature enters the battlefield under your control, creatures you control get +1/+0 until end of turn.

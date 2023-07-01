@@ -1,0 +1,12 @@
+[metadata]
+Code=PH17
+Date=2018-08-01
+Name=2017 Heroes of the Realm
+Alias=HTR17
+Type=Funny
+ScryfallCode=PH17
+
+[cards]
+1 M Diabolical Salvation @Zoltan Boros
+2 M Inzerva, Master of Insights @Filip Burburan
+3 M M'Odo, the Gnarled Oracle @Johann Bodin

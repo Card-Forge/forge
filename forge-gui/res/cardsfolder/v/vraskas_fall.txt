@@ -1,0 +1,7 @@
+Name:Vraska's Fall
+ManaCost:2 B
+Types:Instant
+A:SP$ Sacrifice | SacValid$ Creature,Planeswalker | SacMessage$ creature or planeswalker | Defined$ Opponent | SubAbility$ DBPoison | StackDescription$ SpellDescription | SpellDescription$ Each opponent sacrifices a creature or planeswalker and gets a poison counter.
+SVar:DBPoison:DB$ Poison | Num$ 1 | Defined$ Opponent | StackDescription$ None
+DeckHas:Ability$Counters
+Oracle:Each opponent sacrifices a creature or planeswalker and gets a poison counter.

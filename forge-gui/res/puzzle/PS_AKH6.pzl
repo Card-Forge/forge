@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #06
+URL:https://i.redd.it/x0ubq1rag92z.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+humancounters=ENERGY=1
+AILife=12
+humanhand=Rhonas the Indomitable;Rhonas the Indomitable;Aviary Mechanic;Khenra Charioteer
+humanbattlefield=Longtusk Cub|Id:5;Cartouche of Strength|AttachedTo:5;Scattered Groves;Scattered Groves;Scattered Groves;Scattered Groves;Aether Hub;Rhonas's Monument;Rhonas the Indomitable;Greenbelt Rampager
+aibattlefield=Channeler Initiate;Champion of Rhonas;Naga Vitalist

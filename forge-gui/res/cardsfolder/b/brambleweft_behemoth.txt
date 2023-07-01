@@ -1,0 +1,7 @@
+Name:Brambleweft Behemoth
+ManaCost:4 G G
+Types:Creature Elemental
+PT:6/6
+K:Trample
+DeckHints:Name$Nissa's Encouragement|Nissa, Genesis Mage|Forest
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

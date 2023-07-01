@@ -1,0 +1,10 @@
+Name:Drogskol Reinforcements
+ManaCost:3 W
+Types:Creature Spirit Soldier
+PT:2/2
+K:Melee
+S:Mode$ Continuous | Affected$ Spirit.Other+YouCtrl | AddKeyword$ Melee | Description$ Other Spirits you control have melee.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Spirit.YouCtrl | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt to Spirits you control.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Spirit
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther Spirits you control have melee.\nPrevent all noncombat damage that would be dealt to Spirits you control.

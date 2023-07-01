@@ -1,0 +1,9 @@
+Name:Attendant of Vraska
+ManaCost:1 B G
+Types:Creature Zombie Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | IsPresent$ Planeswalker.Vraska+YouCtrl | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, if you control a Vraska planeswalker, you gain life equal to CARDNAME's power.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredCard$CardPower
+DeckNeeds:Type$Vraska
+Oracle:When Attendant of Vraska dies, if you control a Vraska planeswalker, you gain life equal to Attendant of Vraska's power.

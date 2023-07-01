@@ -1,0 +1,10 @@
+Name:Marshaling the Troops
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Tap | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBGainLife | SpellDescription$ Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Z | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Amount
+SVar:Z:SVar$Y/Times.4
+AI:RemoveDeck:All
+Oracle:Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.

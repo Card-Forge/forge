@@ -1,0 +1,6 @@
+Name:Disrupting Scepter
+ManaCost:3
+Types:Artifact
+A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate only during your turn.
+DeckHas:Ability$Discard
+Oracle:{3}, {T}: Target player discards a card. Activate only during your turn.

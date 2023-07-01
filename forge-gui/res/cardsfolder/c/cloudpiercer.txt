@@ -1,0 +1,9 @@
+Name:Cloudpiercer
+ManaCost:4 R
+Types:Creature Dinosaur
+PT:5/4
+K:Mutate:3 R
+K:Reach
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever this creature mutates, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
+Oracle:Mutate {3}{R} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nReach\nWhenever this creature mutates, you may discard a card. If you do, draw a card.

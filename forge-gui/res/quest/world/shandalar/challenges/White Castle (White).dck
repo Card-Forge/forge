@@ -1,0 +1,37 @@
+[quest]
+id=1012
+OpponentName=Sainted One
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=33% chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG rules:white desc:a White card;chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG rules:white desc:a White card;3 white rares;50% 1 white rare
+Credit Reward=250
+HumanExtras=Crusade
+AIExtras=Miracle Worker
+[metadata]
+Name=quest12
+Title=White Castle (White)
+Difficulty=hard
+Description=This is the castle of the powerful White Wizard, The Sainted One.
+Icon=SaintedOne.jpg
+Deck Type=constructed
+[main]
+3 Armageddon Clock|ATQ
+1 Balance|LEB
+1 Black Lotus|LEB
+3 Bottle of Suleiman|ARN
+3 Circle of Protection: Artifacts|ATQ
+3 Copper Tablet|LEB
+2 Disenchant|4ED
+1 Ivory Tower|ATQ
+1 Library of Alexandria|ARN
+4 Martyrs of Korlis|ATQ
+1 Mishra's Workshop|ATQ
+1 Mox Pearl|LEB
+3 Petra Sphinx|LEG
+22 Plains|4ED
+3 Serra Angel|4ED
+1 Sol Ring|LEB
+4 Swords to Plowshares|LEB
+3 White Knight|4ED
+[sideboard]

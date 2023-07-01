@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Catch Me If You Can
+Title=Catch Me If You Can
+Difficulty=medium
+Description=The man who rose up to fight was not the same man knocked down.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Nightstalker|PO2
+4 Alaborn Veteran|PO2
+4 Angelic Blessing|PO2
+4 Blaze|PO2
+4 Cunning Giant|PO2
+4 Hand of Death|PO2
+10 Mountain|PO2|3
+4 Path of Peace|PO2
+8 Plains|PO2|1
+6 Swamp|PO2|2
+4 Tremor|PO2
+4 Volcanic Hammer|PO2

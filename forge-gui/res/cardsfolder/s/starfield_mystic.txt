@@ -1,0 +1,10 @@
+Name:Starfield Mystic
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Enchantment | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Enchantment spells you cast cost {1} less to cast.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Enchantment
+Oracle:Enchantment spells you cast cost {1} less to cast.\nWhenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Starfield Mystic.

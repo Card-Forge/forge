@@ -1,0 +1,30 @@
+[quest]
+id=7015
+OpponentName=The Scorpion God
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=The Scorpion God
+Credit Reward=200
+AIExtras=The Scorpion God|Sneak Attack|Cinder Barrens|Cinder Barrens|Cinder Barrens|Cinder Barrens|Dragonskull Summit|Dragonskull Summit|Dragonskull Summit|Dragonskull Summit|Canyon Slough|Canyon Slough|Canyon Slough|Canyon Slough
+HumanExtras=Oketra the True|Kefnet the Mindful|Bontu the Glorified|Hazoret the Fervent|Rhonas the Indomitable
+[metadata]
+Name=The Scorpion God
+Title=The Scorpion God
+Difficulty=Hard
+Description=The Scorpion God has been tasked with assassinating the five gods.
+Icon=Scorpion God.jpg
+[Main]
+4 Assassin's Strike|RTR
+4 Assassinate|PCA
+4 Grasping Dunes|AKH
+4 Hour of Glory|HOU
+4 Ifnir Deadlands|HOU
+4 Lethal Sting|HOU
+4 Murder|CN2
+4 Raise Dead|W17
+4 Sneak Attack|EMA
+4 Splendid Agony|AKH
+4 Stab Wound|M15
+3 The Scorpion God|HOU
+4 Torment of Venom|HOU

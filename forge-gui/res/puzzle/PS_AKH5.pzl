@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #05
+URL:https://i.redd.it/8ho04ypwsu0z.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=10
+humanhand=Djeru's Resolve;Disperse;Invocation of Saint Traft;True-Faith Censer;Consuming Fervor
+humanbattlefield=Irrigated Farmland;Irrigated Farmland;Spirebluff Canal;Spirebluff Canal;Spirebluff Canal;Sigarda's Aid;Kari Zev, Skyship Raider|Id:420;Hedron Blade|AttachedTo:420;Pathmaker Initiate;Glory-Bound Initiate|Tapped
+humanlibrary=Plains;Plains;Plains;Plains;Plains;Plains;Plains;Plains;Plains;Plains
+aibattlefield=Shimmerscale Drake;Labyrinth Guardian;Labyrinth Guardian

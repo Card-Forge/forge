@@ -1,0 +1,7 @@
+Name:Elemental Token
+ManaCost:no cost
+Colors:green
+Types:Creature Elemental
+PT:7/7
+K:Trample
+Oracle:Trample

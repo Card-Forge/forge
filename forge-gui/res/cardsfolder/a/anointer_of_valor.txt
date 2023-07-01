@@ -1,0 +1,10 @@
+Name:Anointer of Valor
+ManaCost:5 W
+Types:Creature Angel
+PT:3/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever a creature attacks, you may pay {3}. When you do, put a +1/+1 counter on that creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 3 | Execute$ TrigCounter | RememberObjects$ TriggeredAttackerLKICopy | SpellDescription$ Whenever a creature attacks, you may pay {3}. When you do, put a +1/+1 counter on that creature.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ DelayTriggerRememberedLKI
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever a creature attacks, you may pay {3}. When you do, put a +1/+1 counter on that creature.

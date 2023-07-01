@@ -1,0 +1,11 @@
+Name:Zurzoth, Chaos Rider
+ManaCost:2 R
+Types:Legendary Creature Devil
+PT:2/3
+T:Mode$ Drawn | ValidPlayer$ Player.Opponent+NonActive | Number$ 1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws their first card each turn, if it's not their turn, you create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You
+T:Mode$ AttackersDeclared | ValidAttackers$ Devil.YouCtrl | AttackedTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Devils you control attack one or more players, you and those players each draw a card, then discard a card at random.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredAttackedTargetAndYou | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredAttackedTargetAndYou | NumCards$ 1 | Mode$ Random
+DeckHas:Ability$Token
+Oracle:Whenever an opponent draws their first card each turn, if it's not their turn, you create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\nWhenever one or more Devils you control attack one or more players, you and those players each draw a card, then discard a card at random.

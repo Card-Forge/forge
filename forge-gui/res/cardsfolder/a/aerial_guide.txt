@@ -1,0 +1,8 @@
+Name:Aerial Guide
+ManaCost:2 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | KW$ Flying
+Oracle:Flying\nWhenever Aerial Guide attacks, another target attacking creature gains flying until end of turn.

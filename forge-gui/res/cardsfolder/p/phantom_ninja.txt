@@ -1,0 +1,6 @@
+Name:Phantom Ninja
+ManaCost:1 U U
+Types:Creature Illusion Ninja
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Phantom Ninja can't be blocked.

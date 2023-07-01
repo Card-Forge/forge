@@ -1,0 +1,7 @@
+Name:Peregrine Griffin
+ManaCost:4 W
+Types:Creature Griffin
+PT:2/4
+K:Flying
+K:First Strike
+Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Geth, Lord of the Vault
+Title=Geth, Lord of the Vault
+Difficulty=hard
+Description=“The one who dies with the most toys is still dead.”
+Icon=Geth.jpg
+Deck Type=constructed
+[Main]
+4 Blind Creeper|5DN
+2 Dross Harvester|MRD
+2 Ebon Drake|5DN
+4 Flayer Husk|MBS
+1 Geth, Lord of the Vault|SOM
+1 Lashwrithe|NPH
+2 Loxodon Warhammer|MRD
+1 Mortis Dogs|NPH
+3 Necrogen Scudder|SOM
+1 Nemesis Mask|DST
+2 Night's Whisper|5DN
+4 Phyrexian Obliterator|NPH
+3 Porcelain Legionnaire|NPH
+26 Swamp|SOM|1
+4 Vault Skirge|NPH
+[sideboard]

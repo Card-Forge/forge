@@ -1,0 +1,6 @@
+Name:Okina, Temple to the Grandfathers
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Pump | Cost$ G T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target legendary creature gets +1/+1 until end of turn.
+Oracle:{T}: Add {G}.\n{G}, {T}: Target legendary creature gets +1/+1 until end of turn.

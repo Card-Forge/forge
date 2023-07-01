@@ -1,0 +1,10 @@
+Name:Doomskar Oracle
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:3/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:BuffedBy:Card
+K:Foretell:W
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cast your second spell each turn, you gain 2 life.\nForetell {W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,0 +1,5 @@
+Name:Goblin Roughrider
+ManaCost:2 R
+Types:Creature Goblin Knight
+PT:3/2
+Oracle:

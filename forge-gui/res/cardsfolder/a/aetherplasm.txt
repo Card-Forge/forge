@@ -1,0 +1,9 @@
+Name:Aetherplasm
+ManaCost:2 U U
+Types:Creature Illusion
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME blocks a creature, you may return CARDNAME to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ Return<1/CARDNAME> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | Blocking$ TriggeredAttacker
+AI:RemoveDeck:All
+SVar:HasBlockEffect:TRUE
+Oracle:Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.

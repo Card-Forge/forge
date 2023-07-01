@@ -1,0 +1,8 @@
+Name:Akki Underminer
+ManaCost:3 R
+Types:Creature Goblin Rogue Shaman
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a permanent.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Permanent
+SVar:MustBeBlocked:True
+Oracle:Whenever Akki Underminer deals combat damage to a player, that player sacrifices a permanent.

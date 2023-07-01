@@ -1,0 +1,6 @@
+Name:Devout Witness
+ManaCost:2 W
+Types:Creature Human Spellshaper
+PT:2/2
+A:AB$ Destroy | Cost$ 1 W T Discard<1/Card> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:{1}{W}, {T}, Discard a card: Destroy target artifact or enchantment.

@@ -1,0 +1,7 @@
+Name:Bond of Agony
+ManaCost:X B
+Types:Sorcery
+A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Player.Other | LifeAmount$ X | SpellDescription$ Each other player loses X life.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, pay X life.\nEach other player loses X life.

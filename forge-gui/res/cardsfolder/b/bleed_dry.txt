@@ -1,0 +1,5 @@
+Name:Bleed Dry
+ManaCost:2 B B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -13 | NumDef$ -13 | IsCurse$ True | ReplaceDyingDefined$ Targeted | StackDescription$ {c:Targeted} gets -13/-13 until end of turn. If that creature would die this turn, exile it instead. | SpellDescription$ Target creature gets -13/-13 until end of turn. If that creature would die this turn, exile it instead.
+Oracle:Target creature gets -13/-13 until end of turn. If that creature would die this turn, exile it instead.

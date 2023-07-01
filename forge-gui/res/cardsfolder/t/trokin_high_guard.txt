@@ -1,0 +1,5 @@
+Name:Trokin High Guard
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/3
+Oracle:

@@ -1,0 +1,6 @@
+Name:Spy Kit
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddNames$ AllNonLegendaryCreatureNames | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1 and has all names of nonlegendary creature cards in addition to its name.
+Oracle:Equipped creature gets +1/+1 and has all names of nonlegendary creature cards in addition to its name.\nEquip {2}

@@ -1,0 +1,7 @@
+Name:Vortex Runner
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | Description$ As long as you control eight or more lands, CARDNAME gets +1/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Land.YouCtrl | PresentCompare$ GE8
+Oracle:As long as you control eight or more lands, Vortex Runner gets +1/+0 and can't be blocked.

@@ -1,0 +1,8 @@
+Name:Grixis
+ManaCost:no cost
+Types:Plane Alara
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Graveyard | Affected$ Creature.YouOwn+Blue,Creature.YouOwn+Red,Creature.YouOwn+Black | AddKeyword$ Unearth:CardManaCost | Description$ Blue, black, and/or red creature cards in your graveyard have unearth. The unearth cost is equal to the card's mana cost. (Pay the card's mana cost: Return it to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, put target creature card from a graveyard onto the battlefield under your control.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | LowPriority$ True | MaxRollsPerTurn$ 9
+Oracle:Blue, black, and/or red creature cards in your graveyard have unearth. The unearth cost is equal to the card's mana cost. (Pay the card's mana cost: Return it to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)\nWhenever chaos ensues, put target creature card from a graveyard onto the battlefield under your control.

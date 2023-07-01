@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #00b (Preseason Puzzle 2)
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/01/143.-THB002-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Act of Treason;Rankle, Master of Pranks;Disenchant;Angrath's Rampage
+humanbattlefield=Athreos, Shroud-Veiled;Harmonious Archon;Weapon Rack|Counters:P1P1=2;Ethereal Absolution;Plains;Plains;Swamp;Swamp;Mountain;Mountain
+aibattlefield=Sphinx of the Guildpact;Cauldron Familiar;Cerulean Drake;Sphinx of the Guildpact|Tapped

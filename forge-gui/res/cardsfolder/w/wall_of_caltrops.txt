@@ -1,0 +1,8 @@
+Name:Wall of Caltrops
+ManaCost:1 W
+Types:Creature Wall
+PT:2/1
+K:Defender
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ MakeEffective | IsPresent$ Creature.Wall+Other+sharesBlockingAssignmentWith | IsPresent2$ Creature.nonWall+sharesBlockingAssignmentWith | PresentCompare2$ EQ0 | TriggerDescription$ Whenever CARDNAME blocks a creature, if at least one other Wall creature is blocking that creature and no non-Wall creatures are blocking that creature, CARDNAME gains banding until end of turn. (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)
+SVar:MakeEffective:DB$ Pump | KW$ Banding | Defined$ Self
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Caltrops blocks a creature, if at least one other Wall creature is blocking that creature and no non-Wall creatures are blocking that creature, Wall of Caltrops gains banding until end of turn. (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)

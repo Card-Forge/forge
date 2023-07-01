@@ -1,0 +1,9 @@
+Name:Feast of Sanity
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you discard a card, CARDNAME deals 1 damage to any target and you gain 1 life.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 1 damage to any target and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHints:Ability$Discard
+DeckHas:Ability$LifeGain
+Oracle:Whenever you discard a card, Feast of Sanity deals 1 damage to any target and you gain 1 life.

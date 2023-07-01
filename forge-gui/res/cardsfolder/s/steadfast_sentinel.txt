@@ -1,0 +1,8 @@
+Name:Steadfast Sentinel
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:2/3
+K:Vigilance
+K:Eternalize:4 W W
+DeckHas:Ability$Token
+Oracle:Vigilance\nEternalize {4}{W}{W} ({4}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Human Cleric with no mana cost. Eternalize only as a sorcery.)

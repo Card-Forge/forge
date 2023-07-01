@@ -1,0 +1,35 @@
+[quest]
+id=3
+AILife=30
+Repeat=true
+Wins=60
+Card Reward=tournament pack USG;booster pack ULG;chosen card sets:USG,ULG,UDS rarity:R
+Ticket Reward=true
+Credit Reward=2500
+HumanExtras=
+AIExtras=Urza's Tower|Urza's Power Plant|Urza's Mine
+[metadata]
+Name=quest3
+Title=Urza
+Difficulty=very hard
+Description=It's Urza!
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+4 Urza's Blueprints|ULG
+4 Urza's Armor|USG
+4 Urza's Rage|INV
+2 Urza's Tower
+10 Mountain
+10 Island
+4 Stroke of Genius|USG
+2 Second Chance|ULG
+4 Beast of Burden|ULG
+2 Dragon Blood|USG
+4 Mantis Engine|UDS
+2 Crawlspace|ULG
+2 Metrognome|USG
+2 Mobile Fort|USG
+1 Tolarian Academy|USG
+3 Scoria Wurm|USG
+[sideboard]

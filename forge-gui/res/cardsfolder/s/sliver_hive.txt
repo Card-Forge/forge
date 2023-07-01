@@ -1,0 +1,10 @@
+Name:Sliver Hive
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Sliver | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Sliver spell.
+A:AB$ Token | Cost$ 5 T | IsPresent$ Sliver.YouCtrl | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Sliver creature token. Activate only if you control a Sliver.
+SVar:BuffedBy:Sliver
+DeckHints:Type$Sliver
+DeckHas:Ability$Mana.Colorless|Token
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Sliver spell.\n{5}, {T}: Create a 1/1 colorless Sliver creature token. Activate only if you control a Sliver.

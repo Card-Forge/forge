@@ -1,0 +1,9 @@
+[metadata]
+Code=PSTH
+Date=1998-03-02
+Name=Stronghold Promos
+Type=Promo
+ScryfallCode=PSTH
+
+[cards]
+68 R Revenant @Terese Nielsen

@@ -1,0 +1,7 @@
+Name:Access Tunnel
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Effect | Cost$ 3 T | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 3 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:{T}: Add {C}.\n{3}, {T}: Target creature with power 3 or less can't be blocked this turn.

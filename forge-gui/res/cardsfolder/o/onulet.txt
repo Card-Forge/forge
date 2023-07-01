@@ -1,0 +1,10 @@
+Name:Onulet
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain 2 life.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 2
+SVar:SacMe:3
+DeckHas:Ability$LifeGain
+DeckHints:Ability$Sacrifice
+Oracle:When Onulet dies, you gain 2 life.

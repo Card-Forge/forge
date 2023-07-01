@@ -1,0 +1,9 @@
+Name:Luminous Broodmoth
+ManaCost:2 W W
+Types:Creature Insect
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+withoutFlying | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control without flying dies, return it to the battlefield under its owner's control with a flying counter on it.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | WithCountersType$ Flying
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever a creature you control without flying dies, return it to the battlefield under its owner's control with a flying counter on it.

@@ -1,0 +1,10 @@
+Name:Historian's Wisdom
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.EnchantedBy+greatestPower | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted permanent is a creature, it gets +2/+1.
+DeckHints:Type$Artifact|Vehicle
+Oracle:Enchant artifact or creature\nWhen Historian's Wisdom enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it gets +2/+1.

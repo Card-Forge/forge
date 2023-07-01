@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Princess Zelda 1
+Title=Princess Zelda
+Difficulty=easy
+Description=Mono G Dominaria Standard-legal Elves deck with Verdant Force.
+Icon=Princess Zelda.jpg
+Deck Type=constructed
+[main]
+2 Blackblade Reforged
+2 Elfhame Druid
+21 Forest|DOM
+4 Gift of Growth
+2 Grow from the Ashes
+2 Helm of the Host
+4 Llanowar Elves
+3 Marwyn, the Nurturer
+3 Memorial to Unity
+3 Song of Freyalise
+3 Steel Leaf Champion
+3 Untamed Kavu
+4 Verdant Force
+4 Wild Onslaught
+[sideboard]

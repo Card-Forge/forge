@@ -1,0 +1,22 @@
+[quest]
+id=33004
+OpponentName=Isamaru
+AILife=20
+Repeat=true
+Wins=45
+Card Reward=Tamiyo's Journal;Tamiyo, the Moon Sage;Tamiyo, Field Researcher;2 random rares
+Credit Reward=2000
+AIExtras=Mirror Gallery
+HumanExtras=
+[metadata]
+Name=quest33004
+Title=Who let the dogs out?
+Difficulty=very hard
+Description=It was me.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+40 Isamaru, Hound of Konda
+19 Plains
+[Sideboard]
+

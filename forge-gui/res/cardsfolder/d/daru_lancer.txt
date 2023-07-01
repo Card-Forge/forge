@@ -1,0 +1,7 @@
+Name:Daru Lancer
+ManaCost:4 W W
+Types:Creature Human Soldier
+PT:3/4
+K:First Strike
+K:Morph:2 W W
+Oracle:First strike\nMorph {2}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

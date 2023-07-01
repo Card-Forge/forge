@@ -1,0 +1,8 @@
+Name:Whisper Squad
+ManaCost:B
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 B | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedWhisper Squad | ChangeNum$ 1 | Tapped$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card named Whisper Squad, put it onto the battlefield tapped, then shuffle.
+DeckHints:Type$Human
+DeckNeeds:Name$Whisper Squad
+Oracle:{1}{B}: Search your library for a card named Whisper Squad, put it onto the battlefield tapped, then shuffle.

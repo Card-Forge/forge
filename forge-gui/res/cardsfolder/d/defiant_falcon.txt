@@ -1,0 +1,7 @@
+Name:Defiant Falcon
+ManaCost:1 W
+Types:Creature Rebel Bird
+PT:1/1
+K:Flying
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
+Oracle:Flying\n{4}, {T}: Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.

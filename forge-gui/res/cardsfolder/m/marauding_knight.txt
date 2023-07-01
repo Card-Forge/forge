@@ -1,0 +1,9 @@
+Name:Marauding Knight
+ManaCost:2 B B
+Types:Creature Phyrexian Zombie Knight
+PT:2/2
+K:Protection from white
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Plains your opponents control.
+SVar:X:Count$Valid Plains.OppCtrl
+AI:RemoveDeck:Random
+Oracle:Protection from white\nMarauding Knight gets +1/+1 for each Plains your opponents control.

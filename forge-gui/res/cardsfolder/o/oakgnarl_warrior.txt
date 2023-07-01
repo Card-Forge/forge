@@ -1,0 +1,7 @@
+Name:Oakgnarl Warrior
+ManaCost:5 G G
+Types:Creature Treefolk Warrior
+PT:5/7
+K:Vigilance
+K:Trample
+Oracle:Vigilance, trample

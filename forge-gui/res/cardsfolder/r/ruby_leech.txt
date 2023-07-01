@@ -1,0 +1,7 @@
+Name:Ruby Leech
+ManaCost:1 R
+Types:Creature Leech
+PT:2/2
+K:First Strike
+S:Mode$ RaiseCost | ValidCard$ Card.Red | Activator$ You | Type$ Spell | Cost$ R | Description$ Red spells you cast cost {R} more to cast.
+Oracle:First strike\nRed spells you cast cost {R} more to cast.

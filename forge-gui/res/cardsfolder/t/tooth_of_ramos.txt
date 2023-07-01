@@ -1,0 +1,7 @@
+Name:Tooth of Ramos
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add {W}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {W}.\nSacrifice Tooth of Ramos: Add {W}.

@@ -1,0 +1,6 @@
+Name:Greater Basilisk
+ManaCost:3 G G
+Types:Creature Basilisk
+PT:3/5
+K:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

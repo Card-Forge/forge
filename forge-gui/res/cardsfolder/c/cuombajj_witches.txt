@@ -1,0 +1,9 @@
+Name:Cuombajj Witches
+ManaCost:B B
+Types:Creature Human Wizard
+PT:1/3
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | DamageMap$ True | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals 1 damage to any target and 1 damage to any target of an opponent's choice.
+SVar:DBDmg:DB$ DealDamage | TargetingPlayer$ Player.Opponent | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+AI:RemoveDeck:All
+Oracle:{T}: Cuombajj Witches deals 1 damage to any target and 1 damage to any target of an opponent's choice.

@@ -1,0 +1,7 @@
+Name:Sanctum Weaver
+ManaCost:1 G
+Types:Enchantment Creature Dryad
+PT:0/2
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of enchantments you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+Oracle:{T}: Add X mana of any one color, where X is the number of enchantments you control.

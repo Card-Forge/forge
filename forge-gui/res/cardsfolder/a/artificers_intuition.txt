@@ -1,0 +1,7 @@
+Name:Artificer's Intuition
+ManaCost:1 U
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ U Discard<1/Artifact> | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcLE1 | SpellDescription$ Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:All
+Oracle:{U}, Discard an artifact card: Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Verdeloth, the Ancient
+Icon=Dungeon Crawling Green.jpg
+Difficulty=medium
+Description=Monogreen creature deck
+Deck Type=constructed
+Name=Green2
+[Main]
+11 Forest|INV|1
+4 Forest|INV|2
+4 Forest|INV|3
+5 Forest|INV|4
+2 Gaea's Herald|PLS
+2 Kavu Chameleon|INV
+2 Kavu Lair|INV
+4 Kavu Titan|INV
+2 Lotus Guardian|INV
+1 Nemata, Grove Guardian|PLS
+4 Penumbra Wurm|APC
+1 Restock|INV
+4 Rooting Kavu|INV
+4 Tangle|INV
+2 Thicket Elemental|INV
+3 Urborg Elf|APC
+3 Utopia Tree|INV
+2 Verdeloth the Ancient|INV

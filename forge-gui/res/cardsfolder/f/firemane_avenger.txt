@@ -1,0 +1,9 @@
+Name:Firemane Avenger
+ManaCost:2 R W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionDmg | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME deals 3 damage to any target and you gain 3 life.
+SVar:TrigBattalionDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:Flying\nBattalion — Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to any target and you gain 3 life.

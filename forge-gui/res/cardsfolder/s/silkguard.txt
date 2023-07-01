@@ -1,0 +1,9 @@
+Name:Silkguard
+ManaCost:X G
+Types:Instant
+A:SP$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to X target creatures you control | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each of up to X target creatures you control.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Aura.YouCtrl,Equipment.YouCtrl,Creature.modified+YouCtrl | KW$ Hexproof | SpellDescription$ Auras, Equipment, and modified creatures you control gain hexproof until end of turn. (Equipment, Auras you control, and counters are modifications.)
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+DeckHints:Type$Aura|Equipment
+Oracle:Put a +1/+1 counter on each of up to X target creatures you control.\nAuras, Equipment, and modified creatures you control gain hexproof until end of turn. (Equipment, Auras you control, and counters are modifications.)

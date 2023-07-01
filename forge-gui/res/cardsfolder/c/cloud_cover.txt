@@ -1,0 +1,6 @@
+Name:Cloud Cover
+ManaCost:2 W U
+Types:Enchantment
+T:Mode$ BecomesTarget | ValidTarget$ Permanent.YouCtrl+Other+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredTargetLKICopy
+Oracle:Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.

@@ -1,0 +1,7 @@
+Name:Akroan Conscriptor
+ManaCost:4 R
+Types:Creature Human Shaman
+PT:3/2
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose another target creature | ValidTgts$ Creature.Other | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.
+Oracle:Heroic — Whenever you cast a spell that targets Akroan Conscriptor, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.

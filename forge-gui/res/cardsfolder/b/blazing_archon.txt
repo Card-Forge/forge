@@ -1,0 +1,7 @@
+Name:Blazing Archon
+ManaCost:6 W W W
+Types:Creature Archon
+PT:5/6
+K:Flying
+S:Mode$ CantAttack | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you.
+Oracle:Flying\nCreatures can't attack you.

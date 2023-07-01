@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="65">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Manaweft Sliver&quot;, &quot;Diffusion Sliver&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1z0OABAMBWCbSKzu2NM4s9hE4qe0jVSHt75v4QWIzgFRcpiHsgsbaW/H5TJHNrfXu1Je60qb5r6R5M9i7lvuaK843dk+m6vT1Xyef9wNc2XvEZfb96/ezzcu1b+nZsek9DA2pqsA8yt8nw==
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0T0OgCAMBeCO7eWM8aL+3kpFjkAbB2viwAAsvi95CROvBSIAADAjE11yZ9LzzHV7rMMS9dy5BKnTveu9h8vG715LL+V7v+ZY+Zlh0ZwNer0hc9fS/2C75+za+j0AAOC/EnSXGoc=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1V1FuwjAM7WdzMAaqxIp6SRibNAa7EQyQBowjLBZ5ijGOkzJmyUqbgJ8dPztpVaVlWlfVzlXVLIxcaQ5K73uvc/+88eNrGKH0/uZ1659fahuP7Fm2yA5fI/1yaZvr8J9R4jdTgZeytTbWUtK4GDPhYOQx9rVZIoh56KIPJTE+QghvVIj37td//NoijPyZRjx/GJyBDNwl3tyeEubZrz8ruvRrBz+u/Pjp9VSADdwUv3KYpCcX4z+zOQs7h5vDtLQNNlH/vOb3gU8p3O5OTNKJu61H1Dh6yPAfcNtQJynuYK81+XYXrtyLa/UV3j80GTPeSh/AZczTO3jduphbzTbhPgXsWX37my7YO7prH1ZhjnNv4qKviFfLI/JOMmfnBcfvQl0sgn3EQiL53jI/4EOjxIS8Q8i/jfCRc4vwzy7W59hd7zvWsT/S5tbF81KroYZxjbiFHPIcA0PrX0fFJvBlXBJX+jPOYB2CfxqmlIFiHzmX8xQ3uMp5i9j7nAvIucTUap34gpxq+eUczwl4TsLvR1qtd2Kf5Z63BXgy5nmdvx9ZPTPFJUu0HGti9cy+sZLwmumDLWuqhE9crHNBE+z3X/IL/qZ6sya8nrR7h4wbd1ScD7xm+F1+V+iDlm/wi39jAAP2Zc2gj2k+cH8h8kxY1hGPx4M7KrdvfQdY3zaL+rZf0j6jJh95/8Y5PTTqWOvrlvwCeM1RFw==
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBiewBeIX0PpUYAd1PFS17zRsB4YMJDh/noA7R4FowAEZvHQzmwLKpeRIxHMpGH8jIKRB6jdbqEUjNaBCDBY4gZXmWM+SNw3WAEAA6QIEA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="480" width="112" height="8">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="384" y="192" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Wounded Sliver"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;item&quot;, &quot;itemName&quot;: &quot;Shell Wand&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/gold.tx" x="432" y="400" visible="1">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/gold.tx" x="432" y="128" visible="1">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/gold.tx" x="432" y="240" visible="1">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 150
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/scroll.tx" x="448" y="176">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sliver Hive&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/scroll.tx" x="16" y="160">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sliver Construct&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/scroll.tx" x="144" y="48">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Terramorphic Expanse&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

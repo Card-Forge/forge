@@ -1,0 +1,5 @@
+Name:Giant Octopus
+ManaCost:3 U
+Types:Creature Octopus
+PT:3/3
+Oracle:

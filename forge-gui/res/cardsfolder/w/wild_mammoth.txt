@@ -1,0 +1,8 @@
+Name:Wild Mammoth
+ManaCost:2 G
+Types:Creature Elephant
+PT:3/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ Player.withMostTypeCreatureOnly | Execute$ TrigGain | TriggerDescription$ At the beginning of your upkeep, if a player controls more creatures than each other player, the player who controls the most creatures gains control of CARDNAME.
+SVar:TrigGain:DB$ GainControl | Defined$ Self | NewController$ Player.withMostTypeCreatureOnly
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, if a player controls more creatures than each other player, the player who controls the most creatures gains control of Wild Mammoth.

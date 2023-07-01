@@ -1,0 +1,8 @@
+Name:Vile Manifestation
+ManaCost:1 B
+Types:Creature Horror
+PT:0/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each card with cycling in your graveyard.
+K:Cycling:2
+SVar:X:Count$ValidGraveyard Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling
+Oracle:Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)

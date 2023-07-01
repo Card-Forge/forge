@@ -1,0 +1,8 @@
+Name:General Jarkeld
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:1/2
+A:AB$ SwitchBlock | Cost$ T | ActivationPhases$ Declare Blockers | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.attacking+blocked | DefinedAttacker$ Targeted | DefinedBlocker$ Valid Creature.blockingTargeted | TgtPrompt$ Choose two target blocked attacking creatures | SpellDescription$ Choose two target blocked attacking creatures. If each of those creatures could be blocked by all creatures that the other is blocked by, each creature that's blocking exactly one of those attacking creatures stops blocking it and is blocking the other attacking creature. Activate only during the declare blockers step. | StackDescription$ SpellDescription
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}: Choose two target blocked attacking creatures. If each of those creatures could be blocked by all creatures that the other is blocked by, each creature that's blocking exactly one of those attacking creatures stops blocking it and is blocking the other attacking creature. Activate only during the declare blockers step.

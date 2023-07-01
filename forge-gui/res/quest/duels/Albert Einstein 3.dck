@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Albert Einstein 3
+Title=Albert Einstein
+Difficulty=hard
+Description=WG Retribution of the Meek deck
+Icon=Albert Einstein.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Razorverge Thicket
+4 Windswept Heath
+4 Plains|M12
+5 Forest|M12
+1 Mox Pearl
+1 Mox Emerald
+1 Savannah Lions
+1 Elite Vanguard
+1 Soldier of the Pantheon
+2 Dryad Militant
+1 Isamaru, Hound of Konda
+1 Weathered Wayfarer
+1 Gaddock Teeg
+1 Kataki, War's Wage
+2 Accorder Paladin
+2 Watchwolf
+2 Call of the Conclave
+4 Kitchen Finks
+3 Wilt-Leaf Cavaliers
+1 Mirri, Cat Warrior
+1 Garruk Wildspeaker
+1 Master of the Wild Hunt
+1 Mirran Crusader
+1 Ancient Spider
+1 Hero of Bladehold
+1 Aura Shards
+4 Retribution of the Meek
+2 Swords to Plowshares
+2 Path to Exile
+[sideboard]

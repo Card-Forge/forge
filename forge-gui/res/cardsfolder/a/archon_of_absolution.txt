@@ -1,0 +1,8 @@
+Name:Archon of Absolution
+ManaCost:3 W
+Types:Creature Archon
+PT:3/2
+K:Flying
+K:Protection from white
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ 1 | Description$ Creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.
+Oracle:Flying\nProtection from white (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything white.)\nCreatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.

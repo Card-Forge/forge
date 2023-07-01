@@ -1,0 +1,8 @@
+Name:Karplusan Wolverine
+ManaCost:R
+Types:Snow Creature Wolverine Beast
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, you may have it deal 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+SVar:HasAttackEffect:Blocked
+Oracle:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to any target.

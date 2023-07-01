@@ -1,0 +1,5 @@
+Name:Phyrexian Horror Token
+ManaCost:no cost
+Types:Artifact Creature Phyrexian Horror
+PT:*/*
+Oracle:

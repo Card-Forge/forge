@@ -1,0 +1,6 @@
+Name:Talas Scout
+ManaCost:1 U
+Types:Creature Human Pirate Scout
+PT:1/2
+K:Flying
+Oracle:Flying

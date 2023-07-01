@@ -1,0 +1,11 @@
+Name:Boros Battleshaper
+ManaCost:5 R W
+Types:Creature Minotaur Soldier
+PT:5/5
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigMustAttackBlock | TriggerDescription$ At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
+SVar:TrigMustAttackBlock:DB$ Effect | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature (attacks or blocks this combat if able) | RememberObjects$ ThisTargetedCard | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack,MustBlock | IsCurse$ True | Duration$ UntilEndOfCombat | SubAbility$ DBCantAttackBlock
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks or blocks this combat if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered
+SVar:DBCantAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature (can't attack or block this combat) | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | Duration$ UntilEndOfCombat
+AI:RemoveDeck:All
+Oracle:At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.

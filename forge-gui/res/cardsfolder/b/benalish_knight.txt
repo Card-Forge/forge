@@ -1,0 +1,7 @@
+Name:Benalish Knight
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/2
+K:Flash
+K:First Strike
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

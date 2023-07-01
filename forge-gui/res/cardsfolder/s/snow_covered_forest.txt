@@ -1,0 +1,4 @@
+Name:Snow-Covered Forest
+ManaCost:no cost
+Types:Basic Snow Land Forest
+Oracle:({T}: Add {G}.)

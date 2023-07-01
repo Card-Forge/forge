@@ -1,0 +1,6 @@
+Name:Mogg Flunkies
+ManaCost:1 R
+Types:Creature Goblin
+PT:3/3
+K:CARDNAME can't attack or block alone.
+Oracle:Mogg Flunkies can't attack or block alone.

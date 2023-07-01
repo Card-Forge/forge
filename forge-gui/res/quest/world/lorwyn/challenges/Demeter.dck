@@ -1,0 +1,46 @@
+[quest]
+id=5002
+OpponentName=Demeter
+AILife=40
+Repeat=true
+Wins=35
+Card Reward=15% duplicate card;3 rares;33% 1 green rare;33% 1 white rare; 33% Brushland|10E
+Credit Reward=400
+HumanExtras=
+AIExtras=Leaf-Crowned Elder
+
+[metadata]
+Name=quest5002
+Title=Demeter
+Difficulty=very hard
+Description=You feel the trees watching you...
+Icon=Demeter.jpg
+Deck Type=constructed
+
+[Main]
+4 Brushland|10E
+4 Forest|LRW
+4 Murmuring Bosk|MOR
+3 Mutavault|MOR
+4 Reflecting Pool|SHM
+1 Vivid Grove|LRW
+1 Vivid Meadow|LRW
+3 Wooded Bastion|SHM
+
+4 Bosk Banneret|MOR
+2 Chameleon Colossus|MOR
+4 Crib Swap|LRW
+3 Dauntless Dourbark|LRW
+1 Doran, the Siege Tower|LRW
+3 Leaf-Crowned Elder|MOR
+4 Oblivion Ring|LRW
+1 Sapling of Colfenor|EVE
+2 Shield of the Oversoul|SHM
+4 Timber Protector|LRW
+4 Treefolk Harbinger|LRW
+2 Woodfall Primus|SHM
+2 Wrath of God|10E
+
+[Sideboard]
+[Planes]
+[Schemes]

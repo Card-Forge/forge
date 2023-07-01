@@ -1,0 +1,9 @@
+Name:Cinder Wall
+ManaCost:R
+Types:Creature Wall
+PT:3/3
+K:Defender
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks, destroy it at end of combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
+SVar:TrigDestroy:DB$ Destroy | Defined$ Self
+Oracle:Defender\nWhen Cinder Wall blocks, destroy it at end of combat.

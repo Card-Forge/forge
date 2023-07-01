@@ -1,0 +1,6 @@
+Name:Zendikar Farguide
+ManaCost:4 G
+Types:Creature Elemental
+PT:3/3
+K:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

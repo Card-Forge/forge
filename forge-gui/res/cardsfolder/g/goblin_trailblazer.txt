@@ -1,0 +1,6 @@
+Name:Goblin Trailblazer
+ManaCost:1 R
+Types:Creature Goblin Pirate
+PT:2/1
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

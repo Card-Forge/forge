@@ -1,0 +1,13 @@
+Name:Lightning Serpent
+ManaCost:X R
+Types:Creature Elemental Serpent
+PT:2/1
+K:Trample
+K:Haste
+K:etbCounter:P1P0:X
+SVar:X:Count$xPaid
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
+Oracle:Trample, haste\nLightning Serpent enters the battlefield with X +1/+0 counters on it.\nAt the beginning of the end step, sacrifice Lightning Serpent.

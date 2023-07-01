@@ -1,0 +1,6 @@
+Name:Storm Crow
+ManaCost:1 U
+Types:Creature Bird
+PT:1/2
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

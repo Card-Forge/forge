@@ -1,0 +1,8 @@
+Name:Byway Courier
+ManaCost:2 G
+Types:Creature Human Scout
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:When Byway Courier dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

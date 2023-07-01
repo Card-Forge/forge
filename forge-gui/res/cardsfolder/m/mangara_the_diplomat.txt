@@ -1,0 +1,10 @@
+Name:Mangara, the Diplomat
+ManaCost:3 W
+Types:Legendary Creature Human Cleric
+PT:2/4
+K:Lifelink
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.
+SVar:X:Count$ValidAll Creature.attackingYouOrYourPWLKI
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts their second spell each turn, draw a card.
+Oracle:Lifelink\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.\nWhenever an opponent casts their second spell each turn, draw a card.

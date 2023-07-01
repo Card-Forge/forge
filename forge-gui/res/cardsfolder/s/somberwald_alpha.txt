@@ -1,0 +1,8 @@
+Name:Somberwald Alpha
+ManaCost:3 G
+Types:Creature Wolf
+PT:3/2
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control becomes blocked, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1
+A:AB$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Trample | SpellDescription$ Target creature you control gains trample until end of turn.
+Oracle:Whenever a creature you control becomes blocked, it gets +1/+1 until end of turn.\n{1}{G}: Target creature you control gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

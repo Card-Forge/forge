@@ -1,0 +1,7 @@
+Name:Kinsbaile Cavalier
+ManaCost:3 W
+Types:Creature Kithkin Knight
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Knight+YouCtrl | AddKeyword$ Double Strike | Description$ Knight creatures you control have double strike.
+SVar:PlayMain1:TRUE
+Oracle:Knight creatures you control have double strike.

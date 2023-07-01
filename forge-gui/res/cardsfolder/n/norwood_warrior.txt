@@ -1,0 +1,7 @@
+Name:Norwood Warrior
+ManaCost:2 G
+Types:Creature Elf Warrior
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+Oracle:Whenever Norwood Warrior becomes blocked, it gets +1/+1 until end of turn.

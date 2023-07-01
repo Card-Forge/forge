@@ -1,0 +1,8 @@
+Name:Soldevi Adnate
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:1/2
+A:AB$ Mana | Cost$ T Sac<1/Creature.Black;Creature.Artifact/black or artifact creature> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed creature's mana value.
+SVar:X:Sacrificed$CardManaCost
+AI:RemoveDeck:All
+Oracle:{T}, Sacrifice a black or artifact creature: Add an amount of {B} equal to the sacrificed creature's mana value.

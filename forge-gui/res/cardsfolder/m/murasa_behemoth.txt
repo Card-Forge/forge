@@ -1,0 +1,7 @@
+Name:Murasa Behemoth
+ManaCost:4 G G
+Types:Creature Beast
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Land.YouOwn | PresentZone$ Graveyard | Description$ CARDNAME gets +3/+3 as long as there is a land card in your graveyard.
+Oracle:Trample\nMurasa Behemoth gets +3/+3 as long as there is a land card in your graveyard.

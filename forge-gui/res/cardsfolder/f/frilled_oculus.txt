@@ -1,0 +1,6 @@
+Name:Frilled Oculus
+ManaCost:1 U
+Types:Creature Homunculus
+PT:1/3
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{1}{G}: Frilled Oculus gets +2/+2 until end of turn. Activate only once each turn.

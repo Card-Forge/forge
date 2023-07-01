@@ -1,0 +1,10 @@
+Name:Frillscare Mentor
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a menace counter on target non-Human creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature you control | CounterType$ Menace | CounterNum$ 1
+SVar:PlayMain1:TRUE
+A:AB$ PutCounterAll | Cost$ 2 R T | ValidCards$ Creature.YouCtrl+withMenace | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on each creature you control with menace.
+DeckHas:Ability$Counters
+Oracle:When Frillscare Mentor enters the battlefield, put a menace counter on target non-Human creature you control. (It can't be blocked except by two or more creatures.)\n{2}{R}, {T}: Put a +1/+1 counter on each creature you control with menace.

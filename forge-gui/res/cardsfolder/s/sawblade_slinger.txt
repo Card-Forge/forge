@@ -1,0 +1,10 @@
+Name:Sawblade Slinger
+ManaCost:3 G
+Types:Creature Human Archer
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Destroy,Fight | MinCharmNum$ 0
+SVar:Destroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | SpellDescription$ Destroy target artifact an opponent controls.
+SVar:Fight:DB$ Fight | Defined$ Self | ValidTgts$ Zombie.OppCtrl | TgtPrompt$ Select target Zombie an opponent controls | SpellDescription$ CARDNAME fights target Zombie an opponent controls.
+AI:RemoveDeck:Random
+Oracle:When Sawblade Slinger enters the battlefield, choose up to one —\n• Destroy target artifact an opponent controls.\n• Sawblade Slinger fights target Zombie an opponent controls.

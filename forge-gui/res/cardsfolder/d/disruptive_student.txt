@@ -1,0 +1,7 @@
+Name:Disruptive Student
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+SVar:NonCombatPriority:5
+Oracle:{T}: Counter target spell unless its controller pays {1}.

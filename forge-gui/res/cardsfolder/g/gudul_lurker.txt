@@ -1,0 +1,7 @@
+Name:Gudul Lurker
+ManaCost:U
+Types:Creature Salamander
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+K:Megamorph:U
+Oracle:Gudul Lurker can't be blocked.\nMegamorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)

@@ -1,0 +1,9 @@
+Name:Damping Sphere
+ManaCost:2
+Types:Artifact
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaAmount$ GE2 | ReplaceWith$ ProduceC | Description$ If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
+SVar:ProduceC:DB$ ReplaceMana | ReplaceMana$ C
+S:Mode$ RaiseCost | Activator$ Player | Type$ Spell | Amount$ X | Relative$ True | Description$ Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+SVar:NonStackingEffect:True
+Oracle:If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.\nEach spell a player casts costs {1} more to cast for each other spell that player has cast this turn.

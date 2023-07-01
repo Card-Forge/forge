@@ -1,0 +1,6 @@
+Name:Heartwood Giant
+ManaCost:3 G G
+Types:Creature Giant
+PT:4/4
+A:AB$ DealDamage | Cost$ T Sac<1/Forest> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or planeswalker.
+Oracle:{T}, Sacrifice a Forest: Heartwood Giant deals 2 damage to target player or planeswalker.

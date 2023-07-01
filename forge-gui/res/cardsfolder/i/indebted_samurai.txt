@@ -1,0 +1,9 @@
+Name:Indebted Samurai
+ManaCost:3 W
+Types:Creature Human Samurai
+PT:2/3
+K:Bushido:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Samurai.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Samurai you control dies, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Samurai
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever a Samurai you control dies, you may put a +1/+1 counter on Indebted Samurai.

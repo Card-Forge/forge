@@ -1,0 +1,8 @@
+Name:Double Stroke
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+T:Mode$ SpellCast | ValidCard$ Instant.NamedCard,Sorcery.NamedCard | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell with the chosen name, you may copy it. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True
+SVar:AgendaLogic:MostProminentSpellInComputerDeck
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nWhenever you cast an instant or sorcery spell with the chosen name, you may copy it. You may choose new targets for the copy.

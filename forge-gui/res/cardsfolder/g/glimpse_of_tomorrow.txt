@@ -1,0 +1,14 @@
+Name:Glimpse of Tomorrow
+ManaCost:no cost
+Colors:red
+Types:Sorcery
+K:Suspend:3:R R
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Imprint$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDig | SpellDescription$ Shuffle all permanents you own into your library, then reveal that many cards from the top of your library. Put all non-Aura permanent cards revealed this way onto the battlefield, then do the same for Aura cards, then put the rest on the bottom of your library in a random order.
+SVar:DBDig:DB$ PeekAndReveal | NoPeek$ True | PeekAmount$ WarpX | RememberRevealed$ True | SubAbility$ DBCleanImprint
+SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ ChangePermanent
+SVar:WarpX:Imprinted$Amount
+SVar:ChangePermanent:DB$ ChangeZoneAll | ChangeType$ Permanent.nonAura+IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ ChangeEnchantment
+SVar:ChangeEnchantment:DB$ ChangeZoneAll | ChangeType$ Aura.IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ GotoBottom
+SVar:GotoBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Suspend 3—{R}{R}\nShuffle all permanents you own into your library, then reveal that many cards from the top of your library. Put all non-Aura permanent cards revealed this way onto the battlefield, then do the same for Aura cards, then put the rest on the bottom of your library in a random order.

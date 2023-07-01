@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Swarm and Slam
+Description=Swarm your opponents with creatures and creature tokens, and then screw 'em up with a devastating Echoing Courage, which gives all same-named creatures a boost.
+Deck Type=constructed
+Set=DST
+Image=swarm_and_slam.jpg
+[Main]
+1 Arrest|MRD
+4 Echoing Courage|DST
+4 Forest|MRD|1
+4 Forest|MRD|2
+4 Forest|MRD|3
+4 Forest|MRD|4
+4 Gold Myr|MRD
+2 Infested Roothold|DST
+1 Myr Matrix|DST
+2 One Dozen Eyes|MRD
+3 Plains|MRD|1
+3 Plains|MRD|2
+2 Plains|MRD|3
+2 Pteron Ghost|DST
+1 Pulse of the Tangle|DST
+1 Purge|DST
+2 Raise the Alarm|MRD
+2 Spawning Pit|DST
+1 Stir the Pride|DST
+3 Tangle Golem|DST
+2 Tangle Spider|DST
+1 Tel-Jilad Archers|MRD
+2 Tel-Jilad Outrider|DST
+1 Test of Faith|DST
+1 Thunderstaff|DST
+2 Viridian Shaman|MRD
+1 Wirefly Hive|DST
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Avenging Angel
+ManaCost:3 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, you may put CARDNAME on top of its owner's library.
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0
+Oracle:Flying\nWhen Avenging Angel dies, you may put it on top of its owner's library.

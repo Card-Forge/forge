@@ -1,0 +1,8 @@
+Name:Rakdos Locket
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Black|Red
+A:AB$ Draw | Cost$ BR BR BR BR T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{T}: Add {B} or {R}.\n{B/R}{B/R}{B/R}{B/R}, {T}, Sacrifice Rakdos Locket: Draw two cards.

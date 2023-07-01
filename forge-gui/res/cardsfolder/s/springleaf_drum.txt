@@ -1,0 +1,6 @@
+Name:Springleaf Drum
+ManaCost:1
+Types:Artifact
+A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:All
+Oracle:{T}, Tap an untapped creature you control: Add one mana of any color.

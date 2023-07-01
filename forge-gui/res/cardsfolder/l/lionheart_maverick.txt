@@ -1,0 +1,7 @@
+Name:Lionheart Maverick
+ManaCost:W
+Types:Creature Human Knight
+PT:1/1
+K:Vigilance
+A:AB$ Pump | Cost$ 4 W | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
+Oracle:Vigilance\n{4}{W}: Lionheart Maverick gets +1/+2 until end of turn.

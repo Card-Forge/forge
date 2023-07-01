@@ -1,0 +1,5 @@
+Name:Swordwise Centaur
+ManaCost:G G
+Types:Creature Centaur Warrior
+PT:3/2
+Oracle:

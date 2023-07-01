@@ -1,0 +1,9 @@
+Name:Spire Serpent
+ManaCost:4 U
+Types:Creature Serpent
+PT:3/5
+K:Defender
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Metalcraft | Description$ Metalcraft — As long as you control three or more artifacts, CARDNAME gets +2/+2 and can attack as though it didn't have defender.
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | Condition$ Metalcraft | Secondary$ True | Description$ Metalcraft — As long as you control three or more artifacts, CARDNAME gets +2/+2 and can attack as though it didn't have defender.
+SVar:BuffedBy:Artifact
+Oracle:Defender\nMetalcraft — As long as you control three or more artifacts, Spire Serpent gets +2/+2 and can attack as though it didn't have defender.

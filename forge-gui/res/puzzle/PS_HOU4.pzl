@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU4.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=7
+activeplayer=human
+activephase=MAIN1
+humanhand=Trial of Solidarity;Haunted Dead;Gryff's Boon;Grind // Dust
+humanlibrary=Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN
+humangraveyard=
+humanbattlefield=Swamp|Set:ZEN;Swamp|Set:ZEN;Swamp|Set:ZEN;Plains|Set:ZEN;Plains|Set:ZEN;Archfiend of Ifnir;Thraben foulbloods;Thraben Inspector;Sinister Concoction
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Sengir Vampire|Set:W17|Counters:P1P1=1;Sengir Vampire|Set:W17;Gavony Unhallowed|Counters:P1P1=1
+aiexile=
+aicommand=

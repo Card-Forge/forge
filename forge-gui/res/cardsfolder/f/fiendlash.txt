@@ -1,0 +1,11 @@
+Name:Fiendlash
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Reach | AddPower$ 2 | Description$ Equipped creature gets +2/+0 and has reach.
+T:Mode$ DamageDoneOnce | Execute$ TrigPump | ValidTarget$ Creature.EquippedBy | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature is dealt damage, it deals damage equal to its power to target player or planeswalker.
+SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredTargetLKICopy | SubAbility$ TrigDamage
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | DamageSource$ TriggeredTargetLKICopy | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardPower
+K:Equip:2 R
+Oracle:Equipped creature gets +2/+0 and has reach.\nWhenever equipped creature is dealt damage, it deals damage equal to its power to target player or planeswalker.\nEquip {2}{R}

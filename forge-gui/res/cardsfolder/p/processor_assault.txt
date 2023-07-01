@@ -1,0 +1,7 @@
+Name:Processor Assault
+ManaCost:1 R
+Types:Sorcery
+K:Devoid
+A:SP$ DealDamage | Cost$ 1 R ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | ValidTgts$ Creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
+DeckHints:Keyword$Ingest
+Oracle:Devoid (This card has no color.)\nAs an additional cost to cast this spell, put a card an opponent owns from exile into that player's graveyard.\nProcessor Assault deals 5 damage to target creature.

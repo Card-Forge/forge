@@ -1,0 +1,11 @@
+Name:Tethered Griffin
+ManaCost:W
+Types:Creature Griffin
+PT:2/3
+K:Flying
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Enchantment.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no enchantments, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Enchantment.YouCtrl
+AI:RemoveDeck:Random
+DeckNeeds:Type$Enchantment
+Oracle:Flying\nWhen you control no enchantments, sacrifice Tethered Griffin.

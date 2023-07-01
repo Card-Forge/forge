@@ -1,0 +1,8 @@
+Name:Parasitic Grasp
+ManaCost:1 B
+Types:Instant
+A:SP$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature.Human | TgtPrompt$ Select target Human creature | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target [Human] creature.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:SP$ DealDamage | Cost$ 1 B B | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | PrecostDesc$ Cleave | CostDesc$ {1}{B}{B} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+DeckHas:Ability$LifeGain
+Oracle:Cleave {1}{B}{B} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nParasitic Grasp deals 3 damage to target [Human] creature. You gain 3 life.

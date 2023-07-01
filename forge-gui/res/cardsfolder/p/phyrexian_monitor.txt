@@ -1,0 +1,6 @@
+Name:Phyrexian Monitor
+ManaCost:3 B
+Types:Creature Phyrexian Skeleton
+PT:2/2
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+Oracle:{B}: Regenerate Phyrexian Monitor.

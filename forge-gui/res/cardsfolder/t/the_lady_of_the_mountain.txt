@@ -1,0 +1,5 @@
+Name:The Lady of the Mountain
+ManaCost:4 R G
+Types:Legendary Creature Giant
+PT:5/5
+Oracle:

@@ -1,0 +1,7 @@
+Name:Gnarlroot Trapper
+ManaCost:B
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | RestrictValid$ Spell.Creature+Elf | SpellDescription$ Add {G}. Spend this mana only to cast an Elf creature spell.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+Elf+attacking | TgtPrompt$ Select target attacking Elf you control | KW$ Deathtouch | SpellDescription$ Target attacking Elf you control gains deathtouch until end of turn.
+Oracle:{T}, Pay 1 life: Add {G}. Spend this mana only to cast an Elf creature spell.\n{T}: Target attacking Elf you control gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

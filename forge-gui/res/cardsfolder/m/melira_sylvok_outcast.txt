@@ -1,0 +1,11 @@
+Name:Melira, Sylvok Outcast
+ManaCost:1 G
+Types:Legendary Creature Human Scout
+PT:2/2
+S:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get poison counters.
+S:Mode$ CantPutCounter | ValidCard$ Creature.YouCtrl | CounterType$ M1M1 | Description$ Creatures you control can't have -1/-1 counters put on them.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Infect | Description$ Creatures your opponents control lose infect.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withPersist | AddSVar$ Sac
+SVar:Sac:SVar:SacMe:3
+SVar:PlayMain1:TRUE
+Oracle:You can't get poison counters.\nCreatures you control can't have -1/-1 counters put on them.\nCreatures your opponents control lose infect.

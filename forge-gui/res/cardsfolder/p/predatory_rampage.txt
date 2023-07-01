@@ -1,0 +1,7 @@
+Name:Predatory Rampage
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | SubAbility$ OppBlock | SpellDescription$ Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.
+SVar:OppBlock:DB$ Effect | StaticAbilities$ STBlock
+SVar:STBlock:Mode$ MustBlock | ValidCreature$ Creature.OppCtrl | Description$ Each creature your opponents control blocks this turn if able.
+Oracle:Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.

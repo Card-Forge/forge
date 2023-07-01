@@ -1,0 +1,7 @@
+Name:Flight of Equenauts
+ManaCost:7 W
+Types:Creature Human Knight
+PT:4/5
+K:Flying
+K:Convoke
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying

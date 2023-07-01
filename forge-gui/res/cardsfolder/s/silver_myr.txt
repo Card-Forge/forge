@@ -1,0 +1,6 @@
+Name:Silver Myr
+ManaCost:2
+Types:Artifact Creature Myr
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:{T}: Add {U}.

@@ -1,0 +1,6 @@
+Name:Slippery Bogle
+ManaCost:GU
+Types:Creature Beast
+PT:1/1
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

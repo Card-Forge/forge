@@ -1,0 +1,10 @@
+Name:Ghost Ark
+ManaCost:4
+Types:Artifact Vehicle
+PT:3/3
+K:Flying
+T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ DBPumpAll | TriggerDescription$ Repair Barge — Whenever CARDNAME becomes crewed, each artifact creature card in your graveyard gains unearth {3} until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Artifact.Creature+YouCtrl | KW$ Unearth:3 | PumpZone$ Graveyard
+K:Crew:2
+DeckHas:Ability$Graveyard & Keyword$Unearth
+Oracle:Flying\nRepair Barge — Whenever Ghost Ark becomes crewed, each artifact creature card in your graveyard gains unearth {3} until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

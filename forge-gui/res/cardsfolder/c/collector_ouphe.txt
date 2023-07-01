@@ -1,0 +1,7 @@
+Name:Collector Ouphe
+ManaCost:1 G
+Types:Creature Ouphe
+PT:2/2
+S:Mode$ CantBeActivated | Activator$ Player | AffectedZone$ Battlefield | ValidCard$ Artifact | ValidSA$ Activated | Description$ Activated abilities of artifacts can't be activated.
+AI:RemoveDeck:Random
+Oracle:Activated abilities of artifacts can't be activated.

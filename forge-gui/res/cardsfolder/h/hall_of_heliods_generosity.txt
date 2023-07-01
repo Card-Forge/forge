@@ -1,0 +1,6 @@
+Name:Hall of Heliod's Generosity
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 1 W T | TgtPrompt$ Choose target enchantment card in your graveyard | ValidTgts$ Enchantment.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target enchantment card from your graveyard on top of your library.
+Oracle:{T}: Add {C}.\n{1}{W}, {T}: Put target enchantment card from your graveyard on top of your library.

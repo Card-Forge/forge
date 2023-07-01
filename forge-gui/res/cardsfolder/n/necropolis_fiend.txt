@@ -1,0 +1,10 @@
+Name:Necropolis Fiend
+ManaCost:7 B B
+Types:Creature Demon
+PT:4/5
+K:Delve
+K:Flying
+A:AB$ Pump | Cost$ X T ExileFromGrave<X/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:X:Count$xPaid
+DeckHints:Ability$Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\n{X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.

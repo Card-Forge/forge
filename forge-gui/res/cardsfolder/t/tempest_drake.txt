@@ -1,0 +1,7 @@
+Name:Tempest Drake
+ManaCost:1 W U
+Types:Creature Drake
+PT:2/2
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

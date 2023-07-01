@@ -1,0 +1,8 @@
+Name:Complex Automaton
+ManaCost:4
+Types:Artifact Creature Golem
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE7 | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, if you control seven or more permanents, return CARDNAME to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.

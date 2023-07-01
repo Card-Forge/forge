@@ -1,0 +1,6 @@
+Name:Haunted Cloak
+ManaCost:3
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Vigilance & Trample & Haste | Description$ Equipped creature has vigilance, trample, and haste.
+K:Equip:1
+Oracle:Equipped creature has vigilance, trample, and haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

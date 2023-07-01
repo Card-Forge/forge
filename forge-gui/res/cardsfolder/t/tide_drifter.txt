@@ -1,0 +1,10 @@
+Name:Tide Drifter
+ManaCost:1 U
+Types:Creature Eldrazi Drone
+PT:0/5
+K:Devoid
+S:Mode$ Continuous | Affected$ Creature.Colorless+Other+YouCtrl | AddToughness$ 1 | Description$ Other colorless creatures you control get +0/+1.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+DeckHints:Keyword$Devoid & Color$Colorless
+Oracle:Devoid (This card has no color.)\nOther colorless creatures you control get +0/+1.

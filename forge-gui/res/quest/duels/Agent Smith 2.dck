@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Agent Smith 2
+Title=Agent Smith
+Difficulty=medium
+Description=Mono W Opalescence deck
+Icon=Mr Smith.jpg
+Deck Type=constructed
+[main]
+19 Plains
+2 Serra's Sanctum
+1 Archetype of Courage
+1 Hopeful Eidolon
+3 Mesa Enchantress
+1 Nyx-Fleece Ram
+1 Armistice
+1 Banishing Light
+1 Brave the Sands
+1 Enchanted Evening
+1 Ghostly Prison
+1 Glorious Anthem
+1 Greater Auramancy
+1 High Ground
+1 Honor of the Pure
+1 Inheritance
+4 Journey to Nowhere
+1 Land Tax
+1 Light from Within
+1 Lumithread Field
+1 Mark of Asylum
+1 Martial Law
+1 Myth Realized
+1 Oblivion Ring
+3 Opalescence
+1 Path of Bravery
+1 Spear of Heliod
+1 Sphere of Safety
+3 Starfield of Nyx
+1 True Conviction
+1 Enduring Ideal
+1 Replenish
+[sideboard]

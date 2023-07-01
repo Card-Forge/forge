@@ -1,0 +1,9 @@
+Name:Nim Grotesque
+ManaCost:6 B
+Types:Creature Zombie
+PT:3/6
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+AI:RemoveDeck:Random
+Oracle:Nim Grotesque gets +1/+0 for each artifact you control.

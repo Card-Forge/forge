@@ -1,0 +1,8 @@
+Name:Shadow Guildmage
+ManaCost:B
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature you control on top of its owner's library.
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to any target and 1 damage to you.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+Oracle:{U}, {T}: Put target creature you control on top of its owner's library.\n{R}, {T}: Shadow Guildmage deals 1 damage to any target and 1 damage to you.

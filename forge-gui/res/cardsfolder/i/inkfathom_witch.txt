@@ -1,0 +1,8 @@
+Name:Inkfathom Witch
+ManaCost:1 UB
+Types:Creature Merfolk Wizard
+PT:1/1
+K:Fear
+A:AB$ AnimateAll | Cost$ 2 U B | ValidCards$ Creature.unblocked | Power$ 4 | Toughness$ 1 | SpellDescription$ Each unblocked creature has base power and toughness 4/1 until end of turn.
+AI:RemoveDeck:All
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{2}{U}{B}: Each unblocked creature has base power and toughness 4/1 until end of turn.

@@ -1,0 +1,6 @@
+Name:Raging Cougar
+ManaCost:2 R
+Types:Creature Cat
+PT:2/2
+K:Haste
+Oracle:Haste

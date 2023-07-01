@@ -1,0 +1,9 @@
+Name:Vexyr, Ich-Tekik's Heir
+ManaCost:G W U
+Types:Legendary Creature Phyrexian Artificer
+PT:3/4
+T:Mode$ SeekAll | ValidPlayer$ You | Execute$ TrigToken | TriggerDescription$ Whenever you seek one or more cards, create a 3/3 colorless Phyrexian Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_phyrexian_golem
+S:Mode$ Continuous | Affected$ Golem.YouCtrl | AddKeyword$ Vigilance | Description$ Golems you control have vigilance.
+DeckHints:Type$Golem
+Oracle:Whenever you seek one or more cards, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolems you control have vigilance.

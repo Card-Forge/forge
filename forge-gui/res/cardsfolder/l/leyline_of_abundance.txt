@@ -1,0 +1,10 @@
+Name:Leyline of Abundance
+ManaCost:2 G G
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+T:Mode$ TapsForMana | ValidCard$ Creature | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a creature for mana, add an additional {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G
+A:AB$ PutCounterAll | Cost$ 6 G G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters
+Oracle:If Leyline of Abundance is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you tap a creature for mana, add an additional {G}.\n{6}{G}{G}: Put a +1/+1 counter on each creature you control.

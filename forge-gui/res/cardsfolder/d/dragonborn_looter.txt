@@ -1,0 +1,8 @@
+Name:Dragonborn Looter
+ManaCost:1 U
+Types:Creature Dragon Rogue
+PT:1/2
+A:AB$ Draw | Cost$ 1 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:{1}, {T}: Draw a card, then discard a card.

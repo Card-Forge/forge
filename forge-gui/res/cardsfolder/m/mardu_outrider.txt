@@ -1,0 +1,6 @@
+Name:Mardu Outrider
+ManaCost:1 B B
+Types:Creature Orc Warrior
+PT:5/5
+A:SP$ PermanentCreature | Cost$ 1 B B Discard<1/Card>
+Oracle:As an additional cost to cast this spell, discard a card.

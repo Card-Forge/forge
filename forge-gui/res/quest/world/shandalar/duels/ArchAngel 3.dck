@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ArchAngel 3
+Title=ArchAngel
+Difficulty=hard
+Description=Monowhite flier deck.
+Icon=ArchAngel.jpg
+Deck Type=constructed
+[main]
+4 Dancing Scimitar|ARN
+1 Disenchant|LEB
+2 Mana Vault|LEB
+2 Mishra's Factory|ATQ
+1 Onulet|ATQ
+4 Osai Vultures|LEG
+22 Plains|2ED
+4 Serra Angel|2ED
+2 Soul Net|LEB
+4 Swords to Plowshares|LEB
+4 Tetravus|ATQ
+2 The Hive|LEB
+4 Thunder Spirit|LEG
+4 Wrath of God|2ED
+[sideboard]

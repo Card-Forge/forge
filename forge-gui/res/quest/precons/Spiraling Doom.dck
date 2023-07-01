@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=20
+Credits=2000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spiraling Doom
+Description=Mock life and cheat death! This green and black deck is packed with hard-to-kill creatures, including those with the new undying ability, and many more ways to turn your smaller threats into larger ones.
+Deck Type=constructed
+Set=DKA
+Image=spiraling_doom.jpg
+[main]
+2 Evolving Wilds|DKA
+14 Forest|ISD
+1 Grim Backwoods|DKA
+8 Swamp|ISD
+1 Acidic Slime|M12
+1 Bloodgift Demon|ISD
+1 Brutalizer Exarch|NPH
+1 Hex Parasite|NPH
+1 Morkrut Banshee|ISD
+1 Myr Battlesphere|SOM
+1 Perilous Myr|SOM
+1 Phyrexian Rager|MBS
+3 Skinrender|SOM
+1 Solemn Simulacrum|M12
+1 Stingerfling Spider|M12
+4 Strangleroot Geist|DKA
+1 Viridian Corrupter|MBS
+4 Viridian Emissary|MBS
+1 Wakedancer|DKA
+4 Young Wolf|DKA
+2 Birthing Pod|NPH
+2 Diabolic Tutor|M12
+3 Doom Blade|M12
+1 Mortarpod|MBS
+[sideboard]

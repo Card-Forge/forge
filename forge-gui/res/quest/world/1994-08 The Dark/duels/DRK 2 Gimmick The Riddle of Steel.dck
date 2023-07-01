@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 2 Gimmick: The Riddle of Steel
+Title=The Riddle of Steel
+Difficulty=medium
+Description="As the cavalry bore down, we faced them with swords drawn and pikes hidden in the grass at our feet. 'Don't lift your pikes 'til I give the word,' I said." -Maeveen O'Donagh, Memoirs of a Soldier
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brainwash|DRK
+4 Diabolic Machine|DRK
+12 Forest|LEB|2
+4 Holy Light|DRK
+4 Land Leeches|DRK
+4 Morale|DRK
+4 Pikemen|DRK
+12 Plains|LEB|2
+4 Runesword|DRK
+4 Scavenger Folk|DRK
+4 Spitting Slug|DRK

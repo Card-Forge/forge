@@ -1,0 +1,5 @@
+Name:Incandescent Aria
+ManaCost:R G W
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature.nonToken | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each nontoken creature.
+Oracle:Incandescent Aria deals 3 damage to each nontoken creature.

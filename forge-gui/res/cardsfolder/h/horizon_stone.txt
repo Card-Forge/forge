@@ -1,0 +1,6 @@
+Name:Horizon Stone
+ManaCost:5
+Types:Artifact
+R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes colorless instead.
+SVar:ConvertMana:DB$ ReplaceMana | ReplaceType$ C
+Oracle:If you would lose unspent mana, that mana becomes colorless instead.

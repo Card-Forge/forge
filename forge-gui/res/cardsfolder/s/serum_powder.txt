@@ -1,0 +1,8 @@
+Name:Serum Powder
+ManaCost:3
+Types:Artifact
+Text:Any time you could mulligan and CARDNAME is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\nAny time you could mulligan and Serum Powder is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)

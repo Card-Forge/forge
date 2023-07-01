@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Sideshow Bob 3
+Title=Sideshow Bob
+Difficulty=hard
+Description=UR Instant Sorcery deck with Charmbreaker Devils, Galvanoth and Talrand, Sky Summoner
+Icon=Sideshow Bob.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall
+4 Augur of Bolas
+3 Beacon of Destruction
+3 Cast Through Time
+4 Charmbreaker Devils
+4 Electrolyze
+1 Flame Slash
+2 Flame Wave
+4 Galvanoth
+6 Island
+3 Lightning Bolt
+7 Mountain
+1 Mox Ruby
+1 Mox Sapphire
+4 Sulfur Falls
+2 Talrand, Sky Summoner
+1 Time Walk
+2 Time Warp
+2 Vapor Snag
+1 Opportunity
+4 Volcanic Island
+[sideboard]

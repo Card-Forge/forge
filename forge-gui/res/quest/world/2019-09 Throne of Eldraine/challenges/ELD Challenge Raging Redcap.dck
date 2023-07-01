@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Raging Redcap
+OpponentName=The Redcaps
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Ferocity of the Wilds|Steelclaw Lance
+HumanExtras=
+[metadata]
+Title=Raging Redcap
+Difficulty=medium
+Description=Many tales of redcap terror begin with two simple things: bloodlust and stolen steel.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Raging Redcap
+[Main]
+10 Castle Embereth|ELD|2
+20 Mountain|ELD|2
+30 Raging Redcap|ELD

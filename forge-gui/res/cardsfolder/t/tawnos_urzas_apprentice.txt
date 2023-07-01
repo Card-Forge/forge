@@ -1,0 +1,7 @@
+Name:Tawnos, Urza's Apprentice
+ManaCost:U R
+Types:Legendary Creature Human Artificer
+PT:1/3
+K:Haste
+A:AB$ CopySpellAbility | Cost$ U R T | TgtPrompt$ Select target activated or triggered ability you control from an artifact source | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Artifact | AILogic$ AlwaysCopyActivatedAbilities | MayChooseTarget$ True | StackDescription$ SpellDescription | SpellDescription$ Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+Oracle:Haste\n{U}{R}, {T}: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. (Mana abilities can't be targeted.)

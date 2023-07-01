@@ -1,0 +1,8 @@
+Name:Firebrand Archer
+ManaCost:1 R
+Types:Creature Human Archer
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Whenever you cast a noncreature spell, Firebrand Archer deals 1 damage to each opponent.

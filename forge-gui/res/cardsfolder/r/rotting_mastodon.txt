@@ -1,0 +1,5 @@
+Name:Rotting Mastodon
+ManaCost:4 B
+Types:Creature Zombie Elephant
+PT:2/8
+Oracle:

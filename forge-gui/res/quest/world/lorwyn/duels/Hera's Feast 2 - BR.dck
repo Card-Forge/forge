@@ -1,0 +1,36 @@
+[duel]
+
+[metadata]
+Name=Hera's Feast 2
+Title=Hera
+Icon=Hera.jpg
+Difficulty=medium
+Description=[B/R] Tribal Goblins.
+Deck Type=constructed
+
+[Main]
+3 Adder-Staff Boggart|LRW
+2 Boggart Birth Rite|LRW
+1 Boggart Mob|LRW
+2 Boggart Shenanigans|LRW
+2 Exiled Boggart|LRW
+3 Facevaulter|LRW
+1 Fodder Launch|LRW
+2 Ghostly Changeling|LRW
+1 Hoarder's Greed|LRW
+2 Knucklebone Witch|LRW
+2 Lowland Oaf|LRW
+2 Mad Auntie|LRW
+2 Marsh Flitter|LRW
+10 Mountain|LRW
+2 Mudbutton Torchrunner|LRW
+2 Prickly Boggart|MOR
+2 Shimmering Grotto|LRW
+12 Swamp|LRW
+1 Tar Pitcher|LRW
+4 Tarfire|LRW
+2 Warren Pilferers|LRW
+
+[sideboard]
+[planes]
+[schemes]

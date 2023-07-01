@@ -1,0 +1,7 @@
+Name:Leonin Den-Guard
+ManaCost:1 W
+Types:Creature Cat Soldier
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ As long as CARDNAME is equipped, it gets +1/+1 and has vigilance.
+SVar:EquipMe:Once
+Oracle:As long as Leonin Den-Guard is equipped, it gets +1/+1 and has vigilance.

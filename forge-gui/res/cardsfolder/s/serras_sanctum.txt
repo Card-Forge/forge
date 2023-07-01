@@ -1,0 +1,7 @@
+Name:Serra's Sanctum
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ X | SpellDescription$ Add {W} for each Enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+AI:RemoveDeck:Random
+Oracle:{T}: Add {W} for each enchantment you control.

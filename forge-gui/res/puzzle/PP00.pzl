@@ -1,0 +1,14 @@
+[metadata]
+Name:Pauper Puzzles #00 - Introduction Demo
+URL:https://pauperpuzzles.wordpress.com/2017/01/26/demo-and-introduction-to-pauper-puzzles/
+Goal:Win
+Turns:1
+Difficulty:Easy
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=8
+humanhand=Tendrils of Corruption
+humanbattlefield=Swamp;Swamp;Swamp;Swamp;Island;Island;Island;Crypt Rats;Gurmag Angler
+aibattlefield=Young Wolf;Gurmag Angler

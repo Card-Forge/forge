@@ -1,0 +1,21 @@
+Name:Beloved Beggar
+ManaCost:1 W
+Types:Creature Human Peasant
+PT:0/4
+K:Disturb:4 W W
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Disturb {4}{W}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Generous Soul
+ManaCost:no cost
+Colors:white
+Types:Creature Spirit
+PT:4/4
+K:Flying
+K:Vigilance
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying, vigilance\nIf Generous Soul would be put into a graveyard from anywhere, exile it instead.

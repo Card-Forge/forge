@@ -1,0 +1,6 @@
+Name:Lu Su, Wu Advisor
+ManaCost:3 U U
+Types:Legendary Creature Human Advisor
+PT:1/2
+A:AB$ Draw | Cost$ T | NumCards$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Draw a card. Activate only during your turn, before attackers are declared.
+Oracle:{T}: Draw a card. Activate only during your turn, before attackers are declared.

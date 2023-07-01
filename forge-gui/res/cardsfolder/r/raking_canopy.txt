@@ -1,0 +1,6 @@
+Name:Raking Canopy
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.withFlying | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature with flying attacks you, CARDNAME deals 4 damage to it.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredAttackerLKICopy | NumDmg$ 4
+Oracle:Whenever a creature with flying attacks you, Raking Canopy deals 4 damage to it.

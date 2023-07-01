@@ -1,0 +1,5 @@
+Name:Fire Elemental
+ManaCost:3 R R
+Types:Creature Elemental
+PT:5/4
+Oracle:

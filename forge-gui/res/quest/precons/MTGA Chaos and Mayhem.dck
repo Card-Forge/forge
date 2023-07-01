@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Chaos and Mayhem
+Description=Death is not the end. Strike terror from beyond with powerful graveyard combos.
+Deck Type=constructed
+Set=ANA
+[Main]
+4 Act of Treason|M19
+2 Blood Divination|M19
+3 Brawl-Bash Ogre|M19
+4 Cinder Barrens|M19
+1 Demon of Catastrophes|M19
+3 Doomed Dissenter|M19
+1 Dragonskull Summit|XLN
+3 Goblin Instigator|M19
+1 Goblin Trashmaster|M19
+1 Gravedigger|M19
+1 Gravewaker|M19
+10 Mountain|GRN
+3 Murder|M19
+1 Open the Graves|M19
+3 Ravenous Harpy|M19
+2 Reassembling Skeleton|M19
+1 Rekindling Phoenix|RIX
+3 Shock|M19
+1 Siege-Gang Commander|DOM
+2 Swab Goblin|RIX
+10 Swamp|GRN

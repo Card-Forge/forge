@@ -1,0 +1,6 @@
+Name:Goblin Spy
+ManaCost:R
+Types:Creature Goblin Rogue
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+Oracle:Play with the top card of your library revealed.

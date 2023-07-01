@@ -1,0 +1,7 @@
+Name:Volrath's Gardens
+ManaCost:1 G
+Types:Enchantment
+A:AB$ GainLife | Cost$ 2 tapXType<1/Creature> | LifeAmount$ 2 | SorcerySpeed$ True | SpellDescription$ You gain 2 life. Activate only as a sorcery.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:{2}, Tap an untapped creature you control: You gain 2 life. Activate only as a sorcery.

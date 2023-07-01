@@ -1,0 +1,8 @@
+Name:Khalni Hydra
+ManaCost:G G G G G G G G
+Types:Creature Hydra
+PT:8/8
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Color$ G | Amount$ X | EffectZone$ All | Description$ This spell costs {G} less to cast for each green creature you control.
+SVar:X:Count$Valid Creature.Green+YouCtrl
+Oracle:This spell costs {G} less to cast for each green creature you control.\nTrample

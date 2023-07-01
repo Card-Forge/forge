@@ -1,0 +1,8 @@
+Name:Nezumi Bladeblesser
+ManaCost:2 B
+Types:Creature Rat Samurai
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME has deathtouch as long as you control an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Enchantment.YouCtrl | Description$ CARDNAME has menace as long as you control an enchantment. (It can't be blocked except by two or more creatures.)
+DeckHints:Type$Artifact|Enchantment
+Oracle:Nezumi Bladeblesser has deathtouch as long as you control an artifact.\nNezumi Bladeblesser has menace as long as you control an enchantment. (It can't be blocked except by two or more creatures.)

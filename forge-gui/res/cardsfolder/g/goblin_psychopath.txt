@@ -1,0 +1,14 @@
+Name:Goblin Psychopath
+ManaCost:3 R
+Types:Creature Goblin Mutant
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ CoinFlip | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ CoinFlip | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
+SVar:CoinFlip:DB$ FlipACoin | LoseSubAbility$ CreateEffect
+SVar:CreateEffect:DB$ Effect | ReplacementEffects$ EventDamageDone
+SVar:EventDamageDone:Event$ DamageDone | ValidSource$ Card.EffectSource | DamageTarget$ You | ReplaceWith$ DamageYou | IsCombat$ True | Description$ The next time EFFECTSOURCE would deal combat damage this turn, it deals that damage to you instead.
+SVar:DamageYou:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:PsychoX:ReplaceCount$DamageAmount
+AI:RemoveDeck:Random
+Oracle:Whenever Goblin Psychopath attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.

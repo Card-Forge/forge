@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 5G
+Title=The Color Green
+Difficulty=Hard
+Description="Ach Hans, run! It's the Lhurgoyf!" -Saffi Eriksdotter, last words
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+2 Deadly Insect|ALL|1
+2 Deadly Insect|ALL|2
+1 Elvish Ranger|ALL|1
+1 Elvish Ranger|ALL|2
+20 Forest|ICE|3
+4 Fyndhorn Elves|ICE
+4 Giant Growth|ICE
+1 Gorilla Chieftain|ALL|1
+1 Gorilla Chieftain|ALL|2
+4 Heart of Yavimaya|ALL
+2 Hurricane|ICE
+4 Kaysa|ALL
+4 Lhurgoyf|ICE
+4 Nature's Lore|ICE
+4 Woolly Spider|ICE
+1 Yavimaya Ancients|ALL|1
+1 Yavimaya Ancients|ALL|2

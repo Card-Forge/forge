@@ -1,0 +1,9 @@
+Name:Bane Alley Broker
+ManaCost:1 U B
+Types:Creature Human Rogue
+PT:0/3
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand face down.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Mandatory$ True
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | MayLookAt$ You | Description$ You may look at cards exiled with CARDNAME.
+A:AB$ ChangeZone | Cost$ U B T | Origin$ Exile | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Card.ExiledWithSource | SpellDescription$ Return a card exiled with CARDNAME to its owner's hand.
+Oracle:{T}: Draw a card, then exile a card from your hand face down.\nYou may look at cards exiled with Bane Alley Broker.\n{U}{B}, {T}: Return a card exiled with Bane Alley Broker to its owner's hand.

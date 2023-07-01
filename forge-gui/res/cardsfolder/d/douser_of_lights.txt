@@ -1,0 +1,5 @@
+Name:Douser of Lights
+ManaCost:4 B
+Types:Creature Horror
+PT:4/5
+Oracle:

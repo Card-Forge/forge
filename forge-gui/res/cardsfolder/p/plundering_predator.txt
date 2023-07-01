@@ -1,0 +1,9 @@
+Name:Plundering Predator
+ManaCost:4 R
+Types:Creature Dragon
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards 1
+DeckHas:Ability$Discard
+Oracle:Flying\nWhen Plundering Predator enters the battlefield, you may discard a card. If you do, draw a card.

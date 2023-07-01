@@ -1,0 +1,13 @@
+Name:Crested Sunmare
+ManaCost:3 W W
+Types:Creature Horse
+PT:5/5
+S:Mode$ Continuous | Affected$ Horse.Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other Horses you control have indestructible.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Horse
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained life this turn, create a 5/5 white Horse creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_5_5_horse | TokenOwner$ You
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+SVar:AIEvaluationModifier:70
+DeckHints:Ability$LifeGain
+Oracle:Other Horses you control have indestructible.\nAt the beginning of each end step, if you gained life this turn, create a 5/5 white Horse creature token.

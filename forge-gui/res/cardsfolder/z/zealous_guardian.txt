@@ -1,0 +1,6 @@
+Name:Zealous Guardian
+ManaCost:WU
+Types:Creature Kithkin Soldier
+PT:1/1
+K:Flash
+Oracle:Flash

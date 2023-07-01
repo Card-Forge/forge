@@ -1,0 +1,9 @@
+Name:Blood-Chin Fanatic
+ManaCost:1 B B
+Types:Creature Orc Warrior
+PT:3/3
+A:AB$ LoseLife | Cost$ 1 B Sac<1/Creature.Other+Warrior/another Warrior creature> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target player loses X life and you gain X life, where X is the sacrificed creature's power.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Sacrificed$CardPower
+DeckHints:Type$Warrior
+Oracle:{1}{B}, Sacrifice another Warrior creature: Target player loses X life and you gain X life, where X is the sacrificed creature's power.

@@ -1,0 +1,5 @@
+Name:Amulet of Kroog
+ManaCost:2
+Types:Artifact
+A:AB$ PreventDamage | Cost$ 2 T | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
+Oracle:{2}, {T}: Prevent the next 1 damage that would be dealt to any target this turn.

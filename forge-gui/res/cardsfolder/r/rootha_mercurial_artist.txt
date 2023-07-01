@@ -1,0 +1,6 @@
+Name:Rootha, Mercurial Artist
+ManaCost:1 U R
+Types:Legendary Creature Orc Shaman
+PT:1/4
+A:AB$ CopySpellAbility | Cost$ 2 Return<1/CARDNAME> | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+Oracle:{2}, Return Rootha, Mercurial Artist to its owner's hand: Copy target instant or sorcery spell you control. You may choose new targets for the copy.

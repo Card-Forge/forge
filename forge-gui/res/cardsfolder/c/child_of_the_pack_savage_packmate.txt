@@ -1,0 +1,21 @@
+Name:Child of the Pack
+ManaCost:2 R G
+Types:Creature Human Werewolf
+PT:2/5
+A:AB$ Token | Cost$ 2 R G | TokenScript$ g_2_2_wolf | StackDescription$ SpellDescription | SpellDescription$ Create a 2/2 green Wolf creature token.
+K:Daybound
+DeckHas:Ability$Token & Type$Wolf
+AlternateMode:DoubleFaced
+Oracle:{2}{R}{G}: Create a 2/2 green Wolf creature token.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Savage Packmate
+ManaCost:no cost
+Colors:red,green
+Types:Creature Werewolf
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control get +1/+0.
+K:Nightbound
+Oracle:Trample\nOther creatures you control get +1/+0.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

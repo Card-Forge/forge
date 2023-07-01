@@ -1,0 +1,9 @@
+Name:Bold Plagiarist
+ManaCost:3 B
+Types:Creature Vampire Rogue
+PT:2/2
+K:Flash
+T:Mode$ CounterPlayerAddedAll | ValidSource$ Opponent | ValidObjectToSource$ Creature.YouCtrl+inRealZoneBattlefield | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent puts one or more counters on a creature they control, they put the same number and kind of counters on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | Placer$ TriggeredSource | TriggeredCounterMap$ True
+DeckHas:Ability$Counters
+Oracle:Flash\nWhenever an opponent puts one or more counters on a creature they control, they put the same number and kind of counters on Bold Plagiarist.

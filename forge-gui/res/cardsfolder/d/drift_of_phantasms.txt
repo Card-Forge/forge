@@ -1,0 +1,8 @@
+Name:Drift of Phantasms
+ManaCost:2 U
+Types:Creature Spirit
+PT:0/5
+K:Defender
+K:Flying
+K:Transmute:1 U U
+Oracle:Defender (This creature can't attack.)\nFlying\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

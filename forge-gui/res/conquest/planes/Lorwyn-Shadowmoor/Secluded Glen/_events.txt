@@ -1,0 +1,9 @@
+Name:Fae Control|Deck:Fae Control.dck|Variant:None|Avatar:Glen Elendra Archmage|Desc:
+Name:Rogues on the Prowl|Deck:Rogues on the Prowl.dck|Variant:None|Avatar:Inkfathom Infiltrator|Desc:
+Name:Soldiers of the Glen|Deck:Soldiers of the Glen.dck|Variant:None|Avatar:Glen Elendra Liege|Desc:
+Name:Whims of the Fae|Deck:Whims of the Fae.dck|Variant:None|Avatar:Mistbind Clique|Desc:
+Name:Wizards of the Secluded Glen|Deck:Wizards of the Secluded Glen.dck|Variant:None|Avatar:Sage of Fables|Desc:
+Name:Oona, Queen of the Fae|Deck:Oona, Queen of the Fae.dck|Variant:Commander|Avatar:Oona, Queen of the Fae|Desc:
+Name:Vendilion Clique|Deck:Vendilion Clique.dck|Variant:Commander|Avatar:Vendilion Clique|Desc:
+Name:Wydwen, the Biting Gale|Deck:Wydwen, the Biting Gale.dck|Variant:Commander|Avatar:Wydwen, the Biting Gale|Desc:
+Name:Jace Beleren|Deck:Jace Beleren.dck|Variant:Planeswalker|Avatar:Jace Beleren|Desc:

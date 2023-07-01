@@ -1,0 +1,38 @@
+[duel]
+
+[metadata]
+Name=Gaea's Tinkering 1
+Title=Gaea
+Icon=Gaea.jpg
+Difficulty=easy
+Description=[U/G] Preconstructed
+Deck Type=constructed
+
+[main]
+12 Island|SHM
+12 Forest|SHM
+
+1 Drowner Initiate|SHM
+2 Nurturer Initiate|SHM
+1 Trip Noose|SHM
+1 Slippery Bogle|EVE
+1 Merrow Levitator|EVE
+2 Nettle Sentinel|EVE
+2 Wickerbough Elder|EVE
+1 Invert the Skies|EVE
+2 Favor of the Overbeing|EVE
+3 Wistful Selkie|EVE
+3 Shorecrasher Mimic|EVE
+1 Fable of Wolf and Owl|EVE
+1 Dream Fracture|EVE
+2 Groundling Pouncer|EVE
+1 Grazing Kelpie|EVE
+1 Monstrify|EVE
+2 Sturdy Hatchling|EVE
+1 Spitting Image|EVE
+3 Snakeform|EVE
+1 Cerulean Wisps|SHM
+1 Viridescent Wisps|SHM
+3 Selkie Hedge-Mage|EVE
+
+[sideboard]

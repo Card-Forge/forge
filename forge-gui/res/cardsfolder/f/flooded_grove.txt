@@ -1,0 +1,7 @@
+Name:Flooded Grove
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ GU T | Produced$ Combo G U | Amount$ 2 | SpellDescription$ Add {G}{G}, {G}{U}, or {U}{U}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}.

@@ -1,0 +1,10 @@
+Name:Stern Judge
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILogic$ AllPlayerLoseLife | SpellDescription$ Each player loses 1 life for each Swamp they control.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Swamp.RememberedPlayerCtrl
+AI:RemoveDeck:Random
+Oracle:{T}: Each player loses 1 life for each Swamp they control.

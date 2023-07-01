@@ -1,0 +1,11 @@
+Name:Blood Baron of Vizkopa
+ManaCost:3 W B
+Types:Creature Vampire
+PT:4/4
+K:Lifelink
+K:Protection from black
+K:Protection from white
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | AddPower$ 6 | AddToughness$ 6 | CheckSVar$ X | SVarCompare$ LE10 | CheckSecondSVar$ Y | SecondSVarCompare$ GE30 | Description$ As long as you have 30 or more life and an opponent has 10 or less life, CARDNAME gets +6/+6 and has flying.
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+SVar:Y:Count$YourLifeTotal
+Oracle:Lifelink, protection from white and from black\nAs long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.

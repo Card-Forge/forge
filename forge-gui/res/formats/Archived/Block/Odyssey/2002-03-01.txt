@@ -1,0 +1,6 @@
+[format]
+Name:Block: Odyssey (TOR)
+Type:Archived
+Subtype:Block
+Effective:2002-03-01
+Sets:ODY, TOR

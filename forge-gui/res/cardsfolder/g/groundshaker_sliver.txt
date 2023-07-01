@@ -1,0 +1,8 @@
+Name:Groundshaker Sliver
+ManaCost:6 G
+Types:Creature Sliver
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Trample | Description$ Sliver creatures you control have trample.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+Oracle:Sliver creatures you control have trample. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)

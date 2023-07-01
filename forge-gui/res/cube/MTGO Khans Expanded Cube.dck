@@ -1,0 +1,498 @@
+[metadata]
+Name=MTGO Khans Expanded Cube
+[main]
+1 Herald of Anafenza|KTK
+1 Embodiment of Spring|KTK
+1 Bloodsoaked Champion|KTK
+1 Kolaghan Stormsinger|DTK
+1 Experiment One|GTC
+1 Taigam, Ojutai Master|C17
+1 Chronomaton|M13
+1 Arid Mesa|MH2
+1 Mardu Hateblade|KTK
+1 Enclave Cryptologist|ROE
+1 Cruel Sadist|M15
+1 Monastery Swiftspear|IMA
+1 Gnarlwood Dryad|EMN
+1 Ojutai, Soul of Winter|FRF
+1 Filigree Familiar|KLD
+1 Ash Barrens|2XM
+1 Mardu Woe-Reaper|FRF
+1 Deranged Assistant|UMA
+1 Disowned Ancestor|KTK
+1 Abbot of Keral Keep|ORI
+1 Patron of the Wild|LGN
+1 Dragonlord Silumgar|DTK
+1 Pilgrim's Eye|EMA
+1 Battlefield Forge|ORI
+1 Ainok Bond-Kin|IMA
+1 Elusive Spellfist|IMA
+1 Ruthless Ripper|A25
+1 Firebrand Archer|AKR
+1 Pelt Collector|GRN
+1 Connive // Concoct|GRN
+1 Skittering Surveyor|DOM
+1 Blood Crypt|RNA
+1 Daring Skyjek|GTC
+1 Jeskai Elder|M21
+1 Shambling Goblin|CN2
+1 Horde Ambusher|KTK
+1 Ainok Survivalist|A25
+1 Dreadhorde Butcher|WAR
+1 Awakened Amalgam|RIX
+1 Bloodfell Caves|NEO
+1 Hidden Dragonslayer|DTK
+1 Jeskai Sage|FRF
+1 Battle Brawler|FRF
+1 Ire Shaman|A25
+1 Broodhatch Nantuko|A25
+1 Dragonlord Kolaghan|DTK
+1 Peace Strider|2XM
+1 Bloodstained Mire|EXP
+1 Master of Pearls|KTK
+1 Plaxmanta|DIS
+1 Kitesail Freebooter|M21
+1 Jeering Instigator|UGF
+1 Deadly Recluse|M14
+1 Ghor-Clan Rampager|2XM
+1 Rampaging Monument|GRN
+1 Blooming Marsh|KLD
+1 Remorseful Cleric|M19
+1 Qarsi Deceiver|DTK
+1 Mardu Skullhunter|KTK
+1 Kiln Fiend|IMA
+1 Decorated Champion
+1 Atarka, World Render|FRF
+1 Solemn Simulacrum|M21
+1 Blossoming Sands|NEO
+1 Seeker of the Way|IMA
+1 Spellweaver Eternal|AKR
+1 Silumgar Assassin|DTK
+1 Mogg War Marshal|EMA
+1 Den Protector|DTK
+1 Knight of Autumn|GRN
+1 Chamber Sentry|GRN
+1 Botanical Sanctum|KLD
+1 Soulfire Grand Master|FRF
+1 Stratus Dancer|DTK
+1 Skinthinner|LGN
+1 Nef-Crop Entangler|AKR
+1 Glade Watcher|DTK
+1 Dromoka, the Eternal|FRF
+1 Duplicant|2XM
+1 Breeding Pool|RNA
+1 Steward of Solidarity|AKR
+1 Willbender|A25
+1 Sultai Emissary|FRF
+1 Skirk Marauder|LGN
+1 Heir of the Wilds|KTK
+1 Chief of the Edge|KTK
+1 Animation Module|KLD
+1 Caves of Koilos|ORI
+1 Tithe Taker|RNA
+1 Echo Tracer|LGN
+1 Aphetto Exterminator|LGN
+1 Thermo-Alchemist|DBL
+1 Obsessive Skinner|SOI
+1 Chief of the Scale|KTK
+1 Ghostfire Blade|UGF
+1 Concealed Courtyard|KLD
+1 Wall of Omens|EMA
+1 Riptide Entrancer|ONS
+1 Blood-Chin Fanatic|DTK
+1 War-Name Aspirant|KTK
+1 Rattleclaw Mystic|KTK
+1 Elenda, the Dusk Rose|RIX
+1 Sylvok Lifestaff|SOM
+1 Dismal Backwater|NEO
+1 Abzan Falconer|IMA
+1 Riptide Survivor|SCG
+1 Graveblade Marauder|ORI
+1 Crater Elemental|DTK
+1 Ilysian Caryatid|THB
+1 Mortify|RNA
+1 Triangle of War|VMA
+1 Evolving Wilds|DBL
+1 Arashin Foremost|DTK
+1 Aphetto Runecaster|SCG
+1 Grim Haruspex|UGF
+1 Flamewake Phoenix|FRF
+1 Deathmist Raptor|DTK
+1 Start // Finish|AKR
+1 Cranial Archive|KTK
+1 Flooded Strand|EXP
+1 Kor Sanctifiers|ZEN
+1 Gurmag Drowner|DTK
+1 Mardu Strike Leader|FRF
+1 Legion Warboss|GRN
+1 Springbloom Druid|MH1
+1 Utter End|KTK
+1 Dream Chisel|ONS
+1 Frontier Bivouac|KTK
+1 Mardu Hordechief|KTK
+1 Kheru Spellsnatcher|KTK
+1 Necravolver|APC
+1 Bonecrusher Giant|ELD
+1 Tuskguard Captain|KTK
+1 Castigate|GPT
+1 Guild Globe|WAR
+1 Godless Shrine|RNA
+1 Monastery Mentor|FRF
+1 Master of the Veil|LGN
+1 Bane of the Living|LGN
+1 Reckless Bushwhacker|OGW
+1 Anavolver|APC
+1 Obzedat's Aid|DGM
+1 Leering Emblem|EVE
+1 Grand Coliseum|VMA
+1 Wingbeat Warrior|LGN
+1 Mistfire Weaver|KTK
+1 Bellowing Saddlebrute|KTK
+1 Skirk Commando|A25
+1 Armorcraft Judge|KLD
+1 Death Grasp|VMA
+1 Prophetic Prism|A25
+1 Hallowed Fountain|RNA
+1 Abzan Battle Priest|IMA
+1 Niblis of Frost|EMN
+1 Gift of Doom
+1 Smelt-Ward Minotaur|GRN
+1 Goreclaw, Terror of Qal Sisma|M19
+1 Campaign of Vengeance|EMN
+1 Stormrider Rig|DTK
+1 Hissing Quagmire|OGW
+1 Aven Liberator|SCG
+1 Talrand, Sky Summoner|M13
+1 Grinning Demon|ONS
+1 Ashcloud Phoenix|KTK
+1 Nantuko Vigilante|LGN
+1 Golgari Guildmage|RAV
+1 Trip Noose|SHM
+1 Inspiring Vantage|KLD
+1 Daru Sanctifier|LGN
+1 Chromeshell Crab|LGN
+1 Haunted Cadaver|ONS
+1 Atarka Efreet|DTK
+1 Serpentine Basilisk|ONS
+1 Dreg Mangler|RTR
+1 Arcane Encyclopedia|M19
+1 Jungle Hollow|NEO
+1 Dragonscale General|FRF
+1 Icefall Regent|DTK
+1 Haunted Dead|EMN
+1 Battering Craghorn|ONS
+1 Sultai Flayer|IMA
+1 Corpsejack Menace|IMA
+1 Sickleslicer|2XM
+1 Llanowar Wastes|ORI
+1 High Sentinels of Arashin|KTK
+1 Ixidor, Reality Sculptor|ONS
+1 Mer-Ek Nightblade|IMA
+1 Blistering Firecat|ONS
+1 Surrak, the Hunt Caller|DTK
+1 Izoni, Thousand-Eyed|GRN
+1 Bonehoard|MBS
+1 Lumbering Falls|BFZ
+1 Ojutai Exemplars|DTK
+1 Ixidron|TSP
+1 Thrasher Brute
+1 Erratic Cyclops|GRN
+1 Thelonite Hermit|TSP
+1 Assassin's Trophy|GRN
+1 Obelisk of Alara|CFX
+1 Marsh Flats|MH2
+1 Stonehorn Dignitary|M12
+1 Mischievous Quanar|SCG
+1 Creakwood Ghoul|EVE
+1 Goblin Heelcutter|FRF
+1 Challenger Troll|WAR
+1 Grisly Salvage|RTR
+1 Misty Rainforest|MH2
+1 Elite Scaleguard|FRF
+1 Soulblade Djinn|ORI
+1 Rakshasa Gravecaller|DTK
+1 Mardu Heart-Piercer|KTK
+1 Conclave Naturalists|2XM
+1 Find // Finality|GRN
+1 Mystic Monastery|KTK
+1 Giant Killer|ELD
+1 Vesuvan Shapeshifter|A25
+1 Noosegraf Mob|EMN
+1 Caldera Hellion|ALA
+1 Gigapede|VMA
+1 Death Frenzy|KTK
+1 Needle Spires|OGW
+1 Patron of the Valiant|ORI
+1 Brine Elemental|A25
+1 Silent Specter|ONS
+1 Charging Monstrosaur|XLN
+1 Hystrodon|ONS
+1 Deadbridge Chant|DGM
+1 Nomad Outpost|KTK
+1 Wingmate Roc|KTK
+1 Quicksilver Dragon|ONS
+1 Gurmag Angler|UMA
+1 Dragon-Style Twins|KTK
+1 Kessig Cagebreakers|ISD
+1 Nyx Weaver|JOU
+1 Opulent Palace|KTK
+1 Daru Lancer|ONS
+1 Thousand Winds|KTK
+1 Tombstalker|MMA
+1 Flamerush Rider|FRF
+1 Pine Walker|KTK
+1 Coiling Oracle|MM3
+1 Overgrown Tomb|GRN
+1 Exalted Angel|ONS
+1 Dive Down|XLN
+1 Necropolis Fiend|KTK
+1 Quakefoot Cyclops|MH1
+1 Primal Whisperer|LGN
+1 Icefeather Aven|KTK
+1 Polluted Delta|EXP
+1 Linvala, the Preserver|OGW
+1 Opt|STA
+1 Ghastly Demise|ODY
+1 Skarrgan Hellkite|RNA
+1 Hooting Mandrills|UMA
+1 Mystic Snake|A25
+1 Prismatic Vista|MH1
+1 Harm's Way|M10
+1 Stubborn Denial|KTK
+1 Moment of Craving|RIX
+1 Firemaw Kavu|TSP
+1 Root Elemental|SCG
+1 Sagu Mauler|KTK
+1 Rugged Highlands|NEO
+1 Path to Exile|2XM
+1 Disdainful Stroke|SNC
+1 Vicious Offering|DOM
+1 Rockshard Elemental|LGN
+1 Temur War Shaman|FRF
+1 Applied Biomancy|RNA
+1 Sacred Foundry|GRN
+1 Sheltering Light|XLN
+1 Force Away|KTK
+1 Expunge|VMA
+1 Bedlam Reveler|EMN
+1 Hooded Hydra|KTK
+1 Ethereal Ambush|FRF
+1 Sandsteppe Citadel|KTK
+1 Adamant Will|DBL
+1 Impulse|VIS
+1 Murder|SNC
+1 Weapon Surge|2XM
+1 Venomspout Brackus|ONS
+1 Incubation // Incongruity|RNA
+1 Scalding Tarn|MH2
+1 Artful Maneuver|DTK
+1 Jilt|APC
+1 Foul Renewal|DTK
+1 Burning Oil|DKA
+1 Earthbrawn|MOR
+1 Urban Evolution|UMA
+1 Scoured Barrens|NEO
+1 Disenchant|ZNR
+1 Reality Shift|FRF
+1 Price of Fame|GRN
+1 Lightning Strike|M19
+1 Grapple with the Past|EMN
+1 Secret Plans|KTK
+1 Shambling Vent|BFZ
+1 Feat of Resistance|M21
+1 Think Twice|UMA
+1 Murderous Cut|KTK
+1 Temur Battle Rage|2XM
+1 Winds of Qal Sisma|FRF
+1 Yavimaya's Embrace|2XM
+1 Shivan Reef|ORI
+1 Feeling of Dread|ISD
+1 Twisted Reflection|MH1
+1 Reach of Shadows|FRF
+1 Omen of the Forge|THB
+1 Crushing Canopy|DBL
+1 Stormchaser Mage|OGW
+1 Spirebluff Canal|KLD
+1 Phalanx Tactics|THB
+1 Winds of Rebuke|AKR
+1 Death Wind|CN2
+1 Brimstone Volley|2XM
+1 Gnaw to the Bone|ISD
+1 Bloodwater Entity|HOU
+1 Steam Vents|GRN
+1 Valorous Stance|DBL
+1 Forbidden Alchemy|UMA
+1 Duress|DBL
+1 Geistblast|SOI
+1 Thornado|MH1
+1 Wee Dragonauts|GRN
+1 Stomping Ground|RNA
+1 Generous Gift|MH1
+1 Phantasmal Form|MH1
+1 Chainer's Edict|UMA
+1 Risk Factor|GRN
+1 Wild Hunger|UMA
+1 Crackling Drake|GRN
+1 Swiftwater Cliffs|NEO
+1 Radiant's Judgment|ULG
+1 Repulse|CN2
+1 Agonizing Remorse|STA
+1 Bolt Bend|WAR
+1 Become Immense|UMA
+1 Hypersonic Dragon|IMA
+1 Temple Garden|GRN
+1 Rally the Peasants|UMA
+1 Sinister Sabotage|GRN
+1 Morgue Theft|ODY
+1 Burn Away|CN2
+1 Savage Swipe|MH1
+1 Izzet Charm|2XM
+1 Temple of Abandon|THB
+1 Miraculous Recovery|UMA
+1 Chemister's Insight|GRN
+1 Mire Triton|THB
+1 Deem Worthy|AKR
+1 Epic Confrontation|A25
+1 Electrolyze|STA
+1 Temple of Deceit|THB
+1 Oust|ROE
+1 Commit // Memory|AKR
+1 Doomfall|AKR
+1 Flames of the Raze-Boar|RNA
+1 Savage Punch|KTK
+1 Sonic Assault|GRN
+1 Temple of Enlightenment|THB
+1 Collective Effort|EMN
+1 Icy Blast|KTK
+1 Heartless Pillage|2XM
+1 Faithless Looting|STA
+1 Tracker's Instincts|DKA
+1 Winterflame|KTK
+1 Temple of Epiphany|M21
+1 Slaughter the Strong|RIX
+1 Dig Through Time|UMA
+1 Infest|CN2
+1 Flame Slash|CN2
+1 Winding Way|MH1
+1 Prophetic Bolt|VMA
+1 Temple of Malady|M21
+1 End Hostilities|KTK
+1 Callous Dismissal|WAR
+1 Parting Thoughts|C16
+1 Reckless Charge|MH1
+1 Map the Wastes|FRF
+1 Honored Crop-Captain|AKR
+1 Temple of Malice|THB
+1 Fell the Mighty|C17
+1 Chart a Course|XLN
+1 Wander in Death|AKR
+1 Nightbird's Clutches|UMA
+1 Voracious Hydra|M20
+1 Sunhome Guildmage|MM3
+1 Temple of Mystery|M21
+1 Myth Realized|DTK
+1 Strategic Planning|STA
+1 Moan of the Unhallowed|UMA
+1 Roast|DTK
+1 Nissa's Judgment|OGW
+1 Viashino Firstblade|DGM
+1 Temple of Plenty|THB
+1 Mastery of the Unseen|FRF
+1 Write into Being|FRF
+1 Smiting Helix|MH1
+1 Tormenting Voice|ZNR
+1 Spider Spawning|UMA
+1 Firemane Avenger|GTC
+1 Temple of Silence|M21
+1 Silkwrap|DTK
+1 Set Adrift|KTK
+1 Vigor Mortis|RAV
+1 Arc Lightning|UGF
+1 See the Unwritten|KTK
+1 Foundry Champion|GTC
+1 Temple of Triumph|M21
+1 Suspension Field|KTK
+1 Treasure Cruise|UMA
+1 Crux of Fate|STA
+1 Collective Defiance|EMN
+1 Hardened Scales|KTK
+1 Integrity // Intervention|GRN
+1 Fabled Passage|M21
+1 Lightform|FRF
+1 Spontaneous Mutation|EMN
+1 Dead Drop|KTK
+1 Repeating Barrage|XLN
+1 Obscuring Aether|DTK
+1 Response // Resurgence|GRN
+1 Thornwood Falls|NEO
+1 Stasis Snare|BFZ
+1 Riddleform|AKR
+1 Debilitating Injury|UGF
+1 Rolling Temblor|UMA
+1 Durable Handicraft|KLD
+1 Ride Down|EMN
+1 Tranquil Cove|NEO
+1 Cast Out|AKR
+1 Cloudform|FRF
+1 Raiders' Spoils|KTK
+1 Crater's Claws|KTK
+1 Trail of Mystery|KTK
+1 War Flare|FRF
+1 Verdant Catacombs|MH2
+1 Righteous Cause|ONS
+1 Skywise Teachings|IMA
+1 Raiders' Wake|XLN
+1 Rageform|FRF
+1 Colossal Majesty|M19
+1 Warleader's Helix|UMA
+1 Wandering Fumarole|OGW
+1 Mantis Rider|KTK
+1 Watery Grave|GRN
+1 Shu Yun, the Silent Tempest|FRF
+1 Wind-Scarred Crag|NEO
+1 Elsha of the Infinite
+1 Windswept Heath|EXP
+1 Warden of the Eye|KTK
+1 Wooded Foothills|EXP
+1 Efreet Weaponmaster|KTK
+1 Yavimaya Coast|ORI
+1 Kykar, Wind's Fury|M20
+1 Jeskai Charm|KTK
+1 Flying Crane Technique|KTK
+1 Jeskai Ascendancy|KTK
+1 Alesha, Who Smiles at Death|FRF
+1 Butcher of the Horde|KTK
+1 Ankle Shanker|KTK
+1 Zurgo Helmsmasher|KTK
+1 Ponyback Brigade|KTK
+1 Crackling Doom|KTK
+1 Mardu Charm|KTK
+1 Mardu Ascendancy|KTK
+1 Fervent Charge|APC
+1 Anafenza, the Foremost|KTK
+1 Siege Rhino|KTK
+1 Armament Corps|KTK
+1 Ivorytusk Fortress|KTK
+1 Abzan Guide|KTK
+1 Abzan Charm|KTK
+1 Ready // Willing|DGM
+1 Duneblast|KTK
+1 Abzan Ascendancy|KTK
+1 Sidisi, Brood Tyrant|KTK
+1 Rakshasa Vizier|KTK
+1 Sultai Soothsayer|KTK
+1 Abomination of Gudul|KTK
+1 Muldrotha, the Gravetide|DOM
+1 Tasigur, the Golden Fang|FRF
+1 Sultai Charm|KTK
+1 Villainous Wealth|KTK
+1 Sultai Ascendancy|KTK
+1 Savage Knuckleblade|KTK
+1 Yasova Dragonclaw|FRF
+1 Avalanche Tusker|KTK
+1 Bear's Companion|KTK
+1 Surrak Dragonclaw|KTK
+1 Intet, the Dreamer|PLC
+1 Snowhorn Rider|KTK
+1 Temur Charm|KTK
+1 Temur Ascendancy|KTK

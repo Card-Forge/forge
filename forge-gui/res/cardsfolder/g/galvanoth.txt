@@ -1,0 +1,9 @@
+Name:Galvanoth
+ManaCost:3 R R
+Types:Creature Beast
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of your library. You may cast it without paying its mana cost if it's an instant or sorcery spell.
+SVar:TrigPeek:DB$ PeekAndReveal | NoReveal$ True | SubAbility$ TrigPlay
+SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ConditionDefined$ TopOfLibrary | ConditionPresent$ Instant,Sorcery
+DeckNeeds:Type$Instant|Sorcery
+Oracle:At the beginning of your upkeep, you may look at the top card of your library. You may cast it without paying its mana cost if it's an instant or sorcery spell.

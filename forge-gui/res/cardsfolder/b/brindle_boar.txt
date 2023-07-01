@@ -1,0 +1,6 @@
+Name:Brindle Boar
+ManaCost:2 G
+Types:Creature Boar
+PT:2/2
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+Oracle:Sacrifice Brindle Boar: You gain 4 life.

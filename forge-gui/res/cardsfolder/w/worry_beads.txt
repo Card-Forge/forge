@@ -1,0 +1,7 @@
+Name:Worry Beads
+ManaCost:3
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player mills a card.

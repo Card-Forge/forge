@@ -1,0 +1,8 @@
+Name:Gustcloak Sentinel
+ManaCost:2 W W
+Types:Creature Human Soldier
+PT:3/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntapRemove | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
+SVar:TrigUntapRemove:DB$ Untap | SubAbility$ DBRemoveCombat
+SVar:DBRemoveCombat:DB$ RemoveFromCombat
+Oracle:Whenever Gustcloak Sentinel becomes blocked, you may untap it and remove it from combat.

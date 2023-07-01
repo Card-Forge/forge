@@ -1,0 +1,8 @@
+Name:Gempalm Sorcerer
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/2
+K:Cycling:2 U
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, all Wizards gain flying until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Wizard | KW$ Flying
+Oracle:Cycling {2}{U} ({2}{U}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Sorcerer, Wizard creatures gain flying until end of turn.

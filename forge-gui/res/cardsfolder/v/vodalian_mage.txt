@@ -1,0 +1,6 @@
+Name:Vodalian Mage
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ Counter | Cost$ U T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+Oracle:{U}, {T}: Counter target spell unless its controller pays {1}.

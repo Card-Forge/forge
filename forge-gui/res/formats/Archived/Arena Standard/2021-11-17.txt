@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (VOW)
+Type:Archived
+Subtype:Standard
+Effective:2021-11-17
+Sets:ANA, PANA, ANB, ZNR, KHM, STX, AFR, MID, VOW
+Banned:Omnath, Locus of Creation

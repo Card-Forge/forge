@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Title=Final Judge
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=He brings the final judgement!
+Deck Type=constructed
+Name=FinalJudgement
+[Main]
+4 Alaborn Zealot|PO2
+4 Armageddon|POR
+4 Devoted Hero|POR
+4 Gift of Estates|POR
+4 Loyal Sentry|S99
+10 Plains|POR|1
+8 Plains|POR|2
+4 Plains|POR|3
+6 Plains|POR|4
+4 Ravages of War|PTK
+4 Shu Cavalry|PTK
+4 Wrath of God|POR

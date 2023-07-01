@@ -1,0 +1,7 @@
+Name:Incubation Sac
+ManaCost:G
+Types:Artifact
+K:etbCounter:OIL:3
+A:AB$ Token | Cost$ 4 T SubCounter<1/OIL> | TokenScript$ c_3_3_a_phyrexian_golem | SorcerySpeed$ True | SpellDescription$ Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.
+DeckHas:Ability$Counters|Token & Type$Phyrexian|Golem
+Oracle:Incubation Sac enters the battlefield with three oil counters on it.\n{4}, {T}, Remove an oil counter from Incubation Sac: Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.

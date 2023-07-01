@@ -1,0 +1,8 @@
+Name:Honey Mammoth
+ManaCost:4 G G
+Types:Creature Elephant
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
+DeckHas:Ability$LifeGain
+Oracle:When Honey Mammoth enters the battlefield, you gain 4 life.

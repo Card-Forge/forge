@@ -1,0 +1,8 @@
+Name:Gonti's Machinations
+ManaCost:B
+Types:Enchantment
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigEnergy | TriggerDescription$ Whenever you lose life for the first time each turn, you get {E}. (You get an energy counter. Damage causes loss of life.)
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ LoseLife | Cost$ PayEnergy<2> Sac<1/CARDNAME> | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life. You gain life equal to the life lost this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
+Oracle:Whenever you lose life for the first time each turn, you get {E}. (You get an energy counter. Damage causes loss of life.)\nPay {E}{E}, Sacrifice Gonti's Machinations: Each opponent loses 3 life. You gain life equal to the life lost this way.

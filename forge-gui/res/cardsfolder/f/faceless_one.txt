@@ -1,0 +1,10 @@
+Name:Faceless One
+ManaCost:5
+Types:Legendary Enchantment Creature Background
+PT:3/3
+K:If CARDNAME is your commander, choose a color before the game begins.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | Affected$ Card.Self | SetColor$ ChosenColor | Description$ CARDNAME is the chosen color.
+K:Choose a Background
+AI:RemoveDeck:NonCommander
+AI:RemoveDeck:All
+Oracle:If Faceless One is your commander, choose a color before the game begins. Faceless One is the chosen color.\nChoose a Background (You can have a Background as a second commander.)

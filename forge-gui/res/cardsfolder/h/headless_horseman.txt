@@ -1,0 +1,5 @@
+Name:Headless Horseman
+ManaCost:2 B
+Types:Creature Zombie Knight
+PT:2/2
+Oracle:

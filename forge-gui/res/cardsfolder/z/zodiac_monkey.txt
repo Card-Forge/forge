@@ -1,0 +1,6 @@
+Name:Zodiac Monkey
+ManaCost:1 G
+Types:Creature Monkey
+PT:2/1
+K:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

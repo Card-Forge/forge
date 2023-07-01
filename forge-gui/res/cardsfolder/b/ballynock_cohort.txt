@@ -1,0 +1,8 @@
+Name:Ballynock Cohort
+ManaCost:2 W
+Types:Creature Kithkin Soldier
+PT:2/2
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Creature.White+Other+YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control another white creature.
+SVar:BuffedBy:Creature.White
+Oracle:First strike\nBallynock Cohort gets +1/+1 as long as you control another white creature.

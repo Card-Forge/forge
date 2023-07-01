@@ -1,0 +1,8 @@
+Name:Ilysian Caryatid
+ManaCost:1 G
+Types:Creature Plant
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one color instead.
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
+Oracle:{T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one color instead.

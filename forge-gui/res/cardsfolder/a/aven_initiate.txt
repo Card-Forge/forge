@@ -1,0 +1,8 @@
+Name:Aven Initiate
+ManaCost:3 U
+Types:Creature Bird Warrior
+PT:3/2
+K:Flying
+K:Embalm:6 U
+DeckHas:Ability$Token
+Oracle:Flying\nEmbalm {6}{U} ({6}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Bird Warrior with no mana cost. Embalm only as a sorcery.)

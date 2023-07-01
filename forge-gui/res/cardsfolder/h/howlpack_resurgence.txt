@@ -1,0 +1,8 @@
+Name:Howlpack Resurgence
+ManaCost:2 G
+Types:Enchantment
+K:Flash
+S:Mode$ Continuous | Affected$ Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Each creature you control that's a Wolf or a Werewolf gets +1/+1 and has trample.
+AI:RemoveDeck:Random
+DeckHints:Type$Wolf|Werewolf
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEach creature you control that's a Wolf or a Werewolf gets +1/+1 and has trample.

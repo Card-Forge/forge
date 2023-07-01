@@ -1,0 +1,8 @@
+Name:Turn the Earth
+ManaCost:G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | ValidTgts$ Card | TgtPrompt$ Choose up to three target cards in graveyards | TargetMin$ 0 | TargetMax$ 3 | SubAbility$ DBGainLife | StackDescription$ The owners of {c:Targeted} shuffle them into their libraries. | SpellDescription$ Choose up to three target cards in graveyards. The owners of those cards shuffle them into their libraries. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You
+K:Flashback:1 G
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Choose up to three target cards in graveyards. The owners of those cards shuffle them into their libraries. You gain 2 life.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,0 +1,7 @@
+Name:Bullwhip
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 2 T | ValidTgts$ Creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature attacks this turn if able.
+SVar:DBPump:DB$ Effect | Defined$ Targeted | StaticAbilities$ MustAttack | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+Oracle:{2}, {T}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.

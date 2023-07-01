@@ -1,0 +1,10 @@
+Name:Karona, False God Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-1/+8
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigExchangeChoose | TriggerDescription$ At the beginning of your upkeep, exchange control of a permanent you control chosen at random and a permanent target opponent controls chosen at random.
+SVar:TrigExchangeChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Permanent.TargetedPlayerCtrl | AtRandom$ True | Amount$ 1 | RememberChosen$ True | SubAbility$ ChooseYou
+SVar:ChooseYou:DB$ ChooseCard | Choices$ Permanent.YouCtrl | Amount$ 1 | AtRandom$ True | RememberChosen$ True | SubAbility$ DBExchange
+SVar:DBExchange:DB$ ExchangeControl | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Hand -1, life +8\nAt the beginning of your upkeep, exchange control of a permanent you control chosen at random and a permanent target opponent controls chosen at random.

@@ -1,0 +1,10 @@
+Name:Thopter Assembly
+ManaCost:6
+Types:Artifact Creature Thopter
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Thopter.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if you control no Thopters other than CARDNAME, return CARDNAME to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 5 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Flying\nAt the beginning of your upkeep, if you control no Thopters other than Thopter Assembly, return Thopter Assembly to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying.

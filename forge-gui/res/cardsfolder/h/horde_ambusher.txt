@@ -1,0 +1,10 @@
+Name:Horde Ambusher
+ManaCost:1 R
+Types:Creature Human Berserker
+PT:2/2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks, it deals 1 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+K:Morph:Reveal<1/Card.Red/red>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True
+Oracle:Whenever Horde Ambusher blocks, it deals 1 damage to you.\nMorph—Reveal a red card in your hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Horde Ambusher is turned face up, target creature can't block this turn.

@@ -1,0 +1,7 @@
+Name:Gate to the Aether
+ManaCost:6
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigAetherDig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
+SVar:TrigAetherDig:DB$ Dig | Defined$ TriggeredPlayer | Choser$ TriggeredPlayer | DigNum$ 1 | Reveal$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact,Creature,Enchantment,Land
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.

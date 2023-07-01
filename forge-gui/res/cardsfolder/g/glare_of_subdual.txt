@@ -1,0 +1,6 @@
+Name:Glare of Subdual
+ManaCost:2 G W
+Types:Enchantment
+A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
+AI:RemoveDeck:All
+Oracle:Tap an untapped creature you control: Tap target artifact or creature.

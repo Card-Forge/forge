@@ -1,0 +1,8 @@
+Name:Mask of Intolerance
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | CheckSVar$ CheckLandTypes | SVarCompare$ GE4 | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, CARDNAME deals 3 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 3
+SVar:CheckLandTypes:Count$DomainActivePlayer
+AI:RemoveDeck:Random
+Oracle:At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to that player.

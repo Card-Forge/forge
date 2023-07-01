@@ -1,0 +1,11 @@
+Name:Seafloor Stalker
+ManaCost:2 U
+Types:Creature Merfolk Rogue
+PT:2/3
+A:AB$ Pump | Cost$ 4 U | NumAtt$ +1 | SubAbility$ DBUnblockable | ReduceCost$ X | StackDescription$ CARDNAME gets +1/+0 until end of turn and can't be blocked this turn. | SpellDescription$ CARDNAME gets +1/+0 until end of turn and can't be blocked this turn. This ability costs {1} less to activate for each creature in your party.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Warrior|Wizard
+Oracle:{4}{U}: Seafloor Stalker gets +1/+0 until end of turn and can't be blocked this turn. This ability costs {1} less to activate for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)

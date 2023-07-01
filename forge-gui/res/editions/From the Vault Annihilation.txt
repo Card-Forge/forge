@@ -1,0 +1,26 @@
+[metadata]
+Code=V14
+Date=2014-08-22
+Name=From the Vault: Annihilation
+Type=Collector_Edition
+ScryfallCode=V14
+
+[cards]
+1 M Armageddon @Chris Rahn
+2 M Burning of Xinye @Yang Hong
+3 M Cataclysm @Eric Deschamps
+4 M Child of Alara @Steve Argyle
+5 M Decree of Annihilation @John Avon
+6 M Firespout @Raymond Swanland
+7 M Fracturing Gust @Michael Sutfin
+8 M Living Death @Mark Winters
+9 M Martial Coup @Greg Staples
+10 M Rolling Earthquake @Yang Hong
+11 M Smokestack @Daniel Ljunggren
+12 M Terminus @James Paick
+13 M Upheaval @Kev Walker
+14 M Virtue's Ruin @Mike Dringenberg
+15 M Wrath of God @Willian Murai
+
+[tokens]
+w_1_1_soldier

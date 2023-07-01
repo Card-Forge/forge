@@ -1,0 +1,8 @@
+Name:Force of Savagery
+ManaCost:2 G
+Types:Creature Elemental
+PT:8/0
+K:Trample
+A:SP$ PermanentCreature | Cost$ 2 G | AILogic$ ZeroToughness
+AI:RemoveDeck:Random
+Oracle:Trample

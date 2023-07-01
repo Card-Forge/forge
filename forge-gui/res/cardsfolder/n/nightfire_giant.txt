@@ -1,0 +1,8 @@
+Name:Nightfire Giant
+ManaCost:4 B
+Types:Creature Zombie Giant
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Mountain.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Mountain.
+A:AB$ DealDamage | Cost$ 4 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:BuffedBy:Mountain
+Oracle:Nightfire Giant gets +1/+1 as long as you control a Mountain.\n{4}{R}: Nightfire Giant deals 2 damage to any target.

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 04 Counterburn
+Title=Counterburn
+Difficulty=hard
+Description=A custom strategy for the Blue/Red color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Air Elemental|PO2
+4 Blaze|PO2
+4 Cunning Giant|PO2
+4 Earthquake|PO2
+4 False Summoning|PO2
+11 Island|PO2|1
+13 Mountain|PO2|1
+2 Mystic Denial|PO2
+4 Ogre Arsonist|PO2
+4 Time Ebb|PO2
+2 Undo|PO2
+4 Volcanic Hammer|PO2

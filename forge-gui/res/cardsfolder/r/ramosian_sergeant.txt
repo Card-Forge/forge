@@ -1,0 +1,6 @@
+Name:Ramosian Sergeant
+ManaCost:W
+Types:Creature Human Rebel
+PT:1/1
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE2 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 2 or less, put it onto the battlefield, then shuffle.
+Oracle:{3}, {T}: Search your library for a Rebel permanent card with mana value 2 or less, put it onto the battlefield, then shuffle.

@@ -1,0 +1,9 @@
+Name:Skyship Plunderer
+ManaCost:1 U
+Types:Creature Human Pirate
+PT:2/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigIncrementCounters | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.
+SVar:TrigIncrementCounters:DB$ PutCounter | ValidTgts$ Permanent,Player | CounterType$ ExistingCounter | EachExistingCounter$ True | CounterNum$ 1
+AI:RemoveDeck:All
+Oracle:Flying\nWhenever Skyship Plunderer deals combat damage to a player, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.

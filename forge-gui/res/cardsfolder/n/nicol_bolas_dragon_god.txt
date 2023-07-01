@@ -1,0 +1,11 @@
+Name:Nicol Bolas, Dragon-God
+ManaCost:U B B B R
+Types:Legendary Planeswalker Bolas
+Loyalty:4
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Planeswalker.Other | GainsValidAbilities$ Activated.Loyalty | Description$ CARDNAME has all loyalty abilities of all other planeswalkers on the battlefield.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | SubAbility$ DBChangeZone | Planeswalker$ True | SpellDescription$ You draw a card. Each opponent exiles a card from their hand or a permanent they control.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield,Hand | Destination$ Exile | DefinedPlayer$ Player.Opponent | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Planeswalker$ True | SpellDescription$ Destroy target creature or planeswalker.
+A:AB$ LosesGame | Cost$ SubCounter<8/LOYALTY> | Defined$ Player.Opponent+controlsLegendary.Creature_EQ0+controlsPlaneswalker_LE0 | Planeswalker$ True | Ultimate$ True | SpellDescription$ Each opponent who doesn't control a legendary creature or planeswalker loses the game.
+AI:RemoveDeck:Random
+Oracle:Nicol Bolas, Dragon-God has all loyalty abilities of all other planeswalkers on the battlefield.\n[+1]: You draw a card. Each opponent exiles a card from their hand or a permanent they control.\n[-3]: Destroy target creature or planeswalker.\n[-8]: Each opponent who doesn't control a legendary creature or planeswalker loses the game.

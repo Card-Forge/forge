@@ -1,0 +1,7 @@
+Name:Rampaging Hippo
+ManaCost:4 G G
+Types:Creature Hippo
+PT:5/6
+K:Trample
+K:Cycling:2
+Oracle:Trample\nCycling {2} ({2}, Discard this card: Draw a card.)

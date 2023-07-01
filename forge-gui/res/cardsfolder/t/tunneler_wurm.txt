@@ -1,0 +1,6 @@
+Name:Tunneler Wurm
+ManaCost:6 G G
+Types:Creature Wurm
+PT:6/6
+A:AB$ Regenerate | Cost$ Discard<1/Card> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
+Oracle:Discard a card: Regenerate Tunneler Wurm.

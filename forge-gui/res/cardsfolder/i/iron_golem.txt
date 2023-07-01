@@ -1,0 +1,8 @@
+Name:Iron Golem
+ManaCost:4
+Types:Artifact Creature Golem
+PT:5/3
+K:Vigilance
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks or blocks each combat if able.
+S:Mode$ MustBlock | ValidCreature$ Card.Self
+Oracle:Vigilance\nIron Golem attacks or blocks each combat if able.

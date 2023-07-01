@@ -1,0 +1,5 @@
+Name:Mindlock Orb
+ManaCost:3 U
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ CantSearchLibrary | Description$ Players can't search libraries.
+Oracle:Players can't search libraries.

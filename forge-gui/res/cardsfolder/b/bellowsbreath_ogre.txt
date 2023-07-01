@@ -1,0 +1,11 @@
+Name:Bellowsbreath Ogre
+ManaCost:2 R
+Types:Artifact Creature Ogre Shaman
+PT:3/3
+K:Starting intensity:1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to its intensity to any target, then perpetually increase its intensity by 1.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify
+SVar:X:Count$Intensity
+SVar:HasAttackEffect:TRUE
+Oracle:Starting intensity 1\nWhenever Bellowsbreath Ogre attacks, it deals damage equal to its intensity to any target, then perpetually increase its intensity by 1.

@@ -1,0 +1,13 @@
+[metadata]
+Code=PS15
+Date=2015-07-09
+Name=San Diego Comic-Con 2015
+Type=Promo
+ScryfallCode=PS15
+
+[cards]
+23 M Kytheon, Hero of Akros @Wayne Reynolds
+60 M Jace, Vryn's Prodigy @Wayne Reynolds
+106 M Liliana, Heretical Healer @Wayne Reynolds
+135 M Chandra, Fire of Kaladesh @Wayne Reynolds
+189 M Nissa, Vastwood Seer @Wayne Reynolds

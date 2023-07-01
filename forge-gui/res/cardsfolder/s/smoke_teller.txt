@@ -1,0 +1,6 @@
+Name:Smoke Teller
+ManaCost:1 G
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ LookAt | Cost$ 1 U | ValidTgts$ Creature.faceDown | TgtPrompt$ Select target face-down creature. | SpellDescription$ Look at target face-down creature.
+Oracle:{1}{U}: Look at target face-down creature.

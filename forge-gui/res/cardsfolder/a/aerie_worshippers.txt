@@ -1,0 +1,8 @@
+Name:Aerie Worshippers
+ManaCost:3 U
+Types:Creature Human Cleric
+PT:2/4
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ 2 U | TokenScript$ u_2_2_e_bird_flying
+DeckHas:Ability$Token & Type$Bird|Enchantment
+Oracle:Inspired — Whenever Aerie Worshippers becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying.

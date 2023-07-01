@@ -1,0 +1,9 @@
+Name:Stinging Hivemaster
+ManaCost:2 B
+Types:Creature Phyrexian Warlock
+PT:3/2
+K:Toxic:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock
+DeckHas:Ability$Token & Type$Artifact|Mite
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Stinging Hivemaster dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."

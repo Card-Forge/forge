@@ -1,0 +1,7 @@
+Name:Leonin of the Lost Pride
+ManaCost:1 W
+Types:Creature Cat Warrior
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile target card from an opponent's graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppOwn
+Oracle:When Leonin of the Lost Pride dies, exile target card from an opponent's graveyard.

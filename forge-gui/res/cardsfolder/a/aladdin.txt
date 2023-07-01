@@ -1,0 +1,6 @@
+Name:Aladdin
+ManaCost:2 R R
+Types:Creature Human Rogue
+PT:1/1
+A:AB$ GainControl | Cost$ 1 R R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target artifact for as long as you control CARDNAME.
+Oracle:{1}{R}{R}, {T}: Gain control of target artifact for as long as you control Aladdin.

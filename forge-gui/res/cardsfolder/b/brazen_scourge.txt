@@ -1,0 +1,6 @@
+Name:Brazen Scourge
+ManaCost:1 R R
+Types:Creature Gremlin
+PT:3/3
+K:Haste
+Oracle:Haste

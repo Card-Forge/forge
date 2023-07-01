@@ -1,0 +1,6 @@
+Name:Tempered Steel
+ManaCost:1 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Artifact creatures you control get +2/+2.
+SVar:PlayMain1:TRUE
+Oracle:Artifact creatures you control get +2/+2.

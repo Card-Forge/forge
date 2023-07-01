@@ -1,0 +1,6 @@
+Name:Scattered Thoughts
+ManaCost:3 U
+Types:Instant
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 2 | DestinationZone2$ Graveyard | StackDescription$ SpellDescription | SpellDescription$ Look at the top four cards of your library. Put two of those cards into your hand and the rest into your graveyard.
+DeckHas:Ability$Graveyard
+Oracle:Look at the top four cards of your library. Put two of those cards into your hand and the rest into your graveyard.

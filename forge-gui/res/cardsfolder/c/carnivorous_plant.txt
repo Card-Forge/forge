@@ -1,0 +1,6 @@
+Name:Carnivorous Plant
+ManaCost:3 G
+Types:Creature Plant Wall
+PT:4/5
+K:Defender
+Oracle:Defender

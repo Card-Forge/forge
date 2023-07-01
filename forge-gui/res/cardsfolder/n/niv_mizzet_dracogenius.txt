@@ -1,0 +1,9 @@
+Name:Niv-Mizzet, Dracogenius
+ManaCost:2 U U R R
+Types:Legendary Creature Dragon Wizard
+PT:5/5
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals damage to a player, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ DealDamage | Cost$ U R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Flying\nWhenever Niv-Mizzet, Dracogenius deals damage to a player, you may draw a card.\n{U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to any target.

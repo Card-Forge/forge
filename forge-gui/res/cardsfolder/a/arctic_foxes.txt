@@ -1,0 +1,6 @@
+Name:Arctic Foxes
+ManaCost:1 W
+Types:Creature Fox
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerGE2 | IsPresent$ Land.Snow+DefenderCtrl | Description$ CARDNAME can't be blocked by creatures with power 2 or greater as long as defending player controls a snow land.
+Oracle:Arctic Foxes can't be blocked by creatures with power 2 or greater as long as defending player controls a snow land.

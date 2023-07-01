@@ -1,0 +1,6 @@
+Name:Sky Ruin Drake
+ManaCost:4 U
+Types:Creature Drake
+PT:2/5
+K:Flying
+Oracle:Flying

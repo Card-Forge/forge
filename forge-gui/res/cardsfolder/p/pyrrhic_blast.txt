@@ -1,0 +1,8 @@
+Name:Pyrrhic Blast
+ManaCost:3 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 3 R Sac<1/Creature> | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target. Draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nPyrrhic Blast deals damage equal to the sacrificed creature's power to any target. Draw a card.

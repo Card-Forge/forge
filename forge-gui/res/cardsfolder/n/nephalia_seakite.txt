@@ -1,0 +1,7 @@
+Name:Nephalia Seakite
+ManaCost:3 U
+Types:Creature Bird
+PT:2/3
+K:Flash
+K:Flying
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying

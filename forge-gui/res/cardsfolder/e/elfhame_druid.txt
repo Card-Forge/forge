@@ -1,0 +1,7 @@
+Name:Elfhame Druid
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:0/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | RestrictValid$ Spell.Kicked | SpellDescription$ Add {G}{G}. Spend this mana only to cast kicked spells.
+Oracle:{T}: Add {G}.\n{T}: Add {G}{G}. Spend this mana only to cast kicked spells.

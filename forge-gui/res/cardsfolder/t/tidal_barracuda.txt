@@ -1,0 +1,7 @@
+Name:Tidal Barracuda
+ManaCost:3 U
+Types:Creature Fish
+PT:3/4
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ Player | Description$ Any player may cast spells as though they had flash.
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+Oracle:Any player may cast spells as though they had flash.\nYour opponents can't cast spells during your turn.

@@ -1,0 +1,7 @@
+Name:Agent of Stromgald
+ManaCost:R
+Types:Creature Human Knight
+PT:1/1
+A:AB$ Mana | Cost$ R | Produced$ B | SpellDescription$ Add {B}.
+AI:RemoveDeck:All
+Oracle:{R}: Add {B}.

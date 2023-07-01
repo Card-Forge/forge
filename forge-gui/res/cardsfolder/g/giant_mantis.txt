@@ -1,0 +1,6 @@
+Name:Giant Mantis
+ManaCost:3 G
+Types:Creature Insect
+PT:2/4
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

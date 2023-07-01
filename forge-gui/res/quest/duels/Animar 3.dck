@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Animar 3
+Title=Animar
+Difficulty=hard
+Description=URG Animar deck 
+Icon=Animar.jpg
+Deck Type=constructed
+[main]
+1 Island
+2 Forest
+2 Taiga
+3 Tropical Island
+1 Volcanic Island
+3 Wooded Foothills
+1 Scalding Tarn
+3 Misty Rainforest
+1 Hinterland Harbor
+1 Copperline Gorge
+3 Frontier Bivouac
+4 Birds of Paradise
+3 Noble Hierarch
+4 Animar, Soul of Elements
+4 Mulldrifter
+4 AEthersnipe
+1 Inner-Flame Acolyte
+4 Eternal Witness
+4 Bloodbraid Elf
+4 Shardless Agent
+1 Maelstrom Wanderer
+1 Edric, Spymaster of Trest
+1 Sages of the Anima
+1 Murkfiend Liege
+1 Champion of Lambholt
+1 Surrak Dragonclaw
+1 Imperial Recruiter
+[sideboard]

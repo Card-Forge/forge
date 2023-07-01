@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 206: The Fell Marshes
+Title=The Fell Marshes
+Difficulty=easy
+Description=The difference between a nuisance and a threat is often merely a matter of numbers.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Anaconda|POR|2
+4 Bee Sting|POR
+4 Bog Imp|POR
+2 Bull Hippo|POR
+4 Ebon Dragon|POR
+4 Endless Cockroaches|POR
+4 Giant Spider|POR
+4 Muck Rats|POR
+4 Noxious Toad|POR
+4 Python|POR
+24 Swamp|POR|2

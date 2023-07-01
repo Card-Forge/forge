@@ -1,0 +1,10 @@
+Name:Velican Dragon
+ManaCost:5 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks or blocks, it gets +X/+0 until end of turn, where X is a number from 0 to 5 chosen at random.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, +X/+0 until end of turn, where X is a number from 0 to 5 chosen at random.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:X:Count$Random.0.5
+Oracle:Flying\nWhenever Velican Dragon attacks or blocks, it gets +X/+0 until end of turn, where X is a number from 0 to 5 chosen at random.

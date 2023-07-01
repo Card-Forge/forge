@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Kamigawa: Neon Dynasty #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/01/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. The top card of your library is Bloodthirsty Adversary. Assume any other cards you could access are irrelevant to the solution. Good luck!
+[state]
+humanlife=20
+ailife=11
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Hero's Downfall;The Meathook Massacre;Kappa Tech-Wrecker
+humanlibrary=Bloodthirsty Adversary;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Bookwurm;Atsushi, the Blazing Sky;Hidetsugu, Devouring Chaos;Swamp;Swamp;Swamp;Swamp;Mountain;Mountain;Mountain;Forest
+aibattlefield=Angel of Destiny;Henrika Domnathi|Transformed;Vengeful Reaper

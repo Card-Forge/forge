@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Theros Beyond Death #09
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/03/152.-THB9-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has no mana available and no cards in hand. Assume both players have over 30 cards left in their library, and that any drawn are irrelevant to the puzzle.
+[state]
+humanlife=2
+ailife=94
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Terror of Mount Velus;Awaken the Erstwhile;Dragon Mage;Corpse Knight;Fling
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=The Royal Scions|Counters:LOYALTY=8;Purphoros, Bronze-Blooded;Smothering Tithe;Mace of the Valiant;Bag of Holding;Bag of Holding;Temple of Malice|NoETBTrigs;Temple of Malice|NoETBTrigs;Temple of Malice|NoETBTrigs;Temple of Malice|NoETBTrigs;Temple of Triumph|NoETBTrigs;Temple of Triumph|NoETBTrigs;Temple of Triumph|NoETBTrigs;Temple of Triumph|NoETBTrigs
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Knight of Autumn;Vindictive Vampire;Ajani's Pridemate|Counters:P1P1=15;Ajani, Strength of the Pride|Counters:LOYALTY=2;Sorin, Vengeful Bloodlord|Counters:LOYALTY=2
+humanprecast=Smothering Tithe:TrigToken;Smothering Tithe:TrigToken;Smothering Tithe:TrigToken;Smothering Tithe:TrigToken

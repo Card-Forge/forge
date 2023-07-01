@@ -1,0 +1,10 @@
+Name:Ally Encampment
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Ally | SpellDescription$ Add one mana of any color. Spend this mana only to cast an Ally spell.
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Ally.YouCtrl | TgtPrompt$ Select target Ally you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Ally you control to its owner's hand.
+AI:RemoveDeck:Random
+DeckHas:Ability$Mana.Colorless
+DeckHints:Type$Ally
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an Ally spell.\n{1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.

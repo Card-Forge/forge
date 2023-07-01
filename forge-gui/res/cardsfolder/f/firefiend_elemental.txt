@@ -1,0 +1,8 @@
+Name:Firefiend Elemental
+ManaCost:3 R
+Types:Creature Elemental
+PT:3/2
+K:Haste
+K:Renown:1
+DeckHas:Ability$Counters
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

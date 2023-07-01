@@ -1,0 +1,8 @@
+Name:Emmara Tandris
+ManaCost:5 G W
+Types:Legendary Creature Elf Shaman
+PT:5/7
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.token+YouCtrl | Description$ Prevent all damage that would be dealt to creature tokens you control.
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+Oracle:Prevent all damage that would be dealt to creature tokens you control.

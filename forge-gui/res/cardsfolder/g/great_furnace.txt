@@ -1,0 +1,5 @@
+Name:Great Furnace
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:{T}: Add {R}.

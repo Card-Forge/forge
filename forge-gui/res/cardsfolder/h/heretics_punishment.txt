@@ -1,0 +1,9 @@
+Name:Heretic's Punishment
+ManaCost:4 R
+Types:Enchantment
+A:AB$ Mill | Cost$ 3 R | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBHereticDamage | SpellDescription$ Choose any target, then mill three cards. CARDNAME deals damage to that permanent or player equal to the highest mana value among the milled cards.
+SVar:DBHereticDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ HereticX | SubAbility$ DBHereticCleanup
+SVar:DBHereticCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HereticX:Remembered$GreatestCMC
+AI:RemoveDeck:All
+Oracle:{3}{R}: Choose any target, then mill three cards. Heretic's Punishment deals damage to that permanent or player equal to the highest mana value among the milled cards.

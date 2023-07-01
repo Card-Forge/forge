@@ -1,0 +1,6 @@
+Name:Night Terrors
+ManaCost:2 B
+Types:Sorcery
+A:SP$ RevealHand | Defined$ Targeted | ValidTgts$ Player | IsCurse$ True | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand.
+SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | Mandatory$ True | StackDescription$ {p:You} chooses a nonland card from it. Exile that card. | SpellDescription$ You choose a nonland card from it. Exile that card.
+Oracle:Target player reveals their hand. You choose a nonland card from it. Exile that card.

@@ -1,0 +1,7 @@
+Name:Ana Disciple
+ManaCost:G
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+A:AB$ Pump | Cost$ B T | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -2/-0 until end of turn.
+Oracle:{U}, {T}: Target creature gains flying until end of turn.\n{B}, {T}: Target creature gets -2/-0 until end of turn.

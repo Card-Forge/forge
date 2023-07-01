@@ -1,0 +1,6 @@
+Name:Safe Passage
+ManaCost:2 W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
+Oracle:Prevent all damage that would be dealt to you and creatures you control this turn.

@@ -1,0 +1,8 @@
+Name:Mind Over Matter
+ManaCost:2 U U U U
+Types:Enchantment
+A:AB$ TapOrUntap | Cost$ Discard<1/Card> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Discard a card: You may tap or untap target artifact, creature, or land.

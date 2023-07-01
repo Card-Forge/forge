@@ -1,0 +1,10 @@
+Name:Illusory Ambusher
+ManaCost:4 U
+Types:Creature Cat Illusion
+PT:4/1
+K:Flash
+T:Mode$ DamageDoneOnce | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhenever Illusory Ambusher is dealt damage, draw that many cards.

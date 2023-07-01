@@ -1,0 +1,9 @@
+Name:Teferi, Timebender
+ManaCost:4 W U
+Types:Legendary Planeswalker Teferi
+Loyalty:5
+A:AB$ Untap | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target artifact or creature | SpellDescription$ Untap up to one target artifact or creature.
+A:AB$ GainLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw two cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
+A:AB$ AddTurn | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+Oracle:[+2]: Untap up to one target artifact or creature.\n[-3]: You gain 2 life and draw two cards.\n[-9]: Take an extra turn after this one.

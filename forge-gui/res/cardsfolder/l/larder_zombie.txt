@@ -1,0 +1,9 @@
+Name:Larder Zombie
+ManaCost:U
+Types:Creature Zombie
+PT:1/3
+K:Defender
+A:AB$ Surveil | Cost$ tapXType<3/Creature/creature> | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+DeckHas:Ability$Surveil|Graveyard
+DeckHints:Keyword$Decayed
+Oracle:Defender\nTap three untapped creatures you control: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

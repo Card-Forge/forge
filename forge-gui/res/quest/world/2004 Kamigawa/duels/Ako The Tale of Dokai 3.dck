@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Dokai 3
+Title=The Tale of Dokai
+Difficulty=hard
+Description="Our bodies are weak compared to those of the kami, our knowledge limited, and our magic poor. Yet we draw breath. That alone is reason to hope."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Azusa, Lost but Seeking|CHK
+4 Budoka Gardener|CHK
+2 Budoka Pupil|BOK
+4 Elder Pine of Jukai|SOK
+3 Evermind|SOK
+8 Forest|CHK|1
+3 Forest|CHK|2
+2 Forest|CHK|3
+2 Forest|CHK|4
+2 Hana Kami|CHK
+3 Island|CHK|1
+1 Island|CHK|2
+2 Island|CHK|4
+1 Journeyer's Kite|CHK
+4 Kodama's Reach|CHK
+4 Lifegift|BOK
+1 Meloku the Clouded Mirror|CHK
+1 Minamo, School at Water's Edge|CHK
+1 Okina, Temple to the Grandfathers|CHK
+4 Sakura-Tribe Elder|CHK
+1 Seek the Horizon|SOK
+2 Strength of Cedars|CHK
+1 Tendo Ice Bridge|BOK
+2 Traproot Kami|BOK
+1 Wear Away|CHK
+[Sideboard]
+

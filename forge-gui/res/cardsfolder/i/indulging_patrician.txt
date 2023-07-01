@@ -1,0 +1,11 @@
+Name:Indulging Patrician
+ManaCost:1 W B
+Types:Creature Vampire Noble
+PT:1/4
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, if you gained 3 or more life this turn, each opponent loses 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+Oracle:Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nAt the beginning of your end step, if you gained 3 or more life this turn, each opponent loses 3 life.

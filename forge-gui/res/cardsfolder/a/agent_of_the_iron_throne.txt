@@ -1,0 +1,9 @@
+Name:Agent of the Iron Throne
+ManaCost:2 B
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ Dies | Description$ Commander creatures you own have "Whenever an artifact or creature you control is put into a graveyard from the battlefield, each opponent loses 1 life."
+SVar:Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouCtrl,Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an artifact or creature you control is put into a graveyard from the battlefield, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+DeckHints:Type$Artifact & Ability$Sacrifice
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever an artifact or creature you control is put into a graveyard from the battlefield, each opponent loses 1 life."

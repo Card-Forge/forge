@@ -1,0 +1,9 @@
+Name:Welkin Hawk
+ManaCost:1 W
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may search your library for a card named Welkin Hawk, reveal that card, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedWelkin Hawk | ChangeNum$ 1
+DeckHints:Name$Welkin Hawk
+Oracle:Flying\nWhen Welkin Hawk dies, you may search your library for a card named Welkin Hawk, reveal that card, put it into your hand, then shuffle.

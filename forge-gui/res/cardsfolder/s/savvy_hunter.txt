@@ -1,0 +1,12 @@
+Name:Savvy Hunter
+ManaCost:1 B G
+Types:Creature Human Warrior
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+A:AB$ Draw | Cost$ Sac<2/Food> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Token|LifeGain|Food
+DeckHints:Ability$Food
+Oracle:Whenever Savvy Hunter attacks or blocks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nSacrifice two Foods: Draw a card.

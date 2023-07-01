@@ -1,0 +1,11 @@
+Name:Dermoplasm
+ManaCost:2 U
+Types:Creature Shapeshifter
+PT:1/1
+K:Flying
+K:Morph:2 U U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDermoplasmChangeZone | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card with morph from your hand onto the battlefield face up. If you do, return CARDNAME to its owner's hand.
+SVar:TrigDermoplasmChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.withMorph,Creature.withMegamorph | RememberChanged$ True | SubAbility$ DBDermoplasmBounce
+SVar:DBDermoplasmBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Creature.withMorph,Creature.withMegamorph | ConditionCompare$ GE1 | SubAbility$ DBDermoplasmCleanup
+SVar:DBDermoplasmCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nMorph {2}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Dermoplasm is turned face up, you may put a creature card with a morph ability from your hand onto the battlefield face up. If you do, return Dermoplasm to its owner's hand.

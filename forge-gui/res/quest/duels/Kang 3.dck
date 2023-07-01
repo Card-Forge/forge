@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Kang 3
+Title=Kang
+Difficulty=hard
+Description=UB deck with Glen Elendra Liege and Dire Undercurrents
+Icon=Kang.jpg
+Deck Type=constructed
+[main]
+3 Esper Stormblade
+3 Grixis Grimblade
+2 Ghastlord of Fugue
+4 Glen Elendra Liege
+2 Inkfathom Infiltrator
+4 Shadowmage Infiltrator
+3 Tidehollow Strix
+3 Baleful Strix
+1 Wasp Lancer
+2 Dire Undercurrents
+4 Recoil
+4 Undermine
+1 Countersquall
+4 Creeping Tar Pit
+4 Darkslick Shores
+4 Drowned Catacomb
+6 Island|M12
+6 Swamp|M12
+[sideboard]

@@ -1,0 +1,7 @@
+Name:Grove of the Burnwillows
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SubAbility$ DBLife | SpellDescription$ Add {R} or {G}.
+SVar:DBLife:DB$ GainLife | LifeAmount$ 1 | Defined$ Player.Opponent | SpellDescription$ Each opponent gains 1 life.
+Oracle:{T}: Add {C}.\n{T}: Add {R} or {G}. Each opponent gains 1 life.

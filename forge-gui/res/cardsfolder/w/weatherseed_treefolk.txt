@@ -1,0 +1,8 @@
+Name:Weatherseed Treefolk
+ManaCost:2 G G G
+Types:Creature Treefolk
+PT:5/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
+Oracle:Trample\nWhen Weatherseed Treefolk dies, return it to its owner's hand.

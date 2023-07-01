@@ -1,0 +1,6 @@
+Name:Stonehorn Chanter
+ManaCost:5 W
+Types:Creature Rhino Cleric
+PT:4/4
+A:AB$ Pump | Cost$ 5 W | Defined$ Self | KW$ Lifelink & Vigilance | SpellDescription$ CARDNAME gains vigilance and lifelink until end of turn.
+Oracle:{5}{W}: Stonehorn Chanter gains vigilance and lifelink until end of turn. (Attacking doesn't cause it to tap. Damage dealt by it also causes you to gain that much life.)

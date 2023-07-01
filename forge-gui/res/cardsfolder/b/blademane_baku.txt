@@ -1,0 +1,12 @@
+Name:Blademane Baku
+ManaCost:1 R
+Types:Creature Spirit
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | Defined$ Self | NumAtt$ +Y | SpellDescription$ For each counter removed, CARDNAME gets +2/+0 until end of turn.
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Times.2
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Blademane Baku.\n{1}, Remove X ki counters from Blademane Baku: For each counter removed, Blademane Baku gets +2/+0 until end of turn.

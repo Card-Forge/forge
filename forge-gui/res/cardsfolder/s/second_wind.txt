@@ -1,0 +1,10 @@
+Name:Second Wind
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
+A:AB$ Tap | Cost$ T | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
+A:AB$ Untap | Cost$ T | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
+AI:RemoveDeck:All
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\n{T}: Tap enchanted creature.\n{T}: Untap enchanted creature.

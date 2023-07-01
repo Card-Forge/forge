@@ -1,0 +1,5 @@
+Name:Axegrinder Giant
+ManaCost:4 R R
+Types:Creature Giant Warrior
+PT:6/4
+Oracle:

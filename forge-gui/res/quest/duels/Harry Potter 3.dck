@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Harry Potter 3
+Title=Harry Potter
+Difficulty=hard
+Description=UB Mill and counter spell deck with card draw
+Icon=Harry Potter.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Polluted Delta
+4 Flooded Strand
+4 Swamp|M12
+5 Island|M12
+1 Nephalia Drownyard
+1 Mox Sapphire
+1 Mox Jet
+3 Remove Soul
+4 Glimpse the Unthinkable
+4 Hedron Crab
+3 Mind Funeral
+2 Damnation
+1 Ancestral Recall
+1 Jace Beleren
+3 Tome Scour
+2 Nemesis of Reason
+1 Time Walk
+3 Howling Mine
+2 Mana Drain
+2 Spell Snare
+1 Mental Misstep
+1 Szadek, Lord of Secrets
+1 Chancellor of the Spires
+1 Jace, Memory Adept
+1 Ashiok, Nightmare Weaver
+[sideboard]

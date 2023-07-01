@@ -1,0 +1,7 @@
+[format]
+Name:Extended (10E)
+Type:Archived
+Subtype:Extended
+Effective:2007-07-20
+Sets:INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E
+Banned:Aether Vial; Disciple of the Vault; Entomb; Skullclamp

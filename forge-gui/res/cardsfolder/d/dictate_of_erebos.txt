@@ -1,0 +1,7 @@
+Name:Dictate of Erebos
+ManaCost:3 B B
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control dies, each opponent sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature
+Oracle:Flash\nWhenever a creature you control dies, each opponent sacrifices a creature.

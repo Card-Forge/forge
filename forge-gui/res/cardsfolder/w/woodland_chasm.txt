@@ -1,0 +1,5 @@
+Name:Woodland Chasm
+ManaCost:no cost
+Types:Snow Land Swamp Forest
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {B} or {G}.)\nWoodland Chasm enters the battlefield tapped.

@@ -1,0 +1,7 @@
+Name:Scourge of Geier Reach
+ManaCost:3 R R
+Types:Creature Elemental
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature your opponents control.
+SVar:X:Count$Valid Creature.OppCtrl
+Oracle:Scourge of Geier Reach gets +1/+1 for each creature your opponents control.

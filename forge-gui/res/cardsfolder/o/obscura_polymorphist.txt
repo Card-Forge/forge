@@ -1,0 +1,8 @@
+Name:Obscura Polymorphist
+ManaCost:1 W U
+Types:Creature Cephalid Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target creature. Its controller seeks a creature card.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBSeek
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Creature | ChangeNum$ 1 | DefinedPlayer$ TargetedController
+Oracle:When Obscura Polymorphist enters the battlefield, exile up to one target creature. Its controller seeks a creature card.

@@ -1,0 +1,12 @@
+Name:Mana Vortex
+ManaCost:1 U U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast this spell, counter it unless you sacrifice a land.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ Sac<1/Land> | UnlessPayer$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a land.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ TriggeredPlayer | SacMessage$ land
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ When there are no lands on the battlefield, sacrifice CARDNAME.
+SVar:TrigSacSelf:DB$ Sacrifice
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
+Oracle:When you cast this spell, counter it unless you sacrifice a land.\nAt the beginning of each player's upkeep, that player sacrifices a land.\nWhen there are no lands on the battlefield, sacrifice Mana Vortex.

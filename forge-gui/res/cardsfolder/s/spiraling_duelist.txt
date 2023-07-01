@@ -1,0 +1,7 @@
+Name:Spiraling Duelist
+ManaCost:2 R R
+Types:Creature Human Berserker
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME has double strike as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+Oracle:Metalcraft — Spiraling Duelist has double strike as long as you control three or more artifacts.

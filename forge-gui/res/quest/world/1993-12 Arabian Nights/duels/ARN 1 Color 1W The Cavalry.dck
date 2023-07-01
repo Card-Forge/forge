@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ARN 1 Color: 1W The Cavalry
+Title=The Cavalry
+Difficulty=easy
+Description=Members of the elite Moorish Cavalry are very particular about their mounts, choosing only those whose bloodlines have been pure for generations.
+Icon=The Cavalry.jpg
+Deck Type=constructed
+[Main]
+2 Abu Ja'far|ARN
+4 Army of Allah|ARN|2
+2 Bottle of Suleiman|ARN
+4 Desert|ARN
+4 Elephant Graveyard|ARN
+3 Eye for an Eye|ARN
+4 Jihad|ARN
+2 King Suleiman|ARN
+4 Moorish Cavalry|ARN|2
+3 Piety|ARN|2
+20 Plains|LEB|1
+4 Repentant Blacksmith|ARN
+4 War Elephant|ARN|2

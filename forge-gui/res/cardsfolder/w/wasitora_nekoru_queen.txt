@@ -1,0 +1,13 @@
+Name:Wasitora, Nekoru Queen
+ManaCost:2 B R G
+Types:Legendary Creature Cat Dragon
+PT:5/4
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ brg_3_3_cat_dragon_flying | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:MustBeBlocked:True
+Oracle:Flying, trample\nWhenever Wasitora, Nekoru Queen deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.

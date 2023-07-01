@@ -1,0 +1,22 @@
+Name:Ludevic's Test Subject
+ManaCost:1 U
+Types:Creature Lizard Egg
+PT:0/3
+K:Defender
+A:AB$ PutCounter | Cost$ 1 U | Defined$ Self | CounterType$ HATCHLING | CounterNum$ 1 | AILogic$ CheckDFC | SubAbility$ DBBranch | SpellDescription$ Put a hatchling counter on CARDNAME. Then if there are five or more hatchling counters on it, remove all of them and transform it.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ HatchTimer | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ HATCHLING | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:HatchTimer:Count$Valid Card.Self+counters_GE5_HATCHLING
+AlternateMode:DoubleFaced
+Oracle:Defender\n{1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
+
+ALTERNATE
+
+Name:Ludevic's Abomination
+ManaCost:no cost
+Colors:blue
+Types:Creature Lizard Horror
+PT:13/13
+K:Trample
+Oracle:Trample

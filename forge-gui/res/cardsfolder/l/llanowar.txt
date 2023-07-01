@@ -1,0 +1,9 @@
+Name:Llanowar
+ManaCost:no cost
+Types:Plane Dominaria
+S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ LlanowarAb | Description$ All creatures have "{T}: Add {G}{G}.".
+SVar:LlanowarAb:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add {G}{G}.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap all creatures you control.
+SVar:RolledChaos:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
+Oracle:All creatures have "{T}: Add {G}{G}."\nWhenever chaos ensues, untap all creatures you control.

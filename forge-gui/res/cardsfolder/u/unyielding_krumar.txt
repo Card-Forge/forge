@@ -1,0 +1,6 @@
+Name:Unyielding Krumar
+ManaCost:3 B
+Types:Creature Orc Warrior
+PT:3/3
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+Oracle:{1}{W}: Unyielding Krumar gains first strike until end of turn.

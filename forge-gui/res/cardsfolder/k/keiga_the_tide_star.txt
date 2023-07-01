@@ -1,0 +1,8 @@
+Name:Keiga, the Tide Star
+ManaCost:5 U
+Types:Legendary Creature Dragon Spirit
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME dies, gain control of target creature.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Flying\nWhen Keiga, the Tide Star dies, gain control of target creature.

@@ -1,0 +1,5 @@
+Name:Tower of Murmurs
+ManaCost:4
+Types:Artifact
+A:AB$ Mill | Cost$ 8 T | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills eight cards.
+Oracle:{8}, {T}: Target player mills eight cards.

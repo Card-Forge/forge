@@ -1,0 +1,5 @@
+Name:Heartstone
+ManaCost:3
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Ability | Amount$ 1 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of creatures cost {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.
+Oracle:Activated abilities of creatures cost {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.

@@ -1,0 +1,9 @@
+Name:Possessed Portal
+ManaCost:8
+Types:Artifact
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | Prevent$ True | Description$ If a player would draw a card, that player skips that draw instead.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of each end step, each player sacrifices a permanent unless they discard a card.
+SVar:TrigSacrifice:DB$ RepeatEach | RepeatSubAbility$ DBSac | RepeatPlayers$ Player
+SVar:DBSac:DB$ Sacrifice | SacValid$ Permanent | Defined$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
+AI:RemoveDeck:Random
+Oracle:If a player would draw a card, that player skips that draw instead.\nAt the beginning of each end step, each player sacrifices a permanent unless they discard a card.

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/10/086.-GRN4.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. There are nine creatures in your graveyard. Assume your opponent's graveyard is empty.
+[state]
+humanlife=20
+ailife=15
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Legion Warboss;Voracious Vampire;Jade Bearer;Buccaneer's Bravado
+humangraveyard=Mist-Cloaked Herald;Isareth the Awakener;Siege-Gang Commander;Hungering Hydra;Truefire Captain;Ochran Assassin;Elenda, the Dusk Rose;Skirk Prospector;Cavalry Drillmaster
+humanbattlefield=Lazav, the Multifarious;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_grn;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_grn;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Mountain|Set:GRN;Mountain|Set:GRN;Mountain|Set:GRN;Mountain|Set:GRN
+aibattlefield=Amulet of Safekeeping;Windreader Sphinx;Demonlord Belzenlok;Twilight Prophet;Dream Eater

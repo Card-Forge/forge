@@ -1,0 +1,7 @@
+Name:Sauroform Hybrid
+ManaCost:1 G
+Types:Creature Human Lizard Warrior
+PT:2/2
+K:Adapt:4:4 G G
+DeckHas:Ability$Counters
+Oracle:{4}{G}{G}: Adapt 4. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)

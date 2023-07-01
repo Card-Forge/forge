@@ -1,0 +1,9 @@
+Name:Sadistic Skymarcher
+ManaCost:2 B
+Types:Creature Vampire Soldier
+PT:2/2
+K:AlternateAdditionalCost:Reveal<1/Vampire>:1
+K:Flying
+K:Lifelink
+DeckNeeds:Type$Vampire
+Oracle:As an additional cost to cast this spell, reveal a Vampire card from your hand or pay {1}.\nFlying, lifelink

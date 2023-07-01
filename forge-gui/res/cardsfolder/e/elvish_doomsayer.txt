@@ -1,0 +1,8 @@
+Name:Elvish Doomsayer
+ManaCost:1 B
+Types:Creature Elf Shaman
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Defined$ Opponent | Mode$ TgtChoose
+SVar:SacMe:1
+Oracle:When Elvish Doomsayer dies, each opponent discards a card.

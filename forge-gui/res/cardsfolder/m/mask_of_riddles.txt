@@ -1,0 +1,8 @@
+Name:Mask of Riddles
+ManaCost:U B
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Fear | Description$ Equipped creature has fear.
+T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Equipped creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)\nWhenever equipped creature deals combat damage to a player, you may draw a card.\nEquip {2}

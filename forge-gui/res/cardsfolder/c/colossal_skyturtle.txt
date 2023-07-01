@@ -1,0 +1,10 @@
+Name:Colossal Skyturtle
+ManaCost:4 G G U
+Types:Enchantment Creature Turtle
+PT:6/5
+K:Flying
+K:Ward:2
+A:AB$ ChangeZone | PrecostDesc$ Channel — | Cost$ 2 G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+A:AB$ ChangeZone | PrecostDesc$ Channel — | Cost$ 1 U Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+DeckHas:Ability$Discard
+Oracle:Flying, ward {2}\nChannel — {2}{G}, Discard Colossal Skyturtle: Return target card from your graveyard to your hand.\nChannel — {1}{U}, Discard Colossal Skyturtle: Return target creature to its owner's hand.

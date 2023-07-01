@@ -1,0 +1,10 @@
+Name:Spiked Pit Trap
+ManaCost:1
+Types:Artifact
+K:Flash
+A:AB$ Pump | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Creature | AITgts$ Creature.OppCtrl+toughnessLE5 | IsCurse$ True | SubAbility$ DBRollDice | StackDescription$ SpellDescription | SpellDescription$ Choose target creature, then roll a d20.
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBDamage,10-20:DBDamageAndTreasure
+SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 5 | SpellDescription$ 1—9 VERT CARDNAME deals 5 damage to that creature.
+SVar:DBDamageAndTreasure:DB$ DealDamage | Defined$ Targeted | NumDmg$ 5 | SubAbility$ DBTreasure | SpellDescription$ 10—20 VERT CARDNAME deals 5 damage to that creature. Create a Treasure token.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+Oracle:Flash\n{5}, {T}, Sacrifice Spiked Pit Trap: Choose target creature, then roll a d20.\n1—9 | Spiked Pit Trap deals 5 damage to that creature.\n10—20 | Spiked Pit Trap deals 5 damage to that creature. Create a Treasure token.

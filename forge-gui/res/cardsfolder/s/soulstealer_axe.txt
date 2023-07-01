@@ -1,0 +1,9 @@
+Name:Soulstealer Axe
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | Description$ Equipped creature has trample.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, seek a card with mana value equal to that damage.
+SVar:TrigSeek:DB$ Seek | Type$ Card.cmcEQX
+SVar:X:TriggerCount$DamageAmount
+K:Equip:2
+Oracle:Equipped creature has trample.\nWhenever equipped creature deals combat damage to a player, seek a card with mana value equal to that damage.\nEquip {2}

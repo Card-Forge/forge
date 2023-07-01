@@ -1,0 +1,9 @@
+Name:Time Sidewalk
+ManaCost:4 U U U U
+Types:Sorcery
+K:MayEffectFromOpeningHand:ExileCard
+A:SP$ AddTurn | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+SVar:ExileCard:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Exile | RememberChanged$ True | SubAbility$ DBMakeCard | SpellDescription$ If this card is in your opening hand, you may exile it. If you do, create four Time Walk token cards and shuffle them into your deck.
+SVar:DBMakeCard:DB$ MakeCard | TokenCard$ True | Name$ Time Walk | Amount$ 4 | Zone$ Library | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Take an extra turn after this one.\nIf this card is in your opening hand, you may exile it. If you do, create four Time Walk token cards and shuffle them into your deck.

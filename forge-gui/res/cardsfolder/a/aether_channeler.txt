@@ -1,0 +1,11 @@
+Name:Aether Channeler
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBBounce,DBDraw
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Bird creature token with flying.
+SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select another target nonland permanent | TgtZone$ Battlefield | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return another target nonland permanent to its owner's hand.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Token
+Oracle:When Aether Channeler enters the battlefield, choose one —\n• Create a 1/1 white Bird creature token with flying.\n• Return another target nonland permanent to its owner's hand.\n• Draw a card.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Nyarvirazi 3
+Title=Nyarvirazi
+Icon=Nyarvirazi.jpg
+Difficulty=hard
+Description=Nyarvirazi plays a GW 'Jungle Jam' deck.
+Deck Type=constructed
+[main]
+1 Afterlife|MIR
+2 Armor of Thorns|MIR
+1 Benevolent Unicorn|MIR
+1 Disempower|MIR
+2 Ekundu Griffin|MIR
+2 Foratog|MIR
+10 Forest|MIR
+3 Gibbering Hyenas|MIR
+1 Grasslands|MIR
+1 Ivory Charm|MIR
+3 Jolrael's Centaur|MIR
+1 Mountain|MIR
+1 Mountain Valley|MIR
+2 Mtenda Griffin|MIR
+2 Nettletooth Djinn|MIR
+2 Pacifism|MIR
+10 Plains|MIR
+3 Quirion Elves|MIR
+3 Rampant Growth|MIR
+1 Ritual of Steel|MIR
+1 Sawback Manticore|MIR
+2 Thunder Spirit|LEG
+2 Unyaro Griffin|MIR
+1 Vitalizing Cascade|MIR
+1 Worldly Tutor|MIR
+1 Zuberi, Golden Feather|MIR
+[sideboard]
+[planes]
+[schemes]

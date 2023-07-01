@@ -1,0 +1,7 @@
+Name:Pay Tribute to Me
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBSac | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent sacrifices a creature. If you control six or more lands, each opponent sacrifices another creature.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent | SubAbility$ DBSac2
+SVar:DBSac2:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent | ConditionPresent$ Land.YouCtrl | PresentCompare$ GE6
+Oracle:When you set this scheme in motion, each opponent sacrifices a creature. If you control six or more lands, each opponent sacrifices another creature.

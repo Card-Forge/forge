@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Aido Hwedo 2
+Title=Aido Hwedo
+Icon=AidoHwedo.jpg
+Difficulty=medium
+Description=Aido Hwedo plays a monored 'Wild-Eyed Frenzy' deck.
+Deck Type=constructed
+[main]
+3 Chaos Charm|MIR
+2 Fireblast|VIS
+1 Flame Elemental|MIR
+3 Flare|MIR
+2 Goblin Elite Infantry|MIR
+2 Goblin Recruiter|VIS
+2 Goblin Scouts|MIR
+2 Goblin Soothsayer|MIR
+3 Goblin Swine-Rider|VIS
+2 Goblin Tinkerer|MIR
+3 Keeper of Kookus|VIS
+2 Keldon Warlord|LEB
+1 Kookus|VIS
+2 Mob Mentality|VIS
+23 Mountain|MIR
+2 Orcish Oriflamme|LEB
+1 Shivan Dragon|LEB
+2 Talruum Champion|VIS
+1 Unerring Sling|MIR
+1 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

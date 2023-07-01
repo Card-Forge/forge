@@ -1,0 +1,5 @@
+Name:Obelisk of Naya
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R G W | SpellDescription$ Add {R}, {G}, or {W}.
+Oracle:{T}: Add {R}, {G}, or {W}.

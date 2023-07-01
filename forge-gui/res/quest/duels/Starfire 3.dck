@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Starfire 3
+Title=Starfire
+Difficulty=hard
+Description=BG -1/-1 counter deck with Midnight Banshee and Melira, Sylvok Outcast
+Deck Type=constructed
+Icon=Starfire.jpg
+[main]
+4 Necroskitter
+4 Midnight Banshee
+4 Blowfly Infestation
+4 Crumbling Ashes
+4 Glistening Oil
+2 Kulrath Knight
+1 Skinrender
+4 Phyrexian Hydra
+2 Wall of Roots
+4 Melira, Sylvok Outcast
+1 Flourishing Defenses
+1 Harmonize
+1 Doubling Season
+1 Mox Emerald
+1 Mox Jet
+4 Bayou
+4 Verdant Catacombs
+4 Bloodstained Mire
+4 Woodland Cemetery
+4 Swamp|ISD
+1 Forest|ISD
+1 Urborg, Tomb of Yawgmoth
+[sideboard]

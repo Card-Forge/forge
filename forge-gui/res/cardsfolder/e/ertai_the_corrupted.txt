@@ -1,0 +1,7 @@
+Name:Ertai, the Corrupted
+ManaCost:2 W U B
+Types:Legendary Creature Phyrexian Human Wizard
+PT:3/4
+A:AB$ Counter | Cost$ U T Sac<1/Creature;Enchantment/creature or enchantment> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+AI:RemoveDeck:All
+Oracle:{U}, {T}, Sacrifice a creature or enchantment: Counter target spell.

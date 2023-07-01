@@ -1,0 +1,7 @@
+Name:Akroan Phalanx
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/3
+K:Vigilance
+A:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+Oracle:Vigilance\n{2}{R}: Creatures you control get +1/+0 until end of turn.

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tezzeret, Agent of Bolas 3
+Title=Tezzeret, Agent of Bolas
+Difficulty=hard
+Description=“I tolerate Phyrexians because the dragon requires it. But I have no patience for uninvited guests.”
+Icon=Tezzeret.jpg
+Deck Type=constructed
+[Main]
+4 Blackcleave Cliffs|SOM
+2 Consecrated Sphinx|MBS
+4 Darkslick Shores|SOM
+4 Galvanic Blast|SOM
+4 Go for the Throat|MBS
+2 Great Furnace|MRD
+3 Island|SOM|1
+2 Mountain|SOM|1
+4 Necropede|SOM
+2 Ratchet Bomb|SOM
+2 Seat of the Synod|MRD
+3 Shatter|LEA
+3 Skinrender|SOM
+2 Skithiryx, the Blight Dragon|SOM
+2 Sphere of the Suns|MBS
+3 Swamp|SOM|1
+3 Talisman of Dominance|MRD
+3 Talisman of Indulgence|MRD
+4 Tezzeret, Agent of Bolas|MBS
+2 Vault of Whispers|MRD
+2 wurmcoil engine|SOM
+[sideboard]

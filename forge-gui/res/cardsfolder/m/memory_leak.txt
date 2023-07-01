@@ -1,0 +1,8 @@
+Name:Memory Leak
+ManaCost:2 B
+Types:Sorcery
+A:SP$ RevealHand | ValidTgts$ Opponent | SubAbility$ DBExile | SpellDescription$ Target opponent reveals their hand.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | Mandatory$ True | StackDescription$ {p:You} chooses a nonland card from {p:Targeted}'s graveyard or hand and exiles it. | SpellDescription$ You choose a nonland card from that player's graveyard or hand and exile it.
+K:Cycling:1
+DeckHas:Ability$Discard
+Oracle:Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it.\nCycling {1} ({1}, Discard this card: Draw a card.)

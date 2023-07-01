@@ -1,0 +1,9 @@
+Name:Subterranean Shambler
+ManaCost:3 R
+Types:Creature Elemental
+PT:2/3
+K:Echo:3 R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTremor | TriggerDescription$ When CARDNAME enters or leaves the battlefield, it deals 1 damage to each creature without flying.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigTremor | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, it deals 1 damage to each creature without flying.
+SVar:TrigTremor:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying.
+Oracle:Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Subterranean Shambler enters or leaves the battlefield, it deals 1 damage to each creature without flying.

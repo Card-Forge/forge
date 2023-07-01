@@ -1,0 +1,7 @@
+Name:Eon Hub
+ManaCost:5
+Types:Artifact
+R:Event$ BeginPhase | ActiveZones$ Battlefield | Phase$ Upkeep | Skip$ True | Description$ Players skip their upkeep steps.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Players skip their upkeep steps.

@@ -1,0 +1,8 @@
+Name:Renari, Merchant of Marvels
+ManaCost:3 U
+Types:Legendary Creature Dragon Artificer
+PT:2/4
+S:Mode$ CastWithFlash | ValidCard$ Dragon,Artifact | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast Dragon spells and artifact spells as though they had flash.
+DeckHints:Type$Dragon|Artifact
+K:Choose a Background
+Oracle:You may cast Dragon spells and artifact spells as though they had flash.\nChoose a Background (You can have a Background as a second commander.)

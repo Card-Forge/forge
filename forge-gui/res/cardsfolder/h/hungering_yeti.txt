@@ -1,0 +1,7 @@
+Name:Hungering Yeti
+ManaCost:4 R
+Types:Creature Yeti
+PT:4/4
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | IsPresent$ Permanent.Green+YouCtrl,Permanent.Blue+YouCtrl | Description$ As long as you control a green or blue permanent, you may cast CARDNAME as though it had flash.
+DeckHints:Color$Green|Blue
+Oracle:As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash. (You may cast it any time you could cast an instant.)

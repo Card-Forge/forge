@@ -1,0 +1,7 @@
+Name:Avian Changeling
+ManaCost:2 W
+Types:Creature Shapeshifter
+PT:2/2
+K:Changeling
+K:Flying
+Oracle:Changeling (This card is every creature type.)\nFlying

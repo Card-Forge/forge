@@ -1,0 +1,10 @@
+Name:Essence Sliver
+ManaCost:3 W
+Types:Creature Sliver
+PT:3/3
+T:Mode$ DamageDealtOnce | ValidSource$ Sliver.inZoneBattlefield | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Sliver deals damage, its controller gains that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ TriggeredSourceController | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:PlayMain1:TRUE
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever a Sliver deals damage, its controller gains that much life.

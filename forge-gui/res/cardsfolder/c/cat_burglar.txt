@@ -1,0 +1,6 @@
+Name:Cat Burglar
+ManaCost:3 B
+Types:Creature Kor Rogue Minion
+PT:2/2
+A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards a card. Activate only as a sorcery.
+Oracle:{2}{B}, {T}: Target player discards a card. Activate only as a sorcery.

@@ -1,0 +1,8 @@
+Name:Angelic Arbiter
+ManaCost:5 W W
+Types:Creature Angel
+PT:5/6
+K:Flying
+S:Mode$ CantAttack | ValidCard$ Creature.ControlledBy Opponent.castSpellThisTurn | Description$ Each opponent who cast a spell this turn can't attack with creatures.
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent.attackedWithCreaturesThisTurn | Description$ Each opponent who attacked with a creature this turn can't cast spells.
+Oracle:Flying\nEach opponent who cast a spell this turn can't attack with creatures.\nEach opponent who attacked with a creature this turn can't cast spells.

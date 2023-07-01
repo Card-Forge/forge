@@ -1,0 +1,6 @@
+Name:Scaled Herbalist
+ManaCost:1 G
+Types:Creature Lizard Druid
+PT:1/3
+A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a land card from your hand onto the battlefield.
+Oracle:{T}: You may put a land card from your hand onto the battlefield.

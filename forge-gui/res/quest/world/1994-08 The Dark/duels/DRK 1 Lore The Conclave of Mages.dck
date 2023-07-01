@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Conclave of Mages
+Title=The Conclave of Mages
+Difficulty=easy
+Description=Magic often masters those who cannot master it.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Barl's Cage|DRK
+2 Book of Rass|DRK
+4 Curse Artifact|DRK
+2 Dark Sphere|DRK
+4 Fellwar Stone|DRK
+4 Grave Robbers|DRK
+4 Murk Dwellers|DRK
+4 Rag Man|DRK
+2 Stone Calendar|DRK
+24 Swamp|LEB|3
+4 The Fallen|DRK
+2 Tormod's Crypt|DRK

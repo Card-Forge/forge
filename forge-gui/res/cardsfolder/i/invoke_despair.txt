@@ -1,0 +1,17 @@
+Name:Invoke Despair
+ManaCost:1 B B B B
+Types:Sorcery
+A:SP$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBLoseLifeC | StackDescription$ {p:Targeted} sacrifices a creature. | SpellDescription$ Target opponent sacrifices a creature.
+SVar:DBLoseLifeC:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ DBDrawC | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ SpellDescription | SpellDescription$ If they can't, they lose 2 life
+SVar:DBDrawC:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanC | StackDescription$ and {p:You} draws a card. | SpellDescription$ and you draw a card.
+SVar:DBCleanC:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSacrificeE
+SVar:DBSacrificeE:DB$ Sacrifice | Defined$ Targeted | SacValid$ Enchantment | RememberSacrificed$ True | SubAbility$ DBLoseLifeE | StackDescription$ SpellDescription | SpellDescription$ Then repeat this process for an enchantment and a planeswalker.
+SVar:DBLoseLifeE:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ DBDrawE | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ None
+SVar:DBDrawE:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanE | StackDescription$ None
+SVar:DBCleanE:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSacrificeP
+SVar:DBSacrificeP:DB$ Sacrifice | Defined$ Targeted | SacValid$ Planeswalker | RememberSacrificed$ True | SubAbility$ DBLoseLifeP | StackDescription$ None
+SVar:DBLoseLifeP:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ DBDrawP | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ None
+SVar:DBDrawP:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanP | StackDescription$ None
+SVar:DBCleanP:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Target opponent sacrifices a creature. If they can't, they lose 2 life and you draw a card. Then repeat this process for an enchantment and a planeswalker.

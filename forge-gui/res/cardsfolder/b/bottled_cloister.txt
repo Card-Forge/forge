@@ -1,0 +1,10 @@
+Name:Bottled Cloister
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, exile all cards from your hand face down.
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return all cards you own exiled with CARDNAME to your hand, then draw a card.
+SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+YouOwn | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:At the beginning of each opponent's upkeep, exile all cards from your hand face down.\nAt the beginning of your upkeep, return all cards you own exiled with Bottled Cloister to your hand, then draw a card.

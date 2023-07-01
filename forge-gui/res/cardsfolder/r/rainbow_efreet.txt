@@ -1,0 +1,7 @@
+Name:Rainbow Efreet
+ManaCost:3 U
+Types:Creature Efreet
+PT:3/1
+K:Flying
+A:AB$ Phases | Cost$ U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
+Oracle:Flying\n{U}{U}: Rainbow Efreet phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

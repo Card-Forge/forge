@@ -1,0 +1,9 @@
+Name:Thunderkin Awakener
+ManaCost:1 R
+Types:Creature Elemental Shaman
+PT:1/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, choose target Elemental creature card in your graveyard with toughness less than CARDNAME's toughness. Return that card to the battlefield tapped and attacking. Sacrifice it at the beginning of the next end step.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Elemental+YouCtrl+toughnessLTX | TgtPrompt$ Select target Elemental creature card in your graveyard | Mandatory$ True | Tapped$ True | Attacking$ True | AtEOT$ Sacrifice
+SVar:X:Count$CardToughness
+Oracle:Haste\nWhenever Thunderkin Awakener attacks, choose target Elemental creature card in your graveyard with toughness less than Thunderkin Awakener's toughness. Return that card to the battlefield tapped and attacking. Sacrifice it at the beginning of the next end step.

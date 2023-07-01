@@ -1,0 +1,6 @@
+[format]
+Name:Block: Invasion (PLS)
+Type:Archived
+Subtype:Block
+Effective:2001-03-01
+Sets:INV, PLS

@@ -1,0 +1,9 @@
+Name:Moira, Urborg Haunt
+ManaCost:2 B
+Types:Legendary Creature Spirit Wizard
+K:Menace
+PT:3/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return to the battlefield target creature card in your graveyard that was put there from the battlefield this turn.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeNum$ 1 | ValidTgts$ Creature.YouOwn+ThisTurnEnteredFrom_Battlefield
+DeckHas:Ability$Graveyard
+Oracle:Menace\nWhenever Moira, Urborg Haunt deals combat damage to a player, return to the battlefield target creature card in your graveyard that was put there from the battlefield this turn.

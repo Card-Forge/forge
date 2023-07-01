@@ -1,0 +1,7 @@
+Name:Tarnished Citadel
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPain | SpellDescription$ Add one mana of any color. CARDNAME deals 3 damage to you.
+SVar:DBPain:DB$ DealDamage | NumDmg$ 3 | Defined$ You
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Tarnished Citadel deals 3 damage to you.

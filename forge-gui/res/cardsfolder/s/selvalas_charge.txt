@@ -1,0 +1,10 @@
+Name:Selvala's Charge
+ManaCost:4 G
+Types:Sorcery
+A:SP$ PeekAndReveal | PrecostDesc$ Parley — | Defined$ Player | RememberRevealed$ True | SubAbility$ DBToken | SpellDescription$ Parley — Each player reveals the top card of their library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token. Then each player draws a card.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_3_3_elephant | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+DeckHas:Ability$Token & Type$Elephant
+Oracle:Parley — Each player reveals the top card of their library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token. Then each player draws a card.

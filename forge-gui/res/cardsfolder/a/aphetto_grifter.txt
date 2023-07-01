@@ -1,0 +1,7 @@
+Name:Aphetto Grifter
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+A:AB$ Tap | Cost$ tapXType<2/Wizard> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
+AI:RemoveDeck:All
+Oracle:Tap two untapped Wizards you control: Tap target permanent.

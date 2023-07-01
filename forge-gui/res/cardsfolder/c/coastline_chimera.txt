@@ -1,0 +1,7 @@
+Name:Coastline Chimera
+ManaCost:3 U
+Types:Creature Chimera
+PT:1/5
+K:Flying
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
+Oracle:Flying\n{1}{W}: Coastline Chimera can block an additional creature this turn.

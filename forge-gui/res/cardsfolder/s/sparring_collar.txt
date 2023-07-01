@@ -1,0 +1,7 @@
+Name:Sparring Collar
+ManaCost:2
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | Description$ Equipped creature has first strike.
+A:AB$ Attach | Cost$ R R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
+Oracle:Equipped creature has first strike.\n{R}{R}: Attach Sparring Collar to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

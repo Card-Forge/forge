@@ -1,0 +1,8 @@
+Name:Whipkeeper
+ManaCost:2 R R
+Types:Creature Dwarf
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the damage already dealt to it this turn.
+SVar:X:Targeted$TotalDamageReceivedThisTurn
+AI:RemoveDeck:All
+Oracle:{T}: Whipkeeper deals damage to target creature equal to the damage already dealt to it this turn.

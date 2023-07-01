@@ -1,0 +1,9 @@
+Name:Glint-Horn Buccaneer
+ManaCost:1 R R
+Types:Creature Minotaur Pirate
+PT:2/4
+K:Haste
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you discard a card, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+A:AB$ Draw | Cost$ 1 R Discard<1/Card> | Defined$ You | IsPresent$ Card.Self+attacking | SpellDescription$ Draw a card. Activate only if CARDNAME is attacking.
+Oracle:Haste\nWhenever you discard a card, Glint-Horn Buccaneer deals 1 damage to each opponent.\n{1}{R}, Discard a card: Draw a card. Activate only if Glint-Horn Buccaneer is attacking.

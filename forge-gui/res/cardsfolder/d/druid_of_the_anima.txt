@@ -1,0 +1,6 @@
+Name:Druid of the Anima
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Combo R G W | SpellDescription$ Add {R}, {G}, or {W}.
+Oracle:{T}: Add {R}, {G}, or {W}.

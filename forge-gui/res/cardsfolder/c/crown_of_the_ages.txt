@@ -1,0 +1,6 @@
+Name:Crown of the Ages
+ManaCost:2
+Types:Artifact
+A:AB$ Attach | Cost$ 4 T | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | Object$ Targeted | Choices$ Creature | Move$ True | StackDescription$ SpellDescription | SpellDescription$ Attach target Aura attached to a creature to another creature.
+AI:RemoveDeck:All
+Oracle:{4}, {T}: Attach target Aura attached to a creature to another creature.

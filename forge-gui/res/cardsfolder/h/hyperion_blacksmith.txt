@@ -1,0 +1,7 @@
+Name:Hyperion Blacksmith
+ManaCost:1 R R
+Types:Creature Human Artificer
+PT:2/2
+A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | SpellDescription$ You may tap or untap target artifact an opponent controls.
+AI:RemoveDeck:All
+Oracle:{T}: You may tap or untap target artifact an opponent controls.

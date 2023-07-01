@@ -1,0 +1,6 @@
+Name:Tetsuko Umezawa, Fugitive
+ManaCost:1 U
+Types:Legendary Creature Human Rogue
+PT:1/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl+powerLE1,Creature.YouCtrl+toughnessLE1 | Description$ Creatures you control with power or toughness 1 or less can't be blocked.
+Oracle:Creatures you control with power or toughness 1 or less can't be blocked.

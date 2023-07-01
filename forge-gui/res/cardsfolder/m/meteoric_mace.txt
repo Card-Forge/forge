@@ -1,0 +1,7 @@
+Name:Meteoric Mace
+ManaCost:4 R R
+Types:Artifact Equipment
+K:Equip:4
+K:Cascade
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddKeyword$ Trample | Description$ Equipped creature gets +4/+0 and has trample.
+Oracle:Equipped creature gets +4/+0 and has trample.\nEquip {4}\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

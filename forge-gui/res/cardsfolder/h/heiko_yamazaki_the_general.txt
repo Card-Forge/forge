@@ -1,0 +1,11 @@
+Name:Heiko Yamazaki, the General
+ManaCost:3 R
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Trample
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, you may cast target artifact card from your graveyard this turn.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Artifact.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target artifact card | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play this card from your graveyard this turn.
+DeckHints:Type$Samurai|Warrior|Artifact
+DeckHas:Ability$Graveyard
+Oracle:Trample\nWhenever a Samurai or Warrior you control attacks alone, you may cast target artifact card from your graveyard this turn.

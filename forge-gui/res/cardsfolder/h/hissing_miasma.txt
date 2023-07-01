@@ -1,0 +1,6 @@
+Name:Hissing Miasma
+ManaCost:1 B B
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you, its controller loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 1
+Oracle:Whenever a creature attacks you, its controller loses 1 life.

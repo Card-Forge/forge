@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 2 The Floating Isle
+Title=The Floating Isle
+Difficulty=easy
+Description=The legacy of Feroz lives on.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Coral Reef|HML
+2 Feroz's Ban|HML
+2 Forget|HML
+2 Giant Albatross|HML|1
+2 Giant Albatross|HML|2
+26 Island|LEB|1
+2 Labyrinth Minotaur|HML|1
+2 Labyrinth Minotaur|HML|2
+2 Memory Lapse|HML|1
+2 Memory Lapse|HML|2
+2 Merchant Scroll|HML
+2 Mystic Decree|HML
+4 Reveka, Wizard Savant|HML
+4 Roterothopter|HML
+4 Wall of Kelp|HML

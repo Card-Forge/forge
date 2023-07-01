@@ -1,0 +1,5 @@
+Name:Aladdin's Ring
+ManaCost:8
+Types:Artifact
+A:AB$ DealDamage | Cost$ 8 T | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+Oracle:{8}, {T}: Aladdin's Ring deals 4 damage to any target.

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Captain America 3
+Title=Captain America
+Difficulty=hard
+Description=WUG Exalted deck
+Icon=Captain America.jpg
+Deck Type=constructed
+[main]
+1 Island|9ED
+3 Forest|USG
+3 Plains|ICE
+2 Tundra|3ED
+4 Seaside Citadel|ALA
+3 Tropical Island|3ED
+4 Terramorphic Expanse|TSP
+3 Savannah|3ED
+1 Cathedral of War
+4 Noble Hierarch|CFX
+4 Swords to Plowshares|LEB
+2 Aven Squire
+2 Knight of Glory
+1 Ethercaste Knight
+2 Qasali Pridemage|ARB
+1 Disenchant
+2 Dueling Grounds|INV
+1 Giltspire Avenger
+1 Rhox War Monk
+3 Bant Charm
+2 Rafiq of the Many|ALA
+4 Sublime Archangel
+3 Stoic Angel|ALA
+2 Battlegrace Angel|ALA
+2 Finest Hour|ARB
+[sideboard]

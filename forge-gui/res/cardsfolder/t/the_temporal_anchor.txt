@@ -1,0 +1,10 @@
+Name:The Temporal Anchor
+ManaCost:3 U U U
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+T:Mode$ Scry | ValidPlayer$ You | ToBottom$ True | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom of your library.
+SVar:TrigExile:DB$ Dig | DigNum$ X | ChangeNum$ All | FromBottom$ True | DestinationZone$ Exile
+SVar:X:TriggerCount$ScryBottom
+S:Mode$ Continuous | Condition$ PlayerTurn | MayPlay$ True | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | Description$ During your turn, you may play cards exiled with CARDNAME.
+Oracle:At the beginning of your upkeep, scry 2.\nWhenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom of your library.\nDuring your turn, you may play cards exiled with The Temporal Anchor.

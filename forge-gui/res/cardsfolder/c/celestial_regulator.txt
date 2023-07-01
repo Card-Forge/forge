@@ -1,0 +1,11 @@
+Name:Celestial Regulator
+ManaCost:1 W U
+Types:Creature Angel Advisor
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, choose target creature you don't control and tap it. If you control a creature with a counter on it, the chosen creature doesn't untap during its controller's next untap step.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ConditionPresent$ Creature.YouCtrl+HasCounters | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
+Oracle:Flying\nWhen Celestial Regulator enters the battlefield, choose target creature you don't control and tap it. If you control a creature with a counter on it, the chosen creature doesn't untap during its controller's next untap step.

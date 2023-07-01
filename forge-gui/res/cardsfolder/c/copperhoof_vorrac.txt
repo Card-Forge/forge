@@ -1,0 +1,10 @@
+Name:Copperhoof Vorrac
+ManaCost:3 G G
+Types:Creature Boar Beast
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each untapped permanent your opponents control.
+SVar:X:Count$Valid Permanent.untapped+OppCtrl
+S:Mode$ Continuous | Affected$ Permanent.OppCtrl | AddSVar$ AITap
+SVar:AITap:SVar:AITapDown:True
+AI:RemoveDeck:All
+Oracle:Copperhoof Vorrac gets +1/+1 for each untapped permanent your opponents control.

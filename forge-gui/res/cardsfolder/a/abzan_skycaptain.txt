@@ -1,0 +1,9 @@
+Name:Abzan Skycaptain
+ManaCost:3 W
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigBolster | TriggerDescription$ When CARDNAME dies, bolster 2.
+SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 2 | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Abzan Skycaptain dies, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)

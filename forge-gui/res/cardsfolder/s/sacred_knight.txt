@@ -1,0 +1,6 @@
+Name:Sacred Knight
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Black,Creature.Red | Description$ CARDNAME can't be blocked by black and/or red creatures.
+Oracle:Sacred Knight can't be blocked by black and/or red creatures.

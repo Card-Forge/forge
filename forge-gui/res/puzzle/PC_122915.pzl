@@ -1,0 +1,22 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 122915 - Burn, Baby, Burn
+URL:http://www.gatheringmagic.com/seanuy-122915-burn-baby-burn/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn. AI has these cards in hand - Lightning Bolt, Guerrilla Tactics, Skullcrack, Pyrotechnics.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=2
+AILife=10
+humanhand=Valorous Stance; Parallax Wave
+humangraveyard=
+humanlibrary=
+humanprecast=
+humanbattlefield=Plains|Set:ZEN; Plains|Set:ZEN; Plains|Set:ZEN; Island|Set:ZEN; Island|Set:ZEN; Island|Set:ZEN; Aven Riftwatcher|Counters:TIME=1; Brago, King Eternal; Heavy Infantry|Id:422; Runed Halo|NamedCard:Lightning Bolt|NoETBTrigs; Angelic Shield; Clone|ExecuteScript:DBCopy->420|NoETBTrigs
+aibattlefield=Swamp|Tapped|Set:ZEN; Swamp|Tapped|Set:ZEN; Swamp|Tapped|Set:ZEN; Mountain|Set:ZEN; Mountain|Tapped|Set:ZEN; Mountain|Tapped|Set:ZEN; Volcanic Dragon|Id:420; Typhoid Rats; Skulking Fugitive; Vulshok Refugee; Mindslicer|Id:424; Accorder's Shield|AttachedTo:424; Torment|AttachedTo:422;
+aihand=Lightning Bolt; Guerrilla Tactics; Skullcrack; Pyrotechnics
+aigraveyard=
+ailibrary=
+aiexile=

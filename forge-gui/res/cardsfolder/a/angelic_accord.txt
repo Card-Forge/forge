@@ -1,0 +1,8 @@
+Name:Angelic Accord
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE4 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+AI:RemoveDeck:Random
+Oracle:At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.

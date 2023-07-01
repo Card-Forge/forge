@@ -1,0 +1,15 @@
+Name:Master of the Wild Hunt
+ManaCost:2 G G
+Types:Creature Human Shaman
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
+A:AB$ DealDamage | Cost$ T | SubAbility$ TapWolves | ValidTgts$ Creature | NumDmg$ 0 | AILogic$ WildHunt | SpellDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves. | StackDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to {c:Targeted}. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
+SVar:TapWolves:DB$ TapAll | ValidCards$ Creature.Wolf+YouCtrl+untapped | RememberTapped$ True | SubAbility$ WildHuntDamage | StackDescription$ None
+SVar:WildHuntDamage:DB$ RepeatEach | RepeatSubAbility$ WolfStrike | UseImprinted$ True | RepeatCards$ Card.IsRemembered | DamageMap$ True | SubAbility$ HuntedDamage | StackDescription$ None
+SVar:WolfStrike:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ X | Defined$ ParentTarget | StackDescription$ None
+SVar:HuntedDamage:DB$ DealDamage | DamageSource$ ParentTarget | OptionalDecider$ ParentTargetedController | NumDmg$ Y | DividerOnResolution$ ParentTargetedController | Defined$ Remembered | SubAbility$ DBDamageResolve | StackDescription$ None
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:X:Imprinted$CardPower
+SVar:Y:Targeted$CardPower
+Oracle:At the beginning of your upkeep, create a 2/2 green Wolf creature token.\n{T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.

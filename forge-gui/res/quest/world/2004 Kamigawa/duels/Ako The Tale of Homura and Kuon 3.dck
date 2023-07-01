@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Homura and Kuon 3
+Title=The Tale of Homura and Kuon
+Difficulty=hard
+Description="Walking the path of the kami only leaves you with singed feet." -- Soratami saying
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Forbidden Orchard|CHK
+1 Forest|CHK|1
+1 Forest|CHK|2
+1 Forest|CHK|3
+4 Forest|CHK|4
+4 Goryo's Vengeance|BOK
+4 Hanabi Blast|CHK
+4 Homura, Human Ascendant|SOK
+1 Honden of Life's Web|CHK
+1 Kodama's Reach|CHK
+1 Kokusho, the Evening Star|CHK
+3 Kuon, Ogre Ascendant|SOK
+1 Kuro, Pitlord|CHK
+4 Lantern-Lit Graveyard|CHK
+2 Matsu-Tribe Sniper|BOK
+1 Mountain|CHK|3
+3 Mountain|CHK|4
+3 Ronin Cliffrider|BOK
+1 Ryusei, the Falling Star|CHK
+2 Sakura-Tribe Elder|CHK
+2 Sakura-Tribe Scout|SOK
+2 Swamp|CHK|1
+2 Swamp|CHK|2
+1 Swamp|CHK|3
+1 Swamp|CHK|4
+4 Through the Breach|CHK
+3 Toshiro Umezawa|BOK
+[Sideboard]
+

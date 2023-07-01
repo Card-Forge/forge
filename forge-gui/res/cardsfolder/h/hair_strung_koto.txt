@@ -1,0 +1,6 @@
+Name:Hair-Strung Koto
+ManaCost:6
+Types:Artifact
+A:AB$ Mill | Cost$ tapXType<1/Creature> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills a card.
+SVar:NonStackingEffect:True
+Oracle:Tap an untapped creature you control: Target player mills a card.

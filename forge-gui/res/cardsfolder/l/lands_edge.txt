@@ -1,0 +1,8 @@
+Name:Land's Edge
+ManaCost:1 R R
+Types:World Enchantment
+A:AB$ DealDamage | Cost$ Discard<1/Card> | ValidTgts$ Player,Planeswalker | NumDmg$ X | Activator$ Player | AILogic$ DiscardLands | SpellDescription$ If the discarded card was a land card, CARDNAME deals 2 damage to target player or planeswalker. Any player may activate this ability.
+SVar:X:Discarded$Valid Land/Times.2
+AI:RemoveDeck:All
+DeckHas:Ability$Discard
+Oracle:Discard a card: If the discarded card was a land card, Land's Edge deals 2 damage to target player or planeswalker. Any player may activate this ability.

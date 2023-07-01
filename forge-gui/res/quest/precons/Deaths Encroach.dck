@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=20
+Credits=2500
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Death's Encroach
+Description=Time to devour the living! Master a frighteningly quick force of flesh-hungry undead while you trip up your foe with a barrage of disruptive spells. Tonight is the last night the humans will draw breath.
+Deck Type=constructed
+Set=AVR
+Image=deaths_encroach.jpg
+[main]
+2 Lashwrithe|NPH
+24 Swamp|AVR
+1 Cemetery Reaper|M12
+2 Crypt Creeper|AVR
+4 Diregraf Ghoul|ISD
+1 Geralf's Messenger|DKA
+3 Ghoulraiser|ISD
+1 Gloom Surgeon|AVR
+1 Gravecrawler|DKA
+4 Highborn Ghoul|DKA
+4 Skinrender|SOM
+3 Altar's Reap|ISD
+2 Dismember|NPH
+2 Doom Blade|M12
+3 Go for the Throat|MBS
+3 Despise|NPH
+[sideboard]
+2 Appetite for Brains|AVR
+2 Crypt Creeper|AVR
+3 Deathmark|M12
+1 Despise|NPH
+2 Distress|M12
+1 Ghoulraiser|ISD
+1 Surgical Extraction|NPH
+3 Triumph of Cruelty|AVR

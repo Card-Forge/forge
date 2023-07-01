@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Infestation
+Description=When it comes time for unbridled aggression, see red with "Infestation." This Goblin-heavy deck has what it takes to beat down your opponent or remove creatures. It also features some gigantic, deadly creature just chomping at the bit to close in for the kill.
+Deck Type=constructed
+Set=7ED
+Image=infestation.jpg
+[main]
+1 Blaze|7ED
+1 Fire Elemental|7ED
+2 Goblin Chariot|7ED
+2 Goblin Digging Team|7ED
+2 Goblin Gardener|7ED
+1 Goblin Glider|7ED
+1 Goblin King|7ED
+1 Goblin Matron|7ED
+2 Goblin Raider|7ED
+1 Lightning Blast|7ED
+16 Mountain|7ED
+1 Patagia Golem|7ED
+2 Pillage|7ED
+2 Raging Goblin|7ED
+2 Shock|7ED
+2 Spitting Earth|7ED
+1 Trained Orgg|7ED
+[sideboard]

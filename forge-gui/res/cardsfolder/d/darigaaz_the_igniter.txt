@@ -1,0 +1,12 @@
+Name:Darigaaz, the Igniter
+ManaCost:3 B R G
+Types:Legendary Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChooseColor | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals their hand and NICKNAME deals damage to the player equal to the number of cards of that color revealed this way.
+SVar:TrigChooseColor:AB$ ChooseColor | Cost$ 2 R | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealHand
+SVar:DBRevealHand:DB$ RevealHand | Defined$ TriggeredTarget | RememberRevealed$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredTarget | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.ChosenColor
+Oracle:Flying\nWhenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals their hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.

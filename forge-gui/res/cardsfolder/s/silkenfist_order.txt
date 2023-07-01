@@ -1,0 +1,7 @@
+Name:Silkenfist Order
+ManaCost:3 W W
+Types:Creature Kor Soldier
+PT:3/5
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, untap it.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Whenever Silkenfist Order becomes blocked, untap it.

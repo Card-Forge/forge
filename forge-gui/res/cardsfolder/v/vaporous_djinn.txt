@@ -1,0 +1,8 @@
+Name:Vaporous Djinn
+ManaCost:2 U U
+Types:Creature Djinn
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPhase | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME phases out unless you pay {U}{U}.
+SVar:TrigPhase:DB$ Phases | Defined$ Self | UnlessCost$ U U | UnlessPayer$ You
+Oracle:Flying\nAt the beginning of your upkeep, Vaporous Djinn phases out unless you pay {U}{U}. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

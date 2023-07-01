@@ -1,0 +1,8 @@
+Name:Grond, the Gatebreaker
+ManaCost:3 B
+Types:Legendary Artifact Vehicle
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Army.YouCtrl | Condition$ PlayerTurn | AddType$ Artifact & Creature | RemoveCardTypes$ True | Description$ As long as it's your turn and you control an Army, CARDNAME is an artifact creature.
+K:Crew:3
+Oracle:Trample\nAs long as it's your turn and you control an Army, Grond, the Gatebreaker is an artifact creature.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

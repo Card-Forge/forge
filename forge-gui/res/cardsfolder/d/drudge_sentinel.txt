@@ -1,0 +1,7 @@
+Name:Drudge Sentinel
+ManaCost:2 B
+Types:Creature Skeleton Warrior
+PT:2/1
+A:AB$ Pump | Cost$ 3 | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Tap Drudge Sentinel. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBTap:DB$ Tap | Defined$ Self
+Oracle:{3}: Tap Drudge Sentinel. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nissa, Genesis Mage
+Description=Unleash nature's wrath! The elf Planeswalker Nissa Revane draws power from her connection to the natural world. Enlist her aid to harness primal elemental forces and summon massive creatures as you overrun your enemies' defenses.
+Deck Type=constructed
+Set=HOU
+Image=nissa_genesis_mage.jpg
+[Main]
+2 Aerial Guide|HOU
+2 Ambuscade|HOU
+2 Angler Drake|AKH
+2 Aven Reedstalker|HOU
+3 Avid Reclaimer|HOU
+1 Bounty of the Luxa|AKH
+4 Brambleweft Behemoth|HOU
+2 Feral Prowler|HOU
+14 Forest|HOU
+8 Island|HOU
+2 Nissa's Encouragement|HOU
+1 Nissa, Genesis Mage+|HOU
+3 Pouncing Cheetah|AKH
+1 Reason // Believe|HOU
+2 River Hoopoe|HOU
+2 Spring // Mind|AKH
+3 Unsummon|HOU
+2 Weaver of Currents|AKH
+4 Woodland Stream|HOU

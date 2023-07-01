@@ -1,0 +1,37 @@
+[duel]
+
+[metadata]
+Name=Oceanus Wavecrash 4
+Title=Oceanus
+Icon=Oceanus.jpg
+Difficulty=very hard
+Description= [W/U] Control
+Deck Type=constructed
+
+[main]
+3  Island|LRW
+3  Mutavault|MOR
+4  Mystic Gate|SHM
+1  Plains|LRW
+4  Reflecting Pool|SHM
+1  Rugged Prairie|EVE
+4  Vivid Creek|LRW
+4  Vivid Meadow|LRW
+1  Wanderwine Hub|LRW
+
+3  Kitchen Finks|SHM
+2  Knight of Meadowgrain|LRW
+3  Mirror Entity|LRW
+4  Mulldrifter|LRW
+4  Reveillark|MOR
+4  Sower of Temptation|LRW
+
+2  Austere Command|LRW
+4  Cryptic Command|LRW
+3  Firespout|SHM
+2  Oblivion Ring|LRW
+4  Ponder|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

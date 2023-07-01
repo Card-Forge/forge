@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Quakebringer
+OpponentName=The Quakebringers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Surtland Frostpyre
+HumanExtras=
+[metadata]
+Title=Quakebringer
+Difficulty=medium
+Description=In case of earthquake, jelly is very fun to watch.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Quakebringer
+[Main]
+15 Blood on the Snow|KHM|2
+15 Quakebringer|KHM|2
+30 Sulfurous Mire|KHM|1

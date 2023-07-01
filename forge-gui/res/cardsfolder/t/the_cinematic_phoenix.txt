@@ -1,0 +1,13 @@
+Name:The Cinematic Phoenix
+ManaCost:3 B R
+Types:Legendary Creature Phoenix
+PT:4/4
+K:Flying
+K:Haste
+K:Protection from red
+A:AB$ ChangeZone | Cost$ 1 T | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target legendary creature in your graveyard | GainControl$ True | SpellDescription$ Return target legendary creature card from your graveyard to the battlefield.
+A:AB$ ChangeZone | Cost$ tapXType<6/Creature> | RememberCostCards$ True | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SubAbility$ CheckWin | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. If you tapped six legendary creatures this way, you win the game.
+SVar:CheckWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ6 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature.Legendary
+Oracle:Flying, haste, protection from red\n{1}, {T}: Return target legendary creature card from your graveyard to the battlefield.\nTap six untapped creatures you control: Return The Cinematic Phoenix from your graveyard to the battlefield. If you tapped six legendary creatures this way, you win the game.

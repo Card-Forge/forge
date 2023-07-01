@@ -1,0 +1,9 @@
+Name:Hisoka, Minamo Sensei
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+PT:1/3
+A:AB$ Counter | Cost$ 2 U Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ EQY | SpellDescription$ Counter target spell if it has the same mana value as the discarded card.
+SVar:X:Targeted$CardManaCost
+SVar:Y:Discarded$CardManaCost
+AI:RemoveDeck:All
+Oracle:{2}{U}, Discard a card: Counter target spell if it has the same mana value as the discarded card.

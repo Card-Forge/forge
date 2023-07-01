@@ -1,0 +1,10 @@
+Name:Daring Saboteur
+ManaCost:1 U
+Types:Creature Human Pirate
+PT:2/1
+A:AB$ Effect | Cost$ 2 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoot | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
+DeckHas:Ability$Discard
+Oracle:{2}{U}: Daring Saboteur can't be blocked this turn.\nWhenever Daring Saboteur deals combat damage to a player, you may draw a card. If you do, discard a card.

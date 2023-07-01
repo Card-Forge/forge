@@ -1,0 +1,6 @@
+Name:Scalding Devil
+ManaCost:1 R
+Types:Creature Devil
+PT:1/1
+A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+Oracle:{2}{R}: Scalding Devil deals 1 damage to target player or planeswalker.

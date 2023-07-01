@@ -1,0 +1,7 @@
+Name:Ogre Leadfoot
+ManaCost:4 R
+Types:Creature Ogre
+PT:3/3
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.Artifact | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME becomes blocked by an artifact creature, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
+Oracle:Whenever Ogre Leadfoot becomes blocked by an artifact creature, destroy that creature.

@@ -1,0 +1,6 @@
+Name:Lone Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:2/2
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+Oracle:You may have Lone Wolf assign its combat damage as though it weren't blocked.

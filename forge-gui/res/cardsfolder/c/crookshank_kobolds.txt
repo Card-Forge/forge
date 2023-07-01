@@ -1,0 +1,6 @@
+Name:Crookshank Kobolds
+ManaCost:0
+Colors:red
+Types:Creature Kobold
+PT:0/1
+Oracle:

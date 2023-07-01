@@ -1,0 +1,6 @@
+Name:Covert Operative
+ManaCost:4 U
+Types:Creature Human Wizard
+PT:3/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+Oracle:Covert Operative can't be blocked.

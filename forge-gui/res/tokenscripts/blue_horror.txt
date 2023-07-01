@@ -1,0 +1,8 @@
+Name:Blue Horror
+ManaCost:no cost
+Colors:blue,red
+Types:Creature Demon Horror
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.

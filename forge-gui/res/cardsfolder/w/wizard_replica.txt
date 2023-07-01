@@ -1,0 +1,8 @@
+Name:Wizard Replica
+ManaCost:3
+Types:Artifact Creature Wizard
+PT:1/3
+K:Flying
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+AI:RemoveDeck:All
+Oracle:Flying\n{U}, Sacrifice Wizard Replica: Counter target spell unless its controller pays {2}.

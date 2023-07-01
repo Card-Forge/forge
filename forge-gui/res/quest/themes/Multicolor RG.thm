@@ -1,0 +1,88 @@
+BasicLandPercentage=14
+
+[Group MaxCnt=4 Percentage=21]
+Copperline Gorge
+Kazandu Refuge
+Raging Ravine
+Rootbound Crag
+Stomping Ground
+Taiga
+Wooded Foothills
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Boartusk Liege
+Runes of the Deus
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Jund Hackblade
+Naya Hushblade
+Tattermunge Duo
+Thornscape Familiar
+Thunderscape Familiar
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Artifact Mutation
+Colossal Might
+Nacatl Outlander
+Rip-Clan Crasher
+Scarwood Goblins
+Scuzzback Scrapper
+Tattermunge Maniac
+Yavimaya Barbarian
+[/Group]
+
+[Group MaxCnt=4 Percentage=9]
+Boggart Ram-Gang
+Centaur Archer
+Fires of Yavimaya
+Jungle Troll
+Mage Slayer
+Raging Kavu
+Violent Outburst
+Vithian Renegades
+Wilderness Elemental
+Windreaper Falcon
+[/Group]
+
+[Group MaxCnt=2 Percentage=11]
+Bloodbraid Elf
+Giant Solifuge
+Mudbrawler Raiders
+Rhox Brute
+Rumbling Slum
+Sarkhan Vol
+Spellbreaker Behemoth
+Tuknir Deathlock
+Voracious Cobra
+Wreak Havoc
+Yavimaya Kavu
+[/Group]
+
+[Group MaxCnt=1 Percentage=6]
+Blazethorn Scarecrow
+Blitz Hellion
+Deus of Calamity
+Frenzied Tilling
+Gorger Wurm
+Scuzzback Marauders
+Stonebrow, Krosan Hero
+Streetbreaker Wurm
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Borborygmos
+Dragon Broodmother
+Jerrard of the Closed Fist
+Livonya Silone
+Loamdragger Giant
+Marhault Elsdragon
+Rock Basilisk
+Sangrite Surge
+The Lady of the Mountain
+Viashivan Dragon
+[/Group]
+
+End

@@ -1,0 +1,38 @@
+[quest]
+id=27
+AILife=30
+Repeat=true
+Wins=54
+Card Reward=4 black rares
+Credit Reward=300
+HumanExtras=Torpor Orb
+AIExtras=Torpor Orb|Torpor Orb|Torpor Orb
+[metadata]
+Name=quest27
+Title=The Torpor Orb
+Difficulty=hard
+Description=Summoning creatures feels different here.
+Icon=The Torpor Orb.jpg
+Deck Type=constructed
+[main]
+24 Swamp|SOM
+1 Demonic Tutor
+4 Accursed Centaur
+3 Kjeldoran Dead
+4 Phyrexian Dreadnought
+1 Foul Imp
+4 Hunted Horror
+2 Wretched Anurid
+3 Foul Spirit
+3 Necrogen Scudder
+1 Serpent Warrior
+1 Spined Fluke
+2 Vampiric Spirit
+1 Cao Ren, Wei Commander
+1 Desolation Angel
+1 Eviscerator
+1 Commander Greven il-Vec
+1 Dread Reaper
+1 Vindictive Mob
+1 Annihilate
+[sideboard]

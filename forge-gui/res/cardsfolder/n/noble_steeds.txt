@@ -1,0 +1,6 @@
+Name:Noble Steeds
+ManaCost:2 W
+Types:Enchantment
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
+SVar:NonStackingEffect:True
+Oracle:{1}{W}: Target creature gains first strike until end of turn.

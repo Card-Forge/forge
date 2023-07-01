@@ -1,0 +1,8 @@
+Name:Mystic Forge
+ManaCost:4
+Types:Artifact
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Artifact.TopLibrary+YouCtrl+nonLand,Card.TopLibrary+Colorless+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast artifact spells and colorless spells from the top of your library.
+AI:RemoveDeck:Random
+A:AB$ Dig | Cost$ T PayLife<1> | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Exile the top card of your library.
+Oracle:You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library.

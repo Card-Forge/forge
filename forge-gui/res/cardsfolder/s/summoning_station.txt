@@ -1,0 +1,8 @@
+Name:Summoning Station
+ManaCost:7
+Types:Artifact
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ c_2_2_pincher | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Pincher creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, you may untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+AI:RemoveDeck:Random
+Oracle:{T}: Create a 2/2 colorless Pincher creature token.\nWhenever an artifact is put into a graveyard from the battlefield, you may untap Summoning Station.

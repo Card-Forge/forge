@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Domain
+Description=The "Domain" deck lets you bring out all five basic land types in your first few turns, placing your rivals in dangerous territory. And the more lands you get into play, the nastier your spells become.
+Deck Type=constructed
+Set=PLS
+Image=domain.jpg
+[main]
+1 Strength of Unity|INV
+2 Worldly Counsel|INV
+2 Exotic Curse|INV
+3 Tribal Flames|INV
+1 Breath of Darigaaz|INV
+2 Quirion Trailblazer|INV
+1 Wandering Stream|INV
+3 Harrow|INV
+1 Ordered Migration|INV
+1 Wayfaring Giant|INV
+2 Kavu Scout|INV
+1 Rith's Charm|PLS
+1 Treva's Charm|PLS
+2 Stratadon|PLS
+2 Exotic Disease|PLS
+3 Island|INV
+2 Terminal Moraine|PLS
+1 Kavu Recluse|PLS
+3 Samite Pilgrim|PLS
+1 Quirion Dryad|PLS
+3 Plains|INV
+3 Swamp|INV
+3 Mountain|INV
+8 Forest|INV
+2 Quirion Explorer|PLS
+2 Allied Strategies|PLS
+1 Primal Growth|PLS
+1 Magnigoth Treefolk|PLS
+1 Gaea's Might|PLS
+1 Confound|PLS
+[sideboard]

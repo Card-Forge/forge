@@ -1,0 +1,10 @@
+Name:Flailing Drake
+ManaCost:3 G
+Types:Creature Drake
+PT:2/3
+K:Flying
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
+SVar:TrigBlocks:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1
+SVar:TrigBlocked:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ +1 | NumDef$ +1
+Oracle:Flying\nWhenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.

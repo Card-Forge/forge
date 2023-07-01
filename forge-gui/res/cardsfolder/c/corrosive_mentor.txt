@@ -1,0 +1,7 @@
+Name:Corrosive Mentor
+ManaCost:2 B
+Types:Creature Elemental Rogue
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.Black+YouCtrl | AddKeyword$ Wither | Description$ Black creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.)
+SVar:PlayMain1:TRUE
+Oracle:Black creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.)

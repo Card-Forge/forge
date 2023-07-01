@@ -1,0 +1,9 @@
+Name:Merciless Eviction
+ManaCost:4 W B
+Types:Sorcery
+A:SP$ Charm | Cost$ 4 W B | Choices$ ExileArtifact,ExileCreature,ExileEnchant,ExilePlaneswalker | CharmNum$ 1
+SVar:ExileArtifact:DB$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all artifacts.
+SVar:ExileCreature:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures.
+SVar:ExileEnchant:DB$ ChangeZoneAll | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all enchantments.
+SVar:ExilePlaneswalker:DB$ ChangeZoneAll | ChangeType$ Planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all planeswalkers.
+Oracle:Choose one —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all planeswalkers.

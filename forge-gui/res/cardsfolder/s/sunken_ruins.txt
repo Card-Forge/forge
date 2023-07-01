@@ -1,0 +1,7 @@
+Name:Sunken Ruins
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ UB T | Produced$ Combo U B | Amount$ 2 | SpellDescription$ Add {U}{U}, {U}{B}, or {B}{B}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{U/B}, {T}: Add {U}{U}, {U}{B}, or {B}{B}.

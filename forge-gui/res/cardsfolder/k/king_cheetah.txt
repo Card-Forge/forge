@@ -1,0 +1,6 @@
+Name:King Cheetah
+ManaCost:3 G
+Types:Creature Cat
+PT:3/2
+K:Flash
+Oracle:Flash

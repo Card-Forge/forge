@@ -1,0 +1,7 @@
+Name:Intimidation
+ManaCost:2 B B B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Fear | Description$ Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)

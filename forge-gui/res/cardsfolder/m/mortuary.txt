@@ -1,0 +1,8 @@
+Name:Mortuary
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouOwn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | LibraryPosition$ 0 | Destination$ Library
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.

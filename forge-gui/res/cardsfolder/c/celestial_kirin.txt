@@ -1,0 +1,12 @@
+Name:Celestial Kirin
+ManaCost:2 W W
+Types:Legendary Creature Kirin Spirit
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's mana value.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.cmcEQX
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+AI:RemoveDeck:All
+DeckHints:Type$Spirit|Arcane
+AI:RemoveDeck:Random
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's mana value.

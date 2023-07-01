@@ -1,0 +1,7 @@
+Name:Vampire Neonate
+ManaCost:B
+Types:Creature Vampire
+PT:0/3
+A:AB$ LoseLife | Cost$ 2 T | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:{2}, {T}: Each opponent loses 1 life and you gain 1 life.

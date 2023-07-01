@@ -1,0 +1,10 @@
+Name:Break Ties
+ManaCost:2 W
+Types:Instant
+K:Reinforce:1:W
+A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBExile
+SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard. | SpellDescription$ Exile target card from a graveyard.
+DeckHas:Ability$Counters
+Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard.\nReinforce 1—{W} ({W}, Discard this card: Put a +1/+1 counter on target creature.)

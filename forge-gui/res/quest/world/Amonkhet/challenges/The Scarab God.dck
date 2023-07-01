@@ -1,0 +1,33 @@
+[quest]
+id=7013
+OpponentName=The Scarab God
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=The Scarab God
+Credit Reward=200
+AIExtras=The Scarab God|God-Pharaoh's Gift|Fetid Pools
+HumanExtras=Fetid Pools
+[metadata]
+Name=The Scarab God
+Title=The Scarab God
+Difficulty=Hard
+Description=The Scarab God has amassed an army of eternals.
+Icon=Scarab God.jpg
+[Main]
+4 Ammit Eternal|HOU
+4 Crypt of the Eternals|HOU
+4 Dreamstealer|HOU
+4 Eternal of Harsh Truths|HOU
+4 Hour of Eternity|HOU
+2 Island|HOU|1
+1 Island|HOU|2
+4 Island|HOU|3
+4 Khenra Eternal|HOU
+4 Merciless Eternal|HOU
+4 Scarab Feast|AKH
+4 Spellweaver Eternal|HOU
+6 Swamp|HOU|1
+2 Swamp|HOU|2
+2 Swamp|HOU|3
+4 Torment of Scarabs|HOU

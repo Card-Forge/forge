@@ -1,0 +1,7 @@
+Name:Encampment Keeper
+ManaCost:W
+Types:Creature Dog
+PT:1/1
+K:First Strike
+A:AB$ PumpAll | Cost$ 7 W T Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
+Oracle:First strike\n{7}{W}, {T}, Sacrifice Encampment Keeper: Creatures you control get +2/+2 until end of turn.

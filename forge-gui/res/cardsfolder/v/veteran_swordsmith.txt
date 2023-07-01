@@ -1,0 +1,7 @@
+Name:Veteran Swordsmith
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl+Other | AddPower$ 1 | Description$ Other Soldier creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:Other Soldier creatures you control get +1/+0.

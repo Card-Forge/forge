@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Picard 3
+Title=Picard
+Difficulty=hard
+Description=WUG Elf deck with elf lords
+Icon=Picard.jpg
+Deck Type=constructed
+[main]
+2 Windswept Heath
+2 Misty Rainforest
+2 Wellwisher
+1 Mox Emerald
+4 Tropical Island
+2 Immaculate Magistrate
+1 Island|M12
+1 Ancestral Recall
+1 Mox Pearl
+1 Tundra
+4 Savannah
+4 Imperious Perfect
+2 Essence Warden
+3 Gaea's Skyfolk
+1 Mox Sapphire
+1 Plains|M12
+3 Sylvan Messenger
+1 Wolf-Skull Shaman
+3 Forest|M12
+1 Winnower Patrol
+1 Timberwatch Elf
+1 Llanowar Elves
+3 Safehold Elite
+1 Rhys the Redeemed
+4 Wilt-Leaf Cavaliers
+1 Tolsimir Wolfblood
+4 Wilt-Leaf Liege
+1 Elvish Vanguard
+1 Time Walk
+2 Coiling Oracle
+1 Edric, Spymaster of Trest
+[sideboard]

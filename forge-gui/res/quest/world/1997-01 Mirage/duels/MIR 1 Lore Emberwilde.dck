@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: Emberwilde
+Title=Emberwilde
+Difficulty=medium
+Description=Embermages aren't well known for their diplomatic skills.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Burning Palm Efreet|MIR
+4 Cinder Cloud|MIR
+4 Emberwilde Djinn|MIR
+4 Fireblast|VIS
+4 Flare|MIR
+4 Incinerate|MIR
+24 Mountain|MIR|4
+4 Reckless Embermage|MIR
+4 Spitting Earth|MIR
+4 Wildfire Emissary|MIR

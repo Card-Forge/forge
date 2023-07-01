@@ -1,0 +1,18 @@
+Name:Blackbloom Rogue
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/3
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE8 | Description$ CARDNAME gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+AlternateMode:Modal
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nBlackbloom Rogue gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
+
+ALTERNATE
+
+Name:Blackbloom Bog
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:Blackbloom Bog enters the battlefield tapped.\n{T}: Add {B}.

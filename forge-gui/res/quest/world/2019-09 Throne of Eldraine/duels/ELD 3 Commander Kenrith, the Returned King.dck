@@ -1,0 +1,29 @@
+[metadata]
+Title=Commander: King Kenrith
+Difficulty=hard
+Description="Oh, king, eh? Very nice. And how'd you get that, then? By exploiting the workers! By hanging on to outdated imperialist dogma which perpetuates the economic and social differences in our society! If there's ever going to be any progress--"\n-Dennis the Constitutional Peasant, Monty Python and the Holy Grail
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: Kenrith, the Returned King
+[Main]
+4 Beanstalk Giant|ELD|1
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Fires of Invention|ELD|1
+8 Forest|ELD|4
+4 Island|ELD|1
+4 Kenrith, the Returned King|ELD
+4 Maraleaf Pixie|ELD
+1 Mountain|ELD|1
+4 Once Upon a Time|ELD|1
+1 Plains|ELD|1
+4 Rosethorn Acolyte|ELD|1
+4 Spinning Wheel|ELD
+2 The Great Henge|ELD|1
+4 Thornwood Falls|ELD
+4 Wind-Scarred Crag|ELD
+[Sideboard]
+1 Bake into a Pie|ELD
+1 Garruk, Cursed Huntsman|ELD|1
+1 Oko, Thief of Crowns|ELD|1
+1 Taste of Death|ELD

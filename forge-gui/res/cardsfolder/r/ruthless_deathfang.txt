@@ -1,0 +1,9 @@
+Name:Ruthless Deathfang
+ManaCost:4 U B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ Whenever you sacrifice a creature, target opponent sacrifices a creature.
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature
+DeckHints:Keyword$Exploit
+Oracle:Flying\nWhenever you sacrifice a creature, target opponent sacrifices a creature.

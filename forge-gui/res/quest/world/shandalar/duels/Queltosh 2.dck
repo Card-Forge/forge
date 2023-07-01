@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Queltosh 2
+Title=Queltosh
+Icon=Queltosh.jpg
+Difficulty=medium
+Description=URW 'Highlander' deck.
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+1 Black Vise|LEB
+1 Clockwork Avian|ATQ
+1 Control Magic|LEB
+1 Counterspell|4ED
+1 Disenchant|4ED
+1 Divine Transformation|LEG
+1 Feedback|LEB
+1 Fire Elemental|4ED
+1 Fireball|4ED
+1 Giant Strength|4ED
+1 Giant Tortoise|ARN
+4 Island|4ED
+1 Juggernaut|3ED
+1 Keldon Warlord|LEB
+1 King Suleiman|ARN
+1 Land Tax|LEG
+1 Lightning Bolt|4ED
+1 Mahamoti Djinn|LEB
+1 Mijae Djinn|ARN
+4 Mountain|4ED
+1 Pearled Unicorn|LEB
+1 Phantasmal Forces|LEB
+1 Phantom Monster|LEB
+4 Plains|4ED
+4 Plateau|LEB
+1 Power Sink|4ED
+1 Prodigal Sorcerer|4ED
+1 Reverse Polarity|3ED
+1 Savannah Lions|4ED
+1 Serra Angel|4ED
+1 Spell Blast|4ED
+1 Spirit Link|LEG
+1 Swords to Plowshares|4ED
+1 The Hive|LEB
+1 Thunder Spirit|LEG
+1 Time Elemental|LEG
+4 Tundra|LEB
+1 Unstable Mutation|4ED
+4 Volcanic Island|LEB
+1 Wall of Air|LEB
+1 Wall of Dust|LEG
+1 White Knight|4ED
+1 Zephyr Falcon|LEG
+[sideboard]

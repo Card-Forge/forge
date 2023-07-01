@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #07
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/077.-M197.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume your opponent has no mana available. Remember that your solution must work for all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=5
+activeplayer=human
+activephase=MAIN1
+humanhand=Compulsory Rest;Academy Journeymage;Untamed Hunger;Act of Treason;Emergent Growth
+humanbattlefield=Shield Mare;Surge Mare;Plague Mare;Lightning Mare;Vine Mare;Plains|Set:M19;Island|Set:M19;Swamp|Set:M19;Mountain|Set:M19;Forest|Set:M19;Unknown Shores
+aibattlefield=Ghirapur Osprey;Ancient Crab;Wretched Camel;Thresher Lizard;Stalking Tiger

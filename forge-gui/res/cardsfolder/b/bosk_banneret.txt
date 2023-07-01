@@ -1,0 +1,6 @@
+Name:Bosk Banneret
+ManaCost:1 G
+Types:Creature Treefolk Shaman
+PT:1/3
+S:Mode$ ReduceCost | ValidCard$ Treefolk,Shaman | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Treefolk spells and Shaman spells you cast cost {1} less to cast.
+Oracle:Treefolk spells and Shaman spells you cast cost {1} less to cast.

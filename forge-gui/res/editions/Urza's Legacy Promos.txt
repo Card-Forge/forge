@@ -1,0 +1,10 @@
+[metadata]
+Code=PULG
+Date=1999-02-15
+Name=Urza's Legacy Promos
+Type=Promo
+ScryfallCode=PULG
+
+[cards]
+122 R Beast of Burden @Ron Spears
+122† R Beast of Burden @Ron Spears

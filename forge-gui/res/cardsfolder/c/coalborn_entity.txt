@@ -1,0 +1,6 @@
+Name:Coalborn Entity
+ManaCost:4 R
+Types:Creature Elemental
+PT:4/4
+A:AB$ DealDamage | Cost$ 2 R | NumDmg$ 1 | ValidTgts$ Creature.token,Player,Planeswalker | TgtPrompt$ Select target creature token, player, or planeswalker | SpellDescription$ CARDNAME deals 1 damage to target creature token, player, or planeswalker.
+Oracle:{2}{R}: Coalborn Entity deals 1 damage to target creature token, player, or planeswalker.

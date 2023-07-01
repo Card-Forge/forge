@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Riptide 2
+Title=Riptide
+Difficulty=medium
+Description=UB River Kelpie/Secrets of the Dead deck with Flashback and Retrace spells
+Icon=Riptide.jpg
+Deck Type=constructed
+[main]
+2 Cackling Counterpart
+4 Chainer's Edict
+2 Crucible of Worlds
+4 Drowned Catacomb
+2 Grasp of Phantoms
+8 Island
+4 Oona's Grace
+4 Polluted Delta
+4 Raven's Crime
+4 River Kelpie
+4 Secrets of the Dead
+4 Sever the Bloodline
+2 Silent Departure
+8 Swamp
+4 Syphon Life
+[sideboard]

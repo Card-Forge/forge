@@ -1,0 +1,6 @@
+Name:Treasure Trove
+ManaCost:2 U U
+Types:Enchantment
+A:AB$ Draw | Cost$ 2 U U | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+SVar:NonStackingEffect:True
+Oracle:{2}{U}{U}: Draw a card.

@@ -1,0 +1,11 @@
+Name:Surrakar Spellblade
+ManaCost:1 U U
+Types:Creature Surrakar
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a instant or sorcery spell, you may put a charge counter on CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw X cards, where X is the number of charge counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | OptionalDecider$ You
+SVar:X:Count$CardCounters.CHARGE
+SVar:BuffedBy:Instant,Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, you may put a charge counter on Surrakar Spellblade.\nWhenever Surrakar Spellblade deals combat damage to a player, you may draw X cards, where X is the number of charge counters on it.

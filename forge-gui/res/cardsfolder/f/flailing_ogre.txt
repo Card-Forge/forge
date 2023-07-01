@@ -1,0 +1,8 @@
+Name:Flailing Ogre
+ManaCost:2 R
+Types:Creature Ogre
+PT:3/3
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Activator$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | Activator$ Player | IsCurse$ True | SpellDescription$ CARDNAME gets -1/-1 until end of turn. Any player may activate this ability.
+AI:RemoveDeck:All
+Oracle:{1}: Flailing Ogre gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Ogre gets -1/-1 until end of turn. Any player may activate this ability.

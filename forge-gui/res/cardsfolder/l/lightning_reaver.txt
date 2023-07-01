@@ -1,0 +1,12 @@
+Name:Lightning Reaver
+ManaCost:3 B R
+Types:Creature Zombie Beast
+PT:3/3
+K:Haste
+K:Fear
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a charge counter on it.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals damage equal to the number of charge counters on it to each opponent.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X
+SVar:X:Count$CardCounters.CHARGE
+Oracle:Haste; fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Lightning Reaver deals combat damage to a player, put a charge counter on it.\nAt the beginning of your end step, Lightning Reaver deals damage equal to the number of charge counters on it to each opponent.

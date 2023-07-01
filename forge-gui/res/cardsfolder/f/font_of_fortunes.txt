@@ -1,0 +1,5 @@
+Name:Font of Fortunes
+ManaCost:1 U
+Types:Enchantment
+A:AB$ Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{1}{U}, Sacrifice Font of Fortunes: Draw two cards.

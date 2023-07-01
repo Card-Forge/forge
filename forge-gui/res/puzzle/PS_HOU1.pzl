@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU1.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=10
+humancounters=ENERGY=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Metalwork Colossus;Hedron Archive;Gonti's Aether Heart;Fleetwheel Cruiser
+humanlibrary=Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Island|Set:AKH
+humangraveyard=
+humanbattlefield=Island|Set:AKH;Island|Set:AKH;Island|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Multiform Wonder;Bomat Bazaar Barge;Mirage Mirror
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Hollow One;Chaos Maw;Hollow One
+aiexile=
+aicommand=

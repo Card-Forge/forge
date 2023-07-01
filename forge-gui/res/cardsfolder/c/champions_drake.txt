@@ -1,0 +1,7 @@
+Name:Champion's Drake
+ManaCost:1 U
+Types:Creature Drake
+PT:1/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Creature.counters_GE3_LEVEL+YouCtrl | Description$ CARDNAME gets +3/+3 as long as you control a creature with three or more level counters on it.
+Oracle:Flying\nChampion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.

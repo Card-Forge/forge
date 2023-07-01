@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #07 - Reduce, Reuse, Recycle
+URL:https://pauperpuzzles.wordpress.com/2017/01/23/7-reduce-reuse-recycle/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=6
+humanhand=Swamp;Gurmag Angler;Disfigure;Compulsive Research
+humanlibrary=Dragon Fangs;Swamp;Lightning Bolt
+humangraveyard=Dragon Breath
+humanbattlefield=Mountain;Mountain;Swamp;Island;Island;Forest;Archaeomancer
+aibattlefield=Fume Spitter;Auramancer

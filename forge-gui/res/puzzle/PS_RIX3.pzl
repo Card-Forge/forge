@@ -1,0 +1,26 @@
+[metadata]
+Name:Possibility Storm - Rivals of Ixalan #03
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/02/RIX3-Feb-5.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume all remaining cards in your library are Forests.
+[state]
+humanlife=20
+ailife=2
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Spontaneous Artist;Greenbelt Rampager;Captivating Crew;Run Aground
+humanlibrary=Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN;Forest|Set:XLN
+humangraveyard=
+humanbattlefield=Rishkar, Peema Renegade|Counters:P1P1=1;Crafty Cutpurse|Counters:P1P1=1;Huatli, Radiant Champion|Counters:LOYALTY=9;Botanical Sanctum;Botanical Sanctum;Botanical Sanctum;Botanical Sanctum;Inspiring Vantage;Inspiring Vantage|Set:KLD; t:Thopter,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Thopter,Keywords:Flying,Image:c_1_1_thopter2_kld|Set:KLD; t:Thopter,P:1,T:1,Cost:no cost,Types:Artifact-Creature-Thopter,Keywords:Flying,Image:c_1_1_thopter3_kld
+humanexile=
+humancommand=
+humanprecast=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Maverick Thopterist;Soul of the Rapids;Overgrown Armasaur;Carnage Tyrant
+aiexile=
+aicommand=

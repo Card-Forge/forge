@@ -1,0 +1,9 @@
+Name:Aurification
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals damage to you, put a gold counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ GOLD | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.counters_GE1_GOLD | AddType$ Wall | AddKeyword$ Defender | Description$ Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender. (Those creatures can't attack.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME leaves the battlefield, remove all gold counters from all creatures.
+SVar:TrigRemove:DB$ RemoveCounterAll | ValidCards$ Creature | CounterType$ GOLD | AllCounters$ True
+Oracle:Whenever a creature deals damage to you, put a gold counter on it.\nEach creature with a gold counter on it is a Wall in addition to its other creature types and has defender. (Those creatures can't attack.)\nWhen Aurification leaves the battlefield, remove all gold counters from all creatures.

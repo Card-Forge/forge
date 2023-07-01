@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Evangelyne 3
+Title=Evangelyne
+Difficulty=hard
+Description=Selesnya Stompy ramp deck with Primordial Hydra, Nullhide Ferox, Shalai, Voice of Plenty, and Ghalta, Primal Hunger.
+Deck Type=constructed
+Icon=Evangelyne.jpg
+[main]
+1 Black Lotus|LEA
+3 Conclave Tribunal|GRN
+2 Emmara, Soul of the Accord|GRN
+13 Forest
+3 Ghalta, Primal Hunger|RIX
+4 Llanowar Elves|M19
+1 Mox Emerald|LEA
+1 Mox Jet|LEA
+1 Mox Pearl|LEA
+1 Mox Ruby|LEA
+1 Mox Sapphire|LEA
+2 Nullhide Ferox|GRN
+1 Plains
+4 Primordial Hydra|M13
+4 Savannah|LEA
+2 Shalai, Voice of Plenty|DOM
+1 Sol Ring|LEA
+4 Steel Leaf Champion|DOM
+4 Sunpetal Grove|XLN
+3 Thorn Lieutenant|M19
+4 Thrashing Brontodon|RIX

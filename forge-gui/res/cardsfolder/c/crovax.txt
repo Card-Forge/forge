@@ -1,0 +1,7 @@
+Name:Crovax
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+2/+0
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature,Player | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals damage to a creature or player, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Hand +2, life +0\nWhenever a creature you control deals damage to a creature or player, you gain 1 life.

@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Elderfang Disciple
+OpponentName=The Disciples
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Immersturm Skullcairn
+HumanExtras=
+[metadata]
+Title=Elderfang Disciple
+Difficulty=easy
+Description="One day, the great serpent will rejoin us on Skemfar, and those who've wronged us will taste of our venom."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Elderfang Disciple
+[Main]
+20 Elderfang Disciple|KHM|1
+20 Kardur's Vicious Return|KHM|1
+20 Sulfurous Mire|KHM|1

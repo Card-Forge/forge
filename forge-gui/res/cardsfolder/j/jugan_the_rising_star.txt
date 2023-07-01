@@ -1,0 +1,8 @@
+Name:Jugan, the Rising Star
+ManaCost:3 G G G
+Types:Legendary Creature Dragon Spirit
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may distribute five +1/+1 counters among any number of target creatures.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5
+Oracle:Flying\nWhen Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.

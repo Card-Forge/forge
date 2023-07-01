@@ -1,0 +1,8 @@
+Name:Slaughter Drone
+ManaCost:1 B
+Types:Creature Eldrazi Drone
+PT:2/2
+K:Devoid
+A:AB$ Pump | Cost$ C | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\n{C}: Slaughter Drone gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it. {C} represents colorless mana.)

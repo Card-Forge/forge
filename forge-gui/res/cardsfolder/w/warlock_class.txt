@@ -1,0 +1,16 @@
+Name:Warlock Class
+ManaCost:B
+Types:Enchantment Class
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigLose1 | TriggerDescription$ At the beginning of your end step, if a creature died this turn, each opponent loses 1 life.
+SVar:TrigLose1:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+K:Class:2:1 B:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | Secondary$ True | TriggerDescription$ When this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard | NoReveal$ True
+K:Class:3:6 B:AddTrigger$ TriggerEndTurn
+SVar:TriggerEndTurn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ RepeatOpps | Secondary$ True | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
+SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseAgain
+SVar:TrigLoseAgain:DB$ LoseLife | Defined$ Remembered | LifeAmount$ Y
+SVar:Y:PlayerCountRemembered$LifeLostThisTurn
+DeckHas:Ability$Graveyard
+Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your end step, if a creature died this turn, each opponent loses 1 life.\n{1}{B}: Level 2\nWhen this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n{6}{B}: Level 3\nAt the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)

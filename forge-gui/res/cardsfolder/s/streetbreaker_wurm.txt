@@ -1,0 +1,5 @@
+Name:Streetbreaker Wurm
+ManaCost:3 R G
+Types:Creature Wurm
+PT:6/4
+Oracle:

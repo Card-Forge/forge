@@ -1,0 +1,6 @@
+Name:Scornful Aether-Lich
+ManaCost:3 U
+Types:Artifact Creature Zombie Wizard
+PT:2/4
+A:AB$ Pump | Cost$ W B | Defined$ Self | KW$ Fear & Vigilance | SpellDescription$ CARDNAME gains fear and vigilance until end of turn.
+Oracle:{W}{B}: Scornful Aether-Lich gains fear and vigilance until end of turn. (Attacking doesn't cause it to tap, and it can't be blocked except by artifact creatures and/or black creatures.)

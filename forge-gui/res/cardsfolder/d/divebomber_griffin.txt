@@ -1,0 +1,8 @@
+Name:Divebomber Griffin
+ManaCost:3 W W
+Types:Creature Griffin
+PT:3/2
+K:Flying
+A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | AITgts$ BetterThanSource | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature.
+AI:RemoveDeck:All
+Oracle:Flying\n{T}, Sacrifice Divebomber Griffin: It deals 3 damage to target attacking or blocking creature.

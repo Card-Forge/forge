@@ -1,0 +1,16 @@
+Name:Profane Procession
+ManaCost:1 W B
+Types:Legendary Enchantment
+A:AB$ ChangeZone | Cost$ 3 W B | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBTransform | SpellDescription$ Exile target creature. Then if there are three or more cards exiled with CARDNAME, transform it.
+SVar:DBTransform:DB$ SetState | ConditionZone$ Exile | ConditionPresent$ Card.ExiledWithSource | ConditionCompare$ GE3 | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:{3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
+
+ALTERNATE
+
+Name:Tomb of the Dusk Rose
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ ChangeZone | Cost$ 2 W B T | ChangeType$ Creature.ExiledWithSource | GainControl$ True | Hidden$ True | Origin$ Exile | Destination$ Battlefield | Mandatory$ True | SpellDescription$ Put a creature card exiled with this permanent onto the battlefield under your control.
+Oracle:(Transforms from Profane Procession.)\n{T}: Add one mana of any color.\n{2}{W}{B}, {T}: Put a creature card exiled with this permanent onto the battlefield under your control.

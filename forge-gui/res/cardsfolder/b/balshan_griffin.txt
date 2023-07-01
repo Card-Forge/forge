@@ -1,0 +1,7 @@
+Name:Balshan Griffin
+ManaCost:3 U U
+Types:Creature Griffin
+PT:3/2
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:Flying\n{1}{U}, Discard a card: Return Balshan Griffin to its owner's hand.

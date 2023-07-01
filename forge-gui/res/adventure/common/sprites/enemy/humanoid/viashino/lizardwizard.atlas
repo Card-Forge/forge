@@ -1,0 +1,131 @@
+lizardwizard.png
+size: 512,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 90, 18
+  size: 16, 16      
+Idle 
+  xy: 12, 18
+  size: 36, 25      
+Idle 
+  xy: 76, 18
+  size: 36, 25    
+Idle 
+  xy: 140, 18
+  size: 36, 25    
+Idle 
+  xy: 204, 18
+  size: 36, 25       
+Idle 
+  xy: 268, 18
+  size: 36, 25      
+Idle 
+  xy: 332, 18
+  size: 36, 25    
+Idle 
+  xy: 396, 18
+  size: 36, 25    
+Idle 
+  xy: 460, 18
+  size: 36, 25   
+Idle 
+  xy: 12, 146
+  size: 36, 25      
+Idle 
+  xy: 76, 146
+  size: 36, 25    
+Idle 
+  xy: 140, 146
+  size: 36, 25    
+Idle 
+  xy: 204, 146
+  size: 36, 25       
+Idle 
+  xy: 268, 146
+  size: 36, 25      
+Idle 
+  xy: 332, 146
+  size: 36, 25    
+Idle 
+  xy: 396, 146
+  size: 36, 25  
+Idle 
+  xy: 12, 274
+  size: 36, 25      
+Idle 
+  xy: 76, 274
+  size: 36, 25    
+Idle 
+  xy: 140, 274
+  size: 36, 25    
+Idle 
+  xy: 204, 274
+  size: 36, 25       
+Idle 
+  xy: 268, 274
+  size: 36, 25   
+Walk
+  xy: 16, 82
+  size: 35, 25   
+Walk 
+  xy: 80, 82
+  size: 35, 25  
+Walk 
+  xy: 144, 82
+  size: 35, 25  
+Walk 
+  xy: 208, 82
+  size: 35, 25      
+Walk
+  xy: 272, 82
+  size: 35, 25   
+Walk 
+  xy: 336, 82
+  size: 35, 25  
+Walk 
+  xy: 400, 82
+  size: 35, 25  
+Walk 
+  xy: 464, 82
+  size: 35, 25  
+Attack 
+  xy: 16, 210
+  size: 40, 25  
+Attack 
+  xy: 80, 210
+  size: 40, 25  
+Attack 
+  xy: 144, 210
+  size: 40, 25  
+Attack 
+  xy: 208, 210
+  size: 40, 25    
+Attack 
+  xy: 272, 210
+  size: 40, 25         
+Attack 
+  xy: 336, 210
+  size: 40, 25   
+Attack 
+  xy: 400, 210
+  size: 40, 25   
+Attack 
+  xy: 464, 210
+  size: 40, 25       
+Death 
+  xy: 12, 337
+  size: 40, 26      
+Death 
+  xy: 78, 337
+  size: 40, 26  
+Death 
+  xy: 142, 337
+  size: 40, 26  
+Death 
+  xy: 206, 337
+  size: 40, 26  
+Death 
+  xy: 270, 337
+  size: 40, 26  

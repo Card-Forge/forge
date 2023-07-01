@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Beskir Shieldmate
+OpponentName=The Shieldmates
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Great Hall of Starnheim|Great Hall of Starnheim|Great Hall of Starnheim|Great Hall of Starnheim
+HumanExtras=
+[metadata]
+Title=Beskir Shieldmate
+Difficulty=medium
+Description="If we fall today, let us fall with honor, defending our realm from the horrors that would defile it. Forward, shieldmates! To Starnheim!"
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Beskir Shieldmate
+[Main]
+40 Beskir Shieldmate|KHM|1
+20 Plains|KHM|1

@@ -1,0 +1,7 @@
+Name:Hedron Crawler
+ManaCost:2
+Types:Artifact Creature Construct
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}. ({C} represents colorless mana.)

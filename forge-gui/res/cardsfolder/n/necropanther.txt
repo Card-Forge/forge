@@ -1,0 +1,8 @@
+Name:Necropanther
+ManaCost:1 W B
+Types:Creature Cat Nightmare
+PT:3/3
+K:Mutate:2 WB WB
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever this creature mutates, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE3
+Oracle:Mutate {2}{W/B}{W/B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, return target creature card with mana value 3 or less from your graveyard to the battlefield.

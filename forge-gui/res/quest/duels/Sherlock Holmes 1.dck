@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes 1
+Title=Sherlock Holmes
+Difficulty=easy
+Description=Mono G deck with Crabapple Cohort, An-Havva Constable, Nylea's Disciple and lots of green creatures
+Icon=Sherlock Holmes.jpg
+Deck Type=constructed
+[main]
+22 Forest|M12
+1 Sapseep Forest
+2 An-Havva Constable
+2 An-Havva Inn
+1 Beacon of Creation
+3 Crabapple Cohort
+2 Nylea's Disciple
+1 Crushing Vines
+1 Deadfall
+1 Drove of Elves
+1 Elvish Warrior
+1 Feral Thallid
+1 Fruition
+1 Gorilla Pack
+1 Ivy Lane Denizen
+1 Kaysa
+1 Meng Huo, Barbarian King
+1 Multani's Acolyte
+1 Nettle Sentinel
+1 Niall Silvain
+1 Norwood Priestess
+1 Nourish
+2 Nurturer Initiate
+2 People of the Woods
+1 Reach of Branches
+1 Revive
+1 Roughshod Mentor
+1 Rushwood Elemental
+1 Traproot Kami
+1 Weatherseed Treefolk
+1 Wooden Sphere
+1 Wurm's Tooth
+[sideboard]

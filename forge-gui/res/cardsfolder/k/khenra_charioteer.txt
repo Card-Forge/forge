@@ -1,0 +1,7 @@
+Name:Khenra Charioteer
+ManaCost:1 R G
+Types:Creature Jackal Warrior
+PT:3/3
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
+Oracle:Trample\nOther creatures you control have trample.

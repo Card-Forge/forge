@@ -1,0 +1,5 @@
+Name:Straw Soldiers
+ManaCost:1 U
+Types:Creature Scarecrow Soldier
+PT:1/3
+Oracle:

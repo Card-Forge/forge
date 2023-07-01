@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Black Talon 3
+Title=Black Talon
+Icon=BlackTalon.jpg
+Difficulty=hard
+Description=Black Talon plays a monoblack mostly-weenie deck.
+Deck Type=constructed
+[main]
+4 Ankh of Mishra|LEB
+3 Bad Moon|LEB
+3 Black Knight|5ED
+2 Bone Harvest|MIR
+3 Brass Man|ARN
+3 Charcoal Diamond|MIR
+2 Serrated Arrows|HML
+1 Pestilence|5ED
+4 Erg Raiders|ARN
+4 Hypnotic Specter|LEB
+4 Mishra's Factory|ATQ
+1 Mox Jet|LEB
+3 Sewer Rats|MIR
+3 Skulking Ghost|MIR
+18 Swamp|MIR
+2 Tombstone Stairwell|MIR
+[sideboard]
+[planes]
+[schemes]

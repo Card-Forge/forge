@@ -1,0 +1,7 @@
+Name:Deadly Wanderings
+ManaCost:3 B B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddKeyword$ Deathtouch & Lifelink | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ1 | Description$ As long as you control exactly one creature, that creature gets +2/+0 and has deathtouch and lifelink.
+AI:RemoveDeck:All
+SVar:PlayMain1:TRUE
+Oracle:As long as you control exactly one creature, that creature gets +2/+0 and has deathtouch and lifelink.

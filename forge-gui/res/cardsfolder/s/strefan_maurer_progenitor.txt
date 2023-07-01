@@ -1,0 +1,16 @@
+Name:Strefan, Maurer Progenitor
+ManaCost:2 B R
+Types:Legendary Creature Vampire Noble
+PT:3/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a Blood token for each player who lost life this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw
+SVar:X:PlayerCountPlayers$HasPropertyLostLifeThisTurn
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME attacks, you may sacrifice two Blood tokens. If you do, you may put a Vampire card from your hand onto the battlefield tapped and attacking. It gains indestructible until end of turn.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ Sac<2/Blood.token/Blood token> | Origin$ Hand | Destination$ Battlefield | SelectPrompt$ You may select a Vampire card from your hand | ChangeType$ Vampire | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Indestructible | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice
+DeckHints:Type$Vampire
+Oracle:Flying\nAt the beginning of your end step, create a Blood token for each player who lost life this turn.\nWhenever Strefan attacks, you may sacrifice two Blood tokens. If you do, you may put a Vampire card from your hand onto the battlefield tapped and attacking. It gains indestructible until end of turn.

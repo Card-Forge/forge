@@ -1,0 +1,8 @@
+Name:Kozilek's Translator
+ManaCost:4 B
+Types:Creature Eldrazi Drone
+PT:3/5
+K:Devoid
+A:AB$ Mana | Cost$ PayLife<1> | Produced$ C | ActivationLimit$ 1 | SpellDescription$ Add {C}. Activate only once each turn. ({C} represents colorless mana.)
+DeckHas:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\nPay 1 life: Add {C}. Activate only once each turn. ({C} represents colorless mana.)

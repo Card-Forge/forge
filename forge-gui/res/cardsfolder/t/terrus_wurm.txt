@@ -1,0 +1,6 @@
+Name:Terrus Wurm
+ManaCost:6 B
+Types:Creature Zombie Wurm
+PT:5/5
+K:Scavenge:6 B
+Oracle:Scavenge {6}{B} ({6}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

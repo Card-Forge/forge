@@ -1,0 +1,7 @@
+Name:Blockade Runner
+ManaCost:3 U
+Types:Creature Merfolk
+PT:2/2
+A:AB$ Effect | Cost$ U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:{U}: Blockade Runner can't be blocked this turn.

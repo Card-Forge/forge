@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Oath of Dreams
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Big creatures played for free
+Deck Type=constructed
+Name=DreamOath3
+[Main]
+2 Benthic Behemoth|TMP
+4 Counterspell|TMP
+4 Dream Halls|STH
+2 Forest|TMP|1
+2 Forest|TMP|2
+4 Forest|TMP|3
+2 Forest|TMP|4
+3 Reflecting Pool|TMP
+3 Island|TMP|1
+2 Island|TMP|2
+1 Island|TMP|3
+4 Island|TMP|4
+2 Mana Leak|STH
+4 Oath of Druids|EXO
+2 Primal Rage|STH
+4 Propaganda|TMP
+3 Rootbreaker Wurm|TMP
+4 Sliver Queen|STH
+3 Spike Hatcher|EXO
+3 Spike Weaver|EXO
+2 Verdant Force|TMP

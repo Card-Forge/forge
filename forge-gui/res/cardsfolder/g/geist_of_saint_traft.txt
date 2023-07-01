@@ -1,0 +1,9 @@
+Name:Geist of Saint Traft
+ManaCost:1 W U
+Types:Legendary Creature Spirit Cleric
+PT:2/2
+K:Hexproof
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat.
+SVar:TrigToken:DB$ Token | TokenScript$ w_4_4_angel_flying | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
+SVar:HasAttackEffect:TRUE
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever Geist of Saint Traft attacks, create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat.

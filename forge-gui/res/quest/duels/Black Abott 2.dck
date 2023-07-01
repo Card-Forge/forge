@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Black Abott 2
+Title=Black Abott
+Difficulty=medium
+Description=Mono B Sacrifice deck with Reassembling Skeleton and Gnawing Zombie
+Icon=Black Abott.jpg
+Deck Type=constructed
+[main]
+24 Swamp|ONS
+4 Nether Traitor
+4 Reassembling Skeleton
+4 Bloodghast
+4 Endless Cockroaches
+4 Krovikan Horror
+1 Attrition
+1 Malevolent Awakening
+4 Gnawing Zombie
+1 Gutless Ghoul
+2 Stronghold Assassin
+1 Nezumi Bone-Reader
+2 Plagued Rusalka
+1 Necrosavant
+1 Harvester of Souls
+1 Grave Pact
+1 Mortician Beetle
+[sideboard]

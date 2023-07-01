@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Presence of Mind
+Description=Call upon the rare, flying Djinn of Wishes to fulfill your desires. Then play head games with your opponent using spells that let you see into the future, control any opposing army, counter spells, and copy your opponent's best creatures.
+Deck Type=constructed
+Set=M10
+Image=presence_of_mind.jpg
+[main]
+1 Air Elemental|M10
+1 Cancel|M10
+1 Clone|M10
+1 Coral Merfolk|M10
+2 Divination|M10
+1 Djinn of Wishes+|M10
+1 Doom Blade|M10
+1 Essence Scatter|M10
+1 Horned Turtle|M10
+12 Island|M10
+1 Mind Control|M10
+1 Mind Rot|M10
+1 Negate|M10
+1 Phantom Warrior|M10
+1 Rise from the Grave|M10
+2 Sage Owl|M10
+1 Sleep|M10
+2 Snapping Drake|M10
+5 Swamp|M10
+1 Telepathy|M10
+1 Terramorphic Expanse|M10
+1 Wall of Frost|M10
+1 Zephyr Sprite|M10
+[sideboard]

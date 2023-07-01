@@ -1,0 +1,9 @@
+Name:Azorius Skyguard
+ManaCost:4 W U
+Types:Creature Human Knight
+PT:3/3
+K:Flying
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1 | Description$ Creatures your opponents control get -1/-0.
+SVar:PlayMain1:TRUE
+Oracle:Flying, first strike\nCreatures your opponents control get -1/-0.

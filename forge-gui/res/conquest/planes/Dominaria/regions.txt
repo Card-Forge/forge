@@ -1,0 +1,5 @@
+Name:New Benalia|Art:New Benalia|Colors:W
+Name:Tolaria West|Art:Memorial to Genius|Colors:U
+Name:Llanowar|Art:Llanowar Reborn|Colors:G
+Name:Shiv|Art:Shivan Gorge|Colors:R
+Name:Urborg|Art:Cabal Stronghold|Colors:B

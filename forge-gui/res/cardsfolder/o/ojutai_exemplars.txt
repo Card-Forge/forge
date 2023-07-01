@@ -1,0 +1,13 @@
+Name:Ojutai Exemplars
+ManaCost:2 W W
+Types:Creature Human Monk
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBPump,DBBlink
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ First Strike & Lifelink | SpellDescription$ CARDNAME gains first strike and lifelink until end of turn.
+SVar:DBBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True | SpellDescription$ Exile CARDNAME, then return it to the battlefield tapped under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Whenever you cast a noncreature spell, choose one —\n• Tap target creature.\n• Ojutai Exemplars gains first strike and lifelink until end of turn.\n• Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.

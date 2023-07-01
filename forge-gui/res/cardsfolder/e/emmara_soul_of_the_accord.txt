@@ -1,0 +1,8 @@
+Name:Emmara, Soul of the Accord
+ManaCost:G W
+Types:Legendary Creature Elf Cleric
+PT:2/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, create a 1/1 white Soldier creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink
+DeckHas:Ability$Token|LifeGain
+Oracle:Whenever Emmara, Soul of the Accord becomes tapped, create a 1/1 white Soldier creature token with lifelink.

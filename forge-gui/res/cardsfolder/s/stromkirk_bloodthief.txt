@@ -1,0 +1,9 @@
+Name:Stromkirk Bloodthief
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on target Vampire you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Vampire.YouCtrl | TgtPrompt$ Select target Vampire you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Counters & Type$Vampire
+Oracle:At the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on target Vampire you control.

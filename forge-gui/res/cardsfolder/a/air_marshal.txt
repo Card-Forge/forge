@@ -1,0 +1,7 @@
+Name:Air Marshal
+ManaCost:1 U
+Types:Creature Human Soldier
+PT:2/1
+A:AB$ Pump | Cost$ 3 | ValidTgts$ Soldier | KW$ Flying | SpellDescription$ Target Soldier gains flying until end of turn.
+DeckHints:Type$Soldier
+Oracle:{3}: Target Soldier gains flying until end of turn.

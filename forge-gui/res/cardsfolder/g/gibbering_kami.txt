@@ -1,0 +1,8 @@
+Name:Gibbering Kami
+ManaCost:3 B
+Types:Creature Spirit
+PT:2/2
+K:Flying
+K:Soulshift:3
+DeckHints:Type$Spirit
+Oracle:Flying\nSoulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)

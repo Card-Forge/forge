@@ -1,0 +1,44 @@
+[quest]
+id=33001
+OpponentName=Dragon
+AILife=20
+Repeat=true
+Wins=25
+Card Reward=Kaseto, Orochi Archmage;2 random rares
+Credit Reward=500
+AIExtras=Tatsumasa, the Dragon's Fang
+HumanExtras=Shuko|Shuko
+[metadata]
+Name=quest33001
+Title=Cat Versus Dragon
+Difficulty=hard
+Description=You're the cat.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+2 Bushi Tenderfoot|CHK
+3 Cage of Hands|CHK
+1 Eiganjo Castle|CHK
+1 Hold the Line|CHK
+2 Indebted Samurai|BOK
+4 Inner-Chamber Guard|SOK
+4 Isamaru, Hound of Konda|CHK
+2 Kitsune Blademaster|CHK
+2 Konda's Banner|CHK
+2 Konda's Hatamoto|CHK
+1 Konda, Lord of Eiganjo|CHK
+1 Mirror Gallery|BOK
+1 Nagao, Bound by Honor|CHK
+2 No-Dachi|CHK
+3 Oathkeeper, Takeno's Daisho|CHK
+7 Plains|CHK|1
+6 Plains|CHK|2
+8 Plains|CHK|4
+1 Reciprocate|CHK
+2 Sensei Golden-Tail|CHK
+3 Shuko|BOK
+2 Takeno, Samurai General|CHK
+1 Untaidake, the Cloud Keeper|CHK
+[sideboard]
+[planes]
+[schemes]

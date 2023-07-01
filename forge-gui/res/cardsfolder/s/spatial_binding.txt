@@ -1,0 +1,8 @@
+Name:Spatial Binding
+ManaCost:U B
+Types:Enchantment
+A:AB$ Effect | Cost$ PayLife<1> | RememberObjects$ Targeted | ValidTgts$ Permanent | AITgts$ Permanent.withPhasing+YouCtrl | ForgetOnMoved$ Battlefield | StaticAbilities$ CantPhaseOut | Duration$ UntilYourNextUpkeep | SpellDescription$ Until your next upkeep, target permanent can't phase out.
+SVar:CantPhaseOut:Mode$ CantPhaseOut | ValidCard$ Card.IsRemembered | Description$ Until your next upkeep, this permanent can't phase out.
+AI:RemoveDeck:Random
+SVar:NonStackingEffect:True
+Oracle:Pay 1 life: Until your next upkeep, target permanent can't phase out.

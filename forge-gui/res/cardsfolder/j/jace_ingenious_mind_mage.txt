@@ -1,0 +1,9 @@
+Name:Jace, Ingenious Mind-Mage
+ManaCost:4 U U
+Types:Legendary Planeswalker Jace
+Loyalty:5
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ UntapAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
+A:AB$ GainControl | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature | TgtPrompt$ Choose up to three target creatures | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Gain control of up to three target creatures.
+DeckHints:Name$Grasping Current
+Oracle:[+1]: Draw a card.\n[+1]: Untap all creatures you control.\n[-9]: Gain control of up to three target creatures.

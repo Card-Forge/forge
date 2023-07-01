@@ -1,0 +1,9 @@
+Name:Rainbow Crow
+ManaCost:3 U
+Types:Creature Bird
+PT:2/2
+K:Flying
+A:AB$ ChooseColor | Cost$ 1 | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
+AI:RemoveDeck:All
+Oracle:Flying\n{1}: Rainbow Crow becomes the color of your choice until end of turn.

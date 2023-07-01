@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Luke Skywalker 3
+Title=Luke Skywalker
+Difficulty=hard
+Description=WU Rebels deck with Training Grounds
+Icon=Luke Skywalker.jpg
+Deck Type=constructed
+[main]
+4 Flooded Strand
+4 Tundra
+4 Hallowed Fountain
+9 Plains|M10
+1 Island|M10
+1 Mox Pearl
+1 Mox Sapphire
+3 Enlightened Tutor
+1 Disenchant
+4 Training Grounds
+4 Swords to Plowshares
+4 Ramosian Captain
+4 Ramosian Lieutenant
+4 Ramosian Commander
+4 Ramosian Revivalist
+4 Aven Riftwatcher
+4 Cho-Manno, Revolutionary
+[sideboard]

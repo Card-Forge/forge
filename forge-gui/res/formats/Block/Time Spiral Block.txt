@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block
+Type:Archived
+Subtype:Block
+Order:124
+Sets:FUT, PLC, TSP

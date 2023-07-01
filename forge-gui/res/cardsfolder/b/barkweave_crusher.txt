@@ -1,0 +1,6 @@
+Name:Barkweave Crusher
+ManaCost:3 G
+Types:Creature Elemental Warrior
+PT:2/5
+K:Enlist
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)

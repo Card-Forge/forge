@@ -1,0 +1,7 @@
+Name:Wrecking Crew
+ManaCost:4 R
+Types:Creature Human Warrior
+PT:4/5
+K:Reach
+K:Trample
+Oracle:Reach, trample

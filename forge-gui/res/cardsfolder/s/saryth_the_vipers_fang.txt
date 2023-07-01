@@ -1,0 +1,8 @@
+Name:Saryth, the Viper's Fang
+ManaCost:2 G G
+Types:Legendary Creature Human Warlock
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl+Other | AddKeyword$ Deathtouch | Description$ Other tapped creatures you control have deathtouch.
+S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl+Other | AddKeyword$ Hexproof | Description$ Other untapped creatures you control have hexproof.
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.Other+YouCtrl,Land.Other+YouCtrl | TgtPrompt$ Select another target creature or land you control | SpellDescription$ Untap another target creature or land you control.
+Oracle:Other tapped creatures you control have deathtouch.\nOther untapped creatures you control have hexproof.\n{1}, {T}: Untap another target creature or land you control.

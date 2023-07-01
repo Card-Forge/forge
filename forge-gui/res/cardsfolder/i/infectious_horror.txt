@@ -1,0 +1,8 @@
+Name:Infectious Horror
+ManaCost:3 B
+Types:Creature Zombie Horror
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Infectious Horror attacks, each opponent loses 2 life.

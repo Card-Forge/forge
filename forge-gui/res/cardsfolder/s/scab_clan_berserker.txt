@@ -1,0 +1,10 @@
+Name:Scab-Clan Berserker
+ManaCost:1 R R
+Types:Creature Human Berserker
+PT:2/2
+K:Haste
+K:Renown:1
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | IsPresent$ Card.Self+IsRenowned | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent casts a noncreature spell, if CARDNAME is renowned, CARDNAME deals 2 damage to that player.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 2
+DeckHas:Ability$Counters
+Oracle:Haste\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player.

@@ -1,0 +1,5 @@
+Name:Obelisk of Bant
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo G W U | SpellDescription$ Add {G}, {W}, {U}.
+Oracle:{T}: Add {G}, {W}, or {U}.

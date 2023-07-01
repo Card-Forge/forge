@@ -1,0 +1,11 @@
+Name:Dog Pet
+ManaCost:no cost
+Colors:red
+Types:Creature Dog Pet
+PT:2/1
+K:Haste
+A:AB$ Pump | Cost$ X 1 | Defined$ Self | NumAtt$ +X | SubAbility$ DBDelayTrig | SpellDescription$ CARDNAME gets +X/+0 until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | TriggerDescription$ Sacrifice CARDNAME at the beginning of the next end step.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ Self | Controller$ You
+SVar:X:Count$xPaid
+Oracle:Haste\n{X}{1}:Dog Pet gets +X/+0 until end of turn. Sacrifice it at the beginning of the next end step.

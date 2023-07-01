@@ -1,0 +1,5 @@
+Name:Skeletal Crocodile
+ManaCost:3 B
+Types:Creature Crocodile Skeleton
+PT:5/1
+Oracle:

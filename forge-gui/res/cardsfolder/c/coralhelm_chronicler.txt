@@ -1,0 +1,10 @@
+Name:Coralhelm Chronicler
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a kicked spell, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top five cards of your library. You may reveal a card with a kicker ability from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.withKicker,Card.withMultikicker | RestRandomOrder$ True
+Oracle:Whenever you cast a kicked spell, draw a card, then discard a card.\nWhen Coralhelm Chronicler enters the battlefield, look at the top five cards of your library. You may reveal a card with a kicker ability from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

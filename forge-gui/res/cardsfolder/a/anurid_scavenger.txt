@@ -1,0 +1,9 @@
+Name:Anurid Scavenger
+ManaCost:2 G
+Types:Creature Frog Beast
+PT:3/3
+K:Protection from black
+K:UpkeepCost:PutCardToLibFromGrave<1/-1/Card>
+SVar:NeedsToPlayVar:Y GE3
+SVar:Y:Count$InYourYard
+Oracle:Protection from black\nAt the beginning of your upkeep, sacrifice Anurid Scavenger unless you put a card from your graveyard on the bottom of your library.

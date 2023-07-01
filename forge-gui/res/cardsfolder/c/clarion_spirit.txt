@@ -1,0 +1,9 @@
+Name:Clarion Spirit
+ManaCost:1 W
+Types:Creature Spirit
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:BuffedBy:Card
+DeckHas:Ability$Token
+Oracle:Whenever you cast your second spell each turn, create a 1/1 white Spirit creature token with flying.

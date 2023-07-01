@@ -1,0 +1,6 @@
+Name:Torch Fiend
+ManaCost:1 R
+Types:Creature Devil
+PT:2/1
+A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+Oracle:{R}, Sacrifice Torch Fiend: Destroy target artifact.

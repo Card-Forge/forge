@@ -1,0 +1,8 @@
+Name:Moonsnare Specialist
+ManaCost:3 U
+Types:Creature Human Ninja
+PT:2/2
+K:Ninjutsu:2 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target creature
+Oracle:Ninjutsu {2}{U} ({2}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhen Moonsnare Specialist enters the battlefield, return up to one target creature to its owner's hand.

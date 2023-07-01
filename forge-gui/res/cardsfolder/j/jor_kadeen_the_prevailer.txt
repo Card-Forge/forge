@@ -1,0 +1,9 @@
+Name:Jor Kadeen, the Prevailer
+ManaCost:3 R W
+Types:Legendary Creature Human Warrior
+PT:5/4
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | Condition$ Metalcraft | Description$ Metalcraft — Creatures you control get +3/+0 as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+SVar:PlayMain1:TRUE
+Oracle:First strike\nMetalcraft — Creatures you control get +3/+0 as long as you control three or more artifacts.

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Mwonvuli Jungle
+Title=The Mwonvuli Jungle
+Difficulty=easy
+Description="The Mwonvuli Jungle has given the darkness teeth for tearing the gift of life from the weak." -Jolrael
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Barbed-Back Wurm|MIR
+4 Canopy Dragon|MIR
+14 Forest|MIR|4
+4 Jolrael's Centaur|MIR
+2 Jungle Basin|VIS
+4 Jungle Patrol|MIR
+4 Jungle Wurm|MIR
+4 Python|VIS
+2 Seeds of Innocence|MIR
+6 Swamp|MIR|3
+4 Undiscovered Paradise|VIS
+4 Unseen Walker|MIR
+4 Warthog|VIS

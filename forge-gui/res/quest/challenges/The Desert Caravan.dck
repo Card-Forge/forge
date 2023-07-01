@@ -1,0 +1,35 @@
+[quest]
+id=19
+AILife=30
+Repeat=false
+Wins=80
+Card Reward=5 random rares
+Credit Reward=300
+HumanExtras=Spidersilk Net|Dromad Purebred
+AIExtras=Ambush Party|Ambush Party|Ambush Party|Ambush Party|Gnat Alley Creeper
+[metadata]
+Name=quest19
+Title=The Desert Caravan
+Difficulty=hard
+Description=A caravan is transporting silk across the desert. While setting up camp for the night you are attacked by thieves. Defend yourself.
+Icon=The Desert Caravan.jpg
+Deck Type=constructed
+[main]
+4 Birds of Paradise
+3 Armistice
+1 Mox Emerald
+6 Plains|M12
+4 Temple Garden
+4 Utopia Tree
+3 Door to Nothingness
+4 Darksteel Ingot
+3 Harmonize
+1 Enlightened Tutor
+6 Forest|M12
+4 Peacekeeper
+4 Gemhide Sliver
+4 Magus of the Moat
+1 Mox Pearl
+4 Eladamri's Call
+4 Savannah
+[sideboard]

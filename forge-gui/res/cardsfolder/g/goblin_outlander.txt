@@ -1,0 +1,6 @@
+Name:Goblin Outlander
+ManaCost:B R
+Types:Creature Goblin Scout
+PT:2/2
+K:Protection from white
+Oracle:Protection from white

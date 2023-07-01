@@ -1,0 +1,22 @@
+Name:Shaile, Dean of Radiance
+ManaCost:1 W
+Types:Legendary Creature Bird Cleric
+PT:1/1
+K:Flying
+K:Vigilance
+A:AB$ PutCounterAll | Cost$ T | ValidCards$ Creature.ThisTurnEntered+EnteredUnder You | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.
+DeckHas:Ability$Counters
+AlternateMode:Modal
+Oracle:Flying, vigilance\n{T}: Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.
+
+ALTERNATE
+
+Name:Embrose, Dean of Shadow
+ManaCost:2 B B
+Types:Legendary Creature Human Warlock
+PT:4/4
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDmg | SpellDescription$ Put a +1/+1 counter on another target creature, then CARDNAME deals 2 damage to that creature.
+SVar:DBDmg:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ 2 | StackDescription$ None
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:{T}: Put a +1/+1 counter on another target creature, then Embrose, Dean of Shadow deals 2 damage to that creature.\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card.

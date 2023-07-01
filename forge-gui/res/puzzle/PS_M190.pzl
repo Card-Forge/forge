@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #00 (Pre-release Puzzle)
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/07/070.-M19001.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Start with no cards in either graveyard. Assume your opponent will not activate Razaketh's ability.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Blossoming Defense;Storm Fleet Pyromancer;Pounce;Bloodrage Brawler;Ancient Animus
+humanbattlefield=Yahenni, Undying Partisan;Isareth the Awakener;Bone Picker;Forest|Set:M19;Forest|Set:M19;Forest|Set:M19;Mountain|Set:M19;Mountain|Set:M19;Swamp|Set:M19;Swamp|Set:M19
+aibattlefield=Razaketh, the Foulblooded;Gigantosaurus

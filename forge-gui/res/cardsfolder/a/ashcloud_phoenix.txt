@@ -1,0 +1,12 @@
+Name:Ashcloud Phoenix
+ManaCost:2 R R
+Types:Creature Phoenix
+PT:4/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield face down under your control.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | FaceDown$ True | GainControl$ True
+K:Morph:4 R R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it deals 2 damage to each player.
+SVar:TrigDmg:DB$ DealDamage | Defined$ Player | NumDmg$ 2
+SVar:SacMe:1
+Oracle:Flying\nWhen Ashcloud Phoenix dies, return it to the battlefield face down under your control.\nMorph {4}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Ashcloud Phoenix is turned face up, it deals 2 damage to each player.

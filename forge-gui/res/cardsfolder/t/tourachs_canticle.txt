@@ -1,0 +1,6 @@
+Name:Tourach's Canticle
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | SubAbility$ DiscardRandom | SpellDescription$ Target opponent reveals their hand. You choose a card from it. That player discards that card, then discards a card at random.
+SVar:DiscardRandom:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ Random
+Oracle:Target opponent reveals their hand. You choose a card from it. That player discards that card, then discards a card at random.

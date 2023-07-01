@@ -1,0 +1,11 @@
+Name:Seven Dwarves
+ManaCost:1 R
+Types:Creature Dwarf
+PT:2/2
+K:DeckLimit:7:A deck can have up to seven cards named CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature named Seven Dwarves you control.
+SVar:X:Count$Valid Creature.namedSeven Dwarves+Other+YouCtrl
+SVar:BuffedBy:Creature.namedSeven Dwarves
+SVar:PlayMain1:TRUE
+DeckNeeds:Name$Seven Dwarves
+Oracle:Seven Dwarves gets +1/+1 for each other creature named Seven Dwarves you control.\nA deck can have up to seven cards named Seven Dwarves.

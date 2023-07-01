@@ -1,0 +1,8 @@
+Name:Youthful Scholar
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | Defined$ TriggeredCardController
+SVar:SacMe:1
+Oracle:When Youthful Scholar dies, draw two cards.

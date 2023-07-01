@@ -1,0 +1,6 @@
+Name:Greed
+ManaCost:3 B
+Types:Enchantment
+A:AB$ Draw | Cost$ B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:NonStackingEffect:True
+Oracle:{B}, Pay 2 life: Draw a card.

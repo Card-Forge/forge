@@ -1,0 +1,8 @@
+Name:Pack's Betrayal
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBScry | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If you control a Wolf or Werewolf, scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPresent$ Wolf.YouCtrl,Werewolf.YouCtrl | StackDescription$ If you control a Wolf or Werewolf, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:PlayMain1:OPPONENTCREATURES
+DeckHints:Type$Wolf|Werewolf
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If you control a Wolf or Werewolf, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kami Reborn
+Description=Creatures of the spirit world follow their own rules of life and death-- the souls of some kami can pass on to others. The new soulshift mechanic creates your own private revolving door for the spirits of growth and decay.
+Deck Type=constructed
+Set=CHK
+Image=kami_reborn.jpg
+[main]
+2 Kodama's Reach|CHK
+2 Burr Grafter|CHK
+2 Hana Kami|CHK
+2 Thief of Hope|CHK
+2 Kami of Lunacy|CHK
+2 Scuttling Death|CHK
+2 Gibbering Kami|CHK
+2 Pull Under|CHK
+2 Venerable Kumo|CHK
+12 Swamp|CHK
+12 Forest|CHK
+2 Swallowing Plague|CHK
+1 Dance of Shadows|CHK
+1 Honden of Night's Reach|CHK
+1 Devouring Greed|CHK
+2 Soilshaper|CHK
+1 Honden of Life's Web|CHK
+2 Kami of the Hunt|CHK
+1 Iname, Death Aspect|CHK
+2 Ashen-Skin Zubera|CHK
+2 Dripping-Tongue Zubera|CHK
+1 Long-Forgotten Gohei|CHK
+2 Kodama's Might|CHK
+[sideboard]

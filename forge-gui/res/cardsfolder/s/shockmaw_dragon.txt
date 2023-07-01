@@ -1,0 +1,8 @@
+Name:Shockmaw Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals 1 damage to each creature that player controls.
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.ControlledBy TriggeredTarget
+Oracle:Flying\nWhenever Shockmaw Dragon deals combat damage to a player, it deals 1 damage to each creature that player controls.

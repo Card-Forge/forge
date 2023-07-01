@@ -1,0 +1,7 @@
+Name:Flint Golem
+ManaCost:4
+Types:Artifact Creature Golem
+PT:2/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player mills three cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredDefendingPlayer | NumCards$ 3
+Oracle:Whenever Flint Golem becomes blocked, defending player mills three cards.

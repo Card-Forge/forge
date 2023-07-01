@@ -1,0 +1,9 @@
+Name:Phyrexian Hydra
+ManaCost:3 G G
+Types:Creature Phyrexian Hydra
+PT:7/7
+K:Infect
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Put a -1/-1 counter on CARDNAME for each 1 damage prevented this way.
+SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ M1M1 | CounterNum$ X
+SVar:X:ReplaceCount$DamageAmount
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nIf damage would be dealt to Phyrexian Hydra, prevent that damage. Put a -1/-1 counter on Phyrexian Hydra for each 1 damage prevented this way.

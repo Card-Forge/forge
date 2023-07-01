@@ -1,0 +1,6 @@
+Name:Galina's Knight
+ManaCost:W U
+Types:Creature Merfolk Knight
+PT:2/2
+K:Protection from red
+Oracle:Protection from red

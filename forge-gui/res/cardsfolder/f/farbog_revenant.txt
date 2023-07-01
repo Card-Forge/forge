@@ -1,0 +1,7 @@
+Name:Farbog Revenant
+ManaCost:2 B
+Types:Creature Spirit
+PT:1/3
+K:Skulk
+K:Lifelink
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

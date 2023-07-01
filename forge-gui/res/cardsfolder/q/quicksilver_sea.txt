@@ -1,0 +1,12 @@
+Name:Quicksilver Sea
+ManaCost:no cost
+Types:Plane Mirrodin
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ QuicksilverScry | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, scry 4. (Look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ QuicksilverScry | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, scry 4. (Look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:QuicksilverScry:DB$ Scry | ScryNum$ 4
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, reveal the top card of your library. You may play it without paying its mana cost.
+SVar:RolledChaos:DB$ PeekAndReveal | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:When you planeswalk to Quicksilver Sea or at the beginning of your upkeep, scry 4. (Look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\nWhenever chaos ensues, reveal the top card of your library. You may play it without paying its mana cost.

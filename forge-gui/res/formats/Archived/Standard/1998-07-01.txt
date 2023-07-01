@@ -1,0 +1,6 @@
+[format]
+Name:Standard (EXO)
+Type:Archived
+Subtype:Standard
+Effective:1998-07-01
+Sets:MIR, VIS, 5ED, WTH, TMP, STH, EXO

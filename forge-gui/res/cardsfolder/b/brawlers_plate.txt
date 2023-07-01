@@ -1,0 +1,6 @@
+Name:Brawler's Plate
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+2 and has trample.
+Oracle:Equipped creature gets +2/+2 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

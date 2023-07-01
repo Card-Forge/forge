@@ -1,0 +1,6 @@
+Name:Canyon Slough
+ManaCost:no cost
+Types:Land Swamp Mountain
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:2
+Oracle:({T}: Add {B} or {R}.)\nCanyon Slough enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

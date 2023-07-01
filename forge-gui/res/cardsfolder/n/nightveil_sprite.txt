@@ -1,0 +1,10 @@
+Name:Nightveil Sprite
+ManaCost:1 U
+Types:Creature Faerie Rogue
+PT:1/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhenever Nightveil Sprite attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

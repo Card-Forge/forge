@@ -1,0 +1,10 @@
+Name:Soul of Shandalar
+ManaCost:4 R R
+Types:Creature Avatar
+PT:6/6
+K:First Strike
+A:AB$ DealDamage | Cost$ 3 R R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker and 3 damage to up to one target creature that player or that planeswalker's controller controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TargetedOrController | TgtPrompt$ Select up to one target creature that player or that planeswalker's controller controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 3 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+A:AB$ DealDamage | Cost$ 3 R R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker and 3 damage to up to one target creature that player or that planeswalker's controller controls.
+Oracle:First strike\n{3}{R}{R}: Soul of Shandalar deals 3 damage to target player or planeswalker and 3 damage to up to one target creature that player or that planeswalker's controller controls.\n{3}{R}{R}, Exile Soul of Shandalar from your graveyard: Soul of Shandalar deals 3 damage to target player or planeswalker and 3 damage to up to one target creature that player or that planeswalker's controller controls.

@@ -1,0 +1,9 @@
+Name:Boros Battalion|Deck:Boros Battalion.dck|Variant:None|Avatar:Firemane Avenger|Desc:
+Name:Boros Radiance|Deck:Boros Radiance.dck|Variant:None|Avatar:Wojek Embermage|Desc:
+Name:Coin Flip|Deck:Coin Flip.dck|Variant:None|Avatar:Volatile Rig|Desc:
+Name:Agrus Kos, Wojek Veteran|Deck:Agrus Kos, Wojek Veteran.dck|Variant:Commander|Avatar:Agrus Kos, Wojek Veteran|Desc:
+Name:Aurelia, the Warleader|Deck:Aurelia, the Warleader.dck|Variant:Commander|Avatar:Aurelia, the Warleader|Desc:
+Name:Krenko, Mob Boss|Deck:Krenko, Mob Boss.dck|Variant:Commander|Avatar:Krenko, Mob Boss|Desc:
+Name:Tajic, Blade of the Legion|Deck:Tajic, Blade of the Legion.dck|Variant:Commander|Avatar:Tajic, Blade of the Legion|Desc:
+Name:Serra Angel|Deck:Serra Angel.dck|Variant:Vanguard|Avatar:Serra Angel|Desc:
+Name:Gideon, Champion of Justice|Deck:Gideon, Champion of Justice.dck|Variant:Planeswalker|Avatar:Gideon, Champion of Justice|Desc:

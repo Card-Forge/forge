@@ -1,0 +1,5 @@
+Name:Valiant Guard
+ManaCost:W
+Types:Creature Human Soldier
+PT:0/3
+Oracle:

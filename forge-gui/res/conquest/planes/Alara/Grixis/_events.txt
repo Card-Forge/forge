@@ -1,0 +1,9 @@
+Name:Grixis Unearth|Deck:Grixis Unearth.dck|Variant:None|Avatar:Sedraxis Specter|Desc:
+Name:Grixis Top Cards|Deck:Grixis Top Cards.dck|Variant:None|Avatar:Anathemancer|Desc:
+Name:Thraximundar|Deck:Thraximundar.dck|Variant:Commander|Avatar:Thraximundar|Desc:
+Name:Malfegor|Deck:Malfegor.dck|Variant:Commander|Avatar:Malfegor|Desc:
+Name:Nefarox, Overlord of Grixis|Deck:Nefarox, Overlord of Grixis.dck|Variant:Commander|Avatar:Nefarox, Overlord of Grixis|Desc:
+Name:Kaalia of the Vast|Deck:Kaalia of the Vast.dck|Variant:Commander|Avatar:Kaalia of the Vast|Desc:
+Name:Sedris, the Traitor King|Deck:Sedris, the Traitor King.dck|Variant:Commander|Avatar:Sedris, the Traitor King|Desc:
+Name:Hell's Caretaker Vanguard|Deck:Hells Caretaker Vanguard.dck|Variant:Vanguard|Avatar:Hell's Caretaker|Desc:
+Name:Nicol Bolas|Deck:Nicol Bolas.dck|Variant:Planeswalker|Avatar:Nicol Bolas, Planeswalker|Desc:

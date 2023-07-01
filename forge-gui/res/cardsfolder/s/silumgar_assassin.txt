@@ -1,0 +1,10 @@
+Name:Silumgar Assassin
+ManaCost:1 B
+Types:Creature Human Assassin
+PT:2/1
+K:Megamorph:2 B
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Description$ Creatures with power greater than CARDNAME's power can't block it.
+SVar:X:Count$CardPower
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target creature with power 3 or less an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.powerLE3+OppCtrl | TgtPrompt$ Select target creature with power 3 or less an opponent controls.
+Oracle:Creatures with power greater than Silumgar Assassin's power can't block it.\nMegamorph {2}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Silumgar Assassin is turned face up, destroy target creature with power 3 or less an opponent controls.

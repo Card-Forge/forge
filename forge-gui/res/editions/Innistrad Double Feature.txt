@@ -1,0 +1,1092 @@
+[metadata]
+Code=DBL
+Date=2022-01-28
+Name=Innistrad: Double Feature
+Type=Draft
+BoosterCovers=1
+DraftBooster=4 Common:fromSheet("DBL mid"), 2 Uncommon:fromSheet("DBL mid"), 1 RareMythic:fromSheet("DBL mid"), 4 Common:fromSheet("DBL vow"), 2 Uncommon:fromSheet("DBL vow"), 1 RareMythic:fromSheet("DBL vow"), 1 Any:fromSheet("DBL cards")+
+SheetReplaceCardFromSheet=DBL mid_DBL midDFC
+SheetReplaceCardFromSheet2=DBL vow_DBL vowDFC
+BoosterBox=24
+ScryfallCode=DBL
+
+[cards]
+1 R Adeline, Resplendent Cathar @Bryan Sola
+2 U Ambitious Farmhand @Bryan Sola
+3 U Beloved Beggar @Francisco Miyara
+4 U Bereaved Survivor @Zara Alfonso
+5 C Blessed Defiance @Kim Sokol
+6 U Borrowed Time @Andreas Zafiratos
+7 R Brutal Cathar @Karl Kopinski
+8 C Candlegrove Witch @Anna Christenson
+9 C Candletrap @Manuel Castañón
+10 C Cathar Commando @Evyn Fong
+11 U Cathar's Call @Matt Stewart
+12 C Celestus Sanctifier @Irina Nordsol
+13 U Chaplain of Alms @Anastasia Ovchinnikova
+14 C Clarion Cathars @Leanna Crossan
+15 R Curse of Silence @Irina Nordsol
+16 U Duelcraft Trainer @John Stanko
+17 M Enduring Angel @Irina Nordsol
+18 R Fateful Absence @Eric Deschamps
+19 C Flare of Faith @Justyna Gil
+20 U Gavony Dawnguard @Micah Epstein
+21 C Gavony Silversmith @Volkan Baǵa
+22 C Gavony Trapper @Caio Monteiro
+23 C Hedgewitch's Mask @Ovidio Cartagena
+24 C Homestead Courage @Colin Boyer
+25 M Intrepid Adversary @Viktor Titov
+26 U Loyal Gryff @Ilse Gort
+27 C Lunarch Veteran @Igor Kieryluk
+28 C Mourning Patrol @Greg Opalinski
+29 U Odric's Outrider @Cristi Balanescu
+30 C Ritual Guardian @Denman Rooke
+31 U Ritual of Hope @Craig J Spearing
+32 C Search Party Captain @Mike Bierek
+33 R Sigarda's Splendor @Howard Lyon
+34 M Sigardian Savior @David Rapoza
+35 C Soul-Guide Gryff @Cristi Balanescu
+36 C Sungold Barrage @Leanna Crossan
+37 R Sungold Sentinel @Marta Nael
+38 U Sunset Revelry @Antonio José Manzanedo
+39 C Thraben Exorcism @Matt Stewart
+40 C Unruly Mob @Ryan Pancoast
+41 R Vanquish the Horde @Grzegorz Rutkowski
+42 C Baithook Angler @Uriah Voth
+43 C Component Collector @Mark Behm
+44 C Consider @Zezhou Chen
+45 U Covetous Castaway @Dan Scott
+46 R Curse of Surveillance @Igor Kieryluk
+47 U Delver of Secrets @Matt Stewart
+48 C Devious Cover-Up @Colin Boyer
+49 U Dissipate @David Palumbo
+50 C Drownyard Amalgam @Alex Brock
+51 U Fading Hope @Rovina Cai
+52 C Falcon Abomination @Brent Hollowell
+53 U Firmament Sage @Anastasia Ovchinnikova
+54 C Flip the Switch @Campbell White
+55 C Galedrifter @Daniel Ljunggren
+56 C Geistwave @Olena Richards
+57 R Grafted Identity @Manuel Castañón
+58 C Larder Zombie @E. M. Gist
+59 M Lier, Disciple of the Drowned @Ekaterina Burmak
+60 C Locked in the Cemetery @Tran Nguyen
+61 R Malevolent Hermit @Daarken
+62 R Memory Deluge @Lake Hurwitz
+63 U Mysterious Tome @David Auden Nash
+64 U Nebelgast Intruder @Volkan Baǵa
+65 U Ominous Roost @Josu Hernaiz
+66 C Organ Hoarder @Nicholas Gregory
+67 C Otherworldly Gaze @Chris Cold
+68 U Overwhelmed Archivist @Cristi Balanescu
+69 R Patrician Geist @Marta Nael
+70 U Phantom Carriage @Igor Kieryluk
+71 M Poppet Stitcher @Simon Dominic
+72 C Revenge of the Drowned @Chris Cold
+73 C Secrets of the Key @Alix Branwyn
+74 C Shipwreck Sifters @Svetlin Velinov
+75 U Skaab Wrangler @Billy Christian
+76 R Sludge Monster @Svetlin Velinov
+77 M Spectral Adversary @Uriah Voth
+78 C Startle @Craig J Spearing
+79 C Stormrider Spirit @Lake Hurwitz
+80 R Suspicious Stowaway @Jake Murray
+81 R Triskaidekaphile @Slawomir Maniak
+82 C Unblinking Observer @Filip Burburan
+83 U Vivisection @Aaron Miller
+84 C Arrogant Outlaw @Aurore Folny
+85 U Baneblade Scoundrel @Marta Nael
+86 C Bat Whisperer @Jodie Muir
+87 C Bladebrand @Khurrum
+88 C Blood Pact @Sam White
+89 R Bloodline Culling @Liiga Smilshkalne
+90 U Bloodtithe Collector @Maria Zolotukhina
+91 R Champion of the Perished @Kekai Kotaki
+92 U Covert Cutpurse @John Stanko
+93 C Crawl from the Cellar @Igor Krstic
+94 R Curse of Leeches @Uriah Voth
+95 C Defenestrate @Darek Zabrocki
+96 C Diregraf Horde @Alex Negrea
+97 U Dreadhound @Joe Slucher
+98 C Duress @Paul Scott Canavan
+99 C Eaten Alive @Nicholas Gregory
+100 C Ecstatic Awakener @Tuan Duong Chu
+101 U Foul Play @Campbell White
+102 U Ghoulish Procession @Vincent Proce
+103 R Gisa, Glorious Resurrector @Yongjae Choi
+104 R Graveyard Trespasser @Chris Rallis
+105 U Heirloom Mirror @Josh Hass
+106 C Hobbling Zombie @Josh Hass
+107 U Infernal Grasp @Naomi Baker
+108 R Jadar, Ghoulcaller of Nephalia @Yongjae Choi
+109 M Jerren, Corrupted Bishop @Yongjae Choi
+110 M Lord of the Forsaken @Kekai Kotaki
+111 R Mask of Griselbrand @Jason Felix
+112 M The Meathook Massacre @Chris Seaman
+113 U Morbid Opportunist @Tyler Walpole
+114 C Morkrut Behemoth @Milivoj Ćeran
+115 U Necrosynthesis @Isis
+116 C No Way Out @Sebastian Giacobino
+117 C Novice Occultist @Zara Alfonso
+118 C Olivia's Midnight Ambush @Chris Rallis
+119 C Rotten Reunion @Aaron Miller
+120 C Shady Traveler @Lie Setiawan
+121 C Siege Zombie @Johann Bodin
+122 R Slaughter Specialist @Kari Christensen
+123 U Stromkirk Bloodthief @Caroline Gariba
+124 M Tainted Adversary @Tuan Duong Chu
+125 C Vampire Interloper @James Ryman
+126 U Vengeful Strangler @Sean Sevestre
+127 C Abandon the Post @Zoltan Boros
+128 C Ardent Elementalist @Miguel Mercado
+129 M Bloodthirsty Adversary @Heonhwa Choe
+130 C Brimstone Vandal @Andreas Zafiratos
+131 R Burn Down the House @Campbell White
+132 C Burn the Accursed @David Auden Nash
+133 U Cathartic Pyre @Ryan Yee
+134 R Curse of Shaken Faith @Campbell White
+135 C Electric Revelation @Liiga Smilshkalne
+136 C Falkenrath Perforator @Marcela Medeiros
+137 R Falkenrath Pit Fighter @Anna Fehr
+138 C Famished Foragers @Lorenzo Mastroianni
+139 U Fangblade Brigand @Vincent Proce
+140 C Festival Crasher @Milivoj Ćeran
+141 U Flame Channeler @Véronique Meignaud
+142 R Geistflame Reservoir @Anna Christenson
+143 C Harvesttide Infiltrator @Mathias Kollros
+144 C Immolation @Olena Richards
+145 C Lambholt Harrier @Jason Kang
+146 R Light Up the Night @Wei Wei
+147 U Lunar Frenzy @Alix Branwyn
+148 C Moonrager's Slash @Lars Grant-West
+149 M Moonveil Regent @Joshua Raphael
+150 C Mounted Dreadknight @Josu Hernaiz
+151 C Neonate's Rush @Justine Cruz
+152 U Obsessive Astronomer @Josu Hernaiz
+153 C Pack's Betrayal @Sam Rowan
+154 U Play with Fire @Svetlin Velinov
+155 U Purifying Dragon @Zezhou Chen
+156 C Raze the Effigy @Cristi Balanescu
+157 R Reckless Stormseeker @Manuel Castañón
+158 U Seize the Storm @Deruchenko Alexander
+159 R Smoldering Egg @Simon Dominic
+160 U Spellrune Painter @Lucas Graciano
+161 C Stolen Vitality @Mike Bierek
+162 M Sunstreak Phoenix @Brian Valeza
+163 C Tavern Ruffian @Zoltan Boros
+164 U Thermo-Alchemist @Raymond Swanland
+165 U Village Watch @Nestor Ossandon Leal
+166 U Voldaren Ambusher @Evyn Fong
+167 C Voldaren Stinger @Martina Fackova
+168 R Augur of Autumn @Billy Christian
+169 C Bird Admirer @Slawomir Maniak
+170 C Bounding Wolf @Andrea Radeck
+171 C Bramble Armor @Alessandra Pisano
+172 R Briarbridge Tracker @Mathias Kollros
+173 U Brood Weaver @Slawomir Maniak
+174 U Burly Breaker @Justine Cruz
+175 C Candlelit Cavalry @Viko Menezes
+176 U Clear Shot @Craig J Spearing
+177 M Consuming Blob @Simon Dominic
+178 U Contortionist Troupe @Jesper Ejsing
+179 U Dawnhart Mentor @Fariba Khamseh
+180 C Dawnhart Rejuvenator @Darren Tan
+181 U Deathbonnet Sprout @Filip Burburan
+182 U Defend the Celestus @Andrey Kuzinskiy
+183 U Dryad's Revival @Mila Pesic
+184 C Duel for Dominance @Ryan Pancoast
+185 C Eccentric Farmer @Tyler Walpole
+186 C Harvesttide Sentry @Livia Prima
+187 U Hound Tamer @Randy Vargas
+188 C Howl of the Hunt @Josu Hernaiz
+189 C Might of the Old Ways @Zezhou Chen
+190 U Outland Liberator @Randy Vargas
+191 C Path to the Festival @Darek Zabrocki
+192 C Pestilent Wolf @Oriana Menendez
+193 C Plummet @Nicholas Gregory
+194 M Primal Adversary @Ilse Gort
+195 C Return to Nature @Kim Sokol
+196 U Rise of the Ants @Nicholas Gregory
+197 R Saryth, the Viper's Fang @Igor Kieryluk
+198 C Shadowbeast Sighting @Piotr Foksowicz
+199 C Snarling Wolf @Ilse Gort
+200 R Storm the Festival @Yigit Koroglu
+201 C Tapping at the Window @Nils Hamm
+202 C Timberland Guide @Zoltan Boros
+203 C Tireless Hauler @Forrest Imel
+204 R Tovolar's Huntmaster @Cristi Balanescu
+205 U Turn the Earth @Alayna Danner
+206 R Unnatural Growth @Svetlin Velinov
+207 R Willow Geist @Ryan Yee
+208 M Wrenn and Seven @Heonhwa Choe
+209 R Angelfire Ignition @Yeong-Hao Han
+210 U Arcane Infusion @Jason Felix
+211 M Arlinn, the Pack's Hope @Anna Steinbauer
+212 U Bladestitched Skaab @Dave Kendall
+213 R Can't Stay Away @Milivoj Ćeran
+214 U Corpse Cobble @Ravenna Tran
+215 R Croaking Counterpart @Yeong-Hao Han
+216 U Dawnhart Wardens @Joshua Raphael
+217 R Dennick, Pious Apprentice @Chris Rallis
+218 U Devoted Grafkeeper @Raoul Vitale
+219 R Dire-Strain Rampage @Darek Zabrocki
+220 U Diregraf Rebirth @Irina Nordsol
+221 U Faithful Mending @Caroline Gariba
+222 U Fleshtaker @Kev Walker
+223 R Florian, Voldaren Scion @Justine Cruz
+224 R Galvanic Iteration @Johann Bodin
+225 R Ghoulcaller's Harvest @Anna Steinbauer
+226 U Grizzly Ghoul @Vincent Proce
+227 R Hallowed Respite @Jason A. Engle
+228 U Hungry for More @Bastien L. Deharme
+229 U Join the Dance @Raoul Vitale
+230 R Katilda, Dawnhart Prime @Bryan Sola
+231 U Kessig Naturalist @Johan Grenier
+232 R Liesa, Forgotten Archangel @Dmitry Burmak
+233 R Ludevic, Necrogenius @Ryan Pancoast
+234 R Old Stickfingers @Jehan Choo
+235 R Rem Karolus, Stalwart Slayer @Francisco Miyara
+236 R Rite of Harmony @Rovina Cai
+237 U Rite of Oblivion @Martina Pilcerova
+238 U Rootcoil Creeper @Iris Compiet
+239 U Sacred Fire @Svetlin Velinov
+240 M Sigarda, Champion of Light @Howard Lyon
+241 R Siphon Insight @Livia Prima
+242 R Slogurk, the Overslime @Nicholas Gregory
+243 U Storm Skreelix @Darek Zabrocki
+244 U Sunrise Cavalier @John Di Giovanni
+245 M Teferi, Who Slows the Sunset @Heonhwa Choe
+246 R Tovolar, Dire Overlord @Chris Rahn
+247 U Unnatural Moonrise @Ryan Pancoast
+248 R Vadrik, Astral Archmage @Kieran Yanner
+249 U Vampire Socialite @Suzanne Helmigh
+250 R Wake to Slaughter @Chris Cold
+251 U Winterthorn Blessing @Yeong-Hao Han
+252 R The Celestus @Jonas De Ro
+253 C Crossroads Candleguide @Dan Scott
+254 C Jack-o'-Lantern @Josu Hernaiz
+255 U Moonsilver Key @Joseph Meehan
+256 U Mystic Skull @Joe Slucher
+257 R Pithing Needle @Ovidio Cartagena
+258 C Silver Bolt @Anna Fehr
+259 C Stuffed Bear @Joe Slucher
+260 R Deserted Beach @Jonas De Ro
+261 C Evolving Wilds @Alayna Danner
+262 U Field of Ruin @Chris Ostrowski
+263 R Haunted Ridge @Jonas De Ro
+264 M Hostile Hostel @Daniel Ljunggren
+265 R Overgrown Farmland @Jonas De Ro
+266 R Rockfall Vale @Muhammad Firdaus
+267 R Shipwreck Marsh @Jonas De Ro
+268 C Adamant Will @Irina Nordsol
+269 U Angelic Quartermaster @PINDURSKI
+270 U Arm the Cathars @Zoltan Boros
+271 U Bride's Gown @Eric Deschamps
+272 R By Invitation Only @Micah Epstein
+273 M Cemetery Protector @Chris Rallis
+274 U Circle of Confinement @Lorenzo Mastroianni
+275 U Dawnhart Geist @Artur Treffner
+276 U Distracting Geist @Andrew Mar
+277 C Drogskol Infantry @Cristi Balanescu
+278 C Estwald Shieldbasher @Wayne Reynolds
+279 M Faithbound Judge @Svetlin Velinov
+280 C Fierce Retribution @Sidharth Chaturvedi
+281 U Fleeting Spirit @Evyn Fong
+282 C Gryff Rider @Yongjae Choi
+283 U Gryffwing Cavalry @Steve Prescott
+284 M Hallowed Haunting @David Auden Nash
+285 C Heron of Hope @Daarken
+286 C Heron-Blessed Geist @Jason A. Engle
+287 R Hopeful Initiate @Dan Scott
+288 R Katilda, Dawnhart Martyr @Manuel Castañón
+289 C Kindly Ancestor @Justyna Gil
+290 R Lantern Flare @Lie Setiawan
+291 C Militia Rallier @Eelis Kyttanen
+292 C Nebelgast Beguiler @Andreas Zafiratos
+293 C Nurturing Presence @Irina Nordsol
+294 U Ollenbock Escort @Eric Wilkerson
+295 U Panicked Bystander @Aaron Miller
+296 C Parish-Blade Trainee @Zara Alfonso
+297 C Piercing Light @Donato Giancola
+298 U Radiant Grace @Campbell White
+299 U Resistance Squad @Joshua Raphael
+300 C Sanctify @Kasia 'Kafis' Zielińska
+301 M Savior of Ollenbock @Aaron J. Riley
+302 C Sigarda's Imprisonment @Bryan Sola
+303 R Sigarda's Summons @Nestor Ossandon Leal
+304 C Supernatural Rescue @Anastasia Ovchinnikova
+305 R Thalia, Guardian of Thraben @Magali Villeneuve
+306 C Traveling Minister @Slawomir Maniak
+307 U Twinblade Geist @Tuan Duong Chu
+308 C Unholy Officiant @Campbell White
+309 U Valorous Stance @Anato Finnstark
+310 C Vampire Slayer @Tomas Duchek
+311 R Voice of the Blessed @Anastasia Ovchinnikova
+312 R Wedding Announcement @Caroline Gariba
+313 R Welcoming Vampire @Lorenzo Mastroianni
+314 C Alchemist's Retrieval @David Auden Nash
+315 C Binding Geist @Campbell White
+316 U Biolume Egg @Filip Burburan
+317 M Cemetery Illuminator @Uriah Voth
+318 C Chill of the Grave @Olivier Bernard
+319 U Cobbled Lancer @Igor Kieryluk
+320 R Consuming Tide @Viko Menezes
+321 C Cradle of Safety @Howard Lyon
+322 C Cruel Witness @Vincent Proce
+323 U Diver Skaab @Dave Kendall
+324 C Dreadlight Monstrosity @Jason Kang
+325 R Dreamshackle Geist @Andreas Zafiratos
+326 C Fear of Death @Anato Finnstark
+327 U Geistlight Snare @Anato Finnstark
+328 R Geralf, Visionary Stitcher @Bryan Sola
+329 U Gutter Skulker @Viko Menezes
+330 R Hullbreaker Horror @Svetlin Velinov
+331 R Inspired Idea @Alix Branwyn
+332 M Jacob Hauken, Inspector @Aurore Folny
+333 C Lantern Bearer @Zoltan Boros
+334 U Lunar Rejection @Donato Giancola
+335 R Mirrorhall Mimic @Justine Cruz
+336 U Mischievous Catgeist @Denman Rooke
+337 M Necroduality @Billy Christian
+338 R Overcharged Amalgam @Mike Jordana
+339 R Patchwork Crawler @Fesbra
+340 C Repository Skaab @Olivier Bernard
+341 C Scattered Thoughts @Brian Valeza
+342 U Screaming Swarm @Irina Nordsol
+343 C Selhoff Entomber @Johann Bodin
+344 C Serpentine Ambush @Jokubas Uogintas
+345 C Skywarp Skaab @Steven Belledin
+346 U Soulcipher Board @Caio Monteiro
+347 C Steelclad Spirit @Artur Treffner
+348 C Stitched Assistant @Andrey Kuzinskiy
+349 U Stormchaser Drake @Brent Hollowell
+350 C Syncopate @Marta Nael
+351 C Syphon Essence @Sean Murray
+352 U Thirst for Discovery @Dominik Mayer
+353 C Wanderlight Spirit @Andrew Mar
+354 U Wash Away @Brian Valeza
+355 U Whispering Wizard @E. M. Gist
+356 R Winged Portent @Nicholas Gregory
+357 U Witness the Future @Anato Finnstark
+358 C Wretched Throng @Filip Burburan
+359 C Aim for the Head @Zoltan Boros
+360 U Archghoul of Thraben @Johann Bodin
+361 C Bleed Dry @Jodie Muir
+362 C Blood Fountain @Evyn Fong
+363 C Bloodcrazed Socialite @Marta Nael
+364 U Bloodsworn Squire @Darren Tan
+365 R Bloodvial Purveyor @Fesbra
+366 U Catapult Fodder @Jesper Ejsing
+367 M Cemetery Desecrator @Dan Scott
+368 R Concealing Curtains @Brian Valeza
+369 C Courier Bat @Ilse Gort
+370 R Demonic Bargain @Sam Guay
+371 C Desperate Farmer @Valera Lutfullina
+372 C Diregraf Scavenger @Manuel Castañón
+373 C Doomed Dissenter @Campbell White
+374 U Dread Fugue @Rovina Cai
+375 R Dreadfeast Demon @Andrew Mar
+376 R Dying to Serve @Steven Belledin
+377 U Edgar's Awakening @Joshua Raphael
+378 R Falkenrath Forebear @Aurore Folny
+379 U Fell Stinger @Lars Grant-West
+380 C Gift of Fangs @Dominik Mayer
+381 C Gluttonous Guest @Jesper Ejsing
+382 R Graf Reaver @Dave Kendall
+383 C Grisly Ritual @Anastasia Ovchinnikova
+384 U Groom's Finery @Eric Deschamps
+385 R Headless Rider @E. M. Gist
+386 M Henrika Domnathi @Billy Christian
+387 U Hero's Downfall @Chris Rallis
+388 U Innocent Traveler @Cristi Balanescu
+389 C Mindleech Ghoul @Alex Brock
+390 U Parasitic Grasp @Rovina Cai
+391 R Path of Peril @Kasia 'Kafis' Zielińska
+392 C Persistent Specimen @Scott Murphy
+393 C Pointed Discussion @Jarel Threat
+394 C Ragged Recluse @Lie Setiawan
+395 U Restless Bloodseeker @Justyna Gil
+396 C Rot-Tide Gargantua @Filip Burburan
+397 U Skulking Killer @Alex Brock
+398 M Sorin the Mirthless @Martina Fackova
+399 M Toxrill, the Corrosive @Simon Dominic
+400 U Undead Butler @Nestor Ossandon Leal
+401 C Undying Malice @Igor Kieryluk
+402 C Unhallowed Phalanx @Nicholas Gregory
+403 C Vampire's Kiss @Ilse Gort
+404 R Voldaren Bloodcaster @Kim Sokol
+405 U Wedding Security @Francisco Miyara
+406 C Abrade @Dominik Mayer
+407 R Alchemist's Gambit @Zoltan Boros
+408 U Alluring Suitor @Justine Cruz
+409 C Ancestral Anger @Randy Vargas
+410 U Ballista Watcher @Tomas Duchek
+411 C Belligerent Guest @Darren Tan
+412 U Blood Hypnotist @Marie Magny
+413 C Blood Petal Celebrant @Fajareka Setiawan
+414 C Bloody Betrayal @Brian Valeza
+415 M Cemetery Gatekeeper @Tyler Jacobson
+416 M Chandra, Dressed to Kill @Viktor Titov
+417 R Change of Fortune @Sam Guay
+418 R Creepy Puppeteer @Marie Magny
+419 R Curse of Hospitality @Dominik Mayer
+420 C Daybreak Combatants @Joshua Raphael
+421 R Dominating Vampire @PINDURSKI
+422 C End the Festivities @Chris Rallis
+423 C Falkenrath Celebrants @Anna Steinbauer
+424 C Fearful Villager @Andrew Mar
+425 C Flame-Blessed Bolt @Andreas Zafiratos
+426 U Frenzied Devils @Andrey Kuzinskiy
+427 U Honeymoon Hearse @Raoul Vitale
+428 C Hungry Ridgewolf @Olena Richards
+429 R Ill-Tempered Loner @Grzegorz Rutkowski
+430 U Into the Night @Valera Lutfullina
+431 C Kessig Flamebreather @Lius Lasahido
+432 R Kessig Wolfrider @Bram Sels
+433 C Lacerate Flesh @Pauline Voss
+434 U Lambholt Raconteur @Andrey Kuzinskiy
+435 C Lightning Wolf @Alessandra Pisano
+436 U Magma Pummeler @Filip Burburan
+437 M Manaform Hellkite @Andrew Mar
+438 U Markov Retribution @Uriah Voth
+439 R Olivia's Attendants @Dmitry Burmak
+440 C Pyre Spawn @Nicholas Gregory
+441 C Reckless Impulse @Mathias Kollros
+442 U Rending Flame @Olena Richards
+443 U Runebound Wolf @Tomas Duchek
+444 U Sanguine Statuette @Izzy
+445 R Stensia Uprising @Dan Scott
+446 C Sure Strike @Lie Setiawan
+447 U Vampires' Vengeance @Chris Cold
+448 M Volatile Arsonist @Gabor Szikszai
+449 C Voldaren Epicure @Martina Fackova
+450 U Voltaic Visionary @Francisco Miyara
+451 C Weary Prisoner @Jason Rainville
+452 C Apprentice Sharpshooter @Steve Prescott
+453 R Ascendant Packleader @Alessandra Pisano
+454 M Avabruck Caretaker @Heonhwa Choe
+455 C Bramble Armor @Alessandra Pisano
+456 U Bramble Wurm @Lars Grant-West
+457 U Cartographer's Survey @Donato Giancola
+458 M Cemetery Prowler @Daarken
+459 U Cloaked Cadet @Igor Kieryluk
+460 U Crawling Infestation @Khurrum
+461 C Crushing Canopy @Svetlin Velinov
+462 M Cultivator Colossus @Antonio José Manzanedo
+463 C Dawnhart Disciple @Mila Pesic
+464 R Dig Up @Slawomir Maniak
+465 U Dormant Grove @Kekai Kotaki
+466 C Flourishing Hunter @Ilse Gort
+467 R Glorious Sunrise @Andreas Zafiratos
+468 R Hamlet Vanguard @PINDURSKI
+469 R Hiveheart Shaman @Eric Deschamps
+470 C Hookhand Mariner @Caio Monteiro
+471 R Howling Moon @Alessandra Pisano
+472 R Howlpack Piper @Cristi Balanescu
+473 U Infestation Expert @Vincent Proce
+474 U Laid to Rest @Colin Boyer
+475 C Massive Might @Iris Compiet
+476 C Moldgraf Millipede @Simon Dominic
+477 C Mulch @Lucas Graciano
+478 C Nature's Embrace @Dominik Mayer
+479 U Oakshade Stalker @Alexander Mokhov
+480 U Packsong Pup @April Prime
+481 U Reclusive Taxidermist @Wisnu Tan
+482 U Retrieve @Alix Branwyn
+483 C Rural Recruit @Eelis Kyttanen
+484 U Sawblade Slinger @Joshua Raphael
+485 C Sheltering Boughs @Anato Finnstark
+486 C Snarling Wolf @Ilse Gort
+487 U Spiked Ripsaw @Jesper Ejsing
+488 R Splendid Reclamation @Uriah Voth
+489 C Spore Crawler @Nicholas Gregory
+490 C Sporeback Wolf @Nicholas Elias
+491 C Toxic Scorpion @Simon Dominic
+492 R Ulvenwald Oddity @Brent Hollowell
+493 C Weaver of Blossoms @Andrey Kuzinskiy
+494 C Witch's Web @Yeong-Hao Han
+495 C Wolf Strike @Wisnu Tan
+496 U Wolfkin Outcast @Alexander Mokhov
+497 U Ancient Lumberknot @Nicholas Gregory
+498 R Anje, Maid of Dishonor @Yongjae Choi
+499 U Bloodtithe Harvester @Lucas Graciano
+500 U Brine Comber @Olena Richards
+501 U Child of the Pack @Mila Pesic
+502 R Dorothea, Vengeful Victim @Marta Nael
+503 R Edgar, Charmed Groom @Volkan Baǵa
+504 R Eruth, Tormented Prophet @Ekaterina Burmak
+505 R Grolnok, the Omnivore @Simon Dominic
+506 R Halana and Alena, Partners @Jason Rainville
+507 M Kaya, Geist Hunter @Ryan Pancoast
+508 U Markov Purifier @G-host Lee
+509 U Markov Waltzer @Joshua Raphael
+510 R Odric, Blood-Cursed @Chris Rallis
+511 R Old Rutstein @Greg Staples
+512 M Olivia, Crimson Bride @Anna Steinbauer
+513 R Runo Stromkirk @Matt Stewart
+514 U Sigardian Paladin @Slawomir Maniak
+515 U Skull Skaab @Nicholas Gregory
+516 R Torens, Fist of the Angels @Justine Cruz
+517 U Vilespawn Spider @Nicholas Gregory
+518 U Wandering Mind @Simon Dominic
+519 C Blood Servitor @Jason A. Engle
+520 U Boarded Window @Zoltan Boros
+521 C Ceremonial Knife @Antonio José Manzanedo
+522 R Dollhouse of Horrors @Muhammad Firdaus
+523 U Foreboding Statue @Aaron Miller
+524 C Honored Heirloom @Leanna Crossan
+525 R Investigator's Journal @Yeong-Hao Han
+526 U Lantern of the Lost @Chris Cold
+527 C Wedding Invitation @Justyna Gil
+528 R Deathcap Glade @Sam Burley
+529 R Dreamroot Cascade @Sam Burley
+530 C Evolving Wilds @Alayna Danner
+531 R Shattered Sanctum @Muhammad Firdaus
+532 R Stormcarved Coast @Sarah Finnigan
+533 R Sundown Pass @Muhammad Firdaus
+534 R Voldaren Estate @Richard Wright
+
+[promo]
+535 R Endless Ranks of the Dead @Ryan Yee
+
+[mid]
+1 Adeline, Resplendent Cathar|DBL
+1 Blessed Defiance|DBL
+1 Borrowed Time|DBL
+1 Candlegrove Witch|DBL
+1 Candletrap|DBL
+1 Cathar Commando|DBL
+1 Cathar's Call|DBL
+1 Celestus Sanctifier|DBL
+1 Clarion Cathars|DBL
+1 Curse of Silence|DBL
+1 Duelcraft Trainer|DBL
+1 Fateful Absence|DBL
+1 Flare of Faith|DBL
+1 Gavony Dawnguard|DBL
+1 Gavony Silversmith|DBL
+1 Gavony Trapper|DBL
+1 Hedgewitch's Mask|DBL
+1 Homestead Courage|DBL
+1 Intrepid Adversary|DBL
+1 Loyal Gryff|DBL
+1 Odric's Outrider|DBL
+1 Ritual Guardian|DBL
+1 Ritual of Hope|DBL
+1 Search Party Captain|DBL
+1 Sigarda's Splendor|DBL
+1 Sigardian Savior|DBL
+1 Soul-Guide Gryff|DBL
+1 Sungold Barrage|DBL
+1 Sungold Sentinel|DBL
+1 Sunset Revelry|DBL
+1 Thraben Exorcism|DBL
+1 Unruly Mob|DBL
+1 Vanquish the Horde|DBL
+1 Component Collector|DBL
+1 Consider|DBL
+1 Curse of Surveillance|DBL
+1 Devious Cover-Up|DBL
+1 Dissipate|DBL
+1 Drownyard Amalgam|DBL
+1 Fading Hope|DBL
+1 Falcon Abomination|DBL
+1 Firmament Sage|DBL
+1 Flip the Switch|DBL
+1 Geistwave|DBL
+1 Grafted Identity|DBL
+1 Larder Zombie|DBL
+1 Lier, Disciple of the Drowned|DBL
+1 Locked in the Cemetery|DBL
+1 Memory Deluge|DBL
+1 Nebelgast Intruder|DBL
+1 Ominous Roost|DBL
+1 Organ Hoarder|DBL
+1 Otherworldly Gaze|DBL
+1 Patrician Geist|DBL
+1 Phantom Carriage|DBL
+1 Revenge of the Drowned|DBL
+1 Secrets of the Key|DBL
+1 Shipwreck Sifters|DBL
+1 Skaab Wrangler|DBL
+1 Sludge Monster|DBL
+1 Spectral Adversary|DBL
+1 Startle|DBL
+1 Stormrider Spirit|DBL
+1 Triskaidekaphile|DBL
+1 Unblinking Observer|DBL
+1 Vivisection|DBL
+1 Arrogant Outlaw|DBL
+1 Bat Whisperer|DBL
+1 Bladebrand|DBL
+1 Blood Pact|DBL
+1 Bloodline Culling|DBL
+1 Bloodtithe Collector|DBL
+1 Champion of the Perished|DBL
+1 Crawl from the Cellar|DBL
+1 Defenestrate|DBL
+1 Diregraf Horde|DBL
+1 Dreadhound|DBL
+1 Duress|DBL
+1 Eaten Alive|DBL
+1 Foul Play|DBL
+1 Ghoulish Procession|DBL
+1 Gisa, Glorious Resurrector|DBL
+1 Hobbling Zombie|DBL
+1 Infernal Grasp|DBL
+1 Jadar, Ghoulcaller of Nephalia|DBL
+1 Lord of the Forsaken|DBL
+1 Mask of Griselbrand|DBL
+1 The Meathook Massacre|DBL
+1 Morbid Opportunist|DBL
+1 Morkrut Behemoth|DBL
+1 Necrosynthesis|DBL
+1 No Way Out|DBL
+1 Novice Occultist|DBL
+1 Olivia's Midnight Ambush|DBL
+1 Rotten Reunion|DBL
+1 Siege Zombie|DBL
+1 Slaughter Specialist|DBL
+1 Stromkirk Bloodthief|DBL
+1 Tainted Adversary|DBL
+1 Vampire Interloper|DBL
+1 Abandon the Post|DBL
+1 Ardent Elementalist|DBL
+1 Bloodthirsty Adversary|DBL
+1 Brimstone Vandal|DBL
+1 Burn Down the House|DBL
+1 Burn the Accursed|DBL
+1 Cathartic Pyre|DBL
+1 Curse of Shaken Faith|DBL
+1 Electric Revelation|DBL
+1 Falkenrath Perforator|DBL
+1 Falkenrath Pit Fighter|DBL
+1 Famished Foragers|DBL
+1 Festival Crasher|DBL
+1 Geistflame Reservoir|DBL
+1 Immolation|DBL
+1 Lambholt Harrier|DBL
+1 Light Up the Night|DBL
+1 Lunar Frenzy|DBL
+1 Moonrager's Slash|DBL
+1 Moonveil Regent|DBL
+1 Mounted Dreadknight|DBL
+1 Neonate's Rush|DBL
+1 Obsessive Astronomer|DBL
+1 Pack's Betrayal|DBL
+1 Play with Fire|DBL
+1 Purifying Dragon|DBL
+1 Raze the Effigy|DBL
+1 Seize the Storm|DBL
+1 Stolen Vitality|DBL
+1 Sunstreak Phoenix|DBL
+1 Thermo-Alchemist|DBL
+1 Voldaren Ambusher|DBL
+1 Voldaren Stinger|DBL
+1 Augur of Autumn|DBL
+1 Bounding Wolf|DBL
+1 Bramble Armor|DBL|1
+1 Briarbridge Tracker|DBL
+1 Brood Weaver|DBL
+1 Candlelit Cavalry|DBL
+1 Clear Shot|DBL
+1 Consuming Blob|DBL
+1 Contortionist Troupe|DBL
+1 Dawnhart Mentor|DBL
+1 Dawnhart Rejuvenator|DBL
+1 Defend the Celestus|DBL
+1 Dryad's Revival|DBL
+1 Duel for Dominance|DBL
+1 Eccentric Farmer|DBL
+1 Harvesttide Sentry|DBL
+1 Howl of the Hunt|DBL
+1 Might of the Old Ways|DBL
+1 Path to the Festival|DBL
+1 Pestilent Wolf|DBL
+1 Plummet|DBL
+1 Primal Adversary|DBL
+1 Return to Nature|DBL
+1 Rise of the Ants|DBL
+1 Saryth, the Viper's Fang|DBL
+1 Shadowbeast Sighting|DBL
+1 Snarling Wolf|DBL|1
+1 Storm the Festival|DBL
+1 Tapping at the Window|DBL
+1 Timberland Guide|DBL
+1 Turn the Earth|DBL
+1 Unnatural Growth|DBL
+1 Willow Geist|DBL
+1 Wrenn and Seven|DBL
+1 Angelfire Ignition|DBL
+1 Arcane Infusion|DBL
+1 Bladestitched Skaab|DBL
+1 Can't Stay Away|DBL
+1 Corpse Cobble|DBL
+1 Croaking Counterpart|DBL
+1 Dawnhart Wardens|DBL
+1 Dire-Strain Rampage|DBL
+1 Diregraf Rebirth|DBL
+1 Faithful Mending|DBL
+1 Fleshtaker|DBL
+1 Florian, Voldaren Scion|DBL
+1 Galvanic Iteration|DBL
+1 Ghoulcaller's Harvest|DBL
+1 Grizzly Ghoul|DBL
+1 Hallowed Respite|DBL
+1 Hungry for More|DBL
+1 Join the Dance|DBL
+1 Katilda, Dawnhart Prime|DBL
+1 Liesa, Forgotten Archangel|DBL
+1 Old Stickfingers|DBL
+1 Rem Karolus, Stalwart Slayer|DBL
+1 Rite of Harmony|DBL
+1 Rite of Oblivion|DBL
+1 Rootcoil Creeper|DBL
+1 Sacred Fire|DBL
+1 Sigarda, Champion of Light|DBL
+1 Siphon Insight|DBL
+1 Slogurk, the Overslime|DBL
+1 Storm Skreelix|DBL
+1 Sunrise Cavalier|DBL
+1 Teferi, Who Slows the Sunset|DBL
+1 Unnatural Moonrise|DBL
+1 Vadrik, Astral Archmage|DBL
+1 Vampire Socialite|DBL
+1 Wake to Slaughter|DBL
+1 Winterthorn Blessing|DBL
+1 The Celestus|DBL
+1 Crossroads Candleguide|DBL
+1 Jack-o'-Lantern|DBL
+1 Moonsilver Key|DBL
+1 Pithing Needle|DBL
+1 Silver Bolt|DBL
+1 Stuffed Bear|DBL
+1 Deserted Beach|DBL
+1 Evolving Wilds|DBL|1
+1 Field of Ruin|DBL
+1 Haunted Ridge|DBL
+1 Overgrown Farmland|DBL
+1 Rockfall Vale|DBL
+1 Shipwreck Marsh|DBL
+
+[vow]
+1 Adamant Will|DBL
+1 Angelic Quartermaster|DBL
+1 Arm the Cathars|DBL
+1 Bride's Gown|DBL
+1 By Invitation Only|DBL
+1 Cemetery Protector|DBL
+1 Circle of Confinement|DBL
+1 Dawnhart Geist|DBL
+1 Estwald Shieldbasher|DBL
+1 Fierce Retribution|DBL
+1 Fleeting Spirit|DBL
+1 Gryff Rider|DBL
+1 Gryffwing Cavalry|DBL
+1 Hallowed Haunting|DBL
+1 Heron of Hope|DBL
+1 Heron-Blessed Geist|DBL
+1 Hopeful Initiate|DBL
+1 Lantern Flare|DBL
+1 Militia Rallier|DBL
+1 Nebelgast Beguiler|DBL
+1 Nurturing Presence|DBL
+1 Ollenbock Escort|DBL
+1 Parish-Blade Trainee|DBL
+1 Piercing Light|DBL
+1 Resistance Squad|DBL
+1 Sanctify|DBL
+1 Savior of Ollenbock|DBL
+1 Sigarda's Imprisonment|DBL
+1 Sigarda's Summons|DBL
+1 Supernatural Rescue|DBL
+1 Thalia, Guardian of Thraben|DBL
+1 Traveling Minister|DBL
+1 Unholy Officiant|DBL
+1 Valorous Stance|DBL
+1 Vampire Slayer|DBL
+1 Voice of the Blessed|DBL
+1 Welcoming Vampire|DBL
+1 Alchemist's Retrieval|DBL
+1 Cemetery Illuminator|DBL
+1 Chill of the Grave|DBL
+1 Cobbled Lancer|DBL
+1 Consuming Tide|DBL
+1 Cradle of Safety|DBL
+1 Cruel Witness|DBL
+1 Diver Skaab|DBL
+1 Dreadlight Monstrosity|DBL
+1 Dreamshackle Geist|DBL
+1 Fear of Death|DBL
+1 Geistlight Snare|DBL
+1 Geralf, Visionary Stitcher|DBL
+1 Hullbreaker Horror|DBL
+1 Inspired Idea|DBL
+1 Lunar Rejection|DBL
+1 Necroduality|DBL
+1 Overcharged Amalgam|DBL
+1 Patchwork Crawler|DBL
+1 Repository Skaab|DBL
+1 Scattered Thoughts|DBL
+1 Screaming Swarm|DBL
+1 Selhoff Entomber|DBL
+1 Serpentine Ambush|DBL
+1 Skywarp Skaab|DBL
+1 Steelclad Spirit|DBL
+1 Stitched Assistant|DBL
+1 Stormchaser Drake|DBL
+1 Syncopate|DBL
+1 Syphon Essence|DBL
+1 Thirst for Discovery|DBL
+1 Wanderlight Spirit|DBL
+1 Wash Away|DBL
+1 Whispering Wizard|DBL
+1 Winged Portent|DBL
+1 Witness the Future|DBL
+1 Wretched Throng|DBL
+1 Aim for the Head|DBL
+1 Archghoul of Thraben|DBL
+1 Bleed Dry|DBL
+1 Blood Fountain|DBL
+1 Bloodcrazed Socialite|DBL
+1 Bloodvial Purveyor|DBL
+1 Cemetery Desecrator|DBL
+1 Courier Bat|DBL
+1 Demonic Bargain|DBL
+1 Diregraf Scavenger|DBL
+1 Doomed Dissenter|DBL
+1 Dread Fugue|DBL
+1 Dreadfeast Demon|DBL
+1 Dying to Serve|DBL
+1 Edgar's Awakening|DBL
+1 Falkenrath Forebear|DBL
+1 Fell Stinger|DBL
+1 Gift of Fangs|DBL
+1 Gluttonous Guest|DBL
+1 Graf Reaver|DBL
+1 Grisly Ritual|DBL
+1 Groom's Finery|DBL
+1 Headless Rider|DBL
+1 Hero's Downfall|DBL
+1 Mindleech Ghoul|DBL
+1 Parasitic Grasp|DBL
+1 Path of Peril|DBL
+1 Persistent Specimen|DBL
+1 Pointed Discussion|DBL
+1 Rot-Tide Gargantua|DBL
+1 Skulking Killer|DBL
+1 Sorin the Mirthless|DBL
+1 Toxrill, the Corrosive|DBL
+1 Undead Butler|DBL
+1 Undying Malice|DBL
+1 Unhallowed Phalanx|DBL
+1 Vampire's Kiss|DBL
+1 Wedding Security|DBL
+1 Abrade|DBL
+1 Alchemist's Gambit|DBL
+1 Ancestral Anger|DBL
+1 Belligerent Guest|DBL
+1 Blood Hypnotist|DBL
+1 Blood Petal Celebrant|DBL
+1 Bloody Betrayal|DBL
+1 Cemetery Gatekeeper|DBL
+1 Chandra, Dressed to Kill|DBL
+1 Change of Fortune|DBL
+1 Creepy Puppeteer|DBL
+1 Curse of Hospitality|DBL
+1 Daybreak Combatants|DBL
+1 Dominating Vampire|DBL
+1 End the Festivities|DBL
+1 Falkenrath Celebrants|DBL
+1 Flame-Blessed Bolt|DBL
+1 Frenzied Devils|DBL
+1 Honeymoon Hearse|DBL
+1 Hungry Ridgewolf|DBL
+1 Into the Night|DBL
+1 Kessig Flamebreather|DBL
+1 Kessig Wolfrider|DBL
+1 Lacerate Flesh|DBL
+1 Lightning Wolf|DBL
+1 Magma Pummeler|DBL
+1 Manaform Hellkite|DBL
+1 Markov Retribution|DBL
+1 Olivia's Attendants|DBL
+1 Pyre Spawn|DBL
+1 Reckless Impulse|DBL
+1 Rending Flame|DBL
+1 Runebound Wolf|DBL
+1 Sanguine Statuette|DBL
+1 Stensia Uprising|DBL
+1 Sure Strike|DBL
+1 Vampires' Vengeance|DBL
+1 Voldaren Epicure|DBL
+1 Apprentice Sharpshooter|DBL
+1 Ascendant Packleader|DBL
+1 Bramble Armor|DBL|2
+1 Bramble Wurm|DBL
+1 Cartographer's Survey|DBL
+1 Cemetery Prowler|DBL
+1 Cloaked Cadet|DBL
+1 Crawling Infestation|DBL
+1 Crushing Canopy|DBL
+1 Cultivator Colossus|DBL
+1 Dawnhart Disciple|DBL
+1 Dig Up|DBL
+1 Flourishing Hunter|DBL
+1 Glorious Sunrise|DBL
+1 Hamlet Vanguard|DBL
+1 Hiveheart Shaman|DBL
+1 Howling Moon|DBL
+1 Laid to Rest|DBL
+1 Massive Might|DBL
+1 Moldgraf Millipede|DBL
+1 Mulch|DBL
+1 Nature's Embrace|DBL
+1 Packsong Pup|DBL
+1 Reclusive Taxidermist|DBL
+1 Retrieve|DBL
+1 Rural Recruit|DBL
+1 Sawblade Slinger|DBL
+1 Sheltering Boughs|DBL
+1 Snarling Wolf|DBL|2
+1 Spiked Ripsaw|DBL
+1 Splendid Reclamation|DBL
+1 Spore Crawler|DBL
+1 Sporeback Wolf|DBL
+1 Toxic Scorpion|DBL
+1 Witch's Web|DBL
+1 Wolf Strike|DBL
+1 Ancient Lumberknot|DBL
+1 Anje, Maid of Dishonor|DBL
+1 Bloodtithe Harvester|DBL
+1 Eruth, Tormented Prophet|DBL
+1 Grolnok, the Omnivore|DBL
+1 Halana and Alena, Partners|DBL
+1 Kaya, Geist Hunter|DBL
+1 Markov Purifier|DBL
+1 Markov Waltzer|DBL
+1 Odric, Blood-Cursed|DBL
+1 Old Rutstein|DBL
+1 Olivia, Crimson Bride|DBL
+1 Sigardian Paladin|DBL
+1 Skull Skaab|DBL
+1 Torens, Fist of the Angels|DBL
+1 Vilespawn Spider|DBL
+1 Wandering Mind|DBL
+1 Blood Servitor|DBL
+1 Boarded Window|DBL
+1 Ceremonial Knife|DBL
+1 Dollhouse of Horrors|DBL
+1 Honored Heirloom|DBL
+1 Investigator's Journal|DBL
+1 Lantern of the Lost|DBL
+1 Wedding Invitation|DBL
+1 Deathcap Glade|DBL
+1 Dreamroot Cascade|DBL
+1 Evolving Wilds|DBL|2
+1 Shattered Sanctum|DBL
+1 Stormcarved Coast|DBL
+1 Sundown Pass|DBL
+1 Voldaren Estate|DBL
+
+[midDFC]
+1 Ambitious Farmhand|DBL
+1 Beloved Beggar|DBL
+1 Bereaved Survivor|DBL
+1 Brutal Cathar|DBL
+1 Chaplain of Alms|DBL
+1 Enduring Angel|DBL
+1 Lunarch Veteran|DBL
+1 Mourning Patrol|DBL
+1 Baithook Angler|DBL
+1 Covetous Castaway|DBL
+1 Delver of Secrets|DBL
+1 Galedrifter|DBL
+1 Malevolent Hermit|DBL
+1 Mysterious Tome|DBL
+1 Overwhelmed Archivist|DBL
+1 Poppet Stitcher|DBL
+1 Suspicious Stowaway|DBL
+1 Baneblade Scoundrel|DBL
+1 Covert Cutpurse|DBL
+1 Curse of Leeches|DBL
+1 Ecstatic Awakener|DBL
+1 Graveyard Trespasser|DBL
+1 Heirloom Mirror|DBL
+1 Jerren, Corrupted Bishop|DBL
+1 Shady Traveler|DBL
+1 Vengeful Strangler|DBL
+1 Fangblade Brigand|DBL
+1 Flame Channeler|DBL
+1 Harvesttide Infiltrator|DBL
+1 Reckless Stormseeker|DBL
+1 Smoldering Egg|DBL
+1 Spellrune Painter|DBL
+1 Tavern Ruffian|DBL
+1 Village Watch|DBL
+1 Bird Admirer|DBL
+1 Burly Breaker|DBL
+1 Deathbonnet Sprout|DBL
+1 Hound Tamer|DBL
+1 Outland Liberator|DBL
+1 Tireless Hauler|DBL
+1 Tovolar's Huntmaster|DBL
+1 Arlinn, the Pack's Hope|DBL
+1 Dennick, Pious Apprentice|DBL
+1 Devoted Grafkeeper|DBL
+1 Kessig Naturalist|DBL
+1 Ludevic, Necrogenius|DBL
+1 Tovolar, Dire Overlord|DBL
+1 Mystic Skull|DBL
+1 Hostile Hostel|DBL
+
+[vowDFC]
+1 Distracting Geist|DBL
+1 Drogskol Infantry|DBL
+1 Faithbound Judge|DBL
+1 Katilda, Dawnhart Martyr|DBL
+1 Kindly Ancestor|DBL
+1 Panicked Bystander|DBL
+1 Radiant Grace|DBL
+1 Twinblade Geist|DBL
+1 Wedding Announcement|DBL
+1 Binding Geist|DBL
+1 Biolume Egg|DBL
+1 Gutter Skulker|DBL
+1 Jacob Hauken, Inspector|DBL
+1 Lantern Bearer|DBL
+1 Mirrorhall Mimic|DBL
+1 Mischievous Catgeist|DBL
+1 Soulcipher Board|DBL
+1 Bloodsworn Squire|DBL
+1 Catapult Fodder|DBL
+1 Concealing Curtains|DBL
+1 Desperate Farmer|DBL
+1 Henrika Domnathi|DBL
+1 Innocent Traveler|DBL
+1 Ragged Recluse|DBL
+1 Restless Bloodseeker|DBL
+1 Voldaren Bloodcaster|DBL
+1 Alluring Suitor|DBL
+1 Ballista Watcher|DBL
+1 Fearful Villager|DBL
+1 Ill-Tempered Loner|DBL
+1 Lambholt Raconteur|DBL
+1 Volatile Arsonist|DBL
+1 Voltaic Visionary|DBL
+1 Weary Prisoner|DBL
+1 Avabruck Caretaker|DBL
+1 Dormant Grove|DBL
+1 Hookhand Mariner|DBL
+1 Howlpack Piper|DBL
+1 Infestation Expert|DBL
+1 Oakshade Stalker|DBL
+1 Ulvenwald Oddity|DBL
+1 Weaver of Blossoms|DBL
+1 Wolfkin Outcast|DBL
+1 Brine Comber|DBL
+1 Child of the Pack|DBL
+1 Dorothea, Vengeful Victim|DBL
+1 Edgar, Charmed Groom|DBL
+1 Runo Stromkirk|DBL
+1 Foreboding Statue|DBL

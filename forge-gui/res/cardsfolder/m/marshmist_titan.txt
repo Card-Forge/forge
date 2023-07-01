@@ -1,0 +1,7 @@
+Name:Marshmist Titan
+ManaCost:6 B
+Types:Creature Giant
+PT:4/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is your devotion to black.
+SVar:X:Count$Devotion.Black
+Oracle:This spell costs {X} less to cast, where X is your devotion to black. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)

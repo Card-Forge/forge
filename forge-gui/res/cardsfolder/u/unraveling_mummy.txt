@@ -1,0 +1,8 @@
+Name:Unraveling Mummy
+ManaCost:1 W B
+Types:Creature Zombie
+PT:2/3
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Zombie.attacking | TgtPrompt$ Select target attacking Zombie | KW$ Lifelink | SpellDescription$ Target attacking Zombie gains lifelink until end of turn.
+A:AB$ Pump | Cost$ 1 B | ValidTgts$ Zombie.attacking | TgtPrompt$ Select target attacking Zombie | KW$ Deathtouch | SpellDescription$ Target attacking Zombie gains deathtouch until end of turn.
+DeckHints:Type$Zombie
+Oracle:{1}{W}: Target attacking Zombie gains lifelink until end of turn.\n{1}{B}: Target attacking Zombie gains deathtouch until end of turn.

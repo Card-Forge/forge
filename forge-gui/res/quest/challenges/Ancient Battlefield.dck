@@ -1,0 +1,36 @@
+[quest]
+id=14
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 random rares
+Credit Reward=250
+HumanExtras=Glasses of Urza|Blight Sickle
+AIExtras=Bad Moon|Wall of Brambles
+[metadata]
+Name=quest14
+Title=Ancient Battlefield
+Difficulty=hard
+Description=You visit an ancient battlefield at midnight. It is overgrown and dark. You trip on a root, utter a curse and wish that you could see.
+Icon=Ancient Battlefield.jpg
+Deck Type=constructed
+[main]
+4 Birds of Paradise
+1 Plague Wind
+1 Mox Emerald
+4 Phyrexian Arena
+6 Swamp|M12
+4 Damnation
+2 Garruk Wildspeaker
+3 Harmonize
+2 Buried Alive
+7 Forest|M12
+4 Bayou
+4 Howling Mine
+4 Ostracize
+3 Noble Hierarch
+2 Bloodghast
+4 Vengevine
+1 Mox Jet
+4 Essence Warden
+[sideboard]

@@ -1,0 +1,9 @@
+Name:Wall of Shards
+ManaCost:1 W
+Types:Snow Creature Wall
+PT:1/8
+K:Defender
+K:Flying
+K:Cumulative upkeep:GainLife<1/Player.Opponent>:An opponent gains 1 life.
+AI:RemoveDeck:Random
+Oracle:Defender, flying\nCumulative upkeep—An opponent gains 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

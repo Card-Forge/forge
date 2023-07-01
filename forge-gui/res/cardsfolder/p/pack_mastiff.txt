@@ -1,0 +1,6 @@
+Name:Pack Mastiff
+ManaCost:1 R
+Types:Creature Dog
+PT:2/2
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl+namedPack Mastiff | NumAtt$ +1 | SpellDescription$ Each creature you control named Pack Mastiff gets +1/+0 until end of turn.
+Oracle:{1}{R}: Each creature you control named Pack Mastiff gets +1/+0 until end of turn.

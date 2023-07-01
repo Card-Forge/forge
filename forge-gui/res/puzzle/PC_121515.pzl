@@ -1,0 +1,22 @@
+# TODO: Once Lava Burst is implemented, Blaze can be replaced with it for authenticity
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 121515 - Lava's Labors Lost
+URL:http://www.gatheringmagic.com/seanuy-121515-lavas-labors-lost/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Survive and win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=COMBAT_DECLARE_ATTACKERS
+HumanLife=4
+AILife=6
+humanhand=Vertigo; Sacred Boon; Blaze|Set:5ED
+humangraveyard=
+humanlibrary=Hematatite Talisman
+humanbattlefield=Mountain|Set:IA; Mountain|Set:IA|Tapped; Mountain|Set:IA|Tapped; Plains|Set:IA; Plains|Set:IA; Plains|Set:IA|Tapped; Snow-Covered Mountain|Set:IA; Snow-Covered Forest|Set:IA; Phyrexian War Beast; Bestial Fury|AttachedTo:420; Phyrexian War Beast|Tapped|Id:420; Orcish Bloodpainter; Armor of Faith|AttachedTo:422; Blinking Spirit|Id:422; Darien, King of Kjeldor; Hematite Talisman
+aibattlefield=Swamp|Set:IA; Swamp|Set:IA|Tapped; Swamp|Set:IA|Tapped; Forest|Set:IA; Forest|Set:IA; Forest|Set:IA|Tapped; Forest|Set:IA|Tapped; Snow-Covered Island|Set:IA; Fyndhorn Elves; Lim-Dul's Cohort; Phobian Phantasm|Attacking|Tapped; Surging Might|AttachedTo:424; Zombie Musher|Tapped|Attacking|Id:424; Deadly Insect|Tapped|Attacking; Surging Might|AttachedTo:426; Gorilla Berserkers|Tapped|Attacking|Id:426
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=

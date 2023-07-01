@@ -1,0 +1,7 @@
+Name:Char-Rumbler
+ManaCost:2 R R
+Types:Creature Elemental
+PT:-1/3
+K:Double Strike
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Double strike\n{R}: Char-Rumbler gets +1/+0 until end of turn.

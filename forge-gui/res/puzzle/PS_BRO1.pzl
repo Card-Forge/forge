@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - The Brothers' War #01
+URL:https://www.patreon.com/mtgpuzzles
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start in your upkeep while resolving The Temporal Anchor's Scry 2 trigger. Assume that, in your library, you have additional copies of each card under your control and in your hand. Both graveyards start empty. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p1
+activephase=CLEANUP
+activephaseadvance=UPKEEP
+p0life=20
+p0hand=Defenestrate;Carrion Locust;Dreadhound
+p0library=Haywire Mite;Bushwhack;Defenestrate;Forest;Swamp;Island;The Temporal Anchor;Rona, Sheoldred's Faithful;Hoarding Recluse;Fauna Shaman;Island;Swamp;Forest;Carrion Locust;Dreadhound
+p0battlefield=The Temporal Anchor;Rona, Sheoldred's Faithful;Hoarding Recluse;Fauna Shaman;Island;Island;Swamp;Swamp;Forest;Forest
+p1life=3
+p1battlefield=The Stasis Coffin;Glittering Stockpile|Counters:STASH=3;Patchwork Crawler;Patchwork Crawler;Cradle Clearcutter

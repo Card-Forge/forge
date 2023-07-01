@@ -1,0 +1,19 @@
+Name:Student of Elements
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ Always | IsPresent$ Card.Self+withFlying | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When CARDNAME has flying, flip it.
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
+AI:RemoveDeck:Random
+AlternateMode:Flip
+Oracle:When Student of Elements has flying, flip it.
+
+ALTERNATE
+
+Name:Tobita, Master of Winds
+ManaCost:1 U
+Colors:blue
+Types:Legendary Creature Human Wizard
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
+Oracle:Creatures you control have flying.

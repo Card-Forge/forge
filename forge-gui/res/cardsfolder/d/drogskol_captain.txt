@@ -1,0 +1,8 @@
+Name:Drogskol Captain
+ManaCost:1 W U
+Types:Creature Spirit Soldier
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Hexproof | Description$ Other Spirit creatures you control get +1/+1 and have hexproof.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther Spirit creatures you control get +1/+1 and have hexproof. (They can't be the targets of spells or abilities your opponents control.)

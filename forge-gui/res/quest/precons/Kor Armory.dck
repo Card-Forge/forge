@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kor Armory
+Description=If you want to survive, side with the Kor-- white-aligned nomads who use a variety of Equipment and spells with deadly results. All of your Kor will fight more effectively when your heavily armed Armament Master joins the fray.
+Deck Type=constructed
+Set=ZEN
+Image=kor_armory.jpg
+[main]
+2 Kabira Crossroads|ZEN
+16 Plains|ZEN
+1 Armament Master+|ZEN
+2 Kor Aeronaut|ZEN
+2 Kor Cartographer|ZEN
+1 Kor Duelist|ZEN
+2 Kor Hookmaster|ZEN
+2 Kor Sanctifiers|ZEN
+2 Kor Skyfisher|ZEN
+1 Serra Angel|M10
+1 Conqueror's Pledge|ZEN
+1 Divine Verdict|M10
+1 Explorer's Scope|ZEN
+1 Landbind Ritual|ZEN
+1 Narrow Escape|ZEN
+2 Pacifism|M10
+1 Spidersilk Net|ZEN
+1 Trusty Machete|ZEN
+1 Windborne Charge|ZEN
+[sideboard]

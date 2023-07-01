@@ -1,0 +1,7 @@
+Name:Tajuru Pathwarden
+ManaCost:4 G
+Types:Creature Elf Warrior Ally
+PT:5/4
+K:Vigilance
+K:Trample
+Oracle:Vigilance, trample

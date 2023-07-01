@@ -1,0 +1,7 @@
+Name:Goblin Bombardment
+ManaCost:1 R
+Types:Enchantment
+A:AB$ DealDamage | Cost$ Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:Sacrifice a creature: Goblin Bombardment deals 1 damage to any target.

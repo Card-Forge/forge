@@ -1,0 +1,14 @@
+Name:Hostile Negotiations
+ManaCost:3 B
+Types:Instant
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Exile the top three cards of your library in a face-down pile,
+SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | ExileFaceDown$ True | SubAbility$ YouChoose | StackDescription$ SpellDescription | SpellDescription$ then exile the next top three cards of your library in another face-down pile.
+SVar:YouChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | ChosenPile$ TurnFaceUp | SubAbility$ TheyChoose | KeepRemembered$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the cards in each pile, then turn a pile of your choice face up.
+SVar:TurnFaceUp:DB$ SetState | Defined$ Remembered | Mode$ TurnFace
+SVar:TheyChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | Chooser$ Opponent | ChosenPile$ ToHand | UnchosenPile$ ToGrave | SubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ An opponent chooses one of those piles. Put all cards in the chosen pile into your hand and the rest into your graveyard.
+SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:ToGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | SubAbility$ DBCleanup | SpellDescription$ You lose 3 life.
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+DeckHints:Ability$Graveyard
+Oracle:Exile the top three cards of your library in a face-down pile, then exile the next top three cards of your library in another face-down pile. Look at the cards in each pile, then turn a pile of your choice face up. An opponent chooses one of those piles. Put all cards in the chosen pile into your hand and the rest into your graveyard. You lose 3 life.

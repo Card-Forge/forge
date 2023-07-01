@@ -1,0 +1,10 @@
+Name:Devout Invocation
+ManaCost:6 W
+Types:Sorcery
+A:SP$ Tap | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBToken | SpellDescription$ Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way. | StackDescription$ SpellDescription
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Amount
+SVar:NeedsToPlay:Creature.YouCtrl+untapped
+SVar:PlayMain1:ALWAYS
+Oracle:Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way.

@@ -1,0 +1,8 @@
+Name:Epicure of Blood
+ManaCost:4 B
+Types:Creature Vampire
+PT:4/4
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, each opponent loses 1 life.

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Ruins of Alsoor
+Title=The Ruins of Alsoor
+Difficulty=easy
+Description="The bolts of our ballistae smashed into the monstrous thing, but our hopes died in our chests as its gears continued turning." -Sevti Mukul, The Fall of Alsoor
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+2 Barl's Cage|DRK
+2 Bone Flute|DRK
+3 Book of Rass|DRK
+4 Coal Golem|DRK
+4 Diabolic Machine|DRK
+4 Fellwar Stone|DRK
+5 Forest|LEB|3
+4 Fountain of Youth|DRK
+5 Island|LEB|3
+5 Mountain|LEB|1
+5 Plains|LEB|3
+4 Runesword|DRK
+4 Scarecrow|DRK
+5 Swamp|LEB|3
+4 Wand of Ith|DRK

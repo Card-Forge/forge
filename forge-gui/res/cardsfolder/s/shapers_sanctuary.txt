@@ -1,0 +1,6 @@
+Name:Shapers' Sanctuary
+ManaCost:G
+Types:Enchantment
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control becomes the target of a spell or ability an opponent controls, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+Oracle:Whenever a creature you control becomes the target of a spell or ability an opponent controls, you may draw a card.

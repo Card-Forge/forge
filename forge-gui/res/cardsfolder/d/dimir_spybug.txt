@@ -1,0 +1,11 @@
+Name:Dimir Spybug
+ManaCost:U B
+Types:Creature Insect
+PT:1/1
+K:Flying
+K:Menace
+T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Surveil
+DeckHas:Ability$Counters
+Oracle:Flying\nMenace (This creature can't be blocked except by two or more creatures.)\nWhenever you surveil, put a +1/+1 counter on Dimir Spybug.

@@ -1,0 +1,7 @@
+Name:Bereavement
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Green | TriggerZones$ Battlefield | Execute$ BereavementDiscard | TriggerDescription$ Whenever a green creature dies, its controller discards a card.
+SVar:BereavementDiscard:DB$ Discard | Defined$ TriggeredCardController | Mode$ TgtChoose | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever a green creature dies, its controller discards a card.

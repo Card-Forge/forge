@@ -1,0 +1,6 @@
+Name:Ronom Unicorn
+ManaCost:1 W
+Types:Creature Unicorn
+PT:2/2
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+Oracle:Sacrifice Ronom Unicorn: Destroy target enchantment.

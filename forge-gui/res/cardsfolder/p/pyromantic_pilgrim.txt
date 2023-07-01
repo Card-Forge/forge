@@ -1,0 +1,6 @@
+Name:Pyromantic Pilgrim
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:3/1
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

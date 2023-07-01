@@ -1,0 +1,12 @@
+Name:Emberwilde Caliph
+ManaCost:2 U R
+Types:Creature Djinn
+PT:4/4
+K:Flying
+K:Trample
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+AI:RemoveDeck:All
+Oracle:Flying, trample\nEmberwilde Caliph attacks each combat if able.\nWhenever Emberwilde Caliph deals damage, you lose that much life.

@@ -1,0 +1,8 @@
+Name:Bazaar Trader
+ManaCost:1 R
+Types:Creature Goblin
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Player | SubAbility$ DBGainControl | SpellDescription$ Target player gains control of target artifact, creature, or land you control. | StackDescription$ None
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact, creature, or land you control | NewController$ ParentTarget
+AI:RemoveDeck:All
+Oracle:{T}: Target player gains control of target artifact, creature, or land you control.

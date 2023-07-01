@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Wilderness: One-Eyed Pass
+Title=One-Eyed Pass
+Difficulty=easy
+Description=This Akroan outpost has been carefully chosen by the Stratians for a particular reason: the abundance of cyclopes. They funnel their enemies into the pass, using the cyclopes who aggressively defend their territory as a gauntlet of certain death.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+[Main]
+4 Boulderfall|THS
+4 Cyclops of Eternal Fury|JOU
+4 Cyclops of One-Eyed Pass|BNG
+4 Fearsome Temper|BNG
+8 Forest|THS|1
+4 Gluttonous Cyclops|JOU
+4 Ill-Tempered Cyclops|THS
+20 Mountain|THS|4
+4 Polis Crusher|THS
+4 Thunder Brute|BNG

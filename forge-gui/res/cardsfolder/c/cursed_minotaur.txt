@@ -1,0 +1,6 @@
+Name:Cursed Minotaur
+ManaCost:2 B
+Types:Creature Zombie Minotaur
+PT:3/2
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

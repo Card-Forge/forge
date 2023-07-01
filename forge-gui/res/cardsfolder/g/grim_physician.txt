@@ -1,0 +1,7 @@
+Name:Grim Physician
+ManaCost:B
+Types:Creature Zombie
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME dies, target creature an opponent controls gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+Oracle:When Grim Physician dies, target creature an opponent controls gets -1/-1 until end of turn.

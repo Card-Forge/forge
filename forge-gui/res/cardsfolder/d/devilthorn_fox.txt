@@ -1,0 +1,5 @@
+Name:Devilthorn Fox
+ManaCost:1 W
+Types:Creature Fox
+PT:3/1
+Oracle:

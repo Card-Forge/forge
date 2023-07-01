@@ -1,0 +1,6 @@
+Name:The Hive
+ManaCost:5
+Types:Artifact
+A:AB$ Token | Cost$ 5 T | TokenAmount$ 1 | TokenScript$ wasp | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Insect artifact creature token with flying named Wasp. (It can't be blocked except by creatures with flying or reach.)
+DeckHas:Ability$Token & Type$Insect & Keyword$Flying
+Oracle:{5}, {T}: Create a 1/1 colorless Insect artifact creature token with flying named Wasp. (It can't be blocked except by creatures with flying or reach.)

@@ -1,0 +1,6 @@
+Name:Blistering Barrier
+ManaCost:2 R
+Types:Creature Wall
+PT:5/2
+K:Defender
+Oracle:Defender (This creature can't attack.)

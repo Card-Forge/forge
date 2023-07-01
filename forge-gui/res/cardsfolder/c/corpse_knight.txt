@@ -1,0 +1,7 @@
+Name:Corpse Knight
+ManaCost:W B
+Types:Creature Zombie Knight
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever another creature enters the battlefield under your control, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:Whenever another creature enters the battlefield under your control, each opponent loses 1 life.

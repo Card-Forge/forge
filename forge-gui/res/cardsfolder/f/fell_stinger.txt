@@ -1,0 +1,11 @@
+Name:Fell Stinger
+ManaCost:2 B
+Types:Creature Zombie Scorpion
+PT:3/2
+K:Deathtouch
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME exploits a creature, target player draws two cards and loses 2 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
+DeckHas:Ability$Sacrifice
+Oracle:Deathtouch\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Fell Stinger exploits a creature, target player draws two cards and loses 2 life.

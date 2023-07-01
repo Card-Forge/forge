@@ -1,0 +1,7 @@
+Name:Willow Priestess
+ManaCost:2 G G
+Types:Creature Faerie Druid
+PT:2/2
+A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Faerie | ChangeNum$ 1 | SpellDescription$ You may put a Faerie permanent card from your hand onto the battlefield.
+A:AB$ Protection | Cost$ 2 G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | Gains$ black | SpellDescription$ Target green creature gains protection from black until end of turn.
+Oracle:{T}: You may put a Faerie permanent card from your hand onto the battlefield.\n{2}{G}: Target green creature gains protection from black until end of turn.

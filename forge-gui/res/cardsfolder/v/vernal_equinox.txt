@@ -1,0 +1,7 @@
+Name:Vernal Equinox
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ CastWithFlash | ValidCard$ Creature,Enchantment | ValidSA$ Spell | Caster$ Player | Description$ Any player may cast creature and enchantment spells as though they had flash.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Any player may cast creature and enchantment spells as though they had flash.

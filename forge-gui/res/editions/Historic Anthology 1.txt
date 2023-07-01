@@ -1,0 +1,28 @@
+[metadata]
+Code=HA1
+Date=2019-11-21
+Name=Historic Anthology 1
+Type=Online
+ScryfallCode=HA1
+
+[cards]
+1 R Serra Ascendant @Anthony Palumbo
+2 C Soul Warden @Randy Gallegos
+3 R Kinsbaile Cavalier @Wayne Reynolds
+4 C Treasure Hunt @Daren Bader
+5 C Distant Melody @Omar Rayyan
+6 R Cryptbreaker @Darek Zabrocki
+7 R Hypnotic Specter @Greg Staples
+8 R Phyrexian Arena @Carl Critchlow
+9 C Tendrils of Corruption @Vance Kovacs
+10 C Kiln Fiend @Adi Granov
+11 U Goblin Matron @Jesper Ejsing
+12 R Hidetsugu's Second Rite @Jeff Miracola
+13 C Elvish Visionary @D. Alexander Gregory
+14 R Fauna Shaman @Steve Prescott
+15 U Imperious Perfect @Scott M. Fischer
+16 U Burning-Tree Emissary @Izzy
+17 R Captain Sisay @Ray Lago
+18 U Ornithopter @Franz Vohwinkel
+19 C Mind Stone @Adam Rex
+20 R Darksteel Reactor @Kev Walker

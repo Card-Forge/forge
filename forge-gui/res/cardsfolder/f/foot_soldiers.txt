@@ -1,0 +1,5 @@
+Name:Foot Soldiers
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/4
+Oracle:

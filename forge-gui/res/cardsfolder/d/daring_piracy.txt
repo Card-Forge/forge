@@ -1,0 +1,7 @@
+Name:Daring Piracy
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your combat on your turn, create a 1/1 red Pirate creature token with menace and haste. Exile it at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_pirate_menace_haste | AtEOT$ Exile
+DeckHas:Ability$Token & Type$Pirate
+Oracle:At the beginning of your combat on your turn, create a 1/1 red Pirate creature token with menace and haste. Exile it at the beginning of the next end step.

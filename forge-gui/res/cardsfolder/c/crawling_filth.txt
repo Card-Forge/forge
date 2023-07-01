@@ -1,0 +1,9 @@
+Name:Crawling Filth
+ManaCost:5 B
+Types:Creature Spirit
+PT:2/2
+K:Fear
+K:Soulshift:5
+AI:RemoveDeck:Random
+DeckHints:Type$Spirit
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSoulshift 5 (When this creature dies, you may return target Spirit card with mana value 5 or less from your graveyard to your hand.)

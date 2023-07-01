@@ -1,0 +1,9 @@
+Name:Michiko Konda, Truth Seeker|Deck:Michiko Konda, Truth Seeker.dck|Variant:Commander|Avatar:Michiko Konda, Truth Seeker|Desc:
+Name:Nagao, Bound by Honor|Deck:Nagao, Bound by Honor.dck|Variant:Commander|Avatar:Nagao, Bound by Honor|Desc:
+Name:Oyobi, Who Split the Heavens|Deck:Oyobi, Who Split the Heavens.dck|Variant:Commander|Avatar:Oyobi, Who Split the Heavens|Desc:
+Name:Rune-Tail, Kitsune Ascendant|Deck:Rune-Tail, Kitsune Ascendant.dck|Variant:Commander|Avatar:Rune-Tail, Kitsune Ascendant|Desc:
+Name:Eight-and-a-Half-Tails|Deck:Eight-and-a-Half-Tails.dck|Variant:Vanguard|Avatar:Eight-and-a-Half-Tails Avatar|Desc:
+Name:Celestial Kirin|Deck:Celestial Kirin.dck|Variant:Commander|Avatar:Celestial Kirin|Desc:
+Name:Takeno, Samurai General|Deck:Takeno, Samurai General.dck|Variant:Commander|Avatar:Takeno, Samurai General|Desc:
+Name:Forbidden Orchard|Deck:Forbidden Orchard.dck|Variant:Planechase|Avatar:Forbidden Orchard|Desc:
+Name:Random Towabara|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

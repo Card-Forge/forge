@@ -1,0 +1,7 @@
+Name:Hewed Stone Retainers
+ManaCost:3
+Types:Artifact Creature Golem
+PT:4/4
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast this spell only if you've cast another spell this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:Cast this spell only if you've cast another spell this turn.

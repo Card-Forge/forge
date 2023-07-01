@@ -1,0 +1,8 @@
+Name:Ravenous Leucrocota
+ManaCost:3 G
+Types:Creature Beast
+PT:2/4
+K:Vigilance
+K:Monstrosity:3:6 G
+DeckHas:Ability$Counters
+Oracle:Vigilance\n{6}{G}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)

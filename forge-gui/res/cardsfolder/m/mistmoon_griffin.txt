@@ -1,0 +1,10 @@
+Name:Mistmoon Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileMe | TriggerDescription$ When CARDNAME dies, exile CARDNAME, then return the top creature card of your graveyard to the battlefield.
+SVar:TrigExileMe:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBReturnCreature
+SVar:DBReturnCreature:DB$ ChangeZoneAll | ChangeType$ Creature.YouOwn+TopGraveyardCreature | Origin$ Graveyard | Destination$ Battlefield
+SVar:NeedsOrderedGraveyard:TRUE
+Oracle:Flying\nWhen Mistmoon Griffin dies, exile Mistmoon Griffin, then return the top creature card of your graveyard to the battlefield.

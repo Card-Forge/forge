@@ -1,0 +1,8 @@
+Name:Touch of Darkness
+ManaCost:B
+Types:Instant
+A:SP$ Animate | Cost$ B | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Black | OverwriteColors$ True | SpellDescription$ One or more target creatures become black until end of turn.
+SVar:MaxTgts:Count$Valid Creature
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:One or more target creatures become black until end of turn.

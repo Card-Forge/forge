@@ -1,0 +1,9 @@
+Name:Bounteous Kirin
+ManaCost:5 G G
+Types:Legendary Creature Kirin Spirit
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's mana value.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's mana value.

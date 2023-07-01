@@ -1,0 +1,6 @@
+Name:Simic Guildgate
+ManaCost:no cost
+Types:Land Gate
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {U} or {G}.
+Oracle:Simic Guildgate enters the battlefield tapped.\n{T}: Add {G} or {U}.

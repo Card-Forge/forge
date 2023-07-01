@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: Buleusi Bay
+Title=Buleusi Bay
+Difficulty=easy
+Description="Wear the falcon's feathers in your hair- be fast as the falcon, bright as the Sun." -"Rise on Wings," Zhalfirin song
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bad River|MIR
+4 Bay Falcon|MIR
+4 Benthic Djinn|MIR
+4 Binding Agony|MIR
+4 Cloud Elemental|VIS
+4 Desertion|VIS
+2 Dream Tides|VIS
+14 Island|MIR|2
+4 Man-o'-War|VIS
+2 Sealed Fate|MIR
+6 Swamp|MIR|2
+4 Waterspout Djinn|VIS
+4 Wave Elemental|MIR

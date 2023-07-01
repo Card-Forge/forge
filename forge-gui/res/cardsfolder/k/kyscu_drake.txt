@@ -1,0 +1,10 @@
+Name:Kyscu Drake
+ManaCost:3 G
+Types:Creature Drake
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ G | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn. Activate only once each turn.
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> Sac<1/Creature.namedSpitting Drake/creature named Spitting Drake> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedViashivan Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Viashivan Dragon, put that card onto the battlefield, then shuffle.
+DeckNeeds:Name$Spitting Drake|Viashivan Dragon
+DeckHints:Color$Red
+Oracle:Flying\n{G}: Kyscu Drake gets +0/+1 until end of turn. Activate only once each turn.\nSacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon, put that card onto the battlefield, then shuffle.

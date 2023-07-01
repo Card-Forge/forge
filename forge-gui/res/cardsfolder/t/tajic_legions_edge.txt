@@ -1,0 +1,10 @@
+Name:Tajic, Legion's Edge
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:Haste
+K:Mentor
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.Other+YouCtrl | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt to other creatures you control.
+A:AB$ Pump | Cost$ R W | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+DeckHas:Ability$Counters
+Oracle:Haste\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nPrevent all noncombat damage that would be dealt to other creatures you control.\n{R}{W}: Tajic, Legion's Edge gains first strike until end of turn.

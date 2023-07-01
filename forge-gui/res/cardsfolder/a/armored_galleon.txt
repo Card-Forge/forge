@@ -1,0 +1,6 @@
+Name:Armored Galleon
+ManaCost:4 U
+Types:Creature Human Pirate
+PT:5/4
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+Oracle:Armored Galleon can't attack unless defending player controls an Island.

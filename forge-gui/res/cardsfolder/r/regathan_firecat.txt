@@ -1,0 +1,5 @@
+Name:Regathan Firecat
+ManaCost:2 R
+Types:Creature Elemental Cat
+PT:4/1
+Oracle:

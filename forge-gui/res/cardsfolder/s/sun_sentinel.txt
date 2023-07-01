@@ -1,0 +1,6 @@
+Name:Sun Sentinel
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

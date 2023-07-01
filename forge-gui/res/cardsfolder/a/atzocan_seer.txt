@@ -1,0 +1,8 @@
+Name:Atzocan Seer
+ManaCost:1 G W
+Types:Creature Human Druid
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | TgtPrompt$ Choose target Dinosaur card in your graveyard | ValidTgts$ Dinosaur.YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Dinosaur card from your graveyard to your hand.
+DeckHints:Type$Dinosaur
+Oracle:{T}: Add one mana of any color.\nSacrifice Atzocan Seer: Return target Dinosaur card from your graveyard to your hand.

@@ -1,0 +1,8 @@
+Name:Fire Sprites
+ManaCost:1 G
+Types:Creature Faerie
+PT:1/1
+K:Flying
+A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add {R}.
+AI:RemoveDeck:All
+Oracle:Flying\n{G}, {T}: Add {R}.

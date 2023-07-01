@@ -1,0 +1,8 @@
+Name:Noose Constrictor
+ManaCost:1 G
+Types:Creature Snake
+PT:2/2
+K:Reach
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+DeckHints:Ability$Discard
+Oracle:Reach\nDiscard a card: Noose Constrictor gets +1/+1 until end of turn.

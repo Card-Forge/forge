@@ -1,0 +1,13 @@
+Name:Sudden Substitution
+ManaCost:2 U U
+Types:Instant
+K:Split second
+A:SP$ Pump | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtZone$ Stack | ImprintCards$ TargetedSource | SubAbility$ DBRemember | StackDescription$ SpellDescription | SpellDescription$ Exchange control of target noncreature spell and target creature. Then the spell's controller may choose new targets for it.
+SVar:DBRemember:DB$ Pump | ValidTgts$ Creature | RememberObjects$ ThisTargetedCard | SubAbility$ DBRememberPlayer
+SVar:DBRememberPlayer:DB$ Pump | RememberObjects$ RememberedController | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | Defined$ Remembered.Creature | NewController$ ImprintedController | ConditionDefined$ Imprinted | ConditionPresent$ Card | StackDescription$ None | SubAbility$ DBControlSpell
+SVar:DBControlSpell:DB$ ControlSpell | Defined$ Targeted | NewController$ Player.IsRemembered | Mode$ Gain | ConditionDefined$ Remembered | ConditionPresent$ Card | StackDescription$ None | SubAbility$ DBChooseTargets
+SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ Targeted | Chooser$ Player.IsRemembered | Optional$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AI:RemoveDeck:All
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nExchange control of target noncreature spell and target creature. Then the spell's controller may choose new targets for it.

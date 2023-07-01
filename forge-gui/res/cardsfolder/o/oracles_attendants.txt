@@ -1,0 +1,12 @@
+Name:Oracle's Attendants
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:1/5
+A:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to CARDNAME instead.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessDamage | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to EFFECTSOURCE instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+AI:RemoveDeck:All
+Oracle:{T}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.

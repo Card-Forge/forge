@@ -1,0 +1,9 @@
+Name:Harbinger of Night
+ManaCost:2 B B
+Types:Creature Spirit
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on each creature.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+Oracle:At the beginning of your upkeep, put a -1/-1 counter on each creature.

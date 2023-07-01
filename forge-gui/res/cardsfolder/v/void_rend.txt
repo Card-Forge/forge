@@ -1,0 +1,6 @@
+Name:Void Rend
+ManaCost:W U B
+Types:Instant
+K:This spell can't be countered.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+Oracle:This spell can't be countered.\nDestroy target nonland permanent.

@@ -1,0 +1,7 @@
+Name:Ursine Champion
+ManaCost:1 G
+Types:Creature Human Berserker
+PT:2/2
+A:AB$ Pump | Cost$ 5 G | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBAnimate | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +3/+3 and becomes a Bear Berserker until end of turn. Activate only once each turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Bear,Beserker | RemoveCreatureTypes$ True
+Oracle:{5}{G}: Ursine Champion gets +3/+3 and becomes a Bear Berserker until end of turn. Activate only once each turn.

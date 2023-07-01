@@ -1,0 +1,6 @@
+Name:Halberdier
+ManaCost:3 R
+Types:Creature Human Barbarian
+PT:3/1
+K:First Strike
+Oracle:First strike

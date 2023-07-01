@@ -1,0 +1,6 @@
+Name:Mikokoro, Center of the Sea
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player draws a card.
+Oracle:{T}: Add {C}.\n{2}, {T}: Each player draws a card.

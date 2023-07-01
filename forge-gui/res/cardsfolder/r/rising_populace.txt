@@ -1,0 +1,8 @@
+Name:Rising Populace
+ManaCost:2 W
+Types:Creature Human
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature or planeswalker you control dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever another creature or planeswalker you control dies, put a +1/+1 counter on Rising Populace.

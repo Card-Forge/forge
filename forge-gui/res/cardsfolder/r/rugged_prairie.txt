@@ -1,0 +1,7 @@
+Name:Rugged Prairie
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ RW T | Produced$ Combo R W | Amount$ 2 | SpellDescription$ Add {R}{R}, {R}{W}, or {W}{W}.
+AI:RemoveDeck:All
+Oracle:{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}.

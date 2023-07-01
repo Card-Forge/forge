@@ -1,0 +1,9 @@
+Name:Grasping Thrull
+ManaCost:3 W B
+Types:Creature Thrull
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to each opponent and you gain 2 life.
+SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Flying\nWhen Grasping Thrull enters the battlefield, it deals 2 damage to each opponent and you gain 2 life.

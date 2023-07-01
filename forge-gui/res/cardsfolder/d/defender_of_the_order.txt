@@ -1,0 +1,8 @@
+Name:Defender of the Order
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:2/4
+K:Morph:W W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, creatures you control get +0/+2 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2
+Oracle:Morph {W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Defender of the Order is turned face up, creatures you control get +0/+2 until end of turn.

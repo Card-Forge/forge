@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Take to the Sky
+Description=High in the air you have a unique view of the battlefield. Your army flies about the conflict, ready to strike your opponents as they scramble to take cover from your forces in the sky.
+Deck Type=constructed
+Set=ORI
+Image=take_to_the_sky.jpg
+[Main]
+1 Alhammarret, High Arbiter+|ORI
+1 Aven Battle Priest|ORI
+1 Celestial Flare|ORI
+2 Charging Griffin|ORI
+2 Claustrophobia|ORI
+1 Evolving Wilds|ORI
+3 Faerie Miscreant|ORI
+2 Healing Hands|ORI
+2 Hydrolash|ORI
+4 Island|ORI|1
+4 Island|ORI|2
+3 Island|ORI|3
+3 Island|ORI|4
+1 Murder Investigation|ORI
+1 Negate|ORI
+2 Nivix Barrier|ORI
+3 Plains|ORI|1
+3 Plains|ORI|2
+2 Plains|ORI|3
+2 Plains|ORI|4
+2 Sigiled Starfish|ORI
+1 Soulblade Djinn|ORI
+1 Stratus Walk|ORI
+2 Suppression Bonds|ORI
+2 Thunderclap Wyvern|ORI
+2 Totem-Guide Hartebeest|ORI
+2 Tower Geist|ORI
+1 Turn to Frog|ORI
+2 Watercourser|ORI
+2 Yoked Ox|ORI

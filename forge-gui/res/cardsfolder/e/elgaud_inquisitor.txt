@@ -1,0 +1,10 @@
+Name:Elgaud Inquisitor
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:SacMe:1
+DeckHas:Ability$Token|LifeGain
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen Elgaud Inquisitor dies, create a 1/1 white Spirit creature token with flying.

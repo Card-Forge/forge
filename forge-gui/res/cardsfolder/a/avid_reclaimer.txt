@@ -1,0 +1,7 @@
+Name:Avid Reclaimer
+ManaCost:2 G
+Types:Creature Human Druid
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SubAbility$ DBGainLife | SpellDescription$ Add {G} or {U}. If you control a Nissa planeswalker, you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | ConditionPresent$ Planeswalker.Nissa+YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 2
+Oracle:{T}: Add {G} or {U}. If you control a Nissa planeswalker, you gain 2 life.

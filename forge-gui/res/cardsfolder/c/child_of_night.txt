@@ -1,0 +1,6 @@
+Name:Child of Night
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/1
+K:Lifelink
+Oracle:Lifelink

@@ -1,0 +1,6 @@
+Name:Tajuru Preserver
+ManaCost:1 G
+Types:Creature Elf Shaman
+PT:2/1
+S:Mode$ CantSacrifice | ValidCard$ Card.YouCtrl | ValidCause$ SpellAbility.OppCtrl | ForCost$ False | Description$ Spells and abilities your opponents control can't cause you to sacrifice permanents.
+Oracle:Spells and abilities your opponents control can't cause you to sacrifice permanents.

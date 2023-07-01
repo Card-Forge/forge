@@ -1,0 +1,8 @@
+Name:Nearheath Chaplain
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:3/1
+K:Lifelink
+A:AB$ Token | Cost$ 2 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:Lifelink\n{2}{W}, Exile Nearheath Chaplain from your graveyard: Create two 1/1 white Spirit creature tokens with flying. Activate only as a sorcery.

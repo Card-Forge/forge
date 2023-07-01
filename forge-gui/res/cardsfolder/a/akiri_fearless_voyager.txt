@@ -1,0 +1,15 @@
+Name:Akiri, Fearless Voyager
+ManaCost:1 R W
+Types:Legendary Creature Kor Warrior
+PT:3/3
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl+equipped | AttackedTarget$ Player | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player with one or more equipped creatures, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+A:AB$ ChooseCard | Cost$ W | Defined$ You | Choices$ Creature.YouCtrl+equipped | ChoiceTitle$ Choose an equipped creature you control | RememberChosen$ True | SubAbility$ DBChooseEquip | StackDescription$ SpellDescription | SpellDescription$ You may unattach an Equipment from a creature you control. If you do, tap that creature and it gains indestructible until end of turn.
+SVar:DBChooseEquip:DB$ ChooseCard | Defined$ You | Choices$ Equipment.AttachedTo Creature.IsRemembered | ChoiceTitle$ You may choose an Equipment to unattach from that creature | SubAbility$ DBUnattach
+SVar:DBUnattach:DB$ Unattach | Defined$ ChosenCard | SubAbility$ DBTap | StackDescription$ None
+SVar:DBTap:DB$ Tap | Defined$ Remembered | ConditionDefined$ ChosenCard | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBPump | StackDescription$ None
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Indestructible | ConditionDefined$ ChosenCard | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+AI:RemoveDeck:Random
+DeckNeeds:Type$Equipment
+Oracle:Whenever you attack a player with one or more equipped creatures, draw a card.\n{W}: You may unattach an Equipment from a creature you control. If you do, tap that creature and it gains indestructible until end of turn.

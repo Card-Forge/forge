@@ -1,0 +1,10 @@
+Name:Pyromancer's Swath
+ManaCost:2 R
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus2 | Description$ If an instant or sorcery source you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.2
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each end step, discard your hand.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand
+AI:RemoveDeck:Random
+Oracle:If an instant or sorcery source you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead.\nAt the beginning of each end step, discard your hand.

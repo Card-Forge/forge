@@ -1,0 +1,10 @@
+Name:Core Prowler
+ManaCost:4
+Types:Artifact Creature Phyrexian Horror
+PT:2/2
+K:Infect
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Core Prowler dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

@@ -1,0 +1,25 @@
+[quest]
+id=Deep
+OpponentName=Denizens of the Deep
+AILife=20
+Repeat=true
+Wins=40
+Card Reward=booster pack POR;booster pack PO2;booster pack PTK
+Ticket Reward=true
+Credit Reward=300
+AIExtras=Swamp|Swamp|Island|Island
+HumanExtras=Plains|Island
+[metadata]
+Title=Denizens of the Deep
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Something is lurking below!
+Deck Type=constructed
+Name=Deep
+[Main]
+6 Dakmor Lancer|S99
+12 Denizen of the Deep|PO2
+6 Predatory Nightstalker|PO2
+6 Wei Assassins|PTK
+9 Swamp|PO2
+9 Island|PO2

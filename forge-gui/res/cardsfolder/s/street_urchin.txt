@@ -1,0 +1,10 @@
+Name:Street Urchin
+ManaCost:1 R
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddAbility$ DealDamage | Description$ Commander creatures you own have "{1}, Sacrifice another creature or an artifact: This creature deals 1 damage to any target."
+SVar:DealDamage:AB$ DealDamage | Cost$ 1 Sac<1/Creature.Other;Artifact/another creature or an artifact> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to any target.
+SVar:AIPreference:SacCost$Creature.token,Artifact.token,Creature.cmcLE1,Artifact.cmcEQ1
+AI:RemoveDeck:NonCommander
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Commander creatures you own have "{1}, Sacrifice another creature or an artifact: This creature deals 1 damage to any target."

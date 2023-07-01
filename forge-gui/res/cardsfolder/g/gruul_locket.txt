@@ -1,0 +1,8 @@
+Name:Gruul Locket
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+AI:RemoveDeck:Random
+DeckNeeds:Color$Red|Green
+A:AB$ Draw | Cost$ RG RG RG RG T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{T}: Add {R} or {G}.\n{R/G}{R/G}{R/G}{R/G}, {T}, Sacrifice Gruul Locket: Draw two cards.

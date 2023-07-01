@@ -1,0 +1,6 @@
+Name:Frogmite
+ManaCost:4
+Types:Artifact Creature Frog
+PT:2/2
+K:Affinity:Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)

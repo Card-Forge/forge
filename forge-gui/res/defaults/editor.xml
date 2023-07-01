@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout serial="2018090601">
+	<cell x="0.77443" y="0.37698" w="0.22557" h="0.62302">
+		<doc>CARD_PICTURE</doc>
+	</cell>
+	<cell x="0.38722" y="0.0" w="0.38722" h="1.0">
+		<doc>EDITOR_CURRENTDECK</doc>
+		<doc>EDITOR_STATISTICS</doc>
+		<doc>EDITOR_PROBABILITIES</doc>
+	</cell>
+	<cell x="0.77443" y="0.0" w="0.22557" h="0.37698">
+		<doc>CARD_DETAIL</doc>
+	</cell>
+	<cell x="0.0" y="0.0" w="0.38722" h="1.0">
+		<doc>EDITOR_CATALOG</doc>
+		<doc>EDITOR_ALLDECKS</doc>
+		<doc>EDITOR_COMMANDER</doc>
+		<doc>EDITOR_OATHBREAKER</doc>
+		<doc>EDITOR_BRAWL</doc>
+		<doc>EDITOR_TINY_LEADERS</doc>
+		<doc>EDITOR_DECKGEN</doc>
+	</cell>
+</layout>

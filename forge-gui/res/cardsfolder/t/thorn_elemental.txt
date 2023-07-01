@@ -1,0 +1,6 @@
+Name:Thorn Elemental
+ManaCost:5 G G
+Types:Creature Elemental
+PT:7/7
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have CARDNAME assign its combat damage as though it weren't blocked.
+Oracle:You may have Thorn Elemental assign its combat damage as though it weren't blocked.

@@ -1,0 +1,7 @@
+Name:Ethereal Champion
+ManaCost:2 W W W
+Types:Creature Avatar
+PT:3/4
+A:AB$ PreventDamage | Cost$ PayLife<1> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
+AI:RemoveDeck:All
+Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.

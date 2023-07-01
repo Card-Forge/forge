@@ -1,0 +1,9 @@
+Name:Higure, the Still Wind|Deck:Higure, the Still Wind.dck|Variant:Commander|Avatar:Higure, the Still Wind|Desc:
+Name:Azami, Lady of Scrolls|Deck:Azami, Lady of Scrolls.dck|Variant:Commander|Avatar:Azami, Lady of Scrolls|Desc:
+Name:Ninjas of Kamigawa|Deck:Ninjas of Kamigawa.dck|Variant:Planechase|Avatar:Silent-Blade Oni|Desc:
+Name:Keiga, the Tide Star|Deck:Keiga, the Tide Star.dck|Variant:Commander|Avatar:Keiga, the Tide Star|Desc:
+Name:Cloudhoof Kirin|Deck:Cloudhoof Kirin.dck|Variant:Commander|Avatar:Cloudhoof Kirin|Desc:
+Name:Meloku the Clouded Mirror|Deck:Meloku the Clouded Mirror.dck|Variant:Commander|Avatar:Meloku the Clouded Mirror|Desc:
+Name:Chisei, Heart of Oceans|Deck:Chisei, Heart of Oceans.dck|Variant:Commander|Avatar:Chisei, Heart of Oceans|Desc:
+Name:Oni of Wild Places|Deck:Oni of Wild Places.dck|Variant:Vanguard|Avatar:Oni of Wild Places Avatar|Desc:
+Name:Random Minamo Academy|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

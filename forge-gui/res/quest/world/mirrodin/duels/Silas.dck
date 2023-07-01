@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Silas
+Title=Silas
+Difficulty=easy
+Description="Phyrexian mana" may be the most diabolical advance the Phyrexians have ever created, and this deck is filled with it.
+Icon=Silas.jpg
+Deck Type=constructed
+[Main]
+2 Act of Aggression|NPH
+1 Apostle's Blessing|NPH
+2 Blinding Souleater|NPH
+4 Cathedral Membrane|NPH
+2 Golem's Heart|SOM
+2 Gut Shot|NPH
+2 Immolating Souleater|NPH
+2 Kemba's Skyguard|SOM
+1 Lumengrid Gargoyle|MBS
+2 Marrow Shards|NPH
+1 Moltensteel Dragon|NPH
+11 Mountain|SOM|1
+1 Ogre Resister|MBS
+1 Phyrexian Rebirth|MBS
+13 Plains|SOM|1
+2 Porcelain Legionnaire|NPH
+1 Pristine Talisman|NPH
+4 Rage Extractor|NPH
+1 Shattered Angel|NPH
+3 Slash Panther|NPH
+2 Whitesun's Passage|SOM
+[sideboard]

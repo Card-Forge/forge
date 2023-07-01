@@ -1,0 +1,7 @@
+Name:Soulmender
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ GainLife | Cost$ T | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+DeckHas:Ability$LifeGain
+Oracle:{T}: You gain 1 life.

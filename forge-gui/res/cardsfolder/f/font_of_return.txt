@@ -1,0 +1,5 @@
+Name:Font of Return
+ManaCost:1 B
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 3 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to three target creature cards from your graveyard to your hand.
+Oracle:{3}{B}, Sacrifice Font of Return: Return up to three target creature cards from your graveyard to your hand.

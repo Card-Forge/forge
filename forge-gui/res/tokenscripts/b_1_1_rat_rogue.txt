@@ -1,0 +1,6 @@
+Name:Rat Rogue Token
+ManaCost:no cost
+Types:Creature Rat Rogue
+Colors:black
+PT:1/1
+Oracle:

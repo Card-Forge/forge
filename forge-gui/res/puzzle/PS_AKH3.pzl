@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #03
+URL:https://i.redd.it/93lkzs6y53yy.png
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=20
+AILife=4
+humanhand=Commit // Memory;Quarry Hauler;Splendid Agony;Mockery of Nature
+humanbattlefield=Fetid Pools;Fetid Pools;Forest;Forest;Kiora, Master of the Depths|Counters:LOYALTY=7;Festering Mummy;Hapatra, Vizier of Poisons;Weaver of Currents
+humanlibrary=Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest
+aibattlefield=Metalwork Colossus;Metalwork Colossus

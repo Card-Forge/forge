@@ -1,0 +1,9 @@
+Name:Serpent's Soul-Jar
+ManaCost:2 B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elf.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever an Elf you control dies, exile it.
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+A:AB$ Effect | Cost$ T PayLife<2> | StaticAbilities$ MayCast | SpellDescription$ Until end of turn, you may cast a creature spell from among cards exiled with CARDNAME.
+SVar:MayCast:Mode$ Continuous | Affected$ Creature.ExiledWithEffectSource+nonLand | MayPlay$ True | AffectedZone$ Exile | MayPlayLimit$ 1 | Description$ Until end of turn, you may cast a creature spell from among cards exiled with CARDNAME.
+DeckNeeds:Type$Elf
+Oracle:Whenever an Elf you control dies, exile it.\n{T}, Pay 2 life: Until end of turn, you may cast a creature spell from among cards exiled with Serpent's Soul-Jar.

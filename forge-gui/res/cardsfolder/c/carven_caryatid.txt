@@ -1,0 +1,8 @@
+Name:Carven Caryatid
+ManaCost:1 G G
+Types:Creature Spirit
+PT:2/5
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Defender (This creature can't attack.)\nWhen Carven Caryatid enters the battlefield, draw a card.

@@ -1,0 +1,6 @@
+Name:Urborg Elf
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Combo B G U | SpellDescription$ Add {B}, {G}, or {U}.
+Oracle:{T}: Add {B}, {G}, or {U}.

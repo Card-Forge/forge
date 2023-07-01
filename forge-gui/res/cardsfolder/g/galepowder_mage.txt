@@ -1,0 +1,12 @@
+Name:Galepowder Mage
+ManaCost:3 W
+Types:Creature Kithkin Wizard
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other | Mandatory$ True | TgtPrompt$ Select another target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled creature to the battlefield. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Flying\nWhenever Galepowder Mage attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.

@@ -1,0 +1,7 @@
+Name:Fling
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+SVar:X:Sacrificed$CardPower
+AI:RemoveDeck:Random
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFling deals damage equal to the sacrificed creature's power to any target.

@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Garruk
+OpponentName=Garruk, Cursed Huntsman
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Castle Garenbrig|Castle Locthwain|Revenge of Ravens
+HumanExtras=
+[metadata]
+Title=Garruk, Cursed Huntsman
+Difficulty=hard
+Description=Garruk starts with two lands and a Revenge of Ravens.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Garruk, Cursed Huntsman
+[Main]
+15 Forest|ELD|2
+30 Garruk, Cursed Huntsman|ELD|2
+15 Swamp|ELD|4

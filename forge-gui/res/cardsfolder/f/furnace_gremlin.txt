@@ -1,0 +1,10 @@
+Name:Furnace Gremlin
+ManaCost:1 R
+Types:Creature Phyrexian Gremlin
+PT:1/2
+A:AB$ Pump | Cost$ 1 R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME dies, incubate X, where X is its power. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters|Token & Type$Incubator|Artifact
+Oracle:{1}{R}: Furnace Gremlin gets +1/+0 until end of turn.\nWhen Furnace Gremlin dies, incubate X, where X is its power. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

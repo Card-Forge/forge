@@ -1,0 +1,28 @@
+[metadata]
+Code=EA1
+Date=2022-07-28
+Name=Explorer Anthology 1
+Type=Online
+ScryfallCode=EA1
+
+[cards]
+1 U Favored Hoplite @Winona Nelson
+2 R Rally the Ancestors @Nils Hamm
+3 U Ensoul Artifact @Jasper Sandner
+4 R Mausoleum Wanderer @Kieran Yanner
+5 M Kalitas, Traitor of Ghet @Todd Lockwood
+6 C Shadowborn Apostle @Lucas Graciano
+7 R Tainted Remedy @Izzy
+8 R Alesha, Who Smiles at Death @Anastasia Ovchinnikova
+9 U Searing Blood @Daniel Ljunggren
+10 C Temur Battle Rage @Jaime Jones
+11 C Titan's Strength @Karl Kopinski
+12 U Back to Nature @Howard Lyon
+13 C Elvish Mystic @Wesley Burt
+14 R Tireless Tracker @Eric Deschamps
+15 U Battlewise Hoplite @Willian Murai
+16 R Siege Rhino @Volkan Baǵa
+17 R Slaughter Games @Steve Prescott
+18 R Supreme Verdict @Sam Burley
+19 R Hangarback Walker @Daarken
+20 U Darksteel Citadel @John Avon

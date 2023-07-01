@@ -1,0 +1,8 @@
+Name:Benevolent Unicorn
+ManaCost:1 W
+Types:Creature Unicorn
+PT:1/2
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarget$ Permanent,Player | ReplaceWith$ DmgMinus1 | Description$ If a spell would deal damage to a permanent or player, it deals that much damage minus 1 to that permanent or player instead.
+SVar:DmgMinus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Minus.1
+Oracle:If a spell would deal damage to a permanent or player, it deals that much damage minus 1 to that permanent or player instead.
