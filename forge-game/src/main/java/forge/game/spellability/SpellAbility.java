@@ -201,6 +201,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.lastStateGraveyard = new CardCollection(lastStateGraveyard);
     }
 
+    public void clearLastState() {
+        lastStateBattlefield = null;
+        lastStateGraveyard = null;
+    }
+
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
     }
