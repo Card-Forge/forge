@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -342,6 +343,7 @@ public class GameHUD extends Stage {
         }
         //unequip and reequip abilities
         updateAbility();
+        restorePlayerCollision();
         if (openMapActor != null) {
             String val = "[%80]" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
             for (AdventureQuestData adq: Current.player().getQuests()) {
@@ -673,8 +675,10 @@ public class GameHUD extends Stage {
     }
     public void playerIdle() {
         if (MapStage.getInstance().isInMap()) {
+            MapStage.getInstance().startPause(1f);
             MapStage.getInstance().getPlayerSprite().stop();
         } else {
+            WorldStage.getInstance().startPause(1f);
             WorldStage.getInstance().getPlayerSprite().stop();
         }
     }
@@ -781,6 +785,37 @@ public class GameHUD extends Stage {
     void changeBGM(MusicPlaylist playlist) {
         if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
             SoundSystem.instance.setBackgroundMusic(playlist);
+        }
+    }
+    void restorePlayerCollision() {
+        if (MapStage.getInstance().isInMap() && MapStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
+            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
+                @Override
+                public boolean act(float v) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            MapStage.getInstance().getPlayerSprite().resetCollisionHeight();
+                        }
+                    }, 0.5f);
+                    return true;
+                }
+            });
+            MapStage.getInstance().getPlayerSprite().addAction(flicker);
+        } else if (WorldStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
+            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
+                @Override
+                public boolean act(float v) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            WorldStage.getInstance().getPlayerSprite().resetCollisionHeight();
+                        }
+                    }, 0.5f);
+                    return true;
+                }
+            });
+            WorldStage.getInstance().getPlayerSprite().addAction(flicker);
         }
     }
 }

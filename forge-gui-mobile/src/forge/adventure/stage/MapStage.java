@@ -1126,6 +1126,7 @@ public class MapStage extends GameStage {
         if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
             Controllers.getCurrent().startVibration(duration, 1);
         Forge.restrictAdvMenus = true;
+        player.clearCollisionHeight();
         startPause(0.8f, () -> {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
