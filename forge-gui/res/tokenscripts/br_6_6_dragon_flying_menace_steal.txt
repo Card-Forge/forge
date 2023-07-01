@@ -1,0 +1,10 @@
+Name:Dragon
+ManaCost:no cost
+Types:Creature Dragon
+Colors:red,black
+PT:6/6
+K:Flying
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainControl | TriggerDescription$ Whenever this creature deals combat damage to a player, gain control of target artifact that player controls.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact.ControlledBy TriggeredTarget | NewController$ You
+Oracle:Flying, menace\nWhenever this creature deals combat damage to a player, gain control of target artifact that player controls.
