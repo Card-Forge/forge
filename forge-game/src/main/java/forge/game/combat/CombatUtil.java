@@ -236,7 +236,7 @@ public class CombatUtil {
             // attacker got goaded by defender or defender is not player
             if (goadedByDefender || !(defender instanceof Player)) {
                 for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                    if (!defender.equals(ge) && ge instanceof Player) {
+                    if (!ge.equals(defender) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
                         if (!attacker.isGoadedBy((Player) ge) && !ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
@@ -250,7 +250,7 @@ public class CombatUtil {
         // Quasi-goad logic for "Kardur, Doomscourge" etc. that isn't goad but behaves the same
         if (defender != null && defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
             for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                if (!defender.equals(ge) && ge instanceof Player) {
+                if (!ge.equals(defender) && ge instanceof Player) {
                     if (!ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                         return false;
                     }

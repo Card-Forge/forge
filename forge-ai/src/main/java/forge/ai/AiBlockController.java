@@ -1087,7 +1087,7 @@ public class AiBlockController {
         makeGangBlocks(combat);
 
         // When the AI holds some Fog effect, don't bother about lifeInDanger
-        if (!ComputerUtil.hasAFogEffect(ai, checkingOther)) {
+        if (!ComputerUtil.hasAFogEffect(ai, ai, checkingOther)) {
             lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
             makeTradeBlocks(combat); // choose necessary trade blocks
 
@@ -1109,7 +1109,9 @@ public class AiBlockController {
             }
 
             // TODO could be made more accurate if this would be inside each blocker choosing loop instead
-            lifeInDanger |= removeUnpayableBlocks(combat) && ComputerUtilCombat.lifeInDanger(ai, combat);
+            if (removeUnpayableBlocks(combat) || lifeInDanger) {
+                lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+            }
 
             // == 2. If the AI life would still be in danger make a safer approach ==
             if (lifeInDanger) {

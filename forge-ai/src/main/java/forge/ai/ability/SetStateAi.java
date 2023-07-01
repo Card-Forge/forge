@@ -212,7 +212,7 @@ public class SetStateAi extends SpellAbilityAi {
                 // both forms can attack, try to use the one with better value 
                 if (attackCard && attackTransformed) {
                     return valueCard <= valueTransformed;
-                } else if (attackTransformed) { // only transformed cam attack
+                } else if (attackTransformed) { // only transformed can attack
                     transformAttack = true;
                 }
             }

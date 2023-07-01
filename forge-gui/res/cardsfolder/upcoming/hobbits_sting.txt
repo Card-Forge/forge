@@ -1,0 +1,9 @@
+Name:Hobbit's Sting
+ManaCost:1 W
+Types:Instant
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Creature | SpellDescription$ CARDNAME deals X damage to target creature, where X is the number of creatures you control plus the number of Foods you control.
+SVar:X:Count$Valid Creature.YouCtrl/Plus.Y
+SVar:Y:Count$Valid Food.YouCtrl
+DeckHints:Type$Food
+AI:RemoveDeck:All
+Oracle:Hobbit's Sting deals X damage to target creature, where X is the number of creatures you control plus the number of Foods you control.

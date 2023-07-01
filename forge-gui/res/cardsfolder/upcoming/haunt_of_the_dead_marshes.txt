@@ -1,0 +1,12 @@
+Name:Haunt of the Dead Marshes
+ManaCost:B
+Types:Creature Nightmare Elf
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | IsPresent$ Creature.Legendary+YouCtrl | PresentZone$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. Activate only if you control a legendary creature.
+SVar:DiscardMe:2
+SVar:SacMe:1 
+DeckHints:Ability$Discard & Type$Creature & Type$Legendary
+DeckHas:Ability$Graveyard
+Oracle:When Haunt of the Dead Marshes enters the battlefield, scry 1.\n{2}{B}: Return Haunt of the Dead Marshes from your graveyard to the battlefield tapped. Activate only if you control a legendary creature.

@@ -6,4 +6,4 @@ K:Deathtouch
 S:Mode$ Continuous | Affected$ Assassin.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Assassin's you control get +1/+1.
 T:Mode$ LosesGame | ValidPlayer$ Player.Other+wasAttackedThisTurnBy Assassin.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWinGame | TriggerDescription$ Whenever a player loses the game, if they were attacked this turn by an Assassin you controlled, you win the game. 
 SVar:TrigWinGame:DB$ WinsGame | Defined$ You
-Oracle:Other Assassin's you control get +1/+1.\nWhenever a player loses the game, if they were attacked this turn by an Assassin you controlled, you win the game.
+Oracle:Deathtouch\nOther Assassin's you control get +1/+1.\nWhenever a player loses the game, if they were attacked this turn by an Assassin you controlled, you win the game.

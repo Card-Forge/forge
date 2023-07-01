@@ -116,6 +116,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     int duration = mob.getData().boss ? 400 : 200;
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(duration, 1);
+                    Forge.restrictAdvMenus = true;
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -124,7 +125,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
-                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
+                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });
@@ -346,7 +347,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
         background.loadChunk(pos.x, pos.y);
-        handlePointsOfInterestCollision();
+
     }
 
     @Override
@@ -397,7 +398,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
-            names.add(enemy.getValue().getData().name);
+            names.add(enemy.getValue().getData().getName());
             x.add(enemy.getValue().getX());
             y.add(enemy.getValue().getY());
             questStageIDs.add(enemy.getValue().questStageID);

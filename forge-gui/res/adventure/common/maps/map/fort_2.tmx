@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzllF0KgCAQhH3PTpBdrM5Snct+7pZSA7msD8FYQQNLrYmfk7s6a4z7aPS1MbM9oqvTHGMlmEt4Qj68t5ccY0y2ZEKSy2Zr6+e4UQ3J7xZiqp7nyvqBtP0MIV9J3Jwv7Adi1/Vb5/tXrrdpfclAj5f2mxOzf0elfzWNxD6K/zB60O6Oq2Lvtud8Bhds+NbuCvhkMsFFyPNuxPc76+6FwV+U
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkMGCm7gRGJs8peqJMaeCCDzU7QVhYuxDx5TaOWrvqL2j9o7aO1TsHWn1Ai5zcIUpqfYCAApbnpc=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOmDgZGJiBmIUThwIK1eMCC4D6FwLxIqh5yJgJixiyekqAHRcDgz0QO3BhdxMp6kkF2MzHJ06pX0eqvejph1724jKfCc0dMHdRmodgYD6J4Tx3iMfvQNtrzYVZPtlwQTCIbctFG3uJBUPZ3oGsj0AA5Ad7LgRmhIr/50AVp3V9BMvT6HmV1PoIAMKwJBQ=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2MBvNL7bgLhiFMQOtAOoBH5C6ccD6goEiEHje9LInhdYxJ7QyC50EE0newYL+IXEPjFgrqAP+I5H7g/dXDF0AQA0AQn8
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="145.5" y="43.5"/>
+  <object id="50" template="../obj/enemy.tx" x="247.5" y="115">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="292.5" y="69.8333"/>
+  <object id="52" template="../obj/gold.tx" x="193" y="150"/>
+  <object id="53" template="../obj/enemy.tx" x="181.5" y="95.5">
+   <properties>
+    <property name="enemy" value="Goblin Chief"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="284.167" y="199.333">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="130" y="172.667">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/gold.tx" x="216.5" y="159.5"/>
+  <object id="57" template="../obj/enemy.tx" x="278.5" y="165.5">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="145.5" y="213.5">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

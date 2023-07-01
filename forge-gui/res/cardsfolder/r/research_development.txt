@@ -11,9 +11,6 @@ ALTERNATE
 Name:Development
 ManaCost:3 U R
 Types:Instant
-A:SP$ Repeat | Cost$ 3 U R | RepeatSubAbility$ DBToken | MaxRepeat$ 3 | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_3_1_elemental | TokenOwner$ You | UnlessPayer$ Player.Opponent | UnlessCost$ Draw<1/Player.IsRemembered> | UnlessAI$ MorePowerful
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRemember | Static$ True
-SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredActivator
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Repeat | Cost$ 3 U R | RepeatSubAbility$ DBToken | MaxRepeat$ 3 | StackDescription$ SpellDescription | SpellDescription$ Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_3_1_elemental | TokenOwner$ You | UnlessPayer$ Player.Opponent | UnlessCost$ Draw<1/Player.YouActivator> | UnlessAI$ MorePowerful
 Oracle:Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.

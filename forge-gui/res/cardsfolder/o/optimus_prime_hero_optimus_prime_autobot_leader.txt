@@ -6,7 +6,7 @@ K:More Than Meets the Eye:2 U R W
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigBolster | TriggerDescription$ At the beginning of each end step, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME dies, return it to the battlefield converted under its owner's control.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | Converted$ True
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True
 AlternateMode:DoubleFaced
 DeckHas:Ability$Counters
 Oracle:More Than Meets the Eye {2}{U}{R}{W} (You may cast this card converted for {2}{U}{R}{W}.)\nAt the beginning of each end step, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)\nWhen Optimus Prime dies, return it to the battlefield converted under its owner's control.
@@ -21,7 +21,7 @@ PT:6/8
 K:Living metal
 K:Trample
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBolster | TriggerDescription$ Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert NICKNAME.
-SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2 | RememberPut$ True | SubAbility$ DBPump
+SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2 | RememberCards$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Trample | SubAbility$ DBDelayedTrigger
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ DamageDone | RememberObjects$ Remembered | ValidSource$ Card.IsTriggerRemembered | ValidTarget$ Player | CombatDamage$ True | ThisTurn$ True | Execute$ TrigConvert | TriggerDescription$ When that creature deals combat damage to a player this turn, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ DBCleanup

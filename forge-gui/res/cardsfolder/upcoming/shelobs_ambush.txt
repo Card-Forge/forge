@@ -1,0 +1,7 @@
+Name:Shelob's Ambush
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Deathtouch | NumAtt$ 1 | NumDef$ 2 | SubAbility$ DBFood | SpellDescription$ Target creature gets +1/+2 and gains deathtouch until end of turn.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | SpellDescription$  Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+DeckHas:Ability$Sacrifice|LifeGain & Type$Food|Artifact
+Oracle:Target creature gets +1/+2 and gains deathtouch until end of turn. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

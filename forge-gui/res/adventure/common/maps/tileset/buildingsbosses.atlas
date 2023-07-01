@@ -1,0 +1,32 @@
+buildingsbosses.png
+size: 448,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+Xira 
+  xy: 98, 2
+  size: 52, 48
+Slimefoot 
+  xy: 48, 1
+  size: 45, 42  
+Grolnok 
+  xy: 2, 1
+  size: 40, 43
+Garruk 
+  xy: 154, 18
+  size: 54, 29   
+Zedruu 
+  xy: 1, 58
+  size: 57, 42
+Nahiri 
+  xy: 202,61
+  size: 30, 37
+Tibalt 
+  xy: 329,51
+  size: 64, 48
+Kiora 
+  xy: 210,3
+  size: 59, 46
+SlimeCave 
+  xy: 108,118
+  size: 34, 36

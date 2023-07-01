@@ -418,8 +418,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
                 continue;
             }
 
-//            System.out.println(c.getName());
-
             // Skip glacial chasm, it's really weird.
             if (c.getName().equals("Glacial Chasm")) {
                 System.out.println("Skipping " + c.getName());
@@ -477,7 +475,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         }
         AssertJUnit.assertEquals(0, funky.size());
     }
-
 
     @Test
     public void testPlayRememberedCardsLand() {

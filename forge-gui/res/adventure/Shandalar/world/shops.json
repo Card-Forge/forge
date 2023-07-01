@@ -4502,8 +4502,9 @@
 		}
 	  ]
 	}
-	]
-			},{
+	]		
+},
+{
   "name":"Gods",
   "description":"Al's Dose of Apotheosis",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -4537,8 +4538,9 @@
 		}
 	  ]
 	  }
-	  ]
-},{
+	  ]	  
+},
+{
   "name":"Insects",
   "description":"Grist's Bug Greenhouse",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -4559,7 +4561,62 @@
 	  ]
 	}
 	]
-},{
+},
+{
+  "name":"Horrors",
+  "description":"Horrific Horrors",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"HorrorShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Horror"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Horror"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Mutants",
+  "description":"Marching Mutants",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"MutantShop",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Mutant"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Mutant"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "Mutate"
+		}
+	  ]
+	}
+]
+},
+{
   "name":"Eldrazi",
   "description":"Eldritch Emissaries",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -5048,7 +5105,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+		  "cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin|compleated"
 		}
 	  ]
 	}]
@@ -5071,7 +5128,7 @@
 	{
 		"count":1,
 		"colors":["white"],
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 	}]},
 	{
 		"count":3,
@@ -5083,7 +5140,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 		}
 	]}]},
 {                                    
@@ -5104,7 +5161,7 @@
 	{
 		"count":1,
 		"colors":["blue"],
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 	}]},
 	{
 		"count":3,
@@ -5116,7 +5173,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 		}
 	]}]},
 {                                    
@@ -5137,7 +5194,7 @@
 	{
 		"count":1,
 		"colors":["green"],
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 	}]},
 	{
 		"count":3,
@@ -5149,7 +5206,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 		}
 	]}]},
 {                                    
@@ -5170,7 +5227,7 @@
 	{
 		"count":1,
 		"colors":["red"],
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin|compleated"
 	}]},
 	{
 		"count":3,
@@ -5182,7 +5239,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin|compleated"
 		}
 	]}]},
 {                                    
@@ -5203,7 +5260,7 @@
 	{
 		"count":1,
 		"colors":["black"],
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 	}]},
 	{
 		"count":3,
@@ -5215,7 +5272,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|compleated"
 		}
 	]}]},
 {

@@ -1,0 +1,13 @@
+Name:Grey Host Reinforcements
+ManaCost:3 W
+Types:Creature Spirit Soldier
+PT:1/1
+K:Flying
+K:Ward:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target player's graveyard. Put a number of +1/+1 counters on CARDNAME equal to the number of creature cards exiled this way.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBCounter | RememberChanged$ True
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature
+DeckHas:Ability$Counters
+Oracle:Flying, ward {3}\nWhen Grey Host Reinforcements enters the battlefield, exile target player's graveyard. Put a number of +1/+1 counters on Grey Host Reinforcements equal to the number of creature cards exiled this way.

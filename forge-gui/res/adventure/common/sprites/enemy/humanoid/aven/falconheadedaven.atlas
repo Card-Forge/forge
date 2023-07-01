@@ -1,0 +1,41 @@
+falconheadedaven.png
+size: 70,48
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 0,0
+  size: 16,16
+Idle
+  xy: 16,0
+  size: 16,16
+Walk
+  xy: 0,16
+  size: 16,16
+Walk
+  xy: 16,16
+  size: 16,16
+Walk
+  xy: 32,16
+  size: 16,16
+Walk
+  xy: 48,16
+  size: 16,16
+Walk
+  xy: 64,16
+  size: 16,16
+Walk
+  xy: 0,32
+  size: 16,16
+Walk
+  xy: 16,32
+  size: 16,16
+Walk
+  xy: 32,32
+  size: 16,16
+Walk
+  xy: 48,32
+  size: 16,16
+Walk
+  xy: 64,32
+  size: 16,16

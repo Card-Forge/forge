@@ -1,8 +1,7 @@
 Name:Mirrorweave
 ManaCost:2 WU WU
 Types:Instant
-A:SP$ Pump | Cost$ 2 WU WU | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Choose target nonlegendary creature | AILogic$ Pump | RememberObjects$ Targeted | SubAbility$ MirrorweaveClone | StackDescription$ None | SpellDescription$ Each other creature becomes a copy of target nonlegendary creature until end of turn.
-SVar:MirrorweaveClone:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Creature.IsNotRemembered | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup
-SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Pump | Cost$ 2 WU WU | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Choose target nonlegendary creature | AILogic$ Pump | SubAbility$ MirrorweaveClone | StackDescription$ None | SpellDescription$ Each other creature becomes a copy of target nonlegendary creature until end of turn.
+SVar:MirrorweaveClone:DB$ RepeatEach | RepeatCards$ Creature.NotDefinedTargeted | RepeatSubAbility$ DBCopy
+SVar:DBCopy:DB$ Clone | Defined$ Targeted | CloneTarget$ Remembered | Duration$ UntilEndOfTurn
 Oracle:Each other creature becomes a copy of target nonlegendary creature until end of turn.

@@ -82,3 +82,5 @@ forge-gui/tools/EditionTrackingResults
 forge-gui/tools/PerSetTrackingResults
 
 *.tiled-session
+/forge-gui/res/adventure/*.tiled-project
+/forge-gui/res/adventure/*.tiled-session

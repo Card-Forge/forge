@@ -1,0 +1,11 @@
+Name:Shire Shirriff
+ManaCost:1 W
+Types:Creature Halfling Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a token. When you do, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Card.token/token> | Execute$ TrigExile | TriggerDescription$ When you do, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token
+Oracle:Vigilance\nWhen Shire Shirriff enters the battlefield, you may sacrifice a token. When you do, exile target creature an opponent controls until Shire Shirriff leaves the battlefield.

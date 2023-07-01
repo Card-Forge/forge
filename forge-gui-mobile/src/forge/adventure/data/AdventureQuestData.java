@@ -411,6 +411,17 @@ public class AdventureQuestData implements Serializable {
             updateStatus();
     }
 
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            stage.updateEventComplete(completedEvent);
+            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
     public void updateStatus(){
         for (AdventureQuestStage stage: stages) {
             switch (stage.getStatus()) {

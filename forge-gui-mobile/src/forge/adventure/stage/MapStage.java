@@ -544,7 +544,19 @@ public class MapStage extends GameStage {
                         int portalTargetId = (!prop.containsKey("teleportObjectId") || prop.get("teleportObjectId") ==null || prop.get("teleportObjectId").toString().isEmpty())? 0: Integer.parseInt(prop.get("teleportObjectId").toString());
 
                         PortalActor portal = new PortalActor(this, id, prop.get("teleport").toString(), px, py, pw, ph, prop.get("direction").toString(), currentMap, portalTargetId, portalSpriteToUse);
-                        portal.setAnimation(prop.get("portalState").toString());
+
+                        if (prop.containsKey("activeQuestFlag") && Current.player().checkQuestFlag(prop.get("activeQuestFlag").toString())){
+                            portal.setAnimation("active");
+                        }
+                        else if (prop.containsKey("inactiveQuestFlag") && Current.player().checkQuestFlag(prop.get("inactiveQuestFlag").toString())){
+                            portal.setAnimation("inactive");
+                        }
+                        else if (prop.containsKey("closedQuestFlag") && Current.player().checkQuestFlag(prop.get("closedQuestFlag").toString())){
+                            portal.setAnimation("closed");
+                        }
+                        else if (prop.containsKey("portalState")) {
+                            portal.setAnimation(prop.get("portalState").toString());
+                        }
                         if (prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) {
                             spawnClassified.add(portal);
                         } else if (validSpawnPoint) {
@@ -656,7 +668,7 @@ public class MapStage extends GameStage {
                         //TODO: Ability to move them (using a sequence such as "UULU" for up, up, left, up).
                         break;
                     case "inn":
-                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(InnScene.instance())));
+                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(InnScene.instance(TileMapScene.instance(), TileMapScene.instance().rootPoint.getID(), id))));
                         break;
                     case "spellsmith":
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
@@ -816,7 +828,7 @@ public class MapStage extends GameStage {
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
 
-                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())) {
+                                if (!(data.overlaySprite == null || data.overlaySprite.isEmpty())) {
                                     TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
                                     overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                     overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
@@ -941,6 +953,15 @@ public class MapStage extends GameStage {
                 if (actors.get(i) instanceof EnemySprite) {
                     ((EnemySprite)(actors.get(i))).inactive = false;
                     (actors.get(i)).resetCollisionHeight();
+                    return true;
+                }
+                else if (actors.get(i) instanceof PortalActor) {
+                    PortalActor thisPortal = (PortalActor)(actors.get(i));
+
+                    if (thisPortal.getAnimation().equals("active"))
+                        thisPortal.setAnimation("closed");
+                    else
+                        thisPortal.setAnimation("active");
                     return true;
                 }
             }
@@ -1104,6 +1125,7 @@ public class MapStage extends GameStage {
         int duration = mob.getData().boss ? 400 : 200;
         if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
             Controllers.getCurrent().startVibration(duration, 1);
+        Forge.restrictAdvMenus = true;
         startPause(0.8f, () -> {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -1116,7 +1138,7 @@ public class MapStage extends GameStage {
                         if (isInMap && effect != null && !mob.ignoreDungeonEffect)
                             duelScene.setDungeonEffect(effect);
                         Forge.switchScene(duelScene);
-                    }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
+                    }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                 }
             });
         });
@@ -1138,6 +1160,7 @@ public class MapStage extends GameStage {
         if (dialogStage == null){
             setDialogStage(GameHUD.getInstance());
         }
+        GameHUD.getInstance().playerIdle();
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());

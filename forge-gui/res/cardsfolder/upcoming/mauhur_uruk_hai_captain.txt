@@ -1,0 +1,11 @@
+Name:Mauhur, Uruk-hai Captain
+ManaCost:B R
+Types:Legendary Creature Orc Soldier
+PT:2/2
+K:Menace
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Orc.YouCtrl+inZoneBattlefield,Army.YouCtrl+inZoneBattlefield,Goblin.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on an Army, Goblin, or Orc you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ Y
+SVar:Y:ReplaceCount$CounterNum/Plus.1
+DeckHas:Ability$Counters
+DeckHints:Type$Army|Orc|Goblin
+Oracle:Menace\nIf one or more +1/+1 counters would be put on an Army, Goblin, or Orc you control, that many plus one +1/+1 counters are put on it instead.

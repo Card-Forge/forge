@@ -3,6 +3,7 @@ package forge.ai.ability;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import forge.ai.ComputerUtilCard;
@@ -31,8 +32,9 @@ public class AmassAi extends SpellAbilityAi {
         if (!aiArmies.isEmpty()) {
             return Iterables.any(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         }
-        final String tokenScript = "b_0_0_zombie_army";
+        final String tokenScript = "b_0_0_army";
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
+        final String type = sa.getParam("Type");
 
         Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
 
@@ -42,6 +44,9 @@ public class AmassAi extends SpellAbilityAi {
 
         token.setController(ai, 0);
         token.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        token.setCreatureTypes(Lists.newArrayList(type, "Army"));
+        token.setName(type + " Army Token");
+        token.setTokenSpawningAbility(sa);
 
         boolean result = true;
 

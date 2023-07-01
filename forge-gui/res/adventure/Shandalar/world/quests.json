@@ -5970,5 +5970,820 @@
 		"waste_town_identity",
 		"waste_town_tribal"
 	]
+},
+{
+	"id": 24,
+	"isTemplate": true,
+	"name": "Pest Control",
+	"description": "Defeat Xira and her hornets in her hive and report back",
+	"offerDialog": {
+		"text": "Greetings, adventurer! I have a task that requires your assistance. You see, we have a bit of a situation with a giant insect named Xira. She's been causing quite a stir in our town with her penchant for organizing extravagant balls.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Giant bugs holding balls eh ? Count me out. (decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "Well Yes, Let me explain the situation; Xira's balls have become a bit of a problem. She has been hosting them every night, and they're becoming increasingly extravagant and disruptive. The townspeople are getting tired of the constant noise and commotion, and it's affecting their daily lives.",
+				"options": [
+					{
+						"name": "I see. So you want me to talk to Xira and ask her to stop?",
+						"text": "\"You can find her in her hive, she's not easily dissuaded. I've tried talking to her myself, but she's adamant about continuing her nightly balls. I'm afraid she will need more than just a few words to convince her, if you catch my drift.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "Pest control is my speciality, note the location of her hive on my map.(Accept Quest)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "\"Do you really think I have nothing better to do than hunt down giant insects holding balls? Find someone else to take care of it\" (Decline Quest)",
+								"text": "(-1 Local Reputation) The farmhand keeps a passive look on his face. \"I guess I'm never getting my quiet night's sleep back\"",
+								"options": [
+									{
+										"name": "(Leave)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 800
+							},
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 5,
+								"addMaxCount": 10,
+								"rarity": [
+									"Rare",
+									"Mythic Rare",
+									"Uncommon"
+								],
+								"cardText": "Insect"
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the hive. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the Xira's Hive and defeat all enemies inside. The target location is in the Waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Xira"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Xira"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 25,
+	"isTemplate": true,
+	"name": "Mechanical Problems",
+	"description": "Defeat Slobad and his artificers in his factory and report back",
+	"offerDialog": {
+		"text": "Greetings, brave adventurer! I find myself in need of a courageous soul to undertake a perilous task.\nWithin the sprawling industrial district, an abandoned factory once owned by the notorious inventor Slobad has become a hotbed of danger and mechanical mayhem. ",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "The factory, now infested with an array of peculiar mechs and skilled artificers, poses a grave threat to our community and the delicate balance of technology.  Slobad, once hailed as a genius, was known for his unorthodox creations and their volatile nature. However, a catastrophic incident occurred years ago, leading to the factory's abandonment. Now, the mechanical monstrosities have been reactivated, wreaking havoc on unsuspecting wanderers and nearby settlements.",
+				"options": [
+					{
+						"name": "I see. So you want me to go to his factory and defeat him ?",
+						"text": "Your task, should you accept it, is to venture into Slobad's factory and cleanse it of its mechanical menaces. You will face a myriad of strange mechs, each with its unique capabilities and behaviors. Additionally, the factory's artificers, skilled engineers corrupted by their own creations, will fiercely defend their inventions, making your mission all the more challenging.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll take care of it, note the location of the factory on my map.(Accept Quest)",
+								"text": "Once you have vanquished the mechanical threat and quelled the chaos within the factory, return to me, Maven the Alchemist, and you shall be rewarded handsomely for your bravery and service to our community. Be warned, however, for the path ahead will test your mettle, cunning, and combat prowess. May fortune favor you on this perilous undertaking!"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "\"Do you really think I have nothing better to do ? Find someone else to take care of it\" (Decline Quest)",
+								"text": "(-1 Local Reputation) Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 1000
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 5,
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								],
+								"cardTypes": [
+									"Artifact"
+								]
+							},
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 20,
+								"addMaxCount": 20
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the factory. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Slobad"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Slobad"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 26,
+	"isTemplate": true,
+	"name": "Spores of Death",
+	"description": "Defeat Slimfoot and his fungi in his bog and report back",
+	"offerDialog": {
+		"text": " Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the rogue fungus Slimefoot. ",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Tell me more about Slimefoot and what I can do to stop it.",
+				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence, a monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
+				"options": [
+					{
+						"name": "I see. So you want me to travel to Slimefoots swamp and defeat him ?",
+						"text": "Slimefoot is a formidable foe, adept at both offense and defense. Its body secretes a corrosive slime, and its tentacles strike with lightning speed. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "Thank you, Elder Taldor. I shall embark on this quest immediately and return triumphant. (Accept Quest)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "After further consideration, I've decided I'm not up to the challenge (Decline Quest)",
+								"text": "(-1 Local Reputation) Elder Taldor keeps a passive look on his face. \"Youths these days, he mumbles\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 900
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20,
+								"subTypes": [
+									"Fungus"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the swamp. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Swamp biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Slimefoot"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Slimefoot"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"swamp_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal"
+	]
+},
+{
+	"id": 27,
+	"isTemplate": true,
+	"name": "Slimy Business",
+	"description": "Defeat the mother slime and other creatures in the old sewers and report back",
+	"offerDialog": {
+		"text": "Greetings, brave adventurer! This town is currently plagued by a distressing problem in the form of a slime infestation. \nThe town council has been looking for a brave individual to take care of this.\n",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this and eradicate this slimy menace once and for all.",
+				"options": [
+					{
+						"name": "I see. So you want me to go to the old sewers and deal with the slimes?",
+						"text": "Exactly, Your primary objective is to clear the old sewer of slimes by eliminating their presence and ensuring the safety of the townsfolk. Enter the depths of the sewer, locate the main breeding ground of the slimes, and eliminate their leader to put an end to the infestation. Be warned, however, as the sewer is known to be treacherous and filled with other dangers, such as crumbling infrastructure and toxic gases.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "I don't intending to get slime on my armor, sorry you have to find someone else (Decline Quest)",
+								"text": "(-1 Local Reputation) The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 14,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"SlimeCave"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"SlimeCave"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
 }
 ]

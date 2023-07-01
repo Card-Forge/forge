@@ -380,12 +380,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             String num = sa.getParamOrDefault("ChangeNum", "1");
-            if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                if (xPay == 0) return false;
-                xPay = Math.min(xPay, list.size());
-                sa.setXManaCostPaid(xPay);
+            if (num.contains("X")) {
+                if (sa.getSVar("X").equals("Count$xPaid")) {
+                    // Set PayX here to maximum value.
+                    int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                    if (xPay == 0) return false;
+                    xPay = Math.min(xPay, list.size());
+                    sa.setXManaCostPaid(xPay);
+                } else {
+                    // Figure out the X amount, bail if it's zero (nothing will change zone).
+                    int xValue = AbilityUtils.calculateAmount(source, "X", sa);
+                    if (xValue == 0) {
+                        return false;
+                    }
+                }
             }
 
             if (sourceName.equals("Temur Sabertooth")) {
@@ -1744,7 +1752,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Called when looking for creature to attach aura or equipment
-        return AttachAi.attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, sa.getHostCard(), sa.getParam("AILogic"));
+        return AttachAi.attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, (Card) params.get("Attach"), sa.getParam("AILogic"));
     }
 
     /* (non-Javadoc)

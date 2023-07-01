@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, you may create Boo, a legendary 1/1 red Hamster creature token with trample and haste.
 SVar:TrigToken:DB$ Token | TokenScript$ boo
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.withTrample,Creature.withHaste | TgtPrompt$ Select target creature with trample or haste | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on up to one target creature with trample or haste.
-A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBImmediateTrigger | SpellDescription$ Sacrifice a creature.
+A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBImmediateTrigger | AILogic$ Lethal | SpellDescription$ Sacrifice a creature.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | ConditionDefined$ RememberedLKI | ConditionPresent$ Creature | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | SpellDescription$ When you do, CARDNAME deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ DelayTriggerRememberedLKI | ConditionPresent$ Hamster | NumCards$ X
@@ -15,4 +15,5 @@ SVar:X:TriggerRemembered$CardPower
 K:CARDNAME can be your commander.
 DeckHas:Ability$Sacrifice|Counters|Token
 DeckHints:Keyword$Trample|Haste
+SVar:PlayMain1:TRUE
 Oracle:When Minsc & Boo, Timeless Heroes enters the battlefield and at the beginning of your upkeep, you may create Boo, a legendary 1/1 red Hamster creature token with trample and haste.\n[+1]: Put three +1/+1 counters on up to one target creature with trample or haste.\n[−2]: Sacrifice a creature. When you do, Minsc & Boo, Timeless Heroes deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards.\nMinsc & Boo, Timeless Heroes can be your commander.

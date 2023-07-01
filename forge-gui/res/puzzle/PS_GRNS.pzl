@@ -1,0 +1,25 @@
+# This puzzle utilizes complete human control due to poor AI support. It's a puzzle where a spell is put on stack
+# at the beginning of the match. Unfortunately, this particular puzzle doesn't work well in Forge due to the fact that
+# the AI does not use its resources optimally, thus naturally failing to defeat the player in one turn and losing.
+# Also, this puzzle demonstrates how it's possible to add a card which is owned by a player other than its controller.
+[metadata]
+Name:Possibility Storm - Guilds of Ravnica Special (Survive the Turn) (*)
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/094.-GRN004-3.jpg
+Goal:Survive
+Turns:1
+Difficulty:Special
+Description:Start in your opponent's first main phase with their Mnemonic Betrayal just cast and on the stack. Find a way to survive the turn! The trigger from Deeproot Champion is also on the stack and it will get one +1/+1 counter! Assume that any cards that could be drawn by either player are lands that enter the battlefield tapped. Goblin Banneret and Runaway Steam-Kin controlled by your opponent are owned by you.
+HumanControl:True
+[state]
+humanlife=9
+ailife=20
+turn=1
+activeplayer=ai
+activephase=MAIN1
+humanhand=Mission Briefing
+humanlibrary=Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard
+humangraveyard=Fervent Strike;Warlord's Fury;Dinosaur Stampede;Sure Strike;Crash the Ramparts;Buccaneer's Bravado;Rescue;Forebear's Blade
+humanbattlefield=Raptor Hatchling;Diamond Mare|ChosenColor:Blue;Beamsplitter Mage;Island;Island;Island;Mountain;Forest
+ailibrary=Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard;Foul Orchard
+aibattlefield=Relic Runner;Goblin Banneret|Owner:Human;Deeproot Champion;Runaway Steam-Kin|Owner:Human;Overgrown Tomb;Overgrown Tomb;Overgrown Tomb;Overgrown Tomb|Tapped;Island;Island;Island;Island|Tapped
+aiputonstack=Mnemonic Betrayal

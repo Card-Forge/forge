@@ -1,0 +1,13 @@
+Name:Legolas Greenleaf
+ManaCost:2 G
+Types:Legendary Creature Elf Archer
+PT:2/2
+K:Reach
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Legendary+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:BuffedBy:Creature.Legendary
+DeckHas:Ability$Counters
+Oracle:Reach\nLegolas Greenleaf can't be blocked by creatures with power 2 or less.\nWhenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Legolas Greenleaf.\nWhenever Legolas Greenleaf deals combat damage to a player, draw a card.

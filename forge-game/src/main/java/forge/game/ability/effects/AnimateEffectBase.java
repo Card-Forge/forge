@@ -17,13 +17,16 @@
  */
 package forge.game.ability.effects;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -46,18 +49,28 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final CardType addType, final CardType removeType, final ColorSet colors,
             final List<String> keywords, final List<String> removeKeywords, final List<String> hiddenKeywords,
             List<String> abilities, final List<String> triggers, final List<String> replacements, final List<String> stAbs,
-            final long timestamp) {
+            final long timestamp, final String duration) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
-        boolean removeSuperTypes = sa.hasParam("RemoveSuperTypes");
-        boolean removeCardTypes = sa.hasParam("RemoveCardTypes");
-        boolean removeSubTypes = sa.hasParam("RemoveSubTypes");
-        boolean removeLandTypes = sa.hasParam("RemoveLandTypes");
-        boolean removeCreatureTypes = sa.hasParam("RemoveCreatureTypes");
-        boolean removeArtifactTypes = sa.hasParam("RemoveArtifactTypes");
-        boolean removeEnchantmentTypes = sa.hasParam("RemoveEnchantmentTypes");
+
+        Set<RemoveType> remove = EnumSet.noneOf(RemoveType.class);
+        if (sa.hasParam("RemoveSuperTypes"))
+            remove.add(RemoveType.SuperTypes);
+        if (sa.hasParam("RemoveCardTypes"))
+            remove.add(RemoveType.CardTypes);
+        if (sa.hasParam("RemoveSubTypes"))
+            remove.add(RemoveType.SubTypes);
+        if (sa.hasParam("RemoveLandTypes"))
+            remove.add(RemoveType.LandTypes);
+        if (sa.hasParam("RemoveCreatureTypes"))
+            remove.add(RemoveType.CreatureTypes);
+        if (sa.hasParam("RemoveArtifactTypes"))
+            remove.add(RemoveType.ArtifactTypes);
+        if (sa.hasParam("RemoveEnchantmentTypes"))
+            remove.add(RemoveType.EnchantmentTypes);
+
         boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
@@ -65,10 +78,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             source.addRemembered(c);
         }
 
-        if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || removeSuperTypes
-                || removeCardTypes || removeSubTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
-            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, 0, true, false);
+        if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
+            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
@@ -167,15 +178,15 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         // after unanimate to add RevertCost
-        if (removeAll || removeLandTypes
+        if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
                     addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
         }
 
-        if (!"Permanent".equals(sa.getParam("Duration"))) {
-            if ("UntilControllerNextUntap".equals(sa.getParam("Duration"))) {
+        if (!"Permanent".equals(duration)) {
+            if ("UntilControllerNextUntap".equals(duration)) {
                 game.getUntap().addUntil(c.getController(), unanimate);
             } else {
                 addUntilCommand(sa, unanimate);

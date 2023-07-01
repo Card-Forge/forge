@@ -33,7 +33,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpells(sa);
-        final boolean remember = sa.hasParam("RememberTargetedCard");
         final Player activator = sa.getActivatingPlayer();
         final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : sa.getActivatingPlayer();
 
@@ -139,9 +138,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
                 }
-            }
-            if (remember) {
-                sa.getHostCard().addRemembered(tgtSA.getHostCard());
             }
         }
     }

@@ -1,11 +1,10 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
 import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -14,6 +13,8 @@ import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -73,6 +74,15 @@ public class PeekAndRevealAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("InstantOrSorcery".equals(sa.getParam("AILogic"))) {
+            CardCollection revealed = (CardCollection) params.get("Revealed");
+            for (Card c : revealed) {
+                if (!c.isInstant() && !c.isSorcery()) {
+                    return false;
+                }
+            }
+        }
+
         AbilitySub subAb = sa.getSubAbility();
         return subAb != null && SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(player, subAb);
     }

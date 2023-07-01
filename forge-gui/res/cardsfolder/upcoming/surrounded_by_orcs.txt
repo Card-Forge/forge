@@ -1,0 +1,9 @@
+Name:Surrounded by Orcs
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Amass | Type$ Orc | Num$ 3 | RememberAmass$ True | SubAbility$ DBMill | SpellDescription$ Amass Orcs 3, then target player mills X cards, where X is the amassed Army's power. (To amass Orcs 3, put three +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:DBMill:DB$ Mill | NumCards$ X | ValidTgts$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardPower
+DeckHas:Ability$Token|Counters|Mill & Type$Orc|Army
+Oracle:Amass Orcs 3, then target player mills X cards, where X is the amassed Army's power. (To amass Orcs 3, put three +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

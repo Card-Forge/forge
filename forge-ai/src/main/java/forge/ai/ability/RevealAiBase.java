@@ -35,7 +35,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
         }
 
         return true;
-    } // revealHandTargetAI()
+    }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)

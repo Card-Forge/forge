@@ -9,6 +9,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.model.FModel;
 
@@ -45,6 +46,7 @@ public class RewardData implements Serializable {
     public RewardData[] cardUnion;
     public String[] deckNeeds;
     public RewardData[] rotation;
+    public Deck cardPack;
 
     public RewardData() { }
 
@@ -74,6 +76,7 @@ public class RewardData implements Serializable {
         cardUnion         =rewardData.cardUnion==null?null:rewardData.cardUnion.clone();
         rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
         deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
+        cardPack          = rewardData.cardPack;
     }
 
     private static Iterable<PaperCard> allCards;
@@ -172,6 +175,12 @@ public class RewardData implements Serializable {
                         for(int i=0;i<count+addedCount;i++) {
                             ret.add(new Reward(ItemData.getItem(itemName)));
                         }
+                    }
+                    break;
+                case "cardPack":
+                    if(cardPack!=null)
+                    {
+                        ret.add(new Reward(cardPack));
                     }
                     break;
                 case "deckCard":

@@ -10,43 +10,425 @@ ScryfallCode=LTC
 2 M Frodo, Adventurous Hobbit @Axel Sauerwald
 3 M Galadriel, Elven-Queen @Axel Sauerwald
 4 M Sauron, Lord of the Rings @Alex Brock
+5 M Aragorn, King of Gondor @Yongjae Choi
+6 M Gandalf, Westward Voyager @Sidharth Chaturvedi
 7 M Sam, Loyal Attendant @Campbell White
-48 R Bilbo, Birthday Celebrant @
+8 M Saruman, the White Hand @Leonardo Borazio
+9 R Beregond of the Guard @Campbell White
+10 R Champions of Minas Tirith @Tatiana Kirgetova
+11 R Field-Tested Frying Pan @Nino Is
+12 R The Gaffer @Tomas Duchek
+13 R Gilraen, Dunedain Protector @Marie Magny
+14 R Grey Host Reinforcements @Patrik Hell
+15 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
+16 R Lossarnach Captain @Justine Cruz
+17 R Of Herbs and Stewed Rabbit @Dan Scott
+18 R Archivist of Gondor @Wisnu Tan
+19 R Corsairs of Umbar @Narendra Bintara Adi
+20 R Denethor, Stone Seer @Bruno Biazotto
+21 R Fealty to the Realm @Lorenzo Mastroianni
+22 R Monstrosity of the Lake @Ben Wootten
+23 R Raise the Palisade @Jason Kang
+24 R Subjugate the Hobbits @Chris Cold
+25 R Trap the Trespassers @Tatiana Kirgetova
+26 R Gollum, Obsessed Stalker @John Di Giovanni
+27 R Lobelia, Defender of Bag End @Caroline Gariba
+28 R Rapacious Guest @Bartłomiej Gaweł
+29 R Shelob, Dread Weaver @Warren Mahy
+30 R Call for Aid @Nino Is
+31 R Cavern-Hoard Dragon @Antonio José Manzanedo
+32 R Gimli of the Glittering Caves @Sidharth Chaturvedi
+33 R Orcish Siegemaster @Anton Solovianchyk
+34 R Rampaging War Mammoth @Simon Dominic
+35 R Arwen, Weaver of Hope @Axel Sauerwald
+36 R Assemble the Entmoot @Alex Brock
+37 R Feasting Hobbit @Lorenzo Mastroianni
+38 R Galadhrim Ambush @John Di Giovanni
+39 R Haldir, Lorien Lieutenant @Syd Mills
+40 R Legolas Greenleaf @Anna Steinbauer
+41 R Mirkwood Elk @Christina Kraus
+42 R Motivated Pony @Claudiu-Antoniu Magherusan
+43 R Prize Pig @Bartłomiej Gaweł
+44 R Travel Through Caradhras @Constantin Marin
+45 R Windswift Slice @Narendra Bintara Adi
+46 R The Balrog of Moria @Rudy Siswanto
+47 R Banquet Guests @Viko Menezes
+48 R Bilbo, Birthday Celebrant @Billy Christian
+49 R Boromir, Gondor's Hope @Campbell White
+50 R Cirdan the Shipwright @Filipe Pagliuso
+51 R Elrond of the White Council @Javier Charro
+52 R Eomer, King of Rohan @Leonardo Borazio
+53 R Erestor of the Council @Syd Mills
+54 R Faramir, Steward of Gondor @Anna Podedworna
+55 R Farmer Cotton @Tomas Duchek
+56 R Forth Eorlingas! @Filipe Pagliuso
+57 R Grima, Saruman's Footman @Matt Stewart
+58 R In the Darkness Bind Them @Daarken
+59 R Lidless Gaze @Yigit Koroglu
+60 R Lord of the Nazgul @Anton Solovianchyk
+61 R Merry, Warden of Isengard @Viko Menezes
+62 R Mirkwood Trapper @John Di Giovanni
+63 R Moria Scavenger @Igor Krstic
+64 R Oath of Eorl @Randy Gallegos
+65 R Pippin, Warden of Isengard @Viko Menezes
 66 R Radagast, Wizard of Wilds @Tomas Duchek
+67 R Riders of Rohan @Stanislav Sherbakov
+68 R Sail into the West @Leonardo Borazio
+69 R Song of Earendil @Torgeir Fjereide
+70 R Summons of Saruman @Svetlin Velinov
+71 R Taunt from the Rampart @Lorenzo Mastroianni
+72 R Too Greedily, Too Deep @Anton Solovianchyk
+73 R Treebeard, Gracious Host @Campbell White
+74 R Wake the Dragon @Henry Peters
+75 R Crown of Gondor @Jarel Threat
+76 R Hithlain Rope @Josu Solano
+77 R Lothlorien Blade @Zuzanna Wużyk
+78 R Model of Unity @Yuriy Chemezov
+79 R Relic of Sauron @Anton Solovianchyk
+80 R The Black Gate @Marc Simonetti
 81 M Eowyn, Shieldmaiden @Craig Elliott
 82 M Frodo, Adventurous Hobbit @Axel Sauerwald
 83 M Galadriel, Elven-Queen @Axel Sauerwald
 84 M Sauron, Lord of the Rings @Alex Brock
+85 M Aragorn, King of Gondor @Yongjae Choi
 86 M Eowyn, Shieldmaiden @Craig Elliott
 87 M Frodo, Adventurous Hobbit @Axel Sauerwald
 88 M Galadriel, Elven-Queen @Axel Sauerwald
+89 M Gandalf, Westward Voyager @Sidharth Chaturvedi
 90 M Sam, Loyal Attendant @Campbell White
+91 M Saruman, the White Hand @Leonardo Borazio
 92 M Sauron, Lord of the Rings @Alex Brock
+93 R Beregond of the Guard @Campbell White
+94 R Champions of Minas Tirith @Tatiana Kirgetova
+95 R Field-Tested Frying Pan @Nino Is
+96 R The Gaffer @Tomas Duchek
+97 R Gilraen, Dunedain Protector @Marie Magny
+98 R Grey Host Reinforcements @Patrik Hell
+99 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
+100 R Lossarnach Captain @Justine Cruz
+101 R Archivist of Gondor @Wisnu Tan
+102 R Corsairs of Umbar @Narendra Bintara Adi
+103 R Denethor, Stone Seer @Bruno Biazotto
+104 R Fealty to the Realm @Lorenzo Mastroianni
+105 R Monstrosity of the Lake @Ben Wootten
+106 R Raise the Palisade @Jason Kang
+107 R Subjugate the Hobbits @Chris Cold
+108 R Trap the Trespassers @Tatiana Kirgetova
+109 R Gollum, Obsessed Stalker @John Di Giovanni
+110 R Lobelia, Defender of Bag End @Caroline Gariba
+111 R Rapacious Guest @Bartłomiej Gaweł
+112 R Shelob, Dread Weaver @Warren Mahy
+113 R Call for Aid @Nino Is
+114 R Cavern-Hoard Dragon @Antonio José Manzanedo
+115 R Gimli of the Glittering Caves @Sidharth Chaturvedi
+116 R Orcish Siegemaster @Anton Solovianchyk
+117 R Rampaging War Mammoth @Simon Dominic
+118 R Arwen, Weaver of Hope @Axel Sauerwald
+119 R Assemble the Entmoot @Alex Brock
+120 R Feasting Hobbit @Lorenzo Mastroianni
+121 R Galadhrim Ambush @John Di Giovanni
+122 R Haldir, Lórien Lieutenant @Syd Mills
+123 R Legolas Greenleaf @Anna Steinbauer
+124 R Mirkwood Elk @Christina Kraus
+125 R Motivated Pony @Claudiu-Antoniu Magherusan
+126 R Prize Pig @Bartłomiej Gaweł
+127 R Travel Through Caradhras @Constantin Marin
+128 R Windswift Slice @Narendra Bintara Adi
+129 R The Balrog of Moria @Rudy Siswanto
+130 R Banquet Guests @Viko Menezes
+131 R Bilbo, Birthday Celebrant @Billy Christian
+132 R Boromir, Gondor's Hope @Campbell White
+133 R Cirdan the Shipwright @Filipe Pagliuso
+134 R Elrond of the White Council @Javier Charro
+135 R Eomer, King of Rohan @Leonardo Borazio
+136 R Erestor of the Council @Syd Mills
+137 R Faramir, Steward of Gondor @Anna Podedworna
+138 R Farmer Cotton @Tomas Duchek
+139 R Forth Eorlingas! @Filipe Pagliuso
+140 R Grima, Saruman's Footman @Matt Stewart
+141 R Lidless Gaze @Yigit Koroglu
+142 R Lord of the Nazgul @Anton Solovianchyk
+143 R Merry, Warden of Isengard @Viko Menezes
+144 R Mirkwood Trapper @John Di Giovanni
+145 R Moria Scavenger @Igor Krstic
+146 R Pippin, Warden of Isengard @Viko Menezes
 147 R Radagast, Wizard of Wilds @Tomas Duchek
+148 R Riders of Rohan @Stanislav Sherbakov
+149 R Sail into the West @Leonardo Borazio
+150 R Summons of Saruman @Svetlin Velinov
+151 R Taunt from the Rampart @Lorenzo Mastroianni
+152 R Too Greedily, Too Deep @Anton Solovianchyk
+153 R Treebeard, Gracious Host @Campbell White
+154 R Wake the Dragon @Henry Peters
+155 R Crown of Gondor @Jarel Threat
+156 R Hithlain Rope @Josu Solano
+157 R Lothlorien Blade @Zuzanna Wużyk
+158 R Model of Unity @Yuriy Chemezov
+159 R Relic of Sauron @Anton Solovianchyk
+160 R The Black Gate @Marc Simonetti
 161 U Banishing Light @Joseph Meehan
+162 R Bastion Protector @Sean Vo
+163 R Call for Unity @Yuriy Chemezov
+164 R Dawn of Hope @Marc Simonetti
+165 R Dearly Departed @Arthur Yuan
+166 R Dusk // Dawn @Samuele Bandini
+167 R Fell the Mighty @Alexander Gering
+168 U Fiend Hunter @Irina Nordsol
+169 R Frontline Medic @Francesca Resta
+170 R Fumigate @Anna Pavleeva
+171 R Increasing Devotion @Bruno Biazotto
+172 R Marshal's Anthem @Erion Makuo
+173 R Mentor of the Meek @Wei Guan
+174 U Palace Jailer @Brian Valeza
+175 U Path to Exile @Torgeir Fjereide
+176 R Selfless Squire @Kim Sokol
+177 U Sunset Revelry @Viko Menezes
+178 U Swords to Plowshares @Christina Kraus
+179 R Unbreakable Formation @Ben Wootten
+180 R Verge Rangers @Miguel Mercado
+181 C Village Bell-Ringer @Brian Valeza
+182 R Visions of Glory @Justyna Dura
+183 R Weathered Wayfarer @Javier Charro
+184 C Arcane Denial @Daarken
+185 U Boon of the Wish-Giver @Lie Setiawan
+186 R Colossal Whale @Nicholas Gregory
+187 C Consider @Chris Cold
+188 C Deep Analysis @Nino Is
+189 R Devastation Tide @Warren Mahy
+190 U Fact or Fiction @Daarken
+191 C Forbidden Alchemy @Manuel Castañón
+192 U Learn from the Past @Torgeir Fjereide
+193 R Mystic Confluence @Alexander Forssberg
+194 C Opt @Erion Makuo
+195 R Plea for Power @Josh Hass
+196 C Preordain @Arthur Yuan
+197 R Swan Song @Axel Sauerwald
+198 C Crypt Incursion @Loïc Canavaggia
+199 R Decree of Pain @Antonio José Manzanedo
+200 C Feed the Swarm @Pavel Kolomeyets
+201 U Go for the Throat @Caroline Gariba
+202 R Languish @Sean Vo
+203 R Living Death @Pavel Kolomeyets
+204 U Merciless Executioner @Anton Solovianchyk
+205 C Night's Whisper @Miranda Meeks
+206 R Reanimate @Svetlin Velinov
+207 U Revenge of Ravens @Simon Dominic
+208 R Sanguine Bond @Joseph Meehan
+209 R Toxic Deluge @Anato Finnstark
+210 U Anger @Henry Peters
+211 R Blasphemous Act @Andrea Piparo
+212 M Combat Celebrant @Alexander Gering
+213 R Court of Ire @Elizabeth Peiró
+214 R Earthquake @Tomáš Honz
+215 C Faithless Looting @Miklós Ligeti
+216 R Flamerush Rider @Stanislav Sherbakov
+217 R Frontier Warmonger @Javier Charro
+218 U Goblin Cratermaker @Victor Harmatiuk
+219 R Goblin Dark-Dwellers @Yuriy Chemezov
+220 U Guttersnipe @Simon Dominic
+221 R Harsh Mentor @Elizabeth Peiró
+222 U Humble Defector @Bruno Biazotto
+223 M Inferno Titan @Olivier Bernard
+224 R Knollspine Dragon @Olivier Bernard
+225 M Scourge of the Throne @Alexander Ostrowski
+226 R Shared Animosity @Veli Nyström
+227 U Shiny Impetus @Andrea Piparo
+228 R Siege-Gang Commander @L J Koh
+229 C Thrill of Possibility @Alexander Gering
+230 R Treasure Nabber @Veli Nyström
+231 R Zealous Conscripts @Randy Vargas
+232 C Arbor Elf @Inka Schulz
+233 R Asceticism @Torgeir Fjereide
+234 U Beast Within @Alexander Ostrowski
+235 R Birds of Paradise @Ben Wootten
+236 C Cultivate @Warren Mahy
+237 R Elvish Archdruid @Anastasia Balakchina
+238 C Elvish Mystic @Iga Oliwiak
+239 R Elvish Piper @Joshua Raphael
+240 C Elvish Visionary @Zuzanna Wużyk
+241 R Elvish Warmaster @Ilker Yildiz
+242 C Essence Warden @Wangjie Li
+243 C Farhaven Elf @Christina Kraus
+244 C Farseek @Leonardo Borazio
+245 R Genesis Wave @Anato Finnstark
+246 R Gilded Goose @Valera Lutfullina
+247 U Great Oak Guardian @Andrey Kuzinskiy
+248 U Harmonize @Jason Kang
+249 R Heroic Intervention @Joshua Raphael
+250 R Hornet Queen @Oleg Bulakh
+251 R Inscription of Abundance @Christina Kraus
+252 C Lignify @Hristo D. Chukov
+253 C Orchard Strider @John Tedrick
+254 R Overwhelming Stampede @Viko Menezes
+255 U Paradise Druid @Lixin Yin
+256 U Prosperous Innkeeper @Inka Schulz
+257 C Rampant Growth @Lorenzo Lanfranconi
+258 R Realm Seekers @Alexander Gering
+259 U Reclamation Sage @Ilker Yildiz
+260 R Seeds of Renewal @Kim Sokol
+261 R Sylvan Offering @Valera Lutfullina
+262 U Tireless Provisioner @Wangjie Li
+263 C Wood Elves @Inka Schulz
+264 R Woodfall Primus @John Tedrick
+265 R Anguished Unmaking @Liiga Smilshkalne
+266 U Extract from Darkness @Lie Setiawan
+267 C Growth Spiral @Kasia 'Kafis' Zielińska
+268 R Hostage Taker @Torgeir Fjereide
+269 U Mortify @Ilker Yildiz
+270 R Notion Thief @Veli Nyström
+271 U Savvy Hunter @Valera Lutfullina
+272 R Supreme Verdict @Liiga Smilshkalne
+273 C Arcane Signet @Randy Gallegos
+274 U Basalt Monolith @Pablo Mendoza
+275 R Chromatic Lantern @Ignis Bruno
+276 C Commander's Sphere @Justyna Dura
+277 R Door of Destinies @Pierre Raveneau
+278 U Everflowing Chalice @Maxim Kostin
+279 U Heirloom Blade @Ramazan Kazaliev
+280 U Herald's Horn @Zoltan Boros
+281 U Lightning Greaves @Ignis Bruno
 282 U Mind Stone @Maxim Kostin
+283 C Pristine Talisman @Daniel Correia
 284 U Sol Ring @L J Koh
+285 U Talisman of Conviction @Tatiana Veryayskaya
+286 U Talisman of Progress @Tatiana Veryayskaya
+287 C Thought Vessel @Loïc Canavaggia
+288 R Trading Post @Josu Solano
+289 R Vanquisher's Banner @Uriah Voth
+290 C Wayfarer's Bauble @JB Casacop
+291 R Well of Lost Dreams @Jeremy Paillotin
+292 U Whispersilk Cloak @Wangjie Li
+293 U Worn Powerstone @Miklós Ligeti
+294 U Access Tunnel @Hristo D. Chukov
+295 U Ash Barrens @Sergio Cosmai
+296 R Battlefield Forge @Victor Harmatiuk
+297 R Brushland @Ramazan Kazaliev
+298 R Canopy Vista @Jeremy Paillotin
+299 R Choked Estuary @Lixin Yin
+300 R Clifftop Retreat @Wei Guan
+301 C Command Tower @Sean Vo
+302 U Crumbling Necropolis @Lorenzo Lanfranconi
+303 R Desolate Lighthouse @Marco Gorlei
+304 R Dragonskull Summit @Chris Cold
+305 R Drowned Catacomb @Calder Moore
 306 C Evolving Wilds @Pavel Kolomeyets
+307 R Exotic Orchard @Pablo Mendoza
 308 U Field of Ruin @Shahab Alizadeh
+309 R Flooded Grove @Erikas Perl
+310 R Foreboding Ruins @Nino Is
+311 R Fortified Village @Constantin Marin
+312 R Frostboil Snarl @Alexander Forssberg
+313 R Furycalm Snarl @Tomáš Honz
+314 U Ghost Quarter @Lorenzo Lanfranconi
+315 R Glacial Fortress @Andrea Piparo
 316 U Graypelt Refuge @Erikas Perl
-337 M Yavimaya, Cradle of Growth @Samuel Perin
+317 R Hinterland Harbor @Oleg Shekhovtsov
+318 R Isolated Chapel @Craig Elliott
+319 U Lonely Sandbar @Pierre Raveneau
+320 R Murmuring Bosk @Antonio José Manzanedo
+321 R Necroblossom Snarl @Jonas De Ro
+322 C Path of Ancestry @Hristo D. Chukov
+323 R Port Town @Marina Ortega Lorente
+324 R Prairie Stream @David Frasheski
+325 R Rejuvenating Springs @Stephen Stark
+326 U Rogue's Passage @David Frasheski
+327 U Sandsteppe Citadel @Titus Lunter
+328 R Scattered Groves @Andrea Piparo
+329 C Scoured Barrens @Samuele Bandini
+330 U Secluded Courtyard @Pablo Mendoza
+331 R Shineshadow Snarl @Jonas De Ro
+332 R Smoldering Marsh @Logan Feliciano
+333 R Sulfur Falls @Nino Is
+334 R Sulfurous Springs @Jeremy Paillotin
+335 R Sunken Hollow @Pavel Kolomeyets
+336 R Sunpetal Grove @Lixin Yin
+337 C Terramorphic Expanse @Alexander Gering
+338 C Thornwood Falls @Yigit Koroglu
+339 R Throne of the High City @Pablo Mendoza
+340 C Tranquil Cove @Arthur Yuan
+341 U Tranquil Thicket @Jonas De Ro
+342 R Underground River @Logan Feliciano
+343 R Vineglimmer Snarl @Tomáš Honz
+344 C Wind-Scarred Crag @Nino Is
+345 R Windbrisk Heights @Jokubas Uogintas
+346 R Woodland Cemetery @Hristo D. Chukov
+347 C Woodland Stream @Lucas Terryn
 348 M The Great Henge @Jeremy Paillotin
 349 M Cloudstone Curio @Erikas Perl
 350 M Ensnaring Bridge @Stephen Stark
 351 M The Ozolith @Calder Moore
 352 M Rings of Brighthearth @Jonas De Ro
 353 M Shadowspear @Campbell White
+354 M Sword of Hearth and Home @Randy Gallegos
+355 M Sword of the Animist @Pavel Kolomeyets
+356 M Thorn of Amethyst @Igor Krstic
 357 M Ancient Tomb @Anastasia Balakchina
 358 M Bojuka Bog @Calder Moore
 359 M Boseiju, Who Shelters All @Jeremy Paillotin
+360 M Cabal Coffers @Sean Vo
+361 M Castle Ardenvale @Jeremy Paillotin
 362 M Cavern of Souls @Logan Feliciano
-363 R Deserted Temple @Calder Moore
+363 M Deserted Temple @Calder Moore
+364 M Gemstone Caverns @Jonas De Ro
 365 M Homeward Path @Erikas Perl
+366 M Horizon Canopy @Randy Gallegos
+367 M Karakas @Stephen Stark
+368 M Kor Haven @Erikas Perl
 369 M Minamo, School at Water's Edge @Stephen Stark
+370 M Mouth of Ronom @Marina Ortega Lorente
+371 M Oboro, Palace in the Clouds @Jonas De Ro
+372 M Pillar of the Paruns @Randy Gallegos
+373 M Reflecting Pool @Marco Gorlei
+374 M Shinka, the Bloodsoaked Keep @Logan Feliciano
+375 M Urborg, Tomb of Yawgmoth @Erikas Perl
 376 M Wasteland @Hristo D. Chukov
+377 M Yavimaya, Cradle of Growth @Erikas Perl
 378 M The Great Henge @Jeremy Paillotin
+379 M Cloudstone Curio @Erikas Perl
 380 M Ensnaring Bridge @Stephen Stark
+381 M The Ozolith @Calder Moore
+382 M Rings of Brighthearth @Jonas De Ro
+383 M Shadowspear @Campbell White
+384 M Sword of Hearth and Home @Randy Gallegos
+385 M Sword of the Animist @Pavel Kolomeyets
+386 M Thorn of Amethyst @Igor Krstic
+387 M Ancient Tomb @Anastasia Balakchina
+388 M Bojuka Bog @Calder Moore
+389 M Boseiju, Who Shelters All @Jeremy Paillotin
+390 M Cabal Coffers @Sean Vo
+391 M Castle Ardenvale @Jeremy Paillotin
+392 M Cavern of Souls @Logan Feliciano
+393 M Deserted Temple @Calder Moore
+394 M Gemstone Caverns @Jonas De Ro
+395 M Homeward Path @Erikas Perl
+396 M Horizon Canopy @Randy Gallegos
+397 M Karakas @Stephen Stark
+398 M Kor Haven @Erikas Perl
+399 M Minamo, School at Water's Edge @Stephen Stark
+400 M Mouth of Ronom @Marina Ortega Lorente
+401 M Oboro, Palace in the Clouds @Jonas De Ro
+402 M Pillar of the Paruns @Randy Gallegos
+403 M Reflecting Pool @Marco Gorlei
+404 M Shinka, the Bloodsoaked Keep @Logan Feliciano
+405 M Urborg, Tomb of Yawgmoth @Erikas Perl
 406 M Wasteland @Hristo D. Chukov
+407 M Yavimaya, Cradle of Growth @Erikas Perl
 408 M Sol Ring @Randy Gallegos
 409 M Sol Ring @Erikas Perl
 410 M Sol Ring @Anastasia Balakchina
+
+[tokens]
+b_3_3_wraith_menace
+br_6_6_dragon_flying_menace_steal
+g_1_1_elf_warrior
+g_1_1_insect_flying_deathtouch
+g_3_3_beast
+g_x_x_treefolk
+r_1_1_goblin
+r_2_2_human_knight_trample_haste
+u_2_2_bird_flying
+w_0_1_goat
+w_1_1_halfling
+w_1_1_human
+w_1_1_soldier_lifelink
+w_3_3_bird_flying_attacks

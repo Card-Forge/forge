@@ -5,7 +5,7 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Investigate | Cost$ 4 T | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ ClueResearch | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you sacrificed three or more clues this turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-SVar:ClueResearch:Count$SacrificedThisTurn Clue
+SVar:ClueResearch:PlayerCountPropertyYou$SacrificedThisTurn Clue
 DeckHas:Ability$Investigate|Token|Sacrifice|Graveyard
 DeckHints:Ability$Investigate
 AlternateMode:DoubleFaced

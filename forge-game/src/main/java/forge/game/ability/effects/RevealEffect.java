@@ -32,7 +32,7 @@ public class RevealEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            final CardCollectionView cardsInHand = p.getZone(ZoneType.Hand).getCards();
+            final CardCollectionView cardsInHand = p.getCardsIn(ZoneType.Hand);
             if (cardsInHand.isEmpty()) {
                 continue;
             }
@@ -47,17 +47,8 @@ public class RevealEffect extends SpellAbilityEffect {
                 if (valid.isEmpty())
                     continue;
 
-                if (sa.hasParam("NumCards")) {
-                    final int revealnum = Math.min(cardsInHand.size(), cnt);
-                    for (int i = 0; i < revealnum; i++) {
-                        final Card random = Aggregates.random(valid);
-                        revealed.add(random);
-                        valid.remove(random);
-                    }
-                } else {
-                    revealed.add(Aggregates.random(valid));
-                }
-
+                final int revealnum = Math.min(valid.size(), cnt);
+                revealed.addAll(Aggregates.random(valid, revealnum));
             } else if (sa.hasParam("RevealDefined")) {
                 revealed.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RevealDefined"), sa));
             } else if (sa.hasParam("RevealAllValid")) {
@@ -72,27 +63,22 @@ public class RevealEffect extends SpellAbilityEffect {
                 if (valid.isEmpty())
                     continue;
 
-                if (sa.hasParam("RevealAll")) { //for when cards to reveal are not in hand
-                    revealed.addAll(valid);
-                } else {
-                    if (cnt > valid.size())
-                        cnt = valid.size();
+                if (cnt > valid.size())
+                    cnt = valid.size();
 
-                    int min = cnt;
-                    if (anyNumber) {
-                        cnt = valid.size();
-                        min = 0;
-                    } else if (optional) {
-                        min = 0;
-                    }
-
-                    revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
+                int min = cnt;
+                if (anyNumber) {
+                    cnt = valid.size();
+                    min = 0;
+                } else if (optional) {
+                    min = 0;
                 }
+
+                revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
             }
 
             if (sa.hasParam("RevealToAll") || sa.hasParam("Random")) {
-                game.getAction().reveal(revealed, p, false,
-                        sa.getParamOrDefault("RevealTitle", ""));
+                game.getAction().reveal(revealed, p, false, sa.getParamOrDefault("RevealTitle", ""));
             } else {
                 game.getAction().reveal(revealed, p);
             }

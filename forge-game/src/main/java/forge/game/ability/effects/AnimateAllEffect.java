@@ -7,7 +7,6 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.game.Game;
@@ -43,8 +42,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
-
-        final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
@@ -146,7 +143,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors, keywords, removeKeywords,
-                    hiddenKeywords, abilities, triggers, replacements, stAbs, timestamp);
+                    hiddenKeywords, abilities, triggers, replacements, stAbs, timestamp, sa.getParam("Duration"));
 
             // give sVars
             if (!sVarsMap.isEmpty() ) {
@@ -154,21 +151,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
             }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
-
-            if (!permanent) {
-                final GameCommand unanimate = new GameCommand() {
-                    private static final long serialVersionUID = -5861759814760561373L;
-
-                    @Override
-                    public void run() {
-                        doUnanimate(c, timestamp);
-
-                        game.fireEvent(new GameEventCardStatsChanged(c));
-                    }
-                };
-
-                addUntilCommand(sa, unanimate);
-            }
         }
     }
 

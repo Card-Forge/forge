@@ -88,7 +88,6 @@ public class DeckHints {
         int num = 0;
         for (String hint : hints) {
             for (Pair<Type, String> filter : filters) {
-                System.out.println(filter.getLeft() + " = type = " +  type + "    "+ filter.getRight() + " =filter=   " + hint);
                 if (filter.getLeft() == type && filter.getRight().equals(hint)) {
                     num++;
                     if (num == hints.length) {

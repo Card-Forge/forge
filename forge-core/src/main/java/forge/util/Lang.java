@@ -196,9 +196,9 @@ public abstract class Lang {
 
     public final static String[] numbers0 = new String[] {
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eightteen",
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
             "nineteen" };
-    public final static String[] numbers20 = new String[] { "twenty", "thirty", "fourty", "fifty", "sixty", "seventy",
+    public final static String[] numbers20 = new String[] { "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
             "eighty", "ninety" };
 
     public static String getNumeral(int n) {
