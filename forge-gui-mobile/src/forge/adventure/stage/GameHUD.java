@@ -788,7 +788,7 @@ public class GameHUD extends Stage {
         }
     }
     void restorePlayerCollision() {
-        if (MapStage.getInstance().isInMap() && MapStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
+        if (MapStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
             SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
                 @Override
                 public boolean act(float v) {
@@ -802,7 +802,8 @@ public class GameHUD extends Stage {
                 }
             });
             MapStage.getInstance().getPlayerSprite().addAction(flicker);
-        } else if (WorldStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
+        }
+        if (WorldStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
             SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
                 @Override
                 public boolean act(float v) {
