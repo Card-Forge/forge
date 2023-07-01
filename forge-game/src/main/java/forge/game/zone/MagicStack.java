@@ -44,7 +44,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -694,8 +693,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(false);
-        sa.setLastStateBattlefield(CardCollection.EMPTY);
-        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 

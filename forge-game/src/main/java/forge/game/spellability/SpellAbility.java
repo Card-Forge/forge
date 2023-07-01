@@ -828,10 +828,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isActivatedAbility()) {
             setXManaCostPaid(null);
         }
-
-        // reset last state when finished resolving
-        setLastStateBattlefield(CardCollection.EMPTY);
-        setLastStateGraveyard(CardCollection.EMPTY);
     }
 
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description

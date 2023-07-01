@@ -306,7 +306,6 @@ public class GameAction {
             }
 
             copied.setUnearthed(c.isUnearthed());
-            copied.setTapped(false);
 
             // need to copy counters when card enters another zone than hand or library
             if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
@@ -647,7 +646,6 @@ public class GameAction {
             }
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
         }
-        // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
         if (suppress) {
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
