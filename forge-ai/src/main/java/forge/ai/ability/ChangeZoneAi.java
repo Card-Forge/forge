@@ -118,11 +118,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (aiLogic.equals("Always")) {
                 return true;
             } else if (aiLogic.startsWith("ExileSpell")) {
-                int minCost = 0;
-                if (aiLogic.contains(".")) {
-                    minCost = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
-                }
-                return doExileSpellLogic(aiPlayer, sa, minCost);
+                return doExileSpellLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
                 return doSacAndUpgradeLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndRetFromGrave")) { // Recurring Nightmare, etc.
@@ -2082,10 +2078,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
     }
 
-    private boolean doExileSpellLogic(final Player aiPlayer, final SpellAbility sa, int minCost) {
+    private boolean doExileSpellLogic(final Player aiPlayer, final SpellAbility sa) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
         SpellAbilityStackInstance top = aiPlayer.getGame().getStack().peek();
         List<ApiType> dangerousAPI = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
         int manaCost = 0;
+        int minCost = 0;
+
+        if (aiLogic.contains(".")) {
+            minCost = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
+        }
 
         if (top != null) {
             SpellAbility topSA = top.getSpellAbility(false);
