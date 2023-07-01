@@ -28,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
@@ -116,6 +117,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (aiLogic != null) {
             if (aiLogic.equals("Always")) {
                 return true;
+            } else if (aiLogic.startsWith("ExileSpell")) {
+                int minCost = 0;
+                if (aiLogic.contains(".")) {
+                    minCost = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
+                }
+                return doExileSpellLogic(aiPlayer, sa, minCost);
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
                 return doSacAndUpgradeLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndRetFromGrave")) { // Recurring Nightmare, etc.
@@ -2073,6 +2080,29 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             return isWorstChoice ? ComputerUtilCard.getWorstAI(fetchList) : ComputerUtilCard.getBestAI(fetchList);
         }
+    }
+
+    private boolean doExileSpellLogic(final Player aiPlayer, final SpellAbility sa, int minCost) {
+        SpellAbilityStackInstance top = aiPlayer.getGame().getStack().peek();
+        List<ApiType> dangerousAPI = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
+        int manaCost = 0;
+
+        if (top != null) {
+            SpellAbility topSA = top.getSpellAbility(false);
+            if (topSA != null) {
+                if (topSA.getPayCosts().hasManaCost()) {
+                    manaCost = topSA.getPayCosts().getTotalMana().getCMC();
+                }
+
+                if ((manaCost >= minCost || dangerousAPI.contains(topSA.getApi()))
+                        && topSA.getActivatingPlayer().isOpponentOf(aiPlayer)
+                        && sa.canTargetSpellAbility(topSA)) {
+                    sa.getTargets().add(topSA);
+                    return sa.isTargetNumberValid();
+                }
+            }
+        }
+        return false;
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {
