@@ -2099,6 +2099,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if ((manaCost >= minCost || dangerousAPI.contains(topSA.getApi()))
                         && topSA.getActivatingPlayer().isOpponentOf(aiPlayer)
                         && sa.canTargetSpellAbility(topSA)) {
+                    sa.resetTargets();
                     sa.getTargets().add(topSA);
                     return sa.isTargetNumberValid();
                 }
