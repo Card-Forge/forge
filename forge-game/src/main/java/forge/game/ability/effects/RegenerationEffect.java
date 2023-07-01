@@ -39,7 +39,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCardRegenerated(c));
 
             if (host.isImmutable()) {
-                c.subtractShield(host);
+                c.decShieldCount();
                 host.removeRemembered(c);
             }
 

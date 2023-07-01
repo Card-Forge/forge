@@ -268,7 +268,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean hasBeenDealtExcessDamageThisTurn;
 
     // regeneration
-    private FCollection<Card> shields = new FCollection<>();
+    private int shieldCount = 0;
     private int regeneratedThisTurn;
 
     private int turnInZone;
@@ -3230,28 +3230,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     // shield = regeneration
-    public final Iterable<Card> getShields() {
-        return shields;
-    }
     public final int getShieldCount() {
-        return shields.size();
+        return shieldCount;
     }
 
-    public final void addShield(final Card shield) {
-        if (shields.add(shield)) {
-            view.updateShieldCount(this);
-        }
+    public final void incShieldCount() {
+        shieldCount++;
+        view.updateShieldCount(this);
     }
 
-    public final void subtractShield(final Card shield) {
-        if (shields.remove(shield)) {
-            view.updateShieldCount(this);
-        }
+    public final void decShieldCount() {
+        shieldCount--;
+        view.updateShieldCount(this);
     }
 
-    public final void resetShield() {
-        if (shields.isEmpty()) { return; }
-        shields.clear();
+    public final void resetShieldCount() {
+        shieldCount = 0;
         view.updateShieldCount(this);
     }
 
@@ -6597,7 +6591,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setHasBeenDealtDeathtouchDamage(false);
         setHasBeenDealtExcessDamageThisTurn(false);
         setRegeneratedThisTurn(0);
-        resetShield();
+        resetShieldCount();
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
         clearMustBlockCards();
