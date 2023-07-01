@@ -189,7 +189,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setClassLevelOperator(params.get("ClassLevel").substring(0, 2));
             this.setClassLevel(params.get("ClassLevel").substring(2));
         }
-    } // end setRestrictions()
+    }
 
     /**
      * <p>

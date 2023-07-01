@@ -226,6 +226,17 @@ public class GameAction {
         if (suppress || toBattlefield) {
             copied = c;
 
+            // 400.8. If an object in the exile zone is exiled, it doesn't change zones,
+            // but it becomes a new object that has just been exiled.
+            if (zoneTo.is(ZoneType.Exile)) {
+                copied = CardFactory.copyCard(c, false);
+                copied.setTimestamp(game.getNextTimestamp());
+
+                if (c.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
+                    copied.setCounters(Maps.newHashMap(c.getCounters()));
+                }
+            }
+
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
@@ -600,7 +611,7 @@ public class GameAction {
         }
 
         // only now that the LKI preserved it
-        if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
+        if (!zoneTo.is(ZoneType.Stack)) {
             c.cleanupExiledWith();
         }
 
@@ -923,10 +934,6 @@ public class GameAction {
         return result;
     }
     public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        if (game.isCardExiled(c)) {
-            return c;
-        }
-
         final Zone origin = c.getZone();
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
         final Card copied = moveTo(removed, c, cause, params);
