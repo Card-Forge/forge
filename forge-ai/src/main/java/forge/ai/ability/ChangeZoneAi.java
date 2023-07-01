@@ -2081,7 +2081,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private boolean doExileSpellLogic(final Player aiPlayer, final SpellAbility sa) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
         SpellAbilityStackInstance top = aiPlayer.getGame().getStack().peek();
-        List<ApiType> dangerousAPI = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
+        List<ApiType> dangerousApi = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
         int manaCost = 0;
         int minCost = 0;
 
@@ -2096,7 +2096,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     manaCost = topSA.getPayCosts().getTotalMana().getCMC();
                 }
 
-                if ((manaCost >= minCost || dangerousAPI.contains(topSA.getApi()))
+                if ((manaCost >= minCost || dangerousApi.contains(topSA.getApi()))
                         && topSA.getActivatingPlayer().isOpponentOf(aiPlayer)
                         && sa.canTargetSpellAbility(topSA)) {
                     sa.resetTargets();
