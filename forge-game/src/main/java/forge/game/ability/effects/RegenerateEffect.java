@@ -22,7 +22,6 @@ public class RegenerateEffect extends RegenerateBaseEffect {
             sb.append(Lang.joinHomogenous(tgtCards));
             sb.append(".");
         }
-        sb.append(".");
 
         return sb.toString();
     }

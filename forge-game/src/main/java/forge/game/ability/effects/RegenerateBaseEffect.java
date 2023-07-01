@@ -13,8 +13,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -46,6 +44,11 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
         SpellAbility saReg = AbilityFactory.getAbility(effect, eff);
         AbilitySub saExile = (AbilitySub)AbilityFactory.getAbility(exileEff, eff);
 
+        if (sa.hasAdditionalAbility("RegenerationAbility")) {
+            AbilitySub trigSA = (AbilitySub)sa.getAdditionalAbility("RegenerationAbility").copy(eff, sa.getActivatingPlayer(), false);
+            saExile.setSubAbility(trigSA);
+        }
+
         saReg.setSubAbility(saExile);
         re.setOverridingAbility(saReg);
         eff.addReplacementEffect(re);
@@ -53,18 +56,6 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
         // add extra Remembered
         if (sa.hasParam("RememberObjects")) {
             eff.addRemembered(AbilityUtils.getDefinedObjects(hostCard, sa.getParam("RememberObjects"), sa));
-        }
-
-        if (sa.hasParam("RegenerationTrigger")) {
-            final String str = sa.getSVar(sa.getParam("RegenerationTrigger"));
-
-            SpellAbility trigSA = AbilityFactory.getAbility(str, eff);
-
-            final String trigStr = "Mode$ Regenerated | ValidCause$ Effect.Self | TriggerZones$ Command "
-                    + " | TriggerDescription$ " + trigSA.getDescription();
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, eff, true);
-            trigger.setOverridingAbility(trigSA);
-            eff.addTrigger(trigger);
         }
 
         // Copy text changes
