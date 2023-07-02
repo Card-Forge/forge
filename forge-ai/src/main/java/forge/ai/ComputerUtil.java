@@ -2424,6 +2424,18 @@ public class ComputerUtil {
                         }
                     }
                 }
+            } else if (logic.equals("ProtectionFromType")) {
+                // TODO: protection vs. damage-dealing and milling instants/sorceries in low creature decks and the like?
+                // Maybe non-creature artifacts in certain cases?
+                List<String> choices = ImmutableList.of("Creature", "Planeswalker"); // types that make sense to get protected against
+                CardCollection evalList = new CardCollection();
+
+                evalList.addAll(ai.getOpponents().getCardsIn(ZoneType.Battlefield));
+
+                chosen = ComputerUtilCard.getMostProminentCardType(evalList, choices);
+                if (StringUtils.isEmpty(chosen)) {
+                    chosen = "Creature"; // if in doubt, choose Creature, I guess
+                }
             }
             else {
                 // Are we picking a type to reduce costs for that type?

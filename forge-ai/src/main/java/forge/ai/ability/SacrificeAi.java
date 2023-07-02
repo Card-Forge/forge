@@ -114,13 +114,14 @@ public class SacrificeAi extends SpellAbilityAi {
         }
 
         final String defined = sa.getParamOrDefault("Defined", "You");
+        final String targeted = sa.getParamOrDefault("ValidTgts", "");
         final String valid = sa.getParamOrDefault("SacValid", "Self");
         if (valid.equals("Self")) {
             // Self Sacrifice.
-        } else if (defined.equals("Player")
+        } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")
                 || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
             // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
-            
+
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
