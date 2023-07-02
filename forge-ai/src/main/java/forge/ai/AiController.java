@@ -1318,7 +1318,6 @@ public class AiController {
             });
             if (!bandingCreatures.isEmpty()) {
                 List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow");
-                String[] validString = {"Legendary.Creature", "Creature.namedWolves of the Hunt", "Dinosaur"};
 
                 // TODO: Assign to band with the best attacker for now, but needs better logic.
                 CardCollection attackers = combat.getAttackers();
@@ -1330,8 +1329,22 @@ public class AiController {
                     }
                 }));
                 for (Card c : bandingCreatures) {
-                    // TODO: check for legality in Bands with Other X
-                    if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                    if (c.hasKeyword("Bands with Other Legendary Creatures")) {
+                        Card bestLegendary = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
+                        if (bestLegendary != null) {
+                            combat.addAttacker(c, combat.getDefenderByAttacker(bestLegendary), combat.getBandOfAttacker(bestLegendary));
+                        }
+                    } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
+                        Card bestDinosaur = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
+                        if (bestDinosaur != null) {
+                            combat.addAttacker(c, combat.getDefenderByAttacker(bestDinosaur), combat.getBandOfAttacker(bestDinosaur));
+                        }
+                    } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
+                        Card bestWOTH = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
+                        if (bestWOTH != null) {
+                            combat.addAttacker(c, combat.getDefenderByAttacker(bestWOTH), combat.getBandOfAttacker(bestWOTH));
+                        }
+                    } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) { // Flying, Shadow, Horsemanship
                         if (bestAttackerNoEvasion != null) {
                             combat.addAttacker(c, combat.getDefenderByAttacker(bestAttackerNoEvasion), combat.getBandOfAttacker(bestAttackerNoEvasion));
                         }
