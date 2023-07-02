@@ -1304,6 +1304,44 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker); 
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
+        // Check if we can reinforce with Banding creatures
+        if (!combat.getAttackers().isEmpty()) {
+            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
+                    "Bands with Other Creatures named Wolves of the Hunt",
+                    "Bands with Other Dinosaurs");
+            List<Card> bandingCreatures = new CardCollection(aiAtk.notNeededAsBlockers(attacker.getCreaturesInPlay()));
+            bandingCreatures = CardLists.filter(bandingCreatures, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString);
+                }
+            });
+            if (!bandingCreatures.isEmpty()) {
+                List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow");
+                String[] validString = {"Legendary.Creature", "Creature.namedWolves of the Hunt", "Dinosaur"};
+
+                // TODO: Assign to band with the best attacker for now, but needs better logic.
+                CardCollection attackers = combat.getAttackers();
+                Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
+                Card bestAttackerNoEvasion = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        return !card.hasAnyKeyword(evasionKeywords);
+                    }
+                }));
+                for (Card c : bandingCreatures) {
+                    // TODO: check for legality in Bands with Other X
+                    if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                        if (bestAttackerNoEvasion != null) {
+                            combat.addAttacker(c, combat.getDefenderByAttacker(bestAttackerNoEvasion), combat.getBandOfAttacker(bestAttackerNoEvasion));
+                        }
+                    } else {
+                        combat.addAttacker(c, combat.getDefenderByAttacker(bestAttacker), combat.getBandOfAttacker(bestAttacker));
+                    }
+                }
+            }
+        }
+
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
             combat.clearAttackers();
