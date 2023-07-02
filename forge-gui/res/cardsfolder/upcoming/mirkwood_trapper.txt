@@ -1,0 +1,11 @@
+Name:Mirkwood Trapper
+ManaCost:1 G U
+Types:Creature Elf Scout
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You, | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player attacks you, target attacking creature gets -2/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.ControlledBy TriggeredAttackingPlayer | NumAtt$ -2 | IsCurse$ True
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player.Other | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.ControlledBy TriggeredAttackingPlayer | SubAbility$ DBPump | SpellDescription$ Target player reveals their hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 
+AI:RemoveDeck:All
+Oracle:Whenever a player attacks you, target attacking creature gets -2/-0 until end of turn.\nWhenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.
