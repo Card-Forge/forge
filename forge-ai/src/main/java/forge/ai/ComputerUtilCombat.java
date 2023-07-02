@@ -2111,9 +2111,9 @@ public class ComputerUtilCombat {
                     }
                 }
             } else {
-                // In the event of Banding or Defensive Formation, assign max damage to a single blocker to lose
+                // In the event of Banding or Defensive Formation, assign max damage to the weakest blocker to lose
                 // as little as possible
-                damageMap.put(block.getFirst(), dmgCanDeal);
+                damageMap.put(ComputerUtilCard.getWorstCreatureAI(block), dmgCanDeal);
             }
         }
         return damageMap;
