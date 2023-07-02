@@ -182,8 +182,9 @@ public class Forge implements ApplicationListener {
         ForgePreferences prefs = new ForgePreferences();
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
-        if (prefs.getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != (screenWidth > screenHeight)) {
-            prefs.setPref(FPref.UI_LANDSCAPE_MODE, (screenWidth > screenHeight));
+        boolean landscapeMode = GuiBase.isAndroid() ? !isPortraitMode : screenWidth > screenHeight;
+        if (prefs.getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != landscapeMode) {
+            prefs.setPref(FPref.UI_LANDSCAPE_MODE, landscapeMode);
             prefs.save();
         }
         String skinName;
