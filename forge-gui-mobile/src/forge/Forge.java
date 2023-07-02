@@ -210,13 +210,13 @@ public class Forge implements ApplicationListener {
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
-        else if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
+        else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
             enableUIMask = "Off";
-        enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-        locale = prefs.getPref(FPref.UI_LANGUAGE);
-        autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
-        disposeTextures = prefs.getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
-        CJK_Font = prefs.getPref(FPref.UI_CJK_FONT);
+        enablePreloadExtendedArt = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+        locale = getForgePreferences().getPref(FPref.UI_LANGUAGE);
+        autoCache = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
+        disposeTextures = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+        CJK_Font = getForgePreferences().getPref(FPref.UI_CJK_FONT);
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 300. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
