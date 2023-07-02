@@ -2023,6 +2023,8 @@ public class ComputerUtilCombat {
      * distributeAIDamage.
      * </p>
      *
+     * @param self
+     *            a {@link forge.game.player.Player} object.
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param block
@@ -2031,16 +2033,18 @@ public class ComputerUtilCombat {
      * @param defender
      * @param overrideOrder overriding combatant order
      */
-    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
+    public static Map<Card, Integer> distributeAIDamage(final Player self, final Card attacker, final CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
         // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
         Map<Card, Integer> damageMap = Maps.newHashMap();
         Combat combat = attacker.getGame().getCombat();
 
         boolean isAttacking = defender != null;
+        // TODO: is this enough to determine the fact that we're legally assigning combat damage to our creatures?
+        boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self); // Banding, Defensive Formation - the AI assigns combat damage to itself
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && remaining != null && hasTrample && attacker.isAttacking()) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking() && !isAttackingMe) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2061,7 +2065,7 @@ public class ComputerUtilCombat {
             final Card blocker = block.getFirst();
             int dmgToBlocker = dmgCanDeal;
 
-            if (hasTrample && isAttacking) { // otherwise no entity to deliver damage via trample
+            if (hasTrample && isAttacking && !isAttackingMe) { // otherwise no entity to deliver damage via trample
                 dmgToBlocker = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
                 if (dmgCanDeal < dmgToBlocker) {
@@ -2078,32 +2082,38 @@ public class ComputerUtilCombat {
             damageMap.put(blocker, dmgToBlocker);
         } // 1 blocker
         else {
-            // Does the attacker deal lethal damage to all blockers
-            //Blocking Order now determined after declare blockers
-            Card lastBlocker = null;
-            for (final Card b : block) {
-                lastBlocker = b;
-                final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
-                if (dmgToKill <= dmgCanDeal) {
-                    damageMap.put(b, dmgToKill);
-                    dmgCanDeal -= dmgToKill;
-                } else {
-                    // if it can't be killed choose the minimum damage
-                    int dmg = Math.min(b.getLethalDamage(), dmgCanDeal);
-                    damageMap.put(b, dmg);
-                    dmgCanDeal -= dmg;
-                    if (dmgCanDeal <= 0) {
-                        break;
+            if (!isAttackingMe) {
+                // Does the attacker deal lethal damage to all blockers
+                //Blocking Order now determined after declare blockers
+                Card lastBlocker = null;
+                for (final Card b : block) {
+                    lastBlocker = b;
+                    final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
+                    if (dmgToKill <= dmgCanDeal) {
+                        damageMap.put(b, dmgToKill);
+                        dmgCanDeal -= dmgToKill;
+                    } else {
+                        // if it can't be killed choose the minimum damage
+                        int dmg = Math.min(b.getLethalDamage(), dmgCanDeal);
+                        damageMap.put(b, dmg);
+                        dmgCanDeal -= dmg;
+                        if (dmgCanDeal <= 0) {
+                            break;
+                        }
+                    }
+                } // for
+
+                if (dmgCanDeal > 0) { // if any damage left undistributed,
+                    if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
+                        damageMap.put(null, dmgCanDeal);
+                    else if (lastBlocker != null) { // otherwise flush it into last blocker
+                        damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
                     }
                 }
-            } // for
-
-            if (dmgCanDeal > 0 ) { // if any damage left undistributed,
-                if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
-                    damageMap.put(null, dmgCanDeal);
-                else if (lastBlocker != null) { // otherwise flush it into last blocker
-                    damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
-                }
+            } else {
+                // In the event of Banding or Defensive Formation, assign max damage to a single blocker to lose
+                // as little as possible
+                damageMap.put(block.getFirst(), dmgCanDeal);
             }
         }
         return damageMap;

@@ -106,7 +106,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, CardCollectionView remaining, int damageDealt, GameEntity defender, boolean overrideOrder) {
-        return ComputerUtilCombat.distributeAIDamage(attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+        return ComputerUtilCombat.distributeAIDamage(player, attacker, blockers, remaining, damageDealt, defender, overrideOrder);
     }
 
     @Override
