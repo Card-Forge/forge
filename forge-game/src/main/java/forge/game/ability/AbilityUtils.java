@@ -561,9 +561,9 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
-        } else if (calcX[0].equals("LastStateBattlefield") && ability instanceof SpellAbility) {
-            Card c = ((SpellAbility) ability).getLastStateBattlefield().get(card);
-            val = c == null ? 0 : xCount(c, calcX[1], ability);
+        } else if (calcX[0].equals("ThisTurnCast") && ability instanceof SpellAbility) {
+            String[] def = calcX[1].split("\\$", 2);
+            val = handlePaid(CardUtil.getThisTurnCast(def[0], card, ability, player), def[1], card, ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
 	    } else if (calcX[0].startsWith("Convoked")) {
