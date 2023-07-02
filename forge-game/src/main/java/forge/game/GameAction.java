@@ -223,19 +223,8 @@ public class GameAction {
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || toBattlefield) {
+        if (toBattlefield || (suppress && zoneTo.getZoneType().isHidden())) {
             copied = c;
-
-            // 400.8. If an object in the exile zone is exiled, it doesn't change zones,
-            // but it becomes a new object that has just been exiled.
-            if (zoneTo.is(ZoneType.Exile)) {
-                copied = CardFactory.copyCard(c, false);
-                copied.setTimestamp(game.getNextTimestamp());
-
-                if (c.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
-                    copied.setCounters(Maps.newHashMap(c.getCounters()));
-                }
-            }
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
@@ -396,7 +385,7 @@ public class GameAction {
             }
         }
 
-        if (!zoneTo.is(ZoneType.Stack) && !suppress) {
+        if (!zoneTo.is(ZoneType.Stack)) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
             copied.setTimestamp(game.getNextTimestamp());
         }
