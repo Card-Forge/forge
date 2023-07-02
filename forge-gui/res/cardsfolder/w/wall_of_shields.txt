@@ -4,5 +4,4 @@ Types:Artifact Creature Wall
 PT:0/4
 K:Defender
 K:Banding
-AI:RemoveDeck:All
 Oracle:Defender (This creature can't attack.)\nBanding (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)
