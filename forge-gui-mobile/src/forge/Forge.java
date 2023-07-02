@@ -182,6 +182,10 @@ public class Forge implements ApplicationListener {
         ForgePreferences prefs = new ForgePreferences();
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
+        if (prefs.getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != (screenWidth > screenHeight)) {
+            prefs.setPref(FPref.UI_LANDSCAPE_MODE, (screenWidth > screenHeight));
+            prefs.save();
+        }
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = prefs.getPref(FPref.UI_SKIN);
@@ -378,12 +382,6 @@ public class Forge implements ApplicationListener {
         afterDBloaded = true;
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
-
-        //update landscape mode preference if it doesn't match what the app loaded as
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
-            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
-            FModel.getPreferences().save();
-        }
 
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             //load skin full
