@@ -1,0 +1,11 @@
+Name:Saruman, the White Hand
+ManaCost:1 U B R
+Types:Legendary Creature Avatar Wizard
+PT:2/5
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigAmass | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, amass Orcs X, where X is that spell's mana value. (Put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ X
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+S:Mode$ Continuous | Affected$ Goblin.YouCtrl,Orc.YouCtrl | AddKeyword$ Ward:2 | Description$ Goblins and Orcs you control have ward {2}.
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+DeckHints:Type$Goblin|Orc
+Oracle:Whenever you cast a noncreature spell, amass Orcs X, where X is that spell’s mana value. (Put X +1/+1 counters on an Army you control. It’s also an Orc. If you don’t control an Army, create a 0/0 black Orc Army creature token first.)\nGoblins and Orcs you control have ward {2}.
