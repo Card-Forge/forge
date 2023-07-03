@@ -2055,11 +2055,11 @@ public class ComputerUtilCombat {
                 }
             }
         }
-        final boolean aiDistributesAttackerDmg = isAttackingMe || isBlockingMyBand;
+        final boolean aiDistributesBandingDmg = isAttackingMe || isBlockingMyBand;
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && remaining != null && hasTrample && attacker.isAttacking() && !aiDistributesAttackerDmg) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking() && !aiDistributesBandingDmg) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2080,7 +2080,7 @@ public class ComputerUtilCombat {
             final Card blocker = block.getFirst();
             int dmgToBlocker = dmgCanDeal;
 
-            if (hasTrample && isAttacking && !aiDistributesAttackerDmg) { // otherwise no entity to deliver damage via trample
+            if (hasTrample && isAttacking && !aiDistributesBandingDmg) { // otherwise no entity to deliver damage via trample
                 dmgToBlocker = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
                 if (dmgCanDeal < dmgToBlocker) {
@@ -2097,7 +2097,7 @@ public class ComputerUtilCombat {
             damageMap.put(blocker, dmgToBlocker);
         } // 1 blocker
         else {
-            if (!aiDistributesAttackerDmg) {
+            if (!aiDistributesBandingDmg) {
                 // Does the attacker deal lethal damage to all blockers
                 //Blocking Order now determined after declare blockers
                 Card lastBlocker = null;
