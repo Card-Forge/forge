@@ -1,13 +1,12 @@
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
+
+import java.util.List;
 
 public class AttackingBand {
     private CardCollection attackers = new CardCollection();
