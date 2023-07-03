@@ -320,6 +320,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+
+        if (sp.isSpell() && !sp.isCopied()) {
+            final Card lki = CardUtil.getLKICopy(sp.getHostCard());
+            runParams.put(AbilityKey.CardLKI, lki);
+            thisTurnCast.add(lki);
+            sp.getActivatingPlayer().addSpellCastThisTurn();
+        }
+
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
@@ -461,10 +469,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isSpell() && !sp.isCopied()) {
-            thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
-            sp.getActivatingPlayer().addSpellCastThisTurn();
-        }
         if (sp.isActivatedAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
