@@ -1,0 +1,8 @@
+Name:Relic of Sauron
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo U B R | Amount$ 2 | SpellDescription$ Add two mana in any combination of {U}, {B} and/or {R}.
+A:AB$ Draw | Cost$ 3 T | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose 
+DeckHas:Ability$Discard
+Oracle:{T}: Add two mana in any combination of {U}, {B} and/or {R}.\n{3}, {T}: Draw two cards, then discard a card.
