@@ -533,7 +533,7 @@ public class AiAttackController {
             CardCollection attackers = combat.getAttackers();
             Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
             for (Card c : bandingCreatures) {
-                Card bestBand = null;
+                Card bestBand;
 
                 if (c.hasKeyword("Bands with Other Legendary Creatures")) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
