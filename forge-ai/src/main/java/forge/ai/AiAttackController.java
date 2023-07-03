@@ -532,7 +532,6 @@ public class AiAttackController {
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             CardCollection attackers = combat.getAttackers();
             Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
-            Card bestAttackerNoEvasion = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
             for (Card c : bandingCreatures) {
                 Card bestBand = null;
 
@@ -543,7 +542,7 @@ public class AiAttackController {
                 } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
                 } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
-                    bestBand = bestAttackerNoEvasion;
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {
                     bestBand = bestAttacker;
                 }
