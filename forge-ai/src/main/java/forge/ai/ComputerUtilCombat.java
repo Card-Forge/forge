@@ -2130,7 +2130,7 @@ public class ComputerUtilCombat {
                 for (final Card b : block) {
                     final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                     if (dmgToKill > dmgCanDeal) {
-                        damageMap.put(b, dmgToKill);
+                        damageMap.put(b, dmgCanDeal);
                         break;
                     }
                 }
