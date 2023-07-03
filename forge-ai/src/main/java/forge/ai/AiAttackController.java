@@ -555,7 +555,9 @@ public class AiAttackController {
                     }
 
                     if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
-                        combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
+                        if (CombatUtil.canAttack(c, defender)) {
+                            combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
+                        }
                     }
                 }
             }

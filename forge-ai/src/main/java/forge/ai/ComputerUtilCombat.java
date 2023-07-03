@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -2039,11 +2040,26 @@ public class ComputerUtilCombat {
         Combat combat = attacker.getGame().getCombat();
 
         boolean isAttacking = defender != null;
+
+        // Check for Banding
         boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self); // Banding, Defensive Formation - the AI assigns combat damage to itself
+        boolean isBlockingMyBand = false;
+        if (attacker.getController().isOpponentOf(self)) {
+            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
+                    "Bands with Other Creatures named Wolves of the Hunt",
+                    "Bands with Other Dinosaurs");
+            for (final Card c : block) {
+                if (c.hasKeyword(Keyword.BANDING) || c.hasAnyKeyword(bandsWithString)) {
+                    isBlockingMyBand = true;
+                    break;
+                }
+            }
+        }
+        final boolean aiDistributesAttackerDmg = isAttackingMe || isBlockingMyBand;
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && remaining != null && hasTrample && attacker.isAttacking() && !isAttackingMe) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking() && !aiDistributesAttackerDmg) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2064,7 +2080,7 @@ public class ComputerUtilCombat {
             final Card blocker = block.getFirst();
             int dmgToBlocker = dmgCanDeal;
 
-            if (hasTrample && isAttacking && !isAttackingMe) { // otherwise no entity to deliver damage via trample
+            if (hasTrample && isAttacking && !aiDistributesAttackerDmg) { // otherwise no entity to deliver damage via trample
                 dmgToBlocker = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
                 if (dmgCanDeal < dmgToBlocker) {
@@ -2081,7 +2097,7 @@ public class ComputerUtilCombat {
             damageMap.put(blocker, dmgToBlocker);
         } // 1 blocker
         else {
-            if (!isAttackingMe) {
+            if (!aiDistributesAttackerDmg) {
                 // Does the attacker deal lethal damage to all blockers
                 //Blocking Order now determined after declare blockers
                 Card lastBlocker = null;
@@ -2110,9 +2126,18 @@ public class ComputerUtilCombat {
                     }
                 }
             } else {
-                // In the event of Banding or Defensive Formation, assign max damage to the weakest blocker to lose
-                // as little as possible
-                damageMap.put(ComputerUtilCard.getWorstCreatureAI(block), dmgCanDeal);
+                // In the event of Banding or Defensive Formation, assign max damage to the blocker who
+                // can tank all the damage or to the worst blocker to lose as little as possible
+                for (final Card b : block) {
+                    final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
+                    if (dmgToKill > dmgCanDeal) {
+                        damageMap.put(b, dmgToKill);
+                        break;
+                    }
+                }
+                if (damageMap.isEmpty()) {
+                    damageMap.put(ComputerUtilCard.getWorstCreatureAI(block), dmgCanDeal);
+                }
             }
         }
         return damageMap;
