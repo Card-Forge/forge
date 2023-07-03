@@ -2039,7 +2039,6 @@ public class ComputerUtilCombat {
         Combat combat = attacker.getGame().getCombat();
 
         boolean isAttacking = defender != null;
-        // TODO: is this enough to determine the fact that we're legally assigning combat damage to our creatures?
         boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self); // Banding, Defensive Formation - the AI assigns combat damage to itself
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);

@@ -1305,55 +1305,7 @@ public class AiController {
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
         // Check if we can reinforce with Banding creatures
-        if (!combat.getAttackers().isEmpty()) {
-            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
-                    "Bands with Other Creatures named Wolves of the Hunt",
-                    "Bands with Other Dinosaurs");
-            List<Card> bandingCreatures = new CardCollection(aiAtk.notNeededAsBlockers(attacker.getCreaturesInPlay()));
-            bandingCreatures = CardLists.filter(bandingCreatures, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString);
-                }
-            });
-            if (!bandingCreatures.isEmpty()) {
-                List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow");
-
-                // TODO: Assign to band with the best attacker for now, but needs better logic.
-                CardCollection attackers = combat.getAttackers();
-                Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
-                Card bestAttackerNoEvasion = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        return !card.hasAnyKeyword(evasionKeywords);
-                    }
-                }));
-                for (Card c : bandingCreatures) {
-                    if (c.hasKeyword("Bands with Other Legendary Creatures")) {
-                        Card bestLegendary = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
-                        if (bestLegendary != null) {
-                            combat.addAttacker(c, combat.getDefenderByAttacker(bestLegendary), combat.getBandOfAttacker(bestLegendary));
-                        }
-                    } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
-                        Card bestDinosaur = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
-                        if (bestDinosaur != null) {
-                            combat.addAttacker(c, combat.getDefenderByAttacker(bestDinosaur), combat.getBandOfAttacker(bestDinosaur));
-                        }
-                    } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
-                        Card bestWOTH = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
-                        if (bestWOTH != null) {
-                            combat.addAttacker(c, combat.getDefenderByAttacker(bestWOTH), combat.getBandOfAttacker(bestWOTH));
-                        }
-                    } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) { // Flying, Shadow, Horsemanship
-                        if (bestAttackerNoEvasion != null) {
-                            combat.addAttacker(c, combat.getDefenderByAttacker(bestAttackerNoEvasion), combat.getBandOfAttacker(bestAttackerNoEvasion));
-                        }
-                    } else {
-                        combat.addAttacker(c, combat.getDefenderByAttacker(bestAttacker), combat.getBandOfAttacker(bestAttacker));
-                    }
-                }
-            }
-        }
+        aiAtk.reinforceWithBanding(attacker, combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {

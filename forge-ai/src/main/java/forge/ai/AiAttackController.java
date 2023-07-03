@@ -48,10 +48,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -509,6 +506,54 @@ public class AiAttackController {
             }
         }
         return notNeededAsBlockers;
+    }
+
+    public void reinforceWithBanding(final Player player, final Combat combat) {
+        List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
+                "Bands with Other Creatures named Wolves of the Hunt",
+                "Bands with Other Dinosaurs");
+
+        List<Card> bandingCreatures = new CardCollection(notNeededAsBlockers(player.getCreaturesInPlay()));
+        bandingCreatures = CardLists.filter(bandingCreatures, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+
+        // filter out anything that can't legally attack or is already declared as an attacker
+        bandingCreatures = CardLists.filter(bandingCreatures, card -> CombatUtil.canAttack(card) && !combat.isAttacking(card));
+
+        if (!bandingCreatures.isEmpty()) {
+            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
+                    "Forestwalk", "Mountainwalk", "Swampwalk", "Protection from white", "Protection from black",
+                    "Protection from green", "Protection from red", "Protection from blue", "Protection from all colors",
+                    "Protection from colorless", "Protection from everything", "Protection from creatures");
+
+            // TODO: Assign to band with the best attacker for now, but needs better logic.
+            CardCollection attackers = combat.getAttackers();
+            Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
+            Card bestAttackerNoEvasion = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
+            for (Card c : bandingCreatures) {
+                if (c.hasKeyword("Bands with Other Legendary Creatures")) {
+                    Card bestLegendary = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
+                    if (bestLegendary != null) {
+                        combat.addAttacker(c, combat.getDefenderByAttacker(bestLegendary), combat.getBandOfAttacker(bestLegendary));
+                    }
+                } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
+                    Card bestDinosaur = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
+                    if (bestDinosaur != null) {
+                        combat.addAttacker(c, combat.getDefenderByAttacker(bestDinosaur), combat.getBandOfAttacker(bestDinosaur));
+                    }
+                } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
+                    Card bestWOTH = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
+                    if (bestWOTH != null) {
+                        combat.addAttacker(c, combat.getDefenderByAttacker(bestWOTH), combat.getBandOfAttacker(bestWOTH));
+                    }
+                } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                    if (bestAttackerNoEvasion != null) {
+                        combat.addAttacker(c, combat.getDefenderByAttacker(bestAttackerNoEvasion), combat.getBandOfAttacker(bestAttackerNoEvasion));
+                    }
+                } else {
+                    combat.addAttacker(c, combat.getDefenderByAttacker(bestAttacker), combat.getBandOfAttacker(bestAttacker));
+                }
+            }
+        }
     }
 
     private boolean doAssault() {
