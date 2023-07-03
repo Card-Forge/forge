@@ -26,7 +26,7 @@ public class AttackingBand {
     public void addAttacker(Card card) { attackers.add(card); }
     public void removeAttacker(Card card) { attackers.remove(card); }
 
-    public static boolean isValidBand(List<Card> band, boolean shareDamage) {
+    public static boolean isValidBand(CardCollectionView band, boolean shareDamage) {
         if (band.isEmpty()) {
             // An empty band is not a valid band
             return false;
@@ -64,7 +64,7 @@ public class AttackingBand {
     
     public boolean canJoinBand(Card card) {
         // Trying to join an existing band, attackers should be non-empty and card should exist
-        List<Card> newBand = new ArrayList<>(attackers);
+        CardCollection newBand = new CardCollection(attackers);
         if (card != null) {
             newBand.add(card);
         }
