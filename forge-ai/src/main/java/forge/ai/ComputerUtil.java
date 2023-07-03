@@ -2424,7 +2424,7 @@ public class ComputerUtil {
                         }
                     }
                 }
-            } else if (logic.equals("ProtectionFromType")) {
+            } else if ("ProtectionFromType".equals(logic)) {
                 // TODO: protection vs. damage-dealing and milling instants/sorceries in low creature decks and the like?
                 // Maybe non-creature artifacts in certain cases?
                 List<String> choices = ImmutableList.of("Creature", "Planeswalker"); // types that make sense to get protected against
