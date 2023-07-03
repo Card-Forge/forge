@@ -2040,8 +2040,8 @@ public class ComputerUtilCombat {
 
         boolean isAttacking = defender != null;
 
-        // Check for Banding
-        boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self); // Banding, Defensive Formation - the AI assigns combat damage to itself
+        // Check for Banding, Defensive Formation
+        boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self);
         boolean isBlockingMyBand = false;
         if (attacker.getController().isOpponentOf(self)) {
             List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
