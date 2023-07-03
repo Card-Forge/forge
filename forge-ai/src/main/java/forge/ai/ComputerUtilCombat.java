@@ -38,6 +38,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
+import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
@@ -2044,14 +2045,8 @@ public class ComputerUtilCombat {
         boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self);
         boolean isBlockingMyBand = false;
         if (attacker.getController().isOpponentOf(self)) {
-            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
-                    "Bands with Other Creatures named Wolves of the Hunt",
-                    "Bands with Other Dinosaurs");
-            for (final Card c : block) {
-                if (c.hasKeyword(Keyword.BANDING) || c.hasAnyKeyword(bandsWithString)) {
-                    isBlockingMyBand = true;
-                    break;
-                }
+            if (AttackingBand.isValidBand((List<Card>)block, true)) {
+                isBlockingMyBand = true;
             }
         }
         final boolean aiDistributesBandingDmg = isAttackingMe || isBlockingMyBand;
