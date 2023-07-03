@@ -2035,7 +2035,6 @@ public class ComputerUtilCombat {
      * @param overrideOrder overriding combatant order
      */
     public static Map<Card, Integer> distributeAIDamage(final Player self, final Card attacker, final CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
-        // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
         Map<Card, Integer> damageMap = Maps.newHashMap();
         Combat combat = attacker.getGame().getCombat();
 
