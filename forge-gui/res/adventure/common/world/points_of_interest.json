@@ -3135,7 +3135,7 @@
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "MageTower",
+	"sprite": "Monastery",
 	"map": "../common/maps/map/unhallowed_abbey_1F.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
