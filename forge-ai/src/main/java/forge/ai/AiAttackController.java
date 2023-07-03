@@ -519,6 +519,10 @@ public class AiAttackController {
         // filter out anything that can't legally attack or is already declared as an attacker
         bandingCreatures = CardLists.filter(bandingCreatures, card -> CombatUtil.canAttack(card) && !combat.isAttacking(card));
 
+        // respect global attack constraints
+        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
+        int attackMax = restrict.getMax();
+
         if (!bandingCreatures.isEmpty()) {
             List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
                     "Forestwalk", "Mountainwalk", "Swampwalk", "Protection from white", "Protection from black",
@@ -530,27 +534,30 @@ public class AiAttackController {
             Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
             Card bestAttackerNoEvasion = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
             for (Card c : bandingCreatures) {
+                Card bestBand = null;
+
                 if (c.hasKeyword("Bands with Other Legendary Creatures")) {
-                    Card bestLegendary = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
-                    if (bestLegendary != null) {
-                        combat.addAttacker(c, combat.getDefenderByAttacker(bestLegendary), combat.getBandOfAttacker(bestLegendary));
-                    }
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
                 } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
-                    Card bestDinosaur = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
-                    if (bestDinosaur != null) {
-                        combat.addAttacker(c, combat.getDefenderByAttacker(bestDinosaur), combat.getBandOfAttacker(bestDinosaur));
-                    }
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
                 } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
-                    Card bestWOTH = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
-                    if (bestWOTH != null) {
-                        combat.addAttacker(c, combat.getDefenderByAttacker(bestWOTH), combat.getBandOfAttacker(bestWOTH));
-                    }
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
                 } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
-                    if (bestAttackerNoEvasion != null) {
-                        combat.addAttacker(c, combat.getDefenderByAttacker(bestAttackerNoEvasion), combat.getBandOfAttacker(bestAttackerNoEvasion));
-                    }
+                    bestBand = bestAttackerNoEvasion;
                 } else {
-                    combat.addAttacker(c, combat.getDefenderByAttacker(bestAttacker), combat.getBandOfAttacker(bestAttacker));
+                    bestBand = bestAttacker;
+                }
+
+                if (bestBand != null) {
+                    GameEntity defender = combat.getDefenderByAttacker(bestBand);
+                    if (attackMax == -1) {
+                        // check with the local limitations vs. the chosen defender
+                        attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
+                    }
+
+                    if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
+                        combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
+                    }
                 }
             }
         }
