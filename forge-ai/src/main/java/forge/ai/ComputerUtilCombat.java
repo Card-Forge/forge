@@ -2043,10 +2043,7 @@ public class ComputerUtilCombat {
 
         // Check for Banding, Defensive Formation
         boolean isAttackingMe = isAttacking && combat.getDefenderPlayerByAttacker(attacker).equals(self);
-        boolean isBlockingMyBand = false;
-        if (attacker.getController().isOpponentOf(self) && AttackingBand.isValidBand((List<Card>)block, true)) {
-            isBlockingMyBand = true;
-        }
+        boolean isBlockingMyBand = attacker.getController().isOpponentOf(self) && AttackingBand.isValidBand((List<Card>)block, true);
         final boolean aiDistributesBandingDmg = isAttackingMe || isBlockingMyBand;
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
