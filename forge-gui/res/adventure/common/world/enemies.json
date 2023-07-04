@@ -6369,9 +6369,7 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityAbzan",
-		"BiomeColorless",
-		"BiomeWhite",
-		"BiomeBlack"
+		"BiomeBlue"
 	]
 },
 {
@@ -7242,7 +7240,7 @@
 			]
 		}
 	],
-	"colors": "W",
+	"colors": "GW",
 	"questTags": [
 		"Elephant",
 		"Beast",
