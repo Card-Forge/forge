@@ -122,9 +122,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     String [] msgArray = msg.split(" & ");
                     List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
                     for (String subValid : validArray) {
-                        CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, subValid, sa);
-                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
-                        validTargetsList.add(new CardCollection(validTargets));
+                        CardCollection validTargets = CardLists.filter(AbilityUtils.filterListByType(battlefield, subValid, sa), CardPredicates.canBeSacrificedBy(sa, true));
+                        validTargetsList.add(validTargets);
                     }
                     CardCollection chosenCards = new CardCollection();
                     for (int i = 0; i < validArray.length; ++i) {
