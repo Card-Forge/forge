@@ -525,9 +525,7 @@ public class AiAttackController {
 
         if (!bandingCreatures.isEmpty()) {
             List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
-                    "Forestwalk", "Mountainwalk", "Swampwalk", "Protection from white", "Protection from black",
-                    "Protection from green", "Protection from red", "Protection from blue", "Protection from all colors",
-                    "Protection from colorless", "Protection from everything", "Protection from creatures");
+                    "Forestwalk", "Mountainwalk", "Swampwalk");
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             CardCollection attackers = combat.getAttackers();
@@ -541,7 +539,7 @@ public class AiAttackController {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
                 } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
-                } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker != null && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                } else if (bestAttacker != null && !c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {
                     bestBand = bestAttacker;
