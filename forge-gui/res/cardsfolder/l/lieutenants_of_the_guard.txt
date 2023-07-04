@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Council's dilemma — When CARDNAME enters the battlefield, starting with you, each player votes for strength or numbers. Put a +1/+1 counter on CARDNAME for each strength vote and create a 1/1 white Soldier creature token for each numbers vote.
-SVar:TrigChangeZone:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Strength,Numbers | SubAbility$ DBVoteStrength | AiLogic$ StrengthOrNumbers
+SVar:TrigChangeZone:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Strength,Numbers | SubAbility$ DBVoteStrength | AILogic$ StrengthOrNumbers
 SVar:DBVoteStrength:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumStrength | SubAbility$ DBVoteNumbers
 SVar:DBVoteNumbers:DB$ Token | TokenAmount$ VoteNumNumbers | TokenScript$ w_1_1_soldier | TokenOwner$ You
 DeckHas:Ability$Counters|Token

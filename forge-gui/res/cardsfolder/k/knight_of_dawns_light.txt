@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:2/2
 K:First Strike
-R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AILogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
 SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Plus.1
 A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
