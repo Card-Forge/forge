@@ -1407,7 +1407,7 @@ public class ComputerUtilCard {
         }
 
         if (keywords.contains("Banding") && !c.hasKeyword(Keyword.BANDING)) {
-            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.isPlayerTurn(ai)) {
+            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.isPlayerTurn(ai) && !ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
                 // will this card participate in an attacking band?
                 Card bandingCard = getPumpedCreature(ai, sa, c, toughness, power, keywords);
                 // TODO: It may be possible to use AiController.getPredictedCombat here, but that makes it difficult to
