@@ -524,7 +524,7 @@ public class AiAttackController {
             bandingCreatures = CardLists.filter(bandingCreatures, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
 
             // filter out anything that can't legally attack or is already declared as an attacker
-            bandingCreatures = CardLists.filter(bandingCreatures, card -> CombatUtil.canAttack(card) && !combat.isAttacking(card));
+            bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
         } else {
             // Test a specific creature for Banding
             if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
@@ -535,6 +535,9 @@ public class AiAttackController {
         // respect global attack constraints
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
         int attackMax = restrict.getMax();
+        if (attackMax >= combat.getAttackers().size()) {
+            return;
+        }
 
         if (!bandingCreatures.isEmpty()) {
             List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
