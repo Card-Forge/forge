@@ -93,6 +93,6 @@ public enum MusicPlaylist {
 
         int index = MyRandom.getRandom().nextInt(music.length);
         System.out.println("Looking up " +path + ForgeConstants.PATH_SEPARATOR + music[index]);
-        return path + ForgeConstants.PATH_SEPARATOR + music[index];
+        return music[index].getPath();
     }
 }
