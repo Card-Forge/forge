@@ -490,7 +490,9 @@ public class GameHUD extends Stage {
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
+        System.out.println("Playlist: "+playlist);
         unloadAudio();
+        System.out.println("Playlist: "+playlist);
         audio = getMusic(playlist);
     }
 
@@ -776,7 +778,7 @@ public class GameHUD extends Stage {
                 changeBGM(MusicPlaylist.WHITE);
                 break;
             case "waste":
-                changeBGM(MusicPlaylist.MENUS);
+                changeBGM(MusicPlaylist.COLORLESS);
                 break;
             default:
                 break;
