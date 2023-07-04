@@ -41,7 +41,7 @@ public enum MusicPlaylist {
             try {
                 FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
                 filenames = new File(path).listFiles(filter);
-                if (GuiBase.isAdventureMode() && filenames == null || ArrayUtils.isEmpty(filenames)) {
+                if (GuiBase.isAdventureMode() && (filenames == null || ArrayUtils.isEmpty(filenames))) {
                     path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
                     filenames = new File(path).listFiles(filter);
                 }
@@ -78,7 +78,7 @@ public enum MusicPlaylist {
         try {
             FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
             music = new File(path).listFiles(filter);
-            if (GuiBase.isAdventureMode() && music == null) {
+            if (GuiBase.isAdventureMode() && (music == null || ArrayUtils.isEmpty(music))) {
                 path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
                 music = new File(path).listFiles(filter);
             }
