@@ -19,6 +19,7 @@ package forge.screens.deckeditor;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.Normalizer;
 import java.util.*;
 import java.util.List;
 
@@ -694,7 +695,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     }
 
     private void parseAndDisplay() {
-        List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
+        List<DeckRecognizer.Token> tokens = controller.parseInput(Normalizer.normalize(txtInput.getText(), Normalizer.Form.NFD));
         if (controller.isSmartCardArtEnabled())
             tokens = controller.optimiseCardArtInTokens();
         displayTokens(tokens);
