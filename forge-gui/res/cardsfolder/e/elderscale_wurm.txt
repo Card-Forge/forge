@@ -9,4 +9,6 @@ R:Event$ LifeReduced | ActiveZones$ Battlefield | ValidPlayer$ You | Result$ LT7
 SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ X
 SVar:X:ReplaceCount$Result/NMinus.7
 SVar:ElderscaleCondition:Count$YourLifeTotal
+#NOTE: If the opponent controls the wurm, AI won't take into consideration that combat damage may be ineffective.
+AI:RemoveDeck:All
 Oracle:Trample\nWhen Elderscale Wurm enters the battlefield, if your life total is less than 7, your life total becomes 7.\nAs long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.

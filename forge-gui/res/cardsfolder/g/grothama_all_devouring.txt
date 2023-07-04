@@ -10,4 +10,6 @@ SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigD
 SVar:TrigDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:X:TriggeredCard$TotalDamageThisTurn Card.RememberedPlayerCtrl
 SVar:HasAttackEffect:TRUE
+#NOTE: AI will always choose to activate the "fight Grothama" ability if one of its creatures attacks.
+AI:RemoveDeck:All
 Oracle:Other creatures have "Whenever this creature attacks, you may have it fight Grothama, All-Devouring."\nWhen Grothama leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
