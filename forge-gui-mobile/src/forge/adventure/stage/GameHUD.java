@@ -497,7 +497,10 @@ public class GameHUD extends Stage {
     }
 
     private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
-        FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
+        String filename = playlist.getNewRandomFilename();
+        if (filename == null)
+            return null;
+        FileHandle file = Gdx.files.absolute(filename);
         Music music = Forge.getAssets().getMusic(file);
         if (music != null) {
             currentAudioPlaylist = playlist;
