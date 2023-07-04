@@ -357,35 +357,41 @@ public class AiAttackController {
     }
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
-    public final List<Card> notNeededAsBlockers(final List<Card> attackers) {
+    public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
         //check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
-            return attackers;
+            return potentialAttackers;
         }
         // no need to block (already holding mana to cast fog next turn)
         if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
             // Don't send the card that'll do the fog effect to attack, it's unsafe!
 
             List<Card> toRemove = Lists.newArrayList();
-            for (Card c : attackers) {
+            for (Card c : potentialAttackers) {
                 if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
                     toRemove.add(c);
                 }
             }
-            attackers.removeAll(toRemove);
-            return attackers;
+            potentialAttackers.removeAll(toRemove);
+            return potentialAttackers;
         }
 
+        if (ai.isCardInPlay("Masako the Humorless")) {
+            // "Tapped creatures you control can block as though they were untapped."
+            return potentialAttackers;
+        }
+
+        final CardCollection notNeededAsBlockers = new CardCollection(potentialAttackers);
+
         final List<Card> vigilantes = new ArrayList<>();
-        for (final Card c : myList) {
-            if (c.getName().equals("Masako the Humorless")) {
-                // "Tapped creatures you control can block as though they were untapped."
-                return attackers;
-            }
+        for (final Card c : Iterables.concat(currentAttackers, potentialAttackers)) {
             // no need to block if an effect is in play which untaps all creatures
             // (pseudo-Vigilance akin to Awakening or Prophet of Kruphix)
             if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(ai, c)) {
                 vigilantes.add(c);
+            } else if (currentAttackers.contains(c)) {
+                // already attacking so can't block
+                notNeededAsBlockers.add(c);
             }
         }
         // reduce the search space
@@ -399,10 +405,8 @@ public class AiAttackController {
             }
         });
 
-        final CardCollection notNeededAsBlockers = new CardCollection(attackers);
-
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> blockers = getPossibleBlockers(attackers, opponentsAttackers, true);
+        final List<Card> blockers = getPossibleBlockers(potentialAttackers, opponentsAttackers, true);
 
         if (!blockers.isEmpty()) {
             notNeededAsBlockers.removeAll(blockers);
@@ -473,12 +477,15 @@ public class AiAttackController {
         // these creatures will be available to block anyway
         notNeededAsBlockers.addAll(vigilantes);
 
+        // remove those that were only included to ensure a full picture for the baseline
+        notNeededAsBlockers.removeAll(currentAttackers);
+
         // Increase the total number of blockers needed by 1 if Finest Hour in play
         // (human will get an extra first attack with a creature that untaps)
         // In addition, if the computer guesses it needs no blockers, make sure
         // that it won't be surprised by Exalted
         final int humanExaltedBonus = defendingOpponent.countExaltedBonus();
-        int blockersNeeded = attackers.size() - notNeededAsBlockers.size();
+        int blockersNeeded = potentialAttackers.size() - notNeededAsBlockers.size();
 
         if (humanExaltedBonus > 0) {
             final boolean finestHour = defendingOpponent.isCardInPlay("Finest Hour");
@@ -511,24 +518,28 @@ public class AiAttackController {
     public void reinforceWithBanding(final Player player, final Combat combat) {
         reinforceWithBanding(player, combat, null);
     }
-
     public void reinforceWithBanding(final Player player, final Combat combat, final Card test) {
+        CardCollection attackers = combat.getAttackers();
+        if (attackers.isEmpty()) {
+            return;
+        }
+
         List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
                 "Bands with Other Creatures named Wolves of the Hunt",
                 "Bands with Other Dinosaurs");
 
-        List<Card> bandingCreatures = new CardCollection();
-
+        List<Card> bandingCreatures = null;
         if (test == null) {
-            bandingCreatures.addAll(notNeededAsBlockers(player.getCreaturesInPlay()));
-            bandingCreatures = CardLists.filter(bandingCreatures, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
 
             // filter out anything that can't legally attack or is already declared as an attacker
             bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
+
+            bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
         } else {
             // Test a specific creature for Banding
             if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
-                bandingCreatures.add(test);
+                bandingCreatures = new CardCollection(test);
             }
         }
 
@@ -539,12 +550,11 @@ public class AiAttackController {
             return;
         }
 
-        if (!bandingCreatures.isEmpty()) {
+        if (bandingCreatures != null) {
             List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
                     "Forestwalk", "Mountainwalk", "Swampwalk");
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
-            CardCollection attackers = combat.getAttackers();
             for (Card c : bandingCreatures) {
                 Card bestBand;
 
@@ -1275,7 +1285,7 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("Normal attack");
 
-        attackersLeft = notNeededAsBlockers(attackersLeft);
+        attackersLeft = notNeededAsBlockers(combat.getAttackers(), attackersLeft);
         attackersLeft = sortAttackers(attackersLeft);
 
         if ( LOG_AI_ATTACKS )
