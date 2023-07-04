@@ -117,6 +117,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(duration, 1);
                     Forge.restrictAdvMenus = true;
+                    player.clearCollisionHeight();
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -347,7 +348,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
         background.loadChunk(pos.x, pos.y);
-        handlePointsOfInterestCollision();
     }
 
     @Override

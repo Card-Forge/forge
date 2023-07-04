@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -22,6 +23,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
@@ -342,6 +344,7 @@ public class GameHUD extends Stage {
         }
         //unequip and reequip abilities
         updateAbility();
+        restorePlayerCollision();
         if (openMapActor != null) {
             String val = "[%80]" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
             for (AdventureQuestData adq: Current.player().getQuests()) {
@@ -487,12 +490,17 @@ public class GameHUD extends Stage {
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
+        System.out.println("Playlist: "+playlist);
         unloadAudio();
+        System.out.println("Playlist: "+playlist);
         audio = getMusic(playlist);
     }
 
     private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
-        FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
+        String filename = playlist.getNewRandomFilename();
+        if (filename == null)
+            return null;
+        FileHandle file = Gdx.files.absolute(filename);
         Music music = Forge.getAssets().getMusic(file);
         if (music != null) {
             currentAudioPlaylist = playlist;
@@ -673,8 +681,10 @@ public class GameHUD extends Stage {
     }
     public void playerIdle() {
         if (MapStage.getInstance().isInMap()) {
+            MapStage.getInstance().startPause(1f);
             MapStage.getInstance().getPlayerSprite().stop();
         } else {
+            WorldStage.getInstance().startPause(1f);
             WorldStage.getInstance().getPlayerSprite().stop();
         }
     }
@@ -771,7 +781,7 @@ public class GameHUD extends Stage {
                 changeBGM(MusicPlaylist.WHITE);
                 break;
             case "waste":
-                changeBGM(MusicPlaylist.MENUS);
+                changeBGM(MusicPlaylist.COLORLESS);
                 break;
             default:
                 break;
@@ -782,5 +792,26 @@ public class GameHUD extends Stage {
         if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
             SoundSystem.instance.setBackgroundMusic(playlist);
         }
+    }
+    void flicker(CharacterSprite sprite) {
+        if (sprite.getCollisionHeight() == 0f) {
+            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
+                @Override
+                public boolean act(float v) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            sprite.resetCollisionHeight();
+                        }
+                    }, 0.5f);
+                    return true;
+                }
+            });
+            sprite.addAction(flicker);
+        }
+    }
+    void restorePlayerCollision() {
+        flicker(MapStage.getInstance().getPlayerSprite());
+        flicker(WorldStage.getInstance().getPlayerSprite());
     }
 }

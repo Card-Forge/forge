@@ -1,0 +1,12 @@
+Name:Orcish Siegemaster
+ManaCost:2 R
+Types:Creature Orc Soldier
+PT:0/5
+K:Trample
+S:Mode$ Continuous | Affected$ Goblin.YouCtrl+Other,Orc.YouCtrl+Other | AddKeyword$ Trample | Description$ Other Orcs and Goblins you control have trample.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Goblin|Orc
+Oracle:Trample\nOther Orcs and Goblins you control have trample.\nWhenever Orcish Siegemaster attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
