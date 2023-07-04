@@ -509,15 +509,28 @@ public class AiAttackController {
     }
 
     public void reinforceWithBanding(final Player player, final Combat combat) {
+        reinforceWithBanding(player, combat, null);
+    }
+
+    public void reinforceWithBanding(final Player player, final Combat combat, final Card test) {
         List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
                 "Bands with Other Creatures named Wolves of the Hunt",
                 "Bands with Other Dinosaurs");
 
-        List<Card> bandingCreatures = new CardCollection(notNeededAsBlockers(player.getCreaturesInPlay()));
-        bandingCreatures = CardLists.filter(bandingCreatures, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+        List<Card> bandingCreatures = new CardCollection();
 
-        // filter out anything that can't legally attack or is already declared as an attacker
-        bandingCreatures = CardLists.filter(bandingCreatures, card -> CombatUtil.canAttack(card) && !combat.isAttacking(card));
+        if (test == null) {
+            bandingCreatures.addAll(notNeededAsBlockers(player.getCreaturesInPlay()));
+            bandingCreatures = CardLists.filter(bandingCreatures, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+
+            // filter out anything that can't legally attack or is already declared as an attacker
+            bandingCreatures = CardLists.filter(bandingCreatures, card -> CombatUtil.canAttack(card) && !combat.isAttacking(card));
+        } else {
+            // Test a specific creature for Banding
+            if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
+                bandingCreatures.add(test);
+            }
+        }
 
         // respect global attack constraints
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
