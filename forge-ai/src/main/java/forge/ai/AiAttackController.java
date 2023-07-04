@@ -529,10 +529,15 @@ public class AiAttackController {
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             CardCollection attackers = combat.getAttackers();
-            Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
             for (Card c : bandingCreatures) {
                 Card bestBand;
 
+                if (c.getNetPower() <= 0) {
+                    // Don't band a zero power creature if there's already a banding creature in a band
+                    attackers = CardLists.filter(attackers, card -> combat.getBandOfAttacker(card).getAttackers().size() == 1);
+                }
+
+                Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
                 if (c.hasKeyword("Bands with Other Legendary Creatures")) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
                 } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
@@ -543,6 +548,10 @@ public class AiAttackController {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {
                     bestBand = bestAttacker;
+                }
+
+                if (c.getNetPower() <= 0) {
+                    attackers = combat.getAttackers(); // restore the unfiltered attackers
                 }
 
                 if (bestBand != null) {
