@@ -61,7 +61,10 @@
  <objectgroup id="3" name="Hidden Objects" locked="1">
   <object id="1" template="../obj/portal.tx" x="671.5" y="351.5">
    <properties>
-    <property name="direction" value="up"/>
+    <property name="direction" value="down"/>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../common/maps/map/naktamun.tmx"/>
+    <property name="teleportObjectId" value="46"/>
    </properties>
   </object>
   <object id="10" template="../obj/entry_up.tx" x="672" y="352"/>
