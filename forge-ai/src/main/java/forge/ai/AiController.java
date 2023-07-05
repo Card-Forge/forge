@@ -1304,6 +1304,9 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker); 
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
+        // Check if we can reinforce with Banding creatures
+        aiAtk.reinforceWithBanding(combat);
+
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
             combat.clearAttackers();

@@ -1406,6 +1406,39 @@ public class ComputerUtilCard {
             }
         }
 
+        if (keywords.contains("Banding") && !c.hasKeyword(Keyword.BANDING)) {
+            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.isPlayerTurn(ai) && !ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
+                // will this card participate in an attacking band?
+                Card bandingCard = getPumpedCreature(ai, sa, c, toughness, power, keywords);
+                // TODO: It may be possible to use AiController.getPredictedCombat here, but that makes it difficult to
+                // use reinforceWithBanding through the attack controller, especially with the extra card parameter in mind
+                AiAttackController aiAtk = new AiAttackController(ai);
+                Combat predicted = new Combat(ai);
+                aiAtk.declareAttackers(predicted);
+                aiAtk.reinforceWithBanding(predicted, bandingCard);
+                if (predicted.isAttacking(bandingCard) && predicted.getBandOfAttacker(bandingCard).getAttackers().size() > 1) {
+                    return true;
+                }
+            } else if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && combat != null) {
+                // does this card block a Trample card or participate in a multi block?
+                for (Card atk : combat.getAttackers()) {
+                    if (atk.getController().isOpponentOf(ai)) {
+                        CardCollection blockers = combat.getBlockers(atk);
+                        boolean hasBanding = false;
+                        for (Card blocker : blockers) {
+                            if (blocker.hasKeyword(Keyword.BANDING)) {
+                                hasBanding = true;
+                                break;
+                            }
+                        }
+                        if (!hasBanding && ((blockers.contains(c) && blockers.size() > 1) || atk.hasKeyword(Keyword.TRAMPLE))) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
         final Player opp = ai.getWeakestOpponent();
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
