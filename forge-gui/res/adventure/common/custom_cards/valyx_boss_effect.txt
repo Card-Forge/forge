@@ -1,5 +1,6 @@
 Name:Power of Valyx
 ManaCost:no cost
+Colors:black
 Types:Enchantment
 K:Hexproof
 A:AB$ Destroy | Cost$ 4 B T Sac<1/Creature.YouCtrl/creature you control>| ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 3 life. 
