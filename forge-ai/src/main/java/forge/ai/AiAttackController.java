@@ -570,7 +570,7 @@ public class AiAttackController {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
                 } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
-                } else if (bestAttacker != null && !c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker.hasAnyKeyword(evasionKeywords)) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {
                     bestBand = bestAttacker;
