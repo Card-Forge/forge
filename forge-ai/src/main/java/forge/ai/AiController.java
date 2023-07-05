@@ -1618,8 +1618,7 @@ public class AiController {
             AiPlayDecision opinion = canPlayAndPayFor(sa);
 
             // reset LastStateBattlefield
-            sa.setLastStateBattlefield(CardCollection.EMPTY);
-            sa.setLastStateGraveyard(CardCollection.EMPTY);
+            sa.clearLastState();
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 

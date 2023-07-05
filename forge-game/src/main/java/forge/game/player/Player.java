@@ -327,7 +327,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-        // gameAction moveTo ?
         game.getAction().moveTo(ZoneType.Command, activeScheme, null, moveParams);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
@@ -3268,9 +3267,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final TriggerHandler triggerHandler = game.getTriggerHandler();
-        triggerHandler.suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
-        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        com.add(initiativeEffect);
         triggerHandler.clearActiveTriggers(initiativeEffect, null);
         triggerHandler.registerActiveTrigger(initiativeEffect, false);
 
