@@ -546,7 +546,7 @@ public class AiAttackController {
         // respect global attack constraints
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
         int attackMax = restrict.getMax();
-        if (attackMax >= combat.getAttackers().size()) {
+        if (attackMax >= attackers.size()) {
             return;
         }
 
