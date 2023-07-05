@@ -1239,7 +1239,7 @@
     "name": "Hallowed Sigil",
 	"description": "Turn a creature hexproof until end of turn.",
     "equipmentSlot": "Neck",
-    "iconName": "ChickenEgg",
+    "iconName": "HallowedSigil",
     "effect": {
       "startBattleWithCard": [
         "Hallowed Sigil"
@@ -1250,7 +1250,7 @@
     "name": "Unhallowed Sigil",
 	"description": "Devour the life of an enemy creature, killing it.",
     "equipmentSlot": "Right",
-    "iconName": "ChickenEgg",
+    "iconName": "UnhallowedSigil",
     "effect": {
       "startBattleWithCard": [
         "Sigil of Torment"
