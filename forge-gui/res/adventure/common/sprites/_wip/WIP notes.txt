@@ -1,0 +1,20 @@
+caracal: ready for integration into enemies.json.
+
+cow: missing avatar, otherwise looks like a complete spritesheet.
+
+deerlarge: missing avatar, otherwise looks like a complete spritesheet.
+
+jaguar: Intended to represent the Aswan jaguar. Incomplete spritesheet (missing attack/death), might just salvage avatar and do a reskin of tiger.
+
+penguinlarge: missing avatar, otherwise looks like a complete spritesheet.
+
+spider_web: missing avatar, otherwise looks like a complete spritesheet.
+
+trainingdummy: missing avatar, otherwise looks like a complete spritesheet.
+
+drake: this is an old sprite that is replaced with PR #3332. Enemies.json needs attention from someone who can balance.
+
+mineguard: spritesheet complete.
+
+fruitmonsters: missing avatars, otherwise looks like a complete spritesheet.
+
