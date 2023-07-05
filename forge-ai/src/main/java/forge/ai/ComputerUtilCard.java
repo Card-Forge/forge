@@ -1415,7 +1415,7 @@ public class ComputerUtilCard {
                 AiAttackController aiAtk = new AiAttackController(ai);
                 Combat predicted = new Combat(ai);
                 aiAtk.declareAttackers(predicted);
-                aiAtk.reinforceWithBanding(ai, predicted, bandingCard);
+                aiAtk.reinforceWithBanding(predicted, bandingCard);
                 if (predicted.isAttacking(bandingCard) && predicted.getBandOfAttacker(bandingCard).getAttackers().size() > 1) {
                     return true;
                 }

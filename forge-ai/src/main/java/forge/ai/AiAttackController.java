@@ -515,10 +515,10 @@ public class AiAttackController {
         return notNeededAsBlockers;
     }
 
-    public void reinforceWithBanding(final Player player, final Combat combat) {
-        reinforceWithBanding(player, combat, null);
+    public void reinforceWithBanding(final Combat combat) {
+        reinforceWithBanding(combat, null);
     }
-    public void reinforceWithBanding(final Player player, final Combat combat, final Card test) {
+    public void reinforceWithBanding(final Combat combat, final Card test) {
         CardCollection attackers = combat.getAttackers();
         if (attackers.isEmpty()) {
             return;
