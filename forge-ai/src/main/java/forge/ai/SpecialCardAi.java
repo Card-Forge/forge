@@ -651,6 +651,18 @@ public class SpecialCardAi {
         }
     }
 
+    // Grothama, All-Devouring
+    public static class GrothamaAllDevouring {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            final Card fighter = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).getFirst();
+            final Card devourer = AbilityUtils.getDefinedCards(source, sa.getParam("ExtraDefined"), sa).getFirst(); // maybe just getOriginalHost()?
+            boolean goodTradeOrNoTrade = devourer.canBeDestroyed() && (devourer.getNetPower() < fighter.getNetToughness() || !fighter.canBeDestroyed()
+                    || ComputerUtilCard.evaluateCreature(devourer) > ComputerUtilCard.evaluateCreature(fighter));
+            return goodTradeOrNoTrade && fighter.getNetPower() >= devourer.getNetToughness();
+        }
+    }
+
     // Guilty Conscience
     public static class GuiltyConscience {
         public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
