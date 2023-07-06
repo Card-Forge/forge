@@ -32,6 +32,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
+import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -773,14 +774,13 @@ public class AiBlockController {
             }
 
             boolean needsMoreChumpBlockers = true;
+
             // See if it's possible to tank up the damage with Banding
             List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
                     "Bands with Other Creatures named Wolves of the Hunt",
                     "Bands with Other Dinosaurs");
-            for (final Card blocker : combat.getBlockers(attacker)) {
-                if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
-                    needsMoreChumpBlockers = false;
-                }
+            if (AttackingBand.isValidBand(combat.getBlockers(attacker), true)) {
+                continue;
             }
 
             chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
