@@ -767,8 +767,9 @@ public class AiBlockController {
         tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(changesPTWhenBlocked(true)));
 
         for (final Card attacker : tramplingAttackers) {
+            boolean staticAssignCombatDamageAsUnblocked = StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker);
+
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()
-                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
@@ -786,19 +787,21 @@ public class AiBlockController {
             chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             chumpBlockers.removeAll(combat.getBlockers(attacker));
 
-            if (needsMoreChumpBlockers) {
-                // See if there's a Banding blocker that can tank the damage
-                for (final Card blocker : chumpBlockers) {
-                    if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
-                        if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
-                                && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
-                                && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                            combat.addBlocker(attacker, blocker);
-                            needsMoreChumpBlockers = false;
-                            break;
-                        }
+            // See if there's a Banding blocker that can tank the damage
+            for (final Card blocker : chumpBlockers) {
+                if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
+                    if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
+                            && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
+                            && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                        combat.addBlocker(attacker, blocker);
+                        needsMoreChumpBlockers = false;
+                        break;
                     }
                 }
+            }
+
+            if (staticAssignCombatDamageAsUnblocked) {
+                continue;
             }
 
             if (needsMoreChumpBlockers) {
