@@ -17,11 +17,7 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -776,15 +772,44 @@ public class AiBlockController {
                 continue;
             }
 
+            boolean needsMoreChumpBlockers = true;
+            // See if it's possible to tank up the damage with Banding
+            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
+                    "Bands with Other Creatures named Wolves of the Hunt",
+                    "Bands with Other Dinosaurs");
+            for (final Card blocker : combat.getBlockers(attacker)) {
+                if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
+                    needsMoreChumpBlockers = false;
+                }
+            }
+
             chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             chumpBlockers.removeAll(combat.getBlockers(attacker));
-            for (final Card blocker : chumpBlockers) {
-                // Add an additional blocker if the current blockers are not
-                // enough and the new one would suck some of the damage
-                if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
-                        && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
-                        && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                    combat.addBlocker(attacker, blocker);
+
+            if (needsMoreChumpBlockers) {
+                // See if there's a Banding blocker that can tank the damage
+                for (final Card blocker : chumpBlockers) {
+                    if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
+                        if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
+                                && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
+                                && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                            combat.addBlocker(attacker, blocker);
+                            needsMoreChumpBlockers = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (needsMoreChumpBlockers) {
+                for (final Card blocker : chumpBlockers) {
+                    // Add an additional blocker if the current blockers are not
+                    // enough and the new one would suck some of the damage
+                    if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
+                            && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
+                            && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                        combat.addBlocker(attacker, blocker);
+                    }
                 }
             }
         }
