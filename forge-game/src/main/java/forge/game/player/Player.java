@@ -800,9 +800,11 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             } else if (c.getName().equals("Elderscale Wurm")) {
                 if (c.getController().equals(this) && getLife() >= 7) {
-                    restDamage = getLife() - 7;
-                    if (restDamage < 0) {
-                        restDamage = 0;
+                    if (getLife() - restDamage < 7) {
+                        restDamage = getLife() - 7;
+                        if (restDamage < 0) {
+                            restDamage = 0;
+                        }
                     }
                 }
             } else if (c.getName().equals("Obosh, the Preypiercer")) {
