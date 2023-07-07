@@ -570,7 +570,7 @@ public class AiBlockController {
 
         // Try to block a Menace attacker with two blockers, neither of which will die
         for (final Card attacker : attackersLeft) {
-            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) <= 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) != 2) {
                 continue;
             }
 
@@ -741,16 +741,14 @@ public class AiBlockController {
                     combat.addBlocker(attacker, blocker);
                     usedBlockers.add(blocker);
                     if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size(), combat)) {
+                        attackersLeft.remove(attacker);
+                        usedBlockers.clear();
                         break;
                     }
                 }
             }
-            if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size(), combat)) {
-                attackersLeft.remove(attacker);
-            } else {
-                for (Card blocker : usedBlockers) {
-                    combat.removeBlockAssignment(attacker, blocker);
-                }
+            for (Card blocker : usedBlockers) {
+                combat.removeBlockAssignment(attacker, blocker);
             }
         }
     }
@@ -767,10 +765,7 @@ public class AiBlockController {
         tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(changesPTWhenBlocked(true)));
 
         for (final Card attacker : tramplingAttackers) {
-            boolean staticAssignCombatDamageAsUnblocked = StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker);
-
-            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()) {
                 continue;
             }
 
@@ -800,7 +795,7 @@ public class AiBlockController {
                 }
             }
 
-            if (staticAssignCombatDamageAsUnblocked) {
+            if (!needsMoreChumpBlockers || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 continue;
             }
 
@@ -935,21 +930,21 @@ public class AiBlockController {
             CardLists.sortByPowerAsc(chumpPWDefenders);
             if (!chumpPWDefenders.isEmpty()) {
                 for (final Card attacker : attackers) {
+                    if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                        // don't bother trying to chump a trampling creature
+                        continue;
+                    }
+                    if (!combat.getBlockers(attacker).isEmpty()) {
+                        // already blocked by something, no need to chump
+                        continue;
+                    }
                     GameEntity def = combat.getDefenderByAttacker(attacker);
                     if (def instanceof Card && threatenedPWs.contains(def)) {
-                        if (attacker.hasKeyword(Keyword.TRAMPLE)) {
-                            // don't bother trying to chump a trampling creature
-                            continue;
-                        }
-                        if (!combat.getBlockers(attacker).isEmpty()) {
-                            // already blocked by something, no need to chump
-                            continue;
-                        }
                         Card blockerDecided = null;
                         for (final Card blocker : chumpPWDefenders) {
                             if (CombatUtil.canBlock(attacker, blocker, combat)) {
                                 combat.addBlocker(attacker, blocker);
-                                pwsWithChumpBlocks.add((Card) combat.getDefenderByAttacker(attacker));
+                                pwsWithChumpBlocks.add((Card) def);
                                 chosenChumpBlockers.add(blocker);
                                 blockerDecided = blocker;
                                 blockersLeft.remove(blocker);
@@ -962,9 +957,9 @@ public class AiBlockController {
                 // check to see if we managed to cover all the blockers of the planeswalker; if not, bail
                 for (final Card pw : pwsWithChumpBlocks) {
                     CardCollection pwAttackers = combat.getAttackersOf(pw);
-                    CardCollection pwDefenders = new CardCollection();
-                    boolean isFullyBlocked = true;
                     if (!pwAttackers.isEmpty()) {
+                        CardCollection pwDefenders = new CardCollection();
+                        boolean isFullyBlocked = true;
                         int damageToPW = 0;
                         for (Card pwAtk : pwAttackers) {
                             if (!combat.getBlockers(pwAtk).isEmpty()) {
