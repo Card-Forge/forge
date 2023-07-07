@@ -1234,5 +1234,32 @@
         "Slobad's Iron Boots"
       ]
 }
-}
+},
+  {
+    "name": "Hallowed Sigil",
+	"description": "Turn a creature hexproof until end of turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "HallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Hallowed Sigil"
+      ]
+    }
+  },
+  {
+    "name": "Unhallowed Sigil",
+	"description": "Devour the life of an enemy creature, killing it.",
+    "equipmentSlot": "Right",
+    "iconName": "UnhallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Sigil of Torment"
+      ]
+    }
+  },
+  {
+    "name": "Cultist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  }
 ]
