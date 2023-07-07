@@ -260,9 +260,6 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
-        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
-            return true;
-        }
         if (wrapper.isMandatory()) {
             return true;
         }
