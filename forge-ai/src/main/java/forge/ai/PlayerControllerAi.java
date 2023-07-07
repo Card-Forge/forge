@@ -256,10 +256,15 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
         //final Trigger regtrig = wrapper.getTrigger();
+
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
+        } else if (aiLogic.equals("Grothama")) {
+            return SpecialCardAi.GrothamaAllDevouring.consider(player, sa);
         }
+
         if (wrapper.isMandatory()) {
             return true;
         }
