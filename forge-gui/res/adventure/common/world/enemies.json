@@ -6369,9 +6369,7 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityAbzan",
-		"BiomeColorless",
-		"BiomeWhite",
-		"BiomeBlack"
+		"BiomeBlue"
 	]
 },
 {
@@ -7242,7 +7240,7 @@
 			]
 		}
 	],
-	"colors": "W",
+	"colors": "GW",
 	"questTags": [
 		"Elephant",
 		"Beast",
@@ -12544,7 +12542,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"scale": 0.6,
+	"scale": 1.3,
 	"life": 11,
 	"rewards": [
 		{

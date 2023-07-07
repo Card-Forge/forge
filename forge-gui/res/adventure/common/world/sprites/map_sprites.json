@@ -2,7 +2,7 @@
 "textureAtlas":"world/sprites/map_sprites.atlas",
 "sprites":[
  {      
-"name":"DarkWood",                 
+"name":"DarkWood",
 "startArea":0.2,                           
 "endArea":0.7,                             
 "layer":-1,    
@@ -22,7 +22,7 @@
 "layer":-1,                             
 "density":0.03 
 },{    
-"name":"Reed",                 
+"name":"Reed",
 "startArea":0.9,                           
 "endArea":0.99,                                  
 "layer":0,                                  
@@ -46,7 +46,7 @@
 "name":"Stone",                 
 "startArea":0.2,                           
 "endArea":0.7,                                  
-"layer":-1,           
+"layer":-1,
 "resolution" :5,                                          
 "density":0.01 
 },{ 
@@ -79,21 +79,21 @@
 "name":"WasteTree",                 
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :10,                                           
 "density":0.7 
 },{ 
 "name":"WasteRock",                 
 "startArea":0.8,                           
 "endArea":1.0,                                
-"layer":0,                 
+"layer":1,
 "resolution" :10,                                    
 "density":0.5 
 },{ 
 "name":"SwampTree",                 
 "startArea":0.8,                           
 "endArea":1.0,                                
-"layer":0,                 
+"layer":1,
 "resolution" :10,                                    
 "density":0.5 
 },{ 
@@ -106,45 +106,45 @@
 "name":"SwampRock",                 
 "startArea":0.5,                           
 "endArea":0.6,                                    
-"layer":0,                             
+"layer":1,
 "density":0.1 
 },{ 
 "name":"SwampTree2",              
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :10,                                           
 "density":0.7 
 },{ 
 "name":"PlainsTree",           
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :10,                                           
 "density":0.7 
 },{ 
 "name":"Cactus",                 
 "startArea":0.5,                               
-"layer":0,                             
+"layer":1,
 "endArea":0.7,                             
 "density":0.06 
 },{ 
 "name":"PlainsRock",                 
 "startArea":0.7,                               
-"layer":0,                             
+"layer":1,
 "endArea":0.99,                             
 "density":0.06 
 },{ 
 "name":"IslandTree",           
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :10,                                           
 "density":0.7 
 },{ 
 "name":"Coral",                 
 "startArea":0.0,                              
-"layer":0,                             
+"layer":1,
 "endArea":0.9,                             
 "density":0.01 
 },{ 
@@ -157,65 +157,65 @@
 "name":"WoodTree",            
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :10,                                           
 "density":0.7 
 },{ 
 "name":"WoodTree2",             
 "startArea":0.8,                           
 "endArea":0.99,                                 
-"layer":0,          
+"layer":1,
 "resolution" :5,                                           
 "density":0.7     
 },{ 
 "name":"Bush",              
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :5,                                           
 "density":0.4 
 },{      
 "name":"Stump",                 
 "startArea":0.0,                                  
-"layer":0,                             
+"layer":-1,
 "endArea":0.9,                             
 "density":0.01 
 },{ 
 "name":"MountainTree",            
 "startArea":0.0,                           
 "endArea":0.2,                                 
-"layer":0,          
+"layer":1,
 "resolution" :5,                                           
 "density":0.7 
 },{ 
 "name":"MountainTree2",            
 "startArea":0.8,                           
 "endArea":0.99,                                 
-"layer":0,          
+"layer":1,
 "resolution" :5,                                           
 "density":0.7 
 },{ 
 "name":"MountainRock",                 
 "startArea":0.1,                                
-"layer":0,                             
+"layer":1,
 "endArea":0.9,                             
 "density":0.08 
 },{ 
 "name":"LargeMountainRock",                 
 "startArea":0.0,                                 
-"layer":0,                             
+"layer":1,
 "endArea":0.9,                             
 "density":0.02 
 },{ 
 "name":"LargePlainsRock",                 
 "startArea":0.0,                               
-"layer":0,                             
+"layer":1,
 "endArea":0.9,                             
 "density":0.01 
 },{ 
 "name":"LargeSwampRock",                 
 "startArea":0.0,                                  
-"layer":0,                             
+"layer":1,
 "endArea":0.9,                             
 "density":0.01 
 }

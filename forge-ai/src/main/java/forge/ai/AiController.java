@@ -1304,6 +1304,9 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker); 
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
+        // Check if we can reinforce with Banding creatures
+        aiAtk.reinforceWithBanding(combat);
+
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
             combat.clearAttackers();
@@ -1618,8 +1621,7 @@ public class AiController {
             AiPlayDecision opinion = canPlayAndPayFor(sa);
 
             // reset LastStateBattlefield
-            sa.setLastStateBattlefield(CardCollection.EMPTY);
-            sa.setLastStateGraveyard(CardCollection.EMPTY);
+            sa.clearLastState();
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 

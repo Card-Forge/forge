@@ -44,7 +44,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -321,6 +320,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+
+        if (sp.isSpell() && !sp.isCopied()) {
+            final Card lki = CardUtil.getLKICopy(sp.getHostCard());
+            runParams.put(AbilityKey.CardLKI, lki);
+            thisTurnCast.add(lki);
+            sp.getActivatingPlayer().addSpellCastThisTurn();
+        }
+
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
@@ -462,10 +469,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isSpell() && !sp.isCopied()) {
-            thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
-            sp.getActivatingPlayer().addSpellCastThisTurn();
-        }
         if (sp.isActivatedAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
@@ -694,8 +697,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(false);
-        sa.setLastStateBattlefield(CardCollection.EMPTY);
-        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 

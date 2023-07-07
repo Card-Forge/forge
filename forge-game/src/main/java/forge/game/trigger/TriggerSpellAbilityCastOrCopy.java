@@ -279,11 +279,12 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         sa.setTriggeringObject(AbilityKey.LifeAmount, castSA.getAmountLifePaid());
         sa.setTriggeringObjectsFrom(
                 runParams,
-            AbilityKey.Player,
-            AbilityKey.Activator,
-            AbilityKey.CurrentStormCount,
-            AbilityKey.CurrentCastSpells
-        );
+                AbilityKey.CardLKI,
+                AbilityKey.Player,
+                AbilityKey.Activator,
+                AbilityKey.CurrentStormCount,
+                AbilityKey.CurrentCastSpells
+                );
     }
 
     @Override
