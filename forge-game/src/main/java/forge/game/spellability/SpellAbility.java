@@ -201,6 +201,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.lastStateGraveyard = new CardCollection(lastStateGraveyard);
     }
 
+    public void clearLastState() {
+        lastStateBattlefield = null;
+        lastStateGraveyard = null;
+    }
+
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
     }
@@ -828,10 +833,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isActivatedAbility()) {
             setXManaCostPaid(null);
         }
-
-        // reset last state when finished resolving
-        setLastStateBattlefield(CardCollection.EMPTY);
-        setLastStateGraveyard(CardCollection.EMPTY);
     }
 
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description

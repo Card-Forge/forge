@@ -962,7 +962,12 @@ public class ComputerUtilMana {
             ManaCostShard toPay, SpellAbility saPayment) {
         AbilityManaPart m = saPayment.getManaPart();
         if (m.isComboMana()) {
-            m.setExpressChoice(ColorSet.fromMask(toPay.getColorMask()));
+            // usually we'll want to produce color that matches the shard
+            ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(saPayment).split(" ")));
+            // but other effects might still lead to a more permissive payment
+            if (!shared.isColorless()) {
+                m.setExpressChoice(ColorSet.fromMask(shared.iterator().next()));
+            }
             getComboManaChoice(ai, saPayment, sa, cost);
         }
         else if (saPayment.getApi() == ApiType.ManaReflected) {

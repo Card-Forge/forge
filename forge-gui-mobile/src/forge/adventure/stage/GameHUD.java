@@ -490,12 +490,17 @@ public class GameHUD extends Stage {
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
+        System.out.println("Playlist: "+playlist);
         unloadAudio();
+        System.out.println("Playlist: "+playlist);
         audio = getMusic(playlist);
     }
 
     private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
-        FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
+        String filename = playlist.getNewRandomFilename();
+        if (filename == null)
+            return null;
+        FileHandle file = Gdx.files.absolute(filename);
         Music music = Forge.getAssets().getMusic(file);
         if (music != null) {
             currentAudioPlaylist = playlist;
@@ -776,7 +781,7 @@ public class GameHUD extends Stage {
                 changeBGM(MusicPlaylist.WHITE);
                 break;
             case "waste":
-                changeBGM(MusicPlaylist.MENUS);
+                changeBGM(MusicPlaylist.COLORLESS);
                 break;
             default:
                 break;

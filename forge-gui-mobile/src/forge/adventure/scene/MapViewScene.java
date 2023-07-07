@@ -109,6 +109,7 @@ public class MapViewScene extends UIScene {
         TextraButton questButton = ui.findActor("quest");
         if (questButton != null) {
             questButton.setDisabled(labels.isEmpty());
+            questButton.setVisible(!labels.isEmpty());
         }
         super.enter();
     }

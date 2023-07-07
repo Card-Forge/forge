@@ -1,0 +1,5 @@
+Name:Subjugate the Hobbits
+ManaCost:5 U U
+Types:Sorcery
+A:SP$ GainControl | AllValid$ Creature.IsNotCommander+cmcLE3  | NewController$ You | SpellDescription$ Gain control of each noncommander creature with mana value 3 or less.
+Oracle:Gain control of each noncommander creature with mana value 3 or less.

@@ -523,7 +523,13 @@ public class CardFactoryUtil {
     public static List<String> sharedKeywords(final Iterable<String> kw, final String[] restrictions,
             final Iterable<ZoneType> zones, final Card host, CardTraitBase ctb) {
         final List<String> filteredkw = Lists.newArrayList();
-        final Player p = host.getController();
+        Player p = null;
+        if (ctb instanceof SpellAbility) {
+            p = ((SpellAbility)ctb).getActivatingPlayer();
+        }
+        if (p == null) {
+            p = host.getController();
+        }
         CardCollectionView cardlist = p.getGame().getCardsIn(zones);
         final Set<String> landkw = Sets.newHashSet();
         final Set<String> protectionkw = Sets.newHashSet();
