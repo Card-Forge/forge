@@ -43,6 +43,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
     private final static Float dieTimer = 20f;//todo config
     private Float globalTimer = 0f;
+    private transient boolean newGame = false;
 
     NavArrowActor navArrow;
     public WorldStage() {
@@ -333,15 +334,24 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
+    public void setupNewGame(){
+        newGame = true; //On a new game, we want to automatically enter any POI the player overlaps with.
+    }
+
     @Override
     public void enter() {
         getPlayerSprite().LoadPos();
         getPlayerSprite().setMovementDirection(Vector2.Zero);
-        for (Actor actor : foregroundSprites.getChildren()) {
-            if (actor.getClass() == PointOfInterestMapSprite.class) {
-                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
-                if (player.collideWith(point.getBoundingRect())) {
-                    collidingPoint = point;
+        if (newGame) {
+            newGame = false;
+        }
+        else {
+            for (Actor actor : foregroundSprites.getChildren()) {
+                if (actor.getClass() == PointOfInterestMapSprite.class) {
+                    PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                    if (player.collideWith(point.getBoundingRect())) {
+                        collidingPoint = point;
+                    }
                 }
             }
         }
