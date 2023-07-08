@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -17,6 +15,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
 
+import java.util.List;
+
 public class FightAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -31,10 +31,6 @@ public class FightAi extends SpellAbilityAi {
         // everything is defined or targeted above, can't do anything there unless a specific logic is set
         if (sa.hasParam("Defined") && !sa.usesTargeting()) {
             // TODO extend Logic for cards like Arena
-            if ("Grothama".equals(sa.getParam("AILogic"))) { // Grothama, All-Devouring
-                return SpecialCardAi.GrothamaAllDevouring.consider(ai, sa);
-            }
-
             return true;
         }
 
@@ -120,6 +116,11 @@ public class FightAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if (aiLogic.equals("Grothama")) {
+            return mandatory ? true : SpecialCardAi.GrothamaAllDevouring.consider(ai, sa);
+        }
+
         if (checkApiLogic(ai, sa)) {
             return true;
         }

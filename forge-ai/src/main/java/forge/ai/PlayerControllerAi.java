@@ -23,7 +23,10 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostEnlist;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -257,9 +260,6 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
-        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
-            return true;
-        }
         if (wrapper.isMandatory()) {
             return true;
         }

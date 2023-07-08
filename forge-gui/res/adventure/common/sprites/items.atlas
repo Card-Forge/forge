@@ -468,4 +468,9 @@ CartoucheOfAmbition
 CartoucheOfZeal
   xy:320,240
   size:16,16
-
+HallowedSigil
+  xy:320,256
+  size:16,16
+UnhallowedSigil
+  xy:320,272
+  size:16,16
