@@ -30,7 +30,6 @@ public class FightAi extends SpellAbilityAi {
 
         // everything is defined or targeted above, can't do anything there unless a specific logic is set
         if (sa.hasParam("Defined") && !sa.usesTargeting()) {
-            // TODO extend Logic for cards like Arena
             return true;
         }
 
