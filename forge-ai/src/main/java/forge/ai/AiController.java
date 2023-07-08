@@ -1332,10 +1332,7 @@ public class AiController {
         if (sa == null) {
             return null;
         }
-
-        final List<SpellAbility> abilities = Lists.newArrayList();
-        abilities.add(sa);
-        return abilities;
+        return Lists.newArrayList(sa);
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {

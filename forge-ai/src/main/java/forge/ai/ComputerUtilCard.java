@@ -1865,7 +1865,6 @@ public class ComputerUtilCard {
      */
     public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
-        final CardCollection threatenedTargets = new CardCollection();
 
         if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
@@ -1877,14 +1876,11 @@ public class ComputerUtilCard {
             // For pumps without targeting restrictions, just return immediately until this is fleshed out.
             return false;
         }
-        CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
-        targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
-        for (final Card c : targetables) {
-            if (objects.contains(c)) {
-                threatenedTargets.add(c);
-            }
-        }
+        CardCollection threatenedTargets = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+        threatenedTargets = ComputerUtil.getSafeTargets(ai, sa, threatenedTargets);
+        threatenedTargets.retainAll(objects);
+
         if (!threatenedTargets.isEmpty()) {
             sortByEvaluateCreature(threatenedTargets);
             for (Card c : threatenedTargets) {
