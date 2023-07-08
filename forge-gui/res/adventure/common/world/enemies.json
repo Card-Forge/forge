@@ -7841,6 +7841,168 @@
 	]
 },
 {
+	"name": "False Knight",
+	"sprite": "sprites/enemy/humanoid/human/knight/false_knight.atlas",
+	"deck": [
+		"decks/standard/death_knight.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Disguised",
+		"Soldier",
+		"Human",
+		"Knight",
+		"Unholy",
+		"IdentityBlack"
+	]
+},
+{
+	"name": "False Monk",
+	"sprite": "sprites/enemy/humanoid/human/warlock/false_monk.atlas",
+	"deck": [
+	"decks/standard/cultist.dck"
+	],
+	"randomizeDeck": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1
+			"count": 2,
+			"addMaxCount": 2,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Human",
+		"Disguised",
+		"Unholy",
+		"IdentityBlack",
+	]
+},
+{
 	"name": "Farmer",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/human/peasant/farmer.atlas",
@@ -11671,6 +11833,86 @@
 		null,
 		null,
 		null
+	]
+},
+{
+	"name": "High Cultist",
+	"sprite": "sprites/enemy/humanoid/human/warlock/high_cultist.atlas",
+	"deck": [
+	"decks/standard/cultist.dck"
+	],
+	"randomizeDeck": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Human",
+		"Disguised",
+		"Unholy",
+		"IdentityBlack",
 	]
 },
 {
@@ -21033,6 +21275,69 @@
 		"IdentityGreen",
 		"IdentityRed",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Valyx Feaster of Torment",
+	"sprite": "sprites/enemy/fiend/valyx.atlas",
+	"deck": [
+		"decks/miniboss/valyx.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Demon",
+		"Humanoid",
+		"Unholy",
+		"IdentityBlack"
 	]
 },
 {
