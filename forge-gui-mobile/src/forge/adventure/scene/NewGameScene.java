@@ -199,6 +199,7 @@ public class NewGameScene extends UIScene {
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
+            WorldStage.getInstance().setupNewGame();
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
