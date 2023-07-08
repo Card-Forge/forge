@@ -13,6 +13,7 @@ import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
 import forge.adventure.util.*;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
