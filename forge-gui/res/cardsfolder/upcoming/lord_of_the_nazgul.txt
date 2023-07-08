@@ -1,0 +1,12 @@
+Name:Lord of the Nazgul
+ManaCost:3 U B
+Types:Legendary Creature Wraith Noble
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Wraith+YouCtrl | AddKeyword$ Protection from Ringbearers | Description$ Wraiths you control have protection from Ring-bearers.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 3/3 black Wraith creature token with menace. Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_wraith_menace | TokenOwner$ You | SubAbility$ DBAnimateAll
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Wraith.YouCtrl | Power$ 9 | Toughness$ 9 | ConditionPresent$ Card.Wraith+YouCtrl | ConditionCompare$ GE9
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Wraith
+Oracle:Flying\nWraiths you control have protection from Ring-bearers.\nWhenever you cast an instant or sorcery spell, create a 3/3 black Wraith creature token with menace. Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn.
