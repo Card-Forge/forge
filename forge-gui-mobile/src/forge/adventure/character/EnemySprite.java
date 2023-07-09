@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -51,8 +50,10 @@ public class EnemySprite extends CharacterSprite {
     private final Float _movementTimeout = 150.0f;
     private boolean _freeze = false; //freeze movement after defeating player
     public float unfreezeRange = 30.0f;
-    public float threatRange = 0.0f;
-    public float fleeRange = 0.0f;
+    public float threatRange = 0.0f; //If range < threatRange, begin pursuit
+    public float pursueRange = 0.0f; //If range > pursueRange, abandon pursuit
+    public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
+    private boolean aggro = false;
     public boolean ignoreDungeonEffect = false;
     public String questStageID;
 
@@ -75,11 +76,6 @@ public class EnemySprite extends CharacterSprite {
                 movementBehaviors.peekLast().destination = Integer.parseInt(s);
             }
         }
-    }
-
-    public Rectangle navigationBoundingRect() {
-        //This version of the bounds will be used for navigation purposes to allow mobile mobs to not need pixel perfect pathing
-        return new Rectangle(boundingRect).setSize(boundingRect.width * collisionHeight, boundingRect.height * collisionHeight);
     }
 
     @Override
@@ -124,9 +120,9 @@ public class EnemySprite extends CharacterSprite {
         }
 
         if (threatRange > 0 || fleeRange > 0){
-
-            if (routeToPlayer.len() <= threatRange)
+            if (routeToPlayer.len() <= threatRange || (aggro && routeToPlayer.len() <= pursueRange))
             {
+                aggro = true;
                 return routeToPlayer;
             }
             if (routeToPlayer.len() <= fleeRange)
@@ -185,6 +181,13 @@ public class EnemySprite extends CharacterSprite {
 
     public EnemyData getData() {
         return data;
+    }
+
+    @Override
+    public String getName() {
+        if (nameOverride == null || nameOverride.isEmpty())
+            return data.getName();
+        return nameOverride;
     }
 
     public Array<Reward> getRewards() {
@@ -291,6 +294,8 @@ public class EnemySprite extends CharacterSprite {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        if (inactive || hidden)
+            return;
         super.draw(batch, parentAlpha);
         if(Current.player().hasColorView() && !data.colors.isEmpty()) {
             drawColorHints(batch);
@@ -303,7 +308,7 @@ public class EnemySprite extends CharacterSprite {
         if(effect != null){ //Draw a crown icon on top.
             Texture T = Current.world().getGlobalTexture();
             TextureRegion TR = new TextureRegion(T, 16, 0, 16, 16);
-            batch.draw(TR, getX(), getY() + 16, 16, 16);
+            batch.draw(TR, getX(), getY() + 16, 16*getScaleX(), 16*getScaleY());
         }
     }
 

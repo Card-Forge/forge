@@ -1,0 +1,13 @@
+Name:Phyrexian Harvester
+ManaCost:R R R R
+Types:Creature Phyrexian Horror
+PT:5/5
+K:Menace
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME is dealt damage, seek that many nonland cards. At the beginning of your next end step, discard those cards.
+SVar:TrigSeek:DB$ Seek | Num$ X | Type$ Card.nonLand | RememberFound$ True | SubAbility$ DBDelay
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDiscardExiled | SubAbility$ DBCleanup | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next end step, discard those cards.
+SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Discard
+Oracle:Menace\nWhenever Phyrexian Harvester is dealt damage, seek that many nonland cards. At the beginning of your next end step, discard those cards.

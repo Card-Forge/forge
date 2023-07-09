@@ -28,7 +28,12 @@ public class BiomeSprites {
         if (sprites.isEmpty()) {
             sprites.addAll(textureAtlasBuffer.createSprites(name));
         }
-        return sprites.get(seed % sprites.size);
+        int index = seed % sprites.size;
+        if (index >= sprites.size || index < 0) {
+            System.err.println("Invalid index: " + index + " [" + name + "]");
+            return null;
+        }
+        return sprites.get(index);
     }
 
     public BiomeSpriteData getSpriteData(String name) {

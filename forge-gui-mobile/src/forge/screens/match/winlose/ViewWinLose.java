@@ -2,6 +2,7 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
+import forge.game.GameType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -55,39 +56,6 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnRestart = add(new FButton());
         btnQuit = add(new FButton());
 
-        // Control of the win/lose is handled differently for various game
-        // modes.
-        ControlWinLose control = null;
-        switch (game0.getGameType()) {
-        case Quest:
-            control = new QuestWinLose(this, game0);
-            break;
-        case QuestDraft:
-            control = new QuestDraftWinLose(this, game0);
-            break;
-        case PlanarConquest:
-            control = new ConquestWinLose(this, game0);
-            break;
-        case Draft:
-            if (!FModel.getGauntletMini().isGauntletDraft()) {
-                break;
-            }
-        //$FALL-THROUGH$
-        case Sealed:
-            control = new LimitedWinLose(this, game0);
-            break;
-        case Gauntlet:
-        case CommanderGauntlet:
-        case DeckManager:
-            control = new GauntletWinLose(this, game0);
-            break;
-        default: // will catch it after switch
-            break;
-        }
-        if (control == null) {
-            control = new ControlWinLose(this, game0);
-        }
-
         btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
         btnContinue.setFont(FSkinFont.get(22));
         btnRestart.setText(Forge.getLocalizer().getMessage("btnStartNewMatch"));
@@ -123,8 +91,42 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         }).build());
         lblTitle.setText(composeTitle(game0));
 
-        if (Forge.isMobileAdventureMode)
+        // Control of the win/lose is handled differently for various game
+        // modes.
+        ControlWinLose control = null;
+        switch (game0.getGameType()) {
+        case Quest:
+            control = new QuestWinLose(this, game0);
+            break;
+        case QuestDraft:
+            control = new QuestDraftWinLose(this, game0);
+            break;
+        case PlanarConquest:
+            control = new ConquestWinLose(this, game0);
+            break;
+        case Adventure:
+        case AdventureEvent:
             control = new AdventureWinLose(this, game0);
+            break;
+        case Draft:
+            if (!FModel.getGauntletMini().isGauntletDraft()) {
+                break;
+            }
+        //$FALL-THROUGH$
+        case Sealed:
+            control = new LimitedWinLose(this, game0);
+            break;
+        case Gauntlet:
+        case CommanderGauntlet:
+        case DeckManager:
+            control = new GauntletWinLose(this, game0);
+            break;
+        default: // will catch it after switch
+            break;
+        }
+        if (control == null) {
+            control = new ControlWinLose(this, game0);
+        }
 
         showGameOutcomeSummary();
         showPlayerScores();
@@ -199,17 +201,36 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         h = height / 12;
         if (Forge.isMobileAdventureMode) {
+            if (game.getGameType() == GameType.AdventureEvent) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            }
+            else{
+                btnContinue.setVisible(false);
+            }
             btnQuit.setBounds(x, y, w, h);
             y += h + dy;
-            btnContinue.setVisible(false);
+
             btnRestart.setVisible(false);
         } else {
-            btnContinue.setBounds(x, y, w, h);
-            y += h + dy;
-            btnRestart.setBounds(x, y, w, h);
-            y += h + dy;
-            btnQuit.setBounds(x, y, w, h);
-            y += h + dy;
+            if (btnContinue.isEnabled()) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnContinue.setBounds(-w, -w, 0, 0);
+            }
+            if (btnRestart.isEnabled()) {
+                btnRestart.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnRestart.setBounds(-w, -w, 0, 0);
+            }
+            if (btnQuit.isEnabled()) {
+                btnQuit.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnQuit.setBounds(-w, -w, 0, 0);
+            }
         }
 
 

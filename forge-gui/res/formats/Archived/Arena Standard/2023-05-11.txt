@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (MAT)
+Type:Archived
+Subtype:Standard
+Effective:2023-05-11
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT
+Banned:The Meathook Massacre

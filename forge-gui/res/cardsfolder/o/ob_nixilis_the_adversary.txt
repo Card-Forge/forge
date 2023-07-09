@@ -2,7 +2,7 @@ Name:Ob Nixilis, the Adversary
 ManaCost:1 B R
 Types:Legendary Planeswalker Nixilis
 Loyalty:3
-K:Casualty:X:NonLegendary$ True | CopySetLoyalty$ Casualty:The copy isn't legendary and has starting loyalty X.
+K:Casualty:X:NonLegendary$ True | SetLoyalty$ Casualty:The copy isn't legendary and has starting loyalty X.
 A:AB$ RepeatEach | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDrain | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life unless they discard a card. If you control a Demon or Devil, you gain 2 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 2 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionPresent$ Demon.YouCtrl,Devil.YouCtrl | StackDescription$ None

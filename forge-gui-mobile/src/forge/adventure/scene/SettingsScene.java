@@ -7,11 +7,15 @@ import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.assets.ImageCache;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.sound.SoundSystem;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,7 +30,6 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * Scene to handle settings of the base forge and adventure mode
  */
 public class SettingsScene extends UIScene {
-    static public ForgePreferences Preference;
     private final Table settingGroup;
     TextraButton backButton;
     //TextraButton newPlane;
@@ -95,9 +98,6 @@ public class SettingsScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
         settingGroup = new Table();
-        if (Preference == null) {
-            Preference = new ForgePreferences();
-        }
         //temporary disable custom world until it works correctly on each update
         /*selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
@@ -121,27 +121,14 @@ public class SettingsScene extends UIScene {
         settingGroup.add(newPlane).align(Align.right).pad(2);*/
 
         if (!GuiBase.isAndroid()) {
-            SelectBox<String> videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
+            SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
                 String mode = (String) o;
                 if (mode == null)
                     mode = "720p";
-                Config.instance().getSettingData().videomode = mode;
-                if (mode.equalsIgnoreCase("768p")) {
-                    Config.instance().getSettingData().width = 1366;
-                    Config.instance().getSettingData().height = 768;
-                } else if (mode.equalsIgnoreCase("900p")) {
-                    Config.instance().getSettingData().width = 1600;
-                    Config.instance().getSettingData().height = 900;
-                } else if (mode.equalsIgnoreCase("1080p")) {
-                    Config.instance().getSettingData().width = 1920;
-                    Config.instance().getSettingData().height = 1080;
-                } else {
-                    Config.instance().getSettingData().width = 1280;
-                    Config.instance().getSettingData().height = 720;
-                }
-                Config.instance().saveSettings();
-                //update preference for classic mode if needed
-                if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
+                Graphics.setVideoMode(mode);
+
+                //update
+                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equalsIgnoreCase(mode)) {
                     FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
                     FModel.getPreferences().save();
                 }
@@ -203,10 +190,8 @@ public class SettingsScene extends UIScene {
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
-                    if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
-                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
-                        FModel.getPreferences().save();
-                    }
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
+                    FModel.getPreferences().save();
                 }
             });
         }
@@ -224,8 +209,7 @@ public class SettingsScene extends UIScene {
         addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                boolean value = ((CheckBox) actor).isChecked();
-                Config.instance().getSettingData().disableWinLose = value;
+                Config.instance().getSettingData().disableWinLose = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
             }
         });
@@ -247,11 +231,28 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
-            addCheckBox(Forge.getLocalizer().getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+            final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
+            SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
+                String mode = (String) o;
+                if (mode == null)
+                    mode = "Crop";
+                item[0] = mode;
+                //update
+                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equalsIgnoreCase(mode)) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                    FModel.getPreferences().save();
+                    Forge.enableUIMask = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                }
+                ImageCache.clearGeneratedCards();
+                ImageCache.disposeTextures();
+                return null;
+            });
+            addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
+            settingGroup.add(borderMask).align(Align.right).pad(2);
+
             addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
-            //addInputField(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
         }
 
 
@@ -272,12 +273,12 @@ public class SettingsScene extends UIScene {
 
     private void addInputField(String name, ForgePreferences.FPref pref) {
         TextField box = Controls.newTextField("");
-        box.setText(Preference.getPref(pref));
+        box.setText(FModel.getPreferences().getPref(pref));
         box.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, ((TextField) actor).getText());
-                Preference.save();
+                FModel.getPreferences().setPref(pref, ((TextField) actor).getText());
+                FModel.getPreferences().save();
             }
         });
 
@@ -287,12 +288,12 @@ public class SettingsScene extends UIScene {
 
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
         CheckBox box = Controls.newCheckBox("");
-        box.setChecked(Preference.getPrefBoolean(pref));
+        box.setChecked(FModel.getPreferences().getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, ((CheckBox) actor).isChecked());
-                Preference.save();
+                FModel.getPreferences().setPref(pref, ((CheckBox) actor).isChecked());
+                FModel.getPreferences().save();
             }
         });
 
@@ -302,12 +303,14 @@ public class SettingsScene extends UIScene {
 
     private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {
         Slider slide = Controls.newSlider(min, max, 1, false);
-        slide.setValue(Preference.getPrefInt(pref));
+        slide.setValue(FModel.getPreferences().getPrefInt(pref));
         slide.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
-                Preference.save();
+                FModel.getPreferences().setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
+                FModel.getPreferences().save();
+                if (ForgePreferences.FPref.UI_VOL_MUSIC.equals(pref))
+                    SoundSystem.instance.refreshVolume();
             }
         });
         addLabel(name);

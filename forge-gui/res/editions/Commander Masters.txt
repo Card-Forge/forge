@@ -7,10 +7,30 @@ ScryfallCode=CMM
 
 [cards]
 79 M Capture of Jingzhou @Jack Wei
+110 R Personal Tutor @Julie Dillon
+320 M Selvala, Heart of the Wilds @Tyler Jacobson
 361 M The Ur-Dragon @Jaime Jones
 396 M Jeweled Lotus @Alayna Danner
 483 M Capture of Jingzhou @Jack Wei
+493 R Personal Tutor @Julie Dillon
+571 M Selvala, Heart of the Wilds @Tyler Jacobson
 594 M The Ur-Dragon @Jaime Jones
 611 M Jeweled Lotus @Alayna Danner
+633 R Personal Tutor @Jeff Miracola
+681 M Selvala, Heart of the Wilds @Jack Hughes
 689 M The Ur-Dragon @Tyler Walpole
 702 M Jeweled Lotus @Olena Richards
+704 M Zhulodok, Void Gorger @Lius Lasahido
+705 M Anikthea, Hand of Erebos @Magali Villeneuve
+706 M Commodore Guff @Matt Stewart
+707 M Sliver Gravemother @Chris Rahn
+752 M Zhulodok, Void Gorger @Lius Lasahido
+773 M Anikthea, Hand of Erebos @Magali Villeneuve
+777 M Sliver Gravemother @Chris Rahn
+779 M Zhulodok, Void Gorger @Lius Lasahido
+780 M Anikthea, Hand of Erebos @Magali Villeneuve
+781 M Commodore Guff @Matt Stewart
+782 M Sliver Gravemother @Chris Rahn
+1064 M Selvala, Heart of the Wilds @Jack Hughes
+1065 M The Ur-Dragon @Tyler Walpole
+1066 M Jeweled Lotus @Olena Richards

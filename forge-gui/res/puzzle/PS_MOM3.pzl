@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - March of the Machines #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/05/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your library has 23 cards remaining. Remember that your solution must satisfy all possible blocking decisions. Your King Darien is exiled by your opponent's Alabaster Host Interceptor. In The Trenches has not been activated this game.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Aspirant's Ascent;Lagrella, the Magpie;White Sun's Twilight;Bladehold War-Whip;Mysterious Limousine;Coming in Hot
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=In the Trenches;Veil of Assimilation;Tribute to the World Tree;Bitter Reunion;T:w_1_1_soldier|Set:DMU;T:w_1_1_soldier|Set:DMU;Rockfall Vale|NoETBTrigs;Rockfall Vale|NoETBTrigs;Rockfall Vale|NoETBTrigs;Rockfall Vale|NoETBTrigs;Deserted Beach|NoETBTrigs;Deserted Beach|NoETBTrigs;Deserted Beach|NoETBTrigs;Deserted Beach|NoETBTrigs;King Darien XLVIII|Id:1
+p1life=26
+p1battlefield=Alabaster Host Intercessor|ExecuteScript:TrigExile->1;Paladin of Predation

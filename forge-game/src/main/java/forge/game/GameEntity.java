@@ -275,7 +275,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             tgt = sa.getTargetRestrictions();
         }
 
-        return !((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa));
+        return tgt != null && isValid(tgt.getValidTgts(), aura.getController(), aura, sa);
     }
 
     // Counters!

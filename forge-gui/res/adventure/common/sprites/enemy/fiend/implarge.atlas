@@ -1,0 +1,89 @@
+implarge.png
+size: 256, 384
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 7,16
+  size: 16, 16
+Idle
+  xy: 7,16
+  size: 16, 16
+Idle
+  xy: 39, 16
+  size: 16, 16  
+Idle
+  xy: 71, 16
+  size: 16, 16 
+Idle
+  xy: 103, 16
+  size: 16, 16   
+Idle
+  xy: 135, 16
+  size: 16, 16
+Idle
+  xy: 167, 16
+  size: 16, 16 
+Idle
+  xy: 199, 16
+  size: 16, 16   
+Walk
+  xy: 6, 46
+  size: 18, 18   
+Walk
+  xy: 38, 46
+  size: 18, 18   
+Walk
+  xy: 70, 46
+  size: 18, 18   
+Walk
+  xy: 102, 46
+  size: 18, 18   
+Walk
+  xy: 134, 46
+  size: 18, 18   
+Walk
+  xy: 166, 46
+  size: 18, 18   
+Walk
+  xy: 198, 46
+  size: 18, 18   
+Walk
+  xy: 230, 46
+  size: 18, 18   
+Attack
+  xy: 6, 80
+  size: 18, 16
+Attack
+  xy: 38, 80
+  size: 18, 16
+Attack
+  xy: 70, 80
+  size: 18, 16
+Attack
+  xy: 102, 80
+  size: 18, 16
+Attack
+  xy: 134, 80
+  size: 18, 16
+Attack
+  xy: 166, 80
+  size: 18, 16
+Death
+  xy: 6, 144
+  size: 18, 16
+Death
+  xy: 38, 144
+  size: 18, 16
+Death
+  xy: 70, 144
+  size: 18, 16
+Death
+  xy: 102, 144
+  size: 18, 16
+Death
+  xy: 134, 144
+  size: 18, 16
+Death
+  xy: 166, 144
+  size: 18, 16

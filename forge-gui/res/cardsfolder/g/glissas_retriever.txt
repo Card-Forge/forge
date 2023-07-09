@@ -5,10 +5,11 @@ PT:6/6
 K:Haste
 K:Toxic:3
 S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Corrupted — When CARDNAME dies, exile it. When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
-SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBImmediateTrigger
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigChangeZone | TriggerDescription$ When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Corrupted — When CARDNAME dies, exile it. When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters. | SubAbility$ DBCleanup
 SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select X target cards in your graveyard | Origin$ Graveyard | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill|Dredge
 SVar:X:PlayerCountOpponents$HasPropertyIsCorrupted

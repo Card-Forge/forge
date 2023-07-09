@@ -17,18 +17,10 @@
  */
 package forge.game.combat;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -36,12 +28,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.keyword.Keyword;
@@ -59,6 +46,12 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.MapToAmount;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -75,15 +68,17 @@ public class CombatUtil {
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
-            final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
-            defenders.addAll(planeswalkers);
-            for (Card battle : defender.getBattlesInPlay()) {
-                if (!playerWhoAttacks.equals(battle.getProtectingPlayer()) && battle.getType().hasSubtype("Siege")) {
-                    defenders.add(battle);
-                }
+            defenders.addAll(defender.getPlaneswalkersInPlay());
+        }
+
+        // Relevant battles (protected by the attacking player's opponents)
+        final Game game = playerWhoAttacks.getGame();
+        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.BATTLES);
+        for (Card battle : battles) {
+            if (battle.getType().hasSubtype("Siege") && battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
+                defenders.add(battle);
             }
         }
-        defenders.addAll(playerWhoAttacks.getBattlesInPlay());
 
         return defenders;
     }
@@ -241,10 +236,10 @@ public class CombatUtil {
             // attacker got goaded by defender or defender is not player
             if (goadedByDefender || !(defender instanceof Player)) {
                 for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                    if (!defender.equals(ge) && ge instanceof Player) {
+                    if (!ge.equals(defender) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                        if (!attacker.isGoadedBy((Player) ge) && !ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                             return false;
                         }
                     }
@@ -255,8 +250,8 @@ public class CombatUtil {
         // Quasi-goad logic for "Kardur, Doomscourge" etc. that isn't goad but behaves the same
         if (defender != null && defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
             for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                if (!defender.equals(ge) && ge instanceof Player) {
-                    if (canAttack(attacker, ge)) {
+                if (!ge.equals(defender) && ge instanceof Player) {
+                    if (!ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                         return false;
                     }
                 }
@@ -1131,7 +1126,7 @@ public class CombatUtil {
         if (!canBlock(blocker, nextTurn)) {
             return false;
         }
-        
+
         if (isUnblockableFromLandwalk(attacker, blocker.getController())
         		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
             return false;

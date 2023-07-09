@@ -1,0 +1,11 @@
+Name:Moria Scavenger
+ManaCost:1 B R
+Types:Creature Orc Rogue
+PT:1/4
+K:Deathtouch
+K:Haste
+A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SubAbility$ DBAmass | SpellDescription$ Draw a card. If the discarded card was a creature card, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 1 | ConditionDefined$ Discarded | ConditionPresent$ Card.Creature
+DeckHas:Ability$Token|Counters|Discard & Type$Army
+DeckHints:Type$Goblin|Orc
+Oracle:Deathtouch, haste\n{T}, Discard a card: Draw a card. If the discarded card was a creature card, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

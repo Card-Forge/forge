@@ -107,7 +107,7 @@ public abstract class GameState {
     public GameState() {
     }
 
-    public abstract IPaperCard getPaperCard(String cardName);
+    public abstract IPaperCard getPaperCard(String cardName, String setCode, int artID);
 
     @Override
     public String toString() {
@@ -258,9 +258,12 @@ public abstract class GameState {
 
             if (c.hasMergedCard()) {
                 // we have to go by the current top card name here
-                newText.append(c.getTopMergedCard().getPaperCard().getName());
+                newText.append(c.getTopMergedCard().getPaperCard().getName()).append("|Set:")
+                        .append(c.getTopMergedCard().getPaperCard().getEdition()).append("|Art:")
+                        .append(c.getTopMergedCard().getPaperCard().getArtIndex());
             } else {
-                newText.append(c.getPaperCard().getName());
+                newText.append(c.getPaperCard().getName()).append("|Set:").append(c.getPaperCard().getEdition())
+                        .append("|Art:").append(c.getPaperCard().getArtIndex());
             }
         }
         if (c.isCommander()) {
@@ -303,6 +306,10 @@ public abstract class GameState {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
+                if (c.getMeldedWith() != null) {
+                    newText.append(":");
+                    newText.append(c.getMeldedWith().getName());
+                }
             } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
                 newText.append("|Modal");
             }
@@ -731,9 +738,11 @@ public abstract class GameState {
             String id = rememberedEnts.getValue();
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
-            exiledWith.addExiledCard(c);
-            c.setExiledWith(exiledWith);
-            c.setExiledBy(exiledWith.getController());
+            if (exiledWith != null) {
+                exiledWith.addExiledCard(c);
+                c.setExiledWith(exiledWith);
+                c.setExiledBy(exiledWith.getController());
+            }
         }
     }
 
@@ -1192,6 +1201,18 @@ public abstract class GameState {
                 }
             }
 
+            int artID = -1;
+            for (final String info : cardinfo) {
+                if (info.startsWith("Art:")) {
+                    try {
+                        artID = Integer.parseInt(info.substring(info.indexOf(':') + 1));
+                    } catch (Exception e) {
+                        break;
+                    }
+                    break;
+                }
+            }
+
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
@@ -1208,7 +1229,7 @@ public abstract class GameState {
                 }
                 c = Card.fromPaperCard(token, player, player.getGame());
             } else {
-                PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode, artID);
                 if (pc == null) {
                     System.err.println("ERROR: Tried to create a non-existent card named " + cardinfo[0] + " (set: " + (setCode == null ? "any" : setCode) + ") when loading game state!");
                     continue;
@@ -1246,6 +1267,17 @@ public abstract class GameState {
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
+                    if (info.indexOf(':') > 0) {
+                        String meldCardName = info.substring(info.indexOf(':') + 1).replace("^", ",");
+                        Card meldTarget;
+                        PaperCard pc = StaticData.instance().getCommonCards().getCard(meldCardName);
+                        if (pc == null) {
+                            System.err.println("ERROR: Tried to create a non-existent card named " + meldCardName + " (as a MeldedWith card) when loading game state!");
+                            continue;
+                        }
+                        meldTarget = Card.fromPaperCard(pc, c.getOwner());
+                        c.setMeldedWith(meldTarget);
+                    }
                     c.setState(CardStateName.Meld, true);
                     c.setBackSide(true);
                 } else if (info.startsWith("Modal")) {

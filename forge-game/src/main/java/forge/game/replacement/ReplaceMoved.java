@@ -87,6 +87,10 @@ public class ReplaceMoved extends ReplacementEffect {
             if (!val) { return false; }
         }
 
+        if (runParams.get(AbilityKey.Destination) == ZoneType.Battlefield && !canReplaceETB(runParams)) {
+            return false;
+        }
+
         return true;
     }
 

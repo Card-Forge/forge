@@ -23,6 +23,7 @@ public class TileMapScene extends HudScene   {
     TiledMap map;
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
+    private int nextSpawnPoint;
     private boolean autoheal = false;
 
     private TileMapScene() {
@@ -56,8 +57,9 @@ public class TileMapScene extends HudScene   {
         if (map == null)
             return;
         if (nextMap != null) {
-            load(nextMap);
+            load(nextMap, nextSpawnPoint);
             nextMap = null;
+            nextSpawnPoint = 0;
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
@@ -104,11 +106,11 @@ public class TileMapScene extends HudScene   {
         AdventureQuestController.instance().mostRecentPOI = point;
         rootPoint = point;
         oldMap = point.getData().map;
-        map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(point.getData().map));
+        map = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(point.getData().map));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + oldMap));
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
-        tiledMapRenderer.loadMap(map, "");
+        tiledMapRenderer.loadMap(map, "", oldMap,0);
         stage.getPlayerSprite().stop();
     }
 
@@ -120,12 +122,12 @@ public class TileMapScene extends HudScene   {
     public PointOfInterest rootPoint;
     String oldMap;
 
-    private void load(String targetMap) {
+    private void load(String targetMap, int nextSpawnPoint) {
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(targetMap));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap));
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
-        tiledMapRenderer.loadMap(map, oldMap);
+        tiledMapRenderer.loadMap(map, oldMap, targetMap, nextSpawnPoint);
         oldMap = targetMap;
         stage.getPlayerSprite().stop();
     }
@@ -136,8 +138,9 @@ public class TileMapScene extends HudScene   {
         return MapStage.getInstance().getDialogOnlyInput();
     }
 
-    public void loadNext(String targetMap) {
+    public void loadNext(String targetMap, int entryTargetObject) {
         nextMap = targetMap;
+        nextSpawnPoint = entryTargetObject;
     }
 
 }

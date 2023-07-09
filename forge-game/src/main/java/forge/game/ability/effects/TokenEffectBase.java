@@ -44,8 +44,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (result == null) {
                     throw new RuntimeException("don't find Token for TokenScript: " + script);
                 }
-                // set owner
-                result.setOwner(owner);
+                result.setTokenSpawningAbility(sa);
                 tokenTable.put(owner, result, finalAmount);
             }
         }
@@ -53,16 +52,18 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
     }
 
     protected TokenCreateTable makeTokenTableInternal(Player owner, String script, final int finalAmount, final SpellAbility sa) {
-        TokenCreateTable tokenTable = new TokenCreateTable();
         final Card result = TokenInfo.getProtoType(script, sa, owner, false);
 
         if (result == null) {
             throw new RuntimeException("don't find Token for TokenScript: " + script);
         }
-        // set owner
-        result.setOwner(owner);
-        tokenTable.put(owner, result, finalAmount);
+        result.setTokenSpawningAbility(sa);
+        return makeTokenTableInternal(owner, result, finalAmount);
+    }
 
+    protected TokenCreateTable makeTokenTableInternal(Player owner, Card result, final int finalAmount) {
+        TokenCreateTable tokenTable = new TokenCreateTable();
+        tokenTable.put(owner, result, finalAmount);
         return tokenTable;
     }
 
@@ -81,6 +82,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         for (Player p : Sets.newHashSet(tokenTable.rowKeySet())) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
             repParams.put(AbilityKey.Token, tokenTable);
+            repParams.put(AbilityKey.Cause, sa);
             repParams.put(AbilityKey.EffectOnly, true); // currently only effects can create tokens?
 
             switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {

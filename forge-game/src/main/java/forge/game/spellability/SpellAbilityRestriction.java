@@ -189,7 +189,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setClassLevelOperator(params.get("ClassLevel").substring(0, 2));
             this.setClassLevel(params.get("ClassLevel").substring(2));
         }
-    } // end setRestrictions()
+    }
 
     /**
      * <p>
@@ -361,15 +361,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
 
-        // legendary sorcery
-        if (c.isSorcery() && c.getType().isLegendary() && CardLists.getValidCardCount(
+        // 205.4e. Any instant or sorcery spell with the supertype "legendary" is subject to a casting restriction
+        if ((c.isSorcery() || c.isInstant()) && c.getType().isLegendary() && CardLists.getValidCardCount(
                 activator.getCardsIn(ZoneType.Battlefield),
                 "Creature.Legendary,Planeswalker.Legendary", c.getController(), c, sa) <= 0) {
             return false;
         }
 
         // Explicit Aftermath check there
-        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 

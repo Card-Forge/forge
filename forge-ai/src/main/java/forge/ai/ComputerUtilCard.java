@@ -567,6 +567,13 @@ public class ComputerUtilCard {
             return evaluateCreature(b) - evaluateCreature(a);
         }
     };
+    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = new Comparator<SpellAbility>() {
+        @Override
+        public int compare(final SpellAbility a, final SpellAbility b) {
+            // TODO ideally we could reuse the value from the previous pass with false
+            return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
+        }
+    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -582,7 +589,28 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c) {
         return creatureEvaluator.evaluateCreature(c);
     }
+    public static int evaluateCreature(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
 
+        if (sa.getApi() != ApiType.PermanentCreature) {
+            System.err.println("Warning: tried to evaluate a non-creature spell with evaluateCreature for card " + host + " via SA " + sa);
+            return 0;
+        }
+
+        // switch to the needed card face
+        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
+        if (currentState != null) {
+            host.setState(sa.getCardStateName(), false);
+        }
+
+        int eval = evaluateCreature(host);
+
+        if (currentState != null) {
+            host.setState(currentState, false);
+        }
+
+        return eval;
+    }
     public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }
@@ -795,7 +823,7 @@ public class ComputerUtilCard {
             }
             // Changeling are all creature types, they are not interesting for
             // counting creature types
-            if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+            if (c.getType().hasAllCreatureTypes()) {
                 continue;
             }
             // ignore cards that does enter the battlefield as clones
@@ -1378,6 +1406,39 @@ public class ComputerUtilCard {
             }
         }
 
+        if (keywords.contains("Banding") && !c.hasKeyword(Keyword.BANDING)) {
+            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.isPlayerTurn(ai) && !ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
+                // will this card participate in an attacking band?
+                Card bandingCard = getPumpedCreature(ai, sa, c, toughness, power, keywords);
+                // TODO: It may be possible to use AiController.getPredictedCombat here, but that makes it difficult to
+                // use reinforceWithBanding through the attack controller, especially with the extra card parameter in mind
+                AiAttackController aiAtk = new AiAttackController(ai);
+                Combat predicted = new Combat(ai);
+                aiAtk.declareAttackers(predicted);
+                aiAtk.reinforceWithBanding(predicted, bandingCard);
+                if (predicted.isAttacking(bandingCard) && predicted.getBandOfAttacker(bandingCard).getAttackers().size() > 1) {
+                    return true;
+                }
+            } else if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && combat != null) {
+                // does this card block a Trample card or participate in a multi block?
+                for (Card atk : combat.getAttackers()) {
+                    if (atk.getController().isOpponentOf(ai)) {
+                        CardCollection blockers = combat.getBlockers(atk);
+                        boolean hasBanding = false;
+                        for (Card blocker : blockers) {
+                            if (blocker.hasKeyword(Keyword.BANDING)) {
+                                hasBanding = true;
+                                break;
+                            }
+                        }
+                        if (!hasBanding && ((blockers.contains(c) && blockers.size() > 1) || atk.hasKeyword(Keyword.TRAMPLE))) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
         final Player opp = ai.getWeakestOpponent();
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
@@ -1804,7 +1865,6 @@ public class ComputerUtilCard {
      */
     public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
-        final CardCollection threatenedTargets = new CardCollection();
 
         if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
@@ -1816,14 +1876,11 @@ public class ComputerUtilCard {
             // For pumps without targeting restrictions, just return immediately until this is fleshed out.
             return false;
         }
-        CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
-        targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
-        for (final Card c : targetables) {
-            if (objects.contains(c)) {
-                threatenedTargets.add(c);
-            }
-        }
+        CardCollection threatenedTargets = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+        threatenedTargets = ComputerUtil.getSafeTargets(ai, sa, threatenedTargets);
+        threatenedTargets.retainAll(objects);
+
         if (!threatenedTargets.isEmpty()) {
             sortByEvaluateCreature(threatenedTargets);
             for (Card c : threatenedTargets) {

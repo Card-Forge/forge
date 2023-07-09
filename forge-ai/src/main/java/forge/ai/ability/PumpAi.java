@@ -292,10 +292,6 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            if (sourceName.equals("Necropolis Fiend")) {
-            	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
-                sa.setSVar("X", Integer.toString(xPay));
-            }
             sa.setXManaCostPaid(xPay);
             defense = xPay;
             if (numDefense.equals("-X")) {
@@ -617,7 +613,7 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

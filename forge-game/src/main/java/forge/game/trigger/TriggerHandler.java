@@ -457,8 +457,7 @@ public class TriggerHandler {
             Card original = (Card) runParams.get(AbilityKey.Card);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
             mergedCards.set(mergedCards.indexOf(original), original);
-            Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
-            newParams.putAll(runParams);
+            Map<AbilityKey, Object> newParams = AbilityKey.newMap(runParams);
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
@@ -529,9 +528,6 @@ public class TriggerHandler {
             sa = sa.copy(host, controller, false);
         }
 
-        sa.setLastStateBattlefield(game.getLastStateBattlefield());
-        sa.setLastStateGraveyard(game.getLastStateGraveyard());
-
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
@@ -566,7 +562,6 @@ public class TriggerHandler {
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
-        wrapperAbility.setLastStateBattlefield(game.getLastStateBattlefield());
         if (regtrig.isStatic()) {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {
@@ -576,11 +571,8 @@ public class TriggerHandler {
 
         regtrig.triggerRun();
 
-        if (regtrig.hasParam("OneOff")) {
-            if (regtrig.getHostCard().isImmutable()) {
-                Player p = regtrig.getHostCard().getController();
-                p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
-            }
+        if (regtrig.hasParam("OneOff") && host.isImmutable()) {
+            host.getController().getZone(ZoneType.Command).remove(host);
         }
     }
 

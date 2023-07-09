@@ -8,15 +8,17 @@ import forge.adventure.stage.MapStage;
  * Used to teleport the player in and out of the map
  */
 public class EntryActor extends MapActor{
-    private final MapStage stage;
+    final MapStage stage;
     String targetMap;
-    private float x;
-    private float y;
-    private float w;
-    private float h;
-    private String direction;
+    float x;
+    float y;
+    float w;
+    float h;
+    String direction;
+    String currentMap;
+    int entryTargetObject;
 
-    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction)
+    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction, String currentMap, int entryTargetObject)
     {
         super(id);
         this.stage = stage;
@@ -25,7 +27,8 @@ public class EntryActor extends MapActor{
         this.y = y;
         this.w = w;
         this.h = h;
-
+        this.currentMap = currentMap;
+        this.entryTargetObject = entryTargetObject;
 
         this.direction = direction;
     }
@@ -44,7 +47,15 @@ public class EntryActor extends MapActor{
         }
         else
         {
-            TileMapScene.instance().loadNext(targetMap);
+            if (targetMap.equals(currentMap))
+            {
+                stage.spawn(entryTargetObject);
+            }
+            else
+            {
+                currentMap = targetMap;
+                TileMapScene.instance().loadNext(targetMap, entryTargetObject);
+            }
         }
     }
 

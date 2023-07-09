@@ -47,6 +47,13 @@ public class FLabel extends FDisplayObject implements IButton {
 
         public FLabel build() { return new FLabel(this); }
 
+        public FLabel buildAboveOverlay() { return new FLabel(this) {
+            @Override
+            protected boolean drawAboveOverlay() {
+                return true;
+            }
+        }; }
+
         // Begin builder methods.
         public Builder text(final String s0) { this.bldText = s0; return this; }
         public Builder icon(final FImage i0) { this.bldIcon = i0; return this; }

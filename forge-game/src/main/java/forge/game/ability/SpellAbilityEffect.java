@@ -393,11 +393,16 @@ public abstract class SpellAbilityEffect {
     }
 
     public static void addForgetOnMovedTrigger(final Card card, final String zone) {
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack,Exile | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSource | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
+        SpellAbility forget = getForgetSpellAbility(card);
+        parsedTrigger.setOverridingAbility(forget);
+        parsedTrigger2.setOverridingAbility(forget);
         card.addTrigger(parsedTrigger);
+        card.addTrigger(parsedTrigger2);
     }
 
     protected static void addForgetOnCastTrigger(final Card card) {
@@ -621,7 +626,7 @@ public abstract class SpellAbilityEffect {
     protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
         final Card host = sa.getHostCard();
         final Game game = controller.getGame();
-        if (!game.getPhaseHandler().inCombat()) {
+        if (!c.isCreature() || !game.getPhaseHandler().inCombat()) {
             return false;
         }
         boolean combatChanged = false;
@@ -636,10 +641,8 @@ public abstract class SpellAbilityEffect {
             combat.initConstraints();
             if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
                 PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
-                defs = new FCollection<>();
-                for (Player p : defendingPlayers) {
-                    defs.addAll(combat.getDefendersControlledBy(p));
-                }
+                defs = new FCollection<>(defendingPlayers);
+                defs.addAll(Iterables.filter(combat.getDefendingPlaneswalkers(), CardPredicates.isControlledByAnyOf(defendingPlayers)));
             } else if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {
@@ -895,7 +898,16 @@ public abstract class SpellAbilityEffect {
         return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
     }
 
+    public static void handleExiledWith(final Iterable<Card> movedCards, final SpellAbility cause) {
+        for (Card c : movedCards) {
+            handleExiledWith(c, cause);
+        }
+    }
     public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        if (movedCard.isToken()) {
+            return;
+        }
+
         Card exilingSource = cause.getHostCard();
         // during replacement LKI might be used
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {

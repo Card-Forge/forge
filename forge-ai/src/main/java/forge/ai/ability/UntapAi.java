@@ -1,17 +1,9 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import com.google.common.collect.Iterables;
+import forge.ai.*;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -32,6 +24,9 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
+import java.util.Map;
 
 public class UntapAi extends SpellAbilityAi {
     @Override
@@ -123,6 +118,7 @@ public class UntapAi extends SpellAbilityAi {
      */
     private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
+        sa.resetTargets();
 
         final PlayerCollection targetController = new PlayerCollection();
         if (sa.isCurse()) {
@@ -179,7 +175,6 @@ public class UntapAi extends SpellAbilityAi {
             untapList.removeAll(toExclude);
         }
 
-        sa.resetTargets();
         while (sa.canAddMoreTarget()) {
             Card choice = null;
 
@@ -189,6 +184,10 @@ public class UntapAi extends SpellAbilityAi {
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                 } else if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
+                    // check if the cost is acceptable anyway (e.g. Planeswalker +Loyalty)
+                    if (ComputerUtil.activateForCost(sa, ai)) {
+                        return true;
+                    }
                     sa.resetTargets();
                     return false;
                 } else {
@@ -307,11 +306,18 @@ public class UntapAi extends SpellAbilityAi {
 
         return true;
     }
-    
+
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        PlayerCollection pl = ai.getYourTeam();
-        return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
+        CardCollection pref = CardLists.filterControlledBy(list, ai.getYourTeam());
+        if (Iterables.isEmpty(pref)) {
+            if (isOptional) {
+                return null;
+            }
+        } else {
+            list = pref;
+        }
+        return ComputerUtilCard.getBestAI(list);
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {

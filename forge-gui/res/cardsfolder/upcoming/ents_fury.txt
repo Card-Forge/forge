@@ -1,0 +1,8 @@
+Name:Ent's Fury
+ManaCost:1 G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerGE4 | AILogic$ Fight | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control if its power is 4 or greater. 
+SVar:DBPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ ParentTarget | SubAbility$ DBFight | SpellDescription$ Then that creature gets +1/+1 until end of turn and fights target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature you control if its power is 4 or greater. Then that creature gets +1/+1 until end of turn and fights target creature you don't control.

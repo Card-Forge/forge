@@ -1,0 +1,11 @@
+Name:Mithril Coat
+ManaCost:3
+Types:Legendary Artifact Equipment
+K:Flash
+K:Indestructible
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target legendary creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl+Legendary | TgtPrompt$ Select target legendary creature you control.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Indestructible | Description$ Equipped creature has indestructible.
+DeckHints:Type$Legendary & Type$Creature
+K:Equip:3
+Oracle:Flash\nIndestructible\nWhen Mithril Coat enters the battlefield, attach it to target legendary creature you control.\nEquipped creature has indestructible.\nEquip {3}

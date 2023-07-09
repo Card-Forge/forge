@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwL42RgCBvFo3gUj+JRPIpH8YjAAK/DvUM=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytVVEOwiAM3eeaeC2N2QH89AIeTJ3eajI5hmtis6Y8oENJXkJKy6MPWsa+6x4NeC4YN/ofaMVxwakBw4ZYHgNh3utynjfVce9TXo4VO5qXeNmOdLN6BpBvbV7jRbp57L/yzkBTa/8370SpxsHYWXMvV43X5lhCdHLNxh/xbq3BGq/o86LVv6Qzgq4JpBvKseSf40VvSq/neCVHzk/fW0nnXP0GSt+y3cdqZd+mR2e0jz4L3xcjqH34TLc+7WVInz3gvexw/Ua1rsED5ZaLL/FOtOYkEL15Xfq39FvJ6fwFqn+Jz/F6/x/x56HP4fmPLK+3b0TDOzTGCz5i5QUz
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="57" y="82.1667"/>
+  <object id="49" template="../obj/gold.tx" x="153.667" y="187.667"/>
+  <object id="50" template="../obj/enemy.tx" x="304.667" y="200.666">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="357.333" y="219.667"/>
+  <object id="52" template="../obj/gold.tx" x="357.167" y="200.667"/>
+ </objectgroup>
+</map>

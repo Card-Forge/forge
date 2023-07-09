@@ -128,6 +128,7 @@ public class NewGauntletScreen extends LaunchScreen {
                         DeckType.MODERN_CARDGEN_DECK,
                         DeckType.LEGACY_CARDGEN_DECK,
                         DeckType.VINTAGE_CARDGEN_DECK,
+                        DeckType.PAUPER_CARDGEN_DECK,
                         DeckType.THEME_DECK), null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {

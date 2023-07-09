@@ -134,8 +134,14 @@ public class MapDialog {
         }
     }
 
-    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
+    private boolean loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
+        if (dialog.options.length == 0 && dialog.text.isEmpty() && dialog.action.length > 0){
+            stage.hideDialog();
+            emitDialogFinished();
+            return false; //Allows for use of empty dialogs as area-based effect triggers
+        }
+
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
         D.getTitleTable().clear();
@@ -189,9 +195,7 @@ public class MapDialog {
         float width;
         if (sprite != null) {
             if (actor instanceof EnemySprite) {
-                String name = ((EnemySprite) actor).nameOverride;
-                if (name.isEmpty())
-                    name = ((EnemySprite) actor).getData().name;
+                String name = actor.getName();
                 TextraLabel label = Controls.newTextraLabel("[%?black outline][ORANGE]" + name);
                 D.getTitleTable().add(label).left().expand();
             }
@@ -231,11 +235,15 @@ public class MapDialog {
             if (i == 0) {
                 stage.hideDialog();
                 emitDialogFinished();
+                return false;
             }
-            else
+            else{
                 stage.showDialog();
+                return true;
+            }
         } else {
             stage.hideDialog();
+            return false;
         }
     }
 
@@ -275,12 +283,15 @@ public class MapDialog {
         GameHUD.getInstance().fadeOut();
     }
 
-    public void activate() { //Method for actors to show their dialogues.
+    public boolean activate() { //Method for actors to show their dialogues.
+        boolean dialogShown = false;
         for (DialogData dialog : data) {
             if (isConditionOk(dialog.condition)) {
-                loadDialog(dialog);
+                if (loadDialog(dialog))
+                    dialogShown = true;
             }
         }
+        return dialogShown;
     }
 
     void setEffects(DialogData.ActionData[] data) {
@@ -302,6 +313,10 @@ public class MapDialog {
                 if (E.addGold > 0) Current.player().giveGold(E.addGold);
                 else Current.player().takeGold(-E.addGold);
             }
+            if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
+                if (E.addShards > 0) Current.player().giveGold(E.addShards);
+                else Current.player().takeGold(-E.addShards);
+            }
             if (E.addMapReputation != 0) {
                 PointOfInterestChanges p;
                 if (E.POIReference.length()>0 && !E.POIReference.contains("$"))
@@ -314,6 +329,9 @@ public class MapDialog {
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
+            }
+            if (E.activateMapObject != 0){
+                stage.activateMapObject(E.activateMapObject);
             }
             if (E.battleWithActorID != 0) { //Starts a battle with the given enemy ID.
                 if (E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
@@ -382,6 +400,11 @@ public class MapDialog {
             }
             if (condition.hasGold != 0) { //Check for at least X gold.
                 if (player.getGold() < condition.hasGold) {
+                    if (!condition.not) return false;
+                } else if (condition.not) return false;
+            }
+            if (condition.hasShards != 0) { //Check for at least X gold.
+                if (player.getShards() < condition.hasShards) {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }

@@ -1,7 +1,7 @@
 Name:Ghired's Belligerence
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SubAbility$ DBRepeat | RememberDamaged$ True | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures. Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SubAbility$ DBRepeat | RememberDamaged$ True | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures. Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered | UseImprinted$ True | RepeatSubAbility$ DBDelayedTrigger | SubAbility$ DBCleanup | StackDescription$ Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Imprinted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigPopulate | TriggerDescription$ Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
 SVar:TrigPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | ChoiceTitle$ Select a creature token to copy

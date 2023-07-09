@@ -1,0 +1,6 @@
+Name:Army Token
+ManaCost:no cost
+Types:Creature Army
+Colors:black
+PT:0/0
+Oracle:

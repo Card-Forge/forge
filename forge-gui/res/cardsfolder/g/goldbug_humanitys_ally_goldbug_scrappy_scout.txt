@@ -5,9 +5,8 @@ PT:3/3
 K:More Than Meets the Eye:W U
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Human.attacking+YouCtrl | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to attacking Humans you control.
 SVar:NonStackingEffect:True
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigConvert | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, convert NICKNAME.
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
-SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 AlternateMode:DoubleFaced
 DeckHints:Type$Human
 Oracle:More Than Meets the Eye {W}{U} (You may cast this card converted for {W}{U}.)\nPrevent all combat damage that would be dealt to attacking Humans you control.\nWhenever you cast your second spell each turn, convert Goldbug.

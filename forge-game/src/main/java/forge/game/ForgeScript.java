@@ -45,7 +45,6 @@ public class ForgeScript {
             int desiredColor = MagicColor.fromName(colorName);
             boolean hasColor = colors.hasAnyColor(desiredColor);
             return mustHave == hasColor;
-
         } else if (property.contains("Colorless")) { // ... Card is colorless
             boolean non = property.startsWith("non");
             boolean withSource = property.endsWith("Source");
@@ -53,34 +52,28 @@ public class ForgeScript {
                 return false;
             }
             return non != colors.isColorless();
-
         } else if (property.contains("MultiColor")) {
             // ... Card is multicolored
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return property.startsWith("non") != colors.isMulticolor();
-
         } else if (property.contains("AllColors")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return property.startsWith("non") != colors.isAllColors();
-
         } else if (property.contains("MonoColor")) { // ... Card is monocolored
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return property.startsWith("non") != colors.isMonoColor();
-
         } else if (property.startsWith("ChosenColor")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
-
         } else if (property.startsWith("AnyChosenColor")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return source.hasChosenColor()
                     && colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor());
-
         } else if (property.equals("AssociatedWithChosenColor")) {
             final String color = source.getChosenColor();
             switch (color) {

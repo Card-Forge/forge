@@ -43,7 +43,7 @@ public class NewDraftScreen extends LaunchScreen {
     protected void startMatch() {
         //must run in game thread to prevent blocking UI thread
         ThreadUtil.invokeInGameThread(() -> {
-            final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
+            final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values(true));
             if (poolType == null) { return; }
 
             final BoosterDraft draft = BoosterDraft.createDraft(poolType);

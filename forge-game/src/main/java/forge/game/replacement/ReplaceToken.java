@@ -28,12 +28,6 @@ public class ReplaceToken extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        /*
-        if (((int) runParams.get(AbilityKey.TokenNum)) <= 0) {
-            return false;
-        }
-        //*/
-
         if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get(AbilityKey.EffectOnly);
             if (!effectOnly) {
@@ -64,7 +58,7 @@ public class ReplaceToken extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.TokenNum, filterAmount((TokenCreateTable) runParams.get(AbilityKey.Token)));
-        sa.setReplacingObject(AbilityKey.Token, runParams.get(AbilityKey.Token));
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.Token, AbilityKey.Cause);
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 

@@ -419,6 +419,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 
+            if (sa.hasParam("CastTransformed")) {
+                tgtSA.putParam("CastTransformed", "True");
+            }
+
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }

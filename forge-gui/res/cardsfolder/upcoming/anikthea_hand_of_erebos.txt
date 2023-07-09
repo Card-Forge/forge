@@ -1,0 +1,16 @@
+Name:Anikthea, Hand of Erebos
+ManaCost:2 W B G
+Types:Legendary Enchantment Creature Demigod
+PT:4/4
+K:Menace
+S:Mode$ Continuous | Affected$ Creature.Other+Enchantment+YouCtrl | AddKeyword$ Menace | Description$ Other enchantment creatures you control have menace.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME enters the battlefield or attacks, exile up to one target non-Aura enchantment card from your graveyard. Create a token that's a copy of that card, except it's a 3/3 black Zombie creature in addition to its other types.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters the battlefield or attacks, exile up to one target non-Aura enchantment card from your graveyard. Create a token that's a copy of that card, except it's a 3/3 black Zombie creature in addition to its other types.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Enchantment.nonAura+YouCtrl | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Exile | TgtPrompt$ Select up to one target non-Aura enchantment card from your graveyard | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 3 | SetToughness$ 3 | AddTypes$ Creature & Zombie | SetColor$ Black | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Graveyard
+DeckNeeds:Type$Enchantment
+DeckHints:Ability$Graveyard|Mill
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nOther enchantment creatures you control have menace.\nWhenever Anikthea enters the battlefield or attacks, exile up to one target non-Aura enchantment card from your graveyard. Create a token that's a copy of that card, except it's a 3/3 black Zombie creature in addition to its other types.

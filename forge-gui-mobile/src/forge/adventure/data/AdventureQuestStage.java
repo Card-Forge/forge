@@ -112,7 +112,7 @@ public class AdventureQuestStage implements Serializable {
             count2 = (count2 * candidates.size()) / 100;
             int targetIndex = Math.max(0, (int) (count1 - count2 + (new Random().nextFloat() * count2 * 2)));
 
-            if (targetIndex < candidates.size() && targetIndex > 0 && count1 > 0) {
+            if (targetIndex < candidates.size() && targetIndex >= 0) {
                 candidates.sort(new AdventureQuestController.DistanceSort());
                 setTargetPOI(candidates.get(targetIndex));
             } else {
@@ -297,6 +297,49 @@ public class AdventureQuestStage implements Serializable {
         }
     }
 
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        if (this.objective == AdventureQuestController.ObjectiveTypes.EventFinish) {
+            if (inTargetLocation) {
+                if (++progress1 >= count1) {
+                    status = AdventureQuestController.QuestStatus.Complete;
+                }
+            }
+        }
+        if (this.objective == AdventureQuestController.ObjectiveTypes.EventWinMatches) {
+            if (inTargetLocation) {
+                progress1 += completedEvent.matchesWon;
+                progress2 += completedEvent.matchesLost;
+
+
+                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2 && count2 > 0) {
+                    status = AdventureQuestController.QuestStatus.Failed;
+                }
+                else if (++progress1 >= count1) {
+                    status = AdventureQuestController.QuestStatus.Complete;
+                }
+            }
+        }
+        if (this.objective == AdventureQuestController.ObjectiveTypes.EventWin) {
+            if (inTargetLocation) {
+
+                if (completedEvent.playerWon){
+                    progress1++;
+                }
+                else{
+                    progress2++;
+                }
+
+
+                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2 && count2 > 0) {
+                    status = AdventureQuestController.QuestStatus.Failed;
+                }
+                else if (++progress1 >= count1) {
+                    status = AdventureQuestController.QuestStatus.Complete;
+                }
+            }
+        }
+    }
+
     public AdventureQuestStage() {
 
     }
@@ -336,4 +379,6 @@ public class AdventureQuestStage implements Serializable {
 //        if (this.stageID == null)
 //            this.stageID = other.stageID;
     }
+
+
 }

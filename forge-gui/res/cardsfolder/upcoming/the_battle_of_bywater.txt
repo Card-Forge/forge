@@ -1,0 +1,8 @@
+Name:The Battle of Bywater
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.powerGE3 | SubAbility$ DBFood | SpellDescription$ Destroy all creatures with power 3 or greater. Then create a Food token for each creature you control. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBFood:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac
+SVar:X:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Token|LifeGain & Type$Artifact|Food
+Oracle:Destroy all creatures with power 3 or greater. Then create a Food token for each creature you control. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

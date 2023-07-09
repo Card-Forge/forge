@@ -27,6 +27,7 @@ public enum TrackableProperty {
     IsImmutable(TrackableTypes.BooleanType),
     IsEmblem(TrackableTypes.BooleanType),
     IsBoon(TrackableTypes.BooleanType),
+    CanSpecialize(TrackableTypes.BooleanType),
 
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),

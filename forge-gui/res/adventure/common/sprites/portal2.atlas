@@ -1,0 +1,23 @@
+portals.png
+size: 80,80
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none           
+Closed 
+  xy: 0, 0
+  size: 16, 16 
+Inactive 
+  xy: 0, 32
+  size: 16, 16      
+Active 
+  xy: 16, 32
+  size: 16, 16  
+Active 
+  xy: 32, 32
+  size: 16, 16      
+Active 
+  xy: 48, 32
+  size: 16, 16 
+Active 
+  xy: 64, 32
+  size: 16, 16

@@ -1,0 +1,7 @@
+Name:Isildur's Fateful Strike
+ManaCost:2 B B
+Types:Legendary Instant
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBExileHand | SpellDescription$ Destroy target creature. If its controller has more than four cards in hand, they exile cards from their hand equal to the difference.
+SVar:DBExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | Chooser$ TargetedController | Mandatory$ True | ChangeNum$ X | DefinedPlayer$ TargetedController
+SVar:X:TargetedController$CardsInHand/Minus.4
+Oracle:(You may cast a legendary instant only if you control a legendary creature or planeswalker.)\nDestroy target creature. If its controller has more than four cards in hand, they exile cards from their hand equal to the difference.

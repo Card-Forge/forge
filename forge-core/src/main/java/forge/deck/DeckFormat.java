@@ -106,6 +106,7 @@ public enum DeckFormat {
         }
     },
     PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
+    Adventure      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -481,10 +482,12 @@ public enum DeckFormat {
         };
     }
 
-    public Predicate<Deck> hasLegalCardsPredicate() {
+    public Predicate<Deck> hasLegalCardsPredicate(boolean enforceDeckLegality) {
         return new Predicate<Deck>() {
             @Override
             public boolean apply(Deck deck) {
+                if (!enforceDeckLegality)
+                    return true;
                 if (cardPoolFilter != null) {
                     for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                         if (!cardPoolFilter.apply(cp.getKey().getRules())) {

@@ -1,0 +1,11 @@
+Name:The Lux Foundation Library
+ManaCost:no cost
+Types:Plane The Library
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, put a shadow counter on target creature. (A creature with shadow can block or be blocked by only creatures with shadow.)
+SVar:RolledChaos:DB$ PutCounter | CounterType$ Shadow | ValidTgts$ Creature
+SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True | RollInMain1$ True
+DeckHas:Ability$Counters
+Oracle:Players have no maximum hand size.\nWhenever a creature you control deals combat damage to a player, you may draw a card.\nWhenever chaos ensues, put a shadow counter on target creature. (A creature with shadow can block or be blocked by only creatures with shadow.

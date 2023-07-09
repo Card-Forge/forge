@@ -815,6 +815,7 @@ public class Game {
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
                         cc.removeAttachedTo(c);
+                        cc.removeAttachedCard(c);
                     }
                     triggerList.put(c.getZone().getZoneType(), null, c);
                     getAction().ceaseToExist(c, false);

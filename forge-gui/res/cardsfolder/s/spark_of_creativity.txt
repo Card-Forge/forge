@@ -8,6 +8,6 @@ SVar:SparkDamage:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SpellDescr
 SVar:SparkPlay:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SpellDescription$ You may play exiled card until end of turn.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$RememberedCardManaCost
+SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All
 Oracle:Choose target creature. Exile the top card of your library. You may have Spark of Creativity deal damage to that creature equal to the exiled card's mana value. If you don't, you may play that card until end of turn.

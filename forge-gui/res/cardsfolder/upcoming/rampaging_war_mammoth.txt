@@ -1,0 +1,11 @@
+Name:Rampaging War Mammoth
+ManaCost:5 R R
+Types:Creature Elephant
+PT:9/7
+K:Trample
+K:Cycling:X 2 R
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cycle CARDNAME, destroy up to X target artifacts.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select up to X target artifacts | TargetMin$ 0 | TargetMax$ X 
+SVar:X:Count$xPaid
+DeckHas:Ability$Discard
+Oracle:Trample\nCycling {X}{2}{R} ({X}{2}{R}, Discard this card: Draw a card.)\nWhen you cycle Rampaging War Mammoth, destroy up to X target artifacts.

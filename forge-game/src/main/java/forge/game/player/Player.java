@@ -327,7 +327,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-        // gameAction moveTo ?
         game.getAction().moveTo(ZoneType.Command, activeScheme, null, moveParams);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
@@ -509,13 +508,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        boolean newLifeSet = false;
-
         if (lifeGain > 0) {
             int oldLife = life;
             life += lifeGain;
             view.updateLife(this);
-            newLifeSet = true;
+            boolean firstGain = lifeGainedTimesThisTurn == 0;
             lifeGainedThisTurn += lifeGain;
             lifeGainedTimesThisTurn++;
 
@@ -529,13 +526,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.LifeAmount, lifeGain);
             runParams.put(AbilityKey.Source, source);
             runParams.put(AbilityKey.SourceSA, sa);
+            runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-        } else {
-            System.out.println("Player - trying to gain negative or 0 life");
+            return true;
         }
-        return newLifeSet;
+
+        System.out.println("Player - trying to gain negative or 0 life");
+        return false;
     }
 
     public final boolean canGainLife() {
@@ -808,7 +807,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage = 2;
                 }
             } else if (c.getName().equals("Elderscale Wurm")) {
-                if (c.getController().equals(this) && getLife() - restDamage < 7) {
+                if (c.getController().equals(this) && getLife() >= 7 && getLife() - restDamage < 7) {
                     restDamage = getLife() - 7;
                     if (restDamage < 0) {
                         restDamage = 0;
@@ -2676,17 +2675,19 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Sets up the first plane of a round.
      */
     public void initPlane() {
-        Card firstPlane = null;
+        if (game.isGameOver())
+            return;
+        Card firstPlane;
         view.updateCurrentPlaneName("");
         game.getView().updatePlanarPlayer(getView());
+        PlayerZone planarDeck = getZone(ZoneType.PlanarDeck);
 
-        while (true) {
-            firstPlane = getZone(ZoneType.PlanarDeck).get(0);
-            getZone(ZoneType.PlanarDeck).remove(firstPlane);
+        while (!planarDeck.isEmpty()) {
+            firstPlane = planarDeck.get(0);
+            planarDeck.remove(firstPlane);
             if (firstPlane.getType().isPhenomenon()) {
-                getZone(ZoneType.PlanarDeck).add(firstPlane);
-            }
-            else {
+                planarDeck.add(firstPlane);
+            } else {
                 currentPlanes.add(firstPlane);
                 getZone(ZoneType.Command).add(firstPlane);
                 break;
@@ -3190,7 +3191,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             {
                 final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " +
                 "ValidPlayer$ You |  TriggerDescription$ At the beginning of your end step, draw a card.";
-                final String drawEff = "AB$ Draw | Cost$ 0 | Defined$ You";
+                final String drawEff = "DB$ Draw | Defined$ You";
 
                 final Trigger drawTrigger = TriggerHandler.parseTrigger(drawTrig, monarchEffect, true);
 
@@ -3201,7 +3202,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             {
                 final String damageTrig = "Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | TriggerZones$ Command |" +
                 " TriggerDescription$ Whenever a creature deals combat damage to you, its controller becomes the monarch.";
-                final String damageEff = "AB$ BecomeMonarch | Cost$ 0 | Defined$ TriggeredSourceController";
+                final String damageEff = "DB$ BecomeMonarch | Defined$ TriggeredSourceController";
 
                 final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, monarchEffect, true);
 
@@ -3275,9 +3276,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final TriggerHandler triggerHandler = game.getTriggerHandler();
-        triggerHandler.suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
-        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        com.add(initiativeEffect);
         triggerHandler.clearActiveTriggers(initiativeEffect, null);
         triggerHandler.registerActiveTrigger(initiativeEffect, false);
 
@@ -3415,7 +3414,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
         return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
- || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
+                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
     }
 
     public Card getKeywordCard() {

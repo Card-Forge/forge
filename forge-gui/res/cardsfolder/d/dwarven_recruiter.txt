@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Dwarf
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Dwarf cards, reveal them, then shuffle and put those cards on top in any order.
-SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Dwarf | Origin$ Library | Destination$ Library | LibraryPosition$ 0
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Dwarf | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | Reorder$ True
 SVar:X:Count$InYourLibrary.Dwarf
 AI:RemoveDeck:All
 DeckNeeds:Type$Dwarf

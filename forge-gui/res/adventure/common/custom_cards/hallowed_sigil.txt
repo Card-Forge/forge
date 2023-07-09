@@ -1,0 +1,7 @@
+Name:Hallowed Sigil
+ManaCost:no cost
+Colors:white
+Types:Enchantment
+A:AB$ Pump | Cost$ PayShards<4> T | ValidTgts$ Creature.YouCtrl | KW$ Hexproof | SubAbility$ Eject | ActivationLimit$ 1 | SpellDescription$ Target creature you control gains hexproof until end of turn. Exile Hallowed Sigil.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+Oracle:{M},{T}:Target creature you control gains hexproof until end of turn. Exile Hallowed Sigil.

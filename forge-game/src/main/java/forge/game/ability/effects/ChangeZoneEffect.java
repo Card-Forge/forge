@@ -589,9 +589,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
-                    if (sa.hasParam("Untapped")) {
-                        gameCard.setTapped(false);
-                    }
                     if (sa.hasParam("Transformed")) {
                         if (gameCard.isTransformable()) {
                             // need LKI before Animate does apply
@@ -718,7 +715,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 } else {
                     // might set before card is moved only for nontoken
-                    if (destination.equals(ZoneType.Exile) && !gameCard.isToken()) {
+                    if (destination.equals(ZoneType.Exile)) {
                         handleExiledWith(gameCard, sa);
                     }
 
@@ -741,11 +738,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             // This only fizzles spells, not anything else.
                             game.getStack().remove(gameCard);
                         }
-                    }
-
-                    // might set after card is moved again if something has changed
-                    if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
-                        handleExiledWith(movedCard, sa);
                     }
 
                     if (sa.hasParam("WithCountersType")) {
@@ -779,11 +771,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (meld != null) {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
                     }
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        meld.addCounter(cType, cAmount, player, counterTable);
+                    }
                 }
                 if (gameCard.hasMergedCard()) {
                     for (final Card c : gameCard.getMergedCards()) {
                         if (c == gameCard) continue;
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), c);
+                        if (sa.hasParam("WithCountersType")) {
+                            CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                            int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                            c.addCounter(cType, cAmount, player, counterTable);
+                        }
                     }
                 }
 
@@ -849,6 +851,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
             addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
+        }
+
+        // might set after card is moved again if something has changed
+        if (destination.equals(ZoneType.Exile)) {
+            handleExiledWith(triggerList.allCards(), sa);
         }
 
         // for things like Gaea's Blessing
@@ -1070,6 +1077,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // Panglacial Wurm
                     CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
                             "While you're searching your library, you may cast CARDNAME from your library.");
+                    decider.getController().tempShowCards(canCastWhileSearching);
                     for (final Card tgtCard : canCastWhileSearching) {
                         List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
                         if (sas.isEmpty()) {
@@ -1086,6 +1094,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         //some kind of reset here?
                     }
+                    decider.getController().endTempShowCards();
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
@@ -1243,6 +1252,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 player.shuffle(sa);
             }
 
+            if (sa.hasParam("Reorder")) {
+                chosenCards = new CardCollection(decider.getController().orderMoveToZoneList(chosenCards, destination, sa));
+            }
+
             // remove Controlled While Searching
             if (controlTimestamp != null) {
                 player.removeController(controlTimestamp);
@@ -1292,8 +1305,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 else if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
-                    } else if (sa.hasParam("Untapped")) {
-                        c.setTapped(false);
                     }
                     if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                         // need LKI before Animate does apply
@@ -1399,12 +1410,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 else if (destination.equals(ZoneType.Exile)) {
                     movedCard = game.getAction().exile(c, sa, moveParams);
-                    if (!c.isToken()) {
-                        handleExiledWith(movedCard, sa);
-                    }
+
+                    handleExiledWith(movedCard, sa);
+
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
+
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
@@ -1426,12 +1438,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         Card meld = game.getCardState(c.getMeldedWith(), null);
                         if (meld != null) {
                             triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                            if (destination.equals(ZoneType.Exile)) {
+                                handleExiledWith(meld, sa);
+                            }
                         }
                     }
                     if (c.hasMergedCard()) {
                         for (final Card card : c.getMergedCards()) {
                             if (card == c) continue;
                             triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), card);
+                            if (destination.equals(ZoneType.Exile)) {
+                                handleExiledWith(c, sa);
+                            }
                         }
                     }
                 }

@@ -376,7 +376,7 @@ public class CardImageRenderer {
                                 altArt = CardRenderer.getAlternateCardArt(cv.getAlternateState().getImageKey(), cv.getAlternateState().isPlaneswalker());
                             else {
                                 altArt = CardRenderer.getCardArt(cv.getAlternateState().getImageKey(), cv.isSplitCard(), cv.getAlternateState().isPlane() || cv.getAlternateState().isPhenomenon(), cv.getText().contains("Aftermath"),
-                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker(), CardRenderer.isModernFrame(cv));
+                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker(), CardRenderer.isModernFrame(cv), cv.getAlternateState().getType().isBattle());
                             }
                         }
                     }
@@ -416,7 +416,7 @@ public class CardImageRenderer {
         if (alt == null)
             alt = card.getAlternateState().getCard();
         CardView cv = altState && isFaceDown ? alt : card;
-        boolean isAftermath = altState ? cv.getAlternateState().hasHasAftermath() : cv.getRightSplitState().hasHasAftermath();
+        boolean isAftermath = altState ? cv.getAlternateState().hasAftermath() : cv.getRightSplitState().hasAftermath();
         if (!isAftermath) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(cv.getCurrentState().getSetCode());
             boolean isOldFrame = ed != null && !ed.isModern();

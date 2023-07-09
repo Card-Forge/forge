@@ -26,7 +26,8 @@ jobs:
         close-issue-message: 'This issue was closed because it has been stalled for 5 days with no activity.'
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
-        exempt-pr-labels: 'awaiting-approval,work-in-progress'
+        exempt-issue-labels: 'keep'
+        exempt-pr-labels: 'awaiting-approval,work-in-progress,keep'
         days-before-issue-stale: 30
         days-before-pr-stale: 45
         days-before-issue-close: 5

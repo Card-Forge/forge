@@ -44,7 +44,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -61,7 +60,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.WrappedAbility;
 import forge.util.TextUtil;
 
 /**
@@ -322,6 +320,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+
+        if (sp.isSpell() && !sp.isCopied()) {
+            final Card lki = CardUtil.getLKICopy(sp.getHostCard());
+            runParams.put(AbilityKey.CardLKI, lki);
+            thisTurnCast.add(lki);
+            sp.getActivatingPlayer().addSpellCastThisTurn();
+        }
+
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
@@ -463,10 +469,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isSpell() && !sp.isCopied()) {
-            thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
-            sp.getActivatingPlayer().addSpellCastThisTurn();
-        }
         if (sp.isActivatedAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
@@ -617,11 +619,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
-        // Check if the spellability is a trigger that was invalidated with fizzleTriggersOnStackTargeting
-        if (sa.getSVar("TriggerFizzled").equals("True")) {
-            return true;
-        }
-
         // Can't fizzle unless there are some targets
         Boolean fizzle = null;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
@@ -647,13 +644,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                             invalidTarget = current.getTimestamp() != card.getTimestamp();
                         }
                         invalidTarget = invalidTarget || !sa.canTarget(card);
+                    } else if (o instanceof SpellAbility) {
+                        SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
+                        invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
                     } else {
-                        if (o instanceof SpellAbility) {
-                            SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
-                            invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
-                        } else {
-                            invalidTarget = !sa.canTarget(o);
-                        }
+                        invalidTarget = !sa.canTarget(o);
                     }
                     // Remove targets
                     if (invalidTarget) {
@@ -702,8 +697,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(false);
-        sa.setLastStateBattlefield(CardCollection.EMPTY);
-        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 
@@ -730,20 +723,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             } else {
                 if (activator.equals(p)) {
                     simultaneousStackEntryList.remove(sa);
-                }
-            }
-        }
-    }
-
-    public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
-        for (SpellAbilityStackInstance si : stack) {
-            SpellAbility sa = si.getSpellAbility(false);
-            if (sa.getTriggeringObjects().containsKey(AbilityKey.Target) && sa.getTriggeringObjects().get(AbilityKey.Target).equals(c)) {
-                if (sa instanceof WrappedAbility) {
-                    WrappedAbility wi = (WrappedAbility)sa;
-                    if (wi.getTrigger().getMode() == t) {
-                        ((WrappedAbility)sa).getWrappedAbility().setSVar("TriggerFizzled", "True");
-                    }
                 }
             }
         }

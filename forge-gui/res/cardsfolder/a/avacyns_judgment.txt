@@ -2,11 +2,10 @@ Name:Avacyn's Judgment
 ManaCost:1 R
 Types:Sorcery
 K:Madness:X R
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ Y | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ Y | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of targets. If CARDNAME's madness cost was paid, it deals X damage instead.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ Y | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ Y | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of targets. If CARDNAME's madness cost was paid, it deals X damage instead.
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
-SVar:NumCreatures:Count$Valid Creature,Planeswalker
+SVar:NumCreatures:Count$Valid Any
 SVar:Y:Count$Madness.X.2
 SVar:X:Count$xPaid
-#X Will get overwritten by Announce
 DeckHints:Ability$Discard
 Oracle:Madness {X}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nAvacyn's Judgment deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those permanents and/or players instead.

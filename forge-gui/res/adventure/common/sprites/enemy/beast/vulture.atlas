@@ -1,0 +1,92 @@
+vulture.png
+size: 320,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 45, 10
+  size: 16, 16     
+Idle 
+  xy: 0, 10
+  size: 32, 22   
+Idle 
+  xy: 32, 10
+  size: 32, 22   
+Idle 
+  xy: 64, 10
+  size: 32, 22  
+Idle 
+  xy: 96, 10
+  size: 32, 22   
+Idle 
+  xy: 0, 74
+  size: 32, 22   
+Idle 
+  xy: 32, 74
+  size: 32, 22   
+Idle 
+  xy: 64, 74
+  size: 32, 22   
+Idle 
+  xy: 96, 74
+  size: 32, 22   
+Idle 
+  xy: 128, 74
+  size: 32, 22  
+Idle 
+  xy: 160, 74
+  size: 32, 22   
+Idle 
+  xy: 192, 74
+  size: 32, 22   
+Idle 
+  xy: 224, 74
+  size: 32, 22   
+Idle 
+  xy: 256, 74
+  size: 32, 22  
+Idle 
+  xy: 288, 74
+  size: 32, 22
+Walk
+  xy: 0, 32
+  size: 32, 32      
+Walk
+  xy: 32, 32
+  size: 32, 32      
+Walk
+  xy: 64, 32
+  size: 32, 32      
+Walk
+  xy: 96, 32
+  size: 32, 32      
+Walk
+  xy: 128, 32
+  size: 32, 32         
+Attack 
+  xy: 0, 96
+  size: 32, 32  
+Attack 
+  xy: 32, 96
+  size: 32, 32  
+Attack 
+  xy: 64, 96
+  size: 32, 32  
+Attack 
+  xy: 96, 96
+  size: 32, 32  
+Attack 
+  xy: 128, 96
+  size: 32, 32        
+Death 
+  xy: 0, 128
+  size: 32, 32  
+Death 
+  xy: 32, 128
+  size: 32, 32  
+Death 
+  xy: 64, 128
+  size: 32, 32  
+Death 
+  xy: 96, 128
+  size: 32, 32  

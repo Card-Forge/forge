@@ -357,7 +357,13 @@ public class SimulateMatch {
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
             String baseDir = type.equals(GameType.Commander) ?
                     ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
-            return DeckSerializer.fromFile(new File(baseDir + deckname));
+
+            File f = new File(baseDir + deckname);
+            if (!f.exists()) {
+                System.out.println("No deck found in " + baseDir);
+            }
+
+            return DeckSerializer.fromFile(f);
         }
 
         IStorage<Deck> deckStore = null;
