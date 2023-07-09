@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
