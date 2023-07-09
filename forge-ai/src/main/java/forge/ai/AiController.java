@@ -807,22 +807,24 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (sa.usesTargeting() && (!sa.isSpell() || CardFactoryUtil.isCounterable(host))) {
-            for (Card tgt : sa.getTargets().getTargetCards()) {
-                // TODO some older cards don't use the keyword, so check for trigger instead
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                    int amount = 0;
-                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                    if (wardCost.hasManaCost()) {
-                        amount = wardCost.getTotalMana().getCMC();
-                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player, true)) {
-                            return AiPlayDecision.CantAfford;
+        if (!sa.isSpell() || CardFactoryUtil.isCounterable(host)) {
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                for (Card tgt : tc.getTargetCards()) {
+                    // TODO some older cards don't use the keyword, so check for trigger instead
+                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
+                        int amount = 0;
+                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                        if (wardCost.hasManaCost()) {
+                            amount = wardCost.getTotalMana().getCMC();
+                            if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player, true)) {
+                                return AiPlayDecision.CantAfford;
+                            }
                         }
-                    }
-                    SpellAbilityAi topAI = new SpellAbilityAi() {
-                    };
-                    if (!topAI.willPayCosts(player, sa, wardCost, host)) {
-                        return AiPlayDecision.CostNotAcceptable;
+                        SpellAbilityAi topAI = new SpellAbilityAi() {
+                        };
+                        if (!topAI.willPayCosts(player, sa, wardCost, host)) {
+                            return AiPlayDecision.CostNotAcceptable;
+                        }
                     }
                 }
             }
@@ -1332,10 +1334,7 @@ public class AiController {
         if (sa == null) {
             return null;
         }
-
-        final List<SpellAbility> abilities = Lists.newArrayList();
-        abilities.add(sa);
-        return abilities;
+        return Lists.newArrayList(sa);
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
