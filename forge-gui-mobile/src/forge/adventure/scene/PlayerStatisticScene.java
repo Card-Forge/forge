@@ -32,9 +32,9 @@ import forge.localinstance.achievements.CardActivationAchievements;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.text.DecimalFormat;
 import java.util.Map;
 
 public class PlayerStatisticScene extends UIScene {
@@ -53,7 +53,6 @@ public class PlayerStatisticScene extends UIScene {
     boolean toggle = false;
     AchievementCollection planeswalkers, achievements, cardActivation;
     Scene lastGameScene;
-    DecimalFormat df;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
@@ -218,9 +217,7 @@ public class PlayerStatisticScene extends UIScene {
             totalLoss.setText(String.valueOf(Current.player().getStatistic().totalLoss()));
         }
         if (lossWinRatio != null) {
-            if (df == null)
-                df = new DecimalFormat("#.##");
-            lossWinRatio.setText(df.format(Current.player().getStatistic().winLossRatio()));
+            lossWinRatio.setText(TextUtil.decimalFormat(Current.player().getStatistic().winLossRatio()));
         }
         if (eventMatchWins != null) {
             eventMatchWins.setText(String.valueOf(Current.player().getStatistic().eventWins()));

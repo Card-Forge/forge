@@ -42,6 +42,10 @@ public class TextUtil {
         return Normalizer.normalize(text, Normalizer.Form.NFD);
 
     }
+    private static final DecimalFormat df = new DecimalFormat("#.##");
+    public static String decimalFormat(float value) {
+        return df.format(value);
+    }
     /**
      * Safely converts an object to a String.
      * 
