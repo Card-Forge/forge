@@ -620,7 +620,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!canPayLife(lifePayment, effect, cause)) {
             return false;
         }
-        
+
         final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
 
