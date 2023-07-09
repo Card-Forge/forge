@@ -80,7 +80,7 @@ import java.util.List;
  */
 public class SpecialCardAi {
 
-    // Arena
+    // Arena and Magus of the Arena
     public static class Arena {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             final Game game = ai.getGame();
