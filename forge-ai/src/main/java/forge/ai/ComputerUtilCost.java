@@ -22,6 +22,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -556,12 +557,14 @@ public class ComputerUtilCost {
         }
 
         // Ward - will be accounted for when rechecking a targeted ability
-        if (!sa.isTrigger() && sa.usesTargeting() && (!sa.isSpell() || !cannotBeCountered)) {
-            for (Card tgt : sa.getTargets().getTargetCards()) {
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
-                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                    if (wardCost.hasManaCost()) {
-                        extraManaNeeded += wardCost.getTotalMana().getCMC();
+        if (!sa.isTrigger() && (!sa.isSpell() || !cannotBeCountered)) {
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                for (Card tgt : tc.getTargetCards()) {
+                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                        if (wardCost.hasManaCost()) {
+                            extraManaNeeded += wardCost.getTotalMana().getCMC();
+                        }
                     }
                 }
             }
