@@ -46,8 +46,11 @@ public class TapAi extends TapAiBase {
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
 
-        if ("GoblinPolkaBand".equals(sa.getParam("AILogic"))) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if ("GoblinPolkaBand".equals(aiLogic)) {
             return SpecialCardAi.GoblinPolkaBand.consider(ai, sa);
+        } else if ("Arena".equals(aiLogic)) {
+            return SpecialCardAi.Arena.consider(ai, sa);
         }
 
         if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
