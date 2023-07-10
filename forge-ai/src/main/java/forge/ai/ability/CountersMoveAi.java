@@ -36,7 +36,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
         }
 
-        if (!SpellAbilityAi.playReusable(ai, sa)) {
+        if (!playReusable(ai, sa)) {
             return false;
         }
 

@@ -732,7 +732,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
                     if ((pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
@@ -820,7 +820,7 @@ public class DamageDealAi extends DamageAiBase {
         if (!positive && !(saMe instanceof AbilitySub)) {
             return false;
         }
-        if (!urgent && !SpellAbilityAi.playReusable(ai, saMe)) {
+        if (!urgent && !playReusable(ai, saMe)) {
             return false;
         }
         return true;

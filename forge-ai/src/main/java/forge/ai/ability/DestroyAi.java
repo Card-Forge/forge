@@ -174,7 +174,7 @@ public class DestroyAi extends SpellAbilityAi {
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
-            if (!SpellAbilityAi.playReusable(ai, sa)) {
+            if (!playReusable(ai, sa)) {
                 list = CardLists.filter(list, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
 
                 list = CardLists.filter(list, new Predicate<Card>() {
