@@ -1,87 +1,1330 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="65">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="86" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="264">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Manaweft Sliver&quot;, &quot;Diffusion Sliver&quot; ]
-}</property>
- </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="100" height="100">
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="17793" source="../../tileset/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Ground" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   eJzt2tFKwzAUgOHdycBb39EnEbzZM8suxuLWNklzmnXN90FAYVQ8/5pM6ekEAAAAAAAAAAAAAADH8nO+L15Li/3QYj8iW3x/xq3LeXmlrz2K6Puidca16917pPPfYo/q1eEIPXqcDz1bpE32bu4+6Nlj6w7v1ONVenbQI693Cz2W6bEveuxLj/n/Vq6r9OuRzM3w62Pdmprv2i56PPe4zaWmReR9MpKlWdS0SF8XtXeNpPZ9umaPalkjmPp9o3pENRlF9Ps3t2r3qRG1zrjkvpg6P9JGOtxFd5g770vP7ZFF7UM1Z0auy8i22KfmVu5z7u176s7jtX+fL53jFz2elH4eiuix9HO4y7Vo7ZG7/ujnx6N0HhE91pxLTGvtUdvBfrVsi/2q5v+H/Df3bElkj+v19Sgz9/xVS4/H62lRrvTZ3JIWNc/6Mq1mhnoAAAAAAAAAAAAAAAAAALDGH0pI7Ak=
+   eJzt2U9OhDAYh2EWJgNx7R08ySyNce8FPIhLr+I4eiv/HkGaSUOHgaGFQn8d3if5kokr6EuBYFEAAAAAAADMb7c5HqRBAy1DLW6vm8G8fPYFPcJ1rWv7edA3Q+gRpmttY7VAGNZaA9e9hr57EpbHXkiP+5IG1l4D6w9gaTyDNai9Dz1Xp7MmSi1iGdPwSeDb46V1yB0tdNBAy5gOL9XpII7QHl0NaBLPUA+fdxR6aKEFAAAAACCl17IofqvD7Orfb2XqI1oXu/5m7c381b/vnPmpaLKkz3q9v5z5KI97mLnnW06nJb5xmT7vZdNmX883PSQ8sDcmiX2fN3uFvTEeaweEudkcBhrooYcmemwTdwBcvtz2em7HGyrX88v1uM/hWQgAAAAAAIA121bNQAc9tNge7BVM5d5zuZ7Sm7r+c/Rz7zftv5+7ftZ6Tc29n+gxnvK5P16lPoJhyuvXZcz/200HO8py3MuhPdwOqj1yfn/y6WHPy7aw56jaI2e+PdwW9JiP7eE+E3zXOYdnSG7cHla7Td+60yO+vv3R7uDbaO3+Ad28nrE=
   </data>
  </layer>
- <layer id="6" name="Ground" width="100" height="100">
+ <layer id="2" name="Walls" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   eJzt2FtOwkAUgOG+2YaNuBpDWIYL4dGtiMqu8LYEOzGGW0lpHTpH+b7kJH0k52faplUFAAAAcHmrm/2hDA1i6WtxO9sOl3XOudBjuK69Hj4PTk0fPYbp2m2uFgxj1zH438dw6p7E9JyF8tyXYrD7GOwfmJpncAzR3oeWzfFck0gtchnT8D7At8f/1uGv0yIODWIZ0+GhOR7yGNqjq4Em+fT1OOcdRY9YtAAAAKCkx7qqPprvWbXXT3XpX3Rdfvafdp/ms72+25n3RpMpbdp9v+7Mut7vkWbuW04xqc9LvW3z3M6bHiEsnI1fyX2fT2fF2RjP7gAAAAAAAAAAAAAAAAAAAAAAAACY0heTjntH
+   eJztnD1uGzEQRjeADe/Cde6QIicJEMlw7z7IQRS4UekuB0gVO8lZfIC0sRMfIRqsBh7RJHf4syRX/h4wkCGtZO08DUmNKHUdAAAAAAAAAADwerg5fRmgDpT7+12shtrPBNzsPdyf2gOUhVxwsINf/Xgb/JRH+riw1AkoC7sg/u4u35133RO8JJEzX+RDPi58hDF3vuAkHnpt2yIF+BgJGb9dHnJ7ATq0PlKcoEZ0hLiAk5fkOqcYDzk83Z4t14mrB5FyPnN4CHWyxDqRud8MY6TSggt5fkvB5qKGj0+eeE01kqsurofw0LjI4YPnkZadyOdIHrZKFzIX28EdfIzNw8YRsb4I2+OZ57vq8+YwB+ZcLXPow/balHl3Obq2HLMRXkw/2praOpwy8u+vJ89R+z08vS44iBgXRKyPrZFPvs5VIxonmnnOvM12fA0nclwyxyftGEW4fJi58o1hMqby7/Ol8ea6D5Nr3RKCrTbNvIRgy7vLh89RzNxv5jnkuCk3pWAXb8/GyIGZX40j31yQ4kZ7/1aQLlJ9+OYN6YPP37U+lXNyigtttIAcp6QP6eRPr6tZ7Xwg17m213EpB1cnh9EKpoeU+nDlXuKrh5Jh+mihTnK60OJ7D+0bQ0r5qDGO8TqqtAuC8v6tn+5plKyPWnOLua4t5UD+3w9DvTGqRs6n8iIva6Dp8x1j7k1a6FlqXHzvx71rK0v82N32sLv82Y/7P2mv292+97c0H63g6337XFBQ/v/t40lcd2fpx8JHGlMufLHE8ap1Lgt4gJM0tF7WAQ7gIx8aHyaojXg+inUUwfmW0LqKj+F1livfcJHGpXAh3VDeH4fDOf9ieD4Oc0Y51vs8muuvtfADH/WQ70VCXMDPvPBY9qicw+FgPqhnQmFzQXCfFF7awOeDrwd1QH24Cd03lApc+IndzxWL2SOBkzRkTyQUrHXngde13Cdxfd5hAhdtIj3U2Pt5zPj2X2jGJ/goh6Y/Ah/zE9Kv2gyYP1K5FX3dmJ6h7bsgLbB503VfRCydmLpocX0lv5cmv58GgA/bXu8a+7/BIXBRH861mXd4qAfyDgAAAAAASvG79hMAAAAF+EytLciHtteKXuz8kA/ztz5Co2UXS6t/+GgDzuX78+P2sTTgoy1y+AD5yOHjs/L3usE0OXygRg75DxK/yfU=
   </data>
  </layer>
- <layer id="2" name="Walls" width="100" height="100">
+ <layer id="7" name="Foreground" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer id="7" name="Foreground" width="100" height="100">
+ <layer id="8" name="ForegroundBiss" width="100" height="86">
+  <data encoding="base64" compression="zlib">
+   eJztnD1PFEEYxwe4816gRU3EigRREThJLGxcSwuJWoulAvEL6AcwghFfSmNrp7FAvwAoCoJaaG1nAkdyEWygUOfJzbhzc7PL3e7e7c7e/5c82d17gWF/8zwzs7uBMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7OFTMe4WAJV8X9wtAAAAAAAAAITlXqEaNrCVZ6zMYzsfd0uiQZ57U9jAfd7OOR7zlrQ37QwVGTvBYxjXTtrGDq9Fv1NSj4KSlLq8I37/ad7/d/P1QZ4WOqBWJaUujyp1aLJgjk7InaTU5f6c6+RJoTYmRV95aml+JKUGBYGcjBlCOrExR5JQg1ZFXy/01UYQdhQHS93ueGILSahBt3u935vxec/EI49+ZZOTuMl65MK66CPNzG29fNg6nrQDmovq81E9R1QXkhGfHKbP+b0PH2ZMLugZBN3HbG+tCy+kB3Wua2Ica3UjugvKg1yf2cdjnz5NDnQPXj7gojGkC0L1IWuV13x2TDu/XjlBjCt1b9fiMb1V6xKZH6oL9XWCcoPmwPr8V322qiw+//1QNbyQ11D8PmMDrVqXyPM+6zOPpWeoig2uP94ccK6lL9vnu61al0gfuQbPN+XRhgjTdyhPyj59RvpQndnuJun4+SB0H7bXLpsgN3S90S8WkR+xoHsA8eLngeZvayJA/Phdw0wSz3sY+9vN2B8RtA/az0hXdXs+w/d5nFFiPRNv21pJHM8xLYXs4zPZ9HtpN2GdELey4X8GcDnIiX59W1/Hwkd7oetGdO30l8d6CT7iw+REH0c64ZmzpCDvBV3vqX8PedJ+9riHZzwP9g0+KE8w12o/+n04FZkjly7WxhVcJ4oF1Kxk4ZUfFH5MH2t92zqRIPmRHWDsEI8XA9G3p9MJmh+Ec7y6Ra5ER5jx44fwQbmSQ65EQtjxfNXi+bKsu7I/nUzAPYmwPuT3Fy32IqHrgsvd8Xn5eqF6PmmrUnIYO+vUb1Wm+PENx/VxNUXzZulFj+xAsNo8x9d/8yIe+KwFt4WPbc3HZYexSad+q3KHH991XB8Vsf3ZXFNTD7lY62VsWMTHXn8nN7O19xAbiWnlO2tiO5qCehU10sVUphqNODGNH7mSd+RL5u/I8WN5grF3E9H9TTbznp/3hWK9D4pThucwxvhnPvMoaX07iI9r/LUjGTfeZszHR5vMo5UQY6us93H+fxAvJyYfG8LHlwbP0R4fZ/bFmCP3JTSenxt0g46/DbpBx1tD1aBc2uyK5u+1AXKywuNh0Y0PEfjodxg77FR9yH1JRfNR0XxUFB+VFM3FoqRZH5KZAHMAPXDfpZ6gPkxQDVLzg47V/KBjtV5Rjr3idf017hX/J0ofzYwftE8+NnkdLfN4mUIn/wAycxis
+  </data>
+ </layer>
+ <layer id="1" name="Walls" width="100" height="86" offsetx="0" offsety="-0.666667">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="100" height="86">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="445.25" y="1598.25" width="112" height="8">
+  <object id="57" template="../../obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
-    <property name="teleport" value=""/>
-   </properties>
-  </object>
-  <object id="57" template="../../obj/enemy.tx" x="607" y="380.5" width="16" height="16" visible="1">
-   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;What are you ?&quot;,
+				&quot;text&quot;: &quot;I'm the queen of the Sliver's of the Skep, at least I used to be until my position was usurped.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;Usurped ? what are you talking about ?&quot;,
+						&quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive ? &quot;,
+								&quot;text&quot;: &quot;Exactly, she's been assembling a mightby host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
+								&quot;options&quot;: [
+									{
+										&quot;name&quot;: &quot;Where is she located ? I will take care of it.&quot;,
+										&quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three lieutenants that are scattered around here in the Skep. Only then will the magic shield allow you to enter.&quot;,
+										&quot;options&quot;: [
+											{
+												&quot;name&quot;: &quot;Consider it done&quot;,
+												&quot;text&quot;: &quot;Once you have dealt with the queen, return to me. Once I'm installed as the hive queen of the slivers of Shandalar, I will promise you to that the Slivers of the Skep will never be a danger to the people of Shandalar. Also, take this Hivestone, It will allow your creatures to become Slivers, causing confusion for the Sliver Queen.&quot;,
+												&quot;action&quot;: [
+													{ &quot;addItem&quot;: &quot;Hivestone&quot; }
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				&quot;name&quot;: &quot;The Sliver Queen is no more !&quot;,
+				&quot;text&quot;: &quot;Thank you for what you have done. I'll return to my rightful place as queen of the slivers'&quot;,
+				&quot;condition&quot;: [
+					{
+						&quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;,
+						&quot;not&quot;: false
+					}
+				],
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;Leave&quot;,
+						&quot;action&quot;: [
+							{
+								&quot;setQuestFlag&quot;: {
+									&quot;key&quot;: &quot;QuestCompleted&quot;,
+									&quot;val&quot;: 1
+								}
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
     <property name="enemy" value="Wounded Sliver"/>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;item&quot;, &quot;itemName&quot;: &quot;Shell Wand&quot;, &quot;count&quot;: 1 } ]"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/gold.tx" x="432" y="400" visible="1">
+  <object id="59" template="../../obj/gold.tx" x="34" y="655" visible="1">
    <properties>
     <property name="reward">[{
  &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
 }]</property>
    </properties>
   </object>
-  <object id="64" template="../../obj/gold.tx" x="709" y="308" visible="1">
+  <object id="64" template="../../obj/gold.tx" x="960" y="193" visible="1">
    <properties>
     <property name="reward">[{
  &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
 }]</property>
    </properties>
   </object>
-  <object id="61" template="../../obj/gold.tx" x="181.5" y="538.5" visible="1">
+  <object id="65" template="../../obj/enemy.tx" x="473.5" y="789.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="81,205,206,80,80,206,205"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="638" y="624.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,202,203,162,203,202,83"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="884.5" y="555" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="85,224,85,225,226,225,84,225"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="1374.33" y="741.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="184,220,223,172,172,222,221,172,223,220"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="1344.83" y="963.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="185,186,185,184,178,184,185"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="1535" y="877" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="158,159,158,157,156,187,155,187,156,157"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="960.333" y="223.833" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;commandersDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Metallic Sliver&quot;,&quot;Metallic Sliver&quot;]
+}</property>
+    <property name="enemy" value="Metallic Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="477.5" y="389.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="160,164,161,162,161,189"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="484.5" y="1343.75" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Farmer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="90,89,88,91,88,89,90"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/waypoint.tx" x="492" y="1081.33"/>
+  <object id="75" template="../../obj/waypoint.tx" x="225.833" y="1333"/>
+  <object id="76" template="../../obj/waypoint.tx" x="650.5" y="1217.5"/>
+  <object id="77" template="../../obj/waypoint.tx" x="873" y="1207"/>
+  <object id="78" template="../../obj/waypoint.tx" x="777.5" y="1223"/>
+  <object id="79" template="../../obj/waypoint.tx" x="847" y="985.167"/>
+  <object id="80" template="../../obj/waypoint.tx" x="553" y="1100.5"/>
+  <object id="81" template="../../obj/waypoint.tx" x="448.5" y="818"/>
+  <object id="82" template="../../obj/waypoint.tx" x="362" y="645.167"/>
+  <object id="83" template="../../obj/waypoint.tx" x="578.333" y="746"/>
+  <object id="84" template="../../obj/waypoint.tx" x="735.5" y="584"/>
+  <object id="85" template="../../obj/waypoint.tx" x="937.333" y="530.667"/>
+  <object id="86" template="../../obj/waypoint.tx" x="1111" y="509.5"/>
+  <object id="87" template="../../obj/dialog.tx" type="dialog" gid="11530" x="320.75" y="1104.33" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;The inscription reads: Stranger, tell our kinsmen that we lay here, staying faithful to our fight against the sliver menace.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Walk away&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/waypoint.tx" x="699.25" y="1342.25"/>
+  <object id="89" template="../../obj/waypoint.tx" x="431.75" y="1341.75"/>
+  <object id="90" template="../../obj/waypoint.tx" x="432.5" y="1267"/>
+  <object id="91" template="../../obj/waypoint.tx" x="704.75" y="1379.75"/>
+  <object id="92" template="../../obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/collision.tx" x="-0.75" y="1376" width="1600.5" height="16"/>
+  <object id="94" template="../../obj/collision.tx" x="-0.25" y="-15.5" width="1600.5" height="16"/>
+  <object id="95" template="../../obj/collision.tx" x="-16.75" y="-2" width="17" height="1395"/>
+  <object id="97" template="../../obj/collision.tx" x="1600" y="3" width="17" height="1395"/>
+  <object id="98" template="../../obj/enemy.tx" x="328" y="1215.33" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Knight"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/enemy.tx" x="360" y="1215.33" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Knight"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/enemy.tx" x="400" y="1216" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Knight"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/enemy.tx" x="357.667" y="1185.66" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;Good day, Adventurer. As you can see, we have quite a situation right here&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;What is happening around here ?&quot;,
+        &quot;text&quot;: &quot;Well, for an unknown reason, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. Because of this, General Jarkhald has summoned a large host to deal with this situation.&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;So you intend to just storm the hive, and hope for the best?&quot;,
+            &quot;text&quot;: &quot;Well, we tried that before but due to the huge amount of Slivers we haven't had much progress outside of walling of the hive to prevent further attacks against the villages.&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;Any way I could be of use to deal with the slivers ?&quot;,
+                &quot;text&quot;: &quot;Well, Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... &quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;I'll can deal with the queen, but what's in it for me ?&quot;,
+                    &quot;text&quot;: &quot; Outside the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece or armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward.                    I'll have my men open the gate to let you enter the hive. Good luck Adventurer !&quot;,
+                    &quot;options&quot;: [
+                      {
+                        &quot;name&quot;: &quot;End&quot;,
+                        &quot;action&quot;: [
+                          { &quot;deleteMapObject&quot;: 249 },
+                          { &quot;advanceMapFlag&quot;: &quot;intro&quot; }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;condition&quot;: [
+          {
+            &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+            &quot;not&quot;: false
+          }
+        ],
+        &quot;name&quot;: &quot;The Slivers won't be a problem anymore.&quot;,
+        &quot;text&quot;: &quot;I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer.&quot;,
+        &quot;action&quot;: [
+          { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Legionaire"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="103" template="../../obj/gold.tx" x="1527.67" y="945.667" visible="1">
    <properties>
     <property name="reward">[{
- &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 150
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
 }]</property>
    </properties>
   </object>
-  <object id="60" template="../../obj/scroll.tx" x="685.5" y="354">
+  <object id="104" template="../../obj/gold.tx" x="1050.33" y="1245" visible="1">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sliver Hive&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
    </properties>
   </object>
-  <object id="62" template="../../obj/scroll.tx" x="439.5" y="458.5">
+  <object id="105" template="../../obj/gold.tx" x="1504.33" y="1103.33" visible="1">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sliver Construct&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
    </properties>
   </object>
-  <object id="63" template="../../obj/scroll.tx" x="536.5" y="461">
+  <object id="106" template="../../obj/enemy.tx" x="373.667" y="577" width="16" height="16" visible="1">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Terramorphic Expanse&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;commandersDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of the Forsaken Gods&quot;]
+}</property>
+    <property name="enemy" value="Slivdrazi Experiment"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="107" template="../../obj/manashards.tx" x="1073.33" y="304.333"/>
+  <object id="108" template="../../obj/manashards.tx" x="1437" y="630"/>
+  <object id="109" template="../../obj/manashards.tx" x="1558" y="1151"/>
+  <object id="110" template="../../obj/manashards.tx" x="1141" y="1008.67"/>
+  <object id="111" template="../../obj/manashards.tx" x="1125" y="1163"/>
+  <object id="112" template="../../obj/manashards.tx" x="660" y="868"/>
+  <object id="113" template="../../obj/manashards.tx" x="351" y="921"/>
+  <object id="114" template="../../obj/manashards.tx" x="86" y="765"/>
+  <object id="115" template="../../obj/manashards.tx" x="399" y="586"/>
+  <object id="116" template="../../obj/gold.tx" x="1098" y="808" visible="1">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
+   </properties>
+  </object>
+  <object id="117" template="../../obj/gold.tx" x="628" y="537" visible="1">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
+   </properties>
+  </object>
+  <object id="118" template="../../obj/booster.tx" x="1224" y="744">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="121" template="../../obj/booster.tx" x="1119" y="1277">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/booster.tx" x="47" y="817">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="123" template="../../obj/enemy.tx" x="1263" y="814" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="178,177,176,177,178,184,220,184,178"/>
+   </properties>
+  </object>
+  <object id="124" template="../../obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,84,85,86,85,84,83"/>
+   </properties>
+  </object>
+  <object id="125" template="../../obj/enemy.tx" x="175.333" y="820" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="199,200,193,194,193"/>
+   </properties>
+  </object>
+  <object id="126" template="../../obj/enemy.tx" x="672" y="1069" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="207,208,209,79,126,208,207"/>
+   </properties>
+  </object>
+  <object id="127" template="../../obj/enemy.tx" x="642" y="925.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="210,211,210,209,168,79,208,79,168,209"/>
+   </properties>
+  </object>
+  <object id="128" template="../../obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="166,167,166,212,214,212,165"/>
+   </properties>
+  </object>
+  <object id="129" template="../../obj/enemy.tx" x="1157.33" y="591.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="172,222,221,172,223,220,184,220,223,172"/>
+   </properties>
+  </object>
+  <object id="130" template="../../obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="160,164,161,162,161,189"/>
+   </properties>
+  </object>
+  <object id="131" template="../../obj/enemy.tx" x="776" y="395" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="160,164,161,162"/>
+   </properties>
+  </object>
+  <object id="132" template="../../obj/enemy.tx" x="286" y="483.5" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="161,162,163,162,161,189"/>
+   </properties>
+  </object>
+  <object id="133" template="../../obj/enemy.tx" x="0.666667" y="746.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="192,193,194,193,192,191"/>
+   </properties>
+  </object>
+  <object id="134" template="../../obj/enemy.tx" x="1401" y="1100.5" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="181,180,236,175,174,179,181"/>
+   </properties>
+  </object>
+  <object id="135" template="../../obj/enemy.tx" x="769" y="989.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="209,210,209,79,231,79,209,210"/>
+   </properties>
+  </object>
+  <object id="136" template="../../obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="201,82,202,82"/>
+   </properties>
+  </object>
+  <object id="137" template="../../obj/enemy.tx" x="950.333" y="328.166" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="155,156,155,160,164,161,162"/>
+   </properties>
+  </object>
+  <object id="139" template="../../obj/enemy.tx" x="1116.67" y="1108.5" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="Red Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="173,218,169,170,171,170,169,218,173"/>
+   </properties>
+  </object>
+  <object id="140" template="../../obj/enemy.tx" x="1021" y="1165.17" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="Red Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="165,166,167,166,212,214,212"/>
+   </properties>
+  </object>
+  <object id="141" template="../../obj/enemy.tx" x="1018.67" y="752.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="Red Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="234,226,234,233,232,171,170,171,232,233"/>
+   </properties>
+  </object>
+  <object id="142" template="../../obj/enemy.tx" x="758" y="590" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="84,225,85,224,85,225,226,225"/>
+   </properties>
+  </object>
+  <object id="143" template="../../obj/enemy.tx" x="106" y="885" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="194,193,192,192,193"/>
+   </properties>
+  </object>
+  <object id="144" template="../../obj/enemy.tx" x="365.333" y="1051" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="198,80,76,78,77,78,76,80"/>
+   </properties>
+  </object>
+  <object id="145" template="../../obj/enemy.tx" x="697" y="1227" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,77,78,76,80,198,80,76"/>
+   </properties>
+  </object>
+  <object id="146" template="../../obj/enemy.tx" x="899" y="1104" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="77,78,77,231,79,231,77,78"/>
+   </properties>
+  </object>
+  <object id="147" template="../../obj/enemy.tx" x="537.667" y="1058.5" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="80,206,205,81,205,206,80"/>
+   </properties>
+  </object>
+  <object id="148" template="../../obj/enemy.tx" x="343.334" y="772.5" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="199,201,204,201"/>
+   </properties>
+  </object>
+  <object id="149" template="../../obj/enemy.tx" x="167" y="595.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="161,189,190,189,191,192,191,189"/>
+   </properties>
+  </object>
+  <object id="150" template="../../obj/enemy.tx" x="1131" y="1334" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Archer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="151" template="../../obj/enemy.tx" x="1439" y="1308" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Archer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="153" template="../../obj/entry_up.tx" x="648.667" y="783" width="48" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/skep/sliverqueen.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="154" template="../../obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
+         &quot;not&quot;: false
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Red Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="170,171,232,233,234,226,234,233,232,171"/>
+   </properties>
+  </object>
+  <object id="155" template="../../obj/waypoint.tx" x="1155.67" y="437.667"/>
+  <object id="156" template="../../obj/waypoint.tx" x="1455.67" y="676.333"/>
+  <object id="157" template="../../obj/waypoint.tx" x="1548" y="740.667"/>
+  <object id="158" template="../../obj/waypoint.tx" x="1537.67" y="915"/>
+  <object id="159" template="../../obj/waypoint.tx" x="1417.67" y="803.333"/>
+  <object id="160" template="../../obj/waypoint.tx" x="976.667" y="265"/>
+  <object id="161" template="../../obj/waypoint.tx" x="335.667" y="412"/>
+  <object id="162" template="../../obj/waypoint.tx" x="681" y="367"/>
+  <object id="163" template="../../obj/waypoint.tx" x="801.333" y="264"/>
+  <object id="164" template="../../obj/waypoint.tx" x="922.333" y="446.333"/>
+  <object id="165" template="../../obj/waypoint.tx" x="1050.33" y="1221.33"/>
+  <object id="166" template="../../obj/waypoint.tx" x="1018" y="861.667"/>
+  <object id="167" template="../../obj/waypoint.tx" x="969.333" y="821.667"/>
+  <object id="168" template="../../obj/waypoint.tx" x="795.333" y="895"/>
+  <object id="169" template="../../obj/waypoint.tx" x="1103" y="958.333"/>
+  <object id="170" template="../../obj/waypoint.tx" x="1188.67" y="814.667"/>
+  <object id="171" template="../../obj/waypoint.tx" x="1159" y="704.667"/>
+  <object id="172" template="../../obj/waypoint.tx" x="1161" y="622.667"/>
+  <object id="173" template="../../obj/waypoint.tx" x="1129" y="1230.33"/>
+  <object id="174" template="../../obj/waypoint.tx" x="1252" y="1098.33"/>
+  <object id="175" template="../../obj/waypoint.tx" x="1243.67" y="1026.67"/>
+  <object id="176" template="../../obj/waypoint.tx" x="1161" y="1023.67"/>
+  <object id="177" template="../../obj/waypoint.tx" x="1188" y="918.333"/>
+  <object id="178" template="../../obj/waypoint.tx" x="1271" y="840"/>
+  <object id="179" template="../../obj/waypoint.tx" x="1361.33" y="1178.33"/>
+  <object id="180" template="../../obj/waypoint.tx" x="1466.33" y="1077.33"/>
+  <object id="181" template="../../obj/waypoint.tx" x="1553" y="1013"/>
+  <object id="182" template="../../obj/waypoint.tx" x="1570" y="1154.33"/>
+  <object id="183" template="../../obj/waypoint.tx" x="1341.33" y="1003.67"/>
+  <object id="184" template="../../obj/waypoint.tx" x="1349.67" y="841"/>
+  <object id="185" template="../../obj/waypoint.tx" x="1389" y="964.667"/>
+  <object id="186" template="../../obj/waypoint.tx" x="1388.33" y="868"/>
+  <object id="187" template="../../obj/waypoint.tx" x="1281" y="545"/>
+  <object id="188" template="../../obj/enemy.tx" x="1374" y="597.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Red Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="156,187,155,187,156,157,158,159,158,157"/>
+   </properties>
+  </object>
+  <object id="189" template="../../obj/waypoint.tx" x="186.333" y="525.667"/>
+  <object id="190" template="../../obj/waypoint.tx" x="189.333" y="734.333"/>
+  <object id="191" template="../../obj/waypoint.tx" x="3.33333" y="705"/>
+  <object id="192" template="../../obj/waypoint.tx" x="3.66667" y="898.667"/>
+  <object id="193" template="../../obj/waypoint.tx" x="126.667" y="896.333"/>
+  <object id="194" template="../../obj/waypoint.tx" x="111.333" y="694.667"/>
+  <object id="195" template="../../obj/waypoint.tx" x="223.667" y="947"/>
+  <object id="196" template="../../obj/waypoint.tx" x="275.667" y="858.667"/>
+  <object id="197" template="../../obj/waypoint.tx" x="294.667" y="1012.67"/>
+  <object id="198" template="../../obj/waypoint.tx" x="434.333" y="1115.33"/>
+  <object id="199" template="../../obj/waypoint.tx" x="302" y="781"/>
+  <object id="200" template="../../obj/waypoint.tx" x="297.333" y="593.333"/>
+  <object id="201" template="../../obj/waypoint.tx" x="371.667" y="760.667"/>
+  <object id="202" template="../../obj/waypoint.tx" x="462.333" y="644.667"/>
+  <object id="203" template="../../obj/waypoint.tx" x="463.333" y="554.667"/>
+  <object id="204" template="../../obj/waypoint.tx" x="338.333" y="941"/>
+  <object id="205" template="../../obj/waypoint.tx" x="440.333" y="936"/>
+  <object id="206" template="../../obj/waypoint.tx" x="538.333" y="955.667"/>
+  <object id="207" template="../../obj/waypoint.tx" x="570.667" y="1051.33"/>
+  <object id="208" template="../../obj/waypoint.tx" x="748.333" y="1051.33"/>
+  <object id="209" template="../../obj/waypoint.tx" x="736.667" y="908"/>
+  <object id="210" template="../../obj/waypoint.tx" x="578.333" y="889.333"/>
+  <object id="211" template="../../obj/waypoint.tx" x="666" y="680.667"/>
+  <object id="212" template="../../obj/waypoint.tx" x="1039.67" y="1043"/>
+  <object id="213" template="../../obj/waypoint.tx" x="988.333" y="1156.33"/>
+  <object id="214" template="../../obj/waypoint.tx" x="1034.33" y="1139"/>
+  <object id="215" template="../../obj/waypoint.tx" x="1117.33" y="1177.33"/>
+  <object id="216" template="../../obj/waypoint.tx" x="986" y="1226.67"/>
+  <object id="217" template="../../obj/waypoint.tx" x="1217.33" y="1158.33"/>
+  <object id="218" template="../../obj/waypoint.tx" x="1118.67" y="1074"/>
+  <object id="219" template="../../obj/enemy.tx" x="1549.33" y="1048.67" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;commandersDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Hivestone&quot;]
+}</property>
+    <property name="enemy" value="Recruiter Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="220" template="../../obj/waypoint.tx" x="1349.33" y="721.333"/>
+  <object id="221" template="../../obj/waypoint.tx" x="1048.67" y="509.667"/>
+  <object id="222" template="../../obj/waypoint.tx" x="1059.33" y="647.333"/>
+  <object id="223" template="../../obj/waypoint.tx" x="1249.33" y="670.333"/>
+  <object id="224" template="../../obj/waypoint.tx" x="985.333" y="674"/>
+  <object id="225" template="../../obj/waypoint.tx" x="844" y="600"/>
+  <object id="226" template="../../obj/waypoint.tx" x="932.333" y="696.667"/>
+  <object id="227" template="../../obj/enemy.tx" x="1071.67" y="510" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="221,172,223,172,221,85,224"/>
+   </properties>
+  </object>
+  <object id="228" template="../../obj/waypoint.tx" x="752.333" y="756"/>
+  <object id="229" template="../../obj/waypoint.tx" x="608.667" y="607.667"/>
+  <object id="230" template="../../obj/enemy.tx" x="673.333" y="580.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="84,83,211,228,211,83"/>
+   </properties>
+  </object>
+  <object id="231" template="../../obj/waypoint.tx" x="894.667" y="1079"/>
+  <object id="232" template="../../obj/waypoint.tx" x="1111.67" y="731"/>
+  <object id="233" template="../../obj/waypoint.tx" x="1031.33" y="710.333"/>
+  <object id="234" template="../../obj/waypoint.tx" x="1041" y="786"/>
+  <object id="236" template="../../obj/waypoint.tx" x="1291" y="996.667"/>
+  <object id="237" template="../../obj/enemy.tx" x="535" y="1132" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Green Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="80,76,198,74"/>
+   </properties>
+  </object>
+  <object id="238" template="../../obj/enemy.tx" x="81.6667" y="975.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Archer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="239" template="../../obj/enemy.tx" x="110.667" y="1151" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Archer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="240" template="../../obj/enemy.tx" x="17.6667" y="1343.67" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Archer"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="241" template="../../obj/enemy.tx" x="223.333" y="1128.67" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Knight"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="75,242,243,244,245,246,247,248,247,246,245,244,243,242"/>
+   </properties>
+  </object>
+  <object id="242" template="../../obj/waypoint.tx" x="224.333" y="1086.67"/>
+  <object id="243" template="../../obj/waypoint.tx" x="207" y="1055.67"/>
+  <object id="244" template="../../obj/waypoint.tx" x="176.333" y="1054.67"/>
+  <object id="245" template="../../obj/waypoint.tx" x="176.333" y="991"/>
+  <object id="246" template="../../obj/waypoint.tx" x="144.667" y="992.333"/>
+  <object id="247" template="../../obj/waypoint.tx" x="144" y="975"/>
+  <object id="248" template="../../obj/waypoint.tx" x="114" y="976"/>
+  <object id="249" template="../../obj/gate.tx" x="481" y="1192">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Outer Gate Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Outer Gate Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Outer Gate Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="250" template="../../obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;**The horse looks at you without interest**&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;leave&quot;
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Horse"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="251" template="../../obj/shop.tx" x="303.667" y="1248.29" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="FlipShop"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="252" template="../../obj/shop.tx" x="336.334" y="1248.46" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="LargeSeaCreatures"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="253" template="../../obj/shop.tx" x="370" y="1248.46" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Nobles"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="256" template="../../obj/dialog.tx" x="504.666" y="695" width="116" height="44.3333">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Strange sounds echo through the room behind you.&quot;,
+    &quot;options&quot;: [
+      { &quot;name&quot;: &quot;Leave.&quot; },
+      {
+        &quot;name&quot;: &quot;*The red field melts before your eyes. You are free to go forward.*&quot;,
+        &quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 } ],
+        &quot;condition&quot;: [
+          {
+            &quot;getMapFlag&quot;: {
+              &quot;key&quot;: &quot;commandersDefeated&quot;,
+              &quot;op&quot;: &quot;&gt;=&quot;,
+              &quot;val&quot;: 3
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="257" template="../../obj/treasure.tx" x="751.667" y="508.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.02,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="258" template="../../obj/treasure.tx" x="1422.33" y="1018.33">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.02,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="259" template="../../obj/treasure.tx" x="1081" y="943.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.02,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="260" template="../../obj/treasure.tx" x="166.667" y="668.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.02,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="263" template="../../obj/enemy.tx" x="1525.67" y="1161.67" width="16" height="16" visible="1">
+   <properties>
+    <property name="enemy" value="Blue Sliver"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="182,181,182,179,180,181"/>
    </properties>
   </object>
  </objectgroup>

@@ -30,3 +30,15 @@ Kiora
 SlimeCave 
   xy: 108,118
   size: 34, 36
+CatLair
+  xy: 103,226
+  size: 45, 25
+WhiteCastle
+  xy: 57,212
+  size: 33, 42
+MageTower
+  xy: 156,210
+  size: 26, 49
+Skep
+  xy: 110,281
+  size: 37, 33

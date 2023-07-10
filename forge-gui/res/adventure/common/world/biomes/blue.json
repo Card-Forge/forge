@@ -72,6 +72,7 @@
 ],
 "pointsOfInterest": [
 	"Blue Castle",
+	"Aerie",
 	"Island Capital",
 	"Island Town Generic",
 	"Island Town Identity",
@@ -102,7 +103,8 @@
 	"GitaxianLab",
 	"Kiora Island",
 	"Teferi Hideout",
-	"Jacehold"
+	"Jacehold",
+	"Skep",
 ],
 "structures": [
 	{

@@ -120,8 +120,14 @@ MoxSapphire
 MoxPearl
   xy: 320, 64
   size: 16, 16
+Hivestone
+  xy: 144, 720
+  size: 16, 16
 BattleStandard
   xy: 96, 592
+  size: 16, 16 
+HiveLordArmor
+  xy: 112, 0
   size: 16, 16 
 LifeAmulet
   xy: 0, 864
