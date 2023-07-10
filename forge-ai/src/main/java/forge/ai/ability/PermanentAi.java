@@ -6,6 +6,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.game.card.*;
@@ -129,17 +130,23 @@ public class PermanentAi extends SpellAbilityAi {
                         continue outer; // already disabled, no point in adding another one
                     }
                 }
-                // assume the AI knows the deck lists of its opponents
-                CardCollection aiCards = CardLists.filter(ai.getAllCards(), CardPredicates.hasCMC(i));
-                CardCollection oppCards = CardLists.filter(ai.getStrongestOpponent().getAllCards(), CardPredicates.hasCMC(i));
-                if (i == 0) {
+                // assume the AI knows the deck lists of its opponents and if we see a card in a certain zone except for the library or hand,
+                // it likely won't be cast unless it's bounced back (ideally, this should also somehow account for hidden information such as face down cards in exile)
+                final int manaValue = i;
+                CardCollection aiCards = CardLists.filter(ai.getAllCards(), card -> (card.isInZone(ZoneType.Library) || !card.isInZone(ZoneType.Hand))
+                        && card.getState(CardStateName.Original).getManaCost() != null
+                        && card.getState(CardStateName.Original).getManaCost().getCMC() == manaValue);
+                CardCollection oppCards = CardLists.filter(ai.getStrongestOpponent().getAllCards(), card -> (card.isInZone(ZoneType.Library) || !card.isInZone(ZoneType.Hand))
+                        && card.getState(CardStateName.Original).getManaCost() != null
+                        && card.getState(CardStateName.Original).getManaCost().getCMC() == manaValue);
+                if (manaValue == 0) {
                     aiCards = CardLists.filter(aiCards, Predicates.not(CardPredicates.isType("Land")));
                     oppCards = CardLists.filter(oppCards, Predicates.not(CardPredicates.isType("Land")));
                     // also filter out other Chalices in our own deck
                     aiCards = CardLists.filter(aiCards, Predicates.not(CardPredicates.nameEquals("Chalice of the Void")));
                 }
                 if (oppCards.size() > 3 && oppCards.size() >= aiCards.size() * 2) {
-                    sa.setXManaCostPaid(i);
+                    sa.setXManaCostPaid(manaValue);
                     return true;
                 }
             }
