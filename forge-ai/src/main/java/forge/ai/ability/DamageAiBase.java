@@ -1,14 +1,11 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardPredicates;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -46,11 +43,6 @@ public abstract class DamageAiBase extends SpellAbilityAi {
     }
 
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
-        // TODO: once the "planeswalker redirection" rule is removed completely, just remove this code and
-        // remove the "burn Planeswalkers" code in the called method.
-        return shouldTgtP(comp, sa, d, noPrevention, false);
-    }
-    protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention, final boolean noPlaneswalkerRedirection) {
         int restDamage = d;
         final Game game = comp.getGame();
         Player enemy = comp.getWeakestOpponent();
@@ -87,13 +79,6 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                     return true;
                 }
             }
-        }
-
-        // burn Planeswalkers
-        // TODO: Must be removed completely when the "planeswalker redirection" rule is removed.
-        if (!noPlaneswalkerRedirection
-                && Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
-            return true;
         }
 
         if (avoidTargetP(comp, sa)) {
