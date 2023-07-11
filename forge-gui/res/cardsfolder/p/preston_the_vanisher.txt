@@ -2,7 +2,7 @@ Name:Preston, the Vanisher
 ManaCost:3 W
 Types:Legendary Creature Rabbit Wizard
 PT:2/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+wasNotCast+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopyPermanent | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, if it wasn't cast, create a token that's a copy of that creature except it's a 0/1 white Illusion. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+nonToken+wasNotCast+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopyPermanent | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, if it wasn't cast, create a token that's a copy of that creature except it's a 0/1 white Illusion. 
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetColor$ White | SetCreatureTypes$ Illusion | SetPower$ 0 | SetToughness$ 1
 A:AB$ ChangeZone | Cost$ 1 W Sac<5/Illusion> | ValidTgts$ Permanent.nonLand | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nonland permanent | SpellDescription$ Exile target nonland permanent.
 DeckHas:Ability$Token|Sacrifice & Type$Illusion
