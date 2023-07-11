@@ -1,0 +1,27 @@
+[metadata]
+Code=HA7
+Date=2023-07-18
+Name=Historic Anthology 7
+Type=Online
+ScryfallCode=HA7
+
+[cards]
+1 M Sun Titan @Todd Lockwood
+2 M Frost Titan @Mike Bierek
+3 M Vendilion Clique @Willian Murai
+4 M Grave Titan @Nils Hamm
+5 M Inferno Titan @Kev Walker
+6 C Tribal Flames @Zack Stella
+7 M Primeval Titan @Aleksi Briclot
+8 C Wild Nacatl @Wayne Reynolds
+9 U Acidic Slime @Karl Kopinski
+10 R Tooth and Nail @Jesper Ejsing
+11 U Bloodbraid Elf @Raymond Swanland
+12 U Mortarpod @Eric Deschamps
+13 U Worn Powerstone @Henry G. Higginbotham
+14 R Sword of Fire and Ice @Mark Zug
+15 R Fiery Islet @Richard Wright
+16 R Sunbaked Canyon @Yeong-Hao Han
+17 R Nurturing Peatland @Sam Burley
+18 R Silent Clearing @Seb McKinnon
+19 R Waterlogged Grove @John Avon
