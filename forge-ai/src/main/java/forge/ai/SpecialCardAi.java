@@ -22,6 +22,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
+import forge.ai.ability.FightAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -78,6 +79,49 @@ import java.util.List;
  * own file, inside its own package, for example, forge.ai.cards.
  */
 public class SpecialCardAi {
+
+    // Arena and Magus of the Arena
+    public static class Arena {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Game game = ai.getGame();
+
+            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().getNextTurn() != ai) {
+                return false; // at opponent's EOT only, to conserve mana
+            }
+
+            CardCollection aiCreatures = ai.getCreaturesInPlay();
+            if (aiCreatures.isEmpty()) {
+                return false;
+            }
+
+            for (Player opp : ai.getOpponents()) {
+                CardCollection oppCreatures = opp.getCreaturesInPlay();
+                if (oppCreatures.isEmpty()) {
+                    continue;
+                }
+
+                for (Card aiCreature : aiCreatures) {
+                    boolean canKillAll = true;
+                    for (Card oppCreature : oppCreatures) {
+                        if (FightAi.canKill(oppCreature, aiCreature, 0)) {
+                            canKillAll = false;
+                            break;
+                        }
+                        if (!FightAi.canKill(aiCreature, oppCreature, 0)) {
+                            canKillAll = false;
+                            break;
+                        }
+                    }
+                    if (canKillAll) {
+                        sa.getTargets().clear();
+                        sa.getTargets().add(aiCreature);
+                        return true;
+                    }
+                }
+            }
+            return sa.isTargetNumberValid();
+        }
+    }
 
     // Black Lotus and Lotus Bloom
     public static class BlackLotus {

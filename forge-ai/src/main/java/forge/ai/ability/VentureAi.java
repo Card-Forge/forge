@@ -20,7 +20,7 @@ public class VentureAi extends SpellAbilityAi {
         // If this has a mana cost, do it at opponent's EOT if able to prevent spending mana early; if sorcery, do it in Main2
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         if (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost()) {
-            if (SpellAbilityAi.isSorcerySpeed(sa, aiPlayer)) {
+            if (isSorcerySpeed(sa, aiPlayer)) {
                 return ph.is(PhaseType.MAIN2, aiPlayer);
             } else {
                 return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;

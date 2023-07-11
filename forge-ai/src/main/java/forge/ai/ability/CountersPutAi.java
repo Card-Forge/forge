@@ -437,7 +437,7 @@ public class CountersPutAi extends CountersAi {
         }
 
         if (sa.usesTargeting()) {
-            if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+            if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
                 // only evaluates case where all tokens are placed on a single target
                 if (sa.getMinTargets() < 2) {
                     if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
@@ -550,7 +550,7 @@ public class CountersPutAi extends CountersAi {
                 if (sa.isCurse()) {
                     choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
-                    if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+                    if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
                         for (Card c : list) {
                             if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount, Lists.newArrayList())) {
                                 choice = c;
@@ -623,7 +623,7 @@ public class CountersPutAi extends CountersAi {
                 return false;
             }
             // Instant +1/+1
-            if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+            if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
                 if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }

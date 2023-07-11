@@ -89,7 +89,11 @@ public class StaticAbilityPanharmonicon {
 
         if (trigMode.equals(TriggerType.ChangesZone)) {
             // Cause of the trigger – the card changing zones
-            if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Card))) {
+            Card moved = (Card) runParams.get(AbilityKey.Card);
+            if ("Battlefield".equals(trigger.getParam("Origin"))) {
+                moved = (Card) runParams.get(AbilityKey.CardLKI);
+            }
+            if (!stAb.matchesValidParam("ValidCause", moved)) {
                 return false;
             }
             if (!stAb.matchesValidParam("Origin", runParams.get(AbilityKey.Origin))) {
