@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="86" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="264">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="86" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="266">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -25,7 +25,7 @@
  </layer>
  <layer id="8" name="ForegroundBiss" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   eJztnD1PFEEYxwe4816gRU3EigRREThJLGxcSwuJWoulAvEL6AcwghFfSmNrp7FAvwAoCoJaaG1nAkdyEWygUOfJzbhzc7PL3e7e7c7e/5c82d17gWF/8zwzs7uBMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7OFTMe4WAJV8X9wtAAAAAAAAAITlXqEaNrCVZ6zMYzsfd0uiQZ57U9jAfd7OOR7zlrQ37QwVGTvBYxjXTtrGDq9Fv1NSj4KSlLq8I37/ad7/d/P1QZ4WOqBWJaUujyp1aLJgjk7InaTU5f6c6+RJoTYmRV95aml+JKUGBYGcjBlCOrExR5JQg1ZFXy/01UYQdhQHS93ueGILSahBt3u935vxec/EI49+ZZOTuMl65MK66CPNzG29fNg6nrQDmovq81E9R1QXkhGfHKbP+b0PH2ZMLugZBN3HbG+tCy+kB3Wua2Ica3UjugvKg1yf2cdjnz5NDnQPXj7gojGkC0L1IWuV13x2TDu/XjlBjCt1b9fiMb1V6xKZH6oL9XWCcoPmwPr8V322qiw+//1QNbyQ11D8PmMDrVqXyPM+6zOPpWeoig2uP94ccK6lL9vnu61al0gfuQbPN+XRhgjTdyhPyj59RvpQndnuJun4+SB0H7bXLpsgN3S90S8WkR+xoHsA8eLngeZvayJA/Phdw0wSz3sY+9vN2B8RtA/az0hXdXs+w/d5nFFiPRNv21pJHM8xLYXs4zPZ9HtpN2GdELey4X8GcDnIiX59W1/Hwkd7oetGdO30l8d6CT7iw+REH0c64ZmzpCDvBV3vqX8PedJ+9riHZzwP9g0+KE8w12o/+n04FZkjly7WxhVcJ4oF1Kxk4ZUfFH5MH2t92zqRIPmRHWDsEI8XA9G3p9MJmh+Ec7y6Ra5ER5jx44fwQbmSQ65EQtjxfNXi+bKsu7I/nUzAPYmwPuT3Fy32IqHrgsvd8Xn5eqF6PmmrUnIYO+vUb1Wm+PENx/VxNUXzZulFj+xAsNo8x9d/8yIe+KwFt4WPbc3HZYexSad+q3KHH991XB8Vsf3ZXFNTD7lY62VsWMTHXn8nN7O19xAbiWnlO2tiO5qCehU10sVUphqNODGNH7mSd+RL5u/I8WN5grF3E9H9TTbznp/3hWK9D4pThucwxvhnPvMoaX07iI9r/LUjGTfeZszHR5vMo5UQY6us93H+fxAvJyYfG8LHlwbP0R4fZ/bFmCP3JTSenxt0g46/DbpBx1tD1aBc2uyK5u+1AXKywuNh0Y0PEfjodxg77FR9yH1JRfNR0XxUFB+VFM3FoqRZH5KZAHMAPXDfpZ6gPkxQDVLzg47V/KBjtV5Rjr3idf017hX/J0ofzYwftE8+NnkdLfN4mUIn/wAycxis
+   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
   </data>
  </layer>
  <layer id="1" name="Walls" width="100" height="86" offsetx="0" offsety="-0.666667">
@@ -1195,7 +1195,7 @@
     <property name="signYOffset" type="float" value="-5"/>
    </properties>
   </object>
-  <object id="256" template="../../obj/dialog.tx" x="504.666" y="695" width="116" height="44.3333">
+  <object id="256" template="../../obj/dialog.tx" x="608.999" y="732.333" width="116" height="44.3333">
    <properties>
     <property name="dialog">[
   {
@@ -1325,6 +1325,22 @@
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="182,181,182,179,180,181"/>
+   </properties>
+  </object>
+  <object id="264" template="../../obj/shop.tx" x="272" y="1247.79" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Battle"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="265" template="../../obj/shop.tx" x="401.667" y="1249.12" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Saga"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
    </properties>
   </object>
  </objectgroup>

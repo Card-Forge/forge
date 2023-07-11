@@ -21,11 +21,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFbwlHOgXUAfMFL8SQ2QbsTAkGE00K4YBUMZAAD5HQMQ
+   eJxjYBgFo2AUDFbwlHOgXUAfMFL8SQ2QbsTAkGE00K5ABR4DFH8we73obP9QtxcA6uQFTQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+  <object id="38" template="../../obj/entry_up.tx" x="193.059" y="270.942" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>

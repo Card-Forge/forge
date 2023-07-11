@@ -3,11 +3,6 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Manaweft Sliver&quot;, &quot;Diffusion Sliver&quot; ]
-}</property>
- </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
@@ -45,7 +40,7 @@
     <property name="teleportObjectId" value="153"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/enemy.tx" x="227.014" y="200.071" width="16" height="16" visible="1">
+  <object id="57" template="../../obj/enemy.tx" x="224.189" y="175.454" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
   {

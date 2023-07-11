@@ -3936,7 +3936,7 @@
 },
 {
   "name":"LargeSeaCreatures",
-  "description":"Cards from the deep",
+  "description":"Cards From The Deep",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"LargeSeaCreaturesShop",
   "rewards": [
@@ -3960,7 +3960,7 @@
 },
 {
   "name":"FlipShop",
-  "description":"Two for the price of one",
+  "description":"Two For The Price of One",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"FlipShop",
   "rewards": [
@@ -3969,13 +3969,9 @@
       "cardText": "Flip it"
     },
     {
-      "count":6,
+      "count":7,
       "cardText": "Transform"
-    },
-    {
-      "count":1,
-      "cardText": "Pathway"
-	}
+    }
 	]
 },
 {
@@ -3985,20 +3981,10 @@
   "sprite":"BattleShop",
   "rewards": [
     {
-	  "count":8,
-	  "type":"Union",
-	  "cardUnion": [
-		{
-		  "count":7,
-		  "subTypes": ["Siege"]
-		},
-		{
-		  "count":1,
-		  "cardText": "Battle"
-		}
-	  ]
-	}
-	]
+      "count":8,
+      "cardTypes": ["Battle"]
+    }
+    ]
 },
 {
   "name":"Bird4Blue",
