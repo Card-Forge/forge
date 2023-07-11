@@ -16,7 +16,7 @@ public class DayTimeAi extends SpellAbilityAi {
 
         if ((sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) || sa.getPayCosts().hasManaCost()) {
             // If it involves a cost that may put us at a disadvantage, better activate before own turn if possible
-            if (!SpellAbilityAi.isSorcerySpeed(sa, aiPlayer)) {
+            if (!isSorcerySpeed(sa, aiPlayer)) {
                 return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
             } else {
                 return ph.is(PhaseType.MAIN2, aiPlayer); // Give other things a chance to be cast (e.g. Celestus)

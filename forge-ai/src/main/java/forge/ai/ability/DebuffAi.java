@@ -60,7 +60,7 @@ public class DebuffAi extends SpellAbilityAi {
                 || !game.getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty, unless there are specific activation phase requirements
-            if (!SpellAbilityAi.isSorcerySpeed(sa, ai) && !sa.hasParam("ActivationPhases")) {
+            if (!isSorcerySpeed(sa, ai) && !sa.hasParam("ActivationPhases")) {
                 return false;
             }
         }
