@@ -300,12 +300,11 @@ public class CostPayment extends ManaConversionMatrix {
                 continue;
             }
 
-            if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsSpellAndShardRestrictions(saBeingPaidFor, shard, thisMana.getColor())) {
+            if (shard.isSnow() && !thisMana.isSnow()) {
                 continue;
             }
 
-            boolean canPay = manapool.canPayForShardWithColor(shard, thisMana.getColor());
-            if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
+            if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsSpellAndShardRestrictions(saBeingPaidFor, shard, thisMana.getColor())) {
                 continue;
             }
 
