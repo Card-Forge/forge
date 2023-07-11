@@ -4800,7 +4800,11 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"cardTypes": [
+				"Artifact",
+				"Creature"
+			]
 		},
 		{
 			"type": "gold",
@@ -5518,7 +5522,12 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 4,
-			"addMaxCount": 6
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Rare",
+				"Uncommon"
+			]
 		},
 		{
 			"type": "gold",
@@ -13063,7 +13072,13 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"rarity": [
+				"Common",
+				"Uncommon",
+				"Rare",
+				"Mythic Rare"
+			]
 		},
 		{
 			"type": "gold",
@@ -13385,7 +13400,8 @@
 			"addMaxCount": 6,
 			"rarity": [
 				"common",
-				"uncommon"
+				"uncommon",
+				"Rare"
 			]
 		},
 		{
@@ -13435,7 +13451,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"Uncommon"
 			]
 		},
 		{

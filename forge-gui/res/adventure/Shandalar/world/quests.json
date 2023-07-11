@@ -6298,8 +6298,8 @@
 							{
 								"type": "shards",
 								"probability": 1,
-								"count": 20,
-								"addMaxCount": 20
+								"count": 10,
+								"addMaxCount": 10
 							}
 						]
 					}
@@ -6496,7 +6496,7 @@
 								"type": "card",
 								"probability": 1,
 								"count": 10,
-								"addMaxCount": 20,
+								"addMaxCount": 10,
 								"subTypes": [
 									"Fungus"
 								]
@@ -6606,7 +6606,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
 				"options": [
 					{
@@ -6616,7 +6616,7 @@
 			},
 			{
 				"name": "Let me guess, you want to me to deal with this situation ?",
-				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this and eradicate this slimy menace once and for all.",
+				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this town and eradicate this slimy menace once and for all.",
 				"options": [
 					{
 						"name": "I see. So you want me to go to the old sewers and deal with the slimes?",
@@ -6697,7 +6697,7 @@
 								"type": "card",
 								"probability": 1,
 								"count": 7,
-								"addMaxCount": 14,
+								"addMaxCount": 7,
 								"colors": [
 									"Green",
 									"Blue",
