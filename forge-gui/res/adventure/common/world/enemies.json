@@ -3397,7 +3397,18 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 4,
-			"addMaxCount": 6
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Enchantment",
+				"Sorcery",
+				"Instant"
+			]
 		},
 		{
 			"type": "card",
@@ -8369,9 +8380,8 @@
 	"name": "False Monk",
 	"sprite": "sprites/enemy/humanoid/human/warlock/false_monk.atlas",
 	"deck": [
-	"decks/standard/cultist.dck"
+		"decks/standard/cultist.dck"
 	],
-	"randomizeDeck": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -8379,7 +8389,7 @@
 	"rewards": [
 		{
 			"type": "deckCard",
-			"probability": 1
+			"probability": 1,
 			"count": 2,
 			"addMaxCount": 2,
 			"rarity": [
@@ -8442,7 +8452,7 @@
 		"Human",
 		"Disguised",
 		"Unholy",
-		"IdentityBlack",
+		"IdentityBlack"
 	]
 },
 {
@@ -12282,9 +12292,8 @@
 	"name": "High Cultist",
 	"sprite": "sprites/enemy/humanoid/human/warlock/high_cultist.atlas",
 	"deck": [
-	"decks/standard/cultist.dck"
+		"decks/standard/cultist.dck"
 	],
-	"randomizeDeck": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -12355,7 +12364,7 @@
 		"Human",
 		"Disguised",
 		"Unholy",
-		"IdentityBlack",
+		"IdentityBlack"
 	]
 },
 {
@@ -17875,7 +17884,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.70,
+	"scale": 0.7,
 	"life": 18,
 	"rewards": [
 		{
@@ -17932,7 +17941,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.70,
+	"scale": 0.7,
 	"life": 18,
 	"rewards": [
 		{
