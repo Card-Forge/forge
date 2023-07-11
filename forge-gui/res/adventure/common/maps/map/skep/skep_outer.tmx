@@ -1195,7 +1195,7 @@
     <property name="signYOffset" type="float" value="-5"/>
    </properties>
   </object>
-  <object id="256" template="../../obj/dialog.tx" x="608.999" y="732.333" width="116" height="44.3333">
+  <object id="256" template="../../obj/dialog.tx" x="627.332" y="812.333" width="116" height="44.3333">
    <properties>
     <property name="dialog">[
   {
