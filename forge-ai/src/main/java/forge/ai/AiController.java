@@ -812,16 +812,11 @@ public class AiController {
                 for (Card tgt : tc.getTargetCards()) {
                     // TODO some older cards don't use the keyword, so check for trigger instead
                     if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                        int amount = 0;
                         Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                         if (wardCost.hasManaCost()) {
-                            amount = wardCost.getTotalMana().getCMC();
-                            if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player, true)) {
-                                return AiPlayDecision.CantAfford;
-                            }
+                            xCost = wardCost.getTotalMana().getCMC() > 0;
                         }
-                        SpellAbilityAi topAI = new SpellAbilityAi() {
-                        };
+                        SpellAbilityAi topAI = new SpellAbilityAi() {};
                         if (!topAI.willPayCosts(player, sa, wardCost, host)) {
                             return AiPlayDecision.CostNotAcceptable;
                         }
@@ -831,7 +826,7 @@ public class AiController {
         }
 
         // check if some target raised cost
-        if (oldCMC > -1) {
+        if (!xCost && oldCMC > -1) {
             int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
             if (finalCMC > oldCMC) {
                 xCost = true;

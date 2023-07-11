@@ -277,7 +277,7 @@ public class AiBlockController {
 
                         if (mode == TriggerType.DamageDone) {
                             if (trigger.matchesValidParam("ValidSource", attacker)
-                                    && attacker.getNetCombatDamage() > 0
+                                    && !"False".equals(trigger.getParam("CombatDamage")) && attacker.getNetCombatDamage() > 0
                                     && trigger.matchesValidParam("ValidTarget", combat.getDefenderByAttacker(attacker))) {
                                 value += 50;
                             }

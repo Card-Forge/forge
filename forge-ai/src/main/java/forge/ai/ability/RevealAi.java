@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -26,7 +25,7 @@ public class RevealAi extends RevealAiBase {
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
-        if (SpellAbilityAi.playReusable(ai, sa)) {
+        if (playReusable(ai, sa)) {
             randomReturn = true;
         }
         return randomReturn;

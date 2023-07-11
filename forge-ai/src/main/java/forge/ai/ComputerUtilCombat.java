@@ -673,7 +673,6 @@ public class ComputerUtilCombat {
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return 0;
             }
-
         } // flanking
 
         final int defBushidoMagnitude = blocker.getKeywordMagnitude(Keyword.BUSHIDO);
@@ -859,7 +858,7 @@ public class ComputerUtilCombat {
             }
         } else if (mode == TriggerType.DamageDone) {
             willTrigger = true;
-            if (trigger.hasParam("ValidSource")) {
+            if (trigger.hasParam("ValidSource") && !"False".equals(trigger.getParam("CombatDamage"))) {
                 if (!(trigger.matchesValidParam("ValidSource", defender)
                         && defender.getNetCombatDamage() > 0
                         && trigger.matchesValidParam("ValidTarget", attacker))) {
@@ -2461,7 +2460,7 @@ public class ComputerUtilCombat {
             CardCollectionView trigCards = attacker.getController().getCardsIn(ZoneType.Battlefield);
             for (Card c : trigCards) {
                 for (Trigger t : c.getTriggers()) {
-                    if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage")) && t.matchesValidParam("ValidSource", attacker)) {
+                    if (t.getMode() == TriggerType.DamageDone && !"False".equals(t.getParam("CombatDamage")) && t.matchesValidParam("ValidSource", attacker)) {
                         SpellAbility ab = t.getOverridingAbility();
                         if (ab.getApi() == ApiType.Poison && "TriggeredTarget".equals(ab.getParam("Defined"))) {
                             pd += AbilityUtils.calculateAmount(attacker, ab.getParam("Num"), ab);
