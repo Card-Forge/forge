@@ -1582,10 +1582,6 @@ public class AbilityUtils {
             host.addRemembered(sa.getTargets());
         }
 
-        if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
-            host.addImprintedCards(sa.getTargets().getTargetCards());
-        }
-
         if (sa.hasParam("RememberCostMana")) {
             host.clearRemembered();
             ManaCostBeingPaid activationMana = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());

@@ -101,13 +101,13 @@ public class DigAi extends SpellAbilityAi {
             }
         }
 
-        if (SpellAbilityAi.playReusable(ai, sa)) {
+        if (playReusable(ai, sa)) {
             return true;
         }
 
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-            && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
+            && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
             && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
             && !ComputerUtil.activateForCost(sa, ai)) {
         	return false;
