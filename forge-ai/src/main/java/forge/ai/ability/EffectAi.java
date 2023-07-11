@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -15,7 +18,9 @@ import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,9 +30,13 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -256,6 +265,52 @@ public class EffectAi extends SpellAbilityAi {
                     return true;
                 }
                 return false;
+            } else if (logic.equals("CantRegenerate")) {
+                if (sa.usesTargeting()) {
+                    CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                    list = CardLists.filter(list, Predicates.not(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE)), new Predicate<Card>() {
+
+                        @Override
+                        public boolean apply(@Nullable Card input) {
+                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
+                            runParams.put(AbilityKey.Regeneration, true);
+                            List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                            // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
+                            if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                                return false;
+                            }
+                            // TODO check Stack for Effects that would destroy host, either direct or indirect
+
+                            return true;
+                        }
+                    });
+
+                    if (list.isEmpty()) {
+                        return false;
+                    }
+                    // TODO check Stack for Effects that would destroy the selected card?
+                    sa.getTargets().add(ComputerUtilCard.getBestAI(list));
+                    return true;
+                } else if (sa.getParent() != null) {
+                    // sub ability should be okay
+                    return true;
+                } else if ("Self".equals(sa.getParam("RememberObjects"))) {
+                    // the ones affecting itself are Nimbus cards, were opponent can activate this effect
+                    Card host = sa.getHostCard();
+                    if (host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        return false;
+                    }
+                    Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sa.getHostCard());
+                    runParams.put(AbilityKey.Regeneration, true);
+                    List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                    // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
+                    if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                        return false;
+                    }
+                    // TODO check Stack for Effects that would destroy host, either direct or indirect
+
+                    return true;
+                }
             }
         } else { //no AILogic
             return false;
