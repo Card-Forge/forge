@@ -127,7 +127,7 @@ ScryfallCode=LTC
 119 R Assemble the Entmoot @Alex Brock
 120 R Feasting Hobbit @Lorenzo Mastroianni
 121 R Galadhrim Ambush @John Di Giovanni
-122 R Haldir, Lórien Lieutenant @Syd Mills
+122 R Haldir, Lorien Lieutenant @Syd Mills
 123 R Legolas Greenleaf @Anna Steinbauer
 124 R Mirkwood Elk @Christina Kraus
 125 R Motivated Pony @Claudiu-Antoniu Magherusan
