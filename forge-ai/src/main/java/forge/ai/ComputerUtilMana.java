@@ -875,11 +875,10 @@ public class ComputerUtilMana {
             ManaPool.refundMana(manaSpentToPay, ai, sa);
             if (test) {
                 resetPayment(paymentList);
-                return false;
             } else {
                 System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa.toString() + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
-                return false;
             }
+            return false;
         }
 
         if (test) {
