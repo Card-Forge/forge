@@ -76,7 +76,7 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="62" template="../obj/booster.tx" x="240.333" y="302">
+  <object id="62" template="../obj/booster.tx" x="239" y="304" width="18" height="21">
    <properties>
     <property name="reward">[
   {
