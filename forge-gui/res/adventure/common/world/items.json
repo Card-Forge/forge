@@ -190,7 +190,7 @@
     "equipmentSlot": "Left",
     "iconName": "Hivestone",
     "effect": {
-      "lifeModifier": +2,
+      "lifeModifier": 2,
       "startBattleWithCard": [
         "Hivestone"
       ]
