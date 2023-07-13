@@ -30,16 +30,16 @@ Idle
 Idle 
   xy: 224, 12
   size: 32, 20
-Idle 
+Wake 
   xy: 0, 108
   size: 32, 20   
-Idle 
+Wake 
   xy: 32, 108
   size: 32, 20
-Idle 
+Wake 
   xy: 64, 108
   size: 32, 20 
-Idle 
+Wake 
   xy: 96, 108
   size: 32, 20
 Walk

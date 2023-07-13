@@ -5997,8 +5997,8 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Giant bugs holding balls eh ? Count me out. (decline quest)",
-				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"name": "Giant bugs holding balls eh ? Count me out. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -6030,7 +6030,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "Pest control is my speciality, note the location of her hive on my map.(Accept Quest)"
+								"name": "Pest control is my speciality, note the location of her hive on my map.(Accept Quest) (WARNING HARD QUEST)"
 							},
 							{
 								"action": [
@@ -6051,7 +6051,7 @@
 									}
 								],
 								"name": "\"Do you really think I have nothing better to do than hunt down giant insects holding balls? Find someone else to take care of it\" (Decline Quest)",
-								"text": "(-1 Local Reputation) The farmhand keeps a passive look on his face. \"I guess I'm never getting my quiet night's sleep back\"",
+								"text": "The farmhand keeps a passive look on his face. \"I guess I'm never getting my quiet night's sleep back\"",
 								"options": [
 									{
 										"name": "(Leave)"
@@ -6201,7 +6201,7 @@
 					}
 				],
 				"name": "Sorry, I don't have to the time for this. (Decline quest)",
-				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -6233,7 +6233,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "I'll take care of it, note the location of the factory on my map.(Accept Quest)",
+								"name": "I'll take care of it, note the location of the factory on my map.(Accept Quest) (WARNING HARD QUEST)",
 								"text": "Once you have vanquished the mechanical threat and quelled the chaos within the factory, return to me, Maven the Alchemist, and you shall be rewarded handsomely for your bravery and service to our community. Be warned, however, for the path ahead will test your mettle, cunning, and combat prowess. May fortune favor you on this perilous undertaking!"
 							},
 							{
@@ -6255,7 +6255,7 @@
 									}
 								],
 								"name": "\"Do you really think I have nothing better to do ? Find someone else to take care of it\" (Decline Quest)",
-								"text": "(-1 Local Reputation) Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"text": "Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -6298,8 +6298,8 @@
 							{
 								"type": "shards",
 								"probability": 1,
-								"count": 20,
-								"addMaxCount": 20
+								"count": 10,
+								"addMaxCount": 10
 							}
 						]
 					}
@@ -6438,7 +6438,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "Thank you, Elder Taldor. I shall embark on this quest immediately and return triumphant. (Accept Quest)"
+								"name": "Thank you, Elder Taldor. I shall embark on this quest immediately and return triumphant. (Accept Quest) (WARNING HARD QUEST)"
 							},
 							{
 								"action": [
@@ -6459,7 +6459,7 @@
 									}
 								],
 								"name": "After further consideration, I've decided I'm not up to the challenge (Decline Quest)",
-								"text": "(-1 Local Reputation) Elder Taldor keeps a passive look on his face. \"Youths these days, he mumbles\"",
+								"text": "Elder Taldor keeps a passive look on his face. \"Youths these days, he mumbles\"",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -6496,7 +6496,7 @@
 								"type": "card",
 								"probability": 1,
 								"count": 10,
-								"addMaxCount": 20,
+								"addMaxCount": 10,
 								"subTypes": [
 									"Fungus"
 								]
@@ -6606,8 +6606,8 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline quest)",
-				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -6616,7 +6616,7 @@
 			},
 			{
 				"name": "Let me guess, you want to me to deal with this situation ?",
-				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this and eradicate this slimy menace once and for all.",
+				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this town and eradicate this slimy menace once and for all.",
 				"options": [
 					{
 						"name": "I see. So you want me to go to the old sewers and deal with the slimes?",
@@ -6639,7 +6639,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest)"
+								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest) (WARNING HARD QUEST)"
 							},
 							{
 								"action": [
@@ -6660,7 +6660,7 @@
 									}
 								],
 								"name": "I don't intending to get slime on my armor, sorry you have to find someone else (Decline Quest)",
-								"text": "(-1 Local Reputation) The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"text": "The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -6697,7 +6697,7 @@
 								"type": "card",
 								"probability": 1,
 								"count": 7,
-								"addMaxCount": 14,
+								"addMaxCount": 7,
 								"colors": [
 									"Green",
 									"Blue",

@@ -136,7 +136,7 @@
   </object>
   <object id="54" template="../obj/enemy.tx" x="95.9379" y="221.137">
    <properties>
-    <property name="enemy" value="Dino"/>
+    <property name="enemy" value="Dinosaur Elite"/>
    </properties>
   </object>
   <object id="53" template="../obj/enemy.tx" x="208.407" y="95.1393">

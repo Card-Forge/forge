@@ -76,6 +76,7 @@
 	"Island Town Generic",
 	"Island Town Identity",
 	"Island Town Tribal",
+	"Aerie",
 	"NestU",
 	"MerfolkPool",
 	"MerfolkPool1",
@@ -102,7 +103,8 @@
 	"GitaxianLab",
 	"Kiora Island",
 	"Teferi Hideout",
-	"Jacehold"
+	"Jacehold",
+	"Skep"
 ],
 "structures": [
 	{
