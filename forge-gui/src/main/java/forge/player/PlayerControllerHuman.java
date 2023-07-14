@@ -1431,12 +1431,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            CardView cardView;
-            if (effectSA.getView() != null)
-                cardView = effectSA.getView().getHostCard();
-            else
-                cardView = effectSA.getCardView();
-            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
+            return this.getGui().confirm(effectSA.getCardView(), question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, effectSA);
             inp.showAndWait();
