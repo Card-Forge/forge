@@ -184,6 +184,17 @@
         "r_1_1_goblin"
       ]
     }
+ },
+ {
+    "name": "Hivestone",
+    "equipmentSlot": "Left",
+    "iconName": "Hivestone",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Hivestone"
+      ]
+    }
   },
   {
     "name": "Life Amulet",
@@ -348,6 +359,15 @@
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
+    }
+  },
+  {
+    "name": "Armor of the Hivelord",
+    "equipmentSlot": "Body",
+    "iconName": "HiveLordArmor",
+    "effect": {
+      "lifeModifier": 5,
+      "changeStartCards": 1
     }
   },
   {
