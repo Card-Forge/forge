@@ -42,3 +42,18 @@ MageTower
 Skep
   xy: 110,281
   size: 37, 33
+MageTowerBlue
+  xy: 2,327
+  size: 32, 32
+MageTowerRed
+  xy: 36,328
+  size: 32, 32
+MageTowerBlack
+  xy: 63,328
+  size: 32, 32
+MageTowerGreen
+  xy: 92,328
+  size: 32, 32
+MageTowerWhite
+  xy: 121,328
+  size: 32, 32
