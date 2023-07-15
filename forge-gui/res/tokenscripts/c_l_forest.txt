@@ -1,6 +1,5 @@
 Name:Forest Token
 ManaCost:no cost
 Types:Land Forest
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 DeckHas:Ability$Mana.Green
-Oracle:{T}: Add {G}.
+Oracle:({T}: Add {G}.)
