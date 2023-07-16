@@ -2,13 +2,14 @@ package forge.gamemodes.match.input;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -34,7 +35,7 @@ import forge.util.TextUtil;
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
     // some cards can be targeted several times (eg: distribute damage as you choose)
-    private final Map<GameEntity, Integer> targetDepth = new HashMap<>();
+    private final Set<GameEntity> targets = Sets.newHashSet();
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
     private final Collection<Integer> divisionValues;
@@ -60,7 +61,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
         this.mustTargetFiltered = mustTargetFiltered;
         for (final Card card : sa.getTargets().getTargetCards()) {
-            targetDepth.put(card, Integer.valueOf(1));
+            targets.add(card);
             lastTarget = card;
         }
 
@@ -72,7 +73,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                for (final GameEntity c : targetDepth.keySet()) {
+                for (final GameEntity c : targets) {
                     if (c instanceof Card) {
                         controller.getGui().setUsedToPay(CardView.get((Card) c), true);
                     }
@@ -98,20 +99,17 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         } else {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection());
         }
-        if (!targetDepth.entrySet().isEmpty()) {
+        if (!targets.isEmpty()) {
             sb.append("\nTargeted: ");
         }
-        for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
+        for (final GameEntity o : targets) {
             //if it's not in gdx port landscape mode, append the linebreak
             if (!ForgeConstants.isGdxPortLandscape)
                 sb.append("\n");
-            sb.append(o.getKey());
+            sb.append(o);
             //if it's in gdx port landscape mode, instead append the comma with space...
             if (ForgeConstants.isGdxPortLandscape)
                 sb.append(", ");
-            if (o.getValue() > 1) {
-                sb.append(TextUtil.concatNoSpace(" (", String.valueOf(o.getValue()), " times)"));
-            }
         }
         if (!sa.getUniqueTargets().isEmpty()) {
             sb.append("\nParent Targeted:");
@@ -164,7 +162,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+        if (targets.contains(card)) {
+            removeTarget(card);
             return false;
         }
 
@@ -230,7 +229,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // If all cards must have same controllers
         if (tgt.isSameController()) {
             final List<Player> targetedControllers = new ArrayList<>();
-            for (final GameObject o : targetDepth.keySet()) {
+            for (final GameObject o : targets) {
                 if (o instanceof Card) {
                     final Player p = ((Card) o).getController();
                     targetedControllers.add(p);
@@ -245,7 +244,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {
             final List<Player> targetedControllers = new ArrayList<>();
-            for (final GameObject o : targetDepth.keySet()) {
+            for (final GameObject o : targets) {
                 if (o instanceof Card) {
                     final Player p = ((Card) o).getController();
                     targetedControllers.add(p);
@@ -260,7 +259,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // If all cards must have different mana values
         if (tgt.isDifferentCMC()) {
             final List<Integer> targetedCMCs = new ArrayList<>();
-            for (final GameObject o : targetDepth.keySet()) {
+            for (final GameObject o : targets) {
                 if (o instanceof Card) {
                     final Integer cmc = ((Card) o).getCMC();
                     targetedCMCs.add(cmc);
@@ -289,7 +288,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     public String getActivateAction(final Card card) {
-        if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+        if (!tgt.isUniqueTargets() && targets.contains(card)) {
             return null;
         }
         if (choices.contains(card)) {
@@ -300,7 +299,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
-        if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
+        if (targets.contains(player)) {
+            removeTarget(player);
             return;
         }
 
@@ -360,8 +360,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         else if (ge instanceof Player) {
             getController().getGui().setHighlighted(PlayerView.get((Player) ge), true);
         }
-        final Integer val = targetDepth.get(ge);
-        targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
+        targets.add(ge);
 
         if (hasAllTargets()) {
             bOk = true;
@@ -376,8 +375,23 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
     }
 
+    private void removeTarget(final GameEntity ge) {
+        targets.remove(ge);
+        sa.getTargets().remove(ge);
+        if (ge instanceof Card) {
+            getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
+            // try to get last selected card
+            lastTarget = Iterables.getLast(Iterables.filter(targets, Card.class), null);
+        }
+        else if (ge instanceof Player) {
+            getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);
+        }
+
+        this.showMessage();
+    }
+
     private void done() {
-        for (final GameEntity c : targetDepth.keySet()) {
+        for (final GameEntity c : targets) {
             if (c instanceof Card) {
                 getController().getGui().setUsedToPay(CardView.get((Card) c), false);
             }

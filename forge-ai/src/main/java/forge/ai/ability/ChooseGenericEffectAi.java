@@ -75,6 +75,9 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
             return true; // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
         }
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
+            return true;
+        }
 
         return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
     }

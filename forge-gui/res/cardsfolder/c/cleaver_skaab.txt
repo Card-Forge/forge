@@ -2,7 +2,7 @@ Name:Cleaver Skaab
 ManaCost:3 U
 Types:Creature Zombie Horror
 PT:2/4
-A:AB$ CopyPermanent | Cost$ 3 T Sac<1/Zombie.Other/another zombie> | Defined$ Sacrificed | NumCopies$ 2 | AILogic$ AtOppEOT
+A:AB$ CopyPermanent | Cost$ 3 T Sac<1/Zombie.Other/another zombie> | Defined$ Sacrificed | NumCopies$ 2 | AILogic$ AtOppEOT | SpellDescription$ Create two tokens that are copies of the sacrificed creature.
 DeckNeeds:Type$Zombie
 DeckHas:Ability$Sacrifice|Token
 SVar:AIPreference:SacCost$Zombie.Other

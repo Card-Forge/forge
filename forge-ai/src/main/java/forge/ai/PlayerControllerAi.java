@@ -23,7 +23,10 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostEnlist;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -106,7 +109,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, CardCollectionView remaining, int damageDealt, GameEntity defender, boolean overrideOrder) {
-        return ComputerUtilCombat.distributeAIDamage(attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+        return ComputerUtilCombat.distributeAIDamage(player, attacker, blockers, remaining, damageDealt, defender, overrideOrder);
     }
 
     @Override
@@ -257,9 +260,6 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
-        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
-            return true;
-        }
         if (wrapper.isMandatory()) {
             return true;
         }
@@ -1286,23 +1286,28 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
+            String name = "";
             if (logic.equals("MostProminentInComputerDeck")) {
-                return ComputerUtilCard.getMostProminentCardName(aiLibrary);
+                name = ComputerUtilCard.getMostProminentCardName(aiLibrary);
             } else if (logic.equals("MostProminentInHumanDeck")) {
-                return ComputerUtilCard.getMostProminentCardName(oppLibrary);
+                name = ComputerUtilCard.getMostProminentCardName(oppLibrary);
             } else if (logic.equals("MostProminentCreatureInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard(), sa);
-                return ComputerUtilCard.getMostProminentCardName(cards);
+                name = ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("BestCreatureInComputerDeck")) {
                 Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiLibrary);
-                return bestCreature != null ? bestCreature.getName() : "Plains";
+                name = bestCreature != null ? bestCreature.getName() : "";
             } else if (logic.equals("RandomInComputerDeck")) {
-                return Aggregates.random(aiLibrary).getName();
+                name = aiLibrary.isEmpty() ? "" : Aggregates.random(aiLibrary).getName();
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard(), sa);
-                return ComputerUtilCard.getMostProminentCardName(cards);
+                name = ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("CursedScroll")) {
-                return SpecialCardAi.CursedScroll.chooseCard(player, sa);
+                name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
+            }
+
+            if (!StringUtils.isBlank(name)) {
+                return name;
             }
         } else {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());

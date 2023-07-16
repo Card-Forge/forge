@@ -6,20 +6,222 @@ Type=Commander
 ScryfallCode=CMM
 
 [cards]
-79 M Capture of Jingzhou @Jack Wei
+1 S The Prismatic Piper @Seb McKinnon
+2 M Kozilek, the Great Distortion @Aleksi Briclot
+3 M Morophon, the Boundless @Victor Adame Minguez
+6 C Ulamog's Crusher @Todd Lockwood
+10 R Alms Collector @Bram Sels
+11 R Anafenza, Kin-Tree Spirit @Ryan Yee
+13 R Angelic Field Marshal @Scott Murphy
+16 R Balan, Wandering Knight @Svetlin Velinov
+17 U Battle Screech @Anastasia Ovchinnikova
+18 U Cartographer's Hawk @Donato Giancola
+22 U Elite Scaleguard @Steve Prescott
+27 R Grand Abolisher @Eric Deschamps
+35 U Kirtar's Wrath @Kev Walker
+37 M Land Tax @Chuck Lukacs
+50 U Pianna, Nomad Captain @D. Alexander Gregory
+51 R Puresteel Paladin @Jason Chan
+60 R Sublime Exhalation @Lake Hurwitz
+73 R Aminatou's Augury @Seb McKinnon
+74 R Azami, Lady of Scrolls @Ittoku
+75 R Braids, Conjurer Adept @Zoltan Boros & Gabor Szikszai
+79 R Capture of Jingzhou @Jack Wei
+84 R Cyclonic Rift @Chris Rahn
+89 R Evacuation @Franz Vohwinkel
+92 R Faerie Artisans @Tony Foti
+105 R Minds Aglow @Yeong-Hao Han
+108 R Mystic Confluence @Kieran Yanner
 110 R Personal Tutor @Julie Dillon
+118 R Sai, Master Thopterist @Adam Paquette
+120 M Spellseeker @Igor Kieryluk
+122 R Stormsurge Kraken @Svetlin Velinov
+125 R Teferi, Temporal Archmage @Tyler Jacobson
+128 R Torrential Gearhulk @Svetlin Velinov
+130 M Urza, Lord High Artificer @Grzegorz Rutkowski
+134 C Windrider Wizard @Slawomir Maniak
+137 M Archfiend of Despair @Josh Hass
+144 R Chainer, Dementia Master @Mark Zug
+146 R Curtains' Call @James Ryman
+157 U Extinguish All Hope @Aaron J. Riley
+161 R Ghoulcaller Gisa @Karla Ortiz
+169 R Kindred Dominance @Bram Sels
+176 M Ob Nixilis of the Black Oath @Daarken
+191 R Toxic Deluge @Svetlin Velinov
+197 R Wake the Dead @Christopher Moeller
+200 R Wretched Confluence @Kieran Yanner
+202 U Yargle, Glutton of Urborg @Jehan Choo
+205 R Ashling the Pilgrim @Wayne Reynolds
+208 C Blood Aspirant @Tyler Walpole
+213 R Daretti, Scrap Savant @Dan Scott
+218 R Drakuseth, Maw of Flames @Grzegorz Rutkowski
+222 R Fiery Confluence @Kieran Yanner
+231 R Heartless Hidetsugu @Carl Critchlow
+232 R Hellkite Charger @Jaime Jones
+236 M Insurrection @Mark Zug
+238 R Krenko, Mob Boss @Karl Kopinski
+241 R Magus of the Wheel @Carl Frank
+245 R Nesting Dragon @Jehan Choo
+259 M Star of Extinction @Chris Rahn
+265 R Treasure Nabber @Alex Konstad
+267 U Vandalblast @Seb McKinnon
+274 R Azusa, Lost but Seeking @Winona Nelson
+289 M Finale of Devastation @Bayard Wu
+294 M The Great Henge @Adam Paquette
+295 R Heroic Intervention @James Ryman
+297 C Ilysian Caryatid @Winona Nelson
+299 R Jolrael, Mwonvuli Recluse @Izzy
+303 R Lifeblood Hydra @Alex Horley-Orlandelli
+308 R Obscuring Haze @Campbell White
+309 R Ohran Frostfang @Torstein Nordstrand
+310 M Omnath, Locus of Mana @Mike Bierek
+316 R Regal Behemoth @Jakub Kasper
+317 R Rishkar, Peema Renegade @Todd Lockwood
 320 M Selvala, Heart of the Wilds @Tyler Jacobson
+321 C Skyshroud Claim @Anna Steinbauer
+331 R Wayward Swordtooth @Chris Rahn
+334 R Yisan, the Wanderer Bard @Chase Stone
+342 R Karador, Ghost Chieftain @Todd Lockwood
+344 R Maelstrom Wanderer @Victor Adame Minguez
+348 M Mizzix of the Izmagnus @Cliff Childs
+350 R Queen Marchesa @Kieran Yanner
 361 M The Ur-Dragon @Jaime Jones
+367 C Arcane Signet @Dan Scott
+371 R Boompile @Filip Burburan
+372 C Brass Knuckles @Yeong-Hao Han
+375 R Champion's Helm @Alan Pollack
+379 R Emerald Medallion @Daniel Ljunggren
+382 U Fellwar Stone @John Avon
+388 R Hammer of Nazahn @Victor Adame Minguez
+393 M The Immortal Sun @Kieran Yanner
+395 R Jet Medallion @Daniel Ljunggren
 396 M Jeweled Lotus @Alayna Danner
-483 M Capture of Jingzhou @Jack Wei
+401 R Pearl Medallion @Daniel Ljunggren
+405 R Ruby Medallion @Daniel Ljunggren
+407 R Sapphire Medallion @Daniel Ljunggren
+410 U Sol Ring @Mike Bierek
+415 U Thran Dynamo @Ron Spears
+420 C Command Tower @Ryan Yee
+423 C Path of Ancestry @Alayna Danner
+426 U Rogue's Passage @Christine Choi
+429 C Thriving Bluff @Johannes Voss
+430 C Thriving Grove @Ravenna Tran
+431 C Thriving Heath @Alayna Danner
+432 C Thriving Isle @Jonas De Ro
+433 C Thriving Moor @Titus Lunter
+437 L Plains @Alayna Danner
+438 L Plains @Rebecca Guay
+439 L Plains @Mark Poole
+440 L Island @Alayna Danner
+441 L Island @Rebecca Guay
+442 L Island @Mark Poole
+443 L Swamp @Alayna Danner
+444 L Swamp @Rebecca Guay
+445 L Swamp @Mark Poole
+446 L Mountain @Alayna Danner
+447 L Mountain @Rebecca Guay
+448 L Mountain @Mark Poole
+449 L Forest @Alayna Danner
+450 L Forest @Rebecca Guay
+451 L Forest @Mark Poole
+452 M Kozilek, the Great Distortion @Aleksi Briclot
+455 R Alms Collector @Bram Sels
+456 R Angelic Field Marshal @Scott Murphy
+458 R Balan, Wandering Knight @Svetlin Velinov
+460 R Grand Abolisher @Eric Deschamps
+462 M Heliod, Sun-Crowned @Lius Lasahido
+464 M Land Tax @Chuck Lukacs
+469 R Puresteel Paladin @Jason Chan
+475 R Sublime Exhalation @Lake Hurwitz
+479 R Aminatou's Augury @Seb McKinnon
+481 R Braids, Conjurer Adept @Zoltan Boros & Gabor Szikszai
+483 R Capture of Jingzhou @Jack Wei
+488 R Faerie Artisans @Tony Foti
+490 R Lorthos, the Tidemaker @Kekai Kotaki
+491 R Minds Aglow @Yeong-Hao Han
+492 R Mystic Confluence @Kieran Yanner
 493 R Personal Tutor @Julie Dillon
+495 M Spellseeker @Igor Kieryluk
+497 R Stormsurge Kraken @Svetlin Velinov
+500 R Teferi, Temporal Archmage @Tyler Jacobson
+502 M Urza, Lord High Artificer @Grzegorz Rutkowski
+503 M Archfiend of Despair @Josh Hass
+505 R Chainer, Dementia Master @Mark Zug
+507 R Deadly Rollick @Izzy
+517 M Ob Nixilis of the Black Oath @Daarken
+522 R Sower of Discord @Wisnu Tan
+523 R Toxic Deluge @Svetlin Velinov
+526 R Wake the Dead @Christopher Moeller
+527 R Wretched Confluence @Kieran Yanner
+529 R Avatar of Slaughter @Jason A. Engle
+531 R Daretti, Scrap Savant @Dan Scott
+542 M Insurrection @Mark Zug
+543 R Krenko, Mob Boss @Karl Kopinski
+544 R Magus of the Wheel @Carl Frank
+546 R Nesting Dragon @Jehan Choo
+548 R Savage Beating @Matt Thompson
+550 M Star of Extinction @Chris Rahn
+552 R Treasure Nabber @Alex Konstad
+554 R Azusa, Lost but Seeking @Winona Nelson
+559 M Finale of Devastation @Bayard Wu
+563 R Heroic Intervention @James Ryman
+564 R Jolrael, Mwonvuli Recluse @Izzy
+565 R Lifeblood Hydra @Alex Horley-Orlandelli
+566 R Obscuring Haze @Campbell White
+568 M Omnath, Locus of Mana @Mike Bierek
+569 R Regal Behemoth @Jakub Kasper
 571 M Selvala, Heart of the Wilds @Tyler Jacobson
+576 R Wayward Swordtooth @Chris Rahn
+577 R Yisan, the Wanderer Bard @Chase Stone
+578 R Experiment Kraj @Mark Tedin
+581 R Karador, Ghost Chieftain @Todd Lockwood
+583 R Maelstrom Wanderer @Victor Adame Minguez
+586 M Mizzix of the Izmagnus @Cliff Childs
+587 M Nekusar, the Mindrazer @Mark Winters
+588 R Queen Marchesa @Kieran Yanner
 594 M The Ur-Dragon @Jaime Jones
+600 R Boompile @Filip Burburan
+601 R Champion's Helm @Alan Pollack
+602 R Chromatic Lantern @Jung Park
+603 R Emerald Medallion @Daniel Ljunggren
+606 R Hammer of Nazahn @Victor Adame Minguez
+608 M The Immortal Sun @Kieran Yanner
+610 R Jet Medallion @Daniel Ljunggren
 611 M Jeweled Lotus @Alayna Danner
+612 R Pearl Medallion @Daniel Ljunggren
+613 R Ruby Medallion @Daniel Ljunggren
+614 R Sapphire Medallion @Daniel Ljunggren
+625 R Grand Abolisher @
+627 R Puresteel Paladin @Richard Kane Ferguson
 633 R Personal Tutor @Jeff Miracola
+635 M Spellseeker @
+640 R Kindred Dominance @Thomas M. Baxa
+643 R Magus of the Wheel @Scott M. Fischer
+645 R Treasure Nabber @Pete Venters
+646 U Vandalblast @
+651 R Regal Behemoth @
+653 U Arcane Signet @Drew Tucker
+654 R Champion's Helm @Paolo Parente
+656 R Extraplanar Lens @Ron Spears
+657 U Fellwar Stone @Randy Gallegos
+658 U Thran Dynamo @
+661 C Path of Ancestry @
+663 U Reliquary Tower @Mark Poole
+668 M Kozilek, the Great Distortion @Grant Griffin
+671 U Kemba, Kha Regent @Peter Diamond
+679 R Azusa, Lost but Seeking @Benjamin Ee
+680 M Omnath, Locus of Mana @
 681 M Selvala, Heart of the Wilds @Jack Hughes
+683 R Kykar, Wind's Fury @April Prime
+684 R Maelstrom Wanderer @
 689 M The Ur-Dragon @Tyler Walpole
+693 M Smothering Tithe @Jeff Miracola
+695 R Deadly Rollick @Izzy
+699 M Insurrection @
+700 M Finale of Devastation @Daren Bader
+701 R Obscuring Haze @Daren Bader
 702 M Jeweled Lotus @Olena Richards
+703 U Sol Ring @Mark Poole
 704 M Zhulodok, Void Gorger @Lius Lasahido
 705 M Anikthea, Hand of Erebos @Magali Villeneuve
 706 M Commodore Guff @Matt Stewart
@@ -31,6 +233,10 @@ ScryfallCode=CMM
 780 M Anikthea, Hand of Erebos @Magali Villeneuve
 781 M Commodore Guff @Matt Stewart
 782 M Sliver Gravemother @Chris Rahn
+1057 M Kozilek, the Great Distortion @Grant Griffin
+1060 M Urza, Lord High Artificer @
+1063 M Omnath, Locus of Mana @
 1064 M Selvala, Heart of the Wilds @Jack Hughes
 1065 M The Ur-Dragon @Tyler Walpole
 1066 M Jeweled Lotus @Olena Richards
+1067 R Disrupt Decorum @Ron Spencer

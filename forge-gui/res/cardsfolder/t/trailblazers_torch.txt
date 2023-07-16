@@ -4,6 +4,6 @@ Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
 SVar:TrigInitiative:DB$ TakeInitiative
 T:Mode$ AttackerBlocked | ValidCard$ Creature.EquippedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature becomes blocked, it deals 2 damage to each creature blocking it.
-SVar:TrigDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.blockingEquipped
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.blockingEquipped | DamageSource$ TriggeredAttackerLKICopy
 K:Equip:1
 Oracle:When Trailblazer's Torch enters the battlefield, you take the initiative.\nWhenever equipped creature becomes blocked, it deals 2 damage to each creature blocking it.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

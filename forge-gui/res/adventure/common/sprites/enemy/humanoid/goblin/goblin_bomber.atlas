@@ -1,0 +1,83 @@
+goblin_bomber.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 138, 12
+  size: 14, 14
+Idle 
+  xy: 8, 12
+  size: 20, 20
+Idle 
+  xy: 40, 12
+  size: 20, 20
+Idle 
+  xy: 72, 12
+  size: 20, 20
+Idle 
+  xy: 104, 12
+  size: 20, 20
+Idle 
+  xy: 136, 12
+  size: 20, 20
+Walk
+  xy: 8,42
+  size: 20, 22
+Walk
+  xy: 40,42
+  size: 20, 22
+Walk
+  xy: 72,42
+  size: 20, 22
+Walk
+  xy: 104,42
+  size: 20, 22
+Walk
+  xy: 136, 42
+  size: 20, 22
+Walk
+  xy: 168, 42
+  size: 20, 22
+Walk
+  xy: 200, 42
+  size: 20, 22
+Walk
+  xy: 232, 42
+  size: 20, 22
+Attack
+  xy: 8,68
+  size: 20, 28
+Attack
+  xy: 40,68
+  size: 20, 28
+Attack
+  xy: 72,68
+  size: 20, 28
+Attack
+  xy: 104,68
+  size: 20, 28
+Attack
+  xy: 136,68
+  size: 20, 28
+Attack
+  xy: 168,68
+  size: 20, 28
+Attack
+  xy: 200,68
+  size: 20, 28
+Attack
+  xy: 232,68
+  size: 20, 28
+Death
+  xy: 8, 174
+  size: 20, 18
+Death
+  xy: 40, 174
+  size: 20, 18
+Death
+  xy: 72, 174
+  size: 20, 18
+Death
+  xy: 104, 174
+  size: 20, 18

@@ -1720,14 +1720,10 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (Object o : objects) {
-                if (o instanceof GameEntity) {
-                    final GameEntity ge = (GameEntity) o;
-                    if (ge.canBeTargetedBy(topStack)) {
-                        canBeTargeted.add(ge);
-                    }
+            for (GameEntity ge : topStack.getTargets().getTargetEntities()) {
+                if (ge.canBeTargetedBy(topStack)) {
+                    canBeTargeted.add(ge);
                 }
             }
             if (canBeTargeted.isEmpty()) {
@@ -2423,6 +2419,18 @@ public class ComputerUtil {
                             chosen = type;
                         }
                     }
+                }
+            } else if ("ProtectionFromType".equals(logic)) {
+                // TODO: protection vs. damage-dealing and milling instants/sorceries in low creature decks and the like?
+                // Maybe non-creature artifacts in certain cases?
+                List<String> choices = ImmutableList.of("Creature", "Planeswalker"); // types that make sense to get protected against
+                CardCollection evalList = new CardCollection();
+
+                evalList.addAll(ai.getOpponents().getCardsIn(ZoneType.Battlefield));
+
+                chosen = ComputerUtilCard.getMostProminentCardType(evalList, choices);
+                if (StringUtils.isEmpty(chosen)) {
+                    chosen = "Creature"; // if in doubt, choose Creature, I guess
                 }
             }
             else {

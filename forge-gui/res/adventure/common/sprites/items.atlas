@@ -120,8 +120,14 @@ MoxSapphire
 MoxPearl
   xy: 320, 64
   size: 16, 16
+Hivestone
+  xy: 144, 720
+  size: 16, 16
 BattleStandard
   xy: 96, 592
+  size: 16, 16 
+HiveLordArmor
+  xy: 112, 0
   size: 16, 16 
 LifeAmulet
   xy: 0, 864
@@ -468,4 +474,9 @@ CartoucheOfAmbition
 CartoucheOfZeal
   xy:320,240
   size:16,16
-
+HallowedSigil
+  xy:320,256
+  size:16,16
+UnhallowedSigil
+  xy:320,272
+  size:16,16

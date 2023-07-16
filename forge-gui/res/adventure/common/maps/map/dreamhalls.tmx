@@ -10,6 +10,7 @@
  </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzFVNEOgyAMLG/yYXOGH102/Ssz4mcMszbrTsTCTHYJgYDcXYst0RuPjv6Cqz+HZ/U/pjEZ44hJ9w7fBvbi1NC8vf8e69mT78zerj1AzKgrvNqHK/AFYw51zLc0L6A7KM3gt/Gi75qYI99dFIdoiS/RxXhLb3WE3n9mzKdoO/aVy/Nezn7VlX08R20iu2arbonjDN09zpK3EqQmdb3X5rlFV///M6+nrl1Xeq61hjSk9rAfjexnz1drz8ohxy+cuC+9Bf1bIbWn443wXhfoZ0TbnlULa59BoLda1NR8C16fd0IQ
@@ -17,7 +18,7 @@
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzL4GFgyBjFo3gUj+JRPIpH8YjAALfm5xk=
+   eJw7Zs7AcGwUj+JRPIpH8SgexSMCAwA4PvgW
   </data>
  </layer>
  <layer id="12" name="Shroud" width="30" height="17" opacity="0.15">
@@ -135,7 +136,7 @@
   </object>
   <object id="54" template="../obj/enemy.tx" x="95.9379" y="221.137">
    <properties>
-    <property name="enemy" value="Dino"/>
+    <property name="enemy" value="Dinosaur Elite"/>
    </properties>
   </object>
   <object id="53" template="../obj/enemy.tx" x="208.407" y="95.1393">
