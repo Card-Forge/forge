@@ -166,6 +166,7 @@ public class MapDialog {
                 int vol = FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC);
                 if (vol > 0) {
                     fadeOut();
+                    audio.getRight().setOnCompletionListener(music -> fadeIn());
                     audio.getRight().play();
                 }
             } else {

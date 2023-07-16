@@ -271,6 +271,7 @@ public enum FSkinProp {
     ICO_MANASHARD         (new int[] {2, 304, 100, 100}, PropType.ADVENTURE),
     ICO_ADVLOGO           (new int[] {2, 2, 300, 300}, PropType.ADVENTURE),
     ICO_ADVDECKBOX        (new int[] {111, 365, 192, 240}, PropType.ADVENTURE),
+    ICO_ADVFLIP           (new int[] {10, 504, 80, 80}, PropType.ADVENTURE),
 
     //menu icon
     ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
