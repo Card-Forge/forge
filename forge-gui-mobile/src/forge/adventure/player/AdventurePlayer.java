@@ -282,9 +282,37 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (this.difficultyData.sellFactor == 0)
             this.difficultyData.sellFactor = 0.2f;
 
-        this.difficultyData.shardSellRatio = data.readFloat("sellFactor");
-        if (this.difficultyData.shardSellRatio == 0)
-            this.difficultyData.shardSellRatio = 0.8f;
+        //Previously these were not being read from or written to save files, causing defaults to appear after reload
+        //Pull from config if appropriate
+        DifficultyData configuredDifficulty = null;
+        for (DifficultyData candidate : Config.instance().getConfigData().difficulties) {
+            if (candidate.name.equals(this.difficultyData.name)) {
+                configuredDifficulty = candidate;
+                break;
+            }
+        }
+
+        if (configuredDifficulty != null  && (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0))
+            this.difficultyData.shardSellRatio = configuredDifficulty.shardSellRatio;
+        else
+            this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
+        if (configuredDifficulty != null && !data.containsKey("goldLoss"))
+            this.difficultyData.goldLoss = configuredDifficulty.goldLoss;
+        else
+            this.difficultyData.goldLoss = data.readFloat("goldLoss");
+        if (configuredDifficulty != null && !data.containsKey("lifeLoss"))
+            this.difficultyData.lifeLoss = configuredDifficulty.lifeLoss;
+        else
+            this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
+        if (configuredDifficulty != null && !data.containsKey("spawnRank"))
+            this.difficultyData.spawnRank = configuredDifficulty.spawnRank;
+        else
+            this.difficultyData.spawnRank = data.readInt("spawnRank");
+        if (configuredDifficulty != null && !data.containsKey("rewardMaxFactor"))
+            this.difficultyData.rewardMaxFactor = configuredDifficulty.rewardMaxFactor;
+        else
+            this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
+        // END SPECIAL CASES
 
         name = data.readString("name");
         heroRace = data.readInt("heroRace");
@@ -413,6 +441,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("enemyLifeFactor", this.difficultyData.enemyLifeFactor);
         data.store("sellFactor", this.difficultyData.sellFactor);
         data.store("shardSellRatio", this.difficultyData.shardSellRatio);
+        data.store("goldLoss", this.difficultyData.goldLoss);
+        data.store("lifeLoss", this.difficultyData.lifeLoss);
+        data.store("spawnRank", this.difficultyData.spawnRank);
+        data.store("rewardMaxFactor", this.difficultyData.rewardMaxFactor);
 
         data.store("name", name);
         data.store("heroRace", heroRace);
