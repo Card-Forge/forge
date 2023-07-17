@@ -10,7 +10,7 @@ import java.util.Map;
 public class TriggerRingbearerChosen extends Trigger {
 
     /**
-     * Instantiates a new trigger transformed.
+     * Instantiates a new trigger ring-bearer chosen.
      *
      * @param params the params
      * @param host the host
