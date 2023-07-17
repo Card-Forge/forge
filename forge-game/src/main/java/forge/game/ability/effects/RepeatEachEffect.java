@@ -4,18 +4,21 @@ import java.util.*;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 
@@ -81,9 +84,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChangeZoneTable")) {
             sa.setChangeZoneTable(new CardZoneTable());
         }
+        if (sa.hasParam("LoseLifeMap")) {
+            sa.setLoseLifeMap(Maps.newHashMap());
+        }
 
         if (loopOverCards) {
-            if (sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
+            if (sa.hasParam("ChooseOrder") && repeatCards.size() > 1) {
                 final Player chooser = sa.getParam("ChooseOrder").equals("True") ? player :
                         AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
                 repeatCards = chooser.getController().orderMoveToZoneList(repeatCards, ZoneType.None, sa);
@@ -206,6 +212,14 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChangeZoneTable")) {
             sa.getChangeZoneTable().triggerChangesZoneAll(game, sa);
             sa.setChangeZoneTable(null);
+        }
+        if (sa.hasParam("LoseLifeMap")) {
+            Map<Player, Integer> lossMap = sa.getLoseLifeMap();
+            if (!lossMap.isEmpty()) {
+                final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+            }
+            sa.setLoseLifeMap(null);
         }
     }
 }

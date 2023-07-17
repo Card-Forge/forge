@@ -83,6 +83,7 @@ public enum TriggerType {
     LandPlayed(TriggerLandPlayed.class),
     LifeGained(TriggerLifeGained.class),
     LifeLost(TriggerLifeLost.class),
+    LifeLostAll(TriggerLifeLostAll.class),
     LosesGame(TriggerLosesGame.class),
     ManaAdded(TriggerManaAdded.class),
     MilledAll(TriggerMilledAll.class),

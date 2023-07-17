@@ -1,8 +1,14 @@
 Name:Killing Wave
 ManaCost:X B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ X B | RepeatCards$ Creature | Zone$ Battlefield | RepeatSubAbility$ DBSacUnless | SpellDescription$ For each creature, its controller sacrifices it unless they pay X life.
-SVar:DBSacUnless:DB$ Sacrifice | Defined$ Player | SacValid$ Remembered.Self | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | Random$ True | StackDescription$ Sacrifice {c:Remembered}
+A:SP$ RepeatEach | Cost$ X B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseKeep | SubAbility$ DBRepeatPay | SpellDescription$ For each creature, its controller sacrifices it unless they pay X life.
+SVar:DBChooseKeep:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | MinAmount$ 0 | Amount$ Count$Valid Creature.RememberedPlayerCtrl | RememberChosen$ True
+SVar:DBRepeatPay:DB$ RepeatEach | RepeatPlayers$ Player | LoseLifeMap$ True | RepeatSubAbility$ DBPay | SubAbility$ DBSacAll
+SVar:DBPay:DB$ Pump | ForgetObjects$ Valid Creature.RememberedPlayerCtrl | UnlessCost$ PayLife<Y> | UnlessPayer$ Remembered
+SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
+SVar:Y:SVar$X/Times.Z
+SVar:Z:Count$Valid Creature.RememberedPlayerCtrl+IsRemembered
 AI:RemoveDeck:All
 Oracle:For each creature, its controller sacrifices it unless they pay X life.
