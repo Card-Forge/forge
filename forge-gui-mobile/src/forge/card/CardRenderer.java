@@ -878,6 +878,11 @@ public class CardRenderer {
             abiY += abiSpace;
             abiCount += 1;
         }
+        if (card.isRingBearer()) {
+            CardFaceSymbols.drawSymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
         if (card.getCurrentState().hasFlying()) {
             CardFaceSymbols.drawSymbol("flying", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
