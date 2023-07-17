@@ -2303,6 +2303,7 @@ monarch_cmr.jpg https://downloads.cardforge.org/images/tokens/monarch_cmr.jpg
 monarch_moc.jpg https://downloads.cardforge.org/images/tokens/monarch_moc.jpg
 morph.jpg https://downloads.cardforge.org/images/tokens/morph.jpg
 night_mid.jpg https://downloads.cardforge.org/images/tokens/night_mid.jpg
+the_ring.jpg https://downloads.cardforge.org/images/tokens/the_ring.jpg
 
 #Pets
 
