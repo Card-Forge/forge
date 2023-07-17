@@ -465,12 +465,20 @@ public class PhaseHandler implements java.io.Serializable {
             throw new IllegalStateException("Phase.nextPhase() is called, but Stack isn't empty.");
         }
 
+        final Map<Player, Integer> lossMap = Maps.newHashMap();
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
 
             if (p.getManaPool().hasBurn()) {
-                p.loseLife(burn, false, true);
+                final int lost = p.loseLife(burn, false, true);
+                if (lost > 0) {
+                    lossMap.put(p, lost);
+                }
             }
+        }
+        if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+            final Map<AbilityKey, Object> runLifeLostParams = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runLifeLostParams, false);
         }
 
         switch (phase) {

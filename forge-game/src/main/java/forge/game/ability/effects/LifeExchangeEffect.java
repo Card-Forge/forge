@@ -1,11 +1,15 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
+import com.google.common.collect.Maps;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
+
+import java.util.List;
+import java.util.Map;
 
 public class LifeExchangeEffect extends SpellAbilityEffect {
 
@@ -56,17 +60,27 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
             source.addRemembered(diff);
         }
 
+        final Map<Player, Integer> lossMap = Maps.newHashMap();
         if ((life1 > life2) && p1.canLoseLife() && p2.canGainLife()) {
             final int diff = life1 - life2;
-            p1.loseLife(diff, false, false);
+            final int lost = p1.loseLife(diff, false, false);
             p2.gainLife(diff, source, sa);
+            if (lost > 0) {
+                lossMap.put(p1, lost);
+            }
         } else if ((life2 > life1) && p2.canLoseLife() && p1.canGainLife()) {
             final int diff = life2 - life1;
-            p2.loseLife(diff, false, false);
+            final int lost = p2.loseLife(diff, false, false);
             p1.gainLife(diff, source, sa);
+            if (lost > 0) {
+                lossMap.put(p2, lost);
+            }
         } else {
-            // they are equal, so nothing to do
+            // they are equal or can't be exchanged, so nothing to do
+        }
+        if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+            source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
         }
     }
-
 }

@@ -620,13 +620,26 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        loseLife(lifePayment, false, false);
+        final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
+        if (lost > 0) { // Run triggers if player actually lost life
+            boolean runAll = false;
+            Map<Player, Integer> lossMap = cause.getLoseLifeMap();
+            if (lossMap == null) {
+                lossMap = Maps.newHashMap();
+                runAll = true;
+            }
+            lossMap.put(this, lost);
+            if (runAll) {
+                final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+            }
+        }
 
         return true;
     }
@@ -691,12 +704,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
-            if (isCombat) {
-                // currently all abilities treat is as single event
-                simultaneousDamage += amount;
-            } else {
-                loseLife(amount, true, false);
-            }
+            simultaneousDamage += amount;
         }
 
         if (isCombat) {
@@ -829,9 +837,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return restDamage;
     }
 
-    public final void dealCombatDamage() {
-        loseLife(simultaneousDamage, true, false);
+    public final int processDamage() {
+        int lost = loseLife(simultaneousDamage, true, false);
         simultaneousDamage = 0;
+        return lost;
     }
 
     /**
