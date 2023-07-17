@@ -20,6 +20,7 @@ public class Reward {
     PaperCard card;
     ItemData item;
     Deck deck;
+    boolean isNoSell;
     private final int count;
 
     public Reward(ItemData item) {
@@ -32,22 +33,31 @@ public class Reward {
         this.count = count;
     }
     public Reward(PaperCard card) {
+        this(card,false);
+    }
+    public Reward(PaperCard card, boolean isNoSell) {
         type      = Type.Card;
         this.card = card;
         count     = 0;
+        this.isNoSell = isNoSell;
     }
     public Reward(Type type, int count) {
         this.type  = type;
         this.count = count;
     }
     public Reward(Deck deck) {
+        this(deck, false);
+    }
+    public Reward(Deck deck, boolean isNoSell) {
         type      = Type.CardPack;
         this.deck = deck;
         count     = 0;
+        this.isNoSell = isNoSell;
     }
     public PaperCard getCard() { return card;  }
     public ItemData getItem()  { return item;  }
     public Deck getDeck()      { return deck;  }
     public Type getType()      { return type;  }
     public int getCount()      { return count; }
+    public boolean isNoSell()      { return isNoSell; }
 }

@@ -12,8 +12,8 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
-import forge.adventure.util.*;
 import forge.adventure.stage.WorldStage;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -200,7 +200,8 @@ public class NewGameScene extends UIScene {
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
-            WorldStage.getInstance().setupNewGame();
+            WorldStage.getInstance().setDirectlyEnterPOI();
+            //AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));

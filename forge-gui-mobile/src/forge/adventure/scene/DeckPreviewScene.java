@@ -1,28 +1,31 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import forge.adventure.data.AdventureEventData;
+import forge.deck.Deck;
 import forge.screens.FScreen;
 
 /**
  * DeckEditScene
  * scene class that contains the Deck editor
  */
-public class DeckEditScene extends ForgeScene {
+public class DeckPreviewScene extends ForgeScene {
 
     AdventureDeckEditor screen;
     Stage stage;
-    AdventureEventData currentEvent;
+    Deck deckToPreview;
 
-    private DeckEditScene() {
+    private DeckPreviewScene() {
 
     }
 
-    private static DeckEditScene object;
+    private static DeckPreviewScene object;
 
-    public static DeckEditScene getInstance() {
+    public static DeckPreviewScene getInstance(Deck deckToPreview) {
         if(object==null)
-            object=new DeckEditScene();
+            object=new DeckPreviewScene();
+
+        object.deckToPreview = deckToPreview;
+
         return object;
     }
 
@@ -33,9 +36,7 @@ public class DeckEditScene extends ForgeScene {
             stage.dispose();
     }
 
-    public void loadEvent(AdventureEventData event){
-        currentEvent = event;
-    }
+
 
     @Override
     public void enter() {
@@ -45,18 +46,12 @@ public class DeckEditScene extends ForgeScene {
         super.enter();
 
     }
-
     @Override
     public FScreen getScreen() {
         if (screen==null){
-            if (currentEvent == null){
-                screen = new AdventureDeckEditor(false);
-                screen.setEvent(null);
-            }
-            else {
-                screen = new AdventureDeckEditor(currentEvent);
-            }
+            screen = new AdventureDeckEditor(deckToPreview);
         }
+        screen.setEvent(null);
         return screen;
     }
 

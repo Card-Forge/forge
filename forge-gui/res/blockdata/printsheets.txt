@@ -5997,60 +5997,60 @@ Kaya, Ghost Assassin|CN2|2
 1 Phyrexian Vindicator|ONE
 
 [MOM Brood 1]
-1 Essence of Orthodoxy
-1 Norn's Inquisitor
-1 Phyrexian Pegasus
-1 Alabaster Host Sanctifier
-1 Infected Defector
-1 Alabaster Host Intercessor
-1 Seedpod Caretaker
-1 Tiller of Flesh
-1 Sunder the Gateway
-1 Angelic Intervention
-1 Cut Short
-8 Plains
+1 Essence of Orthodoxy|MOM
+1 Norn's Inquisitor|MOM
+1 Phyrexian Pegasus|MOM
+1 Alabaster Host Sanctifier|MOM
+1 Infected Defector|MOM
+1 Alabaster Host Intercessor|MOM
+1 Seedpod Caretaker|MOM
+1 Tiller of Flesh|MOM
+1 Sunder the Gateway|MOM
+1 Angelic Intervention|MOM
+1 Cut Short|MOM
+8 Plains|MOM
 
 [MOM Brood 2]
-1 Essence of Orthodoxy
-1 Phyrexian Pegasus
-1 Seedpod Caretaker
-1 Norn's Inquisitor
-1 Alabaster Host Sanctifier
-1 Infected Defector
-1 Alabaster Host Intercessor
-1 Tiller of Flesh
-1 Aerial Boost
-1 Inspired Charge
-1 Seal from Existence
-8 Plains
+1 Essence of Orthodoxy|MOM
+1 Phyrexian Pegasus|MOM
+1 Seedpod Caretaker|MOM
+1 Norn's Inquisitor|MOM
+1 Alabaster Host Sanctifier|MOM
+1 Infected Defector|MOM
+1 Alabaster Host Intercessor|MOM
+1 Tiller of Flesh|MOM
+1 Aerial Boost|MOM
+1 Inspired Charge|MOM
+1 Seal from Existence|MOM
+8 Plains|MOM
 
 [MOM Overachiever 1]
-1 Zephyr Winder
-1 Expedition Lookout
-1 Preening Champion
-1 Thunderhead Squadron
-1 Tidal Terror
-1 Referee Squad
-1 Oracle of Tragedy
-1 Interdisciplinary Mascot
-1 Temporal Cleansing
-1 Ephara's Dispersal
-1 Meeting of Minds
-8 Island
+1 Zephyr Winder|MOM
+1 Expedition Lookout|MOM
+1 Preening Champion|MOM
+1 Thunderhead Squadron|MOM
+1 Tidal Terror|MOM
+1 Referee Squad|MOM
+1 Oracle of Tragedy|MOM
+1 Interdisciplinary Mascot|MOM
+1 Temporal Cleansing|MOM
+1 Ephara's Dispersal|MOM
+1 Meeting of Minds|MOM
+8 Island|MOM
 
 [MOM Overachiever 2]
-1 Zephyr Winder
-1 Expedition Lookout
-1 Xerex Strobe-Knight
-1 Thunderhead Squadron
-1 Tidal Terror
-1 Referee Squad
-1 Oracle of Tragedy
-1 Interdisciplinary Mascot
-1 Ephara's Dispersal
-1 Wicked Slumber
-1 Astral Wingspan
-8 Island
+1 Zephyr Winder|MOM
+1 Expedition Lookout|MOM
+1 Xerex Strobe-Knight|MOM
+1 Thunderhead Squadron|MOM
+1 Tidal Terror|MOM
+1 Referee Squad|MOM
+1 Oracle of Tragedy|MOM
+1 Interdisciplinary Mascot|MOM
+1 Ephara's Dispersal|MOM
+1 Wicked Slumber|MOM
+1 Astral Wingspan|MOM
+8 Island|MOM
 
 [MOM Expendable 1]
 1 Terror of Towashi|MOM
@@ -6119,7 +6119,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Arachnoid Adaptation|MOM
 1 Cosmic Hunger|MOM
 1 Fertilid's Favor|MOM
-8 Forest
+8 Forest|MOM
 
 [MOM Buff 2]
 1 Surrak and Goreclaw|MOM
