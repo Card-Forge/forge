@@ -175,6 +175,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
+    private final Map<Long, List<String>> designation = Maps.newHashMap();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -7395,6 +7396,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean canBlockAny() {
         return !canBlockAny.isEmpty();
+    }
+
+    public void addDesignation(long timestamp, List<String> designations) {
+        designation.put(timestamp, designations);
+        getView().updateDesignation(this);
+    }
+
+    public boolean removeDesignation(long timestamp) {
+        boolean result = designation.remove(timestamp) != null;
+        if (result) {
+            getView().updateDesignation(this);
+        }
+        return result;
+    }
+
+    public List<String> getDesignations() {
+        List<String> result = Lists.newArrayList();
+        for (List<String> designations : designation.values()) {
+            result.addAll(designations);
+        }
+        return result;
     }
 
     public boolean removeChangedState() {
