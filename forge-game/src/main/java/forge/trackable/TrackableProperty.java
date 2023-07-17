@@ -74,6 +74,7 @@ public enum TrackableProperty {
     ChosenSector(TrackableTypes.StringType),
     Sector(TrackableTypes.StringType),
     ClassLevel(TrackableTypes.IntegerType),
+    RingLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
     Remembered(TrackableTypes.StringType),
