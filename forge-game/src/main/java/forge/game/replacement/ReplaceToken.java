@@ -39,12 +39,6 @@ public class ReplaceToken extends ReplacementEffect {
             return false;
         }
 
-        /*/
-        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Token))) {
-            return false;
-        }
-        //*/
-
         if (filterAmount((TokenCreateTable) runParams.get(AbilityKey.Token)) <= 0) {
             return false;
         }
