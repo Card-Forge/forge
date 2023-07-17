@@ -66,7 +66,6 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
@@ -1844,14 +1843,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public CardCollectionView findTargetedCards() {
         // First search for targeted cards associated with current ability
-        if (targetChosen.isTargetingAnyCard()) {
-            return targetChosen.getTargetCards();
+        if (getTargets().isTargetingAnyCard()) {
+            return getTargets().getTargetCards();
         }
 
         // Next search for source cards of targeted SAs associated with current ability
-        if (targetChosen.isTargetingAnySpell()) {
+        if (getTargets().isTargetingAnySpell()) {
             CardCollection res = new CardCollection();
-            for (final SpellAbility ability : targetChosen.getTargetSpells()) {
+            for (final SpellAbility ability : getTargets().getTargetSpells()) {
                 res.add(ability.getHostCard());
             }
             return res;
@@ -1873,16 +1872,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getSATargetingCard() {
-        return targetChosen.isTargetingAnyCard() ? this : getParentTargetingCard();
+        return getTargets().isTargetingAnyCard() ? this : getParentTargetingCard();
     }
 
     public SpellAbility getParentTargetingCard() {
         SpellAbility parent = getParent();
-        if (parent instanceof WrappedAbility) {
-            parent = ((WrappedAbility) parent).getWrappedAbility();
-        }
         while (parent != null) {
-            if (parent.targetChosen.isTargetingAnyCard()) {
+            if (parent.getTargets().isTargetingAnyCard()) {
                 return parent;
             }
             parent = parent.getParent();
@@ -1891,13 +1887,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getSATargetingSA() {
-        return targetChosen.isTargetingAnySpell() ? this : getParentTargetingSA();
+        return getTargets().isTargetingAnySpell() ? this : getParentTargetingSA();
     }
 
     public SpellAbility getParentTargetingSA() {
         SpellAbility parent = getParent();
         while (parent != null) {
-            if (parent.targetChosen.isTargetingAnySpell())
+            if (parent.getTargets().isTargetingAnySpell())
                 return parent;
             parent = parent.getParent();
         }
@@ -1905,7 +1901,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getSATargetingPlayer() {
-        return targetChosen.isTargetingAnyPlayer() ? this : getParentTargetingPlayer();
+        return getTargets().isTargetingAnyPlayer() ? this : getParentTargetingPlayer();
     }
 
     public SpellAbility getParentTargetingPlayer() {
