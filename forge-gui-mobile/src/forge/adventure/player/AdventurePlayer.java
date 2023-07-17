@@ -282,6 +282,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (this.difficultyData.sellFactor == 0)
             this.difficultyData.sellFactor = 0.2f;
 
+        //BEGIN SPECIAL CASES
         //Previously these were not being read from or written to save files, causing defaults to appear after reload
         //Pull from config if appropriate
         DifficultyData configuredDifficulty = null;
