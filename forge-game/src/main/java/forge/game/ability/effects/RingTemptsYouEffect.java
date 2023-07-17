@@ -64,14 +64,14 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         switch(level) {
             case 1:
-                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Legendary | AddDesignation$ Ring-bearer | Description$ Your Ring-bearer is legendary.";
-                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
+                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+YouCtrl | AddType$ Legendary | AddDesignation$ Ring-bearer | Description$ Your Ring-bearer is legendary.";
+                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.IsRemembered+YouCtrl | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
                 theRing.addStaticAbility(legendary);
                 theRing.setSVar("X", "Remembered$CardPower");
                 theRing.addStaticAbility(cantBeBlocked);
                 break;
             case 2:
-                final String attackTrig = "Mode$ Attacks | ValidCard$ Card.IsRemembered | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
+                final String attackTrig = "Mode$ Attacks | ValidCard$ Card.IsRemembered+YouCtrl | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
                 final String drawEffect = "DB$ Draw | Defined$ You | NumCards$ 1";
                 final String discardEffect = "DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose";
 
@@ -86,7 +86,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             case 3:
-                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.IsRemembered | ValidBlocker$ Creature | TriggerZones$ Command | Execute$ TrigEndCombat | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
+                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.IsRemembered+YouCtrl| ValidBlocker$ Creature | TriggerZones$ Command | Execute$ TrigEndCombat | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
                 final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacBlocker | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
                 final String sacBlockerEffect = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI | Sacrifice$ True";
                 theRing.setSVar("TrigEndCombat", endOfCombatTrig);
@@ -102,7 +102,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             case 4:
-                final String damageTrig = "Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
+                final String damageTrig = "Mode$ DamageDone | ValidSource$ Card.IsRemembered+YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
                 final String loseEffect = "DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3";
 
                 final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, theRing, true);
