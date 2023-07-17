@@ -4,6 +4,7 @@ import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
@@ -13,6 +14,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class RingTemptsYouEffect extends EffectEffect {
 
@@ -28,6 +31,9 @@ public class RingTemptsYouEffect extends EffectEffect {
         Player p = sa.getActivatingPlayer();
         Game game = p.getGame();
         Card card = sa.getHostCard();
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
+        game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
         Card theRing = null;
         for (Card c : p.getCardsIn(ZoneType.Command)) {
             if (c.getName().equals("The Ring")) {
@@ -56,8 +62,8 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         switch(level) {
             case 1:
-                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.Remembered+YouCtrl | AddType$ Legendary | AddDesignation$ Ring-bearer | Description$ Your Ring-bearer is legendary.";
-                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.Remembered+YouCtrl | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
+                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Legendary | AddDesignation$ Ring-bearer | Description$ Your Ring-bearer is legendary.";
+                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
                 theRing.addStaticAbility(legendary);
                 theRing.setSVar("X", "Remembered$CardPower");
                 theRing.addStaticAbility(cantBeBlocked);
@@ -113,6 +119,9 @@ public class RingTemptsYouEffect extends EffectEffect {
         theRing.clearRemembered();
         if (ringbearer != null) {
             theRing.addRemembered(ringbearer);
+            // Run triggers
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(ringbearer);
+            game.getTriggerHandler().runTrigger(TriggerType.RingbearerChosen, runParams2, false);
         }
         // make sure it shows up in the command zone
         theRing.updateStateForView();
