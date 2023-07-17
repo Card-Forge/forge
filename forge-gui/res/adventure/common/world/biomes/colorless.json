@@ -1,0 +1,212 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.5,
+"noiseWeight": 0.3,
+"distWeight": 1,
+"name": "waste",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Colorless",
+"terrain": [
+	{
+		"spriteName": "Colorless_1",
+		"max": 0.2,
+		"resolution": 5
+	},
+	{
+		"spriteName": "Colorless_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 5
+	}
+],
+"width": 0.85,
+"height": 0.85,
+"color": "aeaeae",
+"spriteNames": [
+	"Stone"
+],
+"enemies": [
+	"Adept Black Wizard",
+	"Adept Blue Wizard",
+	"Adept Green Wizard",
+	"Adept Red Wizard",
+	"Adept White Wizard",
+	"Apprentice Black Wizard",
+	"Apprentice Blue Wizard",
+	"Apprentice Green Wizard",
+    "Apprentice Red Wizard",
+	"Apprentice White Wizard",
+	"Bandit",
+	"Bat",
+	"Boar",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Clay Golem",
+	"Construct",
+	"Dog",
+	"Doppelganger",
+	"Eldrazi",
+	"Falcon",
+	"Fox",
+	"Gargoyle",
+	"Gargoyle 2",
+	"Golem",
+	"Master Black Wizard",
+	"Master Blue Wizard",
+	"Master Green Wizard",
+    "Master Red Wizard",
+	"Master White Wizard",
+	"Mummy",
+	"Ooze",
+	"Pirate",
+	"Raven",
+	"Sliver",
+	"Wandering Giant",
+	"Wild Rat"
+],
+"pointsOfInterest": [
+	"Spawn",
+	"Waste Town Generic",
+	"Waste Town Identity",
+	"Waste Town Tribal",
+	"Fort",
+	"Fort1",
+	"Fort2",
+	"Fort3",
+	"Fort4",
+	"Fort5",
+	"Aerie",
+	"Fort6",
+	"Factory",
+	"Factory1",
+	"Factory2",
+	"Factory3",
+	"MageTowerX",
+	"MageTowerU",
+	"MageTowerU1",
+	"MageTowerU2",
+	"MageTowerU3",
+	"MageTowerU4",
+	"MageTowerU5",
+	"MageTowerU7",
+	"CaveC",
+	"CaveC1",
+	"CaveC2",
+	"CaveC3",
+	"CaveC4",
+	"CaveC5",
+	"CaveC6",
+	"CaveC7",
+	"CaveC8",
+	"CaveC9",
+	"CaveCA",
+	"CaveCB",
+	"CaveCD",
+	"Crawlspace",
+	"Dream Halls",
+	"Lich's Mirror",
+	"Slime Cave",
+	"Slobads Factory",
+	"Xiras Hive",
+	"Emrakul"
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.25,
+		"width": 0.25,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "crater",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "000000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "hole",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "000000",
+				"collision": true
+			}
+		]
+	}
+]
+}

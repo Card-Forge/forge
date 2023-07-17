@@ -1,0 +1,12 @@
+Name:Gandalf, Westward Voyager
+ManaCost:3 G U
+Types:Legendary Creature Avatar Wizard
+PT:5/5
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | Execute$ TrigReveal | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, each opponent reveals the top card of their library. If any of those cards shares a card type with that spell, copy that spell, you may choose new targets for the copy, and each opponent draws a card. Otherwise, you draw a card. (A copy of a permanent spell becomes a token.)
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Opponent | NoPeek$ True | ImprintRevealed$ True | SubAbility$ DBCopyCast
+SVar:DBCopyCast:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionDefined$ Imprinted | ConditionPresent$ Card.sharesCardTypeWith TriggeredCardLKICopy | MayChooseTarget$ True | RememberNewCard$ True | SubAbility$ DBDrawAll
+SVar:DBDrawAll:DB$ Draw | Defined$ Opponent | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBDrawYou
+SVar:DBDrawYou:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True 
+DeckHas:Ability$Token
+Oracle:Whenever you cast a spell with mana value 5 or greater, each opponent reveals the top card of their library. If any of those cards shares a card type with that spell, copy that spell, you may choose new targets for the copy, and each opponent draws a card. Otherwise, you draw a card. (A copy of a permanent spell becomes a token.)

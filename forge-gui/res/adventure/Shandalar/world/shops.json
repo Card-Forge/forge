@@ -3843,8 +3843,10 @@
 		  "cardText": "White"
 		}
 	]
-	}]
-},{
+	}
+	]
+},
+{
   "name":"Bird",
   "description":"Birds Of A Feather",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -3863,8 +3865,128 @@
 		  "cardText": "Bird"
 		}
 	  ]
-	}]
-},{
+	}
+	]
+},
+{
+  "name":"Nobles",
+  "description":"High Court",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NobleShop",
+  "rewards": [
+    {
+      "count":4,
+	  "subTypes": ["Noble"]
+    },
+	{
+      "count":4,
+      "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":4,
+		  "cardText": "Monarch"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Saga",
+  "description":"Relive History",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SagaShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Saga"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Saga"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Giant",
+  "description":"Gigantic Discounts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"GiantShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Giant"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Giant"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"LargeSeaCreatures",
+  "description":"Cards From The Deep",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LargeSeaCreaturesShop",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Serpent"]
+    },
+    {
+      "count":2,
+      "subTypes": ["Kraken"]
+    },
+    {
+      "count":2,
+      "subTypes": ["Leviathan"]
+    },
+    {
+      "count":2,
+      "subTypes": ["Octopus"]
+	}
+	]
+},
+{
+  "name":"FlipShop",
+  "description":"Two For The Price of One",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"FlipShop",
+  "rewards": [
+    {
+      "count":1,
+      "cardText": "Flip it"
+    },
+    {
+      "count":7,
+      "cardText": "Transform"
+    }
+	]
+},
+{
+  "name":"Battle",
+  "description":"Battles of the Ages",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BattleShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Battle"]
+    }
+    ]
+},
+{
   "name":"Bird4Blue",
   "description":"Aven Windreaders",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -3904,6 +4026,43 @@
 },{
   "name":"Bird4White",
   "description":"Wing Stop",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+		  "colors": ["white"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+		  "colors": ["white"]
+		}
+	  ]
+	}]
+},{
+  "name":"Bird4Azorius",
+  "description":"Eerie Well Breds",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"BirdShop",
   "overlaySprite":"Overlay4White",

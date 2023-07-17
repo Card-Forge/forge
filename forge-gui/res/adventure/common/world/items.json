@@ -184,6 +184,17 @@
         "r_1_1_goblin"
       ]
     }
+ },
+ {
+    "name": "Hivestone",
+    "equipmentSlot": "Left",
+    "iconName": "Hivestone",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Hivestone"
+      ]
+    }
   },
   {
     "name": "Life Amulet",
@@ -348,6 +359,15 @@
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
+    }
+  },
+  {
+    "name": "Armor of the Hivelord",
+    "equipmentSlot": "Body",
+    "iconName": "HiveLordArmor",
+    "effect": {
+      "lifeModifier": 5,
+      "changeStartCards": 1
     }
   },
   {
@@ -1234,5 +1254,32 @@
         "Slobad's Iron Boots"
       ]
 }
-}
+},
+  {
+    "name": "Hallowed Sigil",
+	"description": "Turn a creature hexproof until end of turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "HallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Hallowed Sigil"
+      ]
+    }
+  },
+  {
+    "name": "Unhallowed Sigil",
+	"description": "Devour the life of an enemy creature, killing it.",
+    "equipmentSlot": "Right",
+    "iconName": "UnhallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Sigil of Torment"
+      ]
+    }
+  },
+  {
+    "name": "Cultist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  }
 ]

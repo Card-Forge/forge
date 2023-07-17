@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmEtO40AQhnsFSAlKxOsCARMwK2AHF2FPIOxnBi4AgRXiAHAGQFwAkgAi4hScgNcMmxlNWbiVSlHVLzshv1SSH+325+qu6nJHRaVisAhsHmwYNJfyxKlVwFpg7SHhawLHbMqYsD2A/Sgp9XNI7Fepy6jHdKKs1OSQ2FS568c24ZsBu/gmmyZ8WBPMvXlhfjQKSh0iOyr03j8o8M/ZxDFw92z9N9N4aglxNQg+/Y7asrnPCsNzDOcn6bUt8vzKklKrS73Xqp58inmnSfR7OuDPx4Bc5cOXjCFmrMfdY84H9HswM9YiOta+1e18+PIQ5pt1aN8PPs6XHB8nOrd9+Lbir21CxDHeC20HMb6nEIxnVXu7fvBdh73WKDw/QvjqlvyXp7L4ryGsZVmF83cWPl0zJvXOO8TOb4f4+Qvz8J/HXPThq5H3N3OqYU25PWt8NAw1yzMUOy9SweOoED6cq7QPk7r2upj/XPTl43LrfvFzLsZ9+J/KMr54PjYFH67B4r+eFgB/oP2HEEPbwvU81w/MiOdjPOr2PJaOmVC+OQsjHuv6GNSnI5+2M+bH6cMn1SWvMDZvwljT2JbqAKnvLONL63QsHNdS3Lis3a58t5Z+JFYpbrTu0PHGgpmh7cBeI/U3FfMK79yzLay/ei0w8XGy/c/RdZBrvyn0gRn0d7ryVcZlpsiMbOWS+CKGby9wPydR1j2m3ZKdL8t+Tl57TNz4npf99nKu0PFl+WsfV579XZD+qP9C9VQ1n4eK46M55zuVl/98pMtXvO61mHZJ7rsJ5HPJJR3/bntqc80WD9h/dF/zkGGiNkjpnMFxRMhn+Pw/CN3vlw==
+   eJzNmEtOAkEQhnulJGAg+LgAMKLDSt3pRdwr4N7XBRRcGQ+gZxDjBRRQo/EUnsC3G401cToUTdX0YwbkTyqZR0/PN9Vd1TXtZYTwwTywebBxUCnk8UMrgHXAumPC1waOYsgYsN2DbWeF2BkT2832GOWY5nNCTI+JzeR6fuwqfHNgrX+yWYUPK0/cm2fmRyMtRBPZUbr//mGafk4nioG6p+u/HcZTh4mrUfDJd2wuRfdZIHiO4fwkvFZVnl+uCLFS6b9WtuQTxDujpH7PA/jz0SFX2fAFY4gZ637vmPKB+j2YGWsRHVf9/mdt+JIQ5isatB8GH+VLio+SOrdt+Kr+YBsXUYx3TNtRjO8pBONZWd9uGHxXbq+NFJ4fLnx1Tf5LUnH812DWsrjC+TsOn6wZg3rnHWLnwyB+vmEe/ljMRRu+TeX97YRq2KjcHjc+cN2ijvMzFDsvXMFjKBc+nKukD4O69iqT/Fy05aNy60Hmby76Q/ifijO+eD62GR+uwuK/FhYAn9D+i4mhGnM9yfUDM+L56E+aPY8lY8aVr6RhxGNdT0F9OvFnWyk7Ths+ri55hbF5Y8ZajW2uDuD6jjO+ap2OheOaixuTtduU70bTD8fKxY3ULTpeX4hm6Bqwy/qRqzOJV1jnnhqz/sq1IIqPku5/Tl0HqfYbTB+YQX6nKV9himfyopG1XByfR/DtO+7nBIq7x7SX1fPF2c9Jao+JGt/znN1eziU6vsgN9nFp2V9L6U/1n6ueytHnrqL41Jzzn0rKfzaS5Ste9zpEuyD3XTvymeSSB/tu+2pzyeaP2H/qvmaTYFJtlJI5g+LwkM/w+S+Eme+Q
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -242,6 +242,12 @@
    <properties>
     <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
     <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/shardtrader.tx" x="495" y="162" width="19" height="19">
+   <properties>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
  </objectgroup>

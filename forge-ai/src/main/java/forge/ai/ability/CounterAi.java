@@ -123,7 +123,7 @@ public class CounterAi extends SpellAbilityAi {
 
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of the time
-                if (!SpellAbilityAi.playReusable(ai, sa)) {
+                if (!playReusable(ai, sa)) {
                     return false;
                 }
             }
@@ -144,7 +144,7 @@ public class CounterAi extends SpellAbilityAi {
             String logic = sa.getParam("AILogic");
             if ("Never".equals(logic)) {
                 return false;
-            } else if (logic.startsWith("MinCMC.")) {
+            } else if (logic.startsWith("MinCMC.")) { // TODO fix Daze and fold into AITgts
                 int minCMC = Integer.parseInt(logic.substring(7));
                 if (tgtCMC < minCMC) {
                     return false;
@@ -287,7 +287,7 @@ public class CounterAi extends SpellAbilityAi {
                     if (toPay <= usableManaSources) {
                         // If this is a reusable Resource, feel free to play it most
                         // of the time
-                        if (!SpellAbilityAi.playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
+                        if (!playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
                             return false;
                         }
                     }

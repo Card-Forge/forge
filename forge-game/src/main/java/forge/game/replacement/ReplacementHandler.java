@@ -231,7 +231,7 @@ public class ReplacementHandler {
         chosenRE.setHasRun(true);
         hasRun.add(chosenRE);
         chosenRE.setOtherChoices(possibleReplacers);
-        ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
+        ReplacementResult res = executeReplacement(runParams, chosenRE, decider);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
                 res = run(event, runParams);
@@ -287,8 +287,7 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
-        final ReplacementEffect replacementEffect, final Player decider, final Game game) {
-
+        final ReplacementEffect replacementEffect, final Player decider) {
         SpellAbility effectSA = null;
 
         Card host = replacementEffect.getHostCard();
@@ -441,7 +440,7 @@ public class ReplacementHandler {
         int damage = (int) runParams.get(AbilityKey.DamageAmount);
         Map<String, String> mapParams = re.getMapParams();
 
-        ReplacementResult res = executeReplacement(runParams, re, decider, game);
+        ReplacementResult res = executeReplacement(runParams, re, decider);
         GameEntity newTarget = (GameEntity) runParams.get(AbilityKey.Affected);
         int newDamage = (int) runParams.get(AbilityKey.DamageAmount);
 
