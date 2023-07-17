@@ -466,6 +466,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ClassLevel, c.getClassLevel());
     }
 
+    public int getRingLevel() {
+        return get(TrackableProperty.RingLevel);
+    }
+    void updateRingLevel(Card c, Integer ringLevel) {
+        set(TrackableProperty.RingLevel, ringLevel);
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }
@@ -925,6 +932,10 @@ public class CardView extends GameEntityView {
         updateZoneText(c);
         updateDamage(c);
         updateSpecialize(c);
+
+        if (c.hasSVar("RingLevel")) {
+            updateRingLevel(c, Integer.parseInt(c.getSVar("RingLevel")));
+        }
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);
