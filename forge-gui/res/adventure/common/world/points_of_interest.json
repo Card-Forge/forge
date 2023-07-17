@@ -2068,7 +2068,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerRed",
 	"map": "../common/maps/map/magetower/magetower_1.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2084,7 +2084,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlack",
 	"map": "../common/maps/map/magetower/magetower_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2100,7 +2100,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerRed",
 	"map": "../common/maps/map/magetower/magetower_3.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2116,7 +2116,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerWhite",
 	"map": "../common/maps/map/magetower/magetower_4.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2132,7 +2132,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerGreen",
 	"map": "../common/maps/map/magetower/magetower_5.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2148,7 +2148,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlack",
 	"map": "../common/maps/map/magetower/magetower_6.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2163,8 +2163,8 @@
 	"name": "MageTowerC8",
 	"type": "dungeon",
 	"count": 3,
-	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_8.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2180,7 +2180,7 @@
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_13.tmx",
 	"radiusFactor": 0.2,
 	"questTags": [
@@ -2196,7 +2196,7 @@
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_14.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2212,7 +2212,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_1.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2228,7 +2228,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlack",
 	"map": "../common/maps/map/magetower/magetower_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2244,7 +2244,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerRed",
 	"map": "../common/maps/map/magetower/magetower_3.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2260,7 +2260,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerWhite",
 	"map": "../common/maps/map/magetower/magetower_4.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2276,7 +2276,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerGreen",
 	"map": "../common/maps/map/magetower/magetower_5.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2292,7 +2292,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlack",
 	"map": "../common/maps/map/magetower/magetower_6.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2308,7 +2308,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_8.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2324,7 +2324,7 @@
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTower",
+	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_14.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
