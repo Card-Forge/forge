@@ -55,6 +55,7 @@ public enum TrackableProperty {
     Token(TrackableTypes.BooleanType),
     TokenCard(TrackableTypes.BooleanType),
     IsCommander(TrackableTypes.BooleanType),
+    IsRingBearer(TrackableTypes.BooleanType),
     CommanderAltType(TrackableTypes.StringType),
     Damage(TrackableTypes.IntegerType),
     AssignedDamage(TrackableTypes.IntegerType),
