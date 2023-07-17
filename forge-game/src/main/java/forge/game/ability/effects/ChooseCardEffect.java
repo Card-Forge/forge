@@ -125,9 +125,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 for (final String type : partyTypes) {
                     CardCollection valids = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
                             CardPredicates.isType(type));
-                    for (Card alreadyChosen : chosen) {
-                        valids.remove(alreadyChosen);
-                    }
+                    valids.removeAll(chosen);
                     if (!valids.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " +
                                 Lang.nounWithNumeralExceptOne(1, type);

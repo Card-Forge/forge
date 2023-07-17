@@ -2436,11 +2436,21 @@ public class GameAction {
         damageMap.triggerExcessDamage(isCombat, lethalDamage, game, cause, lkiCache);
 
         // lose life simultaneously
-        if (isCombat) {
-            for (Player p : game.getPlayers()) {
-                p.dealCombatDamage();
+        Map<Player, Integer> lifeLostAllDamageMap = Maps.newHashMap();
+        for (Player p : game.getPlayers()) {
+            int lost = p.processDamage();
+            if (lost > 0) {
+                lifeLostAllDamageMap.put(p, lost);
             }
+        }
+
+        if (isCombat) {
             game.getTriggerHandler().runWaitingTriggers();
+        }
+
+        if (!lifeLostAllDamageMap.isEmpty()) { // Run triggers if any player actually lost life
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lifeLostAllDamageMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
         }
 
         if (cause != null) {
