@@ -347,8 +347,8 @@ public class GameHUD extends Stage {
         restorePlayerCollision();
         if (openMapActor != null) {
             String val = "[%80]" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
-            for (AdventureQuestData adq: Current.player().getQuests()) {
-                if (adq.getTargetPOI() !=null) {
+            for (AdventureQuestData adq : Current.player().getQuests()) {
+                if (adq.getTargetPOI() != null) {
                     val = "[%80][+GPS] " + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
                     break;
                 }
@@ -357,12 +357,14 @@ public class GameHUD extends Stage {
             openMapActor.layout();
         }
     }
+
     void clearAbility() {
         for (TextraButton button : abilityButtonMap) {
             button.remove();
         }
         abilityButtonMap.clear();
     }
+
     void updateAbility() {
         clearAbility();
         setAbilityButton(AdventurePlayer.current().getEquippedAbility1());
@@ -406,6 +408,7 @@ public class GameHUD extends Stage {
             playAudio();
         }
     }
+
     public void playAudio() {
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":
@@ -433,6 +436,12 @@ public class GameHUD extends Stage {
         if (audio != null) {
             audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
         }
+    }
+
+    public boolean audioIsPlaying() {
+        if (audio == null)
+            return false;
+        return audio.getRight().isPlaying();
     }
 
     @Override
@@ -610,6 +619,7 @@ public class GameHUD extends Stage {
         }
         opacity = visible ? 1f : 0.4f;
     }
+
     void toggleConsole() {
         console.toggle();
         if (console.isVisible()) {
@@ -679,6 +689,7 @@ public class GameHUD extends Stage {
     public void setDebug(boolean b) {
         debugMap = b;
     }
+
     public void playerIdle() {
         if (MapStage.getInstance().isInMap()) {
             MapStage.getInstance().startPause(1f);
@@ -688,6 +699,7 @@ public class GameHUD extends Stage {
             WorldStage.getInstance().getPlayerSprite().stop();
         }
     }
+
     private void showDialog() {
         playerIdle();
         dialogButtonMap.clear();
@@ -789,10 +801,11 @@ public class GameHUD extends Stage {
     }
 
     void changeBGM(MusicPlaylist playlist) {
-        if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
+        if (!audioIsPlaying() && !playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
             SoundSystem.instance.setBackgroundMusic(playlist);
         }
     }
+
     void flicker(CharacterSprite sprite) {
         if (sprite.getCollisionHeight() == 0f) {
             SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
@@ -810,6 +823,7 @@ public class GameHUD extends Stage {
             sprite.addAction(flicker);
         }
     }
+
     void restorePlayerCollision() {
         flicker(MapStage.getInstance().getPlayerSprite());
         flicker(WorldStage.getInstance().getPlayerSprite());
