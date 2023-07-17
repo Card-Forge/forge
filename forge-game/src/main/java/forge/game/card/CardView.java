@@ -1274,8 +1274,13 @@ public class CardView extends GameEntityView {
             String rulesText = null;
 
             if (type.isVanguard() && rules != null) {
-                rulesText = "Hand Modifier: " + rules.getHand() +
-                        "\r\nLife Modifier: " + rules.getLife();
+                boolean decHand = rules.getHand() < 0;
+                boolean decLife = rules.getLife() < 0;
+                String handSize = Localizer.getInstance().getMessageorUseDefault("lblHandSize", "Hand Size")
+                        + (!decHand ? ": +" : ": ") + rules.getHand();
+                String startingLife = Localizer.getInstance().getMessageorUseDefault("lblStartingLife", "Starting Life")
+                        + (!decLife ? ": +" : ": ") + rules.getLife();
+                rulesText = handSize + "\r\n" + startingLife;
             }
             set(TrackableProperty.RulesText, rulesText);
         }
