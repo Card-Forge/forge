@@ -1075,6 +1075,14 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.BlockAny, c.canBlockAny());
     }
 
+    public boolean isRingBearer() {
+        return get(TrackableProperty.IsRingBearer);
+    }
+
+    void updateDesignation(Card c) {
+        set(TrackableProperty.IsRingBearer, c.getDesignations().contains("Ring-bearer"));
+    }
+
     Set<String> getCantHaveKeyword() {
         return get(TrackableProperty.CantHaveKeyword);
     }
