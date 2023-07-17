@@ -781,14 +781,14 @@ F567 R Puresteel Angel @Lukas Litzsinger
 773 R Repay in Kind @Vance Kovacs
 774 R Volrath's Dungeon @Stephen Daniele
 775 C Dragon's Approach @Andrew Mar
-776 U Dragon's Rage Channeler @Martina Fackova
+776 U Dragon's Rage Channeler @Martina Fačková
 777 M Goldspan Dragon @Andrew Mar
 778 R Lathliss, Dragon Queen @Alex Konstad
 779 U Magic Missile @PINDURSKI
 780 U Thundering Sparkmage @Billy Christian
 781 R Worldgorger Dragon @Wayne England
 782 U Devoted Druid @Kimonas Theodossiou
-783 U Druid's Call @Greg Hildebrandt
+783 U Druid's Call @Greg Hildebrandt & Tim Hildebrandt
 784 U Edgewall Innkeeper @Matt Stewart
 785 R Gilt-Leaf Archdruid @Steve Prescott
 786 M Old Gnawbone @Filip Burburan
@@ -1095,3 +1095,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1087 R Sea of Clouds @Florian de Gesincourt
 1088 R The World Tree @Anastasia Ovchinnikova
 1089 U Zhalfirin Void @Chase Stone
+1090 U All That Glitters @Iain McCaig
+1091 U Baird, Steward of Argive @Christine Choi
+1092 C Battleflight Eagle @Kev Walker
+1093 R Court of Grace @Denman Rooke
+1094 R Darien, King of Kjeldor @Michael Phillippi
+1095 C Doomed Traveler @Lars Grant-West
+1096 R Earnest Fellowship @Heather Hudson
+1097 U Far Traveler @Alix Branwyn
+1098 C Fortifying Provisions @Scott Murphy
+1099 U Generous Gift @Kev Walker
+1100 M Kenrith, the Returned King @Kieran Yanner
+1101 R Knight-Captain of Eos @Chris Rahn
+1102 R Knight Exemplar @Jason Chan
+1103 C Oaken Brawler @Jim Murray
+1104 R Ancestral Memories @Dan Frazier
+1105 R Arcane Melee @Jaime Jones
+1106 R Commandeer @John Matson
+1107 R Counterlash @Austin Hsu
+1108 R Denying Wind @Tony Szczudlo
+1109 R Exhaustion @DiTerlizzi
+1110 R Mindlock Orb @rk post
+1111 R Oath of Scholars @Michael Sutfin
+1112 R Rayne, Academy Chancellor @Matthew D. Wilson
+1113 C Stormwatch Eagle @Aaron Boyd
+1114 R Stroke of Genius @Stephen Daniele
+1115 C Traveler's Cloak @Rebecca Guay
+1116 C Barrow Ghoul @Bryan Talbot
+1117 C Barrow Witches @Alex Brock
+1118 U Bog Wraith @Daarken
+1119 U Evil Eye of Urborg @Clint Langley
+1120 U Grim Strider @Christine Choi
+1121 U Orc Sureshot @Kev Walker
+1122 R Pitiless Horde @Viktor Titov
+1123 U Crush the Weak @Lucas Graciano
+1124 R Dwarven Bloodboiler @Arnie Swekel
+1125 C Dwarven Grunt @Mike Ploog
+1126 U Dwarven Miner @Jock
+1127 U Glittering Stockpile @Brock Grossman
+1128 U Hoarding Dragon @Matt Cavotta
+1129 C Miner's Bane @Adam Paquette
+1130 U Orcish Artillery @Jeff Miracola
+1131 R Reforge the Soul @Jaime Jones
+1132 C Battlewand Oak @Steve Prescott
+1133 U Blossom Prancer @Ryan Yee
+1134 R Budoka Gardener @Kev Walker
+1135 C Courage in Crisis @Micah Epstein
+1136 R Dauntless Dourbark @Jeremy Jarvis
+1137 U Elven Palisade @Mark Zug
+1138 R Elven Warhounds @Kev Walker
+1139 U Gather Courage @Brian Despain
+1140 R Leaf-Crowned Elder @Wayne Reynolds
+1141 U Murasa Ranger @Eric Deschamps
+1142 R Nemata, Grove Guardian @John Avon
+1143 R Unstoppable Ash @Brian Snõddy
+1144 R Ancient Spider @Greg Staples
+1145 R Doomsday Specter @Donato Giancola
+1146 U Empyrean Eagle @Jason A. Engle
+1147 R Ghastlord of Fugue @Mike Dringenberg
+1148 R Gluttonous Troll @Joe Slucher
+1149 R Jared Carthalion, True Heir @Lius Lasahido
+1150 C Old Ghastbark @Thomas M. Baxa
+1151 R Tolsimir, Friend to Wolves @Ryan Pancoast
+1152 R Angelheart Vial @Chippy
+1153 R Dolmen Gate @Richard Sardinha
+1154 R Doom Cannon @Matthew Mitchell
+1155 R Eye of Doom @Yeong-Hao Han
+1156 R Forebear's Blade @Scott Murphy
+1157 R Jinxed Ring @M. W. Kaluta
+1158 R Rakdos Riteknife @Jim Nelson
+1159 M Ring of Three Wishes @Mark Winters
+1160 R Sword of Vengeance @Dan Scott
+1161 R Tower of Calamities @Aleksi Briclot
+1162 R Tower of Fortunes @Matt Cavotta
+1163 R Wheel of Torture @Henry Van Der Linde
+1164 U Forbidding Watchtower @Aleksi Briclot
