@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.ImageKeys;
 import forge.card.CardRarity;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -49,6 +50,7 @@ public class RingTemptsYouEffect extends EffectEffect {
             theRing = createEffect(sa, p, "The Ring", image);
             theRing.setSetCode(card.getSetCode());
             theRing.setRarity(CardRarity.Common);
+            theRing.setColor(MagicColor.COLORLESS);
 
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             theRing = p.getGame().getAction().moveTo(p.getZone(ZoneType.Command), theRing, sa);
@@ -69,7 +71,7 @@ public class RingTemptsYouEffect extends EffectEffect {
                 theRing.addStaticAbility(cantBeBlocked);
                 break;
             case 2:
-                final String attackTrig = "Mode$ Attacks | ValidCard$ Remembered | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
+                final String attackTrig = "Mode$ Attacks | ValidCard$ Card.IsRemembered | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
                 final String drawEffect = "DB$ Draw | Defined$ You | NumCards$ 1";
                 final String discardEffect = "DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose";
 
@@ -84,13 +86,15 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             case 3:
-                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Creature.Remembered+YouCtrl | ValidBlocker$ Creature | TriggerZones$ Command | Execute$ TrigEndCombat | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
+                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.IsRemembered | ValidBlocker$ Creature | TriggerZones$ Command | Execute$ TrigEndCombat | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
                 final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacBlocker | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
                 final String sacBlockerEffect = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI | Sacrifice$ True";
+                theRing.setSVar("TrigEndCombat", endOfCombatTrig);
+                theRing.setSVar("TrigSacBlocker", sacBlockerEffect);
                 final Trigger becomesBlockedTrigger = TriggerHandler.parseTrigger(becomesBlockedTrig, theRing, true);
 
-                SpellAbility endCombatExecute = AbilityFactory.getAbility(endOfCombatTrig, card);
-                AbilitySub sacExecute = (AbilitySub) AbilityFactory.getAbility(sacBlockerEffect, card);
+                SpellAbility endCombatExecute = AbilityFactory.getAbility(endOfCombatTrig, theRing);
+                AbilitySub sacExecute = (AbilitySub) AbilityFactory.getAbility(sacBlockerEffect, theRing);
 
                 endCombatExecute.setSubAbility(sacExecute);
                 becomesBlockedTrigger.setOverridingAbility(endCombatExecute);
@@ -98,11 +102,11 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             case 4:
-                final String damageTrig = "Mode$ DamageDone | ValidSource$ Creature.Remembered+YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
+                final String damageTrig = "Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
                 final String loseEffect = "DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3";
 
                 final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, theRing, true);
-                SpellAbility loseExecute = AbilityFactory.getAbility(loseEffect, card);
+                SpellAbility loseExecute = AbilityFactory.getAbility(loseEffect, theRing);
 
                 damageTrigger.setOverridingAbility(loseExecute);
                 theRing.addTrigger(damageTrigger);
