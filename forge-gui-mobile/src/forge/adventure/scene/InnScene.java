@@ -11,7 +11,6 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
-import forge.adventure.world.WorldSave;
 
 /**
  * Scene for the Inn in towns

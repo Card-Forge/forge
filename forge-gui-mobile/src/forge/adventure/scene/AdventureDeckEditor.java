@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
