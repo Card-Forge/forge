@@ -32,9 +32,6 @@ public class RingTemptsYouEffect extends EffectEffect {
         Player p = sa.getActivatingPlayer();
         Game game = p.getGame();
         Card card = sa.getHostCard();
-        // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-        game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
         Card theRing = null;
         for (Card c : p.getCardsIn(ZoneType.Command)) {
             if (c.getName().equals("The Ring")) {
@@ -113,7 +110,8 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             default:
-                System.out.println("Ring level should always be 1-4. Currently its " + level);
+                //System.out.println("Ring level should always be 1-4. Currently its " + level);
+                break;
         }
 
         // Then choose a ring-bearer (You may keep the same one). Auto pick if <2 choices.
@@ -123,10 +121,12 @@ public class RingTemptsYouEffect extends EffectEffect {
         theRing.clearRemembered();
         if (ringbearer != null) {
             theRing.addRemembered(ringbearer);
-            // Run triggers
-            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(ringbearer);
-            game.getTriggerHandler().runTrigger(TriggerType.RingbearerChosen, runParams2, false);
         }
+
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
+        runParams.put(AbilityKey.Card, ringbearer);
+        game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
         // make sure it shows up in the command zone
         theRing.updateStateForView();
     }

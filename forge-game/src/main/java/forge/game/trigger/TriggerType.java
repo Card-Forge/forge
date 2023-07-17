@@ -101,7 +101,6 @@ public enum TriggerType {
     Proliferate(TriggerProliferate.class),
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
-    RingbearerChosen(TriggerRingbearerChosen.class),
     RingTemptsYou(TriggerRingTemptsYou.class),
     RolledDie(TriggerRolledDie.class),
     RolledDieOnce(TriggerRolledDieOnce.class),

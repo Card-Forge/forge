@@ -19,13 +19,17 @@ public class TriggerRingTemptsYou extends Trigger {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
+
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
+        }
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
     }
 
     @Override
