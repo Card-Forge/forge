@@ -308,6 +308,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final List<GameCommand> faceupCommandList = Lists.newArrayList();
     private final List<GameCommand> facedownCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
+    private final List<GameCommand> ringBearerCommandList = Lists.newArrayList();
 
     // Zone-changing spells should store card's zone here
     private Zone currentZone;
@@ -3360,12 +3361,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
     }
-
+    public final void addRingBearerCommand(final GameCommand c) {
+        ringBearerCommandList.add(c);
+    }
     public final void runLeavesPlayCommands() {
         for (final GameCommand c : leavePlayCommandList) {
             c.run();
         }
         leavePlayCommandList.clear();
+        //cleanup
+        runRingBearerCommands();
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3396,6 +3401,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         changeControllerCommandList.clear();
+        //cleanup
+        runRingBearerCommands();
+    }
+    public final void runRingBearerCommands() {
+        for (final GameCommand c : ringBearerCommandList) {
+            c.run();
+        }
+        ringBearerCommandList.clear();
     }
 
     public final void setSickness(boolean sickness0) {

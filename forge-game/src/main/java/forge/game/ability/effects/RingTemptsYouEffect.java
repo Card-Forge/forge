@@ -130,8 +130,7 @@ public class RingTemptsYouEffect extends EffectEffect {
                     finalTheRing.clearRemembered();
                 }
             };
-            ringbearer.addLeavesPlayCommand(cleanupCommand);
-            ringbearer.addChangeControllerCommand(cleanupCommand);
+            ringbearer.addRingBearerCommand(cleanupCommand);
         }
 
         // Run triggers
