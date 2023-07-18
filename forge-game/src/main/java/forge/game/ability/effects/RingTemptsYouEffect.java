@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.GameCommand;
 import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.card.MagicColor;
@@ -74,8 +75,8 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 final Trigger attackTrigger = TriggerHandler.parseTrigger(attackTrig, theRing, true);
 
-                SpellAbility drawExecute = AbilityFactory.getAbility(drawEffect, card);
-                AbilitySub discardExecute = (AbilitySub) AbilityFactory.getAbility(discardEffect, card);
+                SpellAbility drawExecute = AbilityFactory.getAbility(drawEffect, theRing);
+                AbilitySub discardExecute = (AbilitySub) AbilityFactory.getAbility(discardEffect, theRing);
 
                 drawExecute.setSubAbility(discardExecute);
                 attackTrigger.setOverridingAbility(drawExecute);
@@ -121,6 +122,16 @@ public class RingTemptsYouEffect extends EffectEffect {
         theRing.clearRemembered();
         if (ringbearer != null) {
             theRing.addRemembered(ringbearer);
+            Card finalTheRing = theRing;
+            final GameCommand cleanupCommand = new GameCommand() {
+                private static final long serialVersionUID = 1L;
+                @Override
+                public void run() {
+                    finalTheRing.clearRemembered();
+                }
+            };
+            ringbearer.addLeavesPlayCommand(cleanupCommand);
+            ringbearer.addChangeControllerCommand(cleanupCommand);
         }
 
         // Run triggers
