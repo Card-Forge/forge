@@ -12,5 +12,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cond
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 SVar:HasAttackEffect:TRUE
-Whenever CARDNAME enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
-Oracle:Whenever Titan of Littjara enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
+Oracle:As Titan of Littjara enters the battlefield, choose a creature type.\nTitan of Littjara is the chosen type in addition to its other types.\nWhenever Titan of Littjara enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
