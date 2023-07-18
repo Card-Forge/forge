@@ -20,7 +20,9 @@ import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -34,14 +36,18 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.WrappedAbility;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -268,7 +274,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
-                    list = CardLists.filter(list, Predicates.not(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE)), new Predicate<Card>() {
+                    list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED, new Predicate<Card>() {
 
                         @Override
                         public boolean apply(@Nullable Card input) {
@@ -297,9 +303,15 @@ public class EffectAi extends SpellAbilityAi {
                 } else if ("Self".equals(sa.getParam("RememberObjects"))) {
                     // the ones affecting itself are Nimbus cards, were opponent can activate this effect
                     Card host = sa.getHostCard();
-                    if (host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                    if (!host.canBeDestroyed()) {
                         return false;
                     }
+                    // do this only in reaction to a threatening spell on directly on the stack
+                    MagicStack stack = game.getStack();
+                    if (stack.isEmpty()) {
+                        return false;
+                    }
+
                     Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sa.getHostCard());
                     runParams.put(AbilityKey.Regeneration, true);
                     List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
@@ -308,8 +320,121 @@ public class EffectAi extends SpellAbilityAi {
                         return false;
                     }
                     // TODO check Stack for Effects that would destroy host, either direct or indirect
+                    SpellAbility stackSa = stack.peekAbility();
+                    if (stackSa == null) {
+                        return false;
+                    }
 
-                    return true;
+                    // need to get the wrapped sub abilities
+                    if (stackSa.isWrapper()) {
+                        stackSa = ((WrappedAbility)(stackSa)).getWrappedAbility();
+                    }
+                    if (stackSa == null) {
+                        return false;
+                    }
+
+                    // regenerate is a replace destroy, meaning either destroyed by effect
+                    // or destroyed by state based action, when dying by lethal damage
+                    SpellAbility subAbility = stackSa;
+                    while (subAbility != null) {
+                        ApiType apiType = subAbility.getApi();
+                        if (apiType == null) {
+                            continue;
+                        }
+
+                        if (ApiType.DestroyAll == apiType) {
+                            // or skip to sub abilities?
+                            if (subAbility.hasParam("NoRegen")) {
+                                return false;
+                            }
+                            if (subAbility.usesTargeting() && !Iterables.contains(subAbility.getTargets().getTargetPlayers(), host.getController())) {
+                                return false;
+                            }
+                            String valid = subAbility.getParamOrDefault("ValidCards", "");
+
+                            // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
+                            // to use the X variable
+                            // We really need a better solution to this
+                            if (valid.contains("X")) {
+                                valid = TextUtil.fastReplace(valid,
+                                        "X", Integer.toString(AbilityUtils.calculateAmount(subAbility.getHostCard(), "X", subAbility)));
+                            }
+
+                            // host card is valid
+                            if (host.isValid(valid.split(","), subAbility.getActivatingPlayer(), subAbility.getHostCard(), subAbility)) {
+                                return true;
+                            }
+                            // failed to check via valid, need to pass through the filterList method
+                            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
+
+                            if (subAbility.usesTargeting()) {
+                                list = CardLists.filterControlledBy(list, new PlayerCollection(subAbility.getTargets().getTargetPlayers()));
+                            }
+
+                            list = AbilityUtils.filterListByType(list, valid, subAbility);
+                            if (list.contains(host)) {
+                                return true;
+                            }
+                            // check for defined
+                        } else if (ApiType.Destroy == apiType) {
+                            if (subAbility.hasParam("NoRegen")) {
+                                return false;
+                            }
+                            if (subAbility.hasParam("Sacrifice")) {
+                                return false;
+                            }
+                            // simulate getTargetCards
+                            if (subAbility.usesTargeting()) {
+                                // isTargeting checks parents, i think that might be wrong
+                                if (subAbility.getTargets().contains(host)) {
+                                    return true;
+                                }
+                            } else {
+                                if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                                    return true;
+                                }
+                            }
+
+                            if (CardUtil.getRadiance(sa).contains(host)) {
+                                return true;
+                            }
+
+                            // check for target or indirect target
+                        } else if (ApiType.DamageAll == apiType) {
+                            if (!subAbility.hasParam("ValidCards")) {
+                                continue;
+                            }
+                            String valid = subAbility.getParamOrDefault("ValidCards", "");
+
+                            Card source = game.getChangeZoneLKIInfo(subAbility.getHostCard());
+                            boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
+                                    || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT);
+                            if (wither) {
+                                return false;
+                            }
+
+                            // host card is valid
+                            if (host.isValid(valid.split(","), subAbility.getActivatingPlayer(), subAbility.getHostCard(), subAbility)) {
+                                // TODO check if damage would be lethal
+                                return true;
+                            }
+                            // failed to check via valid, need to pass through the filterList method
+                            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
+                            if (subAbility.usesTargeting()) {
+                                list = CardLists.filterControlledBy(list, new PlayerCollection(subAbility.getTargets().getTargetPlayers()));
+                            }
+
+                            list = AbilityUtils.filterListByType(list, valid, subAbility);
+                            if (list.contains(host)) {
+                                // TODO check if damage would be lethal
+                                return true;
+                            }
+                        }
+
+                        subAbility = subAbility.getSubAbility();
+                    }
+
+                    return false;
                 }
             }
         } else { //no AILogic
