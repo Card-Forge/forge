@@ -7,7 +7,7 @@ SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputer
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBDiscard
+SVar:TrigDraw:DB$ Draw | NumCards$ X | Optional$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
