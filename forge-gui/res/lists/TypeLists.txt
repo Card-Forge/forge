@@ -407,6 +407,7 @@ Wrenn
 Xenagos
 Yanggu
 Yanling
+Vronos
 Zariel
 [DungeonTypes]
 Undercity
