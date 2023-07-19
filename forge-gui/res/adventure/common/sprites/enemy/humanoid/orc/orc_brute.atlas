@@ -1,0 +1,98 @@
+orc_brute.png
+size: 512,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 91, 29
+  size: 16, 16      
+Idle 
+  xy: 16,27
+  size: 32,37 
+Idle 
+  xy: 80,27
+  size: 32,37  
+Idle 
+  xy: 144,27
+  size: 32,37  
+Idle 
+  xy: 208,27
+  size: 32,37  
+Idle 
+  xy: 272,27
+  size: 32,37 
+Idle 
+  xy: 336,27
+  size: 32,37  
+Idle 
+  xy: 400,27
+  size: 32,37  
+Idle 
+  xy: 464,27
+  size: 32,37 
+Walk
+  xy: 12,88
+  size: 40,40 
+Walk
+  xy: 76,88
+  size: 40,40 
+Walk
+  xy: 140,88
+  size: 40,40 
+Walk
+  xy: 204,88
+  size: 40,40 
+Walk
+  xy: 268,88
+  size: 40,40 
+Walk
+  xy: 332,88
+  size: 40,40 
+Walk
+  xy: 396,88
+  size: 40,40 
+Walk
+  xy: 460,88
+  size: 40,40 
+Attack 
+  xy: 10,206
+  size: 46,50
+Attack 
+  xy: 76,206
+  size: 46,50
+Attack 
+  xy: 140,206
+  size: 46,50
+Attack 
+  xy: 204,206
+  size: 46,50
+Attack 
+  xy: 268,206
+  size: 46,50
+Attack 
+  xy: 332,206
+  size: 46,50
+Attack 
+  xy: 396,206
+  size: 46,50
+Attack 
+  xy: 396,206
+  size: 46,50
+Death 
+  xy: 14,348
+  size: 50,36 
+Death 
+  xy: 78,348
+  size: 50,36 
+Death 
+  xy: 142,348
+  size: 50,36 
+Death 
+  xy: 206,348
+  size: 50,36 
+Death 
+  xy: 270,348
+  size: 50,36 
+Death 
+  xy: 334,348
+  size: 50,36 

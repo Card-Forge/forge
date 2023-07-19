@@ -2,9 +2,7 @@ Name:Magus of the Arena
 ManaCost:4 R R
 Types:Creature Human Wizard
 PT:5/5
-A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBTap | AlwaysRemember$ True | SpellDescription$ Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other. (Each deals damage equal to its power to the other.)
-SVar:DBTap:DB$ Tap | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | AlwaysRemember$ True
-SVar:DBFight:DB$ Fight | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-AI:RemoveDeck:All
+A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBTap | AILogic$ Arena | SpellDescription$ Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other. (Each deals damage equal to its power to the other.)
+SVar:DBTap:DB$ Tap | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature you control | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ Targeted
 Oracle:{3}, {T}: Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other. (Each deals damage equal to its power to the other.)

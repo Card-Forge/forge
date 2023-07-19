@@ -1,0 +1,33 @@
+[metadata]
+Code=EA3
+Date=2023-07-18
+Name=Explorer Anthology 3
+Type=Online
+ScryfallCode=EA3
+
+[cards]
+1 R Cyclonic Rift @Chris Rahn
+2 R Abbot of Keral Keep @Deruchenko Alexander
+3 U Shrapnel Blast @Hideaki Takamura
+4 U Sylvan Scrying @Daniel Ljunggren
+5 R Eidolon of Blossoms @Min Yum
+6 R Chord of Calling @Karl Kopinski
+7 M Worldspine Wurm @Richard Wright
+8 U Judge's Familiar @Jack Wang
+9 U Golgari Charm @Zoltan Boros
+10 U Simic Charm @Zoltan Boros
+11 U Izzet Charm @Zoltan Boros
+12 U Gruul Charm @Zoltan Boros
+13 U Orzhov Charm @Zoltan Boros
+14 M Voice of Resurgence @Winona Nelson
+15 R Deathrite Shaman @Steve Argyle
+16 M Obzedat, Ghost Council @Svetlin Velinov
+17 M Omnath, Locus of Rage @Brad Rigney
+18 M Xenagos, God of Revels @Jason Chan
+19 U Accorder's Shield @Alan Pollack
+20 R Canopy Vista @Adam Paquette
+21 R Cinder Glade @Adam Paquette
+22 R Smoldering Marsh @Adam Paquette
+23 R Sunken Hollow @Adam Paquette
+24 R Prairie Stream @Adam Paquette
+25 R Thespian's Stage @John Avon

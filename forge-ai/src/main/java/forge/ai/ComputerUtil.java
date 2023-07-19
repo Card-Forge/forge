@@ -825,6 +825,31 @@ public class ComputerUtil {
             if (!SpecialCardAi.DesecrationDemon.considerSacrificingCreature(ai, source)) {
                 return sacrificed; // don't sacrifice unless in special conditions specified by DesecrationDemon AI
             }
+        } else if ("Lethal".equals(source.getParam("AILogic"))) {
+            for (Card c : cardlist) {
+                boolean isLethal = false;
+                for (Player opp : ai.getOpponents()) {
+                    if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife() && c.getNetPower() >= opp.getLife()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                for (Card creature : ai.getOpponents().getCreaturesInPlay()) {
+                    if (creature.canBeDestroyed() && c.getNetPower() >= creature.getNetToughness()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                if (c.hasSVar("SacMe") || isLethal) {
+                    sacrificed.add(c);
+                    if (sacrificed.size() == amount) {
+                        return sacrificed;
+                    }
+                }
+            }
+            if (sacrificed.size() < amount) {
+                System.err.println("Warning: AILogic Lethal could not meaningfully select enough cards for the AF Sacrifice on " + source.getHostCard());
+            }
         } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
             if ("Pillar Tombs of Aku".equals(host.getName())) {
                 if (!ai.canLoseLife() || ai.cantLose()) {
@@ -1695,14 +1720,10 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (Object o : objects) {
-                if (o instanceof GameEntity) {
-                    final GameEntity ge = (GameEntity) o;
-                    if (ge.canBeTargetedBy(topStack)) {
-                        canBeTargeted.add(ge);
-                    }
+            for (GameEntity ge : topStack.getTargets().getTargetEntities()) {
+                if (ge.canBeTargetedBy(topStack)) {
+                    canBeTargeted.add(ge);
                 }
             }
             if (canBeTargeted.isEmpty()) {
@@ -2398,6 +2419,18 @@ public class ComputerUtil {
                             chosen = type;
                         }
                     }
+                }
+            } else if ("ProtectionFromType".equals(logic)) {
+                // TODO: protection vs. damage-dealing and milling instants/sorceries in low creature decks and the like?
+                // Maybe non-creature artifacts in certain cases?
+                List<String> choices = ImmutableList.of("Creature", "Planeswalker"); // types that make sense to get protected against
+                CardCollection evalList = new CardCollection();
+
+                evalList.addAll(ai.getOpponents().getCardsIn(ZoneType.Battlefield));
+
+                chosen = ComputerUtilCard.getMostProminentCardType(evalList, choices);
+                if (StringUtils.isEmpty(chosen)) {
+                    chosen = "Creature"; // if in doubt, choose Creature, I guess
                 }
             }
             else {

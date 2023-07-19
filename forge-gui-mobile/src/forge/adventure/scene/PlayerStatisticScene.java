@@ -32,6 +32,7 @@ import forge.localinstance.achievements.CardActivationAchievements;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Map;
@@ -187,10 +188,7 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
-
-        GameHUD.getInstance().pauseMusic();
-        GameHUD.getInstance().playAudio();
-
+        GameHUD.getInstance().switchAudio();
         achievementContainer.clear();
         updateAchievements(cardActivation, true);
         updateAchievements(planeswalkers, true);
@@ -219,7 +217,7 @@ public class PlayerStatisticScene extends UIScene {
             totalLoss.setText(String.valueOf(Current.player().getStatistic().totalLoss()));
         }
         if (lossWinRatio != null) {
-            lossWinRatio.setText(Float.toString(Current.player().getStatistic().winLossRatio()));
+            lossWinRatio.setText(TextUtil.decimalFormat(Current.player().getStatistic().winLossRatio()));
         }
         if (eventMatchWins != null) {
             eventMatchWins.setText(String.valueOf(Current.player().getStatistic().eventWins()));

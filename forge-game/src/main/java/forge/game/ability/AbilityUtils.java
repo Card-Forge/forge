@@ -561,9 +561,6 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
-        } else if (calcX[0].equals("LastStateBattlefield") && ability instanceof SpellAbility) {
-            Card c = ((SpellAbility) ability).getLastStateBattlefield().get(card);
-            val = c == null ? 0 : xCount(c, calcX[1], ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
 	    } else if (calcX[0].startsWith("Convoked")) {
@@ -1583,10 +1580,6 @@ public class AbilityUtils {
                 host.clearRemembered();
             }
             host.addRemembered(sa.getTargets());
-        }
-
-        if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
-            host.addImprintedCards(sa.getTargets().getTargetCards());
         }
 
         if (sa.hasParam("RememberCostMana")) {

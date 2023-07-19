@@ -243,7 +243,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (params.containsKey("ConditionTargetsSingleTarget")) {
             this.setTargetsSingleTarget(true);
         }
-    } // setConditions
+    }
 
     /**
      * <p>

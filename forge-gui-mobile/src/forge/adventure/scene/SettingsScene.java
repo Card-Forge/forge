@@ -30,7 +30,6 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * Scene to handle settings of the base forge and adventure mode
  */
 public class SettingsScene extends UIScene {
-    static public ForgePreferences Preference;
     private final Table settingGroup;
     TextraButton backButton;
     //TextraButton newPlane;
@@ -99,9 +98,6 @@ public class SettingsScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
         settingGroup = new Table();
-        if (Preference == null) {
-            Preference = FModel.getPreferences();
-        }
         //temporary disable custom world until it works correctly on each update
         /*selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
@@ -131,10 +127,10 @@ public class SettingsScene extends UIScene {
                     mode = "720p";
                 Graphics.setVideoMode(mode);
 
-                //update preference for classic mode if needed
-                if (Preference.getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equals(mode)) {
-                    Preference.setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
-                    Preference.save();
+                //update
+                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equalsIgnoreCase(mode)) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                    FModel.getPreferences().save();
                 }
                 return null;
             });
@@ -194,10 +190,8 @@ public class SettingsScene extends UIScene {
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
-                    if (Preference.getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
-                        Preference.setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
-                        Preference.save();
-                    }
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
+                    FModel.getPreferences().save();
                 }
             });
         }
@@ -237,16 +231,18 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
-            final String[] item = {Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
+            final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
             SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
                 String mode = (String) o;
                 if (mode == null)
                     mode = "Crop";
                 item[0] = mode;
-                //update preference for classic mode if needed
-                Preference.setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
-                Preference.save();
-                Forge.enableUIMask = Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                //update
+                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equalsIgnoreCase(mode)) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                    FModel.getPreferences().save();
+                    Forge.enableUIMask = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                }
                 ImageCache.clearGeneratedCards();
                 ImageCache.disposeTextures();
                 return null;
@@ -277,12 +273,12 @@ public class SettingsScene extends UIScene {
 
     private void addInputField(String name, ForgePreferences.FPref pref) {
         TextField box = Controls.newTextField("");
-        box.setText(Preference.getPref(pref));
+        box.setText(FModel.getPreferences().getPref(pref));
         box.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, ((TextField) actor).getText());
-                Preference.save();
+                FModel.getPreferences().setPref(pref, ((TextField) actor).getText());
+                FModel.getPreferences().save();
             }
         });
 
@@ -292,12 +288,12 @@ public class SettingsScene extends UIScene {
 
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
         CheckBox box = Controls.newCheckBox("");
-        box.setChecked(Preference.getPrefBoolean(pref));
+        box.setChecked(FModel.getPreferences().getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, ((CheckBox) actor).isChecked());
-                Preference.save();
+                FModel.getPreferences().setPref(pref, ((CheckBox) actor).isChecked());
+                FModel.getPreferences().save();
             }
         });
 
@@ -307,12 +303,12 @@ public class SettingsScene extends UIScene {
 
     private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {
         Slider slide = Controls.newSlider(min, max, 1, false);
-        slide.setValue(Preference.getPrefInt(pref));
+        slide.setValue(FModel.getPreferences().getPrefInt(pref));
         slide.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
-                Preference.save();
+                FModel.getPreferences().setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
+                FModel.getPreferences().save();
                 if (ForgePreferences.FPref.UI_VOL_MUSIC.equals(pref))
                     SoundSystem.instance.refreshVolume();
             }

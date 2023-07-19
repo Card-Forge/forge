@@ -528,9 +528,6 @@ public class TriggerHandler {
             sa = sa.copy(host, controller, false);
         }
 
-        sa.setLastStateBattlefield(game.getLastStateBattlefield());
-        sa.setLastStateGraveyard(game.getLastStateGraveyard());
-
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
@@ -565,7 +562,6 @@ public class TriggerHandler {
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
-        wrapperAbility.setLastStateBattlefield(game.getLastStateBattlefield());
         if (regtrig.isStatic()) {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {

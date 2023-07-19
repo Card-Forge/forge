@@ -1,28 +1,10 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -30,11 +12,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.Keyword;
@@ -51,6 +29,12 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -630,7 +614,7 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt.canTgtPlaneswalker()) {
                 // We can damage planeswalkers with this, consider targeting.
                 Card c = dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
-                if (c != null && !shouldTgtP(ai, sa, dmg, noPrevention, true)) {
+                if (c != null && !shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(c);
                     if (divided) {
                         int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -746,17 +730,17 @@ public class DamageDealAi extends DamageAiBase {
                 }
                 return false;
             }
-            // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
-                if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
-                        || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
-                        || immediately || shouldTgtP(ai, sa, dmg, noPrevention)) &&
-                        (!avoidTargetP(ai, sa))) {
-                    tcs.add(enemy);
-                    if (divided) {
-                        sa.addDividedAllocation(enemy, dmg);
-                        break;
+                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                        || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || immediately) {
+                    boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
+                    if ((pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
+                        tcs.add(enemy);
+                        if (divided) {
+                            sa.addDividedAllocation(enemy, dmg);
+                            break;
+                        }
                     }
                 }
             }
@@ -836,7 +820,7 @@ public class DamageDealAi extends DamageAiBase {
         if (!positive && !(saMe instanceof AbilitySub)) {
             return false;
         }
-        if (!urgent && !SpellAbilityAi.playReusable(ai, saMe)) {
+        if (!urgent && !playReusable(ai, saMe)) {
             return false;
         }
         return true;

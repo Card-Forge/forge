@@ -875,11 +875,10 @@ public class ComputerUtilMana {
             ManaPool.refundMana(manaSpentToPay, ai, sa);
             if (test) {
                 resetPayment(paymentList);
-                return false;
             } else {
                 System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa.toString() + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
-                return false;
             }
+            return false;
         }
 
         if (test) {
@@ -962,7 +961,12 @@ public class ComputerUtilMana {
             ManaCostShard toPay, SpellAbility saPayment) {
         AbilityManaPart m = saPayment.getManaPart();
         if (m.isComboMana()) {
-            m.setExpressChoice(ColorSet.fromMask(toPay.getColorMask()));
+            // usually we'll want to produce color that matches the shard
+            ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(saPayment).split(" ")));
+            // but other effects might still lead to a more permissive payment
+            if (!shared.isColorless()) {
+                m.setExpressChoice(ColorSet.fromMask(shared.iterator().next()));
+            }
             getComboManaChoice(ai, saPayment, sa, cost);
         }
         else if (saPayment.getApi() == ApiType.ManaReflected) {

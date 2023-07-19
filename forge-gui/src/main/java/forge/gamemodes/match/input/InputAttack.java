@@ -65,7 +65,6 @@ public class InputAttack extends InputSyncronizedBase {
         playerAttacks = attacks0;
         combat = combat0;
         defenders = combat.getDefenders();
-        potentialBanding = isBandingPossible();
     }
 
     @Override
@@ -296,6 +295,7 @@ public class InputAttack extends InputSyncronizedBase {
                 getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
         }
+        potentialBanding = isBandingPossible();
 
         updateMessage();
     }

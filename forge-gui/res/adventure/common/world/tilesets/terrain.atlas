@@ -4,16 +4,16 @@ size: 192,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Waste 
+Colorless 
   xy: 0, 64
   size: 48, 64 
-Waste_1 
+Colorless_1 
   xy: 48, 64
   size: 48, 64 
-Waste_2 
+Colorless_2 
   xy: 96, 64
   size: 48, 64 
-Waste_3 
+Colorless_3 
   xy: 144, 64
   size: 48, 64 
 White 

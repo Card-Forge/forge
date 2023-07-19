@@ -1,0 +1,10 @@
+Name:Archivist of Gondor
+ManaCost:2 U
+Types:Creature Human Advisor
+PT:2/3
+T:Mode$ DamageDone | ValidSource$ Card.IsCommander+YouOwn | ValidTarget$ Player | CheckSVar$ Monarch | SVarCompare$ EQ0 | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Battlefield | TriggerDescription$ When your commander deals combat damage to a player, if there is no monarch, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You 
+SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.isMonarch | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the monarch's end step, that player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer
+Oracle:When your commander deals combat damage to a player, if there is no monarch, you become the monarch.\nAt the beginning of the monarch's end step, that player draws a card.

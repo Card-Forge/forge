@@ -15,7 +15,7 @@
 "maxRoadDistance": 1000,
 "biomesNames": [
 	"world/biomes/base.json",
-	"world/biomes/waste.json",
+	"world/biomes/colorless.json",
 	"world/biomes/white.json",
 	"world/biomes/blue.json",
 	"world/biomes/black.json",

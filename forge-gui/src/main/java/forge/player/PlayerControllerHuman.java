@@ -832,7 +832,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return this.getGui().confirm(wrapper.getView().getHostCard(), buildQuestion.toString().replaceAll("\n", " "));
+            CardView cardView;
+            SpellAbilityView spellAbilityView = wrapper.getView();
+            if (spellAbilityView != null) //updated view
+                cardView = spellAbilityView.getHostCard();
+            else
+                cardView = wrapper.getCardView();
+            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
             inp.showAndWait();
@@ -1431,7 +1437,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return this.getGui().confirm(effectSA.getView().getHostCard(), question.replaceAll("\n", " "));
+            CardView cardView;
+            SpellAbilityView spellAbilityView = effectSA.getView();
+            if (spellAbilityView != null) //updated view
+                cardView = spellAbilityView.getHostCard();
+            else //fallback
+                cardView = effectSA.getCardView();
+            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, effectSA);
             inp.showAndWait();
@@ -1861,7 +1873,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             try {
                 cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
             } catch (Exception e) {
-                cardView = sa.getView().getHostCard();
+                SpellAbilityView spellAbilityView = sa.getView();
+                if (spellAbilityView != null) //updated view
+                    cardView = spellAbilityView.getHostCard();
+                else //fallback
+                    cardView = sa.getCardView();
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {

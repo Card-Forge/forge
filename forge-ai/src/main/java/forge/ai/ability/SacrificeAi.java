@@ -56,6 +56,7 @@ public class SacrificeAi extends SpellAbilityAi {
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final boolean destroy = sa.hasParam("Destroy");
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {
             final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -112,14 +113,15 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         }
 
-        final String defined = sa.getParam("Defined");
-        final String valid = sa.getParam("SacValid");
-        if (defined == null) {
+        final String defined = sa.getParamOrDefault("Defined", "You");
+        final String targeted = sa.getParamOrDefault("ValidTgts", "");
+        final String valid = sa.getParamOrDefault("SacValid", "Self");
+        if (valid.equals("Self")) {
             // Self Sacrifice.
-        } else if (defined.equals("Player")
+        } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")
                 || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
             // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
-            
+
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
@@ -140,6 +142,22 @@ public class SacrificeAi extends SpellAbilityAi {
         } else if (defined.equals("You")) {
             List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             for (Card c : computerList) {
+                if ("Lethal".equals(aiLogic)) {
+                    boolean isLethal = false;
+                    for (Player opp : ai.getOpponents()) {
+                        if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife() && c.getNetPower() >= opp.getLife()) {
+                            isLethal = true;
+                            break;
+                        }
+                    }
+                    for (Card creature : ai.getOpponents().getCreaturesInPlay()) {
+                        if (creature.canBeDestroyed() && c.getNetPower() >= creature.getNetToughness()) {
+                            isLethal = true;
+                            break;
+                        }
+                    }
+                    return c.hasSVar("SacMe") || isLethal;
+                }
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;
                 }

@@ -680,7 +680,7 @@ public class CardFactory {
         List<String> creatureTypes = null;
         final CardCloneStates result = new CardCloneStates(in, sa);
 
-        final String newName = sa.getParamOrDefault("NewName", null);
+        final String newName = sa.getParam("NewName");
         ColorSet colors = null;
 
         if (sa.hasParam("AddTypes")) {
@@ -798,7 +798,7 @@ public class CardFactory {
             }
 
             if (sa.hasParam("RemoveCardTypes")) {
-                state.removeCardTypes();
+                state.removeCardTypes(sa.hasParam("RemoveSubTypes"));
             }
 
             state.addType(types);

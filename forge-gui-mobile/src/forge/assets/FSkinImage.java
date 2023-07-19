@@ -232,7 +232,8 @@ public enum FSkinImage implements FImage {
     //adventure
     MANASHARD         (FSkinProp.ICO_MANASHARD, SourceFile.ADVENTURE),
     MENU_ADVLOGO      (FSkinProp.ICO_ADVLOGO, SourceFile.ADVENTURE),
-    ADV_DECKBOX      (FSkinProp.ICO_ADVDECKBOX, SourceFile.ADVENTURE),
+    ADV_DECKBOX       (FSkinProp.ICO_ADVDECKBOX, SourceFile.ADVENTURE),
+    ADV_FLIPICON      (FSkinProp.ICO_ADVFLIP, SourceFile.ADVENTURE),
 
     //menu icon
     MENU_GALAXY       (FSkinProp.ICO_MENU_GALAXY, SourceFile.ICONS),

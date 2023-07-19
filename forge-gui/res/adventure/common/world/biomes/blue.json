@@ -23,8 +23,6 @@
 "height": 0.7,
 "color": "10a2e0",
 "spriteNames": [
-	"IslandTree",
-	"Coral",
 	"Shell"
 ],
 "enemies": [
@@ -78,6 +76,7 @@
 	"Island Town Generic",
 	"Island Town Identity",
 	"Island Town Tribal",
+	"Aerie",
 	"NestU",
 	"MerfolkPool",
 	"MerfolkPool1",
@@ -104,51 +103,98 @@
 	"GitaxianLab",
 	"Kiora Island",
 	"Teferi Hideout",
-	"Jacehold"
+	"Jacehold",
+	"Skep"
 ],
 "structures": [
 	{
+		"N":2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/water.png",
-		"maskPath": "world/masks/circle.png",
-		"height": 0.20000002,
-		"width": 0.20000002,
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/blue.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.1,
+		"width": 0.1,
 		"symmetry": 8,
 		"periodicOutput": false,
 		"mappingInfo": [
 			{
 				"name": "water",
-				"color": "0070a0",
+				"color": "00ffff",
 				"collision": true
 			},
 			{
-				"name": "island_forest",
-				"color": "00a000",
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "pineapple",
+				"color": "ffff00",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "rock3",
+				"color": "402000",
+				"collision": true
+			},
+			{
+				"name": "rock4",
+				"color": "201000",
 				"collision": true
 			}
 		]
 	},
 	{
+		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/island_forest.png",
-		"maskPath": "world/masks/ring.png",
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/beach.png",
+		"maskPath": "world/structures/masks/ring.png",
 		"height": 0.5,
 		"width": 0.5,
 		"symmetry": 8,
-		"periodicOutput": false,
 		"mappingInfo": [
 			{
 				"name": "water",
-				"color": "0070a0",
+				"color": "00ffff",
 				"collision": true
 			},
 			{
-				"name": "island_forest",
-				"color": "00a000",
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "dune",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "dune2",
+				"color": "402000",
 				"collision": true
 			}
 		]

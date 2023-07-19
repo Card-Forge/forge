@@ -6,4 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:EachOpponent:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TemptingChange
 SVar:TemptingChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | DefinedPlayer$ Remembered | ChangeNum$ X
 SVar:X:Count$ValidHand Artifact.RememberedPlayerCtrl,Creature.RememberedPlayerCtrl,Enchantment.RememberedPlayerCtrl,Land.RememberedPlayerCtrl
+SVar:NeedsToPlayVar:Y LE2
+SVar:Y:Count$ValidHand Card.OppOwn
 Oracle:When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from their hand onto the battlefield.
