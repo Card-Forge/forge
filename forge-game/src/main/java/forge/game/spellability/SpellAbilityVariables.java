@@ -65,8 +65,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.activator = sav.getActivator();
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
-        this.activationLimit = sav.getActivationLimit();
-        this.gameActivationLimit = sav.getGameActivationLimit();
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
@@ -127,12 +125,6 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The b player turn. */
     private boolean playerTurn = false;
-
-    /** The activation limit. */
-    private int activationLimit = -1;
-
-    /** The game activation limit. */
-    private int gameActivationLimit = -1;
 
     /** The limitToCheck to check. */
     private String limitToCheck = null;
@@ -342,30 +334,6 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * <p>
-     * Setter for the field <code>activationLimit</code>.
-     * </p>
-     *
-     * @param limit
-     *            a int.
-     */
-    public final void setActivationLimit(final int limit) {
-        this.activationLimit = limit;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>gameActivationLimit</code>.
-     * </p>
-     *
-     * @param limit
-     *            a int.
-     */
-    public final void setGameActivationLimit(final int limit) {
-        this.gameActivationLimit = limit;
-    }
-
-    /**
-     * <p>
      * Setter for the field <code>phases</code>.
      * </p>
      *
@@ -569,24 +537,6 @@ public class SpellAbilityVariables implements Cloneable {
     }
     public final void setSvarOperand2(final String operand) {
         this.setsVarOperand2(operand);
-    }
-
-    /**
-     * Gets the activation limit.
-     *
-     * @return the activationLimit
-     */
-    public final int getActivationLimit() {
-        return this.activationLimit;
-    }
-
-    /**
-     * Gets the activation limit.
-     *
-     * @return the activationLimit
-     */
-    public final int getGameActivationLimit() {
-        return this.gameActivationLimit;
     }
 
     /**
