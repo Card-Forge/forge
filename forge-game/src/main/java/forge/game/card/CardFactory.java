@@ -798,7 +798,7 @@ public class CardFactory {
             }
 
             if (sa.hasParam("RemoveCardTypes")) {
-                state.removeCardTypes();
+                state.removeCardTypes(sa.hasParam("RemoveSubTypes"));
             }
 
             state.addType(types);
