@@ -491,6 +491,7 @@ ScryfallCode=CMM
 736 R Descendants' Fury @Aldo Domínguez
 737 R Guff Rewrites History @Matt Stewart
 738 R Jaya's Phoenix @Justyna Dura
+739 R Composer of Spring @Gaboleps
 740 R For the Ancestors @Hristo D. Chukov
 741 R Hatchery Sliver @Svetlin Velinov
 752 M Zhulodok, Void Gorger @Lius Lasahido
