@@ -295,13 +295,19 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             return;
                         }
 
-                        Map<String, Object> params = Maps.newHashMap();
-                        params.put("Source", source);
-                        params.put("Target", dest);
-                        String title = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
-                        CounterType chosenType = pc.chooseCounterType(typeChoices, sa, title, params);
+                        while (!typeChoices.isEmpty()) {
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Source", source);
+                            params.put("Target", dest);
+                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
+                            CounterType chosenType = pc.chooseCounterType(typeChoices, sa, title, params);
 
-                        removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
+                            removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
+                            if (!counterNum.equals("Any")) {
+                                break;
+                            }
+                            typeChoices.remove(chosenType);
+                        }
                     } else {
                         removeCounter(sa, source, cur, cType, counterNum, countersToAdd);
                     }
@@ -345,10 +351,11 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             params.put("CounterType", cType);
             params.put("Source", src);
             params.put("Target", dest);
+            int min = sa.hasParam("NonZero") && countersToAdd.isEmpty() ? 1 : 0;
             cnum = pc.chooseNumber(
                     sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard",
                             cType.getName(), CardTranslation.getTranslatedName(src.getName())),
-                    0, cmax, params);
+                    min, cmax, params);
         } else {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));
         }
