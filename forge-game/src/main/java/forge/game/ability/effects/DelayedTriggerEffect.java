@@ -47,7 +47,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
-        delTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+        delTrig.setSpawningAbility(sa.copy(host, true));
         delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
