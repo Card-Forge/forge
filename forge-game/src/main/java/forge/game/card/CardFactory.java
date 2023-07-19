@@ -208,10 +208,13 @@ public class CardFactory {
             spell.setCastFaceDown(false);
         }
 
+        // mana is not copied
+        copySA.clearManaPaid();
         //remove all costs
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", targetSA.isAbility()));
         }
+
         copySA.setActivatingPlayer(controller);
 
         return copySA;

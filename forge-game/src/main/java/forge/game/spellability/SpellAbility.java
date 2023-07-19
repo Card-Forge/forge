@@ -1151,11 +1151,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable = new CardZoneTable(changeZoneTable);
             }
 
-            clone.payingMana = Lists.newArrayList();
-            // mana is not copied
-            if (lki) {
-                clone.payingMana.addAll(payingMana);
-            }
+            clone.payingMana = Lists.newArrayList(payingMana);
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(getPaidHash());
 

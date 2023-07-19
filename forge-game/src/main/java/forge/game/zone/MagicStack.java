@@ -224,7 +224,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return Iterables.filter(undoStack, CardTraitPredicates.isHostCard(c));
     }
 
-    public final void add(final SpellAbility sp) {
+    public final void add(SpellAbility sp) {
         SpellAbilityStackInstance si = null;
         final Card source = sp.getHostCard();
         Player activator = sp.getActivatingPlayer();
@@ -298,6 +298,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             for (final Player p : activator.getOpponents()) {
                 p.getController().autoPassCancel();
             }
+        }
+
+        if (sp.isActivatedAbility() && !sp.isCopied()) {
+            // if not already copied use a fresh instance
+            SpellAbility original = sp;
+            sp = sp.copy();
+            sp.setOriginalAbility(original);
         }
 
         if (frozen && !sp.hasParam("IgnoreFreeze")) {
