@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant creature or Vehicle
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | AITgts$ Card.nonVehicle | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Artifact & Vehicle | AddKeyword$ Crew:5 | RemoveCardTypes$ True | Description$ Enchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Artifact & Vehicle | AddKeyword$ Crew:5 | RemoveCardTypes$ True | RemoveArtifactTypes$ True | Description$ Enchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types.
 Oracle:Flash\nEnchant creature or Vehicle\nEnchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types. (It's not a creature unless its crewed.)
