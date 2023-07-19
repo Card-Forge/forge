@@ -3,7 +3,8 @@ ManaCost:X GW
 Types:Sorcery
 A:SP$ GainLife | Cost$ X GW | LifeAmount$ Y | SpellDescription$ You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)
 SVar:X:Count$xPaid
-SVar:Y:SVar$W/Plus.G
-SVar:W:Count$Adamant_1.White.X.0
-SVar:G:Count$Adamant_1.Green.X.0
+SVar:Y:SVar$X/Times.Z
+SVar:Z:SVar$G/Plus.W
+SVar:G:Count$EachSpentToCast.G/LimitMax.1
+SVar:W:Count$EachSpentToCast.W/LimitMax.1
 Oracle:You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)
