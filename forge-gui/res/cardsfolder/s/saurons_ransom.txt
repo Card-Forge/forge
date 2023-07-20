@@ -1,0 +1,10 @@
+Name:Sauron's Ransom
+ManaCost:1 U B
+Types:Instant
+A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBPeekAndReveal | SpellDescription$ Choose an opponent. They look at the top four cards of your library and separate them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard. The Ring tempts you.
+SVar:DBPeekAndReveal:DB$ PeekAndReveal | Defined$ You | PeekAmount$ 4 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ Separate
+SVar:Separate:DB$ TwoPiles | Defined$ You | Separator$ ChosenPlayer | Chooser$ You | DefinedCards$ Remembered | ChosenPile$ DBHand | UnchosenPile$ DBGrave | Zone$ Library | FaceDown$ One | SubAbility$ TrigTempt | StackDescription$ None
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:Choose an opponent. They look at the top four cards of your library and separate them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard. The Ring tempts you.
