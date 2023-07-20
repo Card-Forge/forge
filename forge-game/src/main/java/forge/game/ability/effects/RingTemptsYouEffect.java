@@ -24,7 +24,7 @@ public class RingTemptsYouEffect extends EffectEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("The Ring tempts " + sa.getActivatingPlayer());
+        sb.append("The Ring tempts " + sa.getActivatingPlayer() + ".");
         return sb.toString();
     }
 
