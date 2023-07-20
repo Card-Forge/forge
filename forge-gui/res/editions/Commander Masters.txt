@@ -116,6 +116,7 @@ ScryfallCode=CMM
 232 R Hellkite Charger @Jaime Jones
 235 R Inferno Titan @Kev Walker
 236 M Insurrection @Mark Zug
+237 R Kazuul, Tyrant of the Cliffs @Paul Bonner
 238 R Krenko, Mob Boss @Karl Kopinski
 241 R Magus of the Wheel @Carl Frank
 244 M Neheb, the Eternal @Chris Rahn
@@ -206,6 +207,7 @@ ScryfallCode=CMM
 415 U Thran Dynamo @Ron Spears
 419 C Ash Barrens @Jonas De Ro
 420 C Command Tower @Ryan Yee
+421 U Myriad Landscape @Richard Wright
 423 C Path of Ancestry @Alayna Danner
 424 R Rejuvenating Springs @Alayna Danner
 425 U Reliquary Tower @Jesper Ejsing
@@ -476,15 +478,22 @@ ScryfallCode=CMM
 706 M Commodore Guff @Matt Stewart
 707 M Sliver Gravemother @Chris Rahn
 709 M Leori, Sparktouched Hunter @John Tedrick
+710 M Narci, Fable Singer @Miranda Meeks
 711 M Rukarumel, Biologist @Fariba Khamseh
+719 R Battle at the Helvault @Alix Branwyn
+720 R Boon of the Spirit Realm @Gaboleps
 721 R Gatewatch Beacon @Deruchenko Alexander
 722 R Onakke Oathkeeper @Arash Radkia
+723 R Ondu Spiritdancer @Tran Nguyen
 724 R Regal Sliver @Victor Adame Minguez
 725 R Teyo, Geometric Tactician @Kieran Yanner
 726 R Sparkshaper Visionary @Svetlin Velinov
 727 R Taunting Sliver @Maxime Minard
 728 R Titan of Littjara @Aldo Domínguez
 729 R Vronos, Masked Inquisitor @Ekaterina Burmak
+730 R Cacophony Unleashed @Deruchenko Alexander
+731 R Demon of Fate's Design @Fajareka Setiawan
+732 R Ghoulish Impetus @Steve Ellis
 733 R Lazotep Sliver @Maxime Minard
 734 R Capricious Sliver @Brent Hollowell
 735 R Chandra, Legacy of Fire @Chris Rahn
@@ -494,6 +503,7 @@ ScryfallCode=CMM
 739 R Composer of Spring @Gaboleps
 740 R For the Ancestors @Hristo D. Chukov
 741 R Hatchery Sliver @Svetlin Velinov
+742 R Nyxborn Behemoth @Nestor Ossandon Leal
 752 M Zhulodok, Void Gorger @Lius Lasahido
 754 R Gatewatch Beacon @Deruchenko Alexander
 755 R Onakke Oathkeeper @Arash Radkia
@@ -533,33 +543,64 @@ ScryfallCode=CMM
 797 L Forest @Sam Burley
 798 L Forest @Sam Burley
 799 L Forest @Kev Walker
+813 M Ajani Steadfast @Chris Rahn
 815 R Bonescythe Sliver @Lius Lasahido
 817 R Cleansing Nova @Marta Nael
 818 U Constricting Sliver @Loïc Canavaggia
+819 M Deploy the Gatewatch @Wesley Burt
+820 M Elspeth, Sun's Champion @Tyler Jacobson
+822 M Gideon Jura @Aleksi Briclot
+824 U Grateful Apparition @Izzy
 825 R Harsh Mercy @John Matson
+829 R Norn's Annex @James Paick
+830 R Oath of Gideon @Wesley Burt
+832 U Oreskos Explorer @Winona Nelson
+833 R Promise of Loyalty @Sara Winters
+834 R Semester's End @Alayna Danner
 835 C Sentinel Sliver @Lucas Graciano
 837 C Sinew Sliver @Steven Belledin
+840 M Starfield of Nyx @Tyler Jacobson
+841 U Swords to Plowshares @Sam Wolfe Connelly
+842 R Urza's Ruinous Blast @Slawomir Maniak
+843 U The Wanderer @Wesley Burt
+844 R Deepglow Skate @Jason Kang
 845 U Diffusion Sliver @Campbell White
 846 C Distant Melody @Omar Rayyan
+847 U Flux Channeler @Heonhwa Choe
+848 U Fog Bank @Howard Lyon
 849 R Galerider Sliver @Campbell White
+850 M Jace Beleren @Aleksi Briclot
+851 M Jace, Architect of Thought @Jaime Jones
+852 M Jace, Mirror Mage @Tyler Jacobson
+853 U Narset, Parter of Veils @Magali Villeneuve
+854 R Oath of Jace @Wesley Burt
 855 U Shifting Sliver @Darrell Riche
+856 R Spark Double @Eric Deschamps
 857 R Synapse Sliver @Thomas M. Baxa
+858 U Thrummingbird @Efrem Palacios
 859 U Windfall @Scott Murphy
 860 C Winged Sliver @Anthony S. Waters
 861 C Clot Sliver @Jeff Laubenstein
 862 R Crippling Fear @Nestor Ossandon Leal
 863 C Crypt Sliver @Michele Giorgi
+864 R Cunning Rhetoric @Chris Rallis
 870 R Syphon Sliver @Johann Bodin
 871 U Blade Sliver @Alexandre Honoré
+872 R Blasphemous Act @Daarken
 873 C Blur Sliver @Ben Wootten
 874 C Bonesplitter Sliver @Dany Orizio
+875 M Chandra, Awakened Inferno @Chris Rahn
+876 M Chandra, Torch of Defiance @Magali Villeneuve
 877 C Cleaving Sliver @David Gaillet
 878 U Hollowhead Sliver @Johan Grenier
+879 R Repeated Reverberation @Izzy
+880 R Sarkhan the Masterless @Kieran Yanner
 881 R Spiteful Sliver @Johann Bodin
 882 C Striking Sliver @Aaron J. Riley
 883 C Two-Headed Sliver @Raoul Vitale
 887 R Brood Sliver @Ron Spears
 889 C Cultivate @Anthony Palumbo
+891 R Dryad of the Ilysian Grove @Scott Murphy
 894 C Farseek @Martina Pilcerova
 896 C Gemhide Sliver @Alayna Danner
 900 U Manaweft Sliver @Franz Vohwinkel
@@ -577,34 +618,65 @@ ScryfallCode=CMM
 924 U Harmonic Sliver @Luca Zontini
 925 U Hibernation Sliver @Scott Kirschner
 927 U Lavabelly Sliver @Mark Behm
+929 M Nahiri, the Harbinger @Aleksi Briclot
+930 M Narset of the Ancient Way @Yongjae Choi
+931 M Narset, Enlightened Master @Magali Villeneuve
 932 U Necrotic Sliver @Dave Allsop
+934 R Oath of Teferi @Wesley Burt
+935 U Saheeli, Sublime Artificer @Wesley Burt
 937 M Sliver Hivelord @Aleksi Briclot
+939 U Wall of Denial @Howard Lyon
+941 C Azorius Signet @Greg Hildebrandt
+942 C Boros Signet @Mike Sass
+943 M The Chain Veil @Volkan Baǵa
 953 U Herald's Horn @Jason Felix
+954 U Honor-Worn Shaku @Tony Szczudlo
 955 R Icon of Ancestry @Chris Seaman
+957 C Izzet Signet @Raoul Vitale
+965 R Nevinyrral's Disk @Steve Argyle
 970 U Pillar of Origins @Dimitar Marinski
+972 R Silent Arbiter @Mark Zug
+978 U Talisman of Conviction @Lindsey Look
+979 U Talisman of Creativity @Lindsey Look
+980 U Talisman of Progress @Mike Dringenberg
 982 R Vanquisher's Banner @Milivoj Ćeran
+983 C Wayfarer's Bauble @Darrell Riche
 989 R Canopy Vista @Adam Paquette
+990 R Cascade Bluffs @Brandon Kitkouski
 991 R Cinder Glade @Adam Paquette
 993 R Exotic Orchard @Steven Belledin
 994 U Flood Plain @Pat Lewis
+995 C Forge of Heroes @Titus Lunter
 997 U Frontier Bivouac @Titus Lunter
+998 R Frostboil Snarl @Sam Burley
+999 R Furycalm Snarl @Sam Burley
 1002 U Grasslands @John Avon
+1004 U Interplanar Beacon @Adam Paquette
 1005 R Irrigated Farmland @Jonas De Ro
 1006 U Jungle Shrine @Wayne Reynolds
+1007 R Karn's Bastion @Adam Paquette
+1011 R Mobilized District @Jedd Chevrier
 1012 U Mountain Valley @Kari Johnson
+1013 R Mystic Gate @Fred Fields
 1014 U Mystic Monastery @Florian de Gesincourt
 1016 U Nomad Outpost @Kamila Szutenberg
 1017 U Opulent Palace @Adam Paquette
+1019 R Port Town @Kamila Szutenberg
 1020 R Prairie Stream @Adam Paquette
 1021 U Rocky Tar Pit @Jeff Miracola
+1022 R Rugged Prairie @Fred Fields
 1024 U Sandsteppe Citadel @Sam Burley
-1025 R Savage Lands @John Avon
+1025 U Savage Lands @John Avon
 1026 R Scattered Groves @Christine Choi
 1029 U Seaside Citadel @Volkan Baǵa
 1030 U Secluded Courtyard @Sam Burley
 1032 R Sheltered Thicket @Sung Choi
+1035 R Skycloud Expanse @Sam Burley
 1036 R Smoldering Marsh @Adam Paquette
 1038 R Sunken Hollow @Adam Paquette
+1041 R Temple of Enlightenment @Piotr Dura
+1042 R Temple of Epiphany @Adam Paquette
+1047 R Temple of Triumph @Piotr Dura
 1050 U Unclaimed Territory @Dimitar Marinski
 1057 M Kozilek, the Great Distortion @Grant Griffin
 1058 M Morophon, the Boundless @Jack Hughes
