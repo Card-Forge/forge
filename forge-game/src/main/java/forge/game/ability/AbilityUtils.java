@@ -86,10 +86,11 @@ public class AbilityUtils {
     // But then we only need update one function at a time once the casting is
     // everywhere.
     // Probably will move to One function solution sometime in the future
-    public static CardCollection getDefinedCards(final Card hostCard, final String def, final CardTraitBase sa) {
+    public static CardCollection getDefinedCards(final Card hostCard, final String def, CardTraitBase sa) {
         CardCollection cards = new CardCollection();
         String changedDef = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final String[] incR = changedDef.split("\\.", 2);
+        sa = adjustTriggerContext(incR, sa);
         String defined = incR[0];
         final Game game = hostCard.getGame();
 
@@ -433,7 +434,7 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
         return calculateAmount(card, amount, ability, false);
     }
-    public static int calculateAmount(final Card card, String amount, final CardTraitBase ability, boolean maxto) {
+    public static int calculateAmount(final Card card, String amount, CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
@@ -507,6 +508,8 @@ public class AbilityUtils {
 
         // modify amount string for text changes
         calcX[1] = applyAbilityTextChangeEffects(calcX[1], ability);
+
+        ability = adjustTriggerContext(calcX, ability);
 
         Integer val = null;
         if (calcX[0].startsWith("Count")) {
@@ -986,15 +989,14 @@ public class AbilityUtils {
      * @return a {@link java.util.ArrayList} object.
      */
     @SuppressWarnings("unchecked")
-    public static PlayerCollection getDefinedPlayers(final Card card, final String def, final CardTraitBase sa) {
+    public static PlayerCollection getDefinedPlayers(final Card card, final String def, CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
+        final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
+        final Game game = card == null ? null : card.getGame();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final String[] incR = changedDef.split("\\.", 2);
+        sa = adjustTriggerContext(incR, sa);
         String defined = incR[0];
-
-        final Game game = card == null ? null : card.getGame();
-
-        final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
         if (defined.equals("Self") || defined.equals("TargetedCard") || defined.equals("ThisTargetedCard")
                 || defined.startsWith("Valid") || getPaidCards(sa, defined) != null || defined.equals("TargetedSource")
@@ -3886,5 +3888,21 @@ public class AbilityUtils {
             }
         }
         return false;
+    }
+
+    private static CardTraitBase adjustTriggerContext(String[] def, final CardTraitBase ctb) {
+        if (def[0].startsWith("Spawner>") && ctb instanceof SpellAbility) {
+            Trigger trig = ((SpellAbility) ctb).getTrigger();
+            if (trig == null) {
+                return ctb;
+            }
+            SpellAbility spawner = trig.getSpawningAbility();
+            if (spawner == null) {
+                return ctb;
+            }
+            def[0] = def[0].substring(8);
+            return spawner;
+        }
+        return ctb;
     }
 }

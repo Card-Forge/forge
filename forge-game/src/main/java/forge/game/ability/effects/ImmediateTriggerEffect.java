@@ -70,10 +70,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
                 ((AbilitySub)overridingSA).setParent(null);
             }
 
-            if (sa.hasParam("CopyTriggeringObjects")) {
-                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
-            }
-
             immediateTrig.setOverridingAbility(overridingSA);
         }
 

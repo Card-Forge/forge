@@ -186,7 +186,6 @@ public class CardFactory {
             copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
             copySA = targetSA.copy(c, controller, false);
-            c.setCastSA(copySA);
             // need to copy keyword
             if (targetSA.getKeyword() != null) {
                 KeywordInterface kw = targetSA.getKeyword().copy(c, false);
@@ -206,6 +205,7 @@ public class CardFactory {
         if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
             spell.setCastFaceDown(false);
+            c.setCastSA(copySA);
         }
 
         // mana is not copied
@@ -214,8 +214,6 @@ public class CardFactory {
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", targetSA.isAbility()));
         }
-
-        copySA.setActivatingPlayer(controller);
 
         return copySA;
     }

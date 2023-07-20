@@ -1015,7 +1015,7 @@ public class CountersPutAi extends CountersAi {
         if (mine.isEmpty()) {
             // Try to Benefit Ally if possible
             final CardCollection ally = CardLists.filterControlledBy(options, ai.getAllies());
-            if (ally.isEmpty()) {
+            if (!ally.isEmpty()) {
                 return ComputerUtilCard.getBestAI(ally);
             }
             return isOptional ? null : ComputerUtilCard.getWorstAI(options);
