@@ -81,10 +81,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
                 overridingSA.setSVar("StoredTransform", String.valueOf(host.getTransformedTimestamp()));
             }
 
-            if (sa.hasParam("CopyTriggeringObjects")) {
-                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
-            }
-
             delTrig.setOverridingAbility(overridingSA);
         }
         final TriggerHandler trigHandler  = game.getTriggerHandler();
