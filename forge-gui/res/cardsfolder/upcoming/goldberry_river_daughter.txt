@@ -1,0 +1,11 @@
+Name:Goldberry, River-Daughter
+ManaCost:1 U
+Types:Legendary Creature Nymph
+PT:1/3
+A:AB$ MoveCounter | Cost$ T | Defined$ Self | ValidTgts$ Permanent.YouCtrl+Other | TgtPrompt$ Select another target permanent you control | CounterNum$ 1 | CounterType$ EachNotOn | SpellDescription$ Move a counter of each kind not on CARDNAME from another target permanent you control onto NICKNAME.
+A:AB$ MoveCounter | Cost$ U T | Source$ Self | ValidTgts$ Permanent.YouCtrl+Other | RememberPut$ True | TgtPrompt$ Select another target permanent you control | CounterNum$ Any | CounterType$ Any | NonZero$ True | SubAbility$ DBDraw | SpellDescription$ Move one or more counters from NICKNAME onto another target permanent you control. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHints:Ability$Counters
+Oracle:{T}: Move a counter of each kind not on Goldberry, River-Daughter from another target permanent you control onto Goldberry.\n{U}, {T}: Move one or more counters from Goldberry onto another target permanent you control. If you do, draw a card.
