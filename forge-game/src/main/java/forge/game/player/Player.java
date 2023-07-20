@@ -172,6 +172,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int simultaneousDamage = 0;
 
     private int lastTurnNr = 0;
+    private int numRingTemptedYou = 0;
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
     private final Map<String, Integer> notedNum = Maps.newHashMap();
@@ -1925,6 +1926,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void resetCompletedDungeons() {
         completedDungeons.clear();
+    }
+
+    public final int getNumRingTemptedYou() {
+        return numRingTemptedYou;
+    }
+    public final void incrementRingTemptedYou() {
+        numRingTemptedYou++;
+    }
+    public final void resetRingTemptedYou() {
+        numRingTemptedYou = 0;
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {
