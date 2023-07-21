@@ -605,8 +605,7 @@ public class ComputerUtilCombat {
             }
 
         } // flanking
-        if (attacker.hasKeyword(Keyword.INDESTRUCTIBLE)
-                && !(defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT))) {
+        if (attacker.hasKeyword(Keyword.INDESTRUCTIBLE) && !defender.isWitherDamage()) {
             return 0;
         }
 
@@ -719,8 +718,7 @@ public class ComputerUtilCombat {
         int firstStrikeBlockerDmg = 0;
 
         for (final Card defender : blockers) {
-            if (!(defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT))
-                    && canDestroyAttacker(ai, attacker, defender, combat, true)) {
+            if (!(defender.isWitherDamage()) && canDestroyAttacker(ai, attacker, defender, combat, true)) {
                 return true;
             }
             if (defender.hasFirstStrike() || defender.hasDoubleStrike()) {
@@ -901,7 +899,7 @@ public class ComputerUtilCombat {
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
         if (dealsFirstStrikeDamage(attacker, withoutAbilities, null)
-                && (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT))
+                && attacker.isWitherDamage()
                 && !dealsFirstStrikeDamage(blocker, withoutAbilities, null)
                 && blocker.canReceiveCounters(CounterEnumType.M1M1)) {
             power -= attacker.getNetCombatDamage();
@@ -1193,7 +1191,7 @@ public class ComputerUtilCombat {
         // less damage than expected
         if (null != blocker) {
             if (dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
-                    && (blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT))
+                    && blocker.isWitherDamage()
                     && !dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && attacker.canReceiveCounters(CounterEnumType.M1M1)) {
                 power -= blocker.getNetCombatDamage();
@@ -1689,7 +1687,7 @@ public class ComputerUtilCombat {
         } // flanking
 
         if (((attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, attacker)))
-                && !(blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT)))
+                && !(blocker.isWitherDamage()))
                 || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterEnumType.M1M1) && (attacker
                         .getCounters(CounterEnumType.M1M1) == 0))
                 || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterEnumType.P1P1) && (attacker
@@ -1795,8 +1793,7 @@ public class ComputerUtilCombat {
         final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (!(attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT))
-                    && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
+            if (!(attacker.isWitherDamage()) && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
                 return true;
             }
         }
@@ -1902,8 +1899,8 @@ public class ComputerUtilCombat {
     		return true;
     	}
 
-        if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, blocker))) && !(attacker
-                .hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)))
+        if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (!withoutAbilities && ComputerUtil.canRegenerate(ai, blocker)))
+                && !attacker.isWitherDamage())
                 || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && blocker
                         .getCounters(CounterEnumType.M1M1) == 0)
                 || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterEnumType.P1P1) && blocker
@@ -2158,7 +2155,7 @@ public class ComputerUtilCombat {
         int killDamage = getDamageToKill(c, false);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
-            if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
+            if (!source.isWitherDamage()) {
                 return maxDamage + 1;
             }
         } else if (source.hasKeyword(Keyword.DEATHTOUCH) && c.isCreature()) {

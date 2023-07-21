@@ -498,8 +498,8 @@ public class SpecialCardAi {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
-            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.hasKeyword(Keyword.WITHER)
-                    && !source.hasKeyword(Keyword.INFECT) && predictedPT.getLeft() <= oppT) {
+            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.isWitherDamage()
+                    && predictedPT.getLeft() <= oppT) {
                 // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
                 return false;
             }
