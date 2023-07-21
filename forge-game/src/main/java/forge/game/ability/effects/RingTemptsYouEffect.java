@@ -62,7 +62,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         switch(level) {
             case 1:
-                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+YouCtrl | AddType$ Legendary | AddDesignation$ Ring-bearer | Description$ Your Ring-bearer is legendary.";
+                String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+YouCtrl | AddType$ Legendary | Description$ Your Ring-bearer is legendary.";
                 String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.IsRemembered+YouCtrl | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
                 theRing.addStaticAbility(legendary);
                 theRing.setSVar("X", "Remembered$CardPower");
