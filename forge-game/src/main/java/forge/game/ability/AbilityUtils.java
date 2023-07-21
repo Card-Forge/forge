@@ -165,15 +165,10 @@ public class AbilityUtils {
                 if (defined.startsWith("TopThird")) {
                     int third = defined.contains("RoundedDown") ? (int) Math.floor(libSize / 3.0)
                             : (int) Math.ceil(libSize / 3.0);
-                    for (int i = 0; i < third; i++) {
-                        cards.add(lib.get(i));
-                    }
+                    cards = player.getTopXCardsFromLibrary(third);
                 } else if (defined.startsWith("Top_")) {
                     String[] parts = defined.split("_");
-                    int amt = AbilityUtils.calculateAmount(hostCard, parts[1], sa);
-                    for (int i = 0; i < amt; i++) {
-                        cards.add(lib.get(i));
-                    }
+                    cards = player.getTopXCardsFromLibrary(AbilityUtils.calculateAmount(hostCard, parts[1], sa));
                 } else {
                     c = lib.get(defined.startsWith("Top") ? 0 : libSize - 1);
                 }
