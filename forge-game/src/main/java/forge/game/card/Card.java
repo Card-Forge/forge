@@ -113,13 +113,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
-    private List<Card> theRings = Lists.newArrayList();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
-    private Card mergedTo;
+    private Card mergedTo, theRing;
 
     private SpellAbility effectSourceAbility;
     private SpellAbility tokenSpawningAbility;
@@ -5980,19 +5979,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setRingBearer(final boolean ringbearer0, Card theRing) {
         ringbearer = ringbearer0;
-        if (theRing != null)
-            theRings.add(theRing);
+        if (theRing != null) {
+            if (this.theRing != null) {
+                this.theRing.clearRemembered();
+                this.theRing = theRing;
+            } else {
+                this.theRing = theRing;
+            }
+        }
         view.updateRingBearer(this);
     }
     public final void clearRingBearer() {
         setRingBearer(false, null);
     }
     void clearTheRings() {
-        if (theRings.isEmpty())
+        if (this.theRing == null)
             return;
-        for (Card theRing : theRings)
-            theRing.clearRemembered();
-        theRings.clear();
+        this.theRing.clearRemembered();
+        this.theRing = null;
         clearRingBearer();
     }
     public final int getRingLevel() {
