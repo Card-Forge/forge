@@ -49,7 +49,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
     // next lines need to be updated with each printing of Shivan Dragon
-    protected final String latestArtShivanDragonEdition = "DMR";
+    protected final String latestArtShivanDragonEdition = "P30T";
     protected final String latestArtShivanDragonEditionNoPromo = "DMR";
 
     protected final String originalArtLightningDragonEdition = "USG";
@@ -1757,7 +1757,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaReleaseDate = format.parse(alphaEditionReleaseDate);
             // next line needs to be updated each time Shivan Dragon is reprinted
-            latestShivanDragonReleaseDateToDate = format.parse("2023-03-31");
+            latestShivanDragonReleaseDateToDate = format.parse("2023-09-31");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
