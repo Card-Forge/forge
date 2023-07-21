@@ -1,0 +1,9 @@
+Name:Ugin's Mastery
+ManaCost:4
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigManifest | TriggerDescription$ Whenever you cast a colorless creature spell, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigManifest:DB$ Manifest
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | Execute$ TrigState | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$Whenever you attack with creatures with total power 6 or greater, you may turn a face-down creature you control face up.
+SVar:TrigState:DB$ SetState | Choices$ Creature.faceDown+YouCtrl | ChoiceTitle$ Select a facedown creature you control | Mode$ TurnFace
+SVar:PackTactics:Count$SumPower_Creature.attacking
+Oracle:Whenever you cast a colorless creature spell, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever you attack with creatures with total power 6 or greater, you may turn a face-down creature you control face up.
