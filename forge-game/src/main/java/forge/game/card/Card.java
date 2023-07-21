@@ -5820,7 +5820,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, true);
         }
         if (isCreature()) {
-            if (isWitherDamage()) { // 120.3d
+            if (source.isWitherDamage()) { // 120.3d
                 addCounter(CounterEnumType.M1M1, damageIn, source.getController(), counterTable);
                 damageType = DamageType.M1M1Counters;
             }
