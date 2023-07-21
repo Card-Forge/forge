@@ -401,6 +401,7 @@ Urza
 Venser
 Vivien
 Vraska
+Vronos
 Will
 Windgrace
 Wrenn
