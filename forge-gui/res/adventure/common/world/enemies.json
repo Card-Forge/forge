@@ -333,6 +333,99 @@
 	]
 },
 {
+	"name": "Ancient Silver Dragon",
+	"nameOverride": "",
+	"sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+	"deck": [
+		"decks/standard/bluedragon.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"scale": 1.2,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Dragon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.4,
+			"count": 1,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Planeswalker"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 5,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{R}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 5
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Dragon",
+		"Flyer",
+		"Monster",
+		"IdentityBlue",
+		null,
+		null,
+		null,
+		null,
+		null,
+		null
+	]
+},
+{
 	"name": "Adventurer",
 	"sprite": "sprites/enemy/humanoid/swordsman_3.atlas",
 	"deck": [
@@ -2832,6 +2925,67 @@
 		"Domesticated",
 		"IdentityBlue",
 		"BiomeBlue"
+	]
+},
+{
+	"name": "Black Golem",
+	"sprite": "sprites/enemy/construct/golem_black.atlas",
+	"deck": [
+		"decks/standard/blackconstruct.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Guardian",
+		"Artifact",
+		"Furnace",
+		"IdentityColorless",
+		"Construct",
+		"Robot",
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -7717,9 +7871,10 @@
 },
 {
 	"name": "Elemental",
+	"nameOverride": "Air Elemental",
 	"sprite": "sprites/enemy/elemental/crystalelemental.atlas",
 	"deck": [
-		"decks/standard/elemental_blue.json"
+		"decks/standard/elemental_air.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -7733,17 +7888,9 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
+				"rare",
+				"Common",
+				"Uncommon"
 			],
 			"cardTypes": [
 				"Creature",
@@ -7751,33 +7898,6 @@
 				"Enchantment",
 				"Instant",
 				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
 			]
 		},
 		{
@@ -23274,7 +23394,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 12,
-	"scale": 0.75,
+	"scale": 0.90,
 	"life": 13,
 	"rewards": [
 		{
@@ -23634,9 +23754,10 @@
 },
 {
 	"name": "Zombie",
+	"nameOverride": "Walking Zombie",
 	"sprite": "sprites/enemy/undead/zombie.atlas",
 	"deck": [
-		"decks/standard/zombie_bad.json"
+		"decks/standard/zombie_black_easy.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -23683,10 +23804,10 @@
 	"name": "Zombie Lord",
 	"sprite": "sprites/enemy/undead/lich.atlas",
 	"deck": [
-		"decks/standard/zombie_good.json"
+		"decks/standard/zombie_black_medium.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.7,
 	"difficulty": 0.1,
 	"speed": 21,
 	"life": 18,
@@ -23724,5 +23845,51 @@
 		"IdentityBlack",
 		"BiomeBlack"
 	]
+},
+{
+	"name": "Zombie Master",
+	"sprite": "sprites/enemy/undead/lich_3.atlas",
+	"deck": [
+		"decks/standard/zombie_black_hard.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.4,
+	"difficulty": 0.1,
+	"speed": 21,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 150,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"count": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Zombie",
+		"Humanoid",
+		"Leader",
+		"IdentityBlack",
+		"BiomeBlack"
+		]
 }
 ]

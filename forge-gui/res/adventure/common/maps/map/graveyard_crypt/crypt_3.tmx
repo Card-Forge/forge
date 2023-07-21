@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="111">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <layer id="1" name="Background" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0AMLGA1u6QEMDEyO7DJj/Y3DePE4IHq/sGMvxAOFkEYi+IRk9/8zgR7kTm09t9MIzLfbj49HAfNjxU3IcOBsJ9x4QRmFL3zRvg8EMHQ9F9lLiR2DQznMNvMLuPXnjUffRx3ygYBaNgFIxUAABxFz2P
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="25" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJzN1jsOwjAMBuBsCIlMsFFGdo6D4AQcCu4B7NyCuxALWZg0cZx3LP2qmlb0I7UR00qpSZCzVuqkw2u9sjPZCtbs3Jb/2S/m12Httf4e4bynz34++rBSfPAen+Z4N3mQ4Br3jiU+qOsh3Qf7dNT+cHuIz/ftD15/Z/rsQhtUjM/Vf5w/1UeL82HPY5+N6kObxOe7t4TP3iucTXpOQ+c39F1wVl0zxxU1uXxcQvdKfg84n+9+qS+UWr5STqkvJ6V9pZ0lfbTHRzC28qUYoVr0n22UWlPmseUe1vJxn0f7J9aX64L/wCFf7F7WeLej+y6bX0r2YO3ZoNV7Rjhbrq9VSXwfYFVBoA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzllrFOAzEMhiN1QKdeUccKKG/BgMTQqQ9RRsoTdC3wFox9DQSFR2FqmZC6InVqLGrFZ+KLzeXKwC/90l2Si784cXTO/W9d95x7KYMnPVt/2xr6mDcXzk29b71PS1v/IfhWPu7a+0Pg4/1ne+fQfWI/IP6iCI7x8f4mfO/G8b/hA1n5PoX2EXvn8x46f1TzyN5KfCgLX64ziFxoemcsGd9zWb1PlnsGHJPi4/cRnQMUqwcpJorypZTi4/m21kNTafl4PUDegHXE2r+M8U+u8vDFFKuHmO66fj3ED13dd035LDEuj4OHhjqs4xsX+fieBsG5+ZoqJ9+gHwx8b+X3ecF64NLUQ5t8lPEvpOFDRqy/WadqbJf0WFStFdT9q5IvdRal/8icbBq+zdHPuaCt7j/XyiixUT7ORvO3JXPhs5WP39nUEluKj55B7nNDTdL80P0CS1yx/Y1Z+q6OvS4/lhgaPs0a2/QOZUeeHw==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter Bis" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztycENABAQBdHfwUpUjLpwU5etgaw4zEvmNBJ+V0yqXrOzH60naXgznf0XVr77AAAAABBtA+08Ce0=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter Biss" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztzSERAAAIADEiUZhodCECgsNt9sVHwF3lrX/r5b91AACAbwPwAQO1
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="351.333" y="271.333" width="48.3333" height="49.3333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/graveyard_3.tmx"/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="168.333" y="29.8333"/>
+  <object id="50" template="../../obj/enemy.tx" x="167.235" y="326.392">
+   <properties>
+    <property name="enemy" value="Ghoul Gravecaller"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="171.666" y="84">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="207.333" y="106">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="156" y="246.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="87.6667" y="249.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="104.667" y="192.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="228.667" y="268.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="256.667" y="177">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="169.333" y="141">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="203.333" y="191">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="145.333" y="199.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="247" y="132">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="248.667" y="76.3333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="204" y="229.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="126.667" y="287.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="198.333" y="284">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/enemy.tx" x="77.3333" y="210">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/enemy.tx" x="197.667" y="156.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="160.333" y="108.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="255.667" y="105.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/enemy.tx" x="271" y="236.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/enemy.tx" x="301.667" y="181.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/enemy.tx" x="294.667" y="277.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="403" y="327">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/enemy.tx" x="338" y="320.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/enemy.tx" x="270" y="317.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/enemy.tx" x="320" y="359.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="95" template="../../obj/enemy.tx" x="341.667" y="190">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="96" template="../../obj/treasure.tx" x="168.667" y="363.667"/>
+  <object id="97" template="../../obj/gold.tx" x="495.667" y="339.333"/>
+  <object id="98" template="../../obj/gold.tx" x="544" y="176"/>
+  <object id="99" template="../../obj/gold.tx" x="249" y="32.3333"/>
+  <object id="100" template="../../obj/gold.tx" x="79.6667" y="173.667"/>
+  <object id="101" template="../../obj/enemy.tx" x="397.333" y="170.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="102" template="../../obj/enemy.tx" x="490.667" y="170.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="103" template="../../obj/enemy.tx" x="432" y="256">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="104" template="../../obj/enemy.tx" x="519.667" y="245.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/enemy.tx" x="528.667" y="209.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="106" template="../../obj/enemy.tx" x="475" y="223.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="107" template="../../obj/enemy.tx" x="458" y="294.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/enemy.tx" x="528" y="288">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="109" template="../../obj/enemy.tx" x="559.333" y="230.333">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/enemy.tx" x="410" y="198">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="56">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzVlrEKwzAMRL2VQtduXfsr+cySTw0aBELc2ZKwcSM4EuzkHpIVkePZ2gF0vucJeSPmTC7z9msS3wfXaN8ry5X7jD/iRbg2VnAlVnPVM1rnak6sDzRQv1a5qC9svSx7Jlfi82o0dnAz+drn785FfdCrM6u79xAu+k4q3Oj7d+OyucE8VnN9/6H5o1Hpq3/jisTPXtG6l65nuej7ZTPM55uZ4xFub2awula4Gj5Pzxid6Syu5WdyVq9RXyk/wlX9Oue0kjvqgyjX7kX+hSvayd2lCxDu4/Y=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztlsENwjAMRUMP6YE1SiZADMgBmKAwDzABMBCNSoT5xI5TWhVELX1Vcpz/5DSRXM+M2RMdGvUZNeO/LIxZz59aFf1yOX/Mn8pW1+Jd0honX6/huqZu8RAGl49FqKsY7gV6OQtc6qflHsvXc7rBf6R9IpfLa0Pa4zr4SRxUxfh34cb86ZkMwZWY/8aN1XwrV/uWNNywz7/bMbhj9TtxJy7uiUWK9Stc9KFfzGu4dB25Yd7z3K01Zmdln1zuxra+nivNky7hw3G5O8XNV8jNubepnkNew9XMpjQ09dI8GYTz3qcxtH9u3AFOrYYH
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZYDsbhDZjoq65Jkyo5g8WgOxPUR3sanCJEwNMqByOIKDKThymhV2E1FILkOKHUXuHj73Y8hqt7C1hZmAoZUbIgdggsctMqJja9hKjllqAmmXBSLYXl7n4ykdK3YHPXHqU/YSANiN97BlOYDqNw4wa5ltAyzxLKpR9pLQnYWqIaTMR254kxt4rUDWXSLB3pAMAhjYY2w==
+  </data>
+ </layer>
+ <layer id="8" name="Clutter Biss" width="30" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T+3sARQAAAA3DSAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="112" y="143.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="213" y="49.5">
+   <properties>
+    <property name="enemy" value="Death Knight"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="43.833" y="50">
+   <properties>
+    <property name="enemy" value="Zombie Lord"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

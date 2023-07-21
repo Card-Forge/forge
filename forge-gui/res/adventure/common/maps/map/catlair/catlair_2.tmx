@@ -69,7 +69,6 @@
   <object id="63" template="../../obj/enemy.tx" x="221.023" y="141.152">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
-    <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -77,15 +76,12 @@
   <object id="64" template="../../obj/enemy.tx" x="215.728" y="57.7504">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
-    <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
-    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="65" template="../../obj/enemy.tx" x="183.515" y="119.971" visible="1">
    <properties>
     <property name="enemy" value="Leonin Warrior"/>
-    <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>

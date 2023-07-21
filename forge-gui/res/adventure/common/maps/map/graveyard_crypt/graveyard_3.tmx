@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgcgJV94O1HxgNt/2ByBzVBHTd1zaME7OIZaBeMglEwCkbBKBgFo2AUjIKBAJWcuPFgAgCZcQWe
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFlUsOgjAQhmsMFFlq9AImJm49gEdyafQqPjBexjU7o4cRO4GGglOm9gGT/IEE0vn450HOGMsVLVLGjhN7RbxbG1YKezZLmyzvJBwHJThD8phyZIgkiwuTzXdjLK6egFZRfzXoEsQjMucJyQFxF/dnwp/QDCrLldf+PJH+7YND1uhUsQDXXuSepnoWV+/kftGxSAHLHNl1KoeOx4QD3utikfUBQd+skb6hzjfloFigJsDziWsmrI9tGdo+UiyF4Li0/JF9/ErC7FIsirjZMyoPEzo4zhLmic6XG8dZVB7wxocnFAvUZinybpNSGf/t57FBHh8skC+r9ooqybMb1f78s2eo/4mPsN2pIWKInBTL0AzqdSgG1QvTeQ7FoDt76Fq5Rug59xVfeOWjcQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJytlb9OwzAQxh3yjyYLOxIbCwwtIxJLxcQboEo8QWFFAqROTEi8AmKpBI8BAxvlCRBiRrwD/hQfubhnx0n7SZ/kOqnv57uzo1Sl2WC9TvN+XjdHXxbotOwW50Gw/Q7kivm5qf7FObj4WsNoeR7Ksjr+blSPbUl7hsAB289mwhoUdy+pbO/1PZHz4mJpY3SxHG8odRhV82Ohj4jlQ/uoqL2vfw+186y5HtYYWznx1USSxAKhPoV2qT0ysTMzxvxc+6aUOTgL75cQFm5aEzlZMJeGjcYHiTsnISy3iTzPzfe+SNwGD9XJxUKGrgbNmD9x8/1R1LwfMJ6mSp1rP7WwLEwv8dzYslnIvEZf+vlbWv+Wen0awAMWyklXlm8zv100WXD/cRacE1+dnrMqdxdpOAuJWHaKeo6z2Dx231Jsqh3v3b4s0Gu6/B8oZnnh9QEH9s+fgWnu6VufOMtJXNdKEs8PeFx3Z19xlt+4qtWdcL4lnrZvLenSrP+Y+22fI8jODfoHfkmr7wN4JuZeDWEilvvEbwgsZ1vdPDH5wbiNByxdvApLCE9oL62aF5jOuP1eWx1XZaH6cg5+d7psS+IJZekTj2JK77pyFZqTkNhtIjbf864OYaG7w5cnfI/5OerDEiJ+l7n2fj1onv0/zrT1IQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydljFvE0EQhdfGd8R3tgSiQogGKeC4SSJRpKciNQUKoUqcJkCJBBI2QrQU/APK0NGGJCgQI1chAkRp/gUiUCBmtPe0c3O754WRnvbW3rv99s3s3k3njJmSdKyI6ydd235TY1567tFjfJGc9etXbrWXRTyEuWjs0KNRHnd/HQvitOAZtm2fW0jGpY4xd8intx2nNepf7pTHLTX+n0XzaJZew7HoeeVvPcHQ8/CEOCQL8uzj0fMedFxOOGf7im9jwZjNhbAnu5mrDV0j14txN5q2XcurDIjdIi97pDPtch8xIo6nARbm+E3Pv63EHlyg+c833diLrTJL3Rpj4lnXzzGfUA5JVxPHwyxHiR37mfSoXWapWyNiGsGkOV5RrjZT24KHo1P4wlySZSjWtNU3ZkC6VdQYX3Os9l0fYxAjun+5Xc3LR5p7kti52IdxwcL5+WrKLKd5/HkTCpyVvvqQLNB+5vJzpWhRx8yDvcUeDfpu7Rw3hR/wjT3Se0TXR6/Ij2bhXMCnw6S8ru9zlocj5lxHrHv2COpDC7UrWeaT6jOZRfJs9d3a0Ze+wLf1gA8hTQSL5kDtvC+YX7Qcz7/4wl7zPsFeiWHh2uUc+2oVPM+7ZZ6TVnncSrlr3mXVWo1hwVp4rjdNu7+OhFfg4eAxx8SR01qXFY+Og8wxbaTVMx8apGWWsapp1DPHg4bj+WIsyyfFE3rXIV+c51liFtSzT9pLjm1qd9Iqjwyw/MitPzH6mbv6+jOjxsYib/AGPEstv5iz7hsh9M2AuvcxgYO9XCRlqWOpU4gzxKhD7kUWOBaL52iO19S/l4S14+E+iWTxBftxHJj7PunuubC2PWx1eY0R/OA16fnktwh+uyb2AM5MuSaf6vz1SfoAhg/ifYf/sEch8GifpGaFL6+YT5+ndSyTpHqmPKZz7KHQXwy3Lsk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="207.667" y="399.333"/>
+  <object id="49" template="../../obj/entry_down.tx" x="237.5" y="66" width="21.5" height="21">
+   <properties>
+    <property name="teleport" value="../common/maps/map/crypt_3.tmx"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="239.182" y="89.9011">
+   <properties>
+    <property name="enemy" value="Spider"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="380" y="128">
+   <properties>
+    <property name="enemy" value="Spider"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/gold.tx" x="390.5" y="128.5"/>
+  <object id="55" template="../../obj/enemy.tx" x="204.5" y="143.5" visible="1">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
+}</property>
+    <property name="enemy" value="Greater Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="239" y="146.5" visible="1">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
+}</property>
+    <property name="enemy" value="Greater Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="271.5" y="191" visible="1">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
+}</property>
+    <property name="enemy" value="Greater Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="207" y="190" visible="1">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
+}</property>
+    <property name="enemy" value="Greater Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/collision.tx" x="-18" y="-15.472" width="16" height="419.444"/>
+  <object id="60" template="../../obj/collision.tx" x="561" y="-4.222" width="16" height="403.444"/>
+  <object id="61" template="../../obj/collision.tx" x="-7.73" y="400" width="565.46" height="16"/>
+  <object id="62" template="../../obj/collision.tx" x="-10.73" y="-17" width="565.46" height="16"/>
+  <object id="63" template="../../obj/manashards.tx" x="0.5" y="16"/>
+  <object id="64" template="../../obj/manashards.tx" x="545.5" y="166.5"/>
+ </objectgroup>
+</map>
