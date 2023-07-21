@@ -35,7 +35,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameStage;
-import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -5821,10 +5820,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, true);
         }
         if (isCreature()) {
-            boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
-                    || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT);
-
-            if (wither) { // 120.3d
+            if (source.isWitherDamage()) { // 120.3d
                 addCounter(CounterEnumType.M1M1, damageIn, source.getController(), counterTable);
                 damageType = DamageType.M1M1Counters;
             }
@@ -7477,5 +7473,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
         return !StaticAbilityActivateAbilityAsIfHaste.canActivate(this);
+    }
+
+    public boolean isWitherDamage() {
+        if (this.hasKeyword(Keyword.WITHER) || this.hasKeyword(Keyword.INFECT)) {
+            return true;
+        }
+        return StaticAbilityWitherDamage.isWitherDamage(this);
     }
 }
