@@ -469,8 +469,8 @@ public class CardView extends GameEntityView {
     public int getRingLevel() {
         return get(TrackableProperty.RingLevel);
     }
-    void updateRingLevel(Card c, Integer ringLevel) {
-        set(TrackableProperty.RingLevel, ringLevel);
+    void updateRingLevel(Card c) {
+        set(TrackableProperty.RingLevel, c.getRingLevel());
     }
 
     private String getRemembered() {
@@ -932,10 +932,7 @@ public class CardView extends GameEntityView {
         updateZoneText(c);
         updateDamage(c);
         updateSpecialize(c);
-
-        if (c.hasSVar("RingLevel")) {
-            updateRingLevel(c, Integer.parseInt(c.getSVar("RingLevel")));
-        }
+        updateRingLevel(c);
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);
@@ -1079,8 +1076,8 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.IsRingBearer);
     }
 
-    void updateDesignation(Card c) {
-        set(TrackableProperty.IsRingBearer, c.getDesignations().contains("Ring-bearer"));
+    void updateRingBearer(Card c) {
+        set(TrackableProperty.IsRingBearer, c.isRingBearer());
     }
 
     Set<String> getCantHaveKeyword() {

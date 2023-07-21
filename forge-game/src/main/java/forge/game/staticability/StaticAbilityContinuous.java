@@ -925,10 +925,6 @@ public final class StaticAbilityContinuous {
                 affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp(), stAb.getId(), stAb.hasParam("CharacteristicDefining"));
             }
 
-            if (params.containsKey("AddDesignation")) {
-                affectedCard.addDesignation(se.getTimestamp(), Arrays.asList(params.get("AddDesignation").split(",")));
-            }
-
             if (layer == StaticAbilityLayer.RULES) {
                 if (params.containsKey("Goad")) {
                     affectedCard.addGoad(se.getTimestamp(), hostCard.getController());

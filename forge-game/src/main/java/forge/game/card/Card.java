@@ -113,6 +113,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
+    private List<Card> theRings = Lists.newArrayList();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
@@ -175,7 +176,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
-    private final Map<Long, List<String>> designation = Maps.newHashMap();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -203,7 +203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean copiedSpell = false;
 
     private boolean unearthed;
-
+    private boolean ringbearer;
     private boolean monstrous;
 
     private boolean renowned;
@@ -219,7 +219,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
-
+    private int ringLevel = 0;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
     private long mutatedTimestamp = -1;
@@ -308,7 +308,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final List<GameCommand> faceupCommandList = Lists.newArrayList();
     private final List<GameCommand> facedownCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
-    private final List<GameCommand> ringBearerCommandList = Lists.newArrayList();
 
     // Zone-changing spells should store card's zone here
     private Zone currentZone;
@@ -1074,7 +1073,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
     public final void clearRemembered() {
+        clearRemembered(false);
+    }
+    public final void clearRemembered(boolean cleanupRingBearer) {
         if (rememberedObjects.isEmpty()) { return; }
+        if (cleanupRingBearer) {
+            for (Object o : rememberedObjects) {
+                if (o instanceof Card)
+                    ((Card) o).clearRingBearer();
+            }
+        }
         rememberedObjects.clear();
         view.updateRemembered(this);
     }
@@ -3361,16 +3369,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
     }
-    public final void addRingBearerCommand(final GameCommand c) {
-        ringBearerCommandList.add(c);
-    }
+
     public final void runLeavesPlayCommands() {
         for (final GameCommand c : leavePlayCommandList) {
             c.run();
         }
         leavePlayCommandList.clear();
-        //cleanup
-        runRingBearerCommands();
+        clearTheRings();
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3401,14 +3406,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         changeControllerCommandList.clear();
-        //cleanup
-        runRingBearerCommands();
-    }
-    public final void runRingBearerCommands() {
-        for (final GameCommand c : ringBearerCommandList) {
-            c.run();
-        }
-        ringBearerCommandList.clear();
+        clearTheRings();
     }
 
     public final void setSickness(boolean sickness0) {
@@ -5977,6 +5975,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
 
+    public final boolean isRingBearer() {
+        return ringbearer;
+    }
+    public final void setRingBearer(final boolean ringbearer0, Card theRing) {
+        ringbearer = ringbearer0;
+        if (theRing != null)
+            theRings.add(theRing);
+        view.updateRingBearer(this);
+    }
+    public final void clearRingBearer() {
+        setRingBearer(false, null);
+    }
+    void clearTheRings() {
+        if (theRings.isEmpty())
+            return;
+        for (Card theRing : theRings)
+            theRing.clearRemembered();
+        theRings.clear();
+        clearRingBearer();
+    }
+    public final int getRingLevel() {
+        return ringLevel;
+    }
+    public final void setRingLevel(int level) {
+        ringLevel = level;
+    }
     public final boolean isMonstrous() {
         return monstrous;
     }
@@ -7409,27 +7433,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean canBlockAny() {
         return !canBlockAny.isEmpty();
-    }
-
-    public void addDesignation(long timestamp, List<String> designations) {
-        designation.put(timestamp, designations);
-        getView().updateDesignation(this);
-    }
-
-    public boolean removeDesignation(long timestamp) {
-        boolean result = designation.remove(timestamp) != null;
-        if (result) {
-            getView().updateDesignation(this);
-        }
-        return result;
-    }
-
-    public List<String> getDesignations() {
-        List<String> result = Lists.newArrayList();
-        for (List<String> designations : designation.values()) {
-            result.addAll(designations);
-        }
-        return result;
     }
 
     public boolean removeChangedState() {

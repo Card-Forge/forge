@@ -168,7 +168,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("IsRingbearer")) {
-            if (!card.getDesignations().contains("Ring-bearer")) {
+            if (!card.isRingBearer()) {
                 return false;
             }
         } else if (property.equals("IsTriggerRemembered")) {

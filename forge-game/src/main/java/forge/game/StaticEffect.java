@@ -287,9 +287,6 @@ public class StaticEffect {
             if (hasParam("CanBlockAmount")) {
                 affectedCard.removeCanBlockAdditional(getTimestamp());
             }
-            if (hasParam("AddDesignation")) {
-                affectedCard.removeDesignation(getTimestamp());
-            }
 
             affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
 

@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
 import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.card.MagicColor;
@@ -59,6 +58,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         level += 1;
         theRing.setSVar("RingLevel", String.valueOf(Math.min(level, 4)));
+        theRing.setRingLevel(level);
 
         switch(level) {
             case 1:
@@ -119,18 +119,10 @@ public class RingTemptsYouEffect extends EffectEffect {
         // This should probably set a thing rather than just remembering on the Ring but its a start
         CardCollection creatures = p.getCreaturesInPlay();
         Card ringbearer = p.getController().chooseSingleEntityForEffect(creatures, sa, "Choose your Ring-bearer", false, null);
-        theRing.clearRemembered();
+        theRing.clearRemembered(true);
         if (ringbearer != null) {
             theRing.addRemembered(ringbearer);
-            Card finalTheRing = theRing;
-            final GameCommand cleanupCommand = new GameCommand() {
-                private static final long serialVersionUID = 1L;
-                @Override
-                public void run() {
-                    finalTheRing.clearRemembered();
-                }
-            };
-            ringbearer.addRingBearerCommand(cleanupCommand);
+            ringbearer.setRingBearer(true, theRing);
         }
 
         // Run triggers
