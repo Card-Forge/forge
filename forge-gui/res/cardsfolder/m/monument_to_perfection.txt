@@ -2,7 +2,7 @@ Name:Monument to Perfection
 ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Land.Locus,Land.Sphere | ChangeTypeDesc$ basic, Sphere, or Locus land card | SpellDescription$ Search your library for a basic, Sphere, or Locus land card, reveal it, put it into your hand, then shuffle.
-A:AB$ Animate | Cost$ 3 | CheckSVar$ CountAll | SVarCompare$ GE9 | Power$ 9 | Toughness$ 9 | Types$ Artifact,Creature,Phyrexian,Construct | RemoveAllAbilities$ True | Defined$ Self | Keywords$ Indestructible & Toxic:9 | Duration$ Permanent | SpellDescription$ CARDNAME becomes a 9/9 Phyrexian Construct artifact creature, loses all abilities, and gains indestructible and toxic 9. Activate only if there are nine or more lands with different names among the basic, Sphere, and Locus lands you control.
+A:AB$ Animate | Cost$ 3 | CheckSVar$ CountAll | SVarCompare$ GE9 | Power$ 9 | Toughness$ 9 | Types$ Artifact,Creature,Phyrexian,Construct | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | Defined$ Self | Keywords$ Indestructible & Toxic:9 | Duration$ Permanent | SpellDescription$ CARDNAME becomes a 9/9 Phyrexian Construct artifact creature, loses all abilities, and gains indestructible and toxic 9. Activate only if there are nine or more lands with different names among the basic, Sphere, and Locus lands you control.
 SVar:CountAll:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield+Basic,Land.YouCtrl+inZoneBattlefield+Sphere,Land.YouCtrl+inZoneBattlefield+Locus
 DeckNeeds:Type$Locus|Sphere
 DeckHas:Type$Phyrexian|Construct|Artifact
