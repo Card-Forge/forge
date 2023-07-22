@@ -280,7 +280,7 @@ ScryfallCode=CMM
 272 R Arachnogenesis @Johannes Voss
 273 U Armorcraft Judge @David Palumbo
 274 R Azusa, Lost but Seeking @Winona Nelson
-275 U Beanstalk Giant // Fertile Footsteps @Jason A. Engle
+275 U Beanstalk Giant @Jason A. Engle
 276 R Bloodspore Thrinax @Ralph Horsley
 277 C Broken Wings @Ekaterina Burmak
 278 C Courage in Crisis @Micah Epstein
