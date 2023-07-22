@@ -118,7 +118,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
-    private Card mergedTo, theRing;
+    private Card mergedTo;
 
     private SpellAbility effectSourceAbility;
     private SpellAbility tokenSpawningAbility;
@@ -3374,7 +3374,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         leavePlayCommandList.clear();
-        clearTheRings();
+        clearRingBearer();
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3405,7 +3405,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         changeControllerCommandList.clear();
-        clearTheRings();
+        clearRingBearer();
     }
 
     public final void setSickness(boolean sickness0) {
@@ -5977,27 +5977,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isRingBearer() {
         return ringbearer;
     }
-    public final void setRingBearer(final boolean ringbearer0, Card theRing) {
+    public final void setRingBearer(final boolean ringbearer0) {
         ringbearer = ringbearer0;
-        if (theRing != null) {
-            if (this.theRing != null) {
-                this.theRing.clearRemembered();
-                this.theRing = theRing;
-            } else {
-                this.theRing = theRing;
-            }
-        }
         view.updateRingBearer(this);
     }
     public final void clearRingBearer() {
-        setRingBearer(false, null);
-    }
-    void clearTheRings() {
-        if (this.theRing == null)
-            return;
-        this.theRing.clearRemembered();
-        this.theRing = null;
-        clearRingBearer();
+        setRingBearer(false);
     }
     public final int getRingLevel() {
         return ringLevel;

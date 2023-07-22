@@ -121,8 +121,8 @@ public class RingTemptsYouEffect extends EffectEffect {
         Card ringbearer = p.getController().chooseSingleEntityForEffect(creatures, sa, "Choose your Ring-bearer", false, null);
         theRing.clearRemembered(true);
         if (ringbearer != null) {
+            ringbearer.setRingBearer(true);
             theRing.addRemembered(ringbearer);
-            ringbearer.setRingBearer(true, theRing);
         }
 
         // Run triggers
