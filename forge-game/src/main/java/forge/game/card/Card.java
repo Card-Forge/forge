@@ -152,6 +152,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
 
+    private final Table<StaticAbility, SpellAbility, SpellAbility> storedSpellAbililityByText = HashBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbililityGainedByText = TreeBasedTable.create();
+    private final Table<StaticAbility, Trigger, Trigger> storedTriggerByText = HashBasedTable.create();
+    private final Table<StaticAbility, ReplacementEffect, ReplacementEffect> storedReplacementEffectByText = HashBasedTable.create();
+    private final Table<StaticAbility, StaticAbility, StaticAbility> storedStaticAbilityByText = HashBasedTable.create();
+
+    private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywordByText = Maps.newHashMap();
+
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
     private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = TreeBasedTable.create(); // Layer 5 CDA
@@ -4521,6 +4529,71 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (result == null) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
             storedStaticAbility.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final SpellAbility getSpellAbilityForStaticAbilityByText(final SpellAbility sa, final StaticAbility stAb) {
+        SpellAbility result = storedSpellAbililityByText.get(stAb, sa);
+        if (result == null) {
+            result = sa.copy(this, false);
+            result.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
+            result.setGrantorStatic(stAb);
+            result.setIntrinsic(true); // needs to be changed by CardTextChanges
+            storedSpellAbililityByText.put(stAb, sa, result);
+        }
+        return result;
+    }
+
+    public final SpellAbility getSpellAbilityForStaticAbilityGainedByText(final String str, final StaticAbility stAb) {
+        SpellAbility result = storedSpellAbililityGainedByText.get(stAb, str);
+        if (result == null) {
+            result = AbilityFactory.getAbility(str, this, stAb);
+            result.setIntrinsic(true); // needs to be affected by Text
+            result.setGrantorStatic(stAb);
+            storedSpellAbililityGainedByText.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final Trigger getTriggerForStaticAbilityByText(final Trigger tr, final StaticAbility stAb) {
+        Trigger result = storedTriggerByText.get(stAb, tr);
+        if (result == null) {
+            result = tr.copy(this, false);
+            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            storedTriggerByText.put(stAb, tr, result);
+        }
+        return result;
+    }
+
+    public final ReplacementEffect getReplacementEffectForStaticAbilityByText(final ReplacementEffect re, final StaticAbility stAb) {
+        ReplacementEffect result = storedReplacementEffectByText.get(stAb, re);
+        if (result == null) {
+            result = re.copy(this, false);
+            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            storedReplacementEffectByText.put(stAb, re, result);
+        }
+        return result;
+    }
+
+    public final StaticAbility getStaticAbilityForStaticAbilityByText(final StaticAbility st, final StaticAbility stAb) {
+        StaticAbility result = storedStaticAbilityByText.get(stAb, st);
+        if (result == null) {
+            result = st.copy(this, false);
+            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            storedStaticAbilityByText.put(stAb, st, result);
+        }
+        return result;
+    }
+
+    public final KeywordInterface getKeywordForStaticAbilityByText(final KeywordInterface ki, final StaticAbility stAb, long idx) {
+        Triple<String, Long, Long> triple = Triple.of(ki.getOriginal(), (long)stAb.getId(), idx);
+        KeywordInterface result = storedKeywordByText.get(triple);
+        if (result == null) {
+            result = ki.copy(this, false);
+            result.setStaticId(stAb.getId());
+            result.setIdx(idx);
+            storedKeywordByText.put(triple, result);
         }
         return result;
     }
