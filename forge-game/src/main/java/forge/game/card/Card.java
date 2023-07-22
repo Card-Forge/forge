@@ -4560,7 +4560,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Trigger result = storedTriggerByText.get(stAb, tr);
         if (result == null) {
             result = tr.copy(this, false);
-            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            result.setIntrinsic(true); // needs to be changed by CardTextChanges
             storedTriggerByText.put(stAb, tr, result);
         }
         return result;
@@ -4570,7 +4570,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         ReplacementEffect result = storedReplacementEffectByText.get(stAb, re);
         if (result == null) {
             result = re.copy(this, false);
-            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            result.setIntrinsic(true); // needs to be changed by CardTextChanges
             storedReplacementEffectByText.put(stAb, re, result);
         }
         return result;
@@ -4580,7 +4580,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         StaticAbility result = storedStaticAbilityByText.get(stAb, st);
         if (result == null) {
             result = st.copy(this, false);
-            result.setIntrinsic(false); // needs to be changed by CardTextChanges
+            result.setIntrinsic(true); // needs to be changed by CardTextChanges
             storedStaticAbilityByText.put(stAb, st, result);
         }
         return result;
@@ -4593,6 +4593,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             result = ki.copy(this, false);
             result.setStaticId(stAb.getId());
             result.setIdx(idx);
+            result.setIntrinsic(true);
             storedKeywordByText.put(triple, result);
         }
         return result;
