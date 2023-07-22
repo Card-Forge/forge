@@ -6,9 +6,19 @@ Type=Commander
 ScryfallCode=WHO
 
 [cards]
+3 M The Tenth Doctor @Luisa J. Preissler
+68 U Exterminate! @Ivan Dedov
+91 R The Parting of the Ways @Syd Mills
+187 U TARDIS @Chris Ostrowski
 197 L Plains @Svetlin Velinov
 199 L Island @Svetlin Velinov
 201 L Swamp @Svetlin Velinov
 203 L Mountain @Svetlin Velinov
 205 L Forest @Svetlin Velinov
+551 U TARDIS @Dalton Pencarinha
+561 M The Tenth Doctor @Aurore Folny
+569 C Bad Wolf Bay @Kamila Szutenberg
+580 C The Doctor's Tomb @Anato Finnstark
+582 C Fixed Point in Time @Syd Mills
 588 C The Lux Foundation Library @Wei Guan
+601 C TARDIS Bay @Erikas Perl
