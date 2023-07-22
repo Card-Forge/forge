@@ -51,8 +51,9 @@
     <property name="waypoints" value="94,93,102,103,92,91,90,91,92,103,102"/>
    </properties>
   </object>
-  <object id="83" template="../../obj/door_up.tx" x="310.298" y="158.069" width="37.0004" height="16">
+  <object id="83" template="../../obj/door_up.tx" x="309.411" y="157.773" width="37.0004" height="36.4089">
    <properties>
+    <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/aerie/aerie_2.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>

@@ -5410,6 +5410,74 @@
 	]
 },
 {
+	"name": "Cosmic Horror",
+	"sprite": "sprites/enemy/monstrosity/cosmic_horror.atlas",
+	"deck": [
+		"decks/standard/cosmic_horror.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.8,
+	"speed": 18,
+	"scale": 0.65,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Horror"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Monster",
+		"Horror",
+		"Hidden",
+		"IdentityBlack",
+		"Humanoid",
+		"Huge",
+		"Magic",
+		"Sneaky",
+		"Unholy"
+	]
+},
+{
 	"name": "Crab",
 	"sprite": "sprites/enemy/beast/crab.atlas",
 	"deck": [
@@ -7527,6 +7595,53 @@
 	]
 },
 {
+	"name": "Earth Elemental",
+	"sprite": "sprites/enemy/elemental/earthelemental.atlas",
+	"deck": [
+		"decks/standard/earth_elemental.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 23,
+	"scale": 0.9,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Elemental",
+		"Humanoid",
+		"BiomeRed",
+		"IdentityBoros",
+		"Earth"
+	]
+},
+{
 	"name": "Efreet",
 	"sprite": "sprites/enemy/elemental/efreet_2.atlas",
 	"deck": [
@@ -8023,16 +8138,6 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
 			],
 			"cardTypes": [
@@ -8049,7 +8154,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"Mythic Rare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -8219,18 +8325,8 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
+			"addMaxCount": 4,
 			"rarity": [
 				"uncommon"
 			],
@@ -8421,6 +8517,88 @@
 		"Tribal",
 		"IdentityWhite",
 		"BiomeWhite"
+	]
+},
+{
+	"name": "Fallen Angel",
+	"sprite": "sprites/enemy/celestial/fallen_angel.atlas",
+	"deck": [
+		"decks/standard/fallen_angel.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.4,
+	"difficulty": 0.1,
+	"speed": 29,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BW",
+	"questTags": [
+		"IdentityOrzhov",
+		"Angel",
+		"Large",
+		"Mystic",
+		"BiomeBlack"
 	]
 },
 {
@@ -8986,6 +9164,74 @@
 		"Humanoid",
 		"IdentityRed",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Flesh Abomination",
+	"sprite": "sprites/enemy/monstrosity/flesh_horror.atlas",
+	"deck": [
+		"decks/standard/flesh_horror.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.8,
+	"speed": 18,
+	"scale": 0.65,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Horror"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Monster",
+		"Horror",
+		"Hidden",
+		"IdentityBlack",
+		"Humanoid",
+		"Huge",
+		"Magic",
+		"Sneaky",
+		"Unholy"
 	]
 },
 {
@@ -16396,6 +16642,58 @@
 	]
 },
 {
+	"name": "Mighty Djinn",
+	"sprite": "sprites/enemy/elemental/genie.atlas",
+	"deck": [
+		"decks/standard/mighty_djinn.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"scale":0.6,
+	"difficulty": 0.1,
+	"speed": 5,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 7,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 50,
+			"addMaxCount": 95
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Flying",
+		"Humanoid",
+		"Elemental",
+		"Wind",
+		"IdentityBlue",
+		"Djinn",
+		null,
+		null
+	]
+},
+{
 	"name": "Mimic",
 	"sprite": "sprites/enemy/aberration/mimic.atlas",
 	"deck": [
@@ -23282,14 +23580,15 @@
 },
 {
 	"name": "Water Elemental",
-	"sprite": "sprites/enemy/elemental/waterelemental_2.atlas",
+	"sprite": "sprites/enemy/elemental/waterelemental_3.atlas",
 	"deck": [
 		"decks/standard/water_elemental.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.7,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 0.8,
 	"life": 12,
 	"rewards": [
 		{
@@ -23391,10 +23690,11 @@
 		"decks/standard/wraithswampwalk.dck"
 	],
 	"ai": "",
+	"flying": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 12,
-	"scale": 0.90,
+	"scale": 0.9,
 	"life": 13,
 	"rewards": [
 		{
@@ -23890,6 +24190,6 @@
 		"Leader",
 		"IdentityBlack",
 		"BiomeBlack"
-		]
+	]
 }
 ]
