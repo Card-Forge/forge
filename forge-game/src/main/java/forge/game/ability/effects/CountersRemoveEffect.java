@@ -140,10 +140,13 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
                     player, card, sa);
 
-            //currently only used by one card, so for now
-            //amount is locked at 1 and choice is mandatory
-            srcCards = pc.chooseCardsForEffect(choices, sa, title, 1, 1,
-                    false, null);
+            int min = 1;
+            int max = 1;
+            if (sa.hasParam("ChoiceOptional")) {
+                min = 0;
+                max = choices.size();
+            }
+            srcCards = pc.chooseCardsForEffect(choices, sa, title, min, max, min == 0, null);
         } else {
             srcCards = getTargetCards(sa);
         }

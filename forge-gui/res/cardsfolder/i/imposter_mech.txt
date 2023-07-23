@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Artifact Vehicle
 PT:3/1
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.OppCtrl | AddTypes$ Vehicle & Artifact | AddKeywords$ Crew:3 | RemoveCardTypes$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.OppCtrl | AddTypes$ Vehicle & Artifact | AddKeywords$ Crew:3 | RemoveCardTypes$ True | RemoveSubTypes$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.
 K:Crew:3
 Oracle:You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.

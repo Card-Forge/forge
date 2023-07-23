@@ -1,0 +1,8 @@
+Name:Wall Token
+ManaCost:no cost
+Types:Creature Wall
+Colors:white
+PT:0/4
+K:Defender
+K:Flying
+Oracle:Defender,flying

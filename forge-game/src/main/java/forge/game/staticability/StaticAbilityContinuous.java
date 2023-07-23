@@ -43,7 +43,6 @@ import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -630,40 +629,26 @@ public final class StaticAbilityContinuous {
                         List<KeywordInterface> keywords = Lists.newArrayList();
 
                         for (SpellAbility sa : state.getSpellAbilities()) {
-                            SpellAbility newSA = sa.copy(affectedCard, false);
-                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
-                            newSA.setGrantorStatic(stAb);
-                            //newSA.setIntrinsic(false); needs to be changed by CardTextChanges
-
-                            spellAbilities.add(newSA);
+                            spellAbilities.add(affectedCard.getSpellAbilityForStaticAbilityByText(sa, stAb));
                         }
                         if (params.containsKey("GainTextAbilities")) {
                             for (String ability : params.get("GainTextAbilities").split(" & ")) {
-                                final SpellAbility sa = AbilityFactory.getAbility(AbilityUtils.getSVar(stAb, ability), affectedCard, stAb);
-                                sa.setIntrinsic(true); // needs to be affected by Text
-                                sa.setGrantorStatic(stAb);
-                                spellAbilities.add(sa);
+                                spellAbilities.add(affectedCard.getSpellAbilityForStaticAbilityGainedByText(AbilityUtils.getSVar(stAb, ability), stAb));
                             }
                         }
                         for (Trigger tr : state.getTriggers()) {
-                            Trigger newTr = tr.copy(affectedCard, false);
-                            //newTr.setIntrinsic(false); needs to be changed by CardTextChanges
-                            trigger.add(newTr);
+                            trigger.add(affectedCard.getTriggerForStaticAbilityByText(tr, stAb));
                         }
                         for (ReplacementEffect re : state.getReplacementEffects()) {
-                            ReplacementEffect newRE = re.copy(affectedCard, false);
-                            //newRE.setIntrinsic(false); needs to be changed by CardTextChanges
-                            replacementEffects.add(newRE);
+                            replacementEffects.add(affectedCard.getReplacementEffectForStaticAbilityByText(re, stAb));
                         }
-                        for (StaticAbility sa : state.getStaticAbilities()) {
-                            StaticAbility newST = sa.copy(affectedCard, false);
-                            //newST.setIntrinsic(false);  needs to be changed by CardTextChanges
-                            staticAbilities.add(newST);
+                        for (StaticAbility st : state.getStaticAbilities()) {
+                            staticAbilities.add(affectedCard.getStaticAbilityForStaticAbilityByText(st, stAb));
                         }
+                        long kwIdx = 1;
                         for (KeywordInterface ki : state.getIntrinsicKeywords()) {
-                            KeywordInterface newKi = ki.copy(affectedCard, false);
-                            //newKi.setIntrinsic(false);  needs to be changed by CardTextChanges
-                            keywords.add(newKi);
+                            keywords.add(affectedCard.getKeywordForStaticAbilityByText(ki, stAb, kwIdx));
+                            kwIdx++;
                         }
 
                         // Volrath’s Shapeshifter has that card’s name, mana cost, color, types, abilities, power, and toughness.

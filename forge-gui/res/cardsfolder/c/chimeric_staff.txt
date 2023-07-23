@@ -1,7 +1,7 @@
 Name:Chimeric Staff
 ManaCost:4
 Types:Artifact
-A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
+A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:{X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.
