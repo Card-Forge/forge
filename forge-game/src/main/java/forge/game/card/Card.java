@@ -1072,16 +1072,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
     public final void clearRemembered() {
-        clearRemembered(false);
-    }
-    public final void clearRemembered(boolean cleanupRingBearer) {
         if (rememberedObjects.isEmpty()) { return; }
-        if (cleanupRingBearer) {
-            for (Object o : rememberedObjects) {
-                if (o instanceof Card)
-                    ((Card) o).clearRingBearer();
-            }
-        }
         rememberedObjects.clear();
         view.updateRemembered(this);
     }

@@ -166,6 +166,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
+    private Card ringBearer, theRing;
     private String namedCard = "";
     private String namedCard2 = "";
 
@@ -1830,7 +1831,28 @@ public class Player extends GameEntity implements Comparable<Player> {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
-
+    public final Card getRingBearer() {
+        return ringBearer;
+    }
+    public final Card getTheRing() {
+        return theRing;
+    }
+    public final void setRingBearer(Card bearer) {
+        if (bearer == null)
+            return;
+        clearRingBearer();
+        ringBearer = bearer;
+        ringBearer.setRingBearer(true);
+    }
+    public final void setTheRing(Card ring) {
+        theRing = ring;
+    }
+    public void clearRingBearer() {
+        if (ringBearer == null)
+            return;
+        ringBearer.setRingBearer(false);
+        ringBearer = null;
+    }
     public final String getNamedCard() {
         return namedCard;
     }
