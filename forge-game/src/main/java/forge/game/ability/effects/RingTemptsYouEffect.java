@@ -56,7 +56,7 @@ public class RingTemptsYouEffect extends EffectEffect {
                 String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl+IsRingbearer | AddType$ Legendary | Description$ Your Ring-bearer is legendary.";
                 String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.YouCtrl+IsRingbearer | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
                 p.getTheRing().addStaticAbility(legendary);
-                p.getTheRing().setSVar("X", "Remembered$CardPower");
+                p.getTheRing().setSVar("X", "Count$Valid Card.YouCtrl+IsRingbearer$CardPower");
                 p.getTheRing().addStaticAbility(cantBeBlocked);
                 break;
             case 2:
