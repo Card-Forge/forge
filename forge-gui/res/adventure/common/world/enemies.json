@@ -707,6 +707,78 @@
 	]
 },
 {
+	"name": "Ancient Vampire",
+	"sprite": "sprites/enemy/undead/vampire_4.atlas",
+	"deck": [
+		"decks/standard/ancientvampire.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 29,
+	"scale":0.75,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"rare",
+				"Uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"rare",
+				"Rare"
+			],
+			"subTypes": [
+				"Vampire"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Vampire",
+		"Undead",
+		"Unholy",
+		"Evil",
+		"Wise",
+		"IdentityBlack"
+	]
+},
+{
 	"name": "Angel Warrior",
 	"sprite": "sprites/enemy/celestial/angelwarrior.atlas",
 	"deck": [
@@ -798,6 +870,7 @@
 		"decks/standard/amonkhet_minotaur.dck"
 	],
 	"ai": "",
+	"nameOverride": "Minotaur Shaman",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -883,6 +956,7 @@
 		"decks/standard/ape.json"
 	],
 	"ai": "",
+	"nameOverride": "Ape Behemoth",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1325,6 +1399,7 @@
 		"decks/standard/human_archer.dck"
 	],
 	"ai": "",
+	"nameOverride": "Human Archer",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -9221,7 +9296,7 @@
 			"addMaxCount": 15
 		}
 	],
-	"colors": "RG",
+	"colors": "B",
 	"questTags": [
 		"Monster",
 		"Horror",
@@ -16650,9 +16725,9 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"scale":0.6,
 	"difficulty": 0.1,
 	"speed": 5,
+	"scale": 0.6,
 	"life": 25,
 	"rewards": [
 		{
@@ -17406,6 +17481,65 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"IdentityBoros"
+	]
+},
+{
+	"name": "Necrogoyf",
+	"sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
+	"deck": [
+		"decks/standard/necrogoyf.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"scale":0.8,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Mythic Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Humanoid",
+		"Aberration",
+		"Aggressive",
+		"Predator",
+		"Unholy",
+		"IdentityBlack"
 	]
 },
 {

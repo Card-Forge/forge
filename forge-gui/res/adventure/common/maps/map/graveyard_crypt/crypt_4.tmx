@@ -1,74 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="73">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="30" height="17">
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+   eJzt1sEKwCAIBuCugz3Cnrtjz7qTIGGpTa2BP/y3VR9sMetVSiX63LJSayWlMnueOz/S0gbdZenTlGf2/p2W6mjh1mjeNW6UhfteTrJI9h0lLWlJS1r+ZsFziUUk/x7obEaLdER4tGZuhj3J4m1asXja8Ay16rG+b18tVncOAnu+pdQuJg==
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="17">
+ <layer id="2" name="Ground" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJyT4WFgkCEBR/MyMOwC0lG8pOmjFMsCMQhI09FOetoLC1cY3g21dycPqji1w30vENdxI3A9N8TeWm5U8T3DJJxH43c0fkfjd+iG82CyV4WR/vbC4pvS+AQAqxJtZQ==
+   eJzF1lEOwiAMBmBezZzPJs7TeAs9i3oT76HTuwmJyyqhpS2/s0lj1A0+ygYM6xAGJrkoXXvqQ3jEz2PPt9eSFsv+c/0O1Pc0Nim5cbda8jGm9m4rOe8FTxrDSO6ldnpvreb0/1fMSzfnteM9tL9RMYbco517S528ibLQmL4jXNIzzNU+t9DfWkwlR23+85CMXovGwdlqTqvFM8fI59ljsYSlXW9dOOO5+16j/mmp7QFaS+vaprFIHvQ669kbfzFHtD4WQ+l9QDlSaM4eUiAtmljCY3nOa4Hu97CJZ57tnBYL2oSwoGySRTrnLVWvtFc8ARaEp+R4AxHnbdw=
   </data>
  </layer>
- <layer id="3" name="Clutter" width="30" height="17">
+ <layer id="3" name="Clutter" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlksOgkAMhmfPuNYEZW+8hBoTY+IF1LOIGy81ikfxHG5N40wspfMEZOOfNOFRph99MAjxV98qR0MT1KVk/fwmP3YckPNAzpXmmUq7/VJKfvOEzTCm6JwJccma15+JjHmLvMCzD8nzgIC11Gbz8bGYurnigEztsd+LWdu31morxHzjZknlAcFc0z71rUVZuL6eeWpo48H3XDyuvJxG9f7GLNcxf2xictxKr+F7N46F+vryAjromHeLL2ax1crGslvHsWAtA3woD8xcFTDTITVKEfCYma+k+7u72DdZuhaOz7F0EbuI2Add+1FK71IO6GG6V6eI9pWLpdBzDzLfANsscQrhxTw2liIybhuZPudYYjly5h+hDZOxlHzkyF9N0jhcbCH/AZgFv08Z8WwoUwxP36L1izVOb067YWA=
+  </data>
+ </layer>
+ <layer id="6" name="Objects" width="35" height="25">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFhEAd70C7YOBA5EA7gA7g7kA7gI7g+wDbP5LzEi3BYMinDgPtgFFANAAACPUD3Q==
+   eJxjYBgF5AAliYF2weAGdbwQPFQBNrcfc2Fg0EDDtLRvqABahstQBGd8BtoFgxv0OENo5DQPE0MHd/QYGO7qYZd7rMnA8ESTcvcQG19V+gwM1frY5f6D3KFFuVuIBT3eDAy9QNznTT87cQEtYPhxuDEw6AyCdH8C6IaTQHxqELjlth7+9EtvgC/9kgrUJCCYknbQbQrDZai3MSgBuMLdl77OwAteD7QDhhkAAJseIsI=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="208" y="260">
+  <object id="38" template="../../obj/entry_up.tx" x="400.5" y="364" width="63" height="37">
    <properties>
-    <property name="teleport" value="../common/maps/map/graveyard_4.tmx"/>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../common/maps/map/graveyard_crypt/graveyard_4.tmx"/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="208.333" y="23.8333"/>
-  <object id="50" template="../../obj/enemy.tx" x="208.402" y="40.5586">
+  <object id="48" template="../../obj/treasure.tx" x="303.833" y="33.3333"/>
+  <object id="50" template="../../obj/enemy.tx" x="173.902" y="288.059">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="367.75" y="94">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="491.25" y="144.5">
+   <properties>
+    <property name="enemy" value="Master Black Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="172" y="156.25">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="184.25" y="217.5">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Demonic Rising&quot;]
+}</property>
+    <property name="enemy" value="Immersturm Demon"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="246.5" y="220.5">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="165.5" y="80.25">
    <properties>
     <property name="enemy" value="Skeleton"/>
+    <property name="hidden" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/enemy.tx" x="245.75" y="73.5">
+  <object id="68" template="../../obj/treasure.tx" x="93.5" y="206"/>
+  <object id="70" template="../../obj/treasure.tx" x="354.25" y="201.25"/>
+  <object id="71" template="../../obj/gold.tx" x="90.75" y="139"/>
+  <object id="72" template="../../obj/gold.tx" x="57.5" y="65.75"/>
+  <object id="73" template="../../obj/manashards.tx" x="488.5" y="235"/>
+  <object id="74" template="../../obj/manashards.tx" x="326.5" y="288"/>
+  <object id="75" template="../../obj/manashards.tx" x="252" y="137"/>
+  <object id="76" template="../../obj/booster.tx" x="512.5" y="143">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
    </properties>
   </object>
-  <object id="63" template="../../obj/enemy.tx" x="246.25" y="137.5">
+  <object id="77" template="../../obj/enemy.tx" x="483" y="198.5">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
-  <object id="64" template="../../obj/enemy.tx" x="247.5" y="201.75">
+  <object id="78" template="../../obj/enemy.tx" x="259" y="106">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
    </properties>
   </object>
-  <object id="65" template="../../obj/enemy.tx" x="169.75" y="201.5">
+  <object id="79" template="../../obj/enemy.tx" x="255" y="300.5">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Devil"/>
    </properties>
   </object>
-  <object id="66" template="../../obj/enemy.tx" x="172" y="138">
+  <object id="80" template="../../obj/enemy.tx" x="122.5" y="225.5">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Devil"/>
    </properties>
   </object>
-  <object id="67" template="../../obj/enemy.tx" x="171" y="75.75">
+  <object id="81" template="../../obj/enemy.tx" x="63.5" y="222">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Hidden Snake"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/treasure.tx" x="139" y="138.5"/>
-  <object id="69" template="../../obj/treasure.tx" x="277.5" y="75"/>
-  <object id="70" template="../../obj/treasure.tx" x="276.75" y="202.75"/>
-  <object id="71" template="../../obj/gold.tx" x="135.25" y="201"/>
-  <object id="72" template="../../obj/gold.tx" x="136" y="72.75"/>
+  <object id="82" template="../../obj/enemy.tx" x="253" y="248.5">
+   <properties>
+    <property name="enemy" value="Apprentice Black Wizard"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

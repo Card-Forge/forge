@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="34" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="70">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="34" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="34" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlE0OgjAQhZsoFFhq9AJGE7cewGMZ3XgDL+APxsu4Zmf0MCITaShDO0zbLS95IVJwPmZeWwghCs3zTIhD6u7TWBil1jeibaxp1ub4JH4cYIqj71m4p1hsDPCtu7TfnPoUB+VjbR8OvL6Udo5VxGPR/y9Htr2naqsrxfGMeCyuHKZeUByPau0ieSwuNs2Nygdw3GTTl1fAfjEx6PcoDqh/rjke9SwnnmcIro9r93EoA8cskMH2u49DzQQMOVl75gTXdOWAZ4HlGzc8rpk11TTNyHbWKI6yYriivqjMvhm55ZxxmAurjNsZ0VlE5b3jPCg+ai53aebQWTg9CeWAeSyqmtvk71x2szuS4RycfZvLLjtmCekLZ78MGjRokK9+hDoClQ==
+   eJztlEsOgjAQhrsQiix9XcBo4tYDeBnvYHTjDbyADwyXcc3O6GFERpkAYzt94JI/+UOE4v8xM20mhMhqnsRC7PruPvSEUvh8KZqmGsZNjmfkxwHmOExr4R6y6BjgWzd9s23yOQ7O+9K67PVIz0HXzqSeYx7YsdT/LyHWvYfZeOU4boEdiyuHqhYcR1o8O0k7FheresjNB3BcZFWXe4v9omKo3+M4IP9YcqRlLweeZwjNp9kmDjRwjFsy6H6bOLAnYJiTheec0ExXDlgLLK+w4nGdWVWmqke6Mw858oLhTOqCM/uwmFubs5ZyUeVhc0bqLKCtYz84Pq4vV6nmAKNsatKWA/oxLTJX0deJ/F0D+sc+Nu3bRPIz9JH0r4vNfunUqVMnX70BbH/7jQ==
   </data>
  </layer>
  <layer id="2" name="Ground" width="34" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlj0OwjAMhVNaRNsViYE/MbMAIyNi4kKMTJyDI3AIBjbgBAiYEXegJhgckyZNgK1PelKSqvEnx3ErhKpOKrx0ivXr60CIYywNouM8mRjmid0u77mql7F1Gd8qkd5FQuyf5nv7MINaWaxp5T0fBHKN6hKrMSD+tm7nWDC75KMfSVOWRaLmA83jFLFJkI9xIMeTmjTmCjlwD5/YPvlADjSwfBPbJR95HKh/ciyj4mz/5LiG6nyoqQ9fjlHkfi7QDy+kz/3iXA4OHBgb6pD2019zDLLxkJiL90oqYOiy/vGN96T/6rSp6tfDmnwfc6bbG/tqkfqwccxCtTbycubKwevDxnELzecDahlq7pGzxuccOOi30MaB4jmBO3R+3iP8BvK7/OJM3/8WYJi3U/V50/PfplSpUqVMugNS8bOg
+   eJztlj0OwjAMhVNaRMsBGPgTEhsLMCFGBAsXYmTiHByBQ7ADJ0DQGXEANmoFC8ekSRNg65OelKRq/MlxnQqhqlMXXrrE+vVdIMQ5lgbRcZ5MDKvEbpf3XNXL2LqMb5tIHyIhji/zvX2YQa0s1rzyng8DuUaVxmoMiN9f2DnWzC75GETSlGWdqPlA8zhFbBLkYxrI8awmjblCDtzDJ7ZPPpADDSzfxHbJRx4H6p8cm6g42z85bqE6H2nqw5djHLmfC/TDlPS5X5zLyYEDY0Md0n76a45hNh4Rc/FeSQUMXdY/vvGR9F+d9lX9eliT72POdHtjXy1SHzaOZajWRl7OXDl4fdg47qH5fFCmnKeNzzlw0LvQxoHiOYFv6Jr5MXnfgfxbRkGd478FGObtuvq86flvU6pUqVImPQHkDrNW
   </data>
  </layer>
  <layer id="7" name="Foreground" width="34" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBj6YL4oA8N2CQaGo8IMDAtFsas5x4LAZZwINrXdcUwYuzuQ7aeVO0DmgbCtGAPDYqD9Z4Hm2othd0cdJ8INMEzt8ICBs3jMrUOyH9l99AYwd9QNEncgpw1K3dHHRr47QABk/wq2gQsPGADZf3YA42UwuAMZsAHjhGuA4gUZUCudjoKhA06yQ+iHaPULOp9csIuLOubQAoDKxW/cqLgMrR6jpl2EMDY9lIJKTgSmlplDGdRxkofp6S5K3E4vMBB20gMAANdZUbQ=
+   eJxjYBj6YL4oA8N2CQaGo8IMDAtFsas5x4LAZZwINrXdcUwYuzuQ7aeVO0DmgbCtGIR/FmiuvRh2d9RxItwAw9QODxg4i8fcOiT7kd1HbwBzR90gcQdy2qDUHX1s5LsDBED2r2AbuPCAAZD9ZwcwXgaDO5ABGzBOuAYoXpABtdLpSAfHWAfefmSMD5xkh9AP0eoXdD65YBcXdcyhBQCVi9+4UXEZWj1GTbsIYWx6KAWVnAhMLTOHMqjjJA/T012UuJ1eYCDspAcAALL0VPM=
   </data>
  </layer>
  <layer id="8" name="AboveSprites" width="34" height="25">
   <data encoding="base64" compression="zlib">
-   eJytlk1Ow0AMha1oEkiyAKnqEnGEUs7Ejn0kNuEEcAk2HILuQGLTwhU4RcWOWokVj/H8JfMkq0lmEn959kwKkE/fSjzUcRErnFue2YH6XAF8rIZjOU5zSFsDcN0A/Jzn5ejqgSGWA9Wf7nnM7AdyvKwBirWbA/MezDAXj6sK4KqZx8EZ8HlaSA4678exbmTgz0zl0PJQLs4hxTnwF32oq8GfuRxdbdebe6Ppy0wc2pylHMTyWk1jmg7G9oPY8TpxPJkhlvhxX/rvkRy8b3Ny0HXK6eOQ66evl3E8V+F1oq1bEp7vM9SFS9tLZPD3l1rKIWsT4nApB8eW9cPG2HN4z/g4tPrGcmj3Yj7at1P84L0q/bg79eFlAXBR/Odw9SEpNK5x8CC9l1O9MJDlt53Ct3dTf6SoE36gB8hwC3ZwJvL5rdG/ZRqH9r7yGgXeS3lpn8dcuzFkvY+tf6/gfK6c8rtCfvDvDOY+tnY/+HojFBoHifKG6hmbC9fKjdHHyEeXN1ST1N6Kkeu/oCt/J3xK8UTmmCutXiHF7Alz8qdy5JKrT/4Aoa+oYw==
+   eJytlsFOg0AQhidkQYGDJo1H40XPWp/Jm3cSL/UJ9Dl8iHpSjBerr+BTNN5kAn8YprPsQviTSQu72/9jZnYp0XL6MeIhj4tY8dz0aBiszxVRvWq/63HMgdaO6KIg+j1elqPKW4ZYDtamWfO4cD6qbn1y5udg351r5/L3LCM6L+ZxSAb+PSs0B6433VjVMcjfnMph+cBLcmhJDv7kPORZmx/N8ZHGcVT5sN4yN5a+Xc9hzbE4QiySAywvWT9maeeG+QA73wfHk2sDdZnCAd0H1mgO2bcWRz2zLrgPzzEOvX82+SHHW8NxmY7XBxzPWXifWPsW4usvT13AEsMhZZ0lOuTza1kcV5H9AX+Lx8fhk+YIMVgca9EP1244R/bMGIdmrgM1sdZoP5zbU/Ihe1XuW467pg9PE6KT5JDD14dQaNzikAGO97SvFwez/JV9jJ3d8p0Xq0rlg3PADLc0DMmEPG8L+11mcVjPq+8heC18sXfY67ULXe99OX5WSD6fp36vyH2LPmHvfTnsh7HeCIXFAcE3VM9YL94rN84eQx59uUFNpvZWjHz/BX3+lcrTlJxoj7my6hVSzJkwx38qx1Ly9ck/hbi2nw==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="34" height="25">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
-   eJytljtOw0AQhicob5OCIkgUXIAKiRTUQAM3QOIEhBqJgtAgSiTOwENwB+AGIAGiDIJTpMWj5Zcnk9lHbH7pV9bj8e7n2bHjcZtonFtrU4xPe+73U+Vc/eVx/HB2CjrIiO5rzg+1Ysx+WSJ6zX3SITruOAaLQ+umT3SrfJYVPDzW5++MaxCXHOxUbS3PxlYX87nqxXh3jWhPeEdcw3kwx8EBFqnthTSORqtY+7rv6ioNHtZzd5rB4mBDeu+lmJc59Hoxg1mz+DgGkXpYHCx9jJjUqOPMPZtSD2ilHuaQsjg0TxmON6MWWKfsvoCDjf1JqYfvXvXzUoYDveLj+CjBkcJicYAlVo+BZx3muGxW2xdwsC2ODaMeX+1pFqseF5GaaA7JIt+nof5gDhj7UrVPLQ7fvsheeafivyfEwfPOy2HlhsT1OO/9bz18uSzr3SH1nXP8KEvJHoQ5R3OMAswh4fnZz8LXW+991APfJkMK1y6mx/x5n2RFvu4NHUudl9WtOeM7xPoWeeo6TwK1AAc0Lwe0XrfdaqbNrTlkflkmqazpZ5RGT4bOl5XV4yN1X/oby2cfh66Zb032UcO2j1nGYmywvK+qdbLMa+hjzWDxzMNiMcVkcSDO/gVgORUl
+   eJytlj1Ow0AQhScocWKbFBQgUXABKiRSUAMN3ACJEwC1JQpCgyiRuAMguANwA5AAUQbBKdLikXnyZDL7E4cnPWWzWe9+fjt2dtQjGpXW2hLts371+anGXP+N4/6j6SnoMCe6b1V+aNVt9ssS0Wvp05SoSCsGi0PrZpnoVvk8r3m4rX+/M65Bv+Rgx2p7ZbpvbbGcq12399aJ9oV3xTU8DuZ+cIBFamchjqPTrddmFemkwcN6ziYZLA42pPdeinmZQ68XMpg1i4tjEMjD4tA5QIXKeJhW5pqNyQNabfs5pCwOzdOE483IAus03RdwsLE/MXm47lU/L004UCsujo8GHDEsFgdYQnkMHOswx1Uy376Ag21xbBp5fPUmWaw8LgOZaA7JIt+nvvpgDhj7Mm+dWhyufZG18k71f4+Pg+edlcMa6xPncdH/3zxcY1nWu0Pqu+T4UZaSNQjzGM0x9DD7hOfnIPdfb733kQfOJsfkzy6kx/J5H+f1eF0bui92XlbWqoxziHUWecoqjz1ZgAOalQPaaNvuJnFzaw45vimTVJ64GaVRk77fm8qq8aG6L33GctnFoTNzrck+6dh2Mcu+EBss72venCzzGvq7ZrB4ZmGxmEKyONDP/gUnVhRt
   </data>
  </layer>
  <layer id="9" name="Clutter Above" width="34" height="25">
   <data encoding="base64" compression="zlib">
-   eJzFlr9OwzAQxk1pU5KMVbsww1AJCXVHLF3agSdgpJlgrdSFoQMbf96ABaHyDFAkVAhCCHgGxDMgYMOWfcrl8DkOVOKTPiVN0/Mv99lOhbDrriZEKn0vfVjVHodC7CMvNIWoGC827XVGYVYrZWoOQwaCcPxFHemZg2M5EuJtyY9D3a80aAvRQz6VPUgb+d/129l5t6X7YWNZRSxQn2oF3X+LOHqEY6Olr6tcNuV50tYGnq75XrGoGpjlhrD49GJk8jsKhDgmXqv/vKZ8EmiO91j/FsazsXQ8ezEO8/2AfA7ktYe6PvZML9Sxb47QD6XryN2XIgbM0UeZJIZHcdB5Y+OAfDgWUMowXMnn+Ij5XB4LcqHCLHg9Y2EGNf7UMMD6HpDnLZMLZXFx4HX9Kce/jDTDkMwPVy44O45jK9YsM4aDMmOWeeWitB1n+cw8OIDlK876gZ+d5oL7MXD0A3MAi0t0v6P7WMKsl7IcI8f7RYnud/PKRe1t0yjvIgGLrR9cLkXrBb+zwUVqVDKOV1QXzhUHfKa2cdgYXBxq7uwE+fecTcBB/0Nw45Xl4AT7Cfg/ObCAw1fz4qBycZTp0XPVbl+dyzm07ri/HvjV2a3ZPQl4xjKsseEsMqezgGf0sUsXltpl57TvnKfPMQkyhj0LZ9n19Vs/mSxfmAy+ASRrKeI=
+   eJzFlr1OAkEUhUeExd0tCTTWWpCYGBorY0MDhU9gKVTaktBYUNj58wY2xuAzKCYGxRijNL6A8RmM0jk3Mzd79zozO6sknuRkl2WY+eaemVmEMOu+JMRE+kH6qKg8CIU4IF6oClHQXqya++mHSV8TS5+90ALBOP6ihvTYwbEcCfG+5McB7UGduhAt4jNZg0kl/bt2Pblv1lQ9TCyrhAX751oh7e8IR4txbNbUc8hlS95368rI09TfAwv0QVluGYtPLfo6v+NAiBPmtfLPZ+DTQHF8xOq3OJ6JpeFZi0GYrgfmcyifPZbVtaVrAde2vmI9QDeRuy5ZDJSjTTLpah7g4OvGxIH52FhAryK9hijDtZzHZ2zP5SkjFy7KQvczFWWA8UeaAfd3h803Ty6cxcVB9/WXHP8qUgw9tj5cudDsbBzbsWIZWzg4M2WZVy6gnTjJZ+zBgSyzOKkHnTvPhdaj46gH5UAWl/h5x8+xrmW/5OXoO94vIH7ezSsXONtGUdpZQhZTPWy5ZO0X+s5GZ6lSSDjeSL94Dxz4mdvEYWJwccDa2Q2S82S2YW6HHPw/hG28vBw24XmC/k8OKuTw1bw4uFwceWr0UjTbVxdyDa072pcDv372SmYPAztjHtZYc2bZpvPAzuhjly4Nfedd075rns9jGCQM+wbOvPvrt37WWU4tGXwDiucr5g==
   </data>
  </layer>
  <layer id="10" name="House" width="34" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJztzl0KgCAQReGzBgVdQYFu1KCfrdYSdAMaQ0EP3e/5nmFARGSsOFicrVnbfjM2dyYPs7c1qe2zsek5A1zhnVtP7BGO+PUXIiIi/1YB8WcGrQ==
+   eJzlVkFOw0AM9Ac4JJHKC0CCS4MonJD6Ah4CKV8AbiAV+BgtSKinih9wgCfgFbEyWN50nUQ9wEiW2l177XjHXi8yooucqMx+5IgFccwyoTRME/UES/b1UvuvWGYsi3rtFeJYOc9NAZ4pvoPotavcl4O/irMt+jphOXXanPf06eUuAvnx0TOOsVGDXXGz0922qrkvuOPf93lc38Kc9R+cNhbwbvYKov2i+R/rDVivB6x/WEQUHQj5/BwRfY3Sbd6Mtdse9yJ43CV6YrmGs7AG+vDZixADxoE1sI2+4amZWG8Zor/rmulyBxZfukLyMs7i77tgQk0OVjRMPqT/LOs3/pLlOWve1RTofKwjehbPcO2dmnlDzxeCtm/GHJYb8mnlew17IQ8Yx6Y+jd9RwYwUJJbP0GNwpsIZr8x+34Xsh1hj+UWIDs5N4r+t3lF/ZthWuY8b/xmaj239b8iZQqNtbtdxBs7F9j3xaRt8TzWHLK5aHPNyb6psvgG6i16O
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="239" y="273"/>
+  <object id="38" template="../../obj/entry_up.tx" x="417" y="399.5" width="43" height="16"/>
   <object id="49" template="../../obj/entry_down.tx" x="256" y="31">
    <properties>
-    <property name="teleport" value="../common/maps/map/crypt_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/graveyard_crypt/crypt_4.tmx"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/enemy.tx" x="264.167" y="289.333">
+  <object id="53" template="../../obj/enemy.tx" x="441.667" y="186.833">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Witch"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="54" template="../../obj/gold.tx" x="271.167" y="30.6667"/>
   <object id="56" template="../../obj/enemy.tx" x="206.5" y="125" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
-}</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -68,8 +68,6 @@
   </object>
   <object id="57" template="../../obj/enemy.tx" x="316.5" y="80" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
-}</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -78,8 +76,6 @@
   </object>
   <object id="58" template="../../obj/enemy.tx" x="202.5" y="223" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
-}</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -88,8 +84,6 @@
   </object>
   <object id="59" template="../../obj/enemy.tx" x="311.5" y="175.5" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
-}</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -108,8 +102,6 @@
   </object>
   <object id="61" template="../../obj/enemy.tx" x="255.5" y="126" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
-}</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -133,5 +125,46 @@
   <object id="67" template="../../obj/manashards.tx" x="175.5" y="78.5"/>
   <object id="68" template="../../obj/manashards.tx" x="350" y="177"/>
   <object id="69" template="../../obj/manashards.tx" x="206.5" y="16.5"/>
+  <object id="70" template="../../obj/enemy.tx" x="256.5" y="273" visible="1">
+   <properties>
+    <property name="enemy" value="Death Knight"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/waypoint.tx" x="256" y="352"/>
+  <object id="72" template="../../obj/waypoint.tx" x="257" y="84.5"/>
+  <object id="73" template="../../obj/enemy.tx" x="130" y="346" visible="1">
+   <properties>
+    <property name="enemy" value="Death Knight"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="71,75,71,74,71"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/waypoint.tx" x="0.5" y="323.5"/>
+  <object id="75" template="../../obj/waypoint.tx" x="520" y="359"/>
+  <object id="76" template="../../obj/enemy.tx" x="108.5" y="202.5" visible="1">
+   <properties>
+    <property name="enemy" value="Turtle"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/enemy.tx" x="133" y="77" visible="1">
+   <properties>
+    <property name="enemy" value="Turtle"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="225.5" y="80" visible="1">
+   <properties>
+    <property name="enemy" value="Greater Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/treasure.tx" x="175.5" y="178.5"/>
  </objectgroup>
 </map>
