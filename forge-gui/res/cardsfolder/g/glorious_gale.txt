@@ -1,6 +1,7 @@
 Name:Glorious Gale
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Card.Creature | SubAbility$ TrigTempt | SpellDescription$ Counter target creature spell. If it was a legendary spell, the Ring tempts you.
-SVar:TrigTempt:DB$ RingTemptsYou | ConditionDefined$ Targeted | ConditionPresent$ Card.Legendary
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target creature spell | RememberCountered$ True | ValidTgts$ Card.Creature | SubAbility$ TrigTempt | SpellDescription$ Counter target creature spell. If it was a legendary spell, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou | ConditionDefined$ Remembered | ConditionPresent$ Card.Legendary | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Counter target creature spell. If it was a legendary spell, the Ring tempts you.
