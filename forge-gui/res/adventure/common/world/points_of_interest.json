@@ -1245,7 +1245,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
-	"map": "../common/maps/map/elftown.tmx",
+	"map": "../common/maps/map/hostiletown/elftown.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"OccupiedTown",
@@ -3325,7 +3325,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "YuleTown",
-	"map": "../common/maps/map/yule_town.tmx",
+	"map": "../common/maps/map/hostiletown/yule_town.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeRed",
@@ -3355,7 +3355,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
-	"map": "../common/maps/map/zombietown.tmx",
+	"map": "../common/maps/map/hostiletown/zombietown.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",

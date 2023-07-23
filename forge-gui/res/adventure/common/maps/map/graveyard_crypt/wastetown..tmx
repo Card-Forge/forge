@@ -1,79 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="73">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="35" height="25">
+ <layer id="1" name="Background" width="45" height="25">
   <data encoding="base64" compression="zlib">
-   eJzt1sEKwCAIBuCugz3Cnrtjz7qTIGGpTa2BP/y3VR9sMetVSiX63LJSayWlMnueOz/S0gbdZenTlGf2/p2W6mjh1mjeNW6UhfteTrJI9h0lLWlJS1r+ZsFziUUk/x7obEaLdER4tGZuhj3J4m1asXja8Ay16rG+b18tVncOAnu+pdQuJg==
+   eJzt1EsKgCAQBmC3QQdwUdd22TXyeG0SIWoejq+J+eFfpfExWmFxLkxYKKNtZjazmefs7GZuRnu1ztnMZtZkPu5qMif3n8zcxLWfu6Y53beRlZihPNdwTV/vb2XmzIk7z1Iztld61tizEjNn1qfP3Yn7sXORmrF7C5mhtPoGKY0+923OPf4blG7C1swFhTACvg==
   </data>
  </layer>
- <layer id="2" name="Ground" width="35" height="25">
+ <layer id="2" name="Ground" width="45" height="25">
   <data encoding="base64" compression="zlib">
-   eJzF1lEOwiAMBmBezZzPJs7TeAs9i3oT76HTuwmJyyqhpS2/s0lj1A0+ygYM6xAGJrkoXXvqQ3jEz2PPt9eSFsv+c/0O1Pc0Nim5cbda8jGm9m4rOe8FTxrDSO6ldnpvreb0/1fMSzfnteM9tL9RMYbco517S528ibLQmL4jXNIzzNU+t9DfWkwlR23+85CMXovGwdlqTqvFM8fI59ljsYSlXW9dOOO5+16j/mmp7QFaS+vaprFIHvQ669kbfzFHtD4WQ+l9QDlSaM4eUiAtmljCY3nOa4Hu97CJZ57tnBYL2oSwoGySRTrnLVWvtFc8ARaEp+R4AxHnbdw=
+   eJztlUsOgkAQRNkah6Ur8GJ6FKPexHgMv3eTiUxs2v7MFzCxkgqLTjUvk6FoTVW1Ad7WVXXrnps6LBeal0Ttc7Z7L2bodb+vEXhgHs65PJXxZbb7dsuPGyMzUzOcl5hdjsrEMl/RGVjf+33cDOaxuHxO5n3nA/KxZ+FmFPNp8TYUzOdkpu6sdJ+5PMUM353C/DTDc3sEMnN5jZnK+DL7WGLmrDGndF1J5tB3+zJr/aoxc3mNObWfoWL62Ql/g5Ry9TNUTD9DZieKOWc/Q8X0M8fsuKl8TmZ8Z6UszlP9jHeM0c8as9bPHHPJfo7Naswl+zk275ibTMxjiPsPQs2BE+oXma2mZsa97KOpmUvozyzfhfPqe+57X6Dmds4p/U/pBYiGzDU=
   </data>
  </layer>
- <layer id="3" name="Clutter" width="35" height="25">
+ <layer id="3" name="Clutter" width="45" height="25">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlkESwiAMRdmX7p2pchavUT2L9VxoPYrncOtkhDFNAwRo7cY/kwVtIK8hgSr119oa2q0JprJ6Or7pj5025OzJ2DqevQ7bL2X1N0/YPGOJLo1S12b+/FnI2FXkBeY+NM8DAtbBWcgnxeL3LRYH5Pce+72YtSVrpVhKeUDQ17ROU2tRFq6uD4k9DPHgdxIeLi/ndlrfKRYck/O1bo3Ut3Es1FfC0ruY94AvZgnlZikWrKPAh/JAz42Cns5lkQp4fM+PWnbursUCwvE5liVim4x7MHYf1daLcTVM7+oS0bqKsRjX9yB/BoR6iZOEF/OEWExm3Br5OudYcjk65h+hhslbST465G93ZRwxNsl/AGbB3zNkzJUy5fCsLbp/ucbpDVflXAg=
+   eJxjYBgZIJR9YPWPAghYwgyhd/IwMOxCw7t5UOXQ9Qw0qOVmYKhDw/XcCPk6btx6yQG3ydRnj0VMhgeBZaFhK82DX89AA0JuHoxgMLj5Honq0d0M0j8azpSBGl4Ghu9Auo4XIUYPN4dQoZ76wYC/fAYBepbPDgTkYWFci6VMRtZPrfL5LpS2xSJHSty+RtIDw8hAGkmMluUzuemRkJtpCYaDm4m1E5ubYeLkgmhezPyNC6O3y0jVgwxg8lG8DCQDWNjN48SPYYCQOmLMQeaTk05IdTMhtdgAPvXkupnY8MEGQOUvOeFLjXAmFB4we3dIIPACUdL0DzY3k5OuQYAcN+/lwewDIWN0gC4vS0A/IbyHTmX1QAIARFqfDQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="400.5" y="364" width="63" height="37">
+  <object id="38" template="../../obj/entry_up.tx" x="209" y="380.5" width="62.5" height="45">
    <properties>
-    <property name="teleport">[
-    {
-        &quot;name&quot;: &quot;teleport&quot;,
-        &quot;propertytype&quot;: &quot;&quot;,
-        &quot;type&quot;: &quot;string&quot;,
-        &quot;value&quot;: &quot;../common/maps/map/graveyard_crypt/crypt_4.tmx&quot;
-    }
-]
-</property>
+    <property name="teleport" value="../common/maps/map/graveyard_crypt/graveyard_2.tmx"/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="208.333" y="23.8333"/>
-  <object id="50" template="../../obj/enemy.tx" x="208.402" y="40.5586">
+  <object id="47" template="../../obj/gold.tx" x="363.5" y="66.5"/>
+  <object id="48" template="../../obj/treasure.tx" x="57" y="72.5"/>
+  <object id="49" template="../../obj/gold.tx" x="55" y="194"/>
+  <object id="50" template="../../obj/enemy.tx" x="113.902" y="72.7253">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="High Vampire"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/enemy.tx" x="245.75" y="73.5">
+  <object id="51" template="../../obj/enemy.tx" x="297.5" y="72">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Zombie"/>
    </properties>
   </object>
-  <object id="63" template="../../obj/enemy.tx" x="246.25" y="137.5">
+  <object id="52" template="../../obj/enemy.tx" x="118" y="200">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Big Zombie"/>
    </properties>
   </object>
-  <object id="64" template="../../obj/enemy.tx" x="247.5" y="201.75">
-   <properties>
-    <property name="enemy" value="Skeleton"/>
-   </properties>
-  </object>
-  <object id="65" template="../../obj/enemy.tx" x="169.75" y="201.5">
-   <properties>
-    <property name="enemy" value="Skeleton"/>
-   </properties>
-  </object>
-  <object id="66" template="../../obj/enemy.tx" x="172" y="138">
-   <properties>
-    <property name="enemy" value="Skeleton"/>
-   </properties>
-  </object>
-  <object id="67" template="../../obj/enemy.tx" x="171" y="75.75">
-   <properties>
-    <property name="enemy" value="Skeleton"/>
-   </properties>
-  </object>
-  <object id="68" template="../../obj/treasure.tx" x="139" y="138.5"/>
-  <object id="69" template="../../obj/treasure.tx" x="277.5" y="75"/>
-  <object id="70" template="../../obj/treasure.tx" x="276.75" y="202.75"/>
-  <object id="71" template="../../obj/gold.tx" x="135.25" y="201"/>
-  <object id="72" template="../../obj/gold.tx" x="136" y="72.75"/>
  </objectgroup>
 </map>

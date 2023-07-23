@@ -5494,7 +5494,7 @@
 	"spawnRate": 0.3,
 	"difficulty": 0.8,
 	"speed": 18,
-	"scale": 0.65,
+	"scale": 0.85,
 	"life": 30,
 	"rewards": [
 		{
@@ -5693,7 +5693,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.9,
 	"life": 19,
 	"rewards": [
 		{
@@ -5922,10 +5921,10 @@
 	"name": "Dark Knight",
 	"sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
 	"deck": [
-		"decks/standard/death_knight.json"
+		"decks/standard/death_knight.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 15,
@@ -23828,7 +23827,6 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 12,
-	"scale": 0.9,
 	"life": 13,
 	"rewards": [
 		{
