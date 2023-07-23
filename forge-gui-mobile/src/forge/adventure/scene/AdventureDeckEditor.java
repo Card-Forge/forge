@@ -247,6 +247,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     }
 
     public static BoosterDraft getDraft() {
+        if (currentEvent == null)
+            return null;
         return currentEvent.getDraft();
     }
 
