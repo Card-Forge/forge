@@ -74,7 +74,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         @Override
         public void refresh() {
-            BoosterDraft draft = parentScreen.getDraft();
+            BoosterDraft draft = getDraft();
             if (draft == null || !draft.hasNextChoice()) {
                 return;
             }
@@ -98,7 +98,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         }
 
         private void afterCardPicked(PaperCard card) {
-            BoosterDraft draft = parentScreen.getDraft();
+            BoosterDraft draft = getDraft();
             draft.setChoice(card);
 
             if (draft.hasNextChoice()) {
@@ -246,7 +246,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         }
     }
 
-    public BoosterDraft getDraft() {
+    public static BoosterDraft getDraft() {
         return currentEvent.getDraft();
     }
 
