@@ -225,7 +225,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
-    private int ringLevel = 0;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
     private long mutatedTimestamp = -1;
@@ -6044,12 +6043,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearRingBearer() {
         setRingBearer(false);
-    }
-    public final int getRingLevel() {
-        return ringLevel;
-    }
-    public final void setRingLevel(int level) {
-        ringLevel = level;
     }
     public final boolean isMonstrous() {
         return monstrous;

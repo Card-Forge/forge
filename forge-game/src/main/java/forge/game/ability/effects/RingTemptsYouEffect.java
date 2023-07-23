@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.GameCommand;
 import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.card.MagicColor;
@@ -11,6 +12,7 @@ import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -31,7 +33,7 @@ public class RingTemptsYouEffect extends EffectEffect {
         Game game = p.getGame();
         Card card = sa.getHostCard();
 
-        int level = 0;
+        int level = p.getNumRingTemptedYou();
         if (p.getTheRing() == null) {
             // Create the ring with first level
             String image = ImageKeys.getTokenKey("the_ring");
@@ -43,21 +45,17 @@ public class RingTemptsYouEffect extends EffectEffect {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             p.setTheRing(p.getGame().getAction().moveTo(p.getZone(ZoneType.Command), theRing, sa));
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        } else {
-            level = Integer.parseInt(p.getTheRing().getSVar("RingLevel"));
         }
 
         level += 1;
-        p.getTheRing().setSVar("RingLevel", String.valueOf(Math.min(level, 4)));
-        p.getTheRing().setRingLevel(level);
 
         switch(level) {
             case 1:
                 String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl+IsRingbearer | AddType$ Legendary | Description$ Your Ring-bearer is legendary.";
-                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.YouCtrl+IsRingbearer | ValidBlocker$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
+                String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.YouCtrl+IsRingbearer | ValidBlockerRelative$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
                 p.getTheRing().addStaticAbility(legendary);
-                p.getTheRing().setSVar("X", "Count$Valid Card.YouCtrl+IsRingbearer$CardPower");
-                p.getTheRing().addStaticAbility(cantBeBlocked);
+                StaticAbility st = p.getTheRing().addStaticAbility(cantBeBlocked);
+                st.setSVar("X", "Count$CardPower");
                 break;
             case 2:
                 final String attackTrig = "Mode$ Attacks | ValidCard$ Card.YouCtrl+IsRingbearer | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
@@ -75,17 +73,16 @@ public class RingTemptsYouEffect extends EffectEffect {
 
                 break;
             case 3:
-                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.YouCtrl+IsRingbearer| ValidBlocker$ Creature | TriggerZones$ Command | Execute$ TrigEndCombat | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
-                final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacBlocker | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
+                final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.YouCtrl+IsRingbearer| ValidBlocker$ Creature | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
+                final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
                 final String sacBlockerEffect = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI | Sacrifice$ True";
-                p.getTheRing().setSVar("TrigEndCombat", endOfCombatTrig);
-                p.getTheRing().setSVar("TrigSacBlocker", sacBlockerEffect);
+
                 final Trigger becomesBlockedTrigger = TriggerHandler.parseTrigger(becomesBlockedTrig, p.getTheRing(), true);
 
                 SpellAbility endCombatExecute = AbilityFactory.getAbility(endOfCombatTrig, p.getTheRing());
                 AbilitySub sacExecute = (AbilitySub) AbilityFactory.getAbility(sacBlockerEffect, p.getTheRing());
 
-                endCombatExecute.setSubAbility(sacExecute);
+                endCombatExecute.setAdditionalAbility("Execute", sacExecute);
                 becomesBlockedTrigger.setOverridingAbility(endCombatExecute);
                 p.getTheRing().addTrigger(becomesBlockedTrigger);
 
@@ -107,11 +104,29 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         // Then choose a ring-bearer (You may keep the same one). Auto pick if <2 choices.
         CardCollection creatures = p.getCreaturesInPlay();
-        p.setRingBearer(p.getController().chooseSingleEntityForEffect(creatures, sa, "Choose your Ring-bearer", false, null));
+        Card ringBearer = p.getController().chooseSingleEntityForEffect(creatures, sa, "Choose your Ring-bearer", false, null);
+        p.setRingBearer(ringBearer);
+
+        // 701.52a That creature becomes your Ring-bearer until another player gains control of it.
+        if (ringBearer != null) {
+            GameCommand loseCommand = new GameCommand() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void run() {
+                    if (ringBearer.isRingBearer()) {
+                        p.clearRingBearer();
+                    }
+                }
+            };
+            ringBearer.addChangeControllerCommand(loseCommand);
+            ringBearer.addLeavesPlayCommand(loseCommand);
+        }
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-        runParams.put(AbilityKey.Card, p.getRingBearer());
+        runParams.put(AbilityKey.Card, ringBearer);
         game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
         // make sure it shows up in the command zone
         p.getTheRing().updateStateForView();
