@@ -3207,7 +3207,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             endCombatExecute.setAdditionalAbility("Execute", sacExecute);
             becomesBlockedTrigger.setOverridingAbility(endCombatExecute);
             getTheRing().addTrigger(becomesBlockedTrigger);
-        } else if (level >= 4) {
+        } else if (level == 4) {
             final String damageTrig = "Mode$ DamageDone | ValidSource$ Card.YouCtrl+IsRingbearer | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
             final String loseEffect = "DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3";
 
