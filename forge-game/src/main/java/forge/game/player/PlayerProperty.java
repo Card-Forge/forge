@@ -410,8 +410,7 @@ public class PlayerProperty {
             if (!Iterables.contains(player.getAttackedPlayersMyTurn(), sourceController)) {
                 return false;
             }
-        }
-        else if (property.equals("attackedYouTheirLastTurn")) {
+        } else if (property.equals("attackedYouTheirLastTurn")) {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
             }
