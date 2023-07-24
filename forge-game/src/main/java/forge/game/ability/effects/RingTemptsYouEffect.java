@@ -128,9 +128,9 @@ public class RingTemptsYouEffect extends EffectEffect {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         runParams.put(AbilityKey.Card, ringBearer);
         game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
-        // make sure it shows up in the command zone
-        p.getTheRing().updateStateForView();
         //increment ring tempted you for property
         p.incrementRingTemptedYou();
+        // make sure it shows up in the command zone
+        p.getTheRing().updateStateForView();
     }
 }

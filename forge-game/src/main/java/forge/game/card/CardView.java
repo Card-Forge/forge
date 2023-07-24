@@ -471,7 +471,8 @@ public class CardView extends GameEntityView {
     }
     void updateRingLevel(Card c) {
         Player p = c.getController();
-        set(TrackableProperty.RingLevel, p == null ? 0 : p.getNumRingTemptedYou());
+        if (p != null && p.getTheRing() == c)
+            set(TrackableProperty.RingLevel, p.getNumRingTemptedYou());
     }
 
     private String getRemembered() {
