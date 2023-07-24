@@ -2,7 +2,7 @@ Name:Golgari Keyrune
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
-A:AB$ Animate | Cost$ B G | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Insect | Colors$ Black,Green | Keywords$ Deathtouch | SpellDescription$ CARDNAME becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
+A:AB$ Animate | Cost$ B G | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Insect | RemoveCreatureTypes$ True | Colors$ Black,Green | Keywords$ Deathtouch | SpellDescription$ CARDNAME becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Green
 Oracle:{T}: Add {B} or {G}.\n{B}{G}: Golgari Keyrune becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.

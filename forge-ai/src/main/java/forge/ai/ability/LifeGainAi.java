@@ -129,7 +129,8 @@ public class LifeGainAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         int lifeAmount = 0;
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
-        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
+        if (sourceName.equals("Dawnglow Infusion")
+                || (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid"))) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);

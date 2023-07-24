@@ -606,21 +606,17 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getLimitToCheck() != null) {
-            String limit = this.getLimitToCheck();
-            int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setActivationLimit(activationLimit);
+            int limit = AbilityUtils.calculateAmount(c, getLimitToCheck(), sa);
 
-            if (this.getActivationLimit() != -1 && sa.getActivationsThisTurn() >= this.getActivationLimit()) {
+            if (sa.getActivationsThisTurn() >= limit) {
                 return false;
             }
         }
 
         if (this.getGameLimitToCheck() != null) {
-            String limit = this.getGameLimitToCheck();
-            int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setGameActivationLimit(gameActivationLimit);
+            int limit = AbilityUtils.calculateAmount(c, getGameLimitToCheck(), sa);
 
-            if (this.getGameActivationLimit() != -1 && sa.getActivationsThisGame() >= this.getGameActivationLimit()) {
+            if (sa.getActivationsThisGame() >= limit) {
                 return false;
             }
         }

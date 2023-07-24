@@ -208,6 +208,8 @@ public class CardFactory {
             c.setCastSA(copySA);
         }
 
+        // mana is not copied
+        copySA.clearManaPaid();
         //remove all costs
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", targetSA.isAbility()));

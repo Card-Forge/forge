@@ -2,7 +2,7 @@ Name:Selesnya Keyrune
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-A:AB$ Animate | Cost$ G W | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Wolf | Colors$ Green,White | SpellDescription$ CARDNAME becomes a 3/3 green and white Wolf artifact creature until end of turn.
+A:AB$ Animate | Cost$ G W | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Wolf | RemoveCreatureTypes$ True | Colors$ Green,White | SpellDescription$ CARDNAME becomes a 3/3 green and white Wolf artifact creature until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green|White
 Oracle:{T}: Add {G} or {W}.\n{G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.
