@@ -1,0 +1,113 @@
+vampire_4.png
+size: 384,195
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 6, 7
+  size: 15, 15  
+Idle 
+  xy: 4, 6
+  size:20, 22 
+Idle 
+  xy: 36, 6
+  size:20, 22 
+Idle 
+  xy: 68, 6
+  size:20, 22 
+Idle 
+  xy: 100, 6
+  size:20, 22 
+Idle 
+  xy: 132, 6
+  size:20, 22 
+Idle 
+  xy: 164, 6
+  size:20, 22 
+Idle 
+  xy: 196, 6
+  size:20, 22 
+Idle 
+  xy: 228, 6
+  size:20, 22
+Idle 
+  xy: 260, 6
+  size:20, 22 
+Idle 
+  xy: 292, 6
+  size:20, 22  
+Walk
+  xy: 4, 38
+  size: 20,22 
+Walk 
+  xy: 36, 38
+  size: 20,22 
+Walk 
+  xy: 68, 38
+  size: 20,22 
+Walk 
+  xy: 100, 38
+  size: 20,22 
+Walk
+  xy: 132, 38
+  size: 20,22
+Walk 
+  xy: 164, 38
+  size: 20,22 
+Walk 
+  xy: 196, 38
+  size: 20,22 
+Walk
+  xy: 228, 38
+  size: 20,22  
+Attack 
+  xy: 0, 70
+  size: 32, 22     
+Attack 
+  xy: 32, 70
+  size: 32, 22     
+Attack 
+  xy: 64, 70
+  size: 32, 22     
+Attack 
+  xy: 96, 70
+  size: 32, 22   
+Attack 
+  xy: 128, 70
+  size: 32, 22     
+Attack 
+  xy: 160, 70
+  size: 32, 22    
+Attack 
+  xy: 192, 70
+  size: 32, 22   
+Attack 
+  xy: 224, 70
+  size: 32, 22   
+Death 
+  xy: 0, 166
+  size: 32, 22 
+Death 
+  xy: 32, 166
+  size: 32, 22 
+Death 
+  xy: 64, 166
+  size: 32, 22 
+Death 
+  xy: 96, 166
+  size: 32, 22  
+Death 
+  xy: 128, 166
+  size: 32, 22 
+Death 
+  xy: 160, 166
+  size: 32, 22 
+Death 
+  xy: 192, 166
+  size: 32, 22 
+Death 
+  xy: 224, 166
+  size: 32, 22 
+Death 
+  xy: 256, 166
+  size: 32, 22 

@@ -56,7 +56,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/enemy.tx" x="206.667" y="78.3333">
+  <object id="68" template="../../obj/enemy.tx" x="120" y="141.667">
    <properties>
     <property name="enemy" value="Bandit Slingshot"/>
     <property name="threatRange" type="int" value="30"/>

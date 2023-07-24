@@ -49,14 +49,14 @@
     <property name="waypoints" value="71,73,72"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/enemy.tx" x="335.833" y="239.333">
+  <object id="59" template="../../obj/enemy.tx" x="333.5" y="240.333">
    <properties>
     <property name="enemy" value="Kobold Warrior"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="67" template="../../obj/gold.tx" x="189.5" y="320.5"/>
-  <object id="68" template="../../obj/enemy.tx" x="447.334" y="319.666">
+  <object id="68" template="../../obj/enemy.tx" x="454.001" y="312.666">
    <properties>
     <property name="enemy" value="Kobold Warrior"/>
     <property name="threatRange" type="int" value="50"/>

@@ -6121,7 +6121,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the hive. (-2 Local Reputation)",
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the hive.",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -6602,7 +6602,6 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": -1,
 						"POIReference": ""
 					}
 				],

@@ -1,11 +1,11 @@
 wraith.png
-size: 224,100
+size: 250,100
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 73, 33
-  size: 12, 12     
+  xy: 219, 24
+  size: 31, 29     
 Idle 
   xy: 6, 33
   size: 16, 16   

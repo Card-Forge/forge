@@ -10,12 +10,12 @@
  <tileset firstgid="17793" source="../../tileset/DarkAbbeyTiles.tsx"/>
  <layer id="6" name="Ground" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   eJzt2U9OhDAYh2EWJgNx7R08ySyNce8FPIhLr+I4eiv/HkGaSUOHgaGFQn8d3if5kokr6EuBYFEAAAAAAADMb7c5HqRBAy1DLW6vm8G8fPYFPcJ1rWv7edA3Q+gRpmttY7VAGNZaA9e9hr57EpbHXkiP+5IG1l4D6w9gaTyDNai9Dz1Xp7MmSi1iGdPwSeDb46V1yB0tdNBAy5gOL9XpII7QHl0NaBLPUA+fdxR6aKEFAAAAACCl17IofqvD7Orfb2XqI1oXu/5m7c381b/vnPmpaLKkz3q9v5z5KI97mLnnW06nJb5xmT7vZdNmX883PSQ8sDcmiX2fN3uFvTEeaweEudkcBhrooYcmemwTdwBcvtz2em7HGyrX88v1uM/hWQgAAAAAAIA121bNQAc9tNge7BVM5d5zuZ7Sm7r+c/Rz7zftv5+7ftZ6Tc29n+gxnvK5P16lPoJhyuvXZcz/200HO8py3MuhPdwOqj1yfn/y6WHPy7aw56jaI2e+PdwW9JiP7eE+E3zXOYdnSG7cHla7Td+60yO+vv3R7uDbaO3+Ad28nrE=
+   eJzt2ktOwzAURuEMkJqIcffAShgixJwNsBCGXQM7oDx2xXMJxKqsuGlC7MSJfzfnk65UMWrviZOqoigAAAAAAADmt98cD9KggZahFleXzWBePueCHuG69tp+HvTNEHqE6dptrBYIw641cN1r6LsnYXmchfS4L2lg9xrYP4Cl8QzWoPZ96LE6nTVRahHLmIYPAr89nluH3NFCBw20jOmwq04HcYT26GpAk3iGevh8R6GHFloAAAAAAFJ6LovipzrMvn79UqZ+R+ti9292b+a3fn3jzHdFkyV91Pv+dOa9PO5h5pbfcjot8RuX6fNWNm1e6/mih4Q7zsYkse/z5qxwNsZjd0CY7eYw0EAPPTTRY5u4A+D85XbWc3u/vp62zeToHLvk3gQAAAAAAACY4rpqBjroocX24KxgKveey/WU3tT9z9HPvd+0//7f9bPWa2ru80SP8ZQ/+/1F6ncwTHl/Xcb8H4HpYEdZjmc5tIfbQbVHzt+ffHrYz2Vb2M+o2iNnvj3cFvSYj+3hPhN895zDMyQ3bg+r3aZv7/SIr+98tDv4Nlq7P/Unops=
   </data>
  </layer>
  <layer id="2" name="Walls" width="100" height="86">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="7" name="Foreground" width="100" height="86">
@@ -50,19 +50,19 @@
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;What are you ?&quot;,
-				&quot;text&quot;: &quot;I'm the queen of the Sliver's of the Skep, at least I used to be until my position was usurped.&quot;,
+				&quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.&quot;,
 				&quot;options&quot;: [
 					{
-						&quot;name&quot;: &quot;Usurped ? what are you talking about ?&quot;,
+						&quot;name&quot;: &quot;Usurped ? What are you talking about ?&quot;,
 						&quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
 						&quot;options&quot;: [
 							{
 								&quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive ? &quot;,
-								&quot;text&quot;: &quot;Exactly, she's been assembling a mightby host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
+								&quot;text&quot;: &quot;Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
 								&quot;options&quot;: [
 									{
 										&quot;name&quot;: &quot;Where is she located ? I will take care of it.&quot;,
-										&quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three lieutenants that are scattered around here in the Skep. Only then will the magic shield allow you to enter.&quot;,
+										&quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield dissapear and will you be able to enter her lair.&quot;,
 										&quot;options&quot;: [
 											{
 												&quot;name&quot;: &quot;Consider it done&quot;,
@@ -239,7 +239,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;text&quot;: &quot;Many mouths to feed, little time for smalltalk.&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;leave&quot;
@@ -280,10 +280,10 @@
 ]</property>
    </properties>
   </object>
-  <object id="88" template="../../obj/waypoint.tx" x="699.25" y="1342.25"/>
+  <object id="88" template="../../obj/waypoint.tx" x="703.25" y="1342.92"/>
   <object id="89" template="../../obj/waypoint.tx" x="431.75" y="1341.75"/>
   <object id="90" template="../../obj/waypoint.tx" x="432.5" y="1267"/>
-  <object id="91" template="../../obj/waypoint.tx" x="704.75" y="1379.75"/>
+  <object id="91" template="../../obj/waypoint.tx" x="703.75" y="1373.75"/>
   <object id="92" template="../../obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
@@ -358,19 +358,19 @@
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;What is happening around here ?&quot;,
-        &quot;text&quot;: &quot;Well, for an unknown reason, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. Because of this, General Jarkhald has summoned a large host to deal with this situation.&quot;,
+        &quot;text&quot;: &quot;Well, for an unknown reason, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. General Jarkhald has summoned a large host to deal with this situation.&quot;,
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;So you intend to just storm the hive, and hope for the best?&quot;,
-            &quot;text&quot;: &quot;Well, we tried that before but due to the huge amount of Slivers we haven't had much progress outside of walling of the hive to prevent further attacks against the villages.&quot;,
+            &quot;text&quot;: &quot;Well, we tried that before but due to the huge amount of Slivers we haven't had much progress outside of walling off the hive to prevent further attacks against the surrounding villagers.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;Any way I could be of use to deal with the slivers ?&quot;,
-                &quot;text&quot;: &quot;Well, Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... &quot;,
+                &quot;name&quot;: &quot;Any way I could be of use to deal with the Slivers ?&quot;,
+                &quot;text&quot;: &quot;Well, Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly, we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... &quot;,
                 &quot;options&quot;: [
                   {
                     &quot;name&quot;: &quot;I'll can deal with the queen, but what's in it for me ?&quot;,
-                    &quot;text&quot;: &quot; Outside the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece or armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward.                    I'll have my men open the gate to let you enter the hive. Good luck Adventurer !&quot;,
+                    &quot;text&quot;: &quot; Outside of the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece or armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward.I'll have my men open the gate to let you enter the hive. Good luck Adventurer !&quot;,
                     &quot;options&quot;: [
                       {
                         &quot;name&quot;: &quot;End&quot;,
@@ -1056,7 +1056,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+    &quot;text&quot;: &quot;Those things won't get past this gate. You can count on that, adventurer.&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;leave&quot;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="131">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="135">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,12 +9,12 @@
  <tileset firstgid="16001" source="../../tileset/FarmFood.tsx"/>
  <layer id="10" name="Colission" width="50" height="40">
   <data encoding="base64" compression="zlib">
-   eJztz0EKgDAMRNHu9QbqVT2Z3k1dBEQQ2yTFtPwH2SVhJiUAAIB+rcP3RLeNeXt75t4fcjuIiF1KO4hIXbQdRIQu05lhMebw+GFFD98fVvTw/WFFD98fHmZjBuu9lyuHNovl1ptkKc2jvavlnic3k+amtmcmzUTRQwfRQwfxlrWlDgAAtOYAbb4bLg==
+   eJzt00EKgCAQRmH3dYPqqp2s7lYuBiqIRkdplPeBO43/LQoBAACgX+vwfbzbRt29XXnvD9oG4bEltUF4asltEB5apnPDYtxR4htWdNzRUQYddz10ePjPo9m4wfq+lLgjd4vlbWmyJXVP7rtarnu0m3Le1NZLR/TclXK86aFBvG1tqQEAgNYcP2EZKg==
   </data>
  </layer>
  <layer id="1" name="Background" width="50" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt170JgDAQhuFDbBwgreNaOoMLuI7zSCob/3In5Iu8gacRlHshQjINZhMAAMBPbaNZlw6eb+RVu2NJz2rP+EWDektJg2KLZ37FlmiHSgsddNBBRysd0Zb8vsJ5KtJSe+YrZ+vuuarSjllg5ujeUu5421J7Ro+1998Llaj/0wAAtG4HkAhvWw==
+   eJzt1z0Kg0AQhuFFbATb7STHtfQMXsDreJ4whCEpFnaZEOYjvANPYyHzFuvPvpSyAwAA/Kn7UcpU3yL3sMnu2Na+7B1HGnpzVu2WkYbPUWvxnSKj0vJNg1ILHVodxvawZxAd+Q10vEbtnRjt8Aab7AYXbVDUmtZ15Qbfd+R71/sOgZ1bRs/JWbU7vKUne8eIa47/FyrxswAAAH7jCXgt53o=
   </data>
  </layer>
  <layer id="8" name="Ground" width="50" height="40">
@@ -228,12 +228,16 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="130" template="../../obj/door_left.tx" x="384.75" y="335.25" width="35" height="39.5">
+  <object id="130" template="../../obj/door_left.tx" x="384.75" y="335.25" width="60" height="39.5">
    <properties>
-    <property name="direction" value="up"/>
+    <property name="direction" value="right"/>
     <property name="teleport" value="../common/maps/map/aerie/aerie_4.tmx"/>
     <property name="teleportObjectId" value="103"/>
    </properties>
   </object>
+  <object id="131" template="../../obj/collision.tx" x="-4.23" y="641" width="807.46" height="16"/>
+  <object id="132" template="../../obj/collision.tx" x="1.27" y="-17" width="794.46" height="16"/>
+  <object id="133" template="../../obj/collision.tx" x="799" y="-13.472" width="16" height="667.944"/>
+  <object id="134" template="../../obj/collision.tx" x="-16" y="-11.972" width="16" height="667.944"/>
  </objectgroup>
 </map>

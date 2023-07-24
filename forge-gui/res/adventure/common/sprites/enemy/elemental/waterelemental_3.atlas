@@ -1,0 +1,88 @@
+waterelemental_3.png
+size: 576,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 419, 50
+  size: 16, 16    
+Idle 
+  xy: 8, 54
+  size: 16, 21   
+Idle 
+  xy: 40, 54
+  size: 16, 21   
+Idle 
+  xy: 72, 54
+  size: 16, 21   
+Idle 
+  xy: 104, 54
+  size: 16, 21   
+Walk 
+  xy: 6, 24
+  size: 24, 22   
+Walk
+  xy: 38, 24
+  size: 24, 22   
+Walk
+  xy: 70, 24
+  size: 24, 22   
+Walk 
+  xy: 102, 24
+  size: 24, 22   
+Walk
+  xy: 134, 24
+  size: 24, 22   
+Walk
+  xy: 166, 24
+  size: 24, 22
+Attack
+  xy: 6, 0
+  size: 20, 19  
+Attack
+  xy: 38, 0
+  size: 20, 19    
+Attack
+  xy: 70, 0
+  size: 20, 19    
+Attack
+  xy: 102, 0
+  size: 20, 19    
+Attack
+  xy: 134, 0
+  size: 20, 19    
+Attack
+  xy: 166, 0
+  size: 20, 19    
+Attack
+  xy: 198, 0
+  size: 20, 19
+Attack
+  xy: 230, 0
+  size: 20, 19    
+Attack
+  xy: 262, 0
+  size: 20, 19    
+Attack
+  xy: 294, 0
+  size: 20, 19             
+Death
+  xy: 2, 86
+  size: 22, 22      
+Death
+  xy: 34, 86
+  size: 22, 22   
+Death
+  xy: 66, 86
+  size: 22, 22   
+Death
+  xy: 98, 86
+  size: 22, 22  
+Death
+  xy: 130, 86
+  size: 22, 22  
+Death
+  xy: 162, 86
+  size: 22, 22   
+
+  

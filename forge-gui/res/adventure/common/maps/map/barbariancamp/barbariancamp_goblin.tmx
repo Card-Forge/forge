@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -66,13 +66,13 @@
     <property name="waypoints" value="74,73,72,63,72,73"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/enemy.tx" x="213.736" y="135.909">
+  <object id="56" template="../../obj/enemy.tx" x="211.236" y="141.909">
    <properties>
     <property name="enemy" value="Goblin Chief"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/enemy.tx" x="393.333" y="84.8337">
+  <object id="57" template="../../obj/enemy.tx" x="434.333" y="74.3337">
    <properties>
     <property name="enemy" value="Goblin"/>
     <property name="threatRange" type="int" value="30"/>
@@ -131,5 +131,10 @@
   <object id="74" template="../../obj/waypoint.tx" x="427" y="99.5"/>
   <object id="75" template="../../obj/manashards.tx" x="338" y="109.5"/>
   <object id="76" template="../../obj/manashards.tx" x="82.5" y="96"/>
+  <object id="77" template="../../obj/enemy.tx" x="16.5" y="95.5">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

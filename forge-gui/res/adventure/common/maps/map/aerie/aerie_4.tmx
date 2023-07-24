@@ -108,7 +108,7 @@
   </object>
   <object id="103" template="../../obj/door_left.tx" x="212" y="160" width="35" height="39.5">
    <properties>
-    <property name="direction" value="down"/>
+    <property name="direction" value="left"/>
     <property name="teleport" value="../common/maps/map/aerie/aerie_0.tmx"/>
     <property name="teleportObjectId" value="130"/>
    </properties>
