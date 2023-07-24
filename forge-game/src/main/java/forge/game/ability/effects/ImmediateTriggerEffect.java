@@ -46,7 +46,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         mapParams.put("Mode", TriggerType.Immediate.name());
 
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
-        immediateTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+        immediateTrig.setSpawningAbility(sa.copy(host, true));
 
         // Need to copy paid costs
 

@@ -343,7 +343,7 @@ public abstract class SpellAbilityEffect {
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
         trig.setOverridingAbility(newSa);
-        trig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
+        trig.setSpawningAbility(sa.copy(sa.getHostCard(), true));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
 
@@ -753,7 +753,7 @@ public abstract class SpellAbilityEffect {
                                     " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
 
                             Trigger trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
-                            trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+                            trig.setSpawningAbility(sa.copy(lki, true));
                             trig.setActiveZone(null);
                             trig.addRemembered(newCard);
 
