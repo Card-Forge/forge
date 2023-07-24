@@ -16,7 +16,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return Localizer.getInstance().getMessageorUseDefault("lblTheRingTempts", "The Ring tempts") + " " + sa.getActivatingPlayer() + ".";
+        return Localizer.getInstance().getMessage("lblTheRingTempts", sa.getActivatingPlayer());
     }
 
     @Override

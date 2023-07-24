@@ -1186,7 +1186,12 @@ public abstract class GameState {
             applyCountersToGameEntity(p, state.counters);
         }
         if (state.numRingTemptedYou > 0) {
-            p.setRingLevel(state.numRingTemptedYou);
+            //setup all levels
+            for (int i = 1; i <= state.numRingTemptedYou; i++) {
+                if (i > 4)
+                    break;
+                p.setRingLevel(i);
+            }
         }
     }
 
