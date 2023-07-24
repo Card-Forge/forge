@@ -3225,7 +3225,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             default:
                 break;
         }
-
+        getTheRing().updateStateForView();
     }
     public void changeOwnership(Card card) {
         // If lost then gained, just clear out of lost.

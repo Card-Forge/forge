@@ -16,7 +16,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return "The Ring tempts " + sa.getActivatingPlayer() + ".";
+        return Localizer.getInstance().getMessageorUseDefault("lblTheRingTempts", "The Ring tempts") + " " + sa.getActivatingPlayer() + ".";
     }
 
     @Override
@@ -27,7 +27,10 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         if (p.getTheRing() == null)
             p.createTheRing(card);
-        p.setRingLevel(p.getNumRingTemptedYou() + 1);
+
+        //increment ring tempted you for property
+        p.incrementRingTemptedYou();
+        p.setRingLevel(p.getNumRingTemptedYou());
 
         // Then choose a ring-bearer (You may keep the same one). Auto pick if <2 choices.
         CardCollection creatures = p.getCreaturesInPlay();
@@ -53,9 +56,5 @@ public class RingTemptsYouEffect extends EffectEffect {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         runParams.put(AbilityKey.Card, ringBearer);
         game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);
-        //increment ring tempted you for property
-        p.incrementRingTemptedYou();
-        // make sure it shows up in the command zone
-        p.getTheRing().updateStateForView();
     }
 }
