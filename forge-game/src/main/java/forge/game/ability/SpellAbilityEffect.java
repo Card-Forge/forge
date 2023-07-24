@@ -498,28 +498,7 @@ public abstract class SpellAbilityEffect {
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         String finalname = name.replaceAll("\\([^()]*\\)", "");
-        if (finalname.contains(" 's Effect")) {
-            finalname = finalname.replace( " 's Effect", "");
-            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblEffect");
-        } else if (finalname.contains("'s Effect")) {
-            finalname = finalname.replace( "'s Effect", "");
-            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblEffect");
-        } else if (finalname.contains(" 's Boon")) {
-            finalname = finalname.replace( " 's Boon", "");
-            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblBoon");
-        } else if (finalname.contains("'s Boon")) {
-            finalname = finalname.replace( "'s Boon", "");
-            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblBoon");
-        } else if (finalname.startsWith("Emblem")) {
-            String []s = finalname.split(" - ");
-            try {
-                String translatedName = s[1].endsWith(" ") ? s[1].substring(0, s[1].lastIndexOf(" ")) : s[1];
-                translatedName = CardTranslation.getTranslatedName(s[1]);
-                finalname = translatedName + " " + Localizer.getInstance().getMessage("lblEmblem");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(finalname);
         eff.setColor(hostCard.getColor().getColor());
