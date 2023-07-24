@@ -8,7 +8,7 @@ SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPl
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBToken | FalseSubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenAmount$ 3 
-SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:X:PlayerCountDefinedTriggeredPlayer$HasPropertyattackedYouTheirCurrentTurn
 AI:RemoveDeck:All
 DeckHas:Ability$Token & Type$Soldier
