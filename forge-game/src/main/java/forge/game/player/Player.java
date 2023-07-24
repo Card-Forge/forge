@@ -1838,15 +1838,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final Card getTheRing() {
         return theRing;
     }
+    public final void clearTheRing() {
+        theRing = null;
+    }
     public final void setRingBearer(Card bearer) {
         if (bearer == null)
             return;
         clearRingBearer();
         ringBearer = bearer;
         ringBearer.setRingBearer(true);
-    }
-    public final void setTheRing(Card ring) {
-        theRing = ring;
     }
     public void clearRingBearer() {
         if (ringBearer == null)
@@ -1956,6 +1956,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void incrementRingTemptedYou() {
         numRingTemptedYou++;
+    }
+    public final void setNumRingTemptedYou(int value) {
+        numRingTemptedYou = value;
     }
     public final void resetRingTemptedYou() {
         numRingTemptedYou = 0;
