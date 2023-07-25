@@ -5,7 +5,8 @@ PT:6/5
 K:Trample
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Frenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. CARDNAME attacks that player this combat if able.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME attacks specific player each combat if able:ChosenPlayer | Duration$ UntilEndOfCombat
+SVar:DBPump:DB$ Animate | Defined$ Self | staticAbilities$ AttackChosen | Duration$ UntilEndOfCombat
+SVar:AttackChosen:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ ChosenPlayer
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChooseBis | TriggerDescription$ When CARDNAME dies, it deals 4 damage to target opponent chosen at random.
 SVar:TrigChooseBis:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 4 | SubAbility$ DBCleanup
