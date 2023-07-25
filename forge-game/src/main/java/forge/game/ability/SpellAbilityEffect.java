@@ -497,10 +497,9 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        String finalname = name.replaceAll("\\([^()]*\\)", "");
 
         eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(finalname);
+        eff.setName(name);
         eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
