@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Artifact Vehicle
 PT:5/5
 K:Trample
-A:AB$ Animate | Cost$ tapXType<2/Creature/creature> | Types$ Artifact,Creature | RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
+A:AB$ Animate | Cost$ tapXType<2/Creature/creature> | Types$ Artifact,Creature | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
 Oracle:Trample\nTap two untapped creatures you control: Honeymoon Hearse becomes an artifact creature until end of turn.

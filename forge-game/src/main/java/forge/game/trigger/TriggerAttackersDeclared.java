@@ -23,10 +23,12 @@ import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -60,8 +62,13 @@ public class TriggerAttackersDeclared extends Trigger {
         if (!matchesValidParam("AttackedTarget", runParams.get(AbilityKey.AttackedTarget))) {
             return false;
         }
-        if (!matchesValidParam("ValidAttackers", runParams.get(AbilityKey.Attackers))) {
-            return false;
+        if (hasParam("ValidAttackers")) {
+            String param = getParamOrDefault("ValidAttackersAmount", "GE1");
+            int attackers = CardLists.getValidCardCount((CardCollection) runParams.get(AbilityKey.Attackers), getParam("ValidAttackers"), getHostCard().getController(), getHostCard(), this);
+            int amount = AbilityUtils.calculateAmount(getHostCard(), param.substring(2), this);
+            if (!Expressions.compare(attackers, param, amount)) {
+                return false;
+            }
         }
 
         return true;

@@ -275,8 +275,8 @@ public class PumpAi extends PumpAiBase {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
 
-        if (sa.hasParam("ActivationNumberSacrifice")) {
-            final int sacActivations = Integer.parseInt(sa.getParam("ActivationNumberSacrifice").substring(2));
+        if (sa.hasParam("ConditionActivationLimit")) {
+            final int sacActivations = Integer.parseInt(sa.getParam("ConditionActivationLimit").substring(2));
             final int activations = sa.getActivationsThisTurn();
             // don't risk sacrificing a creature just to pump it
             if (activations >= sacActivations - 1) {

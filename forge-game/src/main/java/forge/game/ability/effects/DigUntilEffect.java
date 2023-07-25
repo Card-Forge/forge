@@ -37,9 +37,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        for (final Player pl : getTargetPlayers(sa)) {
-            sb.append(pl).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :

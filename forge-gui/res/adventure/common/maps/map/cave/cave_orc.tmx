@@ -45,7 +45,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/enemy.tx" x="221.871" y="131.849">
+  <object id="58" template="../../obj/enemy.tx" x="223.459" y="143.23">
    <properties>
     <property name="enemy" value="Orc Brute"/>
     <property name="threatRange" type="int" value="50"/>
@@ -58,7 +58,7 @@
     <property name="waypoints" value="63,64,65,66,67"/>
    </properties>
   </object>
-  <object id="60" template="../../obj/enemy.tx" x="206.121" y="228.883">
+  <object id="60" template="../../obj/enemy.tx" x="207.709" y="224.384">
    <properties>
     <property name="enemy" value="Orc Warrior"/>
     <property name="threatRange" type="int" value="20"/>

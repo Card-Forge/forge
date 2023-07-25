@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFxIJWcfrbR4ydK0Wpbx+9/ToK6A9WiEIwsYBa6QxkDgjzUMm8UUA6oFZcjoKhCQAkEwj6
+   eJxjYBgFxIJWcfrbR4ydK0Wpbx+9/ToK6A9WiEIwsYBa6QxkDgjzkGBeFS917B4FEECtuBwFQxMAAONFCYE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -44,14 +44,14 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../../obj/gold.tx" x="118.172" y="348.083"/>
+  <object id="49" template="../../obj/gold.tx" x="112.522" y="340.819"/>
   <object id="50" template="../../obj/enemy.tx" x="134.676" y="345.362">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/enemy.tx" x="206.034" y="232.502">
+  <object id="56" template="../../obj/enemy.tx" x="220.966" y="236.941">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
@@ -77,7 +77,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/gold.tx" x="376.311" y="377.307"/>
+  <object id="52" template="../../obj/gold.tx" x="375.504" y="374.482"/>
   <object id="59" template="../../obj/gold.tx" x="320" y="384" visible="0">
    <properties>
     <property name="reward">[{
@@ -85,7 +85,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="60" template="../../obj/enemy.tx" x="366.104" y="363.28">
+  <object id="60" template="../../obj/enemy.tx" x="364.086" y="354.805">
    <properties>
     <property name="enemy" value="Hidden Snake"/>
     <property name="threatRange" type="int" value="30"/>
@@ -138,7 +138,7 @@
     <property name="waypoints" value="65,66,72,64"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/enemy.tx" x="308.798" y="185.711">
+  <object id="68" template="../../obj/enemy.tx" x="307.991" y="186.115">
    <properties>
     <property name="enemy" value="Viper"/>
     <property name="threatRange" type="int" value="30"/>
@@ -156,7 +156,7 @@
   <object id="73" template="../../obj/manashards.tx" x="151.408" y="75.1344"/>
   <object id="74" template="../../obj/manashards.tx" x="372.965" y="97.734"/>
   <object id="75" template="../../obj/manashards.tx" x="384.265" y="256.739"/>
-  <object id="77" template="../../obj/enemy.tx" x="266.424" y="62.2203">
+  <object id="77" template="../../obj/enemy.tx" x="269.249" y="64.2381">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="20"/>

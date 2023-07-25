@@ -90,7 +90,17 @@ public class StaticAbilityCantAttackBlock {
             }
         }
 
-        final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
+        final Player defender;
+        if (target instanceof Player) {
+            defender = (Player) target;
+        } else {
+            Card c = (Card) target;
+            if (c.isBattle()) {
+                defender = c.getProtectingPlayer();
+            } else {
+                defender = c.getController();
+            }
+        }
 
         if (stAb.hasParam("UnlessDefenderControls")) {
             String type = stAb.getParam("UnlessDefenderControls");
@@ -108,9 +118,20 @@ public class StaticAbilityCantAttackBlock {
                 return false;
             }
         }
-        if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection") && (hostCard.getChosenDirection() == null
-                || defender.equals(game.getNextPlayerAfter(card.getController(), hostCard.getChosenDirection())))) {
-            return false;
+        if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection")) {
+            if (hostCard.getChosenDirection() == null) {
+                return false;
+            }
+            if (target instanceof Card && ((Card) target).isBattle()) {
+                return false;
+            }
+            Player next = card.getController();
+            while (!next.isOpponentOf(card.getController())) {
+                next = game.getNextPlayerAfter(next, hostCard.getChosenDirection());
+            }
+            if (defender.equals(next)) {
+                return false;
+            }
         }
         if (stAb.hasParam("UnlessDefender")) {
             final String type = stAb.getParam("UnlessDefender");

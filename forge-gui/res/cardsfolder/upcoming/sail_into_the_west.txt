@@ -1,0 +1,13 @@
+Name:Sail into the West
+ManaCost:2 G U
+Types:Instant
+A:SP$ Vote | Defined$ Player | VoteType$ Return,Embark | VoteReturn$ DBChangeZone | VoteEmbark$ DBWheel | Tied$ DBWheel | SpellDescription$ Will of the council — Starting with you, each player votes for return or embark. If return gets more votes, each player returns up to two cards from their graveyard to their hand, then you exile CARDNAME. If embark gets more votes or the vote is tied, each player may discard their hand and draw seven cards.
+SVar:DBChangeZone:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZoneAll | SpellDescription$ If return gets more votes, each player returns up to two cards from their graveyard to their hand, then you exile CARDNAME.
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Graveyard | Defined$ Player.IsRemembered | MinAmount$ 0 | Amount$ 2 | ChoiceTitle$ Select up to two cards from your graveyard | RememberChosen$ True
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:DBWheel:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ If embark gets more votes or the vote is tied, each player may discard their hand and draw seven cards.
+SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Hand> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ 7
+DeckHas:Ability$Discard|Graveyard
+Oracle:Will of the council — Starting with you, each player votes for return or embark. If return gets more votes, each player returns up to two cards from their graveyard to their hand, then you exile Sail into the West. If embark gets more votes or the vote is tied, each player may discard their hand and draw seven cards.

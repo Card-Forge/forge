@@ -230,8 +230,7 @@ public abstract class PlayerController {
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 
-    public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
-            Map<String, Object> params);
+    public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params);
 
     public abstract String chooseKeywordForPump(List<String> options, SpellAbility sa, String prompt, Card tgtCard);
 

@@ -350,7 +350,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS);
         } else if (keyword.endsWith("Wither")) {
-            if (newPower <= 0 || card.hasKeyword(Keyword.INFECT)) {
+            if (newPower <= 0 || card.isWitherDamage()) {
                 return false;
             }
             return combat != null && (combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)));

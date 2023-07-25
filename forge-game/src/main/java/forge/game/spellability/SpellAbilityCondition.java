@@ -154,6 +154,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
         }
 
+        if (params.containsKey("ConditionActivationLimit")) {
+            this.setLimitToCheck(params.get("ConditionActivationLimit"));
+        }
+
         if (params.containsKey("ConditionChosenColor")) {
             this.setColorToCheck(params.get("ConditionChosenColor"));
         }
@@ -340,12 +344,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.getActivationLimit() != -1 && sa.getActivationsThisTurn() >= this.getActivationLimit()) {
-            return false;
-        }
-
-        if (this.getGameActivationLimit() != -1 && sa.getActivationsThisGame() >= this.getGameActivationLimit()) {
-            return false;
+        if (this.getLimitToCheck() != null) {
+            String comp = getLimitToCheck();
+            int right = Integer.parseInt(comp.substring(2));
+            int activationNum =  sa.getActivationsThisTurn();
+            if (!Expressions.compare(activationNum, comp, right)) {
+                return false;
+            }
         }
 
         if (this.getPhases().size() > 0) {

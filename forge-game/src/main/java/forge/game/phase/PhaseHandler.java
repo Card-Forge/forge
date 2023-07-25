@@ -1072,7 +1072,6 @@ public class PhaseHandler implements java.io.Serializable {
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game, sa);
                         }
-
                     }
                     game.copyLastState();
                     loopCount++;

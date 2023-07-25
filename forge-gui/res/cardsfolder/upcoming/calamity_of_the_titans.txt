@@ -1,0 +1,6 @@
+Name:Calamity of the Titans
+ManaCost:4 C C
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 4 C C Reveal<1/Creature.Colorless/colorless creature> | ChangeType$ Creature.cmcLTX,Planeswalker.cmcLTX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each creature and planeswalker with mana value less than the revealed card's mana value.
+SVar:X:Revealed$CardManaCost
+Oracle:As an additional cost to cast this spell, reveal a colorless creature card from your hand.\nExile each creature and planeswalker with mana value less than the revealed card's mana value.
