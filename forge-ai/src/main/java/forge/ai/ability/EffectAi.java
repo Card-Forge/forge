@@ -20,7 +20,6 @@ import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -32,7 +31,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -405,11 +403,12 @@ public class EffectAi extends SpellAbilityAi {
                                 continue;
                             }
                             String valid = subAbility.getParamOrDefault("ValidCards", "");
+                            if (valid.isEmpty()) {
+                                continue;
+                            }
 
                             Card source = game.getChangeZoneLKIInfo(subAbility.getHostCard());
-                            boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
-                                    || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT);
-                            if (wither) {
+                            if (source.isWitherDamage()) {
                                 return false;
                             }
 
