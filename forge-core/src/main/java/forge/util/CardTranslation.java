@@ -17,7 +17,8 @@ public class CardTranslation {
     private static Map <String, List <Pair <String, String> > > oracleMappings;
     private static Map <String, String> translatedCaches;
     private static Map <String, String> translatedEffectNames;
-    private static List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
+    private static Map <String, String> translatedTokenNames;
+    private static final List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
     private static String languageSelected = "en-US";
 
     private static void readTranslationFile(String language, String languagesDirectory) {
@@ -56,7 +57,9 @@ public class CardTranslation {
                 return translatednames.getOrDefault(leftname, leftname) + " // " + translatednames.getOrDefault(rightname, rightname);
             }
             try {
-                if (name.startsWith("Emblem - ") || name.contains("'s Effect") || name.contains("'s Boon")) {
+                if (name.endsWith(" Token")) {
+                    return translateTokenName(name);
+                } else if (name.startsWith("Emblem - ") || name.contains("'s Effect") || name.contains("'s Boon")) {
                     return translateEffectNames(name);
                 } else if (knownEffectNames.contains(name)) {
                     return translateKnownEffectNames(name);
@@ -69,6 +72,25 @@ public class CardTranslation {
             }
         }
         return name;
+    }
+
+    private static String translateTokenName(String name) {
+        if (translatedTokenNames == null)
+            translatedTokenNames = new HashMap<>();
+        String ttype = translatedTokenNames.get(name);
+        if (ttype == null) {
+            String sub = name.replace(" Token", "");
+            ttype = Localizer.getInstance().getMessageorUseDefault("lbl" + sub, "");
+            if (ttype == null || ttype.isEmpty()) {
+                ttype = name;
+            } else {
+                ttype = ttype  + " " + Localizer.getInstance().getMessage("lblToken");
+            }
+            translatedTokenNames.put(name, ttype);
+            return ttype;
+        } else {
+            return ttype;
+        }
     }
 
     private static String translateKnownEffectNames(String name) {
