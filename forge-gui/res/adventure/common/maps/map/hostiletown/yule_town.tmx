@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBhYEM3LwLCLh7o4ipewvbI81PeLNBFmjto7au+ovaP2jtqLHxBTzqO7TZoIPdQA2OylB6CmvQCT/yIe
@@ -34,13 +34,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="192" y="271.659" width="48" height="16"/>
-  <object id="41" template="../obj/shop.tx" x="88" y="177.667"/>
-  <object id="42" template="../obj/shop.tx" x="119" y="113.667"/>
-  <object id="43" template="../obj/shop.tx" x="160.333" y="81.6667"/>
-  <object id="44" template="../obj/shop.tx" x="263.667" y="82.3333"/>
-  <object id="45" template="../obj/shop.tx" x="304.667" y="112.667"/>
-  <object id="46" template="../obj/shop.tx" x="343" y="178.667"/>
-  <object id="47" template="../obj/inn.tx" x="215.333" y="81.3333"/>
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.659" width="48" height="16"/>
+  <object id="41" template="../../obj/shop.tx" x="88" y="177.667"/>
+  <object id="42" template="../../obj/shop.tx" x="119" y="113.667"/>
+  <object id="43" template="../../obj/shop.tx" x="160.333" y="81.6667"/>
+  <object id="44" template="../../obj/shop.tx" x="263.667" y="82.3333"/>
+  <object id="45" template="../../obj/shop.tx" x="304.667" y="112.667"/>
+  <object id="46" template="../../obj/shop.tx" x="343" y="178.667"/>
+  <object id="47" template="../../obj/inn.tx" x="215.333" y="81.3333"/>
  </objectgroup>
 </map>
