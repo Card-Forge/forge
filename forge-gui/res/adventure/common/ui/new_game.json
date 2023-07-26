@@ -98,7 +98,7 @@
       "selectable": true,
       "width": 16,
       "height": 16,
-      "x": 164,
+      "x": 174,
       "y": 64
     },
     {
@@ -106,7 +106,7 @@
       "name": "avatarPreview",
       "width": 48,
       "height": 48,
-      "x": 196,
+      "x": 206,
       "y": 48
     },
     {
@@ -116,7 +116,7 @@
       "selectable": true,
       "width": 16,
       "height": 16,
-      "x": 260,
+      "x": 270,
       "y": 64
     },
     {
@@ -126,62 +126,62 @@
       "align": 1,
       "width": 112,
       "height": 16,
-      "x": 164,
+      "x": 174,
       "y": 96
     },
     {
       "type": "Selector",
       "name": "race",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
     {
       "type": "Selector",
       "name": "gender",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
     {
       "type": "Selector",
       "name": "difficulty",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
     {
       "type": "Selector",
       "name": "colorId",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
     {
       "type": "Selector",
       "name": "mode",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
 	{
       "type": "Selector",
       "name": "starterEdition",
       "selectable": true,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "yOffset": 8
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
     },
     {
       "type": "TextButton",
