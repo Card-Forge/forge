@@ -1306,7 +1306,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // occurrences of each
         Map<String, Integer> typesInDeck = Maps.newHashMap();
 
-        // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
             // Changeling are all creature types, they are not interesting for
             // counting creature types
@@ -1330,10 +1329,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             for (String type : c.getType().getCreatureTypes()) {
-                Integer count = typesInDeck.get(type);
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault(type, 0);
                 typesInDeck.put(type, count + 1);
             }
             // also take into account abilities that generate tokens
@@ -1346,10 +1342,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String token : sa.getParam("TokenScript").split(",")) {
                         Card protoType = TokenInfo.getProtoType(token, sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.get(type);
-                            if (count == null) {
-                                count = 0;
-                            }
+                            Integer count = typesInDeck.getOrDefault(type, 0);
                             typesInDeck.put(type, count + 1);
                         }
                     }
@@ -1365,10 +1358,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         for (String token : sa.getParam("TokenScript").split(",")) {
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
-                                Integer count = typesInDeck.get(type);
-                                if (count == null) {
-                                    count = 0;
-                                }
+                                Integer count = typesInDeck.getOrDefault(type, 0);
                                 typesInDeck.put(type, count + 1);
                             }
                         }
@@ -1377,10 +1367,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             // special rule for Fabricate and Servo
             if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
-                Integer count = typesInDeck.get("Servo");
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault("Servo", 0);
                 typesInDeck.put("Servo", count + 1);
             }
         }
