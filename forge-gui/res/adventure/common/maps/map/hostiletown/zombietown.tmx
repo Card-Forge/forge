@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="60" height="34">
   <data encoding="base64" compression="zlib">
    eJzt1tsJgDAMBdD8SusEres4hO6iewndTYMUfFTUVsHYeyAfgkIuiaVEAAAAAADf05ZEg56rKdfPZ8XvS+OmvjtF1Kv73xr9fD9vsHpfVUTvUvLGZAvJIW9dzMWk5HWZzbdNPFf5fOOSktfvs43s1++03+uv47xmcTbHkjbfVH/PawJ3LAlS8kp0dB/e/stW6DyvCuX9sxzzbgsAACBnI8jCIVI=
@@ -34,41 +34,41 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="416" y="406" width="48" height="16"/>
-  <object id="48" template="../obj/treasure.tx" x="362.5" y="205.25"/>
-  <object id="49" template="../obj/gold.tx" x="581.5" y="281"/>
-  <object id="50" template="../obj/gold.tx" x="314" y="315"/>
-  <object id="51" template="../obj/enemy.tx" x="317" y="331">
+  <object id="38" template="../../obj/entry_up.tx" x="416" y="406" width="48" height="16"/>
+  <object id="48" template="../../obj/treasure.tx" x="362.5" y="205.25"/>
+  <object id="49" template="../../obj/gold.tx" x="581.5" y="281"/>
+  <object id="50" template="../../obj/gold.tx" x="314" y="315"/>
+  <object id="51" template="../../obj/enemy.tx" x="317" y="331">
    <properties>
     <property name="enemy" value="Ghoul"/>
    </properties>
   </object>
-  <object id="52" template="../obj/enemy.tx" x="319.667" y="300.667">
+  <object id="52" template="../../obj/enemy.tx" x="319.667" y="300.667">
    <properties>
     <property name="enemy" value="Zombie"/>
    </properties>
   </object>
-  <object id="53" template="../obj/enemy.tx" x="382.917" y="201.833">
+  <object id="53" template="../../obj/enemy.tx" x="382.917" y="201.833">
    <properties>
     <property name="enemy" value="Ghoul"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="548.333" y="276.667">
+  <object id="54" template="../../obj/enemy.tx" x="548.333" y="276.667">
    <properties>
     <property name="enemy" value="Ghoul"/>
    </properties>
   </object>
-  <object id="55" template="../obj/enemy.tx" x="579.333" y="238.333">
+  <object id="55" template="../../obj/enemy.tx" x="579.333" y="238.333">
    <properties>
     <property name="enemy" value="Big Zombie"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="432.333" y="352.333">
+  <object id="56" template="../../obj/enemy.tx" x="432.333" y="352.333">
    <properties>
     <property name="enemy" value="Ghoul"/>
    </properties>
   </object>
-  <object id="57" template="../obj/enemy.tx" x="464.5" y="293">
+  <object id="57" template="../../obj/enemy.tx" x="464.5" y="293">
    <properties>
     <property name="enemy" value="Ghoul"/>
    </properties>

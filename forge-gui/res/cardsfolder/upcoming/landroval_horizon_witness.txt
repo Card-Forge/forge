@@ -1,0 +1,9 @@
+Name:Landroval, Horizon Witness
+ManaCost:4 W
+Types:Legendary Creature Bird Noble
+PT:3/4
+K:Flying
+T:Mode$ AttackersDeclaredOneTarget | Execute$ TrigPump | AttackedTarget$ Player | ValidAttackers$ Creature.YouCtrl | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever two or more creatures you control attack a player, target attacking creature without flying gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | KW$ Flying
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhenever two or more creatures you control attack a player, target attacking creature without flying gains flying until end of turn.
