@@ -563,7 +563,11 @@ public class TriggerHandler {
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
         if (regtrig.isStatic()) {
-            wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
+            if (wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory)) {
+                final Map<AbilityKey, Object> staticParams = AbilityKey.mapFromCard(host);
+                staticParams.put(AbilityKey.CastSA, sa);
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, staticParams, false);
+            }
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);

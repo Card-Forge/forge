@@ -36,7 +36,7 @@ public class TriggerAbilityResolves extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CastSA);
         if (spellAbility == null) {
-            System.out.println("TriggerAbilityResolves performTest encountered spellAbility == null. runParams2 = " + runParams);
+            System.out.println("TriggerAbilityResolves performTest found null spellAbility. runParams2 = " + runParams);
             return false;
         }
         final Card source = spellAbility.getHostCard();
@@ -55,9 +55,8 @@ public class TriggerAbilityResolves extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final SpellAbility triggeredSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
-        sa.setTriggeringObject(AbilityKey.Source, triggeredSA.getHostCard());
-        sa.setTriggeringObject(AbilityKey.SpellAbility, triggeredSA);
+        sa.setTriggeringObject(AbilityKey.SpellAbility, runParams.get(AbilityKey.CastSA));
+        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.Card));
         sa.setTriggeringObjectsFrom(
                 runParams,
                 AbilityKey.CastSA,
