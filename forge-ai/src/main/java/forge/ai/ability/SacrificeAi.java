@@ -36,14 +36,6 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.hasParam("AILogic")) {
-            if ("OpponentOnly".equals(sa.getParam("AILogic"))) {
-                if (sa.getActivatingPlayer() == ai) {
-                	return false;
-                }
-            }
-        }
-
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something to sacrifice
 
