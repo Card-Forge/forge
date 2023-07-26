@@ -11,7 +11,6 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
-import forge.adventure.world.WorldSave;
 
 /**
  * Scene for the Inn in towns
@@ -23,14 +22,14 @@ public class InnScene extends UIScene {
     private static AdventureEventData localEvent;
     Scene lastGameScene;
     public static InnScene instance() {
-        return instance(null, "",-1);
+        return instance(null, "", null, -1);
     }
 
-    public static InnScene instance(Scene lastGameScene, String pointOfInterestId, int objectId){
+    public static InnScene instance(Scene lastGameScene, String pointOfInterestId, PointOfInterestChanges localChanges, int objectId){
         if(object==null)
             object=new InnScene();
 
-        changes = WorldSave.getCurrentSave().getPointOfInterestChanges(pointOfInterestId);
+        changes = localChanges;
         localPointOfInterestId = pointOfInterestId;
         localObjectId = objectId;
         if (lastGameScene != null)
@@ -103,7 +102,7 @@ public class InnScene extends UIScene {
 
     private void refreshStatus(){
 
-        tempHealthCost = Current.player().falseLifeCost();
+        tempHealthCost = Math.round(Current.player().falseLifeCost() * changes.getTownPriceModifier());
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
 
@@ -145,6 +144,7 @@ public class InnScene extends UIScene {
     }
 
     private void sell() {
+        ShopScene.instance().loadChanges(changes);
         Forge.switchScene(ShopScene.instance());
     }
 
@@ -158,12 +158,12 @@ public class InnScene extends UIScene {
                 return;
             }
         }
-        localEvent = AdventureEventController.instance().createEvent(AdventureEventController.EventFormat.Draft, AdventureEventController.EventStyle.Bracket, localPointOfInterestId, localObjectId, changes);
+        localEvent = AdventureEventController.instance().createEvent(AdventureEventController.EventStyle.Bracket, localPointOfInterestId, localObjectId, changes);
     }
 
     private void startEvent(){
 
-        Forge.switchScene(EventScene.instance(this, localEvent), true);
+        Forge.switchScene(EventScene.instance(this, localEvent, changes), true);
 
     }
 

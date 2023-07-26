@@ -273,6 +273,7 @@
 		"decks/standard/whitewizard_medium_control.dck",
 		"decks/standard/whitewizard_medium_knight.dck"
 	],
+	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.75,
 	"difficulty": 0.1,
@@ -857,10 +858,7 @@
 		"Humanoid",
 		"IdentityWhite",
 		"Mythical",
-		"Warrior",
-		null,
-		null,
-		null
+		"Warrior"
 	]
 },
 {
@@ -1482,12 +1480,7 @@
 		"Human",
 		"Archer",
 		"Soldier",
-		"IdentitySelesnya",
-		null,
-		null,
-		null,
-		null,
-		null
+		"IdentitySelesnya"
 	]
 },
 {
@@ -1540,8 +1533,7 @@
 		"IdentityAzorius",
 		"Archaeologist",
 		"Scientist",
-		"Artificer",
-		null
+		"Artificer"
 	]
 },
 {
@@ -1736,11 +1728,7 @@
 		"Furnace",
 		"IdentityColorless",
 		"Construct",
-		"Robot",
-		null,
-		null,
-		null,
-		null
+		"Robot"
 	]
 },
 {
@@ -1914,8 +1902,7 @@
 		"IdentityAzorius",
 		"Archaeologist",
 		"Scientist",
-		"Artificer",
-		null
+		"Artificer"
 	]
 },
 {
@@ -3518,11 +3505,7 @@
 		"Domesticated",
 		"Beast",
 		"IdentityWhite",
-		"BiomeWhite",
-		null,
-		null,
-		null,
-		null
+		"BiomeWhite"
 	]
 },
 {
@@ -3839,10 +3822,7 @@
 		"Mystic",
 		"Octopus",
 		"Sneaky",
-		"Wandering",
-		null,
-		null,
-		null
+		"Wandering"
 	]
 },
 {
@@ -5253,8 +5233,7 @@
 		"Boss",
 		"Evil",
 		"Warlock",
-		"Intelligent",
-		null
+		"Intelligent"
 	]
 },
 {
@@ -5729,9 +5708,7 @@
 		"IdentityGolgari",
 		"Large",
 		"Sneaky",
-		"Crocodile",
-		null,
-		null
+		"Crocodile"
 	]
 },
 {
@@ -7449,9 +7426,7 @@
 		"IdentityRed",
 		"BiomeRed",
 		"Bandit",
-		"Subterranean",
-		null,
-		null
+		"Subterranean"
 	]
 },
 {
@@ -7534,10 +7509,7 @@
 		"Mercenary",
 		"IdentityGruul",
 		"IdentityRed",
-		"Dwarf",
-		null,
-		null,
-		null
+		"Dwarf"
 	]
 },
 {
@@ -7664,8 +7636,7 @@
 		"Humanoid",
 		"Warlord",
 		"Leader",
-		"Artificer",
-		null
+		"Artificer"
 	]
 },
 {
@@ -8997,11 +8968,7 @@
 		"Dragon",
 		"Flyer",
 		"Fire",
-		"Monster",
-		null,
-		null,
-		null,
-		null
+		"Monster"
 	]
 },
 {
@@ -10562,9 +10529,7 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityAbzan",
-		"BiomeBlack",
-		null,
-		null
+		"BiomeBlack"
 	]
 },
 {
@@ -11272,10 +11237,7 @@
 		"Nature",
 		"Wizard",
 		"Mystic",
-		"IdentityGreen",
-		null,
-		null,
-		null
+		"IdentityGreen"
 	]
 },
 {
@@ -11330,8 +11292,7 @@
 		"IdentityRed",
 		"IdentityBoros",
 		"IdentityWhite",
-		"Gladiator",
-		null
+		"Gladiator"
 	]
 },
 {
@@ -12679,9 +12640,7 @@
 		"IdentityGreen",
 		"Hidden",
 		"Sneaky",
-		"Plant",
-		null,
-		null
+		"Plant"
 	]
 },
 {
@@ -12731,10 +12690,7 @@
 		"Hidden",
 		"Sneaky",
 		"Ambush",
-		"IdentityGreen",
-		null,
-		null,
-		null
+		"IdentityGreen"
 	]
 },
 {
@@ -13444,8 +13400,7 @@
 		"IdentityAzorius",
 		"Archaeologist",
 		"Scientist",
-		"Artificer",
-		null
+		"Artificer"
 	]
 },
 {
@@ -13629,9 +13584,7 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"Mercenary",
-		null,
-		null
+		"Mercenary"
 	]
 },
 {
@@ -14562,9 +14515,7 @@
 		"IdentityWhite",
 		"Mercenary",
 		"IdentityBlue",
-		"IdentityAzorius",
-		null,
-		null
+		"IdentityAzorius"
 	]
 },
 {
@@ -15150,9 +15101,7 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityAbzan",
-		"BiomeGreen",
-		null,
-		null
+		"BiomeGreen"
 	]
 },
 {
@@ -18322,10 +18271,7 @@
 		"Cobra",
 		"Lizard",
 		"Sneaky",
-		"IdentityGreen",
-		null,
-		null,
-		null
+		"IdentityGreen"
 	]
 },
 {
@@ -18986,11 +18932,7 @@
 		"BiomeRed",
 		"Lizard",
 		"Dinosaur",
-		"Beast",
-		null,
-		null,
-		null,
-		null
+		"Beast"
 	]
 },
 {
@@ -19682,12 +19624,7 @@
 		"Beast",
 		"Nature",
 		"IdentityBlack",
-		"Scarab",
-		null,
-		null,
-		null,
-		null,
-		null
+		"Scarab"
 	]
 },
 {
@@ -21314,12 +21251,7 @@
 		"Wild",
 		"Beast",
 		"BiomeGreen",
-		"IdentityGruul",
-		null,
-		null,
-		null,
-		null,
-		null
+		"IdentityGruul"
 	]
 },
 {
@@ -21995,8 +21927,7 @@
 		"IdentityGolgari",
 		"Cook",
 		"Human",
-		"Boss",
-		null
+		"Boss"
 	]
 },
 {
@@ -22501,11 +22432,7 @@
 		"Dinosaur",
 		"Wild",
 		"Aggressive",
-		"IdentitySelesnya",
-		null,
-		null,
-		null,
-		null
+		"IdentitySelesnya"
 	]
 },
 {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzt10EKgCAQRuHZBnaC6Dpdwpt2ura1MXB+c9L3wG3zUZJoRkQztSWzU7j2pPcpw+cLn68RfXkt/xN6+9TvXD0Ln28WPt+sv/iO5blahM/XyL4v6u17O8trznOlr8W3wBfnmTP6au7XpXt7z+6+iOHzFWWfEam7ADCZOGc=
@@ -25,22 +25,22 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="5" name="Roofs" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1j0KgDAMhuHvBs0VrULrz731GM1Q6NRNtOL7TAkEEkKGSACAPzmDdIW3pwCk1aTNWj55HK1ff7fkvfKD/b5s9j0t7ArV7rdwcA/AMPjtAAAA+gorPwh+
+   eJzt1j0KgDAMhuHvOs1drELrz731QM1Q6NRNtOL7TAkEEkKGSACAPzmDdIW3pwCk1aTNWj55HK1ff7fkvfKD/b5s9j0t7ArV7rdwcA/AMPjtAAAA+goRVgjS
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="288" y="527"/>
-  <object id="41" template="../obj/shop.tx" x="192" y="287.5"/>
-  <object id="42" template="../obj/shop.tx" x="385" y="335"/>
-  <object id="43" template="../obj/shop.tx" x="401" y="239.5"/>
-  <object id="44" template="../obj/shop.tx" x="209.5" y="432.5"/>
-  <object id="45" template="../obj/shop.tx" x="272.5" y="256.5"/>
-  <object id="46" template="../obj/shop.tx" x="479" y="241.5"/>
-  <object id="47" template="../obj/inn.tx" x="352.5" y="176"/>
+  <object id="41" template="../obj/shop.tx" x="191" y="289.5" width="34" height="16"/>
+  <object id="42" template="../obj/shop.tx" x="383" y="338" width="34" height="16"/>
+  <object id="43" template="../obj/shop.tx" x="399" y="241" width="34" height="17.5"/>
+  <object id="44" template="../obj/shop.tx" x="207.5" y="433.5" width="33.5" height="16"/>
+  <object id="45" template="../obj/shop.tx" x="271.5" y="257.5" width="33.5" height="16"/>
+  <object id="46" template="../obj/shop.tx" x="463" y="241.5" width="35" height="16"/>
+  <object id="47" template="../obj/inn.tx" x="351" y="177" width="34" height="16"/>
  </objectgroup>
 </map>

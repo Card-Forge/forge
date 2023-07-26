@@ -420,6 +420,12 @@ ChickenEgg
 ChallengeCoin
   xy: 32,512
   size: 16, 16
+SilverChallengeCoin
+  xy: 400,80
+  size: 16, 16
+BronzeChallengeCoin
+  xy: 400,96
+  size: 16, 16
 MetallicBoots
   xy: 80,144
   size: 16, 16

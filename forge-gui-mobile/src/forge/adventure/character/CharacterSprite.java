@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.data.DialogData;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class CharacterSprite extends MapActor {
     public boolean inactive = false;
     private String atlasPath;
     private float wakeTimer = 0.0f;
+    public DialogData.ConditionData[] spawnConditions = new DialogData.ConditionData[0]; //List of conditions for the sprite to spawn.
 
     public CharacterSprite(int id,String path) {
         super(id);

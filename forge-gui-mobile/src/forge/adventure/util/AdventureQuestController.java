@@ -69,6 +69,7 @@ public class AdventureQuestController implements Serializable {
         Find,
         Gather,
         Give,
+        HaveReputation,
         Hunt,
         MapFlag,
         Leave,
@@ -268,6 +269,20 @@ public class AdventureQuestController implements Serializable {
     {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateMapFlag(updatedMapFlag, updatedFlagValue);
+        }
+    }
+
+    public void updateQuestsCharacterFlag(String updatedCharacterFlag, int updatedCharacterFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateCharacterFlag(updatedCharacterFlag, updatedCharacterFlagValue);
+        }
+    }
+
+    public void updateQuestsQuestFlag(String updatedQuestFlag, int updatedQuestFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateQuestFlag(updatedQuestFlag, updatedQuestFlagValue);
         }
     }
 

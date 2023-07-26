@@ -11,11 +11,14 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
+import forge.card.CardZoom;
 import forge.deck.*;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -32,6 +35,7 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,221 +46,383 @@ import java.util.Set;
 
 public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
-        private static class DraftPackPage extends CatalogPage {
-            protected DraftPackPage() {
-                super(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
-            }
+    private static class ContentPreviewPage extends CatalogPage {
 
-            @Override
-            public void refresh() {
-                BoosterDraft draft = parentScreen.getDraft();
-                if (draft == null || !draft.hasNextChoice()) { return; }
+        Deck contents = new Deck();
 
-                CardPool pool = draft.nextChoice();
-
-                if (pool == null || pool.isEmpty()) { return; }
-
-                int packNumber = draft.getCurrentBoosterIndex() + 1;
-                caption = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
-                cardManager.setPool(pool);
-                cardManager.setShowRanking(true);
-            }
-
-            @Override
-            protected void onCardActivated(PaperCard card) {
-                super.onCardActivated(card);
-                afterCardPicked(card);
-            }
-
-            private void afterCardPicked(PaperCard card) {
-                BoosterDraft draft = parentScreen.getDraft();
-                draft.setChoice(card);
-
-                if (draft.hasNextChoice()) {
-                    refresh();
-                }
-                else {
-                    hideTab(); //hide this tab page when finished drafting
-                    parentScreen.completeDraft();
-                }
-            }
-
-            @Override
-            protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblToMainDeck"), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) { //ignore quantity
-                        mainDeckPage.addCard(card);
-
-                        afterCardPicked(card);
-                    }
-                });
-                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) { //ignore quantity
-                        getSideboardPage().addCard(card);
-                        afterCardPicked(card);
-                    }
-                });
-            }
+        protected ContentPreviewPage(Deck cardsToShow) {
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+            contents = cardsToShow;
         }
 
-        public BoosterDraft getDraft(){
-            return currentEvent.getDraft();
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            //No menus to show here, this page is only to be used for previewing the known contents of a sealed pack
         }
 
-        public static AdventureEventData currentEvent;
+        @Override
+        public void refresh() {
+            if (contents != null)  cardManager.setPool(contents.getAllCardsInASinglePool());
+        }
+    }
 
-        public void setEvent(AdventureEventData event){
-            currentEvent = event;
+
+    private static class DraftPackPage extends CatalogPage {
+        protected DraftPackPage() {
+            super(ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
         }
 
-        public void completeDraft(){
-            currentEvent.isDraftComplete = true;
-            Deck[] opponentDecks = currentEvent.getDraft().getDecks();
-            for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
-                currentEvent.participants[i].setDeck(opponentDecks[i]);
+        @Override
+        public void refresh() {
+            BoosterDraft draft = getDraft();
+            if (draft == null || !draft.hasNextChoice()) {
+                return;
             }
-            currentEvent.draftedDeck =  (Deck)currentEvent.registeredDeck.copyTo("Draft Deck");
-            if (allowsAddBasic()){
-                launchBasicLandDialog();
-                //Might be annoying if you haven't pruned your deck yet, but best to remind player that
-                //this probably needs to be done since it's there since it's not normally part of Adventure
+
+            CardPool pool = draft.nextChoice();
+
+            if (pool == null || pool.isEmpty()) {
+                return;
             }
-            if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-            }
+
+            int packNumber = draft.getCurrentBoosterIndex() + 1;
+            caption = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
+            cardManager.setPool(pool);
+            cardManager.setShowRanking(true);
         }
 
-        private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
-        private static FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
-            @Override
-            public float getWidth() {
-                return 100f;
-            }
-            @Override
-            public float getHeight() {
-                return 100f;
-            }
-            @Override
-            public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getTexture(deckIcon), x, y, w, h);
-            }
-        } : Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
-        private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
-        private static FImage SIDEBOARD_ICON = sideIcon.exists() ? new FImage() {
-            @Override
-            public float getWidth() {
-                return 100f;
-            }
-            @Override
-            public float getHeight() {
-                return 100f;
-            }
-            @Override
-            public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getTexture(sideIcon), x, y, w, h);
-            }
-        } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
-        private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-        private static final FileHandle binderIcon = Config.instance().getFile("ui/binder.png");
-        private static FImage CATALOG_ICON = binderIcon.exists() ? new FImage() {
-            @Override
-            public float getWidth() {
-                return 100f;
-            }
-            @Override
-            public float getHeight() {
-                return 100f;
-            }
-            @Override
-            public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getTexture(binderIcon), x, y, w, h);
-            }
-        } : FSkinImage.QUEST_BOX;
-        private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
-        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
-                new FImage() {
-                    @Override
-                    public float getWidth() {
-                        return 100f;
-                    }
-                    @Override
-                    public float getHeight() {
-                        return 100f;
-                    }
-                    @Override
-                    public void draw(Graphics g, float x, float y, float w, float h) {
-                        g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
-                    }
-                }
-        ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            super.onCardActivated(card);
+            afterCardPicked(card);
+        }
 
-        private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
-        private int selected = 0;
-        public static void leave() {
-            if(currentEvent != null && currentEvent.getDraft() != null && !currentEvent.isDraftComplete){
-                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                            AdventurePlayer.current().getNewCards().clear();
-                            Forge.clearCurrentScreen();
-                            Forge.switchToLast();
-                        }
-                    }
-                });
-            }
-            else{
-                AdventurePlayer.current().getNewCards().clear();
-                Forge.clearCurrentScreen();
-                Forge.switchToLast();
+        private void afterCardPicked(PaperCard card) {
+            BoosterDraft draft = getDraft();
+            draft.setChoice(card);
+
+            if (draft.hasNextChoice()) {
+                refresh();
+            } else {
+                hideTab(); //hide this tab page when finished drafting
+                parentScreen.completeDraft();
             }
         }
 
         @Override
-        public void onActivate() {
-            decksUsingMyCards = new ItemPool<>(InventoryItem.class);
-            for (int i=0;i<AdventurePlayer.NUMBER_OF_DECKS;i++)
-            {
-                final Deck deck = AdventurePlayer.current().getDeck(i);
-                CardPool main = deck.getMain();
-                for (final Map.Entry<PaperCard, Integer> e : main) {
-                    decksUsingMyCards.add(e.getKey());
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblToMainDeck"), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) { //ignore quantity
+                    mainDeckPage.addCard(card);
+
+                    afterCardPicked(card);
                 }
-                if (deck.has(DeckSection.Sideboard)) {
-                    for (final Map.Entry<PaperCard, Integer> e : deck.get(DeckSection.Sideboard)) {
-                        // only add card if we haven't already encountered it in main
-                        if (!main.contains(e.getKey())) {
-                            decksUsingMyCards.add(e.getKey());
+            });
+            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) { //ignore quantity
+                    getSideboardPage().addCard(card);
+                    afterCardPicked(card);
+                }
+            });
+        }
+    }
+
+    private static class StoreCatalogPage extends CatalogPage {
+        protected StoreCatalogPage() {
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+            Current.player().onGoldChange(() -> lblGold.setText(String.valueOf(AdventurePlayer.current().getGold())));
+        }
+
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            addItem(menu, "Sell for ", String.valueOf(AdventurePlayer.current().cardSellPrice(card)), SIDEBOARD_ICON, false, true, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    if (result == null || result <= 0) {
+                        return;
+                    }
+
+                    if (!cardManager.isInfinite()) {
+                        removeCard(card, result);
+                    }
+                    AdventurePlayer.current().sellCard(card, result);
+                    lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
+                }
+            });
+        }
+
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            CardZoom.show(card); //This should probably be replaced with call to longPress, where to get x,y params?
+        }
+
+        @Override
+        public void refresh() {
+            cardManager.setPool(AdventurePlayer.current().getSellableCards());
+        }
+    }
+
+    private static class CollectionCatalogPage extends CatalogPage {
+        protected CollectionCatalogPage() {
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+        }
+
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + getMainDeckPage().cardManager.getCaption(), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    if (result == null || result <= 0) {
+                        return;
+                    }
+
+                    if (!cardManager.isInfinite()) {
+                        removeCard(card, result);
+                    }
+                    getMainDeckPage().addCard(card, result);
+                }
+            });
+            if (getSideboardPage() != null) {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                        if (result == null || result <= 0) {
+                            return;
                         }
+
+                        if (!cardManager.isInfinite()) {
+                            removeCard(card, result);
+                        }
+                        getSideboardPage().addCard(card, result);
+                    }
+                });
+            }
+
+            int noSellCount = Current.player().noSellCards.count(card);
+            int autoSellCount = Current.player().autoSellCards.count(card);
+            int sellableCount = Current.player().getSellableCards().count(card);
+
+            if (noSellCount > 0) {
+                FMenuItem unsellableCount = new FMenuItem("Unsellable (" + noSellCount + ")", null, null);
+                unsellableCount.setEnabled(false);
+                menu.addItem(unsellableCount);
+            }
+
+            if (sellableCount > 0) {
+                FMenuItem moveToAutosell = new FMenuItem("Move to Autosell (" + autoSellCount + " / " + sellableCount + ")", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> Current.player().autoSellCards.add(card));
+                moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
+                menu.addItem(moveToAutosell);
+
+                FMenuItem moveToCatalog = new FMenuItem("Move back to Catalog (" + autoSellCount + " / " + sellableCount + ")", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> Current.player().autoSellCards.remove(card));
+                moveToCatalog.setEnabled(autoSellCount > 0);
+                menu.addItem(moveToCatalog);
+            }
+        }
+
+        @Override
+        public void refresh() {
+            final ItemPool<PaperCard> collectionPool = new ItemPool<>(PaperCard.class);
+
+            final ItemPool<PaperCard> cardsInUse = new ItemPool<>(PaperCard.class);
+            cardsInUse.addAllFlat(AdventurePlayer.current().getSelectedDeck().getAllCardsInASinglePool().toFlatList());
+
+            if (showCollectionCards) {
+                collectionPool.addAllFlat(AdventurePlayer.current().getCollectionCards().toFlatList());
+            }
+            if (showNoSellCards) {
+                collectionPool.addAllFlat(AdventurePlayer.current().getNoSellCards().toFlatList());
+                collectionPool.removeAllFlat(cardsInUse.toFlatList());
+            }
+            else{
+                cardsInUse.removeAllFlat(AdventurePlayer.current().getNoSellCards().toFlatList());
+                collectionPool.removeAllFlat(cardsInUse.toFlatList());
+            }
+            if (showAutoSellCards) {
+                collectionPool.addAllFlat(AdventurePlayer.current().getAutoSellCards().toFlatList());
+            }
+            cardManager.setPool(collectionPool);
+        }
+    }
+
+    public static BoosterDraft getDraft() {
+        if (currentEvent == null)
+            return null;
+        return currentEvent.getDraft();
+    }
+
+    public static AdventureEventData currentEvent;
+
+    public void setEvent(AdventureEventData event) {
+        currentEvent = event;
+    }
+
+    public void completeDraft() {
+        currentEvent.isDraftComplete = true;
+        Deck[] opponentDecks = currentEvent.getDraft().getDecks();
+        for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
+            currentEvent.participants[i].setDeck(opponentDecks[i]);
+        }
+        currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
+        if (allowsAddBasic()) {
+            launchBasicLandDialog();
+            //Might be annoying if you haven't pruned your deck yet, but best to remind player that
+            //this probably needs to be done since it's there since it's not normally part of Adventure
+        }
+        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+        }
+    }
+
+    private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
+    private static final FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
+        @Override
+        public float getWidth() {
+            return 100f;
+        }
+
+        @Override
+        public float getHeight() {
+            return 100f;
+        }
+
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            g.drawImage(Forge.getAssets().getTexture(deckIcon), x, y, w, h);
+        }
+    } : Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST;
+    private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
+    private static final FImage SIDEBOARD_ICON = sideIcon.exists() ? new FImage() {
+        @Override
+        public float getWidth() {
+            return 100f;
+        }
+
+        @Override
+        public float getHeight() {
+            return 100f;
+        }
+
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            g.drawImage(Forge.getAssets().getTexture(sideIcon), x, y, w, h);
+        }
+    } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
+    private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    private static final FileHandle binderIcon = Config.instance().getFile("ui/binder.png");
+    private static final FImage CATALOG_ICON = binderIcon.exists() ? new FImage() {
+        @Override
+        public float getWidth() {
+            return 100f;
+        }
+
+        @Override
+        public float getHeight() {
+            return 100f;
+        }
+
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            g.drawImage(Forge.getAssets().getTexture(binderIcon), x, y, w, h);
+        }
+    } : FSkinImage.QUEST_BOX;
+    private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
+    private static final FLabel lblGold = new FLabel.Builder().text("0").icon(Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
+            new FImage() {
+                @Override
+                public float getWidth() {
+                    return 100f;
+                }
+
+                @Override
+                public float getHeight() {
+                    return 100f;
+                }
+
+                @Override
+                public void draw(Graphics g, float x, float y, float w, float h) {
+                    g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
+                }
+            }
+    ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
+
+    private static ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<>(InventoryItem.class);
+    private int selected = 0;
+
+    public static void leave() {
+        if (currentEvent != null && currentEvent.getDraft() != null && !currentEvent.isDraftComplete) {
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                @Override
+                public void run(Boolean result) {
+                    if (result) {
+                        currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
+                        AdventurePlayer.current().getNewCards().clear();
+                        Forge.clearCurrentScreen();
+                        Forge.switchToLast();
+                    }
+                }
+            });
+        } else {
+            AdventurePlayer.current().getNewCards().clear();
+            Forge.clearCurrentScreen();
+            Forge.switchToLast();
+        }
+    }
+
+    @Override
+    public void onActivate() {
+        decksUsingMyCards = new ItemPool<>(InventoryItem.class);
+        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
+            final Deck deck = AdventurePlayer.current().getDeck(i);
+            CardPool main = deck.getMain();
+            for (final Map.Entry<PaperCard, Integer> e : main) {
+                decksUsingMyCards.add(e.getKey());
+            }
+            if (deck.has(DeckSection.Sideboard)) {
+                for (final Map.Entry<PaperCard, Integer> e : deck.get(DeckSection.Sideboard)) {
+                    // only add card if we haven't already encountered it in main
+                    if (!main.contains(e.getKey())) {
+                        decksUsingMyCards.add(e.getKey());
                     }
                 }
             }
-            lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
+        }
+        lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
 
 //            if (currentEvent.registeredDeck!=null && !currentEvent.registeredDeck.isEmpty()){
 //                //Use this deck instead of selected deck
 //            }
+    }
+
+    public void refresh() {
+        for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
+            ((DeckEditorPage) tabPage).initialize();
         }
-        public void refresh() {
-            for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
-                ((DeckEditorPage)tabPage).initialize();
-            }
-            for(TabPage<AdventureDeckEditor> page:tabPages)
-            {
-                if(page instanceof CardManagerPage)
-                    ((CardManagerPage)page).refresh();
-            }
+        for (TabPage<AdventureDeckEditor> page : tabPages) {
+            if (page instanceof CardManagerPage)
+                ((CardManagerPage) page).refresh();
         }
-        private static DeckEditorPage[] getPages(AdventureEventData event) {
-            if (event == null){
-                return new DeckEditorPage[]{
-                        new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
-                        new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                        new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)};
-            }
+    }
+
+    private static DeckEditorPage[] getPages(boolean isShop) {
+        if (isShop) {
+            return new DeckEditorPage[]{
+                    new StoreCatalogPage()
+            };
+        } else {
+            return new DeckEditorPage[]{
+                    new CollectionCatalogPage(),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)};
+        }
+    }
+
+    private static DeckEditorPage[] getPages(AdventureEventData event) {
+        if (event == null) {
+            return getPages(false);
+        }
+        if (event.format == AdventureEventController.EventFormat.Draft) {
             switch (event.eventStatus) {
                 case Available:
                     return null;
@@ -281,69 +447,129 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
             }
         }
-        private CatalogPage catalogPage;
-        private static DeckSectionPage mainDeckPage;
-        private static DeckSectionPage sideboardPage;
-        private DeckSectionPage commanderPage;
+        else if (event.format == AdventureEventController.EventFormat.Jumpstart){
+            return new DeckEditorPage[]{
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
+        }
+        else return new DeckEditorPage[]{};
+    }
 
-        protected final DeckHeader deckHeader = add(new DeckHeader());
-        protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
-        private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
+    private static DeckEditorPage[] getPages(Deck deckToPreview) {
+        return new DeckEditorPage[]{
+                new ContentPreviewPage(deckToPreview)
+        };
+    }
+
+    private CatalogPage catalogPage;
+    private static DeckSectionPage mainDeckPage;
+    private static DeckSectionPage sideboardPage;
+    private DeckSectionPage commanderPage;
+
+    protected final DeckHeader deckHeader = add(new DeckHeader());
+    protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
+    private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
 
 
-        boolean isShop;
-        public AdventureDeckEditor(boolean createAsShop, AdventureEventData event) {
-            super(e -> leave(), getPages(event));
-            isShop=createAsShop;
-            currentEvent = event;
+    boolean isShop;
 
-            //cache specific pages
-            for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
-                if (tabPage instanceof CatalogPage) {
-                    catalogPage = (CatalogPage) tabPage;
-                }
-                else if (tabPage instanceof DeckSectionPage) {
-                    DeckSectionPage deckSectionPage = (DeckSectionPage) tabPage;
-                    switch (deckSectionPage.deckSection) {
-                        case Main:
-                        case Schemes:
-                        case Planes:
-                            mainDeckPage = deckSectionPage;
-                            break;
-                        case Sideboard:
-                            sideboardPage = deckSectionPage;
-                            break;
-                        case Commander:
-                            commanderPage = deckSectionPage;
-                            break;
-                        default:
-                            break;
-                    }
+    public AdventureDeckEditor(boolean createAsShop) {
+        super(e -> leave(), getPages(createAsShop));
+        isShop = createAsShop;
+        doSetup();
+    }
+
+    public AdventureDeckEditor(AdventureEventData event) {
+        super(e -> leave(), getPages(event));
+        currentEvent = event;
+        doSetup();
+    }
+
+    public AdventureDeckEditor(Deck deckToPreview) {
+        super(e -> leave(), getPages(deckToPreview));
+        doSetup();
+    }
+
+    public AdventureDeckEditor(boolean createAsShop, AdventureEventData event) {
+        super(e -> leave(), event == null ? getPages(createAsShop) : getPages(event));
+        doSetup();
+    }
+
+    private void doSetup() {
+        //cache specific pages
+        for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
+            if (tabPage instanceof CatalogPage) {
+                catalogPage = (CatalogPage) tabPage;
+            } else if (tabPage instanceof DeckSectionPage) {
+                DeckSectionPage deckSectionPage = (DeckSectionPage) tabPage;
+                switch (deckSectionPage.deckSection) {
+                    case Main:
+                    case Schemes:
+                    case Planes:
+                        mainDeckPage = deckSectionPage;
+                        break;
+                    case Sideboard:
+                        sideboardPage = deckSectionPage;
+                        break;
+                    case Commander:
+                        commanderPage = deckSectionPage;
+                        break;
+                    default:
+                        break;
                 }
             }
+        }
 
-            btnMoreOptions.setCommand(new FEvent.FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    FPopupMenu menu = new FPopupMenu() {
-                        @Override
-                        protected void buildMenu() {
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
-                            FMenuItem addBasic =  new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEvent.FEventHandler() {
+        btnMoreOptions.setCommand(new FEvent.FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
+                        if (allowsAddBasic()) {
+                            FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEvent.FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     launchBasicLandDialog();
                                 }
                             });
-                            addBasic.setEnabled(allowsAddBasic());
                             addItem(addBasic);
-                            ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
                         }
-                    };
-                    menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
-                }
-            });
-        }
+                        if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage) ) {
+                            if (catalogPage.showNoSellCards) {
+                                FMenuItem hideNoSell = new FMenuItem("Hide No-Sell cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleNoSellCards(false));
+                                addItem(hideNoSell);
+                                hideNoSell.setEnabled(catalogPage.showAutoSellCards || catalogPage.showCollectionCards);
+                            } else {
+                                addItem(new FMenuItem("Show No-Sell cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleNoSellCards(true)));
+                            }
+                            if (catalogPage.showAutoSellCards) {
+                                FMenuItem hideAutoSell = new FMenuItem("Hide Auto-Sell cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleAutoSellCards(false));
+                                addItem(hideAutoSell);
+                                hideAutoSell.setEnabled(catalogPage.showCollectionCards || catalogPage.showNoSellCards);
+                            } else {
+                                addItem(new FMenuItem("Show Auto-Sell cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleAutoSellCards(true)));
+                            }
+                            if (catalogPage.showCollectionCards) {
+                                FMenuItem hideCollection = new FMenuItem("Hide Collection cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleCollectionCards(false));
+                                addItem(hideCollection);
+                                hideCollection.setEnabled(catalogPage.showAutoSellCards || catalogPage.showNoSellCards);
+                            } else {
+                                addItem(new FMenuItem("Show Collection cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleCollectionCards(true)));
+                            }
+                            if (!catalogPage.showNoSellCards || !catalogPage.showAutoSellCards || !catalogPage.showCollectionCards) {
+                                addItem(new FMenuItem("Show All cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
+                            }
+                        }
+                        ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
+                    }
+                };
+                menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
+            }
+        });
+    }
+
 
         protected void launchBasicLandDialog(){
             CardEdition defaultLandSet;
@@ -353,6 +579,10 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
             }
             defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+
+            if (defaultLandSet == null) {
+                defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
+            }
 
             AddBasicLandsDialog dialog = new AddBasicLandsDialog(currentEvent.registeredDeck, defaultLandSet, new Callback<CardPool>() {
                 @Override
@@ -381,7 +611,10 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             super.doLayout(startY, width, height);
         }
         public Deck getDeck() {
-            return (currentEvent != null && currentEvent.registeredDeck != null)?currentEvent.registeredDeck:AdventurePlayer.current().getSelectedDeck();
+            if (currentEvent == null)
+                return AdventurePlayer.current().getSelectedDeck();
+            else
+                return currentEvent.registeredDeck;
         }
         protected CatalogPage getCatalogPage() {
             return catalogPage;
@@ -401,14 +634,16 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         @Override
         public void onClose(final Callback<Boolean> canCloseCallback) {
+            String errorMessage = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+            if(errorMessage != null) {
+                FOptionPane.showErrorDialog(errorMessage);
+            }
 
-            if (currentEvent.getDraft() != null && isShop) {
+            if (currentEvent.getDraft() != null && !isShop) {
                 if (currentEvent.isDraftComplete || canCloseCallback == null) {
                     super.onClose(canCloseCallback); //can skip prompt if draft saved
                     return;
                 }
-
-
                 FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
             }
         }
@@ -483,8 +718,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     }
                 });
             }
-            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
+            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
             public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
             public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
 
@@ -553,19 +788,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             max = cardCopies;
                         }
 
-                        max -= deck.getMain().count(card);
-                        if (deck.has(DeckSection.Sideboard)) {
-                            max -= deck.get(DeckSection.Sideboard).count(card);
-                        }
-                        if (deck.has(DeckSection.Commander)) {
-                            max -= deck.get(DeckSection.Commander).count(card);
-                        }
-                        if (deck.has(DeckSection.Planes)) {
-                            max -= deck.get(DeckSection.Planes).count(card);
-                        }
-                        if (deck.has(DeckSection.Schemes)) {
-                            max -= deck.get(DeckSection.Schemes).count(card);
-                        }
+                        max -= deck.getAllCardsInASinglePool().countAll(paperCard -> paperCard.getCardName().equals(card.getCardName()));
                     }
 
                     int qty;
@@ -735,8 +958,32 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         protected static class CatalogPage extends CardManagerPage {
             private boolean initialized, needRefreshWhenShown;
 
+            boolean showCollectionCards = true, showAutoSellCards = false, showNoSellCards = true;
+            public void showAllCards() {
+                showCollectionCards = true;
+                showAutoSellCards = true;
+                showNoSellCards = true;
+                refresh();
+            }
+
+            public void toggleCollectionCards(boolean show) {
+                showCollectionCards = show;
+                refresh();
+            }
+
+            public void toggleAutoSellCards(boolean show) {
+                showAutoSellCards = show;
+                refresh();
+            }
+
+            public void toggleNoSellCards(boolean show) {
+                showNoSellCards = show;
+                refresh();
+            }
+
             protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
                 super(config, caption0, icon0);
+                refresh();
             }
             private void setNextSelected() {
                 setNextSelected(1);
@@ -805,11 +1052,25 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             public void refresh() {
                 final ItemPool<PaperCard> adventurePool = new ItemPool<>(PaperCard.class);
 
-                adventurePool.addAll(AdventurePlayer.current().getCards());
-                // remove bottom cards that are in the deck from the card pool
-                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getMain());
-                // remove sideboard cards from the catalog
-                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
+                final ItemPool<PaperCard> cardsInUse = new ItemPool<>(PaperCard.class);
+                cardsInUse.addAll(AdventurePlayer.current().getSelectedDeck().getMain());
+                cardsInUse.addAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
+
+                if (showCollectionCards) {
+                    adventurePool.addAll(AdventurePlayer.current().getCollectionCards());
+                }
+                if (showNoSellCards) {
+                    adventurePool.addAll(AdventurePlayer.current().getNoSellCards());
+                    adventurePool.removeAll(cardsInUse);
+                }
+                else{
+                    cardsInUse.removeAll(AdventurePlayer.current().getNoSellCards());
+                    adventurePool.removeAll(cardsInUse);
+                }
+                if (showAutoSellCards) {
+                    adventurePool.addAll(AdventurePlayer.current().getAutoSellCards());
+                }
+
                 cardManager.setPool(adventurePool);
             }
 
@@ -828,7 +1089,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 if (!cardManager.isInfinite()) {
                     removeCard(card);
                 }
-                parentScreen.getMainDeckPage().addCard(card);
+                getMainDeckPage().addCard(card);
             }
 
             @Override
@@ -836,7 +1097,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
                     if(!parentScreen.isShop)
                     {
-                        addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+                        addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + getMainDeckPage().cardManager.getCaption(), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                             @Override
                             public void run(Integer result) {
                                 if (result == null || result <= 0) { return; }
@@ -844,11 +1105,11 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                 if (!cardManager.isInfinite()) {
                                     removeCard(card, result);
                                 }
-                                parentScreen.getMainDeckPage().addCard(card, result);
+                                getMainDeckPage().addCard(card, result);
                             }
                         });
-                        if (parentScreen.getSideboardPage() != null) {
-                            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                        if (getSideboardPage() != null) {
+                            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                                 @Override
                                 public void run(Integer result) {
                                     if (result == null || result <= 0) { return; }
@@ -856,25 +1117,10 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                     if (!cardManager.isInfinite()) {
                                         removeCard(card, result);
                                     }
-                                    parentScreen.getSideboardPage().addCard(card, result);
+                                    getSideboardPage().addCard(card, result);
                                 }
                             });
                         }
-                    }
-                    if(parentScreen.isShop)
-                    {
-                        addItem(menu, "Sell for ", String.valueOf(AdventurePlayer.current().cardSellPrice(card)), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
-                            @Override
-                            public void run(Integer result) {
-                                if (result == null || result <= 0) { return; }
-
-                                if (!cardManager.isInfinite()) {
-                                    removeCard(card, result);
-                                }
-                                AdventurePlayer.current().sellCard(card,result);
-                                lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
-                            }
-                        });
                     }
                 }
 
@@ -971,16 +1217,16 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     case Planes:
                     case Schemes:
                         removeCard(card);
-                        if (parentScreen.getCatalogPage() != null && parentScreen.currentEvent == null || parentScreen.currentEvent.getDraft() == null) {
+                        if (parentScreen.getCatalogPage() != null && currentEvent == null || currentEvent.getDraft() == null) {
                             parentScreen.getCatalogPage().addCard(card);
                         }
-                        else if (parentScreen.getSideboardPage() != null) {
-                            parentScreen.getSideboardPage().addCard(card);
+                        else if (getSideboardPage() != null) {
+                            getSideboardPage().addCard(card);
                         }
                         break;
                     case Sideboard:
                         removeCard(card);
-                        parentScreen.getMainDeckPage().addCard(card);
+                        getMainDeckPage().addCard(card);
                         break;
                     default:
                         break;
@@ -1001,7 +1247,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                 addCard(card, result);
                             }
                         });
-                        if (parentScreen.currentEvent == null || parentScreen.currentEvent.getDraft() == null) {
+                        if (currentEvent == null ) {
                             addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                                 @Override
                                 public void run(Integer result) {
@@ -1016,14 +1262,14 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                 }
                             });
                         }
-                        if (parentScreen.getSideboardPage() != null) {
-                            addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
+                        if (getSideboardPage() != null) {
+                            addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
                                 @Override
                                 public void run(Integer result) {
                                     if (result == null || result <= 0) { return; }
 
                                     removeCard(card, result);
-                                    parentScreen.getSideboardPage().addCard(card, result);
+                                    getSideboardPage().addCard(card, result);
                                 }
                             });
                         }
@@ -1039,7 +1285,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                 addCard(card, result);
                             }
                         });
-                        if (parentScreen.currentEvent == null || parentScreen.currentEvent.getDraft() == null) {
+                        if (currentEvent == null) {
                             addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                                 @Override
                                 public void run(Integer result) {
@@ -1054,13 +1300,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                 }
                             });
                         }
-                        addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
+                        addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
                             @Override
                             public void run(Integer result) {
                                 if (result == null || result <= 0) { return; }
 
                                 removeCard(card, result);
-                                parentScreen.getMainDeckPage().addCard(card, result);
+                                getMainDeckPage().addCard(card, result);
                             }
                         });
                         addCommanderItems(menu, card, false, false);
