@@ -1,0 +1,15 @@
+Name:Faramir, Prince of Ithilien
+ManaCost:2 W U
+Types:Legendary Creature Human Noble
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseOpp | TriggerDescription$ At the beginning of your end step, choose an opponent. At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.
+SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.IsTriggerRemembered | RememberObjects$ ChosenPlayer | SubAbility$ DBCleanup | Execute$ TrigBranch | TriggerDescription$ At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBToken | FalseSubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenAmount$ 3 
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+SVar:X:PlayerCountDefinedTriggeredPlayer$HasPropertyattackedYouTheirCurrentTurn
+AI:RemoveDeck:All
+DeckHas:Ability$Token & Type$Soldier
+Oracle:At the beginning of your end step, choose an opponent. At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.

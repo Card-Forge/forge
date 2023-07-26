@@ -66,9 +66,11 @@ public class DialogData implements Serializable {
         public int battleWithActorID = 0; //Start a battle with enemy ID. -1 for self if possible.
         public EffectData giveBlessing;   //Give a blessing to the player.
         public String setColorIdentity;   //Change player's color identity.
+        public String advanceCharacterFlag;   //Increase given quest flag by 1.
         public String advanceQuestFlag;   //Increase given quest flag by 1.
         public String advanceMapFlag;     //Increase given map flag by 1.
         public EffectData setEffect;      //Set or replace current effects on current actor.
+        public QuestFlag setCharacterFlag;    //Set quest flag.
         public QuestFlag setQuestFlag;    //Set quest flag.
         public QuestFlag setMapFlag;      //Set map flag.
 
@@ -112,7 +114,7 @@ public class DialogData implements Serializable {
     }
 
     static public class ConditionData implements Serializable {
-        private static final long SerialVersionUID = 1L; // TODO: set to current value?
+        private static final long SerialVersionUID = 1L;
         static public class QueryQuestFlag{
             public String key;
             public String op;
@@ -126,8 +128,10 @@ public class DialogData implements Serializable {
         public int hasMapReputation = Integer.MIN_VALUE; //Check for player reputation in this POI. True if reputation is equal or higher than X.
         public int hasLife = 0;                    //Check for player life. True if life is equal or higher than X.
         public String colorIdentity = null;        //Check for player's current color identity.
+        public String checkCharacterFlag = null;       //Check if a character flag is not 0. False if equals 0 (not started, not set).
         public String checkQuestFlag = null;       //Check if a quest flag is not 0. False if equals 0 (not started, not set).
         public String checkMapFlag = null;         //Check if a map flag is not 0. False if equals 0 (not started, not set).
+        public QueryQuestFlag getCharacterFlag = null; //Check for value of a flag { <flagID>, <comparison>, <value> }
         public QueryQuestFlag getQuestFlag = null; //Check for value of a flag { <flagID>, <comparison>, <value> }
         public QueryQuestFlag getMapFlag = null;   //Check for a local dungeon flag ("map flag").
         public boolean not = false;                //Reverse the result of a condition ("actorID":"XX" + "not":true => true if XX is not in the map.)

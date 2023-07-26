@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFlV0OgjAMx/tihHgEHz0Ciia+E8KdPI/x4wBew0C8gHFyDLe4htJ0g00Sm/wfgNJfvwZFClAM6JwAXLSuybCvS9zGMF/2vSqSGcMttdbab6v1TONrDuUqrbfVKfmyY3oucXF+Q/GUZUNE7dzo/MbEK61vEzhvbqVwzxWP5+jj8jPg4u7sdeaIx5m+3hjfwwbglnexJG5Gro/6nVbImzKpP2djfsu8/5wb7qvZF2lm0hyo1dDtuJHJG+M9rE/lOUcm/mrRzx9zr4l/4+HTXtHd93Fp3Zg/9paeX2p36OozalmvFLnv4krfCR4La8D+8V2Y8nvlOr8hzKm4ewj/R0zBrf/Enc1/534Avz2uCA==
+   eJzFlV0OgjAMgPtihHgEH33xHRUT3wnhTp7HKB7AaxiIFzAix3CLayhNN9gksUlDYF2/rj8jiwGyAb1EAKXSazRsa1MuY5gvs68IZIZwc6UbZZcqfcbhZ/blNkrfRs/Rlx2Sc4mL9Rvy1xg2BJydC63fGH+5sa09680lF77Z/PEYXVw+Azbu3rwnFn+c6cqNtj1uAW67zpfETcj7Se1phbgpk9pzNsa33PXXuWC/6n6RaibVgUoFXY+XzP/DPAvHHGn/q0U/foy9Iva1g69ztU47xd53cem5MX7MLZ1fKnfDwvWW5aoh321c6Z7gvnB+MX+8F6a8r2zz68OcinsA/3/EFNzqT9zZ/HfuB6s/qqY=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -38,7 +38,7 @@
    </properties>
   </object>
   <object id="51" template="../../obj/treasure.tx" x="390.492" y="184.777"/>
-  <object id="53" template="../../obj/enemy.tx" x="333.998" y="154.668">
+  <object id="53" template="../../obj/enemy.tx" x="316.265" y="171.872">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
     <property name="threatRange" type="int" value="30"/>

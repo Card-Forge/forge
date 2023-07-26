@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -17,6 +18,7 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.WorldStage;
@@ -24,6 +26,7 @@ import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.util.Callback;
@@ -32,69 +35,94 @@ import forge.util.MyRandom;
 import java.util.Arrays;
 import java.util.List;
 
-import static forge.adventure.util.AdventureEventController.EventStatus.Awarded;
-import static forge.adventure.util.AdventureEventController.EventStatus.Ready;
+import static forge.adventure.util.AdventureEventController.EventStatus.*;
 
 public class EventScene extends MenuScene implements IAfterMatch {
     TextraLabel money, shards;
     TextraButton advance, back, editDeck, nextPage, previousPage;
     private Table scrollContainer;
     ScrollPane scroller;
-    Table root, headerTable;
+    Table root, headerTable, metaDraftTable;
     int pageIndex = 0;
     Scene lastGameScene;
 
     Table[] eventPages;
 
     static AdventureEventData currentEvent;
+    static PointOfInterestChanges changes;
 
     private Array<DialogData> entryDialog;
 
+    private int packsSelected = 0; //Used for meta drafts, booster drafts will use existing logic.
 
     private EventScene() {
         super(Forge.isLandscapeMode() ? "ui/event.json" : "ui/event_portrait.json");
-
+        //todo: add translation
         DialogData introDialog = new DialogData();
         introDialog.text = "Enter this event?";
         DialogData enterWithCoin = new DialogData();
-        enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
+
         DialogData enterWithShards = new DialogData();
-        enterWithShards.name = String.format("Spend %d [+shards]", currentEvent.eventRules.shardsToEnter);
+        enterWithShards.name = String.format("Spend %d [+shards]", Math.round(currentEvent.eventRules.shardsToEnter* changes.getTownPriceModifier()));
         DialogData enterWithGold = new DialogData();
-        enterWithGold.name = String.format("Spend %d [+gold]", currentEvent.eventRules.goldToEnter);
+        enterWithGold.name = String.format("Spend %d [+gold]", Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier()));
 
         DialogData.ConditionData hasGold = new DialogData.ConditionData();
-        hasGold.hasGold = currentEvent.eventRules.goldToEnter;
+        hasGold.hasGold = Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier());
         enterWithGold.condition = new DialogData.ConditionData[]{hasGold};
 
         DialogData.ConditionData hasShards = new DialogData.ConditionData();
-        hasShards.hasShards = currentEvent.eventRules.shardsToEnter;
+        hasShards.hasShards = Math.round(currentEvent.eventRules.shardsToEnter * changes.getTownPriceModifier());
         enterWithShards.condition = new DialogData.ConditionData[]{hasShards};
 
-        if (currentEvent.eventRules.acceptsChallengeCoin){
+        if (currentEvent.eventRules.acceptsChallengeCoin) {
+            enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
+
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item="Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
+
+            DialogData.ActionData giveCoin = new DialogData.ActionData();
+            giveCoin.removeItem = hasCoin.item;
+            enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
+        } else if (currentEvent.eventRules.acceptsSilverChallengeCoin) {
+            enterWithCoin.name = "Redeem a Challenge Coin [+SilverChallengeCoin]";
+            DialogData.ConditionData hasCoin = new DialogData.ConditionData();
+            hasCoin.item="Silver Challenge Coin";
+            enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
+
+            DialogData.ActionData giveCoin = new DialogData.ActionData();
+            giveCoin.removeItem = hasCoin.item;
+            enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
+        } else if (currentEvent.eventRules.acceptsBronzeChallengeCoin) {
+            enterWithCoin.name = "Redeem a Challenge Coin [+BronzeChallengeCoin]";
+            DialogData.ConditionData hasCoin = new DialogData.ConditionData();
+            hasCoin.item="Bronze Challenge Coin";
+            enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
+
+            DialogData.ActionData giveCoin = new DialogData.ActionData();
+            giveCoin.removeItem = hasCoin.item;
+            enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
+
         }
-        else{
+        else {
             DialogData.ConditionData alwaysFalse = new DialogData.ConditionData();
-            alwaysFalse.not = true;
+            alwaysFalse.item = "NonexistentItem";
             enterWithCoin.condition = new DialogData.ConditionData[]{alwaysFalse};
         }
 
         DialogData.ActionData spendGold = new DialogData.ActionData();
-        spendGold.addGold=-currentEvent.eventRules.goldToEnter;
+        spendGold.addGold=-Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier());
         enterWithGold.action = new DialogData.ActionData[]{spendGold};
 
         DialogData.ActionData spendShards = new DialogData.ActionData();
-        spendShards.addShards =-currentEvent.eventRules.shardsToEnter;
+        spendShards.addShards =-Math.round(currentEvent.eventRules.shardsToEnter * changes.getTownPriceModifier());
         enterWithShards.action = new DialogData.ActionData[]{spendShards};
 
-        DialogData.ActionData giveCoin = new DialogData.ActionData();
-        giveCoin.removeItem = "Challenge Coin";
-        enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
+
 
         DialogData decline = new DialogData();
+        //todo: add translation
         decline.name = "Do not enter event";
 
         enterWithCoin.callback = new Callback<Boolean>() {
@@ -128,7 +156,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         entryDialog = new Array<>();
         entryDialog.add(introDialog);
 
-        TypingLabel blessingScroll = Controls.newTypingLabel("[BLACK]" + currentEvent.getDescription());
+        TypingLabel blessingScroll = Controls.newTypingLabel("[BLACK]" + currentEvent.getDescription(changes));
         blessingScroll.skipToTheEnd();
         blessingScroll.setAlignment(Align.topLeft);
         blessingScroll.setWrap(true);
@@ -163,9 +191,13 @@ public class EventScene extends MenuScene implements IAfterMatch {
         editDeck.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.getDraft() != null && currentEvent.eventStatus == Ready) {
+                if (currentEvent.format == AdventureEventController.EventFormat.Draft && currentEvent.eventStatus == Ready) {
                     DraftScene.instance().loadEvent(currentEvent);
                     Forge.switchScene(DraftScene.instance());
+                }
+                else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
+                    DeckEditScene.getInstance().loadEvent(currentEvent);
+                    Forge.switchScene(DeckEditScene.getInstance());
                 }
             }
         });
@@ -186,98 +218,112 @@ public class EventScene extends MenuScene implements IAfterMatch {
         blessing.layout();
         window.add(root);
 
+        metaDraftTable = ui.findActor("metaDraftTable");
+        root.add(metaDraftTable);
+        metaDraftTable.setVisible(false);
+
         refresh();
     }
 
     private void refresh(){
-        scrollContainer = new Table(Controls.getSkin());
-        scrollContainer.row();
+        if (metaDraftTable.isVisible()){
+            scrollContainer = metaDraftTable;
+            headerTable.clear();
+            //todo: add translation
+            headerTable.add("Pack Selection");
 
-        Arrays.sort(currentEvent.participants);
+            if (currentEvent.eventStatus == Entered){
+                loadMetaDraft();
+            }
 
-        for (AdventureEventData.AdventureEventParticipant participant: currentEvent.participants){
-            Image avatar = participant.getAvatar();
-            avatar.setScaling(Scaling.stretch);
-            scrollContainer.add(avatar).pad(5).size(16).fillY();
-            scrollContainer.add().width(16);
-
-            boolean notEliminated = !currentEvent.eventStatus.equals(AdventureEventController.EventStatus.Started) || !currentEvent.matches.containsKey(currentEvent.currentRound) || currentEvent.matches.get(currentEvent.currentRound).stream().anyMatch(q -> q.p1.equals(participant) || q.p2.equals(participant));
-            TextraLabel participantName = Controls.newTextraLabel((notEliminated?"":"[RED]") + participant.getName());
-            participantName.setWrap(true);
-
-            scrollContainer.add(participantName).fillX().pad(5).width(120);
-            scrollContainer.add().width(16);
-            scrollContainer.add(String.format("%d-%d", participant.wins, participant.losses)).pad(5);
+        }
+        else {
+            scrollContainer = new Table(Controls.getSkin());
             scrollContainer.row();
-        }
 
-        eventPages = new Table[currentEvent.rounds + 1];
-        eventPages[0] = scrollContainer;
-        for (int i = 0; i < currentEvent.rounds; i++){
+            Arrays.sort(currentEvent.participants);
 
-            Table round = new Table(Controls.getSkin());
-            round.row();
+            for (AdventureEventData.AdventureEventParticipant participant : currentEvent.participants) {
+                Image avatar = participant.getAvatar();
+                avatar.setScaling(Scaling.stretch);
+                scrollContainer.add(avatar).pad(5).size(16).fillY();
+                scrollContainer.add().width(16);
 
-            List<AdventureEventData.AdventureEventMatch> matches = currentEvent.getMatches(i+1);
+                boolean notEliminated = !currentEvent.eventStatus.equals(AdventureEventController.EventStatus.Started) || !currentEvent.matches.containsKey(currentEvent.currentRound) || currentEvent.matches.get(currentEvent.currentRound).stream().anyMatch(q -> q.p1.equals(participant) || q.p2.equals(participant));
+                TextraLabel participantName = Controls.newTextraLabel((notEliminated ? "" : "[RED]") + participant.getName());
+                participantName.setWrap(true);
 
-            if (matches == null){
-                round.add(Controls.newTextraLabel("Pairings not yet generated"));
+                scrollContainer.add(participantName).fillX().pad(5).width(120);
+                scrollContainer.add().width(16);
+                scrollContainer.add(String.format("%d-%d", participant.wins, participant.losses)).pad(5);
+                scrollContainer.row();
             }
-            else{
-                Table roundScrollContainer = new Table(Controls.getSkin());
-                for (AdventureEventData.AdventureEventMatch match: matches){
 
-                    Table p1Table = new Table(Controls.getSkin());
+            eventPages = new Table[currentEvent.rounds + 1];
+            eventPages[0] = scrollContainer;
+            for (int i = 0; i < currentEvent.rounds; i++) {
 
-                    Image p1Avatar = match.p1.getAvatar();
-                    p1Avatar.setScaling(Scaling.stretch);
-
-                    p1Table.add(p1Avatar).pad(5).size(16).fillY().top();
-                    String color = match.winner == null?"":match.winner.equals(match.p1)?"[GREEN]":match.winner.equals(match.p2)?"[RED]":"";
-                    TypingLabel p1Name = Controls.newTypingLabel(color + match.p1.getName());
-                    p1Name.skipToTheEnd();
-                    p1Name.setWrap(true);
-                    p1Table.add(p1Name).width(50).expandX().top();
-
-                    roundScrollContainer.add(p1Table).left().uniformY().top().padBottom(10);
-
-                    Table verbTable = new Table(Controls.getSkin());
-
-                    if (match.p2 == null){
-                        verbTable.add("has a bye").expand().fillX().top();
-                    }
-                    else if (match.winner != null && match.winner.equals(match.p1)){
-                        verbTable.add("defeated").expand().fillX().top();
-                    }
-                    else if (match.winner != null && match.winner.equals(match.p2)){
-                        verbTable.add("defeated by").expand().fillX().top();
-                    }
-                    else {
-                        verbTable.add("versus").expand().fillX().top();
-                    }
-
-                    roundScrollContainer.add(verbTable).padLeft(10).padRight(10).top();
-
-                    Table p2Table = new Table(Controls.getSkin());
-                    if (match.p2 != null) {
-                        Image p2Avatar = match.p2.getAvatar();
-                        p2Avatar.setScaling(Scaling.stretch);
-                        String color2 = match.winner == null?"":match.winner.equals(match.p2)?"[GREEN]":match.winner.equals(match.p1)?"[RED]":"";
-                        TypingLabel p2Name = Controls.newTypingLabel(color2 + match.p2.getName());
-                        p2Name.skipToTheEnd();
-                        p2Name.setWrap(true);
-                        p2Table.add(p2Name).width(50).expandX().top();
-                        p2Table.add(p2Avatar).pad(5).size(16).fillY().top();
-                    }
-                    roundScrollContainer.add(p2Table).right().uniformY().top().padBottom(10);
-                    roundScrollContainer.row();
-                }
-                round.add(roundScrollContainer).expandX().fillX();
+                Table round = new Table(Controls.getSkin());
                 round.row();
-            }
-            eventPages[i+1] = round;
-        }
 
+                List<AdventureEventData.AdventureEventMatch> matches = currentEvent.getMatches(i + 1);
+
+                if (matches == null) {
+                    //todo: add translation
+                    round.add(Controls.newTextraLabel("Pairings not yet generated"));
+                } else {
+                    Table roundScrollContainer = new Table(Controls.getSkin());
+                    for (AdventureEventData.AdventureEventMatch match : matches) {
+
+                        Table p1Table = new Table(Controls.getSkin());
+
+                        Image p1Avatar = match.p1.getAvatar();
+                        p1Avatar.setScaling(Scaling.stretch);
+
+                        p1Table.add(p1Avatar).pad(5).size(16).fillY().top();
+                        String color = match.winner == null ? "" : match.winner.equals(match.p1) ? "[GREEN]" : match.winner.equals(match.p2) ? "[RED]" : "";
+                        TypingLabel p1Name = Controls.newTypingLabel(color + match.p1.getName());
+                        p1Name.skipToTheEnd();
+                        p1Name.setWrap(true);
+                        p1Table.add(p1Name).width(50).expandX().top();
+
+                        roundScrollContainer.add(p1Table).left().uniformY().top().padBottom(10);
+
+                        Table verbTable = new Table(Controls.getSkin());
+
+                        //todo: add translations
+                        if (match.p2 == null) {
+                            verbTable.add("has a bye").expand().fillX().top();
+                        } else if (match.winner != null && match.winner.equals(match.p1)) {
+                            verbTable.add("defeated").expand().fillX().top();
+                        } else if (match.winner != null && match.winner.equals(match.p2)) {
+                            verbTable.add("defeated by").expand().fillX().top();
+                        } else {
+                            verbTable.add("versus").expand().fillX().top();
+                        }
+
+                        roundScrollContainer.add(verbTable).padLeft(10).padRight(10).top();
+
+                        Table p2Table = new Table(Controls.getSkin());
+                        if (match.p2 != null) {
+                            Image p2Avatar = match.p2.getAvatar();
+                            p2Avatar.setScaling(Scaling.stretch);
+                            String color2 = match.winner == null ? "" : match.winner.equals(match.p2) ? "[GREEN]" : match.winner.equals(match.p1) ? "[RED]" : "";
+                            TypingLabel p2Name = Controls.newTypingLabel(color2 + match.p2.getName());
+                            p2Name.skipToTheEnd();
+                            p2Name.setWrap(true);
+                            p2Table.add(p2Name).width(50).expandX().top();
+                            p2Table.add(p2Avatar).pad(5).size(16).fillY().top();
+                        }
+                        roundScrollContainer.add(p2Table).right().uniformY().top().padBottom(10);
+                        roundScrollContainer.row();
+                    }
+                    round.add(roundScrollContainer).expandX().fillX();
+                    round.row();
+                }
+                eventPages[i + 1] = round;
+            }
+        }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
 
         root.clear();
@@ -293,7 +339,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         scroller.setActor(eventPages[pageIndex]);
         performTouch(scroller);
 
-
+        //todo: add translations
         switch (currentEvent.eventStatus){
             case Available:
                 nextPage.setDisabled(true);
@@ -354,8 +400,9 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private static EventScene object;
 
-    public static EventScene instance(Scene lastGameScene, AdventureEventData event) {
+    public static EventScene instance(Scene lastGameScene, AdventureEventData event, PointOfInterestChanges localChanges) {
         currentEvent = event;
+        changes = localChanges;
         // if (object == null)
         object = new EventScene();
         if (lastGameScene != null)
@@ -364,6 +411,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     private void nextPage(boolean reverse) {
+        //todo: add translations
         headerTable.clear();
         if (!reverse && ++pageIndex >= eventPages.length){
             pageIndex = 0;
@@ -395,6 +443,10 @@ public class EventScene extends MenuScene implements IAfterMatch {
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
 
+        if (currentEvent.eventStatus == Entered){
+            loadMetaDraft();
+        }
+
         refresh();
     }
 
@@ -413,9 +465,13 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 break;
             case Entered: //Start draft or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
-                if (currentEvent.getDraft() != null) {
-                    DraftScene.instance().loadEvent(currentEvent);
-                    Forge.switchScene(DraftScene.instance());
+                switch (currentEvent.format){
+                    case Draft:
+                        DraftScene.instance().loadEvent(currentEvent);
+                        Forge.switchScene(DraftScene.instance());
+                        break;
+                    case Jumpstart:
+                        loadMetaDraft();
                 }
                 break;
             case Ready: //Commit to selected deck
@@ -543,5 +599,75 @@ public class EventScene extends MenuScene implements IAfterMatch {
     public void finishEvent(){
         currentEvent.eventStatus = AdventureEventController.EventStatus.Completed;
     }
+
+    public void loadMetaDraft(){
+        metaDraftTable.setVisible(true);
+
+        metaDraftTable.clear();
+        for (Deck deckOption :  currentEvent.jumpstartBoosters) {
+            if (metaDraftTable.hasChildren())
+                metaDraftTable.row();
+
+            final TypingLabel packName = Controls.newTypingLabel(deckOption.getName().replaceFirst("^[A-Z]([A-Z|\\d]){2}\\s", ""));
+            packName.skipToTheEnd();
+
+            metaDraftTable.add(packName);
+            //TODO: Replace with translations
+
+            TextraButton previewButton = Controls.newTextButton("Preview");
+            previewButton.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    Forge.switchScene(DeckPreviewScene.getInstance(deckOption));
+                }
+            });
+
+            TextraButton selectButton = Controls.newTextButton("Select");
+            if (deckOption.getTags().contains("Selected")) {
+                packName.setColor(Color.FOREST);
+                selectButton.setColor(Color.FOREST);
+                selectButton.setDisabled(true);
+            } else {
+                selectButton.addListener(new ClickListener() {
+                    public void clicked(InputEvent event, float x, float y) {
+                        selectButton.clearListeners();
+                        deckOption.getTags().add("Selected");
+                        if (!selectedJumpstartPackIsLast(deckOption))
+                        {
+                            loadMetaDraft();
+                        }
+                        else {
+                            metaDraftTable.setVisible(false);
+                        }
+                    }
+                });
+            }
+
+            metaDraftTable.add(previewButton).padLeft(10);
+            metaDraftTable.add(selectButton).padLeft(10);
+        }
+        eventPages[0] = metaDraftTable;
+    }
+
+    private boolean selectedJumpstartPackIsLast(Deck selectedPack){
+        int packsToPick = 3;
+        int packsPicked = 0;
+        Deck currentPicks = new Deck();
+        for (Deck deckOption :  currentEvent.jumpstartBoosters) {
+            if (deckOption.getTags().contains("Selected")) {
+                packsPicked++;
+                currentPicks.getMain().addAll(deckOption.getAllCardsInASinglePool());
+            }
+            if (packsPicked >= packsToPick) {
+                currentEvent.registeredDeck.getMain().clear();
+                currentEvent.registeredDeck.getMain().addAll(currentPicks.getAllCardsInASinglePool());
+                metaDraftTable.setVisible(false);
+                currentEvent.eventStatus = Ready;
+                refresh();
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

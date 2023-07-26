@@ -123,7 +123,15 @@ public class RewardData implements Serializable {
         return generate(isForEnemy, null, useSeedlessRandom);
     }
 
-    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom) {
+    public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom, boolean isNoSell) {
+        return generate(isForEnemy, null, useSeedlessRandom, isNoSell);
+    }
+
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom){
+        return generate(isForEnemy, cards, useSeedlessRandom, false);
+    }
+
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
 
         Random rewardRandom = useSeedlessRandom?new Random():WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
@@ -148,7 +156,7 @@ public class RewardData implements Serializable {
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
-                            ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size()))));
+                            ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size())), isNoSell));
                         }
                     }
                     break;
@@ -156,11 +164,11 @@ public class RewardData implements Serializable {
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
                         for(int i = 0; i < count + addedCount; i++) {
-                            ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName)));
+                            ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {
-                            ret.add(new Reward(card));
+                            ret.add(new Reward(card, isNoSell));
                         }
                     }
                     break;
@@ -180,13 +188,16 @@ public class RewardData implements Serializable {
                 case "cardPack":
                     if(cardPack!=null)
                     {
-                        ret.add(new Reward(cardPack));
+                        if (isNoSell){
+                            cardPack.getTags().add("noSell");
+                        }
+                        ret.add(new Reward(cardPack, isNoSell));
                     }
                     break;
                 case "deckCard":
                     if(cards == null) return ret;
                     for(PaperCard card: CardUtil.generateCards(cards,this, count + addedCount + Current.player().bonusDeckCards() ,rewardRandom)) {
-                        ret.add(new Reward(card));
+                        ret.add(new Reward(card, isNoSell));
                     }
                     break;
                 case "gold":

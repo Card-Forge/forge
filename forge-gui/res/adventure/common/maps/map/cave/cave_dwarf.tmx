@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="112">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="116">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -31,7 +31,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2M0OwUAQAOCJg5S4kr6AhO3BT6TolXgNHoMncOFpHBw4kXgFHkAkSFxxMw6NaNKm2J1dzXzJxGGlO7NmN6sAjNHolAC6Jd1Z0OljrQPN9VKu+bhKM08UE9acMdVk7bWrB5DLy3mWCiacKbIkqRYZPlmPm6cuD0px95r9B73C/SzPoaA7A8ZY0vVCzpmbC3B3P3+eaXfHbCXe91pNgHZTzpw632vM0q+gwv+x6aj8fa8JuFMPcQ+PJO1jxpiZ5un3T58J949NJnxshWPrkPFg7sFzPvjOYyEAluK7HE33rNUP3xZr3Wmu91gDOGGcMS51+vn3Eb2lQhlrFBiOhlqfiraeeX81sQCmlu4s6AjsS+eL3myk5OfCGGP/6AFCjC9d
+   eJzt2E0OATEUB/AXC0FYEheQMBY+Ir62xDU4BnEAG05jYcGKxBU4gEiQ2GLnzWIiJpkJ4/W1eL+kmUil7b/apgZACB6tLEA7q3sUfLqYtac5L+ecj4o8/fgxYc6FUI1qr12aAPEkTVsqmHCmUPmlLBTemY9rU904OL2619KEa2WY8P8clMnr2cloP6nyqrRP0bTzDVkp/VteIT7R8ThnrlWAW/X99ky7O8YKr32vXgNo1Gj61PleYxp+FC7yH5uPyt/38gN36j7u4QHRPhZCmGkWfn46TLh/rKPedUusW3nUu8fuPufd7zzmFsDCCjZG09lZneLYYNat5ryHEsARywnLuczf/85nbamQw4wWlryGrLZMWk+/nxpHACYR3aPgY+G6zAdYm5UQ/ViEEOIb3QFhZjMV
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -88,7 +88,7 @@
     <property name="waypoints" value="94,93,92,91,89,91,92,93"/>
    </properties>
   </object>
-  <object id="69" template="../../obj/enemy.tx" x="159.53" y="90.7167">
+  <object id="69" template="../../obj/enemy.tx" x="159.863" y="90.7167">
    <properties>
     <property name="enemy" value="Dwarf Demolisher"/>
     <property name="threatRange" type="int" value="40"/>
@@ -181,5 +181,13 @@
   <object id="109" template="../../obj/waypoint.tx" x="473.667" y="482.333"/>
   <object id="110" template="../../obj/waypoint.tx" x="523.333" y="572.667"/>
   <object id="111" template="../../obj/waypoint.tx" x="488.667" y="541.333"/>
+  <object id="112" template="../../obj/treasure.tx" x="253.333" y="335.333"/>
+  <object id="113" template="../../obj/treasure.tx" x="159.333" y="74.3333"/>
+  <object id="114" template="../../obj/treasure.tx" x="670.333" y="281"/>
+  <object id="115" template="../../obj/enemy.tx" x="686.667" y="212">
+   <properties>
+    <property name="enemy" value="Big Zombie"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

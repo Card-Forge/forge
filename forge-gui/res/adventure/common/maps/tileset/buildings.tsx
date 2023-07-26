@@ -1004,7 +1004,9 @@
  </tile>
  <tile id="348">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="0" width="16" height="16"/>
+   <object id="1" x="13" y="0" width="3" height="16"/>
+   <object id="2" x="0" y="0" width="13" height="3"/>
+   <object id="3" x="0" y="3" width="1" height="10"/>
   </objectgroup>
  </tile>
  <tile id="349">

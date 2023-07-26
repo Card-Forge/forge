@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lU1OAzEMhS01FeIM0Bbu0JkDsGop4jjs+KtEQXAgWM0ZeggELYg7kKckmpcoTgqLWvImif3ZL57J8EBkuAe/Ooy9tBf8vhFZWr9r4nO3fn1J+7m8u9bE+S4GIlvrz0bkrY05Z1OJ7KiN+aWec8xjG/9o+nxgr8XxNZv5vevGxaa9azqHHsHM2aXN+6Fwf6guaIIc6J371rgTe25u484LPZUsaPJN8aet3jNzH4yrmdmsd81SPUo9M/dz0M8Rs2d+rv5joWeNO/L3CjbucuO5X16/Ba1pNvf1vZBu3LM2z5NkpqD7wtdRYqG2len1Suvke87dd8rNGb6T96nzm6avjbVI66xxofWJwgavs3vjNj7fZc7zd4G4scKtsTHT0FL7jyIGvQeD3k/GrdXmKmV35CWmxsY8vZI+KaP2bpTekdSZzfrm8v+Fu8vbErTKMUvcfb3BvzjSlQc=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VUluwzAM1KE59ODHNHZro6f8Jq8IAqSv69Gy4176mJiwpp2MaDvpMoBAiZQ4EiVSIeQ4Fd/9dmwx9U0+j60iW0hjs5VkU2wfQ6ipD3Rja8h/SxK+AZu3E7+VswY8do4h9Y9FyBBpvXJ54zJ38RWbVvR2rhfRDTQXe45kB5/yREfHnHz2Rua8kk+cdwnefgydM8/zZbHnWK/xARq/pXWI39ycWzlvRZ9kFMnAmf+am4EYnUln9/K5su68Yr8XJyeX/gOIZU065DTHuQ/z4Lz5yd10Ig36VhmcF5q3v30b4PXqA/TMUd3JiTf8lOqz1S/UkzLxg7sluVRXvLrLsLc5hLxusZ350fdy0PzUjn4NWIM7Hsim+3+j8fvDtY3/Nc8//oMPsSPeytWJHXm330zyUEz70drMmIv/BRt7Tlc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="213.957" y="105.166">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 8,
+ &quot;startBattleWithCard&quot;: [ &quot;Quest for the Gravelord&quot; ]
+}</property>
+    <property name="enemy" value="Grave Titan"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/gold.tx" x="210.089" y="33.8792"/>
+  <object id="56" template="../../obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="60" template="../../obj/manashards.tx" x="295.846" y="83.716"/>
+  <object id="61" template="../../obj/manashards.tx" x="2.35503" y="18.9231"/>
+  <object id="62" template="../../obj/enemy.tx" x="417.444" y="82.2367">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="67,68,67,66,70,69,65,69,70,66"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="15.3728" y="53.8343">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="446.438" y="172.473">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="65,69,70,66,67,68,67,66,70,69"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/waypoint.tx" x="450.284" y="260.047"/>
+  <object id="66" template="../../obj/waypoint.tx" x="447.621" y="55.3136"/>
+  <object id="67" template="../../obj/waypoint.tx" x="402.651" y="57.6805"/>
+  <object id="68" template="../../obj/waypoint.tx" x="439.337" y="19.2189"/>
+  <object id="69" template="../../obj/waypoint.tx" x="401.172" y="236.083"/>
+  <object id="70" template="../../obj/waypoint.tx" x="425.432" y="139.041"/>
+  <object id="71" template="../../obj/waypoint.tx" x="31.645" y="14.4852"/>
+  <object id="72" template="../../obj/waypoint.tx" x="6.49704" y="92.8876"/>
+  <object id="73" template="../../obj/waypoint.tx" x="34.0118" y="194.663"/>
+  <object id="74" template="../../obj/waypoint.tx" x="77.2071" y="271.882"/>
+ </objectgroup>
+</map>

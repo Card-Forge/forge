@@ -542,6 +542,8 @@ public class GameHUD extends Stage {
             return;
         if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
             return;
+        if (!MapStage.getInstance().canEscape())
+            return;
         if (Forge.restrictAdvMenus)
             return;
         dialog.getButtonTable().clear();

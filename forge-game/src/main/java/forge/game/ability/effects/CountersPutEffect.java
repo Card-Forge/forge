@@ -672,7 +672,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             final SpellAbility newSa = AbilityFactory.getAbility(trigSA, host);
             newSa.setIntrinsic(intrinsic);
             trig.setOverridingAbility(newSa);
-            trig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+            trig.setSpawningAbility(sa.copy(host, true));
             sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
         }
     }

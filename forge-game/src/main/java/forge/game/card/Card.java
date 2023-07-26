@@ -5490,18 +5490,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isEmblem() {
         return isEmblem;
     }
-    public final void setBoon(final boolean isBoon0) {
-        isBoon = isBoon0;
-        view.updateBoon(this);
+    public final void setEmblem(final boolean isEmblem0) {
+        isEmblem = isEmblem0;
+        view.updateEmblem(this);
     }
 
     public final boolean isBoon() {
         return isBoon;
     }
-
-    public final void setEmblem(final boolean isEmblem0) {
-        isEmblem = isEmblem0;
-        view.updateEmblem(this);
+    public final void setBoon(final boolean isBoon0) {
+        isBoon = isBoon0;
+        view.updateBoon(this);
     }
 
     /*
@@ -6119,7 +6118,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void becomesCrewed(SpellAbility sa) {
-        timesCrewedThisTurn += 1;
+        timesCrewedThisTurn++;
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Vehicle, this);
         runParams.put(AbilityKey.Crew, sa.getPaidList("TappedCards", true));

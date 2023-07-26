@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="79">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/phyrexia/phyrexiantiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1k10OAiEMhPvqA1xGlBvsDf07luuFtNk2qXVAU3CSeVrot7TTZUe0OJ8S0Vl8SZ/fkSN3vPeZaBUf8ntNZOb4O1Gu6vaqWU1N5GPezqhmcLV2T/7MDK4Vv4nfz7qm7Z1IUe690c9i+slMnis69why2UXyxBzNTzX91Ln6fJUBpu4FyhOaq81XdIf8Llmhc/4/orNVocx8445kymbLs1GGrDjjI5nSXCF2S1VyPJqrIjVau4z6WyZwbb5+5c7g9ebc6vFMrrJXwNf9/gez1/OR3j4BI+CnQA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr0WNg6BnFo3gUj+JRPIpH8YjAAE3lcpw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYN41IHA8hsfABdD6X2unESZy+yOmrYSw4YavYSG7a4AEj/SLMX3e7hbu9Ii19y7JWhMP9iM5fYckOGDH+D1OPzCzH2IttNyH6YGkL+INZedLvR7UcWJ8YPpNiLrgc9HklxPzIGAAplras=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lcsOwiAQRfki/hG1vla1rYlata5a165bv83bOCSEgpbXTW6gA8NpYAKMTVVxxhpypbixtOq4jPnoqOSV6LfwAAtL++TTnFDuHf33n3V6jD8ic30Um9vSnur9mNwMXsMbOt8Ofil73tN3R3x1fgg3hw/wjX8Zg+Gc1XhN84tAbk1MF8mcEK4w5C4QW5JXlrVFAu4JsTP5koibUY24SObEqKti5hpZxLq6OnBzmh9SV+O9voP3DjU9/ueW8nzfBRP/l2Lx5vJT8XTp97bvOY76ADiCbCA=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjDTQrMfA0KJHf3tnAu2cNQD2joJRMAoQAAAO9QLz
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="317.667" y="43.1667"/>
+  <object id="68" template="../../obj/enemy.tx" x="207" y="94">
+   <properties>
+    <property name="enemy" value="Orthodoxy Angel"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="239.167" y="176">
+   <properties>
+    <property name="enemy" value="Orthodoxy Duelist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="waypoints" value="70,71,70"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="175" y="128">
+   <properties>
+    <property name="enemy" value="Orthodoxy Duelist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="waypoints" value="72,73,72"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/booster.tx" x="98.6667" y="43">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/treasure.tx" x="315" y="74"/>
+ </objectgroup>
+ <objectgroup id="8" name="Waypoints">
+  <object id="70" template="../../obj/waypoint.tx" x="144" y="176"/>
+  <object id="71" template="../../obj/waypoint.tx" x="272" y="176"/>
+  <object id="72" template="../../obj/waypoint.tx" x="272" y="128"/>
+  <object id="73" template="../../obj/waypoint.tx" x="144" y="128"/>
+ </objectgroup>
+</map>

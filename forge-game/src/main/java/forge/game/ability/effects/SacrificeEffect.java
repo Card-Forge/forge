@@ -68,7 +68,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             int n = card.getCounters(CounterEnumType.AGE);
             if (n > 0) {
                 Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
-                payCost.mergeTo(cumCost, n);
+                payCost.mergeTo(cumCost, n, sa);
             }
 
             game.updateLastStateForCard(card);

@@ -103,6 +103,7 @@ public class QuestStageEdit extends FormPanel {
     private final JLabel findLabel = new JLabel("Locate the and enter a PoI.");
     private final JLabel gatherLabel = new JLabel("Have the requested item in your inventory (tracked in inventory)");
     private final JLabel giveLabel = new JLabel("Have the requested items removed from your inventory.");
+    private final JLabel haveReputationLabel = new JLabel("Have a minimum reputation in the selected PoI (and enter it)");
     private final JLabel huntLabel = new JLabel("Track down and defeat your target (on the overworld map).");
     private final JLabel leaveLabel = new JLabel("Exit the current PoI and return to the overworld map.");
     private final JLabel noneLabel = new JLabel("No visible objective. Use in coordination with hidden parallel objectives to track when to progress");
@@ -134,6 +135,7 @@ public class QuestStageEdit extends FormPanel {
         findLabel.setVisible(false);
         gatherLabel.setVisible(false);
         giveLabel.setVisible(false);
+        haveReputationLabel.setVisible(false);
         huntLabel.setVisible(false);
         leaveLabel.setVisible(false);
         noneLabel.setVisible(false);
@@ -247,6 +249,16 @@ public class QuestStageEdit extends FormPanel {
                 poiTokenLabel.setVisible(true);
                 here.setVisible(true);
                 break;
+            case "HaveReputation":
+                haveReputationLabel.setVisible(true);
+                poiPane.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                here.setVisible(true);
+                count1Description.setText("Minimum reputation needed");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count1Spinner.setVisible(true);
+                break;
             case "Hunt":
                 huntLabel.setVisible(true);
                 enemySelector.setVisible(true);
@@ -295,7 +307,6 @@ public class QuestStageEdit extends FormPanel {
                 flagValueGroup.setVisible(true);
                 break;
             case "QuestFlag":
-                nyi.setVisible(true);
                 questFlagLabel.setVisible(true);
                 mapFlagGroup.setVisible(true);
                 flagValueGroup.setVisible(true);
@@ -399,6 +410,7 @@ public class QuestStageEdit extends FormPanel {
         center.add(findLabel);
         center.add(gatherLabel);
         center.add(giveLabel);
+        center.add(haveReputationLabel);
         center.add(huntLabel);
         center.add(leaveLabel);
         center.add(noneLabel);

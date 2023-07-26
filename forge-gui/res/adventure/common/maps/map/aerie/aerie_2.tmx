@@ -36,14 +36,16 @@
     <property name="waypoints" value="102,103,104,103,102,100,101,100,102"/>
    </properties>
   </object>
-  <object id="90" template="../../obj/door_up.tx" x="309.833" y="127" width="37.0004" height="16">
+  <object id="90" template="../../obj/door_up.tx" x="309.833" y="159" width="37.0004" height="48">
    <properties>
+    <property name="direction" value="up"/>
     <property name="teleport" value="../common/maps/map/aerie/aerie_1.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
   <object id="91" template="../../obj/door_up.tx" x="218.166" y="159.667" width="37.0004" height="39">
    <properties>
+    <property name="direction" value="left"/>
     <property name="teleport" value="../common/maps/map/aerie/aerie_3.tmx"/>
     <property name="teleportObjectId" value="88"/>
    </properties>

@@ -322,3 +322,15 @@ MOM Reinforcement 1: 1 wholeSheet("MOM Reinforcement 1"), 1 RareMythic:fromSheet
 MOM Reinforcement 2: 1 wholeSheet("MOM Reinforcement 2"), 1 RareMythic:fromSheet("MOM Red Inserts")
 MOM Buff 1: 1 wholeSheet("MOM Buff 1"), 1 RareMythic:fromSheet("MOM Green Inserts")
 MOM Buff 2: 1 wholeSheet("MOM Buff 2"), 1 RareMythic:fromSheet("MOM Green Inserts")
+
+# LTR Jumpstart
+LTR Courageous 1: 1 wholeSheet("LTR Courageous 1"), 1 RareMythic:fromSheet("LTR White Inserts")
+LTR Courageous 2: 1 wholeSheet("LTR Courageous 2"), 1 RareMythic:fromSheet("LTR White Inserts")
+LTR Tricksy 1: 1 wholeSheet("LTR Tricksy 1"), 1 RareMythic:fromSheet("LTR Blue Inserts")
+LTR Tricksy 2: 1 wholeSheet("LTR Tricksy 2"), 1 RareMythic:fromSheet("LTR Blue Inserts")
+LTR Mordor 1: 1 wholeSheet("LTR Mordor 1"), 1 RareMythic:fromSheet("LTR Black Inserts")
+LTR Mordor 2: 1 wholeSheet("LTR Mordor 2"), 1 RareMythic:fromSheet("LTR Black Inserts")
+LTR Marauders 1: 1 wholeSheet("LTR Marauders 1"), 1 RareMythic:fromSheet("LTR Red Inserts")
+LTR Marauders 2: 1 wholeSheet("LTR Marauders 2"), 1 RareMythic:fromSheet("LTR Red Inserts")
+LTR Journey 1: 1 wholeSheet("LTR Journey 1"), 1 RareMythic:fromSheet("LTR Green Inserts")
+LTR Journey 2: 1 wholeSheet("LTR Journey 2"), 1 RareMythic:fromSheet("LTR Green Inserts")
