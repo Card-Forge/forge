@@ -580,6 +580,10 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
             defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
 
+            if (defaultLandSet == null) {
+                defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
+            }
+
             AddBasicLandsDialog dialog = new AddBasicLandsDialog(currentEvent.registeredDeck, defaultLandSet, new Callback<CardPool>() {
                 @Override
                 public void run(CardPool landsToAdd) {

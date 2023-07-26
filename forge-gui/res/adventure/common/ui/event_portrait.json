@@ -35,6 +35,14 @@
       "height": 222
     },
     {
+      "type": "Table",
+      "name": "metaDraftTable",
+      "x": 15,
+      "y": 37,
+      "width": 256,
+      "height": 222
+    },
+    {
       "type":  "Scroll",
       "name":  "blessingInfo",
       "style": "nobg",

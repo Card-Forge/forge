@@ -1102,9 +1102,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
 
 
-    public ItemPool<PaperCard> getCollectionCards() {
-        ItemPool<PaperCard> collectionCards = cards;
-
+    public CardPool getCollectionCards() {
+        CardPool collectionCards = new CardPool();
+        collectionCards.addAll(cards);
         collectionCards.removeAll(autoSellCards);
         collectionCards.removeAll(noSellCards);
 
