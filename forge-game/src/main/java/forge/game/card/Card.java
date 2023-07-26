@@ -3371,7 +3371,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         leavePlayCommandList.clear();
-        clearRingBearer();
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3402,7 +3401,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         changeControllerCommandList.clear();
-        clearRingBearer();
     }
 
     public final void setSickness(boolean sickness0) {
