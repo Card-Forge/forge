@@ -555,6 +555,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     CardFaceSymbols.drawAbilitySymbol("commander", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
+                if (card.isRingBearer()) {
+                    CardFaceSymbols.drawAbilitySymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
                 if (card.getCurrentState().hasFlying()) {
                     CardFaceSymbols.drawAbilitySymbol("flying", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;

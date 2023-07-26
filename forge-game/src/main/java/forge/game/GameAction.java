@@ -1012,6 +1012,9 @@ public class GameAction {
             partner.updateStateForView();
         }
 
+        // run Game Commands early
+        c.runChangeControllerCommands();
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
         oldBattlefield.remove(c);
@@ -1027,7 +1030,7 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        c.runChangeControllerCommands();
+
     }
 
     // Temporarily disable (if mode = true) actively checking static abilities.

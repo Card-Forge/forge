@@ -1,0 +1,7 @@
+Name:Uruk-hai Berserker
+ManaCost:2 B
+Types:Creature Orc Berserker
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:When Uruk-hai Berserker enters the battlefield, the Ring tempts you.

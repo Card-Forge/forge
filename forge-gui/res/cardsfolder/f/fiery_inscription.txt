@@ -1,0 +1,9 @@
+Name:Fiery Inscription
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:When Fiery Inscription enters the battlefield, the Ring tempts you.\nWhenever you cast an instant or sorcery spell, Fiery Inscription deals 2 damage to each opponent.

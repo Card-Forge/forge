@@ -756,7 +756,13 @@ public class CardRenderer {
         //Class level
         if (card.getCurrentState().getType().hasStringType("Class") && ZoneType.Battlefield.equals(card.getZone())) {
             List<String> markers = new ArrayList<>();
-            markers.add("LV:" + card.getClassLevel());
+            markers.add("CL:" + card.getClassLevel());
+            drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
+        }
+        //Ring level
+        if (card.getRingLevel() > 0) {
+            List<String> markers = new ArrayList<>();
+            markers.add("RL:" + card.getRingLevel());
             drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
         }
 
@@ -869,6 +875,11 @@ public class CardRenderer {
         }
         if (card.isCommander()) {
             CardFaceSymbols.drawSymbol("commander", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.isRingBearer()) {
+            CardFaceSymbols.drawSymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }

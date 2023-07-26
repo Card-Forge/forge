@@ -2,7 +2,7 @@ Name:Saint Traft and Rem Karolus
 ManaCost:U R W
 Types:Legendary Creature Spirit Human
 PT:3/4
-T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, create a 1/1 red Human creature token if this is the first time this ability has resolved this turn. If it’s the second time, create a 1/1 blue Spirit creature token with flying. If it’s the third time, create a 4/4 white Angel creature token with flying.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, create a 1/1 red Human creature token if this is the first time this ability has resolved this turn. If it's the second time, create a 1/1 blue Spirit creature token with flying. If it's the third time, create a 4/4 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_human | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ1 | SubAbility$ DBTokenBis
 SVar:DBTokenBis:DB$ Token | TokenScript$ u_1_1_spirit_flying | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2 | SubAbility$ DBTokenTrice
 SVar:DBTokenTrice:DB$ Token | TokenScript$w_4_4_angel_flying | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ3

@@ -1,0 +1,12 @@
+Name:Frodo, Adventurous Hobbit
+ManaCost:W B
+Types:Legendary Creature Halfling Scout
+PT:1/3
+K:Partner:Sam, Loyal Attendant:Sam
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTempt | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | TriggerDescription$ Whenever CARDNAME  attacks, if you gained 3 or more life this turn, the Ring tempts you. Then if NICKNAME is your Ring-bearer and the Ring has tempted you two or more times this game, draw a card.
+SVar:TrigTempt:DB$ RingTemptsYou | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ NumRingTempted | ConditionSVarCompare$ GE2 | ConditionPresent$ Card.Self+IsRingbearer | ConditionCompare$ GE1
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+SVar:NumRingTempted:PlayerCountPropertyYou$RingTemptedYou
+Oracle:Partner with Sam, Loyal Attendant\nVigilance\nWhenever Frodo, Adventurous Hobbit attacks, if you gained 3 or more life this turn, the Ring tempts you. Then if Frodo is your Ring-bearer and the Ring has tempted you two or more times this game, draw a card.

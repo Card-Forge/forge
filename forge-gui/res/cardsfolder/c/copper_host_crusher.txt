@@ -4,4 +4,4 @@ Types:Creature Phyrexian Bear Rhino
 PT:8/8
 K:Trample
 K:Hexproof
-Oracle:Trample\nHexproof (This creature can’t be the target of spells or abilities your opponents control.)
+Oracle:Trample\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

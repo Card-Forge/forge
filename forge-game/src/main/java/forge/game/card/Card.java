@@ -209,7 +209,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean copiedSpell = false;
 
     private boolean unearthed;
-
+    private boolean ringbearer;
     private boolean monstrous;
 
     private boolean renowned;
@@ -225,7 +225,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
-
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
     private long mutatedTimestamp = -1;
@@ -6032,6 +6031,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
 
+    public final boolean isRingBearer() {
+        return ringbearer;
+    }
+    public final void setRingBearer(final boolean ringbearer0) {
+        ringbearer = ringbearer0;
+        view.updateRingBearer(this);
+    }
+    public final void clearRingBearer() {
+        setRingBearer(false);
+    }
     public final boolean isMonstrous() {
         return monstrous;
     }

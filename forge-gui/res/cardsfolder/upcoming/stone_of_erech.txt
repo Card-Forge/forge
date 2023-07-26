@@ -6,4 +6,4 @@ SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | De
 A:AB$ ChangeZoneAll | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SubAbility$ DBDraw | SpellDescription$ Exile target player's graveyard. Draw a card.
 SVar:DBDraw:DB$ Draw
 DeckHas:Ability$Graveyard|Sacrifice
-Oracle:If a creature an opponent controls would die, exile it instead.\n{2}, {T}, Sacrifice Stone of Erech: Exile target player’s graveyard. Draw a card.
+Oracle:If a creature an opponent controls would die, exile it instead.\n{2}, {T}, Sacrifice Stone of Erech: Exile target player's graveyard. Draw a card.

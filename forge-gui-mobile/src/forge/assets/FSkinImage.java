@@ -420,6 +420,7 @@ public enum FSkinImage implements FImage {
 
     //COMMANDER
     IMG_ABILITY_COMMANDER      (FSkinProp.IMG_ABILITY_COMMANDER, SourceFile.ABILITIES),
+    IMG_ABILITY_RINGBEARER     (FSkinProp.IMG_ABILITY_RINGBEARER, SourceFile.MANAICONS),
 
     //TOXIC
     IMG_ABILITY_TOXIC          (FSkinProp.IMG_ABILITY_TOXIC, SourceFile.ICONS),

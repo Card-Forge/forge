@@ -534,6 +534,14 @@ public class CardDetailUtil {
             area.append("(Class Level:").append(card.getClassLevel()).append(")");
         }
 
+        //ring level
+        if (card.getRingLevel() > 0 && card.getZone() == ZoneType.Command) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("(Ring Level:").append(card.getRingLevel()).append(")");
+        }
+
         // sector
         if (!card.getSector().isEmpty()) {
             if (area.length() != 0) {

@@ -3501,6 +3501,10 @@ public class AbilityUtils {
         if (value.equals("DungeonsCompleted")) {
             return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
         }
+
+        if (value.equals("RingTemptedYou")) {
+            return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
+        }
         if (value.startsWith("DungeonCompletedNamed")) {
             String [] full = value.split("_");
             String name = full[1];
