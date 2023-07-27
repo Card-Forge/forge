@@ -1126,10 +1126,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
+    public boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
-            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
+            return ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
         }
+        return false;
     }
 
     @Override

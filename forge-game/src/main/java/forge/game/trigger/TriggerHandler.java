@@ -485,8 +485,8 @@ public class TriggerHandler {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
@@ -563,7 +563,11 @@ public class TriggerHandler {
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
         if (regtrig.isStatic()) {
-            wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
+            if (wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory)) {
+                final Map<AbilityKey, Object> staticParams = AbilityKey.mapFromCard(host);
+                staticParams.put(AbilityKey.SpellAbility, sa);
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, staticParams, false);
+            }
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);

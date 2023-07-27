@@ -2002,8 +2002,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
+    public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
+        return HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
     }
 
     @Override
