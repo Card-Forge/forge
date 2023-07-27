@@ -6,10 +6,12 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerZones$ Battl
 SVar:TrigPeek:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 2 | SubAbility$ DBChoosePlayer
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ ChooseLand,ChooseNonland | Defined$ You
-SVar:ChooseLand:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ GuessLand,GuessNonland | SpellDescription$ Choose land.
-SVar:ChooseNonland:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ GuessLand,GuessNonland | SpellDescription$ Choose nonland.
-SVar:GuessLand:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.Land | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess land.
-SVar:GuessNonland:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.nonLand | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess nonland.
+SVar:ChooseLand:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ OppGuessLandYouLand,OppGuessNonlandYouland | SpellDescription$ Choose land.
+SVar:ChooseNonland:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ OppGuessLandYouNonland,OppGuessNonlandYouNonland | SpellDescription$ Choose nonland.
+SVar:OppGuessLandYouLand:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.Land | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess land.(Your opponent has chosen land)
+SVar:OppGuessNonlandYouland:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.nonLand | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess nonland. (Your opponent has chosen land)
+SVar:OppGuessLandYouNonland:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.Land | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess land.(Your opponent has chosen nonland)
+SVar:OppGuessNonlandYouNonland:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.nonLand | RememberRevealed$ True | SubAbility$ DBBranch | SpellDescription$ Guess nonland. (Your opponent has chosen nonland)
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ RemoveCombat | FalseSubAbility$ Draw | SubAbility$ DBCleanup
 SVar:RemoveCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:Draw:DB$ Draw | SubAbility$ DBEffect | SpellDescription$ You draw a card and NICKNAME can't be blocked this turn.
