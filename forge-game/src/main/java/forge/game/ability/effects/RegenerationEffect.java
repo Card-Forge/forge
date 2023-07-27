@@ -1,14 +1,10 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
-
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 
 public class RegenerationEffect extends SpellAbilityEffect {
 
@@ -21,9 +17,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         for (Card c : getTargetCards(sa)) {
-            if (!c.canBeShielded() || !c.isInPlay()) {
-                continue;
-            }
+            // checks already done in ReplacementEffect
 
             c.setDamage(0);
             c.setHasBeenDealtDeathtouchDamage(false);
@@ -42,11 +36,6 @@ public class RegenerationEffect extends SpellAbilityEffect {
                 c.decShieldCount();
                 host.removeRemembered(c);
             }
-
-            // Run triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-            runParams.put(AbilityKey.Cause, host);
-            game.getTriggerHandler().runTrigger(TriggerType.Regenerated, runParams, false);
         }
     }
 
