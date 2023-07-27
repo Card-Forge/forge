@@ -486,7 +486,7 @@ public class TriggerHandler {
             }
         }
         else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
@@ -565,7 +565,7 @@ public class TriggerHandler {
         if (regtrig.isStatic()) {
             if (wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory)) {
                 final Map<AbilityKey, Object> staticParams = AbilityKey.mapFromCard(host);
-                staticParams.put(AbilityKey.CastSA, sa);
+                staticParams.put(AbilityKey.SpellAbility, sa);
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, staticParams, false);
             }
         } else {

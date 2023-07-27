@@ -250,13 +250,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
             runParams.put(AbilityKey.Activator, activator);
-            runParams.put(AbilityKey.CastSA, sp);
+            runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
             if (sp.isActivatedAbility()) {
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
+
             AbilityUtils.resolve(sp);
-            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
+
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(source);
+            runParams2.put(AbilityKey.SpellAbility, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams2, false);
+
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
             return;
@@ -339,7 +344,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-        runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
+        runParams.put(AbilityKey.SpellAbility, si.getSpellAbility(true));
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 
@@ -538,7 +543,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
-            runParams.put(AbilityKey.CastSA, sa);
+            runParams.put(AbilityKey.SpellAbility, sa);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
             AbilityUtils.resolve(sa);
         } else {

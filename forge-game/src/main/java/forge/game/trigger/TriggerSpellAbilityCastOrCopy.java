@@ -73,7 +73,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
         if (spellAbility == null) {
             System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams);
             return false;
@@ -262,7 +262,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         final SpellAbility saForTargets = si != null ? si.getSpellAbility(true) : castSA;
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
