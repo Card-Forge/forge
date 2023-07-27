@@ -51,7 +51,7 @@
   <object id="66" template="../../obj/waypoint.tx" x="318" y="230.667"/>
   <object id="67" template="../../obj/enemy.tx" x="161" y="78.6667">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bedlam&quot; }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bedlam&quot; ] }"/>
     <property name="enemy" value="Bandit Leader"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
