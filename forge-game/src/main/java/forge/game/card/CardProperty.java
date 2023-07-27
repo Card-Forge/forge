@@ -167,6 +167,10 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
+        } else if (property.equals("IsRingbearer")) {
+            if (!card.isRingBearer()) {
+                return false;
+            }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
             for (Object o : spellAbility.getTriggerRemembered()) {

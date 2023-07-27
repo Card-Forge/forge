@@ -6,4 +6,4 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a token that's a copy of target artifact that player controls.
 SVar:TrigToken:DB$ CopyPermanent | ValidTgts$ Artifact.ControlledBy TriggeredTarget | Defined$ Targeted 
 DeckHas:Ability$Token
-Oracle:Flying\nWhenever Schema Thief deals combat damage to a player, create a token that’s a copy of target artifact that player controls.
+Oracle:Flying\nWhenever Schema Thief deals combat damage to a player, create a token that's a copy of target artifact that player controls.

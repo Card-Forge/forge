@@ -2,8 +2,10 @@ package forge.adventure.data;
 
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Current;
+import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -80,14 +82,14 @@ public class AdventureQuestStage implements Serializable {
             targetPOI = target;
     }
 
-    public void setTargetPOI(Dictionary<String, PointOfInterest> poiTokens) {
+    public void setTargetPOI(Dictionary<String, PointOfInterest> poiTokens, String questName) {
         if (POIToken != null && POIToken.length() > 0) {
             PointOfInterest tokenTarget = poiTokens.get(POIToken);
             if (tokenTarget != null) {
                 setTargetPOI(tokenTarget);
                 return;
             } else {
-                System.out.println("Quest Stage '" + this.name + "' failed to generate POI from token reference: '" + POIToken + "'");
+                System.out.println("Quest '" + questName + "' -  Stage '" + this.name + "' failed to generate POI from token reference: '" + POIToken + "'");
             }
         }
         if (here) {
@@ -117,7 +119,7 @@ public class AdventureQuestStage implements Serializable {
                 setTargetPOI(candidates.get(targetIndex));
             } else {
                 if (count1 != 0 || count2 != 0) {
-                    System.out.println("Quest Stage '" + this.name + "' has invalid count1 ('" + count1 + "') and/or count2 ('" + count2 + "') value");
+                    System.out.println("Quest '" + questName + "' -  Stage '" + this.name + "' has invalid count1 ('" + count1 + "') and/or count2 ('" + count2 + "') value");
                 }
                 setTargetPOI(Aggregates.random(candidates));
             }
@@ -150,13 +152,50 @@ public class AdventureQuestStage implements Serializable {
             return status;
         } else {
             checkIfInTargetLocation(entered);
-            if (inTargetLocation &&
-                    (this.objective == AdventureQuestController.ObjectiveTypes.Delivery ||
-                            this.objective == AdventureQuestController.ObjectiveTypes.Travel)) {
+            if (inTargetLocation){
+                if (this.objective == AdventureQuestController.ObjectiveTypes.Delivery
+                        || this.objective == AdventureQuestController.ObjectiveTypes.Travel) {
                 status = AdventureQuestController.QuestStatus.Complete;
+                }
+                if (this.objective == AdventureQuestController.ObjectiveTypes.HaveReputation) {
+                    PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(entered.getID() + entered.getData().map);
+                    if (changes.getMapReputation() >= count1) {
+                        status = AdventureQuestController.QuestStatus.Complete;
+                    }
+                }
             }
         }
         return status;
+    }
+
+    public AdventureQuestController.QuestStatus updateCharacterFlag(String flagName, int flagValue) {
+        if (getStatus() == AdventureQuestController.QuestStatus.Complete) {
+            return status;
+        } else if (getStatus() == AdventureQuestController.QuestStatus.Failed) {
+            return status;
+        } else {
+            //Not yet implemented as objective type
+            //Could theoretically be used as a part of quests for character lifetime achievements
+//            if (this.objective == AdventureQuestController.ObjectiveTypes.CharacterFlag) {
+//                if (flagName.equals(this.mapFlag) && flagValue >= this.mapFlagValue)
+//                    status = AdventureQuestController.QuestStatus.Complete;
+//            }
+            return status;
+        }
+    }
+
+    public AdventureQuestController.QuestStatus updateQuestFlag(String flagName, int flagValue) {
+        if (getStatus() == AdventureQuestController.QuestStatus.Complete) {
+            return status;
+        } else if (getStatus() == AdventureQuestController.QuestStatus.Failed) {
+            return status;
+        } else {
+            if (this.objective == AdventureQuestController.ObjectiveTypes.QuestFlag) {
+                if (flagName.equals(this.mapFlag) && flagValue >= this.mapFlagValue)
+                    status = AdventureQuestController.QuestStatus.Complete;
+            }
+            return status;
+        }
     }
 
     public AdventureQuestController.QuestStatus updateMapFlag(String mapFlag, int mapFlagValue) {

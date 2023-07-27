@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import forge.game.event.*;
+import forge.game.spellability.AbilitySub;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -166,12 +167,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
+    private Card ringBearer, theRing;
     private String namedCard = "";
     private String namedCard2 = "";
 
     private int simultaneousDamage = 0;
 
     private int lastTurnNr = 0;
+    private int numRingTemptedYou = 0;
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
     private final Map<String, Integer> notedNum = Maps.newHashMap();
@@ -1630,7 +1633,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView milledView = milled;
 
-        if (destination == ZoneType.Graveyard && milled.size() > 1) {
+        if (destination == ZoneType.Graveyard) {
             milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
@@ -1829,7 +1832,28 @@ public class Player extends GameEntity implements Comparable<Player> {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
-
+    public final Card getRingBearer() {
+        return ringBearer;
+    }
+    public final Card getTheRing() {
+        return theRing;
+    }
+    public final void clearTheRing() {
+        theRing = null;
+    }
+    public final void setRingBearer(Card bearer) {
+        if (bearer == null)
+            return;
+        clearRingBearer();
+        ringBearer = bearer;
+        ringBearer.setRingBearer(true);
+    }
+    public void clearRingBearer() {
+        if (ringBearer == null)
+            return;
+        ringBearer.setRingBearer(false);
+        ringBearer = null;
+    }
     public final String getNamedCard() {
         return namedCard;
     }
@@ -1925,6 +1949,19 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void resetCompletedDungeons() {
         completedDungeons.clear();
+    }
+
+    public final int getNumRingTemptedYou() {
+        return numRingTemptedYou;
+    }
+    public final void incrementRingTemptedYou() {
+        numRingTemptedYou++;
+    }
+    public final void setNumRingTemptedYou(int value) {
+        numRingTemptedYou = value;
+    }
+    public final void resetRingTemptedYou() {
+        numRingTemptedYou = 0;
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {
@@ -3116,7 +3153,72 @@ public class Player extends GameEntity implements Comparable<Player> {
         eff.addStaticAbility(mayBePlayedAbility);
         return eff;
     }
+    public void createTheRing(Card host) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (theRing == null) {
+            theRing = new Card(game.nextCardId(), null, game);
+            theRing.setOwner(this);
+            theRing.setImmutable(true);
+            String image = ImageKeys.getTokenKey("the_ring");
+            if (host != null) {
+                theRing.setImageKey("t:the_ring_" + host.getSetCode().toLowerCase());
+                theRing.setSetCode(host.getSetCode());
+            } else {
+                theRing.setImageKey(image);
+            }
+            theRing.setName("The Ring");
+            theRing.updateStateForView();
+            com.add(theRing);
+            this.updateZoneForView(com);
+        }
+    }
+    public void setRingLevel(int level) {
+        if (getTheRing() == null)
+            createTheRing(null);
+        if (level == 1) {
+            String legendary = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl+IsRingbearer | AddType$ Legendary | Description$ Your Ring-bearer is legendary.";
+            String cantBeBlocked = "Mode$ CantBlockBy | EffectZone$ Command | ValidAttacker$ Card.YouCtrl+IsRingbearer | ValidBlockerRelative$ Creature.powerGTX | Description$ Your Ring-bearer can't be blocked by creatures with greater power.";
+            getTheRing().addStaticAbility(legendary);
+            StaticAbility st = getTheRing().addStaticAbility(cantBeBlocked);
+            st.setSVar("X", "Count$CardPower");
+        } else if (level == 2) {
+            final String attackTrig = "Mode$ Attacks | ValidCard$ Card.YouCtrl+IsRingbearer | TriggerDescription$ Whenever your ring-bearer attacks, draw a card, then discard a card. | TriggerZones$ Command";
+            final String drawEffect = "DB$ Draw | Defined$ You | NumCards$ 1";
+            final String discardEffect = "DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose";
 
+            final Trigger attackTrigger = TriggerHandler.parseTrigger(attackTrig, getTheRing(), true);
+
+            SpellAbility drawExecute = AbilityFactory.getAbility(drawEffect, getTheRing());
+            AbilitySub discardExecute = (AbilitySub) AbilityFactory.getAbility(discardEffect, getTheRing());
+
+            drawExecute.setSubAbility(discardExecute);
+            attackTrigger.setOverridingAbility(drawExecute);
+            getTheRing().addTrigger(attackTrigger);
+        } else if (level == 3) {
+            final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.YouCtrl+IsRingbearer| ValidBlocker$ Creature | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
+            final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
+            final String sacBlockerEffect = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI | Sacrifice$ True";
+
+            final Trigger becomesBlockedTrigger = TriggerHandler.parseTrigger(becomesBlockedTrig, getTheRing(), true);
+
+            SpellAbility endCombatExecute = AbilityFactory.getAbility(endOfCombatTrig, getTheRing());
+            AbilitySub sacExecute = (AbilitySub) AbilityFactory.getAbility(sacBlockerEffect, getTheRing());
+
+            endCombatExecute.setAdditionalAbility("Execute", sacExecute);
+            becomesBlockedTrigger.setOverridingAbility(endCombatExecute);
+            getTheRing().addTrigger(becomesBlockedTrigger);
+        } else if (level == 4) {
+            final String damageTrig = "Mode$ DamageDone | ValidSource$ Card.YouCtrl+IsRingbearer | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
+            final String loseEffect = "DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3";
+
+            final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, getTheRing(), true);
+            SpellAbility loseExecute = AbilityFactory.getAbility(loseEffect, getTheRing());
+
+            damageTrigger.setOverridingAbility(loseExecute);
+            getTheRing().addTrigger(damageTrigger);
+        }
+        getTheRing().updateStateForView();
+    }
     public void changeOwnership(Card card) {
         // If lost then gained, just clear out of lost.
         // If gained then lost, just clear out of gained.

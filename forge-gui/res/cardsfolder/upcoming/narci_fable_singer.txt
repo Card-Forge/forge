@@ -1,0 +1,14 @@
+Name:Narci, Fable Singer
+ManaCost:1 W B G
+Types:Legendary Creature Human Bard
+PT:3/3
+K:Lifelink
+T:Mode$ Sacrificed | ValidCard$ Enchantment.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an enchantment, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ AbilityResolves | ValidSource$ Saga.YouCtrl | ValidSpellAbility$ Triggered.LastChapter | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever the final chapter ability of a Saga you control resolves, each opponent loses X life and you gain X life, where X is that Saga's mana value.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredSpellAbility$CardManaCost
+DeckHas:Ability$LifeGain
+DeckHints:Type$Enchantment|Saga & Ability$Sacrifice
+Oracle:Lifelink\nWhenever you sacrifice an enchantment, draw a card.\nWhenever the final chapter ability of a Saga you control resolves, each opponent loses X life and you gain X life, where X is that Saga's mana value.

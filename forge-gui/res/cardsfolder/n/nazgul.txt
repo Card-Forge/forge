@@ -1,0 +1,13 @@
+Name:Nazgul
+ManaCost:2 B
+Types:Creature Wraith Knight
+PT:1/2
+K:Deathtouch
+K:DeckLimit:9:A deck can have up to nine cards named CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ RingTemptsYou | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever the Ring tempts you, put a +1/+1 counter on each Wraith you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.Wraith+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckNeeds:Name$Nazgul
+DeckHas:Ability$Token
+Oracle:Deathtouch\nWhen Nazgul enters the battlefield, the Ring tempts you.\nWhenever the Ring tempts you, put a +1/+1 counter on each Wraith you control.\nA deck can have up to nine cards named Nazgul.

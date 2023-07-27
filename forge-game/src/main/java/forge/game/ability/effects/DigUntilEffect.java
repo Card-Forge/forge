@@ -20,12 +20,13 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
-         * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-         */
+     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -33,18 +34,19 @@ public class DigUntilEffect extends SpellAbilityEffect {
         String desc = sa.getParamOrDefault("ValidDescription", "Card");
 
         int untilAmount = 1;
+        boolean isNumeric = true;
         if (sa.hasParam("Amount")) {
+            isNumeric = StringUtils.isNumeric(sa.getParam("Amount"));
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        for (final Player pl : getTargetPlayers(sa)) {
-            sb.append(pl).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :
                 "reveals cards from their library until revealing ");
-        sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card"));
+        String noun = "Card".equals(desc) ? " card" : desc + " card";
+        sb.append(isNumeric ? Lang.nounWithNumeralExceptOne(untilAmount, noun) : "X " + noun);
         if (untilAmount != 1) {
             sb.append("s");
         }
@@ -59,11 +61,17 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
             final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
             if (found != null) {
-                sb.append(untilAmount > 1 ? "those cards" : "that card");
+                sb.append(untilAmount > 1 || !isNumeric ? "those cards" : "that card");
                 sb.append(" ");
 
                 if (ZoneType.Hand.equals(found)) {
                     sb.append("into their hand ");
+                }
+
+                if (ZoneType.Battlefield.equals(found)) {
+                    sb.append("onto the battlefield ");
+                    if (sa.hasParam("Tapped"))
+                        sb.append("tapped ");
                 }
 
                 if (ZoneType.Graveyard.equals(revealed)) {
@@ -71,6 +79,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
                 if (ZoneType.Exile.equals(revealed)) {
                     sb.append("and exile all other cards revealed this way.");
+                }
+                if (ZoneType.Library.equals(revealed)) {
+                    int revealedLibPos = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RevealedLibraryPosition"), sa);
+                    sb.append("and the rest on ").append(revealedLibPos < 0 ? "the bottom " : "on top ");
+                    sb.append("of their library").append(sa.hasParam("RevealRandomOrder") ? " in a random order." : ".");
                 }
             } else if (revealed != null) {
                 if (ZoneType.Hand.equals(revealed)) {

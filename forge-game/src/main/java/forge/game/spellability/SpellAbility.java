@@ -39,7 +39,6 @@ import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.IIdentifiable;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -69,7 +68,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
-import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -1151,11 +1149,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable = new CardZoneTable(changeZoneTable);
             }
 
-            clone.payingMana = Lists.newArrayList();
-            // mana is not copied
-            if (lki) {
-                clone.payingMana.addAll(payingMana);
-            }
+            clone.payingMana = Lists.newArrayList(payingMana);
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(getPaidHash());
 
@@ -2159,19 +2153,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    public void checkActivationResolveSubs() {
-        if (hasParam("ActivationNumberSacrifice")) {
-            String comp = getParam("ActivationNumberSacrifice");
-            int right = Integer.parseInt(comp.substring(2));
-            int activationNum =  getActivationsThisTurn();
-            if (Expressions.compare(activationNum, comp, right)) {
-                SpellAbility deltrig = AbilityFactory.getAbility(hostCard.getSVar(getParam("ActivationResolveSub")), hostCard);
-                deltrig.setActivatingPlayer(activatingPlayer);
-                AbilityUtils.resolve(deltrig);
-            }
-        }
-    }
-
     public int getTotalManaSpent() {
         return this.getPayingMana().size();
     }
@@ -2380,7 +2361,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getOriginalAbility() {
-        return grantorOriginal;
+        return grantorOriginal == null ? null : ObjectUtils.firstNonNull(grantorOriginal.getOriginalAbility(), grantorOriginal);
     }
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;

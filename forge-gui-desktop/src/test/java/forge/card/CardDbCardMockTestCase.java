@@ -1946,11 +1946,11 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         if (legacyMilitantAngel != null)
             assertEquals(militantAngel, legacyMilitantAngel);
 
-        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        // Loyal Unicorn: Available in Forge in Commander Masters, The List and COMMANDER 2018
         String cnLoyalUnicorn = "Loyal Unicorn";
         PaperCard loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
-        assertEquals(loyalUnicorn.getEdition(), "PLIST"); // The List
+        assertEquals(loyalUnicorn.getEdition(), "CMM"); // Commander Masters
 
         PaperCard legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.Latest);

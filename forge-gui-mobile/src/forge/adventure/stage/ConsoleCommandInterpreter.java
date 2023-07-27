@@ -208,6 +208,15 @@ public class ConsoleCommandInterpreter {
             Current.player().addCard(card);
             return "Added card: " + s[0];
         });
+        registerCommand(new String[]{"give", "nosell", "card"}, s -> {
+            //TODO: Specify optional amount.
+            if (s.length < 1) return "Command needs 1 parameter: Card name.";
+            PaperCard card = StaticData.instance().getCommonCards().getCard(s[0]);
+            if (card == null) return "Cannot find card: " + s[0];
+            Current.player().addCard(card);
+            Current.player().noSellCards.add(card);
+            return "Added card: " + s[0];
+        });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";
             if (Current.player().addItem(s[0])) return "Added item " + s[0] + ".";

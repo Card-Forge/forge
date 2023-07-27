@@ -53,7 +53,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.56.001";
+    public static final String CURRENT_VERSION = "1.6.58.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;

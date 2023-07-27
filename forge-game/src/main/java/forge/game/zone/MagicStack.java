@@ -133,12 +133,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void addAndUnfreeze(final SpellAbility ability) {
         final Card source = ability.getHostCard();
 
-        if (!ability.isCopied() && ability.isAbility()) {
-            // Copied abilities aren't activated, so they shouldn't change these values
-            source.addAbilityActivated(ability);
-            ability.checkActivationResolveSubs();
-        }
-
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell() && !source.isCopiedSpell()) {
@@ -224,7 +218,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return Iterables.filter(undoStack, CardTraitPredicates.isHostCard(c));
     }
 
-    public final void add(final SpellAbility sp) {
+    public final void add(SpellAbility sp) {
         SpellAbilityStackInstance si = null;
         final Card source = sp.getHostCard();
         Player activator = sp.getActivatingPlayer();
@@ -249,16 +243,25 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            if (!sp.isCopied()) {
+                // Copied abilities aren't activated, so they shouldn't change these values
+                source.addAbilityActivated(sp);
+            }
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
             runParams.put(AbilityKey.Activator, activator);
-            runParams.put(AbilityKey.CastSA, sp);
+            runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
             if (sp.isActivatedAbility()) {
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
             AbilityUtils.resolve(sp);
+
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(source);
+            runParams2.put(AbilityKey.SpellAbility, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams2, false);
+
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
             return;
@@ -306,6 +309,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
+        if (sp.isActivatedAbility() && !sp.isCopied()) {
+            // if not already copied use a fresh instance
+            SpellAbility original = sp;
+            sp = sp.copy();
+            sp.setOriginalAbility(original);
+        }
+
+        if (sp.isAbility()) {
+            source.addAbilityActivated(sp);
+        }
+
         if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
             AbilityUtils.resolve(sp);
             // AbilityStatic should do nothing below
@@ -330,7 +344,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-        runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
+        runParams.put(AbilityKey.SpellAbility, si.getSpellAbility(true));
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 

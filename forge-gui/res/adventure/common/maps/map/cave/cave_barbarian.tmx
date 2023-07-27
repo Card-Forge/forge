@@ -38,7 +38,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="176" y="273.333" width="48" height="16"/>
   <object id="54" template="../../obj/gold.tx" x="231.369" y="44.4817"/>
   <object id="55" template="../../obj/gold.tx" x="337.35" y="46.1496"/>
-  <object id="57" template="../../obj/enemy.tx" x="230.741" y="65.3207">
+  <object id="57" template="../../obj/enemy.tx" x="233.388" y="60.8212">
    <properties>
     <property name="enemy" value="Barbarian"/>
     <property name="threatRange" type="int" value="60"/>
@@ -57,7 +57,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="61" template="../../obj/booster.tx" x="262.762" y="47.0522">
+  <object id="61" template="../../obj/booster.tx" x="263.027" y="45.7288">
    <properties>
     <property name="reward">[
   {
@@ -82,7 +82,7 @@
 </property>
    </properties>
   </object>
-  <object id="62" template="../../obj/treasure.tx" x="200.034" y="46.7876"/>
+  <object id="62" template="../../obj/treasure.tx" x="245.823" y="45.9936"/>
   <object id="63" template="../../obj/enemy.tx" x="201.357" y="186.536">
    <properties>
     <property name="enemy" value="Cave Spider"/>

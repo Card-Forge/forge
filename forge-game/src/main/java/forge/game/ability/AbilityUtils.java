@@ -1,26 +1,8 @@
 package forge.game.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.google.common.collect.*;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
-
+import com.google.common.collect.*;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -29,21 +11,9 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
-import forge.game.CardTraitBase;
-import forge.game.Direction;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -54,15 +24,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.LandAbility;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -74,6 +36,14 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class AbilityUtils {
@@ -165,15 +135,10 @@ public class AbilityUtils {
                 if (defined.startsWith("TopThird")) {
                     int third = defined.contains("RoundedDown") ? (int) Math.floor(libSize / 3.0)
                             : (int) Math.ceil(libSize / 3.0);
-                    for (int i = 0; i < third; i++) {
-                        cards.add(lib.get(i));
-                    }
+                    cards = player.getTopXCardsFromLibrary(third);
                 } else if (defined.startsWith("Top_")) {
                     String[] parts = defined.split("_");
-                    int amt = AbilityUtils.calculateAmount(hostCard, parts[1], sa);
-                    for (int i = 0; i < amt; i++) {
-                        cards.add(lib.get(i));
-                    }
+                    cards = player.getTopXCardsFromLibrary(AbilityUtils.calculateAmount(hostCard, parts[1], sa));
                 } else {
                     c = lib.get(defined.startsWith("Top") ? 0 : libSize - 1);
                 }
@@ -1831,7 +1796,17 @@ public class AbilityUtils {
                     }
                     return count;
                 }
-
+                // Count$ManaProduced
+                if (sq[0].startsWith("AmountManaProduced")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    int amount = 0;
+                    if (root != null) {
+                        for (AbilityManaPart amp : root.getAllManaParts()) {
+                            amount = amount + amp.getLastManaProduced().size();
+                        }
+                    }
+                    return doXMath(amount, expr, c, ctb);
+                }
                 // Count$ManaColorsPaid
                 if (sq[0].equals("ManaColorsPaid")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -3505,6 +3480,10 @@ public class AbilityUtils {
 
         if (value.equals("DungeonsCompleted")) {
             return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
+        }
+
+        if (value.equals("RingTemptedYou")) {
+            return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
         }
         if (value.startsWith("DungeonCompletedNamed")) {
             String [] full = value.split("_");

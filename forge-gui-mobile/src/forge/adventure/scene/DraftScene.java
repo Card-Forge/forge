@@ -40,7 +40,7 @@ public class DraftScene extends ForgeScene {
     @Override
     public FScreen getScreen() {
         if (screen==null){
-            screen = new AdventureDeckEditor(false, currentEvent);
+            screen = new AdventureDeckEditor(currentEvent);
         }
         return screen;
     }

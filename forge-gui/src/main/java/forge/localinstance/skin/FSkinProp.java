@@ -489,6 +489,7 @@ public enum FSkinProp {
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
     IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_RINGBEARER (new int[] {410, 822, 80, 80}, PropType.MANAICONS),
     //TOXIC
     IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
     //Ability Icons

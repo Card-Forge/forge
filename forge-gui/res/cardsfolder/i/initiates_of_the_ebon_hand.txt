@@ -2,7 +2,7 @@ Name:Initiates of the Ebon Hand
 ManaCost:B
 Types:Creature Cleric
 PT:1/1
-A:AB$ Mana | Cost$ 1 | Produced$ B | ActivationNumberSacrifice$ GE4 | ActivationResolveSub$ DBPump | SpellDescription$ Add {B}. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Self | AtEOT$ Sacrifice
+A:AB$ Mana | Cost$ 1 | Produced$ B | SubAbility$ DBPump | SpellDescription$ Add {B}. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | Defined$ Self | AtEOT$ Sacrifice | ConditionActivationLimit$ GE4
 AI:RemoveDeck:All
 Oracle:{1}: Add {B}. If this ability has been activated four or more times this turn, sacrifice Initiates of the Ebon Hand at the beginning of the next end step.

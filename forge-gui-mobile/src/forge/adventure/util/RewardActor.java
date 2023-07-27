@@ -346,7 +346,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
 
                 setItemTooltips(item, backSprite, isBooster);
-                processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, -10, isBooster);
+                if (isBooster)
+                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, -10, isBooster);
+                else
+                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }

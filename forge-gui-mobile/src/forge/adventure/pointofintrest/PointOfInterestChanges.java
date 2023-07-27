@@ -117,23 +117,22 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     public float getShopPriceModifier(int objectID){
-        if (!shopModifiers.containsKey(objectID))
-        {
-            return -1.0f;
-        }
-        return shopModifiers.get(objectID);
+        int shopRep = reputation.getOrDefault(objectID, 0);
+
+        shopRep = Integer.min(maxRepToApply, (Integer.max(-maxRepToApply, shopRep)));
+
+        return 1.0f + (shopRep * priceModifierPerRep);
     }
 
-    public void setShopModifier(int objectID, float mod){
-        if (objectID!= 0) shopModifiers.put(objectID, mod);
-    }
+    int maxRepToApply = 20;
+    float priceModifierPerRep = 0.005f;
 
     public float getTownPriceModifier(){
-        if (!shopModifiers.containsKey(0))
-        {
-            return -1.0f;
-        }
-        return shopModifiers.get(0);
+        int townRep = reputation.getOrDefault(0, 0);
+
+        townRep = Integer.min(maxRepToApply, (Integer.max(-maxRepToApply, townRep)));
+
+        return 1.0f - Math.round((priceModifierPerRep * townRep) * 1000)/1000f;
     }
 
     public void addMapReputation(int delta)

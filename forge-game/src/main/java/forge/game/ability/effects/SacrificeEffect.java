@@ -68,7 +68,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             int n = card.getCounters(CounterEnumType.AGE);
             if (n > 0) {
                 Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
-                payCost.mergeTo(cumCost, n);
+                payCost.mergeTo(cumCost, n, sa);
             }
 
             game.updateLastStateForCard(card);
@@ -160,9 +160,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (choosenToSacrifice.size() > 1) {
-                    choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
-                }
+                choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {

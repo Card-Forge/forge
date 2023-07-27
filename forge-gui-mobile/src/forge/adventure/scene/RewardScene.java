@@ -282,10 +282,10 @@ public class RewardScene extends UIScene {
         loadRewards(ret, RewardScene.Type.Shop,shopActor);
     }
 
-    public void loadRewards(Deck deck, Type type, ShopActor shopActor){
+    public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell){
         Array<Reward> rewards = new Array<>();
         for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList()){
-            rewards.add(new Reward(card));
+            rewards.add(new Reward(card, noSell));
         }
         loadRewards(rewards, type, shopActor);
     }

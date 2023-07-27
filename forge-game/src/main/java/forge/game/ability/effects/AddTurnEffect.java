@@ -51,7 +51,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
                     SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraTurnDelayedTriggerExcute")), sa.getHostCard());
                     overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
                     delTrig.setOverridingAbility(overridingSA);
-                    delTrig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
+                    delTrig.setSpawningAbility(sa.copy(sa.getHostCard(), true));
                     extra.addTrigger(delTrig);
                 }
                 if (sa.hasParam("SkipUntap")) {

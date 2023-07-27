@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="58">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1tsJgDAMBdD8SusEres4hO6iewndTYMUfFTUVsHYeyAfgkIuiaVEAAAAAADf05ZEg56rKdfPZ8XvS+OmvjtF1Kv73xr9fD9vsHpfVUTvUvLGZAvJIW9dzMWk5HWZzbdNPFf5fOOSktfvs43s1++03+uv47xmcTbHkjbfVH/PawJ3LAlS8kp0dB/e/stW6DyvCuX9sxzzbgsAACBnI8jCIVI=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztzzEJAAAIADBfsaBVbG8MEXYswCYjBgB4oeuGr6+vr6+vr6+vr6+vr68vAMC9BRBNzlw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJy1WUtuE0EQHaH4Nyh7pJiEBUHsAgeAo7BiF7LNbhLL10B8lnAMFAQrwxEMCdfg0x3Pk988V3X3mKSkkmK7P/XqX52qWtNyXFU/Av8cr/4+qFf8IPDZpMuzSbVBe2Hdr/Hm2jejqno76n53GdbdrzfPSJ3D+y4GVfUw8Ptw7uvA1che790V8QHXvoOxVNarcVreae3v986J+67k3osW7+/hpj69PbAj8P0d2rqCnCWyQt5pnZa3hIDb2xcxfx6s7lL9WHsgF9ay7wFj/P7c8N9SeVM6Wrbxc1OEWLDizVurttgrtGkJaY6IfhXjpw/mnI48eZfGnpvAlpIHOtUckfIfzp2IvT7+xjG7DWG/4sLneUb+pkf+i3Qv/HY66XKJT2huutwibjiPwxdZ7/u176N6P5jXqi2BNebRO6MVx3x6WuATek+M6YOesTM3aoyX0xWLV1dhX0tG8LtRt/Z4eJEftN7gDpWJ6TDk+cctPxr4Mms/cTm28x72I+fz78CqZ+OsZ4Gfj9dYU/WGz4BswGjZAYQe5kvgr4NNG0MWy1aNo/+jnap6umPLGffp2fEM9inEb6recJ1h+c4TvqeYP4mNpyKf9pmcsyLGJy3Xwb/uDtefwdABnw0dNNSvAEdJf4Yz4E+zTLwx5pfDVR/DNN/t+g/LgfuOWozfdtIcdWDZXXVn1UvkuJKarPFW2i/qWd6+RQZnCnPUJ3R67Uu7m+dr348+xsOuvlNKqTPVf0vxAjP7d6RDiiUljSeuh2pzq7/C9zoXKrZ5G6uKu9R/Lf4Y9r0arPiE8GEmKMHr9THwA4sa0ZWVHxr6nXNlH/9V/u7EL+tfKVfTGevZZP2Zz7J8RO/invCc7Hwc7PBhS/ty/HKspmYeq0dR+zAefOZY5/3IZXpXI2f3zcd9bQx/KrGv2ofX8GedWRSLdY/2FIs2DvvYGHEb9yhe7bk9n54Kbg8zzmSc6DlzM7OVsxatjUr8GjiRmxZGTdJZKjUXKW4Ls+X/6DlL8MInYOdjkj+FOWI9kZx7TLlZ+34w/DDXW1wZvXskK9ahH2Dw8iPHhTebWfnawgq/xT1qV7AXR6Wk56E/t2Y01St+S/WzsBni08IK3cEX4TPWnJmar/vihdzar+qMoTKW9mWI7RQxbp0zMfNDB1YPFcl6d8E6xjIjjDqzYjbZVq99SfV82uYVzMBerY3E9lIf1L4hRXPn/Nsizju5HioS1679upvvgA0YSt/8vXfO27Y5/NyrN5xn+A0Hb+u5t2XGgHcdnVG4ZrBvpPpd3d/3/Qwy69zP/q9vOEzenNWQ/jDvvxh213MtQ+5gHyqpk8gJB2Kr0vldv8v1Wdacxb7BPYfOZRxXWjtK/1+0J/6J+PufPFEy73jrvZyv8mrt6NMPWL1FrrdL+QDeu3L/O/Pew1O69t6M+9Qt6Izrq7df+0zLHvpW52H13rpTsnN+z81lKZq3eebPcP3/a2u/N9+X3vUPUkWMEw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="60" height="34">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVWe1NAkEQXSHx+GMd/CHBrwKM9YgVEFC0A0uwniM2QBVagExwknWZXeZj5+54CeEg7PLevvniCMEH6yunjZl4rfj9qZZ3xd4vhTUbA9ca54zfz9Wl4VvTj5SHxo8YOW8svpyC595SvBm4UGu5MWn1rQRJvFE8avij2WMpWIP7e8VSzRpeqn8cUHE2pBwq4Vx4puDkkKV2cOFZJwAevamEvmcjKbo+nxRQOx5GIXxe6B6Po275WnICY2Nn4KxZu87MUhIt0jyNPV2N6c98T0P4mZb3sZxVl+DwnDd19ukbkLMcnm2k924Wwv3s+LoPvdS8cqqPxzxzWmK988y1RG/t2UKSwzHPnJZY73Z//XF5eDxP6H28YellMc+nPf/b5vi6zWgHYBwMIX85cYM8kTfoRP++Er3XzX9PARgHFr0UT+tviRyQJ1WD20QvnsUNEdMcvV4zrWS2RJ6oBWIYfITnVC8CXqezWK53a+E1H6e+gG7wDJ4Xk4OXiyjG0VNrvqKerufo5bg8E1NeSvxcKfVIe1Z8btq82f3p9a69Wn4eMZ/m7jlB8xvKolebm5J7cLX7VkmvV4/kgJvfuc/l3o/nrFoY+r05SUxvKtTJWuDkE1XzKL0aj9I11vuU0Os8zjSO6SHHIsWN8o/zX4q0Tpd6Y4065z2XpXq7nAN/AUrmh4Y=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1DsKgDAURNFpLax1B2mCKxQC6h51OVYWIhib+Bi4p0o57xcJAADAx9xHJwD+tSfpSNEp2li455shS2N+vh291TJ1MZkQy3WnW+Te+PtC0Pe6Ytyja76rcQ0AAADAVyfiRAlG
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="416" y="406" width="48" height="16"/>
+  <object id="48" template="../../obj/treasure.tx" x="362.5" y="205.25"/>
+  <object id="49" template="../../obj/gold.tx" x="581.5" y="281"/>
+  <object id="50" template="../../obj/gold.tx" x="314" y="315"/>
+  <object id="51" template="../../obj/enemy.tx" x="317" y="331">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="319.667" y="300.667">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="382.917" y="201.833">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="548.333" y="276.667">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="579.333" y="238.333">
+   <properties>
+    <property name="enemy" value="Big Zombie"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="432.333" y="352.333">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="464.5" y="293">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

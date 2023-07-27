@@ -27,7 +27,6 @@ public enum AbilityKey {
     Blocker("Blocker"),
     Blockers("Blockers"),
     CanReveal("CanReveal"),
-    CastSA("CastSA"),
     Card("Card"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
