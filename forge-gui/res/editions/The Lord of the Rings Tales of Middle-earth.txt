@@ -291,6 +291,8 @@ ScryfallCode=LTR
 279 L Mountain @Deven Rue
 280 L Forest @Deven Rue
 281 L Forest @Deven Rue
+
+[alternate art]
 332 U Nazgul @Wonchun Choi
 333 U Nazgul @Chris Cold
 334 U Nazgul @Nino Is
