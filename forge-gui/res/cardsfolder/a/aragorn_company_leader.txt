@@ -1,5 +1,5 @@
 Name:Aragorn, Company Leader
-ManaCost:1 G U
+ManaCost:1 G W
 Types:Legendary Creature Human Ranger
 PT:3/3
 T:Mode$ RingTemptsYou | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever the Ring tempts you, if you chose a creature other than CARDNAME as your Ring-bearer, put your choice of a counter from among first strike, vigilance, deathtouch, and lifelink on NICKNAME.
