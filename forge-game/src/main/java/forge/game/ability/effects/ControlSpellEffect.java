@@ -59,7 +59,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
 
         for (SpellAbility spell : tgtSpells) {
             Card tgtC = spell.getHostCard();
-            SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
+            SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
             long tStamp = game.getNextTimestamp();
             if (exchange) {
                 // Currently the only Exchange Control for Spells is a Permanent Trigger

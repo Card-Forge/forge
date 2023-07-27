@@ -29,7 +29,7 @@ public class ChangeXEffect extends SpellAbilityEffect {
                 castSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
             }
             // fall back to other potential cards
-            SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
+            SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si != null) {
                 // currently hard coded, no nicer way to get the xManaPaid from that Spell/Card
                 si.setXManaPaid(si.getXManaPaid() * 2);

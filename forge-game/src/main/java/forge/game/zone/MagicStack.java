@@ -54,7 +54,6 @@ import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
@@ -326,9 +325,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        for (OptionalCost s : sp.getOptionalCosts()) {
-            source.addOptionalCostPaid(s);
-        }
         // The ability is added to stack HERE
         si = push(sp);
 
@@ -572,7 +568,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
-        final SpellAbilityStackInstance si = getInstanceFromSpellAbility(sa);
+        final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
 
         // remove SA and card from the stack
         removeCardFromStack(sa, si, fizzle);
@@ -659,7 +655,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                         invalidTarget = invalidTarget || !sa.canTarget(card);
                     } else if (o instanceof SpellAbility) {
-                        SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
+                        SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
                         invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
                     } else {
                         invalidTarget = !sa.canTarget(o);
@@ -740,16 +736,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
             }
         }
-    }
-
-    public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
-        // TODO: Confirm this works!
-        for (final SpellAbilityStackInstance si : stack) {
-            if (si.compareToSpellAbility(sa)) {
-                return si;
-            }
-        }
-        return null;
     }
 
     public final SpellAbilityStackInstance getInstanceMatchingSpellAbilityID(final SpellAbility sa) {
