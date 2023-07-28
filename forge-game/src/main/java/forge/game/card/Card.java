@@ -4359,7 +4359,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setIntensity(final int n) { intensity = n; }
     public final boolean hasIntensity() {
-            return intensity > 0;
+        return intensity > 0;
     }
 
     private int multiKickerMagnitude = 0;
@@ -6809,12 +6809,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    // Optional costs paid
-    private final EnumSet<OptionalCost> costsPaid = EnumSet.noneOf(OptionalCost.class);
-    public void clearOptionalCostsPaid() { costsPaid.clear(); }
-    public void addOptionalCostPaid(OptionalCost cost) { costsPaid.add(cost); }
-    public Iterable<OptionalCost> getOptionalCostsPaid() { return costsPaid; }
-    public boolean isOptionalCostPaid(OptionalCost cost) { return costsPaid.contains(cost); }
+    public boolean isOptionalCostPaid(OptionalCost cost) { return getCastSA() == null ? false : getCastSA().isOptionalCostPaid(cost); }
 
     @Override
     public Game getGame() {

@@ -1424,7 +1424,7 @@ public class PlayerControllerAi extends PlayerController {
                 SpellAbility kickedSaCopy = fullCostSa.copy();
                 kickedSaCopy.addOptionalCost(opt.getType());
                 Card copy = CardUtil.getLKICopy(chosen.getHostCard());
-                copy.addOptionalCostPaid(opt.getType());
+                copy.setCastSA(kickedSaCopy);
                 if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
                     continue; // don't choose kickers we don't want to play
                 }

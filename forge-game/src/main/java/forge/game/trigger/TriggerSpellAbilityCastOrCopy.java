@@ -80,7 +80,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         }
         final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
-        final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+        final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(spellAbility);
 
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
@@ -263,7 +263,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-        final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
+        final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceMatchingSpellAbilityID(castSA);
         final SpellAbility saForTargets = si != null ? si.getSpellAbility(true) : castSA;
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);

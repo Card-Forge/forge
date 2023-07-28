@@ -717,7 +717,7 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        SpellAbilityStackInstance castSA = game.getStack().getInstanceFromSpellAbility((SpellAbility) spellAbility);
+                        SpellAbilityStackInstance castSA = game.getStack().getInstanceMatchingSpellAbilityID((SpellAbility) spellAbility);
                         if (castSA == null) {
                             return false;
                         }

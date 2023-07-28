@@ -315,29 +315,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return null;
     }
 
-    public boolean compareToSpellAbility(SpellAbility sa) {
-        // Compare my target choices to the SA passed in
-        // TODO? Compare other data points in the SI to the passed SpellAbility for confirmation
-        SpellAbility compare = sa;
-        SpellAbilityStackInstance sub = this;
-
-        if (!compare.equals(sub.ability)) {
-            return false;
-        }
-
-        while (compare != null && sub != null) {
-            TargetChoices choices = compare.usesTargeting() ? compare.getTargets() : null;
-
-            if (choices != null && !choices.equals(sub.getTargetChoices())) {
-                return false;
-            }
-            compare = compare.getSubAbility();
-            sub = sub.getSubInstance();
-        }
-
-        return true;
-    }
-
     public Player getActivatingPlayer() {
         return activatingPlayer;
     }

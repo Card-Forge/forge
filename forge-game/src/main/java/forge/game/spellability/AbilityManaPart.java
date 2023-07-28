@@ -424,7 +424,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
-            if (getSourceCard().getGame().getStack().getInstanceFromSpellAbility(sa.getRootAbility()) != null) {
+            if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
                 return false;
             }
 

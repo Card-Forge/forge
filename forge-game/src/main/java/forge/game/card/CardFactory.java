@@ -155,9 +155,6 @@ public class CardFactory {
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         copy.setKickerMagnitude(original.getKickerMagnitude());
 
-        for (OptionalCost cost : original.getOptionalCostsPaid()) {
-            copy.addOptionalCostPaid(cost);
-        }
         if (targetSA.isBestow()) {
             copy.animateBestow();
         }

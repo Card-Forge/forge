@@ -1330,7 +1330,7 @@ public class AbilityUtils {
             final List<TargetChoices> targets = defined.startsWith("This") ? Arrays.asList(((SpellAbility)sa).getTargets()) : ((SpellAbility)sa).getAllTargetChoices();
             for (TargetChoices tc : targets) {
                 for (SpellAbility targetSpell : tc.getTargetSpells()) {
-                    SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
+                    SpellAbilityStackInstance stackInstance = game.getStack().getInstanceMatchingSpellAbilityID(targetSpell);
                     if (stackInstance != null) {
                         SpellAbility instanceSA = stackInstance.getSpellAbility(true);
                         if (instanceSA != null) {

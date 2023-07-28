@@ -38,7 +38,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -338,10 +337,6 @@ public final class CardUtil {
         }
 
         newCopy.setKickerMagnitude(in.getKickerMagnitude());
-
-        for (OptionalCost ocost : in.getOptionalCostsPaid()) {
-            newCopy.addOptionalCostPaid(ocost);
-        }
 
         if (in.getCastSA() != null) {
             SpellAbility castSA = in.getCastSA().copy(newCopy, true);

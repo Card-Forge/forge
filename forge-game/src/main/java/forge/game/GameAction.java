@@ -701,7 +701,6 @@ public class GameAction {
                 || zoneTo.is(ZoneType.Hand)
                 || zoneTo.is(ZoneType.Library)
                 || zoneTo.is(ZoneType.Exile)) {
-            copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.setState(CardStateName.Original, true);
             }
