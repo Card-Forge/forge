@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.ShopActor;
 import forge.adventure.data.RewardData;
@@ -24,13 +25,15 @@ import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.ItemPool;
 
 /**
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
-    private TextraLabel shopNameLabel, playerGold, playerShards;
+    private TextraLabel playerGold, playerShards;
+    private TypingLabel shopNameLabel;
 
     private ShopActor shopActor;
     private static RewardScene object;
@@ -55,6 +58,7 @@ public class RewardScene extends UIScene {
     static public final float CARD_WIDTH = 550f ;
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
+    ItemPool<PaperCard> collectionPool = null;
 
     private RewardScene() {
 
@@ -134,6 +138,10 @@ public class RewardScene extends UIScene {
         //save RAM
         ImageCache.unloadCardTextures(true);
         Forge.restrictAdvMenus = false;
+        if (this.collectionPool != null) {
+            this.collectionPool.clear();
+            this.collectionPool = null;
+        }
         Forge.switchToLast();
     }
     public void reactivateInputs() {
@@ -297,6 +305,10 @@ public class RewardScene extends UIScene {
         if (type==Type.Shop) {
             this.shopActor = shopActor;
             this.changes = shopActor.getMapStage().getChanges();
+            if (this.collectionPool == null) {
+                this.collectionPool = new ItemPool<>(PaperCard.class);
+                this.collectionPool.addAllFlat(AdventurePlayer.current().getCollectionCards(true).toFlatList());
+            }
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
@@ -311,7 +323,8 @@ public class RewardScene extends UIScene {
             String shopName = shopActor.getDescription();
             if (shopName != null && !shopName.isEmpty()) {
                 shopNameLabel.setVisible(true);
-                shopNameLabel.setText(shopName);
+                shopNameLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
+                shopNameLabel.skipToTheEnd();
             }
             else
             {
@@ -348,7 +361,8 @@ public class RewardScene extends UIScene {
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
                     shopNameLabel.setVisible(true);
-                    shopNameLabel.setText(shopName);
+                    shopNameLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
+                    shopNameLabel.skipToTheEnd();
                 }
 
                 if (shopActor.canRestock()) {
@@ -390,8 +404,8 @@ public class RewardScene extends UIScene {
         int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
         int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
         int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
-        float fW = x > y ? x : y;
-        float fH = x > y ? y : x;
+        float fW = Math.max(x, y);
+        float fH = Math.min(x, y);
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
@@ -456,6 +470,15 @@ public class RewardScene extends UIScene {
                     stage.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
                 }
+                if (this.collectionPool != null && Reward.Type.Card.equals(reward.getType())) {
+                    int count = collectionPool.count(reward.getCard());
+                    String text = buyCardButton.getTextraLabel().storedText;
+                    buyCardButton.setText("[%75]" + text + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + count);
+                } else if (Reward.Type.Item.equals(reward.getType())) {
+                    int count = AdventurePlayer.current().countItem(reward.getItem().name);
+                    String text = buyCardButton.getTextraLabel().storedText;
+                    buyCardButton.setText("[%75]" + text + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + count);
+                }
             } else {
                 addToSelectable(actor);
             }
@@ -501,7 +524,7 @@ public class RewardScene extends UIScene {
             price = CardUtil.getRewardPrice(actor.getReward());
             price *= Current.player().goldModifier();
             price *= shopModifier;
-            setText(price+"[+Gold]");
+            setText(price+" [+Gold]");
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

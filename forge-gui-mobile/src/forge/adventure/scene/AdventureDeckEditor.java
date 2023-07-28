@@ -229,7 +229,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             cardsInUse.addAllFlat(AdventurePlayer.current().getSelectedDeck().getAllCardsInASinglePool().toFlatList());
 
             if (showCollectionCards) {
-                collectionPool.addAllFlat(AdventurePlayer.current().getCollectionCards().toFlatList());
+                collectionPool.addAllFlat(AdventurePlayer.current().getCollectionCards(false).toFlatList());
             }
             if (showNoSellCards) {
                 collectionPool.addAllFlat(AdventurePlayer.current().getNoSellCards().toFlatList());
@@ -1057,7 +1057,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 cardsInUse.addAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
 
                 if (showCollectionCards) {
-                    adventurePool.addAll(AdventurePlayer.current().getCollectionCards());
+                    adventurePool.addAll(AdventurePlayer.current().getCollectionCards(false));
                 }
                 if (showNoSellCards) {
                     adventurePool.addAll(AdventurePlayer.current().getNoSellCards());

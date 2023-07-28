@@ -898,6 +898,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return inventoryItems.contains(name, false);
     }
 
+    public int countItem(String name) {
+        int count = 0;
+        if (!hasItem(name))
+            return count;
+        for (String s : inventoryItems) {
+            if (s.equals(name))
+                count++;
+        }
+        return count;
+    }
+
     public boolean addItem(String name) {
         ItemData item = ItemData.getItem(name);
         if (item == null)
@@ -1102,11 +1113,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
 
 
-    public CardPool getCollectionCards() {
+    public CardPool getCollectionCards(boolean allCards) {
         CardPool collectionCards = new CardPool();
         collectionCards.addAll(cards);
-        collectionCards.removeAll(autoSellCards);
-        collectionCards.removeAll(noSellCards);
+        if (!allCards) {
+            collectionCards.removeAll(autoSellCards);
+            collectionCards.removeAll(noSellCards);
+        }
 
         return collectionCards;
     }
