@@ -5,7 +5,7 @@ PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove NICKNAME from combat. Otherwise, you draw a card and NICKNAME can't be blocked this turn.
 SVar:TrigPeek:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 2 | SubAbility$ DBChoosePlayer
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseType | Type$ Card | ValidTypes$ Land,Nonland | Defined$ You | ShowChoice$ ExceptSelf | SubAbility$ DBChooseBis
+SVar:DBChoose:DB$ ChooseType | Type$ Card | ValidTypes$ Land,Nonland | Defined$ You | SubAbility$ DBChooseBis
 SVar:DBChooseBis:DB$ ChooseType | Defined$ ChosenPlayer | Type$ Card | ValidTypes$ Land,Nonland | SubAbility$ DBReveal
 SVar:DBReveal:DB$ PeekandReveal | PeekAmount$ 1 | RevealValid$ Card.ChosenType | RememberRevealed$ True | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ RemoveCombat | FalseSubAbility$ Draw | SubAbility$ DBCleanup
