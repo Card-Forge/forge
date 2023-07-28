@@ -4,7 +4,7 @@ Types:Legendary Creature Halfling Horror
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove NICKNAME from combat. Otherwise, you draw a card and NICKNAME can't be blocked this turn.
 SVar:TrigPeek:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 2 | SubAbility$ DBChoosePlayer
-SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChoose
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ ChooseLand,ChooseNonland | Defined$ You | ShowChoice$ ExceptSelf
 SVar:ChooseLand:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ GuessLand,GuessNonland | SpellDescription$ Choose land.
 SVar:ChooseNonland:DB$ GenericChoice | Defined$ ChosenPlayer | Choices$ GuessLand,GuessNonland | SpellDescription$ Choose nonland.
