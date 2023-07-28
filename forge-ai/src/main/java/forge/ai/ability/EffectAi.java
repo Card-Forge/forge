@@ -41,7 +41,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -323,14 +322,6 @@ public class EffectAi extends SpellAbilityAi {
                         return false;
                     }
 
-                    // need to get the wrapped sub abilities
-                    if (stackSa.isWrapper()) {
-                        stackSa = ((WrappedAbility)(stackSa)).getWrappedAbility();
-                    }
-                    if (stackSa == null) {
-                        return false;
-                    }
-
                     // regenerate is a replace destroy, meaning either destroyed by effect
                     // or destroyed by state based action, when dying by lethal damage
                     SpellAbility subAbility = stackSa;
@@ -393,7 +384,7 @@ public class EffectAi extends SpellAbilityAi {
                                 }
                             }
 
-                            if (CardUtil.getRadiance(sa).contains(host)) {
+                            if (CardUtil.getRadiance(subAbility).contains(host)) {
                                 return true;
                             }
 
@@ -426,6 +417,52 @@ public class EffectAi extends SpellAbilityAi {
                             list = AbilityUtils.filterListByType(list, valid, subAbility);
                             if (list.contains(host)) {
                                 // TODO check if damage would be lethal
+                                return true;
+                            }
+                        } else if (ApiType.DealDamage == apiType) {
+                            // skip choices
+                            if (subAbility.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) {
+                                continue;
+                            }
+
+                            final List<Card> definedSources = AbilityUtils.getDefinedCards(subAbility.getHostCard(), subAbility.getParam("DamageSource"), subAbility);
+                            if (definedSources == null || definedSources.isEmpty()) {
+                                continue;
+                            }
+
+                            boolean targeting = false;
+                            // simulate getTargetCards
+                            if (subAbility.usesTargeting()) {
+                                // isTargeting checks parents, i think that might be wrong
+                                if (subAbility.getTargets().contains(host)) {
+                                    targeting = true;
+                                }
+                            } else {
+                                if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                                    targeting = true;
+                                }
+                            }
+
+                            for (Card source : definedSources) {
+                                final Card sourceLKI = game.getChangeZoneLKIInfo(source);
+
+                                if (sourceLKI.isWitherDamage()) {
+                                    return false;
+                                }
+
+                                if (subAbility.hasParam("RelativeTarget")) {
+                                    targeting = false;
+                                    if (AbilityUtils.getDefinedEntities(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                                        targeting = true;
+                                    }
+                                }
+                                // TODO predict damage
+                                if (targeting) {
+                                    return true;
+                                }
+                            }
+
+                            if (CardUtil.getRadiance(subAbility).contains(host)) {
                                 return true;
                             }
                         }
