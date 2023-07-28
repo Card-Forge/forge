@@ -1671,7 +1671,7 @@ public class ComputerUtil {
         for (SpellAbilityStackInstance si : game.getStack()) {
             // iterate from top of stack to find SpellAbility, including sub-abilities,
             // that does not match "sa"
-            SpellAbility spell = si.getSpellAbility(true), sub = spell.getSubAbility();
+            SpellAbility spell = si.getSpellAbility(), sub = spell.getSubAbility();
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
@@ -2043,7 +2043,7 @@ public class ComputerUtil {
             // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
             // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
             for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility sa = si.getSpellAbility(false);
+                SpellAbility sa = si.getSpellAbility();
                 if (sa.getApi() == ApiType.Counter) {
                     noStackCheck = true;
                     break;

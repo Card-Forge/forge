@@ -20,7 +20,6 @@ package forge.game.spellability;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.game.GameObject;
@@ -33,7 +32,6 @@ import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 /**
@@ -65,8 +63,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     private String stackDescription = null;
 
-    private final Map<Player, Object> playersWithValidTargets;
-
     private final StackItemView view;
 
     public SpellAbilityStackInstance(final SpellAbility sa) {
@@ -78,26 +74,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
         subInstance = ability.getSubAbility() == null ? null : new SpellAbilityStackInstance(ability.getSubAbility());
 
-        final Card source = ability.getHostCard();
-
         final Map<String, String> sVars = (ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability).getDirectSVars();
         if (ApiType.SetState == sa.getApi() && !sVars.containsKey("StoredTransform")) {
             // Record current state of Transformation if the ability might change state
-            sVars.put("StoredTransform", String.valueOf(source.getTransformedTimestamp()));
-        }
-
-        //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
-        TargetChoices tc = ability.getTargets();
-        if (tc == null) {
-            playersWithValidTargets = null;
-        } else {
-            playersWithValidTargets = Maps.newHashMap();
-            for (Card card : tc.getTargetCards()) {
-                ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
-                if (zoneType != ZoneType.Battlefield) { //don't need to worry about targets on battlefield
-                    playersWithValidTargets.put(card.getController(), null);
-                }
-            }
+            sVars.put("StoredTransform", String.valueOf(ability.getHostCard().getTransformedTimestamp()));
         }
 
         view = new StackItemView(this);
@@ -108,17 +88,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return id;
     }
 
-    //TODO: See if refresh actually needed for most places this is being called
-    //      Perhaps lets move the refresh logic to a separate function called only when necessary
-    public final SpellAbility getSpellAbility(boolean refresh) {
-        if (refresh) {
-            ability.setActivatingPlayer(activatingPlayer);
-
-            // Saved sub-SA needs to be reset on the way out
-            if (subInstance != null) {
-                ability.setSubAbility((AbilitySub) subInstance.getSpellAbility(true));
-            }
-        }
+    public final SpellAbility getSpellAbility() {
         return ability;
     }
 
@@ -157,10 +127,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     public final TargetChoices getTargetChoices() {
         return ability.getTargets();
-    }
-
-    public final Map<Player, Object> getPlayersWithValidTargets() {
-        return playersWithValidTargets;
     }
 
     public void updateTarget(TargetChoices target, Card cause) {

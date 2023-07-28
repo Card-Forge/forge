@@ -201,7 +201,7 @@ public class GameCopier {
 
     private static void copyStack(Game origGame, Game newGame, GameObjectMap map) {
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
-            SpellAbility origSa = origEntry.getSpellAbility(false);
+            SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
             Card newCard = map.map(origHostCard);
             SpellAbility newSa = null;

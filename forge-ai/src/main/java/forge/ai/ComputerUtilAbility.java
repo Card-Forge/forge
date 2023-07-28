@@ -155,13 +155,13 @@ public class ComputerUtilAbility {
             return null;
         }
 
-        SpellAbility tgtSA = it.next().getSpellAbility(true);
+        SpellAbility tgtSA = it.next().getSpellAbility();
         // Grab the topmost spellability that isn't this SA and use that for comparisons
         if (sa.equals(tgtSA) && game.getStack().size() > 1) {
             if (!it.hasNext()) {
                 return null;
             }
-            tgtSA = it.next().getSpellAbility(true);
+            tgtSA = it.next().getSpellAbility();
         }
         return tgtSA;
     }
@@ -206,7 +206,7 @@ public class ComputerUtilAbility {
             }
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility(false);
+            SpellAbility ab = si.getSpellAbility();
             if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
                 for (Card c : cardList) {
                     // TODO: somehow ensure that the detected SA won't be countered

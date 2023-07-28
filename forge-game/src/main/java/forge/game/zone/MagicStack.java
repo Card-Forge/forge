@@ -160,7 +160,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Add all Frozen Abilities onto the stack
         while (!frozenStack.isEmpty()) {
             final SpellAbilityStackInstance si = frozenStack.pop();
-            add(si.getSpellAbility(true), si);
+            add(si.getSpellAbility(), si);
         }
         // Add all waiting triggers onto the stack
         game.getTriggerHandler().resetActiveTriggers();
@@ -342,7 +342,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-        runParams.put(AbilityKey.SpellAbility, si.getSpellAbility(true));
+        runParams.put(AbilityKey.SpellAbility, si.getSpellAbility());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 
@@ -359,7 +359,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     activator.incCommanderCast(source);
                 }
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
-                executeCastCommand(si.getSpellAbility(true).getHostCard());
+                executeCastCommand(si.getSpellAbility().getHostCard());
             }
 
             // Run AbilityCast triggers
@@ -401,7 +401,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams = AbilityKey.newMap();
             SpellAbility s = sp;
             if (si != null) {
-                s = si.getSpellAbility(true);
+                s = si.getSpellAbility();
                 chosenTargets = s.getAllTargetChoices();
             }
             runParams.put(AbilityKey.SourceSA, s);
@@ -657,7 +657,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         invalidTarget = invalidTarget || !sa.canTarget(card);
                     } else if (o instanceof SpellAbility) {
                         SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
-                        invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
+                        invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility());
                     } else {
                         invalidTarget = !sa.canTarget(o);
                     }
@@ -700,14 +700,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final SpellAbility peekAbility() {
-        return stack.peekFirst().getSpellAbility(true);
+        return stack.peekFirst().getSpellAbility();
     }
 
     public final void remove(final SpellAbilityStackInstance si) {
         stack.remove(si);
         frozenStack.remove(si);
         game.updateStackForView();
-        SpellAbility sa = si.getSpellAbility(false);
+        SpellAbility sa = si.getSpellAbility();
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 
@@ -741,7 +741,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final SpellAbilityStackInstance getInstanceMatchingSpellAbilityID(final SpellAbility sa) {
         for (final SpellAbilityStackInstance si : stack) {
-            if (sa.getId() == si.getSpellAbility(false).getId()) {
+            if (sa.getId() == si.getSpellAbility().getId()) {
                 return si;
             }
         }
@@ -750,8 +750,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final SpellAbility getSpellMatchingHost(final Card host) {
         for (final SpellAbilityStackInstance si : stack) {
-            if (si.isSpell() && host.equals(si.getSpellAbility(false).getHostCard())) {
-                return si.getSpellAbility(false);
+            if (si.isSpell() && host.equals(si.getSpellAbility().getHostCard())) {
+                return si.getSpellAbility();
             }
         }
         return null;
@@ -923,7 +923,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         for (SpellAbilityStackInstance si : stack) {
             if (si.isTrigger() && si.getSourceCard().equals(source)) {
-                if (pred == null || pred.apply(si.getSpellAbility(false))) {
+                if (pred == null || pred.apply(si.getSpellAbility())) {
                     return true;
                 }
             }

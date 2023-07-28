@@ -317,7 +317,7 @@ public class CounterAi extends SpellAbilityAi {
         SpellAbilityStackInstance si = null;
         while (it.hasNext()) {
             si = it.next();
-            tgtSA = si.getSpellAbility(true);
+            tgtSA = si.getSpellAbility();
             if (!sa.canTargetSpellAbility(tgtSA)) {
                 continue;
             }

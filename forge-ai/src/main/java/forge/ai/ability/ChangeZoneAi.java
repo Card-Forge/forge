@@ -2090,7 +2090,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (top != null) {
-            SpellAbility topSA = top.getSpellAbility(false);
+            SpellAbility topSA = top.getSpellAbility();
             if (topSA != null) {
                 if (topSA.getPayCosts().hasManaCost()) {
                     manaCost = topSA.getPayCosts().getTotalMana().getCMC();

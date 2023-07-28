@@ -1323,7 +1323,7 @@ public class AbilityUtils {
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
             } else if (o instanceof SpellAbilityStackInstance) {
-                s = ((SpellAbilityStackInstance) o).getSpellAbility(true);
+                s = ((SpellAbilityStackInstance) o).getSpellAbility();
             }
         }
         else if (defined.endsWith("Targeted") && sa instanceof SpellAbility) {
@@ -1332,7 +1332,7 @@ public class AbilityUtils {
                 for (SpellAbility targetSpell : tc.getTargetSpells()) {
                     SpellAbilityStackInstance stackInstance = game.getStack().getInstanceMatchingSpellAbilityID(targetSpell);
                     if (stackInstance != null) {
-                        SpellAbility instanceSA = stackInstance.getSpellAbility(true);
+                        SpellAbility instanceSA = stackInstance.getSpellAbility();
                         if (instanceSA != null) {
                             sas.add(instanceSA);
                         }
@@ -1720,7 +1720,7 @@ public class AbilityUtils {
                             if (castSI == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
-                            return doXMath(castSI.getSpellAbility(false).getXManaCostPaid(), expr, c, ctb);
+                            return doXMath(castSI.getSpellAbility().getXManaCostPaid(), expr, c, ctb);
                         } else if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
