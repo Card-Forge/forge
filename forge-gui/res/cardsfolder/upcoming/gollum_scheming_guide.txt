@@ -14,5 +14,5 @@ SVar:Draw:DB$ Draw | SubAbility$ DBEffect | SpellDescription$ You draw a card an
 SVar:DBEffect:DB$ Effect | StaticAbilities$ Unblockable | Duration$ UntilHostLeavesPlayOrEOT
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ NICKNAME can't be blocked this turn.
 SVar:X:Count$RememberedSize
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | ClearChosenType$ True
 Oracle:Whenever Gollum, Scheming Guide attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove Gollum from combat. Otherwise, you draw a card and Gollum can't be blocked this turn.
