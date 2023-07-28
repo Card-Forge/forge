@@ -504,10 +504,14 @@ public class RewardScene extends UIScene {
         public RewardActor rewardActor;
         private Reward reward;
         int price;
+        boolean isSold;
 
         void update() {
             setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
-            updateOwned();
+            if (isSold)
+                setText("SOLD");
+            else
+                updateOwned();
         }
 
         void updateOwned() {
@@ -552,12 +556,12 @@ public class RewardScene extends UIScene {
 
                         if (changes == null)
                             return;
+                        isSold = true;
                         setDisabled(true);
                         rewardActor.sold();
                         getColor().a = 0.5f;
                         updateCollectionPool();
                         updateBuyButtons();
-                        setText("SOLD");
                         removeListener(this);
                     }
                 }
