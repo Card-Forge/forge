@@ -56,17 +56,20 @@ public class VoteEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
+        final boolean secret = sa.hasParam("Secret");
+        final StringBuilder secretSB = new StringBuilder();
 
         if (sa.hasParam("VoteType")) {
             voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
         } else if (sa.hasParam("VoteCard")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
             voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), activator, host, sa));
+        } else if (sa.hasParam("VotePlayer")) {
+            voteType.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("VotePlayer"), sa));
         }
         if (voteType.isEmpty()) {
             return;
         }
-
 
         // starting with the activator
         int aidx = tgtPlayers.indexOf(activator);
@@ -88,11 +91,23 @@ public class VoteEffect extends SpellAbilityEffect {
             voteAmount += p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyAdditionalVotesDoYouWant"), 0, optionalVotes, params);
 
             for (int i = 0; i < voteAmount; i++) {
-                Object result = realVoter.getController().vote(sa, host + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes, p);
+                Object result = realVoter.getController().vote(sa, host + " " + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes, p);
 
                 votes.put(result, p);
-                host.getGame().getAction().notifyOfValue(sa, p, result + "\r\n" + Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
+                if (!secret) {
+                    game.getAction().notifyOfValue(sa, p, result + "\r\n" +
+                            Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
+                } else {
+                    if (secretSB.length() > 0) {
+                        secretSB.append("\r\n");
+                    }
+                    secretSB.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
+                }
             }
+        }
+
+        if (secret) {
+            game.getAction().notifyOfValue(sa, host, secretSB.toString(), null);
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -140,6 +155,9 @@ public class VoteEffect extends SpellAbilityEffect {
             if (sa.hasParam("VoteSubAbility")) {
                 host.clearRemembered();
             }
+            if (sa.hasParam("RememberVotedObjects")) {
+                host.addRemembered(votes.keySet());
+            }
         }
     }
 
@@ -158,5 +176,4 @@ public class VoteEffect extends SpellAbilityEffect {
         }
         return most;
     }
-
 }
