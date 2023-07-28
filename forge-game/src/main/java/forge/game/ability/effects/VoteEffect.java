@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.event.GameEventRandomLog;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,7 +58,7 @@ public class VoteEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
         final boolean secret = sa.hasParam("Secret");
-        final StringBuilder secretSB = new StringBuilder();
+        final StringBuilder record = new StringBuilder();
 
         if (sa.hasParam("VoteType")) {
             voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
@@ -97,18 +98,20 @@ public class VoteEffect extends SpellAbilityEffect {
                 if (!secret) {
                     game.getAction().notifyOfValue(sa, p, result + "\r\n" +
                             Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
-                } else {
-                    if (secretSB.length() > 0) {
-                        secretSB.append("\r\n");
-                    }
-                    secretSB.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
                 }
+                if (record.length() > 0) {
+                        record.append("\r\n");
+                }
+                record.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
             }
         }
 
+        final String voteResult = record.toString();
         if (secret) {
-            game.getAction().notifyOfValue(sa, host, secretSB.toString(), null);
+            game.getAction().notifyOfValue(sa, host, voteResult, null);
         }
+        game.fireEvent(new GameEventRandomLog(voteResult));
+
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.AllVotes, votes);
