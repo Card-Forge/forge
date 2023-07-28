@@ -67,7 +67,7 @@
       "y": 200
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "shopName",
       "style":"background",
       "text": "Shard Trader",

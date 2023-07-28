@@ -1,7 +1,6 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.util.CardUtil;
@@ -89,28 +88,23 @@ public class RewardData implements Serializable {
         else
             allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
-        allCards = Iterables.filter(allCards,  new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input){
-                if(input == null)
-                    return false;
-                if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
-                   return false;
-                if(input.getRules().getAiHints().getRemNonCommanderDecks())
-                    return false;
-                if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
-                    return false;
-
-                return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
-            }
+        allCards = Iterables.filter(allCards, input -> {
+            if(input == null)
+                return false;
+            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+               return false;
+            if(input.getRules().getAiHints().getRemNonCommanderDecks())
+                return false;
+            if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
+                return false;
+            if(input.getRules().isCustom())
+                return false;
+            return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
-        allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input) {
-                if (input == null) return false;
-                return !input.getRules().getAiHints().getRemAIDecks();
-            }
+        allEnemyCards=Iterables.filter(allCards, input -> {
+            if (input == null) return false;
+            return !input.getRules().getAiHints().getRemAIDecks();
         });
     }
 
