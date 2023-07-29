@@ -2,6 +2,5 @@ Name:Merfolk Thaumaturgist
 ManaCost:2 U
 Types:Creature Merfolk Wizard
 PT:1/2
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME's power and toughness are switched | TgtPrompt$ Select target creature. | SpellDescription$ Switch target creature's power and toughness until end of turn.
-AI:RemoveDeck:All
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | SwitchPT$ True | SpellDescription$ Switch target creature's power and toughness until end of turn.
 Oracle:{T}: Switch target creature's power and toughness until end of turn.

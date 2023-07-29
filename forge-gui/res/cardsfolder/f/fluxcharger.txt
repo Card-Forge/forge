@@ -4,7 +4,6 @@ Types:Creature Weird
 PT:1/5
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangePT | OptionalDecider$ You | TriggerDescription$ Whenever you cast a instant or sorcery spell, you may switch CARDNAME's power and toughness until end of turn.
-SVar:TrigChangePT:DB$ Pump | KW$ HIDDEN CARDNAME's power and toughness are switched | Defined$ Self
-AI:RemoveDeck:All
+SVar:TrigChangePT:DB$ Pump | Defined$ Self | SwitchPT$ True
 DeckHints:Type$Instant|Sorcery
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
