@@ -2,6 +2,7 @@ Name:Furnace Brood
 ManaCost:3 R
 Types:Creature Elemental
 PT:3/3
-A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ Target creature can't be regenerated this turn.
+A:AB$ Effect | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | AILogic$ CantRegenerate | SpellDescription$ Target creature can't be regenerated this turn.
+SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 AI:RemoveDeck:All
 Oracle:{R}: Target creature can't be regenerated this turn.

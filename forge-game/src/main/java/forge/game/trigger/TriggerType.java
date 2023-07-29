@@ -99,8 +99,6 @@ public enum TriggerType {
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
     Proliferate(TriggerProliferate.class),
-    Regenerated(TriggerRegenerated.class),
-    Revealed(TriggerRevealed.class),
     RingTemptsYou(TriggerRingTemptsYou.class),
     RolledDie(TriggerRolledDie.class),
     RolledDieOnce(TriggerRolledDieOnce.class),
