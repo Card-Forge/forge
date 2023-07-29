@@ -1767,18 +1767,11 @@ public class ComputerUtil {
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
         if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = AbilityUtils.calculateAmount(source,
-                    topStack.getParam("NumDmg"), topStack);
+            final int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
-            if (sub != null && sub.getApi() == ApiType.Pump) {
-                final List<String> keywords = sub.hasParam("KW") ? Arrays.asList(sub.getParam("KW").split(" & ")) : new ArrayList<>();
-                for (String kw : keywords) {
-                    if (kw.contains("can't be regenerated")) {
-                        noRegen = true;
-                        break;
-                    }
-                }
+            if (sub != null && sub.getApi() == ApiType.Effect && sub.hasParam("AILogic") && sub.getParam("AILogic").equals("CantRegenerate")) {
+                noRegen = true;
             }
             for (final Object o : objects) {
                 if (o instanceof Card) {
