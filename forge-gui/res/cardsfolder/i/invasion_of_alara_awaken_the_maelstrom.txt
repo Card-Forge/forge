@@ -3,7 +3,7 @@ ManaCost:W U B R G
 Types:Battle Siege
 Defense:7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, exile cards from the top of your library until you exile two nonland cards with mana value 4 or less. You may cast one of those two cards without paying its mana cost. Put one of them into your hand. Then put the other cards exiled this way on the bottom of your library in a random order.
-SVar:TrigDig:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand+cmcLE4 | Amount$ 2 | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SkipReorder$ True | SubAbility$ DBPlay
+SVar:TrigDig:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand+cmcLE4 | Amount$ 2 | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBPutHand
 SVar:DBPutHand:DB$ ChangeZone | ChangeType$ Card.IsImprinted | Mandatory$ True | Hidden$ True | Chooser$ You | ChangeNum$ 1 | Origin$ Exile | Destination$ Hand | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup

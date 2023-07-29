@@ -35,6 +35,8 @@ import java.util.SortedSet;
 
 import forge.game.event.*;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.LandAbility;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -1700,6 +1702,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
+            if (cause instanceof LandAbility) {
+                land.changeToState(cause.getCardStateName());
+            }
         }
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
