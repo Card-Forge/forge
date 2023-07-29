@@ -295,7 +295,7 @@ public class TargetSelection {
             }
             if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
                 for (final SpellAbilityStackInstance si : game.getStack()) {
-                    SpellAbility abilityOnStack = si.getSpellAbility(true);
+                    SpellAbility abilityOnStack = si.getSpellAbility();
                     // make sure we're not accidentally finding a cast trigger of this card first
                     if (!abilityOnStack.isSpell()) {
                         continue;
@@ -322,7 +322,7 @@ public class TargetSelection {
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
-            SpellAbility abilityOnStack = si.getSpellAbility(true);
+            SpellAbility abilityOnStack = si.getSpellAbility();
             if (ability.canTargetSpellAbility(abilityOnStack)) {
                 stackItemViewCache.put(si.getView(), si);
                 selectOptions.add(si.getView());
@@ -348,7 +348,7 @@ public class TargetSelection {
                 return false;
             }
             if (madeChoice instanceof StackItemView) {
-                ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
+                ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility());
             } else {// 'FINISH TARGETING' chosen
                 bTargetingDone = true;
             }

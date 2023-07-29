@@ -93,7 +93,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             } else if (si == null) {
                 return false;
             } else {
-                activator = si.getSpellAbility(true).getActivatingPlayer();
+                activator = si.getSpellAbility().getActivatingPlayer();
             }
 
             if (!matchesValidParam("ValidActivatingPlayer", activator)) {
@@ -121,7 +121,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
             if (si != null) {
-                sa = si.getSpellAbility(true);
+                sa = si.getSpellAbility();
             }
 
             boolean validTgtFound = false;
@@ -222,7 +222,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 return false;
             }
             boolean sameNameFound = false;
-            for (Card c: si.getSpellAbility(true).getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
+            for (Card c: si.getSpellAbility().getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
                 if (cast.getName().equals(c.getName())) {
                     sameNameFound = true;
                     break;
@@ -264,7 +264,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceMatchingSpellAbilityID(castSA);
-        final SpellAbility saForTargets = si != null ? si.getSpellAbility(true) : castSA;
+        final SpellAbility saForTargets = si != null ? si.getSpellAbility() : castSA;
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
         sa.setTriggeringObject(AbilityKey.StackInstance, si);

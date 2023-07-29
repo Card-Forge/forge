@@ -63,8 +63,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatSas = Lists.newArrayList();
             String[] restrictions = sa.getParam("RepeatSpellAbilities").split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
-                if (stackInstance.getSpellAbility(false).isValid(restrictions, source.getController(), source, sa)) {
-                    repeatSas.add(stackInstance.getSpellAbility(false));
+                if (stackInstance.getSpellAbility().isValid(restrictions, source.getController(), source, sa)) {
+                    repeatSas.add(stackInstance.getSpellAbility());
                 }
             }
 

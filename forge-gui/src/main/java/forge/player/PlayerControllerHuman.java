@@ -1678,13 +1678,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Card chooseProtectionShield(final GameEntity entityBeingDamaged, final List<String> options,
-                                       final Map<String, Card> choiceMap) {
-        final String title = entityBeingDamaged + " - " + localizer.getMessage("lblSelectPreventionShieldToUse");
-        return choiceMap.get(getGui().one(title, options));
-    }
-
-    @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(final SpellAbility saSpellskite,
                                                                     final List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         if (allTargets.size() < 2) {
