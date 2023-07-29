@@ -265,6 +265,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = TreeBasedTable.create(); // Layer 7a
     private Table<Long, Long, Pair<Integer,Integer>> newPT = TreeBasedTable.create(); // Layer 7b
     private Table<Long, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create(); // Layer 7c
+    private Table<Long, Long, Boolean> switchPT = TreeBasedTable.create(); // Layer 7d
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
@@ -4628,13 +4629,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final StatBreakdown getNetPowerBreakdown() {
-        if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
+        if (isSwitchPT()) {
             return getUnswitchedToughnessBreakdown();
         }
         return getUnswitchedPowerBreakdown();
     }
     public final int getNetPower() {
-        if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
+        if (isSwitchPT()) {
             return getUnswitchedToughness();
         }
         return getUnswitchedPower();
@@ -4692,7 +4693,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final StatBreakdown getNetToughnessBreakdown() {
-        if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
+        if (isSwitchPT()) {
             return getUnswitchedPowerBreakdown();
         }
         return getUnswitchedToughnessBreakdown();
@@ -4841,6 +4842,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 }
             } else executePerpetual(p);
         }
+    }
+
+    public boolean isSwitchPT() {
+        return switchPT.values().size() % 2 != 0;
+    }
+
+    public void addSwitchPT(final long timestamp, final long staticId) {
+        switchPT.put(timestamp, staticId, Boolean.TRUE);
+    }
+
+    public void removeSwitchPT(final long timestamp, final long staticId) {
+        switchPT.remove(timestamp, staticId);
+    }
+
+    public Table<Long, Long, Boolean> getSwitchPTTable() {
+        return ImmutableTable.copyOf(switchPT);
+    }
+    public void setSwitchPTTable(Table<Long, Long, Boolean> table) {
+        switchPT.clear();
+        switchPT.putAll(table);
     }
 
     public final boolean isUntapped() {
