@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.BiomeData;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Current;
@@ -78,6 +79,13 @@ public class GameScene extends HudScene {
             }
         }
         return location;
+    }
+
+    public PointOfInterest getMapPOI() {
+        if (MapStage.getInstance().isInMap()) {
+            return TileMapScene.instance().rootPoint;
+        }
+        return null;
     }
 
     public boolean isNotInWorldMap() {

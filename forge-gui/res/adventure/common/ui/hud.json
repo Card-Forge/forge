@@ -89,7 +89,7 @@
       "binding": "Deck",
       "width": 45,
       "height": 25,
-      "x": 175,
+      "x": 198,
       "y": 0
     },
     {
@@ -99,7 +99,7 @@
       "binding": "Inventory",
       "width": 45,
       "height": 25,
-      "x": 220,
+      "x": 243,
       "y": 0
     },
     {
@@ -109,7 +109,7 @@
 	  "binding": "Status",
       "width": 45,
       "height": 25,
-      "x": 265,
+      "x": 288,
       "y": 0
     },
     {
@@ -119,7 +119,7 @@
       "binding": "Menu",
       "width": 45,
       "height": 25,
-      "x": 130,
+      "x": 108,
       "y": 0
     },
     {
@@ -139,7 +139,17 @@
 	  "binding": "ExitToWorldMap",
       "width": 45,
       "height": 25,
-      "x": 310,
+      "x": 333,
+      "y": 0
+    },
+    {
+      "type": "TextButton",
+      "name": "bookmark",
+      "text": "[%120][+Bookmark]",
+      "binding": "Bookmark",
+      "width": 45,
+      "height": 25,
+      "x": 153,
       "y": 0
     }
   ]

@@ -18,6 +18,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
     private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
+    private Boolean isBookmarked;
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -62,6 +63,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
         shopModifiers.clear();
         shopModifiers.putAll((java.util.Map<Integer, Float>) data.readObject("shopModifiers"));
+        isBookmarked = (Boolean) data.readObject("isBookmarked");
     }
 
     @Override
@@ -72,6 +74,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("mapFlags", mapFlags);
         data.storeObject("shopSeeds", shopSeeds);
         data.storeObject("shopModifiers", shopModifiers);
+        data.storeObject("isBookmarked", isBookmarked);
         return data;
     }
 
@@ -158,6 +161,14 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
     public boolean hasDeletedObjects() {
         return deletedObjects != null && !deletedObjects.isEmpty();
+    }
+    public boolean isBookmarked() {
+        if (isBookmarked == null)
+            return false;
+        return isBookmarked;
+    }
+    public void setIsBookmarked(boolean val) {
+        isBookmarked = val;
     }
 
     public void clearDeletedObjects() {
