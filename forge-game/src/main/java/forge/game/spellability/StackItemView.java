@@ -45,7 +45,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         return get(TrackableProperty.Key);
     }
     void updateKey(SpellAbilityStackInstance si) {
-    	set(TrackableProperty.Key, si.getSpellAbility(false).yieldKey());
+    	set(TrackableProperty.Key, si.getSpellAbility().yieldKey());
     }
 
     public String getOptionalCostString() {
@@ -62,7 +62,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         boolean alternate = false;
         boolean generic = false;
 
-        for (OptionalCost cost : si.getSpellAbility(false).getOptionalCosts()) {
+        for (OptionalCost cost : si.getSpellAbility().getOptionalCosts()) {
             if (cost == OptionalCost.Kicker1 || cost == OptionalCost.Kicker2)
                 kicked = true;
             if (cost == OptionalCost.Entwine)
@@ -101,7 +101,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         return get(TrackableProperty.SourceTrigger);
     }
     void updateSourceTrigger(SpellAbilityStackInstance si) {
-        set(TrackableProperty.SourceTrigger, si.getSpellAbility(false).getSourceTrigger());
+        set(TrackableProperty.SourceTrigger, si.getSpellAbility().getSourceTrigger());
     }
 
     public String getText() {

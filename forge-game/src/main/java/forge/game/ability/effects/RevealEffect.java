@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -14,7 +13,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -83,7 +81,6 @@ public class RevealEffect extends SpellAbilityEffect {
                 game.getAction().reveal(revealed, p);
             }
             for (final Card c : revealed) {
-                game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
                 if (sa.hasParam("RememberRevealed")) {
                     host.addRemembered(c);
                 }

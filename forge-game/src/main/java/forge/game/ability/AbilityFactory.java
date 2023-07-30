@@ -63,6 +63,7 @@ public final class AbilityFactory {
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
+            "RegenerationAbility", // for Regeneration Effect
             "ReturnAbility" // for Delayed Trigger on Magpie
         );
 

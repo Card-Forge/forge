@@ -56,7 +56,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, GameObject>> allTargets = new ArrayList<>();
                 while (changingTgtSI != null) {
-                    SpellAbility changedSa = changingTgtSI.getSpellAbility(true);
+                    SpellAbility changedSa = changingTgtSI.getSpellAbility();
                     if (changedSa.usesTargeting()) {
                         for (GameObject it : changedSa.getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
@@ -80,7 +80,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
                 // CR 115.3. The same target can’t be chosen multiple times for
                 // any one instance of the word “target” on a spell or ability.
-                if (!oldTargetBlock.contains(newTarget) && replaceIn.getSpellAbility(true).canTarget(newTarget)) {
+                if (!oldTargetBlock.contains(newTarget) && replaceIn.getSpellAbility().canTarget(newTarget)) {
                     newTargetBlock.remove(oldTarget);
                     newTargetBlock.add(newTarget);
                     if (div != null) {
@@ -90,7 +90,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 }
             } else {
                 while (changingTgtSI != null) {
-                    SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
+                    SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
                     if (changingTgtSA.usesTargeting()) {
                         // random target and DefinedMagnet works on single targets
                         if (sa.hasParam("RandomTarget")) {
