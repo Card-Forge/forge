@@ -3632,18 +3632,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return this.isAttachedToEntity();
     }
 
-    public final void unEquipCard(final Card c) { // equipment.unEquipCard(equippedCard);
-        this.unattachFromEntity(c);
-    }
-
-    public final void unEquipAllCards() {
-        if (isEquipped()) {
-            for (Card c : getEquippedBy()) {
-                c.unattachFromEntity(this);
-            }
-        }
-    }
-
     public final GameEntity getEntityAttachedTo() {
         return entityAttachedTo;
     }

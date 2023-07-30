@@ -224,11 +224,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         c.removeCantHaveKeyword(timestamp);
 
         c.removeHiddenExtrinsicKeywords(timestamp, 0);
-
-        // any other unanimate cleanup
-        if (!c.isCreature()) {
-            c.unEquipAllCards();
-        }
     }
 
 }
