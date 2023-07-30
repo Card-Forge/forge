@@ -292,16 +292,6 @@ ScryfallCode=LTR
 280 L Forest @Deven Rue
 281 L Forest @Deven Rue
 
-[alternate art]
-332 U Nazgul @Wonchun Choi
-333 U Nazgul @Chris Cold
-334 U Nazgul @Nino Is
-335 U Nazgul @Yigit Koroglu
-336 U Nazgul @Igor Krstic
-337 U Nazgul @Miklós Ligeti
-338 U Nazgul @Antonio José Manzanedo
-339 U Nazgul @Lorenzo Mastroianni
-
 [jumpstart]
 282 R Saradoc, Master of Buckland @Sean Vo
 283 R Elvish Mariner @Axel Sauerwald
@@ -361,6 +351,16 @@ ScryfallCode=LTR
 330 R Smeagol, Helpful Guide @Andreas Rocha
 331 M Tom Bombadil @Marko Manev
 649 U Denethor, Ruling Steward @Campbell White
+
+[alternate art]
+332 U Nazgul @Wonchun Choi
+333 U Nazgul @Chris Cold
+334 U Nazgul @Nino Is
+335 U Nazgul @Yigit Koroglu
+336 U Nazgul @Igor Krstic
+337 U Nazgul @Miklós Ligeti
+338 U Nazgul @Antonio José Manzanedo
+339 U Nazgul @Lorenzo Mastroianni
 
 [borderless]
 340 R Barad-dur @Jonas De Ro
