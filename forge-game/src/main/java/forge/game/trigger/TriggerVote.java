@@ -31,11 +31,11 @@ import forge.util.collect.FCollection;
 
 /**
  * <p>
- * Trigger_Untaps class.
+ * Trigger_Vote class.
  * </p>
  * 
  * @author Forge
- * @version $Id: TriggerUntaps.java 24769 2014-02-09 13:56:04Z Hellfish $
+ * @version $Id: TriggerVote.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class TriggerVote extends Trigger {
 
@@ -69,14 +69,14 @@ public class TriggerVote extends Trigger {
         FCollection<Player> oppVotedDiff = getVoters(
             this.getHostCard().getController(),
             (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
-            true, false
+            true, true
         );
         sa.setTriggeringObject(AbilityKey.OpponentVotedDiff, oppVotedDiff);
 
         FCollection<Player> oppVotedSame = getVoters(
                 this.getHostCard().getController(),
                 (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
-                true, true
+                true, false
         );
         sa.setTriggeringObject(AbilityKey.OpponentVotedSame, oppVotedSame);
     }
@@ -105,15 +105,12 @@ public class TriggerVote extends Trigger {
         return sb.toString();
     }
 
-    private static FCollection<Player> getVoters(final Player player,
-            final ListMultimap<Object, Player> votes,
-            final boolean isOpponent, final boolean votedSame) {
+    private static FCollection<Player> getVoters (final Player player, final ListMultimap<Object, Player> votes,
+                                                  final boolean isOpponent, final boolean votedOtherchoice) {
         final FCollection<Player> voters = new FCollection<>();
         for (final Object voteType : votes.keySet()) {
             final List<Player> players = votes.get(voteType);
-            if (!votedSame ^ players.contains(player)) {
-                voters.addAll(players);
-            } else if (votedSame && players.contains(player)) {
+            if (votedOtherchoice ^ players.contains(player)) {
                 voters.addAll(players);
             }
         }
