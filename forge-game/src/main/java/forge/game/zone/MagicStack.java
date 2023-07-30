@@ -309,6 +309,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             SpellAbility original = sp;
             sp = sp.copy();
             sp.setOriginalAbility(original);
+            original.setXManaCostPaid(null);
         }
 
         if (frozen && !sp.hasParam("IgnoreFreeze")) {

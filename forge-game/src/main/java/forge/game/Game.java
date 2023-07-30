@@ -1233,7 +1233,7 @@ public class Game {
                     // it’s revealed after the spell becomes cast or the ability becomes activated.
                     final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                     runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
-                    runParams.put(AbilityKey.Player, this);
+                    runParams.put(AbilityKey.Player, c.getOwner());
                     runParams.put(AbilityKey.CanReveal, true);
                     // need to hold trigger to clear list first
                     getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, true);

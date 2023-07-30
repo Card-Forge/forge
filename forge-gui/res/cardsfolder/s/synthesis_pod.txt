@@ -2,7 +2,7 @@ Name:Synthesis Pod
 ManaCost:3 UP
 Types:Artifact
 A:AB$ DigUntil | Cost$ 1 UP T ExileFromStack<1/Card.YouCtrl/spell you control> | ValidTgts$ Opponent | Valid$ Card.cmcEQX | FoundDestination$ Exile | RevealedDestination$ Library | ImprintFound$ True | Shuffle$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile that card, then that player shuffles. You may cast that exiled card without paying its mana cost.
-SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ Play | Defined$ Imprinted | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:Exiled$CardManaCost/Plus.1
 AI:RemoveDeck:All

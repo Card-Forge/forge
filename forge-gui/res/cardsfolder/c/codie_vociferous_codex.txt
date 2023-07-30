@@ -7,7 +7,7 @@ A:AB$ Mana | Cost$ 4 T | Produced$ W U B R G | SubAbility$ DBTrigger | SpellDesc
 SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ DBDig | TriggerDescription$ When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
 SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Instant.cmcLTX,Sorcery.cmcLTX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | ForgetOnMoved$ Exile | SubAbility$ DBRestRandomOrder
-SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card without paying its mana cost.
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card without paying its mana cost.
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:TriggeredCard$CardManaCost
