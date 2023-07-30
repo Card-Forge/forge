@@ -53,15 +53,13 @@ public class ControlSpellEffect extends SpellAbilityEffect {
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
 
-        List<SpellAbility> tgtSpells = getTargetSpells(sa);
-
         // If an Exchange needs to happen, make sure both parties are still in the right zones
 
-        for (SpellAbility spell : tgtSpells) {
+        for (SpellAbility spell : getTargetSpells(sa)) {
             Card tgtC = spell.getHostCard();
-            SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
             long tStamp = game.getNextTimestamp();
             if (exchange) {
+                SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
                 // Currently the only Exchange Control for Spells is a Permanent Trigger
                 // Expand this area as it becomes needed
                 // Use "DefinedExchange" to Reference Object that is Exchanging the other direction
@@ -101,7 +99,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 tgtC.runChangeControllerCommands();
             }
             tgtC.addTempController(newController, tStamp);
-            si.setActivatingPlayer(newController);
+            spell.setActivatingPlayer(newController);
         }
     }
 }

@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Sorcery
 A:SP$ DigUntil | ValidTgts$ Opponent | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ StolenGoodsPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:StolenGoodsPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
+SVar:StolenGoodsPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.

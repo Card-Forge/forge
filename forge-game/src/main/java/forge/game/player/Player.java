@@ -3158,6 +3158,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         eff.addStaticAbility(mayBePlayedAbility);
         return eff;
     }
+
     public void createTheRing(Card host) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
@@ -3224,6 +3225,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         getTheRing().updateStateForView();
     }
+
     public void changeOwnership(Card card) {
         // If lost then gained, just clear out of lost.
         // If gained then lost, just clear out of gained.
