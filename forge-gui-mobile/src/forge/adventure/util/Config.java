@@ -51,7 +51,7 @@ public class Config {
     private SettingData settingsData;
     private String Lang = "en-us";
     private final String plane;
-    private ObjectMap<String, Sprite> itemSprites = new ObjectMap<>();
+    private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
 
     static public Config instance() {
         if (currentConfig == null)
@@ -248,11 +248,22 @@ public class Config {
     }
 
     public Sprite getItemSprite(String itemName) {
-        Sprite sprite = itemSprites.get(itemName);
+        return getAtlasSprite(forge.adventure.util.Paths.ITEMS_ATLAS, itemName);
+    }
+
+    public Sprite getAtlasSprite(String atlasName, String itemName) {
+        Sprite sprite;
+        ObjectMap<String, Sprite> sprites = atlasSprites.get(atlasName);
+        if (sprites == null) {
+            sprites = new ObjectMap<>();
+        }
+        sprite = sprites.get(itemName);
         if (sprite == null) {
-            sprite = getAtlas(forge.adventure.util.Paths.ITEMS_ATLAS).createSprite(itemName);
-            if (sprite != null)
-                itemSprites.put(itemName, sprite);
+            sprite = getAtlas(atlasName).createSprite(itemName);
+            if (sprite != null) {
+                sprites.put(itemName, sprite);
+                atlasSprites.put(atlasName, sprites);
+            }
         }
         return sprite;
     }

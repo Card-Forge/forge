@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -203,17 +202,15 @@ public class MapDialog {
         });
         float width;
         if (sprite != null) {
-            if (actor instanceof EnemySprite) {
+            if (actor instanceof EnemySprite && !((EnemySprite) actor).hidden) {
                 String name = actor.getName();
-                TextraLabel label = Controls.newTextraLabel("[%?black outline][ORANGE]" + name);
+                TypingLabel label =  Controls.newTypingLabel("[%?BLACKEN]-" + name + "-");
+                label.skipToTheEnd();
                 D.getTitleTable().add(label).left().expand();
             }
             D.getContentTable().add(new Image(sprite)).width(30).height(30).top();
             width = WIDTH - 30;
         } else {
-            //D.getContentTable().add(Controls.newTextraLabel("[%200][+Agent]")).width(30).height(30).top();
-            /*TextraLabel label = Controls.newTextraLabel("[%?black outline][WHITE] ???");
-            D.getTitleTable().add(label).left().expand();*/
             width = WIDTH;
         }
         D.getContentTable().add(A).width(width); //Add() returns a Cell, which is what the width is being applied to.

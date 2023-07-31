@@ -22,6 +22,9 @@
 	},
 	"RGBA_38_23_3_50": {
 		"hex": "b06a0e5a"
+	},
+	"RGBA_74_84_98_AA": {
+		"hex": "4a5462aa"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable": {
@@ -43,6 +46,10 @@
 	"background": {
 		"name": "white-pixel",
 		"color": "RGBA_38_23_3_50"
+	},
+	"border": {
+		"name": "white-pixel",
+		"color": "RGBA_74_84_98_AA"
 	}
 },
 "com.ray3k.tenpatch.TenPatchDrawable": {
@@ -432,6 +439,10 @@
 	"background": {
 		"parent": "default",
 		"background": "background"
+	},
+	"dialog": {
+		"parent": "default",
+		"background": "border"
 	}
 },
 "ListStyle": {
