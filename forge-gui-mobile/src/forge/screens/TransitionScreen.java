@@ -101,6 +101,7 @@ public class TransitionScreen extends FContainer {
     private class BGAnimation extends ForgeAnimation {
         float DURATION = isArenaScene ? 1.2f : 0.6f;
         private float progress = 0;
+        TextureRegion enemyAvatar;
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -156,7 +157,7 @@ public class TransitionScreen extends FContainer {
                 float scale = screenW / 4;
                 float centerX = screenW / 2;
                 float centerY = screenH / 2;
-                TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
+                enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
                 if (enemyAvatar != null)
                     enemyAvatar.flip(true, false);
                 float fontScale = GuiBase.isAndroid() ? 14f : 10f;

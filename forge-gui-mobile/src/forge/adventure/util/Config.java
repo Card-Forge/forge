@@ -10,10 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import forge.CardStorageReader;
 import forge.Forge;
 import forge.ImageKeys;
-import forge.adventure.data.ConfigData;
-import forge.adventure.data.DifficultyData;
-import forge.adventure.data.RewardData;
-import forge.adventure.data.SettingData;
+import forge.adventure.data.*;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -52,6 +49,7 @@ public class Config {
     private String Lang = "en-us";
     private final String plane;
     private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
+    private ObjectMap<PointOfInterestData, Array<Sprite>> poiSprites = new ObjectMap<>();
 
     static public Config instance() {
         if (currentConfig == null)
@@ -266,6 +264,15 @@ public class Config {
             }
         }
         return sprite;
+    }
+
+    public Array<Sprite> getPOISprites(PointOfInterestData d) {
+        Array<Sprite> sprites = poiSprites.get(d);
+        if (sprites == null) {
+            sprites = getAtlas(d.spriteAtlas).createSprites(d.sprite);
+            poiSprites.put(d, sprites);
+        }
+        return sprites;
     }
     public SettingData getSettingData() {
         return settingsData;
