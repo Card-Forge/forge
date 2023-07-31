@@ -36,7 +36,7 @@
  <objectgroup id="4" name="Objects">
   <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
   <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
-  <object id="50" template="../../obj/enemy.tx" x="181.561" y="293.87" width="64" height="64">
+  <object id="50" template="../../obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
     <property name="enemy" value="Emrakul"/>
    </properties>
