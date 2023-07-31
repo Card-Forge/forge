@@ -69,10 +69,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         side = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Side");
         sideWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "SideWin");
         edge = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Edge");
-        edgeM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Edge");
+        edgeM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeFlip");
         edgeM.setFlip(true, false);
         edgeWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWin");
-        edgeWinM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWin");
+        edgeWinM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWinFlip");
         edgeWinM.setFlip(true, false);
         gridSize = fighterSpot.getRegionWidth();
 
