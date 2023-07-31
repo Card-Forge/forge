@@ -444,6 +444,18 @@ GreenLeaf
 GreenLeaf2
   xy: 112, 608
   size: 16, 16
+GoldCoin
+  xy: 464, 63
+  size: 16, 16
+Magnifier
+  xy: 448, 63
+  size: 16, 16
+Bookmark
+  xy: 432, 63
+  size: 16, 16
+Unmark
+  xy: 416, 63
+  size: 16, 16
 SearchPost
   xy: 384, 63
   size: 16, 16
@@ -455,6 +467,12 @@ LogBook
   size: 16, 16
 GPS
   xy: 464, 0
+  size: 16, 16
+Star
+  xy: 464, 16
+  size: 16, 16
+TreasureChest
+  xy: 464, 32
   size: 16, 16
 UnderworldCookbook
   xy: 304, 960
