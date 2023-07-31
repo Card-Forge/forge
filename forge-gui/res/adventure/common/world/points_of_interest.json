@@ -1162,7 +1162,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "colorless_castle",
-	"map": "../common/maps/map/minibosses/emrakul.tmx",
+	"map": "../common/maps/map/emrakul/emrakul.tmx",
 	"radiusFactor": 0.4,
 	"questTags": [
 		"Castle",
