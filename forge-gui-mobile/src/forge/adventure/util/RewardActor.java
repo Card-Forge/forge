@@ -50,8 +50,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-import static forge.adventure.util.Paths.ITEMS_ATLAS;
-
 /**
  * Render the rewards as a card on the reward scene.
  */
@@ -296,8 +294,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
             case Item: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
                 if (reward.getItem() == null) {
                     needsToBeDisposed = true;
                     processSprite(backSprite, null, null, 0, 0, false);
@@ -311,8 +308,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
             case CardPack: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
                 if (reward.getDeck() == null) {
                     needsToBeDisposed = true;
                     processSprite(backSprite, null, null, 0, 0, false);
@@ -342,7 +338,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     item = new Sprite(new TextureRegion(t));
                     isBooster = true;
                 } else {
-                    item = atlas.createSprite("Deck");
+                    item = Config.instance().getItemSprite("Deck");
                 }
 
                 setItemTooltips(item, backSprite, isBooster);
@@ -356,9 +352,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Life:
             case Shards:
             case Gold: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
-                Sprite item = atlas.createSprite(reward.type.toString());
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
+                Sprite item = Config.instance().getItemSprite(reward.type.toString());
                 setItemTooltips(item, backSprite, false);
                 boolean isShop = RewardScene.Type.Shop.equals(type);
                 processSprite(backSprite, item, isShop ? null :

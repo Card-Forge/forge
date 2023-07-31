@@ -518,9 +518,9 @@ public class RewardScene extends UIScene {
             if (Type.Shop != type)
                 return;
             if (collectionPool != null && Reward.Type.Card.equals(reward.getType()))
-                setText("[%75]" + price + " [+Gold]\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + collectionPool.count(reward.getCard()));
+                setText("[%75][+GoldCoin] " + price + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + collectionPool.count(reward.getCard()));
             else if (Reward.Type.Item.equals(reward.getType()))
-                setText("[%75]" + price + " [+Gold]\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
+                setText("[%75][+GoldCoin] " + price + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
         }
 
         public BuyButton(int id, int i, RewardActor actor, Reward reward, TextraButton style, float shopModifier) {
@@ -536,7 +536,7 @@ public class RewardScene extends UIScene {
             price = CardUtil.getRewardPrice(actor.getReward());
             price *= Current.player().goldModifier();
             price *= shopModifier;
-            setText(price + " [+Gold]");
+            setText("[+GoldCoin] " + price);
             updateOwned();
             addListener(new ClickListener() {
                 @Override

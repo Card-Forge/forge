@@ -6,12 +6,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import com.github.tommyettinger.textra.TextraLabel;
 import forge.adventure.data.BiomeSpriteData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.MapViewScene;
-import forge.adventure.util.Controls;
+import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -25,8 +24,8 @@ public class MapSprite extends Actor {
     static public int BackgroundLayer = -1;
     static public int SpriteLayer = 0;
     TextureRegion texture;
-    TextraLabel searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
-    Sprite bookmark = Controls.getSprite("Star");
+    Sprite bookmark = Config.instance().getItemSprite("Star");
+    Sprite magnifier = Config.instance().getItemSprite("Magnifier");
     boolean isCaveDungeon, isOldorVisited, isBookmarked;
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
         if (point != null) {
@@ -87,9 +86,10 @@ public class MapSprite extends Actor {
         if (texture == null)
             return;
         batch.draw(texture, getX(), getY());
-        if (isCaveDungeon && !isOldorVisited) {
-            searchPost.setPosition(getX() - 7, getY() + 7);
-            searchPost.draw(batch, parentAlpha);
+        if (isCaveDungeon && !isOldorVisited && magnifier != null) {
+            magnifier.setScale(0.7f, 0.7f);
+            magnifier.setPosition(getX() - 7, getY() + 2);
+            magnifier.draw(batch, parentAlpha);
         }
         if (isBookmarked && bookmark != null) {
             bookmark.setScale(0.7f, 0.7f);

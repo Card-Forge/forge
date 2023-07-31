@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -50,6 +51,7 @@ public class Config {
     private SettingData settingsData;
     private String Lang = "en-us";
     private final String plane;
+    private ObjectMap<String, Sprite> itemSprites = new ObjectMap<>();
 
     static public Config instance() {
         if (currentConfig == null)
@@ -245,6 +247,15 @@ public class Config {
         return atlas;
     }
 
+    public Sprite getItemSprite(String itemName) {
+        Sprite sprite = itemSprites.get(itemName);
+        if (sprite == null) {
+            sprite = getAtlas(forge.adventure.util.Paths.ITEMS_ATLAS).createSprite(itemName);
+            if (sprite != null)
+                itemSprites.put(itemName, sprite);
+        }
+        return sprite;
+    }
     public SettingData getSettingData() {
         return settingsData;
     }

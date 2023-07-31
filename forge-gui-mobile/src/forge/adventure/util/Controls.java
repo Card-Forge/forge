@@ -429,10 +429,6 @@ public class Controls {
         return Forge.getAssets().getTextraFont(name, getSkin().getFont(name), Config.instance().getAtlas(Paths.ITEMS_ATLAS));
     }
 
-    static public Sprite getSprite(String itemSprite) {
-        return Config.instance().getAtlas(Paths.ITEMS_ATLAS).createSprite(itemSprite);
-    }
-
     static public class AccountingLabel extends TextraLabel {
         private TextraLabel label;
         private final TextraLabel placeholder;
