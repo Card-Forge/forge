@@ -29,7 +29,7 @@
  </layer>
  <layer id="6" name="Clutter" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1Ab/RUgTpxSsEIVgEMgF2rEcyA6XhPAXimLXAxK/5s/AcB2Ib/hTzy0HJfDIhSDYK5HchcuN1HDLSjz+J0WcEjAHaCYTElYOQeXbiaFimLi9GKZZPcHUdx8yQHcLDHPI4tYD8xMhQIwaXKDCgoGh0oJ8/dQEO4Du2Eklt5QHUMccEBDGkff2KTAw7FdA0LiAaCDt3RKjyMAQq4igcYHNFLoFOb0QGy6q7PjNZCazbEBOL8SGCyG30KrMBAGQ3eiYEKBVuUSqO+gNaF0eD0dAST1Aa0DN8phSQM3ymFJAaXk8CigHAEbhM3A=
+   eJxjYBgF1Ab/RUgTpxSsEIVgEMgF2rEcyA6XhPAXimLXAxK/5s/AcB2Ib/hTzy0HJfDIhSDYK5HchcuN1HDLSjz+J0WcEjAHaCYTElYOQeXbiaFimLi9GKZZPcHUdx8yQHcLDHPI4tYD8xMhQIwaXKDCgoGh0oJ8/dQEO4Du2Eklt5QHUMccEBDGkff2KTAw7FdA0LiAaCDt3RKjyMAQq4igcYHNFLoFOb0QGy6q7PjNZCazbEBOL8SGCyG30KrMBAGQ3eiYEKBVuUSqOwiBRBFMTAmgpr+p5abBDiipB2gNqFkeUwqoWR5TCigtj0cB5QAAqOk3GA==
   </data>
  </layer>
  <layer id="7" name="AboveAboveClutter" width="35" height="25">
@@ -37,7 +37,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF9ASTTBkYJpvSxmw1CcJyP5DELgHdcRnNLT8sGBh+WiDogQL4/DLSQB3vQLuA9gDZjwepEPcDFWY1VLAX3QxKzUwG5vEUJJxKRPlDrfBDN2cx0O4lSHgpmWUhNcKZUrdQGkbI+h8D7X6ChJ/SqI4YCIAvnAjFI7peaudrepUTg7EMJ+SmweDmweCGwQLoGRYRDKhtxVEw8AAA2+cojQ==
+   eJxjYBgF9ASTTBkYJpvSxmw1CcJyP5DELgHdcRnNLT8sGBh+WiDogQL4/DLSQKLIQLsAAWjlFmRzDxIZ9yA9uNxDiTvJ1YvPPeSaQQ0zk4F5PAUJpxJR/lDLHeh6FgPtXoKEl5JYFsLcMVjcQi5A98djoN1PkPBTOroF3U3UNgOfmYTksGFS3EKMmfQAxNhH73KeUPk5EO5Btnsg4gnZLQNhLy5Ab7dEMKC2FUfBwAMAz8s65Q==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -72,7 +72,7 @@
   <object id="63" template="../../obj/enemy.tx" x="216" y="144.667">
    <properties>
     <property name="enemy" value="Necromancer"/>
-    <property name="hidden" type="bool" value="true"/>
+    <property name="hidden" type="bool" value="false"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -91,7 +91,7 @@
   <object id="66" template="../../obj/enemy.tx" x="63.3333" y="335.333">
    <properties>
     <property name="enemy" value="Curselord"/>
-    <property name="hidden" type="bool" value="true"/>
+    <property name="hidden" type="bool" value="false"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -110,21 +110,21 @@
    <properties>
     <property name="enemy" value="Adept Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="79,80,79,81,79,72,73,74,78,75,78,77"/>
+    <property name="waypoints" value="80,72,79,81"/>
    </properties>
   </object>
   <object id="70" template="../../obj/enemy.tx" x="226.333" y="346.333">
    <properties>
     <property name="enemy" value="Adept Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="82,83,82,72,73,74,78,75,78,77,79,80,79,81,79"/>
+    <property name="waypoints" value="81,72,73,77,73,72,81"/>
    </properties>
   </object>
   <object id="71" template="../../obj/enemy.tx" x="363.667" y="193.667">
    <properties>
     <property name="enemy" value="Adept Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="75,74,76,74,73,82,73"/>
+    <property name="waypoints" value="75,74,82,74"/>
    </properties>
   </object>
   <object id="72" template="../../obj/waypoint.tx" x="210" y="349"/>
@@ -137,7 +137,7 @@
   <object id="79" template="../../obj/waypoint.tx" x="175" y="189.667"/>
   <object id="80" template="../../obj/waypoint.tx" x="176.667" y="128.333"/>
   <object id="81" template="../../obj/waypoint.tx" x="61.6667" y="185.667"/>
-  <object id="82" template="../../obj/waypoint.tx" x="176.333" y="293.667"/>
+  <object id="82" template="../../obj/waypoint.tx" x="140.666" y="254.334"/>
   <object id="83" template="../../obj/waypoint.tx" x="55.3333" y="299.667"/>
   <object id="84" name="switch" type="dialog" gid="4426" x="286.333" y="54" width="16" height="16">
    <properties>

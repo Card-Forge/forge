@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="119">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEKACAMQ1FXFy/lHTp6/2OIQ6EgLlLoH1LI/khqvTUDZI56gyyy/DhkubNAG3k31QbSRu6otkSHLG8XwUDphWSJnmqHLHwL6XczLecoFlIvmZ4NOR9BiA==
+  </data>
+ </layer>
+ <layer id="6" name="Overlayer" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgYEMmJigcSDIRbtmIRm8nFwHCTe3CEiw334ImjweQWELgKdM9cLggeLGAwuWUUDE6ArcwZBaNgFIyCUTAKRsHgBgAbGQ2b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyFll1ugzAQhP0YX6A3CqAeIFcMbfpUlRMlJByjWPGIL5MFLFkksN6d/Zt1k1Nq6v4+pPRzeD4vG/uWn/sC+fJsVnRRp+Roo7wri+fbeV/nPc77ZPs8y3/VM+X3Y37Xz88J52hnhK7Ped/z87zk9L+s8p1YdH5Ir3a1jtXmUM/Sr7HqutZ4jcA+pMV+BznicSyOs8ux/9Ile32A+1zlqUPnhZG4HUsDWZ075ve4MWeT+RG9nxBDz5fWFGDp8hJ/5fuGeD6wpwAncbB+5eMD2JRXxSSql2Ne8spaiXpL/UEcXkesX9aDcutYiFM1qlrwWlE9KOeOw/OoXLDPmAe9FxbaniBDLhlNRtjYV5JhHj0G8v1mfgiL6sRruK966Ztyw3olJ8lP5zb5JwzsN+aoDfLJGuzyK+9FfLWVO+mkX45jLS6+2UMeI+ZlMlnvqSgve1g8vuzPKBYTbPnckh7nPeldw0JOYnzJN/o+pPX+4f5IS86iXiKmaCbShnw6od6UK/Eya4Hfy5k/O0P+jOLCnjghX1sYxYu8E9B39bJzrde/Y1GetOiv+K4P8hHdCTymEU84/zmWSJffndgHmt9+JyFen2c+S8vam0eMCfvY40a95EHF+GzxFK692ci7ifMm/fC4cYavzSi/b23xLrG4vNdiVDPyt83veGmXeV3jXa/dsgb8ZvyFmxyiWDO2F9jTjOF9Rr0aYWntPfPNGr0c3nlNfUt/ftNi755f5/+4g4X9G905Ij5zPr/nBUdZrHF+p+4Ii58hT/k3f7dmz7H4nJUerX/JhucT
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAB4Mw2sAAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="330.5" y="398.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="501.5" y="30"/>
+  <object id="49" template="../../obj/gold.tx" x="433.333" y="22.8333"/>
+  <object id="51" template="../../obj/treasure.tx" x="178.833" y="131.167"/>
+  <object id="53" template="../../obj/treasure.tx" x="246.5" y="344"/>
+  <object id="54" template="../../obj/manashards.tx" x="239" y="26"/>
+  <object id="55" template="../../obj/manashards.tx" x="516" y="30"/>
+  <object id="56" template="../../obj/manashards.tx" x="367.5" y="173"/>
+  <object id="57" template="../../obj/manashards.tx" x="125.5" y="263.5"/>
+  <object id="58" template="../../obj/manashards.tx" x="111" y="298"/>
+  <object id="59" template="../../obj/manashards.tx" x="133" y="112"/>
+  <object id="60" template="../../obj/manashards.tx" x="96" y="220"/>
+  <object id="61" template="../../obj/manashards.tx" x="377.5" y="62.5"/>
+  <object id="62" template="../../obj/manashards.tx" x="312.5" y="271"/>
+  <object id="63" template="../../obj/manashards.tx" x="466.5" y="388.5"/>
+  <object id="64" template="../../obj/gold.tx" x="281" y="30.5"/>
+  <object id="65" template="../../obj/gold.tx" x="389.5" y="297.5"/>
+  <object id="66" template="../../obj/gold.tx" x="169" y="223.5"/>
+  <object id="67" template="../../obj/gold.tx" x="57" y="26.5"/>
+  <object id="68" template="../../obj/gold.tx" x="176" y="88"/>
+  <object id="70" template="../../obj/enemy.tx" x="357.5" y="228">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="95,94,114,88,115,90,89,87,89,90,115,88,114,94,95"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="519.5" y="50">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/waypoint.tx" x="57" y="255"/>
+  <object id="74" template="../../obj/waypoint.tx" x="23.5" y="243.5"/>
+  <object id="75" template="../../obj/waypoint.tx" x="23.5" y="142"/>
+  <object id="76" template="../../obj/waypoint.tx" x="57" y="110.5"/>
+  <object id="77" template="../../obj/waypoint.tx" x="61.5" y="45.5"/>
+  <object id="78" template="../../obj/waypoint.tx" x="55" y="362"/>
+  <object id="79" template="../../obj/waypoint.tx" x="134" y="361"/>
+  <object id="80" template="../../obj/waypoint.tx" x="229" y="279"/>
+  <object id="81" template="../../obj/waypoint.tx" x="178" y="313.5"/>
+  <object id="82" template="../../obj/waypoint.tx" x="160" y="256"/>
+  <object id="83" template="../../obj/waypoint.tx" x="277.5" y="177.5"/>
+  <object id="84" template="../../obj/waypoint.tx" x="158" y="159"/>
+  <object id="85" template="../../obj/waypoint.tx" x="236.5" y="142"/>
+  <object id="86" template="../../obj/waypoint.tx" x="316.5" y="67.5"/>
+  <object id="87" template="../../obj/waypoint.tx" x="381" y="120.5"/>
+  <object id="88" template="../../obj/waypoint.tx" x="463.5" y="183"/>
+  <object id="89" template="../../obj/waypoint.tx" x="443" y="51"/>
+  <object id="90" template="../../obj/waypoint.tx" x="502.5" y="91"/>
+  <object id="91" template="../../obj/waypoint.tx" x="468.5" y="386"/>
+  <object id="92" template="../../obj/waypoint.tx" x="472.5" y="329.5"/>
+  <object id="93" template="../../obj/waypoint.tx" x="496.5" y="292"/>
+  <object id="94" template="../../obj/waypoint.tx" x="428" y="232.5"/>
+  <object id="95" template="../../obj/waypoint.tx" x="311" y="228.5"/>
+  <object id="96" template="../../obj/waypoint.tx" x="269.5" y="295"/>
+  <object id="97" template="../../obj/waypoint.tx" x="320" y="336.5"/>
+  <object id="98" template="../../obj/waypoint.tx" x="366.5" y="300.5"/>
+  <object id="99" template="../../obj/waypoint.tx" x="232.5" y="217.5"/>
+  <object id="100" template="../../obj/waypoint.tx" x="196" y="27.5"/>
+  <object id="101" template="../../obj/waypoint.tx" x="106" y="28"/>
+  <object id="102" template="../../obj/waypoint.tx" x="197" y="89"/>
+  <object id="103" template="../../obj/waypoint.tx" x="236.5" y="59.5"/>
+  <object id="104" template="../../obj/waypoint.tx" x="107.5" y="118"/>
+  <object id="105" template="../../obj/waypoint.tx" x="85" y="155.5"/>
+  <object id="106" template="../../obj/enemy.tx" x="304.5" y="162.5">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="83,118,87,118,83,99,80,99"/>
+   </properties>
+  </object>
+  <object id="107" template="../../obj/enemy.tx" x="186" y="39.5">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="100,102,103,102,100,101,77,101"/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/enemy.tx" x="418.5" y="327">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="116,92,93,94,95,94,93,92,91,92"/>
+   </properties>
+  </object>
+  <object id="109" template="../../obj/enemy.tx" x="284" y="115">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="85,86,103,102,100,101,104,101,100,102,103,86"/>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/enemy.tx" x="55" y="310">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="78,79,78,73,74,75,76,77,76,75,74,73"/>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="271" y="360"/>
+  <object id="112" template="../../obj/gold.tx" x="244.5" y="372"/>
+  <object id="113" template="../../obj/gold.tx" x="225" y="353"/>
+  <object id="114" template="../../obj/waypoint.tx" x="428" y="205"/>
+  <object id="115" template="../../obj/waypoint.tx" x="505.5" y="139"/>
+  <object id="116" template="../../obj/waypoint.tx" x="391.5" y="334"/>
+  <object id="117" template="../../obj/enemy.tx" x="183.5" y="177">
+   <properties>
+    <property name="enemy" value="Heart-Piercer Manticore"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="99,82,99,80,81,80,96,80,99,83,99,80,96,80,81,80,99,82"/>
+   </properties>
+  </object>
+  <object id="118" template="../../obj/waypoint.tx" x="328" y="132"/>
+ </objectgroup>
+</map>
