@@ -8,7 +8,7 @@ SVar:Planeswalker:DB$ Pump | ValidTgts$ Planeswalker | TgtPrompt$ Select up to o
 SVar:Land:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select up to one target land | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ DBExile | StackDescription$ None
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Targeted | SubAbility$ DBRepeatPlayer | Imprint$ True
 SVar:DBRepeatPlayer:DB$ RepeatEach | RepeatPlayers$ ImprintedController | RepeatSubAbility$ DBRepeatCard | SubAbility$ DBCleanup | SpellDescription$ For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.
-SVar:DBRepeatCard:DB$ RepeatEach | RepeatCards$ Card.IsImprinted+RememberedPlayerCtrl | Zone$ Exile | ChooseOrder$ RememberedPlayer | RepeatSubAbility$ DBDigUntil
+SVar:DBRepeatCard:DB$ RepeatEach | DefinedCards$ ImprintedLKI.RememberedPlayerCtrl | ChooseOrder$ RememberedPlayer | RepeatSubAbility$ DBDigUntil
 SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.sharesCardTypeWith RememberedLKI | FoundDestination$ Battlefield | Defined$ RememberedController | Shuffle$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 Oracle:Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.

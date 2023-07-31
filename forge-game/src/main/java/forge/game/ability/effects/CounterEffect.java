@@ -86,12 +86,6 @@ public class CounterEffect extends SpellAbilityEffect {
             sas = getTargetSpells(sa);
         }
 
-        if (sa.hasParam("ForgetOtherTargets")) {
-            if (sa.getParam("ForgetOtherTargets").equals("True")) {
-                sa.getHostCard().clearRemembered();
-            }
-        }
-
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
         for (final SpellAbility tgtSA : sas) {
@@ -101,6 +95,9 @@ public class CounterEffect extends SpellAbilityEffect {
             // so don't need to worry about LKI (else X amounts would be missing)
             if (sa.hasParam("RememberCounteredCMC")) {
                 sa.getHostCard().addRemembered(Integer.valueOf(tgtSACard.getCMC()));
+            }
+            if (sa.hasParam("RememberForCounter")) {
+                sa.getHostCard().addRemembered(tgtSACard);
             }
 
             if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {

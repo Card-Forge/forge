@@ -128,7 +128,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         boolean shuffle = sa.hasParam("Shuffle");
         final boolean optional = sa.hasParam("Optional");
         final boolean optionalFound = sa.hasParam("OptionalFoundMove");
-        boolean sequential = digSite == ZoneType.Library && revealedDest.equals(foundDest);
+        boolean sequential = digSite == ZoneType.Library && revealedDest != null && revealedDest.equals(foundDest);
 
         CardZoneTable table = new CardZoneTable();
         boolean combatChanged = false;
