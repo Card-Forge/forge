@@ -306,7 +306,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;
 
-        goldLabel.setText(data.entryFee + " [+Gold]");
+        goldLabel.setText("[+GoldCoin] " + data.entryFee);
         goldLabel.layout();
         goldLabel.setVisible(true);
 

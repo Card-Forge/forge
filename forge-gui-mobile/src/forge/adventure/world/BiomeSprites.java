@@ -3,16 +3,15 @@ package forge.adventure.world;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import forge.adventure.data.BiomeSpriteData;
 import forge.adventure.util.Config;
-
-import java.util.HashMap;
 
 /**
  * class to load and buffer map sprites
  */
 public class BiomeSprites {
-    private final HashMap<String, Array<Sprite>> spriteBuffer = new HashMap<>();
+    private final ObjectMap<String, Array<Sprite>> spriteBuffer = new ObjectMap<>();
     public String textureAtlas;
     public BiomeSpriteData[] sprites;
     private TextureAtlas textureAtlasBuffer;

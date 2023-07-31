@@ -107,7 +107,7 @@ public class InnScene extends UIScene {
                 tempHealthCost <= Current.player().getGold();
 
         tempHitPointCost.setDisabled(!purchaseable);
-        tempHitPointCost.setText(  tempHealthCost+"[+Gold]");
+        tempHitPointCost.setText("[+GoldCoin] " + tempHealthCost);
 
         getLocalEvent();
         if (localEvent == null){
