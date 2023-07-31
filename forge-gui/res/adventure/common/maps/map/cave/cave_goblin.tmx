@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJwL42RgCBvFo5jOOA4NYxPDpoaadpKCB8peSuweCHuHol/pFbe0zD+0tGsUDz8MAO0GwKs=
+   eJwL42RgCBvFo5jOOA4NYxPDpoaadpKCB8peSuweCHuHol+pEbduNLaHVP/SIs+O4uGDAayGwJM=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
@@ -17,14 +17,14 @@
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFyOAnFrHdNgwMe2zoY/8fJPZvoJ1/0OyNQWI/5qTMrs1QehsO+eUcDAwrgHglB4T9nBPCjqbMWgyzQUAUSQ7krzVA8WdA+gUQrwKyn3LidicpANlsmH+wybtxQtSgy1MCXDkh5oKwO5a480KS96AwbsWR2CA/PUHyN3K4w+wFhTFIzVMK7MWlF1eYemEJYzHyrccKYGEOS0PI7qE0fvGlR5AdqzkwwwRmN6XxSw54TGH8wgAszGBlAgxsodzoUUAnAAB51T3h
   </data>
  </layer>
  <layer id="6" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFhMAeWwaGvbYDY/ffAbJ3FIyCoQaMgXnFBIhN6ZxnioH2lQBx6WheHQVDBAAA29EGlA==
   </data>

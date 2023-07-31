@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="129">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="130">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -39,6 +39,7 @@
   <object id="50" template="../../obj/enemy.tx" x="114.583" y="603.75">
    <properties>
     <property name="enemy" value="Zombie Lord"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="51" template="../../obj/treasure.tx" x="143.348" y="341.386"/>
@@ -52,7 +53,7 @@
   <object id="54" template="../../obj/enemy.tx" x="383.278" y="236.128">
    <properties>
     <property name="enemy" value="Lich"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="55" template="../../obj/enemy.tx" x="754.069" y="495.78">
@@ -79,13 +80,13 @@
   <object id="68" template="../../obj/enemy.tx" x="16.049" y="464.286">
    <properties>
     <property name="enemy" value="Hippo"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="69" template="../../obj/enemy.tx" x="213" y="409.5">
    <properties>
     <property name="enemy" value="Hippo"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="70" template="../../obj/gold.tx" x="243" y="685.5"/>
@@ -96,6 +97,8 @@
   <object id="76" template="../../obj/enemy.tx" x="110" y="772">
    <properties>
     <property name="enemy" value="Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="77" template="../../obj/enemy.tx" x="659" y="608">
@@ -210,7 +213,7 @@
   <object id="93" template="../../obj/enemy.tx" x="515" y="229">
    <properties>
     <property name="enemy" value="Dark Knight"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
   <object id="94" template="../../obj/enemy.tx" x="2" y="621">
@@ -335,6 +338,14 @@
 ]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="129" template="../../obj/enemy.tx" x="343" y="241" visible="1">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
  </objectgroup>
