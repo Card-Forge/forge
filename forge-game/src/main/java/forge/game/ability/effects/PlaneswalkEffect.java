@@ -28,7 +28,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
             sa.getActivatingPlayer().planeswalkTo(sa, destinations);  
         }
     	{
-        for (Player p : game.getPlayers()) 
+         for ( Player p : getTargetPlayers(sa)) 
 		if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
                    Localizer.getInstance().getMessage("lblWouldYouLikeToPlaneswalk"), null)) {
                        return;
