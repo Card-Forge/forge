@@ -85,7 +85,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
-     * Constructor for AbilityMana.
+     * Dev Mode Constructor for AbilityMana.
      * </p>
      *
      * @param sourceCard
@@ -320,6 +320,9 @@ public class AbilityManaPart implements java.io.Serializable {
 
         TriggerHandler handler = card.getGame().getTriggerHandler();
         Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false, sVarHolder);
+        if (sVarHolder instanceof SpellAbility) {
+            trig.setSpawningAbility((SpellAbility) sVarHolder);
+        }
         handler.registerOneTrigger(trig);
     }
 
