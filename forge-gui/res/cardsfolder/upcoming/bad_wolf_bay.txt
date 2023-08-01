@@ -10,4 +10,4 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescr
 SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ETBPrevent | SubAbility$ DBPlaneswalk
 SVar:DBPlaneswalk:DB$ Planeswalk
 SVar:ETBPrevent:Event$ Moved | ActiveZones$ Battlefield | Origin$ Exile | Destination$ Battlefield | ValidLKI$ Card | Prevent$ True | Layer$ CantHappen | Description$ cards can't enter the battlefield from exile this turn.
-Oracle:At the beginning of combat on your turn, exile up to one target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nWhen chaos ensues, cards can’t enter the battlefield from exile this turn. Then planeswalk.
+Oracle:At the beginning of combat on your turn, exile up to one target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nWhen chaos ensues, cards can't enter the battlefield from exile this turn. Then planeswalk.
