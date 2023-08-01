@@ -53,3 +53,5 @@ ScryfallCode=PMEI
 50 R Frantic Search @Jeff Miracola
 51 R Mental Misstep @Erica Yang
 52 R Worn Powerstone @Henry G. Higginbotham
+53 R Gingerbrute @ Vincent Proce
+54 R Ruin Crab @Simon Dominic
