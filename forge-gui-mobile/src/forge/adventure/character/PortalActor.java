@@ -14,8 +14,7 @@ import java.util.HashMap;
  * PortalActor
  * Extension of EntryActor, visible on map, multiple states that change behavior
  */
-public class PortalActor extends EntryActor{
-
+public class PortalActor extends EntryActor {
     private final HashMap<PortalAnimationTypes, Animation<TextureRegion>> animations = new HashMap<>();
     private Animation<TextureRegion> currentAnimation = null;
     private PortalAnimationTypes currentAnimationType = PortalAnimationTypes.Closed;
@@ -24,35 +23,29 @@ public class PortalActor extends EntryActor{
 
     float transitionTimer;
 
-    public PortalActor(MapStage stage, int id, String targetMap, float x, float y, float w, float h, String direction, String currentMap, int portalTargetObject, String path)
-    {
+    public PortalActor(MapStage stage, int id, String targetMap, float x, float y, float w, float h, String direction, String currentMap, int portalTargetObject, String path) {
         super(stage, id, targetMap, x, y, w, h, direction, currentMap, portalTargetObject);
         load(path);
     }
 
-    public MapStage getMapStage()
-    {
+    public MapStage getMapStage() {
         return stage;
     }
 
     @Override
-    public void  onPlayerCollide()
-    {
-        if(currentAnimationType == PortalAnimationTypes.Inactive) {
+    public void onPlayerCollide() {
+        if (currentAnimationType == PortalAnimationTypes.Inactive) {
             //Activate portal? Launch Dialog?
         }
-        if(currentAnimationType == PortalAnimationTypes.Active) {
+        if (currentAnimationType == PortalAnimationTypes.Active) {
             if (targetMap == null || targetMap.isEmpty()) {
                 stage.exitDungeon();
             } else {
-                if (targetMap.equals(currentMap))
-                {
+                if (targetMap.equals(currentMap)) {
                     stage.spawn(entryTargetObject);
                     stage.getPlayerSprite().playEffect(Paths.EFFECT_TELEPORT, 0.5f);
                     stage.startPause(1.5f);
-                }
-                else
-                {
+                } else {
                     currentMap = targetMap;
                     TileMapScene.instance().loadNext(targetMap, entryTargetObject);
                     stage.getPlayerSprite().playEffect(Paths.EFFECT_TELEPORT, 0.5f);
@@ -62,33 +55,30 @@ public class PortalActor extends EntryActor{
     }
 
     public void spawn() {
-        switch(direction)
-        {
+        switch (direction) {
             case "up":
-                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y+h);
+                stage.getPlayerSprite().setPosition(x + w / 2 - stage.getPlayerSprite().getWidth() / 2, y + h);
                 break;
             case "down":
-                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y-stage.getPlayerSprite().getHeight());
+                stage.getPlayerSprite().setPosition(x + w / 2 - stage.getPlayerSprite().getWidth() / 2, y - stage.getPlayerSprite().getHeight());
                 break;
             case "right":
-                stage.getPlayerSprite().setPosition(x-stage.getPlayerSprite().getWidth(),y+h/2-stage.getPlayerSprite().getHeight()/2);
+                stage.getPlayerSprite().setPosition(x - stage.getPlayerSprite().getWidth(), y + h / 2 - stage.getPlayerSprite().getHeight() / 2);
                 break;
             case "left":
-                stage.getPlayerSprite().setPosition(x+w,y+h/2-stage.getPlayerSprite().getHeight()/2);
+                stage.getPlayerSprite().setPosition(x + w, y + h / 2 - stage.getPlayerSprite().getHeight() / 2);
                 break;
-
         }
     }
 
     protected void load(String path) {
-        if(path==null||path.isEmpty())return;
-        TextureAtlas atlas = Config.instance().getAtlas(path);
+        if (path == null || path.isEmpty()) return;
         animations.clear();
         for (PortalAnimationTypes stand : PortalAnimationTypes.values()) {
-            Array<Sprite> anim = atlas.createSprites(stand.toString());
+            Array<Sprite> anim = Config.instance().getAnimatedSprites(path, stand.toString());
             if (anim.size != 0) {
                 animations.put(stand, new Animation<>(0.2f, anim));
-                if(getWidth()==0.0)//init size onload
+                if (getWidth() == 0.0)//init size onload
                 {
                     setWidth(anim.first().getWidth());
                     setHeight(anim.first().getHeight());
@@ -108,7 +98,7 @@ public class PortalActor extends EntryActor{
     }
 
     public void setAnimation(String typeName) {
-        switch(typeName.toLowerCase()){
+        switch (typeName.toLowerCase()) {
             case "active":
                 setAnimation(PortalAnimationTypes.Active);
                 break;
@@ -156,32 +146,27 @@ public class PortalActor extends EntryActor{
     }
 
     public void draw(Batch batch, float parentAlpha) {
-        if (currentAnimation == null)
-        {
+        if (currentAnimation == null) {
             return;
         }
-        super.draw(batch,parentAlpha);
-        beforeDraw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
+        beforeDraw(batch, parentAlpha);
 
         TextureRegion currentFrame;
-        if (currentAnimationType.equals(PortalAnimationTypes.Opening) || currentAnimationType.equals(PortalAnimationTypes.Closing))
-        {
+        if (currentAnimationType.equals(PortalAnimationTypes.Opening) || currentAnimationType.equals(PortalAnimationTypes.Closing)) {
             currentFrame = currentAnimation.getKeyFrame(transitionTimer, false);
-        }
-        else
-        {
+        } else {
             currentFrame = currentAnimation.getKeyFrame(timer, true);
         }
 
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
-        Color oldColor=batch.getColor().cpy();
+        Color oldColor = batch.getColor().cpy();
         batch.setColor(getColor());
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
         batch.setColor(oldColor);
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
-
     }
 }
 

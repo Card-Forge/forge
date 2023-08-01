@@ -50,6 +50,7 @@ public class Config {
     private final String plane;
     private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
     private ObjectMap<PointOfInterestData, Array<Sprite>> poiSprites = new ObjectMap<>();
+    private ObjectMap<String, ObjectMap<String, Array<Sprite>>> animatedSprites = new ObjectMap<>();
 
     static public Config instance() {
         if (currentConfig == null)
@@ -274,6 +275,24 @@ public class Config {
         }
         return sprites;
     }
+
+    public Array<Sprite> getAnimatedSprites(String path, String animationName) {
+        Array<Sprite> sprites;
+        ObjectMap<String, Array<Sprite>> mapSprites = animatedSprites.get(path);
+        if (mapSprites == null) {
+            mapSprites = new ObjectMap<>();
+        }
+        sprites = mapSprites.get(animationName);
+        if (sprites == null) {
+            sprites = getAtlas(path).createSprites(animationName);
+            if (sprites != null) {
+                mapSprites.put(animationName, sprites);
+                animatedSprites.put(path, mapSprites);
+            }
+        }
+        return sprites;
+    }
+
     public SettingData getSettingData() {
         return settingsData;
     }
