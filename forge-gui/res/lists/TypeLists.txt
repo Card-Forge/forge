@@ -69,6 +69,7 @@ Crab:Crabs
 Crocodile:Crocodiles
 Cyborg:Cyborgs
 Cyclops:Cyclopes
+Dalek:Daleks
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -273,6 +274,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
+Time-Lord:Time Lords
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
