@@ -53,10 +53,8 @@ public class AttackRequirement {
 
         // Remove GameEntities that are no longer on an opposing battlefield or are
         // related to Players who have lost the game
-        final MapToAmount<GameEntity> combinedDefMap = new LinkedHashMapToAmount<>(defenderSpecific);
-
-        final List<GameEntity> toRemove = Lists.newArrayListWithCapacity(combinedDefMap.size());
-        for (final GameEntity entity : combinedDefMap.keySet()) {
+        final List<GameEntity> toRemove = Lists.newArrayListWithCapacity(defenderSpecific.size());
+        for (final GameEntity entity : defenderSpecific.keySet()) {
             boolean removeThis = false;
             if (entity instanceof Player) {
                 if (!((Player) entity).isInGame()) {
@@ -74,9 +72,7 @@ public class AttackRequirement {
                 toRemove.add(entity);
             }
         }
-        for (final GameEntity entity : toRemove) {
-            defenderSpecific.remove(entity);
-        }
+        defenderSpecific.keySet().removeAll(toRemove);
     }
 
     public Card getAttacker() {
@@ -97,9 +93,7 @@ public class AttackRequirement {
         }
 
         final boolean isAttacking = defender != null;
-        int violations = 0;
-
-        violations += defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
+        int violations = defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
         if (isAttacking) {
             final Combat combat = defender.getGame().getCombat();
             final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
