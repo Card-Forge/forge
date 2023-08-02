@@ -240,6 +240,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
                 return false;
             }
+            // Prevent AI from casting spells with "May be played" from the Stack
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
