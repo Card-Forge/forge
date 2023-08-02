@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -173,7 +174,16 @@ public class CardProperty {
             }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
-            for (Object o : spellAbility.getTriggerRemembered()) {
+            List<Object> trigRems = spellAbility.getTriggerRemembered();
+            if (trigRems.size() == 0) { // try wrapped
+                SpellAbility sa = (SpellAbility) spellAbility;
+                SpellAbility root = sa.getRootAbility();
+                if (root.isWrapper()) {
+                    root = ((WrappedAbility) root).getWrappedAbility();
+                }
+                trigRems = root.getTriggerRemembered();
+            }
+            for (Object o : trigRems) {
                 if (o instanceof Card) {
                     Card trigRem = (Card) o;
                     if (trigRem.equalsWithTimestamp(card)) {
