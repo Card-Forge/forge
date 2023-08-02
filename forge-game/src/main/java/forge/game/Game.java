@@ -17,35 +17,16 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import forge.game.card.*;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import com.google.common.eventbus.EventBus;
-
 import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
@@ -54,11 +35,7 @@ import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
-import forge.game.player.IGameEntitiesFactory;
-import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
-import forge.game.player.RegisteredPlayer;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -73,6 +50,9 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
