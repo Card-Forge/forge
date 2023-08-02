@@ -22,7 +22,9 @@ public class ChangeXEffect extends SpellAbilityEffect {
             if (castSA != null && tgtSA.equals(castSA) && castSA.getXManaCostPaid() != null) {
                 castSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
             }
-            tgtSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
+            if (tgtSA.getXManaCostPaid() != null) {
+                tgtSA.setXManaCostPaid(tgtSA.getXManaCostPaid() * 2);
+            }
         }
     }
 }

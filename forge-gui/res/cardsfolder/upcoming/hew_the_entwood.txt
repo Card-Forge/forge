@@ -8,7 +8,7 @@ SVar:ShiftX:Remembered$Amount
 SVar:DBChoose:DB$ ChooseCard | Choices$ Land.IsRemembered,Artifact.IsRemembered | MinAmount$ 0 | ChoiceZone$ Library | Amount$ ShiftX | Mandatory$ True | SubAbility$ DBPutArtifact
 SVar:DBPutArtifact:DB$ ChangeZoneAll | ChangeType$ Artifact.ChosenCard | Origin$ Library | Destination$ Battlefield | SubAbility$ DBPutLands
 SVar:DBPutLands:DB$ ChangeZoneAll | ChangeType$ Land.ChosenCard | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ ShuffleRest
-SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | Hidden$ True | Mandatory$ True | ChangeType$ Card.IsRemembered+!ChosenCard | SubAbility$ DBCleanup
+SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | ChangeType$ Card.IsRemembered+!ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Artifact

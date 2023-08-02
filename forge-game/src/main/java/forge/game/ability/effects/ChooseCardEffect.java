@@ -233,8 +233,16 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("QuasiLibrarySearch")) {
-                    final Player searched = AbilityUtils.getDefinedPlayers(host,
-                            sa.getParam("QuasiLibrarySearch"), sa).get(0);
+                    Long controlTimestamp = null;
+                    if (activator.equals(p)) {
+                        Map.Entry<Long, Player> searchControlPlayer = p.getControlledWhileSearching();
+                        if (searchControlPlayer != null) {
+                            controlTimestamp = searchControlPlayer.getKey();
+                            p.addController(controlTimestamp, searchControlPlayer.getValue());
+                        }
+                    }
+
+                    final Player searched = AbilityUtils.getDefinedPlayers(host, sa.getParam("QuasiLibrarySearch"), sa).get(0);
                     final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
                     CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
                             ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
@@ -247,6 +255,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         return;
                     }
                     chosen.add(choice);
+
+                    if (controlTimestamp != null) {
+                        p.removeController(controlTimestamp);
+                    }
                 } else {
                     chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
                             !sa.hasParam("Mandatory"), null));
