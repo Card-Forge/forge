@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
 A:AB$ PutCounter | Cost$ 2 B ExiledMoveToGrave<1/Creature.ExiledWithSource> | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ TrigDraw | SpellDescription$ Put two +1/+1 counters on NICKNAME.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-A:AB$ ChangeZone | Cost$ X 1 B | TgtPrompt$ Select target creature | Origin$ Exile | Destination$ Battlefield | Tapped$ True | ValidTgts$ Creature.ExiledWithSource+cmcEQX | Hidden$ True | Mandatory$ True | ChangeNum$ 1 | GainControl$ True | SpellDescription$ Put target creature card with mana value X exiled with NICKNAME onto the battlefield tapped under your control.
+A:AB$ ChangeZone | Cost$ X 1 B | TgtPrompt$ Select target creature | Origin$ Exile | Destination$ Battlefield | Tapped$ True | ValidTgts$ Creature.ExiledWithSource+cmcEQX | GainControl$ True | SpellDescription$ Put target creature card with mana value X exiled with NICKNAME onto the battlefield tapped under your control.
 SVar:X:Count$xPaid
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
