@@ -1,8 +1,8 @@
 Name:Absorb Energy
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberTargets$ True | SubAbility$ DBEffect | SpellDescription$ Counter target spell.
-SVar:DBEffect:DB$ Effect | ImprintCards$ Remembered | RememberObjects$ ValidHand Card.YouOwn+sharesCardTypeWith RememberedLKI | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Absorb Energy's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ Cards in your hand that share a card type with that spell perpetually gain "This spell costs {1} less to cast."
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberForCounter$ True | SubAbility$ DBEffect | SpellDescription$ Counter target spell.
+SVar:DBEffect:DB$ Effect | ImprintCards$ Remembered | RememberObjects$ ValidHand Card.YouOwn+sharesCardTypeWith Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Absorb Energy's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ Cards in your hand that share a card type with that spell perpetually gain "This spell costs {1} less to cast."
 SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ PerpetualReduceCost | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Cards in your hand that share a card type with that [imprinted] spell perpetually gain "This spell costs {1} less to cast."
 SVar:PerpetualReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
