@@ -77,7 +77,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
-Doctor:Docters
+Doctor:Doctors
 Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
