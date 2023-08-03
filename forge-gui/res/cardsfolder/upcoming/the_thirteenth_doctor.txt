@@ -7,6 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | C
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Team TARDIS — At the beginning of your end step, untap each creature you control with a counter on it.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl+HasCounters
 DeckHas:Ability$Counters
-DeckHints:Ability$Counters
-AI:RemoveDeck:Random
+DeckNeeds:Ability$Counters
 Oracle:Paradox — Whenever you cast a spell from anywhere other than your hand, put a +1/+1 counter on target creature.\nTeam TARDIS — At the beginning of your end step, untap each creature you control with a counter on it.
