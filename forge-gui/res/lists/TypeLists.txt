@@ -67,6 +67,7 @@ Cow:Cows
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
+Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dauthi:Dauthis
@@ -76,6 +77,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Doctor:Docters
 Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
