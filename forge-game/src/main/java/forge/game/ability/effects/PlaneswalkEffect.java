@@ -18,20 +18,20 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
             return;
         }
         if (sa.hasParam("Optional") && sa.getActivatingPlayer().getController().confirmAction(sa, null,
-            Localizer.getInstance().getMessage("lblWouldYouLikeToPlaneswalk"), null)) {
-                return;
+                Localizer.getInstance().getMessage("lblWouldYouLikeToPlaneswalk"), null)) {
+                    return;
         }
-        	if (!sa.hasParam("DontPlaneswalkAway")) {
+
+        if (!sa.hasParam("DontPlaneswalkAway")) {
             for (Player p : game.getPlayers()) {
                 p.leaveCurrentPlane();
+            }
         }
         if (sa.hasParam("Defined")) {
             CardCollectionView destinations = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             sa.getActivatingPlayer().planeswalkTo(sa, destinations);
-        } 
-        else {
+        } else {
             sa.getActivatingPlayer().planeswalk(sa);
         }
-    }
     }
 }
