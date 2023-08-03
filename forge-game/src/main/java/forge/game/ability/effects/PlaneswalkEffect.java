@@ -17,7 +17,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;
         }
-        if (sa.hasParam("Optional") && sa.getActivatingPlayer().getController().confirmAction(sa, null,
+        if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
                 Localizer.getInstance().getMessage("lblWouldYouLikeToPlaneswalk"), null)) {
                     return;
         }
