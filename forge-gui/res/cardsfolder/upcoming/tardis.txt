@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Vehicle
 PT:2/4
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Time-Lord+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Time Lord+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrantCascade | Triggers$ ExileEffect | SubAbility$ DBPlaneswalk
 SVar:DBPlaneswalk:DB$ Planeswalk | Optional$ True
 SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next spell you cast this turn has cascade and you may planeswalk.

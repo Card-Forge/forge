@@ -274,7 +274,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
-Time-Lord:Time Lords
+Time Lord:Time Lords
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
