@@ -174,16 +174,7 @@ public class CardProperty {
             }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
-            List<Object> trigRems = spellAbility.getTriggerRemembered();
-            if (trigRems.size() == 0) { // try wrapped
-                SpellAbility sa = (SpellAbility) spellAbility;
-                SpellAbility root = sa.getRootAbility();
-                if (root.isWrapper()) {
-                    root = ((WrappedAbility) root).getWrappedAbility();
-                }
-                trigRems = root.getTriggerRemembered();
-            }
-            for (Object o : trigRems) {
+            for (Object o : spellAbility.getTriggerRemembered()) {
                 if (o instanceof Card) {
                     Card trigRem = (Card) o;
                     if (trigRem.equalsWithTimestamp(card)) {
