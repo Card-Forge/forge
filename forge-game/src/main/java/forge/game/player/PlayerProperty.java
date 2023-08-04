@@ -189,6 +189,26 @@ public class PlayerProperty {
             if (!source.isRemembered(player)) {
                 return false;
             }
+        } else if (property.equals("IsRememberedOrController")) {
+            boolean found = false;
+            for (Object o : source.getRemembered()) {
+                if (o instanceof Player) {
+                    final Player p = (Player) o;
+                    if (p.equals(player)) {
+                        found = true;
+                        break;
+                    }
+                } else if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    if (c.getController().equals(player)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.equals("IsNotRemembered")) {
             if (source.isRemembered(player)) {
                 return false;
