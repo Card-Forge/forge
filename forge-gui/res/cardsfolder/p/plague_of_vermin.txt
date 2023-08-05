@@ -1,22 +1,20 @@
 Name:Plague of Vermin
 ManaCost:6 B
 Types:Sorcery
-A:SP$ Repeat | RepeatSubAbility$ DBResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBRepeatToken | StackDescription$ REP you_{p:You} | SpellDescription$ Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.
+A:SP$ Repeat | RepeatSubAbility$ DBResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBToken | StackDescription$ REP you_{p:You} | SpellDescription$ Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.
 SVar:DBResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
 SVar:DBChoice:DB$ ChooseNumber | Defined$ Remembered | Max$ LifeTotal | AILogic$ Vermin | ListTitle$ Choose any amount of life to pay | SubAbility$ DBCheckPaid
 SVar:DBCheckPaid:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBStore
 SVar:DBStore:DB$ StoreSVar | SVar$ EachPlayer | Type$ AdditiveForEach | Expression$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | UnlessCost$ PayLife<X> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBGiveUp | SpellDescription$ Pay the chosen amount of life.
 SVar:DBGiveUp:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:DBRepeatToken:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | SubAbility$ DBFinalReset
-SVar:DBToken:DB$ Token | TokenAmount$ LifePaidAmount | TokenScript$ b_1_1_rat | TokenOwner$ Remembered | StackDescription$ None
+SVar:DBToken:DB$ Token | DifferentAmounts$ SVarAmount | TokenScript$ b_1_1_rat | TokenOwner$ Player | StackDescription$ None | SubAbility$ DBFinalReset
 SVar:DBFinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBResetEach
 SVar:DBResetEach:DB$ RepeatEach | RepeatSubAbility$ DBCleanup | RepeatPlayers$ Player
 SVar:DBCleanup:DB$ StoreSVar | SVar$ EachPlayer | Type$ Number | Expression$ 0
 SVar:NumPlayerGiveup:Number$0
 SVar:TotalPlayer:PlayerCountPlayers$Amount
 SVar:LifeTotal:PlayerCountRemembered$LifeTotal
-SVar:LifePaidAmount:PlayerCountRemembered$SVarAmount
 SVar:X:Count$ChosenNumber
 AI:RemoveDeck:Random
 DeckHas:Ability$Token & Type$Rat

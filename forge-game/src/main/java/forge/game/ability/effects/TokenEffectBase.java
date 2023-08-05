@@ -112,7 +112,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Card prototype = c.getColumnKey();
             Player creator = c.getRowKey();
             Player controller = prototype.getController();
-            int cellAmount = c.getValue();
+            int cellAmount = !sa.hasParam("DifferentAmounts") ? c.getValue() :
+                    AbilityUtils.playerXProperty(creator, sa.getParam("DifferentAmounts"), host, sa);
 
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = CardFactory.copyCard(prototype, true);
