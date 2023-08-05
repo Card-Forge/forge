@@ -277,6 +277,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                     !AiAttackController.choosePreferredDefenderPlayer(ai).equals(sa.getActivatingPlayer()))) {
                 choice = ComputerUtilCard.getBestAI(options);
                 // TODO: would also be nice to take the counters if not in a good position to attack anyway
+                //  – might also be good to do a separate AI for Noble Heritage
             }
         } else if (logic.equals("Phylactery")) {
             CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
