@@ -1,7 +1,0 @@
-Name:Lorien Revealed
-ManaCost:3 U U
-Types:Sorcery
-A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
-K:TypeCycling:Island:1
-DeckHas:Ability$Discard
-Oracle:Draw three cards.\nIslandcycling {1} ({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

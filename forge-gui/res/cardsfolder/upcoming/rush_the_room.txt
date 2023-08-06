@@ -1,8 +1,0 @@
-Name:Rush the Room
-ManaCost:R
-Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | SubAbility$ DBPump | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | ConditionDefined$ Targeted | ConditionPresent$ Orc,Goblin | SpellDescription$ If it's a Goblin or Orc, it also gains haste until end of turn.
-DeckHints:Type$Goblin|Orc
-SVar:PlayMain1:TRUE
-Oracle:Target creature gets +1/+0 and gains first strike until end of turn. If it's a Goblin or Orc, it also gains haste until end of turn.

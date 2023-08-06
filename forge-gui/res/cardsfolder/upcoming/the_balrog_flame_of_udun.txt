@@ -1,8 +1,0 @@
-Name:The Balrog, Flame of Udun
-ManaCost:3 B R
-Types:Legendary Creature Avatar Demon
-PT:7/7
-K:Trample
-T:Mode$ ChangesZone | Origin$ Battlefield | TriggerZones$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Legendary+OppCtrl | Execute$ TrigChange | TriggerDescription$ When a legendary creature an opponent controls dies, put CARDNAME on the bottom of its owner's library.
-SVar:TrigChange:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1
-Oracle:Trample\nWhen a legendary creature an opponent controls dies, put The Balrog, Flame of Udûn on the bottom of its owner's library.
