@@ -76,12 +76,14 @@ public class ComputerUtilAbility {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
-        all.addAll(player.getCardsIn(ZoneType.Command));
-        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
-            all.add(player.getCardsIn(ZoneType.Library).get(0));
+        for (Player p : game.getPlayers()) {
+            if (!p.getCardsIn(ZoneType.Library).isEmpty()) {
+                all.add(p.getCardsIn(ZoneType.Library).get(0));
+            }
         }
-        all.addAll(game.getPlayers().getCardsIn(ZoneType.Exile));
-        all.addAll(game.getPlayers().getCardsIn(ZoneType.Battlefield));
+        all.addAll(game.getCardsIn(ZoneType.Command));
+        all.addAll(game.getCardsIn(ZoneType.Exile));
+        all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
     }
 

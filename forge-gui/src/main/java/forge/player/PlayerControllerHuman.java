@@ -284,6 +284,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     break;
                 }
             }
+            for (SpellAbility sa : hostCard.getAllSpellAbilities()) {
+                if (sa.hasParam("Activator")
+                        && player.isValid(sa.getParam("Activator"), hostCard.getController(), hostCard, sa)) {
+                    noPermission = false;
+                    break;
+                }
+            }
             if (noPermission) {
                 return null;
             }
