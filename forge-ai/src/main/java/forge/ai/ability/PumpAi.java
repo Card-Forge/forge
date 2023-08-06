@@ -469,6 +469,53 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
+        if (sa.hasParam("SwitchPT")) {
+            // Logic to kill opponent creatures
+            CardCollection oppCreatures = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            if (!oppCreatures.isEmpty()) {
+                CardCollection oppCreaturesFiltered = CardLists.filter(oppCreatures, new Predicate<Card>() {
+
+                    @Override
+                    public boolean apply(Card input) {
+                        // don't care about useless creatures
+                        if (ComputerUtilCard.isUselessCreature(ai, input)
+                                || input.hasSVar("EndOfTurnLeavePlay")) {
+                            return false;
+                        }
+                        // dies by target
+                        if (input.getSVar("Targeting").equals("Dies")) {
+                            return true;
+                        }
+                        // dies by state based action
+                        if (input.getNetPower() <= 0) {
+                            return true;
+                        }
+                        if (input.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                            return false;
+                        }
+                        // check if switching PT causes it to be lethal
+                        Card lki = CardUtil.getLKICopy(input);
+                        lki.addSwitchPT(-1, 0);
+                        if (input.getLethal() - input.getDamage() <= 0) {
+                            return true;
+                        }
+                        return false;
+                    }
+
+                });
+                // the ones that die by switching PT
+                if (!oppCreaturesFiltered.isEmpty()) {
+                    Card best = ComputerUtilCard.getBestCreatureAI(oppCreaturesFiltered);
+                    if (best != null) {
+                        sa.getTargets().add(best);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         if (sa.isCurse()) {
             for (final Player opp : ai.getOpponents()) {
                 if (sa.canTarget(opp)) {
