@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 K:Ward:2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME, you may pay {X}{W}{U}{B}. If you do, draw X cards.
-SVar:TrigDraw:AB$ Draw | Cost$ X W U U | NumCards$ X
+SVar:TrigDraw:AB$ Draw | Cost$ X W U B | NumCards$ X
 SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.
 SVar:TrigToken:AB$ Token | Cost$ PayLife<4> | TokenAmount$ Y | TokenScript$ b_1_1_vampire_knight_lifelink | TokenOwner$ You
