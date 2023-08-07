@@ -141,15 +141,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             toolTipImage.remove();
             toolTipImage = new RewardImage(processDrawable(image));
             if (GuiBase.isAndroid() || Forge.hasGamepad()) {
-                if (shown) {
-                    holdTooltip.getTouchDownTarget().fire(RewardScene.eventTouchUp());
-                    Gdx.input.setInputProcessor(null);
+                if (holdTooltip != null) {
+                    if (shown) {
+                        holdTooltip.getTouchDownTarget().fire(RewardScene.eventTouchUp());
+                        Gdx.input.setInputProcessor(null);
+                    }
+                    if (holdTooltip.getImage() != null && holdTooltip.getImage().getDrawable() instanceof TextureRegionDrawable) {
+                        try { // if texture is null either it's not initialized or already disposed
+                            ((TextureRegionDrawable) holdTooltip.getImage().getDrawable()).getRegion().getTexture().dispose();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    holdTooltip.hide();
+                    holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
                 }
-                if (holdTooltip.getImage() != null && holdTooltip.getImage().getDrawable() instanceof TextureRegionDrawable) {
-                    ((TextureRegionDrawable) holdTooltip.getImage().getDrawable()).getRegion().getTexture().dispose();
-                }
-                holdTooltip.hide();
-                holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
             } else {
                 tooltip.setActor(new ComplexTooltip(toolTipImage));
             }
