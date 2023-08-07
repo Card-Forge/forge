@@ -254,7 +254,7 @@ public final class GameActionUtil {
                 }
 
                 // foretell by external source
-                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
+                if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);

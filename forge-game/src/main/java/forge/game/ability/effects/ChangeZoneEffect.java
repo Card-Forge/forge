@@ -752,7 +752,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
-                        movedCard.setForetoldByEffect(true);
+                        if (sa.hasParam("ForetoldCost")) {
+                            movedCard.setForetoldCostByEffect(true);
+                        }
                         // look at the exiled card
                         movedCard.addMayLookTemp(player);
                     }
@@ -1420,7 +1422,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
-                        movedCard.setForetoldByEffect(true);
+                        if (sa.hasParam("ForetoldCost")) {
+                            movedCard.setForetoldCostByEffect(true);
+                        }
                         // look at the exiled card
                         movedCard.addMayLookTemp(sa.getActivatingPlayer());
                     }
