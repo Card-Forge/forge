@@ -1677,6 +1677,7 @@ public class AbilityUtils {
                 boolean v = Expressions.compare(lhs, compString[2], rhs);
                 return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
             }
+
             if (ctb instanceof SpellAbility) {
                 final SpellAbility sa = (SpellAbility) ctb;
 
@@ -1711,13 +1712,12 @@ public class AbilityUtils {
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
                         // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
                         // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.
-                        if (TriggerType.ChangesZone.equals(t.getMode())
-                                && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
+                        if (TriggerType.ChangesZone.equals(t.getMode()) && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
                            return doXMath(c.getXManaCostPaid(), expr, c, ctb);
                         } else if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
                             SpellAbilityStackInstance castSI = (SpellAbilityStackInstance) root.getTriggeringObject(AbilityKey.StackInstance);
-                            if (castSI == null) {
+                            if (castSI == null || castSI.getSpellAbility().getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(castSI.getSpellAbility().getXManaCostPaid(), expr, c, ctb);
