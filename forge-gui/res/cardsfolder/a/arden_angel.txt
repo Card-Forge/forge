@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Angel
 PT:4/4
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigRoll  | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, roll a four-sided die. If the result is 1, return CARDNAME from your graveyard to the battlefield.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, roll a four-sided die. If the result is 1, return CARDNAME from your graveyard to the battlefield.
 SVar:TrigRoll:DB$ RollDice | Sides$ 4 | ResultSubAbilities$ 1:DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 Oracle:Flying\nAt the beginning of your upkeep, if Arden Angel is in your graveyard, roll a four-sided die. If the result is 1, return Arden Angel from your graveyard to the battlefield.
