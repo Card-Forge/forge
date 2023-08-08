@@ -123,7 +123,6 @@ public class TokenEffect extends TokenEffectBase {
             useZoneTable = true;
         }
 
-        // using param "DifferentAmounts" will calculate amounts based on that playerXProperty for each player
         makeTokenTable(AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner", "You"), sa),
                 sa.getParam("TokenScript").split(","),
                 AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa),
