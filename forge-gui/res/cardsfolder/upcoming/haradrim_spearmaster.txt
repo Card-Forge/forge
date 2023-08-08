@@ -1,9 +1,0 @@
-Name:Haradrim Spearmaster
-ManaCost:2 R
-Types:Creature Human Warrior
-PT:2/3
-K:Reach
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ 1
-SVar:PlayMain1:TRUE
-Oracle:Reach\nAt the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.

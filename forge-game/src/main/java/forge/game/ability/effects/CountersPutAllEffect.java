@@ -63,13 +63,21 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
 
         Player placer = activator;
+        boolean placerPerCard = false;
         if (sa.hasParam("Placer")) {
             final String pstr = sa.getParam("Placer");
-            placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
+            if (pstr.contains("Controller")) {
+                placerPerCard = true;
+            } else {
+                placer =  AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
+            }
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
+            if (placerPerCard) {
+                placer = tgtCard.getController();
+            }
             tgtCard.addCounter(type, counterAmount, placer, table);
         }
 
@@ -89,6 +97,9 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
                     AbilityUtils.calculateAmount(host, sa.getParam("CounterNum2"), sa) : counterAmount;
 
             for (final Card tgtCard : cards) {
+                if (placerPerCard) {
+                    placer = tgtCard.getController();
+                }
                 tgtCard.addCounter(type2, counterAmount2, placer, table);
             }
         }

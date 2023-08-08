@@ -1,7 +1,7 @@
 Name:Trove of Temptation
 ManaCost:3 R
 Types:Enchantment
-K:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.
+S:Mode$ PlayerMustAttack | ValidPlayer$ Opponent | MustAttack$ You,Planeswalker.YouCtrl | Description$ Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTreasureToken | TriggerDescription$ At the beginning of your end step, create a Treasure token.
 SVar:DBTreasureToken:DB$ Token | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure

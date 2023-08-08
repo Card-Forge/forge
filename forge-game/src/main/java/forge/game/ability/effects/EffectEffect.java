@@ -19,6 +19,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
@@ -52,7 +53,6 @@ public class EffectEffect extends SpellAbilityEffect {
         FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
         String noteCounterDefined = null;
-        List<Player> effectOwner = null;
         final String duration = sa.getParam("Duration");
 
         if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
@@ -134,15 +134,21 @@ public class EffectEffect extends SpellAbilityEffect {
             name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
-        // Unique Effects shouldn't be duplicated
-        if (sa.hasParam("Unique") && game.isCardInCommand(name)) {
-            return;
+        PlayerCollection effectOwner = sa.hasParam("EffectOwner") ?
+                AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa) :
+                new PlayerCollection(sa.getActivatingPlayer());
+
+        // Unique$ is for effects that should be one per player (e.g. Gollum, Obsessed Stalker)
+        if (sa.hasParam("Unique")) {
+            for (Player eo : effectOwner.threadSafeIterable()) {
+                if (eo.isCardInCommand(name)) {
+                    effectOwner.remove(eo);
+                }
+            }
         }
 
-        if (sa.hasParam("EffectOwner")) {
-            effectOwner = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa);
-        } else {
-            effectOwner = Lists.newArrayList(sa.getActivatingPlayer());
+        if (effectOwner.isEmpty()) {
+            return; // return if we don't need to make an effect
         }
 
         String image;

@@ -1,8 +1,0 @@
-Name:Council's Deliberation
-ManaCost:1 U
-Types:Instant
-A:SP$ Draw | SpellDescription$ Draw a card.
-T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Island.YouCtrl | Execute$ DBDraw | TriggerDescription$ Whenever you scry, if you control an Island, you may exile CARDNAME from your graveyard. If you do, draw a card.
-SVar:DBDraw:AB$ Draw | Cost$ ExileFromGrave<1/CARDNAME> 
-DeckHas:Ability$Graveyard
-Oracle:Draw a card.\nWhenever you scry, if you control an Island, you may exile Council's Deliberation from your graveyard. If you do, draw a card.

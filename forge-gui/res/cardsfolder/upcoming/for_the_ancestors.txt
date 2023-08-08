@@ -1,8 +1,0 @@
-Name:For the Ancestors
-ManaCost:2 G
-Types:Instant
-A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDig | AILogic$ MostProminentInComputerDeckNonToken | SpellDescription$ Choose a creature type. Look at the top six cards of your library. You may reveal any number of cards of the chosen type from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in a random order.
-SVar:DBDig:DB$ Dig | DigNum$ 6 | AnyNumber$ True | ChangeValid$ Creature.ChosenType | DestinationZone$ Hand | RestRandomOrder$ True
-K:Flashback:3 G
-DeckHas:Ability$Graveyard
-Oracle:Choose a creature type. Look at the top six cards of your library. You may reveal any number of cards of the chosen type from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in a random order.\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

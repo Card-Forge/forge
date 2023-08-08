@@ -483,7 +483,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
+            final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
                 continue;
             }

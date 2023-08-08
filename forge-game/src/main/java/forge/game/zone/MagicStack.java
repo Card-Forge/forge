@@ -318,7 +318,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.isAbility()) {
+        if (sp.isAbility() && !sp.isCopied()) {
             source.addAbilityActivated(sp);
         }
 

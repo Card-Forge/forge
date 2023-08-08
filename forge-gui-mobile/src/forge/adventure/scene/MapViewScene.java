@@ -121,7 +121,7 @@ public class MapViewScene extends UIScene {
             if (poi != null) {
                 if (positions.contains(poi.getPosition()))
                     continue; //don't map duplicate position to prevent stacking
-                TypingLabel label = Controls.newTypingLabel("[%?BLACKEN][+GPS]{GRADIENT=RED;WHITE;1;1}>" + adq.name + "{ENDGRADIENT}");
+                TypingLabel label = Controls.newTypingLabel("[+GPS][%?BLACKEN] " + adq.name);
                 labels.add(label);
                 table.addActor(label);
                 label.setPosition(getMapX(poi.getPosition().x) - label.getWidth() / 2, getMapY(poi.getPosition().y) - label.getHeight() / 2);
@@ -130,7 +130,7 @@ public class MapViewScene extends UIScene {
             }
         }
         for (PointOfInterest poi : bookmark) {
-            TypingLabel label = Controls.newTypingLabel("[%70][+Star]");
+            TypingLabel label = Controls.newTypingLabel("[%75][+Star] ");
             table.addActor(label);
             label.setPosition(getMapX(poi.getPosition().x) - label.getWidth() / 2, getMapY(poi.getPosition().y) - label.getHeight() / 2);
             label.skipToTheEnd();

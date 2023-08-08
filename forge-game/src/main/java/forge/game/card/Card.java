@@ -2189,7 +2189,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
-                } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                } else if (keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbLong.append(inst.getReminderText()).append("\r\n");
                 } else if (keyword.contains("At the beginning of your upkeep, ")
@@ -2860,7 +2860,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbBefore.append(n + 1 == costs.length ? ".\r\n\r\n" : n + 2 == costs.length && costs.length > 2
                                 ? ", or " : n + 2 == costs.length ? " or " : ", ");
                     }
-                } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                } else if (keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbBefore.append(inst.getReminderText());
                     sbBefore.append("\r\n");

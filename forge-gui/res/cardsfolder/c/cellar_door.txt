@@ -1,7 +1,7 @@
 Name:Cellar Door
 ManaCost:2
 Types:Artifact
-A:AB$ Mill | Cost$ 3 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | FromBottom$ True | RememberMilled$ True | SubAbility$ DBToken | StackDescription$ {p:Targeted} puts the bottom card of their library into their graveyard. | SpellDescription$ Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
+A:AB$ Dig | Cost$ 3 T | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | FromBottom$ True | DestinationZone$ Graveyard | RememberChanged$ True | SubAbility$ DBToken | StackDescription$ {p:Targeted} puts the bottom card of their library into their graveyard. | SpellDescription$ Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ If it's a creature card, {p:You} creates a 2/2 black Zombie creature token. | SpellDescription$ If it's a creature card, you create a 2/2 black Zombie creature token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{3}, {T}: Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.

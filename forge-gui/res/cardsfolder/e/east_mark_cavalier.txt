@@ -1,0 +1,8 @@
+Name:East-Mark Cavalier
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/2
+K:Vigilance
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Goblin,Orc| TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals damage to a Goblin or Orc, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Vigilance\nWhenever East-Mark Cavalier deals damage to a Goblin or Orc, destroy that creature.

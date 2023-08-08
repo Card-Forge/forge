@@ -1594,11 +1594,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return notedNum.get(notedFor);
     }
 
-    public final CardCollectionView mill(int n, final ZoneType destination,
-            final boolean bottom, SpellAbility sa, CardZoneTable table, Map<AbilityKey, Object> params) {
-        final CardCollectionView lib = getCardsIn(ZoneType.Library);
-        final CardCollection milled = new CardCollection();
-
+    public final CardCollectionView mill(int n, final ZoneType destination, SpellAbility sa, CardZoneTable table, Map<AbilityKey, Object> params) {
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
         repRunParams.put(AbilityKey.Number, n);
@@ -1606,7 +1602,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             repRunParams.putAll(params);
         }
 
-        if (destination == ZoneType.Graveyard && !bottom) {
+        if (destination == ZoneType.Graveyard) {
             switch (getGame().getReplacementHandler().run(ReplacementType.Mill, repRunParams)) {
                 case NotReplaced:
                     break;
@@ -1615,24 +1611,15 @@ public class Player extends GameEntity implements Comparable<Player> {
                     if (this.equals(repRunParams.get(AbilityKey.Affected))) {
                         n = (int) repRunParams.get(AbilityKey.Number);
                     } else {
-                        return milled;
+                        return CardCollection.EMPTY;
                     }
                     break;
                 default:
-                    return milled;
+                    return CardCollection.EMPTY;
             }
         }
 
-        final int max = Math.min(n, lib.size());
-
-        for (int i = 0; i < max; i++) {
-            if (bottom) {
-                milled.add(lib.get(lib.size() - i - 1));
-            } else {
-                milled.add(lib.get(i));
-            }
-        }
-
+        CardCollection milled = getTopXCardsFromLibrary(n);
         CardCollectionView milledView = milled;
 
         if (destination == ZoneType.Graveyard) {

@@ -11,7 +11,7 @@ SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 10 | Reveal$ True | ImprintRevea
 SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.IsImprinted | TypesFromZone$ Library | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn+IsImprinted | ChoiceZone$ Library | RememberChosen$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ ShuffleRest
-SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | Hidden$ True | Mandatory$ True | NoReveal$ True | NoLooking$ True | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBCleanup
+SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$LifeGain
 Oracle:Flying, vigilance, deathtouch, lifelink\nWhen Atraxa, Grand Unifier enters the battlefield, reveal the top ten cards of your library. For each card type, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order. (Artifact, battle, creature, enchantment, instant, land, planeswalker, and sorcery are card types.)

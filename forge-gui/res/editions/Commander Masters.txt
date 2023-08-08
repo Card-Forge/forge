@@ -1076,9 +1076,9 @@ ScryfallCode=CMM
 
 [tokens]
 avacyn
-b_0_0_germ
-b_0_0_sliver_army
-b_0_0_zombie_army
+b_0_0_phyrexian_germ
+b_0_0_army
+b_0_0_army
 b_1_1_assassin_deathtouch_haste
 b_1_1_rat
 b_1_1_thrull
