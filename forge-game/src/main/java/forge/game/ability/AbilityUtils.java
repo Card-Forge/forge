@@ -3428,6 +3428,10 @@ public class AbilityUtils {
             return doXMath(player.getLifeStartedThisTurnWith(), m, source, ctb);
         }
 
+        if (value.contains("SVarAmount")) {
+            return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
+        }
+
         if (value.contains("PoisonCounters")) {
             return doXMath(player.getPoisonCounters(), m, source, ctb);
         }
