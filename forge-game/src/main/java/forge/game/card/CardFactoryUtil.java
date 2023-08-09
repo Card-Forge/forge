@@ -3030,7 +3030,7 @@ public class CardFactoryUtil {
 
                     if (!isIntrinsic()) {
                         // because it doesn't work other wise
-                        c.setForetoldByEffect(true);
+                        c.setForetoldCostByEffect(true);
                     }
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);

@@ -218,7 +218,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean foretold;
     private boolean foretoldThisTurn;
-    private boolean foretoldByEffect;
+    private boolean foretoldCostByEffect;
 
     private boolean specialized;
 
@@ -6059,11 +6059,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.foretold = foretold;
     }
 
-    public boolean isForetoldByEffect() {
-        return foretoldByEffect;
+    public boolean isForetoldCostByEffect() {
+        return foretoldCostByEffect;
     }
-    public void setForetoldByEffect(final boolean val) {
-        this.foretoldByEffect = val;
+    public void setForetoldCostByEffect(final boolean val) {
+        this.foretoldCostByEffect = val;
     }
 
     public boolean isForetoldThisTurn() {

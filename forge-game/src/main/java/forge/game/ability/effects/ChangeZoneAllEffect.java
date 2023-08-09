@@ -13,6 +13,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -182,6 +183,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
+                }
+                if (sa.hasParam("FaceDown")) {
+                    c.turnFaceDown(true);
+                    CardFactoryUtil.setFaceDownState(c, sa);
                 }
             }
             Card movedCard = null;

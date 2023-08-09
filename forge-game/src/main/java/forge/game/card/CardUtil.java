@@ -327,7 +327,7 @@ public final class CardUtil {
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
-        newCopy.setForetoldByEffect(in.isForetoldByEffect());
+        newCopy.setForetoldCostByEffect(in.isForetoldCostByEffect());
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
 
