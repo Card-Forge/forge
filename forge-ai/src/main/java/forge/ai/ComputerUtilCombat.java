@@ -223,7 +223,7 @@ public class ComputerUtilCombat {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += predictPowerBonusOfAttacker(attacker, null, null, false);
-        if (attacker.hasKeyword(Keyword.INFECT)) {
+        if (attacker.hasKeyword(Keyword.INFECT) || attacker.hasKeyword(Keyword.TOXIC)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
             // opponent can always order it so that he gets 0
             if (pd == 1 && Iterables.any(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
@@ -2388,6 +2388,62 @@ public class ComputerUtilCombat {
         categorizedAttackers.addAll(withoutEvasion);
 
         return categorizedAttackers;
+    }
+
+    public static Card mostDangerousAttacker(CardCollection list, Player ai, Combat combat, boolean withAbilities) {
+        Card damageCard = null;
+        Card poisonCard = null;
+
+        int damageScore = 0;
+        int poisonScore = 0;
+
+
+        for(Card c : list) {
+            int estimatedDmg = damageIfUnblocked(c, ai, combat, withAbilities);
+            int estimatedPoison = poisonIfUnblocked(c, ai);
+
+            if (combat.isBlocked(c)) {
+                if (!c.hasKeyword(Keyword.TRAMPLE)) {
+                    continue;
+                }
+
+                int absorbedByToughness = 0;
+                for (Card blocker : combat.getBlockers(c)) {
+                    absorbedByToughness += blocker.getNetToughness();
+                }
+                estimatedPoison -= absorbedByToughness;
+                estimatedDmg -= absorbedByToughness;
+            }
+
+            if (estimatedDmg > damageScore) {
+                damageScore = estimatedDmg;
+                damageCard = c;
+            }
+
+            if (estimatedPoison > poisonScore) {
+                poisonScore = estimatedPoison;
+                poisonCard = c;
+            }
+        }
+
+        if (damageCard == null && poisonCard == null) {
+            return null;
+        } else if (damageCard == null) {
+            return poisonCard;
+        } else if (poisonCard == null) {
+            return damageCard;
+        }
+
+        int life = ai.getLife();
+        int poisonLife = 10 - ai.getPoisonCounters();
+        double percentLife = life * 1.0 / damageScore;
+        double percentPoison = poisonLife * 1.0 / poisonScore;
+
+        if (percentLife >= percentPoison) {
+            return damageCard;
+        } else {
+            return poisonCard;
+        }
     }
 
     public static Card applyPotentialAttackCloneTriggers(Card attacker) {
