@@ -3,7 +3,9 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -14,6 +16,9 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -496,10 +501,27 @@ public class PumpAi extends PumpAiBase {
                         // check if switching PT causes it to be lethal
                         Card lki = CardUtil.getLKICopy(input);
                         lki.addSwitchPT(-1, 0);
-                        if (input.getLethal() - input.getDamage() <= 0) {
-                            return true;
+
+                        // check if creature could regenerate
+                        Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
+                        runParams.put(AbilityKey.Regeneration, true);
+                        List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                        // non-Regeneration one like Totem-Armor
+                        // should do it anyway to destroy the aura?
+                        if (Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                            return false;
                         }
-                        return false;
+                        // TODO make it force to use regen?
+                        // should check phase and make it before combat damage or better before blocker?
+                        if (Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration")) && input.canBeShielded()) {
+                            return false;
+                        }
+
+                        // maybe do it anyway to reduce its power?
+                        if (input.getLethal() - input.getDamage() > 0) {
+                            return false;
+                        }
+                        return true;
                     }
 
                 });
