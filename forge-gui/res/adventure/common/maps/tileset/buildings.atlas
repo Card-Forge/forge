@@ -24,6 +24,9 @@ PirateShop
 WasteTown 
   xy: 272, 128
   size: 48, 48 
+SnowShop
+  xy: 368, 944
+  size: 16, 16 
 IslandCapital
   xy: 128, 592
   size: 64, 64
@@ -558,18 +561,12 @@ BarbarianCamp
 Maze 
   xy: 0, 336
   size: 32, 32
-Maze 
-  xy: 272, 96
-  size: 48, 32
-Maze 
-  xy: 320, 336
-  size: 32, 32
 YuleTown 
   xy: 352, 592
   size: 32, 32
 SnowAbbey 
-  xy: 384, 528
-  size: 64, 64  
+  xy: 192, 448
+  size: 32, 32  
 Grove 
   xy: 416, 496
   size: 32, 32 

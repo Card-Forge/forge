@@ -1,0 +1,13 @@
+Name:Frodo, Sauron's Bane
+ManaCost:W
+Types:Legendary Creature Halfling Citizen
+PT:1/2
+A:AB$ Animate | Cost$ WB WB | ConditionPresent$ Card.Self+Citizen | Types$ Halfling,Scout | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 2 | Toughness$ 3 | Keywords$ Lifelink | SpellDescription$ If CARDNAME is a Citizen, it becomes a Halfling Scout with base power and toughness 2/3 and lifelink.
+A:AB$ Animate | Cost$ B B B | ConditionPresent$ Card.Self+Scout | Types$ Halfling,Rogue | RemoveCreatureTypes$ True | Duration$ Permanent | Triggers$ TrigDamageDone | SpellDescription$ If NICKNAME is a Scout, it becomes a Halfling Rogue with "Whenever this creature deals combat damage to a player, that player loses the game if the Ring has tempted you four or more times this game. Otherwise, the Ring tempts you."
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBranch | TriggerDescription$ Whenever this creature deals combat damage to a player, that player loses the game if the Ring has tempted you four or more times this game. Otherwise, the Ring tempts you.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ NumRingTempted | BranchConditionSVarCompare$ GE4 | TrueSubAbility$ TrigTheyLose | FalseSubAbility$ TrigTempt
+SVar:TrigTheyLose:DB$ LosesGame | Defined$ TriggeredTarget
+SVar:TrigTempt:DB$ RingTemptsYou
+SVar:NumRingTempted:PlayerCountPropertyYou$RingTemptedYou
+DeckHas:Ability$LifeGain
+Oracle:{W/B}{W/B}: If Frodo, Sauron's Bane is a Citizen, it becomes a Halfling Scout with base power and toughness 2/3 and lifelink.\n{B}{B}{B}: If Frodo is a Scout, it becomes a Halfling Rogue with "Whenever this creature deals combat damage to a player, that player loses the game if the Ring has tempted you four or more times this game. Otherwise, the Ring tempts you."

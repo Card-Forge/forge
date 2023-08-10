@@ -76,12 +76,14 @@ public class ComputerUtilAbility {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
-        all.addAll(player.getCardsIn(ZoneType.Command));
-        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
-            all.add(player.getCardsIn(ZoneType.Library).get(0));
+        for (Player p : game.getPlayers()) {
+            if (!p.getCardsIn(ZoneType.Library).isEmpty()) {
+                all.add(p.getCardsIn(ZoneType.Library).get(0));
+            }
         }
-        all.addAll(game.getPlayers().getCardsIn(ZoneType.Exile));
-        all.addAll(game.getPlayers().getCardsIn(ZoneType.Battlefield));
+        all.addAll(game.getCardsIn(ZoneType.Command));
+        all.addAll(game.getCardsIn(ZoneType.Exile));
+        all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
     }
 
@@ -155,13 +157,13 @@ public class ComputerUtilAbility {
             return null;
         }
 
-        SpellAbility tgtSA = it.next().getSpellAbility(true);
+        SpellAbility tgtSA = it.next().getSpellAbility();
         // Grab the topmost spellability that isn't this SA and use that for comparisons
         if (sa.equals(tgtSA) && game.getStack().size() > 1) {
             if (!it.hasNext()) {
                 return null;
             }
-            tgtSA = it.next().getSpellAbility(true);
+            tgtSA = it.next().getSpellAbility();
         }
         return tgtSA;
     }
@@ -206,7 +208,7 @@ public class ComputerUtilAbility {
             }
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility(false);
+            SpellAbility ab = si.getSpellAbility();
             if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
                 for (Card c : cardList) {
                     // TODO: somehow ensure that the detected SA won't be countered

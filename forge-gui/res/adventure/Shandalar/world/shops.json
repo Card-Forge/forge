@@ -3935,6 +3935,28 @@
 	]
 },
 {
+  "name":"SnowShop",
+  "description":"Chilly Cards",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SnowShop",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Snow"]
+		},
+		{
+		  "count":2,
+		  "cardText": "Snow"
+		}
+	  ]
+	}
+	]
+},
+{
   "name":"LargeSeaCreatures",
   "description":"Cards From The Deep",
   "spriteAtlas":"maps/tileset/buildings.atlas",

@@ -167,6 +167,10 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
+        } else if (property.equals("IsRingbearer")) {
+            if (!card.isRingBearer()) {
+                return false;
+            }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
             for (Object o : spellAbility.getTriggerRemembered()) {
@@ -713,11 +717,11 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        SpellAbilityStackInstance castSA = game.getStack().getInstanceFromSpellAbility((SpellAbility) spellAbility);
+                        SpellAbilityStackInstance castSA = game.getStack().getInstanceMatchingSpellAbilityID((SpellAbility) spellAbility);
                         if (castSA == null) {
                             return false;
                         }
-                        List<Mana> payingMana = castSA.getPayingMana();
+                        List<Mana> payingMana = castSA.getSpellAbility().getPayingMana();
                         // even if the cost was raised, we only care about mana from activation part
                         // since this can only be 1 currently with Protective Sphere, let's just assume it's the first shard spent for easy handling
                         if (payingMana.isEmpty() || !card.getColor().hasAnyColor(payingMana.get(0).getColor())) {
@@ -1773,7 +1777,7 @@ public class CardProperty {
             }
         } else if (property.equals("hadToAttackThisCombat")) {
             AttackRequirement e = combat == null ? null : combat.getAttackConstraints().getRequirements().get(card);
-            if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
+            if (e == null || !e.hasRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {

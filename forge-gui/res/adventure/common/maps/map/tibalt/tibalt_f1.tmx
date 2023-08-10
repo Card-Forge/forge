@@ -50,7 +50,7 @@
   <object id="115" template="../../obj/gold.tx" x="587.213" y="138.537"/>
   <object id="117" template="../../obj/enemy.tx" x="159.319" y="212.121">
    <properties>
-    <property name="enemy" value="Imp of Tibalt"/>
+    <property name="enemy" value="Devil of Tibalt"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>

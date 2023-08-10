@@ -701,7 +701,6 @@ public class GameAction {
                 || zoneTo.is(ZoneType.Hand)
                 || zoneTo.is(ZoneType.Library)
                 || zoneTo.is(ZoneType.Exile)) {
-            copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.setState(CardStateName.Original, true);
             }
@@ -1012,6 +1011,9 @@ public class GameAction {
             partner.updateStateForView();
         }
 
+        // run Game Commands early
+        c.runChangeControllerCommands();
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
         oldBattlefield.remove(c);
@@ -1027,7 +1029,7 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        c.runChangeControllerCommands();
+
     }
 
     // Temporarily disable (if mode = true) actively checking static abilities.

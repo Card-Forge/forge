@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -19,6 +21,7 @@ import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -33,6 +36,8 @@ public class MapViewScene extends UIScene {
     private final List<TypingLabel> labels;
     private int index = -1;
     private float avatarX = 0, avatarY = 0;
+    private Set<Vector2> positions;
+    private Set<PointOfInterest> bookmark;
 
     public static MapViewScene instance() {
         if (object == null)
@@ -46,6 +51,8 @@ public class MapViewScene extends UIScene {
         ui.onButtonPress("quest", this::scroll);
         scroll = ui.findActor("map");
         labels = Lists.newArrayList();
+        positions = Sets.newHashSet();
+        bookmark = Sets.newHashSet();
         table = new Group();
         scroll.setActor(table);
         img = new Image();
@@ -62,9 +69,22 @@ public class MapViewScene extends UIScene {
                 a.remove();
         }
         labels.clear();
+        positions.clear();
         index = -1;
         Forge.switchToLast();
         return true;
+    }
+
+    public void addBookmark(PointOfInterest point) {
+        if (point == null)
+            return;
+        bookmark.add(point);
+    }
+
+    public void removeBookmark(PointOfInterest point) {
+        if (point == null)
+            return;
+        bookmark.remove(point);
     }
 
     public boolean scroll() {
@@ -99,12 +119,21 @@ public class MapViewScene extends UIScene {
         for (AdventureQuestData adq : Current.player().getQuests()) {
             PointOfInterest poi = adq.getTargetPOI();
             if (poi != null) {
-                TypingLabel label = Controls.newTypingLabel("[%?BLACKEN][+GPS]{GRADIENT=RED;WHITE;1;1}>" + adq.name + "{ENDGRADIENT}");
+                if (positions.contains(poi.getPosition()))
+                    continue; //don't map duplicate position to prevent stacking
+                TypingLabel label = Controls.newTypingLabel("[+GPS][%?BLACKEN] " + adq.name);
                 labels.add(label);
                 table.addActor(label);
                 label.setPosition(getMapX(poi.getPosition().x) - label.getWidth() / 2, getMapY(poi.getPosition().y) - label.getHeight() / 2);
                 label.skipToTheEnd();
+                positions.add(poi.getPosition());
             }
+        }
+        for (PointOfInterest poi : bookmark) {
+            TypingLabel label = Controls.newTypingLabel("[%75][+Star] ");
+            table.addActor(label);
+            label.setPosition(getMapX(poi.getPosition().x) - label.getWidth() / 2, getMapY(poi.getPosition().y) - label.getHeight() / 2);
+            label.skipToTheEnd();
         }
         TextraButton questButton = ui.findActor("quest");
         if (questButton != null) {

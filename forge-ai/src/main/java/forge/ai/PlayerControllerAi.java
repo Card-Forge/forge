@@ -830,12 +830,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
-        int i = MyRandom.getRandom().nextInt(options.size());
-        return choiceMap.get(options.get(i));
-    }
-
-    @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
         List<AbilitySub> result = brains.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         if (result != null) {
@@ -1001,7 +995,7 @@ public class PlayerControllerAi extends PlayerController {
         SpellAbility hostsa = null;     //for Protect sub-ability
         if (getGame().stack.size() > 1) {
             for (SpellAbilityStackInstance si : getGame().getStack()) {
-                SpellAbility spell = si.getSpellAbility(true);
+                SpellAbility spell = si.getSpellAbility();
                 if (sa != spell && sa.getHostCard() != spell.getHostCard()) {
                     String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
                     if (s != null) {
@@ -1126,10 +1120,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
+    public boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
-            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
+            return ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
         }
+        return false;
     }
 
     @Override
@@ -1423,7 +1418,7 @@ public class PlayerControllerAi extends PlayerController {
                 SpellAbility kickedSaCopy = fullCostSa.copy();
                 kickedSaCopy.addOptionalCost(opt.getType());
                 Card copy = CardUtil.getLKICopy(chosen.getHostCard());
-                copy.addOptionalCostPaid(opt.getType());
+                copy.setCastSA(kickedSaCopy);
                 if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
                     continue; // don't choose kickers we don't want to play
                 }

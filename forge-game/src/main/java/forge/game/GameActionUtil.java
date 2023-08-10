@@ -254,7 +254,7 @@ public final class GameActionUtil {
                 }
 
                 // foretell by external source
-                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
+                if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
@@ -401,7 +401,9 @@ public final class GameActionUtil {
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
         }
 
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        final CardCollection costSources = new CardCollection(source);
+        costSources.addAll(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        for (final Card ca : costSources) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions("OptionalCost")) {
                     continue;
@@ -431,7 +433,7 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    costs.add(new OptionalCostValue(OptionalCost.AltCost, cost));
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost));
                 }
             }
         }
@@ -447,17 +449,11 @@ public final class GameActionUtil {
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
-                // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
-                int numKickers = sCosts.length - (generic ? 1 : 0);
+                int numKickers = sCosts.length;
                 for (int j = 0; j < numKickers; j++) {
                     final Cost cost = new Cost(sCosts[j], false);
                     OptionalCost type = null;
-                    if (!generic) {
-                        type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
-                    } else {
-                        type = OptionalCost.Generic;
-                    }
+                    type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {

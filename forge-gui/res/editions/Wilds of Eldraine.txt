@@ -1,0 +1,26 @@
+[metadata]
+Code=WOE
+Date=2023-09-08
+Name=Wilds of Eldraine
+Type=Expansion
+ScryfallCode=WOE
+
+[cards]
+21 M Moonshaker Cavalry @Aldo Domínguez
+67 C Sleight of Hand @Scott Murphy
+78 M Ashiok, Wicked Manipulator @Raymond Swanland
+193 U Tough Cookie @Milivoj Ćeran
+215 M Talion, the Kindly Lord @Justyna Dura
+222 R Cruel Somnophage @Jason A. Engle
+259 R Restless Fortress @Piotr Dura
+262 L Plains @Hari & Deepti
+263 L Island @Hari & Deepti
+264 L Swamp @Hari & Deepti
+265 L Mountain @Hari & Deepti
+266 L Forest @Hari & Deepti
+286 R Cruel Somnophage @Kev Walker
+297 M Ashiok, Wicked Manipulator @Serena Malyon
+301 M Talion, the Kindly Lord @Olena Richards
+305 R Restless Fortress @Alayna Danner
+325 M Moonshaker Cavalry @Aldo Domínguez
+376 C Sleight of Hand @Scott Murphy

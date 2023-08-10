@@ -33,7 +33,7 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         }
 
         oldMapId="";
-        Array<Sprite> textureAtlas = Config.instance().getAtlas(this.data.spriteAtlas).createSprites(this.data.sprite);
+        Array<Sprite> textureAtlas = Config.instance().getPOISprites(this.data);
         sprite = textureAtlas.get(spriteIndex%textureAtlas.size);
     }
 
@@ -59,7 +59,7 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     public PointOfInterest() {
     }
     public PointOfInterest(PointOfInterestData d, Vector2 pos, Random rand) {
-        Array<Sprite> textureAtlas = Config.instance().getAtlas(d.spriteAtlas).createSprites(d.sprite);
+        Array<Sprite> textureAtlas = Config.instance().getPOISprites(d);
         if (textureAtlas.isEmpty()) {
             System.out.print("sprite " + d.sprite + " not found");
         }
@@ -89,7 +89,7 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     }
 
     public Vector2 getTilePosition(int tileSize) {
-        return new Vector2((int) ((position.x + (sprite.getWidth() / 2)) / tileSize), (int) position.y / tileSize);
+        return new Vector2(((position.x + (sprite.getWidth() / 2)) / tileSize), position.y / tileSize);
     }
 
     public Rectangle getBoundingRectangle() {

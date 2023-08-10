@@ -212,6 +212,7 @@ Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. T
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
+Vronos, Masked Inquisitor|Vronos's Best Friend|Let's see Garruk resist NOW!
 Will, Scholar of Frost|Will's Elementics|I think it's better this way.
 Wrenn and Realmbreaker|Wrenn's Ultimate Resource|There are no more places I cannot reach.
 Wrenn and Seven|Wrenn's Wild Regrowth|The past is no burden for me.

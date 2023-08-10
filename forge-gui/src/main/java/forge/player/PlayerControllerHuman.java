@@ -284,6 +284,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     break;
                 }
             }
+            for (SpellAbility sa : hostCard.getAllSpellAbilities()) {
+                if (sa.hasParam("Activator")
+                        && player.isValid(sa.getParam("Activator"), hostCard.getController(), hostCard, sa)) {
+                    noPermission = false;
+                    break;
+                }
+            }
             if (noPermission) {
                 return null;
             }
@@ -1306,7 +1313,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // occurrences of each
         Map<String, Integer> typesInDeck = Maps.newHashMap();
 
-        // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
             // Changeling are all creature types, they are not interesting for
             // counting creature types
@@ -1330,10 +1336,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             for (String type : c.getType().getCreatureTypes()) {
-                Integer count = typesInDeck.get(type);
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault(type, 0);
                 typesInDeck.put(type, count + 1);
             }
             // also take into account abilities that generate tokens
@@ -1346,10 +1349,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String token : sa.getParam("TokenScript").split(",")) {
                         Card protoType = TokenInfo.getProtoType(token, sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.get(type);
-                            if (count == null) {
-                                count = 0;
-                            }
+                            Integer count = typesInDeck.getOrDefault(type, 0);
                             typesInDeck.put(type, count + 1);
                         }
                     }
@@ -1365,10 +1365,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         for (String token : sa.getParam("TokenScript").split(",")) {
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
-                                Integer count = typesInDeck.get(type);
-                                if (count == null) {
-                                    count = 0;
-                                }
+                                Integer count = typesInDeck.getOrDefault(type, 0);
                                 typesInDeck.put(type, count + 1);
                             }
                         }
@@ -1377,10 +1374,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             // special rule for Fabricate and Servo
             if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
-                Integer count = typesInDeck.get("Servo");
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault("Servo", 0);
                 typesInDeck.put("Servo", count + 1);
             }
         }
@@ -1688,13 +1682,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Collections.reverse(sortedResults);
         }
         return getGui().one(sa.getHostCard().getName() + " - " + localizer.getMessage("lblChooseAResult"), sortedResults).equals(labelsSrc[0]);
-    }
-
-    @Override
-    public Card chooseProtectionShield(final GameEntity entityBeingDamaged, final List<String> options,
-                                       final Map<String, Card> choiceMap) {
-        final String title = entityBeingDamaged + " - " + localizer.getMessage("lblSelectPreventionShieldToUse");
-        return choiceMap.get(getGui().one(title, options));
     }
 
     @Override
@@ -2015,8 +2002,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
+    public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
+        return HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
     }
 
     @Override

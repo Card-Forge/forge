@@ -170,7 +170,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostExileFromStack cost) {
         List<SpellAbility> chosen = Lists.newArrayList();
         for (SpellAbilityStackInstance si :source.getGame().getStack()) {
-            SpellAbility sp = si.getSpellAbility(true).getRootAbility();
+            SpellAbility sp = si.getSpellAbility().getRootAbility();
             if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source, sp)) {
                 chosen.add(sp);
             }

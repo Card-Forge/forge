@@ -1,0 +1,10 @@
+Name:Ringwraiths
+ManaCost:4 B B
+Types:Creature Wraith Knight
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -3/-3 until end of turn. If that creature is legendary, its controller loses 3 life.
+SVar:TrigPump:DB$ Pump | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | SubAbility$ TrigLose
+SVar:TrigLose:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | ConditionDefined$ Targeted | ConditionPresent$ Legendary
+T:Mode$ RingTemptsYou | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ When the Ring tempts you, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+Oracle:When Ringwraiths enters the battlefield, target creature an opponent controls gets -3/-3 until end of turn. If that creature is legendary, its controller loses 3 life.\nWhen the Ring tempts you, return Ringwraiths from your graveyard to your hand.

@@ -71,7 +71,7 @@
       "y": 435
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "shopName",
       "style":"background",
       "text": "A Street Market",

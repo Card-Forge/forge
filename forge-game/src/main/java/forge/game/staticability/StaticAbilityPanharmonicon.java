@@ -127,7 +127,7 @@ public class StaticAbilityPanharmonicon {
         } else if (trigMode.equals(TriggerType.SpellCastOrCopy)
                 || trigMode.equals(TriggerType.SpellCast) || trigMode.equals(TriggerType.SpellCopy)) {
             // Check if the spell cast and the caster match
-            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (!stAb.matchesValidParam("ValidCause", sa.getHostCard())) {
                 return false;
             }

@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -23,8 +22,6 @@ import forge.deck.Deck;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static forge.adventure.util.Paths.ITEMS_ATLAS;
 
 public class InventoryScene extends UIScene {
     TextraButton leave;
@@ -350,8 +347,7 @@ public class InventoryScene extends UIScene {
                 System.err.print("Can not add null / empty booster " + Current.player().getBoostersOwned().get(i) + "\n");
                 continue;
             }
-            TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-            Sprite deckSprite = atlas.createSprite("Deck");
+            Sprite deckSprite = Config.instance().getItemSprite("Deck");
 
             Image img = new Image(deckSprite);
             img.setX((newActor.getWidth() - img.getWidth()) / 2);

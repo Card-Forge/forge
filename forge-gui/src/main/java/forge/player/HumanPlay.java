@@ -185,14 +185,14 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa) {
-        playSpellAbilityNoStack(controller, player, sa, false);
+    public final static boolean playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa) {
+        return playSpellAbilityNoStack(controller, player, sa, false);
     }
-    public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
+    public final static boolean playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-        req.playAbility(!useOldTargets, false, true);
+        return req.playAbility(!useOldTargets, false, true);
     }
 
     /**

@@ -27,3 +27,9 @@ Edge
 EdgeWin 
   xy: 20, 60
   size: 20, 20 
+EdgeFlip
+  xy: 0, 60
+  size: 20, 20      
+EdgeWinFlip 
+  xy: 20, 60
+  size: 20, 20 

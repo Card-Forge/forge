@@ -30,7 +30,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
         sb.append("Separate all ").append(valid).append(" cards ");
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-        sb.append("controls into two piles.");
+        sb.append(" controls into two piles.");
         return sb.toString();
     }
 

@@ -13,12 +13,14 @@ import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 
@@ -61,8 +63,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatSas = Lists.newArrayList();
             String[] restrictions = sa.getParam("RepeatSpellAbilities").split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
-                if (stackInstance.getSpellAbility(false).isValid(restrictions, source.getController(), source, sa)) {
-                    repeatSas.add(stackInstance.getSpellAbility(false));
+                if (stackInstance.getSpellAbility().isValid(restrictions, source.getController(), source, sa)) {
+                    repeatSas.add(stackInstance.getSpellAbility());
                 }
             }
 
@@ -100,6 +102,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     source.addImprintedCard(card);
                 } else {
                     source.addRemembered(card);
+                }
+                if (sa.hasParam("AmountFromVotes")) {
+                    setVoteAmount(card, sa);
                 }
                 AbilityUtils.resolve(repeat);
                 if (useImprinted) {
@@ -199,6 +204,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
                     source.removeRemembered(tempRemembered);
                     source.addRemembered(p);
+                    if (sa.hasParam("AmountFromVotes")) {
+                        setVoteAmount(p, sa);
+                    }
                     AbilityUtils.resolve(repeat);
                     source.removeRemembered(p);
                     source.addRemembered(tempRemembered);
@@ -220,6 +228,21 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
             }
             sa.setLoseLifeMap(null);
+        }
+    }
+
+    private void setVoteAmount (Object o, SpellAbility sa) {
+        SpellAbility rootAbility = sa.getRootAbility();
+        if (rootAbility.isWrapper()) {
+            rootAbility = ((WrappedAbility) rootAbility).getWrappedAbility();
+        }
+        final SpellAbility saVote = rootAbility.getApi().equals(ApiType.Vote) ? rootAbility
+                : rootAbility.findSubAbilityByType(ApiType.Vote);
+        if (saVote == null) {
+            System.err.println(sa.getHostCard() + ": Bad vote amount for " + o + ", default to 0");
+            sa.setSVar("Votes", "Number$0");
+        } else {
+            sa.setSVar("Votes", saVote.getSVar("VoteNum" + o.toString()));
         }
     }
 }

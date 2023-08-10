@@ -73,14 +73,14 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
         if (spellAbility == null) {
             System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams);
             return false;
         }
         final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
-        final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+        final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(spellAbility);
 
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
@@ -93,7 +93,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             } else if (si == null) {
                 return false;
             } else {
-                activator = si.getSpellAbility(true).getActivatingPlayer();
+                activator = si.getSpellAbility().getActivatingPlayer();
             }
 
             if (!matchesValidParam("ValidActivatingPlayer", activator)) {
@@ -121,7 +121,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
             if (si != null) {
-                sa = si.getSpellAbility(true);
+                sa = si.getSpellAbility();
             }
 
             boolean validTgtFound = false;
@@ -222,7 +222,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 return false;
             }
             boolean sameNameFound = false;
-            for (Card c: si.getSpellAbility(true).getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
+            for (Card c: si.getSpellAbility().getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
                 if (cast.getName().equals(c.getName())) {
                     sameNameFound = true;
                     break;
@@ -262,9 +262,9 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
-        final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
-        final SpellAbility saForTargets = si != null ? si.getSpellAbility(true) : castSA;
+        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
+        final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceMatchingSpellAbilityID(castSA);
+        final SpellAbility saForTargets = si != null ? si.getSpellAbility() : castSA;
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
         sa.setTriggeringObject(AbilityKey.StackInstance, si);

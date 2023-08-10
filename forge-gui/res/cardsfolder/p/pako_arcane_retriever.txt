@@ -4,7 +4,7 @@ Types:Legendary Creature Elemental Dog
 PT:3/3
 K:Partner:Haldan, Avid Arcanist:Haldan
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of each player's library and put a fetch counter on each of them. Put a +1/+1 counter on CARDNAME for each noncreature card exiled this way.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of each player's library and put a fetch counter on each of them. Put a +1/+1 counter on NICKNAME for each noncreature card exiled this way.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | ExileWithCounter$ FETCH | RememberChanged$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

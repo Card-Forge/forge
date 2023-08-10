@@ -1237,11 +1237,6 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
   &quot;addMaxCount&quot;: 2
-},{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
 }]</property>
    </properties>
   </object>
@@ -1261,11 +1256,6 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
   &quot;addMaxCount&quot;: 2
-},{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
 }]</property>
    </properties>
   </object>
@@ -1285,12 +1275,8 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
   &quot;addMaxCount&quot;: 2
-},{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
-}]</property>
+}
+]</property>
    </properties>
   </object>
   <object id="260" template="../../obj/treasure.tx" x="166.667" y="668.667">
@@ -1309,11 +1295,6 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
   &quot;addMaxCount&quot;: 2
-},{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
 }]</property>
    </properties>
   </object>

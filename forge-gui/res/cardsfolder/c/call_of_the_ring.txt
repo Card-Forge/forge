@@ -1,0 +1,8 @@
+Name:Call of the Ring
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTempt | TriggerDescription$ At the beginning of your upkeep, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ RingTemptsYou | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you choose a creature as your Ring-bearer, you may pay 2 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<2>
+Oracle:At the beginning of your upkeep, the Ring tempts you.\nWhenever you choose a creature as your Ring-bearer, you may pay 2 life. If you do, draw a card.

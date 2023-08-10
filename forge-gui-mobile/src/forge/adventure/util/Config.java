@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -9,10 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import forge.CardStorageReader;
 import forge.Forge;
 import forge.ImageKeys;
-import forge.adventure.data.ConfigData;
-import forge.adventure.data.DifficultyData;
-import forge.adventure.data.RewardData;
-import forge.adventure.data.SettingData;
+import forge.adventure.data.*;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -50,6 +48,9 @@ public class Config {
     private SettingData settingsData;
     private String Lang = "en-us";
     private final String plane;
+    private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
+    private ObjectMap<PointOfInterestData, Array<Sprite>> poiSprites = new ObjectMap<>();
+    private ObjectMap<String, ObjectMap<String, Array<Sprite>>> animatedSprites = new ObjectMap<>();
 
     static public Config instance() {
         if (currentConfig == null)
@@ -243,6 +244,53 @@ public class Config {
             atlas = Forge.getAssets().manager().get(fileName, TextureAtlas.class, false);
         }
         return atlas;
+    }
+
+    public Sprite getItemSprite(String itemName) {
+        return getAtlasSprite(forge.adventure.util.Paths.ITEMS_ATLAS, itemName);
+    }
+
+    public Sprite getAtlasSprite(String atlasName, String itemName) {
+        Sprite sprite;
+        ObjectMap<String, Sprite> sprites = atlasSprites.get(atlasName);
+        if (sprites == null) {
+            sprites = new ObjectMap<>();
+        }
+        sprite = sprites.get(itemName);
+        if (sprite == null) {
+            sprite = getAtlas(atlasName).createSprite(itemName);
+            if (sprite != null) {
+                sprites.put(itemName, sprite);
+                atlasSprites.put(atlasName, sprites);
+            }
+        }
+        return sprite;
+    }
+
+    public Array<Sprite> getPOISprites(PointOfInterestData d) {
+        Array<Sprite> sprites = poiSprites.get(d);
+        if (sprites == null) {
+            sprites = getAtlas(d.spriteAtlas).createSprites(d.sprite);
+            poiSprites.put(d, sprites);
+        }
+        return sprites;
+    }
+
+    public Array<Sprite> getAnimatedSprites(String path, String animationName) {
+        Array<Sprite> sprites;
+        ObjectMap<String, Array<Sprite>> mapSprites = animatedSprites.get(path);
+        if (mapSprites == null) {
+            mapSprites = new ObjectMap<>();
+        }
+        sprites = mapSprites.get(animationName);
+        if (sprites == null) {
+            sprites = getAtlas(path).createSprites(animationName);
+            if (sprites != null) {
+                mapSprites.put(animationName, sprites);
+                animatedSprites.put(path, mapSprites);
+            }
+        }
+        return sprites;
     }
 
     public SettingData getSettingData() {

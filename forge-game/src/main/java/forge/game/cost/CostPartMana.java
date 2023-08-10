@@ -127,11 +127,12 @@ public class CostPartMana extends CostPart {
     }
 
     public ManaCost getManaCostFor(SpellAbility sa) {
-        if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey, true)!= null && !sa.getPaidList(CostExile.HashLKIListKey, true).isEmpty()) {
+        if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey, true) != null && !sa.getPaidList(CostExile.HashLKIListKey, true).isEmpty()) {
             // back from the brink
             return sa.getPaidList(CostExile.HashLKIListKey, true).get(0).getManaCost();
         }
         if (isEnchantedCreatureCost() && sa.getHostCard().isEnchantingCard()) {
+            // TODO human can still activate on TDFC backside
             return sa.getHostCard().getEnchantingCard().getManaCost();
         }
         if (isCostPayAnyNumberOfTimes) {

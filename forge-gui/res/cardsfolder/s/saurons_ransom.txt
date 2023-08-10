@@ -1,0 +1,8 @@
+Name:Sauron's Ransom
+ManaCost:1 U B
+Types:Instant
+A:SP$ TwoPiles | Defined$ You | Separator$ Opponent | Chooser$ You | DefinedCards$ Top_4_OfLibrary | ChosenPile$ DBHand | UnchosenPile$ DBGrave | FaceDown$ One | SubAbility$ TrigTempt | SpellDescription$ Choose an opponent. They look at the top four cards of your library and separate them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard. The Ring tempts you.
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:Choose an opponent. They look at the top four cards of your library and separate them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard. The Ring tempts you.

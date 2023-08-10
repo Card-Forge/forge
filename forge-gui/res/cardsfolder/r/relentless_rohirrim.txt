@@ -1,0 +1,7 @@
+ Name:Relentless Rohirrim
+ ManaCost:3 R
+ Types:Creature Human Knight
+ PT:4/3
+ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+ SVar:TrigTempt:DB$ RingTemptsYou
+ Oracle:When Relentless Rohirrim enters the battlefield, the Ring tempts you.

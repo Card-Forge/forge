@@ -87,7 +87,7 @@
       "text": "[%120][+Deck]",
       "width": 25,
       "height": 25,
-      "x": 105,
+      "x": 118,
       "y": 450
     }, 
     {
@@ -96,7 +96,7 @@
       "text": "[%120][+Item]",
       "width": 25,
       "height": 25,
-      "x": 130,
+      "x": 143,
       "y": 450
     },
     
@@ -106,7 +106,7 @@
       "text": "[%120][+Logbook]",
       "width": 25,
       "height": 25,
-      "x": 155,
+      "x": 168,
       "y": 450
     },
     {
@@ -115,7 +115,7 @@
       "text": "[%120][+Menu]",
       "width": 25,
       "height": 25,
-      "x": 80,
+      "x": 68,
       "y": 450
     },
     {
@@ -133,7 +133,16 @@
       "text": "[%120][+ExitToWorldMap]",
       "width": 25,
       "height": 25,
-      "x": 180,
+      "x": 193,
+      "y": 450
+    },
+    {
+      "type": "TextButton",
+      "name": "bookmark",
+      "text": "[%120][+Bookmark]",
+      "width": 25,
+      "height": 25,
+      "x": 93,
       "y": 450
     }
   ]

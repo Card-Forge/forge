@@ -13,4 +13,4 @@ SVar:X:Count$RememberedSize/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
 DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
-Oracle:Whenever Borborygmos and Fblthp enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, Borborygmos and Fblthp deals twice that much damage to target creature.\n{1}{U}: Put Borborygmos and Fblthp into its owner’s library third from the top.
+Oracle:Whenever Borborygmos and Fblthp enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, Borborygmos and Fblthp deals twice that much damage to target creature.\n{1}{U}: Put Borborygmos and Fblthp into its owner's library third from the top.

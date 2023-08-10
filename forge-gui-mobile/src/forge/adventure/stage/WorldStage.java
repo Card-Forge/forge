@@ -12,6 +12,7 @@ import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
@@ -343,6 +344,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void setDirectlyEnterPOI(){
         directlyEnterPOI = true; //On a new game, we want to automatically enter any POI the player overlaps with.
+    }
+
+    public PointOfInterestMapSprite getMapSprite(PointOfInterest poi) {
+        if (poi == null)
+            return null;
+        for (Actor actor : foregroundSprites.getChildren()) {
+            if (actor.getClass() == PointOfInterestMapSprite.class) {
+                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                if (poi == point.getPointOfInterest() && poi.getPosition() == point.getPointOfInterest().getPosition())
+                    return point;
+            }
+        }
+        return null;
     }
 
     @Override

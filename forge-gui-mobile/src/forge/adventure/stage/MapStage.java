@@ -683,7 +683,7 @@ public class MapStage extends GameStage {
                         addMapActor(obj, shardTraderActor);
                         if (prop.containsKey("hasSign") && Boolean.parseBoolean(prop.get("hasSign").toString()) && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
-                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(ShardTraderScene.spriteAtlas).createSprite(ShardTraderScene.sprite));
+                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlasSprite(ShardTraderScene.spriteAtlas, ShardTraderScene.sprite));
                                 sprite.setX(shardTraderActor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(shardTraderActor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
@@ -828,13 +828,13 @@ public class MapStage extends GameStage {
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
-                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.sprite));
+                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlasSprite(data.spriteAtlas, data.sprite));
                                 sprite.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
 
                                 if (!(data.overlaySprite == null || data.overlaySprite.isEmpty())) {
-                                    TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
+                                    TextureSprite overlay = new TextureSprite(Config.instance().getAtlasSprite(data.spriteAtlas, data.overlaySprite));
                                     overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                     overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                     addMapActor(overlay);

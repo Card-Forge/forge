@@ -1,0 +1,23 @@
+[metadata]
+Code=WOT
+Date=2023-09-08
+Name=Wilds of Eldraine: Enchanting Tales
+Type=Collector_Edition
+ScryfallCode=WOT
+
+[cards]
+4 M Greater Auramancy @Meel Tamphanon
+13 M Smothering Tithe @Shafer Brown
+17 U Curiosity @Abigail Larson
+25 M Rhystic Study @Serena Malyon
+31 M Necropotence @Abigail Larson
+39 R Aggravated Assault @Maihope
+52 M Doubling Season @Eva Eskelinen
+60 R Prismatic Omen @Qianhao Ma
+64 M Greater Auramancy @Mai Okuma
+67 M Smothering Tithe @Daisuke Tatsuma
+71 M Rhystic Study @Fuzichoco
+74 M Necropotence @Kuregure
+76 R Aggravated Assault @zizero
+81 M Doubling Season @Kemonomichi
+91 M Rhystic Study @Fuzichoco

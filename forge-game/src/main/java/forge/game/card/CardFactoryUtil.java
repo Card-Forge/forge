@@ -1628,9 +1628,6 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(parsedTrigger);
-        } else if (keyword.startsWith("Presence")) {
-            final String[] k = keyword.split(":");
-            card.addIntrinsicKeyword("Kicker:Reveal<1/" + k[1] + ">:Generic");
         } else if (keyword.equals("Provoke")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True"
                     + " | TriggerDescription$ Provoke (" + inst.getReminderText() + ")";
@@ -2575,15 +2572,6 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
-        } else if (keyword.equals("If CARDNAME would be destroyed, regenerate it.")) {
-            String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self"
-                    + " | Secondary$ True | Regeneration$ True | Description$ " + keyword;
-            String effect = "DB$ Regeneration | Defined$ ReplacedCard";
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
-            SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            re.setOverridingAbility(sa);
-
-            inst.addReplacement(re);
         }
 
         // extra part for the Damage Prevention keywords
@@ -2637,30 +2625,6 @@ public class CardFactoryUtil {
             rep += " | Secondary$ True | Description$ " + keyword;
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
-            inst.addReplacement(re);
-        }
-        else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
-                + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-            StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
-
-            // to show it on Nexus
-            if (host.isPermanent()) {
-                sb.append("| Secondary$ True");
-            }
-            sb.append("| Description$ ").append(keyword);
-
-            String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
-
-            SpellAbility sa = AbilityFactory.getAbility(ab, card);
-
-            if (!intrinsic) {
-                sa.setIntrinsic(false);
-            }
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(sb.toString(), host, intrinsic, card);
-
-            re.setOverridingAbility(sa);
-
             inst.addReplacement(re);
         }
 
@@ -3066,7 +3030,7 @@ public class CardFactoryUtil {
 
                     if (!isIntrinsic()) {
                         // because it doesn't work other wise
-                        c.setForetoldByEffect(true);
+                        c.setForetoldCostByEffect(true);
                     }
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);

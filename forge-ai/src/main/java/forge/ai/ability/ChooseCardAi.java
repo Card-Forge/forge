@@ -272,9 +272,13 @@ public class ChooseCardAi extends SpellAbilityAi {
             Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
             return chosen;
         } else if (logic.equals("OrzhovAdvokist")) {
-            if (ai.equals(sa.getActivatingPlayer())) {
+            if (ai.equals(sa.getActivatingPlayer()) || // who cares if you can't attack yourself
+                    (ai.getOpponents().size() > 1 && // if there is another opponent good to attack, take the counters
+                    !AiAttackController.choosePreferredDefenderPlayer(ai).equals(sa.getActivatingPlayer()))) {
                 choice = ComputerUtilCard.getBestAI(options);
-            } // TODO: improve ai
+                // TODO: would also be nice to take the counters if not in a good position to attack anyway
+                //  – might also be good to do a separate AI for Noble Heritage
+            }
         } else if (logic.equals("Phylactery")) {
             CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
             CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));

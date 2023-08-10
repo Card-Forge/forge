@@ -2141,7 +2141,7 @@ public class AiController {
     }
 
     private <T extends CardTraitBase> List<T> filterListByAiLogic(List<T> list, final String logic) {
-        return filterList(list, CardTraitPredicates.hasParam("AiLogic", logic));
+        return filterList(list, CardTraitPredicates.hasParam("AILogic", logic));
     }
 
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {

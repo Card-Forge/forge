@@ -378,7 +378,7 @@ public final class CardScriptParser {
             "RememberedController", "RememberedOwner", "ImprintedController",
             "ImprintedOwner", "EnchantedController", "EnchantedOwner",
             "EnchantedPlayer", "AttackingPlayer", "DefendingPlayer",
-            "ChosenPlayer", "ChosenAndYou", "SourceController", "CardOwner",
+            "ChosenPlayer", "SourceController", "CardOwner",
             "ActivePlayer", "You", "Opponent");
     /**
      * Defined starting strings for players.

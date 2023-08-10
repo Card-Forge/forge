@@ -1,0 +1,12 @@
+Name:Phial of Galadriel
+ManaCost:3
+Types:Legendary Artifact
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Hellbent$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card while you have no cards in hand, draw two cards instead.
+SVar:DrawTwo:DB$ Draw | NumCards$ 2
+R:Event$ GainLife | ActiveZones$ Battlefield | CheckSVar$ Y | SVarCompare$ LE5 | ValidPlayer$ You | ReplaceWith$ GainDouble | AILogic$ DoubleLife | Description$ If you would gain life while you have 5 or less life, you gain twice that much life instead.
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/Twice
+SVar:Y:Count$YourLifeTotal
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$LifeGain
+Oracle:If you would draw a card while you have no cards in hand, draw two cards instead.\nIf you would gain life while you have 5 or less life, you gain twice that much life instead.\n{T}: Add one mana of any color.

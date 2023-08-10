@@ -2,6 +2,7 @@ Name:Mossbridge Troll
 ManaCost:5 G G
 Types:Creature Troll
 PT:5/5
-K:If CARDNAME would be destroyed, regenerate it.
+R:Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | Regeneration$ True | ReplaceWith$ DBRegeneration | Description$ If CARDNAME would be destroyed, regenerate it.
+SVar:DBRegeneration:DB$ Regeneration | Defined$ ReplacedCard
 A:AB$ Pump | Cost$ tapXType<Any/Creature.Other+withTotalPowerGE10> | CostDesc$ Tap any number of untapped creatures you control other than CARDNAME with total power 10 or greater: | Defined$ Self | NumAtt$ +20 | NumDef$ +20 | SpellDescription$ CARDNAME gets +20/+20 until end of turn.
 Oracle:If Mossbridge Troll would be destroyed, regenerate it.\nTap any number of untapped creatures you control other than Mossbridge Troll with total power 10 or greater: Mossbridge Troll gets +20/+20 until end of turn.

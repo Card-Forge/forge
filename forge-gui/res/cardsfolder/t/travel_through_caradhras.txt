@@ -1,0 +1,9 @@
+Name:Travel Through Caradhras
+ManaCost:5 G
+Types:Sorcery
+A:SP$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Redhorn Pass,Mines of Moria | SubAbility$ VoteRedhornPass | SpellDescription$ Council's dilemma — Starting with you, each player votes for Redhorn Pass or Mines of Moria. For each Redhorn Pass vote, search your library for a basic land card and put it onto the battlefield tapped. If you search your library this way, shuffle. For each Mines of Moria vote, return a card from your graveyard to your hand.
+SVar:VoteRedhornPass:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ VoteNumRedhorn Pass | Tapped$ True | SubAbility$ VoteMinesofMoria
+SVar:VoteMinesofMoria:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn | Mandatory$ True | SelectPrompt$ Return a card from your graveyard to your hand for each Mines of Moria vote | Hidden$ True | ChangeNum$ VoteNumMines of Moria | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+DeckHas:Ability$Graveyard
+Oracle:Council's dilemma — Starting with you, each player votes for Redhorn Pass or Mines of Moria. For each Redhorn Pass vote, search your library for a basic land card and put it onto the battlefield tapped. If you search your library this way, shuffle. For each Mines of Moria vote, return a card from your graveyard to your hand.\nExile Travel Through Caradhras.
