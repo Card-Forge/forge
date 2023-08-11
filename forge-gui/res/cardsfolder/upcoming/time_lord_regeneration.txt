@@ -1,0 +1,9 @@
+Name:Time Lord Regeneration
+ManaCost:U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Time Lord.YouCtrl | TgtPrompt$ Select target Time Lord you control | Triggers$ DiesTrig | SpellDescription$ Until end of turn, target Time Lord you control gains "When this creature dies, reveal cards from the top of your library until you reveal a Time Lord creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When this creature dies, reveal cards from the top of your library until you reveal a Time Lord creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:TrigReveal:DB$ DigUntil | Defined$ You | Valid$ Creature.Time Lord | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | StackDescription$ None
+DeckNeeds:Type$Time Lord
+DeckHints:Type$Changeling
+Oracle:Until end of turn, target Time Lord you control gains "When this creature dies, reveal cards from the top of your library until you reveal a Time Lord creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order."

@@ -70,6 +70,7 @@ Crocodile:Crocodiles
 Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
+Dalek:Daleks
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -275,6 +276,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
+Time Lord:Time Lords
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -427,12 +429,14 @@ Bolas's Meditation Realm
 Capenna
 Cridhe
 Dominaria
+Earth
 Echoir
 Eldraine
 Equilor
 Ergamon
 Fabacin
 Fiora
+Gallifrey
 Gargantikar
 Gobakhan
 Ikoria
@@ -472,6 +476,7 @@ Tarkir
 The Abyss
 The Library
 Theros
+Trenzalore
 Ulgrotha
 Valla
 Vryn
