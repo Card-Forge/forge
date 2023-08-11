@@ -338,13 +338,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         String type = sa.getParam("ChangeType");
-        if (type != null) {
-            if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                sa.setXManaCostPaid(xPay);
-                type = type.replace("X", Integer.toString(xPay));
-            }
+        if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            sa.setXManaCostPaid(xPay);
+            type = type.replace("X", Integer.toString(xPay));
         }
 
         for (final Player p : pDefined) {
@@ -500,7 +498,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
-        if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
+        if (!mandatory && sa.getPayCosts().hasXInAnyCostPart() && type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
