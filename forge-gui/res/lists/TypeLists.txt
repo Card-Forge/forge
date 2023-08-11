@@ -427,12 +427,14 @@ Bolas's Meditation Realm
 Capenna
 Cridhe
 Dominaria
+Earth
 Echoir
 Eldraine
 Equilor
 Ergamon
 Fabacin
 Fiora
+Gallifrey
 Gargantikar
 Gobakhan
 Ikoria
@@ -472,6 +474,7 @@ Tarkir
 The Abyss
 The Library
 Theros
+Trenzalore
 Ulgrotha
 Valla
 Vryn
