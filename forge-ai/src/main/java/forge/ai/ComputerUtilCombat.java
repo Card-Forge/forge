@@ -223,7 +223,7 @@ public class ComputerUtilCombat {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += predictPowerBonusOfAttacker(attacker, null, null, false);
-        if (attacker.hasKeyword(Keyword.INFECT) || attacker.hasKeyword(Keyword.TOXIC)) {
+        if (attacker.hasKeyword(Keyword.INFECT)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
             // opponent can always order it so that he gets 0
             if (pd == 1 && Iterables.any(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
@@ -235,7 +235,7 @@ public class ComputerUtilCombat {
             }
         }
         if (damage > 0) {
-            poison += predictPoisonFromTriggers(attacker, attacked, damage);
+            poison += predictExtraPoisonWithDamage(attacker, attacked, damage);
         }
         return poison;
     }
@@ -369,7 +369,7 @@ public class ComputerUtilCombat {
                     if (attacker.hasKeyword(Keyword.INFECT)) {
                         poison += trampleDamage;
                     }
-                    poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
+                    poison += predictExtraPoisonWithDamage(attacker, ai, trampleDamage);
                 }
             }
         }
@@ -2506,7 +2506,7 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    public static int predictPoisonFromTriggers(Card attacker, Player attacked, int damage) {
+    public static int predictExtraPoisonWithDamage(Card attacker, Player attacked, int damage) {
         int pd = 0, poison = 0;
         int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
         if (damageAfterRepl > 0) {
