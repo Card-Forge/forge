@@ -144,7 +144,12 @@ public class RewardData implements Serializable {
                 case "Union":
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
-                        pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                        if( r.cardName != null && !r.cardName.isEmpty() ) {
+                            pool.add(StaticData.instance().getCommonCards().getCard(r.cardName));
+                        }
+                        else {
+                            pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                        }
                     }
                     ArrayList<PaperCard> finalPool = new ArrayList(pool);
 
