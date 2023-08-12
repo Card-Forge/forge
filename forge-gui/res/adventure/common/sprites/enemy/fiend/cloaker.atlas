@@ -1,0 +1,101 @@
+cloaker.png
+size: 1056, 384
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 530,216
+  size: 16, 16
+Idle
+  xy: 0, 0
+  size: 96, 64   
+Idle
+  xy: 96, 0
+  size: 96, 64
+Idle
+  xy: 192, 0
+  size: 96, 64
+Idle
+  xy: 288, 0
+  size: 96, 64
+Idle
+  xy: 384, 0
+  size: 96, 64
+Walk
+  xy: 0, 64
+  size: 96, 64    
+Walk
+  xy: 96, 64
+  size: 96, 64    
+Walk
+  xy: 192, 64
+  size: 96, 64 
+Walk
+  xy: 288, 64
+  size: 96, 64 
+Walk
+  xy: 384, 64
+  size: 96, 64 
+Attack
+  xy: 0, 192
+  size: 96, 64    
+Attack
+  xy: 96, 192
+  size: 96, 64   
+Attack
+  xy: 192, 192
+  size: 96, 64   
+Attack
+  xy: 288, 192
+  size: 96, 64   
+Attack
+  xy: 384, 192
+  size: 96, 64    
+Attack
+  xy: 480, 192
+  size: 96, 64   
+Attack
+  xy: 576, 192
+  size: 96, 64   
+Attack
+  xy: 672, 192
+  size: 96, 64
+Attack
+  xy: 768, 192
+  size: 96, 64   
+Attack
+  xy: 864, 192
+  size: 96, 64    
+Death
+  xy: 0, 320
+  size: 96, 64    
+Death
+  xy: 96, 320
+  size: 96, 64   
+Death
+  xy: 192, 320
+  size: 96, 64 
+Death
+  xy: 288, 320
+  size: 96, 64   
+Death
+  xy: 384, 320
+  size: 96, 64  
+Death
+  xy: 480, 320
+  size: 96, 64 
+Death
+  xy: 576, 320
+  size: 96, 64  
+Death
+  xy: 672, 320
+  size: 96, 64
+Death
+  xy: 768, 320
+  size: 96, 64   
+Death
+  xy: 864, 320
+  size: 96, 64    
+Death
+  xy: 960, 320
+  size: 96, 64  

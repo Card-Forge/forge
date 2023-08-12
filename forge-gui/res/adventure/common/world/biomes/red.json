@@ -93,8 +93,7 @@
 	"Maze1",
 	"Maze2",
 	"Maze3",
-	"Fort",
-	"Fort5",
+	"Fort8",
 	"SnowAbbey",
 	"SnowAbbey1",
 	"SnowAbbey2",
@@ -121,7 +120,8 @@
 	"CaveCerodon",
 	"Temple of Chandra",
 	"Tibalts Fortress",
-	"Zedruu City"
+	"Zedruu City",
+	"Lavaforge Kobold"
 ],
 "structures": [
 	{

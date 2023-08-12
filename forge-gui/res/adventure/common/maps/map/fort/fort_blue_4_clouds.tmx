@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJy9lU1OwzAQhWefNmJf0g0Se8qPWZGD9C4Rp6hgDQIhlrCq1EtwIjIKT5q82rEdkj5p1CSN/c2Mn2ORvlwp8rQUuSvlZFKe1U95HHPkc0tzXtX9uHAi3w/TsrnW/aILXw5TsnWel7aeV9fl4Ouxxlxsrpv1WIhcz8BOEdg3dTxPyE3kSXgwZa618YnmPAWXr4eY/2Frv5zhaJ8deQ95rFpm1cblJp5LjBl7prWAi/nfWu77prvPYXKNMaGPlWHslvlMlX6rYrLvWEaq5620Z3Y+1PJVd79N0QXUkGfGMC13FdgL6KU+Wy+O/9frXP9yj328KrBmzEplWx/51rby1GbFHkrxlK0TsaJx3Ms5mCqfPywP5+bew4D32HPMZA15MtczB8prDHMsG94IMXlNY+xQH622pg7do+VZP+x8ofG2Z+qd80ieW+rd0Dnmq1nHf/z57ZD4rWcmuFwvamYuxg99r61/NXxMcENiX6kn7P6CcJ9z5jwH8vF5GV4Ex+aQe56DvTMR2j+6nuzbz/txzDECvylOx7RK2bM+/QJUAmD1
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="30" height="30" opacity="0.62">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJgDAMheFctBN0FDdzEHcTnUeKBF7FaoUkXt7hP3+El5xEskHTILJ/yMIsbXSrlhTrFg+LcNG62lbu2nGrh3tnR7lot0zN2u21PVy1/3DfbE/3yfZ20cbNI1z8NbWjXLXn8SzSZYwxxlodX72+7A==
+  </data>
+ </layer>
+ <layer id="9" name="Clutter Ground" width="30" height="30" opacity="0.66">
+  <data encoding="base64" compression="zlib">
+   eJzNV9tOwkAQ3T7RPqiYlLYIXv5Q8IKgQdFPAjWixp8AtVr9F2fSmbA2u3V3C8STnJRA27MzO3NmEUKIEfBKqJHWhPggfknXOfCzpnnIAKh5ATzw1L9vBUIkwIbEOjEK3HVvQe8ReK/R/a/IINevFfLtip4P++SvX7cLmhuBfY2lBnWZUg2r7otB8wS0+5YxD+D+d+qLOfXJvLBnGNMR3afaS4752yLmuNAfDVq//J4QPnfgu0Nf3TvhEvqK19Ip7Bv2cbPie03AuT12qNXMwsuGwBv6jHW0GeR53XaIEXNj8txI/PZKrLVTR01TDEkzBs1d4Axifaut3gtaoBUCm8DEc4u1D7wWi30yAcY69hZ57jr4XkRrf8B1C/VM5XnK/b/v5dwBvnh5Tdj24ZQ0J6Svmm2x5AvofW3SfDKYg2nJ7HmG5+8078koVuyRMz+nqSaiS15p44eIAXldIvmizbzv0Vp1Pq1DXNFD2afPaZ9WPe9HwEuR90ko5arqHPgLWDMN6u91o7UkXZuZgYgq6mZ0nkAPtjmbYLy6M3YZ+IyEvYv+W7ec4xHNDRPMpPMSxsd6ch3iPOJa1QF9f2IQbyr5EvoEn59UdT+lWh2Tp+Nc4SsSPX6vxHdl9GiWJQY9xrHg/G0XruyhLVqX7r8bI7TYux8fFnHA
+  </data>
+ </layer>
+ <layer id="1" name="SubClouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwyAMQHOXXcCuwv7MYBe2nQecMqVORttolpbhg3yaZ4MhKUAb1gBMPmbTmCjiYr4yyvwKAQYfV+TxrpG7rfdNPuYNL0ddXMX5si7qQfdebm83hbIulugN50dc3PpOO99CcmsfLvPW1I7lPkLevf2z1oe1bPVPYIhvObwJiT7PvcHZOYZ/77tOp/OJZZorVOfT0HcdDmeYL5IzRuF356/vUHqlvjvtoyMue4QW3CGSf8+/wpl4AevSO68=
+  </data>
+ </layer>
+ <layer id="2" name="Clouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFltFuwyAMRfmXva/dEmlvJVJ/GAIfOFhq9ca1g0ORZsmqQhDHNvZtnNtbuDkXi68397ZNi3Pz0t5Xman4l3+fWS0VZjZwr35jkn/87L2u5QF1QMNc5+ITiwHjGMp9sCpz9dtzFHyCOxjRA8ReB93tf1u4b7/W3m7tTbXHjLWh3snG+TyaAyuXmNSTVrZ0TqT4/eu6dCbO4tzRQzhrNMuVg+vfwpm9TMyRz3RWYql29U9e7GDS/Wh6Qk7vM8TZU9dqye9rFIBNeUTIh9733iXn4r3R2Vo/B8i7t3epxvwMPkd81luxWZhUU6xZYvlIs35GWySmNB+WWvZoGjK1/kB2FJy0kZ61+LgucKak19jfLZc0pcX8q9si67WV/XJXihZJ8WkmfSfwWPh5/LtK0jyLSfd71CMa92zOR/op9WUvF793kcHrrWmlxtXi/CxrF7a3WkuPNU2zMLV8LfuleeD9ePZ/5Gh/MGjHaOMzemo272OYyP0Fy7n4Rw==
+  </data>
+ </layer>
+ <layer id="10" name="CloudsClutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlt8KwiAUxn2Rblasm4Jtji7detm6KXB/qNfrSEpGerTUFbEPhE1hPz3fp5OQV12YoXMC7ZrvcFNpruNviIMPHbR+Yj84+EChjQ62azyEXSFZKBPlRLB75Nu1HFO+mFQkmNsoeQMzr53LMZNC/RE81d5RzGy4+FxjlR659ZHIoPC7k3k0qdBYao5Ybn1ky6B+DhQaKxbXJlXPun3em6m4XMu5qP/Yyn5ZF9WP7dNQpunbsZlCA3NnOzYTE7Zv8oqQdZWGi+XoAMxjAJc29jPM5Ol1T8gCeDmF9VI/hl4zLp91b1P9r5Rf2PnvUgZrzWCdS2gren+36QSMM3uwP2Uq+d4zN1C/bcQazvfM/9MND89aRQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="202" y="415.5" width="48" height="32.5">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="62.75" y="49"/>
+  <object id="51" template="../../obj/treasure.tx" x="71" y="425.333"/>
+  <object id="52" template="../../obj/gold.tx" x="91.5" y="423"/>
+  <object id="53" template="../../obj/enemy.tx" x="231.263" y="156.93">
+   <properties>
+    <property name="enemy" value="Cloud Guardian"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="354.825" y="227.365">
+   <properties>
+    <property name="enemy" value="Cloud Giant"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="92.7585" y="386.594">
+   <properties>
+    <property name="enemy" value="Master Blue Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="438.5" y="150"/>
+  <object id="58" template="../../obj/collision.tx" x="1.75" y="479" width="482" height="16"/>
+  <object id="59" template="../../obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
+  <object id="60" template="../../obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083"/>
+  <object id="61" template="../../obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083"/>
+  <object id="62" template="../../obj/enemy.tx" x="175.622" y="197.414">
+   <properties>
+    <property name="enemy" value="Cloud Guardian"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="231.718" y="263.196">
+   <properties>
+    <property name="enemy" value="Cloud Giant"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/manashards.tx" x="297.095" y="174.815"/>
+ </objectgroup>
+</map>

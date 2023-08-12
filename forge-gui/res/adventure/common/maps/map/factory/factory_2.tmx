@@ -48,7 +48,7 @@
   </object>
   <object id="65" template="../../obj/gold.tx" x="192.391" y="145.196"/>
   <object id="66" template="../../obj/gold.tx" x="19.3334" y="46.6666"/>
-  <object id="67" template="../../obj/enemy.tx" x="241.504" y="212.858">
+  <object id="67" template="../../obj/enemy.tx" x="243.575" y="213.45">
    <properties>
     <property name="enemy" value="Clay Golem"/>
     <property name="threatRange" type="int" value="30"/>

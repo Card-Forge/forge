@@ -102,11 +102,12 @@
   </object>
   <object id="63" template="../../obj/treasure.tx" x="343.333" y="276.667">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 8,
-  &quot;cardTypes&quot;: [ &quot;Elf&quot; ]
-}
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;count&quot;: 8,
+		&quot;subTypes&quot;: [ &quot;Elf&quot; ]
+	}
 ]</property>
    </properties>
   </object>

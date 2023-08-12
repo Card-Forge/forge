@@ -5,9 +5,10 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="7" name="Background" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlEsOgCAMRFm48WIc3zMZFybEFJzpB4gySXelvNIOeU8pr1jx46hpNJeWe+YeUB1bXwZr/sV7R6uedP6NoyWPHktuKU+qUauNCuFGZllyazgYoXul2cMoboZD4x0Ls+XtWL9K/vTkZtlZPT2KMLH3ezMjYt/Sk1vbI+Jj1DuR+Uy/Xn8Ec7fXfLWBKKL2rMxeM7Tu8azckfyetXtyR85vNM+XuU+hLQG1
+   eJztlEEOgCAMBDl48Re+wifwfN9kPJgQU3C7tECUTXorZUq7xDWEOGPGjyOn3lws98g9oDqWtgy1+RfvHaV60vk3jpIseky5pTypRq42KoQbmWXKzXBohO4Vs4de3BoOxjs55m3XsWkYGH9L/mRVs6/snJ8eRZi091szI9K+pSU32yPiY9Q7nvmafq3+CM3dVvNlA5FH7VGZrWZYu8ejcnvyW9Zuye05v948X+Y+AdzkAgs=
   </data>
  </layer>
  <layer id="9" name="Foreground" width="46" height="25">
@@ -114,23 +115,9 @@
   <object id="90" template="../../obj/waypoint.tx" x="357.333" y="262.667"/>
   <object id="91" template="../../obj/waypoint.tx" x="652.667" y="225.333"/>
   <object id="92" template="../../obj/waypoint.tx" x="642" y="146"/>
-  <object id="95" template="../../obj/enemy.tx" x="45.2058" y="358.668">
-   <properties>
-    <property name="enemy" value="Mimic"/>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Nahiri's Key&quot;
-  }
-]
-</property>
-   </properties>
-  </object>
   <object id="96" template="../../obj/door_down.tx" x="40.3333" y="388.333">
    <properties>
-    <property name="direction" value="Up"/>
+    <property name="direction" value="left"/>
     <property name="teleport" value="../common/maps/map/nahiri/nahiri.tmx"/>
     <property name="teleportObjectId" value="106"/>
    </properties>

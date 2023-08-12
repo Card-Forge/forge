@@ -90,6 +90,11 @@
 	"DjinnPalace1",
 	"Factory",
 	"Factory1",
+	"FortBlue1",
+	"FortBlue2",
+	"FortBlue3",
+	"FortBlue4",
+	"FortBlue5",
 	"MageTowerX",
 	"MageTowerU",
 	"MageTowerU1",
@@ -107,7 +112,9 @@
 	"Kiora Island",
 	"Teferi Hideout",
 	"Jacehold",
-	"Skep"
+	"Skep",
+	"Dream Halls",
+	"Crawlspace"
 ],
 "structures": [
 	{
