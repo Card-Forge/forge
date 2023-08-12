@@ -374,7 +374,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-         if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Blockers already set. Are there any dangerous unblocked creatures? Sort by creature that will deal the most damage?
             Card card = ComputerUtilCombat.mostDangerousAttacker(list, ai, activeCombat, true);
 
