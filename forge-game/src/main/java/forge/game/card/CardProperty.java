@@ -1091,6 +1091,18 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.equals("hasNonmanaAbilities")) {
+            boolean hasAbilities = false;
+            for(SpellAbility sa : card.getSpellAbilities()) {
+                if (sa.isActivatedAbility() && !sa.isManaAbility()) {
+                    hasAbilities = true;
+                    break;
+                }
+            }
+
+            if (!hasAbilities) {
+                return false;
+            }
         } else if (property.startsWith("activated")) {
             if (!card.activatedThisTurn()) {
                 return false;

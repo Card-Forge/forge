@@ -1068,7 +1068,7 @@ public class DamageDealAi extends DamageAiBase {
             CardCollection cards = new CardCollection();
             cards.addAll(ai.getCardsIn(ZoneType.Hand));
             cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
-            cards.addAll(ai.getCardsActivableInExternalZones(true));
+            cards.addAll(ai.getCardsActivatableInExternalZones(true));
             for (Card c : cards) {
                 if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
                     continue;
