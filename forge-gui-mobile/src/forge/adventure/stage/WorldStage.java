@@ -232,7 +232,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     @Override
     public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
-        if(isColliding(boundingRect))//if player is already colliding (after flying or teleport) allow to move off collision
+        if (isColliding(boundingRect)) //if player is already colliding (after flying or teleport) allow to move off collision
             return direction;
         return super.adjustMovement(direction, boundingRect);
     }
