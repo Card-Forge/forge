@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="60" height="34">
   <data encoding="base64" compression="zlib">
    eJzl110OgjAMB/CFN6OX0Ddu5AW8whJeOKk30DtoSCDOpbBuXdt9NPlHjQH3W2GT6WTMxBCb+VxuOMabY3xU11G0jbm9mDkoxUkdTw09lhqPtp1r/pea11dsteDdi5ZZo78z8Fvc1vuZNxjvazTmPcp5reOG+ku1hrxbSXp93553WIM1+/fr8wLfv5LXc6iXgxdMX2NLy7vE91ESa+7JuxWnF1qfWvXu7bc5vSlmKSfFu1VpXszzSs39tRHOFryxVk4v9F+Zo78le6XXppa8KdZavf65ufcjzFol4cXMh/8ZekYo3Uu51jGGP8vt9/ZzNeaxBrMXSXmPzKHjIIf7vbQjxgu5Q8dp9YfDizmudm9KarNS06O3R7P2GHrxfgFBViDR
@@ -30,7 +31,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEtOwzAQhi21ElIDbVecABatugUBG1awYgtsAXEDtgi4Aa8lD3EPyuMQ3ACksoXCDgnGJKOOIr9iO05C+aRRHnLs+T0zdhLG9MyBzRu0GycOp+yeW5v264dvnop2IOHIcn4RVx02cQod27LnEmdvJj5SX/FemSmbj3mtwXnp5P2iRbN++nStaZFWvGczD7Jnisqdy1p2H3TtTOYnT72qfXapLh/fxSfTOTHB135Kx0yfbzdiY5HZ81UE1xLKhUKvrq80A4976XqLsQ2wzZZbPyK9gw5jr51sffjMZwrqPGkz9gHH47a97q0khxcmR/cW4bzWZazeNfP1GeblBexAsGaYzIOOU9D33oq1UuO6TTWL6pjulZThhPga233zPIC52Xd8V1bBNZ8JdH9m0Iux5fYFttNQt6fnVJvLXp2VIdH6BnbeNntO5KMsvr/jpGKMubsMub/bGFne0Nw2jS3io7aQmyg22z1d9U2U3ouHFnr7zfh4D8dOD8qvJ24n8vW2aT5OHjmOtWyayxyu964Z610BrasSvWl074tXkf6dpUhc51+2ztu+s+QFje8D2GOGHJVB1wOd3tD/MKhe7iPqFcVbVd8U1fpeFbjvtL5VWsqWw5R+EldZPqd10W9mjuhfxXVU/fgi+M0cEtd/uSaEiE8IHSH5a3rypAr/2v8Jz7jW0LjVQ9F6bcf/Acveh4U=
+   eJztmLlOw0AQhkdKJKQYklQ8ARSJUkABAhoqqGiBFhBvQIuAN+AqOcR7EI6H4A1ACi0EOiTYxRllZO3lXe/aJnzSyIf2mH9n9rAB9MwxmzcoN0ocTtjVW5vM1o+secrbgQFHluOLuOqwiVPo2BY9lzh7U/GV+orvikzRfPS1BvvSydtFi6azadN1Tou04jubcZDVySt3LivpfdCVMxkfn3pV++xSVd6/i0+mY2JCVvsp7TN5v12LDSKz+mUE1xLKhUKvrq0kvQz30vUGwAazzYZbOyK9vRbAaytdG1nmMwV1njQBPtj1uGmve2uQwwvjw3eL7L7SBqi2zXx9ngF4YXYgWDNMxkHHKdP33oi1UuO6TTWL5jHdKyn9MfEzlvtmWmEWYN/xrKyCaz4T6P5MoRdjy+2L2U5NXZ7eU20ue3Va+kTrG7Pzplk9kY+y+P72k4gx5u4yy/3d2tB8Q3PbNLZIFnMLuYlis93TVd9Eyb24b6G3W4+v9+za6gC0O+JyIl9v6+b9+MhxnMumuczheu/qsd4VpnVVojeJ7rx4FenPLHniOv6ydd72zOILGt8HZo8pclQGXQ90ekP/w6B6uY+oVxRv1fymqNb3ssB9p/NbpaVoOUzpDuIqy+ekLvrNzBH9q7iOyh9fBL+ZQ+L6L9eEEPEJoSMkf02PT8rwr/2f8IzqHBq1+ZC3Xtv+fwDUuIeh
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

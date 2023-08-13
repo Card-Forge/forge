@@ -32,7 +32,7 @@ Idle
   size: 25, 19
 Idle 
   xy: 256, 0
-  size: 22, 19
+  size: 25, 19
 Idle 
   xy: 288, 0
   size: 25, 19
@@ -97,38 +97,14 @@ Attack
   xy: 130, 44
   size: 28, 16
 Death
-  xy: 3, 66
-  size: 26, 18
+  xy: 352, 63
+  size: 25, 20
 Death
-  xy: 35, 66
-  size: 26, 18
+  xy: 384, 63
+  size: 25, 20
 Death
-  xy: 67, 66
-  size: 26, 18
+  xy: 416, 63
+  size: 25, 20
 Death
-  xy: 99, 66
-  size: 26, 18
-Death
-  xy: 131, 66
-  size: 26, 18
-Death
-  xy: 163, 66
-  size: 26, 18
-Death
-  xy: 195, 66
-  size: 26, 18
-Death
-  xy: 227, 66
-  size: 26, 18
-Death
-  xy: 259, 66
-  size: 26, 18
-Death
-  xy: 291, 66
-  size: 26, 18
-Death
-  xy: 323, 66
-  size: 26, 18
-Death
-  xy: 355, 66
-  size: 26, 18
+  xy: 448, 63
+  size: 25, 20

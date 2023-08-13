@@ -44,6 +44,13 @@
   </object>
   <object id="67" template="../../obj/enemy.tx" x="207.683" y="52.0172">
    <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Coveted Jewel&quot; ]
+ &quot;opponent&quot;: {
+   &quot;startBattleWithCard&quot;: [ &quot;Rhystic Study&quot; ]
+ }
+}</property>
     <property name="enemy" value="Mighty Djinn"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>

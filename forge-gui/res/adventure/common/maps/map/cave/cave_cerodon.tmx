@@ -39,34 +39,9 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="64" template="../../obj/treasure.tx" x="245.693" y="43.1873">
-   <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.8,
-  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
-}]</property>
-   </properties>
-  </object>
   <object id="62" template="../../obj/gold.tx" x="193.167" y="39.75"/>
   <object id="55" template="../../obj/treasure.tx" x="223.101" y="42.1694"/>
-  <object id="61" template="../../obj/enemy.tx" x="199.029" y="127.692">
+  <object id="61" template="../../obj/enemy.tx" x="210.675" y="69.4637">
    <properties>
     <property name="enemy" value="Cerodon"/>
     <property name="threatRange" type="int" value="70"/>

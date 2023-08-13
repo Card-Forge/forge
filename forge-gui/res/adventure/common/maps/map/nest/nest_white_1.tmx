@@ -5,14 +5,15 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt17sJgDAYRWErMYuJO9lbZhLnCo5hJajERzSY688pvkqFe9IEvasqHzGsxJ6fvV+C6i468rSUOgM66KCDDjrooMNuR4ktdNzr+MP/xxf6eqsV2JSidfHN6h0pm5Vbjs7/SiewPUdHENi+73j6rVrLG39sGZvyG2ix2TI57XvEwhkvHZZagsCOXCy1AAAAAAD0zHEheMc=
+   eJzt17sJgDAURmErMQMJTiBOZpnOLZxLHMPGoEjQqJF7vZzia3zAf9KI3hWFj+h3YvfPnpegdRcdeVqkzoAOOuiggw466LDbIbGFjrSOP/x/fG2oz0nvS9GuymYTrktvu9qdck17Szj/u+91Crbn6JgUbD92PH1XW8sbf2wZK/kNtNhsmZ3u74iFMw4dllomBTtysdQCAAAAANBnAbhteiQ=
   </data>
  </layer>
  <layer id="2" name="Ground" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzVWllOw0AM7Rc0hwugXIZjNbS9FYX2CMSiFpbl8XgLgSfND2Q83vLGdnre73ZPg7xelpXByOQ9K/Lel/+diS6fy3rb28/i+3Edl799JOw4LPtvRNZl6MsDXS5EH68fpxVtiOgD9pw6OsAZPF64D/wg2QB75mVdjbHGGFvj4AX6CXJvbtgj2RDxrSSrAlwfa+5k3z8827unJSdiA4LzDthizTHA5LBfs3kafLzB0eI0i27Uh9rzh/v7d1Oes7z/UVu094XngWYLl5+9u7y2aOdR3sJ9Wk5T+d7cjdiicbT0PDxjzQl6l2XvMQvW4lXqp0xuIV9UcWUUUT9xvrgl/I2yKv1g8avEK0/DT1yku18D5nirbvDqP9/16+UZrzMpR6J9nlyVaoCIPbxmtuYHfccy9W8rvh5fZGtmwJiwAdCKr0eXrA6oB+qg9XAeOV5dqnSYiu4h1CeiC8Y1W09V3XNr3ZkA5Pj/DMoFa+L1YT3ZnM+iMq6Dr2evBufEqIxsr1sFtCez39r3aLXN1vUoAH3R48ZRiRv27tk6jGKNmr1XIx0fv1dlfqJvtBmXF5RTJD3XeNek/jsj92CsN/m50t3v7R/4rCoze+M1r1abTEZbrbq05jve+ojL6dVq+LzGe5PTrx4dNE6gd5XFD706LFID09mTZoO136ysOb2zlN753jhXQdIrUx/x+d9Wc3hAxp/ROQDdm+n1KKLcynnVu5/WKhU1c6SX53Gwznql/VX3uFcHwMhs9/BRayaUnQVEODH6PUX6LpaZidB+7jchzYEiPqGz0kxfm0F2liPF9LRxHxZBZrb31yDFtPLb9pZ9tvad1wL6/afqbo74BLkvynvRuqQn0+tbONvzewN+XlX/O5O4RmRaf2/AUdnLV/wG7Av74c5G
+   eJzVWlluwkAM5auQ27SXaL+gVS7TY5ECtyotHKGxwKplOR5vAfGkqBLNeLzlje3ksFosNp18fYxXBmsm712R9z3+70B0+R2vr5V9L74er93420/Cju24/kxkHbu2PNDlSPTx+rGf0YaIPmDPvqED7MHjhevAD5INsGYYr5Mx1hhjaxy8QD9B7g0T9kg2RHwryaoA18eaO9nnD/f2rpmSE7EBwXkHbLHmGKB32K/Z3Hc+3uCY4jSLbtSH2v3b6/N3Vu6zPP9RW7TnheeBZguXnz27vLZo+1HewnVaTlP53tyN2KJxtHQ/3GPNCXqWZc8xC+biVeqnTG4hX1RxZRRRP3G+OCf8jbIq/WDxq8Qrm+4/LtLZrwFzfKpu8Oo/XPVr5RmvMylHon2eXJVqgIg9vGa25gd9xjL171R8Pb7I1syAdcIGAI/v28vl99fx7/L5NjqgHqiD1sNZ5WTWZnXoi84h1CeiC8Y1W09VnXNznZkA5PhHBuWCOfH5NJ9szmdRGafO17NXg3NiVEa2160C2pNZb+17tNrm3vUoAH3R4sa1Ejfs3bN1GMUcNXurRtotL1dlfqJvtBmXF5RTJD3neNak/jsjd2usN/m+0tnv7R/4rCoze+M1r1ab9EZbrbpMzXe89RGX06rV8H6N93qnXz06aJxAzyqLH1p1WKQGprMnzQZrv1lZc3pnKa39vXGugqRXpj7i8797zeEBGX9G5wB0babXo4hyK+dV73paq1TUzJFensfBOuuV1led414dAGtmu4ePpmZC2VlAhBOj71Ok92KZmQjt524Jym80ll6f0Flppq/NIDvLkWK6v3MfFoEU00eFFNPKd9v37LO197wW0Pc/VWdzxCfIfVHei9YlLZle38Lenu8N+H5V/e9A4hqRaf3egKOyl6/4BuwPMBrMXg==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="50" height="50">

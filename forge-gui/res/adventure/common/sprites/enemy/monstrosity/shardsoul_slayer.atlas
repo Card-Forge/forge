@@ -52,20 +52,20 @@ Walk
   xy: 456, 90
   size: 44,38
 Attack 
-  xy: 206, 149
-  size: 50, 43
+  xy: 10, 149
+  size: 55, 43
 Attack 
-  xy: 14, 149
-  size: 50, 43
+  xy: 138, 149
+  size: 55, 43
 Attack 
-  xy: 142, 149
-  size: 50, 43
+  xy: 202, 149
+  size: 55, 43
 Attack 
-  xy: 206, 149
-  size: 50, 43
+  xy: 266, 149
+  size: 55, 43
 Attack 
-  xy: 270, 149
-  size: 50, 43
+  xy: 330, 149
+  size: 55, 43
 Death 
   xy: 15,277
   size: 50, 43
