@@ -123,7 +123,7 @@ public class MapStage extends GameStage {
     public PointOfInterestChanges getChanges() {
         return changes;
     }
-    private boolean matchJustEnded = false;
+    private boolean freezeAllEnemyBehaviors = false;
 
     protected MapStage() {
         dialog = Controls.newDialog("");
@@ -866,7 +866,7 @@ public class MapStage extends GameStage {
     @Override
     public void setWinner(boolean playerWins) {
         isLoadingMatch = false;
-        matchJustEnded = true;
+        freezeAllEnemyBehaviors = true;
         if (playerWins) {
             currentMob.clearCollisionHeight();
             Current.player().win();
@@ -1034,12 +1034,14 @@ public class MapStage extends GameStage {
             return;
         Iterator<EnemySprite> it = enemies.iterator();
 
-        if (matchJustEnded){
-            if (!positions.contains(player.pos()))
-                matchJustEnded = false;
+        if (freezeAllEnemyBehaviors) {
+            if (!positions.contains(player.pos())) {
+                freezeAllEnemyBehaviors = false;
+            }
+            else return;
         }
 
-        if (!matchJustEnded) {
+        if (!freezeAllEnemyBehaviors) {
             while (it.hasNext()) {
                 EnemySprite mob = it.next();
                 if (mob.inactive){
@@ -1101,6 +1103,7 @@ public class MapStage extends GameStage {
                     }
                     break;
                 } else if (actor instanceof RewardSprite) {
+                    freezeAllEnemyBehaviors = true;
                     Gdx.input.vibrate(50);
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(100, 1);
@@ -1171,6 +1174,7 @@ public class MapStage extends GameStage {
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
         }
+        freezeAllEnemyBehaviors = true;
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;

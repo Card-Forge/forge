@@ -5,6 +5,7 @@
   <properties>
    <property name="direction" value="left"/>
    <property name="teleport" value=""/>
+   <property name="teleportObjectId" value=""/>
   </properties>
  </object>
 </template>

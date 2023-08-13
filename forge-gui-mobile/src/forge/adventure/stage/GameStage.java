@@ -402,8 +402,6 @@ public abstract class GameStage extends Stage {
         Vector2 adjDirY = direction.cpy();
         boolean foundX = false;
         boolean foundY = false;
-        if(isColliding(boundingRect))//if player is already colliding (after flying or teleport) allow to move off collision
-            return direction;
         while (true) {
 
             if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {

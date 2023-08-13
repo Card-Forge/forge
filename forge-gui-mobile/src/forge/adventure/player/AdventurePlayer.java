@@ -8,6 +8,8 @@ import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.AdventureDeckEditor;
+import forge.adventure.scene.DeckEditScene;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
@@ -588,6 +590,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 newCards.add(reward.getCard());
                 if (reward.isNoSell()) {
                     noSellCards.add(reward.getCard());
+                    AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+                    if (editor != null)
+                        editor.refresh();
                 }
                 break;
             case Gold:
