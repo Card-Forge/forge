@@ -3,11 +3,8 @@ ManaCost:2 U
 Types:Creature Elemental
 PT:*/*
 K:etbCounter:TIME:X:no Condition:Tidewalker enters the battlefield with a time counter on it for each Island you control.
+K:Vanishing
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of time counters on it.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME | Execute$ TrigUpkeepVanishing | TriggerDescription$ Vanishing (At the beginning of your upkeep, remove a time counter from this creature. When the last is removed, sacrifice it.)
-T:Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$ Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME | Execute$ TrigVanishingSac | Secondary$ True | TriggerDescription$ Vanishing (At the beginning of your upkeep, remove a time counter from this creature. When the last is removed, sacrifice it.)
-SVar:TrigUpkeepVanishing:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
-SVar:TrigVanishingSac:DB$ Sacrifice | SacValid$ Self
 SVar:X:Count$Valid Island.YouCtrl
 SVar:Y:Count$CardCounters.TIME
 SVar:NeedsToPlayVar:X GE3

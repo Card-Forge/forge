@@ -15,7 +15,6 @@ public class TriggerRingTemptsYou extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
