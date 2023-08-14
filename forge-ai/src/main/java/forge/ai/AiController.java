@@ -279,6 +279,11 @@ public class AiController {
                 continue;
             }
 
+            // can't fetch partner isn't problematic
+            if (tr.getKeyword() != null && tr.getKeyword().getOriginal().startsWith("Partner")) {
+                continue;
+            }
+
             if (!ZoneType.Battlefield.toString().equals(tr.getParam("Destination"))) {
                 continue;
             }
