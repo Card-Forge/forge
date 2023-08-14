@@ -320,11 +320,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView getCardsToMulligan(Player firstPlayer) {
-        return null;
-    }
-
-    @Override
     public void declareAttackers(Player attacker, Combat combat) {
         //Doing nothing is safe in most cases, but not all (creatures that must attack etc).  TODO: introduce checks?
         if (playerActions == null) {

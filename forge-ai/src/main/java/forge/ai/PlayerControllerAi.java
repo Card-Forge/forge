@@ -594,15 +594,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView getCardsToMulligan(Player firstPlayer)  {
-        if (!ComputerUtil.wantMulligan(player, 0)) {
-            return null;
-        }
-
-        return player.getCardsIn(ZoneType.Hand);
-    }
-
-    @Override
     public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
