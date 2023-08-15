@@ -29,3 +29,6 @@ ScryfallCode=PWCS
 20226 U Banishing Slash @Ruiko Nakamura
 20231 M Elspeth Resplendent @Areku Nishiki
 20232 R Giada, Font of Hope @Umiu Geso
+20233 M Liliana of the Veil @Yuichi Murakami
+20234 R Braids, Arisen Nightmare @Daisuke Tatsuma
+20235 U Phyrexian Rager @Brock Grossman
