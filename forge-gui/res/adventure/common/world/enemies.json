@@ -8872,7 +8872,7 @@
 },
 {
 	"name": "Eldrazi",
-	"sprite": "sprites/enemy/elemental/mindelemental.atlas",
+	"sprite": "sprites/enemy/aberration/eldrazi.atlas",
 	"deck": [
 		"decks/standard/eldrazi.json"
 	],
