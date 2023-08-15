@@ -1,0 +1,10 @@
+Name:Spellbook Vendor
+ManaCost:1 W
+Types:Creature Human Peasant
+PT:2/2
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigImmediate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may pay {1}. When you do, create a Sorcerer Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigToken | TriggerDescription$ When you do, create a Sorcerer Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_sorcerer | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Vigilance\nAt the beginning of combat on your turn, you may pay {1}. When you do, create a Sorcerer Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")
