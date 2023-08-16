@@ -6,21 +6,110 @@ Type=Expansion
 ScryfallCode=WOE
 
 [cards]
+4 C Besotted Knight @Andreia Ugrai
+5 C Break the Spell @Miranda Meeks
+9 U Cursed Courtier @Tuan Duong Chu
+13 R Expel the Interlopers @Andreas Zafiratos
+15 U Gallant Pie-Wielder @Matt Forsyth
+16 U Glass Casket @Raoul Vitale
+19 U Knight of Doves @Volkan Baǵa
 21 M Moonshaker Cavalry @Aldo Domínguez
+33 U Stroke of Midnight @Julia Metzger
+35 R Three Blind Mice @Andrew Mar
+49 R Farsight Ritual @Randy Gallegos
+59 C Living Lectern @Chris Seaman
 67 C Sleight of Hand @Scott Murphy
+76 M Virtue of Knowledge @Piotr Dura
 78 M Ashiok, Wicked Manipulator @Raymond Swanland
+82 M Beseech the Mirror @Cynthia Sheppard
+84 C Conceited Witch @Anna Pavleeva
+87 R The End @Donato Giancola
+89 U Faerie Dreamthief @Randy Vargas
+96 R Lich-Knights' Conquest @Denis Zhbankov
+98 R Lord Skitter's Blessing @Joseph Weston
+103 C Rat Out @Michele Giorgi
+104 C Rowan's Grim Search @Aurore Folny
+111 C Sweettooth Witch @Konstantin Porubov
+117 C Warehouse Tabby @Steve Prescott
+127 U Embereth Veteran @Andreia Ugrai
+144 C Ratcatcher Trainee @Michele Giorgi
+145 M Realm-Scorcher Hellkite @Billy Christian
+153 C Torch the Tower @Uriah Voth
+154 U Twisted Fealty @Mila Pesic
+161 C Beanstalk Wurm @Aldo Domínguez
+163 M Blossoming Tortoise @Simon Dominic
+168 R Elvish Archivist @Mila Pesic
+176 R The Huntsman's Redemption @Magali Villeneuve
+181 C Return from the Wilds @Julia Metzger
+182 C Rootrider Faun @Jesper Ejsing
+185 C Skybeast Tracker @Andreas Zafiratos
+188 U Tanglespan Lookout @Dmitry Burmak
+190 R Thunderous Debut @Aldo Domínguez
 193 U Tough Cookie @Milivoj Ćeran
+194 C Troublemaker Ouphe @Jesper Ejsing
+199 M Agatha of the Vile Cauldron @Jason A. Engle
+201 U Ash, Party Crasher @Jason Rainville
+202 M Eriette of the Charmed Apple @Magali Villeneuve
+203 R Faunsbane Troll @Artur Nakhodkin
+204 R The Goose Mother @Jesper Ejsing
+205 U Greta, Sweettooth Scourge @Steve Prescott
+206 M Hylda of the Icy Crown @Ekaterina Burmak
+207 U Johann, Apprentice Sorcerer @Dmitry Burmak
+209 U Neva, Stalked by Nightmares @Tyler Jacobson
+210 U Obyra, Dreaming Duelist @Evyn Fong
+211 M Rowan, Scion of War @Magali Villeneuve
+212 U Ruby, Daring Tracker @Ekaterina Burmak
+213 U Sharae of Numbing Depths @Evyn Fong
+214 U Syr Armont, the Redeemer @Magali Villeneuve
 215 M Talion, the Kindly Lord @Justyna Dura
+216 U Totentanz, Swarm Piper @Matt Stewart
+217 U Troyan, Gutsy Explorer @Jesper Ejsing
+218 M Will, Scion of Peace @Ryan Pancoast
+220 M Beluna Grandsquall @Victor Adame Minguez
 222 R Cruel Somnophage @Jason A. Engle
+223 R Decadent Dragon @Wylie Beckert
+226 U Frolicking Familiar @Brian Valeza
+230 M Kellan, the Fae-Blooded @Anna Steinbauer
+252 R Syr Ginger, the Meal Ender @Michal Ivan
+255 U Edgewall Inn @Alayna Danner
+256 C Evolving Wilds @Alayna Danner
+258 R Restless Cottage @Jesper Ejsing
 259 R Restless Fortress @Piotr Dura
 262 L Plains @Hari & Deepti
 263 L Island @Hari & Deepti
 264 L Swamp @Hari & Deepti
 265 L Mountain @Hari & Deepti
 266 L Forest @Hari & Deepti
+279 M Virtue of Knowledge @Josu Hernaiz
+285 M Beluna Grandsquall @Kev Walker
 286 R Cruel Somnophage @Kev Walker
+287 R Decadent Dragon @Aaron Miller
+291 M Kellan, the Fae-Blooded @Omar Rayyan
 297 M Ashiok, Wicked Manipulator @Serena Malyon
+298 M Kellan, the Fae-Blooded @Andreas Zafiratos
+299 M Eriette of the Charmed Apple @Zach Alexander
+300 M Rowan, Scion of War @Abigail Larson
 301 M Talion, the Kindly Lord @Olena Richards
+302 M Will, Scion of Peace @Matteo Marjoram
+304 R Restless Cottage @Sergey Glushakov
 305 R Restless Fortress @Alayna Danner
+324 R Expel the Interlopers @Andreas Zafiratos
 325 M Moonshaker Cavalry @Aldo Domínguez
+332 R Farsight Ritual @Randy Gallegos
+336 M Beseech the Mirror @Cynthia Sheppard
+337 R The End @Donato Giancola
+338 R Lich-Knights' Conquest @Denis Zhbankov
+354 M Blossoming Tortoise @Simon Dominic
+359 R Thunderous Debut @Aldo Domínguez
+360 M Agatha of the Vile Cauldron @Jason A. Engle
+361 R Faunsbane Troll @Artur Nakhodkin
+362 R The Goose Mother @Jesper Ejsing
+363 M Hylda of the Icy Crown @Ekaterina Burmak
+369 R Syr Ginger, the Meal Ender @Michal Ivan
+375 U Stroke of Midnight @Julia Metzger
 376 C Sleight of Hand @Scott Murphy
+377 U Faerie Dreamthief @Randy Vargas
+378 C Torch the Tower @Uriah Voth
+379 U Tanglespan Lookout @Dmitry Burmak
+380 R Lich-Knights' Conquest @Kristina Carroll
+381 R Expel the Interlopers @Awanqi (Angela Wang)

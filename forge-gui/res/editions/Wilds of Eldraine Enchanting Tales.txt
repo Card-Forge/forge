@@ -7,17 +7,53 @@ ScryfallCode=WOT
 
 [cards]
 4 M Greater Auramancy @Meel Tamphanon
+5 U Griffin Aerie
+9 M Land Tax @Francoyovich
 13 M Smothering Tithe @Shafer Brown
+16 R Copy Enchantment @Abigail Larson
 17 U Curiosity @Abigail Larson
+22 M Kindred Discovery
 25 M Rhystic Study @Serena Malyon
+26 U Spreading Seas @Lander Strijbol
+27 M Bitterblossom @Serena Malyon
+29 M Grave Pact @Zach Alexander
+30 R Leyline of the Void @Matteo Marjoram
 31 M Necropotence @Abigail Larson
+32 R Oppression @Matteo Bassini
+34 R Polluted Bonds @William Phifer
+35 R Sanguine Bond @Harry Conway
 39 R Aggravated Assault @Maihope
+40 R Blood Moon @William Phifer
+42 M Fiery Emancipation
+50 M Sneak Attack @Shafer Brown
+51 R Defense of the Heart @Olena Richards
 52 M Doubling Season @Eva Eskelinen
+53 U Garruk's Uprising @Harry Conway
 60 R Prismatic Omen @Qianhao Ma
+62 R Unnatural Growth @Francoyovich
 64 M Greater Auramancy @Mai Okuma
+66 M Land Tax @Jintetsu
 67 M Smothering Tithe @Daisuke Tatsuma
+69 M Kindred Discovery @Yuchi Yuki
 71 M Rhystic Study @Fuzichoco
+72 M Bitterblossom @I☆LA
 74 M Necropotence @Kuregure
+75 R Polluted Bonds @Yuichi Murakami
 76 R Aggravated Assault @zizero
+77 R Blood Moon @Esuthio
+79 M Sneak Attack @Canata Katana
+80 R Defense of the Heart @Hisashi Momose
 81 M Doubling Season @Kemonomichi
+82 R Nature's Will @Dai-XT
+84 M Greater Auramancy @Mai Okuma
+86 M Land Tax @Jintetsu
+87 M Smothering Tithe @Daisuke Tatsuma
+89 M Kindred Discovery @Yuchi Yuki
 91 M Rhystic Study @Fuzichoco
+92 M Bitterblossom @I☆LA
+93 M Grave Pact @BODAX
+94 M Necropotence @Kuregure
+96 R Aggravated Assault @zizero
+99 M Sneak Attack @Canata Katana
+100 R Defense of the Heart @Hisashi Momose
+101 M Doubling Season @Kemonomichi
