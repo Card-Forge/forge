@@ -735,6 +735,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
+    public boolean isBargain() {
+        return isOptionalCostPaid(OptionalCost.Bargain);
+    }
+
     public boolean isBuyBackAbility() {
         return isOptionalCostPaid(OptionalCost.Buyback);
     }
