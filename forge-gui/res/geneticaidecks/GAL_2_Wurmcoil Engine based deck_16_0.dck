@@ -1,0 +1,30 @@
+[metadata]
+Name=GAL_2_Wurmcoil Engine based deck_16_0
+[Main]
+3 Aqueous Form|CMR|1
+4 Banefire|J22|1
+1 Chalice of the Void|TSR|1
+4 Door of Destinies|LTC|1
+1 Forest|CMM|1
+2 Forest|J22|1
+1 Forest|SCD|1
+3 Goblin Cohort|EVG|1
+4 Inferno Titan|CMM|1
+2 Island|CMM|1
+1 Island|DMR|1
+4 Island|J22|1
+2 Island|SCD|1
+4 Kira, Great Glass-Spinner|JMP|1
+5 Mountain|CMM|1
+1 Mountain|DMR|1
+1 Mountain|J22|1
+2 Mountain|RTR|1
+3 Mountain|SCD|1
+3 Sneak Attack|DMR|1
+3 Solemn Simulacrum|CMM|1
+3 Worldspine Wurm|RTR|1
+3 Wurmcoil Engine|BRR|1
+[Sideboard]
+4 Combustible Gearhulk|SCD|1
+4 Etali, Primal Storm|DMC|1
+3 Rune-Scarred Demon|CMM|1
