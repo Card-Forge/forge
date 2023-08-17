@@ -14,9 +14,12 @@ ScryfallCode=WOE
 16 U Glass Casket @Raoul Vitale
 19 U Knight of Doves @Volkan Baǵa
 21 M Moonshaker Cavalry @Aldo Domínguez
+31 R Spellbook Vendor @Scott Murphy
 33 U Stroke of Midnight @Julia Metzger
 35 R Three Blind Mice @Andrew Mar
 49 R Farsight Ritual @Randy Gallegos
+54 C Ice Out @Olivier Bernard
+58 C Johann's Stopgap @Christina Kraus
 59 C Living Lectern @Chris Seaman
 67 C Sleight of Hand @Scott Murphy
 76 M Virtue of Knowledge @Piotr Dura
@@ -27,18 +30,23 @@ ScryfallCode=WOE
 89 U Faerie Dreamthief @Randy Vargas
 96 R Lich-Knights' Conquest @Denis Zhbankov
 98 R Lord Skitter's Blessing @Joseph Weston
+99 U Lord Skitter's Butcher @Leesha Hannigan
 103 C Rat Out @Michele Giorgi
 104 C Rowan's Grim Search @Aurore Folny
+107 R Specter of Mortality @Daarken
 111 C Sweettooth Witch @Konstantin Porubov
 117 C Warehouse Tabby @Steve Prescott
 127 U Embereth Veteran @Andreia Ugrai
+142 U Monstrous Rage @Borja Pindado
 144 C Ratcatcher Trainee @Michele Giorgi
 145 M Realm-Scorcher Hellkite @Billy Christian
+151 U Stonesplitter Bolt @Alexandr Leskinen
 153 C Torch the Tower @Uriah Voth
 154 U Twisted Fealty @Mila Pesic
 161 C Beanstalk Wurm @Aldo Domínguez
 163 M Blossoming Tortoise @Simon Dominic
 168 R Elvish Archivist @Mila Pesic
+175 U Howling Galefang @Nestor Ossandon Leal
 176 R The Huntsman's Redemption @Magali Villeneuve
 181 C Return from the Wilds @Julia Metzger
 182 C Rootrider Faun @Jesper Ejsing
@@ -66,10 +74,13 @@ ScryfallCode=WOE
 217 U Troyan, Gutsy Explorer @Jesper Ejsing
 218 M Will, Scion of Peace @Ryan Pancoast
 220 M Beluna Grandsquall @Victor Adame Minguez
+221 U Callous Sell-Sword @Valera Lutfullina
 222 R Cruel Somnophage @Jason A. Engle
 223 R Decadent Dragon @Wylie Beckert
 226 U Frolicking Familiar @Brian Valeza
 230 M Kellan, the Fae-Blooded @Anna Steinbauer
+235 R Scalding Viper @Andrew Mar
+242 M Agatha's Soul Cauldron @Jason A. Engle
 252 R Syr Ginger, the Meal Ender @Michal Ivan
 255 U Edgewall Inn @Alayna Danner
 256 C Evolving Wilds @Alayna Danner
@@ -85,6 +96,7 @@ ScryfallCode=WOE
 286 R Cruel Somnophage @Kev Walker
 287 R Decadent Dragon @Aaron Miller
 291 M Kellan, the Fae-Blooded @Omar Rayyan
+295 R Scalding Viper @Omar Rayyan
 297 M Ashiok, Wicked Manipulator @Serena Malyon
 298 M Kellan, the Fae-Blooded @Andreas Zafiratos
 299 M Eriette of the Charmed Apple @Zach Alexander
@@ -95,11 +107,15 @@ ScryfallCode=WOE
 305 R Restless Fortress @Alayna Danner
 324 R Expel the Interlopers @Andreas Zafiratos
 325 M Moonshaker Cavalry @Aldo Domínguez
+327 R Spellbook Vendor @Scott Murphy
 332 R Farsight Ritual @Randy Gallegos
 336 M Beseech the Mirror @Cynthia Sheppard
 337 R The End @Donato Giancola
 338 R Lich-Knights' Conquest @Denis Zhbankov
+340 R Lord Skitter's Blessing @Joseph Weston
+350 M Realm-Scorcher Hellkite @Billy Christian
 354 M Blossoming Tortoise @Simon Dominic
+355 R Elvish Archivist @Mila Pesic
 359 R Thunderous Debut @Aldo Domínguez
 360 M Agatha of the Vile Cauldron @Jason A. Engle
 361 R Faunsbane Troll @Artur Nakhodkin
