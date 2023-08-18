@@ -14,7 +14,6 @@ public enum TrackableProperty {
     Text(TrackableTypes.StringType),
     PreventNextDamage(TrackableTypes.IntegerType),
     AttachedCards(TrackableTypes.CardViewCollectionType),
-    AllAttachedCards(TrackableTypes.CardViewCollectionType),
     Counters(TrackableTypes.CounterMapType),
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
