@@ -15,7 +15,7 @@ Name:Burn Together
 ManaCost:R
 Types:Sorcery Adventure
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | RememberObjects$ ThisTargetedCard | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | SpellDescription$ Target creature you control deals damage equal to its power to any other target. Then sacrifice it.
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature to be dealt damage | DamageSource$ ParentTarget | NumDmg$ X | TargetUnique$ True | SubAbility$ DBSac
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ ParentTarget | NumDmg$ X | TargetUnique$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ SacrificeAll | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ParentTargeted$CardPower
