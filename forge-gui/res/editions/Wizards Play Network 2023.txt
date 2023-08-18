@@ -7,3 +7,5 @@ ScryfallCode=PW23
 
 [cards]
 1 R Norn's Annex @James Paick
+2 R Lifecrafter's Bestiary @Izzy
+3 R Beast Within @Dave Allsop
