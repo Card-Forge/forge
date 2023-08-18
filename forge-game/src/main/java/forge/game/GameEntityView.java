@@ -45,7 +45,7 @@ public abstract class GameEntityView extends TrackableObject {
     public int getPreventNextDamage() {
         return get(TrackableProperty.PreventNextDamage);
     }
-    protected void updatePreventNextDamage(GameEntity e) {
+    public void updatePreventNextDamage(GameEntity e) {
         set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
