@@ -13,7 +13,6 @@ ALTERNATE
 Name:Locthwain Scorn
 ManaCost:1 B
 Types:Sorcery Adventure
-Target creature gets -3/-3 until end of turn. You gain 2 life.
 A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBGainLife | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 2 life.
 Oracle:Target creature gets -3/-3 until end of turn. You gain 2 life.
