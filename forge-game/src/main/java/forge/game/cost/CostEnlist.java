@@ -74,7 +74,7 @@ public class CostEnlist extends CostPartWithTrigger {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true);
+        targetCard.tap(true, ability);
         // need to transfer info
         payTrig.addRemembered(targetCard);
 

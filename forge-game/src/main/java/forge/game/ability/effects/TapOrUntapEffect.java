@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.PlayerController;
@@ -29,10 +27,9 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> tgtCards = getTargetCards(sa);
         PlayerController pc = sa.getActivatingPlayer().getController();
 
-        for (final Card tgtC : tgtCards) {
+        for (final Card tgtC : getTargetCards(sa)) {
             if (!tgtC.isInPlay()) {
                 continue;
             }
@@ -45,7 +42,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                     !tgtC.getController().equals(sa.getActivatingPlayer()) );
 
             if (tap) {
-                tgtC.tap(true);
+                tgtC.tap(true, sa);
             } else {
                 tgtC.untap(true);
             }
