@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -160,6 +161,16 @@ public class SimulationTest {
         return Card.fromPaperCard(token, p, p.getGame());
     }
 
+    protected List<Card> addTokens(String name, int amount, Player p) {
+        List<Card> cards = new ArrayList<>();
+
+        for(int i = 0; i < amount; i++) {
+            cards.add(addToken(name, p));
+        }
+
+        return cards;
+    }
+
     protected Card addToken(String name, Player p) {
         Card c = createToken(name, p);
         // card need a new Timestamp otherwise Static Abilities might collide
@@ -167,5 +178,4 @@ public class SimulationTest {
         p.getZone(ZoneType.Battlefield).add(c);
         return c;
     }
-
 }

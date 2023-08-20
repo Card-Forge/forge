@@ -10,6 +10,8 @@ import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 
 public class AutoPaymentTest extends SimulationTest {
 
@@ -45,5 +47,38 @@ public class AutoPaymentTest extends SimulationTest {
 
         Card elfCopy = findCardWithName(simGame, llanowar);
         AssertJUnit.assertNotNull(elfCopy);
+    }
+
+    @Test
+    public void payWithTreasuresOverPhyrexianAltar() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String squire = "Squire";
+
+        List<Card> squires = addCards(squire, 6,  p);
+        Card altar = addCard("Phyrexian Altar", p);
+        List<Card> treasures = addTokens("c_a_treasure_sac", 6, p);
+
+        String shivan = "Shivan Dragon";
+        Card dragon = addCardToZone(shivan, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(dragon.getFirstSpellAbility()).value;
+
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card dragonBF = findCardWithName(simGame, shivan);
+        AssertJUnit.assertNotNull(dragonBF);
+
+        Card squireCopy = findCardWithName(simGame, squire);
+        AssertJUnit.assertNotNull(squireCopy);
+
+        Card treasureCopy = findCardWithName(simGame, "Treasure Token");
+        AssertJUnit.assertNull(treasureCopy);
     }
 }
