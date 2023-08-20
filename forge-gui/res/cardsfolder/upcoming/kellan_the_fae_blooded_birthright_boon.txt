@@ -6,6 +6,7 @@ K:Double Strike
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
 DeckHints:Type$Equipment|Aura
 AlternateMode:Adventure
 Oracle:Double strike\nOther creatures you control get +1/+0 for each Aura and Equipment attached to Kellan, the Fae-Blooded.
