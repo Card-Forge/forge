@@ -1999,13 +1999,6 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].equals("TotalDamageDoneByThisTurn")) {
-            return doXMath(c.getTotalDamageDoneBy(), expr, c, ctb);
-        }
-        if (sq[0].equals("TotalDamageReceivedThisTurn")) {
-            return doXMath(c.getAssignedDamage(), expr, c, ctb);
-        }
-
         if (sq[0].contains("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
@@ -2333,6 +2326,13 @@ public class AbilityUtils {
 
         if (sq[0].contains("TotalOppPoisonCounters")) {
             return doXMath(player.getOpponentsTotalPoisonCounters(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("TotalDamageDoneByThisTurn")) {
+            return doXMath(c.getTotalDamageDoneBy(), expr, c, ctb);
+        }
+        if (sq[0].equals("TotalDamageReceivedThisTurn")) {
+            return doXMath(c.getAssignedDamage(), expr, c, ctb);
         }
 
         if (sq[0].equals("MaxOppDamageThisTurn")) {
@@ -3493,6 +3493,7 @@ public class AbilityUtils {
         if (value.equals("RingTemptedYou")) {
             return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
         }
+
         if (value.startsWith("DungeonCompletedNamed")) {
             String [] full = value.split("_");
             String name = full[1];

@@ -5636,7 +5636,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     /**
      * Gets the total damage done by card this turn (after prevention and redirects).
      *
-     * @return the damage done to player p this turn
+     * @return the damage done by the card this turn
      */
     public final int getTotalDamageDoneBy() {
         return getDamageHistory().getDamageDoneThisTurn(null, false, null, null, this, getController(), null);
