@@ -20,4 +20,6 @@ ScryfallCode=SCH
 12 M Thalia and The Gitrog Monster @PINDURSKI
 13 R Gifted Aetherborn @Lie Setiawan
 14 R Eidolon of the Great Revel @Yigit Koroglu
+15 R Tail Swipe @Edgar Sánchez Hidalgo
+16 R Transcendent Message @Miranda Meeks
 17 M Moonshaker Cavalry @Awanqi (Angela Wang)
