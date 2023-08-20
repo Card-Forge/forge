@@ -1523,27 +1523,24 @@ public class ComputerUtilMana {
                 final Cost cost = m.getPayCosts();
 
                 if (cost != null) {
-                    if (!cost.isReusuableResource()) {
-                        for(CostPart part : cost.getCostParts()) {
-                            if (part instanceof CostSacrifice) {
-                                if (!part.getType().equals("CARDNAME")) {
-                                    unpreferredCost = true;
-                                } else {
-                                    needsLimitedResources = true;
-                                }
-                            }
-                        }
-                    }
-
                     // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai, true);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
                     }
+
+                    if (!cost.isReusuableResource()) {
+                        for(CostPart part : cost.getCostParts()) {
+                            if (part instanceof CostSacrifice && !part.payCostFromSource()) {
+                                unpreferredCost = true;
+                            }
+                        }
+                        needsLimitedResources = !unpreferredCost;
+                    }
                 }
 
-                // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
+                // We really shouldn't be hardcoding names here. ChkDrawback should just return true for them
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
                     if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
                         continue;

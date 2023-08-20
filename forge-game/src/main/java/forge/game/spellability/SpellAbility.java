@@ -2285,9 +2285,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (costPart instanceof CostTap && !Untap.canUntap(getHostCard())) {
                 score += 10;
             }
-            if (costPart instanceof CostSacrifice && !costPart.getType().equals("CARDNAME")) {
+            if (costPart instanceof CostSacrifice && !costPart.payCostFromSource()) {
                 // Need to sacrifice "something else". Since we lose that something else, add a large sum since the AI
-                // isn't trustworthy to pick a good source
+                // isn't trustworthy to pick
                 score += 40;
             }
             // Increase score by 1 for each costpart in general
