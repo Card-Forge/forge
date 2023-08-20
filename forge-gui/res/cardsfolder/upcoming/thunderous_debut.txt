@@ -1,12 +1,14 @@
-Name:Restless Fortress
-ManaCost:no cost
-Types:Land
-K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
-A:AB$ Animate | Cost$ 2 W B | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Creature,Nightmare | Colors$ White,Black | SpellDescription$ CARDNAME becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, defending player loses 2 life and you gain 2 life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
-DeckHas:Ability$LifeGain & Type$Nightmare
-SVar:HasAttackEffect:TRUE
-Oracle:Restless Fortress enters the battlefield tapped.\n{T}: Add {W} or {B}.\n\n{2}{W}{B}: Restless Fortress becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.\nWhenever Restless Fortress attacks, defending player loses 2 life and you gain 2 life.
+Name:Thunderous Debut
+ManaCost:6 G G
+Types:Sorcery
+K:Bargain
+A:SP$ Dig | Defined$ You | DigNum$ 20 | SubAbility$ DBChoose | ChangeValid$ Creature | Reveal$ True | NoMove$ True | RememberRevealed$ True | SpellDescription$ Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
+SVar:ChooseCard:DB$ ChooseCard | SubAbility$ DBPutBattlefield | Choices$ Creature.IsRemembered | ChoiceAmount$ 2 | ImprintChosen$ True | ForgetChosen$ True | ChoiceTitle$ Choose up to two creature cards to reveal | ChoiceZone$ Library
+SVar:DBPutBattlefield:DB$ ChangeZoneAll | Condition$ Bargain | Origin$ Library | Destination$ Battlefield | Defined$ Imprinted | Hidden$ True | SubAbility$ DBHand
+SVar:DBHand:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | Defined$ Imprinted | Hidden$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nLook at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
