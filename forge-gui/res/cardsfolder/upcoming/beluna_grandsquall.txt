@@ -15,6 +15,6 @@ Name:Seek Thrills
 ManaCost:2 G U R
 Types:Instant Adventure
 A:SP$ Mill |  NumCards$ 7 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards. Then put all cards that have an Adventure from among the milled cards into your hand.
-SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+AdventureCard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+AdventureCard | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Mill seven cards. Then put all cards that have an Adventure from among the milled cards into your hand.
