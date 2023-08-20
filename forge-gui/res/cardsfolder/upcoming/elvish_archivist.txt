@@ -7,5 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 T:Mode$ ChangesZoneAll | ValidCards$ Enchantment.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more enchantments enter the battlefield under your control, draw a card. This ability triggers only once each turn.
 SVar:TrigDraw:DB$ Draw
 DeckHas:Ability$Counters
-DeckHints$Type$Enchantment|Artifact
+DeckHints:Type$Enchantment|Artifact
 Oracle:Whenever one or more artifacts enter the battlefield under your control, put two +1/+1 counters on Elvish Archivist. This ability triggers only once each turn.\nWhenever one or more enchantments enter the battlefield under your control, draw a card. This ability triggers only once each turn.
