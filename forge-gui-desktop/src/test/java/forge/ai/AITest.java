@@ -1,4 +1,4 @@
-package forge.ai.simulation;
+package forge.ai;
 
 import java.util.HashSet;
 import java.util.List;

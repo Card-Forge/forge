@@ -1,5 +1,9 @@
-package forge.ai.simulation;
+package forge.ai;
 
+import forge.ai.AITest;
+import forge.ai.simulation.GameStateEvaluator;
+import forge.ai.simulation.SimulationController;
+import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.spellability.LandAbility;
 
 import java.util.ArrayList;
@@ -13,8 +17,6 @@ import org.testng.annotations.Test;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
-import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
