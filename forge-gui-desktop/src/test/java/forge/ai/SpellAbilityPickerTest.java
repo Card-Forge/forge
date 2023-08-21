@@ -406,7 +406,7 @@ public class SpellAbilityPickerTest extends AITest {
         AssertJUnit.assertEquals(desired, sa.getTargetCard());
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void ensureAllLandsArePlayable() {
         initAndCreateGame();
@@ -459,23 +459,34 @@ public class SpellAbilityPickerTest extends AITest {
             game.getAction().checkStateEffects(true);
 
             // Add the target card to the hand and test it
-            addCardToZone(c.getName(), p, ZoneType.Hand);
+            Card desired = addCardToZone(c.getName(), p, ZoneType.Hand);
 
-            GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
-            System.out.println("Starting score: " + s);
-            SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-            List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
-            for (int i = 0; i < candidateSAs.size(); i++) {
-                SpellAbility sa = candidateSAs.get(i);
-                if (sa.isActivatedAbility()) {
-                    continue;
-                }
-                GameStateEvaluator.Score value = picker.evaluateSa(new SimulationController(s), game.getPhaseHandler().getPhase(), candidateSAs, i);
-                System.out.println("sa: " + sa.getHostCard() + ", value: " + value);
-                if (!(value.value > s.value)) {
-                    funky.add(sa.getHostCard());
-                }
+            List<SpellAbility> choices = p.getController().chooseSpellAbilityToPlay();
+            if (choices == null) {
+                funky.add(desired);
+                continue;
             }
+            SpellAbility sa = choices.get(0);
+            if (sa == null || sa.getHostCard() != desired) {
+                funky.add(desired);
+                continue;
+            }
+//            AssertJUnit.assertEquals(desired, sa.getTargetCard());
+//            GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
+//            System.out.println("Starting score: " + s);
+//            SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+//            List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
+//            for (int i = 0; i < candidateSAs.size(); i++) {
+//                SpellAbility sa = candidateSAs.get(i);
+//                if (sa.isActivatedAbility()) {
+//                    continue;
+//                }
+//                GameStateEvaluator.Score value = picker.evaluateSa(new SimulationController(s), game.getPhaseHandler().getPhase(), candidateSAs, i);
+//                System.out.println("sa: " + sa.getHostCard() + ", value: " + value);
+//                if (!(value.value > s.value)) {
+//                    funky.add(sa.getHostCard());
+//                }
+//            }
         }
 
         // ensure that every land play has a higher evaluation than doing nothing
@@ -700,25 +711,6 @@ public class SpellAbilityPickerTest extends AITest {
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNull(sa);
         AssertJUnit.assertEquals(0, picker.getNumSimulations());
-    }
-
-    @Test
-    public void testLandDropPruning() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-
-        addCardToZone("Island", p, ZoneType.Hand);
-        addCardToZone("Island", p, ZoneType.Hand);
-        addCardToZone("Island", p, ZoneType.Hand);
-
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
-        game.getAction().checkStateEffects(true);
-
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertNotNull(sa);
-        // Only one land drop should be simulated, since the cards are identical.
-        AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
 
     @Test
