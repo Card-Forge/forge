@@ -1,0 +1,11 @@
+Name:Will, Scion of Peace
+ManaCost:1 W U
+Types:Legendary Creature Human Wizard
+PT:2/4
+K:Vigilance
+A:AB$ Effect | Cost$ T | StaticAbilities$ StaticReduce | SetChosenNumber$ X | SorcerySpeed$ True | SpellDescription$ Spells you cast this turn that are white and/or blue cost {X} less to cast, where X is the amount of life you gained this turn. Activate only as a sorcery.
+SVar:StaticReduce:Mode$ ReduceCost | ValidCard$ Card.Blue,Card.White | Type$ Spell | Activator$ You | Amount$ Num | Description$ Spells you cast this turn that are white and/or blue cost {X} less to cast, where X is the amount of life you gained this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:Num:Count$ChosenNumber
+DeckNeeds:Ability$LifeGain
+Oracle:Vigilance\n{T}: Spells you cast this turn that are white and/or blue cost {X} less to cast, where X is the amount of life you gained this turn. Activate only as a sorcery.

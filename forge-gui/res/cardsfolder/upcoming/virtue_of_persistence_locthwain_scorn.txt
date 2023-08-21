@@ -1,0 +1,18 @@
+Name:Virtue of Persistence
+ManaCost:5 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ChangeNum$ 1 | Mandatory$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature
+DeckHas:Ability$LifeGain|Graveyard
+DeckHints:Ability$Mill|Discard
+AlternateMode:Adventure
+Oracle:At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
+
+ALTERNATE
+
+Name:Locthwain Scorn
+ManaCost:1 B
+Types:Sorcery Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBGainLife | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+Oracle:Target creature gets -3/-3 until end of turn. You gain 2 life.

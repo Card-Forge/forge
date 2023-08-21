@@ -1,0 +1,12 @@
+Name:Eriette of the Charmed Apple
+ManaCost:1 W B
+Types:Legendary Creature Human Warlock
+PT:2/4
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy Aura.YouCtrl  | Target$ You,Planeswalker.YouCtrl | Description$ Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.
+T:Mode$ Phase | Phase$ End of Turn  | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$TypeYouCtrl.Aura
+DeckNeeds:Type$Aura
+DeckHas:Ability$LifeGain
+Oracle:Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.\nAt the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
