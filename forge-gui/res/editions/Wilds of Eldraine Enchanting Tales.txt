@@ -13,11 +13,13 @@ ScryfallCode=WOT
 6 U Intangible Virtue @BEMOCS
 8 U Knightly Valor @Matteo Bassini
 9 M Land Tax @Francoyovich
+10 R Leyline of Sanctity @WFlemming Illustration
 11 R Phyrexian Unlife @Harry Conway
 12 R Rest in Peace @Serena Malyon
 13 M Smothering Tithe @Shafer Brown
 16 R Copy Enchantment @Abigail Larson
 17 U Curiosity @Abigail Larson
+18 R Forced Fruition @Shafer Brown
 19 R Fraying Sanity @Meel Tamphanon
 21 R Intruder Alarm @Francoyovich
 22 M Kindred Discovery
@@ -51,6 +53,7 @@ ScryfallCode=WOT
 58 M Parallel Lives @Lander Strijbol
 60 R Prismatic Omen @Qianhao Ma
 62 R Unnatural Growth @Francoyovich
+63 U Utopia Sprawl @Sylvain Sarrailh
 64 M Greater Auramancy @Mai Okuma
 66 M Land Tax @Jintetsu
 67 M Smothering Tithe @Daisuke Tatsuma
@@ -73,6 +76,7 @@ ScryfallCode=WOT
 86 M Land Tax @Jintetsu
 87 M Smothering Tithe @Daisuke Tatsuma
 89 M Kindred Discovery @Yuchi Yuki
+90 M Omniscience @Yakotakos
 91 M Rhystic Study @Fuzichoco
 92 M Bitterblossom @I☆LA
 93 M Grave Pact @BODAX
