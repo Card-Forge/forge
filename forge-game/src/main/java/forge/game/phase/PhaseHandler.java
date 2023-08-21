@@ -1007,7 +1007,7 @@ public class PhaseHandler implements java.io.Serializable {
         return nMain2sThisTurn == 0;
     }
 
-    private final static boolean DEBUG_PHASES = true;
+    private final static boolean DEBUG_PHASES = false;
 
     public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
