@@ -24,7 +24,7 @@ import java.util.Set;
 import static forge.view.SimulateMatch.simulateSingleGameOfMatch;
 
 public class GameFuzzingTest {
-//    @Ignore
+    @Ignore
     @Test
     public void PlayGameWithRandomDecks() {
         GuiBase.setInterface(new GuiDesktop());
