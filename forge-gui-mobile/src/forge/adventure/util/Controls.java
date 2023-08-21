@@ -2,9 +2,7 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -430,7 +428,6 @@ public class Controls {
     static public Font getTextraFont(String name) {
         return Forge.getAssets().getTextraFont(name, getSkin().getFont(name), Config.instance().getAtlas(Paths.ITEMS_ATLAS));
     }
-
 
     static public class AccountingLabel extends TextraLabel {
         private TextraLabel label;

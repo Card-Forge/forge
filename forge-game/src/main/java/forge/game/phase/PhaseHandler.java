@@ -438,7 +438,10 @@ public class PhaseHandler implements java.io.Serializable {
                     givePriorityToPlayer = false;
 
                     // Rule 514.3a - state-based actions
-                    game.getAction().checkStateEffects(true);
+                    if (game.getAction().checkStateEffects(true)) {
+                        bRepeatCleanup = true;
+                        givePriorityToPlayer = true;
+                    }
                     break;
 
                 default:
@@ -472,12 +475,20 @@ public class PhaseHandler implements java.io.Serializable {
         // now that we're going, give priority to the player
         givePriorityToPlayer = true;
 
+        final Map<Player, Integer> lossMap = Maps.newHashMap();
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
 
             if (p.getManaPool().hasBurn()) {
-                p.loseLife(burn, false, true);
+                final int lost = p.loseLife(burn, false, true);
+                if (lost > 0) {
+                    lossMap.put(p, lost);
+                }
             }
+        }
+        if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+            final Map<AbilityKey, Object> runLifeLostParams = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runLifeLostParams, false);
         }
 
         switch (phase) {

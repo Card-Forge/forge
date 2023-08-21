@@ -2,7 +2,7 @@ Name:Glissa Sunslayer
 ManaCost:1 B G
 Types:Legendary Creature Phyrexian Zombie Elf
 PT:3/3
-K:First strike
+K:First Strike
 K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBDestroy,DBRemove

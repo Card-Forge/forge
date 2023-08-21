@@ -1,0 +1,18 @@
+Name:Gollum, Scheming Guide
+ManaCost:1 B
+Types:Legendary Creature Halfling Horror
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove NICKNAME from combat. Otherwise, you draw a card and NICKNAME can't be blocked this turn.
+SVar:TrigPeek:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 2 | SubAbility$ DBChoosePlayer
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseType | Type$ Card | ValidTypes$ Land,Nonland | Defined$ You | SubAbility$ DBChooseBis
+SVar:DBChooseBis:DB$ ChooseType | Defined$ ChosenPlayer | Type$ Card | ValidTypes$ Land,Nonland | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ RemoveCombat | FalseSubAbility$ Draw | SubAbility$ DBCleanup
+SVar:X:Count$ValidLibrary Card.TopLibrary+ChosenType+YouOwn
+SVar:RemoveCombat:DB$ RemoveFromCombat | Defined$ Self
+SVar:Draw:DB$ Draw | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Unblockable | Duration$ UntilHostLeavesPlayOrEOT
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ NICKNAME can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearChosenType$ True
+Oracle:Whenever Gollum, Scheming Guide attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove Gollum from combat. Otherwise, you draw a card and Gollum can't be blocked this turn.

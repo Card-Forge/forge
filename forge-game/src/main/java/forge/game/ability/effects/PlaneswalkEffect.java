@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 
 public class PlaneswalkEffect extends SpellAbilityEffect {
@@ -15,6 +16,10 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
 
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;
+        }
+        if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
+                Localizer.getInstance().getMessage("lblWouldYouLikeToPlaneswalk"), null)) {
+                    return;
         }
 
         if (!sa.hasParam("DontPlaneswalkAway")) {

@@ -1,0 +1,16 @@
+Name:Hew the Entwood
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | SubAbility$ DBReveal | Optional$ True | SpellDescription$ Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.
+SVar:SacX:Count$Valid Land.YouCtrl
+SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ ShiftX | RememberRevealed$ True | SubAbility$ DBChoose
+SVar:ShiftX:Remembered$Amount
+SVar:DBChoose:DB$ ChooseCard | Choices$ Land.IsRemembered,Artifact.IsRemembered | MinAmount$ 0 | ChoiceZone$ Library | Amount$ ShiftX | Mandatory$ True | SubAbility$ DBPutArtifact
+SVar:DBPutArtifact:DB$ ChangeZoneAll | ChangeType$ Artifact.ChosenCard | Origin$ Library | Destination$ Battlefield | SubAbility$ DBPutLands
+SVar:DBPutLands:DB$ ChangeZoneAll | ChangeType$ Land.ChosenCard | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ ShuffleRest
+SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | ChangeType$ Card.IsRemembered+!ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+AI:RemoveDeck:All
+Oracle:Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.

@@ -1,0 +1,10 @@
+Name:Boromir, Warden of the Tower
+ManaCost:2 W
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCounter | ValidSA$ Spell.ManaSpent EQ0 | TriggerDescription$ Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ TrigTempt | SpellDescription$ Creatures you control gain indestructible until end of turn. The Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:Vigilance\nWhenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.\nSacrifice Boromir, Warden of the Tower: Creatures you control gain indestructible until end of turn. The Ring tempts you.

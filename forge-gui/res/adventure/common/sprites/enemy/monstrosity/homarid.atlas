@@ -1,0 +1,104 @@
+homarid.png
+size: 512,488
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 283, 288
+  size: 24, 24      
+Idle 
+  xy: 10,21
+  size: 46,43 
+Idle 
+  xy: 74,21
+  size: 46,43
+Idle 
+  xy: 138,21
+  size: 46,43
+Idle 
+  xy: 202,21
+  size: 46,43
+Idle 
+  xy: 10,21
+  size: 46,43 
+Idle 
+  xy: 74,21
+  size: 46,43
+Idle 
+  xy: 138,21
+  size: 46,43
+Idle 
+  xy: 202,21
+  size: 46,43
+Idle 
+  xy: 10,85
+  size: 46,43 
+Idle 
+  xy: 74,85
+  size: 46,43
+Idle 
+  xy: 138,85
+  size: 46,43
+Idle 
+  xy: 202,85
+  size: 46,43
+Walk
+  xy: 10, 149
+  size: 46,43
+Walk
+  xy: 74, 149
+  size: 46,43
+Walk
+  xy: 138, 149
+  size: 46,43
+Walk
+  xy: 202, 149
+  size: 46,43
+Walk
+  xy: 266, 149
+  size: 46,43
+Walk
+  xy: 330, 149
+  size: 46,43
+Attack 
+  xy: 0, 213
+  size: 64, 43
+Attack 
+  xy: 64, 213
+  size: 64, 43
+Attack 
+  xy: 128, 213
+  size: 64, 43
+Attack 
+  xy: 192, 213
+  size: 64, 43
+Attack 
+  xy: 256, 213
+  size: 64, 43
+Attack 
+  xy: 320, 213
+  size: 64, 43
+Death 
+  xy: 0,405
+  size: 64, 43
+Death 
+  xy: 64,405
+  size: 64, 43
+Death 
+  xy: 128,405
+  size: 64, 43
+Death 
+  xy: 192,405
+  size: 64, 43
+Death 
+  xy: 256,405
+  size: 64, 43
+Death 
+  xy: 320,405
+  size: 64, 43
+Death 
+  xy: 384,405
+  size: 64, 43
+Death 
+  xy: 448,405
+  size: 64, 43

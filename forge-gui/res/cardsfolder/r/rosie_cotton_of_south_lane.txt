@@ -1,0 +1,11 @@
+Name:Rosie Cotton of South Lane
+ManaCost:2 W
+Types:Legendary Creature Halfling Peasant
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Card.token+YouCtrl | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you create a token, put a +1/+1 counter on target creature you control other than NICKNAME.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target other creature you control | CounterType$ P1P1
+DeckHas:Ability$Sacrifice|Token|LifeGain|Counters & Type$Artifact|Food
+DeckHints:Ability$Token
+Oracle:When Rosie Cotton of South Lane enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever you create a token, put a +1/+1 counter on target creature you control other than Rosie.

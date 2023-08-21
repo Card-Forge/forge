@@ -1,0 +1,12 @@
+Name:One Ring to Rule Them All
+ManaCost:2 B B
+Types:Enchantment Saga
+K:Saga:3:DBTempt,DBDestroy,DBEachOpp
+SVar:DBTempt:DB$ RingTemptsYou | SubAbility$ DBMill | SpellDescription$ The Ring tempts you, then each player mills cards equal to your Ring-bearer's power.
+SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ Player
+SVar:X:Count$Valid Creature.YouCtrl+IsRingbearer$CardPower
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.nonLegendary | SpellDescription$ Destroy all nonlegendary creatures.
+SVar:DBEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife | SpellDescription$ Each opponent loses 1 life for each creature card in that player's graveyard.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ Y
+SVar:Y:Count$ValidGraveyard Creature.RememberedPlayerCtrl
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — The Ring tempts you, then each player mills cards equal to your Ring-bearer's power.\nII — Destroy all nonlegendary creatures.\nIII — Each opponent loses 1 life for each creature card in that player's graveyard.

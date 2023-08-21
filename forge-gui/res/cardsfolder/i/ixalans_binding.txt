@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
-S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith ValidExile Card.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the exiled card.
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith ExiledWith | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the exiled card.
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 Oracle:When Ixalan's Binding enters the battlefield, exile target nonland permanent an opponent controls until Ixalan's Binding leaves the battlefield.\nYour opponents can't cast spells with the same name as the exiled card.

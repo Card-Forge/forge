@@ -1,0 +1,13 @@
+Name:Eowyn, Shieldmaiden
+ManaCost:2 U R W
+Types:Legendary Creature Human Knight
+PT:5/4
+K:First Strike
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ HumanEntered | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, if another Human entered the battlefield under your control this turn, create two 2/2 red Human Knight creature tokens with trample and haste. Then if you control six or more Humans, draw a card.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_2_2_human_knight_trample_haste | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
+SVar:X:Count$Valid Human.YouCtrl
+SVar:HumanEntered:Count$ThisTurnEntered_Battlefield_Creature.Human+StrictlyOther+YouCtrl
+DeckNeeds:Type$Human
+DeckHas:Ability$Token
+Oracle:First strike\nAt the beginning of combat on your turn, if another Human entered the battlefield under your control this turn, create two 2/2 red Human Knight creature tokens with trample and haste. Then if you control six or more Humans, draw a card.

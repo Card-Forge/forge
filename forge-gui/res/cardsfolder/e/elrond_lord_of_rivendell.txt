@@ -1,0 +1,9 @@
+Name:Elrond, Lord of Rivendell
+ManaCost:2 U
+Types:Legendary Creature Elf Noble
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, the Ring tempts you.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ TrigTempt
+SVar:TrigTempt:DB$ RingTemptsYou | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2
+SVar:Resolved:Count$ResolvedThisTurn
+Oracle:Whenever Elrond, Lord of Rivendell or another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, the Ring tempts you.

@@ -1,0 +1,9 @@
+Name:Gollum, Patient Plotter
+ManaCost:1 B
+Types:Legendary Creature Halfling Horror
+PT:3/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigTempt | TriggerDescription$ When CARDNAME leaves the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+A:AB$ ChangeZone | Cost$ B Sac<1/Creature> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return NICKNAME from your graveyard to your hand. Activate only as a sorcery. | CostDesc$ Sacrifice a creature:
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
+Oracle:When Gollum, Patient Plotter leaves the battlefield, the Ring tempts you.\n{B}, Sacrifice a creature: Return Gollum from your graveyard to your hand. Activate only as a sorcery.

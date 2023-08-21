@@ -3,5 +3,5 @@ ManaCost:3 B
 Types:Creature Plant
 PT:0/13
 K:Defender
-A:AB$ ExchangeLifeVariant | Cost$ T | ConditionPresent$ Creature.StrictlySelf | ValidTgts$ Opponent | Mode$ Toughness | SpellDescription$ Exchange target opponent's life total with CARDNAME's toughness. | StackDescription$ SpellDescription
+A:AB$ ExchangeLifeVariant | Cost$ T | ConditionPresent$ Creature.StrictlySelf | ValidTgts$ Opponent | Mode$ Toughness | SpellDescription$ Exchange target opponent's life total with CARDNAME's toughness. | StackDescription$ REP target opponent_{p:Targeted}
 Oracle:Defender\n{T}: Exchange target opponent's life total with Tree of Perdition's toughness.

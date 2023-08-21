@@ -17,31 +17,21 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.TreeBasedTable;
 
 import forge.game.GameObject;
 import forge.game.IIdentifiable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
-import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 /**
@@ -71,33 +61,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private final SpellAbilityStackInstance subInstance;
     private Player activatingPlayer;
 
-    // When going to a SubAbility that SA has a Instance Choice object
-    private TargetChoices tc = new TargetChoices();
-    private CardCollection splicedCards = null;
-
     private String stackDescription = null;
-
-    // Adjusted Mana Cost
-    // private String adjustedManaCost = "";
-
-    // Paid Mana Cost
-    private List<Mana> payingMana;
-    // private ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
-    private Integer xManaPaid = null;
-
-    // Other Paid things
-    private final TreeBasedTable<String, Boolean, CardCollection> paidHash;
-
-    // Additional info
-    // is Kicked, is Buyback
-
-    // Triggers
-    private final Map<AbilityKey, Object> triggeringObjects;
-    private final List<Object> triggerRemembered;
-
-    private final Map<String, String> storedSVars = Maps.newHashMap();
-
-    private final Map<Player, Object> playersWithValidTargets;
 
     private final StackItemView view;
 
@@ -108,56 +72,12 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         stackDescription = sa.getStackDescription();
         activatingPlayer = sa.getActivatingPlayer();
 
-        // Payment info
-        paidHash = TreeBasedTable.create(ability.getPaidHash());
-        ability.resetPaidHash();
-        splicedCards = sa.getSplicedCards();
-
-        xManaPaid = sa.getXManaCostPaid();
-        payingMana = Lists.newArrayList(sa.getPayingMana());
-
-        // Triggering info
-        triggeringObjects = sa.getTriggeringObjects();
-        triggerRemembered = sa.getTriggerRemembered();
-
         subInstance = ability.getSubAbility() == null ? null : new SpellAbilityStackInstance(ability.getSubAbility());
 
-        // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
-        // because otherwise AF_DealDamage SubAbilities that use Defined$
-        // Targeted breaks (since it's parents target is reset)
-        if (sa.usesTargeting()) {
-            tc = ability.getTargets();
-            ability.resetTargets();
-        }
-
-        final Card source = ability.getHostCard();
-
-        // We probably should be storing SA svars too right?
-        if (!sa.isWrapper()) {
-            for (final Entry<String, String> e : sa.getDirectSVars().entrySet()) {
-                final String value = e.getValue();
-                if (!StringUtils.isEmpty(value)) {
-                    storedSVars.put(e.getKey(), value);
-                }
-            }
-        }
-
-        if (ApiType.SetState == sa.getApi() && !storedSVars.containsKey("StoredTransform")) {
+        final Map<String, String> sVars = (ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability).getDirectSVars();
+        if (ApiType.SetState == sa.getApi() && !sVars.containsKey("StoredTransform")) {
             // Record current state of Transformation if the ability might change state
-            storedSVars.put("StoredTransform", String.valueOf(source.getTransformedTimestamp()));
-        }
-
-        //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
-        if (tc == null) {
-            playersWithValidTargets = null;
-        } else {
-            playersWithValidTargets = Maps.newHashMap();
-            for (Card card : tc.getTargetCards()) {
-                ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
-                if (zoneType != ZoneType.Battlefield) { //don't need to worry about targets on battlefield
-                    playersWithValidTargets.put(card.getController(), null);
-                }
-            }
+            sVars.put("StoredTransform", String.valueOf(ability.getHostCard().getTransformedTimestamp()));
         }
 
         view = new StackItemView(this);
@@ -168,38 +88,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return id;
     }
 
-    //TODO: See if refresh actually needed for most places this is being called
-    //      Perhaps lets move the refresh logic to a separate function called only when necessary
-    public final SpellAbility getSpellAbility(boolean refresh) {
-        if (refresh) {
-            ability.setTargets(tc);
-            ability.setActivatingPlayer(activatingPlayer);
-
-            // Saved sub-SA needs to be reset on the way out
-            if (subInstance != null) {
-                ability.setSubAbility((AbilitySub) subInstance.getSpellAbility(true));
-            }
-
-            // Set Cost specific things here
-            ability.setPaidHash(paidHash);
-            ability.setSplicedCards(splicedCards);
-            ability.setXManaCostPaid(xManaPaid);
-            ability.setPayingMana(payingMana);
-
-            // Triggered
-            ability.setTriggeringObjects(triggeringObjects);
-            ability.setTriggerRemembered(triggerRemembered);
-
-            // Add SVars back in
-            final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
-            for (final String store : storedSVars.keySet()) {
-                final String value = storedSVars.get(store);
-
-                if (!StringUtils.isEmpty(value)) {
-                    sa.setSVar(store, value);
-                }
-            }
-        }
+    public final SpellAbility getSpellAbility() {
         return ability;
     }
 
@@ -210,13 +99,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     public final Card getSourceCard() {
         return ability.getHostCard();
-    }
-    
-    public final int getXManaPaid() {
-    	return xManaPaid == null ? 0 : xManaPaid;
-    }
-    public final void setXManaPaid(int x) {
-        xManaPaid = x;
     }
 
     public final boolean isSpell() {
@@ -244,18 +126,13 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
 
     public final TargetChoices getTargetChoices() {
-        return tc;
-    }
-
-    public final Map<Player, Object> getPlayersWithValidTargets() {
-        return playersWithValidTargets;
+        return ability.getTargets();
     }
 
     public void updateTarget(TargetChoices target, Card cause) {
         if (target != null) {
-            TargetChoices oldTarget = tc;
-            tc = target;
-            ability.setTargets(tc);
+            TargetChoices oldTarget = ability.getTargets();
+            ability.setTargets(target);
             stackDescription = ability.getStackDescription();
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
@@ -293,49 +170,21 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
 
     public boolean addTriggeringObject(AbilityKey trigObj, Object value) {
-        if (!triggeringObjects.containsKey(trigObj)) {
-            triggeringObjects.put(trigObj, value);
+        if (!ability.hasTriggeringObject(trigObj)) {
+            ability.setTriggeringObject(trigObj, value);
             return true;
         }
         return false;
     }
-
     public boolean updateTriggeringObject(AbilityKey trigObj, Object value) {
-        if (triggeringObjects.containsKey(trigObj)) {
-            triggeringObjects.replace(trigObj, value);
+        if (ability.hasTriggeringObject(trigObj)) {
+            ability.setTriggeringObject(trigObj, value);
             return true;
         }
         return false;
     }
-
     public Object getTriggeringObject(AbilityKey trigObj) {
-        if (triggeringObjects.containsKey(trigObj)) {
-            return triggeringObjects.get(trigObj);
-        }
-        return null;
-    }
-
-    public boolean compareToSpellAbility(SpellAbility sa) {
-        // Compare my target choices to the SA passed in
-        // TODO? Compare other data points in the SI to the passed SpellAbility for confirmation
-        SpellAbility compare = sa;
-        SpellAbilityStackInstance sub = this;
-
-        if (!compare.equals(sub.ability)) {
-            return false;
-        }
-
-        while (compare != null && sub != null) {
-            TargetChoices choices = compare.usesTargeting() ? compare.getTargets() : null;
-
-            if (choices != null && !choices.equals(sub.getTargetChoices())) {
-                return false;
-            }
-            compare = compare.getSubAbility();
-            sub = sub.getSubInstance();
-        }
-
-        return true;
+        return ability.getTriggeringObject(trigObj);
     }
 
     public Player getActivatingPlayer() {
@@ -348,10 +197,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         if (subInstance != null) {
             subInstance.setActivatingPlayer(activatingPlayer0);
         }
-    }
-
-    public List<Mana> getPayingMana() {
-        return payingMana;
     }
 
     @Override

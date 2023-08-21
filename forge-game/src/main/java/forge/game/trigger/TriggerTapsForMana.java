@@ -75,7 +75,7 @@ public class TriggerTapsForMana extends Trigger {
                     return false;
                 }
             } else if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
-                    return false;
+                return false;
             }
         }
 
@@ -91,8 +91,8 @@ public class TriggerTapsForMana extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         return Localizer.getInstance().getMessage("lblTappedForMana") + ": " +
-                sa.getTriggeringObject(AbilityKey.Card) + Localizer.getInstance().getMessage("lblProduced") + ": "
-                + toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString());
+                sa.getTriggeringObject(AbilityKey.Card) + " " + Localizer.getInstance().getMessage("lblProduced") +
+                ": " + toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString());
     }
 
 }

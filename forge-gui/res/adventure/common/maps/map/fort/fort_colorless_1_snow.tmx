@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="31" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="11" name="Colission" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt1FEKgCAMgOFdwB2pB+2gvUhdq5tUiCRFRZFZ9H8wFDZQJk4EwB+1RqQz2/lmzHkzr36ntoRK12E1/7lXeuE0RO772aQX9QO9OOtL93urXkPgfvGfusL9TWdzuo9vv3z/WDPNpaO5DgAAgHwGqlYYTA==
+  </data>
+ </layer>
+ <layer id="9" name="Background" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJACAMBMG0bnWWkHZE0J/+Yi7CBuYr63kzcwAAUEZf1B23rl/65qmbTo37ot57taF6q4i2zH9U3Q0AAOQYfcV9Qw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAgNcAE2AAAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt00EKgCAARNG5oF6hZd2i49YxwkVQYaCBOsR/SxfyGVQC0MIWpD2Mrng3R2mJ97NpHdNSIrW59p1tjn3XNvrqOLclrl3uajd7voPWm5fen+vq1fd1w16c/y0AAPivA/lpJ2M=
+  </data>
+ </layer>
+ <layer id="10" name="ClutterAbove" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJACAMBdHsITinCuqsbqKtIGlS+It7kP4IhJgBAAAAMb3+LvCl9rvAR1+MUt88t7DKPVmoT2lXL/TF0BczxH8ZtG3RYA4f
+  </data>
+ </layer>
+ <layer id="1" name="Above" width="40" height="31">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="541" y="497.25" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="364.75" y="179.333"/>
+  <object id="53" template="../../obj/enemy.tx" x="431.75" y="204">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="334.667" y="187.833">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="214.5" y="112.917">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/collision.tx" x="0.25" y="496.25" width="640" height="16"/>
+  <object id="57" template="../../obj/collision.tx" x="0" y="-16.75" width="640" height="16"/>
+  <object id="58" template="../../obj/collision.tx" x="640.5" y="-17.708" width="16" height="530.166"/>
+  <object id="59" template="../../obj/collision.tx" x="-16.25" y="-16.958" width="16" height="529.416"/>
+  <object id="60" template="../../obj/manashards.tx" x="209" y="73.5"/>
+  <object id="62" template="../../obj/enemy.tx" x="126" y="341">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/booster.tx" x="97.5" y="334.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

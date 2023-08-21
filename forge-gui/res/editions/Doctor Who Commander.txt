@@ -6,9 +6,62 @@ Type=Commander
 ScryfallCode=WHO
 
 [cards]
+1 M Davros, Dalek Creator @Simon Dominic
+2 M The Fourth Doctor @David Auden Nash
+3 M The Tenth Doctor @Luisa J. Preissler
+4 M The Thirteenth Doctor @Pauline Voss
+5 R Rose Tyler @Luisa J. Preissler
+6 R Sarah Jane Smith @Fajareka Setiawan
+7 R Yasmin Khan @Andrey Kuzinskiy
+8 R Missy @Ekaterina Burmak
+20 R Four Knocks @Darren Tan
+41 R The Eleventh Hour @Matt Stewart
+59 U Time Lord Regeneration @Elizabeth Peiró
+66 R Death in Heaven @Justyna Dura
+68 U Exterminate! @Ivan Dedov
+86 R The Flux @Alexander Gering
+91 R The Parting of the Ways @Syd Mills
+99 R City of Death @Miklós Ligeti
+102 R The Foretold Soldier @Fajareka Setiawan
+126 R The Face of Boe @Greg Staples
+152 R River Song @John Di Giovanni
+165 R The Valeyard @Tyukina Tatiana
+187 U TARDIS @Chris Ostrowski
 197 L Plains @Svetlin Velinov
 199 L Island @Svetlin Velinov
 201 L Swamp @Svetlin Velinov
 203 L Mountain @Svetlin Velinov
 205 L Forest @Svetlin Velinov
+207 R Farewell @Alice Xia Zhang
+340 R Four Knocks @Darren Tan
+346 R Rose Tyler @Luisa J. Preissler
+347 R Sarah Jane Smith @Fajareka Setiawan
+392 R Yasmin Khan @Andrey Kuzinskiy
+395 R The Foretold Soldier @Fajareka Setiawan
+407 M Davros, Dalek Creator @Simon Dominic
+412 R The Face of Boe @Greg Staples
+415 M The Fourth Doctor @David Auden Nash
+431 R Missy @Ekaterina Burmak
+436 R River Song @John Di Giovanni
+446 M The Tenth Doctor @Luisa J. Preissler
+448 M The Thirteenth Doctor @Pauline Voss
+450 R The Valeyard @Tyukina Tatiana
+465 R Farewell @Alice Xia Zhang
+535 R Rose Tyler @Mike Uziel
+536 R Sarah Jane Smith @Mike Uziel
+539 R Yasmin Khan @Tony Foti
+540 M Davros, Dalek Creator @Lenka Šimečková
+546 R Missy @Karen Hallion
+547 R River Song @Aurore Folny
+551 U TARDIS @Dalton Pencarinha
+555 M The Fourth Doctor @Jack Hughes
+555z M The Fourth Doctor @Jack Hughes
+561 M The Tenth Doctor @Aurore Folny
+561z M The Tenth Doctor @Aurore Folny
+564 M The Thirteenth Doctor @Lenka Šimečková
+564z M The Thirteenth Doctor
+569 C Bad Wolf Bay @Kamila Szutenberg
+580 C The Doctor's Tomb @Anato Finnstark
+582 C Fixed Point in Time @Syd Mills
 588 C The Lux Foundation Library @Wei Guan
+601 C TARDIS Bay @Erikas Perl

@@ -1,0 +1,8 @@
+Name:Cirith Ungol Patrol
+ManaCost:4 B
+Types:Creature Orc Soldier
+PT:4/5
+A:AB$ Draw | Cost$ 1 T Sac<1/Creature.Other/another creature> | NumCards$ 1 | SubAbility$ DBFood | SpellDescription$ Draw a card, then create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | TokenAmount$ 1
+DeckHas:Ability$Sacrifice|Token|LifeGain & Type$Artifact|Food
+Oracle:{1}, {T}, Sacrifice another creature: Draw a card, then create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

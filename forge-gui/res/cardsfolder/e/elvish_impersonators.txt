@@ -2,7 +2,6 @@ Name:Elvish Impersonators
 ManaCost:3 G
 Types:Creature Elves
 PT:*/*
-K:Flying
 K:ETBReplacement:Other:TrigRoll
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ SetPwr | SubAbility$ RollTough | SpellDescription$ As CARDNAME enters the battlefield, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
 SVar:RollTough:DB$ RollDice | ResultSVar$ SetTgn | SubAbility$ DBAnimate

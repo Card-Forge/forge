@@ -68,7 +68,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             int n = card.getCounters(CounterEnumType.AGE);
             if (n > 0) {
                 Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
-                payCost.mergeTo(cumCost, n);
+                payCost.mergeTo(cumCost, n, sa);
             }
 
             game.updateLastStateForCard(card);
@@ -122,9 +122,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     String [] msgArray = msg.split(" & ");
                     List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
                     for (String subValid : validArray) {
-                        CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, subValid, sa);
-                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
-                        validTargetsList.add(new CardCollection(validTargets));
+                        CardCollection validTargets = CardLists.filter(AbilityUtils.filterListByType(battlefield, subValid, sa), CardPredicates.canBeSacrificedBy(sa, true));
+                        validTargetsList.add(validTargets);
                     }
                     CardCollection chosenCards = new CardCollection();
                     for (int i = 0; i < validArray.length; ++i) {
@@ -161,9 +160,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (choosenToSacrifice.size() > 1) {
-                    choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
-                }
+                choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {

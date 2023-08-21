@@ -1,0 +1,13 @@
+Name:Teyo, Geometric Tactician
+ManaCost:2 W
+Types:Legendary Planeswalker Teyo
+Loyalty:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/4 white Wall creature token with defender and flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_0_4_wall_defender_flying
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 1 | SpellDescription$ You and target opponent each draw a card. 
+A:AB$ ChooseDirection | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | SubAbility$ DBEffect | SpellDescription$ Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.
+SVar:DBEffect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ Static 
+SVar:Static:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Description$ Each player may attack only the nearest opponent in the chosen direction and planeswalkers controller by that opponent.
+AI:RemoveDeck:Random
+DeckHas:Type$Wall & Ability$Token
+Oracle:When Teyo, Geometric Tactician enters the battlefield, create a 0/4 white Wall creature token with defender and flying.\n[+1]: You and target opponent each draw a card.\n[−2]: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.

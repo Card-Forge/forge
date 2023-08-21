@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAACvAQtAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJybwsnAMGWQ47+CqHg42otux0DZO4pH8WDDA5H3ke0dKP+OBHsHOm6Ha31CyF4QoLe9tLQTGdDTXnx24wMDYTet45medtLaXmIBADS0t1w=
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxbzMDAsHgUjyj8VxCC6W0fDP+jk90DYS9y2ILo2UIMDHOEhl+cYgvfgbBzoOwdzmE82MJ6uNs7kPGMbi8DifrRAbFqKbEThOOA+uJJCDN0e4lxLzb8h8R4wgeokT5wmUWpfTAzsKUPXGaS4k9S3EMJICdPkAIAj7vA+w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzVleFugzAMhPlJHqwF8aKwsbeiW3mMEY0TX12TpEWtNKSoVer67LuzOYeqOv+D81lX1bicr/q9uO1y+gVzfkN/7O0nvA6TWMKJd5fwd8Qz747wrjzfy5nW/MKI+B/Lp55pjYucx/vpAHbMPdS3+YUR8SNOfHrEnFbNGfcIvuWW2MSRp+ivGH8Nt7U84tMONbC3GbVMYdOic3Kwb3phD7cJm0aNwaQOVmPmbPG/od40Uxw51XdxNa81eDNKHvSwZ09n1SofnMI9v8zt+dPTPccHNSEu51P1kZ/RcGN193yy58Um0aN2gKexcqY8q7qFIy2E0TmxnAP9h3yTx5JZoWdSe531cSaJ3Tr1lOwGb+48XMazTsVYL6fO3nzsYZAnb47kh9y7Qfp4v9MPth7ltbNrn9R+5l4q1YXzat8buuN+9vhXzzlt7KwOGY0Zv5dbuyLnBTu/djfQ19LpWpC7dPbIwVjf63zknV9ai9Wyf7LHX90DRnk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxUsAWJWOttJb/tgYMkA2TuS/MuKg01vMFBxTU8wEvwIAwOZlgYSDGQcj9QwHwWjYDABAHzEA/w=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="204" y="382.667" width="80" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="385.584" y="231.75"/>
+  <object id="53" template="../../obj/enemy.tx" x="216.167" y="285.167">
+   <properties>
+    <property name="enemy" value="Lich"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="313.667" y="123">
+   <properties>
+    <property name="enemy" value="Abyssal Baron"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="123.833" y="140.667">
+   <properties>
+    <property name="enemy" value="Abyssal Baron"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/treasure.tx" x="338.333" y="215.333"/>
+  <object id="57" template="../../obj/gold.tx" x="365.75" y="193"/>
+  <object id="58" template="../../obj/booster.tx" x="139" y="266.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;10E&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;10E&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;10E&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gold.tx" x="188.333" y="88.6667"/>
+  <object id="61" template="../../obj/gold.tx" x="111" y="352.667"/>
+  <object id="63" template="../../obj/enemy.tx" x="216.333" y="183">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mask of Griselbrand&quot;]
+}</property>
+    <property name="enemy" value="Archfiend"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

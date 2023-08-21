@@ -167,6 +167,10 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
+        } else if (property.equals("IsRingbearer")) {
+            if (!card.isRingBearer()) {
+                return false;
+            }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
             for (Object o : spellAbility.getTriggerRemembered()) {
@@ -713,11 +717,11 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        SpellAbilityStackInstance castSA = game.getStack().getInstanceFromSpellAbility((SpellAbility) spellAbility);
+                        SpellAbilityStackInstance castSA = game.getStack().getInstanceMatchingSpellAbilityID((SpellAbility) spellAbility);
                         if (castSA == null) {
                             return false;
                         }
-                        List<Mana> payingMana = castSA.getPayingMana();
+                        List<Mana> payingMana = castSA.getSpellAbility().getPayingMana();
                         // even if the cost was raised, we only care about mana from activation part
                         // since this can only be 1 currently with Protective Sphere, let's just assume it's the first shard spent for easy handling
                         if (payingMana.isEmpty() || !card.getColor().hasAnyColor(payingMana.get(0).getColor())) {
@@ -1087,6 +1091,18 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.equals("hasNonmanaAbilities")) {
+            boolean hasAbilities = false;
+            for(SpellAbility sa : card.getSpellAbilities()) {
+                if (sa.isActivatedAbility() && !sa.isManaAbility()) {
+                    hasAbilities = true;
+                    break;
+                }
+            }
+
+            if (!hasAbilities) {
+                return false;
+            }
         } else if (property.startsWith("activated")) {
             if (!card.activatedThisTurn()) {
                 return false;
@@ -1309,7 +1325,14 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            if (property.contains("ControlledBy")) {
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
+                cards = CardLists.filterControlledBy(cards, p);
+                if (!cards.contains(card)) {
+                    return false;
+                }
+            }
             for (final Card crd : cards) {
                 if (crd.getNetPower() < card.getNetPower()) {
                     return false;
@@ -1766,7 +1789,7 @@ public class CardProperty {
             }
         } else if (property.equals("hadToAttackThisCombat")) {
             AttackRequirement e = combat == null ? null : combat.getAttackConstraints().getRequirements().get(card);
-            if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
+            if (e == null || !e.hasRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
@@ -1790,8 +1813,19 @@ public class CardProperty {
             if (property.equals("pseudokicked")) {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
+        } else if (property.equals("bargained")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isBargain();
         } else if (property.equals("surged")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isSurged();
@@ -1799,9 +1833,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isBlitz();
         } else if (property.equals("dashed")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isDash();
@@ -1809,9 +1849,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isEscape();
         } else if (property.equals("evoked")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isEvoke();
@@ -1819,9 +1865,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isProwl();
         } else if (property.equals("spectacle")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isSpectacle();

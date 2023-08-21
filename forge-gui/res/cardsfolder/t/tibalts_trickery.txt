@@ -5,7 +5,7 @@ A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ 
 SVar:DBRandom:DB$ ChooseNumber | Min$ 1 | Max$ 3 | Defined$ You | Random$ True | SubAbility$ DBMill | StackDescription$ None
 SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | SubAbility$ DBDig | StackDescription$ None
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Card.nonLand+doesNotShareNameWith Remembered | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ForgetOtherRemembered$ True | ImprintRevealed$ True | SubAbility$ DBPlay | StackDescription$ None
-SVar:DBPlay:DB$ Play | Controller$ TargetedController | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone | StackDescription$ None
+SVar:DBPlay:DB$ Play | Controller$ TargetedController | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone | StackDescription$ None
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$ChosenNumber

@@ -29,7 +29,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
@@ -232,7 +231,7 @@ public class ReplacementHandler {
         chosenRE.setHasRun(true);
         hasRun.add(chosenRE);
         chosenRE.setOtherChoices(possibleReplacers);
-        ReplacementResult res = executeReplacement(runParams, chosenRE, decider, game);
+        ReplacementResult res = executeReplacement(runParams, chosenRE, decider);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
                 res = run(event, runParams);
@@ -251,7 +250,7 @@ public class ReplacementHandler {
 
         // if its updated, try to call event again
         if (res == ReplacementResult.Updated) {
-            Map<AbilityKey, Object> params = Maps.newHashMap(runParams);
+            Map<AbilityKey, Object> params = AbilityKey.newMap(runParams);
 
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
@@ -260,15 +259,14 @@ public class ReplacementHandler {
             switch (result) {
             case NotReplaced:
             case Updated: {
-                for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
-                    runParams.put(e.getKey(), e.getValue());
-                }
+                runParams.putAll(params);
                 // effect was updated
                 runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
                 break;
             }
             default:
                 // effect was replaced with something else
+                res = result;
                 runParams.put(AbilityKey.ReplacementResult, result);
                 break;
             }
@@ -289,8 +287,7 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
-        final ReplacementEffect replacementEffect, final Player decider, final Game game) {
-
+        final ReplacementEffect replacementEffect, final Player decider) {
         SpellAbility effectSA = null;
 
         Card host = replacementEffect.getHostCard();
@@ -443,7 +440,7 @@ public class ReplacementHandler {
         int damage = (int) runParams.get(AbilityKey.DamageAmount);
         Map<String, String> mapParams = re.getMapParams();
 
-        ReplacementResult res = executeReplacement(runParams, re, decider, game);
+        ReplacementResult res = executeReplacement(runParams, re, decider);
         GameEntity newTarget = (GameEntity) runParams.get(AbilityKey.Affected);
         int newDamage = (int) runParams.get(AbilityKey.DamageAmount);
 

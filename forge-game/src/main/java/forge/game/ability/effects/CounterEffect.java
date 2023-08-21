@@ -32,7 +32,7 @@ public class CounterEffect extends SpellAbilityEffect {
         if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility(true);
+                SpellAbility spell = si.getSpellAbility();
                 if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
                 }
@@ -76,7 +76,7 @@ public class CounterEffect extends SpellAbilityEffect {
         if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility(true);
+                SpellAbility spell = si.getSpellAbility();
                 if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
                 }
@@ -84,12 +84,6 @@ public class CounterEffect extends SpellAbilityEffect {
             }
         } else {
             sas = getTargetSpells(sa);
-        }
-
-        if (sa.hasParam("ForgetOtherTargets")) {
-            if (sa.getParam("ForgetOtherTargets").equals("True")) {
-                sa.getHostCard().clearRemembered();
-            }
         }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
@@ -101,6 +95,9 @@ public class CounterEffect extends SpellAbilityEffect {
             // so don't need to worry about LKI (else X amounts would be missing)
             if (sa.hasParam("RememberCounteredCMC")) {
                 sa.getHostCard().addRemembered(Integer.valueOf(tgtSACard.getCMC()));
+            }
+            if (sa.hasParam("RememberForCounter")) {
+                sa.getHostCard().addRemembered(tgtSACard);
             }
 
             if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {

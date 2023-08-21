@@ -1,0 +1,10 @@
+Name:Lidless Gaze
+ManaCost:2 B R
+Types:Sorcery
+K:Flashback:2 B R
+A:SP$ Dig | Defined$ Player | DigNum$ 1 | DestinationZone$ Exile | RememberChanged$ True | ChangeNum$ All | SubAbility$ DBEffect | SpellDescription$ Exile the top card of each player's library. Until the end of your next turn, you may play those cards, and mana of any type can be spent to cast them.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play those cards, and mana of any type can be spent to cast them.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+Oracle:Exile the top card of each player's library. Until the end of your next turn, you may play those cards, and mana of any type can be spent to cast them.\nFlashback {2}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -127,7 +127,7 @@ ScryfallCode=LTC
 119 R Assemble the Entmoot @Alex Brock
 120 R Feasting Hobbit @Lorenzo Mastroianni
 121 R Galadhrim Ambush @John Di Giovanni
-122 R Haldir, Lórien Lieutenant @Syd Mills
+122 R Haldir, Lorien Lieutenant @Syd Mills
 123 R Legolas Greenleaf @Anna Steinbauer
 124 R Mirkwood Elk @Christina Kraus
 125 R Motivated Pony @Claudiu-Antoniu Magherusan
@@ -181,7 +181,10 @@ ScryfallCode=LTC
 173 R Mentor of the Meek @Wei Guan
 174 U Palace Jailer @Brian Valeza
 175 U Path to Exile @Torgeir Fjereide
+176 R Selfless Squire @Kim Sokol
+177 U Sunset Revelry @Viko Menezes
 178 U Swords to Plowshares @Christina Kraus
+179 R Unbreakable Formation @Ben Wootten
 180 R Verge Rangers @Miguel Mercado
 181 C Village Bell-Ringer @Brian Valeza
 182 R Visions of Glory @Justyna Dura
@@ -244,7 +247,7 @@ ScryfallCode=LTC
 239 R Elvish Piper @Joshua Raphael
 240 C Elvish Visionary @Zuzanna Wużyk
 241 R Elvish Warmaster @Ilker Yildiz
-242 C Essence Warden
+242 C Essence Warden @Wangjie Li
 243 C Farhaven Elf @Christina Kraus
 244 C Farseek @Leonardo Borazio
 245 R Genesis Wave @Anato Finnstark
@@ -381,8 +384,51 @@ ScryfallCode=LTC
 376 M Wasteland @Hristo D. Chukov
 377 M Yavimaya, Cradle of Growth @Erikas Perl
 378 M The Great Henge @Jeremy Paillotin
+379 M Cloudstone Curio @Erikas Perl
 380 M Ensnaring Bridge @Stephen Stark
+381 M The Ozolith @Calder Moore
+382 M Rings of Brighthearth @Jonas De Ro
+383 M Shadowspear @Campbell White
+384 M Sword of Hearth and Home @Randy Gallegos
+385 M Sword of the Animist @Pavel Kolomeyets
+386 M Thorn of Amethyst @Igor Krstic
+387 M Ancient Tomb @Anastasia Balakchina
+388 M Bojuka Bog @Calder Moore
+389 M Boseiju, Who Shelters All @Jeremy Paillotin
+390 M Cabal Coffers @Sean Vo
+391 M Castle Ardenvale @Jeremy Paillotin
+392 M Cavern of Souls @Logan Feliciano
+393 M Deserted Temple @Calder Moore
+394 M Gemstone Caverns @Jonas De Ro
+395 M Homeward Path @Erikas Perl
+396 M Horizon Canopy @Randy Gallegos
+397 M Karakas @Stephen Stark
+398 M Kor Haven @Erikas Perl
+399 M Minamo, School at Water's Edge @Stephen Stark
+400 M Mouth of Ronom @Marina Ortega Lorente
+401 M Oboro, Palace in the Clouds @Jonas De Ro
+402 M Pillar of the Paruns @Randy Gallegos
+403 M Reflecting Pool @Marco Gorlei
+404 M Shinka, the Bloodsoaked Keep @Logan Feliciano
+405 M Urborg, Tomb of Yawgmoth @Erikas Perl
 406 M Wasteland @Hristo D. Chukov
+407 M Yavimaya, Cradle of Growth @Erikas Perl
 408 M Sol Ring @Randy Gallegos
 409 M Sol Ring @Erikas Perl
 410 M Sol Ring @Anastasia Balakchina
+
+[tokens]
+b_3_3_wraith_menace
+br_6_6_dragon_flying_menace_steal
+g_1_1_elf_warrior
+g_1_1_insect_flying_deathtouch
+g_3_3_beast
+g_x_x_treefolk
+r_1_1_goblin
+r_2_2_human_knight_trample_haste
+u_2_2_bird_flying
+w_0_1_goat
+w_1_1_halfling
+w_1_1_human
+w_1_1_soldier_lifelink
+w_3_3_bird_flying_attacks

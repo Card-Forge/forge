@@ -1,7 +1,6 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -63,18 +62,17 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private ArenaScene() {
         super(Forge.isLandscapeMode() ? "ui/arena.json" : "ui/arena_portrait.json");
-        TextureAtlas atlas = Config.instance().getAtlas(Paths.ARENA_ATLAS);
-        fighterSpot = atlas.createSprite("Spot");
-        lostOverlay = atlas.createSprite("Lost");
-        up = atlas.createSprite("Up");
-        upWin = atlas.createSprite("UpWin");
-        side = atlas.createSprite("Side");
-        sideWin = atlas.createSprite("SideWin");
-        edge = atlas.createSprite("Edge");
-        edgeM = atlas.createSprite("Edge");
+        fighterSpot = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Spot");
+        lostOverlay = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Lost");
+        up = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Up");
+        upWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "UpWin");
+        side = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Side");
+        sideWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "SideWin");
+        edge = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Edge");
+        edgeM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeFlip");
         edgeM.setFlip(true, false);
-        edgeWin = atlas.createSprite("EdgeWin");
-        edgeWinM = atlas.createSprite("EdgeWin");
+        edgeWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWin");
+        edgeWinM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWinFlip");
         edgeWinM.setFlip(true, false);
         gridSize = fighterSpot.getRegionWidth();
 
@@ -308,7 +306,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;
 
-        goldLabel.setText(data.entryFee + " [+Gold]");
+        goldLabel.setText("[+GoldCoin] " + data.entryFee);
         goldLabel.layout();
         goldLabel.setVisible(true);
 

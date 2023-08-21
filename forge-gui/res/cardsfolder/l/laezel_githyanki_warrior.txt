@@ -5,7 +5,7 @@ PT:2/4
 K:Double Strike
 K:Specialize:1
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When you cast this spell, it gains "When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control."
-SVar:TrigAnimate:DB$ Animate | Triggers$ BecomesTarget
+SVar:TrigAnimate:DB$ Animate | Triggers$ BecomesTarget | Duration$ Permanent
 SVar:BecomesTarget:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigBlink | OptionalDecider$ You | TriggerDescription$ When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control.
 SVar:TrigBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredTargetLKICopy | SubAbility$ DBReturn | RememberChanged$ True
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup

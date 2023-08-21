@@ -379,7 +379,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
         } else if ("LifePaid".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
                 return false;
             }
@@ -408,7 +408,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         } else if ("Sacrificed".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && Iterables.isEmpty(trigSA.getPaidList("Sacrificed"))) {
                 return false;
             }

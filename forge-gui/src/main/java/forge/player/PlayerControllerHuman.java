@@ -284,6 +284,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     break;
                 }
             }
+            for (SpellAbility sa : hostCard.getAllSpellAbilities()) {
+                if (sa.hasParam("Activator")
+                        && player.isValid(sa.getParam("Activator"), hostCard.getController(), hostCard, sa)) {
+                    noPermission = false;
+                    break;
+                }
+            }
             if (noPermission) {
                 return null;
             }
@@ -832,7 +839,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return this.getGui().confirm(wrapper.getView().getHostCard(), buildQuestion.toString().replaceAll("\n", " "));
+            CardView cardView;
+            SpellAbilityView spellAbilityView = wrapper.getView();
+            if (spellAbilityView != null) //updated view
+                cardView = spellAbilityView.getHostCard();
+            else
+                cardView = wrapper.getCardView();
+            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
             inp.showAndWait();
@@ -1300,7 +1313,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // occurrences of each
         Map<String, Integer> typesInDeck = Maps.newHashMap();
 
-        // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
             // Changeling are all creature types, they are not interesting for
             // counting creature types
@@ -1324,10 +1336,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             for (String type : c.getType().getCreatureTypes()) {
-                Integer count = typesInDeck.get(type);
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault(type, 0);
                 typesInDeck.put(type, count + 1);
             }
             // also take into account abilities that generate tokens
@@ -1340,10 +1349,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String token : sa.getParam("TokenScript").split(",")) {
                         Card protoType = TokenInfo.getProtoType(token, sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.get(type);
-                            if (count == null) {
-                                count = 0;
-                            }
+                            Integer count = typesInDeck.getOrDefault(type, 0);
                             typesInDeck.put(type, count + 1);
                         }
                     }
@@ -1359,10 +1365,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         for (String token : sa.getParam("TokenScript").split(",")) {
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
-                                Integer count = typesInDeck.get(type);
-                                if (count == null) {
-                                    count = 0;
-                                }
+                                Integer count = typesInDeck.getOrDefault(type, 0);
                                 typesInDeck.put(type, count + 1);
                             }
                         }
@@ -1371,10 +1374,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             // special rule for Fabricate and Servo
             if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
-                Integer count = typesInDeck.get("Servo");
-                if (count == null) {
-                    count = 0;
-                }
+                Integer count = typesInDeck.getOrDefault("Servo", 0);
                 typesInDeck.put("Servo", count + 1);
             }
         }
@@ -1431,7 +1431,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return this.getGui().confirm(effectSA.getView().getHostCard(), question.replaceAll("\n", " "));
+            CardView cardView;
+            SpellAbilityView spellAbilityView = effectSA.getView();
+            if (spellAbilityView != null) //updated view
+                cardView = spellAbilityView.getHostCard();
+            else //fallback
+                cardView = effectSA.getCardView();
+            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, effectSA);
             inp.showAndWait();
@@ -1452,14 +1458,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final InputLondonMulligan inp = new InputLondonMulligan(this, player, cardsToReturn);
         inp.showAndWait();
         return inp.getSelectedCards();
-    }
-
-    @Override
-    public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
-        // Partial Paris is gone, so it being commander doesn't really matter anymore...
-        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer);
-        inp.showAndWait();
-        return inp.isKeepHand() ? null : player.getCardsIn(ZoneType.Hand);
     }
 
     @Override
@@ -1679,13 +1677,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Card chooseProtectionShield(final GameEntity entityBeingDamaged, final List<String> options,
-                                       final Map<String, Card> choiceMap) {
-        final String title = entityBeingDamaged + " - " + localizer.getMessage("lblSelectPreventionShieldToUse");
-        return choiceMap.get(getGui().one(title, options));
-    }
-
-    @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(final SpellAbility saSpellskite,
                                                                     final List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         if (allTargets.size() < 2) {
@@ -1861,7 +1852,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             try {
                 cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
             } catch (Exception e) {
-                cardView = sa.getView().getHostCard();
+                SpellAbilityView spellAbilityView = sa.getView();
+                if (spellAbilityView != null) //updated view
+                    cardView = spellAbilityView.getHostCard();
+                else //fallback
+                    cardView = sa.getCardView();
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
@@ -1999,8 +1994,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
+    public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
+        return HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
     }
 
     @Override

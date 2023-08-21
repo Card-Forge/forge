@@ -1,0 +1,8 @@
+Name:Storm of Saruman
+ManaCost:4 U U
+Types:Enchantment
+K:Ward:3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigCopyTarget | ActivatorThisTurnCast$ EQ2 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your second spell each turn, copy it, except the copy isn't legendary. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:TrigCopyTarget:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NonLegendary$ True | MayChooseTarget$ True
+DeckHas:Ability$Token
+Oracle:Ward {3}\nWhenever you cast your second spell each turn, copy it, except the copy isn't legendary. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

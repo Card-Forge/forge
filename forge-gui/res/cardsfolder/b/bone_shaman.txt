@@ -2,7 +2,7 @@ Name:Bone Shaman
 ManaCost:2 R R
 Types:Creature Giant Shaman
 PT:3/3
-A:AB$ Animate | Cost$ B | Defined$ Self | staticAbilities$ BoneShamanStatic | StackDescription$ CARDNAME gains "Creatures dealt damage by CARDNAME this turn can't be regenerated this turn." | SpellDescription$ Until end of turn, CARDNAME gains "Creatures dealt damage by CARDNAME this turn can't be regenerated this turn."
-SVar:BoneShamanStatic:Mode$ Continuous | Affected$ Creature.DamagedBy | AddHiddenKeyword$ CARDNAME can't be regenerated. | Description$ Creatures dealt damage by CARDNAME this turn can't be regenerated this turn.
+A:AB$ Animate | Cost$ B | Defined$ Self | staticAbilities$ BoneShamanStatic | AILogic$ BoneManCantRegenerate | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME gains "Creatures dealt damage by CARDNAME this turn can't be regenerated this turn."
+SVar:BoneShamanStatic:Mode$ CantRegenerate | ValidCard$ Creature.DamagedBy | Description$ Creatures dealt damage by CARDNAME this turn can't be regenerated this turn.
 AI:RemoveDeck:All
 Oracle:{B}: Until end of turn, Bone Shaman gains "Creatures dealt damage by Bone Shaman this turn can't be regenerated this turn."

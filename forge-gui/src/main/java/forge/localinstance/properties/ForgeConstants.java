@@ -17,24 +17,25 @@
  */
 package forge.localinstance.properties;
 
+import forge.gui.GuiBase;
+import forge.util.FileUtil;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 
-import forge.gui.GuiBase;
-import forge.util.FileUtil;
-
 public final class ForgeConstants {
-    public static final String PATH_SEPARATOR        = File.separator;
-    public static final String ASSETS_DIR            = GuiBase.getInterface().getAssetsDir();
-    public static final String PROFILE_FILE          = ASSETS_DIR + "forge.profile.properties";
-    public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
+    public static final String PATH_SEPARATOR               = File.separator;
+    public static final String ASSETS_DIR                   = GuiBase.getInterface().getAssetsDir();
+    public static final String PROFILE_FILE                 = ASSETS_DIR + "forge.profile.properties";
+    public static final String PROFILE_TEMPLATE_FILE        = PROFILE_FILE + ".example";
 
-    public static final String RES_DIR = ASSETS_DIR + "res" + PATH_SEPARATOR;
-    public static final String ADVENTURE_DIR = RES_DIR + "adventure" + PATH_SEPARATOR;
-    public static final String ADVENTURE_DEFAULT_PLANE_DIR = ADVENTURE_DIR + "Shandalar" + PATH_SEPARATOR;
-    public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
-    public static final String SETLOOKUP_DIR = RES_DIR + "setlookup" + PATH_SEPARATOR;
+    public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
+    public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
+    public static final String ADVENTURE_DEFAULT_PLANE_DIR  = ADVENTURE_DIR + "Shandalar" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
+    public static final String LISTS_DIR                    = RES_DIR + "lists" + PATH_SEPARATOR;
+    public static final String SETLOOKUP_DIR                = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
     public static final String SPECIAL_CARD_ACHIEVEMENT_LIST_FILE    = LISTS_DIR + "special-card-achievements.txt";
@@ -68,96 +69,96 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
 
 
-    public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
-    public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
-    public static final String LICENSE_FILE            = ASSETS_DIR + "LICENSE.txt";
-    public static final String README_FILE             = ASSETS_DIR + "MANUAL.txt";
-    public static final String HOWTO_FILE              = RES_DIR + "howto.txt";
+    public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
+    public static final String CHANGES_FILE_NO_RELEASE      = ASSETS_DIR + "CHANGES.txt";
+    public static final String LICENSE_FILE                 = ASSETS_DIR + "LICENSE.txt";
+    public static final String README_FILE                  = ASSETS_DIR + "MANUAL.txt";
+    public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
 
-    public static final String DRAFT_DIR           = RES_DIR + "draft" + PATH_SEPARATOR;
-    public static final String DRAFT_RANKINGS_FILE = DRAFT_DIR + "rankings.txt";
-    public static final String SEALED_DIR          = RES_DIR + "sealed" + PATH_SEPARATOR;
-    public static final String CARD_DATA_DIR       = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
-    public static final String TOKEN_DATA_DIR      = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
-    public static final String EDITIONS_DIR        = RES_DIR + "editions" + PATH_SEPARATOR;
-    public static final String BLOCK_DATA_DIR      = RES_DIR + "blockdata" + PATH_SEPARATOR;
-    public static final String FORMATS_DATA_DIR    = RES_DIR + "formats" + PATH_SEPARATOR;
-    public static final String DECK_CUBE_DIR       = RES_DIR + "cube" + PATH_SEPARATOR;
-    public static final String AI_PROFILE_DIR      = RES_DIR + "ai" + PATH_SEPARATOR;
-    public static final String SOUND_DIR           = RES_DIR + "sound" + PATH_SEPARATOR;
-    public static final String MUSIC_DIR           = RES_DIR + "music" + PATH_SEPARATOR;
-    public static final String ADVENTURE_MUSIC_DIR = ADVENTURE_DEFAULT_PLANE_DIR + "music" + PATH_SEPARATOR;
-    public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
-    public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
-    public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
-    public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
-    public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
-    public static final String GENETIC_AI_DECK_DIR = RES_DIR + "geneticaidecks" + PATH_SEPARATOR;
+    public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
+    public static final String DRAFT_RANKINGS_FILE          = DRAFT_DIR + "rankings.txt";
+    public static final String SEALED_DIR                   = RES_DIR + "sealed" + PATH_SEPARATOR;
+    public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
+    public static final String TOKEN_DATA_DIR               = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
+    public static final String EDITIONS_DIR                 = RES_DIR + "editions" + PATH_SEPARATOR;
+    public static final String BLOCK_DATA_DIR               = RES_DIR + "blockdata" + PATH_SEPARATOR;
+    public static final String FORMATS_DATA_DIR             = RES_DIR + "formats" + PATH_SEPARATOR;
+    public static final String DECK_CUBE_DIR                = RES_DIR + "cube" + PATH_SEPARATOR;
+    public static final String AI_PROFILE_DIR               = RES_DIR + "ai" + PATH_SEPARATOR;
+    public static final String SOUND_DIR                    = RES_DIR + "sound" + PATH_SEPARATOR;
+    public static final String MUSIC_DIR                    = RES_DIR + "music" + PATH_SEPARATOR;
+    public static final String ADVENTURE_MUSIC_DIR          = ADVENTURE_DEFAULT_PLANE_DIR + "music" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_MUSIC_DIR   = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
+    public static final String LANG_DIR                     = RES_DIR + "languages" + PATH_SEPARATOR;
+    public static final String EFFECTS_DIR                  = RES_DIR + "effects" + PATH_SEPARATOR;
+    public static final String PUZZLE_DIR                   = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String TUTORIAL_DIR                 = RES_DIR + "tutorial" + PATH_SEPARATOR;
+    public static final String DECK_GEN_DIR                 = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
+    public static final String GENETIC_AI_DECK_DIR          = RES_DIR + "geneticaidecks" + PATH_SEPARATOR;
 
-    private static final String QUEST_DIR             = RES_DIR + "quest" + PATH_SEPARATOR;
-    public static final String QUEST_WORLD_DIR        = QUEST_DIR + "world" + PATH_SEPARATOR;
-    public static final String QUEST_PRECON_DIR       = QUEST_DIR + "precons" + PATH_SEPARATOR;
-    public static final String PRICES_BOOSTER_FILE    = QUEST_DIR + "booster-prices.txt";
-    public static final String BAZAAR_DIR             = QUEST_DIR + "bazaar" + PATH_SEPARATOR;
-    public static final String BAZAAR_INDEX_FILE      = BAZAAR_DIR + "index.xml";
-    public static final String DEFAULT_DUELS_DIR      = QUEST_DIR + "duels";
-    public static final String DEFAULT_CHALLENGES_DIR = QUEST_DIR + "challenges";
-    public static final String THEMES_DIR             = QUEST_DIR + "themes";
+    private static final String QUEST_DIR                   = RES_DIR + "quest" + PATH_SEPARATOR;
+    public static final String QUEST_WORLD_DIR              = QUEST_DIR + "world" + PATH_SEPARATOR;
+    public static final String QUEST_PRECON_DIR             = QUEST_DIR + "precons" + PATH_SEPARATOR;
+    public static final String PRICES_BOOSTER_FILE          = QUEST_DIR + "booster-prices.txt";
+    public static final String BAZAAR_DIR                   = QUEST_DIR + "bazaar" + PATH_SEPARATOR;
+    public static final String BAZAAR_INDEX_FILE            = BAZAAR_DIR + "index.xml";
+    public static final String DEFAULT_DUELS_DIR            = QUEST_DIR + "duels";
+    public static final String DEFAULT_CHALLENGES_DIR       = QUEST_DIR + "challenges";
+    public static final String THEMES_DIR                   = QUEST_DIR + "themes";
 
-    private static final String CONQUEST_DIR       = RES_DIR + "conquest" + PATH_SEPARATOR;
-    public static final String CONQUEST_PLANES_DIR = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
-
-    public static final String BASE_SKINS_DIR         = RES_DIR + "skins" + PATH_SEPARATOR;
-    public static final String COMMON_FONTS_DIR       = RES_DIR + "fonts" + PATH_SEPARATOR;
-    public static final String DEFAULT_SKINS_DIR      = BASE_SKINS_DIR + "default" + PATH_SEPARATOR;
+    private static final String CONQUEST_DIR                = RES_DIR + "conquest" + PATH_SEPARATOR;
+    public static final String CONQUEST_PLANES_DIR          = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
+    public static final String BASE_SKINS_DIR               = RES_DIR + "skins" + PATH_SEPARATOR;
+    public static final String COMMON_FONTS_DIR             = RES_DIR + "fonts" + PATH_SEPARATOR;
+    public static final String DEFAULT_SKINS_DIR            = BASE_SKINS_DIR + "default" + PATH_SEPARATOR;
     //don't associate these skin files with a directory since skin directory will be determined later
-    public static final String SPRITE_ICONS_FILE      = "sprite_icons.png";
-    public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
-    public static final String SPRITE_OLD_FOILS_FILE  = "sprite_old_foils.png";
-    public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
-    public static final String SPRITE_ABILITY_FILE    = "sprite_ability.png";
-    public static final String SPRITE_BORDER_FILE     = "sprite_border.png";
-    public static final String SPRITE_ADV_BUTTONS_FILE  = "sprite_adv_buttons.png";
-    public static final String SPRITE_BUTTONS_FILE    = "sprite_buttons.png";
-    public static final String SPRITE_DECKBOX_FILE    = "sprite_deckbox.png";
-    public static final String SPRITE_START_FILE      = "sprite_start.png";
-    public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
-    public static final String SPRITE_PHYREXIAN_FILE  = "sprite_phyrexian.png";
-    public static final String SPRITE_CURSOR_FILE     = "sprite_cursor.png";
-    public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
-    public static final String SPRITE_CRACKS_FILE     = "sprite_cracks.png";
-    public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";
-    public static final String SPRITE_SLEEVES2_FILE   = "sprite_sleeves2.png";
-    public static final String SPRITE_FAVICONS_FILE   = "sprite_favicons.png";
-    public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
-    public static final String SPRITE_ADVENTURE_FILE = "sprite_adventure.png";
-    public static final String SPRITE_SETLOGO_FILE    = "sprite_setlogo.png";
-    public static final String SPRITE_WATERMARK_FILE  = "sprite_watermark.png";
-    public static final String SPRITE_DRAFTRANKS_FILE  = "sprite_draftranks.png";
-    public static final String FONT_FILE              = "font1.ttf";
-    public static final String SPLASH_BG_FILE         = "bg_splash.png";
-    public static final String MATCH_BG_FILE          = "bg_match.jpg";
-    public static final String MATCH_BG_DAY_FILE      = "bg_day.jpg";
-    public static final String MATCH_BG_NIGHT_FILE    = "bg_night.jpg";
-    public static final String ADV_MATCH_BG_FILE      = "adv_bg_match.jpg";
-    public static final String ADV_MATCH_BG_DAY_FILE  = "adv_bg_match_day.jpg";
-    public static final String ADV_MATCH_BG_NIGHT_FILE= "adv_bg_match_nigh.jpg";
-    public static final String ADV_TEXTURE_BG_FILE    = "adv_bg_texture.jpg";
-    public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
-    public static final String SPACE_BG_FILE          = "bg_space.png";
-    public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
-    public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
+    public static final String SPRITE_ICONS_FILE            = "sprite_icons.png";
+    public static final String SPRITE_FOILS_FILE            = "sprite_foils.png";
+    public static final String SPRITE_OLD_FOILS_FILE        = "sprite_old_foils.png";
+    public static final String SPRITE_TROPHIES_FILE         = "sprite_trophies.png";
+    public static final String SPRITE_ABILITY_FILE          = "sprite_ability.png";
+    public static final String SPRITE_BORDER_FILE           = "sprite_border.png";
+    public static final String SPRITE_ADV_BUTTONS_FILE      = "sprite_adv_buttons.png";
+    public static final String SPRITE_BUTTONS_FILE          = "sprite_buttons.png";
+    public static final String SPRITE_DECKBOX_FILE          = "sprite_deckbox.png";
+    public static final String SPRITE_START_FILE            = "sprite_start.png";
+    public static final String SPRITE_MANAICONS_FILE        = "sprite_manaicons.png";
+    public static final String SPRITE_PHYREXIAN_FILE        = "sprite_phyrexian.png";
+    public static final String SPRITE_CURSOR_FILE           = "sprite_cursor.png";
+    public static final String SPRITE_AVATARS_FILE          = "sprite_avatars.png";
+    public static final String SPRITE_CRACKS_FILE           = "sprite_cracks.png";
+    public static final String SPRITE_SLEEVES_FILE          = "sprite_sleeves.png";
+    public static final String SPRITE_SLEEVES2_FILE         = "sprite_sleeves2.png";
+    public static final String SPRITE_FAVICONS_FILE         = "sprite_favicons.png";
+    public static final String SPRITE_PLANAR_CONQUEST_FILE  = "sprite_planar_conquest.png";
+    public static final String SPRITE_ADVENTURE_FILE        = "sprite_adventure.png";
+    public static final String SPRITE_SETLOGO_FILE          = "sprite_setlogo.png";
+    public static final String SPRITE_WATERMARK_FILE        = "sprite_watermark.png";
+    public static final String SPRITE_DRAFTRANKS_FILE       = "sprite_draftranks.png";
+    public static final String FONT_FILE                    = "font1.ttf";
+    public static final String SPLASH_BG_FILE               = "bg_splash.png";
+    public static final String MATCH_BG_FILE                = "bg_match.jpg";
+    public static final String MATCH_BG_DAY_FILE            = "bg_day.jpg";
+    public static final String MATCH_BG_NIGHT_FILE          = "bg_night.jpg";
+    public static final String ADV_MATCH_BG_FILE            = "adv_bg_match.jpg";
+    public static final String ADV_MATCH_BG_DAY_FILE        = "adv_bg_match_day.jpg";
+    public static final String ADV_MATCH_BG_NIGHT_FILE      = "adv_bg_match_nigh.jpg";
+    public static final String ADV_TEXTURE_BG_FILE          = "adv_bg_texture.jpg";
+    public static final String TEXTURE_BG_FILE              = "bg_texture.jpg";
+    public static final String SPACE_BG_FILE                = "bg_space.png";
+    public static final String CHAOS_WHEEL_IMG_FILE         = "bg_chaos_wheel.png";
+    public static final String DRAFT_DECK_IMG_FILE          = "bg_draft_deck.png";
     //Adventure locations
-    public static final String ADV_BG_SWAMP_FILE      = "adv_bg_swamp.jpg";
-    public static final String ADV_BG_FOREST_FILE     = "adv_bg_forest.jpg";
-    public static final String ADV_BG_MOUNTAIN_FILE   = "adv_bg_mountain.jpg";
-    public static final String ADV_BG_ISLAND_FILE     = "adv_bg_island.jpg";
-    public static final String ADV_BG_PLAINS_FILE     = "adv_bg_plains.jpg";
-    public static final String ADV_BG_WASTE_FILE      = "adv_bg_waste.jpg";
-    public static final String ADV_BG_COMMON_FILE     = "adv_bg_common.jpg";
-    public static final String ADV_BG_CAVE_FILE       = "adv_bg_cave.jpg";
-    public static final String ADV_BG_DUNGEON_FILE    = "adv_bg_dungeon.jpg";
-    public static final String ADV_BG_CASTLE_FILE     = "adv_bg_castle.jpg";
+    public static final String ADV_BG_SWAMP_FILE            = "adv_bg_swamp.jpg";
+    public static final String ADV_BG_FOREST_FILE           = "adv_bg_forest.jpg";
+    public static final String ADV_BG_MOUNTAIN_FILE         = "adv_bg_mountain.jpg";
+    public static final String ADV_BG_ISLAND_FILE           = "adv_bg_island.jpg";
+    public static final String ADV_BG_PLAINS_FILE           = "adv_bg_plains.jpg";
+    public static final String ADV_BG_WASTE_FILE            = "adv_bg_waste.jpg";
+    public static final String ADV_BG_COMMON_FILE           = "adv_bg_common.jpg";
+    public static final String ADV_BG_CAVE_FILE             = "adv_bg_cave.jpg";
+    public static final String ADV_BG_DUNGEON_FILE          = "adv_bg_dungeon.jpg";
+    public static final String ADV_BG_CASTLE_FILE           = "adv_bg_castle.jpg";
 
     //Planes addon
     public static final String BG_1                   = "Academy_at_Tolaria_West.jpg";
@@ -478,7 +479,7 @@ public final class ForgeConstants {
 
         TOP("Top of Card"), BOTTOM("Bottom of Card");
 
-        private String name;
+        private final String name;
 
         CounterDisplayLocation(final String name) {
             this.name = name;

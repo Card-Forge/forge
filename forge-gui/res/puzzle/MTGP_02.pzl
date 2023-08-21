@@ -1,0 +1,21 @@
+[metadata]
+Name:MTG Puzzles #02 - It's a Trap!
+URL:https://mtgpuzzles.com/puzzle/2
+Goal:Survive
+Turns:1
+Difficulty:Easy
+Description:Survive until your next turn. It's your opponents turn and they have attacked with 5 Construct tokens! It's their declare blockers step, can you find a way to survive this turn? Don't forget about Throne of the God-Pharaoh!
+[state]
+turn=1
+activeplayer=p1
+activephase=MAIN1
+activephaseadvance=COMBAT_DECLARE_BLOCKERS
+p0life=7
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Arrow Volley Trap;Pitfall Trap;Inferno Trap
+p0battlefield=Viashino Fangtail;Rockslide Sorcerer;Mountain;Mountain;Plains;Plains
+p1life=20
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Throne of the God-Pharaoh;T:c_4_4_a_construct;T:c_4_4_a_construct;T:c_4_4_a_construct;T:c_4_4_a_construct;T:c_4_4_a_construct

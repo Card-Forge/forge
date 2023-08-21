@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.data.DialogData;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
+
 import java.util.HashMap;
+
 /**
  * CharacterSprite base class for animated sprites on the map
  */
@@ -18,20 +21,22 @@ public class CharacterSprite extends MapActor {
     private Animation<TextureRegion> currentAnimation = null;
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
-    private final Array<Sprite> avatar=new Array<>();
+    private final Array<Sprite> avatar = new Array<>();
     public boolean hidden = false;
     public boolean inactive = false;
     private String atlasPath;
     private float wakeTimer = 0.0f;
+    public DialogData.ConditionData[] spawnConditions = new DialogData.ConditionData[0]; //List of conditions for the sprite to spawn.
 
-    public CharacterSprite(int id,String path) {
+    public CharacterSprite(int id, String path) {
         super(id);
-        collisionHeight=0.4f;
+        collisionHeight = 0.4f;
         atlasPath = path;
         load(path);
     }
+
     public CharacterSprite(String path) {
-        this(0,path);
+        this(0, path);
     }
 
     @Override
@@ -40,12 +45,11 @@ public class CharacterSprite extends MapActor {
     }
 
     protected void load(String path) {
-        if(path==null||path.isEmpty())return;
-        TextureAtlas atlas = Config.instance().getAtlas(path);
+        if (path == null || path.isEmpty()) return;
         animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
             if (stand == AnimationTypes.Avatar) {
-                avatar.addAll(atlas.createSprites(stand.toString()));
+                avatar.addAll(Config.instance().getAnimatedSprites(path, stand.toString()));
                 continue;
             }
             HashMap<AnimationDirections, Animation<TextureRegion>> dirs = new HashMap<>();
@@ -53,13 +57,13 @@ public class CharacterSprite extends MapActor {
 
                 Array<Sprite> anim;
                 if (dir == AnimationDirections.None)
-                    anim = atlas.createSprites(stand.toString());
+                    anim = Config.instance().getAnimatedSprites(path, stand.toString());
                 else
-                    anim = atlas.createSprites(stand.toString() + dir.toString());
+                    anim = Config.instance().getAnimatedSprites(path, stand.toString() + dir.toString());
 
                 if (anim.size != 0) {
                     dirs.put(dir, new Animation<>(0.2f, anim));
-                    if(getWidth()==0.0)//init size onload
+                    if (getWidth() == 0.0)//init size onload
                     {
                         setWidth(anim.first().getWidth());
                         setHeight(anim.first().getHeight());
@@ -67,7 +71,6 @@ public class CharacterSprite extends MapActor {
                 }
             }
             animations.put(stand, dirs);
-
         }
 
 
@@ -108,7 +111,6 @@ public class CharacterSprite extends MapActor {
                 dirs.put(AnimationDirections.Down, dirs.get(AnimationDirections.Left));
             }
         }
-
 
         setAnimation(AnimationTypes.Idle);
         setDirection(AnimationDirections.Right);
@@ -170,13 +172,13 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    public void moveBy(float x, float y){
-        moveBy(x,y,0.0f);
+    public void moveBy(float x, float y) {
+        moveBy(x, y, 0.0f);
     }
 
     public void moveBy(float x, float y, float delta) {
 
-        if (inactive){
+        if (inactive) {
             return;
         }
 
@@ -186,11 +188,10 @@ public class CharacterSprite extends MapActor {
                 setAnimation(AnimationTypes.Wake);
                 wakeTimer = 0.0f;
                 hidden = false;
-            }
-            else return;
+            } else return;
         }
 
-        if (currentAnimationType == AnimationTypes.Wake && wakeTimer <= currentAnimation.getAnimationDuration()){
+        if (currentAnimationType == AnimationTypes.Wake && wakeTimer <= currentAnimation.getAnimationDuration()) {
             wakeTimer += delta;
             return;
         }
@@ -201,7 +202,8 @@ public class CharacterSprite extends MapActor {
         Vector2 vec = new Vector2(x, y);
         float degree = vec.angleDeg();
 
-        if (!hidden) setAnimation(AnimationTypes.Walk);
+        if (!hidden)
+            setAnimation(AnimationTypes.Walk);
         if (degree < 22.5)
             setDirection(AnimationDirections.Right);
         else if (degree < 22.5 + 45)
@@ -228,7 +230,6 @@ public class CharacterSprite extends MapActor {
     }
 
 
-
     @Override
     public void act(float delta) {
         timer += delta;
@@ -238,34 +239,30 @@ public class CharacterSprite extends MapActor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (currentAnimation == null || hidden || inactive)
-        {
+        if (currentAnimation == null || hidden || inactive) {
             return;
         }
-        super.draw(batch,parentAlpha);
-        beforeDraw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
+        beforeDraw(batch, parentAlpha);
 
         TextureRegion currentFrame;
-        if (currentAnimationType.equals(AnimationTypes.Wake))
-        {
+        if (currentAnimationType.equals(AnimationTypes.Wake)) {
             currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
-        }
-        else
-        {
+        } else {
             currentFrame = currentAnimation.getKeyFrame(timer, true);
         }
 
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
-        Color oldColor=batch.getColor().cpy();
+        Color oldColor = batch.getColor().cpy();
         batch.setColor(getColor());
         float scale = 1f;
         if (this instanceof EnemySprite) {
             scale = ((EnemySprite) this).getData().scale;
         }
-        batch.draw(currentFrame, getX(), getY(), getWidth()*scale, getHeight()*scale);
+        batch.draw(currentFrame, getX(), getY(), getWidth() * scale, getHeight() * scale);
         batch.setColor(oldColor);
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
 
     }
@@ -276,9 +273,11 @@ public class CharacterSprite extends MapActor {
             return null;
         return avatar.first();
     }
+
     public String getAtlasPath() {
         return atlasPath;
     }
+
     public Sprite getAvatar(int index) {
         return avatar.get(index);
     }
@@ -295,7 +294,6 @@ public class CharacterSprite extends MapActor {
     }
 
     public enum AnimationDirections {
-
         None,
         Right,
         RightDown,

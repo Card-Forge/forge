@@ -50,6 +50,8 @@ public enum CounterEnumType {
     AWAKENING("AWAKE", 0, 231, 79),
 
     BLAZE("BLAZE", 255, 124, 82),
+    
+    BLESSING("BLESS", 251, 0, 94),
 
     BLOOD("BLOOD", 255, 108, 111),
 
@@ -190,6 +192,8 @@ public enum CounterEnumType {
     INCARNATION("INCRN", 247, 206, 64),
 
     INFECTION("INFCT", 0, 230, 66),
+    
+    INFLUENCE("INFL", 201, 99, 212),
 
     INGENUITY("INGTY", 67, 186, 205),
 
@@ -308,6 +312,8 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+    
+    RIBBON("RIBBON", 233, 245, 232),
 
     RITUAL("RITUAL", 155, 17, 30),
 

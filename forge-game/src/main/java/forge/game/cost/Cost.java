@@ -907,7 +907,7 @@ public class Cost implements Serializable {
         return sb.toString();
     }
 
-    public void mergeTo(Cost source, int amt) {
+    public void mergeTo(Cost source, int amt, final SpellAbility sa) {
         // multiply to create the full cost
         if (amt > 1) {
             // to double itself we need to work on a copy
@@ -918,13 +918,16 @@ public class Cost implements Serializable {
             }
         }
         // combine costs (these shouldn't mix together)
-        this.add(source, false);
+        this.add(source, false, sa);
     }
 
     public Cost add(Cost cost1) {
         return add(cost1, true);
     }
     public Cost add(Cost cost1, boolean mergeAdditional) {
+        return add(cost1, mergeAdditional, null);
+    }
+    public Cost add(Cost cost1, boolean mergeAdditional, final SpellAbility sa) {
         CostPartMana costPart2 = this.getCostMana();
         List<CostPart> toRemove = Lists.newArrayList();
         for (final CostPart part : cost1.getCostParts()) {
@@ -950,21 +953,25 @@ public class Cost implements Serializable {
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||
-                    part instanceof CostSacrifice || part instanceof CostTapType||
+                    part instanceof CostSacrifice || part instanceof CostTapType ||
                     part instanceof CostExile))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
+                    Integer otherAmount = other.convertAmount();
+                    // support X loyalty
+                    if (otherAmount == null && sa != null && sa.isPwAbility()) {
+                        otherAmount = other.getAbilityAmount(sa);
+                    }
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
                             part.getType().equals(other.getType()) &&
                             StringUtils.isNumeric(part.getAmount()) &&
-                            StringUtils.isNumeric(other.getAmount())) {
-                        String amount = String.valueOf(part.convertAmount() + other.convertAmount());
+                            otherAmount != null) {
+                        String amount = String.valueOf(part.convertAmount() + otherAmount);
                         if (part instanceof CostPutCounter) { // CR 606.5 path for Carth
-                            // TODO support X
                             if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
                                 costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
-                                Integer counters = other.convertAmount() - part.convertAmount();
+                                Integer counters = otherAmount - part.convertAmount();
                                 // the cost can turn positive if multiple Carth raise it
                                 if (counters < 0) {
                                     costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));

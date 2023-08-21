@@ -1,5 +1,5 @@
 Name:Xanthic Statue
 ManaCost:8
 Types:Artifact
-A:AB$ Animate | Cost$ 5 | Defined$ Self | Power$ 8 | Toughness$ 8 | Types$ Creature,Artifact,Golem | Keywords$ Trample | SpellDescription$ Until end of turn, CARDNAME becomes an 8/8 Golem artifact creature with trample.
+A:AB$ Animate | Cost$ 5 | Defined$ Self | Power$ 8 | Toughness$ 8 | Types$ Creature,Artifact,Golem | RemoveCreatureTypes$ True | Keywords$ Trample | SpellDescription$ Until end of turn, CARDNAME becomes an 8/8 Golem artifact creature with trample.
 Oracle:{5}: Until end of turn, Xanthic Statue becomes an 8/8 Golem artifact creature with trample.

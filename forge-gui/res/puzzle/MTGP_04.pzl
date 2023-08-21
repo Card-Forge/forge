@@ -1,0 +1,20 @@
+[metadata]
+Name:MTG Puzzles #04 - Enrage Against the Machine
+URL:https://mtgpuzzles.com/puzzle/4
+Goal:Win before opponent's next turn
+Turns:1
+Difficulty:Very Hard
+Description:Win this turn. Your spirit-engrage tribal deck is not doing as well as you planned. Your opponent played a Jin-Gitaxias on their turn and you must find a way to win before its too late! The solution should not depend on how Jin-Gitaxias, Core Augur blocks.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Dark Withering;Tahngarth's Rage;Alms of the Vein
+p0battlefield=Frilled Deathspitter;Niblis of Dusk;Supreme Phantom;Pyrohemia;Mountain;Mountain;Mountain;Mountain;Mountain;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs
+p1life=23
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Jin-Gitaxias, Core Augur

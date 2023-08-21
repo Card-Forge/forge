@@ -1,6 +1,6 @@
 Name:Reverse the Sands
 ManaCost:6 W W
 Types:Sorcery
-A:SP$ SetLife | Cost$ 6 W W | Defined$ Player | Redistribute$ True | SpellDescription$ Redistribute any number of players' life totals. (Each of those players gets one life total back.)
+A:SP$ SetLife | PlayerChoices$ Player | ChoiceAmount$ Any | ChoicePrompt$ Choose any number of players | Redistribute$ True | SpellDescription$ Redistribute any number of players' life totals. (Each of those players gets one life total back.)
 AI:RemoveDeck:All
 Oracle:Redistribute any number of players' life totals. (Each of those players gets one life total back.)

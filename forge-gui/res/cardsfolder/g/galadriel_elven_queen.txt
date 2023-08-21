@@ -1,0 +1,13 @@
+Name:Galadriel, Elven-Queen
+ManaCost:2 G U
+Types:Legendary Creature Elf Noble
+PT:4/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ ElfEntered | TriggerZones$ Battlefield | Execute$ TrigVote | TriggerDescription$ Will of the council — At the beginning of combat on your turn, if another Elf entered the battlefield under your control this turn, starting with you, each player votes for dominion or guidance. If dominion gets more votes, the Ring tempts you, then you put a +1/+1 counter on your Ring-bearer. If guidance gets more votes or the vote is tied, draw a card.
+SVar:TrigVote:DB$ Vote | Defined$ Player | VoteType$ Dominion,Guidance | VoteDominion$ DBTempt | VoteGuidance$ DBDraw | Tied$ DBDraw
+SVar:DBTempt:DB$ RingTemptsYou | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Card.IsRingbearer+YouCtrl | Mandatory$ True | CounterType$ P1P1 | CounterNum$ 1 
+SVar:DBDraw:DB$ Draw
+SVar:ElfEntered:Count$ThisTurnEntered_Battlefield_Creature.Elf+StrictlyOther+YouCtrl
+DeckNeeds:Type$Elf
+DeckHas:Ability$Counters
+Oracle:Will of the council — At the beginning of combat on your turn, if another Elf entered the battlefield under your control this turn, starting with you, each player votes for dominion or guidance. If dominion gets more votes, the Ring tempts you, then you put a +1/+1 counter on your Ring-bearer. If guidance gets more votes or the vote is tied, draw a card.

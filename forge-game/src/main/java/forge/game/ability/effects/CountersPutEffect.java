@@ -587,11 +587,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (sa.hasParam("TriggeredCounterMap")) {
+            Integer counterMapValue = null;
+            if (sa.hasParam("CounterMapValues")) {
+                counterMapValue = Integer.valueOf(sa.getParam("CounterMapValues"));
+            }
             @SuppressWarnings("unchecked")
             Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa
                     .getTriggeringObject(AbilityKey.CounterMap);
             for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
-                resolvePerType(sa, placer, e.getKey(), e.getValue(), table, false);
+                resolvePerType(sa, placer, e.getKey(), counterMapValue == null ? e.getValue() : counterMapValue, table, false);
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
@@ -668,7 +672,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             final SpellAbility newSa = AbilityFactory.getAbility(trigSA, host);
             newSa.setIntrinsic(intrinsic);
             trig.setOverridingAbility(newSa);
-            trig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+            trig.setSpawningAbility(sa.copy(host, true));
             sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
         }
     }

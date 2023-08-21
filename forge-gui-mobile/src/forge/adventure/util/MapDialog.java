@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -46,6 +45,7 @@ public class MapDialog {
     private Array<DialogData> data;
     private final int parentID;
     private final static float WIDTH = 250f;
+    public String questAccepted = "";
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             //"    \"effect\":[],\n" +
@@ -87,6 +87,13 @@ public class MapDialog {
             }
             this.data = new Array<>();
             this.data.add(prebuiltDialog);
+            ChangeListener listen = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    Current.player().addQuest(questAccepted);
+                }
+            };
+            addQuestAcceptedListener(listen);
         }
         catch (Exception exception)
         {
@@ -166,6 +173,7 @@ public class MapDialog {
                 int vol = FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC);
                 if (vol > 0) {
                     fadeOut();
+                    audio.getRight().setOnCompletionListener(music -> fadeIn());
                     audio.getRight().play();
                 }
             } else {
@@ -194,17 +202,15 @@ public class MapDialog {
         });
         float width;
         if (sprite != null) {
-            if (actor instanceof EnemySprite) {
+            if (actor instanceof EnemySprite && !((EnemySprite) actor).hidden) {
                 String name = actor.getName();
-                TextraLabel label = Controls.newTextraLabel("[%?black outline][ORANGE]" + name);
+                TypingLabel label =  Controls.newTypingLabel("[%?BLACKEN]-" + name + "-");
+                label.skipToTheEnd();
                 D.getTitleTable().add(label).left().expand();
             }
             D.getContentTable().add(new Image(sprite)).width(30).height(30).top();
             width = WIDTH - 30;
         } else {
-            //D.getContentTable().add(Controls.newTextraLabel("[%200][+Agent]")).width(30).height(30).top();
-            /*TextraLabel label = Controls.newTextraLabel("[%?black outline][WHITE] ???");
-            D.getTitleTable().add(label).left().expand();*/
             width = WIDTH;
         }
         D.getContentTable().add(A).width(width); //Add() returns a Cell, which is what the width is being applied to.
@@ -343,6 +349,12 @@ public class MapDialog {
             if (E.setColorIdentity != null && !E.setColorIdentity.isEmpty()) { //Sets color identity (use sparingly)
                 Current.player().setColorIdentity(E.setColorIdentity);
             }
+            if (E.setCharacterFlag != null && !E.setCharacterFlag.key.isEmpty()) { //Set a quest to given value.
+                Current.player().setCharacterFlag(E.setCharacterFlag.key, E.setCharacterFlag.val);
+            }
+            if (E.advanceCharacterFlag != null && !E.advanceCharacterFlag.isEmpty()) { //Increase a given quest flag by 1.
+                Current.player().advanceCharacterFlag(E.advanceCharacterFlag);
+            }
             if (E.setQuestFlag != null && !E.setQuestFlag.key.isEmpty()) { //Set a quest to given value.
                 Current.player().setQuestFlag(E.setQuestFlag.key, E.setQuestFlag.val);
             }
@@ -368,6 +380,7 @@ public class MapDialog {
                 Forge.switchScene(RewardScene.instance());
             }
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
+                questAccepted = E.issueQuest;
                 emitQuestAccepted();
             }
         }
@@ -426,6 +439,23 @@ public class MapDialog {
             if (condition.actorID != 0) { //Check for actor ID.
                 if (!stage.lookForID(condition.actorID)) {
                     if (!condition.not) return false; //Same as above.
+                } else if (condition.not) return false;
+            }
+            if (condition.getCharacterFlag != null) {
+                String key = condition.getCharacterFlag.key;
+                String cond = condition.getCharacterFlag.op;
+                int val = condition.getCharacterFlag.val;
+                int QF = player.getCharacterFlag(key);
+                if (!player.checkCharacterFlag(key)) return false; //If the quest is not ongoing, stop.
+                if (!checkFlagCondition(QF, cond, val)) {
+                    if (!condition.not) return false;
+                } else {
+                    if (condition.not) return false;
+                }
+            }
+            if (condition.checkCharacterFlag != null && !condition.checkCharacterFlag.isEmpty()) {
+                if (!player.checkCharacterFlag(condition.checkCharacterFlag)) {
+                    if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
             if (condition.getQuestFlag != null) {

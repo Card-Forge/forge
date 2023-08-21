@@ -1,0 +1,11 @@
+garruk2.png
+size: 42,42
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 3,0
+  size: 32,32
+Idle 
+  xy: 0,0
+  size: 41, 42

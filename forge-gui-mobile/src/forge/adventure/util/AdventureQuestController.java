@@ -17,8 +17,43 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AdventureQuestController implements Serializable {
+
+    public Map<String, Float> getBoostedSpawns(List<EnemyData> localSpawns) {
+        Map<String,Float> boostedSpawns = new HashMap<>();
+        for (AdventureQuestData q : Current.player().getQuests()){
+            for (AdventureQuestStage c : q.stages){
+                if (c.getStatus().equals(QuestStatus.Active) && c.objective.equals(ObjectiveTypes.Defeat))
+                {
+                    List<String> toBoost = new ArrayList<>();
+                    if (c.mixedEnemies){
+                        for (EnemyData enemy : localSpawns){
+                            List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
+                            for (String targetTag : c.enemyTags) {
+                                if (!candidateTags.contains(targetTag)) {
+                                    continue;
+                                }
+                                toBoost.add(enemy.getName());
+                            }
+                        }
+                    }
+                    else{
+                        toBoost.add(c.getTargetEnemyData().getName());
+                    }
+                    if (!toBoost.isEmpty()) {
+                        float value = 2.0f / toBoost.size();
+                        for (String key : toBoost) {
+                            float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
+                                boostedSpawns.put(key, value + existingValue);
+                        }
+                    }
+                }
+            }
+        }
+        return boostedSpawns;
+    }
 
     public enum ObjectiveTypes{
         None,
@@ -34,6 +69,7 @@ public class AdventureQuestController implements Serializable {
         Find,
         Gather,
         Give,
+        HaveReputation,
         Hunt,
         MapFlag,
         Leave,
@@ -233,6 +269,20 @@ public class AdventureQuestController implements Serializable {
     {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateMapFlag(updatedMapFlag, updatedFlagValue);
+        }
+    }
+
+    public void updateQuestsCharacterFlag(String updatedCharacterFlag, int updatedCharacterFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateCharacterFlag(updatedCharacterFlag, updatedCharacterFlagValue);
+        }
+    }
+
+    public void updateQuestsQuestFlag(String updatedQuestFlag, int updatedQuestFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateQuestFlag(updatedQuestFlag, updatedQuestFlagValue);
         }
     }
 

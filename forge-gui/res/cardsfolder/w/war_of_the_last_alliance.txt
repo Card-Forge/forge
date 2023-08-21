@@ -1,0 +1,9 @@
+Name:War of the Last Alliance
+ManaCost:3 W
+Types:Enchantment Saga
+K:Saga:3:DBSearch,DBSearch,DBPump
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SubAbility$ TrigTempt | SpellDescription$ Creatures you control gain double strike until end of turn.
+SVar:TrigTempt:DB$ RingTemptsYou
+DeckNeeds:Type$Legendary & Type$Creature
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.\nIII — Creatures you control gain double strike until end of turn. The Ring tempts you.

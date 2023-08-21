@@ -1,0 +1,35 @@
+arena.png
+size: 40,80
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Spot
+  xy: 0, 0
+  size: 20, 20      
+Lost 
+  xy: 20, 0
+  size: 20, 20           
+Up
+  xy: 0, 20
+  size: 20, 20      
+UpWin 
+  xy: 20, 20
+  size: 20, 20      
+Side
+  xy: 0, 40
+  size: 20, 20      
+SideWin 
+  xy: 20, 40
+  size: 20, 20 
+Edge
+  xy: 0, 60
+  size: 20, 20      
+EdgeWin 
+  xy: 20, 60
+  size: 20, 20 
+EdgeFlip
+  xy: 0, 60
+  size: 20, 20      
+EdgeWinFlip 
+  xy: 20, 60
+  size: 20, 20 

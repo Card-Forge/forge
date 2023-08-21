@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="152">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt17sJgDAURmErMQMJTiBOZpnOLZxLHMPGoEjQqJF7vZzia3zAf9KI3hWFj+h3YvfPnpegdRcdeVqkzoAOOuiggw466LDbIbGFjrSOP/x/fG2oz0nvS9GuymYTrktvu9qdck17Szj/u+91Crbn6JgUbD92PH1XW8sbf2wZK/kNtNhsmZ3u74iFMw4dllomBTtysdQCAAAAANBnAbhteiQ=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzVWlluwkAM5auQ27SXaL+gVS7TY5ECtyotHKGxwKplOR5vAfGkqBLNeLzlje3ksFosNp18fYxXBmsm712R9z3+70B0+R2vr5V9L74er93420/Cju24/kxkHbu2PNDlSPTx+rGf0YaIPmDPvqED7MHjhevAD5INsGYYr5Mx1hhjaxy8QD9B7g0T9kg2RHwryaoA18eaO9nnD/f2rpmSE7EBwXkHbLHmGKB32K/Z3Hc+3uCY4jSLbtSH2v3b6/N3Vu6zPP9RW7TnheeBZguXnz27vLZo+1HewnVaTlP53tyN2KJxtHQ/3GPNCXqWZc8xC+biVeqnTG4hX1RxZRRRP3G+OCf8jbIq/WDxq8Qrm+4/LtLZrwFzfKpu8Oo/XPVr5RmvMylHon2eXJVqgIg9vGa25gd9xjL171R8Pb7I1syAdcIGAI/v28vl99fx7/L5NjqgHqiD1sNZ5WTWZnXoi84h1CeiC8Y1W09VnXNznZkA5PhHBuWCOfH5NJ9szmdRGafO17NXg3NiVEa2160C2pNZb+17tNrm3vUoAH3R4sa1Ejfs3bN1GMUcNXurRtotL1dlfqJvtBmXF5RTJD3neNak/jsjd2usN/m+0tnv7R/4rCoze+M1r1ab9EZbrbpMzXe89RGX06rV8H6N93qnXz06aJxAzyqLH1p1WKQGprMnzQZrv1lZc3pnKa39vXGugqRXpj7i8797zeEBGX9G5wB0babXo4hyK+dV73paq1TUzJFensfBOuuV1led414dAGtmu4ePpmZC2VlAhBOj71Ok92KZmQjt524Jym80ll6f0Flppq/NIDvLkWK6v3MfFoEU00eFFNPKd9v37LO197wW0Pc/VWdzxCfIfVHei9YlLZle38Lenu8N+H5V/e9A4hqRaf3egKOyl6/4BuwPMBrMXg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNWUtuFDEQbQmUz4LdBCZXyD34SLAJnIEVgtUok4TLsOIAmSicAiV3SFgkp6BLTGmeaqrKVbY74UmtGbnbdn1elcv2MGxws//v9wHarpW2Qbx/t/5//mL7/e9do6OD78o4vaDp8T7Q78teb0k2sPR92zAm63m2HvuD8y377x7aNF9aeKO0MW+iMqAc0XZGRlbEmehXmkfOd7O/3UawYiUC2fe0Yyzclz8JQ8rJtovEEsPivSUn2RjtgfEh5dF8wD6SNvX4M2UussDyLWHuKDclWnJIFFnZMA9g3wfxHn24LPiB843H8dIYjPMOdq/BH6Md84yGEkevnf5oY9Q7k3dK8tUA84jm02yORd3YXr1io3b9YZTkQP96+VXzWQt/NT6y3VkmHl/OjfNivGf85ula4nyUv5Y8WX553yN/fzrfneyMOWp8TndiY00Rdz0wG2v+g/F5KWr/xdonXrx4uVfmb+aAxhNuw9xncUbWgYyLUf7V+FyCHrXxVKp9GcwBfIgPJwonPJ70gLUeRTBT9n1XY9svoz2qixbX2RrNWw8R5DPiwCHITDbRfLRcy0+6LANxXIPSOlN6j7pQLL0CvbRcwuPJOG5d71pB9kceaVzTEOUZxmqPPZNWd6IOzCctNqxxMjFDuA3IlYkjzq8zww9WjJDMmK9pzqwuU4Bkp9gmm0g+aXmQZV4Im3GsaLyx9h+RdZw5WfpW84c276LAJdaj5/4nMxbqIXPw8dEwfDzS+0ldZO5iSL95eB3/dAuSS6jL11GHb4oeP54Pw+dnm7pjDjVIae2q8VfkzIZroRXIz7pptS/pcCl0v6o4C2ZovI/s52VOY/tQzce+kPxCEH9kzYH+iMybWS9r11bUZaU8mrxWbDwGPM6xLtJ3tD7OwVfEsU97vi+Qm5EaPLIHy0CrTZg/2v6Ckak7tPN33INp8RmtgXE8xtyRu4SsfT0bRXEnxjvc3Y5hLe68esja40rUxnMkj1802IX3vC327XU2/tT7CQ0yP2XOojPQ6nIJtHPPuVvR228yJ2EO7HkPVoOnnt9Dy74ig4y/MX6kHFPeqeFcmVq45azLAucMr9bJ3Jf+b/D8WMpTsq91BhuZS9Z1bNOp7u4idwMte8YovBruMe8tEZpMWt6wbMi1mpVrWuLF81v0fH4qaOtLNN+2rMMtubi2b2Zd0vJI9m4ObVvq+xe28dH+
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../obj/enemy.tx" name="Sand Golem" x="468.333" y="324.667">
+   <properties>
+    <property name="enemy" value="Sand Golem"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="459" y="479"/>
+  <object id="53" template="../../obj/enemy.tx" name="Griffin" x="310.583" y="440.917">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="110,82,75,71"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" name="Griffin" x="407.751" y="441.583">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/entry_down.tx" x="352" y="18.6342" width="80" height="16"/>
+  <object id="58" template="../../obj/enemy.tx" name="Griffin" x="322" y="306.917">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" name="Hellion" x="145.802" y="183.221">
+   <properties>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="112,108,109,110,111"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" name="Scorpion" x="561.495" y="298.815">
+   <properties>
+    <property name="enemy" value="Scorpion"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="69,66,68"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" name="Vulture" x="639.495" y="255.815">
+   <properties>
+    <property name="enemy" value="Vulture"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" name="Scorpion" x="54.8411" y="429.189">
+   <properties>
+    <property name="enemy" value="Scorpion"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="80,81,82,83,84"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" name="Vulture" x="689" y="560.5">
+   <properties>
+    <property name="enemy" value="Vulture"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/waypoint.tx" x="626.5" y="390"/>
+  <object id="67" template="../../obj/waypoint.tx" x="781" y="203.5"/>
+  <object id="68" template="../../obj/waypoint.tx" x="769" y="339"/>
+  <object id="69" template="../../obj/waypoint.tx" x="612" y="322.5"/>
+  <object id="71" template="../../obj/waypoint.tx" x="712.5" y="174"/>
+  <object id="72" template="../../obj/waypoint.tx" x="647.5" y="161"/>
+  <object id="73" template="../../obj/waypoint.tx" x="605.5" y="231.5"/>
+  <object id="74" template="../../obj/enemy.tx" name="Scorpion" x="677" y="502">
+   <properties>
+    <property name="enemy" value="Scorpion"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="75,76,75,78,77,78"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/waypoint.tx" x="752" y="512"/>
+  <object id="76" template="../../obj/waypoint.tx" x="752.5" y="579"/>
+  <object id="77" template="../../obj/waypoint.tx" x="597" y="563"/>
+  <object id="78" template="../../obj/waypoint.tx" x="599.5" y="504.5"/>
+  <object id="79" template="../../obj/enemy.tx" name="Hellion" x="371.5" y="630">
+   <properties>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,75,76,77"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/waypoint.tx" x="20" y="431.5"/>
+  <object id="81" template="../../obj/waypoint.tx" x="167" y="436.5"/>
+  <object id="82" template="../../obj/waypoint.tx" x="160" y="614"/>
+  <object id="83" template="../../obj/waypoint.tx" x="1.5" y="602"/>
+  <object id="84" template="../../obj/waypoint.tx" x="24" y="505"/>
+  <object id="85" template="../../obj/enemy.tx" name="Griffin" x="79" y="544">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/enemy.tx" name="Hellion" x="118" y="751.5">
+   <properties>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,75,76,77"/>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/enemy.tx" name="Hellion" x="579.5" y="699.5">
+   <properties>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,75,76,77"/>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/waypoint.tx" x="211" y="749.5"/>
+  <object id="89" template="../../obj/waypoint.tx" x="217.5" y="583.5"/>
+  <object id="90" template="../../obj/waypoint.tx" x="261" y="410.5"/>
+  <object id="91" template="../../obj/waypoint.tx" x="330.5" y="543.5"/>
+  <object id="92" template="../../obj/waypoint.tx" x="340" y="716.5"/>
+  <object id="93" template="../../obj/waypoint.tx" x="505.5" y="602"/>
+  <object id="94" template="../../obj/waypoint.tx" x="488" y="703"/>
+  <object id="95" template="../../obj/waypoint.tx" x="568" y="757.5"/>
+  <object id="96" template="../../obj/waypoint.tx" x="668.5" y="656.5"/>
+  <object id="97" template="../../obj/waypoint.tx" x="744.5" y="671.5"/>
+  <object id="98" template="../../obj/waypoint.tx" x="739.5" y="733.5"/>
+  <object id="99" template="../../obj/manashards.tx" x="530" y="482.5"/>
+  <object id="100" template="../../obj/manashards.tx" x="709.5" y="788"/>
+  <object id="101" template="../../obj/booster.tx" x="445.5" y="781">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="103" template="../../obj/gold.tx" x="75" y="571.5"/>
+  <object id="104" template="../../obj/booster.tx" x="428.5" y="404.167">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/booster.tx" x="482.5" y="431">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="106" template="../../obj/enemy.tx" name="Sand Golem" x="378.5" y="377">
+   <properties>
+    <property name="enemy" value="Sand Golem"/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/waypoint.tx" x="38" y="247.5"/>
+  <object id="109" template="../../obj/waypoint.tx" x="3.5" y="157.5"/>
+  <object id="110" template="../../obj/waypoint.tx" x="123.5" y="105.5"/>
+  <object id="111" template="../../obj/waypoint.tx" x="211.5" y="106.5"/>
+  <object id="112" template="../../obj/waypoint.tx" x="200.5" y="232"/>
+  <object id="113" template="../../obj/enemy.tx" name="Hellion" x="571" y="127">
+   <properties>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="118,115,72,71,67"/>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/waypoint.tx" x="509.5" y="244"/>
+  <object id="115" template="../../obj/waypoint.tx" x="514" y="104.5"/>
+  <object id="116" template="../../obj/waypoint.tx" x="345" y="237"/>
+  <object id="117" template="../../obj/waypoint.tx" x="352.5" y="84"/>
+  <object id="118" template="../../obj/waypoint.tx" x="472" y="85.5"/>
+  <object id="119" template="../../obj/enemy.tx" name="Greater Sandwurm" x="190" y="675">
+   <properties>
+    <property name="enemy" value="Greater Sandwurm"/>
+   </properties>
+  </object>
+  <object id="120" template="../../obj/enemy.tx" name="Greater Sandwurm" x="443" y="732">
+   <properties>
+    <property name="enemy" value="Greater Sandwurm"/>
+   </properties>
+  </object>
+  <object id="121" template="../../obj/enemy.tx" name="Griffin" x="561" y="427">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/collision.tx" x="-2.6505" y="-18" width="803.301" height="16"/>
+  <object id="123" template="../../obj/collision.tx" x="-2.6505" y="801" width="801.301" height="16"/>
+  <object id="124" template="../../obj/collision.tx" x="800.35" y="-17" width="24.301" height="832"/>
+  <object id="125" template="../../obj/collision.tx" x="-26.1505" y="-24" width="24.301" height="832"/>
+  <object id="126" template="../../obj/collision.tx" x="299.85" y="286" width="8.301" height="171"/>
+  <object id="128" template="../../obj/collision.tx" x="309.849" y="443.75" width="22.301" height="13.5"/>
+  <object id="129" template="../../obj/collision.tx" x="330.349" y="446.75" width="22.301" height="13.5"/>
+  <object id="132" template="../../obj/collision.tx" x="383.349" y="510.25" width="22.301" height="44.5"/>
+  <object id="133" template="../../obj/collision.tx" x="392.849" y="544.75" width="47.301" height="23"/>
+  <object id="134" template="../../obj/collision.tx" x="428.849" y="529.75" width="48.301" height="13.5"/>
+  <object id="135" template="../../obj/collision.tx" x="468.349" y="496.75" width="69.301" height="31"/>
+  <object id="137" template="../../obj/collision.tx" x="563.35" y="385.25" width="22.301" height="110.5"/>
+  <object id="139" template="../../obj/collision.tx" x="399.849" y="482.75" width="84.801" height="5.5"/>
+  <object id="140" template="../../obj/collision.tx" x="482.849" y="446.25" width="17.801" height="13.5"/>
+  <object id="141" template="../../obj/collision.tx" x="346.349" y="364.75" width="6.301" height="59.5"/>
+  <object id="142" template="../../obj/collision.tx" x="347.349" y="416.75" width="22.301" height="13.5"/>
+  <object id="143" template="../../obj/collision.tx" x="360.349" y="426.75" width="7.801" height="13.5"/>
+  <object id="144" template="../../obj/collision.tx" x="366.349" y="433.75" width="15.801" height="11"/>
+  <object id="145" template="../../obj/collision.tx" x="377.849" y="441.75" width="4.801" height="26.5"/>
+  <object id="146" template="../../obj/collision.tx" x="384.849" y="468.75" width="14.801" height="13.5"/>
+  <object id="147" template="../../obj/collision.tx" x="376.35" y="319.75" width="6.301" height="43.5"/>
+  <object id="148" template="../../obj/collision.tx" x="297.849" y="279.75" width="70.301" height="4"/>
+  <object id="149" template="../../obj/collision.tx" x="395.849" y="313.75" width="70.301" height="7"/>
+  <object id="150" template="../../obj/collision.tx" x="493.35" y="314.75" width="41.801" height="4"/>
+  <object id="151" template="../../obj/collision.tx" x="399.599" y="378.25" width="84.801" height="5.5"/>
+ </objectgroup>
+</map>

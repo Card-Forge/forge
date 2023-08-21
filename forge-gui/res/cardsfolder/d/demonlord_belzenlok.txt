@@ -5,8 +5,10 @@ PT:6/6
 K:Flying
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, exile cards from the top of your library until you exile a nonland card, then put that card into your hand. If the card's mana value is 4 or greater, repeat this process. CARDNAME deals 1 damage to you for each card put into your hand this way.
-SVar:TrigRepeat:DB$ Repeat | RepeatSubAbility$ DBCleanup | RepeatDefined$ Remembered | RepeatPresent$ Card.cmcGE4 | RepeatCompare$ EQ1
+SVar:TrigRepeat:DB$ Repeat | RepeatSubAbility$ DBCleanup | RepeatDefined$ Remembered | RepeatPresent$ Card.cmcGE4 | RepeatCompare$ EQ1 | SubAbility$ DBDealDamage
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDigUntil
-SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ImprintFound$ True | SubAbility$ DBToHand
+SVar:DBToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Imprinted$Amount | Defined$ You | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
 Oracle:Flying, trample\nWhen Demonlord Belzenlok enters the battlefield, exile cards from the top of your library until you exile a nonland card, then put that card into your hand. If the card's mana value is 4 or greater, repeat this process. Demonlord Belzenlok deals 1 damage to you for each card put into your hand this way.

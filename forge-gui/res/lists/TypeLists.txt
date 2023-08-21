@@ -67,8 +67,10 @@ Cow:Cows
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
+Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
+Dalek:Daleks
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -76,6 +78,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Doctor:Doctors
 Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
@@ -273,6 +276,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
+Time Lord:Time Lords
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -401,6 +405,7 @@ Urza
 Venser
 Vivien
 Vraska
+Vronos
 Will
 Windgrace
 Wrenn
@@ -420,16 +425,18 @@ Arcavios
 Arkhos
 Azgol
 Belenon
-Bolas's Meditation Realm
+Bolas's Meditation Realm
 Capenna
 Cridhe
 Dominaria
+Earth
 Echoir
 Eldraine
 Equilor
 Ergamon
 Fabacin
 Fiora
+Gallifrey
 Gargantikar
 Gobakhan
 Ikoria
@@ -469,6 +476,7 @@ Tarkir
 The Abyss
 The Library
 Theros
+Trenzalore
 Ulgrotha
 Valla
 Vryn

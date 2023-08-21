@@ -113,6 +113,9 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             for (Integer i : this.column(damaged.getKey()).values()) {
                 sum += i;
             }
+            if (sum == 0) {
+                continue;
+            }
 
             int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());
 

@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Instant
 K:Ascend
 A:SP$ Sacrifice | Cost$ 2 B | SacValid$ Creature | Defined$ Player.Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBRepeatEach | SpellDescription$ Each opponent sacrifices a creature. If you have the city's blessing, instead each opponent sacrifices half the creatures they control, rounded up.
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | RepeatSubAbility$ DBSacrifice
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | RepeatSubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Amount$ Y | SacValid$ Creature | Defined$ Remembered
 SVar:X:Count$Blessing.1.0
 SVar:Y:Count$Valid Creature.RememberedPlayerCtrl/HalfUp

@@ -7,7 +7,11 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.item.generation.BoosterGenerator;
+import forge.item.generation.UnOpenedProduct;
+import forge.model.CardBlock;
+import forge.util.Aggregates;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,6 +28,7 @@ public class AdventureEventController implements Serializable {
     public enum EventFormat{
         Draft,
         Sealed,
+        Jumpstart,
         Constructed
     }
 
@@ -72,7 +77,7 @@ public class AdventureEventController implements Serializable {
         object = null;
     }
 
-    public AdventureEventData createEvent(EventFormat format, EventStyle style, String pointID, int eventOrigin, PointOfInterestChanges changes)
+    public AdventureEventData createEvent(EventStyle style, String pointID, int eventOrigin, PointOfInterestChanges changes)
     {
         if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()){
             //No event currently available here
@@ -92,24 +97,24 @@ public class AdventureEventController implements Serializable {
             eventSeed = timeSeed + placeSeed;
         }
 
-        if (new Random(eventSeed).nextInt(10) <=6){
-            //60% chance of new event being available in a given location on a day by day basis.
-            //This is intentionally cumulative with the potential nextEventDate lockout to encourage moving around map
-            return null;
+        Random random = new Random(eventSeed);
+
+        AdventureEventData e ;
+
+        if (random.nextInt(10) <=4){
+            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
+        }
+        else{
+            e = new AdventureEventData(eventSeed, EventFormat.Draft);
         }
 
-        AdventureEventData e = new AdventureEventData(eventSeed);
         if (e.cardBlock == null){
-            //covers cases where (somehow) metaset only editions (like jumpstart) have been picked up
+            //covers cases where (somehow) editions that do not match the event style have been picked up
             return null;
         }
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
-        e.format = format;
-        e.eventRules = new AdventureEventData.AdventureEventRules();
-        e.eventRules.acceptsChallengeCoin = true;
-        e.eventRules.goldToEnter = (int)((changes.getTownPriceModifier() == -1.0f? 1: changes.getTownPriceModifier())* 3000);
-        e.eventRules.shardsToEnter = (int)((changes.getTownPriceModifier() == -1.0f? 1: changes.getTownPriceModifier())* 50);
+        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes.getTownPriceModifier());
         e.style = style;
 
         switch (style){
@@ -134,5 +139,88 @@ public class AdventureEventController implements Serializable {
         output.setName("Booster Pack: " + setCode);
         output.setComment(setCode);
         return output;
+    }
+
+    public List<Deck> getJumpstartBoosters(CardBlock block, int count){
+        //Get all candidates then remove at random until no more than count are included
+        //This will prevent duplicate choices within a round of a Jumpstart draft
+        List<Deck> packsAsDecks = new ArrayList<>();
+        for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
+        {
+            if (!template.getEdition().contains(block.getLandSet().getCode()))
+                continue;
+            UnOpenedProduct toOpen = new UnOpenedProduct(template);
+
+            Deck contents = new Deck();
+            contents.getMain().add(toOpen.get());
+
+            int size = contents.getMain().toFlatList().size();
+
+            if ( size < 18 || size > 25)
+                continue;
+
+            contents.setName(template.getEdition());
+
+            int black = 0;
+            int blue = 0;
+            int green = 0;
+            int red = 0;
+            int white = 0;
+            int multi = 0;
+            int colorless = 0;
+
+            for (PaperCard card: contents.getMain().toFlatList()) {
+                int colors = 0;
+                if (card.getRules().getColorIdentity().hasBlack()) {
+                    black++;
+                    colors++;
+                }
+                if (card.getRules().getColorIdentity().hasBlue()) {
+                    blue++;
+                    colors++;
+                }
+                if (card.getRules().getColorIdentity().hasGreen()) {
+                    green++;
+                    colors++;
+                }
+                if (card.getRules().getColorIdentity().hasRed()) {
+                    red++;
+                    colors++;
+                }
+                if (card.getRules().getColorIdentity().hasWhite()) {
+                    white++;
+                    colors++;
+                }
+                if (colors == 0 && !card.getRules().getType().isLand()) {
+                    colorless++;
+                }
+                else if (colors > 1) {
+                    multi++;
+                }
+            }
+
+            if (multi > 3)
+                contents.getTags().add("multicolor");
+            if (colorless > 3)
+                contents.getTags().add("colorless");
+            if (black > 3)
+                contents.getTags().add("black");
+            if (blue > 3)
+                contents.getTags().add("blue");
+            if (green > 3)
+                contents.getTags().add("green");
+            if (red > 3)
+                contents.getTags().add("red");
+            if (white > 3)
+                contents.getTags().add("white");
+
+            packsAsDecks.add(contents);
+        }
+
+        while (packsAsDecks.size() > count){
+            Aggregates.removeRandom(packsAsDecks);
+        }
+
+        return packsAsDecks;
     }
 }

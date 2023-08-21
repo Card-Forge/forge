@@ -1,0 +1,14 @@
+Name:Gwaihir, Greatest of the Eagles
+ManaCost:4 W
+Types:Legendary Creature Bird Noble
+PT:5/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, target attacking creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ Flying
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained 3 or more life this turn, create a 3/3 white Bird creature token with flying and "Whenever this creature attacks, target attacking creature gains flying until end of turn."
+SVar:TrigToken:DB$ Token | TokenScript$ w_3_3_bird_flying_attacks
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever Gwaihir attacks, target attacking creature gains flying until end of turn.\nAt the beginning of each end step, if you gained 3 or more life this turn, create a 3/3 white Bird creature token with flying and "Whenever this creature attacks, target attacking creature gains flying until end of turn."

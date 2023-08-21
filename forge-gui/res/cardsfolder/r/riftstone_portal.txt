@@ -4,4 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 S:Mode$ Continuous | EffectZone$ Graveyard | Affected$ Land.YouCtrl | AddAbility$ AddMana | Description$ As long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."
 SVar:AddMana:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+SVar:SacMe:2
+SVar:DiscardMe:1
 Oracle:{T}: Add {C}.\nAs long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."

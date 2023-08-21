@@ -1,0 +1,138 @@
+dinosaur_triceratops.png
+size: 512,102
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 236, 38
+  size: 30, 30
+Idle 
+  xy: 0, 4
+  size: 24, 16
+Idle 
+  xy: 32, 4
+  size: 26, 16
+Idle 
+  xy: 64, 4
+  size: 26, 16
+Idle 
+  xy: 96, 4
+  size: 26, 16
+Idle 
+  xy: 128, 4
+  size: 26, 16
+Idle 
+  xy: 160, 4
+  size: 26, 16
+Idle 
+  xy: 192, 4
+  size: 26, 16
+Idle 
+  xy: 224, 4
+  size: 26, 16
+Idle 
+  xy: 256, 4
+  size: 26, 16
+Idle 
+  xy: 288, 4
+  size: 26, 16
+Idle 
+  xy: 320, 4
+  size: 26, 16
+Idle 
+  xy: 352, 4
+  size: 26, 16
+Idle 
+  xy: 384, 4
+  size: 26, 16
+Idle 
+  xy: 416, 4
+  size: 26, 16
+Idle 
+  xy: 448, 4
+  size: 26, 16
+Idle 
+  xy: 480, 4
+  size: 26, 16
+Walk
+  xy: 0, 29
+  size: 26, 16
+Walk
+  xy: 32, 29
+  size: 26, 16
+Walk
+  xy: 64, 29
+  size: 26, 16
+Walk
+  xy: 96, 29
+  size: 26, 16
+Walk
+  xy: 128, 29
+  size: 26, 16
+Walk
+  xy: 160, 29
+  size: 26, 16
+Attack
+  xy: 3, 56
+  size: 26, 17
+Attack
+  xy: 35, 56
+  size: 26, 17
+Attack
+  xy: 67, 56
+  size: 26, 17
+Attack
+  xy: 99, 56
+  size: 26, 17
+Attack
+  xy: 131, 56
+  size: 26, 17
+Death
+  xy: 0, 83
+  size: 32, 17
+Death
+  xy: 32, 83
+  size: 32, 17
+Death
+  xy: 64, 83
+  size: 32, 17
+Death
+  xy:96, 83
+  size: 32, 17
+Death
+  xy: 128, 83
+  size: 32, 17
+Death
+  xy: 160, 83
+  size: 32, 17
+Death
+  xy: 192, 83
+  size: 32, 17
+Death
+  xy: 224, 83
+  size: 32, 17
+Death
+  xy: 256, 83
+  size: 32, 17
+Death
+  xy:288, 83
+  size: 32, 17
+Death
+  xy: 320, 83
+  size: 32, 17
+Death
+  xy: 352, 83
+  size: 32, 17
+Death
+  xy: 384, 83
+  size: 32, 17
+Death
+  xy: 416, 83
+  size: 32, 17
+Death
+  xy: 448, 83
+  size: 32, 17
+Death
+  xy: 480, 83
+  size: 32, 17
+  

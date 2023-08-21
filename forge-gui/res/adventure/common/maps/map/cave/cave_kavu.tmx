@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Kavu Lair&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyr42RgqBvk+L0AfkyOmenCEEzIrtuiCBoZw+QtgewqMdzm4bIXXW0l0AxrUVS7LZHsA7FhatDtJNVedFyBxW50vSA16HZSai+y3aToJyV+SdVHTBohx7+0ziOk2vtAFILxmXlDFIEpCStkc2Bm4TIXm1piMSs7Kj+TDdMMXGaTay/IThDOYUPF2My0AWJbqNmwfAbi25HhVxBGtxM53pHtLBfDXq6ViiHcQ820B7L3pij2shpWntEq3SOHLSX1Ayl208p8fJic9IKMAQJUJsw=
+  </data>
+ </layer>
+ <layer id="3" name="Decoration" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuMAMHuqbWcuLXbwRhzgImEHl6rGoiSLRfkYS1VNLLyXgGxA70SAu6AFuAnETJ/3sswbi+xwMDPJcDAwKXPSzl1T7HgHd+JgDvxpfIs26iEVsNRaznwLjoQFHXPwg0i5SAMiPMlwQf8rSKC5M0OxDtmsaljyjhsSmVn6uB4apMe/AlQ/YwHQ6lBcPgGH9kEAapjZggdJyFKYnAAk1FfE=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlGEOgjAMheu/7TzeAYn3NCB6Gg/gH6NyDFmwsSyv5IEukeT9ANZ9r1vbKopUf64uiJwcncP6PVGsZd2H90PAusV1Xuo4xuZrdxmrGfSMUx0dL3si3zpi3zbHxOxB7AOwvbUe18a1meb2UbaeB8NEXOaMEJvleWeF7rqUcjaTs9cHthfYumZz7t51h/zpP9Y/Ou/keSsfD5rHRXx/2n9sXSu7nZkNaH5oTuppSa4eX+XNB8/TklyZO9jI+DTAj51nv2Ci++/NtxIstoZLKvXZVb7nvgDW++rX
+  </data>
+ </layer>
+ <layer id="6" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="285" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="339.917" y="92.4167">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.8,
+  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/gold.tx" x="265.167" y="158.083"/>
+  <object id="62" template="../../obj/gold.tx" x="193.167" y="39.75"/>
+  <object id="68" template="../../obj/gold.tx" x="361.834" y="66.4167">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 550,
+    &quot;addMaxCount&quot;: 200
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="39.4167" y="64.6667"/>
+  <object id="56" template="../../obj/enemy.tx" x="177.5" y="201.5">
+   <properties>
+    <property name="enemy" value="Kavu"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="71,78,71,72,73,72"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="333.318" y="210.697">
+   <properties>
+    <property name="enemy" value="Kavu"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,78,71,78,79"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="123.167" y="88.25">
+   <properties>
+    <property name="enemy" value="Kavu"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="74,75,77,76,77,75,74"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="278.167" y="53.5833">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Coveted Jewel&quot; ]
+ &quot;opponent&quot;: {
+   &quot;startBattleWithCard&quot;: [ &quot;Jungle Barrier&quot; ]
+ }
+}</property>
+    <property name="enemy" value="Kavu"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" x="47.5332" y="84.5411">
+   <properties>
+    <property name="enemy" value="Kavu"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/scroll.tx" x="104.667" y="141">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coastal Drake&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/scroll.tx" x="336.333" y="58.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coveted Jewel&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/manashards.tx" x="350.486" y="220.639"/>
+  <object id="70" template="../../obj/manashards.tx" x="59.1422" y="135.158"/>
+  <object id="71" template="../../obj/waypoint.tx" x="272" y="208"/>
+  <object id="72" template="../../obj/waypoint.tx" x="148.172" y="200.525"/>
+  <object id="73" template="../../obj/waypoint.tx" x="95.5233" y="170.06"/>
+  <object id="74" template="../../obj/waypoint.tx" x="62.3958" y="93.157"/>
+  <object id="75" template="../../obj/waypoint.tx" x="158.525" y="91.0866"/>
+  <object id="76" template="../../obj/waypoint.tx" x="269.147" y="44.3532"/>
+  <object id="77" template="../../obj/waypoint.tx" x="187.511" y="47.0152"/>
+  <object id="78" template="../../obj/waypoint.tx" x="310.26" y="230.399"/>
+  <object id="79" template="../../obj/waypoint.tx" x="372.078" y="188.103"/>
+  <object id="80" template="../../obj/gold.tx" x="382.431" y="157.046"/>
+  <object id="81" template="../../obj/manashards.tx" x="374.445" y="170.356"/>
+ </objectgroup>
+</map>

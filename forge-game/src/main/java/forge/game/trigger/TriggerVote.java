@@ -31,11 +31,11 @@ import forge.util.collect.FCollection;
 
 /**
  * <p>
- * Trigger_Untaps class.
+ * Trigger_Vote class.
  * </p>
  * 
  * @author Forge
- * @version $Id: TriggerUntaps.java 24769 2014-02-09 13:56:04Z Hellfish $
+ * @version $Id: TriggerVote.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class TriggerVote extends Trigger {
 
@@ -66,25 +66,47 @@ public class TriggerVote extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
-        FCollection<Player> voters = getVoters(
+        FCollection<Player> oppVotedDiff = getVoters(
             this.getHostCard().getController(),
             (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
-            true,
-            true
+            true, true
         );
-        sa.setTriggeringObject(AbilityKey.OtherVoters, voters);
+        sa.setTriggeringObject(AbilityKey.OpponentVotedDiff, oppVotedDiff);
+
+        FCollection<Player> oppVotedSame = getVoters(
+                this.getHostCard().getController(),
+                (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
+                true, false
+        );
+        sa.setTriggeringObject(AbilityKey.OpponentVotedSame, oppVotedSame);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblVoters")).append(": ").append(sa.getTriggeringObject(AbilityKey.OtherVoters));
+        if (hasParam("List")) {
+            final String l = getParam("List");
+            if (l.contains("OppVotedSame")) {
+                final String ovs = sa.getTriggeringObject(AbilityKey.OpponentVotedSame).toString();
+                sb.append(Localizer.getInstance().getMessage("lblOppVotedSame")).append(": ");
+                sb.append(!ovs.equals("[]") ? ovs.substring(1, ovs.length() - 1)
+                        : Localizer.getInstance().getMessage("lblNone"));
+            }
+            if (l.contains("OppVotedDiff")) {
+                if (sb.length() > 0) {
+                    sb.append("] [");
+                }
+                final String ovd = sa.getTriggeringObject(AbilityKey.OpponentVotedDiff).toString();
+                sb.append(Localizer.getInstance().getMessage("lblOppVotedDiff")).append(": ");
+                sb.append(!ovd.equals("[]") ? ovd.substring(1, ovd.length() - 1)
+                        : Localizer.getInstance().getMessage("lblNone"));
+            }
+        }
         return sb.toString();
     }
 
-    private static FCollection<Player> getVoters(final Player player,
-            final ListMultimap<Object, Player> votes,
-            final boolean isOpponent, final boolean votedOtherchoice) {
+    private static FCollection<Player> getVoters (final Player player, final ListMultimap<Object, Player> votes,
+                                                  final boolean isOpponent, final boolean votedOtherchoice) {
         final FCollection<Player> voters = new FCollection<>();
         for (final Object voteType : votes.keySet()) {
             final List<Player> players = votes.get(voteType);

@@ -2,7 +2,7 @@ Name:Danitha, Benalia's Hope
 ManaCost:4 W
 Types:Legendary Creature Human Knight
 PT:4/4
-K:First strike
+K:First Strike
 K:Vigilance
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to NICKNAME.

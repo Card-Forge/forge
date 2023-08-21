@@ -1,0 +1,68 @@
+buildingsbosses.png
+size: 448,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+Xira 
+  xy: 98, 2
+  size: 52, 48
+Slimefoot 
+  xy: 48, 1
+  size: 45, 42  
+Grolnok 
+  xy: 2, 1
+  size: 40, 43
+Garruk 
+  xy: 154, 18
+  size: 54, 29   
+Zedruu 
+  xy: 1, 58
+  size: 57, 42
+Nahiri 
+  xy: 202,61
+  size: 30, 37
+Tibalt 
+  xy: 329,51
+  size: 64, 48
+Kiora 
+  xy: 210,3
+  size: 59, 46
+SlimeCave 
+  xy: 108,118
+  size: 34, 36
+CatLair
+  xy: 103,226
+  size: 45, 25
+WhiteCastle
+  xy: 57,212
+  size: 33, 42
+MageTower
+  xy: 156,210
+  size: 26, 49
+Skep
+  xy: 110,281
+  size: 37, 33
+MageTowerBlue
+  xy: 2,327
+  size: 32, 32
+MageTowerRed
+  xy: 36,328
+  size: 32, 32
+MageTowerBlack
+  xy: 63,328
+  size: 32, 32
+MageTowerGreen
+  xy: 92,328
+  size: 32, 32
+MageTowerWhite
+  xy: 121,328
+  size: 32, 32
+LavaForge
+  xy: 149,169
+  size: 32, 32
+FortBlue
+  xy: 216,170
+  size: 42, 46
+FortGreen
+  xy: 155,267
+  size: 46,44

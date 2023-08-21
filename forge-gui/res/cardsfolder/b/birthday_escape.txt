@@ -1,0 +1,6 @@
+Name:Birthday Escape
+ManaCost:U
+Types:Sorcery
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigTempt | StackDescription$ SpellDescription | SpellDescription$ Draw a card. The Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:Draw a card. The Ring tempts you.

@@ -12,5 +12,5 @@ ALTERNATE
 Name:Explosive Crystal
 ManaCost:4 R
 Types:Sorcery Adventure
-A:SP$ DealDamage | ValidTgts$ Any to distribute damage to | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
 Oracle:Explosive Crystal deals 4 damage divided as you choose among any number of targets.

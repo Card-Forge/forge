@@ -1,0 +1,10 @@
+Name:Rangers of Ithilien
+ManaCost:2 U U
+Types:Creature Human Ranger
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of up to one target creature with lesser power for as long as you control CARDNAME. Then the Ring tempts you.
+SVar:TrigChange:DB$ GainControl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | ValidTgts$ Creature.powerLTZ | SubAbility$ TrigTempt | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of up to one target creature with lesser power for as long as you control CARDNAME. Then the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+SVar:Z:Count$CardPower
+Oracle:Vigilance\nWhen Rangers of Ithilien enters the battlefield, gain control of up to one target creature with lesser power for as long as you control Rangers of Ithilien. Then the Ring tempts you.

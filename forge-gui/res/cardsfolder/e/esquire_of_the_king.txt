@@ -1,0 +1,9 @@
+Name:Esquire of the King
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+A:AB$ PumpAll | NumAtt$ +1 | NumDef$ +1 | Cost$ 4 W T | ValidCards$ Creature.YouCtrl | ReduceCost$ X | SpellDescription$ Creatures you control get +1/+1 until end of turn. This ability costs {2} less to activate if you control a legendary creature.
+SVar:X:Count$Compare Y GE1.2.0
+SVar:Y:Count$Valid Creature.Legendary+YouCtrl
+DeckHints:Type$Legendary & Type$Creature
+Oracle:{4}{W}, {T}: Creatures you control get +1/+1 until end of turn. This ability costs {2} less to activate if you control a legendary creature.

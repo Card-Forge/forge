@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKwCAMBVAHt17YS3nHDl2kaBpj8j+UDB/EwWcSsV2ltExmM70+YZhjIs7V7Hm5Um3e7leNUiyzmXlo1xqWK9mRJtNd2eniXMabHvcRnrbnJ/ex/smrteRYTY85nJqaPrwtb3d2PqLeHTei1wwX/a6QffxTbui3Dvk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztktsKgCAMQJf2kP5SZv1oF/rR2jBBAjHw8tIODK1kx7YBMMz/uAaATrX3rug8It73nUrdkfIsGsBizBigXPg9fduVO0fv/HMu9K9bIuzjE7g3uE463ztiDon5+oSbnCV8Ib7WLZ1EqtZU5xrzfn7ocWzec6Aep/pbw+vdJpgxEayyUn8ZhmEYpiY3QUoujg==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlV8OgjAMxvfmOBhqdlHwzymMykFQ5N0LuEaa1Fpcx9AX9yVfptH215WtGJM1psoacyuMqYcVvLHfYdC8zn9fMnekjlqIiWX2JC/m7AWuZKxFy8c9avOHvCp03HImHnqdwN36Hlz8urNP42dY0Xs7LxeYV78eA/GtwMdYjZzA1Kgp3uvWPlteN8YdAvEN+b0dngHEa3tMVUbWCzqR/0+JBzl2Js4ROfDuT9mvI/MCzXVfjMfGnGUq6Xx2ijx0zk3hUj5n4+zjd6ticzSFC+LvAtr/T++MVC7f81gN/XDnca5p736IvbOvlmpJ3aNGvK8x8y1FvAe/YGZlZf23HqwlfII=
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENwCAQBMHtAlpA//33AtU4cIgtET7STnTBZQuSKmgJPfetuk47/bW1c20zYMW7Y0CO7599JUk3ewCmfgdy
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../obj/enemy.tx" gid="2147495067" x="208" y="224">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}&quot;,
+  &quot;options&quot;:[
+    {
+	  &quot;name&quot;:&quot;Why am I here&quot;,      
+	  &quot;condition&quot;:[ { &quot;checkQuestFlag&quot;: &quot;mainQuest&quot; ,&quot;not&quot;:true} ],    
+	  &quot;text&quot;:&quot;This... is Shandalar. A plane where mana is so prevalent and used by all that is sentient. Even the common people use spells daily.&quot;,
+	  &quot;voiceFile&quot;:&quot;audio/WizPAR1.mp3&quot;,
+	  &quot;options&quot;:[
+		{      
+		  &quot;name&quot;:&quot;Continue&quot;,
+		  &quot;text&quot;:&quot;Like you, some planeswalkers have been imprisoned here by the guardians in the castles. You must defeat them in battle to release us from this plane. Use your powers of magic to challenge them.&quot;,
+		  &quot;voiceFile&quot;:&quot;audio/WizPAR2.mp3&quot;
+		  &quot;options&quot;:[
+			{
+			  &quot;name&quot;:&quot;Continue&quot;,
+				&quot;text&quot;:&quot;Find the planeswalkers trapped here. Guide them to me, they will help you on your journey.&quot;,
+				&quot;voiceFile&quot;:&quot;audio/WizPAR3.mp3&quot;,
+				&quot;options&quot;:[
+				{
+					&quot;name&quot;:&quot;Continue&quot;,
+					&quot;text&quot;:&quot;Take this rune. You can use it anytime to return here. Be careful, planeswalker.&quot;,
+					&quot;action&quot;:[{&quot;addItem&quot;:&quot;Colorless rune&quot;}],
+					&quot;voiceFile&quot;:&quot;audio/WizPAR4.mp3&quot;
+					&quot;options&quot;:[
+					{
+						&quot;name&quot;:&quot;Continue&quot;,
+  						&quot;text&quot;:&quot;I have something else for you, {var=player_name}. Take these coins, but do not spend them with merchants.&quot;,
+  						&quot;condition&quot;:[{ &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot; ,&quot;not&quot;:true} ],    
+  						&quot;options&quot;:[{
+							&quot;action&quot;: [{&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 2, &quot;itemName&quot;: &quot;Silver Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 3, &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;}]}, {&quot;setCharacterFlag&quot;: {&quot;key&quot;:&quot;freeChallengeCoins&quot;, &quot;val&quot;: 1}}],
+							&quot;name&quot;:&quot;What are they, then? What are they for?&quot;,
+							&quot;text&quot;:&quot;These are Challenge Coins. Spellcasters of Shandalar will often gather to hold tests of skill. These coins will grant you entry to contests, and the prizes available can help you on your journey.&quot;,
+							&quot;options&quot;:[{&quot;name&quot;:&quot;Where are these contests?&quot;,
+								&quot;text&quot;: &quot;Show the coin to innkeepers. If there is a group in the town, the innkeeper will direct you to them.&quot;,
+								&quot;options&quot;:[{ 
+									&quot;name&quot;:&quot;Thank you&quot;,
+									&quot;text&quot;:&quot;I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.&quot;,
+									&quot;options&quot;:[
+									{
+										&quot;name&quot;:&quot;(Leave)&quot;,
+										&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;mainQuest&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 78}]
+									}]
+								}]
+							}]
+						}]
+					},
+					{ 
+						&quot;name&quot;:&quot;Thank you&quot;,
+						&quot;text&quot;:&quot;I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.&quot;,
+						&quot;condition&quot;:[{ &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot;} ],  
+						&quot;options&quot;:[
+						{
+							&quot;name&quot;:&quot;(Leave)&quot;,
+							&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;mainQuest&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 78}]
+						}]
+					}]
+				}]
+			}]
+		} 
+	  ]
+	},
+    { &quot;name&quot;:&quot;Bye&quot; }
+  ]
+},
+{
+  &quot;text&quot;:&quot;{var=player_name}, I have something else for you. Take these coins, but do not spend them with merchants.&quot;,
+  &quot;condition&quot;:[ { &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;}, { &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot; ,&quot;not&quot;:true} ],    
+  &quot;options&quot;:[{
+
+	&quot;action&quot;: [{&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 2, &quot;itemName&quot;: &quot;Silver Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 3, &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;}]}, {&quot;setCharacterFlag&quot;: {&quot;key&quot;:&quot;freeChallengeCoins&quot;, &quot;val&quot;: 1}}],
+
+	&quot;name&quot;:&quot;What are they, then? What are they for?&quot;,
+	&quot;text&quot;:&quot;These are Challenge Coins. Spellcasters of Shandalar will often gather to hold tests of skill. These coins will grant you entry to contests, and the prizes available can help you on your journey.&quot;,
+	&quot;options&quot;:[{&quot;name&quot;:&quot;Where are these contests?&quot;,
+		&quot;text&quot;: &quot;Show the coin to innkeepers. If there is a group in the town, the innkeeper will direct you to them.&quot;,
+		&quot;options&quot;:[{&quot;name&quot;:&quot;Thank you. (Leave)&quot;}]
+	}]
+  }]
+}]</property>
+    <property name="enemy" value="Adept Black Wizard"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/entry_down.tx" x="192" y="160">
+   <properties>
+    <property name="noExit" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/portal.tx" x="192" y="144">
+   <properties>
+    <property name="activeQuestFlag" value="mainQuest"/>
+    <property name="portalState" value="closed"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -325,6 +325,15 @@ public abstract class TapAiBase extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
+        final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
+
+        if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
+            // canPlayAI (sa activated by ai)
+            Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+            sa.setTargetingPlayer(targetingPlayer);
+            sa.getTargets().clear();
+            return targetingPlayer.getController().chooseTargetsFor(sa);
+        }
 
         boolean randomReturn = true;
 

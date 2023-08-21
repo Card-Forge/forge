@@ -1,0 +1,221 @@
+{
+  "screenWidth": 480,
+  "screenHeight": 270,
+  "skin": "skin/ui_skin.json",
+  "playerBaseSpeed": 32,
+  "minDeckSize": 40,         
+  "colorIds":["W","U","B","R","G"],  
+  "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
+  "restrictedCards": [
+    "Black Lotus",
+    "Mox Emerald",
+    "Mox Pearl",
+    "Mox Ruby",
+    "Mox Sapphire",
+    "Mox Jet",
+    "Ancestral Recall",
+    "Timetwister",
+    "Time Walk",
+    "Command Tower",
+    "Arcane Signet",
+    "Opal Palace",
+    "Path of Ancestry",
+    "War Room",
+    "Commander's Plate",
+    "Campfire",
+    "Cloudkill",
+    "Command Beacon",
+    "Commander's Insignia",
+    "Forge of Heroes",
+    "Imposing Grandeur",
+    "Jeweled Lotus",
+    "Myth Unbound",
+    "Netherborn Altar",
+    "Sanctum of Eternity",
+    "Stinging Study",
+    "Study Hall",
+    "Witch's Clinic",
+    "Time Vault"
+  ],
+  "restrictedEditions": [
+    "HTR",
+    "HTR17",
+    "HTR18",
+    "HTR19",
+    "HTR20",
+    "PCEL",
+    "DS0",
+    "HHO",
+    "CMB1",
+    "UNF",
+    "UGL",
+    "UNH",
+    "UND",
+    "PUST",
+    "UST"
+  ],
+  "difficulties": [
+    {
+      "name": "Easy",
+      "startingLife": 16,
+      "startingShards": 5,
+      "staringMoney": 500,
+      "enemyLifeFactor": 0.8,
+      "spawnRank": 0,          
+      "goldLoss": 0.02,          
+      "lifeLoss": 0.1,
+      "rewardMaxFactor" : 1.5,
+      "sellFactor": 0.6,  
+      "shardSellRatio": 0.95,
+      "starterDecks": {
+        "W":"decks/starter/white_e.json",
+        "B":"decks/starter/black_e.json",
+        "U":"decks/starter/blue_e.json",
+        "R":"decks/starter/red_e.json",
+        "G":"decks/starter/green_e.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low White.dck",
+        "B":"decks/starter/Adventure - Low Black.dck",
+        "U":"decks/starter/Adventure - Low Blue.dck",
+        "R":"decks/starter/Adventure - Low Red.dck",
+        "G":"decks/starter/Adventure - Low Green.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_e.json",
+        "B":"decks/starter/pile_black_e.json",
+        "U":"decks/starter/pile_blue_e.json",
+        "R":"decks/starter/pile_red_e.json",
+        "G":"decks/starter/pile_green_e.json"
+      },
+      "startItems": [
+        "Manasight Amulet",
+        "Leather Boots"
+      ]
+    },{
+      "name": "Normal",
+      "startingLife": 12,
+      "startingShards": 2,
+      "staringMoney": 250,
+      "startingDifficulty": true,
+      "enemyLifeFactor": 1.0,
+      "rewardMaxFactor" : 1.0,
+      "spawnRank": 1,                   
+      "goldLoss": 0.1,             
+      "lifeLoss": 0.2,  
+      "sellFactor": 0.5,      
+      "shardSellRatio": 0.8,
+      "starterDecks": {
+        "W":"decks/starter/white_n.json",
+        "B":"decks/starter/black_n.json",
+        "U":"decks/starter/blue_n.json",
+        "R":"decks/starter/red_n.json",
+        "G":"decks/starter/green_n.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low Azorius.dck",
+        "B":"decks/starter/Adventure - Low Rakdos.dck",
+        "U":"decks/starter/Adventure - Low Dimir.dck",
+        "R":"decks/starter/Adventure - Low Gruul.dck",
+        "G":"decks/starter/Adventure - Low Selesnya.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_n.json",
+        "B":"decks/starter/pile_black_n.json",
+        "U":"decks/starter/pile_blue_n.json",
+        "R":"decks/starter/pile_red_n.json",
+        "G":"decks/starter/pile_green_n.json"
+      },
+      "startItems": [
+        "Leather Boots"
+      ]
+    },{
+      "name": "Hard",
+      "startingLife": 8,
+      "startingShards": 0,
+      "staringMoney": 125,
+      "enemyLifeFactor": 1.5,
+      "rewardMaxFactor" : 0.5,
+      "spawnRank": 2,         
+      "goldLoss": 0.3,
+      "lifeLoss": 0.3,  
+      "sellFactor": 0.25,
+      "shardSellRatio": 0.6,
+      "starterDecks": {
+        "W":"decks/starter/white_h.json",
+        "B":"decks/starter/black_h.json",
+        "U":"decks/starter/blue_h.json",
+        "R":"decks/starter/red_h.json",
+        "G":"decks/starter/green_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low Orzhov.dck",
+        "B":"decks/starter/Adventure - Low Golgari.dck",
+        "U":"decks/starter/Adventure - Low Izzet.dck",
+        "R":"decks/starter/Adventure - Low Boros.dck",
+        "G":"decks/starter/Adventure - Low Simic.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_h.json",
+        "B":"decks/starter/pile_black_h.json",
+        "U":"decks/starter/pile_blue_h.json",
+        "R":"decks/starter/pile_red_h.json",
+        "G":"decks/starter/pile_green_h.json"
+      }
+    },{
+      "name": "Insane",
+      "startingLife": 7,
+      "startingShards": 0,
+      "staringMoney": 0,
+      "enemyLifeFactor": 2.5,
+      "rewardMaxFactor" : 0.0,
+      "spawnRank": 2,
+      "goldLoss": 0.5,
+      "lifeLoss": 0.3,
+      "sellFactor": 0.05,
+      "shardSellRatio": 0.3,
+      "starterDecks": {
+        "W":"decks/starter/white_h.json",
+        "B":"decks/starter/black_h.json",
+        "U":"decks/starter/blue_h.json",
+        "R":"decks/starter/red_h.json",
+        "G":"decks/starter/green_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low Orzhov.dck",
+        "B":"decks/starter/Adventure - Low Golgari.dck",
+        "U":"decks/starter/Adventure - Low Izzet.dck",
+        "R":"decks/starter/Adventure - Low Boros.dck",
+        "G":"decks/starter/Adventure - Low Simic.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_h.json",
+        "B":"decks/starter/pile_black_h.json",
+        "U":"decks/starter/pile_blue_h.json",
+        "R":"decks/starter/pile_red_h.json",
+        "G":"decks/starter/pile_green_h.json"
+      }
+    }
+  ],
+  "starterEditions": [
+	"JMP",
+	"DMU",
+	"BRO",
+	"J22",
+	"ONE",
+	"MOM",
+	"LTR",
+	"(All)"
+  ],
+  "starterEditionNames": [
+	"Jumpstart",
+	"Dominaria United",
+	"Brother's War",
+	"Jumpstart 22",
+	"Phyrexia: ONE",
+	"March of the Machine",
+	"Lord of the Rings",
+	"(All)"
+	]
+}
+

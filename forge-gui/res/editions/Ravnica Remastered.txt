@@ -1,0 +1,11 @@
+[metadata]
+Code=RVR
+Date=2024-03-01
+Name=Ravnica Remastered
+Type=Reprint
+ScryfallCode=RVR
+
+[cards]
+331 R Arclight Phoenix @Slawomir Maniak
+335 R Krenko, Mob Boss @Karl Kopinski
+404 R Hallowed Fountain @Rob Alexander

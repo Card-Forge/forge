@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="59">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Crawlspace|C13|1&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxby8LAsHYUo+CZnBA80O5AxkwiEDxQ9lLLbnMuCCbVv5TGRxIHBBPrV2r5WZUdgXGpaRVkYGgThNjXIkgdu4mxV1mIgUFFCGKXEpQGuUUNyJ7GCcHk2onPXlUhiH83sCPwQaDYLE7a2gsyX0MINX41kPxKjr3JHBCMT91tUQYGdSFU/4LC2JiLPHtB+BMDBONT0y6IiF8Q1hSCuIXSNE0MRg5jNTrai+4Gets5VDAAVFFBAg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztk1EOgjAMQOs3Gx5gcBa9hUS8hp/iWfQWCB5Lv23jltU6owPcjzZ5YWnGHi1doQCKPz9HrQFOyrPWabwlsssAGmSPtInc5DV2fVav3bwvU3wXebnHuWfw6Ozw6WKKnpT2PMNy5Lzq5z082hEzweuQXn5uF/DyMBFOYmPfI0/P8ivtz6zsOp/7HO3f5vc1zWQf6Q39S5c/IEfl51yGuwOxTt5T6SUWWOdSzNqY3kouOuwN9abJPEPrfFfvt5F3JhXVh30eyg19sWgW
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBh8gJEETGt7iXEXrezGZg+17MdnLjY+Ln2U2DuRD7s5+OylBsBnFiMWddSyG2bOV14GBmkezLBGdwM17G1DMkeWB2EvvjDuoNDO3wyo9oDsRQYdDJh+hOFfZNgHM7+Wm4FhDx57QWA9GwPDBiS8kY30cEYPP/QwBeF6boh7qFmGIevBFpcgvJcHNQzQw5mVRvbSoswm1V5aAJi96O6hpZ3o9tICAADo2BAb
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="101.474" y="271.026" width="21.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/gold.tx" x="345" y="186"/>
+  <object id="56" template="../../obj/gold.tx" x="182.5" y="184">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="337.421" y="158.395">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="86" y="185.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 40,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Ensnaring Bridge|2XM|1&quot; ]
+}</property>
+    <property name="enemy" value="Archmage"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/enemy.tx" gid="11419" x="183.579" y="127.263">
+   <properties>
+    <property name="enemy" value="Symbiote"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" gid="11419" x="210.079" y="173.263">
+   <properties>
+    <property name="enemy" value="Merfolk Avatar"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="104.079" y="123.763">
+   <properties>
+    <property name="enemy" value="Adept Blue Wizard"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="104.184" y="214.079">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/manashards.tx" x="105" y="91.6667"/>
+ </objectgroup>
+</map>

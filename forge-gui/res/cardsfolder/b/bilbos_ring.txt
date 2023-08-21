@@ -1,0 +1,12 @@
+Name:Bilbo's Ring
+ManaCost:3
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creature has hexproof and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Secondary$ True | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creature has hexproof and can't be blocked.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks alone, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+K:Equip:4
+K:Equip:1:Halfling.YouCtrl:Halfling you control
+DeckHints:Type$Halfling
+Oracle:As long as it's your turn, equipped creature has hexproof and can't be blocked.\nWhenever equipped creature attacks alone, you draw a card and you lose 1 life.\nEquip Halfling {1} ({1}: Attach to target Halfling you control. Equip only as a sorcery.)\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

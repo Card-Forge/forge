@@ -206,11 +206,6 @@ public class HumanPlaySpellAbility {
                 game.getStack().addAndUnfreeze(ability);
             }
 
-            // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
-            // Triggers haven't resolved yet ??
-            if (mayChooseTargets && !ability.hasParam("TargetsAtRandom")) {
-                ability.clearTargets();
-            }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }

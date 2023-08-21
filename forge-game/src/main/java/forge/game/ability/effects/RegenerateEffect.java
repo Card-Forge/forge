@@ -1,10 +1,12 @@
 package forge.game.ability.effects;
 
-import java.util.Iterator;
 import java.util.List;
 
+import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 
 public class RegenerateEffect extends RegenerateBaseEffect {
 
@@ -15,26 +17,13 @@ public class RegenerateEffect extends RegenerateBaseEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final List<Card> tgtCards = getTargetCards(sa);
+        final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
-        if (tgtCards.size() > 0) {
+        if (!tgtCards.isEmpty()) {
             sb.append("Regenerate ");
-
-            final Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                final Card tgtC = it.next();
-                if (tgtC.isFaceDown()) {
-                    sb.append("Morph");
-                } else {
-                    sb.append(tgtC);
-                }
-
-                if (it.hasNext()) {
-                    sb.append(", ");
-                }
-            }
+            sb.append(Lang.joinHomogenous(tgtCards));
+            sb.append(".");
         }
-        sb.append(".");
 
         return sb.toString();
     }
@@ -45,8 +34,26 @@ public class RegenerateEffect extends RegenerateBaseEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final Game game = sa.getHostCard().getGame();
+        CardCollection result = new CardCollection();
+
+        for (Card c : getDefinedCardsOrTargeted(sa)) {
+            if (!c.isInPlay()) {
+                continue;
+            }
+
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(c, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !c.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
+            result.add(gameCard);
+        }
         // create Effect for Regeneration
-        createRegenerationEffect(sa, getDefinedCardsOrTargeted(sa));
+        createRegenerationEffect(sa, result);
     }
 
 }

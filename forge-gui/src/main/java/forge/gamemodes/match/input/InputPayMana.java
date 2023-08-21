@@ -364,6 +364,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     if (restrictionsMet) {
                         player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
                     }
+                    if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
+                        // force refresh in case too much mana got spent
+                        updateButtons();
+                        canPayManaCost = null;
+                    }
                     onManaAbilityPaid();
                 }
                 // Need to call this to unlock

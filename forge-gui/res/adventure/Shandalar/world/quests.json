@@ -254,7 +254,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "2",
 										"POIReference": ""
 									}
 								],
@@ -280,7 +280,7 @@
 						"setMapFlag": {
 							"key": ""
 						},
-						"issueQuest": "1",
+						"issueQuest": "2",
 						"POIReference": ""
 					}
 				],
@@ -323,6 +323,23 @@
 							{
 								"name": "(Break down the door)",
 								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
 								"options": [
 									{
 										"name": "You mutter to yourself. \"Not worth a scene I suppose.\" (Complete Quest)"
@@ -493,7 +510,7 @@
 				},
 				"issueQuest": "",
 				"addMapReputation": -5,
-				"POIReference": "$(poi_4)"
+				"POIReference": "$(poi_1)"
 			}
 		],
 		"text": "Not every venture is meant to succeed. In this case, two have failed: A business venture and an adventure. (-5 local reputation)",
@@ -717,7 +734,7 @@
 						"setMapFlag": {
 							"key": ""
 						},
-						"issueQuest": "1",
+						"issueQuest": "4",
 						"POIReference": "$(poi_1)"
 					}
 				],
@@ -742,7 +759,7 @@
 					}
 				],
 				"name": "\"I have better things to do right now.\" (Decline Quest)",
-				"text": "The elf says nothing, but looks disappointed. (-1 town reputation)",
+				"text": "The elf says nothing, but looks disappointed. (-1 local reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -766,7 +783,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "4",
 								"POIReference": "$(poi_1)"
 							}
 						],
@@ -791,7 +808,7 @@
 							}
 						],
 						"name": "\"For a $(enemy_2)? No thank you.\" (Decline Quest)",
-						"text": "The elf says nothing, but looks disappointed. (-2 town reputation)",
+						"text": "The elf says nothing, but looks disappointed. (-2 local reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -805,6 +822,23 @@
 	"prologue": {},
 	"epilogue": {
 		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
+		"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "",
+								"addMapReputation": 3,
+								"POIReference": ""
+							}
+						],
 		"options": [
 			{
 				"action": [
@@ -960,7 +994,7 @@
 						"setMapFlag": {
 							"key": ""
 						},
-						"issueQuest": "1",
+						"issueQuest": "5",
 						"POIReference": "$(poi_1)"
 					}
 				],
@@ -1009,7 +1043,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "5",
 								"POIReference": "$(poi_1)"
 							}
 						],
@@ -1273,7 +1307,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "6",
 										"POIReference": ""
 									}
 								],
@@ -1330,7 +1364,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "6",
 										"POIReference": ""
 									}
 								],
@@ -1619,7 +1653,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "7",
 								"POIReference": ""
 							}
 						],
@@ -1841,7 +1875,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "7",
 										"POIReference": ""
 									}
 								],
@@ -1924,7 +1958,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "8",
 										"POIReference": ""
 									}
 								],
@@ -2155,7 +2189,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "9",
 												"POIReference": "$(poi_1)"
 											}
 										],
@@ -2178,7 +2212,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "9",
 														"POIReference": "$(poi_1)"
 													}
 												],
@@ -2450,7 +2484,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "10",
 										"POIReference": ""
 									}
 								],
@@ -2503,7 +2537,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "10",
 								"POIReference": ""
 							}
 						],
@@ -2829,7 +2863,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "11",
 												"POIReference": ""
 											}
 										],
@@ -2857,7 +2891,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "11",
 												"POIReference": ""
 											}
 										],
@@ -3022,7 +3056,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "12",
 								"POIReference": ""
 							}
 						],
@@ -3044,7 +3078,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "12",
 								"POIReference": ""
 							}
 						],
@@ -3249,7 +3283,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "13",
 								"POIReference": ""
 							}
 						],
@@ -3439,7 +3473,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "13",
 								"POIReference": ""
 							}
 						],
@@ -3701,7 +3735,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "14",
 														"POIReference": ""
 													}
 												],
@@ -3732,7 +3766,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "14",
 								"addMapReputation": 1,
 								"POIReference": ""
 							}
@@ -3764,7 +3798,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "14",
 														"POIReference": ""
 													}
 												],
@@ -4000,7 +4034,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "15",
 												"POIReference": ""
 											}
 										],
@@ -4235,7 +4269,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "16",
 												"POIReference": ""
 											}
 										],
@@ -4263,7 +4297,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "16",
 												"POIReference": ""
 											}
 										],
@@ -4495,7 +4529,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "17",
 														"POIReference": ""
 													}
 												],
@@ -4745,7 +4779,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "18",
 										"POIReference": ""
 									}
 								],
@@ -4773,7 +4807,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "18",
 										"POIReference": ""
 									}
 								],
@@ -4974,7 +5008,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "19",
 												"POIReference": ""
 											}
 										],
@@ -5004,7 +5038,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "19",
 														"POIReference": ""
 													}
 												],
@@ -5212,7 +5246,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "20",
 														"POIReference": ""
 													}
 												],
@@ -5274,7 +5308,7 @@
 																"setMapFlag": {
 																	"key": ""
 																},
-																"issueQuest": "1",
+																"issueQuest": "20",
 																"POIReference": ""
 															}
 														],
@@ -5301,7 +5335,7 @@
 														"setMapFlag": {
 															"key": ""
 														},
-														"issueQuest": "1",
+														"issueQuest": "20",
 														"POIReference": ""
 													}
 												],
@@ -5477,7 +5511,7 @@
 												"setMapFlag": {
 													"key": ""
 												},
-												"issueQuest": "1",
+												"issueQuest": "21",
 												"POIReference": ""
 											}
 										],
@@ -5621,7 +5655,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "22",
 										"POIReference": ""
 									}
 								],
@@ -5767,7 +5801,7 @@
 								"setMapFlag": {
 									"key": ""
 								},
-								"issueQuest": "1",
+								"issueQuest": "23",
 								"addMapReputation": -1,
 								"POIReference": ""
 							}
@@ -5788,7 +5822,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "23",
 										"POIReference": ""
 									}
 								],
@@ -5816,7 +5850,7 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "1",
+										"issueQuest": "23",
 										"POIReference": ""
 									}
 								],
@@ -5969,6 +6003,1262 @@
 		"waste_town_generic",
 		"waste_town_identity",
 		"waste_town_tribal"
+	]
+},
+{
+	"id": 24,
+	"isTemplate": true,
+	"name": "Pest Control",
+	"description": "Defeat Xira and her hornets in her hive and report back",
+	"offerDialog": {
+		"text": "Greetings, adventurer! I have a task that requires your assistance. You see, we have a bit of a situation with a giant insect named Xira. She's been causing quite a stir in our town with her penchant for organizing extravagant balls.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Giant bugs holding balls eh ? Count me out. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "Well Yes, Let me explain the situation; Xira's balls have become a bit of a problem. She has been hosting them every night, and they're becoming increasingly extravagant and disruptive. The townspeople are getting tired of the constant noise and commotion, and it's affecting their daily lives.",
+				"options": [
+					{
+						"name": "I see. So you want me to talk to Xira and ask her to stop?",
+						"text": "\"You can find her in her hive, she's not easily dissuaded. I've tried talking to her myself, but she's adamant about continuing her nightly balls. I'm afraid she will need more than just a few words to convince her, if you catch my drift.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "24",
+										"POIReference": ""
+									}
+								],
+								"name": "Pest control is my speciality, note the location of her hive on my map.(Accept Quest) (WARNING HARD QUEST)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "\"Do you really think I have nothing better to do than hunt down giant insects holding balls? Find someone else to take care of it\" (Decline Quest)",
+								"text": "The farmhand keeps a passive look on his face. \"I guess I'm never getting my quiet night's sleep back\"",
+								"options": [
+									{
+										"name": "(Leave)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 800
+							},
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 5,
+								"addMaxCount": 10,
+								"rarity": [
+									"Rare",
+									"Mythic Rare",
+									"Uncommon"
+								],
+								"cardText": "Insect"
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the hive.",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the Xira's Hive and defeat all enemies inside. The target location is in the Waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Xira"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Xira"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 25,
+	"isTemplate": true,
+	"name": "Mechanical Problems",
+	"description": "Defeat Slobad and his artificers in his factory and report back",
+	"offerDialog": {
+		"text": "Greetings, brave adventurer! I find myself in need of a courageous soul to undertake a perilous task.\nWithin the sprawling industrial district, an abandoned factory once owned by the notorious inventor Slobad has become a hotbed of danger and mechanical mayhem. ",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "The factory, now infested with an array of peculiar mechs and skilled artificers, poses a grave threat to our community and the delicate balance of technology.  Slobad, once hailed as a genius, was known for his unorthodox creations and their volatile nature. However, a catastrophic incident occurred years ago, leading to the factory's abandonment. Now, the mechanical monstrosities have been reactivated, wreaking havoc on unsuspecting wanderers and nearby settlements.",
+				"options": [
+					{
+						"name": "I see. So you want me to go to his factory and defeat him ?",
+						"text": "Your task, should you accept it, is to venture into Slobad's factory and cleanse it of its mechanical menaces. You will face a myriad of strange mechs, each with its unique capabilities and behaviors. Additionally, the factory's artificers, skilled engineers corrupted by their own creations, will fiercely defend their inventions, making your mission all the more challenging.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "25",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll take care of it, note the location of the factory on my map.(Accept Quest) (WARNING HARD QUEST)",
+								"text": "Once you have vanquished the mechanical threat and quelled the chaos within the factory, return to me, Maven the Alchemist, and you shall be rewarded handsomely for your bravery and service to our community. Be warned, however, for the path ahead will test your mettle, cunning, and combat prowess. May fortune favor you on this perilous undertaking!"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "\"Do you really think I have nothing better to do ? Find someone else to take care of it\" (Decline Quest)",
+								"text": "Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 1000
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 5,
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								],
+								"cardTypes": [
+									"Artifact"
+								]
+							},
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 10
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the factory. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Slobad"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Slobad"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 26,
+	"isTemplate": true,
+	"name": "Spores of Death",
+	"description": "Defeat Slimfoot and his fungi in his bog and report back",
+	"offerDialog": {
+		"text": " Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the rogue fungus Slimefoot. ",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -1,
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 local reputation)",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Tell me more about Slimefoot and what I can do to stop it.",
+				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence, a monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
+				"options": [
+					{
+						"name": "I see. So you want me to travel to Slimefoots swamp and defeat him ?",
+						"text": "Slimefoot is a formidable foe, adept at both offense and defense. Its body secretes a corrosive slime, and its tentacles strike with lightning speed. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "26",
+										"POIReference": ""
+									}
+								],
+								"name": "Thank you, Elder Taldor. I shall embark on this quest immediately and return triumphant. (Accept Quest) (WARNING HARD QUEST)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "After further consideration, I've decided I'm not up to the challenge (Decline Quest)",
+								"text": "Elder Taldor keeps a passive look on his face. \"Youths these days, he mumbles\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 1000,
+								"addMaxCount": 900
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 10,
+								"subTypes": [
+									"Fungus"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the swamp. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Swamp biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Slimefoot"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Slimefoot"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"swamp_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal"
+	]
+},
+{
+	"id": 27,
+	"isTemplate": true,
+	"name": "Slimy Business",
+	"description": "Defeat the mother slime and other creatures in the old sewers and report back",
+	"offerDialog": {
+		"text": "Greetings, brave adventurer! This town is currently plagued by a distressing problem in the form of a slime infestation. \nThe town council has been looking for a brave individual to take care of this.\n",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Let me guess, you want to me to deal with this situation ?",
+				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this town and eradicate this slimy menace once and for all.",
+				"options": [
+					{
+						"name": "I see. So you want me to go to the old sewers and deal with the slimes?",
+						"text": "Exactly, Your primary objective is to clear the old sewer of slimes by eliminating their presence and ensuring the safety of the townsfolk. Enter the depths of the sewer, locate the main breeding ground of the slimes, and eliminate their leader to put an end to the infestation. Be warned, however, as the sewer is known to be treacherous and filled with other dangers, such as crumbling infrastructure and toxic gases.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "27",
+										"POIReference": ""
+									}
+								],
+								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest) (WARNING HARD QUEST)"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"addMapReputation": -1,
+										"POIReference": ""
+									}
+								],
+								"name": "I don't intending to get slime on my armor, sorry you have to find someone else (Decline Quest)",
+								"text": "The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the waste biome.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"SlimeCave"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"SlimeCave"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 28,
+	"isTemplate": true,
+	"name": "Welcome to Shandalar",
+	"description": "Learn about your surroundings",
+	"offerDialog": {},
+	"prologue": {
+		"text": "Darkness and silence surrounds you. A vague sense of falling slows second by second. ",
+		"options": [
+			{
+				"name": "Where am I? What am I? What is going on?",
+				"text": "A flash of light brighter than anything you remember precedes a fall to a stone floor. This is almost as jarring as realizing that you actually don't remember much of anything at all.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "A quiet crackling sound draws your eyes to the flickering light of a fire within the cave you now occupy. A hooded figure stands by the fire, facing you as if expecting your arrival."
+					}
+				]
+			},
+			{
+				"name": "Been here, done that. Show me to the enemies. (New Game+)",
+				"text": "Okay, skipping all that \"hard work\" somebody put into dialog, the portal opens and you can leave.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"activateMapObject": 78,
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "mainQuest",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "",
+								"POIReference": ""
+							}
+						],
+						"name": "(Continue)"
+					}
+				]
+			}
+		]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Talk to the nearby mage",
+			"description": "There's not a lot to do in here other than talk to him, and any information is more than you have right now.",
+			"mapFlag": "mainQuest",
+			"mapFlagValue": 1,
+			"objective": "QuestFlag",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Exit the cave",
+			"description": "The portal is open and you can leave now.",
+			"mapFlag": "mainQuest",
+			"mapFlagValue": 1,
+			"objective": "Leave",
+			"prologue": {},
+			"epilogue": {
+				"text": "So, you have a quest of sorts now: Find and free the planeswalkers. But is that really what you want to do? Despite the fog covering your memory, you are certain that you are powerful enough to take care of yourself.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "seekWalkers",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "",
+								"POIReference": ""
+							}
+						],
+						"name": "I want to find the planeswalkers",
+						"text": "Well, shouting \"Planeswalkers, where are you?\" into the wastes won't do much. Travel to the nearest settlement and ask around for information.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "29",
+										"POIReference": ""
+									}
+								],
+								"name": "(Dismiss)"
+							}
+						]
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "exploreShand",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "",
+								"POIReference": ""
+							}
+						],
+						"name": "I want to explore and learn about Shandalar",
+						"text": "Exploring it is. Find and enter a nearby dungeon.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "30",
+										"POIReference": ""
+									}
+								],
+								"name": "(Dismiss)"
+							}
+						]
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "shandRep",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "",
+								"POIReference": ""
+							}
+						],
+						"name": "I want to make a name for myself",
+						"text": "Then let's go impress some people. But first, you need some impressive spells. Build your collection to begin your quest.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "30",
+										"POIReference": ""
+									}
+								],
+								"name": "(Dismiss)"
+							}
+						]
+					}
+				]
+			},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 29,
+	"isTemplate": true,
+	"name": "A Chat with the Locals",
+	"description": "Find someone who knows more about the missing Planeswalkers",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {
+		"text": "The locals look at you a little less suspiciously than when you first arrived asking questions, but they can't deliver information they don't have.",
+		"options": [
+			{
+				"name": "(Continue)",
+				"text": "Eventually though, your persistence and local connections pay off. A merchant pausing his travels for the night at the local inn is directed to you to retell a story.",
+				"options": [
+					{
+						"name": "(Listen to his story)",
+						"text": "\"Like I was saying at the tavern, it's my job to travel. West to east and back again. But the roads have been getting rough on my usual route, so I've been trying new paths of late. Last trip I made record time, and I won't be doing it again.\"",
+						"options": [
+							{
+								"name": "\"What happened?\"",
+								"text": "\"Twas near sunset of the third day that I saw a village a little larger than this. The sky smelled of rain, so I welcomed the idea of a roof and bed. But at first there was not a soul in sight.\"",
+								"options": [
+									{
+										"name": "\"Go on...\"",
+										"text": "\"Every door was locked tight. A bad feeling came up my back as I realized just how quiet it was right before I heard splashing. I peeked round the corner, and found a merfolk waving his arms around and casting some spell.\"",
+										"options": [
+											{
+												"name": "\"What was the spell?\"",
+												"text": "\"I'm not an expert in the island magics, so I didn't recognize it until a hole opened in front of 'em, and through they swam.... Flopped...? Went. Anyhow, needless to say I was stunned.\"",
+												"options": [
+													{
+														"name": "\"So, a portal?\"",
+														"text": "\"That it was, at least I think. Folks conjure other creatures all the time, but never anything from around here. And nobody conjures themselves anywhere. But as a merchant, I saw piles of gold in the possibilities. So I waited for our fishman to return.\"",
+														"options": [
+															{
+																"name": "\"And did they?\"",
+																"text": "\"No, that's where it all went wrong. A few minutes later, another hole opened, and demons came pouring out of it. I made for my wagon, and never slowed until I reached the warehouse the next night. I won't be taking that route again.\"",
+																"options": [
+																	{
+																		"action": [
+																			{
+																				"removeItem": "",
+																				"setColorIdentity": "",
+																				"advanceQuestFlag": "",
+																				"advanceMapFlag": "",
+																				"setQuestFlag": {
+																					"key": ""
+																				},
+																				"setMapFlag": {
+																					"key": ""
+																				},
+																				"issueQuest": "32",
+																				"POIReference": "$(poi_2)"
+																			}
+																		],
+																		"name": "Portals aren't exactly what you're looking for, but mages that travel the aether are. The merchant marks your map and goes back to his drink."
+																	}
+																]
+															}
+														]
+													}
+												]
+											},
+											{
+												"name": "\"Cut to the chase already.\"",
+												"text": "\"Right. He and his hole dissapeared, then another appeared and beasties came out, and I ran. Simple enough?\"",
+												"options": [
+													{
+														"action": [
+															{
+																"removeItem": "",
+																"setColorIdentity": "",
+																"advanceQuestFlag": "",
+																"advanceMapFlag": "",
+																"setQuestFlag": {
+																	"key": ""
+																},
+																"setMapFlag": {
+																	"key": ""
+																},
+																"issueQuest": "32",
+																"addMapReputation": -1,
+																"POIReference": "$(poi_2)"
+															}
+														],
+														"name": "\"And where did this happen?\"",
+														"text": "He marks your map without another word and goes back to his drink. (-1 local reputation) (Continue)"
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find a town",
+			"description": "Travel to any town in the wastelands",
+			"anyPOI": true,
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"BiomeColorless",
+				"Town"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Don't be a stranger",
+			"description": "Build your reputation to at least +5 in any wasteland town",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count1": 5,
+			"POITags": [
+				"BiomeColorless",
+				"Town"
+			],
+			"objective": "HaveReputation",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 30,
+	"isTemplate": true,
+	"name": "Where Am I?",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"storyQuest": true
+},
+{
+	"id": 31,
+	"isTemplate": true,
+	"name": "Buillding A Collection",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"storyQuest": true
+},
+{
+	"id": 32,
+	"isTemplate": true,
+	"name": "A Portal to Nowhere",
+	"storyQuest": true,
+	"description": "Investigate the report of portals being opened in a seemingly abandoned town.",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Travel to the abandoned town",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"BiomeColorless",
+				"OccupiedTown"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Investigate",
+			"description": "Search for clues regarding the portals from the merchant's story",
+			"mapFlag": "foundClues",
+			"mapFlagValue": 2,
+			"objective": "MapFlag",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": "$(poi_1)"
+		}
 	]
 }
 ]

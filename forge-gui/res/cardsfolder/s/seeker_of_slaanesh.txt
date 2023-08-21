@@ -1,0 +1,7 @@
+Name:Seeker of Slaanesh
+ManaCost:3 R
+Types:Creature Demon
+PT:3/3
+K:Haste
+S:Mode$ PlayerMustAttack | ValidPlayer$ Opponent | Description$ Allure of Slaanesh — Each opponent must attack with at least one creature each combat if able.
+Oracle:Haste\nAllure of Slaanesh — Each opponent must attack with at least one creature each combat if able.

@@ -483,7 +483,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -588,9 +588,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
-                    }
-                    if (sa.hasParam("Untapped")) {
-                        gameCard.setTapped(false);
                     }
                     if (sa.hasParam("Transformed")) {
                         if (gameCard.isTransformable()) {
@@ -755,7 +752,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
-                        movedCard.setForetoldByEffect(true);
+                        if (sa.hasParam("ForetoldCost")) {
+                            movedCard.setForetoldCostByEffect(true);
+                        }
                         // look at the exiled card
                         movedCard.addMayLookTemp(player);
                     }
@@ -1080,6 +1079,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // Panglacial Wurm
                     CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
                             "While you're searching your library, you may cast CARDNAME from your library.");
+                    decider.getController().tempShowCards(canCastWhileSearching);
                     for (final Card tgtCard : canCastWhileSearching) {
                         List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
                         if (sas.isEmpty()) {
@@ -1096,6 +1096,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         //some kind of reset here?
                     }
+                    decider.getController().endTempShowCards();
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
@@ -1253,6 +1254,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 player.shuffle(sa);
             }
 
+            if (sa.hasParam("Reorder")) {
+                chosenCards = new CardCollection(decider.getController().orderMoveToZoneList(chosenCards, destination, sa));
+            }
+
             // remove Controlled While Searching
             if (controlTimestamp != null) {
                 player.removeController(controlTimestamp);
@@ -1302,8 +1307,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 else if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
-                    } else if (sa.hasParam("Untapped")) {
-                        c.setTapped(false);
                     }
                     if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                         // need LKI before Animate does apply
@@ -1419,7 +1422,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
-                        movedCard.setForetoldByEffect(true);
+                        if (sa.hasParam("ForetoldCost")) {
+                            movedCard.setForetoldCostByEffect(true);
+                        }
                         // look at the exiled card
                         movedCard.addMayLookTemp(sa.getActivatingPlayer());
                     }

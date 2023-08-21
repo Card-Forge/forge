@@ -16,6 +16,7 @@ import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -38,7 +39,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -151,14 +151,9 @@ public class DuelScene extends ForgeScene {
     }
     Runnable endRunnable = null;
     void afterGameEnd(String enemyName, boolean winner) {
+        Forge.restrictAdvMenus = winner;
         endRunnable = () -> Gdx.app.postRunnable(()-> {
-            if (GameScene.instance().isNotInWorldMap()) {
-                SoundSystem.instance.pause();
-                GameHUD.getInstance().playAudio();
-            } else {
-                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                SoundSystem.instance.resume();
-            }
+            GameHUD.getInstance().switchAudio();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -311,7 +306,7 @@ public class DuelScene extends ForgeScene {
             } else if (this.eventData != null){
                 deck = eventData.nextOpponent.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Insane") || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
@@ -433,7 +428,7 @@ public class DuelScene extends ForgeScene {
         this.isArena = isArena;
         this.eventData = eventData;
         if (eventData!= null && eventData.eventRules == null)
-            eventData.eventRules = new AdventureEventData.AdventureEventRules();
+            eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
         this.arenaBattleChallenge = isArena
                 && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
                 || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));

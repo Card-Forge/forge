@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import forge.adventure.data.AdventureEventData;
 import forge.screens.FScreen;
 
 /**
@@ -11,6 +12,7 @@ public class DeckEditScene extends ForgeScene {
 
     AdventureDeckEditor screen;
     Stage stage;
+    AdventureEventData currentEvent;
 
     private DeckEditScene() {
 
@@ -31,7 +33,9 @@ public class DeckEditScene extends ForgeScene {
             stage.dispose();
     }
 
-
+    public void loadEvent(AdventureEventData event){
+        currentEvent = event;
+    }
 
     @Override
     public void enter() {
@@ -41,12 +45,18 @@ public class DeckEditScene extends ForgeScene {
         super.enter();
 
     }
+
     @Override
     public FScreen getScreen() {
         if (screen==null){
-            screen = new AdventureDeckEditor(false, null);
+            if (currentEvent == null){
+                screen = new AdventureDeckEditor(false);
+                screen.setEvent(null);
+            }
+            else {
+                screen = new AdventureDeckEditor(currentEvent);
+            }
         }
-        screen.setEvent(null);
         return screen;
     }
 

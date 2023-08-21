@@ -77,13 +77,21 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 for (String s : spellbook) {
                     // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                     s = s.replace(";", ",");
-                    faces.add(StaticData.instance().getCommonCards().getFaceByName(s));
+                    ICardFace face = StaticData.instance().getCommonCards().getFaceByName(s);
+                    if (face != null)
+                        faces.add(face);
+                    else
+                        throw new RuntimeException("MakeCardEffect didn't find card face by name: " + s);
                 }
             } else if (sa.hasParam("Booster")) {
                 SealedProduct.Template booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
-                    faces.add(pc.getRules().getMainPart());
+                    ICardFace face = pc.getRules().getMainPart();
+                    if (face != null)
+                        faces.add(face);
+                    else
+                        throw new RuntimeException("MakeCardEffect didn't find card face by name: " + pc);
                 }
             }
 

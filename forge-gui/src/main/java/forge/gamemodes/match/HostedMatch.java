@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.gui.control.PlaybackSpeed;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableMap;
@@ -310,7 +311,7 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            humanController.getGui().setGameSpeed(false);
+            humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change
                 humanController.getGui().clearAutoYields();
