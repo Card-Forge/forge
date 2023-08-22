@@ -1,17 +1,12 @@
 package forge.ai;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.GuiDesktop;
 import forge.StaticData;
-import forge.ai.AIOption;
-import forge.ai.LobbyPlayerAi;
-import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameRules;

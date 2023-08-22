@@ -1,9 +1,6 @@
 package forge.ai;
 
-import forge.ai.AITest;
 import forge.ai.simulation.GameStateEvaluator;
-import forge.ai.simulation.SimulationController;
-import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.spellability.LandAbility;
 
 import java.util.ArrayList;
