@@ -256,5 +256,11 @@
             <artifactId>gdx-controllers-desktop</artifactId>
             <version>2.2.3-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d-platform</artifactId>
+            <version>1.11.0</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
     </dependencies>
 </project>
