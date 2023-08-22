@@ -1034,7 +1034,7 @@ public class MapStage extends GameStage {
             return;
         Iterator<EnemySprite> it = enemies.iterator();
 
-        if (freezeAllEnemyBehaviors){
+        if (freezeAllEnemyBehaviors) {
             if (!positions.contains(player.pos())) {
                 freezeAllEnemyBehaviors = false;
             }

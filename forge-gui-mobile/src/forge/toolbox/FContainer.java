@@ -95,7 +95,7 @@ public abstract class FContainer extends FDisplayObject {
     @Override
     public void setSize(float width, float height) {
         //called with (0,0) when app minimized, if set then causes errors with layouts loaded before restoring focus
-        if ((getWidth() == width && getHeight() == height) || width == 0.0 || height == 0.0) { return; }
+        if ((getWidth() == width && getHeight() == height) || width == 0f || height == 0f) { return; }
         super.setSize(width, height);
         doLayout(width, height);
     }

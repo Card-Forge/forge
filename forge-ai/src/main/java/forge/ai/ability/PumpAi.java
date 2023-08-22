@@ -128,7 +128,6 @@ public class PumpAi extends PumpAiBase {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
-        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
         final String numDefense = sa.getParamOrDefault("NumDef", "");
@@ -169,7 +168,6 @@ public class PumpAi extends PumpAiBase {
                     CardCollection best = CardLists.filter(attr, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
-
                             int amount = 0;
                             if (StringUtils.isNumeric(amountStr)) {
                                 amount = AbilityUtils.calculateAmount(source, amountStr, moveSA);
@@ -514,11 +512,10 @@ public class PumpAi extends PumpAiBase {
                 list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
             } else {
                 ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
+                list = CardLists.getTargetableCards(game.getCardsIn(zone), sa);
             }
         }
 
-        list = CardLists.getTargetableCards(list, sa);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {

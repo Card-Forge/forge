@@ -13,6 +13,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
@@ -37,6 +38,10 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         } else if ("PoolExtraMana".equals(aiLogic)) {
             return doPoolExtraManaLogic(ai, sa);
+        } else if ("PreventCombatDamage".equals(aiLogic)) {
+            return doPreventCombatDamageLogic(ai, sa);
+            // In the future if you want to give Pseudo vigilance to a creature you attacked with
+            // activate during your own during the end of combat step
         }
 
         return !("Never".equals(aiLogic));
@@ -63,6 +68,8 @@ public class UntapAi extends SpellAbilityAi {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
         } else {
+            // If we already selected a target just use that
+
             return untapPrefTargeting(ai, sa, false);
         }
     }
@@ -118,6 +125,13 @@ public class UntapAi extends SpellAbilityAi {
      */
     private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
+
+        if (alreadyAssignedTarget(sa)) {
+            if (sa.getTargets().size() > 0) {
+                // If we selected something lets assume its valid
+                return true;
+            }
+        }
         sa.resetTargets();
 
         final PlayerCollection targetController = new PlayerCollection();
@@ -335,6 +349,50 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         return null;
+    }
+
+    private boolean doPreventCombatDamageLogic(final Player ai, final SpellAbility sa) {
+        // Only Maze of Ith and Maze of Shadows uses this. Feel free to use it aggressively.
+        Game game = ai.getGame();
+        Card source = sa.getHostCard();
+        sa.resetTargets();
+
+        if (!game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
+            return false;
+        }
+
+        // If damage can't be prevented. Just return false.
+
+         Combat activeCombat = game.getCombat();
+        if (activeCombat == null) {
+            return false;
+        }
+
+        CardCollection list = CardLists.getTargetableCards(activeCombat.getAttackers(), sa);
+
+        if (list.isEmpty()) {
+            return false;
+        }
+
+         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            // Blockers already set. Are there any dangerous unblocked creatures? Sort by creature that will deal the most damage?
+            Card card = ComputerUtilCombat.mostDangerousAttacker(list, ai, activeCombat, true);
+
+            if (card == null) { return false; }
+
+             sa.getTargets().add(card);
+             return true;
+        }
+
+        return false;
+    }
+
+    private static boolean alreadyAssignedTarget(final SpellAbility sa) {
+        if (sa.hasParam("AILogic")) {
+            String aiLogic = sa.getParam("AILogic");
+            return "PreventCombatDamage".equals(aiLogic);
+        }
+        return false;
     }
 
     private boolean doPoolExtraManaLogic(final Player ai, final SpellAbility sa) {

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="74">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="8" name="toggle" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwE480EwpWootRfGxyZGS4DN3sEIpnHS1vzB7v9RQD54rMnA8EST/vb+B9mpRX97R8EoGAWjYBSMglEwNAAARxQIyg==
+  </data>
+ </layer>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzdl80NwjAMhateSsQFCSF1ATZghl5hiq7DDXHKOMzDCCgHC9d9jvOHhPokq1HU+rPjuE27btvq9+XPTs42zpFWw0uJA+VXwj0PXwt6XpdzZJ7F9d6145LG2zoeyT0NSx8tuHIecUl3h+tL9UD1Q/5zud4tmTRG+wLVDplke/CsZ/lOYlzKRQw0T7xW3IezLdyHehn15szGFgutvSb0DknhxngpbOvdRdxYrq24Ml/kn+ZQTClsWV/ODddZyed1tHONsX/VR5qRX20//xM3pZalXFp73se8PqhuOdzYfpb7GvnX4ijpKUuoh1Nz5so960gm9W+MG3Tp18zcbz/najFZa1tz3pBcxNZUc54cD9ifZa24qDdRj7Y4Qwchbqpq/he2oA9iD2gJ
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztljEKwjAUhkMWGx0UHF26OLuIgwfwGI49iAcQEeworh7C1QPo7hUcXDvYRxv6+sxLk1SEgj/8NCQlX/+kfY0cCCH/7rRXqrLPvaC7rAxKy34Yx2PgZyTErC/EKZ/nrNpxqVKmH7TPx7alfblg29yuXO25dN8XrAPh2LhHA3fnmBW8kPa8HNuUV3NBbbi2zG25ieJN814mn8bS++vKNSkxrLGJm6q6Xff3m1yXnL7cae+3XD0fxwWFcJfMu3WL6s/BcaEfr0tI3WgSx9UKqVebYeVQ+XKvYyFe+XPHo3BmKBdfsWw12iRX7iMueNptFcI1ifs3ZLLwWlbtzGOdcVbKpjXBxKV2YeIzQhOXsjNZb3/znGPLTHOGcrl7MJee7Xzn8jGcC6Am+XybXeZ22W84GqXc
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytl71uE0EQxzdHEe5DciTk+BwKQPbR0lhR6jwBdpueJwCdjdwAEmUUUUAqeh6CpADlAWI3/oCXoE2RHe0NNzc3c7cWjPTX+e529nc7uzO7zmNj0sSYdWTMkb2+tfdNtiraTeNSbT7Ut584da0OrX5FTr2k2Te3jG1U+sC1zYf6Tgt/ap/3jPlCdLlX9+16cqS+5kp8RoEx7+NSx4HfOCST+kJumjS3/bHvhAa/F0H9ORq8exE5LQQuxOp3VI8z5z63fWek/8uXdT0el+9PD405D52+hXLsYI5nsVtjm4J/G7jvPC7G9JNw0zOrcV1HZzIXFBWCPpeEC/MLOTFj84zjBA1SPy60+xRWuaCLsNr3vOBuPXJnl/GiaVyMM6ytDZtnyXoT21ZQfyJz/zx0V87FPMR13Sf8hZI/8PzNg/L+tf2dDerCNvCe9xXETrCueb17FcqSTOJqeY9MENZJWu80bibkbBMX2g8LH8ibdVSNK7f/NV7KxVrVto/8C/fvO4HblD8a70SYt13Hy/OH1q1FUIreL3fkUsPaPI3LOrViez74vetU/T6w+yaTvg8sJ3FGJo07cJ8cGPOU6NmBP1eznMR5Lsw11GeJK+URt2y/qiHx6SblmSaP5X1B435V1rX2DUP2rVg3pLMccL9bzseOP3ekrEWtTtIY45kI1yNlt8V5VPjcBVXBc3pWQy6dV37euHnk2FdW1y3rSuJK5w3kcl/O5WPUxuzLpXVC40rzo+2R9D1KO1/x9XQbVP20/Pcx3hfuRz7/ScBWLXuXj/H/Nj5crKu+56E2pu95jrPXwrpo88VzBfSBY70HRpLliA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFlr1OAkEQx5ezMJq7KyAm4AMgR0JneAkLpTaYaKytLI2tomin8jw8AmdvoSWxMdGoBc5ld8IyN7t7C4r/ZDLH7uz8du72AyGEGIdCbMVC9CPBqgF9icV6MO4ykt6Ug9OVGteMi4+h88rGoi8iV61/JVetxzVpNhWJ4bimWtuBEMGmNNR6V4jBrvQojMniU2XbgZ3r+iZHqo6Njpon8Kp70us6rEkuysXllOpjVK3VfelD4EVgMeFOFPcdnj/ARlrtPqru8O194N2A3XbzfXq9appz1c0pPIB6weIDnkunsyj3ruOOwXo/wb7Avj25+rpMyXeia4eLw5jTlTw3Oy9eQ/u8W1pbi/Qh9yIR4hnsJZHPVJSL+5ZjZ7mH4K/LEFOetp+s8XtlkvGafA1UyK3HeTbmTiqQriKfh6RP555Hs94k/UzuMewsd4uMMb3nM43l4upnciPO319tyxp8ZOp9Sqbm4uoc+tvEpe2+e5NyXGf02yrPHRn2kY3LrScTD2V7/0WE37Re8L+Bqd552YmDS+tdphZl+6y9h5K0QWm23ec935emeXxFOT7cRe6//+aa7kJbblvf2LF/f1N4vuLdsGzh3YCy/Q+gSoNZ78vlzmgf/jxCzg8Q9HnK
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="210" y="447.167" width="48" height="47">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="269.167" y="95"/>
+  <object id="51" template="../../obj/treasure.tx" x="88.75" y="188.416"/>
+  <object id="52" template="../../obj/gold.tx" x="338" y="89.5"/>
+  <object id="53" template="../../obj/enemy.tx" x="286" y="231">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Adept Black Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="145.001" y="221.083" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Adept Green Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="335.333" y="127.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Adept White Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="127.667" y="318.333" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Adept Red Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="338.333" y="379.667" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Adept Blue Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/gold.tx" x="86.333" y="282.667"/>
+  <object id="59" template="../../obj/gold.tx" x="308.333" y="398.667"/>
+  <object id="60" template="../../obj/manashards.tx" x="376.75" y="362"/>
+  <object id="61" template="../../obj/manashards.tx" x="248.75" y="89"/>
+  <object id="62" template="../../obj/manashards.tx" x="170.25" y="89.75"/>
+  <object id="63" template="../../obj/booster.tx" x="127.75" y="108">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/booster.tx" x="288" y="108.25">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/gold.tx" x="319.75" y="182"/>
+  <object id="66" template="../../obj/enemy.tx" x="217.25" y="231.75">
+   <properties>
+    <property name="enemy" value="Cathar"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="71,68,69,70,69,68"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/waypoint.tx" x="219.5" y="323.75"/>
+  <object id="69" template="../../obj/waypoint.tx" x="364.75" y="328.5"/>
+  <object id="70" template="../../obj/waypoint.tx" x="358.25" y="193"/>
+  <object id="71" template="../../obj/waypoint.tx" x="214.75" y="185.75"/>
+  <object id="72" template="../../obj/enemy.tx" x="208.25" y="124.75">
+   <properties>
+    <property name="enemy" value="Arcane Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="73" name="Ward" type="dialog" gid="28296" x="199.5" y="177.75" width="48" height="16">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
+		&quot;options&quot;: [
+			{ &quot;name&quot;: &quot;Leave.&quot; },
+			{
+				&quot;name&quot;: &quot;Place your hand on the barrier&quot;,
+				&quot;text&quot;: &quot;The barrier fades into infinity before you.&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				],
+				&quot;condition&quot;: [
+					{
+						&quot;getMapFlag&quot;: {
+							&quot;key&quot;: &quot;enemiesDefeated&quot;,
+							&quot;op&quot;: &quot;&gt;=&quot;,
+							&quot;val&quot;: 5
+						}
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

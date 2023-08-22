@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
@@ -141,7 +142,8 @@ public class PumpAllAi extends PumpAiBase {
             return pumpAgainstRemoval(ai, sa, comp);
         }
 
-        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source, sa).isEmpty();
+        return Iterables.any(ai.getCreaturesInPlay(), c -> c.isValid(valid, source.getController(), source, sa)
+                && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
     } // pumpAllCanPlayAI()
 
     @Override
@@ -152,7 +154,7 @@ public class PumpAllAi extends PumpAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // it might help so take it
-        if (!sa.usesTargeting() && !sa.isCurse() && sa.getParam("ValidCards") != null && sa.getParam("ValidCards").contains("YouCtrl")) {
+        if (!sa.usesTargeting() && !sa.isCurse() && sa.hasParam("ValidCards") && sa.getParam("ValidCards").contains("YouCtrl")) {
             return true;
         }
 

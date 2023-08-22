@@ -1336,7 +1336,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return cards;
         }
         else if (zoneType == ZoneType.Flashback) {
-            return getCardsActivableInExternalZones(true);
+            return getCardsActivatableInExternalZones(true);
         }
 
         PlayerZone zone = getZone(zoneType);
@@ -1379,7 +1379,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.filter(getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
-    public CardCollectionView getCardsActivableInExternalZones(boolean includeCommandZone) {
+    public CardCollectionView getCardsActivatableInExternalZones(boolean includeCommandZone) {
         final CardCollection cl = new CardCollection();
 
         cl.addAll(getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));

@@ -1461,14 +1461,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
-        // Partial Paris is gone, so it being commander doesn't really matter anymore...
-        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer);
-        inp.showAndWait();
-        return inp.isKeepHand() ? null : player.getCardsIn(ZoneType.Hand);
-    }
-
-    @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
         if (mayAutoPass()) {
             if (CombatUtil.validateAttackers(combat)) {

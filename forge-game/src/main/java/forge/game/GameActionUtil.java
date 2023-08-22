@@ -440,7 +440,10 @@ public final class GameActionUtil {
 
         for (KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
-            if (keyword.startsWith("Buyback")) {
+            if (keyword.equals("Bargain")) {
+                final Cost cost = new Cost("Sac<1/Artifact;Enchantment;Card.token/artifact or enchantment or token>", false);
+                costs.add(new OptionalCostValue(OptionalCost.Bargain, cost));
+            } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
             } else if (keyword.startsWith("Entwine")) {

@@ -235,7 +235,7 @@ public class ComputerUtilCombat {
             }
         }
         if (damage > 0) {
-            poison += predictPoisonFromTriggers(attacker, attacked, damage);
+            poison += predictExtraPoisonWithDamage(attacker, attacked, damage);
         }
         return poison;
     }
@@ -369,7 +369,7 @@ public class ComputerUtilCombat {
                     if (attacker.hasKeyword(Keyword.INFECT)) {
                         poison += trampleDamage;
                     }
-                    poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
+                    poison += predictExtraPoisonWithDamage(attacker, ai, trampleDamage);
                 }
             }
         }
@@ -2390,6 +2390,62 @@ public class ComputerUtilCombat {
         return categorizedAttackers;
     }
 
+    public static Card mostDangerousAttacker(CardCollection list, Player ai, Combat combat, boolean withAbilities) {
+        Card damageCard = null;
+        Card poisonCard = null;
+
+        int damageScore = 0;
+        int poisonScore = 0;
+
+
+        for(Card c : list) {
+            int estimatedDmg = damageIfUnblocked(c, ai, combat, withAbilities);
+            int estimatedPoison = poisonIfUnblocked(c, ai);
+
+            if (combat.isBlocked(c)) {
+                if (!c.hasKeyword(Keyword.TRAMPLE)) {
+                    continue;
+                }
+
+                int absorbedByToughness = 0;
+                for (Card blocker : combat.getBlockers(c)) {
+                    absorbedByToughness += blocker.getNetToughness();
+                }
+                estimatedPoison -= absorbedByToughness;
+                estimatedDmg -= absorbedByToughness;
+            }
+
+            if (estimatedDmg > damageScore) {
+                damageScore = estimatedDmg;
+                damageCard = c;
+            }
+
+            if (estimatedPoison > poisonScore) {
+                poisonScore = estimatedPoison;
+                poisonCard = c;
+            }
+        }
+
+        if (damageCard == null && poisonCard == null) {
+            return null;
+        } else if (damageCard == null) {
+            return poisonCard;
+        } else if (poisonCard == null) {
+            return damageCard;
+        }
+
+        int life = ai.getLife();
+        int poisonLife = 10 - ai.getPoisonCounters();
+        double percentLife = life * 1.0 / damageScore;
+        double percentPoison = poisonLife * 1.0 / poisonScore;
+
+        if (percentLife >= percentPoison) {
+            return damageCard;
+        } else {
+            return poisonCard;
+        }
+    }
+
     public static Card applyPotentialAttackCloneTriggers(Card attacker) {
         // This method returns the potentially cloned card if the creature turns into something else during the attack
         // (currently looks for the creature with maximum raw power since that's what the AI usually judges by when
@@ -2450,7 +2506,7 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    public static int predictPoisonFromTriggers(Card attacker, Player attacked, int damage) {
+    public static int predictExtraPoisonWithDamage(Card attacker, Player attacked, int damage) {
         int pd = 0, poison = 0;
         int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
         if (damageAfterRepl > 0) {

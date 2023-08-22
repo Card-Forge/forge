@@ -191,7 +191,6 @@ public abstract class PlayerController {
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
 
-    public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
     public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
 

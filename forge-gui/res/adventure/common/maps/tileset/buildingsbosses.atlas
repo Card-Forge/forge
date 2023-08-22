@@ -57,3 +57,12 @@ MageTowerGreen
 MageTowerWhite
   xy: 121,328
   size: 32, 32
+LavaForge
+  xy: 149,169
+  size: 32, 32
+FortBlue
+  xy: 216,170
+  size: 42, 46
+FortGreen
+  xy: 155,267
+  size: 46,44

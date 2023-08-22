@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import java.util.*;
 
+import forge.game.cost.CostSacrifice;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -733,6 +734,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!cost.getPip().equals("")) {
             pipsToReduce.add(cost.getPip());
         }
+    }
+
+    public boolean isBargain() {
+        return isOptionalCostPaid(OptionalCost.Bargain);
     }
 
     public boolean isBuyBackAbility() {
@@ -2283,6 +2288,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (costPart instanceof CostTap && !Untap.canUntap(getHostCard())) {
                 score += 10;
+            }
+            if (costPart instanceof CostSacrifice && !costPart.payCostFromSource()) {
+                // Need to sacrifice "something else". Since we lose that something else, add a large sum since the AI
+                // isn't trustworthy to pick
+                score += 40;
             }
             // Increase score by 1 for each costpart in general
             score++;

@@ -36,12 +36,6 @@
     <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
-  <object id="60" template="../../obj/enemy.tx" x="120.229" y="103.029">
-   <properties>
-    <property name="enemy" value="Black Golem"/>
-    <property name="threatRange" type="int" value="30"/>
-   </properties>
-  </object>
   <object id="61" template="../../obj/booster.tx" x="144.333" y="78.3333">
    <properties>
     <property name="reward">[
@@ -85,19 +79,6 @@
     <property name="enemy" value="Black Golem"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="73,74,75,74,73"/>
-   </properties>
-  </object>
-  <object id="68" template="../../obj/enemy.tx" x="177" y="109.333">
-   <properties>
-    <property name="enemy" value="Crocodile"/>
-    <property name="threatRange" type="int" value="30"/>
-   </properties>
-  </object>
-  <object id="69" template="../../obj/enemy.tx" x="304" y="130.333">
-   <properties>
-    <property name="enemy" value="Black Golem"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="62,76,80,76,62"/>
    </properties>
   </object>
   <object id="70" template="../../obj/enemy.tx" x="352.667" y="193">

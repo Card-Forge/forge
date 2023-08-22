@@ -353,7 +353,7 @@ public class UIScene extends Scene {
         }
 
 
-        if (KeyBinding.Back.isPressed(keycode) && selection != null){
+        if (KeyBinding.Back.isPressed(keycode) && selection != null) {
             selection.onDeSelect();
             stage.setKeyboardFocus(null);
         }

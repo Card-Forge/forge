@@ -1,0 +1,18 @@
+[metadata]
+Code=WOC
+Date=2023-09-08
+Name=Wilds of Eldraine Commander
+Type=Commander
+ScryfallCode=WOC
+
+[cards]
+1 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+2 M Ellivere of the Wild Court @Dmitry Burmak
+3 M Alela, Cunning Conqueror @Livia Prima
+4 M Gylwain, Casting Director @Aurore Folny
+34 M Alela, Cunning Conqueror @Livia Prima
+36 M Ellivere of the Wild Court @Dmitry Burmak
+37 M Gylwain, Casting Director @Aurore Folny
+39 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+57 M Ellivere of the Wild Court @Dmitry Burmak
+58 M Tegwyll, Duke of Splendor @Ekaterina Burmak

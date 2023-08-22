@@ -590,7 +590,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 newCards.add(reward.getCard());
                 if (reward.isNoSell()) {
                     noSellCards.add(reward.getCard());
-                    ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).refresh();
+                    AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+                    if (editor != null)
+                        editor.refresh();
                 }
                 break;
             case Gold:

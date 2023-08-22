@@ -20,8 +20,6 @@ package forge.game.spellability;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.google.common.collect.Sets;
-
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -48,55 +46,6 @@ public class SpellAbilityVariables implements Cloneable {
      * </p>
      */
     public SpellAbilityVariables() {
-    }
-
-    /**
-     *
-     * @param sav
-     * SpellAbilityVariables
-     */
-    public void setVariables(SpellAbilityVariables sav) {
-        this.zone = sav.getZone();
-        this.phases = Sets.newEnumSet(sav.getPhases(), PhaseType.class);
-        this.firstCombatOnly = sav.getFirstCombatOnly();
-        this.gameTypes = Sets.newEnumSet(sav.getGameTypes(), GameType.class);
-        this.sorcerySpeed = sav.isSorcerySpeed();
-        this.instantSpeed = sav.isInstantSpeed();
-        this.activator = sav.getActivator();
-        this.opponentTurn = sav.isOpponentTurn();
-        this.playerTurn = sav.isPlayerTurn();
-        this.cardsInHand = sav.getCardsInHand();
-        this.chosenColors = sav.getColorToCheck();
-        this.threshold = sav.isThreshold();
-        this.metalcraft = sav.isMetalcraft();
-        this.delirium = sav.isDelirium();
-        this.hellbent = sav.isHellbent();
-        this.allTargetsLegal = sav.isAllTargetsLegal();
-        this.shareAllColors = sav.getShareAllColors();
-        this.isPresent = sav.getIsPresent();
-        this.isPresent2 = sav.getIsPresent2();
-        this.presentCompare = sav.getPresentCompare();
-        this.presentCompare2 = sav.getPresentCompare2();
-        this.presentDefined = sav.getPresentDefined();
-        this.presentDefined2 = sav.getPresentDefined2();
-        this.playerDefined = sav.getPlayerDefined();
-        this.playerContains = sav.getPlayerContains();
-        this.presentZone = sav.getPresentZone();
-        this.sVarToCheck = sav.getsVarToCheck();
-        this.sVarToCheck2 = sav.getsVarToCheck2();
-        this.sVarOperator = sav.getsVarOperator();
-        this.sVarOperator2 = sav.getsVarOperator2();
-        this.sVarOperand = sav.getsVarOperand();
-        this.sVarOperand2 = sav.getsVarOperand2();
-        this.lifeTotal = sav.getLifeTotal();
-        this.lifeAmount = sav.getLifeAmount();
-        this.manaSpent = sav.getManaSpent();
-        this.manaNotSpent = sav.getManaNotSpent();
-        this.targetValidTargeting = sav.getTargetValidTargeting();
-        this.targetsSingleTarget = sav.targetsSingleTarget();
-        this.presenceCondition = sav.getPresenceCondition();
-        this.classLevel = sav.getClassLevel();
-        this.classLevelOperator = sav.getClassLevelOperator();
     }
 
     // default values for Sorcery speed abilities
@@ -406,6 +355,7 @@ public class SpellAbilityVariables implements Cloneable {
     protected boolean optionalCostPaid = false; // Undergrowth other Pseudo-kickers
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
     protected boolean surgeCostPaid = false;
+    protected boolean bargain = false;
     protected boolean foretold = false;
 
     /**

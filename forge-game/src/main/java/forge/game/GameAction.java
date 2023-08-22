@@ -1225,18 +1225,18 @@ public class GameAction {
         game.getTracker().unfreeze();
     }
 
-    public final void checkStateEffects(final boolean runEvents) {
-        checkStateEffects(runEvents, Sets.newHashSet());
+    public final boolean checkStateEffects(final boolean runEvents) {
+        return checkStateEffects(runEvents, Sets.newHashSet());
     }
-    public final void checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
+    public boolean checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
-            return;
+            return false;
         }
 
         if (game.isGameOver()) {
-            return;
+            return false;
         }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
@@ -1253,6 +1253,7 @@ public class GameAction {
         checkGameOverCondition();
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
+        boolean performedSBA = false;
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         boolean orderedSacrificeList = false;
@@ -1446,6 +1447,8 @@ public class GameAction {
 
             if (!checkAgain) {
                 break; // do not continue the loop
+            } else {
+                performedSBA = true;
             }
         } // for q=0;q<9
 
@@ -1456,13 +1459,12 @@ public class GameAction {
         }
 
         // recheck the game over condition at this point to make sure no other win conditions apply now.
-        // TODO: is this necessary at this point if it's checked early above anyway?
         if (!game.isGameOver()) {
             checkGameOverCondition();
         }
 
         if (game.getAge() != GameStage.Play) {
-            return;
+            return false;
         }
         game.getTriggerHandler().resetActiveTriggers();
         // Resetting triggers may result in needing to check static abilities again. For example,
@@ -1481,6 +1483,8 @@ public class GameAction {
 
         // Run all commands that are queued to run after state based actions are checked
         game.runSBACheckedCommands();
+
+        return performedSBA;
     }
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
@@ -2072,7 +2076,7 @@ public class GameAction {
                 first.initPlane();
             }
 
-            first =  runOpeningHandActions(first);
+            first = runOpeningHandActions(first);
             checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game

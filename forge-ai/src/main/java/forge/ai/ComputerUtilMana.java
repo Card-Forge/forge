@@ -154,23 +154,23 @@ public class ComputerUtilMana {
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
-                    if (preOrder == 0) {
-                        // Mana abilities on the same card
-                        String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
-
-                        boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
-                        boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
-
-                        if (payWithAb1 && !payWithAb2) {
-                            return -1;
-                        } else if (payWithAb2 && !payWithAb1) {
-                            return 1;
-                        }
-
-                        return ability1.compareTo(ability2);
-                    } else {
+                    if (preOrder != 0) {
                         return preOrder;
                     }
+
+                    // Mana abilities on the same card
+                    String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
+
+                    boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
+                    boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
+
+                    if (payWithAb1 && !payWithAb2) {
+                        return -1;
+                    } else if (payWithAb2 && !payWithAb1) {
+                        return 1;
+                    }
+
+                    return ability1.compareTo(ability2);
                 }
             });
 
@@ -1478,6 +1478,7 @@ public class ComputerUtilMana {
 
         final CardCollection sortedManaSources = new CardCollection();
         final CardCollection otherManaSources = new CardCollection();
+        final CardCollection useLastManaSources = new CardCollection();
         final CardCollection colorlessManaSources = new CardCollection();
         final CardCollection oneManaSources = new CardCollection();
         final CardCollection twoManaSources = new CardCollection();
@@ -1510,6 +1511,7 @@ public class ComputerUtilMana {
 
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
+            boolean unpreferredCost = false;
             boolean producesAnyColor = false;
             final List<SpellAbility> manaAbilities = getAIPlayableMana(card);
 
@@ -1521,17 +1523,24 @@ public class ComputerUtilMana {
                 final Cost cost = m.getPayCosts();
 
                 if (cost != null) {
-                    needsLimitedResources |= !cost.isReusuableResource();
-
                     // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai, true);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
                     }
+
+                    if (!cost.isReusuableResource()) {
+                        for(CostPart part : cost.getCostParts()) {
+                            if (part instanceof CostSacrifice && !part.payCostFromSource()) {
+                                unpreferredCost = true;
+                            }
+                        }
+                        needsLimitedResources = !unpreferredCost;
+                    }
                 }
 
-                // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
+                // We really shouldn't be hardcoding names here. ChkDrawback should just return true for them
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
                     if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
                         continue;
@@ -1541,7 +1550,9 @@ public class ComputerUtilMana {
                 usableManaAbilities++;
             }
 
-            if (needsLimitedResources) {
+            if (unpreferredCost) {
+                useLastManaSources.add(card);
+            } else if (needsLimitedResources) {
                 otherManaSources.add(card);
             } else if (producesAnyColor) {
                 anyColorManaSources.add(card);
@@ -1572,6 +1583,10 @@ public class ComputerUtilMana {
         ComputerUtilCard.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), otherManaSources);
+        // This should be things like sacrifice other stuff.
+        ComputerUtilCard.sortByEvaluateCreature(useLastManaSources);
+        Collections.reverse(useLastManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), useLastManaSources);
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);

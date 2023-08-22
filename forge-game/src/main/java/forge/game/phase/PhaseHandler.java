@@ -434,7 +434,10 @@ public class PhaseHandler implements java.io.Serializable {
                     givePriorityToPlayer = false;
 
                     // Rule 514.3a - state-based actions
-                    game.getAction().checkStateEffects(true);
+                    if (game.getAction().checkStateEffects(true)) {
+                        bRepeatCleanup = true;
+                        givePriorityToPlayer = true;
+                    }
                     break;
 
                 default:

@@ -6,18 +6,87 @@ Type=Collector_Edition
 ScryfallCode=WOT
 
 [cards]
+2 R Dawn of Hope @Maël Ollivier-Henry
+3 U Grasp of Fate @WFlemming Illustration
 4 M Greater Auramancy @Meel Tamphanon
+5 U Griffin Aerie
+6 U Intangible Virtue @BEMOCS
+8 U Knightly Valor @Matteo Bassini
+9 M Land Tax @Francoyovich
+10 R Leyline of Sanctity @WFlemming Illustration
+11 R Phyrexian Unlife @Harry Conway
+12 R Rest in Peace @Serena Malyon
 13 M Smothering Tithe @Shafer Brown
+16 R Copy Enchantment @Abigail Larson
 17 U Curiosity @Abigail Larson
+18 R Forced Fruition @Shafer Brown
+19 R Fraying Sanity @Meel Tamphanon
+21 R Intruder Alarm @Francoyovich
+22 M Kindred Discovery
+24 M Omniscience @Justin Hernandez & Alexis Hernandez
 25 M Rhystic Study @Serena Malyon
+26 U Spreading Seas @Lander Strijbol
+27 M Bitterblossom @Serena Malyon
+29 M Grave Pact @Zach Alexander
+30 R Leyline of the Void @Matteo Marjoram
 31 M Necropotence @Abigail Larson
+32 R Oppression @Matteo Bassini
+33 R Oversold Cemetery @Harry Conway
+34 R Polluted Bonds @William Phifer
+35 R Sanguine Bond @Harry Conway
 39 R Aggravated Assault @Maihope
+40 M Blood Moon @William Phifer
+42 R Fiery Emancipation @Harry Conway
+43 R Goblin Bombardment @Shafer Brown
+44 U Impact Tremors @Matteo Marjoram
+45 R Leyline of Lightning @Sam Chivers
+46 R Mana Flare @Olena Richards
+47 U Raid Bombardment @Shafer Brown
+48 M Repercussion @Francoyovich
+50 M Sneak Attack @Shafer Brown
+51 M Defense of the Heart @Olena Richards
 52 M Doubling Season @Eva Eskelinen
+53 U Garruk's Uprising @Harry Conway
+54 U Ground Seal @BEMOCS
+55 R Hardened Scales @Abigail Larson
+57 R Nature's Will @Matteo Bassini
+58 M Parallel Lives @Lander Strijbol
 60 R Prismatic Omen @Qianhao Ma
+62 R Unnatural Growth @Francoyovich
+63 U Utopia Sprawl @Sylvain Sarrailh
 64 M Greater Auramancy @Mai Okuma
+66 M Land Tax @Jintetsu
 67 M Smothering Tithe @Daisuke Tatsuma
+69 M Kindred Discovery @Yuchi Yuki
+70 M Omniscience @Yakotakos
 71 M Rhystic Study @Fuzichoco
+72 M Bitterblossom @I☆LA
+73 M Grave Pact @BODAX
 74 M Necropotence @Kuregure
+75 R Polluted Bonds @Yuichi Murakami
 76 R Aggravated Assault @zizero
+77 M Blood Moon @Esuthio
+78 M Repercussion @Moopic
+79 M Sneak Attack @Canata Katana
+80 M Defense of the Heart @Hisashi Momose
 81 M Doubling Season @Kemonomichi
+82 R Nature's Will @Dai-XT
+83 M Parallel Lives @BODAX
+84 M Greater Auramancy @Mai Okuma
+86 M Land Tax @Jintetsu
+87 M Smothering Tithe @Daisuke Tatsuma
+89 M Kindred Discovery @Yuchi Yuki
+90 M Omniscience @Yakotakos
 91 M Rhystic Study @Fuzichoco
+92 M Bitterblossom @I☆LA
+93 M Grave Pact @BODAX
+94 M Necropotence @Kuregure
+95 R Polluted Bonds @Yuichi Murakami
+96 R Aggravated Assault @zizero
+97 M Blood Moon @Esuthio
+98 M Repercussion @Moopic
+99 M Sneak Attack @Canata Katana
+100 M Defense of the Heart @Hisashi Momose
+101 M Doubling Season @Kemonomichi
+102 R Nature's Will @Dai-XT
+103 M Parallel Lives @BODAX

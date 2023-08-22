@@ -13,7 +13,6 @@ import forge.ai.AiCardMemory;
 import forge.ai.AiController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -82,21 +81,11 @@ public class EffectAi extends SpellAbilityAi {
                     randomReturn = true;
                 }
             } else if (logic.equals("Fog")) {
-                if (phase.isPlayerTurn(sa.getActivatingPlayer())) {
+                FogAi fogAi = new FogAi();
+                if (!fogAi.canPlayAI(ai, sa)) {
                     return false;
                 }
-                if (!phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    return false;
-                }
-                if (!game.getStack().isEmpty()) {
-                    return false;
-                }
-                if (game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
-                    return false;
-                }
-                if (!ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
-                    return false;
-                }
+
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 if (tgt != null) {
                     sa.resetTargets();
@@ -258,6 +247,21 @@ public class EffectAi extends SpellAbilityAi {
                 if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
                     return false;
                 }
+            } else if (logic.equals("PeaceTalks")) {
+                Player nextPlayer = game.getNextPlayerAfter(ai);
+
+                // If opponent doesn't have creatures, preventing attacks don't mean as much
+                if (nextPlayer.getCreaturesInPlay().isEmpty()) {
+                    return false;
+                }
+
+                // Only cast Peace Talks after you attack just in case you have creatures
+                if (!phase.is(PhaseType.MAIN2)) {
+                    return false;
+                }
+
+                // Create a pseudo combat and see if my life is in danger
+                return randomReturn;
             } else if (logic.equals("Bribe")) {
                 Card host = sa.getHostCard();
                 Combat combat = game.getCombat();
