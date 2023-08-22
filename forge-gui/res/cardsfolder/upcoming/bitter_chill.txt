@@ -1,0 +1,12 @@
+Name:Bitter Chill
+ManaCost:1 U
+Types:Enchantment Aura
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay {1}. If you do, scry 1, then draw a card.
+SVar:TrigDraw:AB$ Scry | Cost$ 1 | ScryNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:SacMe:2
+Oracle:Enchant creature\nWhen Bitter Chill enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nWhen Bitter Chill is put into a graveyard from the battlefield, you may pay {1}. If you do, scry 1, then draw a card.
