@@ -1,4 +1,4 @@
-Name:Royal Role
+Name:Royal
 ManaCost:no cost
 Types:Enchantment Aura Role
 K:Enchant creature

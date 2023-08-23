@@ -1,4 +1,4 @@
-Name:Monster Role
+Name:Monster
 ManaCost:no cost
 Types:Enchantment Aura Role
 K:Enchant creature

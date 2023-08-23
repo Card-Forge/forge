@@ -1,4 +1,4 @@
-Name:Young Hero Role
+Name:Young Hero
 ManaCost:no cost
 Types:Enchantment Aura Role
 K:Enchant creature

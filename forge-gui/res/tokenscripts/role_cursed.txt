@@ -1,4 +1,4 @@
-Name:Cursed Role
+Name:Cursed
 ManaCost:no cost
 Types:Enchantment Aura Role
 K:Enchant creature
