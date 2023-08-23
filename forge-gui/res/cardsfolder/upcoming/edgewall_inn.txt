@@ -1,0 +1,11 @@
+Name:Edgewall Inn
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | TgtPrompt$ Choose target card in your graveyard that has an adventure | ValidTgts$ Card.YouCtrl+AdventureCard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card that has an Adventure from your graveyard to your hand.
+DeckHas:Ability$Graveyard|Sacrifice
+DeckHints:Type$Adventure
+Oracle:Edgewall Inn enters the battlefield tapped.\nAs Edgewall Inn enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color.\n{3}, {T}, Sacrifice Edgewall Inn: Return target card that has an Adventure from your graveyard to your hand.
