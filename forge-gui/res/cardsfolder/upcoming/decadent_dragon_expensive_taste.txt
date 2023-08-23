@@ -1,0 +1,23 @@
+Name:Decadent Dragon
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+SVar:HasAttackEffect:TRUE
+AlternateMode:Adventure
+Oracle:Flying, trample\nWhenever Decadent Dragon attacks, create a Treasure token.
+
+ALTERNATE
+
+Name:Expensive Taste
+ManaCost:2 B
+Types:Instant Adventure
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | ValidTgts$ Opponent | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play a card as long as it remains exiled.
+Oracle:Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.

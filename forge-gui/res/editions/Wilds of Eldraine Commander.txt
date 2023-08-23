@@ -10,9 +10,25 @@ ScryfallCode=WOC
 2 M Ellivere of the Wild Court @Dmitry Burmak
 3 M Alela, Cunning Conqueror @Livia Prima
 4 M Gylwain, Casting Director @Aurore Folny
+21 R Court of Ardenvale @Donato Giancola
+22 R Court of Vantress @Nino Vecia
+23 R Court of Locthwain @Julie Dillon
+24 R Court of Embereth @Peter Polach
+25 R Court of Garenbrig @Sam Guay
+26 M Korvold, Gleeful Glutton @Francisco Miyara
+27 M Brenard, Ginger Sculptor @Marta Nael
+28 R Throne of Eldraine @Kieran Yanner
+29 R Court of Ardenvale @Donato Giancola
+30 R Court of Vantress @Nino Vecia
+31 R Court of Locthwain @Julie Dillon
+32 R Court of Embereth @Peter Polach
+33 R Court of Garenbrig @Sam Guay
 34 M Alela, Cunning Conqueror @Livia Prima
+35 M Brenard, Ginger Sculptor @Marta Nael
 36 M Ellivere of the Wild Court @Dmitry Burmak
 37 M Gylwain, Casting Director @Aurore Folny
+38 M Korvold, Gleeful Glutton @Francisco Miyara
 39 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+40 R Throne of Eldraine @Kieran Yanner
 57 M Ellivere of the Wild Court @Dmitry Burmak
 58 M Tegwyll, Duke of Splendor @Ekaterina Burmak
