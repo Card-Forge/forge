@@ -47,11 +47,13 @@
     <property name="dialog">[
 	{
 		&quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
-		&quot;options&quot;: [
+		&quot;options&quot;:
+		[
 			{
 				&quot;name&quot;: &quot;What are you ?&quot;,
 				&quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.&quot;,
-				&quot;options&quot;: [
+				&quot;options&quot;:
+				[
 					{
 						&quot;name&quot;: &quot;Usurped ? What are you talking about ?&quot;,
 						&quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
@@ -82,40 +84,41 @@
 			{
 				&quot;name&quot;: &quot;The Sliver Queen is no more !&quot;,
 				&quot;text&quot;: &quot;Thank you for what you have done. I'll return to my rightful place as queen of the slivers'&quot;,
-				&quot;condition&quot;: [
+				&quot;condition&quot;:
+				[
 					{
 						&quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;,
 						&quot;not&quot;: false
 					}
 				],
-				&quot;options&quot;: [
+				&quot;options&quot;:
+				[
 					{
 						&quot;name&quot;: &quot;Leave&quot;,
-						[
-	{
-		&quot;text&quot;: &quot;G'day to you, adventurer&quot;,
-		&quot;condition&quot;: [
-			{
-				&quot;checkMapFlag&quot;: &quot;TalkedTo&quot;,
-				&quot;not&quot;: true
-			}
-		],
-			&quot;options&quot;:
-			[
-				{
-					&quot;name&quot;: &quot;leave&quot;,
-					&quot;action&quot;: [
-						{
-							&quot;setQuestFlag&quot;: {
-								&quot;key&quot;: &quot;TalkedTo&quot;,
-								&quot;val&quot;: 1
-							}
-						}
-					]
-				}
-			]
-	}
-]
+						&quot;text&quot;: &quot;G'day to you, adventurer&quot;,
+                        &quot;condition&quot;:
+                        [
+                        	{
+                        		&quot;checkMapFlag&quot;: &quot;TalkedTo&quot;,
+                        		&quot;not&quot;: true
+                        	}
+                        ],
+                        &quot;options&quot;:
+                        [
+                        	{
+                        		&quot;name&quot;: &quot;leave&quot;,
+                        		&quot;action&quot;:
+                        		[
+                        			{
+                        				&quot;setQuestFlag&quot;:
+                        				{
+                        					&quot;key&quot;: &quot;TalkedTo&quot;,
+                        					&quot;val&quot;: 1
+                        				}
+                        			}
+                        		]
+                        	}
+                        ]
 					}
 				]
 			}

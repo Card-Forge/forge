@@ -190,6 +190,13 @@
 				"Mythic Rare"
 			]
 		}
+	],
+	"questTags": [
+		"Wizard",
+		"Human",
+		"IdentityBlue",
+		"BiomeBlue",
+		"BiomeColorless"
 	]
 },
 {
@@ -1744,6 +1751,57 @@
 	]
 },
 {
+	"name": "Archivist",
+	"sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
+	"deck": [
+		"decks/standard/archivist.dck"
+	],
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"		
+				]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 100,
+			"addMaxCount": 200
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Mystic",
+		"IdentityBlue",
+		"Dungeon"
+	]
+},
+{
 	"name": "Armored Knight",
 	"sprite": "sprites/enemy/humanoid/knight.atlas",
 	"deck": [
@@ -3238,11 +3296,7 @@
 		"Furnace",
 		"IdentityColorless",
 		"Construct",
-		"Robot",
-		null,
-		null,
-		null,
-		null
+		"Robot"
 	]
 },
 {
@@ -4080,7 +4134,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.4,
-	"flying":true
+	"flying":true,
 	"life": 25,
 	"rewards": [
 		{
@@ -12930,65 +12984,54 @@
 	]
 },
 {
-	"name": "Golem that is Generous",
-	"nameOverride": "Shiny Golem",
-	"sprite": "sprites/enemy/construct/golem.atlas",
+	"name": "Golem Sentinel",
+	"sprite": "sprites/enemy/construct/golem_4.atlas",
 	"deck": [
-		"decks/standard/golem.json"
+		"decks/standard/golem_sentinel.dck",
+		"decks/standard/golem_sentinel_2.dck",
+		"decks/standard/golem_sentinel_3.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.1,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
-	"life": 13,
+	"life": 20,
 	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"editions": [
-				"M22",
-				"M21"
-			],
-			"colors": [
-				"red"
-			],
-			"rarity": [
-				"rare"
-			]
-		},
-		{
-			"type": "life",
-			"probability": 1,
-			"count": 1,
-			"addMaxCount": 3
-		},
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 3,
-			"addMaxCount": 3
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 100,
+			"addMaxCount": 200
 		},
 		{
 			"type": "card",
 			"probability": 1,
-			"count": 2,
-			"cardName": "Black Lotus"
+			"count": 3,
+			"rarity": [
+				"Uncommon"
+			]
 		},
 		{
-			"type": "gold",
-			"probability": 1,
-			"count": 10,
-			"addMaxCount": 90
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"rarity": [
+				"Rare"
+			]
 		}
 	],
-	"colors": "GW",
+	"colors": "C",
 	"questTags": [
 		"Golem",
+		"IdentityColorless",
 		"Construct",
-		"IdentityGreen",
-		"IdentityWhite",
-		"IdentitySelesnya"
+		"Dungeon"
 	]
 },
 {
@@ -18727,6 +18770,58 @@
 	]
 },
 {
+	"name": "Myr Superion",
+	"sprite": "sprites/enemy/construct/myr.atlas",
+	"deck": [
+		"decks/standard/Myr_Superion.dck"
+	],
+	"boss": true,
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.5,
+	"speed": 20,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 100,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"rarity": [
+				"Uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "C",
+	"questTags": [
+		"Myr",
+		"IdentityColorless",
+		"Construct",
+		"Robot",
+		"Dungeon",
+		"Boss"
+	]
+},
+{
 	"name": "Naga Warrior",
 	"sprite": "sprites/enemy/humanoid/naga/nagawarrior.atlas",
 	"deck": [
@@ -19679,6 +19774,168 @@
 	]
 },
 {
+	"name": "Pirate 2",
+	"nameOverride": "Buccaneer",
+	"sprite": "sprites/enemy/humanoid/human/rogue/pirate2.atlas",
+	"deck": [
+		"decks/standard/pirate2.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Blue"
+			]
+		}
+	],
+	"colors": "BRU",
+	"questTags": [
+		"Aggressive",
+		"Human",
+		"Warrior",
+		"Water",
+		"Bandit",
+		"Thief",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityGrixis",
+		"Dungeon"
+	]
+},
+{
+	"name": "Pirate 3",
+	"nameOverride": "Plunderer",
+	"sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
+	"deck": [
+		"decks/standard/pirate3.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Blue"
+			]
+		}
+	],
+	"colors": "BRU",
+	"questTags": [
+		"Aggressive",
+		"Human",
+		"Warrior",
+		"Water",
+		"Bandit",
+		"Thief",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityGrixis",
+		"Dungeon"
+	]
+},
+{
 	"name": "Pirate Captain",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/human/rogue/pirate_captain.atlas",
@@ -19750,6 +20007,85 @@
 		"IdentityJund",
 		"Leader",
 		"Pirate"
+	]
+},
+{
+	"name": "Pirate Captain 2",
+	"nameOverride": "Pirate Captain",
+	"sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
+	"deck": [
+		"decks/standard/pirate_captain_2.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Black"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Black"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Leader",
+		"Aggressive",
+		"Human",
+		"Warrior",
+		"Water",
+		"Bandit",
+		"Thief",
+		"IdentityBlack",
+		"Dungeon"
 	]
 },
 {
@@ -23084,6 +23420,63 @@
 		"Unholy",
 		"IdentityBlack",
 		"BiomeBlack"
+	]
+},
+{
+	"name": "Spirit",
+	"sprite": "sprites/enemy/undead/ghost_3.atlas",
+	"deck": [
+		"decks/standard/spirit.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 100,
+			"addMaxCount": 200
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Undead",
+		"Spirit",
+		"Flying",
+		"Ghost",
+		"IdentityBlue",
+		"Dungeon"
 	]
 },
 {

@@ -1,6 +1,5 @@
 package forge.adventure.stage;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -23,9 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -37,6 +35,9 @@ import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
+import forge.adventure.util.pathfinding.NavigationMap;
+import forge.adventure.util.pathfinding.NavigationVertex;
+import forge.adventure.util.pathfinding.ProgressableGraphPath;
 import forge.adventure.world.WorldSave;
 import forge.assets.FBufferedImage;
 import forge.assets.FImageComplex;
@@ -53,6 +54,7 @@ import forge.sound.SoundSystem;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.Queue;
 
 
 /**
@@ -61,9 +63,10 @@ import java.util.*;
 public class MapStage extends GameStage {
     public static MapStage instance;
     final Array<MapActor> actors = new Array<>();
-
-    TiledMap map;
-    Array<Rectangle> collisionRect = new Array<>();
+    public com.badlogic.gdx.physics.box2d.World gdxWorld;
+    public TiledMap tiledMap;
+    public Array<Rectangle> collisionRect = new Array<>();
+    public Map<Float, NavigationMap> navMaps = new HashMap<>();
     private boolean isInMap = false;
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
@@ -87,7 +90,13 @@ public class MapStage extends GameStage {
     private boolean respawnEnemies;
     private boolean canFailDungeon = false;
     protected ArrayList<EnemySprite> enemies = new ArrayList<>();
-    protected Map<Integer, Vector2> waypoints = new HashMap<>();
+    public Map<Integer, Vector2> waypoints = new HashMap<>();
+
+    //todo: add additional graphs for other sprite sizes if desired. Current implementation
+    // allows for mobs of any size to fit into 16x16 tiles for navigation purposes
+    float collisionWidthMod = 0.4f;
+    float defaultSpriteSize = 16f;
+    float navMapSize =  defaultSpriteSize * collisionWidthMod;
 
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
@@ -126,6 +135,8 @@ public class MapStage extends GameStage {
     private boolean freezeAllEnemyBehaviors = false;
 
     protected MapStage() {
+        disposeWorld();
+        gdxWorld = new World(new Vector2(0, 0),false);
         dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
@@ -137,6 +148,16 @@ public class MapStage extends GameStage {
 
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
+    }
+
+    public void disposeWorld() {
+        if (gdxWorld != null) {
+            try {
+                gdxWorld.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void addMapActor(MapObject obj, MapActor newActor) {
@@ -242,7 +263,12 @@ public class MapStage extends GameStage {
         dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
-            fb.dispose();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fb.dispose();
+                }
+            }, 0.5f);
         })).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -309,10 +335,12 @@ public class MapStage extends GameStage {
     }
 
     public void loadMap(TiledMap map, String sourceMap, String targetMap, int spawnTargetId) {
+        disposeWorld();
+        gdxWorld = new World(new Vector2(0, 0),false);
         isLoadingMatch = false;
         isInMap = true;
         GameHUD.getInstance().showHideMap(false);
-        this.map = map;
+        this.tiledMap = map;
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             actor.remove();
             foregroundSprites.removeActor(actor);
@@ -320,6 +348,7 @@ public class MapStage extends GameStage {
         positions.clear();
         actors.clear();
         collisionRect.clear();
+        waypoints.clear();
 
         if (collisionGroup != null)
             collisionGroup.remove();
@@ -401,8 +430,9 @@ public class MapStage extends GameStage {
         } while (oldSize != collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
-        replaceWaypoints();
-
+        navMaps.clear();
+        navMaps.put(navMapSize, new NavigationMap(navMapSize));
+        navMaps.get(navMapSize).initializeGeometryGraph();
         getPlayerSprite().stop();
     }
 
@@ -428,17 +458,6 @@ public class MapStage extends GameStage {
         }
     }
 
-    void replaceWaypoints() {
-        for (EnemySprite enemy : enemies) {
-            for (EnemySprite.MovementBehavior behavior : enemy.movementBehaviors) {
-                if (behavior.getDestination() > 0 && waypoints.containsKey(behavior.getDestination())) {
-                    behavior.setX(waypoints.get(behavior.getDestination()).x);
-                    behavior.setY(waypoints.get(behavior.getDestination()).y);
-                }
-            }
-        }
-    }
-
     static public boolean containsOrEquals(Rectangle r1, Rectangle r2) {
         float xmi = r2.x;
         float xma = xmi + r2.width;
@@ -456,7 +475,7 @@ public class MapStage extends GameStage {
                 for (MapObject collision : cell.getTile().getObjects()) {
                     if (collision instanceof RectangleMapObject) {
                         Rectangle r = ((RectangleMapObject) collision).getRectangle();
-                        collisionRect.add(new Rectangle((Math.round(layer.getTileWidth() * x) + r.x), (Math.round(layer.getTileHeight() * y) + r.y), Math.round(r.width), Math.round(r.height)));
+                        collisionRect.add(new Rectangle(((layer.getTileWidth() * x) + r.x), ((layer.getTileHeight() * y) + r.y), Math.round(r.width), Math.round(r.height)));
                     }
                 }
             }
@@ -656,6 +675,10 @@ public class MapStage extends GameStage {
                             dialogObject = prop.get("waypoints");
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.parseWaypoints(dialogObject.toString());
+                            }
+                            if (prop.containsKey("speedModifier")) //Increase or decrease default speed for this mob
+                            {
+                                mob.speedModifier = Float.parseFloat(prop.get("speedModifier").toString());
                             }
 
                             enemies.add(mob);
@@ -1026,8 +1049,6 @@ public class MapStage extends GameStage {
         for (Integer i : idsToRemove) deleteObject(i);
     }
 
-    final Rectangle tempBoundingRect = new Rectangle();
-
     @Override
     protected void onActing(float delta) {
         if (isPaused() || isDialogOnlyInput())
@@ -1040,6 +1061,9 @@ public class MapStage extends GameStage {
             }
             else return;
         }
+        float mobSize = navMapSize; //todo: replace with actual size if multiple nav maps implemented
+        ArrayList<NavigationVertex> verticesNearPlayer = new ArrayList<>(navMaps.get(mobSize).navGraph.getNodes());
+        verticesNearPlayer.sort(Comparator.comparingInt(o -> Math.round((o.pos.x - player.pos().x) * (o.pos.x - player.pos().x) + (o.pos.y - player.pos().y) * (o.pos.y - player.pos().y))));
 
         if (!freezeAllEnemyBehaviors) {
             while (it.hasNext()) {
@@ -1048,35 +1072,52 @@ public class MapStage extends GameStage {
                     continue;
                 }
                 mob.updatePositon();
-                mob.targetVector = mob.getTargetVector(player, delta);
-                Vector2 currentVector = new Vector2(mob.targetVector);
+
+                ProgressableGraphPath<NavigationVertex> navPath = new ProgressableGraphPath<>(0);
+                if (mob.getData().flying) {
+                    navPath.add(new NavigationVertex(mob.getTargetVector(player, null,delta)));
+                } else {
+                    Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
+
+                    if (destination.epsilonEquals(mob.pos()) && !mob.aggro) {
+                        mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                        continue;
+                    }
+                    if (destination.equals(mob.targetVector) && mob.getNavPath() != null)
+                        navPath = mob.getNavPath();
+
+                    if (navPath.nodes.size == 0 || !destination.equals(mob.targetVector)) {
+                        mob.targetVector = destination;
+                        navPath = navMaps.get(mobSize).findShortestPath(mobSize, mob.pos(), mob.targetVector);
+                    }
+
+                    if (mob.aggro) {
+                        navPath.add(new NavigationVertex(player.pos()));
+                    }
+                }
+
+                if (navPath == null || navPath.getCount() == 0 || navPath.get(0) == null) {
+                        mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                        continue;
+                }
+                Vector2 currentVector = null;
+
+                while (navPath.getCount() > 0 && navPath.get(0) != null && (navPath.get(0).pos == null || navPath.get(0).pos.dst(mob.pos()) < 0.5f)) {
+
+                    navPath.remove(0);
+
+                }
+                if (navPath.getCount() != 0) {
+                    currentVector = new Vector2(navPath.get(0).pos).sub(mob.pos());
+                }
+                mob.setNavPath(navPath);
                 mob.clearActions();
-                if (mob.targetVector.len() == 0.0f) {
+                if (currentVector == null || (currentVector.x == 0.0f && currentVector.y == 0.0f)) {
                     mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                     continue;
                 }
-
-                currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
-
-                tempBoundingRect.set(mob.getX() + currentVector.x, mob.getY() + currentVector.y, mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
-
-                if (!mob.getData().flying && isColliding(tempBoundingRect))//if direct path is not possible
-                {
-                    currentVector = adjustMovement(currentVector,tempBoundingRect);
-                    tempBoundingRect.set(mob.getX() + currentVector.x, mob.getY(), mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
-                    if (isColliding(tempBoundingRect))//if only x path is not possible
-                    {
-                        tempBoundingRect.set(mob.getX(), mob.getY() + currentVector.y, mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
-                        if (!isColliding(tempBoundingRect))//if y path is possible
-                        {
-                            mob.moveBy(0, currentVector.y, delta);
-                        }
-                    } else {
-                        mob.moveBy(currentVector.x, 0, delta);
-                    }
-                } else {
-                    mob.moveBy(currentVector.x, currentVector.y, delta);
-                }
+                mob.steer(currentVector);
+                mob.update(delta);
             }
         }
 
@@ -1086,9 +1127,6 @@ public class MapStage extends GameStage {
         positions.add(player.pos());
         if (positions.size() > 4)
             positions.remove();
-
-
-
 
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             if (actor.collideWithPlayer(player)) {

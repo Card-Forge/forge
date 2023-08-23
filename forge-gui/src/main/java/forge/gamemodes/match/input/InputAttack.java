@@ -69,7 +69,6 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     public final void showMessage() {
-        // TODO still seems to have some issues with multiple planeswalkers
         setCurrentDefender(defenders.getFirst());
 
         if (currentDefender == null) {
@@ -295,7 +294,9 @@ public class InputAttack extends InputSyncronizedBase {
                 getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
         }
-        potentialBanding = isBandingPossible();
+        if (def != null) {
+            potentialBanding = isBandingPossible();
+        }
 
         updateMessage();
     }

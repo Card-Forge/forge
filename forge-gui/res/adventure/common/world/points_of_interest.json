@@ -2868,6 +2868,18 @@
 	"radiusFactor": 0.8
 },
 {
+	"name": "Quest_APortalToNowhere",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story/waste_town_abandoned.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_APortalToNowhere"
+	]
+},
+{
 	"name": "Red Castle",
 	"type": "castle",
 	"count": 1,
@@ -3196,7 +3208,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Jace",
-	"map": "../common/maps/map/teferi.tmx",
+	"map": "../common/maps/map/teferi/teferi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",

@@ -4697,9 +4697,8 @@
   <objectgroup draworder="index" id="3">
    <object id="2" x="0" y="0" width="4" height="16"/>
    <object id="3" x="4" y="0" width="12" height="8"/>
-   <object id="4" x="4" y="8" width="4" height="4"/>
-   <object id="5" x="8" y="8" width="2" height="2"/>
-   <object id="6" x="4" y="12" width="2" height="2"/>
+   <object id="5" x="6" y="8" width="4" height="3"/>
+   <object id="6" x="4" y="8" width="2" height="6"/>
   </objectgroup>
  </tile>
  <tile id="2218">
@@ -4711,9 +4710,8 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="7"/>
    <object id="2" x="11" y="7" width="5" height="9"/>
-   <object id="3" x="5" y="7" width="6" height="4"/>
-   <object id="4" x="2" y="7" width="3" height="2"/>
-   <object id="6" x="8" y="11" width="3" height="2"/>
+   <object id="4" x="2" y="7" width="9" height="2"/>
+   <object id="6" x="6" y="9" width="5" height="3"/>
   </objectgroup>
  </tile>
  <tile id="2316">
@@ -5020,9 +5018,8 @@
  <tile id="2533">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="13" width="16" height="3"/>
-   <object id="3" x="0" y="11" width="14" height="2"/>
-   <object id="4" x="0" y="5" width="10" height="6"/>
-   <object id="6" x="0" y="-1" width="7" height="6"/>
+   <object id="4" x="0" y="5" width="10" height="8"/>
+   <object id="6" x="0" y="0" width="7" height="5"/>
   </objectgroup>
  </tile>
  <tile id="2534">
@@ -5036,7 +5033,6 @@
    <object id="3" x="0" y="12" width="12" height="4"/>
    <object id="6" x="4" y="9" width="8" height="3"/>
    <object id="7" x="7" y="6" width="5" height="3"/>
-   <object id="8" x="11" y="0" width="1" height="6"/>
   </objectgroup>
  </tile>
  <tile id="2632">
@@ -5743,8 +5739,7 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="8"/>
    <object id="2" x="4" y="8" width="12" height="3"/>
-   <object id="3" x="8" y="11" width="8" height="1"/>
-   <object id="4" x="11" y="12" width="5" height="4"/>
+   <object id="4" x="11" y="11" width="5" height="5"/>
   </objectgroup>
  </tile>
  <tile id="3330">
