@@ -20,11 +20,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9VUsOgkAMna0LzwE3kQTv44cjssAb6M7IFXShjbzwfGmHYeNLCDP9Tee1lJRmXDbf90iywZGdt7/6xpEbOtnzGZFegXOPZNsuuxVh58hKcjIgr9Nkv5/24GKgezayV58IiGU54WG5xgO0DgrouRZ9Pa8tV+bBdGt5MTxozWcx7rUvVx3iIg440F7gPuH6jmLH+2uV0q2aeTmu4FN5OTi2iMc6y//5OfNVxbFLof2wVCvuO/YdRa+cRTjLvRh9pr6ebgj6JAfPB73jzS3TaY1zsJ5raf1wbEq50lwMqJc3j0qwS/mad4Wz0+ME99LZo7Zcd+6viBdvHni5Rf4mL/nfsL33bRpQz2hG/RO5bymaNR5vkA3B//YNj9NLaA==
+   eJy9VUkOwjAMzJUD7yg/aaXyH6A8kUP4AdwQ/QIcwKJWh9E4DRdGQiTe4owdN6UZ59XnfwRZFrJh/a3vhNxwpD2eEekZo5D1y25VaIWsJieD53WY7LfT3rnIcM+O9uwTwWNZTv5DOcdzcB0YrsdanDbz2nJFHkz3Ky+GO6zxLMRto+Ws87gexzngXthDnlhf7iPcX5qUrs3My/4HPpmXnbD1eKiz/B/vM59NHLsW3A9LtcK+Q9+R9OrtKQx0L8SpUF+ly0GflKB8vHfU3DId17gE67ke1ndhU8sV52Lweql5VIM2lWuOutLsVJz4vXj2sC3WHfsr4kXNA5Vb5G/ymu8N2qu3afB6RjPqnyi9pQiKN5fl4Hv7AnveSdc=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="1" y="281" width="478" height="16">
+  <object id="38" template="../../obj/entry_up.tx" x="201.5" y="272" width="32.75" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -81,7 +81,7 @@
   </object>
   <object id="67" template="../../obj/waypoint.tx" x="300.895" y="134.533"/>
   <object id="70" template="../../obj/waypoint.tx" x="441.662" y="135.415"/>
-  <object id="71" template="../../obj/enemy.tx" x="216.169" y="52.0138" visible="1">
+  <object id="71" template="../../obj/enemy.tx" x="211.419" y="41.7638" visible="1">
    <properties>
     <property name="enemy" value="Leonin Warrior"/>
     <property name="fleeRange" value="30"/>
@@ -99,7 +99,7 @@
    </properties>
   </object>
   <object id="74" template="../../obj/waypoint.tx" x="157.038" y="51.5725"/>
-  <object id="75" template="../../obj/waypoint.tx" x="292.51" y="53.3376"/>
+  <object id="75" template="../../obj/waypoint.tx" x="287.01" y="32.5876"/>
   <object id="76" template="../../obj/enemy.tx" x="266.034" y="131.444" visible="1">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
