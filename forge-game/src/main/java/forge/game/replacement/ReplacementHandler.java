@@ -911,7 +911,8 @@ public class ReplacementHandler {
                             && re.hasParam("PreventionEffect")
                             && re.zonesCheck(game.getZoneOf(c))
                             && re.getOverridingAbility() != null
-                            && re.getOverridingAbility().getApi() == ApiType.ReplaceDamage) {
+                            && re.getOverridingAbility().getApi() == ApiType.ReplaceDamage
+                            && re.matchesValidParam("ValidTarget", o)) {
                         list.add(re);
                     }
                 }
