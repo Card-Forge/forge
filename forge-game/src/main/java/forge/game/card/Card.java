@@ -4413,10 +4413,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
-    public final void tap(boolean tapAnimation, SpellAbility cause) {
-        tap(false, tapAnimation, cause);
+    public final void tap(boolean tapAnimation, SpellAbility cause, Player tapper) {
+        tap(false, tapAnimation, cause, tapper);
     }
-    public final void tap(boolean attacker, boolean tapAnimation, SpellAbility cause) {
+    public final void tap(boolean attacker, boolean tapAnimation, SpellAbility cause, Player tapper) {
         if (tapped) { return; }
 
         // Run replacement effects
@@ -4426,6 +4426,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Attacker, attacker);
         runParams.put(AbilityKey.Cause, cause);
+        runParams.put(AbilityKey.Player, tapper);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);

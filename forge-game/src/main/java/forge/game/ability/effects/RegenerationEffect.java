@@ -20,9 +20,11 @@ public class RegenerationEffect extends SpellAbilityEffect {
         for (Card c : getTargetCards(sa)) {
             // checks already done in ReplacementEffect
 
+            SpellAbility cause = (SpellAbility)sa.getReplacingObject(AbilityKey.Cause);
+
             c.setDamage(0);
             c.setHasBeenDealtDeathtouchDamage(false);
-            c.tap(true, (SpellAbility)sa.getReplacingObject(AbilityKey.Cause));
+            c.tap(true, cause, cause == null ? null : cause.getActivatingPlayer());
             c.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {

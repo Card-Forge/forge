@@ -43,7 +43,7 @@ public class TapAllEffect extends SpellAbilityEffect {
             if (remTapped) {
                 card.addRemembered(c);
             }
-            c.tap(true, sa);
+            c.tap(true, sa, activator);
         }
     }
 

@@ -196,7 +196,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true, ability);
+        targetCard.tap(true, ability, targetCard.getController());
         return targetCard;
     }
 
