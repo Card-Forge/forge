@@ -361,7 +361,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             }
             if (aggro && spriteToPlayer.len() > pursueRange) {
                 aggro = false;
-                navPath.clear();
+                if (navPath != null)
+                    navPath.clear();
                 initializeBaseMovementBehavior();
             }
         }
