@@ -3208,7 +3208,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Jace",
-	"map": "../common/maps/map/teferi.tmx",
+	"map": "../common/maps/map/teferi/teferi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
