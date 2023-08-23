@@ -135,6 +135,7 @@ public class MapStage extends GameStage {
     private boolean freezeAllEnemyBehaviors = false;
 
     protected MapStage() {
+        disposeWorld();
         gdxWorld = new World(new Vector2(0, 0),false);
         dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
@@ -147,6 +148,16 @@ public class MapStage extends GameStage {
 
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
+    }
+
+    public void disposeWorld() {
+        if (gdxWorld != null) {
+            try {
+                gdxWorld.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void addMapActor(MapObject obj, MapActor newActor) {
@@ -252,7 +263,12 @@ public class MapStage extends GameStage {
         dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
-            fb.dispose();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fb.dispose();
+                }
+            }, 0.5f);
         })).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -319,6 +335,7 @@ public class MapStage extends GameStage {
     }
 
     public void loadMap(TiledMap map, String sourceMap, String targetMap, int spawnTargetId) {
+        disposeWorld();
         gdxWorld = new World(new Vector2(0, 0),false);
         isLoadingMatch = false;
         isInMap = true;
