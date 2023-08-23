@@ -316,6 +316,7 @@ public class RewardScene extends UIScene {
         if (type == Type.Shop) {
             this.shopActor = shopActor;
             this.changes = shopActor.getMapStage().getChanges();
+            addToSelectable(restockButton);
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
@@ -323,6 +324,7 @@ public class RewardScene extends UIScene {
                 ((RewardActor) actor).dispose();
             }
         }
+        addToSelectable(doneButton);
         generated.clear();
 
         Actor card = ui.findActor("cards");
