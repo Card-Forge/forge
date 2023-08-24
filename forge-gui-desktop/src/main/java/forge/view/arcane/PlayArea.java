@@ -697,7 +697,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
-            attachedToPanel = getCardPanel(card.getAttachedTo().getId());
+            if (card != card.getAttachedTo().getAttachedTo())
+                attachedToPanel = getCardPanel(card.getAttachedTo().getId());
+            else {
+                toPanel.getAttachedPanels().remove(getCardPanel(card.getAttachedTo().getId()));
+                CardPanel panel = getCardPanel(card.getAttachedTo().getId());
+                if (panel != null)
+                    panel.setAttachedToPanel(null);
+                attachedToPanel = null;
+            }
         } else {
             attachedToPanel = null;
         }
