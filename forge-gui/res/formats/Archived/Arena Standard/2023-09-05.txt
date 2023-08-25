@@ -1,7 +1,7 @@
 [format]
-Name:Standard
-Order:101
+Name:Arena Standard (WOE)
+Type:Archived
 Subtype:Standard
-Type:Sanctioned
+Effective:2023-09-05
 Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE
 Banned:Fable of the Mirror-Breaker; Invoke Despair; Reckoner Bankbuster; The Meathook Massacre
