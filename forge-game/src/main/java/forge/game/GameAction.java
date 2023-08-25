@@ -33,7 +33,6 @@ import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
-import forge.game.phase.PhaseType;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -1299,6 +1298,10 @@ public class GameAction {
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
                         checkAgainCard = true;
+                    } else if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        //702.12b. A permanent with indestructible can't be destroyed.
+                        // Such permanents aren't destroyed by lethal damage, and they
+                        // ignore the state-based action that checks for lethal damage
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
@@ -1317,11 +1320,7 @@ public class GameAction {
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
-                        boolean check = true;
-                        if (game.getPhaseHandler() != null && c.hasKeyword("Damage isn't removed from CARDNAME during cleanup steps.")) {
-                            check = PhaseType.CLEANUP != game.getPhaseHandler().getPhase();
-                        }
-                        checkAgainCard = check;
+                        checkAgainCard = true;
                     }
                 }
 
