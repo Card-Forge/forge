@@ -172,7 +172,7 @@
   <object id="106" template="../../obj/gate.tx" x="320.167" y="133" width="14.9999" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is be locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently. Perhaps the key can be found nearby?&quot;,
+    &quot;text&quot;:&quot;This door is locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently so the key can probably be found nearby.&quot;,
     &quot;options&quot;:[
     { &quot;name&quot;:&quot;(Leave)&quot; },
     {      
