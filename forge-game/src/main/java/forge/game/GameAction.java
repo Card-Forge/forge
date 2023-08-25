@@ -33,6 +33,7 @@ import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
+import forge.game.phase.PhaseType;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -1316,7 +1317,11 @@ public class GameAction {
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
-                        checkAgainCard = true;
+                        boolean check = true;
+                        if (game.getPhaseHandler() != null && c.hasKeyword("Damage isn't removed from CARDNAME during cleanup steps.")) {
+                            check = PhaseType.CLEANUP != game.getPhaseHandler().getPhase();
+                        }
+                        checkAgainCard = check;
                     }
                 }
 
