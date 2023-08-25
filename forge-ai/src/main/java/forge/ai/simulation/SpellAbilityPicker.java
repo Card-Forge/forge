@@ -98,7 +98,7 @@ public class SpellAbilityPicker {
             return null;
         }
 
-        if (game.getPhaseHandler().getPhase() == PhaseType.MAIN1 && printOutput) {
+        if (printOutput && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
             System.out.println("Current state for " + player + ":");
             for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
                 System.out.println(c);

@@ -249,6 +249,7 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
+                // Rule 508.8
                 if (inCombat() && combat.getAttackers().isEmpty()) {
                     endCombat();
                 }
@@ -265,6 +266,8 @@ public class PhaseHandler implements java.io.Serializable {
     private final void onPhaseBegin() {
         boolean skipped = false;
 
+        // default to not giving priority to players.
+        givePriorityToPlayer = false;
         game.getTriggerHandler().resetActiveTriggers();
         if (isSkippingPhase(phase)) {
             skipped = true;
@@ -283,12 +286,16 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
+                    // Rule 503.1
+                    givePriorityToPlayer = true;
                     break;
 
+                // Rule 504
                 case DRAW:
                     for (Player p : game.getPlayers()) {
                         p.resetNumDrawnThisDrawStep();
                     }
+                    // Rule 504.1
                     playerTurn.drawCard();
                     for (Player p : game.getPlayers()) {
                         if (p.isOpponentOf(playerTurn) &&
@@ -296,13 +303,17 @@ public class PhaseHandler implements java.io.Serializable {
                             p.drawCard();
                         }
                     }
+                    // Rule 504.2
+                    givePriorityToPlayer = true;
                     break;
 
                 case MAIN1:
                     {
+                        // Rule 505.3
                         if (playerTurn.isArchenemy()) {
                             playerTurn.setSchemeInMotion();
                         }
+                        // Rule 505.4
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
@@ -312,12 +323,17 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                         table.replaceCounterEffect(game, null, false);
                     }
+                    // Rule 505.6
+                    givePriorityToPlayer = true;
                     break;
 
+                // Rule 507
                 case COMBAT_BEGIN:
                     nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
                     //PhaseUtil.verifyCombat();
+                    // Rule 507.2
+                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
@@ -326,14 +342,22 @@ public class PhaseHandler implements java.io.Serializable {
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
 
+                    // Rule 508.2
+                    // For correctness, this should give priority,
+                    // but there are almost no cases where you'd actually want to have priority
+                    // if there are no attackers, so keep this for now or someday make a setting for it.
                     givePriorityToPlayer = inCombat();
                     break;
 
+                // Rule 509
                 case COMBAT_DECLARE_BLOCKERS:
                     combat.removeAbsentCombatants();
                     game.getStack().freezeStack();
+                    // Rule 509
                     declareBlockersTurnBasedAction();
                     game.getStack().unfreezeStack();
+                    // Rule 509.4
+                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_FIRST_STRIKE_DAMAGE:
@@ -347,6 +371,8 @@ public class PhaseHandler implements java.io.Serializable {
                     } else {
                         combat.dealAssignedDamage();
                     }
+                    // Rule 510.3
+                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_DAMAGE:
@@ -359,6 +385,8 @@ public class PhaseHandler implements java.io.Serializable {
                     } else {
                         combat.dealAssignedDamage();
                     }
+                    // Rule 510.3
+                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_END:
@@ -369,10 +397,14 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getEndOfCombat().executeAt();
 
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                    // Rule 511.1
+                    givePriorityToPlayer = true;
                     break;
 
                 case MAIN2:
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                    // Rule 505.6
+                    givePriorityToPlayer = true;
                     break;
 
                 case END_OF_TURN:
@@ -382,6 +414,8 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     game.getEndOfTurn().executeAt();
+                    // Rule 513.1
+                    givePriorityToPlayer = true;
                     break;
 
                 case CLEANUP:
@@ -471,9 +505,6 @@ public class PhaseHandler implements java.io.Serializable {
         if (!game.getStack().isEmpty()) {
             throw new IllegalStateException("Phase.nextPhase() is called, but Stack isn't empty.");
         }
-
-        // now that we're going, give priority to the player
-        givePriorityToPlayer = true;
 
         final Map<Player, Integer> lossMap = Maps.newHashMap();
         for (Player p : game.getPlayers()) {
@@ -1018,12 +1049,8 @@ public class PhaseHandler implements java.io.Serializable {
         advanceToNextPhase();
         onPhaseBegin();
 
-        // don't even offer priority, because it's untap of 1st turn now
-        givePriorityToPlayer = false;
-
         if (startGameHook != null) {
             startGameHook.run();
-            givePriorityToPlayer = true;
         }
     }
 
