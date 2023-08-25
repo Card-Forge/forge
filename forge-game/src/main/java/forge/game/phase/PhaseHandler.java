@@ -112,6 +112,7 @@ public class PhaseHandler implements java.io.Serializable {
     private final transient Game game;
 
     private int loopCount = 0;
+    private static final int MAX_LOOP_COUNT = 999;
     private StopWatch sw = new StopWatch();
 
 
@@ -1120,10 +1121,10 @@ public class PhaseHandler implements java.io.Serializable {
                 }
                 game.copyLastState();
                 loopCount++;
-                if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
+                if (loopCount >= MAX_LOOP_COUNT && pPlayerPriority.getController().isAI()) {
                     System.out.print("AI looped too much with: " + chosenSa);
                 }
-                keep_looping = loopCount < 999 || !pPlayerPriority.getController().isAI();
+                keep_looping = loopCount < MAX_LOOP_COUNT || !pPlayerPriority.getController().isAI();
             }
 
             // reset the loop counter and stopwatch
