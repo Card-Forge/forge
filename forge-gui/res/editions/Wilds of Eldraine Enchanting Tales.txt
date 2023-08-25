@@ -33,7 +33,7 @@ ScryfallCode=WOT
 25 M Rhystic Study @Serena Malyon
 26 U Spreading Seas @Lander Strijbol
 27 M Bitterblossom @Serena Malyon
-28 R Dark Tutelage @Abigail Larson
+28 U Dark Tutelage @Abigail Larson
 29 M Grave Pact @Zach Alexander
 30 R Leyline of the Void @Matteo Marjoram
 31 M Necropotence @Abigail Larson
@@ -43,6 +43,7 @@ ScryfallCode=WOT
 35 R Sanguine Bond @Harry Conway
 36 U Stab Wound @Shafer Brown
 37 U Vampiric Rites @Harry Conway
+38 R Waste Not @Benjamin Ee
 39 R Aggravated Assault @Maihope
 40 M Blood Moon @William Phifer
 41 U Dragon Mantle @Harry Conway
@@ -53,6 +54,7 @@ ScryfallCode=WOT
 46 R Mana Flare @Olena Richards
 47 U Raid Bombardment @Shafer Brown
 48 M Repercussion @Francoyovich
+49 R Shared Animosity @Lander Strijbol
 50 M Sneak Attack @Shafer Brown
 51 M Defense of the Heart @Olena Richards
 52 M Doubling Season @Eva Eskelinen
@@ -62,6 +64,7 @@ ScryfallCode=WOT
 56 R Leyline of Abundance @BEMOCS
 57 R Nature's Will @Matteo Bassini
 58 M Parallel Lives @Lander Strijbol
+59 R Primal Vigor @Maël Ollivier-Henry
 60 R Prismatic Omen @Qianhao Ma
 61 U Season of Growth @Maël Ollivier-Henry
 62 R Unnatural Growth @Francoyovich
@@ -90,6 +93,7 @@ ScryfallCode=WOT
 85 R Karmic Justice @Yakotakos
 86 M Land Tax @Jintetsu
 87 M Smothering Tithe @Daisuke Tatsuma
+88 R As Foretold @Yuichi Murakami
 89 M Kindred Discovery @Yuchi Yuki
 90 M Omniscience @Yakotakos
 91 M Rhystic Study @Fuzichoco
