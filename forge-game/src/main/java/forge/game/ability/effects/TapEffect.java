@@ -40,6 +40,12 @@ public class TapEffect extends SpellAbilityEffect {
             toTap = getTargetCards(sa);
         }
 
+        Player tapper = activator;
+
+        if (sa.hasParam("Tapper")) {
+            tapper = AbilityUtils.getDefinedPlayers(card, sa.getParam("Tapper"), sa).getFirst();
+        }
+
         for (final Card tgtC : toTap) {
             if (tgtC.isPhasedOut()) {
                 continue;
@@ -48,7 +54,7 @@ public class TapEffect extends SpellAbilityEffect {
                 if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);
                 }
-                tgtC.tap(true, sa, activator);
+                tgtC.tap(true, sa, tapper);
             }
             if (sa.hasParam("ETB")) {
                 // do not fire Taps triggers
