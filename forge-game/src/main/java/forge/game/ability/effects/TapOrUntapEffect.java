@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -44,7 +45,12 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                     !tgtC.getController().equals(activator) );
 
             if (tap) {
-                tgtC.tap(true, sa, activator);
+                Player tapper = activator;
+                if (sa.hasParam("Tapper")) {
+                    tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
+                }
+
+                tgtC.tap(true, sa, tapper);
             } else {
                 tgtC.untap(true);
             }

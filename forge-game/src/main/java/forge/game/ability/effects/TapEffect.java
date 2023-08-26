@@ -41,7 +41,6 @@ public class TapEffect extends SpellAbilityEffect {
         }
 
         Player tapper = activator;
-
         if (sa.hasParam("Tapper")) {
             tapper = AbilityUtils.getDefinedPlayers(card, sa.getParam("Tapper"), sa).getFirst();
         }
