@@ -5,19 +5,20 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKRA1ZwIDA9gRsnAtPSDhM+2toxWO1Fx8PJ3l08EPuQMUgMhMkBALjxDFA=
+   eJxjYBgFo2AUjIKRA1ZwIDA9gRsnAtMSmPDR1vxRe3HbS6u43cUDsQ8Zg8RAmBwAAB7VB68=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxr4mZgaBrFo3gUj+JRPOSxDA8DGIDoUXuHp70wTIk5AJTeEms=
+   eJxr4mZgaBrFo3gUj+JRPCwwCIzaOzztleFBYErMAQAesRWT
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzN1F8KgzAMBvC+q3vbk+5i7ixuV/EY/pmX8ERWJCyU2H4JRQx8CGr8NSodSueGC9IEQXrelXNTeZ62yufS9d2c/TFWI2Br5g1NaVbURl1kTs3ciGsxUzbivowmVW2cN/bv0prqxH255+Vu7nnv6CJldRefb4E7/fOfzvf9jG4TsaX3vD6OkCk9V7NPSvbZ942Z2n1SsiU3ZWpdbn+KI9ylcynT4oY9vLTr59kAetHgSA==
+   eJzN1UEOgyAQBVD2anddaS9mz6K9So+hrV7CE4nRSadkhD8T0pRkYgLI46PRoXRu+EE1QSH33CvnXuV5tVU+l8Y38+2vsTYCtiZvaEpZURt1kZya3IhrMVM24t6MJrXamDf27tKe6sS83Hm5mzvvP7pIs7qzr0chr9n5/r74Hn9eP7WNT0a3idh0vvxMlsteZErrar6Tki25dA5npvY7KdmSmzK1Lrf747lOhxf2IRm0/0E+nzft/nmtlufjJA==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -25,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxk48aDy37EzMHxih9DIoI3K9oqzUUfNYAayPITV4APSFOjnEkVlgzB6HLYhyWHTNxzBVF4GhmlIeDov5Wai5yEQqONGYBAw5gPmKTEGhgXQ8DXlo9xeECCULy8C7ekRZ2C4xAfBl6lkLyHQxI1K0wOIAMsLUSAWG+LlBj0AALryE3E=
+   eJxjYBgFIxk48aDy37EzMHxih9DIoI3K9oqzUUfNYAayPITV4APSFOjnEkVlgzB6HLYhyWHTNxzBVF4GhmlIeDov5Wai5yFswJgPmKfEGBgWQMPXlI9ye0GAUL68CLSnR5yB4RIfBF+mkr2EQBM3Kk0PMMUEGL9APM2EfnYOVQAA5YcT4A==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -39,10 +40,10 @@
     <property name="enemy" value="Mimic"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/entry_up.tx" x="272.342" y="211.743" width="17.0844" height="22.8929" rotation="267.698">
+  <object id="70" template="../../obj/entry_down.tx" x="272.342" y="211.743">
    <properties>
-    <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/magetower/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="104"/>
    </properties>
   </object>
   <object id="71" template="../../obj/treasure.tx" x="210.851" y="46.2797">
