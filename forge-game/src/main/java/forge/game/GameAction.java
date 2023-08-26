@@ -1326,7 +1326,7 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
-                checkAgainCard |= stateBasedAction_Role(c, noRegCreats);
+                checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
                 checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
@@ -1537,7 +1537,7 @@ public class GameAction {
             return false;
         }
 
-        for (Player p : this.game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             CardCollection rolesByPlayer = CardLists.filterControlledBy(roles, p);
             if (rolesByPlayer.size() <= 1) {
                 continue;
