@@ -195,7 +195,7 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         if (ability.isCycling() && targetCard.equals(ability.getHostCard())) {
             // discard itself for cycling cost
@@ -203,7 +203,7 @@ public class CostDiscard extends CostPartWithList {
         }
         // if this is caused by 118.12 it's also an effect
         SpellAbility cause = targetCard.getGame().getStack().isResolving(ability.getHostCard()) ? ability : null;
-        return targetCard.getController().discard(targetCard, cause, effect, null, runParams);
+        return payer.discard(targetCard, cause, effect, null, runParams);
     }
 
     /* (non-Javadoc)
