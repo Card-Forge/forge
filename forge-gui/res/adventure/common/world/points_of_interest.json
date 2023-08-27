@@ -3400,7 +3400,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "WurmPond",
-	"map": "../common/maps/evilgrove/evilgrove_8_troll.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_8_troll.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
