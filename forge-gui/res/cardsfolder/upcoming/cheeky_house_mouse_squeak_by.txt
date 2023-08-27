@@ -1,0 +1,16 @@
+Name:Cheeky House-Mouse
+ManaCost:W
+Types:Creature Mouse
+PT:2/1
+AlternateMode:Adventure
+Oracle:
+
+ALTERNATE
+
+Name:Squeak By
+ManaCost:W
+Types:Sorcery Adventure
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUnblockable | SpellDescription$ Target creature you control gets +1/+1 until end of turn. It can't be blocked by creatures with power 3 or greater this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerGE3 | Description$ This creature can't be blocked by creatures with power 3 or greater this turn.
+Oracle:Target creature you control gets +1/+1 until end of turn. It can't be blocked by creatures with power 3 or greater this turn.
