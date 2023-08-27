@@ -52,12 +52,11 @@ public class StaticAbilityNumLoyaltyAct {
                 }
                 if (stAb.hasParam("Additional")) {
                     if (stAb.hasParam("OnlySourceAbs")) {
-                        if (!stAb.getHostCard().getEffectSourceAbility().getRootAbility().equals(sa)) {
+                        if (!stAb.getHostCard().getEffectSourceAbility().getRootAbility().getOriginalAbility().equals(sa)) {
                             continue;
                         }
                     }
-                    int more = AbilityUtils.calculateAmount(card, stAb.getParam("Additional"), stAb);
-                    addl += more;
+                    addl += AbilityUtils.calculateAmount(card, stAb.getParam("Additional"), stAb);
                 }
             }
         }

@@ -351,8 +351,6 @@ public class TokenAi extends SpellAbilityAi {
             throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
         }
 
-        result.setOwner(ai);
-
         // Apply static abilities
         final Game game = ai.getGame();
         ComputerUtilCard.applyStaticContPT(game, result, null);
