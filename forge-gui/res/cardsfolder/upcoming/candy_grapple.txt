@@ -1,0 +1,9 @@
+Name:Candy Grapple
+ManaCost:1 B
+Types:Instant
+K:Bargain
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature gets -3/-3 until end of turn. If this spell was bargained, that creature gets -5/-5 until end of turn instead.
+SVar:X:Count$Bargained.5.3
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nTarget creature gets -3/-3 until end of turn. If this spell was bargained, that creature gets -5/-5 until end of turn instead.

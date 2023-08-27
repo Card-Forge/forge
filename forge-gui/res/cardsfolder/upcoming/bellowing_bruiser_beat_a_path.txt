@@ -1,0 +1,15 @@
+Name:Bellowing Bruiser
+ManaCost:4 R
+Types:Creature Ogre
+PT:4/4
+K:Haste
+AlternateMode:Adventure
+Oracle:Haste
+
+ALTERNATE
+
+Name:Beat a Path
+ManaCost:2 R
+Types:Sorcery Adventure
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Up to two target creatures can't block this turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Up to two target creatures can't block this turn. (Then exile this card. You may cast the creature later from exile.)
