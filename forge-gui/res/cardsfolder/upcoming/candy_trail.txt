@@ -6,4 +6,4 @@ SVar:TrigScry:DB$ Scry | ScryNum$ 2
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw a card.
 SVar:DBDraw:DB$ Draw
 DeckHas:Ability$LifeGain|Sacrifice
-Oracle:When Potion of Healing enters the battlefield, draw a card.\n{W}, {T}, Sacrifice Potion of Healing: You gain 3 life.
+Oracle:When Candy Trail enters the battlefield, scry 2.\n{2}, {T}, Sacrifice Candy Trail: You gain 3 life and draw a card.
