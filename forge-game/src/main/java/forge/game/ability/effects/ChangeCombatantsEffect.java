@@ -49,10 +49,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
             final Combat combat = game.getCombat();
             final GameEntity originalDefender = combat.getDefenderByAttacker(c);
-            final FCollection<GameEntity> defs = new FCollection<>(combat.getDefendingPlayers());
-            if (!sa.hasParam("PlayerOnly")) {
-                defs.addAll(combat.getDefendingPlaneswalkers());
-            }
+            final FCollection<GameEntity> defs = new FCollection<>(sa.hasParam("PlayerOnly") ? combat.getDefendingPlayers() : combat.getDefenders());
 
             String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", cardString);
             Map<String, Object> params = Maps.newHashMap();

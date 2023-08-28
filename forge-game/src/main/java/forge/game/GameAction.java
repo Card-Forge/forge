@@ -1298,6 +1298,10 @@ public class GameAction {
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
                         checkAgainCard = true;
+                    } else if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        //702.12b. A permanent with indestructible can't be destroyed.
+                        // Such permanents aren't destroyed by lethal damage, and they
+                        // ignore the state-based action that checks for lethal damage
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {

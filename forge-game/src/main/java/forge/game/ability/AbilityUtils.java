@@ -30,6 +30,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -1473,7 +1474,11 @@ public class AbilityUtils {
             if (unlessCost.split("_").length == 3) {
                 String modifier = unlessCost.split("_")[2];
                 if (modifier.startsWith("Minus")) {
-                    newCost.decreaseGenericMana(Integer.parseInt(modifier.substring(5)));
+                    int max = Integer.parseInt(modifier.substring(5));
+                    if (sa.hasParam("UnlessUpTo")) { // Flash
+                        max = allPayers.get(0).getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseNumber"), 0, max);
+                    }
+                    newCost.decreaseGenericMana(max);
                 } else {
                     newCost.increaseGenericMana(Integer.parseInt(modifier.substring(4)));
                 }

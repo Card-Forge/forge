@@ -1,0 +1,6 @@
+Name:A Tale for the Ages
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creatures you control get +2/+2.
+DeckNeeds:Type$Aura
+Oracle:Enchanted creatures you control get +2/+2.
