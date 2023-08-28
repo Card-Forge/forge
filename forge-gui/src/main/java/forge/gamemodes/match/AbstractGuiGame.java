@@ -370,6 +370,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             }
             if (concedeNeeded) {
+                if (gameView.isMulligan()) { //prevent UI freezing when conceding while the game is waiting for inputs/action
+                    showErrorDialog(Localizer.getInstance().getMessage("lblWaitingforActions"));
+                    return false;
+                }
                 if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
                     for (final IGameController c : getOriginalGameControllers()) {
                         // Concede each player on this Gui (except mind-controlled players)
