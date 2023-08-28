@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/2
 K:Flash
-T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAttacker | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking. (It can't attack its controller or its controller's planeswalkers.)
+T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAttacker | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)
 SVar:TrigChangeAttacker:DB$ ChangeCombatants | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
 AI:RemoveDeck:All
-Oracle:Flash\nWhen Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking. (It can't attack its controller or its controller's planeswalkers.)
+Oracle:Flash\nWhen Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)

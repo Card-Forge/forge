@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBj8QJaHgUGaB8KWRmLTCpjwQTA2e2FytARRvAwM0bwIe2FsWoOdQLt282CyhxNAjz8Yn5Zxis2OUXtH7R0Fo4AYsIsHgYkRJwYAABuBFGU=
+   eJxjYBj8QJaHgUGaB8KWRmLTCpjwQTA2e2FytARRvAwM0bwIe2FsWoOdQLt282CyhxNAjz8Yn5Zxis2OUXtH7R0IsGMY5unhDnbxIDAx4sQAAKmkFSk=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJybzMnAMHkUj+JRPIpH8bDHO3gG3g2jeOAxAEJuNwA=
+   eJxjYBi8YDInYTwQdlLbblLspJbd5NhJqd2U2EmJ3aP2jto7nOyl1G5KwUDYSY7d1AYDYSc+N1ACALeAhNk=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzl1GsKgCAQBGDpX2gnqC5WZ+lxLHvdLSWWIipntwgiYQiM7XMgtEYp+0KyXZCZMlGqN+cpkudceu/NwT2vVgfYnL6IidqoyzERG3ElZshG3Fxo0kqFfe+6rf5X36+5k0ujZWbl5kahmwltb0bx8Xc59yTHpp5XXdB7ErVDJtfd2rVeQmeo9LoXMiXufob+9VRw/m1mPKPM4A==
+   eJzV02EKgCAMBtD9V09gXazOYl3LrO6WECORGmwOJOFDGLjnQKMFiEQGRqg+nGC/2QEk+53J6dmlueedWpuSzTG1bImpYUvNN5vrjkITlxfO2+qmTm6vef/mnjmrkZkhnzsa/rDEbjGltobJtTXN2l7MHbxDME9N2yxtDL51X9W5PS+ZOt+E
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBj8YIUmBKOzaQWCBCEYm70g8QBB2tr/E2jPL01U9jt22to5EsAhCQTGJ0Zt8E8SgfGJgYA0DwPDLh4IG0aTC5QlEBifGMxeagFSwtmYD0KniFBuLynhDLOXGoCccG4Rp579xACYvXJUjGdS7B0FgwsAAL1qK7A=
+   eJxjYBj8YIUmBKOzaQWCBCEYm70g8QBB2tr/E2jPL01U9jt22to5EsAhCQTGJ0Zt8E8SgfGJgYA0DwPDLh4EmxKgLIHA+MSoYRcyICWcjfkgdIoI5faSEs4we6kByAnnFnHq2U8MoGb8DgV7RwF+AACy1Srn
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -172,13 +172,13 @@
   <object id="106" template="../../obj/gate.tx" x="320.167" y="133" width="14.9999" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;text&quot;:&quot;This door is locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently so the key can probably be found nearby.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    { &quot;name&quot;:&quot;(Leave)&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Illusionist's key&quot;,     
+        &quot;name&quot;:&quot;Unlock the gate with the Illusionist's key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Illusionist's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;text&quot;:&quot;The door swings open and you can continue to explore the tower.&quot;,
         &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Illusionist's Key&quot;}]} ]
     }
     ]

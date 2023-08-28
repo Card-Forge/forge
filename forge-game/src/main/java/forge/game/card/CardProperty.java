@@ -1202,15 +1202,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Damaged")) {
+            boolean found = false;
             for (Pair<Integer, Boolean> p : source.getDamageReceivedThisTurn()) {
-                boolean found = false;
                 if (game.getDamageLKI(p).getLeft().equalsWithTimestamp(card)) {
                     found = true;
                     break;
                 }
-                if (!found) {
-                    return false;
-                }
+            }
+            if (!found) {
+                return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisCombat")) {
             if (card.getDamageHistory().getThisCombatDamaged().isEmpty()) {

@@ -1298,6 +1298,10 @@ public class GameAction {
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
                         checkAgainCard = true;
+                    } else if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        //702.12b. A permanent with indestructible can't be destroyed.
+                        // Such permanents aren't destroyed by lethal damage, and they
+                        // ignore the state-based action that checks for lethal damage
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
@@ -1322,6 +1326,7 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
+                checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
                 checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
@@ -1522,6 +1527,28 @@ public class GameAction {
         }
         return checkAgain;
     }
+    private boolean stateBasedAction_Role(Card c, CardCollection removeList) {
+        if (!c.hasCardAttachments()) {
+            return false;
+        }
+        boolean checkAgain = false;
+        CardCollection roles = CardLists.filter(c.getAttachedCards(), CardPredicates.isType("Role"));
+        if (roles.isEmpty()) {
+            return false;
+        }
+
+        for (Player p : game.getPlayers()) {
+            CardCollection rolesByPlayer = CardLists.filterControlledBy(roles, p);
+            if (rolesByPlayer.size() <= 1) {
+                continue;
+            }
+            // sort by game timestamp
+            rolesByPlayer.sort(CardPredicates.compareByTimestamp());
+            removeList.addAll(rolesByPlayer.subList(0, rolesByPlayer.size() - 1));
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
 
     private void stateBasedAction_Dungeon(Card c) {
         if (!c.getType().isDungeon() || !c.isInLastRoom()) {
@@ -1537,7 +1564,8 @@ public class GameAction {
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
-            if (!ge.canBeAttached(c, null, true)) {
+            // Rule 704.5q - Creature attached to an object or player, becomes unattached
+            if (c.isCreature() || c.isBattle() || !ge.canBeAttached(c, null, true)) {
                 unAttachList.add(c);
                 checkAgain = true;
             }
@@ -1551,10 +1579,7 @@ public class GameAction {
                 }
             }
         }
-        if ((c.isCreature() || c.isBattle()) && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-            unAttachList.add(c);
-            checkAgain = true;
-        }
+
         return checkAgain;
     }
 

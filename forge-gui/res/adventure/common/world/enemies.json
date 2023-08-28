@@ -21925,7 +21925,7 @@
 	"name": "Scourgemaster",
 	"sprite": "sprites/enemy/fiend/scourgemaster.atlas",
 	"deck": [
-		"decks/standard/demon_helbent.dck",
+		"decks/standard/demon_hellbent.dck",
 		"decks/standard/demon_humansac.dck"
 	],
 	"ai": "",
