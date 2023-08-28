@@ -554,7 +554,7 @@ public class HumanPlay {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!manaInputCancelled) {
-                    c.tap(true);
+                    c.tap(true, ability, ability.getActivatingPlayer());
                 }
             }
             ability.clearTappedForConvoke();
@@ -661,7 +661,7 @@ public class HumanPlay {
             activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
-                c.tap(true);
+                c.tap(true, ability, activator);
             }
             activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             ability.clearTappedForConvoke();

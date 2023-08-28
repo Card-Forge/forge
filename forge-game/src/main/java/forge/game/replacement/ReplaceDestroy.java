@@ -62,8 +62,7 @@ public class ReplaceDestroy extends ReplacementEffect {
                     return false;
             }
         }
-
-        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
 
@@ -76,6 +75,7 @@ public class ReplaceDestroy extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.Cause);
     }
 
 }

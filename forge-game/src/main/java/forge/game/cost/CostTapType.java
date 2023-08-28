@@ -195,8 +195,8 @@ public class CostTapType extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true);
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        targetCard.tap(true, ability, payer);
         return targetCard;
     }
 

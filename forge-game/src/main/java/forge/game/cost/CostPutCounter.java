@@ -160,20 +160,20 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         if (this.payCostFromSource()) {
-            executePayment(ability, ability.getHostCard(), effect);
+            executePayment(payer, ability, ability.getHostCard(), effect);
         } else {
-            executePayment(ai, ability, decision.cards, effect);
+            executePayment(payer, ability, decision.cards, effect);
         }
         triggerCounterPutAll(ability, effect);
         return true;
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final int i = this.getAbilityAmount(ability);
-        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), counterTable);
+        targetCard.addCounter(this.getCounter(), i, payer, counterTable);
         return targetCard;
     }
 
