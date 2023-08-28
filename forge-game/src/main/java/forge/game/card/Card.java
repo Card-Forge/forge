@@ -4413,10 +4413,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
-    public final void tap(boolean tapAnimation) {
-        tap(false, tapAnimation);
+    public final void tap(boolean tapAnimation, SpellAbility cause, Player tapper) {
+        tap(false, tapAnimation, cause, tapper);
     }
-    public final void tap(boolean attacker, boolean tapAnimation) {
+    public final void tap(boolean attacker, boolean tapAnimation, SpellAbility cause, Player tapper) {
         if (tapped) { return; }
 
         // Run replacement effects
@@ -4425,6 +4425,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Attacker, attacker);
+        runParams.put(AbilityKey.Cause, cause);
+        runParams.put(AbilityKey.Player, tapper);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);
@@ -5983,11 +5985,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void exert() {
-        exertedByPlayer.add(getController());
+        exert(getController());
+    }
+    public void exert(Player p) {
+        exertedByPlayer.add(p);
         exertThisTurn++;
         view.updateExertedThisTurn(this, true);
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
-        runParams.put(AbilityKey.Player, getController());
+        runParams.put(AbilityKey.Player, p);
         game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
     }
 
@@ -6469,7 +6474,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 shieldCounterReplaceDamage.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
             if (shieldCounterReplaceDestroy == null) {
-                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility | Secondary$ True "
+                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidCause$ SpellAbility | Secondary$ True "
             + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it.";
                 shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));

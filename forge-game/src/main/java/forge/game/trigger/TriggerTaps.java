@@ -57,15 +57,15 @@ public class TriggerTaps extends Trigger {
             return false;
         }
 
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
         if (hasParam("Attacker")) {
-            if ("True".equalsIgnoreCase(getParam("Attacker"))) {
-                if (!(Boolean) runParams.get(AbilityKey.Attacker)) {
-                    return false;
-                }
-            } else if ("False".equalsIgnoreCase(getParam("Attacker"))) {
-                if ((Boolean) runParams.get(AbilityKey.Attacker)) {
-                    return false;
-                }
+            if (getParam("Attacker").equalsIgnoreCase("True") != (Boolean) runParams.get(AbilityKey.Attacker)) {
+                return false;
             }
         }
 
