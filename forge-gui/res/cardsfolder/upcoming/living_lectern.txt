@@ -1,0 +1,8 @@
+Name:Living Lectern
+ManaCost:1 U
+Types:Artifact Creature Construct
+PT:0/4
+A:AB$ Draw | SorcerySpeed$ True | Cost$ 1 Sac<1/CARDNAME> | SubAbility$ DBToken | SpellDescription$ Draw a card. Create a Sorcerer Role token attached to up to one other target creature you control. Activate only as a sorcery. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has “Whenever this creature attacks, scry 1.”)
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TargetMin$ 0 | TargetMax$ 1 | TokenScript$ role_sorcerer | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select up to one other target creature you control
+DeckHas:Ability$Token|Sacrifice & Type$Aura|Enchantment|Role
+Oracle:{1}, Sacrifice Living Lectern: Draw a card. Create a Sorcerer Role token attached to up to one other target creature you control. Activate only as a sorcery. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")
