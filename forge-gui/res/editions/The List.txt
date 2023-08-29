@@ -530,7 +530,7 @@ ScryfallCode=PLIST
 522 R Divining Witch @Donato Giancola
 523 R Graveborn Muse @Kev Walker
 524 R Gravespawn Sovereign @Adam Rex
-525 R Helldozer @Zoltan Boros
+525 R Helldozer @Zoltan Boros & Gabor Szikszai
 526 M Mikaeus, the Unhallowed @Chris Rahn
 527 C Rend Flesh @Stephen Tappin
 528 R Sidisi, Undead Vizier @Min Yum
@@ -643,7 +643,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 635 U Mistmeadow Witch @Greg Staples
 636 U Moonhold @Mike Dringenberg
 637 R Murkfiend Liege @Carl Critchlow
-638 R Wheel of Sun and Moon @Zoltan Boros
+638 R Wheel of Sun and Moon @Zoltan Boros & Gabor Szikszai
 639 R Flesh // Blood @Lucas Graciano
 640 R Blood Clock @Keith Garletts
 641 R Howling Mine @Ralph Horsley
@@ -830,7 +830,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 822 R Planar Collapse @Mark Zug
 823 R Rout @Ron Spencer
 824 C Teremko Griffin @Martin McKenna
-825 R Braids, Conjurer Adept @Zoltan Boros
+825 R Braids, Conjurer Adept @Zoltan Boros & Gabor Szikszai
 826 R Collective Restraint @Alan Rabinowitz
 827 R Empress Galina @Matt Cavotta
 828 R Ertai's Meddling @Steve Luke
@@ -846,7 +846,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 838 R Contamination @Stephen Daniele
 839 C Crypt Rats @Paul Lee
 840 C Dark Ritual @Tom Fleming
-841 C Dash Hopes @Zoltan Boros
+841 C Dash Hopes @Zoltan Boros & Gabor Szikszai
 842 R Doomsday @Adrian Smith
 843 U Hymn to Tourach @Greg Staples
 844 U Imps' Taunt @Colin MacNeil
@@ -859,7 +859,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 851 M Tourach, Dread Cantor @Greg Staples
 852 R Alpine Moon @Alayna Danner
 853 C Brightstone Ritual @Wayne England
-854 C Burning Inquiry @Zoltan Boros
+854 C Burning Inquiry @Zoltan Boros & Gabor Szikszai
 855 R Ghitu Fire @Glen Angus
 856 R Invasion Plans @Pete Venters
 857 R Jaya Ballard, Task Mage @Matt Cavotta
@@ -1067,7 +1067,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1059 R Siege of Towers @Anthony S. Waters
 1060 R Slag Fiend @Mike Bierek
 1061 M Soul of Shandalar @Raymond Swanland
-1062 M Avenger of Zendikar @Zoltan Boros
+1062 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
 1063 C Capenna Express @Viko Menezes
 1064 R Dig Up @Slawomir Maniak
 1065 R Ghalta, Primal Hunger @Chase Stone
@@ -1170,3 +1170,128 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1162 R Tower of Fortunes @Matt Cavotta
 1163 R Wheel of Torture @Henry Van Der Linde
 1164 U Forbidding Watchtower @Aleksi Briclot
+1165 R Alliance of Arms @Johann Bodin
+1166 R Hanna's Custody @DiTerlizzi
+1167 R Hour of Reckoning @Randy Gallegos
+1168 R Knight Exemplar @Jason Chan
+1169 R Kor Spiritdancer @Scott Chou
+1170 R Nomad Mythmaker @Darrell Riche
+1171 R Oath of Lieges @Mark Zug
+1172 R Pariah @Jon J Muth
+1173 U Prison Term @Zoltan Boros & Gabor Szikszai
+1174 R Rune of Protection: Lands @Scott M. Fischer
+1175 R Sacred Mesa @Margaret Organ-Kean
+1176 R Storm Herd @Jim Nelson
+1177 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
+1178 R Dreamborn Muse @Kev Walker
+1179 R Echo Mage @Matt Stewart
+1180 R Equilibrium @Jeff Miracola
+1181 R Flusterstorm @Erica Yang
+1182 R Jace's Archivist @James Ryman
+1183 C Leap @Kev Walker
+1184 R Scalpelexis @Mark Tedin
+1185 R Thing from the Deep @Paolo Parente
+1186 R Tradewind Rider @John Matson
+1187 R Trench Gorger @Hideaki Takamura
+1188 C Brain Weevil @Anthony Jones
+1189 U Consume Spirit @Matt Thompson
+1190 C Dirtwater Wraith @Steve Luke
+1191 U Fallen Ideal @Anson Maddocks
+1192 R Kels, Fight Fixer @Magali Villeneuve
+1193 R Netherborn Altar @Titus Lunter
+1194 R Oppression @Pete Venters
+1195 C Sadistic Augermage @Nick Percival
+1196 U Spined Fluke @Mark A. Nelson
+1197 U Throat Slitter @Paolo Parente
+1198 R Zombie Apocalypse @Volkan Baǵa
+1199 R Chaos Warp @Trevor Claxton
+1200 U Cinder Elemental @Svetlin Velinov
+1201 R Furnace of Rath @John Matson
+1202 U Initiate of Blood @Carl Critchlow
+1203 R Magmatic Force @Jung Park
+1204 C Rift Bolt @Michael Sutfin
+1205 R Ryusei, the Falling Star @Nottsuo
+1206 R Shocker @Thomas M. Baxa
+1207 R Taurean Mauler @Dominick Domingo
+1208 R Burgeoning @Randy Gallegos
+1209 R Collective Voyage @Charles Urbach
+1210 R Forgotten Ancient @Mark Tedin
+1211 C Giant Caterpillar @Zina Saunders
+1212 C Gleeful Sabotage @Todd Lockwood
+1213 R Hidden Herd @Andrew Robinson
+1214 R Magus of the Vineyard @Jim Murray
+1215 R Scavenging Ooze @Austin Hsu
+1216 R Spawnwrithe @Daarken
+1217 R Tornado Elemental @Alex Horley-Orlandelli
+1218 R Verdant Force @DiTerlizzi
+1219 R Vernal Bloom @Bob Eggleton
+1220 U Adeliz, the Cinder Wind @Zezhou Chen
+1221 M Aminatou, the Fateshifter @Seb McKinnon
+1222 U Bladewing the Risen @Seb McKinnon
+1223 U Bruenor Battlehammer @Wayne Reynolds
+1224 U Dina, Soul Steeper @Chris Rahn
+1225 U Elas il-Kor, Sadistic Pilgrim @G-host Lee
+1226 U Eutropia the Twice-Favored @Sara Winters
+1227 M Ghave, Guru of Spores @James Paick
+1228 U Grumgully, the Generous @Milivoj Ćeran
+1229 U Maja, Bretagard Protector @Lie Setiawan
+1230 U Narfi, Betrayer King @Daarken
+1231 U Rakdos Cackler @Ryan Barger
+1232 U Vega, the Watcher @Paul Scott Canavan
+1233 R Crystalline Crawler @Jason Felix
+1234 C Suntouched Myr @Greg Hildebrandt
+1235 R Flamekin Village @Ron Spears
+1236 U Nivix, Aerie of the Firemind @Martina Pilcerova
+1237 U Rix Maadi, Dungeon Palace @Martina Pilcerova
+1238 R Thespian's Stage @John Avon
+1239 C Warped Landscape @Cliff Childs
+1240 R Eldrazi Conscription @Jaime Jones
+1241 C Arcbound Mouser @Campbell White
+1242 U Changeling Hero @Jeff Miracola
+1243 R Charming Prince @Randy Vargas
+1244 R Giant Killer @Jesper Ejsing
+1245 U Rebuff the Wicked @Stephen Tappin
+1246 C Royal Trooper @Scott M. Fischer
+1247 U Auramancer's Guise @Greg Staples
+1248 U Counterbalance @John Zeleznik
+1249 R Faerie Artisans @Tony Foti
+1250 U Faerie Harbinger @Larry MacDougall
+1251 U Pemmin's Aura @Greg Staples
+1252 C Spellstutter Sprite @Rebecca Guay
+1253 C Bake into a Pie @Zoltan Boros
+1254 U Cauldron Familiar @Milivoj Ćeran
+1255 C Cursed Flesh @Ron Spencer
+1256 R Demonic Bargain @Sam Guay
+1257 U Foulmire Knight @Alex Brock
+1258 M The Meathook Massacre @Chris Seaman
+1259 R Mirri the Cursed @Filip Burburan
+1260 U No Rest for the Wicked @Carl Critchlow
+1261 U Aura Barbs @Aleksi Briclot
+1262 U Dwarven Recruiter @Ciruelo
+1263 M Embercleave @Joe Slucher
+1264 C Giant's Ire @Alex Horley-Orlandelli
+1265 U Mad Ratter @Johann Bodin
+1266 U Rust Monster @Simon Dominic
+1267 C Vulshok Sorcerer @rk post
+1268 U Warchief Giant @Slawomir Maniak
+1269 R Yidaro, Wandering Monster @Jesper Ejsing
+1270 M Cavalier of Thorns @Jehan Choo
+1271 C Echoing Courage @Greg Staples
+1272 U Fae Offering @Lucas Graciano
+1273 M Greensleeves, Maro-Sorcerer @Tuan Duong Chu
+1274 R Hungry Lynx @Shreya Shetty
+1275 R Once Upon a Time @Matt Stewart
+1276 M Questing Beast @Igor Kieryluk
+1277 R Return of the Wildspeaker @Chris Rallis
+1278 R Wolfcaller's Howl @Ralph Horsley
+1279 U Cunning Breezedancer @Todd Lockwood
+1280 U Maraleaf Pixie @Matt Cavotta
+1281 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+1282 M Oko, the Trickster @Chris Rallis
+1283 M The Royal Scions @Paul Scott Canavan
+1284 R Sythis, Harvest's Hand @Ryan Yee
+1285 R Academy Manufactor @Campbell White
+1286 U Clock of Omens @Ryan Yee
+1287 U Enchanted Carriage @Zoltan Boros
+1288 R Stonecoil Serpent @Mark Poole
+1289 R Castle Garenbrig @Adam Paquette
