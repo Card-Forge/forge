@@ -2848,8 +2848,7 @@ public class AbilityUtils {
         return doXMath(someCards.size(), expr, c, ctb);
     }
 
-    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
-        String conversion = params.get("ManaConversion");
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
 
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split

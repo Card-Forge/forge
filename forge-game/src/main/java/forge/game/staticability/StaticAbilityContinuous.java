@@ -595,7 +595,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("ManaConversion")) {
-                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params);
+                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params.get("ManaConversion"));
                 }
             }
         }

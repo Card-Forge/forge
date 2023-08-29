@@ -151,7 +151,7 @@ public class HumanPlaySpellAbility {
             }
 
             if (keywordColor || manaColorConversion) {
-                AbilityUtils.applyManaColorConversion(payment, params);
+                AbilityUtils.applyManaColorConversion(payment, params.get("ManaConversion"));
             }
         }
 
