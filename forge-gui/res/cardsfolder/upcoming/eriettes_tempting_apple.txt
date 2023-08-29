@@ -1,0 +1,9 @@
+Name:Eriette's Tempting Apple
+ManaCost:4
+Types:Legendary Artifact Food
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target Creature | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ LoseLife | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life.
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:When Eriette's Tempting Apple enters the battlefield, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.\n{2}, {T}, Sacrifice Eriette's Tempting Apple: You gain 3 life.\n{2}, {T}, Sacrifice Eriette's Tempting Apple: Target opponent loses 3 life.
