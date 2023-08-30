@@ -45,9 +45,12 @@ public class MovementBehavior {
             } else if (MapStage.getInstance().waypoints.containsKey(Integer.parseInt(destination))) {
                 currentTargetVector = new Vector2(MapStage.getInstance().waypoints.get(Integer.parseInt(destination)));
             }
+            else {
+                System.err.println("Navigation error: waypoint could not be parsed or does not exist: " + destination);
+            }
         }
 
-        return currentTargetVector;
+        return currentTargetVector == null? currentPosition: currentTargetVector;
     }
 
     public void setX(float newVal){
