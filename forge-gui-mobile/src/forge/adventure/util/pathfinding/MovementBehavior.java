@@ -47,6 +47,7 @@ public class MovementBehavior {
             }
             else {
                 System.err.println("Navigation error: waypoint could not be parsed or does not exist: " + destination);
+                destination = "";
             }
         }
 
