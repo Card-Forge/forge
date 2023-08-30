@@ -18,12 +18,10 @@
 package forge.player;
 
 import java.util.Collections;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -36,11 +34,11 @@ import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
-import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.Zone;
 import forge.util.Localizer;
 
@@ -78,10 +76,8 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
 
-        boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack();
@@ -103,11 +99,7 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
-            if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostType())) {
-                manaTypeConversion = true;
-            } else if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostColor())) {
+            if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")) {
                 manaColorConversion = true;
             }
         }
@@ -119,10 +111,27 @@ public class HumanPlaySpellAbility {
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player
-        if (manaTypeConversion) {
-            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
-        } else if (manaColorConversion) {
+        if (manaColorConversion) {
             AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
+        }
+
+        if (ability.isSpell() && !ability.isCopied()) { // Apply by Option
+            if (option != null && option.applyManaConvert(payment)) {
+                manaColorConversion = true;
+            }
+        }
+
+        if (ability.isActivatedAbility()) {
+            if (ability.hasParam("ActivateIgnoreColor")) {
+                AbilityUtils.applyManaColorConversion(payment, ability.getParam("ActivateIgnoreColor"));
+                manaColorConversion = true;
+            }
+        }
+
+        if ((ability.isSpell() || ability.isActivatedAbility()) && !ability.isCopied()) {
+            if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+                manaColorConversion = true;
+            }
         }
 
         if (playerManaConversion) {
@@ -132,27 +141,6 @@ public class HumanPlaySpellAbility {
 
         if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
             payment.setSnowForColor(true);
-        }
-
-        if (ability.isActivatedAbility()) {
-            final Map<String, String> params = Maps.newHashMap();
-
-            for (KeywordInterface inst : c.getKeywords()) {
-                String keyword = inst.getOriginal();
-                if (keyword.startsWith("ManaConvert")) {
-                    final String[] k = keyword.split(":");
-                    params.put("ManaConversion", k[1]);
-                    keywordColor = true;
-                }
-            }
-            if (ability.hasParam("ActivateIgnoreColor")) {
-                params.put("ManaConversion", ability.getParam("ActivateIgnoreColor"));
-                manaColorConversion = true;
-            }
-
-            if (keywordColor || manaColorConversion) {
-                AbilityUtils.applyManaColorConversion(payment, params.get("ManaConversion"));
-            }
         }
 
         // reset is also done early here, because if an ability is canceled from targeting it might otherwise lead to refunding mana from earlier cast
@@ -181,7 +169,7 @@ public class HumanPlaySpellAbility {
                 game.getStack().unfreezeStack();
             }
 
-            if (manaTypeConversion || manaColorConversion || keywordColor) {
+            if (manaColorConversion) {
                 manapool.restoreColorReplacements();
             }
             if (playerManaConversion) {
@@ -206,7 +194,7 @@ public class HumanPlaySpellAbility {
                 game.getStack().addAndUnfreeze(ability);
             }
 
-            if (manaTypeConversion || manaColorConversion || keywordColor) {
+            if (manaColorConversion) {
                 manapool.restoreColorReplacements();
             }
         }

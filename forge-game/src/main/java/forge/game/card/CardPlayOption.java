@@ -2,7 +2,10 @@ package forge.game.card;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.card.MagicColor;
+import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 
@@ -63,6 +66,17 @@ public final class CardPlayOption {
 
     public boolean isIgnoreSnowSourceManaCostColor() {
         return sta.hasParam("MayPlaySnowIgnoreColor");
+    }
+
+    public boolean applyManaConvert(ManaConversionMatrix matrix) {
+        if (isIgnoreManaCostType()) {
+            AbilityUtils.applyManaColorConversion(matrix, MagicColor.Constant.ANY_TYPE_CONVERSION);
+            return true;
+        } else if (isIgnoreManaCostColor()) {
+            AbilityUtils.applyManaColorConversion(matrix, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            return true;
+        }
+        return false;
     }
 
     public boolean isWithFlash() {
