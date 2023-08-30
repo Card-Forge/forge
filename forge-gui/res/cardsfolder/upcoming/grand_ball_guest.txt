@@ -1,0 +1,7 @@
+Name:Grand Ball Guest
+ManaCost:1 R
+Types:Creature Human Peasant
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 1 | AddPower$ 1 | AddKeyword$ Trample | CheckSVar$ Celebration | SVarCompare$ GE2 | Description$ Celebration — CARDNAME gets +1/+1 and has trample as long as two or more nonland permanents entered the battlefield under your control this turn.
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+Oracle:Celebration — Grand Ball Guest gets +1/+1 and has trample as long as two or more nonland permanents entered the battlefield under your control this turn.
