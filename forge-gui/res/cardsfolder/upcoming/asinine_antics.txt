@@ -1,0 +1,8 @@
+Name:Asinine Antics
+ManaCost:2 U U
+Types:Sorcery
+K:MayFlashCost:2
+A:SP$ RepeatEach | RepeatCards$ Creature.OppCtrl | Zone$ Battlefield | RepeatSubAbility$ DBToken | ChangeZoneTable$ True | SpellDescription$ For each creature your opponents control, create a Cursed Role token attached to that creature. (if you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1)
+SVar:DBToken:DB$ Token | TokenScript$ role_cursed | AttachedTo$ Remembered
+DeckHas:Type$Aura|Role & Ability$Token
+Oracle:You may cast Asinine Antics as though it had flash if you pay {2} more to cast it. \nFor each creature your opponents control, create a Cursed Role token attached to that creature. (if you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1)

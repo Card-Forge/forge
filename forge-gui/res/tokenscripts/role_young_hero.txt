@@ -1,0 +1,9 @@
+Name:Young Hero
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrig | Description$ Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Self+toughnessLE3 | Execute$ TrigCounter | TriggerDescription$ Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Enchant Creature\nEnchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."

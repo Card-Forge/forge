@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.White | Description$ CARDNAME can't be the target of white spells or abilities from white sources.
 A:AB$ RepeatEach | Cost$ Sac<1/Orc/Orc> | CostDesc$ Sacrifice an Orc: | RepeatPlayers$ Player | RepeatSubAbility$ DBTap | SubAbility$ DBDestroy | SpellDescription$ Each player may tap any number of untapped white creatures they control. For each creature tapped this way, that player chooses up to two Plains. Then destroy all Plains that weren't chosen this way by any player.
-SVar:DBTap:DB$ Tap | CardChoices$ Creature.untapped+White+RememberedPlayerCtrl | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.untapped+White+RememberedPlayerCtrl | RememberTapped$ True | SubAbility$ ChoosePlainsToSave
+SVar:DBTap:DB$ Tap | CardChoices$ Creature.untapped+White+RememberedPlayerCtrl | Tapper$ RememberedPlayer | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.untapped+White+RememberedPlayerCtrl | RememberTapped$ True | SubAbility$ ChoosePlainsToSave
 SVar:ChoosePlainsToSave:DB$ ChooseCard | Defined$ Remembered | MinAmount$ 0 | Amount$ TappedXTwo | Choices$ Plains | ChoiceTitle$ Choose up to two Plains for each creature tapped | ChoiceZone$ Battlefield | ImprintChosen$ True | AILogic$ OwnCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Plains.IsNotImprinted | SubAbility$ DBCleanImp | AILogic$ RaidingParty | StackDescription$ None

@@ -1,0 +1,7 @@
+Name:Cut In
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_young_hero | TargetMin$ 0 | TargetMax$ 1 | TokenOwner$ You | AttachedTo$ ThisTargetedCard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | SpellDescription$ Create a Young Hero Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Cut In deals 4 damage to target creature.\nCreate a Young Hero Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
