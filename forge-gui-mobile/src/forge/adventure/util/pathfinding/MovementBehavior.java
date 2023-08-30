@@ -21,7 +21,7 @@ public class MovementBehavior {
         return duration;
     }
     public Vector2 currentTargetVector;
-    public Vector2 getNextTargetVector(Vector2 currentPosition){
+    public Vector2 getNextTargetVector(int objectID, Vector2 currentPosition){
         if (currentTargetVector != null) {
             return currentTargetVector;
         }
@@ -45,9 +45,13 @@ public class MovementBehavior {
             } else if (MapStage.getInstance().waypoints.containsKey(Integer.parseInt(destination))) {
                 currentTargetVector = new Vector2(MapStage.getInstance().waypoints.get(Integer.parseInt(destination)));
             }
+            else {
+                System.err.println("Navigation error for object ID" + objectID + ", waypoint could not be parsed or does not exist: " + destination);
+                destination = "";
+            }
         }
 
-        return currentTargetVector;
+        return currentTargetVector == null? currentPosition: currentTargetVector;
     }
 
     public void setX(float newVal){

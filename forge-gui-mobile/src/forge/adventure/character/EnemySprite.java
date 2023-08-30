@@ -380,7 +380,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 //                }
 //            }
             //else
-            if (peek.getDuration() == 0 && peek.getNextTargetVector(pos()).dst(pos()) < 2){
+            if (peek.getDuration() == 0 && peek.getNextTargetVector(objectId, pos()).dst(pos()) < 2){
                 //this is a location based behavior that has been completed. Move on to the next behavior
 
                     MovementBehavior current =  movementBehaviors.pop();
@@ -402,8 +402,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                     return new Vector2(pos());
                 }
             }
-            if (peek.getNextTargetVector(pos()).dst(pos()) > 0.3) {
-                target = new Vector2(peek.getNextTargetVector(pos()));
+            if (peek.getNextTargetVector(objectId, pos()).dst(pos()) > 0.3) {
+                target = new Vector2(peek.getNextTargetVector(objectId, pos()));
             }
             else target = new Vector2(pos());
         }
