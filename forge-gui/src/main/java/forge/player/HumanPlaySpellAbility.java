@@ -98,26 +98,19 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
-            if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")) {
-                manaColorConversion = true;
-            }
-        }
-
         final boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?", null);
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
-        // TODO Apply this to the SAStackInstance instead of the Player
-        if (manaColorConversion) {
-            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
-        }
-
         if (ability.isSpell() && !ability.isCopied()) { // Apply by Option
             if (option != null && option.applyManaConvert(payment)) {
                 manaColorConversion = true;
+            }
+
+            if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
+                payment.setSnowForColor(true);
             }
         }
 
@@ -137,10 +130,6 @@ public class HumanPlaySpellAbility {
         if (playerManaConversion) {
             AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
-        }
-
-        if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
-            payment.setSnowForColor(true);
         }
 
         // reset is also done early here, because if an ability is canceled from targeting it might otherwise lead to refunding mana from earlier cast
