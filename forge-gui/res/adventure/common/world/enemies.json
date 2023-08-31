@@ -5607,6 +5607,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 1,
+	"scale": 0.8,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 25,
@@ -5669,6 +5670,7 @@
 	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
+	"scale": 0.8,
 	"speed": 31,
 	"life": 25,
 	"rewards": [
