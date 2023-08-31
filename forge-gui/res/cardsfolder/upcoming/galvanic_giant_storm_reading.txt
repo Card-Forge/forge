@@ -2,7 +2,7 @@ Name:Galvanic Giant
 ManaCost:3 U
 Types:Creature Giant Wizard
 PT:3/3
-T:Mode$ SpellCast | ValidCard$ Creature.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target creature an opponent controls
 SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
 DeckHas:Ability$Counters|Discard

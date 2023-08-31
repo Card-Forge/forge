@@ -7,7 +7,7 @@ A:AB$ Draw | Cost$ T Sac<1/Artifact;Land/artifact or land> | SpellDescription$ D
 DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 DeckHints:Type$Artifact
 AlternateMode:Adventure
-Oracle:Haste\n{2}{R}, Sacrifice an artifact or land: Draw a card.
+Oracle:Reach\n{2}{R}, Sacrifice an artifact or land: Draw a card.
 
 ALTERNATE
 
