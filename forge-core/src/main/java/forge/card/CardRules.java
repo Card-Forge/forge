@@ -55,7 +55,7 @@ public final class CardRules implements ICardCharacteristics {
     private String partnerWith;
     private boolean custom;
 
-    private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
