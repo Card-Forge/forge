@@ -395,6 +395,11 @@ public final class CardRules implements ICardCharacteristics {
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
+            this.faces[2] = null;
+            this.faces[3] = null;
+            this.faces[4] = null;
+            this.faces[5] = null;
+            this.faces[6] = null;
 
             this.handLife = null;
             this.altMode = CardSplitType.None;
