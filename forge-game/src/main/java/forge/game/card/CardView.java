@@ -1184,7 +1184,7 @@ public class CardView extends GameEntityView {
         }
         void updateName(CardState c) {
             Card card = c.getCard();
-            setName(card.getName(c));
+            setName(card.getName(c, false));
 
             if (CardView.this.getCurrentState() == this) {
                 if (card != null) {
