@@ -488,6 +488,8 @@ ScryfallCode=LTR
 [promo]
 299 M Gandalf the White @Leonardo Borazio
 300 M Saruman of Many Colors @Wonchun Choi
+301 M Sauron, the Dark Lord @Anton Solovianchyk
+744 M Sauron, the Dark Lord @Justine Jones
 
 [tokens]
 b_0_0_army
