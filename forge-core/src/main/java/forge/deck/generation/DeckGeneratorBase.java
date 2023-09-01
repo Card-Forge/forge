@@ -130,6 +130,7 @@ public abstract class DeckGeneratorBase {
         int res = 0;
         while (res < cnt) {
             PaperCard cp = source.get(MyRandom.getRandom().nextInt(srcLen));
+            // TODO AltName conversion needed?
             int newCount = cardCounts.get(cp.getName()) + 1;
 
             //add card to deck if not already maxed out on card
