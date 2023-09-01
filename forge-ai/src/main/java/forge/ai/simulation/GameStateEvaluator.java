@@ -210,7 +210,6 @@ public class GameStateEvaluator {
         // excess mana is valued less than getting enough to use everything
         value += max(0, max_total - statistics.maxCost) * 5;
 
-
         return value;
     }
 
