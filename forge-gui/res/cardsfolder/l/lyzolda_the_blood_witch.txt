@@ -3,6 +3,6 @@ ManaCost:1 B R
 Types:Legendary Creature Human Cleric
 PT:3/1
 A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Any | NumDmg$ 2 | ConditionDefined$ Sacrificed | ConditionPresent$ Card.Red | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 2 damage to any target if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionDefined$ Sacriciced | ConditionPresent$ Card.Black
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionDefined$ Sacrificed | ConditionPresent$ Card.Black
 AI:RemoveDeck:All
 Oracle:{2}, Sacrifice a creature: Lyzolda, the Blood Witch deals 2 damage to any target if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
