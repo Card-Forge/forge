@@ -1,4 +1,5 @@
 Name:Lucille
+AltName:Gisa's Favorite Shovel
 ManaCost:1 B
 Types:Legendary Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+0 and has menace.

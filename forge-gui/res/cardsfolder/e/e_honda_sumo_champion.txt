@@ -1,4 +1,5 @@
 Name:E. Honda, Sumo Champion
+AltName:Baldin, Century Herdmaster
 ManaCost:4 W W
 Types:Legendary Creature Human Warrior
 PT:0/7
