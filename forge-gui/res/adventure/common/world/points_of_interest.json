@@ -2109,7 +2109,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "Kiora",
-	"map": "../common/maps/map/kiora_island.tmx",
+	"map": "../common/maps/map/kiora/kiora_island.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
