@@ -1,0 +1,7 @@
+Name:Regal Bunnicorn
+ManaCost:1 W
+Types:Creature Rabbit Unicorn
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonland permanents you control.
+SVar:X:Count$Valid Permanent.nonLand+YouCtrl
+Oracle:Regal Bunnicorn's power and toughness are each equal to the number of nonland permanents you control.

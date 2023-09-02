@@ -1,0 +1,18 @@
+Name:Horned Loch-Whale
+ManaCost:4 U U
+Types:Creature Whale
+PT:6/6
+K:Flash
+K:Ward:2
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPlayerTurn$ False | SpellDescription$ CARDNAME enters the battlefield tapped unless it's your turn.
+AlternateMode:Adventure
+Oracle:Flash\nWard {2}\nHorned Loch-Whale enters the battlefield tapped unless it's your turn.
+
+ALTERNATE
+
+Name:Lagoon Breach
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking+YouDontCtrl | TgtPrompt$ Select target attacking creature you don't control | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | StackDescription$ The owner of {c:Targeted} puts it on the top or bottom of their library. | SpellDescription$ The owner of target attacking creature you don't control puts it on the top or bottom of their library.
+Oracle:The owner of target attacking creature you don't control puts it on the top or bottom of their library.
