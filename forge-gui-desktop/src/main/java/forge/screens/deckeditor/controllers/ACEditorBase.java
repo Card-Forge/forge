@@ -215,7 +215,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         Iterable<Entry<String,Integer>> cardsByName = null;
         if (deck != null) {
             final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
-            cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
+            cardsByName = Aggregates.groupSumBy(allCards, pc -> pc.getRules().getNormalizedName());
         }
 
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
@@ -237,7 +237,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName, new Predicate<Entry<String, Integer>>() {
                     @Override
                     public boolean apply(Entry<String, Integer> t) {
-                        return t.getKey().equals(card.getName());
+                        return t.getKey().equals(card.getRules().getNormalizedName());
                     }
                 }, null);
                 if (cardAmountInfo != null) {

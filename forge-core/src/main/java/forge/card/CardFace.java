@@ -20,7 +20,7 @@ import forge.card.mana.ManaCost;
  * <br><br>
  * <i>Do not use reference to class except for card parsing.<br>Always use reference to interface type outside of package.</i>
  */
-final class CardFace implements ICardFace {
+final class CardFace implements ICardFace, Cloneable {
 
     public enum FaceSelectionMethod { // 
         USE_ACTIVE_FACE,
@@ -32,7 +32,7 @@ final class CardFace implements ICardFace {
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
 
-    private final String name;
+    private String name;
     private String altName = null;
     private CardType type = null;
     private ManaCost manaCost = ManaCost.NO_COST;
@@ -86,6 +86,7 @@ final class CardFace implements ICardFace {
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
+    void setName(String name)             { this.name = name; }
     void setAltName(String name)             { this.altName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
@@ -152,5 +153,15 @@ final class CardFace implements ICardFace {
     @Override
     public int compareTo(ICardFace o) {
         return getName().compareTo(o.getName());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Object clone() {
+        try {
+            return super.clone();
+        } catch (final Exception ex) {
+            throw new RuntimeException("CardFace : clone() error, " + ex);
+        }
     }
 }
