@@ -70,7 +70,7 @@ ScryfallCode=40K
 62 R Their Name Is Death @Evan Shipard
 63 R Their Number Is Legion @Games Workshop
 64 R Tomb Blade @Darren Tan
-65 R Trazyn the Infinite @Micha Mi?kowski
+65 R Trazyn the Infinite @Michał Miłkowski
 66 U Triarch Praetorian @Lucas Terryn
 67 R Triarch Stalker @JB Casacop
 68 R Venomcrawler @Ivan Dedov
@@ -171,7 +171,7 @@ ScryfallCode=40K
 163 R Reaver Titan @Philip Helliwell
 164 R Redemptor Dreadnought @Philip Helliwell
 165 R Resurrection Orb @Hector Ortiz
-166 R Sceptre of Eternal Glory @Micha Mi?kowski
+166 R Sceptre of Eternal Glory @Michał Miłkowski
 167 R Thunderhawk Gunship @Games Workshop
 168 R Tomb Fortress @Josu Solano
 169 M Imotekh the Stormlord @JB Casacop
