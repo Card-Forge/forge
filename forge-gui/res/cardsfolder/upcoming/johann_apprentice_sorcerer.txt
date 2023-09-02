@@ -1,0 +1,8 @@
+Name:Johann, Apprentice Sorcerer
+ManaCost:2 U R
+Types:Legendary Creature Human Wizard
+PT:2/5
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Card.Instant+TopLibrary+YouCtrl+nonLand,Card.Sorcery+TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | Description$ Once each turn, you may cast an instant or sorcery spell from the top of your library. (You still pay its costs. Timing rules still apply.)
+DeckHints:Type$Instant|Sorcery
+Oracle:You may look at the top card of your library any time.\nOnce each turn, you may cast an instant or sorcery spell from the top of your library. (You still pay its costs. Timing rules still apply.)
