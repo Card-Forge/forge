@@ -104,31 +104,29 @@ public class HumanPlaySpellAbility {
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
-        if (ability.isSpell() && !ability.isCopied()) { // Apply by Option
-            if (option != null && option.applyManaConvert(payment)) {
+        if (!ability.isCopied()) {
+            if (ability.isSpell()) { // Apply by Option
+                if (option != null && option.applyManaConvert(payment)) {
+                    manaColorConversion = true;
+                }
+
+                if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
+                    payment.setSnowForColor(true);
+                }
+            }
+
+            if (ability.isActivatedAbility() && ability.getGrantorStatic() != null && ability.getGrantorStatic().hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(payment, ability.getGrantorStatic().getParam("ManaConversion"));
                 manaColorConversion = true;
             }
 
-            if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
-                payment.setSnowForColor(true);
-            }
-        }
-
-        if (ability.isActivatedAbility()) {
-            if (ability.hasParam("ActivateIgnoreColor")) {
-                AbilityUtils.applyManaColorConversion(payment, ability.getParam("ActivateIgnoreColor"));
-                manaColorConversion = true;
-            }
-        }
-
-        if ((ability.isSpell() || ability.isActivatedAbility()) && !ability.isCopied()) {
-            if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+            if ((ability.isSpell() || ability.isActivatedAbility()) && StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
                 manaColorConversion = true;
             }
         }
 
         if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
 

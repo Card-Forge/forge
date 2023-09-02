@@ -681,7 +681,8 @@ public class ComputerUtilMana {
             } else if (mayPlay.hasParam("MayPlayIgnoreType")) {
                 ignoreType = true;
             }
-        } else if (sa.hasParam("ActivateIgnoreColor")) {
+        } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
+            // TODO check Matrix
             ignoreColor = true;
         }
         boolean hasConverge = sa.getHostCard().hasConverge();
