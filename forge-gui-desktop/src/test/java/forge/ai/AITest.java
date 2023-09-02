@@ -135,18 +135,18 @@ public class AITest {
         return addCardToZone(name, p, ZoneType.Battlefield);
     }
 
-    protected void addCards(String name, int count, Player p) {
+    protected List<Card> addCards(String name, int count, Player p) {
+        List<Card> cards = Lists.newArrayList();
         for (int i = 0; i < count; i++) {
-            addCard(name, p);
+            cards.add(addCard(name, p));
         }
+        return cards;
     }
 
     void playUntilStackClear(Game game) {
         do {
             game.getPhaseHandler().mainLoopStep();
-        } while (!game.isGameOver() && game.getStack().size() > 0);
+        } while (!game.isGameOver() && !game.getStack().isEmpty());
         return;
     }
-
-
 }
