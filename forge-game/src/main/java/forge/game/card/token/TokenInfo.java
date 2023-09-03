@@ -17,6 +17,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
@@ -279,7 +280,7 @@ public class TokenInfo {
         if (token == null) {
             return null;
         }
-        final Card result = Card.fromPaperCard(token, owner, game);
+        final Card result = CardFactory.getCard(token, owner, game);
 
         if (sa.hasParam("TokenPower")) {
             String str = sa.getParam("TokenPower");
