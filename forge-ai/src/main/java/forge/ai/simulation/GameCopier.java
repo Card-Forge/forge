@@ -14,6 +14,8 @@ import com.google.common.collect.Table;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
+import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -38,6 +40,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 
 public class GameCopier {
     private static final ZoneType[] ZONES = new ZoneType[] {
@@ -118,7 +121,7 @@ public class GameCopier {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
 
-        copyGameState(newGame);
+        copyGameState(newGame, aiPlayer);
 
         for (Player p : newGame.getPlayers()) {
             List<Card> commanders = Lists.newArrayList();
@@ -231,7 +234,7 @@ public class GameCopier {
         return clone;
     }
 
-    private void copyGameState(Game newGame) {
+    private void copyGameState(Game newGame, Player aiPlayer) {
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -254,7 +257,7 @@ public class GameCopier {
 
         for (ZoneType zone : ZONES) {
             for (Card card : origGame.getCardsIn(zone)) {
-                addCard(newGame, zone, card);
+                addCard(newGame, zone, card, aiPlayer);
             }
             // TODO CardsAddedThisTurn is now messed up
         }
@@ -290,15 +293,24 @@ public class GameCopier {
         }
     }
 
+    private static PaperCard hidden_info_card = new PaperCard(CardRules.fromScript(Lists.newArrayList("Name:hidden", "Types:Artifact", "Oracle:")), "", CardRarity.Common);
+    private static final boolean PRUNE_HIDDEN_INFO = false;
     private static final boolean USE_FROM_PAPER_CARD = true;
-    private Card createCardCopy(Game newGame, Player newOwner, Card c) {
+    private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             CardFactory.copyCopiableCharacteristics(c, result, null, null);
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
-            Card newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
+            Card newCard;
+            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+                // TODO also check REVEALED_CARDS memory
+                newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
+                newCard.setOwner(newOwner);
+            } else {
+                newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
+            }
             newCard.setCommander(c.isCommander());
             return newCard;
         }
@@ -327,9 +339,9 @@ public class GameCopier {
         return newCard;
     }
 
-    private void addCard(Game newGame, ZoneType zone, Card c) {
+    private void addCard(Game newGame, ZoneType zone, Card c, Player aiPlayer) {
         final Player owner = playerMap.get(c.getOwner());
-        final Card newCard = createCardCopy(newGame, owner, c);
+        final Card newCard = createCardCopy(newGame, owner, c, aiPlayer);
         cardMap.put(c, newCard);
 
         // TODO ExiledWith

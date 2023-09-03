@@ -50,7 +50,7 @@ public class GameStateEvaluator {
             return null;
         }
         GameCopier copier = new GameCopier(evalGame);
-        Game gameCopy = copier.makeCopy();
+        Game gameCopy = copier.makeCopy(null, aiPlayer);
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, new Runnable() {
             @Override
             public void run() {
