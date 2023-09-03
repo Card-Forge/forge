@@ -16,6 +16,6 @@ Name:Free the Fae
 ManaCost:1 U
 Types:Instant Adventure
 A:SP$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards. Then put an instant, sorcery, or Faerie card from among the milled cards into your hand.
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+Faerie,Card.IsRemembered+Sorcery,Card.IsRemembered+Instant | SelectPrompt$ Put an instant, sorcery, or Faerie card from among the milled cards into your hand | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Mandatory$ True | Destination$ Hand | ChangeType$ Card.IsRemembered+Faerie,Card.IsRemembered+Sorcery,Card.IsRemembered+Instant | SelectPrompt$ Put an instant, sorcery, or Faerie card from among the milled cards into your hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Mill four cards. Then put an instant, sorcery, or Faerie card from among the milled cards into your hand.
