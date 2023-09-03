@@ -1,0 +1,5 @@
+Name:Misleading Motes
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ Target creature's owner puts it on the top or bottom of their library.
+Oracle:Target creature's owner puts it on the top or bottom of their library.
