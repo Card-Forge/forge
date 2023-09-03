@@ -652,8 +652,6 @@ public class CardFactory {
         if (p != null) {
             to.setActivatingPlayer(p, lki);
         }
-
-        //to.changeText();
     }
 
     /**
