@@ -2,7 +2,7 @@ Name:Lord Skitter's Butcher
 ManaCost:2 B
 Types:Creature Rat Peasant
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one —
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBSacrifice,DBPumpAll
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | SpellDescription$ Create a 1/1 black Rat creature token with "This creature can't block."
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.Other | SacMessage$ another creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBScry | SpellDescription$ You may sacrifice another creature. If you do, scry 2, then draw a card.
