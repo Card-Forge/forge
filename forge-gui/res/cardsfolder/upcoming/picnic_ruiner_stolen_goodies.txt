@@ -14,6 +14,6 @@ ALTERNATE
 Name:Stolen Goodies
 ManaCost:3 G
 Types:Sorcery Adventure
-A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 0 | TargetMax$ 3 | DividedAsYouChoose$ 4 | SpellDescription$ Distribute three +1/+1 counters among any number of target creatures you control.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 0 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among any number of target creatures you control.
 SVar:PlayMain1:TRUE
 Oracle:Distribute three +1/+1 counters among any number of target creatures you control.
