@@ -859,21 +859,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final String getName() {
-        return getName(currentState);
+        return getName(currentState, false);
     }
 
+    public final String getName(boolean alt) {
+        return getName(currentState, alt);
+    }
     public final String getName(CardStateName stateName) {
-        return getName(getState(stateName));
+        return getName(getState(stateName), false);
     }
-
-    public final String getName(CardState state) {
+    public final String getName(CardState state, boolean alt) {
         String name = state.getName();
         for (CardChangedName change : this.changedCardNames.values()) {
             if (change.isOverwrite()) {
                 name = change.getNewName();
             }
         }
-        return name;
+        return alt ? StaticData.instance().getCommonCards().getName(name, true) :  name;
     }
 
     public final boolean hasNonLegendaryCreatureNames() {
@@ -5526,7 +5528,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 return true;
             }
         }
-        return sharesNameWith(c1.getName());
+        return sharesNameWith(c1.getName(true));
     }
 
     public final boolean sharesNameWith(final String name) {
@@ -5535,7 +5537,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        boolean shares = getName().equals(name);
+        boolean shares = getName(true).equals(name);
 
         // Split cards has extra logic to check if it does share a name with
         if (isSplitCard()) {
@@ -6963,9 +6965,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public static Card fromPaperCard(IPaperCard pc, Player owner) {
         return CardFactory.getCard(pc, owner, owner == null ? null : owner.getGame());
-    }
-    public static Card fromPaperCard(IPaperCard pc, Player owner, Game game) {
-        return CardFactory.getCard(pc, owner, game);
     }
 
     private static final Map<PaperCard, Card> cp2card = Maps.newHashMap();

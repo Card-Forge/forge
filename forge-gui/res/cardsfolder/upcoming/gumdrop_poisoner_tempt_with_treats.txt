@@ -1,0 +1,20 @@
+Name:Gumdrop Poisoner
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:3/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME enters the battlefield, up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Token & Type$Food
+DeckHints:Ability$LifeGain
+AlternateMode:Adventure
+Oracle:Lifelink\nWhen Gumdrop Poisoner enters the battlefield, up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
+
+ALTERNATE
+
+Name:Tempt with Treats
+ManaCost:B
+Types:Instant Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create a Food token. (Then exile this card. You may cast the creature later from exile.)

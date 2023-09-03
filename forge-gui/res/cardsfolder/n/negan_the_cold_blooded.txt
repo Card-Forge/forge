@@ -1,4 +1,5 @@
 Name:Negan, the Cold-Blooded
+AltName:Malik, Grim Manipulator
 ManaCost:2 R W B
 Types:Legendary Creature Human Rogue
 PT:4/3
