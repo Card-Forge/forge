@@ -120,7 +120,7 @@ public class HumanPlaySpellAbility {
                 manaColorConversion = true;
             }
 
-            if ((ability.isSpell() || ability.isActivatedAbility()) && StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+            if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
                 manaColorConversion = true;
             }
         }

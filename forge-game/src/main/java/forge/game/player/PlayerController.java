@@ -199,7 +199,7 @@ public abstract class PlayerController {
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
     public abstract boolean playChosenSpellAbility(SpellAbility sa);
 
-    public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
+    public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose, ManaConversionMatrix matrix);
 
     public abstract int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max);
     public boolean addKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt) {
@@ -235,7 +235,7 @@ public abstract class PlayerController {
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 
     // these 4 need some refining.
-    public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
+    public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers, ManaConversionMatrix matrix);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
 

@@ -25,6 +25,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -1524,7 +1525,11 @@ public class AbilityUtils {
                 String halfup = Integer.toString(Math.max(0,(int) Math.ceil(payer.getLife() / 2.0)));
                 cost = new Cost("PayLife<" + halfup + ">", true);
             }
-            alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers);
+            payer.getManaPool().restoreColorReplacements();
+            ManaConversionMatrix matrix = new ManaConversionMatrix();
+            StaticAbilityManaConvert.manaConvert(matrix, payer, source, null);
+            alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers, matrix);
+            payer.getManaPool().restoreColorReplacements();
         }
 
         if (alreadyPaid == isSwitched) {

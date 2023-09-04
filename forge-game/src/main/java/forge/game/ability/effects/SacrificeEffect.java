@@ -28,9 +28,11 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -43,6 +45,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card card = sa.getHostCard();
+
+        activator.getManaPool().restoreColorReplacements();
+        ManaConversionMatrix matrix = new ManaConversionMatrix();
+        StaticAbilityManaConvert.manaConvert(matrix, activator, card, null);
+
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
@@ -50,12 +57,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 isPaid = true;
             } else {
                 isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
-                    sa, Localizer.getInstance().getMessage("lblPayEcho"), ManaPaymentPurpose.Echo);
+                    sa, Localizer.getInstance().getMessage("lblPayEcho"), ManaPaymentPurpose.Echo, matrix);
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
             runParams.put(AbilityKey.EchoPaid, isPaid);
             game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
+                activator.getManaPool().restoreColorReplacements();
                 return;
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
@@ -76,15 +84,17 @@ public class SacrificeEffect extends SpellAbilityEffect {
             StringBuilder sb = new StringBuilder();
             sb.append("Cumulative upkeep for ").append(card);
 
-            boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
+            boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep, matrix);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
             runParams.put(AbilityKey.CumulativeUpkeepPaid, isPaid);
             runParams.put(AbilityKey.PayingMana, StringUtils.join(sa.getPayingMana(), ""));
             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {
+                activator.getManaPool().restoreColorReplacements();
                 return;
             }
         }
+        activator.getManaPool().restoreColorReplacements();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);

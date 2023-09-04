@@ -34,6 +34,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -690,6 +691,7 @@ public class ComputerUtilMana {
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         final ManaPool manapool = ai.getManaPool();
+        manapool.restoreColorReplacements();
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
@@ -706,6 +708,7 @@ public class ComputerUtilMana {
                 if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
                     AbilityUtils.applyManaColorConversion(pay, sa.getGrantorStatic().getParam("ManaConversion"));
                 }
+                StaticAbilityManaConvert.manaConvert(pay, ai, sa.getHostCard(), sa);
                 manapool.applyCardMatrix(pay);
 
                 for (byte color : ManaAtom.MANATYPES) {

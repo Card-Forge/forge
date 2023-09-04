@@ -593,10 +593,6 @@ public final class StaticAbilityContinuous {
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
-
-                if (params.containsKey("ManaConversion")) {
-                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params.get("ManaConversion"));
-                }
             }
         }
 
