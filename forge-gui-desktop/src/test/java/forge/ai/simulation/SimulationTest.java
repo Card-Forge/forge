@@ -5,11 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-import forge.GuiDesktop;
-import forge.StaticData;
 import forge.ai.AIOption;
 import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
@@ -24,13 +21,8 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiBase;
-import forge.item.IPaperCard;
 import forge.item.PaperToken;
-import forge.localinstance.properties.ForgePreferences;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 
 public class SimulationTest extends AITest {
