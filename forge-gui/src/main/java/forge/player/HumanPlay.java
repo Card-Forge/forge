@@ -204,7 +204,7 @@ public class HumanPlay {
      *            a {@link forge.game.cost.Cost} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
+    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt, ManaConversionMatrix matrix) {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
@@ -493,7 +493,7 @@ public class HumanPlay {
         }
 
         sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, hcd.isEffect());
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, matrix, hcd.isEffect());
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }

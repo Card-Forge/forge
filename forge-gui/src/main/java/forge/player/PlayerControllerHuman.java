@@ -1590,7 +1590,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)) {
             return true;
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt, null);
     }
 
     @Override
@@ -1892,7 +1892,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean payCostToPreventEffect(final Cost cost, final SpellAbility sa, final boolean alreadyPaid,
                                           final FCollectionView<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null, null);
     }
 
     // stores saved order for different sets of SpellAbilities
