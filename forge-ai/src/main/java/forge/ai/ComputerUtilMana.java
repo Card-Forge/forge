@@ -34,7 +34,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -674,12 +673,12 @@ public class ComputerUtilMana {
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
 
         boolean ignoreColor = false, ignoreType = false;
-        StaticAbility mayPlay = sa.getMayPlay();
+        CardPlayOption mayPlay = sa.getHostCard().mayPlay(sa.getMayPlay());
         if (mayPlay != null) {
-            if (mayPlay.hasParam("MayPlayIgnoreColor")) {
-                ignoreColor = true;
-            } else if (mayPlay.hasParam("MayPlayIgnoreType")) {
+            if (mayPlay.isIgnoreManaCostType()) {
                 ignoreType = true;
+            } else if (mayPlay.isIgnoreManaCostColor()) {
+                ignoreColor = true;
             }
         } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
             // TODO check Matrix
@@ -701,10 +700,11 @@ public class ComputerUtilMana {
 
                 // Apply the color/type conversion matrix if necessary
                 final CostPayment pay = new CostPayment(sa.getPayCosts(), sa);
-                if (ignoreType) {
-                    AbilityUtils.applyManaColorConversion(pay, MagicColor.Constant.ANY_TYPE_CONVERSION);
-                } else if (ignoreColor) {
-                    AbilityUtils.applyManaColorConversion(pay, MagicColor.Constant.ANY_COLOR_CONVERSION);
+                if (mayPlay != null) {
+                    mayPlay.applyManaConvert(pay);
+                }
+                if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
+                    AbilityUtils.applyManaColorConversion(pay, sa.getGrantorStatic().getParam("ManaConversion"));
                 }
                 manapool.applyCardMatrix(pay);
 
@@ -835,6 +835,7 @@ public class ComputerUtilMana {
                 // for the purpose of testing (since adding appropriate sources for shards in this particular case is handled
                 // inside getSourcesForShards)
                 // This is hacky and may be prone to bugs, so better implementation ideas are highly welcome.
+                // TODO check the Matrix instead
                 String manaProduced = ignoreColor || ignoreType ? MagicColor.toShortString(toPay.getColorMask())
                         : predictManafromSpellAbility(saPayment, ai, toPay);
 
