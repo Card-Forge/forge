@@ -81,7 +81,6 @@ public class CostPayment extends ManaConversionMatrix {
         this.cost = cost;
         this.adjustedCost = cost;
         this.ability = abil;
-        restoreColorReplacements();
     }
 
     /**
