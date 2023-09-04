@@ -19,6 +19,7 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -345,7 +346,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
+                ManaConversionMatrix old = new ManaConversionMatrix();
+                old.restoreColorReplacements();
+                old.applyCardMatrix(player.getManaPool());
                 if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
+                    player.getManaPool().restoreColorReplacements();
+                    player.getManaPool().applyCardMatrix(old);
                     final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
                     boolean restrictionsMet = true;
 
