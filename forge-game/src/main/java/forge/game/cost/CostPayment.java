@@ -151,22 +151,15 @@ public class CostPayment extends ManaConversionMatrix {
             PaymentDecision pd = part.accept(decisionMaker);
 
             // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(this);
+            if (pd != null) {
+                pd.matrix = this;
             }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
-                if (part instanceof CostPartMana) {
-                    ((CostPartMana)part).setCardMatrix(null);
-                }
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }
             this.paidCostParts.add(part);
-
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(null);
-            }
             game.costPaymentStack.pop(); // cost is resolved
         }
 

@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
-import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -39,9 +38,6 @@ public class CostPartMana extends CostPart {
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
     private final String restriction;
-
-    private ManaConversionMatrix cardMatrix = null;
-    public void setCardMatrix(ManaConversionMatrix mtrx) { cardMatrix = mtrx; }
 
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
@@ -150,21 +146,11 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public CostPart copy() {
-        CostPart copied = super.copy();
-        // when copied, clear cardMatrix
-        if (copied instanceof CostPartMana) {
-            ((CostPartMana)copied).cardMatrix = null;
-        }
-        return copied;
-    }
-
-    @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.clearManaPaid();
 
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, cardMatrix, effect);
+        return payer.getController().payManaCost(this, sa, null, pd.matrix, effect);
     }
 
 }
