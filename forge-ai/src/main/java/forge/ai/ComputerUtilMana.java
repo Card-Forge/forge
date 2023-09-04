@@ -666,13 +666,10 @@ public class ComputerUtilMana {
 
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         List<SpellAbility> paymentList = Lists.newArrayList();
+        final ManaPool manapool = ai.getManaPool();
 
-        if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
-            return true;    // paid all from floating mana
-        }
-
-        boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
-
+        // Apply the color/type conversion matrix if necessary
+        manapool.restoreColorReplacements();
         boolean ignoreColor = false, ignoreType = false;
         CardPlayOption mayPlay = sa.getHostCard().mayPlay(sa.getMayPlay());
         if (mayPlay != null) {
@@ -681,17 +678,23 @@ public class ComputerUtilMana {
             } else if (mayPlay.isIgnoreManaCostColor()) {
                 ignoreColor = true;
             }
+            mayPlay.applyManaConvert(manapool);
         } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
-            // TODO check Matrix
+            AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
             ignoreColor = true;
         }
+        StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), sa);
+
+        if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
+            return true;    // paid all from floating mana
+        }
+
+        boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
                 checkPlayable, hasConverge, ignoreColor, ignoreType);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
-        final ManaPool manapool = ai.getManaPool();
-        manapool.restoreColorReplacements();
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
@@ -699,18 +702,6 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
                 boolean found = false;
-
-                // Apply the color/type conversion matrix if necessary
-                final CostPayment pay = new CostPayment(sa.getPayCosts(), sa);
-                if (mayPlay != null) {
-                    mayPlay.applyManaConvert(pay);
-                }
-                if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
-                    AbilityUtils.applyManaColorConversion(pay, sa.getGrantorStatic().getParam("ManaConversion"));
-                }
-                StaticAbilityManaConvert.manaConvert(pay, ai, sa.getHostCard(), sa);
-                manapool.applyCardMatrix(pay);
-
                 for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
                         found = true;
@@ -1779,7 +1770,7 @@ public class ComputerUtilMana {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
-            if (!cost.hasNoManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+            if (cost.hasManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
                 continue;
             }
 
