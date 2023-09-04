@@ -1,0 +1,11 @@
+Name:Sharae of Numbing Depths
+ManaCost:2 W U
+Types:Legendary Creature Merfolk Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls. | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+T:Mode$ Taps | ValidCard$ Creature.OppCtrl | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever you tap one or more untapped creatures your opponents control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+Oracle:When Sharae of Numbing Depths enters the battlefield, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you tap one or more untapped creatures your opponents control, draw a card. This ability triggers only once each turn.
