@@ -1,0 +1,8 @@
+Name:Stroke of Midnight
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AITgts$ Card.cmcGE4 | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Human
+Oracle:Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.
