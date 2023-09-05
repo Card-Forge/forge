@@ -672,16 +672,18 @@ public class ComputerUtilMana {
         manapool.restoreColorReplacements();
         boolean ignoreColor = false, ignoreType = false;
         CardPlayOption mayPlay = sa.getHostCard().mayPlay(sa.getMayPlay());
-        if (sa.isSpell() && mayPlay != null) {
-            if (mayPlay.isIgnoreManaCostType()) {
-                ignoreType = true;
-            } else if (mayPlay.isIgnoreManaCostColor()) {
+        if (!effect) {
+            if (sa.isSpell() && mayPlay != null) {
+                if (mayPlay.isIgnoreManaCostType()) {
+                    ignoreType = true;
+                } else if (mayPlay.isIgnoreManaCostColor()) {
+                    ignoreColor = true;
+                }
+                mayPlay.applyManaConvert(manapool);
+            } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
                 ignoreColor = true;
             }
-            mayPlay.applyManaConvert(manapool);
-        } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
-            AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
-            ignoreColor = true;
         }
         StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect ? null : sa);
 
@@ -691,6 +693,7 @@ public class ComputerUtilMana {
 
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
+        // TODO use matrix instead of ignoreColor, ignoreType
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
                 checkPlayable, hasConverge, ignoreColor, ignoreType);
 
