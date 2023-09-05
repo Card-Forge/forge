@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -149,8 +150,18 @@ public class CostPartMana extends CostPart {
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.clearManaPaid();
 
+        ManaConversionMatrix old = new ManaConversionMatrix();
+        old.restoreColorReplacements();
+        old.applyCardMatrix(payer.getManaPool());
+
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, pd.matrix, effect);
+        boolean result = payer.getController().payManaCost(this, sa, null, pd.matrix, effect);
+
+        // restore old matrix during payment chains
+        payer.getManaPool().restoreColorReplacements();
+        payer.getManaPool().applyCardMatrix(old);
+
+        return result;
     }
 
 }
