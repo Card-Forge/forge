@@ -1,0 +1,7 @@
+Name:Spell Stutter
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {2} plus an additional {1} for each Faerie you control.
+SVar:X:Count$Valid Faerie.YouCtrl/Plus.2
+DeckHints:Type$Faerie
+Oracle:Counter target spell unless its controller pays {2} plus an additional {1} for each Faerie you control.
