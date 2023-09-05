@@ -33,14 +33,12 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.mana.ManaConversionMatrix;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
-import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -290,14 +288,8 @@ public class CombatUtil {
         // If there's a better way of handling this somewhere deeper in the code, feel free to remove
         final SpellAbility fakeSA = new SpellAbility.EmptySa(attacker, attacker.getController());
         fakeSA.setCardState(attacker.getCurrentState());
-
-        attacker.getController().getManaPool().restoreColorReplacements();
-        ManaConversionMatrix matrix = new ManaConversionMatrix();
-        StaticAbilityManaConvert.manaConvert(matrix, attacker.getController(), attacker, null);
-        boolean result = attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
-                "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker, null);
-        attacker.getController().getManaPool().restoreColorReplacements();
-        return result;
+        return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
+                "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
@@ -357,15 +349,7 @@ public class CombatUtil {
 
         SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
         fakeSA.setCardState(blocker.getCurrentState());
-
-        blocker.getController().getManaPool().restoreColorReplacements();
-
-        ManaConversionMatrix matrix = new ManaConversionMatrix();
-        StaticAbilityManaConvert.manaConvert(matrix, blocker.getController(), blocker, null);
-        boolean result = blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA,
-                "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker, matrix);
-        blocker.getController().getManaPool().restoreColorReplacements();
-        return result;
+        return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
     public static Cost getBlockCost(Game game, Card blocker, Card attacker) {

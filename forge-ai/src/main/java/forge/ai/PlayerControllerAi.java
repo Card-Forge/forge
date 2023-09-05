@@ -679,15 +679,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose, ManaConversionMatrix matrix) {
+    public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController(), true);
         ability.setCardState(sa.getCardState());
-
-        if (matrix != null) {
-            c.getController().getManaPool().applyCardMatrix(matrix);
-        }
 
         if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
             // transfer this info for Balduvian Fallen
@@ -1048,7 +1044,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers, ManaConversionMatrix matrix) {
+    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
         final Card source = sa.getHostCard();
         // TODO replace with EmptySa
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
@@ -1057,10 +1053,6 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-
-        if (matrix != null) {
-            player.getManaPool().applyCardMatrix(matrix);
-        }
 
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost

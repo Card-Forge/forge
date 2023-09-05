@@ -426,7 +426,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose, ManaConversionMatrix matrix) {
+    public boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
     }
 
@@ -535,7 +535,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers, ManaConversionMatrix matrix) {
+    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
         // TODO Auto-generated method stub
         return false;
     }

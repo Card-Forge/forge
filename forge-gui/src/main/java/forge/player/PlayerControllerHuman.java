@@ -1585,12 +1585,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean payManaOptional(final Card c, final Cost cost, final SpellAbility sa, final String prompt,
-                                   final ManaPaymentPurpose purpose, ManaConversionMatrix matrix) {
+                                   final ManaPaymentPurpose purpose) {
         if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero()
                 && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)) {
             return true;
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt, matrix);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
     }
 
     @Override
@@ -1890,9 +1890,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean payCostToPreventEffect(final Cost cost, final SpellAbility sa, final boolean alreadyPaid,
-                                          final FCollectionView<Player> allPayers, ManaConversionMatrix matrix) {
+                                          final FCollectionView<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null, null);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
 
     // stores saved order for different sets of SpellAbilities

@@ -25,7 +25,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
-import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -1525,11 +1524,7 @@ public class AbilityUtils {
                 String halfup = Integer.toString(Math.max(0,(int) Math.ceil(payer.getLife() / 2.0)));
                 cost = new Cost("PayLife<" + halfup + ">", true);
             }
-            payer.getManaPool().restoreColorReplacements();
-            ManaConversionMatrix matrix = new ManaConversionMatrix();
-            StaticAbilityManaConvert.manaConvert(matrix, payer, source, null);
-            alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers, matrix);
-            payer.getManaPool().restoreColorReplacements();
+            alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers);
         }
 
         if (alreadyPaid == isSwitched) {
@@ -2854,7 +2849,6 @@ public class AbilityUtils {
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
-
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split
             boolean additive = pair.contains("->");

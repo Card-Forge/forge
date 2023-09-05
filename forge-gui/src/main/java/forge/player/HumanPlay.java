@@ -35,6 +35,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
@@ -204,7 +205,7 @@ public class HumanPlay {
      *            a {@link forge.game.cost.Cost} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt, ManaConversionMatrix matrix) {
+    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
@@ -493,7 +494,7 @@ public class HumanPlay {
         }
 
         sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, matrix, hcd.isEffect());
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, null, hcd.isEffect());
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }
@@ -623,6 +624,13 @@ public class HumanPlay {
             emerge = ability.getSacrificedAsEmerge();
         }
         if (!toPay.isPaid()) {
+            // if matrix still null it's effect payment
+            if (matrix == null) {
+                matrix = new ManaConversionMatrix();
+                matrix.restoreColorReplacements();
+                StaticAbilityManaConvert.manaConvert(matrix, activator, ability.getHostCard(), ability);
+            }
+
             // Input is somehow clearing out the offering card?
             inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect);
             inpPayment.setMessagePrefix(prompt);
