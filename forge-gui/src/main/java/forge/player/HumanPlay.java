@@ -628,7 +628,8 @@ public class HumanPlay {
             if (matrix == null) {
                 matrix = new ManaConversionMatrix();
                 matrix.restoreColorReplacements();
-                StaticAbilityManaConvert.manaConvert(matrix, activator, ability.getHostCard(), ability);
+                // pass sa = null so it doesn't consider unless cost on spell
+                StaticAbilityManaConvert.manaConvert(matrix, activator, ability.getHostCard(), null);
             }
 
             // Input is somehow clearing out the offering card?

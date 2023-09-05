@@ -672,7 +672,7 @@ public class ComputerUtilMana {
         manapool.restoreColorReplacements();
         boolean ignoreColor = false, ignoreType = false;
         CardPlayOption mayPlay = sa.getHostCard().mayPlay(sa.getMayPlay());
-        if (mayPlay != null) {
+        if (sa.isSpell() && mayPlay != null) {
             if (mayPlay.isIgnoreManaCostType()) {
                 ignoreType = true;
             } else if (mayPlay.isIgnoreManaCostColor()) {
@@ -683,7 +683,7 @@ public class ComputerUtilMana {
             AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
             ignoreColor = true;
         }
-        StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), sa);
+        StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect ? null : sa);
 
         if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;    // paid all from floating mana
