@@ -671,7 +671,7 @@ public class ComputerUtilMana {
         // Apply the color/type conversion matrix if necessary
         manapool.restoreColorReplacements();
         boolean ignoreColor = false, ignoreType = false;
-        CardPlayOption mayPlay = sa.getHostCard().mayPlay(sa.getMayPlay());
+        CardPlayOption mayPlay = sa.getMayPlayOption();
         if (!effect) {
             if (sa.isSpell() && mayPlay != null) {
                 if (mayPlay.isIgnoreManaCostType()) {

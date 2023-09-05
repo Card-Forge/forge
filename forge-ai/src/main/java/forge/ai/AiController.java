@@ -1390,7 +1390,7 @@ public class AiController {
 
                     // add mayPlay option
                     for (CardPlayOption o : land.mayPlay(player)) {
-                        la = new LandAbility(land, player, o.getAbility());
+                        la = new LandAbility(land, player, o);
                         la.setCardState(land.getCurrentState());
                         if (la.canPlay()) {
                             abilities.add(la);
