@@ -1,0 +1,8 @@
+Name:Redcap Thief
+ManaCost:2 R
+Types:Creature Goblin Rogue
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:When Redcap Thief enters the battlefield, create a Treasure token. (It's an artifact with "T}, Sacrifice this artifact: Add one mana of any color.")

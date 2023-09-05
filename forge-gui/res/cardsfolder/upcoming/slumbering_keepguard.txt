@@ -1,0 +1,10 @@
+Name:Slumbering Keepguard
+ManaCost:W
+Types:Creature Human Knight
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ Pump | Cost$ 2 W | NumAtt$ +X | NumDef$ +X | AILogic$ Pump | SpellDescription$ CARDNAME gets +1/+1 until end of turn for each enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+DeckHints:Type$Enchantment
+Oracle:Whenever an enchantment enters the battlefield under your control, scry 1.\n{2}{W}: Slumbering Keepguard gets +1/+1 until end of turn for each enchantment you control.

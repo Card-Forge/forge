@@ -1,0 +1,10 @@
+Name:Redtooth Vanguard
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:3/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, you may pay {2}. If you do, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+DeckHints:Type$Enchantment
+Oracle:Trample\nWhenever an enchantment enters the battlefield under your control, you may pay {2}. If you do, return Redtooth Vanguard from your graveyard to your hand.
