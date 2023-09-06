@@ -415,7 +415,6 @@ public abstract class DeckGeneratorBase {
     }
 
     public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards) {
-        //final List<String> dLands = new ArrayList<>();
         Pattern p = Pattern.compile(pattern);
         for (PaperCard card:landCards) {
             Matcher matcher = p.matcher(card.getRules().getOracleText());
@@ -437,7 +436,6 @@ public abstract class DeckGeneratorBase {
 
     public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards) {
         final String fetchPattern="Search your library for an* ([^\\s]*) or ([^\\s]*) card";
-        //final List<String> dLands = new ArrayList<String>();
         Map<String,String> colorLookup= new HashMap<>();
         colorLookup.put("Plains","W");
         colorLookup.put("Forest","G");

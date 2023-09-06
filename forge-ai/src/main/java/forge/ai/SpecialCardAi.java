@@ -680,6 +680,7 @@ public class SpecialCardAi {
     // Gideon Blackblade
     public static class GideonBlackblade {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            sa.resetTargets();
             CardCollectionView otb = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
             if (!otb.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestAI(otb));
