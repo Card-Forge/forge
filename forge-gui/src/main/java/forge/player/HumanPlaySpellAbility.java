@@ -99,7 +99,7 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?", null);
+                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
@@ -126,7 +126,7 @@ public class HumanPlaySpellAbility {
         }
 
         if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
             human.incNumManaConversion();
         }
 
