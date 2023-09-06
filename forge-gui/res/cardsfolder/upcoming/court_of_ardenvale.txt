@@ -4,8 +4,8 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your upkeep, return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead.
-SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ TrigPlay | FalseSubAbility$ TrigReturn
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | Origin$ Graveyard | Destination$ Hand
-SVar:TrigPlay:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+SVar:TrigBranch:DB$ Branch | ValidTgts$ Permanent.YouCtrl+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ TrigPlay | FalseSubAbility$ TrigReturn
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand
+SVar:TrigPlay:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:Count$Monarch.1.0
 Oracle:When Court of Ardenvale enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead.
