@@ -1,0 +1,10 @@
+Name:Alela, Cunning Conqueror
+ManaCost:2 U B
+Types:Legendary Creature Faerie Warlock
+PT:2/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ActivatorThisTurnCast$ EQ1 | OpponentTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, create a 1/1 black Faerie Rogue creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Faerie+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigGoad | TriggerDescription$ Whenever one or more Faeries you control deal combat damage to a player, goad target creature that player controls.
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature that player controls
+Oracle:Flying\nWhenever you cast your first spell during each opponent's turn, create a 1/1 black Faerie Rogue creature token with flying.\nWhenever one or more Faeries you control deal combat damage to a player, goad target creature that player controls.
