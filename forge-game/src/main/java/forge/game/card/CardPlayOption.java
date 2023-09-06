@@ -115,10 +115,10 @@ public final class CardPlayOption {
                     }
                     sb.append(")");
                 }
-                if (isIgnoreManaCostColor()) {
-                    sb.append(" (may spend mana as though it were mana of any color to cast it)");
-                } else if (isIgnoreManaCostType()) {
+                if (isIgnoreManaCostType()) {
                     sb.append(" (may spend mana as though it were mana of any type to cast it)");
+                } else if (isIgnoreManaCostColor()) {
+                    sb.append(" (may spend mana as though it were mana of any color to cast it)");
                 }
                 break;
             case NO:
