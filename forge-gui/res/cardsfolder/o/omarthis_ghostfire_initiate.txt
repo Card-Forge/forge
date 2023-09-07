@@ -4,7 +4,7 @@ Types:Legendary Creature Spirit Naga
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
-T:Mode$ CounterAddedOnce | ValidCard$ Creature.Other+inZoneBattlefield+Colorless | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on NICKNAME.
+T:Mode$ CounterAddedOnce | ValidCard$ Creature.Other+inZoneBattlefield+Colorless | ValidSource$ You | OptionalDecider$ You | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on NICKNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigManifest | TriggerDescription$ When NICKNAME dies, manifest a number of cards from the top of your library equal to the number of counters on it.
 SVar:TrigManifest:DB$ Manifest | Amount$ Y | Defined$ TopOfLibrary
