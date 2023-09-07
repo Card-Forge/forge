@@ -2644,6 +2644,9 @@ public class AbilityUtils {
         if (sq[0].contains("CardControllerTypes")) {
             return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1]))), expr, c, ctb);
         }
+        if (sq[0].contains("CardControllerPermanentTypes")) {
+            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
+        }
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
             CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
@@ -3368,6 +3371,13 @@ public class AbilityUtils {
             return doXMath(list.size(), m, source, ctb);
         }
 
+        //SacrificedPermanentTypesThisTurn
+        if (l[0].startsWith("SacrificedPermanentTypesThisTurn")) {
+            List<Card> list = player.getSacrificedThisTurn();
+            final CardCollectionView cards = new CardCollection(list);
+            return doXMath(getCardTypesFromList(cards, true), m, source, ctb);
+        }
+
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
@@ -3845,10 +3855,15 @@ public class AbilityUtils {
     }
 
     public static int getCardTypesFromList(final CardCollectionView list) {
+        return getCardTypesFromList(list, false);
+    }
+    public static int getCardTypesFromList(final CardCollectionView list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
+        if (permanentTypes)
+            return (int) types.stream().filter(type -> type.isPermanent).count();
         return types.size();
     }
 
