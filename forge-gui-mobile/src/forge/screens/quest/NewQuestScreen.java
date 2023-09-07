@@ -10,7 +10,6 @@ import forge.assets.FSkinImage;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestMode;
