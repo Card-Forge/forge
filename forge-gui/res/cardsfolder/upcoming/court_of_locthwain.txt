@@ -8,9 +8,7 @@ SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ValidTgts$ Opponent | Cha
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMonarchEffect
-SVar:DBMonarchEffect:DB$ Effect | StaticAbilities$ MayPlay | Duration$ UntilEndOfTurn | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:MayPlay:Mode$ Continuous | Affected$ Card.ExiledWithSource | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Exile
-SVar:DBMonarchEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilEndOfTurn | RememberObjects$ ValidExile Card.ExiledWithSource | ForgetOnMoved$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:DBMonarchEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilEndOfTurn | RememberObjects$ ValidExile Card.ExiledWithSource+nonLand | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ You may cast a spell from among cards exiled with CARDNAME without paying its mana cost.
 SVar:X:Count$Monarch.1.0
 Oracle:When Court of Locthwain enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with Court of Locthwain without paying its mana cost.
