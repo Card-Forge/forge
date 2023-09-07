@@ -4,9 +4,9 @@ Types:Legendary Artifact Creature Food Knight
 PT:3/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample & Hexproof & Haste | IsPresent$ Planeswalker.OppCtrl |  Description$ CARDNAME has trample, hexproof, and haste as long as an opponent controls a planeswalker.
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another artifact you control is put into a graveyard from the battlefield, put a +1/+1 counter on NICKNAME and scry 1.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf | SubAbility$ DBScry
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
-A:AB$ GainLife | Cost$ 2 Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to its power.
+A:AB$ GainLife | Cost$ 2 Sac<1/NICKNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to its power.
 SVar:X:Sacrificed$CardPower
 Ability$Sacrifice|Counters|Counters
 DeckHints:Type$Artifact

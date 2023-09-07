@@ -10,5 +10,5 @@ SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Con
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Faerie.YouCtrl | TgtPrompt$ Select target Faerie you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Faerie
-DeckHas:Ability$Discard|Counter
+DeckHas:Ability$Discard|Counters
 Oracle:Flying\nWhenever you attack with one or more Faeries, draw a card, then discard a card. When you discard a card this way, put a +1/+1 counter on target Faerie you control.
