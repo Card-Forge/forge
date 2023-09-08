@@ -1,0 +1,10 @@
+Name:Warehouse Tabby
+ManaCost:B
+Types:Creature Cat
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+DeckHas:Ability$Token & Type$Rat
+DeckHints:Type$Enchantment
+Oracle:Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 black Rat creature token with "This creature can't block."\n{1}{B}: Warehouse Tabby gains deathtouch until end of turn.
