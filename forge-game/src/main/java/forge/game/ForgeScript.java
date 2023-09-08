@@ -325,7 +325,7 @@ public class ForgeScript {
             } else {
                 y = sa.getPayCosts().getTotalMana().getCMC();
             }
-            int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);
+            int x = AbilityUtils.calculateAmount(source, property.substring(5), spellAbility);
             if (!Expressions.compare(y, property, x)) {
                 return false;
             }
