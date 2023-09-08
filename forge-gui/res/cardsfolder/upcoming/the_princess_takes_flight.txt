@@ -1,0 +1,8 @@
+Name:The Princess Takes Flight
+ManaCost:2 W
+Types:Enchantment Saga
+K:Saga:3:DBExile,DBPump,DBReturn
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | RememberChanged$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile up to one target creature.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2 |  KW$ Flying | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +2/+2 and gains flying until end of turn.
+SVar:DBReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Return the exiled card to the battlefield under its owner’s control.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile up to one target creature.\nII — Target creature you control gets +2/+2 and gains flying until end of turn.\nIII — Return the exiled card to the battlefield under its owner's control.

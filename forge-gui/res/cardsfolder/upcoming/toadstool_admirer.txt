@@ -1,0 +1,8 @@
+Name:Toadstool Admirer
+ManaCost:G
+Types:Creature Ouphe
+PT:1/1
+K:Ward:2
+A:AB$ PutCounter | Cost$ 3 G | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\n{3}{G}: Put a +1/+1 counter on Toadstool Admirer.
