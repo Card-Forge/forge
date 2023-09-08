@@ -2,6 +2,6 @@ Name:Witchstalker Frenzy
 ManaCost:3 R
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature that attacked this turn.
-SVar:X:Count$AttackersDeclared
+SVar:X:Count$CreaturesAttackedThisTurn Creature
 A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
 Oracle:This spell costs {1} less to cast for each creature that attacked this turn.\nWitchstalker Frenzy deals 5 damage to target creature.
