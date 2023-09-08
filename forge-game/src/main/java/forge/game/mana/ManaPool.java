@@ -339,18 +339,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
         }
 
-        // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 
         for (byte outColor : ManaAtom.MANATYPES) {
             if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
                 return true;
             }
-        }
-
-        // TODO The following may not be needed anymore?
-        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte)ManaAtom.COLORLESS)) {
-            return true;
         }
 
         return shard.canBePaidWithManaOfColor((byte)0);

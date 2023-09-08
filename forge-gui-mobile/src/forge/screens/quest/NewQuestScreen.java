@@ -1,10 +1,6 @@
 package forge.screens.quest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.*;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -14,7 +10,6 @@ import forge.assets.FSkinImage;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestMode;
@@ -549,13 +544,8 @@ public class NewQuestScreen extends FScreen {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 Set<String> sets = new HashSet<>();
-                for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
-                    sets.add(c.getKey().getEdition());
-                }
-                if (dckStartPool.has(DeckSection.Sideboard)) {
-                    for (Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
-                        sets.add(c.getKey().getEdition());
-                    }
+                for(PaperCard card : dckStartPool.getAllCardsInASinglePool().toFlatList()) {
+                    sets.add(card.getEdition());
                 }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }

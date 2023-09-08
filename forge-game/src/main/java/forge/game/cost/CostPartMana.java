@@ -40,9 +40,6 @@ public class CostPartMana extends CostPart {
     private boolean isCostPayAnyNumberOfTimes = false;
     private final String restriction;
 
-    private ManaConversionMatrix cardMatrix = null;
-    public void setCardMatrix(ManaConversionMatrix mtrx) { cardMatrix = mtrx; }
-
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
     public boolean shouldPayLast() {
@@ -150,21 +147,21 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public CostPart copy() {
-        CostPart copied = super.copy();
-        // when copied, clear cardMatrix
-        if (copied instanceof CostPartMana) {
-            ((CostPartMana)copied).cardMatrix = null;
-        }
-        return copied;
-    }
-
-    @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.clearManaPaid();
 
+        ManaConversionMatrix old = new ManaConversionMatrix();
+        old.restoreColorReplacements();
+        old.applyCardMatrix(payer.getManaPool());
+
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, cardMatrix, effect);
+        boolean result = payer.getController().payManaCost(this, sa, null, pd.matrix, effect);
+
+        // restore old matrix during payment chains
+        payer.getManaPool().restoreColorReplacements();
+        payer.getManaPool().applyCardMatrix(old);
+
+        return result;
     }
 
 }

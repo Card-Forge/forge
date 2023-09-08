@@ -48,6 +48,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactory;
+import forge.game.card.CardPlayOption;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
@@ -173,7 +174,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private SpellAbilityView view;
 
-    private StaticAbility mayPlay;
+    private CardPlayOption mayPlay;
 
     private CardCollection lastStateBattlefield;
     private CardCollection lastStateGraveyard;
@@ -1099,10 +1100,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return lastChapter = value;
     }
 
-    public StaticAbility getMayPlay() {
+    public CardPlayOption getMayPlayOption() {
         return mayPlay;
     }
-    public void setMayPlay(final StaticAbility sta) {
+    public StaticAbility getMayPlay() {
+        return mayPlay != null ? mayPlay.getAbility() : null;
+    }
+    public void setMayPlay(final CardPlayOption sta) {
         mayPlay = sta;
     }
 

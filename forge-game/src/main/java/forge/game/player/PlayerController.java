@@ -251,9 +251,6 @@ public abstract class PlayerController {
 
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
-    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean effect) {
-        return payManaCost(costPartMana, sa, prompt, null, effect);
-    }
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect) {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
     }

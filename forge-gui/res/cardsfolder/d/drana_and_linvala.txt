@@ -5,6 +5,6 @@ PT:3/4
 K:Flying
 K:Vigilance
 S:Mode$ CantBeActivated | Activator$ Opponent | AffectedZone$ Battlefield | ValidCard$ Creature | ValidSA$ Activated | Description$ Activated abilities of creatures your opponents control can't be activated.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.OppCtrl | GainsValidAbilities$ Activated | GainsAbilitiesActivateIgnoreColor$ AnyType->AnyColor | Description$ CARDNAME has all activated abilities of all creatures your opponents control. You may spend mana as though it were mana of any color to activate those abilities.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.OppCtrl | GainsValidAbilities$ Activated | ManaConversion$ AnyType->AnyColor | Description$ CARDNAME has all activated abilities of all creatures your opponents control. You may spend mana as though it were mana of any color to activate those abilities.
 SVar:PlayMain1:TRUE
 Oracle:Flying, vigilance\nActivated abilities of creatures your opponents control can't be activated.\nDrana and Linvala has all activated abilities of all creatures your opponents control. You may spend mana as though it were mana of any color to activate those abilities.

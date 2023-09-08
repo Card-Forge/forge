@@ -1,0 +1,8 @@
+Name:Wicked Visitor
+ManaCost:1 B
+Types:Creature Nightmare
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Opponent
+DeckHints:Type$Enchantment
+Oracle:Whenever an enchantment you control is put into a graveyard from the battlefield, each opponent loses 1 life.
