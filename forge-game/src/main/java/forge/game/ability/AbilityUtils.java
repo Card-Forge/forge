@@ -2851,20 +2851,26 @@ public class AbilityUtils {
         return doXMath(someCards.size(), expr, c, ctb);
     }
 
-    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
-        String conversion = params.get("ManaConversion");
-
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split
             boolean additive = pair.contains("->");
             String[] sides = pair.split(additive ? "->" : "<-");
 
+            byte replacedColor = ManaAtom.fromConversion(sides[1]);
             if (sides[0].equals("AnyColor") || sides[0].equals("AnyType")) {
                 for (byte c : (sides[0].equals("AnyColor") ? MagicColor.WUBRG : MagicColor.WUBRGC)) {
-                    matrix.adjustColorReplacement(c, ManaAtom.fromConversion(sides[1]), additive);
+                    matrix.adjustColorReplacement(c, replacedColor, additive);
+                }
+            } else if (sides[0].startsWith("non")) {
+                byte originalColor = ManaAtom.fromConversion(sides[0]);
+                for (byte b : ManaAtom.MANATYPES) {
+                    if ((originalColor & b) != 0) {
+                        matrix.adjustColorReplacement(b, replacedColor, additive);
+                    }
                 }
             } else {
-                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), ManaAtom.fromConversion(sides[1]), additive);
+                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), replacedColor, additive);
             }
         }
     }

@@ -2154,7 +2154,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final boolean hasManaConversion() {
         return numManaConversion < keywords.getAmount("You may spend mana as though"
-                + " it were mana of any color to cast a spell this turn.");
+                + " it were mana of any type to cast a spell this turn.");
     }
     public final void incNumManaConversion() {
         numManaConversion++;

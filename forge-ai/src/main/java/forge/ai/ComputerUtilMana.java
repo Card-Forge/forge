@@ -34,7 +34,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -394,7 +394,6 @@ public class ComputerUtilMana {
         Card hostCard = saPayment.getHostCard();
         Game game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
-        //String originalProduced = manaProduced;
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(hostCard);
         repParams.put(AbilityKey.Mana, manaProduced);
@@ -666,30 +665,30 @@ public class ComputerUtilMana {
 
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         List<SpellAbility> paymentList = Lists.newArrayList();
+        final ManaPool manapool = ai.getManaPool();
+
+        // Apply the color/type conversion matrix if necessary
+        manapool.restoreColorReplacements();
+        CardPlayOption mayPlay = sa.getMayPlayOption();
+        if (!effect) {
+            if (sa.isSpell() && mayPlay != null) {
+                mayPlay.applyManaConvert(manapool);
+            } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
+            }
+        }
+        StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect ? null : sa);
 
         if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;    // paid all from floating mana
         }
 
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
-
-        boolean ignoreColor = false, ignoreType = false;
-        StaticAbility mayPlay = sa.getMayPlay();
-        if (mayPlay != null) {
-            if (mayPlay.hasParam("MayPlayIgnoreColor")) {
-                ignoreColor = true;
-            } else if (mayPlay.hasParam("MayPlayIgnoreType")) {
-                ignoreType = true;
-            }
-        } else if (sa.hasParam("ActivateIgnoreColor")) {
-            ignoreColor = true;
-        }
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
-                checkPlayable, hasConverge, ignoreColor, ignoreType);
+                checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
-        final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
@@ -697,16 +696,6 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
                 boolean found = false;
-
-                // Apply the color/type conversion matrix if necessary
-                final CostPayment pay = new CostPayment(sa.getPayCosts(), sa);
-                if (ignoreType) {
-                    AbilityUtils.applyManaColorConversion(pay, MagicColor.Constant.ANY_TYPE_CONVERSION);
-                } else if (ignoreColor) {
-                    AbilityUtils.applyManaColorConversion(pay, MagicColor.Constant.ANY_COLOR_CONVERSION);
-                }
-                manapool.applyCardMatrix(pay);
-
                 for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
                         found = true;
@@ -830,13 +819,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                // FIXME: if we're ignoring color or type, assume that the color/type of the mana produced will fit the case
-                // for the purpose of testing (since adding appropriate sources for shards in this particular case is handled
-                // inside getSourcesForShards)
-                // This is hacky and may be prone to bugs, so better implementation ideas are highly welcome.
-                String manaProduced = ignoreColor || ignoreType ? MagicColor.toShortString(toPay.getColorMask())
-                        : predictManafromSpellAbility(saPayment, ai, toPay);
-
+                String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
@@ -895,27 +878,12 @@ public class ComputerUtilMana {
         }
     }
 
-    private static void addAllSourcesForMagicColorRange(final ListMultimap<Integer, SpellAbility> manaAbilityMap, final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards, final byte[] range) {
-        for (final byte b : range) {
-            final ManaCostShard shard = ManaCostShard.valueOf(b);
-            if (!sourcesForShards.containsKey(shard)) {
-                for (final byte c : range) {
-                    for (SpellAbility saMana : manaAbilityMap.get((int) c)) {
-                        if (!sourcesForShards.get(shard).contains(saMana)) {
-                            sourcesForShards.get(shard).add(saMana);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * Creates a mapping between the required mana shards and the available spell abilities to pay for them
      */
     private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
-            final boolean hasConverge, final boolean ignoreColor, final boolean ignoreType) {
+            final boolean hasConverge) {
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
@@ -941,13 +909,6 @@ public class ComputerUtilMana {
                     }
                 }
             }
-        }
-
-        // add all other types/colors if the specific type/color doesn't matter
-        if (ignoreType) {
-            addAllSourcesForMagicColorRange(manaAbilityMap, sourcesForShards, MagicColor.WUBRGC);
-        } else if (ignoreColor) {
-            addAllSourcesForMagicColorRange(manaAbilityMap, sourcesForShards, MagicColor.WUBRG);
         }
 
         sortManaAbilities(sourcesForShards, sa);
@@ -1774,7 +1735,7 @@ public class ComputerUtilMana {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
-            if (!cost.hasNoManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+            if (cost.hasManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
                 continue;
             }
 

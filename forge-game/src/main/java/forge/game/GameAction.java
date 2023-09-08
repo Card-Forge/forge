@@ -1078,9 +1078,6 @@ public class GameAction {
         game.getStaticEffects().clearStaticEffects(affectedCards);
 
         for (final Player p : game.getPlayers()) {
-            if (!game.getStack().isFrozen()) {
-                p.getManaPool().restoreColorReplacements();
-            }
             p.clearStaticAbilities();
         }
 

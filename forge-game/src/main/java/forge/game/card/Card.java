@@ -2090,9 +2090,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         s.append(" on it.");
                     }
                     sbLong.append(s).append("\r\n");
-                } else if (keyword.startsWith("ManaConvert")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.startsWith("Protection:") || keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[2]).append("\r\n");
@@ -6890,7 +6887,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             // extra for MayPlay
             for (CardPlayOption o : source.mayPlay(player)) {
-                la = new LandAbility(this, player, o.getAbility());
+                la = new LandAbility(this, player, o);
                 la.setCardState(oState);
                 if (la.canPlay()) {
                     abilities.add(la);
@@ -6942,7 +6939,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                 // extra for MayPlay
                 for (CardPlayOption o : source.mayPlay(player)) {
-                    la = new LandAbility(this, player, o.getAbility());
+                    la = new LandAbility(this, player, o);
                     la.setCardState(modal);
                     if (la.canPlay(source)) {
                         abilities.add(la);
