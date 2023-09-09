@@ -1,0 +1,8 @@
+Name:The Apprentice's Folly
+ManaCost:2 U R
+Types:Enchantment Saga
+K:Saga:3:DBClone,DBClone,DBSac
+SVar:DBClone:DB$ CopyPermanent | Defined$ Targeted | AddTypes$ Reflection | ValidTgts$ Creature.nonToken+doesNotShareNameWith Card.token+YouCtrl | TgtPrompt$ Choose target nontoken creature you control that doesn't have the same name as a token you control | AddKeywords$ Haste | NonLegendary$ True | SpellDescription$ Choose target nontoken creature you control that doesn't have the same name as a token you control. Create a token that's a copy of it, except it isn't legendary, is a Reflection in addition to its other types, and has haste.
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Reflection.YouCtrl | SpellDescription$ Sacrifice all Reflections you control.
+DeckHas:Ability$Token|Sacrifice & Type$Reflection
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Choose target nontoken creature you control that doesn't have the same name as a token you control. Create a token that's a copy of it, except it isn't legendary, is a Reflection in addition to its other types, and has haste.\nIII — Sacrifice all Reflections you control.

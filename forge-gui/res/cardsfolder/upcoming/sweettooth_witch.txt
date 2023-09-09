@@ -1,0 +1,10 @@
+Name:Sweettooth Witch
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+A:AB$ LoseLife | Cost$ 2 Sac<1/Food> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
+DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact
+DeckHints:Type$Food
+Oracle:When Sweettooth Witch enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{2}, Sacrifice a Food: Target player loses 2 life.
