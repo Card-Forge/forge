@@ -2471,7 +2471,7 @@ public class CardFactoryUtil {
             final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ Opponent";
             final String payStr = "DB$ ImmediateTrigger | RememberObjects$ Player.IsRemembered | TriggerDescription$ Copy CARDNAME | "
                     + "UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessCost$ " + k[1];
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Controller$ Player.IsRemembered | RemoveKeywords$ Reflect";
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Controller$ Player.IsTriggerRemembered | RemoveKeywords$ Reflect";
 
             SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
             AbilitySub paySA = (AbilitySub) AbilityFactory.getAbility(payStr, card);
