@@ -2,6 +2,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -44,7 +45,8 @@ public class TriggerDamageDoneOnce extends Trigger {
                 if (castSA != null) {
                     if (castSA.getTargets().size() > 1)
                         return false;
-                    return castSA.getTargets().getTargetCards().contains(target);
+                    if (target != null)
+                        return Iterables.contains(castSA.getTargets().getTargetEntities(), target);
                 }
             }
             return false;
