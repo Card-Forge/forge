@@ -36,6 +36,20 @@ public class TriggerDamageDoneOnce extends Trigger {
             return false;
         }
 
+        if (hasParam("SingleTarget")) {
+            Object target = runParams.get(AbilityKey.DamageTarget);
+            final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
+            for (Card source : getDamageSources(damageMap)) {
+                SpellAbility castSA = source.getCastSA();
+                if (castSA != null) {
+                    if (castSA.getTargets().size() > 1)
+                        return false;
+                    return castSA.getTargets().getTargetCards().contains(target);
+                }
+            }
+            return false;
+        }
+
         return true;
     }
 
