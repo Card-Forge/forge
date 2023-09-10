@@ -456,7 +456,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (controlledByPlayer != null) {
                 tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
                 controller.pushPaidForSA(tgtSA);
-                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestriction()));
+                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA)));
             }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {

@@ -372,11 +372,6 @@ public class ComputerUtilMana {
                 }
             }
 
-            final String typeRes = cost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().isValid(typeRes, null, null, null)) {
-                continue;
-            }
-
             if (!canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
                 continue;
             }
@@ -586,7 +581,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = CostPayment.getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1, cost.getXManaCostPaidByColor());
+                final Mana mana = CostPayment.getMana(ai, part, sa, (byte) -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, false)) {
                         manaSpentToPay.add(mana);
@@ -995,6 +990,10 @@ public class ComputerUtilMana {
                     continue;
                 }
 
+                if (!sa.allowsPayingWithShard(m.getSourceCard(), ManaAtom.fromName(s))) {
+                    continue;
+                }
+
                 if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s)))
                     return true;
             }
@@ -1008,11 +1007,20 @@ public class ComputerUtilMana {
                 if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(c), xManaCostPaidByColor)) {
                     continue;
                 }
+
+                if (!sa.allowsPayingWithShard(m.getSourceCard(), c)) {
+                    continue;
+                }
+
                 if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return true;
                 }
             }
+            return false;
+        }
+
+        if (!sa.allowsPayingWithShard(m.getSourceCard(), MagicColor.fromName(m.getOrigProduced()))) {
             return false;
         }
 
@@ -1295,11 +1303,7 @@ public class ComputerUtilMana {
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
-        String restriction = null;
-        if (manapart != null) {
-            restriction = manapart.getRestriction();
-        }
-        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
+        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
 
         // Tack xMana Payments into mana here if X is a set value
         if (cost.getXcounter() > 0 || extraMana > 0) {

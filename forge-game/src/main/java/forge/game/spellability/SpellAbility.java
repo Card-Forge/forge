@@ -30,6 +30,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
@@ -292,7 +293,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         AbilityManaPart mp = getManaPart();
-        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.abilityProducesManaColor(this, colorNeeded)) {
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.abilityProducesManaColor(this, colorNeeded) && saPaidFor.allowsPayingWithShard(mp.getSourceCard(), colorNeeded)) {
             return true;
         }
         return this.subAbility != null && this.subAbility.isManaAbilityFor(saPaidFor, colorNeeded);
@@ -388,6 +389,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected final void setManaPart(AbilityManaPart manaPart0) {
         manaPart = manaPart0;
+    }
+
+    public boolean allowsPayingWithShard(Card src, byte shard) {
+        if (!hasParam("ManaRestriction")) { return true; }
+        String res = getParam("ManaRestriction");
+        if (res.equals("None")) {
+            return false;
+        }
+        if (res.equals("ChosenColor")) {
+            return this.getHostCard().hasChosenColor() && shard == ManaAtom.fromName(this.getHostCard().getChosenColor());
+        }
+        if (!src.isValid(res, null, null, this)) {
+            return false;
+        }
+        return true;
     }
 
     // Spell, and Ability, and other Ability objects override this method
