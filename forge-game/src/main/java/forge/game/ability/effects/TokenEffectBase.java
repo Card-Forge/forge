@@ -133,7 +133,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setTapped(true);
                 }
 
-                if (!sa.hasParam("AttachAfter") && sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa)) {
+                // CR 303.4i
+                if (!sa.hasParam("AttachAfter") && sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa) && tok.isAura()) {
                     continue;
                 }
 
