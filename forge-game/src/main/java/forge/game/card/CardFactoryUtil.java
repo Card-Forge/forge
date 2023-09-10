@@ -3887,6 +3887,10 @@ public class CardFactoryUtil {
             altCostSA.addAnnounceVar(params.get("Announce"));
         }
 
+        if (params.containsKey("ManaRestriction")) {
+            altCostSA.putParam("ManaRestriction", params.get("ManaRestriction"));
+        }
+
         return altCostSA;
     }
 
