@@ -2,7 +2,6 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -34,21 +33,6 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
 
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
-            return false;
-        }
-
-        if (hasParam("SingleTarget")) {
-            Object target = runParams.get(AbilityKey.DamageTarget);
-            final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
-            for (Card source : getDamageSources(damageMap)) {
-                SpellAbility castSA = source.getCastSA();
-                if (castSA != null) {
-                    if (castSA.getTargets().size() > 1)
-                        return false;
-                    if (target != null)
-                        return Iterables.contains(castSA.getTargets().getTargetEntities(), target);
-                }
-            }
             return false;
         }
 

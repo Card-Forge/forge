@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
@@ -54,7 +55,8 @@ public class TriggerDamageDone extends Trigger {
     }
 
     /** {@inheritDoc}
-     * @param runParams*/
+     * @param runParams
+     */
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
@@ -98,6 +100,18 @@ public class TriggerDamageDone extends Trigger {
             } else {
                 return false; //for now this is only used to check damage assigned to a player
             }
+        }
+
+        if (hasParam("SourceDamagedTarget")) {
+            final Object target = runParams.get(AbilityKey.DamageTarget);
+            final Card source = (Card) runParams.get(AbilityKey.DamageSource);
+            SpellAbility castSA = source.getCastSA();
+            if (castSA != null) {
+                if (castSA.getTargets().size() > 1)
+                    return false;
+                return Iterables.contains(castSA.getTargets().getTargetEntities(), target);
+            }
+            return false;
         }
 
         return true;
