@@ -2,7 +2,7 @@ Name:Restless Spire
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {U} or {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 A:AB$ Animate | Cost$ U R | Defined$ Self | Power$ 2 | Toughness$ 1 | staticAbilities$ FirstStrikeStatic | Types$ Creature,Elemental  | Colors$ Blue,Red | SpellDescription$ Until end of turn, CARDNAME becomes a 2/1 blue and red Elemental creature with "As long as it's your turn, this creature has first strike." It's still a land.
 SVar:FirstStrikeStatic:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks, scry 1.
