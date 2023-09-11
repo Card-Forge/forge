@@ -193,7 +193,7 @@ public class PlayEffect extends SpellAbilityEffect {
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card c = it.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
                     // it.remove will only remove item from the list part of CardCollection
                     tgtCards.asSet().remove(c);
                     it.remove();
