@@ -2,6 +2,7 @@ Name:Elusive Otter
 ManaCost:U
 Types:Creature Otter
 K:Prowess
+PT:1/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
 SVar:Y:Count$CardPower
 DeckHas:Ability$Counters
