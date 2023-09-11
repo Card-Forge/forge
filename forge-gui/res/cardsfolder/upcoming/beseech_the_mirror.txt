@@ -3,7 +3,7 @@ ManaCost:1 B B B
 Types:Sorcery
 K:Bargain
 A:SP$ ChangeZone | ChangeNum$ 1 | ChangeType$ Card | Mandatory$ True | SubAbility$ DBPlay | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SpellDescription$ Search your library for a card, exile it face down, then shuffle. If this spell was bargained, you may cast the exiled card without paying its mana cost if that spell's mana value is 4 or less. Put the exiled card into your hand if it wasn't cast this way.
-SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | Condition$ Bargain | ImprintPlayed$ True | ValidSA$ Spell | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.cmcLE4 | Optional$ True | Amount$ All | SubAbility$ DBReturnHand
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell.cmcLE4 | Condition$ Bargain | ImprintPlayed$ True | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBReturnHand
 SVar:DBReturnHand:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | Hidden$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHints:Type$Artifact|Enchantment & Ability$Token

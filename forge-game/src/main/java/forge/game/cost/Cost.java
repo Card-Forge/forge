@@ -937,18 +937,15 @@ public class Cost implements Serializable {
                 CostPartMana mPart = (CostPartMana) part;
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
-                String r2 = costPart2.getRestriction();
-                String r1 = mPart.getRestriction();
-                String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
                 boolean XCantBe0 = !mPart.canXbe0() || !costPart2.canXbe0();
-                if (r == null && (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || XCantBe0)) {
+                if (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || XCantBe0) {
                     // FIXME: something was amiss when trying to add the cost since the mana cost is either \EnchantedCost or \Exiled but the
                     // restriction no longer marks it as such. Therefore, we need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
                     // to make cards like Merseine or Back from the Brink work.
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), XCantBe0));
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), XCantBe0));
                 } else {
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), null));
                 }
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||

@@ -124,7 +124,6 @@ public class ManaCostBeingPaid {
     // ManaPartColor is stored before ManaPartGeneric
     private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
     private Map<String, Integer> xManaCostPaidByColor;
-    private final String sourceRestriction;
     private byte sunburstMap = 0;
     private int cntX = 0;
 
@@ -139,17 +138,11 @@ public class ManaCostBeingPaid {
         if (manaCostBeingPaid.xManaCostPaidByColor != null) {
             xManaCostPaidByColor = Maps.newHashMap(manaCostBeingPaid.xManaCostPaidByColor);
         }
-        sourceRestriction = manaCostBeingPaid.sourceRestriction;
         sunburstMap = manaCostBeingPaid.sunburstMap;
         cntX = manaCostBeingPaid.cntX;
     }
 
     public ManaCostBeingPaid(ManaCost manaCost) {
-        this(manaCost, null);
-    }
-
-    public ManaCostBeingPaid(ManaCost manaCost, String srcRestriction) {
-        sourceRestriction = srcRestriction;
         if (manaCost == null) { return; }
         for (ManaCostShard shard : manaCost) {
             if (shard == ManaCostShard.X) {
@@ -703,10 +696,6 @@ public class ManaCostBeingPaid {
 
     public final void removeGenericMana() {
         unpaidShards.remove(ManaCostShard.GENERIC);
-    }
-
-    public String getSourceRestriction() {
-        return sourceRestriction;
     }
 
     public Iterable<ManaCostShard> getDistinctShards() {

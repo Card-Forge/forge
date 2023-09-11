@@ -38,7 +38,6 @@ public class CostPartMana extends CostPart {
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
-    private final String restriction;
 
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
@@ -54,16 +53,14 @@ public class CostPartMana extends CostPart {
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
         this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
         this.isCostPayAnyNumberOfTimes = "NumTimes".equalsIgnoreCase(restriction);
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
-    public CostPartMana(final ManaCost cost, String restriction, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
+    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
         this.cost = cost;
         this.xCantBe0 = XCantBe0;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     /**
@@ -113,10 +110,6 @@ public class CostPartMana extends CostPart {
         // For now, this will always return true. But this should probably be
         // checked at some point
         return true;
-    }
-
-    public String getRestriction() {
-        return restriction;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

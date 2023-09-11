@@ -3114,7 +3114,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
         for (SpellAbility sa : getSpellAbilities()) {
-            if (!(sa instanceof SpellPermanent) && !sa.isMorphUp()) {
+            if (!(sa instanceof SpellPermanent && sa.isBasicSpell()) && !sa.isMorphUp()) {
                 return false;
             }
         }
