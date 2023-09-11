@@ -16,5 +16,6 @@ ManaCost:1 R
 Types:Instant  Adventure
 A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until your next end step, you may play those cards.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep | SubAbility$ DBCleanup | StackDescription$ Until your next end step, you may play those cards.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile the top two cards of your library. Until your next end step, you may play those cards.
