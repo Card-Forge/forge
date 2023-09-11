@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Legendary Creature Human Advisor
 PT:1/4
 S:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life.
-A:AB$ LoseLife | Cost$ 2 T Sac<1/Creature.Other/another creature> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBAmass | SpellDescription$ Target player loses 1 life. If the sacrificed creature was legendary, amass Orcs 2.
+A:AB$ LoseLife | Cost$ T Sac<1/Creature.Other/another creature> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBAmass | SpellDescription$ Target player loses 1 life. If the sacrificed creature was legendary, amass Orcs 2.
 SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 2 | ConditionDefined$ Sacrificed | ConditionPresent$ Creature.Legendary
 DeckHas:Ability$Token|Counters|Sacrifice & Type$Orc|Army
 DeckHints:Type$Legendary & Type$Creature
