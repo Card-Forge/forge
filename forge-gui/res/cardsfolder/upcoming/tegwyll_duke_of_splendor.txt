@@ -1,0 +1,9 @@
+Name:Tegwyll's Scouring
+ManaCost:4 B B 
+Types:Sorcery
+K:MayFlashCost:tapXType<3/Creature.withFlying/creatures with flying>
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBToken | SpellDescription$ Destroy all creatures. Create three 1/1 black Faerie Rogue creature tokens with flying.
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You 
+DeckHints:Type$Faerie
+DeckHas:Ability$Token & Type$Faerie
+Oracle:You may cast Tegwyll's Scouring as though it had flash by tapping three untapped creatures you control with flying in addition to paying its other costs.\nDestroy all creatures. Create three 1/1 black Faerie Rogue creature tokens with flying.

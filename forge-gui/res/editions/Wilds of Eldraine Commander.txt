@@ -76,7 +76,7 @@ ScryfallCode=WOC
 68 U Generous Gift @Kev Walker
 69 R Kor Spiritdancer @Nils Hamm
 70 R Mantle of the Ancients @Lucas Graciano
-71 M Realm-Cloaked Giant@Adam Paquette
+71 M Realm-Cloaked Giant @Adam Paquette
 72 R Retether @Dan Scott
 73 U Sage's Reverie @Jason Rainville
 74 R Shalai, Voice of Plenty @Victor Adame Minguez
