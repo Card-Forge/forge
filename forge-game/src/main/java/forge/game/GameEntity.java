@@ -71,7 +71,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     // This function handles damage after replacement and prevention effects are applied
-    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat, GameEntityCounterTable counterTable);
+    public abstract int addDamageAfterPrevention(final int damage, final Card source, final SpellAbility cause, final boolean isCombat, GameEntityCounterTable counterTable);
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)

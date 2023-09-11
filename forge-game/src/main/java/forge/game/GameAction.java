@@ -2448,7 +2448,7 @@ public class GameAction {
                     lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
-                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
+                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable)));
                 sum += e.getValue();
 
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
