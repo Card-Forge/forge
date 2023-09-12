@@ -24,7 +24,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
 
             c.setDamage(0);
             c.setHasBeenDealtDeathtouchDamage(false);
-            c.tap(true, cause, cause == null ? null : cause.getActivatingPlayer());
+            c.tap(true, cause, c.getController());
             c.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {
