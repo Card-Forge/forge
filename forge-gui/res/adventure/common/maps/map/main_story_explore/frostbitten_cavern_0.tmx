@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="32">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJw7LcrAcHoUj+JRPIpH8SgexaN4FFMNAwBylw0f
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1lTtOw0AQhucIscNuoCQB+oSImlABDeIAJBF9QoQElDwORQ0dHYEDICqEKBCPCzAj78iTyT6MBL/0y4m93m/noTFAIZMDnGYAi3l1n+B6m4NXO3h/1z3bDqxhmV8wyUtuv7YB6Aivo9/w2Wte/H/JZ5+F2NfOqfiZe2wB7kzpiZ2/N3V+DHD1GWJs4t6b2f1DJmYXfWTT3FDuqa6UD6rtCPcZO29EuN1EnG1Xg45YJ+OO9RIpxE5J5k32QANZX3WAb3TL3V/Ga9O5JdbKHIwr5lXXa2LnuUNbMA/xemMKDyvuH5POFbE/6yWXWdr/wa7CZbbMeUyyTrJezN5H1jt6D/0R4a6gV9EDF7ecJ3peNFWd2LduHTOpj1NM4kmWnB0Pihvah7ncTzQjDnCfNQ+vb8sYQ3OEekTGHDu75pKI3RceiF5qm/n5KC1j7nti4FjPMLcLYlZs1gB66K2av09SM1PH7IuBmFxXnk9PjneVFVc+B59llJiVvjpL+ZiSyzrPyt8XWckOzetpgttQ3zmO7TILv8PsnqqF5Ke+Rz6ujjUljp/EOUjpL7ik58g7P11T0Q0=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lU1OwzAQhb2BXRLHCxBQcZAKQVpaCVhzB8oB+BE/hYOwoxIbliy4CgVaYAEVnAGJN/KMakUJxGnIk54cx5E/jz2eKFWNtoxSHbgFt+FPuB/ZsUu02+jvmIpgjt4x5wc8MfaZ1NC2XdXTMdFeoFQvqH4df2kuVGo+rI83iG17DeagIq7MWWRsPyi31wlypcVuR/5rvAr995qY6/CQvVGGDd534LfXIzDG7LJsXybp1eENHX4Wu5mzFmLe/pIPWTrDfTxmPzn8Z7ivi81Bd/xrhjoycmJ+yYkt4X1InP248Yw1LYr9nJ0XK31zqm0uyll0/6FmZumCz0TOgrizxlxEtMcnHDfFS/+QOmJ+AOtAWzbFWxf3iPNfcqAublrEHRv/O5wWnV/Xo151TPGY5V/g1iR5J+e2STnjfLOMeBbgxXjaX4n9uFKXKT/WIutDbd89Modq6BvXEGLsYt47tEtwA76Pbf8HjI5YWw==
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAtqOensQWjYBSMArqDtYID7YJRMApGwSgY3AAA22gBTQ==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="9" template="../../obj/treasure.tx" x="16" y="32"/>
+  <object id="10" template="../../obj/treasure.tx" x="288" y="288"/>
+  <object id="11" template="../../obj/treasure.tx" x="464" y="186"/>
+  <object id="12" template="../../obj/gold.tx" x="240" y="176"/>
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="7" template="../../obj/entry_up.tx" x="48" y="320" width="128" height="16"/>
+  <object id="21" template="../../obj/enemy.tx" x="96" y="112">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r18-19-20,w5"/>
+   </properties>
+  </object>
+  <object id="22" template="../../obj/enemy.tx" x="305" y="225">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="17,r13-14-15,r13-14-15"/>
+   </properties>
+  </object>
+  <object id="23" template="../../obj/enemy.tx" x="432" y="160">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="14,15,16,15,16"/>
+   </properties>
+  </object>
+  <object id="26" template="../../obj/enemy.tx" x="384" y="64">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="5,r24-25-27"/>
+   </properties>
+  </object>
+  <object id="28" template="../../obj/enemy.tx" x="32" y="32">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="29"/>
+   </properties>
+  </object>
+  <object id="30" template="../../obj/dialog.tx" x="368" y="32" width="48" height="32">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Lucky for you, and also possibly the occupants of this cave, the gate is frozen open rather than closed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="31" template="../../obj/entry_down.tx" x="384" y="20" width="16" height="20">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/frostbitten_cavern_1.tmx"/>
+    <property name="teleportObjectId" value="7"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="384" y="48"/>
+  <object id="13" template="../../obj/waypoint.tx" name="13" x="224" y="176"/>
+  <object id="14" template="../../obj/waypoint.tx" name="14" x="384" y="272"/>
+  <object id="15" template="../../obj/waypoint.tx" name="15" x="352" y="128"/>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="448" y="128"/>
+  <object id="17" template="../../obj/waypoint.tx" name="17" x="208" y="288"/>
+  <object id="18" template="../../obj/waypoint.tx" name="18" x="144" y="192"/>
+  <object id="19" template="../../obj/waypoint.tx" name="19" x="32" y="160"/>
+  <object id="20" template="../../obj/waypoint.tx" name="20" x="96" y="64"/>
+  <object id="24" template="../../obj/waypoint.tx" name="24" x="336" y="80"/>
+  <object id="25" template="../../obj/waypoint.tx" name="25" x="432" y="80"/>
+  <object id="27" template="../../obj/waypoint.tx" name="27" x="272" y="48"/>
+  <object id="29" template="../../obj/waypoint.tx" name="29" x="32" y="32"/>
+ </objectgroup>
+</map>

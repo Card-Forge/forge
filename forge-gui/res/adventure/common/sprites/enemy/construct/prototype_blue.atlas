@@ -1,0 +1,23 @@
+prototype_blue.png
+size: 80,16
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 64, 0
+  size: 16, 16     
+Idle 
+  xy: 0, 0
+  size: 16, 16   
+Walk 
+  xy: 0, 0
+  size: 16, 16   
+Walk 
+  xy: 16, 00
+  size: 16, 16
+Walk 
+  xy: 32, 00
+  size: 16, 16
+Walk 
+  xy: 48, 00
+  size: 16, 16

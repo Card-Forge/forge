@@ -17,12 +17,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMBlCGAYoNccciC8BsbIKA4OqCoQG4Ut82DEMXELShwurQs0xw2KvKdSsgyr4MQgsF0XY2yJOvD5jPPbSEuCzFxQuSmjhhM5HB+jy6HGlRIR/QWFyAC2M0PnoAF0eHR8exOHMooZQh4uNCxDSOxj9i56WVCHsBnzpCkeexdCDz15GKfyYSQrTXmL1DMZwVsUSZugYHaDn9WRJzDxMyF5c+Q9f/sWV1w+rDP5ykhBoFMcUa8YiRqy9M3kZGKYRidEBsfpm8FKnzoeBgW6DkIIBPQOT6g==
+   eJwz4WNgMBlCGAYoNccciC8BsbIKA4OqCoQG4Ut82DEMXELShwurQs0xw2KvKdSsgyr4MQgsF0XY2yJOvD5jPPbSEuCzFxQuSmjhhM5HB+jy6HGlRIR/QWFyAC2M0PnoAF0eHR8exOHMooZQh4uNCxDSOxj9i56WVCHsBnzpCkeexdCDz15GKfyYSQrTXmL1DMZwHih7ceU/fPkXV14/rDL4y0lCoFEcU6wZixix9s7kZWCYRiRGB8Tqm8FLnTofBga6DUIKBgBY2I60
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJztw7ENAAAIA6D+ov/f6NrVHRIS2m4yFQDg6wBDvwEe
+   eJxjYBgFyEBFhYFBGQmPglEwCkbBSAfKKoQxPj1KQJwsCWGrjpavo2CEAAAhegZS
   </data>
  </layer>
  <objectgroup id="5" name="Objects">
@@ -64,17 +64,6 @@
     <property name="dialog">[
 {
    &quot;text&quot;: &quot;'The Impact of Personal Teleportation on Intercity Commerce' - Doesn't exactly sound like a page turner.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
-]</property>
-   </properties>
-  </object>
-  <object id="29" template="../../obj/dialog.tx" x="64" y="240">
-   <properties>
-    <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Here you find a collection of copied plans for various goblin inventions. The transcriber added notes alongside each rating each on a scale between 'Will definitely explode' to 'Won't work well enough to explode'.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
@@ -162,35 +151,39 @@
    <properties>
     <property name="enemy" value="Spirit"/>
     <property name="pursueRange" type="int" value="100"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="75"/>
     <property name="waypoints" value="r5-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-37-38"/>
    </properties>
   </object>
   <object id="40" template="../../obj/enemy.tx" x="88" y="144">
    <properties>
     <property name="enemy" value="Golem"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="pursueRange" type="int" value="125"/>
+    <property name="threatRange" type="int" value="100"/>
     <property name="waypoints" value="r5-8-15,r18-21,r11-12-13-16-18-21"/>
    </properties>
   </object>
   <object id="41" template="../../obj/enemy.tx" x="384" y="144">
    <properties>
     <property name="enemy" value="Golem"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="pursueRange" type="int" value="125"/>
+    <property name="threatRange" type="int" value="100"/>
     <property name="waypoints" value="r5-8-15,r19-20,r19-20-37-38-14-17"/>
    </properties>
   </object>
   <object id="42" template="../../obj/enemy.tx" x="384" y="256">
    <properties>
     <property name="enemy" value="Archivist"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="80"/>
     <property name="waypoints" value="r10-14-23,r19-20,r19-20-37-38,r8-10-14-18-21"/>
    </properties>
   </object>
   <object id="43" template="../../obj/enemy.tx" x="80" y="256">
    <properties>
     <property name="enemy" value="Archivist"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="80"/>
     <property name="waypoints" value="22, r11-12, r18-21, 5, r8-15, r18-21, r11-12, r9-13"/>
    </properties>
   </object>
@@ -199,19 +192,25 @@
     <property name="enemy" value="Archivist"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup id="6" name="Waypoints">
+  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_2.tmx"/>
+    <property name="teleportObjectId" value="7"/>
+   </properties>
+  </object>
   <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
   <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
   <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
   <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
   <object id="7" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
    <properties>
     <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_0.tmx"/>
     <property name="teleportObjectId" value="13"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
   <object id="8" template="../../obj/waypoint.tx" name="8" x="232" y="208"/>
   <object id="9" template="../../obj/waypoint.tx" name="9" x="48" y="208"/>
   <object id="10" template="../../obj/waypoint.tx" name="10" x="416" y="208"/>
@@ -232,12 +231,6 @@
    </properties>
   </object>
   <object id="23" template="../../obj/waypoint.tx" name="23" x="336" y="256"/>
-  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
-   <properties>
-    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_2.tmx"/>
-    <property name="teleportObjectId" value="7"/>
-   </properties>
-  </object>
   <object id="37" template="../../obj/waypoint.tx" name="37" x="416" y="128"/>
   <object id="38" template="../../obj/waypoint.tx" name="38" x="416" y="160"/>
  </objectgroup>

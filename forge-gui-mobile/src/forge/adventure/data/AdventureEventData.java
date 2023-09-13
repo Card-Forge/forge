@@ -506,7 +506,9 @@ public class AdventureEventData implements Serializable {
                 data.itemName = item;
                 ret.addAll(data.generate(false, true));
             }
-
+            for (RewardData data :  r.rewards) {
+                ret.addAll(data.generate(false, true));
+            }
         }
         if (ret.size > 0) {
             RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);

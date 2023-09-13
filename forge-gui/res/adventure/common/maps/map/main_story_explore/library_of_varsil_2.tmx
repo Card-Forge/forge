@@ -17,7 +17,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMBlCGAYoNccciC8BsbIKAquqoPJB+BJUHQxcwqIPHatC9ZlhsdcUatZBFfwYBJrEEfY2ihOvzxiPvbQE+OxVUmFowBdmyiqY5mGLD2QxJSL8e4BAeB3EYi8h9YM5nFnUEOr+SSLYyOK4AC69q0QJ20tLgM9e9PQBSmfo6QYdoKWnBmxsQvYySjEwMElBaHQME0cH2NSiY0L20hIQE87Y8iQx4QzKq8mSmPoJ2YsvDx4mIv+i539kPYMtnHNEGBiyRRDqkNkw0CKOKdaIJJYjgspGNgObvTN5GRimEYnRAbH6ZvBSp86HgYFug5CCARwpl9Q=
+   eJzVVksOgkAMrcYtrjAEljB4AVEP5FIOAcYzGL2Cp5ArcCAjE5nMUDofoxP1JS+U0vaF0mYo5gDFH1Hg3Trbjm3HjEnmbHjP2fZxAi2Rh5n3eRtCd93XapiZHIdI6taRe97KoOsTJt2UQWXqWcbG9ajvofpSh/e9WfrVELq2+F/u82wp4+6xtFW/Drrc68Ku6xMmXTwffM7w3GCgeaoo26Y7SQCmyfOKKfwYVCymTdcnXPpM7aRLn/mu7uJxvk3XdRdVqM90+2/T9QmdbhkC7EMZp9oCx2jsqxVfGQ5ttQalewkATo7EcM07B5858wW+/Q/yCh8SAZfQ
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">
@@ -31,8 +31,32 @@
     <property name="enemy" value="Mimic"/>
    </properties>
   </object>
-  <object id="26" template="../../obj/dialog.tx" x="272" y="112"/>
-  <object id="27" template="../../obj/dialog.tx" x="352" y="112"/>
+  <object id="26" template="../../obj/dialog.tx" x="272" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Damnation of the Mad Jester' is presented as the fictional tale of a man named Kuthuman whose meticulously detailed tales of fanciful worlds elevated his stature from a beggar to a royal entertainer before being dragged away by demons in the midst of the king's court which harmed not another soul.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;This copy is prefaced, however, by a scribe's notes that all of the historical figures in the text of note and their interactions appear to be extremely accurately depicted, calling in to question the fictional origin of Kuthuman's tale.&quot;,
+      &quot;options&quot;: [{
+         &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      }]
+}   
+]</property>
+   </properties>
+  </object>
+  <object id="27" template="../../obj/dialog.tx" x="352" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;This shelf is simply a jumble of pages which seem to have come unbound from various books throughout the library. You see nothing of particular importance among them.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
   <object id="28" template="../../obj/dialog.tx" x="320" y="200">
    <properties>
     <property name="dialog">[
@@ -40,31 +64,124 @@
    &quot;text&quot;: &quot;'Magical Meteorology', 'The Destructive Power of the Heavens', these books all seem to focus on things falling from the sky.&quot;,
    
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1},{
+         &quot;grantRewards&quot;: [{
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;count&quot;: 1,
+            &quot;cardName&quot;: &quot;Stone Rain&quot;
+         }]
+      }]
+   }]
 }
 ]</property>
    </properties>
   </object>
-  <object id="29" template="../../obj/dialog.tx" x="368" y="200"/>
-  <object id="30" template="../../obj/dialog.tx" x="80" y="200"/>
-  <object id="31" template="../../obj/dialog.tx" x="144" y="200">
+  <object id="29" template="../../obj/dialog.tx" x="368" y="200">
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of. None of them seem to have done anything significant.&quot;,
+   &quot;text&quot;: &quot;'Dealing with the Magically Impaired' describes the difficulties in Shandalar communities of allowing people without magical talent to feel as though they are fully contributing members of society.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
   </object>
-  <object id="32" template="../../obj/dialog.tx" x="176" y="200"/>
-  <object id="34" template="../../obj/dialog.tx" x="400" y="64"/>
-  <object id="35" template="../../obj/dialog.tx" x="112" y="64"/>
-  <object id="36" template="../../obj/dialog.tx" x="96" y="240"/>
-  <object id="37" template="../../obj/dialog.tx" x="176" y="240"/>
-  <object id="38" template="../../obj/dialog.tx" x="352" y="240"/>
-  <object id="39" template="../../obj/dialog.tx" x="384" y="240"/>
+  <object id="30" template="../../obj/dialog.tx" x="80" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A pile of children's books lie on this shelf. The topmost tells a tale of a Goblin Balloon Brigade whose members do not have names and all address each other as 'Dumber Than X', where X is equal to the number of their peers that are agreed to be smarter on that day.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1},{
+         &quot;grantRewards&quot;: [{
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;count&quot;: 1,
+            &quot;cardName&quot;: &quot;Goblin Balloon Brigade&quot;
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="31" template="../../obj/dialog.tx" x="144" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Genealgy reports and census data collections cover this bookcase. Understandably, these are rather dusty, which makes it all the more obvious that several books have been recently removed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="32" template="../../obj/dialog.tx" x="176" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You find a book on the biology of Elves. One page is marked with a folded corner and describes a type of Elf that you've seen nowhere on Shandalar&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{
+         &quot;deleteMapObject&quot;:-1
+      },{
+         &quot;grantRewards&quot;: [{
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;count&quot;: 1,
+            &quot;cardName&quot;: &quot;Llanowar Elves&quot;
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="34" template="../../obj/dialog.tx" x="400" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'A Historical Account of a Coastal Raid', this is a collection of interviews conducted with the survivors of a coastal fishing village which was plundered by unknown creatures who simply walked out of the sea.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="35" template="../../obj/dialog.tx" x="112" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A collection of writings on Mana Shards - from theories on how they absorb mana while buried underground, to fanciful drawings such as a grain mill functioning beside a dry riverbed and powered by shards instead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="36" template="../../obj/dialog.tx" x="96" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'The Price of Magic' focuses not on the direct effects of spells, but the cost and consequences of casting them. It isn't a very popular book.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="38" template="../../obj/dialog.tx" x="352" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'The Missing Lynx' appears to be a biological and behavioral comparison between domesticated felines and Leonin. Various theories are posited in the text, with the conclusion that one or the other was the result of an ancient wizard's research having been misapplied.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
   <object id="40" template="../../obj/enemy.tx" x="232" y="160">
    <properties>
     <property name="enemy" value="Golem Sentinel"/>
@@ -103,19 +220,25 @@
    </properties>
   </object>
   <object id="47" template="../../obj/treasure.tx" x="304" y="272"/>
- </objectgroup>
- <objectgroup id="6" name="Waypoints">
   <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
   <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
   <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
   <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
   <object id="7" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
    <properties>
     <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_1.tmx"/>
     <property name="teleportObjectId" value="24"/>
    </properties>
   </object>
+  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_3.tmx"/>
+    <property name="teleportObjectId" value="7"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
   <object id="8" template="../../obj/waypoint.tx" name="8" x="232" y="208"/>
   <object id="9" template="../../obj/waypoint.tx" name="9" x="48" y="208"/>
   <object id="10" template="../../obj/waypoint.tx" name="10" x="416" y="208"/>
@@ -132,12 +255,6 @@
   <object id="21" template="../../obj/waypoint.tx" name="21" x="130" y="128"/>
   <object id="22" template="../../obj/waypoint.tx" name="22" x="128" y="256"/>
   <object id="23" template="../../obj/waypoint.tx" name="23" x="336" y="256"/>
-  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
-   <properties>
-    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_3.tmx"/>
-    <property name="teleportObjectId" value="7"/>
-   </properties>
-  </object>
   <object id="45" template="../../obj/waypoint.tx" name="45" x="416" y="160"/>
   <object id="46" template="../../obj/waypoint.tx" name="46" x="416" y="128"/>
  </objectgroup>

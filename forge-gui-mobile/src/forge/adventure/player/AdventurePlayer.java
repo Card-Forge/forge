@@ -331,8 +331,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
-        if (data.containsKey("colorIdentity"))
-            setColorIdentity(data.readString("colorIdentity"));
+        if (data.containsKey("colorIdentity")) {
+            String temp = data.readString("colorIdentity");
+            if (temp != null)
+                setColorIdentity(temp);
+            else
+                colorIdentity = ColorSet.ALL_COLORS;
+        }
         else
             colorIdentity = ColorSet.ALL_COLORS;
 
@@ -343,7 +348,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         worldPosX = data.readFloat("worldPosX");
         worldPosY = data.readFloat("worldPosY");
 
-        if (data.containsKey("blessing")) blessing = (EffectData) data.readObject("blessing");
+        if (data.containsKey("blessing")) {
+            EffectData temp = (EffectData) data.readObject("blessing");
+            if (temp != null)
+                blessing = temp;
+        }
 
         if (data.containsKey("inventory")) {
             String[] inv = (String[]) data.readObject("inventory");

@@ -90,6 +90,12 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
+        float scale = data.scale;
+        if (scale < 0)
+            scale = 1f;
+        setWidth(getWidth() * scale);
+        setHeight(getHeight() * scale);
+        updateBoundingRect();
         initializeBaseMovementBehavior();
     }
 
@@ -112,13 +118,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         float scale = data == null ? 1f : data.scale;
         if (scale < 0)
             scale = 1f;
-
-        float width = getWidth()*scale* collisionHeight;
-        float height = getHeight()*scale* collisionHeight;
-        float x = getX() + (getWidth() - width)/2;
-        float y = getY() + (getHeight() - height)/2;
-
-        boundingRect.set(x, y, width, height);
+        boundingRect.set(getX(), getY(), getWidth(), getHeight());
         unfreezeRange = 30f * scale;
     }
 
@@ -309,7 +309,6 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public void freezeMovement(){
         _freeze = true;
         setPosition(_previousPosition6.x, _previousPosition6.y);
-        targetVector.setZero();
         // This will move the enemy back a few frames of movement.
         // Combined with player doing the same, should no longer be colliding to immediately re-enter battle if mob still present
     }
@@ -423,6 +422,11 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
     public EnemyData getData() {
         return data;
+    }
+
+    public void overrideDeck(String deckPath) {
+        data.deck = new String[1];
+        data.deck[0] = deckPath;
     }
 
     @Override

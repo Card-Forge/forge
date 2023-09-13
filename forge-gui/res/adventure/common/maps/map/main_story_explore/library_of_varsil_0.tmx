@@ -61,7 +61,7 @@
    <properties>
     <property name="enemy" value="Archivist"/>
     <property name="pursueRange" type="int" value="60"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="75"/>
     <property name="waypoints" value="r5-8-9"/>
    </properties>
   </object>
@@ -69,7 +69,7 @@
    <properties>
     <property name="enemy" value="Archivist"/>
     <property name="pursueRange" type="int" value="60"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="75"/>
     <property name="waypoints" value="r5-8-9"/>
    </properties>
   </object>

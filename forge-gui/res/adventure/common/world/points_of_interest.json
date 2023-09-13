@@ -2873,10 +2873,70 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "WasteTown",
-	"map": "../common/maps/map/main_story/waste_town_abandoned.tmx",
+	"map": "../common/maps/map/main_story_explore/waste_town_abandoned.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_APortalToNowhere"
+	]
+},
+{
+	"name": "Quest_DigSite",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story_explore/dig_site_0.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_DigSite"
+	]
+},
+{
+	"name": "Quest_FrostbittenCavern",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story_explore/frostbitten_cavern_0.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_FrostbittenCavern"
+	]
+},
+{
+	"name": "Quest_LibraryOfVarsil",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story_explore/library_of_varsil_0.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_LibraryOfVarsil"
+	]
+},
+{
+	"name": "Quest_PrimalJungle",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story_explore/primal_jungle.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_PrimalJungle"
+	]
+},
+{
+	"name": "Quest_ShardMines",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "../common/maps/map/main_story_explore/shard_mines.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_ShardMines"
 	]
 },
 {
@@ -3438,7 +3498,7 @@
 {
 	"name": "Zedruu City",
 	"type": "cave",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "Zedruu",
 	"map": "../common/maps/map/zedruu/zedruu.tmx",

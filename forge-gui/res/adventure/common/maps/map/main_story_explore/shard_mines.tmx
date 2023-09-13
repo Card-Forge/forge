@@ -1263,20 +1263,7 @@
     <property name="waypoints" value="72, 65,67,70,71"/>
    </properties>
   </object>
-  <object id="37" template="../../obj/entry_up.tx" x="96" y="1600"/>
-  <object id="61" template="../../obj/waypoint.tx" name="61" x="288" y="96"/>
-  <object id="62" template="../../obj/waypoint.tx" name="62" x="352" y="128"/>
-  <object id="63" template="../../obj/waypoint.tx" name="63" x="240" y="176"/>
-  <object id="64" template="../../obj/waypoint.tx" name="64" x="304" y="224"/>
-  <object id="65" template="../../obj/waypoint.tx" name="65" x="192" y="224"/>
-  <object id="67" template="../../obj/waypoint.tx" name="67" x="192" y="288"/>
-  <object id="68" template="../../obj/waypoint.tx" name="68" x="304" y="288"/>
-  <object id="69" template="../../obj/waypoint.tx" name="69" x="247" y="256"/>
-  <object id="70" template="../../obj/waypoint.tx" name="70" x="96" y="208"/>
-  <object id="71" template="../../obj/waypoint.tx" name="71" x="128" y="320"/>
-  <object id="72" template="../../obj/waypoint.tx" name="72" x="134" y="248"/>
-  <object id="73" template="../../obj/waypoint.tx" name="73" x="112" y="128"/>
-  <object id="74" template="../../obj/waypoint.tx" name="74" x="224" y="112"/>
+  <object id="37" template="../../obj/entry_up.tx" x="73" y="1600" width="100" height="31"/>
   <object id="75" template="../../obj/enemy.tx" x="176" y="144">
    <properties>
     <property name="enemy" value="Parrot"/>
@@ -1402,5 +1389,18 @@
   <object id="58" template="../../obj/waypoint.tx" name="58" x="320" y="336"/>
   <object id="59" template="../../obj/waypoint.tx" name="59" x="320" y="432"/>
   <object id="60" template="../../obj/waypoint.tx" name="60" x="272" y="384"/>
+  <object id="61" template="../../obj/waypoint.tx" name="61" x="288" y="96"/>
+  <object id="62" template="../../obj/waypoint.tx" name="62" x="352" y="128"/>
+  <object id="63" template="../../obj/waypoint.tx" name="63" x="240" y="176"/>
+  <object id="64" template="../../obj/waypoint.tx" name="64" x="304" y="224"/>
+  <object id="65" template="../../obj/waypoint.tx" name="65" x="192" y="224"/>
+  <object id="67" template="../../obj/waypoint.tx" name="67" x="192" y="288"/>
+  <object id="68" template="../../obj/waypoint.tx" name="68" x="304" y="288"/>
+  <object id="69" template="../../obj/waypoint.tx" name="69" x="247" y="256"/>
+  <object id="70" template="../../obj/waypoint.tx" name="70" x="96" y="208"/>
+  <object id="71" template="../../obj/waypoint.tx" name="71" x="128" y="320"/>
+  <object id="72" template="../../obj/waypoint.tx" name="72" x="134" y="248"/>
+  <object id="73" template="../../obj/waypoint.tx" name="73" x="112" y="128"/>
+  <object id="74" template="../../obj/waypoint.tx" name="74" x="224" y="112"/>
  </objectgroup>
 </map>
