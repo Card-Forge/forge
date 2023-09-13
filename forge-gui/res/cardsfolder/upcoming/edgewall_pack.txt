@@ -1,0 +1,9 @@
+Name:Edgewall Pack
+ManaCost:3 R
+Types:Creature Dog
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock
+DeckHas:Ability$Token & Type$Rat
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Edgewall Pack enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block."

@@ -55,7 +55,7 @@ public final class CardRules implements ICardCharacteristics {
     private String partnerWith;
     private boolean custom;
 
-    private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
@@ -395,6 +395,11 @@ public final class CardRules implements ICardCharacteristics {
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
+            this.faces[2] = null;
+            this.faces[3] = null;
+            this.faces[4] = null;
+            this.faces[5] = null;
+            this.faces[6] = null;
 
             this.handLife = null;
             this.altMode = CardSplitType.None;

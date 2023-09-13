@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -151,22 +150,15 @@ public class CostPayment extends ManaConversionMatrix {
             PaymentDecision pd = part.accept(decisionMaker);
 
             // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(this);
+            if (pd != null) {
+                pd.matrix = this;
             }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
-                if (part instanceof CostPartMana) {
-                    ((CostPartMana)part).setCardMatrix(null);
-                }
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }
             this.paidCostParts.add(part);
-
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(null);
-            }
             game.costPaymentStack.pop(); // cost is resolved
         }
 
@@ -238,9 +230,9 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a {@link forge.game.mana.Mana} object.
      */
     public static Mana getMana(final Player player, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
-            String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
+            final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(player.getManaPool(), shard,
-            saBeingPaidFor, restriction, colorsPaid, xManaCostPaidByColor);
+            saBeingPaidFor, colorsPaid, xManaCostPaidByColor);
 
         // Exclude border case
         if (weightedOptions.isEmpty()) {
@@ -289,7 +281,7 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
-            final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
+            final SpellAbility saBeingPaidFor, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
         for (final Mana thisMana : manapool) {
             if (shard == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(thisMana.getColor()), xManaCostPaidByColor)) {
@@ -308,7 +300,7 @@ public class CostPayment extends ManaConversionMatrix {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isValid(restriction, null, null, null)) {
+            if (!saBeingPaidFor.allowsPayingWithShard(thisMana.getSourceCard(), thisMana.getColor())) {
                 continue;
             }
 

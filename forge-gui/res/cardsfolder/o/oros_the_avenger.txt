@@ -3,6 +3,6 @@ ManaCost:3 W B R
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{W}. If you do, CARDNAME deals 3 damage to each nonwhite creature.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{W}. If you do, NICKNAME deals 3 damage to each nonwhite creature.
 SVar:TrigDamageAll:AB$DamageAll | Cost$ 2 W | ValidCards$ Creature.nonWhite | NumDmg$ 3
 Oracle:Flying\nWhenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.

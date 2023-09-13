@@ -15,17 +15,21 @@ ScryfallCode=WHO
 7 R Yasmin Khan @Andrey Kuzinskiy
 8 R Missy @Ekaterina Burmak
 20 R Four Knocks @Darren Tan
+21 R The Girl in the Fireplace @Torgeir Fjereide
 41 R The Eleventh Hour @Matt Stewart
 59 U Time Lord Regeneration @Elizabeth Peiró
 66 R Death in Heaven @Justyna Dura
 68 U Exterminate! @Ivan Dedov
+82 R Donna Noble @Andrey Kuzinskiy
 86 R The Flux @Alexander Gering
 91 R The Parting of the Ways @Syd Mills
 99 R City of Death @Miklós Ligeti
 102 R The Foretold Soldier @Fajareka Setiawan
+103 R Fugitive of the Judoon @Lie Setiawan
 126 R The Face of Boe @Greg Staples
 152 R River Song @John Di Giovanni
 165 R The Valeyard @Tyukina Tatiana
+168 R Weeping Angel @Anato Finnstark
 187 U TARDIS @Chris Ostrowski
 197 L Plains @Svetlin Velinov
 199 L Island @Svetlin Velinov
@@ -55,11 +59,8 @@ ScryfallCode=WHO
 547 R River Song @Aurore Folny
 551 U TARDIS @Dalton Pencarinha
 555 M The Fourth Doctor @Jack Hughes
-555z M The Fourth Doctor @Jack Hughes
 561 M The Tenth Doctor @Aurore Folny
-561z M The Tenth Doctor @Aurore Folny
 564 M The Thirteenth Doctor @Lenka Šimečková
-564z M The Thirteenth Doctor
 569 C Bad Wolf Bay @Kamila Szutenberg
 580 C The Doctor's Tomb @Anato Finnstark
 582 C Fixed Point in Time @Syd Mills

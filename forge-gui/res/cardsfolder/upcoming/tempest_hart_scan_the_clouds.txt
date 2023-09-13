@@ -1,0 +1,19 @@
+Name:Tempest Hart
+ManaCost:3 G
+Types:Creature Elemental Elk
+PT:3/4
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$Whenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on CARDNAME
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters|Discard
+AlternateMode:Adventure
+Oracle:Trample\nWhenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on Tempest Hart.
+
+ALTERNATE
+
+Name:Scan the Clouds
+ManaCost:1 U
+Types:Instant  Adventure
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Draw two cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)

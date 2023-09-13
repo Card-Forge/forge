@@ -1,0 +1,10 @@
+Name:Ruby, Daring Tracker
+ManaCost:R G
+Types:Legendary Creature Human Scout
+PT:1/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute TrigPump | TriggerDescription$ Whenever CARDNAME attacks while you control a creature with power 4 or greater, NICKNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nWhenever Ruby, Daring Tracker attacks while you control a creature with power 4 or greater, Ruby gets +2/+2 until end of turn.\n{T}: Add {R} or {G}.

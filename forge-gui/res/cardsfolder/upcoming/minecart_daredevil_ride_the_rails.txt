@@ -1,0 +1,14 @@
+Name:Minecart Daredevil
+ManaCost:2 R
+Types:Creature Dwarf Knight
+PT:4/2
+AlternateMode:Adventure
+Oracle:
+
+ALTERNATE
+
+Name:Ride the Rails
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Target creature gets +2/+1 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gets +2/+1 until end of turn. (Then exile this card. You may cast the creature later from exile.)

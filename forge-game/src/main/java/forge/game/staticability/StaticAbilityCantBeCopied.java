@@ -43,7 +43,7 @@ public class StaticAbilityCantBeCopied {
         return false;
     }
 
-    public static boolean cantBeCopiedCheck(final StaticAbility stAb, final Card card) {
+    private static boolean cantBeCopiedCheck(final StaticAbility stAb, final Card card) {
         if (stAb.matchesValidParam("ValidCard", card)) {
             return true;
         }

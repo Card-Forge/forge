@@ -1,0 +1,7 @@
+Name:Verdant Outrider
+ManaCost:2 G
+Types:Creature Human Knight
+PT:4/2
+A:AB$ Effect | Cost$ 1 G | StaticAbilities$ KWPump | ExileOnMoved$ Battlefield | SpellDescription$ CARDNAME can't be blocked by creatures with power 2 or less this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | ValidBlocker$ Creature.powerLE2 | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked by creatures with power 2 or less this turn.
+Oracle:{1}{G}: Verdant Outrider can't be blocked by creatures with power 2 or less this turn.

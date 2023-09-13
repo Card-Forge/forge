@@ -1,0 +1,8 @@
+Name:Song of Totentanz
+ManaCost:X R
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ Create X 1/1 black Rat creature tokens with "This creature can't block."
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Rat
+Oracle:Create X 1/1 black Rat creature tokens with "This creature can't block." Creatures you control gain haste until end of turn.

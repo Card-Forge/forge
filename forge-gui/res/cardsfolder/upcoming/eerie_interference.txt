@@ -1,0 +1,6 @@
+Name:Eerie Interference
+ManaCost:2 W
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn by creatures.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Creature.inZoneBattlefield | ValidTarget$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt by creatures this turn.
+Oracle:Prevent all damage that would be dealt to you and creatures you control this turn by creatures.

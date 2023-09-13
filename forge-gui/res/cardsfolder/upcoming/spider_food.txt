@@ -1,0 +1,7 @@
+Name:Spider Food
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact, enchantment, or creature with flying. | SubAbility$ DBFood | SpellDescription$ Destroy up to one target artifact, enchantment, or creature with flying.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | SpellDescription$  Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+DeckHas:Ability$Sacrifice|LifeGain & Type$Food|Artifact
+Oracle:Destroy up to one target artifact, enchantment, or creature with flying. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

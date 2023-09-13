@@ -695,7 +695,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // This function handles damage after replacement and prevention effects are applied
     @Override
-    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
+    public final int addDamageAfterPrevention(final int amount, final Card source, final SpellAbility cause, final boolean isCombat, GameEntityCounterTable counterTable) {
         if (amount <= 0 || hasLost()) {
             return 0;
         }
@@ -738,6 +738,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);
+        runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.DamageAmount, amount);
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
         // Defending player at the time the damage was dealt
@@ -2154,7 +2155,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final boolean hasManaConversion() {
         return numManaConversion < keywords.getAmount("You may spend mana as though"
-                + " it were mana of any color to cast a spell this turn.");
+                + " it were mana of any type to cast a spell this turn.");
     }
     public final void incNumManaConversion() {
         numManaConversion++;

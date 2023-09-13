@@ -1,0 +1,10 @@
+Name:Savior of the Sleeping
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Enchantment
+DeckHas:Ability$Counters
+Oracle:Vigilance\nWhenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Savior of the Sleeping.

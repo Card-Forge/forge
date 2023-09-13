@@ -1,0 +1,8 @@
+Name:Mintstrosity
+ManaCost:1 B
+Types:Creature Horror
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token|LifeGain & Type$Artifact|Food
+Oracle:When Mintstrosity dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

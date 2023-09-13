@@ -2,7 +2,7 @@ Name:Quicksilver Elemental
 ManaCost:3 U U
 Types:Creature Elemental
 PT:3/4
-K:ManaConvert:Blue->AnyColor:You may spend blue mana as though it were mana of any color to pay the activation costs of CARDNAME's abilities.
+S:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Activated | ManaConversion$ Blue->AnyColor | Description$ You may spend blue mana as though it were mana of any color to pay the activation costs of CARDNAME's abilities.
 A:AB$ Effect | Cost$ U | ValidTgts$ Creature | TgtZone$ Battlefield | TgtPrompt$ Select target creature card | StaticAbilities$ STSteal | RememberLKI$ Targeted | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ CARDNAME gains all activated abilities of target creature until end of turn.
 SVar:STSteal:Mode$ Continuous | Affected$ Card.EffectSource | EffectZone$ Command | GainsAbilitiesOfDefined$ RememberedLKI | Description$ Quicksilver Elemental gains all activated abilities of that card until end of turn.
 AI:RemoveDeck:All

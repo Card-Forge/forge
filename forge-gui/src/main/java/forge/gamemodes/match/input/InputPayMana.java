@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilMana;
@@ -186,10 +184,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return abilities;
         }
 
-        final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
-            return abilities;
-        }
+        //        final String typeRes = manaCost.getSourceRestriction();
+        //        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
+        //            return abilities;
+        //        }
 
         for (SpellAbility ma : getAllManaAbilities(card)) {
             ma.setActivatingPlayer(player);
@@ -234,15 +232,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         final SpellAbility chosen;
-        final String typeRes = manaCost.getSourceRestriction();
 
         if (chosenAbility == null) {
             HashMap<SpellAbilityView, SpellAbility> abilitiesMap = new HashMap<>();
             // you can't remove unneeded abilities inside a for (am:abilities) loop :(
-
-            if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
-                return false;
-            }
 
             boolean guessAbilityWithRequiredColors = true;
             int amountOfMana = -1;
@@ -351,11 +344,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
                     for (AbilityManaPart sa : manaAbilities) {
                         if (!sa.meetsManaRestrictions(saPaidFor)) {
-                            restrictionsMet = false;
-                            break;
-                        }
-
-                        if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
                             restrictionsMet = false;
                             break;
                         }

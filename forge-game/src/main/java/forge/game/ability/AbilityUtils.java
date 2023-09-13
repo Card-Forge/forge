@@ -2639,15 +2639,18 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb)), expr, c, ctb);
+            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb), false), expr, c, ctb);
         }
         if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1]))), expr, c, ctb);
+            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), false), expr, c, ctb);
+        }
+        if (sq[0].contains("CardControllerPermanentTypes")) {
+            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
         }
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
             CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
-            return doXMath(getCardTypesFromList(oppCards), expr, c, ctb);
+            return doXMath(getCardTypesFromList(oppCards, false), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -2848,20 +2851,26 @@ public class AbilityUtils {
         return doXMath(someCards.size(), expr, c, ctb);
     }
 
-    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
-        String conversion = params.get("ManaConversion");
-
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split
             boolean additive = pair.contains("->");
             String[] sides = pair.split(additive ? "->" : "<-");
 
+            byte replacedColor = ManaAtom.fromConversion(sides[1]);
             if (sides[0].equals("AnyColor") || sides[0].equals("AnyType")) {
                 for (byte c : (sides[0].equals("AnyColor") ? MagicColor.WUBRG : MagicColor.WUBRGC)) {
-                    matrix.adjustColorReplacement(c, ManaAtom.fromConversion(sides[1]), additive);
+                    matrix.adjustColorReplacement(c, replacedColor, additive);
+                }
+            } else if (sides[0].startsWith("non")) {
+                byte originalColor = ManaAtom.fromConversion(sides[0]);
+                for (byte b : ManaAtom.MANATYPES) {
+                    if ((originalColor & b) != 0) {
+                        matrix.adjustColorReplacement(b, replacedColor, additive);
+                    }
                 }
             } else {
-                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), ManaAtom.fromConversion(sides[1]), additive);
+                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), replacedColor, additive);
             }
         }
     }
@@ -3368,6 +3377,11 @@ public class AbilityUtils {
             return doXMath(list.size(), m, source, ctb);
         }
 
+        //SacrificedPermanentTypesThisTurn
+        if (l[0].startsWith("SacrificedPermanentTypesThisTurn")) {
+            return doXMath(getCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
+        }
+
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
@@ -3844,11 +3858,13 @@ public class AbilityUtils {
         return types.size();
     }
 
-    public static int getCardTypesFromList(final CardCollectionView list) {
+    public static int getCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
+        if (permanentTypes)
+            return (int) types.stream().filter(type -> type.isPermanent).count();
         return types.size();
     }
 

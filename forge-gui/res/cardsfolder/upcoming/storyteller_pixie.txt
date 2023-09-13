@@ -1,0 +1,9 @@
+Name:Storyteller Pixie
+ManaCost:3 U
+Types:Creature Faerie Wizard
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Adventure | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Adventure spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Adventure
+Oracle:Flying\nWhenever you cast an Adventure spell, draw a card.

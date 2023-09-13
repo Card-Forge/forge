@@ -1,0 +1,10 @@
+Name:Skewer Slinger
+ManaCost:1 R
+Types:Creature Dwarf Knight
+PT:1/3
+K:Reach
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDamageAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+SVar:TrigDamageAttacker:DB$ DealDamage | Defined$ TriggeredAttackerLKICopy | NumDmg$ 1
+SVar:TrigDamageBlocker:DB$ DealDamage | Defined$ TriggeredBlockerLKICopy | NumDmg$ 1
+Oracle:Reach\nWhenever Skewer Slinger blocks or becomes blocked by a creature, Skewer Slinger deals 1 damage to that creature.

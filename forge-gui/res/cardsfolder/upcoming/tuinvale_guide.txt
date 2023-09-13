@@ -1,0 +1,9 @@
+Name:Tuinvale Guide
+ManaCost:3 W
+Types:Creature Faerie Scout
+PT:2/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Lifelink | CheckSVar$ Celebration | SVarCompare$ GE2 | Description$ Celebration — CARDNAME gets +1/+0 and has lifelink as long as two or more nonland permanents entered the battlefield under your control this turn.
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+DeckHas:Ability$LifeGain
+Oracle:Flying\nCelebration — Tuinvale Guide gets +1/+0 and has lifelink as long as two or more nonland permanents entered the battlefield under your control this turn.

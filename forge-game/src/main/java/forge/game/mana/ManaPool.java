@@ -23,8 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
@@ -209,6 +207,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         // need to get all mana from all ManaAbilities of the SpellAbility
         for (AbilityManaPart mp : saPayment.getAllManaParts()) {
             for (final Mana mana : mp.getLastManaProduced()) {
+                if (!saPaidFor.allowsPayingWithShard(mp.getSourceCard(), mana.getColor())) {
+                    continue;
+                }
                 if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
                     saPaidFor.getPayingMana().add(mana);
                 }
@@ -218,7 +219,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost, List<Mana> manaSpentToPay) {
         Mana manaFound = null;
-        String restriction = manaCost.getSourceRestriction();
         Collection<Mana> cm = floatingMana.get(colorCode);
 
         for (final Mana mana : cm) {
@@ -226,7 +226,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().isValid(restriction, null, null, null)) {
+            if (!saPaidFor.allowsPayingWithShard(mana.getSourceCard(), colorCode)) {
                 continue;
             }
 
@@ -339,18 +339,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
         }
 
-        // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 
         for (byte outColor : ManaAtom.MANATYPES) {
             if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
                 return true;
             }
-        }
-
-        // TODO The following may not be needed anymore?
-        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte)ManaAtom.COLORLESS)) {
-            return true;
         }
 
         return shard.canBePaidWithManaOfColor((byte)0);
@@ -377,7 +371,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = CostPayment.getMana(player, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
+                final Mana mana = CostPayment.getMana(player, part, sa, hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (player.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
                         manaSpentToPay.add(mana);

@@ -1,6 +1,7 @@
 Name:Rat Token
 ManaCost:no cost
 Types:Creature Rat
+Colors:black
 PT:1/1
 S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block
 Oracle:This creature can't block.

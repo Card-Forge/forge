@@ -38,10 +38,6 @@ public class CostPartMana extends CostPart {
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
-    private final String restriction;
-
-    private ManaConversionMatrix cardMatrix = null;
-    public void setCardMatrix(ManaConversionMatrix mtrx) { cardMatrix = mtrx; }
 
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
@@ -57,16 +53,14 @@ public class CostPartMana extends CostPart {
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
         this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
         this.isCostPayAnyNumberOfTimes = "NumTimes".equalsIgnoreCase(restriction);
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
-    public CostPartMana(final ManaCost cost, String restriction, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
+    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
         this.cost = cost;
         this.xCantBe0 = XCantBe0;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     /**
@@ -118,10 +112,6 @@ public class CostPartMana extends CostPart {
         return true;
     }
 
-    public String getRestriction() {
-        return restriction;
-    }
-
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
@@ -150,21 +140,21 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public CostPart copy() {
-        CostPart copied = super.copy();
-        // when copied, clear cardMatrix
-        if (copied instanceof CostPartMana) {
-            ((CostPartMana)copied).cardMatrix = null;
-        }
-        return copied;
-    }
-
-    @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.clearManaPaid();
 
+        ManaConversionMatrix old = new ManaConversionMatrix();
+        old.restoreColorReplacements();
+        old.applyCardMatrix(payer.getManaPool());
+
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, cardMatrix, effect);
+        boolean result = payer.getController().payManaCost(this, sa, null, pd.matrix, effect);
+
+        // restore old matrix during payment chains
+        payer.getManaPool().restoreColorReplacements();
+        payer.getManaPool().applyCardMatrix(old);
+
+        return result;
     }
 
 }

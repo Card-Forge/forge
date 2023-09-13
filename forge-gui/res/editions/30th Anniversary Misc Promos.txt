@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=P30M
 
 [cards]
-1★ R Richard Garfield, Ph.D. @Dave Dorman
+F1★ R Richard Garfield, Ph.D. @Dave Dorman
 2 M Lotus Petal @April Lee
 1F R Arcane Signet @Gaboleps
 1F★ R Arcane Signet @Gaboleps

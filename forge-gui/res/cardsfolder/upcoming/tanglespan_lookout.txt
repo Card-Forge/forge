@@ -1,0 +1,8 @@
+Name:Tanglespan Lookout
+ManaCost:2 G
+Types:Creature Satyr
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Aura.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an Aura enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Aura
+Oracle:Whenever an Aura enters the battlefield under your control, draw a card.

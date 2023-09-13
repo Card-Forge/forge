@@ -1,0 +1,21 @@
+Name:Questing Druid
+ManaCost:1 G
+Types:Creature Human Druid
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.White,Card.Blue,Card.Black,Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.White,Card.Blue,Card.Black,Card.Red
+DeckHas:Ability$Counters
+AlternateMode:Adventure
+Oracle:Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on Questing Druid.
+
+ALTERNATE
+
+Name:Seek the Beast
+ManaCost:1 R
+Types:Instant  Adventure
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until your next end step, you may play those cards.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep | SubAbility$ DBCleanup | StackDescription$ Until your next end step, you may play those cards.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile the top two cards of your library. Until your next end step, you may play those cards.

@@ -1,0 +1,7 @@
+Name:Pirate Token
+ManaCost:no cost
+Types:Creature Pirate
+Colors:red
+PT:4/2
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
+Oracle:This creature can't block.

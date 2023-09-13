@@ -5,5 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | CheckOnTriggeredCard$ X GT1 | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Chooser$ TriggeredCardController | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.ControlledBy TriggeredCardController | ChangeNum$ 1
-SVar:X:Count$ThisTurnEntered_Battlefield_Land.YouCtrl
+SVar:X:Count$ThisTurnEntered_Battlefield_Land.ControlledBy CardController
 Oracle:When Confounding Conundrum enters the battlefield, draw a card.\nWhenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner's hand.
