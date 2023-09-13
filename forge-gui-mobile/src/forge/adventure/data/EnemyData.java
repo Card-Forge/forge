@@ -12,6 +12,7 @@ import java.io.Serializable;
  * contains the information of enemies
  */
 public class EnemyData implements Serializable {
+    private static final long serialVersionUID = -3317270785183936320L;
     public String name;
     public String nameOverride;
     public String sprite;

@@ -321,8 +321,6 @@
 								"name": "\"I guess I should have asked for the reward first.\" (+1 local reputation. Complete Quest)"
 							},
 							{
-								"name": "(Break down the door)",
-								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
 								"action": [
 									{
 										"removeItem": "",
@@ -340,6 +338,8 @@
 										"POIReference": ""
 									}
 								],
+								"name": "(Break down the door)",
+								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
 								"options": [
 									{
 										"name": "You mutter to yourself. \"Not worth a scene I suppose.\" (Complete Quest)"
@@ -821,24 +821,24 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
 		"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": ""
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "",
-								"addMapReputation": 3,
-								"POIReference": ""
-							}
-						],
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": 3,
+				"POIReference": ""
+			}
+		],
+		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
 		"options": [
 			{
 				"action": [
@@ -6080,7 +6080,7 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
+										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6230,7 +6230,7 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": -1,
+						"addMapReputation": 0,
 						"POIReference": ""
 					}
 				],
@@ -6284,7 +6284,7 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
+										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6417,7 +6417,7 @@
 	"id": 26,
 	"isTemplate": true,
 	"name": "Spores of Death",
-	"description": "Defeat Slimfoot and his fungi in his bog and report back",
+	"description": "Defeat Slimefoot and his fungi in his bog and report back",
 	"offerDialog": {
 		"text": " Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the rogue fungus Slimefoot. ",
 		"options": [
@@ -6435,7 +6435,7 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": -1,
+						"addMapReputation": 0,
 						"POIReference": ""
 					}
 				],
@@ -6488,7 +6488,7 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
+										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6688,7 +6688,7 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
+										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6893,7 +6893,7 @@
 			"id": 2,
 			"name": "Exit the cave",
 			"description": "The portal is open and you can leave now.",
-			"mapFlag": "mainQuest",
+			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
 			"prologue": {},
@@ -6938,7 +6938,13 @@
 										"POIReference": ""
 									}
 								],
-								"name": "(Dismiss)"
+								"name": "(Continue)",
+								"text": "New Quest: A Chat with the Locals - Objective: Travel to any town in the wasteland",
+								"options": [
+									{
+										"name": "(Dismiss)"
+									}
+								]
 							}
 						]
 					},
@@ -7041,7 +7047,7 @@
 	"offerDialog": {},
 	"prologue": {},
 	"epilogue": {
-		"text": "The locals look at you a little less suspiciously than when you first arrived asking questions, but they can't deliver information they don't have.",
+		"text": "The locals meet your inquiries with a little less disdain than when you first arrived asking questions without much coin to go along with them, but they can't deliver information they don't have.",
 		"options": [
 			{
 				"name": "(Continue)",
@@ -7088,7 +7094,19 @@
 																				"POIReference": "$(poi_2)"
 																			}
 																		],
-																		"name": "Portals aren't exactly what you're looking for, but mages that travel the aether are. The merchant marks your map and goes back to his drink."
+																		"name": "(Continue)",
+																		"text": "Portals aren't exactly what you're looking for, but mages that travel the aether are. The merchant marks your map and goes back to his drink.",
+																		"options": [
+																			{
+																				"name": "(Continue)",
+																				"text": "[New Quest: A Portal to Nowhere  - Objective: Travel to the ghost town]",
+																				"options": [
+																					{
+																						"name": "(Dismiss)"
+																					}
+																				]
+																			}
+																		]
 																	}
 																]
 															}
@@ -7119,7 +7137,18 @@
 															}
 														],
 														"name": "\"And where did this happen?\"",
-														"text": "He marks your map without another word and goes back to his drink. (-1 local reputation) (Continue)"
+														"text": "He marks your map without another word and goes back to his drink. (-1 local reputation) ",
+														"options": [
+															{
+																"name": "(Continue)",
+																"text": "[New Quest: A Portal to Nowhere  - Objective: Travel to the ghost town]",
+																"options": [
+																	{
+																		"name": "(Dismiss)"
+																	}
+																]
+															}
+														]
 													}
 												]
 											}
@@ -7171,7 +7200,44 @@
 				"Town"
 			],
 			"objective": "HaveReputation",
-			"prologue": {},
+			"prologue": {
+				"text": "As you enter this small town, the local population pays little notice to you as they go about their normal business. It appears that strangers are a familiar sight here, and not a particularly impactful one unless you are looking to spend your gold.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "A centaur trots out of town, adding one more letter to the bag of mail slung over his shoulder. The courier deftly veers around an ogre lifting blocks of stone onto the second floor of a building under construction.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Signs affixed to the smaller buildings along the dusty street advertise specialty spell shops, crop wizards for hire, a recently shuttered parlor of a divination specialist, and a newly built explorer's guild hall. Street peddlers unable to afford permanent shops buy and sell food and mundane goods from their carts.",
+								"options": [
+									{
+										"name": "(Continue)",
+										"text": "Everyone around has something to do or something to barter for, but no one seems to be selling information, let alone giving it away.",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "Perhaps building trust with the community might earn you some information. (Note: Reputation is earned by successfully completing quests offered in the town hall)",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "[New Objective: Reach a total of +5 reputation in any wasteland town]",
+														"options": [
+															{
+																"name": "(Leave)"
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
 			"epilogue": {},
 			"POIToken": ""
 		}
@@ -7218,7 +7284,6 @@
 	"id": 32,
 	"isTemplate": true,
 	"name": "A Portal to Nowhere",
-	"storyQuest": true,
 	"description": "Investigate the report of portals being opened in a seemingly abandoned town.",
 	"offerDialog": {},
 	"prologue": {},
@@ -7240,8 +7305,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
-				"BiomeColorless",
-				"OccupiedTown"
+				"Quest_APortalToNowhere"
 			],
 			"objective": "Travel",
 			"prologue": {},
@@ -7259,6 +7323,91 @@
 			"epilogue": {},
 			"POIToken": "$(poi_1)"
 		}
-	]
+	],
+	"storyQuest": true
+},
+{
+	"id": 33,
+	"isTemplate": true,
+	"name": "Welcome to the Jungle",
+	"description": "Search for a powerful artifact",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Travel to the abandoned town",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Quest_WelcomeToTheJungle"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Investigate",
+			"description": "Search for clues regarding the portals from the merchant's story",
+			"mapFlag": "foundClues",
+			"mapFlagValue": 2,
+			"objective": "MapFlag",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": "$(poi_1)"
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 34,
+	"isTemplate": true,
+	"name": "A Healthy Dose of Skep-ticism",
+	"description": "Find Shandalar's largest Sliver hive",
+	"offerDialog": {},
+	"prologue": {
+				"text": "Quest 'A Healthy Dose of Skep-ticism' is a placeholder. It will eventually be replaced with an actual quest to explore the Skep. For now, this simply serves as directions to get there if you so desire. This placeholder quest does not provide any rewards.",
+				"options": [{"name": "(Dismiss)"}]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Travel to the Skep",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Skep"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": false
 }
 ]

@@ -437,6 +437,7 @@ public class MapStage extends GameStage {
     }
 
     public void spawn(int targetId){
+        stop(); //Prevent player from unintentionally going back through entrance again when holding input
         boolean hasSpawned = false;
         if (targetId > 0){
             for (int i = 0; i < actors.size; i++) {
@@ -623,7 +624,7 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.defeatDialog = new MapDialog(dialogObject.toString(), this, mob.getId());
                             }
-                            dialogObject = prop.get("name"); //Check for name override.
+                            dialogObject = prop.get("displayNameOverride"); //Check for name override.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.nameOverride = dialogObject.toString();
                             }
@@ -667,6 +668,11 @@ public class MapStage extends GameStage {
                             {
                                 mob.inactive = Boolean.parseBoolean(prop.get("inactive").toString());
                                 if (mob.inactive) mob.clearCollisionHeight();
+                            }
+                            dialogObject = prop.get("deckOverride");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty())
+                            {
+                                mob.overrideDeck(dialogObject.toString());
                             }
                             if (hidden){
                                 mob.hidden = hidden; //Evil.
@@ -964,6 +970,9 @@ public class MapStage extends GameStage {
         changes.deleteObject(id);
         for (int i = 0; i < actors.size; i++) {
             if (actors.get(i).getObjectId() == id && id > 0) {
+                if (actors.get(i).getClass().equals(EnemySprite.class)) {
+                    enemies.remove((EnemySprite) actors.get(i));
+                }
                 actors.get(i).remove();
                 actors.removeIndex(i);
                 return true;
@@ -1031,6 +1040,7 @@ public class MapStage extends GameStage {
             actors.removeValue(currentMob, true);
             if (!respawnEnemies || currentMob.getData().boss)
                 changes.deleteObject(currentMob.getId());
+                enemies.remove(currentMob);
         } else {
             currentMob.defeatDialog.activate();
             player.setAnimation(CharacterSprite.AnimationTypes.Idle);

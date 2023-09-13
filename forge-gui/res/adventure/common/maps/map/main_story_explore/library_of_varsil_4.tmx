@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMBmB2ByIL9EYm2Gx1xSIaQ2MR+0dlvZetMZvb7QNcTjWBmFmJJC9wAbTrms+mGKU+jcOyZ54LHbiArSw9yowLEWh4XnRioEhBMq+Ys3QQIm94ta47b1mjapOEMq/DKXDfRkYInxJszfcjzj/ooMr1phitIxfYHpKwKWPVvai+3GSNaoYOfZKIKUPfP6VwBK+lNiLDKiZj2byMjBMIxKj20usvhm8lNXV6GCg2w6kYACuCn5U
+   eJwz4WNgMBmB2ByIL9EYm2Gx1xSICYFdngwMuz2xy+3FIY4MjMm0FwT2EGE+LezFB/CFBy3tJQTobe9Fa/z2RtsQh2NtEGZGAtkLbDDtuuaDKUapf+OQ7InHYicuQAt7rwLDUhQanhetGBhCoOwr1gwNlNgrbo3b3mvWqOoEofzLUDrcl4Ehwpc0e8P9iPMvOrhijSlGy/gFpqcEXPpoZS+6HydZo4qRY68EUvrA518JLOFLib3IgJr5aCYvA8M0IjG6vcTqm8FLWV2NDga67UAKBgBvP4Rt
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">
@@ -65,16 +65,41 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="33" template="../../obj/dialog.tx" x="176" y="112" width="128" height="64"/>
+  <object id="33" template="../../obj/dialog.tx" x="144" y="112" width="192" height="80">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;If there is any information to be gathered from the shredded pages piled across the floor, it will be up to the scholars who might have some memory of what they had been. But your work here appears to be complete.&quot;,
+      &quot;options&quot;: [{
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;completedLibraryOfVarsil&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 34}]
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
   <object id="34" template="../../obj/portal.tx" x="232" y="88">
    <properties>
-    <property name="portalState" value="open"/>
+    <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
     <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_0.tmx"/>
     <property name="teleportObjectId" value="14"/>
    </properties>
   </object>
-  <object id="35" template="../../obj/dialog.tx" x="176" y="272" width="128" height="64"/>
+  <object id="35" template="../../obj/dialog.tx" x="176" y="272" width="128" height="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;In front of you stands one of the largest constructs you've ever seen. In contrast to the golems below, its shape seems to be less modeled after other humanoids and more a unique form of its own.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;Behind the machine you see the remnants of many books pulled from the shelves below, now torn asunder.&quot;,
+      &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+   }]
+}
+]</property>
+   </properties>
+  </object>
   <object id="36" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
   <object id="37" template="../../obj/collision.tx" x="272" y="176" width="176" height="112"/>
   <object id="38" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>

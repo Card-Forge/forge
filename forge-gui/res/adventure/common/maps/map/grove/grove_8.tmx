@@ -31,11 +31,6 @@
   </object>
   <object id="48" template="../../obj/treasure.tx" x="176.334" y="32.5833"/>
   <object id="63" template="../../obj/gold.tx" x="192.333" y="29.167"/>
-  <object id="65" template="../../obj/enemy.tx" x="185.415" y="-58.8264">
-   <properties>
-    <property name="enemy" value="Hydra"/>
-   </properties>
-  </object>
   <object id="66" template="../../obj/enemy.tx" x="190.267" y="79.6539">
    <properties>
     <property name="enemy" value="Hidden Bush"/>

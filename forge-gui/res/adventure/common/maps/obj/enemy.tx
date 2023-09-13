@@ -4,6 +4,8 @@
  <object name="Enemy" type="enemy" gid="1307" width="16" height="16">
   <properties>
    <property name="Type" value="enemy"/>
+   <property name="deckOverride" value=""/>
+   <property name="displayNameOverride" value=""/>
    <property name="enemy" value=""/>
    <property name="fleeRange" value="0"/>
    <property name="pursueRange" type="int" value="0"/>

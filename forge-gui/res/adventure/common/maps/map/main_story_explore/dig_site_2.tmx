@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="116">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|EMA|1&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="8" name="Test" width="30" height="17" opacity="0.3">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFjBRlFUPBLs/SuIaT+t3TFLiIFhthD97R0IAACtEBKm
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+JRPIpH8aDE6GCk2UsvdwyUvQOBASS0PRo=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkEDC0kC8A4il0MRhctugGJc8UG8DNjlsGNm87UAMAluRxIC4AVkOTb4BRuPQi9Odkkjm0QJ4yzEwiNPRXk4NBgYuIP4uSJq9IHeCwFeg3m8auM0HmYsNqAL1qAHxVCHS/QuyW1CTgUFIE7cakLnhgrgxIXt9gHaE4dEPwhFY/AYyFxu4C3TrPU3y/IvLTGLU/ATa+WsA7EWWx2bva0EE/iCIqecVVO49kro3gqhqQABd3XuoOnL9yw5Mkxx40jO5/iVkrzLQThUy7L2ozsBwSR23vfLiCKwgjqqXUPrGl9bfAu18B8TGwvj9uxdo5z40eykFk7gZGKK4CIdzuATQ3UgY3f+kAkMeCI3N3lp+BoYqJAwDIDbI/1X8lOMafuLqRlpjACaLdv4=
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgeQIVxoF0wCkbByAKSAgPtgpEBhms4e8sNbjur+CEYxh5OAABq8gLl
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="87" template="../../obj/manashards.tx" x="176" y="186"/>
+  <object id="88" template="../../obj/enemy.tx" x="216" y="134">
+   <properties>
+    <property name="enemy" value="Golem Sentinel"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="r102-103-104"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/enemy.tx" x="291.5" y="159.5">
+   <properties>
+    <property name="enemy" value="Blue Prototype"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/enemy.tx" x="111.5" y="52.5">
+   <properties>
+    <property name="enemy" value="Green Prototype"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="r105-106-107, r99-100-108-111"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="149" y="53">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="107"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/enemy.tx" x="96" y="161">
+   <properties>
+    <property name="enemy" value="Black Golem"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="99"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/treasure.tx" x="346.5" y="119"/>
+  <object id="95" template="../../obj/treasure.tx" x="293.5" y="117"/>
+  <object id="97" template="../../obj/gold.tx" x="377" y="44"/>
+  <object id="98" template="../../obj/entry_down.tx" x="316" y="37" width="26" height="25">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/dig_site_1.tmx"/>
+    <property name="teleportObjectId" value="104"/>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/waypoint.tx" name="99" x="95" y="160"/>
+  <object id="100" template="../../obj/waypoint.tx" name="100" x="200" y="239"/>
+  <object id="101" template="../../obj/booster.tx" x="156" y="138">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot;, &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot;, &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot;, &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="102" template="../../obj/waypoint.tx" name="102" x="235" y="181"/>
+  <object id="103" template="../../obj/waypoint.tx" name="103" x="242" y="134"/>
+  <object id="104" template="../../obj/waypoint.tx" name="104" x="188" y="136"/>
+  <object id="105" template="../../obj/waypoint.tx" name="105" x="65" y="73"/>
+  <object id="106" template="../../obj/waypoint.tx" name="106" x="223" y="68"/>
+  <object id="107" template="../../obj/waypoint.tx" name="107" x="150" y="54"/>
+  <object id="108" template="../../obj/waypoint.tx" name="108" x="335" y="236"/>
+  <object id="109" template="../../obj/collision.tx" x="20" y="231" width="117" height="21"/>
+  <object id="110" template="../../obj/collision.tx" x="20" y="199" width="53" height="32"/>
+  <object id="111" template="../../obj/waypoint.tx" name="111" x="335" y="181"/>
+  <object id="112" template="../../obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="113" template="../../obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="114" template="../../obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="115" template="../../obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+ </objectgroup>
+</map>

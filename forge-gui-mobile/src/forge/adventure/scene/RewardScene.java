@@ -33,7 +33,7 @@ import forge.util.ItemPool;
 public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
     private TextraLabel playerGold, playerShards;
-    private TypingLabel shopNameLabel;
+    private TypingLabel headerLabel;
 
     private ShopActor shopActor;
     private static RewardScene object;
@@ -51,7 +51,8 @@ public class RewardScene extends UIScene {
     public enum Type {
         Shop,
         Loot,
-        QuestReward
+        QuestReward,
+        RewardChoice
     }
 
     Type type;
@@ -60,6 +61,7 @@ public class RewardScene extends UIScene {
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
     ItemPool<PaperCard> collectionPool = null;
+    private int remainingSelections = 0;
 
     private RewardScene() {
 
@@ -67,7 +69,7 @@ public class RewardScene extends UIScene {
 
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
-        shopNameLabel = ui.findActor("shopName");
+        headerLabel = ui.findActor("shopName");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -297,6 +299,13 @@ public class RewardScene extends UIScene {
         loadRewards(rewards, type, shopActor);
     }
 
+    public void loadSelectableRewards(Array<Reward> choices, Type type, int countToSelect) {
+        if (type != Type.RewardChoice)
+            return;
+        this.remainingSelections = countToSelect;
+        loadRewards(choices, type, null);
+    }
+
     void updateCollectionPool() {
         if (Type.Shop != this.type)
             return;
@@ -331,18 +340,18 @@ public class RewardScene extends UIScene {
         if (type == Type.Shop) {
             String shopName = shopActor.getDescription();
             if (shopName != null && !shopName.isEmpty()) {
-                shopNameLabel.setVisible(true);
-                shopNameLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
-                shopNameLabel.skipToTheEnd();
+                headerLabel.setVisible(true);
+                headerLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
+                headerLabel.skipToTheEnd();
             } else {
-                shopNameLabel.setVisible(false);
+                headerLabel.setVisible(false);
             }
             Actor background = ui.findActor("market_background");
             if (background != null)
                 background.setVisible(true);
         } else {
-            shopNameLabel.setVisible(false);
-            shopNameLabel.setText("");
+            headerLabel.setVisible(false);
+            headerLabel.setText("");
             Actor background = ui.findActor("market_background");
             if (background != null)
                 background.setVisible(false);
@@ -367,9 +376,9 @@ public class RewardScene extends UIScene {
                 doneButton.setText("[+OK]");
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
-                    shopNameLabel.setVisible(true);
-                    shopNameLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
-                    shopNameLabel.skipToTheEnd();
+                    headerLabel.setVisible(true);
+                    headerLabel.setText("[%?SHINY]{GRADIENT}" + shopName + "{ENDGRADIENT}");
+                    headerLabel.skipToTheEnd();
                 }
 
                 if (shopActor.canRestock()) {
@@ -381,15 +390,21 @@ public class RewardScene extends UIScene {
                 break;
             case QuestReward:
             case Loot:
-                shopNameLabel.setVisible(false);
-                shopNameLabel.setText("");
+                headerLabel.setVisible(false);
+                headerLabel.setText("");
                 restockButton.setVisible(false);
                 doneButton.setText("[+OK]");
                 break;
+            case RewardChoice:
+                restockButton.setVisible(false);
+                doneButton.setText("[+OK]");
+                headerLabel.setVisible(remainingSelections > 0);
+                headerLabel.setText("Select " + remainingSelections + " rewards");
+                doneButton.setDisabled(remainingSelections > 0);
         }
         for (int h = 1; h < targetHeight; h++) {
             cardHeight = h;
-            if (type == Type.Shop) {
+            if (type == Type.Shop || type == Type.RewardChoice) {
                 cardHeight += doneButton.getHeight();
             }
             //cardHeight=targetHeight/i;
@@ -476,6 +491,13 @@ public class RewardScene extends UIScene {
                     stage.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
                 }
+            } else if (type == Type.RewardChoice){
+                if (currentRow != ((i + 1) / numberOfColumns))
+                    yOff += doneButton.getHeight();
+                ChooseRewardButton chooseRewardButton = new ChooseRewardButton(i, actor, reward, doneButton);
+                generated.add(chooseRewardButton);
+                stage.addActor(chooseRewardButton);
+                addToSelectable(chooseRewardButton);
             } else {
                 addToSelectable(actor);
             }
@@ -496,6 +518,14 @@ public class RewardScene extends UIScene {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             if (actor instanceof BuyButton) {
                 ((BuyButton) actor).update();
+            }
+        }
+    }
+
+    private void updateChooseRewardButtons() {
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (actor instanceof ChooseRewardButton) {
+                ((ChooseRewardButton) actor).update();
             }
         }
     }
@@ -561,6 +591,72 @@ public class RewardScene extends UIScene {
                         getColor().a = 0.5f;
                         updateCollectionPool();
                         updateBuyButtons();
+                        removeListener(this);
+                    }
+                }
+            });
+        }
+    }
+
+    private class ChooseRewardButton extends TextraButton {
+        private final int index;
+        public RewardActor rewardActor;
+        private Reward reward;
+        int price;
+        boolean isSold;
+
+        void update() {
+            setDisabled(remainingSelections <= 0);
+            if (isSold)
+                setText("SELECTED");
+            else
+                updateOwned();
+        }
+
+        void updateOwned() {
+            if (Type.Shop != type)
+                return;
+            if (collectionPool != null && Reward.Type.Card.equals(reward.getType()))
+                setText("Pick Reward" + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + collectionPool.count(reward.getCard()));
+            else if (Reward.Type.Item.equals(reward.getType()))
+                setText("Pick Reward" + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
+        }
+
+
+
+        public ChooseRewardButton(int i, RewardActor actor, Reward reward, TextraButton style) {
+            super("", style.getStyle(), Controls.getTextraFont());
+            this.index = i;
+            rewardActor = actor;
+            this.reward = reward;
+            setHeight(style.getHeight());
+            setWidth(actor.getWidth());
+            setX(actor.getX());
+            setY(actor.getY() - getHeight());
+
+            setText("Pick Reward");
+            updateOwned();
+            addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (remainingSelections >= 1) {
+
+                        remainingSelections--;
+                        Current.player().addReward(rewardActor.getReward());
+
+                        headerLabel.setVisible(remainingSelections > 0);
+                        headerLabel.setText("Select " + remainingSelections + " rewards");
+                        doneButton.setDisabled(remainingSelections > 0);
+
+                        Gdx.input.vibrate(5);
+                        //SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
+
+                        isSold = true;
+                        setDisabled(true);
+                        rewardActor.sold();
+                        getColor().a = 0.5f;
+                        updateCollectionPool();
+                        updateChooseRewardButtons();
                         removeListener(this);
                     }
                 }

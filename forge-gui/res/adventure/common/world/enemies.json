@@ -491,13 +491,7 @@
 		"Dragon",
 		"Flyer",
 		"Monster",
-		"IdentityBlue",
-		null,
-		null,
-		null,
-		null,
-		null,
-		null
+		"IdentityBlue"
 	]
 },
 {
@@ -629,10 +623,7 @@
 		"Aerie",
 		"Guard",
 		"Wizard",
-		"IdentityAzorius",
-		null,
-		null,
-		null
+		"IdentityAzorius"
 	]
 },
 {
@@ -1535,8 +1526,7 @@
 		"Artifact",
 		"Arcane",
 		"Wizard",
-		"Hostile",
-		null
+		"Hostile"
 	]
 },
 {
@@ -1756,6 +1746,9 @@
 	"deck": [
 		"decks/standard/archivist.dck"
 	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
 	"life": 20,
 	"rewards": [
 		{
@@ -1782,8 +1775,8 @@
 				"Artifact",
 				"Enchantment",
 				"Instant",
-				"Sorcery"		
-				]
+				"Sorcery"
+			]
 		},
 		{
 			"type": "gold",
@@ -2697,8 +2690,7 @@
 		"IdentityRakdos",
 		"Sneaky",
 		"Trapper",
-		"Human",
-		null
+		"Human"
 	]
 },
 {
@@ -3289,12 +3281,13 @@
 			]
 		}
 	],
-	"colors": "U",
+	"colors": "B",
 	"questTags": [
 		"Guardian",
 		"Artifact",
 		"Furnace",
 		"IdentityColorless",
+		"IdentityBlack",
 		"Construct",
 		"Robot"
 	]
@@ -3372,11 +3365,7 @@
 		"IdentityColorless",
 		"IdentityBlue",
 		"Construct",
-		"Robot",
-		null,
-		null,
-		null,
-		null
+		"Robot"
 	]
 },
 {
@@ -4130,11 +4119,11 @@
 		"decks/standard/cephalid.dck"
 	],
 	"ai": "",
+	"flying": true,
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.4,
-	"flying":true,
 	"life": 25,
 	"rewards": [
 		{
@@ -4296,9 +4285,7 @@
 		"Giant",
 		"Monster",
 		"IdentityRed",
-		"Beast",
-		null,
-		null
+		"Beast"
 	]
 },
 {
@@ -5655,8 +5642,7 @@
 		"Aberration",
 		"Giant",
 		"IdentityBant",
-		"Guard",
-		null
+		"Guard"
 	]
 },
 {
@@ -5790,10 +5776,7 @@
 		"IdentityBlack",
 		"Flying",
 		"Demon",
-		"Aberration",
-		null,
-		null,
-		null
+		"Aberration"
 	]
 },
 {
@@ -18167,10 +18150,7 @@
 		"Nesting",
 		"Swarm",
 		"Construct",
-		"IdentityColorless",
-		null,
-		null,
-		null
+		"IdentityColorless"
 	]
 },
 {
@@ -18220,9 +18200,7 @@
 		"Elemental",
 		"Wind",
 		"IdentityBlue",
-		"Djinn",
-		null,
-		null
+		"Djinn"
 	]
 },
 {
@@ -18775,12 +18753,13 @@
 	"name": "Myr Superion",
 	"sprite": "sprites/enemy/construct/myr.atlas",
 	"deck": [
-		"decks/standard/Myr_Superion.dck"
+		"decks/miniboss/myr_superion.dck"
 	],
-	"boss": true,
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.5,
+	"scale": 2.5,
 	"speed": 20,
 	"life": 25,
 	"rewards": [
@@ -20294,6 +20273,156 @@
 		"IdentityBlue",
 		"IdentityGreen",
 		"Snow"
+	]
+},
+{
+	"name": "Blue Prototype",
+	"sprite": "sprites/enemy/construct/prototype_blue.atlas",
+	"deck": [
+		"decks/standard/prototype_blue.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Guardian",
+		"Artifact",
+		"Furnace",
+		"IdentityColorless",
+		"IdentityBlue",
+		"Construct",
+		"Robot"
+	]
+},
+{
+	"name": "Green Prototype",
+	"sprite": "sprites/enemy/construct/prototype_green.atlas",
+	"deck": [
+		"decks/standard/prototype_green.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Green"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Guardian",
+		"Artifact",
+		"IdentityColorless",
+		"IdentityGreen",
+		"Construct",
+		"Prototype",
+		"Robot"
 	]
 },
 {
@@ -22367,12 +22496,14 @@
 			"addMaxCount": 10
 		}
 	],
-	"colors": "B",
+	"colors": "UG",
 	"questTags": [
 		"Wizard",
 		"BiomeBlue",
 		"BiomeGreen",
 		"Lizard",
+		"IdentityBlue",
+		"IdentityGreen",
 		"IdentitySimic"
 	]
 },
@@ -22667,11 +22798,7 @@
 		"Subterranean",
 		"Nesting",
 		"Swarm",
-		"Eldrazi",
-		null,
-		null,
-		null,
-		null
+		"Eldrazi"
 	]
 },
 {
@@ -23216,6 +23343,70 @@
 		"Predator",
 		"IdentityGreen",
 		"IdentityBlue",
+		"IdentitySimic"
+	]
+},
+{
+	"name": "Snow Wizard",
+	"sprite": "sprites/enemy/humanoid/human/wizard/simic_wiz.atlas",
+	"deck": [
+		"decks/standard/simicwizard_snow.dck",
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 0.25,
+	"difficulty": 1,
+	"speed": 25,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 6
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"rarity": [
+				"uncomon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "UG",
+	"questTags": [
+		"Wizard",
+		"Dungeon",
+		"Snow",
+		"Wizard",
+		"Human",
+		"IdentityBlue",
+		"IdentityGreen",
 		"IdentitySimic"
 	]
 },
