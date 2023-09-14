@@ -46,7 +46,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             prevent -= n;
 
             if (card.isImmutable() && prevent <= 0) {
-                game.getAction().exile(card, null);
+                game.getAction().exile(card, null, null);
             } else if (!StringUtils.isNumeric(varValue)) {
                 sa.setSVar(varValue, "Number$" + prevent);
                 card.updateAbilityTextForView();

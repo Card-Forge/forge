@@ -528,7 +528,7 @@ public class HumanPlay {
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
-                final Card d = game.getAction().exile(c, null);
+                final Card d = game.getAction().exile(c, null, null);
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
