@@ -814,7 +814,7 @@ public class Game {
                         si.setActivatingPlayer(c.getController());
                     }
                     if (c.getController().equals(p)) {
-                        getAction().exile(c, null);
+                        getAction().exile(c, null, null);
                         triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
                 }

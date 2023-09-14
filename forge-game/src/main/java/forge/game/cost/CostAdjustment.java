@@ -249,7 +249,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null);
+                        final Card d = game.getAction().exile(c, null, null);
                         final Card host = sa.getHostCard();
                         host.addExiledCard(d);
                         d.setExiledWith(host);

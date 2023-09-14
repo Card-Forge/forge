@@ -628,7 +628,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Ashiok Exile instead of paying life
         if (hasKeyword("Exile library instead of pay life") && lifePayment <= getZone(ZoneType.Library).size()) {
             // TODO is cause always set or not? if not then the ChangeZoneTable needs to trigger differently?
-            getGame().getAction().exile(getTopXCardsFromLibrary(lifePayment), cause);
+            getGame().getAction().exile(getTopXCardsFromLibrary(lifePayment), cause, null);
             return true;
         }
 
