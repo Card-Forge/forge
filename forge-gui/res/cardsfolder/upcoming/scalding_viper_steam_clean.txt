@@ -10,7 +10,7 @@ Oracle:Whenever an opponent casts a spell with mana value 3 or less, Scalding Vi
 ALTERNATE
 
 Name:Steam Clean
-ManaCost:1 u
+ManaCost:1 U
 Types:Sorcery Adventure
 A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Return target nonland permanent to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
