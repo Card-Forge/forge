@@ -3,6 +3,8 @@ Code=WOE
 Date=2023-09-08
 Name=Wilds of Eldraine
 Type=Expansion
+BoosterCovers=3
+Booster=9 Common:fromsheet("WOE cards"), 3 Uncommon:fromSheet("WOE cards"), 1 UncommonRareMythic:fromSheet("WOT cards"), 1 RareMythic:fromSheet("WOE cards"), 1 BasicLand:fromSheet("WOE cards")
 ScryfallCode=WOE
 
 [cards]
