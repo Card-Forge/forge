@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzt1MENwjAMBdBeWYVOgFS4sAvD0QXYgwPrIB8sWW6c2KobG5Ev+ZBWbV7SuNP0u3mc5HvnSz+HlJovQ9CncT4D9hNcWK0M3zYZv2/Jks3HPRG+9618nZ+5z93PB++y+LiRuqjT4z8INq0PbZKPl2Xdnj7JFRH0lPbOsrYjQj3UJ/VIz3BPb19tjpaNP7suvrbXUt8Lq2+++vq4Ya9vPdhH59PYep2/4fP1aW0tH/QzVkYf9DOWl89atUA/Y2X0eWT4/sfXGkf5tOMInzaZbZDsPsjw7UvJ9gVFkjpc
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztlksOgjAQQLs13sIViIkLcEEKKzeehLPx0Y2ftcfwOs6YNNTSKRhpbUwneSFhCH0ZZlqqBWPVn7HO2SvwKuODlwmf3TCCX/ALfv75TY1f+UWcsQ2Q5GZaR3sg+sQSsltc9Lj0jBQf0Vfq2l1B01r0q/mw55Nc41nSYIjntty+nwrWpStp2tyeXyT11dHganrHN373lTn/2PeYajnVb+7/GeGGQfklI2uqszRWw8NyPj/TXtISubl7UJ4V7ex+iCs/nSdVMxd+OMtn/s6RD/1M39amnzzL8kz78n11fmJ/XCtgXbGGJ97fE88lhcP6EWduCmTATpNrLPlpe5I4cy/gcAVuxTAXl+78auLMTYEM2GlyjUM/igs4XIGbBy6BQCDwCU9DjXzl
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9mMtSE0EUhnuV26j4GBJEF8BCSNYRijXwEhGL11BJcSl9BUyIG7AsnwIVXwFEy1shWLrz/E4f58+ZnolDQU7VqYG5dH9zLn93Zqnk3LL4iviNmnM3xesV5zbKzj2sukK2JvcvyTjP5NlzOf4S35a/n8uYvVp8z4GM/aYSz/NNrj+W61/kuC7H1WpyD67rWDrOg2ryTB5f/V7iar0559py/6Y897sU8/0sxWyfIucWomRezHFq2N7Jteu1NNtWOc2mzwzjYwNfJOO+l/HPKHYt4dqV8x+iOL48x+chbHhHjGfZ7laSZ4rET3O8WU7yamPXoffH9Y9yrevzb9ngoTrIYmMu68qHGB5WErb7no/n2fBztPx1ja9lg2excU0PY+T4wZhN+ew8ek8e23kOG56dj4rHD7ZIbDp/x9TOkZzrD2FDDX8VH/fPgKtr8qLWbQhDIz5OiU+LzzSS8/1Gcq/2xIta/I7o6w7lVWunXc1nQw1rPdic6Hv/i13TuYlmfNwTln3xl43k/GQzuRexwbN6ZD6rcWeGaYs0Be+iMcdYeN8Q29/4yfy9ZnycEp8Wn2km5/vgnHNBWyM+1awsLYeWwDXOrCVgPI7SbNb2hGVf/GVz8Pyk8NW9KyvrCsePtVzZwHGtlugO/DBH56z1TXzqjUHfpeush6wryqdavkm5VI4W1VkR62XkT20nwKe1Z9dYZUR8OEa2D0bFp72ruWNt5XOsTaPgQ351P2TXFOXSc9Aiq51XxYdeeT0bxw9840YjTqLBPCof1x7r747X2V4jPe9F+GCvZge1BbXHjNaZ2WrcLa+zE0Yz2BCTcdIQ67cD/MyH/e/bSpoRLFjrjv2a1w/o747X2V4O30VM+R6J/ygNMvb9GngSpXtmVAa+J+V4nQfjd8+IPf5YLV2T3Vrio+BVHWbGU7+/RzxRk7yfsP0yCmPGO5V4Xw9WrcnFjH4+yeDjXh7W00UYD/36ClatSeSba5H5svSPe3lYT/+P2b14O1CTmmeb31ANci8X6eluRpw1f9qjmu/JSpJn7Lvs2jZ/yTVYz3iPlqkpZmRttLq4QO91Gf3czeDTfaXOrTGx2mjXl3nDe9U6afe/4LM5tvfZmmSdvAzO0H5KzeYYfOvC2iG3sbecRePJe3P+LYhcHfg1Y8yvcbB2YH0OjWe1sShn1ji69iNX+v1ihdbhdnVQC+03H9vTec7ro7LmcWkN2e8+T8sxI1h4fcYe0cawZcZjz9qnsU4smuf7hmss8N1Hf6+hX7kGef+gjHm/KUP7NP4fNcXfKdQs17L5RsDxg4X2OKvVNE/IlF8ZjkyMQqa/vS0XfyPYJj3JWk9gfwDO0iC7
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEtOAzEMhrMqPUH37aowqIIlKlygJ0G9DAguMd0BN5gFC8SicCMSTa26lmPnOQMSv2T1kcd8cWInGWNk7Rf953JtzIVgzVrpyOp7oddJUWetdRw3vaWqCXhOF9kntGkD/JOjHDan1SasjeajWgrlw3qaG/M8Ty+PUSgfnqMrGw/XQkxI5bFzHcr3Htkv1T4wxqnv21u5/k4pLyUYP/X98k5udy6Uv8yMebX2NsvG86pV+HakPHb9pGisXOH0dZg7tx7BhhCMmdvruNgaiot77ljPLqncfFVLKfsxqFTc0BzbESulVF6cY0sz/evvCNbpmPsFVcw5bQz95lhxe++QfLHneMy2Ojt+r7WX5Kyf++kpY22lzBtmhHMFxHLJO1bOHuHzY25sA1OJNf+hzLNv/A1pJ+XRS1v3YdLb4+R4N/HdT3BfzoeuHedHqMcxauPCXNupXtdJepckcWJG4PTxYV9xXLn5AjixYWYfX6yvONG4DI1TzrfAx3GVOBtyv7V+sW8/CZcvTrn/a72zBDmfYX9BLimlH2pFc34=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="245.361" y="561.242" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="272.275" y="29.7137"/>
+  <object id="50" template="../../obj/enemy.tx" x="47.8847" y="236.881">
+   <properties>
+    <property name="enemy" value="Archer"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="167.426" y="31.0356"/>
+  <object id="52" template="../../obj/gold.tx" x="222.052" y="31.1389"/>
+  <object id="53" template="../../obj/enemy.tx" x="354.296" y="369.678">
+   <properties>
+    <property name="enemy" value="Archer"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="275.688" y="460.617">
+   <properties>
+    <property name="enemy" value="Sun Titan"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="171.937" y="367.218">
+   <properties>
+    <property name="enemy" value="Archer"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/collision.tx" x="-0.133321" y="559.568" width="641.207" height="16"/>
+  <object id="57" template="../../obj/collision.tx" x="-1.04312" y="-17.702" width="641.207" height="16"/>
+  <object id="58" template="../../obj/collision.tx" x="640.655" y="-0.844722" width="23.6121" height="577.141"/>
+  <object id="59" template="../../obj/collision.tx" x="-23.9336" y="-13.2756" width="23.6121" height="577.141"/>
+  <object id="60" template="../../obj/enemy.tx" x="24.7443" y="432.229">
+   <properties>
+    <property name="enemy" value="Knight"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="608.078" y="458.303">
+   <properties>
+    <property name="enemy" value="Khan"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="324.294" y="230.306">
+   <properties>
+    <property name="enemy" value="Adapt White Wizard"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="268.508" y="372.804">
+   <properties>
+    <property name="enemy" value="Human"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="141.775" y="233.338">
+   <properties>
+    <property name="enemy" value="Archer"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="588.674" y="254.561">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="592.919" y="362.496">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="53.244" y="178.158">
+   <properties>
+    <property name="enemy" value="Rhino"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/gold.tx" x="127.828" y="77.4991"/>
+  <object id="69" template="../../obj/manashards.tx" x="243.04" y="30.2017"/>
+  <object id="70" template="../../obj/manashards.tx" x="195.742" y="32.0208"/>
+  <object id="71" template="../../obj/manashards.tx" x="435.868" y="38.0846"/>
+  <object id="72" template="../../obj/manashards.tx" x="583.217" y="37.4782"/>
+  <object id="73" template="../../obj/booster.tx" x="608.685" y="164.211">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

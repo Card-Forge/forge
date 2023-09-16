@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="43" height="38" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="43" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztll9Og0AQh/fByLLF6AG8BCYSTmJ88bVvRuOT55AmUh56D0/hv6sYlT45E5jsMAJpGliIbpMvCxPSfv3N7rLLUKmlx+PxeDx/hNOoCdVwvDqY3q/PlYOufUztSrVNuBvrlprrXMkhNUqd1ZwDqx38XbhiX+kafzMDtroa0TU21gfrX7q6Jv/ETOdaauuXs9xS5o3/oZhBruSyZfkVrM798jrrwoErrW3pSjny+4xdo39s3OWKH+7J11bG+k/5ltr68nxTB/O1zXUj+h2LtZWwuZGHTe+pXNEvEY6JsV4Fc6X9YExXOVcR6idlR8hsXe+vfI3JtSUzy2tWod175dqbwlW+u/reVTR/8bmxXLlz13lA9rrUv12LsPneeoZnjuH+BcZXPbxnH/eLCswO+49nA6p1fefFoVKXwO0Imcrzq6y31bpc74AP8PwEbkaeE/vyFFX9PzHWdchch4Q8sf+Pwbxdr0Pr+Q3jKpi3K/aePN8g5yMH+9i+rg/B/D2RBbi9g2Nk5u3p8fwnfgDm4c+L
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="43" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztls0KgkAQx/doukF3TXyvjoHXoFOn6IGiwL7I6hmC3qSCujaLLgzr+tkaCfODP8Ks6/4YUIcxgiAIgugOYa9efM7YErLl9ffi/Qsnu2badQXnzOCcTUNXsd/j+v2mXfdwxg6yhsQNEqWuhwqur+A7V5khzz5bV1NxU9cHeNyDxKcoT+TbpqurucdV+lnmiiHXfMi13DVGbvI9P6W1Y4636nq1GBvYjE1a+GYV9bUKqusUcgPfvv3/ro6deIYd6CuO5B2Qaxme5ptbxVXnW9dRzkmR4uBXrJ3Tf+zlB7MLnrPwTCL6LHo2h7WxlVxlTd7joej6a9pVzlnqnCT65OfUMGJuFa6jfvuuJiL/GV1wLXu3yJVcyZVcCSKPD0wabT4=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="43" height="38">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVmDtOw0AQhjdNHrYl6HkookNQp84pkkjhClDkANTUCYID0HADJC6RAlpOAQ4JpGBH3pEnI6/t3bXj5ZdGY69j+9Of2YdXiHKK+0KsHOK7v/u8WU+IeUeITVtel3Ejz79kjmU8yPaxzJN2+htoK6uqWcNAiPduwgccwIWsEGsZ97J9JPNjJ2lrihVEvQVeZKLe0rYmWcHbKEh4F4o5zgjweNFgDXBmqIc54wXGDfHYB1bOu2B1gcy+sCJvlMPsE2sRs4+sOub/IGB+65rfdxq5vdf1flO9GNROFfcvpacHgds7uU6YZ0eOHmKNw/w2cvQHdNHaPb9s7eaBzFfq2q/Ky7O0r+YJWMHTwyBZK9StqYzn8+QYmU1Y0VOT8dVFG5V/VDZhRU9N1i4uGqs8UHVhwmqzJrTVVuUPGXfqmLPyeQPbgJWuaW316tDHKWvePEc9dfV1WhNrFmfVNTBk59innlTOGgd0rPS/r4O1rJpi/STjXtmasGFd1+zrlp0PHVhXFqw266TbMI0i0TmVf3/byHSddBylUXQ/nVPp9/dkT30LxmKMIs162f3KZN9lX9Kx1tG3oN+46HqPvrqyhkE2a1NzQZH4/ouuBmy/rXXf1CbPQPGa1Y1ZPrDymtWNWb6w0jrw2Ve+b6jbJ2ySNY/X13EARffp615nVSHcp4d6/QM5CUdr
+  </data>
+ </layer>
+ <layer id="8" name="WallsBis" width="43" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt0rENwCAMBVH3gQ3IYskuYS6UsFuQWMCNsSzuNb89WRYBAGC95/Au0PnS3D62Bmkuo/VM3hU6dxZ5A7RGuimtNmi1QasNWm3Qiiiu7F2g1/hTAMAmfjoICMw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208.667" y="414.337">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="135.516" y="294.997">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="207.345" y="225.335">
+   <properties>
+    <property name="reward">[
+  {
+    {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;White&quot;,
+        &quot;Blue&quot;,
+        &quot;Green&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Bird&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/gold.tx" x="140.342" y="225.013"/>
+  <object id="53" template="../../obj/enemy.tx" x="206.163" y="284.163">
+   <properties>
+    <property name="enemy" value="Goblin Chief"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="208.178" y="312.006">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="118.668" y="354.664">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="289.157" y="216.015"/>
+  <object id="57" template="../../obj/enemy.tx" x="275.06" y="312.308">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="143.5" y="379.499">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="281.96" y="368.637">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/collision.tx" x="-0.6639" y="606.411" width="685.775" height="16"/>
+  <object id="61" template="../../obj/collision.tx" x="-1.19438" y="-15.9587" width="690.02" height="16"/>
+  <object id="62" template="../../obj/collision.tx" x="-16.5812" y="-15.4281" width="15.6533" height="639.431"/>
+  <object id="63" template="../../obj/manashards.tx" x="509.845" y="100.769"/>
+  <object id="64" template="../../obj/manashards.tx" x="24.3653" y="459.971"/>
+  <object id="65" template="../../obj/waypoint.tx" x="85.9125" y="271.085"/>
+  <object id="66" template="../../obj/waypoint.tx" x="206.885" y="98.1159"/>
+  <object id="67" template="../../obj/waypoint.tx" x="522.049" y="167.622" width="16" height="29.2645"/>
+  <object id="68" template="../../obj/waypoint.tx" x="481.725" y="551.496" width="16" height="29.2645"/>
+  <object id="69" template="../../obj/booster.tx" x="92.2795" y="113.503">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/booster.tx" x="568.74" y="345.366">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

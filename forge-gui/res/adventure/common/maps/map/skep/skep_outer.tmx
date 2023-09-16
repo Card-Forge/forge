@@ -1200,7 +1200,7 @@
   </object>
   <object id="251" template="../../obj/shop.tx" x="303.667" y="1248.29" width="31.3333" height="32.4167">
    <properties>
-    <property name="commonShopList" value="FlipShop"/>
+    <property name="commonShopList" value="Soldier4Red"/>
     <property name="noRestock" type="bool" value="false"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>
@@ -1208,7 +1208,7 @@
   </object>
   <object id="252" template="../../obj/shop.tx" x="336.334" y="1248.46" width="31.3333" height="32.4167">
    <properties>
-    <property name="commonShopList" value="LargeSeaCreatures"/>
+    <property name="commonShopList" value="Equip"/>
     <property name="noRestock" type="bool" value="false"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>
@@ -1337,7 +1337,7 @@
   </object>
   <object id="264" template="../../obj/shop.tx" x="272" y="1247.79" width="31.3333" height="32.4167">
    <properties>
-    <property name="commonShopList" value="Battle"/>
+    <property name="commonShopList" value="Soldier"/>
     <property name="noRestock" type="bool" value="false"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>
@@ -1345,7 +1345,7 @@
   </object>
   <object id="265" template="../../obj/shop.tx" x="401.667" y="1249.12" width="31.3333" height="32.4167">
    <properties>
-    <property name="commonShopList" value="Saga"/>
+    <property name="commonShopList" value="Sliver"/>
     <property name="noRestock" type="bool" value="false"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>

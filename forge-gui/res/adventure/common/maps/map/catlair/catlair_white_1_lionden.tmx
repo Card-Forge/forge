@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlU0SgjAMhbPRKXo39G4epP5dRS+BQDfuJYuMIbyUoryZLizkff15QSKieyCqq/G4DnNaaZh7bIkOFUH1w/wlTOeT48dqqim3Vf7PjT+0d23WlGMidmvqc1we6IxKmJptmawYFCNgrvVvnD0skay9Ax6vjPc/TJa+A8T+RSiDSDrznZNdT3xPZ/O+9ukze0GZL2HHgM/Kenn9yUJ9PsdO5n1h233kssDvWvZx5r655ha+dTr38qw0f8Iv6U1dM+fPd7IkN2uImWnFfinVku+bV89r9v4nckyb+Wjq37vxb+1vc1fS66hG1qJrT/vxmvRz1Ocl7BfoFXvmmivZFu8IehyxPz55hDw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VcsNgkAQ3YsRSajExNiFJBDbAbEJS7ETPNkDHtUCZAIjj2FmAT8v2bDMzv/NgnMdLqvmeXNDaDJCWdvE7b6I+mfHaKD+jiHPK8P/PXDuIdYzMJRnYqfIOKdTned52SwCPddhF5v7cWj10/ade4EgWQl1SxvEpo6xD5pFMa+LZr8N+/58KEb6yufIBcLiegrQFmNbsT7xi74TIc+hduRX2ms1cl/ySJdrvZQznim67C8D3TEOLWgzK31p924KuCepeCdkHp/FD+r6BqVntrAGzFNy7APNbgJ74lbOwtw7g7kwXxq3UyDtKvHEeZD3BaH1hOtiH7Ghi7zjd83qi/Y90HLT7CuPXwukb82w9e8ZO/sHfHdJ5s+caH1jWWn8b19kdUl4
+  </data>
+ </layer>
+ <layer id="7" name="Cave" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztlEsOAUEQhsskzCOxG8IFhBjiIhwHK0ux8YijGGFPwg1cwkI8DqA63ZVulU6YGSvRyR+me/Q3X1cNgPejXwAYqGxdgBJm48rrIWaF36tq3pYyZuF/AFLj4gF0AoAQf1d3APYsDUfyBTtkrAomVlkn5C596Soca8g45V+zM9hbi+MNn/uu0gqSu4p9Drj/JAfQ83TGeH10pFuVeQrHeQJHm6ttL7G+MuapxsJz5kvXTx3NMfW1K53ZGee7an1UlPubCV1d7yT15FzToY3PflVs8zyop2fs/jRnLEYTOQ/v1YHYVHvi0DrVJQuXO5tsweyzd5d6upKhp7gzZ1MtqYeov6jH0vbUO/bAOE96R6NAf2Zl2tixm/5/KC07CrTXt93+47fGE9wMZYo=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="280.568" y="78.4081"/>
+  <object id="52" template="../../obj/gold.tx" x="4.22891" y="16.5203"/>
+  <object id="56" template="../../obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="60" template="../../obj/booster.tx" x="288.887" y="95.5172">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/manashards.tx" x="289.784" y="117.036"/>
+  <object id="63" template="../../obj/enemy.tx" x="254.261" y="98.1235">
+   <properties>
+    <property name="enemy" value="Lion"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="208.514" y="129.121">
+   <properties>
+    <property name="enemy" value="Lion"/>
+    <property name="pursueRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="97.7156" y="113.014" visible="1">
+   <properties>
+    <property name="enemy" value="Caracal"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="76,70,69,68"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="396.57" y="99.4031">
+   <properties>
+    <property name="enemy" value="Caracal"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="72,71,72,77"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/waypoint.tx" x="95.8719" y="48.374"/>
+  <object id="69" template="../../obj/waypoint.tx" x="16.0097" y="48.7768"/>
+  <object id="70" template="../../obj/waypoint.tx" x="13.7678" y="254.501"/>
+  <object id="71" template="../../obj/waypoint.tx" x="466.374" y="60.3981"/>
+  <object id="72" template="../../obj/waypoint.tx" x="383.855" y="127.914"/>
+  <object id="75" template="../../obj/enemy.tx" x="175.709" y="97.6389">
+   <properties>
+    <property name="enemy" value="Lion"/>
+    <property name="pursueRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/waypoint.tx" x="98.4119" y="248.883"/>
+  <object id="77" template="../../obj/waypoint.tx" x="332.621" y="176.739"/>
+ </objectgroup>
+</map>

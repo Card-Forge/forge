@@ -255,7 +255,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_1.tmx",
+	"map": "../common/maps/map/catlair/catlair_green_1_leonincamp.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"CatLair",
@@ -270,7 +270,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_2.tmx",
+	"map": "../common/maps/map/catlair/catlair_green_2_tigerforest.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"CatLair",
@@ -285,7 +285,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_3.tmx",
+	"map": "../common/maps/map/catlair/catlair_green_3_chimera.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"CatLair",
@@ -297,10 +297,10 @@
 {
 	"name": "CatLairW",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_1.tmx",
+	"map": "../common/maps/map/catlair/catlair_white_1_lionden.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -313,10 +313,10 @@
 {
 	"name": "CatLairW1",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_2.tmx",
+	"map": "../common/maps/map/catlair/catlair_white_2_leonincamp.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -329,10 +329,10 @@
 {
 	"name": "CatLairW2",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "CatLair",
-	"map": "../common/maps/map/catlair/catlair_3.tmx",
+	"map": "../common/maps/map/catlair/catlair_white_3_temple.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -808,6 +808,22 @@
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Cave",
 	"map": "../common/maps/map/cave/cave_cerodon.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Cave",
+		"Hostile",
+		"BiomeRed",
+		"BiomeColorless",
+		"Sidequest"
+	]
+},
+{
+	"name": "CaveEldrazi",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "../common/maps/map/cave/cave_eldrazi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
