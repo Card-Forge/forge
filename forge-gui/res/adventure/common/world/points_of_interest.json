@@ -188,10 +188,10 @@
 {
 	"name": "Castle",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "WhiteCastle",
-	"map": "../common/maps/map/fort/fort_white_1.tmx",
+	"map": "../common/maps/map/fort/fort_white_1_celestial.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -207,7 +207,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "WhiteCastle",
-	"map": "../common/maps/map/fort/fort_white_2.tmx",
+	"map": "../common/maps/map/fort/fort_white_2_humans.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -220,10 +220,10 @@
 {
 	"name": "Castle2",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "WhiteCastle",
-	"map": "../common/maps/map/fort/fort_white_3.tmx",
+	"map": "../common/maps/map/fort/fort_white_3_pharaoh.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -236,10 +236,10 @@
 {
 	"name": "Castle3",
 	"type": "dungeon",
-	"count": 2,
-	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "WhiteCastle",
-	"map": "../common/maps/map/fort/fort_white_4.tmx",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "farm",
+	"map": "../common/maps/map/fort/fort_white_4_farm.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -3117,7 +3117,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "farm",
-	"map": "../common/maps/map/farm/scarecrow_farm.tmx",
+	"map": "../common/maps/map/fort/fort_green_4_scarecrowfarm.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",

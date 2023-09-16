@@ -11334,6 +11334,92 @@
 	]
 },
 {
+	"name": "Geonid Death-Cap",
+	"sprite": "sprites/enemy/aberration/geonid.atlas",
+	"deck": [
+		"decks/standard/geonid.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardText": "Saproling"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Black",
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			],
+			"colorType": "Any"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Black"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Fungus"
+			],
+			"colorType": "Any"
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Fungus",
+		"Inhuman",
+		"Nature",
+		"Wild",
+		"Subterranean",
+		"IdentityGreen",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Ghalta",
 	"sprite": "sprites/enemy/beast/ghalta.atlas",
 	"deck": [
@@ -14860,6 +14946,53 @@
 		"IdentityBlack",
 		"IdentityRed",
 		"IdentityMardu",
+		"BiomeWhite"
+	]
+},
+{
+	"name": "Human Bard",
+	"sprite": "sprites/enemy/humanoid/human/bard/humanbard.atlas",
+	"deck": [
+		"decks/standard/humanbard.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 3,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 50
+		}
+	],
+	"colors": "RW",
+	"questTags": [
+		"Human",
+		"Soldier",
+		"IdentityWhite",
+		"IdentityRed",
+		"IdentityGruul",
 		"BiomeWhite"
 	]
 },
@@ -19185,6 +19318,98 @@
 	]
 },
 {
+	"name": "Nantuko Guard",
+	"sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
+	"deck": [
+		"decks/standard/nantuko_morpher.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"scale":0.6,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"subTypes": [
+				"Eldrazi"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "BGU",
+	"questTags": [
+		"Insect",
+		"Humanoid",
+		"Wandering",
+		"Huge",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai"
+			]
+},
+{
 	"name": "Necrogoyf",
 	"sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
 	"deck": [
@@ -20762,7 +20987,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.75,
+	"scale": 0.65,
 	"life": 18,
 	"rewards": [
 		{
@@ -22929,6 +23154,7 @@
 },
 {
 	"name": "Slimefoot",
+	"nameOverride": "Fungus of Slimefoot",
 	"sprite": "sprites/enemy/plant/slimefoot.atlas",
 	"deck": [
 		"decks/miniboss/slimefoot.dck"

@@ -1,0 +1,32 @@
+deadlymantis.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 16, 0
+  size: 16, 16     
+Idle 
+  xy: 0, 0
+  size: 32, 32   
+Idle 
+  xy: 32, 00
+  size: 32, 32
+Idle 
+  xy: 64, 00
+  size: 32, 32
+Idle 
+  xy: 96, 00
+  size: 32, 32
+Idle 
+  xy: 128, 00
+  size: 32, 32
+Idle 
+  xy: 160, 00
+  size: 32, 32
+Idle 
+  xy: 192, 00
+  size: 32, 32
+Idle 
+  xy: 224, 00
+  size: 32, 32

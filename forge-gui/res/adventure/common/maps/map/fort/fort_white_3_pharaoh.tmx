@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlUsKgDAMRHM1FfxUUW9tbYt6JAfsqqsupAmaB7POoxlSIkVRlHzmhmhB1obb5OGAx4lc0WereH16eAyIiT5dzetj4bEjTsi+/khg7mTKxNzJlCDMpzSWqR8Oc33m7BJ31aAHY2YXStxVhxleeDe5/7uUN/fSCnt7aT5f5wY2Dxhz
+   eJztlk0OwiAQhWeBXsd6hNqkWmzUe3ix3qQI9OdIfYksDCsSG4a0fMnbMl/CywBRJpPJhPOoiJ7Iq+I2+TLCY0Jm59OXvD43eDSIdD7XC6+PgscH0Ync1x6xzJ30aZk76WMT84mNYuqHxlwTODvGXpXowT2wCzH2qsYMk3g3ud87nzXvpXZnnQRRgZzFemf/4/M+EHVH/DuYfX4ZxPZ8Ft03Hkg=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -45,13 +45,13 @@
   </object>
   <object id="51" template="../../obj/treasure.tx" x="250.536" y="151.128"/>
   <object id="52" template="../../obj/gold.tx" x="225.064" y="177.386"/>
-  <object id="53" template="../../obj/enemy.tx" x="274.222" y="244.626">
+  <object id="53" template="../../obj/enemy.tx" x="273.222" y="251.626">
    <properties>
     <property name="enemy" value="Khenra Warrior"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="54" template="../../obj/enemy.tx" x="430.566" y="256.246">
+  <object id="54" template="../../obj/enemy.tx" x="421.899" y="251.246">
    <properties>
     <property name="enemy" value="Scorpion"/>
     <property name="hidden" type="bool" value="true"/>
@@ -62,6 +62,7 @@
    <properties>
     <property name="enemy" value="Scarab"/>
     <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -73,7 +74,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/enemy.tx" x="161.725" y="299.797">
+  <object id="58" template="../../obj/enemy.tx" x="167.725" y="303.797">
    <properties>
     <property name="enemy" value="Mummy"/>
     <property name="threatRange" type="int" value="30"/>
@@ -117,6 +118,15 @@
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/treasure.tx" x="550.333" y="305"/>
+  <object id="73" template="../../obj/enemy.tx" x="509" y="301">
+   <properties>
+    <property name="enemy" value="Greater Sandwurm"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
  </objectgroup>
