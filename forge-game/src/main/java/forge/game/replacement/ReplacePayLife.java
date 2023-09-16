@@ -15,7 +15,6 @@ public class ReplacePayLife extends ReplacementEffect {
 
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        // TODO Auto-generated method stub
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
