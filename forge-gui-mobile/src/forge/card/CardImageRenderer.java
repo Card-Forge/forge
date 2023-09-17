@@ -503,7 +503,7 @@ public class CardImageRenderer {
                 drawHeader(g, card, card.getState(true), altcolors, x, y, w - (w / 2), typeBoxHeight, noText, true);
                 drawTypeLine(g, card.getState(true), canShow, altcolors, x, y + typeBoxHeight, w - (w / 2), typeBoxHeight, noText, true, true);
                 float mod = (typeBoxHeight + typeBoxHeight);
-                setTextBox(g, card, state, altcolors, x, y + mod, w - (w / 2), h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
+                setTextBox(g, card, card.getState(true), altcolors, x, y + mod, w - (w / 2), h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
                 //right
                 setTextBox(g, card, state, colors, x + w / 2, y, w - (w / 2), h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
             }
