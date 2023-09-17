@@ -559,6 +559,10 @@ public class FCardImageRenderer {
         TYPE_SIZE = NAME_SIZE - 1;
         textX = x + ART_INSET;
 
+        // refresh if adventure has different color
+        colors = fillColorBackground(g, CardDetailUtil.getBorderColors(advState, true), 0, 0, 0, 0, BLACK_BORDER_THICKNESS);
+        textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
+
         //draw header containing name and mana cost
         Color[] advheaderColors = tintColors(Color.GRAY, colors, 0.6f);
         TEXT_COLOR = Color.WHITE;
