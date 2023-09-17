@@ -1,8 +1,8 @@
 Name:Graceful Takedown
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl+enchanted | TargetMin$ 0 | TargetMax$ X | RememberTargets$ True | SubAbility$ DBPumpBis | SpellDescription$ Any number of target enchanted creatures you control and up to one other target creature you control each deal damage equal to their power to target creature you don't control.
-SVar:DBPumpBis:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetUnique$ True | TargetMin$ 0 | TargetMax 1 | RememberTargets$ True | SubAbility$ DBEachDamage
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl+enchanted | TargetMin$ 0 | TargetMax$ X | RememberObjects$ ThisTargetedCard | SubAbility$ DBPumpBis | SpellDescription$ Any number of target enchanted creatures you control and up to one other target creature you control each deal damage equal to their power to target creature you don't control.
+SVar:DBPumpBis:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetUnique$ True | TargetMin$ 0 | TargetMax 1 | RememberObjects$ ThisTargetedCard | SubAbility$ DBEachDamage
 SVar:X:Count$Valid Creature.YouCtrl+enchanted
 SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | DefinedDamagers$ Remembered | NumDmg$ Count$CardPower | StackDescription$ REP target creature_{c:ThisTargetedCard} | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
