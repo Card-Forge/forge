@@ -2,7 +2,7 @@ Name:Ashiok, Wicked Manipulator
 ManaCost:3 B B
 Types:Legendary Planeswalker Ashiok
 Loyalty:5
-R:Event$ PayLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileTop | Amount$ GT0 | Description$ If you would pay life while your library has at least that many cards in it, exile that many cards from the top of your library instead.
+R:Event$ PayLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileTop | Amount$ LEY | Description$ If you would pay life while your library has at least that many cards in it, exile that many cards from the top of your library instead.
 SVar:ExileTop:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile
 SVar:X:ReplaceCount$Amount
 SVar:Y:Count$ValidLibrary Card
