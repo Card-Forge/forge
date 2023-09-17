@@ -2125,7 +2125,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "Kiora",
-	"map": "../common/maps/map/kiora/kiora_island.tmx",
+	"map": "../common/maps/map/minibosses/kiora_island.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
@@ -3284,7 +3284,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Jace",
-	"map": "../common/maps/map/teferi/teferi.tmx",
+	"map": "../common/maps/map/minibosses/teferi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",

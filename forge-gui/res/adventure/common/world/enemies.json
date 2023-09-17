@@ -19788,7 +19788,7 @@
 },
 {
 	"name": "Ooze Boss",
-	"sprite": "sprites/enemy/ooze/oozeboss.atlas",
+	"sprite": "sprites/enemy/ooze/giant_slime.atlas",
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
 	],
@@ -24717,7 +24717,7 @@
 	"difficulty": 0.8,
 	"speed": 31,
 	"scale": 0.5,
-	"life": 25,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "gold",
