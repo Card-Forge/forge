@@ -210,6 +210,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     Card m = null;
                     if (foundDest.equals(ZoneType.Battlefield)) {
+                        moveParams.put(AbilityKey.SimultaneousETB, new CardCollection(c));
                         if (sa.hasParam("GainControl")) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                         }

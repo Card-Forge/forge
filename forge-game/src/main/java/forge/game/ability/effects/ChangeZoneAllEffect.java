@@ -107,8 +107,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
 
-        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
-
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
@@ -121,6 +119,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
                 return;
             }
+        }
+
+        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+
+        if (sa.hasParam("TypeLimit")) {
+            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -171,6 +175,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
             if (destination == ZoneType.Battlefield) {
+                moveParams.put(AbilityKey.SimultaneousETB, cards);
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));

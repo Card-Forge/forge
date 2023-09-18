@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Legendary Planeswalker Ashiok
 Loyalty:5
 R:Event$ PayLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileTop | Amount$ LEY | Description$ If you would pay life while your library has at least that many cards in it, exile that many cards from the top of your library instead.
-SVar:ExileTop:DB$ DigUntil | Amount$ X | Valid$ Card.NotDefinedReplacedSimultaneousETB | NoMoveRevealed$ True | FoundDestination$ Exile
+SVar:ExileTop:DB$ ChangeZoneAll | TypeLimit$ X | ChangeType$ Card.NotDefinedReplacedSimultaneousETB | Defined$ You | Origin$ Library | Destination$ Exile
 SVar:X:ReplaceCount$Amount
 SVar:Y:Count$ValidLibrary Card.YouOwn
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Exile | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Exile one of them and put the other into your hand.
