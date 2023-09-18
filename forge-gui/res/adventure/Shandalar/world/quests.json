@@ -6080,7 +6080,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6230,7 +6229,6 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": 0,
 						"POIReference": ""
 					}
 				],
@@ -6284,7 +6282,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6435,7 +6432,6 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": 0,
 						"POIReference": ""
 					}
 				],
@@ -6488,7 +6484,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -6688,7 +6683,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": 0,
 										"POIReference": ""
 									}
 								],
@@ -7350,9 +7344,6 @@
 			"description": "Travel to the abandoned town",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"POITags": [
-				"Quest_WelcomeToTheJungle"
-			],
 			"objective": "Travel",
 			"prologue": {},
 			"epilogue": {},
@@ -7379,8 +7370,12 @@
 	"description": "Find Shandalar's largest Sliver hive",
 	"offerDialog": {},
 	"prologue": {
-				"text": "Quest 'A Healthy Dose of Skep-ticism' is a placeholder. It will eventually be replaced with an actual quest to explore the Skep. For now, this simply serves as directions to get there if you so desire. This placeholder quest does not provide any rewards.",
-				"options": [{"name": "(Dismiss)"}]
+		"text": "Quest 'A Healthy Dose of Skep-ticism' is a placeholder. It will eventually be replaced with an actual quest to explore the Skep. For now, this simply serves as directions to get there if you so desire. This placeholder quest does not provide any rewards.",
+		"options": [
+			{
+				"name": "(Dismiss)"
+			}
+		]
 	},
 	"epilogue": {},
 	"failureDialog": {},
@@ -7400,7 +7395,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
-				"Skep"
+				"Snow"
 			],
 			"objective": "Travel",
 			"prologue": {},
@@ -7408,6 +7403,635 @@
 			"POIToken": ""
 		}
 	],
-	"storyQuest": false
+	"questSourceTags": [
+		"island_capital"
+	]
+},
+{
+	"id": 35,
+	"isTemplate": true,
+	"name": "Kiora's Fall",
+	"description": "Defeat the Kiora and her minions",
+	"offerDialog": {
+		"text": "Village Elder: (Wrinkled brow, concerned tone) Ah, adventurer, have you heard of the looming threat? Kiora, the sea mage, stirs the depths with her restless sea creatures. We face a dire peril.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": " Kiora? What's she up to now, Elder?",
+				"text": "(Grimaces) She seeks to summon ancient sea titans that slumber beneath the waves, creatures that could engulf our lands in a cataclysmic flood. It's a threat that endangers Shandalar's very existence.",
+				"options": [
+					{
+						"name": "That sounds like a catastrophe waiting to happen. What can we do?",
+						"text": "(Nods) We must act swiftly. Seek out Kiora, reason with her if you can, but be prepared for a fight. Our survival depends on thwarting her dangerous ambitions. Remember, the sea is a powerful ally and a formidable foe.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "27",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll do my best to stop her, Elder. Shandalar's safety is my priority.",
+								"text": "(Grateful smile) Thank you, brave one. We place our hopes in your hands. Kiora must be convinced to abandon her reckless path, or we'll face a watery doom."
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "I don't think this is a quest for me  (Decline Quest)",
+								"text": "The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Find Kiora's Hideout and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Kiora"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Kiora"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal"
+	]
+},
+{
+	"id": 36,
+	"isTemplate": true,
+	"name": "Teferi's Fall",
+	"description": "Find and defeat Teferi",
+	"offerDialog": {
+		"text": "Village Scholar: (Worried expression, hurried tone) Adventurer, we have a grave concern on our hands, and it concerns Teferi, the temporal mage. His actions threaten Shandalar's very fabric of time.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Teferi? What's he doing that's causing such alarm?  ",
+				"text": "(Frowning) Teferi's meddling with time magic has created temporal anomalies across Shandalar. The past, present, and future are becoming entangled, leading to chaos and unpredictability. It's a perilous situation.",
+				"options": [
+					{
+						"name": "That sounds like a serious problem. How can we resolve it?",
+						"text": "(Nods) We must confront Teferi, but diplomacy should be our first approach. He's a powerful mage, and if he refuses to cooperate, we may have to resort to more forceful measures to restore temporal stability.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "27",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll do what I can to reason with him, Scholar. Shandalar's timeline must be protected. (Accept Quest)",
+								"text": "(Appreciative nod) Your bravery is commendable. Remember, time magic is delicate and dangerous. Approach Teferi with caution, but be resolute in your mission to save Shandalar from temporal disaster."
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "I don't think this is a quest for me  (Decline Quest)",
+								"text": "The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Find Teferi's Hideout and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Teferi"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Teferi"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal"
+	]
+},
+{
+	"id": 37,
+	"isTemplate": true,
+	"name": "The Drunken Plea",
+	"description": "Confront the Phyrexians",
+	"offerDialog": {
+		"text": "Hey there, bud! You see...hiccup... them metal monstrosities, the Phyrexians? Yeah, they're up to no good, I tell ya. I saw 'em, I did!",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Phyrexians? What are you talking about, Tipsy Tim?",
+				"text": "These...hiccup... metal freaks! They ain't from around here, I swear. Saw 'em with me own eyes. They got them twisted, mechanical...things! Up to somethin' bad, they are!",
+				"options": [
+					{
+						"name": "You've had quite a few drinks, Tim. Are you sure you're not imagining things?",
+						"text": "Nonsense! Me eyes don't lie, friend. Them Phyrexians are real trouble, I'm tellin' ya. You gotta go, see for yourself. Kick 'em outta Shandalar!",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "27",
+										"POIReference": ""
+									}
+								],
+								"name": "Alright, Tim, I'll look into it. But first, maybe you should lay off the ale for a while.",
+								"text": "Yeah, yeah, maybe you're right. But don't forget about them Phyrexians! Shandalar needs ya, and so does ol' Tipsy Tim!"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "Sorry, I don't have time for this (Decline Text)",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, These...hiccup... metal freaks! They ain't from around here, I swear. Saw 'em with me own eyes. They got them twisted, mechanical...things! Up to somethin' bad, they are!  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "The Phyrexian camp and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Phyrexian"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"POITags": [
+				"Phyrexian"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"mountain_capital",
+		"forest_capital",
+		"plains_capital",
+		"swamp_capital"
+	]
 }
 ]

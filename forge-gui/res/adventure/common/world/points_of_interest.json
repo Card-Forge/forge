@@ -2130,7 +2130,8 @@
 	"questTags": [
 		"Boss",
 		"Planeswalker",
-		"Hostile"
+		"Hostile",
+		"Kiora"
 	]
 },
 {
@@ -2293,7 +2294,7 @@
 	"name": "MageTowerC8",
 	"type": "dungeon",
 	"count": 3,
-	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
 	"map": "../common/maps/map/magetower/magetower_8.tmx",
 	"radiusFactor": 0.8,
@@ -3289,7 +3290,8 @@
 	"questTags": [
 		"Hostile",
 		"Boss",
-		"Planeswalker"
+		"Planeswalker",
+		"Teferi"
 	]
 },
 {
