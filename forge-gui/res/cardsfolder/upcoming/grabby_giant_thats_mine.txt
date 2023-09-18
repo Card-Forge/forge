@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Giant
 PT:4/3
 K:Reach
-A:AB$ Draw | Cost$ T Sac<1/Artifact;Land/artifact or land> | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 2 R Sac<1/Artifact;Land/artifact or land> | SpellDescription$ Draw a card.
 DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 DeckHints:Type$Artifact
 AlternateMode:Adventure
