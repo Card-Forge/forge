@@ -584,7 +584,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Special check for Lion's Eye Diamond
-        if (sa.isManaAbility() && c.getGame().getStack().isFrozen() && isInstantSpeed()) {
+        if (sa.isManaAbility() && c.getGame().costPaymentStack.peek() != null && isInstantSpeed()) {
             return false;
         }
 
