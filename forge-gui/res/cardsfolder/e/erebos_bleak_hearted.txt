@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Legendary Enchantment Creature God
 PT:5/6
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to black is less than five, CARDNAME is not a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to black is less than five, NICKNAME isn't a creature.
 SVar:X:Count$Devotion.Black
 SVar:BuffedBy:Permanent.Black
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ ABDraw | TriggerDescription$ Whenever another creature you control dies, you may pay 2 life. If you do, draw a card.

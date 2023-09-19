@@ -2,7 +2,7 @@ Name:Kolvori, God of Kinship
 ManaCost:2 G G
 Types:Legendary Creature God
 PT:2/4
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 2 | AddKeyword$ Vigilance | IsPresent$ Creature.Legendary+YouCtrl | PresentCompare$ GE3 | Description$ As long as you control three or more legendary creatures, CARDNAME gets +4/+2 and has vigilance.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 2 | AddKeyword$ Vigilance | IsPresent$ Creature.Legendary+YouCtrl | PresentCompare$ GE3 | Description$ As long as you control three or more legendary creatures, NICKNAME gets +4/+2 and has vigilance.
 A:AB$ Dig | Cost$ 1 G T | DigNum$ 6 | ChangeNum$ 1 | ChangeValid$ Creature.Legendary | Optional$ True | RestRandomOrder$ True | SpellDescription$ Look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 AlternateMode:Modal
 Oracle:As long as you control three or more legendary creatures, Kolvori gets +4/+2 and has vigilance.\n{1}{G}, {T}: Look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
