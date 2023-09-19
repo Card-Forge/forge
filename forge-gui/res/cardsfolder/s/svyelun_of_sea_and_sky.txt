@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Legendary Creature Merfolk God
 PT:3/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | IsPresent$ Merfolk.Other+YouCtrl | PresentCompare$ GE2 | Description$ As long as you control two other Merfolk, CARDNAME has indestructible. (Damage and effects that say "destroy" don't destroy it.)
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddKeyword$ Ward:1 | Description$ Other Merfolk you control have ward {1}. (Whenever another Merfolk you control becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
 DeckNeeds:Type$Merfolk

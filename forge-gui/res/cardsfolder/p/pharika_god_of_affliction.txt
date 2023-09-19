@@ -3,7 +3,7 @@ ManaCost:1 B G
 Types:Legendary Enchantment Creature God
 PT:5/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to black and green is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to black and green is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Black.Green
 A:AB$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | AITgts$ Card.YouOwn | AILogic$ AtOppEOT | AITgtOwnCards$ True | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_e_snake_deathtouch | TokenOwner$ TargetedController

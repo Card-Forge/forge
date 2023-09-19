@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Devil
 PT:3/2
 K:Menace
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, Sin Prodder deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, CARDNAME deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand.
 SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card | ImprintRevealed$ True | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBProd | SubAbility$ DBPutIntoHand
 SVar:DBProd:DB$ GenericChoice | Defined$ Remembered | Choices$ DBGraveAndDamage,DoNothing | ChoicePrompt$ Have them put the card into their graveyard? | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | AILogic$ SinProdder
