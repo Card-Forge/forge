@@ -990,7 +990,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                if (!sa.allowsPayingWithShard(m.getSourceCard(), ManaAtom.fromName(s))) {
+                if (!sa.allowsPayingWithShard(sourceCard, ManaAtom.fromName(s))) {
                     continue;
                 }
 
@@ -1008,7 +1008,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                if (!sa.allowsPayingWithShard(m.getSourceCard(), c)) {
+                if (!sa.allowsPayingWithShard(sourceCard, c)) {
                     continue;
                 }
 
@@ -1020,7 +1020,7 @@ public class ComputerUtilMana {
             return false;
         }
 
-        if (!sa.allowsPayingWithShard(m.getSourceCard(), MagicColor.fromName(m.getOrigProduced()))) {
+        if (!sa.allowsPayingWithShard(sourceCard, MagicColor.fromName(m.getOrigProduced()))) {
             return false;
         }
 

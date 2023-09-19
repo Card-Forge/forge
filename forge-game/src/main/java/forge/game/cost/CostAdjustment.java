@@ -411,7 +411,7 @@ public class CostAdjustment {
                 minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
             }
 
-            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana - sumReduced);
+            final int maxReduction = manaCost.getConvertedManaCost() - minMana - sumReduced;
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }
