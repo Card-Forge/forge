@@ -55,3 +55,4 @@ ScryfallCode=PMEI
 52 R Worn Powerstone @Henry G. Higginbotham
 53 R Gingerbrute @ Vincent Proce
 54 R Ruin Crab @Simon Dominic
+55 R Avalanche Riders @Lake Hurwitz
