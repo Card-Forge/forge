@@ -118,6 +118,7 @@ public enum AbilityKey {
     ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
     Sides("Sides"),
+    SimultaneousETB("SimultaneousETB"),
     Source("Source"),
     Sources("Sources"),
     SourceSA("SourceSA"),

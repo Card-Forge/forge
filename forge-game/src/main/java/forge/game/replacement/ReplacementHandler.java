@@ -312,6 +312,7 @@ public class ReplacementHandler {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
+                tailend.setReplacingObjectsFrom(runParams, AbilityKey.SimultaneousETB);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 

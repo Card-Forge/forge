@@ -398,10 +398,13 @@ public class DigEffect extends SpellAbilityEffect {
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
-                            if (destZone1.equals(ZoneType.Battlefield) && sa.hasParam("WithCounter")) {
-                                final int numCtr = AbilityUtils.calculateAmount(host,
-                                        sa.getParamOrDefault("WithCounterNum", "1"), sa);
-                                c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                            if (destZone1.equals(ZoneType.Battlefield)) {
+                                moveParams.put(AbilityKey.SimultaneousETB, movedCards);
+                                if (sa.hasParam("WithCounter")) {
+                                    final int numCtr = AbilityUtils.calculateAmount(host,
+                                            sa.getParamOrDefault("WithCounterNum", "1"), sa);
+                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                                }
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                                 // need LKI before Animate does apply
@@ -477,8 +480,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     } else {
                         // just move them randomly
-                        for (int i = 0; i < rest.size(); i++) {
-                            Card c = rest.get(i);
+                        for (Card c : rest) {
                             final ZoneType origin = c.getZone().getZoneType();
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
                             c = game.getAction().moveTo(toZone, c, sa);

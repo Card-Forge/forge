@@ -573,195 +573,194 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
-            } else {
-                if (destination.equals(ZoneType.Battlefield)) {
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    if (sa.isReplacementAbility()) {
-                        ReplacementEffect re = sa.getReplacementEffect();
-                        moveParams.put(AbilityKey.ReplacementEffect, re);
-                        if (ReplacementType.Moved.equals(re.getMode()) && sa.getReplacingObject(AbilityKey.CardLKI) != null) {
-                            moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
-                        }
+            } else if (destination.equals(ZoneType.Battlefield)) {
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                moveParams.put(AbilityKey.SimultaneousETB, tgtCards);
+                if (sa.isReplacementAbility()) {
+                    ReplacementEffect re = sa.getReplacementEffect();
+                    moveParams.put(AbilityKey.ReplacementEffect, re);
+                    if (ReplacementType.Moved.equals(re.getMode()) && sa.getReplacingObject(AbilityKey.CardLKI) != null) {
+                        moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
                     }
+                }
 
-                    if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
-                        gameCard.setTapped(true);
-                    }
-                    if (sa.hasParam("Transformed")) {
-                        if (gameCard.isTransformable()) {
-                            // need LKI before Animate does apply
-                            if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
-                            }
-                            gameCard.changeCardState("Transform", null, sa);
-                        } else {
-                            // If it can't Transform, don't change zones.
-                            continue;
-                        }
-                    }
-                    if (sa.hasParam("WithCountersType")) {
-                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
-                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        gameCard.addEtbCounter(cType, cAmount, player);
-                    }
-                    if (sa.hasParam("GainControl")) {
-                        final String g = sa.getParam("GainControl");
-                        Player newController = g.equals("True") ? player :
-                                AbilityUtils.getDefinedPlayers(hostCard, g, sa).get(0);
-                        if (newController != null) {
-                            if (newController != gameCard.getController()) {
-                                gameCard.runChangeControllerCommands();
-                            }
-                            gameCard.setController(newController, game.getNextTimestamp());
-                        }
-                    }
-                    if (sa.hasParam("AttachedTo")) {
-                        CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
-                        if (list.isEmpty()) {
-                            list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), hostCard.getController(), hostCard, sa);
-                        }
-
-                        // only valid choices are when they could be attached
-                        // TODO for multiple Auras entering attached this way, need to use LKI info
-                        if (!list.isEmpty()) {
-                            list = CardLists.filter(list, CardPredicates.canBeAttached(gameCard, sa));
-                        }
-                        if (!list.isEmpty()) {
-                            Map<String, Object> params = Maps.newHashMap();
-                            params.put("Attach", gameCard);
-                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
-
-                            // TODO can't attach later or moveToPlay would attach indirectly
-                            // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
-                            gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
-                        } else { // When it should enter the battlefield attached to an illegal permanent it fails
-                            continue;
-                        }
-                    }
-
-                    if (sa.hasParam("AttachedToPlayer")) {
-                        FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
-                        if (!list.isEmpty()) {
-                            Map<String, Object> params = Maps.newHashMap();
-                            params.put("Attach", gameCard);
-                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
-                            gameCard.attachToEntity(attachedTo, sa);
-                        }
-                        else { // When it should enter the battlefield attached to an illegal player it fails
-                            continue;
-                        }
-                    }
-
-                    if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
+                    gameCard.setTapped(true);
+                }
+                if (sa.hasParam("Transformed")) {
+                    if (gameCard.isTransformable()) {
                         // need LKI before Animate does apply
                         if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                             moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
                         }
-
-                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                        hostCard.addRemembered(gameCard);
-                        AbilityUtils.resolve(animate);
-                        hostCard.removeRemembered(gameCard);
-                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
-                    }
-
-                    // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
-                    if (sa.hasParam("FaceDown")) {
-                        gameCard.turnFaceDown(true);
-                        CardFactoryUtil.setFaceDownState(gameCard, sa);
-                    }
-
-                    movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
-                    // below stuff only if it changed zones
-                    if (movedCard.getZone().equals(originZone)) {
+                        gameCard.changeCardState("Transform", null, sa);
+                    } else {
+                        // If it can't Transform, don't change zones.
                         continue;
                     }
-                    if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
-                        movedCard.setUnearthed(true);
-                        movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false,
-                                game.getNextTimestamp(), 0, true);
-                        registerDelayedTrigger(sa, "Exile", Lists.newArrayList(movedCard));
-                        addLeaveBattlefieldReplacement(movedCard, sa, "Exile");
-                    }
-                    if (sa.hasParam("LeaveBattlefield")) {
-                        addLeaveBattlefieldReplacement(movedCard, sa, sa.getParam("LeaveBattlefield"));
-                    }
-                    if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
-                        combatChanged = true;
-                    }
-                    if (sa.isNinjutsu()) {
-                        // Ninjutsu need to get the Defender of the Returned Creature
-                        final Card returned = sa.getPaidList("Returned", true).getFirst();
-                        final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
-                        game.getCombat().addAttacker(movedCard, defender);
-                        game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
-                        combatChanged = true;
-                    }
-
-                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
-                        CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachAfter"), sa);
-                        if (list.isEmpty()) {
-                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), hostCard.getController(), hostCard, sa);
+                }
+                if (sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    gameCard.addEtbCounter(cType, cAmount, player);
+                }
+                if (sa.hasParam("GainControl")) {
+                    final String g = sa.getParam("GainControl");
+                    Player newController = g.equals("True") ? player :
+                        AbilityUtils.getDefinedPlayers(hostCard, g, sa).get(0);
+                    if (newController != null) {
+                        if (newController != gameCard.getController()) {
+                            gameCard.runChangeControllerCommands();
                         }
-                        if (!list.isEmpty()) {
-                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(gameCard.getName()));
-                            Map<String, Object> params = Maps.newHashMap();
-                            params.put("Attach", gameCard);
-                            Card attachedTo = chooser.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            movedCard.attachToEntity(attachedTo, sa);
-                        }
+                        gameCard.setController(newController, game.getNextTimestamp());
                     }
-                } else {
-                    // might set before card is moved only for nontoken
-                    if (destination.equals(ZoneType.Exile)) {
-                        handleExiledWith(gameCard, sa);
+                }
+                if (sa.hasParam("AttachedTo")) {
+                    CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
+                    if (list.isEmpty()) {
+                        list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), hostCard.getController(), hostCard, sa);
                     }
 
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
-
-                    if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
-                        game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
-                        commandCards.add(movedCard); //add to list to reveal the commandzone cards
+                    // only valid choices are when they could be attached
+                    // TODO for multiple Auras entering attached this way, need to use LKI info
+                    if (!list.isEmpty()) {
+                        list = CardLists.filter(list, CardPredicates.canBeAttached(gameCard, sa));
                     }
+                    if (!list.isEmpty()) {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Attach", gameCard);
+                        Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
 
-                    // If a card is Exiled from the stack, remove its spells from the stack
-                    if (sa.hasParam("Fizzle")) {
-                        if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand)
-                                || gameCard.isInZone(ZoneType.Stack) || gameCard.isInZone(ZoneType.Command)) {
-                            // This only fizzles spells, not anything else.
-                            game.getStack().remove(gameCard);
-                        }
+                        // TODO can't attach later or moveToPlay would attach indirectly
+                        // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
+                        gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
+                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        continue;
                     }
+                }
 
-                    if (sa.hasParam("WithCountersType")) {
-                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
-                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        movedCard.addCounter(cType, cAmount, player, counterTable);
+                if (sa.hasParam("AttachedToPlayer")) {
+                    FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
+                    if (!list.isEmpty()) {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Attach", gameCard);
+                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
+                        gameCard.attachToEntity(attachedTo, sa);
                     }
+                    else { // When it should enter the battlefield attached to an illegal player it fails
+                        continue;
+                    }
+                }
 
-                    if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
-                        movedCard.turnFaceDown(true);
-                    }
-                    if (sa.hasParam("Foretold")) {
-                        movedCard.setForetold(true);
-                        movedCard.setForetoldThisTurn(true);
-                        if (sa.hasParam("ForetoldCost")) {
-                            movedCard.setForetoldCostByEffect(true);
-                        }
-                        // look at the exiled card
-                        movedCard.addMayLookTemp(player);
+                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                    // need LKI before Animate does apply
+                    if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                        moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
                     }
 
-                    if (sa.hasParam("TrackDiscarded")) {
-                        movedCard.setDiscarded(true);
+                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
+                    hostCard.addRemembered(gameCard);
+                    AbilityUtils.resolve(animate);
+                    hostCard.removeRemembered(gameCard);
+                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
+                }
+
+                // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
+                if (sa.hasParam("FaceDown")) {
+                    gameCard.turnFaceDown(true);
+                    CardFactoryUtil.setFaceDownState(gameCard, sa);
+                }
+
+                movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
+                // below stuff only if it changed zones
+                if (movedCard.getZone().equals(originZone)) {
+                    continue;
+                }
+                if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
+                    movedCard.setUnearthed(true);
+                    movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false,
+                            game.getNextTimestamp(), 0, true);
+                    registerDelayedTrigger(sa, "Exile", Lists.newArrayList(movedCard));
+                    addLeaveBattlefieldReplacement(movedCard, sa, "Exile");
+                }
+                if (sa.hasParam("LeaveBattlefield")) {
+                    addLeaveBattlefieldReplacement(movedCard, sa, sa.getParam("LeaveBattlefield"));
+                }
+                if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+                    combatChanged = true;
+                }
+                if (sa.isNinjutsu()) {
+                    // Ninjutsu need to get the Defender of the Returned Creature
+                    final Card returned = sa.getPaidList("Returned", true).getFirst();
+                    final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
+                    game.getCombat().addAttacker(movedCard, defender);
+                    game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
+                    combatChanged = true;
+                }
+
+                if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                    CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachAfter"), sa);
+                    if (list.isEmpty()) {
+                        list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), hostCard.getController(), hostCard, sa);
                     }
+                    if (!list.isEmpty()) {
+                        String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(gameCard.getName()));
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Attach", gameCard);
+                        Card attachedTo = chooser.getController().chooseSingleEntityForEffect(list, sa, title, params);
+                        movedCard.attachToEntity(attachedTo, sa);
+                    }
+                }
+            } else {
+                // might set before card is moved only for nontoken
+                if (destination.equals(ZoneType.Exile)) {
+                    handleExiledWith(gameCard, sa);
+                }
+
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
+
+                if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
+                    game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
+                    commandCards.add(movedCard); //add to list to reveal the commandzone cards
+                }
+
+                // If a card is Exiled from the stack, remove its spells from the stack
+                if (sa.hasParam("Fizzle")) {
+                    if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand)
+                            || gameCard.isInZone(ZoneType.Stack) || gameCard.isInZone(ZoneType.Command)) {
+                        // This only fizzles spells, not anything else.
+                        game.getStack().remove(gameCard);
+                    }
+                }
+
+                if (sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    movedCard.addCounter(cType, cAmount, player, counterTable);
+                }
+
+                if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
+                    movedCard.turnFaceDown(true);
+                }
+                if (sa.hasParam("Foretold")) {
+                    movedCard.setForetold(true);
+                    movedCard.setForetoldThisTurn(true);
+                    if (sa.hasParam("ForetoldCost")) {
+                        movedCard.setForetoldCostByEffect(true);
+                    }
+                    // look at the exiled card
+                    movedCard.addMayLookTemp(player);
+                }
+
+                if (sa.hasParam("TrackDiscarded")) {
+                    movedCard.setDiscarded(true);
                 }
             }
             if (!movedCard.getZone().equals(originZone)) {
@@ -1305,6 +1304,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
                 else if (destination.equals(ZoneType.Battlefield)) {
+                    moveParams.put(AbilityKey.SimultaneousETB, chosenCards);
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
                     }
