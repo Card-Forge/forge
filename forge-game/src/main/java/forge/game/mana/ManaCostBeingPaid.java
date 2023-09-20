@@ -302,7 +302,7 @@ public class ManaCostBeingPaid {
                 for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
                     final ManaCostShard eShard = e.getKey();
                     sc = e.getValue();
-                    if (eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
+                    if (eShard != ManaCostShard.COLORED_X && eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
                         if (otherSubtract >= sc.totalCount) {
                             otherSubtract -= sc.totalCount;
                             sc.xCount = sc.totalCount = 0;
@@ -374,6 +374,20 @@ public class ManaCostBeingPaid {
                             if (sc.xCount > sc.totalCount) {
                                 sc.xCount = sc.totalCount;
                             }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    } else if (sc.xCount > 0) { // X part that can only be paid by specific color
+                        if (otherSubtract >= sc.xCount) {
+                            otherSubtract -= sc.xCount;
+                            sc.totalCount -= sc.xCount;
+                            sc.xCount = 0;
+                            if (sc.totalCount == 0) {
+                                toRemove.add(eShard);
+                            }
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            sc.xCount -= otherSubtract;
                             // nothing more left in otherSubtract
                             return;
                         }
@@ -717,10 +731,10 @@ public class ManaCostBeingPaid {
         }
         return result;
     }
-    
+
     public boolean hasAnyKind(int kind) {
-        for (ManaCostShard s : unpaidShards.keySet()) {
-            if (s.isOfKind(kind)) {
+        for (Map.Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+            if (e.getKey().isOfKind(kind) && e.getValue().totalCount > e.getValue().xCount) {
                 return true;
             }
         }
