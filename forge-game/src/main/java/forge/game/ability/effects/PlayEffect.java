@@ -14,6 +14,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -114,9 +115,13 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Valid")) {
             List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
-            tgtCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa));
+            CardCollectionView zoneCards = game.getCardsIn(zones);
+            if (zones.contains(ZoneType.Sideboard)) {
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(zoneCards), zoneCards);
+            }
+            tgtCards = new CardCollection(AbilityUtils.filterListByType(zoneCards, sa.getParam("Valid"), sa));
             if (sa.hasParam("ShowCards")) {
-                showCards = AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa);
+                showCards = AbilityUtils.filterListByType(zoneCards, sa.getParam("ShowCards"), sa);
             }
         } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
