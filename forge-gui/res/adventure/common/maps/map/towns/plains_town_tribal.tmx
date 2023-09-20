@@ -34,9 +34,9 @@
   <object id="41" template="../../obj/shop.tx" x="97" y="305">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="56" template="../../obj/shop.tx" x="208" y="144">
@@ -58,9 +58,9 @@
   <object id="43" template="../../obj/shop.tx" x="352" y="306">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="224" y="211"/>
@@ -75,33 +75,33 @@
   <object id="49" template="../../obj/shop.tx" x="304" y="306">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="50" template="../../obj/shop.tx" x="256" y="306">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="51" template="../../obj/shop.tx" x="192" y="306">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="52" template="../../obj/shop.tx" x="144" y="306">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
     <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
-    <property name="uncommonShopList" value="Creature2White,Creature,White"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
   <object id="53" template="../../obj/spellsmith.tx" x="157" y="225"/>

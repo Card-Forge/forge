@@ -35,7 +35,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -43,7 +43,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -51,7 +51,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -67,7 +67,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -75,7 +75,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -83,7 +83,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -91,7 +91,7 @@
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>

@@ -4291,7 +4291,7 @@
 {
 	"name": "Challenger 20",
 	"nameOverride": "Challenger",
-	"sprite": "sprites/enemy/undead/doppelganger.atlas",
+	"sprite": "sprites/enemy/aberration/challenger.atlas",
 	"deck": [
 		"decks/standard/challenger_20_allied_fires.dck",
 		"decks/standard/challenger_20_cavalcade_charge.dck",
@@ -4385,7 +4385,7 @@
 {
 	"name": "Challenger 21",
 	"nameOverride": "Challenger",
-	"sprite": "sprites/enemy/undead/doppelganger.atlas",
+	"sprite": "sprites/enemy/aberration/challenger.atlas",
 	"deck": [
 		"decks/standard/challenger_21_azorius_control.dck",
 		"decks/standard/challenger_21_dimir_rogue.dck",
@@ -4479,7 +4479,7 @@
 {
 	"name": "Challenger 22",
 	"nameOverride": "Challenger",
-	"sprite": "sprites/enemy/undead/doppelganger.atlas",
+	"sprite": "sprites/enemy/aberration/challenger.atlas",
 	"deck": [
 		"decks/standard/challenger_22_dimir_control.dck",
 		"decks/standard/challenger_22_gruul_stompy.dck",
@@ -5457,6 +5457,56 @@
 	]
 },
 {
+	"name": "Chimera",
+	"sprite": "sprites/enemy/aberration/chimera.atlas",
+	"deck": [
+		"decks/standard/chimera.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"subTypes": [
+				"Chimera"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Chimera",
+		"Beast",
+		"Wild",
+		"Huge",
+		"Wandering",
+		"IdentityTimur"
+	]
+},
+{
 	"name": "Clay Golem",
 	"sprite": "sprites/enemy/construct/golem_2.atlas",
 	"deck": [
@@ -5594,9 +5644,9 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 1,
-	"scale": 0.8,
 	"difficulty": 0.1,
 	"speed": 31,
+	"scale": 0.8,
 	"life": 25,
 	"rewards": [
 		{
@@ -5656,8 +5706,8 @@
 	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"scale": 0.8,
 	"speed": 31,
+	"scale": 0.8,
 	"life": 25,
 	"rewards": [
 		{
@@ -5896,12 +5946,15 @@
 },
 {
 	"name": "Construct",
+	"nameOverride": "Rustic Construct",
 	"sprite": "sprites/enemy/construct/golem_3.atlas",
 	"deck": [
 		"decks/standard/artificer.dck",
-		"decks/standard/construct.json"
+		"decks/standard/construct.json",
+		"decks/standard/rustic_construct.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
@@ -8911,9 +8964,9 @@
 },
 {
 	"name": "Eldrazi",
-	"sprite": "sprites/enemy/elemental/mindelemental.atlas",
+	"sprite": "sprites/enemy/aberration/eldrazi/eldrazi.atlas",
 	"deck": [
-		"decks/standard/eldrazi.json"
+		"decks/standard/eldrazi.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -8965,21 +9018,122 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
 			"type": "gold",
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"subTypes": [
+				"Eldrazi"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "BGU",
+	"questTags": [
+		"Aberration",
+		"Eldrazi",
+		"Wandering",
+		"Huge",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Eldrazi Devastator",
+	"sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
+	"deck": [
+		"decks/standard/eldrazilarge.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"Mythic Rare",
+				"Uncommon"
+			],
+			"subTypes": [
+				"Eldrazi"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 25,
+			"addMaxCount": 50
 		}
 	],
 	"colors": "BGU",
@@ -11180,6 +11334,92 @@
 	]
 },
 {
+	"name": "Geonid Death-Cap",
+	"sprite": "sprites/enemy/aberration/geonid.atlas",
+	"deck": [
+		"decks/standard/geonid.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardText": "Saproling"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Black",
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			],
+			"colorType": "Any"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Black"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Fungus"
+			],
+			"colorType": "Any"
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Fungus",
+		"Inhuman",
+		"Nature",
+		"Wild",
+		"Subterranean",
+		"IdentityGreen",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Ghalta",
 	"sprite": "sprites/enemy/beast/ghalta.atlas",
 	"deck": [
@@ -12920,11 +13160,14 @@
 },
 {
 	"name": "Golem",
+	"nameOverride": "Rustic Golem",
 	"sprite": "sprites/enemy/construct/golem.atlas",
 	"deck": [
-		"decks/standard/golem.json"
+		"decks/standard/golem.json",
+		"decks/standard/rustic_golem.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -14703,6 +14946,53 @@
 		"IdentityBlack",
 		"IdentityRed",
 		"IdentityMardu",
+		"BiomeWhite"
+	]
+},
+{
+	"name": "Human Bard",
+	"sprite": "sprites/enemy/humanoid/human/bard/humanbard.atlas",
+	"deck": [
+		"decks/standard/humanbard.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 3,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 50
+		}
+	],
+	"colors": "RW",
+	"questTags": [
+		"Human",
+		"Soldier",
+		"IdentityWhite",
+		"IdentityRed",
+		"IdentityGruul",
 		"BiomeWhite"
 	]
 },
@@ -17255,6 +17545,62 @@
 	]
 },
 {
+	"name": "Maelstrom Angel",
+	"sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
+	"deck": [
+		"decks/standard/maelstromangel.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Enchantment"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Angel",
+		"Floating",
+		"Holy",
+		"Humanoid",
+		"IdentityWhite",
+		"Mythical",
+		"Warrior"
+	]
+},
+{
 	"name": "Magma Elemental",
 	"sprite": "sprites/enemy/elemental/magmaelemental.atlas",
 	"deck": [
@@ -18972,6 +19318,98 @@
 	]
 },
 {
+	"name": "Nantuko Guard",
+	"sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
+	"deck": [
+		"decks/standard/nantuko_morpher.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"scale":0.6,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"subTypes": [
+				"Eldrazi"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "BGU",
+	"questTags": [
+		"Insect",
+		"Humanoid",
+		"Wandering",
+		"Huge",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai"
+			]
+},
+{
 	"name": "Necrogoyf",
 	"sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
 	"deck": [
@@ -18982,7 +19420,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"scale": 0.5,
+	"scale": 0.6,
 	"life": 16,
 	"rewards": [
 		{
@@ -19350,7 +19788,7 @@
 },
 {
 	"name": "Ooze Boss",
-	"sprite": "sprites/enemy/ooze/oozeboss.atlas",
+	"sprite": "sprites/enemy/ooze/giant_slime.atlas",
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
 	],
@@ -20070,6 +20508,64 @@
 	]
 },
 {
+	"name": "Pharaoh",
+	"sprite": "sprites/enemy/undead/pharaoh.atlas",
+	"deck": [
+		"decks/standard/pharaoh.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.5,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 5,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 150
+		}
+	],
+	"questTags": [
+		"Undead",
+		"Humanoid",
+		"Loner",
+		"Territorial",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityOrzhov",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Plant",
 	"sprite": "sprites/enemy/plant/plant.atlas",
 	"deck": [
@@ -20491,7 +20987,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.75,
+	"scale": 0.65,
 	"life": 18,
 	"rewards": [
 		{
@@ -22658,6 +23154,7 @@
 },
 {
 	"name": "Slimefoot",
+	"nameOverride": "Fungus of Slimefoot",
 	"sprite": "sprites/enemy/plant/slimefoot.atlas",
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
@@ -24220,7 +24717,7 @@
 	"difficulty": 0.8,
 	"speed": 31,
 	"scale": 0.5,
-	"life": 25,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "gold",
