@@ -1079,7 +1079,7 @@ public class GameAction {
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
 
-        Visitor<Card> visitor = new Visitor<Card>() {
+        game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public boolean visit(final Card c) {
                 // need to get Card from preList if able
@@ -1094,12 +1094,7 @@ public class GameAction {
                  }
                  return true;
             }
-        };
-        if (Iterables.any(preList, CardPredicates.inZone(ZoneType.Sideboard))) {
-            visitor.visitAll(game.getCardsIn(ZoneType.Sideboard));
-        } else {
-            game.forEachCardInGame(visitor);
-        }
+        }, true);
 
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
