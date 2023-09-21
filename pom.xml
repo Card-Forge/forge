@@ -4,7 +4,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.58-SNAPSHOT</version>
+    <version>1.6.59-SNAPSHOT</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
