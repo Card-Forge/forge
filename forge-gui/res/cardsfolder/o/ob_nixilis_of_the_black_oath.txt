@@ -3,8 +3,8 @@ ManaCost:3 B B
 Types:Legendary Planeswalker Nixilis
 Loyalty:3
 Text:CARDNAME can be your commander.
-A:AB$ LoseLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+A:AB$ LoseLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way. | StackDescription$ SpellDescription
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ None
 SVar:AFLifeLost:Number$0
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBLoselife | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
 SVar:DBLoselife:DB$ LoseLife | LifeAmount$ 2

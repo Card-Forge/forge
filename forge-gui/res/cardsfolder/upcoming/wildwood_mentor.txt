@@ -1,0 +1,13 @@
+Name:Wildwood Mentor
+ManaCost:2 G
+Types:Creature Treefolk
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a token enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+X until end of turn, where X is CARDNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | NumDef$ X
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Token
+DeckHas:Ability$Counters
+Oracle:Whenever a token enters the battlefield under your control, put a +1/+1 counter on Wildwood Mentor.\nWhenever Wildwood Mentor attacks, another target attacking creature gets +X/+X until end of turn, where X is Wildwood Mentor's power.

@@ -12,7 +12,7 @@ Oracle:Cruel Somnophage's power and toughness are each equal to the number of cr
 ALTERNATE
 
 Name:Can't Wake Up
-ManaCost:1 U U
+ManaCost:1 U
 Types:Sorcery Adventure
 A:SP$ Mill | NumCards$ 4 | ValidTgts$ Player | SpellDescription$ Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)

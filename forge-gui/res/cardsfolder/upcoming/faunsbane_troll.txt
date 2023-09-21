@@ -1,0 +1,9 @@
+Name:Faunsbane Troll
+ManaCost:2 B G
+Types:Creature Troll
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Monster Role token attached to it. (Enchanted creature gets +1/+1 and has trample.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_monster | AttachedTo$ Self
+A:AB$ Fight | Defined$ Self | Cost$ Sac<1/Aura.Attached> | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ReplaceDyingDefined$ Targeted | SorcerySpeed$ True | SpellDescription$ CARDNAME fights target creature you don't control. If that creature would die this turn, exile it instead. Activate only as a sorcery.
+DeckHas:Ability$Token|Sacrifice & Type$Aura|Enchantment|Role
+Oracle:When Faunsbane Troll enters the battlefield, create a Monster Role token attached to it. (Enchanted creature gets +1/+1 and has trample.)\n{1}, Sacrifice an Aura attached to Faunsbane Troll: Faunsbane Troll fights target creature you don't control. If that creature would die this turn, exile it instead. Activate only as a sorcery.

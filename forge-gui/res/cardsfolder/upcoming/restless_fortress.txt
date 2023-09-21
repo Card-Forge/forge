@@ -9,4 +9,4 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain & Type$Nightmare
 SVar:HasAttackEffect:TRUE
-Oracle:Shambling Vent enters the battlefield tapped.\n{T}: Add {W} or {B}.\n\n{2}{W}{B}: Restless Fortress becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.\nWhenever Restless Fortress attacks, defending player loses 2 life and you gain 2 life.
+Oracle:Restless Fortress enters the battlefield tapped.\n{T}: Add {W} or {B}.\n\n{2}{W}{B}: Restless Fortress becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.\nWhenever Restless Fortress attacks, defending player loses 2 life and you gain 2 life.

@@ -1,0 +1,13 @@
+Name:Rowan's Grim Search
+ManaCost:2 B
+Types:Instant
+K:Bargain
+A:SP$ PeekAndReveal | PeekAmount$ 4 | NoReveal$ True | RememberPeeked$ True | Condition$ Bargain | SubAbility$ DBChangeZone | SpellDescription$ If this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | ChangeType$ Card.IsRemembered | Condition$ Bargain | ChangeNum$ 2 | ImprintChanged$ True | Destination$ Library | SubAbility$ DBChangeAll
+SVar:DBChangeAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Library | Condition$ Bargain | Destination$ Graveyard | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and you lose 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Token & Type$Artifact|Enchantment
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nIf this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard.\nYou draw two cards and you lose 2 life.

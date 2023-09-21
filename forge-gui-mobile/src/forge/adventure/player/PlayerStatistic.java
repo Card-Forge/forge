@@ -110,8 +110,12 @@ public class PlayerStatistic implements SaveFileContent {
         else
             winLossRecord.clear();
 
-        if (data!=null&&data.containsKey("completedEvents"))
+        if (data!=null&&data.containsKey("completedEvents")) {
             completedEvents = (ArrayList<AdventureEventData>) data.readObject("completedEvents");
+            if (completedEvents == null) {
+                completedEvents = new ArrayList<>();
+            }
+        }
         else
             completedEvents.clear();
     }

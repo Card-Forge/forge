@@ -227,7 +227,7 @@ public class PlayAi extends SpellAbilityAi {
             final Iterator<Card> itr = cards.iterator();
             while (itr.hasNext()) {
                 final Card c = itr.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa))) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , source, sa))) {
                     itr.remove();
                 }
             }

@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Myr
 PT:5/6
 Text:Spend only mana produced by creatures to cast this spell.
-A:SP$ PermanentCreature | Cost$ Mana<2\Creature.inZoneBattlefield>
+A:SP$ PermanentCreature | Cost$ 2 | ManaRestriction$ Creature.inZoneBattlefield
 AI:RemoveDeck:Random
 Oracle:Spend only mana produced by creatures to cast this spell.

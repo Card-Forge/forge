@@ -1,0 +1,116 @@
+giant_slime.png
+size: 1024,672
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 24,161
+  size: 31, 31
+Idle 
+  xy: 0,56
+  size: 64, 40
+Idle 
+  xy: 64,56
+  size: 64, 40
+Idle 
+  xy: 128,56
+  size: 64, 40
+Idle 
+  xy: 192,56
+  size: 64, 40
+Idle 
+  xy: 256,56
+  size: 64, 40
+Idle 
+  xy: 320,56
+  size: 64, 40
+Idle 
+  xy: 384,56
+  size: 64, 40
+Idle 
+  xy: 448,56
+  size: 64, 40
+Walk 
+  xy: 0,142
+  size: 64, 50
+Walk 
+  xy: 64,142
+  size: 64, 50
+Walk 
+  xy: 128,142
+  size: 64, 50
+Walk 
+  xy: 192,142
+  size: 64, 50
+Walk 
+  xy: 256,142
+  size: 64, 50
+Walk 
+  xy: 320,142
+  size: 64, 50
+Walk 
+  xy: 384,142
+  size: 64, 50
+Walk 
+  xy: 448,142
+  size: 64, 50
+Attack 
+  xy: 0,238
+  size: 64, 50
+Attack 
+  xy: 64,238
+  size: 64, 50
+Attack 
+  xy: 128,238
+  size: 64, 50
+Attack 
+  xy: 192,238
+  size: 64, 50
+Attack 
+  xy: 256,238
+  size: 64, 50
+Attack 
+  xy: 320,238
+  size: 64, 50
+Attack 
+  xy: 384,238
+  size: 64, 50
+Attack 
+  xy: 448,238
+  size: 64, 50
+Attack 
+  xy: 512,238
+  size: 64, 50
+Attack 
+  xy: 576,238
+  size: 64, 50
+Attack 
+  xy: 640,238
+  size: 64, 50
+Death 
+  xy: 0,622
+  size: 64, 50
+Death  
+  xy: 64,622
+  size: 64, 50
+Death 
+  xy: 128,622
+  size: 64, 50
+Death 
+  xy: 192,622
+  size: 64, 50
+Death 
+  xy: 256,622
+  size: 64, 50
+Death 
+  xy:320,622
+  size: 64, 50
+Death 
+  xy: 384,622
+  size: 64, 50
+Death 
+  xy: 448,622
+  size: 64, 50
+Death 
+  xy: 512,622
+  size: 64, 50

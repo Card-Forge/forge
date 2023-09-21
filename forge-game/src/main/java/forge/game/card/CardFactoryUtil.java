@@ -1801,7 +1801,7 @@ public class CardFactoryUtil {
                 for (int i = idx; i <= skipId; i++) {
                     SpellAbility sa = AbilityFactory.getAbility(card, ab);
                     sa.setChapter(i);
-                    sa.setLastChapter(idx == abs.size());
+                    sa.setLastChapter(i == abs.size());
 
                     StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
                     trigStr.append("| Chapter$ ").append(i).append(" | CounterType$ LORE | CounterAmount$ EQ").append(i);
@@ -2471,7 +2471,7 @@ public class CardFactoryUtil {
             final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ Opponent";
             final String payStr = "DB$ ImmediateTrigger | RememberObjects$ Player.IsRemembered | TriggerDescription$ Copy CARDNAME | "
                     + "UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessCost$ " + k[1];
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Controller$ Player.IsRemembered | RemoveKeywords$ Reflect";
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Controller$ Player.IsTriggerRemembered | RemoveKeywords$ Reflect";
 
             SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
             AbilitySub paySA = (AbilitySub) AbilityFactory.getAbility(payStr, card);
@@ -3018,7 +3018,7 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     final Game game = getHostCard().getGame();
-                    final Card c = game.getAction().exile(getHostCard(), this);
+                    final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
                     c.setForetold(true);
                     game.getTriggerHandler().runTrigger(TriggerType.IsForetold, AbilityKey.mapFromCard(c), false);
                     c.setForetoldThisTurn(true);
@@ -3434,7 +3434,7 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     final Game game = this.getHostCard().getGame();
-                    final Card c = game.getAction().exile(this.getHostCard(), this);
+                    final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
@@ -3885,6 +3885,10 @@ public class CardFactoryUtil {
 
         if (params.containsKey("Announce")) {
             altCostSA.addAnnounceVar(params.get("Announce"));
+        }
+
+        if (params.containsKey("ManaRestriction")) {
+            altCostSA.putParam("ManaRestriction", params.get("ManaRestriction"));
         }
 
         return altCostSA;

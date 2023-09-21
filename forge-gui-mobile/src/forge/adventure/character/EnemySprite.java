@@ -1,5 +1,11 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.ai.steer.Steerable;
+import com.badlogic.gdx.ai.steer.SteeringAcceleration;
+import com.badlogic.gdx.ai.steer.SteeringBehavior;
+import com.badlogic.gdx.ai.steer.behaviors.*;
+import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
+import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,12 +22,16 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
+import forge.adventure.util.pathfinding.MovementBehavior;
+import forge.adventure.util.pathfinding.NavigationVertex;
+import forge.adventure.util.pathfinding.ProgressableGraphPath;
 import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +40,20 @@ import java.util.stream.Collectors;
  * EnemySprite
  * Character sprite that represents an Enemy
  */
-public class EnemySprite extends CharacterSprite {
+public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
+
+    private static final SteeringAcceleration<Vector2> steerOutput =
+            new SteeringAcceleration<Vector2>(new Vector2());
+
+    Vector2 position;
+    float orientation;
+    Vector2 linearVelocity = new Vector2(1, 0);
+    float angularVelocity;
+    float maxSpeed;
+    boolean independentFacing;
+    SteeringBehavior<Vector2> behavior;
+    boolean tagged;
+
     EnemyData data;
     public MapDialog dialog; //Dialog to show on contact. Overrides standard battle (can be started as an action)
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
@@ -53,9 +76,12 @@ public class EnemySprite extends CharacterSprite {
     public float threatRange = 0.0f; //If range < threatRange, begin pursuit
     public float pursueRange = 0.0f; //If range > pursueRange, abandon pursuit
     public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
-    private boolean aggro = false;
+    public float speedModifier = 0.0f; // Increase or decrease default speed
+    public boolean aggro = false;
     public boolean ignoreDungeonEffect = false;
     public String questStageID;
+    private ProgressableGraphPath<NavigationVertex> navPath;
+    public Vector2 fleeTarget;
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -64,16 +90,25 @@ public class EnemySprite extends CharacterSprite {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
+        float scale = data.scale;
+        if (scale < 0)
+            scale = 1f;
+        setWidth(getWidth() * scale);
+        setHeight(getHeight() * scale);
+        updateBoundingRect();
+        initializeBaseMovementBehavior();
     }
 
     public void parseWaypoints(String waypoints){
         String[] wp = waypoints.replaceAll("\\s", "").split(",");
         for (String s : wp) {
             movementBehaviors.addLast(new MovementBehavior());
-            if (s.startsWith("wait")) {
-                movementBehaviors.peekLast().duration = Float.parseFloat(s.substring(4));
-            } else {
-                movementBehaviors.peekLast().destination = Integer.parseInt(s);
+            if (!movementBehaviors.isEmpty()) {
+                if (s.startsWith("wait")) {
+                    movementBehaviors.peekLast().duration = Float.parseFloat(s.substring(4));
+                } else {
+                    movementBehaviors.peekLast().destination = s;
+                }
             }
         }
     }
@@ -83,7 +118,7 @@ public class EnemySprite extends CharacterSprite {
         float scale = data == null ? 1f : data.scale;
         if (scale < 0)
             scale = 1f;
-        boundingRect.set(getX(), getY(), getWidth()*scale, getHeight()*scale);
+        boundingRect.set(getX(), getY(), getWidth(), getHeight());
         unfreezeRange = 30f * scale;
     }
 
@@ -94,23 +129,199 @@ public class EnemySprite extends CharacterSprite {
         moveBy(diff.x, diff.y,delta);
     }
 
+    public void initializeBaseMovementBehavior() {
+        Location<Vector2> seekTarget = new Location<Vector2>() {
+            @Override
+            public Vector2 getPosition() {
+                return navPath.nodes.get(0).pos;
+            }
+
+            @Override
+            public float getOrientation() {
+                return 0;
+            }
+
+            @Override
+            public void setOrientation(float orientation) {
+
+            }
+
+            @Override
+            public float vectorToAngle(Vector2 vector) {
+                return 0;
+            }
+
+            @Override
+            public Vector2 angleToVector(Vector2 outVector, float angle) {
+                return null;
+            }
+
+            @Override
+            public Location<Vector2> newLocation() {
+                return null;
+            }
+        };
+        Seek<Vector2> seek = new Seek<>(this);
+        seek.setTarget(seekTarget);
+
+        Array<Vector2> wp = new Array<>();
+        if (navPath != null && navPath.nodes != null) {
+            for (NavigationVertex v : navPath.nodes)
+                wp.add(v.pos);
+        }
+        LinePath<Vector2> linePath = null;
+        FollowPath<Vector2, LinePath.LinePathParam> followWaypoints = null;
+        if (wp.size == 1) {
+            wp.insert(0, pos());
+        }
+        if (wp.size >= 2) {
+            linePath = new LinePath<Vector2>(wp, false);
+            followWaypoints = new FollowPath<>(this, linePath);
+            followWaypoints.setPathOffset(0.5f);
+        }
+
+        Arrive<Vector2> moveDirectlyToDestination = new Arrive<>(this, new Location<Vector2>() {
+            @Override
+            public Vector2 getPosition() {
+                if (navPath == null || navPath.nodes.size == 0)
+                    return pos();
+                return navPath.get(0).pos;
+            }
+
+            @Override
+            public float getOrientation() {
+                return 0;
+            }
+
+            @Override
+            public void setOrientation(float orientation) {
+
+            }
+
+            @Override
+            public float vectorToAngle(Vector2 vector) {
+                return 0;
+            }
+
+            @Override
+            public Vector2 angleToVector(Vector2 outVector, float angle) {
+                return null;
+            }
+
+            @Override
+            public Location<Vector2> newLocation() {
+                return null;
+            }
+        })
+                .setTimeToTarget(0.01f)
+                .setArrivalTolerance(0f)
+                .setDecelerationRadius(10);
+
+        if (followWaypoints != null)
+            setBehavior(followWaypoints);
+        else
+            setBehavior(moveDirectlyToDestination);
+    }
+
+    public void setBehavior(SteeringBehavior<Vector2> behavior) {
+        this.behavior = behavior;
+    }
+
+    public SteeringBehavior<Vector2> getBehavior() {
+        return behavior;
+    }
+
+    public void update(float delta) {
+        if(behavior != null) {
+            behavior.calculateSteering(steerOutput);
+            while (steerOutput.isZero() && navPath != null && navPath.getCount() > 1) {
+                navPath.remove(0);
+                behavior.calculateSteering(steerOutput);
+            }
+            applySteering(delta);
+        }
+    }
+
+    private void applySteering(float delta) {
+        if(!steerOutput.linear.isZero()) {
+            Vector2 force = steerOutput.linear.scl(delta);
+            force.setLength(Math.min(speed() * delta, force.len()));
+            moveBy(force.x, force.y);
+        }
+    }
+
+    @Override
+    public float vectorToAngle (Vector2 vector) {
+        return (float)Math.atan2(-vector.x, vector.y);
+    }
+
+    @Override
+    public Vector2 angleToVector (Vector2 outVector, float angle) {
+        outVector.x = -(float)Math.sin(angle);
+        outVector.y = (float)Math.cos(angle);
+        return outVector;
+    }
+
+    @Override
+    public Vector2 getLinearVelocity() {
+        return linearVelocity;
+    }
+
+    @Override
+    public float getAngularVelocity() {
+        return angularVelocity;
+    }
+    @Override
+    public float getBoundingRadius() {
+        return getWidth()/2;
+    }
+
+    @Override
+    public boolean isTagged() {
+        return tagged;
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return pos();
+    }
+
+    @Override
+    public float getOrientation() {
+        return orientation;
+    }
+
+    @Override
+    public void setOrientation(float value) {
+        orientation = value;
+    }
+
+    @Override
+    public Location<Vector2> newLocation() {
+        return null;
+    }
+
+    @Override
+    public void setTagged(boolean value) {
+        tagged = value;
+    }
+
     public void freezeMovement(){
         _freeze = true;
         setPosition(_previousPosition6.x, _previousPosition6.y);
-        targetVector.setZero();
         // This will move the enemy back a few frames of movement.
         // Combined with player doing the same, should no longer be colliding to immediately re-enter battle if mob still present
     }
 
-    public Vector2 getTargetVector(PlayerSprite player, float delta) {
+    public Vector2 getTargetVector(PlayerSprite player, ArrayList<NavigationVertex> sortedGraphNodes, float delta) {
         //todo - this can be integrated into overworld movement as well, giving flee behaviors or moving to generated waypoints
         Vector2 target = pos();
-        Vector2 routeToPlayer = new Vector2(player.pos()).sub(target);
+        Vector2 spriteToPlayer = new Vector2(player.pos()).sub(target);
 
         if (_freeze){
             //Mob has defeated player in battle, hold still until player has a chance to move away.
             //Without this moving enemies can immediately restart battle.
-            if (routeToPlayer.len() < unfreezeRange) {
+            if (spriteToPlayer.len() < unfreezeRange) {
                 timer += delta;
                 return Vector2.Zero;
             }
@@ -119,53 +330,83 @@ public class EnemySprite extends CharacterSprite {
             }
         }
 
+        NavigationVertex targetPoint = null;
         if (threatRange > 0 || fleeRange > 0){
-            if (routeToPlayer.len() <= threatRange || (aggro && routeToPlayer.len() <= pursueRange))
+            if (spriteToPlayer.len() <= threatRange || (aggro && spriteToPlayer.len() <= pursueRange))
             {
+                if (sortedGraphNodes != null) {
+                    for (NavigationVertex candidate : sortedGraphNodes) {
+                        Vector2 candidateToPlayer = new Vector2(candidate.pos).sub(player.pos());
+                        if ((candidateToPlayer.x * candidateToPlayer.x) + (candidateToPlayer.y * candidateToPlayer.y) <
+                                (spriteToPlayer.x * spriteToPlayer.x) + (spriteToPlayer.y * spriteToPlayer.y)) {
+                            targetPoint = candidate;
+                            break;
+                        }
+                    }
+                }
                 aggro = true;
-                return routeToPlayer;
+                if (targetPoint != null) {
+                    return targetPoint.pos;
+                }
+                return new Vector2(player.pos());
             }
-            if (routeToPlayer.len() <= fleeRange)
+            if (spriteToPlayer.len() <= fleeRange)
             {
-                Float fleeDistance = fleeRange - routeToPlayer.len();
-                return new Vector2(target).sub(player.pos()).setLength(fleeDistance);
+                //todo: replace with inverse A* variant, seeking max total distance from player in X generations
+                // of movement, valuing each node by distance from player divided by closest distance(s) in path
+                // in order to make close passes to escape less appealing than maintaining moderate distance
+                float fleeDistance = fleeRange - spriteToPlayer.len();
+                return new Vector2(pos()).sub(player.pos()).setLength(fleeDistance).add(pos());
+            }
+            if (aggro && spriteToPlayer.len() > pursueRange) {
+                aggro = false;
+                if (navPath != null)
+                    navPath.clear();
+                initializeBaseMovementBehavior();
             }
         }
 
-        if (movementBehaviors.size() > 0){
+        if (movementBehaviors.peek() != null){
+            MovementBehavior peek = movementBehaviors.peek();
+            //TODO - This first block needs to be redone, doesn't work as intended and can also possibly skip behaviors in rare situations
+//            if (peek.getDuration() == 0 && target.equals(_previousPosition6) && timer >= _movementTimeout)
+//            {
+//                //stationary in an untimed behavior, move on to next behavior attempt to get unstuck
+//                if (movementBehaviors.size() > 1) {
+//                    MovementBehavior current =  movementBehaviors.pop();
+//                    current.currentTargetVector = null;
+//                    movementBehaviors.addLast(current);
+//                }
+//            }
+            //else
+            if (peek.getDuration() == 0 && peek.getNextTargetVector(objectId, pos()).dst(pos()) < 2){
+                //this is a location based behavior that has been completed. Move on to the next behavior
 
-            if (movementBehaviors.peek().getDuration() == 0 && target.equals(_previousPosition6) && timer >= _movementTimeout)
-            {
-                //stationary in an untimed behavior, move on to next behavior attempt to get unstuck
-                if (movementBehaviors.size() > 1) {
-                    movementBehaviors.addLast(movementBehaviors.pop());
-                    timer = 0.0f;
-                }
+                    MovementBehavior current =  movementBehaviors.pop();
+                    current.currentTargetVector = null;
+                    movementBehaviors.addLast(current);
+
             }
-            else if (movementBehaviors.peek().pos().sub(pos()).len() < 0.3){
-                //this is a location based behavior that has been completed. Move on if there are more behaviors
-                if (movementBehaviors.size() > 1) {
-                    movementBehaviors.addLast(movementBehaviors.pop());
-                    timer = 0.0f;
-                }
-            }
-            else if ( movementBehaviors.peek().getDuration() > 0)
+            else if ( peek.getDuration() > 0)
             {
-                if (timer >= movementBehaviors.peek().getDuration() + delta)
+                if (timer >= peek.getDuration() + delta)
                 {
                     //this is a timed behavior that has been completed. Move to the next behavior and restart the timer
-                    movementBehaviors.addLast(movementBehaviors.pop());
-                    timer = 0.0f;
+                    MovementBehavior current =  movementBehaviors.pop();
+                    current.currentTargetVector = null;
+                    movementBehaviors.addLast(current);
                 }
                 else{
                     timer += delta;//this is a timed behavior that has not been completed, continue this behavior
+                    return new Vector2(pos());
                 }
             }
-            if (movementBehaviors.peek().pos().len() > 0.3)
-                target = new Vector2(movementBehaviors.peek().pos()).sub(pos());
-            else target = Vector2.Zero;
+            if (peek.getNextTargetVector(objectId, pos()).dst(pos()) > 0.3) {
+                target = new Vector2(peek.getNextTargetVector(objectId, pos()));
+            }
+            else target = new Vector2(pos());
         }
-        else target = Vector2.Zero;
+        else target = new Vector2(pos());
         return target;
     }
     public void updatePositon()
@@ -181,6 +422,11 @@ public class EnemySprite extends CharacterSprite {
 
     public EnemyData getData() {
         return data;
+    }
+
+    public void overrideDeck(String deckPath) {
+        data.deck = new String[1];
+        data.deck[0] = deckPath;
     }
 
     @Override
@@ -313,7 +559,7 @@ public class EnemySprite extends CharacterSprite {
     }
 
     public float speed() {
-        return data.speed;
+        return Float.max(data.speed + speedModifier, 0);
     }
 
     public float getLifetime() {
@@ -322,44 +568,71 @@ public class EnemySprite extends CharacterSprite {
         return Math.max(data.lifetime, lifetime);
     }
 
+    //Pathfinding integration below this line
 
-    public class MovementBehavior {
-
-        //temporary placeholders for overworld behavior integration
-        public boolean wander = false;
-        public boolean flee = false;
-        public boolean stop = false;
-        //end temporary
-
-        float duration = 0.0f;
-        float x = 0.0f;
-        float y = 0.0f;
-
-        int destination = 0;
-
-        public float getX(){
-            return x;
-        }
-        public float getY(){
-            return y;
-        }
-        public float getDuration(){
-            return duration;
-        }
-        public int getDestination(){
-            return destination;
-        }
-
-        public void setX(float newVal){
-            x = newVal;
-        }
-        public void setY(float newVal){
-            y = newVal;
-        }
-
-        public Vector2 pos() {
-            return new Vector2(getX(), getY());
-        }
+    public void setNavPath(ProgressableGraphPath<NavigationVertex> navPath) {
+        this.navPath = navPath;
     }
+
+    public ProgressableGraphPath<NavigationVertex> getNavPath() {
+        return navPath;
+    }
+
+    @Override
+    public float getZeroLinearSpeedThreshold() {
+        return 0;
+    }
+
+    @Override
+    public void setZeroLinearSpeedThreshold(float value) {
+
+    }
+
+    @Override
+    public float getMaxLinearSpeed() {
+        return 500;
+    }
+
+    @Override
+    public void setMaxLinearSpeed(float maxLinearSpeed) {
+
+    }
+
+    @Override
+    public float getMaxLinearAcceleration() {
+        return 5000;
+    }
+
+    @Override
+    public void setMaxLinearAcceleration(float maxLinearAcceleration) {
+
+    }
+
+    @Override
+    public float getMaxAngularSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularSpeed(float maxAngularSpeed) {
+
+    }
+
+    @Override
+    public float getMaxAngularAcceleration() {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularAcceleration(float maxAngularAcceleration) {
+
+    }
+
+    public void steer(Vector2 currentVector) {
+
+    }
+
+
+
 }
 

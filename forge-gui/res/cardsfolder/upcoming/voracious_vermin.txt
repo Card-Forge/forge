@@ -1,0 +1,10 @@
+Name:Voracious Vermin
+ManaCost:2 B
+Types:Creature Rat
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+DeckHas:Ability$Token|Counters
+Oracle:When Voracious Vermin enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block."\n\nWhenever another creature you control dies, put a +1/+1 counter on Voracious Vermin.

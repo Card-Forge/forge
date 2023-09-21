@@ -362,16 +362,14 @@ public class DigEffect extends SpellAbilityEffect {
                             if (p == chooser) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
                             }
-                            List<Card> chosen = new ArrayList<>();
 
                             int max = anyNumber ? valid.size() : Math.min(valid.size(), destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
                             if (max > 0) { // if max is 0 don't make a choice
-                                chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
+                                movedCards.addAll(chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null));
                             }
 
                             chooser.getController().endTempShowCards();
-                            movedCards.addAll(chosen);
                         }
 
                         if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
@@ -400,10 +398,13 @@ public class DigEffect extends SpellAbilityEffect {
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
-                            if (destZone1.equals(ZoneType.Battlefield) && sa.hasParam("WithCounter")) {
-                                final int numCtr = AbilityUtils.calculateAmount(host,
-                                        sa.getParamOrDefault("WithCounterNum", "1"), sa);
-                                c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                            if (destZone1.equals(ZoneType.Battlefield)) {
+                                moveParams.put(AbilityKey.SimultaneousETB, movedCards);
+                                if (sa.hasParam("WithCounter")) {
+                                    final int numCtr = AbilityUtils.calculateAmount(host,
+                                            sa.getParamOrDefault("WithCounterNum", "1"), sa);
+                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                                }
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                                 // need LKI before Animate does apply
@@ -479,8 +480,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     } else {
                         // just move them randomly
-                        for (int i = 0; i < rest.size(); i++) {
-                            Card c = rest.get(i);
+                        for (Card c : rest) {
                             final ZoneType origin = c.getZone().getZoneType();
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
                             c = game.getAction().moveTo(toZone, c, sa);

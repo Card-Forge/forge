@@ -1,0 +1,15 @@
+Name:Redcap Gutter-Dweller
+ManaCost:2 R R
+Types:Creature Goblin Warrior
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 black Rat creature tokens with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice another creature. If you do, put a +1/+1 counter on CARDNAME and exile the top card of your library. You may play that card this turn.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ Player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:EffPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$  You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Sacrifice & Type$Rat
+Oracle:Menace\nWhen Redcap Gutter-Dweller enters the battlefield, create two 1/1 black Rat creature tokens with "This creature can't block."\nAt the beginning of your upkeep, you may sacrifice another creature. If you do, put a +1/+1 counter on Redcap Gutter-Dweller and exile the top card of your library. You may play that card this turn.

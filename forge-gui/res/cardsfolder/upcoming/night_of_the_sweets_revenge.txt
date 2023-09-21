@@ -1,0 +1,13 @@
+Name:Night of the Sweets' Revenge
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Food.YouCtrl | AddAbility$ AnyMana | Description$ Foods you control have "{T}: Add {G}."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G}.
+A:AB$ PumpAll | Cost$ 5 G G Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | SorcerySpeed$ True | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery.
+SVar:X:Count$Valid Food.YouCtrl
+AI:RemoveDeck:Random
+DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Artifact|Food
+DeckHints:Type$Food
+Oracle:When Night of the Sweets' Revenge enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nFoods you control have "{T}: Add {G}."\n{5}{G}{G}, Sacrifice Night of the Sweets' Revenge: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery.

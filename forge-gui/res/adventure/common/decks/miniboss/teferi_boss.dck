@@ -1,34 +1,74 @@
 [metadata]
 Name=teferi_boss
+[Avatar]
+
 [Main]
-1 Back to Basics|UMA|1
-1 Balance|30A|1
+4 Aetherize|C15|1
+4 Archmage Emeritus|PLIST|1
+2 Archmage's Charm|J21|1
+4 Azor, the Lawbringer|RIX|1
+4 Back to Basics|UMA|1
+2 Baral, Chief of Compliance|KLR|1
+4 Counterspell|30A|1
+4 Cyclonic Rift|MM3|1
 2 Disenchant|30A|1
+4 Echo of Eons|MH1|1
+4 Embargo|MMQ|1
+4 Engulf the Shore|GN2|1
+4 Flooded Strand|KTK|1
+4 Ghostly Prison|C16|1
+4 Glacial Fortress|XLN|1
+2 Grand Arbiter Augustin IV|2X2|1
+4 Hallowed Fountain|RNA|1
 3 Historian of Zhalfir|M21|1
-8 Island|DMU|4
+1 Humility|TPR|1
+4 Hushbringer|ELD|1
+2 Invasion of New Phyrexia|MOM|1
+31 Island|DMU|4
+4 Magus of the Tabernacle|PLC|1
+2 Narset, Parter of Veils|CMM|1
 1 Niambi, Beloved Protector|YDMU|1
 1 Niambi, Esteemed Speaker|M21|1
+3 Oath of Teferi|CMM|1
 1 Oath of Teferi|DOM|1
+1 Open the Vaults|C16|1
+2 Paradox Engine|AER|1
 4 Path to Exile|2X2|1
-10 Plains|DMU|4
+35 Plains|DMU|4
+4 Prairie Stream|DMC|1
 1 Propaganda|AFC|1
+4 Swan Song|LTC|1
 1 Teferi's Ageless Insight|M21|1
-1 Teferi's Contingency|YDMU|1
-1 Teferi's Drake|MIR|1
+4 Teferi's Contingency|YDMU|1
 1 Teferi's Moat|TSB|1
-1 Teferi's Protege|J22|1
+2 Teferi's Protection|SLD|1
 3 Teferi's Sentinel|DOM|1
+4 Teferi's Talent|MOC|1
 1 Teferi's Tutelage|M21|1
 2 Teferi, Hero of Dominaria|DOM|1
-1 Teferi, Mage of Zhalfir|IMA|1
+2 Teferi, Hero of Dominaria|PPRO|1
+4 Teferi, Mage of Zhalfir|IMA|1
 1 Teferi, Master of Time|M21|1
+3 Teferi, Master of Time|M21|7
 1 Teferi, Temporal Archmage|C14|1
+3 Teferi, Temporal Archmage|PZ1|1
 1 Teferi, Temporal Pilgrim|BRO|1
-1 Teferi, Time Raveler|WAR|1
-1 Teferi, Who Slows the Sunset|MID|1
-1 The Tabernacle at Pendrell Vale|OLGC|1
-1 Time Warp|E02|1
+4 Teferi, Time Raveler|SLD|1
+4 Teferi, Who Slows the Sunset|MID|1
+4 Time Warp|E02|1
 2 Time Wipe|WAR|1
+4 Tocatli Honor Guard|XLN|1
 4 Tundra|30A|1
 1 Winter Orb|EMA|1
+4 Wrath of God|DMR|1
 1 Zhalfirin Void|PDOM|1
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+
+[Dungeon]
+

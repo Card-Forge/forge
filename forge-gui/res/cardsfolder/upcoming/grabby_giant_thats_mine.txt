@@ -1,0 +1,18 @@
+Name:Grabby Giant
+ManaCost:3 R
+Types:Creature Giant
+PT:4/3
+K:Reach
+A:AB$ Draw | Cost$ 2 R Sac<1/Artifact;Land/artifact or land> | SpellDescription$ Draw a card.
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+DeckHints:Type$Artifact
+AlternateMode:Adventure
+Oracle:Reach\n{2}{R}, Sacrifice an artifact or land: Draw a card.
+
+ALTERNATE
+
+Name:That's Mine
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create a Treasure token. (Then exile this card. You may cast the creature later from exile.)

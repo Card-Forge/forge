@@ -1245,7 +1245,7 @@ public abstract class GameState {
                     System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
                     continue;
                 }
-                c = Card.fromPaperCard(token, player, player.getGame());
+                c = CardFactory.getCard(token, player, player.getGame());
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode, artID);
                 if (pc == null) {
@@ -1262,7 +1262,7 @@ public abstract class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap(false);
+                    c.tap(false, null, null);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Monstrous")) {

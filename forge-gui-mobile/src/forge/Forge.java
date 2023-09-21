@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -1016,6 +1017,7 @@ public class Forge implements ApplicationListener {
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
+        MapStage.getInstance().disposeWorld();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();

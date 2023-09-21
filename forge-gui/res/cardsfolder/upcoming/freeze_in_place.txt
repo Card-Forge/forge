@@ -1,0 +1,8 @@
+Name:Freeze in Place
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Tap | TgtPrompt$ Choose target creature an opponent controls | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | SpellDescription$ Tap target creature an opponent controls and put three stun counters on it. Scry 2. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+DeckHas:Ability$Counters
+Oracle:Tap target creature an opponent controls and put three stun counters on it. Scry 2. (If a permanent with a stun counter would become untapped, remove one from it instead.)

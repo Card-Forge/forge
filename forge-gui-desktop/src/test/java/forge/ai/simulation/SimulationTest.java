@@ -19,6 +19,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
@@ -72,7 +73,7 @@ public class SimulationTest extends AITest {
             System.out.println("Failed to find token name " + name);
             return null;
         }
-        return Card.fromPaperCard(token, p, p.getGame());
+        return CardFactory.getCard(token, p, p.getGame());
     }
 
     protected List<Card> addTokens(String name, int amount, Player p) {

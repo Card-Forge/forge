@@ -1,17 +1,104 @@
 slimefoot.png
-size: 216,216
+size: 1024,576
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 94,81
-  size: 32, 32
+  xy: 35,54
+  size: 25, 25
 Idle 
-  xy: 0, 0
-  size: 66, 67
+  xy: 0,0
+  size: 96, 96
 Idle 
-  xy: 76, 1
-  size: 65, 67
+  xy: 96,0
+  size: 96, 96
 Idle 
-  xy: 150, 1
-  size: 63, 64
+  xy: 192,0
+  size: 96, 96
+Idle 
+  xy: 288,0
+  size: 96, 96
+Idle 
+  xy: 384,0
+  size: 96, 96
+Idle 
+  xy: 480,0
+  size: 96, 96
+Idle 
+  xy: 576,0
+  size: 96, 96
+Idle 
+  xy: 672,0
+  size: 96, 96
+Walk 
+  xy: 0,192
+  size: 96, 96
+Walk 
+  xy: 96,192
+  size: 96, 96
+Walk 
+  xy: 192,192
+  size: 96, 96
+Walk 
+  xy: 288,192
+  size: 96, 96
+Walk 
+  xy: 384,192
+  size: 96, 96
+Walk 
+  xy: 480,192
+  size: 96, 96
+Walk 
+  xy: 576,192
+  size: 96, 96
+Walk 
+  xy: 672,192
+  size: 96, 96
+Attack 
+  xy: 0,96
+  size: 96, 96
+Attack 
+  xy: 96,96
+  size: 96, 96
+Attack 
+  xy: 192,96
+  size: 96, 96
+Attack 
+  xy: 288,96
+  size: 96, 96
+Attack 
+  xy: 384,96
+  size: 96, 96
+Attack 
+  xy: 480,96
+  size: 96, 96
+Attack 
+  xy: 576,96
+  size: 96, 96
+Attack 
+  xy: 672,96
+  size: 96, 96
+Death 
+  xy: 0,480
+  size: 96, 96
+Death  
+  xy: 96,480
+  size: 96, 96
+Death 
+  xy: 192,480
+  size: 96, 96
+Death 
+  xy: 288,480
+  size: 96, 96
+Death 
+  xy: 384,480
+  size: 96, 96
+Death 
+  xy: 480,480
+  size: 96, 96
+Death 
+  xy: 576,480
+  size: 96, 96
+Death 
+  xy: 672,480
+  size: 96, 96

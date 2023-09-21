@@ -1,0 +1,9 @@
+Name:Knickknack Ouphe
+ManaCost:X G
+Types:Creature Ouphe
+PT:1/1
+K:etbCounter:P1P1:X:no condition:CARDNAME enters the battlefield with X +1/+1 counters on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top X cards of your library. You may put any number of Aura cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | Reveal$ True | ChangeValid$ Aura.cmcLEX | AnyNumber$ True | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True
+SVar:X:Count$xPaid
+Oracle:Knickknack Ouphe enters the battlefield with X +1/+1 counters on it.\nWhen Knickknack Ouphe enters the battlefield, reveal the top X cards of your library. You may put any number of Aura cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order.

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (WOE)
+Type:Archived
+Subtype:Standard
+Effective:2023-09-08
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE
+Banned:Fable of the Mirror-Breaker; Invoke Despair; Reckoner Bankbuster; The Meathook Massacre

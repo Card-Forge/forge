@@ -1,0 +1,7 @@
+Name:Twisted Fealty
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl |ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBToken | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ ThisTargetedCard | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Create a Wicked Role token attached to up to one target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.\nCreate a Wicked Role token attached to up to one target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

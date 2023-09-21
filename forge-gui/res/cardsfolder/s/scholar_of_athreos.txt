@@ -2,7 +2,7 @@ Name:Scholar of Athreos
 ManaCost:2 W
 Types:Creature Human Cleric
 PT:1/4
-A:AB$ LoseLife | Cost$ 2 B | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+A:AB$ LoseLife | Cost$ 2 B | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way. | StackDescription$ SpellDescription
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ None
 SVar:AFLifeLost:Number$0
 Oracle:{2}{B}: Each opponent loses 1 life. You gain life equal to the life lost this way.

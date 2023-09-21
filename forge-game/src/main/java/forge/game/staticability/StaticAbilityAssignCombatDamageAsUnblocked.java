@@ -38,7 +38,7 @@ public class StaticAbilityAssignCombatDamageAsUnblocked {
         return false;
     }
 
-    public static boolean applyAssignCombatDamageAsUnblocked(final StaticAbility stAb, final Card card) {
+    private static boolean applyAssignCombatDamageAsUnblocked(final StaticAbility stAb, final Card card) {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }

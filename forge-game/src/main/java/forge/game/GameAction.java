@@ -899,20 +899,14 @@ public class GameAction {
         return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
     }
 
-    public final Card exile(final Card c, SpellAbility cause) {
-        if (c == null) {
-            return null;
-        }
-        return exile(new CardCollection(c), cause).get(0);
-    }
-    public final CardCollection exile(final CardCollection cards, SpellAbility cause) {
+    public final CardCollection exile(final CardCollection cards, SpellAbility cause, Map<AbilityKey, Object> params) {
         CardZoneTable table = new CardZoneTable();
         CardCollection result = new CardCollection();
         for (Card card : cards) {
             if (cause != null) {
                 table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
             }
-            result.add(exile(card, cause, null));
+            result.add(exile(card, cause, params));
         }
         if (cause != null) {
             table.triggerChangesZoneAll(game, cause);
@@ -1078,9 +1072,6 @@ public class GameAction {
         game.getStaticEffects().clearStaticEffects(affectedCards);
 
         for (final Player p : game.getPlayers()) {
-            if (!game.getStack().isFrozen()) {
-                p.getManaPool().restoreColorReplacements();
-            }
             p.clearStaticAbilities();
         }
 
@@ -1298,6 +1289,10 @@ public class GameAction {
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
                         checkAgainCard = true;
+                    } else if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        //702.12b. A permanent with indestructible can't be destroyed.
+                        // Such permanents aren't destroyed by lethal damage, and they
+                        // ignore the state-based action that checks for lethal damage
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
@@ -1322,6 +1317,7 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
+                checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
                 checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
@@ -1522,6 +1518,28 @@ public class GameAction {
         }
         return checkAgain;
     }
+    private boolean stateBasedAction_Role(Card c, CardCollection removeList) {
+        if (!c.hasCardAttachments()) {
+            return false;
+        }
+        boolean checkAgain = false;
+        CardCollection roles = CardLists.filter(c.getAttachedCards(), CardPredicates.isType("Role"));
+        if (roles.isEmpty()) {
+            return false;
+        }
+
+        for (Player p : game.getPlayers()) {
+            CardCollection rolesByPlayer = CardLists.filterControlledBy(roles, p);
+            if (rolesByPlayer.size() <= 1) {
+                continue;
+            }
+            // sort by game timestamp
+            rolesByPlayer.sort(CardPredicates.compareByTimestamp());
+            removeList.addAll(rolesByPlayer.subList(0, rolesByPlayer.size() - 1));
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
 
     private void stateBasedAction_Dungeon(Card c) {
         if (!c.getType().isDungeon() || !c.isInLastRoom()) {
@@ -1537,7 +1555,8 @@ public class GameAction {
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
-            if (!ge.canBeAttached(c, null, true)) {
+            // Rule 704.5q - Creature attached to an object or player, becomes unattached
+            if (c.isCreature() || c.isBattle() || !ge.canBeAttached(c, null, true)) {
                 unAttachList.add(c);
                 checkAgain = true;
             }
@@ -1551,10 +1570,7 @@ public class GameAction {
                 }
             }
         }
-        if ((c.isCreature() || c.isBattle()) && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-            unAttachList.add(c);
-            checkAgain = true;
-        }
+
         return checkAgain;
     }
 
@@ -1865,7 +1881,7 @@ public class GameAction {
 
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(c);
-        repRunParams.put(AbilityKey.Source, sa);
+        repRunParams.put(AbilityKey.Cause, sa);
         repRunParams.put(AbilityKey.Regeneration, regenerate);
         if (params != null) {
             repRunParams.putAll(params);
@@ -2426,7 +2442,7 @@ public class GameAction {
                     lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
-                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
+                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable)));
                 sum += e.getValue();
 
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);

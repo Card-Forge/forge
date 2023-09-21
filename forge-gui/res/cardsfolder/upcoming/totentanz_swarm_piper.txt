@@ -1,0 +1,10 @@
+Name:Totentanz, Swarm Piper
+ManaCost:1 B R
+Types:Legendary Creature Human Warlock Bard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+A:AB$ Pump | Cost$ 1 B | ValidTgts$ Rat.attacking | TgtPrompt$ Select target attacking Rat | KW$ Deathtouch | SpellDescription$ Target attacking Rat gains deathtouch until end of turn.
+DeckHas:Ability$Token & Type$Rat
+DeckHints:Type$Rat
+Oracle:Whenever Totentanz, Swarm Piper or another nontoken creature you control dies, create a 1/1 black Rat creature token with "This creature can't block."\n{1}{B}: Target attacking Rat you control gains deathtouch until end of turn.

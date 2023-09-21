@@ -285,6 +285,14 @@ public class CardProperty {
             if (source.isRemembered(controller)) {
                 return false;
             }
+        } else if (property.equals("targetedBy")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
+            SpellAbility sp = (SpellAbility)spellAbility;
+            if (!sp.isTargeting(card)) {
+                return false;
+            }
         } else if (property.equals("TargetedPlayerCtrl")) {
             if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(controller)) {
                 return false;
@@ -1202,15 +1210,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Damaged")) {
+            boolean found = false;
             for (Pair<Integer, Boolean> p : source.getDamageReceivedThisTurn()) {
-                boolean found = false;
                 if (game.getDamageLKI(p).getLeft().equalsWithTimestamp(card)) {
                     found = true;
                     break;
                 }
-                if (!found) {
-                    return false;
-                }
+            }
+            if (!found) {
+                return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisCombat")) {
             if (card.getDamageHistory().getThisCombatDamaged().isEmpty()) {

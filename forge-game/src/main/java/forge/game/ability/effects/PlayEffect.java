@@ -193,7 +193,7 @@ public class PlayEffect extends SpellAbilityEffect {
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card c = it.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
                     // it.remove will only remove item from the list part of CardCollection
                     tgtCards.asSet().remove(c);
                     it.remove();
@@ -456,7 +456,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (controlledByPlayer != null) {
                 tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
                 controller.pushPaidForSA(tgtSA);
-                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestriction()));
+                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA)));
             }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
@@ -527,7 +527,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                game.getAction().exile(eff, null);
+                game.getAction().exile(eff, null, null);
             }
         };
 

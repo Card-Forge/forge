@@ -184,7 +184,7 @@ public class FCardImageRenderer {
             if (!card.isSplitCard() && !card.isFlipCard()) {
                 final CardStateView state = card.getState(card.isAdventureCard() ? false : altState);
                 if ((state.isCreature() && !state.getKeywordKey().contains("Level up"))
-                        || state.isPlaneswalker() || state.isVehicle())
+                        || state.isPlaneswalker() || state.isBattle() || state.isVehicle())
                     hasPTBox = true;
             }
             if (hasPTBox) {
@@ -294,7 +294,7 @@ public class FCardImageRenderer {
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
         int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
-        if (state.isCreature() || state.isPlaneswalker() || state.isVehicle()) {
+        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.isVehicle()) {
             //if P/T box needed, make room for it
             ptBoxHeight = headerHeight;
         }
@@ -558,6 +558,10 @@ public class FCardImageRenderer {
         NAME_SIZE = TYPE_SIZE - 2;
         TYPE_SIZE = NAME_SIZE - 1;
         textX = x + ART_INSET;
+
+        // refresh if adventure has different color
+        colors = fillColorBackground(g, CardDetailUtil.getBorderColors(advState, true), 0, 0, 0, 0, BLACK_BORDER_THICKNESS);
+        textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
 
         //draw header containing name and mana cost
         Color[] advheaderColors = tintColors(Color.GRAY, colors, 0.6f);
@@ -839,6 +843,12 @@ public class FCardImageRenderer {
             TEXT_COLOR = Color.WHITE;
             pieces.add(String.valueOf(state.getLoyalty()));
         }
+        else if (state.isBattle()) {
+            Color [] pwColor = { Color.BLACK };
+            colors = pwColor;
+            TEXT_COLOR = Color.WHITE;
+            pieces.add(String.valueOf(state.getDefense()));
+        }
         else if (state.isVehicle()) {
             Color [] vhColor = { new Color(128, 96, 64) };
             colors = vhColor;
@@ -865,7 +875,7 @@ public class FCardImageRenderer {
         int arcWidth = h / 3;
         fillRoundColorBackground(g, colors, x, y, w, h, arcWidth, h);
         g.setStroke(new BasicStroke(BOX_LINE_THICKNESS));
-        g.setColor(state.isPlaneswalker() ? Color.WHITE : Color.BLACK);
+        g.setColor(state.isPlaneswalker() || state.isBattle() ? Color.WHITE : Color.BLACK);
         g.drawRoundRect(x, y, w, h, arcWidth, h);
 
         x += (PT_BOX_WIDTH - totalPieceWidth) / 2;

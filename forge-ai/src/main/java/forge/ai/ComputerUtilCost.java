@@ -398,10 +398,8 @@ public class ComputerUtilCost {
             return false;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostSacrifice) {
-                if ("CARDNAME".equals(part.getType())) {
-                    return true;
-                }
+            if (part instanceof CostSacrifice && part.payCostFromSource()) {
+                return true;
             }
         }
         return false;

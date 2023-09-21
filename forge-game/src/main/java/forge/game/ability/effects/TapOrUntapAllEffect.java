@@ -65,7 +65,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
                 continue;
             }
             if (toTap) {
-                tgtC.tap(true);
+                tgtC.tap(true, sa, activator);
             } else {
                 tgtC.untap(true);
             }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="120">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Kraken Hatchling&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="13" name="Collision" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJgDAQRcE0IHgTtfeUYX0xeBEh190IM5Dz2w8pBcaONbZ33r3r9aL7XWRz/7S2hL2RzRn2dhn/aob2X9Ql+4J4NgMAAAAAAAAAAMCjAQWvBhg=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6BKmon6t1QZeyChl1RVVVVVVVVVVVVVVZ8PEOlbZA==
+  </data>
+ </layer>
+ <layer id="11" name="Below Water" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2T0OgzAMhmHu1MLWLoSTN9yriqpOQGKR//h9JE+RLH+BAYtpAgDgPvP4FYCjz1x7grJcXk2Z10V3ZiuofYC7+WeOzSvtkbOf9Lm4zEZQ2zJG3hSkdya9vzv9JH2B0nZlewJ5x6YtLwBcWZ/xPczLfxaq3ljPzO4sVL0x7+uzmN0ux56XYp5cu2yPeWN22Rx7bYp52LEBAJqcfSu09J8n9Swt5bWV/mPU+tZp6e5L0Ja3pXcNQP++pXv4Ag==
+  </data>
+ </layer>
+ <layer id="12" name="Clutterbelowwater" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2k0OgjAQhuG5kYEQSDiDP+hCT82PLvQ6dqFLYNRpqeV91k3plIRMv9JsZFWGwPU2r+f1+fiYXULvQLO/rUG9h8LtbfH7PL60tUhX283Xu1qHiOsFAAAAgLVoIj7D30uRR2k7p48cpcvcOTebHzeXl5wrkUvlbz1W2cM+d3NN5EJvFnmJxth6lsgepvKy1MX8LfEhdCYLAABErq7HvSn67lQcXW95WnF/CQD/IobzcMg1aM/DW+NM75s1pMYid6KfAmBBeyfig/U/jBraO5FPLVELlvcEJ3st/w==
+  </data>
+ </layer>
+ <layer id="2" name="Water" width="60" height="50" opacity="0.29">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Canu9KqIw9kNBLqqqqqqqqqqqqqqqqzwfxoliJ
+  </data>
+ </layer>
+ <layer id="10" name="UpWater" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmW0OgjAMhncjTYATACZ6bcVETyWLWQJLcevHytS+Sf/4o+3TlWKHc/+rvnFuQNjY7J0xXZ71PNv9kG+XHZjjM6HGvyJZ92KO85yUeTkxJfKU4B2PONM845iXGjvmpfQ1ZtZRDZoxqdhQPfrWuUezPl8M74lQIy2Der7v1sy/ZBDvtftd5q2ZtmQeMu0bavNphgfmIcPG7j3n4mf32eTXK6d+HH/exjYxq2eOW4ZNG7y+nrk1g+oHnQ/F39KvlLZ4c2sG1Q/ipfhb+i3Ny/GHef60ZbzGi/VnvHL5cmW8xov1Z7xy+ULC3FOeAV7O7k/Z57n3pti7rFp2fZ+HN2w/cO7ujFefeQ/eaeN37i6b2pcpvJj7Dezuzt1lU/syibdQLoGXs8um9mVSPxfKJfBKKsQI7wgKr3QupXnDXDZeXWnzUt+/krkYr3wM45WNgcmlNC/03yj1PaGUVHgLf0/ASKWfC39PwKimXtNQTb2moZp6zWQymUymmvQCR6+SXQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1z0OgzAMhmFOVP4ExyhT+Tt0maBNT9NvYEHtAIJATd9H8pJIFk4cSwTBpyH+srhg35oyWbdvzTDW04TTdXeZ7lt3V592Bnq1z3Tmike2Ls9V91YYuLtbrjelqHI/+etIva1oIz/5f81TdTrF60/qrfWmG0Vr4G0fbe4MdKn/b9nDXjPwLOcFAAAAAMBR+LcGsDXmCgAAAAAAwPm8ARejHAc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="371.279" y="644.63" width="85.7826" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="63.2413" y="45.158"/>
+  <object id="64" template="../../obj/treasure.tx" x="225.969" y="32.1053" width="16"/>
+  <object id="56" template="../../obj/enemy.tx" x="157.832" y="107.862" width="16" height="16">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Kiora's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Kiora"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="611.658" y="261.848">
+   <properties>
+    <property name="enemy" value="Merfolk Elite"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="87,96"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gold.tx" x="142.263" y="55"/>
+  <object id="65" template="../../obj/enemy.tx" x="841.736" y="154.292">
+   <properties>
+    <property name="enemy" value="Turtle"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="527.043" y="415.557">
+   <properties>
+    <property name="enemy" value="Crab"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="287.924" y="251.47">
+   <properties>
+    <property name="enemy" value="Merfolk Elite"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="88,118"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/enemy.tx" x="405.76" y="479.799">
+   <properties>
+    <property name="enemy" value="Crab"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/manashards.tx" x="472.877" y="128.357"/>
+  <object id="78" template="../../obj/manashards.tx" x="96.6957" y="112.769"/>
+  <object id="79" template="../../obj/manashards.tx" x="94.0067" y="398.498"/>
+  <object id="80" template="../../obj/booster.tx" x="887.515" y="144.246">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/waypoint.tx" x="170.469" y="142.625"/>
+  <object id="87" template="../../obj/waypoint.tx" x="609.895" y="145.168"/>
+  <object id="88" template="../../obj/waypoint.tx" x="290.52" y="423.634"/>
+  <object id="95" template="../../obj/manashards.tx" x="886" y="172"/>
+  <object id="96" template="../../obj/waypoint.tx" x="612" y="414"/>
+  <object id="97" template="../../obj/enemy.tx" x="138.667" y="696">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="81,83,82,83"/>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/waypoint.tx" x="800" y="415.333"/>
+  <object id="99" template="../../obj/waypoint.tx" x="809.333" y="579.333"/>
+  <object id="100" template="../../obj/waypoint.tx" x="118.667" y="425.333"/>
+  <object id="101" template="../../obj/enemy.tx" x="207.333" y="139.333">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="119,86"/>
+   </properties>
+  </object>
+  <object id="102" template="../../obj/collision.tx" x="773.083" y="598.667" width="89.1667" height="88"/>
+  <object id="103" template="../../obj/collision.tx" x="56.4168" y="454.667" width="317.833" height="291.333"/>
+  <object id="104" template="../../obj/collision.tx" x="459.083" y="439" width="317.833" height="291.333"/>
+  <object id="105" template="../../obj/collision.tx" x="299.75" y="86" width="409.833" height="16"/>
+  <object id="106" template="../../obj/collision.tx" x="374.75" y="646" width="89.1667" height="88"/>
+  <object id="107" template="../../obj/collision.tx" x="345.75" y="182.333" width="235.166" height="192.666"/>
+  <object id="108" template="../../obj/collision.tx" x="27.7503" y="167" width="235.166" height="207.333"/>
+  <object id="109" template="../../obj/collision.tx" x="663.084" y="185" width="265.833" height="192.666"/>
+  <object id="110" template="../../obj/collision.tx" x="857.083" y="368.667" width="37.1663" height="236.667"/>
+  <object id="111" template="../../obj/collision.tx" x="23.0835" y="369" width="64.4997" height="86"/>
+  <object id="112" template="../../obj/collision.tx" x="921.417" y="96.3332" width="19.1663" height="89.3337"/>
+  <object id="113" template="../../obj/enemy.tx" x="156" y="416">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="100,98"/>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/collision.tx" x="795.083" y="79.3333" width="126.5" height="24"/>
+  <object id="115" template="../../obj/collision.tx" x="49.0835" y="6" width="205.166" height="16"/>
+  <object id="116" template="../../obj/collision.tx" x="-12.9165" y="0.333333" width="48.4997" height="164"/>
+  <object id="117" template="../../obj/gold.tx" x="830.667" y="586.667"/>
+  <object id="118" template="../../obj/waypoint.tx" x="286.667" y="148.667"/>
+  <object id="119" template="../../obj/waypoint.tx" x="851.333" y="149.333"/>
+ </objectgroup>
+</map>

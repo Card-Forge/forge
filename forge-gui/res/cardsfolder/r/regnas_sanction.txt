@@ -9,7 +9,7 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creatu
 #Need to imprint all non remembered cards
 SVar:DBImprint:DB$ Pump | ImprintCards$ Valid Creature.IsNotRemembered+RememberedPlayerCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.IsImprinted | SubAbility$ DBCleanupAll
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.IsImprinted | TapperController$ True | SubAbility$ DBCleanupAll
 SVar:DBCleanupAll:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:SVar$Z1/Plus.Z2

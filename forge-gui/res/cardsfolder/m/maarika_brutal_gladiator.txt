@@ -1,9 +1,0 @@
-Name:Maarika, Brutal Gladiator
-ManaCost:2 B R G
-Types:Legendary Creature Human Warrior
-PT:7/4
-K:CARDNAME must be blocked if able.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, NICKNAME has indestructible.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature.wasDealtExcessDamageThisTurn | Execute$ TrigSac | TriggerDescription$ Whenever NICKNAME deals damage to a creature, if that creature was dealt excess damage this turn, that creature's controller sacrifices a noncreature, nonland permanent.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Permanent.nonCreature+nonLand | SacMessage$ noncreature, nonland permanent | Defined$ TriggeredTargetController
-Oracle:Maarika, Brutal Gladiator must be blocked if able.\nAs long as it's your turn, Maarika has indestructible.\nWhenever Maarika deals damage to a creature, if that creature was dealt excess damage this turn, that creature's controller sacrifices a noncreature, nonland permanent.

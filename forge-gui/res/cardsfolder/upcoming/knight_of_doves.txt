@@ -1,0 +1,9 @@
+Name:Knight of Doves
+ManaCost:2 W
+Types:Creature Human Knight
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 white Bird creature token with flying.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying
+DeckHints:Type$Enchantment & Ability$Sacrifice
+DeckHas:Ability$Token & Type$Bird
+Oracle:Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 white Bird creature token with flying.

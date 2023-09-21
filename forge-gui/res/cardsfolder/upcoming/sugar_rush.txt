@@ -1,0 +1,6 @@
+Name:Sugar Rush
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 3 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +3/+0 until end of turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Target creature gets +3/+0 until end of turn.\nDraw a card.

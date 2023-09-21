@@ -3,32 +3,55 @@ Name=slimefoot
 [Avatar]
 
 [Main]
+4 Abrupt Decay|GK1|1
 4 Bayou|30A|1
+2 Blood Artist|J22|1
+4 Corpsejack Menace|CM2|1
+4 Cultivate|AFC|1
 1 Damnation|TSR|1
 2 Deathbloom Thallid|J22|1
+4 Deathbonnet Sprout|MID|1
+4 Deathcap Glade|VOW|1
 3 Deathsprout|C20|1
+11 Forest|DMU|1
 2 Forest|DMU|2
 3 Forest|DMU|3
+2 Ghave, Guru of Spores|PLIST|1
 2 Golgari Germination|DDJ|1
 4 Haunted Mire|DMU|1
+4 Indatha Triome|IKO|1
+2 Llanowar Wastes|BRO|1
+4 Mold Shambler|DDM|1
 3 Moldervine Reclamation|KHC|1
-1 Mycoloth|MB1|1
-1 Myconid Spore Tender|CLB|1
+4 Mortality Spear|STX|1
+4 Mycoid Shepherd|PM10|1
+4 Mycoloth|MB1|1
+4 Myconid Spore Tender|CLB|1
+4 Nature's Lore|DMR|1
 2 Nemata, Primeval Warden|DMU|1
 4 Overgrown Tomb|GRN|1
+2 Pallid Mycoderm|MMA|1
+3 Plains|DMU|1
 2 Rot Shambler|BFZ|1
-2 Nature's Lore|DMR|1
-2 Blood Artist|J22|1
+2 Rot Shambler|CMM|1
+4 Savannah|30A|1
 1 Slimefoot's Survey|DMU|1
-3 Slimefoot, the Stowaway|DOM|1
+4 Slimefoot, Thallid Transplant|YDMU|1
+4 Slimefoot, the Stowaway|DOM|1
 3 Sporecrown Thallid|DOM|1
-1 Sproutback Trudge|C21|1
-1 Swamp|DMU|1
+4 Sporemound|CMR|1
+4 Sproutback Trudge|C21|1
+4 Swamp|DMU|1
 1 Swamp|DMU|2
 1 Swamp|DMU|3
 4 Swarm Shambler|J22|1
+4 Tendershoot Dryad|RIX|1
+4 Thallid|MMA|1
 2 Thelon of Havenwood|TSR|1
 2 Trudge Garden|C21|1
+4 Verdant Catacombs|MM3|1
+4 Verdant Force|C15|1
+4 Village Rites|GN3|1
 4 Woodland Cemetery|DOM|1
 1 Yavimaya Sapherd|DOM|1
 [Sideboard]

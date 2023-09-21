@@ -1,8 +1,8 @@
 Name:Debt to the Deathless
 ManaCost:X W W B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ X W W B B | Defined$ Player.Opponent | LifeAmount$ Y | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses two times X life. You gain life equal to the life lost this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+A:SP$ LoseLife | Cost$ X W W B B | Defined$ Player.Opponent | LifeAmount$ Y | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses two times X life. You gain life equal to the life lost this way. | StackDescription$ SpellDescription
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ None
 SVar:AFLifeLost:Number$0
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice

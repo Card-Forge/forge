@@ -1,0 +1,10 @@
+Name:Tangled Colony
+ManaCost:1 B
+Types:Creature Rat
+PT:3/2
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X 1/1 black Rat creature tokens with "This creature can't block," where X is the amount of damage dealt to it this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+SVar:X:Count$TotalDamageReceivedThisTurn
+DeckHas:Ability$Token
+Oracle:Tangled Colony can't block.\nWhen Tangled Colony dies, create X 1/1 black Rat creature tokens with "This creature can't block," where X is the amount of damage dealt to it this turn.

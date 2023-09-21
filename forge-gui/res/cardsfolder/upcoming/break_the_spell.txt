@@ -1,0 +1,7 @@
+Name:Break the Spell
+ManaCost:W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target enchantment. If a permanent you controlled or a token was destroyed this way, draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ RememberedLKI | ConditionPresent$ Permanent.YouCtrl,Card.token | ConditionCompare$ EQ1 | ConditionDescription$ a permanent you controlled or a token, | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Destroy target enchantment. If a permanent you controlled or a token was destroyed this way, draw a card.

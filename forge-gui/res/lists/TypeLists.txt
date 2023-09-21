@@ -315,6 +315,7 @@ Background
 Cartouche
 Class
 Curse
+Role
 Rune
 Saga
 Shrine

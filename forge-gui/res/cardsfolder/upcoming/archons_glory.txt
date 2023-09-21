@@ -1,0 +1,9 @@
+Name:Archon's Glory
+ManaCost:W
+Types:Instant
+K:Bargain
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ PumpBargain | SpellDescription$ Target creature gets +2/+2 until end of turn. If this spell was bargained, that creature also gains flying and lifelink until end of turn.
+SVar:PumpBargain:DB$ Pump | Condition$ Bargain | KW$ Flying & Lifelink | Defined$ Targeted 
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nTarget creature gets +2/+2 until end of turn. If this spell was bargained, that creature also gains flying and lifelink until end of turn.

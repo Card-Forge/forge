@@ -1,0 +1,15 @@
+Name:Stormkeld Vanguard
+ManaCost:4 G G
+Types:Creature Giant Warrior
+PT:6/7
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+AlternateMode:Adventure
+Oracle:Stormkeld Vanguard can't be blocked by creatures with power 2 or less.
+
+ALTERNATE
+
+Name:Bear Down
+ManaCost:1 G
+Types:Sorcery Adventure
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Destroy target artifact or enchantment. (Then exile this card. You may cast the creature later from exile.)

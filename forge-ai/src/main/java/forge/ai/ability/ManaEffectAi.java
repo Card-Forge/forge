@@ -89,7 +89,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         } else if ("AtOppEOT".equals(logic)) {
-            return !ai.getManaPool().hasBurn() && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            return (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -261,7 +261,8 @@ public class ManaEffectAi extends SpellAbilityAi {
     }
 
     private boolean improvesPosition(Player ai, SpellAbility sa) {
-        boolean activateForTrigger = Iterables.any(Iterables.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
+        boolean activateForTrigger = (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) &&
+                Iterables.any(Iterables.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
                 t -> sa.getHostCard().getAbilityActivatedThisTurn(t.getOverridingAbility()) == 0);
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();

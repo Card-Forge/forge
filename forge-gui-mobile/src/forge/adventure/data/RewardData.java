@@ -23,6 +23,7 @@ import java.util.*;
  * Also used for deck generation and shops
  */
 public class RewardData implements Serializable {
+    private static final long serialVersionUID = 3158932532013393718L;
     public String type;
     public float probability;
     public int count;

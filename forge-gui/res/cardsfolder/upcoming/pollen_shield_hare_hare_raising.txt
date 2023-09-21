@@ -1,0 +1,17 @@
+Name:Pollen-Shield Hare
+ManaCost:1 W
+Types:Creature Rabbit
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens you control get +1/+1.
+DeckHints:Ability$Token
+AlternateMode:Adventure
+Oracle:Creature tokens you control get +1/+1.
+
+ALTERNATE
+
+Name:Hare Raising
+ManaCost:G
+Types:Sorcery Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ X | NumDef$ X | KW$ Vigilance | SpellDescription$ Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.

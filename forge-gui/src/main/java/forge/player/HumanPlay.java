@@ -35,6 +35,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
@@ -493,7 +494,7 @@ public class HumanPlay {
         }
 
         sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, hcd.isEffect());
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, null, hcd.isEffect());
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }
@@ -527,7 +528,7 @@ public class HumanPlay {
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
-                final Card d = game.getAction().exile(c, null);
+                final Card d = game.getAction().exile(c, null, null);
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
@@ -554,7 +555,7 @@ public class HumanPlay {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!manaInputCancelled) {
-                    c.tap(true);
+                    c.tap(true, ability, ability.getActivatingPlayer());
                 }
             }
             ability.clearTappedForConvoke();
@@ -567,7 +568,7 @@ public class HumanPlay {
 
     public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean effect) {
         final Card source = ability.getHostCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost);
 
         String xInCard = source.getSVar("X");
         String xColor = ability.getXColor();
@@ -623,6 +624,14 @@ public class HumanPlay {
             emerge = ability.getSacrificedAsEmerge();
         }
         if (!toPay.isPaid()) {
+            // if matrix still null it's effect payment
+            if (matrix == null) {
+                matrix = new ManaConversionMatrix();
+                matrix.restoreColorReplacements();
+                // pass sa = null so it doesn't consider unless cost on spell
+                StaticAbilityManaConvert.manaConvert(matrix, activator, ability.getHostCard(), null);
+            }
+
             // Input is somehow clearing out the offering card?
             inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect);
             inpPayment.setMessagePrefix(prompt);
@@ -661,7 +670,7 @@ public class HumanPlay {
             activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
-                c.tap(true);
+                c.tap(true, ability, activator);
             }
             activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             ability.clearTappedForConvoke();

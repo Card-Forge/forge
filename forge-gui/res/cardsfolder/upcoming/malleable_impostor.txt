@@ -1,0 +1,9 @@
+Name:Malleable Impostor
+ManaCost:3 U
+Types:Creature Faerie Shapeshifter
+PT:0/0
+K:Flash
+K:Flying
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.OppCtrl | AddKeywords$ Flying | AddTypes$ Faerie & Shapeshifter | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature an opponent controls, except it's a Faerie Shapeshifter in addition to its other types and it has flying.
+Oracle:Flash\nFlying\nYou may have Malleable Impostor enter the battlefield as a copy of a creature an opponent controls, except it's a Faerie Shapeshifter in addition to its other types and it has flying.

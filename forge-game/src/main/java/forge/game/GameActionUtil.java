@@ -144,7 +144,7 @@ public final class GameActionUtil {
                     sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlay(o);
 
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {

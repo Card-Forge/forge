@@ -1,0 +1,15 @@
+Name:Rotisserie Elemental
+ManaCost:R
+Types:Creature Elemental
+PT:1/1
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a skewer counter on CARDNAME. Then you may sacrifice it. If you do, exile the top X cards of your library, where X is the number of skewer counters on CARDNAME. You may play those cards this turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SKEWER | CounterNum$ 1 | SubAbility$ DBMaySac
+SVar:DBMaySac:DB$ Sacrifice | SacValid$ Card.Self | RememberSacrificed$ True | Optional$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ You | DestinationZone$ Exile | DigNum$ X | ChangeNum$ All | Imprint$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True  | ClearImprinted$ True
+SVar:X:Count$CardCounters.SKEWER
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Menace\nWhenever Rotisserie Elemental deals combat damage to a player, put a skewer counter on Rotisserie Elemental. Then you may sacrifice it. If you do, exile the top X cards of your library, where X is the number of skewer counters on Rotisserie Elemental. You may play those cards this turn.

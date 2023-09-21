@@ -1,0 +1,7 @@
+Name:Up the Beanstalk
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield and whenever you cast a spell with mana value 5 or greater, draw a card.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and whenever you cast a spell with mana value 5 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:When Up the Beanstalk enters the battlefield and whenever you cast a spell with mana value 5 or greater, draw a card.

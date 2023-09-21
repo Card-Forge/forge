@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/rivers.tsx"/>
+ <layer id="1" name="Background" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlbENgDAMBF0wEBskgZaRgA0yAAVsl0gwBXiJnES+uPp1n9jOg1kWQgghxO8psX3mFsz20D7XZqbjI5mtgC/lfMf27+uZV+qj3wL0S7k6Pj8PsKdI5/HzrZDzMvWTS+wqh/pXVO7Z4Qy7c4WcD+AW0rzLja1M
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJyVmFtuq0AQROcT2IITJxslsdiofeO7kHjklDhUqkEZCckwPf2sfoxba+00tfZ/aO1jfD7nx/u/xzvX9fH+Nj0f7c3jekbnbsNzX/Tv07qn8+/TStN/fw2rfPEgrfal12JyKV/yqudsOu3Rc/9z/O0nPl3H+7Ddl97c+xpqHjzjsUiyO+3r9DsW0rvrrL2/2Nr5vkwr7y775ee5Q6bi5z7guSN/iW+nu4ztcLnM/vi5pBfxJfyKjtgkdjsOhefTj+3UWXZWMvu+zgm/t0I3+V++1zfm25EviAetpDflJZy5fcz9t6mWeR22vmUeJ7uTH7lSnhODkreMW9+Kt+ej15fbkH2b5OpMp0/55L732pji7bKrM6w/bpPb4zlM3Ms3FUb26ovoyLPSM/kw2Uu+ySaPT4qL+zP5sNcHYeU6bPNcPjmy223uPBfYnGjk8wv2PQ57uZtq3afJrfRLsaAMr/F7+Ne52fhWMbmYXNbnKterWsbvxJDHmbYJz5UsLe+r5OF2uU308bXAtVaak3w2kl1er1N/lz4z5Kdapnwlv4TRKi+TvcJvVU+qmlrlB2nZM1Kv4Hnv+fyW+pX3BJ9HU11x33uv67omzHDeUO1JNrEnp742h7ogXdIMxp4kfCR90hIf1SrPHdnmeiSfea1jTfd4c77WN9JIjvydYsU5qepl7JPskYwdfSMbSFv1PclP+jHO7MXSV7MLbT5NW94VT9atZG+lk99rPI+OeuwSYp302nsch5xN00zcZXmMFrN1736z1++EQ/ZW56s8rjBY4SPVOO9htNNjundvo1+SHmebYV6nfJdMs4zPz4ota5TfH/juK91jU33wmqz+Rp+5r/nuK80Rjok7bHPdiIF0Z1LcfLF3eFzTfWkOeqX/Dqgj+12qq6lHc8/nZce7cizNK8oD5YVo+Z9HdR8S3ogp2SW5aXbx/t3lfwPADxUO
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVWF1T4kAQ5I3kwYvm4kV/JQYQDfdyv9GoCcb7L5cppit97SzgVG0Bm+zsfPT07LLKFovrfB5307idxsM0v59Gv1wsPqfxNg1IN31/9Xk8G33u4HN//f3Bf9v8+zTWrrOn9R/+run4Me29cpvMhqv8qAvPHrOjfWbnr2kUYnPvdthee/dh7Z+P/t0+t67bbG98zvSZVK7vhvTf5Iuk1L73E+m2/eCH6bV9f2dHffDLbHzO0novkdrtu8+PdsPWzuOKOFn8ynyOay954tzq3OD5w3ilnKns3DesMx837mPhcUVMWAr3ge2wtZxv2K32Yf1DNtuwyr7uoTIIrrF277li3YwXlTY7xqUM/BolVgO9N9Cz2uOiOKt9b7YH+UB8OG7YrxZbqvx/fJ+LDfbGe53X39px/iz2lJS/kXggwlhKXhKxRf3uZV/z42c+x7Clen8iLsD+B4/NEOQEHMX52LouG7bPJ2G/In+Ba2AUa3qPi4mtLz2/g+spE/XQkg8F6b3Kv3Ix5wq8w5jgHO5cb4pzsNeWntdu4/bEukqw20l8dwFmVEbHs8pOsH9KFNfAA68fpZ+1zhWKUesJG1l3EIykhDmZbds6Jlg0Jo3wTEt9hbF+iQDXZf6VW9g31PaefEbezYdafBmWMQ4V18pxJuYbegj461r0wybljsbxq3mBHs59I3lHLWO/VD+PMIO6QPw7iqnarbG6tBehhqL3wHPlCbtVCnp34tU/9tlRzoYLsIzYcryHM3wenSe4L1bEZR+BLTgzrIjDoOM+j3u2ySZRR+wfzmnoC4xTPjvBJrMDOEj1zF7sAZ8oLqD/9kwOUe/qjwr3QpyNU2uimGld1pSXCBfgdO6rmicI8KZnEJMq8L9w7EexQR7RV8GFrBdc8R1ujIT7FnCKO4fW5kj+6zz4jTlSOZPrSHvcLvARa96XcS9tfc0d8YjlQXHNOSnk/GT7RthE/9bzl0lzpq+npJBzScQpfPaI6vvSc0Ekg9cM295JjiKsKqZxF4b9FnOcwceAK3HO1/6inMh2RrhGTlhPm833Sr0nQY/GDHcbnUfPUd4AzuwZ9PP5V8+J4M0oVylObbL5foo4oofoGvzvoLmE9N/gBfRgnNOi+xzbiPu98p8JdFx69+H9FV+cA70n4x3mrSifLOCoKC44HwNDUd84uF/A29tyvq+f2hf3GvQP5kn87wMM4a6DesS9vCfetdr8B4GuVKI=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="640"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="640" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="640"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="224" y="352"/>
+  <object id="7" template="../../obj/entry_up.tx" x="96" y="640"/>
+  <object id="10" template="../../obj/waypoint.tx" name="10" x="320" y="512"/>
+  <object id="11" template="../../obj/waypoint.tx" name="11" x="48" y="496"/>
+  <object id="12" template="../../obj/waypoint.tx" name="12" x="416" y="608"/>
+  <object id="13" template="../../obj/waypoint.tx" name="13" x="384" y="320"/>
+  <object id="14" template="../../obj/waypoint.tx" name="14" x="256" y="160"/>
+  <object id="15" template="../../obj/waypoint.tx" name="15" x="416" y="80"/>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="256" y="64"/>
+  <object id="17" template="../../obj/waypoint.tx" name="17" x="144" y="64"/>
+  <object id="18" template="../../obj/waypoint.tx" name="18" x="32" y="160"/>
+  <object id="19" template="../../obj/waypoint.tx" name="19" x="32" y="384"/>
+  <object id="20" template="../../obj/waypoint.tx" name="20" x="160" y="240"/>
+  <object id="21" template="../../obj/waypoint.tx" name="21" x="160" y="496"/>
+  <object id="22" template="../../obj/waypoint.tx" name="22" x="368" y="224"/>
+  <object id="23" template="../../obj/waypoint.tx" name="23" x="288" y="416"/>
+  <object id="24" template="../../obj/waypoint.tx" name="24" x="112" y="320"/>
+  <object id="25" template="../../obj/waypoint.tx" name="25" x="272" y="240"/>
+  <object id="26" template="../../obj/waypoint.tx" name="26" x="144" y="144"/>
+  <object id="27" template="../../obj/treasure.tx" x="64" y="96"/>
+  <object id="28" template="../../obj/gold.tx" x="432" y="224"/>
+  <object id="29" template="../../obj/gold.tx" x="32" y="400"/>
+  <object id="30" template="../../obj/gold.tx" x="224" y="496"/>
+  <object id="37" template="../../obj/waypoint.tx" name="37" x="64" y="352"/>
+  <object id="38" template="../../obj/waypoint.tx" name="38" x="416" y="336"/>
+ </objectgroup>
+ <objectgroup id="5" name="Objects">
+  <object id="8" template="../../obj/treasure.tx" x="304" y="48">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},
+{
+	&quot;type&quot;: &quot;item&quot;,
+	&quot;probability&quot;: 1,
+	&quot;count&quot;: 1,
+	&quot;itemName&quot;: &quot;Jungle Artifact&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="9" template="../../obj/treasure.tx" x="416" y="352"/>
+  <object id="31" template="../../obj/gold.tx" x="304" y="112"/>
+  <object id="32" template="../../obj/dialog.tx" x="240" y="80" width="96" height="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You don't even have to open it to know that this chest contains the item you are after. A primal power radiates from within.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="33" template="../../obj/enemy.tx" x="192" y="544">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Ape"/>
+    <property name="waypoints" value="r11-21-10-23"/>
+   </properties>
+  </object>
+  <object id="34" template="../../obj/enemy.tx" x="112" y="400">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Gorilla"/>
+    <property name="waypoints" value="19,r24-5-23-13"/>
+   </properties>
+  </object>
+  <object id="35" template="../../obj/enemy.tx" x="384" y="480">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Gorilla"/>
+    <property name="waypoints" value="r10-12-23-13"/>
+   </properties>
+  </object>
+  <object id="36" template="../../obj/enemy.tx" x="64" y="352">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Elephant"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="37"/>
+   </properties>
+  </object>
+  <object id="39" template="../../obj/enemy.tx" x="416" y="336">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Green Beast"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="13"/>
+   </properties>
+  </object>
+  <object id="40" template="../../obj/enemy.tx" x="224" y="160">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Ape"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="18,r20-26,r14-25,r15-22, r14-25, r20-26"/>
+   </properties>
+  </object>
+  <object id="41" template="../../obj/enemy.tx" x="240" y="272">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Gorilla"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r20-25-14-26"/>
+   </properties>
+  </object>
+  <object id="42" template="../../obj/enemy.tx" x="192" y="358">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="waypoints" value="r10-13-15-17-18-21-24-25"/>
+   </properties>
+  </object>
+  <object id="43" template="../../obj/enemy.tx" x="256" y="64">
+   <properties>
+    <property name="deckOverride" value="decks/miniboss/jungle_king.dck"/>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Monkey Cage&quot; ]
+}</property>
+    <property name="enemy" value="Gorilla"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="16"/>
+   </properties>
+  </object>
+  <object id="44" template="../../obj/enemy.tx" x="400" y="96">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="waypoints" value="r11-12-16-19-22-23-26"/>
+   </properties>
+  </object>
+  <object id="45" template="../../obj/booster.tx" x="416" y="528">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot;, &quot;basicland&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="46" template="../../obj/booster.tx" x="16" y="176">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot;, &quot;basicland&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/enemy.tx" x="144" y="560">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="enemy" value="Gorilla"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

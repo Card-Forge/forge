@@ -1,0 +1,11 @@
+Name:Stonesplitter Bolt
+ManaCost:X R
+Types:Instant
+K:Bargain
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ Z | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
+SVar:Y:Count$Bargained.2.1
+SVar:Z:SVar$X/Times.Y
+SVar:X:Count$xPaid
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nStonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
