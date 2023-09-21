@@ -515,7 +515,7 @@ public class CardImageRenderer {
     private static void setTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, float adventureHeaderHeight, float adventureTypeHeight, boolean drawAdventure, boolean altstate, boolean isFaceDown) {
         boolean fakeDuals = false;
         //update land bg colors
-        if (state.isLand()) {
+        if (state != null && state.isLand()) {
             DetailColors modColors = DetailColors.WHITE;
             if (state.isBasicLand()) {
                 if (state.isForest())
@@ -632,7 +632,7 @@ public class CardImageRenderer {
             return;
         } //remaining rendering only needed if card on top
 
-        if (state.isBasicLand()) {
+        if (state != null && state.isBasicLand()) {
             //draw watermark
             FSkinImage image = null;
             if (state.origCanProduceColoredMana() == 1 && !state.origProduceManaC()) {
@@ -672,7 +672,7 @@ public class CardImageRenderer {
 
                 } else {
                     text = !card.isSplitCard() ?
-                            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
+                            card.getText(state, needTranslation ? state == null ? null : CardTranslation.getTranslationTexts(state.getName(), "") : null) :
                             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null);
                 }
             } else {
@@ -686,7 +686,7 @@ public class CardImageRenderer {
 
                 } else {
                     text = !card.isSplitCard() ?
-                            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
+                            card.getText(state, needTranslation ? state == null ? null : CardTranslation.getTranslationTexts(state.getName(), "") : null) :
                             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null);
                 }
             }
