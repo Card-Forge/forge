@@ -98,6 +98,13 @@ public class SpellAbilityPicker {
             return null;
         }
 
+        if (printOutput && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
+            System.out.println("Current state for " + player + ":");
+            for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+                System.out.println(c);
+            }
+        }
+
         Score origGameScore = new GameStateEvaluator().getScoreForGameState(game, player);
         List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities();
         if (controller != null) {
@@ -187,7 +194,7 @@ public class SpellAbilityPicker {
 
         SpellAbility bestSa = null;
         Score bestSaValue = origGameScore;
-        print("Evaluating... (orig score = " + origGameScore +  ")");
+        print("Evaluating as " + player + "... (orig score = " + origGameScore + ")");
         for (int i = 0; i < candidateSAs.size(); i++) {
             Score value = evaluateSa(controller, phase, candidateSAs, i);
             if (value.value > bestSaValue.value) {

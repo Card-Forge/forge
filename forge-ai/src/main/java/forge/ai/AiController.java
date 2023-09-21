@@ -519,6 +519,8 @@ public class AiController {
             landList = unreflectedLands;
         }
 
+        // TODO If there's nothing to do with the mana, then play a tapland
+
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
