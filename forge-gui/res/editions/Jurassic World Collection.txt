@@ -7,5 +7,5 @@ ScryfallCode=REX
 
 [cards]
 7 R Welcome to... @Villarrte
-13 R lan Malcolm, Chaotician @Caio Monteiro
+13 R Ian Malcolm, Chaotician @Caio Monteiro
 14 R Indominus Rex, Alpha @Miro Petrov
