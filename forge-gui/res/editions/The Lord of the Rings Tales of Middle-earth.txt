@@ -303,6 +303,11 @@ ScryfallCode=LTR
 385 R Ringwraiths @Warren Mahy
 386 R Assault on Osgiliath @Warren Mahy
 387 R Elanor Gardner @Torgeir Fjereide
+824 R Eagle of Deliverance @Sidharth Chaturvedi
+825 R Minas Tirith Garrison @Irina Nordsol
+826 R Warg Rider @Pascal Quidault
+827 R Riders of the Mark @Antonio José Manzanedo
+828 R Mirkwood Channeler @Irina Nordsol
 
 [bundle]
 287 M Aragorn and Arwen, Wed @Magali Villeneuve
@@ -351,6 +356,7 @@ ScryfallCode=LTR
 330 R Smeagol, Helpful Guide @Andreas Rocha
 331 M Tom Bombadil @Marko Manev
 649 U Denethor, Ruling Steward @Campbell White
+697 M The One Ring @Veli Nyström
 
 [alternate art]
 332 U Nazgul @Wonchun Choi
@@ -422,6 +428,13 @@ ScryfallCode=LTR
 449 U Samwise the Stouthearted @Marta Nael
 450 U Gollum, Patient Plotter @Marta Nael
 451 M The One Ring @Marta Nael
+732 M Gandalf the White @Micha Huigen
+741 M Aragorn, the Uniter @Daniel Correia
+742 M Arwen, Mortal Queen @Marlene Yui
+743 M Saruman of Many Colors @Scott Balmer
+744 M Sauron, the Dark Lord @Justine Jones
+748 M The One Ring @Justine Jones
+750 M Mount Doom @Justine Jones
 753 R Mines of Moria @Lucas Terryn
 
 [extended art]
@@ -489,7 +502,6 @@ ScryfallCode=LTR
 299 M Gandalf the White @Leonardo Borazio
 300 M Saruman of Many Colors @Wonchun Choi
 301 M Sauron, the Dark Lord @Anton Solovianchyk
-744 M Sauron, the Dark Lord @Justine Jones
 
 [tokens]
 b_0_0_army
