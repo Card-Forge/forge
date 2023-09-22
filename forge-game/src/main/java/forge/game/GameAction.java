@@ -1094,7 +1094,7 @@ public class GameAction {
                  }
                  return true;
             }
-        });
+        }, true);
 
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override

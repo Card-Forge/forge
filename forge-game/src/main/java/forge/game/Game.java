@@ -646,8 +646,11 @@ public class Game {
         return visit.getFound();
     }
 
-    // Allows visiting cards in game without allocating a temporary list.
     public void forEachCardInGame(Visitor<Card> visitor) {
+        forEachCardInGame(visitor, false);
+    }
+    // Allows visiting cards in game without allocating a temporary list.
+    public void forEachCardInGame(Visitor<Card> visitor, boolean withSideboard) {
         for (final Player player : getPlayers()) {
             if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
                 return;
@@ -665,6 +668,9 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+                return;
+            }
+            if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {

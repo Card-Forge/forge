@@ -299,22 +299,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
     }
 
-    /**
-     * Check conditions for static abilities acting on a specific player. Also
-     * automatically check the general conditions.
-     *
-     * @param player a {@link Player}.
-     * @return true, if the static ability is applicable.
-     * @see {@link StaticAbility#checkConditions()}
-     */
-    public final boolean checkPlayerSpecificConditions(final Player player) {
-        if (!checkConditions()) {
-            return false;
-        }
-
-        return true;
-    }
-
     public final boolean checkMode(String mode) {
         return getParam("Mode").equals(mode);
     }
