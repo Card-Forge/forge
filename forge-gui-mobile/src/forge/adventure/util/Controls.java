@@ -380,6 +380,10 @@ public class Controls {
         return newTextraLabel(name, getTextraFont());
     }
 
+    public static TextraLabel newRewardLabel(String name) {
+        return newTextraLabel(name, getRewardHeaderFont());
+    }
+
     public static String colorIdToTypingString(ColorSet color) {
         return colorIdToTypingString(color, false);
     }
@@ -423,6 +427,10 @@ public class Controls {
 
     static public Font getTextraFont() {
         return Forge.getAssets().getTextraFont(getSkin().getFont("default"), Config.instance().getAtlas(Paths.ITEMS_ATLAS), Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
+    }
+
+    static public Font getRewardHeaderFont() {
+        return Forge.getAssets().getGenericHeaderFont(getSkin().getFont("default"));
     }
 
     static public Font getTextraFont(String name) {

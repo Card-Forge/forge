@@ -392,7 +392,7 @@ public class SpellSmithScene extends UIScene {
         if (Current.player().getGold() < currentPrice) pullUsingGold.setDisabled(true);
         if (Current.player().getShards() < currentShardPrice) pullUsingShards.setDisabled(true);
         if (rewardActor != null) rewardActor.remove();
-        rewardActor = new RewardActor(R, true, null);
+        rewardActor = new RewardActor(R, true, null, true);
         rewardActor.flip(); //Make it flip so it draws visual attention, why not.
         rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);

@@ -20,4 +20,5 @@ public class SettingData {
     public Float cardTooltipAdjLandscape;
     public boolean dayNightBG;
     public boolean disableWinLose;
+    public boolean showShopOverlay;
 }
