@@ -1,0 +1,9 @@
+Name:Galadhrim Brigade
+ManaCost:2 G
+Types:Creature Elf Soldier
+PT:2/2
+K:Squad:1 G
+S:Mode$ Continuous | Affected$ Elf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+DeckHas:Ability$Token
+DeckHints:Type$Elf
+Oracle:Squad {1}{G} (As an additional cost to cast this spell, you may pay any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nOther Elves you control get +1/+1.
