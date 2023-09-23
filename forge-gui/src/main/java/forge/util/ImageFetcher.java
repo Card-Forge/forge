@@ -65,13 +65,18 @@ public abstract class ImageFetcher {
                     }
                 }
             }
-            return null;
         } else {
             String setCode = edition.getScryfallCode();
             String langCode = edition.getCardsLangCode();
-            return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +
-                    ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
+            String primaryUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
+            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + primaryUrl);
+
+            String alternateUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop, true);
+            if (alternateUrl != null && !alternateUrl.equals(primaryUrl)) {
+                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + alternateUrl);
+            }
         }
+        return null;
     }
 
     public void fetchImage(final String imageKey, final Callback callback) {
@@ -205,9 +210,8 @@ public abstract class ImageFetcher {
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                final String scryfallURL = this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
-                if (scryfallURL != null && !hasSetLookup)
-                    downloadUrls.add(scryfallURL);
+                // This function adds to downloadUrls for us
+                this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
