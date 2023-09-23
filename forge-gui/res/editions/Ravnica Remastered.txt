@@ -38,7 +38,7 @@ ScryfallCode=RVR
 335 R Krenko, Mob Boss @Karl Kopinski
 344 R Birds of Paradise @Marcelo Vignali
 356 M Aurelia, Exemplar of Justice @Chris Rahn
-376 Niv-Mizzet, Parun @Svetlin Velinov
+376 R Niv-Mizzet, Parun @Svetlin Velinov
 397 R Blood Crypt @Rob Alexander
 399 R Breeding Pool @Rob Alexander
 401 R Godless Shrine @Rob Alexander

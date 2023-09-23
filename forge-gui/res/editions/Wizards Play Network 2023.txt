@@ -14,3 +14,4 @@ ScryfallCode=PW23
 6 R Cultivate @Nestor Ossandon Leal
 7 R Ice Out @Takuma Ebisu
 8 R Pyroblast @Takuma Ebisu
+9 R Rampant Growth @Lorenzo Lanfranconi

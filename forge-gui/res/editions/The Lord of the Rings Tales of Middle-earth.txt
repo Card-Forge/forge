@@ -355,8 +355,20 @@ ScryfallCode=LTR
 329 M Sauron, the Dark Lord @Dominik Mayer & Anato Finnstark
 330 R Smeagol, Helpful Guide @Andreas Rocha
 331 M Tom Bombadil @Marko Manev
+470 M Gandalf the White @Magali Villeneuve
+551 U Nazgul @Igor Krstic
+554 R Orcish Bowmasters @Maxim Kostin
+643 M Aragorn, the Uniter @Javier Charro
 649 U Denethor, Ruling Steward @Campbell White
 697 M The One Ring @Veli Nyström
+723 U Nazgul @Wonchun Choi
+724 U Nazgul @Chris Cold
+725 U Nazgul @Nino Is
+726 U Nazgul @Yigit Koroglu
+727 U Nazgul @Igor Krstic
+728 U Nazgul @Miklós Ligeti
+729 U Nazgul @Antonio José Manzanedo
+730 U Nazgul @Lorenzo Mastroianni
 
 [alternate art]
 332 U Nazgul @Wonchun Choi
@@ -494,6 +506,7 @@ ScryfallCode=LTR
 780 R King of the Oathbreakers @Tatiana Veryayskaya
 785 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
 787 M Glamdring @Andrea Piparo
+791 M The One Ring @Veli Nyström
 
 [buy a box]
 398 R Trailblazer's Boots @Alexander Gering

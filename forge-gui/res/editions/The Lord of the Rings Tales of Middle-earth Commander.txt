@@ -434,12 +434,15 @@ ScryfallCode=LTC
 506 R Courageous Resolve @Matt Stewart
 507 M Gandalf of the Secret Fire @Matt Stewart
 508 R Fell Beast's Shriek @Matt Stewart
-509 R Call Forth the Tempest
+509 R Call Forth the Tempest @Campbell White
 510 R Nazgul Battle-Mace @Campbell White
 511 M Witch-king, Sky Scourge @Campbell White
+512 R Mordor on the March @Campbell White
 513 R Fell Beast of Mordor @Campbell White
 514 R Minas Morgul, Dark Fortress @Campbell White
 523 R Pact of Negation @Greg Hildebrandt & Tim Hildebrandt
+529 M Seasons Past @Greg Hildebrandt & Tim Hildebrandt
+531 M Sylvan Tutor @Greg Hildebrandt & Tim Hildebrandt
 
 [tokens]
 b_3_3_wraith_menace
