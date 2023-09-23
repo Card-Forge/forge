@@ -1,0 +1,28 @@
+[metadata]
+Code=LCI
+Date=2023-11-17
+Name=The Lost Caverns of Ixalan
+Type=Expansion
+ScryfallCode=LCI
+
+[cards]
+137 R Breeches, Eager Pillager @Josu Hernaiz
+158 M Ojer Axonil, Deepest Might @Victor Adame Minguez
+185 M Ghalta, Stampede Tyrant @Lars Grant-West
+189 M Huatli, Poet of Unity @Tyler Jacobson
+212 M The Skullspore Nexus @Daarken
+287 L Plains @Olga Tereshenko
+288 L Island @WFlemming Illustration
+289 L Swamp @Elektrodeko
+290 L Mountain @BEMOCS
+291 L Forest @Matteo Bassini
+294 R Breeches, Eager Pillager @Rafal Wechterowicz
+317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
+326 M Ghalta, Stampede Tyrant @Sidharth Chaturvedi
+340 M The Skullspore Nexus @Mónica Robles Corzo
+410a M Cavern of Souls @Pedro Correa
+410b M Cavern of Souls @Pedro Correa
+410c M Cavern of Souls @Pedro Correa
+410d M Cavern of Souls @Pedro Correa
+410e M Cavern of Souls @Pedro Correa
+410f M Cavern of Souls @Pedro Correa

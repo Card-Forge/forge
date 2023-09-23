@@ -1,0 +1,11 @@
+[metadata]
+Code=REX
+Date=2023-11-17
+Name=Jurassic World Collection
+Type=Promo
+ScryfallCode=REX
+
+[cards]
+7 R Welcome to... @Villarrte
+13 R Ian Malcolm, Chaotician @Caio Monteiro
+14 R Indominus Rex, Alpha @Miro Petrov

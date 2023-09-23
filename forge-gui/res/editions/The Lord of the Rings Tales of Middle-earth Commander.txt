@@ -416,6 +416,30 @@ ScryfallCode=LTC
 408 M Sol Ring @Randy Gallegos
 409 M Sol Ring @Erikas Perl
 410 M Sol Ring @Anastasia Balakchina
+491 R Anduril, Narsil Reforged @Jason Rainville
+492 M Aragorn, Hornburg Hero @Jason Rainville
+493 R Legolas's Quick Reflexes @Jason Rainville
+494 R Gimli's Reckless Might @Jason Rainville
+495 R Isengard Unleashed @Jason Rainville
+496 R Rohirrim Chargers @Jason Rainville
+497 R Arboreal Alliance @Alexander Mokhov
+498 M Galadriel, Light of Valinor @Alexander Mokhov
+499 R Rally the Galadhrim @Alexander Mokhov
+500 R Galadriel's Dismissal @Alexander Mokhov
+501 R Mists of Lorien @Alexander Mokhov
+502 R Galadhrim Brigade @Alexander Mokhov
+503 R Olorin's Searing Light @Matt Stewart
+504 R Sorcerous Squall @Matt Stewart
+505 R Rammas Echor, Ancient Shield @Matt Stewart
+506 R Courageous Resolve @Matt Stewart
+507 M Gandalf of the Secret Fire @Matt Stewart
+508 R Fell Beast's Shriek @Matt Stewart
+509 R Call Forth the Tempest
+510 R Nazgul Battle-Mace @Campbell White
+511 M Witch-king, Sky Scourge @Campbell White
+513 R Fell Beast of Mordor @Campbell White
+514 R Minas Morgul, Dark Fortress @Campbell White
+523 R Pact of Negation @Greg Hildebrandt & Tim Hildebrandt
 
 [tokens]
 b_3_3_wraith_menace
