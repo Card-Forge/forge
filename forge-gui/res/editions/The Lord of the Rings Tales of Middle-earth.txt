@@ -746,9 +746,9 @@ ScryfallCode=LTR
 734 M The Watcher in the Water @Pedro Correa
 735 M Shadow of the Enemy @Davor Gromilović
 736 M Witch-king of Angmar @Marlene Yui
-737 M Hew the Entwood @
-738 M Spiteful Banditry @
-739 M Last March of the Ents @
+737 M Hew the Entwood @Davor Gromilović
+738 M Spiteful Banditry @Micha Huigen
+739 M Last March of the Ents @Ian Jepson
 740 M Radagast the Brown @Micha Huigen
 741 M Aragorn, the Uniter @Daniel Correia
 742 M Arwen, Mortal Queen @Marlene Yui
@@ -756,7 +756,7 @@ ScryfallCode=LTR
 744 M Sauron, the Dark Lord @Justine Jones
 745 M Tom Bombadil @Micha Huigen
 746 M Anduril, Flame of the West @Micha Huigen
-747 M Glamdring @
+747 M Glamdring @Zeb Love
 748 M The One Ring @Justine Jones
 749 M Palantir of Orthanc @Marlene Yui
 750 M Mount Doom @Justine Jones
