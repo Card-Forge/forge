@@ -926,7 +926,7 @@ public class AbilityUtils {
             if (index >= 0) {
                 char reference = valid.charAt(index + 2); // take whatever goes after EQ
                 if (Character.isLetter(reference)) {
-                    String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
+                    String varName = valid.substring(index).split(",")[0].split(t)[1].split("\\+")[0];
                     if (!sa.getSVar(varName).isEmpty() || source.hasSVar(varName)) {
                         valid = TextUtil.fastReplace(valid, TextUtil.concatNoSpace(t, varName),
                                 TextUtil.concatNoSpace(t, Integer.toString(calculateAmount(source, varName, sa))));
@@ -2672,17 +2672,25 @@ public class AbilityUtils {
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
-            final String[] workingCopy = l[0].split("_");
+            String[] paidparts = l[0].split("\\$", 2);
+            final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
 
-            List<Card> res = Lists.newArrayList();
+            List<Card> res;
             if (workingCopy[0].contains("This")) {
                 res = CardUtil.getThisTurnCast(validFilter, c, ctb, player);
             } else {
                 res = CardUtil.getLastTurnCast(validFilter, c, ctb, player);
             }
 
-            return doXMath(res.size(), expr, c, ctb);
+            int num;
+            if (paidparts.length > 1) {
+                num = handlePaid(res, paidparts[1], c, ctb);
+            } else {
+                num = res.size();
+            }
+
+            return doXMath(num, expr, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>

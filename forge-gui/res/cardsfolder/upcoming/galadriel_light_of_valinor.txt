@@ -1,0 +1,13 @@
+Name:Galadriel, Light of Valinor
+ManaCost:2 G W U
+Types:Legendary Creature Elf Noble
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBRamp,DBPutCounterAll,DBScry | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:DBRamp:DB$ Mana | Produced$ G | Amount$ 3 | SpellDescription$ Add {G}{G}{G}.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:BuffedBy:Creature
+DeckHas:Ability$Counters
+Oracle:Alliance — Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn —\n• Add {G}{G}{G}.\n• Put a +1/+1 counter on each creature you control.\n• Scry 2, then draw a card.
