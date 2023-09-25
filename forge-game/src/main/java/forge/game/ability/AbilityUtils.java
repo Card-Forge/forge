@@ -926,7 +926,7 @@ public class AbilityUtils {
             if (index >= 0) {
                 char reference = valid.charAt(index + 2); // take whatever goes after EQ
                 if (Character.isLetter(reference)) {
-                    String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
+                    String varName = valid.substring(index).split(",")[0].split(t)[1].split("\\+")[0];
                     if (!sa.getSVar(varName).isEmpty() || source.hasSVar(varName)) {
                         valid = TextUtil.fastReplace(valid, TextUtil.concatNoSpace(t, varName),
                                 TextUtil.concatNoSpace(t, Integer.toString(calculateAmount(source, varName, sa))));

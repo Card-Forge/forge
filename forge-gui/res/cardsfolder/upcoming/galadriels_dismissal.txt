@@ -1,0 +1,9 @@
+Name:Galadriel's Dismissal
+ManaCost:W
+Types:Instant
+K:Kicker:2 W
+A:SP$ Phases | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | IsCurse$ True | SubAbility$ DBPhaseOutAll | SpellDescription$ Target creature phases out. If this spell was kicked, each creature target player controls phases out instead. (Treat phased-out creatures and anything attached to them as though they don't exist until their controller's next turn.)
+SVar:DBPhaseOutAll:DB$ Phases | ValidTgts$ Player | TargetMin$ Y | TargetMax$ Y | AllValid$ Creature.TargetedPlayerCtrl | Condition$ Kicked
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.1.0
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nTarget creature phases out. If this spell was kicked, each creature target player controls phases out instead. (Treat phased-out creatures and anything attached to them as though they don't exist until their controller's next turn.)

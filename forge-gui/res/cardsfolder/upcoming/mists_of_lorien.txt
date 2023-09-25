@@ -1,0 +1,8 @@
+Name:Mists of Lorien
+ManaCost:2 U
+Types:Sorcery
+K:Replicate:U
+A:SP$ Pump | ValidTgts$ Permanent.nonLand | StackDescription$ REP target nonland permanent_{c:Targeted} | TgtPrompt$ Select target nonland permanent | SubAbility$ DBChangeZoneAll | SpellDescription$ Return target nonland permanent and each other nonland permanent with the same mana value as that permanent to their owners' hands.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ TargetedCard.Self,Permanent.nonLand+NotDefinedTargeted+cmcEQX 
+SVar:X:Targeted$CardManaCost
+Oracle:Replicate {U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nReturn target nonland permanent and each other nonland permanent with the same mana value as that permanent to their owners' hands.
