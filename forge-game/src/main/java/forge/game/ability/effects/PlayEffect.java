@@ -91,10 +91,6 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         int totalCMCLimit = Integer.MAX_VALUE;
-        int amount = 1;
-        if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
-            amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
-        }
         final Player controller;
         if (sa.hasParam("Controller")) {
             controller = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
@@ -204,8 +200,13 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("Amount") && sa.getParam("Amount").equals("All")) {
-            amount = tgtCards.size();
+        int amount = 1;
+        if (sa.hasParam("Amount")) {
+            if (sa.getParam("Amount").equals("All")) {
+                amount = tgtCards.size();
+            } else {
+                amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
+            }
         }
 
         if (hasTotalCMCLimit) {

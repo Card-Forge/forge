@@ -73,7 +73,7 @@ public class TriggerLifeLostAll extends Trigger {
         final Map<Player, Integer> map = filteredMap((Map<Player, Integer>) runParams.get(AbilityKey.Map));
 
         sa.setTriggeringObject(AbilityKey.Map, map);
-        sa.setTriggeringObject(AbilityKey.Player, map.entrySet());
+        sa.setTriggeringObject(AbilityKey.Player, map.keySet());
     }
 
     @Override

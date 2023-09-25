@@ -1689,7 +1689,7 @@ public class ComputerUtilMana {
      * @since 1.0.15
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final boolean effect) {
-        int max = 100;
+        int max = 99;
         if (sa.hasParam("XMaxLimit")) {
             max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("XMaxLimit"), sa));
         }
