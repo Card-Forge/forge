@@ -1689,12 +1689,16 @@ public class ComputerUtilMana {
      * @since 1.0.15
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final boolean effect) {
-        for (int i = 1; i < 100; i++) {
+        int max = 99;
+        if (sa.hasParam("XMaxLimit")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("XMaxLimit"), sa));
+        }
+        for (int i = 1; i <= max; i++) {
             if (!canPayManaCost(sa.getRootAbility(), player, i, effect)) {
                 return i - 1;
             }
         }
-        return 99;
+        return max;
     }
 
     /**

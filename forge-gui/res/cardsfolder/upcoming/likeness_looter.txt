@@ -3,7 +3,7 @@ ManaCost:U B
 Types:Creature Faerie Shapeshifter
 PT:1/1
 K:Flying
-A:AB$ Draw | Cost$ 1 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 A:AB$ Clone | Cost$ X | ValidTgts$ Creature.YouOwn+cmcEQX | TgtZone$ Graveyard | TgtPrompt$ Select target creature card in your graveyard | SorcerySpeed$ True | GainThisAbility$ True | AddKeywords$ Flying | SpellDescription$ CARDNAME becomes a copy of target creature card in your graveyard with mana value X, except it has flying and this ability. Activate only as a sorcery.
 SVar:X:Count$xPaid
