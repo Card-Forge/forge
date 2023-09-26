@@ -17,14 +17,14 @@
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJy1VcsNgkAQ3YsRSajExNiFJBDbAbEJS7ETPNkDHtUCZAIjj2FmAT8v2bDMzv/NgnMdLqvmeXNDaDJCWdvE7b6I+mfHaKD+jiHPK8P/PXDuIdYzMJRnYqfIOKdTned52SwCPddhF5v7cWj10/ade4EgWQl1SxvEpo6xD5pFMa+LZr8N+/58KEb6yufIBcLiegrQFmNbsT7xi74TIc+hduRX2ms1cl/ySJdrvZQznim67C8D3TEOLWgzK31p924KuCepeCdkHp/FD+r6BqVntrAGzFNy7APNbgJ74lbOwtw7g7kwXxq3UyDtKvHEeZD3BaH1hOtiH7Ghi7zjd83qi/Y90HLT7CuPXwukb82w9e8ZO/sHfHdJ5s+caH1jWWn8b19kdUl4
   </data>
  </layer>
  <layer id="7" name="Cave" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJztlEsOAUEQhsskzCOxG8IFhBjiIhwHK0ux8YijGGFPwg1cwkI8DqA63ZVulU6YGSvRyR+me/Q3X1cNgPejXwAYqGxdgBJm48rrIWaF36tq3pYyZuF/AFLj4gF0AoAQf1d3APYsDUfyBTtkrAomVlkn5C596Soca8g45V+zM9hbi+MNn/uu0gqSu4p9Drj/JAfQ83TGeH10pFuVeQrHeQJHm6ttL7G+MuapxsJz5kvXTx3NMfW1K53ZGee7an1UlPubCV1d7yT15FzToY3PflVs8zyop2fs/jRnLEYTOQ/v1YHYVHvi0DrVJQuXO5tsweyzd5d6upKhp7gzZ1MtqYeov6jH0vbUO/bAOE96R6NAf2Zl2tixm/5/KC07CrTXt93+47fGE9wMZYo=
   </data>
