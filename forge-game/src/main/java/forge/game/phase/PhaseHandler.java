@@ -264,6 +264,74 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
 
+    public boolean givePriorityToPlayer() {
+            switch (phase) {
+                case UNTAP:
+                    return false;
+
+                case UPKEEP:
+                    // Rule 503.1
+                    return true;
+
+                // Rule 504
+                case DRAW:
+                    // Rule 504.2
+                    return true;
+
+                case MAIN1:
+                    // Rule 505.6
+                    return true;
+
+                // Rule 507
+                case COMBAT_BEGIN:
+                    // Rule 507.2
+                    return true;
+
+                case COMBAT_DECLARE_ATTACKERS:
+                    // Rule 508.2
+                    // For correctness, this should give priority,
+                    // but there are almost no cases where you'd actually want to have priority
+                    // if there are no attackers, so keep this for now or someday make a setting for it.
+                    return inCombat();
+
+                // Rule 509
+                case COMBAT_DECLARE_BLOCKERS:
+                    // Rule 509.4
+                    return true;
+
+                case COMBAT_FIRST_STRIKE_DAMAGE:
+                    // Rule 510.3
+                    return true;
+
+                case COMBAT_DAMAGE:
+                    // Rule 510.3
+                    return true;
+
+                case COMBAT_END:
+                    // Rule 511.1
+                    return true;
+
+                case MAIN2:
+                    // Rule 505.6
+                    return true;
+
+                case END_OF_TURN:
+                    // Rule 513.1
+                    return true;
+
+                case CLEANUP:
+                    // TODO make sure you can get priority in the cleanup step if needed
+
+                    // Rule 514.3, 514.3a
+                    return bRepeatCleanup;
+                    
+                default:
+                    // TODO rase some crazy exception
+                    return false;
+            }
+
+    }
+
     private final void onPhaseBegin() {
         boolean skipped = false;
 
@@ -1072,7 +1140,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     public void mainLoopStep() {
         boolean keep_looping = false;
-        if (givePriorityToPlayer) {
+        if (givePriorityToPlayer()) {
             if (DEBUG_PHASES && !sw.isStarted()) {
                 sw.start();
             }
