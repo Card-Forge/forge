@@ -231,7 +231,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 params.put("Attach", c);
                                 Card attachedTo = p.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", c.toString()), params);
                                 c.attachToEntity(game.getCardState(attachedTo), sa, true);
-                            } else { 
+                            } else if (c.isAura()) { 
                                 continue;
                             }
                         }
