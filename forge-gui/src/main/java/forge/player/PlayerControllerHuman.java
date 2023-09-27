@@ -1432,11 +1432,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                             GameEntity affected, final String question) {
         if (GuiBase.getInterface().isLibgdxPort()) {
             CardView cardView;
-            SpellAbilityView spellAbilityView = effectSA.getView();
+            SpellAbilityView spellAbilityView = effectSA == null ? null : effectSA.getView();
             if (spellAbilityView != null) //updated view
                 cardView = spellAbilityView.getHostCard();
             else //fallback
-                cardView = effectSA.getCardView();
+                cardView = effectSA == null ? null : effectSA.getCardView();
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, effectSA);
