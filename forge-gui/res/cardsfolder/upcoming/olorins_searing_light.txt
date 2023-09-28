@@ -1,0 +1,12 @@
+Name:Olorin's Searing Light
+ManaCost:2 R W
+Types:Instant
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBExile | SpellDescription$ Each opponent exiles a creature with the greatest power among creatures that player controls.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, CARDNAME deals damage to each opponent equal to the power of the creature they exiled.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ RepeatBis | StackDescription$ Each opponent exiles a creature with the greatest power among creatures that player controls.
+SVar:RepeatBis:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | DamageMap$ True | RepeatSubAbility$ DBDamage | ConditionZone$ Graveyard | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionCompare$ GE2 | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$FilterControlledByRemembered_CardPower
+DeckHints:Ability$Graveyard|Mill
+Oracle:Each opponent exiles a creature with the greatest power among creatures that player controls.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, Olorin's Searing Light deals damage to each opponent equal to the power of the creature they exiled.

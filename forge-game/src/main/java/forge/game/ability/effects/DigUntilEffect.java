@@ -11,6 +11,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
@@ -21,6 +23,8 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Maps;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
@@ -213,6 +217,23 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         moveParams.put(AbilityKey.SimultaneousETB, new CardCollection(c));
                         if (sa.hasParam("GainControl")) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                        }
+                        if (sa.hasParam("AttachedTo")) {
+                            CardCollection list = AbilityUtils.getDefinedCards(c, sa.getParam("AttachedTo"), sa);
+                            if (list.isEmpty()) {
+                                list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), c.getController(), c, sa);
+                            }
+                            if (!list.isEmpty()) {
+                                list = CardLists.filter(list, CardPredicates.canBeAttached(c, sa));
+                            }
+                            if (!list.isEmpty()) {
+                                Map<String, Object> params = Maps.newHashMap();
+                                params.put("Attach", c);
+                                Card attachedTo = p.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", c.toString()), params);
+                                c.attachToEntity(game.getCardState(attachedTo), sa, true);
+                            } else { 
+                                continue;
+                            }
                         }
                         if (sa.hasParam("Tapped")) {
                             c.setTapped(true);

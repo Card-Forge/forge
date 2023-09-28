@@ -1,0 +1,11 @@
+Name:Rammas Echor, Ancient Shield
+ManaCost:3 W
+Types:Legendary Artifact
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDaw | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, draw a card, then create a 0/3 white Wall creature token with defender.
+SVar:TrigDaw:DB$ Draw | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_0_3_wall_defender
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, creatures you control with defender gain exalted until end of turn. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.withDefender+YouCtrl | KW$ Exalted
+DeckHas:Ability$Token & Type$Wall
+DeckHints:Keyword$Defender & Type$Wall
+Oracle:Whenever you cast your second spell each turn, draw a card, then create a 0/3 white Wall creature token with defender.\nAt the beginning of combat on your turn, creatures you control with defender gain exalted until end of turn. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)

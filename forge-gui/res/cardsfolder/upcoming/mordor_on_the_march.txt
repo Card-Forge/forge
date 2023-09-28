@@ -1,0 +1,11 @@
+Name:Mordor on the March
+ManaCost:3 B R
+Types:Sorcery
+K:Storm
+A:SP$ ChangeZone | ChangeType$ Creature.YouCtrl | Hidden$ True | ChangeNum$ 1 | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ChangeNum$ 1 | SubAbility$ DBCopy | SpellDescription$ Exile a creature card from your graveyard. Create a token that's a copy of it. It gains haste until end of turn. Exile it at the beginning of the next end step.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+DeckHints:Ability$Graveyard|Mill
+Oracle:Exile a creature card from your graveyard. Create a token that's a copy of it. It gains haste until end of turn. Exile it at the beginning of the next end step.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
