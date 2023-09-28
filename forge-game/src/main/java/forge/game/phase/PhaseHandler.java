@@ -101,13 +101,13 @@ public class PhaseHandler implements java.io.Serializable {
     private transient Player pPlayerPriority = null;
     private transient Player pFirstPriority = null;
     private transient Combat combat = null;
+    private boolean combatDamageAssigned = false;
     private boolean bRepeatCleanup = false;
 
     private transient Player playerDeclaresBlockers = null;
     private transient Player playerDeclaresAttackers = null;
 
     /** The need to next phase. */
-    private boolean givePriorityToPlayer = false;
 
     private final transient Game game;
 
@@ -265,87 +265,82 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public boolean givePriorityToPlayer() {
-            switch (phase) {
-                case UNTAP:
-                    return false;
+        if (isSkippingPhase(phase)) {
+            return true;
+        }
+        switch (phase) {
+            case UNTAP:
+                return false;
 
-                case UPKEEP:
-                    // Rule 503.1
-                    return true;
+            case UPKEEP:
+                // Rule 503.1
+                return true;
 
-                // Rule 504
-                case DRAW:
-                    // Rule 504.2
-                    return true;
+            // Rule 504
+            case DRAW:
+                // Rule 504.2
+                return true;
 
-                case MAIN1:
-                    // Rule 505.6
-                    return true;
+            case MAIN1:
+            case MAIN2:
+                // Rule 505.6
+                return true;
 
-                // Rule 507
-                case COMBAT_BEGIN:
-                    // Rule 507.2
-                    return true;
+            // Rule 507
+            case COMBAT_BEGIN:
+                // Rule 507.2
+                return true;
 
-                case COMBAT_DECLARE_ATTACKERS:
-                    // Rule 508.2
-                    // For correctness, this should give priority,
-                    // but there are almost no cases where you'd actually want to have priority
-                    // if there are no attackers, so keep this for now or someday make a setting for it.
-                    return inCombat();
+            case COMBAT_DECLARE_ATTACKERS:
+                // Rule 508.2
+                // For correctness, this should give priority,
+                // but there are almost no cases where you'd actually want to have priority
+                // if there are no attackers, so keep this for now or someday make a setting for it.
+                return inCombat();
 
-                // Rule 509
-                case COMBAT_DECLARE_BLOCKERS:
-                    // Rule 509.4
-                    return true;
+            // Rule 509
+            case COMBAT_DECLARE_BLOCKERS:
+                // Rule 509.4
+                return true;
 
-                case COMBAT_FIRST_STRIKE_DAMAGE:
-                    // Rule 510.3
-                    return true;
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+            case COMBAT_DAMAGE:
+                // Rule 510.3
+                return combatDamageAssigned;
 
-                case COMBAT_DAMAGE:
-                    // Rule 510.3
-                    return true;
+            case COMBAT_END:
+                // Rule 511.1
+                return true;
 
-                case COMBAT_END:
-                    // Rule 511.1
-                    return true;
+            case END_OF_TURN:
+                // Rule 513.1
+                return true;
 
-                case MAIN2:
-                    // Rule 505.6
-                    return true;
+            case CLEANUP:
+                // TODO make sure you can get priority in the cleanup step if needed
 
-                case END_OF_TURN:
-                    // Rule 513.1
-                    return true;
+                // Rule 514.3, 514.3a
+                return bRepeatCleanup;
 
-                case CLEANUP:
-                    // TODO make sure you can get priority in the cleanup step if needed
-
-                    // Rule 514.3, 514.3a
-                    return bRepeatCleanup;
-                    
-                default:
-                    // TODO rase some crazy exception
-                    return false;
-            }
+            default:
+                // TODO rase some crazy exception
+                return false;
+        }
 
     }
 
     private final void onPhaseBegin() {
         boolean skipped = false;
+        combatDamageAssigned = false;
 
         // default to not giving priority to players.
-        givePriorityToPlayer = false;
         game.getTriggerHandler().resetActiveTriggers();
         if (isSkippingPhase(phase)) {
             skipped = true;
-            givePriorityToPlayer = false;
         } else  {
             // Perform turn-based actions
             switch (phase) {
                 case UNTAP:
-                    givePriorityToPlayer = false;
                     game.getUntap().executeUntil(playerTurn);
                     game.getUntap().executeAt();
                     break;
@@ -355,8 +350,6 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
-                    // Rule 503.1
-                    givePriorityToPlayer = true;
                     break;
 
                 // Rule 504
@@ -372,8 +365,6 @@ public class PhaseHandler implements java.io.Serializable {
                             p.drawCard();
                         }
                     }
-                    // Rule 504.2
-                    givePriorityToPlayer = true;
                     break;
 
                 case MAIN1:
@@ -392,8 +383,6 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                         table.replaceCounterEffect(game, null, false);
                     }
-                    // Rule 505.6
-                    givePriorityToPlayer = true;
                     break;
 
                 // Rule 507
@@ -401,8 +390,6 @@ public class PhaseHandler implements java.io.Serializable {
                     nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
                     //PhaseUtil.verifyCombat();
-                    // Rule 507.2
-                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
@@ -410,12 +397,6 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getStack().freezeStack();
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
-
-                    // Rule 508.2
-                    // For correctness, this should give priority,
-                    // but there are almost no cases where you'd actually want to have priority
-                    // if there are no attackers, so keep this for now or someday make a setting for it.
-                    givePriorityToPlayer = inCombat();
                     break;
 
                 // Rule 509
@@ -425,8 +406,6 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 509
                     declareBlockersTurnBasedAction();
                     game.getStack().unfreezeStack();
-                    // Rule 509.4
-                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_FIRST_STRIKE_DAMAGE:
@@ -435,13 +414,10 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     // no first strikers, skip this step
-                    if (!combat.assignCombatDamage(true)) {
-                        givePriorityToPlayer = false;
-                    } else {
+                    combatDamageAssigned = combat.assignCombatDamage(true);
+                    if (combatDamageAssigned) {
                         combat.dealAssignedDamage();
                     }
-                    // Rule 510.3
-                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_DAMAGE:
@@ -449,13 +425,10 @@ public class PhaseHandler implements java.io.Serializable {
                         game.updateCombatForView();
                     }
 
-                    if (!combat.assignCombatDamage(false)) {
-                        givePriorityToPlayer = false;
-                    } else {
+                    combatDamageAssigned = combat.assignCombatDamage(false);
+                    if (combatDamageAssigned) {
                         combat.dealAssignedDamage();
                     }
-                    // Rule 510.3
-                    givePriorityToPlayer = true;
                     break;
 
                 case COMBAT_END:
@@ -466,14 +439,10 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getEndOfCombat().executeAt();
 
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                    // Rule 511.1
-                    givePriorityToPlayer = true;
                     break;
 
                 case MAIN2:
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                    // Rule 505.6
-                    givePriorityToPlayer = true;
                     break;
 
                 case END_OF_TURN:
@@ -483,8 +452,6 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     game.getEndOfTurn().executeAt();
-                    // Rule 513.1
-                    givePriorityToPlayer = true;
                     break;
 
                 case CLEANUP:
@@ -537,13 +504,9 @@ public class PhaseHandler implements java.io.Serializable {
                     nMain2sThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
-                    // Rule 514.3
-                    givePriorityToPlayer = false;
-
                     // Rule 514.3a - state-based actions
                     if (game.getAction().checkStateEffects(true)) {
                         bRepeatCleanup = true;
-                        givePriorityToPlayer = true;
                     }
                     break;
 
@@ -565,7 +528,6 @@ public class PhaseHandler implements java.io.Serializable {
         // Rule 514.3a
         if (phase == PhaseType.CLEANUP && (!game.getStack().isEmpty() || game.getStack().hasSimultaneousStackEntries())) {
             bRepeatCleanup = true;
-            givePriorityToPlayer = true;
         }
     }
 
@@ -1349,7 +1311,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     // just to avoid exposing variable to outer classes
     public void onStackResolved() {
-        givePriorityToPlayer = true;
+//        givePriorityToPlayer = true;
     }
 
     public final void setPlayerDeclaresAttackers(Player player) {
