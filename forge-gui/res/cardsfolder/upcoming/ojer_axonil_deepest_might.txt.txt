@@ -8,7 +8,7 @@ SVar:DmgPlus:DB$ ReplaceEffect | ConditionCheckSVar$ X | ConditionCompare$ LTY |
 SVar:X:ReplaceCount$DamageAmount
 SVar:Y:Count$CardPower
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control.
-SVar:TrigTransform:DB$ SetState | Defined$ TriggeredCard | Mode$ Transform
+SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Battlefield | Transformed$ True | Tapped$ True
 AlternateMode:DoubleFaced
 Oracle:Trample\nIf a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead.\nWhen Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
 
@@ -17,6 +17,7 @@ ALTERNATE
 Name:Temple of Power
 ManaCost:no cost
 Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ SetState | Cost$ 2 R T | CheckSVar$ X | SVarCompare$ GE4 | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
 SVar:X:Count$NonCombatDamageThisTurn Card.Red+YouCtrl Any
 Oracle:(Transforms from Ojer Axonil, Deepest Might.)\n{T}: Add {R}.\n{2}{R}, {T}: Transform Temple of Power. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
