@@ -29,25 +29,7 @@ import forge.model.FModel;
 public class AITest {
     private static boolean initialized = false;
 
-    public Game resetGame() {
-        // need to be done after FModel.initialize, or the Localizer isn't loaded yet
-        List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
-        Player p = game.getPlayers().get(1);
-        game.setAge(GameStage.Play);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        game.getPhaseHandler().onStackResolved();
-        // game.getAction().checkStateEffects(true);
-
-        return game;
-    }
-
-    protected Game initAndCreateGame() {
+    public void initialize() {
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
             FModel.initialize(null, new Function<ForgePreferences, Void>() {
@@ -60,6 +42,34 @@ public class AITest {
             });
             initialized = true;
         }
+    }
+
+    public Game resetGameToStart() {
+        // need to be done after FModel.initialize, or the Localizer isn't loaded yet
+        List<RegisteredPlayer> players = Lists.newArrayList();
+        Deck d1 = new Deck();
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match match = new Match(rules, players, "Test");
+        Game game = new Game(players, rules, match);
+        game.setAge(GameStage.Play);
+        return game;
+    }
+
+
+    public Game resetGame() {
+        Game game = resetGameToStart();
+        Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().onStackResolved();
+        // game.getAction().checkStateEffects(true);
+
+        return game;
+    }
+
+    protected Game initAndCreateGame() {
+        initialize();
 
         return resetGame();
     }

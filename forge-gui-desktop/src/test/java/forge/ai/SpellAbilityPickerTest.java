@@ -14,12 +14,59 @@ import org.testng.annotations.Test;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class SpellAbilityPickerTest extends AITest {
+    @Test
+    public void testPhasePriority() {
+        initialize();
+        Game game = resetGameToStart();
+
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        // Fill each player's hand and deck with islands
+
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Island", p, ZoneType.Hand);
+            addCardToZone("Island", opponent, ZoneType.Hand);
+        }
+        for (int i = 0; i < 53; i++) {
+            addCardToZone("Island", p, ZoneType.Library);
+            addCardToZone("Island", opponent, ZoneType.Library);
+        }
+
+        // Step through priority, ensuring that we hit the right phases.
+        PhaseHandler ph = game.getPhaseHandler();
+        ph.setupFirstTurn(p, null);
+        AssertJUnit.assertEquals(p, ph.getPlayerTurn());
+        AssertJUnit.assertEquals(p, ph.getPriorityPlayer());
+        AssertJUnit.assertEquals(PhaseType.UNTAP, ph.getPhase());
+        AssertJUnit.assertFalse(ph.givePriorityToPlayer());
+
+        ph.mainLoopStep();
+        // Do another main loop step for the current handling of steps.
+        ph.mainLoopStep();
+        AssertJUnit.assertEquals(PhaseType.UPKEEP, ph.getPhase());
+        AssertJUnit.assertEquals(p, ph.getPlayerTurn());
+        AssertJUnit.assertEquals(p, ph.getPriorityPlayer());
+        AssertJUnit.assertTrue(ph.givePriorityToPlayer());
+
+        ph.mainLoopStep();
+        AssertJUnit.assertEquals(p, ph.getPlayerTurn());
+        AssertJUnit.assertEquals(opponent, ph.getPriorityPlayer());
+        AssertJUnit.assertEquals(PhaseType.UPKEEP, ph.getPhase());
+        AssertJUnit.assertTrue(ph.givePriorityToPlayer());
+
+
+
+        
+    }
+
     @Test
     public void testPickingLethalDamage() {
         Game game = initAndCreateGame();
