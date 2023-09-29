@@ -1,0 +1,9 @@
+Name:Ghalta, Stampede Tyrant
+ManaCost:5 G G G
+Types:Legendary Creature Elder Dinosaur
+PT:12/12
+K:Trample
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$When CARDNAME enters the battlefield, put any number of creature cards from your hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ HandX | Hidden$ True 
+SVar:HandX:Count$ValidHand Creature.YouCtrl
+Oracle:Trample\nWhen Ghalta, Stampede Tyrant enters the battlefield, put any number of creature cards from your hand onto the battlefield.
