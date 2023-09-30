@@ -12,6 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -386,6 +387,19 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
+        if (logic.equals("ValuableAttackerOrBlocker")) {
+            if (ph.inCombat()) {
+                final Combat combat = ph.getCombat();
+                CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+                for (Card c : list) {
+                    Card animated = becomeAnimated(c, sa);
+                    boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+                    boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+                    if (isValuableAttacker || isValuableBlocker)
+                        return true;
+                }
+            }
+        }
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until

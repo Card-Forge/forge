@@ -4,7 +4,7 @@ Types:Artifact Creature Food Golem
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
-A:AB$ Animate | Cost$ 2 G | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact you control becomes a 4/4 artifact creature until end of turn.
+A:AB$ Animate | Cost$ 2 G | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | AILogic$ ValuableAttackerOrBlocker | SpellDescription$ Target noncreature artifact you control becomes a 4/4 artifact creature until end of turn.
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHas:Ability$LifeGain|Sacrifice|Token & Type$Food
 DeckHints:Type$Artifact
