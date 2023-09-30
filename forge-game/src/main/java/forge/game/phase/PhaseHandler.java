@@ -250,11 +250,6 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
-                // Rule 508.8
-                if (inCombat() && combat.getAttackers().isEmpty()) {
-                    endCombat();
-                }
-                //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
                 return !inCombat();
@@ -566,6 +561,14 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getUpkeep().executeUntilEndOfPhase(playerTurn);
                 game.getUpkeep().registerUntilEndCommand(playerTurn);
                 break;
+
+            case COMBAT_DECLARE_ATTACKERS:
+                // Rule 508.8
+                if (inCombat() && combat.getAttackers().isEmpty()) {
+                    endCombat();
+                }
+                break;
+
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
