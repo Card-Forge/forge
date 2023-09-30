@@ -636,7 +636,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // TODO can't attach later or moveToPlay would attach indirectly
                         // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
                         gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
-                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                    } else if (gameCard.isAura()) { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;
                     }
                 }
@@ -1366,7 +1366,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
                             c.attachToEntity(game.getCardState(attachedTo), sa, true);
                         }
-                        else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        else if (c.isAura()) { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
                     }

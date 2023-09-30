@@ -80,6 +80,11 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             sVars.put("StoredTransform", String.valueOf(ability.getHostCard().getTransformedTimestamp()));
         }
 
+        if (sa.getApi() == ApiType.Charm && sa.hasParam("ChoiceRestriction")) {
+            // Remember the Choice here for later handling
+            sa.getHostCard().addChosenModes(sa, sa.getSubAbility().getDescription(), sa.getHostCard().getGame().getPhaseHandler().inCombat());
+        }
+
         view = new StackItemView(this);
     }
 

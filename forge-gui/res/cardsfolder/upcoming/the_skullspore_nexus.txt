@@ -1,0 +1,12 @@
+Name:The Skullspore Nexus
+ManaCost:6 G G
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.
+SVar:TrigToken:DB$ Token | TokenScript$ g_x_x_fungus_dinosaur | TokenPower$ Z | TokenToughness$ Z
+SVar:Z:TriggerObjectsCards$CardPower
+A:AB$ Pump | Cost$ 2 T | NumAtt$ Y | Double$ True | ValidTgts$ Creature | SpellDescription$ Double target creature's power until end of turn.
+SVar:Y:Targeted$CardPower
+DeckHas:Ability$Token & Type$Fungus|Dinosaur
+Oracle:This spell costs {X} less to cast, where X is the greatest power among creatures you control.\nWhenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.\n{2}, {T}: Double target creature's power until end of turn.
