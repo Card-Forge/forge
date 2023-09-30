@@ -6812,7 +6812,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (SpellAbility sa : getSpellAbilities()) {
             //adventure spell check
             if (isAdventureCard() && sa.isAdventure()) {
-                if (getExiledWith() != null && CardStateName.Adventure.equals(getExiledWith().getCurrentStateName()))
+                if (getExiledWith() != null && getExiledWith().equals(this) && CardStateName.Adventure.equals(getExiledWith().getCurrentStateName()))
                     continue; // skip since it's already on adventure
             }
             //add alternative costs as additional spell abilities
