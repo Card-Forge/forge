@@ -176,19 +176,11 @@
 			],
 			"rarity": [
 				"Common",
-				"Uncommon"
-			],
-			"colorType": "MonoColor"
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 4,
-			"rarity": [
+				"Uncommon",
 				"Rare",
 				"Mythic Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		}
 	],
 	"questTags": [
@@ -24994,7 +24986,6 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"addMaxCount": 100,
 			"itemName": "Tibalt's Bag of Tricks",
 			"itemNames": [
 				"Tibalt's Bag of Tricks"
