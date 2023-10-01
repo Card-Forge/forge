@@ -176,19 +176,11 @@
 			],
 			"rarity": [
 				"Common",
-				"Uncommon"
-			],
-			"colorType": "MonoColor"
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 4,
-			"rarity": [
+				"Uncommon",
 				"Rare",
 				"Mythic Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		}
 	],
 	"questTags": [
