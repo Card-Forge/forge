@@ -9,4 +9,4 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | SubAbility$ DBAddCounter | ETB$ True | 
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 3
 A:AB$ Untap | Cost$ 1 U | SpellDescription$ Untap CARDNAME.
 DeckHas:Ability$Counters
-Oracle:Sleep-Cursed Faerie enters the battlefield tapped with three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\n{1}{U}: Untap Sleep-Cursed Faerie.
+Oracle:Flying, ward {2}\nSleep-Cursed Faerie enters the battlefield tapped with three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\n{1}{U}: Untap Sleep-Cursed Faerie.
