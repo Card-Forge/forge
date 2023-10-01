@@ -1164,6 +1164,9 @@ public class AbilityUtils {
             players.addAll(game.getPlayersInTurnOrder());
             players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         }
+        else if (defined.equals("Registered")) {
+            players.addAll(game.getRegisteredPlayers());
+        }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {

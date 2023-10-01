@@ -892,7 +892,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the greatest amount of damage assigned to a single opponent this turn.
      */
     public final int getMaxOpponentAssignedDamage() {
-        return Aggregates.max(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.max(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {

@@ -3,6 +3,7 @@ ManaCost:1 U R
 Types:Legendary Creature Human Wizard
 PT:1/4
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ DrawDamageOther | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.
-SVar:DrawDamageOther:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 1 | ConditionPlayerDefined$ Player.Other | ConditionPlayerContains$ Player.LostLifeThisTurn | OptionalDecider$ True
+SVar:DrawDamageOther:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 1 | ConditionCheckSVar$ OtherLost | OptionalDecider$ True
+SVar:OtherLost:PlayerCountDefinedRegistered.Other$HasPropertyLostLifeThisTurn
 K:Partner
 Oracle:At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.\nPartner (You can have two commanders if both have partner.)

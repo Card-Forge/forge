@@ -3,10 +3,10 @@ ManaCost:2 B
 Types:Legendary Creature Halfling Citizen
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters the battlefield, look at the top card of each opponent's library and exile those cards face down.
-SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Opponent | DestinationZone$ Exile | ExileFaceDown$ True
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Opponent | DestinationZone$ Exile | ExileFaceDown$ True | WithMayLook$ True
 A:AB$ Charm | Cost$ T Sac<1/Artifact> | Choices$ DBEffect,DBLoseGain
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | SpellDescription$ Until end of turn, you may play a card exiled with NICKNAME without paying its mana cost.
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | WithoutManaCost$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | MayPlayLimit$ 1
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | MayPlayLimit$ 1
 SVar:DBLoseGain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGain2 | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
 SVar:DBGain2:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:When Lobelia enters the battlefield, look at the top card of each opponent's library and exile those cards face down.\n{T}, Sacrifice an artifact: Choose one —\n• Until end of turn, you may play a card exiled with Lobelia without paying its mana cost.\n• Each opponent loses 2 life and you gain 2 life.
