@@ -436,7 +436,7 @@ public class DigEffect extends SpellAbilityEffect {
                             c.turnFaceDown(true);
                         }
                         if (sa.hasParam("WithMayLook")) {
-                            c.addMayLookFaceDownExile(c.getOwner());
+                            c.addMayLookFaceDownExile(player);
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);
