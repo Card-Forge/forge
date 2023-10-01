@@ -24994,7 +24994,6 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"addMaxCount": 100,
 			"itemName": "Tibalt's Bag of Tricks",
 			"itemNames": [
 				"Tibalt's Bag of Tricks"
