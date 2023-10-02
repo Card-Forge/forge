@@ -30,6 +30,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -329,11 +330,12 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     public static void handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
+        final CardZoneTable table = new CardZoneTable();
         if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, null, null);
+                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, table, null);
             }
             sa.resetSacrificedAsOffering();
         }
@@ -341,9 +343,12 @@ public class CostPayment extends ManaConversionMatrix {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, null, null);
+                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, table, null);
             }
             sa.resetSacrificedAsEmerge();
+        }
+        if (!table.isEmpty()) {
+            table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
         }
     }
 }
