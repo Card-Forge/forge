@@ -372,7 +372,6 @@ public class GameAction {
 
                     copied.clearDevoured();
                     copied.clearDelved();
-                    copied.clearConvoked();
                     copied.clearExploited();
                 } else if (toBattlefield && !c.isInPlay()) {
                     // was replaced with another Zone Change
@@ -647,7 +646,6 @@ public class GameAction {
         if (!c.isRealToken() && !toBattlefield) {
             copied.clearDevoured();
             copied.clearDelved();
-            copied.clearConvoked();
             copied.clearExploited();
         }
 
