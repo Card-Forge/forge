@@ -23839,7 +23839,7 @@
 	"name": "Snow Wizard",
 	"sprite": "sprites/enemy/humanoid/human/wizard/simic_wiz.atlas",
 	"deck": [
-		"decks/standard/simicwizard_snow.dck",
+		"decks/standard/simicwizard_snow.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,
