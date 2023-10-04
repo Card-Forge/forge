@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Wolf
 PT:2/3
 K:Defender
-T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+powerGE4 | TriggerDescription$ At the beginning of combat on your turn, if you control a creature with power 4 or greater, CARDNAME gets +1/+0 until end of turn and can attack this turn as though it didn't have defender.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+powerGE4 | TriggerDescription$ At the beginning of combat on your turn, if you control a creature with power 4 or greater, CARDNAME gets +1/+0 until end of turn and can attack this turn as though it didn't have defender.
 SVar:TrigPump:DB$ Pump | NumAtt$ +1 | Defined$ Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CanAttack | ExileOnMoved$ Battlefield
 SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
