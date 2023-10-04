@@ -7,7 +7,6 @@ import java.util.List;
 
 import forge.item.PaperCard;
 import forge.model.FModel;
-import java.util.function.Predicate;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
