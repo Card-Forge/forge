@@ -51,6 +51,7 @@ ScryfallCode=RVR
 415 R Watery Grave @Rob Alexander
 417 R Tomik, Distinguished Advokist @Yakotakos
 420 R Fblthp, the Lost @Tetsu Kurosawa
-425 R Massacre Girl @Midon
+425 R Massacre Girl @MiDQN
 430 R Krenko, Mob Boss @Ai Nanahira
 432 R Birds of Paradise @Kemonomichi
+445 M Ral Zarek @Fukuzo Katsura
