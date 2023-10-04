@@ -14,55 +14,235 @@ ScryfallCode=WHO
 6 R Sarah Jane Smith @Fajareka Setiawan
 7 R Yasmin Khan @Andrey Kuzinskiy
 8 R Missy @Ekaterina Burmak
+9 R Clara Oswald @Marta Nael
+10 R Adipose Offspring @John Tedrick
+11 R Astrid Peth @Ekaterina Burmak
+12 U Atraxi Warden @Slawomir Maniak
+15 R The Caves of Androzani @Nestor Ossandon Leal
+16 R Crack in Time @Eliz Roxs
+17 R Crisis of Conscience @Borja Pindado
+18 R Everybody Lives! @Alice Xia Zhang
+19 R Everything Comes to Dust @Lie Setiawan
 20 R Four Knocks @Darren Tan
 21 R The Girl in the Fireplace @Torgeir Fjereide
+23 R Jo Grant @Fajareka Setiawan
+24 R The Night of the Doctor @Borja Pindado
+26 R Peri Brown @Wangjie Li
+28 R Tegan Jovanka @Aurore Folny
+29 R Trial of a Time Lord @Audrey Benjaminsen
+30 R The War Games @Bartek Fedyczak
+32 R Wilfred Mott @John Di Giovanni
+35 R An Unearthly Child @Kieran Yanner
+40 U Don't Blink @Anato Finnstark
 41 R The Eleventh Hour @Matt Stewart
+44 R Flesh Duplicate @Kekai Kotaki
+47 R K-9, Mark I @Narendra Bintara Adi
+48 R Martha Jones @Daniel Correia
+49 R Nanogene Conversion @Miklós Ligeti
+54 R Reverse the Polarity @Randy Gallegos
+55 U Star Whale @Simon Dominic
+58 U Time Beetle @John Tedrick
 59 U Time Lord Regeneration @Elizabeth Peiró
+62 C Wibbly-wobbly, Timey-wimey @Skinnyelbows
 66 R Death in Heaven @Justyna Dura
 68 U Exterminate! @Ivan Dedov
+69 R Genesis of the Daleks @Dominik Mayer
+75 R Amy Pond @Greg Staples
+79 R Day of the Moon @Skinnyelbows
 82 R Donna Noble @Andrey Kuzinskiy
+83 R Ecstatic Beauty @Alice Xia Zhang
 86 R The Flux @Alexander Gering
 91 R The Parting of the Ways @Syd Mills
+93 R RMS Titanic @Henry Peters
+94 R Ryan Sinclair @Kim Sokol
+95 U Sibylline Soothsayer @Anna Pavleeva
+98 R Ace, Fearless Rebel @Colin Boyer
 99 R City of Death @Miklós Ligeti
 102 R The Foretold Soldier @Fajareka Setiawan
 103 R Fugitive of the Judoon @Lie Setiawan
+105 R Jamie McCrimmon @Wangjie Li
+110 R Susan Foreman @Wangjie Li
+115 U Bigger on the Inside @Tatiana Veryayskaya
+116 R Blink @Colin Boyer
+118 R The Curse of Fenric @Tatiana Veryayskaya
+120 R The Dalek Emperor @Mark Tedin
+121 R The Day of the Doctor @Eddie Schillo
+122 R Dinosaurs on a Spaceship @Narendra Bintara Adi
+124 R The Eighth Doctor @Aurore Folny
+125 R The Eleventh Doctor @Justyna Dura
 126 R The Face of Boe @Greg Staples
+127 R The Fifth Doctor @Jake Murray
+128 R The First Doctor @Kieran Yanner
+130 R The Fugitive Doctor @Greg Staples
+132 R Gallifrey Stands @Alexander Gering
+134 R Heaven Sent @BBC Studios & Robert Cornelius
+135 R Idris, Soul of the TARDIS @Manuel Castañón
+137 R Jenny, Generated Anomaly @Mandy Jurgens
+148 R The Ninth Doctor @Colin Boyer
 152 R River Song @John Di Giovanni
+154 R Run for Your Life @Fang Xinyu
+155 R Sally Sparrow @Tatiana Veryayskaya
+156 R The Second Doctor @Bryan Sola
+158 R The Seventh Doctor @BBC Studios
+159 R The Sixth Doctor @Matt Stewart
+162 R The Third Doctor @Ekaterina Burmak
+164 R The Twelfth Doctor @Alexander Mokhov
 165 R The Valeyard @Tyukina Tatiana
+167 R The War Doctor @Lixin Yin
 168 R Weeping Angel @Anato Finnstark
+178 U Laser Screwdriver @Hector Ortiz
+184 U Sonic Screwdriver @Thanh Tuấn
+185 U Sonic Screwdriver @Anthony Devine
+186 U Sonic Screwdriver @Pauline Voss
 187 U TARDIS @Chris Ostrowski
+188 R Gallifrey Council Chamber @Lixin Yin
+189 U Ominous Cemetery @Anato Finnstark
+190 R Trenzalore Clocktower @Eliz Roxs
+192 M Davros, Dalek Creator @Simon Dominic
+193 M The Fourth Doctor @David Auden Nash
+194 M The Tenth Doctor @Luisa J. Preissler
+195 M The Thirteenth Doctor @Pauline Voss
+196 L Plains @Titus Lunter
 197 L Plains @Svetlin Velinov
+198 L Island @Titus Lunter
 199 L Island @Svetlin Velinov
+200 L Swamp @Titus Lunter
 201 L Swamp @Svetlin Velinov
+202 L Mountain @Titus Lunter
 203 L Mountain @Svetlin Velinov
+204 L Forest
 205 L Forest @Svetlin Velinov
 207 R Farewell @Alice Xia Zhang
+213 M Wedding Ring @Narendra Bintara Adi
+214 R As Foretold @Erion Makuo
+239 C Arcane Signet @L J Koh
+243 U Lightning Greaves @Kieran Yanner
+244 U Mind Stone @L J Koh
+245 U Sol Ring @Kekai Kotaki
+247 U Talisman of Conviction @Tatiana Veryayskaya
+248 U Talisman of Creativity @Justyna Dura
+249 U Talisman of Curiosity @Tatiana Veryayskaya
+250 U Talisman of Dominance @Miklós Ligeti
+251 U Talisman of Impulse @David Astruga
+252 U Talisman of Indulgence @Xabi Gaztelua
+253 U Talisman of Progress @Andrey Kuzinskiy
+254 U Talisman of Unity @John Di Giovanni
+264 C Command Tower @Sean Vo
+265 C Command Tower @Pierre Loyvet
+266 C Command Tower @Henry Peters
+276 R Exotic Orchard @Miklós Ligeti
+278 R Fiery Islet @Pierre Loyvet
+293 C Path of Ancestry @Fang Xinyu
+309 R Sunbaked Canyon @Jorge Jacinto
+330 R War Room @Andreas Rocha
+331 R Waterlogged Grove @John Di Giovanni
+334 R Astrid Peth @Ekaterina Burmak
 340 R Four Knocks @Darren Tan
+342 R Jo Grant @Fajareka Setiawan
+344 R Peri Brown @Wangjie Li
 346 R Rose Tyler @Luisa J. Preissler
 347 R Sarah Jane Smith @Fajareka Setiawan
+348 R Tegan Jovanka @Aurore Folny
+350 R Wilfred Mott @John Di Giovanni
+364 R Nanogene Conversion @Miklós Ligeti
+383 R Ecstatic Beauty @Alice Xia Zhang
+389 R RMS Titanic @Henry Peters
 392 R Yasmin Khan @Andrey Kuzinskiy
+393 R Ace, Fearless Rebel @Colin Boyer
 395 R The Foretold Soldier @Fajareka Setiawan
+400 R Susan Foreman @Wangjie Li
 407 M Davros, Dalek Creator @Simon Dominic
+410 R The Eighth Doctor @Aurore Folny
+411 R The Eleventh Doctor @Justyna Dura
 412 R The Face of Boe @Greg Staples
+413 R The Fifth Doctor @Jake Murray
+414 R The First Doctor @Kieran Yanner
 415 M The Fourth Doctor @David Auden Nash
+419 R Idris, Soul of the TARDIS @Manuel Castañón
+421 R Jenny, Generated Anomaly @Mandy Jurgens
 431 R Missy @Ekaterina Burmak
+432 R The Ninth Doctor @Colin Boyer
 436 R River Song @John Di Giovanni
+439 R Sally Sparrow @Tatiana Veryayskaya
+440 R The Second Doctor @Bryan Sola
+442 R The Seventh Doctor @BBC Studios
+443 R The Sixth Doctor @Matt Stewart
 446 M The Tenth Doctor @Luisa J. Preissler
+447 R The Third Doctor @Ekaterina Burmak
 448 M The Thirteenth Doctor @Pauline Voss
+449 R The Twelfth Doctor @Alexander Mokhov
 450 R The Valeyard @Tyukina Tatiana
+452 R The War Doctor @Lixin Yin
+459 R The Moment @Patrik Hell
+463 R Trenzalore Clocktower @Eliz Roxs
 465 R Farewell @Alice Xia Zhang
+469 R As Foretold @Erion Makuo
 535 R Rose Tyler @Mike Uziel
 536 R Sarah Jane Smith @Mike Uziel
+537 R K-9, Mark I @Tyler Walpole
 539 R Yasmin Khan @Tony Foti
 540 M Davros, Dalek Creator @Lenka Šimečková
+541 R The Fugitive Doctor @Steve Morris
 546 R Missy @Karen Hallion
 547 R River Song @Aurore Folny
+548 R The War Doctor @Steve Morris
+549 R Weeping Angel @Jack Hughes
 551 U TARDIS @Dalton Pencarinha
+552 R The First Doctor @Steve Morris
+553 R The Second Doctor @Greg Staples
+554 R The Third Doctor @Roberta Ingranata
 555 M The Fourth Doctor @Jack Hughes
+555z M The Fourth Doctor @Jack Hughes
+556 R The Fifth Doctor @Karen Hallion
+557 R The Sixth Doctor @Mike Uziel
+558 R The Seventh Doctor @Chuck Lukacs
+559 R The Eighth Doctor @Jack Hughes
+560 R The Ninth Doctor @Steve Morris
 561 M The Tenth Doctor @Aurore Folny
+561z M The Tenth Doctor @Aurore Folny
+562 R The Eleventh Doctor @Tyler Walpole
+563 R The Twelfth Doctor @BBC Studios
 564 M The Thirteenth Doctor @Lenka Šimečková
+564z M The Thirteenth Doctor @Lenka Šimečková
+565 R Past in Flames @BBC Studios
+566 C Amy's Home @Filipe Pagliuso
+568 C Aplan Mortarium @Helge C. Balzer
 569 C Bad Wolf Bay @Kamila Szutenberg
+570 C Besieged Viking Village @Randy Gallegos
+579 C The Doctor's Childhood Barn @John Di Giovanni
 580 C The Doctor's Tomb @Anato Finnstark
 582 C Fixed Point in Time @Syd Mills
+585 C Human-Time Lord Meta-Crisis @Elizabeth Peiró
+587 C Lake Silencio @John Di Giovanni
 588 C The Lux Foundation Library @Wei Guan
+592 C New New York @Sean Vo
+595 C Pompeii @Logan Feliciano
+596 C 24 Prime Minister's Cabinet Room @Anthony Devine
 601 C TARDIS Bay @Erikas Perl
+604 C UNIT Headquarters @Hristo D. Chukov
+606 M Davros, Dalek Creator @Simon Dominic
+622 R Crisis of Conscience @Borja Pindado
+630 R The Pandorica @Craig J Spearing
+636 R The Wedding of River Song @Mandy Jurgens
+639 R All of History, All at Once @Nestor Ossandon Leal
+645 U Don't Blink @Anato Finnstark
+652 R K-9, Mark I @Narendra Bintara Adi
+667 C Wibbly-wobbly, Timey-wimey @Skinnyelbows
+674 R Genesis of the Daleks @Dominik Mayer
+682 R Coward // Killer @Bartek Fedyczak
+685 U Decaying Time Loop @Alexander Gering
+721 R Blink @Colin Boyer
+736 R Gallifrey Falls // No More @John Di Giovanni
+756 R Regenerations Restored @Borja Pindado
+758 R Rory Williams @Axel Sauerwald
+759 R Run for Your Life @Fang Xinyu
+772 C The War Doctor @Lixin Yin
+787 R River Song's Diary @Tatiana Veryayskaya
+794 U Ominous Cemetery @Anato Finnstark
+950 R Flesh Duplicate @Kekai Kotaki
+954 R Martha Jones @Daniel Correia
+998 M Davros, Dalek Creator @Simon Dominic
+999 R Dinosaurs on a Spaceship @Narendra Bintara Adi
+1043 R The War Doctor @Lixin Yin
+1131 M Davros, Dalek Creator @Lenka Šimečková
+1139 R The War Doctor @Steve Morris
