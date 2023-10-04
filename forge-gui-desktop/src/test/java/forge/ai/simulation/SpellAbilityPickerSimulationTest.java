@@ -872,7 +872,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
 
         final SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-        Runnable assertPickIsGoblinBombardmenTargetingOpponent = () -> {
+        Runnable assertPickIsGoblinBombardmentTargetingOpponent = () -> {
             game.getAction().checkStateEffects(true);
             SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
             AssertJUnit.assertNotNull(sa);
@@ -881,12 +881,12 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
             AssertJUnit.assertEquals(1, targets.size());
             AssertJUnit.assertTrue(targets.toString().contains(opponent.getName()));
         };
-        assertPickIsGoblinBombardmenTargetingOpponent.run();
+        assertPickIsGoblinBombardmentTargetingOpponent.run();
 
         // If we have a Pithing Needle, but it's naming something else, that's still fine.
         Card pithingNeedle = addCard("Pithing Needle", opponent);
         pithingNeedle.setNamedCard("Flooded Strand");
-        assertPickIsGoblinBombardmenTargetingOpponent.run();
+        assertPickIsGoblinBombardmentTargetingOpponent.run();
 
         // But if it's naming Gobling Bombardment, then we can't choose that SA.
         pithingNeedle.setNamedCard("Goblin Bombardment");
