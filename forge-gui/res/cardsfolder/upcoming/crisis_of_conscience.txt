@@ -1,0 +1,8 @@
+Name:Crisis of Conscience
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroyAllTokens,DBDestroyAllNonlandNontokenPermanents | CharmNum$ 1
+SVar:DBDestroyAllTokens:DB$ DestroyAll | ValidCards$ Card.token | SpellDescription$ Destroy all tokens.
+SVar:DBDestroyAllNonlandNontokenPermanents:DB$ DestroyAll | ValidCards$ Permanent.nonLand+nonToken | SpellDescription$ Destroy all nonland, nontoken permanents.
+DeckHints:Type$Token
+Oracle:Choose one —\n• Destroy all tokens.\n• Destroy all nonland, nontoken permanents.

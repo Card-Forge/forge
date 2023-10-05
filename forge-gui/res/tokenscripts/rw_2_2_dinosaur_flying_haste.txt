@@ -1,0 +1,8 @@
+Name:Dinosaur Token
+ManaCost:no cost
+Types:Creature Dinosaur
+Colors:red,white
+K:Flying
+K:Haste
+PT:2/2
+Oracle:Flying,haste

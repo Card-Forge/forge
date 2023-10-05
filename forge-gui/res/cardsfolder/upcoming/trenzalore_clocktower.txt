@@ -1,0 +1,9 @@
+Name:Trenzalore Clocktower
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPutCounter | SpellDescription$ Add {U}.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | SpellDescription$ Put a time counter on CARDNAME.
+A:AB$ ChangeZoneAll | Cost$ 1 U T SubCounter<12/TIME> Exile<1/CARDNAME> | IsPresent$ Time Lord.YouCtrl | Origin$ Graveyard,Hand | Destination$ Library | ChangeType$ Card.YouOwn | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Shuffle your graveyard and hand into your library, then draw seven cards. Activate only if you control a Time Lord.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
+DeckHas:Ability$Counters
+Oracle:{T}: Add {U}. Put a time counter on Trenzalore Clocktower.\n{1}{U}, {T}, Remove twelve time counters from Trenzalore Clocktower and exile it: Shuffle your graveyard and hand into your library, then draw seven cards. Activate only if you control a Time Lord.
