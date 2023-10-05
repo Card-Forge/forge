@@ -217,13 +217,11 @@ public class StaticEffect {
             // remove P/T bonus
             affectedCard.removePTBoost(getTimestamp(), ability.getId());
 
-            // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-
             // remove keywords
             // (Although nothing uses it at this time)
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword") || hasParam("RemoveLandTypes")
                     || hasParam("ShareRememberedKeywords") || hasParam("RemoveAllAbilities")) {
-                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId(), false);
             }
 
             if (hasParam("CantHaveKeyword")) {
@@ -289,8 +287,6 @@ public class StaticEffect {
             }
 
             affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
-
-            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
         return affectedCards;
     }

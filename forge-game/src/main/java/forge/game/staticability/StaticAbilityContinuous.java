@@ -766,7 +766,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId());
+                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId(), false);
             }
 
             // add HIDDEN keywords
@@ -895,7 +895,7 @@ public final class StaticAbilityContinuous {
             if (addTypes != null || removeTypes != null || addAllCreatureTypes
                     || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
-                        hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
+                        hostCard.getTimestamp(), stAb.getId(), false, stAb.hasParam("CharacteristicDefining"));
             }
 
             // add colors
