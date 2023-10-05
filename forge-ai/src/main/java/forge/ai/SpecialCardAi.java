@@ -296,8 +296,6 @@ public class SpecialCardAi {
     public static class PithingNeedle {
         public static String chooseCard(final Player ai, final SpellAbility sa) {
             // TODO Remove names of cards already named by other Pithing Needles
-            Card best = null;
-
             CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonmanaAbilities", ai, sa.getHostCard(), sa);
             if (!oppPerms.isEmpty()) {
                 return chooseCardFromList(oppPerms).getName();
