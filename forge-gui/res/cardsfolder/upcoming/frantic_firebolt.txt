@@ -2,6 +2,6 @@ Name:Frantic Firebolt
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is 2 plus the number of cards in your graveyard that are instant cards, sorcery cards, and/or have an Adventure.
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,AdventureCard.YouOwn/Plus.2
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Card.AdventureCard+YouOwn/Plus.2
 DeckHints:Type$Instant|Sorcery|Adventure & Ability$Graveyard
 Oracle:Frantic Firebolt deals X damage to target creature, where X is 2 plus the number of cards in your graveyard that are instant cards, sorcery cards, and/or have an Adventure.
