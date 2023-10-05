@@ -1,7 +1,7 @@
 Name:Alien Angel Token
 ManaCost:no cost
-PT:2/2
 Types:Artifact Creature Alien Angel
+PT:2/2
 K:First Strike
 K:Vigilance
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn.
