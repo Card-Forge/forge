@@ -3,7 +3,7 @@ ManaCost:R G
 Types:Legendary Creature Gnoll
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, attacking creatures get +1/+0 until end of turn.
-A:AB$ Pump | Cost$ 2 R G | NumAtt$ +X | NumDef$ +Y | Double$ True | SpellDescription$ Double CARDNAME's power and toughness until end of turn.
+A:AB$ Pump | Cost$ 2 R G | NumAtt$ +X | NumDef$ +Y | Double$ True | SpellDescription$ Double NICKNAME's power and toughness until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 1
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness

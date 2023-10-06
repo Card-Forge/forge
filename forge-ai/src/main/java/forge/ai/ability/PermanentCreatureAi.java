@@ -40,15 +40,6 @@ public class PermanentCreatureAi extends PermanentAi {
 
         if ("Never".equals(aiLogic)) {
             return false;
-        } else if ("ZeroToughness".equals(aiLogic)) {
-            // If Creature has Zero Toughness, make sure some static ability is in play
-            // That will grant a toughness bonus
-
-            final Card copy = CardUtil.getLKICopy(sa.getHostCard());
-
-            ComputerUtilCard.applyStaticContPT(game, copy, null);
-
-            return copy.getNetToughness() > 0;
         }
         return true;
     }

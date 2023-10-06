@@ -177,7 +177,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final CardState state, final IHasSVars sVarHolder) {
-        return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(state, mapParams, type), state, sVarHolder);
+        return getAbility(type, type.getApiTypeOf(mapParams), mapParams, null, state, sVarHolder);
     }
 
     public static Cost parseAbilityCost(final CardState state, Map<String, String> mapParams, AbilityRecordType type) {
@@ -226,6 +226,9 @@ public final class AbilityFactory {
             }
         }
 
+        if (abCost == null) {
+            abCost = parseAbilityCost(state, mapParams, type);
+        }
         SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
 
         if (spellAbility == null) {

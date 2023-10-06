@@ -18,6 +18,7 @@ Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Muse|Ashiok's Subconscious|It's wonderful what you find when you look to places that don't exist!
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
 Ashiok, Sculptor of Fears|Ashiok's Collection|They followed me home. Can I keep them?
+Ashiok, Wicked Manipulator|Ashiok's Oblivion|I have seen nothingness before. Let me guide you.
 Basri Ket|Basri's Army of Solidarity|Each new convert strengthens us all.
 Basri, Devoted Paladin|Basri's Mighty Leap|Soar on the wings of faith.
 Calix, Destiny's Hand|Calix's Replenish|We're all cut of the same Klothys, after all.

@@ -14,5 +14,5 @@ ALTERNATE
 Name:Deathly Ride
 ManaCost:1 B
 Types:Sorcery  Adventure
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)

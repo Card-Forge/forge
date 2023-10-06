@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -44,6 +45,7 @@ import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -75,6 +77,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
+    boolean isRewardShop, showOverlay;
+    TextraLabel overlayLabel;
 
     public int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
@@ -173,9 +177,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.graphics.requestRendering();
     }
 
-    public RewardActor(Reward reward, boolean flippable, RewardScene.Type type) {
+    public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
         this.flipOnClick = flippable;
         this.reward = reward;
+        this.isRewardShop = RewardScene.Type.Shop.equals(type);
+        this.showOverlay = showOverlay;
         if (backTexture == null) {
             backTexture = FSkin.getSleeves().get(0);
         }
@@ -351,9 +357,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite backSprite = Config.instance().getItemSprite("CardBack");
                 Sprite item = Config.instance().getItemSprite(reward.type.toString());
                 setItemTooltips(item, backSprite, false);
-                boolean isShop = RewardScene.Type.Shop.equals(type);
-                processSprite(backSprite, item, isShop ? null :
-                        Controls.newTextraLabel("[%200]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10, false);
+                processSprite(backSprite, item, isRewardShop ? null :
+                        Controls.newTextraLabel("[%200]" + reward.getCount() + " " + reward.type), 0, isRewardShop ? 0 : -10, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -752,10 +757,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         oldProjectionTransform.set(batch.getProjectionMatrix());
         applyProjectionMatrix(batch);
 
-
         if (hover | hasKeyboardFocus())
             batch.setColor(0.5f, 0.5f, 0.5f, 1);
-
 
         if (!frontSideUp()) {
             if (flipOnClick) {
@@ -766,9 +769,58 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         } else {
             drawFrontSide(batch);
         }
+
         batch.setColor(1, 1, 1, 1);
         resetTransform(batch);
         batch.setProjectionMatrix(oldProjectionTransform);
+
+        if (showOverlay && Config.instance().getSettingData().showShopOverlay) {
+            if (overlayLabel == null) {
+                setOverlayLabel();
+            }
+            if (overlayLabel != null) {
+                overlayLabel.draw(batch, parentAlpha);
+            }
+        }
+    }
+
+    private void setOverlayLabel() {
+        String display = "";
+        int alignment = Align.top;
+        String labelStyle = "background";
+        if (reward == null)
+            return;
+        Reward.Type rewardType = reward.getType();
+        switch (rewardType) {
+            case Card:
+                display = reward.getCard() != null ? CardTranslation.getTranslatedName(reward.getCard().getName()) : "";
+                //alignment = Align.topLeft;
+                labelStyle = "dialog";
+                break;
+            case Life:
+            case Gold:
+            case Shards:
+                display = reward.type.toString();
+                break;
+            case Item:
+                display =  reward.getItem() != null ? reward.getItem().name : "";
+                break;
+            case CardPack:
+                display = reward.getDeck() != null ? "Card Pack (" + reward.getDeck().getComment() + ")" : "";
+                break;
+            default:
+                break;
+        }
+        overlayLabel = Controls.newRewardLabel("[%98]" + display);
+        overlayLabel.setWidth(this.getWidth());
+        overlayLabel.setWrap(true);
+        overlayLabel.setAlignment(alignment);
+        overlayLabel.style = (Controls.getSkin().get(labelStyle, Label.LabelStyle.class));
+        //compute layout
+        overlayLabel.layout();
+        //get the layout values and apply
+        overlayLabel.setHeight(overlayLabel.layout.getHeight());
+        overlayLabel.setPosition(this.getX(), (this.getY(Align.top) - overlayLabel.layout.getHeight()));
     }
 
     private void drawFrontSide(Batch batch) {

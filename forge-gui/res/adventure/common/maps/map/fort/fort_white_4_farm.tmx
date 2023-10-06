@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="38" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <layer id="10" name="Subbackground" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJACAQBLBvBfcvHcTN7BxC5ESSCVIFAABvWukAX5k9PbhjtPQAAAAAOLEB4qICZw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztlktOwzAQhrNAje2WG3CJIhHlBBwBsWHLjsKSc5BIpFlwD7gEr6vwSld4lIwydZw2adN0DIn0y8koj/n8j8eZSc+b1ejSIdUx/DUOV3j+A4dL9TVw8NLAwUsDh1c5IHY0cZ8DGFAXB6vFmQP9eJDNNLfE4B2fo+45Vj1rHvB9yhEqzzsudKIVN2DblR+bckRaC5GPwDFVZa4Q/xb5ObIFiidHJsrcE7nsEcaBL2XuB+a5IPOekjjNPSk8Sply4PzT64icAxutt6ctenYbDuxJ6ziwD0WkptCXTJQs1JeQ6fqgNTQ11nlA6i2Ry0wcOSD3wMg/UGXOKeHAvrULjnXP1nFgjeCco0xP+to/NuWgfYjOdVIoluXeYvYBbhy41kNV7bOmcL3AffvgMFng2uy7Zv1kosqRSvt+/qLvfRX9c9D/XarbcS6Yc6gp+NfCmO2dp8V4rv292YMfWFc2n2yxOg7Ul37fdU8cXeqR7Ocfo5yjCz/6Znku1sKZzv/ed5fjijD86DH23eWAekKGN+3PYcNezIUBOe789gzcOMY673ed/0S1Y+DGsY0GDl4aOHjpF+1TSEg=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztl71OwzAQx29q3cQB9hYpL9DyPjAiMQJihzK3ApX3QCxMfHRk5uM5AEErwcpZ9qkGJU2c1nFS/Jf+iurm3Pv57OQK4OXl5VVf9SPXGayWHlwnYFlV3y/HIcAJuh8ud969lpnvOcAlesxlPqYW8R2e/NtlclypPBb1NXfLsR3JPHbwesvNrcdncXzF9jjaaj03ebF1o/gJ5vgZy1zneZqTxQWHPl8WR155Ds+xihyPDGAjADgo+bm7bI4j9AuyREG9OcJAMiS9P7Kk92CuOXSTvmPzeT2HXQ5TFlMO6lfHBTn0+DSOIjLloDp0/vR/YrytevldJq80Rvfo/W5SXcrkSOtXk+ajz7pOw/z9rk2OG7W2d3P2eZbT4svksOn/wrGO78snPHvPrN4ckwbAB3otgcd17iYcoybAsPmbR9RI8LjO3ZTjDfN/b0ieAXpaQZ48HBfoM3SPzXhEfYinCix5OfZb0l3M+VWrT9rZqZrofAyU6ZyI+uh7TYwt+r/Mpuh89FQdhLfYrDaCRXx/jvcdVpjjB5iahhA=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzVmb1uE0EQx7dI4uTuEHQUCVKw6FJEQjxAXoEmRLwDKdwngYqaGCUPwCMkQgqipU4B7wFCcT46drQe+e/R3uyc7wv/pdH5bs/n+Xl2Z2f3nKuvybZztzXsbnv+eaMN504Hzj2s+XZvh/78xh8n3s789Tf+eLA2u4eukS5XnHuasK8r3XHkmXO/1oPv5CP5zBxk994+++v7/ng+CNdIr1fDcUf5z/metjk+PQ9HjAmxsL8YE7ym+fhDcPBvtMnBopgUWWAZT3kmEaPYjAc6B6qreMR4qI+dChby/wFiI328Hs4/h8/74pAsY9HXmCflI4+Z3x1x0O99fBlnKRSeFIdFbcfDwmPluOgw7y7CIzlwfOBnC+tR7tyxtxNvoxf6val20odXwUhluZJ4fq7rPlo5doeB4Xvh3FaR9q9J4ZxXN++SNhtmsPRV6o/XPhaPs7SPHM8Ux1WC4VmkfVP5jpWD5v396Tj/s5qur/7WzGlWDurLzKCJOZ5kofbqSm1xcK2IonqKcwTnCcwrWh2ZUlscN1AnoiRHU/pWBJPn7/P5+6pyYN3ep64En+SQYxuvEQfW7XXXUSSs8WN9yCrkSOUq6/oDVaUGO85ndpKn70dZOCQDcpTVI5a6XRPHZq+k/cuCHHI9ZfWxbk1sVZ8cu8PytqpahONecMi1IEpbRzWhPTfzoSrHbYV4pMT1LgvHOlqqTRPVhFyHyD2gGEds3tbWUXS/rHe3iril2lByjcI1odwDOmhwnNN89vbR7Jzna2mpNk2jjflYIAv6qI2Pqn2vTi1WpjIOOc41LTqGsG/g/0ScmOfK1q2od8Z4oPg3resoi7R4W5RncQ6eP7pYRzUlua+I/cqqOvs7uLdT9Tn8Xeqjcoxg3tWEdWzfHCQ5RjDvWtUnB63rdqYc2Les8fhfOFhy/x3325eBA3N07F3CsnCgaC7Ad2/Llq+k+N0bjY9/m+P02g==
+  </data>
+ </layer>
+ <layer id="9" name="Clutter Above" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKgDAQBMC0oj8QP+kD8nYbxc5CieeZGUiRIrDLXUoBAACgF+sQneBf6nie457RMt17F7FPV1mf9PjS38jUo9U83taiR7R5z501PwBATzayPgca
+  </data>
+ </layer>
+ <layer id="8" name="WallsBis" width="50" height="38">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlmM9KAzEQxkcttMX2WPGgSz2JpyL4CFbfQcFjH0Pxz9G7voBQvepF1IpXX0MEX0G9mOAG0pjdTGZn4qI/CLvb7qb5dr5MJ8kaEEWW3z9sAmw3456tIy9Kw6uQjizy3VZBUkdKMDouBgBnqwDnqo0HacYVCzYe10rDjWpvSB1za/5zKar4anODdywUzBysouMkoOM0YUyk5nkKL9n8p3zlgvlf2J/n77MMiXjcd76PD+p4EKmHiqSvlpSO5Q7uXo54rLSLa6xxb7rFsNsFuLN0PK/TxxnisAUwafPE5N06j4kFF2Xeelqk9Smtw+dDWwdXjZo6Hnr90WfylY1Ph6k1XUYz+H6L3rOOxaPScdzyf8/pK1NrujRmab9hI5V3sb6KiUURFE9d9vznLhgdHBo0IU9pPlT7JPSN0cHhJw2np/ac61Q6pPLUVe61VDownophuDB9nVLHX1l32PVhir0miT0/zvrQZaf78zOp+aiheiv0Xm+deWE0YOYjxRfGW1sl4wrVlSH0825O4faw9tZR7i+jB9P6hPtT5BSjB9smuUdinuHK75zUMWdT9jbrqCO0t+mjjjpsitZrLiEd2H6kKFqvuYR0YPv5beruKyySOr4AzsCLvQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="431.373" y="607.359" width="37.6667" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="612.849" y="129.33">
+   <properties>
+    <property name="displayNameOverride" value="Plebeian Overseer"/>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="431.345" y="221.668">
+   <properties>
+    <property name="reward">[
+  {
+    {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;White&quot;,
+        &quot;Blue&quot;,
+        &quot;Green&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Bird&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/gold.tx" x="30.0087" y="46.013"/>
+  <object id="54" template="../../obj/enemy.tx" x="273.845" y="528.006">
+   <properties>
+    <property name="displayNameOverride" value="Oppressed Farmer"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="waypoints" value="wait1,93,97,93,78,wait1,93"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="467.157" y="219.348"/>
+  <object id="59" template="../../obj/enemy.tx" x="354.627" y="370.97">
+   <properties>
+    <property name="enemy" value="Human Guard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/collision.tx" x="111.336" y="606.411" width="685.775" height="16"/>
+  <object id="61" template="../../obj/collision.tx" x="-16.1944" y="-15.9587" width="817.02" height="16"/>
+  <object id="62" template="../../obj/collision.tx" x="-15.5812" y="-1.4281" width="15.6533" height="639.431"/>
+  <object id="63" template="../../obj/manashards.tx" x="621.845" y="100.769"/>
+  <object id="64" template="../../obj/manashards.tx" x="136.365" y="459.971"/>
+  <object id="65" template="../../obj/waypoint.tx" x="231.579" y="24.085"/>
+  <object id="66" template="../../obj/waypoint.tx" x="318.885" y="98.1159"/>
+  <object id="68" template="../../obj/waypoint.tx" x="637.392" y="604.163" width="11.3333" height="16.9312"/>
+  <object id="69" template="../../obj/booster.tx" x="529.946" y="244.17">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/booster.tx" x="600.176" y="84.2959">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="710.333" y="284.667">
+   <properties>
+    <property name="displayNameOverride" value="Oppressed Farmer"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="waypoints" value="wait1,75,77,98,76"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="321" y="35.3333">
+   <properties>
+    <property name="displayNameOverride" value="Oppressed Farmer"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="waypoints" value="wait1,66,99"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="232.333" y="78.6667">
+   <properties>
+    <property name="displayNameOverride" value="Plebeian Overseer"/>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="79,65"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/gold.tx" x="30" y="318"/>
+  <object id="75" template="../../obj/waypoint.tx" x="701" y="383.333"/>
+  <object id="76" template="../../obj/waypoint.tx" x="719.667" y="198.333"/>
+  <object id="77" template="../../obj/waypoint.tx" x="611" y="309.333"/>
+  <object id="78" template="../../obj/waypoint.tx" x="555" y="524.667"/>
+  <object id="79" template="../../obj/waypoint.tx" x="213.333" y="602"/>
+  <object id="80" template="../../obj/waypoint.tx" x="447.667" y="484.667"/>
+  <object id="81" template="../../obj/waypoint.tx" x="661" y="488.333"/>
+  <object id="82" template="../../obj/enemy.tx" x="526.333" y="368">
+   <properties>
+    <property name="enemy" value="Archer"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/enemy.tx" x="374.333" y="230.333">
+   <properties>
+    <property name="enemy" value="Adept White Wizard"/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/enemy.tx" x="456.333" y="250">
+   <properties>
+    <property name="deckOverride" value="decks/standard/barronlevilain.dck"/>
+    <property name="displayNameOverride" value="Baron Levilain"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Imposing Sovereign&quot; ] }"/>
+    <property name="enemy" value="Human elite"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/manashards.tx" x="490.667" y="220"/>
+  <object id="86" template="../../obj/gold.tx" x="548.333" y="221.667"/>
+  <object id="87" template="../../obj/gold.tx" x="541.667" y="393.333"/>
+  <object id="88" template="../../obj/gold.tx" x="467.667" y="46.3333"/>
+  <object id="89" template="../../obj/enemy.tx" x="81" y="66.6667">
+   <properties>
+    <property name="displayNameOverride" value="Brown Warhorse"/>
+    <property name="enemy" value="Horse"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/enemy.tx" x="84.6667" y="198">
+   <properties>
+    <property name="displayNameOverride" value="White Warhorse"/>
+    <property name="enemy" value="Sunmare"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="83.3333" y="348.667">
+   <properties>
+    <property name="displayNameOverride" value="Stuffed Pig"/>
+    <property name="enemy" value="Boar"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/enemy.tx" x="83.3333" y="460">
+   <properties>
+    <property name="displayNameOverride" value="Stuffed Pig"/>
+    <property name="enemy" value="Boar"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/waypoint.tx" x="379" y="526"/>
+  <object id="94" template="../../obj/enemy.tx" x="617.667" y="485">
+   <properties>
+    <property name="displayNameOverride" value="Plebeian Overseer"/>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="75,77,81,80,93,80,81,77"/>
+   </properties>
+  </object>
+  <object id="95" template="../../obj/enemy.tx" x="445" y="297.667">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="102,103"/>
+   </properties>
+  </object>
+  <object id="96" template="../../obj/enemy.tx" x="542.667" y="304.667">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="100,101"/>
+   </properties>
+  </object>
+  <object id="97" template="../../obj/waypoint.tx" x="194" y="564.333"/>
+  <object id="98" template="../../obj/waypoint.tx" x="625.667" y="206.667"/>
+  <object id="99" template="../../obj/waypoint.tx" x="503" y="94.6667"/>
+  <object id="100" template="../../obj/waypoint.tx" x="543.333" y="263"/>
+  <object id="101" template="../../obj/waypoint.tx" x="544.333" y="351"/>
+  <object id="102" template="../../obj/waypoint.tx" x="504.333" y="298"/>
+  <object id="103" template="../../obj/waypoint.tx" x="377.667" y="299"/>
+ </objectgroup>
+</map>

@@ -70,6 +70,15 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     /**
+     * Create a new deck from a cardpool
+     */
+    public Deck(final String name0, CardPool main) {
+        super(name0);
+        getOrCreate(DeckSection.Main).add(main.toFlatList());
+    }
+
+
+    /**
      * Copy constructor.
      * 
      * @param other

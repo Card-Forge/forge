@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="9" name="Collision2" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF9AILealrniUfYXlcmNpgsLoFmx30dMsoGAWjgHzgxokfk6t21C3Uc8soGAWjYBSMAtoCAGjkFrU=
+  </data>
+ </layer>
+ <layer id="6" name="Collision" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYCANLCgjHlMKHPkYGO5QATvwUe4We6gZC3gx8UJeiNx8LHLIGARsqegWEG2JhmFyhOwBqRsJbkGXGwi34JIbDG4hxQxau+UuVOz2CA4XSsq5u1Ryy2IC5RisvAMBfOoW8eK2g1oAOe4oiUdqgFG3jIJRMApGwSigBQAARRlSCg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlc0NgzAMhX1vR2CDjsGtXYgeyXgwAOtQJCIi145/EhCHPOlJSLHyPtlJALBr6f/N1aTqnoc9GSXmpGWRNDxoh925fGtfvCw5xexaLByDxEGxTCPAPPpYchyanmCWdwD4BDsLl//6HrayTD+O+SSWaKpHFIv3vFhYcI9wdq2zy2XnWLC8LKW5NVnOkMRCvYfx23qHtzVuP5ynYUktvSuUub1KWOL/JSgZ0vq7s+D5e1m4uWnqpZk1NTU1XaEVSCKO0Q==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlUsKwjAQQENVansSbfEAoq70GF5E2p0X6AVE6UpQwdPowoOIOzPEQRtmbEhT2kUHHoSQz0tm0gpBhxcI0ZP0A2aAwfj7VpH53/Y/9BglQowrEknipLrLUa5xgTVTe85y/klzMfGhXGAdiAOTH64//+lvkwuEaY6uvqINLrdBuQu+DYRziTdF6nDhzu9pbugA77kul71hjtBlZ+mC9aLXr029oEtu4YJ3Qr0lcJl8XKIp7YL9UUoTp9VddC88/yws1jAwDxXQXoRqHPWOHsviXiYu1B1xOeKCcsFa4Hx0F+7b59olIzBxcfmf5jyykjsr4zVU+zyH5nM4F+hfr+w8bOFyZHsfrnygPpp2oeq4SRfKqWmXjg4XvAHWxPK5
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllk1ugkAYhr9N06tYcGddAYmKZ7Am7R386U9iqKteoMcggiv0KthbWO3Puq/ViRPhG2AK7aJv8ix0PvHxZcaweiJaVYSc5/NsuM+WnbJdQo/ImBDNvd91CR6T+AeXwEtfl+d+6iL7mNMkskvaujwXWCX2Mk3SsIkuQdNOXxfouPRc3sWcJIngsABLWz2r4xIXdGk46AU0nf3r0+R1SXu/qEsEhwVYOn/fi7ymmivqstsrN13e5cJjsI4YXjr1E5cXN7sTEdmlhv+HyOIJrf1vnytmdpiH/X2N7+l39Vx8XCMEMwb5XHMzgjydpLmI1LAv68BgkM81NyMQLlmJmRkf1wjBjEE+19yM4Pse4f70FT5i3+qEO9eqcN30cnSmis6zBdcNd2+qjvCJz7Jd3tpE7+ADfLar9clyue0Q3YF78NCpxkX4XLl7dPesKmv0+Ao2YFtRp3kzQI9DMAJjRafrFpzBBmxb+jNlZIDOhmAExkx/eWb+W74Ae2Jo2w==
+  </data>
+ </layer>
+ <layer id="8" name="ClutterBis" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdljsOglAQRacDd6Fr8VdggkCtawCWoA2wKZegQGMDjbFzEV5NUKJ8hs97GG9yQgjw5mQYyCOqj8a4p+y+BThPmQtISBOXhTiNZ36xL7pHtAYGMIHlDedyRO0TCEEE4gKXWcsaG4doCxKQOu/zMhfdR1+AAUxg+S0LVzm5cHDLr7/6gtonEIIIxAJcEnikDBc9QF+AAUxgBf05bGz0w/4+5pP/v4icXY4LUbPZFR2Zs8uNjNnlRuTsishqaIE/yVwhWiri63D2TRd4XBkuMt59kQt371eXpv7cvoiqn0VjuNwKnumazPdzrb770iW/MruP73k8IpqM5HzXVXn05ACPnUq0V/td+w5NrGmU
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="180.63" y="399.698" width="88.9304" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="277.606" y="130.186">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bard Class&quot; ] }"/>
+    <property name="enemy" value="Human Bard"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="119.354" y="112.639"/>
+  <object id="52" template="../../obj/gold.tx" x="99.1001" y="131.475"/>
+  <object id="53" template="../../obj/enemy.tx" x="122.559" y="128.649">
+   <properties>
+    <property name="enemy" value="Human elite"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="343.924" y="114.932">
+   <properties>
+    <property name="enemy" value="Archer"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="73,74"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="70.5139" y="102.578">
+   <properties>
+    <property name="enemy" value="Human guard"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="99.2609" y="112.417"/>
+  <object id="57" template="../../obj/enemy.tx" x="373.131" y="358.616">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,68"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/collision.tx" x="-2.71042" y="400.395" width="577.537" height="16"/>
+  <object id="59" template="../../obj/collision.tx" x="-9.07737" y="-18.46" width="563.894" height="16"/>
+  <object id="60" template="../../obj/collision.tx" x="558.491" y="-17.5202" width="23.6121" height="434.794"/>
+  <object id="61" template="../../obj/collision.tx" x="-24.0852" y="-16.3832" width="23.6121" height="434.794"/>
+  <object id="62" template="../../obj/enemy.tx" x="48.8478" y="344.002">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="24.7443" y="140.714">
+   <properties>
+    <property name="enemy" value="Rhino"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/manashards.tx" x="533.191" y="272.146"/>
+  <object id="65" template="../../obj/manashards.tx" x="108.879" y="158.45"/>
+  <object id="66" template="../../obj/booster.tx" x="312.167" y="113.882">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/waypoint.tx" x="331.268" y="359.919"/>
+  <object id="68" template="../../obj/waypoint.tx" x="419.041" y="366.286"/>
+  <object id="71" template="../../obj/waypoint.tx" x="71.1321" y="45.2095"/>
+  <object id="72" template="../../obj/waypoint.tx" x="70.6773" y="184.828"/>
+  <object id="73" template="../../obj/waypoint.tx" x="345.366" y="44.3"/>
+  <object id="74" template="../../obj/waypoint.tx" x="343.547" y="184.373"/>
+  <object id="75" template="../../obj/manashards.tx" x="1.09565" y="21.5609"/>
+  <object id="76" template="../../obj/enemy.tx" x="26.5635" y="82.5017">
+   <properties>
+    <property name="enemy" value="Rhino"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="69,70"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -3,7 +3,7 @@ ManaCost:4 W B
 Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and black is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and black is less than seven, NICKNAME isn't a creature.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, put a coin counter on another target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | CounterType$ COIN | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.counters_GE1_COIN | Execute$ TrigReturn | TriggerDescription$ Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.

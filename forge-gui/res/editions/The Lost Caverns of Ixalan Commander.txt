@@ -1,0 +1,9 @@
+[metadata]
+Code=LCC
+Date=2023-11-17
+Name=The Lost Caverns of Ixalan Commander
+Type=Commander
+ScryfallCode=LCC
+
+[cards]
+109 M Coercive Portal @Chris Ostrowski

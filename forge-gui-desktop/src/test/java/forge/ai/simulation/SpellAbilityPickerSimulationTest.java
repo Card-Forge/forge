@@ -767,7 +767,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
          picker.chooseSpellAbilityToPlay(null);
-        // Only mode "Creatures with power 3 or less can’t block this turn" should be simulated.
+        // Only mode "Creatures with power 3 or less can't block this turn" should be simulated.
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
 
@@ -859,5 +859,38 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, targets.size());
         AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Flying Men"));
+    }
+
+    @Test
+    public void testPithingNeedlePreventsAbilitiesFromBeingChosen() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        opponent.setLife(1, null);
+        Card goblinBombardment = addCard("Goblin Bombardment", p);
+        addCard("Flying Men", p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        final SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        Runnable assertPickIsGoblinBombardmentTargetingOpponent = () -> {
+            game.getAction().checkStateEffects(true);
+            SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+            AssertJUnit.assertNotNull(sa);
+            AssertJUnit.assertEquals(goblinBombardment, sa.getHostCard());
+            MultiTargetSelector.Targets targets = picker.getPlan().getSelectedDecision().targets;
+            AssertJUnit.assertEquals(1, targets.size());
+            AssertJUnit.assertTrue(targets.toString().contains(opponent.getName()));
+        };
+        assertPickIsGoblinBombardmentTargetingOpponent.run();
+
+        // If we have a Pithing Needle, but it's naming something else, that's still fine.
+        Card pithingNeedle = addCard("Pithing Needle", opponent);
+        pithingNeedle.setNamedCard("Flooded Strand");
+        assertPickIsGoblinBombardmentTargetingOpponent.run();
+
+        // But if it's naming Gobling Bombardment, then we can't choose that SA.
+        pithingNeedle.setNamedCard("Goblin Bombardment");
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
     }
 }

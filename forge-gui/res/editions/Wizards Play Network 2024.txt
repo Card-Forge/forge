@@ -1,0 +1,13 @@
+[metadata]
+Code=PW24
+Date=2024-01-01
+Name=Wizards Play Network 2024
+Type=Promo
+ScryfallCode=PW24
+
+[cards]
+1 R Serra Angel @Jodie Muir
+2 R Lord of Atlantis @Billy Christian
+3 R Zombie Master @Igor Krstic
+4 R Goblin King @Joshua Cairos
+5 S Gaea's Liege @Jodie Muir

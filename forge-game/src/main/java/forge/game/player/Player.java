@@ -621,9 +621,40 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
+        return payLife(lifePayment, cause, effect, null);
+    }
+    public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect, Map<AbilityKey, Object> params) {
+        // fast check for pay zero life
+        if (lifePayment <= 0) {
+            cause.setPaidLife(0);
+            return true;
+        }
+
         if (!canPayLife(lifePayment, effect, cause)) {
             return false;
         }
+
+        // Replacement only matters when life payment is greater than 0
+        Map<AbilityKey, Object> replaceParams = AbilityKey.mapFromAffected(this);
+        replaceParams.put(AbilityKey.Amount, lifePayment);
+        replaceParams.put(AbilityKey.Cause, cause);
+        replaceParams.put(AbilityKey.EffectOnly, effect);
+        // copy replacement params?
+        if (cause.isReplacementAbility() && effect) {
+            replaceParams.putAll(cause.getReplacingObjects());
+        }
+        if (params != null) {
+            replaceParams.putAll(params);
+        }
+        switch (getGame().getReplacementHandler().run(ReplacementType.PayLife, replaceParams)) {
+        case Replaced:
+            return true;
+        case Prevented:
+        case Skipped:
+            return false;
+        default:
+            break;
+        };
 
         final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
@@ -632,6 +663,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
+
         if (lost > 0) { // Run triggers if player actually lost life
             boolean runAll = false;
             Map<Player, Integer> lossMap = cause.getLoseLifeMap();
@@ -860,7 +892,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the greatest amount of damage assigned to a single opponent this turn.
      */
     public final int getMaxOpponentAssignedDamage() {
-        return Aggregates.max(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.max(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {

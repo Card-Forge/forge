@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Snake
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ NafsEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player loses 1 life at the beginning of their next draw step unless they pay {1} before that draw step.
-SVar:NafsEffect:DB$ Effect | RememberObjects$ Targeted | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp
+SVar:NafsEffect:DB$ Effect | RememberObjects$ TriggeredTarget | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp
 SVar:DrawTrig:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | OneOff$ True | Execute$ Bleed | TriggerDescription$ TriggerDescription$ That player loses 1 life at the beginning of their next draw step unless they pay {1} before that step.
 SVar:Bleed:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 1
 SVar:PayUp:ST$ ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | Activator$ Player.IsRemembered | AILogic$ Always | SpellDescription$ Pay {1} to avoid losing another 1 life.

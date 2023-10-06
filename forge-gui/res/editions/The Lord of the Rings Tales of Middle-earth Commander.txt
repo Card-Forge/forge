@@ -416,6 +416,154 @@ ScryfallCode=LTC
 408 M Sol Ring @Randy Gallegos
 409 M Sol Ring @Erikas Perl
 410 M Sol Ring @Anastasia Balakchina
+411 R Beregond of the Guard @Campbell White
+412 R Champions of Minas Tirith @Tatiana Kirgetova
+413 R Field-Tested Frying Pan @Nino Is
+414 R The Gaffer @Tomas Duchek
+415 R Gilraen, Dunedain Protector @Marie Magny
+416 R Grey Host Reinforcements @Patrik Hell
+417 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
+418 R Lossarnach Captain @Justine Cruz
+419 R Of Herbs and Stewed Rabbit @Dan Scott
+420 R Archivist of Gondor @Wisnu Tan
+421 R Corsairs of Umbar @Narendra Bintara Adi
+422 R Denethor, Stone Seer @Bruno Biazotto
+423 R Fealty to the Realm @Lorenzo Mastroianni
+424 R Monstrosity of the Lake @Ben Wootten
+425 R Raise the Palisade @Jason Kang
+426 R Subjugate the Hobbits @Chris Cold
+427 R Trap the Trespassers @Tatiana Kirgetova
+428 R Gollum, Obsessed Stalker @John Di Giovanni
+429 R Lobelia, Defender of Bag End @Caroline Gariba
+430 R Rapacious Guest @Bartłomiej Gaweł
+431 R Shelob, Dread Weaver @Warren Mahy
+432 R Call for Aid @Nino Is
+433 R Cavern-Hoard Dragon @Antonio José Manzanedo
+434 R Gimli of the Glittering Caves @Sidharth Chaturvedi
+435 R Orcish Siegemaster @Anton Solovianchyk
+436 R Rampaging War Mammoth @Simon Dominic
+437 R Arwen, Weaver of Hope @Axel Sauerwald
+438 R Assemble the Entmoot @Alex Brock
+439 R Feasting Hobbit @Lorenzo Mastroianni
+440 R Galadhrim Ambush @John Di Giovanni
+441 R Haldir, Lorien Lieutenant @Syd Mills
+442 R Legolas Greenleaf @Anna Steinbauer
+443 R Mirkwood Elk @Christina Kraus
+444 R Motivated Pony @Claudiu-Antoniu Magherusan
+445 R Prize Pig @Bartłomiej Gaweł
+446 R Travel Through Caradhras @Constantin Marin
+447 R Windswift Slice @Narendra Bintara Adi
+448 M Aragorn, King of Gondor @Eli
+449 R The Balrog of Moria @Rudy Siswanto
+450 R Banquet Guests @Viko Menezes
+451 R Bilbo, Birthday Celebrant @Billy Christian
+452 R Boromir, Gondor's Hope @Campbell White
+453 R Cirdan the Shipwright @Filipe Pagliuso
+454 R Elrond of the White Council @Javier Charro
+455 R Eomer, King of Rohan @Leonardo Borazio
+456 M Eowyn, Shieldmaiden @Craig Elliott
+457 R Erestor of the Council @Syd Mills
+458 R Faramir, Steward of Gondor @Anna Podedworna
+459 R Farmer Cotton @Tomas Duchek
+460 R Forth Eorlingas! @Filipe Pagliuso
+461 M Frodo, Adventurous Hobbit @Axel Sauerwald
+462 M Galadriel, Elven-Queen @Axel Sauerwald
+463 M Gandalf, Westward Voyager @Sidharth Chaturvedi
+464 R Grima, Saruman's Footman @Matt Stewart
+465 R In the Darkness Bind Them @Lack
+466 R Lidless Gaze @Yigit Koroglu
+467 R Lord of the Nazgul @Anton Solovianchyk
+468 R Merry, Warden of Isengard @Viko Menezes
+469 R Mirkwood Trapper @John Di Giovanni
+470 R Moria Scavenger @Igor Krstic
+471 R Oath of Eorl @Randy Gallegos
+472 R Pippin, Warden of Isengard @Viko Menezes
+473 R Radagast, Wizard of Wilds @Tomas Duchek
+474 R Riders of Rohan @Stanislav Sherbakov
+475 R Sail into the West @Leonardo Borazio
+476 M Sam, Loyal Attendant @Campbell White
+477 M Saruman, the White Hand @Leonardo Borazio
+478 M Sauron, Lord of the Rings @Alex Brock
+479 R Song of Earendil @Torgeir Fjereide
+480 R Summons of Saruman @Svetlin Velinov
+481 R Taunt from the Rampart @Lorenzo Mastroianni
+482 R Too Greedily, Too Deep @Anton Solovianchyk
+483 R Treebeard, Gracious Host @Campbell White
+484 R Wake the Dragon @Henry Peters
+485 R Crown of Gondor @Jarel Threat
+486 R Hithlain Rope @Josu Solano
+487 R Lothlorien Blade @Zuzanna Wużyk
+488 R Model of Unity @Yuriy Chemezov
+489 R Relic of Sauron @Anton Solovianchyk
+490 R The Black Gate @Marc Simonetti
+491 R Anduril, Narsil Reforged @Jason Rainville
+492 M Aragorn, Hornburg Hero @Jason Rainville
+493 R Legolas's Quick Reflexes @Jason Rainville
+494 R Gimli's Reckless Might @Jason Rainville
+495 R Isengard Unleashed @Jason Rainville
+496 R Rohirrim Chargers @Jason Rainville
+497 R Arboreal Alliance @Alexander Mokhov
+498 M Galadriel, Light of Valinor @Alexander Mokhov
+499 R Rally the Galadhrim @Alexander Mokhov
+500 R Galadriel's Dismissal @Alexander Mokhov
+501 R Mists of Lorien @Alexander Mokhov
+502 R Galadhrim Brigade @Alexander Mokhov
+503 R Olorin's Searing Light @Matt Stewart
+504 R Sorcerous Squall @Matt Stewart
+505 R Rammas Echor, Ancient Shield @Matt Stewart
+506 R Courageous Resolve @Matt Stewart
+507 M Gandalf of the Secret Fire @Matt Stewart
+508 R Fell Beast's Shriek @Matt Stewart
+509 R Call Forth the Tempest @Campbell White
+510 R Nazgul Battle-Mace @Campbell White
+511 M Witch-king, Sky Scourge @Campbell White
+512 R Mordor on the March @Campbell White
+513 R Fell Beast of Mordor @Campbell White
+514 R Minas Morgul, Dark Fortress @Campbell White
+515 R Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
+516 M Ishkanah, Grafwidow @Greg Hildebrandt & Tim Hildebrandt
+517 R Doran, the Siege Tower @Greg Hildebrandt & Tim Hildebrandt
+518 R Hammerheim @Greg Hildebrandt & Tim Hildebrandt
+519 R Urborg @Greg Hildebrandt & Tim Hildebrandt
+520 U Soul's Attendant @Greg Hildebrandt & Tim Hildebrandt
+521 R Stonehewer Giant @Greg Hildebrandt & Tim Hildebrandt
+522 R Worship @Tim Hildebrandt & Greg Hildebrandt
+523 R Pact of Negation @Greg Hildebrandt & Tim Hildebrandt
+524 R River Kelpie @Greg Hildebrandt & Tim Hildebrandt
+525 M Abyssal Persecutor @Greg Hildebrandt & Tim Hildebrandt
+526 M Diabolic Intent @Greg Hildebrandt & Tim Hildebrandt
+527 U Elvish Harbinger @Greg Hildebrandt & Tim Hildebrandt
+528 U Explore @Greg Hildebrandt & Tim Hildebrandt
+529 M Seasons Past @Greg Hildebrandt & Tim Hildebrandt
+530 R Second Harvest @Greg Hildebrandt & Tim Hildebrandt
+531 M Sylvan Tutor @Greg Hildebrandt & Tim Hildebrandt
+532 U Tempt with Discovery @Greg Hildebrandt & Tim Hildebrandt
+533 R Timber Protector @Greg Hildebrandt & Tim Hildebrandt
+534 U Myriad Landscape @Greg Hildebrandt & Tim Hildebrandt
+535 R Anduril, Narsil Reforged @Jason Rainville
+536 M Aragorn, Hornburg Hero @Jason Rainville
+537 R Legolas's Quick Reflexes @Jason Rainville
+538 R Gimli's Reckless Might @Jason Rainville
+539 R Isengard Unleashed @Jason Rainville
+540 R Rohirrim Chargers @Jason Rainville
+541 R Arboreal Alliance @Alexander Mokhov
+542 M Galadriel, Light of Valinor @Alexander Mokhov
+543 R Rally the Galadhrim @Alexander Mokhov
+544 R Galadriel's Dismissal @Alexander Mokhov
+545 R Mists of Lorien @Alexander Mokhov
+546 R Galadhrim Brigade @Alexander Mokhov
+547 R Olorin's Searing Light @Matt Stewart
+548 R Sorcerous Squall @Matt Stewart
+549 R Rammas Echor, Ancient Shield @Matt Stewart
+550 R Courageous Resolve @Matt Stewart
+551 M Gandalf of the Secret Fire @Matt Stewart
+552 R Fell Beast's Shriek @Matt Stewart
+553 R Call Forth the Tempest @Campbell White
+554 R Nazgul Battle-Mace @Campbell White
+555 M Witch-king, Sky Scourge @Campbell White
+556 R Mordor on the March @Campbell White
+557 R Fell Beast of Mordor @Campbell White
+558 R Minas Morgul, Dark Fortress @Campbell White
 
 [tokens]
 b_3_3_wraith_menace

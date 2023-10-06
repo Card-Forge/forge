@@ -990,7 +990,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                if (!sa.allowsPayingWithShard(m.getSourceCard(), ManaAtom.fromName(s))) {
+                if (!sa.allowsPayingWithShard(sourceCard, ManaAtom.fromName(s))) {
                     continue;
                 }
 
@@ -1008,7 +1008,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                if (!sa.allowsPayingWithShard(m.getSourceCard(), c)) {
+                if (!sa.allowsPayingWithShard(sourceCard, c)) {
                     continue;
                 }
 
@@ -1020,7 +1020,7 @@ public class ComputerUtilMana {
             return false;
         }
 
-        if (!sa.allowsPayingWithShard(m.getSourceCard(), MagicColor.fromName(m.getOrigProduced()))) {
+        if (!sa.allowsPayingWithShard(sourceCard, MagicColor.fromName(m.getOrigProduced()))) {
             return false;
         }
 
@@ -1689,12 +1689,16 @@ public class ComputerUtilMana {
      * @since 1.0.15
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final boolean effect) {
-        for (int i = 1; i < 100; i++) {
+        int max = 99;
+        if (sa.hasParam("XMaxLimit")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("XMaxLimit"), sa));
+        }
+        for (int i = 1; i <= max; i++) {
             if (!canPayManaCost(sa.getRootAbility(), player, i, effect)) {
                 return i - 1;
             }
         }
-        return 99;
+        return max;
     }
 
     /**

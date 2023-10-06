@@ -1,0 +1,15 @@
+Name:Fell Beast of Mordor
+ManaCost:2 B B
+Types:Creature Drake Beast
+PT:3/3
+K:Flying
+K:Devour:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target opponent loses X life and you gain X life, where X is the number of +1/+1 counters on it.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target opponent loses X life and you gain X life, where X is the number of +1/+1 counters on it.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | Defined$ You
+SVar:X:Count$CardCounters.P1P1
+DeckHas:Ability$Sacrifice|Counters|LifeGain
+DeckHints:Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nDevour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)\nWhenever Fell Beast of Mordor enters the battlefield or attacks, target opponent loses X life and you gain X life, where X is the number of +1/+1 counters on it.

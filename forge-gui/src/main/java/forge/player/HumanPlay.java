@@ -528,7 +528,7 @@ public class HumanPlay {
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
-                final Card d = game.getAction().exile(c, null);
+                final Card d = game.getAction().exile(c, null, null);
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
@@ -558,7 +558,9 @@ public class HumanPlay {
                     c.tap(true, ability, ability.getActivatingPlayer());
                 }
             }
-            ability.clearTappedForConvoke();
+            if (manaInputCancelled) {
+                ability.clearTappedForConvoke();
+            }
         }
         if (!table.isEmpty() && !manaInputCancelled) {
             table.triggerChangesZoneAll(game, ability);
@@ -648,22 +650,10 @@ public class HumanPlay {
             if (ability.getSacrificedAsOffering() == null && offering != null) {
                 ability.setSacrificedAsOffering(offering);
             }
-            if (ability.getSacrificedAsOffering() != null) {
-                System.out.println("Finishing up Offering");
-                offering.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(offering, ability, false, null, null);
-                ability.resetSacrificedAsOffering();
-            }
         }
         if (ability.isEmerge()) {
             if (ability.getSacrificedAsEmerge() == null && emerge != null) {
                 ability.setSacrificedAsEmerge(emerge);
-            }
-            if (ability.getSacrificedAsEmerge() != null) {
-                System.out.println("Finishing up Emerge");
-                emerge.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(emerge, ability, false, null, null);
-                ability.resetSacrificedAsEmerge();
             }
         }
         if (ability.getTappedForConvoke() != null) {
@@ -673,7 +663,6 @@ public class HumanPlay {
                 c.tap(true, ability, activator);
             }
             activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
-            ability.clearTappedForConvoke();
         }
         return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
     }

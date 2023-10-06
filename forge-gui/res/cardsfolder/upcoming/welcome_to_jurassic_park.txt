@@ -1,0 +1,25 @@
+Name:Welcome to...
+ManaCost:1 G G
+Types:Enchantment Saga
+K:Saga:3:DBAnimateAll,DBToken,DBWrath
+SVar:DBAnimateAll:DB$ Animate |  ValidTgts$ Artifact.nonCreature+OppCtrl | TgtPrompt$ Select target noncreature Artifact | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | Defined$ Targeted | Power$ 0 | Toughness$ 4 | Types$ Creature & Artifact & Wall | Keywords$ Defender | Duration$ UntilHostLeavesPlay | SpellDescription$ For each opponent, up to one target noncreature artifact they control becomes a 0/4 Wall artifact creature with defender for as long as you control this Saga
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | PumpKeywords$ Haste | SpellDescription$ Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.
+SVar:DBWrath:DB$ DestroyAll | ValidCards$ Creature.Wall | SubAbility$ DBTransform | SpellDescription$ Destroy all Walls. Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Dinosaur
+DeckHints:Type$Dinosaur & Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — For each opponent, up to one target noncreature artifact they control becomes a 0/4 Wall artifact creature with defender for as long as you control this Saga.\nII — Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.\nIII — Destroy all Walls. Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Jurassic Park
+ManaCost:no cost
+Types:Legendary Land
+S:Mode$ Continuous | Affected$ Dinosaur.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Escape:CardManaCost ExileFromGrave<3/Card.Other/other> | Description$ Each Dinosaur card in your graveyard has escape. The escape cost is equal to the card’s mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Dinosaur you control.
+SVar:X:Count$Valid Dinosaur.YouCtrl
+Oracle:(Transforms from Welcome to ….)\nEach Dinosaur card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)\n{T}: Add {G} for each Dinosaur you control.

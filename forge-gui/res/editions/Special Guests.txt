@@ -1,0 +1,16 @@
+[metadata]
+Code=SPG
+Date=2023-11-17
+Name=Special Guests
+Type=Collector_Edition
+ScryfallCode=SPG
+
+[cards]
+1 R Lord of Atlantis @Syd Mills
+17 M Mana Crypt @Dominik Mayer
+17a M Mana Crypt @Dominik Mayer
+17b M Mana Crypt @Dominik Mayer
+17c M Mana Crypt @Dominik Mayer
+17d M Mana Crypt @Dominik Mayer
+17e M Mana Crypt @Dominik Mayer
+17f M Mana Crypt @Dominik Mayer

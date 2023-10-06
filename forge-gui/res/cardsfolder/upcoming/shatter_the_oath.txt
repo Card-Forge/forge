@@ -2,6 +2,6 @@ Name:Shatter the Oath
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ Destroy | ValidTgts$ Enchantment,Creature | TgtPrompt$ Select enchantment or creature | SubAbility$ TrigToken | SpellDescription$ Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | TargetMin$ 0 | TargetMax$ 1 | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | TargetMin$ 0 | TargetMax$ 1 | AttachedTo$ ThisTargetedCard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control
 DeckHas:Ability$Token & Type$Role|Aura
 Oracle:Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

@@ -10,7 +10,7 @@ ScryfallCode=PMEI
 5 C Blue Elemental Blast @Richard Thomas
 9 C Scent of Cinder @Carl Critchlow
 10 C Lightning Hounds @Andrew Robinson
-10* C Jamuraan Lion @Stuart Griffin
+10★ C Jamuraan Lion @Stuart Griffin
 11 C Spined Wurm @Keith Parkinson
 12 U Warmonger @Heather Hudson
 13 C Silver Drake @Alan Pollack
@@ -52,3 +52,7 @@ ScryfallCode=PMEI
 49 R Usher of the Fallen @Anastasia Ovchinnikova
 50 R Frantic Search @Jeff Miracola
 51 R Mental Misstep @Erica Yang
+52 R Worn Powerstone @Henry G. Higginbotham
+53 R Gingerbrute @ Vincent Proce
+54 R Ruin Crab @Simon Dominic
+55 R Avalanche Riders @Lake Hurwitz

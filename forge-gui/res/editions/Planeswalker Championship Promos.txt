@@ -1,0 +1,34 @@
+[metadata]
+Code=PWCS
+Date=2019-10-01
+Name=Planeswalker Championship Promos
+Type=Promo
+ScryfallCode=PWCS
+
+[cards]
+20191 U Pteramander @Simon Dominic
+20192 R Experimental Frenzy @Simon Dominic
+20193 M Vraska, Golgari Queen @Magali Villeneuve
+20201 U Narset, Parter of Veils @Magali Villeneuve
+20202 R Nissa, Who Shakes the World @Chris Rallis
+20203 M Liliana, Dreadhorde General @Chris Rallis
+20204 U Mystical Dispute @Ekaterina Burmak
+20205 R Fae of Wishes @Magali Villeneuve
+20206 M Elspeth, Sun's Nemesis @Livia Prima
+20211 M Basri Ket @Toshiaki Takayama
+20212 U Seasoned Hallowblade @Keiji Hida
+20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
+20214 U Saw It Coming @Anato Finnstark
+20215 M Kaya the Inexorable @Jason A. Engle
+20216 R Faceless Haven @Pablo Mendoza
+20221 M Grand Master of Flowers @Toshiaki Takayama
+20222 R Adult Gold Dragon @Kotakan
+20223 U Krydle of Baldur's Gate @Sansyu
+20224 M The Wandering Emperor @Takayuki Futami
+20225 R Farewell @SOFT_MEN
+20226 U Banishing Slash @Ruiko Nakamura
+20231 M Elspeth Resplendent @Areku Nishiki
+20232 R Giada, Font of Hope @Umiu Geso
+20233 M Liliana of the Veil @Yuichi Murakami
+20234 R Braids, Arisen Nightmare @Daisuke Tatsuma
+20235 U Phyrexian Rager @Brock Grossman

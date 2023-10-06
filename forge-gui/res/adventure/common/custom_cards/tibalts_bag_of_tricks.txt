@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:red,black
 Types:Enchantment
 A:AB$ RollDice | Cost$ 3 PayShards<4> | Sides$ 6 | ActivationZone$ Command | ResultSubAbilities$ 1-2:DBConjureSmall,3:DBRandomLoot:,4:DBCast,5-6:DBDraft | SpellDescription$ Roll a six-sided die.
-SVar:DBConjureSmall:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chained Brute,Big Spender,Devilish Valet,Gibbering Fiend,Hobblefiend,Footlight Fiend,Forge Devil,Festival Crasher,Hulking Devil,Mayhem Devil,Spiteful Prankster,Vexing Devil,Wildfire Devil | Zone$ Battlefield | SpellDescription$ Conjure a random Devil unto the battlefield.  
+SVar:DBConjureSmall:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chained Brute,Big Spender,Devilish Valet,Gibbering Fiend,Hobblefiend,Footlight Fiend,Forge Devil,Festival Crasher,Hulking Devil,Mayhem Devil,Spiteful Prankster,Vexing Devil,Wildfire Devils | Zone$ Battlefield | SpellDescription$ Conjure a random Devil unto the battlefield.  
 SVar:DBRandomLoot:DB$ Draw | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard3 | SpellDescription$ Each player draws three cards, then discards three cards at random.
 SVar:DBDiscard3:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 3
 SVar:DBCast:DB$ Play | AnySupportedCard$ Names:Hellion Eruption,Insurrection,Warp World,Shahrazad,Possibility Storm,Scrambleverse | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World,Shahrazad,Possibility Storm,Scrambleverse.

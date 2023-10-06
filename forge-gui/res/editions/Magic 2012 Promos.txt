@@ -8,6 +8,4 @@ ScryfallCode=PM12
 [cards]
 82★ M Bloodlord of Vaasgoth @Min Yum
 126★ R Chandra's Phoenix @Steve Argyle
-156 U Stormblood Berserker @Greg Staples
-171 R Dungrove Elder @Scott Chou
 176★ R Garruk's Horde @Kev Walker

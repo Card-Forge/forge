@@ -1,10 +1,10 @@
 Name:Feral Encounter
 ManaCost:G G
 Types:Sorcery
-A:SP$ Dig | Defined$ You | DigNum$ 5 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | RestRandomOrder$ True | SubAbility$ DBMayPlay | SpellDescription$ Look at the top five cards of your library. You may exile a creature card from among them. Put the rest on the bottom of your library in a random order. You may cast the exiled card this turn. At the beginning of the next combat phase this turn, target creature you control deals damage equal to its power to up to one target creature you don’t control.
+A:SP$ Dig | Defined$ You | DigNum$ 5 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | RestRandomOrder$ True | SubAbility$ DBMayPlay | SpellDescription$ Look at the top five cards of your library. You may exile a creature card from among them. Put the rest on the bottom of your library in a random order. You may cast the exiled card this turn. At the beginning of the next combat phase this turn, target creature you control deals damage equal to its power to up to one target creature you don't control.
 SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ExileOnMoved$ Exile | SubAbility$ DBDelayTrig 
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast the exiled card this turn. 
-SVar:DBDelayTrig:DB$ DelayedTrigger | ThisTurn$ True | Mode$ Phase | Phase$ BeginCombat | Execute$ TrigFight | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next combat phase this turn, target creature you control deals damage equal to its power to up to one target creature you don’t control.
+SVar:DBDelayTrig:DB$ DelayedTrigger | ThisTurn$ True | Mode$ Phase | Phase$ BeginCombat | Execute$ TrigFight | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next combat phase this turn, target creature you control deals damage equal to its power to up to one target creature you don't control.
 SVar:TrigFight:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

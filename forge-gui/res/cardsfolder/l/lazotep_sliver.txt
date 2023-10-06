@@ -3,10 +3,10 @@ ManaCost:3 B
 Types:Creature Zombie Sliver
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Afflict:2 | Description$ Sliver creatures you control have afflict 2. (Whenever a creature with afflict 2 becomes blocked, defending player loses 2 life.)
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Sliver.nonToken+YouCtrl | Execute$ TrigAmass | TriggerDescription$ Whenever a nontoken Sliver you control dies, amass Slivers 2. (Put two +1/+1 counters on an Army you control. It’s also a Sliver. If you don’t control an Army, create a 0/0 black Sliver Army creature token first.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Sliver.nonToken+YouCtrl | Execute$ TrigAmass | TriggerDescription$ Whenever a nontoken Sliver you control dies, amass Slivers 2. (Put two +1/+1 counters on an Army you control. It's also a Sliver. If you don't control an Army, create a 0/0 black Sliver Army creature token first.)
 SVar:TrigAmass:DB$ Amass | Type$ Sliver | Num$ 2 
 DeckHas:Ability$Token|Counters & Type$Army
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 DeckHints:Type$Sliver
-Oracle:Sliver creatures you control have afflict 2. (Whenever a creature with afflict 2 becomes blocked, defending player loses 2 life.)\nWhenever a nontoken Sliver you control dies, amass Slivers 2. (Put two +1/+1 counters on an Army you control. It’s also a Sliver. If you don’t control an Army, create a 0/0 black Sliver Army creature token first.)
+Oracle:Sliver creatures you control have afflict 2. (Whenever a creature with afflict 2 becomes blocked, defending player loses 2 life.)\nWhenever a nontoken Sliver you control dies, amass Slivers 2. (Put two +1/+1 counters on an Army you control. It's also a Sliver. If you don't control an Army, create a 0/0 black Sliver Army creature token first.)

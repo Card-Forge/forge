@@ -1,0 +1,10 @@
+Name:Aragorn, Hornburg Hero
+ManaCost:1 R G W
+Types:Legendary Creature Human Soldier
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ First Strike & Renown:1 |  Description$ Attacking creatures you control have first strike and renown 1. (When a creature with renown 1 deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)
+T:Mode$ DamageDone | ValidSource$ Creature.IsRenowned+YouCtrl | Execute$ TrigDouble | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever a renowned creature you control deals combat damage to a player, double the number of +1/+1 counters on it.
+SVar:TrigDouble:DB$ MultiplyCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Attacking creatures you control have first strike and renown 1. (When a creature with renown 1 deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhenever a renowned creature you control deals combat damage to a player, double the number of +1/+1 counters on it.

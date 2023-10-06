@@ -167,7 +167,15 @@ public class FightAi extends SpellAbilityAi {
     public static boolean canFightAi(final Player ai, final SpellAbility sa, int power, int toughness) {
     	final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final AbilitySub tgtFight = sa.getSubAbility();
+        AbilitySub tgtFight = sa.getSubAbility();
+        while (tgtFight != null && tgtFight.getApi() != ApiType.Fight && tgtFight.getApi() != ApiType.DealDamage) {
+            // Search for the Fight/DealDamage subability (matters e.g. for Ent's Fury where the Fight SA is not an immediate child of Pump)
+            tgtFight = tgtFight.getSubAbility();
+        }
+        if (tgtFight == null) {
+            System.out.println("Warning: couldn't find a Fight/DealDamage subability from FightAi.canFightAi for card " + source.toString());
+            tgtFight = sa.getSubAbility(); // at least avoid a NPE, although this will most likely fail
+        }
         final boolean isChandrasIgnition = "Chandra's Ignition".equals(sourceName); // TODO: generalize this for other "fake Fight" cases that do not target
         if ("Savage Punch".equals(sourceName) && !ai.hasFerocious()) {
             power = 0;

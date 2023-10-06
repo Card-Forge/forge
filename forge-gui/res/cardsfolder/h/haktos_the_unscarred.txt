@@ -5,5 +5,5 @@ PT:6/1
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 K:ETBReplacement:Other:ChooseNum
 SVar:ChooseNum:DB$ ChooseNumber | Min$ 2 | Max$ 4 | Defined$ You | Random$ True | SpellDescription$ As NICKNAME enters the battlefield, choose 2, 3, or 4 at random.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.cmcNEChosenNumber,Emblem:Protection from each mana value other than ChosenNumber | Description$ CARDNAME has protection from each mana value other than the chosen number.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.cmcNEChosenNumber,Emblem:Protection from each mana value other than ChosenNumber | Description$ NICKNAME has protection from each mana value other than the chosen number.
 Oracle:Haktos the Unscarred attacks each combat if able.\nAs Haktos enters the battlefield, choose 2, 3, or 4 at random.\nHaktos has protection from each mana value other than the chosen number.

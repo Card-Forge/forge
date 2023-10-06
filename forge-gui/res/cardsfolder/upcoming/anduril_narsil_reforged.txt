@@ -1,0 +1,12 @@
+Name:Anduril, Narsil Reforged
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Ascend
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigCounter | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on each creature you control. If you have the city's blessing, put two +1/+1 counters on each creature you control instead.
+SVar:TrigCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+SVar:X:Count$Blessing.2.1
+K:Equip:3
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nWhenever equipped creature attacks, put a +1/+1 counter on each creature you control. If you have the city's blessing, put two +1/+1 counters on each creature you control instead.\nEquip {3}

@@ -12,7 +12,7 @@ ScryfallCode=PRTR
 152★ R Corpsejack Menace @Vincent Proce
 158 U Dreg Mangler @Svetlin Velinov
 170★ R Hypersonic Dragon @Volkan Baǵa
-*201 R Supreme Verdict @John Avon
+201★ R Supreme Verdict @John Avon
 212 R Cryptborn Horror @Nils Hamm
 214 U Dryad Militant @Ryan Pancoast
 240★ R Grove of the Guardian @Yeong-Hao Han

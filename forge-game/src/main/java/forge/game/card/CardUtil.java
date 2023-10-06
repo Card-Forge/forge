@@ -229,7 +229,7 @@ public final class CardUtil {
         if (in.isTransformed()) {
             newCopy.incrementTransformedTimestamp();
         }
-        newCopy.setState(newCopy.getFaceupCardStateName(), false, true);
+        newCopy.setState(in.getCurrentStateName(), false, true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(in.getFaceDownState().getType()));

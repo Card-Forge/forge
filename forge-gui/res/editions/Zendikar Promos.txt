@@ -6,8 +6,6 @@ Type=Promo
 ScryfallCode=PZEN
 
 [cards]
-*9 R Day of Judgment @Kev Walker
-34 R Nissa's Chosen @Sam Wood
-35 R Emeria Angel @Steve Argyle
+9★ R Day of Judgment @Kev Walker
 178★ M Rampaging Baloths @Eric Deschamps
 228★ R Valakut, the Molten Pinnacle @James Paick

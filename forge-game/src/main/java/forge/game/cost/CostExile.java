@@ -182,7 +182,7 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final Game game = targetCard.getGame();
-        Card newCard = game.getAction().exile(targetCard, null);
+        Card newCard = game.getAction().exile(targetCard, null, null);
         SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;
     }

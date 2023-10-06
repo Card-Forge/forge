@@ -11,6 +11,6 @@ ALTERNATE
 
 Name:Guard Change
 ManaCost:1 G
-Types:Sorcery Adventure
+Types:Instant Adventure
 A:SP$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Monster Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has trample.)
 Oracle:Create a Monster Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has trample.)

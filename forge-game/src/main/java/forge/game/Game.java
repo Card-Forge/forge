@@ -646,8 +646,11 @@ public class Game {
         return visit.getFound();
     }
 
-    // Allows visiting cards in game without allocating a temporary list.
     public void forEachCardInGame(Visitor<Card> visitor) {
+        forEachCardInGame(visitor, false);
+    }
+    // Allows visiting cards in game without allocating a temporary list.
+    public void forEachCardInGame(Visitor<Card> visitor, boolean withSideboard) {
         for (final Player player : getPlayers()) {
             if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
                 return;
@@ -665,6 +668,9 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+                return;
+            }
+            if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {
@@ -814,7 +820,7 @@ public class Game {
                         si.setActivatingPlayer(c.getController());
                     }
                     if (c.getController().equals(p)) {
-                        getAction().exile(c, null);
+                        getAction().exile(c, null, null);
                         triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
                 }
@@ -826,7 +832,7 @@ public class Game {
         triggerList.triggerChangesZoneAll(this, null);
 
         // 901.6: If the current planar controller would leave the game, instead the next player
-        // in turn order that wouldn’t leave the game becomes the planar controller, then the old
+        // in turn order that wouldn't leave the game becomes the planar controller, then the old
         // planar controller leaves
         // 901.10: When a player leaves the game, all objects owned by that player except abilities
         // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card

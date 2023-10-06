@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Legendary Enchantment Creature God
 PT:7/4
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to red and white is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to red and white is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Red.White
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.attacking+YouCtrl | Description$ Prevent all damage that would be dealt to attacking creatures you control.

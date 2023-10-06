@@ -1,7 +1,7 @@
 Name:Into the Fae Court
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Draw | DrawNum$ 3 | SubAbility$ DBToken | SpellDescription$ Draw three cards. 
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBToken | SpellDescription$ Draw three cards. 
 SVar:DBToken:DB$ Token | TokenScript$ u_1_1_faerie_flying_blockflying | SpellDescription$ Create a 1/1 blue Faerie creature token with flying and "This creature can block only creatures with flying."
 DeckHas:Ability$Token & Type$Faerie
 Oracle:Draw three cards. Create a 1/1 blue Faerie creature token with flying and "This creature can block only creatures with flying."

@@ -105,7 +105,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards,
+    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, imprintedCards,
             exiledCards, encodedCards;
     private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
@@ -1019,16 +1019,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getConvoked() {
-        return CardCollection.getView(convokedCards);
-    }
-    public final void addConvoked(final Card c) {
-        if (convokedCards == null) {
-            convokedCards = new CardCollection();
+        if (getCastSA() == null) {
+            return CardCollection.EMPTY;
         }
-        convokedCards.add(c);
-    }
-    public final void clearConvoked() {
-        convokedCards = null;
+        return getCastSA().getTappedForConvoke();
     }
 
     public final Iterable<Object> getRemembered() {
@@ -5728,7 +5722,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addAssignedDamage(int assignedDamage0, final Card sourceCard) {
-        // 510.1a Creatures that would assign 0 or less damage don’t assign combat damage at all.
+        // 510.1a Creatures that would assign 0 or less damage don't assign combat damage at all.
         if (assignedDamage0 <= 0) {
             return;
         }
@@ -5844,7 +5838,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0; // 120.8
         }
 
-        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
+        // 120.1a Damage can't be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
         if (!isPlaneswalker() && !isCreature() && !isBattle()) {
             return 0;
         }
@@ -6810,6 +6804,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // this can only be called by the Human
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
+            //adventure spell check
+            if (isAdventureCard() && sa.isAdventure()) {
+                if (getExiledWith() != null && getExiledWith().equals(this) && CardStateName.Adventure.equals(getExiledWith().getCurrentStateName()))
+                    continue; // skip since it's already on adventure
+            }
             //add alternative costs as additional spell abilities
             abilities.add(sa);
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));

@@ -95,11 +95,11 @@
     <property name="waypoints" value="79,81,79,76,79"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/enemy.tx" x="284.5" y="222.5">
+  <object id="62" template="../../obj/enemy.tx" x="350" y="223.5">
    <properties>
     <property name="enemy" value="Penguin"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="78,82,78"/>
+    <property name="waypoints" value="78,82"/>
    </properties>
   </object>
   <object id="63" template="../../obj/enemy.tx" x="377.5" y="157.5">
@@ -136,12 +136,11 @@
   <object id="74" template="../../obj/waypoint.tx" x="481" y="286.5"/>
   <object id="75" template="../../obj/waypoint.tx" x="226" y="288.5"/>
   <object id="76" template="../../obj/waypoint.tx" x="352" y="289"/>
-  <object id="77" template="../../obj/waypoint.tx" x="351.5" y="223.5"/>
-  <object id="78" template="../../obj/waypoint.tx" x="447" y="225"/>
+  <object id="78" template="../../obj/waypoint.tx" x="448" y="220.5"/>
   <object id="79" template="../../obj/waypoint.tx" x="352.5" y="155"/>
   <object id="80" template="../../obj/waypoint.tx" x="461.5" y="159.5"/>
   <object id="81" template="../../obj/waypoint.tx" x="240.5" y="160"/>
-  <object id="82" template="../../obj/waypoint.tx" x="260" y="223"/>
+  <object id="82" template="../../obj/waypoint.tx" x="256.5" y="220"/>
   <object id="83" template="../../obj/treasure.tx" x="74.5" y="371">
    <properties>
     <property name="reward">[{
