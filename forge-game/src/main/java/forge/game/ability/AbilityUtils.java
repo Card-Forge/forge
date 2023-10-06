@@ -1694,7 +1694,7 @@ public class AbilityUtils {
                     SpellAbility root = sa.getRootAbility();
 
                     // 107.3i If an object gains an ability, the value of X within that ability is the value defined by that ability,
-                    // or 0 if that ability doesn’t define a value of X. This is an exception to rule 107.3h. This may occur with ability-adding effects, text-changing effects, or copy effects.
+                    // or 0 if that ability doesn't define a value of X. This is an exception to rule 107.3h. This may occur with ability-adding effects, text-changing effects, or copy effects.
                     if (root.getXManaCostPaid() != null) {
                         return doXMath(root.getXManaCostPaid(), expr, c, ctb);
                     }

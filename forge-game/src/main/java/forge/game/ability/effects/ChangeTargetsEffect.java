@@ -79,7 +79,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
-                // CR 115.3. The same target can’t be chosen multiple times for
+                // CR 115.3. The same target can't be chosen multiple times for
                 // any one instance of the word “target” on a spell or ability.
                 if (!oldTargetBlock.contains(newTarget) && replaceIn.getSpellAbility().canTarget(newTarget)) {
                     newTargetBlock.remove(oldTarget);

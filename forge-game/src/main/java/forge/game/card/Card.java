@@ -5722,7 +5722,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addAssignedDamage(int assignedDamage0, final Card sourceCard) {
-        // 510.1a Creatures that would assign 0 or less damage don’t assign combat damage at all.
+        // 510.1a Creatures that would assign 0 or less damage don't assign combat damage at all.
         if (assignedDamage0 <= 0) {
             return;
         }
@@ -5838,7 +5838,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0; // 120.8
         }
 
-        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
+        // 120.1a Damage can't be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
         if (!isPlaneswalker() && !isCreature() && !isBattle()) {
             return 0;
         }

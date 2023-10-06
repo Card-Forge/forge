@@ -779,7 +779,7 @@ public class CombatUtil {
             if (!blocker.getMustBlockCards().isEmpty()) {
                 final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
                 for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
-                    // If a creature can’t block unless a player pays a cost, that player is not required to pay that cost
+                    // If a creature can't block unless a player pays a cost, that player is not required to pay that cost
                     if (getBlockCost(blocker.getGame(), blocker, cardToBeBlocked) != null) {
                         continue;
                     }

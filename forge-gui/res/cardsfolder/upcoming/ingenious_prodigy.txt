@@ -8,4 +8,4 @@ SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE1_P1P1 | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has one or more +1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ SubCounter<1/P1P1>
 DeckHas:Ability$Counters
-Oracle:Skulk (This creature can’t be blocked by creatures with greater power.)\nIngenious Prodigy enters the battlefield with X +1/+1 counters on it.\nAt the beginning of your upkeep, if Ingenious Prodigy has one or more +1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card.
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nIngenious Prodigy enters the battlefield with X +1/+1 counters on it.\nAt the beginning of your upkeep, if Ingenious Prodigy has one or more +1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card.

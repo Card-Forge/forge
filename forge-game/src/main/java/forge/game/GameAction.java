@@ -1496,7 +1496,7 @@ public class GameAction {
         if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
             return false;
         }
-        // 704.5v If a battle has defense 0 and it isn’t the source of an ability that has triggered but not yet left the stack,
+        // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
             removeList.add(c);
@@ -2310,7 +2310,7 @@ public class GameAction {
     // 701.17a To "scry N" means to look at the top N cards of your library, then put any number of them
     // on the bottom of your library in any order and the rest on top of your library in any order.
     // 701.17b If a player is instructed to scry 0, no scry event occurs. Abilities that trigger whenever a
-    // player scries won’t trigger.
+    // player scries won't trigger.
     // 701.17c If multiple players scry at once, each of those players looks at the top cards of their library
     // at the same time. Those players decide in APNAP order (see rule 101.4) where to put those
     // cards, then those cards move at the same time.

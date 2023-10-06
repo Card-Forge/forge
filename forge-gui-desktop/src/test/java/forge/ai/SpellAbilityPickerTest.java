@@ -780,7 +780,7 @@ public class SpellAbilityPickerTest extends AITest {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
          picker.chooseSpellAbilityToPlay(null);
-        // Only mode "Creatures with power 3 or less can’t block this turn" should be simulated.
+        // Only mode "Creatures with power 3 or less can't block this turn" should be simulated.
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
 
