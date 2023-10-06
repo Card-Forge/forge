@@ -18,7 +18,7 @@
  </layer>
  <layer id="3" name="Foreground" width="60" height="34">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="60" height="34">
@@ -76,7 +76,7 @@
   <object id="60" template="../../obj/collision.tx" x="960.478" y="-14.2464" width="17" height="570.363"/>
   <object id="61" template="../../obj/collision.tx" x="-17.965" y="-8.92226" width="17" height="570.363"/>
   <object id="62" template="../../obj/manashards.tx" x="739.142" y="132.791"/>
-  <object id="63" template="../../obj/manashards.tx" x="515.532" y="176.567"/>
+  <object id="63" template="../../obj/manashards.tx" x="432" y="128"/>
   <object id="64" template="../../obj/treasure.tx" x="576.463" y="217.385">
    <properties>
     <property name="reward">[{
@@ -100,7 +100,7 @@
   <object id="66" template="../../obj/shop.tx" x="370.623" y="319.207" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Skeleton"/>
-    <property name="noRestock" type="bool" value="false"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>
    </properties>
@@ -108,7 +108,7 @@
   <object id="67" template="../../obj/shop.tx" x="497.809" y="383.687" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Zombie"/>
-    <property name="noRestock" type="bool" value="false"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signXOffset" type="float" value="0"/>
     <property name="signYOffset" type="float" value="-5"/>
    </properties>
