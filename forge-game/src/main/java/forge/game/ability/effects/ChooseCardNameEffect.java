@@ -6,7 +6,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardFacePredicates;
 import forge.card.CardRules;
@@ -146,8 +145,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     cpp = CardFacePredicates.valid(valid);
                 }
                 if (randomChoice) {
-                    final Iterable<ICardFace> cardsFromDb = StaticData.instance().getCommonCards().getAllFaces();
-                    final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
+                    final Iterable<ICardFace> cards = Iterables.filter(StaticData.instance().getCommonCards().getAllFaces(), cpp);
                     chosen = Aggregates.random(cards).getName();
                 } else {
                     chosen = p.getController().chooseCardName(sa, cpp, valid, message);
