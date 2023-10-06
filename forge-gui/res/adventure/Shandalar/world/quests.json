@@ -6728,7 +6728,7 @@
             {
                 "id": 1,
                 "name": "Clear",
-                "description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Waste biome.",
+                "description": "Travel to Slobad's Factory' and defeat all enemies inside. The target location is in the Waste biome.",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "POITags": [
@@ -6746,9 +6746,6 @@
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "Slobad"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},
@@ -6938,7 +6935,7 @@
             {
                 "id": 1,
                 "name": "Clear",
-                "description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Swamp biome.",
+                "description": "Travel to Slimefoot's Lair and defeat him and his fungal minions'. The target location is in the Swamp biome.",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "POITags": [
@@ -6952,13 +6949,10 @@
             {
                 "id": 2,
                 "name": "Travel",
-                "description": "Return to town and report your success in clearing the $(poi_1).",
+                "description": "Return to town and report your success in clearing Slimefoots Lair.",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "Slimefoot"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},
@@ -7155,7 +7149,7 @@
             {
                 "id": 1,
                 "name": "Clear",
-                "description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the waste biome.",
+                "description": "Travel to the Old Sewers and defeat all enemies inside. The target location is in the waste biome.",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "POITags": [
@@ -7173,9 +7167,6 @@
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "SlimeCave"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},
@@ -7849,7 +7840,7 @@
                     ]
                 },
                 {
-                    "name": " Kiora? What's she up to now, Elder?",
+                    "name": "Kiora? What's she up to now, Elder?",
                     "text": "(Grimaces) She seeks to summon ancient sea titans that slumber beneath the waves, creatures that could engulf our lands in a cataclysmic flood. It's a threat that endangers Shandalar's very existence.",
                     "options": [
                         {
@@ -7871,7 +7862,7 @@
                                             {
                                                 "key": ""
                                             },
-                                            "issueQuest": "27",
+                                            "issueQuest": "35",
                                             "POIReference": ""
                                         }
                                     ],
@@ -7914,7 +7905,7 @@
         "prologue": {},
         "epilogue":
         {
-            "text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+            "text": "As you enter the village, the local towspeople rush towards you to thank you for defeating Kiora. (+3 reputation in $(poi_1))",
             "options": [
                 {
                     "action": [
@@ -8012,13 +8003,10 @@
             {
                 "id": 2,
                 "name": "Travel",
-                "description": "Return to town and report your success in clearing the $(poi_1).",
+                "description": "Return to town and report your success in clearing Kiora's Hideout'",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "Kiora"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},
@@ -8092,7 +8080,7 @@
                                             {
                                                 "key": ""
                                             },
-                                            "issueQuest": "27",
+                                            "issueQuest": "36",
                                             "POIReference": ""
                                         }
                                     ],
@@ -8135,7 +8123,7 @@
         "prologue": {},
         "epilogue":
         {
-            "text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds  (+3 reputation in $(poi_1))",
+            "text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds.  (+3 reputation in $(poi_1))",
             "options": [
                 {
                     "action": [
@@ -8196,7 +8184,7 @@
                     "POIReference": "$(poi_2)"
                 }
             ],
-            "text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+            "text": "After some reflection, you decide that the rewards promised to you are not worth the effort of defeating Teferi. (-2 Local Reputation)",
             "options": [
                 {
                     "name": "(Quest Failed)"
@@ -8237,9 +8225,6 @@
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "Teferi"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},
@@ -8295,7 +8280,7 @@
                     "text": "These...hiccup... metal freaks! They ain't from around here, I swear. Saw 'em with me own eyes. They got them twisted, mechanical...things! Up to somethin' bad, they are!",
                     "options": [
                         {
-                            "name": "You've had quite a few drinks, Tim. Are you sure you're not imagining things?",
+                            "name": "You've had quite a few drinks, Tim. Are you sure you're not imagining things? Phyrexians haven't been seen in these parts for thousands of years",
                             "text": "Nonsense! Me eyes don't lie, friend. Them Phyrexians are real trouble, I'm tellin' ya. You gotta go, see for yourself. Kick 'em outta Shandalar!",
                             "options": [
                                 {
@@ -8313,7 +8298,7 @@
                                             {
                                                 "key": ""
                                             },
-                                            "issueQuest": "27",
+                                            "issueQuest": "37",
                                             "POIReference": ""
                                         }
                                     ],
@@ -8416,7 +8401,7 @@
                     "POIReference": "$(poi_2)"
                 }
             ],
-            "text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the sewers. (-2 Local Reputation)",
+            "text": "After some reflection, you decide that the rewards promised to you are not worth the effort of dealing with the phyrexians. (-2 Local Reputation)",
             "options": [
                 {
                     "name": "(Quest Failed)"
@@ -8438,7 +8423,7 @@
             {
                 "id": 1,
                 "name": "Clear",
-                "description": "The Phyrexian camp and defeat all enemies present.",
+                "description": "Find the Phyrexian camp and defeat all enemies present.",
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "POITags": [
@@ -8457,9 +8442,6 @@
                 "mapFlag": "",
                 "mapFlagValue": 1,
                 "here": true,
-                "POITags": [
-                    "Phyrexian"
-                ],
                 "objective": "Travel",
                 "prologue": {},
                 "epilogue": {},

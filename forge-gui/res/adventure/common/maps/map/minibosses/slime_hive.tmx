@@ -9,12 +9,12 @@
  <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="13" name="Background" width="45" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1j0KAjEQBeC1ELWzshSvIPizWFl5Es9kZes9rDyKN7CXYRl4xCQ7yWSTKD54iLhuvoTVpGny5bizt9a4vDWafdYazRJvbXOINZeya70+92kWZnmO85pj15yc2FHPPFN7U5i5ubwhbrqObPw6nTfNbet3p3Bp1hm/Q1aubc3vkzLrfDGeU5eZKpln6vrGtY1tmvH757ar7RquxCOtJAuHhyMZR+vEkkfS2Pv/ill7L9ezQMX3vmjHDXlOvzUp96BUea39n6f8r88176H2p74x/6k/p02+Ltuufdetdl1z2rRmuiaHGfcLtsWW19n1Ocbcp2L3Vq3ZV96T+85ptpSYx8Jilp5JNOcbrRfPPtqz1pB+84xZyhzrLWUO8Zl97MuZ0U6RmMmL5pDf2BC/R6k31OxKrJnHRxvPAY1mMdfDZyVmtIfMweeSmNlo2qVrHbL+GOl6asbVml1B5zeYtcaUQWfMnF15A9j9jUQ=
+   eJzt1jtuAkEMBuCliEK6VJQoV0AisKKi4iQ5Uypa7kHFUXKD9MhaWbLMeNYez4soln4J2NHON9YuM8NQr467cHotydujOWbt0azx9raGVHMru9cbc5/ebJafl7rm1J6Dk2Yxs87cXqs5NB5+k/pdwmtxc9vyfRgun9Nn7Hlus3QPbfHx4IXwZwVyfW3T52/2nEpm7HVsnSUSmzc0N/Vy99c4JTQGo/Foo6mV4An132K2OGnAo0nq/f+K2Xsv6VmA0O+x8s5reU6ftXLuQbnqdxO/nvO/vta6S+1Pc3P+V/912tbLepwyN+5jN6WmzWuGMTXMdL9AW2qwz9J1WnyfSt1bveZYcE+eO6eFqsU6VgGz9kziOd94vfTs4z1rlfTzM2Yrc6q3ldni47nt25mpHUpjBi81W96xEu+j1ms1S5VqxvmpDddAjTy0zofHaMzUbllDzKUxo5Hbtb229J+Wtp+eeb1mqajzGcxeY86izpQ1S3UHMbGErQ==
   </data>
  </layer>
  <layer id="10" name="Ground" width="45" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlUFOwzAQRb2hqCmgSkisA2eAJnSFxBm4AuIYIE7AhhVCbLgG9DSsOQKMzKgTM/ZMEttEyE/6UuuOneepk8z2jZkFstnl49ZcHsiJhdb1Y8fG50y/p/Ac68zVumO5nW/2/Gci5JzyPEjOtM/umdAkNZwretL02UMOqDPnSF0B335yOYd6iqkPjTkm4ebgfnIg+UKe5928zLtzc54JQLr3XF8M5S+dF0tjqp9crGw4T6jDsdz3Hjp/GhtwwXDOME6plr/HxnLbGHPX9J931Nq5EO4sIPifLBTudau//vVpN5yfFIlK0WvX+SSwrs81Jn2d378/bwTnKfDWyq5Ajh6n4D8747PNNx6Ktvb1TL+m5noP6+HRrqF17tOvodG6xO5zHx497xipBp2nyNX5NiFwX5payn3jj7YG+gfvS+rKhdsTl3plI/1eDzwn1JmuxQWRrqldZwx4Toc4D0lM50KhkBe499zEWDMXsZwL0+ZpvU2hUEjLFxK2C2A=
+   eJztlU1OAzEMRrOhiGlBrFiPOAN0SldInIErII4B4gRsWFXsuAbtaVhzBLBSq27kxE6ahBHKkz6pP07mxfV0JqfGTALZHPNxa+7O5ORC6/p1ZONzpu9LeB7qzNW6n9V2fpz5ZyLkXHIeJGfaZ3cmNCkN54qeNDFnqAF15hypK+A7Ty3nUE99DtwaPE8NNL4Xi/24a2vOBCDdexDqyfGXztNzY7ptbuc2Puf3E5va9x46fxsbcMZIzkC3rc3J02DM8xC/DhxhLQT7yYG/yVTh3gvzRXm42g/nJ0WiU/Tadb4M7OtzzUms8/r39UZwHgOfC9kVqNHjEvxnZ/xv830eirb241q/p+Z6r8v0aPfQOsf0KzVal9x9juHN84yRatB5jNzf7BICz6WppbwM/mhroH/wvKSuXLgzcennNtL3feKcUGe6FxdEuqZ2n0PAOU1xTklO50ajURe499zk2LMWuZwb42a13KXRaJTlB3uqA14=
   </data>
  </layer>
  <layer id="9" name="Walls" width="45" height="40">
@@ -48,6 +48,7 @@
   </object>
   <object id="96" template="../../obj/enemy.tx" x="119.418" y="354.89">
    <properties>
+    <property name="deckOverride" value="decks/standard/rat_realmagic.dck"/>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="120,121"/>
@@ -55,6 +56,7 @@
   </object>
   <object id="98" template="../../obj/enemy.tx" x="489.241" y="356.064">
    <properties>
+    <property name="deckOverride" value="decks/standard/rat_realmagic.dck"/>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="120,121"/>
