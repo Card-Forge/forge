@@ -582,8 +582,7 @@ public class CardFactoryUtil {
         return filteredkw;
     }
 
-
-        public static int getCardTypesFromList(final CardCollectionView list) {
+    public static int getCardTypesFromList(final CardCollectionView list) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getCoreTypes());
