@@ -122,6 +122,8 @@ public enum CounterEnumType {
     EON("EON", 23, 194, 255),
 
     EMBER("EMBER", 247, 52, 43),
+    
+    EXPOSURE("EXPOSURE", 50, 180, 30),
 
     EYEBALL("EYE", 184, 202, 201),
 
