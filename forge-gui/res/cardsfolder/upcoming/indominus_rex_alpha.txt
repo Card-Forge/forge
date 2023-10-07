@@ -1,0 +1,14 @@
+Name:Indominus Rex, Alpha
+ManaCost:1 UB UB G G
+Types:Legendary Creature Dinosaur Mutant
+PT:6/6
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ Discard | ReplacementResult$ Updated | Description$ As CARDNAME enters the battlefield, discard any number of creature cards. It enters with a flying counter on it if a card discarded this way has flying. The same is true for first strike, double strike, deathtouch, hexproof, haste, indestructible, lifelink, menace, reach, trample, and vigilance.
+SVar:Discard:DB$ Discard | DiscardValid$ Creature | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBPutCounters
+SVar:DBPutCounters:DB$ PutCounter | SharedKeywords$ Flying & First Strike & Double Strike & Deathtouch & Hexproof & Haste & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsDefined$ Remembered | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters the battlefield, draw a card for each counter on it.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:TriggeredCard$CardCounters.ALL
+DeckHas:Ability$Counters|Discard
+DeckHints:Ability$Graveyard
+Oracle:As Indominus Rex, Alpha enters the battlefield, discard any number of creature cards. It enters with a flying counter on it if a card discarded this way has flying. The same is true for first strike, double strike, deathtouch, hexproof, haste, indestructible, lifelink, menace, reach, trample, and vigilance.\nWhen Indominus Rex enters the battlefield, draw a card for each counter on it.

@@ -522,7 +522,6 @@ public class CardFactoryUtil {
      */
     public static List<String> sharedKeywords(final Iterable<String> kw, final String[] restrictions,
             final Iterable<ZoneType> zones, final Card host, CardTraitBase ctb) {
-        final List<String> filteredkw = Lists.newArrayList();
         Player p = null;
         if (ctb instanceof SpellAbility) {
             p = ((SpellAbility)ctb).getActivatingPlayer();
@@ -531,14 +530,18 @@ public class CardFactoryUtil {
             p = host.getController();
         }
         CardCollectionView cardlist = p.getGame().getCardsIn(zones);
+        return getSharedKeywords(kw, CardLists.getValidCards(cardlist, restrictions, p, host, ctb));
+    }
+
+    public static List<String> getSharedKeywords(final Iterable<String> kw, final CardCollection cards) {
+        final List<String> filteredkw = Lists.newArrayList();
         final Set<String> landkw = Sets.newHashSet();
         final Set<String> protectionkw = Sets.newHashSet();
         final Set<String> protectionColorkw = Sets.newHashSet();
         final Set<String> hexproofkw = Sets.newHashSet();
         final Set<String> tramplekw = Sets.newHashSet();
         final Set<String> allkw = Sets.newHashSet();
-
-        for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, ctb)) {
+        for (Card c : cards) {
             for (KeywordInterface inst : c.getKeywords()) {
                 final String k = inst.getOriginal();
                 if (k.endsWith("walk")) {
@@ -560,6 +563,7 @@ public class CardFactoryUtil {
                 }
             }
         }
+
         for (String keyword : kw) {
             if (keyword.equals("Protection")) {
                 filteredkw.addAll(protectionkw);

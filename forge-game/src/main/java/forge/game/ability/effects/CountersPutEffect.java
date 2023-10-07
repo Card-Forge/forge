@@ -599,10 +599,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
-            List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
-            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
-                    : new String[] { "Card" };
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            if (sa.hasParam("SharedKeywordsDefined")) {
+                CardCollection def = getDefinedCardsOrTargeted(sa, "SharedKeywordsDefined");
+                keywords = CardFactoryUtil.getSharedKeywords(keywords, def);
+            } else {
+                List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+                String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
+                        : new String[] { "Card" };
+                keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            }
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table, false);
             }
