@@ -1,0 +1,9 @@
+[metadata]
+Code=YWOE
+Date=2023-10-10
+Name=Alchemy: Eldraine
+Type=Online
+ScryfallCode=YWOE
+
+[cards]
+1 R Cerise, Slayer of Fear @Christina Kraus

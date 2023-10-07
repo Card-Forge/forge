@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (YWOE)
+Type:Archived
+Subtype:Arena
+Effective:2023-10-10
+Sets:ANA, ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE
