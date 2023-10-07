@@ -2,7 +2,7 @@ Name:Undercity Plunder
 ManaCost:1 B
 Types:Sorcery
 A:SP$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBChooseCard | SpellDescription$ Target opponent discards a card.
-SVar:DBChooseCard:DB$ ChooseCard | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | Choices$ Card | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure | OrString$ {p:You} conjures a duplicate of a random card from your library into their hand. | StackDescription$ SpellDescription | SpellDescription$ Then they may discard an additional card.
+SVar:DBChooseCard:DB$ ChooseCard | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | Choices$ Card.TargetedPlayerOwn | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure | OrString$ {p:You} conjures a duplicate of a random card from their library into your hand. | StackDescription$ SpellDescription | SpellDescription$ Then they may discard an additional card.
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen | StackDescription$ If they don't, {p:You} conjures a duplicate of a random card from their library into their hand. | SpellDescription$ If they don't, conjure a duplicate of a random card from their library into your hand.
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Undercity Plunder's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

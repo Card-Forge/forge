@@ -1,0 +1,12 @@
+Name:Long List of the Ents
+ManaCost:G
+Types:Enchantment Saga
+K:Saga:6:DBNoteType,DBNoteType,DBNoteType,DBNoteType,DBNoteType,DBNoteType
+SVar:DBNoteType:DB$ ChooseType | Type$ Creature | Note$ True | ChooseNoted$ True | SubAbility$ DBEffect | SpellDescription$ Note a creature type that hasn't been noted for CARDNAME. When you cast your next creature spell of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:DBEffect:DB$ Effect | Triggers$ SpellCast | Description$ When you cast your next creature spell of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature.ChosenType | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:I, II, III, IV, V, VI — Note a creature type that hasn't been noted for Long List of the Ents. When you cast your next creature spell of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
