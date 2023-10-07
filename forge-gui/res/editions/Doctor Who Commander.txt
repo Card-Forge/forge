@@ -209,7 +209,7 @@ ScryfallCode=WHO
 201 L Swamp @Svetlin Velinov
 202 L Mountain @Titus Lunter
 203 L Mountain @Svetlin Velinov
-204 L Forest
+204 L Forest @Titus Lunter
 205 L Forest @Svetlin Velinov
 206 R Day of Destiny @Irina Nordsol
 207 R Farewell @Alice Xia Zhang
@@ -229,7 +229,7 @@ ScryfallCode=WHO
 221 C Feed the Swarm @Steve Argyle
 222 U Snuff Out @Bartek Fedyczak
 223 R Wound Reflection @Kieran Yanner
-224 R Blasphemous Act
+224 R Blasphemous Act @Eliz Roxs
 225 R Chaos Warp @Kim Sokol
 226 R Cursed Mirror @Mandy Jurgens
 227 U Throes of Chaos @David Frasheski
@@ -268,7 +268,7 @@ ScryfallCode=WHO
 260 R Celestial Colonnade @Nadia Hurianova
 261 R Choked Estuary @Shahab Alizadeh
 262 R Cinder Glade @Hristo D. Chukov
-263 C Command Tower
+263 C Command Tower @Hector Ortiz
 264 C Command Tower @Sean Vo
 265 C Command Tower @Pierre Loyvet
 266 C Command Tower @Henry Peters
@@ -293,7 +293,7 @@ ScryfallCode=WHO
 285 R Glacial Fortress @Nestor Ossandon Leal
 286 R Haunted Ridge @Victor Harmatiuk
 287 R Horizon Canopy @David Sondered
-288 R Irrigated Farmland
+288 R Irrigated Farmland @Pablo Mendoza
 289 R Lavaclaw Reaches @Jake Murray
 290 U Myriad Landscape @Bartek Fedyczak
 291 U Mystic Monastery @Logan Feliciano
@@ -340,24 +340,29 @@ ScryfallCode=WHO
 332 R Clara Oswald @Marta Nael
 333 R Adipose Offspring @John Tedrick
 334 R Astrid Peth @Ekaterina Burmak
-336 R Crack in Time
+335 R Barbara Wright @Irina Nordsol
+336 R Crack in Time @Eliz Roxs
 337 R Crisis of Conscience @Borja Pindado
 338 R Everybody Lives! @Alice Xia Zhang
 339 R Everything Comes to Dust @Lie Setiawan
 340 R Four Knocks @Darren Tan
+341 R Ian Chesterton @Kim Sokol
 342 R Jo Grant @Fajareka Setiawan
 343 R The Pandorica @Craig J Spearing
 344 R Peri Brown @Wangjie Li
+345 R Romana II @Tyukina Tatiana
 346 R Rose Tyler @Luisa J. Preissler
 347 R Sarah Jane Smith @Fajareka Setiawan
 348 R Tegan Jovanka @Aurore Folny
 349 R The Wedding of River Song @Mandy Jurgens
 350 R Wilfred Mott @John Di Giovanni
+351 R Adric, Mathematical Genius @Billy Christian
 352 R All of History, All at Once @Nestor Ossandon Leal
 353 R Auton Soldier @Greg Opalinski
 354 R Become the Pilot @Irina Nordsol
 355 R Cyber Conversion @Eddie Schillo
 356 R Danny Pink @Daniel Correia
+357 R Five Hundred Year Diary @Kieran Yanner
 358 R Flatline @Filipe Pagliuso
 359 R Flesh Duplicate @Kekai Kotaki
 360 R The Flood of Mars @Andrey Kuzinskiy
@@ -366,9 +371,11 @@ ScryfallCode=WHO
 363 R Martha Jones @Daniel Correia
 364 R Nanogene Conversion @Miklós Ligeti
 365 R Nardole, Resourceful Cyborg @Yuliya Litvinova
+366 R Nyssa of Traken @Irina Nordsol
 367 R Osgood, Operation Double @Justyna Dura
 368 R Quantum Misalignment @Borja Pindado
 369 R Reverse the Polarity @Randy Gallegos
+370 R Traverse Eternity @Jeremy Paillotin
 371 R Dalek Drone @Bartek Fedyczak
 372 R Doomsday Confluence @Dominik Mayer
 373 R This Is How It Ends @Eliz Roxs
@@ -392,11 +399,14 @@ ScryfallCode=WHO
 391 R The Sound of Drums @Alexandr Leskinen
 392 R Yasmin Khan @Andrey Kuzinskiy
 393 R Ace, Fearless Rebel @Colin Boyer
+394 R The Five Doctors @JB Casacop
 395 R The Foretold Soldier @Fajareka Setiawan
 396 R Graham O'Brien @Tyukina Tatiana
 397 R Jamie McCrimmon @Wangjie Li
+398 R Leela, Sevateem Warrior @Irina Nordsol
 399 R Sisterhood of Karn @Yuliya Litvinova
 400 R Susan Foreman @Wangjie Li
+401 R Alistair, the Brigadier @Thanh Tuấn
 402 R Ashad, the Lone Cyberman @Eric Wilkerson
 403 R The Beast, Deathless Prince @Pavel Kolomeyets
 404 R Cult of Skaro @Alexander Mokhov
@@ -404,6 +414,7 @@ ScryfallCode=WHO
 406 R The Dalek Emperor @Mark Tedin
 407 M Davros, Dalek Creator @Simon Dominic
 408 R Dinosaurs on a Spaceship @Narendra Bintara Adi
+409 R Duggan, Private Detective @Craig J Spearing
 410 R The Eighth Doctor @Aurore Folny
 411 R The Eleventh Doctor @Justyna Dura
 412 R The Face of Boe @Greg Staples
@@ -435,6 +446,7 @@ ScryfallCode=WHO
 438 R Run for Your Life @Fang Xinyu
 439 R Sally Sparrow @Tatiana Veryayskaya
 440 R The Second Doctor @Bryan Sola
+441 R Sergeant John Benton @Wei Guan
 442 R The Seventh Doctor @BBC Studios
 443 R The Sixth Doctor @Matt Stewart
 444 R Strax, Sontaran Nurse @John Tedrick
@@ -444,8 +456,11 @@ ScryfallCode=WHO
 448 M The Thirteenth Doctor @Pauline Voss
 449 R The Twelfth Doctor @Alexander Mokhov
 450 R The Valeyard @Tyukina Tatiana
+451 R Vrestin, Menoptra Leader @Ivan Dedov
 452 R The War Doctor @Lixin Yin
 453 R Weeping Angel @Anato Finnstark
+454 R Ace's Baseball Bat @L J Koh
+455 R Bessie, the Doctor's Roadster @David Auden Nash
 456 R Confession Dial @Narendra Bintara Adi
 457 R Cybermen Squadron @Craig J Spearing
 458 R Cybership @JB Casacop
@@ -454,6 +469,7 @@ ScryfallCode=WHO
 461 R Rotating Fireplace @Daniel Correia
 462 R Gallifrey Council Chamber @Lixin Yin
 463 R Trenzalore Clocktower @Eliz Roxs
+464 R Day of Destiny @Irina Nordsol
 465 R Farewell @Alice Xia Zhang
 466 R Grasp of Fate @Randy Gallegos
 467 R Out of Time @JB Casacop
@@ -461,12 +477,18 @@ ScryfallCode=WHO
 469 R As Foretold @Erion Makuo
 470 R Inspiring Refrain @John Tedrick
 471 R Wound Reflection @Kieran Yanner
+472 R Blasphemous Act @Eliz Roxs
 473 R Chaos Warp @Kim Sokol
 474 R Cursed Mirror @Mandy Jurgens
 475 R Carpet of Flowers @Logan Feliciano
+476 R Heroic Intervention @Billy Christian
 477 R Fractured Identity @Anna Pavleeva
+478 R Time Wipe @Anthony Devine
+479 R Heroes' Podium @Daniel Correia
 480 R Solemn Simulacrum @Ivan Dedov
+481 R Canopy Vista @Zhillustrator
 482 R Canyon Slough @Logan Feliciano
+483 R Celestial Colonnade @Nadia Hurianova
 484 R Choked Estuary @Shahab Alizadeh
 485 R Cinder Glade @Hristo D. Chukov
 486 R Creeping Tar Pit @Nino Is
@@ -476,22 +498,26 @@ ScryfallCode=WHO
 490 R Dragonskull Summit @Henry Peters
 491 R Dreamroot Cascade @Shahab Alizadeh
 492 R Drowned Catacomb @Victor Harmatiuk
-493 R Exotic Orchard
+493 R Exotic Orchard @Miklós Ligeti
 494 R Fetid Pools @Miklós Ligeti
 495 R Fiery Islet @Pierre Loyvet
 496 R Foreboding Ruins @Stephen Stark
+497 R Fortified Village @Nino Is
 498 R Frostboil Snarl @Wei Guan
 499 R Furycalm Snarl @Evan Shipard
 500 R Game Trail @Victor Harmatiuk
 501 R Glacial Fortress @Nestor Ossandon Leal
 502 R Haunted Ridge @Victor Harmatiuk
-504 R Irrigated Farmland
+503 R Horizon Canopy @David Sondered
+504 R Irrigated Farmland @Pablo Mendoza
 505 R Lavaclaw Reaches @Jake Murray
+506 R Overgrown Farmland @Álvaro Calvo Escudero
 507 R Port Town @Alexander Gering
 508 R Prairie Stream @JB Casacop
 509 R River of Tears @Oliver Wetter
 510 R Rockfall Vale @Jonas De Ro
 511 R Rootbound Crag @Jeremy Paillotin
+512 R Scattered Groves @Piotr Dura
 513 R Shadowblood Ridge @Kamila Szutenberg
 514 R Sheltered Thicket @Drew Tucker
 515 R Shipwreck Marsh @Kamila Szutenberg
@@ -500,6 +526,7 @@ ScryfallCode=WHO
 518 R Stormcarved Coast @L J Koh
 519 R Sunbaked Canyon @Jorge Jacinto
 520 R Sundown Pass @David Frasheski
+521 R Sungrass Prairie @Nino Is
 522 R Sunken Hollow @Sean Vo
 523 R Temple of Abandon @Anton Solovianchyk
 524 R Temple of Deceit @Eliz Roxs
@@ -507,6 +534,7 @@ ScryfallCode=WHO
 526 R Temple of Epiphany @Nino Is
 527 R Temple of Malice @Jokubas Uogintas
 528 R Temple of Mystery @Jokubas Uogintas
+529 R Temple of Plenty @David Álvarez
 530 R Temple of Triumph @Pierre Loyvet
 531 R Thespian's Stage @Anton Solovianchyk
 532 R Vineglimmer Snarl @Jorge Jacinto
@@ -533,18 +561,15 @@ ScryfallCode=WHO
 553 R The Second Doctor @Greg Staples
 554 R The Third Doctor @Roberta Ingranata
 555 M The Fourth Doctor @Jack Hughes
-555z M The Fourth Doctor @Jack Hughes
 556 R The Fifth Doctor @Karen Hallion
 557 R The Sixth Doctor @Mike Uziel
 558 R The Seventh Doctor @Chuck Lukacs
 559 R The Eighth Doctor @Jack Hughes
 560 R The Ninth Doctor @Steve Morris
 561 M The Tenth Doctor @Aurore Folny
-561z M The Tenth Doctor @Aurore Folny
 562 R The Eleventh Doctor @Tyler Walpole
 563 R The Twelfth Doctor @BBC Studios
 564 M The Thirteenth Doctor @Lenka Šimečková
-564z M The Thirteenth Doctor @Lenka Šimečková
 565 R Past in Flames @BBC Studios
 566 C Amy's Home @Filipe Pagliuso
 567 C Antarctic Research Base @Erikas Perl
@@ -598,6 +623,8 @@ ScryfallCode=WHO
 615 R Adipose Offspring @John Tedrick
 616 R Astrid Peth @Ekaterina Burmak
 617 U Atraxi Warden @Slawomir Maniak
+618 U Banish to Another Universe @David Astruga
+619 R Barbara Wright @Irina Nordsol
 620 R The Caves of Androzani @Nestor Ossandon Leal
 621 R Crack in Time @Eliz Roxs
 622 R Crisis of Conscience @Borja Pindado
@@ -605,15 +632,18 @@ ScryfallCode=WHO
 624 R Everything Comes to Dust @Lie Setiawan
 625 R Four Knocks @Darren Tan
 626 R The Girl in the Fireplace @Torgeir Fjereide
+627 R Ian Chesterton @Kim Sokol
 628 R Jo Grant @Fajareka Setiawan
 629 R The Night of the Doctor @Borja Pindado
 630 R The Pandorica @Craig J Spearing
 631 R Peri Brown @Wangjie Li
+632 R Romana II @Tyukina Tatiana
 633 R Tegan Jovanka @Aurore Folny
 634 R Trial of a Time Lord @Audrey Benjaminsen
 635 R The War Games @Bartek Fedyczak
 636 R The Wedding of River Song @Mandy Jurgens
 637 R Wilfred Mott @John Di Giovanni
+638 R Adric, Mathematical Genius @Billy Christian
 639 R All of History, All at Once @Nestor Ossandon Leal
 640 R An Unearthly Child @Kieran Yanner
 641 R Auton Soldier @Greg Opalinski
@@ -622,6 +652,7 @@ ScryfallCode=WHO
 644 R Danny Pink @Daniel Correia
 645 U Don't Blink @Anato Finnstark
 646 R The Eleventh Hour @Matt Stewart
+647 R Five Hundred Year Diary @Kieran Yanner
 648 R Flatline @Filipe Pagliuso
 649 R Flesh Duplicate @Kekai Kotaki
 650 R The Flood of Mars @Andrey Kuzinskiy
@@ -630,6 +661,7 @@ ScryfallCode=WHO
 653 R Martha Jones @Daniel Correia
 654 R Nanogene Conversion @Miklós Ligeti
 655 R Nardole, Resourceful Cyborg @Yuliya Litvinova
+656 R Nyssa of Traken @Irina Nordsol
 657 R Quantum Misalignment @Borja Pindado
 658 U Renegade Silent @Calder Moore
 659 R Reverse the Polarity @Randy Gallegos
@@ -638,6 +670,7 @@ ScryfallCode=WHO
 662 U Surge of Brilliance @Alice Xia Zhang
 663 U Time Beetle @John Tedrick
 664 U Time Lord Regeneration @Elizabeth Peiró
+665 R Traverse Eternity @Jeremy Paillotin
 666 R Twice Upon a Time @Elizabeth Peiró
 667 C Wibbly-wobbly, Timey-wimey @Skinnyelbows
 668 U Zygon Infiltrator @Simon Dominic
@@ -673,17 +706,23 @@ ScryfallCode=WHO
 698 R RMS Titanic @Henry Peters
 699 R Ryan Sinclair @Kim Sokol
 700 U Sibylline Soothsayer @Anna Pavleeva
+701 U Sontaran General @Anton Solovianchyk
 702 R The Sound of Drums @Alexandr Leskinen
 703 R Ace, Fearless Rebel @Colin Boyer
 704 R City of Death @Miklós Ligeti
+705 U Displaced Dinosaurs @Simon Dominic
+706 R The Five Doctors @JB Casacop
 707 R The Foretold Soldier @Fajareka Setiawan
 708 R Fugitive of the Judoon @Lie Setiawan
 709 R Graham O'Brien @Tyukina Tatiana
 710 R Jamie McCrimmon @Wangjie Li
 711 R Karvanista, Loyal Lupari @Erion Makuo
+712 R Leela, Sevateem Warrior @Irina Nordsol
+713 R The Sea Devils @Miklós Ligeti
 714 R Sisterhood of Karn @Yuliya Litvinova
 715 R Susan Foreman @Wangjie Li
 716 U Thijarian Witness @John Tedrick
+717 R Alistair, the Brigadier @Thanh Tuấn
 718 R Ashad, the Lone Cyberman @Eric Wilkerson
 719 R The Beast, Deathless Prince @Pavel Kolomeyets
 720 U Bigger on the Inside @Tatiana Veryayskaya
@@ -694,6 +733,7 @@ ScryfallCode=WHO
 725 R The Dalek Emperor @Mark Tedin
 726 R The Day of the Doctor @Eddie Schillo
 727 R Dinosaurs on a Spaceship @Narendra Bintara Adi
+728 R Duggan, Private Detective @Craig J Spearing
 729 R The Eighth Doctor @Aurore Folny
 730 R The Eleventh Doctor @Justyna Dura
 731 R The Face of Boe @Greg Staples
@@ -727,6 +767,7 @@ ScryfallCode=WHO
 759 R Run for Your Life @Fang Xinyu
 760 R Sally Sparrow @Tatiana Veryayskaya
 761 R The Second Doctor @Bryan Sola
+762 R Sergeant John Benton @Wei Guan
 763 R The Seventh Doctor @BBC Studios
 764 R The Sixth Doctor @Matt Stewart
 765 R Strax, Sontaran Nurse @John Tedrick
@@ -735,9 +776,12 @@ ScryfallCode=WHO
 768 U Truth or Consequences @Pierre Loyvet
 769 R The Twelfth Doctor @Alexander Mokhov
 770 R The Valeyard @Tyukina Tatiana
+771 R Vrestin, Menoptra Leader @Ivan Dedov
 772 R The War Doctor @Lixin Yin
 773 R Weeping Angel @Anato Finnstark
 774 U Wreck and Rebuild @Pablo Mendoza
+775 R Ace's Baseball Bat @L J Koh
+776 R Bessie, the Doctor's Roadster @David Auden Nash
 777 U Clockwork Droid @Andrey Kuzinskiy
 778 R Confession Dial @Narendra Bintara Adi
 779 U Cyberman Patrol @Anton Solovianchyk
@@ -758,9 +802,13 @@ ScryfallCode=WHO
 794 U Ominous Cemetery @Anato Finnstark
 795 R Trenzalore Clocktower @Eliz Roxs
 796 R Osgood, Operation Double @Justyna Dura
+797 R Day of Destiny @Irina Nordsol
 798 R Farewell @Alice Xia Zhang
 799 R Grasp of Fate @Randy Gallegos
 800 R Out of Time @JB Casacop
+801 U Path to Exile @Colin Boyer
+802 U Return to Dust @Pierre Loyvet
+803 U Swords to Plowshares @Axel Sauerwald
 804 M Wedding Ring @Narendra Bintara Adi
 805 R As Foretold @Erion Makuo
 806 C Clockspinning @Thanh Tuấn
@@ -772,18 +820,25 @@ ScryfallCode=WHO
 812 C Feed the Swarm @Steve Argyle
 813 U Snuff Out @Bartek Fedyczak
 814 R Wound Reflection @Kieran Yanner
+815 R Blasphemous Act @Eliz Roxs
 816 R Chaos Warp @Kim Sokol
 817 R Cursed Mirror @Mandy Jurgens
 818 U Throes of Chaos @David Frasheski
 819 U Beast Within @Helge C. Balzer
 820 R Carpet of Flowers @Logan Feliciano
 821 C Cultivate @Tuomas Korpi
+822 C Explore @Kim Sokol
 823 C Farseek @Pierre Loyvet
+824 R Heroic Intervention @Billy Christian
 825 C Search for Tomorrow @Eddie Schillo
+826 U Three Visits @Kieran Yanner
 827 R Fractured Identity @Anna Pavleeva
 828 C Growth Spiral @Shahab Alizadeh
+829 R Time Wipe @Anthony Devine
 830 C Arcane Signet @L J Koh
 831 C Commander's Sphere @Thanh Tuấn
+832 U Hero's Blade @Randy Gallegos
+833 R Heroes' Podium @Daniel Correia
 834 U Lightning Greaves @Kieran Yanner
 835 U Mind Stone @L J Koh
 836 U Sol Ring @Kekai Kotaki
@@ -798,10 +853,13 @@ ScryfallCode=WHO
 845 U Talisman of Unity @John Di Giovanni
 846 U Thought Vessel @Anthony Devine
 847 C Wayfarer's Bauble @Tyukina Tatiana
+848 U Ash Barrens @Oliver Wetter
+849 R Canopy Vista @Zhillustrator
 850 R Canyon Slough @Logan Feliciano
+851 R Celestial Colonnade @Nadia Hurianova
 852 R Choked Estuary @Shahab Alizadeh
 853 R Cinder Glade @Hristo D. Chukov
-854 C Command Tower
+854 C Command Tower @Hector Ortiz
 855 C Command Tower @Sean Vo
 856 C Command Tower @Pierre Loyvet
 857 C Command Tower @Henry Peters
@@ -818,16 +876,19 @@ ScryfallCode=WHO
 868 R Fetid Pools @Miklós Ligeti
 869 R Fiery Islet @Pierre Loyvet
 870 R Foreboding Ruins @Stephen Stark
+871 R Fortified Village @Nino Is
 872 U Frontier Bivouac @Oliver Wetter
 873 R Frostboil Snarl @Wei Guan
 874 R Furycalm Snarl @Evan Shipard
 875 R Game Trail @Victor Harmatiuk
 876 R Glacial Fortress @Nestor Ossandon Leal
 877 R Haunted Ridge @Victor Harmatiuk
-879 R Irrigated Farmland
+878 R Horizon Canopy @David Sondered
+879 R Irrigated Farmland @Pablo Mendoza
 880 R Lavaclaw Reaches @Jake Murray
 881 U Myriad Landscape @Bartek Fedyczak
 882 U Mystic Monastery @Logan Feliciano
+883 R Overgrown Farmland @Álvaro Calvo Escudero
 884 C Path of Ancestry @Fang Xinyu
 885 R Port Town @Alexander Gering
 886 R Prairie Stream @JB Casacop
@@ -836,6 +897,8 @@ ScryfallCode=WHO
 889 R Rockfall Vale @Jonas De Ro
 890 U Rogue's Passage @David Álvarez
 891 R Rootbound Crag @Jeremy Paillotin
+892 R Scattered Groves @Piotr Dura
+893 U Seaside Citadel @Piotr Dura
 894 R Shadowblood Ridge @Kamila Szutenberg
 895 R Sheltered Thicket @Drew Tucker
 896 R Shipwreck Marsh @Kamila Szutenberg
@@ -844,6 +907,7 @@ ScryfallCode=WHO
 899 R Stormcarved Coast @L J Koh
 900 R Sunbaked Canyon @Jorge Jacinto
 901 R Sundown Pass @David Frasheski
+902 R Sungrass Prairie @Nino Is
 903 R Sunken Hollow @Sean Vo
 904 R Temple of Abandon @Anton Solovianchyk
 905 R Temple of Deceit @Eliz Roxs
@@ -851,11 +915,15 @@ ScryfallCode=WHO
 907 R Temple of Epiphany @Nino Is
 908 R Temple of Malice @Jokubas Uogintas
 909 R Temple of Mystery @Jokubas Uogintas
+910 R Temple of Plenty @David Álvarez
 911 U Temple of the False God @Shahab Alizadeh
 912 R Temple of Triumph @Pierre Loyvet
 913 C Terramorphic Expanse @Pavel Kolomeyets
 914 R Thespian's Stage @Anton Solovianchyk
 915 C Thriving Bluff @Bruce Brenneise
+916 C Thriving Grove @Zhillustrator
+917 C Thriving Heath @Sean Vo
+918 C Thriving Isle @Bruce Brenneise
 919 C Thriving Moor @Pavel Kolomeyets
 920 R Vineglimmer Snarl @Jorge Jacinto
 921 R War Room @Andreas Rocha
@@ -863,24 +931,29 @@ ScryfallCode=WHO
 923 R Clara Oswald @Marta Nael
 924 R Adipose Offspring @John Tedrick
 925 R Astrid Peth @Ekaterina Burmak
-927 R Crack in Time
+926 R Barbara Wright @Irina Nordsol
+927 R Crack in Time @Eliz Roxs
 928 R Crisis of Conscience @Borja Pindado
 929 R Everybody Lives! @Alice Xia Zhang
 930 R Everything Comes to Dust @Lie Setiawan
 931 R Four Knocks @Darren Tan
+932 R Ian Chesterton @Kim Sokol
 933 R Jo Grant @Fajareka Setiawan
 934 R The Pandorica @Craig J Spearing
 935 R Peri Brown @Wangjie Li
+936 R Romana II @Tyukina Tatiana
 937 R Rose Tyler @Luisa J. Preissler
 938 R Sarah Jane Smith @Fajareka Setiawan
 939 R Tegan Jovanka @Aurore Folny
 940 R The Wedding of River Song @Mandy Jurgens
 941 R Wilfred Mott @John Di Giovanni
+942 R Adric, Mathematical Genius @Billy Christian
 943 R All of History, All at Once @Nestor Ossandon Leal
 944 R Auton Soldier @Greg Opalinski
 945 R Become the Pilot @Irina Nordsol
 946 R Cyber Conversion @Eddie Schillo
 947 R Danny Pink @Daniel Correia
+948 R Five Hundred Year Diary @Kieran Yanner
 949 R Flatline @Filipe Pagliuso
 950 R Flesh Duplicate @Kekai Kotaki
 951 R The Flood of Mars @Andrey Kuzinskiy
@@ -889,9 +962,11 @@ ScryfallCode=WHO
 954 R Martha Jones @Daniel Correia
 955 R Nanogene Conversion @Miklós Ligeti
 956 R Nardole, Resourceful Cyborg @Yuliya Litvinova
+957 R Nyssa of Traken @Irina Nordsol
 958 R Osgood, Operation Double @Justyna Dura
 959 R Quantum Misalignment @Borja Pindado
 960 R Reverse the Polarity @Randy Gallegos
+961 R Traverse Eternity @Jeremy Paillotin
 962 R Dalek Drone @Bartek Fedyczak
 963 R Doomsday Confluence @Dominik Mayer
 964 R This Is How It Ends @Eliz Roxs
@@ -915,11 +990,14 @@ ScryfallCode=WHO
 982 R The Sound of Drums @Alexandr Leskinen
 983 R Yasmin Khan @Andrey Kuzinskiy
 984 R Ace, Fearless Rebel @Colin Boyer
+985 R The Five Doctors @JB Casacop
 986 R The Foretold Soldier @Fajareka Setiawan
 987 R Graham O'Brien @Tyukina Tatiana
 988 R Jamie McCrimmon @Wangjie Li
+989 R Leela, Sevateem Warrior @Irina Nordsol
 990 R Sisterhood of Karn @Yuliya Litvinova
 991 R Susan Foreman @Wangjie Li
+992 R Alistair, the Brigadier @Thanh Tuấn
 993 R Ashad, the Lone Cyberman @Eric Wilkerson
 994 R The Beast, Deathless Prince @Pavel Kolomeyets
 995 R Cult of Skaro @Alexander Mokhov
@@ -927,6 +1005,7 @@ ScryfallCode=WHO
 997 R The Dalek Emperor @Mark Tedin
 998 M Davros, Dalek Creator @Simon Dominic
 999 R Dinosaurs on a Spaceship @Narendra Bintara Adi
+1000 R Duggan, Private Detective @Craig J Spearing
 1001 R The Eighth Doctor @Aurore Folny
 1002 R The Eleventh Doctor @Justyna Dura
 1003 R The Face of Boe @Greg Staples
@@ -958,6 +1037,7 @@ ScryfallCode=WHO
 1029 R Run for Your Life @Fang Xinyu
 1030 R Sally Sparrow @Tatiana Veryayskaya
 1031 R The Second Doctor @Bryan Sola
+1032 R Sergeant John Benton @Wei Guan
 1033 R The Seventh Doctor @BBC Studios
 1034 R The Sixth Doctor @Matt Stewart
 1035 R Strax, Sontaran Nurse @John Tedrick
@@ -967,8 +1047,11 @@ ScryfallCode=WHO
 1039 M The Thirteenth Doctor @Pauline Voss
 1040 R The Twelfth Doctor @Alexander Mokhov
 1041 R The Valeyard @Tyukina Tatiana
+1042 R Vrestin, Menoptra Leader @Ivan Dedov
 1043 R The War Doctor @Lixin Yin
 1044 R Weeping Angel @Anato Finnstark
+1045 R Ace's Baseball Bat @L J Koh
+1046 R Bessie, the Doctor's Roadster @David Auden Nash
 1047 R Confession Dial @Narendra Bintara Adi
 1048 R Cybermen Squadron @Craig J Spearing
 1049 R Cybership @JB Casacop
@@ -977,19 +1060,26 @@ ScryfallCode=WHO
 1052 R Rotating Fireplace @Daniel Correia
 1053 R Gallifrey Council Chamber @Lixin Yin
 1054 R Trenzalore Clocktower @Eliz Roxs
-1056 R Farewell
+1055 R Day of Destiny @Irina Nordsol
+1056 R Farewell @Alice Xia Zhang
 1057 R Grasp of Fate @Randy Gallegos
 1058 R Out of Time @JB Casacop
 1059 M Wedding Ring @Narendra Bintara Adi
 1060 R As Foretold @Erion Makuo
 1061 R Inspiring Refrain @John Tedrick
 1062 R Wound Reflection @Kieran Yanner
+1063 R Blasphemous Act @Eliz Roxs
 1064 R Chaos Warp @Kim Sokol
 1065 R Cursed Mirror @Mandy Jurgens
 1066 R Carpet of Flowers @Logan Feliciano
+1067 R Heroic Intervention @Billy Christian
 1068 R Fractured Identity @Anna Pavleeva
+1069 R Time Wipe @Anthony Devine
+1070 R Heroes' Podium @Daniel Correia
 1071 R Solemn Simulacrum @Ivan Dedov
+1072 R Canopy Vista @Zhillustrator
 1073 R Canyon Slough @Logan Feliciano
+1074 R Celestial Colonnade @Nadia Hurianova
 1075 R Choked Estuary @Shahab Alizadeh
 1076 R Cinder Glade @Hristo D. Chukov
 1077 R Creeping Tar Pit @Nino Is
@@ -999,22 +1089,26 @@ ScryfallCode=WHO
 1081 R Dragonskull Summit @Henry Peters
 1082 R Dreamroot Cascade @Shahab Alizadeh
 1083 R Drowned Catacomb @Victor Harmatiuk
-1084 R Exotic Orchard
+1084 R Exotic Orchard @Miklós Ligeti
 1085 R Fetid Pools @Miklós Ligeti
 1086 R Fiery Islet @Pierre Loyvet
 1087 R Foreboding Ruins @Stephen Stark
+1088 R Fortified Village @Nino Is
 1089 R Frostboil Snarl @Wei Guan
 1090 R Furycalm Snarl @Evan Shipard
 1091 R Game Trail @Victor Harmatiuk
 1092 R Glacial Fortress @Nestor Ossandon Leal
 1093 R Haunted Ridge @Victor Harmatiuk
-1095 R Irrigated Farmland
+1094 R Horizon Canopy @David Sondered
+1095 R Irrigated Farmland @Pablo Mendoza
 1096 R Lavaclaw Reaches @Jake Murray
+1097 R Overgrown Farmland @Álvaro Calvo Escudero
 1098 R Port Town @Alexander Gering
 1099 R Prairie Stream @JB Casacop
 1100 R River of Tears @Oliver Wetter
 1101 R Rockfall Vale @Jonas De Ro
 1102 R Rootbound Crag @Jeremy Paillotin
+1103 R Scattered Groves @Piotr Dura
 1104 R Shadowblood Ridge @Kamila Szutenberg
 1105 R Sheltered Thicket @Drew Tucker
 1106 R Shipwreck Marsh @Kamila Szutenberg
@@ -1023,6 +1117,7 @@ ScryfallCode=WHO
 1109 R Stormcarved Coast @L J Koh
 1110 R Sunbaked Canyon @Jorge Jacinto
 1111 R Sundown Pass @David Frasheski
+1112 R Sungrass Prairie @Nino Is
 1113 R Sunken Hollow @Sean Vo
 1114 R Temple of Abandon @Anton Solovianchyk
 1115 R Temple of Deceit @Eliz Roxs
@@ -1030,6 +1125,7 @@ ScryfallCode=WHO
 1117 R Temple of Epiphany @Nino Is
 1118 R Temple of Malice @Jokubas Uogintas
 1119 R Temple of Mystery @Jokubas Uogintas
+1120 R Temple of Plenty @David Álvarez
 1121 R Temple of Triumph @Pierre Loyvet
 1122 R Thespian's Stage @Anton Solovianchyk
 1123 R Vineglimmer Snarl @Jorge Jacinto
@@ -1073,5 +1169,5 @@ ScryfallCode=WHO
 1161 L Swamp @Svetlin Velinov
 1162 L Mountain @Titus Lunter
 1163 L Mountain @Svetlin Velinov
-1164 L Forest
+1164 L Forest @Titus Lunter
 1165 L Forest @Svetlin Velinov
