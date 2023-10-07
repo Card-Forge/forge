@@ -138,9 +138,9 @@ public class HumanPlaySpellAbility {
         // because of Selective Snare do announceType first
         final boolean prerequisitesMet = announceType()
                 && announceValuesLikeX()
+                && ability.checkRestrictions(human)
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
-                && ability.checkRestrictions(human)
                 && ability.isLegalAfterStack()
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false)));
 

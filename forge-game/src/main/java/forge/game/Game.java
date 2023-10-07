@@ -832,7 +832,7 @@ public class Game {
         triggerList.triggerChangesZoneAll(this, null);
 
         // 901.6: If the current planar controller would leave the game, instead the next player
-        // in turn order that wouldn’t leave the game becomes the planar controller, then the old
+        // in turn order that wouldn't leave the game becomes the planar controller, then the old
         // planar controller leaves
         // 901.10: When a player leaves the game, all objects owned by that player except abilities
         // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card

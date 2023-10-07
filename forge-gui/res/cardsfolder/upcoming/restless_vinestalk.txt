@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
 A:AB$ Animate | Cost$ 3 G U | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Creature,Plant | Keywords$ Trample | Colors$ Green,Blue | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 green and blue Plant creature with trample. It's still a land.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME attacks, up to one other target creature has base power and toughness 3/3 until end of turn.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select up to one target other creature you control | Power$ 3 | Toughness$ 3 | TargetMin$ 0 | TargetMax$ 1
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one target other creature | Power$ 3 | Toughness$ 3 | TargetMin$ 0 | TargetMax$ 1
 DeckHas:Type$Plant
 SVar:HasAttackEffect:TRUE
 Oracle:Restless Vinestalk enters the battlefield tapped.\n{T}: Add {G} or {U}.\n{3}{G}{U}:Until end of turn, Restless Vinestalk becomes a 5/5 green and blue Plant creature with trample. It's still a land.\nWhenever Restless Vinestalk attacks, up to one other target creature has base power and toughness 3/3 until end of turn.

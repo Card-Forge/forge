@@ -1,0 +1,65 @@
+wildratpoison.png
+size: 160,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 40, 48
+  size: 16, 16  
+Idle 
+  xy: 0, 10
+  size: 32, 22    
+Idle 
+  xy: 32, 10
+  size: 32, 22    
+Idle 
+  xy: 64, 10
+  size: 32, 22
+Idle 
+  xy: 96, 10
+  size: 32, 22  
+Walk 
+  xy: 0, 42
+  size: 32, 22   
+Walk 
+  xy: 32, 42
+  size: 32, 22    
+Walk 
+  xy: 64, 44
+  size: 32, 22    
+Walk 
+  xy: 96, 42
+  size: 32, 22      
+Walk 
+  xy: 128, 42
+  size: 32, 22
+Attack
+  xy: 0, 76
+  size: 32, 20 
+Attack
+  xy: 32, 76
+  size: 32, 20 
+Attack
+  xy: 64, 76
+  size: 32, 20 
+Attack
+  xy: 96, 76
+  size: 32, 20 
+Attack
+  xy: 128, 76
+  size: 32, 20 
+Death
+  xy: 00, 108
+  size: 32, 20
+Death
+  xy: 32, 108
+  size: 32, 20 
+Death
+  xy: 64, 108
+  size: 32, 20
+Death
+  xy: 96,108
+  size: 32, 20
+Death
+  xy: 128, 108
+  size: 32, 20

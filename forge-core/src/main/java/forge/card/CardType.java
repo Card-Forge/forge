@@ -753,20 +753,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         final CardType result = new CardType(incomplete);
 
         int iTypeStart = 0;
-        int iSpace = typeText.indexOf(space);
-        boolean hasMoreTypes = typeText.length() > 0;
+        int max = typeText.length();
+        boolean hasMoreTypes = max > 0;
         while (hasMoreTypes) {
-            final String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
-            hasMoreTypes = iSpace != -1;
             final String rest = typeText.substring(iTypeStart);
-            if (isMultiwordType(rest)) {
-                result.add(rest);
-                break;
+            String type = getMultiwordType(rest);
+            if (type == null) {
+                int iSpace = typeText.indexOf(space, iTypeStart);
+                type = typeText.substring(iTypeStart, iSpace == -1 ? max : iSpace);
             }
-
-            iTypeStart = iSpace + 1;
             result.add(type);
-            iSpace = typeText.indexOf(space, iSpace + 1);
+            iTypeStart += type.length() + 1;
+            hasMoreTypes = iTypeStart < max;
         }
         return result;
     }
@@ -782,8 +780,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return result;
     }
 
-    private static boolean isMultiwordType(final String type) {
-        return Constant.MultiwordTypes.contains(type);
+    private static String getMultiwordType(final String type) {
+        for (String multi : Constant.MultiwordTypes) {
+            if (type.startsWith(multi)) {
+                return multi;
+            }
+        }
+        return null;
     }
 
     public static class Constant {

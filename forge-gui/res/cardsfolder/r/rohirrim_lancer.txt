@@ -5,4 +5,4 @@ PT:1/1
 K:Menace
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME dies, the Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
-Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nWhen Rohirrim Lancer dies, the Ring tempts you.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Rohirrim Lancer dies, the Ring tempts you.
