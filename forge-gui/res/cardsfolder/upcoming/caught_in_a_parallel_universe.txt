@@ -2,8 +2,8 @@ Name:Caught in a Parallel Universe
 ManaCost:no cost
 Types:Phenomenon
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When you encounter CARDNAME, each player chooses a creature controlled by the player to their left. Each player creates a token that's a copy of the creature they chose, except it has menace. (Then planeswalk away from this phenomenon.)
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | ChangeZoneTable$ True | RepeatSubAbility$ DBChooseCreature | SubAbility$ PWAway
-SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.ControlledByPlayerInTheDirection_Left_Player.IsRemembered | ChoiceTitle$ Choose a creature controlled by the player to your left | Mandatory$ True | RememberChosen$ True
-SVar:DBToken:DB$ CopyPermanent | Defined$ Remembered | AddKeywords$ Menace
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | ChangeZoneTable$ True | RepeatSubAbility$ DBChooseCreature | SubAbility$ PWAway
+SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.ControlledByPlayerInTheDirection_Left_Player.IsRemembered | ChoiceTitle$ Choose a creature controlled by the player to your left | Mandatory$ True | RememberChosen$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ CopyPermanent | Controller$ RememberedPlayer | Defined$ Remembered | AddKeywords$ Menace
 SVar:PWAway:DB$ Planeswalk
 Oracle:When you encounter Caught in a Parallel Universe, each player chooses a creature controlled by the player to their left. Each player creates a token that's a copy of the creature they chose, except it has menace. (Then planeswalk away from this phenomenon.)

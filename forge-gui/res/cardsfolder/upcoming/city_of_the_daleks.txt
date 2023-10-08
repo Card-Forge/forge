@@ -8,7 +8,7 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeat | TriggerDescr
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | RememberTokens$ True | AtEOT$ Sacrifice | TokenOwner$ You | SubAbility$ DBPumpCombat
 SVar:DBPumpCombat:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | Duration$ UntilEndOfCombat | RememberObjects$ RememberedPlayer | SubAbility$ DBCleanup
-SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered | Description$ This creature attacks that opponent if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ RememberedPlayer | Description$ This creature attacks that opponent if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Artifact
 DeckHas:Ability$Token & Type$Dalek

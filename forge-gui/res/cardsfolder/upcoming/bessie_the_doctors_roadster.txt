@@ -1,6 +1,7 @@
 Name:Bessie, the Doctor's Roadster
 ManaCost:2
 Types:Legendary Artifact Vehicle
+PT:3/4
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, another target legendary creature can't be blocked this turn.
 SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.Legendary+Other | TgtPrompt$ Select another target legendary creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
