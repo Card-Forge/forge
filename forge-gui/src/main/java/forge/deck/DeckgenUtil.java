@@ -147,6 +147,10 @@ public class DeckgenUtil {
         return buildLDACardGenDeck(card, format, isForAI);
     }
 
+    private static boolean isCrucialCard(PaperCard pc) {
+        //avoid breaking decks, this should be deck/card hints in the future
+        return pc.getName().contains("Urza") || pc.getName().contains("Yawgmoth") || pc.getName().equalsIgnoreCase("Living End");
+    }
     /**
      * Build a deck based on the chosen card.
      *
@@ -161,16 +165,14 @@ public class DeckgenUtil {
         List<PaperCard> selectedCards = new ArrayList<>();
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
-            PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
-            //for(int i=0; i<1;++i) {
-                if(!cardToAdd.getName().equals(card.getName())) {
-                    selectedCards.add(cardToAdd);
-                }
-            //}
+            //remove any cards not valid in format
+            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCards(name, format.getFilterPrinted()));
+            if (cardToAdd == null)
+                continue;
+            if(!cardToAdd.getName().equals(card.getName())) {
+                selectedCards.add(cardToAdd);
+            }
         }
-
-        //remove any cards not valid in format
-        selectedCards = Lists.newArrayList(Iterables.filter(selectedCards, format.getFilterPrinted()));
 
         List<PaperCard> toRemove = new ArrayList<>();
 
@@ -179,7 +181,7 @@ public class DeckgenUtil {
         int i=0;
         for(PaperCard c:selectedCards){
             if(MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
-                    &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
+                    &&!isCrucialCard(c)){
                 toRemove.add(c);
                 removeCount++;
             }
@@ -254,8 +256,8 @@ public class DeckgenUtil {
         int cardCount=0;
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
-            PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
-            //for(int i=0; i<1;++i) {
+            //remove any cards not valid in format
+            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCards(name, format.getFilterPrinted()));
             if(cardToAdd != null && !cardToAdd.getName().equals(card.getName())) {
                 selectedCards.add(cardToAdd);
                 cardCount++;
@@ -263,11 +265,7 @@ public class DeckgenUtil {
             if(cardCount>120){// no need to have more than this
                 break;
             }
-            //}
         }
-
-        //remove any cards not valid in format
-        selectedCards = Lists.newArrayList(Iterables.filter(selectedCards, format.getFilterPrinted()));
 
         List<PaperCard> toRemove = new ArrayList<>();
 
@@ -276,7 +274,7 @@ public class DeckgenUtil {
         int i=0;
         for(PaperCard c:selectedCards){
             if( i > 4 && MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
-                    &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
+                    &&!isCrucialCard(c)){
                 toRemove.add(c);
                 removeCount++;
             }
