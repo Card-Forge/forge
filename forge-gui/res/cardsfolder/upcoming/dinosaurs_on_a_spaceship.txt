@@ -1,0 +1,12 @@
+Name:Dinosaurs on a Spaceship
+ManaCost:4 R W
+Types:Creature Dinosaur
+PT:7/7
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Dinosaur+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance & Trample | Description$ Other Dinosaurs you control get +1/+1 and have vigilance and trample.
+K:Suspend:4:3 R W
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigToken | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, create a 2/2 red and white Dinosaur creature token with flying and haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_2_dinosaur_flying_haste | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Dinosaur
+Oracle:Vigilance, trample\nOther Dinosaurs you control get +1/+1 and have vigilance and trample.\nSuspend 4—{3}{R}{W}\nWhenever a time counter is removed from Dinosaurs on a Spaceship while it's exiled, create a 2/2 red and white Dinosaur creature token with flying and haste.
