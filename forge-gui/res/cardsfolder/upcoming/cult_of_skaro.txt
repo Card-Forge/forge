@@ -1,0 +1,13 @@
+Name:Cult of Skaro
+ManaCost:1 U B R
+Types:Legendary Artifact Creature Dalek
+PT:4/4
+• Thay — Put a +1/+1 counter on each artifact creature you control.
+
+• Caan — Draw two cards.
+
+• Sec — Create a 3/3 black Dalek artifact creature token with menace.
+
+• Jast — Each opponent loses 4 life.
+
+Oracle:Whenever Cult of Skaro attacks, choose one at random —\n• Thay — Put a +1/+1 counter on each artifact creature you control.\n• Caan — Draw two cards.\n• Sec — Create a 3/3 black Dalek artifact creature token with menace.\n• Jast — Each opponent loses 4 life.

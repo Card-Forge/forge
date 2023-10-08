@@ -1,0 +1,7 @@
+Name:Coal Hill School
+ManaCost:2
+Types:Plane Earth
+PT:3/1
+You may exert Clockwork Droid as it attacks. When you do, it can't be blocked this turn and you scry 1. (An exerted creature won't untap during your next untap step. To scry 1, look at the top card of your library. You may put that card on the bottom.)
+Oracle:
+You may exert Clockwork Droid as it attacks. When you do, it can't be blocked this turn and you scry 1. (An exerted creature won't untap during your next untap step. To scry 1, look at the top card of your library. You may put that card on the bottom.)
