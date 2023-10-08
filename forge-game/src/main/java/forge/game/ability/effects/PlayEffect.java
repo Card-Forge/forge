@@ -32,6 +32,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostReveal;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -383,6 +384,8 @@ public class PlayEffect extends SpellAbilityEffect {
                         continue;
                     }
                     abCost = new Cost(source.getManaCost(), false);
+                } else if (cost.equals("SuspendCost")) {
+                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.getKeyword() != null && s.getKeyword().getKeyword() == Keyword.SUSPEND).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         if (unpayableCost) {

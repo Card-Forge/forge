@@ -1,0 +1,7 @@
+Name:The Face of Boe
+ManaCost:1 U R W
+Types:Legendary Creature Alien Advisor 
+PT:0/4
+A:AB$ Play | Cost$ T | Valid$ Card.withSuspend | PlayCost$ SuspendCost | Optional$ True | SorcerySpeed$ True | SpellDescription$ You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost. Activate only as a sorcery.
+DeckNeeds:Keyword$Suspend
+Oracle:{T}: You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost. Activate only as a sorcery.
