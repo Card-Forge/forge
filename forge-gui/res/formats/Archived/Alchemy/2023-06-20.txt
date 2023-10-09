@@ -4,3 +4,5 @@ Type:Archived
 Subtype:Arena
 Effective:2023-06-20
 Sets:ANA, ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR
+// Some LTR cards are "banned" in this format due to an additional product "Holiday" release on 3 November 2023 that is not available on Arena
+Banned:Eagle of Deliverance; Minas Tirith Garrison; Mirkwood Channeler; Riders of the Mark; Warg Rider
