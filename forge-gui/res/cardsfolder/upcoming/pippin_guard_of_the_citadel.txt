@@ -4,5 +4,5 @@ Types:Legendary Creature Halfling Soldier
 PT:2/2
 K:Vigilance
 K:Ward:1
-A:AB$ Protection | Cost$ T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Gains$ Choice | Choices$ artifacts,enchantments,creatures,battles,instant,sorcery,lands | SpellDescription$ Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
+A:AB$ Protection | Cost$ T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Gains$ Choice | Choices$ artifacts,enchantments,creatures,battles,instants,sorceries,planeswalkers,lands | SpellDescription$ Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
 Oracle:Vigilance, ward {1}\n{T}: Another target creature you control gains protection from the card type of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that type.)
