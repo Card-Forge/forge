@@ -1,0 +1,12 @@
+Name:Astrid Peth
+ManaCost:1 W
+Types:Legendary Creature Human
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a Food token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a Food token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Food.YouCtrl,Clue.YouCtrl | Execute$ TrigExplore | TriggerZones$ Battlefield | TriggerDescription$ Brand-new Sky — Whenever you sacrifice a Clue or Food, CARDNAME explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
+SVar:TrigExplore:DB$ Explore
+DeckHas:Ability$Sacrifice|Token|Counters & Type$Food|Artifact
+DeckHints:Type$Food|Clue
+Oracle:Whenever Astrid Peth enters the battlefield or attacks, create a Food token.\nBrand-new Sky — Whenever you sacrifice a Clue or Food, Astrid Peth explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
