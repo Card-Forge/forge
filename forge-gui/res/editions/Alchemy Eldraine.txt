@@ -13,7 +13,7 @@ ScryfallCode=YWOE
 5 R Talion's Throneguard @John Stanko
 6 R Tome of Gadwick @Maxime Minard
 7 U Dunbarrow Revivalist @Marie Magny
-8 M Underbridge Warlock @Nereida
+8 M Underbridge Warlock @Marzena Nereida Piwowar
 9 U Draconic Debut @Maxime Minard
 10 R Heir to Dragonfire @J.P. Targete
 11 M Overcooked @David Szabo

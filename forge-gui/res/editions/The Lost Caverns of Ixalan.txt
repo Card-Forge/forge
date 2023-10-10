@@ -11,6 +11,8 @@ ScryfallCode=LCI
 185 M Ghalta, Stampede Tyrant @Lars Grant-West
 189 M Huatli, Poet of Unity @Tyler Jacobson
 212 M The Skullspore Nexus @Daarken
+231 R Kellan, Daring Traveler @Marta Nael
+269 M Cavern of Souls @Alayna Danner
 287 L Plains @Olga Tereshenko
 288 L Island @WFlemming Illustration
 289 L Swamp @Elektrodeko
@@ -20,6 +22,7 @@ ScryfallCode=LCI
 317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
 326 M Ghalta, Stampede Tyrant @Sidharth Chaturvedi
 340 M The Skullspore Nexus @Mónica Robles Corzo
+345 M Cavern of Souls @Pedro Correa
 410a M Cavern of Souls @Pedro Correa
 410b M Cavern of Souls @Pedro Correa
 410c M Cavern of Souls @Pedro Correa
