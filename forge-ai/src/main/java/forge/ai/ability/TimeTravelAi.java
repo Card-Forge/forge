@@ -1,33 +1,26 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.Map;
+
 public class TimeTravelAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        boolean hasRelevantCards = false;
-
-        for (Card c : aiPlayer.getCardsIn(new ZoneType[] {ZoneType.Battlefield, ZoneType.Exile})) {
-            if (c.hasSuspend() || (c.isInPlay() && c.getCounters(CounterEnumType.TIME) >= 1)) {
-                hasRelevantCards = true;
-            }
-        }
+        boolean hasSuspendedCards = !CardLists.filter(aiPlayer.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend()).isEmpty();
+        boolean hasRelevantCardsOTB = !CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(CounterEnumType.TIME)).isEmpty();
 
         // TODO: add more logic for cards which may need it
-        return hasRelevantCards;
+        return hasSuspendedCards || hasRelevantCardsOTB;
     }
 
     @Override
