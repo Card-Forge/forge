@@ -4,7 +4,7 @@ Types:Legendary Creature Bird Serpent
 PT:4/5
 K:Companion:Special:DeckSizePlus20:Your starting deck contains at least twenty cards more than the minimum deck size.
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other cards you own and control. Return those cards to the battlefield at the beginning of the next end step.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters the battlefield, exile any number of other cards you own and control. Return those cards to the battlefield at the beginning of the next end step.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand+Other+YouOwn+YouCtrl | SelectPrompt$ Select any number of other nonland permanents you own and control | Hidden$ True | ChangeNum$ X | RememberChanged$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return those cards to the battlefield at the beginning of the next end step. | SubAbility$ DBCleanup
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI

@@ -3,7 +3,7 @@ ManaCost:X X X
 Types:Artifact
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid
-A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on Astral Cornucopia.
+A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on CARDNAME.
 SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ Y
 SVar:Y:Count$CardCounters.CHARGE
 Oracle:Astral Cornucopia enters the battlefield with X charge counters on it.\n{T}: Choose a color. Add one mana of that color for each charge counter on Astral Cornucopia.

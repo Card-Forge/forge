@@ -3,6 +3,6 @@ ManaCost:1 W U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W U | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
-S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | ValidSA$ Spell | Description$ Enchanted creature can't be the target of spells.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
+S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | ValidSA$ Spell | Secondary$ True | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and can't be the target of spells.
