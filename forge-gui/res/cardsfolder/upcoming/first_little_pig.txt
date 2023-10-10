@@ -1,0 +1,6 @@
+Name:First Little Pig
+ManaCost:1 GW
+Types:Creature Boar
+PT:2/2
+A:AB$ ChangeZone | Cost$ 1 GW | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target artifact or enchantment | ValidTgts$ Artifact,Enchantment | GameActivationLimit$ 1 | SpellDescription$ Exile target artifact or enchantment. Activate only once.
+Oracle:{1}{G/W}: Exile target artifact or enchantment. Activate only once.
