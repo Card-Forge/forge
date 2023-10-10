@@ -2,6 +2,7 @@ package forge.game.ability;
 
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import forge.game.ability.effects.*;
@@ -182,6 +183,7 @@ public enum ApiType {
     TapAll (TapAllEffect.class),
     TapOrUntap (TapOrUntapEffect.class),
     TapOrUntapAll (TapOrUntapAllEffect.class),
+    TimeTravel (TimeTravelEffect.class),
     Token (TokenEffect.class, false),
     TwoPiles (TwoPilesEffect.class),
     Unattach (UnattachEffect.class),
@@ -206,9 +208,9 @@ public enum ApiType {
     private static final Map<String, ApiType> allValues = new HashMap<>();
 
     static {
-    	for (ApiType t : ApiType.values()) {
-    		allValues.put(t.name().toLowerCase(), t);
-    	}
+        for (ApiType t : ApiType.values()) {
+            allValues.put(t.name().toLowerCase(Locale.ENGLISH), t);
+        }
     }
 
     ApiType(Class<? extends SpellAbilityEffect> clsEf) { this(clsEf, true); }
@@ -218,7 +220,7 @@ public enum ApiType {
     }
 
     public static ApiType smartValueOf(String value) {
-        ApiType v = allValues.get(value.toLowerCase());
+        ApiType v = allValues.get(value.toLowerCase(Locale.ENGLISH));
         if ( v == null )
             throw new RuntimeException("Element " + value + " not found in ApiType enum");
         return v;
