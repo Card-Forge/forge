@@ -1,0 +1,8 @@
+Name:Cybermen Squadron
+ManaCost:7
+Types:Artifact Creature Cyberman
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Artifact+nonLegendary+YouCtrl | AddKeyword$ Myriad | Description$ Nonlegendary artifact creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+DeckHas:Ability$Token
+DeckHints:Type$Artifact & Type$Creature
+Oracle:Nonlegendary artifact creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
