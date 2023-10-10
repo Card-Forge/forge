@@ -861,6 +861,10 @@ ScryfallCode=LTR
 300 M Saruman of Many Colors @Wonchun Choi
 301 M Sauron, the Dark Lord @Anton Solovianchyk
 
+[rebalanced]
+A103 R A-Orcish Bowmasters @Maxim Kostin
+A246 M A-The One Ring @Veli Nyström
+
 [tokens]
 b_0_0_army
 b_0_0_army
