@@ -1,0 +1,13 @@
+Name:Cerise, Slayer of Fear
+ManaCost:3 W W
+Types:Legendary Creature Human Cleric Knight
+PT:5/5
+K:First strike
+K:Lifelink
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | CheckSVar$ LifeGained | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ At the beginning of your postcombat main phase, if you gained life this turn, seek a card with the highest mana value among cards in your library with mana value less than or equal to the amount of life you gained this turn.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.nonLand+cmcLEX | ChangeNum$ 1 | DefinedPlayer$ Player
+SVar:X:SVar$HighestCMC/Max.LifeGained
+SVar:HighestCMC:Count$ValidLibrary Card.YouOwn$GreatestCMC
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+Oracle:First strike, lifelink\nAt the beginning of your postcombat main phase, if you gained life this turn, seek a card with the highest mana value among cards in your library with mana value less than or equal to the amount of life you gained this turn.
