@@ -48,7 +48,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
             GameEntityCounterTable table = new GameEntityCounterTable();
 
-            String prompt = Localizer.getInstance().getMessage("lblChooseEntity");
+            String prompt = Localizer.getInstance().getMessage("lblChooseaCard");
             for (Card c : pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa, prompt, p, null)) {
 
                 Map<String, Object> params = Maps.newHashMap();
