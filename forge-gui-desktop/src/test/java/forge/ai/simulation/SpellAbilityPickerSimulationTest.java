@@ -885,11 +885,11 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         // If we have a Pithing Needle, but it's naming something else, that's still fine.
         Card pithingNeedle = addCard("Pithing Needle", opponent);
-        pithingNeedle.setNamedCard("Flooded Strand");
+        pithingNeedle.addNamedCard("Flooded Strand");
         assertPickIsGoblinBombardmentTargetingOpponent.run();
 
         // But if it's naming Gobling Bombardment, then we can't choose that SA.
-        pithingNeedle.setNamedCard("Goblin Bombardment");
+        pithingNeedle.addNamedCard("Goblin Bombardment");
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
     }

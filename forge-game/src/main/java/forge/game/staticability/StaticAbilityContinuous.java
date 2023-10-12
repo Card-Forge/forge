@@ -213,7 +213,7 @@ public final class StaticAbilityContinuous {
                         if (!hostCard.hasChosenPlayer() && input.contains("ChosenPlayer")) {
                             return true;
                         }
-                        if (!hostCard.hasChosenName() && input.contains("ChosenName")) {
+                        if (!hostCard.hasNamedCard() && input.contains("ChosenName")) {
                             return true;
                         }
                         if (!hostCard.hasChosenEvenOdd() && (input.contains("ChosenEvenOdd") || input.contains("chosenEvenOdd"))) {
@@ -297,8 +297,8 @@ public final class StaticAbilityContinuous {
                             input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
                             input = input.replaceAll("ChosenPlayerName", cp.getName());
                         }
-                        if (hostCard.hasChosenName()) {
-                            final String chosenName = hostCard.getChosenName().replace(",", ";");
+                        if (hostCard.hasNamedCard()) {
+                            final String chosenName = hostCard.getNamedCard().replace(",", ";");
                             input = input.replaceAll("ChosenName", "Card.named" + chosenName);
                         }
                         if (hostCard.hasChosenEvenOdd()) {

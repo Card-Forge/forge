@@ -287,7 +287,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String chosenType2 = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
-    private String chosenName = "";
+    private List<String> chosenName = new ArrayList<>();
     private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
@@ -1947,34 +1947,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
-        return getChosenName();
+        return hasNamedCard() ? chosenName.get(0) : "";
     }
-    public final void setNamedCard(final String s) {
-        setChosenName(s);
+    public final List<String> getNamedCards() {
+        return chosenName == null ? Lists.newArrayList() : chosenName;
     }
-    public final String getNamedCard2() { return getChosenName2(); }
-    public final void setNamedCard2(final String s) {
-        setChosenName2(s);
-    }
-
-    public boolean hasChosenName() {
-        return chosenName != null;
-    }
-    public boolean hasChosenName2() { return chosenName2 != null; }
-
-    public String getChosenName() {
-        return chosenName;
-    }
-    public final void setChosenName(final String s) {
+    public final void setNamedCards(final List<String> s) {
         chosenName = s;
         view.updateNamedCard(this);
     }
-    public String getChosenName2() {
-        return chosenName2;
+
+    public final void addNamedCard(final String s) {
+        chosenName.add(s);
+        view.updateNamedCard(this);
     }
-    public final void setChosenName2(final String s) {
-        chosenName2 = s;
-        view.updateNamedCard2(this);
+
+    public boolean hasNamedCard() {
+            return chosenName != null && !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {

@@ -152,12 +152,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
             }
 
-            host.setNamedCard(chosen);
+            host.addNamedCard(chosen);
             if (!randomChoice) {
                 p.setNamedCard(chosen);
-            }
-            if (sa.hasParam("NoteFor")) {
-                p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
             }
         }
     }
