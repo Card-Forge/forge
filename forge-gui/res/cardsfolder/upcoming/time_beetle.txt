@@ -1,0 +1,8 @@
+Name:Time Beetle
+ManaCost:1 U
+Types:Creature Alien Insect
+PT:1/1
+K:Skulk
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigTimeTravel | CombatDamage$ True | TriggerDescription$ Parallel Universe — Whenever CARDNAME deals combat damage to a player, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
+SVar:TrigTimeTravel:DB$ TimeTravel
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nParallel Universe — Whenever Time Beetle deals combat damage to a player, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
