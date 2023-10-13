@@ -1580,49 +1580,6 @@ public class AbilityUtils {
             host.addRemembered(sb.toString());
         }
 
-        if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
-            List <Card> noList = Lists.newArrayList();
-            Table<String, Boolean, CardCollection> paidLists = sa.getPaidHash();
-            if (sa.hasParam("RememberCostExcept")) {
-                noList.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RememberCostExcept"), sa));
-            }
-            if (paidLists.contains("Exiled", true)) {
-                final CardCollection paidListExiled = sa.getPaidList("Exiled", true);
-                for (final Card exiledAsCost : paidListExiled) {
-                    if (!noList.contains(exiledAsCost)) {
-                        host.addRemembered(exiledAsCost);
-                    }
-                }
-            } else if (paidLists.contains("Sacrificed", true)) {
-                final CardCollection paidListSacrificed = sa.getPaidList("Sacrificed", true);
-                for (final Card sacrificedAsCost : paidListSacrificed) {
-                    if (!noList.contains(sacrificedAsCost)) {
-                        host.addRemembered(sacrificedAsCost);
-                    }
-                }
-            } else if (paidLists.contains("Tapped", true)) {
-                final CardCollection paidListTapped = sa.getPaidList("Tapped", true);
-                for (final Card tappedAsCost : paidListTapped) {
-                    if (!noList.contains(tappedAsCost)) {
-                        host.addRemembered(tappedAsCost);
-                    }
-                }
-            } else if (paidLists.contains("Unattached", true)) {
-                final CardCollection paidListUnattached = sa.getPaidList("Unattached", true);
-                for (final Card unattachedAsCost : paidListUnattached) {
-                    if (!noList.contains(unattachedAsCost)) {
-                        host.addRemembered(unattachedAsCost);
-                    }
-                }
-            } else if (paidLists.contains("Discarded", true)) {
-                final CardCollection paidListDiscarded = sa.getPaidList("Discarded", true);
-                for (final Card discardedAsCost : paidListDiscarded) {
-                    if (!noList.contains(discardedAsCost)) {
-                        host.addRemembered(discardedAsCost);
-                    }
-                }
-            }
-        }
         // make sure that when this is from a trigger LKI is updated
         host.getGame().updateLastStateForCard(host);
     }
@@ -3922,6 +3879,14 @@ public class AbilityUtils {
             }
             def[0] = def[0].substring(8);
             return spawner;
+        }
+        if (def[0].startsWith("TriggeredSpellAbility>") && ctb instanceof SpellAbility) {
+            SpellAbility trig = (SpellAbility) ((SpellAbility) ctb).getTriggeringObject(AbilityKey.SpellAbility);
+            if (trig == null) {
+                return ctb;
+            }
+            def[0] = def[0].substring(22);
+            return trig;
         }
         return ctb;
     }
