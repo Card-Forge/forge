@@ -1,0 +1,10 @@
+Name:Bessie, the Doctor's Roadster
+ManaCost:2
+Types:Legendary Artifact Vehicle
+PT:3/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, another target legendary creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.Legendary+Other | TgtPrompt$ Select another target legendary creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+K:Crew:2
+Oracle:Haste\nWhenever Bessie attacks, another target legendary creature can't be blocked this turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

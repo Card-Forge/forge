@@ -1,0 +1,9 @@
+Name:Besieged Viking Village
+ManaCost:no cost
+Types:Plane Earth
+S:Mode$ Continuous | Affected$ Creature | AddAbility$ ABBoast | EffectZone$ Command | Description$ All creatures have "Boast — {1}: Put a +1/+1 counter on this creature." (Activate only if that creature attacked this turn and only once each turn.)
+SVar:ABBoast:AB$ PutCounter | Cost$ 1 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Boast$ True | Description$ Boast - Put a +1/+1 counter on this creature." (Activate only if that creature attacked this turn and only once each turn.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever chaos ensues, put an indestructible counter on target creature you control that attacked this turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+attackedThisTurn |TgtPrompt$ Select target creature you control that attacked this turn | CounterType$ Indestructible | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:All creatures have "Boast — {1}: Put a +1/+1 counter on this creature." (Activate only if that creature attacked this turn and only once each turn.)\nWhenever chaos ensues, put an indestructible counter on target creature you control that attacked this turn.
