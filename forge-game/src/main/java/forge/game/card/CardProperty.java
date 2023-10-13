@@ -708,18 +708,8 @@ public class CardProperty {
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
-                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted") || restriction.startsWith("TopOfLibrary")) {
-                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
-                }
 
                 switch (restriction) {
-                    case "Equipped":
-                        if (!source.isEquipment() || !source.isEquipping()
-                                || !card.sharesColorWith(source.getEquipping())) {
-                            return false;
-                        }
-                        break;
                     case "MostProminentColor":
                         byte mask = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
                         if (!card.getColor().hasAnyColor(mask))
@@ -744,12 +734,10 @@ public class CardProperty {
                         }
                         break;
                     default:
-                        for (final Card c1 : sourceController.getCardsIn(ZoneType.Battlefield)) {
-                            if (c1.isValid(restriction, sourceController, source, spellAbility) && card.sharesColorWith(c1)) {
-                                return true;
-                            }
+                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesColorWith(card))) {
+                            return false;
                         }
-                        return false;
+                        break;
                 }
             }
         } else if (property.startsWith("MostProminentColor")) {
@@ -801,7 +789,7 @@ public class CardProperty {
                     return false;
                 }
             } else {
-                final String restriction = property.split("sharesCreatureTypeWith ")[1];
+                final String restriction = property.split(" ", 2)[1];
                 switch (restriction) {
                     case "Commander":
                         final List<Card> cmdrs = sourceController.getCommanders();
@@ -817,18 +805,13 @@ public class CardProperty {
                             }
                         }
                         return false;
-                    case "AllRemembered":
-                        for (final Object rem : source.getRemembered()) {
-                            if (rem instanceof Card) {
-                                final Card c = (Card) rem;
-                                if (!card.sharesCreatureTypeWith(c)) {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCreatureTypeWith(card))) {
+                        CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                        if (property.contains("WithAll")) {
+                            if (!Iterables.all(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                                return false;
+                            }  
+                        } else if (!Iterables.any(def, CardPredicates.sharesCreatureTypeWith(card))) {
                             return false;
                         }
                         break;
