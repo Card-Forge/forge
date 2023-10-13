@@ -1,6 +1,18 @@
-Name:All of History, All at Once
-ManaCost:2 U U
+Name:Coward
+ManaCost:1 R
 Types:Sorcery
-K:Time travel
-K:Storm
-Oracle:Time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SubAbility$ DBAnimate | SpellDescription$ Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Coward | SubAbility$ DBTimeTravel
+SVar:DBTimeTravel:DB$ TimeTravel | SpellDescription$ Time Travel.
+AlternateMode:Split
+Oracle:Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.\nTime travel.
+
+ALTERNATE
+
+Name:Killer
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | DamageMap$ True | SubAbility$ DamageSame | SpellDescription$ CARDNAME deals 4 damage to target creature and to each other creature with the same name as that creature.
+SVar:DamageSame:DB$ DamageAll | ValidCards$ Creature.SharesCreatureTypeWith Targeted | ValidDescription$ each other creature that shares a creature type with it | NumDmg$ 4 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:Killer deals 3 damage to target creature and each other creature that shares a creature type with it.
