@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | StackDescription$ None
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.ControlledBy NextOpponentToYourLeft | TgtPrompt$ Select target creature controlled by the opponent to your left | SubAbility$ DBCopy | SpellDescription$ Target creature you control fights target creature the opponent to your left controls.
-SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ NextOpponentToYourLeft | Optional$ True | AILogic$ ChainOfAcid | StackDescription$ None | MayChooseTarget$ True | StackDescription$ REP that player_{p:NextPlayerToYourLeft} | SpellDescription$ Then that player may copy this spell and may choose new targets for the copy.
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ NextOpponentToYourLeft | Optional$ True | AILogic$ ChainOfAcid | MayChooseTarget$ True | StackDescription$ REP that player_{p:NextPlayerToYourLeft} | SpellDescription$ Then that player may copy this spell and may choose new targets for the copy.
 Oracle:Target creature you control fights target creature the opponent to your left controls. Then that player may copy this spell and may choose new targets for the copy.
