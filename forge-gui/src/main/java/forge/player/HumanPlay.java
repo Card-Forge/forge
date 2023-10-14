@@ -552,12 +552,14 @@ public class HumanPlay {
             ability.resetSacrificedAsEmerge();
         }
         if (ability.getTappedForConvoke() != null) {
+            game.getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!manaInputCancelled) {
                     c.tap(true, ability, ability.getActivatingPlayer());
                 }
             }
+            game.getTriggerHandler().clearSuppression(TriggerType.Taps);
             if (manaInputCancelled) {
                 ability.clearTappedForConvoke();
             }
@@ -655,14 +657,6 @@ public class HumanPlay {
             if (ability.getSacrificedAsEmerge() == null && emerge != null) {
                 ability.setSacrificedAsEmerge(emerge);
             }
-        }
-        if (ability.getTappedForConvoke() != null) {
-            activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                c.tap(true, ability, activator);
-            }
-            activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
         }
         return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
     }
