@@ -10,7 +10,6 @@ import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.model.FModel;
 
 import java.io.Serializable;
 import java.util.*;
@@ -167,8 +166,15 @@ public class RewardData implements Serializable {
                 case "card":
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
-                        for(int i = 0; i < count + addedCount; i++) {
-                            ret.add(new Reward(allCardVariants ? CardUtil.getCardByName(cardName) : StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
+                        if (allCardVariants) {
+                            PaperCard card = CardUtil.getCardByName(cardName);
+                            for (int i = 0; i < count + addedCount; i++) {
+                                ret.add(new Reward(CardUtil.getCardByNameAndEdition(cardName, card.getEdition()), isNoSell));
+                            }
+                        } else {
+                            for (int i = 0; i < count + addedCount; i++) {
+                                ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
+                            }
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {

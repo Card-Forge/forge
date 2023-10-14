@@ -595,9 +595,20 @@ public class CardUtil {
     }
 
     private static Collection<PaperCard> generateLands(String landName,int count) {
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Collection<PaperCard> ret=new ArrayList<>();
-        for(int i=0;i<count;i++)
-            ret.add(FModel.getMagicDb().getCommonCards().getCard(landName));
+
+        if (allCardVariants) {
+            PaperCard randomLand = getCardByName(landName);
+            String edition = randomLand.getEdition();
+
+            for (int i = 0; i < count; i++) {
+                ret.add(getCardByNameAndEdition(landName, edition));
+            }
+        } else {
+            for (int i = 0; i < count; i++)
+                ret.add(FModel.getMagicDb().getCommonCards().getCard(landName));
+        }
 
         return ret;
     }
