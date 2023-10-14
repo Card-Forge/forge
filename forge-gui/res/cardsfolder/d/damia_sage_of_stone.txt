@@ -1,5 +1,5 @@
 Name:Damia, Sage of Stone
-ManaCost:4 G U B
+ManaCost:4 B G U
 Types:Legendary Creature Gorgon Wizard
 PT:4/4
 K:Deathtouch
