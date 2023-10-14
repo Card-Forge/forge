@@ -84,10 +84,14 @@ public class RewardData implements Serializable {
 
     static private void initializeAllCards(){
         RewardData legals = Config.instance().getConfigData().legalCards;
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+
         if(legals==null)
-            allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+            allCards = allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards()
+                    : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
         else
-            allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
+            allCards = Iterables.filter(allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards()
+                    : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
         allCards = Iterables.filter(allCards, input -> {
             if(input == null)
@@ -100,7 +104,7 @@ public class RewardData implements Serializable {
                 return false;
             if(input.getRules().isCustom())
                 return false;
-            return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
+            return allCardVariants || !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
         allEnemyCards=Iterables.filter(allCards, input -> {
