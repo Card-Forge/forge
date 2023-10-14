@@ -2,7 +2,6 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
-import forge.StaticData;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -129,6 +128,7 @@ public class RewardData implements Serializable {
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
 
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom?new Random():WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
 
@@ -147,7 +147,8 @@ public class RewardData implements Serializable {
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
                         if( r.cardName != null && !r.cardName.isEmpty() ) {
-                            PaperCard pc = StaticData.instance().getCommonCards().getCard(r.cardName);
+                            PaperCard pc = allCardVariants ? CardUtil.getCardByName(r.cardName)
+                                    : FModel.getMagicDb().getCommonCards().getCard(r.cardName);
                             if (pc != null)
                                 pool.add(pc);
                         } else {
@@ -166,7 +167,7 @@ public class RewardData implements Serializable {
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
                         for(int i = 0; i < count + addedCount; i++) {
-                            ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
+                            ret.add(new Reward(allCardVariants ? CardUtil.getCardByName(cardName) : FModel.getMagicDb().getCommonCards().getCard(cardName), isNoSell));
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {

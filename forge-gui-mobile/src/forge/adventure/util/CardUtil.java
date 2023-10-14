@@ -715,6 +715,14 @@ public class CardUtil {
         return generateBoosterPackAsDeck(edition);
     }
 
+    public static PaperCard getCardByName(String cardName) {
+        return Aggregates.random(Iterables.filter(getFullCardPool(), input -> input.getCardName().equals(cardName)));
+    }
+
+    public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
+        return Aggregates.random(Iterables.filter(getFullCardPool(), input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)));
+    }
+
     public static Collection<PaperCard> getFullCardPool() {
         return Config.instance().getSettingData().useAllCardVariants ?
                 FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
