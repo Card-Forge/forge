@@ -450,6 +450,8 @@ public class CardUtil {
         int colorLess=0;
         int cardCount=nonLands.size();
         List<PaperCard> cards=new ArrayList<>();
+        boolean allCardVariants=Config.instance().getSettingData().useAllCardVariants;
+
         for(PaperCard nonLand:nonLands)
         {
             red+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.RED);
@@ -463,6 +465,11 @@ public class CardUtil {
         int neededLands=template.count-cardCount;
         int neededDualLands= Math.round (neededLands*template.rares);
         int neededBase=neededLands-neededDualLands;
+        String edition = "";
+        if (allCardVariants) {
+            PaperCard templateLand = CardUtil.getCardByName("Plains");
+            edition = templateLand.getEdition();
+        }
         if(sum==0.)
         {
             cards.addAll(generateLands("Wastes",neededLands));
@@ -474,11 +481,11 @@ public class CardUtil {
             int forest=Math.round(neededBase*(green/sum));
             int plains=Math.round(neededBase*(white/sum));
             int swamp=Math.round(neededBase*(black/sum));
-            cards.addAll(generateLands("Plains",plains));
-            cards.addAll(generateLands("Island",island));
-            cards.addAll(generateLands("Forest",forest));
-            cards.addAll(generateLands("Mountain",mount));
-            cards.addAll(generateLands("Swamp",swamp));
+            cards.addAll(generateLands("Plains",plains,edition));
+            cards.addAll(generateLands("Island",island,edition));
+            cards.addAll(generateLands("Forest",forest,edition));
+            cards.addAll(generateLands("Mountain",mount,edition));
+            cards.addAll(generateLands("Swamp",swamp,edition));
             List<String> landTypes=new ArrayList<>();
             if(mount>0)
                 landTypes.add("Mountain");
@@ -594,14 +601,19 @@ public class CardUtil {
         return ret;
     }
 
-    private static Collection<PaperCard> generateLands(String landName,int count) {
+    private static Collection<PaperCard> generateLands(String landName, int count) {
+        return generateLands(landName, count, "");
+    }
+
+    private static Collection<PaperCard> generateLands(String landName, int count, String edition) {
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
-        Collection<PaperCard> ret=new ArrayList<>();
+        Collection<PaperCard> ret = new ArrayList<>();
 
         if (allCardVariants) {
-            PaperCard randomLand = getCardByName(landName);
-            String edition = randomLand.getEdition();
-
+            if (edition.isEmpty()) {
+                PaperCard templateLand = getCardByName(landName);
+                edition = templateLand.getEdition();
+            }
             for (int i = 0; i < count; i++) {
                 ret.add(getCardByNameAndEdition(landName, edition));
             }

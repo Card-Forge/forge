@@ -236,8 +236,27 @@ public class RewardData implements Serializable {
     }
     static public List<PaperCard> rewardsToCards(Iterable<Reward> dataList) {
         ArrayList<PaperCard> ret=new ArrayList<PaperCard>();
-        for (Reward data:dataList) {
-            ret.add(data.getCard());
+
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+
+        if (allCardVariants) {
+            String basicLandEdition = "";
+            for (Reward data : dataList) {
+                PaperCard card = data.getCard();
+                if (card.isVeryBasicLand()) {
+                    // ensure that all basid lands share the same edition so the deck doesn't look odd
+                    if (basicLandEdition.isEmpty()) {
+                        basicLandEdition = card.getEdition();
+                    }
+                    ret.add(CardUtil.getCardByNameAndEdition(card.getName(), basicLandEdition));
+                } else {
+                    ret.add(card);
+                }
+            }
+        } else {
+            for (Reward data : dataList) {
+                ret.add(data.getCard());
+            }
         }
         return ret;
     }
