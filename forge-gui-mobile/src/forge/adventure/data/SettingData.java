@@ -21,4 +21,5 @@ public class SettingData {
     public boolean dayNightBG;
     public boolean disableWinLose;
     public boolean showShopOverlay;
+    public boolean useAllCardVariants;
 }
