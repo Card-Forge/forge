@@ -1,4 +1,4 @@
-Name:Human Noble
+Name:Human Noble Token
 ManaCost:no cost
 Types:Creature Human Noble
 Colors:white

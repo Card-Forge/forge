@@ -1,4 +1,4 @@
-Name:Horse
+Name:Horse Token
 ManaCost:no cost
 Types:Creature Horse
 Colors:white
