@@ -2,9 +2,9 @@ Name:The Wedding of River Song
 ManaCost:2 W
 Types:Sorcery
 A:SP$ Draw | DrawNum$ 2 | SubAbility$ DBExile | SpellDescription$ Draw two cards, then you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. Then target opponent does the same. Cards exiled this way that don't have suspend gain suspend.
-SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.NonLand | WithCountersType$ TIME | WithCountersAmount$ X | RememberChanged$ True | SubAbility$ DBPump
-SVar:OppExile:DB$ ChangeZone | ValidTgts$ Opponent | Chooser$ Targeted | Mandatory$ True | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ Y | ChangeType$ Card.NonLand | SubAbility$ DBGiveSuspend
-SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | WithCountersType$ TIME | WithCountersAmount$ X | RememberChanged$ True | SubAbility$ OppExile
+SVar:OppExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | Chooser$ Targeted | Hidden$ True | Mandatory$ True | WithCountersType$ TIME | WithCountersAmount$ Y | ChangeType$ Card.nonLand | Imprint$ True |  SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend,Card.Imprinted+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Remembered$CardManaCost
 SVar:Y:Imprinted$CardManaCost
