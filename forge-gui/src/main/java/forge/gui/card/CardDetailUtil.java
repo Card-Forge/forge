@@ -501,18 +501,15 @@ public class CardDetailUtil {
         }
 
         // named card
-        if (!card.getNamedCard().isEmpty()) {
+        if (card.getNamedCard() != null && !card.getNamedCard().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(named card: ");
+            area.append("(named card").append(card.getNamedCard().size() > 1 ? "s" : "").append(": ");
             if (card.isFaceDown() && state.getState() == CardStateName.FaceDown) {
                 area.append("Hidden");
             } else {
-                area.append(card.getNamedCard());
-                if (!card.getNamedCard2().isEmpty()) {
-                    area.append(", ").append(card.getNamedCard2());
-                }
+                area.append(StringUtils.join(card.getNamedCard(), ", "));
             }
             area.append(")");
         }

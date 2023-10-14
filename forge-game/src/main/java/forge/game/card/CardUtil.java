@@ -296,8 +296,7 @@ public final class CardUtil {
 
         newCopy.setChosenType(in.getChosenType());
         newCopy.setChosenType2(in.getChosenType2());
-        newCopy.setChosenName(in.getChosenName());
-        newCopy.setChosenName2(in.getChosenName2());
+        newCopy.setNamedCards(in.getNamedCards());
         newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
         if (in.hasChosenNumber()) {
             newCopy.setChosenNumber(in.getChosenNumber());

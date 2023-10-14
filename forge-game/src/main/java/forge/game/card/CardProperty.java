@@ -69,12 +69,19 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
-            if (!card.sharesNameWith(source.getNamedCard())) {
-                return false;
+            boolean found = false;
+            for (String name : source.getNamedCards()) {
+                if (card.sharesNameWith(name)) {
+                    found = true;
+                    break;
+                }
             }
-        } else if (property.equals("NamedCard2")) {
-            if (!card.sharesNameWith(source.getNamedCard2())) {
-                return false;
+            return found;
+        } else if (property.startsWith("DifferentNameThan")) {
+            for (Card c : AbilityUtils.getDefinedCards(source, property.substring(17), spellAbility)) {
+                if (card.sharesNameWith(c)) {
+                    return false;
+                }
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
             if (!source.hasRemembered()) {

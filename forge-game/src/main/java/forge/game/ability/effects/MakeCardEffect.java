@@ -52,8 +52,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
             if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
                 if (n.equals("ChosenName")) {
-                    if (source.hasChosenName()) {
-                        names.add(source.getChosenName());
+                    if (source.hasNamedCard()) {
+                        names.addAll(source.getNamedCards());
                     } else {
                         System.err.println("Malformed MakeCard entry! - " + source.toString());
                     }

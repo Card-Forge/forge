@@ -100,7 +100,7 @@ public class CloneEffect extends SpellAbilityEffect {
         } else if (sa.usesTargeting()) {
             cardToCopy = sa.getTargetCard();
         } else if (sa.hasParam("CopyFromChosenName")) {
-            String name = host.getChosenName();
+            String name = host.getNamedCard();
             cardToCopy = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), activator);
         }
         if (cardToCopy == null) {
