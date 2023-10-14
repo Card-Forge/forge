@@ -1,0 +1,9 @@
+Name:Maelstrom Wanderer
+ManaCost:5 G U R
+Types:Legendary Creature Elemental
+PT:7/5
+K:Cascade
+K:Cascade
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+SVar:PlayMain1:True
+Oracle:Creatures you control have haste.\nCascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order. Then do it again.)

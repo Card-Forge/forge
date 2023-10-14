@@ -1,0 +1,8 @@
+Name:Numot, the Devastator
+ManaCost:3 U R W
+Types:Legendary Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{R}. If you do, destroy up to two target lands.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 2 R | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land
+Oracle:Flying\nWhenever Numot, the Devastator deals combat damage to a player, you may pay {2}{R}. If you do, destroy up to two target lands.

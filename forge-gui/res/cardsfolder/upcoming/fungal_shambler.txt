@@ -1,0 +1,9 @@
+Name:Fungal Shambler
+ManaCost:4 B G U
+Types:Creature Fungus Beast
+PT:6/4
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDrawDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you draw a card and that opponent discards a card.
+SVar:TrigDrawDiscard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Trample\nWhenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.

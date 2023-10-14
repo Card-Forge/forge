@@ -1,0 +1,7 @@
+Name:Overgrown Estate
+ManaCost:W B G
+Types:Enchantment
+A:AB$ GainLife | Cost$ Sac<1/Land> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+AI:RemoveDeck:All
+SVar:NonStackingEffect:True
+Oracle:Sacrifice a land: You gain 3 life.
