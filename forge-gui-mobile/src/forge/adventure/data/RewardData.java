@@ -82,16 +82,18 @@ public class RewardData implements Serializable {
     private static Iterable<PaperCard> allCards;
     private static Iterable<PaperCard> allEnemyCards;
 
+    private static Collection<PaperCard> getFullCardPool() {
+        return Config.instance().getSettingData().useAllCardVariants ?
+                FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+    }
+
     static private void initializeAllCards(){
         RewardData legals = Config.instance().getConfigData().legalCards;
-        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
 
         if(legals==null)
-            allCards = allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards()
-                    : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+            allCards = getFullCardPool();
         else
-            allCards = Iterables.filter(allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards()
-                    : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(), new CardUtil.CardPredicate(legals, true));
+            allCards = Iterables.filter(getFullCardPool(), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
         allCards = Iterables.filter(allCards, input -> {
             if(input == null)
