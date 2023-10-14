@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
+import forge.StaticData;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -148,7 +149,7 @@ public class RewardData implements Serializable {
                     for (RewardData r : cardUnion) {
                         if( r.cardName != null && !r.cardName.isEmpty() ) {
                             PaperCard pc = allCardVariants ? CardUtil.getCardByName(r.cardName)
-                                    : FModel.getMagicDb().getCommonCards().getCard(r.cardName);
+                                    : StaticData.instance().getCommonCards().getCard(r.cardName);
                             if (pc != null)
                                 pool.add(pc);
                         } else {
@@ -167,7 +168,7 @@ public class RewardData implements Serializable {
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
                         for(int i = 0; i < count + addedCount; i++) {
-                            ret.add(new Reward(allCardVariants ? CardUtil.getCardByName(cardName) : FModel.getMagicDb().getCommonCards().getCard(cardName), isNoSell));
+                            ret.add(new Reward(allCardVariants ? CardUtil.getCardByName(cardName) : StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {
