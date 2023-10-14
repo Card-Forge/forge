@@ -104,7 +104,7 @@ public class RewardData implements Serializable {
                 return false;
             if(input.getRules().isCustom())
                 return false;
-            return allCardVariants || !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
+            return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
         allEnemyCards=Iterables.filter(allCards, input -> {
