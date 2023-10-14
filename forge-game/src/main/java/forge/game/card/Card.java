@@ -288,7 +288,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
     private List<String> chosenName = new ArrayList<>();
-    private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
     private Player protectingPlayer;
@@ -1947,7 +1946,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
-        return hasNamedCard() ? chosenName.get(0) : "";
+        return hasNamedCard() ? Iterables.getLast(chosenName) : "";
     }
     public final List<String> getNamedCards() {
         return chosenName == null ? Lists.newArrayList() : chosenName;
@@ -1963,7 +1962,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean hasNamedCard() {
-            return chosenName != null && !chosenName.isEmpty();
+        return chosenName != null && !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {

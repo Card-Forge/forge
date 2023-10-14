@@ -50,7 +50,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         boolean randomChoice = sa.hasParam("AtRandom");
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
         boolean chooseFromList = sa.hasParam("ChooseFromList");
-        boolean chooseFromOneTimeList = sa.hasParam("ChooseFromOneTimeList");
 
         if (!randomChoice) {
             if (sa.hasParam("SelectPrompt")) {
@@ -105,6 +104,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 for (String name : names) {
                     // Cardnames that include "," must use ";" instead in ChooseFromList$ (i.e. Tovolar; Dire Overlord)
                     name = name.replace(";", ",");
+                    if (sa.hasParam("ExcludeChosen") && host.getNamedCards().contains(name)) {
+                        continue;
+                    }
                     faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
                 }
                 if (randomChoice) {
@@ -112,23 +114,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 } else {
                     chosen = p.getController().chooseCardName(sa, faces, message);
                 }
-            } else if (chooseFromOneTimeList) {
-                String [] names = sa.getParam("ChooseFromOneTimeList").split(",");
-                List<ICardFace> faces = new ArrayList<>();
-                for (String name : names) {
-                    faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
-                }
-                chosen = p.getController().chooseCardName(sa, faces, message);
-
-                // Remove chosen Name from List
-                StringBuilder sb = new StringBuilder();
-                for (String name : names) {
-                    if (chosen.equals(name)) continue;
-                    if (sb.length() > 0) sb.append(',');
-                    sb.append(name);
-                }
-                sa.putParam("ChooseFromOneTimeList", sb.toString());
-            } else {
+            }  else {
                 // use CardFace because you might name a alternate names
                 Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                 if (sa.hasParam("ValidCards")) {
@@ -152,7 +138,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
             }
 
-            host.addNamedCard(chosen);
+            if (!chosen.isEmpty()) {
+                host.addNamedCard(chosen);
+            }
             if (!randomChoice) {
                 p.setNamedCard(chosen);
             }
