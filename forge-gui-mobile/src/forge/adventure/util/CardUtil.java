@@ -714,5 +714,10 @@ public class CardUtil {
         CardEdition edition = Aggregates.random(possibleEditions);
         return generateBoosterPackAsDeck(edition);
     }
+
+    public static Collection<PaperCard> getFullCardPool() {
+        return Config.instance().getSettingData().useAllCardVariants ?
+                FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+    }
 }
 
