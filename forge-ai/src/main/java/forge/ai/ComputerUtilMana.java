@@ -1468,6 +1468,14 @@ public class ComputerUtilMana {
                     }
                 }
             }
+            // exclude cards that will deal lethal damage when tapped
+            String aiManaHint = card.getSVar("AIManaHint");
+            if (aiManaHint.startsWith("DamageOnTap") && !ai.cantLoseForZeroOrLessLife()) {
+                int numDamage = Integer.parseInt(aiManaHint.substring(aiManaHint.indexOf(".") + 1));
+                if (ai.getLife() <= numDamage) {
+                    continue;
+                }
+            }
 
             if (card.isCreature() || card.isEnchanted()) {
                 otherManaSources.add(card);
