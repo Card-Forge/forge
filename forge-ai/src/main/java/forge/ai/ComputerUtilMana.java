@@ -1462,6 +1462,26 @@ public class ComputerUtilMana {
                     }
                 }
             }
+            // exclude cards that will deal lethal damage when tapped
+            if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                boolean dealsLethalOnTap = false;
+                for (Trigger t : card.getTriggers()) {
+                    if (t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana) {
+                        SpellAbility trigSa = t.getOverridingAbility();
+                        if (trigSa.getApi() == ApiType.DealDamage && trigSa.getParamOrDefault("Defined", "").equals("You")) {
+                            int numDamage = AbilityUtils.calculateAmount(card, trigSa.getParam("NumDmg"), null);
+                            numDamage = ai.staticReplaceDamage(numDamage, card, false);
+                            if (ai.getLife() <= numDamage) {
+                                dealsLethalOnTap = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (dealsLethalOnTap) {
+                    continue;
+                }
+            }
 
             if (card.isCreature() || card.isEnchanted()) {
                 otherManaSources.add(card);
