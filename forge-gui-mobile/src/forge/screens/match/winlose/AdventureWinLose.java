@@ -3,6 +3,7 @@ package forge.screens.match.winlose;
 import forge.Forge;
 import forge.adventure.scene.DuelScene;
 import forge.game.GameView;
+import forge.screens.match.MatchController;
 
 public class AdventureWinLose extends ControlWinLose {
     /**
@@ -36,11 +37,12 @@ public class AdventureWinLose extends ControlWinLose {
 
     @Override
     public void actionOnRestart() {
-        //Do Nothing
+        saveOptions();
     }
 
     @Override
     public void actionOnQuit() {
+        saveOptions();
         getView().hide();
         DuelScene.instance().GameEnd();
         DuelScene.instance().exitDuelScene();
@@ -48,7 +50,7 @@ public class AdventureWinLose extends ControlWinLose {
 
     @Override
     public void saveOptions() {
-        //Do Nothing
+        MatchController.writeMatchPreferences();
     }
 
     @Override
