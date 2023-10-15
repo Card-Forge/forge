@@ -1,0 +1,15 @@
+Name:Dalek Intensive Care
+Types:Plane The Dalek Asylum
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.YouCtrl+nonDalek | Choiceprompt
+
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | PumpKeywords$ Haste | PumpDuration$ EOT
+
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create two 1/1 red Goblin creature tokens.
+
+DeckHas:Ability$Token & Type$Artifact|Dalek
+Oracle:
+When you planeswalk to Dalek Intensive Care and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
+
+Whenever chaos ensues, target Dalek you control deals damage equal to its power to target creature you don’t control.

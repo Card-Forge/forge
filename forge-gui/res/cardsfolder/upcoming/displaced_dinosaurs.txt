@@ -1,0 +1,9 @@
+Name:Ace's Baseball Bat
+ManaCost:2
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy+attacking | AddKeyword$ First Strike & MustBeBlockedBy Creature.Dalek | Description$ As long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.
+K:Equip:1:Creature.Legendary:legendary creature
+K:Equip:3
+DeckHints:Type$Legendary & Type$Creature
+Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.\nEquip legendary creature {1}\nEquip {3}
