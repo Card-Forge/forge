@@ -215,7 +215,7 @@ public class CardFactoryUtil {
         if (name == null || name.isEmpty()) {
             return false;
         }
-        card.setNamedCard(name);
+        card.addNamedCard(name);
 
         if (card.hasKeyword("Double agenda")) {
             String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
@@ -223,7 +223,7 @@ public class CardFactoryUtil {
             if (name2 == null || name2.isEmpty()) {
                 return false;
             }
-            card.setNamedCard2(name2);
+            card.addNamedCard(name2);
         }
 
         card.turnFaceDown();

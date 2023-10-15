@@ -1,5 +1,5 @@
 Name:Guided Passage
-ManaCost:U R G
+ManaCost:G U R
 Types:Sorcery
 A:SP$ PeekAndReveal | PeekAmount$ X | NoPeek$ True | SubAbility$ DBCreature | SpellDescription$ Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle.
 SVar:DBCreature:DB$ ChangeZone | ChangeType$ EACH Creature.YouOwn & Land.YouOwn & Card.nonCreature+nonLand+YouOwn | Mandatory$ True | Chooser$ Opponent | Origin$ Library | Destination$ Hand | Shuffle$ True

@@ -50,13 +50,11 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
             String prompt = Localizer.getInstance().getMessage("lblChooseaCard");
             for (Card c : pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa, prompt, p, null)) {
-
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Target", c);
                 params.put("CounterType", counterType);
                 prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  counterType.getName()) + " ";
-                boolean putCounter;
-                    putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+                boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                 if (putCounter) {
                     c.addCounter(counterType, 1, p, table);

@@ -457,6 +457,7 @@ Kylem
 Kyneth
 Lorwyn
 Luvion
+Mars
 Mercadia
 Mirrodin
 Moag
@@ -474,6 +475,7 @@ Serra's Realm
 Shadowmoor
 Shandalar
 Shenmeng
+Skaro
 Tarkir
 The Abyss
 The Library

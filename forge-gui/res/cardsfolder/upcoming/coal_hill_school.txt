@@ -1,0 +1,9 @@
+Name:Coal Hill School
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ SpellCast | ValidCard$ Card.Historic | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ Whenever a player casts a historic spell, that player draws a card. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigReturn | TriggerDescription$ Whenever chaos ensues, return target historic card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Historic+YouOwn | TgtPrompt$ Select target historic card 
+DeckHints:Type$Artifact|Saga|Legendary
+Oracle:Whenever a player casts a historic spell, that player draws a card. (Artifacts, legendaries, and Sagas are historic.)\nWhenever chaos ensues, return target historic card from your graveyard to your hand.

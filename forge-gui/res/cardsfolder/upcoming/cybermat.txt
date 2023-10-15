@@ -1,0 +1,10 @@
+Name:Cybermat
+ManaCost:2
+Types:Artifact Creature Robot
+PT:2/1
+K:Skulk
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it gets +X/+0 until end of turn, where X is the number of attacking artifact creatures.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:Count$Valid Creature.Artifact+attacking
+DeckHints:Type$Artifact & Type$Creature
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhenever Cybermat attacks and isn't blocked, it gets +X/+0 until end of turn, where X is the number of attacking artifact creatures.

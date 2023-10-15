@@ -398,6 +398,10 @@ public class DigEffect extends SpellAbilityEffect {
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
+                            if (sa.hasParam("FaceDown")) {
+                                c.turnFaceDown(true);
+                                CardFactoryUtil.setFaceDownState(c, sa);
+                            }
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 moveParams.put(AbilityKey.SimultaneousETB, movedCards);
                                 if (sa.hasParam("WithCounter")) {

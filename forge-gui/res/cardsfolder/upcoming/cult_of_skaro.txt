@@ -1,0 +1,14 @@
+Name:Cult of Skaro
+ManaCost:1 U B R
+Types:Legendary Artifact Creature Dalek
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounterAll,DBDraw,DBToken,DBLoseLife | Random$ True
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Artifact+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Thay — Put a +1/+1 counter on each artifact creature you control.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Caan — Draw two cards.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | SpellDescription$ Sec — Create a 3/3 black Dalek artifact creature token with menace.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ Opponent | SpellDescription$ Jast — Each opponent loses 4 life.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Counters & Type$Dalek|Artifact
+DeckHints:Type$Artifact & Type$Creature
+Oracle:Whenever Cult of Skaro attacks, choose one at random —\n• Thay — Put a +1/+1 counter on each artifact creature you control.\n• Caan — Draw two cards.\n• Sec — Create a 3/3 black Dalek artifact creature token with menace.\n• Jast — Each opponent loses 4 life.

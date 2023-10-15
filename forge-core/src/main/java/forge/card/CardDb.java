@@ -954,7 +954,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardEdition edition = null;
                 try {
                     edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMO||edition.getType() == Type.REPRINT)
+                    if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
                         return false;
                 } catch (Exception ex) {
                     return false;

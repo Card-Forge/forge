@@ -39,12 +39,11 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
-        mapParams.remove("Cost");
-
-        if (mapParams.containsKey("SpellDescription")) {
+        if (mapParams.containsKey("SpellDescription") && !mapParams.containsKey("TriggerDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
-            mapParams.remove("SpellDescription");
         }
+        mapParams.remove("SpellDescription");
+        mapParams.remove("Cost");
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
         delTrig.setSpawningAbility(sa.copy(host, true));

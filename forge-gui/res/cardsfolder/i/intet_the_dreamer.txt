@@ -1,5 +1,5 @@
 Name:Intet, the Dreamer
-ManaCost:3 U R G
+ManaCost:3 G U R
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying

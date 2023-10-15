@@ -509,17 +509,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Sector, c.getSector());
     }
 
-    public String getNamedCard() {
+    public List<String> getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
     void updateNamedCard(Card c) {
-        set(TrackableProperty.NamedCard, c.getNamedCard());
-    }
-    public String getNamedCard2() {
-        return get(TrackableProperty.NamedCard2);
-    }
-    void updateNamedCard2(Card c) {
-        set(TrackableProperty.NamedCard2, c.getNamedCard2());
+        set(TrackableProperty.NamedCard, c.getNamedCards());
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);

@@ -185,12 +185,11 @@ public abstract class ImageFetcher {
                 if (!hasSetLookup) {
                     if (!updateLink) {
                         setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
-                        downloadUrls.add(setDownload.toString());
                     } else {
                         String url = ImageUtil.getDownloadUrl(paperCard, face);
                         setDownload.append(TextUtil.fastReplace(url, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full"));
-                        downloadUrls.add(setDownload.toString());
                     }
+                    downloadUrls.add(setDownload.toString());
                 } else {
                     List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
                     for (PaperCard pc : clones) {

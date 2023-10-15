@@ -1,5 +1,5 @@
 Name:Animar, Soul of Elements
-ManaCost:U R G
+ManaCost:G U R
 Types:Legendary Creature Elemental
 PT:1/1
 K:Protection from white
