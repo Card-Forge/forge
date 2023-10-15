@@ -147,7 +147,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbilility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
     private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
@@ -288,7 +288,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
     private List<String> chosenName = new ArrayList<>();
-    private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
     private Player protectingPlayer;
@@ -1947,7 +1946,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
-        return hasNamedCard() ? chosenName.get(0) : "";
+        return hasNamedCard() ? Iterables.getLast(chosenName) : "";
     }
     public final List<String> getNamedCards() {
         return chosenName == null ? Lists.newArrayList() : chosenName;
@@ -1963,7 +1962,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean hasNamedCard() {
-            return chosenName != null && !chosenName.isEmpty();
+        return chosenName != null && !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {
@@ -4452,12 +4451,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
-        SpellAbility result = storedSpellAbilility.get(stAb, str);
+        SpellAbility result = storedSpellAbility.get(stAb, str);
         if (result == null) {
             result = AbilityFactory.getAbility(str, this, stAb);
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
-            storedSpellAbilility.put(stAb, str, result);
+            storedSpellAbility.put(stAb, str, result);
         }
         return result;
     }

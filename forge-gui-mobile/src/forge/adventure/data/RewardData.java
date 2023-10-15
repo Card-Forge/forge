@@ -85,9 +85,9 @@ public class RewardData implements Serializable {
         RewardData legals = Config.instance().getConfigData().legalCards;
 
         if(legals==null)
-            allCards = CardUtil.getFullCardPool();
+            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
         else
-            allCards = Iterables.filter(CardUtil.getFullCardPool(), new CardUtil.CardPredicate(legals, true));
+            allCards = Iterables.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
         allCards = Iterables.filter(allCards, input -> {
             if(input == null)
@@ -159,7 +159,13 @@ public class RewardData implements Serializable {
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
-                            ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size())), isNoSell));
+                            if (allCardVariants) {
+                                PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
+                                PaperCard finalCard = CardUtil.getCardByName(cardTemplate.getCardName());
+                                ret.add(new Reward(finalCard, isNoSell));
+                            } else {
+                                ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size())), isNoSell));
+                            }
                         }
                     }
                     break;

@@ -967,12 +967,6 @@ public class ComputerUtilMana {
             return false;
         }
 
-        if (ma.hasParam("ActivationLimit")) {
-            if (ma.getActivationsThisTurn() >= AbilityUtils.calculateAmount(sourceCard, ma.getParam("ActivationLimit"), ma)) {
-                return false;
-            }
-        }
-
         if (checkCosts) {
             // Check if AI can still play this mana ability
             ma.setActivatingPlayer(ai, true);
@@ -1466,6 +1460,26 @@ public class ComputerUtilMana {
                     if (combat.getAttackers().indexOf(card) != -1 && !card.hasKeyword(Keyword.VIGILANCE)) {
                         continue;
                     }
+                }
+            }
+            // exclude cards that will deal lethal damage when tapped
+            if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                boolean dealsLethalOnTap = false;
+                for (Trigger t : card.getTriggers()) {
+                    if (t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana) {
+                        SpellAbility trigSa = t.getOverridingAbility();
+                        if (trigSa.getApi() == ApiType.DealDamage && trigSa.getParamOrDefault("Defined", "").equals("You")) {
+                            int numDamage = AbilityUtils.calculateAmount(card, trigSa.getParam("NumDmg"), null);
+                            numDamage = ai.staticReplaceDamage(numDamage, card, false);
+                            if (ai.getLife() <= numDamage) {
+                                dealsLethalOnTap = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (dealsLethalOnTap) {
+                    continue;
                 }
             }
 

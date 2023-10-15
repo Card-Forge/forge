@@ -16,7 +16,7 @@ ManaCost:no cost
 Colors:white,black
 Types:Artifact Equipment
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigPutCounters | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on that creature and each other creature you control that shares a creature type with it.
-SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.EquippedBy,Creature.YouCtrl+!Equippedby+sharesCreatureTypeWith Equipped | CounterType$ P1P1
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.EquippedBy,Creature.YouCtrl+!EquippedBy+sharesCreatureTypeWith Equipped | CounterType$ P1P1
 DeckHas:Ability$Counters
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
