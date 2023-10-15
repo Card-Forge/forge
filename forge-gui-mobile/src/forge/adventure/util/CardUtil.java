@@ -302,6 +302,7 @@ public class CardUtil {
 
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r)
     {
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
 
         final List<PaperCard> result = new ArrayList<>();
         List<PaperCard> pool = getPredicateResult(cards, data);
@@ -309,7 +310,12 @@ public class CardUtil {
             for (int i = 0; i < count; i++) {
                 PaperCard candidate = pool.get(r.nextInt(pool.size()));
                 if (candidate != null) {
-                    result.add(candidate);
+                    if (allCardVariants) {
+                        PaperCard finalCandidate = CardUtil.getCardByName(candidate.getCardName()); // get a random set variant
+                        result.add(finalCandidate);
+                    } else {
+                        result.add(candidate);
+                    }
                 }
             }
         }
@@ -739,16 +745,17 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByName(String cardName) {
-        return Aggregates.random(Iterables.filter(getFullCardPool(), input -> input.getCardName().equals(cardName)));
+        return Aggregates.random(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName)));
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
-        return Aggregates.random(Iterables.filter(getFullCardPool(), input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)));
+        return Aggregates.random(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)));
     }
 
-    public static Collection<PaperCard> getFullCardPool() {
-        return Config.instance().getSettingData().useAllCardVariants ?
-                FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+    public static Collection<PaperCard> getFullCardPool(boolean allCardVariants) {
+        return allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
     }
 }
 
