@@ -7,6 +7,6 @@ SVar:TrigInitiative:DB$ TakeInitiative
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBUntapAll | FalseSubAbility$ DBUntap
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:DBUntap:DB$ Untap | UntapExactly$ True | UntapType$ Creature.YouCtrl | Amount$ 1
+SVar:DBUntap:DB$ Untap | UntapExactly$ True | UntapType$ Creature.YouCtrl+tapped | Amount$ 1
 SVar:X:PlayerCountPropertyYou$DungeonsCompleted
 Oracle:When White Plume Adventurer enters battlefield, you take the initiative.\nAt the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.
