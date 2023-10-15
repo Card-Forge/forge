@@ -1,0 +1,18 @@
+Name:Coward
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SubAbility$ DBAnimate | SpellDescription$ Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Coward | SubAbility$ DBTimeTravel
+SVar:DBTimeTravel:DB$ TimeTravel | SpellDescription$ Time Travel.
+AlternateMode:Split
+Oracle:Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.\nTime travel.
+
+ALTERNATE
+
+Name:Killer
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | DamageMap$ True | SubAbility$ DamageSame | SpellDescription$ CARDNAME deals 3 damage to target creature and each other creature that shares a creature type with it.
+SVar:DamageSame:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted+sharesCreatureTypeWith Targeted | ValidDescription$ each other creature that shares a creature type with it | NumDmg$ 3 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:Killer deals 3 damage to target creature and each other creature that shares a creature type with it.
