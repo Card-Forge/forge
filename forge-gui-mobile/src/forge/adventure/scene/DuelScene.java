@@ -139,8 +139,10 @@ public class DuelScene extends ForgeScene {
                 public void run(Integer result) {
                     if (result == 0) {
                         afterGameEnd(enemyName, finalWinner);
-                        if (Config.instance().getSettingData().disableWinLose)
+                        if (Config.instance().getSettingData().disableWinLose) {
+                            MatchController.writeMatchPreferences();
                             exitDuelScene();
+                        }
                     }
                     fb.dispose();
                 }
