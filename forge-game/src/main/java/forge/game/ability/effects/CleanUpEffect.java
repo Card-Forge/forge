@@ -65,7 +65,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
             source.setChosenColors(null);
         }
         if (sa.hasParam("ClearNamedCard")) {
-            source.setNamedCard("");
+            source.setNamedCards(null);
         }
         if (sa.hasParam("Log")) {
             source.getController().getGame().fireEvent(new GameEventRandomLog(logMessage));

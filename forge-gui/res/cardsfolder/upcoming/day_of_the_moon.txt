@@ -1,0 +1,7 @@
+Name:Day of the Moon
+ManaCost:2 R
+Types:Enchantment Saga
+K:Saga:3:DBChoose,DBChoose,DBChoose
+SVar:DBChoose:DB$ NameCard | ValidCards$ Creature | ValidDesc$ creature | SubAbility$ DBGoad | SpellDescription$ Choose a creature card name, then goad all creatures with a name chosen for CARDNAME. (Until your next turn, they attack each combat if able and attack a player other than you if able.)
+SVar:DBGoad:DB$ Goad | Defined$ Valid Creature.NamedCard
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II, III — Choose a creature card name, then goad all creatures with a name chosen for Day of the Moon. (Until your next turn, they attack each combat if able and attack a player other than you if able.)

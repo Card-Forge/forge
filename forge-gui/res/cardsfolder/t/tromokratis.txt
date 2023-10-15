@@ -2,6 +2,6 @@ Name:Tromokratis
 ManaCost:5 U U
 Types:Legendary Creature Kraken
 PT:8/8
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+notattacking+notblocking | Description$ CARDNAME has hexproof unless it's attacking or blocking.
+S:Mode$ Continuous | Affected$ Card.Self+notattacking+notblocking | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof unless it's attacking or blocking.
 K:CARDNAME can't be blocked unless all creatures defending player controls block it.
 Oracle:Tromokratis has hexproof unless it's attacking or blocking.\nTromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)

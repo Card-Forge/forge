@@ -147,7 +147,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbilility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
     private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
@@ -287,8 +287,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String chosenType2 = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
-    private String chosenName = "";
-    private String chosenName2 = "";
+    private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
     private Player protectingPlayer;
@@ -1947,34 +1946,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
-        return getChosenName();
+        return hasNamedCard() ? Iterables.getLast(chosenName) : "";
     }
-    public final void setNamedCard(final String s) {
-        setChosenName(s);
+    public final List<String> getNamedCards() {
+        return chosenName == null ? Lists.newArrayList() : chosenName;
     }
-    public final String getNamedCard2() { return getChosenName2(); }
-    public final void setNamedCard2(final String s) {
-        setChosenName2(s);
-    }
-
-    public boolean hasChosenName() {
-        return chosenName != null;
-    }
-    public boolean hasChosenName2() { return chosenName2 != null; }
-
-    public String getChosenName() {
-        return chosenName;
-    }
-    public final void setChosenName(final String s) {
+    public final void setNamedCards(final List<String> s) {
         chosenName = s;
         view.updateNamedCard(this);
     }
-    public String getChosenName2() {
-        return chosenName2;
+
+    public final void addNamedCard(final String s) {
+        chosenName.add(s);
+        view.updateNamedCard(this);
     }
-    public final void setChosenName2(final String s) {
-        chosenName2 = s;
-        view.updateNamedCard2(this);
+
+    public boolean hasNamedCard() {
+        return chosenName != null && !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {
@@ -4463,12 +4451,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
-        SpellAbility result = storedSpellAbilility.get(stAb, str);
+        SpellAbility result = storedSpellAbility.get(stAb, str);
         if (result == null) {
             result = AbilityFactory.getAbility(str, this, stAb);
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
-            storedSpellAbilility.put(stAb, str, result);
+            storedSpellAbility.put(stAb, str, result);
         }
         return result;
     }

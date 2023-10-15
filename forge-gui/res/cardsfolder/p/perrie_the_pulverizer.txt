@@ -1,5 +1,5 @@
 Name:Perrie, the Pulverizer
-ManaCost:1 G U W
+ManaCost:1 G W U
 Types:Legendary Creature Rhino Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When NICKNAME enters the battlefield, put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)

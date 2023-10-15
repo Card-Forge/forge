@@ -1,5 +1,5 @@
 Name:Doran, the Siege Tower
-ManaCost:B G W
+ManaCost:W B G
 Types:Legendary Creature Treefolk Shaman
 PT:0/5
 S:Mode$ CombatDamageToughness | ValidCard$ Creature | Description$ Each creature assigns combat damage equal to its toughness rather than its power.

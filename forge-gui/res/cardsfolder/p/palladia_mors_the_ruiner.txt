@@ -1,5 +1,5 @@
 Name:Palladia-Mors, the Ruiner
-ManaCost:3 W R G
+ManaCost:3 R G W
 Types:Legendary Creature Elder Dragon
 PT:6/6
 K:Flying

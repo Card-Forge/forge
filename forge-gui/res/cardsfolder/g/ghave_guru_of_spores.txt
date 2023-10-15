@@ -1,5 +1,5 @@
 Name:Ghave, Guru of Spores
-ManaCost:2 B G W
+ManaCost:2 W B G
 Types:Legendary Creature Fungus Shaman
 PT:0/0
 K:etbCounter:P1P1:5
