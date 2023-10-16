@@ -1,0 +1,11 @@
+Name:Drover of the Swine
+ManaCost:2 W B G
+Types:Creature Human Warlock
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBConjure,DBReturn | CharmNum$ 1
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Spellbook$ First Little Pig,Second Little Pig,Third Little Pig | Zone$ Battlefield | SpellDescription$ Conjure a card of your choice from the Three Pigs spellbook onto the battlefield.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Boar.YouOwn | TargetsWithDifferentNames$ True | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Return up to three target Boar creature cards with different names from your graveyard to the battlefield.
+DeckHints:Type$Boar
+DeckHas:Type$Boar & Ability$Graveyard
+Oracle:When Drover of the Swine enters the battlefield, choose one —\n• Conjure a card of your choice from the Three Pigs spellbook onto the battlefield.\n• Return up to three target Boar creature cards with different names from your graveyard to the battlefield.

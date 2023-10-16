@@ -1,0 +1,8 @@
+Name:Third Little Pig
+ManaCost:1 BG
+Types:Creature Boar
+PT:2/2
+T:Mode$ ConjureAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Battlefield,Graveyard | Execute$ TrigEffect | TriggerDescription$ Whenever you conjure one or more other cards, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in your graveyard.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Third Little Pig's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1.
+Oracle:Whenever you conjure one or more other cards, Third Little Pig perpetually gets +1/+1. This ability also triggers if Third Little Pig is in your graveyard.
