@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Legendary Creature Human Soldier Advisor
 PT:4/3
 K:Mentor
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTriggers$ CountersAdded | Description$ Creatures you control have "Whenever one or more counters are put on this creature for the first time each turn, draw a card."
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ CountersAdded | Description$ Creatures you control have "Whenever one or more counters are put on this creature for the first time each turn, draw a card."
 SVar:CountersAdded:Mode$ CounterAddedOnce | ValidCard$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more counters are put on this creature for the first time each turn, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 DeckHas:Ability$Counters
