@@ -336,16 +336,18 @@ public class CostPayment extends ManaConversionMatrix {
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
                 sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, table, null);
+            } else {
+                sa.resetSacrificedAsOffering();
             }
-            sa.resetSacrificedAsOffering();
         }
         if (sa.isEmerge() && sa.getSacrificedAsEmerge() != null) {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
                 sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, table, null);
+            } else {
+                sa.resetSacrificedAsEmerge();
             }
-            sa.resetSacrificedAsEmerge();
         }
         if (!table.isEmpty()) {
             table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);

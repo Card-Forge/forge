@@ -1024,6 +1024,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getCastSA().getTappedForConvoke();
     }
 
+    public final CardCollectionView getEmerged() {
+        if (getCastSA() == null) {
+            return CardCollection.EMPTY;
+        }
+        return new CardCollection(getCastSA().getSacrificedAsEmerge());
+    }
+
     public final Iterable<Object> getRemembered() {
         return rememberedObjects;
     }

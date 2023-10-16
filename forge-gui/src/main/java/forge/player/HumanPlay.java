@@ -549,7 +549,9 @@ public class HumanPlay {
             if (!manaInputCancelled) {
                 game.getAction().sacrifice(emerge, ability, false, table, null);
             }
-            ability.resetSacrificedAsEmerge();
+            if (manaInputCancelled) {
+                ability.resetSacrificedAsEmerge();
+            }
         }
         if (ability.getTappedForConvoke() != null) {
             game.getTriggerHandler().suppressMode(TriggerType.Taps);
