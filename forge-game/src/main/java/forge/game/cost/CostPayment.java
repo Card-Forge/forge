@@ -330,12 +330,13 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     public static void handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
+        final Game game = sa.getHostCard().getGame();
         final CardZoneTable table = new CardZoneTable();
         if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, table, null);
+                game.getAction().sacrifice(offering, sa, false, table, null);
             } else {
                 sa.resetSacrificedAsOffering();
             }
@@ -344,7 +345,8 @@ public class CostPayment extends ManaConversionMatrix {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, table, null);
+                game.getAction().sacrifice(emerge, sa, false, table, null);
+                sa.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             } else {
                 sa.resetSacrificedAsEmerge();
             }
