@@ -1,9 +1,9 @@
-Name:Ace's Baseball Bat
-ManaCost:2
-Types:Legendary Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
-S:Mode$ Continuous | Affected$ Creature.EquippedBy+attacking | AddKeyword$ First Strike & MustBeBlockedBy Creature.Dalek | Description$ As long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.
-K:Equip:1:Creature.Legendary:legendary creature
-K:Equip:3
-DeckHints:Type$Legendary & Type$Creature
-Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.\nEquip legendary creature {1}\nEquip {3}
+Name:Displaced Dinosaurs
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:7/7
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Historic | AddReplacementEffects$ ETBAnimate | Description$ As a historic permanent enters the battlefield under your control, it becomes a 7/7 Dinosaur creature in addition to its other types. (Artifacts, legendaries, and Sagas are historic.)
+SVar:ETBAnimate:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ BecomeDino | ReplacementResult$ Updated
+SVar:BecomeDino:DB$ Animate | Defined$ Self | Toughness$ 7 | Power$ 7 | Types$ Dinosaur | Duration$ Permanent
+DeckHints:Type$Legendary|Artifact|Saga
+Oracle:As a historic permanent enters the battlefield under your control, it becomes a 7/7 Dinosaur creature in addition to its other types. (Artifacts, legendaries, and Sagas are historic.)

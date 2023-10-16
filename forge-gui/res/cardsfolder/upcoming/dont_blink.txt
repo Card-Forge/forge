@@ -1,9 +1,8 @@
-Name:Ace's Baseball Bat
-ManaCost:2
-Types:Legendary Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
-S:Mode$ Continuous | Affected$ Creature.EquippedBy+attacking | AddKeyword$ First Strike & MustBeBlockedBy Creature.Dalek | Description$ As long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.
-K:Equip:1:Creature.Legendary:legendary creature
-K:Equip:3
-DeckHints:Type$Legendary & Type$Creature
-Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.\nEquip legendary creature {1}\nEquip {3}
+Name:Don't Blink
+ManaCost:1 U
+Types:Instant
+A:SP$ Effect | ReplacementEffects$ ReplaceETB | SpellDescription$ Until end of turn, if one or more creatures would enter the battlefield from exile or after being cast from exile, their owners shuffle them into their libraries instead.
+SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.wasCastFromExile,Creature.ThisTurnEnteredFrom_Exile | ReplaceWith$ DBShuffle | Description$ If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+SVar:DBShuffle:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True
+K:Cycling:2
+Oracle:Until end of turn, if one or more creatures would enter the battlefield from exile or after being cast from exile, their owners shuffle them into their libraries instead.\nCycling {2} ({2}, Discard this card: Draw a card.)

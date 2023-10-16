@@ -1,0 +1,12 @@
+Name:Fugitive of the Judoon
+ManaCost:4 G
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBInvestigate,DBTutor
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_human_ward,w_4_4_alien_rhino | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token with ward {2} and a 4/4 white Alien Rhino creature token.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate
+
+You may exile a Human you control and an artifact you control. If you do, search your library for a Doctor card, put it onto the battlefield, then shuffle.
+DeckHas:Ability$Token & Type$Clue|Rhino|Human|Alien
+DeckNeeds:Type$Doctor
+DeckHints:Type$Artifact
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human creature token with ward {2} and a 4/4 white Alien Rhino creature token.\nII — Investigate.\nIII — You may exile a Human you control and an artifact you control. If you do, search your library for a Doctor card, put it onto the battlefield, then shuffle.
