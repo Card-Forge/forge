@@ -220,7 +220,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                 value -= subValue(50, "doesnt-untap");
             }
         } else {
-            value -= subValue(10 * c.getCounters(CounterEnumType.SHIELD), "stunned");
+            value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
         }
         if (c.hasSVar("EndOfTurnLeavePlay")) {
             value -= subValue(50, "eot-leaves");
