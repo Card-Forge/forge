@@ -306,6 +306,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // need to reapply text changes
             sp.changeText();
             sp.setOriginalAbility(original);
+            original.clearTargets();
             original.setXManaCostPaid(null);
             if (original.getApi() == ApiType.Charm) {
                 // reset chain
