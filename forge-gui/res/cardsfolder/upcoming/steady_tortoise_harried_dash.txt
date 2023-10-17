@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Turtle
 PT:3/3
 K:Ward:2
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield,Exile | TriggerDescription$ Whenever you attack, CARDNAME perpetually gets +1/+1. This ability also triggers if Steady Tortoise is in exile.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield,Exile | TriggerDescription$ Whenever you attack, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in exile.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Steady Tortoise's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1
 DeckHas:Ability$Token & Type$Rabbit
