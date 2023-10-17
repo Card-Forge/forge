@@ -923,7 +923,7 @@ public class ComputerUtil {
         }
 
         for (int i = 0; i < max; i++) {
-            Card c = chooseCardToSacrifice(remaining, ai, destroy);
+            Card c = chooseCardToSacrifice(source, remaining, ai, destroy);
             remaining.remove(c);
             if (c != null) {
                 sacrificed.add(c);
@@ -938,7 +938,7 @@ public class ComputerUtil {
     }
 
     // Precondition it wants: remaining are reverse-sorted by CMC
-    private static Card chooseCardToSacrifice(final CardCollection remaining, final Player ai, final boolean destroy) {
+    private static Card chooseCardToSacrifice(final SpellAbility source, CardCollection remaining, final Player ai, final boolean destroy) {
         // If somehow ("Drop of Honey") they suggest to destroy opponent's card - use the chance!
         for (Card c : remaining) { // first compare is fast, second is precise
             if (ai.isOpponentOf(c.getController()))
@@ -951,6 +951,7 @@ public class ComputerUtil {
                 return indestructibles.get(0);
             }
         }
+
         for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
             final int priority = 6 - ip;
             for (Card card : remaining) {
@@ -958,6 +959,11 @@ public class ComputerUtil {
                     return card;
                 }
             }
+        }
+
+        if (source.isEmerge() || source.isOffering()) {
+            // don't sac when cost wouldn't be reduced
+            remaining = CardLists.filter(remaining, CardPredicates.greaterCMC(1));
         }
 
         Card c = null;
