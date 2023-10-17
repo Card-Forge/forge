@@ -654,6 +654,11 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
+        if (!CostPayment.handleOfferings(sa, test, cost.isPaid())) {
+            // nothing was chosen
+            return false;
+        }
+
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
