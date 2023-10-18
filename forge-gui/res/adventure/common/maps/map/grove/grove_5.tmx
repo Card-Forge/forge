@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="73">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="73">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFlVEOgCAIhnltegS7Treq7tXqbs1ZGzNIILV/48HR+LBfMXiAUCGmoZzHgXNYNVg1uJp+qDoUd7tCK44l5baS9j9/7WUkfOG4Ulk8odharlXUnnvoDy7ncYnNearxuvdd4rj3ujWTO8+tvJbMDW4WLw5gdXTd2aU8/p6qYeHGs3P4JzsydzTfre/R2/uSszEz71PCPgG2Kz28
+   eJzFlVEOgCAIhnktPYJep1tV92p1t+bKjRkkmNq/8VA4PvI3dBbAVYhpyOdx4BxWDVYNrqYfqg7F3e7QimNJua2k3eevvXjCF44rVYknFDu+86OullbUN/fQH1zO4xyb81Tjde9/iePG59ZM7jy38loyN7hZvBiA1dB1Z3Pl8XqqRgk3nJ3DPtmBuaP5Xnofvd0vKRsz0z4l7BNryD3j
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -18,7 +18,7 @@
  </layer>
  <layer id="2" name="Grass" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFlU1OwzAQhSOFIttXoFAux4YFS3YFxOX6o94B0nIQMoqf8vzkMemKkaxEscffzJux03X/Yw/Jn9uFrjuE6/dc4vca62zzfYnT8Pbw9u/T5HfbyMm4Nj5i+T2kmXvMe3+Nz834fQhlXDU7hXbMNS4zbazSxHxMsz7DAj28eYtZuU+xZCLXbZzXYj2vq5npvRKtoZNy+1TmCbsb33+Cz23VUpngnkUHxGnaDjTHbOPaulNFb/P7Fl+zZ4pTmexn9XwXDY19GefuKT9opH2gvqxlzZDXG/WQWetM9jmOT6oduHzeoJHaLpTsc84NPd5ic67wQ021v5TJPWJs6MkaeextvJ5pxmeo1p9cxxbX9MVexz96TXPyat+K3fRZk0Y3tBYx6b3IbPAR56bBOuQ7c5/z2Ds1QN09rhr6s/bv0PuUB59l7rWlxncFn6kWU9nrrD/bL43LefI=
+   eJzFlE1uAjEMhUeaUiW5Qin0ct2w6LI7WsTl+BF3aIEepGNNnnhxbUO7qaVoYCbOZz/bOabuX2xWuu7osDfD+90f4rrF7zXbbPF9yePyzvDO78vod19irqxVbt+ncuHu69kfw3NeY+S4LDukOGaLy0xZkzIyn0qrzzU9vO8Ss+Y+55aJXJf5shf7eZ9lovdEaQ2dNLcvbZ6wh+H3V/K5US01E9zT8P+R/BCnaMv9xmzhyr6Dobf4faafvbqgODWT/aSe70pDYZ+NOK0+0L6spWZyXm9qxqKZ7Os5a6oduDxv0EjbJrVs6IEej9icK/xQU91fmsk9ImzowRp57GX+PVOMZ8jqT65jxBV9cdb+Sq/pnLyZjGIXfaak0R3tRUz6XmQ2+IhzHrB29c7c1jy2Tg1Qd4+rDf05M9j6PuXFs8y9dqvxXcEzFTE1e1r1Z/sG6jd9Ig==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17" opacity="0.9">

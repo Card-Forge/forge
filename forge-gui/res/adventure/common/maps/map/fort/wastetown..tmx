@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlkEOgjAQRWfnVRTYIStg5alIZeUFPAYBXAFnweM4RpuMtAMILWz6k7eAGZqXoSX0N4DeEjT3wzTcs6Zj2qUWAF4G8BDbulRXleLrUgl9nfatdaE+fq5CXXR12lfFBueSq4QJwBmJEn1dssTlHc7Fz1QadGiRLhnv3cIlTHEuSJR+roeZ66K7//dc0KFFunT/udDaWJ9pl5PQQ108oScYuDwv0x4y1OWI34cm5vl5Z2N9ZH/PmYnOpcA1aqRkoOea65EsdZE54r4MEI+BnmuuR7I2Ba5RIyUDPddcj8R2uHO9R2z/W7i4uLjYyAux2y9L
+   eJztljsOgzAMhrP1KrymUiZg6qlQytQL9Bi8uhQ4Cz1OjVokQ2KgEGDJL30D2EQfVoJo7ow1G4HzOE1DPas6ql0KzpgVMfbk+7rkN5Hk55JzeR33rXXBPnYsgl1kddyX+wrnEou4AWMXwAvk9Y4lLm0oFzsSKcGhAupgvHcPFzeEuQBe+L0eZq6L7P7fcwGHCqjD4+eCa2N9ql1MLuL6fZczXFtcxBm4vK/THl2wiwHfBzOQU/r993/5dK+N9vecmchcElijADICfK6pnpZ0hUsXA/alA1gE+FxTPS3mYH8vSQJrFEBGgM811dOSKnCZCnWuj8jW/xY6Ojo6W+QDSF4obQ==
   </data>
  </layer>
  <layer id="8" name="ClutterBis" width="35" height="25">
