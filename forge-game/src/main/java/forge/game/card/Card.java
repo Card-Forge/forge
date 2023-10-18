@@ -6562,7 +6562,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void onCleanupPhase(final Player turn) {
-        if (!this.hasKeyword("Damage isn't removed from CARDNAME during cleanup steps.")) {
+        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(this)) {
             setDamage(0);
         }
         setHasBeenDealtDeathtouchDamage(false);
