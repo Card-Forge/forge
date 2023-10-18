@@ -40,6 +40,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
+        final boolean perpetual = ("Perpetual").equals(duration);
 
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
@@ -70,7 +71,11 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (a != 0 || d != 0) {
-            gameCard.addPTBoost(a, d, timestamp, 0);
+            if (perpetual) {
+                gameCard.generatePerpetual("PTBoost", a, d, timestamp);
+            } else {
+                gameCard.addPTBoost(a, d, timestamp, 0);
+            }
             redrawPT = true;
         }
 
@@ -96,7 +101,7 @@ public class PumpEffect extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        if (!"Permanent".equals(duration)) {
+        if (!"Permanent".equals(duration) && !perpetual) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -42244224L;
@@ -434,8 +439,8 @@ public class PumpEffect extends SpellAbilityEffect {
             host.removeImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa));
         }
 
-        final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
-                : ZoneType.Battlefield;
+        List<ZoneType> pumpZones = sa.hasParam("PumpZone") ? ZoneType.listValueOf(sa.getParam("PumpZone"))
+                : ZoneType.listValueOf("Battlefield");
 
         for (Card tgtC : tgtCards) {
             // CR 702.26e
@@ -443,8 +448,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // only pump things in PumpZone
-            if (!tgtC.isInZone(pumpZone)) {
+            // only pump things in PumpZones
+            if (!tgtC.isInZones(pumpZones)) {
                 continue;
             }
 
@@ -488,7 +493,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
-            if (!tgtC.isInZone(pumpZone)) {
+            if (!tgtC.isInZones(pumpZones)) {
                 continue;
             }
 

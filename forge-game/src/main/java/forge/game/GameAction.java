@@ -582,13 +582,15 @@ public class GameAction {
             copied.clearEtbCounters();
         }
 
-        // intensity is perpetual
+        // perpetual stuff
         if (c.hasIntensity()) {
             copied.setIntensity(c.getIntensity(false));
         }
-        // specialize is perpetual
         if (c.isSpecialized()) {
             copied.setState(c.getCurrentStateName(), false);
+        }
+        if (c.hasPerpetual()) {
+            copied.setPerpetual(c.getPerpetual());
         }
 
         // update state for view

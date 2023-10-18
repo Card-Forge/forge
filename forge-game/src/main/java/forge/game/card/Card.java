@@ -4386,6 +4386,42 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return intensity > 0;
     }
 
+    private Map<String, List<Object>> perpetual = Maps.newHashMap();
+    public final boolean hasPerpetual() {
+        return !perpetual.isEmpty();
+    }
+    public final Map<String, List<Object>> getPerpetual() {
+        return perpetual;
+    }
+
+    public final void addPerpetual(String s, List<Object> list) {
+        perpetual.put(s, list);
+        executePerpetual(s, list);
+    }
+
+    public final void executePerpetual(String s, List<Object> list) {
+        if (s.equals("NewPT")) {
+            addNewPT((Integer) list.get(0), (Integer) list.get(1), (long) list.get(2), (long) list.get(3));
+        } else if (s.equals("PTBoost")) {
+            addPTBoost((Integer) list.get(0), (Integer) list.get(1), (long) list.get(2), (long) list.get(3));
+        }
+    }
+
+    public final void setPerpetual(Map<String, List<Object>> map) {
+        for (String key : map.keySet()) {
+            addPerpetual(key, map.get(key));
+        }
+    }
+
+    public final void generatePerpetual(String type, Integer power, Integer toughness, long timestamp) {
+        List<Object> params = new ArrayList<>();
+        params.add(0, power);
+        params.add(1, toughness);
+        params.add(2, timestamp);
+        params.add(3, (long) 0);
+        addPerpetual(type, params);
+    }
+
     private int multiKickerMagnitude = 0;
     public final void addMultiKickerMagnitude(final int n) { multiKickerMagnitude += n; }
     public final void setKickerMagnitude(final int n) { multiKickerMagnitude = n; }
@@ -6410,6 +6446,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isInZone(final ZoneType zone) {
         Zone z = this.getLastKnownZone();
         return z != null && z.is(zone);
+    }
+
+    public boolean isInZones(final List<ZoneType> zones) {
+        boolean inZones = false;
+        Zone z = this.getLastKnownZone();
+        for (ZoneType okZone : zones) {
+            if (z.is(okZone)) {
+                inZones = true;
+                break;
+            }
+        }
+        return z != null && inZones;
     }
 
     public final boolean canBeDestroyed() {

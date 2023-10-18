@@ -52,6 +52,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final long timestamp, final String duration) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        final boolean perpetual = "Perpetual".equals(duration);
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
 
@@ -88,7 +89,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {
-            c.addNewPT(power, toughness, timestamp, 0);
+            if (perpetual) {
+                c.generatePerpetual("NewPT", power, toughness, timestamp);
+            } else {
+                c.addNewPT(power, toughness, timestamp, 0);
+            }
         }
 
         if (sa.hasParam("CantHaveKeyword")) {
@@ -187,7 +192,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                     addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
         }
 
-        if (!"Permanent".equals(duration)) {
+        if (!"Permanent".equals(duration) && !perpetual) {
             if ("UntilControllerNextUntap".equals(duration)) {
                 game.getUntap().addUntil(c.getController(), unanimate);
             } else {

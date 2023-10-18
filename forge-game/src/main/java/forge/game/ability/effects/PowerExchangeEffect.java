@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.GameCommand;
@@ -34,6 +35,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final boolean perpetual = "Perpetual".equals(sa.getParam("Duration"));
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Card c1;
@@ -51,18 +53,24 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         if (!c1.isInPlay() || !c2.isInPlay()) {
             return;
         }
-        final int power1 = c1.getNetPower();
-        final int power2 = c2.getNetPower();
+        final boolean basePower = sa.hasParam("BasePower");
+        final int power1 = basePower ? c1.getCurrentPower() : c1.getNetPower();
+        final int power2 = basePower ? c2.getCurrentPower() : c2.getNetPower();
 
         final long timestamp = game.getNextTimestamp();
 
-        c1.addNewPT(power2, null, timestamp, 0);
-        c2.addNewPT(power1, null, timestamp, 0);
+        if (perpetual) {
+            c1.generatePerpetual("NewPT", power2, null, timestamp);
+            c2.generatePerpetual("NewPT", power1, null, timestamp);
+        } else {
+            c1.addNewPT(power2, null, timestamp, 0);
+            c2.addNewPT(power1, null, timestamp, 0);
+        }
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
 
-        if (!"Permanent".equals(sa.getParam("Duration"))) {
+        if (!"Permanent".equals(sa.getParam("Duration")) && !perpetual) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
 
@@ -81,4 +89,12 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         }
     }
 
+    private void generatePerpetual(Card c, int power, long timestamp) {
+        List<Object> params = new ArrayList<>();
+        params.add(0, power);
+        params.add(1, null);
+        params.add(2, timestamp);
+        params.add(3, (long) 0);
+        c.addPerpetual("PT", params);
+    }
 }

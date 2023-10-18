@@ -27,6 +27,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenkws = Lists.newArrayList();
+        final boolean perpetual = ("Perpetual").equals(sa.getParam("Duration"));
 
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
@@ -38,21 +39,18 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         for (final Card tgtC : list) {
             // only pump things in the affected zones.
-            boolean found = false;
-            for (final ZoneType z : affectedZones) {
-                if (tgtC.isInZone(z)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
+            if (!tgtC.isInZones(affectedZones)) {
                 continue;
             }
 
             boolean redrawPT = false;
 
             if (a != 0 || d != 0) {
-                tgtC.addPTBoost(a, d, timestamp, 0);
+                if (perpetual) {
+                    tgtC.generatePerpetual("PTBoost", a, d, timestamp);
+                } else {
+                    tgtC.addPTBoost(a, d, timestamp, 0);
+                }
                 redrawPT = true;
             }
 
@@ -71,7 +69,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtC);
             }
 
-            if (!"Permanent".equals(sa.getParam("Duration"))) {
+            if (!"Permanent".equals(sa.getParam("Duration")) && !perpetual) {
                 // If not Permanent, remove Pumped at EOT
                 final GameCommand untilEOT = new GameCommand() {
                     private static final long serialVersionUID = 5415795460189457660L;
