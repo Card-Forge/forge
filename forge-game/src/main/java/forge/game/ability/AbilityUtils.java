@@ -532,10 +532,11 @@ public class AbilityUtils {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
-	    } else if (calcX[0].startsWith("Convoked")) {
-	        val = handlePaid(card.getConvoked(), calcX[1], card, ability);
-	    }
-        else if (calcX[0].startsWith("Remembered")) {
+        } else if (calcX[0].startsWith("Convoked")) {
+            val = handlePaid(card.getConvoked(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("Emerged")) {
+            val = handlePaid(card.getEmerged(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
             Card newCard = card;
@@ -1955,7 +1956,10 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
-            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("Emerged")) {
+            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getCastSA() != null && c.getCastSA().isEmerge() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("AltCost")) {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2], ctb), expr, c, ctb);

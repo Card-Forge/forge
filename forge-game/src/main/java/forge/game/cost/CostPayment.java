@@ -329,26 +329,37 @@ public class CostPayment extends ManaConversionMatrix {
         return weightedOptions;
     }
 
-    public static void handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
+    public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
+        final Game game = sa.getHostCard().getGame();
         final CardZoneTable table = new CardZoneTable();
-        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
+        if (sa.isOffering()) {
+            if (sa.getSacrificedAsOffering() == null) {
+                return false;
+            }
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, table, null);
+            if (test) {
+                sa.resetSacrificedAsOffering();
+            } else if (costIsPaid) {
+                game.getAction().sacrifice(offering, sa, false, table, null);
             }
-            sa.resetSacrificedAsOffering();
         }
-        if (sa.isEmerge() && sa.getSacrificedAsEmerge() != null) {
+        if (sa.isEmerge()) {
+            if (sa.getSacrificedAsEmerge() == null) {
+                return false;
+            }
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, table, null);
+            if (test) {
+                sa.resetSacrificedAsEmerge();
+            } else if (costIsPaid) {
+                game.getAction().sacrifice(emerge, sa, false, table, null);
+                sa.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             }
-            sa.resetSacrificedAsEmerge();
         }
         if (!table.isEmpty()) {
             table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
         }
+        return true;
     }
 }

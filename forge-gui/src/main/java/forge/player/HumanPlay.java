@@ -548,8 +548,10 @@ public class HumanPlay {
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
                 game.getAction().sacrifice(emerge, ability, false, table, null);
+                ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
+            } else {
+                ability.resetSacrificedAsEmerge();
             }
-            ability.resetSacrificedAsEmerge();
         }
         if (ability.getTappedForConvoke() != null) {
             game.getTriggerHandler().suppressMode(TriggerType.Taps);
