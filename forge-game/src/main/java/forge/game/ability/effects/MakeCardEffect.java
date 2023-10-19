@@ -96,20 +96,21 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             if (!faces.isEmpty()) {
-                if (sa.hasParam("AtRandom")) {
-                    names.add(Aggregates.random(faces).getName());
-                } else {
-                    int i = sa.hasParam("SpellbookAmount") ?
-                            AbilityUtils.calculateAmount(source, sa.getParam("SpellbookAmount"), sa) : 1;
-                    while (i > 0) {
+                int i = sa.hasParam("SpellbookAmount") ?
+                        AbilityUtils.calculateAmount(source, sa.getParam("SpellbookAmount"), sa) : 1;
+                while (i > 0) {
+                    String chosen;
+                    if (sa.hasParam("AtRandom")) {
+                        chosen = Aggregates.random(faces).getName();
+                    } else {
                         String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
                                 CardTranslation.getTranslatedName(source.getName());
-                        String chosen = player.getController().chooseCardName(sa, faces,
+                        chosen = player.getController().chooseCardName(sa, faces,
                                 Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName));
-                        names.add(chosen);
-                        faces.remove(StaticData.instance().getCommonCards().getFaceByName(chosen));
-                        i--;
                     }
+                    names.add(chosen);
+                    faces.remove(StaticData.instance().getCommonCards().getFaceByName(chosen));
+                    i--;
                 }
             }
 
