@@ -4,6 +4,6 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseChampion | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses a player. Until your next turn, only you and the chosen player can cast spells and attack with creatures.
 SVar:ChooseChampion:DB$ ChoosePlayer | ValidTgts$ Opponent | Choices$ Player | AILogic$ BestAllyBoardPosition | SubAbility$ PrepChamps
 SVar:PrepChamps:DB$ Effect | RememberObjects$ ChosenPlayer,You | Name$ Choose Your Champion Scheme | Duration$ UntilYourNextTurn | StaticAbilities$ RestrictAttackers,RestrictCasting
-SVar:RestrictAttackers:Mode$ Continuous | Affected$ Creature.nonRememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't attack. | EffectZone$ Command | Description$ Until your next turn, only you and the chosen player can attack with creatures.
+SVar:RestrictAttackers:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.nonRememberedPlayerCtrl | Description$ Until your next turn, only you and the chosen player can attack with creatures.
 SVar:RestrictCasting:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsNotRemembered | EffectZone$ Command | Description$ Until your next turn, only you and the chosen player can cast spells.
 Oracle:When you set this scheme in motion, target opponent chooses a player. Until your next turn, only you and the chosen player can cast spells and attack with creatures.
