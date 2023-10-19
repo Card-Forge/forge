@@ -5412,6 +5412,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!isEmblem()) {
                 return testFailed;
             }
+        } else if (incR[0].equals("Boon")) {
+            if (!isBoon()) {
+                return testFailed;
+            }
         } else if (incR[0].equals("card") || incR[0].equals("Card")) {
             if (isImmutable()) {
                 return testFailed;
