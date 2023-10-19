@@ -1,0 +1,58 @@
+[metadata]
+Code=PIP
+Date=2024-03-08
+Name=Fallout Commander
+Type=Commander
+ScryfallCode=PIP
+
+[cards]
+1 M Caesar, Legion's Emperor @Alexander Gering
+2 M Dogmeat, Ever Loyal @Kieran Yanner
+3 M Dr. Madison Li @Zuzanna Wużyk
+4 M The Wise Mothman @Sergei Leoluch Panin
+7 M Mr. House, President and CEO @Joseph Meehan
+16 U Gary Clone @Nicholas Gregory
+17 R Idolized @Kim Sokol
+18 R Overencumbered @Elizabeth Peiró
+28 R Vault 101: Birthday Party @Andrea Piparo
+37 R Radstorm @Salvatorre Zee Yazzie
+44 R Feral Ghoul @Sergio Cosmai
+50 R V.A.T.S. @Diego Gisbert
+91 R Alpha Deathclaw @Daarken
+117 R Rex, Cyber-Hound @Jeremy Paillotin
+134 U Intelligence Bobblehead @Torgeir Fjereide
+137 U Nuka-Cola Vending Machine @Anthony Devine
+164 M Caesar, Legion's Emperor @Alexander Gering
+259 C Command Tower @Gabriel Tanko
+317 L Plains @Samuele Bandini
+318 L Plains @Constantin Marin
+319 L Island @Samuele Bandini
+320 L Island @Pablo Mendoza
+321 L Swamp @Samuele Bandini
+322 L Swamp @Nikola Matkovic
+323 L Mountain @Samuele Bandini
+324 L Mountain @Pablo Mendoza
+325 L Forest @Samuele Bandini
+326 L Forest @Nikola Matkovic
+327 R Idolized @Tim Brumley
+329 R Radstorm @Tim Brumley
+333 R V.A.T.S. @Robin Olausson
+336 R Alpha Deathclaw @Robin Olausson
+339 M Caesar, Legion's Emperor @David Gaillet
+340 M Dogmeat, Ever Loyal @Mark Poole
+341 M Dr. Madison Li @John Stanko
+343 M The Wise Mothman @David Gaillet
+356 U Arcane Signet @AKQA
+357 M Crucible of Worlds @AKQA
+358 U Nuka-Cola Vending Machine @AKQA
+359 M Sol Ring @AKQA
+360 U Command Tower @AKQA
+361 R Wasteland @AKQA
+367 R Overencumbered @Elizabeth Peiró
+381 R Feral Ghoul @Sergio Cosmai
+421 M Mr. House, President and CEO @Joseph Meehan
+427 R Rex, Cyber-Hound @Jeremy Paillotin
+1061 U Intelligence Bobblehead @Torgeir Fjereide
+1065 M Dogmeat, Ever Loyal @Kieran Yanner
+1066 M Dr. Madison Li @Zuzanna Wużyk
+1067 M The Wise Mothman @Sergei Leoluch Panin
