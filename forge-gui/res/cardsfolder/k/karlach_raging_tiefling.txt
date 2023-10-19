@@ -2,7 +2,7 @@ Name:Karlach, Raging Tiefling
 ManaCost:1 R
 Types:Legendary Creature Tiefling Barbarian
 PT:2/2
-K:First strike
+K:First Strike
 K:Specialize:6:Rage Beyond Death:You may also activate this ability if CARDNAME is in your graveyard.:AdditionalActivationZone$ Graveyard
 AlternateMode:Specialize
 DeckHas:Ability$Graveyard
@@ -14,7 +14,7 @@ Name:Karlach, Tiefling Zealot
 ManaCost:1 R W
 Types:Legendary Creature Tiefling Barbarian
 PT:4/4
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
@@ -32,7 +32,7 @@ Name:Karlach, Tiefling Spellrager
 ManaCost:1 U R
 Types:Legendary Creature Tiefling Barbarian
 PT:4/4
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
@@ -52,7 +52,7 @@ Name:Karlach, Tiefling Punisher
 ManaCost:1 B R
 Types:Legendary Creature Tiefling Barbarian
 PT:4/4
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
@@ -70,7 +70,7 @@ Name:Karlach, Tiefling Berserker
 ManaCost:1 R R
 Types:Legendary Creature Tiefling Barbarian
 PT:4/4
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
@@ -86,7 +86,7 @@ Name:Karlach, Tiefling Guardian
 ManaCost:1 R G
 Types:Legendary Creature Tiefling Barbarian
 PT:4/4
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
