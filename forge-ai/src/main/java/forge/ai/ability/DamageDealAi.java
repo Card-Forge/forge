@@ -15,6 +15,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -741,6 +742,13 @@ public class DamageDealAi extends DamageAiBase {
                             sa.addDividedAllocation(enemy, dmg);
                             break;
                         }
+                    } else if (sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)) {
+                        // e.g. Sorin, Vengeful Broodlord
+                        tcs.add(enemy);
+                        if (divided) {
+                            sa.addDividedAllocation(enemy, dmg);
+                        }
+                        return true;
                     }
                 }
             }
