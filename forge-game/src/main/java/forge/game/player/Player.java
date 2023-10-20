@@ -168,6 +168,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int maxHandSize = 7;
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
+    private boolean hasLivingEnd = false;
     private Card lastDrawnCard;
     private Card ringBearer, theRing;
     private String namedCard = "";
@@ -453,6 +454,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         return isOpponentOf(otherPlayer);
+    }
+
+    public boolean isLivingEnd() {
+        return hasLivingEnd;
+    }
+    public void setHasLivingEnd(boolean value) {
+        hasLivingEnd = value;
     }
 
     public final boolean setLife(final int newLife, final SpellAbility sa) {

@@ -2146,6 +2146,11 @@ public class ComputerUtil {
         final int handSize = handList.size();
         final int landSize = lands.size();
         int score = handList.size();
+        if (ai.isLivingEnd()) {
+            final CardCollectionView livingEnd = CardLists.filter(handList, c -> "Living End".equalsIgnoreCase(c.getName()));
+            if (livingEnd.size() > 0)
+                score = -(livingEnd.size() * 10);
+        }
 
         if (handSize/2 == landSize || handSize/2 == landSize +1) {
             score += 10;

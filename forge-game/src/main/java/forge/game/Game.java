@@ -265,6 +265,7 @@ public class Game {
         for (RegisteredPlayer psc : players0) {
             IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
             Player pl = factory.createIngamePlayer(this, plId++);
+            pl.setHasLivingEnd(psc.getDeck().getMain().countByName("Living End", true) > 0);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
 
