@@ -856,7 +856,7 @@ public abstract class SpellAbilityEffect {
             host.addLeavesPlayCommand(until);
             host.addUntapCommand(until);
         } else if ("UntilTargetedUntaps".equals(duration)) {
-            Card tgt = sa.getTargetCard();
+            Card tgt = sa.getSATargetingCard().getTargetCard();
             tgt.addLeavesPlayCommand(until);
             tgt.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
