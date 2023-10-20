@@ -53,6 +53,9 @@ public class ExploreEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (final Card c : getTargetCards(sa)) {
+            // 701.40c If a permanent changes zones before an effect causes it to explore,
+            // its last known information is used to determine which object explored and who controlled it.
+
             // revealed land card
             boolean revealedLand = false;
             final Player pl = c.getController();
@@ -82,9 +85,11 @@ public class ExploreEffect extends SpellAbilityEffect {
             if (!revealedLand) {
                 // need to get newest game state to check
                 // if it is still on the battlefield
-                // and the timestamp didnt change
-                Card gamec = game.getCardState(c);
-                if (gamec.isInPlay() && gamec.equalsWithTimestamp(c)) {
+                // and the timestamp didn't change
+                Card gamec = game.getCardState(c, null);
+                // if the card is not more in the game anymore
+                // this might still return true but its no problem
+                if (gamec != null && gamec.isInPlay() && gamec.equalsWithGameTimestamp(c)) {
                     c.addCounter(CounterEnumType.P1P1, 1, pl, table);
                 }
             }

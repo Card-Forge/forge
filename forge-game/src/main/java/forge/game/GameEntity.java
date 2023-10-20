@@ -363,7 +363,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             if (isCombat != null && dmg.getRight() != isCombat) {
                 continue;
             }
-            if (source != null && !getGame().getDamageLKI(dmg).getLeft().equalsWithTimestamp(source)) {
+            if (source != null && !getGame().getDamageLKI(dmg).getLeft().equalsWithGameTimestamp(source)) {
                 continue;
             }
             num += dmg.getLeft();

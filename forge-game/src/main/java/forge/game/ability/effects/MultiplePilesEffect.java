@@ -66,7 +66,6 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-
             CardCollection pool;
             if (sa.hasParam("DefinedCards")) {
                 pool = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);

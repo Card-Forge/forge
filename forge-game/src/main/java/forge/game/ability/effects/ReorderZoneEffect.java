@@ -30,7 +30,6 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-
             CardCollection list = new CardCollection(p.getCardsIn(zone));
             if (shuffle) {
                 Collections.shuffle(list, MyRandom.getRandom());

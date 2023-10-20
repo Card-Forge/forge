@@ -34,6 +34,14 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
             if (combat == null || !c.isInPlay()) {
                 continue;
             }
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(c, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
 
             // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
             if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
@@ -55,11 +63,11 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
                 }
             }
 
-            game.getCombat().saveLKI(c);
-            combat.removeFromCombat(c);
+            game.getCombat().saveLKI(gameCard);
+            combat.removeFromCombat(gameCard);
 
             if (rem) {
-                sa.getHostCard().addRemembered(c);
+                sa.getHostCard().addRemembered(gameCard);
             }
         }
     }

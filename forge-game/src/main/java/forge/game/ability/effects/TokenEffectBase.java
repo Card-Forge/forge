@@ -125,7 +125,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (creator != controller) {
                     tok.setController(controller, timestamp);
                 }
-                tok.setTimestamp(timestamp);
+                tok.setGameTimestamp(timestamp);
                 tok.setToken(true);
 
                 // do effect stuff with the token

@@ -17,6 +17,8 @@
  */
 package forge.game;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
@@ -50,7 +52,6 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -222,18 +223,18 @@ public class Game {
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
-    private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
+    private final Table<Integer, Long, Card> changeZoneLKIInfo = HashBasedTable.create();
     public final void addChangeZoneLKIInfo(Card lki) {
         if (lki == null) {
             return;
         }
-        changeZoneLKIInfo.put(lki.getId(), lki);
+        changeZoneLKIInfo.put(lki.getId(), lki.getGameTimestamp(), lki);
     }
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {
             return null;
         }
-        return changeZoneLKIInfo.getOrDefault(c.getId(), c);
+        return ObjectUtils.defaultIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
@@ -1126,7 +1127,7 @@ public class Game {
         }
         for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
             for (Pair<Card, Integer> p : l) {
-                if (p.getKey().equalsWithTimestamp(card)) {
+                if (p.getKey().equalsWithGameTimestamp(card)) {
                     result += p.getValue();
                 }
             }

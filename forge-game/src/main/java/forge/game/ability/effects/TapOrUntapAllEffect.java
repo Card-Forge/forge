@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -64,10 +63,19 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
             if (!tgtC.isInPlay()) {
                 continue;
             }
+
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
             if (toTap) {
-                tgtC.tap(true, sa, activator);
+                gameCard.tap(true, sa, activator);
             } else {
-                tgtC.untap(true);
+                gameCard.untap(true);
             }
         }
     }

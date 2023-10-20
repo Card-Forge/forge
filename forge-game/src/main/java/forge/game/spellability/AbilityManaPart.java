@@ -233,8 +233,8 @@ public class AbilityManaPart implements java.io.Serializable {
     public void addNoCounterEffect(SpellAbility saBeingPaid) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(sourceCard + "'s Effect");
+        eff.setGameTimestamp(game.getNextTimestamp());
+        eff.setName(sourceCard.getName() + "'s Effect");
         eff.setOwner(sourceCard.getController());
 
         eff.setImageKey(sourceCard.getImageKey());

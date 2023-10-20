@@ -236,7 +236,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 }
 
                 // because copy should be able to copy LKI values, don't handle target and timestamp there
-
                 if (sa.hasParam("ForEach")) {
                     for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
                         Card proto = getProtoType(sa, c, controller);

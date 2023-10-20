@@ -47,6 +47,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             }
         }
 
+
         for (Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
                 p = getNewChooser(sa, sa.getActivatingPlayer(), p);

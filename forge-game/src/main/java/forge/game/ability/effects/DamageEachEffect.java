@@ -93,20 +93,29 @@ public class DamageEachEffect extends DamageBaseEffect {
                     }
                 }
             }
-        } else for (final GameEntity ge : getTargetEntities(sa)) {
+        } else for (GameEntity ge : getTargetEntities(sa)) {
+            // check before checking sources
+            if (ge instanceof Card) {
+                final Card c = (Card) ge;
+                if (!c.isInPlay() || c.isPhasedOut()) {
+                    continue;
+                }
+                // check if the object is still in game or if it was moved
+                Card gameCard = game.getCardState(c, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                ge = gameCard;
+            }
+
             for (final Card source : sources) {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
-
                 final int dmg = AbilityUtils.calculateAmount(source, num, sa);
 
-                if (ge instanceof Card) {
-                    final Card c = (Card) ge;
-                    if (c.isInPlay() && !c.isPhasedOut()) {
-                        damageMap.put(sourceLKI, c, dmg);
-                    }
-                } else {
-                    damageMap.put(sourceLKI, ge, dmg);
-                }
+                damageMap.put(sourceLKI, ge, dmg);
             }
         }
 

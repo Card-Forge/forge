@@ -36,6 +36,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         boolean isCombatChanged = false;
+
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)

@@ -1285,13 +1285,10 @@ public class GameSimulationTest extends SimulationTest {
         Player opp = game.getPlayers().get(1);
 
         addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
-        for (int i = 0; i < 4; i++) {
-            addCardToZone("Plains", p, ZoneType.Battlefield);
-        }
 
-        for (int i = 0; i < 2; i++) {
-            addCardToZone("Aboroth", opp, ZoneType.Battlefield);
-        }
+        addCards("Plains", 4, p);
+
+        addCards("Aboroth", 2, opp);
 
         Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);

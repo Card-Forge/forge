@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -38,6 +39,7 @@ public class UntapEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Game game = sa.getHostCard().getGame();
         if (sa.hasParam("UntapUpTo")) {
             untapChoose(sa, false);
         } else if (sa.hasParam("UntapExactly")) {
@@ -51,7 +53,15 @@ public class UntapEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (tgtC.isInPlay()) {
-                    tgtC.untap(true);
+                    // check if the object is still in game or if it was moved
+                    Card gameCard = game.getCardState(tgtC, null);
+                    // gameCard is LKI in that case, the card is not in game anymore
+                    // or the timestamp did change
+                    // this should check Self too
+                    if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                        continue;
+                    }
+                    gameCard.untap(true);
                 }
                 if (sa.hasParam("ETB")) {
                     // do not fire triggers
@@ -79,7 +89,6 @@ public class UntapEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-
             CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
             // the few mandatory are handled differently

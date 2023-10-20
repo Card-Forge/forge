@@ -19,7 +19,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append("chooses a player.");
+        sb.append(" chooses a player.");
 
         return sb.toString();
     }

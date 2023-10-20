@@ -111,7 +111,7 @@ public class TriggerChangesZone extends Trigger {
             }
             if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
                 List<Card> etbLKI = moved.getController().getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
-                Collections.sort(etbLKI, CardPredicates.compareByTimestamp());
+                Collections.sort(etbLKI, CardPredicates.compareByGameTimestamp());
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
             }
 

@@ -20,7 +20,7 @@ public class HauntEffect extends SpellAbilityEffect {
         Card card = game.getCardState(host, null);
         if (card == null) {
             return;
-        } else if (sa.usesTargeting() && !card.isToken() && host.equalsWithTimestamp(card)) {
+        } else if (sa.usesTargeting() && !card.isToken() && host.equalsWithGameTimestamp(card)) {
             // haunt target but only if card is no token and still in grave
             final Card copy = game.getAction().exile(new CardCollection(card), sa, null).get(0);
             sa.getTargetCard().addHauntedBy(copy);

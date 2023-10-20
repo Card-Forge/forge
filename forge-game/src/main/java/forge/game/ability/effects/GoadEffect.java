@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
 import forge.util.Lang;
 
 import java.util.List;
@@ -39,8 +40,16 @@ public class GoadEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
             // 701.38d is handled by getGoaded
-            tgtC.addGoad(timestamp, player);
+            gameCard.addGoad(timestamp, player);
 
             // currently, only Life of the Party uses Duration$ – Duration$ Permanent
             if (!sa.hasParam("Duration")) {
@@ -49,14 +58,14 @@ public class GoadEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removeGoad(timestamp);
+                        gameCard.removeGoad(timestamp);
                     }
                 };
 
                 game.getCleanup().addUntil(player, untilEOT);
             }
 
-            if (remember && tgtC.isGoaded()) {
+            if (remember && gameCard.isGoaded()) {
                 sa.getHostCard().addRemembered(tgtC);
             }
         }

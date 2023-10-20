@@ -43,6 +43,7 @@ public class TriggerTokenCreatedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        @SuppressWarnings("unchecked")
         Iterable<Card> tokens = (Iterable<Card>) runParams.get(AbilityKey.Cards);
         if (hasParam("ValidToken")) {
             tokens = Iterables.filter(tokens, CardPredicates.restriction(getParam("ValidToken").split(","), getHostCard().getController(), getHostCard(), this));

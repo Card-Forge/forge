@@ -120,14 +120,13 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             }
         }
 
-        CardCollectionView srcCards = null;
+        CardCollectionView srcCards;
 
         String typeforPrompt = counterType == null ? "" : counterType.getName();
         String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", typeforPrompt);
         title = title.replace("  ", " ");
         if (sa.hasParam("ValidSource")) {
-            srcCards = game.getCardsIn(ZoneType.Battlefield);
-            srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
+            srcCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidSource"), player, card, sa);
             if (num.equals("Any")) {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("CounterType", counterType);
@@ -158,10 +157,9 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
-            final Zone zone = game.getZoneOf(gameCard);
             if (type.equals("All")) {
                 for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
                     gameCard.subtractCounter(e.getKey(), e.getValue());
@@ -175,6 +173,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (type.equals("Any")) {
                 removeAnyType(gameCard, cntToRemove, sa);
             } else {
+                final Zone zone = game.getZoneOf(gameCard);
                 cntToRemove = Math.min(cntToRemove, gameCard.getCounters(counterType));
 
                 if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {

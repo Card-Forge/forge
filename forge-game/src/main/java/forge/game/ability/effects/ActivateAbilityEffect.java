@@ -42,9 +42,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-
-            List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"));
-            for (Card c : list) {
+            for (Card c : CardLists.getType(p.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"))) {
                 List<SpellAbility> possibleAb = Lists.newArrayList(c.getAllPossibleAbilities(p, true));
                 if (isManaAb) {
                     possibleAb.retainAll((FCollection<SpellAbility>)c.getManaAbilities());

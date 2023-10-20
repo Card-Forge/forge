@@ -63,7 +63,7 @@ public class AttackRequirement {
             } else if (entity instanceof Card) {
                 final Card reqPW = (Card) entity;
                 final Card gamePW = game.getCardState(reqPW, null);
-                if (gamePW == null || !gamePW.getController().isInGame() || !gamePW.equalsWithTimestamp(reqPW)
+                if (gamePW == null || !gamePW.getController().isInGame() || !gamePW.equalsWithGameTimestamp(reqPW)
                         || (!gamePW.isBattle() && !gamePW.getController().isOpponentOf(attacker.getController()))) {
                     removeThis = true;
                 }

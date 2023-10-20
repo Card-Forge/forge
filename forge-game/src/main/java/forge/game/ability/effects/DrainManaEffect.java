@@ -15,7 +15,6 @@ public class DrainManaEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-
         sb.append(" loses all unspent mana.");
 
         return sb.toString();

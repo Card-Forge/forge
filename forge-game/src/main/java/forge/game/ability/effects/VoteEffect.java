@@ -83,6 +83,9 @@ public class VoteEffect extends SpellAbilityEffect {
         Player voter = game.getControlVote();
 
         for (final Player p : tgtPlayers) {
+            if (!p.isInGame()) {
+                continue;
+            }
             int voteAmount = p.getAdditionalVotesAmount() + 1;
             int optionalVotes = p.getAdditionalOptionalVotesAmount();
             Player realVoter = voter == null ? p : voter;
