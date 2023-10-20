@@ -1,0 +1,8 @@
+Name:Syr Joshua and Syr Saxon
+ManaCost:G W
+Types:Legendary Creature Human Knight
+PT:2/3
+K:Double team
+S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.YouCtrl+Legendary+namedSyr Joshua and Syr Saxon | IsPresent$ Permanent.Legendary+YouCtrl+namedSyr Joshua and Syr Saxon | PresentCompare$ EQ2 | Description$ If you control exactly two legendary permanents named Syr Joshua and Syr Saxon, the "legend rule" doesn't apply to them.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other+namedSyr Joshua and Syr Saxon | AddKeyword$ Battle Cry | Description$ Each other creature you control named Syr Joshua and Syr Saxon has battle cry.
+Oracle:Double team\nIf you control exactly two legendary permanents named Syr Joshua and Syr Saxon, the "legend rule" doesn't apply to them.\nEach other creature you control named Syr Joshua and Syr Saxon has battle cry.
