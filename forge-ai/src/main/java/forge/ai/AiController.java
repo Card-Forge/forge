@@ -89,6 +89,7 @@ public class AiController {
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
+    private boolean useLivingEnd;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1573,7 +1574,7 @@ public class AiController {
             }
         });
         //update LivingEndPlayer
-        player.setHasLivingEnd(CardLists.filter(player.getZone(ZoneType.Library).getCards(), c-> "Living End".equalsIgnoreCase(c.getName())).size() > 0);
+        useLivingEnd = Iterables.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
@@ -1597,7 +1598,7 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
         //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
-        boolean isLifeInDanger = player.isLivingEnd() && ComputerUtil.aiLifeInDanger(player, true, 0);
+        boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
@@ -1614,7 +1615,7 @@ public class AiController {
             }
             //living end AI decks
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
-            if (player.isLivingEnd()) {
+            if (useLivingEnd) {
                 if (sa.isCycling() && sa.canCastTiming(player)) {
                     if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
                         aiPlayDecision = AiPlayDecision.WillPlay;
@@ -1640,7 +1641,7 @@ public class AiController {
                 sa.setLastStateGraveyard(game.getLastStateGraveyard());
             }
             //override decision for living end player
-            AiPlayDecision opinion = player.isLivingEnd() && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
+            AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
 
             // reset LastStateBattlefield
             sa.clearLastState();
