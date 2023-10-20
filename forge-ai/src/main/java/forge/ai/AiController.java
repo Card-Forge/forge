@@ -1572,6 +1572,8 @@ public class AiController {
                 return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
             }
         });
+        //update LivingEndPlayer
+        player.setHasLivingEnd(CardLists.filter(player.getZone(ZoneType.Library).getCards(), c-> "Living End".equalsIgnoreCase(c.getName())).size() > 0);
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
@@ -1613,10 +1615,6 @@ public class AiController {
             //living end AI decks
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (player.isLivingEnd()) {
-                if (CardLists.filter(player.getZone(ZoneType.Library).getCards(), c-> "Living End".equalsIgnoreCase(c.getName())).size() < 1) {
-                    player.setHasLivingEnd(false); // stop forced playing since we don't have any choice
-                    continue;
-                }
                 if (sa.isCycling() && sa.canCastTiming(player)) {
                     if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
                         aiPlayDecision = AiPlayDecision.WillPlay;
