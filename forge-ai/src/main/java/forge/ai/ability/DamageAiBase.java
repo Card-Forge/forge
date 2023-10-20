@@ -6,7 +6,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -148,9 +147,6 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                 final float chance = MyRandom.getRandom().nextFloat();
                 return chance < value;
             }
-        } else if (sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)) {
-            // e.g. Sorin, Vengeful Broodlord
-            return true;
         }
 
         return false;
