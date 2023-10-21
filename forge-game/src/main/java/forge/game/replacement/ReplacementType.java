@@ -38,6 +38,7 @@ public enum ReplacementType {
     ProduceMana(ReplaceProduceMana.class),
     Proliferate(ReplaceProliferate.class),
     RemoveCounter(ReplaceRemoveCounter.class),
+    RollDice(ReplaceRollDice.class),
     RollPlanarDice(ReplaceRollPlanarDice.class),
     Scry(ReplaceScry.class),
     SetInMotion(ReplaceSetInMotion.class),

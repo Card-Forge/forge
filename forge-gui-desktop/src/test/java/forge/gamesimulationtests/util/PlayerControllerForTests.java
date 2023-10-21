@@ -496,6 +496,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Integer chooseRollToIgnore(List<Integer> rolls) {
+        return Aggregates.random(rolls);
+    }
+
+    @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return chooseItem(options);
     }
