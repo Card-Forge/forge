@@ -13,8 +13,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
-import org.checkerframework.checker.units.qual.K;
-
 
 public class ReplaceEffect extends SpellAbilityEffect {
 

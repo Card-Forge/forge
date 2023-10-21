@@ -1,27 +1,22 @@
 package forge.game.ability.effects;
 
-import java.util.*;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.Maps;
-import forge.game.ability.AbilityFactory;
-import forge.game.card.CounterType;
-import forge.game.event.GameEventRollDie;
-import forge.game.replacement.ReplacementType;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class RollDiceEffect extends SpellAbilityEffect {
 
