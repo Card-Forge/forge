@@ -743,13 +743,6 @@ public class DamageDealAi extends DamageAiBase {
                             sa.addDividedAllocation(enemy, dmg);
                             break;
                         }
-                    } else if (sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)) {
-                        // e.g. Sorin, Vengeful Broodlord
-                        tcs.add(enemy);
-                        if (divided) {
-                            sa.addDividedAllocation(enemy, dmg);
-                        }
-                        return true;
                     }
                 }
             }
