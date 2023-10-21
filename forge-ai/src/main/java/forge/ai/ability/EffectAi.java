@@ -212,7 +212,8 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 final SpellAbility topStack = game.getStack().peekAbility();
-                return topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife;
+                final Player tgtPlayer = topStack.getActivatingPlayer();
+                return tgtPlayer.isOpponentOf(ai) && tgtPlayer.canGainLife() && topStack.getApi() == ApiType.GainLife;
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Pump")) {
