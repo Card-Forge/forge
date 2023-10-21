@@ -1,0 +1,10 @@
+Name:Iraxxa, Empress of Mars
+ManaCost:2 R R
+Types:Legendary Creature Alien Warrior
+PT:5/4
+K:Trample
+K:Battle cry
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, create a 2/2 red Alien Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_alien_warrior
+DeckHas:Ability$Token
+Oracle:Trample\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nParadox — Whenever you cast a spell from anywhere other than your hand, create a 2/2 red Alien Warrior creature token.

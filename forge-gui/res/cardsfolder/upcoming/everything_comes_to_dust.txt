@@ -1,0 +1,6 @@
+Name:Everything Comes to Dust
+ManaCost:7 W W W
+Types:Sorcery
+K:Convoke
+A:SP$ ChangeZoneAll | ChangeType$ Creature.!sharesCreatureTypeWith Convoked,Artifact,Enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures except those that share a creature type with a creature that convoked this spell, all artifacts, and all enchantments.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nExile all creatures except those that share a creature type with a creature that convoked this spell, all artifacts, and all enchantments.
