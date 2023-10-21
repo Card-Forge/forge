@@ -198,13 +198,13 @@ public abstract class SpellAbilityEffect {
     protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa, final String definedParam) { return getCards(true,  definedParam, sa); }
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
-        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         if (sa.hasParam("ThisDefinedAndTgts")) {
             CardCollection cards =
                     AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
             cards.addAll(sa.getTargets().getTargetCards());
             return cards;
         }
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
@@ -855,6 +855,10 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUntaps".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addUntapCommand(until);
+        } else if ("UntilTargetedUntaps".equals(duration)) {
+            Card tgt = sa.getSATargetingCard().getTargetCard();
+            tgt.addLeavesPlayCommand(until);
+            tgt.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
             host.addLeavesPlayCommand(until); //if it leaves play, it's unattached
             host.addUnattachCommand(until);
