@@ -736,19 +736,13 @@ public class DamageDealAi extends DamageAiBase {
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
-                    if ((pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
+                    boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
+                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
                         tcs.add(enemy);
                         if (divided) {
                             sa.addDividedAllocation(enemy, dmg);
                             break;
                         }
-                    } else if (sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)) {
-                        // e.g. Sorin, Vengeful Broodlord
-                        tcs.add(enemy);
-                        if (divided) {
-                            sa.addDividedAllocation(enemy, dmg);
-                        }
-                        return true;
                     }
                 }
             }
