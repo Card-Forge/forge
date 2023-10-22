@@ -490,6 +490,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("(stored dice results: ").append(StringUtils.join(card.getStoredRolls(), ", "));
+            area.append(")");
         }
 
         // chosen player

@@ -2629,19 +2629,39 @@ public class AbilityUtils {
             int max = 0;
             List<Integer> rolls = c.getStoredRolls();
             if (rolls != null) {
-                rolls.sort(null);
+                int lastNum = 1;
+                int tally = 0;
                 for (int i = 0; i < rolls.size(); i++) {
-                    Integer num = rolls.get(i);
-                    int counter = 0;
-                    for (Integer roll : rolls) {
-                        if (num.equals(roll)) {
-                            counter++;
+                    Integer roll = rolls.get(i);
+                    if (roll.equals(lastNum)) {
+                        tally++;
+                    } else {
+                        if (tally > max) {
+                            max = tally;
                         }
-                    }
-                    if (counter > max) {
-                        max = counter;
+                        lastNum = roll;
+                        tally = 1;
                     }
                 }
+                /**
+                for (int i = 0; i < rolls.size(); i++) {
+                    Integer num = rolls.get(i);
+                    if (!num.equals(lastNum)) {
+                        lastNum = num;
+                        int counter = 0;
+                        for (int n = i; n < rolls.size(); n++) {
+                            Integer roll = rolls.get(n);
+                            if (num.equals(roll)) {
+                                counter++;
+                            } else if (num < roll) {
+                                break;
+                            }
+                        }
+                        if (counter > max) {
+                            max = counter;
+                        }
+                    }
+                }**/
             }
             return doXMath(max, expr, c, ctb);
         }

@@ -12,7 +12,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -267,15 +266,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> results = new ArrayList<>(playersToRoll.size());
 
         for (Player player : playersToRoll) {
-            List<Integer> toReroll = Lists.newArrayList();
             if (sa.hasParam("RerollResults")) {
-                for (Integer storedResult : host.getStoredRolls()) {
-                    if (player.getController().confirmAction(sa, null,
-                            Localizer.getInstance().getMessage("lblRerollResult", storedResult), null)) {
-                        toReroll.add(storedResult);
-                    }
-                }
-                rerollDice(sa, host, player, sides, toReroll);
+                rerollDice(sa, host, player, sides);
             } else {
                 int result = rollDice(sa, player, amount, sides);
                 results.add(result);
@@ -296,7 +288,16 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
     }
 
-    private void rerollDice(SpellAbility sa, Card host, Player roller, int sides, List<Integer> toReroll) {
+    private void rerollDice(SpellAbility sa, Card host, Player roller, int sides) {
+        List<Integer> toReroll = Lists.newArrayList();
+
+        for (Integer storedResult : host.getStoredRolls()) {
+            if (roller.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblRerollResult", storedResult), null)) {
+                toReroll.add(storedResult);
+            }
+        }
+
         Map<Integer, Integer> replaceMap = Maps.newHashMap();
         for (Integer old : toReroll) {
             int newRoll = rollDice(sa, roller, 1, sides);

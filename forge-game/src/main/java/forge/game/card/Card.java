@@ -1302,6 +1302,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             storedRolls.remove(oldValue);
             storedRolls.add(replaceMap.get(oldValue));
         }
+        storedRolls.sort(null);
         view.updateStoredRolls(this);
     }
 
