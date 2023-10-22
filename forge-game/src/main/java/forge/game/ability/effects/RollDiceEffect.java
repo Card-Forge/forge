@@ -12,6 +12,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -205,6 +206,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> rolls = new ArrayList<>();
         int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
 
+        if (sa.hasParam("StoreResults")) {
+            host.setStoredRolls(rolls);
+        }
         if (sa.hasParam("ResultSVar")) {
             sa.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
         }
@@ -263,8 +267,19 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> results = new ArrayList<>(playersToRoll.size());
 
         for (Player player : playersToRoll) {
-            int result = rollDice(sa, player, amount, sides);
-            results.add(result);
+            List<Integer> toReroll = Lists.newArrayList();
+            if (sa.hasParam("RerollResults")) {
+                for (Integer storedResult : host.getStoredRolls()) {
+                    if (player.getController().confirmAction(sa, null,
+                            Localizer.getInstance().getMessage("lblRerollResult", storedResult), null)) {
+                        toReroll.add(storedResult);
+                    }
+                }
+                rerollDice(sa, host, player, sides, toReroll);
+            } else {
+                int result = rollDice(sa, player, amount, sides);
+                results.add(result);
+            }
         }
         if (rememberHighest) {
             int highest = 0;
@@ -279,5 +294,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 }
             }
         }
+    }
+
+    private void rerollDice(SpellAbility sa, Card host, Player roller, int sides, List<Integer> toReroll) {
+        Map<Integer, Integer> replaceMap = Maps.newHashMap();
+        for (Integer old : toReroll) {
+            int newRoll = rollDice(sa, roller, 1, sides);
+            replaceMap.put(old, newRoll);
+        }
+        host.replaceStoredRoll(replaceMap);
     }
 }
