@@ -10,4 +10,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenO
 SVar:X:TriggerCount$DamageAmount
 K:Crew:3
 DeckHas:Ability$Sacrifice|Token & Type$Treasure
-Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Archive Dragon enters the battlefield, scry 2.
+Oracle:Flying, trample\nWhen RMS Titanic deals combat damage to a player, sacrifice it and create that many Treasure tokens.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
