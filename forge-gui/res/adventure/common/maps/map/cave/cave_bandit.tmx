@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzVVEtuwjAQ9QbJI9HuKrHvITgACq1y0RToAWDLVQhpjlB2eGQ/5SWamI+EEE8aBTuZeW9+OPc8bOfO7YJNP7q7yju38vfH5FgWNPZ/4DzN+/eFONfIOLfq+pO+/fho1+jl2Iil50N4/obnt3Tf7mfRFHi/lGjr8Hvj410jXZwxLFNeqrNN/keJGvT8JeO+yl1LxwW9uMv5Qi8M/gVpAD5n0RQr6l+RfJmH+6Q5LN6jAWvfrxe4c7lWqY/oa2toPFAd9D1z8jcb6g/40Vue7Yr6UZPf0dDINbd4LQ3oD3iaTG6XdqYYyZehMXimSspNtQw5gdy+W7zDHeU6anyeD63FkBO714q975pHafDy3lh1LI1ZBR92j2fSmsVcnXm2OKdS7NpiZuBTp7NVj8nb5f5aeqx+XgPmvJX3Fgz/rxWo/yN5XwFnv62PlQ==
+   eJzVVEFqw0AM3EthBU1uBd/7iDwgOCn+qJukD2iv+Upc109ob12xO3i8yBvnUEoGRLJrSyNpJDv3f3jfOPcR7PFpvGu9cwe/zP8izn3K9I5jWdDY34HzZzO9r0OcXua5Na8vmdqrj7YkX46NWHrWGt7C7wvVca6ioUZ9vpNox/D/5ONdL2OcOexSXZrnkPy1Z20672XeV7k7GbmQL+5KvsgXBv+acgCeq2iKA+lXJ1/mYZ20hu06GnD0036Bu1Rrm3SEroOR44X6oM+Zk985kT7gh7Y82y3p0ZFfPs+5DhavlQP0AU9fqO3aztQz9TI0Bs9UQ7VpLjknUNp3izffUe6jxuf5sL4P2L1B7H3XOhqDl/fG6mNjzCr4sHs8k9YslvrMs8U1NWL3FjMDny6drX48rK7ra+Vj6bkEzHkr7y3Iv9cK9P8vee8BvyHNkW8=
   </data>
  </layer>
  <layer id="7" name="Clutter" width="30" height="17">
