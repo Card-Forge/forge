@@ -1355,8 +1355,8 @@ public class AiBlockController {
         }
 
         int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
-        boolean atkEmbalm = (attacker.hasStartOfKeyword("Embalm") || attacker.hasStartOfKeyword("Eternalize")) && !attacker.isToken();
-        boolean blkEmbalm = (blocker.hasStartOfKeyword("Embalm") || blocker.hasStartOfKeyword("Eternalize")) && !blocker.isToken();
+        boolean atkEmbalm = (attacker.hasKeyword(Keyword.EMBALM) || attacker.hasKeyword(Keyword.ETERNALIZE)) && !attacker.isToken();
+        boolean blkEmbalm = (blocker.hasKeyword(Keyword.EMBALM) || blocker.hasKeyword(Keyword.ETERNALIZE)) && !blocker.isToken();
 
         if (atkEmbalm && !blkEmbalm) {
             // The opponent will eventually get his creature back, while the AI won't
