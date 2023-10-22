@@ -18,6 +18,6 @@ ALTERNATE
 Name:Lupari Shield
 ManaCost:1 G
 Types:Sorcery Adventure
-A:SP$ PumpAll | ValidCards$ Human.YouCtrl | Duration$ Permanent | KW$ Indestructible | Duration$ UntilYourNextTurn | SpellDescription$ Humans you control gain indestructible until your next turn. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ PumpAll | ValidCards$ Human.YouCtrl | KW$ Indestructible | Duration$ UntilYourNextTurn | SpellDescription$ Humans you control gain indestructible until your next turn. (Then exile this card. You may cast the creature later from exile.)
 SVar:PlayMain1:TRUE
 Oracle:Humans you control gain indestructible until your next turn. (Then exile this card. You may cast the creature later from exile.)
