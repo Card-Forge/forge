@@ -463,6 +463,7 @@ Mirrodin
 Moag
 Mongseng
 Muraganda
+Necros
 New Phyrexia
 Phyrexia
 Pyrulea
@@ -476,6 +477,7 @@ Shadowmoor
 Shandalar
 Shenmeng
 Skaro
+Spacecraft
 Tarkir
 The Abyss
 The Dalek Asylum
