@@ -224,7 +224,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         if (c.hasSVar("EndOfTurnLeavePlay")) {
             value -= subValue(50, "eot-leaves");
-        } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
+        } else if (c.hasKeyword(Keyword.CUMULATIVE_UPKEEP)) {
             value -= subValue(30, "cupkeep");
         } else if (c.hasStartOfKeyword("UpkeepCost")) {
             value -= subValue(20, "sac-unless");

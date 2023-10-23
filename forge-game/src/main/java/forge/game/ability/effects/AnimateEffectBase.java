@@ -82,7 +82,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
-        c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
+        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
+        }
 
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {

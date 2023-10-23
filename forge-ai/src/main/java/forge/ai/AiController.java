@@ -791,7 +791,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.costHasX() || host.hasStartOfKeyword("Strive");
+        boolean xCost = sa.costHasX() || host.hasKeyword(Keyword.STRIVE);
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check

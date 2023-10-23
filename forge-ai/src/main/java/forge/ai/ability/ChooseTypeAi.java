@@ -169,7 +169,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             // Account for the situation when only changelings are on the battlefield
             boolean allChangeling = false;
             for (Card c : cards) {
-                if (c.isCreature() && c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                if (c.isCreature() && c.hasKeyword(Keyword.CHANGELING)) {
                     chosenType = Aggregates.random(valid); // just choose a random type for changelings
                     allChangeling = true;
                     break;
