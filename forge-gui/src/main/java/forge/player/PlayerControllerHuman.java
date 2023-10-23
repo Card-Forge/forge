@@ -1316,7 +1316,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (Card c : player.getAllCards()) {
             // Changeling are all creature types, they are not interesting for
             // counting creature types
-            if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+            if (c.hasKeyword(Keyword.CHANGELING)) {
                 continue;
             }
             // same is true if it somehow has all creature types
@@ -1373,7 +1373,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
             // special rule for Fabricate and Servo
-            if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
+            if (c.hasKeyword(Keyword.FABRICATE)) {
                 Integer count = typesInDeck.getOrDefault("Servo", 0);
                 typesInDeck.put("Servo", count + 1);
             }

@@ -136,6 +136,10 @@ public class CloneEffect extends SpellAbilityEffect {
             return;
         }
 
+        if ("UntilTargetedUntaps".equals(sa.getParam("Duration")) && !cardToCopy.isTapped()) {
+            return;
+        }
+
         final Long ts = game.getNextTimestamp();
         tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
 

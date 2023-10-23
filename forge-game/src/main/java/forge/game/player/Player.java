@@ -1652,11 +1652,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        CardCollection milled = getTopXCardsFromLibrary(n);
-        CardCollectionView milledView = milled;
+        CardCollectionView milledView = getCardsIn(ZoneType.Library);
+        // 614.13c
+        if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
+            Iterables.removeAll(milledView, (CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB));
+        }
+        CardCollection milled = new CardCollection(Iterables.limit(milledView, n));
+        milledView = milled;
 
         if (destination == ZoneType.Graveyard) {
-            milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
+            milledView = GameActionUtil.orderCardsByTheirOwners(game, milledView, ZoneType.Graveyard, sa);
         }
 
         for (Card m : milledView) {

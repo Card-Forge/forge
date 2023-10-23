@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="107">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="107">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -17,7 +17,7 @@
  </layer>
  <layer id="7" name="Mountain Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzNljtOA0EMhncCm6QBGshKNPRwAVquwRmoqEISREFLh8QFuEBEFpJLQCoajkCHEJSIWLMjHK/teewW/JIVZcaxv7U9ky1MlhUee9nk7bRjjfrvruyR2F5AnlhzeYAFC77DOrCVKL/kDypNOi/E4577ydTzSCoT/EM4cb8g/liJ+dwLzx/DqTFiPsz20QKLNLe0/4NAPhyX0xIxHxOfSSDfKKvni+Hjns/pPM+yI2HGJgKjxuuk9Vjiu9/wJBNyg2779X18fmN6zPUW7ISpIdSvqWJnUOLjepzKJ/UoZAb/C580gxofZaR811vNeX019PHhPcrXqc7QTd+apEVXZ0zlGwtxmupSiIvXNL6F0evYVFJcui7df3NjGQ8qm1d+b4nzFsI3ZNbbrk9HudO5OuH1gdCzWL7UM+tT2RIflsbq9uDsfqL3ikPEcRWQI4ZxuG1nkPqlPB/4P6xYLzKdM7aG+zt/fq5GKT3A7wuLinNEfODMzJkzrAlq6JjwJ13TYr12rU171s7ydU5nM+Pno/UFPnoXcL6OwRm3Bpqi2eT+P3x3se9MSXaXr9t7z37ifSqOz93FWs18NaV+S+Y3P1Wdvor6XiwfZYlhk/icvgU+mJkZw/cLoMsq1g==
+   eJzNljtOA0EMhmcDeTRAA4lEQw8XoOUanIGKKiRBFLR0SLkAF4hIILkEpKLhCHQIQYmINWvheG3PYyn4JSvKjGN/67En2yuc6wXseVO204Y37r+7sgdmexF5Ug3zAAsVfId1YJuR/Jo/aFbk80I86bkfi2oeTbMM/xhOel4Qf2jEfGrH50/htBgpH2V7/wMWrW/5+Xcj+WhcSUvCfMx8RpF8A1fNl8InPR/qvOnckdJjI4XR4kVZZ6zx3W0Ekim5Qbed6j6d35Qzls4W7ESoIdSvrlJ7UOOTzjiXTzujmB78L3xaD1p8nJHzXW/V5w3VMMRH9zhfo5yhm443TYuWzZjLN1Ti1NWlEpeuWXyLwq5jXWlx+bp2/80Lz3hQ2rz0e83stxi+vvMzEvufmKOGcadLdaLr3QBbLF/uzIYUql1O/SxW3IPZ/SDvFYeE4yoiRwpjf9v3IPfLeT7wv1+xXjibM7WG+zu/flijnDOg7wuLknPAfGBm5sIMW4IaIhP95GtWrJeWt0nb21lznRNtWoT5eH2Br+/k39A1ZECT1kAT0pvS/0foLpb2psas4Z06bq7bW9t/ot9YeNeQ+PAutmoWqin3Wwq/+S7r9Nmr7qXycZYUNo0P9aXwQc9MBb4flGop4Q==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="26">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

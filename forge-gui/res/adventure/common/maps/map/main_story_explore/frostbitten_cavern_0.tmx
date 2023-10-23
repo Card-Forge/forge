@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="32">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="32">
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
@@ -17,7 +17,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lU1OwzAQhb2BXRLHCxBQcZAKQVpaCVhzB8oB+BE/hYOwoxIbliy4CgVaYAEVnAGJN/KMakUJxGnIk54cx5E/jz2eKFWNtoxSHbgFt+FPuB/ZsUu02+jvmIpgjt4x5wc8MfaZ1NC2XdXTMdFeoFQvqH4df2kuVGo+rI83iG17DeagIq7MWWRsPyi31wlypcVuR/5rvAr995qY6/CQvVGGDd534LfXIzDG7LJsXybp1eENHX4Wu5mzFmLe/pIPWTrDfTxmPzn8Z7ivi81Bd/xrhjoycmJ+yYkt4X1InP248Yw1LYr9nJ0XK31zqm0uyll0/6FmZumCz0TOgrizxlxEtMcnHDfFS/+QOmJ+AOtAWzbFWxf3iPNfcqAublrEHRv/O5wWnV/Xo151TPGY5V/g1iR5J+e2STnjfLOMeBbgxXjaX4n9uFKXKT/WIutDbd89Modq6BvXEGLsYt47tEtwA76Pbf8HjI5YWw==
+   eJy9lUtOwzAQhr2BXRLHC55VD4IQpKWVgItQDsBDPAoHYUclNixZcBUKtMACKjgDEv/IM6oVJRCnISP9chxH/vzb44lS1cS2UaoDtaA29An1Izt2iXYH/V1TEcyJd8z5AU2MfaZoaNs29XRMYi9QqhdUv46/Yi5Uaj6sjzeIbXsN5qAirsxZZGw/KLfXCXKlxWpH/mu8Cv33mpgb0JC1WYYN3nfgt9cjMMassmxfJsWrwxs6/Cz2Ws5aiHn7Sz5kxRnu4zHryeE/Q31dbA66418z1JGR4/klx1vC+5A4+3Hj6TUd5P2cleeVvjnVNhflLLr/UDOz4oLPRM6CuLN6LhK0xyfsm/zSP6QOzw9gHWjLJr91cY84/yUH6uKmg7hj43+H00Hn1/WoVx1T3LP8C9yaJO/k3LYoZ5xvVuBnAVqMp/3V2I8rdZnyYz2yOtT23SNzqIa+cQ0hxhJ0By1DDeie+z+G11ge
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">

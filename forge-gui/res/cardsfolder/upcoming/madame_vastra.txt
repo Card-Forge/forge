@@ -1,0 +1,11 @@
+Name:Madame Vastra
+ManaCost:2 G U
+Types:Legendary Creature Lizard Detective
+PT:3/3
+K:Partner:Jenny Flint
+K:CARDNAME must be blocked if able.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, create a Clue token and a Food token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac,c_a_clue_draw | TokenOwner$ You
+DeckHints:Name$Jenny Flint
+DeckHas:Ability$Token|Sacrifice & Type$Clue|Food
+Oracle:Partner with Jenny Flint (When this creature enters the battlefield, target player may put Jenny Flint into their hand from their library, then shuffle.)\nMadame Vastra must be blocked if able.\nWhenever a creature dealt damage by Madame Vastra this turn dies, create a Clue token and a Food token.

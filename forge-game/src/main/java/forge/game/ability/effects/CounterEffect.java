@@ -302,8 +302,6 @@ public class CounterEffect extends SpellAbilityEffect {
             movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
             movedCard = game.getAction().exile(c, srcSA, params);
-        } else if (destination.equals("TopOfLibrary")) {
-            movedCard = game.getAction().moveToLibrary(c, srcSA, params);
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);
         } else if (destination.equals("Battlefield")) {
@@ -314,6 +312,8 @@ public class CounterEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
                 movedCard.setController(srcSA.getActivatingPlayer(), 0);
             }
+        } else if (destination.equals("TopOfLibrary")) {
+            movedCard = game.getAction().moveToLibrary(c, srcSA, params);
         } else if (destination.equals("BottomOfLibrary")) {
             movedCard = game.getAction().moveToBottomOfLibrary(c, srcSA, params);
         } else if (destination.equals("ShuffleIntoLibrary")) {

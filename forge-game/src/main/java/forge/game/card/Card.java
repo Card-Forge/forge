@@ -4683,7 +4683,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (keywords != null) {
             long idx = 1;
             for (String kw : keywords) {
-                kws.add(getKeywordForStaticAbility(kw, staticId, idx));
+                // CR 113.11
+                boolean canHave = true;
+                for (Keyword cantKW : getCantHaveKeyword()) {
+                    if (kw.startsWith(cantKW.toString())) {
+                        canHave = false;
+                        break;
+                    }
+                }
+                if (canHave) {
+                    kws.add(getKeywordForStaticAbility(kw, staticId, idx));
+                }
                 idx++;
             }
         }
@@ -5410,6 +5420,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (incR[0].equals("Emblem")) {
             if (!isEmblem()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Boon")) {
+            if (!isBoon()) {
                 return testFailed;
             }
         } else if (incR[0].equals("card") || incR[0].equals("Card")) {

@@ -36,7 +36,6 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Game game = ai.getGame();
 
         if ("Never".equals(aiLogic)) {
             return false;
