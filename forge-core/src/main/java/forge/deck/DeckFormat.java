@@ -255,18 +255,7 @@ public enum DeckFormat {
                     PaperCard a = commanders.get(0);
                     PaperCard b = commanders.get(1);
 
-                    if (a.getRules().hasKeyword("Partner") && b.getRules().hasKeyword("Partner")) {
-                        // normal partner commander
-                    } else if (a.getName().equals(b.getRules().getPartnerWith())
-                            && b.getName().equals(a.getRules().getPartnerWith())) {
-                        // paired partner commander
-                    } else if (a.getRules().hasKeyword("Friends forever") &&
-                            b.getRules().hasKeyword("Friends forever")) {
-                        // Stranger Things Secret Lair gimmick partner commander
-                    } else if (a.getRules().hasKeyword("Choose a Background") && b.getRules().canBeBackground()
-                            || b.getRules().hasKeyword("Choose a Background") && a.getRules().canBeBackground()) {
-                        // commander with background
-                    } else {
+                    if (!a.getRules().canBePartnerCommanders(b.getRules())) {
                         return "has an illegal commander partnership";
                     }
                 }

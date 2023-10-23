@@ -275,16 +275,51 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
+    public boolean canBePartnerCommanders(CardRules b) {
+        if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
+            return false;
+        }
+        boolean legal = false;
+        if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
+            legal = true; // normal partner commander
+        }
+        if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
+            legal = true; // paired partner commander
+        }
+        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
+            legal = true; // Stranger Things Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Choose a Background") && b.canBeBackground()
+                || b.hasKeyword("Choose a Background") && canBeBackground()) {
+            legal = true; // commander with background
+        }
+        if (isDoctor() && b.hasKeyword("Doctor's companion")
+                || hasKeyword("Doctor's companion") && b.isDoctor()) {
+            legal = true; // Doctor Who partner commander
+        }
+        return legal;
+    }
+
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background"));
+                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
+                hasKeyword("Doctor's companion") || isDoctor());
     }
 
     public boolean canBeBackground() {
         return mainPart.getType().hasSubtype("Background");
+    }
+
+    public boolean isDoctor() {
+        for (String type : mainPart.getType().getSubtypes()) {
+            if (!type.equals("Time Lord") && !type.equals("Doctor")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean canBeOathbreaker() {

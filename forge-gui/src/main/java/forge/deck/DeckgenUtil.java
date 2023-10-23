@@ -729,17 +729,8 @@ public class DeckgenUtil {
                 //check for partner commanders
                 List<PaperCard> partners = new ArrayList<>();
                 for (PaperCard c : preSelectedCards) {
-                    if (c.getRules().canBePartnerCommander()) {
-                        if (commander.getRules().hasKeyword("Partner") && commander.getRules().getPartnerWith().isEmpty() && c.getRules().hasKeyword("Partner") && c.getRules().getPartnerWith().isEmpty())
-                            partners.add(c);
-                        else if (commander.getRules().getPartnerWith().equals(c.getName()) && c.getRules().getPartnerWith().equals(commander.getName()))
-                            partners.add(c);
-                        else if (commander.getRules().hasKeyword("Friends forever") && c.getRules().hasKeyword("Friends forever"))
-                            partners.add(c);
-                        else if (commander.getRules().hasKeyword("Choose a Background") && c.getRules().canBeBackground())
-                            partners.add(c);
-                        else if (c.getRules().hasKeyword("Choose a Background") && commander.getRules().canBeBackground())
-                            partners.add(c);
+                    if (c.getRules().canBePartnerCommanders(commander.getRules())) {
+                        partners.add(c);
                     }
                 }
 
@@ -799,7 +790,7 @@ public class DeckgenUtil {
                     //check for partner commanders
                     List<PaperCard> partners = new ArrayList<>();
                     for (PaperCard c : colorList) {
-                        if (c.getRules().canBePartnerCommander()) {
+                        if (c.getRules().canBePartnerCommanders(commander.getRules())) {
                             partners.add(c);
                         }
                     }
