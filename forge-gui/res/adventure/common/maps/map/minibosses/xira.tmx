@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="104">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="104">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
  </layer>
  <layer id="9" name="Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJy1l11uwjAQhHOOEqcSoFyzLQ+cpVyhUlELV+GBYzRWGTEMs44tWkurEsX2fp79iTukrhsme/4H+4sxCN9ysvPiautGJl2PPR7l+77s+/7Uddv+1/LvbOpPuZkJa9je+lufmF/DzfqdpjWb/ur3FPiDrSvn6dl2AXeJL58prwHfKl33ee1/Tf1ibsTn1ujaWj74GEWTvI/OgelcjWm6vCudrYVvTPexZb59ut/f8YEt24H+KmdNDcH3QfJ9RxpxjjKj5hPmp4K9BDGPctH1F/Y3pPs5zBjpVjKnt4v12vjmtayd9nD1sSG2L+Hh56U5G4+dPLNv1o7zTudoTF28tZ+4XHB8pfiyJhHfXK+rtdoR+dbYDkFs5gw1m3MMtYF+inetfE477n+lvsv+UcvoMfobz/tCH3TaOD68R43uTT9jJtjnZB9BHbfEV/Mq5/JRtNuY/sGaOwZ3zui+0cLHGvK3mX1rPsKP4wNXKS8cL/PxvSr67rL/qJbZh6ur6L6h+jDfgc6acytzHg0fa1jTa86LWyb+xkQ5jHngY85S3TJfS6+JcnMuh10ezvGxJlFfcbHTvGzlyyNrwjlTurO7ePDeLnZcP25/jo2rZ/QQp1nUf1lnV7dun+g7jHfb3v/PUhO/URhWQT+r0d7ZGPRB1Gxk0d0OcSyZMkQ+IrZHRqmuovpvGT+EkeM6
+   eJy1l11uwjAQhHOOkqQSQrlmWx44S7lCpVYtXIUHjlFWMGIYZh1btJZWJYrt/Tz7E3ccum482fM/2F+MUfiWJzsurrZqZNL12ONRvp/Lvu9PXbfpzxa/w9SfcjMT1rC99bc+Mb+Gm/U7nNas+6vfQ+IPtqqcp2fbJtwlvjhTrAFfPGOf1/5s6hdzMz63RtfW8sHHJJrEPjoHpnM1psPlXelsLXzTcB9b5vsa7vd3fGAL29FfXq9xz3IRvneS71vSiHOUfWg+Yf5QsJck5lkuuv7C/sbhfo7q4HQrmdPbxXplfPNa1k57uPpYE9u38PDz0pyNx1ae2Tdrx3mnczSmLt7aT1wuOL5SfFmTjG+u19Va7ch8a2zHJDZzht4SOYbaQD/Fu1Y+px33v1LfZf+oZfQY/c19Z46PtXF8eI8ajT2Vk5lgnyf7SOq4Jb6aV5HLe9FubfoHa+4Y3Dmz+0YLH2vI32b2rfkIP44PXKW8cLzMx/eq7LvL/rNaZh+urrL7hurDfDs6a+RWcO4NH2tY02uOi1sm/sZkOYx54GPOUt0yX0uvyXJzLoddHs7xsSZZX3Gx07xs5YsRmnDOlO7sLh68t4sd14/bn2Pj6hk9xGmW9V/W2dWt2yf7DuPdpvf/s9TEbxKGrJ/VaO9sSvogajaz7G6HOJZMGTIfGdsjo1RXWf23jF9uYeN3
   </data>
  </layer>
  <layer id="10" name="Clutter" width="40" height="26">

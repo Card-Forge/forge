@@ -883,7 +883,7 @@ public class ComputerUtilCard {
                     }
                 }
                 // special rule for Fabricate and Servo
-                if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
+                if (c.hasKeyword(Keyword.FABRICATE)) {
                     Integer count = typesInDeck.getOrDefault("Servo", 0);
                     typesInDeck.put("Servo", count + weight);
                 }

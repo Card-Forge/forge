@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="97">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="97">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -13,12 +13,12 @@
  </layer>
  <layer id="9" name="Foreground" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJzt0LsJACAMANEUNg7hUC7uGM4hQRxAyIfAvSZdckQkzhyBxwAgwWrZBX92v1O7I9otb2j76/Zq9/6L9W7vf3io1gsAAFDNAeMHDps=
+   eJzt0LENABAQRmGFxhB2sIrFjWEOuYhOI+5O4X2Nzv9yIfip2XEMAB5o8XXBmZ7mK90e7Zob0r66rdqt76L9t/U9dsrllncvAADAbwba4Q7P
   </data>
  </layer>
  <layer id="8" name="Walls" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlEEOwyAMBHNo1PY3eUcf2HNv+UmPfVOFIlTLIng3GCtIXcmHELMeMDBNcXpdtxhNf+5YRXN/LuVgdRZudg2R3Ahzb262nsfZyMrMkvs9/8KqjyqSWXJbPWX2ukWSOYdmTmO1enL8cbdrHumRlmbUvDlq+7zecGaWW/dShuRbyHOQvlFelHGvt8g4+jYdPa9oLZSxlMPWZ5jRdVg5lr83tzWvlPNU/2tzGA6WuyXfWi/qzTKwd6N1PiP27nn5npEZ8ffy7KUe3CXfHvL0juT2lOYeRaPtc9IX51/7sw==
+   eJztlEEOwyAMBHNI1fQ3fUcf2HNv/UmOeVOFIqvIong3GCtIXcmHELMeMDBNcXpd9xhNf+5YRXNvczlYnYWbXUMkN8Lcm5ut53E2RMKcc6+Xb1j1UUUy59xWT5m9blHOLKGZ01itXj7+uNk1j/RISzNqXonaPr8XnJnl1r2U0Hx38hykb5QXZfzVW2QcfZuOnle0FspYymHrM8zoOqwcy9+b25pXynmq/7U5DAfL3ZJvrRf1ZhnYu9E6nxF797x8z8iM+Ht59lIP7pJvD3l6R3J7SnOPotH2OekDo477rA==
   </data>
  </layer>
  <layer id="6" name="Clutter" width="46" height="25">
@@ -26,7 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0FOwzAQRY3UhS1xGNbdIkGU27HhClXdnqWXKBiOQUfNV8bDuBmbyAKJL3kRN7afv2fGqXP9NATnxtBxwZX0z91Xvbmjd+4g2tHXz9Obe1DWOof6PfTkJq/fL2u9TM8fIW97f92Dhb2VWztvCzP0qayZpj6w7wtzRv99jrhwXvidGE6bvN1iJu381VeNmYv7Ltmxf8kMT0ZlLyVe8JSUlDmXpMUM+Hg+HBgzcdB+bnlrZYZq43GY1uRjZE5jbTRifrq055Cz8fwh4dmiZIgPKDKv4Dn6HjZzk75TewvzWOnTmjVIy2+evzj7IejnzL3U/Jfc1nq1xFgS+MYwe72b8rTVS8QZzsnCH5U8kf5w7/DOOeQxA/4WL5MYY4kZmvfV5ayleE+MncbIWqCtZ61ZnN2Sb/yMLOeTCv6XuDHGwmJ9j98Lj/f1uSH30JJbVsm7SspaE6USY1/ju1IyI3+0vGtlluyk7d3c/5PaXPpWWFtgt+S5RbgfSDV1skU1d/CSODdpjbjoIc79l/631tb136Av7LjqTw==
+   eJztl0FOwzAQRY3UhS1xGNbdIkGU27HhClXdnqWXKBiOQUfNV8bDuBmbyAKJL3kRN7afv2fGqXP9NATnxtBxwZX0z91Xvbmjd+4g2tHXz9Obe1DWOof6PfTkJq/fL2u9TM8fIW97f92Dhb2VWztvCzP0qayZpj6w7wtzRv99jrhwXvidGE6bvN1iJu381VeNmYv7Ltmxf8kMT0ZlLyVe8JSUlDmXpMUM+Hg+HBgzcdB+bnlrZYZq43GY1uRjZE5jbTRifrq055Cz8fwh4dmiZIgPKDKv4Dn1PWzyJn2n9hbmsdKnNWuQlt88f3H2Q9DPmXup+S+5rfVqibEk8I1h9n835Wmrl4gznJOFPyp5Iv3h3uGdc8hjBvwtXiYxxhIzNO+ry1lL8Z4YO42RtUBbz1qzOLsl3/gZWc4nFfwvcWOMhcX6Hr8XHu/rc0PuoSW3rJJ3lZS1Jkolxr7Gd6VkRv5oedfKLNlJ27u5/ye1ufStsLbAbslzi3A/kGrqZItq7uAlcW7SGnHRQ5z7L/1vra3rv0Ff4nTplQ==
+  </data>
+ </layer>
+ <layer id="10" name="Clutter 2" width="46" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztziEBAAAIA7Bb+mekBw0QGMyWYAkAwE3X9wAAgM0AFBYA7w==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
