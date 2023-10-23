@@ -1,11 +1,13 @@
-Name:The First Doctor
-ManaCost:1 W U
+Name:The Second Doctor
+ManaCost:2 W U
 Types:Legendary Creature Time Lord Doctor
-PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library and/or graveyard for a card named TARDIS, reveal it, and put it into your hand. If you search your library this way, shuffle.
-SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Card.YouOwn+namedTARDIS
-T:Mode$ SpellCast | ValidCard$ Card.withCascade | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell with cascade, put a +1/+1 counter on target artifact or creature
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | CounterType$ P1P1 | CounterNum$ 1 
-DeckNeeds:Name$TARDIS
-DeckHas:Ability$Counters
-Oracle:When The First Doctor enters the battlefield, search your library and/or graveyard for a card named TARDIS, reveal it, and put it into your hand. If you search your library this way, shuffle.\nWhenever you cast a spell with cascade, put a +1/+1 counter on target artifact or creature
+PT:2/4
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ How Civil of You — At the beginning of your end step, each player may draw a card. Each opponent who does can't attack you or permanents you control during their next turn.
+SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBAllowDraw
+SVar:DBAllowDraw:DB$ Draw | OptionalDecider$ True | Defined$ Remembered | RememberDrawn$ True | NumCards$ 1 | SubAbility$ DBEffect 
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.IsRemembered | Target$ You,Planeswalker.YouCtrl | Description$ Each opponent who does can't attack you or permanents you control during their next turn.
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.PlayerUID_ChosenPlayerUID:Protection from ChosenPlayerName | DefinedKW$ RememberedController.Opponent | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Players have no maximum hand size.\nHow Civil of You — At the beginning of your end step, each player may draw a card. Each opponent who does can't attack you or permanents you control during their next turn.

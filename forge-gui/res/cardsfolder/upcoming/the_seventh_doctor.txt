@@ -1,0 +1,15 @@
+Name:The Seventh Doctor
+ManaCost:3 W U
+Types:Legendary Creature Time Lord Doctor
+PT:3/6
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGuess | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose a card in your hand. That player guesses whether the card's mana value is greater than 4. If the player guessed wrong, you may cast the card without paying its mana cost.
+SVar:TrigGuess:DB$ ChooseCard | ChoiceZone$ Hand | Defined$ You | Choices$ Card.YouOwn | AILogic$ RandomNonLand | SubAbility$ DBGuess
+SVar:DBGuess:DB$ GenericChoice | Defined$ TriggeredTarget | Choices$ GuessGreaterArtifacts,GuessNotGreaterArtifacts | AILogic$ Random | ShowChoice$ True
+SVar:GuessGreaterArtifacts:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcLEX+nonLand | ConditionCompare$ GE1 | SubAbility$ DBCleanup | SpellDescription$ That card's mana value is greater the number of artifact attacking player controls
+SVar:GuessNotGreaterArtifacts:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ValidSA$ Spell | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcGTX+nonLand | SubAbility$ DBCleanup | ConditionCompare$ GE1 | SpellDescription$ That card's mana value is not greater than the number of artifact attacking player controls
+SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:HasAttackEffect:True
+DeckHas:Ability$Token & Type$Clue|Artifact
+Oracle:When The Seventh Doctor attacks, choose a card in your hand. Defending player guesses whether that card's mana value is greater than the number of artifacts you control. If they guessed wrong, you may cast it without paying its mana cost. If you don't cast a spell this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
