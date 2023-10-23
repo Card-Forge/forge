@@ -224,7 +224,6 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 return false;
-
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Pump")) {
