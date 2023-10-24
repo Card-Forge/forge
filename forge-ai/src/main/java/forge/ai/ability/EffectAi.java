@@ -3,20 +3,14 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
+import forge.ai.*;
+import forge.game.keyword.Keyword;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -208,19 +202,37 @@ public class EffectAi extends SpellAbilityAi {
                 return false;
             } else if (logic.equals("NoGain")) {
             	// basic logic to cancel GainLife on stack
-                if (game.getStack().isEmpty()) {
-                    return false;
-                }
-                SpellAbility topStack = game.getStack().peekAbility();
-                final Player tgtPlayer = topStack.getActivatingPlayer();
-                if (tgtPlayer.isOpponentOf(ai) && tgtPlayer.canGainLife()) {
-                    while (topStack != null) {
-                        if (topStack.getApi() == ApiType.GainLife) {
-                            if ("You".equals(topStack.getParam("Defined")) || topStack.isTargeting(tgtPlayer)) {
+                if (!game.getStack().isEmpty()) {
+                    SpellAbility topStack = game.getStack().peekAbility();
+                    final Player activator = topStack.getActivatingPlayer();
+                    if (activator.isOpponentOf(ai) && activator.canGainLife()) {
+                        while (topStack != null) {
+                            if (topStack.getApi() == ApiType.GainLife) {
+                                if ("You".equals(topStack.getParam("Defined")) || topStack.isTargeting(activator)) {
+                                    return true;
+                                }
+                            } else if (topStack.getApi() == ApiType.DealDamage && topStack.getHostCard().hasKeyword(Keyword.LIFELINK)) {
                                 return true;
                             }
+                            topStack = topStack.getSubAbility();
                         }
-                        topStack = topStack.getSubAbility();
+                    }
+                }
+                // also check for combat lifelink
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    final Combat combat = game.getCombat();
+                    final Player attackingPlayer = combat.getAttackingPlayer();
+                    if (combat != null && attackingPlayer.isOpponentOf(ai) && attackingPlayer.canGainLife()) {
+                        for (Card attacker : combat.getAttackers()) {
+                            int netDamage = attacker.getNetCombatDamage();
+                            if (attacker.hasKeyword(Keyword.LIFELINK) && netDamage > 0) {
+                                int damage = ComputerUtilCombat.predictDamageTo(combat.getDefenderByAttacker(attacker), netDamage, attacker, true);
+                                boolean prevented = ComputerUtilCombat.isCombatDamagePrevented(attacker, combat.getDefenderByAttacker(attacker), damage);
+                                if (damage > 0 && !prevented) {
+                                    return true;
+                                }
+                            }
+                        }
                     }
                 }
                 return false;
