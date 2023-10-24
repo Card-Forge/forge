@@ -1,29 +1,19 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
-import forge.ai.*;
-import forge.game.keyword.Keyword;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
+import forge.ai.*;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -38,6 +28,10 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import java.util.List;
+import java.util.Map;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -212,7 +206,13 @@ public class EffectAi extends SpellAbilityAi {
                                     return true;
                                 }
                             } else if (topStack.getApi() == ApiType.DealDamage && topStack.getHostCard().hasKeyword(Keyword.LIFELINK)) {
-                                return true;
+                                Card host = topStack.getHostCard();
+                                for (GameEntity target : topStack.getTargets().getTargetEntities()) {
+                                    if (ComputerUtilCombat.predictDamageTo(target,
+                                            AbilityUtils.calculateAmount(host, topStack.getParam("NumDmg"), topStack), host, false) > 0) {
+                                        return true;
+                                    }
+                                }
                             }
                             topStack = topStack.getSubAbility();
                         }
