@@ -8,7 +8,7 @@ SVar:DBGuess:DB$ GenericChoice | Defined$ TriggeredDefender | Choices$ GuessGrea
 SVar:GuessGreaterArtifacts:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcLEX+nonLand | RememberPlayed$ True | ConditionCompare$ GE1 | SubAbility$ DBInvestigate | SpellDescription$ That card's mana value is greater the number of artifact attacking player controls
 SVar:GuessNotGreaterArtifacts:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ValidSA$ Spell | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcGTX+nonLand | RememberPlayed$ True | SubAbility$ DBInvestigate | ConditionCompare$ GE1 | SpellDescription$ That card's mana value is not greater than the number of artifact attacking player controls
 SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:HasAttackEffect:True
 DeckHas:Ability$Token & Type$Clue|Artifact
