@@ -2643,25 +2643,6 @@ public class AbilityUtils {
                         tally = 1;
                     }
                 }
-                /**
-                for (int i = 0; i < rolls.size(); i++) {
-                    Integer num = rolls.get(i);
-                    if (!num.equals(lastNum)) {
-                        lastNum = num;
-                        int counter = 0;
-                        for (int n = i; n < rolls.size(); n++) {
-                            Integer roll = rolls.get(n);
-                            if (num.equals(roll)) {
-                                counter++;
-                            } else if (num < roll) {
-                                break;
-                            }
-                        }
-                        if (counter > max) {
-                            max = counter;
-                        }
-                    }
-                }**/
             }
             return doXMath(max, expr, c, ctb);
         }
