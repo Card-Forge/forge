@@ -35,6 +35,7 @@ public enum ReplacementType {
     Moved(ReplaceMoved.class),
     PayLife(ReplacePayLife.class),
     PlanarDiceResult(ReplacePlanarDiceResult.class),
+    Planeswalk(ReplacePlaneswalk.class),
     ProduceMana(ReplaceProduceMana.class),
     Proliferate(ReplaceProliferate.class),
     RemoveCounter(ReplaceRemoveCounter.class),

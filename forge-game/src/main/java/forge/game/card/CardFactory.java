@@ -329,7 +329,7 @@ public class CardFactory {
         String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
                 "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
 
-        String rolledWalk = "DB$ Planeswalk";
+        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
 
         Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
         planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
