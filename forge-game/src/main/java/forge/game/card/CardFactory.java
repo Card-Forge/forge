@@ -31,6 +31,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
@@ -689,6 +690,23 @@ public class CardFactory {
 
         if (sa.hasParam("AddKeywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+        }
+
+        if (sa.hasParam("AddKeywordsIfNew")) {
+            List<KeywordInterface> inKW = in.getKeywords();
+            for (String k : sa.getParam("AddKeywordsIfNew").split(" & ")) {
+                Keyword toAdd = Keyword.getInstance(k).getKeyword();
+                boolean match = false;
+                for (KeywordInterface kw : inKW) {
+                    if (kw.getKeyword().equals(toAdd)) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) {
+                    keywords.add(k);
+                }
+            }
         }
 
         if (sa.hasParam("RemoveKeywords")) {
