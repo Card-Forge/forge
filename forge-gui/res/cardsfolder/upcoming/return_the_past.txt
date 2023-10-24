@@ -1,0 +1,7 @@
+Name:Return the Past
+ManaCost:4 R R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Instant.YouOwn,Sorcery.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Flashback | Condition$ PlayerTurn | Description$ As long as it's your turn, each instant and sorcery card in your graveyard has flashback. Its flashback cost is equal to its mana cost.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:As long as it's your turn, each instant and sorcery card in your graveyard has flashback. Its flashback cost is equal to its mana cost.
