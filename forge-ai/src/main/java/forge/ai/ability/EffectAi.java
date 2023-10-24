@@ -225,7 +225,7 @@ public class EffectAi extends SpellAbilityAi {
                     if (combat != null && attackingPlayer.isOpponentOf(ai) && attackingPlayer.canGainLife()) {
                         for (Card attacker : combat.getAttackers()) {
                             int netDamage = attacker.getNetCombatDamage();
-                            if (attacker.hasKeyword(Keyword.LIFELINK) && netDamage > 0) {
+                            if ((attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasSVar("LikeLifeLink")) && netDamage > 0) {
                                 int damage = ComputerUtilCombat.predictDamageTo(combat.getDefenderByAttacker(attacker), netDamage, attacker, true);
                                 boolean prevented = ComputerUtilCombat.isCombatDamagePrevented(attacker, combat.getDefenderByAttacker(attacker), damage);
                                 if (damage > 0 && !prevented) {
