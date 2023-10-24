@@ -621,6 +621,12 @@ public class ComputerUtil {
         // don't sacrifice the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
 
+        // if the source has "Casualty", don't sacrifice cards that may have granted the effect
+        // TODO: is there a surefire way to determine which card added Casualty?
+        if (source.hasKeyword(Keyword.CASUALTY)) {
+            typeList = CardLists.filter(typeList, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+        }
+
         if (typeList.size() < amount) {
             return null;
         }
