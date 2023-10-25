@@ -2630,8 +2630,7 @@ public class AbilityUtils {
             List<Integer> rolls = c.getStoredRolls();
             if (rolls != null) {
                 int lastNum = 0;
-                for (int i = 0; i < rolls.size(); i++) {
-                    Integer roll = rolls.get(i);
+                for (Integer roll : rolls) {
                     if (roll.equals(lastNum)) {
                         continue; // no need to count instances of the same roll multiple times
                     }
