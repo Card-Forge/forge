@@ -206,7 +206,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
 
         if (sa.hasParam("StoreResults")) {
-            host.setStoredRolls(rolls);
+            host.addStoredRolls(rolls);
         }
         if (sa.hasParam("ResultSVar")) {
             sa.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));

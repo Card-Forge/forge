@@ -2629,19 +2629,17 @@ public class AbilityUtils {
             int max = 0;
             List<Integer> rolls = c.getStoredRolls();
             if (rolls != null) {
-                int lastNum = 1;
-                int tally = 0;
+                int lastNum = 0;
                 for (int i = 0; i < rolls.size(); i++) {
                     Integer roll = rolls.get(i);
                     if (roll.equals(lastNum)) {
-                        tally++;
-                    } else {
-                        if (tally > max) {
-                            max = tally;
-                        }
-                        lastNum = roll;
-                        tally = 1;
+                        continue; // no need to count instances of the same roll multiple times
                     }
+                    int tally = Collections.frequency(rolls, roll);
+                    if (tally > max) {
+                        max = tally;
+                    }
+                    lastNum = roll;
                 }
             }
             return doXMath(max, expr, c, ctb);
