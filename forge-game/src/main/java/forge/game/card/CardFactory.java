@@ -673,6 +673,7 @@ public class CardFactory {
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
         final List<String> keywords = Lists.newArrayList();
+        boolean KWifNew = false;
         final List<String> removeKeywords = Lists.newArrayList();
         List<String> creatureTypes = null;
         final CardCloneStates result = new CardCloneStates(in, sa);
@@ -689,24 +690,11 @@ public class CardFactory {
         }
 
         if (sa.hasParam("AddKeywords")) {
-            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
-        }
-
-        if (sa.hasParam("AddKeywordsIfNew")) {
-            List<KeywordInterface> inKW = in.getKeywords();
-            for (String k : sa.getParam("AddKeywordsIfNew").split(" & ")) {
-                Keyword toAdd = Keyword.getInstance(k).getKeyword();
-                boolean match = false;
-                for (KeywordInterface kw : inKW) {
-                    if (kw.getKeyword().equals(toAdd)) {
-                        match = true;
-                        break;
-                    }
-                }
-                if (!match) {
-                    keywords.add(k);
-                }
-            }
+            String kwString = sa.getParam("AddKeywords");
+            if (kwString.startsWith("IfNew"))
+                KWifNew = true;
+                kwString = kwString.substring(6);
+            keywords.addAll(Arrays.asList(kwString.split(" & ")));
         }
 
         if (sa.hasParam("RemoveKeywords")) {
@@ -821,7 +809,23 @@ public class CardFactory {
                 state.setCreatureTypes(creatureTypes);
             }
 
-            state.addIntrinsicKeywords(keywords);
+            List<String> finalizedKWs = KWifNew ? Lists.newArrayList() : keywords;
+            if (KWifNew) {
+                for (String k : keywords) {
+                    Keyword toAdd = Keyword.getInstance(k).getKeyword();
+                    boolean match = false;
+                    for (KeywordInterface kw : state.getIntrinsicKeywords()) {
+                        if (kw.getKeyword().equals(toAdd)) {
+                            match = true;
+                            break;
+                        }
+                    }
+                    if (!match) {
+                        finalizedKWs.add(k);
+                    }
+                }
+            }
+            state.addIntrinsicKeywords(finalizedKWs);
             for (String kw : removeKeywords) {
                 state.removeIntrinsicKeyword(kw);
             }
