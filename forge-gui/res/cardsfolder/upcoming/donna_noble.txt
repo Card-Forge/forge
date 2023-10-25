@@ -1,0 +1,10 @@
+Name:Donna Noble
+ManaCost:3 R
+Types:Legendary Creature Human
+PT:2/4
+K:Soulbond
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self,Creature.PairedWith | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or a creature it's paired with is dealt damage, NICKNAME deals that much damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+K:Doctor's companion
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nWhenever Donna or a creature it's paired with is dealt damage, Donna deals that much damage to target opponent.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

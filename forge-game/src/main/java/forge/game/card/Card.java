@@ -2199,7 +2199,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
                         || keyword.equals("Friends forever") || keyword.equals("Choose a Background")
-                        || keyword.equals("Space sculptor")) {
+                        || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");

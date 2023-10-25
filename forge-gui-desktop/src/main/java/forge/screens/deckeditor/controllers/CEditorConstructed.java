@@ -218,7 +218,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 else { //replace existing commander unless new commander is valid partner commander
                     if (count == 1 && newCard.getRules().canBePartnerCommander()) { //replace existing partners regardless
                         PaperCard commander = editor.getDeckManager().getPool().toFlatList().get(0);
-                        if (!commander.getRules().canBePartnerCommander()) {
+                        if (!commander.getRules().canBePartnerCommanders(newCard.getRules())) {
                             editor.getDeckManager().removeAllItems();
                         }
                     }
