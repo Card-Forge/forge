@@ -1,7 +1,7 @@
 Name:Barbarian Class
 ManaCost:R
 Types:Enchantment Class
-R:Event$ RollDice | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
 SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreLowest
 SVar:IgnoreLowest:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
 K:Class:2:1 R:AddTrigger$ TriggerRoll
