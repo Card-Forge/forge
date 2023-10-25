@@ -1,0 +1,10 @@
+Name:Sibylline Soothsayer
+ManaCost:2 R
+Types:Creature Human Warlock
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Temporal Foresight — When CARDNAME enters the battlefield, reveal cards from the top of your library until you reveal a nonland card with mana value 3 or greater. Exile that card with three time counters on it. If it doesn’t have suspend, it gains suspend. Put the rest of the revealed cards on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.nonLand+cmcGE3 | ValidDescription$ nonland permanent with mana value 3 or greater | FoundDestination$ Exile | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ Pump | Defined$ Remembered.withoutSuspend | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Temporal Foresight — When Sibylline Soothsayer enters the battlefield, reveal cards from the top of your library until you reveal a nonland card with mana value 3 or greater. Exile that card with three time counters on it. If it doesn't have suspend, it gains suspend. Put the rest of the revealed cards on the bottom of your library in a random order.
