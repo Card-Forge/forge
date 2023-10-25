@@ -1203,7 +1203,7 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        if (mode == PlayerActionConfirmMode.AlternativeDamageAssignment || mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
+        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
             System.err.printf("Overriding AI confirmAction decision for %s, defaulting to true.\n", mode);
             return true;
         }
@@ -1232,7 +1232,7 @@ public class AiController {
         return false;
     }
 
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+    public boolean confirmStaticApplication(Card hostCard, String logic) {
         return true;
     }
 

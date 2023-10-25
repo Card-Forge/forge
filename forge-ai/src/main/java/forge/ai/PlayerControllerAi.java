@@ -252,8 +252,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        return getAi().confirmStaticApplication(hostCard, affected, logic, message);
+    public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
+        return getAi().confirmStaticApplication(hostCard, logic);
     }
 
     @Override
