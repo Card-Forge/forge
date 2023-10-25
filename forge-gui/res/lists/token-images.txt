@@ -2413,10 +2413,12 @@ copy_voc.jpg https://downloads.cardforge.org/images/tokens/copy_voc.jpg
 copy_vow.jpg https://downloads.cardforge.org/images/tokens/copy_vow.jpg
 copy_woc.jpg https://downloads.cardforge.org/images/tokens/copy_woc.jpg
 copy_znr.jpg https://downloads.cardforge.org/images/tokens/copy_znr.jpg
+cyberman.jpg https://downloads.cardforge.org/images/tokens/cyberman.jpg
 day_mid.jpg https://downloads.cardforge.org/images/tokens/day_mid.jpg
 foretell.jpg https://downloads.cardforge.org/images/tokens/foretell.jpg
 foretell_khm.jpg https://downloads.cardforge.org/images/tokens/foretell_khm.jpg
 hidden.jpg https://downloads.cardforge.org/images/tokens/hidden.jpg
+horror.jpg https://downloads.cardforge.org/images/tokens/horror.jpg
 initiative.jpg https://downloads.cardforge.org/images/tokens/initiative.jpg
 manifest.jpg https://downloads.cardforge.org/images/tokens/manifest.jpg
 manifest_cmm.jpg https://downloads.cardforge.org/images/tokens/manifest_cmm.jpg
