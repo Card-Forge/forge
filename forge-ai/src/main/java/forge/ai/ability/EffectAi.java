@@ -241,11 +241,10 @@ public class EffectAi extends SpellAbilityAi {
                     SpellAbility topStack = game.getStack().peekAbility();
                     final Player activator = topStack.getActivatingPlayer();
                     if (activator.isOpponentOf(ai)) {
-                        boolean changeZone = (topStack.getApi() == ApiType.ChangeZone || topStack.getApi() == ApiType.ChangeZoneAll)
-                                && "Battlefield".equals(topStack.getParam("Destination"));
-                        boolean reanimator = "true".equalsIgnoreCase(topStack.getSVar("IsReanimatorCard"))
-                                && (topStack.getApi() == ApiType.ChangeZone || topStack.getApi() == ApiType.ChangeZoneAll);
-                        if (changeZone || reanimator) {
+                        boolean changeZone = topStack.getApi() == ApiType.ChangeZone || topStack.getApi() == ApiType.ChangeZoneAll;
+                        boolean toBattlefield = "Battlefield".equals(topStack.getParam("Destination"));
+                        boolean reanimator = "true".equalsIgnoreCase(topStack.getSVar("IsReanimatorCard"));
+                        if (changeZone && (toBattlefield || reanimator)) {
                             if ("Creature".equals(topStack.getParam("ChangeType")) || topStack.getParamOrDefault("Defined", "").contains("Creature"))
                                 return true;
                         }
