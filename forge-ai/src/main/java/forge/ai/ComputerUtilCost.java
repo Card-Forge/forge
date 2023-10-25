@@ -598,6 +598,20 @@ public class ComputerUtilCost {
             }
         }
 
+        // Bail early on Casualty in case there are no cards that would make sense to pay with
+        if (sa.getHostCard().hasKeyword(Keyword.CASUALTY)) {
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostSacrifice) {
+                    CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
+                            sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    valid = CardLists.filter(valid, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+                    if (valid.isEmpty()) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded, effect)
                 && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }

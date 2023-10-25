@@ -235,13 +235,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        ZoneType origin = null;
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        List<ZoneType> origin = null;
         final Player opponent = AiAttackController.choosePreferredDefenderPlayer(ai);
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         if (sa.hasParam("Origin")) {
             try {
-                origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+                origin = ZoneType.listValueOf(sa.getParam("Origin"));
             } catch (IllegalArgumentException ex) {
                 // This happens when Origin is something like
                 // "Graveyard,Library" (Doomsday)
@@ -366,8 +367,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 });
             }
-            // TODO: prevent ai seaching its own library when Ob Nixilis, Unshackled is in play
-            if (origin != null && origin.isKnown()) {
+            // TODO: prevent ai searching its own library when Ob Nixilis, Unshackled is in play
+            if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
+                // FIXME: make this properly interact with several origin zones
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
@@ -422,7 +424,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
             // Only tutor something in main1 if hand is almost empty
-            if (ai.getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")) {
+            if (ai.getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")
+                    && !aiLogic.equals("AnyMainPhase")) {
                 return false;
             }
         }
