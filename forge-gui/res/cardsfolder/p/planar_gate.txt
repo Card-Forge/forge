@@ -1,5 +1,5 @@
 Name:Planar Gate
 ManaCost:6
 Types:Artifact
-S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast cost up to {2} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | UpTo$ True | Description$ Creature spells you cast cost up to {2} less to cast.
 Oracle:Creature spells you cast cost up to {2} less to cast.

@@ -34,6 +34,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class CostAdjustment {
 
@@ -169,7 +170,7 @@ public class CostAdjustment {
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        if (sa.isTrigger()) {
+        if (sa.isTrigger() || sa.isReplacementAbility()) {
             return;
         }
 
@@ -212,8 +213,10 @@ public class CostAdjustment {
             sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
         }
 
-        for (final StaticAbility stAb : reduceAbilities) {
-            sumGeneric += applyReduceCostAbility(stAb, sa, cost, sumGeneric);
+        while (!reduceAbilities.isEmpty()) {
+            StaticAbility choice = sa.getActivatingPlayer().getController().chooseSingleStaticAbility(Localizer.getInstance().getMessage("lblChooseCostReduction"), reduceAbilities);
+            reduceAbilities.remove(choice);
+            sumGeneric += applyReduceCostAbility(choice, sa, cost, sumGeneric);
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
@@ -400,6 +403,10 @@ public class CostAdjustment {
             value = AbilityUtils.calculateAmount(hostCard, staticAbility.hasSVar(amount) ? staticAbility.getSVar(amount) : amount, sa);
         } else {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
+        }
+
+        if (staticAbility.hasParam("UpTo")) {
+            value = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, value);
         }
 
         if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
