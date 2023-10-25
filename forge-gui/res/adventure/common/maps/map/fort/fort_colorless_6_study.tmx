@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="71">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="75">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,7 +9,7 @@
  <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkEKwkAMRUs3UgRxI3gBryB4AY/o2qMWkdAh/CR/MjPioh8+ZWjJm0ySttO0y9JziT2Kx+zD0nzczOh22KzX2pFY5vvCuTf3IytmS75SD1QblJOXK8MVob7w6ldTazHqO49r5VQ6up/hRn4tsRkuUsSq7SvNYrger5btycs1y/XyLeM/Tnl7uVpX2XtPbq9+Zs18x/6F23LOEVefd6/6ov623hWai+aj5oyzQjMs8UYxdWyZ6SjvXiq51p5+yUXsVpX/ftqZ5zKS3r+ev+v7bM/mCCHuLk4rzVt4Ow==
+   eJztlksKwlAMRUsnUpw4EdyAW+gSukTHLlWkhIZwk9z3Qwc9cJHS+k7T5FWn6cRjW/KM8jH34TFfjzA8L0fssU0G63zfufT2fvHWbKlX+oF6g2qKamW8ApqLqH8lvZaguYu8Xk062fkab5bXkofxIjJX6VxZF+ONfKXuiKjWWm9Ur16/N7q/6LN0P7LOHvPMhvkd+xdvC5nXPm/9nR5ejfeusF5Ue8kzbr1nvYdlvVFOu7bd0yN8yG3fI7/yIncr+r+fTc11NcjsP2778Tr7e3MEyHvC8QFjWGeX
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
@@ -98,29 +98,96 @@
     <property name="waypoints" value="66,65"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/booster.tx" x="273.75" y="244.25">
+  <object id="71" template="../../obj/collision.tx" x="130" y="296.628" width="236.8" height="23.144"/>
+  <object id="72" template="../../obj/collision.tx" x="128.8" y="232.228" width="236.8" height="13.144"/>
+  <object id="74" template="../../obj/booster.tx" x="352.8" y="245.6">
    <properties>
     <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CSP&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CSP&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CSP&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
    </properties>
   </object>
  </objectgroup>
