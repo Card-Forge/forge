@@ -382,7 +382,12 @@ public class SpellSmithScene extends UIScene {
 
     public void pullCard(boolean usingShards) {
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
-        Reward R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+        Reward R = null;
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+        } else {
+            R = new Reward(P);
+        }
         Current.player().addReward(R);
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
