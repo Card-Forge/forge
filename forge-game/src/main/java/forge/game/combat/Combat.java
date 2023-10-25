@@ -713,7 +713,7 @@ public class Combat {
                 Player defender = null;
                 boolean divideCombatDamageAsChoose = blocker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
                                 "defending player and/or any number of creatures they control.")
-                        && blocker.getController().getController().confirmAction(null, null,
+                        && blocker.getController().getController().confirmStaticApplication(blocker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
                                 CardTranslation.getTranslatedName(blocker.getName())), null);
                 // choose defending player
