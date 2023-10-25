@@ -1171,3 +1171,34 @@ ScryfallCode=WHO
 1163 L Mountain @Svetlin Velinov
 1164 L Forest @Titus Lunter
 1165 L Forest @Svetlin Velinov
+
+[tokens]
+b_2_2_a_alien_angel_firststrike_vigilance
+b_2_2_human_rogue
+b_3_3_a_dalek_menace
+c_a_clue_draw
+c_a_clue_draw
+c_a_clue_draw
+c_a_food_sac
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_2_2_alien_salamander_islandwalk
+g_3_3_beast
+g_3_3_mutant_deathtouch
+gw_1_1_alien_insect_flying
+mark_of_the_rani
+r_2_2_alien_warrior
+rw_2_2_dinosaur_flying_haste
+u_1_1_fish
+w_1_1_human_doctor_reduce
+w_1_1_human_noble_vanishing_prevention
+w_1_1_human_ward
+w_1_1_soldier
+w_1_1_warrior
+w_2_2_alien
+w_2_2_alien_rhino
+w_2_2_horse_horsemanship
