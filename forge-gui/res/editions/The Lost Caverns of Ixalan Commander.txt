@@ -6,4 +6,24 @@ Type=Commander
 ScryfallCode=LCC
 
 [cards]
+1 M Admiral Brass, Unsinkable @Jason Rainville
+2 M Clavileno, First of the Blessed @Matt Stewart
+3 M Hakbal of the Surging Soul @Tyler Walpole
+4 M Pantlaza, Sun-Favored @Sam Burley
+17 M Admiral Brass, Unsinkable @Michael Walsh
+18 M Clavileno, First of the Blessed @Chun Lo
+19 M Hakbal of the Surging Soul @Anditya Dita
+20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
+25 M Admiral Brass, Unsinkable @Jason Rainville
+29 M Hakbal of the Surging Soul @Tyler Walpole
+30 M Pantlaza, Sun-Favored @Sam Burley
+103 R Amulet of Vigor @Chris Seaman
+104 U Arcane Signet @J.P. Targete
+105 M Chalice of the Void @Julie Dillon
 109 M Coercive Portal @Chris Ostrowski
+112 U Expedition Map @Julian Kok Joon Wen
+121 M Admiral Brass, Unsinkable @Jason Rainville
+123 M Hakbal of the Surging Soul @Tyler Walpole
+124 M Pantlaza, Sun-Favored @Sam Burley
+299 C Arcane Signet @Dan Scott
+346 C Path of Ancestry @Alayna Danner
