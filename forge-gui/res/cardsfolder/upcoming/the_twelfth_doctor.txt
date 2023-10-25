@@ -1,0 +1,10 @@
+Name:The Twelfth Doctor
+ManaCost:3 U R
+Types:Legendary Creature Time Lord Doctor
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.YouCtrl+wasNotCastFromYourHand  | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Demonstrate | Description$ The first spell you cast from anywhere other than your hand each turn has demonstrate. (When you cast that spell, you may copy it. If you do, choose an opponent to also copy it. A copy of a permanent spell becomes a token.)
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+wasNotCastFromYourHand
+T:Mode$ SpellCopy | ValidActivatingPlayer$ You | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you copy a spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:The first spell you cast from anywhere other than your hand each turn has demonstrate. (When you cast that spell, you may copy it. If you do, choose an opponent to also copy it. A copy of a permanent spell becomes a token.)\nWhenever you copy a spell, put a +1/+1 counter on The Twelfth Doctor.

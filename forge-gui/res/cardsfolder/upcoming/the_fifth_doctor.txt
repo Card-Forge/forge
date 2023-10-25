@@ -1,0 +1,10 @@
+Name:The Fifth Doctor
+ManaCost:2 W U
+Types:Legendary Creature Time Lord Doctor
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Peaceful Coexistence — At the beginning of your end step, put a +1/+1 counter on each creature you control that didn't attack or enter the battlefield this turn. Untap those creatures.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+!ThisTurnEntered+!attackedThisTurn | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl+!ThisTurnEntered+!attackedThisTurn
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Peaceful Coexistence — At the beginning of your end step, put a +1/+1 counter on each creature you control that didn't attack or enter the battlefield this turn. Untap those creatures.
