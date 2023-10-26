@@ -15,14 +15,17 @@ ScryfallCode=LCC
 19 M Hakbal of the Surging Soul @Anditya Dita
 20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
 25 M Admiral Brass, Unsinkable @Jason Rainville
+27 M Clavileno, First of the Blessed @Matt Stewart
 29 M Hakbal of the Surging Soul @Tyler Walpole
 30 M Pantlaza, Sun-Favored @Sam Burley
 103 R Amulet of Vigor @Chris Seaman
 104 U Arcane Signet @J.P. Targete
 105 M Chalice of the Void @Julie Dillon
+107 M Chromatic Orrery @Gaboleps
 109 M Coercive Portal @Chris Ostrowski
 112 U Expedition Map @Julian Kok Joon Wen
 121 M Admiral Brass, Unsinkable @Jason Rainville
+122 M Clavileno, First of the Blessed @Matt Stewart
 123 M Hakbal of the Surging Soul @Tyler Walpole
 124 M Pantlaza, Sun-Favored @Sam Burley
 299 C Arcane Signet @Dan Scott
