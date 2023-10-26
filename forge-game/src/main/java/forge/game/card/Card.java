@@ -352,6 +352,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private ReplacementEffect shieldCounterReplaceDamage = null;
     private ReplacementEffect shieldCounterReplaceDestroy = null;
     private ReplacementEffect stunCounterReplaceUntap = null;
+    private ReplacementEffect finalityReplaceDying = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -6489,13 +6490,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (getCounters(CounterEnumType.STUN) > 0) {
             String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Stun | CounterNum$ 1";
             if (stunCounterReplaceUntap == null) {
-                String reStr = "Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self  | Secondary$ True "
+                String reStr = "Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self | Secondary$ True "
             + "| Description$ If this permanent would become untapped, instead remove a stun counter from it.";
 
                 stunCounterReplaceUntap = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 stunCounterReplaceUntap.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
             list.add(stunCounterReplaceUntap);
+        }
+        if (getCounters(CounterEnumType.FINALITY) > 0) {
+            if (finalityReplaceDying == null) {
+                String reStr = "Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Secondary$ True "
+            + " | Description$ If CARDNAME would die, exile it instead.";
+                String sa = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard";
+
+                finalityReplaceDying = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                finalityReplaceDying.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+            list.add(finalityReplaceDying);
         }
     }
 
