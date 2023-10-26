@@ -1,0 +1,15 @@
+Name:Talion's Throneguard
+ManaCost:2 U U
+Types:Creature Faerie Wizard
+PT:2/1
+K:Flash
+K:Bargain
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target spell or nonland permanent to its owner's hand. If CARDNAME was bargained, that card perpetually gains "This spell costs {2} more to cast."
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtZone$ Stack,Battlefield | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Choose up to one target spell or nonland permanent | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ConditionDefined$ Self | ConditionPresent$ Card.bargained | StaticAbilities$ PerpetualAbility | Name$ Talion's Throneguard's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ RaiseCost | ValidCard$ Card.IsRemembered | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} more to cast.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice
+Oracle:Flash\nBargain\nFlying\nWhen Talion's Throneguard enters the battlefield, return up to one target spell or nonland permanent to its owner's hand. If Talion's Throneguard was bargained, that card perpetually gains "This spell costs {2} more to cast."
