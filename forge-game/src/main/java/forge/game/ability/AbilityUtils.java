@@ -2625,6 +2625,25 @@ public class AbilityUtils {
             return doXMath(game.getStack().getMaxDistinctSources(), expr, c, ctb);
         }
 
+        if (sq[0].equals("MaxSameStoredRolls")) {
+            int max = 0;
+            List<Integer> rolls = c.getStoredRolls();
+            if (rolls != null) {
+                int lastNum = 0;
+                for (Integer roll : rolls) {
+                    if (roll.equals(lastNum)) {
+                        continue; // no need to count instances of the same roll multiple times
+                    }
+                    int tally = Collections.frequency(rolls, roll);
+                    if (tally > max) {
+                        max = tally;
+                    }
+                    lastNum = roll;
+                }
+            }
+            return doXMath(max, expr, c, ctb);
+        }
+
         //Count$Random.<Min>.<Max>
         if (sq[0].equals("Random")) {
             int min = calculateAmount(c, sq[1], ctb);

@@ -484,6 +484,15 @@ public class CardDetailUtil {
             area.append("(chosen number: ").append(card.getChosenNumber()).append(")");
         }
 
+        // stored dice results
+        if (card.getStoredRolls() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(stored dice results: ").append(StringUtils.join(card.getStoredRolls(), ", "));
+            area.append(")");
+        }
+
         // chosen player
         if (card.getChosenPlayer() != null) {
             if (area.length() != 0) {

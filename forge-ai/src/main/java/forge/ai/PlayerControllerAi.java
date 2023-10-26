@@ -589,6 +589,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Integer chooseRollToIgnore(List<Integer> rolls) {
+        //TODO create AI logic for this
+        return Aggregates.random(rolls);
+    }
+
+    @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
     }

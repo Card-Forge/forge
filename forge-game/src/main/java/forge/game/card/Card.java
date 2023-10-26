@@ -189,6 +189,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
     private Map<Player, String> flipResult;
+    private List<Integer> storedRolls;
 
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
@@ -1277,6 +1278,33 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             topCard.removeMutatedStates();
             topCard.rebuildMutatedStates(cause);
         }
+    }
+
+    public final List<Integer> getStoredRolls() {
+        return storedRolls;
+    }
+    public final List<String> getStoredRollsForView() {
+        List<String> forView = new ArrayList<>();
+        for (Integer i : storedRolls) {
+            forView.add(String.valueOf(i));
+        }
+        return forView;
+    }
+    public final void addStoredRolls(final List<Integer> results) {
+        if (storedRolls == null) {
+            storedRolls = Lists.newArrayList();
+        }
+        storedRolls.addAll(results);
+        storedRolls.sort(null);
+        view.updateStoredRolls(this);
+    }
+    public final void replaceStoredRoll(final Map<Integer, Integer> replaceMap) {
+        for (Integer oldValue : replaceMap.keySet()) {
+            storedRolls.remove(oldValue);
+            storedRolls.add(replaceMap.get(oldValue));
+        }
+        storedRolls.sort(null);
+        view.updateStoredRolls(this);
     }
 
     public final String getFlipResult(final Player flipper) {

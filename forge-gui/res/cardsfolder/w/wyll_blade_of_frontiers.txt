@@ -2,7 +2,9 @@ Name:Wyll, Blade of Frontiers
 ManaCost:1 R
 Types:Legendary Creature Human Warlock
 PT:1/1
-S:Mode$ Continuous | Affected$ You | AddKeyword$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll. | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreLowest
+SVar:IgnoreLowest:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
 T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPut | TriggerDescription$ Whenever you roll one or more dice, put a +1/+1 counter on CARDNAME.
 SVar:TrigPut:DB$ PutCounter | CounterType$ P1P1 
 K:Choose a Background

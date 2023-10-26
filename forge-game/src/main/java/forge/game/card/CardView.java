@@ -388,6 +388,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenNumber, c.getChosenNumber().toString());
     }
 
+    public List<String> getStoredRolls() {
+        return get(TrackableProperty.StoredRolls);
+    }
+    void updateStoredRolls(Card c) {
+        set(TrackableProperty.StoredRolls, c.getStoredRollsForView());
+    }
+
     public List<String> getChosenColors() {
         return get(TrackableProperty.ChosenColors);
     }
