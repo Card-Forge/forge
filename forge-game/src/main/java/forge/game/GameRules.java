@@ -97,13 +97,6 @@ public class GameRules {
                 || appliedVariants.contains(GameType.Brawl);
     }
 
-    public boolean canCloneUseTargetsImage() {
-        return canCloneUseTargetsImage;
-    }
-    public void setCanCloneUseTargetsImage(final boolean canCloneUseTargetsImage) {
-        this.canCloneUseTargetsImage = canCloneUseTargetsImage;
-    }
-
     public boolean useGrayText() {
         return useGrayText;
     }
