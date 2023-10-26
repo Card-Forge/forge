@@ -237,7 +237,26 @@ public class ComputerUtilCard {
         final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
 
         if (!nbLand.isEmpty()) {
-            // TODO - Rank non basics?
+            // TODO - Improve ranking various non-basic lands depending on context
+
+            // Urza's Mine/Tower/Power Plant
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(new ZoneType[] {ZoneType.Battlefield, ZoneType.Hand});
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
+                }
+            }
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Tower"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Tower")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Tower")).getFirst();
+                }
+            }
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Power Plant"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Power Plant")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Power Plant")).getFirst();
+                }
+            }
+
             return Aggregates.random(nbLand);
         }
 

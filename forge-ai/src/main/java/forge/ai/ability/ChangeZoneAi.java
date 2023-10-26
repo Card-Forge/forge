@@ -1665,9 +1665,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (c == null) {
-                fetchList = CardLists.getNotType(fetchList, "Land");
-                // Prefer to pull a creature, generally more useful for AI.
-                c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
+                if (Iterables.all(fetchList, Presets.LANDS)) {
+                    // we're only choosing from lands, so get the best land
+                    c = ComputerUtilCard.getBestLandAI(fetchList);
+                } else {
+                    fetchList = CardLists.getNotType(fetchList, "Land");
+                    // Prefer to pull a creature, generally more useful for AI.
+                    c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
+                }
             }
             if (c == null) { // Could not find a creature.
                 if (decider.getLife() <= 5) { // Desperate?
