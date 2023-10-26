@@ -233,6 +233,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
+                Forge.getLocalizer().getMessage("cbCloneImgSource"),
+                Forge.getLocalizer().getMessage("nlCloneImgSource")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCHPREF_PROMPT_FREE_BLOCKS,
                 Forge.getLocalizer().getMessage("cbPromptFreeBlocks"),
                 Forge.getLocalizer().getMessage("nlPromptFreeBlocks")),

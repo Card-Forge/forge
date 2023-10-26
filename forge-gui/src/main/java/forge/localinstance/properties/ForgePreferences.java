@@ -128,6 +128,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CURRENT_SOUND_SET("Default"),
         UI_CURRENT_MUSIC_SET("Default"),
         UI_CURRENT_AI_PROFILE ("Default"),
+        UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),

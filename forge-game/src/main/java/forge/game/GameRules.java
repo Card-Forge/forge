@@ -15,6 +15,8 @@ public class GameRules {
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
 
     // it's a preference, not rule... but I could hardly find a better place for it
+    private boolean canCloneUseTargetsImage;
+    // same for me
     private boolean useGrayText;
 
     // whether to warn about cards AI can't play well
