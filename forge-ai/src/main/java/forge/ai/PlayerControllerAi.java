@@ -762,7 +762,9 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         switch (kindOfChoice) {
-            case TapOrUntap: return true;
+            case TapOrUntap:
+            case CastOrHand:
+                return true;
             case UntapOrLeaveTapped:
                 Card source = sa.getHostCard();
                 if (source != null && source.hasSVar("AIUntapPreference")) {

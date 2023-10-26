@@ -70,6 +70,7 @@ public abstract class PlayerController {
         UntapTimeVault,
         LeftOrRight,
         AddOrRemove,
+        CastOrHand,
     }
 
     protected final GameView gameView;

@@ -1,0 +1,8 @@
+Name:Hit the Mother Lode
+ManaCost:4 R R R
+Types:Sorcery
+A:SP$ Discover | Num$ 10 | SubAbility$ DBTreasure | RememberDiscovered$ True | SpellDescription$ Discover 10.
+SVar:DBTreasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.cmcLT10 | TokenScript$ c_a_treasure_sac | TokenAmount$ Remembered$CardManaCost/NMinus.10 | TokenTapped$ True | SubAbility$ DBCleanup | SpellDescription$ If the discovered card's mana value is less than 10, create a number of tapped Treasure tokens equal to the difference.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | StackDescription$ None | SpellDescription$ (To discover 10, exile cards from the top of your library until you exile a nonland card with mana value 10 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Type$Artifact|Treasure & Ability$Sacrifice|Token
+Oracle:Discover 10. If the discovered card's mana value is less than 10, create a number of tapped Treasure tokens equal to the difference. (To discover 10, exile cards from the top of your library until you exile a nonland card with mana value 10 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

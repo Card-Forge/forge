@@ -1652,6 +1652,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             case AddOrRemove:
                 labels = ImmutableList.of(localizer.getMessage("lblAddCounter"), localizer.getMessage("lblRemoveCounter"));
                 break;
+            case CastOrHand:
+                labels = ImmutableList.of(StringUtils.capitalize(localizer.getMessage("lblCast")),
+                        StringUtils.capitalize(localizer.getMessage("lblHandZone")));
+                break;
             default:
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
