@@ -195,7 +195,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return false;
             } else if (logic.equals("NoGain")) {
-            	// basic logic to cancel GainLife on stack
+                // basic logic to cancel GainLife on stack
                 if (!game.getStack().isEmpty()) {
                     SpellAbility topStack = game.getStack().peekAbility();
                     final Player activator = topStack.getActivatingPlayer();
@@ -232,6 +232,22 @@ public class EffectAi extends SpellAbilityAi {
                                     return true;
                                 }
                             }
+                        }
+                    }
+                }
+                return false;
+            } else if (logic.equals("NonCastCreature")) {
+                // TODO: add support for more cases with more convoluted API setups
+                if (!game.getStack().isEmpty()) {
+                    SpellAbility topStack = game.getStack().peekAbility();
+                    final Player activator = topStack.getActivatingPlayer();
+                    if (activator.isOpponentOf(ai)) {
+                        boolean changeZone = topStack.getApi() == ApiType.ChangeZone || topStack.getApi() == ApiType.ChangeZoneAll;
+                        boolean toBattlefield = "Battlefield".equals(topStack.getParam("Destination"));
+                        boolean reanimator = "true".equalsIgnoreCase(topStack.getSVar("IsReanimatorCard"));
+                        if (changeZone && (toBattlefield || reanimator)) {
+                            if ("Creature".equals(topStack.getParam("ChangeType")) || topStack.getParamOrDefault("Defined", "").contains("Creature"))
+                                return true;
                         }
                     }
                 }
