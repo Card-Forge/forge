@@ -465,8 +465,8 @@ public final class ForgeConstants {
     public static final String LAND_PLAYED_NOTIFICATION_AI = "Lands entering a battlefield because of an action of a AI player";
     public static final String LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS = "Nonbasic lands entering a battlefield because of an action of a AI player";
 
-    // Constants for Land played notification policy
     public static final String SWITCH_CARDSTATES_DECK_NEVER = "Never";
+    public static final String SWITCH_CARDSTATES_DECK_ALWAYS = "Always";
     public static final String SWITCH_CARDSTATES_DECK_HOVER = "Switch back on hover";
 
     // Set boolean constant for landscape mode for gdx port
