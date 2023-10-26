@@ -35,6 +35,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
@@ -534,6 +535,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+        // TODO Auto-generated method stub
+        return Iterables.getFirst(possibleStatics, null);
+    }
+
+    @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         return choices.get(0);
     }
@@ -724,10 +731,14 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
+        return max;
     }
 
     @Override

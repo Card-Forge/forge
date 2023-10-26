@@ -100,6 +100,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.TargetChoices;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
@@ -160,6 +161,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean mayLookAtAllCards = false;
     private boolean disableAutoYields = false;
 
+    private boolean fullControl = false;
+
     private IGuiGame gui;
 
     protected final InputQueue inputQueue;
@@ -205,7 +208,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean getDisableAutoYields() {
         return disableAutoYields;
     }
-
     public void setDisableAutoYields(final boolean disableAutoYields0) {
         disableAutoYields = disableAutoYields0;
     }
@@ -213,6 +215,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
+    }
+    /**
+     * Set this to {@code true} to enable this player to see all cards any other
+     * player can see.
+     *
+     * @param mayLookAtAllCards the mayLookAtAllCards to set
+     */
+    public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
+        this.mayLookAtAllCards = mayLookAtAllCards;
     }
 
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
@@ -255,14 +266,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tempShownCards.clear();
     }
 
-    /**
-     * Set this to {@code true} to enable this player to see all cards any other
-     * player can see.
-     *
-     * @param mayLookAtAllCards the mayLookAtAllCards to set
-     */
-    public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
-        this.mayLookAtAllCards = mayLookAtAllCards;
+    @Override
+    public boolean isFullControl() {
+        return fullControl;
+    }
+    @Override
+    public void setFullControl(boolean full) {
+        fullControl = full;
     }
 
     /**
@@ -1888,6 +1898,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public StaticAbility chooseSingleStaticAbility(final String prompt, final List<StaticAbility> possibleStatics) {
+        final StaticAbility first = possibleStatics.get(0);
+        if (possibleStatics.size() == 1 || !fullControl) {
+            return first;
+        }
+        final String firstStr = first.toString();
+        for (int i = 1; i < possibleStatics.size(); i++) {
+            // prompt user if there are multiple different options
+            if (!possibleStatics.get(i).toString().equals(firstStr)) {
+                return getGui().one(prompt, possibleStatics);
+            }
+        }
+        // return first option without prompting if all options are the same
+        return first;
+    }
+
+    @Override
     public String chooseProtectionType(final String string, final SpellAbility sa, final List<String> choices) {
         return getGui().one(string, choices);
     }
@@ -3347,8 +3374,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * spellability.SpellAbility, java.util.List)
      */
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
-                                                       List<OptionalCostValue> optionalCost) {
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCost) {
         return getGui().many(localizer.getMessage("lblChooseOptionalCosts"), localizer.getMessage("lblOptionalCosts"), 0, optionalCost.size(),
                 optionalCost, choosen.getHostCard().getView());
     }
@@ -3369,6 +3395,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         Integer v = getGui().getInteger(prompt, 0, max, 9);
         return v == null ? 0 : v.intValue();
+    }
+
+    @Override
+    public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
+        if (fullControl) {
+            return chooseNumber(sa, localizer.getMessage("lblChooseAmountCostReduction"), min, max);
+        }
+        return max;
     }
 
     @Override
