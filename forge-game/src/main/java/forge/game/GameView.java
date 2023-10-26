@@ -26,6 +26,8 @@ import forge.util.collect.FCollectionView;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
+    private boolean sourceImageForClone;
+
     private final transient Game game; //TODO: Remove this when possible before network support added
     private final transient Match match; //TODO: Remove this when possible before network support added
 
@@ -286,4 +288,12 @@ public class GameView extends TrackableObject {
     public AnteResult getAnteResult(PlayerView player) {
         return getOutcome().getAnteResult(player);
     }
+
+    public boolean useSourceImageForClone() {
+        return sourceImageForClone;
+    }
+    public void setSourceImageForClone(final boolean b) {
+        this.sourceImageForClone = b;
+    }
+
 }
