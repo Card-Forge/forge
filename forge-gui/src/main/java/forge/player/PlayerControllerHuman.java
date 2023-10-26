@@ -797,8 +797,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean confirmStaticApplication(final Card hostCard, final GameEntity affected, final String logic,
-                                            final String message) {
+    public boolean confirmStaticApplication(final Card hostCard, PlayerActionConfirmMode mode, final String message, final String logic) {
         return InputConfirm.confirm(this, CardView.get(hostCard), message);
     }
 

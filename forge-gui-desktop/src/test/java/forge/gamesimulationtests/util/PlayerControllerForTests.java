@@ -191,13 +191,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmBidAction(SpellAbility sa,
-            PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
         return false;
     }
 
     @Override
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+    public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
         return true;
     }
 

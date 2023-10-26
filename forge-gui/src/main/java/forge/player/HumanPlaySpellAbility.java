@@ -99,7 +99,7 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
+                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);

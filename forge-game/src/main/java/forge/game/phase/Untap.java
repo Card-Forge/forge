@@ -37,6 +37,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -124,10 +125,13 @@ public class Untap extends Phase {
             c.setStartedTheTurnUntapped(c.isUntapped());
         }
 
+        CardZoneTable triggerList = new CardZoneTable();
         CardCollection bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
-            game.getAction().moveToHand(c, null);
+            Card moved = game.getAction().moveToHand(c, null);
+            triggerList.put(ZoneType.Battlefield, moved.getZone().getZoneType(), moved);
         }
+        triggerList.triggerChangesZoneAll(game, null);
         list.removeAll(bounceList);
 
         final Map<String, Integer> restrictUntap = Maps.newHashMap();

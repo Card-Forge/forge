@@ -287,6 +287,8 @@ public class StaticEffect {
             }
 
             affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
+
+            affectedCard.updateAbilityTextForView(); // need to update keyword cache for clean reapply
         }
         return affectedCards;
     }
