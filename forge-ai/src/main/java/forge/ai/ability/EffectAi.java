@@ -237,6 +237,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return false;
             } else if (logic.equals("NonCastCreature")) {
+                // TODO: add support for more cases with more convoluted API setups
                 if (!game.getStack().isEmpty()) {
                     SpellAbility topStack = game.getStack().peekAbility();
                     final Player activator = topStack.getActivatingPlayer();

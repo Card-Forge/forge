@@ -356,6 +356,14 @@ public class ComputerUtilCost {
                     if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
                     }
+                    if (source.isCreature()) {
+                        // e.g. Sakura Tribe-Elder
+                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai);
+                        final boolean inDanger = ComputerUtil.predictThreatenedObjects(ai, sourceAbility, true).contains(source);
+                        if (!(inDanger || beforeNextTurn)) {
+                            return false;
+                        }
+                    }
                     continue;
                 }
 
