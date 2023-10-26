@@ -1,0 +1,6 @@
+Name:Alien Rhino Token
+ManaCost:no cost
+Types:Creature Alien Rhino
+Colors:white
+PT:4/4
+Oracle:

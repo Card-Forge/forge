@@ -1,0 +1,15 @@
+Name:Pompeii
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put an eruption counter on it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put an eruption counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ ERUPTION | CounterNum$ 1
+T:Mode$ PlanarDice | Result$ Blank | Execute$ TrigScry | TriggerZones$ Command | TriggerDescription$ Whenever you roll a blank on the planar die, scry 2. Then put an eruption counter on CARDNAME.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ TrigPutCounter
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDamageAll | TriggerDescription$ When chaos ensues, CARDNAME deals damage to each creature and each player equal to the number of eruption counters on CARDNAME. Each player sacrifices a land. Then planeswalk.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ X | SubAbility$ DBSacLand
+SVar:DBSacLand:DB$ Sacrifice | SacValid$ Land | Defined$ Player | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk
+SVar:X:Count$CardCounters.ERUPTION
+DeckHas:Ability$Counters|Sacrifice
+Oracle:When you planeswalk to Pompeii and at the beginning of your upkeep, put an eruption counter on it.\nWhenever you roll a blank on the planar die, scry 2. Then put an eruption counter on Pompeii.\nWhen chaos ensues, Pompeii deals damage to each creature and each player equal to the number of eruption counters on Pompeii. Each player sacrifices a land. Then planeswalk.
