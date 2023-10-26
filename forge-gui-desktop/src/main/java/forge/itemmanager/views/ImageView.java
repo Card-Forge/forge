@@ -62,6 +62,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
+    private InventoryItem lastAltCard = null;
     private boolean panelOptionsCreated = false;
 
     private final List<ItemInfo> orderedItems = new ArrayList<>();
@@ -1109,9 +1110,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         InventoryItem item = itemInfo.item;
                         itemInfo.alt = false;
                         if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
-                            if (hoveredItem != null && hoveredItem.item.equals(item)) {
-                                if (item instanceof PaperCard && ((PaperCard)item).hasBackFace())
-                                    itemInfo.alt = true;
+                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
+                                if (item instanceof PaperCard) {
+                                    if (((PaperCard)item).hasBackFace()) {
+                                        if (item.equals(lastAltCard)) {
+                                            itemInfo.alt = true;
+                                            lastAltCard = null;
+                                        } else {
+                                            lastAltCard = item;
+                                        }
+                                    } else {
+                                        lastAltCard = null;
+                                    }
+                                }
                             }
                         }
 
