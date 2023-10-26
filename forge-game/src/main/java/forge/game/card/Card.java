@@ -673,12 +673,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 this.flipped = true;
             }
             return retResult;
-        } else if (mode.equals("TurnFace")) {
+        } else if (mode.equals("TurnFaceUp")) {
+            if (isFaceDown()) {
+                return turnFaceUp(cause);
+            }
+        } else if (mode.equals("TurnFaceDown")) {
             CardStateName oldState = getCurrentStateName();
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
                 return turnFaceDown();
-            } else if (isFaceDown()) {
-                return turnFaceUp(cause);
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);

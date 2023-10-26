@@ -33,7 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
 
         // turning face is most likely okay
         // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
-        if ("TurnFace".equals(mode)) {
+        if ("TurnFaceUp".equals(mode)) {
             return true;
         }
 
@@ -103,7 +103,7 @@ public class SetStateAi extends SpellAbilityAi {
 
                 return sa.isMinTargetChosen();
             }
-        } else if ("TurnFace".equals(mode)) {
+        } else if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
             if (sa.usesTargeting()) {
                 sa.resetTargets();
 
