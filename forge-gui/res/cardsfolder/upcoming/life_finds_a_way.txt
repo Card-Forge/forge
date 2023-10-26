@@ -1,0 +1,8 @@
+Name:Life Finds a Way
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigPopulate | TriggerDescription$ Whenever a nontoken creature with power 4 or greater enters the battlefield under your control, populate. (Create a token that's a copy of a creature token you control.)
+SVar:TrigPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | ChoiceTitle$ Select a creature token to copy
+DeckHints:Ability$Token
+DeckHas:Ability$Token
+Oracle:Whenever a nontoken creature with power 4 or greater enters the battlefield under your control, populate. (Create a token that's a copy of a creature token you control.)

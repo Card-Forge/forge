@@ -1,0 +1,9 @@
+Name:Compy Swarm
+ManaCost:1 B G
+Types:Creature Dinosaur
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if a creature died this turn, create a tapped token that's a copy of CARDNAME.
+SVar:TrigToken:DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | NumCopies$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, if a creature died this turn, create a tapped token that's a copy of Compy Swarm.
