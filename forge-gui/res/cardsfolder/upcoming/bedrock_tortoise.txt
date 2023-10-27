@@ -1,0 +1,8 @@
+Name:Bedrock Tortoise
+ManaCost:3 G
+Types:Creature Turtle
+PT:0/6
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ As long as it's your turn, creatures you control have hexproof.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.powerLTtoughness+YouCtrl | Description$ Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
+DeckHints:Type$Turtle|Spider|Treefolk|Crab|Wall
+Oracle:As long as it's your turn, creatures you control have hexproof.\nEach creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.

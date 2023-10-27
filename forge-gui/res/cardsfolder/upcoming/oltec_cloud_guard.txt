@@ -1,0 +1,9 @@
+Name:Oltec Cloud Guard
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Gnome artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome
+DeckHas:Ability$Token & Type$Gnome|Artifact
+Oracle:Flying\nWhen Oltec Cloud Guard enters the battlefield, create a 1/1 colorless Gnome artifact creature token.
