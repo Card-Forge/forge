@@ -4,10 +4,12 @@ import com.google.common.collect.Lists;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.player.actions.FinishTargetingAction;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.player.actions.PlayerAction;
 import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputPassPriority;
+import forge.gamemodes.match.input.InputSelectTargets;
 import forge.interfaces.IMacroSystem;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -127,6 +129,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (action instanceof PassPriorityAction) {
             final Input inp = playerControllerHuman.getInputProxy().getInput();
             if (inp instanceof InputPassPriority) {
+                inp.selectButtonOK();
+            }
+        } else if (action instanceof FinishTargetingAction) {
+            final Input inp = playerControllerHuman.getInputProxy().getInput();
+            if (inp instanceof InputSelectTargets) {
                 inp.selectButtonOK();
             }
         } else {
