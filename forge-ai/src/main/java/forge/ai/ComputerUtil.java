@@ -2473,6 +2473,13 @@ public class ComputerUtil {
                 else if (logic.equals("MostProminentComputerControls")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), valid);
                 }
+                else if (logic.equals("MostProminentComputerControlsOrOwns")) {
+                    CardCollectionView list = ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+                    if (list.isEmpty()) {
+                        list = ai.getCardsIn(Arrays.asList(ZoneType.Library));
+                    }
+                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
+                }
                 else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
