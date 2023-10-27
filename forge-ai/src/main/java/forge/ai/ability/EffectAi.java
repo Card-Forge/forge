@@ -202,7 +202,7 @@ public class EffectAi extends SpellAbilityAi {
                     if (activator.isOpponentOf(ai) && activator.canGainLife()) {
                         while (topStack != null) {
                             if (topStack.getApi() == ApiType.GainLife) {
-                                if ("You".equals(topStack.getParam("Defined")) || topStack.isTargeting(activator)) {
+                                if ("You".equals(topStack.getParam("Defined")) || topStack.isTargeting(activator) || (!topStack.usesTargeting() && !topStack.hasParam("Defined"))) {
                                     return true;
                                 }
                             } else if (topStack.getApi() == ApiType.DealDamage && topStack.getHostCard().hasKeyword(Keyword.LIFELINK)) {
