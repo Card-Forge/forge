@@ -151,18 +151,13 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         boolean changeAll = false;
-        boolean allButOne = false;
         boolean totalCMC = sa.hasParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
                 changeAll = true;
-            }
-            else if (sa.getParam("ChangeNum").equalsIgnoreCase("AllButOne")) {
-                allButOne = true;
-            }
-            else {
+            } else {
                 destZone1ChangeNum = AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
             }
         }
@@ -325,20 +320,6 @@ public class DigEffect extends SpellAbilityEffect {
                         if (!movedCards.isEmpty()) {
                             game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
                         }
-                    } else if (allButOne) {
-                        movedCards = new CardCollection(valid);
-                        String prompt;
-                        if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
-                        } else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone2.getTranslatedName());
-                        }
-
-                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p, null);
-                        movedCards.remove(chosen);
-                        if (sa.hasParam("RandomOrder")) {
-                            CardLists.shuffle(movedCards);
-                        }
                     } else {
                         String prompt;
 
@@ -347,7 +328,13 @@ public class DigEffect extends SpellAbilityEffect {
                         } else {
                             prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.getTranslatedName());
                             if (destZone1.equals(ZoneType.Library)) {
-                                if (libraryPosition == -1) {
+                                if (!destZone2.equals(ZoneType.Library) && destZone1ChangeNum == 1) {
+                                    if (libraryPosition == 0) {
+                                        prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
+                                    } else {
+                                        prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone1.getTranslatedName());
+                                    }
+                                } else if (libraryPosition == -1) {
                                     prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryBottom", p.getName());
                                 } else if (libraryPosition == 0) {
                                     prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryTop", p.getName());
@@ -381,7 +368,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     Collections.reverse(movedCards);
 
-                    if (destZone1.equals(ZoneType.Battlefield)) {
+                    if (destZone1.equals(ZoneType.Battlefield) || destZone1.equals(ZoneType.Library)) {
                         movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
                     }
 
