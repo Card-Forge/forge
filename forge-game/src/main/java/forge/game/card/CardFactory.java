@@ -691,9 +691,10 @@ public class CardFactory {
 
         if (sa.hasParam("AddKeywords")) {
             String kwString = sa.getParam("AddKeywords");
-            if (kwString.startsWith("IfNew"))
+            if (kwString.startsWith("IfNew ")) {
                 KWifNew = true;
                 kwString = kwString.substring(6);
+            }
             keywords.addAll(Arrays.asList(kwString.split(" & ")));
         }
 
