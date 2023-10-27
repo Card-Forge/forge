@@ -1230,6 +1230,13 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            // Extra check for the Exalted trigger in case we're declaring more than one attacker
+            if (combat != null && trigger.getKeyword() != null && trigger.getKeyword().getKeyword() == Keyword.EXALTED) {
+                if (!combat.getAttackers().isEmpty() && !combat.getAttackers().contains(attacker)) {
+                    continue;
+                }
+            }
+
             SpellAbility sa = trigger.ensureAbility();
             if (sa == null) {
                 continue;
@@ -2556,5 +2563,24 @@ public class ComputerUtilCombat {
             }
         }
         return Iterables.getFirst(defenders, null);
+    }
+
+    public static int checkAttackerLifelinkDamage(Combat combat) {
+        if (combat == null) {
+            return 0;
+        }
+
+        int totalLifeLinkDamage = 0;
+        for (Card attacker : combat.getAttackers()) {
+            int netDamage = attacker.getNetCombatDamage();
+            if ((attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasSVar("LikeLifeLink")) && netDamage > 0) {
+                int damage = ComputerUtilCombat.predictDamageTo(combat.getDefenderByAttacker(attacker), netDamage, attacker, true);
+                boolean prevented = ComputerUtilCombat.isCombatDamagePrevented(attacker, combat.getDefenderByAttacker(attacker), damage);
+                if (!prevented) {
+                    totalLifeLinkDamage += damage;
+                }
+            }
+        }
+        return totalLifeLinkDamage;
     }
 }

@@ -220,18 +220,11 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 // also check for combat lifelink
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    final Combat combat = game.getCombat();
+                    final Combat combat = ai.getGame().getCombat();
                     final Player attackingPlayer = combat.getAttackingPlayer();
-                    if (combat != null && attackingPlayer.isOpponentOf(ai) && attackingPlayer.canGainLife()) {
-                        for (Card attacker : combat.getAttackers()) {
-                            int netDamage = attacker.getNetCombatDamage();
-                            if ((attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasSVar("LikeLifeLink")) && netDamage > 0) {
-                                int damage = ComputerUtilCombat.predictDamageTo(combat.getDefenderByAttacker(attacker), netDamage, attacker, true);
-                                boolean prevented = ComputerUtilCombat.isCombatDamagePrevented(attacker, combat.getDefenderByAttacker(attacker), damage);
-                                if (damage > 0 && !prevented) {
-                                    return true;
-                                }
-                            }
+                    if (attackingPlayer.isOpponentOf(ai) && attackingPlayer.canGainLife()) {
+                        if (ComputerUtilCombat.checkAttackerLifelinkDamage(combat) > 0) {
+                            return true;
                         }
                     }
                 }
