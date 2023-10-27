@@ -1971,6 +1971,9 @@ public class AbilityUtils {
         if (sq[0].contains("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
+        if (sq[0].contains("CardBasePower")) {
+            return doXMath(c.getCurrentPower(), expr, c, ctb);
+        }
         if (sq[0].contains("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
