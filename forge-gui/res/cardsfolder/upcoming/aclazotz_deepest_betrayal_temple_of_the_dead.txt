@@ -4,7 +4,6 @@ Types:Legendary Creature Bat God
 PT:4/4
 K:Flying
 K:Lifelink
-Whenever an opponent discards a land card, create a 1/1 black Bat creature token with flying.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME attacks, each opponent discards a card. For each opponent who can't, you draw a card.
 SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
