@@ -440,6 +440,9 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
+        final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
+        boolean lastDitchSacrifice = !(sacSelf && ComputerUtil.predictLastDitchSacrifice(ai, source, sa));
+
         if (sa.usesTargeting()) {
             if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
                 // only evaluates case where all tokens are placed on a single target
@@ -453,14 +456,15 @@ public class CountersPutAi extends CountersAi {
                         sa.addDividedAllocation(c, amount);
                         return true;
                     } else {
-                        return false;
+                        // check if the card is going to die anyway, so use the ability to gain something from it?
+                        if (!(sacSelf && ComputerUtil.predictLastDitchSacrifice(ai, source, sa))) {
+                            return false;
+                        }
                     }
                 }
             }
 
             sa.resetTargets();
-
-            final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
@@ -628,7 +632,7 @@ public class CountersPutAi extends CountersAi {
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                if (!lastDitchSacrifice && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
             }

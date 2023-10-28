@@ -434,10 +434,7 @@ public class ComputerUtil {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
-                                || ((priority == 1 && c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false))
-                                && (game.getCombat() == null
-                                || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, game.getCombat())))
-                                || (priority == 1 && !c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
+                                || (priority == 1 && predictLastDitchSacrifice(ai, c, sa));
                     }
                 });
                 if (!sacMeList.isEmpty()) {
@@ -1439,11 +1436,7 @@ public class ComputerUtil {
                 if (type.equals("CARDNAME")) {
                     if (source.getSVar("SacMe").equals("6")) {
                         return true;
-                    } else if (source.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sa)
-                            && (ai.getGame().getCombat() == null
-                            || (ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, ai.getGame().getCombat()) && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, ai.getGame().getCombat())))) {
-                        return true;
-                    } else if (!source.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(source)) {
+                    } else if (predictLastDitchSacrifice(ai, source, sa)) {
                         return true;
                     }
                     continue;
@@ -1454,11 +1447,7 @@ public class ComputerUtil {
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
-                    } else if (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa)
-                            && (ai.getGame().getCombat() == null
-                            || (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, ai.getGame().getCombat()) && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, ai.getGame().getCombat())))) {
-                        return true;
-                    } else if (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c)) {
+                    } else if (predictLastDitchSacrifice(ai, c, sa)) {
                         return true;
                     }
                 }
@@ -1834,9 +1823,11 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
-                        if (!canSave) {
-                            continue;
+                        if ((saviour.usesTargeting() && saviour.canTarget(c)) || (source == c && !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
+                            boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
+                            if (!canSave) {
+                                continue;
+                            }
                         }
                     }
 
@@ -3281,5 +3272,12 @@ public class ComputerUtil {
         List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
         return !list.isEmpty();
     }
-    
+
+    public static boolean predictLastDitchSacrifice(Player ai, Card c, SpellAbility sa) {
+        Game game = ai.getGame();
+        Combat combat = game.getCombat();
+        return (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
+                && (game.getCombat() == null || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat)))
+                || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
+    }
 }
