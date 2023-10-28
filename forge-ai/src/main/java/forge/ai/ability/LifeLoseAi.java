@@ -136,16 +136,14 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         // Sacrificing a creature in response to something dangerous is generally good in any phase
-        boolean isSacCreature = false;
+        boolean isSacCost = false;
         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
-            if (sa.getPayCosts().getCostPartByType(CostSacrifice.class).getType().contains("Creature")) {
-                isSacCreature = true;
-            }
+            isSacCost = true;
         }
 
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa) && !aiLogic.contains("AnyPhase") && !isSacCreature) {
+                && !ComputerUtil.castSpellInMain1(ai, sa) && !aiLogic.contains("AnyPhase") && !isSacCost) {
             return false;
         }
 

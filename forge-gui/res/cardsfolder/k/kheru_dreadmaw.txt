@@ -6,5 +6,4 @@ K:Defender
 A:AB$ GainLife | Cost$ 1 G Sac<1/Creature.Other/another creature> | LifeAmount$ X | SubAbility$ DBCleanup | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-AI:RemoveDeck:All
 Oracle:Defender\n{1}{G}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.

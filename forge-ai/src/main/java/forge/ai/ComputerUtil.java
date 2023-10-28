@@ -433,8 +433,9 @@ public class ComputerUtil {
                 final CardCollection sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
+                        // TODO: non-creature endangered objects
                         return (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
-                                || (priority == 1 && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false))
+                                || (priority == 1 && c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false))
                                 && (game.getCombat() == null
                                 || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, game.getCombat()));
                     }
@@ -1435,8 +1436,13 @@ public class ComputerUtil {
 
                 final String type = sac.getType();
 
+                // TODO: non-creature endangered objects
                 if (type.equals("CARDNAME")) {
                     if (source.getSVar("SacMe").equals("6")) {
+                        return true;
+                    } else if (source.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sa)
+                            && (ai.getGame().getCombat() == null
+                            || (ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, ai.getGame().getCombat()) && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, ai.getGame().getCombat())))) {
                         return true;
                     }
                     continue;
