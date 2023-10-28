@@ -433,7 +433,10 @@ public class ComputerUtil {
                 final CardCollection sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority;
+                        return (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
+                                || (priority == 1 && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false))
+                                && (game.getCombat() == null
+                                || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, game.getCombat()));
                     }
                 });
                 if (!sacMeList.isEmpty()) {
@@ -1444,6 +1447,10 @@ public class ComputerUtil {
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
+                    } else if (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa)
+                            && (ai.getGame().getCombat() == null
+                            || (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, ai.getGame().getCombat()) && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, ai.getGame().getCombat())))) {
+                        return true;
                     }
                 }
             }
@@ -2038,6 +2045,10 @@ public class ComputerUtil {
      * @return true if the creature dies according to current board position.
      */
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
+        return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
+    }
+
+    public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
         final Game game = ai.getGame();
 
         // a creature will [hopefully] die from a spell on stack
@@ -2056,6 +2067,10 @@ public class ComputerUtil {
             }
         }
         willDieFromSpell = !noStackCheck && predictThreatenedObjects(creature.getController(), excludeSa).contains(creature);
+
+        if (nonCombatOnly) {
+            return willDieFromSpell;
+        }
 
         // a creature will die as a result of combat
         boolean willDieInCombat = !willDieFromSpell && game.getPhaseHandler().inCombat()

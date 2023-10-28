@@ -81,6 +81,7 @@ public class LifeGainAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
         final int life = ai.getLife();
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         boolean lifeCritical = life <= 5;
@@ -103,9 +104,17 @@ public class LifeGainAi extends SpellAbilityAi {
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) { return false; }
         }
 
+        // Sacrificing a creature in response to something dangerous is generally good in any phase
+        boolean isSacCreature = false;
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            if (sa.getPayCosts().getCostPartByType(CostSacrifice.class).getType().contains("Creature")) {
+                isSacCreature = true;
+            }
+        }
+
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                && !ComputerUtil.castSpellInMain1(ai, sa) && !aiLogic.contains("AnyPhase") && !isSacCreature) {
             return false;
         }
 
@@ -124,6 +133,7 @@ public class LifeGainAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         final int life = ai.getLife();
         final String amountStr = sa.getParam("LifeAmount");
@@ -182,7 +192,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         if (isSorcerySpeed(sa, ai)
-                || sa.getSubAbility() != null || playReusable(ai, sa)) {
+                || sa.getSubAbility() != null || playReusable(ai, sa) || aiLogic.equals("SacAnyPhase")) {
             return true;
         }
         
