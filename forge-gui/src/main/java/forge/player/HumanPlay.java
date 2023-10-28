@@ -15,8 +15,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -101,13 +99,6 @@ public class HumanPlay {
             source.forceTurnFaceUp();
         }
 
-        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
-            // 603.3c If no mode is chosen, the ability is removed from the stack.
-            return false;
-        }
-
-        sa = AbilityUtils.addSpliceEffects(sa);
-
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
             Card rollback = p.getGame().getCardState(source);
@@ -164,15 +155,6 @@ public class HumanPlay {
         final Card source = sa.getHostCard();
 
         source.setSplitStateToPlayAbility(sa);
-
-        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
-            // 603.3c If no mode is chosen, the ability is removed from the stack.
-            return;
-        }
-
-        if (!sa.isCopied()) {
-            sa = AbilityUtils.addSpliceEffects(sa);
-        }
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         req.playAbility(mayChooseNewTargets, true, false);
