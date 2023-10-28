@@ -79,6 +79,10 @@ public class PlayerProperty {
             if (!player.equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("descended")) {
+            if (!(player.getDescended() > 0)) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
