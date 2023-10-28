@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Beast
 PT:3/3
 K:Morph:1 U U
-A:AB$ SetState | Cost$ 3 U U | Defined$ Self | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down.
+A:AB$ SetState | Cost$ 3 U U | Defined$ Self | Mode$ TurnFaceDown | SpellDescription$ Turn CARDNAME face down.
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
 SVar:TrigCopy:DB$ CopySpellAbility | ValidTgts$ Instant,Sorcery | MayChooseTarget$ True
 AI:RemoveDeck:All

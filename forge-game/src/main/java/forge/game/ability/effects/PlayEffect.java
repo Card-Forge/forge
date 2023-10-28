@@ -564,7 +564,7 @@ public class PlayEffect extends SpellAbilityEffect {
             "Event$ DealtDamage | ValidCard$ Card.IsRemembered+faceDown",
             "Event$ Tap | ValidCard$ Card.IsRemembered+faceDown"
         };
-        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFace";
+        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFaceUp";
 
         for (int i = 0; i < 3; ++i) {
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstrs[i], eff, true);
