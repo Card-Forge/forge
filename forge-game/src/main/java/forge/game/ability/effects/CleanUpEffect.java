@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 
+import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -65,7 +67,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
             source.setChosenColors(null);
         }
         if (sa.hasParam("ClearNamedCard")) {
-            source.setNamedCards(null);
+            source.setNamedCards(Lists.newArrayList());
         }
         if (sa.hasParam("Log")) {
             source.getController().getGame().fireEvent(new GameEventRandomLog(logMessage));

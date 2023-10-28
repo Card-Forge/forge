@@ -1987,7 +1987,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasNamedCard() ? Iterables.getLast(chosenName) : "";
     }
     public final List<String> getNamedCards() {
-        return chosenName == null ? Lists.newArrayList() : chosenName;
+        return chosenName;
     }
     public final void setNamedCards(final List<String> s) {
         chosenName = s;
@@ -2000,7 +2000,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean hasNamedCard() {
-        return chosenName != null && !chosenName.isEmpty();
+        return !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {
