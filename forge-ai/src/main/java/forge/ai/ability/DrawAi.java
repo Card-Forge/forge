@@ -35,11 +35,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -148,9 +144,15 @@ public class DrawAi extends SpellAbilityAi {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         }
 
+        // Sacrificing a creature in response to something dangerous is generally good in any phase
+        boolean isSacCost = false;
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            isSacCost = true;
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                && !ComputerUtil.castSpellInMain1(ai, sa) && !isSacCost) {
             return false;
         }
 
