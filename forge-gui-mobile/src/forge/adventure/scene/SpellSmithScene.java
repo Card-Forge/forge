@@ -384,7 +384,11 @@ public class SpellSmithScene extends UIScene {
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
         Reward R = null;
         if (Config.instance().getSettingData().useAllCardVariants) {
-            R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+            if (!edition.isEmpty()) {
+                R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+            } else {
+                R = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
+            }
         } else {
             R = new Reward(P);
         }
