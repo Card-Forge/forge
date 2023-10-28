@@ -3,10 +3,9 @@ ManaCost:2 B
 Types:Legendary Creature Human Rogue
 PT:3/2
 K:Menace
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.hasInitiative | Execute$ TrigTreasure | TriggerDescription$ At the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.hasInitiative | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ At the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
-SVar:X:Count$Compare Y GE1.3.1
-SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:Count$Compare PlayerCountPropertyYou$DungeonsCompleted GE1.3.1
 K:Choose a Background
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 AI:RemoveDeck:Random
