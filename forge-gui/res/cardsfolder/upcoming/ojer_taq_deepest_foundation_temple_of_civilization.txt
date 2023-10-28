@@ -1,0 +1,22 @@
+Name:Ojer Taq, Deepest Foundation
+ManaCost:4 W W
+Types:Legendary Creature God
+PT:6/6
+K:Vigilance
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Creature.YouCtrl | ReplaceWith$ TripleToken | Description$ If one or more creature tokens would be created under your control, three times that many of those tokens are created instead.
+SVar:TripleToken:DB$ ReplaceToken | Type$ Amount | Amount$ Thrice | ValidCard$ Creature.YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control.
+SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | Tapped$ True
+DeckNeeds:Ability$Token
+AlternateMode:DoubleFaced
+Oracle:Vigilance\nIf one or more creature tokens would be created under your control, three times that many of those tokens are created instead.\nWhen Ojer Taq dies, return it to the battlefield tapped and transformed under its owner's control.
+
+ALTERNATE
+
+Name:Temple of Civilization
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ SetState | Cost$ 2 W T | CheckSVar$ X | SVarCompare$ GE3 | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if you attacked with three or more creatures this turn and only as a sorcery.
+SVar:X:Count$AttackersDeclared
+Oracle:(Transforms from Ojer Taq, Deepest Foundation.)\n{T}: Add {W}.\n{2}{W}, {T}: Transform Temple of Civilization. Activate only if you attacked with three or more creatures this turn and only as a sorcery.
