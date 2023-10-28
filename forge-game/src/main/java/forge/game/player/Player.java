@@ -182,6 +182,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<String, Integer> notedNum = Maps.newHashMap();
 
     private boolean revolt = false;
+    private int descended = 0;
 
     private List<Card> sacrificedThisTurn = new ArrayList<>();
 
@@ -2132,6 +2133,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         revolt = val;
     }
 
+    public final int getDescended() {
+        return descended;
+    }
+    public final void descend() {
+        descended++;
+    }
+    public final void setDescended(final int n) {
+        descended = n;
+    }
+
     public final boolean hasDelirium() {
         return CardFactoryUtil.getCardTypesFromList(getCardsIn(ZoneType.Graveyard)) >= 4;
     }
@@ -2526,6 +2537,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
         setRevolt(false);
+        setDescended(0);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
         setLifeLostLastTurn(getLifeLostThisTurn());

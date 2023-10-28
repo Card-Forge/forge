@@ -2254,6 +2254,10 @@ public class AbilityUtils {
             return doXMath(player.getSurveilThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouDescendedThisTurn")) {
+            return doXMath(player.getDescended(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouCastThisGame")) {
             return doXMath(player.getSpellsCastThisGame(), expr, c, ctb);
         }
