@@ -3,5 +3,5 @@ ManaCost:B
 Types:Sorcery
 S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Flash | IsPresent$ Permanent.YouCtrl+hasKeywordFlash | Description$ CARDNAME has flash as long as you control a permanent with flash.
 A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
-SVar:AICostPreference:SacCost$Creature.Token,Creature.cmcLE2
+SVar:AIPreference:SacCost$Creature.Token,Creature.cmcLE2
 Oracle:This spell has flash as long as you control a permanent with flash.\nAs an additional cost to cast this spell, sacrifice a creature.\nDestroy target creature.
