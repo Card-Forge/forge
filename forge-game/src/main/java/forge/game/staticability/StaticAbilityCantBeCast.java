@@ -120,11 +120,6 @@ public class StaticAbilityCantBeCast {
             }
         }
 
-        if (stAb.hasParam("NonCasterTurn") && activator != null
-                && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
-            return false;
-        }
-
         if (stAb.hasParam("cmcGT") && activator != null) {
             if (stAb.getParam("cmcGT").equals("Turns")) {
                 if (card.getCMC() <= activator.getTurn()) {
@@ -173,11 +168,6 @@ public class StaticAbilityCantBeCast {
         }
 
         if (!stAb.matchesValidParam("Activator", activator)) {
-            return false;
-        }
-
-        if (stAb.hasParam("NonActivatorTurn") && activator != null
-                && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
