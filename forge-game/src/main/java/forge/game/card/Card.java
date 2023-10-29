@@ -2539,6 +2539,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
         }
 
+        if (state.getStateName().equals(CardStateName.Transformed) &&
+                state.getView().getOracleText().startsWith("(Transforms")) {
+            sb.append("(").append(Localizer.getInstance().getMessage("lblTransformsFrom",
+                    CardTranslation.getTranslatedName(state.getCard().getState(CardStateName.Original).getName())));
+            sb.append(")").append(linebreak);
+        }
+
         // Check if the saga card does not have the keyword Read ahead
         if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
