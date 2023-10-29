@@ -1,0 +1,13 @@
+Name:Ace, Fearless Rebel
+ManaCost:3 G
+Types:Legendary Creature Human Rebel
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBImmediateTrig | OptionalDecider$ You | TriggerDescription$ Nitro-9 — Whenever CARDNAME attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on CARDNAME, then it fights up to one target creature defending player controls.
+SVar:DBImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact> | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on CARDNAME, then it fights up to one target creature defending player controls.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ Self | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.ControlledBy Spawner>TriggeredDefendingPlayer | TgtPrompt$ Select up to one target creature defending player controls
+K:Doctor's companion
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Sacrifice
+DeckNeeds:Type$Artifact
+Oracle:Nitro-9 — Whenever Ace, Fearless Rebel attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on Ace, Fearless Rebel, then it fights up to one target creature defending player controls.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

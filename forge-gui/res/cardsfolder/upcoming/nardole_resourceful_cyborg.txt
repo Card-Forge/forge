@@ -1,0 +1,11 @@
+Name:Nardole, Resourceful Cyborg
+ManaCost:1 U
+Types:Legendary Artifact Creature Scientist
+PT:1/2
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | RestrictValid$ Spell.nonCreature | SpellDescription$ Add {U} for each counter on NICKNAME. Spend this mana only to cast noncreature spells.
+SVar:X:Count$CardCounters.ALL
+K:Undying
+K:Doctor's companion
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:{T}: Add {U} for each counter on Nardole. Spend this mana only to cast noncreature spells.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)
