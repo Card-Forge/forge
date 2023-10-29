@@ -338,11 +338,6 @@ public class StaticAbilityCantAttackBlock {
                 applyMinMaxBlockerAbility(stAb, attacker, defender, result);
             }
         }
-        if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
-            if (defender != null) {
-                result.setLeft(defender.getCreaturesInPlay().size());
-            }
-        }
         return result;
     }
 
