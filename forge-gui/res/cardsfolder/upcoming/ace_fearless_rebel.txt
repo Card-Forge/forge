@@ -8,6 +8,6 @@ SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ DBFight | TriggerDescriptio
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls.
 K:Doctor's companion
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Counters|Sacrifice & Type$Artifact
+DeckHas:Ability$Counters|Sacrifice
 DeckNeeds:Type$Artifact
 Oracle:Nitro-9 — Whenever Ace, Fearless Rebel attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on Ace, Fearless Rebel, then it fights up to one target creature defending player controls.\nDoctor's companion (You can have two commanders if the other is the Doctor.)
