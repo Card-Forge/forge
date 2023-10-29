@@ -1,0 +1,14 @@
+Name:Vrestin, Menoptra Leader
+ManaCost:X G G W
+Types:Legendary Creature Alien Insect Scout
+PT:0/0
+K:Flying
+K:etbCounter:P1P1:X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters the battlefield, create X 1/1 green and white Alien Insect creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ gw_1_1_alien_insect_flying | TokenOwner$ You
+SVar:X:Count$xPaid
+T:Mode$ AttackersDeclared | ValidAttackers$ Insect.YouCtrl | Execute$ TrigPutCounterAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more Insects, put a +1/+1 counter on each of them.
+SVar:TrigPutCounterAll:DB$ PutCounter | Defined$ TriggeredAttackers | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Insect
+Oracle:Flying\nVrestin enters the battlefield with X +1/+1 counters on it.\nWhen Vrestin enters the battlefield, create X 1/1 green and white Alien Insect creature tokens with flying.\nWhenever you attack with one or more Insects, put a +1/+1 counter on each of them.
