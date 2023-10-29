@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.cost.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -65,13 +66,6 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1815,6 +1809,13 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
+                        if (saviour.usesTargeting() && !saviour.canTarget(c)) {
+                            continue;
+                        } else if (saviour.getPayCosts() != null && saviour.getPayCosts().hasSpecificCostType(CostSacrifice.class)
+                                && (c == source || !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
+                            continue;
+                        }
+
                         boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
                         if ((!topStack.usesTargeting() && !grantIndestructible && !canSave)
                                 || (!grantIndestructible && !grantShroud && !canSave)) {
@@ -1823,11 +1824,16 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-                        if ((saviour.usesTargeting() && saviour.canTarget(c)) || (source == c && !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
-                            boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
-                            if (!canSave) {
-                                continue;
-                            }
+                        if (saviour.usesTargeting() && !saviour.canTarget(c)) {
+                            continue;
+                        } else if (saviour.getPayCosts() != null && saviour.getPayCosts().hasSpecificCostType(CostSacrifice.class)
+                                && (c == source || !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
+                            continue;
+                        }
+
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
+                        if (!canSave) {
+                            continue;
                         }
                     }
 
