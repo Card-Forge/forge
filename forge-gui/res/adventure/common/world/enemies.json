@@ -9434,6 +9434,49 @@
 			"type": "life",
 			"probability": 1,
 			"count": 1
+		},
+		{
+			"type": "Union",
+			"probability": 1,
+			"count": 1,
+			"cardUnion": [
+				{
+					"count": 1,
+					"cardName": "Ancestral Recall"
+				},
+				{
+					"count": 1,
+					"cardName": "Black Lotus"
+				},
+				{
+					"count": 1,
+					"cardName": "Mox Emerald"
+				},
+				{
+					"count": 1,
+					"cardName": "Mox Jet"
+				},
+				{
+					"count": 1,
+					"cardName": "Mox Pearl"
+				},
+				{
+					"count": 1,
+					"cardName": "Mox Ruby"
+				},
+				{
+					"count": 1,
+					"cardName": "Mox Sapphire"
+				},
+				{
+					"count": 1,
+					"cardName": "Timetwister"
+				},
+				{
+					"count": 1,
+					"cardName": "Time Walk"
+				}
+			]
 		}
 	],
 	"equipment": [
