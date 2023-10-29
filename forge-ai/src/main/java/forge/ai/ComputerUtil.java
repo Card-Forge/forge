@@ -1812,7 +1812,7 @@ public class ComputerUtil {
                         if (saviour.usesTargeting() && !saviour.canTarget(c)) {
                             continue;
                         } else if (saviour.getPayCosts() != null && saviour.getPayCosts().hasSpecificCostType(CostSacrifice.class)
-                                && (c == source || !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
+                                && (!ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts())) || c == source) {
                             continue;
                         }
 
@@ -1827,7 +1827,7 @@ public class ComputerUtil {
                         if (saviour.usesTargeting() && !saviour.canTarget(c)) {
                             continue;
                         } else if (saviour.getPayCosts() != null && saviour.getPayCosts().hasSpecificCostType(CostSacrifice.class)
-                                && (c == source || !ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts()))) {
+                                && (!ComputerUtilCost.isSacrificeSelfCost(saviour.getPayCosts())) || c == source) {
                             continue;
                         }
 
