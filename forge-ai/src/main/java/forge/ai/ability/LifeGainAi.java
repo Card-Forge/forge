@@ -190,7 +190,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         if (isSorcerySpeed(sa, ai)
-                || sa.getSubAbility() != null || playReusable(ai, sa) || aiLogic.equals("SacAnyPhase")) {
+                || sa.getSubAbility() != null || playReusable(ai, sa)) {
             return true;
         }
         

@@ -434,7 +434,7 @@ public class ComputerUtil {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
-                                || (priority == 1 && predictLastDitchSacrifice(ai, c, sa));
+                                || (priority == 1 && shouldSacrificeThreatenedCard(ai, c, sa));
                     }
                 });
                 if (!sacMeList.isEmpty()) {
@@ -1436,7 +1436,7 @@ public class ComputerUtil {
                 if (type.equals("CARDNAME")) {
                     if (source.getSVar("SacMe").equals("6")) {
                         return true;
-                    } else if (predictLastDitchSacrifice(ai, source, sa)) {
+                    } else if (shouldSacrificeThreatenedCard(ai, source, sa)) {
                         return true;
                     }
                     continue;
@@ -1447,7 +1447,7 @@ public class ComputerUtil {
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
-                    } else if (predictLastDitchSacrifice(ai, c, sa)) {
+                    } else if (shouldSacrificeThreatenedCard(ai, c, sa)) {
                         return true;
                     }
                 }
@@ -3273,7 +3273,7 @@ public class ComputerUtil {
         return !list.isEmpty();
     }
 
-    public static boolean predictLastDitchSacrifice(Player ai, Card c, SpellAbility sa) {
+    public static boolean shouldSacrificeThreatenedCard(Player ai, Card c, SpellAbility sa) {
         Game game = ai.getGame();
         Combat combat = game.getCombat();
         return (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)

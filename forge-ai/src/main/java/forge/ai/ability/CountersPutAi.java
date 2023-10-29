@@ -441,7 +441,7 @@ public class CountersPutAi extends CountersAi {
         }
 
         final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
-        boolean lastDitchSacrifice = !(sacSelf && ComputerUtil.predictLastDitchSacrifice(ai, source, sa));
+        final boolean shouldSacSelf = sacSelf && ComputerUtil.shouldSacrificeThreatenedCard(ai, source, sa);
 
         if (sa.usesTargeting()) {
             if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
@@ -457,7 +457,7 @@ public class CountersPutAi extends CountersAi {
                         return true;
                     } else {
                         // check if the card is going to die anyway, so use the ability to gain something from it?
-                        if (!(sacSelf && ComputerUtil.predictLastDitchSacrifice(ai, source, sa))) {
+                        if (!shouldSacSelf) {
                             return false;
                         }
                     }
@@ -632,7 +632,7 @@ public class CountersPutAi extends CountersAi {
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                if (!lastDitchSacrifice && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                if (!shouldSacSelf && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
             }
