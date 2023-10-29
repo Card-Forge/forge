@@ -119,9 +119,11 @@ public enum CounterEnumType {
 
     ELIXIR("ELIXR", 81, 221, 175),
 
+    EMBER("EMBER", 247, 52, 43),
+    
     EON("EON", 23, 194, 255),
 
-    EMBER("EMBER", 247, 52, 43),
+    ERUPTION("ERUPTION", 255, 124, 124),
     
     EXPOSURE("EXPOSURE", 50, 180, 30),
 
