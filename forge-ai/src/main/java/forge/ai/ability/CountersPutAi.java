@@ -440,6 +440,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
+        final boolean hasSacCost = abCost.hasSpecificCostType(CostSacrifice.class);
         final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
         final boolean shouldSacSelf = sacSelf && ComputerUtil.shouldSacrificeThreatenedCard(ai, source, sa);
 
@@ -456,8 +457,7 @@ public class CountersPutAi extends CountersAi {
                         sa.addDividedAllocation(c, amount);
                         return true;
                     } else {
-                        // check if the card is going to die anyway, so use the ability to gain something from it?
-                        if (!shouldSacSelf) {
+                        if (!hasSacCost) { // for Sacrifice costs, evaluate further to see if it's worth using the ability before the card dies
                             return false;
                         }
                     }
@@ -477,6 +477,8 @@ public class CountersPutAi extends CountersAi {
                 public boolean apply(final Card c) {
                     // don't put the counter on the dead creature
                     if (sacSelf && c.equals(source)) {
+                        return false;
+                    } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
                         return false;
                     }
                     if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -632,7 +634,7 @@ public class CountersPutAi extends CountersAi {
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                if (!shouldSacSelf && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
             }
