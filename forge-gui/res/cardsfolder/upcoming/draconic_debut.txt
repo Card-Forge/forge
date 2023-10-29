@@ -3,11 +3,10 @@ ManaCost:X R
 Types:Sorcery
 A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | TargetMin$ 0 | SubAbility$ DBStore | SpellDescription$ CARDNAME deals X damage to any target. 
 SVar:DBStore:DB$ StoreSVar | SVar$ Num | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent | SpellDescription$ The next Dragon creature spell you cast costs {X} less to cast.
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | ValidCard$ Creature.Dragon | Amount$ Num | Description$ The next Dragon creature spell you cast costs {X} less to cast.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent | SetChosenNumber$ X | SpellDescription$ The next Dragon creature spell you cast costs {X} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | ValidCard$ Creature.Dragon | Amount$ Count$ChosenNumber | Description$ The next Dragon creature spell you cast costs {X} less to cast.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$xPaid
-SVar:Num:Number$0
 DeckNeeds:Type$Dragon
 Oracle:Draconic Debut deals X damage to any target.\nThe next Dragon creature spell you cast costs {X} less to cast.
