@@ -307,7 +307,7 @@ SACRIFICE_DEFAULT_PREF_ENABLE=true
 SACRIFICE_DEFAULT_PREF_MIN_CMC=0
 # If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
 # consider the sacrifice of a matching card if its mana value (CMC) matches the specified maximum
-SACRIFICE_DEFAULT_PREF_MAX_CMC=3
+SACRIFICE_DEFAULT_PREF_MAX_CMC=1
 # If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
 # consider the sacrifice of a matching card is a token
 SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS=true
