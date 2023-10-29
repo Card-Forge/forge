@@ -433,7 +433,26 @@ public class ComputerUtil {
                 });
                 if (!sacMeList.isEmpty()) {
                     CardLists.shuffle(sacMeList);
-                    return sacMeList.get(0);
+                    return sacMeList.getFirst();
+                } else {
+                    // empty sacMeList, so get some viable average preference if the option is enabled
+                    AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                    int minCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
+                    int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
+                    boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
+                    List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
+                    CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            return (allowTokens && card.isToken())
+                                    || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                        }
+                    });
+                    if (!allowList.isEmpty()) {
+                        sacMeList.addAll(typeList);
+                        CardLists.shuffle(sacMeList);
+                        return allowList.getFirst();
+                    }
                 }
             }
 
