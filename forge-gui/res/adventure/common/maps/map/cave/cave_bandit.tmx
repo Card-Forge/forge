@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwL42RgCKMyvslNfTOJxXEDZC81sTMfBI9Ee2HsgXAHOj7GiooH2j2kYHQwau/wsncUj2JKMAAJYrkS
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlEsOgjAQhrvQCC338RHXhnAAz2BiPJDPuDNRz+ENBMMBlFtoG5gwlCkUiMY/+TZM24+WDmeHsUtHrpJzTX3mFvElcwvWnLGNZMvLNZypYGwkeYh8fODSXpvExHpUwAuMBe21ib4WrKcC+z0OcvY8JZRjohqvfl62Xgj23vopkLb7VTnwopf6vuDDXlXv4r2L9NzgDCNRHvN2i1R5fe2dTfe0rlYVG6++fhsPBPfer7zKGaM7aNO/pn9HU+eqx9guuwvf3i92KiaG/qW8baM7Ya+Jwbv07P7RVHB9qDlPTupU0b1PycuSBN2HgJgLPR5mvZ1kzynvwmsG9jaZ9y/eDx1Go0g=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVVEFqw0AM3EthBU1uBd/7iDwgOCn+qJukD2iv+Upc109ob12xO3i8yBvnUEoGRLJrSyNpJDv3f3jfOPcR7PFpvGu9cwe/zP8izn3K9I5jWdDY34HzZzO9r0OcXua5Na8vmdqrj7YkX46NWHrWGt7C7wvVca6ioUZ9vpNox/D/5ONdL2OcOexSXZrnkPy1Z20672XeV7k7GbmQL+5KvsgXBv+acgCeq2iKA+lXJ1/mYZ20hu06GnD0036Bu1Rrm3SEroOR44X6oM+Zk985kT7gh7Y82y3p0ZFfPs+5DhavlQP0AU9fqO3aztQz9TI0Bs9UQ7VpLjknUNp3izffUe6jxuf5sL4P2L1B7H3XOhqDl/fG6mNjzCr4sHs8k9YslvrMs8U1NWL3FjMDny6drX48rK7ra+Vj6bkEzHkr7y3Iv9cK9P8vee8BvyHNkW8=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhegEd0oF1AHkB293sxBoYPYvR3Q684A0OfOP3tRQcV5gwMleYD7QoIuMXCwHCbZaBdgR8c5ESliQU/LBgYflqgim21gtDRRJqx14o0O4kBv4hUR6p/ByP4AcQ/B9oRdAJfaZBWRgF5AABfBhHN
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="390.871" y="48.703"/>
+  <object id="51" template="../../obj/treasure.tx" x="392.159" y="96.1103"/>
+  <object id="55" template="../../obj/gold.tx" x="390.667" y="66.3333"/>
+  <object id="56" template="../../obj/gold.tx" x="391.333" y="28"/>
+  <object id="57" template="../../obj/gold.tx" x="343.667" y="164.667"/>
+  <object id="58" template="../../obj/gold.tx" x="39" y="60"/>
+  <object id="59" template="../../obj/waypoint.tx" x="123.333" y="116.667"/>
+  <object id="60" template="../../obj/waypoint.tx" x="113.333" y="233"/>
+  <object id="61" template="../../obj/waypoint.tx" x="13.6667" y="231"/>
+  <object id="62" template="../../obj/waypoint.tx" x="20.3333" y="199.333"/>
+  <object id="63" template="../../obj/waypoint.tx" x="191.667" y="211.333"/>
+  <object id="64" template="../../obj/waypoint.tx" x="292.667" y="145"/>
+  <object id="65" template="../../obj/waypoint.tx" x="378.333" y="146.667"/>
+  <object id="66" template="../../obj/waypoint.tx" x="318" y="230.667"/>
+  <object id="67" template="../../obj/enemy.tx" x="161" y="78.6667">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bedlam&quot; ] }"/>
+    <property name="enemy" value="Bandit Leader"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="120" y="141.667">
+   <properties>
+    <property name="enemy" value="Bandit Slingshot"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/waypoint.tx" x="70.3333" y="26.3333"/>
+  <object id="70" template="../../obj/waypoint.tx" x="252.667" y="29.6667"/>
+  <object id="71" template="../../obj/waypoint.tx" x="378.667" y="44.3333"/>
+  <object id="72" template="../../obj/enemy.tx" x="351" y="160.333">
+   <properties>
+    <property name="enemy" value="Bandit Scoundrel"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="65,66,63,60,61,62,61,60,63,64"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="26.3333" y="163.667">
+   <properties>
+    <property name="enemy" value="Bandit Archer"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="150.667" y="26">
+   <properties>
+    <property name="enemy" value="Bandit Scoundrel"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="69,70,71,70"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/manashards.tx" x="174" y="138"/>
+  <object id="76" template="../../obj/manashards.tx" x="85.3333" y="91"/>
+  <object id="77" template="../../obj/booster.tx" x="223.667" y="95.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

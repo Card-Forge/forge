@@ -1,0 +1,68 @@
+snake_green.png
+size: 160,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 1, 0
+  size: 16, 16     
+Idle
+  xy: 8, 16
+  size: 16, 16  
+Idle
+  xy: 40, 16
+  size: 16, 16  
+Idle
+  xy: 72, 16
+  size: 16, 16  
+Idle
+  xy: 104, 16
+  size: 16, 16  
+Idle
+  xy: 136, 16
+  size: 16, 16  
+Walk
+  xy: 8, 48
+  size: 16, 16  
+Walk
+  xy: 40, 48
+  size: 16, 16   
+Walk
+  xy: 72, 48
+  size: 16, 16  
+Walk
+  xy: 104, 48
+  size: 16, 16  
+Walk
+  xy: 136, 24
+  size: 16, 16  
+Attack
+  xy: 8, 80
+  size: 18, 16  
+Attack
+  xy: 40, 80
+  size: 18, 16  
+Attack
+  xy: 72, 80
+  size: 18, 16  
+Attack
+  xy: 104, 80
+  size: 18, 16  
+Attack
+  xy: 136, 80
+  size: 18, 16  
+Death 
+  xy: 0, 144
+  size: 32, 16    
+Death 
+  xy: 32, 144
+  size: 32, 16    
+Death 
+  xy: 64, 144
+  size: 32, 16    
+Death 
+  xy: 96, 144
+  size: 32, 16     
+Death 
+  xy: 128, 144
+  size: 32, 16    

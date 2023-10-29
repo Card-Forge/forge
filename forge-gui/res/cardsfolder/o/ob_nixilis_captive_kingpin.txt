@@ -1,0 +1,14 @@
+Name:Ob Nixilis, Captive Kingpin
+ManaCost:2 B R
+Types:Legendary Creature Demon
+PT:4/3
+K:Flying
+K:Trample
+T:Mode$ LifeLostAll | ValidPlayer$ Opponent | ValidAmountEach$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more opponents each lose exactly 1 life, put a +1/+1 counter on CARDNAME. Exile the top card of your library. Until your next end step, you may play that card.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBExileTop
+SVar:DBExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ UntilYourNextEndStep | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Flying, trample\nWhenever one or more opponents each lose exactly 1 life, put a +1/+1 counter on Ob Nixilis, Captive Kingpin. Exile the top card of your library. Until your next end step, you may play that card.

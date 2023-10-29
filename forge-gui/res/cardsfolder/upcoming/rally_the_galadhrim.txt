@@ -1,0 +1,7 @@
+Name:Rally the Galadhrim
+ManaCost:2 G U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
+K:Conspire
+DeckHas:Ability$Token
+Oracle:Create a token that's a copy of target creature you control.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

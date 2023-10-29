@@ -1,0 +1,9 @@
+Name:Deification
+ManaCost:1 W
+Types:Enchantment
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Type$ Planeswalker | SpellDescription$ As CARDNAME enters the battlefield, choose a planeswalker type.
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl+ChosenType | AddKeyword$ Hexproof | Description$ Planeswalkers you control of the chosen type have hexproof.
+R:Event$ RemoveCounter | ActiveZones$ Battlefield | IsPresent$ Creature.YouCtrl | ValidCard$ Planeswalker.YouCtrl+ChosenType | Result$ LT1 | ValidCounterType$ LOYALTY | IsDamage$ True | ReplaceWith$ ReduceLoss | Description$ As long as you control a creature, if damage dealt to a planeswalker you control of the chosen type would result in all loyalty counters being removed, instead remove all but one of those counters instead.
+SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ 1
+Oracle:As Deification enters the battlefield, choose a planeswalker type.\nPlaneswalkers you control of the chosen type have hexproof.\nAs long as you control a creature, if damage dealt to a planeswalker you control of the chosen type would result in all loyalty counters being removed, instead remove all but one of those counters instead.

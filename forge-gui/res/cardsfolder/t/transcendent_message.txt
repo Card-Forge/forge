@@ -1,0 +1,7 @@
+Name:Transcendent Message
+ManaCost:X U U U U
+Types:Instant
+K:Convoke
+SVar:X:Count$xPaid
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDraw X cards.

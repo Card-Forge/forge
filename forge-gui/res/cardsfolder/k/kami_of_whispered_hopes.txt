@@ -1,0 +1,12 @@
+Name:Kami of Whispered Hopes
+ManaCost:2 G
+Types:Creature Spirit
+PT:1/1
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are put on that permanent instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | SpellDescription$ Add X mana of any one color, where X is CARDNAME's power.
+SVar:Y:Count$CardPower
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are put on that permanent instead.\n{T}: Add X mana of any one color, where X is Kami of Whispered Hopes's power.

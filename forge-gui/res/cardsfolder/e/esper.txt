@@ -1,0 +1,10 @@
+Name:Esper
+ManaCost:no cost
+Types:Plane Alara
+S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact | Type$ Spell | Amount$ 1 | Description$ Artifact spells cost {1} less to cast.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures you control that are white, blue, and/or black become artifacts in addition to other types until end of turn. Then each artifact creature you control gains vigilance, menace, and lifelink until end of turn.
+SVar:RolledChaos:DB$ AnimateAll | ValidCards$ Creature.YouCtrl+Black,Creature.YouCtrl+Blue,Creature.YouCtrl+White | Types$ Artifact | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.Artifact+YouCtrl | KW$ Vigilance & Menace & Lifelink
+DeckHas:Ability$LifeGain
+DeckHints:Type$Artifact
+Oracle:Artifact spells cost {1} less to cast.\nWhenever chaos ensues, creatures you control that are white, blue, and/or black become artifacts in addition to other types until end of turn. Then each artifact creature you control gains vigilance, menace, and lifelink until end of turn.

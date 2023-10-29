@@ -1,0 +1,20 @@
+Name:Invasion of Xerex
+ManaCost:2 W U
+Types:Battle Siege
+Defense:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | Origin$ Battlefield | Destination$ Hand
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Xerex enters the battlefield, return up to one target creature to its owner's hand.
+
+ALTERNATE
+
+Name:Vertex Paladin
+ManaCost:no cost
+Colors:white,blue
+Types:Creature Angel Knight
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+K:Flying
+Oracle:Flying\nVertex Paladin's power and toughness are each equal to the number of creatures you control.

@@ -16,9 +16,9 @@ ALTERNATE
 Name:Flamethrower Sonata
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card. When you discard an instant or sorcery card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker you don't control.
+A:SP$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBImmediateTrigger
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | TriggerDescription$ When you discard an instant or sorcery card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker you don't control.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | SpellDescription$ When you discard an instant or sorcery card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker you don't control.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerRemembered$CardManaCost

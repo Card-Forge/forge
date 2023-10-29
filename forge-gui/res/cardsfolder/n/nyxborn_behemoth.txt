@@ -1,0 +1,9 @@
+Name:Nyxborn Behemoth
+ManaCost:10 G G
+Types:Enchantment Creature Beast
+PT:10/10
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total mana value of noncreature enchantments you control.
+A:AB$ Pump | Cost$ 1 G Sac<1/Enchantment.Other/another enchantment> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+SVar:X:Count$Valid Enchantment.nonCreature+YouCtrl$SumCMC
+Oracle:This spell costs {X} less to cast, where X is the total mana value of noncreature enchantments you control.\nTrample\n{1}{G}, Sacrifice another enchantment: Nyxborn Behemoth gains indestructible until end of turn.

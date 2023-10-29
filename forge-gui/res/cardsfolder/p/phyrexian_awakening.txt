@@ -1,0 +1,10 @@
+Name:Phyrexian Awakening
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigIncubate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, incubate 4. (Create an Incubator token with four +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 4
+S:Mode$ Continuous | Affected$ Phyrexian.YouCtrl | AddKeyword$ Vigilance | Description$ Phyrexians you control have vigilance.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Phyrexian
+DeckHas:Ability$Token|Counters & Type$Artifact|Incubator|Phyrexian
+Oracle:When Phyrexian Awakening enters the battlefield, incubate 4. (Create an Incubator token with four +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\nPhyrexians you control have vigilance.

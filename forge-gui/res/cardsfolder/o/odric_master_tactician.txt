@@ -3,8 +3,7 @@ ManaCost:2 W W
 Types:Legendary Creature Human Soldier
 PT:3/4
 K:First Strike
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ OdricTest | SVarCompare$ GE3 | NoResolvingCheck$ True | Execute$ TrigOdricEffect | TriggerDescription$ Whenever CARDNAME and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | PresentCompare$ GE3 | NoResolvingCheck$ True | Execute$ TrigOdricEffect | TriggerDescription$ Whenever CARDNAME and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
 SVar:TrigOdricEffect:DB$ DeclareCombatants | DeclareBlockers$ True
-SVar:OdricTest:Count$Valid Creature.attacking+Other
 AI:RemoveDeck:All
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.

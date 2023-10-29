@@ -1,0 +1,10 @@
+Name:Locthwain Lancer
+ManaCost:4 B
+Types:Creature Human Knight
+PT:5/5
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Knight.nonToken+YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nontoken Knight you control dies, each opponent loses 1 life and you draw a card.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Knight
+Oracle:Menace\nWhenever a nontoken Knight you control dies, each opponent loses 1 life and you draw a card.

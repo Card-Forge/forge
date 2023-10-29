@@ -1,0 +1,10 @@
+Name:Barrow-Blade
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigAnimateAttacker | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.AttachedBy | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigAnimateDefender | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.
+SVar:TrigAnimateDefender:DB$ Animate | Defined$ TriggeredBlockerLKICopy | RemoveAllAbilities$ True
+SVar:TrigAnimateAttacker:DB$ Animate | Defined$ TriggeredAttackerLKICopy | RemoveAllAbilities$ True
+Oracle:Equipped creature gets +1/+1.\nWhenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

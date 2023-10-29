@@ -116,7 +116,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     public final Card getFirstTargetedCard() {
-        return Iterables.getFirst(Iterables.filter(targets, Card.class), null);
+        return Iterables.getFirst(getTargetCards(), null);
     }
 
     public final Player getFirstTargetedPlayer() {
@@ -142,6 +142,14 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     @Override
     protected List<GameObject> delegate() {
         return targets;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        if (o instanceof Card) {
+            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithTimestamp((Card) o));
+        }
+        return super.contains(o);
     }
 
     public final void addDividedAllocation(final GameObject tgt, final Integer portionAllocated) {

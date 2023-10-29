@@ -1,0 +1,8 @@
+Name:A-Knockout Blow
+ManaCost:2 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Creature.Red | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a red creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target tapped creature. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You
+DeckHas:Ability$LifeGain
+Oracle:This spell costs {2} less to cast if it targets a red creature.\nDestroy target tapped creature. You gain 2 life.

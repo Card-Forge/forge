@@ -1,4 +1,5 @@
 Name:Chun-Li, Countless Kicks
+AltName:Zethi, Arcane Blademaster
 ManaCost:1 W U
 Types:Legendary Creature Human Soldier
 PT:3/3

@@ -2,8 +2,8 @@ Name:Thassa's Oracle
 ManaCost:U U
 Types:Creature Merfolk Wizard
 PT:1/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top X cards of your library, where X is your devotion to blue. Put one of them on top of your library and the rest on the bottom of your library in a random order. If X is greater than or equal to the number of cards in your library, you win the game.
-SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | RestRandomOrder$ True | SubAbility$ DBWin
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top X cards of your library, where X is your devotion to blue. Put up to one of them on top of your library and the rest on the bottom of your library in a random order. If X is greater than or equal to the number of cards in your library, you win the game.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | RestRandomOrder$ True | Optional$ True | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX
 SVar:X:Count$Devotion.Blue
 SVar:Y:Count$InYourLibrary

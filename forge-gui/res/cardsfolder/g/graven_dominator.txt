@@ -4,5 +4,5 @@ Types:Creature Gargoyle
 PT:4/4
 K:Flying
 K:Haunt:TrigAnimate
-SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.Other | Power$ 1 | Toughness$ 1 | SpellDescription$ Each other creature has base power and toughness 1/1 until end of turn.
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.StrictlyOther | Power$ 1 | Toughness$ 1 | SpellDescription$ Each other creature has base power and toughness 1/1 until end of turn.
 Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Graven Dominator enters the battlefield or the creature it haunts dies, each other creature has base power and toughness 1/1 until end of turn.

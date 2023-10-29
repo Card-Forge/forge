@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Lord of the Rings #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/07/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. The Ring has not tempted you yet this game. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0numringtemptedyou=0
+p0hand=The Battle of Bywater|Set:LTR|Art:2;Ranger's Firebrand|Set:LTR|Art:1;Glamdring|Set:LTR|Art:3;Gimli's Fury|Set:LTR|Art:1;Improvised Club|Set:LTR|Art:1;Anduril, Flame of the West|Set:LTR|Art:2
+p0battlefield=Riders of Rohan|Set:LTC|Art:2;T:r_2_2_human_knight_trample_haste;T:r_2_2_human_knight_trample_haste;Forge Anew|Set:LTR|Art:3;Plains|Set:LTR|Art:2;Plains|Set:LTR|Art:2;Plains|Set:LTR|Art:2;Mountain|Set:LTR|Art:2;Mountain|Set:LTR|Art:2;Mountain|Set:LTR|Art:2
+p1life=16
+p1numringtemptedyou=0
+p1battlefield=Saruman of Many Colors|Set:LTR|Art:4;t:Orc Army Token,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Orc-Army,Keywords:,Image:b_0_0_army_ltr|Counters:P1P1=2

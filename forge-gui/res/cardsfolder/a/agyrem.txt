@@ -10,9 +10,9 @@ T:Mode$ ChangesZone | ValidCard$ Creature.nonWhite | Origin$ Battlefield | Desti
 SVar:TrigDelay2:DB$ Effect | Name$ Agyrem Effect For non-White Creatures | Triggers$ TrigEOT2 | RememberObjects$ TriggeredCard | Duration$ Permanent
 SVar:TrigEOT2:Mode$ Phase | Phase$ End of Turn | Execute$ AgyremReturn2 | TriggerDescription$ Return creature to its owner's hand at the beginning of the next end step.
 SVar:AgyremReturn2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ AgyremCleanup
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, creatures can't attack you until a player planeswalks.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures can't attack you until a player planeswalks.
 SVar:RolledChaos:DB$ Effect | Name$ Agyrem Effect - Can't Attack | StaticAbilities$ STCantAttack | Triggers$ TrigPlaneswalk | Duration$ Permanent
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ AgyremCleanup | Static$ True
 SVar:AIRollPlanarDieParams:Mode$ Always
-Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever you roll {CHAOS}, creatures can't attack you until a player planeswalks.
+Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever chaos ensues, creatures can't attack you until a player planeswalks.

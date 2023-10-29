@@ -63,6 +63,15 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
         };
     }
 
+    public static final Predicate<SpellAbility> isTrigger() {
+        return new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(final SpellAbility sa) {
+                return sa.isTrigger();
+            }
+        };
+    }
+
     public static final Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {
         return new Predicate<SpellAbility>() {
             @Override

@@ -1,0 +1,10 @@
+Name:Back for Seconds
+ManaCost:2 B
+Types:Sorcery
+K:Bargain
+A:SP$ Pump | Origin$ Graveyard | TgtZone$ Graveyard | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBCheat | SpellDescription$ Return up to two target creature cards from your graveyard to your hand. If this spell was bargained, you may put one of those cards with mana value 4 or less onto the battlefield instead of putting it into your hand.
+SVar:DBCheat:DB$ ChangeZone | Defined$ Targeted.cmcLE4 | ChooseFromDefined$ True | OptionalPrompt$ Do you want to put one of those creature cards with mana value 4 or less onto the battlefield instead of putting it into your hand ? | Optional$ True | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Condition$ Bargain | ChangeNum$ 1 | SubAbility$ DBChangeAll
+SVar:DBChangeAll:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nReturn up to two target creature cards from your graveyard to your hand. If this spell was bargained, you may put one of those cards with mana value 4 or less onto the battlefield instead of putting it into your hand.

@@ -1,0 +1,8 @@
+Name:Grey Havens Navigator
+ManaCost:2 U
+Types:Creature Elf Pilot
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Flash\nWhen Grey Havens Navigator enters the battlefield, scry 1.

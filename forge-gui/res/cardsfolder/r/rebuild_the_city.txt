@@ -1,0 +1,6 @@
+Name:Rebuild the City
+ManaCost:3 B R G
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Land | TgtPrompt$ Select target land | NumCopies$ 3 | SetPower$ 3 | SetToughness$ 3 | AddKeywords$ Vigilance & Menace | AddTypes$ Creature | SpellDescription$ Choose target land. Create three tokens that are copies of it, except they're 3/3 creatures in addition to their other types and they have vigilance and menace. (They're affected by summoning sickness.)
+DeckHas:Ability$Token
+Oracle:Choose target land. Create three tokens that are copies of it, except they're 3/3 creatures in addition to their other types and they have vigilance and menace. (They're affected by summoning sickness.)

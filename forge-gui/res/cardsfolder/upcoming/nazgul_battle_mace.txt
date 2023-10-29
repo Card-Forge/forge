@@ -1,0 +1,10 @@
+Name:Nazgul Battle-Mace
+ManaCost:5 
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | AddTrigger$ SacrificeStatic | Affected$ Creature.EquippedBy | AddKeyword$ Menace & Deathtouch & Annihilator:1 | Description$ Equipped creature has menace, deathtouch, annihilator 1, and "Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control unless that player pays 3 life." (Whenever a creature with annihilator 1 attacks, defending player sacrifices a permanent.)
+SVar:SacrificeStatic:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+OppCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control unless that player pays 3 life.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | UnlessCost$ PayLife<3> | UnlessPayer$ TriggeredCardController
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Equipped creature has menace, deathtouch, annihilator 1, and "Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control unless that player pays 3 life." (Whenever a creature with annihilator 1 attacks, defending player sacrifices a permanent.)\nEquip {3}

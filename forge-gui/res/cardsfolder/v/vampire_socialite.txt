@@ -4,7 +4,7 @@ Types:Creature Vampire Noble
 PT:2/2
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control.
-SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Vampire.YouCtrl+Other | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Vampire.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Vampire.YouCtrl+Other
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ As long as an opponent lost life this turn, each other Vampire you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:X:Count$LifeOppsLostThisTurn

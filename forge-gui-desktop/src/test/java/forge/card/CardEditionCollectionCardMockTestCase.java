@@ -41,7 +41,7 @@ public class CardEditionCollectionCardMockTestCase extends CardMockTestCase {
 
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
         String[] cardNames = { "Shivan Dragon", "Animate Wall", "Balance", "Blessing", "Force of Will" };
-        String[] expectedSets = { "DMR", "30A", "30A", "30A", "DMR" };
+        String[] expectedSets = { "P30T", "30A", "30A", "30A", "DMR" };
         List<PaperCard> cards = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             String cardName = cardNames[i];

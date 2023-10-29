@@ -1,9 +1,9 @@
 Name:Calibrated Blast
 ManaCost:2 R
 Types:Instant
-A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ DBImmediateTrigger | StackDescription$ Reveal cards from the top of your library until you reveal a nonland card. Put the revealed cards on the bottom of your library in a random order. | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card. Put the revealed cards on the bottom of your library in a random order. When you reveal a nonland card this way, CARDNAME deals damage equal to that card's mana value to any target.
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | Execute$ TrigDamage | TriggerDescription$ When you reveal a nonland card this way, CARDNAME deals damage equal to that card's mana value to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBCleanup
+A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ DBImmediateTrigger | StackDescription$ Reveal cards from the top of your library until you reveal a nonland card. Put the revealed cards on the bottom of your library in a random order. | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card. Put the revealed cards on the bottom of your library in a random order.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | Execute$ TrigDamage | SpellDescription$ When you reveal a nonland card this way, CARDNAME deals damage equal to that card's mana value to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 K:Flashback:3 R R

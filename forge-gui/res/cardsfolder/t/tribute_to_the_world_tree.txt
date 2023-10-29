@@ -1,0 +1,11 @@
+Name:Tribute to the World Tree
+ManaCost:G G G
+Types:Enchantment
+DeckHas:Ability$Counters
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever a creature enters the battlefield under your control, draw a card if its power is 3 or greater. Otherwise, put two +1/+1 counters on it.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBPutCounter
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters
+Oracle:Whenever a creature enters the battlefield under your control, draw a card if its power is 3 or greater. Otherwise, put two +1/+1 counters on it.

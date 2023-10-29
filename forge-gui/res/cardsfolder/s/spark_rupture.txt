@@ -1,0 +1,9 @@
+Name:Spark Rupture
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ Planeswalker.counters_GE1_LOYALTY | AddType$ Creature | RemoveCardTypes$ True | RemoveAllAbilities$ True | SetPower$ AffectedX | SetToughness$ AffectedX | Description$ Each planeswalker with one or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it.
+SVar:AffectedX:Count$CardCounters.LOYALTY
+SVar:NonStackingEffect:True
+Oracle:When Spark Rupture enters the battlefield, draw a card.\nEach planeswalker with one or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it.

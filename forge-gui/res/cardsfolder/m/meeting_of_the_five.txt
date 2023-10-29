@@ -2,7 +2,7 @@ Name:Meeting of the Five
 ManaCost:3 W U B R G
 Types:Sorcery
 A:SP$ Dig | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top ten cards of your library.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup | SpellDescription$ You may cast spells with exactly three colors from among them this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup | SpellDescription$ You may cast spells with exactly three colors from among them this turn.
 SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+numColorsEQ3 | MayPlay$ True | AffectedZone$ Exile | Description$ You may cast spells with exactly three colors from among them this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ W W U U B B R R G G | RestrictValid$ Spell.numColorsEQ3 | SpellDescription$ Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Spend this mana only to cast spells with exactly three colors.

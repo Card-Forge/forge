@@ -22,6 +22,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
+import forge.ai.ability.FightAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -78,6 +79,49 @@ import java.util.List;
  * own file, inside its own package, for example, forge.ai.cards.
  */
 public class SpecialCardAi {
+
+    // Arena and Magus of the Arena
+    public static class Arena {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Game game = ai.getGame();
+
+            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().getNextTurn() != ai) {
+                return false; // at opponent's EOT only, to conserve mana
+            }
+
+            CardCollection aiCreatures = ai.getCreaturesInPlay();
+            if (aiCreatures.isEmpty()) {
+                return false;
+            }
+
+            for (Player opp : ai.getOpponents()) {
+                CardCollection oppCreatures = opp.getCreaturesInPlay();
+                if (oppCreatures.isEmpty()) {
+                    continue;
+                }
+
+                for (Card aiCreature : aiCreatures) {
+                    boolean canKillAll = true;
+                    for (Card oppCreature : oppCreatures) {
+                        if (FightAi.canKill(oppCreature, aiCreature, 0)) {
+                            canKillAll = false;
+                            break;
+                        }
+                        if (!FightAi.canKill(aiCreature, oppCreature, 0)) {
+                            canKillAll = false;
+                            break;
+                        }
+                    }
+                    if (canKillAll) {
+                        sa.getTargets().clear();
+                        sa.getTargets().add(aiCreature);
+                        return true;
+                    }
+                }
+            }
+            return sa.isTargetNumberValid();
+        }
+    }
 
     // Black Lotus and Lotus Bloom
     public static class BlackLotus {
@@ -246,6 +290,45 @@ public class SpecialCardAi {
             }
 
             return best != null ? best.getName() : "";
+        }
+    }
+
+    public static class PithingNeedle {
+        public static String chooseCard(final Player ai, final SpellAbility sa) {
+            // TODO Remove names of cards already named by other Pithing Needles
+            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
+            if (!oppPerms.isEmpty()) {
+                return chooseCardFromList(oppPerms).getName();
+            }
+
+            CardCollection visibleZones = CardLists.getValidCards(ai.getOpponents().getCardsIn(Lists.newArrayList(ZoneType.Graveyard, ZoneType.Exile)), "Card.OppCtrl+hasNonmanaAbilities", ai, sa.getHostCard(), sa);
+            if (!visibleZones.isEmpty()) {
+                // If nothing on the battlefield has a nonmana ability choose something
+                return chooseCardFromList(visibleZones).getName();
+            }
+
+            return chooseNonBattlefieldName();
+        }
+
+        static public Card chooseCardFromList(CardCollection cardlist) {
+            Card best = ComputerUtilCard.getBestPlaneswalkerAI(cardlist);
+            if (best != null) {
+                // No planeswalkers choose something!
+                return best;
+            }
+
+            best = ComputerUtilCard.getBestCreatureAI(cardlist);
+            if (best == null) {
+                // If nothing on the battlefield has a nonmana ability choose something
+                Collections.shuffle(cardlist);
+                best = cardlist.getFirst();
+            }
+
+            return best;
+        }
+
+        static public String chooseNonBattlefieldName() {
+            return "Liliana of the Veil";
         }
     }
 
@@ -454,8 +537,8 @@ public class SpecialCardAi {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
-            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.hasKeyword(Keyword.WITHER)
-                    && !source.hasKeyword(Keyword.INFECT) && predictedPT.getLeft() <= oppT) {
+            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.isWitherDamage()
+                    && predictedPT.getLeft() <= oppT) {
                 // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
                 return false;
             }
@@ -595,6 +678,7 @@ public class SpecialCardAi {
     // Gideon Blackblade
     public static class GideonBlackblade {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            sa.resetTargets();
             CardCollectionView otb = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
             if (!otb.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestAI(otb));
@@ -622,6 +706,47 @@ public class SpecialCardAi {
             sa.resetTargets();
             sa.getTargets().addAll(Aggregates.random(validTgts, numTgts));
             return true;
+        }
+    }
+
+    // Grisly Sigil
+    public static class GrislySigil {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            // TODO: improve targeting support for Casualty 1
+            CardCollection potentialTgts = CardLists.filterControlledBy(CardUtil.getValidCardsToTarget(sa), ai.getOpponents());
+
+            for (Card c : potentialTgts) {
+                int potentialDamage = c.getAssignedDamage(false, null) > 0 ? 3 : 1; // TODO: account for damage reduction
+                if (c.canBeDestroyed()) {
+                    int damageToDeal = c.isCreature() ? c.getNetToughness() : c.getCurrentLoyalty();
+                    if (damageToDeal <= c.getAssignedDamage() + potentialDamage) {
+                        potentialTgts.add(c);
+                    }
+                }
+            }
+
+            if (!potentialTgts.isEmpty()) {
+                sa.resetTargets();
+                sa.getTargets().add(ComputerUtilCard.getBestAI(potentialTgts));
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    // Grothama, All-Devouring
+    public static class GrothamaAllDevouring {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            final Card devourer = AbilityUtils.getDefinedCards(source, sa.getParam("ExtraDefined"), sa).getFirst(); // maybe just getOriginalHost()?
+            if (ai.getTeamMates(true).contains(devourer.getController())) {
+                return false; // TODO: Currently, the AI doesn't ever fight its own (or allied) Grothama for card draw. This can be improved.
+            }
+            final Card fighter = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).getFirst();
+            boolean goodTradeOrNoTrade = devourer.canBeDestroyed() && (devourer.getNetPower() < fighter.getNetToughness() || !fighter.canBeDestroyed()
+                    || ComputerUtilCard.evaluateCreature(devourer) > ComputerUtilCard.evaluateCreature(fighter));
+            return goodTradeOrNoTrade && fighter.getNetPower() >= devourer.getNetToughness();
         }
     }
 
@@ -1102,7 +1227,7 @@ public class SpecialCardAi {
                 return false;
             }
 
-            final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
+            final CardCollectionView cards = ai.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command));
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
             int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableManaSources(ai, true), CardPredicates.Presets.UNTAPPED).size();

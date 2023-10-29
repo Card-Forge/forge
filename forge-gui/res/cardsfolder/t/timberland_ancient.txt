@@ -1,0 +1,9 @@
+Name:Timberland Ancient
+ManaCost:4 G G
+Types:Creature Treefolk
+PT:6/5
+K:Reach
+K:Trample
+K:TypeCycling:Forest:2
+DeckHas:Ability$Discard
+Oracle:Reach, trample\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

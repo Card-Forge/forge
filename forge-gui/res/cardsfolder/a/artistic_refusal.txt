@@ -1,0 +1,10 @@
+Name:Artistic Refusal
+ManaCost:4 U U
+Types:Instant
+K:Convoke
+A:SP$ Charm | Choices$ DBCounter,DBDraw | MinCharmNum$ 1 | CharmNum$ 2
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one or both —\n• Counter target spell.\n•Draw two cards, then discard a card.

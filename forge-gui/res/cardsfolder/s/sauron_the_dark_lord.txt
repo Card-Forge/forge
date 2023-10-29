@@ -1,0 +1,13 @@
+Name:Sauron, the Dark Lord
+ManaCost:3 U B R
+Types:Legendary Creature Avatar Horror
+PT:7/6
+K:Ward:Sac<1/Artifact.Legendary;Creature.Legendary/legendary artifact or legendary creature>
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigAmass | TriggerDescription$ Whenever an opponent casts a spell, amass Orcs 1.
+SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 1
+T:Mode$ DamageDone | ValidSource$ Army.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTempt | TriggerZones$ Battlefield | TriggerDescription$ Whenever an Army you control deals combat damage to a player, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ RingTemptsYou | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever the Ring tempts you, you may discard your hand. If you do, draw four cards.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ 4
+DeckHas:Ability$Token
+Oracle:Ward—Sacrifice a legendary artifact or legendary creature.\nWhenever an opponent casts a spell, amass Orcs 1.\nWhenever an Army you control deals combat damage to a player, the Ring tempts you.\nWhenever the Ring tempts you, you may discard your hand. If you do, draw four cards.

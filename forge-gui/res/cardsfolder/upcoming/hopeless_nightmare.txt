@@ -1,0 +1,11 @@
+Name:Hopeless Nightmare
+ManaCost:B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card and loses 2 life.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Opponent
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Sacrifice | Cost$ 2 B | SpellDescription$ Sacrifice CARDNAME
+DeckHas:Ability$Discard|Sacrifice
+Oracle:When Hopeless Nightmare enters the battlefield, each opponent discards a card and loses 2 life.\nWhen Hopeless Nightmare is put into a graveyard from the battlefield, scry 2.\n{2}{B}: Sacrifice Hopeless Nightmare.

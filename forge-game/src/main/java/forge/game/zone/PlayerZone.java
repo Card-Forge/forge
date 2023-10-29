@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -124,8 +123,8 @@ public class PlayerZone extends Zone {
         return Lang.getInstance().getPossessedObject(player.toString(), zoneType.toString());
     }
 
-    public CardCollectionView getCardsPlayerCanActivate(Player who) {
-        CardCollectionView cl = getCards(false);
+    public Iterable<Card> getCardsPlayerCanActivate(Player who) {
+        Iterable<Card> cl = getCards(false);
         boolean checkingForOwner = who == player;
 
         if (checkingForOwner && (is(ZoneType.Battlefield) || is(ZoneType.Hand))) {
@@ -133,9 +132,8 @@ public class PlayerZone extends Zone {
         }
 
         // Only check the top card of the library
-        Iterable<Card> cards = cl;
         if (is(ZoneType.Library)) {
-            cards = Iterables.limit(cards, 1);
+            cl = Iterables.limit(cl, 1);
         }
 
         final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : alienCardsActivationFilter(who);

@@ -13,5 +13,6 @@ SVar:PlayEn:Mode$ Continuous | Affected$ Enchantment.YouCtrl+IsRemembered | MayP
 SVar:PlayIn:Mode$ Continuous | Affected$ Instant.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Instant | EffectZone$ Command | AffectedZone$ Exile
 SVar:PlaySo:Mode$ Continuous | Affected$ Sorcery.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Sorcery | EffectZone$ Command | AffectedZone$ Exile
 SVar:PlayTr:Mode$ Continuous | Affected$ Tribal.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Tribal | EffectZone$ Command | AffectedZone$ Exile
+SVar:PlayTr:Mode$ Continuous | Affected$ Battle.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Battle | EffectZone$ Command | AffectedZone$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile the top eight cards of your library. You may put a land card from among them onto the battlefield. Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards without paying its mana cost.

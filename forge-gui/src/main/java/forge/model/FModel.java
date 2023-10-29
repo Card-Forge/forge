@@ -164,6 +164,8 @@ public final class FModel {
         if (new AutoUpdater(true).attemptToUpdate()) {
             //
         }
+        // load types before loading cards
+        loadDynamicGamedata();
 
         //load card database
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
@@ -221,7 +223,11 @@ public final class FModel {
         magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
 
         magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
-        magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
+        try {
+            magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
+        } catch(Exception e) {
+            magicDb.setMulliganRule(MulliganDefs.MulliganRule.London);
+        }
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         //setblockLands
@@ -242,8 +248,6 @@ public final class FModel {
         worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
 
         Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
-
-        loadDynamicGamedata();
 
         if (progressBar != null) {
             FThreads.invokeInEdtLater(new Runnable() {
@@ -270,6 +274,7 @@ public final class FModel {
         achievements.put(GameType.Quest, new QuestAchievements());
         achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
+        achievements.put(GameType.Adventure, new AdventureAchievements());
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
@@ -414,14 +419,25 @@ public final class FModel {
                     addTo = CardType.Constant.WALKER_TYPES;
                 } else if (s.equals("[DungeonTypes]")) {
                     addTo = CardType.Constant.DUNGEON_TYPES;
+                } else if (s.equals("[BattleTypes]")) {
+                    addTo = CardType.Constant.BATTLE_TYPES;
+                } else if (s.equals("[PlanarTypes]")) {
+                    addTo = CardType.Constant.PLANAR_TYPES;
                 } else if (s.length() > 1) {
                     if (addTo != null) {
                         if (s.contains(":")) {
                             String[] k = s.split(":");
                             addTo.add(k[0]);
                             CardType.Constant.pluralTypes.put(k[0], k[1]);
+
+                            if (k[0].contains(" ")) {
+                                CardType.Constant.MultiwordTypes.add(k[0]);
+                            }
                         } else {
                             addTo.add(s);
+                            if (s.contains(" ")) {
+                                CardType.Constant.MultiwordTypes.add(s);
+                            }
                         }
                     }
                 }
@@ -459,6 +475,10 @@ public final class FModel {
         case Quest:
         case PlanarConquest:
         case Puzzle:
+        case Adventure:
+            break;
+        case AdventureEvent:
+            gameType = GameType.Adventure;
             break;
         case QuestDraft:
             gameType = GameType.Quest;

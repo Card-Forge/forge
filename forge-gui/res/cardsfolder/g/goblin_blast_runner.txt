@@ -2,7 +2,7 @@ Name:Goblin Blast-Runner
 ManaCost:R
 Types:Creature Goblin
 PT:1/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | AddPower$ 2 | CheckSVar$ SaccThisTurn | SVarCompare$ GE1 | Description$ CARDNAME gets +2/+0 and has menace as long as you sacrificed a permanent this turn.
-SVar:SaccThisTurn:Count$SacrificedThisTurn Permanent
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | AddPower$ 2 | CheckSVar$ SaccThisTurn | SVarCompare$ GE1 | Description$ CARDNAME gets +2/+0 and has menace as long as you sacrificed a permanent this turn.
+SVar:SaccThisTurn:PlayerCountPropertyYou$SacrificedThisTurn Permanent
 DeckHints:Ability$Sacrifice
 Oracle:Goblin Blast-Runner gets +2/+0 and has menace as long as you sacrificed a permanent this turn.

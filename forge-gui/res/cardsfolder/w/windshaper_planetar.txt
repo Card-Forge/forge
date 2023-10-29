@@ -4,8 +4,8 @@ Types:Creature Angel
 PT:4/4
 K:Flash
 K:Flying
-T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachAttacker | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, for each attacking creature, you may reselect which player or planeswalker that creature is attacking. (It can't attack its controller or its controller's planeswalkers.)
+T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachAttacker | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, for each attacking creature, you may reselect which player or permanent that creature is attacking. (It can't attack its controller or their permanents.)
 SVar:TrigEachAttacker:DB$ RepeatEach | RepeatCards$ Creature.attacking | RepeatSubAbility$ DBChangeAttacker
 SVar:DBChangeAttacker:DB$ ChangeCombatants | Defined$ Remembered | Optional$ True
 AI:RemoveDeck:All
-Oracle:Flash\nFlying\nWhen Windshaper Planetar enters the battlefield during the declare attackers step, for each attacking creature, you may reselect which player or planeswalker that creature is attacking. (It can't attack its controller or its controller's planeswalkers.)
+Oracle:Flash\nFlying\nWhen Windshaper Planetar enters the battlefield during the declare attackers step, for each attacking creature, you may reselect which player or permanent that creature is attacking. (It can't attack its controller or their permanents.)

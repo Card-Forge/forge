@@ -1,0 +1,9 @@
+Name:Lothlorien Blade
+ManaCost:3
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigExchangeDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.
+SVar:TrigExchangeDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls. | NumDmg$ MyX
+SVar:MyX:TriggeredAttacker$CardPower
+K:Equip:2:Creature.Elf:elf
+K:Equip:5
+Oracle:Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.\nEquip Elf {2}\nEquip {5}

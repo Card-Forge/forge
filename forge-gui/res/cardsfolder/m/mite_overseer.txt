@@ -2,7 +2,7 @@ Name:Mite Overseer
 ManaCost:3 W
 Types:Creature Phyrexian Soldier
 PT:4/2
-K:First strike
+K:First Strike
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+token | AddPower$ 1 | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, creature tokens you control get +1/+0 and have first strike.
 A:AB$ Token | Cost$ 3 WP | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | SpellDescription$ Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter. {W/P} can be paid with either {W} or 2 life.)
 DeckHas:Ability$Token & Type$Artifact|Mite

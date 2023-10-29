@@ -64,8 +64,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || topSA.getActivatingPlayer() == ai
-                    || ai.getAllies().contains(topSA.getActivatingPlayer())) {
+            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
             } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
@@ -124,7 +123,7 @@ public class CounterAi extends SpellAbilityAi {
 
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of the time
-                if (!SpellAbilityAi.playReusable(ai, sa)) {
+                if (!playReusable(ai, sa)) {
                     return false;
                 }
             }
@@ -145,7 +144,7 @@ public class CounterAi extends SpellAbilityAi {
             String logic = sa.getParam("AILogic");
             if ("Never".equals(logic)) {
                 return false;
-            } else if (logic.startsWith("MinCMC.")) {
+            } else if (logic.startsWith("MinCMC.")) { // TODO fix Daze and fold into AITgts
                 int minCMC = Integer.parseInt(logic.substring(7));
                 if (tgtCMC < minCMC) {
                     return false;
@@ -288,7 +287,7 @@ public class CounterAi extends SpellAbilityAi {
                     if (toPay <= usableManaSources) {
                         // If this is a reusable Resource, feel free to play it most
                         // of the time
-                        if (!SpellAbilityAi.playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
+                        if (!playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
                             return false;
                         }
                     }
@@ -318,7 +317,7 @@ public class CounterAi extends SpellAbilityAi {
         SpellAbilityStackInstance si = null;
         while (it.hasNext()) {
             si = it.next();
-            tgtSA = si.getSpellAbility(true);
+            tgtSA = si.getSpellAbility();
             if (!sa.canTargetSpellAbility(tgtSA)) {
                 continue;
             }

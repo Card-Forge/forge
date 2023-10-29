@@ -1,0 +1,10 @@
+Name:Gatewatch Beacon
+ManaCost:2 W
+Types:Artifact
+K:etbCounter:LOYALTY:6
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Planeswalker.YouCtrl | IsPresent$ Card.Self+counters_GE1_LOYALTY | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ Whenever a planeswalker enters the battlefield under your control, if CARDNAME has loyalty counters on it, you may move a loyalty counter from CARDNAME onto that planeswalker.
+SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy | CounterType$ LOYALTY
+DeckHints:Type$Planeswalker
+DeckHas:Ability$Counters
+Oracle:Gatewatch Beacon enters the battlefield with three loyalty counters on it.\n{T}: Add {W}.\nWhenever a planeswalker enters the battlefield under your control, if Gatewatch Beacon has loyalty counters on it, you may move a loyalty counter from Gatewatch Beacon onto that planeswalker.

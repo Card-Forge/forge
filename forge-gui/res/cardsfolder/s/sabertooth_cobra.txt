@@ -4,9 +4,8 @@ Types:Creature Snake
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ PoisonTarget | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player gets a poison counter. The player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that step. (A player with ten or more poison counters loses the game.)
 SVar:PoisonTarget:DB$ Poison | Num$ 1 | Defined$ TriggeredTarget | SubAbility$ CobraEffect
-SVar:CobraEffect:DB$ Effect | Name$ Sabertooth Cobra Effect | EffectOwner$ TriggeredTarget | Duration$ Permanent | Triggers$ PoisonTrig | RememberObjects$ TriggeredTarget | Abilities$ PayUp
-SVar:PoisonTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ You get another poison counter at the beginning of your next upkeep unless you pay {2} before that step.
-SVar:Bleed:DB$ Poison | Num$ 1 | Defined$ You | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:PayUp:ST$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {2} to remove this effect.
+SVar:CobraEffect:DB$ Effect | OneOff$ True | Abilities$ PayUp | Duration$ Permanent | Triggers$ PoisonTrig | RememberObjects$ TriggeredTarget
+SVar:PayUp:ST$ ChangeZone | Activator$ Player.IsRemembered | ActivationZone$ Command | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | AILogic$ Always | SpellDescription$ Pay {2} to avoid another poison counter.
+SVar:PoisonTrig:Mode$ Phase | OneOff$ True | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ The player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that step.
+SVar:Bleed:DB$ Poison | Num$ 1 | Defined$ Remembered
 Oracle:Whenever Sabertooth Cobra deals damage to a player, that player gets a poison counter. The player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that step. (A player with ten or more poison counters loses the game.)

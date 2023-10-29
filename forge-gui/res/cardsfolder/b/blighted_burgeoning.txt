@@ -1,0 +1,12 @@
+Name:Blighted Burgeoning
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "2: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 2
+T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 1 | Defined$ TriggeredCardController
+DeckHas:Ability$Counters|Token
+AI:RemoveDeck:All
+Oracle:Enchant land\nWhen Blighted Burgeoning enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.

@@ -4,8 +4,8 @@ Types:Plane Mercadia
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may exchange life totals with target player.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLife | TriggerZones$ Command | Secondary$ True | OptionalDecider$ You | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may exchange life totals with target player.
 SVar:TrigLife:DB$ ExchangeLife | Optional$ True | ValidTgts$ Player | TgtPrompt$ Select target player to exchange life totals with
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, exchange control of two target permanents that share a card type.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, exchange control of two target permanents that share a card type.
 SVar:RolledChaos:DB$ ExchangeControl | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanents that share a permanent type | TargetsWithSameCardType$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:When you planeswalk to Cliffside Market or at the beginning of your upkeep, you may exchange life totals with target player.\nWhenever you roll {CHAOS}, exchange control of two target permanents that share a card type.
+Oracle:When you planeswalk to Cliffside Market or at the beginning of your upkeep, you may exchange life totals with target player.\nWhenever chaos ensues, exchange control of two target permanents that share a card type.

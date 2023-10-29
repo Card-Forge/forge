@@ -6,10 +6,8 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:DevourCreatsAndWalkers:DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ Creature.Other,Planeswalker | SacMessage$ any number of creatures and/or planeswalkers | RememberSacrificed$ True | Optional$ True | SubAbility$ DevourCounters
 SVar:DevourCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Devour2X | ETB$ True | SubAbility$ DevourCleanup
 SVar:DevourCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DevourSacX:Count$Valid Creature.YouCtrl+Other/Plus.DevourSacY
-SVar:DevourSacY:Count$Valid Planeswalker.YouCtrl
-SVar:Devour2X:SVar$DevourSize/Times.2
-SVar:DevourSize:Count$RememberedSize
+SVar:DevourSacX:Count$Valid Creature.YouCtrl+Other,Planeswalker.YouCtrl
+SVar:Devour2X:Count$RememberedSize/Times.2
 AI:RemoveDeck:All
 # TODO: Figure out a way to make an AIPreference that would work for this kind of ability, e.g.:
 # SVar:AIPreference:Sacrifice$Creature.cmcLE3,Planeswalker.counters_LE2_LOYALTY

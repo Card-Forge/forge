@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar 3
+Title=The Very Hungry Caterpillar
+Difficulty=hard
+Description=BUG Evolve deck with Corpsejack Menace and Master Biomancer
+Icon=The Very Hungry Caterpillar.jpg
+Deck Type=constructed
+[main]
+4 Bayou
+2 Bramblewood Paragon
+2 Bred for the Hunt
+2 Cloudfin Raptor
+4 Corpsejack Menace
+2 Cytoplast Root-Kin
+4 Drowned Catacomb
+2 Elusive Krasis
+2 Experiment One
+2 Fathom Mage
+4 Hinterland Harbor
+4 Master Biomancer
+2 Oona's Blackguard
+1 Prime Speaker Zegana
+4 Renegade Krasis
+2 Sapphire Drake
+2 Shambleshark
+1 Tree of Redemption
+4 Tropical Island
+4 Underground Sea
+1 Varolz, the Scar-Striped
+1 Vigean Hydropon
+4 Woodland Cemetery
+[sideboard]

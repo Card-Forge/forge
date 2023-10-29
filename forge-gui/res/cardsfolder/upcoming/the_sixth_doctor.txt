@@ -1,0 +1,9 @@
+Name:The Sixth Doctor
+ManaCost:4 G U
+Types:Legendary Creature Time Lord Doctor
+PT:3/3
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | ActivationLimit$ 1 | Execute$ TrigCopy | TriggerDescription$ Time Lord's Prerogative — Whenever you cast a historic spell, copy it, except the copy isn't legendary. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. A copy of a permanent spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NonLegendary$ True
+DeckHints:Type$Artifact|Saga|Legendary
+DeckHas:Ability$Token
+Oracle:Time Lord's Prerogative — Whenever you cast a historic spell, copy it, except the copy isn't legendary. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. A copy of a permanent spell becomes a token.)

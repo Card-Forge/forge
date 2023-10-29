@@ -1,0 +1,10 @@
+Name:Feast of the Victorious Dead
+ManaCost:W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Y | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your end step, if one or more creatures died this turn, you gain that much life and distribute that many +1/+1 counters among creatures you control.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose any number of creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ Y | DividedAsYouChoose$ Y | MinChoiceAmount$ 1 | ChoiceAmount$ Y
+SVar:Y:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$LifeGain|Counters
+DeckHints:Ability$Sacrifice
+Oracle:At the beginning of your end step, if one or more creatures died this turn, you gain that much life and distribute that many +1/+1 counters among creatures you control.

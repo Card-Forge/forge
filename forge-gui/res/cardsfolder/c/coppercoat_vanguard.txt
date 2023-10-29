@@ -1,0 +1,8 @@
+Name:Coppercoat Vanguard
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Human.YouCtrl+Other | AddPower$ 1 | AddKeyword$ Ward:1 | Description$ Each other Human you control gets +1/+0 and has ward {1}.
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Human
+Oracle:Each other Human you control gets +1/+0 and has ward {1}.

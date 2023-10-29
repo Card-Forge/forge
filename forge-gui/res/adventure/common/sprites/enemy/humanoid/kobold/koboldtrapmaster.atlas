@@ -1,0 +1,83 @@
+koboldtrapmaster.png
+size: 256,448
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 140, 148
+  size: 14, 14     
+Idle 
+  xy: 6, 19
+  size: 20, 22   
+Idle 
+  xy: 38, 19
+  size: 20, 22  
+Idle 
+  xy: 70, 19
+  size: 20, 22  
+Idle 
+  xy: 102, 19
+  size: 20, 22     
+Walk
+  xy: 6, 77
+  size: 22, 28      
+Walk
+  xy: 38, 77
+  size: 22, 28      
+Walk
+  xy: 70, 77
+  size: 22, 28      
+Walk
+  xy: 102, 77
+  size: 22, 28      
+Walk
+  xy: 134, 77
+  size: 22, 28     
+Walk
+  xy: 166, 77
+  size: 22, 28      
+Walk
+  xy: 198, 77
+  size: 22, 28      
+Walk
+  xy: 230, 77
+  size: 22, 28   
+Attack 
+  xy: 38, 141
+  size: 22, 28  
+Attack 
+  xy: 70, 141
+  size: 22, 28 
+Attack 
+  xy: 70, 141
+  size: 22, 28 
+Attack 
+  xy: 102, 141
+  size: 22, 28 
+Attack 
+  xy: 134, 141
+  size: 22, 28
+Attack 
+  xy: 166, 141
+  size: 22, 28          
+Death 
+  xy: 0, 406
+  size: 32, 19  
+Death 
+  xy: 32, 406
+  size: 32, 19  
+Death 
+  xy: 64, 406
+  size: 32, 19 
+Death 
+  xy: 96, 406
+  size: 32, 19  
+Death 
+  xy: 128, 406
+  size: 32, 19  
+Death 
+  xy: 160, 406
+  size: 32, 19  
+Death 
+  xy: 192, 406
+  size: 32, 19  

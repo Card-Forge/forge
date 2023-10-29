@@ -1,14 +1,16 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import com.github.tommyettinger.textra.TextraLabel;
 import forge.adventure.data.BiomeSpriteData;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.util.Controls;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.MapViewScene;
+import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -22,15 +24,19 @@ public class MapSprite extends Actor {
     static public int BackgroundLayer = -1;
     static public int SpriteLayer = 0;
     TextureRegion texture;
-    TextraLabel searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
-    boolean isCaveDungeon, isOldorVisited;
-
+    Sprite bookmark = Config.instance().getItemSprite("Star");
+    Sprite magnifier = Config.instance().getItemSprite("Magnifier");
+    boolean isCaveDungeon, isOldorVisited, isBookmarked;
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
         if (point != null) {
+            PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + point.getData().map);
+            setBookmarked(changes.isBookmarked(), point);
             isCaveDungeon = "cave".equalsIgnoreCase(point.getData().type) || "dungeon".equalsIgnoreCase(point.getData().type);
             if (point.getData().map != null && point.getID() != null) {
-                isOldorVisited = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + point.getData().map).hasDeletedObjects();
+                isOldorVisited = changes.hasDeletedObjects();
             }
+        } else {
+            setBookmarked(false, null);
         }
         texture = sprite;
         setPosition(pos.x, pos.y);
@@ -40,6 +46,15 @@ public class MapSprite extends Actor {
 
     public void checkOut() {
         isOldorVisited = true;
+    }
+
+    public void setBookmarked(boolean val, PointOfInterest poi) {
+        isBookmarked = val;
+        if (isBookmarked)
+            MapViewScene.instance().addBookmark(poi);
+        else
+            MapViewScene.instance().removeBookmark(poi);
+
     }
 
     public static Array<Actor> getMapSprites(int chunkX, int chunkY, int layer) {
@@ -56,8 +71,11 @@ public class MapSprite extends Actor {
             BiomeSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
             if (data.layer != layer)
                 continue;
-            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483), null);
-            actorGroup.add(sprite);
+            Sprite biomeSprite = WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483);
+            if (biomeSprite != null) { //null means invalid and will cause blackscreen, investigate why this would happen...
+                Actor sprite = new MapSprite(entry.getKey(), biomeSprite, null);
+                actorGroup.add(sprite);
+            }
         }
         return actorGroup;
     }
@@ -68,9 +86,15 @@ public class MapSprite extends Actor {
         if (texture == null)
             return;
         batch.draw(texture, getX(), getY());
-        if (isCaveDungeon && !isOldorVisited) {
-            searchPost.setPosition(getX() - 7, getY() + 7);
-            searchPost.draw(batch, parentAlpha);
+        if (isCaveDungeon && !isOldorVisited && magnifier != null) {
+            magnifier.setScale(0.7f, 0.7f);
+            magnifier.setPosition(getX() - 7, getY() + 2);
+            magnifier.draw(batch, parentAlpha);
+        }
+        if (isBookmarked && bookmark != null) {
+            bookmark.setScale(0.7f, 0.7f);
+            bookmark.setPosition(getRight() - 8, getY() + getHeight() / 1.5f);
+            bookmark.draw(batch, parentAlpha);
         }
         //font.draw(batch,String.valueOf(getZIndex()),getX()-(getWidth()/2),getY());
     }

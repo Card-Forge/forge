@@ -1,0 +1,10 @@
+Name:Gallifrey Council Chamber
+ManaCost:no cost
+Types:Legendary Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any| RestrictValid$ Spell.Time Lord,Spell.Alien,Activated.Time Lord+inZoneBattlefield,Activated.Alien+inZoneBattlefield | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Time Lord or Alien spell or activate an ability of a Time Lord or Alien.
+DeckHas:Ability$Surveil|Graveyard
+DeckNeeds:Type$Time Lord|Alien
+Oracle:When Gallifrey Council Chamber enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Time Lord or Alien spell or activate an ability of a Time Lord or Alien.

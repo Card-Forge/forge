@@ -6,4 +6,6 @@ Type=Promo
 ScryfallCode=P10E
 
 [cards]
+1 R Faerie Conclave @Stephan Martiniere
+2 R Treetop Village @Rob Alexander
 35 R Reya Dawnbringer @Matthew D. Wilson

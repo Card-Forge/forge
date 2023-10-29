@@ -1,0 +1,10 @@
+Name:Courageous Resolve
+ManaCost:2 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | KW$ Protection:Card.ControlledBy Player.PlayerUID_ChosenPlayerUID,Emblem.ControlledBy Player.PlayerUID_ChosenPlayerUID:Protection from ChosenPlayerName | DefinedKW$ Opponent | SpellDescription$ Up to one target creature you control gains protection from each of your opponents until end of turn. Draw a card. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)
+SVar:DBDraw:DB$ Draw | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STKeepLife,STCantLose | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5 | AILogic$ Fog | SpellDescription$ Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn, and your opponents can't win the game this turn.
+SVar:STKeepLife:Mode$ CantLoseLife | ValidPlayer$ You | Description$ You can't lose life this turn.
+SVar:STCantLose:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. & Your opponents can't win the game. | Description$ You can't lose the game. Your opponents can't win the game.
+SVar:FatefulHour:Count$YourLifeTotal
+Oracle:Up to one target creature you control gains protection from each of your opponents until end of turn. Draw a card. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)\nFateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn, and your opponents can't win the game this turn.

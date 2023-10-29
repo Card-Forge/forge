@@ -6,29 +6,21 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.combat;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -36,12 +28,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.keyword.Keyword;
@@ -59,24 +46,40 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.MapToAmount;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
  * Static class containing utility methods related to combat.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
 public class CombatUtil {
 
     public static FCollectionView<GameEntity> getAllPossibleDefenders(final Player playerWhoAttacks) {
+        // Opponents, opposing planeswalkers, and any battle you don't protect
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
-            final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
-            defenders.addAll(planeswalkers);
+            defenders.addAll(defender.getPlaneswalkersInPlay());
         }
+
+        // Relevant battles (protected by the attacking player's opponents)
+        final Game game = playerWhoAttacks.getGame();
+        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.BATTLES);
+        for (Card battle : battles) {
+            if (battle.getType().hasSubtype("Siege") && battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
+                defenders.add(battle);
+            }
+        }
+
         return defenders;
     }
 
@@ -130,7 +133,7 @@ public class CombatUtil {
      * <p>
      * Check whether a player should be given the chance to attack this combat.
      * </p>
-     * 
+     *
      * @param p
      *            a {@link Player}.
      * @return {@code true} if and only if the player controls any creatures and
@@ -147,7 +150,7 @@ public class CombatUtil {
      * controls that could attack any possible defending {@link GameEntity}.
      * Note that this only performs primitive checks (see
      * {@link #canAttack(Card)}).
-     * 
+     *
      * @param p
      *            the attacking {@link Player}.
      * @return a {@link CardCollection}.
@@ -199,7 +202,7 @@ public class CombatUtil {
      * Note that a creature affected by any attacking restrictions may never be
      * declared as an attacker.
      * </p>
-     * 
+     *
      * @param attacker
      *            the attacking {@link Card}.
      * @param defender
@@ -233,10 +236,10 @@ public class CombatUtil {
             // attacker got goaded by defender or defender is not player
             if (goadedByDefender || !(defender instanceof Player)) {
                 for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                    if (!defender.equals(ge) && ge instanceof Player) {
+                    if (!ge.equals(defender) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                        if (!attacker.isGoadedBy((Player) ge) && !ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                             return false;
                         }
                     }
@@ -247,8 +250,8 @@ public class CombatUtil {
         // Quasi-goad logic for "Kardur, Doomscourge" etc. that isn't goad but behaves the same
         if (defender != null && defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
             for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                if (!defender.equals(ge) && ge instanceof Player) {
-                    if (canAttack(attacker, ge)) {
+                if (!ge.equals(defender) && ge instanceof Player) {
+                    if (!ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                         return false;
                     }
                 }
@@ -271,7 +274,7 @@ public class CombatUtil {
      * <p>
      * checkPropagandaEffects.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      */
@@ -295,7 +298,7 @@ public class CombatUtil {
     /**
      * Get the cost that has to be paid for a creature to attack a certain
      * defender.
-     * 
+     *
      * @param game
      *            the {@link Game}.
      * @param attacker
@@ -375,7 +378,7 @@ public class CombatUtil {
      * defending player declares blockers.
      * </p>
      * @param game
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      */
@@ -414,7 +417,7 @@ public class CombatUtil {
      * then maps each {@link GameEntity}, for which an attack requirement
      * exists, to the number of requirements on attacking that entity. Absent
      * entries, including an empty map, indicate no requirements exist.
-     * 
+     *
      * @param combat
      *            a {@link Combat}.
      * @return a {@link Map}.
@@ -432,7 +435,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @param combat
@@ -476,7 +479,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
@@ -490,7 +493,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
@@ -528,7 +531,7 @@ public class CombatUtil {
      * <p>
      * canBeBlocked.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param combat
@@ -564,7 +567,7 @@ public class CombatUtil {
      * <p>
      * canBeBlocked.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
@@ -670,7 +673,7 @@ public class CombatUtil {
 
     /**
      * canBlockAtLeastOne.
-     * 
+     *
      * @param blocker
      *            the blocker
      * @param attackers
@@ -688,7 +691,7 @@ public class CombatUtil {
 
     /**
      * Can be blocked.
-     * 
+     *
      * @param attacker
      *            the attacker
      * @param blockers
@@ -760,7 +763,7 @@ public class CombatUtil {
      * <p>
      * finishedMandatotyBlocks.
      * </p>
-     * 
+     *
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -776,7 +779,7 @@ public class CombatUtil {
             if (!blocker.getMustBlockCards().isEmpty()) {
                 final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
                 for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
-                    // If a creature can’t block unless a player pays a cost, that player is not required to pay that cost
+                    // If a creature can't block unless a player pays a cost, that player is not required to pay that cost
                     if (getBlockCost(blocker.getGame(), blocker, cardToBeBlocked) != null) {
                         continue;
                     }
@@ -793,7 +796,7 @@ public class CombatUtil {
                         }
                     }
                     if (potentialBlockers >= additionalBlockers && !blockedSoFar.contains(cardToBeBlocked)
-                            && (canBlockMoreCreatures(blocker, blockedSoFar) || freeBlockers.contains(blocker)) 
+                            && (canBlockMoreCreatures(blocker, blockedSoFar) || freeBlockers.contains(blocker))
                             && combat.isAttacking(cardToBeBlocked) && canBlock(cardToBeBlocked, blocker)) {
                         return TextUtil.concatWithSpace(blocker.toString(), "must still block", TextUtil.addSuffix(cardToBeBlocked.toString(),"."));
                     }
@@ -866,7 +869,7 @@ public class CombatUtil {
      * <p>
      * mustBlockAnAttacker.
      * </p>
-     * 
+     *
      * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @param combat
@@ -996,7 +999,7 @@ public class CombatUtil {
      * <p>
      * canAttack.
      * </p>
-     * 
+     *
      * @param p
      *            a {@link forge.game.player} object.
      * @param combat
@@ -1025,7 +1028,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param blocker
@@ -1092,7 +1095,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param blocker
@@ -1108,7 +1111,7 @@ public class CombatUtil {
      * <p>
      * canBlock.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param blocker
@@ -1123,7 +1126,7 @@ public class CombatUtil {
         if (!canBlock(blocker, nextTurn)) {
             return false;
         }
-        
+
         if (isUnblockableFromLandwalk(attacker, blocker.getController())
         		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
             return false;

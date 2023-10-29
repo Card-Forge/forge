@@ -1,0 +1,9 @@
+Name:Strixhaven
+ManaCost:no cost
+Types:Plane Arcavios
+S:Mode$ Continuous | AddKeyword$ Demonstrate | EffectZone$ Command | Affected$ Instant,Sorcery | AffectedZone$ Stack | Description$ Instant and sorcery spells players cast have demonstrate. (Whenever a player casts an instant or sorcery spell, they may copy it. If they do, they choose an opponent to also copy it. Players may choose new targets for their copies.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return up to one target instant or sorcery card from a graveyard to its owner's hand
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Hand | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select up to target instant or sorcery spell from any graveyard
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells players cast have demonstrate. (Whenever a player casts an instant or sorcery spell, they may copy it. If they do, they choose an opponent to also copy it. Players may choose new targets for their copies.)\nWhenever chaos ensues, return up to one target instant or sorcery card from a graveyard to its owner's hand

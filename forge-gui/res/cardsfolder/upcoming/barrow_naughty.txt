@@ -1,0 +1,10 @@
+Name:Barrow Naughty
+ManaCost:1 B
+Types:Creature Faerie
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | IsPresent$ Faerie.Other+YouCtrl | Description$ CARDNAME has lifelink as long as you control another Faerie.
+A:AB$ Pump | Cost$ 2 B | NumAtt$ +1 | Defined$ Self | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+DeckHints:Type$Faerie
+DeckHas:Ability$LifeGain
+Oracle:Flying\nBarrow Naughty has lifelink as long as you control another Faerie.\n{2}{B}: Barrow Naughty gets +1/+0 until end of turn.

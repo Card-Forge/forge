@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -20,6 +22,10 @@ public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         Game game = player.getGame();
+        if (property.endsWith("Activator")) {
+            sourceController = spellAbility.getHostCard().getController();
+            property = property.substring(0, property.length() - 9);
+        }
         if (property.equals("You")) {
             if (!player.equals(sourceController)) {
                 return false;
@@ -71,6 +77,10 @@ public class PlayerProperty {
             }
         } else if (property.equals("CardOwner")) {
             if (!player.equals(source.getOwner())) {
+                return false;
+            }
+        } else if (property.equals("descended")) {
+            if (!(player.getDescended() > 0)) {
                 return false;
             }
         } else if (property.equals("isMonarch")) {
@@ -179,15 +189,28 @@ public class PlayerProperty {
             if (player.getNumCardsInHandStartedThisTurnWith() <= 0) {
                 return false;
             }
-        } else if (property.startsWith("WithCardsInHand")) {
-            if (property.contains("AtLeast")) {
-                int amount = Integer.parseInt(property.split("AtLeast")[1]);
-                if (player.getCardsIn(ZoneType.Hand).size() < amount) {
-                    return false;
-                }
-            }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(player)) {
+                return false;
+            }
+        } else if (property.equals("IsRememberedOrController")) {
+            boolean found = false;
+            for (Object o : source.getRemembered()) {
+                if (o instanceof Player) {
+                    final Player p = (Player) o;
+                    if (p.equals(player)) {
+                        found = true;
+                        break;
+                    }
+                } else if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    if (c.getController().equals(player)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.equals("IsNotRemembered")) {
@@ -407,6 +430,10 @@ public class PlayerProperty {
                 }
             }
             return false;
+        } else if (property.equals("attackedYouTheirCurrentTurn")) {
+            if (!Iterables.contains(player.getAttackedPlayersMyTurn(), sourceController)) {
+                return false;
+            }
         } else if (property.equals("attackedYouTheirLastTurn")) {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;

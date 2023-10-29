@@ -7,7 +7,5 @@ ScryfallCode=PM10
 
 [cards]
 16★ R Honor of the Pure @Ralph Horsley
-28 R Mycoid Shepherd @Jarreau Wimberly
-29 R Naya Sojourners @Michael Bruinsma
 118★ M Vampire Nocturnus @Andrew Robinson
 166★ R Ant Queen @Ron Spencer

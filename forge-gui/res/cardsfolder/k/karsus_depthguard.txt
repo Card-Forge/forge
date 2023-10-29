@@ -1,0 +1,9 @@
+Name:Karsus Depthguard
+ManaCost:2 R
+Types:Creature Viashino Warrior
+PT:4/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self+powerGE5 | Description$ As long as CARDNAME's power is 5 or greater, it can attack as though it didn't have defender.
+DeckHints:Ability$Counters
+AI:RemoveDeck:Random
+Oracle:Defender\nAs long as Karsus Depthguard's power is 5 or greater, it can attack as though it didn't have defender.

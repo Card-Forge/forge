@@ -1,0 +1,9 @@
+Name:Rising of the Day
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 1 | Description$ Legendary creatures you control get +1/+0.
+SVar:BuffedBy:Creature
+SVar:PlayMain1:TRUE
+DeckHints:Type$Legendary
+Oracle:Creatures you control have haste.\nLegendary creatures you control get +1/+0.

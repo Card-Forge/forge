@@ -2,7 +2,7 @@ Name:Brood Sliver
 ManaCost:4 G
 Types:Creature Sliver
 PT:3/3
-T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigToken | OptionalDecider$ TriggeredSourceController | TriggerController$ TriggeredSourceController | TriggerDescription$ Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token.
+T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigToken | OptionalDecider$ TriggeredSourceController | TriggerDescription$ Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ TriggeredSourceController
 SVar:PlayMain1:TRUE
 DeckHints:Type$Sliver

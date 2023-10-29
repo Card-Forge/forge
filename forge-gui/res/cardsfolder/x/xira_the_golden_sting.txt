@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEggCounter | TriggerDescription$ Whenever CARDNAME attacks, put an egg counter on another target creature without an egg counter on it. When that creature dies, if it has an egg counter on it, draw a card and create a 1/1 black Insect creature token with flying.
-SVar:TrigEggCounter:DB$ PutCounter | CounterType$ EGG | CounterNum$ 1 | ValidTgts$ Creature.Other+counters_EQ0_EGG | RememberTargets$ True | TgtPrompt$ Put an egg counter on another target creature without an egg counter on it. | SubAbility$ DelayedTrigger
+SVar:TrigEggCounter:DB$ PutCounter | CounterType$ EGG | CounterNum$ 1 | ValidTgts$ Creature.Other+counters_EQ0_EGG | TgtPrompt$ Put an egg counter on another target creature without an egg counter on it. | SubAbility$ DelayedTrigger
 SVar:DelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsTriggerRemembered+counters_GE1_EGG | Execute$ TrigDraw | TriggerDescription$ When this creature dies, if it has an egg counter on it, draw a card and create a 1/1 black Insect creature token with flying.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_1_1_insect_flying

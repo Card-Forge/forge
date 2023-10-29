@@ -1,0 +1,7 @@
+Name:Wraith Token
+ManaCost:no cost
+Types:Creature Wraith
+Colors:black
+PT:3/3
+K:Menace
+Oracle:Menace

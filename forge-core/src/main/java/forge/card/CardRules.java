@@ -55,7 +55,7 @@ public final class CardRules implements ICardCharacteristics {
     private String partnerWith;
     private boolean custom;
 
-    private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
@@ -237,6 +237,11 @@ public final class CardRules implements ICardCharacteristics {
     @Override public String getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
 
     @Override
+    public String getDefense() {
+        return mainPart.getDefense();
+    }
+
+    @Override
     public String getOracleText() {
         switch (splitType.getAggregationMethod()) {
         case COMBINE:
@@ -270,16 +275,51 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
+    public boolean canBePartnerCommanders(CardRules b) {
+        if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
+            return false;
+        }
+        boolean legal = false;
+        if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
+            legal = true; // normal partner commander
+        }
+        if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
+            legal = true; // paired partner commander
+        }
+        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
+            legal = true; // Stranger Things Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Choose a Background") && b.canBeBackground()
+                || b.hasKeyword("Choose a Background") && canBeBackground()) {
+            legal = true; // commander with background
+        }
+        if (isDoctor() && b.hasKeyword("Doctor's companion")
+                || hasKeyword("Doctor's companion") && b.isDoctor()) {
+            legal = true; // Doctor Who partner commander
+        }
+        return legal;
+    }
+
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background"));
+                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
+                hasKeyword("Doctor's companion") || isDoctor());
     }
 
     public boolean canBeBackground() {
         return mainPart.getType().hasSubtype("Background");
+    }
+
+    public boolean isDoctor() {
+        for (String type : mainPart.getType().getSubtypes()) {
+            if (!type.equals("Time Lord") && !type.equals("Doctor")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean canBeOathbreaker() {
@@ -390,6 +430,11 @@ public final class CardRules implements ICardCharacteristics {
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
+            this.faces[2] = null;
+            this.faces[3] = null;
+            this.faces[4] = null;
+            this.faces[5] = null;
+            this.faces[6] = null;
 
             this.handLife = null;
             this.altMode = CardSplitType.None;
@@ -495,6 +540,8 @@ public final class CardRules implements ICardCharacteristics {
                         needs = new DeckHints(value);
                     } else if ("DeckHas".equals(key)) {
                         has = new DeckHints(value);
+                    } else if ("Defense".equals(key)) {
+                        this.faces[this.curFace].setDefense(value);
                     }
                     break;
 
@@ -662,6 +709,16 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean hasKeyword(final String k) {
         return Iterables.contains(mainPart.getKeywords(), k);
+    }
+
+    public boolean hasStartOfKeyword(final String k) {
+        for (final String inst : mainPart.getKeywords()) {
+            final String[] parts = inst.split(":");
+            if (parts[0].equals(k)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Integer getKeywordMagnitude(final String k) {

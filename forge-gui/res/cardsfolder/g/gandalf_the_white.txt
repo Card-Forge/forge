@@ -1,0 +1,10 @@
+Name:Gandalf the White
+ManaCost:3 W W
+Types:Legendary Creature Avatar Wizard
+PT:4/5
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Artifact,Card.Legendary | ValidSA$ Spell | Caster$ You | Description$ You may cast legendary spells and artifact spells as though they had flash.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent.Legendary,Artifact | Destination$ Battlefield | Description$ If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent.Legendary,Artifact | Origin$ Battlefield | Secondary$ True | Description$ If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+DeckNeeds:Type$Artifact|Legendary
+Oracle:Flash\nYou may cast legendary spells and artifact spells as though they had flash.\nIf a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

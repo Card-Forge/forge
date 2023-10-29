@@ -4,6 +4,6 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME becomes a 4/4 Phyrexian Eye artifact creature until end of turn.
-SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Phyrexian,Eye
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Phyrexian,Eye | RemoveCreatureTypes$ True
 DeckHas:Type$Eye|Phryexian
 Oracle:When Eye of Malcator enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\nWhenever another artifact enters the battlefield under your control, Eye of Malcator becomes a 4/4 Phyrexian Eye artifact creature until end of turn.

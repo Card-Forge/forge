@@ -1,0 +1,9 @@
+Name:Failed Conversion
+ManaCost:4 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -4 | AddToughness$ -4 | Description$ Enchanted creature gets -4/-4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigSurveil | TriggerDescription$ When enchanted creature dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+Oracle:Enchant creature\nEnchanted creature gets -4/-4.\nWhen enchanted creature dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

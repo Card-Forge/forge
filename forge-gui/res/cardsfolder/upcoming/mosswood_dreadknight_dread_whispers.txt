@@ -1,0 +1,20 @@
+Name:Mosswood Dreadknight
+ManaCost:1 G
+Types:Creature Human Knight
+PT:3/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Graveyard | RememberObjects$ Self | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+Adventure | AffectedZone$ Graveyard | Description$ Until the end of your next turn, you may play EFFECTSOURCE as an adventure. 
+DeckHas:Ability$Graveyard
+AlternateMode:Adventure
+Oracle:Trample\nWhen Mosswood Dreadknight dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
+
+ALTERNATE
+
+Name:Dread Whispers
+ManaCost:1 B
+Types:Sorcery Adventure
+A:SP$ Draw | NumCards$ 1 | SubAbility$ DBSLoseLife | SpellDescription$ You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
+SVar:DBSLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)

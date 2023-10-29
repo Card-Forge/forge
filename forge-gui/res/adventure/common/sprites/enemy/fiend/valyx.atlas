@@ -1,0 +1,68 @@
+valyx.png
+size: 136,96
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 16, 16   
+Idle 
+  xy: 0, 16
+  size: 24, 24     
+Idle 
+  xy: 24, 16
+  size: 24, 24  
+Idle 
+  xy: 48, 16
+  size: 24, 24  
+Idle 
+  xy: 72, 16
+  size: 24, 24    
+Walk
+  xy: 0, 40
+  size: 24, 24  
+Walk 
+  xy: 24, 40
+  size: 24, 24  
+Walk 
+  xy: 48, 40
+  size: 24, 24  
+Walk 
+  xy: 72, 40
+  size: 24, 24     
+Attack 
+  xy: 0, 64
+  size: 24, 24  
+Attack 
+  xy: 24, 64
+  size: 24, 24  
+Attack 
+  xy: 48, 64
+  size: 24, 24  
+Attack 
+  xy: 72, 64
+  size: 24, 24     
+Hit 
+  xy: 0, 88
+  size: 24, 24  
+Hit 
+  xy: 24, 88
+  size: 24, 24  
+Hit 
+  xy: 48, 88
+  size: 24, 24  
+Hit 
+  xy: 72, 88
+  size: 24, 24  
+Death 
+  xy: 0, 112
+  size: 24, 24      
+Death 
+  xy: 24, 112
+  size: 24, 24  
+Death 
+  xy: 48, 112
+  size: 24, 24  
+Death 
+  xy: 72, 112
+  size: 24, 24  

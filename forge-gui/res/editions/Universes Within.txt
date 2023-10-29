@@ -23,3 +23,9 @@ ScryfallCode=SLX
 15 R Maarika, Brutal Gladiator @Wisnu Tan
 16 R Tadeas, Juniper Ascendant @Alexander Mokhov
 17 R Zethi, Arcane Blademaster @Billy Christian
+18 M Greymond, Avacyn's Stalwart @Bram Sels
+19 M Gisa's Favorite Shovel @Svetlin Velinov
+20 M Enkira, Hostile Scavenger @Matt Stewart
+21 M Gregor, Shrewd Magistrate @Filipe Pagliuso
+22 M Hansk, Slayer Zealot @Michal Ivan
+23 M Malik, Grim Manipulator @Joshua Raphael

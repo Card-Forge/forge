@@ -1,0 +1,15 @@
+Name:Rapacious Guest
+ManaCost:2 B
+Types:Creature Halfling Citizen
+PT:2/2
+K:Menace
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$Whenever one or more creatures you control deal combat damage to a player, create a Food token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac 
+T:Mode$ Sacrificed | ValidCard$ Food | Execute$ TrigPutCounter | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a Food, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME leaves the battlefield, target opponent loses life equal to its power.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Token|Counters & Type$Food
+DeckHints:Type$Food
+Oracle:Menace\nWhenever one or more creatures you control deal combat damage to a player, create a Food token.\nWhenever you sacrifice a Food, put a +1/+1 counter on Rapacious Guest.\nWhen Rapacious Guest leaves the battlefield, target opponent loses life equal to its power.

@@ -1,0 +1,13 @@
+Name:Guff Rewrites History
+ManaCost:2 R
+Types:Instant 
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+nonEnchantment | RememberChanged$ True | TgtPrompt$ For each player, choose target nonenchantment, nonland permanent that player controls. | Origin$ Battlefield | Destination$ Library | Shuffle$ True | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBRepeat | SpellDescription$ For each player, choose target nonenchantment, nonland permanent that player controls. Those permanents' owners shuffle them into their libraries. Each player who controlled one of those permanents exiles cards from the top of their library until they exile a nonland card, then puts the rest on the bottom of their library in a random order. Each player may cast the nonland card they exiled without paying its mana cost.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ RememberedController | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBDigUntil | SubAbility$ DBRepeatCard
+SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | Valid$ Permanent.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | RememberRevealed$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBRepeatCard:DB$ RepeatEach | RepeatCards$ Card.IsImprinted | Zone$ Exile | RepeatSubAbility$ DBPlay | SubAbility$ DBCleanupBis
+SVar:DBPlay:DB$ Play | Defined$ Remembered  | Controller$ RememberedController | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True
+SVar:DBCleanupBis:DB$ Cleanup | ClearImprinted$ True
+SVar:OneEach:PlayerCountPlayers$Amount
+Oracle:For each player, choose target nonenchantment, nonland permanent that player controls. Those permanents' owners shuffle them into their libraries. Each player who controlled one of those permanents exiles cards from the top of their library until they exile a nonland card, then puts the rest on the bottom of their library in a random order. Each player may cast the nonland card they exiled without paying its mana cost.

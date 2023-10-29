@@ -1,0 +1,10 @@
+Name:Lithomantic Barrage
+ManaCost:R
+Types:Sorcery
+K:This spell can't be countered.
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | StackDescription$ REP target creature or planeswalker_{c:Targeted} | IsCurse$ True | AITgts$ Creature.White,Creature.Blue,Planeswalker.White,Planeswalker.Blue | SpellDescription$ CARDNAME deals 1 damage to target creature or planeswalker. It deals 5 damage instead if that target is white and/or blue.
+SVar:Y:Targeted$Valid Creature.White,Creature.Blue,Planeswalker.White,Planeswalker.Blue
+SVar:X:Count$Compare Y GE1.5.1
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:This spell can't be countered.\nLithomantic Barrage deals 1 damage to target creature or planeswalker. It deals 5 damage instead if that target is white and/or blue.

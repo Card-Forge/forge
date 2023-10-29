@@ -24,7 +24,6 @@ public class MillEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-        final boolean bottom = sa.hasParam("FromBottom");
         final boolean facedown = sa.hasParam("ExileFaceDown");
         final boolean reveal = !sa.hasParam("NoReveal");
         final boolean showRevealDialog = sa.hasParam("ShowMilledCards");
@@ -55,7 +54,7 @@ public class MillEffect extends SpellAbilityEffect {
                     continue;
                 }
             }
-            final CardCollectionView milled = p.mill(numCards, destination, bottom, sa, table, moveParams);
+            final CardCollectionView milled = p.mill(numCards, destination, sa, table, moveParams);
             // Reveal the milled cards, so players don't have to manually inspect the
             // graveyard to figure out which ones were milled.
             if (!facedown && reveal) { // do not reveal when exiling face down

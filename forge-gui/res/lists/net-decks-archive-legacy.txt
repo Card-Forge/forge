@@ -2188,6 +2188,7 @@
 2021-12-28 Legacy Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-12-28-legacy-preliminary.zip
 2021-12-29 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-12-29-legacy-preliminary.zip
 2021-12-31 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-12-31-legacy-preliminary.zip
+2022--Legacy Eternal Weekend (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022--legacy-eternal-weekend.zip
 2022-01-01 Legacy League (58 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-01-01-legacy-league.zip
 2022-01-03 12367821 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-01-03-12367821-legacy-challenge.zip
 2022-01-04 12367831 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-01-04-12367831-legacy-preliminary.zip
@@ -2541,3 +2542,59 @@
 2023-02-18 Legacy League (47 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-18-legacy-league.zip
 2023-02-19 12523134 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-19-12523134-legacy-challenge.zip
 2023-02-20 12523143 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-20-12523143-legacy-preliminary.zip
+2023-02-23 12525215 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-23-12525215-legacy-preliminary.zip
+2023-02-24 12525222 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-24-12525222-legacy-preliminary.zip
+2023-02-25 12525231 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-25-12525231-legacy-challenge-32.zip
+2023-02-25 Legacy League (47 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-25-legacy-league.zip
+2023-02-26 12525204 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-26-12525204-legacy-showcase-challenge.zip
+2023-02-27 12525250 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-27-12525250-legacy-preliminary.zip
+2023-02-28 12525262 Legacy Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-02-28-12525262-legacy-preliminary.zip
+2023-03-03 12527613 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-03-12527613-legacy-preliminary.zip
+2023-03-04 12527622 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-04-12527622-legacy-challenge-32.zip
+2023-03-04 Legacy League (44 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-04-legacy-league.zip
+2023-03-05 12527634 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-05-12527634-legacy-challenge.zip
+2023-03-07 12527655 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-07-12527655-legacy-preliminary.zip
+2023-03-09 12529536 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-09-12529536-legacy-preliminary.zip
+2023-03-10 12529543 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-10-12529543-legacy-preliminary.zip
+2023-03-11 12529552 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-11-12529552-legacy-challenge-32.zip
+2023-03-11 Legacy League (51 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-11-legacy-league.zip
+2023-03-12 12 529562 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-12-12-529562-legacy-challenge.zip
+2023-03-13 12529571 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-13-12529571-legacy-preliminary.zip
+2023-03-14 12529583 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-14-12529583-legacy-preliminary.zip
+2023-03-15 12529585 Legacy Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-15-12529585-legacy-preliminary.zip
+2023-03-16 12532705 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-16-12532705-legacy-preliminary.zip
+2023-03-17 12532712 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-17-12532712-legacy-preliminary.zip
+2023-03-18 12532721 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-18-12532721-legacy-challenge-32.zip
+2023-03-18 Legacy League (69 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-18-legacy-league.zip
+2023-03-19 12532694 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-19-12532694-legacy-showcase-challenge.zip
+2023-03-20 12532741 Legacy Last Chance (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-20-12532741-legacy-last-chance.zip
+2023-03-21 12532755 Legacy Last Chance (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-21-12532755-legacy-last-chance.zip
+2023-03-22 12532757 Legacy Last Chance (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-22-12532757-legacy-last-chance.zip
+2023-03-23 12536177 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-23-12536177-legacy-preliminary.zip
+2023-03-24 12536181 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-24-12536181-legacy-preliminary.zip
+2023-03-25 12535605 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-25-12535605-legacy-challenge-32.zip
+2023-03-25 Legacy League (60 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-25-legacy-league.zip
+2023-03-26 12535617 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-26-12535617-legacy-challenge.zip
+2023-03-27 12536187 Legacy Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-27-12536187-legacy-preliminary.zip
+2023-03-28 12536195 Legacy Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-28-12536195-legacy-preliminary.zip
+2023-03-29 12536196 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-29-12536196-legacy-preliminary.zip
+2023-03-30 12538294 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-30-12538294-legacy-preliminary.zip
+2023-03-31 12538301 Legacy Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-03-31-12538301-legacy-preliminary.zip
+2023-04-01 12538310 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-01-12538310-legacy-challenge-32.zip
+2023-04-01 Legacy League (46 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-01-legacy-league.zip
+2023-04-02 12538283 Legacy Showcase Qualifier (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-02-12538283-legacy-showcase-qualifier.zip
+2023-04-02 12538322 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-02-12538322-legacy-challenge.zip
+2023-04-03 12538331 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-03-12538331-legacy-preliminary.zip
+2023-04-04 12538343 Legacy Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-04-12538343-legacy-preliminary.zip
+2023-04-06 12540035 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-06-12540035-legacy-preliminary.zip
+2023-04-07 12540042 Legacy Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-07-12540042-legacy-preliminary.zip
+2023-04-08 12540051 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-08-12540051-legacy-challenge-32.zip
+2023-04-08 Legacy League (50 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-08-legacy-league.zip
+2023-04-09 12540063 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-09-12540063-legacy-challenge.zip
+2023-04-10 12540072 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-10-12540072-legacy-preliminary.zip
+2023-04-11 12540084 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-11-12540084-legacy-preliminary.zip
+2023-04-13 12541662 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-13-12541662-legacy-preliminary.zip
+2023-04-14 12541669 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-14-12541669-legacy-preliminary.zip
+2023-04-15 12541678 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-15-12541678-legacy-challenge-32.zip
+2023-04-15 Legacy League (58 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-15-legacy-league.zip
+2023-04-16 12541690 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2023-04-16-12541690-legacy-challenge.zip

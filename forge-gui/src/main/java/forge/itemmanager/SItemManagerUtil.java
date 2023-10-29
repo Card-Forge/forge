@@ -47,6 +47,7 @@ public final class SItemManagerUtil {
         PLANESWALKER (FSkinProp.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, "lblPlaneswalkers"),
         INSTANT      (FSkinProp.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, "lblInstants"),
         SORCERY      (FSkinProp.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, "lblSorceries"),
+        BATTLE       (FSkinProp.IMG_BATTLE,       CardRulesPredicates.Presets.IS_BATTLE, "lblBattles"),
 
         CMC_0 (FSkinProp.IMG_MANA_0, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 0), "lblCCMC0"),
         CMC_1 (FSkinProp.IMG_MANA_1, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 1), "lblCCMC1"),

@@ -1,0 +1,7 @@
+Name:Delete
+ManaCost:X R R
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature.nonArtifact | ValidDescription$ each nonartifact creature and each player | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each nonartifact creature and each player.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+Oracle:Delete deals X damage to each nonartifact creature and each player.

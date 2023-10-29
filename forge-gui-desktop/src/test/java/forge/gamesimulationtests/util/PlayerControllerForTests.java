@@ -20,10 +20,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -38,6 +35,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
@@ -194,13 +192,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmBidAction(SpellAbility sa,
-            PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
         return false;
     }
 
     @Override
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+    public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
         return true;
     }
 
@@ -320,11 +317,6 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn) {
         return true;
-    }
-
-    @Override
-    public CardCollectionView getCardsToMulligan(Player firstPlayer) {
-        return null;
     }
 
     @Override
@@ -454,11 +446,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
-        return choiceMap.get(options.get(0));
-    }
-
-    @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
@@ -504,6 +491,16 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
+        return Aggregates.random(rolls);
+    }
+
+    @Override
+    public Integer chooseRollToIgnore(List<Integer> rolls) {
+        return Aggregates.random(rolls);
+    }
+
+    @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return chooseItem(options);
     }
@@ -538,6 +535,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+        // TODO Auto-generated method stub
+        return Iterables.getFirst(possibleStatics, null);
+    }
+
+    @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         return choices.get(0);
     }
@@ -568,9 +571,9 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
+    public boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         prepareSingleSa(host, wrapperAbility, isMandatory);
-        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
+        return ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
     }
 
     @Override
@@ -728,10 +731,14 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
+        return max;
     }
 
     @Override

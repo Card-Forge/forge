@@ -1,0 +1,11 @@
+Name:Amy Pond
+ManaCost:2 R
+Types:Legendary Creature Human
+PT:2/2
+K:Partner:Rory Williams:Rory
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRemove | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.
+SVar:TrigRemove:DB$ RemoveCounter | Choices$ Card.suspended+YouOwn | ChoiceZone$ Exile | CounterType$ TIME | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+K:Doctor's companion
+DeckNeeds:Keyword$Suspend
+Oracle:Partner with Rory Williams (When this creature enters the battlefield, target player may put Rory into their hand from their library, then shuffle.)\nWhenever Amy Pond deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

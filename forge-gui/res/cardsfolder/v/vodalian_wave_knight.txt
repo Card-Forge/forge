@@ -1,0 +1,9 @@
+Name:Vodalian Wave-Knight
+ManaCost:2 W U 
+Types:Creature Merfolk Knight
+PT:3/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on each other Merfolk and/or Knight you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Knight.YouCtrl+StrictlyOther,Merfolk.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Merfolk|Knight
+Oracle:Whenever you draw a card, put a +1/+1 counter on each other Merfolk and/or Knight you control.

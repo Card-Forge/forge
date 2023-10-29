@@ -65,8 +65,8 @@ public class CostTap extends CostPart {
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        ability.getHostCard().tap(true);
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
+        ability.getHostCard().tap(true, ability, payer);
         return true;
     }
 

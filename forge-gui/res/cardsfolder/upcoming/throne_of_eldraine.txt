@@ -1,0 +1,8 @@
+Name:Throne of Eldraine
+ManaCost:5
+Types:Legendary Artifact
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | Amount$ 4 | RestrictValid$ Spell.ChosenColor+MonoColor | SpellDescription$ Add four mana of the chosen color. Spend this mana only to cast monocolored spells of that color.
+A:AB$ Draw | Cost$ 3 T | NumCards$ 2 | ManaRestriction$ ChosenColor | SpellDescription$ Draw two cards. Spend only mana of the chosen color to activate this ability.
+Oracle:As Throne of Eldraine enters the battlefield, choose a color.\n{T}: Add four mana of the chosen color. Spend this mana only to cast monocolored spells of that color.\n{3}, {T}: Draw two cards. Spend only mana of the chosen color to activate this ability.

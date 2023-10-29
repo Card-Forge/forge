@@ -1,0 +1,19 @@
+Name:Picnic Ruiner
+ManaCost:1 R
+Types:Creature Goblin Rogue
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while you control a creature with power 4 or greater, CARDNAME gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Double Strike
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+AlternateMode:Adventure
+Oracle:Whenever Picnic Ruiner attacks while you control a creature with power 4 or greater, Picnic Ruiner gains double strike until end of turn.
+
+ALTERNATE
+
+Name:Stolen Goodies
+ManaCost:3 G
+Types:Sorcery Adventure
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 0 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among any number of target creatures you control.
+SVar:PlayMain1:TRUE
+Oracle:Distribute three +1/+1 counters among any number of target creatures you control.

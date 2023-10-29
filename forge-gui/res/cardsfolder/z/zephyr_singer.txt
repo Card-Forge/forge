@@ -1,0 +1,11 @@
+Name:Zephyr Singer
+ManaCost:2 U U
+Types:Creature Siren Pirate
+PT:3/4
+K:Convoke
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a flying counter on each creature that convoked it.
+SVar:TrigPutCounterAll:DB$ PutCounter | Defined$ Convoked | CounterType$ Flying | CounterNum$ 1 | AILogic$ Always
+DeckHas:Ability$Counters
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance\nWhen Zephyr Singer enters the battlefield, put a flying counter on each creature that convoked it.

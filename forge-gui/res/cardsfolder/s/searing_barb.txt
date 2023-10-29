@@ -1,0 +1,8 @@
+Name:Searing Barb
+ManaCost:2 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBCantBlock | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:DBCantBlock:DB$ Pump | Defined$ Targeted.Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SubAbility$ DBIncubate | StackDescription$ SpellDescription | SpellDescription$ If it's a creature, it can't block this turn.
+SVar:DBIncubate:DB$ Incubate | Amount$ 1 | SpellDescription$ Incubate 1. (Create an Incubator token with a +1/+1 counter on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+DeckHas:Ability$Token|Counters & Type$Artifact|Incubator|Phyrexian
+Oracle:Searing Barb deals 2 damage to any target. If it's a creature, it can't block this turn. Incubate 1. (Create an Incubator token with a +1/+1 counter on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

@@ -30,12 +30,12 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    protected BoosterDraft getDraft() {
+    public BoosterDraft getDraft() {
         return draft;
     }
 
     @Override
-    protected void save(final Callback<Boolean> callback) {
+    public void save(final Callback<Boolean> callback) {
         if (isDraftSaved) { //if draft itself is saved, let base class handle saving deck changes
             super.save(callback);
             return;

@@ -1,0 +1,8 @@
+Name:Begin the Invasion
+ManaCost:X W U B R G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | DifferentNames$ True | ChangeTypeDesc$ battle cards with different names | Destination$ Battlefield | ChangeType$ Card.Battle | ChangeNum$ X | SpellDescription$ Search your library for up to X battle cards with different names, put them onto the battlefield, then shuffle.
+SVar:X:Count$xPaid
+DeckNeeds:Type$Battle
+AI:RemoveDeck:Random
+Oracle:Search your library for up to X battle cards with different names, put them onto the battlefield, then shuffle.

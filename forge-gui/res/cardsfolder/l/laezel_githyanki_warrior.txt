@@ -5,7 +5,7 @@ PT:2/4
 K:Double Strike
 K:Specialize:1
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When you cast this spell, it gains "When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control."
-SVar:TrigAnimate:DB$ Animate | Triggers$ BecomesTarget
+SVar:TrigAnimate:DB$ Animate | Triggers$ BecomesTarget | Duration$ Permanent
 SVar:BecomesTarget:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigBlink | OptionalDecider$ You | TriggerDescription$ When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control.
 SVar:TrigBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredTargetLKICopy | SubAbility$ DBReturn | RememberChanged$ True
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
@@ -39,7 +39,7 @@ SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | RememberMad
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Illithid Thrall's Perpetual Effect | SubAbility$ DBCleanup
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
-SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember

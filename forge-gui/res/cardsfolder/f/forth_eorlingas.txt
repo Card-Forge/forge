@@ -1,0 +1,10 @@
+Name:Forth Eorlingas!
+ManaCost:X R W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_2_2_human_knight_trample_haste | TokenOwner$ You | SubAbility$ DBEffect | SpellDescription$ Create X 2/2 red Human Knight creature tokens with trample and haste.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigDamage | SpellDescription$ Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
+SVar:TrigDamage:Mode$ DamageAll | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMonarch | TriggerDescription$ Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You 
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Human|Knight
+Oracle:Create X 2/2 red Human Knight creature tokens with trample and haste.\nWhenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.

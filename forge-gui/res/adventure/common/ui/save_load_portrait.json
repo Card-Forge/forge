@@ -1,0 +1,62 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Window",
+      "name": "saveSlots",
+      "x": 10,
+      "y": 106,
+      "width": 250,
+      "height": 330
+    },    
+    {
+      "type": "Image",
+      "image": "ui/blank.png",
+      "width": 100,
+      "height": 100,
+      "x": 168,
+      "y": 2
+    },
+    {
+      "type": "Image",
+      "name": "preview",
+      "x": 170,
+      "y": 4,
+      "width": 96,
+      "height": 96
+    },                
+    {
+      "type": "Label",
+      "name": "saveDate",
+      "x": 170,
+      "y": 8,
+      "width": 96,
+      "height": 16
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "width": 120,
+      "height": 32,
+      "x": 10,
+      "y": 440
+    },
+    {
+      "type": "TextButton",
+      "name": "save",
+      "width": 120,
+      "height": 32,
+      "x": 140,
+      "y": 440
+    } 
+  ]
+}

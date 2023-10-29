@@ -1,0 +1,7 @@
+Name:Zhulodok, Void Gorger
+ManaCost:5 C
+Types:Legendary Creature Eldrazi
+PT:7/4
+S:Mode$ Continuous | Affected$ Card.Colorless+YouCtrl+YouOwn+wasCastFromHand+cmcGE7 | AffectedZone$ Stack | AddKeyword$ Cascade & Cascade | Description$ Colorless spells you cast from your hand with mana value 7 or greater have "Cascade, cascade."
+DeckHints:Type$Eldrazi|Construct|Golem
+Oracle:Colorless spells you cast from your hand with mana value 7 or greater have "Cascade, cascade." (When you cast one, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order. Then do it again.)

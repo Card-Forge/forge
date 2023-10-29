@@ -1,0 +1,14 @@
+Name:Lobelia Sackville-Baggins
+ManaCost:2 B
+Types:Creature Halfling Citizen
+PT:2/3
+K:Flash
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature card from an opponent's graveyard that was put there from the battlefield this turn, then create X Treasure tokens, where X is the exiled card's power.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.ThisTurnEnteredFrom_Battlefield+OppCtrl | TgtPrompt$ Select target creature card from an opponents graveyard that was put there from the battlefield this turn | RememberChanged$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:X:Remembered$CardPower
+AI:RemoveDeck:All
+DeckHas:Ability$Graveyard|Token & Type$Artifact|Treasure
+Oracle:Flash\nMenace\nWhen Lobelia Sackville-Baggins enters the battlefield, exile target creature card from an opponent's graveyard that was put there from the battlefield this turn, then create X Treasure tokens, where X is the exiled card's power.

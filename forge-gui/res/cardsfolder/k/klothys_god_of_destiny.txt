@@ -3,9 +3,9 @@ ManaCost:1 R G
 Types:Legendary Enchantment Creature God
 PT:4/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to red and green is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to red and green is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Red.Green
-T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and CARDNAME deals 2 damage to each opponent.
+T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and NICKNAME deals 2 damage to each opponent.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | RememberChanged$ True | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Amount$ 1 | Produced$ Combo R G | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ0 | SubAbility$ DBDamage

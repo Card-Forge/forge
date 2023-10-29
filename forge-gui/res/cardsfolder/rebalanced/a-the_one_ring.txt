@@ -1,0 +1,12 @@
+Name:A-The One Ring
+ManaCost:4
+Types:Legendary Artifact
+K:Indestructible
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, you gain protection from everything until your next turn.
+SVar:TrigPump:DB$ Pump | Defined$ You | Duration$ UntilYourNextTurn | KW$ Protection from everything
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each burden counter on CARDNAME.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X
+A:AB$ PutCounter | Cost$ 1 T | Defined$ Self | CounterType$ BURDEN | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a burden counter on CARDNAME, then draw a card for each burden counter on CARDNAME.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$CardCounters.BURDEN
+Oracle:Indestructible\nWhen The One Ring enters the battlefield, if you cast it, you gain protection from everything until your next turn.\nAt the beginning of your upkeep, you lose 1 life for each burden counter on The One Ring.\n{1}, {T}: Put a burden counter on The One Ring, then draw a card for each burden counter on The One Ring.

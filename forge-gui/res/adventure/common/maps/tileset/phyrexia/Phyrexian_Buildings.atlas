@@ -1,0 +1,20 @@
+Phyrexian_Buildings.png
+size: 64, 32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BasilicaSmall
+  xy: 0, 0
+  size: 32, 32
+GitLabSmall
+ xy: 32,0
+ size: 32, 32
+CopperhostForest
+ xy: 64,0
+ size: 32, 32
+DrossOutpost
+ xy: 96,0
+ size: 32, 32
+FurnaceBase
+ xy: 128,0
+ size: 32, 32

@@ -1,0 +1,10 @@
+Name:Mordor Trebuchet
+ManaCost:2 B
+Types:Artifact Creature Wall
+PT:1/4
+K:Defender
+T:Mode$ AttackersDeclared | ValidAttackers$ Goblin.YouCtrl,Orc.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you attack with one or more Goblins and/or Orcs, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at end of combat.
+SVar:TrigToken:DB$ Token | TokenScript$ ballistic_boulder | TokenTapped$ True | TokenAttacking$ True | AtEOT$ SacrificeCombat
+DeckHints:Type$Goblin|Orc
+DeckHas:Ability$Token & Type$Artifact|Construct
+Oracle:Defender\nWhenever you attack with one or more Goblins and/or Orcs, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at end of combat.

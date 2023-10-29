@@ -1,0 +1,7 @@
+Name:Monster
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Enchanted creature gets +1/+1 and has trample.
+Oracle:Enchant Creature\nEnchanted creature gets +1/+1 and has trample.

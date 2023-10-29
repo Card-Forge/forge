@@ -4,7 +4,7 @@ Types:Legendary Creature Human Elf Shaman
 PT:2/7
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigPutBottom | TriggerZones$ Battlefield | ActivationLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may put it on the bottom of its owner's library. If you do, reveal cards from the top of your library until you reveal a nonland card. You may cast that card without paying its mana cost. Then put all revealed cards not cast this way on the bottom of your library in a random order. This ability triggers only once each turn.
 SVar:TrigPutBottom:DB$ ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ -1 | Defined$ TriggeredCard | Fizzle$ True | RememberChanged$ True | SubAbility$ DBDig
-SVar:DBDig:DB$ DigUntil | Valid$ Card.nonLand | ForgetOtherRemembered$ True | ImprintFound$ True | RememberFound$ True | RememberRevealed$ True | NoMoveFound$ True | NoMoveRevealed$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBPlay
+SVar:DBDig:DB$ DigUntil | Valid$ Card.nonLand | ForgetOtherRemembered$ True | ImprintFound$ True | RememberFound$ True | RememberRevealed$ True | NoMoveRevealed$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | ValidZone$ Library | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ForgetPlayed$ True | SubAbility$ DBBottom
 SVar:DBBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True

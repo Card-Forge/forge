@@ -6,7 +6,7 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigConjure:AB$ MakeCard | Cost$ Discard<1/Card> | Conjure$ True | DefinedName$ DelayTriggerRemembered | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Soul Servitude's Perpetual Effect
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
-SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice|Discard
 Oracle:Target player sacrifices a nontoken creature. When they do, you may discard a card. If you do, conjure a duplicate of the sacrificed creature into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

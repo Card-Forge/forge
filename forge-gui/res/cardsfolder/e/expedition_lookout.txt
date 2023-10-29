@@ -1,0 +1,10 @@
+Name:Expedition Lookout
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:2/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE8 | Description$ As long as an opponent has eight or more cards in their graveyard, CARDNAME can attack as though it didn't have defender and it can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$  Card.Self | CheckSVar$ X | SVarCompare$ GE8
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Defender\nAs long as an opponent has eight or more cards in their graveyard, Expedition Lookout can attack as though it didn't have defender and it can't be blocked.

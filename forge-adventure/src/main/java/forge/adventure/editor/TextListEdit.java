@@ -1,13 +1,7 @@
 package forge.adventure.editor;
 
-import forge.adventure.util.Config;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,16 +14,11 @@ public class TextListEdit extends Box {
     public TextListEdit(String[] possibleElements) {
         super(BoxLayout.X_AXIS);
 
-        findButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TextListEdit.this.find();
-            }
-        });
+        findButton.addActionListener(e -> TextListEdit.this.find());
 
         add(edit);
         edit.setPreferredSize(new Dimension(400,edit.getPreferredSize().height));
-        //add(findButton);
+        add(findButton);
         elements= new JComboBox(possibleElements);
         add(elements);
 
@@ -45,20 +34,32 @@ public class TextListEdit extends Box {
     }
 
     private void find() {
-        JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File(Config.instance().getFilePath("")));
-        fc.setMultiSelectionEnabled(false);
-        if (fc.showOpenDialog(this) ==
-                JFileChooser.APPROVE_OPTION) {
-            File selected = fc.getSelectedFile();
+        edit.setText((edit.getText().trim().length()>0?edit.getText() + ";": "")+elements.getSelectedItem().toString());
+        elements.remove(elements.getSelectedIndex());
+        elements.setSelectedIndex(0);
+//        JFileChooser fc = new JFileChooser();
+//        fc.setCurrentDirectory(new File(Config.instance().getFilePath("")));
+//        fc.setMultiSelectionEnabled(false);
+//        if (fc.showOpenDialog(this) ==
+//                JFileChooser.APPROVE_OPTION) {
+//            File selected = fc.getSelectedFile();
+//
+//            try {
+//                if (selected != null&&selected.getCanonicalPath().startsWith(new File(Config.instance().getFilePath("")).getCanonicalPath())) {
+//                    edit.setText(selected.getCanonicalPath().substring(new File(Config.instance().getFilePath("")).getCanonicalPath().length()+1));
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
 
-            try {
-                if (selected != null&&selected.getCanonicalPath().startsWith(new File(Config.instance().getFilePath("")).getCanonicalPath())) {
-                    edit.setText(selected.getCanonicalPath().substring(new File(Config.instance().getFilePath("")).getCanonicalPath().length()+1));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void setOptions(List<String> itemNames) {
+        if(itemNames==null)
+            elements.removeAllItems();
+        else {
+            for(String item: itemNames)
+                elements.addItem(item);
         }
     }
 
@@ -105,7 +106,7 @@ public class TextListEdit extends Box {
             String intName=stringList[i];
             try
             {
-                retList[i] = Integer.valueOf(intName);
+                retList[i] = Integer.parseInt(intName);
             }
             catch (NumberFormatException e)
             {

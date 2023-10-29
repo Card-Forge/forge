@@ -1,0 +1,9 @@
+Name:Desecrate Reality
+ManaCost:7
+Types:Instant
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl+cmcEven | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | SubAbility$ DBReturn | SpellDescription$ For each opponent, exile up to one target permanent that player controls with an even mana value. (Zero is even.)
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Permanent.cmcOdd+YouOwn | Hidden$ True | Mandatory$ True | ChangeTypeDesc$ permanent card with an odd mana value | ChangeNum$ 1 | ConditionCheckSVar$ X | SpellDescription$ Adamant — If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield.
+SVar:X:Count$Adamant.Colorless.1.0
+SVar:OneEach:PlayerCountOpponents$Amount
+DeckHas:Ability$Graveyard
+Oracle:For each opponent, exile up to one target permanent that player controls with an even mana value. (Zero is even.)\nAdamant — If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield.

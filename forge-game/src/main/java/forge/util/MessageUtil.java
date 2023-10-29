@@ -68,11 +68,16 @@ public class MessageUtil {
             case Protection:
                 return Localizer.getInstance().getMessage("lblPlayerChooseValue", choser, value);
             case RollDice:
+            case RollPlanarDice:
             case PutCounter:// For Clay Golem cost text
                 return value;
             case Vote:
-                String chooser = StringUtils.capitalize(mayBeYou(player, target));
-                return Localizer.getInstance().getMessage("lblPlayerVoteValue", chooser, value);
+                if (sa.hasParam("Secret")) {
+                    return value;
+                } else {
+                    String chooser = StringUtils.capitalize(mayBeYou(player, target));
+                    return Localizer.getInstance().getMessage("lblPlayerVoteValue", chooser, value);
+                }
             default:
                 String tgt = mayBeYou(player, target);
                 if (tgt.equals("(null)")) {

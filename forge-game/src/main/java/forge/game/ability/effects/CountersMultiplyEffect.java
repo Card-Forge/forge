@@ -34,6 +34,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
 
         return sb.toString();
     }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();

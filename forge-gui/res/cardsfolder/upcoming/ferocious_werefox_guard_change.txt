@@ -1,0 +1,16 @@
+Name:Ferocious Werefox
+ManaCost:3 G
+Types:Creature Elf Fox Warrior
+PT:4/3
+K:Trample
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+AlternateMode:Adventure
+Oracle:Trample
+
+ALTERNATE
+
+Name:Guard Change
+ManaCost:1 G
+Types:Instant Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Monster Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has trample.)
+Oracle:Create a Monster Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has trample.)

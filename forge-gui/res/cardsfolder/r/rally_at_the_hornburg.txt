@@ -1,0 +1,9 @@
+Name:Rally at the Hornburg
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | SubAbility$ TrigPump | SpellDescription$ Create two 1/1 white Human Soldier creature tokens.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Human.YouCtrl | KW$ Haste | SpellDescription$ Humans you control gain haste until end of turn.
+DeckHas:Ability$Token & Type$Human|Soldier
+SVar:PlayMain1:TRUE
+DeckHints:Type$Human
+Oracle:Create two 1/1 white Human Soldier creature tokens. Humans you control gain haste until end of turn.

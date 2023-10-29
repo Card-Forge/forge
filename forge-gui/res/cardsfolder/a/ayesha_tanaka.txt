@@ -4,5 +4,4 @@ Types:Legendary Creature Human Artificer
 PT:2/2
 K:Banding
 A:AB$ Counter | Cost$ T | TargetType$ Activated | TgtPrompt$ Select target activated ability from an artifact source | ValidTgts$ Artifact | UnlessCost$ W | SpellDescription$ Counter target activated ability from an artifact source unless that ability's controller pays {W}. (Mana abilities can't be targeted.)
-AI:RemoveDeck:All
 Oracle:Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\n{T}: Counter target activated ability from an artifact source unless that ability's controller pays {W}. (Mana abilities can't be targeted.)

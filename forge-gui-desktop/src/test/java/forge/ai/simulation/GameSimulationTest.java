@@ -1745,12 +1745,12 @@ public class GameSimulationTest extends SimulationTest {
         Card giant = addCard(hillGiantName, p);
 
         AssertJUnit.assertFalse(outlaw.isCloned());
-        AssertJUnit.assertTrue(outlaw.isDoubleFaced());
+        AssertJUnit.assertTrue(outlaw.isTransformable());
         AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(outlaw.canTransform(null));
         AssertJUnit.assertFalse(outlaw.isBackSide());
 
-        AssertJUnit.assertFalse(giant.isDoubleFaced());
+        AssertJUnit.assertFalse(giant.isTransformable());
         AssertJUnit.assertFalse(giant.canTransform(null));
 
         addCards("Forest", 4, p);
@@ -1778,14 +1778,12 @@ public class GameSimulationTest extends SimulationTest {
         Card clonedOutLaw = (Card) sim.getGameCopier().find(outlaw);
 
         AssertJUnit.assertTrue(clonedOutLaw.isCloned());
-        AssertJUnit.assertTrue(clonedOutLaw.isDoubleFaced());
-        AssertJUnit.assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
+        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(clonedOutLaw.canTransform(null));
         AssertJUnit.assertFalse(clonedOutLaw.isBackSide());
 
         AssertJUnit.assertEquals(clonedOutLaw.getName(), hillGiantName);
-
-        AssertJUnit.assertTrue(clonedOutLaw.isDoubleFaced());
 
         score = sim.simulateSpellAbility(moonmistSA).value;
         AssertJUnit.assertTrue(score > 0);
@@ -1799,8 +1797,8 @@ public class GameSimulationTest extends SimulationTest {
         Card transformOutLaw = (Card) sim.getGameCopier().find(outlaw);
 
         AssertJUnit.assertTrue(transformOutLaw.isCloned());
-        AssertJUnit.assertTrue(transformOutLaw.isDoubleFaced());
-        AssertJUnit.assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.isTransformable());
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
@@ -1814,7 +1812,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(1, countCardsWithName(simGame, terrorName));
 
         AssertJUnit.assertFalse(transformOutLaw.isCloned());
-        AssertJUnit.assertTrue(transformOutLaw.isDoubleFaced());
+        AssertJUnit.assertTrue(transformOutLaw.isTransformable());
         AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
@@ -2451,13 +2449,9 @@ public class GameSimulationTest extends SimulationTest {
         // whereas Naban doesn't see Memnarch to double the trigger
         addCardToZone("Memnarch", p, ZoneType.Library);
 
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Island", p);
-        addCard("Island", p);
-        addCard("Island", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Forest", 2, p);
+        addCards("Island", 3, p);
+        addCards("Mountain", 2, p);
 
         Card genesis = addCardToZone("Genesis Ultimatum", p, ZoneType.Hand);
 
@@ -2472,5 +2466,47 @@ public class GameSimulationTest extends SimulationTest {
 
         // 2 damage dealt for 2 artifacts
         AssertJUnit.assertEquals(18, simGame.getPlayers().get(1).getLife());
+    }
+
+    @Test
+    public void testLKITransformableTokenCopy() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+
+        String untransformedName = "Heliod, the Radiant Dawn";
+        String transformedName = "Heliod, the Warped Eclipse";
+
+        addCard("Ratadrabik of Urborg", p);
+        Card heliod = addCard(untransformedName, p);
+
+        addCards("Island", 4, p);
+        addCards("Swamp", 3, p);
+
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+        SpellAbility murderSA = murder.getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility transformSA = findSAWithPrefix(heliod, "{3}{U/P}: Transform");
+
+        GameSimulator sim = createSimulator(game, p);
+        AssertJUnit.assertNotNull(transformSA);
+        sim.simulateSpellAbility(transformSA);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card transformedHeliod = findCardWithName(simGame, transformedName);
+        AssertJUnit.assertNotNull(transformedHeliod);
+        murderSA.getTargets().add(transformedHeliod);
+
+        sim.simulateSpellAbility(murderSA);
+        simGame = sim.getSimulatedGameState();
+
+        Card transformedHeliodToken = findCardWithName(simGame, transformedName);
+        AssertJUnit.assertNotNull(transformedHeliodToken);
+        AssertJUnit.assertTrue(transformedHeliodToken.isToken());
+        AssertJUnit.assertTrue(transformedHeliodToken.isTransformable());
+        AssertJUnit.assertTrue(transformedHeliodToken.isTransformed());
+        AssertJUnit.assertTrue(transformedHeliodToken.isBackSide());
     }
 }

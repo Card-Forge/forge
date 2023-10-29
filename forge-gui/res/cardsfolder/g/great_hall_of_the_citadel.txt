@@ -1,0 +1,7 @@
+Name:Great Hall of the Citadel
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Legendary | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast legendary spells.
+DeckHints:Type$Legendary
+Oracle:{T}: Add {C}.\n{1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spells.

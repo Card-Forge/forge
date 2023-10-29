@@ -19,6 +19,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
@@ -52,7 +53,6 @@ public class EffectEffect extends SpellAbilityEffect {
         FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
         String noteCounterDefined = null;
-        List<Player> effectOwner = null;
         final String duration = sa.getParam("Duration");
 
         if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
@@ -106,6 +106,21 @@ public class EffectEffect extends SpellAbilityEffect {
             }
         }
 
+        if (sa.hasParam("RememberLKI")) {
+            rememberList = new FCollection<>();
+            for (final String rem : sa.getParam("RememberLKI").split(",")) {
+                CardCollection def = AbilityUtils.getDefinedCards(hostCard, rem, sa);
+                for (Card c : def) {
+                    rememberList.add(CardUtil.getLKICopy(c));
+                }
+            }
+
+            // don't create Effect if there is no remembered Objects
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved"))) {
+                return;
+            }
+        }
+
         if (sa.hasParam("ImprintCards")) {
             effectImprinted = sa.getParam("ImprintCards");
         }
@@ -119,15 +134,21 @@ public class EffectEffect extends SpellAbilityEffect {
             name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
-        // Unique Effects shouldn't be duplicated
-        if (sa.hasParam("Unique") && game.isCardInCommand(name)) {
-            return;
+        PlayerCollection effectOwner = sa.hasParam("EffectOwner") ?
+                AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa) :
+                new PlayerCollection(sa.getActivatingPlayer());
+
+        // Unique$ is for effects that should be one per player (e.g. Gollum, Obsessed Stalker)
+        if (sa.hasParam("Unique")) {
+            for (Player eo : effectOwner.threadSafeIterable()) {
+                if (eo.isCardInCommand(name)) {
+                    effectOwner.remove(eo);
+                }
+            }
         }
 
-        if (sa.hasParam("EffectOwner")) {
-            effectOwner = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa);
-        } else {
-            effectOwner = Lists.newArrayList(sa.getActivatingPlayer());
+        if (effectOwner.isEmpty()) {
+            return; // return if we don't need to make an effect
         }
 
         String image;
@@ -202,7 +223,6 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Remember Keywords
             if (sa.hasParam("RememberKeywords")) {
-                rememberList = new FCollection<>();
                 List<String> effectKeywords = Arrays.asList(sa.getParam("RememberKeywords").split(","));
                 if (sa.hasParam("SharedKeywordsZone")) {
                     List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
@@ -273,7 +293,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Chosen name
             if (!hostCard.getNamedCard().isEmpty()) {
-                eff.setNamedCard(hostCard.getNamedCard());
+                eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 
             // chosen number
@@ -282,10 +302,6 @@ public class EffectEffect extends SpellAbilityEffect {
                         sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
-            }
-
-            if (sa.hasParam("CopySVar")) {
-                eff.setSVar(sa.getParam("CopySVar"), hostCard.getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes
@@ -303,7 +319,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        game.getAction().exile(eff, null);
+                        game.getAction().exile(eff, null, null);
                     }
                 };
 

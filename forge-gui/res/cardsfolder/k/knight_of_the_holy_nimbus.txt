@@ -3,6 +3,8 @@ ManaCost:W W
 Types:Creature Human Rebel Knight
 PT:2/2
 K:Flanking
-K:If CARDNAME would be destroyed, regenerate it.
-A:AB$ Pump | Cost$ 2 | Activator$ Player.Opponent | Defined$ Self | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ CARDNAME can't be regenerated this turn. Only your opponents may activate this ability.
+R:Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | Regeneration$ True | ReplaceWith$ DBRegeneration | Description$ If CARDNAME would be destroyed, regenerate it.
+SVar:DBRegeneration:DB$ Regeneration | Defined$ ReplacedCard
+A:AB$ Effect | Cost$ 2 | Activator$ Player.Opponent | RememberObjects$ Self | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | AILogic$ CantRegenerate | SpellDescription$ CARDNAME can't be regenerated this turn. Only your opponents may activate this ability.
+SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nIf Knight of the Holy Nimbus would be destroyed, regenerate it. (Tap it, remove it from combat, and heal all damage on it.)\n{2}: Knight of the Holy Nimbus can't be regenerated this turn. Only your opponents may activate this ability.

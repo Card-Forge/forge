@@ -1,0 +1,20 @@
+[metadata]
+Name:MTG Puzzles #09 - Aqua Regia
+URL:https://mtgpuzzles.com/puzzle/9
+Goal:Win
+Turns:1
+Difficulty:Easy
+Description:Win this turn. You've done the hard work of getting your opponent below 0, now to actually win the game! Can you rustle up enough mana for your ultimate weapon and win this turn? Your opponent's life total is -1 (yes it's negative). Fungal Reaches does not have any storage counters.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Watery Grave;Talisman of Impulse;Mana Crypt
+p0battlefield=Legacy Weapon;Nimbus Maze;City of Traitors;Fungal Reaches;River of Tears;Caves of Koilos
+p1life=-1
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Platinum Angel

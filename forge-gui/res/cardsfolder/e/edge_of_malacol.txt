@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Belenon
 R:Event$ Untap | ActiveZones$ Command | ValidCard$ Creature.YouCtrl | ReplaceWith$ RepPutCounter | UntapStep$ True | Description$ If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.
 SVar:RepPutCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, untap each creature you control.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap each creature you control.
 SVar:RolledChaos:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
-Oracle:If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.\nWhenever you roll {CHAOS}, untap each creature you control.
+Oracle:If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.\nWhenever chaos ensues, untap each creature you control.

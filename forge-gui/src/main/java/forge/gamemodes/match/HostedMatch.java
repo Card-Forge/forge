@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.gui.control.PlaybackSpeed;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableMap;
@@ -88,7 +89,6 @@ public class HostedMatch {
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         gameRules.setSideboardForAI(FModel.getPreferences().getPrefBoolean(FPref.MATCH_SIDEBOARD_FOR_AI));
-        gameRules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
         return gameRules;
@@ -310,7 +310,7 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            humanController.getGui().setGameSpeed(false);
+            humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change
                 humanController.getGui().clearAutoYields();

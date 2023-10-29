@@ -1,0 +1,9 @@
+Name:Merry Bards
+ManaCost:2 R
+Types:Creature Human Bard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}. When you do, create a Young Hero Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigToken | TriggerDescription$ When you do, create a Young Hero Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_young_hero | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:When Merry Bards enters the battlefield, you may pay {1}. When you do, create a Young Hero Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")

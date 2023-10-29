@@ -125,12 +125,20 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
         final boolean canCopyLegendary = sa.hasParam("NonLegendary");
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            List<Card> list = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+
+            if (aiLogic.equals("Different")) {
+                // TODO: possibly improve the check, currently only checks if the name is the same
+                // Possibly also check if the card is threatened, and then allow to copy (this will, however, require a bit
+                // of a rewrite in canPlayAI to allow a response form of CopyPermanentAi)
+                list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(host.getName())));
+            }
 
             //Nothing to target
             if (list.isEmpty()) {
@@ -261,12 +269,12 @@ public class CopyPermanentAi extends SpellAbilityAi {
     }
 
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
-        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
+        return super.chooseSingleAttackableEntity(ai, sa, options, params);
     }
 
 }

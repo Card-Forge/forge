@@ -1,0 +1,86 @@
+banditslingshot.png
+size: 576,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 24, 7
+  size: 16, 16      
+Idle 
+  xy: 20,6
+  size: 24,26  
+Idle 
+  xy: 84,6
+  size: 24,26  
+Idle 
+  xy: 148,6
+  size: 24,26 
+Idle 
+  xy: 212,6
+  size: 24,26 
+Walk
+  xy: 20,36
+  size: 26,28 
+Walk
+  xy: 84,36
+  size: 26,28 
+Walk
+  xy: 148,36
+  size: 26,28 
+Walk
+  xy: 212,36
+  size: 26,28 
+Walk
+  xy: 276,36
+  size: 26,28 
+Walk
+  xy: 340,36
+  size: 26,28 
+Walk
+  xy: 404,36
+  size: 26,28 
+Walk
+  xy: 468,36
+  size: 26,28 
+Attack 
+  xy: 16,71
+  size: 35,25 
+Attack 
+  xy: 80,71
+  size: 35,25 
+Attack 
+  xy: 144,71
+  size: 35,25 
+Attack 
+  xy: 208,71
+  size: 35,25 
+Attack 
+  xy: 272,71
+  size: 35,25 
+Attack 
+  xy: 336,71
+  size: 35,25 
+Attack 
+  xy: 400,71
+  size: 35,25 
+Attack 
+  xy: 464,71
+  size: 35,25 
+Death 
+  xy: 23,132
+  size: 34,28 
+Death 
+  xy: 87,132
+  size: 34,28 
+Death 
+  xy: 151,132
+  size: 34,28 
+Death 
+  xy: 215,132
+  size: 34,28 
+Death 
+  xy: 279,132
+  size: 34,28 
+Death 
+  xy: 343,132
+  size: 34,28 

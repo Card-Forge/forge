@@ -1,0 +1,8 @@
+Name:Display of Power
+ManaCost:1 R R
+Types:Instant
+S:Mode$ CantBeCopied | ValidCard$ Card.Self | EffectZone$ Stack | Description$ This spell can't be copied.
+A:SP$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select any number of target instant and sorcery spells | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy any number of target instant and/or sorcery spells. You may choose new targets for the copies.
+SVar:X:Count$SpellsOnStack
+DeckHints:Type$Instant|Sorcery
+Oracle:This spell can't be copied.\nCopy any number of target instant and/or sorcery spells. You may choose new targets for the copies.

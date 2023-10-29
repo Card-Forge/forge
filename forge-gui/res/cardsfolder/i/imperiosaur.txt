@@ -3,5 +3,5 @@ ManaCost:2 G G
 Types:Creature Dinosaur
 PT:5/5
 Text:Spend only mana produced by basic lands to cast this spell.
-A:SP$ PermanentCreature | Cost$ Mana<2 G G\Land.Basic>
+A:SP$ PermanentCreature | Cost$ 2 G G | ManaRestriction$ Land.Basic
 Oracle:Spend only mana produced by basic lands to cast this spell.

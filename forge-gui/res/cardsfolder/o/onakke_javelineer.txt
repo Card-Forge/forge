@@ -1,0 +1,7 @@
+Name:Onakke Javelineer
+ManaCost:4 R
+Types:Creature Ogre Spirit
+PT:5/4
+K:Reach
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Battle | TgtPrompt$ Select target player or battle | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or battle.
+Oracle:Reach\n{T}: Onakke Javelineer deals 2 damage to target player or battle.

@@ -1,0 +1,14 @@
+Name:Flockchaser Phantom
+ManaCost:4 W U
+Types:Creature Spirit
+PT:5/5
+K:Convoke
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, the next spell you cast this turn has convoke.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrandConvoke | Triggers$ ExileEffect
+SVar:GrandConvoke:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ The next spell you cast this turn has convoke.
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.YouCtrl | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:HasAttackEffect:TRUE
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance\nWhenever Flockchaser Phantom attacks, the next spell you cast this turn has convoke.

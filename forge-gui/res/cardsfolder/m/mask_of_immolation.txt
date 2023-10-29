@@ -6,7 +6,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_elemental | Token
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Sacrifice this creature: It deals 1 damage to any target."
-SVar:Damage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:Damage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All
 DeckHas:Ability$Token

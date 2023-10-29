@@ -2,9 +2,7 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -102,6 +100,23 @@ public class Controls {
         if (!actor.isVisible())
             return false;
         return getBoundingRect(actor).contains(point);
+    }
+
+    static public boolean actorContainsVector(Array<TextraButton> buttons, Vector2 point) {
+        boolean value = false;
+        if (buttons == null)
+            return false;
+        if (buttons.isEmpty())
+            return false;
+        for (Actor actor : buttons) {
+            if (actor == null)
+                return false;
+            if (!actor.isVisible())
+                return false;
+            if (getBoundingRect(actor).contains(point))
+                value = true;
+        }
+        return value;
     }
 
     static public SelectBox<String> newComboBox(String[] text, String item, Function<Object, Void> func) {
@@ -365,6 +380,10 @@ public class Controls {
         return newTextraLabel(name, getTextraFont());
     }
 
+    public static TextraLabel newRewardLabel(String name) {
+        return newTextraLabel(name, getRewardHeaderFont());
+    }
+
     public static String colorIdToTypingString(ColorSet color) {
         return colorIdToTypingString(color, false);
     }
@@ -410,10 +429,13 @@ public class Controls {
         return Forge.getAssets().getTextraFont(getSkin().getFont("default"), Config.instance().getAtlas(Paths.ITEMS_ATLAS), Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
     }
 
+    static public Font getRewardHeaderFont() {
+        return Forge.getAssets().getGenericHeaderFont(getSkin().getFont("default"));
+    }
+
     static public Font getTextraFont(String name) {
         return Forge.getAssets().getTextraFont(name, getSkin().getFont(name), Config.instance().getAtlas(Paths.ITEMS_ATLAS));
     }
-
 
     static public class AccountingLabel extends TextraLabel {
         private TextraLabel label;

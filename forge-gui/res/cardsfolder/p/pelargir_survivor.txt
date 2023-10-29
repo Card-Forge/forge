@@ -1,0 +1,9 @@
+Name:Pelargir Survivor
+ManaCost:1 U
+Types:Creature Human Peasant
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.
+A:AB$ Mill | Cost$ 5 U T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose target player | SpellDescription$ Target player mills three cards. (They put the top three cards of their library into their graveyard.)
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Mill
+Oracle:{T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.\n{5}{U}, {T}:Target player mills three cards. (They put the top three cards of their library into their graveyard.)

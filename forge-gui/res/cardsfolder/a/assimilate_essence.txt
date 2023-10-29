@@ -1,0 +1,7 @@
+Name:Assimilate Essence
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or battle spell | ValidTgts$ Creature,Battle | UnlessCost$ 4 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBIncubate | SpellDescription$ Counter target spell unless its controller pays {4}.
+SVar:DBIncubate:DB$ Incubate | Amount$ 2 | StackDescription$ SpellDescription | SpellDescription$ If they do, you incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+DeckHas:Ability$Token|Counters & Type$Incubator|Artifact|Phyrexian
+Oracle:Counter target creature or battle spell unless its controller pays {4}. If they do, you incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

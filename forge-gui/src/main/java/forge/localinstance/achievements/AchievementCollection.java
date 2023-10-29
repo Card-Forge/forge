@@ -67,6 +67,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         AltWinAchievements.instance.updateAll(player);
         PlaneswalkerAchievements.instance.updateAll(player);
         ChallengeAchievements.instance.updateAll(player);
+        CardActivationAchievements.instance.updateAll(player);
     }
     
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {
@@ -76,8 +77,10 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Quest));
         cb.addItem(FModel.getAchievements(GameType.PlanarConquest));
         cb.addItem(FModel.getAchievements(GameType.Puzzle));
+        cb.addItem(FModel.getAchievements(GameType.Adventure));
         cb.addItem(AltWinAchievements.instance);
         cb.addItem(PlaneswalkerAchievements.instance);
+        cb.addItem(CardActivationAchievements.instance);
         cb.addItem(ChallengeAchievements.instance);
     }
 

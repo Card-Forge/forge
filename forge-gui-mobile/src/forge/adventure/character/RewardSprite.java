@@ -46,7 +46,7 @@ public class RewardSprite extends CharacterSprite {
         Array<Reward> ret = new Array<Reward>();
         if(rewards == null) return ret;
         for(RewardData rdata:rewards) {
-            ret.addAll(rdata.generate(false));
+            ret.addAll(rdata.generate(false, true));
         }
         return ret;
     }

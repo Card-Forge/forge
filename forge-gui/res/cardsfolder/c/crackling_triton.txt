@@ -2,5 +2,5 @@ Name:Crackling Triton
 ManaCost:2 U
 Types:Creature Merfolk Wizard
 PT:2/3
-A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:{2}{R}, Sacrifice Crackling Triton: It deals 2 damage to any target.

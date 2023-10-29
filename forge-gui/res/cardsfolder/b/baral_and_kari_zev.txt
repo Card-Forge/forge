@@ -1,0 +1,13 @@
+Name:Baral and Kari Zev
+ManaCost:1 U R
+Types:Legendary Creature Human
+PT:2/4
+K:First Strike
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigMayCast | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first instant or sorcery spell each turn, you may cast a spell with lesser mana value that shares a card type with it from your hand without paying its mana cost. If you don't, create First Mate Ragavan, a legendary 2/1 red Monkey Pirate creature token. It gains haste until end of turn.
+SVar:TrigMayCast:DB$ Play | Valid$ Card.nonLand+YouOwn+sharesCardTypeWith TriggeredCard | ValidSA$ Spell.cmcLTX | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | SubAbility$ DBTokenIfNotPlayed
+SVar:DBTokenIfNotPlayed:DB$ Token | TokenScript$ first_mate_ragavan | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | PumpKeywords$ Haste | PumpDuration$ EOT | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckHints:Type$Instant|Sorcery
+Oracle:First strike, menace\nWhenever you cast your first instant or sorcery spell each turn, you may cast a spell with lesser mana value that shares a card type with it from your hand without paying its mana cost. If you don't, create First Mate Ragavan, a legendary 2/1 red Monkey Pirate creature token. It gains haste until end of turn.

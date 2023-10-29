@@ -43,6 +43,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card card = sa.getHostCard();
+
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
@@ -68,7 +69,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             int n = card.getCounters(CounterEnumType.AGE);
             if (n > 0) {
                 Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
-                payCost.mergeTo(cumCost, n);
+                payCost.mergeTo(cumCost, n, sa);
             }
 
             game.updateLastStateForCard(card);
@@ -87,8 +88,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         // Expand Sacrifice keyword here depending on what we need out of it.
-        final String num = sa.getParamOrDefault("Amount", "1");
-        final int amount = AbilityUtils.calculateAmount(card, num, sa);
+        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
         final boolean devour = sa.hasParam("Devour");
         final boolean exploit = sa.hasParam("Exploit");
         final boolean sacEachValid = sa.hasParam("SacEachValid");
@@ -123,9 +123,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     String [] msgArray = msg.split(" & ");
                     List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
                     for (String subValid : validArray) {
-                        CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, subValid, sa);
-                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
-                        validTargetsList.add(new CardCollection(validTargets));
+                        CardCollection validTargets = CardLists.filter(AbilityUtils.filterListByType(battlefield, subValid, sa), CardPredicates.canBeSacrificedBy(sa, true));
+                        validTargetsList.add(validTargets);
                     }
                     CardCollection chosenCards = new CardCollection();
                     for (int i = 0; i < validArray.length; ++i) {
@@ -162,13 +161,14 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (choosenToSacrifice.size() > 1) {
-                    choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
-                }
+                choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
-                    final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
+                    Card lKICopy = null;
+                    if (devour || exploit || remSacrificed) {
+                        lKICopy = CardUtil.getLKICopy(sac, cachedMap);
+                    }
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, table, params) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
                     // Run Devour Trigger

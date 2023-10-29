@@ -627,6 +627,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             case MODERN_COLOR_DECK:
                 updateColors(FModel.getFormats().getModern().getFilterPrinted());
                 break;
+            case PAUPER_COLOR_DECK:
+                updateColors(FModel.getFormats().getPauper().getFilterPrinted());
+                break;
             case STANDARD_CARDGEN_DECK:
                 if(FModel.isdeckGenMatrixLoaded()) {
                     updateMatrix(FModel.getFormats().getStandard());
@@ -656,7 +659,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 if(FModel.isdeckGenMatrixLoaded()) {
                     updateMatrix(FModel.getFormats().get("Vintage"));
                 }
-            break;
+                break;
+            case PAUPER_CARDGEN_DECK:
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    updateMatrix(FModel.getFormats().getPauper());
+                }
+                break;
             case RANDOM_COMMANDER_DECK:
                 updateRandomCommander();
                 break;

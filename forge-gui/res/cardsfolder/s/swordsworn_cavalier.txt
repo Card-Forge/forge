@@ -1,0 +1,7 @@
+Name:Swordsworn Cavalier
+ManaCost:1 W
+Types:Creature Human Knight
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Knight.StrictlyOther+ThisTurnEntered+EnteredUnder You | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as another Knight entered the battlefield under your control this turn. 
+DeckHints:Type$Knight
+Oracle:Swordsworn Cavalier has first strike as long as another Knight entered the battlefield under your control this turn.

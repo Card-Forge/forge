@@ -1,0 +1,8 @@
+Name:Storm the Seedcore
+ManaCost:2 G G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 4 | CounterType$ P1P1 | CounterNum$ 4 | DividedAsYouChoose$ 4 | SubAbility$ DBPumpAll | SpellDescription$ Distribute four +1/+1 counters among up to four target creatures you control. 
+SVar:DBPumpAll:DB$ PumpAll | KW$ Vigilance & Trample  | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control gain vigilance and trample until end of turn.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Distribute four +1/+1 counters among up to four target creatures you control. Creatures you control gain vigilance and trample until end of turn.

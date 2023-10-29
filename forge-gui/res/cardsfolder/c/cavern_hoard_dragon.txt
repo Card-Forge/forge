@@ -1,0 +1,14 @@
+Name:Cavern-Hoard Dragon
+ManaCost:7 R R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Trample
+K:Haste
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.
+SVar:X:PlayerCountOpponents$HighestValid Artifact.YouCtrl
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you create a Treasure token for each artifact that player controls.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ Y
+SVar:Y:Count$Valid Artifact.ControlledBy TriggeredTarget
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.\nFlying, trample, haste\nWhenever Cavern-Hoard Dragon deals combat damage to a player, you create a Treasure token for each artifact that player controls.

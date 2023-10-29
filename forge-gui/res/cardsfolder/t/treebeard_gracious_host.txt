@@ -1,0 +1,14 @@
+Name:Treebeard, Gracious Host
+ManaCost:2 G W
+Types:Legendary Creature Treefolk
+PT:0/5
+K:Trample 
+K:Ward:2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two Food tokens.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put that many +1/+1 counters on target Halfling or Treefolk
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Halfling,Creature.Treefolk | TgtPrompt$ Select target Halfling or Treefolk | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$LifeAmount
+DeckHints:Ability$Counters|LifeGain|Token
+DeckHas:Ability$Counters|LifeGain|Token
+Oracle:Trample, ward {2}\nWhen Treebeard, Gracious Host enters the battlefield, create two Food tokens.\nWhenever you gain life, put that many +1/+1 counters on target Halfling or Treefolk.

@@ -3,7 +3,7 @@ ManaCost:2 W U
 Types:Creature Astartes Wizard
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self  | Execute$ TrigCast | TriggerDescription$ Veil of Time — Whenever CARDNAME attacks, you may cast a spell with mana value X or less from your hand without paying its mana cost, where X is the number of attacking creatures.
-SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Card.cmcLEX+YouOwn | ValidSA$ Spell | Optional$ True | WithoutManaCost$ True
+SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Card.YouOwn | ValidSA$ Spell.cmcLEX | Optional$ True | WithoutManaCost$ True
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:HasAttackEffect:TRUE
 Oracle:Veil of Time — Whenever Epistolary Librarian attacks, you may cast a spell with mana value X or less from your hand without paying its mana cost, where X is the number of attacking creatures.

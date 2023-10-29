@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Arena" type="arena" gid="1419" width="16" height="16">
+  <properties>
+   <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Adventurer&quot;,
+	&quot;Archer&quot;,
+	&quot;Cat&quot;,
+	&quot;Cathar&quot;,
+	&quot;Cleric&quot;,
+	&quot;Dawnhart Witch&quot;,
+	&quot;Eldraine Knight&quot;,
+	&quot;Griffin&quot;,
+	&quot;Horseman&quot;,
+	&quot;Human&quot;,
+	&quot;Human elite&quot;,
+	&quot;Human guard&quot;,
+	&quot;Knight&quot;,
+	&quot;Monk&quot;,
+	&quot;White Dwarf&quot;,
+	&quot;Apprentice White Wizard&quot;,
+	&quot;Adept White Wizard&quot;,
+	&quot;Master White Wizard&quot;
+],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [
+		{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemName&quot;: &quot;Bronze Sword&quot;
+		},
+		{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemName&quot;: &quot;Steel Sword&quot;
+		},
+		{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemName&quot;: &quot;Gold Shield&quot;
+		}
+	]
+
+}</property>
+  </properties>
+ </object>
+</template>

@@ -1,0 +1,10 @@
+Name:Harnessed Snubhorn
+ManaCost:3 W
+Types:Creature Dinosaur
+PT:2/5
+K:Vigilance
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigReturn | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return target artifact or enchantment card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn,Enchantment.YouOwn | TgtPrompt$ Select target artifact or enchantment card from your graveyard | Origin$ Graveyard | Destination$ Battlefield
+DeckHas:Ability$Graveyard
+DeckHints:Type$Artifact|Enchantment
+Oracle:Whenever Harnessed Snubhorn deals combat damage to a player, return target artifact or enchantment card from your graveyard to the battlefield.

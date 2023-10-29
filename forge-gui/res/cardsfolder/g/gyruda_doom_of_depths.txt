@@ -3,7 +3,7 @@ ManaCost:4 U/B U/B
 Types:Legendary Creature Demon Kraken
 PT:6/6
 K:Companion:Card.cmcM20:Your starting deck contains only cards with even mana value. (If this card is your chosen companion, you may cast it once from outside the game.)
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills four cards. Put a creature card with an even mana value from those cards onto the battlefield under your control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters the battlefield, each player mills four cards. Put a creature card with an even mana value from those cards onto the battlefield under your control.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ Player | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | GainControl$ True | Mandatory$ True | Hidden$ True | ChangeNum$ 1 | ChangeType$ Card.Creature+IsRemembered+cmcM20 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

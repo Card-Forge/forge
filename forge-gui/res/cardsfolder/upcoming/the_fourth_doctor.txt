@@ -1,0 +1,12 @@
+Name:The Fourth Doctor
+ManaCost:2 G U
+Types:Legendary Creature Time Lord Doctor
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.YouOwn+TopLibrary | EffectZone$ Battlefield | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl+Historic | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Library | Description$ Would You Like A…? — Once each turn, you may play a historic land or cast a historic spell from the top of your library. When you do, create a Food token. (Artifacts, legendaries, and Sagas are historic.)
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.MayPlaySource | Execute$ TrigFood | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ When you do, create a Food token.
+T:Mode$ LandPlayed | ValidCard$ Land | ValidSA$ SpellAbility.MayPlaySource | TriggerZones$ Battlefield | Execute$ TrigFood | Secondary$ True | TriggerDescription$ When you do, create a Food token.
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHints:Type$Artifact|Legendary|Saga
+DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact
+Oracle:You may look at the top card of your library any time.\nWould You Like A…? — Once each turn, you may play a historic land or cast a historic spell from the top of your library. When you do, create a Food token. (Artifacts, legendaries, and Sagas are historic.)

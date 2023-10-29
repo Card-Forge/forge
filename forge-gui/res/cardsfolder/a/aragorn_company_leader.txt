@@ -1,0 +1,10 @@
+Name:Aragorn, Company Leader
+ManaCost:1 G W
+Types:Legendary Creature Human Ranger
+PT:3/3
+T:Mode$ RingTemptsYou | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever the Ring tempts you, if you chose a creature other than CARDNAME as your Ring-bearer, put your choice of a counter from among first strike, vigilance, deathtouch, and lifelink on NICKNAME.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ First Strike,Vigilance,Deathtouch,Lifelink | Defined$ Self
+T:Mode$ CounterPlayerAddedAll | ValidObject$ Card.Self+inRealZoneBattlefield | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigPutCountersOther | TriggerDescription$ Whenever you put one or more counters on NICKNAME, put one of each of those kinds of counters on up to one other target creature.
+SVar:TrigPutCountersOther:DB$ PutCounter | Placer$ TriggeredSource | TriggeredCounterMap$ True | CounterMapValues$ 1 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target other creature | ValidTgts$ Creature.Other
+DeckHas:Ability$Counters
+Oracle:Whenever the Ring tempts you, if you chose a creature other than Aragorn, Company Leader as your Ring-bearer, put your choice of a counter from among first strike, vigilance, deathtouch, and lifelink on Aragorn.\nWhenever you put one or more counters on Aragorn, put one of each of those kinds of counters on up to one other target creature.

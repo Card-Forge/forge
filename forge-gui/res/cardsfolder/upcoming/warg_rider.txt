@@ -1,0 +1,11 @@
+Name:Warg Rider
+ManaCost:4 B
+Types:Creature Orc Warrior
+PT:4/3
+K:Menace
+S:Mode$ Continuous | Affected$ Goblin.YouCtrl+Other,Orc.YouCtrl+Other | AddKeyword$ Menace | Description$ Other Orcs and Goblins you control have menace.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAmass | TriggerDescription$ At the beginning of combat on your turn, amass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 2 
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+DeckHints:Type$Goblin|Orc
+Oracle:Menace\nOther Orcs and Goblins you control have menace.\nAt the beginning of combat on your turn, amass Orcs 2. (Put two +1/+1 counters on an Army you control. It’s also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

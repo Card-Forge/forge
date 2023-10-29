@@ -166,8 +166,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             game.updateLastStateForCard(dest);
-            table.replaceCounterEffect(game, sa, true);
-            return;
         } else if (sa.hasParam("ValidDefined")) {
             // one Source to many Targets
             // need given CounterType
@@ -231,9 +229,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (updateSource) {
                 // update source
                 game.updateLastStateForCard(source);
-                table.replaceCounterEffect(game, sa, true);
             }
-            return;
         } else {
             Card source = null;
             List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
@@ -276,7 +272,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
                             removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
                         }
-
+                    } else if ("EachNotOn".equals(counterName)) {
+                        final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(source.getCounters());
+                        for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
+                            if (cur.getCounters(e.getKey()) > 0) {
+                                continue;
+                            }
+                            removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
+                        }
                     } else if ("Any".equals(counterName)) {
                         // any counterType currently only Leech Bonder
                         final Map<CounterType, Integer> tgtCounters = source.getCounters();
@@ -292,18 +295,20 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             return;
                         }
 
-                        Map<String, Object> params = Maps.newHashMap();
-                        params.put("Source", source);
-                        params.put("Target", dest);
-                        String title = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
-                        CounterType chosenType = pc.chooseCounterType(typeChoices, sa, title, params);
+                        while (!typeChoices.isEmpty()) {
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Source", source);
+                            params.put("Target", dest);
+                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
+                            CounterType chosenType = pc.chooseCounterType(typeChoices, sa, title, params);
 
-                        removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
-                    } else {
-                        if (!cur.canReceiveCounters(cType)) {
-                            continue;
+                            removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
+                            if (!counterNum.equals("Any")) {
+                                break;
+                            }
+                            typeChoices.remove(chosenType);
                         }
-
+                    } else {
                         removeCounter(sa, source, cur, cType, counterNum, countersToAdd);
                     }
 
@@ -346,10 +351,11 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             params.put("CounterType", cType);
             params.put("Source", src);
             params.put("Target", dest);
+            int min = sa.hasParam("NonZero") && countersToAdd.isEmpty() ? 1 : 0;
             cnum = pc.chooseNumber(
                     sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard",
                             cType.getName(), CardTranslation.getTranslatedName(src.getName())),
-                    0, cmax, params);
+                    min, cmax, params);
         } else {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));
         }

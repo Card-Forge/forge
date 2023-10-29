@@ -17,48 +17,28 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameLogEntryType;
-import forge.game.GameObjectMap;
+import com.google.common.collect.*;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -74,7 +54,7 @@ public class Combat {
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
-    // Keyed by attackable defender (player or planeswalker)
+    // Keyed by attackable defender (player or planeswalker or battle)
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
@@ -231,7 +211,11 @@ public class Combat {
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
-        return new CardCollection(Iterables.filter(attackableEntries, Card.class));
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Planeswalker"));
+    }
+
+    public final CardCollection getDefendingBattles() {
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Battle"));
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
@@ -303,8 +287,15 @@ public class Combat {
 
         // maybe attack on a controlled planeswalker?
         if (defender instanceof Card) {
-            return ((Card) defender).getController();
+            Card def = (Card)defender;
+            if (def.isBattle()) {
+                return def.getProtectingPlayer();
+            } else {
+                return def.getController();
+            }
+
         }
+
         return null;
     }
 
@@ -612,17 +603,17 @@ public class Combat {
             }
         }
 
-        for (Card pw : getDefendingPlaneswalkers()) {
-            if (pw.equals(c)) {
+        for (Card battleOrPW : Iterables.filter(attackableEntries, Card.class)) {
+            if (battleOrPW.equals(c)) {
                 Multimap<GameEntity, AttackingBand> attackerBuffer = ArrayListMultimap.create();
                 Collection<AttackingBand> bands = attackedByBands.get(c);
-                for (AttackingBand abPW : bands) {
-                    unregisterDefender(c, abPW);
+                for (AttackingBand abDef : bands) {
+                    unregisterDefender(c, abDef);
                     // Rule 506.4c workaround to keep creatures in combat
                     Card fake = new Card(-1, c.getGame());
                     fake.setName("<Nothing>");
                     fake.setController(c.getController(), 0);
-                    attackerBuffer.put(fake, abPW);
+                    attackerBuffer.put(fake, abDef);
                 }
                 bands.clear();
                 attackedByBands.putAll(attackerBuffer);
@@ -639,9 +630,7 @@ public class Combat {
         // iterate all attackers and remove illegal declarations
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
-            CardCollectionView atk = ee.getValue().getAttackers();
-            for (int i = atk.size() - 1; i >= 0; i--) { // might remove items from collection, so no iterators
-                Card c = atk.get(i);
+            for (Card c : ee.getValue().getAttackers()) {
                 if (!c.isInPlay() || !c.isCreature()) {
                     missingCombatants.add(c);
                 }
@@ -724,7 +713,7 @@ public class Combat {
                 Player defender = null;
                 boolean divideCombatDamageAsChoose = blocker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
                                 "defending player and/or any number of creatures they control.")
-                        && blocker.getController().getController().confirmAction(null, null,
+                        && blocker.getController().getController().confirmStaticApplication(blocker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
                                 CardTranslation.getTranslatedName(blocker.getName())), null);
                 // choose defending player
@@ -796,15 +785,13 @@ public class Combat {
                 assigningPlayer = orderedBlockers.get(0).getController();
             }
 
-            final SpellAbility emptySA = new SpellAbility.EmptySa(ApiType.Cleanup, attacker);
-
             boolean assignToPlayer = false;
             if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker, false)) {
                 assignToPlayer = true;
             }
             if (!assignToPlayer && attacker.getGame().getCombat().isBlocked(attacker)
                     && StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
-                assignToPlayer = assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                assignToPlayer = assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageWerentBlocked",
                                 CardTranslation.getTranslatedName(attacker.getName())), null);
             }
@@ -816,7 +803,7 @@ public class Combat {
                 divideCombatDamageAsChoose = getDefendersCreatures().size() > 0 &&
                         attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
                                 "defending player and/or any number of creatures they control.")
-                        && assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                        && assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                                 Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
                                         CardTranslation.getTranslatedName(attacker.getName())), null);
                 if (defender instanceof Card && divideCombatDamageAsChoose) {
@@ -827,7 +814,7 @@ public class Combat {
                         getDefendersCreatures().size() > 0 &&
                         attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
                                 "a creature defending player controls.") &&
-                        assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                        assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                                 Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
                                         CardTranslation.getTranslatedName(attacker.getName())), null);
                         if (divideCombatDamageAsChoose) {
@@ -845,10 +832,9 @@ public class Combat {
 
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (defender instanceof Card && attacker.hasKeyword("Trample:Planeswalker")) {
+            if (defender instanceof Card && !((Card) defender).isBattle() && attacker.hasKeyword("Trample:Planeswalker")) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                    CardCollection cc = new CardCollection((Card) defender);
-                    orderedBlockers = cc;
+                    orderedBlockers = new CardCollection((Card) defender);
                 } else {
                     orderedBlockers.add((Card) defender);
                 }
@@ -861,6 +847,7 @@ public class Combat {
             else if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                 attackers.remove(attacker);
                 if (assignCombatDamageToCreature) {
+                    final SpellAbility emptySA = new SpellAbility.EmptySa(ApiType.Cleanup, attacker);
                     Card chosen = attacker.getController().getController().chooseCardsForEffect(getDefendersCreatures(),
                             emptySA, Localizer.getInstance().getMessage("lblChooseCreature"), 1, 1, false, null).get(0);
                     damageMap.put(attacker, chosen, damageDealt);
@@ -954,7 +941,7 @@ public class Combat {
     public boolean isPlayerAttacked(Player who) {
         for (GameEntity defender : attackedByBands.keySet()) {
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
-            if ((null != defenderAsCard && defenderAsCard.getController() != who) ||
+            if ((null != defenderAsCard && (defenderAsCard.getController() != who && defenderAsCard.getProtectingPlayer() != who)) ||
                 (null == defenderAsCard && defender != who)) {
                 continue; // defender is not related to player 'who'
             }

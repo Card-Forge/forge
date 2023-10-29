@@ -1,0 +1,6 @@
+Name:Halo Hopper
+ManaCost:3
+Types:Artifact Creature Frog
+PT:3/2
+K:Convoke
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)

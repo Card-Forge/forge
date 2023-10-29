@@ -1,18 +1,13 @@
 Name:The Great Aurora
 ManaCost:6 G G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBStoreAmount | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.
+A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile CARDNAME.
 # ChangeType is fine being "Card" because if it's on the battlefield, it has to be a permanent
-SVar:DBStoreAmount:DB$ StoreSVar | SVar$ AuroraY | Type$ Count | Expression$ Valid Card.RememberedPlayerOwn | SubAbility$ DBStoreAmount2
-SVar:DBStoreAmount2:DB$ StoreSVar | SVar$ AuroraZ | Type$ Count | Expression$ ValidHand Card.RememberedPlayerOwn | SubAbility$ DBShuffle
-SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.RememberedPlayerOwn | Origin$ Hand,Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ AuroraX
-SVar:AuroraX:SVar$AuroraY/Plus.AuroraZ
-SVar:AuroraY:Number$0
-SVar:AuroraZ:Number$0
-SVar:RepeatLands:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBAurora | SubAbility$ DBCleanup
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.RememberedPlayerOwn | Origin$ Hand,Battlefield | Destination$ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ Remembered$Amount | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RepeatLands:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBAurora | SubAbility$ ExileAurora
 SVar:DBAurora:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeType$ Land | ChangeNum$ HandSize
 SVar:HandSize:Count$ValidHand Land.RememberedPlayerCtrl
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ ExileAurora
 SVar:ExileAurora:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self
 Oracle:Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.

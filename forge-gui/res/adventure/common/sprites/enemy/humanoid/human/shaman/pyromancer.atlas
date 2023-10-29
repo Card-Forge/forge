@@ -1,0 +1,71 @@
+pyromancer.png
+size: 512,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 39,40
+  size: 16, 16  
+Idle 
+  xy: 4, 10
+  size: 22, 22  
+Idle 
+  xy: 36, 10
+  size: 22, 22  
+Idle 
+  xy: 68, 10
+  size: 22, 22  
+Idle 
+  xy: 100, 10
+  size: 22, 22  
+Walk 
+  xy: 4, 138
+  size: 22, 22
+Walk 
+  xy: 36, 138
+  size: 22, 22
+Walk 
+  xy: 68, 138
+  size: 22, 22
+Walk 
+  xy: 100, 138
+  size: 22, 22
+Walk 
+  xy: 132, 138
+  size: 22, 22
+Walk 
+  xy: 164, 138
+  size: 22, 22
+Walk 
+  xy: 196, 138
+  size: 22, 22
+Walk 
+  xy: 228, 138
+  size: 22, 22
+Attack 
+  xy: 4, 74
+  size: 24, 22
+Attack 
+  xy: 36, 74
+  size: 24, 22
+Attack 
+   xy: 68, 74
+  size: 24, 22
+Attack 
+  xy: 100, 74
+  size: 24, 22
+Attack 
+  xy: 132, 74
+  size: 24, 22
+Death
+  xy: 4, 202
+  size: 25, 22
+Death
+  xy: 36, 202
+  size: 25, 22
+Death
+  xy: 68, 202
+  size: 25, 22
+Death
+  xy: 100, 202
+  size: 25, 22

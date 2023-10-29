@@ -33,6 +33,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
         private void doFetch(String urlToDownload) throws IOException {
             String newdespath = urlToDownload.contains(".fullborder.") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
+            if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD))
+                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             java.net.URLConnection c = url.openConnection();

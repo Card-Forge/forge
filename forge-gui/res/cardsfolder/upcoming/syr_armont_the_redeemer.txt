@@ -1,0 +1,10 @@
+Name:Syr Armont, the Redeemer
+ManaCost:3 G W
+Types:Legendary Creature Human Knight
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Monster Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control
+S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creatures you control get +1/+1.
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+DeckHints:Type$Aura
+Oracle:When Syr Armont, the Redeemer enters the battlefield, create a Monster Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)\nEnchanted creatures you control get +1/+1.

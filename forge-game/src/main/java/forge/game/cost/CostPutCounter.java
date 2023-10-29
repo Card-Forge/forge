@@ -141,7 +141,7 @@ public class CostPutCounter extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         if (this.payCostFromSource()) {
-            return source.isInPlay() && source.canReceiveCounters(this.counter);
+            return source.isInPlay() && (getAbilityAmount(ability) == 0 || source.canReceiveCounters(this.counter));
         }
 
         // 3 Cards have Put a -1/-1 Counter on a Creature you control.
@@ -160,20 +160,20 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         if (this.payCostFromSource()) {
-            executePayment(ability, ability.getHostCard(), effect);
+            executePayment(payer, ability, ability.getHostCard(), effect);
         } else {
-            executePayment(ai, ability, decision.cards, effect);
+            executePayment(payer, ability, decision.cards, effect);
         }
         triggerCounterPutAll(ability, effect);
         return true;
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final int i = this.getAbilityAmount(ability);
-        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), counterTable);
+        targetCard.addCounter(this.getCounter(), i, payer, counterTable);
         return targetCard;
     }
 

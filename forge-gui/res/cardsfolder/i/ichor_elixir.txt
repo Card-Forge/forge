@@ -1,0 +1,8 @@
+Name:Ichor Elixir
+ManaCost:4
+Types:Artifact
+R:Event$ RollPlanarDice | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreRoll
+SVar:IgnoreRoll:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+Oracle:If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.\n{T}: Add {C}{C}.

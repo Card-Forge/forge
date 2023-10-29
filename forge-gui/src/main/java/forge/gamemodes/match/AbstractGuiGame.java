@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import forge.gui.control.PlaybackSpeed;
 import forge.trackable.TrackableCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,6 +46,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
     private boolean gameSpeed = false;
+    private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
     private boolean ignoreConcedeChain = false;
 
@@ -334,8 +336,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         gamePause = pause;
     }
 
-    public void setGameSpeed(boolean isFast) {
-        gameSpeed = isFast;
+    public void setGameSpeed(PlaybackSpeed speed) {
+        playbackSpeed = speed;
     }
 
     public void pauseMatch() {
@@ -368,6 +370,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             }
             if (concedeNeeded) {
+                if (gameView.isMulligan()) { //prevent UI freezing when conceding while the game is waiting for inputs/action
+                    showErrorDialog(Localizer.getInstance().getMessage("lblWaitingforActions"));
+                    return false;
+                }
                 if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
                     for (final IGameController c : getOriginalGameControllers()) {
                         // Concede each player on this Gui (except mind-controlled players)
@@ -711,7 +717,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         while (true) {
-            final String str = showInputDialog(prompt, message);
+            final String str = showInputDialog(prompt, message, true);
             if (str == null) {
                 return null;
             } // that is 'cancel'
@@ -772,18 +778,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title) {
-        return showInputDialog(message, title, null, "", null);
+    public String showInputDialog(final String message, final String title, boolean isNumeric) {
+        return showInputDialog(message, title, null, "", null, isNumeric);
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon) {
-        return showInputDialog(message, title, icon, "", null);
+        return showInputDialog(message, title, icon, "", null, false);
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput) {
-        return showInputDialog(message, title, icon, initialInput, null);
+        return showInputDialog(message, title, icon, initialInput, null, false);
     }
 
     @Override

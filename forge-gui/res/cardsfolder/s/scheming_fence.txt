@@ -5,7 +5,7 @@ PT:2/3
 K:ETBReplacement:Other:ChooseCard
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Permanent.nonLand | MinAmount$ 0 | ChoiceTitle$ You may choose a nonland permanent | AILogic$ OppPreferred | SpellDescription$ As CARDNAME enters the battlefield, you may choose a nonland permanent.
 S:Mode$ Continuous | Affected$ Card.ChosenCard | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of the chosen permanent can't be activated.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOfDefined$ ChosenCard | GainsValidAbilities$ Activated.nonLoyalty | GainsAbilitiesActivateIgnoreColor$ AnyType->AnyColor | Description$ CARDNAME has all activated abilities of the chosen permanent except for loyalty abilities. You may spend mana as though it were mana of any color to activate those abilities.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOfDefined$ ChosenCard | GainsValidAbilities$ Activated.nonLoyalty | ManaConversion$ AnyType->AnyColor | Description$ CARDNAME has all activated abilities of the chosen permanent except for loyalty abilities. You may spend mana as though it were mana of any color to activate those abilities.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.ChosenCard | Execute$ TrigCleanup
 SVar:TrigCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:As Scheming Fence enters the battlefield, you may choose a nonland permanent.\nActivated abilities of the chosen permanent can't be activated.\nScheming Fence has all activated abilities of the chosen permanent except for loyalty abilities. You may spend mana as though it were mana of any color to activate those abilities.

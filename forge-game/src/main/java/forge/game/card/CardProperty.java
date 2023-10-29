@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -70,12 +69,19 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
-            if (!card.sharesNameWith(source.getNamedCard())) {
-                return false;
+            boolean found = false;
+            for (String name : source.getNamedCards()) {
+                if (card.sharesNameWith(name)) {
+                    found = true;
+                    break;
+                }
             }
-        } else if (property.equals("NamedCard2")) {
-            if (!card.sharesNameWith(source.getNamedCard2())) {
-                return false;
+            return found;
+        } else if (property.startsWith("DifferentNameThan")) {
+            for (Card c : AbilityUtils.getDefinedCards(source, property.substring(17), spellAbility)) {
+                if (card.sharesNameWith(c)) {
+                    return false;
+                }
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
             if (!source.hasRemembered()) {
@@ -144,8 +150,12 @@ public class CardProperty {
             if (!card.isBackSide()) {
                 return false;
             }
+        } else if (property.equals("CanTransform")) {
+            if (!card.isTransformable()) {
+                return false;
+            }
         } else if (property.equals("Transformed")) {
-            if (!card.getCurrentStateName().equals(CardStateName.Transformed)) {
+            if (!card.isTransformed()) {
                 return false;
             }
         } else if (property.equals("Flip")) {
@@ -162,6 +172,10 @@ public class CardProperty {
             }
         } else if (property.equals("AdventureCard")) {
             if (!card.isAdventureCard()) {
+                return false;
+            }
+        } else if (property.equals("IsRingbearer")) {
+            if (!card.isRingBearer()) {
                 return false;
             }
         } else if (property.equals("IsTriggerRemembered")) {
@@ -214,6 +228,19 @@ public class CardProperty {
                     return false;
                 }
             }
+        } else if (property.startsWith("OppProtect")) {
+            if (card.getProtectingPlayer() == null
+                    || !sourceController.getOpponents().contains(card.getProtectingPlayer())) {
+                return false;
+            }
+        } else if (property.startsWith("ProtectedBy")) {
+            if (card.getProtectingPlayer() == null) {
+                return false;
+            }
+            final List<Player> lp = AbilityUtils.getDefinedPlayers(source, property.substring(12), spellAbility);
+            if (!lp.contains(card.getProtectingPlayer())) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {
@@ -263,6 +290,14 @@ public class CardProperty {
             }
 
             if (source.isRemembered(controller)) {
+                return false;
+            }
+        } else if (property.equals("targetedBy")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
+            SpellAbility sp = (SpellAbility)spellAbility;
+            if (!sp.isTargeting(card)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -342,6 +377,10 @@ public class CardProperty {
                 } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("StrictlyOther")) {
+            if (card.equalsWithTimestamp(source)) {
+                return false;
             }
         } else if (property.startsWith("Other")) {
             if (card.equals(source)) {
@@ -669,18 +708,8 @@ public class CardProperty {
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
-                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted") || restriction.startsWith("TopOfLibrary")) {
-                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
-                }
 
                 switch (restriction) {
-                    case "Equipped":
-                        if (!source.isEquipment() || !source.isEquipping()
-                                || !card.sharesColorWith(source.getEquipping())) {
-                            return false;
-                        }
-                        break;
                     case "MostProminentColor":
                         byte mask = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
                         if (!card.getColor().hasAnyColor(mask))
@@ -693,11 +722,11 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        SpellAbilityStackInstance castSA = game.getStack().getInstanceFromSpellAbility((SpellAbility) spellAbility);
+                        SpellAbilityStackInstance castSA = game.getStack().getInstanceMatchingSpellAbilityID((SpellAbility) spellAbility);
                         if (castSA == null) {
                             return false;
                         }
-                        List<Mana> payingMana = castSA.getPayingMana();
+                        List<Mana> payingMana = castSA.getSpellAbility().getPayingMana();
                         // even if the cost was raised, we only care about mana from activation part
                         // since this can only be 1 currently with Protective Sphere, let's just assume it's the first shard spent for easy handling
                         if (payingMana.isEmpty() || !card.getColor().hasAnyColor(payingMana.get(0).getColor())) {
@@ -705,12 +734,10 @@ public class CardProperty {
                         }
                         break;
                     default:
-                        for (final Card c1 : sourceController.getCardsIn(ZoneType.Battlefield)) {
-                            if (c1.isValid(restriction, sourceController, source, spellAbility) && card.sharesColorWith(c1)) {
-                                return true;
-                            }
+                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesColorWith(card))) {
+                            return false;
                         }
-                        return false;
+                        break;
                 }
             }
         } else if (property.startsWith("MostProminentColor")) {
@@ -762,7 +789,7 @@ public class CardProperty {
                     return false;
                 }
             } else {
-                final String restriction = property.split("sharesCreatureTypeWith ")[1];
+                final String restriction = property.split(" ", 2)[1];
                 switch (restriction) {
                     case "Commander":
                         final List<Card> cmdrs = sourceController.getCommanders();
@@ -778,18 +805,13 @@ public class CardProperty {
                             }
                         }
                         return false;
-                    case "AllRemembered":
-                        for (final Object rem : source.getRemembered()) {
-                            if (rem instanceof Card) {
-                                final Card c = (Card) rem;
-                                if (!card.sharesCreatureTypeWith(c)) {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCreatureTypeWith(card))) {
+                        CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                        if (property.contains("WithAll")) {
+                            if (!Iterables.all(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                                return false;
+                            }  
+                        } else if (!Iterables.any(def, CardPredicates.sharesCreatureTypeWith(card))) {
                             return false;
                         }
                         break;
@@ -867,7 +889,7 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -959,7 +981,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
+            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController);
             if (cards.size() < 2) {
                 return false;
             }
@@ -967,7 +989,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
-            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility)) {
+            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController)) {
                 if (card.equals(c)) {
                     return true;
                 }
@@ -1067,6 +1089,10 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.startsWith("activated")) {
+            if (!card.activatedThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("tapped")) {
             if (!card.isTapped()) {
                 return false;
@@ -1162,15 +1188,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Damaged")) {
+            boolean found = false;
             for (Pair<Integer, Boolean> p : source.getDamageReceivedThisTurn()) {
-                boolean found = false;
                 if (game.getDamageLKI(p).getLeft().equalsWithTimestamp(card)) {
                     found = true;
                     break;
                 }
-                if (!found) {
-                    return false;
-                }
+            }
+            if (!found) {
+                return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisCombat")) {
             if (card.getDamageHistory().getThisCombatDamaged().isEmpty()) {
@@ -1230,6 +1256,10 @@ public class CardProperty {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
                 return false;
             }
+        } else if (property.startsWith("attackedBattleThisTurn")) {
+            if (!card.getDamageHistory().hasAttackedBattleThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("attackedYouThisTurn")) {
             if (!card.getDamageHistory().hasAttackedThisTurn(sourceController)) {
                 return false;
@@ -1281,14 +1311,28 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            if (property.contains("ControlledBy")) {
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
+                cards = CardLists.filterControlledBy(cards, p);
+                if (!cards.contains(card)) {
+                    return false;
+                }
+            }
             for (final Card crd : cards) {
                 if (crd.getNetPower() < card.getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            if (property.contains("ControlledBy")) { // 4/25/2023 only used for adventure mode Death Ring
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
+                cards = CardLists.filterControlledBy(cards, p);
+                if (!cards.contains(card)) {
+                    return false;
+                }
+            }
             for (final Card crd : cards) {
                 if (crd.getNetToughness() < card.getNetToughness()) {
                     return false;
@@ -1546,6 +1590,15 @@ public class CardProperty {
                     return false;
                 }
             }
+            if (property.equals("attackingBattle")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!(attacked instanceof Card)) {
+                    return false;
+                }
+                if (!((Card) attacked).isBattle()) {
+                    return false;
+                }
+            }
             if (property.startsWith("attackingYouOrYourPW")) {
                 GameEntity defender = combat.getDefenderByAttacker(card);
                 if (defender instanceof Card) {
@@ -1722,7 +1775,7 @@ public class CardProperty {
             }
         } else if (property.equals("hadToAttackThisCombat")) {
             AttackRequirement e = combat == null ? null : combat.getAttackConstraints().getRequirements().get(card);
-            if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
+            if (e == null || !e.hasRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
@@ -1746,8 +1799,19 @@ public class CardProperty {
             if (property.equals("pseudokicked")) {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
+        } else if (property.equals("bargained")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isBargain();
         } else if (property.equals("surged")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isSurged();
@@ -1755,9 +1819,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isBlitz();
         } else if (property.equals("dashed")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isDash();
@@ -1765,9 +1835,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isEscape();
         } else if (property.equals("evoked")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isEvoke();
@@ -1775,9 +1851,15 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             return card.getCastSA().isProwl();
         } else if (property.equals("spectacle")) {
             if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             return card.getCastSA().isSpectacle();
@@ -1962,7 +2044,8 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                SpellAbility sa = (SpellAbility) spellAbility;
+                Object o = sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key));
                 boolean found = false;
                 if (o != null) {
                     if (o instanceof CardCollection) {
@@ -1980,7 +2063,8 @@ public class CardProperty {
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
-                if (card.equals(((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key)))) {
+                SpellAbility sa = (SpellAbility) spellAbility;
+                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

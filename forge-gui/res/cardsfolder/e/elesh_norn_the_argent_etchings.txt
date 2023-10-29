@@ -1,0 +1,29 @@
+Name:Elesh Norn
+ManaCost:2 W W
+Types:Legendary Creature Phyrexian Praetor
+PT:3/5
+K:Vigilance
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You,Permanent.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a source an opponent controls deals damage to you or a permanent you control, that source's controller loses 2 life unless they pay {1}.
+SVar:TrigDealDamage:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ 2 | UnlessCost$ 1 | UnlessPayer$ TriggeredSourceController
+A:AB$ ChangeZone | Cost$ 2 W Sac<3/Creature.Other/other creatures> | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME,
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ then return it to the battlefield transformed under its owner's control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | StackDescription$ None | SpellDescription$ Activate only as a sorcery.
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice
+Oracle:Vigilance\nWhenever a source an opponent controls deals damage to you or a permanent you control, that source's controller loses 2 life unless they pay {1}.\n{2}{W}, Sacrifice three other creatures: Exile Elesh Norn, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:The Argent Etchings
+ManaCost:no cost
+Types:Enchantment Saga
+K:Saga:3:Incubate,PumpAll,DestroyAll
+SVar:Incubate:DB$ Incubate | Amount$ 2 | Times$ 5 | SubAbility$ DBTransform | SpellDescription$ Incubate 2 five times, then transform all Incubator tokens you control.
+SVar:DBTransform:DB$ SetState | Defined$ Valid Incubator.token+YouCtrl | Mode$ Transform
+SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Double Strike | SpellDescription$ Creatures you control get +1/+1 and gain double strike until end of turn.
+SVar:DestroyAll:DB$ DestroyAll | Cost$ SubCounter<5/LOYALTY> | ValidCards$ Permanent.nonArtifact+nonLand+nonPhyrexian+StrictlyOther | SubAbility$ DBExile | Ultimate$ True | SpellDescription$ Destroy all other permanents except for artifacts, lands, and Phyrexians. Exile CARDNAME, then return it to the battlefield (front face up).
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters & Type$Artifact|Phyrexian
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Incubate 2 five times, then transform all Incubator tokens you control.\nII — Creatures you control get +1/+1 and gain double strike until end of turn.\nIII — Destroy all other permanents except for artifacts, lands, and Phyrexians. Exile The Argent Etchings, then return it to the battlefield (front face up).

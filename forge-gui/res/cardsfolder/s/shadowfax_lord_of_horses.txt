@@ -1,0 +1,12 @@
+Name:Shadowfax, Lord of Horses
+ManaCost:3 R W
+Types:Legendary Creature Horse
+PT:4/4
+S:Mode$ Continuous | Affected$ Horse.YouCtrl | AddKeyword$ Haste | Description$ Horses you control have haste. (They can attack and {T} as soon as they come under your control.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may put a creature card with lesser power from your hand onto the battlefield tapped and attacking.
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+powerLTX | Origin$ Hand | Tapped$ True | Attacking$ True | Destination$ Battlefield | TgtPrompt$ Select target creature card with lesser power that Shadowfax in your hand
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+DeckHints:Type$Horse
+Oracle:Horses you control have haste. (They can attack and {T} as soon as they come under your control.)\nWhenever Shadowfax, Lord of Horses attacks, you may put a creature card with lesser power from your hand onto the battlefield tapped and attacking.

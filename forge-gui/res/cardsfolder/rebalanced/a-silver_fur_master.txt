@@ -1,0 +1,9 @@
+Name:A-Silver-Fur Master
+ManaCost:U B
+Types:Creature Rat Ninja
+PT:2/2
+K:Ninjutsu:UB
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Ninjutsu | Activator$ You | Amount$ 1 | Description$ Ninjutsu abilities you activate cost {1} less to activate.
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.Ninja+Other+YouCtrl,Creature.Rogue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Ninja and Rogue creatures you control get +1/+1.
+DeckHints:Type$Ninja|Rogue
+Oracle:Ninjutsu {U/B}\nNinjutsu abilities you activate cost {1} less to activate.\nOther Ninja and Rogue creatures you control get +1/+1.

@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact Creature Scarecrow
 PT:2/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Creature.Blue+YouCtrl | Description$ CARDNAME has flying as long as you control a blue creature.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent Creature.White+YouCtrl | Description$ CARDNAME has vigilance as long as you control a white creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Creature.White+YouCtrl | Description$ CARDNAME has vigilance as long as you control a white creature.
 SVar:BuffedBy:Creature.White,Creature.Blue
 Oracle:Watchwing Scarecrow has vigilance as long as you control a white creature.\nWatchwing Scarecrow has flying as long as you control a blue creature.

@@ -111,7 +111,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         String typeDesc = this.getTypeDescription();
         if (typeDesc == null) {
             String typeS = this.getType();
-            typeDesc = CardType.CoreType.isValidEnum(typeS) ? typeS.toLowerCase() : typeS;
+            typeDesc = CardType.CoreType.isValidEnum(typeS) || typeS.equals("Card") ? typeS.toLowerCase() : typeS;
         }
         return typeDesc;
     }

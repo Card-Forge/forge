@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy1lksOwjAMRLuk12ELa1T1rByp69JjQIUshmHGcRBEGqmAnedfUpbzMCxF3cantocuiZQvrhbndHxp/5yxWOjL+2QcFueY2aLdZPKvcGfBUuyoCbInYedq7XLNcnRC7r6qXMfs6VHMY8V/f96SflaZ2Ovr4dPf9TSYHBMqzo6KS8151rOZ7GNfxVdnNnqI/lUu1knVuXUumYv3h5rtCrclxw2tZs85YVXmySlWxLOO73vOFGMlN2XnfN2dpvLNzrp7F3Ce3N/IuVq/njqrhf58tyqbb/upuDh7yG31F89pdY5479Z88O+qFtw7xY1nxey581vCfiE3m8eK3Jy6PPmebv1P4llo8VxfHYO/y3iV2cX9KnEwu+eM/IL/LacnDqV/rTvHbHZ/
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztkksOgCAMBT2RCyFRTy5IvJsQf5W0UR8ENywmGsAOr9W0TWM9s8cIHPvuBdw3yw7dc0Jt6Q4otL5NqDN1/slgu3tGmpW6pV7E52LXoHhGvbk5l2v5Oz3RCy7OTbOjvmXPOuh33tOvMBeSNacXyRrPupSTm3UpJ9pzZKYcNvT7B+/X/2vy501in79mTXEHl1EbiBNxo/meZh3eOd+xntN5Zo7Rl7Mk/Q/O6q3e6r1YASr6U50=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllMEOgjAMhvtMjAMwHklPyLO5vZOelLs1ppEYZruuIzH+yX8ho1//ruAbAL8yyTd6W9XYqimVlpPKopGWu1bX1stulVPD5XQbAO7oZbDjSjR5gBN69vtyn1oSzN4BxMzvinTB+V2/zHAaMS96Hje4uHvho39un0kHzHIUzFCqPfb3V7g19U/cEmbn0s8j888uzRraF4d6IGZM9GTFPWP94N58CZPj5twvZe4LcmrvmuPmMiX82txUD7XmzPEt8+ac5bhWnBwu9+4DPFuldA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lgFugzAMRXOiwmBStZBwpO18JMCR2ivM0exhXJymQL9kCUGSFzuxjTFl6htjItoI1rW6Bfjum2VuvMCcy9/z18f2+r4CRrWMIznGcmAxYxbZUfCTBsYdquV5gue5Wo/t0Udad2zzsQnITnu0jEs+afI1fK/XvjrB0uJF7wP5jlxbb/vENcGYGbnkq/RxULjyPXFD/ThWEzGlr68osPtIZz1kfObMZ+eZkxX3fAKb2ZlbER93AjMpiHvucQ+aHJ7pzRlzd/u5fH7aw4R7yHGTvr0xP34/V5sv81pybzDnfoCrzdfqilP2c0S8bth2u6a+g8vrRmB3zb6Zu6XA8ot6zlnqoFa5TL3i+XWkRiX1n8tzBOaY4fL82lsvZE/5XxvqUkQbsUbl6qW2jibeUzhzYvVwVnrKs3VI14KYELMD3xxYyPioScZF4/JaT/mZeF2z9BvaUxQ2FsSixF/+zxNZj5OxJ5Xkb1Gc23UvpB5HTIo/aS7wuYRL7Ny/2VYPPoP7qo5yc/n5Cxl3ntY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="242" y="397.667" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="337.833" y="137.111">
+   <properties>
+    <property name="enemy" value="Satyr Grove Guardian"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="65,66,67,64"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="182.167" y="156.833">
+   <properties>
+    <property name="enemy" value="Satyr Grove Guardian"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="66,65,64,67"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="243.658" y="228.891">
+   <properties>
+    <property name="enemy" value="Satyr Grove Guardian"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="65,66"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="241.058" y="150.057"/>
+  <object id="59" template="../../obj/gold.tx" x="246.333" y="55.3333"/>
+  <object id="60" template="../../obj/gold.tx" x="291" y="55"/>
+  <object id="62" template="../../obj/treasure.tx" x="268.667" y="55.3333"/>
+  <object id="63" template="../../obj/enemy.tx" x="270" y="72">
+   <properties>
+    <property name="enemy" value="Satyr Grove Guardian"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/waypoint.tx" x="332" y="92.6667"/>
+  <object id="65" template="../../obj/waypoint.tx" x="324.667" y="222"/>
+  <object id="66" template="../../obj/waypoint.tx" x="175.667" y="233.333"/>
+  <object id="67" template="../../obj/waypoint.tx" x="179.333" y="95"/>
+  <object id="68" template="../../obj/collision.tx" x="-0.833333" y="-16.6667" width="481" height="16"/>
+  <object id="69" template="../../obj/collision.tx" x="479.667" y="0.9585" width="16" height="414.416"/>
+  <object id="70" template="../../obj/collision.tx" x="-15.6667" y="0.458667" width="16" height="414.416"/>
+  <object id="71" template="../../obj/collision.tx" x="-0.833333" y="401" width="481" height="16"/>
+  <object id="72" template="../../obj/manashards.tx" x="448.333" y="245.333"/>
+  <object id="73" template="../../obj/manashards.tx" x="144.667" y="16"/>
+  <object id="74" template="../../obj/enemy.tx" x="44.25" y="88.5">
+   <properties>
+    <property name="enemy" value="Symbiote"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

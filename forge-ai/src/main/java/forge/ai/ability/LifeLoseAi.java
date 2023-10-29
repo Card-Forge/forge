@@ -144,7 +144,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        if (SpellAbilityAi.isSorcerySpeed(sa, ai) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
+        if (isSorcerySpeed(sa, ai) || sa.hasParam("ActivationPhases") || playReusable(ai, sa)
                 || ComputerUtil.activateForCost(sa, ai)) {
             return true;
         }

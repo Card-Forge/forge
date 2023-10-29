@@ -75,6 +75,11 @@ public class DeckHtmlSerializer {
                     final PaperCard r = card.getKey();
                     final String url = ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(r, "");
                     list.add(url);
+
+                    if (r.hasBackFace()) {
+                        final String backUrl = ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(r, "back");
+                        list.add(backUrl);
+                    }
                 }
             }
 

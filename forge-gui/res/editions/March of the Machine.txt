@@ -3,6 +3,10 @@ Code=MOM
 Date=2023-04-21
 Name=March of the Machine
 Type=Expansion
+BoosterCovers=3
+Booster=8 Common:!dfc:!fromSheet("MOM lands"):fromsheet("MOM cards"), 2 Uncommon:!dfc:!fromSheet("MOM battles"):fromSheet("MOM cards"), 1 fromSheet("MOM double-face"), 1 RareMythic:!fromSheet("MOM battles"):!dfc:fromSheet("MOM cards"), 1 fromSheet("MOM battles"), 1 fromSheet("MUL draft booster"), 1 fromSheet("MOM lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=MOM
 
 [cards]
@@ -178,7 +182,7 @@ ScryfallCode=MOM
 170 C Volcanic Spite @Kevin Sidharta
 171 R Voldaren Thrillseeker @Viko Menezes
 172 C War-Trained Slasher @Francis Tneh
-173 C Wrenn's Resolve
+173 C Wrenn's Resolve @Viko Menezes
 174 R Ancient Imperiosaur @Piotr Foksowicz
 175 C Arachnoid Adaptation @Isis
 176 C Atraxa's Fall @Xavier Ribeiro
@@ -332,7 +336,11 @@ ScryfallCode=MOM
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 322 M Wrenn and Realmbreaker @Jehan Choo
+338 M Elesh Norn @Ryan Pancost
 339 M Jin-Gitaxias @Julian Kok Joon Wen
+340 M Sheoldred @Camille Alquier
+341 M Urabrask @Jose Parodi
+342 M Vorinclex @Joseph Weston
 
 [jumpstart]
 323 R Essence of Orthodoxy @Oriana Menendez
@@ -402,5 +410,116 @@ ScryfallCode=MOM
 [buy a box]
 387 R Omnath, Locus of All @Helge C. Balzer
 
+[lands]
+10 Plains|MOM|1
+10 Plains|MOM|2
+10 Plains|MOM|3
+10 Island|MOM|1
+10 Island|MOM|2
+10 Island|MOM|3
+10 Swamp|MOM|1
+10 Swamp|MOM|2
+10 Swamp|MOM|3
+10 Mountain|MOM|1
+10 Mountain|MOM|2
+10 Mountain|MOM|3
+10 Forest|MOM|1
+10 Forest|MOM|2
+10 Forest|MOM|3
+15 Bloodfell Caves|MOM
+15 Blossoming Sands|MOM
+15 Dismal Backwater|MOM
+15 Jungle Hollow|MOM
+15 Rugged Highlands|MOM
+15 Scoured Barrens|MOM
+15 Swiftwater Cliffs|MOM
+15 Thornwood Falls|MOM
+15 Tranquil Cove|MOM
+15 Wind-Scarred Crag|MOM
+
+[battles]
+2 Invasion of Alara|MOM
+4 Invasion of Amonkhet|MOM
+2 Invasion of Arcavios|MOM
+4 Invasion of Azgol|MOM
+4 Invasion of Belenon|MOM
+4 Invasion of Dominaria|MOM
+4 Invasion of Eldraine|MOM
+4 Invasion of Ergamon|MOM
+2 Invasion of Fiora|MOM
+2 Invasion of Gobakhan|MOM
+2 Invasion of Ikoria|MOM
+1 Invasion of Innistrad|MOM
+2 Invasion of Ixalan|MOM
+4 Invasion of Kaladesh|MOM
+2 Invasion of Kaldheim|MOM
+4 Invasion of Kamigawa|MOM
+2 Invasion of Karsus|MOM
+4 Invasion of Kylem|MOM
+4 Invasion of Lorwyn|MOM
+4 Invasion of Mercadia|MOM
+4 Invasion of Moag|MOM
+4 Invasion of Muraganda|MOM
+4 Invasion of New Capenna|MOM
+1 Invasion of New Phyrexia|MOM
+4 Invasion of Pyrulea|MOM
+1 Invasion of Ravnica|MOM
+4 Invasion of Regatha|MOM
+2 Invasion of Segovia|MOM
+1 Invasion of Shandalar|MOM
+1 Invasion of Tarkir|MOM
+2 Invasion of Theros|MOM
+2 Invasion of Tolvada|MOM
+4 Invasion of Ulgrotha|MOM
+4 Invasion of Vryn|MOM
+4 Invasion of Xerex|MOM
+4 Invasion of Zendikar|MOM
+
+
+[double-face]
+1 Elesh Norn|MOM
+2 Heliod, the Radiant Dawn|MOM
+3 Seraph of New Capenna|MOM
+3 Sun-Blessed Guardian|MOM
+9 Tarkir Duneshaper|MOM
+3 Captive Weird|MOM
+1 Jin-Gitaxias|MOM
+9 Order of the Mirror|MOM
+2 Rona, Herald of Invasion|MOM
+3 Skyclave Aerialist|MOM
+9 Aetherblade Agent|MOM
+2 Ayara, Widow of the Realm|MOM
+3 Blightreaper Thallid|MOM
+3 Nezumi Freewheeler|MOM
+1 Sheoldred|MOM
+2 Etali, Primal Conqueror|MOM
+3 Harried Artisan|MOM
+3 Khenra Spellspear|MOM
+9 Pyretic Prankster|MOM
+1 Urabrask|MOM
+9 Bonded Herdbeast|MOM
+3 Gnottvold Hermit|MOM
+3 Herbology Instructor|MOM
+2 Polukranos Reborn|MOM
+1 Vorinclex|MOM
+
+
 [tokens]
-incubator_c_0_0_a_phyrexian
+b_2_2_zombie
+c_1_1_a_thopter_flying
+c_a_treasure_sac
+c_a_treasure_sac
+first_mate_ragavan
+g_1_1_phyrexian_saproling
+g_x_x_dinosaur_trample
+gw_3_3_phyrexian_hydra_lifelink
+gw_3_3_phyrexian_hydra_reach
+rw_3_2_spirit
+rw_3_2_warrior_symbiotic_attack
+u_1_1_kraken_trample
+ur_1_1_elemental
+w_1_1_monk_prowess
+w_1_1_soldier_lifelink
+w_1_1_vampire_lifelink
+wb_1_1_spirit_flying
+wu_2_2_knight_vigilance

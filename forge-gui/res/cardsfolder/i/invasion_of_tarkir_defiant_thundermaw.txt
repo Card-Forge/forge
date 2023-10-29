@@ -1,0 +1,26 @@
+Name:Invasion of Tarkir
+ManaCost:1 R
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, reveal any number of Dragon cards from your hand. When you do, CARDNAME deals X plus 2 damage to any other target, where X is the number of cards revealed this way. (X can be 0.)
+SVar:TrigReveal:DB$ Reveal | RevealValid$ Card.Dragon+YouOwn | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDamageBis | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ When you do, CARDNAME deals X plus 2 damage to any other target, where X is the number of cards revealed this way. (X can be 0.)
+SVar:TrigDamageBis:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | TgtPrompt$ Select any other target | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$Amount/Plus.2
+DeckHints:Type$Dragon
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Tarkir enters the battlefield, reveal any number of Dragon cards from your hand. When you do, Invasion of Tarkir deals X plus 2 damage to any other target, where X is the number of cards revealed this way. (X can be 0.)
+
+ALTERNATE
+
+Name:Defiant Thundermaw
+ManaCost:no cost
+Colors:red
+Types:Creature Dragon
+PT:4/4
+K:Trample
+K:Flying
+T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Dragon you control attacks, it deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+Oracle:Flying, trample\nWhenever a Dragon you control attacks, it deals 2 damage to any target.

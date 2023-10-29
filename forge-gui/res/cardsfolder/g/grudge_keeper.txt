@@ -2,6 +2,6 @@ Name:Grudge Keeper
 ManaCost:1 B
 Types:Creature Zombie Wizard
 PT:2/1
-T:Mode$ Vote | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever players finish voting, each opponent who voted for a choice you didn't vote for loses 2 life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredOtherVoters | LifeAmount$ 2
+T:Mode$ Vote | TriggerZones$ Battlefield | Execute$ TrigLoseLife | List$ OppVotedDiff | TriggerDescription$ Whenever players finish voting, each opponent who voted for a choice you didn't vote for loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredOpponentVotedDiff | LifeAmount$ 2
 Oracle:Whenever players finish voting, each opponent who voted for a choice you didn't vote for loses 2 life.

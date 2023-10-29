@@ -1,0 +1,12 @@
+Name:Osgood, Operation Double
+ManaCost:2 U U
+Types:Legendary Creature Human Alien Shapeshifter
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, create a token that's a copy of it, except it isn't legendary.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NonLegendary$ True
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ Spell.Artifact,Activated.Artifact+InZoneBattlefield | SpellDescription$ Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact.
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Token & Type$Clue|Artifact
+DeckHints:Type$Artifact
+Oracle:When you cast this spell, create a token that's a copy of it, except it isn't legendary.\n{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact.\nParadox — Whenever you cast a spell from anywhere other than your hand, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

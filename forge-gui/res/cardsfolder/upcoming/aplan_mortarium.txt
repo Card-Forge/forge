@@ -1,0 +1,11 @@
+Name:Aplan Mortarium
+ManaCost:no cost
+Types:Plane Alfava Metraxis
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Byzantium Radiation — At the beginning of your upkeep, put an exposure counter on CARDNAME. Then you lose life equal to the number of exposure counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ EXPOSURE | CounterNum$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$CardCounters.EXPOSURE
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create two 2/2 black Alien Angel artifact creature tokens with first strike, vigilance, and "Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_a_alien_angel_firststrike_vigilance 
+DeckHas:Ability$Counters|Token & Type$Angel|Alien|Artifact
+Oracle:Byzantium Radiation — At the beginning of your upkeep, put an exposure counter on Aplan Mortarium. Then you lose life equal to the number of exposure counters on it.\nWhenever chaos ensues, create two 2/2 black Alien Angel artifact creature tokens with first strike, vigilance, and "Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn."

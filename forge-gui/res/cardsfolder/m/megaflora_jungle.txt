@@ -1,0 +1,8 @@
+Name:Megaflora Jungle
+ManaCost:no cost
+Types:Plane Gargantikar
+S:Mode$ Continuous | Affected$ Creature.cmcLE2 | AddPower$ 2 | AddToughness$ 2 | EffectZone$ Command | Description$ Each creature with mana value 2 or less gets +2/+2.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create a 1/1 green Insect creature token with flying named Butterfly.
+SVar:RolledChaos:DB$ Token | TokenAmount$ 1 | TokenScript$ butterfly | TokenOwner$ You
+DeckHas:Ability$Token & Type$Butterfly
+Oracle:Each creature with mana value 2 or less gets +2/+2.\nWhenever chaos ensues, create a 1/1 green Insect creature token with flying named Butterfly.

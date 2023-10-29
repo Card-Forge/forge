@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -620,6 +621,12 @@ public class ComputerUtil {
         // don't sacrifice the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
 
+        // if the source has "Casualty", don't sacrifice cards that may have granted the effect
+        // TODO: is there a surefire way to determine which card added Casualty?
+        if (source.hasKeyword(Keyword.CASUALTY)) {
+            typeList = CardLists.filter(typeList, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+        }
+
         if (typeList.size() < amount) {
             return null;
         }
@@ -694,10 +701,8 @@ public class ComputerUtil {
     public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude, SpellAbility sa) {
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
-        CardCollection typeList =
-                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
+        CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
@@ -733,7 +738,6 @@ public class ComputerUtil {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
         }
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
@@ -772,7 +776,6 @@ public class ComputerUtil {
         CardCollection typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
 
         if (untap) {
@@ -827,6 +830,31 @@ public class ComputerUtil {
         } else if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
             if (!SpecialCardAi.DesecrationDemon.considerSacrificingCreature(ai, source)) {
                 return sacrificed; // don't sacrifice unless in special conditions specified by DesecrationDemon AI
+            }
+        } else if ("Lethal".equals(source.getParam("AILogic"))) {
+            for (Card c : cardlist) {
+                boolean isLethal = false;
+                for (Player opp : ai.getOpponents()) {
+                    if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife() && c.getNetPower() >= opp.getLife()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                for (Card creature : ai.getOpponents().getCreaturesInPlay()) {
+                    if (creature.canBeDestroyed() && c.getNetPower() >= creature.getNetToughness()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                if (c.hasSVar("SacMe") || isLethal) {
+                    sacrificed.add(c);
+                    if (sacrificed.size() == amount) {
+                        return sacrificed;
+                    }
+                }
+            }
+            if (sacrificed.size() < amount) {
+                System.err.println("Warning: AILogic Lethal could not meaningfully select enough cards for the AF Sacrifice on " + source.getHostCard());
             }
         } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
             if ("Pillar Tombs of Aku".equals(host.getName())) {
@@ -901,7 +929,7 @@ public class ComputerUtil {
         }
 
         for (int i = 0; i < max; i++) {
-            Card c = chooseCardToSacrifice(remaining, ai, destroy);
+            Card c = chooseCardToSacrifice(source, remaining, ai, destroy);
             remaining.remove(c);
             if (c != null) {
                 sacrificed.add(c);
@@ -916,7 +944,7 @@ public class ComputerUtil {
     }
 
     // Precondition it wants: remaining are reverse-sorted by CMC
-    private static Card chooseCardToSacrifice(final CardCollection remaining, final Player ai, final boolean destroy) {
+    private static Card chooseCardToSacrifice(final SpellAbility source, CardCollection remaining, final Player ai, final boolean destroy) {
         // If somehow ("Drop of Honey") they suggest to destroy opponent's card - use the chance!
         for (Card c : remaining) { // first compare is fast, second is precise
             if (ai.isOpponentOf(c.getController()))
@@ -929,6 +957,7 @@ public class ComputerUtil {
                 return indestructibles.get(0);
             }
         }
+
         for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
             final int priority = 6 - ip;
             for (Card card : remaining) {
@@ -936,6 +965,11 @@ public class ComputerUtil {
                     return card;
                 }
             }
+        }
+
+        if (source.isEmerge() || source.isOffering()) {
+            // don't sac when cost wouldn't be reduced
+            remaining = CardLists.filter(remaining, CardPredicates.greaterCMC(1));
         }
 
         Card c = null;
@@ -1083,6 +1117,11 @@ public class ComputerUtil {
             }
         }
 
+        // cast Blitz in main 1 if the creature attacks
+        if (sa.isBlitz() && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, card)) {
+            return true;
+        }
+
         // try not to cast Raid creatures in main 1 if an attack is likely
         if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !cardState.hasKeyword(Keyword.HASTE)) {
             for (Card potentialAtkr: ai.getCreaturesInPlay()) {
@@ -1211,7 +1250,7 @@ public class ComputerUtil {
                     creatures2.add(creatures.get(i));
                 }
             }
-            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0), null).size()) > 1)
+            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0), null, ai).size()) > 1)
                     && card.isCreature() && card.getManaCost().getCMC() <= 3) {
                 return true;
             }
@@ -1293,7 +1332,6 @@ public class ComputerUtil {
                 && !sa.hasParam("ActivationPhases");
     }
 
-    //returns true if it's better to wait until blockers are declared).
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
@@ -1315,6 +1353,7 @@ public class ComputerUtil {
                 return true;
             }
         }
+
         final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !source.isInZone(ZoneType.Graveyard);
         for (Card buffedCard : buffed) {
@@ -1380,8 +1419,8 @@ public class ComputerUtil {
         }
         if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
             return true;
-        } else if (sa.isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
-            for (final CostPart part : abCost.getCostParts()) {
+        } else if (sa.getRootAbility().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+            for (final CostPart part : sa.getRootAbility().getPayCosts().getCostParts()) {
                 if (part instanceof CostPutCounter) {
                     return part.convertAmount() == null || part.convertAmount() > 0 || ai.isCardInPlay("Carth the Lion");
                 }
@@ -1470,7 +1509,7 @@ public class ComputerUtil {
             }
         }
 
-        all.addAll(ai.getCardsActivableInExternalZones(true));
+        all.addAll(ai.getCardsActivatableInExternalZones(true));
         all.addAll(ai.getCardsIn(ZoneType.Hand));
 
         for (final Card c : all) {
@@ -1508,19 +1547,29 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean hasAFogEffect(final Player ai, boolean checkingOther) {
-        final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+    public static boolean hasAFogEffect(final Player defender, final Player ai, boolean checkingOther) {
+        final CardCollection all = new CardCollection(defender.getCardsIn(ZoneType.Battlefield));
 
-        all.addAll(ai.getCardsActivableInExternalZones(true));
+        all.addAll(defender.getCardsActivatableInExternalZones(true));
         // TODO check if cards can be viewed instead
         if (!checkingOther) {
-            all.addAll(ai.getCardsIn(ZoneType.Hand));
+            all.addAll(defender.getCardsIn(ZoneType.Hand));
+        }
+
+        Set<Card> revealed = AiCardMemory.getMemorySet(ai, MemorySet.REVEALED_CARDS);
+        if (revealed != null) {
+            for (Card c : revealed) {
+                // if the card moved to a hidden zone depending on the circumstances the AI could not have noticed...?
+                if (c.isInZone(ZoneType.Hand) && c.getOwner() == defender) {
+                    all.add(c);
+                }
+            }
         }
 
         for (final Card c : all) {
             // check if card is at least available to be played
             // further improvements might consider if AI has options to steal the spell by making it playable first
-            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != defender && c.mayPlay(defender).isEmpty()) {
                 continue;
             }
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1535,13 +1584,13 @@ public class ComputerUtil {
                     if (!c.getController().isAI()) {
                         continue;
                     }
-                    if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
+                    if (AiCardMemory.isRememberedCard(defender, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
                         continue;
                     }
-                    AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
+                    AiCardMemory.rememberCard(defender, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
                 }
 
-                if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
+                if (!ComputerUtilCost.canPayCost(sa, defender, false)) {
                     continue;
                 }
                 return true;
@@ -1553,7 +1602,7 @@ public class ComputerUtil {
     public static int possibleNonCombatDamage(final Player ai, final Player enemy) {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
-        all.addAll(ai.getCardsActivableInExternalZones(true));
+        all.addAll(ai.getCardsActivatableInExternalZones(true));
         all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
 
         for (final Card c : all) {
@@ -1634,7 +1683,7 @@ public class ComputerUtil {
         for (SpellAbilityStackInstance si : game.getStack()) {
             // iterate from top of stack to find SpellAbility, including sub-abilities,
             // that does not match "sa"
-            SpellAbility spell = si.getSpellAbility(true), sub = spell.getSubAbility();
+            SpellAbility spell = si.getSpellAbility(), sub = spell.getSubAbility();
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
@@ -1683,14 +1732,10 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (Object o : objects) {
-                if (o instanceof GameEntity) {
-                    final GameEntity ge = (GameEntity) o;
-                    if (ge.canBeTargetedBy(topStack)) {
-                        canBeTargeted.add(ge);
-                    }
+            for (GameEntity ge : topStack.getTargets().getTargetEntities()) {
+                if (ge.canBeTargetedBy(topStack)) {
+                    canBeTargeted.add(ge);
                 }
             }
             if (canBeTargeted.isEmpty()) {
@@ -1734,18 +1779,11 @@ public class ComputerUtil {
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
         if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = AbilityUtils.calculateAmount(source,
-                    topStack.getParam("NumDmg"), topStack);
+            final int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
-            if (sub != null && sub.getApi() == ApiType.Pump) {
-                final List<String> keywords = sub.hasParam("KW") ? Arrays.asList(sub.getParam("KW").split(" & ")) : new ArrayList<>();
-                for (String kw : keywords) {
-                    if (kw.contains("can't be regenerated")) {
-                        noRegen = true;
-                        break;
-                    }
-                }
+            if (sub != null && sub.getApi() == ApiType.Effect && sub.hasParam("AILogic") && sub.getParam("AILogic").equals("CantRegenerate")) {
+                noRegen = true;
             }
             for (final Object o : objects) {
                 if (o instanceof Card) {
@@ -2010,7 +2048,7 @@ public class ComputerUtil {
             // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
             // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
             for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility sa = si.getSpellAbility(false);
+                SpellAbility sa = si.getSpellAbility();
                 if (sa.getApi() == ApiType.Counter) {
                     noStackCheck = true;
                     break;
@@ -2114,6 +2152,10 @@ public class ComputerUtil {
         final int handSize = handList.size();
         final int landSize = lands.size();
         int score = handList.size();
+        //adjust score for Living End decks
+        final CardCollectionView livingEnd = CardLists.filter(handList, c -> "Living End".equalsIgnoreCase(c.getName()));
+        if (livingEnd.size() > 0)
+            score = -(livingEnd.size() * 10);
 
         if (handSize/2 == landSize || handSize/2 == landSize +1) {
             score += 10;
@@ -2387,6 +2429,18 @@ public class ComputerUtil {
                         }
                     }
                 }
+            } else if ("ProtectionFromType".equals(logic)) {
+                // TODO: protection vs. damage-dealing and milling instants/sorceries in low creature decks and the like?
+                // Maybe non-creature artifacts in certain cases?
+                List<String> choices = ImmutableList.of("Creature", "Planeswalker"); // types that make sense to get protected against
+                CardCollection evalList = new CardCollection();
+
+                evalList.addAll(ai.getOpponents().getCardsIn(ZoneType.Battlefield));
+
+                chosen = ComputerUtilCard.getMostProminentCardType(evalList, choices);
+                if (StringUtils.isEmpty(chosen)) {
+                    chosen = "Creature"; // if in doubt, choose Creature, I guess
+                }
             }
             else {
                 // Are we picking a type to reduce costs for that type?
@@ -2418,6 +2472,13 @@ public class ComputerUtil {
                 }
                 else if (logic.equals("MostProminentComputerControls")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), valid);
+                }
+                else if (logic.equals("MostProminentComputerControlsOrOwns")) {
+                    CardCollectionView list = ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+                    if (list.isEmpty()) {
+                        list = ai.getCardsIn(Arrays.asList(ZoneType.Library));
+                    }
+                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
                 }
                 else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
@@ -2716,12 +2777,11 @@ public class ComputerUtil {
         return ComputerUtilCard.getBestCreatureAI(killables);
     }
 
-    public static int predictDamageFromSpell(final SpellAbility sa, final Player targetPlayer) {
+    public static int predictDamageFromSpell(SpellAbility ab, final Player targetPlayer) {
         int damage = -1; // returns -1 if the spell does not deal damage
-        final Card card = sa.getHostCard();
+        final Card card = ab.getHostCard();
 
-        SpellAbility ab = sa;
-        while (ab != null) {
+        while (ab != null && targetPlayer.canLoseLife()) {
             if (ab.getApi() == ApiType.DealDamage) {
                 if (damage == -1) { damage = 0; } // found a damage-dealing spell
                 if (!ab.hasParam("NumDmg")) {
@@ -2879,7 +2939,8 @@ public class ComputerUtil {
                 || type.is(CounterEnumType.GOLD) || type.is(CounterEnumType.MUSIC) || type.is(CounterEnumType.PUPA)
                 || type.is(CounterEnumType.PARALYZATION) || type.is(CounterEnumType.SHELL) || type.is(CounterEnumType.SLEEP)
                 || type.is(CounterEnumType.SLUMBER) || type.is(CounterEnumType.SLEIGHT) || type.is(CounterEnumType.WAGE)
-                || type.is(CounterEnumType.INCARNATION) || type.is(CounterEnumType.RUST) || type.is(CounterEnumType.STUN);
+                || type.is(CounterEnumType.INCARNATION) || type.is(CounterEnumType.RUST) || type.is(CounterEnumType.STUN)
+                || type.is(CounterEnumType.FINALITY);
     }
 
     // this countertypes has no effect
@@ -2891,6 +2952,10 @@ public class ComputerUtil {
                 e = Integer.parseInt(c.getSVar("MaxQuestEffect"));
             }
             return c.getCounters(type) > e;
+        }
+        // keyword counters
+        if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
+            return true;
         }
 
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
@@ -2959,11 +3024,11 @@ public class ComputerUtil {
                 repParams,
                 ReplacementLayer.Other);
 
-        if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
+        if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
             return false;
         }
         return true;
@@ -2988,13 +3053,13 @@ public class ComputerUtil {
             ReplacementLayer.Other
         );
 
-        if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
+        if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
             // no life gain is not negative
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
             // lose life is only negative is the player can lose life
             return player.canLoseLife();
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
             // if it would draw more cards than player has, then its negative
             return player.getCardsIn(ZoneType.Library).size() <= n;
         }

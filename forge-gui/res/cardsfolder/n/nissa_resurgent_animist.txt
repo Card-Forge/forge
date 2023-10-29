@@ -1,0 +1,10 @@
+Name:Nissa, Resurgent Animist
+ManaCost:2 G
+Types:Legendary Creature Elf Scout
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, add one mana of any color. Then if this is the second time this ability has resolved this turn, reveal cards from the top of your library until you reveal an Elf or Elemental card. Put that card into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigMana:DB$ Mana | Produced$ Any | SubAbility$ RevealUntil
+SVar:RevealUntil:DB$ DigUntil | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | Valid$ Elf,Elemental | ValidDescription$ elf or elemental | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+SVar:X:Count$ResolvedThisTurn
+DeckHints:Type$Elemental|Elf
+Oracle:Landfall — Whenever a land enters the battlefield under your control, add one mana of any color. Then if this is the second time this ability has resolved this turn, reveal cards from the top of your library until you reveal an Elf or Elemental card. Put that card into your hand and the rest on the bottom of your library in a random order.

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,26 +28,29 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
 import forge.assets.FSkin;
+import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-
-import static forge.adventure.util.Paths.ITEMS_ATLAS;
 
 /**
  * Render the rewards as a card on the reward scene.
@@ -70,9 +74,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean clicked = false;
     boolean sold = false;
     boolean flipOnClick;
-    private boolean hover;
+    private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
+    boolean isRewardShop, showOverlay;
+    TextraLabel overlayLabel;
 
     public int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
@@ -139,15 +145,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             toolTipImage.remove();
             toolTipImage = new RewardImage(processDrawable(image));
             if (GuiBase.isAndroid() || Forge.hasGamepad()) {
-                if (shown) {
-                    holdTooltip.getTouchDownTarget().fire(RewardScene.eventTouchUp());
-                    Gdx.input.setInputProcessor(null);
+                if (holdTooltip != null) {
+                    if (shown) {
+                        holdTooltip.getTouchDownTarget().fire(RewardScene.eventTouchUp());
+                        Gdx.input.setInputProcessor(null);
+                    }
+                    if (holdTooltip.getImage() != null && holdTooltip.getImage().getDrawable() instanceof TextureRegionDrawable) {
+                        try { // if texture is null either it's not initialized or already disposed
+                            ((TextureRegionDrawable) holdTooltip.getImage().getDrawable()).getRegion().getTexture().dispose();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    holdTooltip.hide();
+                    holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
                 }
-                if (holdTooltip.getImage() != null && holdTooltip.getImage().getDrawable() instanceof TextureRegionDrawable) {
-                    ((TextureRegionDrawable) holdTooltip.getImage().getDrawable()).getRegion().getTexture().dispose();
-                }
-                holdTooltip.hide();
-                holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
             } else {
                 tooltip.setActor(new ComplexTooltip(toolTipImage));
             }
@@ -165,15 +177,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.graphics.requestRendering();
     }
 
-    public RewardActor(Reward reward, boolean flippable, RewardScene.Type type) {
+    public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
         this.flipOnClick = flippable;
         this.reward = reward;
+        this.isRewardShop = RewardScene.Type.Shop.equals(type);
+        this.showOverlay = showOverlay;
         if (backTexture == null) {
             backTexture = FSkin.getSleeves().get(0);
         }
         switch (reward.type) {
             case Card: {
-                if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                hasbackface = reward.getCard().hasBackFace();
+                if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
                     PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
                     File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
@@ -200,47 +215,37 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     }
                     ImageCache.updateSynqCount(frontFace, count);
                     //preload card back for performance
-                    if (reward.getCard().hasBackFace() && ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
-                        PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
-                        File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
-                        if (backFace != null) {
-                            try {
-                                Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
-                                if (back == null) {
-                                    Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                                    Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
-                                    back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
-                                }
-                                if (back != null) {
-                                    ImageCache.updateSynqCount(backFace, 1);
-                                    if (holdTooltip != null) {
-                                        if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
-                                            holdTooltip.tooltip_actor.altcImage = new RewardImage(processDrawable(back));
-                                            holdTooltip.tooltip_actor.addActorAt(2, holdTooltip.tooltip_actor.altcImage);
-                                            holdTooltip.tooltip_actor.swapActor(holdTooltip.tooltip_actor.altcImage, holdTooltip.tooltip_actor.cImage);
-                                        }
+                    if (hasbackface) {
+                        if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
+                            PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
+                            File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
+                            if (backFace != null) {
+                                try {
+                                    Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
+                                    if (back == null) {
+                                        Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                        Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
+                                        back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
                                     }
-                                } else {
-                                    if (holdTooltip != null) {
-                                        if (Talt == null)
-                                            Talt = renderPlaceholder(new Graphics(), reward.getCard(), true);
-                                        if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
-                                            holdTooltip.tooltip_actor.altcImage = new RewardImage(processDrawable(Talt));
-                                            holdTooltip.tooltip_actor.addActorAt(2, holdTooltip.tooltip_actor.altcImage);
-                                            holdTooltip.tooltip_actor.swapActor(holdTooltip.tooltip_actor.altcImage, holdTooltip.tooltip_actor.cImage);
-                                        }
+                                    if (back != null) {
+                                        ImageCache.updateSynqCount(backFace, 1);
+                                        generateBackFace(reward, back);
+                                    } else {
+                                        generateBackFace(reward, getRenderedBackface(reward));
                                     }
+                                } catch (Exception e) {
+                                    System.err.println("Failed to load image: " + backFace.getPath());
                                 }
-                            } catch (Exception e) {
-                                System.err.println("Failed to load image: " + backFace.getPath());
                             }
+                        } else {
+                            generateBackFace(reward, getRenderedBackface(reward));
                         }
                     }
                 } else {
                     String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath + "border") : null;
                     int count = 0;
-                    if (lookup != null) {
+                    if (lookup != null && !Forge.enableUIMask.equals("Art")) {
                         try {
                             Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
                             if (replacement == null) {
@@ -259,13 +264,29 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             System.err.println("Failed to load image: " + lookup.getPath());
                             loaded = false;
                         }
-                    } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                    } else {
                         //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
+                        String imageRelativePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
+                        if (imageRelativePath != null) {
+                            File file = ImageKeys.getImageFile(imagePath);
+                            try {
+                                if (file != null) {
+                                    Texture check = Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
+                                    if (check == null) {
+                                        Forge.getAssets().manager().load(file.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                        Forge.getAssets().manager().finishLoadingAsset(file.getPath());
+                                    }
+                                    ImageCache.updateSynqCount(file, 1);
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
                         T = renderPlaceholder(new Graphics(), reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
                         loaded = false;
-                        fetcher.fetchImage(reward.getCard().getImageKey(false), this);
-                        if (reward.getCard().hasBackFace()) {
+                        if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)))
+                            fetcher.fetchImage(reward.getCard().getImageKey(false), this);
+                        if (hasbackface) {
                             if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
                                 fetcher.fetchImage(reward.getCard().getImageKey(true), null);
                             }
@@ -275,30 +296,69 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
             case Item: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
                 if (reward.getItem() == null) {
                     needsToBeDisposed = true;
-                    processSprite(backSprite, null, null, 0, 0);
+                    processSprite(backSprite, null, null, 0, 0, false);
                     break;
                 }
                 Sprite item = reward.getItem().sprite();
-                setItemTooltips(item, backSprite);
+                setItemTooltips(item, backSprite, false);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
+                needsToBeDisposed = true;
+                break;
+            }
+            case CardPack: {
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
+                if (reward.getDeck() == null) {
+                    needsToBeDisposed = true;
+                    processSprite(backSprite, null, null, 0, 0, false);
+                    break;
+                }
+
+
+                String imageKey = "";
+                String editionCode = "";
+                try {
+                    editionCode = reward.getDeck().getComment();
+                    int artIndex = 1;
+                    if (SealedProduct.specialSets.contains(editionCode) || editionCode.equals("?")) {
+                        imageKey = "b:" + getName().substring(0, getName().indexOf("Booster Pack") - 1);
+                    } else {
+                        int maxIdx = StaticData.instance().getEditions().get(editionCode).getCntBoosterPictures();
+                        artIndex = Aggregates.randomInt(1, 2);//MyRandom.getRandom().nextInt(maxIdx) + 1;
+                        imageKey = ImageKeys.BOOSTER_PREFIX + editionCode + ((1 >= maxIdx) ? "" : ("_" + artIndex));
+                    }
+                } catch (Exception e) {
+                    //Comment did not contain the edition code, this is not a basic booster pack
+                }
+                boolean isBooster = false;
+                Sprite item;
+                Texture t = ImageCache.getImage(imageKey, false, true);
+                if (t != null) {
+                    item = new Sprite(new TextureRegion(t));
+                    isBooster = true;
+                } else {
+                    item = Config.instance().getItemSprite("Deck");
+                }
+
+                setItemTooltips(item, backSprite, isBooster);
+                if (isBooster)
+                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, -10, isBooster);
+                else
+                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
             case Life:
             case Shards:
             case Gold: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
-                Sprite item = atlas.createSprite(reward.type.toString());
-                setItemTooltips(item, backSprite);
-                boolean isShop = RewardScene.Type.Shop.equals(type);
-                processSprite(backSprite, item, isShop ? null :
-                        Controls.newTextraLabel("[%]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10);
+                Sprite backSprite = Config.instance().getItemSprite("CardBack");
+                Sprite item = Config.instance().getItemSprite(reward.type.toString());
+                setItemTooltips(item, backSprite, false);
+                processSprite(backSprite, item, isRewardShop ? null :
+                        Controls.newTextraLabel("[%200]" + reward.getCount() + " " + reward.type), 0, isRewardShop ? 0 : -10, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -357,6 +417,26 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
+    private Texture getRenderedBackface(Reward r) {
+        if (Talt == null)
+            Talt = renderPlaceholder(new Graphics(), r.getCard(), true);
+        return Talt;
+    }
+
+    private void generateBackFace(Reward r, Texture t) {
+        try {
+            if (holdTooltip != null) {
+                if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
+                    holdTooltip.tooltip_actor.altcImage = new RewardImage(processDrawable(t));
+                    holdTooltip.tooltip_actor.addActorAt(2, holdTooltip.tooltip_actor.altcImage);
+                    holdTooltip.tooltip_actor.swapActor(holdTooltip.tooltip_actor.altcImage, holdTooltip.tooltip_actor.cImage);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to load alternate image: " + r.getCard());
+        }
+    }
+
     private void switchTooltip() {
         if (!Reward.Type.Card.equals(reward.type))
             return;
@@ -411,8 +491,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         } else if (realY > y) {
             y *= 1.1f;
         }
-        float fW = x > y ? x : y;
-        float fH = x > y ? y : x;
+        float fW = Math.max(x, y);
+        float fH = Math.min(x, y);
         float mul = fW / fH < AR ? AR / (fW / fH) : (fW / fH) / AR;
         Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().cardTooltipAdjLandscape : Config.instance().getSettingData().cardTooltipAdj;
         if (custom != null && custom != 1f) {
@@ -494,8 +574,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return result;
     }
 
-    private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY) {
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, (int) sprite.getWidth(), (int) sprite.getHeight(), false);
+    private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY, boolean isBooster) {
+        int pw = 192;
+        int ph = 256;
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, pw, ph, false);
         SpriteBatch batch = new SpriteBatch();
 
         frameBuffer.begin();
@@ -504,24 +586,30 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, sprite.getHeight(), sprite.getWidth(), -sprite.getHeight());
+        matrix.setToOrtho2D(0, ph, pw, -ph);
         batch.setProjectionMatrix(matrix);
 
         batch.begin();
-        batch.draw(sprite, 0, 0);
-        if (item != null)
-            batch.draw(item, sprite.getWidth() / 2 - item.getWidth() / 2, (sprite.getHeight() / 2 - item.getHeight() / 2) - modY);
+        batch.draw(sprite, 0, 0, pw, ph);
+        if (item != null) {
+            if (!isBooster) {
+                float iw = item.getWidth() * 4;
+                float ih = item.getHeight() * 4;
+                batch.draw(item, pw / 2f - iw / 2f, (ph / 2f - ih / 2f), iw, ih);
+            } else
+                batch.draw(item, pw / 4f, ph / 4f, pw / 2f, ph / 2f);
+        }
         if (itemText != null) {
             itemText.setWrap(true);
             itemText.setAlignment(1);
-            itemText.setWidth(sprite.getWidth());
-            itemText.setHeight(sprite.getHeight());
-            itemText.setX(itemText.getX() + modX);
-            itemText.setY(itemText.getY() + modY);
+            itemText.setWidth(pw);
+            itemText.setHeight(ph);
+            itemText.setX(itemText.getX() + (modX * 4));
+            itemText.setY(itemText.getY() + (modY * 8));
             itemText.draw(batch, 1);
         }
         batch.end();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, (int) sprite.getWidth(), (int) sprite.getHeight());
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, pw, ph);
         image = new Texture(pixmap);
         frameBuffer.end();
         batch.dispose();
@@ -529,7 +617,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         frameBuffer.dispose();
     }
 
-    private void setItemTooltips(Sprite icon, Sprite backSprite) {
+    private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
         int align = Align.left;
         if (generatedTooltip == null) {
             Matrix4 m = new Matrix4();
@@ -544,18 +632,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 getGraphics().setProjectionMatrix(m);
                 getGraphics().startClip();
                 getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
-                getGraphics().drawImage(icon, preview_w / 2 - 75, 160, 160, 160);
-                BitmapFont font = Controls.getBitmapFont("default", 4 / (preview_h / preview_w));
+                if (!isBooster)
+                    getGraphics().drawImage(icon, preview_w / 2f - 75, 160, 160, 160);
+                else
+                    getGraphics().drawImage(icon, 0, 0, preview_w, preview_h);
+                float div = (float) preview_h / preview_w;
+                BitmapFont font = Controls.getBitmapFont("default", 4 / div);
                 layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 getGraphics().drawText(font, layout, 32, preview_h - 70);
                 align = itemExists ? Align.topLeft : Align.top;
                 if (itemExists) {
                     description = item.getDescription();
                     layout.reset();
+                } else if (getReward().getDeck() != null) {
+                    description = getReward().getDeck().getName();
                 } else {
                     description = "Adds " + getReward().getCount() + " " + getReward().type;
                 }
-                if (description.isEmpty() && item.questItem)
+                if (itemExists && description.isEmpty() && item.questItem)
                     description = "Quest Item";
                 getGraphics().end();
                 getGraphics().endClip();
@@ -601,7 +695,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     public void removeTooltip() {
         if (tooltip != null) {
-            tooltip.getActor().remove();
+            if (tooltip.getActor() != null)
+                tooltip.getActor().remove();
         }
     }
 
@@ -662,10 +757,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         oldProjectionTransform.set(batch.getProjectionMatrix());
         applyProjectionMatrix(batch);
 
-
         if (hover | hasKeyboardFocus())
             batch.setColor(0.5f, 0.5f, 0.5f, 1);
-
 
         if (!frontSideUp()) {
             if (flipOnClick) {
@@ -676,9 +769,58 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         } else {
             drawFrontSide(batch);
         }
+
         batch.setColor(1, 1, 1, 1);
         resetTransform(batch);
         batch.setProjectionMatrix(oldProjectionTransform);
+
+        if (showOverlay && Config.instance().getSettingData().showShopOverlay) {
+            if (overlayLabel == null) {
+                setOverlayLabel();
+            }
+            if (overlayLabel != null) {
+                overlayLabel.draw(batch, parentAlpha);
+            }
+        }
+    }
+
+    private void setOverlayLabel() {
+        String display = "";
+        int alignment = Align.top;
+        String labelStyle = "background";
+        if (reward == null)
+            return;
+        Reward.Type rewardType = reward.getType();
+        switch (rewardType) {
+            case Card:
+                display = reward.getCard() != null ? CardTranslation.getTranslatedName(reward.getCard().getName()) : "";
+                //alignment = Align.topLeft;
+                labelStyle = "dialog";
+                break;
+            case Life:
+            case Gold:
+            case Shards:
+                display = reward.type.toString();
+                break;
+            case Item:
+                display =  reward.getItem() != null ? reward.getItem().name : "";
+                break;
+            case CardPack:
+                display = reward.getDeck() != null ? "Card Pack (" + reward.getDeck().getComment() + ")" : "";
+                break;
+            default:
+                break;
+        }
+        overlayLabel = Controls.newRewardLabel("[%98]" + display);
+        overlayLabel.setWidth(this.getWidth());
+        overlayLabel.setWrap(true);
+        overlayLabel.setAlignment(alignment);
+        overlayLabel.style = (Controls.getSkin().get(labelStyle, Label.LabelStyle.class));
+        //compute layout
+        overlayLabel.layout();
+        //get the layout values and apply
+        overlayLabel.setHeight(overlayLabel.layout.getHeight());
+        overlayLabel.setPosition(this.getX(), (this.getY(Align.top) - overlayLabel.layout.getHeight()));
     }
 
     private void drawFrontSide(Batch batch) {
@@ -710,7 +852,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 batch.end();
                 shaderRoundRect.bind();
                 shaderRoundRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-                shaderRoundRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * 20);
+                shaderRoundRect.setUniformf("edge_radius", (float) (image.getHeight() / image.getWidth()) * 20);
                 shaderRoundRect.setUniformf("u_gray", sold ? 1f : 0f);
                 batch.setShader(shaderRoundRect);
                 batch.begin();
@@ -737,6 +879,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     batch.setShader(null);
                     batch.begin();
                 }
+            }
+            if (hasbackface) {
+                TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
+                float scale = getHeight() / 4f;
+                batch.draw(icon, getOriginX() - scale / 2f, getOriginY() - scale / 2f, scale, scale);
             }
         }
     }
@@ -819,8 +966,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             inset = cImage.getPrefWidth() * 0.13f;
             width = cImage.getPrefWidth() - inset * 2;
             x = cImage.getX() + inset;
-            y = cImage.getPrefHeight() / 2.5f;
-            ARP = Forge.isLandscapeMode() ? 125 : 175;
+            y = cImage.getPrefHeight() / 2.3f;
+            ARP = Forge.isLandscapeMode() ? 100 : 150;
             cLabel = new TextraLabel("[%" + ARP + "]" + description, Controls.getSkin(), Controls.getTextraFont());
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
@@ -863,7 +1010,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         public HoldTooltip(ComplexTooltip complexTooltip) {
             tooltip_actor = complexTooltip;
-            switchButton = Controls.newTextButton("Flip");
+            switchButton = Controls.newTextButton("[+Flip]");
             switchButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -906,8 +1053,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (!frontSideUp())
                 return;
             tooltip_actor.setBounds(tooltip_actor.cImage.getX(), tooltip_actor.cImage.getY(), tooltip_actor.cImage.getPrefWidth(), tooltip_actor.cImage.getPrefHeight());
-            tooltip_actor.cLabel.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.width / 2);
-            tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.inset);
+            tooltip_actor.cLabel.setX(Scene.getIntendedWidth() / 2f - tooltip_actor.width / 2);
+            tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2f - tooltip_actor.inset);
             getStage().addActor(tooltip_actor);
             TextraButton done = getStage().getRoot().findActor("done");
             if (done != null && Reward.Type.Card.equals(reward.type)) {
@@ -919,8 +1066,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         public void hide() {
-            tooltip_actor.remove();
-            switchButton.remove();
+            if (tooltip_actor != null)
+                tooltip_actor.remove();
+            if (switchButton != null)
+                switchButton.remove();
             shown = false;
         }
     }
@@ -939,15 +1088,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     TextureRegion tr = ((TextureRegionDrawable) getDrawable()).getRegion();
                     Texture t = tr.getTexture();
                     if (t != null) {
-                        float x = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedWidth() / 2 - holdTooltip.tooltip_actor.getWidth() / 2 : tooltip.getActor().getStoredImage().getImageX();
-                        float y = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedHeight() / 2 - holdTooltip.tooltip_actor.getHeight() / 2 : tooltip.getActor().getStoredImage().getImageY();
+                        float x = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedWidth() / 2f - holdTooltip.tooltip_actor.getWidth() / 2f : tooltip.getActor().getStoredImage().getImageX();
+                        float y = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedHeight() / 2f - holdTooltip.tooltip_actor.getHeight() / 2f : tooltip.getActor().getStoredImage().getImageY();
                         float w = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getStoredImage().getPrefWidth() : tooltip.getActor().getStoredImage().getPrefWidth();
                         float h = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getStoredImage().getPrefHeight() : tooltip.getActor().getStoredImage().getPrefHeight();
                         if (t.toString().contains(".fullborder.") && Forge.enableUIMask.equals("Full")) {
                             batch.end();
                             shaderRoundRect.bind();
                             shaderRoundRect.setUniformf("u_resolution", t.getWidth(), t.getHeight());
-                            shaderRoundRect.setUniformf("edge_radius", (t.getHeight() / t.getWidth()) * ImageCache.getRadius(t));
+                            shaderRoundRect.setUniformf("edge_radius", ((float) (t.getHeight() / t.getWidth())) * ImageCache.getRadius(t));
                             shaderRoundRect.setUniformf("u_gray", sold ? 0.8f : 0f);
                             batch.setShader(shaderRoundRect);
                             batch.begin();

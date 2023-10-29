@@ -1,0 +1,11 @@
+Name:The Great Aerie
+ManaCost:no cost
+Types:Plane Tarkir
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigBolster | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBolster | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)
+SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 3 | CounterType$ P1P1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, choose up to one target creature you control and up to one target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.
+SVar:RolledChaos:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBEachDamage
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | ToEachOther$ Targeted | NumDmg$ Count$CardToughness
+DeckHas:Ability$Counters
+Oracle:When you planeswalk to The Great Aerie and at the beginning of your upkeep, bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)\nWhenever chaos ensues, choose up to one target creature you control and up to one target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.

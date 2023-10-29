@@ -25,7 +25,9 @@ public class TriggerChangesZoneAll extends Trigger {
 
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
-        } else if (hasParam("ValidAmount")) {
+        }
+
+        if (hasParam("ValidAmount")) {
             int right = AbilityUtils.calculateAmount(hostCard, getParam("ValidAmount").substring(2), this);
             if (!Expressions.compare(this.filterCards(table).size(), getParam("ValidAmount").substring(0, 2), right)) { return false; }
         }

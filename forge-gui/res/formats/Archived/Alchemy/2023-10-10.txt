@@ -1,0 +1,8 @@
+[format]
+Name:Alchemy (YWOE)
+Type:Archived
+Subtype:Arena
+Effective:2023-10-10
+Sets:ANA, ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE
+// Some LTR cards are "banned" in this format due to an additional product "Holiday" release on 3 November 2023 that is not available on Arena
+Banned:Eagle of Deliverance; Minas Tirith Garrison; Mirkwood Channeler; Riders of the Mark; Warg Rider

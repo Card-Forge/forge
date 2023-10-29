@@ -2,7 +2,7 @@ Name:Orator of Ojutai
 ManaCost:1 W
 Types:Creature Bird Monk
 PT:0/4
-K:Presence:Dragon
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Reveal<1/Dragon> | Description$ As an additional cost to cast this spell, you may reveal a Dragon card from your hand.
 K:Defender
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Presence$ Dragon | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast this spell, draw a card.

@@ -1,0 +1,18 @@
+Name:Underbridge Warlock
+ManaCost:3 B B
+Types:Creature Ogre Warlock
+PT:5/4
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon |  TriggerDescription$ When CARDNAME enters the battlefield, you get a one-time boon with "At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ EndStepTrig
+SVar:EndStepTrig:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE3 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDrain | OneOff$ True | TriggerDescription$ At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 5 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Boon.YouOwn | PresentZone$ Command | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your end step, if you have a boon, you mill three cards, draw a card, and lose 2 life.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain|Mill
+DeckHints:Ability$Graveyard|Sacrifice|Token
+Oracle:Deathtouch\nWhen Underbridge Warlock enters the battlefield, you get a one-time boon with "At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life."\nAt the beginning of your end step, if you have a boon, you mill three cards, draw a card, and lose 2 life.

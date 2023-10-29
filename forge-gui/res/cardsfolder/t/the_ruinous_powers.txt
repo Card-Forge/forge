@@ -7,7 +7,7 @@ SVar:DBExile:DB$ Dig | Defined$ ChosenPlayer | DigNum$ 1 | DestinationZone$ Exil
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastDoM | ForgetOnMoved$ Exile | ForgetOnCast$ False | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.
-SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | OneOff$ True | Secondary$ True | TriggerDescription$ When you cast a spell this way, its owner loses life equal to its mana value.
+SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | OneOff$ True | Secondary$ True | TriggerDescription$ When you cast a spell this way, its owner loses life equal to its mana value.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ X
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 Oracle:At the beginning of your upkeep, choose an opponent at random. Exile the top card of that player's library. Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it. When you cast a spell this way, its owner loses life equal to its mana value.

@@ -1,0 +1,8 @@
+Name:Abstruse Archaic
+ManaCost:4
+Types:Creature Avatar
+PT:3/4
+K:Vigilance
+A:AB$ CopySpellAbility | Cost$ 1 T | TgtPrompt$ Select target activated or triggered ability you control from a colorless source | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card.Colorless | AILogic$ AlwaysCopyActivatedAbilities | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control from a colorless source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+DeckHints:Type$Artifact|Eldrazi
+Oracle:Vigilance\n{1}, {T}: Copy target activated or triggered ability you control from a colorless source. You may choose new targets for the copy. (Mana abilities can't be targeted.)

@@ -1,0 +1,36 @@
+[metadata]
+Name=Archivist
+[Main]
+3 Ancient Den|BRC|1
+4 Archive Trap|PLIST|1
+3 Archivist|ULG|1
+2 Archivist of Oghma|CLB|2
+2 Automatic Librarian|DMU|1
+4 Bury in Books|J22|1
+4 Compulsive Research|CLB|1
+4 Field Research|ZNR|1
+3 Geist of the Archives|EMN|1
+2 Ghost Quarter|SLD|1
+2 Island|JMP|1
+1 Island|JMP|3
+1 Island|JMP|4
+1 Island|JMP|5
+2 Island|JMP|7
+4 Jace's Archivist|M12|1
+2 Key to the Archive|YMID|1
+3 Magus of the Moat|FUT|1
+2 Oath of Lieges|EXO|1
+2 Ormos, Archive Keeper|JMP|1
+4 Overwhelmed Archivist|MID|1
+1 Plains|JMP|1
+1 Plains|JMP|7
+1 Preston, the Vanisher|J22|1
+4 Razortide Bridge|BRC|1
+4 Seat of the Synod|J22|1
+2 Temple of Enlightenment|SCD|1
+1 Tolarian Academy|VMA|1
+1 Tome of the Infinite|J21|1
+4 Walking Archive|PLIST|1
+2 Winds of Abandon|PLIST|1
+[Sideboard]
+1 Wizard's Spellbook|AFR|1

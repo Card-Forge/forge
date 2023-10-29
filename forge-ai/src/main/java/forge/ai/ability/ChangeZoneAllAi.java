@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.ai.AiController;
 import forge.ai.AiPlayerPredicates;
@@ -197,8 +196,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
             // mass zone change for creatures: if in dire danger, do it; otherwise, only do it if the opponent's
             // creatures are better in value
-            if ((CardLists.getNotType(oppType, "Creature").size() == 0)
-                    && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+            if (CardLists.getNotType(oppType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
                 if (game.getCombat() != null && ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
                     if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                             && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
@@ -225,17 +223,15 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if (origin.equals(ZoneType.Graveyard)) {
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
-                        PlayerPredicates.isTargetableBy(sa));
+                final PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
-                if (Iterables.isEmpty(oppList)) {
+                if (oppList.isEmpty()) {
                     return false;
                 }
 
                 // get the one with the most in graveyard
                 // zone is visible so evaluate which would be hurt the most
-                Player oppTarget = Collections.max(Lists.newArrayList(oppList),
-                        AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
+                Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
 
                 // set the target
                 if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
@@ -270,18 +266,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return (curHandSize + minAdv - 1 < numExiledWithSrc) || (!noDiscard && numExiledWithSrc >= ai.getMaxHandSize());
             }
         } else if (origin.equals(ZoneType.Stack)) {
-            // time stop can do something like this:
-            // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
-            // DBSKipToPhase | DB$SkipToPhase | Phase$ Cleanup
-            // otherwise, this situation doesn't exist
+            // TODO
             return false;
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
             if (sa.hasParam("GainControl")) {
                 // Check if the cards are valuable enough
-                if (CardLists.getNotType(oppType, "Creature").size() == 0
-                        && CardLists.getNotType(computerType, "Creature").size() == 0) {
+                if (CardLists.getNotType(oppType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
                     if ((ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
                             .evaluateCreatureList(oppType)) < 400) {
                         return false;
@@ -294,8 +286,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
             } else {
                 // don't activate if human gets more back than AI does
-                if ((CardLists.getNotType(oppType, "Creature").size() == 0)
-                        && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+                if (CardLists.getNotType(oppType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
                     if (ComputerUtilCard.evaluateCreatureList(computerType) <= (ComputerUtilCard
                             .evaluateCreatureList(oppType) + 100)) {
                         return false;
@@ -354,8 +345,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         		return true;
 
         	// if AI creature is better than Human Creature
-            return ComputerUtilCard.evaluateCreatureList(aiCards) >= ComputerUtilCard
-                    .evaluateCreatureList(humanCards);
+            return ComputerUtilCard.evaluateCreatureList(aiCards) >= ComputerUtilCard.evaluateCreatureList(humanCards);
         }
         return true;
     }
@@ -416,15 +406,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // if the AI is using it defensively, then something else needs to occur
             // if only creatures are affected evaluate both lists and pass only
             // if human creatures are more valuable
-            if ((CardLists.getNotType(humanType, "Creature").isEmpty()) && (CardLists.getNotType(computerType, "Creature").isEmpty())) {
-                if (ComputerUtilCard.evaluateCreatureList(computerType) >= ComputerUtilCard
-                        .evaluateCreatureList(humanType)) {
+            if (CardLists.getNotType(humanType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
+                if (ComputerUtilCard.evaluateCreatureList(computerType) >= ComputerUtilCard.evaluateCreatureList(humanType)) {
                     return false;
                 }
             } // otherwise evaluate both lists by CMC and pass only if human
               // permanents are more valuable
-            else if (ComputerUtilCard.evaluatePermanentList(computerType) >= ComputerUtilCard
-                    .evaluatePermanentList(humanType)) {
+            else if (ComputerUtilCard.evaluatePermanentList(computerType) >= ComputerUtilCard.evaluatePermanentList(humanType)) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
@@ -457,11 +445,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if (origin.equals(ZoneType.Exile)) {
 
         } else if (origin.equals(ZoneType.Stack)) {
-            // time stop can do something like this:
-            // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
-            // DBSKipToPhase | DB$SkipToPhase | Phase$ Cleanup
-            // otherwise, this situation doesn't exist
-            return false;
+            // currently only exists indirectly (e.g. Summary Dismissal via PlayAi)
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
@@ -469,25 +453,22 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             if (mandatory) {
                 return true;
             }
-            if (sa.getParam("GainControl") != null) {
+            if (sa.hasParam("GainControl")) {
                 // Check if the cards are valuable enough
-                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
-                    return (ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
-                            .evaluateCreatureList(humanType)) >= 1;
+                if (CardLists.getNotType(humanType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
+                    return (ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard.evaluateCreatureList(humanType)) >= 1;
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
-                else return (ComputerUtilCard.evaluatePermanentList(computerType) + ComputerUtilCard
+                return (ComputerUtilCard.evaluatePermanentList(computerType) + ComputerUtilCard
                         .evaluatePermanentList(humanType)) >= 1;
-            } else {
-                // don't activate if human gets more back than AI does
-                if ((CardLists.getNotType(humanType, "Creature").isEmpty()) && (CardLists.getNotType(computerType, "Creature").isEmpty())) {
-                    return ComputerUtilCard.evaluateCreatureList(computerType) > ComputerUtilCard
-                            .evaluateCreatureList(humanType);
-                } // otherwise evaluate both lists by CMC and pass only if human
-                  // permanents are less valuable
-                else return ComputerUtilCard.evaluatePermanentList(computerType) > ComputerUtilCard
-                        .evaluatePermanentList(humanType);
             }
+
+            // don't activate if human gets more back than AI does
+            if (CardLists.getNotType(humanType, "Creature").isEmpty() && CardLists.getNotType(computerType, "Creature").isEmpty()) {
+                return ComputerUtilCard.evaluateCreatureList(computerType) > ComputerUtilCard.evaluateCreatureList(humanType);
+            } // otherwise evaluate both lists by CMC and pass only if human
+            // permanents are less valuable
+            return ComputerUtilCard.evaluatePermanentList(computerType) > ComputerUtilCard.evaluatePermanentList(humanType);
         }
 
         return true;

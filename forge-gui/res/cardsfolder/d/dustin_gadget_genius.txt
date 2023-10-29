@@ -1,4 +1,5 @@
 Name:Dustin, Gadget Genius
+AltName:Hargilde, Kindly Runechanter
 ManaCost:2 W U
 Types:Legendary Creature Human
 PT:2/3

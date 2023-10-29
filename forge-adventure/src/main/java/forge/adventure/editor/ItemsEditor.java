@@ -67,6 +67,7 @@ public class ItemsEditor extends JComponent {
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(new JScrollPane(list), BorderLayout.LINE_START);
+        toolBar.setFloatable(false);
         add(toolBar, BorderLayout.PAGE_START);
         add(edit,BorderLayout.CENTER);
         load();
@@ -105,8 +106,7 @@ public class ItemsEditor extends JComponent {
         FileHandle handle = Config.instance().getFile(Paths.ITEMS);
         if (handle.exists())
         {
-            Array readEnemies=json.fromJson(Array.class, ItemData.class, handle);
-            allEnemies = readEnemies;
+            allEnemies =json.fromJson(Array.class, ItemData.class, handle);
         }
         for (int i=0;i<allEnemies.size;i++) {
             model.add(i,allEnemies.get(i));

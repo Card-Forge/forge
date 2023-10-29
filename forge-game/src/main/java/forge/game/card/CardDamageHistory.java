@@ -26,6 +26,7 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisCombat = false;
 
     private List<GameEntity> attackedThisTurn = Lists.newArrayList();
+    private boolean attackedBattleThisTurn = false;
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
     private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
@@ -59,6 +60,12 @@ public class CardDamageHistory {
 
         if (defender != null) {
             attackedThisTurn.add(defender);
+            if (defender instanceof Card) {
+                final Card def = (Card) defender;
+                if (def.isBattle()) {
+                    attackedBattleThisTurn = true;
+                }
+            }
         }
     }
     /**
@@ -83,6 +90,9 @@ public class CardDamageHistory {
     }
     public final boolean hasAttackedThisTurn(GameEntity e) {
         return this.attackedThisTurn.contains(e);
+    }
+    public final boolean hasAttackedBattleThisTurn() {
+        return this.attackedBattleThisTurn;
     }
     /**
      * <p>
@@ -237,10 +247,17 @@ public class CardDamageHistory {
      * @param player
      */
     public void registerDamage(int damage, boolean isCombat, Card sourceLKI, GameEntity target, Map<Integer, Card> lkiCache) {
+        if (damage <= 0) {
+            return;
+        }
         damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
         if (isCombat && target instanceof Player) {
-            damagedThisCombat.add((Player) target);
+            final Player pTgt = (Player) target;
+            damagedThisCombat.add(pTgt);
+            if (pTgt.getLastTurnNr() > 0 && !pTgt.getGame().getPhaseHandler().isPlayerTurn(pTgt)) {
+                pTgt.setBeenDealtCombatDamageSinceLastTurn(true);
+            }
         }
         Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
         damageDoneThisTurn.add(dmg);
@@ -256,11 +273,13 @@ public class CardDamageHistory {
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;
             }
-            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
-                continue;
-            }
-            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
-                continue;
+            if (sourceToTarget != null) {
+                if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
+                    continue;
+                }
+                if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
+                    continue;
+                }
             }
             sum += damage.getLeft();
             if (anyIsEnough) {
@@ -272,6 +291,7 @@ public class CardDamageHistory {
 
     public void newTurn() {
         attackedThisTurn.clear();
+        attackedBattleThisTurn = false;
         damagedThisCombat.clear();
         damageDoneThisTurn.clear();
 

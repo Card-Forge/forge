@@ -1,0 +1,8 @@
+Name:Virtuous
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+Oracle:Enchant Creature\nEnchanted creature gets +1/+1.\nEnchanted creature gets +1/+1 for each enchantment you control.

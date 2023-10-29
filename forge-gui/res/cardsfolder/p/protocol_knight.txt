@@ -1,0 +1,10 @@
+Name:Protocol Knight
+ManaCost:3 U
+Types:Creature Human Knight
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls. Put a stun counter on that creature if you control another Knight. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target creature an opponent controls
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | ConditionPresent$ Knight.YouCtrl+StrictlyOther
+DeckHas:Ability$Counters
+DeckHints:Type$Knight
+Oracle:When Protocol Knight enters the battlefield, tap target creature an opponent controls. Put a stun counter on that creature if you control another Knight. (If a permanent with a stun counter would become untapped, remove one from it instead.)

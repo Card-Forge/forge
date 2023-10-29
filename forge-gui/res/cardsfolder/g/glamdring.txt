@@ -1,0 +1,11 @@
+Name:Glamdring
+ManaCost:2
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddKeyword$ First Strike | Description$ Equipped creature has first strike and gets +1/+0 for each instant and sorcery card in your graveyard.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCastFromYard | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+SVar:TrigCastFromYard:DB$ Play | Valid$ Card.YouOwn | ValidSA$ Instant.cmcLEY,Sorcery.cmcLEY | ValidZone$ Hand | Optional$ True | WithoutManaCost$ True | Amount$ 1 | Controller$ You
+K:Equip:3
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:Y:TriggerCount$DamageAmount
+DeckHints:Ability$Graveyard|Mill & Type$Instant|Sorcery
+Oracle:Equipped creature has first strike and gets +1/+0 for each instant and sorcery card in your graveyard.\nWhenever equipped creature deals combat damage to a player, you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.\nEquip {3}

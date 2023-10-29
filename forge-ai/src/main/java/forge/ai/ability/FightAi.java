@@ -1,12 +1,6 @@
 package forge.ai.ability;
 
-import java.util.List;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -21,6 +15,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
 
+import java.util.List;
+
 public class FightAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -32,9 +28,8 @@ public class FightAi extends SpellAbilityAi {
         sa.resetTargets();
         final Card source = sa.getHostCard();
 
-        // everything is defined or targeted above, can't do anything there?
+        // everything is defined or targeted above, can't do anything there unless a specific logic is set
         if (sa.hasParam("Defined") && !sa.usesTargeting()) {
-            // TODO extend Logic for cards like Arena or Grothama
             return true;
         }
 
@@ -120,7 +115,12 @@ public class FightAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (canPlayAI(ai, sa)) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if (aiLogic.equals("Grothama")) {
+            return mandatory ? true : SpecialCardAi.GrothamaAllDevouring.consider(ai, sa);
+        }
+
+        if (checkApiLogic(ai, sa)) {
             return true;
         }
         if (!mandatory) {
@@ -167,7 +167,15 @@ public class FightAi extends SpellAbilityAi {
     public static boolean canFightAi(final Player ai, final SpellAbility sa, int power, int toughness) {
     	final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final AbilitySub tgtFight = sa.getSubAbility();
+        AbilitySub tgtFight = sa.getSubAbility();
+        while (tgtFight != null && tgtFight.getApi() != ApiType.Fight && tgtFight.getApi() != ApiType.DealDamage) {
+            // Search for the Fight/DealDamage subability (matters e.g. for Ent's Fury where the Fight SA is not an immediate child of Pump)
+            tgtFight = tgtFight.getSubAbility();
+        }
+        if (tgtFight == null) {
+            System.out.println("Warning: couldn't find a Fight/DealDamage subability from FightAi.canFightAi for card " + source.toString());
+            tgtFight = sa.getSubAbility(); // at least avoid a NPE, although this will most likely fail
+        }
         final boolean isChandrasIgnition = "Chandra's Ignition".equals(sourceName); // TODO: generalize this for other "fake Fight" cases that do not target
         if ("Savage Punch".equals(sourceName) && !ai.hasFerocious()) {
             power = 0;

@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice CARDNAME unless you sacrifice four creatures.
 SVar:TrigSac:DB$ Sacrifice | UnlessCost$ Sac<4/Creature> | UnlessPayer$ You
-A:AB$ DealDamage | Cost$ tapXType<1/Swamp> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ tapXType<1/Swamp> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:NeedsToPlayVar:Creats GE4

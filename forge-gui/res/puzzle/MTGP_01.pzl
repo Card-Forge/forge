@@ -1,0 +1,19 @@
+[metadata]
+Name:MTG Puzzles #01 - Gaining Experience
+URL:https://mtgpuzzles.com/puzzle/1
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Defeat your opponent before their next turn. You currently have 0 experience counters. Your opponent flashed in a Nebelgast Herald on your upkeep step, tapping your Mizzix of the Izmagnus. Can you find 4 damage to win?
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Banners Raised;Electrickery;Temporary Insanity
+p0graveyard=Opt;Volcanic Spray
+p0battlefield=Mizzix of the Izmagnus|Tapped;Mountain;Mountain;Sulfur Falls|NoETBTrigs;Sulfur Falls|NoETBTrigs
+p1life=4
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Nebelgast Herald;Treetop Ambusher

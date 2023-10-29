@@ -176,7 +176,7 @@ public class CardDetailUtil {
         return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown && isInPlay ? "Creature" : "");
     }
 
-    public static String formatPowerToughness(final CardStateView card, final boolean canShow) {
+    public static String formatPrimaryCharacteristic(final CardStateView card, final boolean canShow) {
         if (!canShow && card.getState() != CardStateName.FaceDown) {
             return "";
         }
@@ -204,6 +204,12 @@ public class CardDetailUtil {
 
             ptText.append(card.getLoyalty());
         }
+
+        if (card.isBattle()) {
+            ptText.append(Localizer.getInstance().getMessage("lblDefense")).append(": ");
+            ptText.append(card.getDefense());
+        }
+
         return ptText.toString();
     }
 
@@ -478,6 +484,15 @@ public class CardDetailUtil {
             area.append("(chosen number: ").append(card.getChosenNumber()).append(")");
         }
 
+        // stored dice results
+        if (card.getStoredRolls() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(stored dice results: ").append(StringUtils.join(card.getStoredRolls(), ", "));
+            area.append(")");
+        }
+
         // chosen player
         if (card.getChosenPlayer() != null) {
             if (area.length() != 0) {
@@ -495,18 +510,15 @@ public class CardDetailUtil {
         }
 
         // named card
-        if (!card.getNamedCard().isEmpty()) {
+        if (card.getNamedCard() != null && !card.getNamedCard().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(named card: ");
+            area.append("(named card").append(card.getNamedCard().size() > 1 ? "s" : "").append(": ");
             if (card.isFaceDown() && state.getState() == CardStateName.FaceDown) {
                 area.append("Hidden");
             } else {
-                area.append(card.getNamedCard());
-                if (!card.getNamedCard2().isEmpty()) {
-                    area.append(", ").append(card.getNamedCard2());
-                }
+                area.append(StringUtils.join(card.getNamedCard(), ", "));
             }
             area.append(")");
         }
@@ -526,6 +538,14 @@ public class CardDetailUtil {
                 area.append("\n\n");
             }
             area.append("(Class Level:").append(card.getClassLevel()).append(")");
+        }
+
+        //ring level
+        if (card.getRingLevel() > 0 && card.getZone() == ZoneType.Command) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("(Ring Level:").append(card.getRingLevel()).append(")");
         }
 
         // sector
@@ -568,6 +588,13 @@ public class CardDetailUtil {
             area.append("+Controlling: ");
             area.append(StringUtils.join(card.getGainControlTargets(), ", "));
             area.append("+");
+        }
+
+        if (card.getProtectingPlayer() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Protected by: ").append(card.getProtectingPlayer());
         }
 
         // cloned via

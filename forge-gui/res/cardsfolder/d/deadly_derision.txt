@@ -1,0 +1,7 @@
+Name:Deadly Derision
+ManaCost:2 B B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature or planeswalker.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Destroy target creature or planeswalker. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

@@ -1,0 +1,202 @@
+[metadata]
+Code=WOC
+Date=2023-09-08
+Name=Wilds of Eldraine Commander
+Type=Commander
+ScryfallCode=WOC
+
+[cards]
+1 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+2 M Ellivere of the Wild Court @Dmitry Burmak
+3 M Alela, Cunning Conqueror @Livia Prima
+4 M Gylwain, Casting Director @Aurore Folny
+5 R Liberated Livestock @Kisung Koh
+6 R Ox Drover @Filipe Pagliuso
+7 R Songbirds' Blessing @Eelis Kyttanen
+8 R Unfinished Business @Mark Zug
+9 R Archmage of Echoes @Olena Richards
+10 R Malleable Impostor @Alessandra Pisano
+11 R Misleading Signpost @Julian Kok Joon Wen
+12 R Shadow Puppeteers @Cristi Balanescu
+13 R Blightwing Bandit @Marie Magny
+14 R Faerie Bladecrafter @Jodie Muir
+15 R Nettling Nuisance @Kevin Sidharta
+16 R Tegwyll's Scouring @Campbell White
+17 R Giant Inheritance @Borja Pindado
+18 R Knickknack Ouphe @Iris Compiet
+19 R Loamcrafter Faun @Mark Zug
+20 R Timber Paladin @Johan Grenier
+21 R Court of Ardenvale @Donato Giancola
+22 R Court of Vantress @Nino Vecia
+23 R Court of Locthwain @Julie Dillon
+24 R Court of Embereth @Peter Polach
+25 R Court of Garenbrig @Sam Guay
+26 M Korvold, Gleeful Glutton @Francisco Miyara
+27 M Brenard, Ginger Sculptor @Marta Nael
+28 R Throne of Eldraine @Kieran Yanner
+29 R Court of Ardenvale @Donato Giancola
+30 R Court of Vantress @Nino Vecia
+31 R Court of Locthwain @Julie Dillon
+32 R Court of Embereth @Peter Polach
+33 R Court of Garenbrig @Sam Guay
+34 M Alela, Cunning Conqueror @Livia Prima
+35 M Brenard, Ginger Sculptor @Marta Nael
+36 M Ellivere of the Wild Court @Dmitry Burmak
+37 M Gylwain, Casting Director @Aurore Folny
+38 M Korvold, Gleeful Glutton @Francisco Miyara
+39 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+40 R Throne of Eldraine @Kieran Yanner
+41 R Liberated Livestock @Kisung Koh
+42 R Ox Drover @Filipe Pagliuso
+43 R Songbirds' Blessing @Eelis Kyttanen
+44 R Unfinished Business @Mark Zug
+45 R Archmage of Echoes @Olena Richards
+46 R Malleable Impostor @Alessandra Pisano
+47 R Misleading Signpost @Julian Kok Joon Wen
+48 R Shadow Puppeteers @Cristi Balanescu
+49 R Blightwing Bandit @Marie Magny
+50 R Faerie Bladecrafter @Jodie Muir
+51 R Nettling Nuisance @Kevin Sidharta
+52 R Tegwyll's Scouring @Campbell White
+53 R Giant Inheritance @Borja Pindado
+54 R Knickknack Ouphe @Iris Compiet
+55 R Loamcrafter Faun @Mark Zug
+56 R Timber Paladin @Johan Grenier
+57 M Ellivere of the Wild Court @Dmitry Burmak
+58 M Tegwyll, Duke of Splendor @Ekaterina Burmak
+59 R Ajani's Chosen @Wayne Reynolds
+60 M Angelic Destiny @Jana Schirmer & Johannes Voss
+61 R Archon of Sun's Grace @Matt Stewart
+62 R Austere Command @Anna Steinbauer
+63 R Celestial Archon @Matt Stewart
+64 U Danitha Capashen, Paragon @Chris Rallis
+65 R Daybreak Coronet @Johannes Voss
+66 R Eidolon of Countless Battles @Raymond Swanland
+67 C Ethereal Armor @Daarken
+68 U Generous Gift @Kev Walker
+69 R Kor Spiritdancer @Nils Hamm
+70 R Mantle of the Ancients @Lucas Graciano
+71 M Realm-Cloaked Giant @Adam Paquette
+72 R Retether @Dan Scott
+73 U Sage's Reverie @Jason Rainville
+74 R Shalai, Voice of Plenty @Victor Adame Minguez
+75 U Spectral Steel @Johannes Voss
+76 R Starfield Mystic @Eric Deschamps
+77 M Sun Titan @Todd Lockwood
+78 U Swords to Plowshares @Jesper Ejsing
+79 R Timely Ward @Matt Stewart
+80 R Tithe Taker @Aaron Miller
+81 C Transcendent Envoy @Zezhou Chen
+82 R Umbra Mystic @Matt Stewart
+83 R Winds of Rath @Drew Tucker
+84 C Arcane Denial @Xi Zhang
+85 M Brazen Borrower @Eric Deschamps
+86 C Cloud of Faeries @Iris Compiet
+87 C Consider @Zezhou Chen
+88 R Dig Through Time @Ryan Yee
+89 C Distant Melody @Sam Guay
+90 U Fact or Fiction @Matt Cavotta
+91 R Faerie Formation @Ryan Yee
+92 C Faerie Seer @Colin Boyer
+93 C Frantic Search @Mitchell Malloy
+94 R Glen Elendra Archmage @Warren Mahy
+95 R Hullbreaker Horror @Svetlin Velinov
+96 U Hypnotic Sprite @Irina Nordsol
+97 R Illusionist's Gambit @Zoltan Boros
+98 C Keep Watch @Fred Rahmqvist
+99 R Midnight Clock @Alexander Forssberg
+100 U Nightveil Sprite @Uriah Voth
+101 C Opt @Dan Scott
+102 R Perplexing Test @Fariba Khamseh
+103 U Quickling @Clint Cearley
+104 U Reality Shift @Howard Lyon
+105 U Reconnaissance Mission @Johannes Voss
+106 R Reflections of Littjara @Aaron Miller
+107 C Repulse @Aaron Boyd
+108 C Run Away Together @Filip Burburan
+109 R Scion of Oona @Eric Fortune
+110 C Snap @Mike Raabe
+111 R Sower of Temptation @Christopher Moeller
+112 R Theoretical Duplication @Anna Christenson
+113 R Kindred Dominance @Bram Sels
+114 R Nightmare Unmaking @Izzy
+115 R Puppeteer Clique @Daren Bader
+116 R Rankle, Master of Pranks @Dmitry Burmak
+117 U Reckless Spite @Karl Kopinski
+118 R Thrilling Encore @Alex Konstad
+119 C Ancestral Mask @Massimilano Frezzato
+120 C Aura Gnarlid @Lars Grant-West
+121 R Bear Umbra @Howard Lyon
+122 C Careful Cultivation @A. M. Sartor
+123 U Destiny Spinner @Livia Prima
+124 R Eidolon of Blossoms @Min Yum
+125 R Enchantress's Presence @Rebecca Guay
+126 C Fertile Ground @Mark Tedin
+127 R Indomitable Might @Svetlin Velinov
+128 U Kenrith's Transformation @Kimonas Theodossiou
+129 U Paradise Druid @Nils Hamm
+130 R Rishkar's Expertise @Magali Villeneuve
+131 R Sanctum Weaver @Kimonas Theodossiou
+132 R Setessan Champion @Emrah Elmasli
+133 U Snake Umbra @Christopher Moeller
+134 C Sylvan Ranger @Christopher Moeller
+135 C Utopia Sprawl @Ron Spears
+136 R Verdant Embrace @Stephen Tappin
+137 C Warbriar Blessing @Michele Parisi
+138 R Glen Elendra Liege @Kev Walker
+139 U Halo Forager @Kevin Sidharta
+140 U Jukai Naturalist @Anna Steinbauer
+141 R Nymris, Oona's Trickster @Johannes Voss
+142 R Oona, Queen of the Fae @Adam Rex
+143 U Pollenbright Wings @Brian Valeza
+144 U Siona, Captain of the Pyleas @Chris Rallis
+145 C Arcane Signet @Dan Scott
+146 U Dimir Signet @Raoul Vitale
+147 U Fellwar Stone @John Avon
+148 C Mind Stone @Adam Rex
+149 U Sol Ring @Mike Bierek
+150 U Talisman of Dominance @Mike Dringenberg
+151 C Wayfarer's Bauble @Darrell Riche
+152 C Bojuka Bog @Howard Lyon
+153 R Canopy Vista @Adam Paquette
+154 R Castle Ardenvale @Volkan Baǵa
+155 R Choked Estuary @Vincent Proce
+156 C Command Tower @Ryan Yee
+157 R Darkwater Catacombs @Monte Michael Moore
+158 U Dimir Aqueduct @John Avon
+159 R Exotic Orchard @Steven Belledin
+160 U Faerie Conclave @Stephan Martiniere
+161 R Fortified Village @Cliff Childs
+162 R Hall of Heliod's Generosity @Daniel Ljunggren
+163 U Krosan Verge @Ruxing Gao
+164 U Myriad Landscape @Richard Wright
+165 C Path of Ancestry @Alayna Danner
+166 R Secluded Glen @Alayna Danner
+167 R Sungrass Prairie @Ron Spencer
+168 R Sunken Hollow @Adam Paquette
+169 U Tainted Isle @Alan Pollack
+170 R Temple of Deceit @Jonas De Ro
+171 R Temple of Plenty @Chris Ostrowski
+172 U Temple of the False God @Brian Snõddy
+173 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
+
+[tokens]
+b_1_1_faerie_rogue_flying
+g_1_1_human_monk_g
+g_1_1_saproling
+g_3_3_elephant
+r_4_2_pirate_noblock
+role_monster
+role_royal
+role_sorcerer
+role_virtuous
+role_virtuous
+role_virtuous
+u_1_1_faerie_flying
+ub_1_1_faerie_rogue_flying
+w_1_1_cat_lifelink
+w_1_1_human_soldier
+w_1_1_pegasus_flying
+w_2_2_cat
+w_2_4_ox
+wb_1_1_spirit_flying

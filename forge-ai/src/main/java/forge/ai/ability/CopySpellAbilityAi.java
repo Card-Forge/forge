@@ -71,13 +71,16 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             } else if (top.getApi() == ApiType.CopySpellAbility) {
                 // Don't try to copy a copy ability, too complex for the AI to handle
                 return false;
+            } else if (top.getApi() == ApiType.Mana) {
+                // would lead to Stack Overflow by trying to play this again
+                return false;
             } else if (top.getApi() == ApiType.DestroyAll || top.getApi() == ApiType.SacrificeAll || top.getApi() == ApiType.ChangeZoneAll || top.getApi() == ApiType.TapAll || top.getApi() == ApiType.UnattachAll) {
                 if (!top.usesTargeting() || top.getActivatingPlayer().equals(aiPlayer)) {
                     // If we activated a mass removal / mass tap / mass bounce / etc. spell, or if the opponent activated it but
                     // it can't be retargeted, no reason to copy this spell since it'll probably do the same thing and is useless as a copy
                     return false;
                 }
-            } else if (top.hasParam("ConditionManaSpent")) {
+            } else if (top.hasParam("ConditionManaSpent") || top.getHostCard().hasSVar("AINoCopy")) {
                 // Mana spent is not copied, so these spells generally do nothing when copied.
                 return false;
             } else if (ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
@@ -87,12 +90,13 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
             // A copy is necessary to properly test the SA before targeting the copied spell, otherwise the copy SA will fizzle.
             final SpellAbility topCopy = top.copy(aiPlayer);
+            topCopy.clearManaPaid();
             topCopy.resetTargets();
 
             if (top.canBeTargetedBy(sa)) {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
                 if (top instanceof Spell) {
-                    decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
+                    decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, false, true);
                 } else if (top.isActivatedAbility() && top.getActivatingPlayer().equals(aiPlayer)
                         && logic.contains("CopyActivatedAbilities")) {
                     decision = AiPlayDecision.WillPlay; // FIXME: we activated it once, why not again? Or bad idea?

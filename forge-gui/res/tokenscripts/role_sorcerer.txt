@@ -1,0 +1,9 @@
+Name:Sorcerer
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1  | AddTrigger$ AttackTrig | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever this creature attacks, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Enchant Creature\nEnchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."

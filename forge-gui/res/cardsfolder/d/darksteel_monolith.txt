@@ -1,0 +1,6 @@
+Name:Darksteel Monolith
+ManaCost:8
+Types:Artifact
+K:Indestructible
+S:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayLimit$ 1 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.nonLand+Colorless+YouOwn | AffectedZone$ Hand | Description$ Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell that you cast from your hand.
+Oracle:Indestructible\nOnce each turn, you may pay {0} rather than pay the mana cost for a colorless spell that you cast from your hand.

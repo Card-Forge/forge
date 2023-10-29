@@ -4,7 +4,7 @@ Types:Legendary Creature Elder Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
-SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
 A:AB$ ChangeZone | Cost$ 4 U B R | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME, then return him to the battlefield transformed under his owner's control. Activate only as a sorcery.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -18,9 +18,9 @@ ManaCost:no cost
 Colors:blue,black,red
 Types:Legendary Planeswalker Bolas
 Loyalty:7
-A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | NumCards$ 2 | Planeswalker$ True | SpellDescription$ Draw two cards.
-A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target | Planeswalker$ True | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to target creature or planeswalker.
-A:AB$ ChangeZone | Cost$ SubCounter<4/LOYALTY> | Origin$ Graveyard | Destination$ Battlefield | Planeswalker$ True | GainControl$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Choose target creature or planeswalker card in a graveyard | SpellDescription$ Put target creature or planeswalker card from a graveyard onto the battlefield under your control.
-A:AB$ Dig | Cost$ SubCounter<12/LOYALTY> | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ValidTgts$ Player | TgtPrompt$ Choose a player | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all but the bottom card of target player's library.
+A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to target creature or planeswalker.
+A:AB$ ChangeZone | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker card in a graveyard | SpellDescription$ Put target creature or planeswalker card from a graveyard onto the battlefield under your control.
+A:AB$ Dig | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | Ultimate$ True | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Exile all but the bottom card of target player's library.
 SVar:X:Count$InTargetedLibrary.Card/Minus.1
 Oracle:[+2]: Draw two cards.\n[-3]: Nicol Bolas, the Arisen deals 10 damage to target creature or planeswalker.\n[-4]: Put target creature or planeswalker card from a graveyard onto the battlefield under your control.\n[-12]: Exile all but the bottom card of target player's library.

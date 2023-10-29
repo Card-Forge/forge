@@ -3,7 +3,7 @@ ManaCost:1 U R
 Types:Creature Goblin Pilot Wizard
 PT:0/2
 K:Flying
-A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TargetsAtRandom$ True | SpellDescription$ CARDNAME deals 2 damage to any target chosen at random.
+A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Any | TargetsAtRandom$ True | SpellDescription$ CARDNAME deals 2 damage to any target chosen at random.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Flying\n{T}: Goblin Test Pilot deals 2 damage to any target chosen at random.

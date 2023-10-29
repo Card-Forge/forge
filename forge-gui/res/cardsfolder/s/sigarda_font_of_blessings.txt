@@ -1,0 +1,10 @@
+Name:Sigarda, Font of Blessings
+ManaCost:2 G W
+Types:Legendary Creature Angel
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Hexproof | Description$ Other permanents you control have hexproof. 
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Angel.TopLibrary+YouCtrl+nonLand,Human.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Angel spells and Human spells from the top of your library.
+DeckHints:Type$Human|Angel
+Oracle:Flying\nOther permanents you control have hexproof.\nYou may look at the top card of your library any time.\nYou may cast Angel spells and Human spells from the top of your library.

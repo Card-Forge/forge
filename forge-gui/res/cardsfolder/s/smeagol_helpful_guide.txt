@@ -1,0 +1,10 @@
+Name:Smeagol, Helpful Guide
+ManaCost:1 B G
+Types:Legendary Creature Halfling Horror
+PT:4/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigTempt | TriggerDescription$ At the beginning of your end step, if a creature died under your control this turn, the Ring tempts you.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ RingTemptsYou | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ Whenever the Ring tempts you, target opponent reveals cards from the top of their library until they reveal a land card. Put that card onto the battlefield tapped under your control and the rest into their graveyard.
+SVar:TrigDigUntil:DB$ DigUntil | Reveal$ True | ValidTgts$ Opponent | IsCurse$ True | Valid$ Land | ValidDescription$ land card | FoundDestination$ Battlefield | GainControl$ True | Tapped$ True | RevealedDestination$ Graveyard
+Oracle:At the beginning of your end step, if a creature died under your control this turn, the Ring tempts you.\nWhenever the Ring tempts you, target opponent reveals cards from the top of their library until they reveal a land card. Put that card onto the battlefield tapped under your control and the rest into their graveyard.

@@ -125,7 +125,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbPerformanceMode(), FPref.PERFORMANCE_MODE));
         lstControls.add(Pair.of(view.getCbSideboardForAI(), FPref.MATCH_SIDEBOARD_FOR_AI));
         lstControls.add(Pair.of(view.getCbFilteredHands(), FPref.FILTERED_HANDS));
-        lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
         lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
         lstControls.add(Pair.of(view.getCbCardBased(), FPref.DECKGEN_CARDBASED));
         lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
@@ -574,7 +573,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeSwitchStatesCombobox() {
-        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER};
+        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER, ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS};
         final FPref userSetting = FPref.UI_SWITCH_STATES_DECKVIEW;
         final FComboBoxPanel<String> panel = this.view.getSwitchStates();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);

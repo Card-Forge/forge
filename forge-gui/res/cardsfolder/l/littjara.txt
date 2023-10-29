@@ -1,0 +1,11 @@
+Name:Littjara
+ManaCost:no cost
+Types:Plane Kaldheim
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)
+SVar:TrigToken:DB$ Token | TokenScript$ u_2_2_shapeshifter_changeling | TokenOwner$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, choose a creature type. Put a +1/+1 counter on each creature you control of that type.
+SVar:RolledChaos:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBPutCounterAll | AILogic$ MostProminentComputerControls
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.ChosenType+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters & Type$Shapeshifter
+Oracle:When you planeswalk to Littjara and at the beginning of your upkeep, create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)\nWhenever chaos ensues, choose a creature type. Put a +1/+1 counter on each creature you control of that type.

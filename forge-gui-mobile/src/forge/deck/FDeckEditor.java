@@ -533,11 +533,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return catalogPage;
     }
 
-    protected DeckSectionPage getMainDeckPage() {
+    public DeckSectionPage getMainDeckPage() {
         return mainDeckPage;
     }
 
-    protected DeckSectionPage getSideboardPage() {
+    public DeckSectionPage getSideboardPage() {
         return sideboardPage;
     }
 
@@ -545,7 +545,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return commanderPage;
     }
 
-    protected BoosterDraft getDraft() {
+    public BoosterDraft getDraft() {
         return null;
     }
 
@@ -584,7 +584,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         saveHandler = saveHandler0;
     }
 
-    protected void save(final Callback<Boolean> callback) {
+    public void save(final Callback<Boolean> callback) {
         if (StringUtils.isEmpty(deck.getName())) {
             List<PaperCard> commanders = deck.getCommanders(); //use commander name as default deck name
             String initialInput = Lang.joinHomogenous(commanders);
@@ -1073,7 +1073,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class CatalogPage extends CardManagerPage {
+    public static class CatalogPage extends CardManagerPage {
         private boolean initialized, needRefreshWhenShown;
 
         protected CatalogPage(ItemManagerConfig config) {

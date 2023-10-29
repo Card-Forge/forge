@@ -156,17 +156,18 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showInputDialog(final String title, final Callback<String> callback) {
-        showInputDialog(null, title, "", null, callback);
+        showInputDialog(null, title, "", null, callback, false);
     }
     public static <T> void showInputDialog(final String title, final T initialInput, final Callback<T> callback) {
-        showInputDialog(null, title, initialInput, null, callback);
+        showInputDialog(null, title, initialInput, null, callback, false);
     }
-    public static <T> void showInputDialog(final String message, final String title, final T initialInput, final List<T> inputOptions, final Callback<T> callback) {
+    public static <T> void showInputDialog(final String message, final String title, final T initialInput, final List<T> inputOptions, final Callback<T> callback, final boolean isNumeric) {
         final FDisplayObject inputField;
         final FTextField txtInput;
         final FComboBox<T> cbInput;
         if (inputOptions == null) {
             txtInput = new FTextField(initialInput.toString());
+            txtInput.setIsNumeric(isNumeric);
             cbInput = null;
             inputField = txtInput;
         }

@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
@@ -23,6 +24,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
@@ -133,7 +135,7 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
+                && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && !haste && !pwMinus) {
             return false;
         }
@@ -162,6 +164,11 @@ public class TokenAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
+
+            if (actualToken.getType().hasSubtype("Role")) {
+                return tgtRoleAura(ai, sa, actualToken, false);
+            }
+
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
                 if (sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
@@ -253,9 +260,16 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        Card actualToken = spawnToken(ai, sa);
+
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
+
+            if (actualToken.getType().hasSubtype("Role")) {
+                return tgtRoleAura(ai, sa, actualToken, mandatory);
+            }
+
             if (tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
                 if (mandatory && targetableOpps.isEmpty()) {
@@ -268,13 +282,6 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        if (mandatory) {
-            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
-            // and then the second time to confirm the trigger (where mandatory may be set to false).
-            return true;
-        }
-
-        Card actualToken = spawnToken(ai, sa);
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
         String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
@@ -289,9 +296,15 @@ public class TokenAi extends SpellAbilityAi {
                     sa.setXManaCostPaid(x);
                 }
             }
-            if (x <= 0) {
+            if (x <= 0 && !mandatory) {
                 return false;
             }
+        }
+
+        if (mandatory) {
+            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
+            // and then the second time to confirm the trigger (where mandatory may be set to false).
+            return true;
         }
 
         if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {
@@ -326,12 +339,12 @@ public class TokenAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayerOrPlaneswalker(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.GameEntity> options)
      */
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
-        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
+        return super.chooseSingleAttackableEntity(ai, sa, options, params);
     }
 
     /**
@@ -351,12 +364,49 @@ public class TokenAi extends SpellAbilityAi {
             throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
         }
 
-        result.setOwner(ai);
-
         // Apply static abilities
         final Game game = ai.getGame();
         ComputerUtilCard.applyStaticContPT(game, result, null);
         return result;
+    }
+
+    private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {
+        boolean isCurse = "Curse".equals(sa.getParam("AILogic")) ||
+                tok.getFirstAttachSpell().getParamOrDefault("AILogic", "").equals("Curse");
+        List<Card> tgts = CardUtil.getValidCardsToTarget(sa);
+
+        // look for card without role from ai
+        List<Card> prefListSBA = CardLists.filter(tgts, c ->
+        !Iterables.any(c.getAttachedCards(), att -> att.getController() == ai && att.getType().hasSubtype("Role")));
+
+        List<Card> prefList;
+        if (isCurse) {
+            prefList = CardLists.filterControlledBy(prefListSBA, ai.getOpponents());
+        } else {
+            prefList = CardLists.filterControlledBy(prefListSBA, ai.getYourTeam());
+        }
+
+        if (prefList.isEmpty()) {
+            if (mandatory) {
+                if (sa.isTargetNumberValid()) {
+                    // TODO try replace Curse <-> Pump depending on target controller
+                    return true;
+                }
+                if (!prefListSBA.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(prefListSBA));
+                    return true;
+                }
+                if (!tgts.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(tgts));
+                    return true;
+                }
+            }
+        } else {
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(prefList));
+            return true;
+        }
+
+        return false;
     }
 
 }

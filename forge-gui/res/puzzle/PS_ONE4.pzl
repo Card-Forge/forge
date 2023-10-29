@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Phyrexia: All Will Be One #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/03/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that any cards you could draw are irrelevant to the solution.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Volt Charge;Furnace Skullbomb;Experimental Augury;Blazing Crescendo
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Tekuthal, Inquiry Dominus;Ichor Synthesizer;Serum-Core Chimera|Counters:OIL=2;Cacophony Scamp;Urabrask's Forge|Counters:OIL=2;Island;Island;Mountain;Mountain;Mountain
+p1life=16
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Phyrexian Vindicator;Porcelain Zealot;Porcelain Zealot;Porcelain Zealot
+p1counters=POISON=4

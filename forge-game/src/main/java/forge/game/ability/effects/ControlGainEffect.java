@@ -113,7 +113,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
         final Game game = newController.getGame();
 
-        CardCollectionView tgtCards = null;
+        CardCollectionView tgtCards;
         if (sa.hasParam("Choices")) {
             Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
                     sa.getParam("Chooser"), sa).get(0) : activator;
@@ -131,11 +131,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         if (tgtCards != null & sa.hasParam("ControlledByTarget")) {
             tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
-        }
-
-        // in case source was LKI or still resolving
-        if (source.isLKI() || source.getZone().is(ZoneType.Stack)) {
-            source = game.getCardState(source);
         }
 
         // check for lose control criteria right away

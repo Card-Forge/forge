@@ -1,0 +1,8 @@
+Name:Quickbeam, Upstart Ent
+ManaCost:4 G G
+Types:Legendary Creature Treefolk
+PT:5/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Treefolk.Other+YouCtrl | Execute$ DBPump | TriggerDescription$ Whenever CARDNAME or another Treefolk enters the battlefield under your control, up to two target creatures each get +2/+2 and gain trample until end of turn.
+SVar:DBPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ 2 | KW$ Trample | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures.
+DeckHints:Type$Treefolk
+Oracle:Whenever Quickbeam, Upstart Ent or another Treefolk enters the battlefield under your control, up to two target creatures each get +2/+2 and gain trample until end of turn.

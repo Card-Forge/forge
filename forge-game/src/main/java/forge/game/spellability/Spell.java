@@ -186,7 +186,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
 
             source.setState(stateName, false);
-            if (getHostCard().hasBackSide()) {
+            if (getHostCard().isDoubleFaced()) {
                 source.setBackSide(getHostCard().getRules().getSplitType().getChangedStateName().equals(stateName));
             }
 

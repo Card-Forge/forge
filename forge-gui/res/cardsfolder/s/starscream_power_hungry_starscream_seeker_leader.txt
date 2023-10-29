@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Robot
 PT:2/3
 K:More Than Meets the Eye:2 B
 K:Flying
-T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Condition$ Monarch | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you draw a card, if you're the monarch, target opponent loses 2 life.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | CheckDefinedPlayer$ You.isMonarch | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you draw a card, if you're the monarch, target opponent loses 2 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2
 T:Mode$ DamageDoneOnce | ValidSource$ Creature | TriggerZones$ Battlefield | ValidTarget$ You | CombatDamage$ True | Execute$ TrigConvert | TriggerDescription$ Whenever one or more creatures deal combat damage to you, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform

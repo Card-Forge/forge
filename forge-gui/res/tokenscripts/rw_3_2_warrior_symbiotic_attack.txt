@@ -1,0 +1,8 @@
+Name:Warrior Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Warrior
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+token+Other | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME and at least one other creature token attack, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature.

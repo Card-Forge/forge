@@ -1,0 +1,6 @@
+Name:Vengeant Earth
+ManaCost:1 G
+Types:Instant
+A:SP$ Animate | ValidTgts$ Land.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target creature or land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | HiddenKeywords$ CARDNAME must be blocked if able. | SpellDescription$ Target creature or land you control becomes a 4/4 Elemental creature with haste in addition to its other types until end of turn. It must be blocked this turn if able.
+DeckHas:Type$Elemental
+Oracle:Target creature or land you control becomes a 4/4 Elemental creature with haste in addition to its other types until end of turn. It must be blocked this turn if able.

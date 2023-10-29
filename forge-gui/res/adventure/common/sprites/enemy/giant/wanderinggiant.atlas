@@ -1,0 +1,140 @@
+wanderinggiant.png
+size: 800,110
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 390, 39
+  size: 25, 31
+Idle 
+  xy: 8, 1
+  size: 16, 18
+Idle 
+  xy: 40, 1
+  size: 16, 18
+Idle 
+  xy: 72, 1
+  size: 16, 18
+Idle 
+  xy: 104, 1
+  size: 16, 18
+Walk
+  xy: 12, 31
+  size: 16, 18
+Walk
+  xy: 44, 31
+  size: 16, 18
+Walk
+  xy: 76, 31
+  size: 16, 18
+Walk
+  xy: 108, 31
+  size: 16, 18
+Walk
+  xy: 140, 31
+  size: 16, 18
+Walk
+  xy: 172, 31
+  size: 16, 18
+Walk
+  xy: 204, 31
+  size: 16, 18
+Walk
+  xy: 236, 31
+  size: 16, 18
+Attack
+  xy: 8, 60
+  size: 24, 23
+Attack
+  xy: 40, 60
+  size: 24, 23
+Attack
+  xy: 72, 60
+  size: 24, 23
+Attack
+  xy: 104, 60
+  size: 24, 23
+Attack
+  xy: 136, 60
+  size: 24, 23
+Attack
+  xy: 168, 60
+  size: 24, 23
+Attack
+  xy: 200, 60
+  size: 24, 23
+Attack
+  xy: 232, 60
+  size: 24, 23
+Death
+  xy: 0, 85
+  size: 32, 23
+Death
+  xy: 32, 85
+  size: 32, 23
+Death
+  xy: 64, 85
+  size: 32, 23
+Death
+  xy: 96, 85
+  size: 32, 23
+Death
+  xy: 128, 85
+  size: 32, 23
+Death
+  xy: 160, 85
+  size: 32, 23
+Death
+  xy: 192, 85
+  size: 32, 23
+Death
+  xy: 224, 85
+  size: 32, 23
+Death
+  xy: 256, 85
+  size: 32, 23
+Death
+  xy: 288, 85
+  size: 32, 23
+Death
+  xy: 320, 85
+  size: 32, 23
+Death
+  xy: 352, 85
+  size: 32, 23
+Death
+  xy: 384, 85
+  size: 32, 23
+Death
+  xy: 416, 85
+  size: 32, 23
+Death
+  xy: 448, 85
+  size: 32, 23
+Death
+  xy: 480, 85
+  size: 32, 23
+Death
+  xy: 512, 85
+  size: 32, 23
+Death
+  xy: 544, 85
+  size: 32, 23
+Death
+  xy: 576, 85
+  size: 32, 23
+Death
+  xy: 608, 85
+  size: 32, 23
+Death
+  xy: 640, 85
+  size: 32, 23
+Death
+  xy: 672, 85
+  size: 32, 23
+Death
+  xy: 704, 85
+  size: 32, 23
+Death
+  xy: 736, 85
+  size: 32, 23

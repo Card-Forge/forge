@@ -1,0 +1,9 @@
+Name:Arwen, Mortal Queen
+ManaCost:1 G W
+Types:Legendary Creature Elf Noble
+PT:2/2
+K:etbCounter:Indestructible:1
+A:AB$ Pump | Cost$ 1 SubCounter<1/Indestructible> | KW$ Indestructible | CounterNum$ 1 | TgtPrompt$ Select another target creature | ValidTgts$ Creature.Other | SubAbility$ PutCounterSelf | SpellDescription$ Another target creature gains indestructible until end of turn. Put a +1/+1 counter and a lifelink counter on that creature and a +1/+1 counter and a lifelink counter on NICKNAME.
+SVar:PutCounterSelf:DB$ PutCounter | Defined$ Self & Targeted | CounterNum$ 1 | CounterTypes$ Lifelink,P1P1  | StackDescription$ {c:Targeted} gains indestructible until end of turn. Put a +1/+1 counter and a lifelink counter on that creature and a +1/+1 counter and a lifelink counter on Arwen.
+DeckHas:Ability$Counters|LifeGain
+Oracle:Arwen, Mortal Queen enters the battlefield with an indestructible counter on it.\n{1}, Remove an indestructible counter from Arwen: Another target creature gains indestructible until end of turn. Put a +1/+1 counter and a lifelink counter on that creature and a +1/+1 counter and a lifelink counter on Arwen.

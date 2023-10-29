@@ -1,0 +1,9 @@
+Name:Etched Familiar
+ManaCost:2 B
+Types:Artifact Creature Phyrexian Fox
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each opponent loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOpponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:When Etched Familiar dies, each opponent loses 2 life and you gain 2 life.

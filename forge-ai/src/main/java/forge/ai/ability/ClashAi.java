@@ -59,7 +59,7 @@ public class ClashAi extends SpellAbilityAi {
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         for (Player p : options) {
-            if (p.getCardsIn(ZoneType.Library).size() == 0)
+            if (p.getCardsIn(ZoneType.Library).isEmpty())
                 return p;
         }
 

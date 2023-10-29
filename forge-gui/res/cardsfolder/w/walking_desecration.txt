@@ -2,10 +2,8 @@ Name:Walking Desecration
 ManaCost:2 B
 Types:Creature Zombie
 PT:1/1
-A:AB$ ChooseType | Cost$ B T | Defined$ You | Type$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice attack this turn if able.
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | RememberAllPumped$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | SubAbility$ DBCleanup | StackDescription$ None
-SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChooseType | Cost$ B T | Defined$ You | Type$ Creature | SubAbility$ DBEffect | SpellDescription$ Creatures of the creature type of your choice attack this turn if able.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MustAttack | StackDescription$ None
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.ChosenType | Description$ Creatures of the chosen creature type attack this turn if able.
 AI:RemoveDeck:All
 Oracle:{B}, {T}: Creatures of the creature type of your choice attack this turn if able.

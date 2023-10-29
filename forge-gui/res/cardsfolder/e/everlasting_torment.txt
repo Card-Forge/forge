@@ -3,7 +3,7 @@ ManaCost:2 BR
 Types:Enchantment
 S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
 S:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
-S:Mode$ Continuous | GlobalRule$ All damage is dealt as though its source had wither. | Description$ All damage is dealt as though its source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
+S:Mode$ WitherDamage | Description$ All damage is dealt as though its source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Players can't gain life.\nDamage can't be prevented.\nAll damage is dealt as though its source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)

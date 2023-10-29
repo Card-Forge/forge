@@ -1,0 +1,21 @@
+Name:Invasion of Moag
+ManaCost:2 G W
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1
+DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Moag enters the battlefield, put a +1/+1 counter on each creature you control.
+
+ALTERNATE
+
+Name:Bloomwielder Dryads
+ManaCost:no cost
+Colors:white,green
+Types:Creature Dryad
+PT:3/3
+K:Ward:2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nAt the beginning of your end step, put a +1/+1 counter on target creature you control.

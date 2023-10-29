@@ -1,0 +1,7 @@
+Name:Embereth Veteran
+ManaCost:R
+Types:Creature Human Knight
+PT:2/1
+A:AB$ Token | Cost$ 1 Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ role_young_hero | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SpellDescription$ Create a Young Hero Role token attached to another target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
+DeckHas:Ability$Token|Sacrifice & Type$Aura|Enchantment|Role
+Oracle:{1}, Sacrifice Embereth Veteran: Create a Young Hero Role token attached to another target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")

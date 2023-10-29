@@ -1,10 +1,10 @@
 package forge;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
-
+import forge.adventure.util.Config;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -25,6 +25,9 @@ import forge.assets.ImageCache;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
 import forge.util.Utils;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -1515,5 +1518,38 @@ public class Graphics {
             P.dispose();
         }
         return dummyTexture;
+    }
+
+    public static void setVideoMode(String videoMode) {
+        if (videoMode == null)
+            videoMode = "720p";
+        Config.instance().getSettingData().videomode = videoMode;
+        switch (videoMode) {
+            case "768p":
+                Config.instance().getSettingData().width = 1366;
+                Config.instance().getSettingData().height = 768;
+                break;
+            case "900p":
+                Config.instance().getSettingData().width = 1600;
+                Config.instance().getSettingData().height = 900;
+                break;
+            case "1080p":
+                Config.instance().getSettingData().width = 1920;
+                Config.instance().getSettingData().height = 1080;
+                break;
+            case "1440p":
+                Config.instance().getSettingData().width = 2560;
+                Config.instance().getSettingData().height = 1440;
+                break;
+            case "2160p":
+                Config.instance().getSettingData().width = 3840;
+                Config.instance().getSettingData().height = 2160;
+                break;
+            default: // assume 720p
+                Config.instance().getSettingData().width = 1280;
+                Config.instance().getSettingData().height = 720;
+                break;
+        }
+        Config.instance().saveSettings();
     }
 }

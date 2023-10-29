@@ -10,5 +10,6 @@ SVar:DBScry:DB$ Scry
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {2}. If you do, target creature can't be blocked this turn.
 SVar:TrigUnblockable:AB$ Effect | Cost$ 2 | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
-DeckHas:Ability$LifeGain
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain|Mill
 Oracle:Whenever Krydle of Baldur's Gate deals combat damage to a player, that player loses 1 life and mills a card, then you gain 1 life and scry 1.\nWhenever you attack, you may pay {2}. If you do, target creature can't be blocked this turn.

@@ -198,13 +198,13 @@ public abstract class SpellAbilityEffect {
     protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa, final String definedParam) { return getCards(true,  definedParam, sa); }
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
-        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         if (sa.hasParam("ThisDefinedAndTgts")) {
             CardCollection cards =
                     AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
             cards.addAll(sa.getTargets().getTargetCards());
             return cards;
         }
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
@@ -343,7 +343,7 @@ public abstract class SpellAbilityEffect {
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
         trig.setOverridingAbility(newSa);
-        trig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
+        trig.setSpawningAbility(sa.copy(sa.getHostCard(), true));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
 
@@ -393,11 +393,16 @@ public abstract class SpellAbilityEffect {
     }
 
     public static void addForgetOnMovedTrigger(final Card card, final String zone) {
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack,Exile | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSource | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
+        SpellAbility forget = getForgetSpellAbility(card);
+        parsedTrigger.setOverridingAbility(forget);
+        parsedTrigger2.setOverridingAbility(forget);
         card.addTrigger(parsedTrigger);
+        card.addTrigger(parsedTrigger2);
     }
 
     protected static void addForgetOnCastTrigger(final Card card) {
@@ -492,31 +497,9 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        String finalname = name.replaceAll("\\([^()]*\\)", "");
-        if (finalname.contains(" 's Effect")) {
-            finalname = finalname.replace( " 's Effect", "");
-            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblEffect");
-        } else if (finalname.contains("'s Effect")) {
-            finalname = finalname.replace( "'s Effect", "");
-            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblEffect");
-        } else if (finalname.contains(" 's Boon")) {
-            finalname = finalname.replace( " 's Boon", "");
-            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblBoon");
-        } else if (finalname.contains("'s Boon")) {
-            finalname = finalname.replace( "'s Boon", "");
-            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblBoon");
-        } else if (finalname.startsWith("Emblem")) {
-            String []s = finalname.split(" - ");
-            try {
-                String translatedName = s[1].endsWith(" ") ? s[1].substring(0, s[1].lastIndexOf(" ")) : s[1];
-                translatedName = CardTranslation.getTranslatedName(s[1]);
-                finalname = translatedName + " " + Localizer.getInstance().getMessage("lblEmblem");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
         eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(finalname);
+        eff.setName(name);
         eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
@@ -604,7 +587,7 @@ public abstract class SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    game.getAction().exile(eff, null);
+                    game.getAction().exile(eff, null, null);
                 }
             };
 
@@ -621,7 +604,7 @@ public abstract class SpellAbilityEffect {
     protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
         final Card host = sa.getHostCard();
         final Game game = controller.getGame();
-        if (!game.getPhaseHandler().inCombat()) {
+        if (!c.isCreature() || !game.getPhaseHandler().inCombat()) {
             return false;
         }
         boolean combatChanged = false;
@@ -636,10 +619,8 @@ public abstract class SpellAbilityEffect {
             combat.initConstraints();
             if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
                 PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
-                defs = new FCollection<>();
-                for (Player p : defendingPlayers) {
-                    defs.addAll(combat.getDefendersControlledBy(p));
-                }
+                defs = new FCollection<>(defendingPlayers);
+                defs.addAll(Iterables.filter(combat.getDefendingPlaneswalkers(), CardPredicates.isControlledByAnyOf(defendingPlayers)));
             } else if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {
@@ -750,7 +731,7 @@ public abstract class SpellAbilityEffect {
                                     " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
 
                             Trigger trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
-                            trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+                            trig.setSpawningAbility(sa.copy(lki, true));
                             trig.setActiveZone(null);
                             trig.addRemembered(newCard);
 
@@ -874,6 +855,10 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUntaps".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addUntapCommand(until);
+        } else if ("UntilTargetedUntaps".equals(duration)) {
+            Card tgt = sa.getSATargetingCard().getTargetCard();
+            tgt.addLeavesPlayCommand(until);
+            tgt.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
             host.addLeavesPlayCommand(until); //if it leaves play, it's unattached
             host.addUnattachCommand(until);
@@ -895,7 +880,16 @@ public abstract class SpellAbilityEffect {
         return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
     }
 
+    public static void handleExiledWith(final Iterable<Card> movedCards, final SpellAbility cause) {
+        for (Card c : movedCards) {
+            handleExiledWith(c, cause);
+        }
+    }
     public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        if (movedCard.isToken()) {
+            return;
+        }
+
         Card exilingSource = cause.getHostCard();
         // during replacement LKI might be used
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {

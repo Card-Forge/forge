@@ -1,0 +1,12 @@
+Name:Summons of Saruman
+ManaCost:X U R
+Types:Sorcery
+A:SP$ Amass | Type$ Orc | Num$ X | SubAbility$ DBMill | SpellDescription$ Amass Orcs X. Mill X cards. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. (To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:DBMill:DB$ Mill | NumCards$ X | RememberMilled$ True | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | ValidZone$ Graveyard | Valid$ Card.IsRemembered | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell.Instant+cmcLEX,Spell.Sorcery+cmcLEX | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:3 U R ExileFromGrave<X/Card>
+SVar:X:Count$xPaid
+DeckHas:Ability$Mill|Amass|Graveyard & Type$Army|Goblin
+DeckHints:Ability$Graveyard
+Oracle:Amass Orcs X. Mill X cards. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. (To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)\nFlashback—{3}{U}{R}, Exile X cards from your graveyard.

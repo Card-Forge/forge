@@ -1,0 +1,15 @@
+Name:Prize Pig
+ManaCost:1 G
+Types:Creature Boar
+PT:0/3
+T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put that many ribbon counters on CARDNAME. Then if there are three or more ribbon counters on CARDNAME, remove those counters and untap it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ RIBBON | CounterNum$ Y | SubAbility$ DBRemoveCounters
+SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ RIBBON | CounterNum$ All | RememberRemoved$ True | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE3_RIBBON | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | ConditionCheckSVar$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+SVar:Y:TriggerCount$LifeAmount
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Whenever you gain life, put that many ribbon counters on Prize Pig. Then if there are three or more ribbon counters on Prize Pig, remove those counters and untap it.\n{T}: Add one mana of any color.

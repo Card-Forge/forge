@@ -23,7 +23,7 @@ public class PointOfInterestEditor extends JComponent {
 
 
 
-    public class PointOfInterestRenderer extends DefaultListCellRenderer {
+    public static class PointOfInterestRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -71,6 +71,7 @@ public class PointOfInterestEditor extends JComponent {
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(new JScrollPane(list), BorderLayout.LINE_START);
+        toolBar.setFloatable(false);
         add(toolBar, BorderLayout.PAGE_START);
         add(edit,BorderLayout.CENTER);
         load();
@@ -109,12 +110,13 @@ public class PointOfInterestEditor extends JComponent {
         FileHandle handle = Config.instance().getFile(Paths.POINTS_OF_INTEREST);
         if (handle.exists())
         {
-            Array readEnemies=json.fromJson(Array.class, PointOfInterestData.class, handle);
-            allEnemies = readEnemies;
+            allEnemies =json.fromJson(Array.class, PointOfInterestData.class, handle);
         }
         for (int i=0;i<allEnemies.size;i++) {
             model.add(i,allEnemies.get(i));
         }
+
+        QuestController.getInstance().load();
     }
     void addItem()
     {

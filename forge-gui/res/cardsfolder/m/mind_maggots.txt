@@ -2,15 +2,11 @@ Name:Mind Maggots
 ManaCost:3 B
 Types:Creature Insect
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseDiscardCount | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on CARDNAME.
-SVar:ChooseDiscardCount:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ MaxChoice | ListTitle$ Discard how many creatures? | SubAbility$ MindMaggotsDiscard
-# Used ChooseNumber here because otherwise the user must cancel for every valid card not discarded which can make it seem slow or broken.
-SVar:MindMaggotsDiscard:DB$ Discard | DiscardValid$ Creature | NumCards$ ChosenMaggots | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ MindMaggotsPutCounter
-SVar:MindMaggotsPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ MindMaggotsCount | SubAbility$ MindMaggotsCleanup
-SVar:MindMaggotsCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:MaxChoice:Count$TypeInYourHand.Creature
-SVar:ChosenMaggots:Count$ChosenNumber
-SVar:DiscardedMind:Remembered$Amount
-SVar:MindMaggotsCount:SVar$DiscardedMind/Times.2
-AI:RemoveDeck:All
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on CARDNAME.
+SVar:TrigDiscard:DB$ Discard | DiscardValid$ Creature | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ MindMaggotsPutCounter
+SVar:MindMaggotsPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize/Twice
+DeckHas:Ability$Counters|Discard
+DeckHints:Ability$Graveyard
 Oracle:When Mind Maggots enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.

@@ -77,6 +77,9 @@ public class TargetingOverlay {
                 drawArrow(g, endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
             }
         }
+        if (null != attachedTo && c == attachedTo.getAttachedTo()) {
+            drawArrow(g, endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
+        }
         if (null != attachedCards) {
             for (final CardView enc : attachedCards) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
@@ -89,7 +92,7 @@ public class TargetingOverlay {
         }
         if (null != combat) {
             final GameEntityView defender = combat.getDefender(c);
-            // if c is attacking a planeswalker
+            // if c is attacking a planeswalker or battle
             if (defender instanceof CardView) {
                 drawArrow(g, endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }

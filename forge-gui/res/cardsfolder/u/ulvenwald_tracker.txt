@@ -2,7 +2,7 @@ Name:Ulvenwald Tracker
 ManaCost:G
 Types:Creature Human Shaman
 PT:1/1
-A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ TrackerFight | StackDescription$ None
-SVar:TrackerFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select another target creature | SpellDescription$ Target creature you control fights another target creature.
+A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ TrackerFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
+SVar:TrackerFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select another target creature
 AI:RemoveDeck:All
 Oracle:{1}{G}, {T}: Target creature you control fights another target creature.

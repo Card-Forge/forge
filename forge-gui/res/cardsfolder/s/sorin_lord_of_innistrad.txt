@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Sorin
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_1_1_vampire_lifelink | Planeswalker$ True | SpellDescription$ Create a 1/1 black Vampire creature token with lifelink.
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Name$ Emblem - Sorin, Lord of Innistrad | Image$ emblem_sorin_lord_of_innistrad | StaticAbilities$ STPump | Planeswalker$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +1/+0."
-SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1
+SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
 A:AB$ Destroy | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature,Planeswalker.Other | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target creatures or other planeswalkers | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

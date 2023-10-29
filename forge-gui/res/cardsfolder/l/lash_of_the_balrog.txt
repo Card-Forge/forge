@@ -1,0 +1,7 @@
+Name:Lash of the Balrog
+ManaCost:B
+Types:Sorcery
+DeckHas:Ability$Sacrifice
+K:AlternateAdditionalCost:Sac<1/Creature>:4
+A:SP$ Destroy | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+Oracle:As an additional cost to cast this spell, sacrifice a creature or pay {4}.\nDestroy target creature.

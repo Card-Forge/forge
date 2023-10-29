@@ -5,6 +5,6 @@ PT:1/2
 A:AB$ Pump | Cost$ 2 B | NumAtt$ +3 | NumDef$ +3 | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gets +3/+3 and gains deathtouch until end of turn.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if a player lost 4 or more life this turn, put a +1/+1 counter on CARDNAME. (Damage causes loss of life.)
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:X:PlayerCountPlayers$HighestLifeLostThisTurn
+SVar:X:PlayerCountDefinedRegistered$HighestLifeLostThisTurn
 DeckHas:Ability$Counters
 Oracle:{2}{B}: Knight of the Ebon Legion gets +3/+3 and gains deathtouch until end of turn.\nAt the beginning of your end step, if a player lost 4 or more life this turn, put a +1/+1 counter on Knight of the Ebon Legion. (Damage causes loss of life.)

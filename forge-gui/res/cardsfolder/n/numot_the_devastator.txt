@@ -1,5 +1,5 @@
 Name:Numot, the Devastator
-ManaCost:3 R W U
+ManaCost:3 U R W
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying

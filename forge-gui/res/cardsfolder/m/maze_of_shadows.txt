@@ -2,9 +2,9 @@ Name:Maze of Shadows
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature with shadow.
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | AILogic$ PreventCombatDamage | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature with shadow.
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn. | Secondary$ True
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:{T}: Add {C}.\n{T}: Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.

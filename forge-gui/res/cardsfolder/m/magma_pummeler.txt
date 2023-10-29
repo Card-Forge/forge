@@ -8,7 +8,7 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y | RememberRemoved$ True | SubAbility$ DBImmediateTrigger
 SVar:Y:ReplaceCount$DamageAmount
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberSVarAmount$ Z | SubAbility$ DBCleanup | TriggerDescription$ When one or more counters are removed from CARDNAME this way, it deals that much damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Count$TriggerRememberAmount
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Count$TriggerRememberAmount
 SVar:Z:Count$RememberedSize
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters

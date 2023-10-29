@@ -1,0 +1,21 @@
+[metadata]
+Name:MTG Puzzles #05 - Miracles of Nature
+URL:https://mtgpuzzles.com/puzzle/5
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. After a Gruuling match you're down to the last card in your library - can you get through your opponent's defenses to secure the win? It's the beginning of your Upkeep Step. Your library consists of only Blessings of Nature. Damping Sphere still increases the casting cost for any card's alternative casting cost. Your solution should not depend on how your opponent will block.
+[state]
+turn=20
+activeplayer=p0
+activephase=UPKEEP
+p0life=6
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Electrostatic Bolt;Inner Calm, Outer Strength;Crash
+p0library=Blessings of Nature
+p0battlefield=Goblin Spy;Frontline Devastator;Forest;Forest;Forest;Mountain;Mountain;Mountain
+p1life=6
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Butcher Ghoul;Guardian Automaton;Damping Sphere

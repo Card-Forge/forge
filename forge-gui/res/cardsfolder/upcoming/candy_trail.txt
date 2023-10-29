@@ -1,0 +1,9 @@
+Name:Candy Trail
+ManaCost:1
+Types:Artifact Food Clue
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:When Candy Trail enters the battlefield, scry 2.\n{2}, {T}, Sacrifice Candy Trail: You gain 3 life and draw a card.

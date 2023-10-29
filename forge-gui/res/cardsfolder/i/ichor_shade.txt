@@ -1,0 +1,10 @@
+Name:Ichor Shade
+ManaCost:2 B
+Types:Creature Phyrexian Shade
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if an artifact or creature was put into a graveyard from the battlefield this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature,Artifact
+DeckHints:Type$Artifact & Ability$Sacrifice
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, if an artifact or creature was put into a graveyard from the battlefield this turn, put a +1/+1 counter on Ichor Shade.

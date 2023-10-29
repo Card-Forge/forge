@@ -23,6 +23,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("TriggerDescription")) {
             return sa.getParam("TriggerDescription");
+        } else if (sa.hasParam("SpellDescription")) {
+            return sa.getParam("SpellDescription");
         }
 
         return "";
@@ -34,17 +36,16 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
-        mapParams.remove("Cost");
-
-        if (mapParams.containsKey("SpellDescription")) {
+        if (mapParams.containsKey("SpellDescription") && !mapParams.containsKey("TriggerDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
-            mapParams.remove("SpellDescription");
         }
+        mapParams.remove("SpellDescription");
+        mapParams.remove("Cost");
 
         mapParams.put("Mode", TriggerType.Immediate.name());
 
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
-        immediateTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+        immediateTrig.setSpawningAbility(sa.copy(host, true));
 
         // Need to copy paid costs
 
@@ -66,10 +67,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             // need to set Parent to null, otherwise it might have wrong root ability
             if (overridingSA instanceof AbilitySub) {
                 ((AbilitySub)overridingSA).setParent(null);
-            }
-
-            if (sa.hasParam("CopyTriggeringObjects")) {
-                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
             }
 
             immediateTrig.setOverridingAbility(overridingSA);

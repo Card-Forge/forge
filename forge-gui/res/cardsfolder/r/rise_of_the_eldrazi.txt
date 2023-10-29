@@ -1,0 +1,9 @@
+Name:Rise of the Eldrazi
+ManaCost:9 C C C
+Types:Sorcery
+K:This spell can't be countered.
+A:SP$ Destroy | ValidTgts$ Permanent| SubAbility$ DBDraw | SpellDescription$ Destroy target permanent.
+SVar:DBDraw:DB$ Draw | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBExtraTurn | SpellDescription$ Target player draws four cards.
+SVar:DBExtraTurn: DB$ AddTurn | Defined$ You | NumTurns$ 1 | SubAbility$ DBChange | SpellDescription$ Take an extra turn after this one.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME
+Oracle:This spell can't be countered.\nDestroy target permanent. Target player draws four cards. Take an extra turn after this one.\nExile Rise of the Eldrazi.

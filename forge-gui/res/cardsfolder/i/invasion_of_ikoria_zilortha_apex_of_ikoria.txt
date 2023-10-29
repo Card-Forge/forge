@@ -1,0 +1,20 @@
+Name:Invasion of Ikoria
+ManaCost:X G G
+Types:Battle Siege
+Defense:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library and/or graveyard for a non-Human creature card with mana value X or less and put it onto the battlefield. If you search your library this way, shuffle.
+SVar:TrigSearch:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+nonHuman+cmcLEX | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ShuffleNonMandatory$ True
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Ikoria enters the battlefield, search your library and/or graveyard for a non-Human creature card with mana value X or less and put it onto the battlefield. If you search your library this way, shuffle.
+
+ALTERNATE
+
+Name:Zilortha, Apex of Ikoria
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Dinosaur
+PT:8/8
+K:Reach
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Creature.YouCtrl+nonHuman | Optional$ True | Description$ For each non-Human creature you control, you may have that creature assign its combat damage as though it weren't blocked.
+Oracle:Reach\nFor each non-Human creature you control, you may have that creature assign its combat damage as though it weren't blocked.

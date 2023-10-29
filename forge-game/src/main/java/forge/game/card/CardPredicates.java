@@ -352,6 +352,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> hasSuspend() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.hasSuspend();
+            }
+        };
+    }
+
     public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {
             @Override
@@ -722,6 +731,12 @@ public final class CardPredicates {
             @Override
             public boolean apply(final Card c) {
                 return c.isPlaneswalker();
+            }
+        };
+        public static final Predicate<Card> BATTLES = new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.isBattle();
             }
         };
         public static final Predicate<Card> CAN_BE_DESTROYED = new Predicate<Card>() {

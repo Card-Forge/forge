@@ -1,0 +1,8 @@
+Name:City on Fire
+ManaCost:5 R R R
+Types:Enchantment
+K:Convoke
+R:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ActiveZones$ Battlefield | ValidTarget$ Player,Permanent | ReplaceWith$ DmgTriple | Description$ If a source you control would deal damage to a permanent or player, it deals triple that damage instead.
+SVar:DmgTriple:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Z
+SVar:Z:ReplaceCount$DamageAmount/Thrice
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nIf a source you control would deal damage to a permanent or player, it deals triple that damage instead.

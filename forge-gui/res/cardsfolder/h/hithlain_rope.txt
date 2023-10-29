@@ -1,0 +1,8 @@
+Name:Hithlain Rope
+ManaCost:2
+Types:Artifact
+S:Mode$ CantSacrifice | ValidCard$ Card.Self | Description$ CARDNAME can't be sacrificed.
+A:AB$ ChangeZone | Cost$ 1 T | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBPass | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. The player to your right gains control of CARDNAME.
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBPass | SpellDescription$ Draw a card. The player to your right gains control of CARDNAME.
+SVar:DBPass:DB$ GainControl | Defined$ Self | NewController$ NextPlayerToYourRight
+Oracle:Hithlain Rope can't be sacrificed.\n{1}, {T}: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. The player to your right gains control of Hithlain Rope.\n{2}, {T}: Draw a card. The player to your right gains control of Hithlain Rope.

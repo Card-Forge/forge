@@ -29,12 +29,14 @@ import forge.toolbox.GuiChoose;
 import forge.util.*;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
     private ImageFetcher imageFetcher = new LibGDXImageFetcher();
+    private List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -151,12 +153,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         if (Forge.isMobileAdventureMode) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image);
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image));
             return;
         }
         new WaitCallback<Integer>() {
@@ -178,11 +175,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
         return new WaitCallback<String>() {
             @Override
             public void run() {
-                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this);
+                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this, isNumeric);
             }
         }.invokeAndWait();
     }
@@ -256,12 +253,20 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
-        return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
+        //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
+        List<Integer> v = getChoices(title, 0, 1, integerChoices, null, null);
+        if (v == null || v.isEmpty())
+            return null;
+        return defaultDir + "state" + v.get(0) + ".txt";
     }
 
     @Override
     public File getSaveFile(final File defaultFile) {
-        return defaultFile; //TODO: Show dialog
+        //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
+        List<Integer> v = getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, integerChoices, null, null);
+        if (v == null || v.isEmpty())
+            return null;
+        return new File(ForgeConstants.USER_GAMES_DIR + "state" + v.get(0) + ".txt");
     }
 
     @Override

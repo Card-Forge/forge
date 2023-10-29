@@ -6,6 +6,5 @@ K:Kicker:3 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
 SVar:NeedsToPlayKickedVar:Z GE1
-SVar:Z:Count$ValidGraveyard Instant.YouOwn/Plus.Z1
-SVar:Z1:Count$ValidGraveyard Sorcery.YouOwn
+SVar:Z:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 Oracle:Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)\nWhen Ghitu Chronicler enters the battlefield, if it was kicked, return target instant or sorcery card from your graveyard to your hand.

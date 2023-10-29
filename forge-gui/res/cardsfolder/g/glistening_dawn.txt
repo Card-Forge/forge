@@ -1,0 +1,6 @@
+Name:Glistening Dawn
+ManaCost:2 G G
+Types:Sorcery
+A:SP$ Incubate | Amount$ Count$Valid Land.YouCtrl | Times$ 2 | SpellDescription$ Incubate X twice, where X is the number of lands you control. (To incubate X, create an incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+DeckHas:Ability$Token|Counters & Type$Incubator|Artifact|Phyrexian
+Oracle:Incubate X twice, where X is the number of lands you control. (To incubate X, create an incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

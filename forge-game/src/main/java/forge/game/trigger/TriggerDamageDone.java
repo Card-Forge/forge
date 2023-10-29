@@ -63,9 +63,22 @@ public class TriggerDamageDone extends Trigger {
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
             return false;
         }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
 
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equalsIgnoreCase("True") != (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
+                return false;
+            }
+        }
+
+        if (hasParam("TargetRelativeToCause")) {
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+            if (cause == null) {
+                return false;
+            }
+            if (!cause.matchesValidParam(getParam("TargetRelativeToCause"), runParams.get(AbilityKey.DamageTarget))) {
                 return false;
             }
         }
@@ -111,6 +124,7 @@ public class TriggerDamageDone extends Trigger {
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(
             runParams,
+            AbilityKey.Cause,
             AbilityKey.DamageAmount,
             // This parameter is here because LKI information related to combat doesn't work properly
             AbilityKey.DefendingPlayer

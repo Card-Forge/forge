@@ -1,0 +1,11 @@
+Name:Shalai and Hallar
+ManaCost:1 R G W
+Types:Legendary Creature Angel Elf
+PT:3/3
+K:Flying
+K:Vigilance
+T:Mode$ CounterAddedOnce | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | Execute$ TrigDealDamage | CounterType$ P1P1 | TriggerDescription$ Whenever one or more +1/+1 counters are put on a creature you control, CARDNAME deals that much damage to target opponent.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
+SVar:X:TriggerCount$Amount
+DeckNeeds:Ability$Counters
+Oracle:Flying, vigilance\nWhenever one or more +1/+1 counters are put on a creature you control, Shalai and Hallar deals that much damage to target opponent.

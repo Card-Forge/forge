@@ -1,0 +1,11 @@
+Name:Faramir, Steward of Gondor
+ManaCost:1 W U
+Types:Legendary Creature Human Noble
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.Legendary+YouCtrl+cmcGE4 | Execute$ TrigMonarch | TriggerDescription$ Whenever a legendary creature with mana value 4 or greater enters the battlefield under your control, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+DeckHas:Ability$Token & Type$Soldier
+DeckHints:Type$Creature & Type$Legendary
+Oracle:Whenever a legendary creature with mana value 4 or greater enters the battlefield under your control, you become the monarch.\nAt the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens.

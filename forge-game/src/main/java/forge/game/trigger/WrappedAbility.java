@@ -64,6 +64,11 @@ public class WrappedAbility extends Ability {
             ApiType.SetState,
             ApiType.Play,
             ApiType.SacrificeAll,
+            ApiType.Pump,
+
+            ApiType.Regenerate, // Updated
+            ApiType.RegenerateAll, // No Triggered
+            ApiType.Regeneration, // Replacement Effect only
 
             ApiType.DelayedTrigger
             );
@@ -228,7 +233,8 @@ public class WrappedAbility extends Ability {
     public String getStackDescription() {
         final Trigger regtrig = getTrigger();
         if (regtrig == null) return "";
-        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
+        final StringBuilder sb =
+                new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
         List<TargetChoices> allTargets = sa.getAllTargetChoices();
         if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
             sb.append(" (Targeting: ");

@@ -1,0 +1,5 @@
+Name:Lost to Legend
+ManaCost:W W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+Historic | TgtPrompt$ Select target historic nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 3 | IsCurse$ True | SpellDescription$ Put target nonland historic permanent into its owner's library fourth from the top. (Artifacts, legendaries, and Sagas are historic.)
+Oracle:Put target nonland historic permanent into its owner's library fourth from the top. (Artifacts, legendaries, and Sagas are historic.)

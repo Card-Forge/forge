@@ -1,0 +1,6 @@
+Name:Banish from Edoras
+ManaCost:4 W
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | ValidTarget$ Creature.tapped | Description$ This spell costs {2} less to cast if it targets a tapped creature.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature.
+Oracle:This spell costs {2} less to cast if it targets a tapped creature.\nExile target creature.

@@ -907,7 +907,7 @@ public class Cost implements Serializable {
         return sb.toString();
     }
 
-    public void mergeTo(Cost source, int amt) {
+    public void mergeTo(Cost source, int amt, final SpellAbility sa) {
         // multiply to create the full cost
         if (amt > 1) {
             // to double itself we need to work on a copy
@@ -918,13 +918,16 @@ public class Cost implements Serializable {
             }
         }
         // combine costs (these shouldn't mix together)
-        this.add(source, false);
+        this.add(source, false, sa);
     }
 
     public Cost add(Cost cost1) {
         return add(cost1, true);
     }
     public Cost add(Cost cost1, boolean mergeAdditional) {
+        return add(cost1, mergeAdditional, null);
+    }
+    public Cost add(Cost cost1, boolean mergeAdditional, final SpellAbility sa) {
         CostPartMana costPart2 = this.getCostMana();
         List<CostPart> toRemove = Lists.newArrayList();
         for (final CostPart part : cost1.getCostParts()) {
@@ -934,37 +937,38 @@ public class Cost implements Serializable {
                 CostPartMana mPart = (CostPartMana) part;
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
-                String r2 = costPart2.getRestriction();
-                String r1 = mPart.getRestriction();
-                String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
                 boolean XCantBe0 = !mPart.canXbe0() || !costPart2.canXbe0();
-                if (r == null && (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || XCantBe0)) {
+                if (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || XCantBe0) {
                     // FIXME: something was amiss when trying to add the cost since the mana cost is either \EnchantedCost or \Exiled but the
                     // restriction no longer marks it as such. Therefore, we need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
                     // to make cards like Merseine or Back from the Brink work.
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), XCantBe0));
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), XCantBe0));
                 } else {
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), null));
                 }
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||
-                    part instanceof CostSacrifice || part instanceof CostTapType||
+                    part instanceof CostSacrifice || part instanceof CostTapType ||
                     part instanceof CostExile))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
+                    Integer otherAmount = other.convertAmount();
+                    // support X loyalty
+                    if (otherAmount == null && sa != null && sa.isPwAbility()) {
+                        otherAmount = other.getAbilityAmount(sa);
+                    }
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
                             part.getType().equals(other.getType()) &&
                             StringUtils.isNumeric(part.getAmount()) &&
-                            StringUtils.isNumeric(other.getAmount())) {
-                        String amount = String.valueOf(part.convertAmount() + other.convertAmount());
+                            otherAmount != null) {
+                        String amount = String.valueOf(part.convertAmount() + otherAmount);
                         if (part instanceof CostPutCounter) { // CR 606.5 path for Carth
-                            // TODO support X
                             if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
                                 costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
-                                Integer counters = other.convertAmount() - part.convertAmount();
+                                Integer counters = otherAmount - part.convertAmount();
                                 // the cost can turn positive if multiple Carth raise it
                                 if (counters < 0) {
                                     costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));

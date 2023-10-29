@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,6 +55,24 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
     private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
+        final StringBuilder sb = new StringBuilder();
+
+        if (sa.getManaPart().isComboMana()) {
+            Map<Byte, Integer> choices = player.getController().specifyManaCombo(sa, ColorSet.fromNames(colors), amount, false);
+            for (Map.Entry<Byte, Integer> e : choices.entrySet()) {
+                Byte chosenColor = e.getKey();
+                String choice = MagicColor.toShortString(chosenColor);
+                Integer count = e.getValue();
+                while (count > 0) {
+                    if (sb.length() > 0) {
+                        sb.append(" ");
+                    }
+                    sb.append(choice);
+                    --count;
+                }
+            }
+            return sb.toString();
+        }
 
         String baseMana;
 
@@ -93,7 +112,6 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             }
         }
 
-        final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
         } else {

@@ -1,0 +1,13 @@
+Name:Brenard, Ginger Sculptor
+ManaCost:1 G W U
+Types:Legendary Creature Human Artificer
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Food+YouCtrl,Creature.Golem+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Each creature you control that's a Food or a Golem gets +2/+2 and has trample.
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's a 1/1 Food Golem artifact creature in addition to its other types and it has "{2}, {T}, Sacrifice this artifact: You gain 3 life."
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1 | AddAbilities$ FoodSac | AddTypes$ Food & Golem & Artifact | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+DeckHas:Ability$Token
+DeckHints:Type$Food|Golem
+Oracle:Each creature you control that's a Food or a Golem gets +2/+2 and has trample.\nWhenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's a 1/1 Food Golem artifact creature in addition to its other types and it has "{2}, {T}, Sacrifice this artifact: You gain 3 life."

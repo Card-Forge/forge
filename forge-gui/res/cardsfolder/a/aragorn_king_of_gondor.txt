@@ -1,0 +1,16 @@
+Name:Aragorn, King of Gondor
+ManaCost:1 U R W
+Types:Legendary Creature Human Noble
+PT:4/4
+K:Vigilance
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TgtNoBlock | TriggerDescription$ Whenever NICKNAME attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn.
+SVar:TgtNoBlock:DB$ Pump | SubAbility$ AllNoBlock | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | StackDescription$ {c:Targeted} can't block this turn. 
+SVar:AllNoBlock:DB$ Effect | StaticAbilities$ KWPump | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | AILogic$ Evasion
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ creatures can't block this turn.
+SVar:X:Count$Monarch.1.0
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Vigilance, lifelink\nWhen Aragorn, King of Gondor enters the battlefield, you become the monarch.\nWhenever Aragorn attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn.

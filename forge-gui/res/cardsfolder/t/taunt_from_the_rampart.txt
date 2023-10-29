@@ -1,0 +1,7 @@
+Name:Taunt from the Rampart
+ManaCost:3 R W
+Types:Sorcery
+A:SP$ Goad | Defined$ Valid Creature.OppCtrl | SubAbility$ DBEffect | SpellDescription$ Goad all creatures your opponents control. Until your next turn, those creatures can't block. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.OppCtrl | StaticAbilities$ AllUnblockable | Duration$ UntilYourNextTurn
+SVar:AllUnblockable:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME can't block. | Description$ Until your next turn, those creatures can't block.
+Oracle:Goad all creatures your opponents control. Until your next turn, those creatures can't block. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)

@@ -1,0 +1,11 @@
+Name:Nahiri's Resolve
+ManaCost:3 R W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Haste | Description$ Creatures you control get +1/+0 and have haste.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, exile any number of nontoken artifacts and/or creatures you control. Return those cards to the battlefield under their owner's control at the beginning of your next upkeep.
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Creature.YouCtrl+nonToken,Artifact.YouCtrl+nonToken | Hidden$ True | SelectPrompt$ Choose any number of nontoken artifacts and creatures you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup| TriggerDescription$ At the beginning of your next upkeep, return that card to the battlefield under its owner's control. 
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.YouCtrl+nonToken,Artifact.YouCtrl+nonToken
+Oracle:Creatures you control get +1/+0 and have haste.\nAt the beginning of your end step, exile any number of nontoken artifacts and/or creatures you control. Return those cards to the battlefield under their owner's control at the beginning of your next upkeep.

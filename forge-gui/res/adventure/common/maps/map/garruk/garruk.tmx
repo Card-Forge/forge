@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="97">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="10" name="Lowest Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJz7ysbA8JWOeBsrA8N2VvraiW4/CIcA2focA+uOiewDZ/9gcgfIDQuYGBhuMQ+sGwYyPcDcMJB5YzC5AxkMhvAAYZsBTJ+jbiHsjoFOs8hu+TxI3DHQYTLqjlF3jLpj6LkD2S123IPDHaAwSeOE4IF0CyxuBos7BjpusLkDAFXcau0=
+  </data>
+ </layer>
+ <layer id="8" name="Lower Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxX8YxxoFyDcsI0VggfSDaNg8ICtwLRwm42BYfsApQlsYCDTKDoAuePhQDsCCgZTmFADtHEPDndQCgaLO0bBKBgFQxd8YBtoF0DABPaBdgEEDBZ3DGYAAOvSD34=
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzFljtOw0AQhgdQcJxEgoYKkGh4VXRUOQYHSEVBkZIOhYrwaOAGnAIOEAJKR5EGGgjiAEiIEsSM7JEnu7NeL4Zg6ZfjtbPz7T8za3frAMeoE5Q8umL8FHWG+pgtr6sKwHXFHl9tAKyh1lHtOGGguHJ8A7XZKB+ftIO/t6r2/R7Of4PqN9w+3OK9u5TjCed4ztFIicEcF1FxbvaBvCFJH4hhpQZQidzqxMmzdHD8r6lwjl7K0BcsNE7nA9R+KhlbXnfirMY4F6TLaYDHmbBccnyNQ/OgOp+cX9Cv5ZrNoNXDb3DQ+jk2ixk4J7ux3hsDGL8egs4wiGwOluQwvTiMs5rw9agV08GicVKsRVzva9X2gjlkfcrDF8sXW8sVsSwp4pxItbBPPlHNtD4fAlh8Mr1ndmLU1tFKe7YZ2Ct5otqT4jHpl/Y/7huNpaxHvHbJ5POkSM2WyQ2zuPxgT6hW3pV7pie8lrx6JR3V3RxtI2+SYxtsT0YFY5rxtecX5pL3oKyRIYzzlMnNXoH9mL0B0H2ga3qGa9XHYeZcUzvO4pq5kT6ZLHkcvv2N5jVzYL5zXDI5zqPs3a/5MSrZu0V1D8XzUlT0vdb9wbfqX3GEsITU6STEe9nbhOK5vJKeaD3OCtnTfByuuWRuXBx/7YfJ8d81onF8A2dv7dc=
+  </data>
+ </layer>
+ <layer id="9" name="Tree" width="34" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1l81OQjEQhRsJf7ngRt/AgJiAaxNfyLhwZdzqih9N5Fk0wRdAYtizdOULuOAF7IR7wrnDtPQabTIBS9v5emY6rd2Wc11vZ94W3pZ15zp531/YqbdZ1bm33NBCPmR83zNcN/6HQ9pRIodoMcqce8zC64pu7xHrqbEL4pAm648jPsAR0wLroh1UnPuiv3mfGPtdc+41QQfNMVd70mOk3beLvofZ9nOe62IxpHJc+dw4j2giY+AT7dNbtb7lgGkG9INTG3w8+TGTLB4b6AHfktfTWtFkH+JvZjBY42GWH2buGb8jNsJczf2O8n1A02l9lwPnYJzbhLTlHESOsK+Oodldc7Ou+IQGHfpd+rvNrWHPuibwvnQfM0+MeC5axTzAHIz7aG3mDRp2Llscw8zOD875WEx5nzd+36s8pprlpWrra+nBZwbrD/L6KryyBsdWm/gVFjGOEfIELPv00P06RrEayHNX5Ev6dHy4PsX0QHtol7vzZO7K7dayYVY8O6xJCgf0KMvBekosy3KcGGehDAfyYUX+UFN0bDpqDnMI29oVzwfPSdWE9bDyldfke5PX6NP50HNSNeE6yXlicYTq2LJerE9lOXgtLCGfl5X0/NAcfD+G3gGpuuzLU64fzIH3hXy/bf+Ohf1Inh4bb6GQHlxL+R7nWMfegRbH2u1qgn3xe8bS8qJdvMdDbOtI/ug35Mx4l4XqGPNIDcd38Am7+F4auR9j0O+iFI6YxnzvCE/obc/593wYzhHeZxkOxBp67Hs/sh46R377PxLX4H0cnGtrYolx/AAKXB5T
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="431.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="522.915" y="383.179"/>
+  <object id="54" template="../../obj/enemy.tx" x="104.779" y="294.529">
+   <properties>
+    <property name="enemy" value="Viper"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="274.384" y="103.802">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
+}</property>
+    <property name="enemy" value="Garruk"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="303.059" y="176.054">
+   <properties>
+    <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="79.889" y="367.701">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="513.96" y="174.058">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="385.042" y="366.783">
+   <properties>
+    <property name="enemy" value="Fox"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="65.5575" y="124.951">
+   <properties>
+    <property name="enemy" value="Beastmaster"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="478.558" y="111.013">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="222.685" y="60.7665"/>
+  <object id="70" template="../../obj/gold.tx" x="68.0821" y="226.099"/>
+  <object id="71" template="../../obj/gold.tx" x="401.185" y="431.423"/>
+  <object id="72" template="../../obj/gold.tx" x="45.6927" y="80.6475"/>
+  <object id="88" template="../../obj/manashards.tx" x="288" y="64"/>
+  <object id="89" template="../../obj/manashards.tx" x="303.5" y="62"/>
+  <object id="90" template="../../obj/manashards.tx" x="320.5" y="270"/>
+  <object id="91" template="../../obj/manashards.tx" x="513" y="336.5"/>
+  <object id="94" template="../../obj/collision.tx" x="-0.25" y="0" width="544.5" height="16"/>
+  <object id="95" template="../../obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431"/>
+  <object id="96" template="../../obj/collision.tx" x="344.25" y="432.5" width="136" height="16"/>
+ </objectgroup>
+</map>

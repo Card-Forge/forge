@@ -1,0 +1,84 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Window",
+      "name": "scrollWindow",
+	  "style": "paper",
+      "x": 4,
+      "y": 4,
+      "width": 262,
+      "height": 419
+    },
+    {
+      "type": "Table",
+      "name": "questList",
+      "x": 8,
+      "y": 10,
+      "width": 258,
+      "height": 413
+    },
+	{
+      "type": "Table",
+      "name": "questDetails",
+      "x": 8,
+      "y": 10,
+      "width": 258,
+      "height": 413
+	  "fontColor":"black"
+    },
+	{
+      "type": "TextButton",
+      "name": "abandonQuest",
+      "text": "Abandon Quest",
+      "width": 250,
+      "height": 30,
+      "x": 10,
+      "y": 14
+    },
+	{
+      "type": "TextButton",
+      "name": "trackQuest",
+      "text": "Track Quest",
+      "width": 250,
+      "height": 30,
+      "x": 10,
+      "y": 54
+    },
+	{
+      "type": "TextButton",
+      "name": "backToList",
+      "text": "Quest List",
+      "width": 250,
+      "height": 30,
+      "x": 10,
+      "y": 94
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "width": 130,
+      "height": 30,
+      "x": 135,
+      "y": 440
+    },
+	{
+      "type": "TextButton",
+      "name": "status",
+      "text": "Status",
+      "width": 130,
+      "height": 30,
+      "x": 5,
+      "y": 440
+    }
+  ]
+}

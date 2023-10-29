@@ -1,0 +1,11 @@
+Name:Ash, Party Crasher
+ManaCost:R W
+Types:Legendary Creature Human Peasant
+PT:2/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Creature.Self | CheckSVar$ Celebration | SVarCompare$ GE2 | Execute$ TrigPutCounter | TriggerDescription$ Celebration — Whenever CARDNAME attacks, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nCelebration — Whenever Ash, Party Crasher attacks, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on Ash.

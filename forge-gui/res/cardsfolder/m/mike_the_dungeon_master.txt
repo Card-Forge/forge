@@ -1,4 +1,5 @@
 Name:Mike, the Dungeon Master
+AltName:Othelm, Sigardian Outcast
 ManaCost:1 G W
 Types:Legendary Creature Human
 PT:2/2

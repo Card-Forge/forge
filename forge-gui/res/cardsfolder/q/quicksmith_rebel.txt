@@ -4,6 +4,6 @@ Types:Creature Human Artificer
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target artifact you control gains "{T}: This artifact deals 2 damage to any target" for as long as you control CARDNAME.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Abilities$ ABDealDamage | Duration$ UntilLoseControlOfHost
-SVar:ABDealDamage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:ABDealDamage:AB$DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:PlayMain1:TRUE
 Oracle:When Quicksmith Rebel enters the battlefield, target artifact you control gains "{T}: This artifact deals 2 damage to any target" for as long as you control Quicksmith Rebel.

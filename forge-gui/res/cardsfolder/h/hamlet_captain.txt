@@ -4,6 +4,6 @@ Types:Creature Human Warrior
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME attacks or blocks, other Humans you control get +1/+1 until end of turn
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, other Human creatures you control get +1/+1 until end of turn
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+Human+YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+Human+YouCtrl | NumAtt$ +1 | NumDef$ +1
 DeckHints:Type$Human
 Oracle:Whenever Hamlet Captain attacks or blocks, other Humans you control get +1/+1 until end of turn.

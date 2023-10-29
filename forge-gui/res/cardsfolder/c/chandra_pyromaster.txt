@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | DamageMap$ True | SubAbility$ ChandraDamage | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker's controller controls. That creature can't block this turn.
-SVar:ChandraDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TargetedOrController | TgtPrompt$ Select target creature that player or that planeswalker's controller controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:ChandraDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TargetedOrController | TgtPrompt$ Select up to one target creature that player or that planeswalker's controller controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ GE1
 A:AB$ Dig | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.

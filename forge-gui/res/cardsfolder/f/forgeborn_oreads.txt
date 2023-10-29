@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Enchantment Creature Nymph
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDamage | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, CARDNAME deals 1 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
 Oracle:Constellation — Whenever Forgeborn Oreads or another enchantment enters the battlefield under your control, Forgeborn Oreads deals 1 damage to any target.

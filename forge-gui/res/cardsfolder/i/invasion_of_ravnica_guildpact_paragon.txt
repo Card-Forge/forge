@@ -1,0 +1,18 @@
+Name:Invasion of Ravnica
+ManaCost:5
+Types:Battle Siege
+Defense:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls that isn't exactly two colors.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl+!numColorsEQ2 | TgtPrompt$ Select target nonland, permanent an opponent controls that isn't exactly two colors.. | Origin$ Battlefield | Destination$ Exile 
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Ravnica enters the battlefield, exile target nonland permanent an opponent controls that isn't exactly two colors.
+
+ALTERNATE
+
+Name:Guildpact Paragon
+ManaCost:no cost
+Types:Artifact Creature Construct
+PT:5/5
+T:Mode$ SpellCast | ValidCard$ Card.numColorsEQ2 | ValidActivatingPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell that's exactly two colors, look at the top six cards of your library. You may reveal a card that's exactly two colors from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | ChangeValid$ Card.numColorsEQ2 | Optional$ True | DestinationZone$ Hand | RestRandomOrder$ True
+Oracle:Whenever you cast a spell that's exactly two colors, look at the top six cards of your library. You may reveal a card that's exactly two colors from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

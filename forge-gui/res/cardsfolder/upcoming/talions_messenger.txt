@@ -1,0 +1,14 @@
+Name:Talion's Messenger
+ManaCost:2 U
+Types:Creature Faerie Noble
+PT:1/3
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Faerie.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you attack with one or more Faeries, draw a card, then discard a card. When you discard a card this way, put a +1/+1 counter on target Faerie you control.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard 
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigPutCounter | SubAbility$ DBCleanup | TriggerDescription$ When you discard a card this way, put a +1/+1 counter on target Faerie you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Faerie.YouCtrl | TgtPrompt$ Select target Faerie you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Faerie
+DeckHas:Ability$Discard|Counters
+Oracle:Flying\nWhenever you attack with one or more Faeries, draw a card, then discard a card. When you discard a card this way, put a +1/+1 counter on target Faerie you control.

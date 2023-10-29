@@ -1,0 +1,74 @@
+walkingbrain.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 103, 16
+  size: 16, 16  
+Idle 
+  xy: 0, 12
+  size: 32, 20    
+Idle 
+  xy: 32, 12
+  size: 32, 20    
+Idle 
+  xy: 64, 12
+  size: 32, 20    
+Idle 
+  xy: 96, 12
+  size: 32, 20  
+Walk 
+  xy: 0, 44
+  size: 32, 20   
+Walk 
+  xy: 32, 44
+  size: 32, 20    
+Walk 
+  xy: 64, 44
+  size: 32, 20    
+Walk 
+  xy: 96, 44
+  size: 32, 20      
+Walk 
+  xy: 128, 44
+  size: 32, 20     
+Walk 
+  xy: 160, 44
+  size: 32, 20     
+Walk 
+  xy: 192, 44
+  size: 32, 20    
+Walk 
+  xy: 224, 44
+  size: 32, 20    
+Attack
+  xy: 0, 72
+  size: 32, 24
+Attack
+  xy: 32, 72
+  size: 32, 24
+Attack
+  xy: 64, 72
+  size: 32, 24
+Attack
+  xy: 96, 72
+  size: 32, 24
+Attack
+  xy: 128, 72
+  size: 32, 24
+Attack
+  xy: 160, 72
+  size: 32, 24
+Death
+  xy: 0, 168
+  size: 32, 24
+Death
+  xy: 32, 168
+  size: 32, 24
+Death
+  xy: 64, 168
+  size: 32, 24
+Death
+  xy: 96, 168
+  size: 32, 24

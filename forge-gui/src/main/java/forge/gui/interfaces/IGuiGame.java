@@ -21,6 +21,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
@@ -132,13 +133,13 @@ public interface IGuiGame {
 
     int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
 
-    String showInputDialog(String message, String title);
+    String showInputDialog(String message, String title, boolean isNumeric);
 
     String showInputDialog(String message, String title, FSkinProp icon);
 
     String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
 
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric);
 
     boolean confirm(CardView c, String question);
 
@@ -236,7 +237,7 @@ public interface IGuiGame {
 
     void setgamePause(boolean pause);
 
-    void setGameSpeed(boolean gameSpeed);
+    void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();
 

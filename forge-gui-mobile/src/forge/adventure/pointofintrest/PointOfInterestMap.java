@@ -25,7 +25,7 @@ public class PointOfInterestMap implements SaveFileContent {
         mapObjects = new List[numberOfChunksX][numberOfChunksY];
         for (int x = 0; x < numberOfChunksX; x++) {
             for (int y = 0; y < numberOfChunksY; y++) {
-                mapObjects[x][y] = new ArrayList();
+                mapObjects[x][y] = new ArrayList<>();
             }
         }
     }
@@ -53,9 +53,23 @@ public class PointOfInterestMap implements SaveFileContent {
         }
         return null;
     }
+
+    public List<PointOfInterest> getAllPointOfInterest() {
+        List<PointOfInterest> allPOI = new ArrayList<>();
+
+        for(List<PointOfInterest>[] poiList1:mapObjects)
+        {
+            for(List<PointOfInterest> poiList:poiList1)
+            {
+                allPOI.addAll(poiList);
+            }
+        }
+        return allPOI;
+    }
+
     public List<PointOfInterest> pointsOfInterest(int chunkX, int chunkY) {
         if (chunkX >= numberOfChunksX || chunkY >= numberOfChunksY || chunkX < 0 || chunkY < 0)
-            return new ArrayList<PointOfInterest>();
+            return new ArrayList<>();
         return mapObjects[chunkX][chunkY];
     }
 
@@ -70,7 +84,7 @@ public class PointOfInterestMap implements SaveFileContent {
         mapObjects = new List[numberOfChunksX][numberOfChunksY];
         for (int x = 0; x < numberOfChunksX; x++) {
             for (int y = 0; y < numberOfChunksY; y++) {
-                mapObjects[x][y] = new ArrayList();
+                mapObjects[x][y] = new ArrayList<>();
                 int arraySize=data.readInt("mapObjects["+x +"]["+y+"]");
                 for(int i=0;i<arraySize;i++)
                 {

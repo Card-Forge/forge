@@ -1,0 +1,128 @@
+arcane_golem.png
+size: 1344,576
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 226, 32
+  size: 32, 32      
+Idle 
+  xy: 0, 0
+  size: 96, 96      
+Idle 
+  xy: 96, 0
+  size: 96, 96   
+Idle 
+  xy: 192, 0
+  size: 96, 96   
+Idle 
+  xy: 288, 0
+  size: 96, 96     
+Idle 
+  xy: 384, 0
+  size: 96, 96   
+Idle 
+  xy: 480, 0
+  size: 96, 96   
+Walk 
+  xy: 0, 96
+  size: 96, 96      
+Walk 
+  xy: 96, 96
+  size: 96, 96   
+Walk 
+  xy: 192, 96
+  size: 96, 96   
+Walk 
+  xy: 288, 96
+  size: 96, 96     
+Walk 
+  xy: 384, 96
+  size: 96, 96   
+Walk 
+  xy: 480, 96
+  size: 96, 96    
+Walk 
+  xy: 576, 96
+  size: 96, 96   
+Walk 
+  xy: 672, 96
+  size: 96, 96   
+Attack 
+  xy: 0, 192
+  size: 96, 96      
+Attack 
+  xy: 96, 192
+  size: 96, 96   
+Attack 
+  xy: 192, 192
+  size: 96, 96   
+Attack 
+  xy: 288, 192
+  size: 96, 96     
+Attack 
+  xy: 384, 192
+  size: 96, 96   
+Attack 
+  xy: 480, 192
+  size: 96, 96    
+Attack 
+  xy: 576, 192
+  size: 96, 96   
+Attack 
+  xy: 672, 192
+  size: 96, 96   
+Attack 
+  xy: 768, 192
+  size: 96, 96   
+Attack 
+  xy: 864, 192
+  size: 96, 96    
+Attack 
+  xy: 960, 192
+  size: 96, 96   
+Attack 
+  xy: 1056, 192
+  size: 96, 96   
+Death 
+  xy: 0, 480
+  size: 96, 96      
+Death 
+  xy: 96, 480
+  size: 96, 96   
+Death 
+  xy: 192, 480
+  size: 96, 96   
+Death 
+  xy: 288, 480
+  size: 96, 96     
+Death 
+  xy: 384, 480
+  size: 96, 96   
+Death 
+  xy: 480, 480
+  size: 96, 96    
+Death 
+  xy: 576, 480
+  size: 96, 96   
+Death 
+  xy: 672, 480
+  size: 96, 96   
+Death 
+  xy: 768, 480
+  size: 96, 96   
+Death 
+  xy: 864, 480
+  size: 96, 96    
+Death 
+  xy: 960, 480
+  size: 96, 96   
+Death 
+  xy: 1056, 480
+  size: 96, 96   
+Death 
+  xy: 1152, 480
+  size: 96, 96   
+Death 
+  xy: 1248, 480
+  size: 96, 96   

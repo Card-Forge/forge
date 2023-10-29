@@ -1,0 +1,10 @@
+Name:Jirina, Dauntless General
+ManaCost:W B
+Types:Legendary Creature Human Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from target player's graveyard.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
+A:AB$ PumpAll | Cost$ Sac<1/NICKNAME> | ValidCards$ Human.YouCtrl | KW$ Hexproof & Indestructible | SpellDescription$ Humans you control gain hexproof and indestructible until end of turn.
+DeckHas:Ability$Graveyard|Sacrifice
+DeckHints:Type$Human
+Oracle:When Jirina, Dauntless General enters the battlefield, exile target player's graveyard.\nSacrifice Jirina: Humans you control gain hexproof and indestructible until end of turn.

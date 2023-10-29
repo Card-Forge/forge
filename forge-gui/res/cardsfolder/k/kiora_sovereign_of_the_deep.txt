@@ -1,0 +1,14 @@
+Name:Kiora, Sovereign of the Deep
+ManaCost:3 G U
+Types:Legendary Creature Merfolk Noble
+PT:4/5
+K:Vigilance
+K:Ward:3
+T:Mode$ SpellCast | ValidCard$ Card.Kraken+wasCastFromYourHandByYou,Card.Leviathan+wasCastFromYourHandByYou,Card.Octopus+wasCastFromYourHandByYou,Card.Serpent+wasCastFromYourHandByYou | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever you cast a Kraken, Leviathan, Octopus, or Serpent spell from your hand, look at the top X cards of your library, where X is that spell's mana value. You may cast a spell with mana value less than X from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ PeekAndReveal | Defined$ You | PeekAmount$ X | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBPlay 
+SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.IsRemembered | ValidSA$ Spell.cmcLTX | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckNeeds:Type$Kraken|Leviathan|Octopus|Serpent
+Oracle:Vigilance, ward {3}\nWhenever you cast a Kraken, Leviathan, Octopus, or Serpent spell from your hand, look at the top X cards of your library, where X is that spell's mana value. You may cast a spell with mana value less than X from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.

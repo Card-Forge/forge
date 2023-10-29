@@ -1,0 +1,12 @@
+Name:Karn, Legacy Reforged
+ManaCost:5
+Types:Legendary Artifact Creature Golem
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the greatest mana value among artifacts you control.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ArtifactMana | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:ArtifactMana:DB$ Mana | Produced$ C | Amount$ Y | PersistentMana$ True | RestrictValid$ CantCastNonArtifactSpells
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+SVar:Y:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+DeckNeeds:Type$Artifact
+Oracle:Karn, Legacy Reforged's power and toughness are each equal to the greatest mana value among artifacts you control.\nAt the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end.

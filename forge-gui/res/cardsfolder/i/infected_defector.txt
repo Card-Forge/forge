@@ -1,0 +1,8 @@
+Name:Infected Defector
+ManaCost:4 W
+Types:Creature Phyrexian Knight
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME dies, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 3
+DeckHas:Ability$Token|Counters|Graveyard & Type$Incubator|Artifact
+Oracle:When Infected Defector dies, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

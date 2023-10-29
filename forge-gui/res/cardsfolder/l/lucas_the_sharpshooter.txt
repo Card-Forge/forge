@@ -1,4 +1,5 @@
 Name:Lucas, the Sharpshooter
+AltName:Bjorna, Nightfall Alchemist
 ManaCost:U R
 Types:Legendary Creature Human
 PT:1/3

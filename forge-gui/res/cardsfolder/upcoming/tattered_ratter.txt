@@ -1,0 +1,8 @@
+Name:Tattered Ratter
+ManaCost:1 R
+Types:Creature Human Peasant
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Rat.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Rat you control becomes blocked, it gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 2
+DeckHints:Type$Rat
+Oracle:Whenever a Rat you control becomes blocked, it gets +2/+0 until end of turn.

@@ -1,0 +1,10 @@
+Name:There and Back Again
+ManaCost:3 R R
+Types:Enchantment Saga
+K:Saga:3:DBCantBlock,DBSearch,DBToken
+SVar:DBCantBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | KW$ HIDDEN CARDNAME can't block. | SubAbility$ TrigTempt | IsCurse$ True | Duration$ UntilLoseControlOfHost | SpellDescription$ Up to one target creature can't block for as long as you control CARDNAME. The Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Mountain | SpellDescription$ Search your library for a Mountain card, put it onto the battlefield, then shuffle.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ smaug | SpellDescription$ Create Smaug, a legendary 6/6 red Dragon creature token with flying, haste, and "When this creature dies, create fourteen Treasure tokens."
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Up to one target creature can't block for as long as you control There and Back Again. The Ring tempts you.\nII — Search your library for a Mountain card, put it onto the battlefield, then shuffle.\nIII — Create Smaug, a legendary 6/6 red Dragon creature token with flying, haste, and "When this creature dies, create fourteen Treasure tokens."

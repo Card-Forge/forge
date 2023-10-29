@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="51">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B3Fo3gUj+JRPIpH8SgexVTDAA08eeE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYIsEBNMbbJeAYHoDeQEGBkUB6ph1EGjOISJxOz9DgqoAQwKx6g9TyY3U9O9A2dvIz8DQRCRWAdqpLEC8+mZ+/H5QoBHGFzZ7gXL7iMRtQPe38hOvfv9ouoKD0fxLH3tHwxk74FVH2Ati0wvA6t6BqoMpAQDikGk6
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVlkEOwiAQRcfGbd2ZJl1W6gWser1qPIPRE3iNqj0BJxICpGQCDFUb8SU/pQnDT38YaLMAaP5Ihk/X2QtxoRUDqJl6usT1PAO36nyqdd3O4bvVa93FnJ6pp0uSQwGt8T0VQ11Ikk3Ad0pCvjKXikGLs6qsMcaXrV1L+cpMOpQRfsdQGaec83w9zPONfVC1KX4v3keuXsZ49lWLa0K+s5IWJiPmZyXtOyUhX98Zafc0JnQ+xubs6r3niP7tHHUPps7VFHOmOFp3guG2fN/3mgOcI4WJrbvk37nzDb/+BxmjF7xtk1U=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="38" template="../../obj/enemy.tx" x="232" y="58">
+   <properties>
+    <property name="enemy" value="Golem Sentinel"/>
+   </properties>
+  </object>
+  <object id="39" template="../../obj/enemy.tx" x="192" y="144">
+   <properties>
+    <property name="enemy" value="Golem Sentinel"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="r11-12-15-18-21, r8-19-20-43-44"/>
+   </properties>
+  </object>
+  <object id="40" template="../../obj/enemy.tx" x="272" y="144">
+   <properties>
+    <property name="enemy" value="Golem Sentinel"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="r8-19-20-43-44, r11-12-15-18-21"/>
+   </properties>
+  </object>
+  <object id="41" template="../../obj/enemy.tx" x="424" y="144">
+   <properties>
+    <property name="enemy" value="Spirit"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="r10-14-17-43-44,w10"/>
+   </properties>
+  </object>
+  <object id="42" template="../../obj/enemy.tx" x="40" y="144">
+   <properties>
+    <property name="enemy" value="Spirit"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="r9-11-12-13-16,w10"/>
+   </properties>
+  </object>
+  <object id="45" template="../../obj/enemy.tx" x="232" y="184">
+   <properties>
+    <property name="enemy" value="Black Golem"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="r8-15,w5,5,w5,r12-19-20-21,w5"/>
+   </properties>
+  </object>
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="7" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_2.tmx"/>
+    <property name="teleportObjectId" value="24"/>
+   </properties>
+  </object>
+  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_4.tmx"/>
+    <property name="teleportObjectId" value="40"/>
+   </properties>
+  </object>
+  <object id="26" template="../../obj/dialog.tx" x="144" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Shandalaar’s Most Burnable Cities'. Well, this one sounds like light reading...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1},
+      &quot;action&quot;: [{
+         &quot;grantRewards&quot;: [{
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;count&quot;: 1,
+            &quot;cardName&quot;: &quot;Fireball&quot;
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="27" template="../../obj/dialog.tx" x="64" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of. None of them seem to have done anything significant.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="28" template="../../obj/dialog.tx" x="128" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Diaries of soldiers, all from a similar time period but from several armies, are found here. Between all of them it seems that one could piece together a comprehensive account of common battles.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="30" template="../../obj/dialog.tx" x="368" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'The Art of the Subtle Counterspell' is very useful reading if you have the time for it.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{
+         &quot;deleteMapObject&quot;:-1
+         },{
+         &quot;grantRewards&quot;: [{
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;count&quot;: 1,
+            &quot;cardName&quot;: &quot;Force Spike&quot;
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="31" template="../../obj/dialog.tx" x="400" y="199">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Logs of caravan manifests are collected here. The contents all appear to be mundane, but someone has circled several items and scribbled notes in handwriting so messy that it is basically illegible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="32" template="../../obj/dialog.tx" x="352" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Being a Report on an Urgent Threat to All Civilized Nations' is a rather wordy title for a scouting report, but that is what you find here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;The report, relatively recent by the standards of this library, describes a Sliver hive which dwarfs the largest cities of Shandalar. It includes a detailed map to the location.&quot;,
+      &quot;options&quot;: [
+         {&quot;name&quot;: &quot;(Put down the report)&quot;},
+         {
+            &quot;name&quot;: &quot;Perhaps it's still there? Let's make a note of the location.&quot;, 
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}, {&quot;issueQuest&quot;:34}],
+            &quot;text&quot;: &quot;You mark of the location of the Skep on your own map in case you decide to investigate later.&quot;,
+            &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]
+         }
+      ]
+   }]
+}   
+]</property>
+   </properties>
+  </object>
+  <object id="34" template="../../obj/dialog.tx" x="352" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of. None of them seem to have done anything significant.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="35" template="../../obj/dialog.tx" x="80" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find a collection of copied plans for various goblin inventions. The transcriber added notes alongside each rating each on a scale between 'Will definitely explode' to 'Won't work well enough to explode'.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="36" template="../../obj/dialog.tx" x="400" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'How to Train your Badger', by Greensleeves... What's more ridiculous, the subject matter, or the pen name?&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/enemy.tx" x="80" y="256">
+   <properties>
+    <property name="enemy" value="Construct"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="r16-22,r11-12,r18-21,5,r8-15, r18-21, r11-12,r9-13"/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/enemy.tx" x="384" y="256">
+   <properties>
+    <property name="enemy" value="Construct"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="23,10, r5-19-20"/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/enemy.tx" x="512" y="-32" visible="0">
+   <properties>
+    <property name="deckOverride" value="../common/decks/standard/mimic_multicolor.dck"/>
+    <property name="defeatDialog">[
+  {
+    &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}, {&quot;deleteMapObject&quot;: 50}]
+  }
+]</property>
+    <property name="displayNameOverride" value="Book Mimic"/>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="37" template="../../obj/dialog.tx" x="400" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Pardic Heat' is, of all things to be found here, a romance novel. It tells the tale of a kindling fire between star-crossed mages.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/dialog.tx" x="272" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Common Forms of Mimics' would actually be a relatively useful book to read, if it wasn't trying so hard to eat you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;:49}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
+  <object id="8" template="../../obj/waypoint.tx" name="8" x="232" y="208"/>
+  <object id="9" template="../../obj/waypoint.tx" name="9" x="48" y="208"/>
+  <object id="10" template="../../obj/waypoint.tx" name="10" x="416" y="208"/>
+  <object id="11" template="../../obj/waypoint.tx" name="11" x="48" y="128"/>
+  <object id="12" template="../../obj/waypoint.tx" name="12" x="48" y="160"/>
+  <object id="13" template="../../obj/waypoint.tx" name="13" x="48" y="80"/>
+  <object id="14" template="../../obj/waypoint.tx" name="14" x="416" y="80"/>
+  <object id="15" template="../../obj/waypoint.tx" name="15" x="232" y="80"/>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="48" y="256"/>
+  <object id="17" template="../../obj/waypoint.tx" name="17" x="416" y="256"/>
+  <object id="18" template="../../obj/waypoint.tx" name="18" x="130" y="158"/>
+  <object id="19" template="../../obj/waypoint.tx" name="19" x="334" y="158"/>
+  <object id="20" template="../../obj/waypoint.tx" name="20" x="334" y="128"/>
+  <object id="21" template="../../obj/waypoint.tx" name="21" x="130" y="128"/>
+  <object id="22" template="../../obj/waypoint.tx" name="22" x="128" y="256"/>
+  <object id="23" template="../../obj/waypoint.tx" name="23" x="336" y="256"/>
+  <object id="43" template="../../obj/waypoint.tx" name="43" x="416" y="128"/>
+  <object id="44" template="../../obj/waypoint.tx" name="44" x="416" y="160"/>
+ </objectgroup>
+</map>

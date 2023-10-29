@@ -1,0 +1,10 @@
+Name:Saiba Cryptomancer
+ManaCost:1 U
+Types:Creature Moonfolk Ninja
+PT:0/1
+K:Flash
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Pump | KW$ Hexproof
+K:Hexproof
+DeckHas:Ability$Counters
+Oracle:Flash\nBackup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nHexproof

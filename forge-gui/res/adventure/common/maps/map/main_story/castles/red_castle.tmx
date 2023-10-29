@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{&quot;startBattleWithCardInCommandZone&quot;: [ &quot;Lathliss' Presence&quot; ]
+}</property>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgDAMQFG9gHRxE3Hw4J7JE0lx0NHJGPselI79U2i6DgDgO/YhugAgn6mc91xiOwDgqfrv38brZNwD7v1ZrX10AbQreu5Fvw+t+sP+viRur/TH0h+nzp/ab/7EeaP/AL1iC1I=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmNsNwyAMRbNA+t09kiaT9jVJ52izUIsaVGphfEN4RIqR7lcs+4gAvtAfmqZXqVQqlUqlyqjxoxcoM9DYoRD/aeZKPTrl3wX/vW2aC6Br++U6g/G3tvxeRv5TqXndCz96fk4z/xOM1/NT+ZU/374cCvEj54Nvr0tcXSF+JL/vX8Xyo/2V68+p+O9zTo7H9neaP3bdcnk4f+KycV7D5JR4uLruuh1IDP0WMw8hNpvf9EypX05MXZenIzH0m48fqWtj6P5dsyc5/sfxJ4Q/pqbyb4N/6Z0kF3/uu46vZkr+NR7C17fNkLzD0vWA8I+kPnJPCNVHaqbkR1iU//8bPQO49wfOh9Tm5/ItqbeGP+TfQnPG9X3p/k59iMvmO88tW+jslPxbLu8vza3Ehvo335ylHFLtHP6txkjpf2qMWP8Tcz+MvV/Wfuvd6vun8qfVG7JpOnI=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../obj/gold.tx" x="432.5" y="463">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 180,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../obj/gold.tx" x="304.5" y="466">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 180,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../obj/enemy.tx" x="223.57" y="537.245">
+   <properties>
+    <property name="enemy" value="Master Red Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="76,75,76,84,81,82,83,82,79,80,78,77"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../obj/gate.tx" x="368" y="639.5" width="17" height="16">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You enter the gate.&quot;,
+		&quot;loctext&quot;: &quot;&quot;,
+		&quot;action&quot;: [
+			{ &quot;advanceMapFlag&quot;: &quot;intro&quot; }
+		],
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Lathliss, I've done as you asked ! It's time to end this !&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 4
+							}
+						}
+					],
+					&quot;text&quot;: &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;You knock on the door&quot;,
+					&quot;condition&quot;: [ { &quot;checkMapFlag&quot;: &quot;intro&quot; } ],
+					&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE !&quot;,
+					&quot;loctext&quot;: &quot;&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../obj/entry_down.tx" x="354" y="542.5" width="44" height="23.5">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/castles/red_castle_f1.tmx"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../obj/enemy.tx" x="81.5" y="606">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Barbarian"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../obj/enemy.tx" x="649.5" y="599">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Goblin King"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../obj/enemy.tx" x="660" y="409.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Pyromancer"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../obj/enemy.tx" x="368.5" y="228.091">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Fire Giant"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../obj/enemy.tx" x="78.5" y="405.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Minotaur Warcaller"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../obj/enemy.tx" x="520.254" y="498.533">
+   <properties>
+    <property name="enemy" value="Master Red Wizard"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="83,82,79,80,78,77,76,75,84,81,82"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../obj/enemy.tx" x="401.5" y="655">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;Welcome {var=player_name}, dragon queen Lathliss has been waiting eagerly for this moment.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Is that so ? I guess you woudn't mind opening that gate in front of me ?&quot;,
+        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am only an ordinary dragon, a mere servant of the mighty Lathliss, queen of dragons.&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;What do I need to do to get passed though this gate ?&quot;,
+            &quot;text&quot;: &quot;To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I defeat your challengers.&quot;,
+                &quot;text&quot;: &quot;Leave&quot;
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Dragon"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../obj/waypoint.tx" x="54.5" y="495"/>
+  <object id="76" template="../../../obj/waypoint.tx" x="223.5" y="498.5"/>
+  <object id="77" template="../../../obj/waypoint.tx" x="224.5" y="701"/>
+  <object id="78" template="../../../obj/waypoint.tx" x="52.5" y="703"/>
+  <object id="79" template="../../../obj/waypoint.tx" x="511" y="703"/>
+  <object id="80" template="../../../obj/waypoint.tx" x="687" y="703.5"/>
+  <object id="81" template="../../../obj/waypoint.tx" x="510.5" y="348.5"/>
+  <object id="82" template="../../../obj/waypoint.tx" x="513.5" y="497"/>
+  <object id="83" template="../../../obj/waypoint.tx" x="685" y="497"/>
+  <object id="84" template="../../../obj/waypoint.tx" x="228.5" y="352.5"/>
+ </objectgroup>
+</map>

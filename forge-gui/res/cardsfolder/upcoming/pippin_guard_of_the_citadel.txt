@@ -1,0 +1,8 @@
+Name:Pippin, Guard of the Citadel
+ManaCost:W U
+Types:Legendary Creature Halfling Soldier
+PT:2/2
+K:Vigilance
+K:Ward:1
+A:AB$ Protection | Cost$ T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Gains$ Choice | Choices$ artifacts,enchantments,creatures,battles,instants,sorceries,planeswalkers,lands | SpellDescription$ Another target creature you control gains protection from the card type of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that type.)
+Oracle:Vigilance, ward {1}\n{T}: Another target creature you control gains protection from the card type of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that type.)

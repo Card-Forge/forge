@@ -27,6 +27,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -68,8 +69,6 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     private boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {
         final Game game = ai.getGame();
 
-        final int amount = Integer.valueOf(sa.getParam("CounterNum"));
-
         // remove counter with Time might use Exile Zone too
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         // need to targetable
@@ -81,6 +80,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
+
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("CounterNum", "1"), sa);
 
         if (sa.hasParam("CounterType")) {
             // currently only Jhoira's Timebug

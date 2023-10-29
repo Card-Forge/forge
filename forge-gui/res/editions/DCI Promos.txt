@@ -1,0 +1,87 @@
+[metadata]
+Code=PDCI
+Date=2006-01-01
+Name=DCI Promos
+Type=Promo
+ScryfallCode=PDCI
+
+[cards]
+1 R Wood Elves @Rebecca Guay
+2 R Icatian Javelineers @Michael Phillippi
+3 R Fiery Temper @Ben Wootten
+4 R Boomerang @Rebecca Guay
+5 R Calciderm @Dave Kendall
+6 R Reckless Wurm @Greg Staples
+7 R Yixlid Jailer @Alex Horley-Orlandelli
+8 R Zoetic Cavern @Martina Pilcerova
+9 R Llanowar Elves @Anson Maddocks
+10 R Mogg Fanatic @Nils Hamm
+11 R Mind Stone @Martina Pilcerova
+12 R Dauntless Dourbark @Jeremy Jarvis
+13 R Lava Axe @Ray Lago
+14 R Cenn's Tactician @Steven Belledin
+15 R Oona's Blackguard @Darrell Riche
+16 R Gravedigger @Tony Szczudlo
+17 R Boggart Ram-Gang @Lucio Parrillo
+18 R Wilt-Leaf Cavaliers @Steven Belledin
+19 R Duergar Hedge-Mage @Thomas M. Baxa
+20 R Selkie Hedge-Mage @Brandon Kitkouski
+21 R Sprouting Thrinax @Jaime Jones
+22 R Woolly Thoctar @Steve Argyle
+24 R Path to Exile @Rebecca Guay
+25 R Hellspark Elemental @Nils Hamm
+26 R Marisi's Twinclaws @Dominick Domingo
+27 R Slave of Bolas @Karl Kopinski
+28 R Mycoid Shepherd @Jarreau Wimberly
+29 R Naya Sojourners @Michael Bruinsma
+30 R Mind Control @Keith Garletts
+31 R Rise from the Grave @Thomas M. Baxa
+32 R Kor Duelist @Kekai Kotaki
+33 R Vampire Nighthawk @Karl Kopinski
+34 R Nissa's Chosen @Sam Wood
+35 R Emeria Angel @Steve Argyle
+36 R Kor Firewalker @Alex Horley-Orlandelli
+37 R Leatherback Baloth @Chris Rahn
+38 R Hada Freeblade @Cyril Van Der Haegen
+39 R Kalastria Highborn @D. Alexander Gregory
+40 R Syphon Mind @Jeff Easley
+41 R Tazeem @Vincent Proce
+42 R Celestine Reef @Donato Giancola
+43 R Horizon Boughs @Jean-Sébastien Rossbach
+44 R Mirrored Depths @Chippy
+45 R Tember City @Ben Thompson
+46 R Pathrazer of Ulamog @Goran Josic
+47 R Curse of Wizardry @Karl Kopinski
+48 R Staggershock @Raymond Swanland
+49 R Deathless Angel @Johann Bodin
+50 R Fling @Daren Bader
+51 R Sylvan Ranger @Ciruelo
+52 C Liliana's Specter @Jaime Jones
+53 R Mitotic Slime @Ron Spencer
+54 R Plots That Span Centuries @Jesper Ejsing
+55 R Perhaps You've Met My Cohort @Howard Lyon
+56 R Your Inescapable Doom @Chuck Lukacs
+57 R Drench the Soil in Their Blood @Val Mayerik
+58 R Imprison This Insolent Wretch @Jim Pavelec
+59 R Plague Stinger @Tomasz Jedruszek
+60 R Golem's Heart @Alan Pollack
+61 U Memnite @rk post
+62 R Tempered Steel @jD
+63 R Skinrender @Adrian Smith
+64 R Master's Call @Erica Yang
+65 R Plague Myr @Ryan Pancoast
+66 R Signal Pest @Chippy
+67 U Treasure Mage @Greg Staples
+68 R Black Sun's Zenith @James Paick
+69 R Fling @Daren Bader
+70 R Sylvan Ranger @Ciruelo
+71 R Vault Skirge @Lars Grant-West
+72 R Maul Splicer @Erica Yang
+73 R Shrine of Burning Rage @Nils Hamm
+74 U Priest of Urabrask @Clint Cearley
+75 R Myr Superion @Greg Staples
+76 R Tormented Soul @John Stanko
+77 R Auramancer @Wayne Reynolds
+78 R Circle of Flame @James Paick
+79 U Stormblood Berserker @Greg Staples
+80 R Dungrove Elder @Scott Chou

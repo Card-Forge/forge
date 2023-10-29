@@ -27,7 +27,7 @@ Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
 Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate.zip
 Dear Azami | https://downloads.cardforge.org/decks/dearazami-standard.zip
 Deconstructing Famous | https://downloads.cardforge.org/decks/dfd.zip
-EDHREC Columms | https://downloads.cardforge.org/decks/edhrec-constructed.zip
+EDHREC Columns | https://downloads.cardforge.org/decks/edhrec-constructed.zip
 Feature Article | https://downloads.cardforge.org/decks/feature.zip
 Fish 5-0 | https://downloads.cardforge.org/decks/fish50.zip
 From the Lab | https://downloads.cardforge.org/decks/fromthelab.zip

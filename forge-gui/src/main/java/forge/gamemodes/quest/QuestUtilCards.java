@@ -425,10 +425,7 @@ public final class QuestUtilCards {
             return;
         }
         questController.getMyDecks().add(fromDeck);
-        addAllCards(fromDeck.getMain().toFlatList());
-        if (fromDeck.has(DeckSection.Sideboard)) {
-            addAllCards(fromDeck.get(DeckSection.Sideboard).toFlatList());
-        }
+        addAllCards(fromDeck.getAllCardsInASinglePool().toFlatList());
     }
 
     /**

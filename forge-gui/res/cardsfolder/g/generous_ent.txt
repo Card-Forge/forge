@@ -1,0 +1,11 @@
+Name:Generous Ent
+ManaCost:5 G
+Types:Creature Treefolk
+PT:5/7
+K:Reach
+K:TypeCycling:Forest:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$LifeGain|Token|Food|Discard
+DeckHints:Ability$Food
+Oracle:Reach\nWhen Generous Ent enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nForestcycling {1} ({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

@@ -59,6 +59,7 @@ public abstract class GameState {
         private String persistentMana = "";
         private int landsPlayed = 0;
         private int landsPlayedLastTurn = 0;
+        private int numRingTemptedYou = 0;
         private String precast = null;
         private String putOnStack = null;
         private final Map<ZoneType, String> cardTexts = new EnumMap<>(ZoneType.class);
@@ -78,8 +79,7 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
     private final Map<Card, List<String>> cardToMergedCards = new HashMap<>();
-    private final Map<Card, String> cardToNamedCard = new HashMap<>();
-    private final Map<Card, String> cardToNamedCard2 = new HashMap<>();
+    private final Map<Card, List<String>> cardToNamedCard = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -107,7 +107,7 @@ public abstract class GameState {
     public GameState() {
     }
 
-    public abstract IPaperCard getPaperCard(String cardName);
+    public abstract IPaperCard getPaperCard(String cardName, String setCode, int artID);
 
     @Override
     public String toString() {
@@ -135,6 +135,7 @@ public abstract class GameState {
             sb.append(TextUtil.concatNoSpace(prefix + "life=", String.valueOf(p.life), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayed=", String.valueOf(p.landsPlayed), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayedlastturn=", String.valueOf(p.landsPlayedLastTurn), "\n"));
+            sb.append(TextUtil.concatNoSpace(prefix + "numringtemptedyou=", String.valueOf(p.numRingTemptedYou), "\n"));
             if (!p.counters.isEmpty()) {
                 sb.append(TextUtil.concatNoSpace(prefix + "counters=", p.counters, "\n"));
             }
@@ -164,6 +165,7 @@ public abstract class GameState {
             p.landsPlayedLastTurn = player.getLandsPlayedLastTurn();
             p.counters = countersToString(player.getCounters());
             p.manaPool = processManaPool(player.getManaPool());
+            p.numRingTemptedYou = player.getNumRingTemptedYou();
             playerStates.add(p);
         }
 
@@ -258,13 +260,19 @@ public abstract class GameState {
 
             if (c.hasMergedCard()) {
                 // we have to go by the current top card name here
-                newText.append(c.getTopMergedCard().getPaperCard().getName());
+                newText.append(c.getTopMergedCard().getPaperCard().getName()).append("|Set:")
+                        .append(c.getTopMergedCard().getPaperCard().getEdition()).append("|Art:")
+                        .append(c.getTopMergedCard().getPaperCard().getArtIndex());
             } else {
-                newText.append(c.getPaperCard().getName());
+                newText.append(c.getPaperCard().getName()).append("|Set:").append(c.getPaperCard().getEdition())
+                        .append("|Art:").append(c.getPaperCard().getArtIndex());
             }
         }
         if (c.isCommander()) {
             newText.append("|IsCommander");
+        }
+        if (c.isRingBearer()) {
+            newText.append("|IsRingBearer");
         }
 
         if (cardsReferencedByID.contains(c)) {
@@ -303,6 +311,10 @@ public abstract class GameState {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
+                if (c.getMeldedWith() != null) {
+                    newText.append(":");
+                    newText.append(c.getMeldedWith().getName());
+                }
             } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
                 newText.append("|Modal");
             }
@@ -329,9 +341,6 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
-            }
-            if (!c.getNamedCard2().isEmpty()) {
-                newText.append("|NamedCard2:").append(c.getNamedCard2());
             }
 
             List<String> chosenCardIds = Lists.newArrayList();
@@ -511,6 +520,8 @@ public abstract class GameState {
             getPlayerState(categoryName).landsPlayed = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("landsplayedlastturn")) {
             getPlayerState(categoryName).landsPlayedLastTurn = Integer.parseInt(categoryValue);
+        } else if (categoryName.endsWith("numringtemptedyou")) {
+            getPlayerState(categoryName).numRingTemptedYou = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("play") || categoryName.endsWith("battlefield")) {
             getPlayerState(categoryName).cardTexts.put(ZoneType.Battlefield, categoryValue);
         } else if (categoryName.endsWith("hand")) {
@@ -731,9 +742,11 @@ public abstract class GameState {
             String id = rememberedEnts.getValue();
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
-            exiledWith.addExiledCard(c);
-            c.setExiledWith(exiledWith);
-            c.setExiledBy(exiledWith.getController());
+            if (exiledWith != null) {
+                exiledWith.addExiledCard(c);
+                c.setExiledWith(exiledWith);
+                c.setExiledBy(exiledWith.getController());
+            }
         }
     }
 
@@ -995,15 +1008,11 @@ public abstract class GameState {
         }
 
         // Named card
-        for (Entry<Card, String> entry : cardToNamedCard.entrySet()) {
+        for (Entry<Card, List<String>> entry : cardToNamedCard.entrySet()) {
             Card c = entry.getKey();
-            c.setNamedCard(entry.getValue());
-        }
-
-        // Named card 2
-        for (Entry<Card,String> entry : cardToNamedCard2.entrySet()) {
-            Card c = entry.getKey();
-            c.setNamedCard2(entry.getValue());
+            for (String s : entry.getValue()) {
+                c.addNamedCard(s);
+            }
         }
 
         // Chosen cards
@@ -1101,6 +1110,7 @@ public abstract class GameState {
         }
 
         p.setCommanders(Lists.newArrayList());
+        p.clearTheRing();
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<>(ZoneType.class);
         for (Entry<ZoneType, String> kv : state.cardTexts.entrySet()) {
@@ -1111,6 +1121,7 @@ public abstract class GameState {
         if (state.life >= 0) p.setLife(state.life, null);
         p.setLandsPlayedThisTurn(state.landsPlayed);
         p.setLandsPlayedLastTurn(state.landsPlayedLastTurn);
+        p.setNumRingTemptedYou(state.numRingTemptedYou);
 
         p.clearPaidForSA();
 
@@ -1166,6 +1177,14 @@ public abstract class GameState {
         if (!state.counters.isEmpty()) {
             applyCountersToGameEntity(p, state.counters);
         }
+        if (state.numRingTemptedYou > 0) {
+            //setup all levels
+            for (int i = 1; i <= state.numRingTemptedYou; i++) {
+                if (i > 4)
+                    break;
+                p.setRingLevel(i);
+            }
+        }
     }
 
     /**
@@ -1192,6 +1211,18 @@ public abstract class GameState {
                 }
             }
 
+            int artID = -1;
+            for (final String info : cardinfo) {
+                if (info.startsWith("Art:")) {
+                    try {
+                        artID = Integer.parseInt(info.substring(info.indexOf(':') + 1));
+                    } catch (Exception e) {
+                        break;
+                    }
+                    break;
+                }
+            }
+
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
@@ -1206,9 +1237,9 @@ public abstract class GameState {
                     System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
                     continue;
                 }
-                c = Card.fromPaperCard(token, player, player.getGame());
+                c = CardFactory.getCard(token, player, player.getGame());
             } else {
-                PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode, artID);
                 if (pc == null) {
                     System.err.println("ERROR: Tried to create a non-existent card named " + cardinfo[0] + " (set: " + (setCode == null ? "any" : setCode) + ") when loading game state!");
                     continue;
@@ -1223,7 +1254,7 @@ public abstract class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap(false);
+                    c.tap(false, null, null);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Monstrous")) {
@@ -1246,6 +1277,17 @@ public abstract class GameState {
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
+                    if (info.indexOf(':') > 0) {
+                        String meldCardName = info.substring(info.indexOf(':') + 1).replace("^", ",");
+                        Card meldTarget;
+                        PaperCard pc = StaticData.instance().getCommonCards().getCard(meldCardName);
+                        if (pc == null) {
+                            System.err.println("ERROR: Tried to create a non-existent card named " + meldCardName + " (as a MeldedWith card) when loading game state!");
+                            continue;
+                        }
+                        meldTarget = Card.fromPaperCard(pc, c.getOwner());
+                        c.setMeldedWith(meldTarget);
+                    }
                     c.setState(CardStateName.Meld, true);
                     c.setBackSide(true);
                 } else if (info.startsWith("Modal")) {
@@ -1268,6 +1310,9 @@ public abstract class GameState {
                     List<Card> cmd = Lists.newArrayList(player.getCommanders());
                     cmd.add(c);
                     player.setCommanders(cmd);
+                } else if (info.startsWith("IsRingBearer")) {
+                    c.setRingBearer(true);
+                    player.setRingBearer(c);
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
@@ -1305,9 +1350,8 @@ public abstract class GameState {
                     List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
                     cardToMergedCards.put(c, cardNames);
                 } else if (info.startsWith("NamedCard:")) {
-                    cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
-                } else if (info.startsWith("NamedCard2:")) {
-                    cardToNamedCard2.put(c, info.substring(info.indexOf(':') + 1));
+                    List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
+                    cardToNamedCard.put(c, cardNames);
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {

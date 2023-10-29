@@ -28,10 +28,9 @@ public class CountersProliferateAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final List<Card> cperms = Lists.newArrayList();
-        final List<Player> allies = ai.getYourTeam();
         boolean allyExpOrEnergy = false;
 
-        for (final Player p : allies) {
+        for (final Player p : ai.getYourTeam()) {
         	// player has experience or energy counter
             if (p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) {
                 allyExpOrEnergy = true;
@@ -140,9 +139,16 @@ public class CountersProliferateAi extends SpellAbilityAi {
             if (c.isPlaneswalker()) {
                 if (c.getController().isOpponentOf(ai)) {
                     continue;
-                } else {
-                    return (T)c;
                 }
+                return (T)c;
+            }
+
+            if (c.isBattle()) {
+                if (c.getProtectingPlayer().isOpponentOf(ai)) {
+                    // TODO in multiplayer we might sometimes want to do it anyway?
+                    continue;
+                }
+                return (T)c;
             }
 
             final Card lki = CardUtil.getLKICopy(c);

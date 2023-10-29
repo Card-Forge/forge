@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
+import forge.adventure.stage.GameHUD;
 
 public class AudioMusic implements IAudioMusic {
     private Music music;
@@ -18,6 +19,10 @@ public class AudioMusic implements IAudioMusic {
     public void play(final Runnable onComplete) {
         if (music == null)
             return;
+        if (Forge.isMobileAdventureMode) {
+            if (GameHUD.getInstance().audioIsPlaying())
+                return;
+        }
         music.setOnCompletionListener(new OnCompletionListener() {
             @Override
             public void onCompletion(Music music) {

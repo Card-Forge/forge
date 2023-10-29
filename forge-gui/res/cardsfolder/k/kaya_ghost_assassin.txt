@@ -2,7 +2,7 @@ Name:Kaya, Ghost Assassin
 ManaCost:2 W B
 Types:Legendary Planeswalker Kaya
 Loyalty:5
-A:AB$ Pump | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TargetMax$ 1 | TargetMin$ 0 | Planeswalker$ True | SubAbility$ DBChoose | StackDeSpellDescription$ SpellDescription | SpellDescription$ Exile CARDNAME or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. You lose 2 life.
+A:AB$ Pump | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TargetMax$ 1 | TargetMin$ 0 | Planeswalker$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. You lose 2 life.
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBExileSelf,DBExileTarget | Defined$ You
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile CARDNAME
 SVar:DBExileTarget:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile up to one target creature
@@ -10,9 +10,10 @@ SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Y
 SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Defined$ DelayTriggerRememberedLKI | Destination$ Battlefield
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
-A:AB$ LoseLife | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-A:AB$ Discard | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Each opponent discards a card and you draw a card.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ LoseLife | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ Discard | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Each opponent discards a card and you draw a card.
+SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:All
+DeckHas:Ability$LifeGain
 Oracle:[0]: Exile Kaya, Ghost Assassin or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. You lose 2 life.\n[-1]: Each opponent loses 2 life and you gain 2 life.\n[-2]: Each opponent discards a card and you draw a card.

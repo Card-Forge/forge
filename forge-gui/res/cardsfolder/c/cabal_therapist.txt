@@ -6,6 +6,7 @@ K:Menace
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | Execute$ DBImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your precombat main phase, you may sacrifice a creature. When you do, choose a nonland card name, then target player reveals their hand and discards all cards with that name.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ NameCard | TriggerDescription$ You may sacrifice a creature. When you do, choose a nonland card name, then target player reveals their hand and discards all cards with that name. | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True
 SVar:NameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ DBDiscard | SpellDescription$ Choose a nonland card name. Target player reveals their hand and discards all cards with that name.
-SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.NamedCard
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.NamedCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
 AI:RemoveDeck:All
 Oracle:Menace\nAt the beginning of your precombat main phase, you may sacrifice a creature. When you do, choose a nonland card name, then target player reveals their hand and discards all cards with that name.

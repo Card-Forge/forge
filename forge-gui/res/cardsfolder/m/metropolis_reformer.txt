@@ -1,0 +1,13 @@
+Name:Metropolis Reformer
+ManaCost:2 W
+Types:Creature Angel Cleric
+PT:2/3
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+AI:RemoveDeck:Random
+DeckHas:Ability$LifeGain
+Oracle:Flying, vigilance\nYou have hexproof.\nWhenever Metropolis Reformer is dealt damage, you gain that much life.

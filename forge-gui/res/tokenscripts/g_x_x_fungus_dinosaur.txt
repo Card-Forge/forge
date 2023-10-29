@@ -1,0 +1,6 @@
+Name:Fungus Dinosaur Token
+ManaCost:no cost
+Colors:green
+Types:Creature Fungus Dinosaur
+PT:*/*
+Oracle:

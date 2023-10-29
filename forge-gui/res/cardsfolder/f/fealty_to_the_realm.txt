@@ -1,0 +1,11 @@
+Name:Fealty to the Realm
+ManaCost:4 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ Player.isMonarch | Description$ The monarch controls enchanted creature.
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Target$ You | Description$ Enchanted creature attacks each combat if able and can't attack you.
+S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy
+Oracle:Enchant creature\nWhen Fealty to the Realm enters the battlefield, you become the monarch.\nThe monarch controls enchanted creature.\nEnchanted creature attacks each combat if able and can't attack you.

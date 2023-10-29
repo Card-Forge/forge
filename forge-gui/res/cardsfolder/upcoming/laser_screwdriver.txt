@@ -1,0 +1,9 @@
+Name:Laser Screwdriver
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | SpellDescription$ Tap target artifact.
+A:AB$ Surveil | Cost$ 2 T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+A:AB$ Goad | Cost$ 3 T | ValidTgts$ Creature | SpellDescription$ Goad target creature. (Until your next turn, it attacks each combat if able and attacks a player other than you if able.)
+DeckHas:Ability$Graveyard
+Oracle:{T}: Add one mana of any color.\n{1}, {T}: Tap target artifact.\n{2}, {T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\n{3}, {T}: Goad target creature. (Until your next turn, it attacks each combat if able and attacks a player other than you if able.)

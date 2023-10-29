@@ -1,0 +1,11 @@
+Name:Progenitor Exarch
+ManaCost:X X W
+Types:Creature Phyrexian Cat Cleric
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigIncubate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, incubate 3 X times. (To incubate 3, create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 3 | Times$ X
+A:AB$ SetState | Cost$ T | TgtPrompt$ Select target Incubator token you control | ValidTgts$ Incubator.token+YouCtrl | Mode$ Transform | SpellDescription$ Transform target Incubator token you control.
+SVar:X:Count$xPaid
+DeckHints:Type$Incubator
+DeckHas:Ability$Token|Counters & Type$Artifact|Incubator
+Oracle:When Progenitor Exarch enters the battlefield, incubate 3 X times. (To incubate 3, create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n{T}: Transform target Incubator token you control.

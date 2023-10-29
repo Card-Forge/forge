@@ -1,0 +1,14 @@
+Name:Tranquil Frillback
+ManaCost:2 G
+Types:Creature Dinosaur
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {G} up to three times. When you pay this cost one or more times, ABILITY
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<G\NumTimes> | Announce$ NumTimes | AnnounceLimit$ 3 | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | RememberSVarAmount$ NumTimes | Execute$ TrigCharm | TriggerDescription$ When you pay this cost one or more times, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ X | Choices$ DestroyAE,ExileGrave,GainLife
+SVar:DestroyAE:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:ExileGrave:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.
+SVar:GainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+SVar:X:Count$TriggerRememberAmount
+DeckHas:Ability$LifeGain
+AI:RemoveDeck:All
+Oracle:When Tranquil Frillback enters the battlefield, you may pay {G} up to three times. When you pay this cost one or more times, choose up to that many —\n• Destroy target artifact or enchantment.\n• Exile target player's graveyard.\n• You gain 4 life.

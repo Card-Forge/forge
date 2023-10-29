@@ -1,0 +1,8 @@
+Name:Ondu Spiritdancer
+ManaCost:4 W
+Types:Creature Kor Cleric
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | ResolvedLimit$ 1 | OptionalDecider$ You | Execute$ TrigCopy | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, you may create a token that's a copy of it. Do this only once each turn.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy
+DeckHas:Ability$Token
+Oracle:Whenever an enchantment enters the battlefield under your control, you may create a token that's a copy of it. Do this only once each turn.

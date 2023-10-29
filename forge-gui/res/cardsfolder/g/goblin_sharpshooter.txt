@@ -2,7 +2,7 @@ Name:Goblin Sharpshooter
 ManaCost:2 R
 Types:Creature Goblin
 PT:1/1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature dies, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self

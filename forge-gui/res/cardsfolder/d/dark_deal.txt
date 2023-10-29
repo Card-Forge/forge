@@ -6,7 +6,7 @@ SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | Remembe
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanDrawn
 SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True
 # This calculation isn't considering the remembered player, only the remembered cards
-SVar:X:Remembered$Amount.Minus.1
+SVar:X:Remembered$Amount/Minus.1
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard

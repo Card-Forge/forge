@@ -85,7 +85,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             // check stack for something on the stack will kill anything i control
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
-            if (objects.contains(ai)) {
+            if (objects.contains(ai) && sa.canTarget(ai)) {
             	tcs.add(ai);
                 chance = true;
             }

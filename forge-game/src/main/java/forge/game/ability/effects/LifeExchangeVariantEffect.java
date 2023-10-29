@@ -1,13 +1,17 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
+import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
+
+import java.util.List;
+import java.util.Map;
 
 public class LifeExchangeVariantEffect extends SpellAbilityEffect {
 
@@ -68,9 +72,16 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
 
         if ((pLife > num) && p.canLoseLife()) {
             final int diff = pLife - num;
-            p.loseLife(diff, false, false);
+            final int lost = p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp, 0);
             game.fireEvent(new GameEventCardStatsChanged(source));
+
+            if (lost > 0) { // Run triggers if player actually lost life
+                final Map<Player, Integer> lossMap = Maps.newHashMap();
+                lossMap.put(p, lost);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+                source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+            }
         } else if ((num > pLife) && p.canGainLife()) {
             final int diff = num - pLife;
             p.gainLife(diff, source, sa);

@@ -33,8 +33,9 @@ SVar:Black:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | At
 SVar:DBAnimateB:DB$ Animate | Defined$ ChosenCard | Colors$ Black | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
 SVar:Blue:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateU | SpellDescription$ A spell or permanent chosen at random becomes blue. (Mana symbols on that permanent remain unchanged.)
 SVar:DBAnimateU:DB$ Animate | Defined$ ChosenCard | Colors$ Blue | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
-SVar:NoRegen:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump13 | SpellDescription$ A creature chosen at random can't be regenerated this turn.
-SVar:DBPump13:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN CARDNAME can't be regenerated. | SubAbility$ DBCleanup
+SVar:NoRegen:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBNoRegen | SpellDescription$ A creature chosen at random can't be regenerated this turn.
+SVar:DBNoRegen:DB$ Effect | RememberObjects$ ChosenCard | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegenST | IsCurse$ True | StackDescription$ None | SubAbility$ DBCleanup | AILogic$ CantRegenerate
+SVar:NoRegenST:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 SVar:LilSneak:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump14 | RememberChosen$ True | SpellDescription$ If a creature chosen at random has power 2 or less, it is unblockable this turn.
 SVar:DBPump14:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card.powerLE2 | RememberObjects$ Remembered | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBCleanup
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.

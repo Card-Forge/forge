@@ -1,0 +1,7 @@
+Name:Quarrel's End
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Draw | Cost$ 2 R Discard<1/Card/card> | NumCards$ 2 | SubAbility$ DBToken | SpellDescripion$ Draw two cards and create a 1/1 white Human Soldier creature token.
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier
+DeckHas:Ability$Discard|Token & Type$Human|Soldier
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards and create a 1/1 white Human Soldier creature token.

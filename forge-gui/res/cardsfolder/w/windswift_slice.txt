@@ -1,0 +1,9 @@
+Name:Windswift Slice
+ManaCost:2 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | ExcessSVar$ Excess | NumDmg$ X | DamageSource$ ParentTarget | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ g_1_1_elf_warrior | TokenAmount$ Excess | SpellDescription$ Create a number of 1/1 green Elf Warrior creature tokens equal to the amount of excess damage dealt this way.
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Token & Type$Elf|Warrior
+Oracle:Target creature you control deals damage equal to its power to target creature you don't control. Create a number of 1/1 green Elf Warrior creature tokens equal to the amount of excess damage dealt this way.

@@ -1,0 +1,10 @@
+Name:Lost Isle Calling
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter |TriggerDescription$ Whenever you scry, put a verse counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | Defined$ Self | CounterType$ Verse
+SVar:X:Count$CardCounters.VERSE
+A:AB$ Draw | Cost$ 4 U U Exile<1/CARDNAME> | NumCards$ X | SubAbility$ DBExtraTurn | SorcerySpeed$ True | SpellDescription$ Draw a card for each verse counter on CARDNAME. If it had seven or more verse counters on it, take an extra turn after this one. Activate only as a sorcery.
+SVar:DBExtraTurn:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7
+DeckHas:Ability$Counters
+Oracle:Whenever you scry, put a verse counter on Lost Isle Calling.\n{4}{U}{U}, Exile Lost Isle Calling: Draw a card for each verse counter on Lost Isle Calling. If it had seven or more verse counters on it, take an extra turn after this one. Activate only as a sorcery.

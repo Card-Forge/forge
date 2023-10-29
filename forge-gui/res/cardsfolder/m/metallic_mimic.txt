@@ -5,7 +5,7 @@ PT:2/1
 K:ETBReplacement:Other:ChooseCT
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.ChosenType+Other+YouCtrl
 SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
+S:Mode$ Continuous | Affected$ Card.Self | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
 DeckHas:Ability$Counters
 Oracle:As Metallic Mimic enters the battlefield, choose a creature type.\nMetallic Mimic is the chosen type in addition to its other types.\nEach other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.

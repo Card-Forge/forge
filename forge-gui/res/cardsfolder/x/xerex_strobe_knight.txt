@@ -1,0 +1,10 @@
+Name:Xerex Strobe-Knight
+ManaCost:2 U
+Types:Creature Human Knight
+PT:2/2
+K:Flying
+K:Vigilance
+A:AB$ Token | Cost$ T | CheckSVar$ X | SVarCompare$ GE2 | TokenAmount$ 1 | TokenScript$ wu_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white and blue Knight creature token with vigilance. Activate only if you've cast two or more spells this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+DeckHas:Ability$Token
+Oracle:Flying, vigilance\n{T}: Create a 2/2 white and blue Knight creature token with vigilance. Activate only if you've cast two or more spells this turn.

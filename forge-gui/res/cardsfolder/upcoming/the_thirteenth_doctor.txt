@@ -1,0 +1,11 @@
+Name:The Thirteenth Doctor
+ManaCost:1 G U
+Types:Legendary Creature Time Lord Doctor
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Team TARDIS — At the beginning of your end step, untap each creature you control with a counter on it.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl+HasCounters
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
+Oracle:Paradox — Whenever you cast a spell from anywhere other than your hand, put a +1/+1 counter on target creature.\nTeam TARDIS — At the beginning of your end step, untap each creature you control with a counter on it.

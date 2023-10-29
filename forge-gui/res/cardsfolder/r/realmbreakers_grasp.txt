@@ -1,0 +1,8 @@
+Name:Realmbreaker's Grasp
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
+S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility
+Oracle:Enchant artifact or creature\nEnchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.

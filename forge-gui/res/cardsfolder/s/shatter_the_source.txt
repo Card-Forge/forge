@@ -1,0 +1,8 @@
+Name:Shatter the Source
+ManaCost:5 R
+Types:Instant
+K:Convoke
+A:SP$ Charm | Choices$ Damage,Destroy
+SVar:Damage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker,Battle | TgtPrompt$ Select target creature, planeswalker, or battle | NumDmg$ 6 | StackDescription$ CARDNAME deals 6 damage to {c:Targeted}. | SpellDescription$ CARDNAME deals 6 damage to target creature, planeswalker, or battle.
+SVar:Destroy:DB$ Destroy | ValidTgts$ Artifact | StackDescription$ Destroy {c:Targeted}. | SpellDescription$ Destroy target artifact.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one —\n• Shatter the Source deals 6 damage to target creature, planeswalker, or battle.\n• Destroy target artifact.

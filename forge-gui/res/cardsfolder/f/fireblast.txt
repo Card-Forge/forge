@@ -2,5 +2,5 @@ Name:Fireblast
 ManaCost:4 R R
 Types:Instant
 SVar:AltCost:Cost$ Sac<2/Mountain> | Description$ You may sacrifice two Mountains rather than pay this spell's mana cost.
-A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 Oracle:You may sacrifice two Mountains rather than pay this spell's mana cost.\nFireblast deals 4 damage to any target.

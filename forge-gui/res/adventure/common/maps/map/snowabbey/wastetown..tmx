@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="56">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="45" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzd1k0KAzEIBeCh2657/2v0eKWLgIjP6JsUtYGB6c+YL6+m5Lpi4/3qc02yRs0d3ROMyFzt+IW507qQuZMxYu6+Hzua/tlc7ciaH896B2P+XlPynpzz936KfWLOq5fXVe3JmCvnn2aemPMd86SeRuZTdnSWQfUj857OmT3DZuaOeDPrWGeA6FmAycnyMlkv3y6Du/PodbI1ZJ7Si3LW87A5o8x3Vtmv6ByA3mP3j2VmvEwvVvbGzibHif8mtobMWPv0vTZH+9j6LWV9XcvrQV3H8qKcvTnka29Ec7YcXsbo+54XrTNitjJHe8czWvV31ow549l9nn0uO1Dt014mPzQ+N8jLcA==
+  </data>
+ </layer>
+ <layer id="7" name="Background2" width="45" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztklEKxCAMRPvd37Jn6pn2ZoVebikl4EqcRmPEwgzMj9rJ6+iyUBRFURRFUW/U8fn3rMo5Z2bO2SJ5vZmo11bmkVmeGdo3aC2KtZW39H1LfiS3NsMyuzdra9eWmSewlzfi/hCvl/1JtbmIb99ue3oewSuc4vS8tuZ9vzX3WMNacunctW6V1ptI8r4rZkX9Wv5L9noxpypxWI36zZlRDmLuxarxpns581OW5c57MqMziDeix2i/jbfm3cxk9jzGPy5JgGo=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="45" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzVlE0OgkAMhdkb3SlcxEuod/FixrXHMJxISCROmv69UgZ5ySQQ2s7XR2eaxtbryC/rOxdr7UGfuXcPp7cHT12NVauNcEr5GZy7tmmuHb/2rbyHxqKxa55oq+S8dXLc5cuN+Otl8vhZ8mqctOaF+F7WtTglFk9/nK+ePqkeLR+Hzrw1L9RXS1rc6HkZxz0jrJK/I+8bmB9LvfLPo6vUM3B+UOYMTsocObeSxrx+pqfWmpij4vq0mGmeVCsyGx5OTlGfM4XUnmYDzcsSutdh+GfnIf5++uXXEOJn+TzyTqy1hHiqzeLSc4B46r0DluLNYK11viKsVg9rsmosNe9ZlBXtRYqPMno5vHWi8+RlzehlKVYpJzJrUp0MTvSOnDvPWm2U1dov8+xFtcT50upnaO5ZsGYpi9MjL6sntoaQu21NzpKJvv8LH1Xk7l1LW+HktBXOreoDuvWqyQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="45" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVmH1O20AQxZfiQPgjK8XUFT1WjxBKAkkv0PYqJEQQ0t4A9Q49U0l3lXnyZNkvj5eKjjQyjoP988ub8aznI6UWLC9N3picm/xi8leTzn8dO8OltFJDlrcmr8znR/rt8XJmcP8x+88mj83fj7rlegusCKvnkDFPzf6Stp893rBRkv13489YDIhXMY25R3zcfVldvk/nSn0fK/V1nMmt99zQGLqD/yzhaSkvOG2+r/fHzms/+wt+YkZa1juzXZs8NXlSoA59ul7U4bTsMc3f6X29wRPWD7bfXZOv7f5NpOfl8n4bt7rGeHm6miNs30Bvg84bvdca258erXOC8+ZyxjRHPBDXD0ofn7Tm+vIiP9aHzK/5rLDXacz1nij/F2aejZD5QyZziF9yXy73U52nPVjdGowxlp41fM+7JsIYeraEWHLvQRI+7lzeEEfqHiTsXc/r/l9XZikv/86kwzzepaZyNU3xuuea0ByDOUCiVUlmH7er7xXN6Dmzi4R5NorPFymvISa0TlvSPGPnmtSMmMvtaoJ5f0FzUlcPgnfJZpf7Dmu1rjpXpMmGUqINvGB57/Wh1mshc8x7W2dG2mXM/G6e6pYXrLHZq3RWHXWekcZT5g3LvsiokVK5o+tfB9azPo2xlrR94ojWOqpA/XGfxI6v6Hd9HrXrl1BN8rrDuwbU3kC39Sfppa6ncz06pPUiegr/refkCc55S35W5GnrZymvy53ra+iHLV8nbum3OCEvDJzs0+OkOlfsPQJfO3KPVvrw2IBp/ChkDkWOt1dsXc7fh0BrGyvq53i3s6FakPJKvOHr3Xe6fbeAde9at+fa0vEpq9W+Hpb62fWJ1dcyzVgPRDzoQ7+XYo752fc534eW6Au++oKX+sxxOX7uktASPcEXVWL2TGkWi9R9hs6J/nYW6Ltbp/5Kxl+u/fNG
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="284.667" y="560.167" width="67.6667" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="297.333" y="233.167"/>
+  <object id="51" template="../../obj/treasure.tx" x="199.833" y="28.8333"/>
+  <object id="52" template="../../obj/gold.tx" x="99" y="232.5"/>
+  <object id="53" template="../../obj/enemy.tx" x="199.25" y="63">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="135.333" y="199">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="262.333" y="198.5">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -9,10 +9,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -61,45 +58,19 @@ public class EnemyEditor extends JComponent {
     {
 
         list.setCellRenderer(new EnemyDataRenderer());
-        list.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                EnemyEditor.this.updateEdit();
-            }
+        list.addListSelectionListener(e -> EnemyEditor.this.updateEdit());
+        addButton("add", e -> EnemyEditor.this.addEnemy());
+        addButton("remove", e -> EnemyEditor.this.remove());
+        addButton("copy", e -> EnemyEditor.this.copy());
+        addButton("load", e -> {
+            EnemyEditor.this.load();
+            QuestController.getInstance().load();
         });
-        addButton("add", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EnemyEditor.this.addEnemy();
-            }
-        });
-        addButton("remove", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EnemyEditor.this.remove();
-            }
-        });
-        addButton("copy", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EnemyEditor.this.copy();
-            }
-        });
-        addButton("load", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EnemyEditor.this.load();
-            }
-        });
-        addButton("save", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EnemyEditor.this.save();
-            }
-        });
+        addButton("save", e -> EnemyEditor.this.save());
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(new JScrollPane(list), BorderLayout.LINE_START);
+        toolBar.setFloatable(false);
         add(toolBar, BorderLayout.PAGE_START);
         add(edit,BorderLayout.CENTER);
         load();
@@ -118,6 +89,7 @@ public class EnemyEditor extends JComponent {
         if(selected<0)
             return;
         edit.setCurrentEnemy(model.get(selected));
+        edit.updateEnemy();
     }
 
     void save()
@@ -138,8 +110,7 @@ public class EnemyEditor extends JComponent {
         FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
         if (handle.exists())
         {
-            Array readEnemies=json.fromJson(Array.class, EnemyData.class, handle);
-            allEnemies = readEnemies;
+            allEnemies = json.fromJson(Array.class, EnemyData.class, handle);
         }
         for (int i=0;i<allEnemies.size;i++) {
             model.add(i,allEnemies.get(i));

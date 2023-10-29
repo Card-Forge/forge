@@ -1,0 +1,107 @@
+drake.png
+size: 120,170
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+ xy: 0, 0
+ size: 30,30
+Idle
+ xy: 0,34
+ size: 30,34
+Idle
+ xy: 30,34
+ size: 30,34
+Idle
+ xy: 60,34
+ size: 30,34
+Idle
+ xy: 90,34
+ size: 30,34
+Idle
+ xy: 0,68
+ size: 30,34
+Idle
+ xy: 30,68
+ size: 30,34
+Idle
+ xy: 60,68
+ size: 30,34
+Idle
+ xy: 90,68
+ size: 30,34
+Idle
+ xy: 0,102
+ size: 30,34
+Idle
+ xy: 30,102
+ size: 30,34
+Idle
+ xy: 60,102
+ size: 30,34
+Idle
+ xy: 90,102
+ size: 30,34
+Walk
+ xy: 0,34
+ size: 30,34
+Walk
+ xy: 30,34
+ size: 30,34
+Walk
+ xy: 60,34
+ size: 30,34
+Walk
+ xy: 90,34
+ size: 30,34
+Walk
+ xy: 0,68
+ size: 30,34
+Walk
+ xy: 30,68
+ size: 30,34
+Walk
+ xy: 60,68
+ size: 30,34
+Walk
+ xy: 90,68
+ size: 30,34
+Walk
+ xy: 0,102
+ size: 30,34
+Walk
+ xy: 30,102
+ size: 30,34
+Walk
+ xy: 60,102
+ size: 30,34
+Walk
+ xy: 90,102
+ size: 30,34
+Attack
+ xy: 0,134
+ size: 30,34
+Attack
+ xy: 30,134
+ size: 30,34
+Attack
+ xy: 60,134
+ size: 30,34
+Attack
+ xy: 90,134
+ size: 30,34
+Death
+ xy: 90,134
+ size: 30,34
+Death
+ xy: 90,0
+ size: 30,34
+Death
+ xy: 90,134
+ size: 30,34
+Death
+ xy: 90,0
+ size: 30,34
+Death
+ xy: 90,134
+ size: 30,34

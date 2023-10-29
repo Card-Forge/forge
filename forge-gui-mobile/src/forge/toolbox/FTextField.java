@@ -52,7 +52,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     protected FSkinFont font, renderedFont;
     private int alignment;
     private int selStart, selLength;
-    private boolean isEditing, readOnly;
+    private boolean isEditing, readOnly, isNumeric;
 
     private final FPopupMenu contextMenu = new FPopupMenu() {
         @Override
@@ -164,6 +164,9 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     public boolean isReadOnly() {
         return readOnly;
+    }
+    public void setIsNumeric(boolean isNumeric0) {
+        isNumeric = isNumeric0;
     }
     public void setReadOnly(boolean readOnly0) {
         readOnly = readOnly0;
@@ -353,7 +356,7 @@ public class FTextField extends FDisplayObject implements ITextField {
             public void onInputEnd() {
                 endEdit();
             }
-        });
+        }, isNumeric);
         isEditing = true;
         return true;
     }

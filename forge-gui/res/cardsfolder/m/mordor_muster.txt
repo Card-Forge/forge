@@ -1,0 +1,8 @@
+Name:Mordor Muster
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Subability$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 1 | SpellDescription$ Amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+Oracle:You draw a card and you lose 1 life.\nAmass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

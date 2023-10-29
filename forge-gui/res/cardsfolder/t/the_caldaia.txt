@@ -1,0 +1,8 @@
+Name:The Caldaia
+ManaCost:no cost
+Types:Plane Capenna
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddKeyword$ Blitz:3:Spell.Creature+wasCastFromYourHand | Description$ Creature spells you cast from your hand have blitz {3}. (If you cast a spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target creature card from your graveyard to your hand.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
+DeckHas:Ability$Sacrifice & Keyword$Blitz
+Oracle:Creature spells you cast from your hand have blitz {3}. (If you cast a spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)\nWhenever chaos ensues, return target creature card from your graveyard to your hand.

@@ -2,10 +2,7 @@ package forge.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,6 +16,9 @@ public class CardTranslation {
     private static Map <String, String> translatedoracles;
     private static Map <String, List <Pair <String, String> > > oracleMappings;
     private static Map <String, String> translatedCaches;
+    private static Map <String, String> translatedEffectNames;
+    private static Map <String, String> translatedTokenNames;
+    private static final List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
     private static String languageSelected = "en-US";
 
     private static void readTranslationFile(String language, String languagesDirectory) {
@@ -43,7 +43,8 @@ public class CardTranslation {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading translation file: cardnames-" + language + ".txt");
+            if (!"en-US".equalsIgnoreCase(language))
+                System.err.println("Error reading translation file: cardnames-" + language + ".txt");
         }
     }
 
@@ -55,11 +56,142 @@ public class CardTranslation {
                 String rightname = name.substring(splitIndex + 4, name.length());
                 return translatednames.getOrDefault(leftname, leftname) + " // " + translatednames.getOrDefault(rightname, rightname);
             }
-            String tname = translatednames.get(name);
-            return (tname == null || tname.isEmpty()) ? name : tname;
+            try {
+                if (name.endsWith(" Token")) {
+                    return translateTokenName(name);
+                } else if (name.startsWith("Emblem - ") || name.contains("'s Effect") || name.contains("'s Boon")) {
+                    return translateEffectNames(name);
+                } else if (knownEffectNames.contains(name)) {
+                    return translateKnownEffectNames(name);
+                } else {
+                    String tname = translatednames.get(name);
+                    return (tname == null || tname.isEmpty()) ? name : tname;
+                }
+            } catch (Exception e) {
+                return name;
+            }
         }
-
         return name;
+    }
+
+    private static String translateTokenName(String name) {
+        if (translatedTokenNames == null)
+            translatedTokenNames = new HashMap<>();
+        String ttype = translatedTokenNames.get(name);
+        if (ttype == null) {
+            String sub = name.replace(" Token", "");
+            ttype = Localizer.getInstance().getMessageorUseDefault("lbl" + sub, "");
+            if (ttype == null || ttype.isEmpty()) {
+                ttype = name;
+            } else {
+                ttype = ttype  + " " + Localizer.getInstance().getMessage("lblToken");
+            }
+            translatedTokenNames.put(name, ttype);
+            return ttype;
+        } else {
+            return ttype;
+        }
+    }
+
+    private static String translateKnownEffectNames(String name) {
+        if (translatedEffectNames == null)
+            translatedEffectNames = new HashMap<>();
+        String fname = translatedEffectNames.get(name);
+        if (fname == null) {
+            switch (name) {
+                case "The Ring":
+                    fname = Localizer.getInstance().getMessage("lblTheRing");
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                case "The Monarch":
+                    fname = Localizer.getInstance().getMessage("lblTheMonarch");
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                case "The Initiative":
+                    fname = Localizer.getInstance().getMessage("lblTheInitiative");
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                case "City's Blessing":
+                    fname = Localizer.getInstance().getMessage("lblCityBlessing");
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                case "Keyword Effects":
+                    fname = Localizer.getInstance().getMessage("lblKeywordEffects");
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                default:
+                    return name;
+            }
+        } else {
+            return fname;
+        }
+    }
+
+    private static String translateEffectNames(String name) {
+        if (translatedEffectNames == null)
+            translatedEffectNames = new HashMap<>();
+        String fname = translatedEffectNames.get(name);
+        if (fname == null) {
+            String finalname = name.replaceAll("\\([^()]*\\)", "");
+            if (finalname.contains(" 's Effect")) {
+                finalname = finalname.replace( " 's Effect", "");
+                fname = translatednames.get(finalname);
+                if (fname == null || fname.isEmpty())
+                    fname = finalname;
+                else {
+                    fname = fname + " " + Localizer.getInstance().getMessage("lblEffect");
+                }
+                translatedEffectNames.put(name, fname);
+                return fname;
+            } else if (finalname.contains("'s Effect")) {
+                finalname = finalname.replace( "'s Effect", "");
+                fname = translatednames.get(finalname);
+                if (fname == null || fname.isEmpty())
+                    fname = finalname;
+                else {
+                    fname = fname + " " + Localizer.getInstance().getMessage("lblEffect");
+                }
+                translatedEffectNames.put(name, fname);
+                return fname;
+            } else if (finalname.contains(" 's Boon")) {
+                finalname = finalname.replace( " 's Boon", "");
+                fname = translatednames.get(finalname);
+                if (fname == null || fname.isEmpty())
+                    fname = finalname;
+                else {
+                    fname = fname + " " + Localizer.getInstance().getMessage("lblBoon");
+                }
+                translatedEffectNames.put(name, fname);
+                return fname;
+            } else if (finalname.contains("'s Boon")) {
+                finalname = finalname.replace( "'s Boon", "");
+                fname = translatednames.get(finalname);
+                if (fname == null || fname.isEmpty())
+                    fname = finalname;
+                else {
+                    fname = fname + " " + Localizer.getInstance().getMessage("lblBoon");
+                }
+                translatedEffectNames.put(name, fname);
+                return fname;
+            } else if (finalname.startsWith("Emblem - ")) {
+                String []s = finalname.split(" - ");
+                try {
+                    fname = translatednames.get(s[1].endsWith(" ") ? s[1].substring(0, s[1].lastIndexOf(" ")) : s[1]);
+                    if (fname == null || fname.isEmpty())
+                        fname = finalname;
+                    else {
+                        fname = fname + " " + Localizer.getInstance().getMessage("lblEmblem");
+                    }
+                    translatedEffectNames.put(name, fname);
+                    return fname;
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
+            }
+            return name;
+        } else {
+            return fname;
+        }
     }
 
     public static String getTranslatedType(String name, String originaltype) {
@@ -167,6 +299,8 @@ public class CardTranslation {
     }
 
     public static String translateSingleDescriptionText(String descText, String cardName) {
+        if (descText == null)
+            return "";
         if (!needsTranslation()) return descText;
         if (translatedCaches.containsKey(descText)) return translatedCaches.get(descText);
 

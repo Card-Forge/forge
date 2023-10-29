@@ -1,0 +1,19 @@
+Name:Steady Tortoise
+ManaCost:4 G
+Types:Creature Turtle
+PT:3/3
+K:Ward:2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield,Exile | TriggerDescription$ Whenever you attack, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in exile.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Steady Tortoise's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1.
+DeckHas:Ability$Token & Type$Rabbit
+AlternateMode:Adventure
+Oracle:Ward {2}\nWhenever you attack, Steady Tortoise perpetually gets +1/+1. This ability also triggers if Steady Tortoise is in exile.
+
+ALTERNATE
+
+Name:Harried Dash
+ManaCost:R
+Types:Sorcery Adventure
+A:SP$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ 1 | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a 1/1 white Rabbit creature token. It gains haste until end of turn.
+Oracle:Create a 1/1 white Rabbit creature token. It gains haste until end of turn.

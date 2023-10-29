@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestMode;
@@ -222,13 +221,9 @@ public enum CSubmenuQuestStart implements ICDoc {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 final Set<String> sets = new HashSet<>();
-                for (final Map.Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
-                    sets.add(c.getKey().getEdition());
-                }
-                if (dckStartPool.has(DeckSection.Sideboard)) {
-                    for (final Map.Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
-                        sets.add(c.getKey().getEdition());
-                    }
+
+                for(Map.Entry<PaperCard, Integer> entry : dckStartPool.getAllCardsInASinglePool()) {
+                    sets.add(entry.getKey().getEdition());
                 }
                 fmtPrizes = new GameFormat(localizer.getMessage("lblFromDeck"), sets, null);
             }

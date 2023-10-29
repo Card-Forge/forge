@@ -173,7 +173,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
     private Card chooseCardOnStack(SpellAbility sa, Player ai, Game game) {
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card source = si.getSourceCard();
-            final SpellAbility abilityOnStack = si.getSpellAbility(true);
+            final SpellAbility abilityOnStack = si.getSpellAbility();
 
             if (sa.hasParam("Choices") && !abilityOnStack.matchesValid(source, sa.getParam("Choices").split(","))) {
                 continue;

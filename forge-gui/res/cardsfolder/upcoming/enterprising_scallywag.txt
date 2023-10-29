@@ -1,0 +1,9 @@
+Name:Enterprising Scallywag
+ManaCost:1 R
+Types:Creature Goblin Pirate
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+DeckHints:Ability$Sacrifice
+Oracle:At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)

@@ -1,0 +1,9 @@
+Name:Atraxi Warden
+ManaCost:4 W W
+Types:Creature Alien Eye
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$When CARDNAME enters the battlefield, exile up to one target tapped creature.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped | TgtPrompt$ Select up to one target tapped creature | TargetMin$ 0 | TargetMax$ 1
+K:Suspend:5:1 W
+Oracle:Flying\nWhen Atraxi Warden enters the battlefield, exile up to one target tapped creature.\nSuspend 5—{1}{W} (Rather than cast this card from your hand, you may pay {1}{W} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)

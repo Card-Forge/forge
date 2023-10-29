@@ -1,0 +1,7 @@
+Name:Monstrous Rage
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | SubAbility$ DBToken | SpellDescription$ Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ Targeted
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)

@@ -1,0 +1,14 @@
+Name:Commodore Guff
+ManaCost:1 U R W
+Types:Legendary Planeswalker Guff
+Loyalty:5
+Text:CARDNAME can be your commander.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ At the beginning of your end step, put a loyalty counter on another target planeswalker you control.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Planeswalker.Other+YouCtrl | TgtPrompt$ Select another target planeswalker you control | CounterType$ LOYALTY | CounterNum$ 1
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ r_1_1_wizard_mana_restrict | TokenOwner$ You | SpellDescription$ Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell."
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ X | SubAbility$ DBDamage | SpellDescription$ You draw X cards and CARDNAME deals X damage to each opponent, where X is the number of planeswalkers you control.
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:X:Count$Valid Planeswalker.YouCtrl
+DeckNeeds:Type$Planeswalker
+DeckHas:Ability$Token & Type$Wizard
+Oracle:At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n[+1]: Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell."\n[-3]:You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.\nCommodore Guff can be your commander.

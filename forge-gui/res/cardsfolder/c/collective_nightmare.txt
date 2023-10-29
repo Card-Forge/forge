@@ -1,0 +1,6 @@
+Name:Collective Nightmare
+ManaCost:2 B
+Types:Instant
+K:Convoke
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTarget creature gets -3/-3 until end of turn.

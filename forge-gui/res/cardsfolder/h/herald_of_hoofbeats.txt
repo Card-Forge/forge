@@ -1,0 +1,9 @@
+Name:Herald of Hoofbeats
+ManaCost:3 U
+Types:Creature Human Knight
+PT:3/3
+K:Horsemanship
+S:Mode$ Continuous | Affected$ Knight.YouCtrl+Other | AddKeyword$ Horsemanship | Description$ Other Knights you control have horsemanship.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Knight
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nOther Knights you control have horsemanship.

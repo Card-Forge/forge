@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -28,11 +27,8 @@ public class RegenerateAllEffect extends RegenerateBaseEffect {
         final Game game = hostCard.getGame();
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
-        CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, valid, hostCard.getController(), hostCard, sa);
-
         // create Effect for Regeneration
-        createRegenerationEffect(sa, list);
+        createRegenerationEffect(sa, CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), valid, hostCard.getController(), hostCard, sa));
     }
 
 }

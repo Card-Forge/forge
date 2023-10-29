@@ -2,6 +2,6 @@ Name:Ghitu Fire-Eater
 ManaCost:2 R
 Types:Creature Human Nomad
 PT:2/2
-A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
+A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
 SVar:X:Sacrificed$CardPower
 Oracle:{T}, Sacrifice Ghitu Fire-Eater: It deals damage equal to its power to any target.

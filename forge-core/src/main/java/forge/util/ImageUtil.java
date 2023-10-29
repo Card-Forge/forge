@@ -161,6 +161,10 @@ public class ImageUtil {
     }
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
+        return getScryfallDownloadUrl(cp, face, setCode, langCode, useArtCrop, false);
+    }
+
+    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
@@ -169,6 +173,23 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
+        if (cardCollectorNumber.startsWith("OHOP")) {
+            editionCode = "ohop";
+            cardCollectorNumber = cardCollectorNumber.substring("OHOP".length());
+        } else if (cardCollectorNumber.startsWith("OPCA")) {
+            editionCode = "opca";
+            cardCollectorNumber = cardCollectorNumber.substring("OPCA".length());
+        } else if (cardCollectorNumber.startsWith("OPC2")) {
+            editionCode = "opc2";
+            cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
+        } else if (hyphenateAlchemy) {
+            if (!cardCollectorNumber.startsWith("A")) {
+                return null;
+            }
+
+            cardCollectorNumber = cardCollectorNumber.replace("A", "A-");
+        }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {

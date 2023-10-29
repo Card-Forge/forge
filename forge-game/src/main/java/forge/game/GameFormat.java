@@ -56,6 +56,7 @@ public class GameFormat implements Comparable<GameFormat> {
         BLOCK,
         STANDARD,
         EXTENDED,
+        PAUPER,
         PIONEER,
         MODERN,
         LEGACY,
@@ -364,6 +365,8 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Extended.txt");
             coreFormats.add("Brawl.txt");
             coreFormats.add("Oathbreaker.txt");
+            coreFormats.add("Premodern.txt");
+            coreFormats.add("Pauper.txt");
         }
         
         public Reader(File forgeFormats, File customFormats, boolean includeArchived) {
@@ -487,6 +490,22 @@ public class GameFormat implements Comparable<GameFormat> {
             return reverseDateOrdered;
         }
 
+        private TreeMap<GameFormat.FormatType, List<GameFormat>> formatsTypeMap;
+        public final Map<GameFormat.FormatType, List<GameFormat>> getFormatTypeMap() {
+            if (formatsTypeMap == null) {
+                formatsTypeMap = new TreeMap<>();
+                for (GameFormat.FormatType formatType : GameFormat.FormatType.values())
+                    formatsTypeMap.put(formatType, new ArrayList<>());
+
+                for (GameFormat format : this.naturallyOrdered) {
+                    GameFormat.FormatType key = format.getFormatType();
+                    List<GameFormat> formatsOfType = formatsTypeMap.get(key);
+                    formatsOfType.add(format);
+                }
+            }
+            return formatsTypeMap;
+        }
+
         public Iterable<GameFormat> getSanctionedList() {
             List<GameFormat> coreList = new ArrayList<>();
             for (GameFormat format: naturallyOrdered) {
@@ -516,6 +535,26 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
             return coreList;
+        }
+
+        public Iterable<GameFormat> getCasualList() {
+            List<GameFormat> casualList = new ArrayList<>();
+            for (GameFormat format: naturallyOrdered) {
+                if (format.getFormatType().equals(FormatType.CASUAL)){
+                    casualList.add(format);
+                }
+            }
+            return casualList;
+        }
+
+        public Iterable<GameFormat> getCoreFormatsWithLimitedSets() {
+            List<GameFormat> formatsWithLimitedSets = new ArrayList<>();
+            for (GameFormat format: naturallyOrdered) {
+                if (format.getAllowedSetCodes().size() > 0){
+                    formatsWithLimitedSets.add(format);
+                }
+            }
+            return formatsWithLimitedSets;
         }
 
         public Iterable<GameFormat> getBlockList() {
@@ -568,6 +607,10 @@ public class GameFormat implements Comparable<GameFormat> {
         public GameFormat getVintage() {
             return this.map.get("Vintage");
         }
+
+        public GameFormat getPremodern() { return this.map.get("Premodern"); }
+
+        public GameFormat getPauper() { return this.map.get("Pauper"); }
 
         public GameFormat getFormat(String format) {
             return this.map.get(format);

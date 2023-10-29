@@ -1,0 +1,10 @@
+Name:Obyra, Dreaming Duelist
+ManaCost:U B
+Types:Legendary Creature Faerie Warrior
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Faerie.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever another Faerie enters the battlefield under your control, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+DeckHints:Type$Faerie
+Oracle:Flash\nFlying\nWhenever another Faerie enters the battlefield under your control, each opponent loses 1 life.

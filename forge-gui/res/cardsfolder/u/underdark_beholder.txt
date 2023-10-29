@@ -11,7 +11,7 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:Y:Count$RememberedSize
 SVar:Z:Count$CardCounters.EYESTALK
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, reveal cards from the top of your library until you reveal an instant, sorcery, or enchantment card with converted mana cost less than the number of eyestalk counters on CARDNAME. You may cast it without paying its mana cost. Shuffle your library.
-SVar:TrigDig:DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.Instant+cmcLEZ,Card.Sorcery+cmcLEZ,Card.Enchantment+cmcLEZ | NoMoveFound$ True | NoMoveRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast
+SVar:TrigDig:DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.Instant+cmcLEZ,Card.Sorcery+cmcLEZ,Card.Enchantment+cmcLEZ | NoMoveRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast
 SVar:CascadeCast:DB$ Play | ValidSA$ Spell | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ Shuffle
 SVar:Shuffle:DB$ Shuffle | SubAbility$ DBCleanup
 SVar:HasAttackEffect:TRUE

@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:3/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigNodamage | TriggerDescription$ Whenever CARDNAME becomes blocked, prevent all combat damage that would be dealt by it this turn.
-SVar:TrigNodamage:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ TriggeredCard | ExileOnMoved$ Battlefield
+SVar:TrigNodamage:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ TriggeredAttackerLKICopy | ExileOnMoved$ Battlefield
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by it this turn.
 SVar:MustBeBlocked:True
 Oracle:Whenever Ignoble Soldier becomes blocked, prevent all combat damage that would be dealt by it this turn.

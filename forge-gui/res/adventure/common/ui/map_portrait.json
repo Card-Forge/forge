@@ -1,0 +1,31 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [      
+    {
+      "type": "Scroll",
+      "name": "map",    
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "[%80]tr(lblBack)",
+      "width": 60,
+      "height": 20,
+      "x": 5,
+      "y": 455
+    },
+    {
+      "type": "TextButton",
+      "name": "quest",
+      "text": "[%80]tr(lblQuest)",
+      "width": 60,
+      "height": 20,
+      "x": 205,
+      "y": 455
+    }  
+  ]
+}

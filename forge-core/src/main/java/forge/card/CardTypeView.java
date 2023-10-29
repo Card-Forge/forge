@@ -34,6 +34,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean isPermanent();
     boolean isCreature();
     boolean isPlaneswalker();
+    boolean isBattle();
     boolean isLand();
     boolean isArtifact();
     boolean isInstant();

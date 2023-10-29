@@ -120,13 +120,13 @@ public class ReplaceDamage extends ReplacementEffect {
                     return false;
                 }
             } else {
-                for (Player p : AbilityUtils.getDefinedPlayers(getHostCard(), def, null)) {
-                    if (!game.getPlayers().contains(p)) {
+                for (Player p : AbilityUtils.getDefinedPlayers(getHostCard(), def, this)) {
+                    if (!p.isInGame()) {
                         return false;
                     }
                 }
-                for (Card c : AbilityUtils.getDefinedCards(getHostCard(), def, null)) {
-                    if (!c.isCreature() && !c.isPlaneswalker()) {
+                for (Card c : AbilityUtils.getDefinedCards(getHostCard(), def, this)) {
+                    if (!c.isCreature() && !c.isPlaneswalker() && !c.isBattle()) {
                         return false;
                     }
                     if (!c.isInPlay()) {

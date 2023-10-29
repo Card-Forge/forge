@@ -1,0 +1,18 @@
+Name:Cruel Somnophage
+ManaCost:1 B
+Types:Creature Nightmare
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in all graveyards.
+SVar:X:Count$TypeInAllYards.Creature
+DeckHints:Ability$Mill|Discard|Graveyard
+DeckHas:Ability$Mill
+AlternateMode:Adventure
+Oracle:Cruel Somnophage's power and toughness are each equal to the number of creature cards in all graveyards.
+
+ALTERNATE
+
+Name:Can't Wake Up
+ManaCost:1 U
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 4 | ValidTgts$ Player | SpellDescription$ Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)

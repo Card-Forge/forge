@@ -1,0 +1,10 @@
+Name:Soldier of the Grey Host
+ManaCost:3 W
+Types:Creature Spirit Soldier
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2
+SVar:AmbushAI:True
+Oracle:Flash\nFlying\nWhen Soldier of the Grey Host enters the battlefield, target creature gets +2/+0 until end of turn.

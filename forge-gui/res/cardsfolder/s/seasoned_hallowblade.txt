@@ -2,6 +2,6 @@ Name:Seasoned Hallowblade
 ManaCost:1 W
 Types:Creature Human Warrior
 PT:3/1
-A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Discard a card: Tap CARDNAME. It gains indestructible until end of turn.
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Tap CARDNAME. It gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self
 Oracle:Discard a card: Tap Seasoned Hallowblade. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

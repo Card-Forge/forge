@@ -4,5 +4,5 @@ Types:Creature Hellion Beast
 PT:6/6
 K:Echo:4 R R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to each other creature.
-SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.Other | NumDmg$ 4 | ValidDescription$ each other creature.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.StrictlyOther | NumDmg$ 4 | ValidDescription$ each other creature.
 Oracle:Echo {4}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Crater Hellion enters the battlefield, it deals 4 damage to each other creature.

@@ -1,0 +1,23 @@
+Name:Invasion of Ergamon
+ManaCost:R G
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token. Then you may discard a card. If you do, draw a card.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBLoot
+SVar:DBLoot:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
+DeckHas:Ability$Discard|Token & Type$Treasure
+DeckHints:Type$Battle
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Ergamon enters the battlefield, create a Treasure token. Then you may discard a card. If you do, draw a card.
+
+ALTERNATE
+
+Name:Truga Cliffcharger
+ManaCost:no cost
+Colors:red,green
+Types:Creature Rhino
+PT:3/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, search your library for a land or battle card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | ChangeType$ Land,Battle | ChangeNum$ 1
+Oracle:Trample\nWhen Truga Cliffcharger enters the battlefield, you may discard a card. If you do, search your library for a land or battle card, reveal it, put it into your hand, then shuffle.

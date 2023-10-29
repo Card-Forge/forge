@@ -1,0 +1,8 @@
+Name:Placid Rottentail
+ManaCost:G
+Types:Creature Fungus Rabbit
+PT:1/1
+K:Vigilance
+A:AB$ PutCounter | Cost$ 2 G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | CounterNum$ 2 | ValidTgts$ Creature | SorcerySpeed$ True | CounterTypes$ P1P1 | SpellDescription$ Put two +1/+1 counters on target creature. Activate only as a sorcery.
+DeckHas:Ability$Graveyard|Counters
+Oracle:Vigilance\n{2}{G}, Exile Placid Rottentail from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery.

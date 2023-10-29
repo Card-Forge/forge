@@ -1,0 +1,15 @@
+Name:A-Krydle of Baldur's Gate
+ManaCost:U B
+Types:Legendary Creature Human Elf Rogue
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses 1 life and mills a card, then you gain 1 life and scry 1.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ 1 | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ TriggeredTarget | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ Unblockable | TgtPrompt$ Select target creature
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain|Mill
+Oracle:Whenever Krydle of Baldur's Gate deals combat damage to a player, that player loses 1 life and mills a card, then you gain 1 life and scry 1.\nWhenever you attack, target creature can't be blocked this turn.

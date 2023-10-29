@@ -5,5 +5,5 @@ PT:2/2
 K:Flying
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMoveCounters | TriggerDescription$ When CARDNAME enters the battlefield, move any number of +1/+1 counters from other permanents you control onto CARDNAME.
-SVar:TrigMoveCounters:DB$ MoveCounter | ValidSource$ Permanent.YouCtrl+Other+counters_GE1_P1P1 | Defined$ Self | CounterType$ P1P1 | CounterNum$ Any | AiLogic$ FromValid
+SVar:TrigMoveCounters:DB$ MoveCounter | ValidSource$ Permanent.YouCtrl+Other+counters_GE1_P1P1 | Defined$ Self | CounterType$ P1P1 | CounterNum$ Any | AILogic$ FromValid
 Oracle:Flying, lifelink\nWhen Aetherborn Marauder enters the battlefield, move any number of +1/+1 counters from other permanents you control onto Aetherborn Marauder.

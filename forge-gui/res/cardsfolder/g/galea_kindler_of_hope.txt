@@ -1,5 +1,5 @@
 Name:Galea, Kindler of Hope
-ManaCost:1 G U W
+ManaCost:1 G W U
 Types:Legendary Creature Elf Knight
 PT:4/4
 K:Vigilance

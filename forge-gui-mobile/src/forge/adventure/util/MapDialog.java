@@ -3,8 +3,12 @@ package forge.adventure.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -12,16 +16,24 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
+import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
+import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MapDialog
@@ -33,9 +45,10 @@ public class MapDialog {
     private Array<DialogData> data;
     private final int parentID;
     private final static float WIDTH = 250f;
+    public String questAccepted = "";
     static private final String defaultJSON = "[\n" +
             "  {\n" +
-            "    \"effect\":[],\n" +
+            //"    \"effect\":[],\n" +
             "    \"name\":\"Error\",\n" +
             "    \"text\":\"This is a fallback dialog.\\nPlease check Forge logs for errors.\",\n" +
             "    \"condition\":[],\n" +
@@ -50,7 +63,6 @@ public class MapDialog {
         this.stage = stage;
         this.parentID = parentID;
         try {
-
             if (S.isEmpty()) {
                 System.err.print("Dialog error. Dialog property is empty.\n");
                 this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
@@ -60,6 +72,32 @@ public class MapDialog {
         } catch (Exception exception) {
             exception.printStackTrace();
 
+        }
+    }
+
+    public MapDialog(DialogData prebuiltDialog, MapStage stage, int parentID) {
+        this.stage = stage;
+        this.parentID = parentID;
+        try
+        {
+            if (prebuiltDialog == null) {
+                System.err.print("Dialog error. Dialog provided is null.\n");
+                this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
+                return;
+            }
+            this.data = new Array<>();
+            this.data.add(prebuiltDialog);
+            ChangeListener listen = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    Current.player().addQuest(questAccepted);
+                }
+            };
+            addQuestAcceptedListener(listen);
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
         }
     }
 
@@ -103,13 +141,25 @@ public class MapDialog {
         }
     }
 
-    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
+    private boolean loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
+        if (dialog.options.length == 0 && dialog.text.isEmpty() && dialog.action.length > 0){
+            stage.hideDialog();
+            emitDialogFinished();
+            return false; //Allows for use of empty dialogs as area-based effect triggers
+        }
+
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
+        D.getTitleTable().clear();
         D.getContentTable().clear();
         D.getButtonTable().clear(); //Clear tables to start fresh.
         D.clearListeners();
+        Sprite sprite = null;
+
+        Actor actor = stage.getByID(parentID);
+        if (actor instanceof CharacterSprite)
+            sprite = ((CharacterSprite) actor).getAvatar();
         String text; //Check for localized string (locname), otherwise print text.
         if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
@@ -123,6 +173,7 @@ public class MapDialog {
                 int vol = FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC);
                 if (vol > 0) {
                     fadeOut();
+                    audio.getRight().setOnCompletionListener(music -> fadeIn());
                     audio.getRight().play();
                 }
             } else {
@@ -149,7 +200,20 @@ public class MapDialog {
                 }
             }
         });
-        D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
+        float width;
+        if (sprite != null) {
+            if (actor instanceof EnemySprite && !((EnemySprite) actor).hidden) {
+                String name = actor.getName();
+                TypingLabel label =  Controls.newTypingLabel("[%?BLACKEN]-" + name + "-");
+                label.skipToTheEnd();
+                D.getTitleTable().add(label).left().expand();
+            }
+            D.getContentTable().add(new Image(sprite)).width(30).height(30).top();
+            width = WIDTH - 30;
+        } else {
+            width = WIDTH;
+        }
+        D.getContentTable().add(A).width(width); //Add() returns a Cell, which is what the width is being applied to.
         if (dialog.options != null) {
             int i = 0;
             for (DialogData option : dialog.options) {
@@ -174,12 +238,45 @@ public class MapDialog {
                     super.clicked(event, x, y);
                 }
             });
-            if (i == 0)
+            if (i == 0) {
                 stage.hideDialog();
-            else
+                emitDialogFinished();
+                return false;
+            }
+            else{
                 stage.showDialog();
+                return true;
+            }
         } else {
             stage.hideDialog();
+            return false;
+        }
+    }
+
+    protected List<ChangeListener> dialogCompleteList = new ArrayList<>();
+    protected List<ChangeListener> questAcceptedList = new ArrayList<>();
+    public void addDialogCompleteListener(ChangeListener listener) {
+        dialogCompleteList.add(listener);
+    }
+    public void addQuestAcceptedListener(ChangeListener listener){
+        questAcceptedList.add(listener);
+    }
+
+    private void emitDialogFinished(){
+        if (dialogCompleteList != null && dialogCompleteList.size() > 0) {
+            ChangeListener.ChangeEvent evt = new ChangeListener.ChangeEvent();
+            for (ChangeListener listener : dialogCompleteList) {
+                listener.changed(evt, null);
+            }
+        }
+    }
+
+    private void emitQuestAccepted(){
+        if (questAcceptedList != null && questAcceptedList.size() > 0) {
+            ChangeListener.ChangeEvent evt = new ChangeListener.ChangeEvent();
+            for (ChangeListener listener : questAcceptedList) {
+                listener.changed(evt, null);
+            }
         }
     }
 
@@ -192,21 +289,27 @@ public class MapDialog {
         GameHUD.getInstance().fadeOut();
     }
 
-    public void activate() { //Method for actors to show their dialogues.
+    public boolean activate() { //Method for actors to show their dialogues.
+        boolean dialogShown = false;
         for (DialogData dialog : data) {
             if (isConditionOk(dialog.condition)) {
-                loadDialog(dialog);
+                if (loadDialog(dialog))
+                    dialogShown = true;
             }
         }
+        return dialogShown;
     }
 
     void setEffects(DialogData.ActionData[] data) {
         if (data == null) return;
         for (DialogData.ActionData E : data) {
-            if (E.removeItem != null) { //Removes an item from the player's inventory.
+            if (E == null){
+                continue;
+            }
+            if (E.removeItem != null&& (!E.removeItem.isEmpty())) { //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
-            if (E.addItem != null) { //Gives an item to the player.
+            if (E.addItem != null&& (!E.addItem.isEmpty())) { //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
             if (E.addLife != 0) { //Gives (positive or negative) life to the player. Cannot go over max health.
@@ -216,9 +319,25 @@ public class MapDialog {
                 if (E.addGold > 0) Current.player().giveGold(E.addGold);
                 else Current.player().takeGold(-E.addGold);
             }
+            if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
+                if (E.addShards > 0) Current.player().giveGold(E.addShards);
+                else Current.player().takeGold(-E.addShards);
+            }
+            if (E.addMapReputation != 0) {
+                PointOfInterestChanges p;
+                if (E.POIReference.length()>0 && !E.POIReference.contains("$"))
+                    p = WorldSave.getCurrentSave().getPointOfInterestChanges( E.POIReference);
+                else
+                    p = stage.getChanges();
+                if (p != null)
+                    p.addMapReputation(E.addMapReputation);
+            }
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
+            }
+            if (E.activateMapObject != 0){
+                stage.activateMapObject(E.activateMapObject);
             }
             if (E.battleWithActorID != 0) { //Starts a battle with the given enemy ID.
                 if (E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
@@ -229,6 +348,12 @@ public class MapDialog {
             }
             if (E.setColorIdentity != null && !E.setColorIdentity.isEmpty()) { //Sets color identity (use sparingly)
                 Current.player().setColorIdentity(E.setColorIdentity);
+            }
+            if (E.setCharacterFlag != null && !E.setCharacterFlag.key.isEmpty()) { //Set a quest to given value.
+                Current.player().setCharacterFlag(E.setCharacterFlag.key, E.setCharacterFlag.val);
+            }
+            if (E.advanceCharacterFlag != null && !E.advanceCharacterFlag.isEmpty()) { //Increase a given quest flag by 1.
+                Current.player().advanceCharacterFlag(E.advanceCharacterFlag);
             }
             if (E.setQuestFlag != null && !E.setQuestFlag.key.isEmpty()) { //Set a quest to given value.
                 Current.player().setQuestFlag(E.setQuestFlag.key, E.setQuestFlag.val);
@@ -245,6 +370,18 @@ public class MapDialog {
             if (E.setEffect != null) { //Replace current effects.
                 EnemySprite EN = stage.getEnemyByID(parentID);
                 EN.effect = E.setEffect;
+            }
+            if (E.grantRewards != null && E.grantRewards.length > 0) {
+                Array<Reward> ret = new Array<Reward>();
+                for(RewardData rdata:E.grantRewards) {
+                    ret.addAll(rdata.generate(false, true));
+                }
+                RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
+                Forge.switchScene(RewardScene.instance());
+            }
+            if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
+                questAccepted = E.issueQuest;
+                emitQuestAccepted();
             }
         }
     }
@@ -279,19 +416,46 @@ public class MapDialog {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
+            if (condition.hasShards != 0) { //Check for at least X gold.
+                if (player.getShards() < condition.hasShards) {
+                    if (!condition.not) return false;
+                } else if (condition.not) return false;
+            }
             if (condition.hasLife != 0) { //Check for at least X life..
                 if (player.getLife() < condition.hasLife + 1) {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
-            if (condition.hasBlessing != null && !condition.hasBlessing.isEmpty()) { //Check for a named blessing.
-                if (!player.hasBlessing(condition.hasBlessing)) {
+            if (condition.hasMapReputation != Integer.MIN_VALUE){ //Check for at least X reputation.
+                if ( stage.getChanges().getMapReputation() < condition.hasMapReputation + 1) {
                     if (!condition.not) return false;
-                } else if (condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if (condition.hasBlessing != null && !condition.hasBlessing.isEmpty()){ //Check for a named blessing.
+                if(!player.hasBlessing(condition.hasBlessing)){
+                   if(!condition.not) return false;
+                } else if(condition.not) return false;
             }
             if (condition.actorID != 0) { //Check for actor ID.
                 if (!stage.lookForID(condition.actorID)) {
                     if (!condition.not) return false; //Same as above.
+                } else if (condition.not) return false;
+            }
+            if (condition.getCharacterFlag != null) {
+                String key = condition.getCharacterFlag.key;
+                String cond = condition.getCharacterFlag.op;
+                int val = condition.getCharacterFlag.val;
+                int QF = player.getCharacterFlag(key);
+                if (!player.checkCharacterFlag(key)) return false; //If the quest is not ongoing, stop.
+                if (!checkFlagCondition(QF, cond, val)) {
+                    if (!condition.not) return false;
+                } else {
+                    if (condition.not) return false;
+                }
+            }
+            if (condition.checkCharacterFlag != null && !condition.checkCharacterFlag.isEmpty()) {
+                if (!player.checkCharacterFlag(condition.checkCharacterFlag)) {
+                    if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
             if (condition.getQuestFlag != null) {

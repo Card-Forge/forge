@@ -1,0 +1,7 @@
+Name:Second Breakfast
+ManaCost:2 W
+Types:Instant
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SubAbility$ DBFood | SpellDescription$ Up to two target creatures each get +2/+1 until end of turn. 
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | TokenAmount$ 1 | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+DeckHas:Ability$Sacrifice|Token|LifeGain & Type$Artifact|Food
+Oracle:Up to two target creatures each get +2/+1 until end of turn. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

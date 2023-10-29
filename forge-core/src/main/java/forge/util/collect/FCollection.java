@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -265,6 +266,15 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean remove(final Object o) {
         if (set.remove(o)) {
             list.remove(o);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeIf(Predicate<? super T> filter) {
+        if (list.removeIf(filter)) {
+            set.removeIf(filter);
             return true;
         }
         return false;

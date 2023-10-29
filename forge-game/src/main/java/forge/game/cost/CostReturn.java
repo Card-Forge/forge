@@ -115,7 +115,7 @@ public class CostReturn extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         return targetCard.getGame().getAction().moveToHand(targetCard, null);
     }
 

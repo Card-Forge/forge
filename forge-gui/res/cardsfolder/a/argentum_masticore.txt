@@ -2,7 +2,7 @@ Name:Argentum Masticore
 ManaCost:5
 Types:Artifact Creature Phyrexian Masticore
 PT:5/5
-K:First strike
+K:First Strike
 K:Protection:Card.MultiColor:Protection from multicolored
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card. When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
 SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | OrString$ Sacrifice it. | SubAbility$ TrigImmediateTrig

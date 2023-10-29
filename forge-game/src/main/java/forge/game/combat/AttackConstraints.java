@@ -29,6 +29,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -44,12 +45,14 @@ public class AttackConstraints {
 
     private final Map<Card, AttackRestriction> restrictions = Maps.newHashMap();
     private final Map<Card, AttackRequirement> requirements = Maps.newHashMap();
+    private final List<Set<GameEntity>> playerRequirements;
 
     public AttackConstraints(final Combat combat) {
         final Game game = combat.getAttackingPlayer().getGame();
         possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
+        playerRequirements = StaticAbilityMustAttack.mustAttackSpecific(combat.getAttackingPlayer(), possibleDefenders);
 
         // Number of "must attack" constraints on each creature with a magnet counter (equal to the number of permanents requiring that constraint).
         int nMagnetRequirements = 0;
@@ -205,7 +208,7 @@ public class AttackConstraints {
         final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<>();
         int attackersNeeded = 0;
 
-        outer: while(!reqs.isEmpty()) {
+        outer: while (!reqs.isEmpty()) {
             final Iterator<Attack> iterator = reqs.iterator();
             final Attack req = iterator.next();
             final boolean isReserved = reserved.contains(req.attacker);
@@ -344,8 +347,7 @@ public class AttackConstraints {
         for (final Entry<Card, List<Pair<GameEntity, Integer>>> reqList : sortedRequirements.entrySet()) {
             final AttackRestriction restriction = restrictions.get(reqList.getKey());
             final List<Pair<GameEntity, Integer>> list = reqList.getValue();
-            for (int i = 0; i < list.size(); i++) {
-                final Pair<GameEntity, Integer> attackReq = list.get(i);
+            for (Pair<GameEntity, Integer> attackReq : list) {
                 if (restriction.canAttack(attackReq.getLeft())) {
                     result.add(new Attack(reqList.getKey(), attackReq.getLeft(), attackReq.getRight()));
                 }
@@ -353,6 +355,33 @@ public class AttackConstraints {
         }
 
         Collections.sort(result);
+
+        List<Set<GameEntity>> playerReqs = Lists.newArrayList(playerRequirements);
+        CardCollection usedAttackers = new CardCollection();
+        FCollection<GameEntity> excludedDefenders = new FCollection<>();
+        MapToAmount<GameEntity> sortedPlayerReqs = new LinkedHashMapToAmount<>();
+        sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+        while (!sortedPlayerReqs.isEmpty()) {
+            Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
+            // find best attack to also fulfill the additional requirements
+            Attack bestMatch = Iterables.getLast(Iterables.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
+            if (bestMatch != null) {
+                bestMatch.requirements += playerReq.getRight();
+                usedAttackers.add(bestMatch.attacker);
+                // recalculate remaining requirements
+                playerReqs.removeIf(s -> s.contains(playerReq.getLeft()));
+                sortedPlayerReqs.clear();
+                sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+            } else {
+                excludedDefenders.add(playerReq.getLeft());
+            }
+            sortedPlayerReqs.keySet().removeAll(excludedDefenders);
+        }
+        if (!usedAttackers.isEmpty()) {
+            // order could have changed
+            Collections.sort(result);
+        }
+
         return Lists.reverse(result);
     }
     private static List<Attack> deepClone(final List<Attack> original) {
@@ -406,6 +435,12 @@ public class AttackConstraints {
             final AttackRequirement requirement = requirements.get(possibleAttacker);
             if (requirement != null) {
                 violations += requirement.countViolations(attackers.get(possibleAttacker), attackers);
+            }
+        }
+
+        for (Set<GameEntity> defSet : playerRequirements) {
+            if (Collections.disjoint(defSet, attackers.values())) {
+                violations++;
             }
         }
 

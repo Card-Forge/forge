@@ -93,7 +93,7 @@ ScryfallCode=JMP
 85 R Angel of the Dire Hour @Jack Wang
 86 R Angelic Arbiter @Steve Argyle
 87 C Angelic Edict @Trevor Claxton
-88 U Angelic Page @Chris Rahn
+88 C Angelic Page @Chris Rahn
 89 R Archon of Justice @Jason Chan
 90 R Archon of Redemption @Steven Belledin
 91 C Battlefield Promotion @Scott Murphy

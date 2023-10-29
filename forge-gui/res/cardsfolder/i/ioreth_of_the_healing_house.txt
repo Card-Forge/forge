@@ -1,0 +1,8 @@
+Name:Ioreth of the Healing House
+ManaCost:2 U
+Types:Legendary Creature Human Cleric
+PT:1/4
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | SpellDescription$ Untap another target permanent.
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select two other legendary creatures | SpellDescription$ Untap two other target legendary creatures.
+DeckHints:Type$Legendary & Type$Creature
+Oracle:{T}: Untap another target permanent.\n{T}: Untap two other target legendary creatures.

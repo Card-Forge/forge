@@ -1,0 +1,8 @@
+Name:War Historian
+ManaCost:2 G
+Types:Creature Human Monk
+PT:3/3
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self+attackedBattleThisTurn | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it attacked a battle this turn.
+AI:RemoveDeck:Random
+Oracle:Reach\nWar Historian has indestructible as long as it attacked a battle this turn.

@@ -1,0 +1,38 @@
+[metadata]
+Code=YWOE
+Date=2023-10-10
+Name=Alchemy: Eldraine
+Type=Online
+ScryfallCode=YWOE
+
+[cards]
+1 R Cerise, Slayer of Fear @Christina Kraus
+2 R Dedicated Dollmaker @Michele Giorgi
+3 R The Conundrum of Bowls @Volkan Baǵa
+4 U Paths of Tuinvale @David Szabo
+5 R Talion's Throneguard @John Stanko
+6 R Tome of Gadwick @Maxime Minard
+7 U Dunbarrow Revivalist @Marie Magny
+8 M Underbridge Warlock @Marzena Nereida Piwowar
+9 U Draconic Debut @Maxime Minard
+10 R Heir to Dragonfire @J.P. Targete
+11 M Overcooked @David Szabo
+12 R Victory of the Pyrohammer @Xabi Gaztelua
+13 R A Golden Opportunity @Steve Prescott
+14 R Hex, Kellan's Companion @Kaitlyn McCulley
+15 R Swine Rebellion @Josiah "Jo" Cameron
+16 U Accident-Prone Apprentice @Alexander Mokhov
+17 M Drover of the Swine @Warren Mahy
+18 U First Little Pig @Josiah "Jo" Cameron
+19 U Grow Old Together @Elizabeth Peiró
+20 R High Fae Prankster @John Stanko
+21 M Jewel Mine Overseer @Elizabeth Peiró
+22 R Outfitted Jouster @J.P. Targete
+23 R Porcine Portent @Warren Mahy
+24 U Second Little Pig @Josiah "Jo" Cameron
+25 U Steady Tortoise @Steve Prescott
+26 M Stormkeld Curator @Michele Giorgi
+27 R Syr Joshua and Syr Saxon @Xabi Gaztelua
+28 U Third Little Pig @Josiah "Jo" Cameron
+29 R Captivating Crossroads @Yeong-Hao Han
+30 U Loch Larent @Julian Kok Joon Wen

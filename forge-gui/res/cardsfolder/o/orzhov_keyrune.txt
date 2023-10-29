@@ -2,7 +2,7 @@ Name:Orzhov Keyrune
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
-A:AB$ Animate | Cost$ W B | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Artifact,Creature,Thrull | Colors$ White,Black | Keywords$ Lifelink | SpellDescription$ CARDNAME becomes a 1/4 white and black Thrull artifact creature with lifelink until end of turn.
+A:AB$ Animate | Cost$ W B | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Artifact,Creature,Thrull | RemoveCreatureTypes$ True | Colors$ White,Black | Keywords$ Lifelink | SpellDescription$ CARDNAME becomes a 1/4 white and black Thrull artifact creature with lifelink until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Black
 Oracle:{T}: Add {W} or {B}.\n{W}{B}: Orzhov Keyrune becomes a 1/4 white and black Thrull artifact creature with lifelink until end of turn.

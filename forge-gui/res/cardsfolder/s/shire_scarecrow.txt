@@ -1,0 +1,7 @@
+Name:Shire Scarecrow
+ManaCost:2
+Types:Artifact Creature Scarecrow
+PT:0/3
+K:Defender
+A:AB$ Mana | Cost$ 1 | Produced$ Any | ActivationLimit$ 1 | SpellDescription$ Add one mana of any color. Activate only once each turn.
+Oracle:Defender\n{1}: Add one mana of any color. Activate only once each turn.

@@ -97,7 +97,7 @@ public enum GroupDef {
                         if (type.isLand()) { //make Artifact Lands appear in Lands group
                             return 2;
                         }
-                        if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
+                        if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery() || type.isBattle()) {
                             return 1;
                         }
                     }
@@ -106,7 +106,7 @@ public enum GroupDef {
             }),
 
     CARD_TYPE("lblType",
-            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant" },
+            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant", "Battle" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -141,6 +141,9 @@ public enum GroupDef {
                         }
                         if (type.isEnchantment()) {
                             return 5;
+                        }
+                        if (type.isBattle()) {
+                            return 8;
                         }
                         if (type.isLand()) {
                             return 6;

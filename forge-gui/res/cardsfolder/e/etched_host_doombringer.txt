@@ -1,0 +1,12 @@
+Name:Etched Host Doombringer
+ManaCost:4 B
+Types:Creature Phyrexian Demon
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Drain,Battle
+SVar:Drain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | StackDescription$ None
+SVar:Battle:DB$ AddOrRemoveCounter | ValidTgts$ Battle | RemoveConditionSVar$ Targeted$Valid Battle.OppProtect | CounterType$ DEFENSE | CounterNum$ 3 | StackDescription$ REP Choose target battle. _ & it_{c:Targeted} | SpellDescription$ Choose target battle. If an opponent protects it, remove three defense counters from it. Otherwise, put three defense counters on it.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Battle
+Oracle:When Etched Host Doombringer enters the battlefield, choose one —\n• Target opponent loses 2 life and you gain 2 life.\n• Choose target battle. If an opponent protects it, remove three defense counters from it. Otherwise, put three defense counters on it.

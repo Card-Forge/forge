@@ -1,0 +1,8 @@
+Name:Portent Tracker
+ManaCost:1 G
+Types:Creature Satyr Scout
+PT:1/1
+A:AB$ Untap | Cost$ T | ValidTgts$ Land | AILogic$ PoolExtraMana | SpellDescription$ Untap target land.
+A:AB$ AddOrRemoveCounter | Cost$ T | ValidTgts$ Battle | RemoveConditionSVar$ Targeted$Valid Battle.OppProtect | CounterType$ DEFENSE | SorcerySpeed$ True | StackDescription$ REP Choose target battle. _ & it_{c:Targeted} &  Activate only as a sorcery._ | SpellDescription$ Choose target battle. If an opponent protects it, remove a defense counter from it. Otherwise, put a defense counter on it. Activate only as a sorcery.
+DeckHints:Type$Battle
+Oracle:{T}: Untap target land.\n{T}: Choose target battle. If an opponent protects it, remove a defense counter from it. Otherwise, put a defense counter on it. Activate only as a sorcery.

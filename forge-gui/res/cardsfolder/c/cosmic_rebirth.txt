@@ -1,0 +1,9 @@
+Name:Cosmic Rebirth
+ManaCost:1 G W
+Types:Instant
+A:SP$ ChangeZone | Optional$ True | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent card in your graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLE3 | SubAbility$ DBChangeZone | SpellDescription$ Choose target permanent card in your graveyard. If it has mana value 3 or less, you may put it onto the battlefield. If you don't put it onto the battlefield, put it into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBCleanup |  SpellDescription$ You gain 3 life.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain|Graveyard
+Oracle:Choose target permanent card in your graveyard. If it has mana value 3 or less, you may put it onto the battlefield. If you don't put it onto the battlefield, put it into your hand.\nYou gain 3 life.

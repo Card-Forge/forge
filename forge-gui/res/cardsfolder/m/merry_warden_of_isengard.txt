@@ -1,0 +1,11 @@
+Name:Merry, Warden of Isengard
+ManaCost:1 G W
+Types:Legendary Creature Halfling Advisor
+PT:1/4
+K:Partner:Pippin, Warden of Isengard:Pippin
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more artifacts enter the battlefield under your control, create a 1/1 white Soldier creature token with lifelink. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | TokenOwner$ You
+DeckHints:Name$Pippin, Warden of Isengard
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Partner with Pippin, Warden of Isengard (When this creature enters the battlefield, target player may put Pippin into their hand from their library, then shuffle.)\nWhenever one or more artifacts enter the battlefield under your control, create a 1/1 white Soldier creature token with lifelink. This ability triggers only once each turn.

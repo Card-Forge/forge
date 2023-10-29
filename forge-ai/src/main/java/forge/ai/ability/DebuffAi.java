@@ -59,8 +59,8 @@ public class DebuffAi extends SpellAbilityAi {
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !game.getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
-            // stack is empty
-            if (!SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+            // stack is empty, unless there are specific activation phase requirements
+            if (!isSorcerySpeed(sa, ai) && !sa.hasParam("ActivationPhases")) {
                 return false;
             }
         }
@@ -195,7 +195,7 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

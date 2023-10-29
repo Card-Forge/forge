@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Wilds of Eldraine #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/09/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent's Cursed Courtier does not have a Cursed Role attached to it. Begin the puzzle with both graveyards empty. You know the remaining seven cards (it's one of each of the cards you already have access to) in your library, but not their order. Assume your opponent has no creatures remaining in their library. Assume your opponent has no cards in hand. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Bone Splinters;Sleight of Hand;Sleight of Hand;Cruel Somnophage
+p0library=Talion, the Kindly Lord;Haunted Ridge;Furnace Strider;Island;Bone Splinters;Sleight of Hand;Cruel Somnophage
+p0battlefield=Talion, the Kindly Lord|NoETBTrigs;Furnace Strider|Counters:OIL=2;Island;Island;Island;Island;Haunted Ridge;Haunted Ridge;Haunted Ridge
+p1life=8
+p1battlefield=Cursed Courtier
+# Randomize the order of cards in the library
+humanprecast=Ancestral Knowledge:TrigShuffle

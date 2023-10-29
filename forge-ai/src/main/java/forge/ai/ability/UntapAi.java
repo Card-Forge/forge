@@ -1,17 +1,9 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import com.google.common.collect.Iterables;
+import forge.ai.*;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -21,6 +13,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
@@ -33,6 +26,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
+import java.util.List;
+import java.util.Map;
+
 public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -42,6 +38,10 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         } else if ("PoolExtraMana".equals(aiLogic)) {
             return doPoolExtraManaLogic(ai, sa);
+        } else if ("PreventCombatDamage".equals(aiLogic)) {
+            return doPreventCombatDamageLogic(ai, sa);
+            // In the future if you want to give Pseudo vigilance to a creature you attacked with
+            // activate during your own during the end of combat step
         }
 
         return !("Never".equals(aiLogic));
@@ -68,6 +68,8 @@ public class UntapAi extends SpellAbilityAi {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
         } else {
+            // If we already selected a target just use that
+
             return untapPrefTargeting(ai, sa, false);
         }
     }
@@ -124,6 +126,14 @@ public class UntapAi extends SpellAbilityAi {
     private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
 
+        if (alreadyAssignedTarget(sa)) {
+            if (sa.getTargets().size() > 0) {
+                // If we selected something lets assume its valid
+                return true;
+            }
+        }
+        sa.resetTargets();
+
         final PlayerCollection targetController = new PlayerCollection();
         if (sa.isCurse()) {
             targetController.addAll(ai.getOpponents());
@@ -179,7 +189,6 @@ public class UntapAi extends SpellAbilityAi {
             untapList.removeAll(toExclude);
         }
 
-        sa.resetTargets();
         while (sa.canAddMoreTarget()) {
             Card choice = null;
 
@@ -189,6 +198,10 @@ public class UntapAi extends SpellAbilityAi {
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                 } else if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
+                    // check if the cost is acceptable anyway (e.g. Planeswalker +Loyalty)
+                    if (ComputerUtil.activateForCost(sa, ai)) {
+                        return true;
+                    }
                     sa.resetTargets();
                     return false;
                 } else {
@@ -307,11 +320,18 @@ public class UntapAi extends SpellAbilityAi {
 
         return true;
     }
-    
+
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        PlayerCollection pl = ai.getYourTeam();
-        return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
+        CardCollection pref = CardLists.filterControlledBy(list, ai.getYourTeam());
+        if (Iterables.isEmpty(pref)) {
+            if (isOptional) {
+                return null;
+            }
+        } else {
+            list = pref;
+        }
+        return ComputerUtilCard.getBestAI(list);
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {
@@ -329,6 +349,50 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         return null;
+    }
+
+    private boolean doPreventCombatDamageLogic(final Player ai, final SpellAbility sa) {
+        // Only Maze of Ith and Maze of Shadows uses this. Feel free to use it aggressively.
+        Game game = ai.getGame();
+        Card source = sa.getHostCard();
+        sa.resetTargets();
+
+        if (!game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
+            return false;
+        }
+
+        // If damage can't be prevented. Just return false.
+
+         Combat activeCombat = game.getCombat();
+        if (activeCombat == null) {
+            return false;
+        }
+
+        CardCollection list = CardLists.getTargetableCards(activeCombat.getAttackers(), sa);
+
+        if (list.isEmpty()) {
+            return false;
+        }
+
+         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            // Blockers already set. Are there any dangerous unblocked creatures? Sort by creature that will deal the most damage?
+            Card card = ComputerUtilCombat.mostDangerousAttacker(list, ai, activeCombat, true);
+
+            if (card == null) { return false; }
+
+             sa.getTargets().add(card);
+             return true;
+        }
+
+        return false;
+    }
+
+    private static boolean alreadyAssignedTarget(final SpellAbility sa) {
+        if (sa.hasParam("AILogic")) {
+            String aiLogic = sa.getParam("AILogic");
+            return "PreventCombatDamage".equals(aiLogic);
+        }
+        return false;
     }
 
     private boolean doPoolExtraManaLogic(final Player ai, final SpellAbility sa) {
@@ -367,7 +431,7 @@ public class UntapAi extends SpellAbilityAi {
                     if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                         // TODO: Currently limited to predicting something that can be paid with any color,
                         // can ideally be improved to work by color.
-                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestriction());
+                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab));
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
                         if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),

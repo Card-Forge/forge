@@ -174,7 +174,7 @@ public enum FSkinTexture implements FImage {
     Ghirapur(ForgeConstants.BG_89, false, true),
     Inys_Haen(ForgeConstants.BG_90, false, true),
     Ketria(ForgeConstants.BG_91, false, true),
-    Littiara(ForgeConstants.BG_92, false, true),
+    Littjara(ForgeConstants.BG_92, false, true),
     Megaflora_Jungle(ForgeConstants.BG_93, false, true),
     Naktamun(ForgeConstants.BG_94, false, true),
     New_Argive(ForgeConstants.BG_95, false, true),

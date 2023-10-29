@@ -1,0 +1,9 @@
+Name:Battle at the Helvault
+ManaCost:4 W W
+Types:Enchantment Saga
+K:Saga:3:DBExile,DBExile,DBToken
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+nonSaga | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ For each player, exile up to one target non-Saga, nonland permanent that player controls | Duration$ UntilHostLeavesPlay | SpellDescription$ For each player, exile up to one target non-Saga, nonland permanent that player controls until CARDNAME leaves the battlefield.
+SVar:OneEach:PlayerCountPlayers$Amount
+SVar:DBToken:DB$ Token | TokenScript$ avacyn | SpellDescription$ Create Avacyn, a legendary 8/8 white Angel creature token with flying, vigilance, and indestructible.
+DeckHas:Ability$Token & Type$Angel
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — For each player, exile up to one target non-Saga, nonland permanent that player controls until Battle at the Helvault leaves the battlefield.\nIII — Create Avacyn, a legendary 8/8 white Angel creature token with flying, vigilance, and indestructible.

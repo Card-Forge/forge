@@ -5,7 +5,7 @@ PT:0/3
 K:Flash
 K:Evoke:W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPrevent | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 3 damage that would be dealt to any target this turn.
-SVar:TrigPrevent:DB$ PreventDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 3
+SVar:TrigPrevent:DB$ PreventDamage | ValidTgts$ Any | Amount$ 3
 AI:RemoveDeck:All
 SVar:AmbushAI:True
 Oracle:Flash\nWhen Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to any target this turn.\nEvoke {W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

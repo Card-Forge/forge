@@ -1,0 +1,7 @@
+Name:Inherited Envelope
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:When Inherited Envelope enters the battlefield, the Ring tempts you.\n{T}: Add one mana of any color.

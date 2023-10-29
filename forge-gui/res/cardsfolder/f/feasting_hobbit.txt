@@ -1,0 +1,10 @@
+Name:Feasting Hobbit
+ManaCost:1 G
+Types:Creature Halfling Citizen
+PT:2/2
+K:Devour food:3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:Y:Count$CardPower
+DeckHas:Ability$Sacrifice|Counters
+DeckHints:Type$Food
+Oracle:Devour Food 3 (As this enters the battlefield, you may sacrifice any number of Foods. This creature enters the battlefield with three times that many +1/+1 counters on it.)\nCreatures with power less than Feasting Hobbit's power can't block it.

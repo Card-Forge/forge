@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.YouOwn+nonLand | Condition$ PlayerTurn |
 S:Mode$ Continuous | Affected$ Planeswalker.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Planeswalker | EffectZone$ Battlefield | AffectedZone$ Graveyard
 S:Mode$ Continuous | Affected$ Artifact.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Artifact | EffectZone$ Battlefield | AffectedZone$ Graveyard
 S:Mode$ Continuous | Affected$ Enchantment.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Enchantment | EffectZone$ Battlefield | AffectedZone$ Graveyard
+S:Mode$ Continuous | Affected$ Battle.YouOwn+nonLand | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Battle | EffectZone$ Battlefield | AffectedZone$ Graveyard
 Oracle:During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. (If a card has multiple permanent types, choose one as you play it.)

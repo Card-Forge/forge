@@ -19,7 +19,9 @@ public class StoreSVarEffect extends SpellAbilityEffect {
         String expr = null;
 
         if (sa.hasParam("SVar")) {
-            key = sa.getParam("SVar");
+            key = sa.getParam("SVar").equals("EachPlayer") ?
+                    AbilityUtils.getDefinedPlayers(source, "Remembered", sa).get(0).toString() :
+                    sa.getParam("SVar");
         }
 
         if (sa.hasParam("Type")) {
@@ -57,6 +59,10 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             value = AbilityUtils.xCount(trigCard, expr, sa);
         } else if (type.equals("Calculate")) {
             value = AbilityUtils.calculateAmount(source, expr, sa);
+        } else if (type.startsWith("AdditiveForEach")) {
+            int current = source.hasSVar(key) ? AbilityUtils.calculateAmount(source, source.getSVar(key), sa) : 0;
+            int toAdd = AbilityUtils.calculateAmount(source, expr, sa);
+            value = current + toAdd;
         }
         //TODO For other types call a different function
 

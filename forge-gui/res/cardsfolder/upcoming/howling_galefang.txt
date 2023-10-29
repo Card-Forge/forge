@@ -1,0 +1,8 @@
+Name:Howling Galefang
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Card.AdventureCard+YouOwn | PresentZone$ Exile | Description$ CARDNAME has haste as long as you own a card in exile that has an Adventure.
+DeckHints:Type$Adventure
+Oracle:Vigilance\nHowling Galefang has haste as long as you own a card in exile that has an Adventure.

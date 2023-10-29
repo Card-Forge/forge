@@ -1,0 +1,57 @@
+[metadata]
+Code=RVR
+Date=2024-03-01
+Name=Ravnica Remastered
+Type=Reprint
+ScryfallCode=RVR
+
+[cards]
+31 R Tomik, Distinguished Advokist @Johannes Voss
+44 R Fblthp, the Lost @Jesper Ejsing
+83 R Massacre Girl @Chris Rallis
+114 R Krenko, Mob Boss @Karl Kopinski
+133 R Birds of Paradise @Marcelo Vignali
+164 M Aurelia, Exemplar of Justice @Chris Rahn
+207 R Niv-Mizzet, Parun @Svetlin Velinov
+273 R Blood Crypt @Rob Alexander
+275 R Breeding Pool @Rob Alexander
+277 R Godless Shrine @Rob Alexander
+280 R Hallowed Fountain @Rob Alexander
+283 R Overgrown Tomb @Rob Alexander
+285 R Sacred Foundry @Rob Alexander
+288 R Steam Vents @Rob Alexander
+289 R Stomping Ground @Rob Alexander
+290 R Temple Garden @Rob Alexander
+291 R Watery Grave @Rob Alexander
+292 R Blood Crypt @Jonas De Ro
+293 R Breeding Pool @Yeong-Hao Han
+294 R Godless Shrine @Cliff Childs
+295 R Hallowed Fountain @Yeong-Hao Han
+296 R Overgrown Tomb @Svetlin Velinov
+297 R Sacred Foundry @Chris Ostrowski
+298 R Steam Vents @Yeong-Hao Han
+299 R Stomping Ground @Cliff Childs
+300 R Temple Garden @Alayna Danner
+301 R Watery Grave @Svetlin Velinov
+328 R Massacre Girl @Chris Rallis
+331 R Arclight Phoenix @Slawomir Maniak
+335 R Krenko, Mob Boss @Karl Kopinski
+344 R Birds of Paradise @Marcelo Vignali
+356 M Aurelia, Exemplar of Justice @Chris Rahn
+376 R Niv-Mizzet, Parun @Svetlin Velinov
+397 R Blood Crypt @Rob Alexander
+399 R Breeding Pool @Rob Alexander
+401 R Godless Shrine @Rob Alexander
+404 R Hallowed Fountain @Rob Alexander
+407 R Overgrown Tomb @Rob Alexander
+409 R Sacred Foundry @Rob Alexander
+412 R Steam Vents @Rob Alexander
+413 R Stomping Ground @Rob Alexander
+414 R Temple Garden @Rob Alexander
+415 R Watery Grave @Rob Alexander
+417 R Tomik, Distinguished Advokist @Yakotakos
+420 R Fblthp, the Lost @Tetsu Kurosawa
+425 R Massacre Girl @MiDQN
+430 R Krenko, Mob Boss @Ai Nanahira
+432 R Birds of Paradise @Kemonomichi
+445 M Ral Zarek @Fukuzo Katsura

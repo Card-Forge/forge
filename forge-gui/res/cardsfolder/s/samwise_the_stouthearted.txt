@@ -1,0 +1,10 @@
+Name:Samwise the Stouthearted
+ManaCost:1 W
+Types:Legendary Creature Halfling Peasant
+PT:2/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, choose up to one target permanent card in your graveyard that was put there from the battlefield this turn. Return it to your hand. Then the Ring tempts you.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn+ThisTurnEnteredFrom_Battlefield | Origin$ Graveyard | Destination$ Hand | SubAbility$ TrigTempt | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target permanent card in your graveyard that was put there from the battlefield this turn
+SVar:TrigTempt:DB$ RingTemptsYou
+DeckHas:Ability$Graveyard
+Oracle:Flash\nWhen Samwise the Stouthearted enters the battlefield, choose up to one target permanent card in your graveyard that was put there from the battlefield this turn. Return it to your hand. Then the Ring tempts you.

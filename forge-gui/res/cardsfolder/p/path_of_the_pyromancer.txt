@@ -1,0 +1,14 @@
+Name:Path of the Pyromancer
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Discard | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBMana | SpellDescription$ Discard all the cards in your hand.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Add {R} for each card discarded this way,
+SVar:DBDraw:DB$ Draw | NumCards$ SVar$X/Plus.1 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ then draw that many cards plus one.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSpace
+SVar:X:Remembered$Amount
+SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
+SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
+SVar:DBPlaneswalk:DB$ Planeswalk
+SVar:DBChaos:DB$ ChaosEnsues
+DeckHas:Ability$Discard
+Oracle:Discard all the cards in your hand. Add {R} for each card discarded this way, then draw that many cards plus one.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.

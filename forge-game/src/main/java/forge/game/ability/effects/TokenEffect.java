@@ -110,7 +110,6 @@ public class TokenEffect extends TokenEffectBase {
             }
         }
 
-        final int finalAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
         MutableBoolean combatChanged = new MutableBoolean(false);
 
         boolean useZoneTable = true;
@@ -125,7 +124,9 @@ public class TokenEffect extends TokenEffectBase {
         }
 
         makeTokenTable(AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner", "You"), sa),
-                sa.getParam("TokenScript").split(","), finalAmount, false, triggerList, combatChanged, sa);
+                sa.getParam("TokenScript").split(","),
+                AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa),
+                false, triggerList, combatChanged, sa);
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game, sa);

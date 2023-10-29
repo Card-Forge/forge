@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="23">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJx7L8DA8H4UD2k8QXDg3TCKR/EoHsWjeBSPYgQGAOukVWk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1lV8OgjAMxpeo8Un2IjIP479LGRXvosbEBw/gGTyCGg/jGmkoZSsbaJMv4gL79WtHuWZKXX8kHmfHGsavmF24B6ulcevYggv7DZmOWZ0r5bcQcjmQ/SjTaKWeo68w+rruQeJKuaysTuRZYMIaDcjhVfAvjDtj97bJAbRN3Pcgm3OR3be/g0jvEI+iplP9/b938DeJm0v5sWzaR+ovhhva7yfxiD4ldghXqvl7VOWsPT1FVgw3pub/4IbU3MfdJdXrie7Gvdnnc7Knj4tekXm3/Zmbbn7HjJ0zNvVqirOA8yWE6Zo/Pp+pLsUD2K452aa33HNTQN1PHb1Sdsr4UGO+1sSl38MmJg9eY94HiYvzgs+MXlauc/neb9oHPGchdaY5SOdf+pZhH+Adwn0+8DHMnQ==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lU0OAiEMhUn8XwAuDN6QGN17RvUEEzcewgs4LAidWkrRzktImBnmfaVAMUZPr728aepX7tkZs/J0u7h+LuWXfDD3xHgvmViSf/aDzLUv/z9t6eM5cFwuluQfXZ2JFRFny4yVxpDj4IS5mX0fc/Kw39+0RHEhv4c9jGOvwnXiuEmt9R4s3f+XO1fOW1zI12RLuUk9Z+y9mT4HtL/n4nJaHI3ZdZzXFvdQ8QqoZkWiTtbUqj81Ns5vZktqfZJWjrMk6yudqwYX3l89TJhnKsctbq4XuGbcbHmPm/R8By/LM4yB2/+Suyz44vMBllpLQA==
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQx04SmCK2WMRo7WdtAYDYecoGAWjYPgCWpeTo2DkAWZxBBsA3y8B1A==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="8" template="../../obj/enemy.tx" x="336" y="176">
+   <properties>
+    <property name="enemy" value="Snow Wizard"/>
+   </properties>
+  </object>
+  <object id="9" template="../../obj/enemy.tx" x="308" y="255">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+   </properties>
+  </object>
+  <object id="10" template="../../obj/enemy.tx" x="413" y="186">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+   </properties>
+  </object>
+  <object id="11" template="../../obj/enemy.tx" x="97" y="79">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="21"/>
+   </properties>
+  </object>
+  <object id="12" template="../../obj/treasure.tx" x="64" y="64"/>
+  <object id="13" template="../../obj/gold.tx" x="96" y="304"/>
+  <object id="14" template="../../obj/enemy.tx" x="143" y="304">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="22"/>
+   </properties>
+  </object>
+  <object id="15" template="../../obj/enemy.tx" x="208" y="112">
+   <properties>
+    <property name="waypoints" value="r5-17-16"/>
+   </properties>
+  </object>
+  <object id="18" template="../../obj/dialog.tx" x="323" y="144" width="46" height="28">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The mage at the heart of the cavern snarls at you, 'If my companions haven't given you a cold enough welcoming, allow me...' &quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Fight!)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;:8}, {&quot;deleteMapObject&quot;: -1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="19" template="../../obj/manashards.tx" x="416" y="288"/>
+  <object id="20" template="../../obj/manashards.tx" x="177" y="79"/>
+  <object id="21" template="../../obj/waypoint.tx" name="21" x="97" y="79"/>
+  <object id="22" template="../../obj/waypoint.tx" name="22" x="143" y="304"/>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="240" y="96"/>
+  <object id="7" template="../../obj/entry_up.tx" x="296" y="320" width="113" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/frostbitten_cavern_0.tmx"/>
+    <property name="teleportObjectId" value="31"/>
+   </properties>
+  </object>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="176" y="160"/>
+  <object id="17" template="../../obj/waypoint.tx" name="17" x="144" y="96"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,14 @@
+Name:The Wilds
+ManaCost:no cost
+Types:Plane Eldraine
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a Food token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a Food token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature's toughness was 4 or greater.
+SVar:RolledChaos:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ Z | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Z:Remembered$Valid Creature.powerGE4/Plus.1
+DeckHas:Ability$Token|Sacrifice & Type$Food
+DeckHints:Type$Food
+Oracle:When you planeswalk to The Wilds and at the beginning of your upkeep, create a Food token.\nWhenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature's toughness was 4 or greater.

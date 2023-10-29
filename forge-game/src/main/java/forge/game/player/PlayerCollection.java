@@ -23,6 +23,10 @@ public class PlayerCollection extends FCollection<Player> {
         this.addAll(players); 
     }
 
+    public PlayerCollection(Player player) {
+        this.add(player);
+    }
+
     // card collection functions
     public final CardCollection getCardsIn(ZoneType zone) {
         CardCollection result = new CardCollection();

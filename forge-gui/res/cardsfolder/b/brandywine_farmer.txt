@@ -1,0 +1,9 @@
+Name:Brandywine Farmer
+ManaCost:2 G
+Types:Creature Halfling Peasant
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters or leaves the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigFood | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Sacrifice|Token|LifeGain & Type$Artifact|Food
+Oracle:When Brandywine Farmer enters or leaves the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

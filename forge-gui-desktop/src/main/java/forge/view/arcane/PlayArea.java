@@ -595,8 +595,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             Iterable<CardView> cards = model.getCards(zone);
             if (cards != null) {
                 modelCopy = Lists.newArrayList(cards);
-            }
-            else {
+            } else {
                 modelCopy = Lists.newArrayList();
             }
         }
@@ -648,17 +647,17 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             doLayout();
         }
 
-	invalidate(); //pfps do the extra invalidate before any scrolling 
+        invalidate(); //pfps do the extra invalidate before any scrolling 
         if (!newPanels.isEmpty()) {
-	    int i = newPanels.size();
+            int i = newPanels.size();
             for (final CardPanel toPanel : newPanels) {
-		if ( --i == 0 ) { // only scroll to last panel to be added
-		    scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
-		}
+                if ( --i == 0 ) { // only scroll to last panel to be added
+                    scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+                }
                 Animation.moveCard(toPanel);
             }
-	}
-	repaint();
+        }
+        repaint();
     }
 
     public boolean updateCard(final CardView card, boolean fromRefresh) {
@@ -698,7 +697,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
-            attachedToPanel = getCardPanel(card.getAttachedTo().getId());
+            if (card != card.getAttachedTo().getAttachedTo())
+                attachedToPanel = getCardPanel(card.getAttachedTo().getId());
+            else {
+                toPanel.getAttachedPanels().remove(getCardPanel(card.getAttachedTo().getId()));
+                CardPanel panel = getCardPanel(card.getAttachedTo().getId());
+                if (panel != null)
+                    panel.setAttachedToPanel(null);
+                attachedToPanel = null;
+            }
         } else {
             attachedToPanel = null;
         }

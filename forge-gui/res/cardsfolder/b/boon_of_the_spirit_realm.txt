@@ -1,0 +1,10 @@
+Name:Boon of the Spirit Realm
+ManaCost:3 W W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigCounter | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, put a blessing counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ BLESSING | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Creatures you control get +1/+1 for each blessing counter on CARDNAME
+SVar:X:Count$CardCounters.BLESSING
+DeckHints:Type$Enchantment
+DeckHas:Ability$Counters
+Oracle:Constellation — Whenever Boon of the Spirit Realm or another enchantment enters the battlefield under your control, put a blessing counter on Boon of the Spirit Realm.\nCreatures you control get +1/+1 for each blessing counter on Boon of the Spirit Realm.

@@ -3,7 +3,7 @@ ManaCost:3 U B
 Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to blue and black is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to blue and black is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Blue.Black
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ PhenaxMill | AddSVar$ PhenaxToughness | Description$ Creatures you control have "{T}: Target player mills X cards, where X is this creature's toughness."
 SVar:PhenaxMill:AB$ Mill | Cost$ T | ValidTgts$ Player | NumCards$ PhenaxToughness | SpellDescription$ Target player mills X cards, where X is CARDNAME's toughness.

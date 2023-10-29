@@ -1,0 +1,17 @@
+Name:Rankle and Torbran
+ManaCost:1 B B R R
+Types:Legendary Creature Faerie Dwarf
+PT:3/4
+K:Flying
+K:First Strike
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigCharm | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or battle, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Treasure,Sacrifice,Effect | MinCharmNum$ 0 | CharmNum$ 3
+SVar:Treasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ Player | SpellDescription$ Each player creates a Treasure token.
+SVar:Sacrifice:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices a creature.
+SVar:Effect:DB$ Effect | ReplacementEffects$ MoreDamage | SpellDescription$ If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.
+SVar:MoreDamage:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player,Battle | ReplaceWith$ DmgPlus2 | Description$ If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.2
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Flying, first strike, haste\nWhenever Rankle and Torbran deals combat damage to a player or battle, choose any number —\n• Each player creates a Treasure token.\n• Each player sacrifices a creature.\n• If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.

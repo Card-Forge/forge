@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Legendary Planeswalker Sorin
 Loyalty:4
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | NumAtt$ +2 | SpellDescription$ Up to one target creature gets +2/+0 until end of turn.
-A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target. You gain 4 life.
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target. You gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 A:AB$ AnimateAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Vampire.YouCtrl | Abilities$ ABControl | SpellDescription$ Until end of turn, each Vampire you control gains "{T}: Gain control of target creature."
 SVar:ABControl:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.

@@ -1,0 +1,9 @@
+Name:Rivendell
+ManaCost:no cost
+Types:Legendary Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary creature.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Scry | Cost$ 1 U T | ScryNum$ 2 | IsPresent$ Creature.Legendary+YouCtrl | SpellDescription$ Scry 2. Activate only if you control a legendary creature.
+DeckHints:Type$Legendary & Type$Creature
+Oracle:Rivendell enters the battlefield tapped unless you control a legendary creature.\n{T}: Add {U}.\n{1}{U}, {T}: Scry 2. Activate only if you control a legendary creature.

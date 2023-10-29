@@ -1,0 +1,12 @@
+Name:Wizard's Rockets
+ManaCost:1
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ X T Sac<1/CARDNAME> | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+SVar:SacMe:1
+Oracle:Wizard's Rockets enters the battlefield tapped.\n{X}, {T}, Sacrifice Wizard's Rockets: Add X mana in any combination of colors.\nWhen Wizard's Rockets is put into a graveyard from the battlefield, draw a card.

@@ -1,0 +1,8 @@
+Name:Flywheel Racer
+ManaCost:2
+Types:Artifact Vehicle
+PT:3/2
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | IsPresent$ Creature.Self | SpellDescription$ Add one mana of any color. Activate only if CARDNAME is a creature.
+K:Crew:1
+Oracle:Vigilance\n{T}: Add one mana of any color. Activate only if Flywheel Racer is a creature.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

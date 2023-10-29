@@ -1,0 +1,9 @@
+Name:Gnawing Crescendo
+ManaCost:2 R
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | SubAbility$ DBEffect | SpellDescription$ Creatures you control get +2/+0 until end of turn. Whenever a nontoken creature you control dies this turn, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:DBEffect:DB$ Effect | Triggers$ DiesTrig
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies this turn, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You
+DeckHas:Ability$Token & Type$Rat
+Oracle:Creatures you control get +2/+0 until end of turn. Whenever a nontoken creature you control dies this turn, create a 1/1 black Rat creature token with "This creature can't block."

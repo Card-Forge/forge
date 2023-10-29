@@ -1,0 +1,9 @@
+Name:Furtive Analyst
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/4
+K:Vigilance
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Vigilance\n{2}, {T}: Draw a card, then discard a card.

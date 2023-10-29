@@ -1,0 +1,10 @@
+[metadata]
+Code=P30T
+Date=2023-09-01
+Name=30th Anniversary Celebration Tokyo
+Type=Promo
+ScryfallCode=P30T
+
+[cards]
+1 R Destroy Evil @Naoki Saito
+2 R Shivan Dragon @Kota Nakatsubo

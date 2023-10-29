@@ -1,0 +1,6 @@
+Name:Meeting of Minds
+ManaCost:3 U
+Types:Instant
+K:Convoke
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDraw two cards.

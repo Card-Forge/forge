@@ -19,7 +19,7 @@ public class AbilityApiBased extends AbilityActivated {
         effect = api.getSpellEffect();
 
         if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
-            this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
+            this.setManaPart(new AbilityManaPart(this, mapParams));
             this.setUndoable(true); // will try at least
         }
 

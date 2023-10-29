@@ -6,7 +6,7 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | Counter
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 A:AB$ Draw | Cost$ 1 U SubCounter<2/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.
-A:AB$ DealDamage | Cost$ 1 R SubCounter<5/CHARGE> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
+A:AB$ DealDamage | Cost$ 1 R SubCounter<5/CHARGE> | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Instant|Sorcery
 Oracle:Whenever you cast an instant or sorcery spell, put a charge counter on Firemind's Research.\n{1}{U}, Remove two charge counters from Firemind's Research: Draw a card.\n{1}{R}, Remove five charge counters from Firemind's Research: It deals 5 damage to any target.

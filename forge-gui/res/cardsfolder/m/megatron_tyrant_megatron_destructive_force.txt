@@ -22,8 +22,9 @@ PT:4/5
 K:Living metal
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediate | TriggerDescription$ Whenever NICKNAME attacks, you may sacrifice another artifact. When you do, NICKNAME deals damage equal to the sacrificed artifact's mana value to target creature. If excess damage would be dealt to that creature this way, instead that damage is dealt to that creature's controller and you convert NICKNAME.
 SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact.Other/another artifact> | RememberObjects$ Sacrificed | Execute$ TrigDamage | AILogic$ SacForDamage.cmc | TriggerDescription$ When you do, NICKNAME deals damage equal to the sacrificed artifact's mana value to target creature. If excess damage would be dealt to that creature this way, instead that damage is dealt to that creature's controller and you convert NICKNAME.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | ExcessSVar$ Excess | ExcessDamage$ TargetedController | SubAbility$ DBConvert
-SVar:DBConvert:DB$ SetState | ConditionCheckSVar$ Excess | Mode$ Transform
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | RememberRedirectedExcess$ True | ExcessDamage$ TargetedController | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | ConditionCheckSVar$ Count$RememberedNumber | Mode$ Transform | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerRemembered$CardManaCost
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice

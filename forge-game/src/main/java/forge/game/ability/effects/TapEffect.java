@@ -1,9 +1,15 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -12,6 +18,7 @@ public class TapEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
@@ -19,7 +26,26 @@ public class TapEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        for (final Card tgtC : getTargetCards(sa)) {
+        Iterable<Card> toTap;
+
+        if (sa.hasParam("CardChoices")) { // choosing outside Defined/Targeted
+            CardCollection choices = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), activator, card, sa);
+            int n = sa.hasParam("ChoiceAmount") ?
+                    AbilityUtils.calculateAmount(card, sa.getParam("ChoiceAmount"), sa) : 1;
+            int min = sa.hasParam("AnyNumber") ? 0 : n;
+            final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
+                    Localizer.getInstance().getMessage("lblChoosePermanentstoTap");
+            toTap = activator.getController().chooseEntitiesForEffect(choices, min, n, null, sa, prompt, null, null);
+        } else {
+            toTap = getTargetCards(sa);
+        }
+
+        Player tapper = activator;
+        if (sa.hasParam("Tapper")) {
+            tapper = AbilityUtils.getDefinedPlayers(card, sa.getParam("Tapper"), sa).getFirst();
+        }
+
+        for (final Card tgtC : toTap) {
             if (tgtC.isPhasedOut()) {
                 continue;
             }
@@ -27,7 +53,7 @@ public class TapEffect extends SpellAbilityEffect {
                 if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);
                 }
-                tgtC.tap(true);
+                tgtC.tap(true, sa, tapper);
             }
             if (sa.hasParam("ETB")) {
                 // do not fire Taps triggers

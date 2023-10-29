@@ -1,0 +1,12 @@
+{                                    
+"name":"Dross Grimnarch",
+  "template":
+  {
+   "count":60,
+   "colors":["Black, Blue"],
+   "tribe":"Phyrexian",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.40,
+   "rares":0.4
+  }
+}

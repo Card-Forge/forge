@@ -1,0 +1,14 @@
+Name:Corruption of Towashi
+ManaCost:4 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME enters the battlefield, incubate 4. (Create an Incubator token with four +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 4
+T:Mode$ Transformed | ValidCard$ Permanent.YouCtrl+inZoneBattlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | CheckSVar$ X | SVarCompare$ LT1 | TriggerDescription$ Whenever a permanent you control transforms or a permanent enters the battlefield under your control transformed, you may draw a card. Do this only once each turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Transformed+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | CheckSVar$ X | SVarCompare$ LT1 | TriggerDescription$ Whenever a permanent you control transforms or a permanent enters the battlefield under your control transformed, you may draw a card. Do this only once each turn.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLog
+SVar:DBLog:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1
+SVar:X:Number$0
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
+DeckHas:Ability$Counters|Token & Type$Incubator|Artifact|Phyrexian
+Oracle:When Corruption of Towashi enters the battlefield, incubate 4. (Create an Incubator token with four +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\nWhenever a permanent you control transforms or a permanent enters the battlefield under your control transformed, you may draw a card. Do this only once each turn.

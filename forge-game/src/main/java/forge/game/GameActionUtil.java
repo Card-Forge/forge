@@ -144,7 +144,7 @@ public final class GameActionUtil {
                     sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlay(o);
 
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
@@ -254,7 +254,7 @@ public final class GameActionUtil {
                 }
 
                 // foretell by external source
-                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
+                if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
@@ -401,7 +401,9 @@ public final class GameActionUtil {
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
         }
 
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        final CardCollection costSources = new CardCollection(source);
+        costSources.addAll(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        for (final Card ca : costSources) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions("OptionalCost")) {
                     continue;
@@ -431,14 +433,17 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    costs.add(new OptionalCostValue(OptionalCost.AltCost, cost));
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost));
                 }
             }
         }
 
         for (KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
-            if (keyword.startsWith("Buyback")) {
+            if (keyword.equals("Bargain")) {
+                final Cost cost = new Cost("Sac<1/Artifact;Enchantment;Card.token/artifact, enchantment or token>", false);
+                costs.add(new OptionalCostValue(OptionalCost.Bargain, cost));
+            } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
             } else if (keyword.startsWith("Entwine")) {
@@ -447,17 +452,11 @@ public final class GameActionUtil {
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
-                // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
-                int numKickers = sCosts.length - (generic ? 1 : 0);
+                int numKickers = sCosts.length;
                 for (int j = 0; j < numKickers; j++) {
                     final Cost cost = new Cost(sCosts[j], false);
                     OptionalCost type = null;
-                    if (!generic) {
-                        type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
-                    } else {
-                        type = OptionalCost.Generic;
-                    }
+                    type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {
@@ -868,6 +867,9 @@ public final class GameActionUtil {
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
+            // might have been an alternative lki host
+            oldCard = ability.getCardState().getCard();
+ 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
             // add back to where it came from, hopefully old state
@@ -899,10 +901,18 @@ public final class GameActionUtil {
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);
             oldCard.unanimateBestow();
+            if (ability.isDisturb() || ability.hasParam("CastTransformed")) {
+                oldCard.undoIncrementTransformedTimestamp();
+            }
 
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
             }
+        }
+
+        if (ability.getApi() == ApiType.Charm) {
+            // reset chain
+            ability.setSubAbility(null);
         }
 
         ability.clearTargets();

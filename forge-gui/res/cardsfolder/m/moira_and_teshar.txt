@@ -1,0 +1,10 @@
+Name:Moira and Teshar
+ManaCost:3 W B
+Types:Legendary Creature Phyrexian Spirit Bird
+PT:4/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever you cast a historic spell, return target nonland permanent card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent card in your graveyard | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Haste | LeaveBattlefield$ Exile | Defined$ Targeted | Duration$ Permanent | AtEOT$ Exile
+DeckHints:Type$Artifact|Legendary|Saga
+Oracle:Flying\nWhenever you cast a historic spell, return target nonland permanent card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. (Artifacts, legendaries, and Sagas are historic.)

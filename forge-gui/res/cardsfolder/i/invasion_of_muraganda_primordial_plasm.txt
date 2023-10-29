@@ -1,0 +1,22 @@
+Name:Invasion of Muraganda
+ManaCost:4 G
+Types:Battle Siege
+Defense:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control. Then that creature fights up to one target creature you don't control.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Fight | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouDontCtrl | AILogic$ Always | TgtPrompt$ Choose up to one target creature you don't control
+DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Muraganda enters the battlefield, put a +1/+1 counter on target creature you control. Then that creature fights up to one target creature you don't control.
+
+ALTERNATE
+
+Name:Primordial Plasm
+ManaCost:no cost
+Colors:green
+Types:Creature Ooze
+PT:4/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | RemoveAllAbilities$ True 
+Oracle:At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn.

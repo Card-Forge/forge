@@ -1,0 +1,13 @@
+Name:Thunderous Debut
+ManaCost:6 G G
+Types:Sorcery
+K:Bargain
+A:SP$ Dig | Defined$ You | DigNum$ 20 | SubAbility$ DBChoose | ChangeValid$ Creature | Reveal$ True | NoMove$ True | RememberRevealed$ True | SpellDescription$ Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
+SVar:DBChoose:DB$ ChooseCard | SubAbility$ DBPutBattlefield | Choices$ Creature.IsRemembered | Amount$ 2 | ChoiceTitle$ Choose up to two creature cards to reveal | ChoiceZone$ Library
+SVar:DBPutBattlefield:DB$ ChangeZoneAll | Condition$ Bargain | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.ChosenCard | SubAbility$ DBHand
+SVar:DBHand:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | ChangeType$ Card.ChosenCard | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nLook at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.

@@ -1,0 +1,9 @@
+Name:Preening Champion
+ManaCost:2 U
+Types:Creature Bird Knight
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 blue and red Elemental creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ur_1_1_elemental
+DeckHas:Ability$Token & Type$Elemental
+Oracle:Flying\nWhen Preening Champion enters the battlefield, create a 1/1 blue and red Elemental creature token.

@@ -1,0 +1,8 @@
+Name:Delighted Halfling
+ManaCost:G
+Types:Creature Halfling Citizen
+PT:1/2
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Legendary | AddsNoCounter$ True | SpellDescription$ Add one mana of any color. Spend this mana only to cast a legendary spell, and that spell can't be countered.
+DeckNeeds:Type$Legendary
+Oracle:{T}: Add {C}\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell, and that spell can't be countered.

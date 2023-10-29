@@ -1,0 +1,12 @@
+Name:Inys Haen
+ManaCost:no cost
+Types:Plane Cridhe
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Command | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, mill three cards.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When you planeswalk away from CARDNAME, each player returns all land cards from their graveyard to the battlefield tapped
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | Tapped$ True | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target nonland card from your graveyard to your hand.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.nonLand+YouCtrl | TgtPrompt$ Select target nonland card in your graveyard
+DeckHas:Ability$Graveyard|Mill
+Oracle:When you planeswalk to Ins Haen and at the beginning of your upkeep, mill three cards.\nWhen you planeswalk away from Ins Haen, each player returns all land cards from their graveyard to the battlefield tapped\nWhenever chaos ensues, return target nonland card from your graveyard to your hand.

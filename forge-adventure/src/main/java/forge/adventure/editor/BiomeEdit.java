@@ -42,7 +42,7 @@ public class BiomeEdit extends FormPanel {
         center.add("height:",height);
         center.add("spriteNames:",spriteNames);
         center.add("enemies:",enemies);
-        center.add("pointsOfInterest:",pointsOfInterest);
+        center.add("POITags:",pointsOfInterest);
         center.add("color:",color);
         center.add("collision:",collision);
         center.add("terrain/structures:",new JLabel(""));

@@ -1,11 +1,9 @@
 package forge.game.ability.effects;
 
 
-import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 
 public class EndCombatPhaseEffect extends SpellAbilityEffect {
@@ -24,9 +22,7 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
         }
 
         // 1) All spells and abilities on the stack are exiled.
-        for (final Card c : Lists.newArrayList(game.getStackZone().getCards())) {
-            game.getAction().exile(c, sa);
-        }
+        game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, null);
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
         game.getTriggerHandler().clearWaitingTriggers();

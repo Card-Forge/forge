@@ -30,7 +30,7 @@ public class StaticAbilityUnspentMana {
         return result;
     }
 
-    public static void applyUnspentManaAbility(final StaticAbility stAb, final Player player, Set<Byte> result) {
+    private static void applyUnspentManaAbility(final StaticAbility stAb, final Player player, Set<Byte> result) {
         if (!stAb.matchesValidParam("ValidPlayer", player)) {
             return;
         }

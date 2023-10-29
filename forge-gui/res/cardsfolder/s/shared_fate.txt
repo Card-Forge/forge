@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffects:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | EffectOwner$ Remembered | StaticAbilities$ STPlay | ReplacementEffects$ RDraw | Duration$ UntilHostLeavesPlay | ForgetOnMoved$ Exile
 SVar:RDraw:Event$ Draw | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DBChooseOpp | Description$ If you would draw a card, exile the top card of an opponent's library face down instead.
-SVar:DBChooseOpp:DB$ ChoosePlayer | ChoiceTitle$ Choose an opponent whose top library card to exile | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBExile
+SVar:DBChooseOpp:DB$ ChoosePlayer | ChoiceTitle$ Choose an opponent whose top library card to exile | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBExile | DontNotify$ True
 SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | Defined$ Player.Chosen | RememberChanged$ True
 SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play cards exiled with Shared Fate.
 AI:RemoveDeck:All

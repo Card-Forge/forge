@@ -1,0 +1,7 @@
+Name:Unseal the Necropolis
+ManaCost:2 B
+Types:Instant
+A:SP$ Mill | NumCards$ 3 | Defined$ Player | SubAbility$ DBChangeZone | SpellDescription$ Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To mill three cards, a player puts the top three cards of their library into their graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Creature.YouOwn | SelectPrompt$ Select up to two creature cards from your graveyard to return to your hand | Hidden$ True | StackDescription$ {p:You} returns up to two creature cards from their graveyard to their hand.
+DeckHas:Ability$Graveyard|Mill
+Oracle:Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To mill three cards, a player puts the top three cards of their library into their graveyard.)

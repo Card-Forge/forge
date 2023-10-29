@@ -68,6 +68,14 @@ public class TriggerCounterRemovedOnce extends Trigger {
             }
         }
 
+        if (hasParam("Remaining")) {
+            final int remaining = Integer.parseInt(getParam("Remaining"));
+
+            if (remaining != (int) runParams.get(AbilityKey.NewCounterAmount)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

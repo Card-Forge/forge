@@ -1,0 +1,92 @@
+snake_cobra.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 240, 144
+  size: 16, 16    
+Idle
+  xy: 2, 16
+  size: 20, 16  
+Idle
+  xy: 34, 16
+  size: 20, 16  
+Idle
+  xy: 66, 16
+  size: 20, 16   
+Idle
+  xy: 98, 16
+  size: 20, 16  
+Idle
+  xy: 130, 16
+  size: 20, 16  
+Idle
+  xy: 162, 16
+  size: 20, 16  
+Idle
+  xy: 194, 16
+  size: 20, 16   
+Idle
+  xy: 226, 16
+  size: 20, 16  
+Walk
+  xy: 2, 48
+  size: 22, 16  
+Walk
+  xy: 34, 48
+  size: 22, 16  
+Walk
+  xy: 66, 48
+  size: 22, 16   
+Walk
+  xy: 98, 48
+  size: 22, 16    
+Walk
+  xy: 130, 48
+  size: 22, 16  
+Walk 
+  xy: 162, 48
+  size: 22, 16    
+Walk 
+  xy: 194, 48
+  size: 22, 16   
+Walk 
+  xy: 226, 48
+  size: 22, 16  
+Attack
+  xy: 2, 78
+  size: 30, 18  
+Attack
+  xy: 34, 78
+  size: 30, 18  
+Attack
+  xy: 66, 78
+  size: 30, 18   
+Attack
+  xy: 98, 78
+  size: 30, 18    
+Attack
+  xy: 130, 78
+  size: 30, 18   
+Attack
+  xy: 162, 78
+  size: 30, 18  
+Death 
+  xy: 0, 140
+  size: 32, 20    
+Death 
+  xy: 32, 140
+  size: 32, 20    
+Death 
+  xy: 64, 140
+  size: 32, 20   
+Death 
+  xy: 96, 140
+  size: 32, 20    
+Death 
+  xy: 128, 140
+  size: 32, 20    
+Death 
+  xy: 160, 140
+  size: 32, 20   

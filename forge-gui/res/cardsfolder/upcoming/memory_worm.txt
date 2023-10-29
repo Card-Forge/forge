@@ -1,0 +1,11 @@
+Name:Memory Worm
+ManaCost:1 R
+Types:Creature Alien Worm
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, CARDNAME deals 2 damage to target player. That player discards a card, then draws a card. Put a +1/+1 counter on CARDNAME.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Player | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | Mode$ TgtChoose | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ TargetedPlayer | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 
+DeckHas:Ability$Counters|Discard
+Oracle:Paradox — Whenever you cast a spell from anywhere other than your hand, Memory Worm deals 2 damage to target player. That player discards a card, then draws a card. Put a +1/+1 counter on Memory Worm.

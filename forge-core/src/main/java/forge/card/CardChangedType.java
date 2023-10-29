@@ -17,6 +17,8 @@
  */
 package forge.card;
 
+import java.util.Set;
+
 /**
  * <p>
  * CardType class.
@@ -26,31 +28,19 @@ package forge.card;
  * @version $Id: CardType.java 24393 2014-01-21 06:27:36Z Max mtg $
  */
 public class CardChangedType {
+
     // takes care of individual card types
     private final CardType addType;
     private final CardType removeType;
     private final boolean addAllCreatureTypes;
-    private final boolean removeSuperTypes;
-    private final boolean removeCardTypes;
-    private final boolean removeSubTypes;
-    private final boolean removeLandTypes;
-    private final boolean removeCreatureTypes;
-    private final boolean removeArtifactTypes;
-    private final boolean removeEnchantmentTypes;
+    private final Set<RemoveType> remove;
 
     public CardChangedType(final CardType addType0, final CardType removeType0, final boolean addAllCreatureTypes0,
-            final boolean removeSuperType0, final boolean removeCardType0, final boolean removeSubType0,
-            final boolean removeLandType0, final boolean removeCreatureType0, final boolean removeArtifactType0, final boolean removeEnchantmentTypes0) {
+            final Set<RemoveType> remove0) {
         addType = addType0;
         removeType = removeType0;
         addAllCreatureTypes = addAllCreatureTypes0;
-        removeSuperTypes = removeSuperType0;
-        removeCardTypes = removeCardType0;
-        removeSubTypes = removeSubType0;
-        removeLandTypes = removeLandType0;
-        removeCreatureTypes = removeCreatureType0;
-        removeArtifactTypes = removeArtifactType0;
-        removeEnchantmentTypes = removeEnchantmentTypes0;
+        remove = remove0;
     }
 
     public final CardType getAddType() {
@@ -66,30 +56,30 @@ public class CardChangedType {
     }
 
     public final boolean isRemoveSuperTypes() {
-        return removeSuperTypes;
+        return remove.contains(RemoveType.SuperTypes);
     }
 
     public final boolean isRemoveCardTypes() {
-        return removeCardTypes;
+        return remove.contains(RemoveType.CardTypes);
     }
 
     public final boolean isRemoveSubTypes() {
-        return removeSubTypes;
+        return remove.contains(RemoveType.SubTypes);
     }
 
     public final boolean isRemoveLandTypes() {
-        return removeLandTypes;
+        return remove.contains(RemoveType.LandTypes);
     }
 
     public final boolean isRemoveCreatureTypes() {
-        return removeCreatureTypes;
+        return remove.contains(RemoveType.CreatureTypes);
     }
 
     public final boolean isRemoveArtifactTypes() {
-        return removeArtifactTypes;
+        return remove.contains(RemoveType.ArtifactTypes);
     }
 
     public final boolean isRemoveEnchantmentTypes() {
-        return removeEnchantmentTypes;
+        return remove.contains(RemoveType.EnchantmentTypes);
     }
 }

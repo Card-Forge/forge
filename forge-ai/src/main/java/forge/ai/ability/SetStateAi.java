@@ -23,7 +23,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class SetStateAi extends SpellAbilityAi {
@@ -34,7 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
 
         // turning face is most likely okay
         // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
-        if ("TurnFace".equals(mode)) {
+        if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
             return true;
         }
 
@@ -79,11 +78,10 @@ public class SetStateAi extends SpellAbilityAi {
                 }
                 return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
             } else {
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
 
                 // select only the ones that can transform
-                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
+                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card c) {
                         return c.canTransform(sa);
@@ -105,25 +103,18 @@ public class SetStateAi extends SpellAbilityAi {
 
                 return sa.isMinTargetChosen();
             }
-        } else if ("TurnFace".equals(mode)) {
-            if (!sa.usesTargeting()) {
-                CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-                if (list.isEmpty()) {
-                    return false;
-                }
-                return shouldTurnFace(list.get(0), ai, ph) || "Always".equals(logic);
-            } else {
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
+        } else if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
+            if (sa.usesTargeting()) {
                 sa.resetTargets();
 
-                List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+                List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
                 if (list.isEmpty()) {
                     return false;
                 }
 
                 for (final Card c : list) {
-                    if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
+                    if (shouldTurnFace(c, ai, ph, mode) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
                         if (!sa.canAddMoreTarget()) {
                             break;
@@ -132,6 +123,12 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 return sa.isTargetNumberValid();
+            } else {
+                CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                return shouldTurnFace(list.get(0), ai, ph, mode) || "Always".equals(logic);
             }
         }
         return true;
@@ -153,8 +150,11 @@ public class SetStateAi extends SpellAbilityAi {
         return compareCards(card, transformed, ai, ph);
     }
 
-    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph) {
+    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph, String mode) {
         if (card.isFaceDown()) {
+            if ("TurnFaceDown".equals(mode)) {
+                return false;
+            }
             // hidden agenda
             if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
                     && card.isInZone(ZoneType.Command)) {
@@ -172,8 +172,11 @@ public class SetStateAi extends SpellAbilityAi {
                 return false;
             }            
         } else {
+            if ("TurnFaceUp".equals(mode)) {
+                return false;
+            }
             // doublefaced or meld cards can't be turned face down
-            if (card.isDoubleFaced() || card.isMeldable()) {
+            if (card.isTransformable() || card.isMeldable()) {
                 return false;
             }
         }
@@ -215,7 +218,7 @@ public class SetStateAi extends SpellAbilityAi {
                 // both forms can attack, try to use the one with better value 
                 if (attackCard && attackTransformed) {
                     return valueCard <= valueTransformed;
-                } else if (attackTransformed) { // only transformed cam attack
+                } else if (attackTransformed) { // only transformed can attack
                     transformAttack = true;
                 }
             }

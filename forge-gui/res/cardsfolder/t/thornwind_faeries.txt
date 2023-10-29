@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Creature Faerie
 PT:1/1
 K:Flying
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonCombatPriority:1
 Oracle:Flying\n{T}: Thornwind Faeries deals 1 damage to any target.

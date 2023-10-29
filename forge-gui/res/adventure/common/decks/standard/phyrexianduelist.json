@@ -1,0 +1,12 @@
+{                                    
+"name":"Orthodoxy Duelist",
+  "template":
+  {
+   "count":60,
+   "colors":["White"],
+   "tribe":"Phyrexian",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.5,
+   "rares":0.25
+  }
+}

@@ -4,7 +4,7 @@ Types:Creature Bird
 PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Council's dilemma — When CARDNAME enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on CARDNAME for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
-SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Feather,Quill | SubAbility$ DBVoteFeather | AiLogic$ FeatherOrQuill
+SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Feather,Quill | SubAbility$ DBVoteFeather | AILogic$ FeatherOrQuill
 SVar:DBVoteFeather:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumFeather | SubAbility$ DBVoteQuill
 SVar:DBVoteQuill:DB$ Draw | NumCards$ VoteNumQuill | SubAbility$ DBDiscard | RememberDrawn$ True
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SubAbility$ DBCleanup

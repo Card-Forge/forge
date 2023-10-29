@@ -2,7 +2,7 @@ Name:Kayla's Kindling
 ManaCost:3 R R
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ At the beginning of your upkeep, draft a card from CARDNAME's spellbook and exile it. Until end of turn, you may cast that card.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Abrade,Cleansing Wildfire,Terror of the Peaks,Explosive Singularity,Guttersnipe,Seasoned Pyromancer,Unexpected Windfall,Banefire,Lightning Bolt,Dualcaster Mage,Electrodominance,Crackle with Power,Volcanic Fallout,Young Pyromancer,Siege-Gang Commander | Zone$ Exile | RememberDrafted$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup

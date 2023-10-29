@@ -1,0 +1,9 @@
+Name:Undercity Upheaval
+ManaCost:1 G G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ X | DividedAsYouChoose$ X | TargetMin$ 0 | TargetMax$ X | SubAbility$ DBPump | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell.
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | SpellDescription$ Creatures you control gain vigilance until end of turn.
+SVar:X:Count$LastStateGraveyardWithFallback Creature.YouOwn
+DeckHints:Ability$Discard|Sacrifice
+DeckHas:Ability$Counters
+Oracle:Undergrowth — Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn.

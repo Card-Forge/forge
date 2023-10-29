@@ -34,9 +34,7 @@ public class IncubateEffect extends TokenEffectBase {
         if (times > 1) {
             sb.append(" ").append(times == 2 ? "twice" : Lang.nounWithNumeral(amount, "times"));
         }
-        sb.append(".").append(" (Create an Incubator token with ");
-        sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
-        sb.append(" on it and \"{2}: Transform this artifact.\" It transforms into a 0/0 Phyrexian artifact creature.)");
+        sb.append(".");
 
         return sb.toString();
     }
@@ -50,7 +48,6 @@ public class IncubateEffect extends TokenEffectBase {
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
 
         for (final Player p : getTargetPlayers(sa)) {
-
             for (int i = 0; i < times; i++) {
                 CardZoneTable triggerList = new CardZoneTable();
                 MutableBoolean combatChanged = new MutableBoolean(false);

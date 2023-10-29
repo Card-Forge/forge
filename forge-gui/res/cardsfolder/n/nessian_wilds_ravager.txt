@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Hydra
 PT:6/6
 K:Tribute:6
-SVar:TrigNotTribute:DB$ Fight | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may have CARDNAME fight another target creature.
+SVar:TrigNotTribute:DB$ Fight | Optional$ True | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may have CARDNAME fight another target creature.
 SVar:TributeAILogic:Never
 DeckHas:Ability$Counters
 Oracle:Tribute 6 (As this creature enters the battlefield, an opponent of your choice may put six +1/+1 counters on it.)\nWhen Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature. (Each deals damage equal to its power to the other.)

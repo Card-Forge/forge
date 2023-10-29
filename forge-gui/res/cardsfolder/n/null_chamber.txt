@@ -2,14 +2,10 @@ Name:Null Chamber
 ManaCost:3 W
 Types:World Enchantment
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ RememberYou | SpellDescription$ As CARDNAME enters the battlefield, you and an opponent each choose a card name other than a basic land card name.
-SVar:RememberYou:DB$ Pump | RememberObjects$ ValidAll Card.NamedCard | SubAbility$ ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | SubAbility$ NameOpp
-SVar:NameOpp:DB$ NameCard | Defined$ ChosenPlayer | ValidCards$ Card.nonBasic | ValidDesc$ a card name other than a basic land card name | SubAbility$ RememberOpp
-SVar:RememberOpp:DB$ Pump | RememberObjects$ ValidAll Card.NamedCard
-S:Mode$ CantBeCast | ValidCard$ Card.IsRemembered | Description$ Spells with the chosen names can't be cast and lands with the chosen names can't be played.
-S:Mode$ CantPlayLand | ValidCard$ Land.IsRemembered
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBNameCard:DB$ NameCard | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, you and an opponent each choose a card name other than a basic land card name.
+SVar:ChooseP:DB$ ChoosePlayer | Choices$ Opponent | SubAbility$ NameOpp
+SVar:NameOpp:DB$ NameCard | Defined$ ChosenPlayer | ValidCards$ Card.nonBasic | ValidDesc$ a card name other than a basic land card name
+S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ Spells with the chosen names can't be cast and lands with the chosen names can't be played.
+S:Mode$ CantPlayLand | ValidCard$ Land.NamedCard
 AI:RemoveDeck:Random
 Oracle:As Null Chamber enters the battlefield, you and an opponent each choose a card name other than a basic land card name.\nSpells with the chosen names can't be cast and lands with the chosen names can't be played.

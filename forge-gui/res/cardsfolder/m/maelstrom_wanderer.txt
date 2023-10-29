@@ -1,5 +1,5 @@
 Name:Maelstrom Wanderer
-ManaCost:5 U R G
+ManaCost:5 G U R
 Types:Legendary Creature Elemental
 PT:7/5
 K:Cascade

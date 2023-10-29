@@ -1,0 +1,8 @@
+Name:Orcish Medicine
+ManaCost:1 B
+Types:Instant
+K:Flash
+A:SP$ Pump | ValidTgts$ Creature |SubAbility$ DBAmass | KWChoice$ Indestructible,Lifelink | StackDescription$ REP Target creature_{c:Targeted} & your_{p:You}'s | SpellDescription$ Target creature gains your choice of lifelink or indestructible until end of turn.
+SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 1 | SpellDescription$ Amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+DeckHas:Ability$Token|Counters|LifeGain & Type$Orc|Army
+Oracle:Target creature gains your choice of lifelink or indestructible until end of turn.\nAmass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

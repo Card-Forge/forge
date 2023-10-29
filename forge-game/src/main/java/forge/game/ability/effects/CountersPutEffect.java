@@ -169,7 +169,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         return stringBuilder.toString();
     }
 
-    protected void resolvePerType(SpellAbility sa, final Player placer, CounterType counterType, int counterAmount,
+    protected void resolvePerType(SpellAbility sa, Player placer, CounterType counterType, int counterAmount,
                                   GameEntityCounterTable table, boolean stopForTypes) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
@@ -251,9 +251,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else {
             if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                for (String def : sa.getParam("Defined").split(" & ")) {
-                    tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, def, sa));
-                }
+                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
             } else {
                 tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
             }
@@ -516,10 +514,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         String message = Localizer.getInstance().getMessage(
                                 "lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount),
                                 CardTranslation.getTranslatedName(gameCard.getName()));
-                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
+                        placer = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                 Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
+                        if (placer.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
                             gameCard.setTributed(true);
                         } else {
                             continue;
@@ -589,18 +587,27 @@ public class CountersPutEffect extends SpellAbilityEffect {
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (sa.hasParam("TriggeredCounterMap")) {
+            Integer counterMapValue = null;
+            if (sa.hasParam("CounterMapValues")) {
+                counterMapValue = Integer.valueOf(sa.getParam("CounterMapValues"));
+            }
             @SuppressWarnings("unchecked")
             Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa
                     .getTriggeringObject(AbilityKey.CounterMap);
             for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
-                resolvePerType(sa, placer, e.getKey(), e.getValue(), table, false);
+                resolvePerType(sa, placer, e.getKey(), counterMapValue == null ? e.getValue() : counterMapValue, table, false);
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
-            List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
-            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
-                    : new String[] { "Card" };
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            if (sa.hasParam("SharedKeywordsDefined")) {
+                CardCollection def = getDefinedCardsOrTargeted(sa, "SharedKeywordsDefined");
+                keywords = CardFactoryUtil.getSharedKeywords(keywords, def);
+            } else {
+                List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+                String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
+                        : new String[] { "Card" };
+                keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            }
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table, false);
             }
@@ -670,7 +677,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             final SpellAbility newSa = AbilityFactory.getAbility(trigSA, host);
             newSa.setIntrinsic(intrinsic);
             trig.setOverridingAbility(newSa);
-            trig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+            trig.setSpawningAbility(sa.copy(host, true));
             sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
         }
     }

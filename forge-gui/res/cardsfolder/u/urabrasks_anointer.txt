@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Artifact Creature Phyrexian Wizard
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to any target, where X is the number of permanents you control with oil counters on them.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$Valid Permanent.YouCtrl+counters_GE1_OIL
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Counters

@@ -1,0 +1,8 @@
+Name:Ichor Drinker
+ManaCost:B
+Types:Creature Phyrexian Vampire
+PT:1/1
+K:Lifelink
+A:AB$ Incubate | Cost$ B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Amount$ 2 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Incubate 2. Activate only as a sorcery. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+DeckHas:Ability$Token|Counters|Graveyard & Type$Incubator|Artifact
+Oracle:Lifelink\n{B}, Exile Ichor Drinker from your graveyard: Incubate 2. Activate only as a sorcery. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

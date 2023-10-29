@@ -1,0 +1,8 @@
+Name:City of Death
+ManaCost:2 G
+Types:Enchantment Saga
+K:Saga:6:DBToken,DBCopy,DBCopy,DBCopy,DBCopy,DBCopy
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a Treasure token.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Card.token+nonSaga+YouCtrl | TgtPrompt$ Select target non-Saga token you control | SpellDescription$ Create a token that's a copy of target non-Saga token you control.
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after VI.)\nI — Create a Treasure token.\nII, II, III, IV, V, VI — Create a token that's a copy of target non-Saga token you control.

@@ -1,0 +1,20 @@
+Name:Porcine Portent
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card of your choice from the Three Pigs spellbook onto the battlefield.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Spellbook$ First Little Pig,Second Little Pig,Third Little Pig | Zone$ Battlefield 
+S:Mode$ Continuous | Affected$ Boar.Other | AddPower$ 1 | AddToughness$ 1 | Description$ Boars you control get +1/+1.
+AlternateMode:Adventure
+DeckHints:Type$Boar
+DeckHas:Ability$LifeGain
+Oracle:When Porcine Portent enters the battlefield, conjure a card of your choice from the Three Pigs spellbook onto the battlefield.\nBoars you control get +1/+1.
+
+ALTERNATE
+
+Name:Lend a Ham
+ManaCost:2 B
+Types:Instant Adventure
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature. You gain 1 life for each Boar you control.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Boar.YouCtrl
+Oracle:Exile target creature. You gain 1 life for each Boar you control.

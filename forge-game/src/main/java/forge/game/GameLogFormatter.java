@@ -266,7 +266,14 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 sb.append("\n");
             }
 
-            String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
+            String controllerName;
+            if (defender instanceof Card) {
+                Card c = ((Card)defender);
+                controllerName = c.isBattle() ? c.getProtectingPlayer().getName() : c.getController().getName();
+            } else {
+                controllerName = defender.getName();
+            }
+
             boolean firstAttacker = true;
             for (final Entry<Card, Collection<Card>> att : attackers.entrySet()) {
                 if (!firstAttacker) sb.append("\n");

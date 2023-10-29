@@ -1,0 +1,7 @@
+Name:Stasis Field
+ManaCost:1 U
+Types:Enchantment Aura
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 2 | RemoveAllAbilities$ True | AddKeyword$ Defender | Description$ Enchanted creature has base power and toughness 0/2, has defender, and loses all other abilities.
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nEnchanted creature has base power and toughness 0/2, has defender, and loses all other abilities.

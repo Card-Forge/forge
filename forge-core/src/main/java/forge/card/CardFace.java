@@ -20,7 +20,7 @@ import forge.card.mana.ManaCost;
  * <br><br>
  * <i>Do not use reference to class except for card parsing.<br>Always use reference to interface type outside of package.</i>
  */
-final class CardFace implements ICardFace {
+final class CardFace implements ICardFace, Cloneable {
 
     public enum FaceSelectionMethod { // 
         USE_ACTIVE_FACE,
@@ -32,7 +32,7 @@ final class CardFace implements ICardFace {
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
 
-    private final String name;
+    private String name;
     private String altName = null;
     private CardType type = null;
     private ManaCost manaCost = ManaCost.NO_COST;
@@ -44,6 +44,7 @@ final class CardFace implements ICardFace {
     private String power = null;
     private String toughness = null;
     private String initialLoyalty = "";
+    private String defense = "";
 
     private String nonAbilityText = null;
     private List<String> keywords = null;
@@ -62,6 +63,7 @@ final class CardFace implements ICardFace {
     @Override public String getPower()              { return power; }
     @Override public String getToughness()          { return toughness; }
     @Override public String getInitialLoyalty()              { return initialLoyalty; }
+    @Override public String getDefense()              { return defense; }
     @Override public String getName()               { return this.name; }
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
@@ -84,12 +86,14 @@ final class CardFace implements ICardFace {
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
+    void setName(String name)             { this.name = name; }
     void setAltName(String name)             { this.altName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
     void setOracleText(String text)          { this.oracleText = text; }
     void setInitialLoyalty(String value)        { this.initialLoyalty = value; }
+    void setDefense(String value)        { this.defense = value; }
 
     void setPtText(String value) {
         final String[] k = value.split("/");
@@ -149,5 +153,15 @@ final class CardFace implements ICardFace {
     @Override
     public int compareTo(ICardFace o) {
         return getName().compareTo(o.getName());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Object clone() {
+        try {
+            return super.clone();
+        } catch (final Exception ex) {
+            throw new RuntimeException("CardFace : clone() error, " + ex);
+        }
     }
 }

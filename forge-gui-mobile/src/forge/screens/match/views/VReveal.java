@@ -176,6 +176,8 @@ public class VReveal extends FDropDown {
                 type += " (" + paperCard.getRules().getPower() + " / " + paperCard.getRules().getToughness() + ")";
             } else if (paperCard.getRules().getType().isPlaneswalker()) {
                 type += " (" + paperCard.getRules().getInitialLoyalty() + ")";
+            } else if (paperCard.getRules().getType().isBattle()) {
+                type += " (" + paperCard.getRules().getDefense() + ")";
             } else if (paperCard.getRules().getType().hasSubtype("Vehicle")) {
                 type += String.format(" [%s / %s]", paperCard.getRules().getPower(), paperCard.getRules().getToughness());
             }

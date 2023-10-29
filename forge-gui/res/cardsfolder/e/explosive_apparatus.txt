@@ -1,5 +1,5 @@
 Name:Explosive Apparatus
 ManaCost:1
 Types:Artifact
-A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:{3}, {T}, Sacrifice Explosive Apparatus: It deals 2 damage to any target.

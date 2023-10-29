@@ -2,7 +2,6 @@ Name:Trygon Prime
 ManaCost:2 G U
 Types:Creature Tyranid
 PT:4/4
-K:Vigilance
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigCounters | TriggerDescription$ Subterranean Assault — Whenever CARDNAME attacks, put a +1/+1 counter on it and a +1/+1 counter on up to one other target attacking creature. That creature can't be blocked this turn.
 SVar:TrigCounters:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select up to one other target attacking creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | SubAbility$ DBUnblockable

@@ -1,0 +1,10 @@
+Name:Nimrodel Watcher
+ManaCost:1 U
+Types:Creature Elf Scout
+PT:2/1
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | ActivationLimit$ 1 | TriggerDescription$ Whenever you scry, CARDNAME gets +1/+0 until end of turn and can't be blocked this turn. This ability triggers only once each turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Whenever you scry, Nimrodel Watcher gets +1/+0 until end of turn and can't be blocked this turn. This ability triggers only once each turn.

@@ -1,0 +1,8 @@
+Name:Frodo Baggins
+ManaCost:G W
+Types:Legendary Creature Halfling Scout
+PT:1/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Legendary+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigTempt | TriggerDescription$ Whenever CARDNAME or another legendary creature enters the battlefield under your control, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+S:Mode$ Continuous | Affected$ Card.Self+IsRingbearer | AddHiddenKeyword$ CARDNAME must be blocked if able. | Description$ As long as NICKNAME is your Ring-bearer, it must be blocked if able.
+Oracle:Whenever Frodo Baggins or another legendary creature enters the battlefield under your control, the Ring tempts you.\nAs long as Frodo is your Ring-bearer, it must be blocked if able.

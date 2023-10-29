@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Ulgrotha
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+nonBlack | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each opponent discards a card.
-SVar:RolledChaos:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | NumCards$ 1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each opponent discards a card.
+SVar:RolledChaos:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
-Oracle:Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.\nWhenever you roll {CHAOS}, each opponent discards a card.
+Oracle:Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.\nWhenever chaos ensues, each opponent discards a card.

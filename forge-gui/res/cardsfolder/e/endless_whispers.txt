@@ -1,12 +1,11 @@
 Name:Endless Whispers
 ManaCost:2 B B
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature | AddTrigger$ TrigEndlessDies | AddSVar$ EndlessDelayTrigReturn & TrigEndlessGain & EndlessRemoveEffect & EndlessReturn | Description$ Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."
-SVar:TrigEndlessDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ EndlessDelayTrigReturn | TriggerDescription$ When CARDNAME dies, choose target opponent. That player puts CARDNAME from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
-SVar:EndlessDelayTrigReturn:DB$ Effect | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to return this card under their control | EffectOwner$ Targeted | ImprintCards$ Self | Triggers$ TrigEndlessGain | Duration$ Permanent
-SVar:TrigEndlessGain:Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | TriggerZones$ Command | TriggerDescription$ Return CARDNAME to the battlefield.
-SVar:EndlessReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Imprinted | GainControl$ True | SubAbility$ EndlessRemoveEffect
-SVar:EndlessRemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+S:Mode$ Continuous | Affected$ Creature | AddTrigger$ TrigEndlessDies | AddSVar$ EndlessReturn | Description$ Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."
+SVar:TrigEndlessDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigTgtOpp | TriggerDescription$ When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
+SVar:TrigTgtOpp:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | RememberObjects$ TargetedPlayer,Self | TriggerDescription$ That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
+SVar:EndlessReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRemembered | GainControl$ DelayTriggerRemembered
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."

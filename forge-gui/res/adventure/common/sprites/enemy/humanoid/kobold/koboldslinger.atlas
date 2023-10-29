@@ -1,0 +1,101 @@
+koboldslinger.png
+size: 512,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 90, 70
+  size: 14, 14     
+Idle 
+  xy: 22,5
+  size: 24, 20   
+Idle 
+  xy: 86,5
+  size: 24, 20  
+Idle 
+  xy: 150,5
+  size: 24, 20  
+Idle 
+  xy: 214,5
+  size: 24, 20  
+Idle 
+  xy: 22,133
+  size: 24, 20   
+Idle 
+  xy: 86,133
+  size: 24, 20  
+Idle 
+  xy: 150,133
+  size: 24, 20  
+Idle 
+  xy: 214,133
+  size: 24, 20  
+Walk
+  xy: 22,33
+  size: 24, 24   
+Walk
+  xy: 86,33
+  size: 24, 24     
+Walk
+  xy: 150,33
+  size: 24, 24       
+Walk
+  xy: 214, 33
+  size: 24, 24     
+Walk
+  xy: 278, 33
+  size: 24, 24     
+Walk
+  xy: 342, 33
+  size: 24, 24      
+Walk
+  xy: 406, 33
+  size: 24, 24      
+Walk
+  xy: 470, 33
+  size: 24, 24      
+Attack 
+  xy: 18, 68
+  size: 34, 21  
+Attack 
+  xy: 82, 68
+  size: 34, 21  
+Attack 
+  xy: 146, 68
+  size: 34, 21  
+Attack 
+  xy: 210, 68
+  size: 34, 21  
+Attack 
+  xy: 18, 100
+  size: 34, 21  
+Attack 
+  xy: 82, 100
+  size: 34, 21  
+Attack 
+  xy: 146, 100
+  size: 34, 21  
+Attack 
+  xy: 210, 100
+  size: 34, 21          
+Death 
+  xy: 18, 164
+  size: 34, 21   
+Death 
+  xy: 82, 164
+  size: 34, 21  
+Death 
+  xy: 146, 164
+  size: 34, 21  
+Death 
+  xy: 210, 164
+  size: 34, 21   
+Death 
+  xy: 274, 164
+  size: 34, 21  
+Death 
+  xy: 338, 164
+  size: 34, 21  
+Death 
+  xy: 402, 164
+  size: 34, 21   

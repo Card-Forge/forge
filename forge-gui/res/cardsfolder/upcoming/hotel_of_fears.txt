@@ -1,0 +1,18 @@
+Name:Hotel of Fears
+ManaCost:no cost
+Types:Plane Spacecraft
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You lose life equal to its mana value. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBloseLife
+SVar:DBloseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play them this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$CardManaCost
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigChooseColor | TriggerDescription$ Praise Him — Whenever chaos ensues, choose a color. Put X +1/+1 counters on target creature you control, where X is your devotion to that color. Then sacrifice another creature. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+SVar:TrigChooseColor:DB$ ChooseColor | AILogic$ MostProminentInComputerDeck | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.NotDefinedTargeted | SacMessage$ Another target creature | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:X:Count$Devotion.Chosen
+DeckHas:Ability$Counters|Sacrifice
+Oracle:At the beginning of your upkeep, exile the top card of your library. You lose life equal to its mana value. You may play that card this turn.\nPraise Him — Whenever chaos ensues, choose a color. Put X +1/+1 counters on target creature you control, where X is your devotion to that color. Then sacrifice another creature. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)

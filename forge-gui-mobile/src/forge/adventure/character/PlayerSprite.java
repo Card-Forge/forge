@@ -16,22 +16,18 @@ public class PlayerSprite extends CharacterSprite {
     private float playerSpeedModifier = 1f;
     private float playerSpeedEquipmentModifier = 1f;
     GameStage gameStage;
+
     public PlayerSprite(GameStage gameStage) {
         super(AdventurePlayer.current().spriteName());
-        this.gameStage=gameStage;
+        this.gameStage = gameStage;
         setOriginX(getWidth() / 2);
-        Current.player().onPlayerChanged(new Runnable() {
-            @Override
-            public void run() {
-                PlayerSprite.this.updatePlayer();
-            }
-        });
+        Current.player().onPlayerChanged(PlayerSprite.this::updatePlayer);
 
         playerSpeed = Config.instance().getConfigData().playerBaseSpeed;
 
         //Attach signals here.
-        Current.player().onBlessing(         () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
-        Current.player().onEquipmentChanged( () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
+        Current.player().onBlessing(() -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed());
+        Current.player().onEquipmentChanged(() -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed());
     }
 
     private void updatePlayer() {
@@ -89,6 +85,6 @@ public class PlayerSprite extends CharacterSprite {
     }
 
     public void setPosition(Vector2 oldPosition) {
-        setPosition(oldPosition.x,oldPosition.y);
+        setPosition(oldPosition.x, oldPosition.y);
     }
 }

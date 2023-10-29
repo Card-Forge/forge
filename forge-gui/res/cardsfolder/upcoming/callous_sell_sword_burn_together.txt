@@ -1,0 +1,22 @@
+Name:Callous Sell-Sword
+ManaCost:1 B
+Types:Creature Human Soldier
+PT:2/2
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature that died under your control this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Counters|Sacrifice
+AlternateMode:Adventure
+Oracle:Callous Sell-Sword enters the battlefield with a +1/+1 counter on it for each creature that died under your control this turn.
+
+ALTERNATE
+
+Name:Burn Together
+ManaCost:R
+Types:Sorcery Adventure
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | RememberObjects$ ThisTargetedCard | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | SpellDescription$ Target creature you control deals damage equal to its power to any other target. Then sacrifice it.
+SVar:DBDamage:DB$ DealDamage | AILogic$ PowerDmg | ValidTgts$ Any | DamageSource$ ParentTarget | NumDmg$ X | TargetUnique$ True | SubAbility$ DBSac
+SVar:DBSac:DB$ SacrificeAll | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ParentTargeted$CardPower
+Oracle:Target creature you control deals damage equal to its power to any other target. Then sacrifice it.

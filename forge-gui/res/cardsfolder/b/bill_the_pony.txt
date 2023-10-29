@@ -1,0 +1,11 @@
+Name:Bill the Pony
+ManaCost:3 W
+Types:Legendary Creature Horse
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create two Food tokens. (They're artifacts with "{2}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_food_sac | TokenOwner$ You
+A:AB$ Effect | Cost$ Sac<1/Food> | ValidTgts$ Creature.YouCtrl | RememberObjects$ Targeted | StaticAbilities$ CombatDamageToughness | ForgetOnMoved$ Battlefield | TgtPrompt$ Select target creature you control | SpellDescription$ Until end of turn, target creature you control assigns combat damage equal to its toughness rather than its power.
+SVar:CombatDamageToughness:Mode$ CombatDamageToughness | ValidCard$ Card.IsRemembered | Description$ This creature assigns combat damage equal to its toughness rather than its power.
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food
+DeckHints:Type$Food|Treefolk|Wall
+Oracle:When Bill the Pony enters the battlefield, create two Food tokens. (They're artifacts with "{2}, Sacrifice this artifact: You gain 3 life.")\nSacrifice a Food: Until end of turn, target creature you control assigns combat damage equal to its toughness rather than its power.

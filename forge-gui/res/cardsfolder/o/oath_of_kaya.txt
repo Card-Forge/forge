@@ -2,7 +2,7 @@ Name:Oath of Kaya
 ManaCost:1 W B
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to any target and you gain 3 life.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent attacks a planeswalker you control with one or more creatures, CARDNAME deals 2 damage to that player and you gain 2 life.
 SVar:TrigDmg:DB$ DealDamage | Defined$ AttackingPlayer | NumDmg$ 2 | SubAbility$ DBGainLife2

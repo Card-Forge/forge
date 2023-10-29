@@ -1,0 +1,8 @@
+Name:Volcanic Spite
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker,Battle | TgtPrompt$ Select target creature, planeswalker, or battle | NumDmg$ 3 | SubAbility$ DBBottom | SpellDescription$ CARDNAME deals 3 damage to target creature, planeswalker, or battle.
+SVar:DBBottom:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ You may put a card from your hand on the bottom of your library.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you do, draw a card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Volcanic Spite deals 3 damage to target creature, planeswalker, or battle. You may put a card from your hand on the bottom of your library. If you do, draw a card.

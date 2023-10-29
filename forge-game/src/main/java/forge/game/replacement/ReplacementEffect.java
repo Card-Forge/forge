@@ -32,8 +32,10 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -143,7 +145,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public boolean requirementsCheck(Game game) {
         return this.requirementsCheck(game, this.getMapParams());
     }
-
     public boolean requirementsCheck(Game game, Map<String,String> params) {
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
@@ -318,5 +319,23 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     @Override
     public List<Object> getTriggerRemembered() {
         return ImmutableList.of();
+    }
+
+    protected boolean canReplaceETB(Map<AbilityKey, Object> runParams) {
+        // if Card does affect something other than itself
+        if (!hasParam("ValidCard") || !getParam("ValidCard").startsWith("Card.Self")) {
+            // and it self is entering, skip
+            if (getHostCard().equals(runParams.get(AbilityKey.Affected))) {
+                return false;
+            }
+            // and it wasn't already on the field, skip
+            if (getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+                CardCollectionView lastBattlefield = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+                if (!lastBattlefield.contains(getHostCard())) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

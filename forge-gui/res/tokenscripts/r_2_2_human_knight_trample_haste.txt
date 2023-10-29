@@ -1,0 +1,8 @@
+Name:Human Knight Token
+ManaCost:no cost
+Types:Creature Human Knight
+Colors:red
+PT:2/2
+K:Trample
+K:Haste
+Oracle:Trample, haste

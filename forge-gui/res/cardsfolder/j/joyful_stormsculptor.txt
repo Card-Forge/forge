@@ -1,0 +1,11 @@
+Name:Joyful Stormsculptor
+ManaCost:3 U R
+Types:Creature Human Shaman
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 blue and red Elemental creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ ur_1_1_elemental
+T:Mode$ SpellCast | ValidCard$ Card.withConvoke | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell that has convoke, CARDNAME deals 1 damage to each opponent and each battle they protect.
+SVar:TrigDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | ValidCards$ Battle.OppProtect | NumDmg$ 1
+DeckHas:Ability$Token & Type$Elemental
+DeckHints:Keyword$Convoke
+Oracle:When Joyful Stormsculptor enters the battlefield, create two 1/1 blue and red Elemental creature tokens.\nWhenever you cast a spell that has convoke, Joyful Stormsculptor deals 1 damage to each opponent and each battle they protect.

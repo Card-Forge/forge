@@ -17,33 +17,16 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.AnimateAi;
-import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
@@ -53,15 +36,19 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
 
 
 /**
@@ -119,7 +106,11 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
-        this.oppList = getOpponentCreatures(defendingOpponent);
+        if (defender instanceof Card && ((Card) defender).isBattle()) {
+            this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
+        } else {
+            this.oppList = getOpponentCreatures(defendingOpponent);
+        }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
             if (canAttackWrapper(c, defender)) {
@@ -131,21 +122,50 @@ public class AiAttackController {
 
     public static List<Card> getOpponentCreatures(final Player defender) {
         List<Card> defenders = defender.getCreaturesInPlay();
+        int totalMana = ComputerUtilMana.getAvailableManaEstimate(defender, true);
+        int manaReserved = 0; // for paying the cost to transform
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return !c.isTapped() && !c.isCreature() && !c.isPlaneswalker();
             }
         };
+
+        CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            if (c.isToken() && c.getCopiedPermanent() == null) {
-                continue;
-            }
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
-                if (ComputerUtilCost.canPayCost(sa, defender, false)
-                        && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                    Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
-                    defenders.add(animatedCopy);
+                if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
+                    continue;
+                }
+                sa.setActivatingPlayer(defender);
+                if (sa.hasParam("Crew") && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
+                    continue;
+                } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                    continue;
+                }
+                Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
+                if (animatedCopy.isCreature()) {
+                    int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
+                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                    if (totalMana - manaReserved >= saCMC) {
+                        manaReserved += saCMC;
+                        defenders.add(animatedCopy);
+                        break;
+                    }
+                }
+            }
+            defenders.removeAll(tappedDefenders);
+
+            // Transform (e.g. Incubator tokens)
+            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
+                Card transformedCopy = ComputerUtilCombat.canTransform(c);
+                if (transformedCopy.isCreature()) {
+                    int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
+                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                    if (totalMana - manaReserved >= saCMC) {
+                        manaReserved += saCMC;
+                        defenders.add(transformedCopy);
+                    }
                 }
             }
         }
@@ -337,35 +357,41 @@ public class AiAttackController {
     }
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
-    public final List<Card> notNeededAsBlockers(final List<Card> attackers) {
+    public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
         //check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
-            return attackers;
+            return potentialAttackers;
         }
         // no need to block (already holding mana to cast fog next turn)
         if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
             // Don't send the card that'll do the fog effect to attack, it's unsafe!
 
             List<Card> toRemove = Lists.newArrayList();
-            for (Card c : attackers) {
+            for (Card c : potentialAttackers) {
                 if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
                     toRemove.add(c);
                 }
             }
-            attackers.removeAll(toRemove);
-            return attackers;
+            potentialAttackers.removeAll(toRemove);
+            return potentialAttackers;
         }
 
+        if (ai.isCardInPlay("Masako the Humorless")) {
+            // "Tapped creatures you control can block as though they were untapped."
+            return potentialAttackers;
+        }
+
+        final CardCollection notNeededAsBlockers = new CardCollection(potentialAttackers);
+
         final List<Card> vigilantes = new ArrayList<>();
-        for (final Card c : myList) {
-            if (c.getName().equals("Masako the Humorless")) {
-                // "Tapped creatures you control can block as though they were untapped."
-                return attackers;
-            }
+        for (final Card c : Iterables.concat(currentAttackers, potentialAttackers)) {
             // no need to block if an effect is in play which untaps all creatures
             // (pseudo-Vigilance akin to Awakening or Prophet of Kruphix)
             if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(ai, c)) {
                 vigilantes.add(c);
+            } else if (currentAttackers.contains(c)) {
+                // already attacking so can't block
+                notNeededAsBlockers.add(c);
             }
         }
         // reduce the search space
@@ -379,10 +405,8 @@ public class AiAttackController {
             }
         });
 
-        final CardCollection notNeededAsBlockers = new CardCollection(attackers);
-
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> blockers = getPossibleBlockers(attackers, opponentsAttackers, true);
+        final List<Card> blockers = getPossibleBlockers(potentialAttackers, opponentsAttackers, true);
 
         if (!blockers.isEmpty()) {
             notNeededAsBlockers.removeAll(blockers);
@@ -453,12 +477,15 @@ public class AiAttackController {
         // these creatures will be available to block anyway
         notNeededAsBlockers.addAll(vigilantes);
 
+        // remove those that were only included to ensure a full picture for the baseline
+        notNeededAsBlockers.removeAll(currentAttackers);
+
         // Increase the total number of blockers needed by 1 if Finest Hour in play
         // (human will get an extra first attack with a creature that untaps)
         // In addition, if the computer guesses it needs no blockers, make sure
         // that it won't be surprised by Exalted
         final int humanExaltedBonus = defendingOpponent.countExaltedBonus();
-        int blockersNeeded = attackers.size() - notNeededAsBlockers.size();
+        int blockersNeeded = potentialAttackers.size() - notNeededAsBlockers.size();
 
         if (humanExaltedBonus > 0) {
             final boolean finestHour = defendingOpponent.isCardInPlay("Finest Hour");
@@ -488,8 +515,89 @@ public class AiAttackController {
         return notNeededAsBlockers;
     }
 
+    public void reinforceWithBanding(final Combat combat) {
+        reinforceWithBanding(combat, null);
+    }
+    public void reinforceWithBanding(final Combat combat, final Card test) {
+        CardCollection attackers = combat.getAttackers();
+        if (attackers.isEmpty()) {
+            return;
+        }
+
+        List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
+                "Bands with Other Creatures named Wolves of the Hunt",
+                "Bands with Other Dinosaurs");
+
+        List<Card> bandingCreatures = null;
+        if (test == null) {
+            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+
+            // filter out anything that can't legally attack or is already declared as an attacker
+            bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
+
+            bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
+        } else {
+            // Test a specific creature for Banding
+            if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
+                bandingCreatures = new CardCollection(test);
+            }
+        }
+
+        // respect global attack constraints
+        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
+        int attackMax = restrict.getMax();
+        if (attackMax >= attackers.size()) {
+            return;
+        }
+
+        if (bandingCreatures != null) {
+            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
+                    "Forestwalk", "Mountainwalk", "Swampwalk");
+
+            // TODO: Assign to band with the best attacker for now, but needs better logic.
+            for (Card c : bandingCreatures) {
+                Card bestBand;
+
+                if (c.getNetPower() <= 0) {
+                    // Don't band a zero power creature if there's already a banding creature in a band
+                    attackers = CardLists.filter(attackers, card -> combat.getBandOfAttacker(card).getAttackers().size() == 1);
+                }
+
+                Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
+                if (c.hasKeyword("Bands with Other Legendary Creatures")) {
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
+                } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
+                } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
+                } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker != null && bestAttacker.hasAnyKeyword(evasionKeywords)) {
+                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
+                } else {
+                    bestBand = bestAttacker;
+                }
+
+                if (c.getNetPower() <= 0) {
+                    attackers = combat.getAttackers(); // restore the unfiltered attackers
+                }
+
+                if (bestBand != null) {
+                    GameEntity defender = combat.getDefenderByAttacker(bestBand);
+                    if (attackMax == -1) {
+                        // check with the local limitations vs. the chosen defender
+                        attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
+                    }
+
+                    if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
+                        if (CombatUtil.canAttack(c, defender)) {
+                            combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private boolean doAssault() {
-        // Beastmaster Ascension
         if (ai.isCardInPlay("Beastmaster Ascension") && this.attackers.size() > 1) {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
@@ -502,6 +610,12 @@ public class AiAttackController {
             }
         }
 
+        // the real AI (running this AttackController) doesn't track if cards only get revealed to a subset of players
+        // - therefore in the few cases AI runs this for others conclusions might be wrong
+        if (ComputerUtil.hasAFogEffect(defendingOpponent, ai, true)) {
+            return false;
+        }
+
         CardLists.sortByPowerDesc(this.attackers);
 
         CardCollection unblockedAttackers = new CardCollection();
@@ -509,31 +623,15 @@ public class AiAttackController {
         final CardCollection remainingBlockers = new CardCollection(this.blockers);
         final CardCollection blockedAttackers = new CardCollection();
 
-        // Conservative prediction for vehicles: the AI tries to acknowledge the fact that
-        // at least one creature will tap to crew a blocking vehicle when predicting if an
-        // alpha strike for lethal is viable
         int maxBlockersAfterCrew = remainingBlockers.size();
-        for (Card c : this.blockers) {
-            CardTypeView cardType = c.getCurrentState().getType();
-            Zone oppBattlefield = c.getController().getZone(ZoneType.Battlefield);
-
-            if (c.getName().equals("Heart of Kiran")) {
-                if (Iterables.any(oppBattlefield, CardPredicates.Presets.PLANESWALKERS)) {
-                    // can be activated by removing a loyalty counter instead of tapping a creature
-                    continue;
-                }
-            } else if (c.getName().equals("Peacewalker Colossus")) {
-                // can activate other vehicles for {1}{W}
-                // TODO: the AI should ideally predict how many times it can activate
-                // for now, unless the opponent is tapped out, break at this point
-                // and do not predict the blocker limit (which is safer)
-                if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
-                    maxBlockersAfterCrew = Integer.MAX_VALUE;
-                    break;
-                }
-                maxBlockersAfterCrew--;
-            } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
-                maxBlockersAfterCrew--;
+        if (defendingOpponent.isCardInPlay("Peacewalker Colossus")) {
+            // can activate other vehicles for {1}{W}
+            // TODO: the AI should ideally predict how many times it can activate
+            // for now, unless the opponent is tapped out, break at this point
+            // and do not predict the blocker limit (which is safer)
+            if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.Presets.UNTAPPED)) {
+                maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
+                        Predicates.and(CardPredicates.isType("Vehicle"), CardPredicates.Presets.UNTAPPED));
             }
         }
 
@@ -592,12 +690,9 @@ public class AiAttackController {
             }
 
             int numExtraBlocks = blocker.canBlockAdditional();
-            if (numExtraBlocks > 0) {
-                // TODO should be limited to how much getBlockCost the opp can pay
-                while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
-                    blockedAttackers.add(remainingAttackers.remove(0));
-                    maxBlockersAfterCrew--;
-                }
+            // TODO should be limited to how much getBlockCost the opp can pay
+            while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
+                blockedAttackers.add(remainingAttackers.remove(0));
             }
 
             if (remainingAttackers.isEmpty()) {
@@ -722,6 +817,16 @@ public class AiAttackController {
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
 
+        // Get the preferred battle (prefer own battles, then ally battles)
+        final CardCollection defBattles = c.getDefendingBattles();
+        List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
+        List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+        List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        if (!prefBattleList.isEmpty()) {
+            // TODO try to be less predictable here, should really check if something would make the back uncastable
+            return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
+        }
+
         return prefDefender;
     }
 
@@ -751,7 +856,17 @@ public class AiAttackController {
         // decided to attack another defender so related lists need to be updated
         // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
-            defendingOpponent = defender instanceof Player ? (Player) defender : ((Card)defender).getController();
+            if (defender instanceof Player) {
+                defendingOpponent = (Player) defender;
+            } else if (defender instanceof Card) {
+                Card defCard = (Card) defender;
+                if (defCard.isBattle()) {
+                    defendingOpponent = defCard.getProtectingPlayer();
+                } else {
+                    // TODO: assume Planeswalker for now, may need to be updated later if more unique mechanics appear like Battle
+                    defendingOpponent = defCard.getController();
+                }
+            }
             refreshCombatants(defender);
         }
         if (this.attackers.isEmpty()) {
@@ -1170,7 +1285,7 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("Normal attack");
 
-        attackersLeft = notNeededAsBlockers(attackersLeft);
+        attackersLeft = notNeededAsBlockers(combat.getAttackers(), attackersLeft);
         attackersLeft = sortAttackers(attackersLeft);
 
         if ( LOG_AI_ATTACKS )
@@ -1282,13 +1397,12 @@ public class AiAttackController {
         if (!isEffectiveAttacker(ai, attacker, combat, defender)) {
             return false;
         }
-        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
+        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasKeyword(Keyword.ANNIHILATOR);
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 
         if (!hasCombatEffect) {
-            if (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)
-                    || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT)) {
+            if (attacker.isWitherDamage() || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT)) {
                 hasCombatEffect = true;
             }
         }
@@ -1483,7 +1597,7 @@ public class AiAttackController {
                 }
                 if (sa.usesTargeting()) {
                     sa.setActivatingPlayer(c.getController(), true);
-                    List<Card> validTargets = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+                    List<Card> validTargets = CardUtil.getValidCardsToTarget(sa);
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;

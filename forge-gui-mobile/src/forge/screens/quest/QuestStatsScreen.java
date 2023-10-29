@@ -115,7 +115,8 @@ public class QuestStatsScreen extends FScreen {
         cbPlant.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? Forge.getLocalizer().getMessage("lblPlant") : null);
+                // This can't be translated. As the English string "Plant" is used to find the Plant pet.
+                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? "Plant" : null);
                 FModel.getQuest().save();
             }
         });

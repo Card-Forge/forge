@@ -9,12 +9,14 @@ import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -34,9 +36,9 @@ import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -69,6 +71,7 @@ public class DuelScene extends ForgeScene {
     boolean callbackExit = false;
     boolean arenaBattleChallenge = false;
     boolean isArena = false;
+    AdventureEventData eventData;
     private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
@@ -87,20 +90,25 @@ public class DuelScene extends ForgeScene {
     }
 
     public void GameEnd() {
+        //TODO: Progress towards applicable Adventure quests also needs to be reported here.
+        if (eventData != null)
+            eventData.nextOpponent = null;
         boolean winner = false;
         try {
             winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
 
             //Persists expended (or potentially gained) shards back to Adventure
-            //TODO: Progress towards applicable Adventure quests also needs to be reported here.
-            List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers();
-            if (humans.size() == 1) {
-                Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
+            if (eventData == null || eventData.eventRules.allowsShards) {
+                List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers(); {
+                    if (humans.size() == 1) {
+                        Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
+        String enemyName = enemy.getName();
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
@@ -130,25 +138,24 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner, true, true);
+                        afterGameEnd(enemyName, finalWinner);
+                        if (Config.instance().getSettingData().disableWinLose) {
+                            MatchController.writeMatchPreferences();
+                            exitDuelScene();
+                        }
                     }
                     fb.dispose();
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner, false, false);
+            afterGameEnd(enemyName, winner);
         }
     }
-
-    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
-        Runnable runnable = () -> Gdx.app.postRunnable(()-> {
-            if (GameScene.instance().isNotInWorldMap()) {
-                SoundSystem.instance.pause();
-                GameHUD.getInstance().playAudio();
-            } else {
-                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                SoundSystem.instance.resume();
-            }
+    Runnable endRunnable = null;
+    void afterGameEnd(String enemyName, boolean winner) {
+        Forge.restrictAdvMenus = winner;
+        endRunnable = () -> Gdx.app.postRunnable(()-> {
+            GameHUD.getInstance().switchAudio();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -160,14 +167,9 @@ public class DuelScene extends ForgeScene {
                 ((IAfterMatch) last).setWinner(winner);
             }
         });
-        if (showOverlay) {
-            FThreads.invokeInEdtNowOrLater(() -> {
-                matchOverlay = new LoadingOverlay(runnable, true, alternate);
-                matchOverlay.show();
-            });
-        } else {
-            runnable.run();
-        }
+    }
+    public void exitDuelScene() {
+        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {
@@ -190,7 +192,8 @@ public class DuelScene extends ForgeScene {
         player.addExtraCardsOnBattlefield(startCards);
         player.addExtraCardsInCommandZone(startCardsInCommandZone);
 
-        player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
+        if (lifeMod != 0)
+            player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
         player.setManaShards((player.getManaShards() + extraManaShards));
         player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
@@ -204,10 +207,17 @@ public class DuelScene extends ForgeScene {
     public void enter() {
         GameHUD.getInstance().unloadAudio();
         Set<GameType> appliedVariants = new HashSet<>();
-        appliedVariants.add(GameType.Constructed);
+        if (eventData!= null && eventData.eventRules != null){
+            appliedVariants.add(eventData.eventRules.gameType);
+        }
+        else{
+            appliedVariants.add(GameType.Adventure);
+        }
+
         AdventurePlayer advPlayer = Current.player();
 
         List<RegisteredPlayer> players = new ArrayList<>();
+
         int missingCards = Config.instance().getConfigData().minDeckSize - playerDeck.getMain().countAll();
         if (missingCards > 0) //Replace unknown cards for a Wastes.
             playerDeck.getMain().add("Wastes", missingCards);
@@ -224,8 +234,9 @@ public class DuelScene extends ForgeScene {
         playerObject.setAvatarIndex(90000);
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setTeamNumber(0);
-        humanPlayer.setStartingLife(advPlayer.getLife());
-        humanPlayer.setManaShards((advPlayer.getShards()));
+        humanPlayer.setStartingLife(eventData!=null?eventData.eventRules.startingLife:advPlayer.getLife());
+        if (eventData==null || eventData.eventRules.allowsShards)
+            humanPlayer.setManaShards(advPlayer.getShards());
 
         Array<EffectData> playerEffects = new Array<>();
         Array<EffectData> oppEffects = new Array<>();
@@ -244,30 +255,32 @@ public class DuelScene extends ForgeScene {
             humanPlayer.addExtraCardsOnBattlefield(playerCards);
         }
 
-        //Collect and add items effects first.
-        for (String playerItem : advPlayer.getEquippedItems()) {
-            ItemData item = ItemData.getItem(playerItem);
-            if (item != null) {
-                playerEffects.add(item.effect);
-                if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
-            } else {
-                System.err.printf("Item %s not found.", playerItem);
+        if (eventData ==null || eventData.eventRules.allowsItems) {
+            //Collect and add items effects first.
+            for (String playerItem : advPlayer.getEquippedItems()) {
+                ItemData item = ItemData.getItem(playerItem);
+                if (item != null && item.effect != null) {
+                    playerEffects.add(item.effect);
+                    if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+                } else {
+                    System.err.printf("Item %s not found.", playerItem);
+                }
             }
         }
+        if (eventData ==null || eventData.eventRules.allowsBlessings) {
+            //Collect and add player blessings.
+            if (advPlayer.getBlessing() != null) {
+                playerEffects.add(advPlayer.getBlessing());
+                if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
+            }
 
-        //Collect and add player blessings.
-        if (advPlayer.getBlessing() != null) {
-            playerEffects.add(advPlayer.getBlessing());
-            if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
+            //Collect and add enemy effects (same as blessings but for individual enemies).
+            if (enemy.effect != null) {
+                oppEffects.add(enemy.effect);
+                if (enemy.effect.opponent != null)
+                    playerEffects.add(enemy.effect.opponent);
+            }
         }
-
-        //Collect and add enemy effects (same as blessings but for individual enemies).
-        if (enemy.effect != null) {
-            oppEffects.add(enemy.effect);
-            if (enemy.effect.opponent != null)
-                playerEffects.add(enemy.effect.opponent);
-        }
-
         //Collect and add dungeon-wide effects.
         if (dungeonEffect != null) {
             oppEffects.add(dungeonEffect);
@@ -292,28 +305,31 @@ public class DuelScene extends ForgeScene {
                 deck = deckProxy.getDeck();
             } else if (this.arenaBattleChallenge) {
                 deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
+            } else if (this.eventData != null){
+                deck = eventData.nextOpponent.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Insane") || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
-            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.name, selectAI(currentEnemy.ai));
-            if (!enemy.nameOverride.isEmpty())
-                enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.(only supported for 1 enemy atm)
+            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
+            enemyPlayer.setName(enemy.getName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
             FSkin.getAvatars().put(90001 + i, enemyAvatar);
             enemyPlayer.setAvatarIndex(90001 + i);
             aiPlayer.setPlayer(enemyPlayer);
             aiPlayer.setTeamNumber(currentEnemy.teamNumber);
-            aiPlayer.setStartingLife(Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
+            aiPlayer.setStartingLife(eventData!=null?eventData.eventRules.startingLife:Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
 
             Array<EffectData> equipmentEffects = new Array<>();
-            if (currentEnemy.equipment != null) {
-                for (String oppItem : currentEnemy.equipment) {
-                    ItemData item = ItemData.getItem(oppItem);
-                    equipmentEffects.add(item.effect);
-                    if (item.effect.opponent != null) playerEffects.add(item.effect.opponent);
+            if (eventData!=null && eventData.eventRules.allowsItems) {
+                if (currentEnemy.equipment != null) {
+                    for (String oppItem : currentEnemy.equipment) {
+                        ItemData item = ItemData.getItem(oppItem);
+                        equipmentEffects.add(item.effect);
+                        if (item.effect.opponent != null) playerEffects.add(item.effect.opponent);
+                    }
                 }
             }
             addEffects(aiPlayer, oppEffects);
@@ -326,7 +342,9 @@ public class DuelScene extends ForgeScene {
 
             players.add(aiPlayer);
 
-            Current.setLatestDeck(deck);
+            if (eventData==null) {
+                Current.setLatestDeck(deck);
+            }
 
             currentEnemy = currentEnemy.nextEnemy;
         }
@@ -338,14 +356,23 @@ public class DuelScene extends ForgeScene {
 
         hostedMatch = MatchController.hostMatch();
 
-        GameRules rules = new GameRules(GameType.Constructed);
+        GameRules rules;
+
+        if (eventData != null){
+            rules = new GameRules(eventData.eventRules.gameType);
+            rules.setGamesPerMatch(eventData.eventRules.gamesPerMatch);
+            bossBattle = false;
+        }
+        else{
+            rules = new GameRules(GameType.Adventure);
+            rules.setGamesPerMatch(1);
+        }
         rules.setPlayForAnte(false);
         rules.setMatchAnteRarity(true);
-        rules.setGamesPerMatch(1);
         rules.setManaBurn(false);
         rules.setWarnAboutAICards(false);
 
-        hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
+        //hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
@@ -367,7 +394,7 @@ public class DuelScene extends ForgeScene {
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, fb, new Callback<Integer>() {
+                    FOptionPane.showMessageDialog(message, enemy.getName(), fb, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             fb.dispose();
@@ -395,16 +422,22 @@ public class DuelScene extends ForgeScene {
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
-        initDuels(playerSprite, enemySprite, false);
+        initDuels(playerSprite, enemySprite, false, null);
     }
-    public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena) {
+    public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena, AdventureEventData eventData) {
         this.player = playerSprite;
         this.enemy = enemySprite;
         this.isArena = isArena;
+        this.eventData = eventData;
+        if (eventData!= null && eventData.eventRules == null)
+            eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
         this.arenaBattleChallenge = isArena
                 && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
                 || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));
-        this.playerDeck = (Deck) Current.player().getSelectedDeck().copyTo("PlayerDeckCopy");
+        if (eventData != null && eventData.registeredDeck != null)
+            this.playerDeck = eventData.registeredDeck;
+        else
+            this.playerDeck = (Deck) Current.player().getSelectedDeck().copyTo("PlayerDeckCopy");
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();
         this.playerExtras.clear();

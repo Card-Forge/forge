@@ -253,6 +253,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.IsBoon, c.isBoon());
     }
 
+    public boolean canSpecialize() {
+        return get(TrackableProperty.CanSpecialize);
+    }
+    public void updateSpecialize(Card c) {
+        set(TrackableProperty.CanSpecialize, c.canSpecialize());
+    }
+
     public boolean isTokenCard() { return get(TrackableProperty.TokenCard); }
     void updateTokenCard(Card c) { set(TrackableProperty.TokenCard, c.isTokenCard()); }
 
@@ -313,6 +320,7 @@ public class CardView extends GameEntityView {
         state.updatePower(c);
         state.updateToughness(c);
         state.updateLoyalty(c);
+        state.updateDefense(c);
     }
 
     public int getCrackOverlayInt() {
@@ -380,6 +388,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenNumber, c.getChosenNumber().toString());
     }
 
+    public List<String> getStoredRolls() {
+        return get(TrackableProperty.StoredRolls);
+    }
+    void updateStoredRolls(Card c) {
+        set(TrackableProperty.StoredRolls, c.getStoredRollsForView());
+    }
+
     public List<String> getChosenColors() {
         return get(TrackableProperty.ChosenColors);
     }
@@ -400,6 +415,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenPlayer(Card c) {
         set(TrackableProperty.ChosenPlayer, PlayerView.get(c.getChosenPlayer()));
+    }
+    public PlayerView getProtectingPlayer() {
+        return get(TrackableProperty.ProtectingPlayer);
+    }
+    void updateProtectingPlayer(Card c) {
+        set(TrackableProperty.ProtectingPlayer, PlayerView.get(c.getProtectingPlayer()));
     }
 
     public Direction getChosenDirection() {
@@ -452,6 +473,15 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ClassLevel, c.getClassLevel());
     }
 
+    public int getRingLevel() {
+        return get(TrackableProperty.RingLevel);
+    }
+    void updateRingLevel(Card c) {
+        Player p = c.getController();
+        if (p != null && p.getTheRing() == c)
+            set(TrackableProperty.RingLevel, p.getNumRingTemptedYou());
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }
@@ -486,17 +516,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Sector, c.getSector());
     }
 
-    public String getNamedCard() {
+    public List<String> getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
     void updateNamedCard(Card c) {
-        set(TrackableProperty.NamedCard, c.getNamedCard());
-    }
-    public String getNamedCard2() {
-        return get(TrackableProperty.NamedCard2);
-    }
-    void updateNamedCard2(Card c) {
-        set(TrackableProperty.NamedCard2, c.getNamedCard2());
+        set(TrackableProperty.NamedCard, c.getNamedCards());
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
@@ -910,12 +934,14 @@ public class CardView extends GameEntityView {
         updateName(c);
         updateZoneText(c);
         updateDamage(c);
+        updateSpecialize(c);
+        updateRingLevel(c);
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);
         }
 
-        if (getBackup() == null && !c.isFaceDown() && (c.hasBackSide()||c.isFlipCard()||c.isAdventureCard())) {
+        if (getBackup() == null && !c.isFaceDown() && (c.isDoubleFaced()||c.isFlipCard()||c.isAdventureCard())) {
             set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
@@ -932,7 +958,7 @@ public class CardView extends GameEntityView {
 
         //backside
         if (c.getAlternateState() != null)
-            updateBackSide(c.getAlternateState().getName(), c.hasBackSide());
+            updateBackSide(c.getAlternateState().getName(), c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
 
@@ -977,6 +1003,7 @@ public class CardView extends GameEntityView {
             currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
             currentStateView.updateToughness(c);
             currentStateView.updateLoyalty(c);
+            currentStateView.updateDefense(c);
 
             // update the color only while in Game
             if (c.getGame() != null) {
@@ -985,6 +1012,7 @@ public class CardView extends GameEntityView {
             }
         } else {
             currentStateView.updateLoyalty(currentState);
+            currentStateView.updateDefense(currentState);
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
         currentState.getView().setOriginalColors(c); //set original Colors
@@ -996,7 +1024,7 @@ public class CardView extends GameEntityView {
             alternateState = c.getState(CardStateName.Original);
         }
 
-        if (c.hasBackSide() && isFaceDown()) //fixes facedown cards with backside...
+        if (c.isDoubleFaced() && isFaceDown()) //fixes facedown cards with backside...
             alternateState = c.getState(CardStateName.Original);
 
         if (alternateState == null) {
@@ -1009,6 +1037,7 @@ public class CardView extends GameEntityView {
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
                 alternateStateView.updateToughness(c);
                 alternateStateView.updateLoyalty(c);
+                alternateStateView.updateDefense(c);
 
                 // update the color only while in Game
                 if (c.getGame() != null) {
@@ -1016,6 +1045,7 @@ public class CardView extends GameEntityView {
                 }
             } else {
                 alternateStateView.updateLoyalty(alternateState);
+                alternateStateView.updateDefense(alternateState);
             }
             alternateState.getView().updateKeywords(c, alternateState);
         }
@@ -1043,6 +1073,14 @@ public class CardView extends GameEntityView {
     void updateBlockAdditional(Card c) {
         set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
         set(TrackableProperty.BlockAny, c.canBlockAny());
+    }
+
+    public boolean isRingBearer() {
+        return get(TrackableProperty.IsRingBearer);
+    }
+
+    void updateRingBearer(Card c) {
+        set(TrackableProperty.IsRingBearer, c.isRingBearer());
     }
 
     Set<String> getCantHaveKeyword() {
@@ -1147,7 +1185,7 @@ public class CardView extends GameEntityView {
         }
         void updateName(CardState c) {
             Card card = c.getCard();
-            setName(card.getName(c));
+            setName(card.getName(c, false));
 
             if (CardView.this.getCurrentState() == this) {
                 if (card != null) {
@@ -1196,7 +1234,9 @@ public class CardView extends GameEntityView {
                 if (getCard().getZone() == ZoneType.Exile) {
                     return ImageKeys.getTokenKey(getCard().isForeTold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD);
                 }
-                return ImageKeys.getTokenKey(getCard().isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE);
+                return ImageKeys.getTokenKey(getCard().isManifested() ? ImageKeys.MANIFEST_IMAGE
+                        : getType().getCreatureTypes().isEmpty() ? isCreature() ? ImageKeys.MORPH_IMAGE : ImageKeys.HIDDEN_CARD
+                        : getType().getCreatureTypes().toString().toLowerCase().replace(" ", "_").replace("[", "").replace("]",""));
             }
             if (canBeShownToAny(viewers)) {
                 return get(TrackableProperty.ImageKey);
@@ -1255,8 +1295,13 @@ public class CardView extends GameEntityView {
             String rulesText = null;
 
             if (type.isVanguard() && rules != null) {
-                rulesText = "Hand Modifier: " + rules.getHand() +
-                        "\r\nLife Modifier: " + rules.getLife();
+                boolean decHand = rules.getHand() < 0;
+                boolean decLife = rules.getLife() < 0;
+                String handSize = Localizer.getInstance().getMessageorUseDefault("lblHandSize", "Hand Size")
+                        + (!decHand ? ": +" : ": ") + rules.getHand();
+                String startingLife = Localizer.getInstance().getMessageorUseDefault("lblStartingLife", "Starting Life")
+                        + (!decLife ? ": +" : ": ") + rules.getLife();
+                rulesText = handSize + "\r\n" + startingLife;
             }
             set(TrackableProperty.RulesText, rulesText);
         }
@@ -1340,6 +1385,36 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
 
+
+        public String getDefense() {
+            return get(TrackableProperty.Defense);
+        }
+        void updateDefense(Card c) {
+            if (c.isInZone(ZoneType.Battlefield)) {
+                updateDefense(String.valueOf(c.getCurrentDefense()));
+            } else {
+                updateDefense(c.getCurrentState().getBaseDefense());
+            }
+        }
+        void updateDefense(String defense) {
+            set(TrackableProperty.Defense, defense);
+        }
+        void updateDefense(CardState c) {
+            if (CardView.this.getCurrentState() == this) {
+                Card card = c.getCard();
+                if (card != null) {
+                    if (card.isInZone(ZoneType.Battlefield)) {
+                        updateDefense(card);
+                    } else {
+                        updateDefense(c.getBaseDefense());
+                    }
+
+                    return;
+                }
+            }
+            updateDefense("0");
+        }
+
         public String getSetCode() {
             return get(TrackableProperty.SetCode);
         }
@@ -1411,7 +1486,7 @@ public class CardView extends GameEntityView {
         public boolean hasLandwalk() {
             return get(TrackableProperty.HasLandwalk);
         }
-        public boolean hasHasAftermath() {
+        public boolean hasAftermath() {
             return get(TrackableProperty.HasAftermath);
         }
 
@@ -1587,6 +1662,10 @@ public class CardView extends GameEntityView {
         }
         public boolean isPlaneswalker() {
             return getType().isPlaneswalker();
+        }
+
+        public boolean isBattle() {
+            return getType().isBattle();
         }
         public boolean isMountain() {
             return getType().hasSubtype("Mountain");

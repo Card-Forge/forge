@@ -1,0 +1,10 @@
+Name:Hopeful Vigil
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white Knight creature token with vigilance.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_knight_vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Sacrifice | Cost$ 2 W | SpellDescription$ Sacrifice CARDNAME
+DeckHas:Ability$Sacrifice|Token & Type$Knight
+Oracle:When Hopeful Vigil enters the battlefield, create a 2/2 white Knight creature token with vigilance.\nWhen Hopeful Vigil is put into a graveyard from the battlefield, scry 2.\n{2}{W}: Sacrifice Hopeful Vigil.

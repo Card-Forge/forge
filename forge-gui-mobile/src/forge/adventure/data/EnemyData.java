@@ -4,12 +4,15 @@ import forge.adventure.util.*;
 import forge.deck.Deck;
 import forge.util.Aggregates;
 
+import java.io.Serializable;
+
 /**
  * Data class that will be used to read Json configuration files
  * BiomeData
  * contains the information of enemies
  */
-public class EnemyData {
+public class EnemyData implements Serializable {
+    private static final long serialVersionUID = -3317270785183936320L;
     public String name;
     public String nameOverride;
     public String sprite;
@@ -30,6 +33,9 @@ public class EnemyData {
 
     public EnemyData nextEnemy;
     public int teamNumber = -1;
+
+    public String[] questTags = new String[0];
+    public float lifetime;
 
     public EnemyData() {
     }
@@ -53,6 +59,8 @@ public class EnemyData {
         teamNumber      = enemyData.teamNumber;
         nextEnemy       = enemyData.nextEnemy == null ? null : new EnemyData(enemyData.nextEnemy);
         nameOverride    = enemyData.nameOverride == null ? "" : enemyData.nameOverride;
+        questTags       = enemyData.questTags.clone();
+        lifetime        = enemyData.lifetime;
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }
@@ -69,6 +77,15 @@ public class EnemyData {
         if (randomizeDeck) {
             return CardUtil.getDeck(Aggregates.random(deck), true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
         }
-        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.name, deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.getName(), deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+    }
+
+    public String getName(){
+        //todo: make this the default accessor for anything seen in UI
+        if (nameOverride != null && !nameOverride.isEmpty())
+            return nameOverride;
+        if (name != null && !name.isEmpty())
+            return name;
+        return "(Unnamed Enemy)";
     }
 }

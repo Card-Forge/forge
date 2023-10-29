@@ -87,7 +87,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            return SpellAbilityAi.isSorcerySpeed(sa, ai) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
+            return isSorcerySpeed(sa, ai) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
@@ -118,7 +118,7 @@ public class PumpAi extends PumpAiBase {
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            return sa.isCurse() || SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred;
+            return sa.isCurse() || isSorcerySpeed(sa, ai) || main1Preferred;
         }
         return true;
     }
@@ -128,7 +128,6 @@ public class PumpAi extends PumpAiBase {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
-        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
         final String numDefense = sa.getParamOrDefault("NumDef", "");
@@ -169,7 +168,6 @@ public class PumpAi extends PumpAiBase {
                     CardCollection best = CardLists.filter(attr, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
-
                             int amount = 0;
                             if (StringUtils.isNumeric(amountStr)) {
                                 amount = AbilityUtils.calculateAmount(source, amountStr, moveSA);
@@ -275,8 +273,8 @@ public class PumpAi extends PumpAiBase {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
 
-        if (sa.hasParam("ActivationNumberSacrifice")) {
-            final int sacActivations = Integer.parseInt(sa.getParam("ActivationNumberSacrifice").substring(2));
+        if (sa.hasParam("ConditionActivationLimit")) {
+            final int sacActivations = Integer.parseInt(sa.getParam("ConditionActivationLimit").substring(2));
             final int activations = sa.getActivationsThisTurn();
             // don't risk sacrificing a creature just to pump it
             if (activations >= sacActivations - 1) {
@@ -292,10 +290,6 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            if (sourceName.equals("Necropolis Fiend")) {
-            	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
-                sa.setSVar("X", Integer.toString(xPay));
-            }
             sa.setXManaCostPaid(xPay);
             defense = xPay;
             if (numDefense.equals("-X")) {
@@ -371,7 +365,7 @@ public class PumpAi extends PumpAiBase {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
-                        if (game.getPhaseHandler().isPreCombatMain() && SpellAbilityAi.isSorcerySpeed(sa, ai) ||
+                        if (game.getPhaseHandler().isPreCombatMain() && isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
                             Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
@@ -518,11 +512,10 @@ public class PumpAi extends PumpAiBase {
                 list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
             } else {
                 ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
+                list = CardLists.getTargetableCards(game.getCardsIn(zone), sa);
             }
         }
 
-        list = CardLists.getTargetableCards(list, sa);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {
@@ -617,7 +610,7 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

@@ -1,0 +1,9 @@
+Name:Rohirrim Chargers
+ManaCost:2 R W
+Types:Creature Human Knight
+PT:4/4
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. (It won't untap during your next untap step.)
+T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you exert a creature, reveal cards from the top of your library until you reveal an Equipment card. Put that card onto the battlefield attached to that creature, then put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ DigUntil | Defined$ You | Valid$ Equipment | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | AttachedTo$ TriggeredCard
+DeckHints:Type$Equipment
+Oracle:You may exert Rohirrim Chargers as it attacks. (It won't untap during your next untap step.)\nWhenever you exert a creature, reveal cards from the top of your library until you reveal an Equipment card. Put that card onto the battlefield attached to that creature, then put the rest on the bottom of your library in a random order.

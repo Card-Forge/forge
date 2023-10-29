@@ -1,0 +1,10 @@
+Name:Ecstatic Beauty
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library. You may play those cards until end of turn. Put four time counters on each of those cards that has suspend.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBPumpAll | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards until end of turn.
+SVar:DBPumpAll:DB$ PutCounterAll | ValidCards$ Card.IsRemembered+withSuspend | CounterType$ TIME | CounterNum$ 4 | ValidZone$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Suspend:4:R
+Oracle:Exile the top three cards of your library. You may play those cards until end of turn. Put four time counters on each of those cards that has suspend.\nSuspend 4—{R}

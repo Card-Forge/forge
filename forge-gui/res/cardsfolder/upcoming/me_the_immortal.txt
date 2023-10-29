@@ -1,0 +1,11 @@
+Name:Me, the Immortal
+ManaCost:2 G U R
+Types:Legendary Creature Human Rogue
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ At the beginning of combat on your turn, put your choice of a +1/+1, first strike, vigilance, or menace counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1,First strike,Vigilance,Menace | CounterNum$ 1
+K:Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.
+SVar:AltCost:Cost$ 2 G U R Discard<2/Card> | ActivationZone$ Graveyard | Description$ You may cast NICKNAME from your graveyard by discarding two cards in addition to paying its other costs.
+DeckHas:Ability$Counters|Discard
+DeckHints:Ability$Counters
+Oracle:At the beginning of combat on your turn, put your choice of a +1/+1, first strike, vigilance, or menace counter on Me, the Immortal.\nCounters remain on Me as it moves to any zone other than a player’s hand or library.\nYou may cast Me from your graveyard by discarding two cards in addition to paying its other costs.

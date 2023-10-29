@@ -58,6 +58,10 @@ public class UIActor extends Group {
                         newActor = Controls.newTextraLabel("");
                         readLabelProperties((TextraLabel) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
+                    case "TypingLabel":
+                        newActor = Controls.newTypingLabel("");
+                        readLabelProperties((TextraLabel) newActor, new OrderedMap.OrderedMapEntries<>(element));
+                        break;
                     case "Table":
                         newActor = new Table(Controls.getSkin());
                         readTableProperties((Table) newActor, new OrderedMap.OrderedMapEntries<>(element));
@@ -174,6 +178,7 @@ public class UIActor extends Group {
                     break;
             }
         }
+        newActor.setMovable(false);
     }
 
     private void readTextFieldProperties(TextField newActor, ObjectMap.Entries<String, String> entries) {

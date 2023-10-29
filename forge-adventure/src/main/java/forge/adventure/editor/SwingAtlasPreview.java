@@ -20,7 +20,7 @@ public class SwingAtlasPreview extends Box {
     Timer timer;
     public SwingAtlasPreview()
     {
-        this(32,200);
+        this(64,200);
     }
     public SwingAtlasPreview(int imageSize,int timeDelay) {
         super(BoxLayout.Y_AXIS);
@@ -47,7 +47,7 @@ public class SwingAtlasPreview extends Box {
         setSpritePath(sprite,null);
     }
     public void setSpritePath(String sprite,String name) {
-        if(this.sprite==null||sprite==null||(this.sprite.equals(sprite)&&(spriteName!=null&&name!=null&&spriteName.equals(name))))
+        if(this.sprite==null||sprite==null||(this.sprite.equals(sprite)&&(spriteName != null && spriteName.equals(name))))
             return;
         removeAll();
         counter=0;
@@ -85,10 +85,10 @@ public class SwingAtlasPreview extends Box {
         {
             timer.restart();
         }
-        doLayout();
-        revalidate();
-        update(getGraphics());
-        repaint();
+//        doLayout(); //These lines cause images to bleed on to other tabs and don't appear to be needed
+//        revalidate();
+//        update(getGraphics());
+//        repaint();
 
     }
 }

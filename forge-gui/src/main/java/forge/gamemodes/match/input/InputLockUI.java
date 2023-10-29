@@ -10,6 +10,7 @@ import forge.game.spellability.SpellAbility;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class InputLockUI implements Input {
@@ -58,7 +59,7 @@ public class InputLockUI implements Input {
         @Override
         public void run() {
             controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
-            showMessage("Waiting for actions...");
+            showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
         }
     };
 

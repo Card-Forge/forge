@@ -9,6 +9,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityCantGainLosePayLife {
 
     static String MODE_CANT_GAIN_LIFE = "CantGainLife";
+    static String MODE_CANT_LOSE_LIFE = "CantLoseLife";
     static String MODE_CANT_CHANGE_LIFE = "CantChangeLife";
     static String MODE_CANT_PAY_LIFE = "CantPayLife";
 
@@ -36,7 +37,7 @@ public class StaticAbilityCantGainLosePayLife {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE_CANT_CHANGE_LIFE)) {
+                if (!(stAb.checkMode(MODE_CANT_LOSE_LIFE) || stAb.checkMode(MODE_CANT_CHANGE_LIFE))) {
                     continue;
                 }
 
@@ -53,7 +54,7 @@ public class StaticAbilityCantGainLosePayLife {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!(stAb.checkMode(MODE_CANT_PAY_LIFE) || stAb.checkMode(MODE_CANT_CHANGE_LIFE))) {
+                if (!(stAb.checkMode(MODE_CANT_PAY_LIFE) || stAb.checkMode(MODE_CANT_LOSE_LIFE) || stAb.checkMode(MODE_CANT_CHANGE_LIFE))) {
                     continue;
                 }
 

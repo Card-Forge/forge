@@ -1,7 +1,6 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -17,6 +16,7 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.gui.FThreads;
@@ -62,18 +62,17 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private ArenaScene() {
         super(Forge.isLandscapeMode() ? "ui/arena.json" : "ui/arena_portrait.json");
-        TextureAtlas atlas = Config.instance().getAtlas(Paths.ARENA_ATLAS);
-        fighterSpot = atlas.createSprite("Spot");
-        lostOverlay = atlas.createSprite("Lost");
-        up = atlas.createSprite("Up");
-        upWin = atlas.createSprite("UpWin");
-        side = atlas.createSprite("Side");
-        sideWin = atlas.createSprite("SideWin");
-        edge = atlas.createSprite("Edge");
-        edgeM = atlas.createSprite("Edge");
+        fighterSpot = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Spot");
+        lostOverlay = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Lost");
+        up = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Up");
+        upWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "UpWin");
+        side = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Side");
+        sideWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "SideWin");
+        edge = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "Edge");
+        edgeM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeFlip");
         edgeM.setFlip(true, false);
-        edgeWin = atlas.createSprite("EdgeWin");
-        edgeWinM = atlas.createSprite("EdgeWin");
+        edgeWin = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWin");
+        edgeWinM = Config.instance().getAtlasSprite(Paths.ARENA_ATLAS, "EdgeWinFlip");
         edgeWinM.setFlip(true, false);
         gridSize = fighterSpot.getRegionWidth();
 
@@ -86,7 +85,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             else
                 showAreYouSure();
         });
-        ui.onButtonPress("start", () -> startButton());
+        ui.onButtonPress("start", this::startButton);
         doneButton = ui.findActor("done");
         ScrollPane pane = ui.findActor("arena");
         arenaPlane = new Table();
@@ -112,10 +111,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void loose() {
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblLeave"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted = false;
+        AdventureQuestController.instance().updateArenaComplete(false);
+        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
     private void startDialog() {
@@ -146,9 +147,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         enable = false;
         goldLabel.setVisible(false);
         arenaStarted = true;
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblContinue"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblConcede"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         Current.player().takeGold(arenaData.entryFee);
@@ -161,7 +162,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
         for (int i = 0; i < fighters.size - 2; i += 2) {
-            boolean leftWon = rand.nextBoolean();
+            int matchHP = enemies.get(i).getData().life + enemies.get(i+1).getData().life;
+            boolean leftWon = rand.nextInt(matchHP) < enemies.get(i).getData().life;
             if (leftWon) {
                 winners.add(fighters.get(i));
                 winnersEnemies.add(enemies.get(i));
@@ -191,8 +193,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         if (roundsWon >= arenaData.rounds) {
             arenaStarted = false;
             startButton.setDisabled(true);
-            doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+            doneButton.setText("[%80][+Exit]");
             doneButton.layout();
+            AdventureQuestController.instance().updateArenaComplete(true);
+            AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
         }
         if (!Forge.isLandscapeMode())
             drawArena();//update
@@ -241,7 +245,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy);
                 Forge.switchScene(duelScene);
-            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride));
+            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName()));
         });
     }
 
@@ -257,7 +261,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             Array<Reward> data = new Array<>();
             for (int i = 0; i < roundsWon; i++) {
                 for (int j = 0; j < arenaData.rewards[i].length; j++) {
-                    data.addAll(arenaData.rewards[i][j].generate(false, null));
+                    data.addAll(arenaData.rewards[i][j].generate(false, null, true));
                 }
             }
             RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null);
@@ -277,9 +281,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     Actor player;
 
     public void loadArenaData(ArenaData data, long seed) {
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblStart"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         arenaData = data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now
@@ -297,12 +301,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                 enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
             EnemySprite enemy = new EnemySprite(enemyData);
             enemies.add(enemy);
-            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.name));
+            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.getName()));
         }
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;
 
-        goldLabel.setText(data.entryFee + " [+Gold]");
+        goldLabel.setText("[+GoldCoin] " + data.entryFee);
         goldLabel.layout();
         goldLabel.setVisible(true);
 

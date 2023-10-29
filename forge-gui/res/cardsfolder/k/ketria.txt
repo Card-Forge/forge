@@ -1,0 +1,12 @@
+Name:Ketria
+ManaCost:no cost
+Types:Plane Ikoria
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Command | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put your choice of vigilance, menace, or trample counter on target creature you control.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCounter | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put your choice of vigilance, menace, or trample counter on target creature you control.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ Vigilance,Menace,Trample | CounterNum$ 1 | CounterTypePerDefined$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, exile cards from the top of your library until you exile a nonland permanent card. Put that card onto the battlefield or into your hand.
+SVar:RolledChaos:DB$ DigUntil | ValidPlayer$ You | Valid$ Permanent.nonLand | ValidDescription$ nonland permanent | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChangeZone | Defined$ Remembered | DestinationAlternative$ Hand | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup | AlternativeDestinationMessage$ Would you like to put the card onto battlefield (and not into your hand)? | 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:When you planeswalk to Ketria and at the beginning of your upkeep, put your choice of vigilance, menace, or trample counter on target creature you control.\nWhenever chaos ensues, exile cards from the top of your library until you exile a nonland permanent card. Put that card onto the battlefield or into your hand.

@@ -17,23 +17,10 @@
  */
 package forge.game.trigger;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameStage;
-import forge.game.IHasSVars;
-import forge.game.TriggerReplacementBase;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -49,6 +36,8 @@ import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
+import java.util.*;
 
 /**
  * <p>
@@ -167,6 +156,9 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public final String replaceAbilityText(final String desc, SpellAbility sa) {
+        return replaceAbilityText(desc, sa, false);
+    }
+    public final String replaceAbilityText(final String desc, SpellAbility sa, boolean forStack) {
         String result = desc;
 
         // this function is for ABILITY
@@ -177,23 +169,35 @@ public abstract class Trigger extends TriggerReplacementBase {
             sa = getOverridingAbility();
         }
         if (sa != null) {
-            String saDesc;
+            String saDesc = "";
+            boolean digMore = true;
             // if sa is a wrapper, get the Wrapped Ability
             if (sa.isWrapper()) {
                 final WrappedAbility wa = (WrappedAbility) sa;
                 sa = wa.getWrappedAbility();
 
-                // wrapped Charm spells are special,
-                // only get the selected abilities
+                // wrapped Charm spells are special, only get the selected abilities (if there are any yet)
                 if (ApiType.Charm.equals(sa.getApi())) {
                     saDesc = sa.getStackDescription();
-                } else {
-                    saDesc = sa.toString();
+                    digMore = false;
                 }
-            } else if (ApiType.Charm.equals(sa.getApi())) {
-                // use special formating, can be used in Card Description
-                saDesc = CharmEffect.makeFormatedDescription(sa);
-            } else {
+            }
+            if (digMore) { // if ABILITY is used, there is probably Charm somewhere
+                SpellAbility trigSA = sa;
+                while (trigSA != null) {
+                    ApiType api = trigSA.getApi();
+                    if (ApiType.Charm.equals(api)) {
+                        saDesc = CharmEffect.makeFormatedDescription(trigSA, !forStack);
+                        break;
+                    }
+                    if (ApiType.ImmediateTrigger.equals(api) || ApiType.DelayedTrigger.equals(api)) {
+                        trigSA = trigSA.getAdditionalAbility("Execute");
+                    } else {
+                        trigSA = trigSA.getSubAbility();
+                    }
+                }
+            }
+            if (saDesc.equals("")) { // in case we haven't found anything better
                 saDesc = sa.toString();
             }
             // string might have leading whitespace
@@ -375,7 +379,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
         } else if ("LifePaid".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
                 return false;
             }
@@ -404,7 +408,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         } else if ("Sacrificed".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && Iterables.isEmpty(trigSA.getPaidList("Sacrificed"))) {
                 return false;
             }

@@ -1,0 +1,9 @@
+Name:Sally Sparrow
+ManaCost:2 W U
+Types:Legendary Creature Human Detective
+PT:2/3
+S:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | Caster$ You | Description$ You may cast creature spells as though they had flash.
+T:Mode$ ChangesZoneAll | Origin$ Battlefield | ActivationLimit$ 1 | Destination$ Any | ValidCards$ Creature.YouCtrl+Other | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more other creatures you control leave the battlefield, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Token & Type$Clue|Artifact
+Oracle:You may cast creature spells as though they had flash.\nWhenever one or more other creatures you control leave the battlefield, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

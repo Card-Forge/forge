@@ -1,0 +1,95 @@
+archaeologist.png
+size: 512,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 23,8
+  size: 16, 16  
+Idle 
+  xy: 20, 8
+  size: 25, 24  
+Idle 
+  xy: 84, 8
+  size: 25, 24   
+Idle 
+  xy: 148, 8
+  size: 25, 24 
+Idle 
+  xy: 212, 8
+  size: 25, 24 
+Idle 
+  xy: 276, 8
+  size: 25, 24 
+Idle 
+  xy: 340, 8
+  size: 25, 24 
+Idle 
+  xy: 404, 8
+  size: 25, 24 
+Idle 
+  xy: 468, 8
+  size: 25, 24 
+Walk 
+  xy: 20, 38
+  size: 25, 26
+Walk 
+  xy: 84, 38
+  size: 25, 26
+Walk 
+  xy: 148, 38
+  size: 25, 26
+Walk 
+  xy: 212, 38
+  size: 25, 26
+Walk 
+  xy: 276,38
+  size: 25, 26
+Walk 
+  xy: 340, 38
+  size: 25, 26
+Walk 
+  xy: 404, 38
+  size: 25, 26
+Walk 
+  xy: 468, 38
+  size: 25, 26
+Attack 
+  xy: 0, 128
+  size: 64, 32
+Attack 
+  xy: 64, 128
+  size: 64, 32
+Attack 
+   xy: 128, 128
+  size: 64, 32
+Attack 
+  xy: 192, 128
+  size: 64, 32
+Attack 
+  xy: 256, 128
+  size: 64, 32
+Attack 
+  xy: 320, 128
+  size: 64, 32
+Attack 
+  xy: 384, 128
+  size: 64, 32
+Attack
+  xy: 448, 128
+  size: 64, 32
+Death
+  xy: 22, 198
+  size: 27, 26
+Death
+  xy: 86, 198
+  size: 27, 26
+Death
+  xy: 150, 198
+  size: 27, 26
+Death
+  xy: 214, 198
+  size: 27, 26
+Death
+  xy: 278, 198
+  size: 27, 26

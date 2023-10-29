@@ -9,6 +9,8 @@ import com.google.common.collect.Lists;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -31,7 +33,10 @@ public class ChoosePlayerAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> choices, Map<String, Object> params) {
         Player chosen = null;
-        if ("Curse".equals(sa.getParam("AILogic"))) {
+        if (sa.hasParam("Protect")) {
+            chosen = new PlayerCollection(choices).min(PlayerPredicates.compareByLife());
+        }
+        else if ("Curse".equals(sa.getParam("AILogic"))) {
             for (Player pc : choices) {
                 if (pc.isOpponentOf(ai)) {
                     chosen = pc;

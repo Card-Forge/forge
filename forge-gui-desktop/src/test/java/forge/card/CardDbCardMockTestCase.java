@@ -49,7 +49,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
     // next lines need to be updated with each printing of Shivan Dragon
-    protected final String latestArtShivanDragonEdition = "DMR";
+    protected final String latestArtShivanDragonEdition = "P30T";
     protected final String latestArtShivanDragonEditionNoPromo = "DMR";
 
     protected final String originalArtLightningDragonEdition = "USG";
@@ -1757,7 +1757,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaReleaseDate = format.parse(alphaEditionReleaseDate);
             // next line needs to be updated each time Shivan Dragon is reprinted
-            latestShivanDragonReleaseDateToDate = format.parse("2023-03-31");
+            latestShivanDragonReleaseDateToDate = format.parse("2023-09-31");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
@@ -1946,11 +1946,11 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         if (legacyMilitantAngel != null)
             assertEquals(militantAngel, legacyMilitantAngel);
 
-        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        // Loyal Unicorn: Available in Forge in Commander Masters, The List and COMMANDER 2018
         String cnLoyalUnicorn = "Loyal Unicorn";
         PaperCard loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
-        assertEquals(loyalUnicorn.getEdition(), "PLIST"); // The List
+        assertEquals(loyalUnicorn.getEdition(), "CMM"); // Commander Masters
 
         PaperCard legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.Latest);
@@ -1958,11 +1958,11 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest;
-        // COMMANDER 2016
+        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander
         String cnSelflessSquire = "Selfless Squire";
         PaperCard selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "C21"); // Commander 2021
+        assertEquals(selflessSquire.getEdition(), "LTC"); // The Lord of the Rings: Tales of Middle-earth Commander
 
         PaperCard legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.Latest);
@@ -2003,10 +2003,10 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest;
-        // COMMANDER 2016
+        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander
         selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "C21");
+        assertEquals(selflessSquire.getEdition(), "LTC");
 
         legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.LatestCoreExp);

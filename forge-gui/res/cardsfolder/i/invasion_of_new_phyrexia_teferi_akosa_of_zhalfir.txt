@@ -1,0 +1,31 @@
+Name:Invasion of New Phyrexia
+ManaCost:X W U
+Types:Battle Siege
+Defense:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X 2/2 white and blue Knight creature tokens with vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ wu_2_2_knight_vigilance
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Knight
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of New Phyrexia enters the battlefield, create X 2/2 white and blue Knight creature tokens with vigilance.
+
+ALTERNATE
+
+Name:Teferi Akosa of Zhalfir
+ManaCost:no cost
+Colors:white,blue
+Types:Legendary Planeswalker Teferi
+Loyalty:4
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards.
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Creature | StackDescription$ SpellDescription | SpellDescription$ Then discard two cards unless you discard a creature card.
+A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Emblem - Teferi Akosa of Zhalfir | Image$ emblem_teferi_akosa_of_zhalfir | StaticAbilities$ STPump | Duration$ Permanent | SpellDescription$ You get an emblem with "Knights you control get +1/+0 and have ward {1}."
+SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Knight.YouCtrl | AddPower$ 1 | AddKeyword$ Ward:1 | Description$ Knights you control get +1/+0 and have ward {1}.
+A:AB$ Tap | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped | ChoicePrompt$ Tap any number of untapped creatures you control | RememberTapped$ True | SubAbility$ DBImmediateTrig | StackDescription$ Tap any number of untapped creatures you control. | SpellDescription$ Tap any number of untapped creatures you control.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | RememberSVarAmount$ Y | Execute$ TrigChangeZone | SubAbility$ DBCleanup | SpellDescription$ When you do, shuffle target nonland permanent an opponent controls with mana value X or less into its owner's library, where X is the number of creatures tapped this way.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLEX | TgtPrompt$ Select target nonland permanent an opponent controls with mana value X or less | Origin$ Battlefield | Destination$ Library | Shuffle$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$TriggerRememberAmount
+SVar:Y:Count$RememberedSize
+DeckHas:Ability$Discard
+DeckHints:Type$Knight
+Oracle:[+1]: Draw two cards. Then discard two cards unless you discard a creature card.\n[−2]: You get an emblem with "Knights you control get +1/+0 and have ward {1}."\n[−3]: Tap any number of untapped creatures you control. When you do, shuffle target nonland permanent an opponent controls with mana value X or less into its owner's library, where X is the number of creatures tapped this way.

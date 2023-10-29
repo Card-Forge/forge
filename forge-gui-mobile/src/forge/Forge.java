@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -52,7 +54,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.56.001";
+    public static final String CURRENT_VERSION = "1.6.58.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -61,6 +63,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
+    public static boolean restrictAdvMenus = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -102,6 +105,7 @@ public class Forge implements ApplicationListener {
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
     public Assets assets;
+    private ForgePreferences forgePreferences;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
@@ -143,6 +147,11 @@ public class Forge implements ApplicationListener {
     private Forge() {
     }
 
+    private ForgePreferences getForgePreferences() {
+        if (forgePreferences == null)
+            forgePreferences = new ForgePreferences();
+        return forgePreferences;
+    }
     public static Localizer getLocalizer() {
         if (localizer == null)
             localizer = Localizer.getInstance();
@@ -177,33 +186,38 @@ public class Forge implements ApplicationListener {
          */
         Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
-        ForgePreferences prefs = new ForgePreferences();
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
-            selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
+            selector = getForgePreferences().getPref(FPref.UI_SELECTOR_MODE);
+        boolean landscapeMode = GuiBase.isAndroid() ? !isPortraitMode : screenWidth > screenHeight;
+        //update landscape mode preference if it doesn't match what the app loaded as
+        if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != landscapeMode) {
+            getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, landscapeMode);
+            getForgePreferences().save();
+        }
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
-            skinName = prefs.getPref(FPref.UI_SKIN);
+            skinName = getForgePreferences().getPref(FPref.UI_SKIN);
         } else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
         FSkin.loadLight(skinName, splashScreen);
 
-        textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
-        showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
-        autoAIDeckSelection = prefs.getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
-        altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
-        altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
-        animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
-        enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
-        if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
+        textureFiltering = getForgePreferences().getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
+        showFPS = getForgePreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+        autoAIDeckSelection = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
+        altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+        altZoneTabs = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+        animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+        if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
-        else if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
+        else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
             enableUIMask = "Off";
-        enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-        locale = prefs.getPref(FPref.UI_LANGUAGE);
-        autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
-        disposeTextures = prefs.getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
-        CJK_Font = prefs.getPref(FPref.UI_CJK_FONT);
+        enablePreloadExtendedArt = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+        locale = getForgePreferences().getPref(FPref.UI_LANGUAGE);
+        autoCache = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
+        disposeTextures = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+        CJK_Font = getForgePreferences().getPref(FPref.UI_CJK_FONT);
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 300. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
@@ -376,12 +390,6 @@ public class Forge implements ApplicationListener {
         afterDBloaded = true;
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
-
-        //update landscape mode preference if it doesn't match what the app loaded as
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
-            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
-            FModel.getPreferences().save();
-        }
 
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             //load skin full
@@ -1009,6 +1017,7 @@ public class Forge implements ApplicationListener {
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
+        MapStage.getInstance().disposeWorld();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();
@@ -1023,13 +1032,23 @@ public class Forge implements ApplicationListener {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
-        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene) {
-            if (!(currentScene instanceof ForgeScene)) //prevent overwriting the last preview if last scene is instance of ForgeScene
+        return switchScene(newScene, false);
+    }
+    public static boolean switchScene(Scene newScene, boolean skipPreview) {
+        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene || newScene instanceof QuestLogScene) {
+            if (!(currentScene instanceof ForgeScene || skipPreview)) //prevent overwriting the last preview if last scene is instance of ForgeScene
                 WorldSave.getCurrentSave().header.createPreview();
         }
         if (currentScene != null) {
             if (!currentScene.leave())
                 return false;
+            if (lastScene.contains(currentScene, false))
+            {
+                int i = lastScene.indexOf(currentScene, false);
+                if (i > -1){
+                    lastScene.setSize(i);
+                }
+            }
             lastScene.add(currentScene);
         }
         storeScreen();
@@ -1049,7 +1068,6 @@ public class Forge implements ApplicationListener {
     }
 
     public static Scene switchToLast() {
-
         if (lastScene.size != 0) {
             storeScreen();
             currentScene = lastScene.get(lastScene.size - 1);
@@ -1066,7 +1084,7 @@ public class Forge implements ApplicationListener {
         System.out.println(message);
     }
 
-    public static void startKeyInput(KeyInputAdapter adapter) {
+    public static void startKeyInput(KeyInputAdapter adapter, boolean numeric) {
         if (keyInputAdapter == adapter) {
             return;
         }
@@ -1074,7 +1092,7 @@ public class Forge implements ApplicationListener {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
         keyInputAdapter = adapter;
-        Gdx.input.setOnscreenKeyboardVisible(true);
+        Gdx.input.setOnscreenKeyboardVisible(true, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
     }
 
     public static boolean endKeyInput() {

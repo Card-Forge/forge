@@ -1,0 +1,17 @@
+torturer.png
+size: 78,144
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 3, 6
+  size: 20, 20     
+Idle 
+  xy: 0, 0
+  size: 26, 36 
+Idle 
+  xy: 26, 0
+  size: 26, 36 
+Idle 
+  xy: 52, 0
+  size: 26, 36 

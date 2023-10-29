@@ -1,9 +1,10 @@
 Name:Academy at Tolaria West
 ManaCost:no cost
 Types:Plane Dominaria
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ AcademicDraw | TriggerDescription$ At the beginning of your end step, if you have no cards in hand, draw seven cards.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.YouOwn | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ AcademicDraw | TriggerDescription$ At the beginning of your end step, if you have no cards in hand, draw seven cards.
 SVar:AcademicDraw:DB$ Draw | Defined$ You | NumCards$ 7
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, discard your hand.
-SVar:RolledChaos:DB$ Discard | Mode$ Hand | Defined$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDiscard | TriggerDescription$ Whenever chaos ensues, discard your hand.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | CardsInHandLE$ 2
-Oracle:At the beginning of your end step, if you have no cards in hand, draw seven cards.\nWhenever you roll {CHAOS}, discard your hand.
+Deckhas:Ability$Discard
+Oracle:At the beginning of your end step, if you have no cards in hand, draw seven cards.\nWhenever chaos ensues, discard your hand.

@@ -3,6 +3,6 @@ ManaCost:3 R R
 Types:Legendary Creature Viashino Shaman
 PT:3/4
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ GainControl | Cost$ T | ValidTgts$ Dragon | TgtPrompt$ Select target Dragon. | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target Dragon for as long as you control CARDNAME and CARDNAME remains tapped.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Dragon | TgtPrompt$ Select target Dragon. | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target Dragon for as long as you control NICKNAME and NICKNAME remains tapped.
 AI:RemoveDeck:Random
 Oracle:You may choose not to untap Hivis of the Scale during your untap step.\n{T}: Gain control of target Dragon for as long as you control Hivis and Hivis remains tapped.

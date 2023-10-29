@@ -1,0 +1,9 @@
+Name:Avacyn
+ManaCost:no cost
+Types:Legendary Creature Angel
+PT:8/8
+Colors:white
+K:Flying
+K:Vigilance
+K:Indestructible
+Oracle:Flying, vigilance, indestructible

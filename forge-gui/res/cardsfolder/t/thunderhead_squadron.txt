@@ -1,0 +1,7 @@
+Name:Thunderhead Squadron
+ManaCost:5 U
+Types:Creature Human Knight
+PT:3/4
+K:Convoke
+K:Flying
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying

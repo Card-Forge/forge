@@ -22,15 +22,13 @@ package forge.game;
  */
 public enum GlobalRuleChange {
 
-    alwaysWither ("All damage is dealt as though its source had wither."),
     attackerChoosesBlockers ("The attacking player chooses how each creature blocks each combat."),
     manaBurn ("A player losing unspent mana causes that player to lose that much life."),
     noNight ("It can't become night."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),
-    onlyTwoBlockers ("No more than two creatures can block each combat."),
-    blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll.");
-    
+    onlyTwoBlockers ("No more than two creatures can block each combat.");
+
     private final String ruleText;
 
     GlobalRuleChange(String text) {

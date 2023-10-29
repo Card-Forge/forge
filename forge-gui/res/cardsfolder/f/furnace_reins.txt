@@ -1,0 +1,10 @@
+Name:Furnace Reins
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | StackDescription$ REP target creature_{c:Targeted},that creature_it | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and "Whenever this creature deals combat damage to a player or battle, create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Triggers$ DamageTrig | StackDescription$ None
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigTreasure | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+DeckHints:Ability$Sacrifice
+Oracle:Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and "Whenever this creature deals combat damage to a player or battle, create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

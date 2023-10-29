@@ -4,6 +4,8 @@ Types:Creature Elk Beast
 PT:6/6
 K:Mutate:5 G
 T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Whenever this creature mutates, exile cards from the top of your library until you exile X permanent cards, where X is the number of times this creature has mutated. Put those permanent cards onto the battlefield.
-SVar:TrigDigUntil:DB$ DigUntil | Amount$ X | Defined$ You | Valid$ Permanent | ValidDescription$ permanent | RevealedDestination$ Exile | FoundDestination$ Battlefield
+SVar:TrigDigUntil:DB$ DigUntil | Amount$ X | Defined$ You | Valid$ Permanent | ValidDescription$ permanent | RevealedDestination$ Exile | FoundDestination$ Exile | RememberFound$ True | SubAbility$ DBToPlay
+SVar:DBToPlay:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TimesMutated
 Oracle:Mutate {5}{G} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, exile cards from the top of your library until you exile X permanent cards, where X is the number of times this creature has mutated. Put those permanent cards onto the battlefield.

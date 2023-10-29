@@ -1,0 +1,30 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Scroll",
+      "name": "settings",
+      "x": 10,
+      "y": 10,
+      "width": 250,
+      "height": 420
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "width": 250,
+      "height": 32,
+      "x": 10,
+      "y": 432
+    }
+  ]
+}

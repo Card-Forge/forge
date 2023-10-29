@@ -80,7 +80,7 @@ public class CardDetailPanel extends SkinnedPanel {
         nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardNameAndCost")).build();
         typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardType")).build();
         idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip(Localizer.getInstance().getMessage("lblCardID")).build();
-        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardPTOrLoyalty")).build();
+        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblPrimaryCharacteristic")).build();
         setInfoLabel = new JLabel();
         setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -251,7 +251,7 @@ public class CardDetailPanel extends SkinnedPanel {
             updateBorder(state, mayView);
         }
 
-        powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, mayView));
+        powerToughnessLabel.setText(CardDetailUtil.formatPrimaryCharacteristic(state, mayView));
 
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 

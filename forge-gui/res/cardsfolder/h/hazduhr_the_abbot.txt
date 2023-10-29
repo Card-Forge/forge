@@ -2,7 +2,7 @@ Name:Hazduhr the Abbot
 ManaCost:3 W W
 Types:Legendary Creature Human Cleric
 PT:2/5
-A:AB$ ChooseCard | Cost$ X T | ValidTgts$ Creature.White+YouCtrl | TgtPrompt$ Select target white creature you control | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBSetVarBefore | SpellDescription$ The next X damage that would be dealt this turn to target white creature you control is dealt to CARDNAME instead. | StackDescription$ SpellDescription
+A:AB$ ChooseCard | Cost$ X T | ValidTgts$ Creature.White+YouCtrl | TgtPrompt$ Select target white creature you control | Mandatory$ True | Defined$ You | SubAbility$ DBSetVarBefore | SpellDescription$ The next X damage that would be dealt this turn to target white creature you control is dealt to CARDNAME instead. | StackDescription$ SpellDescription
 SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ HazduhrDamage | Triggers$ OutOfSight | RememberObjects$ Targeted | ImprintCards$ Self | SubAbility$ DBCleanup
 SVar:HazduhrDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ HazduhrDmg | DamageTarget$ Imprinted | Description$ The next X damage that would be dealt this turn to target white creature you control is dealt to EFFECTSOURCE instead.

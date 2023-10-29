@@ -1,0 +1,9 @@
+Name:Serpent-Blade Assailant
+ManaCost:2 G
+Types:Creature Elf Warrior
+PT:2/1
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Pump | KW$ Deathtouch
+K:Deathtouch
+DeckHas:Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nDeathtouch

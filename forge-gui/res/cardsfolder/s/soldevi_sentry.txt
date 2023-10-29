@@ -2,6 +2,7 @@ Name:Soldevi Sentry
 ManaCost:1
 Types:Artifact Creature Soldier
 PT:1/1
-A:AB$ Regenerate | Cost$ 1 | ValidTgts$ Opponent | Defined$ Self | RegenerationTrigger$ TrigDraw | RememberObjects$ TargetedPlayer | SpellDescription$ Choose target opponent. Regenerate CARDNAME. When it regenerates this way, that player may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ Remembered | NumCards$ 1 | OptionalDecider$ True | SpellDescription$ When it regenerates this way, that player may draw a card.
+A:AB$ Regenerate | Cost$ 1 | ValidTgts$ Opponent | Defined$ Self | RegenerationAbility$ DBImmediateTrigger | RememberObjects$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Choose target opponent. Regenerate CARDNAME. When it regenerates this way, that player may draw a card.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ Remembered | Execute$ TrigDraw | TriggerDescription$ When it regenerates this way, that player may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ DelayTriggerRemembered | NumCards$ 1 | OptionalDecider$ True | SpellDescription$ When it regenerates this way, that player may draw a card.
 Oracle:{1}: Choose target opponent. Regenerate Soldevi Sentry. When it regenerates this way, that player may draw a card.

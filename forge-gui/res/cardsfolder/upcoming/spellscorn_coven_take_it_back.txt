@@ -1,0 +1,18 @@
+Name:Spellscorn Coven
+ManaCost:3 B
+Types:Creature Faerie Warlock
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
+DeckHas:Ability$Discard
+AlternateMode:Adventure
+Oracle:Flying\nWhen Spellscorn Coven enters the battlefield, each opponent discards a card.
+
+ALTERNATE
+
+Name:Take It Back
+ManaCost:2 U
+Types:Instant  Adventure
+A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)

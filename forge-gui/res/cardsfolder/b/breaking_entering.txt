@@ -11,8 +11,7 @@ ALTERNATE
 Name:Entering
 ManaCost:4 B R
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 4 B R | Choices$ Creature | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True | RememberChanged$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
+A:SP$ ChangeZone | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Hidden$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)

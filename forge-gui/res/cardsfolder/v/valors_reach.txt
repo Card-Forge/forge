@@ -1,0 +1,9 @@
+Name:Valor's Reach
+ManaCost:no cost
+Types:Plane Kylem
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YourTeamCtrl | Execute$ TrigPumpAll | IsPresent$ Creature.attacking | PresentCompare$ EQ2 | NoResolvingCheck$ True | TriggerZones$ Command | AttackingPlayer$ You | TriggerDescription$ Whenever your team attacks with exactly two creatures, those creatures gain double strike until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YourTeamCtrl+attacking | KW$ Double Strike
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap up to two target creatures your team controls. If it's a main phase, there is an additional combat phase after this phase, followed by an additional main phase.
+SVar:RolledChaos:DB$ Untap | ValidTgts$ Creature.YourTeamCtrl | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures your team controls | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
+Oracle:Whenever your team attacks with exactly two creatures, those creatures gain double strike until end of turn.\nWhenever chaos ensues, untap up to two target creatures your team controls. If it's a main phase, there is an additional combat phase after this phase, followed by an additional main phase.

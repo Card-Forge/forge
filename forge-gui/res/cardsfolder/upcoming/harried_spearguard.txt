@@ -1,0 +1,10 @@
+Name:Harried Spearguard
+ManaCost:R
+Types:Creature Human Soldier
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_rat_noblock
+DeckHas:Ability$Token & Type$Rat
+SVar:SacMe:2
+Oracle:Haste\nWhen Harried Spearguard dies, create a 1/1 black Rat creature token with "This creature can't block."

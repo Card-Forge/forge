@@ -5,5 +5,5 @@ PT:5/4
 K:Surge:3 R R
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+surged | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, if its surge cost was paid, it deals 3 damage to any target.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
 Oracle:Surge {3}{R}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nFlying\nWhen Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to any target.

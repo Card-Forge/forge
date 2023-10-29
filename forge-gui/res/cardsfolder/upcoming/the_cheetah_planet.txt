@@ -1,0 +1,12 @@
+Name:The Cheetah Planet
+ManaCost:no cost
+Types:Plane Outside Mutter's Spiral
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put two +1/+1 counters on target non-Cat creature you control. It becomes a Cat in addition to its other types.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, put two +1/+1 counters on target non-Cat creature you control. It becomes a Cat in addition to its other types.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.nonCat+YouCtrl | TgtPrompt$ Select target non-Cat creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Cat | Duration$ Permanent
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigPumpAll | TriggerDescription$ Whenever chaos ensues, all Cats gain provoke until end of turn. (Whenever a Cat attacks, its controller may have target creature defending player controls untap and block it if able.)
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Card.Cat | KW$ Provoke
+DeckHas:Ability$Counters & Type$Cat
+DeckHints:Type$Cat
+Oracle:When you planeswalk to The Cheetah Planet and at the beginning of your upkeep, put two +1/+1 counters on target non-Cat creature you control. It becomes a Cat in addition to its other types.\nWhenever chaos ensues, all Cats gain provoke until end of turn. (Whenever a Cat attacks, its controller may have target creature defending player controls untap and block it if able.)

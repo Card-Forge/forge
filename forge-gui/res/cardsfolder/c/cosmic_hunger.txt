@@ -1,0 +1,6 @@
+Name:Cosmic Hunger
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DealDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to another target creature, planeswalker, or battle.
+SVar:DealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker,Battle | TgtPrompt$ Select another target creature, planeswalker, or battle | TargetUnique$ True | AILogic$ PowerDmg | NumDmg$ ParentTargeted$CardPower | DamageSource$ ParentTarget
+Oracle:Target creature you control deals damage equal to its power to another target creature, planeswalker, or battle.

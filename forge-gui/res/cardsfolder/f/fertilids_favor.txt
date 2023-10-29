@@ -1,0 +1,7 @@
+Name:Fertilid's Favor
+ManaCost:3 G
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Player | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBCounter | Chooser$ Targeted | SpellDescription$ Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles. Put two +1/+1 counters on up to one target artifact or creature.
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature,Artifact | TgtPrompt$ Select up to one target creature or artifact | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 2 
+DeckHas:Ability$Counters
+Oracle:Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles. Put two +1/+1 counters on up to one target artifact or creature.

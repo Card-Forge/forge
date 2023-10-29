@@ -197,10 +197,11 @@ ScryfallCode=AER
 182 C Watchful Automaton @Eric Deschamps
 183 C Welder Automaton @Victor Adame Minguez
 184 R Spire of Industry @John Avon
-185 M Ajani, Valiant Protector @Anna Steinbauer
-186 C Inspiring Roar @Chris Rahn
+
 
 [precon product]
+185 M Ajani, Valiant Protector @Anna Steinbauer
+186 C Inspiring Roar @Chris Rahn
 187 U Ajani's Comrade @James Ryman
 188 R Ajani's Aid @Terese Nielsen
 189 C Tranquil Expanse @Sam Burley

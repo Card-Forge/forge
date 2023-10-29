@@ -21,7 +21,7 @@ Types:Enchantment Creature Dragon Spirit
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever another creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on that creature.
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigPutCounter | RememberObjects$ TriggeredCardLKICopy | AILogic$ MaxX | TriggerDescription$ When you do, put X +1/+1 counters on that creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigPutCounter | RememberObjects$ TriggeredCardLKICopy | TriggerDescription$ When you do, put X +1/+1 counters on that creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ DelayTriggerRememberedLKI | CounterType$ P1P1 | CounterNum$ X
 S:Mode$ Continuous | IsPresent$ Creature.modified+YouCtrl | PresentCompare$ GE5 | Affected$ Card.Self | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Trample | Description$ As long as you control five or more modified creatures, CARDNAME gets +5/+5 and has trample.
 SVar:X:Count$xPaid

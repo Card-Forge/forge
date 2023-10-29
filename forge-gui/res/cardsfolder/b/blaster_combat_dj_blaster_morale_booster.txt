@@ -20,7 +20,7 @@ Types:Legendary Artifact
 K:Modular:3
 A:AB$ MoveCounter | Cost$ X T | Source$ Self | ValidTgts$ Artifact.Other | TgtPrompt$ Select another target artifact to get counters | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Move X +1/+1 counters from NICKNAME onto another target artifact. Activate only as a sorcery.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | SubAbility$ DBConvert | SpellDescription$ That artifact gains haste until end of turn.
-SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionPresent$ Card.Self+counters_EQ0_P1P1 | StackDescription$ If NICKNAME has no +1/+1 counters on it, convert it.
+SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionPresent$ Card.Self+counters_EQ0_P1P1 | SpellDescription$ If NICKNAME has no +1/+1 counters on it, convert it.
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 Oracle:Modular 3\n{X}, {T}: Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.

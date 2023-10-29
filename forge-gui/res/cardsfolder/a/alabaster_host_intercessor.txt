@@ -1,0 +1,10 @@
+Name:Alabaster Host Intercessor
+ManaCost:5 W
+Types:Creature Phyrexian Samurai
+PT:3/4
+K:TypeCycling:Plains:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+Oracle:When Alabaster Host Intercessor enters the battlefield, exile target creature an opponent controls until Alabaster Host Intercessor leaves the battlefield.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffe.)

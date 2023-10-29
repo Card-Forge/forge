@@ -1,0 +1,20 @@
+Name:Pyretic Prankster
+ManaCost:1 R
+Types:Creature Devil
+PT:2/1
+A:AB$ SetState | Cost$ 3 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+AlternateMode:DoubleFaced
+Oracle:{3}{B/P}: Transform Pyretic Prankster. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+
+ALTERNATE
+
+Name:Glistening Goremonger
+ManaCost:no cost
+Colors:black,red
+Types:Creature Phyrexian Devil
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, each opponent sacrifices an artifact or creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature,Artifact
+SVar:SacMe:2
+DeckHas:Ability$Sacrifice
+Oracle:When Glistening Goremonger dies, each opponent sacrifices an artifact or creature.

@@ -1,0 +1,7 @@
+Name:Urn of Godfire
+ManaCost:1
+Types:Artifact
+A:AB$ Mana | Cost$ 2 | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Destroy | Cost$ 6 T Sac<1/CARDNAME> | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
+DeckHas:Ability$Sacrifice
+Oracle:{2}: Add one mana of any color.\n{6}, {T}, Sacrifice Urn of Godfire: Destroy target creature or enchantment.

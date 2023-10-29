@@ -256,7 +256,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false));
+                return ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false);
             }
         };
 

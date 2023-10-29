@@ -1,0 +1,10 @@
+Name:Scorn-Blade Berserker
+ManaCost:B
+Types:Creature Human Berserker
+PT:0/1
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Animate | Abilities$ ABDraw
+SVar:ABDraw:AB$ Draw | Cost$ 1 Sac<1/CARDNAME/this creature> | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME/this creature> | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\n{1}, Sacrifice this creature: Draw a card.

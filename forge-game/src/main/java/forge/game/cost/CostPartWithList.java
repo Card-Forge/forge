@@ -107,10 +107,10 @@ public abstract class CostPartWithList extends CostPart {
         super(amount, type, description);
     }
 
-    public final boolean executePayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    public final boolean executePayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         lkiList.add(CardUtil.getLKICopy(targetCard));
         final Zone origin = targetCard.getZone();
-        final Card newCard = doPayment(ability, targetCard, effect);
+        final Card newCard = doPayment(payer, ability, targetCard, effect);
 
         // need to update the LKI info to ensure correct interaction with cards which may trigger on this
         // (e.g. Necroskitter + a creature dying from a -1/-1 counter on a cost payment).
@@ -134,10 +134,10 @@ public abstract class CostPartWithList extends CostPart {
             for (Card c: targetCards) {
                 lkiList.add(CardUtil.getLKICopy(c));
             }
-            cardList.addAll(doListPayment(ability, targetCards, effect));
+            cardList.addAll(doListPayment(payer, ability, targetCards, effect));
         } else {
             for (Card c : targetCards) {
-                executePayment(ability, c, effect);
+                executePayment(payer, ability, c, effect);
             }
         }
         handleChangeZoneTrigger(payer, ability, targetCards);
@@ -150,10 +150,10 @@ public abstract class CostPartWithList extends CostPart {
      * @param targetCard the {@link Card} to pay with.
      * @return The physical card after the payment.
      */
-    protected abstract Card doPayment(SpellAbility ability, Card targetCard, final boolean effect);
+    protected abstract Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect);
     // Overload these two only together, set to true and perform payment on list
     protected boolean canPayListAtOnce() { return false; }
-    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards, final boolean effect) { return CardCollection.EMPTY; }
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) { return CardCollection.EMPTY; }
 
     /**
      * TODO: Write javadoc for this method.
@@ -163,13 +163,13 @@ public abstract class CostPartWithList extends CostPart {
     public abstract String getHashForCardList();
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        executePayment(ai, ability, decision.cards, effect);
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
+        executePayment(payer, ability, decision.cards, effect);
         reportPaidCardsTo(ability);
         return true;
     }
 
-    protected void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
+    protected void handleBeforePayment(Player payer, SpellAbility ability, CardCollectionView targetCards) {
 
     }
 

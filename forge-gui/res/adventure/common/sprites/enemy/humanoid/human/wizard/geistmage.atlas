@@ -1,0 +1,236 @@
+geistmage.png
+size: 64,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 0,0
+  size: 16,16
+Idle
+  xy: 16,0
+  size: 16,16
+Idle
+  xy: 32,0
+  size: 16,16
+Idle
+  xy: 48,0
+  size: 16,16
+Idle
+  xy: 0,16
+  size: 16,16
+Idle
+  xy: 16,16
+  size: 16,16
+Idle
+  xy: 32,16
+  size: 16,16
+Idle
+  xy: 48,16
+  size: 16,16
+Idle
+  xy: 0,32
+  size: 16,16
+Idle
+  xy: 16,32
+  size: 16,16
+Idle
+  xy: 32,32
+  size: 16,16
+Idle
+  xy: 48,32
+  size: 16,16
+Walk
+  xy: 0,48
+  size: 16,16
+Walk
+  xy: 16,48
+  size: 16,16
+Walk
+  xy: 32,48
+  size: 16,16
+Walk
+  xy: 48,48
+  size: 16,16
+Walk
+  xy: 0,64
+  size: 16,16
+Walk
+  xy: 16,64
+  size: 16,16
+Walk
+  xy: 32,64
+  size: 16,16
+Walk
+  xy: 48,64
+  size: 16,16
+IdleUp
+  xy: 16,80
+  size: 16,16
+IdleUp
+  xy: 32,80
+  size: 16,16
+IdleUp
+  xy: 48,80
+  size: 16,16
+IdleUp
+  xy: 0,96
+  size: 16,16
+IdleUp
+  xy: 16,96
+  size: 16,16
+IdleUp
+  xy: 32,96
+  size: 16,16
+IdleUp
+  xy: 48,96
+  size: 16,16
+IdleUp
+  xy: 0,112
+  size: 16,16
+IdleUp
+  xy: 16,112
+  size: 16,16
+IdleUp
+  xy: 32,112
+  size: 16,16
+IdleUp
+  xy: 48,112
+  size: 16,16
+WalkUp
+  xy: 0,128
+  size: 16,16
+WalkUp
+  xy: 16,128
+  size: 16,16
+WalkUp
+  xy: 32,128
+  size: 16,16
+WalkUp
+  xy: 48,128
+  size: 16,16
+WalkUp
+  xy: 0,144
+  size: 16,16
+WalkUp
+  xy: 16,144
+  size: 16,16
+WalkUp
+  xy: 32,144
+  size: 16,16
+WalkUp
+  xy: 48,144
+  size: 16,16
+IdleRightUp
+  xy: 16,80
+  size: 16,16
+IdleRightUp
+  xy: 32,80
+  size: 16,16
+IdleRightUp
+  xy: 48,80
+  size: 16,16
+IdleRightUp
+  xy: 0,96
+  size: 16,16
+IdleRightUp
+  xy: 16,96
+  size: 16,16
+IdleRightUp
+  xy: 32,96
+  size: 16,16
+IdleRightUp
+  xy: 48,96
+  size: 16,16
+IdleRightUp
+  xy: 0,112
+  size: 16,16
+IdleRightUp
+  xy: 16,112
+  size: 16,16
+IdleRightUp
+  xy: 32,112
+  size: 16,16
+IdleRightUp
+  xy: 48,112
+  size: 16,16
+WalkRightUp
+  xy: 0,128
+  size: 16,16
+WalkRightUp
+  xy: 16,128
+  size: 16,16
+WalkRightUp
+  xy: 32,128
+  size: 16,16
+WalkRightUp
+  xy: 48,128
+  size: 16,16
+WalkRightUp
+  xy: 0,144
+  size: 16,16
+WalkRightUp
+  xy: 16,144
+  size: 16,16
+WalkRightUp
+  xy: 32,144
+  size: 16,16
+WalkRightUp
+  xy: 48,144
+  size: 16,16
+IdleLeftUp
+  xy: 16,80
+  size: 16,16
+IdleLeftUp
+  xy: 32,80
+  size: 16,16
+IdleLeftUp
+  xy: 48,80
+  size: 16,16
+IdleLeftUp
+  xy: 0,96
+  size: 16,16
+IdleLeftUp
+  xy: 16,96
+  size: 16,16
+IdleLeftUp
+  xy: 32,96
+  size: 16,16
+IdleLeftUp
+  xy: 48,96
+  size: 16,16
+IdleLeftUp
+  xy: 0,112
+  size: 16,16
+IdleLeftUp
+  xy: 16,112
+  size: 16,16
+IdleLeftUp
+  xy: 32,112
+  size: 16,16
+IdleLeftUp
+  xy: 48,112
+  size: 16,16
+WalkLeftUp
+  xy: 0,128
+  size: 16,16
+WalkLeftUp
+  xy: 16,128
+  size: 16,16
+WalkLeftUp
+  xy: 32,128
+  size: 16,16
+WalkLeftUp
+  xy: 48,128
+  size: 16,16
+WalkLeftUp
+  xy: 0,144
+  size: 16,16
+WalkLeftUp
+  xy: 16,144
+  size: 16,16
+WalkLeftUp
+  xy: 32,144
+  size: 16,16
+WalkLeftUp
+  xy: 48,144
+  size: 16,16

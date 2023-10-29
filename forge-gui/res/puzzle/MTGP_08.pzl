@@ -1,0 +1,22 @@
+[metadata]
+Name:MTG Puzzles #08 - Counter Intelligence (*)
+URL:https://mtgpuzzles.com/puzzle/8
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn. It's the eternal struggle between +1/+1 counters and -1/-1 counters, can you force your opponent's hand to secure the victory? Your opponent could activate Ashling at any point they have priority.
+# Needs AI support for Ashling the Pilgrim to work correctly (without human control).
+HumanControl:True
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=2
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Scar
+p0battlefield=Dread Shade;Carnifex Demon|Counters:M1M1=2;Dread Shade;Swamp;Swamp;Swamp
+p1life=10
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Ashling the Pilgrim;Cascade Bluffs;Cascade Bluffs;Cascade Bluffs;Shivan Reef;Shivan Reef;Shivan Reef

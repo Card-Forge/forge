@@ -1,0 +1,11 @@
+Name:The Golden City of Orazca
+ManaCost:no cost
+Types:Plane Ixalan
+K:Ascend
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Treasure token. Then draw a card if you have the city's blessing.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Condition$ Blessing
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you may put a permanent card from your hand onto the battlefield tapped.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | Tapped$ True | ChangeType$ Permanent | ChangeNum$ 1
+DeckHas:Ability$Token & Type$Treasure
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token. Then draw a card if you have the city's blessing.\nWhenever chaos ensues, you may put a permanent card from your hand onto the battlefield tapped.

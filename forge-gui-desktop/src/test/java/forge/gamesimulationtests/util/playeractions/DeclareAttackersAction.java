@@ -9,11 +9,13 @@ import forge.gamesimulationtests.util.player.PlayerSpecification;
 public class DeclareAttackersAction extends BasePlayerAction {
 	private final Map<CardSpecification, PlayerSpecification> playerAttackAssignments;
 	private final Map<CardSpecification, CardSpecification> planeswalkerAttackAssignments;
+	private final Map<CardSpecification, CardSpecification> battleAttackAssignments;
 
 	public DeclareAttackersAction( PlayerSpecification player ) {
 		super( player );
 		playerAttackAssignments = new HashMap<>();
 		planeswalkerAttackAssignments = new HashMap<>();
+		battleAttackAssignments = new HashMap<>();
 	}
 
 	/**
@@ -40,5 +42,9 @@ public class DeclareAttackersAction extends BasePlayerAction {
 
 	public Map<CardSpecification, CardSpecification> getPlaneswalkerAttackAssignments() {
 		return planeswalkerAttackAssignments;
+	}
+
+	public Map<CardSpecification, CardSpecification> getBattleAttackAssignments() {
+		return battleAttackAssignments;
 	}
 }

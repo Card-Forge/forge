@@ -1,0 +1,16 @@
+Name:Rocco, Street Chef
+ManaCost:R G W
+Types:Legendary Creature Elf Druid
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, each player exiles the top card of their library. Until your next end step, each player may play the card they exiled this way.
+SVar:TrigExile:DB$ Dig | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ UntilYourNextEndStep | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ CardOwner | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, each player may play the card they exiled this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player plays a land from exile or casts a spell from exile, you put a +1/+1 counter on target creature and create a Food token.
+T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigCounter | Secondary$ True | TriggerDescription$ Whenever a player plays a land from exile or casts a spell from exile, you put a +1/+1 counter on target creature and create a Food token.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTokenFood
+SVar:DBTokenFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Sacrifice|Token|Counters|LifeGain & Type$Artifact
+DeckHints:Keyword$Cascade
+Oracle:At the beginning of your end step, each player exiles the top card of their library. Until your next end step, each player may play the card they exiled this way.\nWhenever a player plays a land from exile or casts a spell from exile, you put a +1/+1 counter on target creature and create a Food token.

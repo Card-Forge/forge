@@ -180,7 +180,7 @@ public class TriggerHandler {
         return FileSection.parseToMap(trigParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
-    private void collectTriggerForWaiting() {
+    public void collectTriggerForWaiting() {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;
@@ -207,7 +207,6 @@ public class TriggerHandler {
     public final void resetActiveTriggers() {
         resetActiveTriggers(true);
     }
-
     public final void resetActiveTriggers(boolean collect) {
         if (collect) {
             collectTriggerForWaiting();
@@ -281,11 +280,11 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
-        waitingTriggers.clear();
-        if (waiting.isEmpty()) {
+        if (waitingTriggers.isEmpty()) {
             return false;
         }
+        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
+        waitingTriggers.clear();
 
         boolean haveWaiting = false;
         for (final TriggerWaiting wt : waiting) {
@@ -458,8 +457,7 @@ public class TriggerHandler {
             Card original = (Card) runParams.get(AbilityKey.Card);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
             mergedCards.set(mergedCards.indexOf(original), original);
-            Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
-            newParams.putAll(runParams);
+            Map<AbilityKey, Object> newParams = AbilityKey.newMap(runParams);
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
@@ -487,8 +485,8 @@ public class TriggerHandler {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
@@ -530,9 +528,6 @@ public class TriggerHandler {
             sa = sa.copy(host, controller, false);
         }
 
-        sa.setLastStateBattlefield(game.getLastStateBattlefield());
-        sa.setLastStateGraveyard(game.getLastStateGraveyard());
-
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
@@ -567,9 +562,12 @@ public class TriggerHandler {
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
-        wrapperAbility.setLastStateBattlefield(game.getLastStateBattlefield());
         if (regtrig.isStatic()) {
-            wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
+            if (wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory)) {
+                final Map<AbilityKey, Object> staticParams = AbilityKey.mapFromCard(host);
+                staticParams.put(AbilityKey.SpellAbility, sa);
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, staticParams, false);
+            }
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);
@@ -577,11 +575,8 @@ public class TriggerHandler {
 
         regtrig.triggerRun();
 
-        if (regtrig.hasParam("OneOff")) {
-            if (regtrig.getHostCard().isImmutable()) {
-                Player p = regtrig.getHostCard().getController();
-                p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
-            }
+        if (regtrig.hasParam("OneOff") && host.isImmutable()) {
+            host.getController().getZone(ZoneType.Command).remove(host);
         }
     }
 

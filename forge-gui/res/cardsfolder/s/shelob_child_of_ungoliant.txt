@@ -1,0 +1,14 @@
+Name:Shelob, Child of Ungoliant
+ManaCost:4 B G
+Types:Legendary Creature Spider Demon
+PT:8/8
+K:Deathtouch
+K:Ward:2
+S:Mode$ Continuous | Affected$ Spider.Other+YouCtrl | AddKeyword$ Deathtouch & Ward:2 | Description$ Other Spiders you control have deathtouch and ward {2}.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+DamagedBySpider.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another creature dealt damage this turn by a Spider you controlled dies, create a token that's a copy of that creature, except it's a Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life," and it loses all other card types.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddAbilities$ FoodSac | AddTypes$ Artifact & Food | RemoveCardTypes$ True | RemoveSubTypes$ True
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|LifeGain & Type$Artifact|Food
+DeckHints:Type$Spider
+Oracle:Deathtouch, ward {2}\nOther Spiders you control have deathtouch and ward {2}.\nWhenever another creature dealt damage this turn by a Spider you controlled dies, create a token that's a copy of that creature, except it's a Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life," and it loses all other card types.

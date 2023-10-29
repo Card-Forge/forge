@@ -1,0 +1,5 @@
+Name:Isolation at Orthanc
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Creature | LibraryPosition$ 1 | SpellDescription$ Put target creature into its owner's library second from the top.
+Oracle:Put target creature into its owner's library second from the top.

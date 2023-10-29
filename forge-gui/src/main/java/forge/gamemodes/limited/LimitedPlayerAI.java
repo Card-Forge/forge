@@ -15,7 +15,6 @@ public class LimitedPlayerAI extends LimitedPlayer {
     public LimitedPlayerAI(int seatingOrder) {
         super(seatingOrder);
         deckCols = new DeckColors();
-
     }
 
     @Override

@@ -1,0 +1,8 @@
+Name:Redtooth Genealogist
+ManaCost:2 G
+Types:Creature Elf Advisor
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Royal Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_royal | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:When CARDNAME enters the battlefield, create a Royal Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)

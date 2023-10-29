@@ -6,7 +6,7 @@ SVar:TabernacleTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZone
 SVar:TabernacleDestroy:DB$ Destroy | Defined$ Self | UnlessPayer$ You | UnlessCost$ 1
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:CountOpps GTCountMe
-SVar:CountOpp:Count$Valid Creature.OppCtrl
+SVar:CountOpps:Count$Valid Creature.OppCtrl
 SVar:CountMe:Count$Valid Creature.YouCtrl
 DeckHints:Type$Enchantment|Planeswalker|Artifact|Instant|Sorcery
 Oracle:All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."

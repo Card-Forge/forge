@@ -38,7 +38,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -59,7 +58,7 @@ public final class CardUtil {
     public static final ImmutableList<String> modifiableKeywords = ImmutableList.<String>builder().add(
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
-            "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
+            "Affinity", "Entwine", "Splice", "Ninjutsu",
             "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
@@ -101,9 +100,6 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
-        return getThisTurnEntered(to, from, valid, src, ctb, src.getController());
-    }
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
@@ -126,7 +122,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -136,15 +132,15 @@ public final class CardUtil {
         } else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
+        return CardLists.getValidCardsAsList(res, valid, controller, src, ctb);
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, controller, src, ctb);
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
     }
 
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
@@ -197,23 +193,49 @@ public final class CardUtil {
         newCopy.setController(in.getController(), 0);
         newCopy.setCommander(in.isCommander());
 
+        newCopy.setRules(in.getRules());
+        
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(in.getCMC());
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
+        // copy EffectSource for description
+        newCopy.setEffectSource(getLKICopy(in.getEffectSource(), cachedMap));
 
-        newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
-        if (in.isFaceDown()) {
-            newCopy.turnFaceDownNoUpdate();
-            // prevent StackDescription from revealing face
-            newCopy.updateStateForView();
-        }
-
-        if (in.isAdventureCard() && in.getFaceupCardStateName().equals(CardStateName.Original)) {
+        if (in.isFlipCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.Flipped, false);
+            newCopy.getState(CardStateName.Flipped).copyFrom(in.getState(CardStateName.Flipped), true);
+        } else if (in.isTransformable()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.Transformed, false);
+            newCopy.getState(CardStateName.Transformed).copyFrom(in.getState(CardStateName.Transformed), true);
+        } else if (in.isAdventureCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Adventure, false);
             newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
+        } else if (in.isSplitCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.LeftSplit, false);
+            newCopy.getState(CardStateName.LeftSplit).copyFrom(in.getState(CardStateName.LeftSplit), true);
+            newCopy.addAlternateState(CardStateName.RightSplit, false);
+            newCopy.getState(CardStateName.RightSplit).copyFrom(in.getState(CardStateName.RightSplit), true);
+        } else {
+            newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         }
+        newCopy.setFlipped(in.isFlipped());
+        newCopy.setBackSide(in.isBackSide());
+        if (in.isTransformed()) {
+            newCopy.incrementTransformedTimestamp();
+        }
+        newCopy.setState(in.getCurrentStateName(), false, true);
+        if (in.isFaceDown()) {
+            newCopy.turnFaceDownNoUpdate();
+            newCopy.setType(new CardType(in.getFaceDownState().getType()));
+        }
+        // prevent StackDescription from revealing face
+        newCopy.updateStateForView();
 
         /*
         if (in.isCloned()) {
@@ -274,8 +296,7 @@ public final class CardUtil {
 
         newCopy.setChosenType(in.getChosenType());
         newCopy.setChosenType2(in.getChosenType2());
-        newCopy.setChosenName(in.getChosenName());
-        newCopy.setChosenName2(in.getChosenName2());
+        newCopy.setNamedCards(Lists.newArrayList(in.getNamedCards()));
         newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
         if (in.hasChosenNumber()) {
             newCopy.setChosenNumber(in.getChosenNumber());
@@ -305,7 +326,7 @@ public final class CardUtil {
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
-        newCopy.setForetoldByEffect(in.isForetoldByEffect());
+        newCopy.setForetoldCostByEffect(in.isForetoldCostByEffect());
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
 
@@ -315,10 +336,6 @@ public final class CardUtil {
         }
 
         newCopy.setKickerMagnitude(in.getKickerMagnitude());
-
-        for (OptionalCost ocost : in.getOptionalCostsPaid()) {
-            newCopy.addOptionalCostPaid(ocost);
-        }
 
         if (in.getCastSA() != null) {
             SpellAbility castSA = in.getCastSA().copy(newCopy, true);
@@ -543,7 +560,8 @@ public final class CardUtil {
     // parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
-    public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
+    public static List<Card> getValidCardsToTarget(final SpellAbility ability) {
+        final TargetRestrictions tgt = ability.getTargetRestrictions();
         final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();

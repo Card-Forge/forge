@@ -1,0 +1,11 @@
+Name:Bilbo, Retired Burglar
+ManaCost:1 U R
+Types:Legendary Creature Halfling Rogue
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters or leaves the battlefield, the Ring tempts you.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigTempt | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Counters|Token
+Oracle:When Bilbo, Retired Burglar enters or leaves the battlefield, the Ring tempts you.\nWhenever Bilbo deals combat damage to a player, create a Treasure token.

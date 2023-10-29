@@ -1,0 +1,16 @@
+Name:Woodland Acolyte
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1
+AlternateMode:Adventure
+Oracle:When Woodland Acolyte enters the battlefield, draw a card.
+
+ALTERNATE
+
+Name:Mend the Wilds
+ManaCost:G
+Types:Instant Adventure
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent card from your graveyard | SpellDescription$ Put target permanent card from your graveyard on top of your library. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Put target permanent card from your graveyard on top of your library. (Then exile this card. You may cast the creature later from exile.)

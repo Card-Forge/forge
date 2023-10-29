@@ -85,7 +85,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
-     * Constructor for AbilityMana.
+     * Dev Mode Constructor for AbilityMana.
      * </p>
      *
      * @param sourceCard
@@ -226,6 +226,10 @@ public class AbilityManaPart implements java.io.Serializable {
         return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard, null);
     }
 
+    public boolean isCannotCounterPaidWith() {
+        return null != cannotCounterSpell;
+    }
+
     public void addNoCounterEffect(SpellAbility saBeingPaid) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
@@ -316,6 +320,9 @@ public class AbilityManaPart implements java.io.Serializable {
 
         TriggerHandler handler = card.getGame().getTriggerHandler();
         Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false, sVarHolder);
+        if (sVarHolder instanceof SpellAbility) {
+            trig.setSpawningAbility((SpellAbility) sVarHolder);
+        }
         handler.registerOneTrigger(trig);
     }
 
@@ -420,7 +427,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
-            if (getSourceCard().getGame().getStack().getInstanceFromSpellAbility(sa.getRootAbility()) != null) {
+            if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
                 return false;
             }
 

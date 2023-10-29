@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.util.CardTranslation;
@@ -29,10 +29,10 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> tgtCards = getTargetCards(sa);
-        PlayerController pc = sa.getActivatingPlayer().getController();
+        Player activator = sa.getActivatingPlayer();
+        PlayerController pc = activator.getController();
 
-        for (final Card tgtC : tgtCards) {
+        for (final Card tgtC : getTargetCards(sa)) {
             if (!tgtC.isInPlay()) {
                 continue;
             }
@@ -42,10 +42,15 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
 
             // If the effected card is controlled by the same controller of the SA, default to untap.
             boolean tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(tgtC.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
-                    !tgtC.getController().equals(sa.getActivatingPlayer()) );
+                    !tgtC.getController().equals(activator) );
 
             if (tap) {
-                tgtC.tap(true);
+                Player tapper = activator;
+                if (sa.hasParam("Tapper")) {
+                    tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
+                }
+
+                tgtC.tap(true, sa, tapper);
             } else {
                 tgtC.untap(true);
             }

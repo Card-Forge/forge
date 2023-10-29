@@ -1,0 +1,12 @@
+Name:The Pit
+ManaCost:no cost
+Types:Plane The Abyss
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerZones$ Command | TriggerDescription$ When you planeswalk to CARDNAME, each player creates their choice of a 3/3 white Angel creature token with flying or a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you."
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | ClearRememberedBeforeLoop$ True | ChangeZoneTable$ True | RepeatSubAbility$ DBChoice 
+SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ Angel,Demon
+SVar:Angel:DB$ Token | TokenScript$ w_3_3_angel_flying | TokenOwner$ Player.IsRemembered | SpellDescription$ Create a 3/3 white Angel creature token with flying 
+SVar:Demon:DB$ Token | TokenScript$ b_6_6_demon_flying_trample_aristocrat | TokenOwner$ Player.IsRemembered | SpellDescription$ a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you."
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each player sacrifices a nontoken creature.
+SVar:RolledChaos:DB$ Sacrifice | SacValid$ Creature.nonToken | Defined$ Player
+DeckHas:Ability$Token|Sacrifice & Type$Demon|Angel
+Oracle:When you planeswalk to The Pit, each player creates their choice of a 3/3 white Angel creature token with flying or a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you."\nWhenever chaos ensues, each player sacrifices a nontoken creature.

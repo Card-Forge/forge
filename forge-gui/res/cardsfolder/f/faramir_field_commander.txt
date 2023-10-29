@@ -1,0 +1,11 @@
+Name:Faramir, Field Commander
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if a creature died under your control this turn, draw a card.
+T:Mode$ RingTemptsYou | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever the Ring tempts you, if you chose a creature other than CARDNAME as your Ring-bearer, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, if a creature died under your control this turn, draw a card.\nWhenever the Ring tempts you, if you chose a creature other than Faramir, Field Commander as your Ring-bearer, create a 1/1 white Human Soldier creature token.

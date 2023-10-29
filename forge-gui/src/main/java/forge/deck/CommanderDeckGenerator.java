@@ -1,6 +1,7 @@
 package forge.deck;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -27,9 +28,12 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         if (isCardGen){
             uniqueCards = new ItemPool<>(PaperCard.class);
             String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
-            Iterable<String> legendNames = CardRelationMatrixGenerator.cardPools.get(matrixKey).keySet();
-            for (String legendName : legendNames) {
-                uniqueCards.add(FModel.getMagicDb().getCommonCards().getUniqueByName(legendName));
+            HashMap matrixPool = CardRelationMatrixGenerator.cardPools.get(matrixKey);
+            if (matrixPool != null) {
+                Iterable<String> legendNames = matrixPool.keySet();
+                for (String legendName : legendNames) {
+                    uniqueCards.add(FModel.getMagicDb().getCommonCards().getUniqueByName(legendName));
+                }
             }
         }
         else {

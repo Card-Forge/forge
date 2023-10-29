@@ -1,0 +1,6 @@
+[format]
+Name:Premodern
+Order:106
+Type:Casual
+Sets:4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG
+Banned:Amulet of Quoz; Balance; Brainstorm; Bronze Tablet; Channel; Demonic Consultation; Earthcraft; Entomb; Flash; Force of Will; Goblin Recruiter; Grim Monolith; Jeweled Bird; Land Tax; Mana Vault; Memory Jar; Mind Twist; Mind's Desire; Mystical Tutor; Necropotence; Rebirth; Strip Mine; Tempest Efreet; Tendrils of Agony; Time Spiral; Timmerian Fiends; Tolarian Academy; Vampiric Tutor; Windfall; Worldgorger Dragon; Yawgmoth's Bargain; Yawgmoth's Will

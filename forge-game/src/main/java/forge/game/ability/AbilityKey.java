@@ -1,12 +1,11 @@
 package forge.game.ability;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
-
 import forge.game.player.Player;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Keys for Ability parameter maps.
@@ -28,7 +27,6 @@ public enum AbilityKey {
     Blocker("Blocker"),
     Blockers("Blockers"),
     CanReveal("CanReveal"),
-    CastSA("CastSA"),
     Card("Card"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
@@ -74,6 +72,8 @@ public enum AbilityKey {
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
     FoundSearchingLibrary("FoundSearchingLibrary"),
+    Ignore("Ignore"),
+    IgnoreChosen("IgnoreChosen"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IsDamage("IsDamage"),
@@ -83,6 +83,7 @@ public enum AbilityKey {
     LastStateGraveyard("LastStateGraveyard"),
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
     LifeGained("LifeGained"),
+    Map("Map"),
     Mana("Mana"),
     MergedCards("MergedCards"),
     Mode("Mode"),
@@ -96,8 +97,9 @@ public enum AbilityKey {
     Number("Number"),
     Object("Object"),
     Objects("Objects"),
+    OpponentVotedDiff("OpponentVotedDiff"),
+    OpponentVotedSame("OpponentVotedSame"),
     OtherAttackers("OtherAttackers"),
-    OtherVoters("OtherVoters"),
     Origin("Origin"),
     OriginalController("OriginalController"),
     OriginalDefender("OriginalDefender"),
@@ -117,6 +119,7 @@ public enum AbilityKey {
     ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
     Sides("Sides"),
+    SimultaneousETB("SimultaneousETB"),
     Source("Source"),
     Sources("Sources"),
     SourceSA("SourceSA"),
@@ -190,6 +193,13 @@ public enum AbilityKey {
         final Map<AbilityKey, Object> runParams = newMap();
 
         runParams.put(Affected, gameEntity);
+        return runParams;
+    }
+
+    public static Map<AbilityKey, Object> mapFromPIMap(Map<Player, Integer> map) {
+        final Map<AbilityKey, Object> runParams = newMap();
+
+        runParams.put(Map, map);
         return runParams;
     }
 }

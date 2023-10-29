@@ -1,0 +1,11 @@
+Name:Goddric, Cloaked Reveler
+ManaCost:1 R R
+Types:Legendary Creature Human Noble
+PT:3/3
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddAbility$ DragonPump | AddType$ Dragon | RemoveCreatureTypes$ True | AddKeyword$ Flying | CheckSVar$ Celebration | SVarCompare$ GE2 | Description$ Celebration — As long as two or more nonland permanents entered the battlefield under your control this turn, CARDNAME is a Dragon with base power and toughness 4/4, flying, and "{R}: Dragons you control get +1/+0 until end of turn." (It loses all other creature types.)
+SVar:DragonPump:AB$ PumpAll | Cost$ R | ValidCards$ Dragon.YouCtrl | NumAtt$ +1 | SpellDescription$ Dragons you control get +1/+0 until end of turn.
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+DeckNeeds:Type$Dragon
+DeckHas:Type$Dragon
+Oracle:Haste\nCelebration — As long as two or more nonland permanents entered the battlefield under your control this turn, Goddric, Cloaked Reveler is a Dragon with base power and toughness 4/4, flying, and "{R}: Dragons you control get +1/+0 until end of turn." (It loses all other creature types.)
